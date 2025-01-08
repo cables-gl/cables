@@ -60,7 +60,7 @@ function getDefaultFragmentShader(r, g, b)
         .endl() + "    {{MODULE_COLOR}}"
         .endl() + "    outColor = col;"
         .endl() + "}";
-};
+}
 
 
 /**
@@ -76,7 +76,7 @@ function getDefaultFragmentShader(r, g, b)
  */
 class Shader extends CgShader
 {
-    constructor (_cgl, _name, _op)
+    constructor(_cgl, _name, _op)
     {
         super();
         if (!_cgl) throw new Error("shader constructed without cgl " + _name);
@@ -143,7 +143,7 @@ class Shader extends CgShader
         this._tempInverseProjMatrix = mat4.create();
 
         this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
-    };
+    }
 
 
 
@@ -154,17 +154,17 @@ class Shader extends CgShader
     isValid()
     {
         return this._isValid;
-    };
+    }
 
     getCgl()
     {
         return this._cgl;
-    };
+    }
 
     getName()
     {
         return this._name;
-    };
+    }
 
     /**
      * enable an extension for the shader
@@ -178,24 +178,24 @@ class Shader extends CgShader
         this.setWhyCompile("enable extension " + name);
         this._needsRecompile = true;
         this._extensions.push(name);
-    };
+    }
 
     getAttrVertexPos()
     {
         return this._attrVertexPos;
-    };
+    }
 
     hasTextureUniforms()
     {
         for (let i = 0; i < this._uniforms.length; i++)
             if (this._uniforms[i].getType() == "t") return true;
         return false;
-    };
+    }
 
     setWhyCompile(why)
     {
         this._compileReason = why;
-    };
+    }
 
     /**
      * copy all uniform values from another shader
@@ -206,7 +206,7 @@ class Shader extends CgShader
      */
     copyUniformValues(origShader)
     {
-        // console.log(origShader._uniforms);
+        // this._log.log(origShader._uniforms);
         for (let i = 0; i < origShader._uniforms.length; i++)
         {
             if (!this._uniforms[i])
@@ -221,7 +221,7 @@ class Shader extends CgShader
 
 
             // if (origShader._uniforms[i].getName().contains("pathPoints"))
-            //     console.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
+            //     this._log.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
 
             this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
         }
@@ -239,7 +239,7 @@ class Shader extends CgShader
         // this._textureStackTex = [];
         // this._textureStackType = [];
         // this._textureStackTexCgl = [];
-    };
+    }
 
     /**
      * copy current shader
@@ -273,7 +273,7 @@ class Shader extends CgShader
         this.setWhyCompile("copy");
         shader._needsRecompile = true;
         return shader;
-    };
+    }
 
 
     /**
@@ -293,7 +293,7 @@ class Shader extends CgShader
         this.setWhyCompile("Source changed");
         this._needsRecompile = true;
         this._isValid = true;
-    };
+    }
 
     _addLibs(src)
     {
@@ -309,7 +309,7 @@ class Shader extends CgShader
         }
 
         return src;
-    };
+    }
 
     createStructUniforms()
     {
@@ -461,7 +461,7 @@ class Shader extends CgShader
         }
 
         return [structStrVert, structStrFrag];
-    };
+    }
 
     _getAttrSrc(attr, firstLevel)
     {
@@ -492,7 +492,7 @@ class Shader extends CgShader
             }
         }
         return r;
-    };
+    }
 
     compile()
     {
@@ -846,7 +846,7 @@ class Shader extends CgShader
         // this._cgl.printError("shader compile");
 
         this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
-    };
+    }
 
     hasChanged()
     {
@@ -866,7 +866,7 @@ class Shader extends CgShader
         if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
         {
             this._countMissingUniforms++;
-            // if (this._countMissingUniforms == 10)console.log("stopping getlocation of missing uniforms...", this._name);
+            // if (this._countMissingUniforms == 10)this._log.log("stopping getlocation of missing uniforms...", this._name);
             if (this._countMissingUniforms < 10)
             {
                 this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
@@ -968,26 +968,26 @@ class Shader extends CgShader
         this._bindTextures();
 
         return this._isValid;
-    };
+    }
 
     unBind()
     {
-    };
+    }
 
 
     dispose()
     {
         this._cgl.gl.deleteProgram(this._program);
-    };
+    }
 
     needsRecompile()
     {
         return this._needsRecompile;
-    };
+    }
 
     setDrawBuffers(arr)
     {
-        console.log("useless drawbuffers...?!");
+        this._log.warn("useless drawbuffers...?!");
         // if (this._drawBuffers.length !== arr.length)
         // {
         //     this._drawBuffers = arr;
@@ -1005,12 +1005,12 @@ class Shader extends CgShader
         //         return;
         //     }
         // }
-    };
+    }
 
     getUniforms()
     {
         return this._uniforms;
-    };
+    }
 
     getUniform(name)
     {
@@ -1018,14 +1018,14 @@ class Shader extends CgShader
             if (this._uniforms[i].getName() == name)
                 return this._uniforms[i];
         return null;
-    };
+    }
 
     removeAllUniforms()
     {
         this._uniforms = [];
         // for (let i = 0; i < this._uniforms.length; i++)
         //     this.removeUniform(this._uniforms[i].name);
-    };
+    }
 
     removeUniform(name)
     {
@@ -1038,7 +1038,7 @@ class Shader extends CgShader
         }
         this._needsRecompile = true;
         this.setWhyCompile("remove uniform " + name);
-    };
+    }
 
 
     _addUniform(uni)
@@ -1046,7 +1046,7 @@ class Shader extends CgShader
         this._uniforms.push(uni);
         this.setWhyCompile("add uniform " + name);
         this._needsRecompile = true;
-    };
+    }
 
     /**
      * add a uniform to the fragment shader
@@ -1066,7 +1066,7 @@ class Shader extends CgShader
         const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "frag";
         return uni;
-    };
+    }
 
     /**
      * add a uniform to the vertex shader
@@ -1086,7 +1086,8 @@ class Shader extends CgShader
         const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "vert";
         return uni;
-    };
+    }
+
     /**
      * add a uniform to both shaders
      * @param {String} type ['f','t', etc]
@@ -1105,7 +1106,7 @@ class Shader extends CgShader
         const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "both";
         return uni;
-    };
+    }
 
     /**
      * add a struct & its uniforms to the fragment shader
@@ -1143,7 +1144,7 @@ class Shader extends CgShader
         }
 
         return uniforms;
-    };
+    }
 
     /**
      * add a struct & its uniforms to the vertex shader
@@ -1181,7 +1182,7 @@ class Shader extends CgShader
         }
 
         return uniforms;
-    };
+    }
 
     /**
      * add a struct & its uniforms to the both shaders. PLEASE NOTE: it is not possible to add the same struct to both shaders when it contains ANY integer members.
@@ -1221,7 +1222,7 @@ class Shader extends CgShader
         }
 
         return uniforms;
-    };
+    }
 
     hasUniform(name)
     {
@@ -1230,7 +1231,7 @@ class Shader extends CgShader
             if (this._uniforms[i].getName() == name) return true;
         }
         return false;
-    };
+    }
 
     _createProgram(vstr, fstr)
     {
@@ -1259,12 +1260,12 @@ class Shader extends CgShader
 
         this._cgl.printError("shader _createProgram");
         return program;
-    };
+    }
 
     hasErrors()
     {
         return this._hasErrors;
-    };
+    }
 
     _linkProgram(program, vstr, fstr)
     {
@@ -1290,8 +1291,8 @@ class Shader extends CgShader
             if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.VALIDATE_STATUS))
             {
                 // validation failed
-                console.log("shaderprogram validation failed...");
-                console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+                this._log.log("shaderprogram validation failed...");
+                this._log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
             }
 
             if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
@@ -1306,8 +1307,8 @@ class Shader extends CgShader
 
                 this._log.error(this._name + " shader linking fail...");
 
-                console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
-                console.log(this);
+                this._log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+                this._log.log(this);
                 this._isValid = false;
 
                 this._name = "errorshader";
@@ -1315,19 +1316,19 @@ class Shader extends CgShader
                 this._cgl.printError("shader link err");
             }
         }
-    };
+    }
 
     getProgram()
     {
         return this._program;
-    };
+    }
 
     setFeedbackNames(names)
     {
         this.setWhyCompile("setFeedbackNames");
         this._needsRecompile = true;
         this._feedBackNames = names;
-    };
+    }
 
     // getDefaultVertexShader()
     // {
@@ -1349,7 +1350,7 @@ class Shader extends CgShader
      * @param {Object} attr {type:x,name:x,[nameFrag:x]}
      * @return {Object}
      */
-    addAttribute = function (attr)
+    addAttribute(attr)
     {
         for (let i = 0; i < this._attributes.length; i++)
         {
@@ -1358,12 +1359,13 @@ class Shader extends CgShader
         this._attributes.push(attr);
         this._needsRecompile = true;
         this.setWhyCompile("addAttribute");
-    };
+    }
 
     bindTextures()
     {
         this._bindTextures();
     }
+
     _bindTextures()
     {
         if (this._textureStackTex.length > this._cgl.maxTextureUnits)
@@ -1375,7 +1377,7 @@ class Shader extends CgShader
 
         for (let i = 0; i < this._textureStackTex.length; i++)
         {
-            // console.log(this._textureStackTex.length, i);
+            // this._log.log(this._textureStackTex.length, i);
             if (!this._textureStackTex[i] && !this._textureStackTexCgl[i])
             {
                 this._log.warn("no texture for pushtexture", this._name);
@@ -1401,14 +1403,14 @@ class Shader extends CgShader
                     this._textureStackUni[i].setValue(i);
                     bindOk = this._cgl.setTexture(i, t, this._textureStackType[i]);
 
-                    // console.log(bindOk, i, t, this._textureStackType[i]);
+                    // this._log.log(bindOk, i, t, this._textureStackType[i]);
                 }
-                if (!bindOk) console.warn("tex bind failed", this.getName(), this._textureStackUni[i]);
+                if (!bindOk) this._log.warn("tex bind failed", this.getName(), this._textureStackUni[i]);
             }
         }
-    };
+    }
 
-    setUniformTexture = function (uni, tex)
+    setUniformTexture(uni, tex)
     {
         tex = tex || CGL.Texture.getTempTexture(this._cgl);
         for (let i = 0; i < this._textureStackUni.length; i++)
@@ -1431,7 +1433,7 @@ class Shader extends CgShader
                 return old;
             }
         return null;
-    };
+    }
 
     /**
      * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
@@ -1442,11 +1444,11 @@ class Shader extends CgShader
      * @memberof Shader
      * @instance
      */
-    pushTexture = function (uniform, t, type)
+    pushTexture(uniform, t, type)
     {
         if (!uniform)
         {
-            // console.log("pushtexture: no uniform given to texturestack", "shader:"+this._name,uniform,t,type);
+            // this._log.log("pushtexture: no uniform given to texturestack", "shader:"+this._name,uniform,t,type);
             return;
         }
         if (!t)
@@ -1476,7 +1478,7 @@ class Shader extends CgShader
         }
 
         this._textureStackType.push(type);
-    };
+    }
 
     /**
      * pop last texture
@@ -1484,13 +1486,13 @@ class Shader extends CgShader
      * @memberof Shader
      * @instance
      */
-    popTexture = function ()
+    popTexture()
     {
         this._textureStackUni.pop();
         this._textureStackTex.pop();
         this._textureStackTexCgl.pop();
         this._textureStackType.pop();
-    };
+    }
 
     /**
      * pop all textures
@@ -1498,18 +1500,18 @@ class Shader extends CgShader
      * @memberof Shader
      * @instance
      */
-    popTextures = function ()
+    popTextures()
     {
         this._textureStackTex.length =
         this._textureStackTexCgl.length =
         this._textureStackType.length =
         this._textureStackUni.length = 0;
-    };
+    }
 
     getMaterialId()
     {
         return this._materialId;
-    };
+    }
 
     getInfo()
     {
@@ -1521,20 +1523,18 @@ class Shader extends CgShader
         info.hasErrors = this.hasErrors();
 
         return info;
-    };
-
-
-    getDefaultFragmentShader=function(r,g,b,a)
-    {
-        return getDefaultFragmentShader(r,g,b,a);
     }
 
-    getDefaultVertexShader=function()
+
+    getDefaultFragmentShader(r, g, b, a)
+    {
+        return getDefaultFragmentShader(r, g, b, a);
+    }
+
+    getDefaultVertexShader()
     {
         return getDefaultVertexShader();
     }
-
-
 }
 
 
@@ -1563,8 +1563,8 @@ class Shader extends CgShader
 
 // --------------------------
 
-Shader.getDefaultVertexShader=getDefaultVertexShader;
-Shader.getDefaultFragmentShader=getDefaultFragmentShader;
+Shader.getDefaultVertexShader = getDefaultVertexShader;
+Shader.getDefaultFragmentShader = getDefaultFragmentShader;
 
 
 Shader.getErrorFragmentShader = function ()
@@ -1606,7 +1606,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         let infoLog = cgl.gl.getShaderInfoLog(shader);
         if (!infoLog)
         {
-            console.warn("empty shader info log", this._name);
+            this._log.warn("empty shader info log", this._name);
             return;
         }
 
@@ -1617,8 +1617,8 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         if (!cgl.aborted && infoLog)
         {
-            if (type == cgl.gl.VERTEX_SHADER) console.log("VERTEX_SHADER");
-            if (type == cgl.gl.FRAGMENT_SHADER) console.log("FRAGMENT_SHADER");
+            if (type == cgl.gl.VERTEX_SHADER) this._log.log("VERTEX_SHADER");
+            if (type == cgl.gl.FRAGMENT_SHADER) this._log.log("FRAGMENT_SHADER");
 
             for (const i in lines)
             {
@@ -1647,14 +1647,14 @@ Shader.createShader = function (cgl, str, type, cglShader)
         }
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
-        if (cgl.patch.isEditorMode())console.log("Shader error ", cglShader._name, infoLog, this);
+        if (cgl.patch.isEditorMode()) this._log.log("Shader error ", cglShader._name, infoLog, this);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
 
         if (this._fromUserInteraction)
         {
-            // console.log("todo show modal?");
+            // this._log.log("todo show modal?");
             // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
         }
 
@@ -1662,7 +1662,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     }
     else
     {
-        // console.log(name+' shader compiled...');
+        // this._log.log(name+' shader compiled...');
     }
     // cgl.printError("shader create2");
     return shader;
