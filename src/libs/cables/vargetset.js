@@ -1,4 +1,4 @@
-import { CONSTANTS } from "../../core/constants.js";
+import { CONSTANTS } from "cables-shared-client";
 
 const VarSetOpWrapper = class
 {

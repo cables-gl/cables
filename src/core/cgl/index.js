@@ -1,3 +1,4 @@
+import { CONSTANTS } from "cables-shared-client";
 import { Framebuffer } from "./cgl_framebuffer.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
@@ -18,7 +19,6 @@ import {
 } from "./cgl_texture.js";
 
 import { TextureEffect } from "./cgl_textureeffect.js";
-import { CONSTANTS } from "./constants.js";
 import { ProfileData } from "./cgl_profiledata.js";
 import { MatrixStack } from "../cg/cg_matrixstack.js";
 import { Geometry } from "../cg/cg_geom.js";

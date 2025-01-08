@@ -1,4 +1,4 @@
-import { CONSTANTS } from "./constants.js";
+import { CONSTANTS } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 
 /**

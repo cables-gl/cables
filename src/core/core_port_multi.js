@@ -1,4 +1,4 @@
-import { CONSTANTS } from "./constants.js";
+import { CONSTANTS } from "cables-shared-client";
 import { Port } from "./core_port.js";
 
 const MIN_NUM_PORTS = 2;

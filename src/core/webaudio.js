@@ -1,6 +1,6 @@
 /** @namespace WEBAUDIO */
 
-import { CONSTANTS } from "./constants.js";
+import { CONSTANTS } from "cables-shared-client";
 
 const WEBAUDIO = {};
 

@@ -1,6 +1,5 @@
-import { Logger } from "cables-shared-client";
+import { Logger, CONSTANTS } from "cables-shared-client";
 import { Key } from "./anim_key.js";
-import { CONSTANTS } from "./constants.js";
 import { EventTarget } from "./eventtarget.js";
 
 /**

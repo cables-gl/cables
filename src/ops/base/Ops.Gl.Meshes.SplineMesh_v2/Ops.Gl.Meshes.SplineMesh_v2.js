@@ -3,6 +3,7 @@ const
     inPoints = op.inArray("Points"),
     inHardEdges = op.inBool("Tesselate Edges", false),
     inRenderMesh = op.inBool("Render Mesh", true),
+    strip = op.inBool("Line Strip", true),
     next = op.outTrigger("Next");
 
 const geom = new CGL.Geometry("splinemesh_2");
@@ -18,7 +19,6 @@ let doDraw = new Float32Array();
 let splineIndex = null;
 
 let pointsProgress = new Float32Array();
-const pointsDoDraw = new Float32Array();
 const arrEdges = [];
 
 const verts = [0, 0, 0];
@@ -26,10 +26,11 @@ const verts = [0, 0, 0];
 let mesh = new CGL.Mesh(cgl, geom);
 mesh.addVertexNumbers = true;
 
-let rebuildLater = true;
+let needsRebuild = true;
 
+strip.onChange =
 inHardEdges.onChange =
-    inPoints.onChange = () => { rebuildLater = true; };
+inPoints.onChange = () => { needsRebuild = true; };
 
 render.onTriggered = renderMesh;
 
@@ -37,13 +38,20 @@ let shader = null;
 
 function renderMesh()
 {
-    if (rebuildLater)rebuild();
+    if (needsRebuild) rebuild();
     if (mesh && inRenderMesh.get())
     {
+        let oldPrim = null;
         if (shader != cgl.getShader())
         {
             shader = cgl.getShader();
             if (!shader) return;
+
+            oldPrim = shader.glPrimitive;
+
+            if (strip.get()) shader.glPrimitive = cgl.gl.LINE_STRIP; // LINE_LOOP
+            else shader.glPrimitive = cgl.gl.LINES;
+
             if (shader.getName() != "splinemesh_material") op.setUiError("nosplinemat", "Splinemesh needs a SplineMeshMaterial!");
             else op.setUiError("nosplinemat");
 
@@ -51,6 +59,7 @@ function renderMesh()
         }
 
         if (verts.length > 0) mesh.render(shader);
+        if (shader) shader.glPrimitive = oldPrim;
     }
 
     next.trigger();
@@ -165,7 +174,7 @@ function rebuild()
     mesh.setAttribute("splineDoDraw", doDraw, 1);
     mesh.setAttribute("splineProgress", pointsProgress, 1);
 
-    rebuildLater = false;
+    needsRebuild = false;
 }
 
 function ip(a, b, p)

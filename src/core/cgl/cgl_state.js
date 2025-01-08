@@ -1,5 +1,4 @@
-import { Logger } from "cables-shared-client";
-import { CONSTANTS } from "./constants.js";
+import { Logger, CONSTANTS } from "cables-shared-client";
 import { Shader } from "./cgl_shader.js";
 import { ProfileData } from "./cgl_profiledata.js";
 import { CGState } from "../cg/cg_state.js";
