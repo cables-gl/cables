@@ -38,6 +38,7 @@ import { Port } from "../core_port.js";
  */
 
 
+
 // export const Uniform(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 
 class Uniform extends CgUniform
