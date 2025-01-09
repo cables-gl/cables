@@ -20,6 +20,7 @@
         "cables-shared-client": "file:../shared/client/"
     },
     "devDependencies": {
+        "@k88/module-scope-plugin": "1.1.0",
         "gulp": "5.0.0",
         "raw-loader": "^4.0.2",
         "webpack": "5.91.0",

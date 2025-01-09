@@ -1,5 +1,4 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS } from "../../core/constants.js";
 
 const Plan = class extends Events
 {
