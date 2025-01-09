@@ -146,5 +146,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "P_SED0"
+    "exampleProjectId": "P_SED0",
+    "license": "MIT"
 }

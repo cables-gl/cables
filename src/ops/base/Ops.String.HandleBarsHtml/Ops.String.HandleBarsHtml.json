@@ -23,6 +23,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Done"
+            },
+            {
                 "type": 5,
                 "name": "Result"
             },

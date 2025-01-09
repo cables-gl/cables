@@ -58,6 +58,9 @@ const modelMatrix = mat4.create();
 const identViewMatrix = mat4.create();
 const zeroVec3 = vec3.create();
 
+active.onChange = updateActiveRender;
+isInteractive.onChange = updateIsInteractive;
+
 render.onTriggered = function ()
 {
     if (!div)
@@ -402,7 +405,6 @@ function onTouchMove(e)
     }
 }
 
-active.onChange = updateActiveRender;
 function updateActiveRender()
 {
     if (active.get())
@@ -417,7 +419,6 @@ function updateActiveRender()
     }
 }
 
-isInteractive.onChange = updateIsInteractive;
 function updateIsInteractive()
 {
     if (isInteractive.get())

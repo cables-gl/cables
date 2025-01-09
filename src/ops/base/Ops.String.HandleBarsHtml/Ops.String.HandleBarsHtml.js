@@ -1,6 +1,7 @@
 const
     inTplStr = op.inStringEditor("Template", ""),
     inData = op.inObject("Data"),
+    outDone = op.outTrigger("Done"),
     outStr = op.outString("Result"),
     outErrors = op.outString("Errors");
 
@@ -59,6 +60,7 @@ function render()
     try
     {
         outStr.set(template(inData.get()));
+        outDone.trigger();
     }
     catch (e)
     {
@@ -69,5 +71,6 @@ function render()
             outErrors.set(e.message);
         }
         else op.logWarn(e);
+        outDone.trigger();
     }
 }
