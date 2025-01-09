@@ -5,6 +5,9 @@ const
     inAlignVert = op.inSwitch("Vertical Align", ["Top", "Center", "Bottom"], "Top"),
     inOrientHor = op.inSwitch("Horizontal Orientation", ["Left", "Center", "Right"], "Center"),
     inOrientVert = op.inSwitch("Vertical Orientation", ["Top", "Center", "Bottom"], "Center"),
+    inUpdate = op.inTriggerButton("Force update"),
+    inOffsetX = op.inFloat("Offset X", 0),
+    inOffsetY = op.inFloat("Offset Y", 0),
     outEle = op.outObject("Element passthrough"),
     outEleAligned = op.outObject("Aligned Element");
 
@@ -12,10 +15,13 @@ inEle.onLinkChanged =
     inEleAlign.onLinkChanged =
     op.onDelete = remove;
 
+inUpdate.onTriggered =
 inOrientHor.onChange =
     inOrientVert.onChange =
     inEleAlign.onChange =
     inAlignVert.onChange =
+    inOffsetY.onChange =
+    inOffsetX.onChange =
     inAlignHor.onChange = () =>
     {
         oldTop = null;
@@ -23,7 +29,6 @@ inOrientHor.onChange =
     };
 
 let eleAlign = null;
-
 let oldTop;
 let oldLeft;
 let oldWidth;
@@ -83,8 +88,8 @@ function update()
         if (inOrientVert.get() == "Bottom") top -= childRect.height;
         if (inOrientVert.get() == "Center") top -= childRect.height / 2;
 
-        eleAlign.style.top = top + "px";
-        eleAlign.style.left = left + "px";
+        eleAlign.style.top = (top + inOffsetY.get()) + "px";
+        eleAlign.style.left = (left + inOffsetX.get()) + "px";
 
         outEle.setRef(ele);
         outEleAligned.setRef(eleAlign);
