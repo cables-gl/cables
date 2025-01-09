@@ -7,13 +7,17 @@ const
     aspect = op.outNumber("Aspect Ratio"),
     landscape = op.outBool("Landscape"),
     outCanvasEle = op.outObject("Canvas", "element"),
-    outCanvasParentEle = op.outObject("Canvas Parent", "element");
+    outCanvasParentEle = op.outObject("Canvas Parent", "element"),
+    outResize = op.outTrigger("Resized");
 
 let cgl = op.patch.cgl;
 outCanvasEle.set(op.patch.cgl.canvas);
 outCanvasParentEle.set(op.patch.cgl.canvas.parentElement);
 
-cgl.on("resize", update);
+cgl.on("resize", () =>
+{
+    outResize.trigger();
+});
 
 update();
 
