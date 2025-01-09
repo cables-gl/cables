@@ -8,7 +8,7 @@ const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 function getMIDINote(dataByte1LSB)
 {
     return dataByte1LSB <= 126
-        ? `${NOTE_VALUES[dataByte1LSB % 12]}${Math.floor(dataByte1LSB / 12) - 2} - ${dataByte1LSB}`
+        ? NOTE_VALUES[dataByte1LSB % 12] + Math.floor(dataByte1LSB / 12) - 2 + " - " + dataByte1LSB
         : "NO NOTE";
 }
 
@@ -33,7 +33,7 @@ const noteEndDropdown = op.inValueSelect("Note End", noteValues, 0);
 const normalizeDropdown = op.inValueSelect(
     "Normalize Velocity",
     ["none", "0 to 1", "-1 to 1"],
-    "none",
+    "none"
 );
 const learn = op.inTriggerButton("learn");
 const reset = op.inTriggerButton("reset");
@@ -123,8 +123,9 @@ inEvent.onChange = () =>
 
     const [statusByte] = event.data;
 
-    const { newNote, velocity } = event;
-    const [noteIndex, noteName] = newNote;
+    const newNote = event.newNote;
+    const velocity = newNote.velocity;
+    const [noteIndex, _noteName] = newNote;
     const midiNote = getMIDINote(noteIndex);
     const learnedNotes = learnedNotesIn.get();
 
@@ -156,13 +157,12 @@ inEvent.onChange = () =>
         if (CABLES.UI)
         {
             gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
-            gui.emitEvent("portValueEdited", op, learnedNotes, learnedNotes.get());
             gui.emitEvent("portValueEdited", op, learnedNotesIn, learnedNotesIn.get());
             gui.emitEvent("portValueEdited", op, noteEndDropdown, noteEndDropdown.get());
             gui.emitEvent("portValueEdited", op, noteStartDropdown, noteStartDropdown.get());
 
-            op.uiAttr({ "info": `Start bound to Note: ${noteStartDropdown.get()}` });
-            op.uiAttr({ "info": `End bound to Note: ${noteEndDropdown.get()}` });
+            op.uiAttr({ "info": "Start bound to Note: " + noteStartDropdown.get() });
+            op.uiAttr({ "info": "End bound to Note: " + noteEndDropdown.get() });
             op.refreshParams();
         }
         eventOut.set(event);
@@ -188,12 +188,10 @@ inEvent.onChange = () =>
 
                 if (normalizeDropdown.get() === "0 to 1")
                 {
-                    // (max'-min')/(max-min)*(value-min)+min'
                     velocityOut.set((1 / 126) * (velocity - 1));
                 }
                 else if (normalizeDropdown.get() === "-1 to 1")
                 {
-                    // (max'-min')/(max-min)*(value-min)+min'
                     const normalizedValue = (2 / 126) * (velocity - 1) - 1;
                     velocityOut.set(normalizedValue);
                 }

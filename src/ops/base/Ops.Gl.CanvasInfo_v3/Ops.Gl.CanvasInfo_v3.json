@@ -45,6 +45,10 @@
             {
                 "type": 2,
                 "name": "Canvas Parent"
+            },
+            {
+                "type": 1,
+                "name": "Resized"
             }
         ]
     },
@@ -67,6 +71,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1708694160875
+        },
+        {
+            "message": "Added output \"resize\", which will be triggered when canvas size has changed",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1736415803884
         }
     ],
     "license": "MIT",

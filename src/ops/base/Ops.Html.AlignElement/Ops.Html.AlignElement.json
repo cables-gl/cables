@@ -6,6 +6,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1730384737203
+        },
+        {
+            "message": "Added trigger input to force an update",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1736415753187
+        },
+        {
+            "message": "Position offset inputs",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1736416059848
         }
     ],
     "authorName": "pandur",
@@ -61,6 +73,20 @@
                     "Bottom"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Force update"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "subType": "number"
             }
         ],
         "portsOut": [
