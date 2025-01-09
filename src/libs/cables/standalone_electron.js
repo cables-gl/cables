@@ -1,5 +1,3 @@
-import { CONSTANTS } from "../../core/constants.js";
-
 const StandaloneElectron = class
 {
     constructor(op)
