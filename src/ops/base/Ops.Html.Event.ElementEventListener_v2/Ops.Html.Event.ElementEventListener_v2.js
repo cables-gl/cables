@@ -1,21 +1,25 @@
-let lastElement = null; // stores the last connected element, so we can remove prior event listeners
-let lastEventName = "";
-let lastUseCapture = false;
-
-// inputs
 const
     elementPort = op.inObject("Element"),
     eventNamePort = op.inString("Event Name", ""),
     useCapturePort = op.inValueBool("Use Capture", false),
     preventDefaultPort = op.inValueBool("Prevent Default", true),
     stopPropagationPort = op.inValueBool("Stop Propagation", true),
+    outEle = op.outObject("Element Passthrough"),
     triggerPort = op.outTrigger("Event Trigger"),
     eventObjPort = op.outObject("Event Object");
 
-// change listeners
-elementPort.onChange = update;
-eventNamePort.onChange = update;
-useCapturePort.onChange = update;
+let lastElement = null; // stores the last connected element, so we can remove prior event listeners
+let lastEventName = "";
+let lastUseCapture = false;
+
+elementPort.onChange = () =>
+{
+    outEle.setRef(elementPort.get());
+    update();
+};
+
+eventNamePort.onChange =
+    useCapturePort.onChange = update;
 
 function update()
 {
