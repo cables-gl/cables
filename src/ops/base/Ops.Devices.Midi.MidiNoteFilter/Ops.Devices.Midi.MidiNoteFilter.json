@@ -145,6 +145,13 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034758646
+        },
+        {
+            "message": "fix error when learning note",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1736416409907
         }
-    ]
+    ],
+    "license": "MIT"
 }

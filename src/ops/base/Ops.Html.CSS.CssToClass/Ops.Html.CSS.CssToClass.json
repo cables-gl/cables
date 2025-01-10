@@ -1,0 +1,34 @@
+{
+    "id": "d0eebfda-eba0-4702-9bcb-a3d31ea05ab4",
+    "created": 1736430207339,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1736430207340
+        },
+        {
+            "message": "Patch.PyS8myy.CSSClass renamed to Ops.Html.CSS.CssToClass",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1736431161758
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Class Name"
+            }
+        ],
+        "portsOut": []
+    }
+}

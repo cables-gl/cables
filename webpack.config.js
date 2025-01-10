@@ -4,6 +4,7 @@ import webpack from "webpack";
 import { fileURLToPath } from "url";
 import TerserPlugin from "terser-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import ModuleScopePlugin from "@k88/module-scope-plugin";
 
 export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
 {
@@ -63,7 +64,10 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
         },
         "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
         "resolve": {
-            "extensions": [".json", ".js", ".jsx"]
+            "extensions": [".json", ".js", ".jsx"],
+            "plugins": [
+                new ModuleScopePlugin.default("src/core/"),
+            ],
         },
         "plugins": plugins
     };

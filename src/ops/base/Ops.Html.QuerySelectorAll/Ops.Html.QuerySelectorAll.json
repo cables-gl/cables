@@ -49,8 +49,6 @@
         ]
     },
     "summary": "Selects all matching elements in the DOM",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -60,5 +58,6 @@
         ]
     },
     "exampleProjectId": "HPRqIR",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": []
 }

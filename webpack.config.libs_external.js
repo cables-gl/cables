@@ -1,6 +1,7 @@
 import path, { dirname } from "path";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
+import ModuleScopePlugin from "@k88/module-scope-plugin";
 
 export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
 {
@@ -26,7 +27,10 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
             "usedExports": true
         },
         "resolve": {
-            "extensions": [".js"]
+            "extensions": [".js"],
+            "plugins": [
+                new ModuleScopePlugin.default("libs/"),
+            ],
         }
     };
     return config;

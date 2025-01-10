@@ -13,8 +13,6 @@ key.setUiAttribs({ "stringTrim": true });
 key.onChange =
     data.onChange = update;
 
-updateUi();
-
 function update()
 {
     if (data.get())
