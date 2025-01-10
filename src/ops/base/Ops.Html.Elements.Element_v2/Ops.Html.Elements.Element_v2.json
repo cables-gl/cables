@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1734352676786
+        },
+        {
+            "message": "Interactive elements are not always keyboard focussable (tabindex) and clickable by keyboard space and enter keys",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1736509340912
         }
     ],
     "layout": {
