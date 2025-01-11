@@ -5,36 +5,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Event Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Capture",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Prevent Default",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Stop Propagation",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 2,
+                "name": "Element Passthrough"
+            },
+            {
+                "type": 1,
                 "name": "Event Trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event Object"
             }
         ]
@@ -70,10 +74,12 @@
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.Html.Event.CustomEventListener",
+            "message": "Added passthrough of element",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1706603656088
+            "date": 1736522253434
         }
     ],
-    "exampleProjectId": "9ixt13"
+    "exampleProjectId": "9ixt13",
+    "license": "MIT"
 }

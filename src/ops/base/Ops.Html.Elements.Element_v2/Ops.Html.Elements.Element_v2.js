@@ -196,6 +196,11 @@ function onMouseLeave(e)
     outHover.set(false);
 }
 
+function onKey(e)
+{
+    if (e.keyCode == 13 || e.keyCode == 32)outClicked.trigger();
+}
+
 function onMouseClick(e)
 {
     if (!inPropagation.get()) e.stopPropagation();
@@ -223,6 +228,8 @@ function removeListeners()
         listenerElement.removeEventListener("pointerdown", onMouseClick);
         listenerElement.removeEventListener("pointerleave", onMouseLeave);
         listenerElement.removeEventListener("pointerenter", onMouseEnter);
+        listenerElement.removeEventListener("keydown", onKey, false);
+        listenerElement.removeAttribute("tabindex");
         listenerElement = null;
     }
 }
@@ -238,6 +245,8 @@ function addListeners()
         listenerElement.addEventListener("pointerdown", onMouseClick);
         listenerElement.addEventListener("pointerleave", onMouseLeave);
         listenerElement.addEventListener("pointerenter", onMouseEnter);
+        listenerElement.setAttribute("tabindex", 0);
+        listenerElement.addEventListener("keydown", onKey, false);
     }
 }
 

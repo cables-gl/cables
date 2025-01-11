@@ -180,7 +180,6 @@ Mesh.prototype._bufferArray = function (array, attr)
         if (attr && floatArray && floatArray.length == array.length)
         {
             floatArray.set(array);
-            // floatArray = floatArray;
         }
         else
         {

@@ -118,6 +118,11 @@ class Patch extends EventTarget
         if (this.cgl.aborted) this.aborted = true;
         if (this.cgl.silent) this.silent = true;
 
+        if (!CABLES.OPS)
+        {
+            this.aborted = true;
+            throw new Error("no CABLES.OPS found");
+        }
         this.freeTimer.play();
         this.exec();
 
@@ -338,6 +343,8 @@ class Patch extends EventTarget
     {
         let op = null;
         let objName = "";
+
+
 
         try
         {
