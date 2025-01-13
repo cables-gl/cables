@@ -114,11 +114,10 @@ function update()
         finished = true;
         result.set(val);
     }
-
-    next.trigger();
 }
 
 exec.onTriggered = function ()
 {
     update();
+    next.trigger();
 };
