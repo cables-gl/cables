@@ -1330,16 +1330,6 @@ class Shader extends CgShader
         this._feedBackNames = names;
     }
 
-    // getDefaultVertexShader()
-    // {
-    //     return defaultShaderSrcVert;
-    // }
-
-    // getDefaultFragmentShader()
-    // {
-    //     return this.getDefaultFragmentShader()
-    // }
-
 
     /**
       * adds attribute definition to shader header without colliding with other shader modules...
@@ -1615,7 +1605,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
-        if (!cgl.aborted && infoLog)
+        if (!cgl.aborted && infoLog && this._log)
         {
             if (type == cgl.gl.VERTEX_SHADER) this._log.log("VERTEX_SHADER");
             if (type == cgl.gl.FRAGMENT_SHADER) this._log.log("FRAGMENT_SHADER");
