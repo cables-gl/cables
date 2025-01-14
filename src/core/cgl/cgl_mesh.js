@@ -659,7 +659,7 @@ class Mesh
      */
     render(shader)
     {
-    // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
+        // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
         if (!shader || !shader.isValid() || this._cgl.aborted) return;
 
@@ -671,7 +671,6 @@ class Mesh
             {
                 this.setGeom(this._preWireframeGeom);
                 this._preWireframeGeom = null;
-            // console.log("remove prewireframe geom");
             }
 
             if (shader.wireframe)
@@ -703,8 +702,6 @@ class Mesh
                 }
                 if (changed) this.setGeom(this._geom);
             }
-        // if (shader.wireframe)
-        // console.log(shader.wireframe, this._geom.isIndexed());
         }
 
         let needsBind = false;
@@ -714,16 +711,10 @@ class Mesh
             needsBind = true;
         }
 
-
-        // var needsBind=false;
-        // {
-        //     needsBind=true;
-        // }
         if (needsBind) this._preBind(shader);
 
         if (!shader.bind()) return;
 
-        // if(needsBind)
         this._bind(shader);
         if (this.addVertexNumbers) this._setVertexNumbers();
 

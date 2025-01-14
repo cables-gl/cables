@@ -175,11 +175,12 @@ const Plan = class extends Events
     {
         this._data = data;
     }
+
+    getPlan(patch, name)
+    {
+        if (patch.plans && patch.plans[name]) return patch.plans[name];
+    }
 };
 
-Plan.prototype.getPlan = function (patch, name)
-{
-    if (patch.plans && patch.plans[name]) return patch.plans[name];
-};
 
 CABLES.Plan = Plan;
