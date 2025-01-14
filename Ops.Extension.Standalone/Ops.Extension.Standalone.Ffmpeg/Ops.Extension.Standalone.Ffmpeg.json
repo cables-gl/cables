@@ -100,12 +100,8 @@
     ],
     "dependencies": [
         {
-            "name": "fluent-ffmpeg",
             "type": "npm",
-            "src": [
-                "fluent-ffmpeg"
-            ],
-            "version": ""
+            "src": "fluent-ffmpeg"
         }
     ],
     "coreLibs": [

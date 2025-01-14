@@ -41,18 +41,17 @@
             }
         ]
     },
+    "coreLibs": [
+        "standalone_electron"
+    ],
     "summary": "send data to a OSC device",
     "docs": {
         "ports": []
     },
     "dependencies": [
         {
-            "name": "osc",
             "type": "npm",
-            "src": [
-                "osc"
-            ],
-            "version": ""
+            "src": "osc"
         }
     ]
 }

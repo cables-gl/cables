@@ -47,6 +47,9 @@
             }
         ]
     },
+    "coreLibs": [
+        "standalone_electron"
+    ],
     "summary": "Create a Web/Http server locally ",
     "docs": {
         "ports": []

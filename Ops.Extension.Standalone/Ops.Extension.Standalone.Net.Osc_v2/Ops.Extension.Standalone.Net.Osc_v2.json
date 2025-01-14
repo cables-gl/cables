@@ -51,12 +51,8 @@
     ],
     "dependencies": [
         {
-            "name": "osc",
             "type": "npm",
-            "src": [
-                "osc"
-            ],
-            "version": ""
+            "src": "osc"
         }
     ],
     "coreLibs": [

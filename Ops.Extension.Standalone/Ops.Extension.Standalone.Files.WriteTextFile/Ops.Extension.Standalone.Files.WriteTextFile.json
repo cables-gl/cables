@@ -42,6 +42,9 @@
             }
         ]
     },
+    "coreLibs": [
+        "standalone_electron"
+    ],
     "summary": "Write a string to a text file on the local file system",
     "docs": {
         "ports": []
