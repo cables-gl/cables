@@ -39,14 +39,14 @@ function update()
                 const errorMsg = "could not find element at path " + path;
                 foundOut.set(false);
                 result = null;
-                op.setUiError("missing", errorMsg, 2);
+                op.setUiError("missing", errorMsg, 1);
             }
             else if (typeof result !== "number")
             {
                 const errorMsg = "element at path " + path + " is not a number";
                 foundOut.set(false);
                 result = null;
-                op.setUiError("missing", errorMsg, 2);
+                op.setUiError("missing", errorMsg, 1);
             }
             else
             {

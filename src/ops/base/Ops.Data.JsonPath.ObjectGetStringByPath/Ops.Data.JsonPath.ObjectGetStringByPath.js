@@ -42,7 +42,7 @@ function update()
             if (result === undefined)
             {
                 const errorMsg = "could not find element at path " + path;
-                let errorLevel = 2;
+                let errorLevel = 1;
                 result = null;
                 foundOut.set(false);
                 if (returnPathIn.get())

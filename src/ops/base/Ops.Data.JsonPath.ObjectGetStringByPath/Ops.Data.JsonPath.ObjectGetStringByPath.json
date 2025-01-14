@@ -50,5 +50,13 @@
         ]
     },
     "exampleProjectId": "eJIqln",
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "wrong path is not an error anymore, but a warning",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1736843486845
+        }
+    ]
 }
