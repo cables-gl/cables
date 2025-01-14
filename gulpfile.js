@@ -111,12 +111,20 @@ function _core_libs(done)
     getBuildInfo((buildInfo) =>
     {
         webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze),
-            (err, stats) =>
+            (err, multiStats) =>
             {
                 if (err) throw err;
-                if (stats && stats.hasErrors() && stats.compilation && stats.compilation.errors)
+                if (multiStats && multiStats.hasErrors())
                 {
-                    done(Error(stats.compilation.errors.join("\n")));
+                    const allErrors = [];
+                    multiStats.stats.forEach((stat) =>
+                    {
+                        if (stat.hasErrors() && stat.compilation && stat.compilation.errors)
+                        {
+                            allErrors.push(stat.compilation.errors.join("\n"));
+                        }
+                    });
+                    done(Error(allErrors.join("\n\n")));
                 }
                 else
                 {
