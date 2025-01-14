@@ -17,6 +17,7 @@ outCanvasParentEle.set(op.patch.cgl.canvas.parentElement);
 cgl.on("resize", () =>
 {
     outResize.trigger();
+    update();
 });
 
 update();

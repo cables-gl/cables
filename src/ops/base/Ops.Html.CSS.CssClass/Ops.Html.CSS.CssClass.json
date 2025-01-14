@@ -15,20 +15,28 @@
             "type": "rename",
             "author": "pandur",
             "date": 1736431161758
+        },
+        {
+            "message": "Html.CSS.CssToClass renamed to Ops.Html.CSS.CssClass",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1736767478731
         }
     ],
     "layout": {
         "portsIn": [
             {
-                "type": 2,
-                "name": "Element",
-                "objType": "element"
+                "type": 5,
+                "name": "CSS"
             },
             {
                 "type": 5,
                 "name": "Class Name"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "Create a CSS class for styling other elements",
+    "docs": {
+        "ports": []
     }
 }

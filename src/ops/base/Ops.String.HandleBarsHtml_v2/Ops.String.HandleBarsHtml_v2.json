@@ -1,0 +1,54 @@
+{
+    "id": "1bc0f780-6473-41e5-8e8b-6c509cafc99b",
+    "created": 1736434074993,
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1710844490022
+        },
+        {
+            "message": "remove patch-library, load from oplibs",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736436543586
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Template"
+            },
+            {
+                "type": 2,
+                "name": "Data"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Done"
+            },
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 5,
+                "name": "Errors"
+            }
+        ]
+    },
+    "docs": {},
+    "summary": "string conversion using handlebars template engine",
+    "license": "MIT",
+    "dependencies": [
+        {
+            "src": "./lib_handlebars-v4.7.8.js",
+            "type": "commonjs"
+        }
+    ]
+}

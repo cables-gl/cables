@@ -1,5 +1,5 @@
 const
-    inEle = op.inObject("Element", null, "element"),
+    inStr = op.inStringEditor("CSS", ""),
     inClassName = op.inString("Class Name", "");
 
 op.toWorkPortsNeedsString(inClassName);
@@ -14,17 +14,10 @@ const head = op.patch.getDocument().getElementsByTagName("body")[0];
 head.appendChild(styleEle);
 
 inClassName.onChange =
-    inEle.onChange = () =>
+    inStr.onChange = () =>
     {
-        const ele = inEle.get();
-        if (!ele)
-        {
-            styleEle.textContent = "";
-        }
-        else
-        {
-            styleEle.textContent = "." + inClassName.get() + " {\n" + ele.style.cssText + "\n}\n";
-        }
+        const content = inStr.get() || "";
+        styleEle.textContent = "." + inClassName.get() + " {\n" + content + "\n}\n";
     };
 
 op.onDelete = () =>
