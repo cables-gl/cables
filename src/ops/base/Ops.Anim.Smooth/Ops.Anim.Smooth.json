@@ -28,6 +28,7 @@
             {
                 "type": 0,
                 "name": "Inc factor",
+                "uititle": "Inc factor",
                 "subType": "number"
             },
             {
@@ -50,7 +51,6 @@
     },
     "summary": "Smooths out jumps in values (AverageInterpolation)",
     "issues": "",
-
     "youtubeids": [
         "00Rvb749wrc"
     ],
@@ -86,5 +86,6 @@
             }
         ]
     },
-    "exampleProjectId": "c9gqda"
+    "exampleProjectId": "c9gqda",
+    "license": "MIT"
 }
