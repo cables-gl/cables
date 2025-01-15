@@ -24,7 +24,6 @@ function updateUi()
 
 function update()
 {
-    result.set(null);
     const dat = data.get();
     const k = key.get();
     if (dat && (dat.hasOwnProperty(k) || dat[k]))
@@ -32,11 +31,11 @@ function update()
         result.setRef(dat[k]);
         if (!result.get())
         {
-            arrLength.set(0);
+            arrLength.setRef(0);
         }
         else
         {
-            arrLength.set(result.get().length);
+            arrLength.setRef(result.get().length);
         }
     }
     else

@@ -10,15 +10,9 @@ objectIn.ignoreValueSerialize = true;
 objectIn.onChange =
     pathIn.onChange =
     returnPathIn.onChange = update;
-pathIn.setUiAttribs({ "stringTrim": true });
 
-pathIn.on("change", updateUi);
-updateUi();
-function updateUi()
-{
-    if (!pathIn.get())op.setUiError("nokey", "Missing Key Value");
-    else op.setUiError("nokey", null);
-}
+op.toWorkPortsNeedsString(pathIn);
+pathIn.setUiAttribs({ "stringTrim": true });
 
 function update()
 {
@@ -30,7 +24,7 @@ function update()
         if (!Array.isArray(data) && !(typeof data === "object"))
         {
             foundOut.set(false);
-            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not traversable by path");
         }
         else
         {
@@ -42,19 +36,17 @@ function update()
             if (result === undefined)
             {
                 const errorMsg = "could not find element at path " + path;
-                let errorLevel = 2;
                 result = null;
                 foundOut.set(false);
                 if (returnPathIn.get())
                 {
                     result = path;
-                    errorLevel = 1;
                 }
                 else
                 {
                     result = null;
                 }
-                op.setUiError("missing", errorMsg, errorLevel);
+                op.setUiError("missing", errorMsg, 1);
             }
             else
             {

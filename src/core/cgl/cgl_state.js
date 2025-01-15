@@ -6,6 +6,15 @@ import { CGState } from "../cg/cg_state.js";
 import { CG } from "../cg/cg_constants.js";
 
 
+export const BLENDS = {
+    "BLEND_NONE": 0,
+    "BLEND_NORMAL": 1,
+    "BLEND_ADD": 2,
+    "BLEND_SUB": 3,
+    "BLEND_MUL": 4,
+};
+
+
 /**
  * cables gl context/state manager
  * @class
@@ -54,6 +63,16 @@ class Context extends CGState
         this._shaderStack = [];
         this._stackDepthTest = [];
         this.mainloopOp = null;
+        this._stackBlendMode = [];
+        this._stackBlendModePremul = [];
+        this._stackBlend = [];
+        this._stackDepthFunc = [];
+        this._stackCullFaceFacing = [];
+        this._stackCullFace = [];
+        this._stackDepthWrite = [];
+        this._stackDepthTest = [];
+        this._stackStencil = [];
+
 
         this._simpleShader = new Shader(this, "simpleshader");
         this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
@@ -403,6 +422,12 @@ class Context extends CGState
         return this._simpleShader;
     }
 
+
+    setShader(s)
+    {
+        this.pushShader;
+    }
+
     /**
      * push a shader to the shader stack
      * @function pushShader
@@ -430,6 +455,12 @@ class Context extends CGState
 
         this._shaderStack.push(shader);
         this._currentShader = shader;
+    }
+
+
+    popShader()
+    {
+        this.setPreviousShader();
     }
 
 
@@ -751,528 +782,520 @@ class Context extends CGState
         this._simpleShader.dispose();
         this.gl = null;
     }
+
+
+
+
+
+
+
+
+
+    /**
+     * execute the callback next frame, once
+     * @function addNextFrameOnceCallback
+     * @memberof Context
+     * @instance
+     * @param {function} cb
+     */
+    addNextFrameOnceCallback(cb)
+    {
+        if (cb && this._onetimeCallbacks.indexOf(cb) == -1) this._onetimeCallbacks.push(cb);
+    }
+
+    // state depthtest
+
+    /**
+     * push depth testing enabled state
+     * @function pushDepthTest
+     * @param {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+
+    pushDepthTest(b)
+    {
+        this._stackDepthTest.push(b);
+        if (!b) this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+    }
+
+    /**
+     * current state of depth testing
+     * @function stateCullFace
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    stateDepthTest()
+    {
+        return this._stackDepthTest[this._stackDepthTest.length - 1];
+    }
+
+    /**
+     * pop depth testing state
+     * @function popCullFace
+     * @memberof Context
+     * @instance
+     */
+    popDepthTest()
+    {
+        this._stackDepthTest.pop();
+
+        if (!this._stackDepthTest[this._stackDepthTest.length - 1]) this.gl.disable(this.gl.DEPTH_TEST);
+        else this.gl.enable(this.gl.DEPTH_TEST);
+    }
+
+    // --------------------------------------
+    // state depthwrite
+
+    /**
+     * push depth write enabled state
+     * @function pushDepthTest
+     * @param {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    pushDepthWrite(b)
+    {
+        b = b || false;
+        this._stackDepthWrite.push(b);
+        this.gl.depthMask(b);
+    }
+
+    /**
+     * current state of depth writing
+     * @function stateDepthWrite
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    stateDepthWrite()
+    {
+        return this._stackDepthWrite[this._stackDepthWrite.length - 1];
+    }
+
+    /**
+     * pop depth writing state
+     * @function popDepthWrite
+     * @memberof Context
+     * @instance
+     */
+    popDepthWrite()
+    {
+        this._stackDepthWrite.pop();
+        this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1] || false);
+    }
+
+
+    // --------------------------------------
+    // state CullFace
+
+
+    /**
+     * push face culling face enabled state
+     * @function pushCullFace
+     * @param {Boolean} b enabled
+     * @memberof Context
+     * @instance
+     */
+    pushCullFace(b)
+    {
+        this._stackCullFace.push(b);
+
+        if (b) this.gl.enable(this.gl.CULL_FACE);
+        else this.gl.disable(this.gl.CULL_FACE);
+    }
+
+    /**
+     * current state of face culling
+     * @function stateCullFace
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    stateCullFace()
+    {
+        return this._stackCullFace[this._stackCullFace.length - 1];
+    }
+
+    /**
+     * pop face culling enabled state
+     * @function popCullFace
+     * @memberof Context
+     * @instance
+     */
+    popCullFace()
+    {
+        this._stackCullFace.pop();
+
+        if (this._stackCullFace[this._stackCullFace.length - 1]) this.gl.enable(this.gl.CULL_FACE);
+        else this.gl.disable(this.gl.CULL_FACE);
+    }
+
+
+    // --------------------------------------
+    // state CullFace Facing
+
+
+    /**
+     * push face culling face side
+     * @function pushCullFaceFacing
+     * @param {Number} cgl.gl.FRONT_AND_BACK, cgl.gl.BACK or cgl.gl.FRONT
+     * @memberof Context
+     * @instance
+     */
+
+    pushCullFaceFacing(b)
+    {
+        this._stackCullFaceFacing.push(b);
+        this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+    }
+
+    /**
+     * current state of face culling side
+     * @function stateCullFaceFacing
+     * @returns {Boolean} enabled
+     * @memberof Context
+     * @instance
+     */
+    stateCullFaceFacing()
+    {
+        return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
+    }
+
+    /**
+     * pop face culling face side
+     * @function popCullFaceFacing
+     * @memberof Context
+     * @instance
+     */
+    popCullFaceFacing()
+    {
+        this._stackCullFaceFacing.pop();
+        if (this._stackCullFaceFacing.length > 0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+    }
+
+
+    // --------------------------------------
+    // state depthfunc
+
+
+
+    /**
+     * enable / disable depth testing
+     * like `gl.depthFunc(boolean);`
+     * @function pushDepthFunc
+     * @memberof Context
+     * @instance
+     * @param {Boolean} f depthtesting
+     */
+    pushDepthFunc(f)
+    {
+        this._stackDepthFunc.push(f);
+        this.gl.depthFunc(f);
+    }
+
+    /**
+     * current state of blend
+     * @function stateDepthFunc
+     * @memberof Context
+     * @instance
+     * @returns {Boolean} depth testing enabled/disabled
+     */
+    stateDepthFunc()
+    {
+        if (this._stackDepthFunc.length > 0) return this._stackDepthFunc[this._stackDepthFunc.length - 1];
+        return false;
+    }
+
+    /**
+     * pop depth testing and set the previous state
+     * @function popDepthFunc
+     * @memberof Context
+     * @instance
+     */
+    popDepthFunc()
+    {
+        this._stackDepthFunc.pop();
+        if (this._stackDepthFunc.length > 0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length - 1]);
+    }
+
+    // --------------------------------------
+    // state blending
+
+    /**
+     * enable / disable blend
+     * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
+     * @function pushBlend
+     * @memberof Context
+     * @instance
+     * @param {boolean} b blending
+     */
+    pushBlend(b)
+    {
+        this._stackBlend.push(b);
+        if (!b) this.gl.disable(this.gl.BLEND);
+        else this.gl.enable(this.gl.BLEND);
+    }
+
+    /**
+     * pop blend state and set the previous state
+     * @function popBlend
+     * @memberof Context
+     * @instance
+     */
+    popBlend()
+    {
+        this._stackBlend.pop();
+
+        if (!this._stackBlend[this._stackBlend.length - 1]) this.gl.disable(this.gl.BLEND);
+        else this.gl.enable(this.gl.BLEND);
+    }
+
+    /**
+     * current state of blend
+     * @function stateBlend
+     * @returns {boolean} blending enabled/disabled
+     * @memberof Context
+     * @instance
+     */
+    stateBlend()
+    {
+        return this._stackBlend[this._stackBlend.length - 1];
+    }
+
+
+    /**
+     * push and switch to predefined blendmode (CONSTANTS.BLEND_MODES.BLEND_NONE,CONSTANTS.BLEND_MODES.BLEND_NORMAL,CONSTANTS.BLEND_MODES.BLEND_ADD,CONSTANTS.BLEND_MODES.BLEND_SUB,CONSTANTS.BLEND_MODES.BLEND_MUL)
+     * @function pushBlendMode
+     * @memberof Context
+     * @instance
+     * @param {Number} blendMode
+     * @param {Boolean} premul premultiplied mode
+     */
+    pushBlendMode(blendMode, premul)
+    {
+        this._stackBlendMode.push(blendMode);
+        this._stackBlendModePremul.push(premul);
+
+        const n = this._stackBlendMode.length - 1;
+
+        this.pushBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
+        this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
+    }
+
+    /**
+     * pop predefined blendmode / switch back to previous blendmode
+     * @function popBlendMode
+     * @memberof Context
+     * @instance
+     */
+    popBlendMode()
+    {
+        this._stackBlendMode.pop();
+        this._stackBlendModePremul.pop();
+
+        const n = this._stackBlendMode.length - 1;
+
+        this.popBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
+
+        if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
+    }
+
+
+    // --------------------------------------
+    // state stencil
+
+
+    /**
+     * enable / disable stencil testing
+
+    * @function pushStencil
+    * @memberof Context
+    * @instance
+    * @param {Boolean} b enable
+    */
+    pushStencil(b)
+    {
+        this._stackStencil.push(b);
+        if (!b) this.gl.disable(this.gl.STENCIL_TEST);
+        else this.gl.enable(this.gl.STENCIL_TEST);
+    }
+
+    /**
+     * pop stencil test state and set the previous state
+     * @function popStencil
+     * @memberof Context
+     * @instance
+     */
+    popStencil()
+    {
+        this._stackStencil.pop();
+
+        if (!this._stackStencil[this._stackStencil.length - 1]) this.gl.disable(this.gl.STENCIL_TEST);
+        else this.gl.enable(this.gl.STENCIL_TEST);
+    }
+
+    // --------------------------------------
+
+
+    glGetAttribLocation(prog, name)
+    {
+        const l = this.gl.getAttribLocation(prog, name);
+        // if (l == -1)
+        // {
+        //     this._log.warn("get attr loc -1 ", name);
+        // }
+        return l;
+    }
+
+
+    /**
+     * should an op now draw helpermeshes
+     * @function shouldDrawHelpers
+     * @memberof Context
+     * @param op
+     * @instance
+     */
+    shouldDrawHelpers(op)
+    {
+        if (this.tempData.shadowPass) return false;
+        if (!op.patch.isEditorMode()) return false;
+
+        // const fb = this.getCurrentFrameBuffer();
+        // if (fb && fb.getWidth)
+        // {
+        //     const fbshould = this.canvasWidth / this.canvasHeight == fb.getWidth() / fb.getHeight();
+        //     if (!fbshould) return false;
+        // }
+
+        return gui.shouldDrawOverlay;// || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
+    }
+
+    _setBlendMode(blendMode, premul)
+    {
+        const gl = this.gl;
+
+        if (blendMode == CONSTANTS.BLEND_MODES.BLEND_NONE)
+        {
+            // this.gl.disable(this.gl.BLEND);
+        }
+        else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_ADD)
+        {
+            if (premul)
+            {
+                gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
+                gl.blendFuncSeparate(gl.ONE, gl.ONE, gl.ONE, gl.ONE);
+            }
+            else
+            {
+                gl.blendEquation(gl.FUNC_ADD);
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+            }
+        }
+        else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_SUB)
+        {
+            if (premul)
+            {
+                gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
+                gl.blendFuncSeparate(gl.ZERO, gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ONE_MINUS_SRC_ALPHA);
+            }
+            else
+            {
+                gl.blendEquation(gl.FUNC_ADD);
+                gl.blendFunc(gl.ZERO, gl.ONE_MINUS_SRC_COLOR);
+            }
+        }
+        else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_MUL)
+        {
+            if (premul)
+            {
+                gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
+                gl.blendFuncSeparate(gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA);
+            }
+            else
+            {
+                gl.blendEquation(gl.FUNC_ADD);
+                gl.blendFunc(gl.ZERO, gl.SRC_COLOR);
+            }
+        }
+        else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_NORMAL)
+        {
+            if (premul)
+            {
+                gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
+                gl.blendFuncSeparate(gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+            }
+            else
+            {
+                gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
+                gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+            }
+        }
+        else
+        {
+            this._log.log("setblendmode: unknown blendmode");
+        }
+    }
+
+    createMesh(geom, options)
+    {
+        if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
+        return new CGL.Mesh(this, geom, options);
+    }
+
+    /**
+     * set cursor
+     * @function setCursor
+     * @memberof Context
+     * @instance
+     * @param {String} str css cursor string
+     */
+    setCursor(str)
+    {
+        this._cursor = str;
+    }
+
+    /**
+     * enable a webgl extension
+     * @function enableExtension
+     * @memberof Context
+     * @instance
+     * @param {String} name extension name
+     * @returns {Object} extension object or null
+     */
+    enableExtension(name)
+    {
+        if (!this.gl) return null;
+
+        if (this._enabledExtensions.hasOwnProperty(name))
+            return this._enabledExtensions[name];
+
+        const o = this.gl.getExtension(name);
+        this._enabledExtensions[name] = o;
+
+        if (!o)
+            this._log.warn("[cgl_state] extension not available " + name);
+        // else
+            // this._log.log("enabled extension", name);
+
+        return o;
+    }
+
+    checkTextureSize(x)
+    {
+        x = x || 1;
+        x = Math.floor(x);
+        x = Math.min(x, this.maxTexSize);
+        x = Math.max(x, 1);
+        return x;
+    }
 }
 
 
-Context.prototype.popShader = Context.prototype.setPreviousShader;
-Context.prototype.setShader = Context.prototype.pushShader;
-
-/**
- * execute the callback next frame, once
- * @function addNextFrameOnceCallback
- * @memberof Context
- * @instance
- * @param {function} cb
- */
-Context.prototype.addNextFrameOnceCallback = function (cb)
-{
-    if (cb && this._onetimeCallbacks.indexOf(cb) == -1) this._onetimeCallbacks.push(cb);
-};
-
-// state depthtest
-
-/**
- * push depth testing enabled state
- * @function pushDepthTest
- * @param {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype._stackDepthTest = [];
-Context.prototype.pushDepthTest = function (b)
-{
-    this._stackDepthTest.push(b);
-    if (!b) this.gl.disable(this.gl.DEPTH_TEST);
-    else this.gl.enable(this.gl.DEPTH_TEST);
-};
-/**
- * current state of depth testing
- * @function stateCullFace
- * @returns {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype.stateDepthTest = function ()
-{
-    return this._stackDepthTest[this._stackDepthTest.length - 1];
-};
-
-/**
- * pop depth testing state
- * @function popCullFace
- * @memberof Context
- * @instance
- */
-Context.prototype.popDepthTest = function ()
-{
-    this._stackDepthTest.pop();
-
-    if (!this._stackDepthTest[this._stackDepthTest.length - 1]) this.gl.disable(this.gl.DEPTH_TEST);
-    else this.gl.enable(this.gl.DEPTH_TEST);
-};
-
-// --------------------------------------
-// state depthwrite
-
-/**
- * push depth write enabled state
- * @function pushDepthTest
- * @param {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype._stackDepthWrite = [];
-Context.prototype.pushDepthWrite = function (b)
-{
-    b = b || false;
-    this._stackDepthWrite.push(b);
-    this.gl.depthMask(b);
-};
-
-/**
- * current state of depth writing
- * @function stateDepthWrite
- * @returns {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype.stateDepthWrite = function ()
-{
-    return this._stackDepthWrite[this._stackDepthWrite.length - 1];
-};
-
-/**
- * pop depth writing state
- * @function popDepthWrite
- * @memberof Context
- * @instance
- */
-Context.prototype.popDepthWrite = function ()
-{
-    this._stackDepthWrite.pop();
-    this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1] || false);
-};
-
-
-// --------------------------------------
-// state CullFace
-
-Context.prototype._stackCullFace = [];
-
-/**
- * push face culling face enabled state
- * @function pushCullFace
- * @param {Boolean} b enabled
- * @memberof Context
- * @instance
- */
-Context.prototype.pushCullFace = function (b)
-{
-    this._stackCullFace.push(b);
-
-    if (b) this.gl.enable(this.gl.CULL_FACE);
-    else this.gl.disable(this.gl.CULL_FACE);
-};
-
-/**
- * current state of face culling
- * @function stateCullFace
- * @returns {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype.stateCullFace = function ()
-{
-    return this._stackCullFace[this._stackCullFace.length - 1];
-};
-
-/**
- * pop face culling enabled state
- * @function popCullFace
- * @memberof Context
- * @instance
- */
-Context.prototype.popCullFace = function ()
-{
-    this._stackCullFace.pop();
-
-    if (this._stackCullFace[this._stackCullFace.length - 1]) this.gl.enable(this.gl.CULL_FACE);
-    else this.gl.disable(this.gl.CULL_FACE);
-};
-
-
-// --------------------------------------
-// state CullFace Facing
-
-
-/**
- * push face culling face side
- * @function pushCullFaceFacing
- * @param {Number} cgl.gl.FRONT_AND_BACK, cgl.gl.BACK or cgl.gl.FRONT
- * @memberof Context
- * @instance
- */
-Context.prototype._stackCullFaceFacing = [];
-Context.prototype.pushCullFaceFacing = function (b)
-{
-    this._stackCullFaceFacing.push(b);
-    this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
-};
-
-/**
- * current state of face culling side
- * @function stateCullFaceFacing
- * @returns {Boolean} enabled
- * @memberof Context
- * @instance
- */
-Context.prototype.stateCullFaceFacing = function ()
-{
-    return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
-};
-
-/**
- * pop face culling face side
- * @function popCullFaceFacing
- * @memberof Context
- * @instance
- */
-Context.prototype.popCullFaceFacing = function ()
-{
-    this._stackCullFaceFacing.pop();
-    if (this._stackCullFaceFacing.length > 0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
-};
-
-
-// --------------------------------------
-// state depthfunc
-
-Context.prototype._stackDepthFunc = [];
-
-/**
- * enable / disable depth testing
- * like `gl.depthFunc(boolean);`
- * @function pushDepthFunc
- * @memberof Context
- * @instance
- * @param {Boolean} f depthtesting
- */
-Context.prototype.pushDepthFunc = function (f)
-{
-    this._stackDepthFunc.push(f);
-    this.gl.depthFunc(f);
-};
-
-/**
- * current state of blend
- * @function stateDepthFunc
- * @memberof Context
- * @instance
- * @returns {Boolean} depth testing enabled/disabled
- */
-Context.prototype.stateDepthFunc = function ()
-{
-    if (this._stackDepthFunc.length > 0) return this._stackDepthFunc[this._stackDepthFunc.length - 1];
-    return false;
-};
-
-/**
- * pop depth testing and set the previous state
- * @function popDepthFunc
- * @memberof Context
- * @instance
- */
-Context.prototype.popDepthFunc = function ()
-{
-    this._stackDepthFunc.pop();
-    if (this._stackDepthFunc.length > 0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length - 1]);
-};
-
-// --------------------------------------
-// state blending
-
-Context.prototype._stackBlend = [];
-
-/**
- * enable / disable blend
- * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
- * @function pushBlend
- * @memberof Context
- * @instance
- * @param {boolean} b blending
- */
-Context.prototype.pushBlend = function (b)
-{
-    this._stackBlend.push(b);
-    if (!b) this.gl.disable(this.gl.BLEND);
-    else this.gl.enable(this.gl.BLEND);
-};
-
-/**
- * pop blend state and set the previous state
- * @function popBlend
- * @memberof Context
- * @instance
- */
-Context.prototype.popBlend = function ()
-{
-    this._stackBlend.pop();
-
-    if (!this._stackBlend[this._stackBlend.length - 1]) this.gl.disable(this.gl.BLEND);
-    else this.gl.enable(this.gl.BLEND);
-};
-
-/**
- * current state of blend
- * @function stateBlend
- * @returns {boolean} blending enabled/disabled
- * @memberof Context
- * @instance
- */
-Context.prototype.stateBlend = function ()
-{
-    return this._stackBlend[this._stackBlend.length - 1];
-};
-
-export const BLENDS = {
-    "BLEND_NONE": 0,
-    "BLEND_NORMAL": 1,
-    "BLEND_ADD": 2,
-    "BLEND_SUB": 3,
-    "BLEND_MUL": 4,
-};
-
-Context.prototype._stackBlendMode = [];
-Context.prototype._stackBlendModePremul = [];
-
-/**
- * push and switch to predefined blendmode (CONSTANTS.BLEND_MODES.BLEND_NONE,CONSTANTS.BLEND_MODES.BLEND_NORMAL,CONSTANTS.BLEND_MODES.BLEND_ADD,CONSTANTS.BLEND_MODES.BLEND_SUB,CONSTANTS.BLEND_MODES.BLEND_MUL)
- * @function pushBlendMode
- * @memberof Context
- * @instance
- * @param {Number} blendMode
- * @param {Boolean} premul premultiplied mode
- */
-Context.prototype.pushBlendMode = function (blendMode, premul)
-{
-    this._stackBlendMode.push(blendMode);
-    this._stackBlendModePremul.push(premul);
-
-    const n = this._stackBlendMode.length - 1;
-
-    this.pushBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
-    this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
-};
-
-/**
- * pop predefined blendmode / switch back to previous blendmode
- * @function popBlendMode
- * @memberof Context
- * @instance
- */
-Context.prototype.popBlendMode = function ()
-{
-    this._stackBlendMode.pop();
-    this._stackBlendModePremul.pop();
-
-    const n = this._stackBlendMode.length - 1;
-
-    this.popBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
-
-    if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
-};
-
-
-// --------------------------------------
-// state stencil
-
-Context.prototype._stackStencil = [];
-
-/**
- * enable / disable stencil testing
-
-* @function pushStencil
- * @memberof Context
- * @instance
- * @param {Boolean} b enable
- */
-Context.prototype.pushStencil = function (b)
-{
-    this._stackStencil.push(b);
-    if (!b) this.gl.disable(this.gl.STENCIL_TEST);
-    else this.gl.enable(this.gl.STENCIL_TEST);
-};
-
-/**
- * pop stencil test state and set the previous state
- * @function popStencil
- * @memberof Context
- * @instance
- */
-Context.prototype.popStencil = function ()
-{
-    this._stackStencil.pop();
-
-    if (!this._stackStencil[this._stackStencil.length - 1]) this.gl.disable(this.gl.STENCIL_TEST);
-    else this.gl.enable(this.gl.STENCIL_TEST);
-};
-
-// --------------------------------------
-
-
-Context.prototype.glGetAttribLocation = function (prog, name)
-{
-    const l = this.gl.getAttribLocation(prog, name);
-    // if (l == -1)
-    // {
-    //     this._log.warn("get attr loc -1 ", name);
-    // }
-    return l;
-};
-
-
-/**
- * should an op now draw helpermeshes
- * @function shouldDrawHelpers
- * @memberof Context
- * @param op
- * @instance
- */
-Context.prototype.shouldDrawHelpers = function (op)
-{
-    if (this.tempData.shadowPass) return false;
-    if (!op.patch.isEditorMode()) return false;
-
-    // const fb = this.getCurrentFrameBuffer();
-    // if (fb && fb.getWidth)
-    // {
-    //     const fbshould = this.canvasWidth / this.canvasHeight == fb.getWidth() / fb.getHeight();
-    //     if (!fbshould) return false;
-    // }
-
-    return gui.shouldDrawOverlay;// || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
-};
-
-Context.prototype._setBlendMode = function (blendMode, premul)
-{
-    const gl = this.gl;
-
-    if (blendMode == CONSTANTS.BLEND_MODES.BLEND_NONE)
-    {
-        // this.gl.disable(this.gl.BLEND);
-    }
-    else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_ADD)
-    {
-        if (premul)
-        {
-            gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
-            gl.blendFuncSeparate(gl.ONE, gl.ONE, gl.ONE, gl.ONE);
-        }
-        else
-        {
-            gl.blendEquation(gl.FUNC_ADD);
-            gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
-        }
-    }
-    else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_SUB)
-    {
-        if (premul)
-        {
-            gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
-            gl.blendFuncSeparate(gl.ZERO, gl.ZERO, gl.ONE_MINUS_SRC_COLOR, gl.ONE_MINUS_SRC_ALPHA);
-        }
-        else
-        {
-            gl.blendEquation(gl.FUNC_ADD);
-            gl.blendFunc(gl.ZERO, gl.ONE_MINUS_SRC_COLOR);
-        }
-    }
-    else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_MUL)
-    {
-        if (premul)
-        {
-            gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
-            gl.blendFuncSeparate(gl.ZERO, gl.SRC_COLOR, gl.ZERO, gl.SRC_ALPHA);
-        }
-        else
-        {
-            gl.blendEquation(gl.FUNC_ADD);
-            gl.blendFunc(gl.ZERO, gl.SRC_COLOR);
-        }
-    }
-    else if (blendMode == CONSTANTS.BLEND_MODES.BLEND_NORMAL)
-    {
-        if (premul)
-        {
-            gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
-            gl.blendFuncSeparate(gl.ONE, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-        }
-        else
-        {
-            gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);
-            gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-        }
-    }
-    else
-    {
-        this._log.log("setblendmode: unknown blendmode");
-    }
-};
-
-Context.prototype.createMesh = function (geom, options)
-{
-    if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
-    return new CGL.Mesh(this, geom, options);
-};
-
-
-/**
- * set cursor
- * @function setCursor
- * @memberof Context
- * @instance
- * @param {String} str css cursor string
- */
-Context.prototype.setCursor = function (str)
-{
-    this._cursor = str;
-};
-
-/**
- * enable a webgl extension
- * @function enableExtension
- * @memberof Context
- * @instance
- * @param {String} name extension name
- * @returns {Object} extension object or null
- */
-Context.prototype.enableExtension = function (name)
-{
-    if (!this.gl) return null;
-
-    if (this._enabledExtensions.hasOwnProperty(name))
-        return this._enabledExtensions[name];
-
-    const o = this.gl.getExtension(name);
-    this._enabledExtensions[name] = o;
-
-    if (!o)
-        this._log.warn("[cgl_state] extension not available " + name);
-    // else
-        // this._log.log("enabled extension", name);
-
-    return o;
-};
-
-Context.prototype.checkTextureSize = function (x)
-{
-    x = x || 1;
-    x = Math.floor(x);
-    x = Math.min(x, this.maxTexSize);
-    x = Math.max(x, 1);
-    return x;
-};
-
 
 export { Context };
+
+
 
