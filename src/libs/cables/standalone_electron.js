@@ -6,7 +6,7 @@ const StandaloneElectron = class
 
         op.isElectron = () =>
         {
-            return CABLES.platform.frontendOptions.isStandalone;
+            return CABLES.platform.frontendOptions.isElectron;
         };
     }
 };

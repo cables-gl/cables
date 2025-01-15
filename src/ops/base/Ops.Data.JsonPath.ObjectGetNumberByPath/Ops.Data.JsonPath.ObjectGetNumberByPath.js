@@ -6,31 +6,26 @@ const
 
 objectIn.onChange = update;
 pathIn.onChange = update;
-pathIn.setUiAttribs({ "stringTrim": true });
 
-pathIn.on("change", updateUi);
-updateUi();
-function updateUi()
-{
-    if (!pathIn.get())op.setUiError("nokey", "Missing Key Value");
-    else op.setUiError("nokey", null);
-}
+op.toWorkPortsNeedsString(pathIn);
+pathIn.setUiAttribs({ "stringTrim": true });
 
 function update()
 {
     const data = objectIn.get();
     const path = pathIn.get();
     op.setUiError("missing", null);
+    op.setUiError("notiterable", null);
+
     if (data && path)
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
         {
             foundOut.set(false);
-            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not traversable by path");
         }
         else
         {
-            op.setUiError("notiterable", null);
             const parts = path.split(".");
             op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
             let result = resolve(path, data);

@@ -78,7 +78,7 @@ function _core_libs_copy(done)
     const source = "build/libs/";
     const target = "../cables_api/public/libs_core/";
 
-    if (!process.env.cables_standalone || process.env.cables_standalone === "false")
+    if (!process.env.cables_electron || process.env.cables_electron === "false")
     {
         if (!fs.existsSync(target)) fs.mkdirSync(target, { "recursive": true });
         if (!fs.existsSync(source)) fs.mkdirSync(source, { "recursive": true });
@@ -111,12 +111,20 @@ function _core_libs(done)
     getBuildInfo((buildInfo) =>
     {
         webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze),
-            (err, stats) =>
+            (err, multiStats) =>
             {
                 if (err) throw err;
-                if (stats && stats.hasErrors() && stats.compilation && stats.compilation.errors)
+                if (multiStats && multiStats.hasErrors())
                 {
-                    done(Error(stats.compilation.errors.join("\n")));
+                    const allErrors = [];
+                    multiStats.stats.forEach((stat) =>
+                    {
+                        if (stat.hasErrors() && stat.compilation && stat.compilation.errors)
+                        {
+                            allErrors.push(stat.compilation.errors.join("\n"));
+                        }
+                    });
+                    done(Error(allErrors.join("\n\n")));
                 }
                 else
                 {
