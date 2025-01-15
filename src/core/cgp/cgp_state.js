@@ -80,11 +80,6 @@ class WebGpuContext extends CGState
 
     /// ////////////////////
 
-    // getViewPort()
-    // {
-    //     return [0, 0, this.canvasWidth, this.canvasHeight];
-    // }
-
     renderStart(cgp, identTranslate, identTranslateView)
     {
         this.frame++;
@@ -108,8 +103,9 @@ class WebGpuContext extends CGState
         this.pushDepthWrite(true);
         this.pushDepthFunc("less-equal");
 
-
         this.pushBlend(this._defaultBlend);
+
+        this._execOneTimeCallbacks();
 
         this.emitEvent("beginFrame");
     }
