@@ -358,8 +358,6 @@ class Mesh
             {
                 if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
                 shader.uniformNumVertices.setValue(this._numVerts);
-
-            // console.log("this._numVerts", this._numVerts, attr, shader.uniformNumVertices);
             });
         }
     }
@@ -661,7 +659,11 @@ class Mesh
     {
         // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
+        // console.log(this._name);
+
+
         if (!shader || !shader.isValid() || this._cgl.aborted) return;
+
 
         this._checkAttrLengths();
 
@@ -672,6 +674,7 @@ class Mesh
                 this.setGeom(this._preWireframeGeom);
                 this._preWireframeGeom = null;
             }
+
 
             if (shader.wireframe)
             {
@@ -769,6 +772,7 @@ class Mesh
                 }
             }
         }
+
 
 
         if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
