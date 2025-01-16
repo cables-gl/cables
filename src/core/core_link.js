@@ -15,8 +15,19 @@ class Link extends EventTarget
         super();
 
         this.id = CABLES.simpleId();
+
+        /**
+         * @type {Port}
+         */
         this.portIn = null;
+        /**
+         * @type {Port}
+         */
         this.portOut = null;
+
+        /**
+         * @type {Patch}
+         */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;

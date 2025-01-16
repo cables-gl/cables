@@ -1,6 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
+import { Geometry } from "../cg/cg_geom.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -37,6 +38,10 @@ class Mesh
         this._indexType = this._cgl.gl.UNSIGNED_SHORT;
         this._attributes = [];
         this._attribLocs = {};
+
+        /**
+         * @type {Geometry}
+         */
         this._geom = null;
         this._lastShader = null;
         this._numInstances = 0;

@@ -18,7 +18,7 @@ import { cleanJson } from "./utils.js";
  * const myPort=op.inString("String Port");
  */
 
-class Port extends EventTarget
+export class Port extends EventTarget
 {
     constructor(___op, name, type, uiAttribs)
     {
@@ -34,6 +34,9 @@ class Port extends EventTarget
          */
         this.direction = CONSTANTS.PORT.PORT_DIR_IN;
         this.id = String(CABLES.simpleId());
+        /**
+         * @type {Op}
+         */
         this._op = ___op;
 
         /**
@@ -1005,4 +1008,3 @@ Port.portTypeNumberToString = function (type)
     return "unknown";
 };
 
-export { Port };
