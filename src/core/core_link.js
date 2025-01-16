@@ -1,3 +1,4 @@
+import { Events } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import Patch from "./core_patch.js";
 import { EventTarget } from "./eventtarget.js";

@@ -164,7 +164,7 @@ class Patch extends Events
         console.log("made with https://cables.gl"); // eslint-disable-line
     }
 
-sPlaying()
+    isPlaying()
     {
         return !this._paused;
     }

@@ -3,6 +3,7 @@ import { EventTarget } from "./eventtarget.js";
 import { Anim, ANIM } from "./anim.js";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
+import { Link } from "./core_link.js";
 
 
 /**
