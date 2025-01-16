@@ -1,6 +1,6 @@
-import { EventTarget } from "../eventtarget.js";
+import { Events } from "cables-shared-client";
 
-export default class GPUBuffer extends EventTarget
+export default class GPUBuffer extends Events
 {
     constructor(cgp, name, data = null, options = {})
     {

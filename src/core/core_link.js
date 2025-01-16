@@ -1,4 +1,5 @@
 import { CONSTANTS } from "./constants.js";
+import Patch from "./core_patch.js";
 import { EventTarget } from "./eventtarget.js";
 
 /**
@@ -8,7 +9,7 @@ import { EventTarget } from "./eventtarget.js";
  * @hideconstructor
  * @class
  */
-class Link extends EventTarget
+class Link extends Events
 {
     constructor(p)
     {
@@ -16,18 +17,11 @@ class Link extends EventTarget
 
         this.id = CABLES.simpleId();
 
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portIn = null;
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portOut = null;
-
-        /**
-         * @type {Patch}
-         */
+        /** @type {Patch} */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;

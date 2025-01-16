@@ -1,4 +1,4 @@
-import { Logger } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
@@ -34,7 +34,7 @@ import PatchVariable from "./core_variable.js";
  * });
  */
 
-class Patch extends EventTarget
+class Patch extends Events
 {
     constructor(cfg)
     {
@@ -161,10 +161,10 @@ class Patch extends EventTarget
             this.timer.play();
         }
 
-    console.log("made with https://cables.gl"); // eslint-disable-line
+        console.log("made with https://cables.gl"); // eslint-disable-line
     }
 
-    isPlaying()
+sPlaying()
     {
         return !this._paused;
     }
@@ -1385,7 +1385,6 @@ Patch.replaceOpIds = function (json, options)
                         {
                             if (options.fixLostLinks)
                             {
-                                // console.log("lost link...?", links[l]);
                                 const op = gui.corePatch().getOpById(links[l].objIn);
                                 if (!op) console.log("op not found!");
                                 else
@@ -1406,8 +1405,6 @@ Patch.replaceOpIds = function (json, options)
             }
         }
     }
-
-
 
     for (const i in json.ops)
     {

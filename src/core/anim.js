@@ -1,4 +1,4 @@
-import { Logger } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { Key } from "./anim_key.js";
 import { CONSTANTS } from "./constants.js";
 import { EventTarget } from "./eventtarget.js";
@@ -53,7 +53,7 @@ import { EventTarget } from "./eventtarget.js";
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
  */
 
-class Anim extends EventTarget
+class Anim extends Events
 {
     constructor(cfg)
     {

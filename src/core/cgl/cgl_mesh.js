@@ -39,9 +39,7 @@ class Mesh
         this._attributes = [];
         this._attribLocs = {};
 
-        /**
-         * @type {Geometry}
-         */
+        /** @type {Geometry} */
         this._geom = null;
         this._lastShader = null;
         this._numInstances = 0;
@@ -130,9 +128,7 @@ class Mesh
         if (!start && !end) return;
 
         if (!attr.name)
-        {
             this._log.stack("no attrname?!");
-        }
 
         this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
         this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
