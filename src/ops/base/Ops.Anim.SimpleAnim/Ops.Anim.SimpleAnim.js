@@ -82,6 +82,7 @@ exe.onTriggered = function ()
     if (waitForReset.get() && !resetted)
     {
         result.set(inStart.get());
+        next.trigger();
         return;
     }
     let t = CABLES.now() / 1000;

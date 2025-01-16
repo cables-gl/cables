@@ -14,7 +14,6 @@ let gltfMesh = class
         this.name = name;
         this.submeshIndex = 0;
         this.material = prim.material;
-        // console.log(prim);
         this.mesh = null;
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
@@ -341,7 +340,7 @@ let gltfMesh = class
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
             let g = this.geom;
-            if (this.geom.vertices.length / 3 > 64000)
+            if (this.geom.vertices.length / 3 > 64000 && this.geom.verticesIndices.length > 0)
             {
                 g = this.geom.copy();
                 g.unIndex(false, true);
@@ -421,8 +420,6 @@ let gltfMesh = class
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
             if (this.mesh)
             {
-                // console.log(this.mesh)
-                // this.mesh.lastMaterial=0;
                 this.mesh.render(cgl.getShader(), ignoreMaterial);
             }
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
@@ -435,6 +432,10 @@ let gltfMesh = class
             }
 
             if (useMat) cgl.popShader();
+        }
+        else
+        {
+            console.log("no mesh......");
         }
     }
 };

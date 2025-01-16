@@ -15,6 +15,7 @@ class CGState extends Events
         this._ident = vec3.create();
         vec3.set(this._identView, 0, 0, -2);
         vec3.set(this._ident, 0, 0, 0);
+        this._onetimeCallbacks = [];
 
         this.patch = _patch;
         this.autoReSize = true;
@@ -312,6 +313,29 @@ class CGState extends Events
     shouldDrawHelpers()
     {
         return false;
+    }
+
+
+
+    /**
+     * execute the callback next frame, once
+     * @function addNextFrameOnceCallback
+     * @memberof Context
+     * @instance
+     * @param {function} cb
+     */
+    addNextFrameOnceCallback(cb)
+    {
+        if (cb && this._onetimeCallbacks.indexOf(cb) == -1) this._onetimeCallbacks.push(cb);
+    }
+
+    _execOneTimeCallbacks()
+    {
+        if (this._onetimeCallbacks.length > 0)
+        {
+            for (let i = 0; i < this._onetimeCallbacks.length; i++) this._onetimeCallbacks[i]();
+            this._onetimeCallbacks.length = 0;
+        }
     }
 }
 

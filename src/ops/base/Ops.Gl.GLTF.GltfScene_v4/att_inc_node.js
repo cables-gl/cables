@@ -3,6 +3,7 @@ const gltfNode = class
     constructor(node, gltf)
     {
         this.isChild = node.isChild || false;
+        node.name = node.name || "unknown node " + CABLES.simpleId();
         this.name = node.name;
         if (node.hasOwnProperty("camera")) this.camera = node.camera;
         this.hidden = false;
@@ -85,7 +86,6 @@ const gltfNode = class
             this.mesh = this._gltf.meshes[this._node.mesh];
             if (this.isCopy)
             {
-                // console.log(this.mesh);
             }
         }
 
@@ -144,19 +144,11 @@ const gltfNode = class
 
     setAnimAction(name)
     {
-        // console.log("setAnimAction:", name);
         if (!name) return;
 
         this._currentAnimaction = name;
 
-        if (name && !this._animActions[name])
-        {
-            // console.log("no action found:", name,this._animActions);
-            return null;
-        }
-
-        // else console.log("YES action found:", name);
-        // console.log(this._animActions);
+        if (name && !this._animActions[name]) return null;
 
         for (let path in this._animActions[name])
         {
@@ -164,7 +156,6 @@ const gltfNode = class
             else if (path == "rotation") this._animRot = this._animActions[name][path];
             else if (path == "scale") this._animScale = this._animActions[name][path];
             else if (path == "weights") this.animWeights = this._animActions[name][path];
-            else console.log("[gltfNode] unknown anim path", path, this._animActions[name][path]);
         }
     }
 
@@ -172,11 +163,8 @@ const gltfNode = class
     {
         if (!path || !name || !anims) return;
 
-        // console.log("setanim", this._node.name, path, name, anims);
-
         this._animActions[name] = this._animActions[name] || {};
 
-        // console.log(this._animActions);
         // debugger;
 
         // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;
@@ -188,13 +176,7 @@ const gltfNode = class
         if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
-        else if (path == "weights")
-        {
-            // console.log("weights",name,path,anims)
-            this.animWeights = this._animActions[name][path];
-            // console.log(this.animWeights);
-        }
-        else console.warn("unknown anim path", path, anims);
+        else if (path == "weights") this.animWeights = this._animActions[name][path];
     }
 
     modelMatLocal()
@@ -212,8 +194,6 @@ const gltfNode = class
         if (!_time && _time != 0)_time = time;
 
         this._lastTimeTrans = _time;
-
-        // console.log(this._rot)
 
         gltfTransforms++;
 
@@ -287,9 +267,7 @@ const gltfNode = class
                 str += this.weights[i] + "/";
             }
 
-            // console.log(str);
             // this.mesh.weights=this.animWeights.get(_time);
-            // console.log(this.animWeights);
         }
 
         if (this.addTranslate) mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);

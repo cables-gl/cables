@@ -4,6 +4,9 @@ const gltfMeshGroup = class
     {
         this.bounds = new CABLES.CG.BoundingBox();
         this.meshes = [];
+
+        m.name = m.name || ("unknown mesh " + CABLES.simpleId());
+
         this.name = m.name;
         const prims = m.primitives;
 
@@ -28,7 +31,6 @@ const gltfMeshGroup = class
             const useMat = gltf.shaders[this.meshes[i].material];
 
             if (!ignoreMat && useMat) cgl.pushShader(gltf.shaders[this.meshes[i].material]);
-            // console.log(gltf.shaders[this.meshes[i].material],this.meshes[i].material)
             if (skinRenderer)skinRenderer.renderStart(cgl, _time);
             if (weights) this.meshes[i].weights = weights;
             this.meshes[i].render(cgl, ignoreMat, skinRenderer, _time);

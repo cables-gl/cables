@@ -51,7 +51,6 @@ class Context extends CGState
         this._isSafariCrap = false;
 
         this.temporaryTexture = null;
-        this._onetimeCallbacks = [];
         this.gl = null;
 
         this._cursor = "auto";
@@ -597,11 +596,7 @@ class Context extends CGState
 
         this._frameStarted = true;
 
-        if (this._onetimeCallbacks.length > 0)
-        {
-            for (let i = 0; i < this._onetimeCallbacks.length; i++) this._onetimeCallbacks[i]();
-            this._onetimeCallbacks.length = 0;
-        }
+        this._execOneTimeCallbacks();
 
         for (let i = 0; i < this._textureslots.length; i++)
         {
@@ -789,19 +784,6 @@ class Context extends CGState
 
 
 
-
-
-    /**
-     * execute the callback next frame, once
-     * @function addNextFrameOnceCallback
-     * @memberof Context
-     * @instance
-     * @param {function} cb
-     */
-    addNextFrameOnceCallback(cb)
-    {
-        if (cb && this._onetimeCallbacks.indexOf(cb) == -1) this._onetimeCallbacks.push(cb);
-    }
 
     // state depthtest
 
