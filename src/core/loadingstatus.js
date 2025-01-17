@@ -1,4 +1,4 @@
-import { Logger } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { generateUUID } from "./utils.js";
 import { EventTarget } from "./eventtarget.js";
 
@@ -11,7 +11,7 @@ import { EventTarget } from "./eventtarget.js";
  * @param patch
  */
 
-class LoadingStatus extends EventTarget
+class LoadingStatus extends Events
 {
     constructor(patch)
     {
@@ -29,7 +29,6 @@ class LoadingStatus extends EventTarget
         this._wasFinishedPrinted = false;
         this._loadingAssetTaskCb = false;
     }
-
 
     setOnFinishedLoading(cb)
     {
@@ -142,6 +141,7 @@ class LoadingStatus extends EventTarget
         this.emitEvent("finishedTask");
         return null;
     }
+
 
     _startAssetTasks()
     {

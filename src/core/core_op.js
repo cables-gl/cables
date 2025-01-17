@@ -7,24 +7,8 @@ import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 
-/**
- * op the class of all operators
- * @namespace external:CABLES#Op
- * @hideconstructor
- */
 
-/**
- * @type {Object}
- * @name attachments
- * @instance
- * @memberof Op
- * @description access file attachments as String values
- * @example
- * // set shader source to attached files (files are called shader.vert / shader.frag)
- * shader.setSource(attachments.shader_vert,attachments.shader_frag);
- */
-
-const Ops = {};
+//const Ops = {};
 
 const Op = function ()
 {

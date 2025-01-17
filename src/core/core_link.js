@@ -1,4 +1,6 @@
+import { Events } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
+import Patch from "./core_patch.js";
 import { EventTarget } from "./eventtarget.js";
 
 /**
@@ -8,15 +10,19 @@ import { EventTarget } from "./eventtarget.js";
  * @hideconstructor
  * @class
  */
-class Link extends EventTarget
+class Link extends Events
 {
     constructor(p)
     {
         super();
 
         this.id = CABLES.simpleId();
+
+        /** @type {Port} */
         this.portIn = null;
+        /** @type {Port} */
         this.portOut = null;
+        /** @type {Patch} */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;

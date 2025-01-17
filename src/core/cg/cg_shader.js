@@ -1,7 +1,7 @@
-import { EventTarget } from "../eventtarget.js";
+import { Events } from "cables-shared-client";
 import { simpleId } from "../utils.js";
 
-class CgShader extends EventTarget
+class CgShader extends Events
 {
     constructor()
     {

@@ -1,4 +1,4 @@
-import { EventTarget } from "./eventtarget.js";
+import { Events } from "cables-shared-client";
 
 /** @namespace CABLES */
 
@@ -26,16 +26,17 @@ export const now = function ()
  * @hideconstructor
  * @class
  */
-
-class Timer extends EventTarget
+class Timer extends Events
 {
     constructor()
     {
         super();
 
+        /**
+         * @private
+         */
         this._timeStart = internalNow();
         this._timeOffset = 0;
-
         this._currentTime = 0;
         this._lastTime = 0;
         this._paused = true;

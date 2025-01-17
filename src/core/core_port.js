@@ -1,8 +1,9 @@
-import { Logger } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { EventTarget } from "./eventtarget.js";
 import { Anim, ANIM } from "./anim.js";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
+import { Link } from "./core_link.js";
 
 
 /**
@@ -18,7 +19,7 @@ import { cleanJson } from "./utils.js";
  * const myPort=op.inString("String Port");
  */
 
-class Port extends EventTarget
+export class Port extends Events
 {
     constructor(___op, name, type, uiAttribs)
     {
@@ -34,6 +35,7 @@ class Port extends EventTarget
          */
         this.direction = CONSTANTS.PORT.PORT_DIR_IN;
         this.id = String(CABLES.simpleId());
+        /** @type {Op} */
         this._op = ___op;
 
         /**
@@ -51,7 +53,6 @@ class Port extends EventTarget
         this.anim = null;
         this._oldAnimVal = -5711;
         this.defaultValue = null;
-
 
         this._uiActiveState = true;
         this.ignoreValueSerialize = false;
@@ -128,6 +129,7 @@ class Port extends EventTarget
         port.setUiAttribs(attr);
     }
 
+    // sdjksdjklsd
     // TODO make extend class for ports, like for ops only for ui
     getValueForDisplay()
     {
@@ -1005,4 +1007,3 @@ Port.portTypeNumberToString = function (type)
     return "unknown";
 };
 
-export { Port };
