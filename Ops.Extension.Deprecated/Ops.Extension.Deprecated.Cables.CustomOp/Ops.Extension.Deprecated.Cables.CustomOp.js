@@ -197,9 +197,9 @@ const execute = () =>
                 const name = "Ops.Custom.CUSTOM" + op.id.replace(/-/g, "");
                 const code = inJS.get();
                 let codeHead = "Ops.Custom = Ops.Custom || {};\n";
-                codeHead += name + " = " + name + " || {};\n";
-                codeHead += name + " = function()\n{\nCABLES.Op.apply(this,arguments);\nconst op=this;\n";
-                let codeFoot = "\n\n};\n\n" + name + ".prototype = new CABLES.Op();\n";
+                codeHead += name + " = class extends CABLES.Op \n{";
+                codeHead += "constructor()\n{ super(...arguments);\nconst op=this;const attachments=op.attachments={};\n";
+                let codeFoot = "}\n\n};\n\n";
                 codeFoot += "new " + name + "();\n";
                 const opCode = codeHead + code + codeFoot;
                 op.setUiError("error", e);

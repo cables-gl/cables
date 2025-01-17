@@ -22,6 +22,12 @@
             "type": "deprecation",
             "author": "stephan",
             "date": 1719915871534
+        },
+        {
+            "message": "refactor to use new op class",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1737112559414
         }
     ],
     "authorName": "stephan",
