@@ -63,7 +63,6 @@ class PixelReader
         });
     }
 
-
     read(cgl, fb, pixelFormat, x, y, w, h, finishedcb)
     {
         if (CABLES.UI)
@@ -84,7 +83,6 @@ class PixelReader
 
         if (isFloatingPoint)bytesPerItem = 4;
         if (CGL.Texture.isPixelFormatHalfFloat(pixelFormat)) bytesPerItem = 2;
-
 
         const pixelInfo = CGL.Texture.setUpGlPixelFormat(cgl, pixelFormat);
         const numItems = pixelInfo.numColorChannels * w * h;

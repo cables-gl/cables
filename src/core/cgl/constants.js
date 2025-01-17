@@ -22,7 +22,6 @@ const SHADER = {
     "SHADERVAR_UNI_VIEWPOS": "camPos",
 };
 
-
 const BLEND_MODES = {
     "BLEND_NONE": 0,
     "BLEND_NORMAL": 1,
@@ -30,10 +29,6 @@ const BLEND_MODES = {
     "BLEND_SUB": 3,
     "BLEND_MUL": 4,
 };
-
-
-
-
 
 const RAD2DEG = 180.0 / Math.PI;
 const DEG2RAD = Math.PI / 180.0;
@@ -46,6 +41,5 @@ const CONSTANTS = {
     "SHADER": SHADER,
     "BLEND_MODES": BLEND_MODES,
 };
-
 
 export { CONSTANTS };

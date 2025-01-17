@@ -144,9 +144,8 @@ function doRender()
 {
     if (!inTex1.get()) return;
     if (!mesh && geom.get())
-    {
         mesh = new CGL.Mesh(cgl, geom.get());
-    }
+
     if (!mesh) return;
 
     if (mesh.numInstances != inTex1.get().width * inTex1.get().height) reset();
@@ -158,14 +157,17 @@ function doRender()
         updateDefines();
     }
 
-    if (inTex1.isLinked()) mod.pushTexture("MOD_texTrans", inTex1.get().tex);
-    if (inTex2.isLinked()) mod.pushTexture("MOD_texRot", inTex2.get().tex);
-    if (inTex3.isLinked()) mod.pushTexture("MOD_texScale", inTex3.get().tex);
-    if (inTex4.isLinked()) mod.pushTexture("MOD_texColor", inTex4.get().tex);
-    if (inTex5.isLinked()) mod.pushTexture("MOD_texCoords", inTex5.get().tex);
+    if (inTex1.isLinked() && inTex1.get()) mod.pushTexture("MOD_texTrans", inTex1.get().tex);
+    if (inTex2.isLinked() && inTex2.get()) mod.pushTexture("MOD_texRot", inTex2.get().tex);
+    if (inTex3.isLinked() && inTex3.get()) mod.pushTexture("MOD_texScale", inTex3.get().tex);
+    if (inTex4.isLinked() && inTex4.get()) mod.pushTexture("MOD_texColor", inTex4.get().tex);
+    if (inTex5.isLinked() && inTex5.get()) mod.pushTexture("MOD_texCoords", inTex5.get().tex);
 
-    mod.setUniformValue("MOD_texSizeX", inTex1.get().width);
-    mod.setUniformValue("MOD_texSizeY", inTex1.get().height);
+    if (inTex1.get())
+    {
+        mod.setUniformValue("MOD_texSizeX", inTex1.get().width);
+        mod.setUniformValue("MOD_texSizeY", inTex1.get().height);
+    }
 
     outNum.set(mesh.numInstances);
 
