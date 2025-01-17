@@ -1,4 +1,6 @@
-/** @namespace CGL */
+/**
+ * @namespace CGL
+ */
 
 /**
  * multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`

@@ -3,7 +3,6 @@ import { CONSTANTS } from "./constants.js";
 import Patch from "./core_patch.js";
 import { Port } from "./core_port.js";
 
-
 /**
  * @namespace external:CABLES#Link
  * @param {Object} scene The patch object
@@ -19,11 +18,19 @@ export class Link extends Events
 
         this.id = CABLES.simpleId();
 
-        /** @type {Port} */
+        /**
+         * @type {Port}
+         */
         this.portIn = null;
-        /** @type {Port} */
+
+        /**
+         * @type {Port}
+         */
         this.portOut = null;
-        /** @type {Patch} */
+
+        /**
+         * @type {Patch}
+         */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;
@@ -161,7 +168,6 @@ export class Link extends Events
 
 // --------------------------------------------
 
-
 /**
  * @function canLinkText
  * @memberof Link
@@ -190,7 +196,6 @@ Link.canLinkText = function (p1, p2)
             if (p1.uiAttribs.objType != p2.uiAttribs.objType)
                 return "incompatible objects";
     }
-
 
     if (!p1) return "can not link: port 1 invalid";
     if (!p2) return "can not link: port 2 invalid";
@@ -247,4 +252,3 @@ Link.canLink = function (p1, p2)
 
     return true;
 };
-

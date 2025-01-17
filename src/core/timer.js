@@ -1,6 +1,8 @@
 import { Events } from "cables-shared-client";
 
-/** @namespace CABLES */
+/**
+ * @namespace CABLES
+ */
 
 export const internalNow = function ()
 {
