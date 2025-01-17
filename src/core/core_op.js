@@ -5,11 +5,10 @@ import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
-import { EventTarget } from "./eventtarget.js";
 import Patch from "./core_patch.js";
 
 /** Op */
-class Op extends EventTarget
+export class Op extends Events
 {
     /**
      * Description
@@ -21,6 +20,9 @@ class Op extends EventTarget
     {
         super();
 
+        /**
+         * @private
+         */
         this._log = new Logger("core_op");
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
         this.storage = {}; // op-specific data to be included in export
@@ -31,6 +33,10 @@ class Op extends EventTarget
         this.opId = ""; // unique op id
         this.uiAttribs = {};
         this.enabled = true;
+
+        /**
+         * @type {Patch}
+         */
         this.patch = _patch;
         this._name = _name;
 
@@ -80,9 +86,8 @@ class Op extends EventTarget
          */
         this.init = null;
 
-
         /**
-         * Implement to render 2d canvas based graphics from in an op
+         * Implement to render 2d canvas based graphics from in an op - optionaly defined in op instance
          * @function renderVizLayer
          * @instance
          * @memberof Op
@@ -94,7 +99,7 @@ class Op extends EventTarget
          * @param {number} layer.height height of canvas
          * @param {number} layer.scale current scaling of patchfield view
          */
-        this.renderVizLayer = null; // optionaly defined in op instance
+        this.renderVizLayer = null;
 
         if (this.initUi) this.initUi();
     }
@@ -130,6 +135,12 @@ class Op extends EventTarget
         this.uiAttrib(obj);
     }
 
+    /**
+     * op.require
+     *
+     * @param {String} name - module name
+     * @returns {Object}
+     */
     require(name)
     {
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
@@ -137,7 +148,6 @@ class Op extends EventTarget
 
         return null;
     }
-
 
     checkMainloopExists()
     {
@@ -150,18 +160,22 @@ class Op extends EventTarget
     {
         if (!this.uiAttribs) return "nouiattribs" + this._name;
 
-        // if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
-        //     this.uiAttribs.title = this._shortOpName;
+        /*
+         * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
+         *     this.uiAttribs.title = this._shortOpName;
+         */
 
         return this.uiAttribs.title || this._shortOpName;
     }
 
     setTitle(title)
     {
-        // this._log.log("settitle", title);
-        // this._log.log(
-        //     (new Error()).stack
-        // );
+        /*
+         * this._log.log("settitle", title);
+         * this._log.log(
+         *     (new Error()).stack
+         * );
+         */
 
         if (title != this.getTitle()) this.uiAttr({ "title": title });
     }
@@ -187,31 +201,51 @@ class Op extends EventTarget
         return false;
     }
 
+    /**
+     * setUiAttrib
+     * possible values:
+     * <pre>
+     * warning - warning message - showing up in op parameter panel
+     * error - error message - showing up in op parameter panel
+     * extendTitle - op title extension, e.g. [ + ]
+     * </pre>
+     * @function setUiAttrib
+     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @memberof Op
+     * @instance
+     * @example
+     * op.setUiAttrib({"extendTitle":str});
+     */
+    setUiAttrib(newAttribs)
+    {
+        this._setUiAttrib(newAttribs);
+    }
 
+    /**
+     *  @deprecated
+     */
     setUiAttribs(a)
     {
         this._setUiAttrib(a);
     }
 
-    setUiAttrib(a)
-    {
-        this._setUiAttrib(a);
-    }
-
+    /**
+     *  @deprecated
+     */
     uiAttr(a)
     {
         this._setUiAttrib(a);
     }
 
+    /**
+     *  @private
+     */
     _setUiAttrib(newAttribs)
     {
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-        {
             this._log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
-        }
-
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -226,7 +260,6 @@ class Op extends EventTarget
                 this.uiAttribs.translate.x != newAttribs.translate.x ||
                 this.uiAttribs.translate.y != newAttribs.translate.y
             )) emitMove = true;
-
 
         if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
@@ -245,9 +278,7 @@ class Op extends EventTarget
             this.uiAttribs[p] = newAttribs[p];
         }
 
-
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
-
 
         if (changed)
         {
@@ -255,25 +286,8 @@ class Op extends EventTarget
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
 
-
         if (emitMove) this.emitEvent("move");
     }
-    /**
-     * setUiAttrib
-     * possible values:
-     * <pre>
-     * warning - warning message - showing up in op parameter panel
-     * error - error message - showing up in op parameter panel
-     * extendTitle - op title extension, e.g. [ + ]
-     * </pre>
-     * @function setUiAttrib
-     * @param {Object} newAttribs, e.g. {"attrib":value}
-     * @memberof Op
-     * @instance
-     * @example
-     * op.setUiAttrib({"extendTitle":str});
-     */
-
 
     getName()
     {
@@ -321,6 +335,14 @@ class Op extends EventTarget
     }
 
     /**
+     * @deprecated
+     */
+    inFunction(name, v)
+    {
+        return this.inTrigger(name, v);
+    }
+
+    /**
      * create a trigger input port
      * @function inTrigger
      * @instance
@@ -329,11 +351,6 @@ class Op extends EventTarget
      * @return {Port} created port
      *
      */
-    inFunction(name, v)
-    {
-        return this.inTrigger(name, v);
-    }
-
     inTrigger(name, v)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
@@ -341,6 +358,13 @@ class Op extends EventTarget
         return p;
     }
 
+    /**
+     * @deprecated
+     */
+    inFunctionButton(name, v)
+    {
+        return this.inTriggerButton(name, v);
+    }
     /**
      * create multiple UI trigger buttons
      * @function inTriggerButton
@@ -350,10 +374,6 @@ class Op extends EventTarget
      * @param {Array} names
      * @return {Port} created port
      */
-    inFunctionButton(name, v)
-    {
-        return this.inTriggerButton(name, v);
-    }
 
     inTriggerButton(name, v)
     {
@@ -366,7 +386,6 @@ class Op extends EventTarget
         return p;
     }
 
-
     inUiTriggerButtons(name, v)
     {
         const p = this.addInPort(
@@ -378,8 +397,21 @@ class Op extends EventTarget
         return p;
     }
 
+    /**
+     * @deprecated
+     */
+    inValueFloat(name, v)
+    {
+        return this.inFloat(name, v);
+    }
 
-
+    /**
+     * @deprecated
+     */
+    inValue(name, v)
+    {
+        return this.inFloat(name, v);
+    }
     /**
      * create a number value input port
      * @function inFloat
@@ -389,15 +421,6 @@ class Op extends EventTarget
      * @param {Number} value
      * @return {Port} created port
      */
-    inValueFloat(name, v)
-    {
-        return this.inFloat(name, v);
-    }
-
-    inValue(name, v)
-    {
-        return this.inFloat(name, v);
-    }
 
     inFloat(name, v)
     {
@@ -409,6 +432,14 @@ class Op extends EventTarget
     }
 
     /**
+     * @deprecated
+     */
+    inValueBool(name, v)
+    {
+        return this.inBool(name, v);
+    }
+
+    /**
      * create a boolean input port, displayed as a checkbox
      * @function inBool
      * @instance
@@ -417,11 +448,6 @@ class Op extends EventTarget
      * @param {Boolean} value
      * @return {Port} created port
      */
-    inValueBool(name, v)
-    {
-        return this.inBool(name, v);
-    }
-
     inBool(name, v)
     {
         const p = this.addInPort(
@@ -436,7 +462,6 @@ class Op extends EventTarget
 
         return p;
     }
-
 
     inMultiPort(name, type)
     {
@@ -478,8 +503,6 @@ class Op extends EventTarget
 
         return p;
     }
-
-
 
     inValueString(name, v)
     {
@@ -537,11 +560,13 @@ class Op extends EventTarget
         p.value = "";
 
         p.setInitialValue(v);
-        // if (v !== undefined)
-        // {
-        //     p.set(v);
-        //     p.defaultValue = v;
-        // }
+        /*
+         * if (v !== undefined)
+         * {
+         *     p.set(v);
+         *     p.defaultValue = v;
+         * }
+         */
         return p;
     }
 
@@ -571,7 +596,6 @@ class Op extends EventTarget
      * @param {String} value default value
      * @return {Port} created port
      */
-    // new string
     inStringEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
@@ -779,7 +803,9 @@ class Op extends EventTarget
         return p;
     }
 
-
+    /**
+     * @deprecated
+     */
     inValueInt(name, v)
     {
         return this.inInt(name, v);
@@ -835,6 +861,9 @@ class Op extends EventTarget
         return p;
     }
 
+    /**
+     * @deprecated
+     */
     inUrl(name, filter, v)
     {
         const p = this.addInPort(
@@ -874,7 +903,6 @@ class Op extends EventTarget
         return p;
     }
 
-
     /**
      * create a object input port
      * @function inObject
@@ -903,7 +931,6 @@ class Op extends EventTarget
         if (v !== undefined) p.set(v);
         return p;
     }
-
 
     getPortVisibleIndex(p)
     {
@@ -940,6 +967,14 @@ class Op extends EventTarget
     }
 
     /**
+     * @deprecated
+     */
+    inValueSlider(name, v, min, max)
+    {
+        return this.inFloatSlider(name, v, min, max);
+    }
+
+    /**
      * create a value slider input port
      * @function inFloatSlider
      * @instance
@@ -950,11 +985,6 @@ class Op extends EventTarget
      * @param {number} max
      * @return {Port} created port
      */
-    inValueSlider(name, v, min, max)
-    {
-        return this.inFloatSlider(name, v, min, max);
-    }
-
     inFloatSlider(name, v, min, max)
     {
         const uiattribs = { "display": "range" };
@@ -975,6 +1005,14 @@ class Op extends EventTarget
     }
 
     /**
+     * @deprecated
+     */
+    outFunction(name, v)
+    {
+        return this.outTrigger(name, v);
+    }
+
+    /**
      * create output trigger port
      * @function outTrigger
      * @instance
@@ -982,17 +1020,20 @@ class Op extends EventTarget
      * @param {String} name
      * @return {Port} created port
      */
-    outFunction(name, v)
-    {
-        return this.outTrigger(name, v);
-    }
-
     outTrigger(name, v)
     {
         // old
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
+    }
+
+    /**
+     * @deprecated
+     */
+    outValue(name, v)
+    {
+        return this.outNumber(name, v);
     }
 
     /**
@@ -1004,17 +1045,19 @@ class Op extends EventTarget
      * @param {number} default value
      * @return {Port} created port
      */
-    outValue(name, v)
-    {
-        return this.outNumber(name, v);
-    }
-
     outNumber(name, v)
     {
-        // old
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
+    }
+
+    /**
+     * @deprecated
+     */
+    outValueBool(name, v)
+    {
+        return this.outBool(name, v);
     }
 
     /**
@@ -1026,11 +1069,6 @@ class Op extends EventTarget
      * @param {String} name
      * @return {Port} created port
      */
-    outValueBool(name, v)
-    {
-        return this.outBool(name, v);
-    }
-
     outBool(name, v)
     {
         // old: use outBoolNum
@@ -1071,12 +1109,7 @@ class Op extends EventTarget
     }
 
     /**
-     * create output string port
-     * @function outString
-     * @instance
-     * @memberof Op
-     * @param {String} name
-     * @return {Port} created port
+     * @deprecated
      */
     outValueString(name, v)
     {
@@ -1089,6 +1122,14 @@ class Op extends EventTarget
         return p;
     }
 
+    /**
+     * create output string port
+     * @function outString
+     * @instance
+     * @memberof Op
+     * @param {String} name
+     * @return {Port} created port
+     */
     outString(name, v)
     {
         const p = this.addOutPort(
@@ -1281,7 +1322,6 @@ class Op extends EventTarget
         }
     }
 
-
     /**
      * return port by the name id
      * @function getPortById
@@ -1309,7 +1349,7 @@ class Op extends EventTarget
 
     /**
      * @deprecated
-    */
+     */
     error()
     {
         this._log.error(...arguments);
@@ -1322,7 +1362,7 @@ class Op extends EventTarget
 
     /**
      * @deprecated
-    */
+     */
     warn()
     {
         this._log.warn(...arguments);
@@ -1335,7 +1375,7 @@ class Op extends EventTarget
 
     /**
      * @deprecated
-    */
+     */
     verbose()
     {
         this._log.verbose(...arguments);
@@ -1346,8 +1386,7 @@ class Op extends EventTarget
         this._log.verbose(...arguments);
     }
 
-
-    profile(enable)
+    profile()
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
@@ -1373,24 +1412,19 @@ class Op extends EventTarget
         return null;
     }
 
-
     // todo: check instancing stuff?
     cleanUp()
     {
         if (this._instances)
         {
             for (let i = 0; i < this._instances.length; i++)
-            {
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
-            }
-
 
             this._instances.length = 0;
         }
+
         for (let i = 0; i < this.portsIn.length; i++)
-        {
             this.portsIn[i].setAnimated(false);
-        }
 
         if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
     }
@@ -1399,69 +1433,82 @@ class Op extends EventTarget
     instanced(triggerPort)
     {
         return false;
-        // this._log.log("instanced", this.patch.instancing.numCycles());
-        // if (this.patch.instancing.numCycles() === 0) return false;
+        /*
+         * this._log.log("instanced", this.patch.instancing.numCycles());
+         * if (this.patch.instancing.numCycles() === 0) return false;
+         */
 
+        /*
+         * let i = 0;
+         * let ipi = 0;
+         * if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
+         * {
+         *     if (!this._instances) this._instances = [];
+         *     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+         *     this._instances.length = this.patch.instancing.numCycles();
+         */
 
-        // let i = 0;
-        // let ipi = 0;
-        // if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
-        // {
-        //     if (!this._instances) this._instances = [];
-        //     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
-        //     this._instances.length = this.patch.instancing.numCycles();
+        /*
+         *     for (i = 0; i < this._instances.length; i++)
+         *     {
+         *         this._instances[i] = this.patch.createOp(this.objName, true);
+         *         this._instances[i].instanced ()
+         *         {
+         *             return false;
+         *         };
+         *         this._instances[i].uiAttr(this.uiAttribs);
+         */
 
-        //     for (i = 0; i < this._instances.length; i++)
-        //     {
-        //         this._instances[i] = this.patch.createOp(this.objName, true);
-        //         this._instances[i].instanced ()
-        //         {
-        //             return false;
-        //         };
-        //         this._instances[i].uiAttr(this.uiAttribs);
+        /*
+         *         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+         *         {
+         *             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *             {
+         *                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
+         *             }
+         *         }
+         *     }
+         */
 
-        //         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-        //         {
-        //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-        //             {
-        //                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
-        //             }
-        //         }
-        //     }
+        /*
+         *     for (ipi = 0; ipi < this.portsIn.length; ipi++)
+         *     {
+         *         this.portsIn[ipi].onChange = null;
+         *         this.portsIn[ipi].onValueChanged = null;
+         *     }
+         * }
+         */
 
-        //     for (ipi = 0; ipi < this.portsIn.length; ipi++)
-        //     {
-        //         this.portsIn[ipi].onChange = null;
-        //         this.portsIn[ipi].onValueChanged = null;
-        //     }
-        // }
-
-        // const theTriggerPort = null;
-        // for (ipi = 0; ipi < this.portsIn.length; ipi++)
-        // {
-        //     if (
-        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
-        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
-        //     )
-        //     {
-        //         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
-        //     }
-        //     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-        //     {
-        //         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-        //         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
-        //     }
-        // }
+        /*
+         * const theTriggerPort = null;
+         * for (ipi = 0; ipi < this.portsIn.length; ipi++)
+         * {
+         *     if (
+         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
+         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
+         *     )
+         *     {
+         *         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
+         *     }
+         *     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *     {
+         *         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+         *         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+         *     }
+         * }
+         */
 
         // if (theTriggerPort) theTriggerPort.onTriggered();
 
-        // for (ipi = 0; ipi < this.portsOut.length; ipi++)
-        // {
-        //     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
-        //     {
-        //         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
-        //     }
-        // }
+        /*
+         * for (ipi = 0; ipi < this.portsOut.length; ipi++)
+         * {
+         *     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
+         *     {
+         *         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
+         *     }
+         * }
+         */
 
         // return true;
     }
@@ -1540,7 +1587,6 @@ class Op extends EventTarget
         this._log.warn("old error message op.error() - use op.setUiError()");
     }
 
-
     /**
      * enable/disable op
      * @function
@@ -1568,10 +1614,7 @@ class Op extends EventTarget
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else
-                {
-                    this._log.error("setPortGroup: invalid port!");
-                }
+                else this._log.error("setPortGroup: invalid port!");
         }
     }
 
@@ -1650,7 +1693,6 @@ class Op extends EventTarget
         if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
     }
 
-
     toWorkPortsNeedsString()
     {
         if (!this.patch.isEditorMode()) return;
@@ -1715,5 +1757,3 @@ class Op extends EventTarget
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     }
 }
-
-export { Op };

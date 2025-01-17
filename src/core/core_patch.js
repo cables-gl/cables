@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { EventTarget } from "./eventtarget.js";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Timer } from "./timer.js";
@@ -8,8 +7,7 @@ import { Profiler } from "./core_profiler.js";
 import { Context } from "./cgl/cgl_state.js";
 import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
-
-
+import { Op } from "./core_op.js";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -321,7 +319,7 @@ class Patch extends Events
         if (filename.indexOf("file:") === 0) return filename;
         filename = filename.replace("//", "/");
         if (filename.startsWith(this.config.prefixAssetPath)) filename = filename.replace(this.config.prefixAssetPath, "");
-        return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
+        return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || ""); //
     }
 
     clear()
@@ -341,9 +339,9 @@ class Patch extends Events
 
     createOp(identifier, id, opName = null)
     {
+        /** @type {Op} */
         let op = null;
         let objName = "";
-
 
 
         try

@@ -1,6 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
 import { generateUUID } from "./utils.js";
-import { EventTarget } from "./eventtarget.js";
 
 /**
  * LoadingStatus class, manages asynchronous loading jobs

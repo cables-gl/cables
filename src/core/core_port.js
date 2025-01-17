@@ -1,9 +1,9 @@
 import { Events, Logger } from "cables-shared-client";
-import { EventTarget } from "./eventtarget.js";
 import { Anim, ANIM } from "./anim.js";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
+import { Op } from "./core_op.js";
 
 
 /**
@@ -37,6 +37,8 @@ export class Port extends Events
         this.id = String(CABLES.simpleId());
         /** @type {Op} */
         this._op = ___op;
+
+        this._op.get();
 
         /**
          * @type {Array<Link>}

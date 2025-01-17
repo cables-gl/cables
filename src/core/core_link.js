@@ -1,7 +1,8 @@
 import { Events } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import Patch from "./core_patch.js";
-import { EventTarget } from "./eventtarget.js";
+import { Port } from "./core_port.js";
+
 
 /**
  * @namespace external:CABLES#Link
@@ -10,7 +11,7 @@ import { EventTarget } from "./eventtarget.js";
  * @hideconstructor
  * @class
  */
-class Link extends Events
+export class Link extends Events
 {
     constructor(p)
     {
@@ -247,4 +248,3 @@ Link.canLink = function (p1, p2)
     return true;
 };
 
-export { Link };
