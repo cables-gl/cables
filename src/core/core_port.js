@@ -41,7 +41,7 @@ export class Port extends Events
          */
         this._op = ___op;
 
-        this._op.get();
+        // this._op.get();
 
         /**
          * @type {Array<Link>}
