@@ -263,19 +263,21 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
 
     op.webAudio.audioInPorts[portName] = port;
 
-    // port.onLinkChanged = function() {
-    //   op.log("onLinkChanged");
-    //   if(port.isLinked()) {
-    //
-    //       if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_) { // value
-    //
-    //       } else if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT) { // object
-    //
-    //       }
-    //   } else { // unlinked
-    //
-    //   }
-    // };
+    /*
+     * port.onLinkChanged = function() {
+     *   op.log("onLinkChanged");
+     *   if(port.isLinked()) {
+     *
+     *       if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_) { // value
+     *
+     *       } else if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT) { // object
+     *
+     *       }
+     *   } else { // unlinked
+     *
+     *   }
+     * };
+     */
 
     port.onChange = function ()
     {
@@ -417,7 +419,6 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     };
     return port;
 };
-
 
 /**
  * Loads an audio file and updates the loading indicators when cables is run in the editor.

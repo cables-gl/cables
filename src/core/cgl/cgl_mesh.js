@@ -17,13 +17,13 @@ MESH.lastMesh = null;
  * @example
  * const cgl=this._cgl
  * const mesh=new CGL.Mesh(cgl, geometry);
-*
-* function render()
-* {
-*   mesh.render(cgl.getShader());
-* }
-*
-*/
+ *
+ * function render()
+ * {
+ *   mesh.render(cgl.getShader());
+ * }
+ *
+ */
 class Mesh
 {
     constructor(_cgl, __geom, _options)
@@ -39,7 +39,9 @@ class Mesh
         this._attributes = [];
         this._attribLocs = {};
 
-        /** @type {Geometry} */
+        /**
+         * @type {Geometry}
+         */
         this._geom = null;
         this._lastShader = null;
         this._numInstances = 0;
@@ -89,7 +91,7 @@ class Mesh
      * @instance
      * @description update vertices only from a geometry
      * @param {Geometry} geom
-    */
+     */
     updateVertices(geom)
     {
         this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION, geom.vertices, 3);
@@ -164,12 +166,10 @@ class Mesh
         attr.numItems = array.length / attr.itemSize;// numItems;
     }
 
-
     _bufferArray(array, attr)
     {
         let floatArray = attr.floatArray || null;
         if (!array) return;
-
 
         if (this._cgl.debugOneFrame)
         {
@@ -215,7 +215,7 @@ class Mesh
      * @param {Array} data
      * @param {Number} itemSize
      * @param {Object} options
-    */
+     */
     addAttribute(name, array, itemSize, options)
     {
         this.setAttribute(name, array, itemSize, options);
@@ -247,7 +247,6 @@ class Mesh
         }
 
         if (name == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX) instanced = true;
-
 
         for (i = 0; i < this._attributes.length; i++)
         {
@@ -309,7 +308,7 @@ class Mesh
      * @memberof Mesh
      * @instance
      * @param {Geometry} geom
-    */
+     */
     updateTexCoords(geom)
     {
         if (geom.texCoords && geom.texCoords.length > 0)
@@ -323,14 +322,13 @@ class Mesh
         }
     }
 
-
     /**
      * @function updateNormals
      * @description update normals only from a geometry
      * @memberof Mesh
      * @instance
      * @param {Geometry} geom
-    */
+     */
     updateNormals(geom)
     {
         if (geom.vertexNormals && geom.vertexNormals.length > 0)
@@ -369,7 +367,7 @@ class Mesh
      * @memberof Mesh
      * @instance
      * @param {array} vertIndices
-    */
+     */
     setVertexIndices(vertIndices)
     {
         if (!this._bufVerticesIndizes)
@@ -392,8 +390,10 @@ class Mesh
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
-            // todo cache this ?
-            // if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
+            /*
+             * todo cache this ?
+             * if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
+             */
 
             if (vertIndices.length > 65535)
             {
@@ -428,7 +428,7 @@ class Mesh
      * @description set geometry for mesh
      * @param {Geometry} geom
      * @param {boolean} removeRef
-    */
+     */
     setGeom(geom, removeRef)
     {
         this._geom = geom;
@@ -459,7 +459,6 @@ class Mesh
             if (geomAttribs[index].data && geomAttribs[index].data.length)
                 this.setAttribute(attribAssoc[index] || index, geomAttribs[index].data, geomAttribs[index].itemSize);
 
-
         if (removeRef)
         {
             this._geom = null;
@@ -483,11 +482,14 @@ class Mesh
             {
                 let name = "unknown";
                 if (this._geom)name = this._geom.name;
-            // this._log.warn(
-            //     name + ": " + this._attributes[i].name +
-            //     " wrong attr length. is:", this._attributes[i].arrayLength / this._attributes[i].itemSize,
-            //     " should be:", this._attributes[0].arrayLength / this._attributes[0].itemSize,
-            // );
+
+            /*
+             * this._log.warn(
+             *     name + ": " + this._attributes[i].name +
+             *     " wrong attr length. is:", this._attributes[i].arrayLength / this._attributes[i].itemSize,
+             *     " should be:", this._attributes[0].arrayLength / this._attributes[0].itemSize,
+             * );
+             */
             }
         }
     }
@@ -648,7 +650,6 @@ class Mesh
         return this._bufVertexAttrib.numItems;
     }
 
-
     /**
      * @function render
      * @memberof Mesh
@@ -662,9 +663,7 @@ class Mesh
 
         // console.log(this._name);
 
-
         if (!shader || !shader.isValid() || this._cgl.aborted) return;
-
 
         this._checkAttrLengths();
 
@@ -675,7 +674,6 @@ class Mesh
                 this.setGeom(this._preWireframeGeom);
                 this._preWireframeGeom = null;
             }
-
 
             if (shader.wireframe)
             {
@@ -774,22 +772,22 @@ class Mesh
             }
         }
 
-
-
         if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
         else if (!this._bufVerticesIndizes || this._bufVerticesIndizes.numItems === 0)
         {
-        // for (let i = 0; i < this._attributes.length; i++)
-        // {
-        //     if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
-        //     {
-        //         this._log.warn("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
-        //         // this._log.log(this);
-        //         // debugger;
-        //         return;
-        //     }
-        // }
 
+            /*
+             * for (let i = 0; i < this._attributes.length; i++)
+             * {
+             *     if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
+             *     {
+             *         this._log.warn("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
+             *         // this._log.log(this);
+             *         // debugger;
+             *         return;
+             *     }
+             * }
+             */
 
             if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
@@ -873,6 +871,5 @@ class Mesh
         this._disposeAttributes();
     }
 }
-
 
 export { Mesh, MESH };

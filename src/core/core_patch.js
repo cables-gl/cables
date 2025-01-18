@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { EventTarget } from "./eventtarget.js";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Timer } from "./timer.js";
@@ -8,8 +7,7 @@ import { Profiler } from "./core_profiler.js";
 import { Context } from "./cgl/cgl_state.js";
 import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
-
-
+import { Op } from "./core_op.js";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -174,7 +172,6 @@ class Patch extends Events
         return this._renderOneFrame;
     }
 
-
     renderOneFrame()
     {
         this._paused = true;
@@ -197,12 +194,12 @@ class Patch extends Events
     }
 
     /**
-    * returns true if patch is opened in editor/gui mode
-    * @function isEditorMode
-    * @memberof Patch
-    * @instance
-    * @return {Boolean} editor mode
-    */
+     * returns true if patch is opened in editor/gui mode
+     * @function isEditorMode
+     * @memberof Patch
+     * @instance
+     * @return {Boolean} editor mode
+     */
     isEditorMode()
     {
         return this.config.editorMode === true;
@@ -253,7 +250,6 @@ class Patch extends Events
         this.config.masterVolume = v;
         for (let i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
     }
-
 
     /**
      * get asset path
@@ -321,7 +317,7 @@ class Patch extends Events
         if (filename.indexOf("file:") === 0) return filename;
         filename = filename.replace("//", "/");
         if (filename.startsWith(this.config.prefixAssetPath)) filename = filename.replace(this.config.prefixAssetPath, "");
-        return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
+        return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || ""); //
     }
 
     clear()
@@ -336,15 +332,14 @@ class Patch extends Events
         this.emitEvent("patchClearEnd");
     }
 
-
-
-
     createOp(identifier, id, opName = null)
     {
+
+        /**
+         * @type {Op}
+         */
         let op = null;
         let objName = "";
-
-
 
         try
         {
@@ -356,11 +351,12 @@ class Patch extends Events
             }
             if (identifier.indexOf("Ops.") === -1)
             {
-                // this should be a uuid, not a namespace
-                // creating ops by id should be the default way from now on!
+
+                /*
+                 * this should be a uuid, not a namespace
+                 * creating ops by id should be the default way from now on!
+                 */
                 const opId = identifier;
-
-
 
                 if (CABLES.OPS[opId])
                 {
@@ -689,7 +685,6 @@ class Patch extends Events
             this._renderOneFrame = false;
         }
 
-
         if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
     }
 
@@ -897,11 +892,14 @@ class Patch extends Events
                         }
                         else
                         {
-                            // if (port.uiAttribs.hasOwnProperty("title"))
-                            // {
-                            //     op.preservedPortTitles = op.preservedPortTitles || {};
-                            //     op.preservedPortTitles[port.name] = port.uiAttribs.title;
-                            // }
+
+                            /*
+                             * if (port.uiAttribs.hasOwnProperty("title"))
+                             * {
+                             *     op.preservedPortTitles = op.preservedPortTitles || {};
+                             *     op.preservedPortTitles[port.name] = port.uiAttribs.title;
+                             * }
+                             */
                             op.preservedPortValues = op.preservedPortValues || {};
                             op.preservedPortValues[objPort.name] = objPort.value;
                         }
@@ -924,7 +922,6 @@ class Patch extends Events
                                 op.preservedPortTitles = op.preservedPortTitles || {};
                                 op.preservedPortTitles[port2.name] = port2.uiAttribs.title;
                             }
-
 
                             if (port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
                                 port2.set(obj.ops[iop].portsOut[ipo].value);
@@ -974,8 +971,10 @@ class Patch extends Events
                                     obj.ops[iop].portsIn[ipi2].links[ili].portIn,
                                     obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                                // const took = performance.now - startTime;
-                                // if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
+                                /*
+                                 * const took = performance.now - startTime;
+                                 * if (took > 100)console.log(obj().ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
+                                 */
                             }
                         }
                     }
@@ -1213,7 +1212,6 @@ class Patch extends Events
         if (this._variables.hasOwnProperty(name)) return this._variables[name];
     }
 
-
     deleteVar(name)
     {
         for (let i = 0; i < this.ops.length; i++)
@@ -1250,7 +1248,6 @@ class Patch extends Events
         }
         return vars;
     }
-
 
     /**
      * @function preRenderOps
@@ -1353,8 +1350,6 @@ Patch.getOpClass = function (objName)
         return null;
     }
 };
-
-
 
 Patch.replaceOpIds = function (json, options)
 {
@@ -1532,6 +1527,7 @@ Patch.replaceOpIds = function (json, options)
 
     return json;
 };
+
 /**
  * remove an eventlistener
  * @instance

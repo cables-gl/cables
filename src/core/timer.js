@@ -1,24 +1,25 @@
 import { Events } from "cables-shared-client";
 
-/** @namespace CABLES */
+/**
+ * @namespace CABLES
+ */
 
 export const internalNow = function ()
 {
     return window.performance.now();
 };
 
-/**
+/*
  * current time in milliseconds
  * @memberof CABLES
  * @function now
  * @static
+ *
  */
 export const now = function ()
 {
     return internalNow();
 };
-
-// ----------------------------
 
 /**
  * Measuring time

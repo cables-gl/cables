@@ -1,10 +1,9 @@
 import { Events, Logger } from "cables-shared-client";
-import { EventTarget } from "./eventtarget.js";
 import { Anim, ANIM } from "./anim.js";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
-
+import { Op } from "./core_op.js";
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -26,6 +25,7 @@ export class Port extends Events
         super();
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
         this._log = new Logger("core_port");
+
         /**
          * @type {Number}
          * @name direction
@@ -35,8 +35,13 @@ export class Port extends Events
          */
         this.direction = CONSTANTS.PORT.PORT_DIR_IN;
         this.id = String(CABLES.simpleId());
-        /** @type {Op} */
+
+        /**
+         * @type {Op}
+         */
         this._op = ___op;
+
+        // this._op.get();
 
         /**
          * @type {Array<Link>}
@@ -104,7 +109,6 @@ export class Port extends Events
         this.setValue(v);
     }
 
-
     /**
      * copy over a uiattrib from an external connected port to another port
      * @function copyLinkedUiAttrib
@@ -113,12 +117,12 @@ export class Port extends Events
      * @param {Port} port source port
      * @instance
      * @example
-
-        inArray.onLinkChanged=()=>
-        {
-            if(inArray) inArray.copyLinkedUiAttrib("stride", outArray);
-        };
-    */
+     *
+     *  inArray.onLinkChanged=()=>
+     *  {
+     *      if(inArray) inArray.copyLinkedUiAttrib("stride", outArray);
+     *  };
+     */
     copyLinkedUiAttrib(which, port)
     {
         if (!CABLES.UI) return;
@@ -129,8 +133,10 @@ export class Port extends Events
         port.setUiAttribs(attr);
     }
 
-    // sdjksdjklsd
-    // TODO make extend class for ports, like for ops only for ui
+    /*
+     * sdjksdjklsd
+     * TODO make extend class for ports, like for ops only for ui
+     */
     getValueForDisplay()
     {
         let str = this.value;
@@ -269,10 +275,10 @@ export class Port extends Events
 
     /**
      * @function get
-    * @memberof Port
-    * @instance
-    * @description get value of port
-    */
+     * @memberof Port
+     * @instance
+     * @description get value of port
+     */
     get()
     {
         if (this._animated && this._lastAnimFrame != this._op.patch.getFrameNum())
@@ -313,11 +319,9 @@ export class Port extends Events
     {
         if (v === undefined) v = null;
 
-
         if (CABLES.UI && CABLES.UI.showDevInfos)
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && v && !this.forceRefChange)
                 this._log.warn("object port uses .set", this.name, this.op.objName);
-
 
         if (this._op.enabled && !this.crashed)
         {
@@ -374,8 +378,11 @@ export class Port extends Events
     {
         if (this.onValueChanged || this.onChange)
         {
-        // very temporary: deprecated warning!!!!!!!!!
-        // if(params.length>0) this._log.warn('TOM: port has onchange params!',this._op.objName,this.name);
+
+        /*
+         * very temporary: deprecated warning!!!!!!!!!
+         * if(params.length>0) this._log.warn('TOM: port has onchange params!',this._op.objName,this.name);
+         */
         }
         this._activity();
         this.emitEvent("change", this.value, this);
@@ -431,7 +438,6 @@ export class Port extends Events
         }
     }
 
-
     setInitialValue(v)
     {
         if (this.op.preservedPortLinks[this.name])
@@ -447,7 +453,6 @@ export class Port extends Events
             }
         }
 
-
         if (this.op.preservedPortValues && this.op.preservedPortValues.hasOwnProperty(this.name) && this.op.preservedPortValues[this.name] !== undefined)
         {
             this.set(this.op.preservedPortValues[this.name]);
@@ -457,13 +462,9 @@ export class Port extends Events
         if (v !== undefined) this.defaultValue = v;
     }
 
-
-
-
     getSerialized()
     {
         let obj = { "name": this.getName() };
-
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
         {
@@ -716,9 +717,12 @@ export class Port extends Events
 
             if (this._op.patch.isEditorMode())
             {
-            // this._op.patch.emitEvent("exception", ex, portTriggered.op);
-            // this._op.patch.emitEvent("opcrash", portTriggered);
-            // console.log("crash", portTriggered.op.objName);
+
+                /*
+                 * this._op.patch.emitEvent("exception", ex, portTriggered.op);
+                 * this._op.patch.emitEvent("opcrash", portTriggered);
+                 * console.log("crash", portTriggered.op.objName);
+                 */
 
                 if (portTriggered.op.onError) portTriggered.op.onError(ex);
             }
@@ -741,7 +745,6 @@ export class Port extends Events
     setVariableName(n)
     {
         this._useVariableName = n;
-
 
         this._op.patch.on("variableRename", (oldname, newname) =>
         {
@@ -959,8 +962,6 @@ export class Port extends Events
         }
     }
 
-
-
     getUiActiveState()
     {
         return this._uiActiveState;
@@ -987,7 +988,6 @@ export class Port extends Events
     hidePort() {}
 }
 
-
 /**
  * Returns the port type string, e.g. "value" based on the port type number
  * @function portTypeNumberToString
@@ -1006,4 +1006,3 @@ Port.portTypeNumberToString = function (type)
     if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };
-

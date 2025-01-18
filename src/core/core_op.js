@@ -1,141 +1,186 @@
-import { Logger } from "cables-shared-client";
-import { EventTarget } from "./eventtarget.js";
+import { Events, Logger } from "cables-shared-client";
 import { UTILS, cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
+import Patch from "./core_patch.js";
 
-
-//const Ops = {};
-
-const Op = function ()
+/** Op */
+export class Op extends Events
 {
-    EventTarget.apply(this);
-
-    this._log = new Logger("core_op");
-    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
-    this.storage = {}; // op-specific data to be included in export
-    this.__objName = "";
-    this.portsOut = [];
-    this.portsIn = [];
-    this.portsInData = []; // original loaded patch data
-    this.opId = ""; // unique op id
-    this.uiAttribs = {};
-    this.enabled = true;
-    this.patch = arguments[0];
-    this._name = arguments[1];
-    this.preservedPortTitles = {};
-    this.preservedPortValues = {};
-    this.preservedPortLinks = {};
-
-    this._linkTimeRules = {
-        "needsLinkedToWork": [],
-        "needsStringToWork": [],
-        "needsParentOp": null
-    };
-
-    this.shouldWork = {};
-    this.hasUiErrors = false;
-    this._uiErrors = {};
-    this._hasAnimPort = false;
-
-    if (arguments[1])
+    /**
+     * Description
+     * @param {Patch} _patch
+     * @param {String} _name
+     * @param {String} _id=null
+     */
+    constructor(_patch, _name, _id = null)
     {
-        this._shortOpName = CABLES.getShortOpName(arguments[1]);
+        super();
+
+        /**
+         * @private
+         */
+        this._log = new Logger("core_op");
+        this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+        this.storage = {}; // op-specific data to be included in export
+        this.__objName = "";
+        this.portsOut = [];
+        this.portsIn = [];
+        this.portsInData = []; // original loaded patch data
+        this.opId = ""; // unique op id
+        this.uiAttribs = {};
+        this.enabled = true;
+
+        /**
+         * @type {Patch}
+         */
+        this.patch = _patch;
+        this._name = _name;
+
+        this.preservedPortTitles = {};
+        this.preservedPortValues = {};
+        this.preservedPortLinks = {};
+
+        this._linkTimeRules = {
+            "needsLinkedToWork": [],
+            "needsStringToWork": [],
+            "needsParentOp": null
+        };
+
+        this.shouldWork = {};
+        this.hasUiErrors = false;
+        this._uiErrors = {};
+        this._hasAnimPort = false;
+
+        // {
+        this._shortOpName = CABLES.getShortOpName(_name);
         this.getTitle();
+        // }
+
+        this.id = _id || shortId(); // instance id
+        this.onAddPort = null;
+        this.onCreate = null;
+        this.onResize = null;
+        this.onLoaded = null;
+        this.onDelete = null;
+        this.onError = null;
+
+        this._instances = null;
+
+        /**
+         * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
+         * @function preRender
+         * @memberof Op
+         * @instance
+         */
+        this.preRender = null;
+
+        /**
+         * overwrite this to initialize your op
+         * @function init
+         * @memberof Op
+         * @instance
+         */
+        this.init = null;
+
+        /**
+         * Implement to render 2d canvas based graphics from in an op - optionaly defined in op instance
+         * @function renderVizLayer
+         * @instance
+         * @memberof Op
+         * @param {ctx} context of canvas 2d
+         * @param {Object} layer info
+         * @param {number} layer.x x position on canvas
+         * @param {number} layer.y y position on canvas
+         * @param {number} layer.width width of canvas
+         * @param {number} layer.height height of canvas
+         * @param {number} layer.scale current scaling of patchfield view
+         */
+        this.renderVizLayer = null;
+
+        if (this.initUi) this.initUi();
     }
 
-    this.id = arguments[2] || shortId(); // instance id
-    this.onAddPort = null;
-    this.onCreate = null;
-    this.onResize = null;
-    this.onLoaded = null;
-    this.onDelete = null;
-    this.onError = null;
+    get name()
+    {
+        return this.getTitle();
+    }
 
-    this._instances = null;
+    set name(n)
+    {
+        this.setTitle(n);
+    }
 
-    /**
-     * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
-     * @function preRender
-     * @memberof Op
-     * @instance
-     */
-    this.preRender = null;
-
-    /**
-     * overwrite this to initialize your op
-     * @function init
-     * @memberof Op
-     * @instance
-     */
-    this.init = null;
-
-    Object.defineProperty(this, "name", {
-        get() { return this.getTitle(); },
-        set(v)
-        {
-            this.setTitle(v);
-        }
-    });
-
-    Object.defineProperty(this, "_objName", { set(on)
+    set _objName(on)
     {
         this.__objName = on; this._log = new Logger("op " + on);
-    } });
+    }
 
-    Object.defineProperty(this, "objName", { get() { return this.__objName; } });
-    Object.defineProperty(this, "shortName", { get() { return this._shortOpName; } });
+    get objName()
+    {
+        return this.__objName;
+    }
 
-    if (this.initUi) this.initUi();
-};
+    get shortName()
+    {
+        return this._shortOpName;
+    }
 
-{
-    Op.prototype.clearUiAttrib = function (name)
+    clearUiAttrib(name)
     {
         const obj = {};
         this.uiAttrib(obj);
-    };
+    }
 
-    Op.prototype.require = function (name)
+    /**
+     * op.require
+     *
+     * @param {String} name - module name
+     * @returns {Object}
+     */
+    require(name)
     {
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
             this.setUiError("notstandalone", "This op will only work in cables standalone version", 3);
 
         return null;
-    };
+    }
 
-
-    Op.prototype.checkMainloopExists = function ()
+    checkMainloopExists()
     {
         if (!CABLES.UI) return;
         if (!this.patch.tempData.mainloopOp) this.setUiError("nomainloop", "patch should have a mainloop to use this op");
         else this.setUiError("nomainloop", null);
-    };
+    }
 
-    Op.prototype.getTitle = function ()
+    getTitle()
     {
         if (!this.uiAttribs) return "nouiattribs" + this._name;
 
-        // if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
-        //     this.uiAttribs.title = this._shortOpName;
+        /*
+         * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
+         *     this.uiAttribs.title = this._shortOpName;
+         */
 
         return this.uiAttribs.title || this._shortOpName;
-    };
+    }
 
-    Op.prototype.setTitle = function (title)
+    setTitle(title)
     {
-        // this._log.log("settitle", title);
-        // this._log.log(
-        //     (new Error()).stack
-        // );
+        /*
+         * this._log.log("settitle", title);
+         * this._log.log(
+         *     (new Error()).stack
+         * );
+         */
 
         if (title != this.getTitle()) this.uiAttr({ "title": title });
-    };
+    }
 
-    Op.prototype.setStorage = function (newAttribs)
+    setStorage(newAttribs)
     {
         if (!newAttribs) return;
         this.storage = this.storage || {};
@@ -148,23 +193,59 @@ const Op = function ()
         }
 
         if (changed) this.emitEvent("onStorageChange", newAttribs);
-    };
+    }
 
-    Op.prototype.isSubPatchOp = function ()
+    isSubPatchOp()
     {
         if (this.patchId && this.storage) return (this.storage.subPatchVer || this.storage.blueprintVer || 0);
         return false;
-    };
+    }
 
-    const _setUiAttrib = function (newAttribs)
+    /**
+     * setUiAttrib
+     * possible values:
+     * <pre>
+     * warning - warning message - showing up in op parameter panel
+     * error - error message - showing up in op parameter panel
+     * extendTitle - op title extension, e.g. [ + ]
+     * </pre>
+     * @function setUiAttrib
+     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @memberof Op
+     * @instance
+     * @example
+     * op.setUiAttrib({"extendTitle":str});
+     */
+    setUiAttrib(newAttribs)
+    {
+        this._setUiAttrib(newAttribs);
+    }
+
+    /**
+     *  @deprecated
+     */
+    setUiAttribs(a)
+    {
+        this._setUiAttrib(a);
+    }
+
+    /**
+     *  @deprecated
+     */
+    uiAttr(a)
+    {
+        this._setUiAttrib(a);
+    }
+
+    /**
+     *  @private
+     */
+    _setUiAttrib(newAttribs)
     {
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-        {
             this._log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
-        }
-
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -179,7 +260,6 @@ const Op = function ()
                 this.uiAttribs.translate.x != newAttribs.translate.x ||
                 this.uiAttribs.translate.y != newAttribs.translate.y
             )) emitMove = true;
-
 
         if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
@@ -198,9 +278,7 @@ const Op = function ()
             this.uiAttribs[p] = newAttribs[p];
         }
 
-
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
-
 
         if (changed)
         {
@@ -208,42 +286,25 @@ const Op = function ()
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
 
-
         if (emitMove) this.emitEvent("move");
-    };
-    /**
-     * setUiAttrib
-     * possible values:
-     * <pre>
-     * warning - warning message - showing up in op parameter panel
-     * error - error message - showing up in op parameter panel
-     * extendTitle - op title extension, e.g. [ + ]
-     * </pre>
-     * @function setUiAttrib
-     * @param {Object} newAttribs, e.g. {"attrib":value}
-     * @memberof Op
-     * @instance
-     * @example
-     * op.setUiAttrib({"extendTitle":str});
-     */
-    Op.prototype.setUiAttribs = Op.prototype.setUiAttrib = Op.prototype.uiAttr = _setUiAttrib;
+    }
 
-    Op.prototype.getName = function ()
+    getName()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
         return this._name;
-    };
+    }
 
-    Op.prototype.addOutPort = function (p)
+    addOutPort(p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p._op = this;
         this.portsOut.push(p);
         this.emitEvent("onPortAdd", p);
         return p;
-    };
+    }
 
-    Op.prototype.hasDynamicPort = function ()
+    hasDynamicPort()
     {
         let i = 0;
         for (i = 0; i < this.portsIn.length; i++)
@@ -258,9 +319,9 @@ const Op = function ()
         }
 
         return false;
-    };
+    }
 
-    Op.prototype.addInPort = function (p)
+    addInPort(p)
     {
         if (!(p instanceof Port)) throw new Error("parameter is not a port!");
 
@@ -271,7 +332,15 @@ const Op = function ()
         this.emitEvent("onPortAdd", p);
 
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    inFunction(name, v)
+    {
+        return this.inTrigger(name, v);
+    }
 
     /**
      * create a trigger input port
@@ -282,13 +351,20 @@ const Op = function ()
      * @return {Port} created port
      *
      */
-    Op.prototype.inFunction = Op.prototype.inTrigger = function (name, v)
+    inTrigger(name, v)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
 
+    /**
+     * @deprecated
+     */
+    inFunctionButton(name, v)
+    {
+        return this.inTriggerButton(name, v);
+    }
     /**
      * create multiple UI trigger buttons
      * @function inTriggerButton
@@ -298,7 +374,8 @@ const Op = function ()
      * @param {Array} names
      * @return {Port} created port
      */
-    Op.prototype.inFunctionButton = Op.prototype.inTriggerButton = function (name, v)
+
+    inTriggerButton(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
@@ -307,9 +384,9 @@ const Op = function ()
         );
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
 
-    Op.prototype.inFunctionButton = Op.prototype.inUiTriggerButtons = function (name, v)
+    inUiTriggerButtons(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
@@ -318,10 +395,23 @@ const Op = function ()
         );
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
 
+    /**
+     * @deprecated
+     */
+    inValueFloat(name, v)
+    {
+        return this.inFloat(name, v);
+    }
 
-
+    /**
+     * @deprecated
+     */
+    inValue(name, v)
+    {
+        return this.inFloat(name, v);
+    }
     /**
      * create a number value input port
      * @function inFloat
@@ -331,14 +421,23 @@ const Op = function ()
      * @param {Number} value
      * @return {Port} created port
      */
-    Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
+
+    inFloat(name, v)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
 
         p.setInitialValue(v);
 
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    inValueBool(name, v)
+    {
+        return this.inBool(name, v);
+    }
 
     /**
      * create a boolean input port, displayed as a checkbox
@@ -349,7 +448,7 @@ const Op = function ()
      * @param {Boolean} value
      * @return {Port} created port
      */
-    Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
+    inBool(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
@@ -362,10 +461,9 @@ const Op = function ()
         p.setInitialValue(v);
 
         return p;
-    };
+    }
 
-
-    Op.prototype.inMultiPort = function (name, type)
+    inMultiPort(name, type)
     {
         const p = new MultiPort(
             this,
@@ -383,9 +481,9 @@ const Op = function ()
         p.initPorts();
 
         return p;
-    };
+    }
 
-    Op.prototype.outMultiPort = function (name, type, uiAttribsPort = {})
+    outMultiPort(name, type, uiAttribsPort = {})
     {
         const p = new MultiPort(
             this,
@@ -404,11 +502,9 @@ const Op = function ()
         p.initPorts();
 
         return p;
-    };
+    }
 
-
-
-    Op.prototype.inValueString = function (name, v)
+    inValueString(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
@@ -419,7 +515,7 @@ const Op = function ()
 
         p.setInitialValue(v);
         return p;
-    };
+    }
 
     /**
      * create a String value input port
@@ -430,7 +526,7 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inString = function (name, v)
+    inString(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
@@ -442,7 +538,7 @@ const Op = function ()
 
         p.setInitialValue(v);
         return p;
-    };
+    }
 
     /**
      * create a String value input port displayed as TextArea
@@ -453,7 +549,7 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueText = function (name, v)
+    inValueText(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
@@ -464,15 +560,17 @@ const Op = function ()
         p.value = "";
 
         p.setInitialValue(v);
-        // if (v !== undefined)
-        // {
-        //     p.set(v);
-        //     p.defaultValue = v;
-        // }
+        /*
+         * if (v !== undefined)
+         * {
+         *     p.set(v);
+         *     p.defaultValue = v;
+         * }
+         */
         return p;
-    };
+    }
 
-    Op.prototype.inTextarea = function (name, v)
+    inTextarea(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
@@ -487,7 +585,7 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
     /**
      * create a String value input port displayed as editor
@@ -498,8 +596,7 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    // new string
-    Op.prototype.inStringEditor = function (name, v, syntax, hideFormatButton = true)
+    inStringEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
@@ -517,10 +614,12 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
-    // old
-    Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)
+    /**
+     * @deprecated
+     */
+    inValueEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
@@ -537,7 +636,15 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    inValueSelect(name, values, v, noindex)
+    {
+        return this.inDropDown(name, values, v, noindex);
+    }
 
     /**
      * create a string select box
@@ -549,7 +656,7 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v, noindex)
+    inDropDown(name, values, v, noindex)
     {
         let p = null;
         if (!noindex)
@@ -573,6 +680,7 @@ const Op = function ()
                     "values": values
                 },
                 n
+
             );
 
             valuePort.indexPort = indexPort;
@@ -586,7 +694,7 @@ const Op = function ()
                 }
             });
 
-            indexPort.onLinkChanged = function ()
+            indexPort.onLinkChanged = () =>
             {
                 valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
             };
@@ -615,7 +723,7 @@ const Op = function ()
         }
 
         return p;
-    };
+    }
 
     /**
      * create a string switch box
@@ -627,7 +735,7 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inSwitch = function (name, values, v, noindex)
+    inSwitch(name, values, v, noindex)
     {
         let p = null;
         if (!noindex)
@@ -693,7 +801,15 @@ const Op = function ()
         }
 
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    inValueInt(name, v)
+    {
+        return this.inInt(name, v);
+    }
 
     /**
      * create a integer input port
@@ -704,7 +820,7 @@ const Op = function ()
      * @param {number} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueInt = Op.prototype.inInt = function (name, v)
+    inInt(name, v)
     {
         // old
         const p = this.addInPort(
@@ -718,7 +834,7 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
     /**
      * create a file/URL input port
@@ -728,7 +844,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inFile = function (name, filter, v)
+    inFile(name, filter, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
@@ -743,9 +859,12 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
-    Op.prototype.inUrl = function (name, filter, v)
+    /**
+     * @deprecated
+     */
+    inUrl(name, filter, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
@@ -760,7 +879,7 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
     /**
      * create a texture input port
@@ -770,7 +889,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inTexture = function (name, v)
+    inTexture(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
@@ -782,8 +901,7 @@ const Op = function ()
         p.ignoreValueSerialize = true;
         if (v !== undefined) p.set(v);
         return p;
-    };
-
+    }
 
     /**
      * create a object input port
@@ -793,16 +911,16 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inObject = function (name, v, objType)
+    inObject(name, v, objType)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType }));
         p.ignoreValueSerialize = true;
 
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
 
-    Op.prototype.inGradient = function (name, v)
+    inGradient(name, v)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
@@ -812,10 +930,9 @@ const Op = function ()
         );
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
 
-
-    Op.prototype.getPortVisibleIndex = function (p)
+    getPortVisibleIndex(p)
     {
         let ports = this.portsIn;
         if (p.direction == CONSTANTS.PORT_DIR_OUT)ports = this.portsOut;
@@ -827,7 +944,7 @@ const Op = function ()
             index++;
             if (ports[i] == p) return index;
         }
-    };
+    }
 
     /**
      * create a array input port
@@ -837,7 +954,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inArray = function (name, v, stride)
+    inArray(name, v, stride)
     {
         if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
 
@@ -847,7 +964,15 @@ const Op = function ()
 
         // if (v !== undefined) p.set(v);
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    inValueSlider(name, v, min, max)
+    {
+        return this.inFloatSlider(name, v, min, max);
+    }
 
     /**
      * create a value slider input port
@@ -860,7 +985,7 @@ const Op = function ()
      * @param {number} max
      * @return {Port} created port
      */
-    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v, min, max)
+    inFloatSlider(name, v, min, max)
     {
         const uiattribs = { "display": "range" };
 
@@ -877,7 +1002,15 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    outFunction(name, v)
+    {
+        return this.outTrigger(name, v);
+    }
 
     /**
      * create output trigger port
@@ -887,13 +1020,21 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outFunction = Op.prototype.outTrigger = function (name, v)
+    outTrigger(name, v)
     {
         // old
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    outValue(name, v)
+    {
+        return this.outNumber(name, v);
+    }
 
     /**
      * create output value port
@@ -904,13 +1045,20 @@ const Op = function ()
      * @param {number} default value
      * @return {Port} created port
      */
-    Op.prototype.outValue = Op.prototype.outNumber = function (name, v)
+    outNumber(name, v)
     {
-        // old
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    outValueBool(name, v)
+    {
+        return this.outBool(name, v);
+    }
 
     /**
      * deprecated create output boolean port
@@ -921,7 +1069,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
+    outBool(name, v)
     {
         // old: use outBoolNum
         const p = this.addOutPort(
@@ -932,7 +1080,7 @@ const Op = function ()
         if (v !== undefined) p.set(v);
         else p.set(0);
         return p;
-    };
+    }
 
     /**
      * create output boolean port,value will be converted to 0 or 1
@@ -942,7 +1090,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outBoolNum = function (name, v)
+    outBoolNum(name, v)
     {
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
@@ -953,13 +1101,26 @@ const Op = function ()
         p.set = function (b)
         {
             this.setValue(b ? 1 : 0);
-            // this._log.log("bool set", b, this.get());
         }.bind(p);
 
         if (v !== undefined) p.set(v);
         else p.set(0);
         return p;
-    };
+    }
+
+    /**
+     * @deprecated
+     */
+    outValueString(name, v)
+    {
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "type": "string"
+            })
+        );
+        if (v !== undefined) p.set(v);
+        return p;
+    }
 
     /**
      * create output string port
@@ -969,17 +1130,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outValueString = function (name, v)
-    {
-        const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                "type": "string"
-            })
-        );
-        if (v !== undefined) p.set(v);
-        return p;
-    };
-    Op.prototype.outString = function (name, v)
+    outString(name, v)
     {
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
@@ -989,7 +1140,7 @@ const Op = function ()
         if (v !== undefined) p.set(v);
         else p.set("");
         return p;
-    };
+    }
 
     /**
      * create output object port
@@ -999,13 +1150,13 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outObject = function (name, v, objType)
+    outObject(name, v, objType)
     {
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType || null }));
         p.set(v || null);
         p.ignoreValueSerialize = true;
         return p;
-    };
+    }
 
     /**
      * create output array port
@@ -1015,7 +1166,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outArray = function (name, v, stride)
+    outArray(name, v, stride)
     {
         if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
@@ -1023,7 +1174,7 @@ const Op = function ()
 
         p.ignoreValueSerialize = true;
         return p;
-    };
+    }
 
     /**
      * create output texture port
@@ -1033,7 +1184,7 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outTexture = function (name, v)
+    outTexture(name, v)
     {
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
@@ -1046,13 +1197,13 @@ const Op = function ()
 
         p.ignoreValueSerialize = true;
         return p;
-    };
+    }
 
-    Op.prototype.inDynamic = function (name, filter, options, v)
+    inDynamic(name, filter, options, v)
     {
         const p = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC, options);
 
-        p.shouldLink = function (p1, p2)
+        p.shouldLink = (p1, p2) =>
         {
             if (filter && UTILS.isArray(filter))
             {
@@ -1073,15 +1224,15 @@ const Op = function ()
             p.defaultValue = v;
         }
         return p;
-    };
+    }
 
-    Op.prototype.removeLinks = function ()
+    removeLinks()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
-    };
+    }
 
-    Op.prototype.getSerialized = function ()
+    getSerialized()
     {
         const opObj = {};
 
@@ -1122,17 +1273,17 @@ const Op = function ()
         cleanJson(opObj);
 
         return opObj;
-    };
+    }
 
-    Op.prototype.getFirstOutPortByType = function (type)
+    getFirstOutPortByType(type)
     {
         for (const ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
-    };
+    }
 
-    Op.prototype.getFirstInPortByType = function (type)
+    getFirstInPortByType(type)
     {
         for (const ipo in this.portsIn) if (this.portsIn[ipo].type == type) return this.portsIn[ipo];
-    };
+    }
 
     /**
      * return port by the name portName
@@ -1142,7 +1293,12 @@ const Op = function ()
      * @param {String} portName
      * @return {Port}
      */
-    Op.prototype.getPort = Op.prototype.getPortByName = function (name, lowerCase)
+    getPort(name, lowerCase)
+    {
+        return this.getPortByName(name, lowerCase);
+    }
+
+    getPortByName(name, lowerCase)
     {
         if (lowerCase)
         {
@@ -1164,8 +1320,7 @@ const Op = function ()
                 if (this.portsOut[ipo].getName() == name || this.portsOut[ipo].id == name)
                     return this.portsOut[ipo];
         }
-    };
-
+    }
 
     /**
      * return port by the name id
@@ -1175,49 +1330,72 @@ const Op = function ()
      * @param {String} id
      * @return {Port}
      */
-    Op.prototype.getPortById = function (id)
+    getPortById(id)
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].id == id) return this.portsIn[ipi];
         for (let ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].id == id) return this.portsOut[ipo];
-    };
+    }
 
-    Op.prototype.updateAnims = function ()
+    updateAnims()
     {
         if (this._hasAnimPort)
             for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
-    };
+    }
 
-    Op.prototype.log = function ()
+    log()
     {
         this._log.log(...arguments);
-    };
+    }
 
-    Op.prototype.error = Op.prototype.logError = function ()
+    /**
+     * @deprecated
+     */
+    error()
     {
         this._log.error(...arguments);
-    };
+    }
 
-    Op.prototype.warn = Op.prototype.logWarn = function ()
+    logError()
+    {
+        this._log.error(...arguments);
+    }
+
+    /**
+     * @deprecated
+     */
+    warn()
     {
         this._log.warn(...arguments);
-    };
+    }
 
-    Op.prototype.verbose = Op.prototype.logVerbose = function ()
+    logWarn()
+    {
+        this._log.warn(...arguments);
+    }
+
+    /**
+     * @deprecated
+     */
+    verbose()
     {
         this._log.verbose(...arguments);
-    };
+    }
 
+    logVerbose()
+    {
+        this._log.verbose(...arguments);
+    }
 
-    Op.prototype.profile = function (enable)
+    profile()
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
             this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
         }
-    };
+    }
 
-    Op.prototype.findParent = function (objName)
+    findParent(objName)
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
@@ -1232,103 +1410,111 @@ const Op = function ()
             }
         }
         return null;
-    };
-
+    }
 
     // todo: check instancing stuff?
-    Op.prototype.cleanUp = function ()
+    cleanUp()
     {
         if (this._instances)
         {
             for (let i = 0; i < this._instances.length; i++)
-            {
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
-            }
-
 
             this._instances.length = 0;
         }
+
         for (let i = 0; i < this.portsIn.length; i++)
-        {
             this.portsIn[i].setAnimated(false);
-        }
 
         if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
-    };
+    }
 
     // todo: check instancing stuff?
-    Op.prototype.instanced = function (triggerPort)
+    instanced(triggerPort)
     {
         return false;
-        // this._log.log("instanced", this.patch.instancing.numCycles());
-        // if (this.patch.instancing.numCycles() === 0) return false;
+        /*
+         * this._log.log("instanced", this.patch.instancing.numCycles());
+         * if (this.patch.instancing.numCycles() === 0) return false;
+         */
 
+        /*
+         * let i = 0;
+         * let ipi = 0;
+         * if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
+         * {
+         *     if (!this._instances) this._instances = [];
+         *     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+         *     this._instances.length = this.patch.instancing.numCycles();
+         */
 
-        // let i = 0;
-        // let ipi = 0;
-        // if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
-        // {
-        //     if (!this._instances) this._instances = [];
-        //     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
-        //     this._instances.length = this.patch.instancing.numCycles();
+        /*
+         *     for (i = 0; i < this._instances.length; i++)
+         *     {
+         *         this._instances[i] = this.patch.createOp(this.objName, true);
+         *         this._instances[i].instanced ()
+         *         {
+         *             return false;
+         *         };
+         *         this._instances[i].uiAttr(this.uiAttribs);
+         */
 
-        //     for (i = 0; i < this._instances.length; i++)
-        //     {
-        //         this._instances[i] = this.patch.createOp(this.objName, true);
-        //         this._instances[i].instanced = function ()
-        //         {
-        //             return false;
-        //         };
-        //         this._instances[i].uiAttr(this.uiAttribs);
+        /*
+         *         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+         *         {
+         *             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *             {
+         *                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
+         *             }
+         *         }
+         *     }
+         */
 
-        //         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-        //         {
-        //             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-        //             {
-        //                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
-        //             }
-        //         }
-        //     }
+        /*
+         *     for (ipi = 0; ipi < this.portsIn.length; ipi++)
+         *     {
+         *         this.portsIn[ipi].onChange = null;
+         *         this.portsIn[ipi].onValueChanged = null;
+         *     }
+         * }
+         */
 
-        //     for (ipi = 0; ipi < this.portsIn.length; ipi++)
-        //     {
-        //         this.portsIn[ipi].onChange = null;
-        //         this.portsIn[ipi].onValueChanged = null;
-        //     }
-        // }
-
-        // const theTriggerPort = null;
-        // for (ipi = 0; ipi < this.portsIn.length; ipi++)
-        // {
-        //     if (
-        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
-        //         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
-        //     )
-        //     {
-        //         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
-        //     }
-        //     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
-        //     {
-        //         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-        //         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
-        //     }
-        // }
+        /*
+         * const theTriggerPort = null;
+         * for (ipi = 0; ipi < this.portsIn.length; ipi++)
+         * {
+         *     if (
+         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
+         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
+         *     )
+         *     {
+         *         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
+         *     }
+         *     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *     {
+         *         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
+         *         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+         *     }
+         * }
+         */
 
         // if (theTriggerPort) theTriggerPort.onTriggered();
 
-        // for (ipi = 0; ipi < this.portsOut.length; ipi++)
-        // {
-        //     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
-        //     {
-        //         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
-        //     }
-        // }
+        /*
+         * for (ipi = 0; ipi < this.portsOut.length; ipi++)
+         * {
+         *     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
+         *     {
+         *         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
+         *     }
+         * }
+         */
 
         // return true;
-    };
+    }
 
     // todo: check instancing stuff?
-    Op.prototype.initInstancable = function ()
+    initInstancable()
     {
         //         if(this.isInstanced)
         //         {
@@ -1356,9 +1542,9 @@ const Op = function ()
         //             }
         // };
         // this._instances=null;
-    };
+    }
 
-    Op.prototype.setValues = function (obj)
+    setValues(obj)
     {
         for (const i in obj)
         {
@@ -1366,7 +1552,7 @@ const Op = function ()
             if (port) port.set(obj[i]);
             else this._log.warn("op.setValues: port not found:", i);
         }
-    };
+    }
 
     /**
      * return true if op has this error message id
@@ -1376,10 +1562,10 @@ const Op = function ()
      * @param {id} error id
      * @returns {Boolean} - has id
      */
-    Op.prototype.hasUiError = function (id)
+    hasUiError(id)
     {
         return this._uiErrors.hasOwnProperty(id) && this._uiErrors[id];
-    };
+    }
 
     /**
      * show op error message - set message to null to remove error message
@@ -1390,17 +1576,16 @@ const Op = function ()
      * @param {txt} text message
      * @param {level} level
      */
-    Op.prototype.setUiError = function (id, txt, level)
+    setUiError(id, txt, level)
     {
         // overwritten in ui: core_extend_op
-    };
+    }
 
     // todo: remove
-    Op.prototype.setError = function (id, txt)
+    setError(id, txt)
     {
         this._log.warn("old error message op.error() - use op.setUiError()");
-    };
-
+    }
 
     /**
      * enable/disable op
@@ -1409,11 +1594,11 @@ const Op = function ()
      * @memberof Op
      * @param {boolean}
      */
-    Op.prototype.setEnabled = function (b)
+    setEnabled(b)
     {
         this.enabled = b;
         this.emitEvent("onEnabledChange", b);
-    };
+    }
 
     /**
      * organize ports into a group
@@ -1423,18 +1608,15 @@ const Op = function ()
      * @param {String} name
      * @param {Array} ports
      */
-    Op.prototype.setPortGroup = function (name, ports)
+    setPortGroup(name, ports)
     {
         for (let i = 0; i < ports.length; i++)
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else
-                {
-                    this._log.error("setPortGroup: invalid port!");
-                }
+                else this._log.error("setPortGroup: invalid port!");
         }
-    };
+    }
 
     /**
      * visually indicate ports that they are coordinate inputs
@@ -1445,12 +1627,12 @@ const Op = function ()
      * @param {Port} portY
      * @param {Port} portZ
      */
-    Op.prototype.setUiAxisPorts = function (px, py, pz)
+    setUiAxisPorts(px, py, pz)
     {
         if (px) px.setUiAttribs({ "axis": "X" });
         if (py) py.setUiAttribs({ "axis": "Y" });
         if (pz) pz.setUiAttribs({ "axis": "Z" });
-    };
+    }
 
     /**
      * remove port from op
@@ -1459,7 +1641,7 @@ const Op = function ()
      * @memberof Op
      * @param {Port} port to remove
      */
-    Op.prototype.removePort = function (port)
+    removePort(port)
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
@@ -1481,9 +1663,9 @@ const Op = function ()
                 return;
             }
         }
-    };
+    }
 
-    Op.prototype._checkLinksNeededToWork = function () {};
+    _checkLinksNeededToWork() {}
 
     /**
      * show a warning of this op is not a child of parentOpName
@@ -1492,10 +1674,10 @@ const Op = function ()
      * @memberof Op
      * @param {String} parentOpName
      */
-    Op.prototype.toWorkNeedsParent = function (parentOpName)
+    toWorkNeedsParent(parentOpName)
     {
         this._linkTimeRules.needsParentOp = parentOpName;
-    };
+    }
 
     // /**
     //  * show a warning of this op is a child of parentOpName
@@ -1504,20 +1686,19 @@ const Op = function ()
     //  * @memberof Op
     //  * @param {String} parentOpName
     //  */
-    Op.prototype.toWorkShouldNotBeChild = function (parentOpName, type)
+    toWorkShouldNotBeChild(parentOpName, type)
     {
         if (!this.patch.isEditorMode()) return;
         this._linkTimeRules.forbiddenParent = parentOpName;
         if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
-    };
+    }
 
-
-    Op.prototype.toWorkPortsNeedsString = function ()
+    toWorkPortsNeedsString()
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
             if (this._linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsStringToWork.push(arguments[i]);
-    };
+    }
 
     /**
      * show a small X to indicate op is not working when given ports are not linked
@@ -1528,26 +1709,27 @@ const Op = function ()
      * @param {Port} port2
      * @param {Port} port3
      */
-    Op.prototype.toWorkPortsNeedToBeLinked = function ()
+    toWorkPortsNeedToBeLinked()
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
             if (this._linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsLinkedToWork.push(arguments[i]);
-    };
-    Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
+    }
+
+    toWorkPortsNeedToBeLinkedReset()
     {
         if (!this.patch.isEditorMode()) return;
         this._linkTimeRules.needsLinkedToWork.length = 0;
         if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
-    };
+    }
 
-    Op.prototype.initVarPorts = function ()
+    initVarPorts()
     {
         for (let i = 0; i < this.portsIn.length; i++)
         {
             if (this.portsIn[i].getVariableName()) this.portsIn[i].setVariable(this.portsIn[i].getVariableName());
         }
-    };
+    }
 
     /**
      * refresh op parameters, if current op is selected
@@ -1555,13 +1737,13 @@ const Op = function ()
      * @instance
      * @memberof Op
      */
-    Op.prototype.refreshParams = function ()
+    refreshParams()
     {
         if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp())
         {
             gui.opParams.show(this);
         }
-    };
+    }
 
     /**
      * Returns true if op is selected and parameter are shown in the editor, can only return true if in editor/ui
@@ -1570,25 +1752,8 @@ const Op = function ()
      * @memberof Op
      * @returns {Boolean} - is current ui op
      */
-    Op.prototype.isCurrentUiOp = function ()
+    isCurrentUiOp()
     {
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
-    };
-
-    /**
-     * Implement to render 2d canvas based graphics from in an op
-     * @function renderVizLayer
-     * @instance
-     * @memberof Op
-     * @param {ctx} context of canvas 2d
-     * @param {Object} layer info
-     * @param {number} layer.x x position on canvas
-     * @param {number} layer.y y position on canvas
-     * @param {number} layer.width width of canvas
-     * @param {number} layer.height height of canvas
-     * @param {number} layer.scale current scaling of patchfield view
-     */
-    Op.prototype.renderVizLayer = null; // optionaly defined in op instance
+    }
 }
-
-export { Op };
