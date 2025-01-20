@@ -46,6 +46,26 @@ function getBuildInfo(cb)
     });
 }
 
+function getWebpackErrorMessage(stats)
+{
+    let errorMessage = stats.compilation.errors.join("\n");
+    const errorsWarnings = stats.toJson("errors-warnings");
+    if (errorsWarnings && errorsWarnings.errors)
+    {
+        const modules = errorsWarnings.errors.filter((e) => { return !!e.moduleIdentifier; });
+        if (modules && modules.length > 0)
+        {
+            modules.forEach((m) =>
+            {
+                const parts = m.moduleIdentifier.split("|");
+                const filename = parts.length > 0 ? parts[1] : m.moduleIdentifier;
+                errorMessage = filename + ":" + m.loc + " - " + m.message;
+            });
+        }
+    }
+    return errorMessage;
+}
+
 function _watch(done)
 {
     const watchOptions = { "usePolling": true, "ignored": (fileName) => { return fileName.includes("node_modules"); } };
@@ -99,7 +119,7 @@ function _core_js(done)
             if (err) throw err;
             if (stats.hasErrors())
             {
-                done(new Error(stats.compilation.errors.join("\n")));
+                done(new Error(getWebpackErrorMessage(stats)));
             }
             done();
         });
@@ -121,7 +141,7 @@ function _core_libs(done)
                     {
                         if (stat.hasErrors() && stat.compilation && stat.compilation.errors)
                         {
-                            allErrors.push(stat.compilation.errors.join("\n"));
+                            allErrors.push(getWebpackErrorMessage(stat));
                         }
                     });
                     done(Error(allErrors.join("\n\n")));
@@ -145,7 +165,7 @@ function _external_libs(done)
                 if (err) throw err;
                 if (stats.hasErrors())
                 {
-                    done(new Error(stats.compilation.errors.join("\n")));
+                    done(new Error(getWebpackErrorMessage(stats)));
                 }
                 done();
             }
@@ -186,4 +206,3 @@ gulp.task("watch", gulp.series(
     defaultSeries,
     _watch
 ));
-
