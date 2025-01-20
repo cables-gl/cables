@@ -2,8 +2,9 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: bug, new
+labels: new
 assignees: ''
+type: 'Bug'
 
 ---
 **Link to simple, reproducible example patch**
