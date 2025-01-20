@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1736430207340
-        },
-        {
-            "message": "Patch.PyS8myy.CSSClass renamed to Ops.Html.CSS.CssToClass",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1736431161758
-        },
-        {
-            "message": "Html.CSS.CssToClass renamed to Ops.Html.CSS.CssClass",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1736767478731
         }
     ],
     "layout": {

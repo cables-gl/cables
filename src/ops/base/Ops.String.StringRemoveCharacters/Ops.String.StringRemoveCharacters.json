@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1736108053182
-        },
-        {
-            "message": "Patch.PPAbp2z.StringRemoveCharacters renamed to Ops.String.StringRemoveCharacters",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1736153666111
         }
     ],
     "layout": {

@@ -32,7 +32,6 @@
     },
     "summary": "Finds a string at a position in an array defined by path",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -60,6 +59,12 @@
             "message": "Ops.User.cables.ArrayGetStringByPath renamed to Ops.Json.ArrayGetStringByPath",
             "author": "cables",
             "date": 1610121798115
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850804953
         }
     ],
     "exampleProjectId": "rs0XWr"

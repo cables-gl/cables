@@ -1,7 +1,7 @@
 {
     "id": "1bc0f780-6473-41e5-8e8b-6c509cafc99b",
     "created": 1736434074993,
-    "authorName": "stephan",
+    "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
@@ -29,10 +29,6 @@
         ],
         "portsOut": [
             {
-                "type": 1,
-                "name": "Done"
-            },
-            {
                 "type": 5,
                 "name": "Result"
             },
@@ -42,7 +38,9 @@
             }
         ]
     },
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "summary": "string conversion using handlebars template engine",
     "license": "MIT",
     "dependencies": [

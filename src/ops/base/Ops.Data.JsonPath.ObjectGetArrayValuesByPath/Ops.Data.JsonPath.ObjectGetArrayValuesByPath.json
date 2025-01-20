@@ -44,5 +44,13 @@
             }
         ]
     },
-    "exampleProjectId": "fBcgln"
+    "exampleProjectId": "fBcgln",
+    "changelog": [
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850861949
+        }
+    ]
 }

@@ -22,17 +22,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Changed"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Result"
             }
         ]
@@ -55,5 +55,6 @@
                 "text": "Object out"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }

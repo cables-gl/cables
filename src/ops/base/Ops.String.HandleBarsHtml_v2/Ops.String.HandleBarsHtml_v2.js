@@ -1,31 +1,15 @@
 const
     inTplStr = op.inStringEditor("Template", ""),
     inData = op.inObject("Data"),
-    outDone = op.outTrigger("Done"),
     outStr = op.outString("Result"),
     outErrors = op.outString("Errors");
 
 let template = null;
 
-function wait()
-{
-    setTimeout(() =>
-    {
-        if (!window.Handlebars)
-        {
-            wait();
-            updateString();
-        }
-    }, 100);
-}
-
-wait();
-
 inTplStr.onChange = updateString;
 
 function updateString()
 {
-    if (!window.Handlebars) return;
     try
     {
         template = Handlebars.compile(inTplStr.get());
@@ -61,7 +45,6 @@ function render()
     try
     {
         outStr.set(template(templateData));
-        outDone.trigger();
     }
     catch (e)
     {
@@ -72,6 +55,5 @@ function render()
             outErrors.set(e.message);
         }
         else op.logWarn(e);
-        outDone.trigger();
     }
 }

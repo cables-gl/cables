@@ -27,7 +27,6 @@
     },
     "summary": "returns the array at the position defined by a path",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -51,6 +50,12 @@
             "message": "Ops.User.cables.ArrayGetArrayByPath renamed to Ops.Json.ArrayGetArrayByPath",
             "author": "cables",
             "date": 1610123306143
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850792768
         }
     ],
     "exampleProjectId": "uqXSWr"
