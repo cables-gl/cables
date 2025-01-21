@@ -52,7 +52,11 @@ const escapeHtml = (unsafe) =>
 
 function render()
 {
-    if (!template) return;
+    if (!template)
+    {
+        outStr.set("");
+        return;
+    }
 
     op.setUiError("hbserr", null);
     outErrors.set("");

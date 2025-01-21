@@ -8,6 +8,7 @@ inObject.onChange =
     inValue.onChange = update;
 
 inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
+outObject.ignoreValueSerialize = true;
 
 function update()
 {

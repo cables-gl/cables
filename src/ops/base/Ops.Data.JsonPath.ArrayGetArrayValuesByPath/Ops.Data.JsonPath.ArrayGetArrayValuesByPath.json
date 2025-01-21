@@ -50,6 +50,12 @@
             "message": "Ops.User.cables.ArrayGetArrayValuesByPath renamed to Ops.Json.ArrayGetArrayValuesByPath",
             "author": "cables",
             "date": 1610123597666
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850824494
         }
     ],
     "exampleProjectId": "Y3pXWr"

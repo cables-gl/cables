@@ -28,7 +28,6 @@
     },
     "summary": "finds a number at a position in an array defined by path",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -52,6 +51,12 @@
             "message": "Ops.User.cables.ArrayGetNumberByPath renamed to Ops.Json.ArrayGetNumberByPath",
             "author": "cables",
             "date": 1610123341036
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850853376
         }
     ],
     "exampleProjectId": "7kSVWr"

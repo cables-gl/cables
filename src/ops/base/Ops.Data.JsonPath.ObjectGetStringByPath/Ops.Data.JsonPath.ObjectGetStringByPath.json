@@ -57,6 +57,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1736843486845
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850845190
         }
     ]
 }
