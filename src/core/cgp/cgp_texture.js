@@ -1,8 +1,14 @@
 import { Logger } from "cables-shared-client";
 import CgTexture from "../cg/cg_texture.js";
+import { WebGpuContext } from "./cgp_state.js";
 
 export default class Texture extends CgTexture
 {
+
+    /**
+     * @param {WebGpuContext} _cgp
+     * @param {Object} options={}
+     */
     constructor(_cgp, options = {})
     {
         super(options);
@@ -13,8 +19,6 @@ export default class Texture extends CgTexture
         this.gpuTextureDescriptor = null;
 
         options = options || {};
-
-        console.log("new tex", this.width, options);
 
         this.name = options.name || "unknown";
 

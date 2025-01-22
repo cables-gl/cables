@@ -1,5 +1,6 @@
 import { Events } from "cables-shared-client";
 import { simpleId } from "../utils.js";
+import { Port } from "../core_port.js";
 
 class CgShader extends Events
 {
@@ -20,8 +21,8 @@ class CgShader extends Events
      * @function toggleDefine
      * @memberof Shader
      * @instance
-     * @param {name} name
-     * @param {any} enabled value or port
+     * @param {String} name
+     * @param {Port} enabled value or port
      */
     toggleDefine(name, enabled)
     {
@@ -65,7 +66,6 @@ class CgShader extends Events
 
             value = value.get();
         }
-
 
         for (let i = 0; i < this._defines.length; i++)
         {
@@ -133,7 +133,6 @@ class CgShader extends Events
         }
     }
 
-
     hasModule(modId)
     {
         for (let i = 0; i < this._modules.length; i++)
@@ -147,7 +146,6 @@ class CgShader extends Events
     {
         this._moduleNames = names;
     }
-
 
     /**
      * remove a module from shader
@@ -188,15 +186,12 @@ class CgShader extends Events
         }
     }
 
-
     getNumModules()
     {
         return this._modules.length;
     }
 
-
     getCurrentModules() { return this._modules; }
-
 
     /**
      * add a module
@@ -254,14 +249,12 @@ class CgShader extends Events
 
                 srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
 
-
                 if (mod.getAttributeSrc)
                 {
                     const r = getAttributeSrc(mod, srcHeadVert, srcVert);
                     if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
                     if (r.srcVert)srcVert += r.srcVert;
                 }
-
 
                 srcHeadVert += mod.srcHeadVert || "";
                 srcVert += mod.srcBodyVert || "";
@@ -277,7 +270,6 @@ class CgShader extends Events
                 srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
             }
         }
-
 
         vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
     }

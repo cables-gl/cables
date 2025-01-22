@@ -20,7 +20,6 @@ export default class Uniform extends CgUniform
         this.gpuBuffer = null;
     }
 
-
     updateValueF() { }
 
     updateValueArrayF() {}
@@ -92,7 +91,6 @@ export default class Uniform extends CgUniform
     updateValueAny() {}
 
     updateValueT() {}
-
 
     setGpuBuffer(b)
     {
@@ -173,7 +171,6 @@ export default class Uniform extends CgUniform
         uni.shaderType = this.shaderType;
 
         console.log(this._name, this._value, uni._value);
-
 
         return uni;
     }

@@ -1,8 +1,17 @@
 import { Logger } from "cables-shared-client";
 import { Uniform } from "../cgl/cgl_shader_uniform.js";
+import { WebGpuContext } from "./cgp_state.js";
+import Shader from "./cgp_shader.js";
+import Mesh from "./cgp_mesh.js";
 
 export default class Pipeline
 {
+
+    /**
+     * Description
+     * @param {WebGpuContext} _cgp
+     * @param {String} name
+     */
     constructor(_cgp, name)
     {
         if (!_cgp) throw new Error("Pipeline constructed without cgp " + name);
@@ -31,6 +40,9 @@ export default class Pipeline
 
     get isValid() { return this._isValid; }
 
+    /**
+     * @param {String} name
+     */
     setName(name)
     {
         this._name = name;
@@ -71,6 +83,10 @@ export default class Pipeline
         return arr;
     }
 
+    /**
+     * @param {Shader} shader
+     * @param {Mesh} mesh
+     */
     setPipeline(shader, mesh)
     {
         if (!mesh || !shader)
@@ -134,10 +150,9 @@ export default class Pipeline
             if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
             {
                 needsRebuildReason = "depth state ";
-                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepththis._cgp.stateDepthFunc();
+                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
             }
 
-            // this._log.log(this._pipeCfg.primitive.cullMode, this._cgp.stateCullFaceFacing());
             if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
                 needsRebuildReason = "cullmode change";
@@ -148,7 +163,6 @@ export default class Pipeline
         this._cgp.currentPipeDebug =
         {
             "cfg": this._pipeCfg,
-            "bindingGroupEntries": this.bindingGroupEntries,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
 

@@ -3,9 +3,16 @@ import Uniform from "./cgp_uniform.js";
 import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
 import Binding from "./cgp_binding.js";
+import { WebGpuContext } from "./cgp_state.js";
 
 export default class Shader extends CgShader
 {
+
+    /**
+     * @param {WebGpuContext} _cgp
+     * @param {String} _name
+     * @param {Object} options={}
+     */
     constructor(_cgp, _name, options = {})
     {
         super();

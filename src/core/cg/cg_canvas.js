@@ -27,8 +27,13 @@ class CgCanvas
 
     get canvasEle() { return this._canvasEle; }
 
-
-    setSize(w, h, ignorestyle)
+    /**
+     * @param {Number} w
+     * @param {Number} h
+     * @param {any} ignorestyle
+     * @returns {any}
+     */
+    setSize(w, h, ignorestyle = false)
     {
         if (this._oldWidthRp != w * this.pixelDensity || this._oldHeightRp != h * this.pixelDensity)
         {

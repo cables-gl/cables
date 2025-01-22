@@ -1,7 +1,17 @@
 import { Events } from "cables-shared-client";
+import { WebGpuContext } from "./cgp_state.js";
 
+/** GPUBuffer */
 export default class GPUBuffer extends Events
 {
+
+    /**
+     * Description
+     * @param {WebGpuContext} cgp
+     * @param {String} name
+     * @param {Array} data=null
+     * @param {Object} options={}
+     */
     constructor(cgp, name, data = null, options = {})
     {
         super();
@@ -11,6 +21,7 @@ export default class GPUBuffer extends Events
         this._name = name;
         this.floatArr = null;
         this._gpuBuffer = null;
+        this.presentationFormat = null;
 
         this.setData([0, 0, 0, 0]);
         this.needsUpdate = true;

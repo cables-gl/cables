@@ -6,8 +6,6 @@ export default class Mesh
     constructor(_cgp, __geom)
     {
 
-        vec3;
-
         this.bla = GPUBufferUsage.VERTEX;
 
         this._log = new Logger("cgl_mesh");
@@ -33,7 +31,6 @@ export default class Mesh
             "usage": usage,
             "mappedAtCreation": true,
         };
-        // ifbo.stepMode = "instance";
         const buffer = device.createBuffer(bo);
         const dst = new data.constructor(buffer.getMappedRange());
         dst.set(data);

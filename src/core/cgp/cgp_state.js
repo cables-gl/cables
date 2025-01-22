@@ -19,6 +19,10 @@ import CgTexture from "../cg/cg_texture.js";
 // const Context = function (_patch)
 class WebGpuContext extends CGState
 {
+
+    /**
+     * @param {Patch} _patch
+     */
     constructor(_patch)
     {
         super();
@@ -42,6 +46,8 @@ class WebGpuContext extends CGState
         this._stackErrorScope = [];
         this._stackBlend = [];
         this._stackErrorScopeLogs = [];
+
+        this.currentPipeDebug = null;
 
         this._defaultBlend = {
             "color": {

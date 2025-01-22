@@ -3,7 +3,6 @@ import { Logger } from "cables-shared-client";
 import { UTILS } from "../utils.js";
 import { BoundingBox } from "./cg_boundingbox.js";
 
-
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @namespace external:CGL#Geometry
@@ -54,6 +53,7 @@ class Geometry
         this.glPrimitive = null;
         this._attributes = {};
 
+        /** @type {Array|Float32Array} */
         this._vertices = [];
         this.verticesIndices = [];
 
@@ -132,7 +132,6 @@ class Geometry
         this.setAttribute("vertexColors", v, 4);
     }
 
-
     /**
      * @function clear
      * @memberof Geometry
@@ -202,7 +201,6 @@ class Geometry
         else if (itemSize == 3) attrType = "vec3";
         else if (itemSize == 4) attrType = "vec4";
 
-
         const attr = {
             "name": name,
             "data": arr,
@@ -218,7 +216,6 @@ class Geometry
         const attr = this.getAttribute(name);
         newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemSize);
     }
-
 
     /**
      * @function setVertices
@@ -269,7 +266,6 @@ class Geometry
         if (y == undefined)y = 1;
         if (z == undefined)z = 1;
 
-
         for (let i = 0; i < this.vertexNormals.length; i += 3)
         {
             vec3.set(vec,
@@ -295,7 +291,6 @@ class Geometry
         return this.vertices.length / 3;
     }
 
-
     /**
      * @function flipVertDir
      * @memberof Geometry
@@ -313,7 +308,6 @@ class Geometry
         }
         this.verticesIndices = newInd;
     }
-
 
     setPointVertices(verts)
     {
@@ -495,7 +489,6 @@ class Geometry
                 this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2] += faceNormals[i / 3][2];
             }
 
-
             for (let i = 0; i < this.verticesIndices.length; i += 3) // faces
             {
                 for (let k = 0; k < 3; k++) // triangles
@@ -669,7 +662,7 @@ class Geometry
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals
      */
-    unIndex(reIndex, dontCalcNormals)
+    unIndex(reIndex = false, dontCalcNormals = false)
     {
         const newVerts = [];
         const newIndizes = [];
@@ -865,6 +858,7 @@ class Geometry
 }
 
 // TODO : rewritwe circle op 1
+/** @deprecated */
 Geometry.buildFromFaces = function (arr, name, optimize)
 {
     const vertices = [];
@@ -915,6 +909,5 @@ Geometry.buildFromFaces = function (arr, name, optimize)
 
     return geom;
 };
-
 
 export { Geometry };

@@ -31,7 +31,7 @@ class MultiPort extends Port
 
         const updateUi = () =>
         {
-            let grey = !this.uiAttribs.multiPortManual || undefined;
+            let grey = !this.uiAttribs.multiPortManual || false;
 
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT)grey = false;
 
@@ -44,10 +44,8 @@ class MultiPort extends Port
                 let title;
                 let o = {};
 
-
                 // console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
                 if (this.op.preservedPortTitles && this.op.preservedPortTitles[this.ports[i].name]) title = this.op.preservedPortTitles[this.ports[i].name];
-
 
                 // if (!this.uiAttribs.multiPortManual)grey = true;
                 if (i == 0) lp = this.ports.length;
@@ -162,13 +160,11 @@ class MultiPort extends Port
                         }
                     }
 
-
                     // this.checkNum();
                 }
 
                 // this.removeInvalidPorts();
             }
-
 
             if (!this.uiAttribs.multiPortManual) // if auto
             {
@@ -216,10 +212,8 @@ class MultiPort extends Port
                 if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
-
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
                 po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
-
 
                 // if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
                 // po.multiPortTriggerListener = po.on("trigger", this.trigger());
@@ -316,7 +310,6 @@ class MultiPort extends Port
             }
         });
 
-
         this.on("onUiAttrChange", this.checkNum.bind(this));
         this.checkNum();
         this.countPorts();
@@ -324,7 +317,5 @@ class MultiPort extends Port
         updateUi();
     }
 }
-
-
 
 export { MultiPort };
