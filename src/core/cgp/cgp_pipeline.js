@@ -227,8 +227,6 @@ export default class Pipeline
 
             if (this._bindGroups[shader.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[shader.bindingCounter]);
 
-            // shader.bindingCounter++;
-
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
             this._cgp.popErrorScope();

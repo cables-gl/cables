@@ -16,12 +16,11 @@ import CgTexture from "../cg/cg_texture.js";
  * @namespace external:CGP
  * @hideconstructor
  */
-// const Context = function (_patch)
 class WebGpuContext extends CGState
 {
 
     /**
-     * @param {Patch} _patch
+     * @param {CABLES.Patch} _patch
      */
     constructor(_patch)
     {
@@ -83,6 +82,13 @@ class WebGpuContext extends CGState
 
     /// ////////////////////
 
+    /**
+     * Description
+     * @param {any} cgp
+     * @param {any} identTranslate
+     * @param {any} identTranslateView
+     * @returns {any}
+     */
     renderStart(cgp, identTranslate, identTranslateView)
     {
 

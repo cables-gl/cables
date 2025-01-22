@@ -98,14 +98,14 @@ class Anim extends Events
     }
 
     /**
- * returns true if animation has ended at @time
- * checks if last key time is < time
- * @param {Number} time
- * @returns {Boolean}
- * @memberof Anim
- * @instance
- * @function
- */
+     * returns true if animation has ended at @time
+     * checks if last key time is < time
+     * @param {Number} time
+     * @returns {Boolean}
+     * @memberof Anim
+     * @instance
+     * @function
+     */
     hasEnded(time)
     {
         if (this.keys.length === 0) return true;
@@ -122,12 +122,12 @@ class Anim extends Events
     }
 
     /**
- * remove all keys from animation before time
- * @param {Number} time
- * @memberof Anim
- * @instance
- * @function
- */
+     * remove all keys from animation before time
+     * @param {Number} time
+     * @memberof Anim
+     * @instance
+     * @function
+     */
     clearBefore(time)
     {
         const v = this.getValue(time);
@@ -140,12 +140,12 @@ class Anim extends Events
     }
 
     /**
- * remove all keys from animation
- * @param {Number} [time=0] set a new key at time with the old value at time
- * @memberof Anim
- * @instance
- * @function
- */
+     * remove all keys from animation
+     * @param {Number} [time=0] set a new key at time with the old value at time
+     * @memberof Anim
+     * @instance
+     * @function
+     */
     clear(time)
     {
         let v = 0;
@@ -190,14 +190,14 @@ class Anim extends Events
     }
 
     /**
- * set value at time
- * @function setValue
- * @memberof Anim
- * @instance
- * @param {Number} time
- * @param {Number} value
- * @param {Function} cb callback
- */
+     * set value at time
+     * @function setValue
+     * @memberof Anim
+     * @instance
+     * @param {Number} time
+     * @param {Number} value
+     * @param {Function} cb callback
+     */
     setValue(time, value, cb)
     {
         let found = null;
@@ -281,13 +281,13 @@ class Anim extends Events
     }
 
     /**
- * get value at time
- * @function getValue
- * @memberof Anim
- * @instance
- * @param {Number} [time] time
- * @returns {Number} interpolated value at time
- */
+     * get value at time
+     * @function getValue
+     * @memberof Anim
+     * @instance
+     * @param {Number} [time] time
+     * @returns {Number} interpolated value at time
+     */
     getValue(time)
     {
         if (this.keys.length === 0)
@@ -305,8 +305,6 @@ class Anim extends Events
 
         if (time < this.keys[0].time)
         {
-        // if (this.name)console.log("A");
-
             return this.keys[0].value;
         }
 
@@ -330,7 +328,6 @@ class Anim extends Events
             return this.keys[this._lastKeyIndex].value;
         }
 
-
         const index2 = index + 1;
         const key1 = this.keys[index];
         const key2 = this.keys[index2];
@@ -341,7 +338,7 @@ class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
-        if (!key1.ease) this.log._warn("has no ease", key1, key2);
+        if (!key1.ease) this._log.warn("has no ease", key1, key2);
 
         return key1.ease(perc, key2);
     }
@@ -355,7 +352,7 @@ class Anim extends Events
     {
         if (k.time === undefined)
         {
-            this.log.warn("key time undefined, ignoring!");
+            this._log.warn("key time undefined, ignoring!");
         }
         else
         {
@@ -429,12 +426,6 @@ class Anim extends Events
         return port;
     }
 }
-
-
-
-
-
-
 
 // ------------------------------
 

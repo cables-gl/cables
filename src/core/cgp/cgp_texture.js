@@ -37,6 +37,10 @@ export default class Texture extends CgTexture
         this.setSize(options.width, options.height);
     }
 
+    /**
+     * @param {Number} w
+     * @param {Number} h
+     */
     setSize(w, h)
     {
         this.width = w;

@@ -5,13 +5,16 @@ import { Port } from "./core_port.js";
 
 /**
  * @namespace external:CABLES#Link
- * @param {Object} scene The patch object
  * @description a link is a connection between two ops/ports -> one input and one output port
  * @hideconstructor
  * @class
  */
 export class Link extends Events
 {
+
+    /**
+     * @param {{Patch}} p
+     */
     constructor(p)
     {
         super();

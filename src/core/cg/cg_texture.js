@@ -19,7 +19,6 @@ export default class CgTexture
     }
 }
 
-
 CgTexture.getDefaultTextureData = (name, size, options = {}) =>
 {
     if (name == "empty")
@@ -113,8 +112,6 @@ CgTexture.getDefaultTextureData = (name, size, options = {}) =>
     }
 };
 
-
-
 CgTexture.FILTER_NEAREST = 0;
 CgTexture.FILTER_LINEAR = 1;
 CgTexture.FILTER_MIPMAP = 2;
@@ -126,7 +123,6 @@ CgTexture.WRAP_CLAMP_TO_EDGE = 2;
 CgTexture.TYPE_DEFAULT = 0;
 CgTexture.TYPE_DEPTH = 1;
 CgTexture.TYPE_FLOAT = 2;
-
 
 CgTexture.PFORMATSTR_RGB565 = "RGB 5/6/5bit ubyte";
 
@@ -144,14 +140,12 @@ CgTexture.PFORMATSTR_RG16F = "RG 16bit float";
 CgTexture.PFORMATSTR_RGB16F = "RGB 16bit float";
 CgTexture.PFORMATSTR_RGBA16F = "RGBA 16bit float";
 
-
 CgTexture.PFORMATSTR_R32F = "R 32bit float";
 CgTexture.PFORMATSTR_RG32F = "RG 32bit float";
 CgTexture.PFORMATSTR_RGB32F = "RGB 32bit float";
 CgTexture.PFORMATSTR_RGBA32F = "RGBA 32bit float";
 
 CgTexture.PFORMATSTR_DEPTH = "DEPTH";
-
 
 CgTexture.PIXELFORMATS = [
 

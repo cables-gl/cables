@@ -9,7 +9,7 @@ import Patch from "./core_patch.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
-import { Timer, now, internalNow, logErrorConsole } from "./timer.js";
+import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
 import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
@@ -32,8 +32,6 @@ CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
 CABLES.internalNow = internalNow;
-
-
 
 CABLES = Object.assign(CABLES,
     utils,

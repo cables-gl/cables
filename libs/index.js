@@ -8,5 +8,6 @@ window.mat4 = mat4;
 window.quat = quat;
 window.quat2 = quat2;
 window.vec2 = vec2;
+
 window.vec3 = vec3;
 window.vec4 = vec4;

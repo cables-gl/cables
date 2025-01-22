@@ -190,7 +190,7 @@ class Geometry
         let attrType = "";
         if (!itemSize || itemSize > 4)
         {
-            console.log("itemsize wrong?", itemSize, name);
+            this._log.warn("itemsize wrong?", itemSize, name);
             this._log.stack("itemsize");
 
             itemSize = 3;
@@ -527,7 +527,6 @@ class Geometry
         }
         if (!this.texCoords.length)
         {
-            // console.warn("No texcoords. Replacing with default values [0, 0].");
             const texCoordLength = (this.vertices.length / 3) * 2;
             this.texCoords = new Float32Array(texCoordLength);
             for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;
@@ -695,7 +694,7 @@ class Geometry
                     else if (attr.itemSize == 1)
                         na.push(
                             attr.data[this.verticesIndices[i + s]]);
-                    else console.log("unknown attr", attr);
+                    else this._log.warn("unknown attr", attr);
                 }
             }
             this.setAttribute(attr.name, na, attr.itemSize);

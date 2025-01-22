@@ -155,9 +155,7 @@ export default class Uniform extends CgUniform
         if (this._type == "3f") return 3 * bytesPerFloat;
         if (this._type == "4f") return 4 * bytesPerFloat;
         if (this._type == "f[]") return this._value.length * bytesPerFloat;
-
         if (this._type == "m4") return 4 * 4 * bytesPerFloat;
-
         if (this._type == "i") return 1 * bytesPerInt;
         if (this._type == "2i") return 2 * bytesPerInt;
 

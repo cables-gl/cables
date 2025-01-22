@@ -4,6 +4,11 @@ import { MatrixStack } from "./cg_matrixstack.js";
 
 class CGState extends Events
 {
+
+    /**
+     * Description
+     * @param {CABLES.Patch} _patch
+     */
     constructor(_patch)
     {
         super();
@@ -112,6 +117,9 @@ class CGState extends Events
         return [0, 0, this.canvasWidth, this.canvasHeight];
     }
 
+    /**
+     * @param {HTMLElement} canvEle
+     */
     setCanvas(canvEle)
     {
         if (this.cgCanvas && canvEle == this.cgCanvas.canvasEle) return;
@@ -130,6 +138,11 @@ class CGState extends Events
         this.cgCanvas.updateSize();
     }
 
+    /**
+     * @param {number} w
+     * @param {number} h
+     * @param {boolean} ignorestyle
+     */
     setSize(w, h, ignorestyle)
     {
         this.cgCanvas.setSize(w, h, ignorestyle);
@@ -280,6 +293,10 @@ class CGState extends Events
         return this._vMatrixStack.stateCounter;
     }
 
+    /**
+     * @param {vec3} identTranslate
+     * @param {vec3} identTranslateView
+     */
     _startMatrixStacks(identTranslate, identTranslateView)
     {
         identTranslate = identTranslate || this._ident;
