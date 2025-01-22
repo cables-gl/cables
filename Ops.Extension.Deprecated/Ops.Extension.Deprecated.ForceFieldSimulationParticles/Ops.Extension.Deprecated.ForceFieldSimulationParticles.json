@@ -82,6 +82,6 @@
         }
     ],
     "coreLibs": [
-        "cgl_deprecatedMeshFeedback"
+        "cgl_deprecated_meshfeedback"
     ]
 }

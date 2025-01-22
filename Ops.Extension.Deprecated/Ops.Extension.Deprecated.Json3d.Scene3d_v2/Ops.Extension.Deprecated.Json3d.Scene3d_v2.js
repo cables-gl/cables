@@ -669,7 +669,7 @@ function createNodes()
     {
         if (CABLES.UI)
         {
-            CABLES.UI.notifyError("remove child nodes first");
+            op.logError("remove child nodes first");
         }
     }
 }
