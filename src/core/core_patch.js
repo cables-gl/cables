@@ -86,10 +86,8 @@ class Patch extends Events
         this.deSerialized = false;
         this.reqAnimTimeStamp = 0;
 
-        /** @deprecated */
-        this.onDelete = null;
-
-        this._subPatchCacheAdd = null;
+        // /** @deprecated */
+        // this.onDelete = null;
 
         this.cgCanvas = null;
 

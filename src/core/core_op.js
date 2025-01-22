@@ -10,6 +10,7 @@ import Patch from "./core_patch.js";
 /** Op */
 export class Op extends Events
 {
+
     /**
      * Description
      * @param {Patch} _patch
@@ -170,6 +171,7 @@ export class Op extends Events
 
     setTitle(title)
     {
+
         /*
          * this._log.log("settitle", title);
          * this._log.log(
@@ -365,6 +367,7 @@ export class Op extends Events
     {
         return this.inTriggerButton(name, v);
     }
+
     /**
      * create multiple UI trigger buttons
      * @function inTriggerButton
@@ -412,6 +415,7 @@ export class Op extends Events
     {
         return this.inFloat(name, v);
     }
+
     /**
      * create a number value input port
      * @function inFloat
@@ -560,6 +564,7 @@ export class Op extends Events
         p.value = "";
 
         p.setInitialValue(v);
+
         /*
          * if (v !== undefined)
          * {
@@ -1433,6 +1438,7 @@ export class Op extends Events
     instanced(triggerPort)
     {
         return false;
+
         /*
          * this._log.log("instanced", this.patch.instancing.numCycles());
          * if (this.patch.instancing.numCycles() === 0) return false;
