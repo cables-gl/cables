@@ -9,11 +9,12 @@ export default class Texture extends CgTexture
         if (!_cgp) throw new Error("no cgp");
         this._log = new Logger("cgp_texture");
         this._cgp = _cgp;
-        // this.id = CABLES.uuid();
         this.gpuTexture = null;
         this.gpuTextureDescriptor = null;
 
         options = options || {};
+
+        console.log("new tex", this.width, options);
 
         this.name = options.name || "unknown";
 
@@ -24,11 +25,18 @@ export default class Texture extends CgTexture
             "minFilter": options.minFilter || options.filter || "linear",
         };
 
-
         this._cgp.on("deviceChange", () =>
         {
             // this.reInit();
         });
+
+        this.setSize(options.width, options.height);
+    }
+
+    setSize(w, h)
+    {
+        this.width = w;
+        this.height = h;
     }
 
     /**
@@ -52,6 +60,7 @@ export default class Texture extends CgTexture
 
             "size": { "width": img.width, "height": img.height },
             "format": textureType,
+            // "sampleCount": 4,
             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
 
@@ -70,13 +79,12 @@ export default class Texture extends CgTexture
 
     getInfo()
     {
-        const tex = this;
         const obj = {};
 
-        obj.name = tex.name;
-        obj.size = tex.width + " x " + tex.height;
+        obj.name = this.name || "???";
+        obj.size = this.width + " x " + this.height;
 
-        obj.textureType = tex.textureType;
+        obj.textureType = this.textureType;
 
         return obj;
     }
@@ -130,7 +138,6 @@ export default class Texture extends CgTexture
             { "width": w, "height": h });
     }
 
-
     setWrap(v)
     {
         this.samplerDesc.addressModeU = this.samplerDesc.addressModeV = v;
@@ -141,7 +148,6 @@ export default class Texture extends CgTexture
         this.samplerDesc.minFilter = this.samplerDesc.magFilter = v;
     }
 }
-
 
 /**
  * @function load

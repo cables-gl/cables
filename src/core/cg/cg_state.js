@@ -9,14 +9,15 @@ class CGState extends Events
         super();
         this.tempData = this.frameStore = this.frameStore || {};
         // this.canvas = null;
-
         this.fpsCounter = new CABLES.CG.FpsCounter();
         this._identView = vec3.create();
         this._ident = vec3.create();
         vec3.set(this._identView, 0, 0, -2);
         vec3.set(this._ident, 0, 0, 0);
         this._onetimeCallbacks = [];
-
+        this.maxTexSize = 2048;
+        this._viewPort = [0, 0, 1, 1];
+        this._viewPortStack = [];
         this.patch = _patch;
         this.autoReSize = true;
 
@@ -28,7 +29,6 @@ class CGState extends Events
         this.DEPTH_COMPARE_FUNC_NOTEQUAL = 5;
         this.DEPTH_COMPARE_FUNC_GREATEREQUAL = 6;
         this.DEPTH_COMPARE_FUNC_ALWAYS = 7;
-
 
         /**
          * Current projection matrix
@@ -64,7 +64,6 @@ class CGState extends Events
         mat4.identity(this.mMatrix);
         mat4.identity(this.vMatrix);
 
-
         window.matchMedia("screen and (min-resolution: 2dppx)")
             .addEventListener("change", (e) =>
             {
@@ -97,7 +96,6 @@ class CGState extends Events
         return this.cgCanvas.pixelDensity;
     }
 
-
     getGApiName()
     {
         return ["WebGL", "WebGPU"][this.gApi];
@@ -108,7 +106,11 @@ class CGState extends Events
         return this.cgCanvas.canvasEle;
     }
 
-
+    get viewPort()
+    {
+        // TODO: add stack...
+        return [0, 0, this.canvasWidth, this.canvasHeight];
+    }
 
     setCanvas(canvEle)
     {
@@ -249,7 +251,6 @@ class CGState extends Events
         return this.mMatrix;
     }
 
-
     /**
      * push a matrix to the view matrix stack
      * @function pushviewMatrix
@@ -315,8 +316,6 @@ class CGState extends Events
         return false;
     }
 
-
-
     /**
      * execute the callback next frame, once
      * @function addNextFrameOnceCallback
@@ -337,8 +336,16 @@ class CGState extends Events
             this._onetimeCallbacks.length = 0;
         }
     }
+
+    checkTextureSize(x)
+    {
+        x = x || 1;
+        x = Math.floor(x);
+        x = Math.min(x, this.maxTexSize);
+        x = Math.max(x, 1);
+        return x;
+    }
+
 }
 
 export { CGState };
-
-

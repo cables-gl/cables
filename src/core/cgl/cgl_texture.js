@@ -49,7 +49,6 @@ class Texture extends CgTexture
         this._glInternalFormat = -1;
         this._glDataFormat = -1;
 
-
         if (options)
         {
             if (options.isDepthTexture) this.textureType = Texture.TYPE_DEPTH;
@@ -74,15 +73,12 @@ class Texture extends CgTexture
 
         this._cgl.profileData.profileTextureNew++;
 
-
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
         this.setSize(options.width, options.height);
         this.getInfoOneLine();
     }
-
-
 
     isFloatingPoint()
     {
@@ -160,7 +156,6 @@ class Texture extends CgTexture
         return newTex;
     }
 
-
     setFormat(o)
     {
         this.pixelFormat = o.pixelFormat;
@@ -168,8 +163,6 @@ class Texture extends CgTexture
         this._glInternalFormat = o.glInternalFormat;
         this._glDataType = o.glDataType;
     }
-
-
 
     /**
      * set pixel size of texture
@@ -218,7 +211,6 @@ class Texture extends CgTexture
 
         this._cgl.gl.bindTexture(this.texTarget, null);
     }
-
 
     /**
      * @function initFromData
@@ -311,7 +303,6 @@ class Texture extends CgTexture
         this.deleted = false;
         this.flipped = !this.flip;
         if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
-
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
@@ -423,12 +414,10 @@ class Texture extends CgTexture
         return txt;
     }
 
-
     getInfo()
     {
         return Texture.getTexInfo(this);
     }
-
 
     _setFilter()
     {
@@ -505,8 +494,6 @@ class Texture extends CgTexture
             {
                 const ext = this._cgl.enableExtension("EXT_texture_filter_anisotropic");
 
-
-
                 if (this._cgl.maxAnisotropic)
                 {
                     const aniso = Math.min(this._cgl.maxAnisotropic, this.anisotropic);
@@ -518,31 +505,6 @@ class Texture extends CgTexture
         this._cgl.printError("_setFilter");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * @function load
@@ -600,11 +562,6 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     return texture;
 };
 
-
-
-
-
-
 /**
  * @static
  * @function getTempTexture
@@ -634,7 +591,6 @@ Texture.getErrorTexture = function (cgl)
     if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT, 1, 0.2, 0.2);
     return cgl.errorTexture;
 };
-
 
 /**
  * @function getEmptyTexture
@@ -682,7 +638,6 @@ Texture.getEmptyTextureFloat = function (cgl)
 
     return cgl.tempTextureEmptyFloat;
 };
-
 
 /**
  * @function getRandomTexture
@@ -750,7 +705,6 @@ Texture.getBlackTexture = function (cgl)
     return cgl.blackTexture;
 };
 
-
 /**
  * @function getEmptyCubemapTexture
  * @memberof Texture
@@ -779,7 +733,6 @@ Texture.getEmptyCubemapTexture = function (cgl)
 
     cgl.profileData.profileTextureNew++;
 
-
     cgl.gl.bindTexture(target, tex);
     cgl.profileData.profileTextureResize++;
 
@@ -794,7 +747,6 @@ Texture.getEmptyCubemapTexture = function (cgl)
         cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
         cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
     }
-
 
     cgl.gl.bindTexture(target, null);
 
@@ -813,7 +765,6 @@ Texture.getEmptyCubemapTexture = function (cgl)
         "anisotropic": 0,
     };
 };
-
 
 Texture.getTempGradientTexture = function (cgl) // deprecated...
 {
@@ -979,7 +930,6 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         }
     }
 
-
     if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
     {
     }
@@ -1074,16 +1024,12 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
     }
 
-
     o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
-
 
     if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
     return o;
 };
-
-
 
 Texture.getPixelFormatNumChannels =
     (pxlFrmtStr) =>
@@ -1105,8 +1051,5 @@ Texture.isPixelFormatHalfFloat =
     {
         return (pxlFrmtStr || "").contains("float") && (pxlFrmtStr || "").contains("16bit");
     };
-
-
-
 
 export { Texture };

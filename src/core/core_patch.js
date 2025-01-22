@@ -68,6 +68,7 @@ class Patch extends Events
         this._triggerStack = [];
         this.storeObjNames = false; // remove after may release
 
+        /** @type {LoadingStatus} */
         this.loading = new LoadingStatus(this);
 
         this._volumeListeners = [];

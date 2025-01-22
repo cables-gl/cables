@@ -24,7 +24,6 @@ const ShaderLibMods = {
             + "}".endl();
     },
 
-
     // quite good random numbers, but somehow don't work in ANGLE
     "CGL.RANDOM_OLD": function ()
     {
@@ -39,7 +38,6 @@ const ShaderLibMods = {
             + "    return vec3( cgl_random(co),cgl_random(co+0.5711),cgl_random(co+1.5711));".endl()
             + "}";
     },
-
 
     // low quality generative ranodm numbers
     "CGL.RANDOM_LOW": function ()
@@ -60,6 +58,7 @@ const ShaderLibMods = {
     "CGL.RANDOM_TEX": function ()
     {
         this.name = "randomNumbertex";
+
         this.srcHeadFrag = "".endl()
             + "UNI sampler2D CGLRNDTEX;".endl()
             + "float cgl_random(vec2 co)".endl()

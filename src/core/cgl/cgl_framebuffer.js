@@ -218,7 +218,9 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.resetViewPort();
     };
 
-
+    /**
+     * @private
+     */
     this.delete = function ()
     {
         texture.delete();

@@ -17,7 +17,7 @@ export default class Pipeline
         this._bindGroups = [];
 
         this._shaderListeners = [];
-        this.shaderNeedsPipelineUpdate = false;
+        this.shaderNeedsPipelineUpdate = "";
 
         this._old = {};
 
@@ -43,16 +43,15 @@ export default class Pipeline
         this._shaderListeners.push(
             newShader.on("compiled", () =>
             {
-                // console.log("pipe update shader compileeeeeee");
+                // this._log.log("pipe update shader compileeeeeee");
                 // this.needsRebuildReason = "shader changed";
                 this.shaderNeedsPipelineUpdate = "shader compiled";
             }));
     }
 
-
     getInfo()
     {
-        // console.log(this.bindingGroupLayoutEntries);
+        // this._log.log(this.bindingGroupLayoutEntries);
 
         const arr = [
             "name: " + this._name,
@@ -76,7 +75,7 @@ export default class Pipeline
     {
         if (!mesh || !shader)
         {
-            console.log("pipeline unknown shader/mesh");
+            this._log.log("pipeline unknown shader/mesh");
             return;
         }
 
@@ -123,7 +122,6 @@ export default class Pipeline
             //             "blend":
             //         },
 
-
             if (this._cgp.stateDepthTest() === false)
             {
                 if (this._pipeCfg.depthStencil.depthCompare != "never")
@@ -139,7 +137,7 @@ export default class Pipeline
                 this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepththis._cgp.stateDepthFunc();
             }
 
-            // console.log(this._pipeCfg.primitive.cullMode, this._cgp.stateCullFaceFacing());
+            // this._log.log(this._pipeCfg.primitive.cullMode, this._cgp.stateCullFaceFacing());
             if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
                 needsRebuildReason = "cullmode change";
@@ -154,10 +152,9 @@ export default class Pipeline
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
 
-
         if (needsRebuildReason != "")
         {
-            console.log("rebuild pipe", needsRebuildReason);
+            this._log.log("rebuild pipe", needsRebuildReason);
             this._cgp.pushErrorScope("createPipeline", { "logger": this._log });
 
             this._bindGroups = [];
@@ -171,12 +168,11 @@ export default class Pipeline
             this._cgp.popErrorScope();
         }
 
-
         if (this._renderPipeline && this._isValid)
         {
             this._cgp.pushErrorScope("setpipeline", { "logger": this._log });
 
-
+            // this._cgp.passEncoder.setViewport(this._cgp.viewPort[0], this._cgp.viewPort[1], this._cgp.viewPort[2], this._cgp.viewPort[3], -1000, 1000);
             this._cgp.passEncoder.setPipeline(this._renderPipeline);
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("updateUniforms");
@@ -193,7 +189,7 @@ export default class Pipeline
                     {
                         bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
                     }
-                    else console.log("shader defaultBindingVert size 0");
+                    else this._log.log("shader defaultBindingVert size 0");
                 }
                 for (let i = 0; i < shader.bindingsFrag.length; i++)
                 {
@@ -201,7 +197,7 @@ export default class Pipeline
                     {
                         bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this._cgp.device, shader.bindingCounter));
                     }
-                    else console.log("shader defaultBindingFrag size 0");
+                    else this._log.log("shader defaultBindingFrag size 0");
                 }
 
                 const bg = {
@@ -217,7 +213,6 @@ export default class Pipeline
 
             if (this._bindGroups[shader.bindingCounter]) this._cgp.passEncoder.setBindGroup(0, this._bindGroups[shader.bindingCounter]);
 
-
             // shader.bindingCounter++;
 
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
@@ -226,8 +221,7 @@ export default class Pipeline
         }
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
-
-        this.shaderNeedsPipelineUpdate = false;
+        this.shaderNeedsPipelineUpdate = "";
     }
 
     getPipelineObject(shader, mesh)
@@ -240,7 +234,7 @@ export default class Pipeline
             {
                 this.bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
             }
-            else console.log("shader defaultBindingVert size 0");
+            else this._log.log("shader defaultBindingVert size 0");
         }
 
         for (let i = 0; i < shader.bindingsFrag.length; i++)
@@ -249,7 +243,7 @@ export default class Pipeline
             {
                 this.bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
             }
-            else console.log("shader defaultBindingFrag size 0");
+            else this._log.log("shader defaultBindingFrag size 0");
         }
         // //////////
 
@@ -263,7 +257,6 @@ export default class Pipeline
             "label": "pipe layout " + this._name,
             "bindGroupLayouts": [this.bindGroupLayout]
         });
-
 
         let buffers = [
             // position
@@ -287,8 +280,6 @@ export default class Pipeline
                     { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
                 ],
             }];
-
-
 
         const pipeCfg = {
             // "layout": "auto",
@@ -331,11 +322,8 @@ export default class Pipeline
         return pipeCfg;
     }
 
-
     _bindUniforms(shader, inst)
     {
-        // this._cgp.pushErrorScope("pipeline bind uniforms", { "logger": this._log });
-
         shader.bind();
 
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("bind uniforms vert", ["num:" + shader.bindingsVert.length]);
@@ -346,13 +334,5 @@ export default class Pipeline
         for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(this._cgp, inst);
         if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
 
-
-
-        // shader.defaultBindingVert.update(this._cgp);
-
-        // this._cgp.popErrorScope((e) =>
-        // {
-        //     this._isValid = false;
-        // });
     }
 }

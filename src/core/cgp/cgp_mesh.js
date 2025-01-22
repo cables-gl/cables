@@ -5,6 +5,11 @@ export default class Mesh
 {
     constructor(_cgp, __geom)
     {
+
+        vec3;
+
+        this.bla = GPUBufferUsage.VERTEX;
+
         this._log = new Logger("cgl_mesh");
         this._cgp = _cgp;
         this._geom = null;
@@ -63,7 +68,6 @@ export default class Mesh
         this.setAttribute("normals", geom.vertexNormals, 3);
     }
 
-
     _disposeAttributes()
     {
         this._needsPipelineUpdate = true;
@@ -112,7 +116,6 @@ export default class Mesh
         return attr;
     }
 
-
     render()
     {
         if (!this._positionBuffer) return;
@@ -131,7 +134,6 @@ export default class Mesh
 
         this._pipe.setName("mesh " + this._geom.name + " " + this._cgp.getShader().getName());
         this._pipe.setPipeline(this._cgp.getShader(), this);
-
 
         if (this._pipe.isValid)
         {

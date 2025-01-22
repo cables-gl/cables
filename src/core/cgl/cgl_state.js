@@ -5,7 +5,6 @@ import { ProfileData } from "./cgl_profiledata.js";
 import { CGState } from "../cg/cg_state.js";
 import { CG } from "../cg/cg_constants.js";
 
-
 export const BLENDS = {
     "BLEND_NONE": 0,
     "BLEND_NORMAL": 1,
@@ -13,7 +12,6 @@ export const BLENDS = {
     "BLEND_SUB": 3,
     "BLEND_MUL": 4,
 };
-
 
 /**
  * cables gl context/state manager
@@ -36,7 +34,7 @@ class Context extends CGState
 
         this.profileData = new ProfileData(this);
         this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
-        this._viewPort = [0, 0, 0, 0];
+
         this.glVersion = 0;
         this.glUseHalfFloatTex = false;
         this.clearCanvasTransparent = true;
@@ -72,13 +70,11 @@ class Context extends CGState
         this._stackDepthTest = [];
         this._stackStencil = [];
 
-
         this._simpleShader = new Shader(this, "simpleshader");
         this._simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
         this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
         this._currentShader = this._simpleShader;
-
 
         this._oldCanvasWidth = -1;
         this._oldCanvasHeight = -1;
@@ -94,8 +90,6 @@ class Context extends CGState
     // {
     //     return this._pixelDensity;
     // }
-
-
 
     get viewPort()
     {
@@ -117,8 +111,6 @@ class Context extends CGState
             return this._viewPort;
         }
     }
-
-
 
     get mvMatrix() // deprecate
     {
@@ -152,7 +144,6 @@ class Context extends CGState
         }
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
-
 
         if (!this.gl || this.gl.isContextLost())
         {
@@ -207,11 +198,9 @@ class Context extends CGState
             this.aborted = true;
         });
 
-
         this.maxAnisotropic = 0;
         if (this.enableExtension("EXT_texture_filter_anisotropic"))
             this.maxAnisotropic = this.gl.getParameter(this.enableExtension("EXT_texture_filter_anisotropic").MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-
 
         this.maxVaryingVectors = this.gl.getParameter(this.gl.MAX_VARYING_VECTORS);
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
@@ -266,18 +255,12 @@ class Context extends CGState
         };
     }
 
-
-
-
-
     /**
      * @function popViewPort
      * @memberof Context
      * @instance
      * @description pop viewPort stack
      */
-
-
     popViewPort()
     {
         this._viewPortStack.pop();
@@ -286,17 +269,9 @@ class Context extends CGState
         this._viewPortStack.pop();
 
         if (this._viewPortStack.length == 0)
-        {
             this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
-            // this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
-            // this.setViewPort(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
-        }
         else
-        {
-            // this.viewPort = [this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]];
-            // this.gl.viewport(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
             this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
-        }
     }
 
     /**
@@ -315,7 +290,6 @@ class Context extends CGState
         this._viewPortStack.push(x, y, w, h);
         this.setViewPort(x, y, w, h);
     }
-
 
     // old
     getViewPort()
@@ -338,7 +312,6 @@ class Context extends CGState
         this._viewPort[3] = Math.round(h);
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     }
-
 
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
@@ -421,7 +394,6 @@ class Context extends CGState
         return this._simpleShader;
     }
 
-
     setShader(s)
     {
         this.pushShader;
@@ -456,12 +428,10 @@ class Context extends CGState
         this._currentShader = shader;
     }
 
-
     popShader()
     {
         this.setPreviousShader();
     }
-
 
     /**
      * pop current used shader from shader stack
@@ -567,7 +537,6 @@ class Context extends CGState
         return this._frameBufferStack[this._frameBufferStack.length - 1];
     }
 
-
     renderStart(cgl, identTranslate, identTranslateView)
     {
         this.fpsCounter.startFrame();
@@ -651,7 +620,6 @@ class Context extends CGState
         }
     }
 
-
     setTexture(slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
@@ -665,7 +633,6 @@ class Context extends CGState
             this._textureslots[slot] = t;
         }
 
-
         return true;
     }
 
@@ -676,7 +643,6 @@ class Context extends CGState
         else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     }
-
 
     printError(str)
     {
@@ -700,7 +666,6 @@ class Context extends CGState
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             found = true;
-
 
             this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
@@ -778,13 +743,6 @@ class Context extends CGState
         this.gl = null;
     }
 
-
-
-
-
-
-
-
     // state depthtest
 
     /**
@@ -838,11 +796,11 @@ class Context extends CGState
      * @memberof Context
      * @instance
      */
-    pushDepthWrite(b)
+    pushDepthWrite(enabled)
     {
-        b = b || false;
-        this._stackDepthWrite.push(b);
-        this.gl.depthMask(b);
+        enabled = enabled || false;
+        this._stackDepthWrite.push(enabled);
+        this.gl.depthMask(enabled);
     }
 
     /**
@@ -869,10 +827,8 @@ class Context extends CGState
         this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1] || false);
     }
 
-
     // --------------------------------------
     // state CullFace
-
 
     /**
      * push face culling face enabled state
@@ -915,10 +871,8 @@ class Context extends CGState
         else this.gl.disable(this.gl.CULL_FACE);
     }
 
-
     // --------------------------------------
     // state CullFace Facing
-
 
     /**
      * push face culling face side
@@ -958,11 +912,8 @@ class Context extends CGState
         if (this._stackCullFaceFacing.length > 0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
     }
 
-
     // --------------------------------------
     // state depthfunc
-
-
 
     /**
      * enable / disable depth testing
@@ -1047,7 +998,6 @@ class Context extends CGState
         return this._stackBlend[this._stackBlend.length - 1];
     }
 
-
     /**
      * push and switch to predefined blendmode (CONSTANTS.BLEND_MODES.BLEND_NONE,CONSTANTS.BLEND_MODES.BLEND_NORMAL,CONSTANTS.BLEND_MODES.BLEND_ADD,CONSTANTS.BLEND_MODES.BLEND_SUB,CONSTANTS.BLEND_MODES.BLEND_MUL)
      * @function pushBlendMode
@@ -1085,10 +1035,8 @@ class Context extends CGState
         if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
     }
 
-
     // --------------------------------------
     // state stencil
-
 
     /**
      * enable / disable stencil testing
@@ -1121,7 +1069,6 @@ class Context extends CGState
 
     // --------------------------------------
 
-
     glGetAttribLocation(prog, name)
     {
         const l = this.gl.getAttribLocation(prog, name);
@@ -1131,7 +1078,6 @@ class Context extends CGState
         // }
         return l;
     }
-
 
     /**
      * should an op now draw helpermeshes
@@ -1265,19 +1211,6 @@ class Context extends CGState
         return o;
     }
 
-    checkTextureSize(x)
-    {
-        x = x || 1;
-        x = Math.floor(x);
-        x = Math.min(x, this.maxTexSize);
-        x = Math.max(x, 1);
-        return x;
-    }
 }
 
-
-
 export { Context };
-
-
-
