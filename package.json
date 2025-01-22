@@ -22,7 +22,6 @@
     },
     "devDependencies": {
         "@k88/module-scope-plugin": "1.1.0",
-        "cables-shared-types": "file:../shared/types/",
         "gulp": "5.0.0",
         "raw-loader": "^4.0.2",
         "terser-webpack-plugin": "5.3.10",
