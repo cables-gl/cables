@@ -5,16 +5,6 @@
             "message": "created op",
             "author": "simod",
             "date": 1586863769593
-        },
-        {
-            "message": "Ops.User.simod.ArrayOfObjectsFilterByKey renamed to Ops.User.simod.ArrayOfObjectsFilterByKeyValue",
-            "author": "simod",
-            "date": 1586867144493
-        },
-        {
-            "message": "Ops.User.simod.ArrayOfObjectsFilterByKeyValue renamed to Ops.Array.ArrayOfObjectsFilterByKeyValue",
-            "author": "simod",
-            "date": 1586878303281
         }
     ],
     "authorName": "simod",
@@ -48,7 +38,6 @@
     },
     "summary": "filter key value pairs in objects in an array of objects",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

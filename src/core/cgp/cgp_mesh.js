@@ -3,10 +3,11 @@ import Pipeline from "./cgp_pipeline.js";
 
 export default class Mesh
 {
+    #log = new Logger("cgl_mesh");
+    #needsPipelineUpdate = false;
 
     constructor(_cgp, __geom)
     {
-        this._log = new Logger("cgl_mesh");
         this._cgp = _cgp;
         this._geom = null;
         this.numIndex = 0;
@@ -17,9 +18,13 @@ export default class Mesh
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
         this._attributes = [];
-        this._needsPipelineUpdate = false;
 
         if (__geom) this.setGeom(__geom);
+    }
+
+    get needsPipelineUpdate()
+    {
+        return this.#needsPipelineUpdate;
     }
 
     _createBuffer(device, data, usage)
@@ -46,7 +51,7 @@ export default class Mesh
      */
     setGeom(geom, removeRef)
     {
-        this._needsPipelineUpdate = true;
+        this.#needsPipelineUpdate = true;
         this._geom = geom;
         this._disposeAttributes();
 
@@ -65,7 +70,7 @@ export default class Mesh
 
     _disposeAttributes()
     {
-        this._needsPipelineUpdate = true;
+        this.#needsPipelineUpdate = true;
         for (let i = 0; i < this._attributes.length; i++)
         {
             this._attributes[i].buffer.destroy();
@@ -92,7 +97,7 @@ export default class Mesh
     {
         if (!array)
         {
-            this._log.error("mesh addAttribute - no array given! " + name);
+            this.#log.error("mesh addAttribute - no array given! " + name);
             throw new Error();
         }
 
@@ -111,24 +116,24 @@ export default class Mesh
         return attr;
     }
 
-    render()
+    render(shader)
     {
         if (!this._positionBuffer) return;
         if (this.instances <= 0) return;
 
-        const shader = this._cgp.getShader();
+        shader = shader || this._cgp.getShader();
         if (shader)shader.bind();
 
-        if (!this._cgp.getShader() || !this._cgp.getShader().isValid)
+        if (!shader || !shader.isValid)
         {
             // this.status = "shader invalid";
             return;
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh", ["geom " + this._geom.name, "shader " + this._cgp.getShader().getName()]);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh", ["geom " + this._geom.name, "shader " + shader.getName()]);
 
-        this._pipe.setName("mesh " + this._geom.name + " " + this._cgp.getShader().getName());
-        this._pipe.setPipeline(this._cgp.getShader(), this);
+        this._pipe.setName("mesh " + this._geom.name + " " + shader.getName());
+        this._pipe.setPipeline(shader, this);
 
         if (this._pipe.isValid)
         {
