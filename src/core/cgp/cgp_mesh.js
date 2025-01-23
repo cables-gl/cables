@@ -3,11 +3,9 @@ import Pipeline from "./cgp_pipeline.js";
 
 export default class Mesh
 {
+
     constructor(_cgp, __geom)
     {
-
-        this.bla = GPUBufferUsage.VERTEX;
-
         this._log = new Logger("cgl_mesh");
         this._cgp = _cgp;
         this._geom = null;

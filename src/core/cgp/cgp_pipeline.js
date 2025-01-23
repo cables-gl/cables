@@ -6,6 +6,7 @@ import Mesh from "./cgp_mesh.js";
 
 export default class Pipeline
 {
+    #pipeCfg = null;
 
     /**
      * Description
@@ -20,7 +21,6 @@ export default class Pipeline
         this._isValid = true;
         this._log = new Logger("pipeline");
 
-        this._pipeCfg = null;
         this._renderPipeline = null;
 
         this._bindGroups = [];
@@ -99,7 +99,7 @@ export default class Pipeline
 
         let needsRebuildReason = "";
         if (!this._renderPipeline) needsRebuildReason = "no renderpipeline";
-        if (!this._pipeCfg)needsRebuildReason = "no pipecfg";
+        if (!this.#pipeCfg)needsRebuildReason = "no pipecfg";
         if (this._old.mesh != mesh)needsRebuildReason = "no mesh";
         if (this._old.shader != shader)
         {
@@ -115,18 +115,18 @@ export default class Pipeline
         if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
         if (this.shaderNeedsPipelineUpdate)needsRebuildReason = "shader was recompiled: " + this.shaderNeedsPipelineUpdate;
 
-        if (this._pipeCfg)
+        if (this.#pipeCfg)
         {
-            if (this._pipeCfg.depthStencil.depthWriteEnabled != this._cgp.stateDepthWrite())
+            if (this.#pipeCfg.depthStencil.depthWriteEnabled != this._cgp.stateDepthWrite())
             {
                 needsRebuildReason = "depth changed";
-                this._pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
+                this.#pipeCfg.depthStencil.depthWriteEnabled = this._cgp.stateDepthWrite();
             }
 
-            if (this._pipeCfg.fragment.targets[0].blend != this._cgp.stateBlend())
+            if (this.#pipeCfg.fragment.targets[0].blend != this._cgp.stateBlend())
             {
                 needsRebuildReason = "blend changed";
-                this._pipeCfg.fragment.targets[0].blend = this._cgp.stateBlend();
+                this.#pipeCfg.fragment.targets[0].blend = this._cgp.stateBlend();
             }
 
             // "fragment": {
@@ -140,29 +140,29 @@ export default class Pipeline
 
             if (this._cgp.stateDepthTest() === false)
             {
-                if (this._pipeCfg.depthStencil.depthCompare != "never")
+                if (this.#pipeCfg.depthStencil.depthCompare != "never")
                 {
-                    this._pipeCfg.depthStencil.depthCompare = "never";
+                    this.#pipeCfg.depthStencil.depthCompare = "never";
                     needsRebuildReason = "depth compare changed";
                 }
             }
             else
-            if (this._pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
+            if (this.#pipeCfg.depthStencil.depthCompare != this._cgp.stateDepthFunc())
             {
                 needsRebuildReason = "depth state ";
-                this._pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
+                this.#pipeCfg.depthStencil.depthCompare = this._cgp.stateDepthFunc();
             }
 
-            if (this._pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
+            if (this.#pipeCfg.primitive.cullMode != this._cgp.stateCullFaceFacing())
             {
                 needsRebuildReason = "cullmode change";
-                this._pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
+                this.#pipeCfg.primitive.cullMode = this._cgp.stateCullFaceFacing();
             }
         }
 
         this._cgp.currentPipeDebug =
         {
-            "cfg": this._pipeCfg,
+            "cfg": this.#pipeCfg,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
 
@@ -173,11 +173,11 @@ export default class Pipeline
 
             this._bindGroups = [];
 
-            this._pipeCfg = this.getPipelineObject(shader, mesh);
+            this.#pipeCfg = this.getPipelineObject(shader, mesh);
             this._old.device = this._cgp.device;
             this._old.shader = shader;
             this._old.mesh = mesh;
-            this._renderPipeline = this._cgp.device.createRenderPipeline(this._pipeCfg);
+            this._renderPipeline = this._cgp.device.createRenderPipeline(this.#pipeCfg);
 
             this._cgp.popErrorScope();
         }
