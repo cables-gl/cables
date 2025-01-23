@@ -63,7 +63,6 @@ class BoundingBox
      */
     get z() { return this._center[2]; }
 
-
     /**
      * minimum x
      * @type {Number}
@@ -99,7 +98,6 @@ class BoundingBox
      * @type {Number}
      */
     get maxZ() { return this._max[2]; }
-
 
     apply(geom, mat)
     {
@@ -173,7 +171,6 @@ class BoundingBox
     calcCenterSize()
     {
         if (this._first) return;
-
 
         this._size[0] = this._max[0] - this._min[0];
         this._size[1] = this._max[1] - this._min[1];

@@ -24,5 +24,4 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGP = CGP;
 window.CGP = CGP;
 
-
 export { CGP };

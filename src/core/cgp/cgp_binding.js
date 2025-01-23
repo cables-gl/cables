@@ -1,23 +1,25 @@
 import { Logger } from "cables-shared-client";
 import GPUBuffer from "./cgp_gpubuffer.js";
+import { WebGpuContext } from "./cgp_state.js";
+import Uniform from "./cgp_uniform.js";
 
 export default class Binding
 {
+
     /**
      * Description
-     * @param {any} cgp
-     * @param {any} idx
-     * @param {string} name
-     * @param {any} options={}
+     * @param {WebGpuContext} cgp
+     * @param {String} name
+     * @param {Object} options={}
      */
     constructor(cgp, name, options = {})
     {
+        this._log = new Logger("cgp_binding");
         if (typeof options != "object") this._log.error("binding options is not an object");
         this._index = -1;
 
         this._name = name;
         this._cgp = cgp;
-        this._log = new Logger("cgp_binding");
         this.uniforms = [];
         this.cGpuBuffers = [];
         this._options = options;
@@ -66,7 +68,6 @@ export default class Binding
 
     copy(newShader)
     {
-        console.log("copy binding...");
         const options = {};
 
         for (const i in this._options)
@@ -81,12 +82,12 @@ export default class Binding
             binding.addUniform(newShader.getUniform(this.uniforms[i].name)); // .copy(newShader)
         }
 
-
-
-
         return binding;
     }
 
+    /**
+     * @param {Uniform} uni
+     */
     addUniform(uni)
     {
         this.uniforms.push(uni);
@@ -113,7 +114,6 @@ export default class Binding
         let name = this._name;
 
         if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
-
 
         str += "// " + this.uniforms.length + " uniforms\n";
 
@@ -149,7 +149,6 @@ export default class Binding
 
         return str;
     }
-
 
     getBindingGroupLayoutEntry()
     {
@@ -251,22 +250,24 @@ export default class Binding
         if (this.uniforms.length > 0 && this.uniforms[0].gpuBuffer) this.cGpuBuffers[inst] = this.uniforms[0].gpuBuffer;
     }
 
-
-
-    update(cgp, inst)
+    /**
+     * @param {WebGpuContext} cgp
+     * @param {Number} bindingIndex
+     */
+    update(cgp, bindingIndex)
     {
-        let b = this.bindingInstances[inst];
-        if (!b) b = this.getBindingGroupEntry(cgp.device, inst);
+        let b = this.bindingInstances[bindingIndex];
+        if (!b) b = this.getBindingGroupEntry(cgp.device, bindingIndex);
 
         if (this.uniforms.length == 1 && this.uniforms[0].gpuBuffer)
         {
-            if (this.uniforms[0].gpuBuffer != this.cGpuBuffers[inst])
+            if (this.uniforms[0].gpuBuffer != this.cGpuBuffers[bindingIndex])
             {
                 console.log("changed?!");
                 this.shader._needsRecompile = true; // TODO this should actually just rebuild the bindinggroup i guess ?
             }
 
-            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffers[inst].floatArr]);
+            if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("extern uni bind", [this.uniforms[0].getName(), this.cGpuBuffers[bindingIndex].floatArr]);
             if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
         }
         else
@@ -276,7 +277,7 @@ export default class Binding
             if (this.uniforms[0].getValue())
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
-                    this.bindingInstances[inst] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, inst);
+                    this.bindingInstances[bindingIndex] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, bindingIndex);
                 }
                 else
                 {
@@ -294,7 +295,7 @@ export default class Binding
         }
         else
         {
-            let info = ["stage " + this.stageStr + " / inst " + inst];
+            let info = ["stage " + this.stageStr + " / inst " + bindingIndex];
 
             // console.log("B",this.);
             // update uniform values to buffer
@@ -304,13 +305,13 @@ export default class Binding
             // this._createCgpuBuffer(inst);
             // this.cGpuBuffers[inst] = new GPUBuffer(this._cgp, "buff", null, { "buffCfg": buffCfg });
 
-            this.cGpuBuffers[inst].setLength(s);
+            this.cGpuBuffers[bindingIndex].setLength(s);
 
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
                 info.push(this.uniforms[i].getName() + " " + this.uniforms[i].getValue());
-                this.uniforms[i].copyToBuffer(this.cGpuBuffers[inst].floatArr, off); // todo: check if uniform changed?
+                this.uniforms[i].copyToBuffer(this.cGpuBuffers[bindingIndex].floatArr, off); // todo: check if uniform changed?
 
                 // if (isNaN(this.cGpuBuffers[inst].floatArr[0]))
                 // {
@@ -323,7 +324,7 @@ export default class Binding
 
             // console.log("upodate", inst);
 
-            this.cGpuBuffers[inst].updateGpuBuffer();
+            this.cGpuBuffers[bindingIndex].updateGpuBuffer();
             // todo: only if changed...
             // cgp.device.queue.writeBuffer(
             //     b.resource.buffer,

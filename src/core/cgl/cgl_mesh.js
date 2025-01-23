@@ -2,6 +2,7 @@ import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
+import { Context } from "./cgl_state.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -11,9 +12,6 @@ MESH.lastMesh = null;
  * @class
  * @namespace external:CGL
  * @hideconstructor
- * @param {Context} _cgl cgl
- * @param {Geometry} __geom geometry
- * @param {Number} _options glPrimitive
  * @example
  * const cgl=this._cgl
  * const mesh=new CGL.Mesh(cgl, geometry);
@@ -26,6 +24,12 @@ MESH.lastMesh = null;
  */
 class Mesh
 {
+
+    /**
+     * @param {Context} _cgl cgl
+     * @param {Geometry} __geom geometry
+     * @param {Number} _options glPrimitive
+     */
     constructor(_cgl, __geom, _options)
     {
         this._cgl = _cgl;
@@ -211,8 +215,8 @@ class Mesh
      * @description update attribute
      * @memberof Mesh
      * @instance
-     * @param {String} attribute name
-     * @param {Array} data
+     * @param {String} name
+     * @param {Array} array
      * @param {Number} itemSize
      * @param {Object} options
      */
@@ -221,6 +225,12 @@ class Mesh
         this.setAttribute(name, array, itemSize, options);
     }
 
+    /**
+     * @param {String} name
+     * @param {Array} array
+     * @param {Number} itemSize Integer
+     * @param {Object} options
+     */
     setAttribute(name, array, itemSize, options)
     {
         if (!array)
@@ -342,6 +352,9 @@ class Mesh
         }
     }
 
+    /**
+     * @param {Array} arr
+     */
     _setVertexNumbers(arr)
     {
         if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts || arr)
@@ -429,7 +442,7 @@ class Mesh
      * @param {Geometry} geom
      * @param {boolean} removeRef
      */
-    setGeom(geom, removeRef)
+    setGeom(geom, removeRef = false)
     {
         this._geom = geom;
         if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
@@ -661,9 +674,15 @@ class Mesh
     {
         // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
-        // console.log(this._name);
-
-        if (!shader || !shader.isValid() || this._cgl.aborted) return;
+        if (this._cgl.aborted) return;
+        if (!shader)
+        {
+            return console.log("no shader");
+        }
+        if (!shader.isValid())
+        {
+            return console.log("shadern not valid");
+        }
 
         this._checkAttrLengths();
 

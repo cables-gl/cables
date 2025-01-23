@@ -3,7 +3,6 @@ import { Logger } from "cables-shared-client";
 import { UTILS } from "../utils.js";
 import { BoundingBox } from "./cg_boundingbox.js";
 
-
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @namespace external:CGL#Geometry
@@ -54,6 +53,7 @@ class Geometry
         this.glPrimitive = null;
         this._attributes = {};
 
+        /** @type {Array|Float32Array} */
         this._vertices = [];
         this.verticesIndices = [];
 
@@ -132,7 +132,6 @@ class Geometry
         this.setAttribute("vertexColors", v, 4);
     }
 
-
     /**
      * @function clear
      * @memberof Geometry
@@ -191,7 +190,7 @@ class Geometry
         let attrType = "";
         if (!itemSize || itemSize > 4)
         {
-            console.log("itemsize wrong?", itemSize, name);
+            this._log.warn("itemsize wrong?", itemSize, name);
             this._log.stack("itemsize");
 
             itemSize = 3;
@@ -201,7 +200,6 @@ class Geometry
         else if (itemSize == 2) attrType = "vec2";
         else if (itemSize == 3) attrType = "vec3";
         else if (itemSize == 4) attrType = "vec4";
-
 
         const attr = {
             "name": name,
@@ -218,7 +216,6 @@ class Geometry
         const attr = this.getAttribute(name);
         newgeom.setAttribute(name, new Float32Array(attr.data), attr.itemSize);
     }
-
 
     /**
      * @function setVertices
@@ -269,7 +266,6 @@ class Geometry
         if (y == undefined)y = 1;
         if (z == undefined)z = 1;
 
-
         for (let i = 0; i < this.vertexNormals.length; i += 3)
         {
             vec3.set(vec,
@@ -295,7 +291,6 @@ class Geometry
         return this.vertices.length / 3;
     }
 
-
     /**
      * @function flipVertDir
      * @memberof Geometry
@@ -313,7 +308,6 @@ class Geometry
         }
         this.verticesIndices = newInd;
     }
-
 
     setPointVertices(verts)
     {
@@ -495,7 +489,6 @@ class Geometry
                 this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2] += faceNormals[i / 3][2];
             }
 
-
             for (let i = 0; i < this.verticesIndices.length; i += 3) // faces
             {
                 for (let k = 0; k < 3; k++) // triangles
@@ -534,7 +527,6 @@ class Geometry
         }
         if (!this.texCoords.length)
         {
-            // console.warn("No texcoords. Replacing with default values [0, 0].");
             const texCoordLength = (this.vertices.length / 3) * 2;
             this.texCoords = new Float32Array(texCoordLength);
             for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;
@@ -669,7 +661,7 @@ class Geometry
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals
      */
-    unIndex(reIndex, dontCalcNormals)
+    unIndex(reIndex = false, dontCalcNormals = false)
     {
         const newVerts = [];
         const newIndizes = [];
@@ -702,7 +694,7 @@ class Geometry
                     else if (attr.itemSize == 1)
                         na.push(
                             attr.data[this.verticesIndices[i + s]]);
-                    else console.log("unknown attr", attr);
+                    else this._log.warn("unknown attr", attr);
                 }
             }
             this.setAttribute(attr.name, na, attr.itemSize);
@@ -865,6 +857,7 @@ class Geometry
 }
 
 // TODO : rewritwe circle op 1
+/** @deprecated */
 Geometry.buildFromFaces = function (arr, name, optimize)
 {
     const vertices = [];
@@ -915,6 +908,5 @@ Geometry.buildFromFaces = function (arr, name, optimize)
 
     return geom;
 };
-
 
 export { Geometry };

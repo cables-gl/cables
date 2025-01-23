@@ -68,6 +68,7 @@ class Patch extends Events
         this._triggerStack = [];
         this.storeObjNames = false; // remove after may release
 
+        /** @type {LoadingStatus} */
         this.loading = new LoadingStatus(this);
 
         this._volumeListeners = [];
@@ -84,6 +85,9 @@ class Patch extends Events
         this.tempData = this.frameStore = {};
         this.deSerialized = false;
         this.reqAnimTimeStamp = 0;
+
+        // /** @deprecated */
+        // this.onDelete = null;
 
         this.cgCanvas = null;
 
@@ -700,7 +704,7 @@ class Patch extends Events
      * @param {boolean} lowerCase
      * @param {boolean} fromDeserialize
      */
-    link(op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
+    link(op1, port1Name, op2, port2Name, lowerCase = false, fromDeserialize = false)
     {
         if (!op1) return this._log.warn("link: op1 is null ");
         if (!op2) return this._log.warn("link: op2 is null");

@@ -3,9 +3,16 @@ import Uniform from "./cgp_uniform.js";
 import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
 import Binding from "./cgp_binding.js";
+import { WebGpuContext } from "./cgp_state.js";
 
 export default class Shader extends CgShader
 {
+
+    /**
+     * @param {WebGpuContext} _cgp
+     * @param {String} _name
+     * @param {Object} options={}
+     */
     constructor(_cgp, _name, options = {})
     {
         super();
@@ -42,7 +49,6 @@ export default class Shader extends CgShader
             this._tempNormalMatrix = mat4.create();
             this._tempModelViewMatrix = mat4.create();
         }
-
 
         this._src = "";
 
@@ -89,7 +95,6 @@ export default class Shader extends CgShader
     {
         return ++this._bindingIndexCount;
     }
-
 
     setSource(src)
     {
@@ -150,7 +155,6 @@ export default class Shader extends CgShader
         for (let i = 0; i < this._defines.length; i++)
             defs[this._defines[i][0]] = this._defines[i][1] || true;
 
-
         let src = preproc(this._src, defs);
 
         let bindingsHeadVert = "";
@@ -160,8 +164,6 @@ export default class Shader extends CgShader
         let bindingsHeadFrag = "";
         for (let i = 0; i < this.bindingsVert.length; i++)
             bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
-
-
 
         src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
         src = this._replaceMods(src);
@@ -200,12 +202,9 @@ export default class Shader extends CgShader
             // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
             mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
 
-
-
             // mat4.set(this._tempNormalMatrix, this._tempModelViewMatrix);
             mat4.invert(this._tempNormalMatrix, this._tempModelViewMatrix);
             mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
-
 
             // cpu billboarding?
             // this._tempModelViewMatrix[0 * 4 + 0] = 1.0;
@@ -357,7 +356,6 @@ export default class Shader extends CgShader
         return shader;
     }
 
-
     /**
      * copy all uniform values from another shader
      * @function copyUniforms
@@ -385,5 +383,10 @@ export default class Shader extends CgShader
         //     this._textureStackType[i] = origShader._textureStackType[i];
         //     this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
         // }
+    }
+
+    dispose()
+    {
+
     }
 }

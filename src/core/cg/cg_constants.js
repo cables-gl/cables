@@ -22,13 +22,11 @@ const CG = {
     "CULL_FRONT": 2,
     "CULL_BOTH": 3,
 
-
     "Geometry": Geometry,
     "BoundingBox": BoundingBox,
     "FpsCounter": FpsCounter,
 
     "CgCanvas": CgCanvas
 };
-
 
 export { CG };
