@@ -4,6 +4,13 @@ import { WebGpuContext } from "./cgp_state.js";
 /** GPUBuffer */
 export default class GPUBuffer extends Events
 {
+    #name = "unknown";
+    #gpuBuffer = null;
+    #length = 0;
+    id = CABLES.shortId();
+    floatArr = null;
+    needsUpdate = true;
+    presentationFormat = null;
 
     /**
      * Description
@@ -15,48 +22,38 @@ export default class GPUBuffer extends Events
     constructor(cgp, name, data = null, options = {})
     {
         super();
+        if (!cgp.supported) return;
 
-        this.id = CABLES.shortId();
-
-        this._name = name;
-        this.floatArr = null;
-        this._gpuBuffer = null;
-        this.presentationFormat = null;
-
+        this.#name = name;
         this.setData([0, 0, 0, 0]);
-        this.needsUpdate = true;
-        this._length = 0;
 
-        if (options.buffCfg)
-        {
-            this._buffCfg = options.buffCfg;
-        }
-
-        if (data)
-            this.setData(data);
-
+        if (options.buffCfg) this._buffCfg = options.buffCfg;
+        if (data) this.setData(data);
         if (options.length) this.setLength(options.length);
 
         this.updateGpuBuffer(cgp);
     }
 
-    setData(d)
+    /**
+     * @param {Array} arr
+     */
+    setData(arr)
     {
-        // console.log((new Error()).stack);
-
-        this.floatArr = new Float32Array(d);
+        this.floatArr = new Float32Array(arr);
         this.setLength(this.floatArr.length);
 
-        // console.log(this.name, this.floatArr);
         this.needsUpdate = true;
     }
 
+    /**
+     * @param {number} s
+     */
     setLength(s)
     {
-        this._length = s;
+        this.#length = s;
         if (!this.floatArr || s != this.floatArr.length)
         {
-            this.floatArr = new Float32Array(this._length);
+            this.floatArr = new Float32Array(this.#length);
             this.needsUpdate = true;
         }
     }
@@ -66,26 +63,26 @@ export default class GPUBuffer extends Events
         if (cgp) this._cgp = cgp;
         if (!this._cgp || !this._cgp.device)
         {
-            console.log("no cgp...", this._name, this._cgp);
+            console.log("no cgp...", this.#name, this._cgp);
             return;
         }
 
         this._cgp.pushErrorScope("updateGpuBuffer");
-        if (!this._gpuBuffer)
+        if (!this.#gpuBuffer)
         {
             this._buffCfg = this._buffCfg || {};
-            this._buffCfg.label = "gpuBuffer-" + this._name;
+            this._buffCfg.label = "gpuBuffer-" + this.#name;
             if (!this._buffCfg.hasOwnProperty("size") && this.floatArr) this._buffCfg.size = this.floatArr.length * 4;
             this._buffCfg.usage = this._buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
-            this._gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
+            this.#gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
         }
 
-        // if (!isNaN(this.floatArr[0]))console.log("shit", this._name);
+        // if (!isNaN(this.floatArr[0]))console.log("shit", this.#name);
 
         if (this.floatArr)
             this._cgp.device.queue.writeBuffer(
-                this._gpuBuffer,
+                this.#gpuBuffer,
                 0,
                 this.floatArr.buffer,
                 this.floatArr.byteOffset,
@@ -101,19 +98,19 @@ export default class GPUBuffer extends Events
 
     get name()
     {
-        return this._name;
+        return this.#name;
     }
 
     get gpuBuffer()
     {
-        if (!this._gpuBuffer || this.needsUpdate) this.updateGpuBuffer();
+        if (!this.#gpuBuffer || this.needsUpdate) this.updateGpuBuffer();
 
-        return this._gpuBuffer;
+        return this.#gpuBuffer;
     }
 
     get length()
     {
-        return this._length;
+        return this.#length;
     }
 
     getSizeBytes()
