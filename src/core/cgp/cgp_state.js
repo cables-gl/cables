@@ -80,6 +80,12 @@ class WebGpuContext extends CGState
         ];
     }
 
+    get supported()
+    {
+        return !!navigator.gpu;
+
+    }
+
     /// ////////////////////
 
     /**
@@ -503,6 +509,22 @@ class WebGpuContext extends CGState
         this._defaultTexture = new Texture(this, {});
         this._defaultTexture.initFromData(CgTexture.getDefaultTextureData("stripes", size), size, size);
         return this._defaultTexture;
+    }
+
+    /**
+     * Description
+     * @param {CABLES.Op} op
+     * @returns {boolean}
+     */
+    opCheckSupport(op)
+    {
+        if (!this.supported)
+        {
+            op.setUiError("nowebgpu", "Your browser does not support webgpu", 2);
+            op.setEnabled(false);
+        }
+        return this.supported;
+
     }
 
 }

@@ -4,10 +4,11 @@ import { Port } from "../core_port.js";
 
 class CgShader extends Events
 {
+    id = simpleId();
+
     constructor()
     {
         super();
-        this.id = simpleId();
         this._isValid = true;
         this._defines = [];
 
@@ -18,9 +19,6 @@ class CgShader extends Events
 
     /**
      * easily enable/disable a define without a value
-     * @function toggleDefine
-     * @memberof Shader
-     * @instance
      * @param {String} name
      * @param {Port} enabled value or port
      */
@@ -45,11 +43,8 @@ class CgShader extends Events
 
     /**
      * add a define to a shader, e.g.  #define DO_THIS_THAT 1
-     * @function define
-     * @memberof Shader
-     * @instance
      * @param {String} name
-     * @param {Any} value (can be empty)
+     * @param {String} value (can be empty)
      */
     define(name, value)
     {
@@ -112,10 +107,7 @@ class CgShader extends Events
 
     /**
      * remove a define from a shader
-     * @param {name} name
-     * @function removeDefine
-     * @memberof Shader
-     * @instance
+     * @param {string} name
      */
     removeDefine(name)
     {
@@ -149,10 +141,7 @@ class CgShader extends Events
 
     /**
      * remove a module from shader
-     * @function removeModule
-     * @memberof Shader
-     * @instance
-     * @param {shaderModule} mod the module to be removed
+     * @param {ShaderModule} mod the module to be removed
      */
     removeModule(mod)
     {
@@ -195,9 +184,6 @@ class CgShader extends Events
 
     /**
      * add a module
-     * @function addModule
-     * @memberof Shader
-     * @instance
      * @param {shaderModule} mod the module to be added
      * @param {shaderModule} [sibling] sibling module, new module will share the same group
      */

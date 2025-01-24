@@ -1,3 +1,5 @@
+import { Geometry } from "./cg_geom.js";
+
 export { BoundingBox };
 
 /**
@@ -8,6 +10,10 @@ export { BoundingBox };
  */
 class BoundingBox
 {
+
+    /**
+     * @param {Geometry} geom
+     */
     constructor(geom)
     {
         this._init();

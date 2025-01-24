@@ -4,37 +4,41 @@ import { WebGpuContext } from "./cgp_state.js";
 
 export default class Texture extends CgTexture
 {
+    #log = new Logger("cgp_texture");
+    #cgp = null;
+    gpuTexture = null;
+    gpuTextureDescriptor = null;
+    name = "unknown";
+    width = 8;
+    height = 8;
+    textureType = "???";
+
+    samplerDesc = {
+        "addressModeU": options.wrap || options.addressModeU || "clamp-to-edge",
+        "addressModeV": options.wrap || options.addressModeV || "clamp-to-edge",
+        "magFilter": options.magFilter || options.filter || "linear",
+        "minFilter": options.minFilter || options.filter || "linear",
+    };
 
     /**
-     * @param {WebGpuContext} _cgp
-     * @param {Object} options={}
-     */
+    * @param {WebGpuContext} _cgp
+    * @param {Object} options={}
+    */
     constructor(_cgp, options = {})
     {
         super(options);
-        if (!_cgp) throw new Error("no cgp");
-        this._log = new Logger("cgp_texture");
-        this._cgp = _cgp;
-        this.gpuTexture = null;
-        this.gpuTextureDescriptor = null;
-
         options = options || {};
 
-        this.name = options.name || "unknown";
+        this.#cgp = _cgp;
+        if (!this.#cgp) throw new Error("no cgp");
 
-        this.samplerDesc = {
-            "addressModeU": options.wrap || options.addressModeU || "clamp-to-edge",
-            "addressModeV": options.wrap || options.addressModeV || "clamp-to-edge",
-            "magFilter": options.magFilter || options.filter || "linear",
-            "minFilter": options.minFilter || options.filter || "linear",
-        };
+        if (options.name) this.name = options.name;
+        if (options.height && options.width) this.setSize(options.width, options.height);
 
-        this._cgp.on("deviceChange", () =>
+        this.#cgp.on("deviceChange", () =>
         {
-            // this.reInit();
         });
 
-        this.setSize(options.width, options.height);
     }
 
     /**
@@ -62,7 +66,7 @@ export default class Texture extends CgTexture
 
         const textureType = "rgba8unorm";
 
-        this._cgp.pushErrorScope("inittexture", { "logger": this._log });
+        this.#cgp.pushErrorScope("inittexture", { "logger": this.#log });
 
         this.gpuTextureDescriptor = {
 
@@ -72,10 +76,10 @@ export default class Texture extends CgTexture
             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
 
-        this.gpuTexture = this._cgp.device.createTexture(this.gpuTextureDescriptor);
-        this._cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": this.gpuTexture }, this.gpuTextureDescriptor.size);
+        this.gpuTexture = this.#cgp.device.createTexture(this.gpuTextureDescriptor);
+        this.#cgp.device.queue.copyExternalImageToTexture({ "source": img }, { "texture": this.gpuTexture }, this.gpuTextureDescriptor.size);
 
-        this._cgp.popErrorScope();
+        this.#cgp.popErrorScope();
 
         return this.gpuTexture;
     }
@@ -129,17 +133,17 @@ export default class Texture extends CgTexture
      */
     initFromData(data, w, h, filter, wrap)
     {
-        if (!w || !h) this._log.error("texture size is 0");
+        if (!w || !h) this.#log.error("texture size is 0");
         this.width = w;
         this.height = h;
-        this.gpuTexture = this._cgp.device.createTexture(
+        this.gpuTexture = this.#cgp.device.createTexture(
             {
                 "size": [w, h],
                 "format": "rgba8unorm",
                 "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
             });
 
-        this._cgp.device.queue.writeTexture(
+        this.#cgp.device.queue.writeTexture(
             { "texture": this.gpuTexture },
             data,
             { "bytesPerRow": w * 4 },

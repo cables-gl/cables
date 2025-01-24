@@ -56,6 +56,12 @@ function update()
 
     if (!ele || !eleAlign) return;
 
+    if (!eleAlign.getBoundingClientRect)
+    {
+        op.error("ele has no boundinclientrect...");
+        return;
+    }
+
     const r = ele.getBoundingClientRect();
     const rCanv = op.patch.cgl.canvas.getBoundingClientRect();
 

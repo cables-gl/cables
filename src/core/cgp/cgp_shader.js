@@ -169,7 +169,6 @@ export default class Shader extends CgShader
         src = this._replaceMods(src);
 
         return src;
-        // console.log("----------------\n", src, "\n----------------------------");
     }
 
     compile()

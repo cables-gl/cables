@@ -1,18 +1,21 @@
+import { Logger } from "cables-shared-client/index.js";
+
 class CgCanvas
 {
     constructor(options)
     {
+        this._log = new Logger("CgCanvas");
         if (!options)
         {
-            console.error("CgCanvas no options");
+            this._log.error("CgCanvas no options");
         }
         else
         {
             this._canvasEle = options.canvasEle;
         }
 
-        if (!options.cg)console.error("CgCanvas options has no cg");
-        if (!options.canvasEle)console.error("CgCanvas options has no canvasEle");
+        if (!options.cg) this._log.error("CgCanvas options has no cg");
+        if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
 
         this._cg = options.cg;
         this.pixelDensity = 1;

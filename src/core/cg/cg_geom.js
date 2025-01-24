@@ -251,12 +251,9 @@ class Geometry
     }
 
     /**
-     * @function flipNormals
-     * @memberof Geometry
      * @param x
      * @param y
      * @param z
-     * @description flip normals
      */
     flipNormals(x, y, z)
     {
@@ -293,7 +290,6 @@ class Geometry
 
     /**
      * @function flipVertDir
-     * @memberof Geometry
      * @description flip order of vertices in geom faces
      */
     flipVertDir()
@@ -309,6 +305,9 @@ class Geometry
         this.verticesIndices = newInd;
     }
 
+    /**
+     * @param {Array} verts
+     */
     setPointVertices(verts)
     {
         if (verts.length % 3 !== 0)
@@ -404,9 +403,7 @@ class Geometry
     /**
      * Calculaten normals
      * @function calculateNormals
-     * @memberof Geometry
      * @param options
-     * @instance
      */
     calculateNormals(options)
     {
@@ -510,8 +507,6 @@ class Geometry
      * https://fenix.tecnico.ulisboa.pt/downloadFile/845043405449073/Tangent%20Space%20Calculation.pdf
      *
      * @function calcTangentsBitangents
-     * @memberof Geometry
-     * @instance
      */
     calcTangentsBitangents()
     {
@@ -757,6 +752,12 @@ class Geometry
         return new BoundingBox(this);
     }
 
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z
+     * @returns {Array} offset
+     */
     center(x, y, z)
     {
         if (x === undefined)

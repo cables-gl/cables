@@ -18,7 +18,7 @@ const
 const cgl = op.patch.cgl;
 let normalize = 1;
 let listenerElement = null;
-let sizeElement = null;
+let areaElement = null;
 
 inPassive.onChange =
 area.onChange = addListeners;
@@ -34,10 +34,10 @@ function onStart()
 {
     if (normalize == 0)
     {
-        if (sizeElement.clientWidth === 0) setTimeout(onStart, 50);
+        if (areaElement.clientWidth === 0) setTimeout(onStart, 50);
 
-        outMouseX.set(sizeElement.clientWidth / 2);
-        outMouseY.set(sizeElement.clientHeight / 2);
+        outMouseX.set(areaElement.clientWidth / 2);
+        outMouseY.set(areaElement.clientHeight / 2);
     }
     else if (normalize == 1)
     {
@@ -51,13 +51,13 @@ function onStart()
     }
     else if (normalize == 3)
     {
-        if (sizeElement.clientWidth === 0)
+        if (areaElement.clientWidth === 0)
         {
             setTimeout(onStart, 50);
         }
 
-        outMouseX.set(sizeElement.clientWidth / 2 / cgl.pixelDensity);
-        outMouseY.set(sizeElement.clientHeight / 2 / cgl.pixelDensity);
+        outMouseX.set(areaElement.clientWidth / 2 / cgl.pixelDensity);
+        outMouseY.set(areaElement.clientHeight / 2 / cgl.pixelDensity);
     }
     else console.error("unknown normalize mouse", normalize);
 }
@@ -80,8 +80,8 @@ function setValue(x, y)
     }
     else
     {
-        let w = sizeElement.clientWidth / cgl.pixelDensity;
-        let h = sizeElement.clientHeight / cgl.pixelDensity;
+        let w = areaElement.clientWidth / cgl.pixelDensity;
+        let h = areaElement.clientHeight / cgl.pixelDensity;
 
         w = w || 1;
         h = h || 1;
@@ -112,7 +112,8 @@ function setValue(x, y)
 
 function checkHovering(e)
 {
-    const r = sizeElement.getBoundingClientRect();
+    if (!areaElement) return;
+    const r = areaElement.getBoundingClientRect();
 
     return (
         e.clientX > r.left &&
@@ -190,12 +191,12 @@ function setCoords(e)
     }
     if (area.get() === "Canvas Area")
     {
-        const r = sizeElement.getBoundingClientRect();
+        const r = areaElement.getBoundingClientRect();
         x = e.clientX - r.left;
         y = e.clientY - r.top;
     }
 
-    if (flipY.get()) y = sizeElement.clientHeight - y;
+    if (flipY.get()) y = areaElement.clientHeight - y;
 
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
 }
@@ -249,14 +250,22 @@ function addListeners()
     if (listenerElement || !active.get())removeListeners();
     if (!active.get()) return;
 
-    listenerElement = sizeElement = cgl.canvas;
+    listenerElement = areaElement = cgl.canvas;
+
     if (area.get() == "Canvas Area")
     {
-        sizeElement = cgl.canvas.parentElement;
+        areaElement = cgl.canvas.parentElement;
         listenerElement = document.body;
     }
-    if (area.get() == "Document") sizeElement = listenerElement = document.body;
-    if (area.get() == "Parent Element") listenerElement = sizeElement = cgl.canvas.parentElement;
+    if (area.get() == "Document") areaElement = listenerElement = document.body;
+    if (area.get() == "Parent Element") listenerElement = areaElement = cgl.canvas.parentElement;
+
+    if (!areaElement)
+    {
+        op.setUiError("noarea", "could not find area element for mouse", 2);
+        return;
+    }
+    op.setUiError("noarea", null);
 
     let passive = false;
     if (inPassive.get())passive = { "passive": true };
