@@ -1,0 +1,67 @@
+{
+    "authorName": "stephan",
+    "id": "da9061bb-ab7c-439b-a01b-4d42281328b5",
+    "created": 1737650710066,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Value"
+            }
+        ]
+    },
+    "summary": "Get an object variable value at time of trigger",
+    "coreLibs": [
+        "vargetset"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Vars.VarGetNumber_v2",
+            "author": "pandur",
+            "date": 1682433539531
+        },
+        {
+            "message": "Ops.Patch.P2dk___Nu.TriggerVarGetNumber renamed to Ops.Vars.TriggerVarGetNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1682434069596
+        },
+        {
+            "message": "cloned op from Ops.Vars.TriggerVarGetNumber",
+            "author": "stephan",
+            "date": 1691137347207
+        },
+        {
+            "message": "Ops.Patch.PU7byNy.TriggerVarGetString renamed to Ops.Vars.TriggerVarGetString",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1691138636639
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1737650710066
+        },
+        {
+            "message": "Patch.PaZfgnp.TriggerVarGetObject renamed to Ops.Vars.TriggerVarGetObject",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1737713103600
+        }
+    ],
+    "license": "MIT"
+}

@@ -1,0 +1,63 @@
+{
+    "id": "b9989c26-9dc3-48af-ac8b-bc562bebbdef",
+    "created": 1737726100205,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1737726100238
+        },
+        {
+            "message": "Patch.PPoAXNA.Exr renamed to Ops.Graphics.ArrayToExr",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1737735270576
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "ZIP compression",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 1,
+                "name": "Download"
+            }
+        ],
+        "portsOut": []
+    },
+    "dependencies": [
+        {
+            "src": "./lib_fflate.module.js",
+            "type": "module",
+            "export": "fflate"
+        }
+    ],
+    "exampleProjectId": "PoAXNA",
+    "docs": {
+        "ports": []
+    }
+}

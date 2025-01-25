@@ -1,0 +1,36 @@
+{
+    "id": "d20ac27f-104b-451b-ae65-99284997e7fd",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1736355021894
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1736355021894,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            },
+            {
+                "type": 5,
+                "name": "Classname"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Classes"
+            }
+        ]
+    },
+    "summary": "remove css class to/from a HTML element",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
