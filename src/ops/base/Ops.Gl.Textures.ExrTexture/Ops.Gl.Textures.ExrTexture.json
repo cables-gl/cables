@@ -43,7 +43,16 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "Nearest",
+                    "Linear"
+                ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -80,10 +89,10 @@
     "summary": "load .exr floating point texture files",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "zHxXMW"
+    "exampleProjectId": "zHxXMW",
+    "license": "MIT"
 }

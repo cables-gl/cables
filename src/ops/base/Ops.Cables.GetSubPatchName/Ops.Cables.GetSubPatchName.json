@@ -11,10 +11,15 @@
         }
     ],
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 5,
                 "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "ShortName"
             }
         ]
     },

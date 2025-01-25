@@ -1,13 +1,11 @@
-// welcome to your new op!
-// have a look at the documentation:
-// https://cables.gl/docs/5_writing_ops/dev_ops/dev_ops
-
 const
-    outName = op.outString("Name");
+    outName = op.outString("Name"),
+    outShortName = op.outString("ShortName");
 
 op.init = update;
 
 op.patch.on("patchLoadEnd", update);
+op.patch.on("opReloaded", update);
 
 update();
 
@@ -20,12 +18,13 @@ function update()
 
     if (outerOp)
     {
-        // console.log(outerOp);
         outName.set(outerOp.objName);
-        // outName.set(outerOp.shortName);
+
+        const parts = outerOp.objName.split(".");
+        outShortName.set(parts.at(-1));
     }
     else
     {
-        // console.log("no outerOP?!");
+        console.log("no outerOP?!");
     }
 }

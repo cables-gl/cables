@@ -63,6 +63,10 @@
             },
             {
                 "type": 1,
+                "name": "Fullscreen"
+            },
+            {
+                "type": 1,
                 "name": "Close"
             }
         ],

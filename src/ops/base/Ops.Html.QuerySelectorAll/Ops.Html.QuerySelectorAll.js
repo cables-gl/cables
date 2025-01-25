@@ -14,9 +14,9 @@ if (inMode.get() === "document")
 }
 
 inUpdate.onTriggered =
-queryPort.onChange =
-inMimeType.onChange =
-inSource.onChange = update;
+    queryPort.onChange =
+    inMimeType.onChange =
+    inSource.onChange = update;
 
 inMode.onChange = modeChange;
 

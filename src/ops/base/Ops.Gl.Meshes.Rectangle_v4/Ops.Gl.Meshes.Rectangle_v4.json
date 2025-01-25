@@ -7,21 +7,6 @@
             "date": 1587023107369
         },
         {
-            "message": "cloned op from Ops.Gl.Meshes.Rectangle_v2",
-            "author": "pandur",
-            "date": 1666259954804
-        },
-        {
-            "message": "Ops.User.pandur.Rectangle_v3 renamed to Ops.Dev.Graphics.Meshes.Rectangle_v3",
-            "author": "pandur",
-            "date": 1666261275845
-        },
-        {
-            "message": "Ops.Dev.Graphics.Meshes.Rectangle_v3 renamed to Ops.Gl.Meshes.Rectangle_v3",
-            "author": "pandur",
-            "date": 1670258506267
-        },
-        {
             "message": "tangents/bitangents fixed",
             "type": "bugfix",
             "author": "pandur",
@@ -44,17 +29,6 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034996588
-        },
-        {
-            "message": "cloned op from Ops.Gl.Meshes.Rectangle_v3",
-            "author": "pandur",
-            "date": 1681976835285
-        },
-        {
-            "message": "Ops.Patch.PWYZdju.Rectangle_v4 renamed to Ops.Gl.Meshes.Rectangle_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1681978445953
         }
     ],
     "authorName": "pandur",
