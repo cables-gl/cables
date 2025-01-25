@@ -16,7 +16,7 @@ function update()
     if (CABLES.UI)
         outerOp = op.patch.getSubPatchOuterOp(op.uiAttribs.subPatch);
 
-    if (outerOp)
+    if (outerOp && outerOp.objName)
     {
         outName.set(outerOp.objName);
 
