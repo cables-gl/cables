@@ -2,6 +2,7 @@ const
     inFile = op.inUrl("EXR File", [".exr"]),
     inAlpha = op.inBool("Remove Alpha", false),
     inFilter = op.inSwitch("Filter", ["Nearest", "Linear"], "Nearest"),
+    inFlip = op.inBool("Flip", true),
     outTex = op.outTexture("Texture"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
@@ -15,6 +16,7 @@ let
 
 const cgl = op.patch.cgl;
 
+inFlip.onChange =
 inFilter.onChange =
 inAlpha.onChange =
 inFile.onChange = reloadSoon;
@@ -29,7 +31,7 @@ function loadBin(addCacheBuster)
 {
     // if (!inActive.get()) return;
 
-    if (!loadingId)loadingId = op.patch.loading.start("gltf" + inFile.get(), inFile.get(), op);
+    if (!loadingId)loadingId = op.patch.loading.start("exr" + inFile.get(), inFile.get(), op);
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
@@ -73,6 +75,7 @@ function loadBin(addCacheBuster)
                         "name": "exr texture",
                         "filter": filter,
                         "wrap": filter,
+                        "flip": inFlip.get(),
                         "isFloatingPointTexture": true });
 
                     tex.initFromData(arr, p.width, p.height, filter, filter);

@@ -206,7 +206,7 @@ function updateUi()
 function checkTypes()
 {
     if (tex)
-        if (inTex.isLinked() && inTex.get() && (tex.isFloatingPoint() != inTex.get().isFloatingPoint()))
+        if (inTex.isLinked() && inTex.get() && (tex.isFloatingPoint() < inTex.get().isFloatingPoint()))
             op.setUiError("textypediff", "Warning: Mixing floating point and non floating point texture can result in data/precision loss", 1);
         else
             op.setUiError("textypediff", null);

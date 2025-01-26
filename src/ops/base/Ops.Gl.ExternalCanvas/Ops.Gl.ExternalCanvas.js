@@ -9,6 +9,7 @@ const
     inStretch = op.inBool("Stretch", false),
     inTitle = op.inString("Title", "cables"),
     inOpen = op.inTriggerButton("Open Window"),
+    inFull = op.inTriggerButton("Fullscreen"),
     outEle = op.outObject("Element", null, "element"),
     inClose = op.inTriggerButton("Close");
 

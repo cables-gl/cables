@@ -236,7 +236,7 @@
             "date": 1716457266603
         },
         {
-            "message": "Fix loading meshes with hi polycount without not face indices",
+            "message": "Fix loading meshes with hi polycount without no face indices",
             "type": "improvement",
             "author": "pandur",
             "date": 1736960082039
