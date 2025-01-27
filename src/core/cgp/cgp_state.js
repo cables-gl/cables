@@ -511,21 +511,5 @@ class WebGpuContext extends CGState
         return this._defaultTexture;
     }
 
-    /**
-     * Description
-     * @param {CABLES.Op} op
-     * @returns {boolean}
-     */
-    opCheckSupport(op)
-    {
-        if (!this.supported)
-        {
-            op.setUiError("nowebgpu", "Your browser does not support webgpu", 2);
-            op.setEnabled(false);
-        }
-        return this.supported;
-
-    }
-
 }
 export { WebGpuContext };

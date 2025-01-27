@@ -1,4 +1,3 @@
-
 const SubPatchOp = class
 {
     constructor(op, options)

@@ -98,7 +98,6 @@ const Plan = class extends Events
         return this.getCurrentPlace().level || 0;
     }
 
-
     getCurrentPlace()
     {
         if (!this._data) return { "name": "no plan data" };
@@ -181,6 +180,5 @@ const Plan = class extends Events
         if (patch.plans && patch.plans[name]) return patch.plans[name];
     }
 };
-
 
 CABLES.Plan = Plan;
