@@ -202,7 +202,7 @@ export default class Shader extends CgShader
             mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
             this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
 
-            mat4.copy(this._tempNormalMatrix, this._tempModelViewMatrix);
+            mat4.copy(this._tempNormalMatrix, this._cgp.mMatrix);
             mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
             mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
