@@ -6,6 +6,15 @@ const
     inStr = op.inString("Filename", "file.exr"),
     exec = op.inTriggerButton("Download");
 
+const FloatType = 1015;
+const HalfFloatType = 1016;
+
+const NO_COMPRESSION = 0;
+const ZIPS_COMPRESSION = 2;
+const ZIP_COMPRESSION = 3;
+
+const textEncoder = new TextEncoder();
+
 function downloadBlob(data, fileName, mimeType)
 {
     let blob, url;
@@ -33,9 +42,6 @@ function downloadURL(data, fileName)
     a.remove();
 }
 
-const FloatType = 1015;
-const HalfFloatType = 1016;
-
 exec.onTriggered = () =>
 {
     const info = buildInfoDT();
@@ -46,12 +52,6 @@ exec.onTriggered = () =>
 
     downloadBlob(data, inStr.get(), "application/octet-stream");
 };
-
-const textEncoder = new TextEncoder();
-
-const NO_COMPRESSION = 0;
-const ZIPS_COMPRESSION = 2;
-const ZIP_COMPRESSION = 3;
 
 function buildInfoDT()
 {
