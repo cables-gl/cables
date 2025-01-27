@@ -5,6 +5,11 @@ export default class WebGpuOp
         this._op = op;
         this.supported = !!navigator.gpu;
 
+        if (!op.patch.cgp)
+        {
+            op.patch.cgp = new CABLES.CGP.Context(op.patch);
+        }
+
         this.checkSupport();
     }
 
