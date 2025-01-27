@@ -194,6 +194,17 @@ function setCoords(e)
         const r = areaElement.getBoundingClientRect();
         x = e.clientX - r.left;
         y = e.clientY - r.top;
+
+        // let clamp = true;
+        // let crop = false;
+        // if (crop)
+        //     if (x < 0 || x > r.width || y > r.height || y < 0) return;
+
+        // if (clamp)
+        // {
+        //     x = CABLES.clamp(x, 0, r.width);
+        //     y = CABLES.clamp(y, 0, r.height);
+        // }
     }
 
     if (flipY.get()) y = areaElement.clientHeight - y;
