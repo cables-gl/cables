@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1737726100238
-        },
-        {
-            "message": "Patch.PPoAXNA.Exr renamed to Ops.Graphics.ArrayToExr",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1737735270576
         }
     ],
     "layout": {
@@ -46,8 +40,7 @@
                 "type": 1,
                 "name": "Download"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "dependencies": [
         {
@@ -59,5 +52,6 @@
     "exampleProjectId": "PoAXNA",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "convert and download an array of numbers as an .exr image file"
 }
