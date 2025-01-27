@@ -198,7 +198,7 @@ class Anim extends Events
      * @param {Number} value
      * @param {Function} cb callback
      */
-    setValue(time, value, cb)
+    setValue(time, value, cb = null)
     {
         let found = null;
 

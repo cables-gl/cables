@@ -200,9 +200,10 @@ export default class Shader extends CgShader
             // mat4.invert(this._tempNormalMatrix, this._cgp.mMatrix);
             // mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
             mat4.mul(this._tempModelViewMatrix, this._cgp.vMatrix, this._cgp.mMatrix);
+            this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
 
-            // mat4.set(this._tempNormalMatrix, this._tempModelViewMatrix);
-            mat4.invert(this._tempNormalMatrix, this._tempModelViewMatrix);
+            mat4.copy(this._tempNormalMatrix, this._tempModelViewMatrix);
+            mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
             mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
             // cpu billboarding?
@@ -220,7 +221,6 @@ export default class Shader extends CgShader
             // this._tempModelViewMatrix[2 * 4 + 1] = 0.0;
             // this._tempModelViewMatrix[2 * 4 + 2] = 1.0;
 
-            this.uniModelViewMatrix.setValue(this._tempModelViewMatrix);
             this.uniNormalMatrix.setValue(this._tempNormalMatrix);
         }
 

@@ -43,19 +43,16 @@ export class Port extends Events
 
         // this._op.get();
 
-        /**
-         * @type {Array<Link>}
-         * @name links
-         * @instance
-         * @memberof Port
-         * @description links of port
-         */
+        /** @type {Array<Link>} */
         this.links = [];
         this.value = 0.0;
         this.name = name;
         this.type = type || CONSTANTS.OP.OP_PORT_TYPE_VALUE;
         this.uiAttribs = uiAttribs || {};
+
+        /** @type {Anim} */
         this.anim = null;
+
         this._oldAnimVal = -5711;
         this.defaultValue = null;
 

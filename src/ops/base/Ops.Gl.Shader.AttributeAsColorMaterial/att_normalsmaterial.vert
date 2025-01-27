@@ -17,6 +17,7 @@ UNI mat4 projMatrix;
 
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
+UNI mat4 normalMatrix;
 
 
 {{MODULES_HEAD}}
@@ -37,6 +38,10 @@ void main()
     mat4 modelViewMatrix=viewMatrix*mMatrix;
 
     vert=pos.xyz;
+
+    #ifdef SHOW_NORMAL_MAT
+        norm=( vec4(norm,1.0)*normalMatrix ).xyz;
+    #endif
     normal=norm;
     outTangent=tangent;
     outBiTangent=bitangent;

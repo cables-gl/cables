@@ -11,12 +11,14 @@ const GltfTargetsRenderer = class
 
     renderFinish(cgl)
     {
+        if (!cgl.gl) return;
         cgl.popModelMatrix();
         this._mod.unbind();
     }
 
     renderStart(cgl, time)
     {
+        if (!cgl.gl) return;
         if (!this._mod)
         {
             this._mod = new CGL.ShaderModifier(cgl, "gltftarget");
@@ -56,6 +58,8 @@ const GltfTargetsRenderer = class
 
     makeTex(geom)
     {
+        if (!cgl.gl) return;
+
         if (!geom.morphTargets || !geom.morphTargets.length) return;
 
         let w = geom.morphTargets[0].vertices.length / 3;

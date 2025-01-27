@@ -13,6 +13,7 @@
                     "TexCoords",
                     "TexCoords 1",
                     "Normals",
+                    "Normal Mat",
                     "Tangents",
                     "BiTangents"
                 ],
@@ -71,5 +72,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "bZEZGc"
+    "exampleProjectId": "bZEZGc",
+    "license": "MIT"
 }
