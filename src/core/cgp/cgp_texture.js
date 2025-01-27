@@ -13,12 +13,7 @@ export default class Texture extends CgTexture
     height = 8;
     textureType = "???";
 
-    samplerDesc = {
-        "addressModeU": options.wrap || options.addressModeU || "clamp-to-edge",
-        "addressModeV": options.wrap || options.addressModeV || "clamp-to-edge",
-        "magFilter": options.magFilter || options.filter || "linear",
-        "minFilter": options.minFilter || options.filter || "linear",
-    };
+    samplerDesc = {};
 
     /**
     * @param {WebGpuContext} _cgp
@@ -38,6 +33,12 @@ export default class Texture extends CgTexture
         this.#cgp.on("deviceChange", () =>
         {
         });
+        this.samplerDesc = {
+            "addressModeU": options.wrap || options.addressModeU || "clamp-to-edge",
+            "addressModeV": options.wrap || options.addressModeV || "clamp-to-edge",
+            "magFilter": options.magFilter || options.filter || "linear",
+            "minFilter": options.minFilter || options.filter || "linear",
+        };
 
     }
 

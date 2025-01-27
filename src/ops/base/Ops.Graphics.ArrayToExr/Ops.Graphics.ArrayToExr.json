@@ -3,6 +3,13 @@
     "created": 1737726100205,
     "license": "MIT",
     "authorName": "pandur",
+    "credits": [
+        {
+            "title": "three.js .exr exporter",
+            "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/exporters/EXRExporter.js",
+            "licence": "MIT"
+        }
+    ],
     "changelog": [
         {
             "message": "op created",
