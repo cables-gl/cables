@@ -27,7 +27,7 @@ let didRotChanged = true;
 
 render.onTriggered = function ()
 {
-    const cg = op.patch.cgl;
+    const cg = op.patch.cg;
 
     let updateMatrix = false;
     if (translationChanged)

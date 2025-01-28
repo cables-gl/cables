@@ -8,6 +8,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1716289161933
+        },
+        {
+            "message": "added shortname output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738067676482
+        },
+        {
+            "message": "updates when subpatch was cloned and recreated",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738067704351
         }
     ],
     "layout": {
