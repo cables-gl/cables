@@ -311,7 +311,7 @@ export default class Binding
 
             if (!this.cGpuBuffers[bindingIndex])
             {
-                console.log("no cpubuff?");
+                // console.log("no cpubuff?");
                 return;
             }
             this.cGpuBuffers[bindingIndex].setLength(s);
