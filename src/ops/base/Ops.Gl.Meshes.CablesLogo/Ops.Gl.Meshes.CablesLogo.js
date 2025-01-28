@@ -10,8 +10,11 @@ const indices = [0, 1, 2, 2, 3, 0, 2, 1, 4, 4, 5, 2, 6, 7, 2, 2, 5, 6, 8, 3, 2, 
 
 let geom = new CGL.Geometry(op.name);
 let mesh = null;
-scale.onChange = build;
-build();
+scale.onChange = () =>
+{
+    if (mesh)mesh.dispose();
+    mesh = null;
+};
 
 function build()
 {
@@ -26,16 +29,15 @@ function build()
     geom.tangents = vertices.map(function (v, i) { return i % 3 == 0 ? 1 : 0; });
     geom.biTangents = vertices.map(function (v, i) { return i % 3 == 1 ? 1 : 0; });
     geom.vertexNormals = vertices.map(function (v, i) { return i % 3 == 2 ? 1 : 0; });
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 
-    if (!mesh)mesh = new CGL.Mesh(op.patch.cgl, geom);
+    if (!mesh)mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     else mesh.setGeom(geom);
 }
 
 render.onTriggered = function ()
 {
-    if (draw.get())
-        mesh.render(op.patch.cgl.getShader());
+    if (!mesh)build();
+    if (draw.get()) mesh.render();
     trigger.trigger();
 };

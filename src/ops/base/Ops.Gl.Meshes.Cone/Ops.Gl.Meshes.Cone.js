@@ -30,14 +30,14 @@ render.onTriggered = function ()
     if (needsRebuild) updateMesh();
     if (active.get() && mesh)
     {
-        mesh.render(cgl.getShader());
+        mesh.render();
     }
     else
     {
         trigger.trigger();
         return;
     }
-    // mesh.render(cgl.getShader());
+
     trigger.trigger();
 };
 
@@ -207,6 +207,6 @@ function generateCone(base, height, stacks, slices)
 
     geom.setTexCoords(texCoords);
 
-    mesh = new CGL.Mesh(cgl, geom);
-    geomOut.set(geom);
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    geomOut.setRef(geom);
 }

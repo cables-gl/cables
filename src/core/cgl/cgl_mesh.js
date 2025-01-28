@@ -675,10 +675,8 @@ class Mesh
         // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
         if (this._cgl.aborted) return;
-        if (!shader)
-        {
-            return console.log("no shader");
-        }
+        shader = shader || this._cgl.getShader();
+
         if (!shader.isValid())
         {
             return console.log("shadern not valid");

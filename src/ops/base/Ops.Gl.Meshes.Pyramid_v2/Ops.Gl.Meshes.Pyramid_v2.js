@@ -20,7 +20,7 @@ sizeW.onChange =
 render.onTriggered = function ()
 {
     if (!mesh)create();
-    if (inDraw.get())mesh.render(cgl.getShader());
+    if (inDraw.get())mesh.render();
     trigger.trigger();
 };
 
@@ -73,7 +73,8 @@ function create()
     if (!inSmooth.get())geom.unIndex();
     geom.calculateNormals({ "forceZUp": false });
 
-    mesh = new CGL.Mesh(cgl, geom);
-    geomOut.set(null);
-    geomOut.set(geom);
+    if (mesh)mesh.dispose();
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+
+    geomOut.setRef(geom);
 }

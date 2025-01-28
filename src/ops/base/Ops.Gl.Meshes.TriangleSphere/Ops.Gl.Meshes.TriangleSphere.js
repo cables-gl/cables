@@ -27,7 +27,7 @@ render.onTriggered = function ()
 {
     if (needsUpdate) generate();
 
-    if (inDraw.get() && mesh) mesh.render(cgl.getShader());
+    if (inDraw.get() && mesh) mesh.render();
     next.trigger();
 };
 
@@ -168,7 +168,7 @@ function generate()
     geom.calculateNormals({ "forceZUp": false });
     geom.calcTangentsBitangents();
 
-    mesh = new CGL.Mesh(cgl, geom);
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);
     needsUpdate = false;

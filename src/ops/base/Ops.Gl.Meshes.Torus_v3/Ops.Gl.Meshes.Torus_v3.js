@@ -32,7 +32,7 @@ outerRadius.onChange = function ()
 render.onTriggered = function ()
 {
     if (needsUpdate) updateMesh();
-    if (indraw.get() && mesh !== null) mesh.render(cgl.getShader());
+    if (indraw.get() && mesh !== null) mesh.render();
 
     trigger.trigger();
 };

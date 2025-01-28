@@ -30,7 +30,7 @@ zDiff.onChange =
 render.onTriggered = function ()
 {
     if (!mesh)calc();
-    if (renderMesh.get() && mesh) mesh.render(cgl.getShader());
+    if (renderMesh.get() && mesh) mesh.render();
     trigger.trigger();
 };
 
@@ -150,6 +150,6 @@ function calc()
     geomOut.set(geom);
 
     if (geom.vertices.length == 0) return;
-    if (!mesh)mesh = new CGL.Mesh(cgl, geom);
+    if (!mesh)mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
     mesh.setGeom(geom);
 }

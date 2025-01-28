@@ -19,8 +19,9 @@ generate();
 
 render.onTriggered = function ()
 {
-    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
-    if (mesh && renderMesh.get()) mesh.render(cgl.getShader());
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+
+    if (mesh && renderMesh.get()) mesh.render();
     trigger.trigger();
 };
 
@@ -83,5 +84,5 @@ function generate()
 
     mesh = null;
 
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 }

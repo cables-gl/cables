@@ -83,8 +83,8 @@
     "id": "b67027f5-8f56-4aa0-8bb3-18d42ff15ffe",
     "created": 1537800182423,
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "fGA7W6",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }
