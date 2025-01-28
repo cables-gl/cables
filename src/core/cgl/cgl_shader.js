@@ -9,7 +9,6 @@ import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
 import { simpleId } from "../utils.js";
 // ---------------------------------------------------------------------------
 
-
 /*
 
 proposal default shader variable names:
@@ -29,19 +28,14 @@ uCamPosition - currently: camPos
 
 */
 
-
 // ---------------------------------------------------------------------------
 
 let materialIdCounter = 0;
-
-
-
 
 function getDefaultVertexShader()
 {
     return defaultShaderSrcVert;
 }
-
 
 function getDefaultFragmentShader(r, g, b)
 {
@@ -61,7 +55,6 @@ function getDefaultFragmentShader(r, g, b)
         .endl() + "    outColor = col;"
         .endl() + "}";
 }
-
 
 /**
  * @class
@@ -128,7 +121,6 @@ class Shader extends CgShader
         this.srcFrag = getDefaultFragmentShader();
         this.lastCompile = 0;
 
-
         this._libs = [];
         this._structNames = [];
         this._structUniformNames = [];
@@ -144,12 +136,6 @@ class Shader extends CgShader
 
         this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
     }
-
-
-
-
-
-
 
     isValid()
     {
@@ -219,7 +205,6 @@ class Shader extends CgShader
             // this.getUniform(origShader._uniforms[i].)
             // this._uniforms[i].set(origShader._uniforms[i].getValue());
 
-
             // if (origShader._uniforms[i].getName().contains("pathPoints"))
             //     this._log.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
 
@@ -274,7 +259,6 @@ class Shader extends CgShader
         shader._needsRecompile = true;
         return shader;
     }
-
 
     /**
      * set shader source code
@@ -499,8 +483,6 @@ class Shader extends CgShader
         if (this._cgl.aborted) return;
         const startTime = performance.now();
 
-
-
         this._cgl.profileData.profileShaderCompiles++;
         this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
@@ -517,8 +499,6 @@ class Shader extends CgShader
         const structStrings = this.createStructUniforms();
         this._cgl.profileData.addHeavyEvent("shader compile", this._name + " [" + this._compileReason + "]");
         this._compileReason = "";
-
-
 
         if (this._uniforms)
         {
@@ -619,7 +599,6 @@ class Shader extends CgShader
         let uniformsStrVert = "\n// cgl generated".endl();
         let uniformsStrFrag = "\n// cgl generated".endl();
 
-
         fs += "\n// active mods: --------------- ";
         vs += "\n// active mods: --------------- ";
 
@@ -669,7 +648,6 @@ class Shader extends CgShader
             }
         }
 
-
         let countUniFrag = 0;
         let countUniVert = 0;
         for (let i = 0; i < this._uniforms.length; i++)
@@ -683,7 +661,6 @@ class Shader extends CgShader
         if (countUniFrag >= this._cgl.maxUniformsFrag) this._log.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
         if (countUniVert >= this._cgl.maxUniformsVert) this._log.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
 
-
         if (!fs.contains("precision")) fs = "precision " + this.precision + " float;".endl() + fs;
         if (!vs.contains("precision")) vs = "precision " + this.precision + " float;".endl() + vs;
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
@@ -693,7 +670,6 @@ class Shader extends CgShader
         }
         vs = extensionString + vs + definesStr + structStrings[0] + uniformsStrVert + "\n// -- \n" + this.srcVert;
         fs = extensionString + fs + definesStr + structStrings[1] + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
-
 
         let srcHeadVert = "";
         let srcHeadFrag = "";
@@ -708,7 +684,6 @@ class Shader extends CgShader
         {
             return a.priority || 0 - b.priority || 0;
         });
-
 
         let addedAttribs = false;
 
@@ -773,19 +748,15 @@ class Shader extends CgShader
                 }
             }
 
-
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
             fs = fs.replace("{{" + this._moduleNames[i] + "}}", srcFrag);
         }
 
-
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
 
-
         vs = this._addLibs(vs);
         fs = this._addLibs(fs);
-
 
         // SETUP draw buffers / multi texture render targets
 
@@ -815,7 +786,6 @@ class Shader extends CgShader
         fs = fs.replace("{{DRAWBUFFER}}", drawBufferStr);
         // //////
 
-
         if (!this._program)
         {
             this._program = this._createProgram(vs, fs);
@@ -835,7 +805,6 @@ class Shader extends CgShader
         this.finalShaderFrag = fs;
         this.finalShaderVert = vs;
 
-
         MESH.lastMesh = null;
         MESH.lastShader = null;
 
@@ -852,7 +821,6 @@ class Shader extends CgShader
     {
         return this._needsRecompile;
     }
-
 
     bind()
     {
@@ -884,7 +852,6 @@ class Shader extends CgShader
                 for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
             }
         }
-
 
         if (this._cgl.currentProgram != this._program)
         {
@@ -974,7 +941,6 @@ class Shader extends CgShader
     {
     }
 
-
     dispose()
     {
         this._cgl.gl.deleteProgram(this._program);
@@ -1039,7 +1005,6 @@ class Shader extends CgShader
         this._needsRecompile = true;
         this.setWhyCompile("remove uniform " + name);
     }
-
 
     _addUniform(uni)
     {
@@ -1242,7 +1207,6 @@ class Shader extends CgShader
         this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
         this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
-
         if (this.vshader && this.fshader)
         {
             this._cgl.gl.attachShader(program, this.vshader);
@@ -1329,7 +1293,6 @@ class Shader extends CgShader
         this._needsRecompile = true;
         this._feedBackNames = names;
     }
-
 
     /**
       * adds attribute definition to shader header without colliding with other shader modules...
@@ -1515,7 +1478,6 @@ class Shader extends CgShader
         return info;
     }
 
-
     getDefaultFragmentShader(r, g, b, a)
     {
         return getDefaultFragmentShader(r, g, b, a);
@@ -1527,35 +1489,10 @@ class Shader extends CgShader
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // --------------------------
 
 Shader.getDefaultVertexShader = getDefaultVertexShader;
 Shader.getDefaultFragmentShader = getDefaultFragmentShader;
-
 
 Shader.getErrorFragmentShader = function ()
 {
@@ -1586,7 +1523,6 @@ Shader.createShader = function (cgl, str, type, cglShader)
         return basLines;
     }
 
-
     const shader = cgl.gl.createShader(type);
     cgl.gl.shaderSource(shader, str);
     cgl.gl.compileShader(shader);
@@ -1599,7 +1535,6 @@ Shader.createShader = function (cgl, str, type, cglShader)
             this._log.warn("empty shader info log", this._name);
             return;
         }
-
 
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
@@ -1637,7 +1572,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         }
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
-        if (cgl.patch.isEditorMode()) this._log.log("Shader error ", cglShader._name, infoLog, this);
+        if (cgl.patch.isEditorMode()) cglShader._log.warn("Shader error ", cglShader._name, infoLog, this);
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
         htmlWarning += "</code></pre>";
@@ -1658,14 +1593,4 @@ Shader.createShader = function (cgl, str, type, cglShader)
     return shader;
 };
 
-
 export { Shader };
-
-
-
-
-
-
-
-
-

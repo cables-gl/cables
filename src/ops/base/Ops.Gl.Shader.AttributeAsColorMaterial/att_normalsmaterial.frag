@@ -24,6 +24,9 @@ void main()
     #ifdef SHOW_NORMALS
         attr.xyz=normal;
     #endif
+    #ifdef SHOW_NORMAL_MAT
+        attr.xyz=normal;
+    #endif
     #ifdef SHOW_BITANGENTS
         attr.xyz=outBiTangent;
     #endif

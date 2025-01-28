@@ -12,6 +12,8 @@ class CubemapTexture
         this.textureType = Texture.TYPE_DEFAULT;
         this._options = options;
 
+        if (!this._cgl.gl) return;
+
         this._cubemapFaces = [
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
@@ -22,7 +24,6 @@ class CubemapTexture
         ];
 
         this.cubemap = this.tex = this._cgl.gl.createTexture();
-
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
 
@@ -35,7 +36,6 @@ class CubemapTexture
 
         this.flip = options.flip || true;
 
-
         if (!options.hasOwnProperty("pixelFormat") || !options.pixelFormat)
         {
             if (options.isFloatingPointTexture) options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
@@ -43,7 +43,6 @@ class CubemapTexture
         }
 
         this.pixelFormat = options.pixelFormat;
-
 
         // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
 

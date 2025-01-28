@@ -3,18 +3,20 @@
     "created": 1737726100205,
     "license": "MIT",
     "authorName": "pandur",
+    "credits": [
+        {
+            "title": "three.js .exr exporter",
+            "author":"mr doob",
+            "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/exporters/EXRExporter.js",
+            "licence": "MIT"
+        }
+    ],
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1737726100238
-        },
-        {
-            "message": "Patch.PPoAXNA.Exr renamed to Ops.Graphics.ArrayToExr",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1737735270576
         }
     ],
     "layout": {
@@ -46,8 +48,7 @@
                 "type": 1,
                 "name": "Download"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "dependencies": [
         {
@@ -59,5 +60,6 @@
     "exampleProjectId": "PoAXNA",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "convert and download an array of numbers as an .exr image file"
 }
