@@ -1390,7 +1390,7 @@ Patch.replaceOpIds = function (json, options)
                                     if (outerOp)
                                     {
                                         op.storage = op.storage || {};
-                                        op.storage.ref = op.storage.ref || CABLES.shortId();
+                                        op.storage.ref = op.storage.ref || shortId();
                                         links[l].refOp = op.storage.ref;
                                         links[l].subOpRef = outerOp.storage.ref;
                                     }
@@ -1407,7 +1407,7 @@ Patch.replaceOpIds = function (json, options)
     {
         const op = json.ops[i];
         const oldId = op.id;
-        let newId = CABLES.shortId();
+        let newId = shortId();
 
         if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
 
@@ -1422,7 +1422,7 @@ Patch.replaceOpIds = function (json, options)
             else
             {
                 op.storage = op.storage || {};
-                op.storage.ref = newId = CABLES.shortId();
+                op.storage.ref = newId = shortId();
             }
         }
 
