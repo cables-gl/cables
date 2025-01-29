@@ -1,0 +1,64 @@
+{
+    "authorName": "cristián",
+    "id": "c2cc8b93-812c-42fa-be72-8f5856b583a7",
+    "created": 1738170496874,
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cristián",
+            "date": 1555064309756,
+            "type": "new"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Repetitions",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Interval (ms)",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Out"
+            }
+        ]
+    },
+    "summary": "Repeats the incoming trigger event a number of times",
+    "docs": {
+        "ports": [
+            {
+                "name": "Number of Times",
+                "text": "how many times the trigger is repeated"
+            },
+            {
+                "name": "Only Once",
+                "text": "only trigger once"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "cristián",
+            "date": 1738170496874
+        }
+    ],
+    "issues": "",
+    "license": "MIT"
+}
