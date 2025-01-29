@@ -14,10 +14,6 @@ import { Op } from "./core_op.js";
  *
  * see {@link PatchConfig}
  *
- * @namespace external:CABLES#Patch
- * @hideconstructor
- * @param {PatchConfig} cfg The configuration object.
- * @class
  * @example
  * CABLES.patch=new CABLES.Patch(
  * {
@@ -34,6 +30,8 @@ import { Op } from "./core_op.js";
 
 class Patch extends Events
 {
+
+    /** @param {PatchConfig} cfg */
     constructor(cfg)
     {
         super();
