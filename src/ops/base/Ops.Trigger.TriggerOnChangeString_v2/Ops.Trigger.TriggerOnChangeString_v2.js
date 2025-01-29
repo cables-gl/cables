@@ -10,6 +10,7 @@ inval.onChange = function ()
     outStr.set(inval.get());
     next.trigger();
 };
+
 op.init = () =>
 {
     if (inval.get() != "")next.trigger();
