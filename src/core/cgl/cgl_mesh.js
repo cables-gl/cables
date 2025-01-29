@@ -25,6 +25,9 @@ MESH.lastMesh = null;
 class Mesh
 {
 
+    /** @type {Geometry} */
+    #geom = null;
+
     /**
      * @param {Context} _cgl cgl
      * @param {Geometry} __geom geometry
@@ -43,10 +46,6 @@ class Mesh
         this._attributes = [];
         this._attribLocs = {};
 
-        /**
-         * @type {Geometry}
-         */
-        this._geom = null;
         this._lastShader = null;
         this._numInstances = 0;
         this._glPrimitive = options.glPrimitive;
@@ -444,21 +443,21 @@ class Mesh
      */
     setGeom(geom, removeRef = false)
     {
-        this._geom = geom;
+        this.#geom = geom;
         if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
-        if (this._geom && this._geom.name) this._name = "mesh " + this._geom.name;
+        if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
 
         MESH.lastMesh = null;
         this._cgl.profileData.profileMeshSetGeom++;
 
         this._disposeAttributes();
 
-        this.updateVertices(this._geom);
-        this.setVertexIndices(this._geom.verticesIndices);
+        this.updateVertices(this.#geom);
+        this.setVertexIndices(this.#geom.verticesIndices);
 
         if (this.addVertexNumbers) this._setVertexNumbers();
 
-        const geomAttribs = this._geom.getAttributes();
+        const geomAttribs = this.#geom.getAttributes();
 
         const attribAssoc = {
             "texCoords": CONSTANTS.SHADER.SHADERVAR_VERTEX_TEXCOORD,
@@ -474,7 +473,7 @@ class Mesh
 
         if (removeRef)
         {
-            this._geom = null;
+            this.#geom = null;
         }
     }
 
@@ -482,7 +481,7 @@ class Mesh
     {
         for (let i = 0; i < this._attributes.length; i++)
             if (this._attributes[i].cb)
-                this._attributes[i].cb(this._attributes[i], this._geom, shader);
+                this._attributes[i].cb(this._attributes[i], this.#geom, shader);
     }
 
     _checkAttrLengths()
@@ -494,7 +493,7 @@ class Mesh
             if (this._attributes[i].arrayLength / this._attributes[i].itemSize < this._attributes[0].arrayLength / this._attributes[0].itemSize)
             {
                 let name = "unknown";
-                if (this._geom)name = this._geom.name;
+                if (this.#geom)name = this.#geom.name;
 
             /*
              * this._log.warn(
@@ -546,7 +545,7 @@ class Mesh
                 // todo: easier way to fill mat4 attribs...
                     if (attribute.itemSize <= 4)
                     {
-                        if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("instanced attrib itemsize error", this._geom.name, attribute);
+                        if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("instanced attrib itemsize error", this.#geom.name, attribute);
 
                         this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
                         this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
@@ -684,9 +683,9 @@ class Mesh
 
         this._checkAttrLengths();
 
-        if (this._geom)
+        if (this.#geom)
         {
-            if (this._preWireframeGeom && !shader.wireframe && !this._geom.isIndexed())
+            if (this._preWireframeGeom && !shader.wireframe && !this.#geom.isIndexed())
             {
                 this.setGeom(this._preWireframeGeom);
                 this._preWireframeGeom = null;
@@ -696,30 +695,30 @@ class Mesh
             {
                 let changed = false;
 
-                if (this._geom.isIndexed())
+                if (this.#geom.isIndexed())
                 {
                     if (!this._preWireframeGeom)
                     {
-                        this._preWireframeGeom = this._geom;
-                        this._geom = this._geom.copy();
+                        this._preWireframeGeom = this.#geom;
+                        this.#geom = this.#geom.copy();
                     }
 
-                    this._geom.unIndex();
+                    this.#geom.unIndex();
                     changed = true;
                 }
 
-                if (!this._geom.getAttribute("attrBarycentric"))
+                if (!this.#geom.getAttribute("attrBarycentric"))
                 {
                     if (!this._preWireframeGeom)
                     {
-                        this._preWireframeGeom = this._geom;
-                        this._geom = this._geom.copy();
+                        this._preWireframeGeom = this.#geom;
+                        this.#geom = this.#geom.copy();
                     }
                     changed = true;
 
-                    this._geom.calcBarycentric();
+                    this.#geom.calcBarycentric();
                 }
-                if (changed) this.setGeom(this._geom);
+                if (changed) this.setGeom(this.#geom);
             }
         }
 
