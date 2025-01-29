@@ -131,5 +131,6 @@
         }
     ],
     "issues": "",
-    "exampleProjectId": "GxagQ6"
+    "exampleProjectId": "GxagQ6",
+    "license": "MIT"
 }

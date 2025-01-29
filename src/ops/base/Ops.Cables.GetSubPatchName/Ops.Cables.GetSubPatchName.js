@@ -7,6 +7,9 @@ op.init = update;
 op.patch.on("patchLoadEnd", update);
 op.patch.on("opReloaded", update);
 
+// outShortName.onLinkChanged =
+//     outName.onLinkChanged = update;
+
 update();
 
 function update()
@@ -25,6 +28,10 @@ function update()
     }
     else
     {
+        setTimeout(() =>
+        {
+            update();
+        }, 100);
         console.log("no outerOP?!");
     }
 }

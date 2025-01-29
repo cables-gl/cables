@@ -34,5 +34,6 @@
     "authorName": "pandur",
     "id": "d53b5d7b-99b5-420e-b5a1-2d7c2c1f1ebb",
     "created": 1540457633048,
-    "exampleProjectId": "xUMq3j"
+    "exampleProjectId": "xUMq3j",
+    "license": "MIT"
 }

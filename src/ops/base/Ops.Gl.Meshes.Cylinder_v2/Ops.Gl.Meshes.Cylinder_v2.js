@@ -295,7 +295,7 @@ function buildMesh()
 inRender.onTriggered = function ()
 {
     if (needsRebuild) buildMesh();
-    if (inDraw.get() && mesh) mesh.render(cgl.getShader());
+    if (inDraw.get() && mesh) mesh.render();
     outTrigger.trigger();
 };
 

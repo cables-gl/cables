@@ -27,12 +27,22 @@
             {
                 "type": 0,
                 "name": "pivot x index",
+                "values": [
+                    "center",
+                    "left",
+                    "right"
+                ],
                 "group": "Transform",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "pivot y index",
+                "values": [
+                    "center",
+                    "top",
+                    "bottom"
+                ],
                 "group": "Transform",
                 "subType": "integer"
             },
@@ -97,5 +107,6 @@
             "author": "pandur",
             "date": 1686920989282
         }
-    ]
+    ],
+    "license": "MIT"
 }

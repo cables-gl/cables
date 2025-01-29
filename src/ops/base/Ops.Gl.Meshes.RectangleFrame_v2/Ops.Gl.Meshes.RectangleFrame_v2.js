@@ -41,7 +41,7 @@ width.onChange =
 render.onTriggered = function ()
 {
     if (!mesh) create();
-    if (active.get() && mesh) mesh.render(cgl.getShader());
+    if (active.get() && mesh) mesh.render();
 
     trigger.trigger();
 };
@@ -97,9 +97,9 @@ function create()
         geom.texCoords = tc;
     }
 
-    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+    if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+
     else mesh.setGeom(geom);
 
-    geomOut.set(null);
-    geomOut.set(geom);
+    geomOut.setRef(geom);
 }

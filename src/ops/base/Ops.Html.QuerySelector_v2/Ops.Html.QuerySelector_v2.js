@@ -24,6 +24,11 @@ function update()
 {
     op.setUiError("exc", null);
     const q = queryPort.get();
+    if (!q)
+    {
+        elementPort.set(null);
+        return;
+    }
     const theDocument = inSource.get();
     const mode = inMode.get();
     if (mode === "string input" && theDocument)

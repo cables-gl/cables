@@ -793,17 +793,16 @@ const create = () =>
 
         if (!mesh)
         {
-            mesh = new CGL.Mesh(cgl, geom);
+            mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
         }
         else
         {
             mesh.setGeom(geom);
         }
-        geomOut.set(null);
-        geomOut.set(geom);
+        geomOut.setRef(geom);
     }
-    outPosition.set(null);
-    outPosition.set(geom.vertices);
+
+    outPosition.setRef(geom.vertices);
     outLength.set(geom.vertices.length);
     shouldRender = false;
     shouldScale = false;
@@ -846,7 +845,7 @@ render.onTriggered = function ()
     if (shouldRender) create();
     if (draw.get())
     {
-        mesh.render(cgl.getShader());
+        mesh.render();
     }
     trigger.trigger();
 };

@@ -58,14 +58,14 @@ render.onLinkChanged = function ()
 render.onTriggered = function ()
 {
     if (needsRebuild)buildMesh();
-    if (active.get() && mesh && meshvalid) mesh.render(cgl.getShader());
+    if (active.get() && mesh && meshvalid) mesh.render();
     trigger.trigger();
 };
 
 op.preRender = function ()
 {
     buildMesh();
-    if (mesh && cgl)mesh.render(cgl.getShader());
+    if (mesh && cgl)mesh.render();
 };
 
 function buildMesh()

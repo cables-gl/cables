@@ -262,8 +262,8 @@ function create()
 
     if (geom.vertices.length == 0) return;
     if (mesh) mesh.dispose();
-    mesh = null;
-    mesh = new CGL.Mesh(cgl, geom);
-    geomOut.set(null);
-    geomOut.set(geom);
+
+    if (mesh)mesh.dispose();
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    geomOut.setRef(geom);
 }

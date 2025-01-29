@@ -29,7 +29,7 @@ showLeft.onChange =
 render.onTriggered = function ()
 {
     if (!mesh)buildMesh();
-    if (active.get() && mesh) mesh.render(cgl.getShader());
+    if (active.get() && mesh) mesh.render();
     trigger.trigger();
 };
 
@@ -174,7 +174,8 @@ function buildMesh()
 
     if (geom.verticesIndices.length === 0)geom.verticesIndices.push(0, 0, 0);
 
-    mesh = new CGL.Mesh(cgl, geom);
+    // mesh = new CGL.Mesh(cgl, geom);
+    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);
 }
