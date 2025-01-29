@@ -1,0 +1,56 @@
+{
+    "id": "874380ae-4a10-4a53-92d9-4982f4c1f3a2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557471942484,
+            "type": "new"
+        },
+        {
+            "message": "New version: will trigger on patch load, if the string is not empty",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1738162776711
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1738162711082,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Changed"
+            },
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "triggers when string has changed",
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - only when something in the String has changed"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "ohxBci"
+}
