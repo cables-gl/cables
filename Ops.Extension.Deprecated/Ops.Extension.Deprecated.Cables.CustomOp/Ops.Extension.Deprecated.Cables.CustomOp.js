@@ -199,7 +199,7 @@ const execute = () =>
                 let codeHead = "Ops.Custom = Ops.Custom || {};\n";
                 codeHead += name + " = class extends CABLES.Op \n{";
                 codeHead += "constructor()\n{ super(...arguments);\nconst op=this;const attachments=op.attachments={};\n";
-                let codeFoot = "}\n\n};\n\n";
+                let codeFoot = "\n}\n};\n\n";
                 codeFoot += "new " + name + "();\n";
                 const opCode = codeHead + code + codeFoot;
                 op.setUiError("error", e);
