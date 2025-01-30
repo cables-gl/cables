@@ -1,5 +1,10 @@
 export function preproc(str, vars)
 {
+    if (!str)
+    {
+        console.warn("shader preproc no shader code given");
+    }
+    str = str || "";
     const lines = str.split("\n");
     const outLines = [];
     let stack = [];
