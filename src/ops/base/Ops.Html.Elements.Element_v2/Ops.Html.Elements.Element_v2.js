@@ -1,9 +1,9 @@
 const
-    inText = op.inString("Text", ""),
+    inText = op.inString("Text", "Element"),
     inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
     inInteractive = op.inSwitch("Interactive", ["True", "False", "No Pointer Events"], "True"),
 
-    inSetSize = op.inValueBool("Set Size", true),
+    inSetSize = op.inValueBool("Set Size", false),
     inWidth = op.inFloat("Width", 100),
     inHeight = op.inFloat("Height", 100),
     inOverflow = op.inSwitch("Overflow", ["Visible", "Hidden", "Scroll", "Auto"], "Hidden"),

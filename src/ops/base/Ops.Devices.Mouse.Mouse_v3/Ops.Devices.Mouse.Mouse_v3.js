@@ -195,16 +195,9 @@ function setCoords(e)
         x = e.clientX - r.left;
         y = e.clientY - r.top;
 
-        // let clamp = true;
-        // let crop = false;
-        // if (crop)
-        //     if (x < 0 || x > r.width || y > r.height || y < 0) return;
-
-        // if (clamp)
-        // {
-        //     x = CABLES.clamp(x, 0, r.width);
-        //     y = CABLES.clamp(y, 0, r.height);
-        // }
+        if (x < 0 || x > r.width || y > r.height || y < 0) return;
+        x = CABLES.clamp(x, 0, r.width);
+        y = CABLES.clamp(y, 0, r.height);
     }
 
     if (flipY.get()) y = areaElement.clientHeight - y;
@@ -215,6 +208,15 @@ function setCoords(e)
 function onmousemove(e)
 {
     mouseOver.set(checkHovering(e));
+    if (area.get() === "Canvas Area")
+    {
+        const r = areaElement.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+
+        if (x < 0 || x > r.width || y > r.height || y < 0) return;
+    }
+
     setCoords(e);
 
     outMovementX.set(e.movementX / cgl.pixelDensity);

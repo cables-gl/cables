@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1668760304023
-        },
-        {
-            "message": "Ops.User.pandur.MouseV3 renamed to Ops.Devices.Mouse.Mouse_v3",
-            "author": "pandur",
-            "date": 1668766229733
+            "date": 1668760304023,
+            "type": "new"
         },
         {
             "message": "add normalization switch: more normalizing options",
@@ -34,6 +30,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1706698494011
+        },
+        {
+            "message": "Canvas area is now cropped and will not change outside of the canvas area",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738146229190
         }
     ],
     "layout": {

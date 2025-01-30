@@ -9,6 +9,30 @@
             "author": "pandur",
             "date": 1732009302664,
             "type": "new"
+        },
+        {
+            "message": "Fix sorting of arrays with RGBA/RGB strides",
+            "type": "bugfix",
+            "author": "franck",
+            "date": 1738148488907
+        },
+        {
+            "message": "Added an \"Alpha\" sorting option",
+            "type": "feature",
+            "author": "franck",
+            "date": 1738148523731
+        },
+        {
+            "message": "Added a \"Reverse Sort\" check button",
+            "type": "feature",
+            "author": "franck",
+            "date": 1738148533205
+        },
+        {
+            "message": "Added user warning if array is not dividable by 3 or 4",
+            "type": "improvement",
+            "author": "franck",
+            "date": 1738148541940
         }
     ],
     "layout": {
