@@ -47,6 +47,7 @@ class WebGpuContext extends CGState
         this._stackErrorScopeLogs = [];
 
         this.currentPipeDebug = null;
+        this.canvasAttachments = [];
 
         this._defaultBlend = {
             "color": {

@@ -29,7 +29,10 @@ export default class WebGpuCanvasAttachment
         return this.#canvas;
     }
 
-    render(commandEncoder, cb)
+    /**
+     * @param {function} cb
+     */
+    render(cb)
     {
 
         const canvas = this.#cgp.canvas;
@@ -76,7 +79,7 @@ export default class WebGpuCanvasAttachment
         };
 
         // make a render pass encoder to encode render specific commands
-        this.#cgp.passEncoder = commandEncoder.beginRenderPass(this.#cgp.renderPassDescriptor);
+        this.#cgp.passEncoder = this.#cgp.commandEncoder.beginRenderPass(this.#cgp.renderPassDescriptor);
         this.#cgp.textureView = this.#ctx.getCurrentTexture().createView();
         this.#cgp.renderStart();
 
