@@ -7,6 +7,7 @@ import Binding from "./cgp_binding.js";
 import Uniform from "./cgp_uniform.js";
 import GPUBuffer from "./cgp_gpubuffer.js";
 import { MESHES } from "../cgl/cgl_simplerect.js";
+import WebGpuCanvasAttachment from "./cgp_canvasattachment.js";
 
 const CGP = {
     "Context": WebGpuContext,
@@ -23,5 +24,6 @@ const CGP = {
 window.CABLES = window.CABLES || {};
 window.CABLES.CGP = CGP;
 window.CGP = CGP;
+window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 
 export { CGP };

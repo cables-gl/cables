@@ -519,7 +519,6 @@ class WebGpuContext extends CGState
      */
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
-
         if (this.canvas && this.canvas.toBlob)
         {
             this.canvas.toBlob((blob) =>
