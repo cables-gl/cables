@@ -217,10 +217,17 @@ export default class Binding
                 "mipmapFilter": "linear",
             };
 
-            if (this.uniforms[0].getValue()) smplDesc = this.uniforms[0].getValue().getSampler();
-
-            const sampler = this.uniforms[0]._cgp.device.createSampler(smplDesc);
-            o.resource = sampler;
+            if (this.uniforms[0].getValue())
+                if (!this.uniforms[0].getValue().getSampler)
+                {
+                    this._log.error("uniform texture does not have function getSampler... not a WebGpu Texture?");
+                }
+                else
+                {
+                    smplDesc = this.uniforms[0].getValue().getSampler();
+                    const sampler = this.uniforms[0]._cgp.device.createSampler(smplDesc);
+                    o.resource = sampler;
+                }
         }
         else
         {

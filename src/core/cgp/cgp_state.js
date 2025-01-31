@@ -47,6 +47,7 @@ class WebGpuContext extends CGState
         this._stackErrorScopeLogs = [];
 
         this.currentPipeDebug = null;
+        this.canvasAttachments = [];
 
         this._defaultBlend = {
             "color": {
@@ -509,6 +510,24 @@ class WebGpuContext extends CGState
         this._defaultTexture = new Texture(this, {});
         this._defaultTexture.initFromData(CgTexture.getDefaultTextureData("stripes", size), size, size);
         return this._defaultTexture;
+    }
+
+    /**
+     * @param {function} cb
+     * @param {boolean} doScreenshotClearAlpha
+     * @param {string} mimeType
+     * @param {number} quality
+     */
+    screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
+    {
+        if (this.canvas && this.canvas.toBlob)
+        {
+            this.canvas.toBlob((blob) =>
+            {
+                if (cb) cb(blob);
+                else this._log.log("no screenshot callback...");
+            }, mimeType, quality);
+        }
     }
 
 }

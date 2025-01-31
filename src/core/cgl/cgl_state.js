@@ -313,6 +313,12 @@ class Context extends CGState
         this.gl.viewport(this._viewPort[0], this._viewPort[1], this._viewPort[2], this._viewPort[3]);
     }
 
+    /**
+     * @param {function} cb
+     * @param {boolean} doScreenshotClearAlpha
+     * @param {string} mimeType
+     * @param {number} quality
+     */
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
         if (doScreenshotClearAlpha)
@@ -680,61 +686,6 @@ class Context extends CGState
         error = this.gl.getError();
 
         return found;
-    }
-
-    saveScreenshot(filename, cb, pw, ph, noclearalpha)
-    {
-        this.patch.renderOneFrame();
-
-        let w = this.canvas.clientWidth * this.pixelDensity;
-        let h = this.canvas.clientHeight * this.pixelDensity;
-
-        if (pw)
-        {
-            this.canvas.width = pw;
-            w = pw;
-        }
-        if (ph)
-        {
-            this.canvas.height = ph;
-            h = ph;
-        }
-
-        function padLeft(nr, n, str)
-        {
-            return Array(n - String(nr).length + 1).join(str || "0") + nr;
-        }
-
-        const d = new Date();
-
-        const dateStr = "".concat(String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate()), "_").concat(padLeft(d.getHours(), 2)).concat(padLeft(d.getMinutes(), 2)).concat(padLeft(d.getSeconds(), 2));
-
-        if (!filename) filename = "cables_" + dateStr + ".png";
-        else filename += ".png";
-
-        this.patch.cgl.screenShot(function (blob)
-        {
-            this.canvas.width = w;
-            this.canvas.height = h;
-
-            if (blob)
-            {
-                const anchor = document.createElement("a");
-
-                anchor.download = filename;
-                anchor.href = URL.createObjectURL(blob);
-
-                setTimeout(function ()
-                {
-                    anchor.click();
-                    if (cb) cb(blob);
-                }, 100);
-            }
-            else
-            {
-                this._log.log("screenshot: no blob");
-            }
-        }.bind(this), noclearalpha);
     }
 
     _dispose()

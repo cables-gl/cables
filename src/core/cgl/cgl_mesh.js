@@ -508,6 +508,7 @@ class Mesh
 
     _bind(shader)
     {
+        if (!shader) return;
         if (!shader.isValid()) return;
 
         let attrLocs = [];
@@ -676,7 +677,7 @@ class Mesh
         if (this._cgl.aborted) return;
         shader = shader || this._cgl.getShader();
 
-        if (!shader.isValid())
+        if (!shader || !shader.isValid())
         {
             return console.log("shadern not valid");
         }
