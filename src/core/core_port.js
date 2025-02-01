@@ -847,6 +847,8 @@ export class Port extends Events
             this.anim = null;
         }
 
+        this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
+
         this.setUiAttribs({ "isAnimated": this._animated });
     }
 
