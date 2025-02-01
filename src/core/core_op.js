@@ -822,7 +822,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} value default value
+     * @param {number} v default value
      * @return {Port} created port
      */
     inInt(name, v)
@@ -830,8 +830,7 @@ export class Op extends Events
         // old
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                "increment": "integer"
-            })
+                "increment": "integer" })
         );
         if (v !== undefined)
         {
