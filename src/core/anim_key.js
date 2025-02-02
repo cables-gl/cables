@@ -1,7 +1,5 @@
 import { CONSTANTS } from "./constants.js";
 
-
-
 class Key
 {
     constructor(obj)
@@ -27,7 +25,6 @@ class Key
         this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
         this.set(obj);
     }
-
 
     setEasing(e)
     {
@@ -129,12 +126,6 @@ class Key
     }
 }
 
-
-
-
-
-
-
 Key.cubicSpline = function (perc, key1, key2)
 {
     let
@@ -153,7 +144,6 @@ Key.easeCubicSpline = function (perc, key2)
 {
     return Key.cubicSpline(perc, this, key2);
 };
-
 
 Key.linear = function (perc, key1, key2)
 {
@@ -244,7 +234,6 @@ Key.easeCubicIn = function (t, key2)
     return Key.linear(t, this, key2);
 };
 
-
 // b 0
 // c 1/2 or 1
 // d always 1
@@ -334,7 +323,6 @@ Key.easeInElastic = function (t, key2)
 
     return Key.linear(t, this, key2);
 };
-
 
 Key.easeOutElastic = function (t, key2)
 {
@@ -434,7 +422,5 @@ Key.easeSmootherStep = function (perc, key2)
     perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
     return Key.linear(perc, this, key2);
 };
-
-
 
 export { Key };
