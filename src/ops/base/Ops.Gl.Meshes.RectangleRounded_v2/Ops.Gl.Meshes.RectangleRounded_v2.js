@@ -264,6 +264,6 @@ function create()
     if (mesh) mesh.dispose();
 
     if (mesh)mesh.dispose();
-    mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    mesh = (op.patch.cg || op.patch.cgl).createMesh(geom, { "opId": op.id });
     geomOut.setRef(geom);
 }

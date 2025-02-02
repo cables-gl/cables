@@ -4,7 +4,7 @@ const
     inMode = op.inValueSelect("Mode", ["document", "string input"], "document"),
     inMimeType = op.inValueSelect("Type", ["text/html", "text/xml"], "text/html"),
     inSource = op.inStringEditor("Document", "xml"),
-    elementPort = op.outObject("Element");
+    elementPort = op.outObject("Element", null, "element");
 
 if (inMode.get() === "document")
 {

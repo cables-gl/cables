@@ -85,7 +85,11 @@ function updateArray()
 
         if (!convertedpixel || convertedpixel.length != pixel.length) convertedpixel = new Float32Array(pixel.length);
 
-        for (let i = 0; i < pixel.length; i++) convertedpixel[i] = pixel[i];
+        for (let i = 0; i < pixel.length; i++)
+        {
+            convertedpixel[i] = pixel[i];
+            if (channelType == gl.UNSIGNED_BYTE)convertedpixel[i] /= 255;
+        }
 
         outColors.setRef(convertedpixel || pixel);
         needsUpdate = false;
