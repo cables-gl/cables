@@ -76,5 +76,13 @@
                 "text": "number of clients"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "stephan",
+            "date": 1738583457089
+        }
+    ]
 }

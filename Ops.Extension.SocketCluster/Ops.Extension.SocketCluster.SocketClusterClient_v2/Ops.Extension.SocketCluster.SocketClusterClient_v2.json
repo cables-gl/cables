@@ -4,27 +4,8 @@
         {
             "message": "created op",
             "author": "stephan",
-            "date": 1584534300415
-        },
-        {
-            "message": " added lib: socketcluster-client.js",
-            "author": "stephan",
-            "date": 1584534406220
-        },
-        {
-            "message": "cloned op from Ops.Net.SocketCluster.SocketCluster",
-            "author": "stephan",
-            "date": 1620731073038
-        },
-        {
-            "message": "Ops.User.stephan.SocketCluster_v2 renamed to Ops.Net.SocketCluster.SocketCluster_v2",
-            "author": "stephan",
-            "date": 1620731129156
-        },
-        {
-            "message": "Ops.Net.SocketCluster.SocketCluster_v2 renamed to Ops.Extension.SocketCluster.SocketCluster_v2",
-            "author": "stephan",
-            "date": 1671003339954
+            "date": 1584534300415,
+            "type": "new"
         },
         {
             "message": "print error message, remove connection on op delete, return error string",
@@ -33,10 +14,16 @@
             "date": 1727880750822
         },
         {
-            "message": "Extension.SocketCluster.SocketCluster_v2 renamed to Ops.Extension.SocketCluster.SocketClusterClient_v2",
-            "type": "rename",
-            "author": "",
-            "date": 1738579180820
+            "message": "Added auto reconnect",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738583612737
+        },
+        {
+            "message": "Display status as extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738583628054
         }
     ],
     "authorName": "stephan",
