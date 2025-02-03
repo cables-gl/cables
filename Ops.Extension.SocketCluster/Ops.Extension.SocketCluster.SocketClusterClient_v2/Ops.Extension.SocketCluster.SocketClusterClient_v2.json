@@ -41,9 +41,6 @@
     ],
     "authorName": "stephan",
     "created": 1620731073037,
-    "libs": [
-        "socketcluster-client.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -124,8 +121,6 @@
         ]
     },
     "summary": "connect to a socketcluster server and manage the connection",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -191,5 +186,11 @@
         ]
     },
     "exampleProjectId": "EJvr0a",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": [
+        {
+            "src": "./lib_socketcluster-client.js",
+            "type": "commonjs"
+        }
+    ]
 }

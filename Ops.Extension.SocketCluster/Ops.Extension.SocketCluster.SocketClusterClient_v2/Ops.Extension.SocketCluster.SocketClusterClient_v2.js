@@ -1,4 +1,4 @@
-const
+ const
     channelName = op.inString("Channel", "changeme"),
     serverHostname = op.inString("Server hostname", "socket.cables.gl"),
     serverPort = op.inValue("Server port", 443),
@@ -16,7 +16,8 @@ const
     errorOut = op.outString("Error", null);
 
 let socket = null;
-let initDelay = null;
+
+
 
 op.setPortGroup("Server",[serverHostname,serverSecure,serverPort,serverPath]);
 
@@ -37,26 +38,21 @@ function init()
     errorOut.set("");
     op.setUiError("catcherr", null);
 
-    if (!initDelay && activeIn.get())
+    if (activeIn.get())
     {
-        initDelay = setTimeout(() =>
-        {
-            if (socket)
-            {
-                socket.disconnect();
-                socket = null;
-            }
+        if (socket) disconnect();
 
-            try
-            {
+        try
+        {
             socket = socketClusterClient.create({
                 "hostname": serverHostname.get(),
                 "secure": serverSecure.get(),
                 "port": serverPort.get(),
                 "path": serverPath.get(),
                 "autoReconnect":true,
-                autoReconnectOptions:{initialDelay:1000,randomness:0,multiplier:1}
+                "autoReconnectOptions":{"initialDelay":1000,"randomness":0,"multiplier":1}
             });
+
             socket.allowSend = allowSend.get();
             socket.channelName = channelName.get();
             socket.globalDelay = globalDelay.get();
@@ -105,28 +101,34 @@ function init()
                     op.setUiError("catcherr", e.message);
                 }
             })();
+
             serverHostname.onChange = init;
             serverPort.onChange = init;
             serverSecure.onChange = init;
-            initDelay = null;
             updateUi()
+        }
+        catch(e)
+        {
+            op.setUiError("catcherr", e.message);
+        }
 
-            }
-            catch(e)
-            {
-op.setUiError("catcherr", e.message);
-            }
-        }, 1000);
     }
     else if (!activeIn.get())
     {
-        if (socket)
-        {
-            socket.disconnect();
-            socket = null;
-        }
+        disconnect();
     }
-};
+}
+function disconnect()
+{
+    if (socket)
+    {
+        socket.disconnect();
+        ready.set(false);
+        socket = null;
+        updateUi();
+    }
+
+}
 
 globalDelay.onChange = () =>
 {
@@ -199,9 +201,5 @@ const handleControlMessage = (message) =>
 
 op.onDelete = () =>
 {
-    if (socket)
-    {
-        socket.disconnect();
-        socket = null;
-    }
+    disconnect();
 };
