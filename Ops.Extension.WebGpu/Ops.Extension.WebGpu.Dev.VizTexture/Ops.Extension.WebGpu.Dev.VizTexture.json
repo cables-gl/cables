@@ -24,10 +24,13 @@
                 "name": "Texture In",
                 "objType": "texture"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "exampleProjectId": "tk5uLB",
+    "docs": {
+        "ports": []
+    }
 }
