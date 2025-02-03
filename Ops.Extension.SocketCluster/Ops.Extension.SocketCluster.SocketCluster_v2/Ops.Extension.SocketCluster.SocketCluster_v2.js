@@ -1,25 +1,38 @@
-const activeIn = op.inBool("Active", false);
-const serverHostname = op.inString("Server hostname", "socket.cables.gl");
-const serverPath = op.inString("Server path", "/socketcluster/");
-const serverPort = op.inValue("Server port", 443);
-const serverSecure = op.inBool("Use SSL", true);
-const allowSend = op.inBool("Allow send", true);
-const allowMultipleSenders = op.inBool("Allow multiple senders", true);
-const channelName = op.inString("Channel", CABLES.generateUUID());
-const globalDelay = op.inInt("Delay send (ms)", 0);
-const commonValues = op.inObject("Additional serverdata", {});
-const ready = op.outBool("Ready", false);
-const socketOut = op.outObject("Socket", null, "socketcluster");
-const clientIdOut = op.outString("Own client id");
-const sendOut = op.outBool("Can send", false);
-const errorOut = op.outString("Error", null);
+const
+    channelName = op.inString("Channel", "changeme"),
+    serverHostname = op.inString("Server hostname", "socket.cables.gl"),
+    serverPort = op.inValue("Server port", 443),
+    serverSecure = op.inBool("Use SSL", true),
+    serverPath = op.inString("Server path", "/socketcluster/"),
+    allowSend = op.inBool("Allow send", true),
+    allowMultipleSenders = op.inBool("Allow multiple senders", true),
+    globalDelay = op.inInt("Delay send (ms)", 0),
+    commonValues = op.inObject("Additional serverdata", {}),
+    activeIn = op.inBool("Active", true),
+    ready = op.outBool("Ready", false),
+    socketOut = op.outObject("Socket", null, "socketcluster"),
+    clientIdOut = op.outString("Own client id"),
+    sendOut = op.outBool("Can send", false),
+    errorOut = op.outString("Error", null);
 
 let socket = null;
 let initDelay = null;
 
+op.setPortGroup("Server",[serverHostname,serverSecure,serverPort,serverPath]);
 
+activeIn.onChange = init;
+serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;
+op.init = init;
 
-const init = () =>
+function updateUi()
+{
+    let state="disconnected";
+
+    if(ready.get())state="connected";
+    op.setUiAttrib({ "extendTitle": state});
+}
+
+function init()
 {
     errorOut.set("");
     op.setUiError("catcherr", null);
@@ -53,9 +66,10 @@ const init = () =>
             {
                 for await (const { error } of socket.listener("error"))
                 {
-                    op.setUiError("connectionError", error.message + " (" + error.name + ")", 2);
+                    op.setUiError("connectionError", error.message + " (" + error.name + ")", 1);
                     errorOut.set(error.name);
                     ready.set(false);
+                    updateUi()
                 }
             })();
             (async () =>
@@ -63,9 +77,10 @@ const init = () =>
                 for await (const event of socket.listener("connect"))
                 {
                     op.setUiError("connectionError", null);
-                    op.setUiError("catcherr", null);
+                    op.setUiError("catc2herr", null);
                     ready.set(true);
-                    socketOut.set(socket);
+                    socketOut.setRef(socket);
+                    updateUi()
                 }
             })();
 
@@ -92,6 +107,7 @@ const init = () =>
             serverPort.onChange = init;
             serverSecure.onChange = init;
             initDelay = null;
+            updateUi()
 
             }
             catch(e)
@@ -115,7 +131,7 @@ globalDelay.onChange = () =>
     if (socket)
     {
         socket.globalDelay = globalDelay.get();
-        socketOut.set(socket);
+        socketOut.setRef(socket);
     }
 };
 
@@ -124,7 +140,7 @@ allowSend.onChange = () =>
     if (socket)
     {
         socket.allowSend = allowSend.get();
-        socketOut.set(socket);
+        socketOut.setRef(socket);
         sendOut.set(allowSend.get());
         const payload = Object.assign(socket.commonValues, {
             "topic": "cablescontrol",
@@ -141,7 +157,7 @@ channelName.onChange = () =>
     {
         socket.unsubscribe(socket.channelName + "/control");
         socket.channelName = channelName.get();
-        socketOut.set(socket);
+        socketOut.setRef(socket);
 
         // subscribe to controlmessages for this channel
         (async () =>
@@ -163,7 +179,7 @@ commonValues.onChange = () =>
     if (socket)
     {
         socket.commonValues = commonValues.get() || {};
-        socketOut.set(socket);
+        socketOut.setRef(socket);
     }
 };
 
@@ -173,12 +189,12 @@ const handleControlMessage = (message) =>
     if (message.payload.allowSend && !allowMultipleSenders.get())
     {
         socket.allowSend = false;
-        socketOut.set(socket);
+        socketOut.setRef(socket);
         sendOut.set(false);
     }
 };
 
-op.init = init;
+
 op.onDelete = () =>
 {
     if (socket)
@@ -187,5 +203,3 @@ op.onDelete = () =>
         socket = null;
     }
 };
-activeIn.onChange = init;
-serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;

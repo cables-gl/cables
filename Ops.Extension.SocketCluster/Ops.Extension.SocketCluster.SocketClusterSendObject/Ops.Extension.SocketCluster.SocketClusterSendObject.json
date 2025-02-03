@@ -5,10 +5,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
-                "name": "send"
-            },
-            {
                 "type": 2,
                 "name": "socket",
                 "objType": "socketcluster"
@@ -25,6 +21,10 @@
                 "type": 0,
                 "name": "delay (ms)",
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "send"
             }
         ],
         "portsOut": [

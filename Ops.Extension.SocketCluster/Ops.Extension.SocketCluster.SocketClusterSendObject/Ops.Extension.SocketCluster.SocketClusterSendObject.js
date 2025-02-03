@@ -1,12 +1,12 @@
 const
-    inTrigger = op.inTrigger("send"),
     inSocket = op.inObject("socket", null, "socketcluster"),
     inTopic = op.inString("topic", "main"),
     inData = op.inObject("data"),
     inDelay = op.inInt("delay (ms)", 0),
+    inTrigger = op.inTriggerButton("send"),
     outTrigger = op.outTrigger("Sent Data");
 
-op.toWorkPortsNeedToBeLinked(inTrigger, inSocket, inData);
+op.toWorkPortsNeedToBeLinked( inSocket, inData);
 
 const send = () =>
 {
@@ -14,8 +14,7 @@ const send = () =>
 
     if (!socket) return;
 
-    if (!socket.allowSend)
-        op.setUiError("allowsend", "socket is not allowed to send data", 1);
+    if (!socket.allowSend) op.setUiError("allowsend", "socket is not allowed to send data", 1);
     else op.setUiError("allowsend", null);
 
     if (socket.channelName && socket.allowSend)

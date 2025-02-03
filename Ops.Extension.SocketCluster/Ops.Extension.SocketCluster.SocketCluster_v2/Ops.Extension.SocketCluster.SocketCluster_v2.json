@@ -41,27 +41,30 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
-                "name": "Active",
-                "subType": "boolean"
+                "type": 5,
+                "name": "Channel"
             },
             {
                 "type": 5,
-                "name": "Server hostname"
-            },
-            {
-                "type": 5,
-                "name": "Server path"
+                "name": "Server hostname",
+                "group": "Server"
             },
             {
                 "type": 0,
                 "name": "Server port",
+                "group": "Server",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Use SSL",
+                "group": "Server",
                 "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Server path",
+                "group": "Server"
             },
             {
                 "type": 0,
@@ -74,10 +77,6 @@
                 "subType": "boolean"
             },
             {
-                "type": 5,
-                "name": "Channel"
-            },
-            {
                 "type": 0,
                 "name": "Delay send (ms)",
                 "subType": "integer"
@@ -85,6 +84,11 @@
             {
                 "type": 2,
                 "name": "Additional serverdata"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
