@@ -17,9 +17,12 @@ const errorOut = op.outString("Error", null);
 let socket = null;
 let initDelay = null;
 
+
+
 const init = () =>
 {
     errorOut.set("");
+    op.setUiError("catcherr", null);
 
     if (!initDelay && activeIn.get())
     {
@@ -30,6 +33,9 @@ const init = () =>
                 socket.disconnect();
                 socket = null;
             }
+
+            try
+            {
             socket = socketClusterClient.create({
                 "hostname": serverHostname.get(),
                 "secure": serverSecure.get(),
@@ -57,6 +63,7 @@ const init = () =>
                 for await (const event of socket.listener("connect"))
                 {
                     op.setUiError("connectionError", null);
+                    op.setUiError("catcherr", null);
                     ready.set(true);
                     socketOut.set(socket);
                 }
@@ -65,19 +72,32 @@ const init = () =>
             // subscribe to controlmessages
             (async () =>
             {
-                const channel = socket.subscribe(channelName.get() + "/control");
-                for await (const obj of channel)
+                try
                 {
-                    if (obj.clientId != socket.clientId)
+                    const channel = socket.subscribe(channelName.get() + "/control");
+                    for await (const obj of channel)
                     {
-                        handleControlMessage(obj);
+                        if (obj.clientId != socket.clientId)
+                        {
+                            handleControlMessage(obj);
+                        }
                     }
+                }
+                catch(e)
+                {
+                    op.setUiError("catcherr", e.message);
                 }
             })();
             serverHostname.onChange = init;
             serverPort.onChange = init;
             serverSecure.onChange = init;
             initDelay = null;
+
+            }
+            catch(e)
+            {
+op.setUiError("catcherr", e.message);
+            }
         }, 1000);
     }
     else if (!activeIn.get())
