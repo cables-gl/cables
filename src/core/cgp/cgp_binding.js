@@ -253,10 +253,10 @@ export default class Binding
         this.isValid = true;
         this.bindingInstances[inst] = o;
 
-        if (o.hasOwnProperty("resource"))
-        {
-            console.log("rrrrrr ", o.label, o.resource);
-        }
+        // if (o.hasOwnProperty("resource"))
+        // {
+        //     console.log("rrrrrr ", o.label, o.resource);
+        // }
 
         return o;
     }
