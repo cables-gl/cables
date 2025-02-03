@@ -51,5 +51,9 @@
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "exampleProjectId": "PNx2LB",
+    "docs": {
+        "ports": []
+    }
 }

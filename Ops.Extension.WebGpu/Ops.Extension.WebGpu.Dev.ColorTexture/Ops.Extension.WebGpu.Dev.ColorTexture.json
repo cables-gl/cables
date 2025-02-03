@@ -1,6 +1,6 @@
 {
-    "id": "8685cc29-ac57-44e7-b237-e51ac8598e4d",
-    "created": 1726653169519,
+    "id": "d5a7e3b8-a900-4090-8e2d-9544118bccf3",
+    "created": 1726833905711,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -8,7 +8,19 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1726653169521
+            "date": 1726833905712
+        },
+        {
+            "message": "Ops.Patch.PpWtAIo.ColorTexture renamed to Ops.Team.WebGpu.ColorTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1726836779243
+        },
+        {
+            "message": "Team.WebGpu.ColorTexture renamed to Ops.Extension.WebGpu.Dev.ColorTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1738599464510
         }
     ],
     "layout": {
@@ -36,37 +48,18 @@
                 "type": 0,
                 "name": "a",
                 "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "r 2",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "g 2",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "b 2",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "a 2",
-                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture_out",
+                "objType": "texture"
             }
         ]
-    },
-    "exampleProjectId": "1Jm1LB",
-    "docs": {
-        "ports": []
     }
 }
