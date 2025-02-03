@@ -1,0 +1,65 @@
+{
+    "id": "3a952a05-8b7b-4dab-9c08-f2c00f6cd899",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1738596528015
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1666707407047,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixelformat",
+                "subType": "number"
+            }
+        ]
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgp_webgpuop"
+    ],
+    "exampleProjectId": "08iWKB",
+    "docs": {
+        "ports": []
+    }
+}

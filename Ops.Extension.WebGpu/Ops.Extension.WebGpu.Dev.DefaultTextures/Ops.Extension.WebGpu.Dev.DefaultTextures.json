@@ -1,0 +1,43 @@
+{
+    "id": "009745ac-fc86-42ef-a26d-2d782262d339",
+    "created": 1727173067469,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1738596490753
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Texture index",
+                "values": [
+                    "Default",
+                    "Error",
+                    "Empty"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop"
+    ],
+    "exampleProjectId": "nQEVKB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Outputs textures"
+}

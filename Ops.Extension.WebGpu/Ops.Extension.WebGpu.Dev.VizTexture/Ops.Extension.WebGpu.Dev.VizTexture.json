@@ -1,0 +1,33 @@
+{
+    "id": "30527328-7d50-4220-9f88-7a0d27100345",
+    "created": 1738247518351,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1738247518352
+        },
+        {
+            "message": "Team.WebGpu.VizTexture renamed to Ops.Extension.WebGpu.Dev.VizTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1738597225580
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Texture In",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": []
+    },
+    "coreLibs": [
+        "cgp_webgpuop"
+    ]
+}

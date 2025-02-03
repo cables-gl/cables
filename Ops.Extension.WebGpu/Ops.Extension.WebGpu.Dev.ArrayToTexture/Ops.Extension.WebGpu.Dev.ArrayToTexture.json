@@ -1,0 +1,73 @@
+{
+    "id": "40391a3f-0102-4049-a6d9-86664db0aad6",
+    "created": 1733934334011,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1733934334012
+        },
+        {
+            "message": "Patch.PoJUzEw.ArrayToTexture renamed to Ops.Team.WebGpu.ArrayToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1733935473517
+        },
+        {
+            "message": "Team.WebGpu.ArrayToTexture renamed to Ops.Extension.WebGpu.Dev.ArrayToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1738597150783
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ]
+    }
+}

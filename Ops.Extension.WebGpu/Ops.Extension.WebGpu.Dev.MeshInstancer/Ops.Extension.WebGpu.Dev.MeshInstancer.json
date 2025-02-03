@@ -1,0 +1,59 @@
+{
+    "id": "daf22c14-6ba3-4c63-83d2-27e9e60d3dbf",
+    "changelog": [
+        {
+            "message": "new op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1738596580829
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1664538220050,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 2,
+                "name": "Pos Buffer"
+            },
+            {
+                "type": 0,
+                "name": "Num Instances",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Billboarding index",
+                "values": [
+                    "Off",
+                    "Spherical",
+                    "Cylindrical"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgp_webgpuop"
+    ]
+}
