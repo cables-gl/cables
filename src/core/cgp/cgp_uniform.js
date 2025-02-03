@@ -8,10 +8,14 @@ export default class Uniform extends CgUniform
         super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
         this._cgp = __shader._cgp;
 
-        if (!_value)
+        if (!_value || (_value.get && !_value.get()))
         {
             // if (this.getType() == "m4") this._value = mat4.create();
-            if (this.getType() == "t") this._value = this._cgp.getEmptyTexture();
+            if (this.getType() == "t")
+            {
+                this._value = this._cgp.getEmptyTexture();
+                console.log("TEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", this._value);
+            }
             // else if (this.getType() == "2f") this._value = [0, 0];
             // else if (this.getType() == "4f") this._value = [0, 1, 0, 1];
             // else if (this.getType() == "3f") this._value = [0, 1, 0];

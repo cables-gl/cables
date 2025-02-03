@@ -14,6 +14,7 @@ export default class Pipeline
     #bindGroups = [];
     #shaderListeners = [];
     #old = {};
+    #errorCount = 0;
 
     shaderNeedsPipelineUpdate = "";
 
@@ -111,10 +112,14 @@ export default class Pipeline
 
         if (shader.needsPipelineUpdate)
         {
-            needsRebuildReason = "mesh needs update: " + shader.needsPipelineUpdate;
+            needsRebuildReason = "shader needs update: " + shader.needsPipelineUpdate;
             shader.needsPipelineUpdate = "";
         }
-        if (mesh.needsPipelineUpdate)needsRebuildReason = "mesh needs update";
+        if (mesh.needsPipelineUpdate)
+        {
+            needsRebuildReason = "mesh needs update";
+            mesh.needsPipelineUpdate = false;
+        }
         if (this.shaderNeedsPipelineUpdate)needsRebuildReason = "shader was recompiled: " + this.shaderNeedsPipelineUpdate;
 
         if (this.#pipeCfg)
@@ -167,15 +172,15 @@ export default class Pipeline
             "cfg": this.#pipeCfg,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };
-
         if (needsRebuildReason != "")
         {
-            this.#log.log("rebuild pipe", needsRebuildReason);
+            // console.log("needsRebuildReason");
+            console.log("rebuild pipe", needsRebuildReason);
             this.#cgp.pushErrorScope("createPipeline", { "logger": this.#log });
 
             this.#bindGroups = [];
 
-            const pipeObj = this.getPipelineObject(shader, mesh);
+            this.#pipeCfg = this.getPipelineObject(shader, mesh);
 
             this.#old.device = this.#cgp.device;
             this.#old.shader = shader;
@@ -183,11 +188,11 @@ export default class Pipeline
 
             try
             {
-                this.#renderPipeline = this.#cgp.device.createRenderPipeline(pipeObj);
+                this.#renderPipeline = this.#cgp.device.createRenderPipeline(this.#pipeCfg);
             }
             catch (e)
             {
-                console.error("catc", e.message, pipeObj);
+                console.error("catc", e.message, this.#pipeCfg);
                 this.#isValid = false;
             }
 
@@ -227,12 +232,28 @@ export default class Pipeline
                 }
 
                 const bg = {
-                    "label": "label2",
+                    "label": this.#name,
                     "layout": this.bindGroupLayout,
                     "entries": bindingGroupEntries
                 };
 
-                this.#bindGroups[shader.bindingCounter] = this.#cgp.device.createBindGroup(bg);
+                try
+                {
+                    this.#bindGroups[shader.bindingCounter] = this.#cgp.device.createBindGroup(bg);
+                }
+                catch (e)
+                {
+                    this.#errorCount++;
+                    if (this.#errorCount == 3) console.log("stopping error logging for cgp pipeline");
+                    if (this.#errorCount >= 3) return;
+
+                    console.log(bg);
+                    console.error(e);
+                    // console.log(shader);
+                    console.log("error mesh:", this.#name);
+
+                }
+
             }
 
             this._bindUniforms(shader, shader.bindingCounter);

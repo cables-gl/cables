@@ -143,7 +143,7 @@ class CGState extends Events
      * @param {number} h
      * @param {boolean} ignorestyle
      */
-    setSize(w, h, ignorestyle)
+    setSize(w, h, ignorestyle = false)
     {
         this.cgCanvas.setSize(w, h, ignorestyle);
     }

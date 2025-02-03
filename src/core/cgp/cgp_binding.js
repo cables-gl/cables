@@ -121,6 +121,7 @@ export default class Binding
         if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
 
         str += "// " + this.uniforms.length + " uniforms\n";
+        // if (this.#options.define) str += "#ifdef " + this.#options.define + "\n";
 
         if (this.isStruct())
         {
@@ -128,9 +129,11 @@ export default class Binding
             str += "{\n";
             for (let i = 0; i < this.uniforms.length; i++)
             {
+
                 str += "    " + this.uniforms[i].name + ": " + this.uniforms[i].getWgslTypeStr();
                 if (i != this.uniforms.length - 1)str += ",";
                 str += "\n";
+
             }
             str += "};\n";
         }
@@ -151,6 +154,8 @@ export default class Binding
         else str += "var ";
 
         str += name + ": " + typeStr + ";\n";
+
+        // if (this.#options.define) str += "#endif\n";
 
         return str;
     }
@@ -206,6 +211,7 @@ export default class Binding
         {
             if (this.uniforms[0].getValue() && this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
             else o.resource = this.#cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
+
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
@@ -218,6 +224,7 @@ export default class Binding
             };
 
             if (this.uniforms[0].getValue())
+            {
                 if (!this.uniforms[0].getValue().getSampler)
                 {
                     this._log.error("uniform texture does not have function getSampler... not a WebGpu Texture?");
@@ -226,8 +233,11 @@ export default class Binding
                 {
                     smplDesc = this.uniforms[0].getValue().getSampler();
                     const sampler = this.uniforms[0]._cgp.device.createSampler(smplDesc);
-                    o.resource = sampler;
+                    if (sampler)o.resource = sampler;
+
                 }
+
+            }
         }
         else
         {
@@ -242,6 +252,11 @@ export default class Binding
 
         this.isValid = true;
         this.bindingInstances[inst] = o;
+
+        if (o.hasOwnProperty("resource"))
+        {
+            console.log("rrrrrr ", o.label, o.resource);
+        }
 
         return o;
     }

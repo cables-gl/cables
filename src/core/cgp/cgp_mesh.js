@@ -1,30 +1,28 @@
 import { Logger } from "cables-shared-client";
 import Pipeline from "./cgp_pipeline.js";
+import CgMesh from "../cg/cg_mesh.js";
 
-export default class Mesh
+export default class Mesh extends CgMesh
 {
     #log = new Logger("cgl_mesh");
-    #needsPipelineUpdate = false;
+    needsPipelineUpdate = false;
 
     constructor(_cgp, __geom)
     {
+        super();
+
         this._cgp = _cgp;
         this._geom = null;
         this.numIndex = 0;
         this.instances = 1;
 
-        this._pipe = new Pipeline(this._cgp, "new mesh");
+        this._pipe = new Pipeline(this._cgp, "new mesh " + __geom.name);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
         this._attributes = [];
 
         if (__geom) this.setGeom(__geom);
-    }
-
-    get needsPipelineUpdate()
-    {
-        return this.#needsPipelineUpdate;
     }
 
     _createBuffer(device, data, usage)
@@ -51,7 +49,7 @@ export default class Mesh
      */
     setGeom(geom, removeRef)
     {
-        this.#needsPipelineUpdate = true;
+        this.needsPipelineUpdate = true;
         this._geom = geom;
         this._disposeAttributes();
 
@@ -70,7 +68,7 @@ export default class Mesh
 
     _disposeAttributes()
     {
-        this.#needsPipelineUpdate = true;
+        this.needsPipelineUpdate = true;
         for (let i = 0; i < this._attributes.length; i++)
         {
             this._attributes[i].buffer.destroy();

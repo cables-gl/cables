@@ -3,6 +3,7 @@ import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { Context } from "./cgl_state.js";
+import CgMesh from "../cg/cg_mesh.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -22,7 +23,7 @@ MESH.lastMesh = null;
  * }
  *
  */
-class Mesh
+class Mesh extends CgMesh
 {
 
     /** @type {Geometry} */
@@ -35,6 +36,7 @@ class Mesh
      */
     constructor(_cgl, __geom, _options)
     {
+        super();
         this._cgl = _cgl;
 
         let options = _options || {};
@@ -53,7 +55,6 @@ class Mesh
         this.opId = options.opId || "";
         this._preWireframeGeom = null;
         this.addVertexNumbers = false;
-        this._name = "unknown";
 
         this.feedBackAttributes = [];
         this.setGeom(__geom);
