@@ -57,5 +57,9 @@
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "exampleProjectId": "V2a3LB",
+    "docs": {
+        "ports": []
+    }
 }
