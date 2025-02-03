@@ -12,7 +12,7 @@ const
 op.onAnimFrame = render;
 hdpi.onChange = updateHdpi;
 
-const cgl = op.patch.cgl;
+const cgl = op.patch.cg = op.patch.cgl;
 let rframes = 0;
 let rframeStart = 0;
 let timeOutTest = null;

@@ -23,7 +23,6 @@
     },
     "summary": "Get a number variable value at time of trigger",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
@@ -38,13 +37,8 @@
         {
             "message": "cloned op from Ops.Vars.VarGetNumber_v2",
             "author": "pandur",
-            "date": 1682433539531
-        },
-        {
-            "message": "Ops.Patch.P2dk___Nu.TriggerVarGetNumber renamed to Ops.Vars.TriggerVarGetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1682434069596
+            "date": 1682433539531,
+            "type": "new"
         }
     ]
 }

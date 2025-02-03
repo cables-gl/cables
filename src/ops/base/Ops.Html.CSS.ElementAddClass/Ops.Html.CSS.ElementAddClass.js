@@ -1,4 +1,4 @@
-const inEle = op.inObject("HTML Element");
+const inEle = op.inObject("HTML Element", null, "element");
 const inClassName = op.inString("Classname");
 const outClassList = op.outArray("Classes");
 
