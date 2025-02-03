@@ -53,7 +53,9 @@ function init()
                 "hostname": serverHostname.get(),
                 "secure": serverSecure.get(),
                 "port": serverPort.get(),
-                "path": serverPath.get()
+                "path": serverPath.get(),
+                "autoReconnect":true,
+                autoReconnectOptions:{initialDelay:1000,randomness:0,multiplier:1}
             });
             socket.allowSend = allowSend.get();
             socket.channelName = channelName.get();

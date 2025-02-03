@@ -31,6 +31,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1727880750822
+        },
+        {
+            "message": "Extension.SocketCluster.SocketCluster_v2 renamed to Ops.Extension.SocketCluster.SocketClusterClient_v2",
+            "type": "rename",
+            "author": "",
+            "date": 1738579180820
         }
     ],
     "authorName": "stephan",
