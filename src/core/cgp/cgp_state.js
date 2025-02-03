@@ -532,7 +532,7 @@ class WebGpuContext extends CGState
                 }, mimeType, quality);
             }
 
-        }, 100); // todo remove timeout, implement renderOneFrame as in cgl
+        }, 400); // todo remove timeout, implement renderOneFrame as in cgl
     }
 
 }
