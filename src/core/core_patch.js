@@ -174,6 +174,7 @@ class Patch extends Events
         return this._renderOneFrame;
     }
 
+    /** @deprecated */
     renderOneFrame()
     {
         this._paused = true;

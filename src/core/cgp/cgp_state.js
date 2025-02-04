@@ -520,19 +520,15 @@ class WebGpuContext extends CGState
      */
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
-
-        setTimeout(() =>
+        if (this.canvas && this.canvas.toBlob)
         {
-            if (this.canvas && this.canvas.toBlob)
+            this.canvas.toBlob((blob) =>
             {
-                this.canvas.toBlob((blob) =>
-                {
-                    if (cb) cb(blob);
-                    else this._log.log("no screenshot callback...");
-                }, mimeType, quality);
-            }
+                if (cb) cb(blob);
+                else this._log.log("no screenshot callback...");
+            }, mimeType, quality);
+        }
 
-        }, 400); // todo remove timeout, implement renderOneFrame as in cgl
     }
 
 }
