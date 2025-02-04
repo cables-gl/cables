@@ -82,5 +82,9 @@
     "license": "MIT",
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "exampleProjectId": "J0HjQB",
+    "docs": {
+        "ports": []
+    }
 }
