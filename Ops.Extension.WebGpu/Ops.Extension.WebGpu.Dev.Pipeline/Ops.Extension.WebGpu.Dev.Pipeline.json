@@ -1,0 +1,42 @@
+{
+    "id": "0000d68b-b85f-4493-b8d6-4a2b76e25ab6",
+    "created": 1726132830007,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1726132830009
+        },
+        {
+            "message": "Team.WebGpu.Pipeline renamed to Ops.Extension.WebGpu.Dev.Pipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1738674134484
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Pipeline"
+            },
+            {
+                "type": 5,
+                "name": "Shader Suurce"
+            }
+        ]
+    }
+}

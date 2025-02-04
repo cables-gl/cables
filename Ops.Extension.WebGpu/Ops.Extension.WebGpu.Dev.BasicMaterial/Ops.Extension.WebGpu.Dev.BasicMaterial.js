@@ -50,11 +50,12 @@ inTrigger.onTriggered = () =>
         const binSampler = new CGP.Binding(cgp, "sampler", { "stage": "frag", "shader": shader, "define": "HAS_TEXTURE" });
         binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTex));
 
-        // const bindarr = new CGP.Binding(cgp, "arr", { "stage": "vert", "shader": shader, "bindingType": "read-only-storage" });
-        // bindarr.addUniform(new CGP.Uniform(shader, "f[]", "arr", [
-        //       0, 0.25, 0, 0,
-        //     -0.5, 0, 0, 0,
-        //      0.5, 0, 0, 0,]));
+        // todo remove and move into meshinstancer shader module!
+        const bindarr = new CGP.Binding(cgp, "arr", { "stage": "vert", "shader": shader, "bindingType": "read-only-storage" });
+        bindarr.addUniform(new CGP.Uniform(shader, "f[]", "arr", [
+              0, 0.25, 0, 0,
+            -0.5, 0, 0, 0,
+             0.5, 0, 0, 0,]));
 
         const binTexMask = new CGP.Binding(cgp, "texMask", { "shader": shader, "stage": "frag", "define": "HAS_MASK_TEXTURE" });
         const uniTexMask = new CGP.Uniform(shader, "t", "ourTextureMask", inTexMask);
