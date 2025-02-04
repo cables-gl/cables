@@ -155,6 +155,7 @@ export default class Shader extends CgShader
         for (let i = 0; i < this._defines.length; i++)
             defs[this._defines[i][0]] = this._defines[i][1] || true;
 
+        // let src = this._src;
         let src = preproc(this._src, defs);
 
         let bindingsHeadVert = "";
