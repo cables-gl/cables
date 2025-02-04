@@ -57,5 +57,9 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "FM4hQB",
+    "docs": {
+        "ports": []
+    }
 }

@@ -1,14 +1,8 @@
 const
     inTrigger = op.inTrigger("Render"),
     inAttr = op.inSwitch("Attribute", ["Position", "TexCoords", "Normals", "Normal Mat", "Tangents", "BiTangents"], "Normals"),
-
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1),
     next = op.outTrigger("Next");
 
-r.setUiAttribs({ "colorPick": true });
 
 let shader = null;
 

@@ -2,7 +2,7 @@ const
     inTrigger = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inPosBuff = op.inObject("Pos Buffer"),
-    inInstances = op.inInt("Num Instances", 1),
+    inInstances = op.inInt("Num Instances", 0),
     inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next");

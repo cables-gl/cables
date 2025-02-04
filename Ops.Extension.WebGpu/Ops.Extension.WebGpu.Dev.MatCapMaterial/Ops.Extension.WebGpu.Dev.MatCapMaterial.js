@@ -39,19 +39,20 @@ inTrigger.onTriggered = () =>
         shader.setSource(attachments.mat_wgsl);
         shader.addUniformFrag("4f", "color", r, g, b, a);
         shader.addUniformFrag("4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY);
+        updateDefines();
 
-        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag" });
+        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag","define":"HAS_TEXTURE" });
         binTex.addUniform(new CGP.Uniform(shader, "t", "ourTexture", inTex));
 
-        const binTexDiff = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag" });
+        const binTexDiff = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag","define":"HAS_TEXTURE_DIFFUSE" });
         binTexDiff.addUniform(new CGP.Uniform(shader, "t", "texDiffuse", inTextureDiffuse));
 
-        const binSampler = new CGP.Binding(cgp, "sampler", { "shader": shader, "stage": "frag" });
+        const binSampler = new CGP.Binding(cgp, "sampler", { "shader": shader, "stage": "frag","define":"HAS_TEXTURE" });
         binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler"));
 
         console.log(binSampler.getBindingGroupLayoutEntry());
 
-        updateDefines();
+
     }
 
     cgp.pushShader(shader);
