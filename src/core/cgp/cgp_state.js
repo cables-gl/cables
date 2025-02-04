@@ -5,6 +5,7 @@ import Shader from "./cgp_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 import Texture from "./cgp_texture.js";
 import CgTexture from "../cg/cg_texture.js";
+import Patch from "../core_patch.js";
 
 // https://github.com/greggman/webgpu-utils
 // https://developer.chrome.com/blog/from-webgl-to-webgpu/
@@ -20,7 +21,7 @@ class WebGpuContext extends CGState
 {
 
     /**
-     * @param {CABLES.Patch} _patch
+     * @param {Patch} _patch
      */
     constructor(_patch)
     {

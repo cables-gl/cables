@@ -2,7 +2,7 @@ import { Logger } from "cables-shared-client";
 import Pipeline from "./cgp_pipeline.js";
 import CgMesh from "../cg/cg_mesh.js";
 
-export default class Mesh extends CgMesh
+export default class CgpMesh extends CgMesh
 {
     #log = new Logger("cgl_mesh");
     needsPipelineUpdate = false;

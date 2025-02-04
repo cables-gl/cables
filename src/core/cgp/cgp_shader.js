@@ -5,7 +5,7 @@ import { CgShader } from "../cg/cg_shader.js";
 import Binding from "./cgp_binding.js";
 import { WebGpuContext } from "./cgp_state.js";
 
-export default class Shader extends CgShader
+export default class CgpShader extends CgShader
 {
 
     /**
@@ -35,8 +35,14 @@ export default class Shader extends CgShader
         this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "stage": "vert", "bindingType": "uniform", "index": this._bindingIndexCount++ });
         this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "stage": "frag", "bindingType": "uniform", "index": this._bindingIndexCount++ });
         this.defaultBindingComp = new Binding(_cgp, "computeUniforms", { "bindingType": "uniform", "index": this._bindingIndexCount++ });
+
+        /** @type {Array<Binding>} */
         this.bindingsFrag = [this.defaultBindingFrag];
+
+        /** @type {Array<Binding>} */
         this.bindingsVert = [this.defaultBindingVert];
+
+        /** @type {Array<Binding>} */
         this.bindingsComp = [this.defaultBindingComp];
 
         if (!this.compute)
@@ -158,6 +164,10 @@ export default class Shader extends CgShader
         // let src = this._src;
         let src = preproc(this._src, defs);
 
+        let strDefs = "";
+        for (let i = 0; i < this._defines.length; i++)
+            strDefs += "// #define " + this._defines[i] + "\n";
+
         let bindingsHeadVert = "";
         for (let i = 0; i < this.bindingsFrag.length; i++)
             bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
@@ -168,6 +178,8 @@ export default class Shader extends CgShader
 
         src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
         src = this._replaceMods(src);
+
+        src = strDefs + "\n" + src;
 
         return src;
     }
