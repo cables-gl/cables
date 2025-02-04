@@ -128,7 +128,7 @@ export default class Pipeline
             if (this.#pipeCfg.depthStencil.depthWriteEnabled != this.#cgp.stateDepthWrite())
             {
                 needsRebuildReason = "depth changed";
-                this.#pipeCfg.depthStencil.depthWriteEnabled = this.#cgp.stateDepthWrite();
+                this.#pipeCfg.depthStencil.depthWriteEnabled = !!this.#cgp.stateDepthWrite();
             }
 
             if (this.#pipeCfg.fragment.targets[0].blend != this.#cgp.stateBlend())
@@ -136,15 +136,6 @@ export default class Pipeline
                 needsRebuildReason = "blend changed";
                 this.#pipeCfg.fragment.targets[0].blend = this.#cgp.stateBlend();
             }
-
-            // "fragment": {
-            //     "module": shader.gpuShaderModule,
-            //     "entryPoint": "myFSMain",
-            //     "targets": [
-            //         {
-            //             "format": this._cgp.presentationFormat,
-            //             "blend":
-            //         },
 
             if (this.#cgp.stateDepthTest() === false)
             {
@@ -372,7 +363,7 @@ export default class Pipeline
                 // "triangle-strip"
             },
             "depthStencil": {
-                "depthWriteEnabled": this.#cgp.stateDepthTest(),
+                "depthWriteEnabled": this.#cgp.stateDepthWrite(),
                 "depthCompare": this.#cgp.stateDepthFunc(),
                 "format": "depth24plus",
             },
