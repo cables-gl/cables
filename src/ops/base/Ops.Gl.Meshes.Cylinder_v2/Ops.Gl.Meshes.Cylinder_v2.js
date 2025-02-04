@@ -24,6 +24,7 @@ let needsRebuild = true;
 let mesh = null;
 
 inUVMode.setUiAttribs({ "hidePort": true });
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 op.preRender = buildMesh;
 
@@ -312,6 +313,3 @@ inUVMode.onChange = function ()
     // only calculate once, even after multiple settings could were changed
     needsRebuild = true;
 };
-
-// set lifecycle handlers
-op.onDelete = function () { if (mesh)mesh.dispose(); };

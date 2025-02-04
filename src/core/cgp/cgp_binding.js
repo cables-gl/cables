@@ -180,11 +180,7 @@ export default class Binding
 
     getBindingGroupLayoutEntry()
     {
-        if (!this.isActive)
-        {
-            console.log("not activeeee " + this.#name);
-            return null;
-        }
+        if (!this.isActive) return null;
 
         let label = "layout " + this.#name + " [";
         for (let i = 0; i < this.uniforms.length; i++) label += this.uniforms[i].getName() + ",";

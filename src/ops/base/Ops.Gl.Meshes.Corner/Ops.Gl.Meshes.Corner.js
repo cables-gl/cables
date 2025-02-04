@@ -30,7 +30,7 @@ width.onChange =
     height.onChange =
     thickness.onChange = () => { mesh = null; };
 
-// create();
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 render.onTriggered = function ()
 {
@@ -57,14 +57,7 @@ function create()
 
     geom.vertices.length = 0;
     geom.vertices.push(
-        x, y, 0,
-        x + w, y, 0,
-        x + w, y + h, 0,
-        x, y + h, 0,
-        x - th, y, 0,
-        x + w + th, y - th, 0,
-        x + w, y + h + th, 0,
-        x - th, y + h + th, 0
+        x, y, 0, x + w, y, 0, x + w, y + h, 0, x, y + h, 0, x - th, y, 0, x + w + th, y - th, 0, x + w, y + h + th, 0, x - th, y + h + th, 0
     );
 
     if (geom.vertexNormals.length === 0) geom.vertexNormals = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];

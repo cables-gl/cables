@@ -30,8 +30,8 @@ mod.addUniformVert("t", "MOD_tex");
 mod.addUniformVert("t", "MOD_texPointSize");
 render.onTriggered = doRender;
 updateDefines();
-
 mod.addUniformVert("f", "MOD_texSize", 0);
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 inNorm.onChange =
     inTexPS.onChange =

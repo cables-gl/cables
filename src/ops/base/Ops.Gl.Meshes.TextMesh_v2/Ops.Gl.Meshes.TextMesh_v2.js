@@ -56,6 +56,8 @@ let mesh = null;
 let createMesh = true;
 let createTexture = true;
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 scaleText.onChange = () =>
 {
     vec3.set(vScale, scaleText.get(), scaleText.get(), scaleText.get());

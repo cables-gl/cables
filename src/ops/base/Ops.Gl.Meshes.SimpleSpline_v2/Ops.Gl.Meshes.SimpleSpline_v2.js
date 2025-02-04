@@ -31,11 +31,7 @@ texCoords.onChange =
 
 op.toWorkPortsNeedToBeLinked(inPoints);
 
-op.onDelete = () =>
-{
-    if (mesh)mesh.dispose();
-    mesh = null;
-};
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 function rebuild()
 {

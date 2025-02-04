@@ -16,6 +16,7 @@ let verts = [];
 let geom = null;
 let mesh = null;
 let needsUpdate = true;
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 flat.onChange =
 inIterations.onChange = () =>
@@ -115,6 +116,7 @@ function generate()
 
     if (iterations > 1)
     {
+
         /* Bisect each edge and move to the surface of a unit sphere */
         for (it = 0; it < iterations; it++)
         {

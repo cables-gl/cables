@@ -41,6 +41,7 @@ let shader = null;
 let needsCalc = true;
 
 render.onTriggered = renderMesh;
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 op.preRender = () =>
 {
@@ -274,8 +275,3 @@ function calcLater()
 {
     needsCalc = true;
 }
-
-op.onDelete = function ()
-{
-    if (mesh)mesh.dispose();
-};

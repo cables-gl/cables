@@ -11,7 +11,7 @@ const
 const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
-
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 sizeW.onChange =
     sizeH.onChange =
     sizeL.onChange =

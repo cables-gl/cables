@@ -20,6 +20,7 @@ let mesh = null;
 let geom = null;
 let j = 0, i = 0, idx = 0;
 let needsUpdate = true;
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 rings.onChange =
 sides.onChange =

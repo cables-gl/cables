@@ -37,6 +37,8 @@ seed.onChange =
 
 exe.onTriggered = doRender;
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 function doRender()
 {
     let shader = cgl.getShader();
