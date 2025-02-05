@@ -54,6 +54,7 @@ if (op.patch.config.glCanvasId)
     console.log("webgpu canvas container via glCanvasId");
     canvasId = op.patch.config.glCanvasId;
     container = document.getElementById(canvasId).parentElement;
+    console.log(container);
 }
 
 container.appendChild(canvas);
@@ -86,16 +87,13 @@ op.patch.cgCanvas = new CABLES.CG.CgCanvas(
 function setUnSupported(msg)
 {
     if (!CABLES.UI)
-        op.logError("Your browser does not support WebGPU: " + msg);
+        op.logError("Your browser does not support WebGPU: " + (msg || ""));
 
-    if (CABLES.UI)
-    {
-        container.innerHTML = "<br/><br/><br/>Your browser does not support WebGPU! " + msg;
-        container.style.color = "red";
-        container.style.textAlign = "center";
-        container.style.fontSize = "20px";
-        canvas.classList.add("unsupported");
-    }
+    container.innerHTML = "<br/><br/><br/>Sorry, your browser does not support WebGPU! " + (msg || "");
+    container.style.color = "red";
+    container.style.textAlign = "center";
+    container.style.fontSize = "20px";
+    canvas.classList.add("unsupported");
 
     supported.set(false);
 }
@@ -136,6 +134,7 @@ if (!navigator.gpu)
 {
     const warn = "Your browser does not support webGPU";
     setUnSupported();
+
 }
 
 if (navigator.gpu)
@@ -291,6 +290,7 @@ function render(b)
     //     // return;
     // }
 
+    cgp.commandEncoders = [];
     const commandEncoder = device.createCommandEncoder();
     cgp.commandEncoder = commandEncoder;
 
@@ -335,61 +335,7 @@ function render(b)
     {
         gui.patchView.patchRenderer.vizLayer.renderWebGpuPreviews(cgp);
 
-        // console.log(gui.patchView().patchRenderer.vizLayer)
-        // for(let i=0;i<cgp.canvasAttachments.length;i++)
-        // {
-        // cgp.canvasAttachments[i].render(commandEncoder,()=>
-        //     {
-        //         next2.trigger();
-        //     });
-        // }
-
-        // if(canvas2.width!=canvas.width || canvas2.height!=canvas.height)
-        // {
-        //     canvas2.style.width = canvas.width + "px";
-        //     canvas2.style.height = canvas.height + "px";
-        //     canvas2.width=canvas.width;
-        //     canvas2.height=canvas.height;
-        // }
-
-        // // cgp.renderPassDescriptor.colorAttachments[0].view = contextPrev.getCurrentTexture().createView();
-        // cgp.canvasInfo.depthTextureView = depthTexturePrev.createView();
-
-        // cgp.renderPassDescriptor = {
-        //     "label": "preview renderpass",
-        //     "colorAttachments": [
-        //         {
-        //             "view": contextPrev.getCurrentTexture().createView(),
-        //             "loadOp": "clear",
-        //             "storeOp": "store",
-        //         },
-
-        //     ],
-        //         "depthStencilAttachment": {
-        //         "view": cgp.canvasInfo.depthTextureView,
-        //         "depthClearValue": 1,
-        //         "depthLoadOp": "clear",
-        //         "depthStoreOp": "store",
-        //     },
-        // };
-
-        // // make a render pass encoder to encode render specific commands
-        // cgp.passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);
-        // cgp.textureView =  contextPrev.getCurrentTexture().createView();
-        // cgp.renderStart();
-        // next2.trigger();
-        // //   pass.setPipeline(pipeline);
-        // //   pass.draw(3);  // call our vertex shader 3 times.
-        // cgp.renderEnd();
-        // cgp.passEncoder.end();
     }
 
-    cgp.commandEncoders = [];
-
-    cgp.commandEncoders.push(commandEncoder.finish());
-
-    // renderPassDescriptor.colorAttachments[0].view =
-    //   context.getCurrentTexture().createView();
-
-    cgp.device.queue.submit(cgp.commandEncoders);
+    cgp.device.queue.submit([cgp.commandEncoder.finish()]);
 }

@@ -12,10 +12,10 @@ const
 new CABLES.WebGpuOp(op);
 
 let sizeCanvas = true;
-let colorTextureForTeapotDesc = null;
-let colorTextureForTeapot = null;
-let renderPassForTeapotDesc;
-let colorForTeapotAttachment;
+let colorTex = null;
+let colorTexture = null;
+let renderPass;
+let colorAtt;
 const teapotTextureSize = 512;
 
 let tex;
@@ -63,46 +63,46 @@ exec.onTriggered = () =>
 
         let depthTextureForTeapot = cgp.device.createTexture(depthTextureForTeapotDesc);
 
-        let depthTextureViewForTeapot = depthTextureForTeapot.createView();
+        let depthView = depthTextureForTeapot.createView();
 
-        const depthAttachmentForTeapot = {
-            "view": depthTextureViewForTeapot,
+        const depthAtt = {
+            "view": depthView,
             "depthClearValue": 1,
             "depthLoadOp": "clear",
             "depthStoreOp": "store",
             "stencilClearValue": 0,
         };
 
-        const colorTextureForTeapotDesc = {
+        const colorTex = {
             "size": [width, height, 1],
             "dimension": "2d",
             "format": "bgra8unorm",
             "usage": GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT
         };
-        colorTextureForTeapot = cgp.device.createTexture(colorTextureForTeapotDesc);
+        colorTexture = cgp.device.createTexture(colorTex);
 
-        tex.gpuTexture = colorTextureForTeapot;
-        tex.gpuTextureDescriptor = colorTextureForTeapotDesc;
+        tex.gpuTexture = colorTexture;
+        tex.gpuTextureDescriptor = colorTex;
 
-        let colorTextureForTeapotView = colorTextureForTeapot.createView();
-        colorForTeapotAttachment = {
-            "view": colorTextureForTeapotView,
+        let colorTextureView = colorTexture.createView();
+        colorAtt = {
+            "view": colorTextureView,
             "clearValue": { "r": 0, "g": 0, "b": 0, "a": 1 },
             "loadOp": inClear.get() ? "clear" : "load",
             "storeOp": "store"
         };
 
-        renderPassForTeapotDesc = {
+        renderPass = {
             "label": op.shortName,
-            "colorAttachments": [colorForTeapotAttachment],
-            "depthStencilAttachment": depthAttachmentForTeapot
+            "colorAttachments": [colorAtt],
+            "depthStencilAttachment": depthAtt
         };
 
         result.setRef(tex);
         console.log("iknit rt2");
     }
 
-    if (!renderPassForTeapotDesc)
+    if (!renderPass)
     {
         console.log("no");
         return;
@@ -112,8 +112,8 @@ exec.onTriggered = () =>
 
     const oldEnc = cgp.passEncoder;
 
-    cgp.passEncoder = commandEncoder.beginRenderPass(renderPassForTeapotDesc);
-    cgp.renderPassDescriptor = renderPassForTeapotDesc;
+    cgp.passEncoder = commandEncoder.beginRenderPass(renderPass);
+    cgp.renderPassDescriptor = renderPass;
 
     cgp.renderStart();
 
