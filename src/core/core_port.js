@@ -814,12 +814,11 @@ export class Port extends Events
 
         if (!hasTriggerPort)
         {
-            if (a) this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame",
-                () =>
-                {
-                    this.updateAnim();
-                });
-            else this._op.patch.removeEventListener(this._notriggerAnimUpdate);
+            if (a) this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
+            {
+                this.updateAnim();
+            });
+            else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.removeEventListener(this._notriggerAnimUpdate);
         }
     }
 
