@@ -70,5 +70,6 @@
     "coreLibs": [
         "cgp_webgpuop"
     ],
-    "exampleProjectId": "ALyYKB"
+    "exampleProjectId": "ALyYKB",
+    "caniusequery": "webgpu"
 }

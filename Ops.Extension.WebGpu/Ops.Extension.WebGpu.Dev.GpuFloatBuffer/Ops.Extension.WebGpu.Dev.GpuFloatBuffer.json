@@ -27,5 +27,9 @@
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "caniusequery": "webgpu",
+    "docs": {
+        "ports": []
+    }
 }

@@ -27,5 +27,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Vizualize a webgpu texture on the patchfield"
+    "summary": "Vizualize a webgpu texture on the patchfield",
+    "caniusequery": "webgpu"
 }

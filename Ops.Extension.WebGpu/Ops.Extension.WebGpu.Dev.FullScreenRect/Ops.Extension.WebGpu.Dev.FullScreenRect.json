@@ -55,5 +55,6 @@
     "exampleProjectId": "PNx2LB",
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": "webgpu"
 }

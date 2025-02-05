@@ -86,5 +86,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "WwXZKB"
+    "exampleProjectId": "WwXZKB",
+    "caniusequery": "webgpu"
 }

@@ -39,5 +39,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Outputs textures"
+    "summary": "Outputs textures",
+    "caniusequery": "webgpu"
 }
