@@ -3,21 +3,33 @@ import GPUBuffer from "./cgp_gpubuffer.js";
 import { WebGpuContext } from "./cgp_state.js";
 import Uniform from "./cgp_uniform.js";
 import Shader from "./cgp_shader.js";
+import CgUniform from "../cg/cg_uniform.js";
 
 export default class Binding
 {
     #name = "";
+    #options = {};
+
+    /** @type {WebGpuContext} */
     #cgp = null;
-    #options = null;
+
+    /** @type {Array<Uniform>} */
     uniforms = [];
+
+    /** @type {Array<GPUBuffer>} */
     cGpuBuffers = [];
+
+    /** @type {Shader} */
     shader = null;
+
     bindingInstances = [];
     stageStr = "";
     bindingType = "uniform";
     isValid = true;
     changed = 0;
     #index = -1;
+
+    define = "";
 
     /**
      * Description
@@ -33,6 +45,7 @@ export default class Binding
         this.#name = name;
         this.#cgp = cgp;
         this.#options = options;
+        this.define = options.define || "";
         this.stageStr = options.stage;
         if (options.bindingType) this.bindingType = options.bindingType; // "uniform", "storage", "read-only-storage",
         if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
@@ -118,10 +131,15 @@ export default class Binding
         let typeStr = "strct_" + this.#name;
         let name = this.#name;
 
+        if (!this.isActive)
+        {
+            str += "// " + typeStr + " " + this.#name + ": excluded because define " + this.#options.define + "\n";
+            return str;
+        }
+
         if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
 
         str += "// " + this.uniforms.length + " uniforms\n";
-        // if (this.#options.define) str += "#ifdef " + this.#options.define + "\n";
 
         if (this.isStruct())
         {
@@ -162,6 +180,8 @@ export default class Binding
 
     getBindingGroupLayoutEntry()
     {
+        if (!this.isActive) return null;
+
         let label = "layout " + this.#name + " [";
         for (let i = 0; i < this.uniforms.length; i++) label += this.uniforms[i].getName() + ",";
         label += "]";
@@ -190,8 +210,19 @@ export default class Binding
         return o;
     }
 
-    getBindingGroupEntry(gpuDevice, inst)
+    get isActive()
     {
+        if (!this.define) return true;
+        if (this.define && !this.shader.hasDefine(this.define)) return false;
+        return true;
+    }
+
+    /**
+     * @param {number} inst
+     */
+    getBindingGroupEntry(inst)
+    {
+        if (!this.isActive) return null;
         this.isValid = false;
 
         const o = {
@@ -282,8 +313,10 @@ export default class Binding
      */
     update(cgp, bindingIndex)
     {
+        if (!this.isActive) return;
+
         let b = this.bindingInstances[bindingIndex];
-        if (!b) b = this.getBindingGroupEntry(cgp.device, bindingIndex);
+        if (!b) b = this.getBindingGroupEntry(bindingIndex);
 
         if (this.uniforms.length == 1 && this.uniforms[0].gpuBuffer)
         {
@@ -303,7 +336,7 @@ export default class Binding
             if (this.uniforms[0].getValue())
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
-                    this.bindingInstances[bindingIndex] = this.getBindingGroupEntry(this.uniforms[0]._cgp.device, bindingIndex);
+                    this.bindingInstances[bindingIndex] = this.getBindingGroupEntry(bindingIndex);
                 }
                 else
                 {

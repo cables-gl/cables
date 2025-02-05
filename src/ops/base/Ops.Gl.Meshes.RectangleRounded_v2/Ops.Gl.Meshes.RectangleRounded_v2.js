@@ -25,6 +25,8 @@ CORNER_PORTS.forEach((port) =>
 
 op.setPortGroup("Round Corner", CORNER_PORTS);
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 const draw = op.inValueBool("Draw", true);
 op.setPortGroup("Draw", [draw]);
 

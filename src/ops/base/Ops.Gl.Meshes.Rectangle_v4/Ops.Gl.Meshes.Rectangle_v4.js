@@ -92,11 +92,7 @@ render.onTriggered = () =>
     trigger.trigger();
 };
 
-op.onDelete = () =>
-{
-    if (mesh) mesh.dispose();
-    rebuildLater();
-};
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 function rebuild()
 {

@@ -14,6 +14,7 @@ let tc = [];
 let normals = [];
 let prim = cgl.gl.LINE_STRIP;
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 inGeom.onChange = function ()
 {
     let geom = inGeom.get();

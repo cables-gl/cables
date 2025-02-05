@@ -367,6 +367,7 @@ const parametricBodies = [
         "displaceV": 0
     },
     {
+
         /*
 a : 1.6
 b : 1.6
@@ -671,7 +672,7 @@ Object.keys(inObj).forEach((key) =>
 });
 
 shapes.set("Rectangle");
-
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 shapes.onChange = ({ value }) =>
 {
     const [shape] = parametricBodies.filter((s) => { return s.title === value; });

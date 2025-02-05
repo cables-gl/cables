@@ -5,6 +5,7 @@ import Shader from "./cgp_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
 import Texture from "./cgp_texture.js";
 import CgTexture from "../cg/cg_texture.js";
+import Patch from "../core_patch.js";
 
 // https://github.com/greggman/webgpu-utils
 // https://developer.chrome.com/blog/from-webgl-to-webgpu/
@@ -20,7 +21,7 @@ class WebGpuContext extends CGState
 {
 
     /**
-     * @param {CABLES.Patch} _patch
+     * @param {Patch} _patch
      */
     constructor(_patch)
     {
@@ -520,19 +521,15 @@ class WebGpuContext extends CGState
      */
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
-
-        setTimeout(() =>
+        if (this.canvas && this.canvas.toBlob)
         {
-            if (this.canvas && this.canvas.toBlob)
+            this.canvas.toBlob((blob) =>
             {
-                this.canvas.toBlob((blob) =>
-                {
-                    if (cb) cb(blob);
-                    else this._log.log("no screenshot callback...");
-                }, mimeType, quality);
-            }
+                if (cb) cb(blob);
+                else this._log.log("no screenshot callback...");
+            }, mimeType, quality);
+        }
 
-        }, 400); // todo remove timeout, implement renderOneFrame as in cgl
     }
 
 }

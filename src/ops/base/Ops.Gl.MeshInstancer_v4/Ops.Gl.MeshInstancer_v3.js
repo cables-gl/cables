@@ -17,7 +17,7 @@ op.setPortGroup("Limit Number of Instances", [inLimit, doLimit]);
 op.setPortGroup("Parameters", [inScales, inRot, inTranslates]);
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
-
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 geom.ignoreValueSerialize = true;
 
 const cgl = op.patch.cgl;
@@ -30,7 +30,6 @@ let
     num = 0,
     arrayChangedColor = true,
     arrayChangedTrans = true;
-
 
 const mod = new CGL.ShaderModifier(cgl, "colorArea");
 mod.addModule({
@@ -50,7 +49,6 @@ mod.addModule({
 });
 
 mod.addUniformVert("f", "MOD_scale", inScale);
-
 
 inBlendMode.onChange = updateDefines;
 doLimit.onChange = updateLimit;
@@ -133,12 +131,11 @@ function setupArray()
     {
         mat4.identity(m);
 
-        mat4.translate(m, m,
-            [
-                transforms[i * 3],
-                transforms[i * 3 + 1],
-                transforms[i * 3 + 2]
-            ]);
+        mat4.translate(m, m, [
+            transforms[i * 3],
+            transforms[i * 3 + 1],
+            transforms[i * 3 + 2]
+        ]);
 
         if (rotArr)
         {
@@ -183,12 +180,10 @@ function updateLimit()
     inLimit.setUiAttribs({ "hidePort": !doLimit.get(), "greyout": !doLimit.get() });
 }
 
-
 function doRender()
 {
     if (!mesh) return;
     if (recalc) setupArray();
-
 
     mod.bind();
 
@@ -204,7 +199,6 @@ function doRender()
     outTrigger.trigger();
 
     mod.unbind();
-
 
     // if (cgl.getShader() && cgl.getShader() != shader)
     // {

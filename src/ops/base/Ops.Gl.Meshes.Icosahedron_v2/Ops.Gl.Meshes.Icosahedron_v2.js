@@ -17,6 +17,8 @@ let mesh = null;
 
 generate();
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 render.onTriggered = function ()
 {
     if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });

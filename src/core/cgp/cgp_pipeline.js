@@ -2,6 +2,7 @@ import { Logger } from "cables-shared-client";
 import { WebGpuContext } from "./cgp_state.js";
 import Shader from "./cgp_shader.js";
 import Mesh from "./cgp_mesh.js";
+import CgpShader from "./cgp_shader.js";
 
 export default class Pipeline
 {
@@ -127,7 +128,7 @@ export default class Pipeline
             if (this.#pipeCfg.depthStencil.depthWriteEnabled != this.#cgp.stateDepthWrite())
             {
                 needsRebuildReason = "depth changed";
-                this.#pipeCfg.depthStencil.depthWriteEnabled = this.#cgp.stateDepthWrite();
+                this.#pipeCfg.depthStencil.depthWriteEnabled = !!this.#cgp.stateDepthWrite();
             }
 
             if (this.#pipeCfg.fragment.targets[0].blend != this.#cgp.stateBlend())
@@ -135,15 +136,6 @@ export default class Pipeline
                 needsRebuildReason = "blend changed";
                 this.#pipeCfg.fragment.targets[0].blend = this.#cgp.stateBlend();
             }
-
-            // "fragment": {
-            //     "module": shader.gpuShaderModule,
-            //     "entryPoint": "myFSMain",
-            //     "targets": [
-            //         {
-            //             "format": this._cgp.presentationFormat,
-            //             "blend":
-            //         },
 
             if (this.#cgp.stateDepthTest() === false)
             {
@@ -218,7 +210,8 @@ export default class Pipeline
                 {
                     if (shader.bindingsVert[i].getSizeBytes() > 0)
                     {
-                        bindingGroupEntries.push(shader.bindingsVert[i].getBindingGroupEntry(this.#cgp.device, shader.bindingCounter));
+                        const entry = shader.bindingsVert[i].getBindingGroupEntry(shader.bindingCounter);
+                        if (entry)bindingGroupEntries.push(entry);
                     }
                     else this.#log.log("shader defaultBindingVert size 0");
                 }
@@ -226,7 +219,8 @@ export default class Pipeline
                 {
                     if (shader.bindingsFrag[i].getSizeBytes() > 0)
                     {
-                        bindingGroupEntries.push(shader.bindingsFrag[i].getBindingGroupEntry(this.#cgp.device, shader.bindingCounter));
+                        const entry = shader.bindingsFrag[i].getBindingGroupEntry(shader.bindingCounter);
+                        if (entry)bindingGroupEntries.push(entry);
                     }
                     else this.#log.log("shader defaultBindingFrag size 0");
                 }
@@ -269,6 +263,10 @@ export default class Pipeline
         this.shaderNeedsPipelineUpdate = "";
     }
 
+    /**
+     * @param {CgpShader} shader
+     * @param {Mesh} mesh
+     */
     getPipelineObject(shader, mesh)
     {
         this.bindingGroupLayoutEntries = [];
@@ -283,7 +281,8 @@ export default class Pipeline
         {
             if (shader.bindingsVert[i].getSizeBytes() > 0)
             {
-                this.bindingGroupLayoutEntries.push(shader.bindingsVert[i].getBindingGroupLayoutEntry());
+                const entry = shader.bindingsVert[i].getBindingGroupLayoutEntry();
+                if (entry) this.bindingGroupLayoutEntries.push(entry);
             }
             else this.#log.log("shader defaultBindingVert size 0");
         }
@@ -292,7 +291,8 @@ export default class Pipeline
         {
             if (shader.bindingsFrag[i].getSizeBytes() > 0)
             {
-                this.bindingGroupLayoutEntries.push(shader.bindingsFrag[i].getBindingGroupLayoutEntry());
+                const entry = shader.bindingsFrag[i].getBindingGroupLayoutEntry();
+                if (entry) this.bindingGroupLayoutEntries.push(entry);
             }
             else this.#log.log("shader defaultBindingFrag size 0");
         }
@@ -363,7 +363,7 @@ export default class Pipeline
                 // "triangle-strip"
             },
             "depthStencil": {
-                "depthWriteEnabled": this.#cgp.stateDepthTest(),
+                "depthWriteEnabled": this.#cgp.stateDepthWrite(),
                 "depthCompare": this.#cgp.stateDepthFunc(),
                 "format": "depth24plus",
             },

@@ -35,6 +35,8 @@ let oldVp = [];
 updateUi();
 updateScale();
 
+op.onDelete = function () { if (mesh)mesh.dispose(); };
+
 inTexture.onChange = function ()
 {
     updateShaderLater = true;

@@ -9,7 +9,6 @@ let startSlice = op.inValueInt("Start Slice", 0);
 let trigger = op.outTrigger("trigger");
 let geomOut = op.outObject("geometry");
 
-
 height.set(2);
 slices.set(32);
 stacks.set(5);
@@ -49,6 +48,7 @@ updateMesh();
 function circleTable(n, halfCircle)
 {
     let i;
+
     /* Table size, the sign of n flips the circle direction */
     let size = Math.abs(n);
 
@@ -80,6 +80,7 @@ function circleTable(n, halfCircle)
     }
     else
     {
+
         /* Last sample is duplicate of the first (sin or cos of 2 PI) */
         sint[size] = sint[0];
         cost[size] = cost[0];
@@ -97,7 +98,6 @@ function generateCylinder(radf, height, stacks, slices)
     let z = 0;
     let zStep = height / ((stacks > 0) ? stacks : 1);
 
-
     /* top on Z-axis */
     geom.vertices[0] = 0;
     geom.vertices[1] = 0;
@@ -106,6 +106,7 @@ function generateCylinder(radf, height, stacks, slices)
     geom.vertexNormals[1] = 0;
     geom.vertexNormals[2] = -1;
     idx = 3;
+
     /* other on top (get normals right) */
     for (j = 0; j < slices; j++, idx += 3)
     {
@@ -152,7 +153,6 @@ function generateCylinder(radf, height, stacks, slices)
     geom.vertexNormals[idx] = 0;
     geom.vertexNormals[idx + 1] = 0;
     geom.vertexNormals[idx + 2] = 1;
-
 
     /* top stack */
     for (j = 0, idx = 0; j < slices; j++, idx += 2)

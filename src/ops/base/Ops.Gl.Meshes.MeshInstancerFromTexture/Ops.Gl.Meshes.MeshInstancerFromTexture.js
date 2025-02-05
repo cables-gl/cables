@@ -14,6 +14,7 @@ const
 
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
+op.onDelete = function () { if (mesh)mesh.dispose(); };
 
 geom.ignoreValueSerialize = true;
 

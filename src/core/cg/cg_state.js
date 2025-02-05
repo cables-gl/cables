@@ -1,13 +1,14 @@
 import { Events } from "cables-shared-client";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
+import Patch from "../core_patch.js";
 
 class CGState extends Events
 {
 
     /**
      * Description
-     * @param {CABLES.Patch} _patch
+     * @param {Patch} _patch
      */
     constructor(_patch)
     {
@@ -392,7 +393,6 @@ class CGState extends Events
         }
 
         const d = new Date();
-
         const dateStr = "".concat(String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate()), "_").concat(padLeft(d.getHours(), 2)).concat(padLeft(d.getMinutes(), 2)).concat(padLeft(d.getSeconds(), 2));
 
         if (!filename) filename = "cables_" + dateStr + ".png";
