@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1738247518352
-        },
-        {
-            "message": "Team.WebGpu.VizTexture renamed to Ops.Extension.WebGpu.Dev.VizTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1738597225580
         }
     ],
     "layout": {
@@ -32,5 +26,6 @@
     "exampleProjectId": "tk5uLB",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Vizualize a webgpu texture on the patchfield"
 }

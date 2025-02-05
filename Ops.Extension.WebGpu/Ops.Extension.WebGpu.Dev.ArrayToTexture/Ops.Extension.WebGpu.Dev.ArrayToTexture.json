@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1733934334012
-        },
-        {
-            "message": "Patch.PoJUzEw.ArrayToTexture renamed to Ops.Team.WebGpu.ArrayToTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1733935473517
-        },
-        {
-            "message": "Team.WebGpu.ArrayToTexture renamed to Ops.Extension.WebGpu.Dev.ArrayToTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1738597150783
         }
     ],
     "layout": {
@@ -69,5 +57,9 @@
                 "objType": "texture"
             }
         ]
+    },
+    "summary": "Convert an array of numbers to a webgpu texture",
+    "docs": {
+        "ports": []
     }
 }

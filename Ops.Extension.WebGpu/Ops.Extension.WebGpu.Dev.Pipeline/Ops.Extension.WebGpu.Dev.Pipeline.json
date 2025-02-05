@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1726132830009
-        },
-        {
-            "message": "Team.WebGpu.Pipeline renamed to Ops.Extension.WebGpu.Dev.Pipeline",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1738674134484
         }
     ],
     "layout": {
@@ -38,5 +32,9 @@
                 "name": "Shader Suurce"
             }
         ]
+    },
+    "summary": "show content of last used pipeline for debugging",
+    "docs": {
+        "ports": []
     }
 }

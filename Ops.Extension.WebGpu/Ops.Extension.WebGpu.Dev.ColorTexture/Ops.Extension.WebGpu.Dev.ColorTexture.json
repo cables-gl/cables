@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1726833905712
-        },
-        {
-            "message": "Ops.Patch.PpWtAIo.ColorTexture renamed to Ops.Team.WebGpu.ColorTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1726836779243
-        },
-        {
-            "message": "Team.WebGpu.ColorTexture renamed to Ops.Extension.WebGpu.Dev.ColorTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1738599464510
         }
     ],
     "layout": {
