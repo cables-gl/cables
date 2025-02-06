@@ -15,6 +15,12 @@
             "message": "Ops.Net.SocketCluster.SocketCluster renamed to Ops.Extension.SocketCluster.SocketCluster",
             "author": "stephan",
             "date": 1671005182035
+        },
+        {
+            "message": "Extension.SocketCluster.SocketCluster renamed to Ops.Extension.SocketCluster.SocketClusterClient",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1738833383700
         }
     ],
     "authorName": "stephan",
@@ -94,7 +100,6 @@
     },
     "summary": "connect to a socketcluster server and manage the connection",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
