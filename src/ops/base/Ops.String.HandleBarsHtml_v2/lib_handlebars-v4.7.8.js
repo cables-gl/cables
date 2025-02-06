@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 */
 
-if(!CABLES.UI)
+if(!window.CABLES || (window.CABLES && !window.CABLES.UI))
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
