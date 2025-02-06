@@ -179,5 +179,8 @@
             "src": "./lib_socketcluster-client.js",
             "type": "commonjs"
         }
+    ],
+    "libs": [
+        "socketcluster-client.js"
     ]
 }
