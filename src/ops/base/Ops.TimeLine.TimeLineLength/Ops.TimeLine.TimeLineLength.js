@@ -8,7 +8,7 @@ inLength.setUiAttribs({ "hidePort": true, "hideParam": true });
 
 if (CABLES.UI)
 {
-    inLength.set(gui.timeLine().getTimeLineLength());
+    inLength.set(gui.getTimeLineLength());
 
     gui.on("timelineControl", (cmd, l) =>
     {

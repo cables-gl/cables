@@ -8,6 +8,7 @@ import { Op } from "./core_op.js";
 /**
  * data is coming into and out of ops through input and output ports
  * @namespace external:CABLES#Port
+ * @module Port
  * @class
  * @hideconstructor
  * @param ___op
@@ -431,6 +432,8 @@ export class Port extends Events
             {
                 this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
             }
+            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+
             this.anim.sortKeys();
         }
     }
@@ -865,6 +868,7 @@ export class Port extends Events
         this.setAnimated(this._animated);
         this._onAnimToggle();
         this.setUiAttribs({ "isAnimated": this._animated });
+        this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
     }
 
     /**
