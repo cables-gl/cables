@@ -280,6 +280,19 @@ class Anim extends Events
         return time >= this.keys[0].time;
     }
 
+    remove(k)
+    {
+        for (let i = 0; i < this.keys.length; i++)
+        {
+            if (this.keys[i] == k)
+            {
+                this.keys.splice(i, 1);
+                this._updateLastIndex();
+                return;
+            }
+        }
+    }
+
     /**
      * get value at time
      * @function getValue
