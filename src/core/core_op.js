@@ -7,7 +7,6 @@ import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 import Patch from "./core_patch.js";
 
-/** Op */
 export class Op extends Events
 {
 
@@ -56,10 +55,8 @@ export class Op extends Events
         this._uiErrors = {};
         this._hasAnimPort = false;
 
-        // {
         this._shortOpName = CABLES.getShortOpName(_name);
         this.getTitle();
-        // }
 
         this.id = _id || shortId(); // instance id
         this.onAddPort = null;
