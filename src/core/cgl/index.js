@@ -1,11 +1,9 @@
-import { Framebuffer } from "./cgl_framebuffer.js";
-import { Framebuffer2 } from "./cgl_framebuffer2.js";
+import Framebuffer2 from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { ShaderLibMods } from "./cgl_shader_lib.js";
 import { UniColorShader } from "./cgl_unicolorshader.js";
-
 
 import { Shader } from "./cgl_shader.js";
 import { MESHES } from "./cgl_simplerect.js";
@@ -25,7 +23,6 @@ import { Geometry } from "../cg/cg_geom.js";
 import { BoundingBox } from "../cg/cg_boundingbox.js";
 
 const CGL = {
-    "Framebuffer": Framebuffer,
     "Framebuffer2": Framebuffer2,
     "Geometry": Geometry,
     "BoundingBox": BoundingBox,
@@ -57,5 +54,3 @@ const CGL = {
 window.CGL = CGL;
 
 export { CGL };
-
-
