@@ -1,10 +1,7 @@
-// * see framebuffer1
-
-
 import { Logger } from "cables-shared-client";
 import { Texture } from "./cgl_texture.js";
 
-export class Framebuffer2
+export default class Framebuffer2
 {
     constructor(cgl, w, h, options)
     {
@@ -66,7 +63,6 @@ export class Framebuffer2
         this.clearColors = [];
         for (let i = 0; i < this._numRenderBuffers; i++) this.clearColors.push([0, 0, 0, 1]);
 
-
         if (!options.pixelFormat)
         {
             if (options.isFloatingPointTexture) this._options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
@@ -84,8 +80,6 @@ export class Framebuffer2
                 "wrap": this._options.wrap,
             });
         }
-
-
 
         let fil = Texture.FILTER_NEAREST;
         if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
@@ -260,8 +254,6 @@ export class Framebuffer2
                 this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, internFormat, this._width, this._height);
             }
 
-
-
             this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.RENDERBUFFER, renderBuffer);
             this._colorRenderbuffers[i] = renderBuffer;
         }
@@ -282,7 +274,6 @@ export class Framebuffer2
         // depth renderbuffer
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
-
 
         let depthType = this._cgl.gl.DEPTH_COMPONENT32F;
 
@@ -318,7 +309,6 @@ export class Framebuffer2
         for (i = 0; i < this._numRenderBuffers; i++) this._drawTargetArray.push(this._cgl.gl.COLOR_ATTACHMENT0 + i);
 
         // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
-
 
         if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) this._log.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
         const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
@@ -410,7 +400,6 @@ export class Framebuffer2
 
         this._cgl.profileData.profileFramebuffer++;
 
-
         if (this._numRenderBuffers <= 1)
         {
             this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._frameBuffer);
@@ -432,7 +421,6 @@ export class Framebuffer2
                 this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);
                 this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
 
-
                 this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
                 this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
 
@@ -442,8 +430,6 @@ export class Framebuffer2
                 this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
 
                 // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, i, [0.0, 0.0, 0.0, 1.0]);
-
-
 
                 let flags = this._cgl.gl.COLOR_BUFFER_BIT;
                 if (i == 0) flags |= this._cgl.gl.DEPTH_BUFFER_BIT;
@@ -459,7 +445,6 @@ export class Framebuffer2
         // this._cgl.resetViewPort();
         this._cgl.popViewPort();
 
-
         if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)
         {
             for (let i = 0; i < this._numRenderBuffers; i++)
@@ -471,6 +456,3 @@ export class Framebuffer2
         }
     }
 }
-
-
-/// ///////

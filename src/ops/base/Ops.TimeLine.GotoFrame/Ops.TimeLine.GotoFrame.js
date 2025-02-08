@@ -1,8 +1,8 @@
-var inFrame=op.inValueInt("Frame");
+let inFrame = op.inValueInt("Frame");
 
-inFrame.onChange=function()
+inFrame.onChange = function ()
 {
-    op.patch.timer.setTime(inFrame.get()/30.0);
-    
-    if(CABLES.UI) gui.timeLine().updateTime();
+    op.patch.timer.setTime(inFrame.get() / 30.0);
+
+    // if(CABLES.UI) gui.timeLine().updateTime();
 };

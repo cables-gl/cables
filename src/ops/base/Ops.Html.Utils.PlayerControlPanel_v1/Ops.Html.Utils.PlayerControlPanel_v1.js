@@ -110,7 +110,7 @@ function updateTime()
 {
     if (CABLES.GUI && window.gui)
     {
-        let p = op.patch.timer.getTime() / gui.timeLine().getTimeLineLength();
+        let p = op.patch.timer.getTime() / gui.getTimeLineLength();
         timeline.style.width = (p * 100) + "%";
     }
 
