@@ -6,6 +6,8 @@ class Key
     {
         this.time = 0.0;
         this.value = 0.0;
+        this.selected = false;
+
         // this.ui = null;
         this.onChange = null;
         this._easing = 0;

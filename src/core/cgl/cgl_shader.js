@@ -943,7 +943,8 @@ class Shader extends CgShader
 
     dispose()
     {
-        this._cgl.gl.deleteProgram(this._program);
+        if (this._program) this._cgl.gl.deleteProgram(this._program);
+        this._program = null;
     }
 
     needsRecompile()

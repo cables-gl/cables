@@ -42,6 +42,7 @@ CABLES = Object.assign(CABLES,
     CONSTANTS.OP
 );
 
+CABLES.map = utils.map;
 export default CABLES;
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

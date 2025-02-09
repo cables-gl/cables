@@ -37,6 +37,8 @@ class Patch extends Events
         super();
 
         this._log = new Logger("core_patch", { "onError": cfg.onError });
+
+        /** @type {Array<Op>} */
         this.ops = [];
         this.settings = {};
         this.config = cfg ||
