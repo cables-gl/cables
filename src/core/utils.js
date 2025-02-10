@@ -222,7 +222,7 @@ export const clamp = function (value, min, max)
  * @return {Number} mapped value
  * @static
  */
-export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
+export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0)
 {
     if (x >= _oldMax) return _newMax;
     if (x <= _oldMin) return _newMin;

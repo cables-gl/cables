@@ -21,6 +21,7 @@ import { Op } from "./core_op.js";
 
 export class Port extends Events
 {
+    static TYPE_STRING = 1;
     constructor(___op, name, type, uiAttribs)
     {
         super();

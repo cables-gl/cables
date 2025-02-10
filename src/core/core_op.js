@@ -9,34 +9,33 @@ import Patch from "./core_patch.js";
 
 export class Op extends Events
 {
+    #log = new Logger("core_op");
 
     /**
      * Description
      * @param {Patch} _patch
      * @param {String} _name
      * @param {String} _id=null
-     */
+    */
     constructor(_patch, _name, _id = null)
     {
         super();
 
-        /**
-         * @private
-         */
-        this._log = new Logger("core_op");
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
         this.storage = {}; // op-specific data to be included in export
         this.__objName = "";
+
+        /** @type {Array<Port>} */
         this.portsOut = [];
+
+        /** @type {Array<Port>} */
         this.portsIn = [];
         this.portsInData = []; // original loaded patch data
         this.opId = ""; // unique op id
         this.uiAttribs = {};
         this.enabled = true;
 
-        /**
-         * @type {Patch}
-         */
+        /** @type {Patch} */
         this.patch = _patch;
         this._name = _name;
 
@@ -114,7 +113,7 @@ export class Op extends Events
 
     set _objName(on)
     {
-        this.__objName = on; this._log = new Logger("op " + on);
+        this.__objName = on; this.#log = new Logger("op " + on);
     }
 
     get objName()
@@ -125,12 +124,6 @@ export class Op extends Events
     get shortName()
     {
         return this._shortOpName;
-    }
-
-    clearUiAttrib(name)
-    {
-        const obj = {};
-        this.uiAttrib(obj);
     }
 
     /**
@@ -154,6 +147,7 @@ export class Op extends Events
         else this.setUiError("nomainloop", null);
     }
 
+    /** @returns {string} */
     getTitle()
     {
         if (!this.uiAttribs) return "nouiattribs" + this._name;
@@ -166,12 +160,15 @@ export class Op extends Events
         return this.uiAttribs.title || this._shortOpName;
     }
 
+    /**
+     * @param {string} title
+     */
     setTitle(title)
     {
 
         /*
-         * this._log.log("settitle", title);
-         * this._log.log(
+         * this.#log.log("settitle", title);
+         * this.#log.log(
          *     (new Error()).stack
          * );
          */
@@ -244,9 +241,9 @@ export class Op extends Events
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-            this._log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
+            this.#log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
 
-        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
+        if (typeof newAttribs != "object") this.#log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
         let changed = false;
@@ -294,6 +291,9 @@ export class Op extends Events
         return this._name;
     }
 
+    /**
+     * @param {Port} p
+     */
     addOutPort(p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
@@ -464,6 +464,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {number} type
+     */
     inMultiPort(name, type)
     {
         const p = new MultiPort(
@@ -505,6 +509,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inValueString(name, v)
     {
         const p = this.addInPort(
@@ -524,7 +532,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inString(name, v)
@@ -547,7 +555,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inValueText(name, v)
@@ -572,6 +580,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inTextarea(name, v)
     {
         const p = this.addInPort(
@@ -595,7 +607,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inStringEditor(name, v, syntax, hideFormatButton = true)
@@ -655,7 +667,7 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @param {Array} values
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inDropDown(name, values, v, noindex)
@@ -734,7 +746,7 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @param {Array} values
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inSwitch(name, values, v, noindex)
@@ -843,6 +855,8 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {String} filter
+     * @param {String} v
      * @return {Port} created port
      */
     inFile(name, filter, v)
@@ -921,6 +935,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inGradient(name, v)
     {
         const p = this.addInPort(
@@ -953,6 +971,8 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {array} v
+     * @param {number} stride
      * @return {Port} created port
      */
     inArray(name, v, stride)
@@ -963,7 +983,6 @@ export class Op extends Events
 
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 
-        // if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -981,7 +1000,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} defaultvalue
+     * @param {number} v
      * @param {number} min
      * @param {number} max
      * @return {Port} created port
@@ -1043,7 +1062,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} default value
+     * @param {number} v default value
      * @return {Port} created port
      */
     outNumber(name, v)
@@ -1068,6 +1087,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {boolean} v default value
      * @return {Port} created port
      */
     outBool(name, v)
@@ -1345,7 +1365,7 @@ export class Op extends Events
 
     log()
     {
-        this._log.log(...arguments);
+        this.#log.log(...arguments);
     }
 
     /**
@@ -1353,12 +1373,12 @@ export class Op extends Events
      */
     error()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     logError()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     /**
@@ -1366,12 +1386,12 @@ export class Op extends Events
      */
     warn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     logWarn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     /**
@@ -1379,12 +1399,12 @@ export class Op extends Events
      */
     verbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     logVerbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     profile()
@@ -1436,7 +1456,7 @@ export class Op extends Events
         return false;
 
         /*
-         * this._log.log("instanced", this.patch.instancing.numCycles());
+         * this.#log.log("instanced", this.patch.instancing.numCycles());
          * if (this.patch.instancing.numCycles() === 0) return false;
          */
 
@@ -1520,7 +1540,7 @@ export class Op extends Events
     {
         //         if(this.isInstanced)
         //         {
-        //             this._log.log('cancel instancing');
+        //             this.#log.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
@@ -1537,7 +1557,7 @@ export class Op extends Events
         //                 {
         //
         //                     var i=0;
-        // // this._log.log('trigger',this._instances.length);
+        // // this.#log.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //
@@ -1552,7 +1572,7 @@ export class Op extends Events
         {
             const port = this.getPortByName(i);
             if (port) port.set(obj[i]);
-            else this._log.warn("op.setValues: port not found:", i);
+            else this.#log.warn("op.setValues: port not found:", i);
         }
     }
 
@@ -1586,7 +1606,7 @@ export class Op extends Events
     // todo: remove
     setError(id, txt)
     {
-        this._log.warn("old error message op.error() - use op.setUiError()");
+        this.#log.warn("old error message op.error() - use op.setUiError()");
     }
 
     /**
@@ -1616,7 +1636,7 @@ export class Op extends Events
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else this._log.error("setPortGroup: invalid port!");
+                else this.#log.error("setPortGroup: invalid port!");
         }
     }
 
