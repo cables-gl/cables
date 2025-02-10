@@ -1,4 +1,3 @@
-
 /**
  * @namespace external:CABLES#Utils
  */
@@ -6,6 +5,7 @@
 import { CONSTANTS } from "./constants.js";
 
 const UTILS = {};
+
 /**
  * Merge two Float32Arrays.
  * @function float32Concat
@@ -67,7 +67,6 @@ export const shuffleArray = function (array)
     return array;
 };
 
-
 /**
  * generate a short "relativly unique" id
  * @function shortId
@@ -86,7 +85,6 @@ const _shortId = function ()
     return str;
 };
 export const shortId = _shortId;
-
 
 /**
  * generate a UUID
@@ -109,8 +107,6 @@ const _uuid = function ()
 export const uuid = _uuid;
 export const generateUUID = _uuid;
 
-
-
 export function cleanJson(obj)
 {
     for (const i in obj)
@@ -123,7 +119,6 @@ export function cleanJson(obj)
 
     return obj;
 }
-
 
 /**
  * @see http://stackoverflow.com/q/7616461/940217
@@ -199,7 +194,6 @@ export const smootherStep = function (perc)
     perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
     return perc;
 };
-
 
 /**
  * clamp number / make sure its between min/max
@@ -280,7 +274,6 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
  */
 Math.randomSeed = 1;
 
-
 Math.setRandomSeed = function (seed)
 {
     // https://github.com/cables-gl/cables_docs/issues/622
@@ -291,7 +284,6 @@ Math.setRandomSeed = function (seed)
         Math.randomSeed = Math.seededRandom() * 9737333;
     }
 };
-
 
 /**
  * generate a seeded random number
@@ -313,7 +305,6 @@ Math.seededRandom = function (max, min)
 
     return min + rnd * (max - min);
 };
-
 
 // ----------------------------------------------------------------
 
@@ -400,8 +391,6 @@ String.prototype.contains = String.prototype.contains || function (searchStr)
     return this.indexOf(searchStr) > -1;
 };
 
-
-
 // ----------------------------------------------------------------
 
 /**
@@ -442,7 +431,6 @@ export const copyArray = function (src, dst)
 
     return dst;
 };
-
 
 /**
  * return the filename part of a url without extension
@@ -502,7 +490,6 @@ export const filename = function (url)
 
     return name || "";
 };
-
 
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {
@@ -616,7 +603,6 @@ export const request = function (options)
     }
 };
 
-
 export const keyCodeToName = function (keyCode)
 {
     if (!keyCode && keyCode !== 0) return "Unidentified";
@@ -677,7 +663,6 @@ window.performance = window.performance || {
     },
 };
 
-
 export const logErrorConsole = function (initiator)
 {
     CABLES.errorConsole = CABLES.errorConsole || { "log": [] };
@@ -724,9 +709,7 @@ export const logErrorConsole = function (initiator)
         logHtml += "<br/>";
     }
 
-
     CABLES.errorConsole.ele.innerHTML = logHtml;
 };
-
 
 export { UTILS };
