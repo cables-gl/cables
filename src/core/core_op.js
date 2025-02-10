@@ -1574,9 +1574,9 @@ export class Op extends Events
      * @function setUiError
      * @instance
      * @memberof Op
-     * @param {id} error id
-     * @param {txt} text message
-     * @param {level} level
+     * @param {string} id error id
+     * @param {string} txt text message
+     * @param {Integer} level level
      */
     setUiError(id, txt, level)
     {
@@ -1594,7 +1594,7 @@ export class Op extends Events
      * @function
      * @instance
      * @memberof Op
-     * @param {boolean}
+     * @param {boolean} b
      */
     setEnabled(b)
     {
