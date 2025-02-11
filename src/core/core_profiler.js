@@ -1,7 +1,12 @@
+import Patch from "./core_patch.js";
 import { now } from "./timer.js";
 
-class Profiler
+export default class Profiler
 {
+
+    /**
+     * @param {Patch} patch
+     */
     constructor(patch)
     {
         this.startFrame = patch.getFrameNum();
@@ -90,5 +95,3 @@ class Profiler
         }
     }
 }
-
-export { Profiler };

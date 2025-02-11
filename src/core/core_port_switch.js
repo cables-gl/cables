@@ -1,8 +1,6 @@
+import Port from "./core_port.js";
 
-import { Port } from "./core_port.js";
-
-
-class SwitchPort extends Port
+export default class SwitchPort extends Port
 {
     constructor(__parent, name, type, uiAttribs, indexPort)
     {
@@ -69,5 +67,3 @@ class SwitchPort extends Port
         }
     }
 }
-
-export { SwitchPort };

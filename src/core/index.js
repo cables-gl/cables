@@ -1,12 +1,12 @@
 import * as utils from "./utils.js";
 import Anim from "./anim.js";
-import { Link } from "./core_link.js";
-import { Port } from "./core_port.js";
-import { Op } from "./core_op.js";
+import Link from "./core_link.js";
+import Port from "./core_port.js";
+import Op from "./core_op.js";
 import { EMBED } from "./embedding.js";
-import { Profiler } from "./core_profiler.js";
+import Profiler from "./core_profiler.js";
 import Patch from "./core_patch.js";
-import { LoadingStatus } from "./loadingstatus.js";
+import LoadingStatus from "./loadingstatus.js";
 import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";

@@ -1,13 +1,14 @@
 import { Events, Logger } from "cables-shared-client";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
-import { LoadingStatus } from "./loadingstatus.js";
+import LoadingStatus from "./loadingstatus.js";
 import { Timer } from "./timer.js";
-import { Link } from "./core_link.js";
-import { Profiler } from "./core_profiler.js";
+import Link from "./core_link.js";
+import Profiler from "./core_profiler.js";
 import { Context } from "./cgl/cgl_state.js";
 import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
-import { Op } from "./core_op.js";
+import Op from "./core_op.js";
+import Port from "./core_port.js";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -882,7 +883,7 @@ class Patch extends Events
                         const port = op.getPort(objPort.name);
 
                         if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
-                        if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
+                        if (port && objPort.value !== undefined && port.type != Port.TYPE_TEXTURE) port.set(objPort.value);
 
                         if (port)
                         {
@@ -921,7 +922,7 @@ class Patch extends Events
                                 op.preservedPortTitles[port2.name] = port2.uiAttribs.title;
                             }
 
-                            if (port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && objPort.hasOwnProperty("value"))
+                            if (port2.type != Port.TYPE_TEXTURE && objPort.hasOwnProperty("value"))
                                 port2.set(obj.ops[iop].portsOut[ipo].value);
 
                             if (objPort.expose) port2.setUiAttribs({ "expose": true });
@@ -1235,10 +1236,10 @@ class Patch extends Events
         if (t === undefined) return this._variables;
 
         const vars = [];
-        if (t == CABLES.OP_PORT_TYPE_STRING) t = "string";
-        if (t == CABLES.OP_PORT_TYPE_VALUE) t = "number";
-        if (t == CABLES.OP_PORT_TYPE_ARRAY) t = "array";
-        if (t == CABLES.OP_PORT_TYPE_OBJECT) t = "object";
+        if (t == Port.TYPE_STRING) t = "string";
+        if (t == Port.TYPE_VALUE) t = "number";
+        if (t == Port.TYPE_ARRAY) t = "array";
+        if (t == Port.TYPE_OBJECT) t = "object";
 
         for (const i in this._variables)
         {

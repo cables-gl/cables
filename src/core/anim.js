@@ -1,8 +1,8 @@
 import { Events, Logger } from "cables-shared-client";
 import { uuid } from "./utils.js";
 import AnimKey from "./anim_key.js";
-import { Op } from "./core_op.js";
-import { Port } from "./core_port.js";
+import Op from "./core_op.js";
+import Port from "./core_port.js";
 
 /**
  * Keyframed interpolated animation.

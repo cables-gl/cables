@@ -39,12 +39,9 @@ const ShaderGraphProgram = class extends Events
             console.warn("HAS NO SGOP!", op);
             return;
         }
-        // if (!op.sgOp.info) return;
-
 
         if (this._opIdsHeadFuncSrc[op.id])
         {
-        // console.log("already exist",op.name,op.id);
             return;
         }
         this._opIdsHeadFuncSrc[op.id] = true;
@@ -59,7 +56,6 @@ const ShaderGraphProgram = class extends Events
         //     src = this.replaceId(op, src);
         //     this._headFuncSrc += src;
         // }
-
 
         if (op.sgOp.info)
         {
@@ -204,7 +200,6 @@ const ShaderGraphProgram = class extends Events
                 count++;
         return count;
     }
-
 
     _getPortParamStr(p, convertTo)
     {

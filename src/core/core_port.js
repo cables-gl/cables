@@ -1,8 +1,8 @@
 import { Events, Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
-import { Link } from "./core_link.js";
-import { Op } from "./core_op.js";
+import Link from "./core_link.js";
+import Op from "./core_op.js";
 import Anim from "./anim.js";
 
 /**
@@ -19,9 +19,17 @@ import Anim from "./anim.js";
  * const myPort=op.inString("String Port");
  */
 
-export class Port extends Events
+export default class Port extends Events
 {
-    static TYPE_STRING = 1;
+    static TYPE_VALUE = 0;
+    static TYPE_NUMBER = 0;
+    static TYPE_FUNCTION = 1;
+    static TYPE_TRIGGER = 1;
+    static TYPE_OBJECT = 2;
+    static TYPE_TEXTURE = 2;
+    static TYPE_ARRAY = 3;
+    static TYPE_DYNAMIC = 4;
+    static TYPE_STRING = 5;
 
     #oldAnimVal = -5711;
 
@@ -51,7 +59,7 @@ export class Port extends Events
         this.value = 0.0;
 
         this.name = name;
-        this.type = type || CONSTANTS.OP.OP_PORT_TYPE_VALUE;
+        this.type = type || Port.TYPE_VALUE;
         this.uiAttribs = uiAttribs || {};
 
         /** @type {Anim} */
@@ -320,12 +328,12 @@ export class Port extends Events
         if (v === undefined) v = null;
 
         if (CABLES.UI && CABLES.UI.showDevInfos)
-            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && v && !this.forceRefChange)
+            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
                 this._log.warn("object port uses .set", this.name, this.op.objName);
 
         if (this._op.enabled && !this.crashed)
         {
-            if (v !== this.value || this.changeAlways || this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE || this.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
+            if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
                 if (this._animated)
                 {
@@ -351,7 +359,7 @@ export class Port extends Events
                         this._op.patch.emitEvent("exception", ex, this._op);
                     }
 
-                    if (this._op && this._op.patch && this._op.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
+                    if (this._op && this._op.patch && this._op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
                 }
 
                 if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -400,12 +408,12 @@ export class Port extends Events
      */
     getTypeString()
     {
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) return "Number";
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) return "Trigger";
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) return "Object";
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "Dynamic";
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY) return "Array";
-        if (this.type == CONSTANTS.OP.OP_PORT_TYPE_STRING) return "String";
+        if (this.type == Port.TYPE_VALUE) return "Number";
+        if (this.type == Port.TYPE_FUNCTION) return "Trigger";
+        if (this.type == Port.TYPE_OBJECT) return "Object";
+        if (this.type == Port.TYPE_DYNAMIC) return "Dynamic";
+        if (this.type == Port.TYPE_ARRAY) return "Array";
+        if (this.type == Port.TYPE_STRING) return "String";
         return "Unknown";
     }
 
@@ -470,7 +478,7 @@ export class Port extends Events
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
         {
-            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.value && this.value.tex) {}
+            if (this.type == Port.TYPE_OBJECT && this.value && this.value.tex) {}
             else obj.value = this.value;
         }
         if (this._useVariableName) obj.useVariable = this._useVariableName;
@@ -515,8 +523,8 @@ export class Port extends Events
         }
 
         if (obj.links && obj.links.length == 0) delete obj.links;
-        if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) delete obj.value;
-        if (this.type === CONSTANTS.OP.OP_PORT_TYPE_FUNCTION && this.links.length == 0) obj = null;
+        if (this.type === Port.TYPE_FUNCTION) delete obj.value;
+        if (this.type === Port.TYPE_FUNCTION && this.links.length == 0) obj = null;
         if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
 
         // console.log(obj);
@@ -567,7 +575,7 @@ export class Port extends Events
 
         if (this.direction == CONSTANTS.PORT.PORT_DIR_IN)
         {
-            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
+            if (this.type == Port.TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
             else this.setValue(this._valueBeforeLink || null);
         }
 
@@ -781,7 +789,7 @@ export class Port extends Events
             }
             else
             {
-                if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+                if (this.type == Port.TYPE_OBJECT)
                 {
                     this._varChangeListenerId = this._variableIn.on("change", () => { this.set(null); this.set(this._variableIn.getValue()); });
                 }
@@ -810,7 +818,7 @@ export class Port extends Events
         let hasTriggerPort = false;
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
-            if (this._op.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+            if (this._op.portsIn.type == Port.TYPE_FUNCTION)
             {
                 hasTriggerPort = true;
                 break;
@@ -875,13 +883,13 @@ export class Port extends Events
 
     /**
      * <pre>
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_VALUE = 0;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_FUNCTION = 1;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT = 2;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_TEXTURE = 2;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_ARRAY = 3;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC = 4;
-     * CABLES.CONSTANTS.OP.OP_PORT_TYPE_STRING = 5;
+     * CABLES.Port.TYPE_VALUE = 0;
+     * CABLES.Port.TYPE_FUNCTION = 1;
+     * CABLES.Port.TYPE_OBJECT = 2;
+     * CABLES.Port.TYPE_TEXTURE = 2;
+     * CABLES.Port.TYPE_ARRAY = 3;
+     * CABLES.Port.TYPE_DYNAMIC = 4;
+     * CABLES.Port.TYPE_STRING = 5;
      * </pre>
      * @function getType
      * @memberof Port
@@ -1002,11 +1010,11 @@ export class Port extends Events
  */
 Port.portTypeNumberToString = function (type)
 {
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) return "value";
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) return "function";
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) return "object";
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY) return "array";
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_STRING) return "string";
-    if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
+    if (type == Port.TYPE_VALUE) return "value";
+    if (type == Port.TYPE_FUNCTION) return "function";
+    if (type == Port.TYPE_OBJECT) return "object";
+    if (type == Port.TYPE_ARRAY) return "array";
+    if (type == Port.TYPE_STRING) return "string";
+    if (type == Port.TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };

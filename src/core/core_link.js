@@ -1,7 +1,7 @@
 import { Events } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import Patch from "./core_patch.js";
-import { Port } from "./core_port.js";
+import Port from "./core_port.js";
 
 /**
  * @namespace external:CABLES#Link
@@ -9,7 +9,7 @@ import { Port } from "./core_port.js";
  * @hideconstructor
  * @class
  */
-export class Link extends Events
+export default class Link extends Events
 {
 
     /**
@@ -61,7 +61,7 @@ export class Link extends Events
 
         if (v == v) // NaN is the only JavaScript value that is treated as unequal to itself
         {
-            if (this.portIn.type != CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) this.activity();
+            if (this.portIn.type != Port.TYPE_FUNCTION) this.activity();
 
             if (this.portIn.get() !== v)
             {
@@ -103,7 +103,7 @@ export class Link extends Events
             this._patch.emitEvent("onUnLink", this.portIn, this.portOut, this);
         }
 
-        if (this.portIn && (this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT || this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY))
+        if (this.portIn && (this.portIn.type == Port.TYPE_OBJECT || this.portIn.type == Port.TYPE_ARRAY))
         {
             this.portIn.set(null);
             if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
@@ -188,12 +188,12 @@ Link.canLinkText = function (p1, p2)
         return "can not link: same direction " + txt;
     }
     if (p1.op == p2.op) return "can not link: same op";
-    if (p1.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC && p2.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC)
+    if (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)
     {
         if (p1.type != p2.type) return "can not link: different type";
     }
 
-    if (CABLES.UI && p1.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && p2.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+    if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
     {
         if (p1.uiAttribs.objType && p2.uiAttribs.objType)
             if (p1.uiAttribs.objType != p2.uiAttribs.objType)
@@ -235,7 +235,7 @@ Link.canLink = function (p1, p2)
 
     if (p1.direction == p2.direction) return false;
 
-    if (CABLES.UI && p1.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT && p2.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+    if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
     {
         if (p1.uiAttribs.objType && p2.uiAttribs.objType)
         {
@@ -245,8 +245,8 @@ Link.canLink = function (p1, p2)
         }
     }
 
-    if (p1.type != p2.type && (p1.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC && p2.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC)) return false;
-    if (p1.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC || p2.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
+    if (p1.type != p2.type && (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)) return false;
+    if (p1.type == Port.TYPE_DYNAMIC || p2.type == Port.TYPE_DYNAMIC) return true;
 
     if (p1.op == p2.op) return false;
 

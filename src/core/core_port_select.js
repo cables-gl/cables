@@ -1,6 +1,6 @@
-import { SwitchPort } from "./core_port_switch.js";
+import SwitchPort from "./core_port_switch.js";
 
-class ValueSelectPort extends SwitchPort
+export default class ValueSelectPort extends SwitchPort
 {
     setUiAttribs(newAttribs)
     {
@@ -15,5 +15,3 @@ class ValueSelectPort extends SwitchPort
         super.setUiAttribs(newAttribs);
     }
 }
-
-export { ValueSelectPort };

@@ -1,6 +1,5 @@
-
 import CgUniform from "../cg/cg_uniform.js";
-import { Port } from "../core_port.js";
+import Port from "../core_port.js";
 
 /**
  * Shader uniforms
@@ -36,8 +35,6 @@ import { Port } from "../core_port.js";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-
-
 
 // export const Uniform(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 
@@ -332,7 +329,6 @@ class Uniform extends CgUniform
         this._value = v;
     }
 
-
     updateValue3F()
     {
         if (!this._value) return;
@@ -492,7 +488,6 @@ class Uniform extends CgUniform
     }
 }
 
-
 Uniform.glslTypeString = (t) =>
 {
     if (t == "f") return "float";
@@ -513,7 +508,6 @@ Uniform.glslTypeString = (t) =>
 
     console.warn("[CGL UNIFORM] unknown glsl type string ", t);
 };
-
 
 /**
  * @function setValue
