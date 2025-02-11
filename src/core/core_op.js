@@ -10,6 +10,11 @@ import Patch from "./core_patch.js";
 export class Op extends Events
 {
     #log = new Logger("core_op");
+    #objName = "";
+    #name = "";
+    #shortOpName = "";
+
+    opId = ""; // unique op id
 
     /**
      * Description
@@ -21,9 +26,10 @@ export class Op extends Events
     {
         super();
 
+        this.#name = _name;
+
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
         this.storage = {}; // op-specific data to be included in export
-        this.__objName = "";
 
         /** @type {Array<Port>} */
         this.portsOut = [];
@@ -31,13 +37,11 @@ export class Op extends Events
         /** @type {Array<Port>} */
         this.portsIn = [];
         this.portsInData = []; // original loaded patch data
-        this.opId = ""; // unique op id
         this.uiAttribs = {};
         this.enabled = true;
 
         /** @type {Patch} */
         this.patch = _patch;
-        this._name = _name;
 
         this.preservedPortTitles = {};
         this.preservedPortValues = {};
@@ -54,7 +58,7 @@ export class Op extends Events
         this._uiErrors = {};
         this._hasAnimPort = false;
 
-        this._shortOpName = CABLES.getShortOpName(_name);
+        this.#shortOpName = CABLES.getShortOpName(_name);
         this.getTitle();
 
         this.id = _id || shortId(); // instance id
@@ -113,17 +117,18 @@ export class Op extends Events
 
     set _objName(on)
     {
-        this.__objName = on; this.#log = new Logger("op " + on);
+        this.#objName = on;
+        this.#log = new Logger("op " + on);
     }
 
     get objName()
     {
-        return this.__objName;
+        return this.#objName;
     }
 
     get shortName()
     {
-        return this._shortOpName;
+        return this.#shortOpName;
     }
 
     /**
@@ -150,14 +155,14 @@ export class Op extends Events
     /** @returns {string} */
     getTitle()
     {
-        if (!this.uiAttribs) return "nouiattribs" + this._name;
+        if (!this.uiAttribs) return "nouiattribs" + this.#name;
 
         /*
          * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
          *     this.uiAttribs.title = this._shortOpName;
          */
 
-        return this.uiAttribs.title || this._shortOpName;
+        return this.uiAttribs.title || this.#shortOpName;
     }
 
     /**
@@ -241,7 +246,7 @@ export class Op extends Events
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-            this.#log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
+            this.#log.warn("old ui error/warning attribute in " + this.#name + ", use op.setUiError !", newAttribs);
 
         if (typeof newAttribs != "object") this.#log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -288,7 +293,7 @@ export class Op extends Events
     getName()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
-        return this._name;
+        return this.#name;
     }
 
     /**
@@ -968,7 +973,6 @@ export class Op extends Events
     /**
      * create a array input port
      * @function inArray
-     * @instance
      * @memberof Op
      * @param {String} name
      * @param {array} v
@@ -1271,8 +1275,8 @@ export class Op extends Events
         if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
         if (opObj.uiAttribs.comment === null) delete opObj.uiAttribs.comment;
 
-        if (opObj.uiAttribs.title == this._shortOpName ||
-            (this.uiAttribs.title || "").toLowerCase() == this._shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
+        if (opObj.uiAttribs.title == this.#shortOpName ||
+            (this.uiAttribs.title || "").toLowerCase() == this.#shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
 
         opObj.portsIn = [];
         opObj.portsOut = [];

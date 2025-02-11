@@ -14,8 +14,6 @@ class MultiPort extends Port
         this.direction = dir;
         this._uiAttribsPorts = uiAttribsPorts;
 
-        // console.log("uiattribs", uiAttribs);
-
         const updateArray = () =>
         {
             const arr = [];

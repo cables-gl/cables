@@ -1,6 +1,7 @@
 import { Events, Logger } from "cables-shared-client";
 import { Key } from "./anim_key.js";
 import { CONSTANTS } from "./constants.js";
+import { uuid } from "./utils.js";
 
 /**
  * Keyframed interpolated animation.
@@ -58,6 +59,7 @@ class Anim extends Events
     {
         super();
         cfg = cfg || {};
+        this.id = uuid();
         this.keys = [];
         this.onChange = null;
         this.stayInTimeline = false;
@@ -113,6 +115,9 @@ class Anim extends Events
         return false;
     }
 
+    /**
+     * @param {number} time
+     */
     isRising(time)
     {
         if (this.hasEnded(time)) return false;
@@ -165,12 +170,52 @@ class Anim extends Events
         if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
     }
 
+    hasDuplicates()
+    {
+        const test = {};
+        let count = 0;
+        for (let i = 0; i < this.keys.length; i++)
+        {
+            test[this.keys[i].time] = 1;
+            count++;
+        }
+
+        const keys = Object.keys(test);
+        if (keys.length != count)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    removeDuplicates()
+    {
+        if (this.hasDuplicates())
+        {
+            this.sortKeys();
+            let count = 0;
+
+            while (this.hasDuplicates())
+            {
+                for (let i = 0; i < this.keys.length - 1; i++)
+                {
+                    if (this.keys[i].time == this.keys[i + 1].time) this.keys.splice(i, 1);
+                    count++;
+                }
+            }
+            this._updateLastIndex();
+        }
+    }
+
     getLength()
     {
         if (this.keys.length === 0) return 0;
         return this.keys[this.keys.length - 1].time;
     }
 
+    /**
+     * @param {number} time
+     */
     getKeyIndex(time)
     {
         let index = 0;
@@ -233,15 +278,22 @@ class Anim extends Events
         return found;
     }
 
-    setKeyEasing(index, e)
+    /**
+     * @param {number} index
+     * @param {number} easing
+     */
+    setKeyEasing(index, easing)
     {
         if (this.keys[index])
         {
-            this.keys[index].setEasing(e);
+            this.keys[index].setEasing(easing);
             this.emitEvent("onChange", this);
         }
     }
 
+    /**
+     * @returns {object}
+     */
     getSerialized()
     {
         const obj = {};
@@ -254,12 +306,18 @@ class Anim extends Events
         return obj;
     }
 
+    /**
+     * @param {number} time
+     */
     getKey(time)
     {
         const index = this.getKeyIndex(time);
         return this.keys[index];
     }
 
+    /**
+     * @param {number} time
+     */
     getNextKey(time)
     {
         let index = this.getKeyIndex(time) + 1;
@@ -268,18 +326,27 @@ class Anim extends Events
         return this.keys[index];
     }
 
+    /**
+     * @param {number} time
+     */
     isFinished(time)
     {
         if (this.keys.length <= 0) return true;
         return time > this.keys[this.keys.length - 1].time;
     }
 
+    /**
+     * @param {number} time
+     */
     isStarted(time)
     {
         if (this.keys.length <= 0) return false;
         return time >= this.keys[0].time;
     }
 
+    /**
+     * @param {Key} k
+     */
     remove(k)
     {
         for (let i = 0; i < this.keys.length; i++)
@@ -361,6 +428,9 @@ class Anim extends Events
         this._lastKeyIndex = this.keys.length - 1;
     }
 
+    /**
+     * @param {Key} k
+     */
     addKey(k)
     {
         if (k.time === undefined)
@@ -372,6 +442,7 @@ class Anim extends Events
             this.keys.push(k);
             if (this.onChange !== null) this.onChange();
             this.emitEvent("onChange", this);
+            this._needsSort = true;
         }
         this._updateLastIndex();
     }

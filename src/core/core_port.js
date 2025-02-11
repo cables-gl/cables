@@ -22,6 +22,9 @@ import { Op } from "./core_op.js";
 export class Port extends Events
 {
     static TYPE_STRING = 1;
+
+    #oldAnimVal = -5711;
+
     constructor(___op, name, type, uiAttribs)
     {
         super();
@@ -38,16 +41,15 @@ export class Port extends Events
         this.direction = CONSTANTS.PORT.PORT_DIR_IN;
         this.id = String(CABLES.simpleId());
 
-        /**
-         * @type {Op}
-         */
+        /** @type {Op} */
         this._op = ___op;
-
-        // this._op.get();
 
         /** @type {Array<Link>} */
         this.links = [];
+
+        /** @type {any} */
         this.value = 0.0;
+
         this.name = name;
         this.type = type || CONSTANTS.OP.OP_PORT_TYPE_VALUE;
         this.uiAttribs = uiAttribs || {};
@@ -55,7 +57,6 @@ export class Port extends Events
         /** @type {Anim} */
         this.anim = null;
 
-        this._oldAnimVal = -5711;
         this.defaultValue = null;
 
         this._uiActiveState = true;
@@ -289,7 +290,7 @@ export class Port extends Events
             if (this.value != animval)
             {
                 this.value = animval;
-                this._oldAnimVal = this.value;
+                this.#oldAnimVal = this.value;
                 this.forceChange();
             }
         }
@@ -364,12 +365,12 @@ export class Port extends Events
         {
             this.value = this.get();
 
-            if (this._oldAnimVal != this.value || this.changeAlways)
+            if (this.#oldAnimVal != this.value || this.changeAlways)
             {
-                this._oldAnimVal = this.value;
+                this.#oldAnimVal = this.value;
                 this.forceChange();
             }
-            this._oldAnimVal = this.value;
+            this.#oldAnimVal = this.value;
         }
     }
 
