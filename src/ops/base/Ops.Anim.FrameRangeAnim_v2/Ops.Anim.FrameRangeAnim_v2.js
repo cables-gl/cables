@@ -49,7 +49,7 @@ function parse()
 
     for (let i = 0; i < parts.length; i++)
     {
-        if (CABLES.UTILS.isNumeric(parts[i]))
+        if (CABLES.isNumeric(parts[i]))
         {
             frames.push(parseInt(parts[i], 10));
         }

@@ -567,13 +567,6 @@ class Patch extends Events
                     const opToDelete = this.ops[i];
                     opToDelete.removeLinks();
 
-                    if (this.onDelete)
-                    {
-                        // todo: remove
-                        this._log.warn("deprecated this.onDelete", this.onDelete);
-                        this.onDelete(opToDelete);
-                    }
-
                     this.ops.splice(i, 1);
                     opToDelete.emitEvent("delete", opToDelete);
                     this.emitEvent("onOpDelete", opToDelete, reloadingOp);

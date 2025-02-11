@@ -15,6 +15,7 @@ import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
 import AnimKey from "./anim_key.js";
+import { CGState } from "./cg/cg_state.js";
 
 window.CABLES = window.CABLES || {};
 
@@ -36,8 +37,35 @@ CABLES.internalNow = internalNow;
 CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
 
+CABLES.shortId = utils.shortId;
+CABLES.uuid = utils.uuid;
+CABLES.getShortOpName = utils.getShortOpName;
+CABLES.simpleId = utils.simpleId;
+CABLES.clamp = utils.clamp;
+CABLES.map = utils.map;
+CABLES.shuffleArray = utils.shuffleArray;
+CABLES.generateUUID = utils.generateUUID;
+CABLES.prefixedHash = utils.prefixedHash;
+CABLES.smoothStep = utils.smoothStep;
+CABLES.smootherStep = utils.smootherStep;
+CABLES.cacheBust = utils.cacheBust;
+CABLES.copyArray = utils.copyArray;
+CABLES.basename = utils.basename;
+CABLES.logStack = utils.logStack;
+CABLES.filename = utils.filename;
+CABLES.ajaxSync = utils.ajaxSync;
+CABLES.ajax = utils.ajax;
+CABLES.request = utils.request;
+CABLES.keyCodeToName = utils.keyCodeToName;
+CABLES.logErrorConsole = utils.logErrorConsole;
+CABLES.isNumeric = utils.isNumeric;
+CABLES.isArray = utils.isArray;
+CABLES.float32Concat = utils.float32Concat;
+CABLES.uniqueArray = utils.uniqueArray;
+
+CABLES.CGState = CGState;
+
 CABLES = Object.assign(CABLES,
-    utils,
     CONSTANTS.PORT,
     CONSTANTS.PACO,
     CONSTANTS.ANIM,

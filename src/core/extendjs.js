@@ -29,14 +29,14 @@ Math.setRandomSeed = function (seed)
 };
 
 /**
-     * generate a seeded random number
-     * @function seededRandom
-     * @memberof Math
-     * @param {Number} max minimum possible random number
-     * @param {Number} min maximum possible random number
-     * @return {Number} random value
-     * @static
-     */
+ * generate a seeded random number
+ * @function seededRandom
+ * @memberof Math
+ * @param {Number} max minimum possible random number
+ * @param {Number} min maximum possible random number
+ * @return {Number} random value
+ * @static
+ */
 Math.seededRandom = function (max, min)
 {
     if (Math.randomSeed === 0) Math.randomSeed = Math.random() * 999;

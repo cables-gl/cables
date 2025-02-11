@@ -30,7 +30,7 @@ function generate()
     const numX = Math.floor(Math.max(0, inNumX.get()));
     const numY = Math.floor(Math.max(0, inNumY.get()));
 
-    if (!CABLES.UTILS.isNumeric(numX) || !CABLES.UTILS.isNumeric(numY) || numX < 0 || numY < 0)
+    if (!CABLES.isNumeric(numX) || !CABLES.isNumeric(numY) || numX < 0 || numY < 0)
     {
         outRowNums.setRef(0);
         outColNums.setRef(0);

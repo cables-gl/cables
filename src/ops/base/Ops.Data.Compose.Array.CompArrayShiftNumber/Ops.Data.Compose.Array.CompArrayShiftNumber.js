@@ -10,7 +10,7 @@ update.onTriggered = () =>
         let arr = op.patch.tempData.compArray[op.patch.tempData.compArray.length - 1];
 
         const n = arr.shift();
-        if (CABLES.UTILS.isNumeric(n)) result.set(n);
+        if (CABLES.isNumeric(n)) result.set(n);
         else result.set(0);
     }
     next.trigger();

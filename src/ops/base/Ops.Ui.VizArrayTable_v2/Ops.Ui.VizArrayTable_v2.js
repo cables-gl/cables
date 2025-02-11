@@ -12,11 +12,11 @@ function getCellValue(v)
 
     if (typeof v == "string")
     {
-        // if (CABLES.UTILS.isNumeric(v)) str = "\"" + v + "\"";
+        // if (CABLES.isNumeric(v)) str = "\"" + v + "\"";
         // else str = v;
         str = "\"" + v + "\"";
     }
-    else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
+    else if (CABLES.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
     else if (Array.isArray(v))
     {
         let preview = "...";
@@ -125,7 +125,7 @@ op.renderVizLayer = (ctx, layer) =>
             {
                 str = v;
             }
-            else if (CABLES.UTILS.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
+            else if (CABLES.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
             else if (Array.isArray(v))
             {
                 str = JSON.stringify(v);

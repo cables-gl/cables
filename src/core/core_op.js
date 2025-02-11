@@ -1,5 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
-import { UTILS, cleanJson, shortId } from "./utils.js";
+import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
@@ -981,7 +981,7 @@ export class Op extends Events
      */
     inArray(name, v, stride)
     {
-        if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
+        if (!stride && CABLES.isNumeric(v))stride = v;
 
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
 
@@ -1193,7 +1193,7 @@ export class Op extends Events
      */
     outArray(name, v, stride)
     {
-        if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
+        if (!stride && CABLES.isNumeric(v))stride = v;
         const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 

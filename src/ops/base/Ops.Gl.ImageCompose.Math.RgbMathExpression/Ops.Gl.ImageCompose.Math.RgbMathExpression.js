@@ -60,7 +60,7 @@ function updateDefines()
 
 function myFloat(f)
 {
-    // if(CABLES.UTILS.isNumeric(parseFloat(f)))
+    // if(CABLES.isNumeric(parseFloat(f)))
     // {
     //     let str= f+"";
 

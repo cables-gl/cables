@@ -34,7 +34,7 @@ function update()
             {
                 let n = Number(iArr[i][iName] || 0);
                 arr.push(n);
-                if (!CABLES.UTILS.isNumeric(iArr[i][iName]))
+                if (!CABLES.isNumeric(iArr[i][iName]))
                 {
                     hasStrings = true;
                 }

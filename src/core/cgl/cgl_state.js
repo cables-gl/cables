@@ -1120,7 +1120,7 @@ class Context extends CGState
 
     createMesh(geom, options)
     {
-        if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
+        if (CABLES.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
         return new CGL.Mesh(this, geom, options);
     }
 

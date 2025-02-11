@@ -7,18 +7,15 @@ import extendJs from "./extendjs.js";
 
 extendJs();
 
-const UTILS = {};
-
 /**
  * Merge two Float32Arrays.
  * @function float32Concat
- * @memberof Utils
  * @param {Float32Array} first Left-hand side array
  * @param {Float32Array} second Right-hand side array
  * @return {Float32Array}
  * @static
  */
-UTILS.float32Concat = function (first, second)
+export function float32Concat(first, second)
 {
     if (!(first instanceof Float32Array)) first = new Float32Array(first);
     if (!(second instanceof Float32Array)) second = new Float32Array(second);
@@ -29,7 +26,7 @@ UTILS.float32Concat = function (first, second)
     result.set(second, first.length);
 
     return result;
-};
+}
 
 /**
  * get op shortname: only last part of fullname and without version
@@ -53,7 +50,6 @@ export const getShortOpName = function (fullname)
 /**
  * randomize order of an array
  * @function shuffleArray
- * @memberof Utils
  * @param {Array|Float32Array} array {Array} original
  * @return {Array|Float32Array} shuffled array
  * @static
@@ -73,7 +69,6 @@ export const shuffleArray = function (array)
 /**
  * generate a short "relativly unique" id
  * @function shortId
- * @memberof Utils
  * @return {String} generated ID
  * @static
  */
@@ -92,7 +87,6 @@ export const shortId = _shortId;
 /**
  * generate a UUID
  * @function uuid
- * @memberof Utils
  * @return {String} generated UUID
  * @static
  */
@@ -125,7 +119,6 @@ export function cleanJson(obj)
 
 /**
  * @see http://stackoverflow.com/q/7616461/940217
- * @memberof Utils
  * @param {string} str
  * @param {string} prefix
  * @return {string}
@@ -149,7 +142,6 @@ export const prefixedHash = _prefixedHash;
 /**
  * generate a simple ID
  * @function simpleId
- * @memberof Utils
  * @return {Number} new id
  * @static
  */
@@ -163,7 +155,6 @@ export const simpleId = function ()
 /**
  * smoothStep a value
  * @function smoothStep
- * @memberof Utils
  * @function
  * @param {Number} perc value value to be smoothed [0-1]
  * @return {Number} smoothed value
@@ -179,7 +170,6 @@ export const smoothStep = function (perc)
 /**
  * smootherstep a value
  * @function smootherStep
- * @memberof Utils
  * @param {Number} perc value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
@@ -194,7 +184,6 @@ export const smootherStep = function (perc)
 /**
  * clamp number / make sure its between min/max
  * @function clamp
- * @memberof Utils
  * @param {Number} value value to be mapped
  * @param {Number} min minimum value
  * @param {Number} max maximum value
@@ -208,7 +197,6 @@ export const clamp = function (value, min, max)
 /**
  * map a value in a range to a value in another range
  * @function map
- * @memberof Utils
  * @param {Number} x value to be mapped
  * @param {Number} _oldMin old range minimum value
  * @param {Number} _oldMax old range maximum value
@@ -264,15 +252,14 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0)
 /**
  * returns true if parameter is a number
  * @function isNumeric
- * @memberof Utils
  * @param {Any} n value The value to check.
  * @return {Boolean}
  * @static
  */
-UTILS.isNumeric = function (n)
+export function isNumeric(n)
 {
     return !isNaN(parseFloat(n)) && isFinite(n);
-};
+}
 
 /**
  * returns true if parameter is array
@@ -281,10 +268,10 @@ UTILS.isNumeric = function (n)
  * @return {Boolean}
  * @static
  */
-UTILS.isArray = function (v)
+export function isArray(v)
 {
     return Object.prototype.toString.call(v) === "[object Array]";
-};
+}
 
 // ----------------------------------------------------------------
 
@@ -292,7 +279,6 @@ UTILS.isArray = function (v)
  * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
  * @function cacheBust
  * @static
- * @memberof Utils
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
@@ -309,7 +295,6 @@ export const cacheBust = function (url = "")
  * copy the content of an array
  * @function copyArray
  * @static
- * @memberof Utils
  * @param {Array} src sourceArray
  * @param {Array} dst optional
  * @return {Array} dst
@@ -329,7 +314,6 @@ export const copyArray = function (src, dst)
  * return the filename part of a url without extension
  * @function basename
  * @static
- * @memberof Utils
  * @param {String} url
  * @return {String} just the filename
  */
@@ -347,7 +331,6 @@ export const basename = function (url)
  * output a stacktrace to the console
  * @function logStack
  * @static
- * @memberof Utils
  */
 export const logStack = function ()
 {
@@ -358,7 +341,6 @@ export const logStack = function ()
  * return the filename part of a url
  * @function filename
  * @static
- * @memberof Utils
  * @param {String} url
  * @return {String} just the filename
  */
@@ -597,4 +579,19 @@ export const logErrorConsole = function (initiator)
     CABLES.errorConsole.ele.innerHTML = logHtml;
 };
 
-export { UTILS };
+/**
+ * @param {Array<any>} arr
+ */
+export function uniqueArray(arr)
+{
+    const u = {}, a = [];
+    for (let i = 0, l = arr.length; i < l; ++i)
+    {
+        if (!u.hasOwnProperty(arr[i]))
+        {
+            a.push(arr[i]);
+            u[arr[i]] = 1;
+        }
+    }
+    return a;
+}

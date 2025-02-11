@@ -1,6 +1,4 @@
-// import { vec2, vec3 } from "gl-matrix";
 import { Logger } from "cables-shared-client";
-import { UTILS } from "../utils.js";
 import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
@@ -365,11 +363,11 @@ class Geometry
         for (let i = 0; i < geom.verticesIndices.length; i++)
             this.verticesIndices[oldIndizesLength + i] = geom.verticesIndices[i] + vertLength;
 
-        this.vertices = UTILS.float32Concat(this._vertices, geom.vertices);
-        this.texCoords = UTILS.float32Concat(this.texCoords, geom.texCoords);
-        this.vertexNormals = UTILS.float32Concat(this.vertexNormals, geom.vertexNormals);
-        this.tangents = UTILS.float32Concat(this.tangents, geom.tangents);
-        this.biTangents = UTILS.float32Concat(this.biTangents, geom.biTangents);
+        this.vertices = CABLES.float32Concat(this._vertices, geom.vertices);
+        this.texCoords = CABLES.float32Concat(this.texCoords, geom.texCoords);
+        this.vertexNormals = CABLES.float32Concat(this.vertexNormals, geom.vertexNormals);
+        this.tangents = CABLES.float32Concat(this.tangents, geom.tangents);
+        this.biTangents = CABLES.float32Concat(this.biTangents, geom.biTangents);
     }
 
     /**
