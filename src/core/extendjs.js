@@ -67,46 +67,6 @@ export default function extendJs()
         return this + "\n";
     };
 
-    /**
-     * return true if string starts with prefix
-     * @function startsWith
-     * @memberof String
-     * @param {String} prefix The prefix to check.
-     * @return {Boolean}
-     */
-    String.prototype.startsWith = function (prefix)
-    {
-        if (!this || !prefix) return false;
-        if (this.length >= prefix.length)
-        {
-            if (this.substring(0, prefix.length) == prefix) return true;
-        }
-        return false;
-    // return this.indexOf(prefix) === 0;
-    };
-
-    /**
-     * return true if string ends with suffix
-     * @function endsWith
-     * @memberof String
-     * @param {String} suffix
-     * @return {Boolean}
-     */
-    String.prototype.endsWith = String.prototype.endsWith || function (suffix)
-    {
-        return this.match(suffix + "$") == suffix;
-    };
-
-    /**
-     * return true if string contains string
-     * @function contains
-     * @memberof String
-     * @param {String} searchStr
-     * @return {Boolean}
-     */
-    String.prototype.contains = String.prototype.contains || function (searchStr)
-    {
-        return this.indexOf(searchStr) > -1;
-    };
+    String.prototype.contains = String.prototype.includes;
 
 }
