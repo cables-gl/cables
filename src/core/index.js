@@ -1,5 +1,5 @@
 import * as utils from "./utils.js";
-import * as anim from "./anim.js";
+import Anim from "./anim.js";
 import { Link } from "./core_link.js";
 import { Port } from "./core_port.js";
 import { Op } from "./core_op.js";
@@ -14,6 +14,7 @@ import { CONSTANTS } from "./constants.js";
 import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
+import AnimKey from "./anim_key.js";
 
 window.CABLES = window.CABLES || {};
 
@@ -32,10 +33,11 @@ CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
 CABLES.internalNow = internalNow;
+CABLES.Anim = Anim;
+CABLES.AnimKey = AnimKey;
 
 CABLES = Object.assign(CABLES,
     utils,
-    anim,
     CONSTANTS.PORT,
     CONSTANTS.PACO,
     CONSTANTS.ANIM,

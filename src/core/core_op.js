@@ -9,12 +9,42 @@ import Patch from "./core_patch.js";
 
 export class Op extends Events
 {
-    #log = new Logger("core_op");
     #objName = "";
+    #log = new Logger("core_op");
     #name = "";
     #shortOpName = "";
 
     opId = ""; // unique op id
+
+    /** @type {Array<Port>} */
+    portsOut = [];
+
+    /** @type {Patch} */
+    patch = null;
+
+    data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+    storage = {}; // op-specific data to be included in export
+
+    /** @type {Array<Port>} */
+    portsIn = [];
+    portsInData = []; // original loaded patch data
+    uiAttribs = {};
+    enabled = true;
+
+    preservedPortTitles = {};
+    preservedPortValues = {};
+    preservedPortLinks = {};
+
+    linkTimeRules = {
+        "needsLinkedToWork": [],
+        "needsStringToWork": [],
+        "needsParentOp": null
+    };
+
+    shouldWork = {};
+    hasUiErrors = false;
+    uiErrors = {};
+    hasAnimPort = false;
 
     /**
      * Description
@@ -27,36 +57,7 @@ export class Op extends Events
         super();
 
         this.#name = _name;
-
-        this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
-        this.storage = {}; // op-specific data to be included in export
-
-        /** @type {Array<Port>} */
-        this.portsOut = [];
-
-        /** @type {Array<Port>} */
-        this.portsIn = [];
-        this.portsInData = []; // original loaded patch data
-        this.uiAttribs = {};
-        this.enabled = true;
-
-        /** @type {Patch} */
         this.patch = _patch;
-
-        this.preservedPortTitles = {};
-        this.preservedPortValues = {};
-        this.preservedPortLinks = {};
-
-        this._linkTimeRules = {
-            "needsLinkedToWork": [],
-            "needsStringToWork": [],
-            "needsParentOp": null
-        };
-
-        this.shouldWork = {};
-        this.hasUiErrors = false;
-        this._uiErrors = {};
-        this._hasAnimPort = false;
 
         this.#shortOpName = CABLES.getShortOpName(_name);
         this.getTitle();
@@ -178,7 +179,7 @@ export class Op extends Events
          * );
          */
 
-        if (title != this.getTitle()) this.uiAttr({ "title": title });
+        if (title != this.getTitle()) this._setUiAttrib({ "title": title });
     }
 
     setStorage(newAttribs)
@@ -424,10 +425,9 @@ export class Op extends Events
      * @memberof Op
      * @instance
      * @param {String} name
-     * @param {Number} value
+     * @param {Number} v
      * @return {Port} created port
      */
-
     inFloat(name, v)
     {
         const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
@@ -1315,7 +1315,8 @@ export class Op extends Events
      * @function getPort
      * @instance
      * @memberof Op
-     * @param {String} portName
+     * @param {String} name
+     * @param {boolean} lowerCase
      * @return {Port}
      */
     getPort(name, lowerCase)
@@ -1323,6 +1324,12 @@ export class Op extends Events
         return this.getPortByName(name, lowerCase);
     }
 
+    /**
+     * Description
+     * @param {string} name
+     * @param {boolean} lowerCase
+     * @returns {Port}
+     */
     getPortByName(name, lowerCase)
     {
         if (lowerCase)
@@ -1363,7 +1370,7 @@ export class Op extends Events
 
     updateAnims()
     {
-        if (this._hasAnimPort)
+        if (this.hasAnimPort)
             for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
     }
 
@@ -1590,7 +1597,7 @@ export class Op extends Events
      */
     hasUiError(id)
     {
-        return this._uiErrors.hasOwnProperty(id) && this._uiErrors[id];
+        return this.uiErrors.hasOwnProperty(id) && this.uiErrors[id];
     }
 
     /**
@@ -1702,7 +1709,7 @@ export class Op extends Events
      */
     toWorkNeedsParent(parentOpName)
     {
-        this._linkTimeRules.needsParentOp = parentOpName;
+        this.linkTimeRules.needsParentOp = parentOpName;
     }
 
     // /**
@@ -1715,15 +1722,15 @@ export class Op extends Events
     toWorkShouldNotBeChild(parentOpName, type)
     {
         if (!this.patch.isEditorMode()) return;
-        this._linkTimeRules.forbiddenParent = parentOpName;
-        if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
+        this.linkTimeRules.forbiddenParent = parentOpName;
+        if (type != undefined) this.linkTimeRules.forbiddenParentType = type;
     }
 
     toWorkPortsNeedsString()
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
-            if (this._linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsStringToWork.push(arguments[i]);
+            if (this.linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsStringToWork.push(arguments[i]);
     }
 
     /**
@@ -1739,13 +1746,13 @@ export class Op extends Events
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
-            if (this._linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsLinkedToWork.push(arguments[i]);
+            if (this.linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsLinkedToWork.push(arguments[i]);
     }
 
     toWorkPortsNeedToBeLinkedReset()
     {
         if (!this.patch.isEditorMode()) return;
-        this._linkTimeRules.needsLinkedToWork.length = 0;
+        this.linkTimeRules.needsLinkedToWork.length = 0;
         if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
     }
 

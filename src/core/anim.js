@@ -1,49 +1,12 @@
 import { Events, Logger } from "cables-shared-client";
-import { Key } from "./anim_key.js";
-import { CONSTANTS } from "./constants.js";
 import { uuid } from "./utils.js";
+import AnimKey from "./anim_key.js";
+import { Op } from "./core_op.js";
+import { Port } from "./core_port.js";
 
 /**
  * Keyframed interpolated animation.
  *
- * Available Easings:
- * <code>
- * CONSTANTS.ANIM.EASING_LINEAR
- * CONSTANTS.ANIM.EASING_ABSOLUTE
- * CONSTANTS.ANIM.EASING_SMOOTHSTEP
- * CONSTANTS.ANIM.EASING_SMOOTHERSTEP
- * CONSTANTS.ANIM.EASING_CUBICSPLINE
-
- * CONSTANTS.ANIM.EASING_CUBIC_IN
- * CONSTANTS.ANIM.EASING_CUBIC_OUT
- * CONSTANTS.ANIM.EASING_CUBIC_INOUT
-
- * CONSTANTS.ANIM.EASING_EXPO_IN
- * CONSTANTS.ANIM.EASING_EXPO_OUT
- * CONSTANTS.ANIM.EASING_EXPO_INOUT
-
- * CONSTANTS.ANIM.EASING_SIN_IN
- * CONSTANTS.ANIM.EASING_SIN_OUT
- * CONSTANTS.ANIM.EASING_SIN_INOUT
-
- * CONSTANTS.ANIM.EASING_BACK_IN
- * CONSTANTS.ANIM.EASING_BACK_OUT
- * CONSTANTS.ANIM.EASING_BACK_INOUT
-
- * CONSTANTS.ANIM.EASING_ELASTIC_IN
- * CONSTANTS.ANIM.EASING_ELASTIC_OUT
-
- * CONSTANTS.ANIM.EASING_BOUNCE_IN
- * CONSTANTS.ANIM.EASING_BOUNCE_OUT
-
- * CONSTANTS.ANIM.EASING_QUART_IN
- * CONSTANTS.ANIM.EASING_QUART_OUT
- * CONSTANTS.ANIM.EASING_QUART_INOUT
-
- * CONSTANTS.ANIM.EASING_QUINT_IN
- * CONSTANTS.ANIM.EASING_QUINT_OUT
- * CONSTANTS.ANIM.EASING_QUINT_INOUT
- * </code>
  * @class
  * @param cfg
  * @example
@@ -53,8 +16,49 @@ import { uuid } from "./utils.js";
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
  */
 
-class Anim extends Events
+export default class Anim extends Events
 {
+    static EASING_LINEAR = 0;
+    static EASING_ABSOLUTE = 1;
+    static EASING_SMOOTHSTEP = 2;
+    static EASING_SMOOTHERSTEP = 3;
+    static EASING_CUBICSPLINE = 4;
+
+    static EASING_CUBIC_IN = 5;
+    static EASING_CUBIC_OUT = 6;
+    static EASING_CUBIC_INOUT = 7;
+
+    static EASING_EXPO_IN = 8;
+    static EASING_EXPO_OUT = 9;
+    static EASING_EXPO_INOUT = 10;
+
+    static EASING_SIN_IN = 11;
+    static EASING_SIN_OUT = 12;
+    static EASING_SIN_INOUT = 13;
+
+    static EASING_BACK_IN = 14;
+    static EASING_BACK_OUT = 15;
+    static EASING_BACK_INOUT = 16;
+
+    static EASING_ELASTIC_IN = 17;
+    static EASING_ELASTIC_OUT = 18;
+
+    static EASING_BOUNCE_IN = 19;
+    static EASING_BOUNCE_OUT = 21;
+
+    static EASING_QUART_IN = 22;
+    static EASING_QUART_OUT = 23;
+    static EASING_QUART_INOUT = 24;
+
+    static EASING_QUINT_IN = 25;
+    static EASING_QUINT_OUT = 26;
+    static EASING_QUINT_INOUT = 27;
+
+    static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
+
+    /**
+     * @param {object} cfg
+     */
     constructor(cfg)
     {
         super();
@@ -75,7 +79,9 @@ class Anim extends Events
          * @instance
          * @type {Number}
          */
-        this.defaultEasing = cfg.defaultEasing || CONSTANTS.ANIM.EASING_LINEAR;
+        // if (cfg.defaultEasing === undefined) throw Error(12);
+
+        this.defaultEasing = cfg.defaultEasing || Anim.EASING_LINEAR;
         this.onLooped = null;
 
         this._timesLooped = 0;
@@ -259,7 +265,7 @@ class Anim extends Events
 
         if (!found)
         {
-            found = new Key(
+            found = new AnimKey(
                 {
                     "time": time,
                     "value": value,
@@ -345,7 +351,7 @@ class Anim extends Events
     }
 
     /**
-     * @param {Key} k
+     * @param {AnimKey} k
      */
     remove(k)
     {
@@ -429,7 +435,7 @@ class Anim extends Events
     }
 
     /**
-     * @param {Key} k
+     * @param {AnimKey} k
      */
     addKey(k)
     {
@@ -447,65 +453,70 @@ class Anim extends Events
         this._updateLastIndex();
     }
 
+    /**
+     * @param {string} str
+     */
     easingFromString(str)
     {
-        if (str == "linear") return CONSTANTS.ANIM.EASING_LINEAR;
-        if (str == "absolute") return CONSTANTS.ANIM.EASING_ABSOLUTE;
-        if (str == "smoothstep") return CONSTANTS.ANIM.EASING_SMOOTHSTEP;
-        if (str == "smootherstep") return CONSTANTS.ANIM.EASING_SMOOTHERSTEP;
+        // todo smarter way to map ?
+        if (str == "linear") return Anim.EASING_LINEAR;
+        if (str == "absolute") return Anim.EASING_ABSOLUTE;
+        if (str == "smoothstep") return Anim.EASING_SMOOTHSTEP;
+        if (str == "smootherstep") return Anim.EASING_SMOOTHERSTEP;
 
-        if (str == "Cubic In") return CONSTANTS.ANIM.EASING_CUBIC_IN;
-        if (str == "Cubic Out") return CONSTANTS.ANIM.EASING_CUBIC_OUT;
-        if (str == "Cubic In Out") return CONSTANTS.ANIM.EASING_CUBIC_INOUT;
+        if (str == "Cubic In") return Anim.EASING_CUBIC_IN;
+        if (str == "Cubic Out") return Anim.EASING_CUBIC_OUT;
+        if (str == "Cubic In Out") return Anim.EASING_CUBIC_INOUT;
 
-        if (str == "Expo In") return CONSTANTS.ANIM.EASING_EXPO_IN;
-        if (str == "Expo Out") return CONSTANTS.ANIM.EASING_EXPO_OUT;
-        if (str == "Expo In Out") return CONSTANTS.ANIM.EASING_EXPO_INOUT;
+        if (str == "Expo In") return Anim.EASING_EXPO_IN;
+        if (str == "Expo Out") return Anim.EASING_EXPO_OUT;
+        if (str == "Expo In Out") return Anim.EASING_EXPO_INOUT;
 
-        if (str == "Sin In") return CONSTANTS.ANIM.EASING_SIN_IN;
-        if (str == "Sin Out") return CONSTANTS.ANIM.EASING_SIN_OUT;
-        if (str == "Sin In Out") return CONSTANTS.ANIM.EASING_SIN_INOUT;
+        if (str == "Sin In") return Anim.EASING_SIN_IN;
+        if (str == "Sin Out") return Anim.EASING_SIN_OUT;
+        if (str == "Sin In Out") return Anim.EASING_SIN_INOUT;
 
-        if (str == "Back In") return CONSTANTS.ANIM.EASING_BACK_IN;
-        if (str == "Back Out") return CONSTANTS.ANIM.EASING_BACK_OUT;
-        if (str == "Back In Out") return CONSTANTS.ANIM.EASING_BACK_INOUT;
+        if (str == "Back In") return Anim.EASING_BACK_IN;
+        if (str == "Back Out") return Anim.EASING_BACK_OUT;
+        if (str == "Back In Out") return Anim.EASING_BACK_INOUT;
 
-        if (str == "Elastic In") return CONSTANTS.ANIM.EASING_ELASTIC_IN;
-        if (str == "Elastic Out") return CONSTANTS.ANIM.EASING_ELASTIC_OUT;
+        if (str == "Elastic In") return Anim.EASING_ELASTIC_IN;
+        if (str == "Elastic Out") return Anim.EASING_ELASTIC_OUT;
 
-        if (str == "Bounce In") return CONSTANTS.ANIM.EASING_BOUNCE_IN;
-        if (str == "Bounce Out") return CONSTANTS.ANIM.EASING_BOUNCE_OUT;
+        if (str == "Bounce In") return Anim.EASING_BOUNCE_IN;
+        if (str == "Bounce Out") return Anim.EASING_BOUNCE_OUT;
 
-        if (str == "Quart Out") return CONSTANTS.ANIM.EASING_QUART_OUT;
-        if (str == "Quart In") return CONSTANTS.ANIM.EASING_QUART_IN;
-        if (str == "Quart In Out") return CONSTANTS.ANIM.EASING_QUART_INOUT;
+        if (str == "Quart Out") return Anim.EASING_QUART_OUT;
+        if (str == "Quart In") return Anim.EASING_QUART_IN;
+        if (str == "Quart In Out") return Anim.EASING_QUART_INOUT;
 
-        if (str == "Quint Out") return CONSTANTS.ANIM.EASING_QUINT_OUT;
-        if (str == "Quint In") return CONSTANTS.ANIM.EASING_QUINT_IN;
-        if (str == "Quint In Out") return CONSTANTS.ANIM.EASING_QUINT_INOUT;
+        if (str == "Quint Out") return Anim.EASING_QUINT_OUT;
+        if (str == "Quint In") return Anim.EASING_QUINT_IN;
+        if (str == "Quint In Out") return Anim.EASING_QUINT_INOUT;
+
+        console.log("unknown anim easing?", str);
     }
 
+    /**
+     * @param {Op} op
+     * @param {string} title
+     * @param {function} cb
+     * @returns {Port}
+     */
     createPort(op, title, cb)
     {
-        const port = op.inDropDown(title, CONSTANTS.ANIM.EASINGS, "Cubic Out");
-
-        // const port = op.addInPort(
-        //     new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-        //         "display": "dropdown",
-        //         "values": CONSTANTS.ANIM.EASINGS,
-        //     }),
-        // );
-
+        const port = op.inDropDown(title, Anim.EASINGNAMES, "Cubic Out");
         port.set("linear");
-        port.defaultValue = "linear";
+        port.defaultValue = "Cubic Out";
 
-        port.onChange = function ()
+        port.onChange = () =>
         {
             this.defaultEasing = this.easingFromString(port.get());
             this.emitEvent("onChangeDefaultEasing", this);
 
             if (cb) cb();
-        }.bind(this);
+        };
+        port.set("Cubic Out");
 
         return port;
     }
@@ -543,8 +554,3 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     }
     return q;
 };
-
-const ANIM = { "Key": Key };
-
-export { ANIM };
-export { Anim };

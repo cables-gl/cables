@@ -3,17 +3,20 @@
  */
 
 /**
- * @namespace Math
+ * @external Math
  */
 
 /**
-     * set random seed for seededRandom()
-     * @memberof Math
-     * @type Number
-     * @static
-     */
+ * set random seed for seededRandom()
+ * @type Number
+ * @static
+ */
 Math.randomSeed = 1;
 
+/**
+ * @function external:Math#setRandomSeed
+ * @param {number} seed
+ */
 Math.setRandomSeed = function (seed)
 {
     // https://github.com/cables-gl/cables_docs/issues/622

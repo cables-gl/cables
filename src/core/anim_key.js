@@ -1,6 +1,6 @@
 import { CONSTANTS } from "./constants.js";
 
-class Key
+export default class AnimKey
 {
     constructor(obj)
     {
@@ -32,42 +32,42 @@ class Key
     {
         this._easing = e;
 
-        if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = Key.easeLinear;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = Key.easeAbsolute;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = Key.easeSmoothStep;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = Key.easeSmootherStep;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = Key.easeCubicIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_OUT) this.ease = Key.easeCubicOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_INOUT) this.ease = Key.easeCubicInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_IN) this.ease = Key.easeExpoIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_OUT) this.ease = Key.easeExpoOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_INOUT) this.ease = Key.easeExpoInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_IN) this.ease = Key.easeSinIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_OUT) this.ease = Key.easeSinOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_INOUT) this.ease = Key.easeSinInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_OUT) this.ease = Key.easeOutBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_IN) this.ease = Key.easeInBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_INOUT) this.ease = Key.easeInOutBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_IN) this.ease = Key.easeInElastic;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_OUT) this.ease = Key.easeOutElastic;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_INOUT) this.ease = Key.easeElasticInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_IN) this.ease = Key.easeInBounce;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_OUT) this.ease = Key.easeOutBounce;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_OUT) this.ease = Key.easeOutQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_IN) this.ease = Key.easeInQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_INOUT) this.ease = Key.easeInOutQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = Key.easeOutQuint;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = Key.easeInQuint;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = Key.easeInOutQuint;
+        if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = AnimKey.easeLinear;
+        else if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = AnimKey.easeAbsolute;
+        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = AnimKey.easeSmoothStep;
+        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = AnimKey.easeSmootherStep;
+        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = AnimKey.easeCubicIn;
+        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_OUT) this.ease = AnimKey.easeCubicOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_INOUT) this.ease = AnimKey.easeCubicInOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_IN) this.ease = AnimKey.easeExpoIn;
+        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_OUT) this.ease = AnimKey.easeExpoOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_INOUT) this.ease = AnimKey.easeExpoInOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_IN) this.ease = AnimKey.easeSinIn;
+        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_OUT) this.ease = AnimKey.easeSinOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_INOUT) this.ease = AnimKey.easeSinInOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_OUT) this.ease = AnimKey.easeOutBack;
+        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_IN) this.ease = AnimKey.easeInBack;
+        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_INOUT) this.ease = AnimKey.easeInOutBack;
+        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_IN) this.ease = AnimKey.easeInElastic;
+        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_OUT) this.ease = AnimKey.easeOutElastic;
+        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_INOUT) this.ease = AnimKey.easeElasticInOut;
+        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_IN) this.ease = AnimKey.easeInBounce;
+        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_OUT) this.ease = AnimKey.easeOutBounce;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_OUT) this.ease = AnimKey.easeOutQuart;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_IN) this.ease = AnimKey.easeInQuart;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_INOUT) this.ease = AnimKey.easeInOutQuart;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
+        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
         else if (this._easing == CONSTANTS.ANIM.EASING_CUBICSPLINE)
         {
         // this._updateBezier = true;
-            this.ease = Key.easeCubicSpline;
+            this.ease = AnimKey.easeCubicSpline;
         }
         else
         {
             this._easing = CONSTANTS.ANIM.EASING_LINEAR;
-            this.ease = Key.easeLinear;
+            this.ease = AnimKey.easeLinear;
         }
     }
 
@@ -128,7 +128,7 @@ class Key
     }
 }
 
-Key.cubicSpline = function (perc, key1, key2)
+AnimKey.cubicSpline = function (perc, key1, key2)
 {
     let
         previousPoint = key1.value,
@@ -142,22 +142,22 @@ Key.cubicSpline = function (perc, key1, key2)
     return (2 * t3 - 3 * t2 + 1) * previousPoint + (t3 - 2 * t2 + t) * previousTangent + (-2 * t3 + 3 * t2) * nextPoint + (t3 - t2) * nextTangent;
 };
 
-Key.easeCubicSpline = function (perc, key2)
+AnimKey.easeCubicSpline = function (perc, key2)
 {
-    return Key.cubicSpline(perc, this, key2);
+    return AnimKey.cubicSpline(perc, this, key2);
 };
 
-Key.linear = function (perc, key1, key2)
+AnimKey.linear = function (perc, key1, key2)
 {
     return parseFloat(key1.value) + parseFloat(key2.value - key1.value) * perc;
 };
 
-Key.easeLinear = function (perc, key2)
+AnimKey.easeLinear = function (perc, key2)
 {
-    return Key.linear(perc, this, key2);
+    return AnimKey.linear(perc, this, key2);
 };
 
-Key.easeAbsolute = function (perc, key2)
+AnimKey.easeAbsolute = function (perc, key2)
 {
     return this.value;
 };
@@ -167,10 +167,10 @@ export const easeExpoIn = function (t)
     return (t = 2 ** (10 * (t - 1)));
 };
 
-Key.easeExpoIn = function (t, key2)
+AnimKey.easeExpoIn = function (t, key2)
 {
     t = easeExpoIn(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 export const easeExpoOut = function (t)
@@ -179,10 +179,10 @@ export const easeExpoOut = function (t)
     return t;
 };
 
-Key.easeExpoOut = function (t, key2)
+AnimKey.easeExpoOut = function (t, key2)
 {
     t = easeExpoOut(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 export const easeExpoInOut = function (t)
@@ -200,28 +200,28 @@ export const easeExpoInOut = function (t)
     return t;
 };
 
-Key.easeExpoInOut = function (t, key2)
+AnimKey.easeExpoInOut = function (t, key2)
 {
     t = easeExpoInOut(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeSinIn = function (t, key2)
+AnimKey.easeSinIn = function (t, key2)
 {
     t = -1 * Math.cos((t * Math.PI) / 2) + 1;
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeSinOut = function (t, key2)
+AnimKey.easeSinOut = function (t, key2)
 {
     t = Math.sin((t * Math.PI) / 2);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeSinInOut = function (t, key2)
+AnimKey.easeSinInOut = function (t, key2)
 {
     t = -0.5 * (Math.cos(Math.PI * t) - 1.0);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 export const easeCubicIn = function (t)
@@ -230,10 +230,10 @@ export const easeCubicIn = function (t)
     return t;
 };
 
-Key.easeCubicIn = function (t, key2)
+AnimKey.easeCubicIn = function (t, key2)
 {
     t = easeCubicIn(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 // b 0
@@ -242,44 +242,44 @@ Key.easeCubicIn = function (t, key2)
 // easeOutCubic: function (x, t, b, c, d) {
 //     return c*((t=t/d-1)*t*t + 1) + b;
 
-Key.easeInQuint = function (t, key2)
+AnimKey.easeInQuint = function (t, key2)
 {
     t = t * t * t * t * t;
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
-Key.easeOutQuint = function (t, key2)
+AnimKey.easeOutQuint = function (t, key2)
 {
     t = (t -= 1) * t * t * t * t + 1;
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
-Key.easeInOutQuint = function (t, key2)
+AnimKey.easeInOutQuint = function (t, key2)
 {
     if ((t /= 0.5) < 1) t = 0.5 * t * t * t * t * t;
     else t = 0.5 * ((t -= 2) * t * t * t * t + 2);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeInQuart = function (t, key2)
+AnimKey.easeInQuart = function (t, key2)
 {
     t = t * t * t * t;
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeOutQuart = function (t, key2)
+AnimKey.easeOutQuart = function (t, key2)
 {
     // return -c * ((t=t/d-1)*t*t*t - 1) + b;
     t = -1 * ((t -= 1) * t * t * t - 1);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeInOutQuart = function (t, key2)
+AnimKey.easeInOutQuart = function (t, key2)
 {
     if ((t /= 0.5) < 1) t = 0.5 * t * t * t * t;
     else t = -0.5 * ((t -= 2) * t * t * t - 2);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.bounce = function (t)
+AnimKey.bounce = function (t)
 {
     if ((t /= 1) < 1 / 2.75) t = 7.5625 * t * t;
     else if (t < 2 / 2.75) t = 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
@@ -288,18 +288,18 @@ Key.bounce = function (t)
     return t;
 };
 
-Key.easeInBounce = function (t, key2)
+AnimKey.easeInBounce = function (t, key2)
 {
-    return Key.linear(Key.bounce(t), this, key2);
+    return AnimKey.linear(AnimKey.bounce(t), this, key2);
     // return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d);
 };
 
-Key.easeOutBounce = function (t, key2)
+AnimKey.easeOutBounce = function (t, key2)
 {
-    return Key.linear(Key.bounce(t), this, key2);
+    return AnimKey.linear(AnimKey.bounce(t), this, key2);
 };
 
-Key.easeInElastic = function (t, key2)
+AnimKey.easeInElastic = function (t, key2)
 {
     let s = 1.70158;
     let p = 0;
@@ -323,10 +323,10 @@ Key.easeInElastic = function (t, key2)
         t = -(a * 2 ** (10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b;
     }
 
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeOutElastic = function (t, key2)
+AnimKey.easeOutElastic = function (t, key2)
 {
     let s = 1.70158;
     let p = 0;
@@ -350,33 +350,33 @@ Key.easeOutElastic = function (t, key2)
         t = a * 2 ** (-10 * t) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) + c + b;
     }
 
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeInBack = function (t, key2)
+AnimKey.easeInBack = function (t, key2)
 {
     const s = 1.70158;
     t = t * t * ((s + 1) * t - s);
 
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeOutBack = function (t, key2)
+AnimKey.easeOutBack = function (t, key2)
 {
     const s = 1.70158;
     t = (t = t / 1 - 1) * t * ((s + 1) * t + s) + 1;
 
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeInOutBack = function (t, key2)
+AnimKey.easeInOutBack = function (t, key2)
 {
     let s = 1.70158;
     const c = 1 / 2;
     if ((t /= 1 / 2) < 1) t = c * (t * t * (((s *= 1.525) + 1) * t - s));
     else t = c * ((t -= 2) * t * (((s *= 1.525) + 1) * t + s) + 2);
 
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 export const easeCubicOut = function (t)
@@ -386,10 +386,10 @@ export const easeCubicOut = function (t)
     return t;
 };
 
-Key.easeCubicOut = function (t, key2)
+AnimKey.easeCubicOut = function (t, key2)
 {
     t = easeCubicOut(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
 export const easeCubicInOut = function (t)
@@ -404,25 +404,23 @@ export const easeCubicInOut = function (t)
     return t;
 };
 
-Key.easeCubicInOut = function (t, key2)
+AnimKey.easeCubicInOut = function (t, key2)
 {
     t = easeCubicInOut(t);
-    return Key.linear(t, this, key2);
+    return AnimKey.linear(t, this, key2);
 };
 
-Key.easeSmoothStep = function (perc, key2)
+AnimKey.easeSmoothStep = function (perc, key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     const x = Math.max(0, Math.min(1, perc));
     perc = x * x * (3 - 2 * x); // smoothstep
-    return Key.linear(perc, this, key2);
+    return AnimKey.linear(perc, this, key2);
 };
 
-Key.easeSmootherStep = function (perc, key2)
+AnimKey.easeSmootherStep = function (perc, key2)
 {
     const x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
     perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
-    return Key.linear(perc, this, key2);
+    return AnimKey.linear(perc, this, key2);
 };
-
-export { Key };

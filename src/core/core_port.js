@@ -1,9 +1,9 @@
 import { Events, Logger } from "cables-shared-client";
-import { Anim, ANIM } from "./anim.js";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Op } from "./core_op.js";
+import Anim from "./anim.js";
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -424,7 +424,7 @@ export class Port extends Events
         if (objPort.anim)
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
-            this._op._hasAnimPort = true;
+            this._op.hasAnimPort = true;
             this.anim.addEventListener("onChange", () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
@@ -432,7 +432,7 @@ export class Port extends Events
             if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
             for (const ani in objPort.anim.keys)
             {
-                this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
+                this.anim.keys.push(new CABLES.AnimKey(objPort.anim.keys[ani]));
             }
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
 
@@ -832,7 +832,7 @@ export class Port extends Events
         if (this._animated != a)
         {
             this._animated = a;
-            this._op._hasAnimPort = true;
+            this._op.hasAnimPort = true;
 
             if (this._animated && !this.anim)
             {
