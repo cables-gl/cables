@@ -36,6 +36,8 @@ export default class Op extends Events
     uiAttribs = {};
     enabled = true;
 
+    onAnimFrame = null;
+
     preservedPortTitles = {};
     preservedPortValues = {};
     preservedPortLinks = {};
@@ -359,7 +361,7 @@ export default class Op extends Events
      * @function inTrigger
      * @instance
      * @memberof Op
-     * @param {String} name
+     * @param {String} v
      * @return {Port} created port
      *
      */
@@ -384,7 +386,7 @@ export default class Op extends Events
      * @memberof Op
      * @instance
      * @param {String} name
-     * @param {Array} names
+     * @param {Array} v
      * @return {Port} created port
      */
 
@@ -458,7 +460,7 @@ export default class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {Boolean} value
+     * @param {Boolean|number} v
      * @return {Port} created port
      */
     inBool(name, v)
@@ -1157,7 +1159,7 @@ export default class Op extends Events
      * @function outString
      * @instance
      * @memberof Op
-     * @param {String} name
+     * @param {String} v
      * @return {Port} created port
      */
     outString(name, v)
@@ -1594,9 +1596,7 @@ export default class Op extends Events
     /**
      * return true if op has this error message id
      * @function hasUiError
-     * @instance
-     * @memberof Op
-     * @param {id} error id
+     * @param {String} id
      * @returns {Boolean} - has id
      */
     hasUiError(id)
@@ -1660,9 +1660,9 @@ export default class Op extends Events
      * @function
      * @instance
      * @memberof Op
-     * @param {Port} portX
-     * @param {Port} portY
-     * @param {Port} portZ
+     * @param {Port} px
+     * @param {Port} py
+     * @param {Port} pz
      */
     setUiAxisPorts(px, py, pz)
     {
