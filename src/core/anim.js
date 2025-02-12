@@ -271,6 +271,7 @@ export default class Anim extends Events
                     "value": value,
                     "e": this.defaultEasing,
                     "cb": cb,
+                    "anim": this
                 });
             this.keys.push(found);
 
@@ -364,6 +365,7 @@ export default class Anim extends Events
                 return;
             }
         }
+        console.log("key remove not found", k);
     }
 
     /**

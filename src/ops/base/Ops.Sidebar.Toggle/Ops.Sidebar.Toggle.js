@@ -34,11 +34,9 @@ el.appendChild(label);
 // input.classList.add('sidebar__toggle-input');
 // el.appendChild(input);
 
-
 const icon = document.createElement("div");
 icon.classList.add("icon_toggle");
 el.appendChild(icon);
-
 
 const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
@@ -104,6 +102,7 @@ function onInputValuePortChanged()
 
 function onDefaultValueChanged()
 {
+
     /*
     var defaultValue = defaultValuePort.get();
     if(defaultValue) {

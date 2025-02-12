@@ -39,7 +39,7 @@ export const getShortOpName = function (fullname)
 {
     let name = fullname.split(".")[fullname.split(".").length - 1];
 
-    if (name.contains(CONSTANTS.OP.OP_VERSION_PREFIX))
+    if (name.includes(CONSTANTS.OP.OP_VERSION_PREFIX))
     {
         const n = name.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
         name = name.substring(0, name.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
@@ -286,7 +286,7 @@ export const cacheBust = function (url = "")
 {
     if (!url) return "";
     if (url.startsWith("data:")) return;
-    if (url.contains("?")) url += "&";
+    if (url.includes("?")) url += "&";
     else url += "?";
     return url + "cache=" + CABLES.uuid();
 };
@@ -349,7 +349,7 @@ export const filename = function (url)
     let name = "";
     if (!url) return "";
 
-    if (url.startsWith("data:") && url.contains(":"))
+    if (url.startsWith("data:") && url.includes(":"))
     {
         const parts = url.split(",");
         return parts[0];

@@ -675,7 +675,7 @@ class Context extends CGState
 
             this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
-            if (this.canvas.id.contains("glGuiCanvas"))
+            if (this.canvas.id.includes("glGuiCanvas"))
                 if (!this._loggedGlError)
                 {
                     this.patch.printTriggerStack();

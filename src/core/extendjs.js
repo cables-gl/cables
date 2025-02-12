@@ -49,24 +49,29 @@ Math.seededRandom = function (max, min)
     return min + rnd * (max - min);
 };
 
-export default function extendJs()
-{
-
-    /**
+/**
      * @namespace String
      */
 
-    /**
-     * append a linebreak to a string
-     * @function endl
-     * @memberof String
-     * @return {String} string with newline break appended ('\n')
-     */
-    String.prototype.endl = function ()
-    {
-        return this + "\n";
-    };
+/**
+ * append a linebreak to a string
+ * @function endl
+ * @extends String
+ * @return {String} string with newline break appended ('\n')
+ */
+String.prototype.endl = function ()
+{
+    return this + "\n";
+};
 
-    String.prototype.contains = String.prototype.includes;
+String.prototype.contains = function (str)
+{
+    console.log((new Error()).stack);
+    return this.includes(str);
+
+};
+
+export default function extendJs()
+{
 
 }

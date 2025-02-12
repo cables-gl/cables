@@ -1,12 +1,14 @@
-import { CONSTANTS } from "./constants.js";
+import Anim from "./anim.js";
 
 export default class AnimKey
 {
-    constructor(obj)
+    constructor(obj, an)
     {
         this.time = 0.0;
         this.value = 0.0;
         this.selected = false;
+
+        this.anim = obj.anim || an || null;
 
         // this.ui = null;
         this.onChange = null;
@@ -24,49 +26,55 @@ export default class AnimKey
         // const bezierAnim = null;
         // this._updateBezier = false;
 
-        this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
+        this.setEasing(Anim.EASING_LINEAR);
         this.set(obj);
+    }
+
+    delete()
+    {
+        if (this.anim) this.anim.remove(this);
+        else console.log("animkey without anim...");
     }
 
     setEasing(e)
     {
         this._easing = e;
 
-        if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = AnimKey.easeLinear;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = AnimKey.easeAbsolute;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = AnimKey.easeSmoothStep;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = AnimKey.easeSmootherStep;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = AnimKey.easeCubicIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_OUT) this.ease = AnimKey.easeCubicOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_INOUT) this.ease = AnimKey.easeCubicInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_IN) this.ease = AnimKey.easeExpoIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_OUT) this.ease = AnimKey.easeExpoOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_INOUT) this.ease = AnimKey.easeExpoInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_IN) this.ease = AnimKey.easeSinIn;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_OUT) this.ease = AnimKey.easeSinOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_SIN_INOUT) this.ease = AnimKey.easeSinInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_OUT) this.ease = AnimKey.easeOutBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_IN) this.ease = AnimKey.easeInBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BACK_INOUT) this.ease = AnimKey.easeInOutBack;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_IN) this.ease = AnimKey.easeInElastic;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_OUT) this.ease = AnimKey.easeOutElastic;
-        else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_INOUT) this.ease = AnimKey.easeElasticInOut;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_IN) this.ease = AnimKey.easeInBounce;
-        else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_OUT) this.ease = AnimKey.easeOutBounce;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_OUT) this.ease = AnimKey.easeOutQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_IN) this.ease = AnimKey.easeInQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUART_INOUT) this.ease = AnimKey.easeInOutQuart;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
-        else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
-        else if (this._easing == CONSTANTS.ANIM.EASING_CUBICSPLINE)
+        if (this._easing == Anim.EASING_LINEAR) this.ease = AnimKey.easeLinear;
+        else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = AnimKey.easeAbsolute;
+        else if (this._easing == Anim.EASING_SMOOTHSTEP) this.ease = AnimKey.easeSmoothStep;
+        else if (this._easing == Anim.EASING_SMOOTHERSTEP) this.ease = AnimKey.easeSmootherStep;
+        else if (this._easing == Anim.EASING_CUBIC_IN) this.ease = AnimKey.easeCubicIn;
+        else if (this._easing == Anim.EASING_CUBIC_OUT) this.ease = AnimKey.easeCubicOut;
+        else if (this._easing == Anim.EASING_CUBIC_INOUT) this.ease = AnimKey.easeCubicInOut;
+        else if (this._easing == Anim.EASING_EXPO_IN) this.ease = AnimKey.easeExpoIn;
+        else if (this._easing == Anim.EASING_EXPO_OUT) this.ease = AnimKey.easeExpoOut;
+        else if (this._easing == Anim.EASING_EXPO_INOUT) this.ease = AnimKey.easeExpoInOut;
+        else if (this._easing == Anim.EASING_SIN_IN) this.ease = AnimKey.easeSinIn;
+        else if (this._easing == Anim.EASING_SIN_OUT) this.ease = AnimKey.easeSinOut;
+        else if (this._easing == Anim.EASING_SIN_INOUT) this.ease = AnimKey.easeSinInOut;
+        else if (this._easing == Anim.EASING_BACK_OUT) this.ease = AnimKey.easeOutBack;
+        else if (this._easing == Anim.EASING_BACK_IN) this.ease = AnimKey.easeInBack;
+        else if (this._easing == Anim.EASING_BACK_INOUT) this.ease = AnimKey.easeInOutBack;
+        else if (this._easing == Anim.EASING_ELASTIC_IN) this.ease = AnimKey.easeInElastic;
+        else if (this._easing == Anim.EASING_ELASTIC_OUT) this.ease = AnimKey.easeOutElastic;
+        // else if (this._easing == Anim.EASING_ELASTIC_INOUT) this.ease = AnimKey.easeElasticInOut;
+        else if (this._easing == Anim.EASING_BOUNCE_IN) this.ease = AnimKey.easeInBounce;
+        else if (this._easing == Anim.EASING_BOUNCE_OUT) this.ease = AnimKey.easeOutBounce;
+        else if (this._easing == Anim.EASING_QUART_OUT) this.ease = AnimKey.easeOutQuart;
+        else if (this._easing == Anim.EASING_QUART_IN) this.ease = AnimKey.easeInQuart;
+        else if (this._easing == Anim.EASING_QUART_INOUT) this.ease = AnimKey.easeInOutQuart;
+        else if (this._easing == Anim.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
+        else if (this._easing == Anim.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
+        else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
+        else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
         // this._updateBezier = true;
             this.ease = AnimKey.easeCubicSpline;
         }
         else
         {
-            this._easing = CONSTANTS.ANIM.EASING_LINEAR;
+            this._easing = Anim.EASING_LINEAR;
             this.ease = AnimKey.easeLinear;
         }
     }
@@ -117,7 +125,7 @@ export default class AnimKey
         obj.t = this.time;
         obj.v = this.value;
         obj.e = this._easing;
-        // if (this._easing == CONSTANTS.ANIM.EASING_CUBICSPLINE) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
+        // if (this._easing == Anim.EASING_CUBICSPLINE) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
         return obj;
     }

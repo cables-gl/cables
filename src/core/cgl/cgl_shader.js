@@ -90,9 +90,6 @@ class Shader extends CgShader
         this._uniforms = [];
         this._drawBuffers = [true];
 
-        this._needsRecompile = true;
-        this._compileReason = "initial";
-
         this.ignoreMissingUniforms = false;
         this._projMatrixUniform = null;
         this._mvMatrixUniform = null;
@@ -178,11 +175,6 @@ class Shader extends CgShader
         return false;
     }
 
-    setWhyCompile(why)
-    {
-        this._compileReason = why;
-    }
-
     /**
      * copy all uniform values from another shader
      * @function copyUniforms
@@ -205,7 +197,7 @@ class Shader extends CgShader
             // this.getUniform(origShader._uniforms[i].)
             // this._uniforms[i].set(origShader._uniforms[i].getValue());
 
-            // if (origShader._uniforms[i].getName().contains("pathPoints"))
+            // if (origShader._uniforms[i].getName().includes("pathPoints"))
             //     this._log.log("copyUniformValues", origShader._uniforms[i].getName(), origShader._uniforms[i].getValue());
 
             this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
@@ -283,7 +275,7 @@ class Shader extends CgShader
     {
         for (const id in ShaderLibMods)
         {
-            if (src.contains(id))
+            if (src.includes(id))
             {
                 const lib = new ShaderLibMods[id]();
                 src = src.replace("{{" + id + "}}", lib.srcHeadFrag);
@@ -351,8 +343,8 @@ class Shader extends CgShader
                 {
                     // * inject member before {injectionString}
                     if (
-                        !this._injectedStringsFrag[this._uniforms[i]._structName].contains(stringToInsert)
-                    && !this._injectedStringsVert[this._uniforms[i]._structName].contains(stringToInsert))
+                        !this._injectedStringsFrag[this._uniforms[i]._structName].includes(stringToInsert)
+                    && !this._injectedStringsVert[this._uniforms[i]._structName].includes(stringToInsert))
                     {
                         const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                         const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -639,11 +631,11 @@ class Shader extends CgShader
                 if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
                 if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
-                    if (!this.srcVert.contains(uniStr) && !this.srcVert.contains("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
+                    if (!this.srcVert.includes(uniStr) && !this.srcVert.includes("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
                         uniformsStrVert += uniStr + ";" + comment.endl();
 
                 if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
-                    if (!this.srcFrag.contains(uniStr) && !this.srcFrag.contains("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
+                    if (!this.srcFrag.includes(uniStr) && !this.srcFrag.includes("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()))
                         uniformsStrFrag += uniStr + ";" + comment.endl();
             }
         }
@@ -661,8 +653,8 @@ class Shader extends CgShader
         if (countUniFrag >= this._cgl.maxUniformsFrag) this._log.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
         if (countUniVert >= this._cgl.maxUniformsVert) this._log.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
 
-        if (!fs.contains("precision")) fs = "precision " + this.precision + " float;".endl() + fs;
-        if (!vs.contains("precision")) vs = "precision " + this.precision + " float;".endl() + vs;
+        if (!fs.includes("precision")) fs = "precision " + this.precision + " float;".endl() + fs;
+        if (!vs.includes("precision")) vs = "precision " + this.precision + " float;".endl() + vs;
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
         {
             fs += "#define MOBILE".endl();
@@ -762,7 +754,7 @@ class Shader extends CgShader
 
         let drawBufferStr = "";
         for (let i = 0; i < 16; i++)
-            if (fs.contains("outColor" + i)) this._drawBuffers[i] = true;
+            if (fs.includes("outColor" + i)) this._drawBuffers[i] = true;
 
         if (this._drawBuffers.length == 1)
         {

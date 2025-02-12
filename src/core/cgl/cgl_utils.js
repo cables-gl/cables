@@ -27,7 +27,7 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
  * @param {MouseEvent} event
  * @return {Number} normalized delta
  */
-export const isWindows = window.navigator.userAgent.contains("Windows");
+export const isWindows = window.navigator.userAgent.includes("Windows");
 const getWheelDelta_ = function (event)
 {
     let normalized;

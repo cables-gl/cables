@@ -894,7 +894,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
     }
 
-    if (pixelFormatStr.contains("16bit"))
+    if (pixelFormatStr.includes("16bit"))
     {
         if (cgl.glVersion == 2)
         {
@@ -1016,7 +1016,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     /// //////
 
-    if (pixelFormatStr.contains("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+    if (pixelFormatStr.includes("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
     {
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
@@ -1043,13 +1043,13 @@ Texture.getPixelFormatNumChannels =
 Texture.isPixelFormatFloat =
     (pxlFrmtStr) =>
     {
-        return (pxlFrmtStr || "").contains("float");
+        return (pxlFrmtStr || "").includes("float");
     };
 
 Texture.isPixelFormatHalfFloat =
     (pxlFrmtStr) =>
     {
-        return (pxlFrmtStr || "").contains("float") && (pxlFrmtStr || "").contains("16bit");
+        return (pxlFrmtStr || "").includes("float") && (pxlFrmtStr || "").includes("16bit");
     };
 
 export { Texture };

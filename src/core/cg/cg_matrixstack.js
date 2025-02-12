@@ -7,6 +7,9 @@ class MatrixStack
         this.stateCounter = 0;
     }
 
+    /**
+     * @param {mat4} m
+     */
     push(m)
     {
         this._index++;

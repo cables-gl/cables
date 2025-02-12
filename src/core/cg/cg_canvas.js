@@ -30,6 +30,11 @@ class CgCanvas
 
     get canvasEle() { return this._canvasEle; }
 
+    setWhyCompile(why)
+    {
+        this._compileReason = why;
+    }
+
     /**
      * @param {Number} w
      * @param {Number} h

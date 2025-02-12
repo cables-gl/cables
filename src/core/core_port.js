@@ -440,7 +440,7 @@ export default class Port extends Events
             if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
             for (const ani in objPort.anim.keys)
             {
-                this.anim.keys.push(new CABLES.AnimKey(objPort.anim.keys[ani]));
+                this.anim.keys.push(new CABLES.AnimKey(objPort.anim.keys[ani], this.anim));
             }
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
 
