@@ -54,7 +54,7 @@ class PatchVariable extends Events
      * @memberof PatchVariable
      * @instance
      * @param v
-     * @returns {String|Number|Boolean}
+     * @returns {any}
      * @function
      */
     setValue(v)

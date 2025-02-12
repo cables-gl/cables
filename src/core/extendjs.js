@@ -66,6 +66,7 @@ String.prototype.endl = function ()
 
 String.prototype.contains = function (str)
 {
+    console.warn("string.contains deprecated, use string.includes");
     console.log((new Error()).stack);
     return this.includes(str);
 

@@ -75,7 +75,7 @@ WEBAUDIO.getAudioContext = function ()
  * @param {string} portName - The name of the port
  * @param {AudioNode} audioNode - The audionode incoming connections should connect to
  * @param {number} [inputChannelIndex=0] - If the audio node has multiple inputs, this is the index of the input channel to connect to
- * @returns {CABLES.Port|undefined} - The newly created audio in port or `undefined` if there was an error
+ * @returns {Types.Port|undefined} - The newly created audio in port or `undefined` if there was an error
  */
 WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelIndex)
 {
@@ -166,7 +166,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
  * node must be made.
  * Can be used for both Audio ports as well as AudioParam ports
  * if used with an AudioParam pass e.g. `synth.frequency` as newNode
- * @param {CABLES.Port} port - The port where the audio node needs to be replaced
+ * @param {Types.Port} port - The port where the audio node needs to be replaced
  * @param oldNode
  * @param newNode
  */

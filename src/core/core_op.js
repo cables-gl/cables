@@ -975,8 +975,6 @@ export default class Op extends Events
 
     /**
      * create a array input port
-     * @function inArray
-     * @memberof Op
      * @param {String} name
      * @param {array} v
      * @param {number} stride
@@ -1233,7 +1231,7 @@ export default class Op extends Events
 
         p.shouldLink = (p1, p2) =>
         {
-            if (filter && UTILS.isArray(filter))
+            if (filter && CABLES.isArray(filter))
             {
                 for (let i = 0; i < filter.length; i++)
                 {
@@ -1609,7 +1607,7 @@ export default class Op extends Events
      * @memberof Op
      * @param {string} id error id
      * @param {string} txt text message
-     * @param {Integer} level level
+     * @param {number} level level
      */
     setUiError(id, txt, level)
     {
@@ -1775,9 +1773,7 @@ export default class Op extends Events
     refreshParams()
     {
         if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp())
-        {
             gui.opParams.show(this);
-        }
     }
 
     /**

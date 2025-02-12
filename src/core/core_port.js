@@ -33,6 +33,12 @@ export default class Port extends Events
 
     #oldAnimVal = -5711;
 
+    /**
+     * @param {Op} ___op
+     * @param {string} name
+     * @param {number} type
+     * @param {object} uiAttribs
+     */
     constructor(___op, name, type, uiAttribs)
     {
         super();
@@ -59,6 +65,8 @@ export default class Port extends Events
         this.value = 0.0;
 
         this.name = name;
+
+        /** @type {number} */
         this.type = type || Port.TYPE_VALUE;
         this.uiAttribs = uiAttribs || {};
 
@@ -565,7 +573,7 @@ export default class Port extends Events
      * @memberof Port
      * @instance
      * @description remove all link from port
-     * @param {CABLES.Link} link
+     * @param {Link} link
      */
     removeLink(link)
     {
@@ -818,7 +826,7 @@ export default class Port extends Events
         let hasTriggerPort = false;
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
-            if (this._op.portsIn.type == Port.TYPE_FUNCTION)
+            if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
             {
                 hasTriggerPort = true;
                 break;
@@ -835,6 +843,9 @@ export default class Port extends Events
         }
     }
 
+    /**
+     * @param {boolean} a
+     */
     setAnimated(a)
     {
         if (this._animated != a)

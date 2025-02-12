@@ -1224,12 +1224,8 @@ class Patch extends Events
     }
 
     /**
-     * @function getVars
-     * @memberof Patch
-     * @instance
-     * @param t
-     * @return {Array<Variable>} variables
-     * @function
+     * @param {number} t
+     * @returns {any}
      */
     getVars(t)
     {
