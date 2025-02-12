@@ -287,7 +287,7 @@ class Texture extends CgTexture
         if (img.width || img.videoWidth) this.width = img.videoWidth || img.width;
         if (img.height || img.videoHeight) this.height = img.videoHeight || img.height;
 
-        if (filter !== undefined) this.filter = filter; // todo: can we remove this filter param?
+        if (filter !== null) this.filter = filter; // todo: can we remove this filter param?
 
         if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
         {
