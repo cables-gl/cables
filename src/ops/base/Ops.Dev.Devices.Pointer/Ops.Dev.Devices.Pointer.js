@@ -124,6 +124,9 @@ function setValue(x, y)
     }
 }
 
+/**
+ * @param {PointerEvent} e
+ */
 function checkHovering(e)
 {
     if (e.pointerType == "touch") return true;

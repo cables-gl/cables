@@ -74,15 +74,14 @@ export const shuffleArray = function (array)
  */
 
 const _shortIds = {};
-const _shortId = function ()
+export const shortId = function ()
 {
     let str = Math.random().toString(36).substr(2, 9);
 
-    if (_shortIds.hasOwnProperty(str)) str = _shortId();
+    if (_shortIds.hasOwnProperty(str)) str = shortId();
     _shortIds[str] = true;
     return str;
 };
-export const shortId = _shortId;
 
 /**
  * generate a UUID
@@ -90,19 +89,18 @@ export const shortId = _shortId;
  * @return {String} generated UUID
  * @static
  */
-const _uuid = function ()
+export const uuid = function ()
 {
     let d = new Date().getTime();
-    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
+    const uuidStr = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
     {
         const r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
-    return uuid;
+    return uuidStr;
 };
-export const uuid = _uuid;
-export const generateUUID = _uuid;
+export const generateUUID = uuid;
 
 export function cleanJson(obj)
 {
@@ -123,7 +121,7 @@ export function cleanJson(obj)
  * @param {string} prefix
  * @return {string}
  */
-const _prefixedHash = function (str, prefix = "id")
+export const prefixedHash = function (str, prefix = "id")
 {
     let hash = 0;
     if (str.length > 0)
@@ -137,7 +135,6 @@ const _prefixedHash = function (str, prefix = "id")
     }
     return prefix + "" + hash;
 };
-export const prefixedHash = _prefixedHash;
 
 /**
  * generate a simple ID

@@ -4,11 +4,10 @@ import LoadingStatus from "./loadingstatus.js";
 import { Timer } from "./timer.js";
 import Link from "./core_link.js";
 import Profiler from "./core_profiler.js";
-import { Context } from "./cgl/cgl_state.js";
-import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
 import Op from "./core_op.js";
 import Port from "./core_port.js";
+import CglContext from "./cgl/cgl_state.js";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -108,7 +107,7 @@ class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new Context(this);
+        this.cgl = new CglContext(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};

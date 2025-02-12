@@ -132,7 +132,7 @@ op.renderVizLayer = (ctx, layer) =>
                 }
                 catch (e)
                 {
-                    str = "{object}";
+                    str = "{Object}";
                 }
             }
             else if (v != v || v === undefined)

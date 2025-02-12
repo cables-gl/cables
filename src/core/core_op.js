@@ -31,6 +31,8 @@ export default class Op extends Events
     /** @type {Array<Port>} */
     portsIn = [];
     portsInData = []; // original loaded patch data
+
+    /** @type {Object} */
     uiAttribs = {};
     enabled = true;
 
@@ -46,6 +48,8 @@ export default class Op extends Events
 
     shouldWork = {};
     hasUiErrors = false;
+
+    /** @type {Object} */
     uiErrors = {};
     hasAnimPort = false;
 

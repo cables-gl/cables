@@ -37,7 +37,7 @@ export default class Port extends Events
      * @param {Op} ___op
      * @param {string} name
      * @param {number} type
-     * @param {object} uiAttribs
+     * @param {Object} uiAttribs
      */
     constructor(___op, name, type, uiAttribs)
     {

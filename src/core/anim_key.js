@@ -4,6 +4,7 @@ export default class AnimKey
 {
     constructor(obj, an)
     {
+        this.id = CABLES.shortId();
         this.time = 0.0;
         this.value = 0.0;
         this.selected = false;
@@ -119,13 +120,15 @@ export default class AnimKey
         if (this.onChange !== null) this.onChange();
     }
 
+    /**
+     * @returns {Object}
+     */
     getSerialized()
     {
         const obj = {};
         obj.t = this.time;
         obj.v = this.value;
         obj.e = this._easing;
-        // if (this._easing == Anim.EASING_CUBICSPLINE) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
         return obj;
     }

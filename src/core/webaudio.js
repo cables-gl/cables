@@ -29,7 +29,7 @@ WEBAUDIO.toneJsInitialized = false;
  * Checks if a global audio context has been created and creates
  * it if necessary. This audio context can be used for native Web Audio as well as Tone.js ops.
  * Associates the audio context with Tone.js if it is being used
- * @param {CABLES.Op} op - The operator which needs the Audio Context
+ * @param {Types.Op} op - The operator which needs the Audio Context
  */
 WEBAUDIO.createAudioContext = function (op)
 {
@@ -71,7 +71,7 @@ WEBAUDIO.getAudioContext = function ()
  * Creates an audio in port for the op with name `portName`
  * When disconnected it will disconnect the previous connected audio node
  * from the op's audio node.
- * @param {CABLES.Op} op - The operator to create the audio port in
+ * @param {Types.Op} op - The operator to create the audio port in
  * @param {string} portName - The name of the port
  * @param {AudioNode} audioNode - The audionode incoming connections should connect to
  * @param {number} [inputChannelIndex=0] - If the audio node has multiple inputs, this is the index of the input channel to connect to
@@ -206,7 +206,7 @@ WEBAUDIO.replaceNodeInPort = function (port, oldNode, newNode)
 
 /**
  * Creates an audio out port which takes care of (dis-)connecting on it’s own
- * @param {CABLES.op} op - The op to create an audio out port for
+ * @param {Types.Op} op - The op to create an audio out port for
  * @param {string} portName - The name of the port to be created
  * @param {AudioNode} audioNode - The audio node to link to the port
  * @returns {(CABLES.Port|undefined)} - The newly created audio out port or `undefined` if there was an error
@@ -231,7 +231,7 @@ WEBAUDIO.createAudioOutPort = function (op, portName, audioNode)
  * The port accepts other audio nodes as signals as well as values (numbers)
  * When the port is disconnected it will disconnect the previous connected audio node
  * from the op's audio node and restore the number value set before.
- * @param {CABLES.Op} op - The operator to create an audio param input port for
+ * @param {Types.Op} op - The operator to create an audio param input port for
  * @param {string} portName - The name of the port to create
  * @param audioNode
  * @param options

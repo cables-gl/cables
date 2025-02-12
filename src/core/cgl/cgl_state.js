@@ -21,7 +21,7 @@ export const BLENDS = {
  * @hideconstructor
  */
 // const Context(_patch)
-class Context extends CGState
+export default class CglContext extends CGState
 {
     constructor(_patch)
     {
@@ -1164,5 +1164,3 @@ class Context extends CGState
     }
 
 }
-
-export { Context };
