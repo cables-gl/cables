@@ -335,8 +335,8 @@ class Texture extends CgTexture
     {
         if (this.loading)
         {
-        // cant delete texture when still loading
-        // setTimeout(this.delete.bind(this), 50);
+            // cant delete texture when still loading
+            // setTimeout(this.delete.bind(this), 50);
             return;
         }
 
