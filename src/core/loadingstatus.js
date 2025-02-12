@@ -10,7 +10,7 @@ import { generateUUID } from "./utils.js";
  * @param patch
  */
 
-class LoadingStatus extends Events
+export default class LoadingStatus extends Events
 {
     constructor(patch)
     {
@@ -91,7 +91,6 @@ class LoadingStatus extends Events
         return arr;
     }
 
-
     getListJobs()
     {
         let arr = [];
@@ -141,7 +140,6 @@ class LoadingStatus extends Events
         return null;
     }
 
-
     _startAssetTasks()
     {
         for (let i = 0; i < this._assetTasks.length; i++) this._assetTasks[i]();
@@ -188,7 +186,6 @@ class LoadingStatus extends Events
         name = name || "unknown";
         if (name.length > 100)name = name.substring(0, 100);
 
-
         if (op)op.setUiAttribs({ "loading": true });
 
         this._loadingAssets[id] = {
@@ -207,6 +204,3 @@ class LoadingStatus extends Events
         return id;
     }
 }
-
-
-export { LoadingStatus };

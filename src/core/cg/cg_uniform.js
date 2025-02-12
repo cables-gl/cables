@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { Port } from "../core_port.js";
+import Port from "../core_port.js";
 
 class CgUniform
 {
@@ -125,7 +125,6 @@ class CgUniform
             this._port = _value;
             this._value = this._port.get();
 
-
             if (_port2 && _port3 && _port4)
             {
                 if (!(_port2 instanceof Port) || !(_port3 instanceof Port) || !(_port4 instanceof Port))
@@ -186,7 +185,6 @@ class CgUniform
         }
         else this._value = _value;
 
-
         if (this._value == undefined)
         {
             this._value = 0;
@@ -231,7 +229,6 @@ class CgUniform
     {
         return !!this._structName;
     }
-
 
     updateFromPort4f()
     {

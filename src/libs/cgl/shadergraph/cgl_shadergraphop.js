@@ -23,7 +23,6 @@ class ShaderGraphOp
         {
             if (this._op.portsIn[i].type != CABLES.OP_PORT_TYPE_OBJECT) continue;
 
-
             if (this._op.portsIn[i].uiAttribs.objType && this._op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0) this._op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
 
             this._op.portsIn[i].on("change", this.updateGraph.bind(this));
@@ -197,7 +196,6 @@ class ShaderGraphOp
         this._op.refreshParams();
     }
 
-
     /**
  * add a define to a shader, e.g.  #define DO_THIS_THAT 1
  * @function define
@@ -221,7 +219,6 @@ class ShaderGraphOp
 
             value = value.get();
         }
-
 
         for (let i = 0; i < this._defines.length; i++)
         {
@@ -297,7 +294,6 @@ class ShaderGraphOp
         this.updateGraph();
     }
 }
-
 
 ShaderGraphOp.getMaxGenTypeFromPorts = (ports, portsSetType) =>
 {

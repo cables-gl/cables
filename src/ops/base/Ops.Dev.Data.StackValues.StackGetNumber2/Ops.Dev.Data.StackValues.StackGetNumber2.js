@@ -34,7 +34,7 @@ inExec.onTriggered = () =>
         if (op.patch.stackValues)
             for (let i in op.patch.stackValues)
             {
-                if (CABLES.UTILS.isNumeric(op.patch.stackValues[i][0]))
+                if (CABLES.isNumeric(op.patch.stackValues[i][0]))
                 {
                     names.push(i);
                     // console.log(i);

@@ -71,7 +71,7 @@ function asFlat()
             for (let x = 0; x < data.cells[0].length; x++)
             {
                 let v = data.cells[y][x] || defaultValue;
-                if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
+                if (CABLES.isNumeric(v)) v = parseFloat(v);
                 if (v !== "" && v !== null) lastRow = y;
 
                 arr[x + (y * data.cols)] = v;
@@ -103,7 +103,7 @@ function asObjectArray(objects)
             for (let x = 0; x < data.cols; x++)
             {
                 let v = data.cells[y][x] || defaultValue;
-                if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
+                if (CABLES.isNumeric(v)) v = parseFloat(v);
                 if (v !== "" && v !== null) lastRow = y;
 
                 if (objects) o[getColName(data, x)] = v;

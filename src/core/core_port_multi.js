@@ -1,20 +1,18 @@
 import { CONSTANTS } from "./constants.js";
-import { Port } from "./core_port.js";
+import Port from "./core_port.js";
 
 const MIN_NUM_PORTS = 2;
 
-class MultiPort extends Port
+export default class MultiPort extends Port
 {
     constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {
-        super(__parent, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, uiAttribs);
+        super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
         this._uiAttribsPorts = uiAttribsPorts;
-
-        // console.log("uiattribs", uiAttribs);
 
         const updateArray = () =>
         {
@@ -251,8 +249,8 @@ class MultiPort extends Port
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
             else this.op.addInPort(po);
 
-            if (type == CONSTANTS.OP.OP_PORT_TYPE_NUMBER) po.setInitialValue(0);
-            else if (type == CONSTANTS.OP.OP_PORT_TYPE_STRING) po.setInitialValue("");
+            if (type == Port.TYPE_NUMBER) po.setInitialValue(0);
+            else if (type == Port.TYPE_STRING) po.setInitialValue("");
 
             this.addListeners();
 
@@ -317,5 +315,3 @@ class MultiPort extends Port
         updateUi();
     }
 }
-
-export { MultiPort };

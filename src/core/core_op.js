@@ -1,61 +1,68 @@
 import { Events, Logger } from "cables-shared-client";
-import { UTILS, cleanJson, shortId } from "./utils.js";
+import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
-import { Port } from "./core_port.js";
-import { SwitchPort } from "./core_port_switch.js";
-import { ValueSelectPort } from "./core_port_select.js";
-import { MultiPort } from "./core_port_multi.js";
+import Port from "./core_port.js";
+import SwitchPort from "./core_port_switch.js";
+import ValueSelectPort from "./core_port_select.js";
+import MultiPort from "./core_port_multi.js";
 import Patch from "./core_patch.js";
 
-export class Op extends Events
+export default class Op extends Events
 {
+
+    static OP_VERSION_PREFIX = "_v";
+
+    #objName = "";
+    #log = new Logger("core_op");
+    #name = "";
+    #shortOpName = "";
+
+    opId = ""; // unique op id
+
+    /** @type {Array<Port>} */
+    portsOut = [];
+
+    /** @type {Patch} */
+    patch = null;
+
+    data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+    storage = {}; // op-specific data to be included in export
+
+    /** @type {Array<Port>} */
+    portsIn = [];
+    portsInData = []; // original loaded patch data
+    uiAttribs = {};
+    enabled = true;
+
+    preservedPortTitles = {};
+    preservedPortValues = {};
+    preservedPortLinks = {};
+
+    linkTimeRules = {
+        "needsLinkedToWork": [],
+        "needsStringToWork": [],
+        "needsParentOp": null
+    };
+
+    shouldWork = {};
+    hasUiErrors = false;
+    uiErrors = {};
+    hasAnimPort = false;
 
     /**
      * Description
      * @param {Patch} _patch
      * @param {String} _name
      * @param {String} _id=null
-     */
+    */
     constructor(_patch, _name, _id = null)
     {
         super();
 
-        /**
-         * @private
-         */
-        this._log = new Logger("core_op");
-        this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
-        this.storage = {}; // op-specific data to be included in export
-        this.__objName = "";
-        this.portsOut = [];
-        this.portsIn = [];
-        this.portsInData = []; // original loaded patch data
-        this.opId = ""; // unique op id
-        this.uiAttribs = {};
-        this.enabled = true;
-
-        /**
-         * @type {Patch}
-         */
+        this.#name = _name;
         this.patch = _patch;
-        this._name = _name;
 
-        this.preservedPortTitles = {};
-        this.preservedPortValues = {};
-        this.preservedPortLinks = {};
-
-        this._linkTimeRules = {
-            "needsLinkedToWork": [],
-            "needsStringToWork": [],
-            "needsParentOp": null
-        };
-
-        this.shouldWork = {};
-        this.hasUiErrors = false;
-        this._uiErrors = {};
-        this._hasAnimPort = false;
-
-        this._shortOpName = CABLES.getShortOpName(_name);
+        this.#shortOpName = CABLES.getShortOpName(_name);
         this.getTitle();
 
         this.id = _id || shortId(); // instance id
@@ -114,23 +121,18 @@ export class Op extends Events
 
     set _objName(on)
     {
-        this.__objName = on; this._log = new Logger("op " + on);
+        this.#objName = on;
+        this.#log = new Logger("op " + on);
     }
 
     get objName()
     {
-        return this.__objName;
+        return this.#objName;
     }
 
     get shortName()
     {
-        return this._shortOpName;
-    }
-
-    clearUiAttrib(name)
-    {
-        const obj = {};
-        this.uiAttrib(obj);
+        return this.#shortOpName;
     }
 
     /**
@@ -154,29 +156,33 @@ export class Op extends Events
         else this.setUiError("nomainloop", null);
     }
 
+    /** @returns {string} */
     getTitle()
     {
-        if (!this.uiAttribs) return "nouiattribs" + this._name;
+        if (!this.uiAttribs) return "nouiattribs" + this.#name;
 
         /*
          * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
          *     this.uiAttribs.title = this._shortOpName;
          */
 
-        return this.uiAttribs.title || this._shortOpName;
+        return this.uiAttribs.title || this.#shortOpName;
     }
 
+    /**
+     * @param {string} title
+     */
     setTitle(title)
     {
 
         /*
-         * this._log.log("settitle", title);
-         * this._log.log(
+         * this.#log.log("settitle", title);
+         * this.#log.log(
          *     (new Error()).stack
          * );
          */
 
-        if (title != this.getTitle()) this.uiAttr({ "title": title });
+        if (title != this.getTitle()) this._setUiAttrib({ "title": title });
     }
 
     setStorage(newAttribs)
@@ -244,9 +250,9 @@ export class Op extends Events
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-            this._log.warn("old ui error/warning attribute in " + this._name + ", use op.setUiError !", newAttribs);
+            this.#log.warn("old ui error/warning attribute in " + this.#name + ", use op.setUiError !", newAttribs);
 
-        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
+        if (typeof newAttribs != "object") this.#log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
         let changed = false;
@@ -291,9 +297,12 @@ export class Op extends Events
     getName()
     {
         if (this.uiAttribs.name) return this.uiAttribs.name;
-        return this._name;
+        return this.#name;
     }
 
+    /**
+     * @param {Port} p
+     */
     addOutPort(p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
@@ -308,12 +317,12 @@ export class Op extends Events
         let i = 0;
         for (i = 0; i < this.portsIn.length; i++)
         {
-            if (this.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsIn[i].type == Port.TYPE_DYNAMIC) return true;
             if (this.portsIn[i].getName() == "dyn") return true;
         }
         for (i = 0; i < this.portsOut.length; i++)
         {
-            if (this.portsOut[i].type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsOut[i].type == Port.TYPE_DYNAMIC) return true;
             if (this.portsOut[i].getName() == "dyn") return true;
         }
 
@@ -352,7 +361,7 @@ export class Op extends Events
      */
     inTrigger(name, v)
     {
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
+        const p = this.addInPort(new Port(this, name, Port.TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -378,7 +387,7 @@ export class Op extends Events
     inTriggerButton(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
+            new Port(this, name, Port.TYPE_FUNCTION, {
                 "display": "button"
             })
         );
@@ -389,7 +398,7 @@ export class Op extends Events
     inUiTriggerButtons(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
+            new Port(this, name, Port.TYPE_FUNCTION, {
                 "display": "buttons"
             })
         );
@@ -419,13 +428,12 @@ export class Op extends Events
      * @memberof Op
      * @instance
      * @param {String} name
-     * @param {Number} value
+     * @param {Number} v
      * @return {Port} created port
      */
-
     inFloat(name, v)
     {
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
+        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE));
 
         p.setInitialValue(v);
 
@@ -452,7 +460,7 @@ export class Op extends Events
     inBool(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
+            new Port(this, name, Port.TYPE_NUMBER, {
                 "display": "bool"
             })
         );
@@ -464,6 +472,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {number} type
+     */
     inMultiPort(name, type)
     {
         const p = new MultiPort(
@@ -505,10 +517,14 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inValueString(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "type": "string"
             })
         );
@@ -524,13 +540,13 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inString(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new Port(this, name, Port.TYPE_STRING, {
                 "type": "string"
             })
         );
@@ -547,13 +563,13 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inValueText(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "type": "string",
                 "display": "text"
             })
@@ -572,10 +588,14 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inTextarea(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new Port(this, name, Port.TYPE_STRING, {
                 "type": "string",
                 "display": "text"
             })
@@ -595,13 +615,13 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inStringEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new Port(this, name, Port.TYPE_STRING, {
                 "type": "string",
                 "display": "editor",
                 "editShortcut": true,
@@ -624,7 +644,7 @@ export class Op extends Events
     inValueEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
+            new Port(this, name, Port.TYPE_NUMBER, {
                 "type": "string",
                 "display": "editor",
                 "editorSyntax": syntax,
@@ -655,7 +675,7 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @param {Array} values
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inDropDown(name, values, v, noindex)
@@ -663,7 +683,7 @@ export class Op extends Events
         let p = null;
         if (!noindex)
         {
-            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_NUMBER, {
+            const indexPort = new Port(this, name + " index", Port.TYPE_NUMBER, {
                 "increment": "integer",
                 "hideParam": true
             });
@@ -674,7 +694,7 @@ export class Op extends Events
             const valuePort = new ValueSelectPort(
                 this,
                 name,
-                CONSTANTS.OP.OP_PORT_TYPE_NUMBER,
+                Port.TYPE_NUMBER,
                 {
                     "display": "dropdown",
                     "hidePort": true,
@@ -714,7 +734,7 @@ export class Op extends Events
         }
         else
         {
-            const valuePort = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            const valuePort = new Port(this, name, Port.TYPE_VALUE, {
                 "display": "dropdown",
                 "hidePort": true,
                 "type": "string",
@@ -734,7 +754,7 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @param {Array} values
-     * @param {String} value default value
+     * @param {String} v default value
      * @return {Port} created port
      */
     inSwitch(name, values, v, noindex)
@@ -743,7 +763,7 @@ export class Op extends Events
         if (!noindex)
         {
             if (!v)v = values[0];
-            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            const indexPort = new Port(this, name + " index", Port.TYPE_VALUE, {
                 "increment": "integer",
                 "values": values,
                 "hideParam": true
@@ -755,7 +775,7 @@ export class Op extends Events
             const switchPort = new SwitchPort(
                 this,
                 name,
-                CONSTANTS.OP.OP_PORT_TYPE_STRING,
+                Port.TYPE_STRING,
                 {
                     "display": "switch",
                     "hidePort": true,
@@ -793,7 +813,7 @@ export class Op extends Events
         }
         else
         {
-            const switchPort = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            const switchPort = new Port(this, name, Port.TYPE_STRING, {
                 "display": "switch",
                 "hidePort": true,
                 "type": "string",
@@ -826,7 +846,7 @@ export class Op extends Events
     {
         // old
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "increment": "integer" })
         );
         if (v !== undefined)
@@ -843,12 +863,14 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {String} filter
+     * @param {String} v
      * @return {Port} created port
      */
     inFile(name, filter, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "display": "file",
                 "type": "string",
                 "filter": filter
@@ -868,7 +890,7 @@ export class Op extends Events
     inUrl(name, filter, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new Port(this, name, Port.TYPE_STRING, {
                 "display": "file",
                 "type": "string",
                 "filter": filter
@@ -893,7 +915,7 @@ export class Op extends Events
     inTexture(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
+            new Port(this, name, Port.TYPE_OBJECT, {
                 "display": "texture",
                 "objType": "texture",
                 "preview": true
@@ -914,17 +936,21 @@ export class Op extends Events
      */
     inObject(name, v, objType)
     {
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType }));
+        const p = this.addInPort(new Port(this, name, Port.TYPE_OBJECT, { "objType": objType }));
         p.ignoreValueSerialize = true;
 
         if (v !== undefined) p.set(v);
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
     inGradient(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "display": "gradient"
                 // "hidePort": true
             })
@@ -950,20 +976,20 @@ export class Op extends Events
     /**
      * create a array input port
      * @function inArray
-     * @instance
      * @memberof Op
      * @param {String} name
+     * @param {array} v
+     * @param {number} stride
      * @return {Port} created port
      */
     inArray(name, v, stride)
     {
-        if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
+        if (!stride && CABLES.isNumeric(v))stride = v;
 
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
+        const p = this.addInPort(new Port(this, name, Port.TYPE_ARRAY, { "stride": stride }));
 
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 
-        // if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -981,7 +1007,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} defaultvalue
+     * @param {number} v
      * @param {number} min
      * @param {number} max
      * @return {Port} created port
@@ -996,7 +1022,7 @@ export class Op extends Events
             uiattribs.max = max;
         }
 
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, uiattribs));
+        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE, uiattribs));
         if (v !== undefined)
         {
             p.set(v);
@@ -1024,7 +1050,7 @@ export class Op extends Events
     outTrigger(name, v)
     {
         // old
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
+        const p = this.addOutPort(new Port(this, name, Port.TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -1043,12 +1069,12 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} default value
+     * @param {number} v default value
      * @return {Port} created port
      */
     outNumber(name, v)
     {
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
+        const p = this.addOutPort(new Port(this, name, Port.TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -1068,13 +1094,14 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {boolean} v default value
      * @return {Port} created port
      */
     outBool(name, v)
     {
         // old: use outBoolNum
         const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "display": "bool"
             })
         );
@@ -1094,7 +1121,7 @@ export class Op extends Events
     outBoolNum(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "display": "boolnum"
             })
         );
@@ -1115,7 +1142,7 @@ export class Op extends Events
     outValueString(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, Port.TYPE_VALUE, {
                 "type": "string"
             })
         );
@@ -1134,7 +1161,7 @@ export class Op extends Events
     outString(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new Port(this, name, Port.TYPE_STRING, {
                 "type": "string"
             })
         );
@@ -1153,7 +1180,7 @@ export class Op extends Events
      */
     outObject(name, v, objType)
     {
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType || null }));
+        const p = this.addOutPort(new Port(this, name, Port.TYPE_OBJECT, { "objType": objType || null }));
         p.set(v || null);
         p.ignoreValueSerialize = true;
         return p;
@@ -1169,8 +1196,8 @@ export class Op extends Events
      */
     outArray(name, v, stride)
     {
-        if (!stride && CABLES.UTILS.isNumeric(v))stride = v;
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY, { "stride": stride }));
+        if (!stride && CABLES.isNumeric(v))stride = v;
+        const p = this.addOutPort(new Port(this, name, Port.TYPE_ARRAY, { "stride": stride }));
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 
         p.ignoreValueSerialize = true;
@@ -1188,7 +1215,7 @@ export class Op extends Events
     outTexture(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
+            new Port(this, name, Port.TYPE_OBJECT, {
                 "preview": true,
                 "objType": "texture",
                 "display": "texture"
@@ -1202,7 +1229,7 @@ export class Op extends Events
 
     inDynamic(name, filter, options, v)
     {
-        const p = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC, options);
+        const p = new Port(this, name, Port.TYPE_DYNAMIC, options);
 
         p.shouldLink = (p1, p2) =>
         {
@@ -1251,8 +1278,8 @@ export class Op extends Events
         if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
         if (opObj.uiAttribs.comment === null) delete opObj.uiAttribs.comment;
 
-        if (opObj.uiAttribs.title == this._shortOpName ||
-            (this.uiAttribs.title || "").toLowerCase() == this._shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
+        if (opObj.uiAttribs.title == this.#shortOpName ||
+            (this.uiAttribs.title || "").toLowerCase() == this.#shortOpName.toLowerCase()) delete opObj.uiAttribs.title;
 
         opObj.portsIn = [];
         opObj.portsOut = [];
@@ -1291,7 +1318,8 @@ export class Op extends Events
      * @function getPort
      * @instance
      * @memberof Op
-     * @param {String} portName
+     * @param {String} name
+     * @param {boolean} lowerCase
      * @return {Port}
      */
     getPort(name, lowerCase)
@@ -1299,7 +1327,12 @@ export class Op extends Events
         return this.getPortByName(name, lowerCase);
     }
 
-    getPortByName(name, lowerCase)
+    /**
+     * @param {string} name
+     * @param {boolean} lowerCase
+     * @returns {Port}
+     */
+    getPortByName(name, lowerCase = false)
     {
         if (lowerCase)
         {
@@ -1339,13 +1372,13 @@ export class Op extends Events
 
     updateAnims()
     {
-        if (this._hasAnimPort)
+        if (this.hasAnimPort)
             for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
     }
 
     log()
     {
-        this._log.log(...arguments);
+        this.#log.log(...arguments);
     }
 
     /**
@@ -1353,12 +1386,12 @@ export class Op extends Events
      */
     error()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     logError()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     /**
@@ -1366,12 +1399,12 @@ export class Op extends Events
      */
     warn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     logWarn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     /**
@@ -1379,12 +1412,12 @@ export class Op extends Events
      */
     verbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     logVerbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     profile()
@@ -1436,7 +1469,7 @@ export class Op extends Events
         return false;
 
         /*
-         * this._log.log("instanced", this.patch.instancing.numCycles());
+         * this.#log.log("instanced", this.patch.instancing.numCycles());
          * if (this.patch.instancing.numCycles() === 0) return false;
          */
 
@@ -1464,7 +1497,7 @@ export class Op extends Events
         /*
          *         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
          *         {
-         *             if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *             if (this.portsOut[ipo].type == Port.TYPE_FUNCTION)
          *             {
          *                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
          *             }
@@ -1486,13 +1519,13 @@ export class Op extends Events
          * for (ipi = 0; ipi < this.portsIn.length; ipi++)
          * {
          *     if (
-         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
-         *         this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
+         *         this.portsIn[ipi].type == Port.TYPE_VALUE ||
+         *         this.portsIn[ipi].type == Port.TYPE_ARRAY
          *     )
          *     {
          *         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
          *     }
-         *     if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+         *     if (this.portsIn[ipi].type == Port.TYPE_FUNCTION)
          *     {
          *         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
          *         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
@@ -1505,7 +1538,7 @@ export class Op extends Events
         /*
          * for (ipi = 0; ipi < this.portsOut.length; ipi++)
          * {
-         *     if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
+         *     if (this.portsOut[ipi].type == Port.TYPE_VALUE)
          *     {
          *         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
          *     }
@@ -1520,24 +1553,24 @@ export class Op extends Events
     {
         //         if(this.isInstanced)
         //         {
-        //             this._log.log('cancel instancing');
+        //             this.#log.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
         //         for(var ipi=0;ipi<this.portsIn.length;ipi++)
         //         {
-        //             if(this.portsIn[ipi].type==CONSTANTS.OP.OP_PORT_TYPE_VALUE)
+        //             if(this.portsIn[ipi].type==Port.TYPE_VALUE)
         //             {
         //
         //             }
-        //             if(this.portsIn[ipi].type==CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        //             if(this.portsIn[ipi].type==Port.TYPE_FUNCTION)
         //             {
         //                 // var piIndex=ipi;
         //                 this.portsIn[ipi].onTriggered=function(piIndex)
         //                 {
         //
         //                     var i=0;
-        // // this._log.log('trigger',this._instances.length);
+        // // this.#log.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //
@@ -1552,7 +1585,7 @@ export class Op extends Events
         {
             const port = this.getPortByName(i);
             if (port) port.set(obj[i]);
-            else this._log.warn("op.setValues: port not found:", i);
+            else this.#log.warn("op.setValues: port not found:", i);
         }
     }
 
@@ -1566,7 +1599,7 @@ export class Op extends Events
      */
     hasUiError(id)
     {
-        return this._uiErrors.hasOwnProperty(id) && this._uiErrors[id];
+        return this.uiErrors.hasOwnProperty(id) && this.uiErrors[id];
     }
 
     /**
@@ -1586,7 +1619,7 @@ export class Op extends Events
     // todo: remove
     setError(id, txt)
     {
-        this._log.warn("old error message op.error() - use op.setUiError()");
+        this.#log.warn("old error message op.error() - use op.setUiError()");
     }
 
     /**
@@ -1616,7 +1649,7 @@ export class Op extends Events
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else this._log.error("setPortGroup: invalid port!");
+                else this.#log.error("setPortGroup: invalid port!");
         }
     }
 
@@ -1678,7 +1711,7 @@ export class Op extends Events
      */
     toWorkNeedsParent(parentOpName)
     {
-        this._linkTimeRules.needsParentOp = parentOpName;
+        this.linkTimeRules.needsParentOp = parentOpName;
     }
 
     // /**
@@ -1691,15 +1724,15 @@ export class Op extends Events
     toWorkShouldNotBeChild(parentOpName, type)
     {
         if (!this.patch.isEditorMode()) return;
-        this._linkTimeRules.forbiddenParent = parentOpName;
-        if (type != undefined) this._linkTimeRules.forbiddenParentType = type;
+        this.linkTimeRules.forbiddenParent = parentOpName;
+        if (type != undefined) this.linkTimeRules.forbiddenParentType = type;
     }
 
     toWorkPortsNeedsString()
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
-            if (this._linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsStringToWork.push(arguments[i]);
+            if (this.linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsStringToWork.push(arguments[i]);
     }
 
     /**
@@ -1715,13 +1748,13 @@ export class Op extends Events
     {
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
-            if (this._linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this._linkTimeRules.needsLinkedToWork.push(arguments[i]);
+            if (this.linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsLinkedToWork.push(arguments[i]);
     }
 
     toWorkPortsNeedToBeLinkedReset()
     {
         if (!this.patch.isEditorMode()) return;
-        this._linkTimeRules.needsLinkedToWork.length = 0;
+        this.linkTimeRules.needsLinkedToWork.length = 0;
         if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
     }
 

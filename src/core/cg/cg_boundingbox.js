@@ -150,7 +150,7 @@ class BoundingBox
             y == Number.MAX_VALUE || y == -Number.MAX_VALUE ||
             z == Number.MAX_VALUE || z == -Number.MAX_VALUE) return;
 
-        if (!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z)) return;
+        if (!CABLES.isNumeric(x) || !CABLES.isNumeric(y) || !CABLES.isNumeric(z)) return;
 
         if (this._first)
         {

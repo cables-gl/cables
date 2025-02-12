@@ -41,7 +41,7 @@ function update()
             if (data.cols == 2)
             {
                 let v = data.cells[y][1] || null;
-                if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
+                if (CABLES.isNumeric(v)) v = parseFloat(v);
 
                 if (data.cells[y][0]) obj[data.cells[y][0]] = v;
             }
@@ -53,7 +53,7 @@ function update()
                 for (let x = 1; x < data.cols; x++)
                 {
                     let v = data.cells[y][x] || null;
-                    if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
+                    if (CABLES.isNumeric(v)) v = parseFloat(v);
 
                     row[getColName(data, x)] = v;
                 }

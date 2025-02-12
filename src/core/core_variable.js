@@ -1,15 +1,13 @@
 import { Events } from "cables-shared-client";
 
-/**
- * @type {Object}
- * @name PatchVariable
- * @param {String} name
- * @param {String|Number} value
- * @memberof Patch
- * @constructor
- */
 class PatchVariable extends Events
 {
+
+    /**
+     * @param {String} name
+     * @param {String|Number} val
+     * @param {number} type
+     */
     constructor(name, val, type)
     {
         super();

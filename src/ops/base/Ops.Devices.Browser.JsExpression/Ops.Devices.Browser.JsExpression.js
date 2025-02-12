@@ -16,7 +16,7 @@ function update()
     {
         const a = eval("\"use strict\";" + inJs.get());
 
-        if (CABLES.UTILS.isNumeric(a))
+        if (CABLES.isNumeric(a))
         {
             outNum.set(a);
             outStr.set(a + "");

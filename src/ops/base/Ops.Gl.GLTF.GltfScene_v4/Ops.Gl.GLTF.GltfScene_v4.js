@@ -317,7 +317,7 @@ function finishLoading()
         for (let i = 0; i < gltf.nodes.length; i++)
         {
             const node = gltf.nodes[i];
-            node.children = uniqueArray(node.children); // stupid fix why are there too many children ?!
+            node.children = CABLES.uniqueArray(node.children); // stupid fix why are there too many children ?!
         }
     }
 
@@ -727,17 +727,3 @@ op.toggleNodeVisibility = function (name)
 
     saveData();
 };
-
-function uniqueArray(arr)
-{
-    const u = {}, a = [];
-    for (let i = 0, l = arr.length; i < l; ++i)
-    {
-        if (!u.hasOwnProperty(arr[i]))
-        {
-            a.push(arr[i]);
-            u[arr[i]] = 1;
-        }
-    }
-    return a;
-}

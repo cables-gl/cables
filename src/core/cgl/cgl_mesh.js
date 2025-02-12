@@ -40,7 +40,7 @@ class Mesh extends CgMesh
         this._cgl = _cgl;
 
         let options = _options || {};
-        if (CABLES.UTILS.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
+        if (CABLES.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
         this._log = new Logger("cgl_mesh");
         this._bufVertexAttrib = null;
         this._bufVerticesIndizes = this._cgl.gl.createBuffer();

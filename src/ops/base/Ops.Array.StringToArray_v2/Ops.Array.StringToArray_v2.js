@@ -62,7 +62,7 @@ function parse()
         for (let i = 0; i < r.length; i++)
         {
             r[i] = Number(r[i]);
-            if (!CABLES.UTILS.isNumeric(r[i]))
+            if (!CABLES.isNumeric(r[i]))
             {
                 hasStrings = true;
             }

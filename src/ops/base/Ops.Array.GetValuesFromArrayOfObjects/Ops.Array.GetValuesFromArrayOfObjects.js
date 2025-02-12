@@ -51,7 +51,7 @@ function exec()
 
             if (numsonly)
             {
-                if (CABLES.UTILS.isNumeric(v)) newArr.push(parseFloat(v));
+                if (CABLES.isNumeric(v)) newArr.push(parseFloat(v));
                 else newArr.push(0);
             }
             else

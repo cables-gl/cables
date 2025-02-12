@@ -3,19 +3,19 @@
  */
 
 import { CONSTANTS } from "./constants.js";
+import extendJs from "./extendjs.js";
 
-const UTILS = {};
+extendJs();
 
 /**
  * Merge two Float32Arrays.
  * @function float32Concat
- * @memberof Utils
  * @param {Float32Array} first Left-hand side array
  * @param {Float32Array} second Right-hand side array
  * @return {Float32Array}
  * @static
  */
-UTILS.float32Concat = function (first, second)
+export function float32Concat(first, second)
 {
     if (!(first instanceof Float32Array)) first = new Float32Array(first);
     if (!(second instanceof Float32Array)) second = new Float32Array(second);
@@ -26,7 +26,7 @@ UTILS.float32Concat = function (first, second)
     result.set(second, first.length);
 
     return result;
-};
+}
 
 /**
  * get op shortname: only last part of fullname and without version
@@ -50,7 +50,6 @@ export const getShortOpName = function (fullname)
 /**
  * randomize order of an array
  * @function shuffleArray
- * @memberof Utils
  * @param {Array|Float32Array} array {Array} original
  * @return {Array|Float32Array} shuffled array
  * @static
@@ -70,7 +69,6 @@ export const shuffleArray = function (array)
 /**
  * generate a short "relativly unique" id
  * @function shortId
- * @memberof Utils
  * @return {String} generated ID
  * @static
  */
@@ -89,7 +87,6 @@ export const shortId = _shortId;
 /**
  * generate a UUID
  * @function uuid
- * @memberof Utils
  * @return {String} generated UUID
  * @static
  */
@@ -122,28 +119,20 @@ export function cleanJson(obj)
 
 /**
  * @see http://stackoverflow.com/q/7616461/940217
- * @memberof Utils
- * @param str
- * @param prefix
+ * @param {string} str
+ * @param {string} prefix
  * @return {string}
  */
 const _prefixedHash = function (str, prefix = "id")
 {
     let hash = 0;
-    if (Array.prototype.reduce)
+    if (str.length > 0)
     {
-        hash = str.split("").reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
-    }
-    else
-    {
-        if (str.length > 0)
+        for (let i = 0; i < str.length; i++)
         {
-            for (let i = 0; i < str.length; i++)
-            {
-                let character = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + character;
-                hash &= hash; // Convert to 32bit integer
-            }
+            let character = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + character;
+            hash &= hash; // Convert to 32bit integer
         }
     }
     return prefix + "" + hash;
@@ -153,7 +142,6 @@ export const prefixedHash = _prefixedHash;
 /**
  * generate a simple ID
  * @function simpleId
- * @memberof Utils
  * @return {Number} new id
  * @static
  */
@@ -167,7 +155,6 @@ export const simpleId = function ()
 /**
  * smoothStep a value
  * @function smoothStep
- * @memberof Utils
  * @function
  * @param {Number} perc value value to be smoothed [0-1]
  * @return {Number} smoothed value
@@ -183,7 +170,6 @@ export const smoothStep = function (perc)
 /**
  * smootherstep a value
  * @function smootherStep
- * @memberof Utils
  * @param {Number} perc value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
@@ -198,7 +184,6 @@ export const smootherStep = function (perc)
 /**
  * clamp number / make sure its between min/max
  * @function clamp
- * @memberof Utils
  * @param {Number} value value to be mapped
  * @param {Number} min minimum value
  * @param {Number} max maximum value
@@ -212,7 +197,6 @@ export const clamp = function (value, min, max)
 /**
  * map a value in a range to a value in another range
  * @function map
- * @memberof Utils
  * @param {Number} x value to be mapped
  * @param {Number} _oldMin old range minimum value
  * @param {Number} _oldMax old range maximum value
@@ -222,7 +206,7 @@ export const clamp = function (value, min, max)
  * @return {Number} mapped value
  * @static
  */
-export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
+export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0)
 {
     if (x >= _oldMax) return _newMax;
     if (x <= _oldMin) return _newMin;
@@ -263,133 +247,31 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
     return r;
 };
 
-/**
- * @namespace Math
- */
-/**
- * set random seed for seededRandom()
- * @memberof Math
- * @type Number
- * @static
- */
-Math.randomSeed = 1;
-
-Math.setRandomSeed = function (seed)
-{
-    // https://github.com/cables-gl/cables_docs/issues/622
-    Math.randomSeed = seed * 50728129;
-    if (seed != 0)
-    {
-        Math.randomSeed = Math.seededRandom() * 17624813;
-        Math.randomSeed = Math.seededRandom() * 9737333;
-    }
-};
-
-/**
- * generate a seeded random number
- * @function seededRandom
- * @memberof Math
- * @param {Number} max minimum possible random number
- * @param {Number} min maximum possible random number
- * @return {Number} random value
- * @static
- */
-Math.seededRandom = function (max, min)
-{
-    if (Math.randomSeed === 0) Math.randomSeed = Math.random() * 999;
-    max = max || 1;
-    min = min || 0;
-
-    Math.randomSeed = (Math.randomSeed * 9301 + 49297) % 233280;
-    const rnd = Math.randomSeed / 233280.0;
-
-    return min + rnd * (max - min);
-};
-
 // ----------------------------------------------------------------
 
 /**
  * returns true if parameter is a number
  * @function isNumeric
- * @memberof Utils
  * @param {Any} n value The value to check.
  * @return {Boolean}
  * @static
  */
-UTILS.isNumeric = function (n)
+export function isNumeric(n)
 {
     return !isNaN(parseFloat(n)) && isFinite(n);
-};
+}
 
 /**
  * returns true if parameter is array
  * @function isArray
- * @param {Any} v value Value to check
- * @memberof Utils
+ * @param {any} v value Value to check
  * @return {Boolean}
  * @static
  */
-UTILS.isArray = function (v)
+export function isArray(v)
 {
     return Object.prototype.toString.call(v) === "[object Array]";
-};
-
-/**
- * @namespace String
- */
-
-/**
- * append a linebreak to a string
- * @function endl
- * @memberof String
- * @return {String} string with newline break appended ('\n')
- */
-String.prototype.endl = function ()
-{
-    return this + "\n";
-};
-
-/**
- * return true if string starts with prefix
- * @function startsWith
- * @memberof String
- * @param {String} prefix The prefix to check.
- * @return {Boolean}
- */
-String.prototype.startsWith = function (prefix)
-{
-    if (!this || !prefix) return false;
-    if (this.length >= prefix.length)
-    {
-        if (this.substring(0, prefix.length) == prefix) return true;
-    }
-    return false;
-    // return this.indexOf(prefix) === 0;
-};
-
-/**
- * return true if string ends with suffix
- * @function endsWith
- * @memberof String
- * @param {String} suffix
- * @return {Boolean}
- */
-String.prototype.endsWith = String.prototype.endsWith || function (suffix)
-{
-    return this.match(suffix + "$") == suffix;
-};
-
-/**
- * return true if string contains string
- * @function contains
- * @memberof String
- * @param {String} searchStr
- * @return {Boolean}
- */
-String.prototype.contains = String.prototype.contains || function (searchStr)
-{
-    return this.indexOf(searchStr) > -1;
-};
+}
 
 // ----------------------------------------------------------------
 
@@ -397,7 +279,6 @@ String.prototype.contains = String.prototype.contains || function (searchStr)
  * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
  * @function cacheBust
  * @static
- * @memberof Utils
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
@@ -414,7 +295,6 @@ export const cacheBust = function (url = "")
  * copy the content of an array
  * @function copyArray
  * @static
- * @memberof Utils
  * @param {Array} src sourceArray
  * @param {Array} dst optional
  * @return {Array} dst
@@ -425,9 +305,7 @@ export const copyArray = function (src, dst)
     dst = dst || [];
     dst.length = src.length;
     for (let i = 0; i < src.length; i++)
-    {
         dst[i] = src[i];
-    }
 
     return dst;
 };
@@ -436,7 +314,6 @@ export const copyArray = function (src, dst)
  * return the filename part of a url without extension
  * @function basename
  * @static
- * @memberof Utils
  * @param {String} url
  * @return {String} just the filename
  */
@@ -454,7 +331,6 @@ export const basename = function (url)
  * output a stacktrace to the console
  * @function logStack
  * @static
- * @memberof Utils
  */
 export const logStack = function ()
 {
@@ -465,7 +341,6 @@ export const logStack = function ()
  * return the filename part of a url
  * @function filename
  * @static
- * @memberof Utils
  * @param {String} url
  * @return {String} just the filename
  */
@@ -655,14 +530,6 @@ export const keyCodeToName = function (keyCode)
 };
 // ----------------------------------------------------------------
 
-window.performance = window.performance || {
-    "offset": Date.now(),
-    "now": function now()
-    {
-        return Date.now() - this.offset;
-    },
-};
-
 export const logErrorConsole = function (initiator)
 {
     CABLES.errorConsole = CABLES.errorConsole || { "log": [] };
@@ -712,4 +579,19 @@ export const logErrorConsole = function (initiator)
     CABLES.errorConsole.ele.innerHTML = logHtml;
 };
 
-export { UTILS };
+/**
+ * @param {Array<any>} arr
+ */
+export function uniqueArray(arr)
+{
+    const u = {}, a = [];
+    for (let i = 0, l = arr.length; i < l; ++i)
+    {
+        if (!u.hasOwnProperty(arr[i]))
+        {
+            a.push(arr[i]);
+            u[arr[i]] = 1;
+        }
+    }
+    return a;
+}

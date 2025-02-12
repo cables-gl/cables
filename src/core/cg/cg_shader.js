@@ -1,6 +1,6 @@
 import { Events } from "cables-shared-client";
 import { simpleId } from "../utils.js";
-import { Port } from "../core_port.js";
+import Port from "../core_port.js";
 
 class CgShader extends Events
 {

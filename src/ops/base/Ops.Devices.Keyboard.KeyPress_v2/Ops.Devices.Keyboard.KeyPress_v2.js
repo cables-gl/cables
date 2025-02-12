@@ -41,7 +41,7 @@ function addListeners()
 
     listenerElement = cgl.canvas;
 
-    if (!CABLES.UTILS.isNumeric(cgl.canvas.getAttribute("tabindex"))) cgl.canvas.setAttribute("tabindex", 1);
+    if (!CABLES.isNumeric(cgl.canvas.getAttribute("tabindex"))) cgl.canvas.setAttribute("tabindex", 1);
 
     if (inArea.get() === "Document") listenerElement = document.body;
     if (inArea.get() === "Parent Element") listenerElement = cgl.canvas.parentElement;
