@@ -1,6 +1,7 @@
 /** @namespace WEBAUDIO */
 
 import { CONSTANTS } from "./constants.js";
+import Patch from "./core_patch.js";
 
 const WEBAUDIO = {};
 
@@ -422,7 +423,7 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
 
 /**
  * Loads an audio file and updates the loading indicators when cables is run in the editor.
- * @param {CABLES.Patch} patch - The cables patch, when called from inside an op this is `op.patch`
+ * @param {Patch} patch - The cables patch, when called from inside an op this is `op.patch`
  * @param {string} url - The url of the audio file to load
  * @param {function} onFinished - The callback to be called when the loading is finished, passes the AudioBuffer
  * @param {function} onError - The callback when there was an error loading the file, the rror message is passed
