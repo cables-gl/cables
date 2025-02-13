@@ -170,8 +170,9 @@ class Mesh extends CgMesh
             return;
         }
 
-        if (glVersion == 1) gl.bufferSubData(gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
-        else gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
+        // if (glVersion == 1) gl.bufferSubData(gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
+        // else
+        gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
     }
 
     _resizeAttr(array, attr)
@@ -224,7 +225,7 @@ class Mesh extends CgMesh
         attr.arrayLength = floatArray.length;
         attr.floatArray = null;// floatArray;
 
-        gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+        this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
     }
 
     /**
