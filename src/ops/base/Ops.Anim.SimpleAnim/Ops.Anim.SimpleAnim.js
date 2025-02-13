@@ -14,8 +14,8 @@ const
 
 const anim = new CABLES.Anim();
 let resetted = false;
-anim.createPort(op, "easing", init);
 let currentEasing = -1;
+anim.createPort(op, "easing", init);
 loop.onChange = init;
 init();
 

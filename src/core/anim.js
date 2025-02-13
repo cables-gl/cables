@@ -426,8 +426,6 @@ export default class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
-        if (!key1.ease) this._log.warn("has no ease", key1, key2);
-
         return key1.ease(perc, key2);
     }
 

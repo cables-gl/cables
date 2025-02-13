@@ -88,8 +88,6 @@
             }
         ]
     },
-
-
     "changelog": [
         {
             "message": "added key-name to extended title and outport",
@@ -100,5 +98,6 @@
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],
-    "exampleProjectId": "ZRY-x3"
+    "exampleProjectId": "ZRY-x3",
+    "license": "MIT"
 }
