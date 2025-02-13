@@ -112,8 +112,6 @@ export default class Op extends Events
          */
         this.renderVizLayer = null;
 
-        this.setUiError = null; // will be overwritten in ui
-
         if (this.initUi) this.initUi();
     }
 
@@ -125,6 +123,16 @@ export default class Op extends Events
     set name(n)
     {
         this.setTitle(n);
+    }
+
+    /**
+     * @param {string} id
+     * @param {string} txt
+     * @param {number} level
+     */
+    setUiError(id, txt, level)
+    {
+        // will be overwritten in ui
     }
 
     set _objName(on)
