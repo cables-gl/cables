@@ -112,6 +112,8 @@ export default class Op extends Events
          */
         this.renderVizLayer = null;
 
+        this.setUiError = null; // will be overwritten in ui
+
         if (this.initUi) this.initUi();
     }
 
@@ -339,7 +341,7 @@ export default class Op extends Events
     {
         if (!(p instanceof Port)) throw new Error("parameter is not a port!");
 
-        p.direction = CONSTANTS.PORT.PORT_DIR_IN;
+        p.direction = Port.DIR_IN;
         p._op = this;
 
         this.portsIn.push(p);
@@ -488,7 +490,7 @@ export default class Op extends Events
             this,
             name,
             type,
-            CONSTANTS.PORT.PORT_DIR_IN,
+            Port.DIR_IN,
             {
                 "addPort": true,
                 "hidePort": true

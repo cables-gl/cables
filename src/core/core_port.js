@@ -21,6 +21,9 @@ import Anim from "./anim.js";
 
 export default class Port extends Events
 {
+    static DIR_IN = 0;
+    static DIR_OUT = 1;
+
     static TYPE_VALUE = 0;
     static TYPE_NUMBER = 0;
     static TYPE_FUNCTION = 1;
@@ -52,7 +55,7 @@ export default class Port extends Events
          * @memberof Port
          * @description direction of port (input(0) or output(1))
          */
-        this.direction = CONSTANTS.PORT.PORT_DIR_IN;
+        this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
         /** @type {Op} */
@@ -97,6 +100,8 @@ export default class Port extends Events
         this.activityCounterStartFrame = 0;
 
         this._tempLastUiValue = null;
+        this.canLink = null; // function fan be overwritten
+        this.checkLinkTimeWarnings = null; // function fan be overwritten
     }
 
     get parent()
@@ -511,7 +516,7 @@ export default class Port extends Events
             }
         }
 
-        if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
+        if (this.direction == Port.DIR_IN && this.links.length > 0)
         {
             for (const i in this.links)
             {
@@ -581,7 +586,7 @@ export default class Port extends Events
             if (this.links[i] == link)
                 this.links.splice(i, 1);
 
-        if (this.direction == CONSTANTS.PORT.PORT_DIR_IN)
+        if (this.direction == Port.DIR_IN)
         {
             if (this.type == Port.TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
             else this.setValue(this._valueBeforeLink || null);
