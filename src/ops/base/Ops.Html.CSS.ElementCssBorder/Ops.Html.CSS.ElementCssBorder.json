@@ -52,6 +52,26 @@
                 "type": 0,
                 "name": "Color A",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Left",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Right",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

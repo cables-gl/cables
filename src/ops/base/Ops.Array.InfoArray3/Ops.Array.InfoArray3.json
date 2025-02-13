@@ -23,27 +23,7 @@
             },
             {
                 "type": 0,
-                "name": "Max X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Average X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Min Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Max Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Average Y",
                 "subType": "number"
             },
             {
@@ -53,12 +33,47 @@
             },
             {
                 "type": 0,
+                "name": "Max X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Max Z",
                 "subType": "number"
             },
             {
                 "type": 0,
+                "name": "Average X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Average Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Average Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center Z",
                 "subType": "number"
             }
         ]
@@ -112,10 +127,18 @@
         {
             "message": "Ops.Array.Array3xAnalyze renamed to Ops.Array.InfoArray3",
             "author": "pandur",
-            "date": 1560413598551
+            "date": 1560413598551,
+            "type": "new"
+        },
+        {
+            "message": "added center point output",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1739212179348
         }
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "tg7cRx"
+    "exampleProjectId": "tg7cRx",
+    "license": "MIT"
 }

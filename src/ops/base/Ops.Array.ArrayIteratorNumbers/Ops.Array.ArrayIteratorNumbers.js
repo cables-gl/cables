@@ -5,6 +5,8 @@ const
     idx = op.addOutPort(new CABLES.Port(op, "index")),
     val = op.addOutPort(new CABLES.Port(op, "value"));
 
+val.changeAlways = true;
+
 exe.onTriggered = function ()
 {
     if (!arr.get()) return;

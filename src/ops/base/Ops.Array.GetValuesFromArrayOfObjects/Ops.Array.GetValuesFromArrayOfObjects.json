@@ -53,5 +53,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "KQGGeT"
+    "exampleProjectId": "KQGGeT",
+    "license": "MIT"
 }

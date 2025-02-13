@@ -3,16 +3,29 @@ let inArr = op.inArray("Array"),
     outNum = op.outNumber("Num Items"),
 
     outMinX = op.outNumber("Min X"),
-    outMaxX = op.outNumber("Max X"),
-    outAvgX = op.outNumber("Average X"),
-
     outMinY = op.outNumber("Min Y"),
-    outMaxY = op.outNumber("Max Y"),
-    outAvgY = op.outNumber("Average Y"),
-
     outMinZ = op.outNumber("Min Z"),
+
+    outMaxX = op.outNumber("Max X"),
+    outMaxY = op.outNumber("Max Y"),
     outMaxZ = op.outNumber("Max Z"),
-    outAvgZ = op.outNumber("Average Z");
+
+    outAvgX = op.outNumber("Average X"),
+    outAvgY = op.outNumber("Average Y"),
+    outAvgZ = op.outNumber("Average Z"),
+
+    outCenterX = op.outNumber("Center X"),
+    outCenterY = op.outNumber("Center Y"),
+    outCenterZ = op.outNumber("Center Z");
+
+function dist3d(x1, y1, z1, x2, y2, z2)
+{
+    const xd = x2 - x1;
+    const yd = y2 - y1;
+    const zd = z2 - z1;
+
+    return Math.sqrt(xd * xd + yd * yd + zd * zd);
+}
 
 inArr.onChange = function ()
 {
@@ -56,14 +69,18 @@ inArr.onChange = function ()
     }
 
     outMinX.set(minX);
-    outMaxX.set(maxX);
-    outAvgX.set(avgX);
-
     outMinY.set(minY);
-    outMaxY.set(maxY);
-    outAvgY.set(avgY);
-
     outMinZ.set(minZ);
+
+    outMaxX.set(maxX);
+    outMaxY.set(maxY);
     outMaxZ.set(maxZ);
+
+    outAvgX.set(avgX);
+    outAvgY.set(avgY);
     outAvgZ.set(avgZ);
+
+    outCenterX.set(CABLES.map(0.5, 0, 1, minX, maxX));
+    outCenterY.set(CABLES.map(0.5, 0, 1, minY, maxY));
+    outCenterZ.set(CABLES.map(0.5, 0, 1, minZ, maxZ));
 };
