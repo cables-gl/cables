@@ -56,7 +56,6 @@ CABLES.filename = utils.filename;
 CABLES.ajaxSync = utils.ajaxSync;
 CABLES.ajax = utils.ajax;
 CABLES.request = utils.request;
-CABLES.keyCodeToName = utils.keyCodeToName;
 CABLES.logErrorConsole = utils.logErrorConsole;
 CABLES.isNumeric = utils.isNumeric;
 CABLES.isArray = utils.isArray;

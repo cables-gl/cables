@@ -3,9 +3,9 @@ const
     inThick = op.inFloat("Thickness", 3),
     inRadius = op.inFloat("Radius", 0),
 
-    r = op.inValueSlider("Color R", 0),
-    g = op.inValueSlider("Color G", 0),
-    b = op.inValueSlider("Color B", 0),
+    r = op.inValueSlider("Color R", 1),
+    g = op.inValueSlider("Color G", 1),
+    b = op.inValueSlider("Color B", 1),
     a = op.inValueSlider("Color A", 1),
     borderTop = op.inBool("Top", true),
     borderBottom = op.inBool("Bottom", true),
