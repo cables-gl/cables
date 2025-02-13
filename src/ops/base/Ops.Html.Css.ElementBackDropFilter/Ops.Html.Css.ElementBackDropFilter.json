@@ -1,0 +1,69 @@
+{
+    "id": "a67f915a-859a-4acd-ad74-faee42a1af47",
+    "created": 1738922133823,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1738922133823
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Blur",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Contrast",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Brightness",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hue",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Invert",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Saturate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sepia",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set CSS backdrop filter like blur, contrast, brightness, saturation",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Tem67C"
+}
