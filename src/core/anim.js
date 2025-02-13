@@ -57,7 +57,7 @@ export default class Anim extends Events
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
 
     /**
-     * @param {object} cfg
+     * @param {Object} cfg
      */
     constructor(cfg)
     {
@@ -271,6 +271,7 @@ export default class Anim extends Events
                     "value": value,
                     "e": this.defaultEasing,
                     "cb": cb,
+                    "anim": this
                 });
             this.keys.push(found);
 
@@ -298,7 +299,7 @@ export default class Anim extends Events
     }
 
     /**
-     * @returns {object}
+     * @returns {Object}
      */
     getSerialized()
     {
@@ -364,6 +365,7 @@ export default class Anim extends Events
                 return;
             }
         }
+        console.log("key remove not found", k);
     }
 
     /**
@@ -524,6 +526,14 @@ export default class Anim extends Events
 
 // ------------------------------
 
+/**
+ * @param {number} time
+ * @param {number} q
+ * @param {number} animx
+ * @param {number} animy
+ * @param {number} animz
+ * @param {number} animw
+ */
 Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
 {
     if (!Anim.slerpQuaternion.q1)

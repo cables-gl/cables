@@ -12,7 +12,6 @@ class UniColorShader
             .endl() + "    outColor = vec4(color.rgb,1.0);"
             .endl() + "}";
 
-
         const vert = ""
             .endl() + "IN vec3 vPosition;"
             .endl() + "UNI mat4 projMatrix;"

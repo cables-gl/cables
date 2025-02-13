@@ -4,6 +4,7 @@ import { Shader } from "./cgl_shader.js";
 import { ProfileData } from "./cgl_profiledata.js";
 import { CGState } from "../cg/cg_state.js";
 import { CG } from "../cg/cg_constants.js";
+import Framebuffer2 from "./cgl_framebuffer2.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -20,7 +21,7 @@ export const BLENDS = {
  * @hideconstructor
  */
 // const Context(_patch)
-class Context extends CGState
+export default class CglContext extends CGState
 {
     constructor(_patch)
     {
@@ -509,7 +510,7 @@ class Context extends CGState
      * @function pushGlFrameBuffer
      * @memberof Context
      * @instance
-     * @param {Framebuffer} fb framebuffer
+     * @param {Framebuffer2} fb framebuffer
      */
     pushFrameBuffer(fb)
     {
@@ -521,7 +522,7 @@ class Context extends CGState
      * @function popFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {Framebuffer} current framebuffer or null
+     * @returns {Framebuffer2} current framebuffer or null
      */
     popFrameBuffer()
     {
@@ -535,7 +536,7 @@ class Context extends CGState
      * @function getCurrentFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {Framebuffer} current framebuffer or null
+     * @returns {Framebuffer2} current framebuffer or null
      */
     getCurrentFrameBuffer()
     {
@@ -675,7 +676,7 @@ class Context extends CGState
 
             this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
-            if (this.canvas.id.contains("glGuiCanvas"))
+            if (this.canvas.id.includes("glGuiCanvas"))
                 if (!this._loggedGlError)
                 {
                     this.patch.printTriggerStack();
@@ -704,10 +705,10 @@ class Context extends CGState
      * @instance
      */
 
-    pushDepthTest(b)
+    pushDepthTest(enabled)
     {
-        this._stackDepthTest.push(b);
-        if (!b) this.gl.disable(this.gl.DEPTH_TEST);
+        this._stackDepthTest.push(enabled);
+        if (!enabled) this.gl.disable(this.gl.DEPTH_TEST);
         else this.gl.enable(this.gl.DEPTH_TEST);
     }
 
@@ -784,15 +785,15 @@ class Context extends CGState
     /**
      * push face culling face enabled state
      * @function pushCullFace
-     * @param {Boolean} b enabled
+     * @param {Boolean} enabled
      * @memberof Context
      * @instance
      */
-    pushCullFace(b)
+    pushCullFace(enabled)
     {
-        this._stackCullFace.push(b);
+        this._stackCullFace.push(enabled);
 
-        if (b) this.gl.enable(this.gl.CULL_FACE);
+        if (enabled) this.gl.enable(this.gl.CULL_FACE);
         else this.gl.disable(this.gl.CULL_FACE);
     }
 
@@ -1163,5 +1164,3 @@ class Context extends CGState
     }
 
 }
-
-export { Context };

@@ -6,20 +6,19 @@ const
     result = op.outNumber("result"),
     finished = op.outTrigger("Finished");
 
-const anim = new CABLES.Anim();
 anim.createPort(op, "easing", init);
+const anim = new CABLES.Anim();
+let lastTime = 0;
+let startTime = 0;
+let offset = 0;
+
+let firsttime = true;
 
 anim.loop = false;
 duration.set(0.5);
 
 duration.onChange =
     inValue.onChange = init;
-
-let lastTime = 0;
-let startTime = 0;
-let offset = 0;
-
-let firsttime = true;
 
 function init()
 {

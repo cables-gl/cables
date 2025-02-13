@@ -3,7 +3,6 @@ import slots_vert from "./slots.vert";
 import slots_head_frag from "./slots_head.frag";
 import slots_head_vert from "./slots_head.vert";
 
-
 class RenderTargets
 {
     constructor(cgl)
@@ -15,14 +14,12 @@ class RenderTargets
         this.mod = new CGL.ShaderModifier(cgl, this._name);
         // this.updateModules();
 
-
         this.mod.onBind = (currentShader) =>
         {
             // console.log(currentShader);
             // currentShader.setDrawBuffers([true, true, true, true]);
         };
     }
-
 
     updateModules()
     {
@@ -98,7 +95,7 @@ class RenderTargets
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
         else if (type == "FragCoord.z") return "    " + outcolor + i + " = vec4(vec3(gl_FragCoord.z),1.);".endl();
 
-        else if (type.contains("OIT "))
+        else if (type.includes("OIT "))
         {
             let str = ""
                 .endl() + "#ifndef OIT_WEIGHT"
@@ -119,7 +116,6 @@ class RenderTargets
     getSrcFrag()
     {
         let src = slots_frag;
-
 
         if (this._slots.length == 1)
         {
@@ -150,7 +146,6 @@ class RenderTargets
         let hasNormalWorld = false;
         let hasPosModelView = false;
 
-
         for (let i = 0; i < this._numBuffers; i++)
         {
             hasPosWorld = (slots[i] == "Position World") || hasPosWorld;
@@ -158,14 +153,13 @@ class RenderTargets
             hasPosLocal = (slots[i] == "Position Local") || hasPosLocal;
             hasPosModelView = (slots[i] == "Position * ModelView") || hasPosModelView;
             hasPosObject = (slots[i] == "Position Object") || hasPosObject;
-            hasMaterialId = (slots[i].contains("Material Id")) || hasMaterialId;
-            hasObjectId = (slots[i].contains("Object Id")) || hasObjectId;
-            hasNormalWorld = (slots[i].contains("Normal World")) || hasNormalWorld;
+            hasMaterialId = (slots[i].includes("Material Id")) || hasMaterialId;
+            hasObjectId = (slots[i].includes("Object Id")) || hasObjectId;
+            hasNormalWorld = (slots[i].includes("Normal World")) || hasNormalWorld;
 
             this.asString += slots[i];
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
-
 
         // this.updateModules();
         this.updateModules();

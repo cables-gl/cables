@@ -1,6 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { uuid } from "../utils.js";
 import CgTexture from "../cg/cg_texture.js";
+import { CGState } from "../cg/cg_state.js";
 
 const DEFAULT_TEXTURE_SIZE = 8;
 
@@ -8,7 +9,7 @@ const DEFAULT_TEXTURE_SIZE = 8;
  * A Texture
  * @namespace external:CGL
  * @class
- * @param {Context} __cgl cgl
+ * @param {CGState} __cgl cgl
  * @param {Object} options
  * @hideconstructor
  * @example
@@ -276,7 +277,7 @@ class Texture extends CgTexture
      * @param {Object} img image
      * @param {Number} filter
      */
-    initTexture(img, filter)
+    initTexture(img, filter = null)
     {
         this._cgl.printError("before initTexture");
         this._cgl.checkFrameStarted("texture inittexture");
@@ -286,7 +287,7 @@ class Texture extends CgTexture
         if (img.width || img.videoWidth) this.width = img.videoWidth || img.width;
         if (img.height || img.videoHeight) this.height = img.videoHeight || img.height;
 
-        if (filter !== undefined) this.filter = filter; // todo: can we remove this filter param?
+        if (filter !== null) this.filter = filter; // todo: can we remove this filter param?
 
         if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
         {
@@ -334,8 +335,8 @@ class Texture extends CgTexture
     {
         if (this.loading)
         {
-        // cant delete texture when still loading
-        // setTimeout(this.delete.bind(this), 50);
+            // cant delete texture when still loading
+            // setTimeout(this.delete.bind(this), 50);
             return;
         }
 
@@ -389,13 +390,13 @@ class Texture extends CgTexture
         // if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " 32bit"; else txt += " 8bit";
         txt += this.pixelFormat;
 
-        if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
-        if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";
-        if (this.filter === CGL.Texture.FILTER_MIPMAP) txt += " mipmap";
+        if (this.filter === Texture.FILTER_NEAREST) txt += " nearest";
+        if (this.filter === Texture.FILTER_LINEAR) txt += " linear";
+        if (this.filter === Texture.FILTER_MIPMAP) txt += " mipmap";
 
-        if (this.wrap === CGL.Texture.WRAP_CLAMP_TO_EDGE) txt += " clamp";
-        if (this.wrap === CGL.Texture.WRAP_REPEAT) txt += " repeat";
-        if (this.wrap === CGL.Texture.WRAP_MIRRORED_REPEAT) txt += " repeatmir";
+        if (this.wrap === Texture.WRAP_CLAMP_TO_EDGE) txt += " clamp";
+        if (this.wrap === Texture.WRAP_REPEAT) txt += " repeat";
+        if (this.wrap === Texture.WRAP_MIRRORED_REPEAT) txt += " repeatmir";
 
         this.shortInfoString = txt;
 
@@ -511,7 +512,7 @@ class Texture extends CgTexture
  * @static
  * @memberof Texture
  * @description load an image from an url
- * @param {Context} cgl
+ * @param {CGState} cgl
  * @param {String} url
  * @param {Function} finishedCallback
  * @param {Object} settings
@@ -567,7 +568,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  * @function getTempTexture
  * @memberof Texture
  * @description returns the default temporary texture (grey diagonal stipes)
- * @param {Context} cgl
+ * @param {CGState} cgl
  * @return {Texture}
  */
 Texture.getTempTexture = function (cgl)
@@ -582,7 +583,7 @@ Texture.getTempTexture = function (cgl)
  * @function getErrorTexture
  * @memberof Texture
  * @description returns the default temporary texture (grey diagonal stipes)
- * @param {Context} cgl
+ * @param {CGState} cgl
  * @return {Texture}
  */
 Texture.getErrorTexture = function (cgl)
@@ -785,7 +786,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
  * @function createFromImage
  * @memberof Texture
  * @description create texturem from image data (e.g. image or canvas)
- * @param {Context} cgl
+ * @param {CGState} cgl
  * @param {Object} img image
  * @param {Object} options
  */
@@ -894,7 +895,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
         if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
     }
 
-    if (pixelFormatStr.contains("16bit"))
+    if (pixelFormatStr.includes("16bit"))
     {
         if (cgl.glVersion == 2)
         {
@@ -1016,7 +1017,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     /// //////
 
-    if (pixelFormatStr.contains("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+    if (pixelFormatStr.includes("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
     {
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
         if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
@@ -1043,13 +1044,13 @@ Texture.getPixelFormatNumChannels =
 Texture.isPixelFormatFloat =
     (pxlFrmtStr) =>
     {
-        return (pxlFrmtStr || "").contains("float");
+        return (pxlFrmtStr || "").includes("float");
     };
 
 Texture.isPixelFormatHalfFloat =
     (pxlFrmtStr) =>
     {
-        return (pxlFrmtStr || "").contains("float") && (pxlFrmtStr || "").contains("16bit");
+        return (pxlFrmtStr || "").includes("float") && (pxlFrmtStr || "").includes("16bit");
     };
 
 export { Texture };

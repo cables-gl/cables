@@ -32,10 +32,7 @@ export default class FpsCounter extends Events
         const timeFrame = CABLES.now() - this._timeStartFrame;
         this._msCounter += timeFrame;
 
-        if (CABLES.now() - this._timeStartSecond > 1000)
-        {
-            this.endSecond();
-        }
+        if (CABLES.now() - this._timeStartSecond > 1000) this.endSecond();
     }
 
     endSecond()

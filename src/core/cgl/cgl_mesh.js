@@ -2,7 +2,7 @@ import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
-import { Context } from "./cgl_state.js";
+import cglcontext from "./cgl_state.js";
 import CgMesh from "../cg/cg_mesh.js";
 
 const MESH = {};
@@ -32,9 +32,9 @@ class Mesh extends CgMesh
     /**
      * @param {Context} _cgl cgl
      * @param {Geometry} __geom geometry
-     * @param {Number} _options glPrimitive
+     * @param {Object} _options
      */
-    constructor(_cgl, __geom, _options)
+    constructor(_cgl, __geom, _options = {})
     {
         super();
         this._cgl = _cgl;
@@ -151,7 +151,6 @@ class Mesh extends CgMesh
         {
             if (CABLES.platform.isDevEnv())
                 this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
-            // end = array.length - 1;
             return;
         }
 

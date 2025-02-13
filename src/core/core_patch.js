@@ -4,11 +4,10 @@ import LoadingStatus from "./loadingstatus.js";
 import { Timer } from "./timer.js";
 import Link from "./core_link.js";
 import Profiler from "./core_profiler.js";
-import { Context } from "./cgl/cgl_state.js";
-import { CONSTANTS } from "./constants.js";
 import PatchVariable from "./core_variable.js";
 import Op from "./core_op.js";
 import Port from "./core_port.js";
+import CglContext from "./cgl/cgl_state.js";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -28,9 +27,14 @@ import Port from "./core_port.js";
  *     glslPrecision:'highp'
  * });
  */
-
 class Patch extends Events
 {
+    static EVENT_OP_DELETED = "onOpDelete";
+    static EVENT_OP_ADDED = "onOpAdd";
+    static EVENT_PAUSE = "pause";
+    static EVENT_RESUME = "resume";
+    static EVENT_PATCHLOADEND = "patchLoadEnd";
+    static EVENT_VARIABLES_CHANGED = "variablesChanged";
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
@@ -108,7 +112,7 @@ class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new Context(this);
+        this.cgl = new CglContext(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};
@@ -165,6 +169,7 @@ class Patch extends Events
         }
 
         console.log("made with https://cables.gl"); // eslint-disable-line
+
     }
 
     isPlaying()
@@ -220,7 +225,7 @@ class Patch extends Events
     pause()
     {
         cancelAnimationFrame(this._animReq);
-        this.emitEvent("pause");
+        this.emitEvent(Patch.EVENT_PAUSE);
         this._animReq = null;
         this._paused = true;
         this.freeTimer.pause();
@@ -239,7 +244,7 @@ class Patch extends Events
             cancelAnimationFrame(this._animReq);
             this._paused = false;
             this.freeTimer.play();
-            this.emitEvent("resume");
+            this.emitEvent(Patch.EVENT_RESUME);
             this.exec();
         }
     }
@@ -489,7 +494,7 @@ class Patch extends Events
             this._opIdCache[op.id] = op;
 
             if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
-            this.emitEvent("onOpAdd", op, fromDeserialize);
+            this.emitEvent(Patch.EVENT_OP_ADDED, op, fromDeserialize);
 
             if (op.init) op.init();
 
@@ -570,7 +575,7 @@ class Patch extends Events
 
                     this.ops.splice(i, 1);
                     opToDelete.emitEvent("delete", opToDelete);
-                    this.emitEvent("onOpDelete", opToDelete, reloadingOp);
+                    this.emitEvent(Patch.EVENT_OP_DELETED, opToDelete, reloadingOp);
 
                     if (this.clearSubPatchCache) this.clearSubPatchCache(opToDelete.uiAttribs.subPatch);
 
@@ -1114,7 +1119,7 @@ class Patch extends Events
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
         this.deSerialized = true;
-        this.emitEvent("patchLoadEnd", newOps, obj, options.genIds);
+        this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
     }
 
     profile(enable)
@@ -1188,7 +1193,7 @@ class Patch extends Events
         {
             this._variables[name] = new PatchVariable(name, val, type);
             this._sortVars();
-            this.emitEvent("variablesChanged");
+            this.emitEvent(Patch.EVENT_VARIABLES_CHANGED);
         }
         return this._variables[name];
     }
@@ -1224,12 +1229,8 @@ class Patch extends Events
     }
 
     /**
-     * @function getVars
-     * @memberof Patch
-     * @instance
-     * @param t
-     * @return {Array<Variable>} variables
-     * @function
+     * @param {number} t
+     * @returns {any}
      */
     getVars(t)
     {

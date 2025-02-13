@@ -85,5 +85,4 @@ class ProfileData
     }
 }
 
-
 export { ProfileData };

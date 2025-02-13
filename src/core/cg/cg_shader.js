@@ -15,6 +15,13 @@ class CgShader extends Events
         this._moduleNames = [];
         this._modules = [];
         this._moduleNumId = 0;
+        this._needsRecompile = true;
+        this._compileReason = "initial";
+    }
+
+    setWhyCompile(reason)
+    {
+        this._compileReason = reason;
     }
 
     /**
@@ -26,7 +33,7 @@ class CgShader extends Events
     {
         if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
         {
-            if (enabled.changeListener)enabled.removeEventListener(enabled.changeListener);
+            if (enabled.changeListener)enabled.off(enabled.changeListener);
 
             enabled.onToggleDefine = (v) =>
             {
@@ -44,9 +51,9 @@ class CgShader extends Events
     /**
      * add a define to a shader, e.g.  #define DO_THIS_THAT 1
      * @param {String} name
-     * @param {String} value (can be empty)
+     * @param {any} value (can be empty)
      */
-    define(name, value)
+    define(name, value = "")
     {
         if (value === null || value === undefined) value = "";
 

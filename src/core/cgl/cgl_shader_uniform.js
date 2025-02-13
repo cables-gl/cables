@@ -1,3 +1,4 @@
+import { CgShader } from "../cg/cg_shader.js";
 import CgUniform from "../cg/cg_uniform.js";
 import Port from "../core_port.js";
 
@@ -21,7 +22,7 @@ import Port from "../core_port.js";
  *
  * @namespace external:CGL
  * @class
- * @param {Shader} shader
+ * @param {CgShader} shader
  * @param {String} [type=f]
  * @param {String} name
  * @param {Number|Port} value  can be a Number,Matrix or Port

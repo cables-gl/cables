@@ -1,14 +1,11 @@
 import { Geometry } from "../cg/cg_geom.js";
 import { Mesh } from "./cgl_mesh.js";
 
-
 const MESHES = {};
 
 MESHES.getSimpleRect = function (cgl, name, size = 1.0)
 {
     const geom = new Geometry(name);
-
-
 
     geom.vertices = [1.0 * size, 1.0 * size, 0.0, -1.0 * size, 1.0 * size, 0.0, 1.0 * size, -1.0 * size, 0.0, -1.0 * size, -1.0 * size, 0.0];
     geom.texCoords = [1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0];
@@ -16,9 +13,7 @@ MESHES.getSimpleRect = function (cgl, name, size = 1.0)
     geom.vertexNormals = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
     return cgl.createMesh(geom);
-    // return new Mesh(cgl, geom);
 };
-
 
 MESHES.getSimpleCube = function (cgl, name)
 {
@@ -32,6 +27,5 @@ MESHES.getSimpleCube = function (cgl, name)
 
     return new Mesh(cgl, geom);
 };
-
 
 export { MESHES };

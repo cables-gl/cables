@@ -110,6 +110,7 @@ function onInputValuePortChanged()
 
 function onDefaultValueChanged()
 {
+
     /*
     var defaultValue = defaultValuePort.get();
     if(defaultValue) {

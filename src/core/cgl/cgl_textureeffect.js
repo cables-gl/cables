@@ -110,11 +110,7 @@ export class TextureEffect
         this._cgl.pushPMatrix();
         // todo why two pushs?
 
-
-
         this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
-
-
 
         mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0); // todo: why?
 
@@ -127,7 +123,6 @@ export class TextureEffect
         this._cgl.pushModelMatrix();
         mat4.identity(this._cgl.mMatrix);
     }
-
 
     startEffect(bgTex)
     {
@@ -377,15 +372,6 @@ TextureEffect.getBlendCode = function (ver)
         + "      colNew=vec3(BlendColorBurnf(base.r, blend.r),BlendColorBurnf(base.g, blend.g),BlendColorBurnf(base.b, blend.b));".endl()
         + "   #endif".endl()
 
-
-
-
-
-
-
-
-
-
         + "   return colNew;".endl()
         + "}".endl();
 
@@ -416,7 +402,6 @@ TextureEffect.getBlendCode = function (ver)
                 "#ifdef BM_MATH_DIV".endl() +
                 "   return vec4(base.rgb/col.rgb*amount,1.0);".endl() +
                 "#endif".endl() +
-
 
                     "#ifndef BM_MATH".endl() +
                         "vec3 colNew=_blend(base.rgb,col.rgb);".endl() +
@@ -465,7 +450,6 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName, maskAlpha = fal
     shader.toggleDefine("BM_MATH_DIV", blendName == "Math Divide");
 
     shader.toggleDefine("BM_MATH", blendName.indexOf("Math ") == 0);
-
 
     shader.toggleDefine("BM_ALPHAMASKED", maskAlpha);
 };
@@ -534,5 +518,3 @@ TextureEffect.setupBlending = function (op, shader, blendPort, amountPort, alpha
 
     TextureEffect.onChangeBlendSelect(shader, blendPort.get(), maskAlpha);
 };
-
-

@@ -65,7 +65,7 @@ const ShaderGraphProgram = class extends Events
                 const f = op.sgOp.info.functions[i];
                 // console.log("ADD FUNCTION CODE", f.name, f.uniqueName, this._functionIdInHead[f.uniqueName]);
                 if (this._functionIdInHead[f.uniqueName]) continue;
-                if (!f.name.contains("_ID")) this._functionIdInHead[f.uniqueName] = true;
+                if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
                 let src = f.src;
                 // console.log("src", src);
                 src = this.replaceId(op, src);
@@ -97,7 +97,7 @@ const ShaderGraphProgram = class extends Events
         if (typeStr == "float")
         {
             let floatStr = String(uni.ports[0].get());
-            if (!floatStr.contains("."))floatStr += ".";
+            if (!floatStr.includes("."))floatStr += ".";
             str = typeStr + " " + uni.name + " = " + floatStr + ";".endl();
         }
         else

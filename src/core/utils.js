@@ -39,7 +39,7 @@ export const getShortOpName = function (fullname)
 {
     let name = fullname.split(".")[fullname.split(".").length - 1];
 
-    if (name.contains(CONSTANTS.OP.OP_VERSION_PREFIX))
+    if (name.includes(CONSTANTS.OP.OP_VERSION_PREFIX))
     {
         const n = name.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
         name = name.substring(0, name.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
@@ -74,15 +74,14 @@ export const shuffleArray = function (array)
  */
 
 const _shortIds = {};
-const _shortId = function ()
+export const shortId = function ()
 {
     let str = Math.random().toString(36).substr(2, 9);
 
-    if (_shortIds.hasOwnProperty(str)) str = _shortId();
+    if (_shortIds.hasOwnProperty(str)) str = shortId();
     _shortIds[str] = true;
     return str;
 };
-export const shortId = _shortId;
 
 /**
  * generate a UUID
@@ -90,19 +89,18 @@ export const shortId = _shortId;
  * @return {String} generated UUID
  * @static
  */
-const _uuid = function ()
+export const uuid = function ()
 {
     let d = new Date().getTime();
-    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
+    const uuidStr = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
     {
         const r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
-    return uuid;
+    return uuidStr;
 };
-export const uuid = _uuid;
-export const generateUUID = _uuid;
+export const generateUUID = uuid;
 
 export function cleanJson(obj)
 {
@@ -123,7 +121,7 @@ export function cleanJson(obj)
  * @param {string} prefix
  * @return {string}
  */
-const _prefixedHash = function (str, prefix = "id")
+export const prefixedHash = function (str, prefix = "id")
 {
     let hash = 0;
     if (str.length > 0)
@@ -137,7 +135,6 @@ const _prefixedHash = function (str, prefix = "id")
     }
     return prefix + "" + hash;
 };
-export const prefixedHash = _prefixedHash;
 
 /**
  * generate a simple ID
@@ -286,7 +283,7 @@ export const cacheBust = function (url = "")
 {
     if (!url) return "";
     if (url.startsWith("data:")) return;
-    if (url.contains("?")) url += "&";
+    if (url.includes("?")) url += "&";
     else url += "?";
     return url + "cache=" + CABLES.uuid();
 };
@@ -349,7 +346,7 @@ export const filename = function (url)
     let name = "";
     if (!url) return "";
 
-    if (url.startsWith("data:") && url.contains(":"))
+    if (url.startsWith("data:") && url.includes(":"))
     {
         const parts = url.split(",");
         return parts[0];

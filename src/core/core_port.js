@@ -33,6 +33,12 @@ export default class Port extends Events
 
     #oldAnimVal = -5711;
 
+    /**
+     * @param {Op} ___op
+     * @param {string} name
+     * @param {number} type
+     * @param {Object} uiAttribs
+     */
     constructor(___op, name, type, uiAttribs)
     {
         super();
@@ -59,6 +65,8 @@ export default class Port extends Events
         this.value = 0.0;
 
         this.name = name;
+
+        /** @type {number} */
         this.type = type || Port.TYPE_VALUE;
         this.uiAttribs = uiAttribs || {};
 
@@ -440,7 +448,7 @@ export default class Port extends Events
             if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
             for (const ani in objPort.anim.keys)
             {
-                this.anim.keys.push(new CABLES.AnimKey(objPort.anim.keys[ani]));
+                this.anim.keys.push(new CABLES.AnimKey(objPort.anim.keys[ani], this.anim));
             }
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
 
@@ -565,7 +573,7 @@ export default class Port extends Events
      * @memberof Port
      * @instance
      * @description remove all link from port
-     * @param {CABLES.Link} link
+     * @param {Link} link
      */
     removeLink(link)
     {
@@ -818,7 +826,7 @@ export default class Port extends Events
         let hasTriggerPort = false;
         for (let i = 0; i < this._op.portsIn.length; i++)
         {
-            if (this._op.portsIn.type == Port.TYPE_FUNCTION)
+            if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
             {
                 hasTriggerPort = true;
                 break;
@@ -835,6 +843,9 @@ export default class Port extends Events
         }
     }
 
+    /**
+     * @param {boolean} a
+     */
     setAnimated(a)
     {
         if (this._animated != a)

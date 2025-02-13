@@ -45,7 +45,7 @@ let events = [
 
 /**
  * Creates an event handler function
- * @param {object} event an element of the events array (see top)
+ * @param {Object} event an element of the events array (see top)
  */
 function handlerFactory(event)
 {
@@ -204,8 +204,8 @@ function addListeners(element)
 
 /**
  * Adds a listener to the element
- * @param {object} element the HTML DOM element
- * @param {object} event the event object from the events-array
+ * @param {Object} element the HTML DOM element
+ * @param {Object} event the event object from the events-array
  */
 function addListener(element, event)
 {

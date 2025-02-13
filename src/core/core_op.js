@@ -31,8 +31,12 @@ export default class Op extends Events
     /** @type {Array<Port>} */
     portsIn = [];
     portsInData = []; // original loaded patch data
+
+    /** @type {Object} */
     uiAttribs = {};
     enabled = true;
+
+    onAnimFrame = null;
 
     preservedPortTitles = {};
     preservedPortValues = {};
@@ -46,6 +50,8 @@ export default class Op extends Events
 
     shouldWork = {};
     hasUiErrors = false;
+
+    /** @type {Object} */
     uiErrors = {};
     hasAnimPort = false;
 
@@ -355,7 +361,7 @@ export default class Op extends Events
      * @function inTrigger
      * @instance
      * @memberof Op
-     * @param {String} name
+     * @param {String} v
      * @return {Port} created port
      *
      */
@@ -380,7 +386,7 @@ export default class Op extends Events
      * @memberof Op
      * @instance
      * @param {String} name
-     * @param {Array} names
+     * @param {Array} v
      * @return {Port} created port
      */
 
@@ -454,7 +460,7 @@ export default class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {Boolean} value
+     * @param {Boolean|number} v
      * @return {Port} created port
      */
     inBool(name, v)
@@ -975,8 +981,6 @@ export default class Op extends Events
 
     /**
      * create a array input port
-     * @function inArray
-     * @memberof Op
      * @param {String} name
      * @param {array} v
      * @param {number} stride
@@ -1155,7 +1159,7 @@ export default class Op extends Events
      * @function outString
      * @instance
      * @memberof Op
-     * @param {String} name
+     * @param {String} v
      * @return {Port} created port
      */
     outString(name, v)
@@ -1233,7 +1237,7 @@ export default class Op extends Events
 
         p.shouldLink = (p1, p2) =>
         {
-            if (filter && UTILS.isArray(filter))
+            if (filter && CABLES.isArray(filter))
             {
                 for (let i = 0; i < filter.length; i++)
                 {
@@ -1592,9 +1596,7 @@ export default class Op extends Events
     /**
      * return true if op has this error message id
      * @function hasUiError
-     * @instance
-     * @memberof Op
-     * @param {id} error id
+     * @param {String} id
      * @returns {Boolean} - has id
      */
     hasUiError(id)
@@ -1609,7 +1611,7 @@ export default class Op extends Events
      * @memberof Op
      * @param {string} id error id
      * @param {string} txt text message
-     * @param {Integer} level level
+     * @param {number} level level
      */
     setUiError(id, txt, level)
     {
@@ -1658,9 +1660,9 @@ export default class Op extends Events
      * @function
      * @instance
      * @memberof Op
-     * @param {Port} portX
-     * @param {Port} portY
-     * @param {Port} portZ
+     * @param {Port} px
+     * @param {Port} py
+     * @param {Port} pz
      */
     setUiAxisPorts(px, py, pz)
     {
@@ -1775,9 +1777,7 @@ export default class Op extends Events
     refreshParams()
     {
         if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp())
-        {
             gui.opParams.show(this);
-        }
     }
 
     /**

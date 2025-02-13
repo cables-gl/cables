@@ -14,7 +14,7 @@ export default class WebGpuOp
     }
 
     /**
-     * @param {CABLES.Op} op
+     * @param {Types.Op} op
      * @returns {boolean}
      */
     checkSupport()

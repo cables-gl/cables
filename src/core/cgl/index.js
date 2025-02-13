@@ -7,7 +7,6 @@ import { UniColorShader } from "./cgl_unicolorshader.js";
 
 import { Shader } from "./cgl_shader.js";
 import { MESHES } from "./cgl_simplerect.js";
-import { Context } from "./cgl_state.js";
 import {
     isWindows, getWheelSpeed, getWheelDelta, onLoadingAssetsFinished,
 } from "./cgl_utils.js";
@@ -21,6 +20,7 @@ import { ProfileData } from "./cgl_profiledata.js";
 import { MatrixStack } from "../cg/cg_matrixstack.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { BoundingBox } from "../cg/cg_boundingbox.js";
+import CglContext from "./cgl_state.js";
 
 const CGL = {
     "Framebuffer2": Framebuffer2,
@@ -36,7 +36,7 @@ const CGL = {
     "Shader": Shader,
     "Uniform": Uniform,
     "MESHES": MESHES,
-    "Context": Context,
+    "Context": CglContext,
     "Texture": Texture,
     "TextureEffect": TextureEffect,
     "isWindows": isWindows,

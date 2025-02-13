@@ -95,7 +95,7 @@ function reload(addCachebuster, force = false)
 
         const options = {};
         if (inSendCredentials.get()) options.credentials = "include";
-        if (inContent.get().contains("Binary"))
+        if (inContent.get().includes("Binary"))
         {
             fetch(url, options).then((res) =>
             {
@@ -106,7 +106,7 @@ function reload(addCachebuster, force = false)
                 {
                     outStringBin.set(URL.createObjectURL(b));
 
-                    if (inContent.get().contains("Base64"))
+                    if (inContent.get().includes("Base64"))
                     {
                         const reader = new FileReader();
                         reader.onloadend = function ()
