@@ -17,6 +17,8 @@ import Patch from "./core_patch.js";
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {string} [comment]
+ * @property {object} [translate]
+ * @property {string} [subpatch]
  */
 
 export default class Op extends Events
@@ -137,16 +139,6 @@ export default class Op extends Events
         this.setTitle(n);
     }
 
-    /**
-     * @param {string} id
-     * @param {string} txt
-     * @param {number} level
-     */
-    setUiError(id, txt, level)
-    {
-        // will be overwritten in ui
-    }
-
     set _objName(on)
     {
         this.#objName = on;
@@ -255,7 +247,8 @@ export default class Op extends Events
     }
 
     /**
-     *  @deprecated
+     * @deprecated
+     * @param {OpUiAttribs} a
      */
     setUiAttribs(a)
     {
@@ -263,7 +256,8 @@ export default class Op extends Events
     }
 
     /**
-     *  @deprecated
+     * @deprecated
+     * @param {OpUiAttribs} a
      */
     uiAttr(a)
     {
@@ -1635,7 +1629,7 @@ export default class Op extends Events
      * @param {string} txt text message
      * @param {number} level level
      */
-    setUiError(id, txt, level)
+    setUiError(id, txt, level = 2)
     {
         // overwritten in ui: core_extend_op
     }

@@ -793,6 +793,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {String} name
+     */
     getOpsByObjName(name)
     {
         const arr = [];
@@ -801,6 +804,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {UUID} opid
+     */
     getOpsByOpId(opid)
     {
         const arr = [];
@@ -809,6 +815,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {String} which
+     */
     loadLib(which)
     {
         ajaxSync(

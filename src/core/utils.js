@@ -84,9 +84,13 @@ export const shortId = function ()
 };
 
 /**
+ * @typedef {String} UUID
+*/
+
+/**
  * generate a UUID
  * @function uuid
- * @return {String} generated UUID
+ * @return {UUID} generated UUID
  * @static
  */
 export const uuid = function ()
