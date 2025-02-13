@@ -7,6 +7,18 @@ import ValueSelectPort from "./core_port_select.js";
 import MultiPort from "./core_port_multi.js";
 import Patch from "./core_patch.js";
 
+/**
+ * configuration object for loading a patch
+ * @typedef {Object} OpUiAttribs
+ * @property {string} [title] overwrite op title
+ * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property {object} [storage] internal - do not use manualy
+ * @property {boolean} [working] internal - do not use manualy
+ * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
+ * @property {string} [color]
+ * @property {string} [comment]
+ */
+
 export default class Op extends Events
 {
 
@@ -32,7 +44,7 @@ export default class Op extends Events
     portsIn = [];
     portsInData = []; // original loaded patch data
 
-    /** @type {Object} */
+    /** @type {OpUiAttribs} */
     uiAttribs = {};
     enabled = true;
 
@@ -231,7 +243,7 @@ export default class Op extends Events
      * extendTitle - op title extension, e.g. [ + ]
      * </pre>
      * @function setUiAttrib
-     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
      * @memberof Op
      * @instance
      * @example
@@ -259,7 +271,7 @@ export default class Op extends Events
     }
 
     /**
-     *  @private
+     * @param {OpUiAttribs} newAttribs
      */
     _setUiAttrib(newAttribs)
     {

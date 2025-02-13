@@ -4,9 +4,23 @@ import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
 import cglcontext from "./cgl_state.js";
 import CgMesh from "../cg/cg_mesh.js";
+import { CgCanvas } from "../cg/cg_canvas.js";
 
 const MESH = {};
 MESH.lastMesh = null;
+
+/**
+ * @typedef {Object} CglMeshAttributeOptions
+ * @property {Number} [instanced]
+ * @property {Function} [cb]
+ * @property {Function} [type]
+ */
+
+/**
+ * @typedef {Object} CglMeshOptions
+ * @property {Number} [glPrimitive]
+ * @property {String} [opId]
+ */
 
 /**
  * webgl renderable 3d object
@@ -30,9 +44,9 @@ class Mesh extends CgMesh
     #geom = null;
 
     /**
-     * @param {Context} _cgl cgl
+     * @param {CgCanvas} _cgl cgl
      * @param {Geometry} __geom geometry
-     * @param {Object} _options
+     * @param {CglMeshOptions|Number} _options
      */
     constructor(_cgl, __geom, _options = {})
     {
@@ -136,7 +150,9 @@ class Mesh extends CgMesh
         if (!attr.name)
             this._log.stack("no attrname?!");
 
-        this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+        const gl = this._cgl.gl;
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
         this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
         this._cgl.profileData.profileSingleMeshAttribute[this._name] = this._cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
@@ -154,17 +170,19 @@ class Mesh extends CgMesh
             return;
         }
 
-        if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
-        else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
+        if (glVersion == 1) gl.bufferSubData(gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
+        else gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
     }
 
     _resizeAttr(array, attr)
     {
-        if (attr.buffer)
-            this._cgl.gl.deleteBuffer(attr.buffer);
+        const gl = this._cgl.gl;
 
-        attr.buffer = this._cgl.gl.createBuffer();
-        this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+        if (attr.buffer)
+            gl.deleteBuffer(attr.buffer);
+
+        attr.buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
         this._bufferArray(array, attr);
         attr.numItems = array.length / attr.itemSize;// numItems;
     }
@@ -206,7 +224,7 @@ class Mesh extends CgMesh
         attr.arrayLength = floatArray.length;
         attr.floatArray = null;// floatArray;
 
-        this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+        gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
     }
 
     /**
@@ -228,9 +246,9 @@ class Mesh extends CgMesh
      * @param {String} name
      * @param {Array} array
      * @param {Number} itemSize Integer
-     * @param {Object} options
+     * @param {CglMeshAttributeOptions} options
      */
-    setAttribute(name, array, itemSize, options)
+    setAttribute(name, array, itemSize, options = {})
     {
         if (!array)
         {

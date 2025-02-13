@@ -5,6 +5,13 @@ import Op from "./core_op.js";
 import Port from "./core_port.js";
 
 /**
+ * configuration object for loading a patch
+ * @typedef {Object} AnimCfg
+ * @property {number} [defaultEasing] use easing index as default
+ * @property {string} [name] anim name
+ */
+
+/**
  * Keyframed interpolated animation.
  *
  * @class
@@ -57,7 +64,7 @@ export default class Anim extends Events
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
 
     /**
-     * @param {Object} cfg
+     * @param {AnimCfg} cfg
      */
     constructor(cfg)
     {
@@ -74,13 +81,8 @@ export default class Anim extends Events
         this.name = cfg.name || null;
 
         /**
-         * @member defaultEasing
-         * @memberof Anim
-         * @instance
          * @type {Number}
          */
-        // if (cfg.defaultEasing === undefined) throw Error(12);
-
         this.defaultEasing = cfg.defaultEasing || Anim.EASING_LINEAR;
         this.onLooped = null;
 
