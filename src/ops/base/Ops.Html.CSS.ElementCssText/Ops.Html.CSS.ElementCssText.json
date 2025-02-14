@@ -17,10 +17,10 @@
             "date": 1733487901375
         },
         {
-            "message": "Html.CSS.ElementCssFont renamed to Ops.Html.CSS.ElementCssText",
-            "type": "rename",
+            "message": "added option to disable user selection of text",
+            "type": "feature",
             "author": "pandur",
-            "date": 1734352524796
+            "date": 1738925035484
         }
     ],
     "layout": {
@@ -68,6 +68,11 @@
                 "type": 0,
                 "name": "Line Height",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Disable Text Select",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

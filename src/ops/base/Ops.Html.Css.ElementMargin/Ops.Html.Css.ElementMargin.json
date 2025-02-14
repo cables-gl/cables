@@ -1,0 +1,59 @@
+{
+    "id": "8b32eb8a-aa3f-4d40-a8b4-31e29bce02b8",
+    "created": 1739452208857,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1739452208857
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Margin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Right",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set CSS margins of a html element",
+    "docs": {
+        "ports": []
+    }
+}

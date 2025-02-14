@@ -27,6 +27,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1736509340912
+        },
+        {
+            "message": "size can now be chosen to be in different units like % or vh,vw etc",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1739455623071
         }
     ],
     "layout": {
@@ -73,6 +79,17 @@
                 "name": "Height",
                 "group": "Area",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size  Units index",
+                "values": [
+                    "px",
+                    "%",
+                    "vwh"
+                ],
+                "group": "Area",
+                "subType": "integer"
             },
             {
                 "type": 0,

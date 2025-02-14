@@ -17,7 +17,7 @@ function update()
 
     outArr.setUiAttribs({ "stride": stride });
 
-    if (!indices)
+    if (!indices || !values)
     {
         outArr.setRef([]);
         return;

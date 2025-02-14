@@ -8,9 +8,12 @@ const
 
     inOverflow = op.inBool("Overflow Ellipsis", false),
 
-    inLetterSpace = op.inFloat("Letter Spacing", 12),
+    inLetterSpace = op.inFloat("Letter Spacing", 0),
 
     inLineHeight = op.inFloat("Line Height", 0),
+
+    inUserSelectNone = op.inBool("Disable Text Select", false),
+
     // in1 = op.inSwitch("White Space",["Initial","no-wrap"], "Initial"),
     outEle = op.outObject("HTML Element", null, "element");
 
@@ -33,6 +36,10 @@ function remove()
 {
     if (!ele) return;
     ele.style.removeProperty("font-family");
+    ele.style.removeProperty("user-select");
+    ele.style.removeProperty("letter-spacing");
+    ele.style.removeProperty("text-align");
+    ele.style.removeProperty("line-height");
     ele.style.removeProperty("font-size");
 }
 
@@ -54,6 +61,8 @@ function update()
 
         if (inLineHeight.get()) ele.style["line-height"] = inLineHeight.get() + "px";
         else ele.style["line-height"] = "";
+
+        if (inUserSelectNone.get())ele.style["user-select"] = "none";
     }
     else
     {

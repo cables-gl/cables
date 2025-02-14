@@ -7,6 +7,20 @@ import ValueSelectPort from "./core_port_select.js";
 import MultiPort from "./core_port_multi.js";
 import Patch from "./core_patch.js";
 
+/**
+ * configuration object for loading a patch
+ * @typedef {Object} OpUiAttribs
+ * @property {string} [title] overwrite op title
+ * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property {object} [storage] internal - do not use manualy
+ * @property {boolean} [working] internal - do not use manualy
+ * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
+ * @property {string} [color]
+ * @property {string} [comment]
+ * @property {object} [translate]
+ * @property {string} [subpatch]
+ */
+
 export default class Op extends Events
 {
 
@@ -32,7 +46,7 @@ export default class Op extends Events
     portsIn = [];
     portsInData = []; // original loaded patch data
 
-    /** @type {Object} */
+    /** @type {OpUiAttribs} */
     uiAttribs = {};
     enabled = true;
 
@@ -221,7 +235,7 @@ export default class Op extends Events
      * extendTitle - op title extension, e.g. [ + ]
      * </pre>
      * @function setUiAttrib
-     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
      * @memberof Op
      * @instance
      * @example
@@ -233,7 +247,8 @@ export default class Op extends Events
     }
 
     /**
-     *  @deprecated
+     * @deprecated
+     * @param {OpUiAttribs} a
      */
     setUiAttribs(a)
     {
@@ -241,7 +256,8 @@ export default class Op extends Events
     }
 
     /**
-     *  @deprecated
+     * @deprecated
+     * @param {OpUiAttribs} a
      */
     uiAttr(a)
     {
@@ -249,7 +265,7 @@ export default class Op extends Events
     }
 
     /**
-     *  @private
+     * @param {OpUiAttribs} newAttribs
      */
     _setUiAttrib(newAttribs)
     {
@@ -339,7 +355,7 @@ export default class Op extends Events
     {
         if (!(p instanceof Port)) throw new Error("parameter is not a port!");
 
-        p.direction = CONSTANTS.PORT.PORT_DIR_IN;
+        p.direction = Port.DIR_IN;
         p._op = this;
 
         this.portsIn.push(p);
@@ -488,7 +504,7 @@ export default class Op extends Events
             this,
             name,
             type,
-            CONSTANTS.PORT.PORT_DIR_IN,
+            Port.DIR_IN,
             {
                 "addPort": true,
                 "hidePort": true
@@ -1613,7 +1629,7 @@ export default class Op extends Events
      * @param {string} txt text message
      * @param {number} level level
      */
-    setUiError(id, txt, level)
+    setUiError(id, txt, level = 2)
     {
         // overwritten in ui: core_extend_op
     }

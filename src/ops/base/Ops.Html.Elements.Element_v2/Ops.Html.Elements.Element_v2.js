@@ -6,6 +6,8 @@ const
     inSetSize = op.inValueBool("Set Size", false),
     inWidth = op.inFloat("Width", 100),
     inHeight = op.inFloat("Height", 100),
+    inSizeUnit = op.inSwitch("Size  Units", ["px", "%", "vwh"], "px"),
+
     inOverflow = op.inSwitch("Overflow", ["Visible", "Hidden", "Scroll", "Auto"], "Hidden"),
 
     inStyle = op.inStringEditor("Inline Style", "", "inline-css"),
@@ -21,7 +23,7 @@ const
     outHover = op.outBoolNum("Hovering"),
     outClicked = op.outTrigger("Clicked");
 
-op.setPortGroup("Area", [inWidth, inHeight, inSetSize, inOverflow]);
+op.setPortGroup("Area", [inWidth, inHeight, inSetSize, inSizeUnit, inOverflow]);
 op.setPortGroup("CSS", [inClass, inStyle, inBlacklist]);
 
 let listenerElement = null;
@@ -53,7 +55,7 @@ inDisplay.onChange =
     inWidth.onChange =
     inHeight.onChange =
     inOverflow.onChange =
-
+    inSizeUnit.onChange =
     inHeight.onChange =
     inStyle.onChange = updateStyle;
 
@@ -128,8 +130,8 @@ function updateStyle()
 
     if (inSetSize.get())
     {
-        div.style.width = inWidth.get() + "px";
-        div.style.height = inHeight.get() + "px";
+        div.style.width = inWidth.get() + inSizeUnit.get();
+        div.style.height = inHeight.get() + inSizeUnit.get();
     }
     else
     {

@@ -133,7 +133,7 @@ export default class Link extends Events
             return false;
         }
 
-        if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN)
+        if (p1.direction == Port.DIR_IN)
         {
             this.portIn = p1;
             this.portOut = p2;
@@ -148,9 +148,6 @@ export default class Link extends Events
         p2.addLink(this);
 
         this.setValue();
-
-        if (p1.onLink) p1.onLink(this);
-        if (p2.onLink) p2.onLink(this);
 
         p1.op._checkLinksNeededToWork();
         p2.op._checkLinksNeededToWork();
@@ -184,7 +181,7 @@ Link.canLinkText = function (p1, p2)
     if (p1.direction == p2.direction)
     {
         let txt = "(out)";
-        if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN) txt = "(in)";
+        if (p2.direction == Port.DIR_IN) txt = "(in)";
         return "can not link: same direction " + txt;
     }
     if (p1.op == p2.op) return "can not link: same op";
@@ -203,8 +200,8 @@ Link.canLinkText = function (p1, p2)
     if (!p1) return "can not link: port 1 invalid";
     if (!p2) return "can not link: port 2 invalid";
 
-    if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN && p1.isAnimated()) return "can not link: is animated";
-    if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN && p2.isAnimated()) return "can not link: is animated";
+    if (p1.direction == Port.DIR_IN && p1.isAnimated()) return "can not link: is animated";
+    if (p2.direction == Port.DIR_IN && p2.isAnimated()) return "can not link: is animated";
 
     if (p1.isLinkedTo(p2)) return "ports already linked";
 
@@ -226,8 +223,8 @@ Link.canLink = function (p1, p2)
 {
     if (!p1) return false;
     if (!p2) return false;
-    if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN && p1.isAnimated()) return false;
-    if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN && p2.isAnimated()) return false;
+    if (p1.direction == Port.DIR_IN && p1.isAnimated()) return false;
+    if (p2.direction == Port.DIR_IN && p2.isAnimated()) return false;
 
     if (p1.isHidden() || p2.isHidden()) return false;
 

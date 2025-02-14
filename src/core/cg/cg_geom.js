@@ -42,6 +42,10 @@ import { BoundingBox } from "./cg_boundingbox.js";
 
 class Geometry
 {
+
+    /**
+     * @param {String} name
+     */
     constructor(name)
     {
         this.name = name || "unknown";

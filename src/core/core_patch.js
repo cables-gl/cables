@@ -27,6 +27,28 @@ import CglContext from "./cgl/cgl_state.js";
  *     glslPrecision:'highp'
  * });
  */
+
+/**
+ * @typedef {Object} PatchConfig
+ * @hideconstructor
+ * @property {String} [prefixAssetPath=''] prefix for path to assets
+ * @property {String} [assetPath=''] path to assets
+ * @property {String} [jsPath=''] path to javascript files
+ * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @property {Function} [onError=null] called when an error occurs
+ * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
+ * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
+ * @property {Boolean} [silent=false]
+ * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
+ * @property {String} [glslPrecision='mediump'] default precision for glsl shader
+ *
+ */
+
 class Patch extends Events
 {
     static EVENT_OP_DELETED = "onOpDelete";
@@ -771,6 +793,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {String} name
+     */
     getOpsByObjName(name)
     {
         const arr = [];
@@ -779,6 +804,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {UUID} opid
+     */
     getOpsByOpId(opid)
     {
         const arr = [];
@@ -787,6 +815,9 @@ class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {String} which
+     */
     loadLib(which)
     {
         ajaxSync(
@@ -1584,28 +1615,6 @@ Patch.replaceOpIds = function (json, options)
  * @type {Object}
  * @property {Port} port1
  * @property {Port} port2
- */
-
-/**
- * configuration object for loading a patch
- * @typedef {Object} PatchConfig
- * @hideconstructor
- * @property {String} [prefixAssetPath=''] prefix for path to assets
- * @property {String} [assetPath=''] path to assets
- * @property {String} [jsPath=''] path to javascript files
- * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
- * @property {Function} [onError=null] called when an error occurs
- * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
- * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
- * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
- * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
- * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
- * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
- * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
- * @property {Boolean} [silent=false]
- * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
- * @property {String} [glslPrecision='mediump'] default precision for glsl shader
- *
  */
 
 export default Patch;

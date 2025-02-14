@@ -44,11 +44,11 @@ function update()
     {
         let rgbaText = "inherit";
 
-        if (inSetCol.get()) rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + Math.floor(a.get()) + ")";
+        if (inSetCol.get()) rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + a.get() + ")";
         ele.style.color = rgbaText;
 
         let rgbaBg = "inherit";
-        if (inSetBg.get()) rgbaBg = "rgba(" + Math.floor(bgr.get() * 255) + "," + Math.floor(bgg.get() * 255) + "," + Math.floor(bgb.get() * 255) + "," + Math.floor(a.get()) + ")";
+        if (inSetBg.get()) rgbaBg = "rgba(" + Math.floor(bgr.get() * 255) + "," + Math.floor(bgg.get() * 255) + "," + Math.floor(bgb.get() * 255) + ", " + bga.get() + ")";
         ele.style["background-color"] = rgbaBg;
     }
     else
@@ -56,6 +56,5 @@ function update()
         setTimeout(update, 50);
     }
 
-    // if (outEle != inEle.get())e
     outEle.setRef(inEle.get());
 }

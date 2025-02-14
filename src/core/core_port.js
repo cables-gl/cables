@@ -6,21 +6,39 @@ import Op from "./core_op.js";
 import Anim from "./anim.js";
 
 /**
+ * @typedef {Object} PortUiAttribs
+ * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property  {Boolean} [greyout=false] port paramater will appear greyed out, can not be
+ * @property  {Boolean} [hidePort] port will be hidden from op
+ * @property  {Boolean} [hideParam] port params will be hidden from parameter panel
+ * @property  {Boolean} [showIndex] only for dropdowns - show value index (e.g. `0 - normal` )
+ * @property  {String} [editorSyntax] set syntax highlighting theme for editor port
+ * @property  {Boolean} [ignoreObjTypeErrors] do not auto check object types
+ * @property  {string} [group] do not set manually - group ports, usually set by op.setPortGroup...
+ * @property  {Boolean} [isAnimated] internal: do not set manually
+ * @property  {Boolean} [useVariable] internal: do not set manually
+ * @property  {string} [variableName] internal: do not set manually
+ * @property  {Number} [order] internal: do not set manually
+ * @property  {Boolean} [expose] internal: do not set manually
+ * @property  {Boolean} [multiPortManual] internal: do not set manually
+ * @property  {Number} [multiPortNum] internal: do not set manually
+ * @property  {String} [display] internal: do not set manually
+ *
+ */
+
+/**
  * data is coming into and out of ops through input and output ports
  * @namespace external:CABLES#Port
  * @module Port
  * @class
- * @hideconstructor
- * @param ___op
- * @param name
- * @param type
- * @param uiAttribs
  * @example
  * const myPort=op.inString("String Port");
  */
-
 export default class Port extends Events
 {
+    static DIR_IN = 0;
+    static DIR_OUT = 1;
+
     static TYPE_VALUE = 0;
     static TYPE_NUMBER = 0;
     static TYPE_FUNCTION = 1;
@@ -37,7 +55,7 @@ export default class Port extends Events
      * @param {Op} ___op
      * @param {string} name
      * @param {number} type
-     * @param {Object} uiAttribs
+     * @param {PortUiAttribs} uiAttribs
      */
     constructor(___op, name, type, uiAttribs)
     {
@@ -52,7 +70,7 @@ export default class Port extends Events
          * @memberof Port
          * @description direction of port (input(0) or output(1))
          */
-        this.direction = CONSTANTS.PORT.PORT_DIR_IN;
+        this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
         /** @type {Op} */
@@ -97,6 +115,8 @@ export default class Port extends Events
         this.activityCounterStartFrame = 0;
 
         this._tempLastUiValue = null;
+        this.canLink = null; // function fan be overwritten
+        this.checkLinkTimeWarnings = null; // function fan be overwritten
     }
 
     get parent()
@@ -223,16 +243,8 @@ export default class Port extends Events
      * @function setUiAttribs
      * @memberof Port
      * @instance
-     * @param {Object} newAttribs
-     * <pre>
-     * title - overwrite title of port (by default this is portname)
-     * greyout - port paramater will appear greyed out, can not be
-     * hidePort - port will be hidden from op
-     * hideParam - port params will be hidden from parameter panel
-     * showIndex - only for dropdowns - show value index (e.g. `0 - normal` )
-     * editorSyntax - set syntax highlighting theme for editor port
-     * ignoreObjTypeErrors - do not auto check object types
-     * </pre>
+     * @param {PortUiAttribs} newAttribs
+
      * @example
      * myPort.setUiAttribs({greyout:true});
      */
@@ -441,7 +453,7 @@ export default class Port extends Events
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this._op.hasAnimPort = true;
-            this.anim.addEventListener("onChange", () =>
+            this.anim.on("onChange", () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });
@@ -511,7 +523,7 @@ export default class Port extends Events
             }
         }
 
-        if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
+        if (this.direction == Port.DIR_IN && this.links.length > 0)
         {
             for (const i in this.links)
             {
@@ -581,7 +593,7 @@ export default class Port extends Events
             if (this.links[i] == link)
                 this.links.splice(i, 1);
 
-        if (this.direction == CONSTANTS.PORT.PORT_DIR_IN)
+        if (this.direction == Port.DIR_IN)
         {
             if (this.type == Port.TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
             else this.setValue(this._valueBeforeLink || null);
@@ -735,13 +747,6 @@ export default class Port extends Events
 
             if (this._op.patch.isEditorMode())
             {
-
-                /*
-                 * this._op.patch.emitEvent("exception", ex, portTriggered.op);
-                 * this._op.patch.emitEvent("opcrash", portTriggered);
-                 * console.log("crash", portTriggered.op.objName);
-                 */
-
                 if (portTriggered.op.onError) portTriggered.op.onError(ex);
             }
             this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op);
@@ -856,7 +861,7 @@ export default class Port extends Events
             if (this._animated && !this.anim)
             {
                 this.anim = new Anim({ "name": "port " + this.name });
-                this.anim.addEventListener("onChange", () =>
+                this.anim.on("onChange", () =>
                 {
                     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
                 });
@@ -881,7 +886,7 @@ export default class Port extends Events
         if (this._animated && !this.anim)
         {
             this.anim = new Anim({ "name": "port " + this.name });
-            this.anim.addEventListener("onChange", () =>
+            this.anim.on("onChange", () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });

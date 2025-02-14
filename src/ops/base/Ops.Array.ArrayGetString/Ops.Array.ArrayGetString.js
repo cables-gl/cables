@@ -5,12 +5,8 @@ const
 
 array.ignoreValueSerialize = true;
 
+array.onChange =
 index.onChange = update;
-
-array.onChange = function ()
-{
-    update();
-};
 
 function update()
 {

@@ -4,8 +4,8 @@ const inKeyShouldEqual = op.inString("Filter Value", "");
 const inInvertEquality = op.inBool("Invert Filter", false);
 const outArray = op.outArray("arrayOut");
 
-const COMPARATOR_FUNC = (obj, comparator, key) => { return obj[key] == comparator; };
-const INV_COMPARATOR_FUNC = (obj, comparator, key) => { return (obj[key] != comparator); };
+const COMPARATOR_FUNC = (obj, comparator, key) => { return obj && obj[key] == comparator; };
+const INV_COMPARATOR_FUNC = (obj, comparator, key) => { return obj && (obj[key] != comparator); };
 
 inArray.onChange = inInvertEquality.onChange
 = inKeyToFilterBy.onChange = inKeyShouldEqual.onChange = function ()

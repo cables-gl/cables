@@ -50,10 +50,10 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.fillStyle = "#ccc";
 
-    for (let i = Math.min(lines, arr.length - 1); i > 0; i--)
+    for (let i = Math.min(lines, arr.length - 1); i >= 0; i--)
     {
         if (arr[i].length > numChars)arr[i] = arr[i].substr(0, numChars);
-        ctx.fillText(arr[i], layer.x / layer.scale + padding, layer.y / layer.scale + 10 * i + padding);
+        ctx.fillText(arr[i], layer.x / layer.scale + padding, layer.y / layer.scale + 10 * i + padding * 2);
     }
 
     ctx.restore();

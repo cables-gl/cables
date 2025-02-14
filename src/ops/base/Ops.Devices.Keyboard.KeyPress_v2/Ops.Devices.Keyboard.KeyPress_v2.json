@@ -40,8 +40,6 @@
     "docs": {
         "ports": []
     },
-
-
     "exampleProjectId": "lmGgPZ",
     "issues": "",
     "caniusequery": "",
@@ -57,5 +55,6 @@
             "author": "stephan",
             "date": 1647442062066
         }
-    ]
+    ],
+    "license": "MIT"
 }

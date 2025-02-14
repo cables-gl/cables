@@ -7,6 +7,7 @@ const
 let template = null;
 
 inTplStr.onChange = updateString;
+inData.onChange = render;
 
 function updateString()
 {
@@ -20,8 +21,6 @@ function updateString()
     }
     render();
 }
-
-inData.onChange = render;
 
 const escapeHtml = (unsafe) =>
 {

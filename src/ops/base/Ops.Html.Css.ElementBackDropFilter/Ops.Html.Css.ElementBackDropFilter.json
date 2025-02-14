@@ -1,6 +1,6 @@
 {
-    "id": "e1c84aec-667d-426f-8922-99fa8a175bad",
-    "created": 1723567532363,
+    "id": "a67f915a-859a-4acd-ad74-faee42a1af47",
+    "created": 1738922133823,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -8,13 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1723567532363
-        },
-        {
-            "message": "Ops.Html.ElementCssBorder renamed to Ops.Html.CSS.ElementCssBorder",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1730273915201
+            "date": 1738922133823
         }
     ],
     "layout": {
@@ -25,53 +19,38 @@
             },
             {
                 "type": 0,
-                "name": "Thickness",
+                "name": "Blur",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Radius",
+                "name": "Contrast",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color R",
+                "name": "Brightness",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color G",
+                "name": "Hue",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color B",
+                "name": "Invert",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color A",
+                "name": "Saturate",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Top",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Bottom",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Left",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Right",
-                "subType": "boolean"
+                "name": "Sepia",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -82,9 +61,9 @@
             }
         ]
     },
-    "summary": "Set CSS border properties of a HTML element",
+    "summary": "Set CSS backdrop filter like blur, contrast, brightness, saturation",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "KmnVEm"
+    "exampleProjectId": "Tem67C"
 }

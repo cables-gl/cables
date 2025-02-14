@@ -1,7 +1,17 @@
 const DEFAULT_TEXTURE_SIZE = 8;
 
+/**
+ * @typedef {Object} CglTextureOptions
+ * @property {number} [width]
+ * @property {number} [height]
+ * @property {string} [pixelformat]
+ */
 export default class CgTexture
 {
+
+    /**
+     * @param {CglTextureOptions} options={}
+     */
     constructor(options = {})
     {
         this.id = CABLES.uuid();

@@ -11,10 +11,10 @@
             "date": 1723566813059
         },
         {
-            "message": "Ops.Html.ElementCssColor renamed to Ops.Html.CSS.ElementCssColor",
-            "type": "rename",
+            "message": "fixed css opacity/alpha values ",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1730273923829
+            "date": 1738922831714
         }
     ],
     "layout": {
