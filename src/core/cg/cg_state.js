@@ -6,6 +6,9 @@ import Patch from "../core_patch.js";
 class CGState extends Events
 {
 
+    static API_WEBGL = 0;
+    static API_WEBGPU = 1;
+
     /**
      * Description
      * @param {Patch} _patch

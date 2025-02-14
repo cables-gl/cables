@@ -5,7 +5,7 @@ import { Timer } from "./timer.js";
 import Link from "./core_link.js";
 import Profiler from "./core_profiler.js";
 import PatchVariable from "./core_variable.js";
-import Op from "./core_op.js";
+import Op, { OpUiAttribs } from "./core_op.js";
 import Port from "./core_port.js";
 import CglContext from "./cgl/cgl_state.js";
 
@@ -364,6 +364,11 @@ class Patch extends Events
         this.emitEvent("patchClearEnd");
     }
 
+    /**
+     * @param {string} identifier
+     * @param {string} id
+     * @param {string} [opName]
+     */
     createOp(identifier, id, opName = null)
     {
 
@@ -479,15 +484,15 @@ class Patch extends Events
      * @memberof Patch
      * @instance
      * @param {string} opIdentifier uuid or name, e.g. Ops.Math.Sum
-     * @param {Object} uiAttribs Attributes
+     * @param {OpUiAttribs} uiAttribs Attributes
      * @param {string} id
-     * @param {boolean} fromDeserialize
-     * @param {string} opName e.g. Ops.Math.Sum
+     * @param {boolean} [fromDeserialize]
+     * @param {string} [opName] e.g. Ops.Math.Sum
      * @example
      * // add invisible op
      * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
      */
-    addOp(opIdentifier, uiAttribs, id, fromDeserialize, opName)
+    addOp(opIdentifier, uiAttribs, id, fromDeserialize = false, opName = null)
     {
         const op = this.createOp(opIdentifier, id, opName);
 

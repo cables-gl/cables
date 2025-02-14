@@ -29,7 +29,7 @@ export default class CglContext extends CGState
     {
         super(_patch);
 
-        this.gApi = CG.GAPI_WEBGL;
+        this.gApi = CGState.API_WEBGL;
         this.aborted = false;
 
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
