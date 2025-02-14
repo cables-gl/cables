@@ -29,7 +29,6 @@ import CglContext from "./cgl/cgl_state.js";
  */
 
 /**
- * @typedef {Object} PatchConfig
  * @hideconstructor
  * @property {String} [prefixAssetPath=''] prefix for path to assets
  * @property {String} [assetPath=''] path to assets
@@ -46,8 +45,8 @@ import CglContext from "./cgl/cgl_state.js";
  * @property {Boolean} [silent=false]
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
- *
  */
+export class PatchConfig {}
 
 class Patch extends Events
 {

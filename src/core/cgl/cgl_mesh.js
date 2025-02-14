@@ -2,9 +2,7 @@ import { Logger } from "cables-shared-client";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
-import cglcontext from "./cgl_state.js";
 import CgMesh from "../cg/cg_mesh.js";
-import { CgCanvas } from "../cg/cg_canvas.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -17,7 +15,8 @@ MESH.lastMesh = null;
  */
 
 /**
- * @typedef {Object} CglMeshOptions
+ * @type Object
+ * @typedef CglMeshOptions
  * @property {Number} [glPrimitive]
  * @property {String} [opId]
  */
@@ -44,9 +43,9 @@ class Mesh extends CgMesh
     #geom = null;
 
     /**
-     * @param {CgCanvas} _cgl cgl
+     * @param {CglContext} _cgl cgl
      * @param {Geometry} __geom geometry
-     * @param {CglMeshOptions|Number} _options
+     * @param {CglMeshOptions} _options
      */
     constructor(_cgl, __geom, _options = {})
     {

@@ -9,7 +9,6 @@ import Patch from "./core_patch.js";
 
 /**
  * configuration object for loading a patch
- * @typedef {Object} OpUiAttribs
  * @property {string} [title] overwrite op title
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
@@ -20,10 +19,10 @@ import Patch from "./core_patch.js";
  * @property {object} [translate]
  * @property {string} [subpatch]
  */
+export class OpUiAttribs {}
 
 export default class Op extends Events
 {
-
     static OP_VERSION_PREFIX = "_v";
 
     #objName = "";
