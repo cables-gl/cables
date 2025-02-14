@@ -935,9 +935,6 @@ export default class Port extends Events
     }
 
     /**
-     * @function isAnimated
-     * @memberof Port
-     * @instance
      * @return {Boolean} true if port is animated
      */
     isAnimated()

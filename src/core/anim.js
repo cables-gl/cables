@@ -507,9 +507,9 @@ export default class Anim extends Events
      */
     createPort(op, title, cb)
     {
-        const port = op.inDropDown(title, Anim.EASINGNAMES, "Cubic Out");
+        const port = op.inDropDown(title, Anim.EASINGNAMES, "linear");
         port.set("linear");
-        port.defaultValue = "Cubic Out";
+        port.defaultValue = "linear";
 
         port.onChange = () =>
         {
@@ -518,7 +518,6 @@ export default class Anim extends Events
 
             if (cb) cb();
         };
-        port.set("Cubic Out");
 
         return port;
     }
