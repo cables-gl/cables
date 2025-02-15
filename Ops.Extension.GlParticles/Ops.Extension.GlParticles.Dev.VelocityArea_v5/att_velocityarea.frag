@@ -2,9 +2,11 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texPos;
 UNI sampler2D texAbsVel;
-UNI sampler2D texCollision;
 UNI sampler2D texLifeProgress;
+UNI sampler2D texCollision;
+UNI sampler2D texCollided;
 
+UNI float reset;
 UNI float strength;
 UNI float falloff;
 UNI float size;
@@ -69,9 +71,8 @@ void main()
     vec4 col=texture(tex,texCoord);
     col.a=1.0;
 
-
-
     vec4 collisionCol=texture(texCollision,texCoord);
+    vec4 collidedCol=texture(texCollided,texCoord);
 
     vec4 timing=texture(texTiming,texCoord);
     float age=timing.g-timing.r;
@@ -82,6 +83,8 @@ void main()
     collisionCol.r*=(1.0-(timeDiff*collisionFade));
     collisionCol.a=1.0;
     collisionCol.g=collisionCol.b=0.0;
+
+
 
     // if(age<0.1)collisionCol.r=0.0;
     // collisionCol.r*=1.0-step(0.3,age);
@@ -134,19 +137,16 @@ void main()
             col.xyz+=normalize(direction)*finalStrength3;
     #endif
 
-
-
     #ifdef METHOD_VORTEX
-        // if(length(direction)>0.0)
-        //     col.xyz+=normalize(direction)*finalStrength3;
-
         vec3 np= vec3( -(pos.xyz+areaPos).y, (pos.xyz+areaPos).x ,(pos.xyz+areaPos).z) / dot(pos.xyz,pos.xyz);      // field around a vortex
-
         col.xyz+=(pos.xyz-np)*strength;
-
     #endif
 
 
+    if(finalStrength>0.1) collidedCol=vec4(1.0,1.0,1.0,1.0);
+    // else collidedCol=vec4(0.0,0.0,0.0,1.0);
+    if(lifeProgress<0.1)collidedCol=vec4(0.0,0.0,0.0,1.0);
+    collidedCol.a=1.0;
 
 
     #ifdef METHOD_POINT
@@ -156,7 +156,6 @@ void main()
 
     #ifdef METHOD_ROTATE
 
-
         if(finalStrength>0.0)
         {
             // 2d rot....
@@ -165,10 +164,7 @@ void main()
             // col.xy=normalize(pos.xy-a)*strength;
 
             vec3 p=pos.xyz;
-
             vec4 vecV=normalize(vec4(areaPos-p,1.0));
-
-            // vecV=vec4(0.0,0.0,0.0,1.0);
 
             vecV*=rotationMatrix(vec3(1.0,0.0,0.0), direction.x)*
             rotationMatrix(vec3(0.0,1.0,0.0), direction.y)*
@@ -217,16 +213,12 @@ void main()
 
     #endif
 
-if(isnan(col.r)||isnan(col.g))col=vec4(0.0,1.0,1.0,1.0);
-// col.r=1.0;
-
+    if(isnan(col.r)||isnan(col.g))col=vec4(0.0,1.0,1.0,1.0);
 
     outColor0=col;
     outColor1=collisionCol;
-    outColor2=col;
+    outColor2=collidedCol;
     outColor3=col;
 }
 
 
-
-//

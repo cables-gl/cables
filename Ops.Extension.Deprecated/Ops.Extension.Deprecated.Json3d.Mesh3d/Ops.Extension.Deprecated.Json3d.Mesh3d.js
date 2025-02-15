@@ -157,7 +157,7 @@ function setMesh()
 
     const index = Math.floor(meshIndex.get());
 
-    if (!data || index != index || !CABLES.UTILS.isNumeric(index) || index < 0 || index >= data.meshes.length)
+    if (!data || index != index || !CABLES.isNumeric(index) || index < 0 || index >= data.meshes.length)
     {
         op.uiAttr({ "warning": "mesh not found - index out of range / or no file selected " });
         meshes[index] = null;

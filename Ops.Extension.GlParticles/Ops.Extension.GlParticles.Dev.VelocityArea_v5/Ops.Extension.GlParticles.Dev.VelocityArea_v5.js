@@ -25,7 +25,8 @@ const
     inTimeFade = op.inFloat("Age Fade", 1),
     trigger = op.outTrigger("trigger"),
     outTexVel = op.outTexture("Velocity"),
-    outTexCollision = op.outTexture("Collision");
+    outTexCollision = op.outTexture("Collision"),
+    outTexCollided = op.outTexture("Colided");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
@@ -44,10 +45,10 @@ let
     shaderCopyTex2 = new CGL.Uniform(shader, "t", "texVel", 1),
     textureUniform,
     texposuni, texMuluni, texAbsVel, texLifeProgress, texTiming,
-    uniformMorph, uniform2,
+    uniformMorph, uniform2, uniReset,
     uniAreaPos, uniTimeDiff, uniScale, uniDir,
-    uniAgeMul, uniCollisionParams, uniformMul, texCollisionFeedback,
-    tcCollision;
+    uniAgeMul, uniCollisionParams, uniformMul, texCollisionFeedback, texCollidedFeedback,
+    tcCollision, tcCollided;
 
 let velAreaSys = null;
 
@@ -73,10 +74,12 @@ function createShader()
     texLifeProgress = new CGL.Uniform(velAreaSys.bgShader, "t", "texLifeProgress", 4),
     texTiming = new CGL.Uniform(velAreaSys.bgShader, "t", "texTiming", 5),
     texCollisionFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollision", 6),
+    texCollidedFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollided", 7),
 
     uniTimeDiff = new CGL.Uniform(velAreaSys.bgShader, "f", "timeDiff", 0),
     new CGL.Uniform(velAreaSys.bgShader, "f", "collisionFade", inCollisionFade),
 
+    uniReset = new CGL.Uniform(velAreaSys.bgShader, "f", "reset", 0),
     uniformMorph = new CGL.Uniform(velAreaSys.bgShader, "f", "strength", inStrength),
     uniform2 = new CGL.Uniform(velAreaSys.bgShader, "f", "falloff", inFalloff),
     uniAreaPos = new CGL.Uniform(velAreaSys.bgShader, "3f", "areaPos", x, y, z),
@@ -98,10 +101,6 @@ function updateDefines()
     x.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
     y.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
     z.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
-
-    // inTimeStart.setUiAttribs({"greyout":!inTimeAge.isLinked()});
-    // inTimeEnd.setUiAttribs({"greyout":!inTimeAge.isLinked()});
-    // inTimeFade.setUiAttribs({"greyout":!inTimeAge.isLinked()});
     inFalloff.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
 
     if (velAreaSys)
@@ -132,29 +131,6 @@ function updateDefines()
     inRandomDir.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
     inForceOutwards.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
 }
-
-// function drawHelpers()
-// {
-//     if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
-
-//     cgl.pushModelMatrix();
-
-//     mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
-
-//     if (cgl.shouldDrawHelpers(op))
-//     {
-//         if (inArea.get() == "Box")
-//             CABLES.GL_MARKER.drawCube(op,
-//                     scale_x.get() + inFalloff.get()/2,
-//                     scale_y.get() + inFalloff.get()/2,
-//                     scale_z.get() + inFalloff.get()/2);
-//             else if (inArea.get() == "Sphere")
-//                 CABLES.GL_MARKER.drawSphere(op, inSize.get()+inFalloff.get());
-
-//     }
-//     cgl.popModelMatrix();
-
-// }
 
 render.onTriggered = function ()
 {
@@ -190,8 +166,8 @@ render.onTriggered = function ()
             }
             else if (inArea.get() == "Sphere")
             {
-                CABLES.GL_MARKER.drawCircle(op, inSize.get() / 2.0);
-                CABLES.GL_MARKER.drawCircle(op, inSize.get() / 2.0 + inFalloff.get());
+                CABLES.GL_MARKER.drawCircle(op, inSize.get());
+                CABLES.GL_MARKER.drawCircle(op, inSize.get() + inFalloff.get());
             }
 
             cgl.popModelMatrix();
@@ -222,9 +198,18 @@ render.onTriggered = function ()
     }
     if (cgl.frameStore.particleSys.reset) outTexCollision.setRef(CGL.Texture.getEmptyTexture(cgl));
 
+    if (!tcCollided)
+    {
+        tcCollided = new CGL.CopyTexture(op.patch.cgl, "ps_collided", { "pixelFormat": cgl.frameStore.particleSys.pixelFormat, "filter": CGL.Texture.FILTER_NEAREST });
+        outTexCollided.setRef(CGL.Texture.getEmptyTexture(cgl));
+    }
+    if (cgl.frameStore.particleSys.reset) outTexCollided.setRef(CGL.Texture.getEmptyTexture(cgl));
+
     uniTimeDiff.set(cgl.frameStore.particleSys.timeDiff);
 
     velAreaSys.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
+    velAreaSys.bgShader.pushTexture(texCollidedFeedback, tcCollision.copy(outTexCollided.get()));
+
     velAreaSys.bgShader.pushTexture(textureUniform, cgl.currentTextureEffect.getCurrentSourceTexture());
     velAreaSys.bgShader.pushTexture(texposuni, cgl.frameStore.particleSys.texPos || CGL.Texture.getEmptyTexture(cgl));
     velAreaSys.bgShader.pushTexture(texMuluni, inTexMultiply.get() || CGL.Texture.getEmptyTexture(cgl));
@@ -236,6 +221,11 @@ render.onTriggered = function ()
 
     outTexVel.setRef(velAreaSys.fb.getTextureColorNum(0));
     outTexCollision.setRef(velAreaSys.fb.getTextureColorNum(1));
+    outTexCollided.setRef(velAreaSys.fb.getTextureColorNum(2));
+
+    uniReset.set(cgl.frameStore.particleSys.reset ? 1 : 0);
+
+    console.log(cgl.frameStore.particleSys.reset);
 
     // imagecompose... -------------------------------------------
 

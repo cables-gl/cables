@@ -9,7 +9,6 @@ const
     inSpawnRate = op.inFloatSlider("Spawn Rate", 1),
     inRandSpawn = op.inBool("Randomize Spawn", true),
 
-
     inLifeTimeMin = op.inFloat("Min Lifetime", 0.5),
     inLifeTimeMax = op.inFloat("Max Lifetime", 2),
     inResetRandLifetime = op.inBool("Reset Randomize Age", true),
@@ -363,7 +362,7 @@ function renderFrame(time, timeDiff)
 {
     cgl.frameStore.particleSys.time = time;
     cgl.frameStore.particleSys.timeDiff = timeDiff;
-    // cgl.frameStore.particleSys.reset = uniReset.getValue();
+    cgl.frameStore.particleSys.reset = uniReset.getValue();
 
     outTime.set(time);
     uniTimeParams.setValue([time, timeDiff, inSpawnRate.get(), inSpawnEnergy.get()]);
