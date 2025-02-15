@@ -9,21 +9,21 @@ import Patch from "./core_patch.js";
 
 /**
  * configuration object for loading a patch
- * @typedef {Object} OpUiAttribs
  * @property {string} [title] overwrite op title
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
+ * @property {boolean} [bookmarked] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {string} [comment]
  * @property {object} [translate]
  * @property {string} [subpatch]
  */
+export class OpUiAttribs {}
 
 export default class Op extends Events
 {
-
     static OP_VERSION_PREFIX = "_v";
 
     #objName = "";
@@ -33,7 +33,7 @@ export default class Op extends Events
 
     opId = ""; // unique op id
 
-    /** @type {Array<Port>} */
+    /** @type {Array<CABLES.Port>} */
     portsOut = [];
 
     /** @type {Patch} */
@@ -42,7 +42,7 @@ export default class Op extends Events
     data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
     storage = {}; // op-specific data to be included in export
 
-    /** @type {Array<Port>} */
+    /** @type {Array<CABLES.Port>} */
     portsIn = [];
     portsInData = []; // original loaded patch data
 

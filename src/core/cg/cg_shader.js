@@ -2,23 +2,43 @@ import { Events } from "cables-shared-client";
 import { simpleId } from "../utils.js";
 import Port from "../core_port.js";
 
+/**
+ * @typedef ShaderModule
+ * @property {String} title
+ * @property {Number} id
+ * @property {Number} numId
+ * @property {String} group
+ * @property {String} prefix
+ */
+
 class CgShader extends Events
 {
     id = simpleId();
+    _isValid = true;
+
+    // this._defines.push([name, value]);
+
+    /** @type {Array<Array<String>>} */
+    _defines = [];
+
+    /** @type {Array<String>} */
+    _moduleNames = [];
+
+    _moduleNumId = 0;
+    _needsRecompile = true;
+    _compileReason = "initial";
+
+    /** @type {Array<ShaderModule>} */
+    _modules = [];
 
     constructor()
     {
         super();
-        this._isValid = true;
-        this._defines = [];
-
-        this._moduleNames = [];
-        this._modules = [];
-        this._moduleNumId = 0;
-        this._needsRecompile = true;
-        this._compileReason = "initial";
     }
 
+    /**
+     * @param {string} reason
+     */
     setWhyCompile(reason)
     {
         this._compileReason = reason;
@@ -91,6 +111,9 @@ class CgShader extends Events
         return this._defines;
     }
 
+    /**
+     * @param {string} name
+     */
     getDefine(name)
     {
         for (let i = 0; i < this._defines.length; i++)
@@ -141,6 +164,10 @@ class CgShader extends Events
         return false;
     }
 
+    /**
+     *
+     * @param {Array<String>} names
+     */
     setModules(names)
     {
         this._moduleNames = names;
@@ -191,8 +218,8 @@ class CgShader extends Events
 
     /**
      * add a module
-     * @param {shaderModule} mod the module to be added
-     * @param {shaderModule} [sibling] sibling module, new module will share the same group
+     * @param {ShaderModule} mod the module to be added
+     * @param {ShaderModule} [sibling] sibling module, new module will share the same group
      */
     addModule(mod, sibling)
     {
@@ -216,56 +243,56 @@ class CgShader extends Events
         return mod;
     }
 
-    getAttributeSrc(mod, srcHeadVert, srcVert)
-    {
-        if (mod.attributes)
-            for (let k = 0; k < mod.attributes.length; k++)
-            {
-                const r = this._getAttrSrc(mod.attributes[k], false);
-                if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
-                if (r.srcVert)srcVert += r.srcVert;
-            }
+    // getAttributeSrc(mod, srcHeadVert, srcVert)
+    // {
+    //     if (mod.attributes)
+    //         for (let k = 0; k < mod.attributes.length; k++)
+    //         {
+    //             const r = this._getAttrSrc(mod.attributes[k], false);
+    //             if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
+    //             if (r.srcVert)srcVert += r.srcVert;
+    //         }
 
-        return { "srcHeadVert": srcHeadVert, "srcVert": srcVert };
-    }
+    //     return { "srcHeadVert": srcHeadVert, "srcVert": srcVert };
+    // }
 
-    replaceModuleSrc()
-    {
-        let srcHeadVert = "";
+    // replaceModuleSrc()
+    // {
+    //     let srcHeadVert = "";
 
-        for (let j = 0; j < this._modules.length; j++)
-        {
-            const mod = this._modules[j];
-            if (mod.name == this._moduleNames[i])
-            {
-                srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
+    //     for (let j = 0; j < this._modules.length; j++)
+    //     {
+    //         const mod = this._modules[j];
+    //         if (mod.name == this._moduleNames[i])
+    //         {
+    //             srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
 
-                srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
+    //             srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
 
-                if (mod.getAttributeSrc)
-                {
-                    const r = getAttributeSrc(mod, srcHeadVert, srcVert);
-                    if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
-                    if (r.srcVert)srcVert += r.srcVert;
-                }
+    //             if (mod.getAttributeSrc)
+    //             {
+    //                 const r = getAttributeSrc(mod, srcHeadVert, srcVert);
+    //                 if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
+    //                 if (r.srcVert)srcVert += r.srcVert;
+    //             }
 
-                srcHeadVert += mod.srcHeadVert || "";
-                srcVert += mod.srcBodyVert || "";
+    //             srcHeadVert += mod.srcHeadVert || "";
+    //             srcVert += mod.srcBodyVert || "";
 
-                srcHeadVert += "\n//---- end mod ------\n";
+    //             srcHeadVert += "\n//---- end mod ------\n";
 
-                srcVert += "\n//---- end mod ------\n";
+    //             srcVert += "\n//---- end mod ------\n";
 
-                srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
-                srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
+    //             srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
+    //             srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
 
-                srcVert = srcVert.replace(/MOD_/g, mod.prefix);
-                srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
-            }
-        }
+    //             srcVert = srcVert.replace(/MOD_/g, mod.prefix);
+    //             srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+    //         }
+    //     }
 
-        vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
-    }
+    //     vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
+    // }
 }
 
 export { CgShader };

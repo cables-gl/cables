@@ -25,13 +25,13 @@ class WebGpuContext extends CGState
      */
     constructor(_patch)
     {
-        super();
+        super(_patch);
         this.patch = _patch;
 
         this.lastErrorMsg = "";
 
         this._log = new Logger("WebGpuContext");
-        this.gApi = CG.GAPI_WEBGPU;
+        this.gApi = CGState.API_WEBGPU;
         this._viewport = [0, 0, 256, 256];
         this._shaderStack = [];
         this._simpleShader = null;

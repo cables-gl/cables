@@ -6,7 +6,6 @@ import Op from "./core_op.js";
 import Anim from "./anim.js";
 
 /**
- * @typedef {Object} PortUiAttribs
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
  * @property  {Boolean} [greyout=false] port paramater will appear greyed out, can not be
  * @property  {Boolean} [hidePort] port will be hidden from op
@@ -23,8 +22,8 @@ import Anim from "./anim.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {String} [display] internal: do not set manually
- *
  */
+export class PortUiAttribs {}
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -936,9 +935,6 @@ export default class Port extends Events
     }
 
     /**
-     * @function isAnimated
-     * @memberof Port
-     * @instance
      * @return {Boolean} true if port is animated
      */
     isAnimated()

@@ -6,7 +6,7 @@ import { CONSTANTS } from "./constants.js";
 import { escapeHTML } from "./cgl_utils.js";
 import { CgShader } from "../cg/cg_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
-import { simpleId } from "../utils.js";
+
 // ---------------------------------------------------------------------------
 
 /*
@@ -67,7 +67,7 @@ function getDefaultFragmentShader(r, g, b)
  * var shader=new CGL.Shader(cgl,'MinimalMaterial');
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
-class Shader extends CgShader
+class CglShader extends CgShader
 {
     constructor(_cgl, _name, _op)
     {
@@ -227,7 +227,7 @@ class Shader extends CgShader
      */
     copy()
     {
-        const shader = new Shader(this._cgl, this._name + " copy");
+        const shader = new CglShader(this._cgl, this._name + " copy");
         shader.setSource(this.srcVert, this.srcFrag);
 
         shader._modules = JSON.parse(JSON.stringify(this._modules));
@@ -1197,8 +1197,8 @@ class Shader extends CgShader
 
         const program = this._cgl.gl.createProgram();
 
-        this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
-        this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
+        this.vshader = CglShader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
+        this.fshader = CglShader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
         if (this.vshader && this.fshader)
         {
@@ -1269,7 +1269,7 @@ class Shader extends CgShader
                 this._isValid = false;
 
                 this._name = "errorshader";
-                this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
+                this.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
                 this._cgl.printError("shader link err");
             }
         }
@@ -1484,10 +1484,10 @@ class Shader extends CgShader
 
 // --------------------------
 
-Shader.getDefaultVertexShader = getDefaultVertexShader;
-Shader.getDefaultFragmentShader = getDefaultFragmentShader;
+CglShader.getDefaultVertexShader = getDefaultVertexShader;
+CglShader.getDefaultFragmentShader = getDefaultFragmentShader;
 
-Shader.getErrorFragmentShader = function ()
+CglShader.getErrorFragmentShader = function ()
 {
     return ""
         .endl() + "void main()"
@@ -1498,7 +1498,7 @@ Shader.getErrorFragmentShader = function ()
         .endl() + "}";
 };
 
-Shader.createShader = function (cgl, str, type, cglShader)
+CglShader.createShader = function (cgl, str, type, cglShader)
 {
     if (cgl.aborted) return;
 
@@ -1576,7 +1576,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
             // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
         }
 
-        cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
+        cglShader.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
     }
     else
     {
@@ -1586,4 +1586,4 @@ Shader.createShader = function (cgl, str, type, cglShader)
     return shader;
 };
 
-export { Shader };
+export { CglShader as Shader };

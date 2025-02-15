@@ -5,9 +5,6 @@ import FpsCounter from "./cg_fpscounter.js";
 
 const CG = {
 
-    "GAPI_WEBGL": 0,
-    "GAPI_WEBGPU": 1,
-
     "DEPTH_COMPARE_NEVER": 0,
     "DEPTH_COMPARE_LESS": 1,
     "DEPTH_COMPARE_EQUAL": 2,

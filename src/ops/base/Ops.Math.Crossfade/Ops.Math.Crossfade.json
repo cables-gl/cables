@@ -17,37 +17,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Crossfade",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Min",
                 "group": "Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Max",
                 "group": "Range",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Easing",
+                "type": 0,
+                "name": "Easing index",
                 "group": "Easing",
-                "subType": "string"
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "A",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "B",
                 "subType": "number"
             }
@@ -55,7 +55,6 @@
     },
     "summary": "crossfade between 2 values",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -85,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "U_a2d-"
+    "exampleProjectId": "U_a2d-",
+    "license": "MIT"
 }

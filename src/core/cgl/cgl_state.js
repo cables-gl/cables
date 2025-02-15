@@ -5,6 +5,8 @@ import { ProfileData } from "./cgl_profiledata.js";
 import { CGState } from "../cg/cg_state.js";
 import { CG } from "../cg/cg_constants.js";
 import Framebuffer2 from "./cgl_framebuffer2.js";
+import { Mesh } from "./cgl_mesh.js";
+import { CgShader } from "../cg/cg_shader.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -27,7 +29,7 @@ export default class CglContext extends CGState
     {
         super(_patch);
 
-        this.gApi = CG.GAPI_WEBGL;
+        this.gApi = CGState.API_WEBGL;
         this.aborted = false;
 
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
@@ -401,9 +403,13 @@ export default class CglContext extends CGState
         return this._simpleShader;
     }
 
+    /**
+     * @deprecated
+     * @param {CgShader|Shader} s
+     */
     setShader(s)
     {
-        this.pushShader;
+        this.pushShader(s);
     }
 
     /**
@@ -411,10 +417,9 @@ export default class CglContext extends CGState
      * @function pushShader
      * @memberof Context
      * @instance
-     * @param {Object} shader
+     * @param {CgShader} shader
      * @function
      */
-
     pushShader(shader)
     {
         if (this.tempData.forceShaderMods)
@@ -1119,10 +1124,13 @@ export default class CglContext extends CGState
         }
     }
 
+    /**
+     * @param {CglMeshOptions} options
+     */
     createMesh(geom, options)
     {
-        if (CABLES.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
-        return new CGL.Mesh(this, geom, options);
+        if (CABLES.isNumeric(options))options = { "glPrimisdstive": options }; // old constructor fallback...
+        return new Mesh(this, geom, options);
     }
 
     /**
