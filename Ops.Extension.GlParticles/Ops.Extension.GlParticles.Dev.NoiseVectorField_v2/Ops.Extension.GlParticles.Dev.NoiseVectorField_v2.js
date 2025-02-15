@@ -24,23 +24,26 @@ const
     scale_y = op.inValue("Size Y", 1),
     scale_z = op.inValue("Size Z", 1),
 
-    // inPositions = op.inTexture("Positions"),
+    inTexMultiply = op.inTexture("Multiply"),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Size", [scale_x, scale_y, scale_z]);
-// op.toWorkPortsNeedToBeLinked(inPositions);
+
 shader.setSource(shader.getDefaultVertexShader(), attachments.perlin_frag + attachments.noisefield_frag);
 
-inInvertArea.onChange =
+inTexMultiply.onLinkChanged =
+    inInvertArea.onChange =
     inArea.onChange = updateDefines;
+
 updateDefines();
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     texposuni = new CGL.Uniform(shader, "t", "texPos", 1),
+    texMulUni = new CGL.Uniform(shader, "t", "texMul", 2),
     uniform2 = new CGL.Uniform(shader, "f", "falloff", inFalloff),
     uniAreaPos = new CGL.Uniform(shader, "3f", "areaPos", x, y, z),
     uniNoisePos = new CGL.Uniform(shader, "3f", "noisePos", noisex, noisey, noisez),
@@ -91,6 +94,8 @@ function updateDefines()
 
     shader.toggleDefine("INVERT", inInvertArea.get());
 
+    shader.toggleDefine("TEX_MUL", inTexMultiply.isLinked());
+
     scale_x.setUiAttribs({ "greyout": inArea.get() != "Box" });
     scale_y.setUiAttribs({ "greyout": inArea.get() != "Box" });
     scale_z.setUiAttribs({ "greyout": inArea.get() != "Box" });
@@ -126,7 +131,6 @@ render.onTriggered = function ()
         if (op.isCurrentUiOp())
         {
             cgl.pushModelMatrix();
-            // mat4.identity(cgl.mMatrix);
 
             gui.setTransformGizmo(
                 {
@@ -145,6 +149,7 @@ render.onTriggered = function ()
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     cgl.setTexture(1, cgl.frameStore.particleSys.texPos.tex);
+    if (inTexMultiply.get())cgl.setTexture(2, inTexMultiply.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

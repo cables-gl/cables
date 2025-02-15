@@ -156,6 +156,11 @@
                 "name": "Size Z",
                 "group": "Size",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
             }
         ],
         "portsOut": [

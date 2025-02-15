@@ -143,11 +143,6 @@
                 "subType": "number"
             },
             {
-                "type": 2,
-                "name": "Multiply",
-                "objType": "texture"
-            },
-            {
                 "type": 0,
                 "name": "Age Start",
                 "group": "Age Activation",
@@ -164,6 +159,11 @@
                 "name": "Age Fade",
                 "group": "Age Activation",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
             }
         ],
         "portsOut": [

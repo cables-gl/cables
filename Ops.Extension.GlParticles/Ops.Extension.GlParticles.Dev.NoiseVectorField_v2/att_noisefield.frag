@@ -1,6 +1,11 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texPos;
+
+#ifdef TEX_MUL
+    UNI sampler2D texMul;
+#endif
+
 UNI float falloff;
 UNI float size;
 UNI vec3 areaPos;
@@ -32,6 +37,9 @@ void main()
 {
     vec4 pos=texture(texPos,texCoord);
     vec4 col=texture(tex,texCoord);
+
+
+
     vec3 p=pos.xyz-areaPos;
 
     #ifdef MOD_AREA_SPHERE
@@ -62,6 +70,12 @@ void main()
 
     float noiseStrength=noise.x;
     float noiseScale=noise.y/10.0;
+
+    #ifdef TEX_MUL
+        float mul=texture(texMul,texCoord).r;
+        noiseStrength=mul;
+    #endif
+
     col.xyz+=
         noiseStrength*
         MOD_de*
