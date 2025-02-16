@@ -1,16 +1,19 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texPos;
-#ifdef METHOD_COLLISION
-    UNI sampler2D texAbsVel;
-#endif
-#ifdef METHOD_GRAVITY
-    UNI sampler2D texMass;
-#endif
 UNI sampler2D texLifeProgress;
 UNI sampler2D texCollision;
 UNI sampler2D texCollided;
-UNI sampler2D texTiming;
+
+#ifdef METHOD_COLLISION
+    UNI sampler2D texAbsVel;
+#endif
+#ifdef HAS_TEX_MASS
+    UNI sampler2D texMass;
+#endif
+#ifdef HAS_TEX_MUL
+    UNI sampler2D texMul;
+#endif
 
 UNI float reset;
 UNI float strength;
@@ -23,15 +26,9 @@ UNI vec4 collisionParams;
 UNI float timeDiff;
 UNI float collisionFade;
 
-UNI vec3 ageMul; // x age start - y age end - z age fade
-
 
 {{CGL.RANDOM_LOW}}
 
-
-#ifdef HAS_TEX_MUL
-    UNI sampler2D texMul;
-#endif
 
 float MOD_sdSphere( vec3 p, float s )
 {
@@ -49,12 +46,10 @@ float MOD_sdRoundBox( vec3 p, vec3 b, float r )
     return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 }
 
-
 void pR(inout vec2 p, float a)
 {
 	p = cos(a)*p + sin(a)*vec2(p.y, -p.x);
 }
-
 
 mat4 rotationMatrix(vec3 axis, float angle)
 {
@@ -69,8 +64,6 @@ mat4 rotationMatrix(vec3 axis, float angle)
                 0.0,                                0.0,                                0.0,                                1.0);
 }
 
-
-
 void main()
 {
     vec4 pos=texture(texPos,texCoord);
@@ -80,20 +73,11 @@ void main()
     vec4 collisionCol=texture(texCollision,texCoord);
     vec4 collidedCol=texture(texCollided,texCoord);
 
-    vec4 timing=texture(texTiming,texCoord);
-    float age=timing.g-timing.r;
-
-
     float lifeProgress=texture(texLifeProgress,texCoord).r;
 
     collisionCol.r*=(1.0-(timeDiff*collisionFade));
     collisionCol.a=1.0;
     collisionCol.g=collisionCol.b=0.0;
-
-
-
-    // if(age<0.1)collisionCol.r=0.0;
-    // collisionCol.r*=1.0-step(0.3,age);
 
     vec3 p=pos.xyz-areaPos;
     float MOD_de=0.0;
@@ -123,9 +107,9 @@ void main()
         0.0, falloff,
         0.0,1.0
         );
-    #ifdef HAS_TEX_TIMING
-        mul*=smoothstep(0.0,1.0, MOD_map(age,ageMul.x,ageMul.x+ageMul.z,0.0,1.0));
-    #endif
+    // #ifdef HAS_TEX_TIMING
+    //     mul*=smoothstep(0.0,1.0, MOD_map(age,ageMul.x,ageMul.x+ageMul.z,0.0,1.0));
+    // #endif
 
     float finalStrength=strength*mul;
     vec3 finalStrength3=vec3(finalStrength);
@@ -149,15 +133,36 @@ void main()
     #endif
 
 
-    if(finalStrength>0.1) collidedCol=vec4(1.0,1.0,1.0,1.0);
-    // else collidedCol=vec4(0.0,0.0,0.0,1.0);
+
+    // output if particle has ever colided with this area
+    if(finalStrength>0.01) collidedCol=vec4(1.0,1.0,1.0,1.0);
+
     if(lifeProgress<0.1)collidedCol=vec4(0.0,0.0,0.0,1.0);
     collidedCol.a=1.0;
 
+    //
 
     #ifdef METHOD_POINT
         col.xyz+=normalize(pos.xyz-areaPos)*finalStrength3;
     #endif
+
+
+    #ifdef METHOD_GRAVITY
+
+        vec4 mass=vec4(1.0);
+        #ifdef HAS_TEX_MASS
+            mass=texture(texMass,texCoord);
+        #endif
+
+        // timeDiff
+        // vec4 gravityVelocity=vec4(gravity*m*(vtiming.g-vtiming.r)*timeDiff,1.0); // gravity // (time-vtiming.r)??
+
+
+
+
+
+    #endif
+
 
 
     #ifdef METHOD_ROTATE

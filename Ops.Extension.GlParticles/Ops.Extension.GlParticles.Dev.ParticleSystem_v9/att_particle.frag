@@ -55,10 +55,8 @@ void main()
     vtiming.r-=timeDiff;
 
 
-
-vec4 velocityTex=_velocityTex;
-if(isnan(velocityTex.r))velocityTex=vec4(0.0);
-
+    vec4 velocityTex=_velocityTex;
+    if(isnan(velocityTex.r))velocityTex=vec4(0.0);
 
 
     // respawn!!

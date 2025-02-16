@@ -35,12 +35,7 @@ const
 
     inSpawnEnergy = op.inFloat("Spawn Energy", 3),
     inTexSpawnDir = op.inTexture("Spawn Directions"),
-
-    // inTexVelocity = op.inTexture("Velocity"),
-
     inVelocityDrag = op.inFloatSlider("Velocity Drag", 1),
-
-    // inherVel = op.inFloatSlider("Inherit Velocity", 0),
     inTexPassThrough1 = op.inTexture("Pass Through 1"),
     inTexPassThrough2 = op.inTexture("Pass Through 2"),
 
