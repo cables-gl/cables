@@ -52,47 +52,62 @@
             },
             {
                 "type": 0,
-                "name": "Invert Area",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Strength",
                 "subType": "number"
             },
             {
                 "type": 0,
+                "name": "Velocity Dir X",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Dir Y",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Dir Z",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Size",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Falloff",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Boncyness",
-                "group": "Collision",
+                "name": "Size X",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Collision fade",
-                "group": "Collision",
+                "name": "Size Y",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Dir Randomness",
-                "group": "Collision",
+                "name": "Size Z",
+                "group": "Area",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "inForceOutwards",
-                "group": "Collision",
-                "subType": "number"
+                "name": "Invert Area",
+                "group": "Area",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -110,36 +125,6 @@
                 "type": 0,
                 "name": "z",
                 "group": "Position",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Velocity Dir X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Velocity Dir Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Velocity Dir Z",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Z",
                 "subType": "number"
             },
             {
@@ -169,6 +154,30 @@
                 "type": 2,
                 "name": "Gravity Mass",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Boncyness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Collision fade",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dir Randomness",
+                "group": "Collision",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "inForceOutwards",
+                "group": "Collision",
+                "subType": "number"
             }
         ],
         "portsOut": [

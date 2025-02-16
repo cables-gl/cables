@@ -1,29 +1,31 @@
 const
     render = op.inTrigger("Render"),
     inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Gravity","Collision", "Rotate", "Vortex"], "Point"),
-    inInvArea = op.inBool("Invert Area", false),
+    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Gravity", "Collision", "Rotate", "Vortex"], "Point"),
     inStrength = op.inFloat("Strength", 1),
-    inSize = op.inFloat("Size", 1),
-    inFalloff = op.inFloat("Falloff", 0.3),
-    inBounciness = op.inFloat("Boncyness", 0.5),
-    inCollisionFade = op.inFloat("Collision fade", 1),
-    inRandomDir = op.inFloat("Dir Randomness", 0.5),
-    inForceOutwards = op.inFloat("inForceOutwards", 0.5),
-    x = op.inValue("x", 0),
-    y = op.inValue("y", 0),
-    z = op.inValue("z", 0),
+
     dir_x = op.inValue("Velocity Dir X", 0),
     dir_y = op.inValue("Velocity Dir Y", 1),
     dir_z = op.inValue("Velocity Dir Z", 0),
+    inSize = op.inFloat("Size", 1),
+    inFalloff = op.inFloat("Falloff", 0.3),
     scale_x = op.inValue("Size X", 1),
     scale_y = op.inValue("Size Y", 1),
     scale_z = op.inValue("Size Z", 1),
+    inInvArea = op.inBool("Invert Area", false),
+    x = op.inValue("x", 0),
+    y = op.inValue("y", 0),
+    z = op.inValue("z", 0),
     inTimeStart = op.inFloat("Age Start", 0.0),
     inTimeEnd = op.inFloat("Age End", 1000.0),
     inTimeFade = op.inFloat("Age Fade", 1),
     inTexMultiply = op.inTexture("Multiply"),
     inTexMass = op.inTexture("Gravity Mass"),
+    inBounciness = op.inFloat("Boncyness", 0.5),
+    inCollisionFade = op.inFloat("Collision fade", 1),
+    inRandomDir = op.inFloat("Dir Randomness", 0.5),
+    inForceOutwards = op.inFloat("inForceOutwards", 0.5),
+
     trigger = op.outTrigger("trigger"),
     outTexVel = op.outTexture("Velocity"),
     outTexCollision = op.outTexture("Collision"),
@@ -33,6 +35,8 @@ const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 op.setPortGroup("Collision", [inBounciness, inRandomDir, inForceOutwards, inCollisionFade]);
 op.setPortGroup("Position", [x, y, z]);
+op.setPortGroup("Direction", [dir_z, dir_y, dir_x]);
+op.setPortGroup("Area", [inSize, scale_z, scale_y, scale_x, inInvArea, inFalloff]);
 op.setPortGroup("Age Activation", [inTimeEnd, inTimeFade, inTimeStart]);
 shader.setSource(shader.getDefaultVertexShader(), attachments.copy_frag);
 
@@ -46,9 +50,9 @@ let
     shaderCopyTex = new CGL.Uniform(shader, "t", "tex", 0),
     shaderCopyTex2 = new CGL.Uniform(shader, "t", "texVel", 1),
     textureUniform,
-    texposuni, texMuluni,texMassUni, texAbsVel, texLifeProgress, texMass,
+    texposuni, texMuluni, texMassUni, texAbsVel, texLifeProgress,
     uniformMorph, uniform2, uniReset,
-    uniAreaPos, uniTimeDiff, uniScale, uniDir,
+    uniAreaPos, uniTimeDiff, uniTime, uniScale, uniDir,
     uniAgeMul, uniCollisionParams, uniformMul, texCollisionFeedback, texCollidedFeedback,
     tcCollision, tcCollided;
 
@@ -74,7 +78,7 @@ function createShader()
     texMuluni = new CGL.Uniform(velAreaSys.bgShader, "t", "texMul", 2),
     texAbsVel = new CGL.Uniform(velAreaSys.bgShader, "t", "texAbsVel", 3),
     texLifeProgress = new CGL.Uniform(velAreaSys.bgShader, "t", "texLifeProgress", 4),
-    texMass = new CGL.Uniform(velAreaSys.bgShader, "t", "texMass", 5),
+    texMassUni = new CGL.Uniform(velAreaSys.bgShader, "t", "texMass", 5),
     texCollisionFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollision", 6),
     texCollidedFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollided", 7),
 
@@ -105,6 +109,7 @@ function updateDefines()
     y.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
     z.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
     inFalloff.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
+    inInvArea.setUiAttribs({ "greyout": inArea.get() == "Everywhere" });
 
     if (velAreaSys)
     {
@@ -128,9 +133,22 @@ function updateDefines()
     scale_y.setUiAttribs({ "greyout": inArea.get() != "Box" });
     scale_z.setUiAttribs({ "greyout": inArea.get() != "Box" });
 
-    dir_x.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" });
-    dir_y.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" });
-    dir_z.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" });
+    dir_x.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" && inMethod.get() != "Gravity" });
+    dir_y.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" && inMethod.get() != "Gravity" });
+    dir_z.setUiAttribs({ "greyout": inMethod.get() != "Direction" && inMethod.get() != "Rotate" && inMethod.get() != "Gravity" });
+
+    if (inMethod.get() == "Gravity")
+    {
+        dir_x.setUiAttribs({ "title": "Gravity X" });
+        dir_y.setUiAttribs({ "title": "Gravity Y" });
+        dir_z.setUiAttribs({ "title": "Gravity Z" });
+    }
+    else
+    {
+        dir_x.setUiAttribs({ "title": null });
+        dir_y.setUiAttribs({ "title": null });
+        dir_z.setUiAttribs({ "title": null });
+    }
 
     inBounciness.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
     inRandomDir.setUiAttribs({ "greyout": inMethod.get() != "Collision" });
@@ -211,22 +229,18 @@ render.onTriggered = function ()
     if (cgl.frameStore.particleSys.reset) outTexCollided.setRef(CGL.Texture.getEmptyTexture(cgl));
 
     uniTimeDiff.set(cgl.frameStore.particleSys.timeDiff);
-    // uniTime.set(cgl.frameStore.particleSys.timeDiff);
-
-    console.log(cgl.frameStore.particleSys.timeDiff)
-
+    uniTime.set(cgl.frameStore.particleSys.time);
 
     velAreaSys.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
     velAreaSys.bgShader.pushTexture(texCollidedFeedback, tcCollision.copy(outTexCollided.get()));
 
     velAreaSys.bgShader.pushTexture(textureUniform, cgl.currentTextureEffect.getCurrentSourceTexture());
     velAreaSys.bgShader.pushTexture(texposuni, cgl.frameStore.particleSys.texPos || CGL.Texture.getEmptyTexture(cgl));
-    velAreaSys.bgShader.pushTexture(texMuluni,texMassUni, inTexMultiply.get() || CGL.Texture.getEmptyTexture(cgl));
+    velAreaSys.bgShader.pushTexture(texMuluni, inTexMultiply.get() || CGL.Texture.getEmptyTexture(cgl));
     velAreaSys.bgShader.pushTexture(texMassUni, inTexMass.get() || CGL.Texture.getEmptyTexture(cgl));
 
     velAreaSys.bgShader.pushTexture(texAbsVel, cgl.frameStore.particleSys.texAbsVel || CGL.Texture.getEmptyTexture(cgl));
     velAreaSys.bgShader.pushTexture(texLifeProgress, cgl.frameStore.particleSys.texLifeProgress || CGL.Texture.getEmptyTexture(cgl));
-    velAreaSys.bgShader.pushTexture(texMass, cgl.frameStore.particleSys.texMassInt || CGL.Texture.getEmptyTexture(cgl));
 
     velAreaSys.copy(cgl.frameStore.particleSys.texPos);
 
@@ -235,8 +249,6 @@ render.onTriggered = function ()
     outTexCollided.setRef(velAreaSys.fb.getTextureColorNum(2));
 
     uniReset.set(cgl.frameStore.particleSys.reset ? 1 : 0);
-
-
 
     // imagecompose... -------------------------------------------
 

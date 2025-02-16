@@ -24,6 +24,7 @@ UNI vec3 scale;
 UNI vec3 direction;
 UNI vec4 collisionParams;
 UNI float timeDiff;
+UNI float time;
 UNI float collisionFade;
 
 
@@ -119,6 +120,23 @@ void main()
     #endif
 
 
+
+
+    // output if particle has ever collided with this area
+    // channel b - time when first collided
+    if(finalStrength>0.01)
+    {
+        if(collidedCol.r==0.0)
+            collidedCol=vec4(1.0,1.0,time,1.0);
+    }
+
+    if(lifeProgress<0.1)collidedCol=vec4(0.0,0.0,0.0,1.0);
+    collidedCol.a=1.0;
+
+    //
+
+
+
     ///////////////////////////////////////////
     // methods...
 
@@ -132,16 +150,6 @@ void main()
         col.xyz+=(pos.xyz-np)*strength;
     #endif
 
-
-
-    // output if particle has ever colided with this area
-    if(finalStrength>0.01) collidedCol=vec4(1.0,1.0,1.0,1.0);
-
-    if(lifeProgress<0.1)collidedCol=vec4(0.0,0.0,0.0,1.0);
-    collidedCol.a=1.0;
-
-    //
-
     #ifdef METHOD_POINT
         col.xyz+=normalize(pos.xyz-areaPos)*finalStrength3;
     #endif
@@ -149,17 +157,14 @@ void main()
 
     #ifdef METHOD_GRAVITY
 
-        vec4 mass=vec4(1.0);
+        vec3 mass=vec3(1.0);
         #ifdef HAS_TEX_MASS
-            mass=texture(texMass,texCoord);
+            mass=texture(texMass,texCoord).xyz;
         #endif
 
-        // timeDiff
-        // vec4 gravityVelocity=vec4(gravity*m*(vtiming.g-vtiming.r)*timeDiff,1.0); // gravity // (time-vtiming.r)??
+        float timeSinceCol=time-collidedCol.b;
 
-
-
-
+        col.rgb+=0.5*direction * mass *finalStrength * (timeSinceCol*timeSinceCol) * timeDiff; // gravity
 
     #endif
 
