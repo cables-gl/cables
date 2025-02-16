@@ -164,7 +164,7 @@ void main()
 
         float timeSinceCol=time-collidedCol.b;
 
-        col.rgb+=0.5*direction * mass *finalStrength * (timeSinceCol*timeSinceCol) * timeDiff; // gravity
+        col.rgb+=0.5*direction * mass *finalStrength3 * (timeSinceCol*timeSinceCol) * timeDiff; // gravity
 
     #endif
 
