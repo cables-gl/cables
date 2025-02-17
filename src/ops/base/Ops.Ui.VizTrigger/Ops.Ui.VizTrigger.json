@@ -8,6 +8,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1717428723105
+        },
+        {
+            "message": "Show count as circle overlay",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1739781999603
+        },
+        {
+            "message": "Fix bug when op crashed when very small",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1739782024789
         }
     ],
     "layout": {
@@ -19,6 +31,11 @@
             {
                 "type": 1,
                 "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Count Overlay",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
