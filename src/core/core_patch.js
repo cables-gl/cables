@@ -10,6 +10,28 @@ import Port from "./core_port.js";
 import CglContext from "./cgl/cgl_state.js";
 
 /**
+ * @typedef PatchConfig
+ * @property {String} [prefixAssetPath=''] prefix for path to assets
+ * @property {String} [assetPath=''] path to assets
+ * @property {String} [jsPath=''] path to javascript files
+ * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @property {Function} [onError=null] called when an error occurs
+ * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
+ * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
+ * @property {Boolean} [silent=false]
+ * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
+ * @property {String} [glslPrecision='mediump'] default precision for glsl shader
+ * @property {String} [prefixJsPath]
+ * @property {Function} [onPatchLoaded]
+ *
+ */
+
+/**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
  * see {@link PatchConfig}
@@ -27,27 +49,6 @@ import CglContext from "./cgl/cgl_state.js";
  *     glslPrecision:'highp'
  * });
  */
-
-/**
- * @hideconstructor
- * @property {String} [prefixAssetPath=''] prefix for path to assets
- * @property {String} [assetPath=''] path to assets
- * @property {String} [jsPath=''] path to javascript files
- * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
- * @property {Function} [onError=null] called when an error occurs
- * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
- * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
- * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
- * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
- * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
- * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
- * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
- * @property {Boolean} [silent=false]
- * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
- * @property {String} [glslPrecision='mediump'] default precision for glsl shader
- */
-export class PatchConfig {}
-
 class Patch extends Events
 {
     static EVENT_OP_DELETED = "onOpDelete";
@@ -56,6 +57,8 @@ class Patch extends Events
     static EVENT_RESUME = "resume";
     static EVENT_PATCHLOADEND = "patchLoadEnd";
     static EVENT_VARIABLES_CHANGED = "variablesChanged";
+
+    #renderOneFrame = false;
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
@@ -67,6 +70,8 @@ class Patch extends Events
         /** @type {Array<Op>} */
         this.ops = [];
         this.settings = {};
+
+        /** @type {PatchConfig} */
         this.config = cfg ||
         {
             "glCanvasResizeToWindow": false,
@@ -79,6 +84,7 @@ class Patch extends Events
             "onPatchLoaded": null,
             "fpsLimit": 0
         };
+
         this.timer = new Timer();
         this.freeTimer = new Timer();
         this.animFrameOps = [];
@@ -88,7 +94,7 @@ class Patch extends Events
         this.profiler = null;
         this.aborted = false;
         this._crashedOps = [];
-        this._renderOneFrame = false;
+
         this._animReq = null;
         this._opIdCache = {};
         this._triggerStack = [];
@@ -109,7 +115,6 @@ class Patch extends Events
         this._lastFrameTime = 0;
         this._frameWasdelayed = true;
         this.tempData = this.frameStore = {};
-        this.deSerialized = false;
         this.reqAnimTimeStamp = 0;
 
         // /** @deprecated */
@@ -119,8 +124,6 @@ class Patch extends Events
 
         if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
-        this._isLocal = document.location.href.indexOf("file:") === 0;
-
         if (this.config.hasOwnProperty("silent")) this.silent = CABLES.logSilent = this.config.silent;
         if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
@@ -129,7 +132,6 @@ class Patch extends Events
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
         this._variables = {};
-        this._variableListeners = [];
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
@@ -198,11 +200,6 @@ class Patch extends Events
         return !this._paused;
     }
 
-    isRenderingOneFrame()
-    {
-        return this._renderOneFrame;
-    }
-
     /** @deprecated */
     renderOneFrame()
     {
@@ -210,19 +207,6 @@ class Patch extends Events
         this._renderOneFrame = true;
         this.exec();
         this._renderOneFrame = false;
-    }
-
-    /**
-     * current number of frames per second
-     * @function getFPS
-     * @memberof Patch
-     * @instance
-     * @return {Number} fps
-     */
-    getFPS()
-    {
-        this._log.error("deprecated getfps");
-        return 0;
     }
 
     /**
@@ -667,7 +651,7 @@ class Patch extends Events
 
     exec(timestamp)
     {
-        if (!this._renderOneFrame && (this._paused || this.aborted)) return;
+        if (!this.#renderOneFrame && (this._paused || this.aborted)) return;
         this.emitEvent("reqAnimFrame");
         cancelAnimationFrame(this._animReq);
 
@@ -682,7 +666,7 @@ class Patch extends Events
 
         if (this.isEditorMode())
         {
-            if (!this._renderOneFrame)
+            if (!this.#renderOneFrame)
             {
                 if (now - this._lastFrameTime >= 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed)
                 {
@@ -695,7 +679,7 @@ class Patch extends Events
             }
         }
 
-        if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
+        if (this.#renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
         {
             this.renderFrame(timestamp);
 
@@ -708,7 +692,7 @@ class Patch extends Events
             this._frameWasdelayed = false;
         }
 
-        if (this._renderOneFrame)
+        if (this.#renderOneFrame)
         {
             if (this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
             this.emitEvent("renderedOneFrame");
@@ -772,7 +756,7 @@ class Patch extends Events
         return JSON.stringify(obj);
     }
 
-    getOpsByRefId(refId) // needed ?
+    getOpsByRefId(refId) // needed for instancing ops ?
     {
         const perf = gui.uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
@@ -788,14 +772,14 @@ class Patch extends Events
         return this._opIdCache[opid];
     }
 
-    getOpsByName(name)
-    {
-        // TODO: is this still needed ? unclear behaviour....
-        const arr = [];
-        for (const i in this.ops)
-            if (this.ops[i].name == name) arr.push(this.ops[i]);
-        return arr;
-    }
+    // getOpsByName(name)
+    // {
+    //     // TODO: is this still needed ? unclear behaviour....
+    //     const arr = [];
+    //     for (const i in this.ops)
+    //         if (this.ops[i].name == name) arr.push(this.ops[i]);
+    //     return arr;
+    // }
 
     /**
      * @param {String} name
@@ -1153,7 +1137,6 @@ class Patch extends Events
 
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
-        this.deSerialized = true;
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
     }
 

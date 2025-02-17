@@ -1,0 +1,1 @@
+When `Value` changed from `true` to `false` the `False` trigger port triggers once, when value changed from `false` to `true` the `True` trigger port triggers once.

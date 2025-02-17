@@ -1,0 +1,45 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "57314742-8d51-422e-9f6a-977be424f2c9",
+    "created": 1739808341189,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "True"
+            },
+            {
+                "type": 1,
+                "name": "False"
+            }
+        ]
+    },
+    "summary": "Triggers when boolean value has changed",
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "The boolean value to watch for change"
+            },
+            {
+                "name": "True",
+                "text": "Triggers when `Value` became `true`"
+            },
+            {
+                "name": "False",
+                "text": "Triggers when `Value` became `false`"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "UWCvS8",
+    "changelog": []
+}

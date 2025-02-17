@@ -9,6 +9,7 @@ import Patch from "./core_patch.js";
 
 /**
  * configuration object for loading a patch
+ * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
@@ -20,7 +21,6 @@ import Patch from "./core_patch.js";
  * @property {object} [translate]
  * @property {string} [subpatch]
  */
-export class OpUiAttribs {}
 
 export default class Op extends Events
 {
@@ -389,14 +389,6 @@ export default class Op extends Events
     }
 
     /**
-     * @deprecated
-     */
-    inFunctionButton(name, v)
-    {
-        return this.inTriggerButton(name, v);
-    }
-
-    /**
      * create multiple UI trigger buttons
      * @function inTriggerButton
      * @memberof Op
@@ -579,36 +571,36 @@ export default class Op extends Events
         return p;
     }
 
-    /**
-     * create a String value input port displayed as TextArea
-     * @function inValueText
-     * @instance
-     * @memberof Op
-     * @param {String} name
-     * @param {String} v default value
-     * @return {Port} created port
-     */
-    inValueText(name, v)
-    {
-        const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, {
-                "type": "string",
-                "display": "text"
-            })
-        );
-        p.value = "";
+    // /**
+    //  * create a String value input port displayed as TextArea
+    //  * @function inValueText
+    //  * @instance
+    //  * @memberof Op
+    //  * @param {String} name
+    //  * @param {String} v default value
+    //  * @return {Port} created port
+    //  */
+    // inValueText(name, v)
+    // {
+    //     const p = this.addInPort(
+    //         new Port(this, name, Port.TYPE_VALUE, {
+    //             "type": "string",
+    //             "display": "text"
+    //         })
+    //     );
+    //     p.value = "";
 
-        p.setInitialValue(v);
+    //     p.setInitialValue(v);
 
-        /*
-         * if (v !== undefined)
-         * {
-         *     p.set(v);
-         *     p.defaultValue = v;
-         * }
-         */
-        return p;
-    }
+    //     /*
+    //      * if (v !== undefined)
+    //      * {
+    //      *     p.set(v);
+    //      *     p.defaultValue = v;
+    //      * }
+    //      */
+    //     return p;
+    // }
 
     /**
      * @param {string} name
@@ -1247,6 +1239,9 @@ export default class Op extends Events
         return p;
     }
 
+    /**
+     * @deprecated
+     */
     inDynamic(name, filter, options, v)
     {
         const p = new Port(this, name, Port.TYPE_DYNAMIC, options);
@@ -1449,22 +1444,22 @@ export default class Op extends Events
         }
     }
 
-    findParent(objName)
-    {
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-        {
-            if (this.portsIn[ipi].isLinked())
-            {
-                if (this.portsIn[ipi].links[0].portOut.parent.objName == objName)
-                    return this.portsIn[ipi].links[0].portOut.parent;
+    // findParent(objName)
+    // {
+    //     for (let ipi = 0; ipi < this.portsIn.length; ipi++)
+    //     {
+    //         if (this.portsIn[ipi].isLinked())
+    //         {
+    //             if (this.portsIn[ipi].links[0].portOut.parent.objName == objName)
+    //                 return this.portsIn[ipi].links[0].portOut.parent;
 
-                let found = null;
-                found = this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
-                if (found) return found;
-            }
-        }
-        return null;
-    }
+    //             let found = null;
+    //             found = this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
+    //             if (found) return found;
+    //         }
+    //     }
+    //     return null;
+    // }
 
     // todo: check instancing stuff?
     cleanUp()
@@ -1599,15 +1594,15 @@ export default class Op extends Events
         // this._instances=null;
     }
 
-    setValues(obj)
-    {
-        for (const i in obj)
-        {
-            const port = this.getPortByName(i);
-            if (port) port.set(obj[i]);
-            else this.#log.warn("op.setValues: port not found:", i);
-        }
-    }
+    // setValues(obj)
+    // {
+    //     for (const i in obj)
+    //     {
+    //         const port = this.getPortByName(i);
+    //         if (port) port.set(obj[i]);
+    //         else this.#log.warn("op.setValues: port not found:", i);
+    //     }
+    // }
 
     /**
      * return true if op has this error message id
@@ -1635,10 +1630,10 @@ export default class Op extends Events
     }
 
     // todo: remove
-    setError(id, txt)
-    {
-        this.#log.warn("old error message op.error() - use op.setUiError()");
-    }
+    // setError(id, txt)
+    // {
+    //     this.#log.warn("old error message op.error() - use op.setUiError()");
+    // }
 
     /**
      * enable/disable op

@@ -13,5 +13,5 @@ inval.onChange = function ()
 
 op.init = () =>
 {
-    if (inval.get() != "")next.trigger();
+    if (inval.isLinked())next.trigger();
 };

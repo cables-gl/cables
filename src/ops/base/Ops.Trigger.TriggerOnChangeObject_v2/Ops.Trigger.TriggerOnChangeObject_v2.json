@@ -1,0 +1,60 @@
+{
+    "id": "67969ea9-7d2b-48e5-8bb0-a2e4f6c4888d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557471901737
+        },
+        {
+            "message": "cloned op from Ops.Trigger.TriggerOnChangeArray",
+            "author": "pandur",
+            "date": 1611658197625
+        },
+        {
+            "message": "Ops.User.pandur.TriggerOnChangeObject renamed to Ops.Trigger.TriggerOnChangeObject",
+            "author": "pandur",
+            "date": 1611658315070
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1739808252186,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Changed"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "triggers when Object has changed",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Object",
+                "text": "Object in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - happens only when something in the Object has changed"
+            },
+            {
+                "name": "Result",
+                "text": "Object out"
+            }
+        ]
+    },
+    "license": "MIT"
+}
