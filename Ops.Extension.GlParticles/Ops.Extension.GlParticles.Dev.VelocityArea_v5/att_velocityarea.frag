@@ -1,12 +1,8 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D texPos;
-#ifdef METHOD_COLLISION
-    UNI sampler2D texAbsVel;
-#endif
-#ifdef METHOD_GRAVITY
-    UNI sampler2D texMass;
-#endif
+UNI sampler2D texAbsVel;
+
 UNI sampler2D texLifeProgress;
 UNI sampler2D texCollision;
 UNI sampler2D texCollided;

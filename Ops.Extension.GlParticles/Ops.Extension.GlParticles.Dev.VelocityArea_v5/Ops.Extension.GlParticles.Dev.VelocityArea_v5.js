@@ -223,7 +223,7 @@ render.onTriggered = function ()
     outTexCollision.setRef(velAreaSys.fb.getTextureColorNum(1));
     outTexCollided.setRef(velAreaSys.fb.getTextureColorNum(2));
 
-    uniReset.set(cgl.frameStore.particleSys.reset ? 1 : 0);
+    // uniReset.set(cgl.frameStore.particleSys.reset ? 1 : 0);
 
 
 
