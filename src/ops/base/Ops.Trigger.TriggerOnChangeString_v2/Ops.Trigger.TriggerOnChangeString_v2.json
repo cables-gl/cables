@@ -8,7 +8,7 @@
             "type": "new"
         },
         {
-            "message": "New version: will trigger on patch load, if the string is not empty",
+            "message": "New version: will trigger on patch load, if input port is linked",
             "type": "bugfix",
             "author": "pandur",
             "date": 1738162776711

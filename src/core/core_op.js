@@ -42,7 +42,7 @@ export default class Op extends Events
     data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
     storage = {}; // op-specific data to be included in export
 
-    /** @type {Array<CABLES.Port>} */
+    /** @type {Array<Port>} */
     portsIn = [];
     portsInData = []; // original loaded patch data
 
@@ -205,6 +205,9 @@ export default class Op extends Events
         if (title != this.getTitle()) this._setUiAttrib({ "title": title });
     }
 
+    /**
+     * @param {Object} newAttribs
+     */
     setStorage(newAttribs)
     {
         if (!newAttribs) return;
@@ -630,6 +633,8 @@ export default class Op extends Events
      * @memberof Op
      * @param {String} name
      * @param {String} v default value
+     * @param {String} syntax language
+     * @param {Boolean} hideFormatButton
      * @return {Port} created port
      */
     inStringEditor(name, v, syntax, hideFormatButton = true)

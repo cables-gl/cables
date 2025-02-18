@@ -1,5 +1,5 @@
 const
-    inTplStr = op.inStringEditor("Template", ""),
+    inTplStr = op.inStringEditor("Template", "", "html"),
     inData = op.inObject("Data"),
     outStr = op.outString("Result"),
     outErrors = op.outString("Errors");
