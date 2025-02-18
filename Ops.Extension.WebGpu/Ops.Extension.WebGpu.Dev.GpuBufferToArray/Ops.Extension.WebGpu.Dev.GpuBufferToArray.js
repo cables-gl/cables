@@ -10,7 +10,8 @@ let gpuReadBuffer = null;
 exec.onTriggered = () =>
 {
     let cgp = op.patch.cgp;
-    if (!cgp || !inPosBuff.get() || !inPosBuff.get()._buffCfg)
+    // console.log(inPosBuff.get())
+    if (!cgp || !inPosBuff.get() || !inPosBuff.get().buffCfg)
     {
         outArr.setRef([]);
         return;
@@ -20,7 +21,7 @@ exec.onTriggered = () =>
     {
         gpuReadBuffer = cgp.device.createBuffer({
             "label": "buffToArr",
-            "size": inPosBuff.get()._buffCfg.size,
+            "size": inPosBuff.get().buffCfg.size,
             "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ
         });
 
@@ -31,7 +32,7 @@ exec.onTriggered = () =>
             0 /* source offset */,
             gpuReadBuffer /* destination buffer */,
             0 /* destination offset */,
-            inPosBuff.get()._buffCfg.size /* size */
+            inPosBuff.get().buffCfg.size /* size */
         );
 
         const gpuCommands = commandEncoder.finish();

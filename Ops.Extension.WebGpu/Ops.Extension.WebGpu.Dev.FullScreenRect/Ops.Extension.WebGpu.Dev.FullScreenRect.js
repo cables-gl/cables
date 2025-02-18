@@ -90,11 +90,11 @@ function doRender()
 
         shader.aspectUni = new CGP.Uniform(shader, "f", "aspectTex", 1);
 
-        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag" });
+        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT });
         const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTexture);
         binTex.addUniform(uniTex);
 
-        const binSampler = new CGP.Binding(cgp, "sampler", { "stage": "frag", "shader": shader });
+        const binSampler = new CGP.Binding(cgp, "sampler", { "stage": GPUShaderStage.FRAGMENT, "shader": shader });
         binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTexture));
     }
 

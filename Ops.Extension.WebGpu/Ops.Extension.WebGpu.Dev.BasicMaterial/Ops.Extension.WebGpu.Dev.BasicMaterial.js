@@ -43,21 +43,21 @@ inTrigger.onTriggered = () =>
 
         shader.setModules(["MODULE_COLOR"]);
 
-        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": "frag", "define": "HAS_TEXTURE" });
+        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE" });
         const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTex);
         binTex.addUniform(uniTex);
 
-        const binSampler = new CGP.Binding(cgp, "sampler", { "stage": "frag", "shader": shader, "define": "HAS_TEXTURE" });
+        const binSampler = new CGP.Binding(cgp, "sampler", { "stage": GPUShaderStage.FRAGMENT, "shader": shader, "define": "HAS_TEXTURE" });
         binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTex));
 
         // todo remove and move into meshinstancer shader module!
-        const bindarr = new CGP.Binding(cgp, "arr", { "stage": "vert", "shader": shader, "bindingType": "read-only-storage" });
+        const bindarr = new CGP.Binding(cgp, "arr", { "stage": GPUShaderStage.VERTEX, "shader": shader, "bindingType": "read-only-storage" });
         bindarr.addUniform(new CGP.Uniform(shader, "f[]", "arr", [
-              0, 0.25, 0, 0,
+            0, 0.25, 0, 0,
             -0.5, 0, 0, 0,
-             0.5, 0, 0, 0,]));
+            0.5, 0, 0, 0,]));
 
-        const binTexMask = new CGP.Binding(cgp, "texMask", { "shader": shader, "stage": "frag", "define": "HAS_MASK_TEXTURE" });
+        const binTexMask = new CGP.Binding(cgp, "texMask", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_MASK_TEXTURE" });
         const uniTexMask = new CGP.Uniform(shader, "t", "ourTextureMask", inTexMask);
         binTexMask.addUniform(uniTexMask);
 
