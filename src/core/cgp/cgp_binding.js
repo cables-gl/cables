@@ -2,8 +2,15 @@ import { Logger } from "cables-shared-client";
 import GPUBuffer from "./cgp_gpubuffer.js";
 import { WebGpuContext } from "./cgp_state.js";
 import Uniform from "./cgp_uniform.js";
-import Shader from "./cgp_shader.js";
-import CgUniform from "../cg/cg_uniform.js";
+import CgpShader from "./cgp_shader.js";
+
+/**
+     * @typedef CgpBindingOptions
+     * @property {string} bindingType  "uniform", "storage", "read-only-storage","read-write-storage",
+     * @property {number} stage
+     * @property {number} index
+     * @property {CgpShader} shader
+     */
 
 export default class Binding
 {
@@ -19,11 +26,11 @@ export default class Binding
     /** @type {Array<GPUBuffer>} */
     cGpuBuffers = [];
 
-    /** @type {Shader} */
+    /** @type {CgpShader} */
     shader = null;
 
     bindingInstances = [];
-    stageStr = "";
+
     bindingType = "uniform";
     isValid = true;
     changed = 0;
@@ -35,7 +42,7 @@ export default class Binding
      * Description
      * @param {WebGpuContext} cgp
      * @param {String} name
-     * @param {Object} options={}
+     * @param {CgpBindingOptions} options={}
      */
     constructor(cgp, name, options = {})
     {
@@ -46,17 +53,16 @@ export default class Binding
         this.#cgp = cgp;
         this.#options = options;
         this.define = options.define || "";
-        this.stageStr = options.stage;
-        if (options.bindingType) this.bindingType = options.bindingType; // "uniform", "storage", "read-only-storage",
-        if (this.stageStr == "frag") this.stage = GPUShaderStage.FRAGMENT;
-        else this.stage = GPUShaderStage.VERTEX;
+        if (options.bindingType) this.bindingType = options.bindingType; //
+        this.stage = options.stage;
         if (options.hasOwnProperty("index")) this.#index = options.index;
         if (options.shader) this.shader = options.shader;
 
         if (this.shader)
         {
-            if (this.stageStr == "frag") this.shader.bindingsFrag.push(this);
-            if (this.stageStr == "vert") this.shader.bindingsVert.push(this);
+            if (this.stage == GPUShaderStage.FRAGMENT) this.shader.bindingsFrag.push(this);
+            if (this.stage == GPUShaderStage.VERTEX) this.shader.bindingsVert.push(this);
+            if (this.stage == GPUShaderStage.COMPUTE) this.shader.bindingsCompute.push(this);
             if (this.#index == -1) this.#index = this.shader.getNewBindingIndex();
         }
 
@@ -137,7 +143,7 @@ export default class Binding
             return str;
         }
 
-        if (this.uniforms.length === 0) return "// no uniforms in bindinggroup...?\n";
+        if (this.uniforms.length === 0) return "// no uniforms in bindinggroup " + this.#name + "...?\n";
 
         str += "// " + this.uniforms.length + " uniforms\n";
 
@@ -147,11 +153,9 @@ export default class Binding
             str += "{\n";
             for (let i = 0; i < this.uniforms.length; i++)
             {
-
                 str += "    " + this.uniforms[i].name + ": " + this.uniforms[i].getWgslTypeStr();
                 if (i != this.uniforms.length - 1)str += ",";
                 str += "\n";
-
             }
             str += "};\n";
         }
@@ -169,6 +173,8 @@ export default class Binding
             str += "var<" + this.bindingType + "> ";
         }
         else if (this.bindingType == "read-only-storage")str += "var<storage,read> ";
+        else if (this.bindingType == "read-write")str += "var<storage,read_write> ";
+
         else str += "var ";
 
         str += name + ": " + typeStr + ";\n";
@@ -178,6 +184,7 @@ export default class Binding
         return str;
     }
 
+    /** @returns {GPUBindGroupLayoutEntry} */
     getBindingGroupLayoutEntry()
     {
         if (!this.isActive) return null;
@@ -300,7 +307,9 @@ export default class Binding
             "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM,
         };
 
-        if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
+        if (this.bindingType == "read-write-storage") buffCfg.usage = GPUBufferUsage.MAP_WRITE | GPUBufferUsage.COPY_SRC;
+        else if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
+
         if (this.cGpuBuffers[inst]) this.cGpuBuffers[inst].dispose();
         this.cGpuBuffers[inst] = new GPUBuffer(this.#cgp, this.#name + " buff", null, { "buffCfg": buffCfg });
 
@@ -354,7 +363,7 @@ export default class Binding
         }
         else
         {
-            let info = ["stage " + this.stageStr + " / inst " + bindingIndex];
+            let info = ["stage " + CgpShader.getStageString(this.stage) + " / inst " + bindingIndex];
 
             // this._log.log("B",this.);
             // update uniform values to buffer
