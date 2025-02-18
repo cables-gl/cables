@@ -180,11 +180,6 @@
                 "type": 2,
                 "name": "Collision",
                 "objType": "texture"
-            },
-            {
-                "type": 2,
-                "name": "Colided",
-                "objType": "texture"
             }
         ]
     },

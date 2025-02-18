@@ -25,8 +25,8 @@ const
     inTexMultiply = op.inTexture("Multiply"),
     trigger = op.outTrigger("trigger"),
     outTexVel = op.outTexture("Velocity"),
-    outTexCollision = op.outTexture("Collision"),
-    outTexCollided = op.outTexture("Colided");
+    outTexCollision = op.outTexture("Collision");
+
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
@@ -47,7 +47,7 @@ let
     texposuni, texMuluni, texAbsVel, texLifeProgress, texTiming,
     uniformMorph, uniform2, uniReset,
     uniAreaPos, uniTimeDiff, uniScale, uniDir,
-    uniAgeMul, uniCollisionParams, uniformMul, texCollisionFeedback, texCollidedFeedback,
+    uniAgeMul, uniCollisionParams, uniformMul, texCollisionFeedback,
     tcCollision, tcCollided;
 
 let velAreaSys = null;
@@ -74,7 +74,7 @@ function createShader()
     texLifeProgress = new CGL.Uniform(velAreaSys.bgShader, "t", "texLifeProgress", 4),
     texTiming = new CGL.Uniform(velAreaSys.bgShader, "t", "texTiming", 5),
     texCollisionFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollision", 6),
-    texCollidedFeedback = new CGL.Uniform(velAreaSys.bgShader, "t", "texCollided", 7),
+
 
     uniTimeDiff = new CGL.Uniform(velAreaSys.bgShader, "f", "timeDiff", 0),
     new CGL.Uniform(velAreaSys.bgShader, "f", "collisionFade", inCollisionFade),
@@ -198,17 +198,11 @@ render.onTriggered = function ()
     }
     if (cgl.frameStore.particleSys.reset) outTexCollision.setRef(CGL.Texture.getEmptyTexture(cgl));
 
-    if (!tcCollided)
-    {
-        tcCollided = new CGL.CopyTexture(op.patch.cgl, "ps_collided", { "pixelFormat": cgl.frameStore.particleSys.pixelFormat, "filter": CGL.Texture.FILTER_NEAREST });
-        outTexCollided.setRef(CGL.Texture.getEmptyTexture(cgl));
-    }
-    if (cgl.frameStore.particleSys.reset) outTexCollided.setRef(CGL.Texture.getEmptyTexture(cgl));
 
     uniTimeDiff.set(cgl.frameStore.particleSys.timeDiff);
 
     velAreaSys.bgShader.pushTexture(texCollisionFeedback, tcCollision.copy(outTexCollision.get()));
-    velAreaSys.bgShader.pushTexture(texCollidedFeedback, tcCollision.copy(outTexCollided.get()));
+    // velAreaSys.bgShader.pushTexture(texCollidedFeedback, tcCollision.copy(outTexCollided.get()));
 
     velAreaSys.bgShader.pushTexture(textureUniform, cgl.currentTextureEffect.getCurrentSourceTexture());
     velAreaSys.bgShader.pushTexture(texposuni, cgl.frameStore.particleSys.texPos || CGL.Texture.getEmptyTexture(cgl));
@@ -221,7 +215,7 @@ render.onTriggered = function ()
 
     outTexVel.setRef(velAreaSys.fb.getTextureColorNum(0));
     outTexCollision.setRef(velAreaSys.fb.getTextureColorNum(1));
-    outTexCollided.setRef(velAreaSys.fb.getTextureColorNum(2));
+    // outTexCollided.setRef(velAreaSys.fb.getTextureColorNum(2));
 
     // uniReset.set(cgl.frameStore.particleSys.reset ? 1 : 0);
 
