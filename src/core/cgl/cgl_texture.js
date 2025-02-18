@@ -5,6 +5,8 @@ import { CGState } from "../cg/cg_state.js";
 
 const DEFAULT_TEXTURE_SIZE = 8;
 
+const log = new Logger("cgl_texture");
+
 /**
  * A Texture
  * @namespace external:CGL
@@ -28,7 +30,7 @@ class Texture extends CgTexture
     {
         super(options);
         if (!__cgl) throw new Error("no cgl");
-        this._log = new Logger("cgl_texture");
+
         this._cgl = __cgl;
         this.tex = this._cgl.gl.createTexture();
         this.loading = false;
@@ -364,7 +366,7 @@ class Texture extends CgTexture
 
     printInfo()
     {
-        console.log(this.getInfo());
+        log.log(this.getInfo());
     }
 
     getInfoReadable()
@@ -1012,7 +1014,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
     }
     else
     {
-        console.log("unknown pixelformat ", pixelFormatStr);
+        log.log("unknown pixelformat ", pixelFormatStr);
     }
 
     /// //////
@@ -1027,7 +1029,7 @@ Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
 
     o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
 
-    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) console.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
+    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) log.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
 
     return o;
 };

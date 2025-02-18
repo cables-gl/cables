@@ -50,6 +50,13 @@ export default class Port extends Events
 
     #oldAnimVal = -5711;
 
+    #uiActiveState = true;
+    #valueBeforeLink = null;
+    // #lastAnimFrame = -1;
+    #animated = false;
+    // #tempLastUiValue = null;
+    #useVariableName = null;
+
     /**
      * @param {Op} ___op
      * @param {string} name
@@ -92,28 +99,19 @@ export default class Port extends Events
 
         this.defaultValue = null;
 
-        this._uiActiveState = true;
         this.ignoreValueSerialize = false;
         this.onLinkChanged = null;
         this.crashed = false;
 
-        this._valueBeforeLink = null;
-        this._lastAnimFrame = -1;
-        this._animated = false;
-
         this.onValueChanged = null;
         this.onTriggered = null;
-        this.onUiActiveStateChange = null;
         this.changeAlways = false;
         this.forceRefChange = false;
-
-        this._useVariableName = null;
 
         this.activityCounter = 0;
         this.apf = 0;
         this.activityCounterStartFrame = 0;
 
-        this._tempLastUiValue = null;
         this.canLink = null; // function fan be overwritten
         this.checkLinkTimeWarnings = null; // function fan be overwritten
     }
@@ -308,9 +306,9 @@ export default class Port extends Events
      */
     get()
     {
-        if (this._animated && this._lastAnimFrame != this._op.patch.getFrameNum())
+        if (this.#animated && this.lastAnimFrame != this._op.patch.getFrameNum())
         {
-            this._lastAnimFrame = this._op.patch.getFrameNum();
+            this.lastAnimFrame = this._op.patch.getFrameNum();
 
             let animval = this.anim.getValue(this._op.patch.timer.getTime());
 
@@ -354,7 +352,7 @@ export default class Port extends Events
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
-                if (this._animated)
+                if (this.#animated)
                 {
                     this.anim.setValue(this._op.patch.timer.getTime(), v);
                 }
@@ -388,7 +386,7 @@ export default class Port extends Events
 
     updateAnim()
     {
-        if (this._animated)
+        if (this.#animated)
         {
             this.value = this.get();
 
@@ -500,8 +498,8 @@ export default class Port extends Events
             if (this.type == Port.TYPE_OBJECT && this.value && this.value.tex) {}
             else obj.value = this.value;
         }
-        if (this._useVariableName) obj.useVariable = this._useVariableName;
-        if (this._animated) obj.animated = true;
+        if (this.#useVariableName) obj.useVariable = this.#useVariableName;
+        if (this.#animated) obj.animated = true;
         if (this.anim) obj.anim = this.anim.getSerialized();
         if (this.uiAttribs.multiPortNum) obj.multiPortNum = this.uiAttribs.multiPortNum;
         if (this.uiAttribs.multiPortManual) obj.multiPortManual = this.uiAttribs.multiPortManual;
@@ -594,8 +592,8 @@ export default class Port extends Events
 
         if (this.direction == Port.DIR_IN)
         {
-            if (this.type == Port.TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
-            else this.setValue(this._valueBeforeLink || null);
+            if (this.type == Port.TYPE_VALUE) this.setValue(this.#valueBeforeLink || 0);
+            else this.setValue(this.#valueBeforeLink || null);
         }
 
         if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
@@ -638,7 +636,7 @@ export default class Port extends Events
 
     addLink(l)
     {
-        this._valueBeforeLink = this.value;
+        this.#valueBeforeLink = this.value;
         this.links.push(l);
         if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
 
@@ -766,18 +764,18 @@ export default class Port extends Events
 
     setVariableName(n)
     {
-        this._useVariableName = n;
+        this.#useVariableName = n;
 
         this._op.patch.on("variableRename", (oldname, newname) =>
         {
-            if (oldname != this._useVariableName) return;
-            this._useVariableName = newname;
+            if (oldname != this.#useVariableName) return;
+            this.#useVariableName = newname;
         });
     }
 
     getVariableName()
     {
-        return this._useVariableName;
+        return this.#useVariableName;
     }
 
     setVariable(v)
@@ -811,13 +809,13 @@ export default class Port extends Events
                 }
                 this.set(this._variableIn.getValue());
             }
-            this._useVariableName = v;
+            this.#useVariableName = v;
             attr.useVariable = true;
-            attr.variableName = this._useVariableName;
+            attr.variableName = this.#useVariableName;
         }
         else
         {
-            attr.variableName = this._useVariableName = null;
+            attr.variableName = this.#useVariableName = null;
             attr.useVariable = false;
         }
 
@@ -852,12 +850,12 @@ export default class Port extends Events
      */
     setAnimated(a)
     {
-        if (this._animated != a)
+        if (this.#animated != a)
         {
-            this._animated = a;
+            this.#animated = a;
             this._op.hasAnimPort = true;
 
-            if (this._animated && !this.anim)
+            if (this.#animated && !this.anim)
             {
                 this.anim = new Anim({ "name": "port " + this.name });
                 this.anim.on("onChange", () =>
@@ -876,13 +874,13 @@ export default class Port extends Events
 
         this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
 
-        this.setUiAttribs({ "isAnimated": this._animated });
+        this.setUiAttribs({ "isAnimated": this.#animated });
     }
 
     toggleAnim()
     {
-        this._animated = !this._animated;
-        if (this._animated && !this.anim)
+        this.#animated = !this.#animated;
+        if (this.#animated && !this.anim)
         {
             this.anim = new Anim({ "name": "port " + this.name });
             this.anim.on("onChange", () =>
@@ -890,9 +888,9 @@ export default class Port extends Events
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });
         }
-        this.setAnimated(this._animated);
+        this.setAnimated(this.#animated);
         this._onAnimToggle();
-        this.setUiAttribs({ "isAnimated": this._animated });
+        this.setUiAttribs({ "isAnimated": this.#animated });
         this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
     }
 
@@ -924,12 +922,12 @@ export default class Port extends Events
      */
     isLinked()
     {
-        return this.links.length > 0 || this._animated || this._useVariableName != null;
+        return this.links.length > 0 || this.#animated || this.#useVariableName != null;
     }
 
     isBoundToVar()
     {
-        const b = this._useVariableName != null;
+        const b = this.#useVariableName != null;
         this.uiAttribs.boundToVar = b;
         return b;
     }
@@ -939,7 +937,7 @@ export default class Port extends Events
      */
     isAnimated()
     {
-        return this._animated;
+        return this.#animated;
     }
 
     /**
@@ -969,33 +967,33 @@ export default class Port extends Events
         if (this._op.enabled) this.emitEvent("trigger");
     }
 
-    _onSetProfiling(v)
-    {
-        this._op.patch.profiler.add("port", this);
-        this.setValue(v);
-        this._op.patch.profiler.add("port", null);
-    }
+    // _onSetProfiling(v)
+    // {
+    //     this._op.patch.profiler.add("port", this);
+    //     this.setValue(v);
+    //     this._op.patch.profiler.add("port", null);
+    // }
 
-    _onTriggeredProfiling()
-    {
-        if (this._op.enabled && this.onTriggered)
-        {
-            this._op.patch.profiler.add("port", this);
-            this.onTriggered();
-            this._op.patch.profiler.add("port", null);
-        }
-    }
+    // _onTriggeredProfiling()
+    // {
+    //     if (this._op.enabled && this.onTriggered)
+    //     {
+    //         this._op.patch.profiler.add("port", this);
+    //         this.onTriggered();
+    //         this._op.patch.profiler.add("port", null);
+    //     }
+    // }
 
-    getUiActiveState()
-    {
-        return this._uiActiveState;
-    }
+    // getUiActiveState()
+    // {
+    //     return this.#uiActiveState;
+    // }
 
-    setUiActiveState(onoff)
-    {
-        this._uiActiveState = onoff;
-        if (this.onUiActiveStateChange) this.onUiActiveStateChange();
-    }
+    // setUiActiveState(onoff)
+    // {
+    //     this._uiActiveState = onoff;
+    //     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
+    // }
 
     /**
      * @deprecated

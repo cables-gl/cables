@@ -8,3 +8,8 @@ inval.onChange = function ()
     outArr.set(inval.get());
     next.trigger();
 };
+
+op.init = () =>
+{
+    if (inval.get())next.trigger();
+};

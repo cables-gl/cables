@@ -164,8 +164,7 @@ class Mesh extends CgMesh
 
         if (end > array.length)
         {
-            if (CABLES.platform.isDevEnv())
-                this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+            this._log.warn(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
             return;
         }
 

@@ -13,7 +13,7 @@ export default class Link extends Events
 {
 
     /**
-     * @param {{Patch}} p
+     * @param {Patch} p
      */
     constructor(p)
     {
