@@ -6,14 +6,14 @@ export class WebGpuCanvasAttachment
     /** @type {canvas} */
     #canvas = null;
 
-    /** @type {WebGpuContext} */
+    /** @type {CgpContext} */
     #cgp = null;
 
     /** @type {CanvasContext} */
     #ctx = null;
 
     /**
-     * @param {WebGpuContext} cgp
+     * @param {CgpContext} cgp
      */
     constructor(cgp)
     {

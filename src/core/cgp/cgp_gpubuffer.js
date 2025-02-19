@@ -25,7 +25,7 @@ export class CgpGguBuffer extends Events
 
     /**
      * Description
-     * @param {WebGpuContext} cgp
+     * @param {CgpContext} cgp
      * @param {String} name
      * @param {Array} data=null
      * @param {GPUBufferOptions} options={}
@@ -70,7 +70,7 @@ export class CgpGguBuffer extends Events
         }
     }
 
-    /** @param {WebGpuContext} cgp */
+    /** @param {CgpContext} cgp */
     updateGpuBuffer(cgp = null)
     {
         if (cgp) this._cgp = cgp;

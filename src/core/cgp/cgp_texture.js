@@ -16,7 +16,7 @@ export class Texture extends CgTexture
     samplerDesc = {};
 
     /**
-    * @param {WebGpuContext} _cgp
+    * @param {CgpContext} _cgp
     * @param {Object} options={}
     */
     constructor(_cgp, options = {})

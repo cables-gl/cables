@@ -11,7 +11,7 @@ import { Patch } from "./core_patch.js";
  * configuration object for loading a patch
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
- * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
  * @property {boolean} [bookmarked] internal - do not use manualy

@@ -183,9 +183,12 @@ export class CgpShader extends CgShader
         {
             let bindingsHeadCompute = "";
             for (let i = 0; i < this.bindingsCompute.length; i++)
+            {
+                bindingsHeadCompute += "// bindingsCompute " + i + "\n";
                 bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode();
+            }
 
-            src = bindingsHeadCompute + "\n\n////////////////\n\n" + src;
+            src = bindingsHeadCompute + "\n\n//////////////// \n\n" + src;
         }
         else
         {
@@ -218,10 +221,11 @@ export class CgpShader extends CgShader
 
     compile()
     {
-        console.log("compile", this._compileReason);
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
-        // console.log(this.getProcessedSource());
+
+        console.log("compile", this._compileReason);
+
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
         this._needsRecompile = false;

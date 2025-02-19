@@ -346,7 +346,7 @@ export class Port extends Events
 
         if (CABLES.UI && CABLES.UI.showDevInfos)
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
-                this._log.warn("object port uses .set", this.name, this.op.objName);
+                this._log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
         if (this._op.enabled && !this.crashed)
         {

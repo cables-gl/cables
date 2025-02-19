@@ -38,7 +38,7 @@ export class CgpContext extends CgContext
         this._shaderStack = [];
         this._simpleShader = null;
         this.frame = 0;
-        this.catchErrors = false;
+        this.catchErrors = true;
 
         this._stackCullFaceFacing = [];
         this._stackDepthTest = [];
@@ -109,8 +109,8 @@ export class CgpContext extends CgContext
     {
 
         this.frame++;
-        this.pushErrorScope("cgpstate internal", "internal");
-        this.pushErrorScope("cgpstate out-of-memory", "out-of-memory");
+        this.pushErrorScope("cgpstate internal", { "scope": "internal" });
+        this.pushErrorScope("cgpstate out-of-memory", { "scope": "out-of-memory" });
 
         if (!this._simpleShader)
         {
@@ -264,7 +264,15 @@ export class CgpContext extends CgContext
         this.emitEvent("deviceChange");
     }
 
-    pushErrorScope(name, options = {})
+    /** @typedef ErrorScoprOptions
+     * @property {string} scope
+     */
+
+    /**
+     * @param {String} name
+     * @param {ErrorScoprOptions} options
+     */
+    pushErrorScope(name, options = { "scope": "validation" })
     {
         if (this.catchErrors)
         {
@@ -274,6 +282,9 @@ export class CgpContext extends CgContext
         }
     }
 
+    /**
+     * @param {Function} [cb]
+     */
     popErrorScope(cb)
     {
         if (this.catchErrors)
@@ -290,7 +301,7 @@ export class CgpContext extends CgContext
                     }
                     else
                     {
-                        (logger || this._log).error(error.constructor.name, "in", name);
+                        (logger || this._log).error(error.constructor.name, "in ERROR SCOPE:", name);
                         (logger || this._log).error(error.message);
                     }
                     this.lastErrorMsg = error.message;

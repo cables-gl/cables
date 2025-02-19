@@ -1,11 +1,11 @@
 import { Events, Logger } from "cables-shared-client";
-import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
+import { ajax, ajaxSync, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Timer } from "./timer.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
 import { PatchVariable } from "./core_variable.js";
-import { Op, OpUiAttribs } from "./core_op.js";
+import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { CglContext } from "./cgl/cgl_state.js";
 
@@ -1231,6 +1231,7 @@ export class Patch extends Events
      */
     getVar(name)
     {
+
         if (this._variables.hasOwnProperty(name)) return this._variables[name];
     }
 
