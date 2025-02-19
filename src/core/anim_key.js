@@ -1,6 +1,6 @@
-import Anim from "./anim.js";
+import { Anim } from "./anim.js";
 
-export default class AnimKey
+export class AnimKey
 {
     constructor(obj, an)
     {

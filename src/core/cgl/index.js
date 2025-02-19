@@ -1,4 +1,4 @@
-import Framebuffer2 from "./cgl_framebuffer2.js";
+import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
 import { Uniform } from "./cgl_shader_uniform.js";
@@ -10,17 +10,14 @@ import { MESHES } from "./cgl_simplerect.js";
 import {
     isWindows, getWheelSpeed, getWheelDelta, onLoadingAssetsFinished,
 } from "./cgl_utils.js";
-import {
-    Texture,
-} from "./cgl_texture.js";
-
+import { Texture } from "./cgl_texture.js";
 import { TextureEffect } from "./cgl_textureeffect.js";
 import { CONSTANTS } from "./constants.js";
 import { ProfileData } from "./cgl_profiledata.js";
 import { MatrixStack } from "../cg/cg_matrixstack.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { BoundingBox } from "../cg/cg_boundingbox.js";
-import CglContext from "./cgl_state.js";
+import { CglContext } from "./cgl_state.js";
 
 const CGL = {
     "Framebuffer2": Framebuffer2,

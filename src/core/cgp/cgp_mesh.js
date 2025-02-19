@@ -1,9 +1,9 @@
 import { Logger } from "cables-shared-client";
-import Pipeline from "./cgp_pipeline.js";
-import CgMesh from "../cg/cg_mesh.js";
+import { Pipeline } from "./cgp_pipeline.js";
+import { CgMesh } from "../cg/cg_mesh.js";
 import { Geometry } from "../cg/cg_geom.js";
 
-export default class CgpMesh extends CgMesh
+export class CgpMesh extends CgMesh
 {
     #log = new Logger("cgl_mesh");
     needsPipelineUpdate = false;
@@ -46,9 +46,8 @@ export default class CgpMesh extends CgMesh
      * @instance
      * @description set geometry for mesh
      * @param {Geometry} geom geometry
-     * @param {boolean} removeRef
      */
-    setGeom(geom, removeRef)
+    setGeom(geom)
     {
         this.needsPipelineUpdate = true;
         this._geom = geom;

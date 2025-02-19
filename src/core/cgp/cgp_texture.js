@@ -1,8 +1,8 @@
 import { Logger } from "cables-shared-client";
-import CgTexture from "../cg/cg_texture.js";
+import { CgTexture } from "../cg/cg_texture.js";
 import { WebGpuContext } from "./cgp_state.js";
 
-export default class Texture extends CgTexture
+export class Texture extends CgTexture
 {
     #log = new Logger("cgp_texture");
     #cgp = null;

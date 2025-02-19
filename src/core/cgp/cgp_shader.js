@@ -1,22 +1,22 @@
 import { Logger } from "cables-shared-client";
-import Uniform from "./cgp_uniform.js";
+import { CgpUniform } from "./cgp_uniform.js";
 import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
-import Binding from "./cgp_binding.js";
-import { WebGpuContext } from "./cgp_state.js";
+import { Binding } from "./cgp_binding.js";
+import { CgpContext } from "./cgp_state.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
  * @property {String} [entryPoint]
  */
 
-export default class CgpShader extends CgShader
+export class CgpShader extends CgShader
 {
 
     #computePipeline;
 
     /**
-     * @param {WebGpuContext} _cgp
+     * @param {CgpContext} _cgp
      * @param {String} _name
      * @param {CgpShaderOptions} options={}
      */
@@ -283,11 +283,11 @@ export default class CgpShader extends CgShader
      * @memberof Shader
      * @instance
      * @function addUniformFrag
-     * @returns {Uniform}
+     * @returns {CgpUniform}
      */
     addUniformFrag(type, name, valueOrPort, p2, p3, p4)
     {
-        const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
+        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "frag";
 
         this.defaultBindingFrag.addUniform(uni);
@@ -307,11 +307,11 @@ export default class CgpShader extends CgShader
      * @memberof Shader
      * @instance
      * @function addUniformVert
-     * @returns {Uniform}
+     * @returns {CgpUniform}
      */
     addUniformVert(type, name, valueOrPort, p2, p3, p4)
     {
-        const uni = new Uniform(this, type, name, valueOrPort, p2, p3, p4);
+        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
         uni.shaderType = "vert";
 
         this.defaultBindingVert.addUniform(uni);
@@ -336,7 +336,7 @@ export default class CgpShader extends CgShader
         if (!o.type) this._log.warn("no uni type: ", o.type);
         if (!o.name) this._log.warn("no uni name: ", o.name);
 
-        const uni = new Uniform(this, o.type, o.name, o.values[0]);
+        const uni = new CgpUniform(this, o.type, o.name, o.values[0]);
 
         if (o.shaderType == GPUShaderStage.COMPUTE)
         {

@@ -234,7 +234,7 @@ export class TextureEffect
 
     createMesh()
     {
-        this._cgl.TextureEffectMesh = MESHES.getSimpleRect(this._cgl, "texEffectRect");
+        this._cgl.TextureEffectMesh = CABLES.CGL.MESHES.getSimpleRect(this._cgl, "texEffectRect");
     }
 
     // ---------------------------------------------------------------------------------

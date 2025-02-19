@@ -1,9 +1,8 @@
 import { Uniform } from "./cgl_shader_uniform.js";
-import { Texture } from "./cgl_texture.js";
 import { TextureEffect } from "./cgl_textureeffect.js";
 
 /** @type {Object} */
-const ShaderLibMods = {
+export const ShaderLibMods = {
     "CGL.BLENDMODES": function ()
     {
         this.name = "blendmodes";
@@ -84,5 +83,3 @@ const ShaderLibMods = {
     }
 
 };
-
-export { ShaderLibMods };

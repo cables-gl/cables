@@ -1,6 +1,6 @@
 import { Events, Logger } from "cables-shared-client";
 import { generateUUID } from "./utils.js";
-import Patch from "./core_patch.js";
+import { Patch } from "./core_patch.js";
 
 /**
  * LoadingStatus class, manages asynchronous loading jobs
@@ -11,7 +11,7 @@ import Patch from "./core_patch.js";
  * @param patch
  */
 
-export default class LoadingStatus extends Events
+export class LoadingStatus extends Events
 {
 
     /**

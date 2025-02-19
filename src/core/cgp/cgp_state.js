@@ -1,11 +1,13 @@
 import { Logger } from "cables-shared-client";
-import { CG } from "../cg/cg_constants.js";
-import { CGState } from "../cg/cg_state.js";
-import Shader from "./cgp_shader.js";
-import defaultShaderSrcVert from "./cgl_shader_default.wgsl";
-import Texture from "./cgp_texture.js";
-import CgTexture from "../cg/cg_texture.js";
-import Patch from "../core_patch.js";
+import { Geometry } from "../cg/cg_geom.js";
+import defaultShaderSrcVert from "./cgp_shader_default.wgsl";
+
+import { CgContext } from "../cg/cg_state.js";
+import { CgpShader } from "./cgp_shader.js";
+import { Texture } from "./cgp_texture.js";
+import { CgTexture } from "../cg/cg_texture.js";
+import { Patch } from "../core_patch.js";
+import { CgpMesh } from "./cgp_mesh.js";
 
 // https://github.com/greggman/webgpu-utils
 // https://developer.chrome.com/blog/from-webgl-to-webgpu/
@@ -17,7 +19,7 @@ import Patch from "../core_patch.js";
  * @namespace external:CGP
  * @hideconstructor
  */
-class WebGpuContext extends CGState
+export class CgpContext extends CgContext
 {
 
     /**
@@ -31,7 +33,7 @@ class WebGpuContext extends CGState
         this.lastErrorMsg = "";
 
         this._log = new Logger("WebGpuContext");
-        this.gApi = CGState.API_WEBGPU;
+        this.gApi = CgContext.API_WEBGPU;
         this._viewport = [0, 0, 256, 256];
         this._shaderStack = [];
         this._simpleShader = null;
@@ -49,6 +51,12 @@ class WebGpuContext extends CGState
 
         this.currentPipeDebug = null;
         this.canvasAttachments = [];
+
+        /** @type {GPUDevice} */
+        this.device = null;
+
+        /** @type {GPURenderPassEncoder} */
+        this.passEncoder = null;
 
         this._defaultBlend = {
             "color": {
@@ -106,8 +114,9 @@ class WebGpuContext extends CGState
 
         if (!this._simpleShader)
         {
-            this._simpleShader = new Shader(this, "simple default shader");
+            this._simpleShader = new CgpShader(this, "simple default shader");
             this._simpleShader.setSource(defaultShaderSrcVert);
+
             this._simpleShader.addUniformFrag("4f", "color", [1, 1, 0, 1]);
         }
 
@@ -163,9 +172,14 @@ class WebGpuContext extends CGState
         return this._viewPort;
     }
 
+    /**
+     * @param {Geometry} geom
+     * @param {any} glPrimitive
+     * @returns {CgpMesh}
+     */
     createMesh(geom, glPrimitive)
     {
-        return new CGP.Mesh(this, geom, glPrimitive);
+        return new CgpMesh(this, geom);
     }
 
     /**
@@ -237,7 +251,7 @@ class WebGpuContext extends CGState
     }
 
     /**
-     * @param {WebGpuDevice} device
+     * @param {GPUDevice} device
      */
     setDevice(device)
     {
@@ -536,4 +550,3 @@ class WebGpuContext extends CGState
     }
 
 }
-export { WebGpuContext };

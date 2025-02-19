@@ -1,15 +1,13 @@
-import { Texture } from "../../../core/cgl/cgl_texture.js";
-
 const DEFAULT_TEXTURE_SIZE = 8;
 
-class CubemapTexture
+export class CubemapTexture
 {
     constructor(cgl, options)
     {
         this.id = CABLES.uuid();
         this.name = options.name || "unknown cubemap texture";
         this._cgl = cgl;
-        this.textureType = Texture.TYPE_DEFAULT;
+        this.textureType = CGL.Texture.TYPE_DEFAULT;
         this._options = options;
 
         if (!this._cgl.gl) return;
@@ -38,8 +36,8 @@ class CubemapTexture
 
         if (!options.hasOwnProperty("pixelFormat") || !options.pixelFormat)
         {
-            if (options.isFloatingPointTexture) options.pixelFormat = Texture.PFORMATSTR_RGBA32F;
-            else options.pixelFormat = Texture.PFORMATSTR_RGBA8UB;
+            if (options.isFloatingPointTexture) options.pixelFormat = CGL.Texture.PFORMATSTR_RGBA32F;
+            else options.pixelFormat = CGL.Texture.PFORMATSTR_RGBA8UB;
         }
 
         this.pixelFormat = options.pixelFormat;
@@ -82,7 +80,7 @@ class CubemapTexture
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
         this._cgl.profileData.profileTextureResize++;
 
-        const info = Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
+        const info = CGL.Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
         this.pixelFormat = info.pixelFormat;
 
         if (CGL.Texture.isPixelFormatHalfFloat(info.pixelFormat))
@@ -91,7 +89,7 @@ class CubemapTexture
 
             if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
-                this.filter = Texture.FILTER_NEAREST;
+                this.filter = CGL.Texture.FILTER_NEAREST;
             }
         }
         else if (CGL.Texture.isPixelFormatFloat(info.pixelFormat))
@@ -99,7 +97,7 @@ class CubemapTexture
             if (!this._cgl.enableExtension("OES_texture_float_linear"))
             {
                 console.log("no linear pixelformat,using nearest");
-                this.filter = Texture.FILTER_NEAREST;
+                this.filter = CGL.Texture.FILTER_NEAREST;
             }
         }
         // console.log("cubemaptex setfilter...");
@@ -169,7 +167,7 @@ class CubemapTexture
             this.filter = CGL.Texture.FILTER_LINEAR;
         }
 
-        if (this._cgl.glVersion == 1 && !Texture.isPowerOfTwo())
+        if (this._cgl.glVersion == 1 && !CGL.Texture.isPowerOfTwo())
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
@@ -241,5 +239,3 @@ class CubemapTexture
         this._cgl.gl.deleteTexture(this.tex);
     }
 }
-
-export { CubemapTexture };

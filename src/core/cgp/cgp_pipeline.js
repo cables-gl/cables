@@ -1,10 +1,10 @@
 /// <reference types="@webgpu/types" />
 import { Logger } from "cables-shared-client";
 import { WebGpuContext } from "./cgp_state.js";
-import CgpShader from "./cgp_shader.js";
-import CgpMesh from "./cgp_mesh.js";
+import { CgpShader } from "./cgp_shader.js";
+import { CgpMesh } from "./cgp_mesh.js";
 
-export default class Pipeline
+export class Pipeline
 {
     static DEPTH_COMPARE_FUNCS_STRINGS = ["never", "less", "equal", "lessequal", "greater", "notequal", "greaterequal", "always"];
 
@@ -13,6 +13,8 @@ export default class Pipeline
 
     #log = new Logger("pipeline");
     #name = "";
+
+    /** @type {WebGpuContext} */
     #cgp = null;
     #isValid = true;
 
@@ -25,10 +27,10 @@ export default class Pipeline
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
-    /** @type {Array<GPUBindGroupEntry>} */
+    /** @type {Array<GPUBindGroup>} */
     #bindGroups = [];
 
-    /** @type {Array<GPURenderPassEncoder|GPUComputePassEncoder>} */
+    /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
     #passEncoder;
 
     #shaderListeners = [];
@@ -157,6 +159,7 @@ export default class Pipeline
         {
             if (this.#type == Pipeline.TYPE_RENDER)
             {
+                this.#pipeCfg =/** @type {GPURenderPipelineDescriptor} */ (this.#pipeCfg || {});
                 if (this.#pipeCfg.depthStencil.depthWriteEnabled != this.#cgp.stateDepthWrite())
                 {
                     needsRebuildReason = "depth changed";
@@ -191,6 +194,7 @@ export default class Pipeline
                 }
 
             }
+
         }
 
         this.#cgp.currentPipeDebug =
@@ -240,9 +244,10 @@ export default class Pipeline
         {
             this.#cgp.pushErrorScope("setpipeline", { "logger": this.#log });
 
-            if (this.#type == Pipeline.TYPE_RENDER) this.#passEncoder = this.#cgp.passEncoder;
-
-            this.#passEncoder.setPipeline(this.#renderPipeline);
+            if (this.#type == Pipeline.TYPE_RENDER)
+                this.#cgp.passEncoder.setPipeline(this.#renderPipeline);
+            else
+                this.#passEncoder.setPipeline(this.#renderPipeline);
 
             if (this.#cgp.frameStore.branchProfiler) this.#cgp.frameStore.branchStack.push("updateUniforms");
 
@@ -285,6 +290,7 @@ export default class Pipeline
                         else this.#log.log("shader defaultBindingCompute size 0");
                     }
 
+                /** @type {GPUBindGroupDescriptor} */
                 const bg = {
                     "label": this.#name,
                     "layout": this.bindGroupLayout,
@@ -303,7 +309,6 @@ export default class Pipeline
 
                     console.log(bg);
                     console.error(e);
-                    // console.log(shader);
                     console.log("error mesh:", this.#name);
 
                 }
@@ -325,7 +330,7 @@ export default class Pipeline
 
     /**
      * @param {CgpShader} shader
-     * @returns {GPUPipelineDescriptorBase}
+     * @returns {GPUPipelineDescriptorBase|GPURenderPipelineDescriptor|GPUComputePipelineDescriptor}
      */
     getPipelineObject(shader)
     {
@@ -362,7 +367,7 @@ export default class Pipeline
 
         this.bindGroupLayout = this.#cgp.device.createBindGroupLayout(
             {
-                "label": "bg layout " + this.#name,
+                "label": "bindgrouplayout " + this.#name,
                 "entries": this.bindingGroupLayoutEntries,
             });
 
@@ -497,8 +502,6 @@ export default class Pipeline
         /** @type {GPUCommandEncoder} */
         const commandEncoder = this.#cgp.device.createCommandEncoder();
 
-        console.log(this.bindGroupLayout);
-
         this.#passEncoder = commandEncoder.beginComputePass();
 
         if (!this.#renderPipeline) this.setPipeline(shader);
@@ -520,6 +523,7 @@ export default class Pipeline
         const gpuCommands = commandEncoder.finish();
         this.#cgp.device.queue.submit([gpuCommands]);
 
+        // const entry = shader.bindingsVert[i].getBindingGroupEntry(shader.bindingCounter);
         // this._passEncoder = commandEncoder.beginComputePass();
         // this._passEncoder.setPipeline(computePipeline);
         // this._passEncoder.setBindGroup(0, bindGroup);
@@ -528,4 +532,5 @@ export default class Pipeline
         this.#passEncoder.end();
 
     }
+
 }

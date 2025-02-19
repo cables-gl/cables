@@ -1,4 +1,4 @@
-export default class WebGpuOp
+export class WebGpuOp
 {
     constructor(op)
     {

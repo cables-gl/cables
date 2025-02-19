@@ -1,8 +1,8 @@
 import { Logger } from "cables-shared-client";
-import Port from "../core_port.js";
+import { Port } from "../core_port.js";
 import { CgShader } from "./cg_shader.js";
 
-class CgUniform
+export class CgUniform
 {
 
     /**
@@ -268,5 +268,3 @@ class CgUniform
         this.setValue(this._port.get());
     }
 }
-
-export default CgUniform;

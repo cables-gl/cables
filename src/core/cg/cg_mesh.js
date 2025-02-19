@@ -1,4 +1,4 @@
-export default class CgMesh
+export class CgMesh
 {
     _name = "unknown";
 

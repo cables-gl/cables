@@ -1,11 +1,10 @@
-import CgTexture from "../cg/cg_texture.js";
-import CgUniform from "../cg/cg_uniform.js";
+import { CgUniform } from "../cg/cg_uniform.js";
 
-export default class Uniform extends CgUniform
+export class CgpUniform extends CgUniform
 {
-    constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
+    constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
     {
-        super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
+        super(__shader, __type, __name, _value, _port2, _port3, _port4);
         this._cgp = __shader._cgp;
 
         if (!_value || (_value.get && !_value.get()))
@@ -116,6 +115,17 @@ export default class Uniform extends CgUniform
             buff[pos + 1] = this._value[1];
             buff[pos + 2] = this._value[2];
             buff[pos + 3] = this._value[3];
+        }
+        else if (this._type == "2f")
+        {
+            buff[pos] = this._value[0];
+            buff[pos + 1] = this._value[1];
+        }
+        else if (this._type == "3f")
+        {
+            buff[pos] = this._value[0];
+            buff[pos + 1] = this._value[1];
+            buff[pos + 2] = this._value[2];
         }
         else if (this._type == "f[]")
         {

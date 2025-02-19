@@ -1,8 +1,8 @@
 import { Logger } from "cables-shared-client";
-import GPUBuffer from "./cgp_gpubuffer.js";
+import { CgpGguBuffer } from "./cgp_gpubuffer.js";
 import { WebGpuContext } from "./cgp_state.js";
-import Uniform from "./cgp_uniform.js";
-import CgpShader from "./cgp_shader.js";
+import { CgpUniform } from "./cgp_uniform.js";
+import { CgpShader } from "./cgp_shader.js";
 
 /**
      * @typedef CgpBindingOptions
@@ -12,7 +12,7 @@ import CgpShader from "./cgp_shader.js";
      * @property {CgpShader} shader
      */
 
-export default class Binding
+export class Binding
 {
     #name = "";
     #options = {};
@@ -23,7 +23,7 @@ export default class Binding
     /** @type {Array<Uniform>} */
     uniforms = [];
 
-    /** @type {Array<GPUBuffer>} */
+    /** @type {Array<CgpGguBuffer>} */
     cGpuBuffers = [];
 
     /** @type {CgpShader} */
@@ -88,7 +88,7 @@ export default class Binding
     }
 
     /**
-     * @param {Shader} newShader
+     * @param {CgpShader} newShader
      * @returns {Binding}
      */
     copy(newShader)
@@ -225,18 +225,20 @@ export default class Binding
     }
 
     /**
-     * @param {number} inst
+     * @param {Number} inst
+     * @returns {GPUBindGroupEntry}
      */
     getBindingGroupEntry(inst)
     {
         if (!this.isActive) return null;
         this.isValid = false;
 
+        /** @type {GPUBindGroupEntry} */
         const o = {
             "label": this.#name + " binding",
             "binding": this.#index,
             "size": this.getSizeBytes(),
-            "visibility": this.stage,
+            "visibility": this.stage
         };
 
         if (this.uniforms.length == 0)
@@ -248,8 +250,7 @@ export default class Binding
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
             if (this.uniforms[0].getValue() && this.uniforms[0].getValue().gpuTexture) o.resource = this.uniforms[0].getValue().gpuTexture.createView();
-            else o.resource = this.#cgp.getEmptyTexture().createView();// CABLES.emptyCglTexture.createView();
-
+            else o.resource = this.#cgp.getEmptyTexture().createView();
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
@@ -272,15 +273,15 @@ export default class Binding
                     smplDesc = this.uniforms[0].getValue().getSampler();
                     const sampler = this.uniforms[0]._cgp.device.createSampler(smplDesc);
                     if (sampler)o.resource = sampler;
-
                 }
-
             }
         }
         else
         {
-            this._createCgpuBuffer(inst);
 
+            console.log("create byufferrrrrrrrrrrrrr", inst, this.#name);
+
+            this._createCgpuBuffer(inst);
             o.resource = {
                 "buffer": this.cGpuBuffers[inst].gpuBuffer,
                 "minBindingSize": this.getSizeBytes(),
@@ -311,7 +312,7 @@ export default class Binding
         else if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
 
         if (this.cGpuBuffers[inst]) this.cGpuBuffers[inst].dispose();
-        this.cGpuBuffers[inst] = new GPUBuffer(this.#cgp, this.#name + " buff", null, { "buffCfg": buffCfg });
+        this.cGpuBuffers[inst] = new CgpGguBuffer(this.#cgp, this.#name + " buff", null, { "buffCfg": buffCfg });
 
         if (this.uniforms.length > 0 && this.uniforms[0].gpuBuffer) this.cGpuBuffers[inst] = this.uniforms[0].gpuBuffer;
     }
@@ -375,7 +376,7 @@ export default class Binding
 
             if (!this.cGpuBuffers[bindingIndex])
             {
-                // console.log("no cpubuff?");
+                console.log("no cpubuff? ", this.stage, this.#name);
                 return;
             }
             this.cGpuBuffers[bindingIndex].setLength(s);

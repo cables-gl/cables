@@ -1,6 +1,6 @@
 import { WebGpuContext } from "./cgp_state.js";
 
-export default class WebGpuCanvasAttachment
+export class WebGpuCanvasAttachment
 {
 
     /** @type {canvas} */

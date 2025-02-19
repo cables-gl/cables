@@ -6,7 +6,7 @@ const DEFAULT_TEXTURE_SIZE = 8;
  * @property {number} [height]
  * @property {string} [pixelformat]
  */
-export default class CgTexture
+export class CgTexture
 {
 
     /**

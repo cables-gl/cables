@@ -1,5 +1,3 @@
-import { CONSTANTS } from "../../core/constants.js";
-
 const VarSetOpWrapper = class
 {
     constructor(op, type, valuePort, varNamePort, triggerPort, nextPort)
@@ -47,7 +45,6 @@ const VarSetOpWrapper = class
             this._valuePort.onChange = this._setVarValue.bind(this);
         }
 
-
         this._op.init = () =>
         {
             this._updateName();
@@ -55,11 +52,11 @@ const VarSetOpWrapper = class
             this._updateErrorUi();
         };
 
-        if (type == "array") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_ARRAY;
-        else if (type == "object") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_OBJECT;
-        else if (type == "string") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_STRING;
-        else if (type == "texture") this._typeId = CONSTANTS.OP.OP_PORT_TYPE_TEXTURE;
-        else this._typeId = CONSTANTS.OP.OP_PORT_TYPE_VALUE;
+        if (type == "array") this._typeId = CABLES.Port.TYPE_ARRAY;
+        else if (type == "object") this._typeId = CABLES.Port.TYPE_OBJECT;
+        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
+        else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
+        else this._typeId = CABLES.Port.TYPE_VALUE;
     }
 
     _updateErrorUi()
@@ -146,12 +143,12 @@ const VarSetOpWrapper = class
 
         const v = this._valuePort.get();
 
-        if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_VALUE || this._typeId == CONSTANTS.OP.OP_PORT_TYPE_STRING)
+        if (this._typeId == CABLES.Port.TYPE_VALUE || this._typeId == CABLES.Port.TYPE_STRING)
         {
             this._op.patch.setVarValue(name, v);
         }
         else
-        if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
+        if (this._typeId == CABLES.Port.TYPE_ARRAY)
         {
             this._arr = [];
             CABLES.copyArray(v, this._arr);
@@ -160,7 +157,7 @@ const VarSetOpWrapper = class
         }
         else
         {
-            if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+            if (this._typeId == CABLES.Port.TYPE_OBJECT)
             {
                 if (this._isTexture)
                     this._op.patch.setVarValue(name, CGL.Texture.getEmptyTexture(this._op.patch.cgl));
@@ -255,7 +252,7 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         if (this._valueOutPort)
-            if (this._typeId == CONSTANTS.OP.OP_PORT_TYPE_ARRAY && this._typeId == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+            if (this._typeId == CABLES.Port.TYPE_ARRAY && this._typeId == CABLES.Port.TYPE_OBJECT)
                 this._valueOutPort.setRef(v);
             else
                 this._valueOutPort.set(v);

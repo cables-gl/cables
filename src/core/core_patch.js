@@ -1,13 +1,13 @@
 import { Events, Logger } from "cables-shared-client";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId } from "./utils.js";
-import LoadingStatus from "./loadingstatus.js";
+import { LoadingStatus } from "./loadingstatus.js";
 import { Timer } from "./timer.js";
-import Link from "./core_link.js";
-import Profiler from "./core_profiler.js";
-import PatchVariable from "./core_variable.js";
-import Op, { OpUiAttribs } from "./core_op.js";
-import Port from "./core_port.js";
-import CglContext from "./cgl/cgl_state.js";
+import { Link } from "./core_link.js";
+import { Profiler } from "./core_profiler.js";
+import { PatchVariable } from "./core_variable.js";
+import { Op, OpUiAttribs } from "./core_op.js";
+import { Port } from "./core_port.js";
+import { CglContext } from "./cgl/cgl_state.js";
 
 /**
  * @typedef PatchConfig
@@ -49,7 +49,7 @@ import CglContext from "./cgl/cgl_state.js";
  *     glslPrecision:'highp'
  * });
  */
-class Patch extends Events
+export class Patch extends Events
 {
     static EVENT_OP_DELETED = "onOpDelete";
     static EVENT_OP_ADDED = "onOpAdd";
@@ -1603,5 +1603,3 @@ Patch.replaceOpIds = function (json, options)
  * @property {Port} port1
  * @property {Port} port2
  */
-
-export default Patch;

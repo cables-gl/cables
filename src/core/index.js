@@ -1,12 +1,12 @@
 import * as utils from "./utils.js";
-import Anim from "./anim.js";
-import Link from "./core_link.js";
-import Port from "./core_port.js";
-import Op from "./core_op.js";
+import { Anim } from "./anim.js";
+import { Link } from "./core_link.js";
+import { Port } from "./core_port.js";
+import { Op } from "./core_op.js";
 import { EMBED } from "./embedding.js";
-import Profiler from "./core_profiler.js";
-import Patch from "./core_patch.js";
-import LoadingStatus from "./loadingstatus.js";
+import { Profiler } from "./core_profiler.js";
+import { Patch } from "./core_patch.js";
+import { LoadingStatus } from "./loadingstatus.js";
 import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
@@ -14,8 +14,8 @@ import { CONSTANTS } from "./constants.js";
 import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
-import AnimKey from "./anim_key.js";
-import { CGState } from "./cg/cg_state.js";
+import { AnimKey } from "./anim_key.js";
+import { CGState, CgContext } from "./cg/cg_state.js";
 
 window.CABLES = window.CABLES || {};
 
@@ -61,8 +61,8 @@ CABLES.isNumeric = utils.isNumeric;
 CABLES.isArray = utils.isArray;
 CABLES.float32Concat = utils.float32Concat;
 CABLES.uniqueArray = utils.uniqueArray;
-
-CABLES.CGState = CGState;
+CABLES.CGState = CgContext;
+CABLES.CgContext = CgContext;
 
 CABLES = Object.assign(CABLES,
     CONSTANTS.PORT,

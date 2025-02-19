@@ -3,7 +3,7 @@
  */
 
 import { CONSTANTS } from "./constants.js";
-import extendJs from "./extendjs.js";
+import { extendJs } from "./extendjs.js";
 
 extendJs();
 

@@ -6,7 +6,7 @@ import { WebGpuContext } from "./cgp_state.js";
  * @property {GPUBufferDescriptor} [buffCfg]
 */
 
-export default class GPUBuffer extends Events
+export class CgpGguBuffer extends Events
 {
     #name = "unknown";
 
@@ -70,20 +70,20 @@ export default class GPUBuffer extends Events
         }
     }
 
-    updateGpuBuffer(cgp)
+    /** @param {WebGpuContext} cgp */
+    updateGpuBuffer(cgp = null)
     {
         if (cgp) this._cgp = cgp;
         if (!this._cgp || !this._cgp.device)
         {
-            this.#log.warn.log("no cgp...", this.#name, this._cgp);
+            this.#log.warn("no cgp...", this.#name, this._cgp);
             return;
         }
 
         this._cgp.pushErrorScope("updateGpuBuffer");
         if (!this.#gpuBuffer)
         {
-
-            this.buffCfg = this.buffCfg || {};
+            this.buffCfg = /** @type {GPUBufferDescriptor} */(this.buffCfg || {});
             this.buffCfg.label = "gpuBuffer-" + this.#name;
             if (!this.buffCfg.hasOwnProperty("size") && this.floatArr) this.buffCfg.size = this.floatArr.length * 4;
             this.buffCfg.usage = this.buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
@@ -110,6 +110,7 @@ export default class GPUBuffer extends Events
         return this.#name;
     }
 
+    /** @returns {GPUBuffer} */
     get gpuBuffer()
     {
         if (!this.#gpuBuffer || this.needsUpdate) this.updateGpuBuffer();

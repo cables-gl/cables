@@ -1,9 +1,9 @@
 import { CONSTANTS } from "./constants.js";
-import Port from "./core_port.js";
+import { Port } from "./core_port.js";
 
 const MIN_NUM_PORTS = 2;
 
-export default class MultiPort extends Port
+export class MultiPort extends Port
 {
     constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {
