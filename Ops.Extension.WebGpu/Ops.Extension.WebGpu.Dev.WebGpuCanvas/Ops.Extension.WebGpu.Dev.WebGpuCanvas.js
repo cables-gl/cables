@@ -1,7 +1,7 @@
 const
     inEnabled = op.inBool("Active", true),
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
-    inCatchErrs = op.inBool("Debug Mode", false),
+    inCatchErrs = op.inBool("Catch Errors", true),
     next = op.outTrigger("Next"),
     next2 = op.outTrigger("Next2"),
     supported = op.outBoolNum("Supported", false),
@@ -134,7 +134,6 @@ if (!navigator.gpu)
 {
     const warn = "Your browser does not support webGPU";
     setUnSupported();
-
 }
 
 if (navigator.gpu)
@@ -170,7 +169,7 @@ if (navigator.gpu)
 
                 const limits = {};
                 for (let i in device.limits) limits[i] = device.limits[i];
-                outLimits.set(limits);
+                outLimits.setRef(limits);
 
                 //
 
@@ -291,7 +290,7 @@ function render(b)
     // }
 
     cgp.commandEncoders = [];
-    const commandEncoder = device.createCommandEncoder();
+    const commandEncoder = device.createCommandEncoder({ "label": op.objName });
     cgp.commandEncoder = commandEncoder;
 
     cgp.textureView = renderTarget.createView();
@@ -334,7 +333,6 @@ function render(b)
     if (renderPreview)
     {
         gui.patchView.patchRenderer.vizLayer.renderWebGpuPreviews(cgp);
-
     }
 
     cgp.device.queue.submit([cgp.commandEncoder.finish()]);

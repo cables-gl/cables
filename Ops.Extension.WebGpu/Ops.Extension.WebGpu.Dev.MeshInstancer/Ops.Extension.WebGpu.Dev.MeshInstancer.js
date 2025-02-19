@@ -65,7 +65,6 @@ inTrigger.onTriggered = () =>
             oldPosBuff = null;
         }
         u.setGpuBuffer(null);
-        console.log("no connection");
     }
 
     if (mesh)mesh.render();

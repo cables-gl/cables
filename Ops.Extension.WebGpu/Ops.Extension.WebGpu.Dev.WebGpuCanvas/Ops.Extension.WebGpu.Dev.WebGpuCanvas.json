@@ -24,7 +24,7 @@
             },
             {
                 "type": 0,
-                "name": "Debug Mode",
+                "name": "Catch Errors",
                 "subType": "boolean"
             }
         ],
