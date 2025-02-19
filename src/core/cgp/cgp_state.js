@@ -236,6 +236,9 @@ class WebGpuContext extends CGState
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
+    /**
+     * @param {WebGpuDevice} device
+     */
     setDevice(device)
     {
         this.device = device;

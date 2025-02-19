@@ -14,6 +14,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1736436543586
+        },
+        {
+            "message": "Syntax highlighter",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1739870048851
         }
     ],
     "layout": {

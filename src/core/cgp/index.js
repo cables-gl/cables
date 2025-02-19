@@ -25,5 +25,6 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGP = CGP;
 window.CGP = CGP;
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
+window.CGP.Pipeline = Pipeline;
 
 export { CGP };

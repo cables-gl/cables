@@ -1,9 +1,21 @@
 import { Logger } from "cables-shared-client";
 import Port from "../core_port.js";
+import { CgShader } from "./cg_shader.js";
 
 class CgUniform
 {
-    constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
+
+    /**
+     * Description
+     * @param {CgShader} __shader
+     * @param {string} __type
+     * @param {string} __name
+     * @param {Number|Port} _value
+     * @param {Port} _port2
+     * @param {Port} _port3
+     * @param {Port} _port4
+     */
+    constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
     {
         this._log = new Logger("cg_uniform");
         this._type = __type;
@@ -12,9 +24,6 @@ class CgUniform
         this._value = 0.00001;
         this._oldValue = null;
         this._port = null;
-        this._structName = _structName;
-        this._structUniformName = _structUniformName;
-        this._propertyName = _propertyName;
 
         this._shader._addUniform(this);
         this.needsUpdate = true;

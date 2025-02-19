@@ -1,33 +1,45 @@
-import { Events } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { WebGpuContext } from "./cgp_state.js";
 
-/** GPUBuffer */
+/** @typedef GPUBufferOptions
+ * @property {number} length
+ * @property {GPUBufferDescriptor} [buffCfg]
+*/
+
 export default class GPUBuffer extends Events
 {
     #name = "unknown";
+
+    /** @type {GPUBuffer} */
     #gpuBuffer = null;
+
+    /** @type {GPUBufferDescriptor} */
+    buffCfg = null;
+
     #length = 0;
     id = CABLES.shortId();
     floatArr = null;
     needsUpdate = true;
-    presentationFormat = null;
+    #log;
+    // presentationFormat = null;
 
     /**
      * Description
      * @param {WebGpuContext} cgp
      * @param {String} name
      * @param {Array} data=null
-     * @param {Object} options={}
+     * @param {GPUBufferOptions} options={}
      */
-    constructor(cgp, name, data = null, options = {})
+    constructor(cgp, name, data = null, options = null)
     {
         super();
+        this.#log = new Logger("cgpGpubuffer");
         if (!cgp.supported) return;
 
         this.#name = name;
         this.setData([0, 0, 0, 0]);
 
-        if (options.buffCfg) this._buffCfg = options.buffCfg;
+        if (options.buffCfg) this.buffCfg = options.buffCfg;
         if (data) this.setData(data);
         if (options.length) this.setLength(options.length);
 
@@ -63,22 +75,21 @@ export default class GPUBuffer extends Events
         if (cgp) this._cgp = cgp;
         if (!this._cgp || !this._cgp.device)
         {
-            console.log("no cgp...", this.#name, this._cgp);
+            this.#log.warn.log("no cgp...", this.#name, this._cgp);
             return;
         }
 
         this._cgp.pushErrorScope("updateGpuBuffer");
         if (!this.#gpuBuffer)
         {
-            this._buffCfg = this._buffCfg || {};
-            this._buffCfg.label = "gpuBuffer-" + this.#name;
-            if (!this._buffCfg.hasOwnProperty("size") && this.floatArr) this._buffCfg.size = this.floatArr.length * 4;
-            this._buffCfg.usage = this._buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
-            this.#gpuBuffer = this._cgp.device.createBuffer(this._buffCfg);
+            this.buffCfg = this.buffCfg || {};
+            this.buffCfg.label = "gpuBuffer-" + this.#name;
+            if (!this.buffCfg.hasOwnProperty("size") && this.floatArr) this.buffCfg.size = this.floatArr.length * 4;
+            this.buffCfg.usage = this.buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
+
+            this.#gpuBuffer = this._cgp.device.createBuffer(this.buffCfg);
         }
-
-        // if (!isNaN(this.floatArr[0]))console.log("shit", this.#name);
 
         if (this.floatArr)
             this._cgp.device.queue.writeBuffer(
@@ -88,8 +99,6 @@ export default class GPUBuffer extends Events
                 this.floatArr.byteOffset,
                 this.floatArr.byteLength
             );
-
-        // this._gpuBuffer.unmap();
 
         this._cgp.popErrorScope();
 
