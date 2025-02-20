@@ -1,7 +1,7 @@
-import Patch from "./core_patch.js";
+import { Patch } from "./core_patch.js";
 import { now } from "./timer.js";
 
-export default class Profiler
+export class Profiler
 {
 
     /**

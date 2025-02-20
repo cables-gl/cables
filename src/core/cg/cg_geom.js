@@ -40,7 +40,7 @@ import { BoundingBox } from "./cg_boundingbox.js";
  *
  */
 
-class Geometry
+export class Geometry
 {
 
     /**
@@ -911,5 +911,3 @@ Geometry.buildFromFaces = function (arr, name, optimize)
 
     return geom;
 };
-
-export { Geometry };

@@ -1,6 +1,6 @@
 import { CgShader } from "../cg/cg_shader.js";
-import CgUniform from "../cg/cg_uniform.js";
-import Port from "../core_port.js";
+import { CgUniform } from "../cg/cg_uniform.js";
+import { Port } from "../core_port.js";
 
 /**
  * Shader uniforms
@@ -39,7 +39,7 @@ import Port from "../core_port.js";
 
 // export const Uniform(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 
-class Uniform extends CgUniform
+export class Uniform extends CgUniform
 {
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
     {
@@ -516,5 +516,3 @@ Uniform.glslTypeString = (t) =>
  * @instance
  * @param {Number|Array|Matrix|Texture} value
  */
-
-export { Uniform };

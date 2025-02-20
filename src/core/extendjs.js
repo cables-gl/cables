@@ -72,7 +72,7 @@ String.prototype.contains = function (str)
 
 };
 
-export default function extendJs()
+export function extendJs()
 {
 
 }

@@ -1,17 +1,17 @@
 import { Events, Logger } from "cables-shared-client";
 import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
-import Port from "./core_port.js";
-import SwitchPort from "./core_port_switch.js";
-import ValueSelectPort from "./core_port_select.js";
-import MultiPort from "./core_port_multi.js";
-import Patch from "./core_patch.js";
+import { Port } from "./core_port.js";
+import { SwitchPort } from "./core_port_switch.js";
+import { ValueSelectPort } from "./core_port_select.js";
+import { MultiPort } from "./core_port_multi.js";
+import { Patch } from "./core_patch.js";
 
 /**
  * configuration object for loading a patch
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
- * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
  * @property {boolean} [bookmarked] internal - do not use manualy
@@ -22,7 +22,7 @@ import Patch from "./core_patch.js";
  * @property {string} [subpatch]
  */
 
-export default class Op extends Events
+export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";
 

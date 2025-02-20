@@ -1,5 +1,3 @@
-import { MESHES } from "../../../core/cgl/cgl_simplerect.js";
-
 class CopyTexture
 {
     constructor(cgl, name, options)
@@ -56,7 +54,6 @@ class CopyTexture
             .endl() + "   gl_Position = vec4(vPosition,  1.0);"
             .endl() + "}";
 
-
         this.bgShader = new CGL.Shader(cgl, "corelib copytexture " + name);
         this.bgShader.setSource(verts, shader);
 
@@ -68,7 +65,7 @@ class CopyTexture
         new CGL.Uniform(this.bgShader, "t", "tex2", 2);
         new CGL.Uniform(this.bgShader, "t", "tex3", 3);
 
-        this.mesh = MESHES.getSimpleRect(this.cgl, "texEffectRect");
+        this.mesh = CABLES.CGL.MESHES.getSimpleRect(this.cgl, "texEffectRect");
     }
 
     setSize(w, h)

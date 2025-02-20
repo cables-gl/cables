@@ -1,8 +1,8 @@
 import { Events, Logger } from "cables-shared-client";
 import { uuid } from "./utils.js";
-import AnimKey from "./anim_key.js";
-import Op from "./core_op.js";
-import Port from "./core_port.js";
+import { AnimKey } from "./anim_key.js";
+import { Op } from "./core_op.js";
+import { Port } from "./core_port.js";
 
 /**
  * configuration object for loading a patch
@@ -23,7 +23,7 @@ import Port from "./core_port.js";
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
  */
 
-export default class Anim extends Events
+export class Anim extends Events
 {
     static EASING_LINEAR = 0;
     static EASING_ABSOLUTE = 1;

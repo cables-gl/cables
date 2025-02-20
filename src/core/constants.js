@@ -1,4 +1,4 @@
-import Anim from "./anim.js";
+import { Anim } from "./anim.js";
 
 export const CONSTANTS = {
     "ANIM": {

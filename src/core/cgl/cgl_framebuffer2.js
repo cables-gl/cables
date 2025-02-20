@@ -1,7 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { Texture } from "./cgl_texture.js";
 
-export default class Framebuffer2
+export class Framebuffer2
 {
     constructor(cgl, w, h, options)
     {

@@ -2,9 +2,9 @@ import { Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { Shader } from "./cgl_shader.js";
 import { ProfileData } from "./cgl_profiledata.js";
-import { CGState } from "../cg/cg_state.js";
+import { CgContext } from "../cg/cg_state.js";
 import { CG } from "../cg/cg_constants.js";
-import Framebuffer2 from "./cgl_framebuffer2.js";
+import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
 
@@ -23,13 +23,13 @@ export const BLENDS = {
  * @hideconstructor
  */
 // const Context(_patch)
-export default class CglContext extends CGState
+export class CglContext extends CgContext
 {
     constructor(_patch)
     {
         super(_patch);
 
-        this.gApi = CGState.API_WEBGL;
+        this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
 
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??

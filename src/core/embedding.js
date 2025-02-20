@@ -1,4 +1,4 @@
-import Patch from "./core_patch.js";
+import { Patch } from "./core_patch.js";
 import { generateUUID } from "./utils.js";
 
 const EMBED = {};

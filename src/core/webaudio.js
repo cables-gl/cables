@@ -1,7 +1,7 @@
 /** @namespace WEBAUDIO */
 
 import { CONSTANTS } from "./constants.js";
-import Patch from "./core_patch.js";
+import { Patch } from "./core_patch.js";
 
 const WEBAUDIO = {};
 

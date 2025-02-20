@@ -1,6 +1,6 @@
 import { Events } from "cables-shared-client";
 
-export default class FpsCounter extends Events
+export class FpsCounter extends Events
 {
     constructor()
     {

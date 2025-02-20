@@ -1,9 +1,9 @@
 import { Events } from "cables-shared-client";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
-import Patch from "../core_patch.js";
+import { Patch } from "../core_patch.js";
 
-class CGState extends Events
+export class CgContext extends Events
 {
 
     static API_WEBGL = 0;
@@ -427,5 +427,3 @@ class CGState extends Events
     }
 
 }
-
-export { CGState };

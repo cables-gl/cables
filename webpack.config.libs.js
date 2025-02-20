@@ -130,13 +130,17 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
                 {
                     "test": /\.vert/,
                     "use": "raw-loader",
+                },
+                {
+                    "test": /\.wgsl/,
+                    "use": "raw-loader",
                 }
             ].filter(Boolean),
         },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
-                new ModuleScopePlugin.default("src/"),
+                new ModuleScopePlugin.default("src/libs/"),
             ],
         },
     };

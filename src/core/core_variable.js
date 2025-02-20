@@ -1,6 +1,6 @@
 import { Events } from "cables-shared-client";
 
-class PatchVariable extends Events
+export class PatchVariable extends Events
 {
 
     /**
@@ -63,5 +63,3 @@ class PatchVariable extends Events
         this.emitEvent("change", v, this);
     }
 }
-
-export default PatchVariable;

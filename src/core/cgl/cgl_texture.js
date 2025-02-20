@@ -1,7 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { uuid } from "../utils.js";
-import CgTexture from "../cg/cg_texture.js";
-import { CGState } from "../cg/cg_state.js";
+import { CgTexture } from "../cg/cg_texture.js";
+import { CglContext } from "./cgl_state.js";
 
 const DEFAULT_TEXTURE_SIZE = 8;
 
@@ -11,7 +11,7 @@ const log = new Logger("cgl_texture");
  * A Texture
  * @namespace external:CGL
  * @class
- * @param {CGState} __cgl cgl
+ * @param {CglContext} __cgl cgl
  * @param {Object} options
  * @hideconstructor
  * @example
@@ -24,7 +24,7 @@ const log = new Logger("cgl_texture");
  * const tex=new CGL.Texture(cgl);
  * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
-class Texture extends CgTexture
+export class Texture extends CgTexture
 {
     constructor(__cgl, options = {})
     {
@@ -1054,5 +1054,3 @@ Texture.isPixelFormatHalfFloat =
     {
         return (pxlFrmtStr || "").includes("float") && (pxlFrmtStr || "").includes("16bit");
     };
-
-export { Texture };

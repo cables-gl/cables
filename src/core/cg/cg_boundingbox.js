@@ -1,4 +1,4 @@
-import { Geometry } from "./cg_geom.js";
+import Geometry from "./cg_geom.js";
 
 export { BoundingBox };
 

@@ -1,7 +1,6 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS } from "./constants.js";
-import Patch from "./core_patch.js";
-import Port from "./core_port.js";
+import { Patch } from "./core_patch.js";
+import { Port } from "./core_port.js";
 
 /**
  * @namespace external:CABLES#Link
@@ -9,7 +8,7 @@ import Port from "./core_port.js";
  * @hideconstructor
  * @class
  */
-export default class Link extends Events
+export class Link extends Events
 {
 
     /**

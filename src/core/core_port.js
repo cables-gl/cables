@@ -1,9 +1,9 @@
 import { Events, Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
-import Link from "./core_link.js";
-import Op from "./core_op.js";
-import Anim from "./anim.js";
+import { Link } from "./core_link.js";
+import { Op } from "./core_op.js";
+import { Anim } from "./anim.js";
 
 /**
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
@@ -33,7 +33,7 @@ export class PortUiAttribs {}
  * @example
  * const myPort=op.inString("String Port");
  */
-export default class Port extends Events
+export class Port extends Events
 {
     static DIR_IN = 0;
     static DIR_OUT = 1;
@@ -346,7 +346,7 @@ export default class Port extends Events
 
         if (CABLES.UI && CABLES.UI.showDevInfos)
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
-                this._log.warn("object port uses .set", this.name, this.op.objName);
+                this._log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
         if (this._op.enabled && !this.crashed)
         {
