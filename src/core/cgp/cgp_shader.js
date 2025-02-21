@@ -38,6 +38,7 @@ export class CgpShader extends CgShader
         this.bindingCounter = -1;
         this.bindCountlastFrame = -1;
         this._bindingIndexCount = 0;
+        this._compileCount = 0;
 
         /** @type {Array<Binding>} */
         this.bindingsFrag = [];
@@ -225,19 +226,20 @@ export class CgpShader extends CgShader
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.branchProfiler.push("shadercompile", this._name);
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("shadercompile", this._name, { "info": this.getInfo() });
 
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
 
         this.#lastCompileReason = this._compileReason;
 
-        console.log("#lastCompileReason", this.#lastCompileReason);
+        // console.log("#lastCompileReason", this.#lastCompileReason);
 
         this.emitEvent("compiled", this._compileReason);
         this._needsRecompile = false;
         this._compileReason = "none";
-        if (this._cgp.frameStore.branchProfiler) this._cgp.branchProfiler.pop();
+        this._compileCount++;
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
     }
 
     error(e)

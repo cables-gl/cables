@@ -406,7 +406,7 @@ export class Binding
             if (this.uniforms[0].gpuBuffer != this.cGpuBuffers[bindingIndex])
             {
                 this._log.log("changed?!");
-                this.#shader.setWhyCompile("binding update"); // TODO this should actually just rebuild the bindinggroup i guess ?
+                // this.#shader.setWhyCompile("binding update"); // TODO this should actually just rebuild the bindinggroup i guess ?
             }
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update", this.uniforms[0].getName(), { "uni": this.uniforms[0].getInfo(), "data": this.cGpuBuffers[bindingIndex].floatArr });

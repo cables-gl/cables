@@ -1,6 +1,5 @@
 const
     inObj = op.inObject("Profiler Data"),
-
     inRender = op.inSwitch("Render", ["Patch", "Canvas", "Both"], "Patch"),
     inWidth = op.inInt("Width", 500),
     inHeight = op.inInt("Height", 200),
@@ -65,18 +64,18 @@ inUpdate.onTriggered = () =>
 {
     doUpdate = true;
 
-    if (render2Canvas && inObj.get() && inObj.get().root)
+    if (render2Canvas)
     {
         const layer = { "width": inWidth.get(), "height": inHeight.get(), "x": 0, "y": 0 };
         const ctx = canvas.getContext("2d");
-
-        totalDur = inObj.get().root.dur;
-        // console.log(inObj.get());
-        // console.log(inObj.get().root.dur)
         clear(ctx, layer);
-        drawBranch(ctx, layer, inObj.get().root, 0, 0);
-        outCanvas.set(null);
-        outCanvas.set(canvas);
+
+        if (inObj.get() && inObj.get().root)
+        {
+            totalDur = inObj.get().root.dur;
+            drawBranch(ctx, layer, inObj.get().root, 0, 0);
+            outCanvas.setRef(canvas);
+        }
     }
 
     outTotalDur.set(totalDur);
@@ -126,7 +125,6 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
     if (!b) return;
 
     colorCycle++;
-    colorCycle %= (colors.length);
 
     // let lines = 1;
     let rowHeight = itemHeight(b) * mulY;// ((lines + 1) * 14) * pixelDensity + padd + padd+(mulY);
@@ -140,21 +138,32 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
         viewBox.mouseY * pixelDensity > layer.y + posy &&
         viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
     {
-        hoverele = b;
-        hover = true;
-        hovering = b;
-        // w = layer.width - posx;
-
         hoverX = layer.x + posx;
         hoverY = layer.y + posy;
         hoverW = layer.width;
-        // hoverH = rowHeight;
 
-        if (mouseState.getButton() == 1) outInfo.setRef({
-            "task": b.task,
-            "name": b.name,
-            "duration": b.dur,
-            "data": b.data });
+        if (mouseState.getButton() == 1)
+        {
+            clicked = { "count": colorCycle, "task": b.task, "name": String(b.name) };
+        }
+    }
+
+    // if (clicked &&
+    //     clicked.x ==posx &&
+    //     clicked.y ==posy)
+    if (clicked && String(b.name) == clicked.name && b.task == clicked.task && colorCycle == clicked.count)
+    {
+        hoverele = b;
+        hover = true;
+        hovering = b;
+
+        outInfo.setRef(
+            {
+                "task": b.task,
+                "name": b.name,
+                "duration": b.dur,
+                "data": b.data
+            });
     }
 
     let region = new Path2D();
@@ -168,7 +177,7 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
         ctx.clip(region, "evenodd");
     }
 
-    ctx.fillStyle = colors[colorCycle];
+    ctx.fillStyle = colors[colorCycle % colors.length];
     ctx.fillRect(
         layer.x + posx, posy + layer.y,
         w, rowHeight);
@@ -197,7 +206,7 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
     // outline
     if (hover)ctx.strokeStyle = "#ffffff";
     else ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.rect(
         layer.x + posx, posy + layer.y,

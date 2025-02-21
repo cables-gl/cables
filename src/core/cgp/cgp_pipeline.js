@@ -38,6 +38,7 @@ export class Pipeline
     #errorCount = 0;
     #type = Pipeline.TYPE_RENDER;
     lastRebuildReason = "first";
+    rebuildCount = 0;
     profile = false;
 
     profiler;
@@ -94,6 +95,7 @@ export class Pipeline
             "class": this.constructor.name,
             "name": this.#name,
             "rebuildReason": this.lastRebuildReason,
+            "rebuildCount": this.rebuildCount,
             "numBindgroups": this.#bindGroups.length,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries,
         };
@@ -204,6 +206,7 @@ export class Pipeline
         if (needsRebuildReason != "")
         {
             this.lastRebuildReason = needsRebuildReason;
+            this.rebuildCount++;
             // console.log("needsRebuildReason");
             console.log("rebuild pipe", needsRebuildReason);
             this.#cgp.pushErrorScope("createPipeline", { "logger": this.#log });
