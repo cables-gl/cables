@@ -11,12 +11,12 @@ An attachment file can be created by clicking on an Op and then clicking the cre
 
 ![create_attachment](img/attachment_files.png)
 
-You then need to give your attachment a name that will later be used to access it's content in your Op.
+You then need to give your attachment a name that will later be used to access its content in your Op.
 An attachment named `my_attachment` will be accessible in the Op via `attachments["my_attachment"]`
 
 ## Editing Attachment
 
-After you created the attachment, the cables-editor will open and let you edit it's content.
+After you created the attachment, the cables-editor will open and let you edit its content.
 
 You can open the editor again later by clicking the edit button
 

@@ -25,7 +25,7 @@ and start using the functionality in your Op.
 
 Pick a type for your library. If unsure, read on [below](#librarytypes).
 
-This is a great way to quickly test libraries in cables, there is a few caveats though:
+This is a great way to quickly test libraries in cables, there are a few caveats though:
 
 * If the library is no longer available at the given URL, your Op will no longer work.
 * Sometimes you will run into [CORS-Issues](../../4_export_embed/cors) that might not be fixable by you, if you do not control the "other side".
@@ -43,7 +43,7 @@ You will have to consult the documentation of the module to find this kind of in
 ### Op
 
 Enter a name of any Op to load it's libraries when using your Op. This is useful when you are creating a collection of
-Ops that all need to load the same library but you don't want to add it to every individual op.
+Ops that all need to load the same library, but you don't want to add it to every individual op.
 
 All libraries are loaded globally and all Ops have access to the global variables provided. This function just
 makes sure that you do not need a "LoadMyLibraryOp" before using other ops in your collection. These references to
