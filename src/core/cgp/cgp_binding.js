@@ -275,7 +275,6 @@ export class Binding
         }
         else
         {
-            this._log.warn("unknown bindingGroupLayoutEntry", this.#name, this.bindingType);
             o.buffer = {};
             o.buffer.type = this.bindingType;
         }
@@ -388,10 +387,9 @@ export class Binding
     }
 
     /**
-     * @param {CgpContext} cgp
      * @param {Number} bindingIndex
      */
-    update(cgp)
+    update()
     {
 
         let bindingIndex = this.getBindingIndex();
@@ -409,13 +407,13 @@ export class Binding
                 // this.#shader.setWhyCompile("binding update"); // TODO this should actually just rebuild the bindinggroup i guess ?
             }
 
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update", this.uniforms[0].getName(), { "uni": this.uniforms[0].getInfo(), "data": this.cGpuBuffers[bindingIndex].floatArr });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update uni", this.uniforms[0].getName(), { "uni": this.uniforms[0].getInfo(), "data": this.cGpuBuffers[bindingIndex].floatArr });
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
         else
         if (this.uniforms.length == 1 && this.uniforms[0].getType() == "t")
         {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update", "texture " + this.uniforms[0].getName(), { "uni": this.uniforms[0].getInfo() });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update uni texture", "texture " + this.uniforms[0].getName(), { "uni": this.uniforms[0].getInfo() });
             if (this.uniforms[0].getValue())
                 if (this.uniforms[0].getValue().gpuTexture)
                 {
@@ -431,13 +429,13 @@ export class Binding
         }
         else if (this.uniforms.length == 1 && this.uniforms[0].getType() == "sampler")
         {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("uni sampler");
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update uni sampler");
             b.resource = this.uniforms[0].getValue();
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
         else
         {
-            let info = { "name": this._name, "stage ": CgpShader.getStageString(this.stage), "bindingIndex": bindingIndex, "uniforms": [] };
+            let info = { "name": this.uniforms.length + " uniforms", "stage ": CgpShader.getStageString(this.stage), "bindingIndex": bindingIndex, "uniforms": [] };
 
             // this._log.log("B",this.);
             // update uniform values to buffer
@@ -457,17 +455,20 @@ export class Binding
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
-                info.uniforms.push(this.uniforms[i].getInfo());
                 this.uniforms[i].copyToBuffer(this.cGpuBuffers[bindingIndex].floatArr, off); // todo: check if uniform changed?
+
+                // console.log(this.cGpuBuffers[bindingIndex].floatArr);
+
+                info.uniforms.push(this.uniforms[i].getInfo());
 
                 // if (isNaN(this.cGpuBuffers[inst].floatArr[0]))
                 // {
-                // this._log.log("shitttttttt", this.cGpuBuffers[inst].floatArr[0], this.uniforms[i].getName(), this.cGpuBuffers[inst].name, this.uniforms[i]);
+                // this._log.log("s", this.cGpuBuffers[inst].floatArr[0], this.uniforms[i].getName(), this.cGpuBuffers[inst].name, this.uniforms[i]);
                 // }
 
                 off += this.uniforms[i].getSizeBytes() / 4;
             }
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("uni buff", this.getStageString() + " " + this.bindingType, { "info": info });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update buff", this.getStageString() + " " + this.bindingType, { "info": info });
 
             // this._log.log("upodate", inst);
 

@@ -191,11 +191,12 @@ export class Pipeline
                     this.#pipeCfg.depthStencil.depthCompare = this.#cgp.stateDepthFunc();
                 }
 
-                if (this.#pipeCfg.primitive.cullMode != this.#cgp.stateCullFaceFacing())
-                {
-                    needsRebuildReason = "cullmode change";
-                    this.#pipeCfg.primitive.cullMode = this.#cgp.stateCullFaceFacing();
-                }
+                // if (this.#pipeCfg.primitive.cullMode != this.#cgp.stateCullFaceFacing())
+                // {
+                //     needsRebuildReason = "cullmode change";
+                //     // this.#pipeCfg.primitive.cullMode = this.#cgp.stateCullFaceFacing();
+                // console.log(this.#cgp.stateCullFaceFacing());
+                // }
 
             }
 
@@ -260,8 +261,7 @@ export class Pipeline
 
             let passEnc = this.#cgp.passEncoder;
 
-            if (this.#type != Pipeline.TYPE_RENDER)
-                passEnc = this.#passEncoder;
+            if (this.#type != Pipeline.TYPE_RENDER) passEnc = this.#passEncoder;
 
             // this.#passEncoder.setPipeline(this.#renderPipeline);
             // this.#cgp.passEncoder.setPipeline(this.#renderPipeline);
@@ -352,6 +352,7 @@ export class Pipeline
                 }
                 this.#cgp.passEncoder.setBindGroup(i, this.#bindGroups[i]);
             }
+
             if (this.#bindGroups.length == 0)
             {
                 console.warn("No effing bindgroups...");
@@ -360,7 +361,6 @@ export class Pipeline
             {
                 passEnc.setPipeline(this.#renderPipeline);
 
-                /// ///////////////////
                 this._bindUniforms(shader, shader.bindingCounter);
             }
 
@@ -473,7 +473,7 @@ export class Pipeline
             const renderCfg = /** @type {GPURenderPipelineDescriptor} */ (pipeCfg || {});
             renderCfg.primitive = {
                 "topology": "triangle-list",
-                "cullMode": this.#cgp.stateCullFaceFacing(), // back/none/front
+                "cullMode": "none", // this.#cgp.stateCullFaceFacing(), // back/none/front
 
                 // "point-list",
                 // "line-list",
