@@ -82,7 +82,7 @@ AGFzbQEAAAABCAJgAX8AYAAAAh4BDG15X25hbWVzcGFjZQ1pbXBvcnRlZF9mdW5jAAADAgEBBxEBDWV4
 Now, in the Op code, add this:
 ```javascript
 // create data url from base64 wasm code
-const ammoWasm = "data:application/wasm;base64," + attachments.wasm;
+const simpleWasm = "data:application/wasm;base64," + attachments.wasm;
 
 // define callable functions
 const importObject = {
@@ -90,7 +90,7 @@ const importObject = {
 };
 
 // fetch code from dataurl and instantiate wasm
-fetch(ammoWasm).then((g) =>
+fetch(simpleWasm).then((g) =>
 {
     WebAssembly.instantiateStreaming(g, importObject).then(
         (obj) =>
