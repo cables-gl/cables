@@ -17,7 +17,7 @@ export class CgpMesh extends CgMesh
         this.numIndex = 0;
         this.instances = 1;
 
-        this._pipe = new Pipeline(this._cgp, "new mesh " + __geom.name, Pipeline.TYPE_RENDER);
+        this._pipe = new Pipeline(this._cgp, "pipe mesh " + __geom.name, Pipeline.TYPE_RENDER);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
@@ -69,10 +69,7 @@ export class CgpMesh extends CgMesh
     _disposeAttributes()
     {
         this.needsPipelineUpdate = true;
-        for (let i = 0; i < this._attributes.length; i++)
-        {
-            this._attributes[i].buffer.destroy();
-        }
+        for (let i = 0; i < this._attributes.length; i++) this._attributes[i].buffer.destroy();
         this._attributes.length = 0;
     }
 
@@ -128,7 +125,7 @@ export class CgpMesh extends CgMesh
             return;
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh", ["geom " + this._geom.name, "shader " + shader.getName()]);
+        if (this._cgp.frameStore.branchProfiler) this._cgp.branchProfiler.push("mesh", "geom " + this._geom.name, { "geom ": this._geom.getInfo(), "shader ": shader.getInfo() });
 
         this._pipe.setName("mesh " + this._geom.name + " " + shader.getName());
         this._pipe.setPipeline(shader, this);
@@ -149,7 +146,7 @@ export class CgpMesh extends CgMesh
                 this._cgp.passEncoder.drawIndexed(this._numIndices, this.instances);
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+        if (this._cgp.frameStore.branchProfiler) this._cgp.branchProfiler.pop();
 
         // if (shader)shader.unbind();
     }

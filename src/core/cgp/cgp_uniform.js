@@ -2,17 +2,19 @@ import { CgUniform } from "../cg/cg_uniform.js";
 
 export class CgpUniform extends CgUniform
 {
+    #cgp = null;
+
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
     {
         super(__shader, __type, __name, _value, _port2, _port3, _port4);
-        this._cgp = __shader._cgp;
+        this.#cgp = __shader._cgp;
 
         if (!_value || (_value.get && !_value.get()))
         {
             // if (this.getType() == "m4") this._value = mat4.create();
             if (this.getType() == "t")
             {
-                this._value = this._cgp.getEmptyTexture();
+                this._value = this.#cgp.getEmptyTexture();
                 console.log("TEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", this._value);
             }
             // else if (this.getType() == "2f") this._value = [0, 0];
@@ -21,6 +23,11 @@ export class CgpUniform extends CgUniform
         }
 
         this.gpuBuffer = null;
+    }
+
+    getInfo()
+    {
+        return { "name": this.name, "type": this.type, "value": this.getValue() };
     }
 
     updateValueF() { }
@@ -186,4 +193,5 @@ export class CgpUniform extends CgUniform
 
         return uni;
     }
+
 }

@@ -4,6 +4,7 @@ const
     inZoomText = op.inBool("ZoomText", false),
     inLineNums = op.inBool("Line Numbers", true),
     inExpString = op.inBool("Experimental Stringify", true),
+    inSort = op.inBool("Sort Keys", false),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0);
 
@@ -16,88 +17,135 @@ function myStringify(o, level = 0)
 {
     let ind = "   ";
     let indent = "";
+
     let str = "";
     for (let i = 0; i < level; i++) indent += ind;
 
-    let keys = Object.keys(o);
-    let numKeys = keys.length;
-
-    if (!(Array.isArray(o) || (o.constructor && o.constructor.name === "Float32Array")))
-        keys = keys.sort();
-
-    if (numKeys == 0)
+    if (level > 4)
     {
-        str += indent + "{}";
+        return indent + "/* too deep... */";
     }
+
+    if (typeof o === "string") str += "\"" + o + "\""; //  e.g. in arrays
+    else if (typeof o === "number") str += o; //  e.g. in arrays
     else
     {
-        let keyCounter = 0;
-        str += indent + "{\n";
-        for (let i = 0; i < keys.length; i++)
+        let keys = Object.keys(o);
+        let numKeys = keys.length;
+
+        if (inSort.get())
+            if (!(Array.isArray(o) || (o.constructor && o.constructor.name === "Float32Array")))
+                keys = keys.sort();
+
+        try
         {
-            const item = o[keys[i]];
-
-            keyCounter++;
-            str += indent + ind;
-            str += "\"" + keys[i] + "\": ";
-
-            if (item === null)
+            if (numKeys == 0)
             {
-                str += "null";
+                str += indent + "{}";
             }
             else
-            if (item === undefined)
             {
-                str += "undefined";
-            }
-            else
-            if (item === true)
-            {
-                str += "true";
-            }
-            else
-            if (item === false)
-            {
-                str += "false";
-            }
-            else
-            if (typeof item === "number")
-            {
-                str += String(item);
-            }
-            else if (typeof item === "string")
-            {
-                str += "\"" + item + "\"";
-            }
-            else if (Array.isArray(item) || (item.constructor && item.constructor.name === "Float32Array"))
-            {
-                str += "{" + item.constructor.name + "[" + item.length + "]} ";
-                str += "[";
-                for (let a = 0; a < Math.min(5, item.length); a++)
+                let keyCounter = 0;
+                str += indent + "{\n";
+                for (let i = 0; i < keys.length; i++)
                 {
-                    if (a > 0)str += ",";
-                    str += item[a];
+                    const item = o[keys[i]];
+
+                    keyCounter++;
+                    str += indent + ind;
+                    str += "\"" + keys[i] + "\": ";
+
+                    if (item === null)
+                    {
+                        str += "null";
+                    }
+                    else
+                    if (item === undefined)
+                    {
+                        str += "undefined";
+                    }
+                    else
+                    if (item === true)
+                    {
+                        str += "true";
+                    }
+                    else
+                    if (item === false)
+                    {
+                        str += "false";
+                    }
+                    else
+                    if (item === 0)
+                    {
+                        str += "0";
+                    }
+                    else
+                    if (typeof item === "number")
+                    {
+                        str += String(item);
+                    }
+                    else if (typeof item === "string")
+                    {
+                        str += "\"" + item + "\"";
+                    }
+                    else if (item && (Array.isArray(item) || (item.constructor && item.constructor.name === "Float32Array")))
+                    {
+                        const maxItems = 5;
+                        str += "{" + item.constructor.name + "[" + item.length + "]} ";
+                        str += "[";
+                        for (let a = 0; a < Math.min(maxItems, item.length); a++)
+                        {
+                            if (a > 0)str += ",";
+                            try
+                            {
+                                str += myStringify(item[a], level + 1);
+                            }
+                            catch (e)
+                            {
+                            // console.log(e);
+                                str += "exception:" + e.message;
+                            }
+                        }
+                        if (item.length > maxItems)
+                            str += ",/* ... " + (item.length - maxItems) + " more items */";
+                        str += "]";
+                    }
+                    else if (item && item.constructor.name === "Object")
+                    {
+                        if (Object.keys(item).length == 0) str += "{}";
+                        else str += "\n" + myStringify(item, level + 1);
+                    }
+                    else
+                    if (!item)
+                    {
+                        str += "/*no item?*/";
+                        console.log("no item????????", item);
+                    }
+                    else
+                    {
+                        if (item)
+                        {
+                            str += "[" + item.constructor.name + "]";
+                            str += "\n" + myStringify(item, level + 1);
+                        }
+                        else
+                        {
+                            str += "??";
+                        }
+                    }
+
+                    if (keyCounter != numKeys)str += ",";
+                    str += "\n";
                 }
-                str += "...";
-                str += "]";
-            }
-            else if (item.constructor.name === "Object")
-            {
-                if (Object.keys(item).length == 0) str += "{}";
-                else str += "\n" + myStringify(item, level + 1);
-            }
-            else
-            {
-                str += "[" + item.constructor.name + "]";
-                str += "\n" + myStringify(item, level + 1);
-            }
 
-            if (keyCounter != numKeys)str += ",";
-            str += "\n";
+                str += indent;
+                str += "}";
+            }
         }
-
-        str += indent;
-        str += "}";
+        catch (e)
+        {
+            console.log(e);
+        }
     }
 
     return str;
@@ -113,39 +161,45 @@ inObj.onChange = () =>
     if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
 
     if (obj === undefined)str = "undefined";
-    else if (obj == null)str = "null";
+    else if (obj === null)str = "null";
+    else if (obj === false)str = "false";
+    else if (obj === 0)str = "0";
     else
         try
         {
             if (inExpString.get()) str = myStringify(obj);
-            else str = JSON.stringify(obj, false, 4);
-
-            if (
-                obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
-            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+            else
             {
-                str = "could not stringify object: " + obj.constructor.name + "\n";
-
-                const o = {};
-                for (const i in obj)
-                {
-                    if (!obj[i]) continue;
-
-                    if (obj[i].constructor)
-                    {
-                        if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
-                            o[i] = obj[i];
-                    }
-                    else
-                        o[i] = "{???}";
-                }
-                obj = o;
                 str = JSON.stringify(obj, false, 4);
+
+                if (
+                    obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
+            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+                {
+                    str = "could not stringify object: " + obj.constructor.name + "\n";
+
+                    const o = {};
+                    for (const i in obj)
+                    {
+                        if (!obj[i]) continue;
+
+                        if (obj[i].constructor)
+                        {
+                            if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
+                                o[i] = obj[i];
+                        }
+                        else
+                            o[i] = "{???}";
+                    }
+                    obj = o;
+                    str = JSON.stringify(obj, false, 4);
+                }
             }
         }
         catch (e)
         {
             str = "object can not be displayed as string\n" + e.message;
+            // console.log(obj);
         }
 
     str = String(str);

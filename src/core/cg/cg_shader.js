@@ -31,6 +31,8 @@ class CgShader extends Events
     /** @type {Array<ShaderModule>} */
     _modules = [];
 
+    _compileCount = 0;
+
     constructor()
     {
         super();
@@ -42,6 +44,7 @@ class CgShader extends Events
     setWhyCompile(reason)
     {
         this._compileReason = reason;
+        this._needsRecompile = true;
     }
 
     /**
@@ -96,13 +99,11 @@ class CgShader extends Events
             {
                 this._defines[i][1] = value;
                 this.setWhyCompile("define " + name + " " + value);
-
-                this._needsRecompile = true;
                 return;
             }
         }
         this.setWhyCompile("define " + name + " " + value);
-        this._needsRecompile = true;
+
         this._defines.push([name, value]);
     }
 
@@ -146,7 +147,6 @@ class CgShader extends Events
             if (this._defines[i][0] == name)
             {
                 this._defines.splice(i, 1);
-                this._needsRecompile = true;
 
                 this.setWhyCompile("define removed:" + name);
 
@@ -200,7 +200,6 @@ class CgShader extends Events
                         }
                     }
 
-                    this._needsRecompile = true;
                     this.setWhyCompile("remove module " + mod.title);
                     this._modules.splice(i, 1);
                     break;
@@ -236,7 +235,6 @@ class CgShader extends Events
         mod.prefix = "mod" + mod.group + "_";
         this._modules.push(mod);
 
-        this._needsRecompile = true;
         this.setWhyCompile("add module " + mod.title);
         this._moduleNumId++;
 

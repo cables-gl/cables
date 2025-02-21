@@ -62,6 +62,10 @@
                 "type": 0,
                 "name": "Duration",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Data"
             }
         ]
     },

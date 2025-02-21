@@ -245,7 +245,7 @@ function onmousemove(e)
 
     if (inPreventDefault.get())e.preventDefault();
 
-    outEvent.set(e);
+    outEvent.setRef(e);
 }
 
 function ontouchmove(e)

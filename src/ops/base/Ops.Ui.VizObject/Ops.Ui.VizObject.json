@@ -57,6 +57,11 @@
             },
             {
                 "type": 0,
+                "name": "Sort Keys",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Font Size",
                 "subType": "number"
             },
