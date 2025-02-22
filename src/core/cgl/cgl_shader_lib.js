@@ -77,8 +77,8 @@ export const ShaderLibMods = {
 
         this.onBind = function (cgl, shader)
         {
-            Texture.getRandomTexture(cgl);
-            cgl.setTexture(7, Texture.getRandomTexture(cgl).tex);
+            CABLES.CGL.Texture.getRandomTexture(cgl);
+            cgl.setTexture(7, CABLES.CGL.Texture.getRandomTexture(cgl).tex);
         };
     }
 
