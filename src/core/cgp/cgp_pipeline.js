@@ -278,7 +278,7 @@ export class Pipeline
                     {
                         if (shader.bindingsVert[i] && shader.bindingsVert[i].getSizeBytes() > 0)
                         {
-                            const entry = shader.bindingsVert[i].getBindingGroupEntry();
+                            const entry = shader.bindingsVert[i].getBindingGroupEntry(shader.frameUsageCounter);
                             if (entry)bindingGroupEntries.push(entry);
                         }
                         else this.#log.log("shader defaultBindingVert size 0");
@@ -289,7 +289,7 @@ export class Pipeline
                     {
                         if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
                         {
-                            const entry = shader.bindingsFrag[i].getBindingGroupEntry();
+                            const entry = shader.bindingsFrag[i].getBindingGroupEntry(shader.frameUsageCounter);
                             if (entry)bindingGroupEntries.push(entry);
                         }
                         else this.#log.log("shader defaultBindingFrag size 0");
@@ -300,7 +300,7 @@ export class Pipeline
                     {
                         if (shader.bindingsCompute[i] && shader.bindingsCompute[i].getSizeBytes() > 0)
                         {
-                            const entry = shader.bindingsCompute[i].getBindingGroupEntry();
+                            const entry = shader.bindingsCompute[i].getBindingGroupEntry(shader.frameUsageCounter);
                             if (entry)bindingGroupEntries.push(entry);
                         }
                         else this.#log.log("shader defaultBindingCompute size 0");
@@ -323,7 +323,6 @@ export class Pipeline
                     // TODO bindgroup counter somehow ?!?!?!??!
                     this.#bindGroups[0] = this.#cgp.device.createBindGroup(bg);
 
-                    console.log(this.#bindGroups, shader.bindingCounter);
                 }
                 catch (e)
                 {
@@ -361,7 +360,7 @@ export class Pipeline
             {
                 passEnc.setPipeline(this.#renderPipeline);
 
-                this._bindUniforms(shader, shader.bindingCounter);
+                this._bindUniforms(shader, shader.frameUsageCounter);
             }
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
@@ -537,17 +536,17 @@ export class Pipeline
         if (this.#type == Pipeline.TYPE_RENDER)
         {
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms vert", { "bindings": shader.bindingsVert });
-            for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(this.#cgp);
+            for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(shader.getFrameUsageCount());
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms frag", { "bindings": shader.bindingsFrag });
-            for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(this.#cgp);
+            for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(shader.getFrameUsageCount());
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
         if (this.#type == Pipeline.TYPE_COMPUTE)
         {
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms compute", { "bindings": shader.bindingsFrag });
-            for (let i = 0; i < shader.bindingsCompute.length; i++) shader.bindingsCompute[i].update(this.#cgp);
+            for (let i = 0; i < shader.bindingsCompute.length; i++) shader.bindingsCompute[i].update(shader.getFrameUsageCount());
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
     }

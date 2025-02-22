@@ -7,6 +7,7 @@ import { CG } from "../cg/cg_constants.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
+import { Geometry } from "../cg/cg_geom.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -417,7 +418,7 @@ export class CglContext extends CgContext
      * @function pushShader
      * @memberof Context
      * @instance
-     * @param {CgShader} shader
+     * @param {CglShader} shader
      * @function
      */
     pushShader(shader)
@@ -1125,11 +1126,12 @@ export class CglContext extends CgContext
     }
 
     /**
+     * @param {Geometry} options
      * @param {CglMeshOptions} options
      */
     createMesh(geom, options)
     {
-        if (CABLES.isNumeric(options))options = { "glPrimisdstive": options }; // old constructor fallback...
+        if (CABLES.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
         return new Mesh(this, geom, options);
     }
 
