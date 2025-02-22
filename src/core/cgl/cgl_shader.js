@@ -229,8 +229,6 @@ class CglShader extends CgShader
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
-        CABLES.logStack();
-
         shader._modGroupCount = this._modGroupCount;
         shader._moduleNames = this._moduleNames;
         shader.glPrimitive = this.glPrimitive;
