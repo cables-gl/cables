@@ -822,6 +822,9 @@ export class Geometry
     {
         const info = {};
 
+        info.name = this.name;
+        info.class = this.constructor.name;
+
         if (this.faceVertCount == 3 && this.verticesIndices)info.numFaces = this.verticesIndices.length / 3;
         else info.numFaces = 0;
 

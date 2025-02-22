@@ -17,7 +17,7 @@ export class CgpMesh extends CgMesh
         this.numIndex = 0;
         this.instances = 1;
 
-        this._pipe = new Pipeline(this._cgp, "new mesh " + __geom.name, Pipeline.TYPE_RENDER);
+        this._pipe = new Pipeline(this._cgp, "pipe mesh " + __geom.name, Pipeline.TYPE_RENDER);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
         this._bufVerticesIndizes = null;
@@ -69,10 +69,7 @@ export class CgpMesh extends CgMesh
     _disposeAttributes()
     {
         this.needsPipelineUpdate = true;
-        for (let i = 0; i < this._attributes.length; i++)
-        {
-            this._attributes[i].buffer.destroy();
-        }
+        for (let i = 0; i < this._attributes.length; i++) this._attributes[i].buffer.destroy();
         this._attributes.length = 0;
     }
 
@@ -119,6 +116,8 @@ export class CgpMesh extends CgMesh
         if (!this._positionBuffer) return;
         if (this.instances <= 0) return;
 
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh", "geom " + this._geom.name);
+
         shader = shader || this._cgp.getShader();
         if (shader)shader.bind();
 
@@ -128,18 +127,20 @@ export class CgpMesh extends CgMesh
             return;
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.push("mesh", ["geom " + this._geom.name, "shader " + shader.getName()]);
-
-        this._pipe.setName("mesh " + this._geom.name + " " + shader.getName());
+        this._pipe.setName("mesh.render " + this._geom.name + " " + shader.getName());
         this._pipe.setPipeline(shader, this);
 
         if (this._pipe.isValid)
         {
+            if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh draw", "geom " + this._geom.name, {
+                "geom ": this._geom.getInfo(),
+                "shader ": shader.getInfo(),
+                "numAttributes": this._attributes.length
+            });
+
             this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
             for (let i = 0; i < this._attributes.length; i++)
-            {
                 this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
-            }
 
             this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
 
@@ -147,9 +148,19 @@ export class CgpMesh extends CgMesh
                 this._cgp.passEncoder.draw(this._numIndices, this.instances);
             else
                 this._cgp.passEncoder.drawIndexed(this._numIndices, this.instances);
+
+            if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
+        }
+        else
+        {
+            if (this._cgp.branchProfiler)
+            {
+                this._cgp.branchProfiler.push("mesh invalid pipeline ", "geom " + this._geom.name);
+                this._cgp.branchProfiler.pop();
+            }
         }
 
-        if (this._cgp.frameStore.branchProfiler) this._cgp.frameStore.branchStack.pop();
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
 
         // if (shader)shader.unbind();
     }

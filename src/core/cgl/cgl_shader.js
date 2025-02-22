@@ -518,6 +518,7 @@ class CglShader extends CgShader
 
         this._cgl.printError("uniform resets");
 
+        this._compileCount++;
         if (this.hasTextureUniforms()) definesStr += "#define HAS_TEXTURES".endl();
 
         let vs = "";

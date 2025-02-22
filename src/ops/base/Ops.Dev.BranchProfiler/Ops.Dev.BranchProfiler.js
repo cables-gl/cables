@@ -7,7 +7,6 @@ const
 
 inExec.onTriggered = () =>
 {
-    // op.patch.cg.frameStore.branchProfiler = op.patch.cg.frameStore.branchProfiler || {};
 
     op.patch.cg.frameStore.branchProfiler = {};
 

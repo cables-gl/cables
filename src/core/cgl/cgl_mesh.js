@@ -163,8 +163,9 @@ class Mesh extends CgMesh
             this._resizeAttr(array, attr);
         }
 
-        if (end > array.length)
+        if (end > array.length && !this.warned)
         {
+            this.warned = true;
             this._log.warn(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
             return;
         }

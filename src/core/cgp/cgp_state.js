@@ -22,6 +22,8 @@ import { CgpMesh } from "./cgp_mesh.js";
 export class CgpContext extends CgContext
 {
 
+    branchProfiler = null;
+
     /**
      * @param {Patch} _patch
      */
@@ -149,7 +151,8 @@ export class CgpContext extends CgContext
         this.popErrorScope();
         this.popErrorScope();
 
-        if (this._stackErrorScope.length > 0)console.log("scope stack length invalid...");
+        if (this._stackErrorScope.length > 0)console.log("error scope stack length invalid...");
+        this._stackErrorScope.length = 0;
 
         this.emitEvent("endFrame");
         this.fpsCounter.endFrame();

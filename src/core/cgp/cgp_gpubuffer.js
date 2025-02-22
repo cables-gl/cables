@@ -1,5 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
-import { WebGpuContext } from "./cgp_state.js";
+import { CgpContext, WebGpuContext } from "./cgp_state.js";
 
 /** @typedef GPUBufferOptions
  * @property {number} length
@@ -9,6 +9,9 @@ import { WebGpuContext } from "./cgp_state.js";
 export class CgpGguBuffer extends Events
 {
     #name = "unknown";
+
+    /** @type {CgpContext} */
+    #cgp = null;
 
     /** @type {GPUBuffer} */
     #gpuBuffer = null;
@@ -22,6 +25,10 @@ export class CgpGguBuffer extends Events
     needsUpdate = true;
     #log;
     // presentationFormat = null;
+
+    static BINDINGTYPE_STORAGE = "storage";
+    static BINDINGTYPE_UNIFORM = "uniform";
+    static BINDINGTYPE_READONLY_STORAGE = "read-only-storage";
 
     /**
      * Description
@@ -73,14 +80,14 @@ export class CgpGguBuffer extends Events
     /** @param {CgpContext} cgp */
     updateGpuBuffer(cgp = null)
     {
-        if (cgp) this._cgp = cgp;
-        if (!this._cgp || !this._cgp.device)
+        if (cgp) this.#cgp = cgp;
+        if (!this.#cgp || !this.#cgp.device)
         {
-            this.#log.warn("no cgp...", this.#name, this._cgp);
+            this.#log.warn("no cgp...", this.#name, this.#cgp);
             return;
         }
 
-        this._cgp.pushErrorScope("updateGpuBuffer");
+        this.#cgp.pushErrorScope("updateGpuBuffer");
         if (!this.#gpuBuffer)
         {
             this.buffCfg = /** @type {GPUBufferDescriptor} */(this.buffCfg || {});
@@ -88,11 +95,11 @@ export class CgpGguBuffer extends Events
             if (!this.buffCfg.hasOwnProperty("size") && this.floatArr) this.buffCfg.size = this.floatArr.length * 4;
             this.buffCfg.usage = this.buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
-            this.#gpuBuffer = this._cgp.device.createBuffer(this.buffCfg);
+            this.#gpuBuffer = this.#cgp.device.createBuffer(this.buffCfg);
         }
 
         if (this.floatArr)
-            this._cgp.device.queue.writeBuffer(
+            this.#cgp.device.queue.writeBuffer(
                 this.#gpuBuffer,
                 0,
                 this.floatArr.buffer,
@@ -100,7 +107,7 @@ export class CgpGguBuffer extends Events
                 this.floatArr.byteLength
             );
 
-        this._cgp.popErrorScope();
+        this.#cgp.popErrorScope();
 
         this.needsUpdate = false;
     }

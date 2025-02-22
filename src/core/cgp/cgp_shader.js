@@ -14,6 +14,7 @@ export class CgpShader extends CgShader
 {
 
     #computePipeline;
+    #lastCompileReason = "first";
 
     /**
      * @param {CgpContext} _cgp
@@ -33,25 +34,30 @@ export class CgpShader extends CgShader
 
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
-        this._compileReason = "";
         this.gpuShaderModule = null;
-        this._needsRecompile = true;
-        this.bindingCounter = 0;
+        this.bindingCounter = -1;
         this.bindCountlastFrame = -1;
         this._bindingIndexCount = 0;
-
-        this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this._bindingIndexCount++ });
-        this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "stage": GPUShaderStage.FRAGMENT, "bindingType": "uniform", "index": this._bindingIndexCount++ });
-        this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this._bindingIndexCount++ });
+        this._compileCount = 0;
 
         /** @type {Array<Binding>} */
-        this.bindingsFrag = [this.defaultBindingFrag];
+        this.bindingsFrag = [];
 
         /** @type {Array<Binding>} */
-        this.bindingsVert = [this.defaultBindingVert];
+        this.bindingsVert = [];
 
         /** @type {Array<Binding>} */
-        this.bindingsCompute = [this.defaultBindingCompute];
+        this.bindingsCompute = [];// this.defaultBindingCompute
+
+        if (!this.options.compute)
+        {
+            this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNextBindingCounter() });
+            this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "shader": this, "stage": GPUShaderStage.FRAGMENT, "bindingType": "uniform", "index": this.getNextBindingCounter() });
+        }
+        else
+        {
+            // this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this._bindingIndexCount++ });
+        }
 
         if (!this.options.compute)
         {
@@ -75,13 +81,6 @@ export class CgpShader extends CgShader
         });
     }
 
-    incBindingCounter()
-    {
-        if (this.bindCountlastFrame != this._cgp.frame) this.bindingCounter = 0;
-        else this.bindingCounter++;
-        this.bindCountlastFrame = this._cgp.frame;
-    }
-
     reInit()
     {
 
@@ -102,22 +101,24 @@ export class CgpShader extends CgShader
         return this._name;
     }
 
-    setWhyCompile(why)
+    getNextBindingCounter()
     {
-        this._compileReason = why;
-        this._needsRecompile = true;
+        if (this.bindCountlastFrame != this._cgp.frame) this.bindingCounter = 0;
+        else this.bindingCounter++;
+        this.bindCountlastFrame = this._cgp.frame;
+
+        return this.bindingCounter;
     }
 
-    getNewBindingIndex()
-    {
-        return ++this._bindingIndexCount;
-    }
+    // getNewBindingIndex()
+    // {
+    //     return ++this._bindingIndexCount;
+    // }
 
     setSource(src)
     {
         this._src = src;
         this.setWhyCompile("Source changed");
-        this._needsRecompile = true;
     }
 
     _replaceMods(vs)
@@ -184,8 +185,9 @@ export class CgpShader extends CgShader
             let bindingsHeadCompute = "";
             for (let i = 0; i < this.bindingsCompute.length; i++)
             {
+                if (!this.bindingsCompute[i]) continue;
                 bindingsHeadCompute += "// bindingsCompute " + i + "\n";
-                bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode();
+                bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode(this);
             }
 
             src = bindingsHeadCompute + "\n\n//////////////// \n\n" + src;
@@ -195,11 +197,11 @@ export class CgpShader extends CgShader
 
             let bindingsHeadVert = "";
             for (let i = 0; i < this.bindingsFrag.length; i++)
-                bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
+                bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode(this);
 
             let bindingsHeadFrag = "";
             for (let i = 0; i < this.bindingsVert.length; i++)
-                bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
+                bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode(this);
 
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
@@ -224,13 +226,20 @@ export class CgpShader extends CgShader
         this._isValid = true;
         this._cgp.pushErrorScope("cgp_shader " + this._name);
 
-        console.log("compile", this._compileReason);
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("shadercompile", this._name, { "info": this.getInfo() });
 
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
-        this._needsRecompile = false;
 
-        this.emitEvent("compiled");
+        this.#lastCompileReason = this._compileReason;
+
+        // console.log("#lastCompileReason", this.#lastCompileReason);
+
+        this.emitEvent("compiled", this._compileReason);
+        this._needsRecompile = false;
+        this._compileReason = "none";
+        this._compileCount++;
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
     }
 
     error(e)
@@ -367,7 +376,6 @@ export class CgpShader extends CgShader
     {
         this._uniforms.push(uni);
         this.setWhyCompile("add uniform " + name);
-        this._needsRecompile = true;
     }
 
     getUniform(name)
@@ -419,7 +427,6 @@ export class CgpShader extends CgShader
         console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         this.setWhyCompile("copy");
-        shader._needsRecompile = true;
         return shader;
     }
 
@@ -466,5 +473,18 @@ export class CgpShader extends CgShader
         if (stage == GPUShaderStage.VERTEX) return "vertex";
         if (stage == GPUShaderStage.COMPUTE) return "compute";
 
+    }
+
+    getInfo()
+    {
+        return {
+            "class": this.constructor.name,
+            "name": this._name,
+            "lastCompileReason": this.#lastCompileReason,
+            "compileCount": this._compileCount,
+            "numUniforms": this.uniforms.length,
+            "numDefines": this._defines.length,
+            "isCompute": this.options.compute
+        };
     }
 }

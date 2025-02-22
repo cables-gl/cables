@@ -1,13 +1,13 @@
 const
     inObj = op.inObject("Profiler Data"),
-
     inRender = op.inSwitch("Render", ["Patch", "Canvas", "Both"], "Patch"),
     inWidth = op.inInt("Width", 500),
     inHeight = op.inInt("Height", 200),
     expEle = op.inBool("Expand elements", true),
+    inUpdate = op.inTriggerButton("Update"),
     outCanvas = op.outObject("Canvas", null, "element"),
     outTotalDur = op.outNumber("Duration"),
-    inUpdate = op.inTriggerButton("Update");
+    outInfo = op.outObject("Data");
 
 op.setUiAttrib({ "height": 100, "width": 500, "resizable": true });
 
@@ -26,10 +26,12 @@ let render2Canvas = false;
 let canvasWidth = 0;
 let canvasHeight = 0;
 let pixelDensity = 1;
+let fontMultiply = 1;
 let hovering = false;
 let mulY = 1;
 let maxPosy = 0;
 let padd = 7;
+let clicked = {};
 
 inRender.onChange = updateUi;
 inHeight.onChange = inWidth.onChange = setupCanvas;
@@ -62,18 +64,18 @@ inUpdate.onTriggered = () =>
 {
     doUpdate = true;
 
-    if (render2Canvas && inObj.get() && inObj.get().root)
+    if (render2Canvas)
     {
         const layer = { "width": inWidth.get(), "height": inHeight.get(), "x": 0, "y": 0 };
         const ctx = canvas.getContext("2d");
-
-        totalDur = inObj.get().root.dur;
-        // console.log(inObj.get());
-        // console.log(inObj.get().root.dur)
         clear(ctx, layer);
-        drawBranch(ctx, layer, inObj.get().root, 0, 0);
-        outCanvas.set(null);
-        outCanvas.set(canvas);
+
+        if (inObj.get() && inObj.get().root)
+        {
+            totalDur = inObj.get().root.dur;
+            drawBranch(ctx, layer, inObj.get().root, 0, 0);
+            outCanvas.setRef(canvas);
+        }
     }
 
     outTotalDur.set(totalDur);
@@ -113,17 +115,16 @@ let hoverH = 0;
 function itemHeight(b)
 {
     let lines = 1;
-    if (b.txt)lines += b.txt.length;
+    // if (b.txt)lines += b.txt.length;
     let rowHeight = ((lines + 1) * 14) * pixelDensity + padd + padd;
     return rowHeight;
 }
 
-function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, viewBox)
+function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, viewBox, mouseState)
 {
     if (!b) return;
 
     colorCycle++;
-    colorCycle %= (colors.length);
 
     // let lines = 1;
     let rowHeight = itemHeight(b) * mulY;// ((lines + 1) * 14) * pixelDensity + padd + padd+(mulY);
@@ -137,15 +138,32 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
         viewBox.mouseY * pixelDensity > layer.y + posy &&
         viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
     {
+        hoverX = layer.x + posx;
+        hoverY = layer.y + posy;
+        hoverW = layer.width;
+
+        if (mouseState.getButton() == 1)
+        {
+            clicked = { "count": colorCycle, "task": b.task, "name": String(b.name) };
+        }
+    }
+
+    // if (clicked &&
+    //     clicked.x ==posx &&
+    //     clicked.y ==posy)
+    if (clicked && String(b.name) == clicked.name && b.task == clicked.task && colorCycle == clicked.count)
+    {
         hoverele = b;
         hover = true;
         hovering = b;
-        w = layer.width - posx;
 
-        hoverX = layer.x + posx;
-        hoverY = layer.y + posy;
-        hoverW = w;
-        hoverH = rowHeight;
+        outInfo.setRef(
+            {
+                "task": b.task,
+                "name": b.name,
+                "duration": b.dur,
+                "data": b.data
+            });
     }
 
     let region = new Path2D();
@@ -159,12 +177,12 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
         ctx.clip(region, "evenodd");
     }
 
-    ctx.fillStyle = colors[colorCycle];
+    ctx.fillStyle = colors[colorCycle % colors.length];
     ctx.fillRect(
         layer.x + posx, posy + layer.y,
         w, rowHeight);
 
-    let fontSize = 12 * pixelDensity;
+    let fontSize = 12 * pixelDensity * fontMultiply;
     ctx.fillStyle = "#f0d164";
     ctx.font = "bold " + fontSize + "px sourceCodePro";
 
@@ -174,21 +192,21 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
     for (let i = 0; i < b.childs.length; i++)
         nBranchDur += b.childs[i].dur;
 
-    ctx.fillText(b.name, layer.x + posx + padd + 5, layer.y + posy + fontSize + padd);
+    ctx.fillText(b.task, layer.x + posx + padd + 5, layer.y + posy + fontSize + padd);
     // ctx.fillText(durs, layer.x + posx + padd, layer.y + posy + fontSize + fontSize * 1.2 + padd);
-    if (b.txt)
+    if (b.name)
     {
         ctx.fillStyle = "#ccc";
-        ctx.font = "normal " + 12 * pixelDensity + "px sourceCodePro";
+        ctx.font = "normal " + 12 * fontMultiply * pixelDensity + "px sourceCodePro";
 
-        for (let i = 0; i < b.txt.length; i++)
-            ctx.fillText(b.txt[i], layer.x + posx + padd + 15, layer.y + posy + fontSize + fontSize * (i + 1) * 1.3 + padd);
+        if (typeof b.name == "string")
+            ctx.fillText(b.name, layer.x + posx + padd + 5, layer.y + posy + fontSize + fontSize * (1) * 1.3 + padd);
     }
 
     // outline
     if (hover)ctx.strokeStyle = "#ffffff";
     else ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.rect(
         layer.x + posx, posy + layer.y,
@@ -197,13 +215,11 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
 
     ctx.restore();
 
-    // if (nBranchDur)ctx.fillText("child durs " + Math.round(nBranchDur / b.dur * 100) + "%", layer.x + posx + padd, layer.y + posy + fontSize + fontSize + fontSize * 1.2 + padd);
-
     let xadd = 0;
 
     for (let i = 0; i < b.childs.length; i++)
     {
-        drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd, posy + rowHeight, w, branchWidth / b.childs.length, viewBox);
+        drawBranch(ctx, layer, b.childs[i], level + 1, posx + xadd, posy + rowHeight, w, branchWidth / b.childs.length, viewBox, mouseState);
 
         if (expEle.get()) xadd += branchWidth / b.childs.length;
         else xadd += getWidth(layer, b.childs[i].dur);
@@ -243,7 +259,6 @@ op.renderVizLayer = (ctx, layer, viz) =>
     calcHeight(root, 0);
 
     mulY = (layer.height + 20) / maxPosy / 1.5; // why these magic numbers
-    // console.log(maxPosy, layer.height, mulY);
 
-    drawBranch(ctx, layer, root, 0, 0, 0, 0, layer.width, viz._glPatch.viewBox);
+    drawBranch(ctx, layer, root, 0, 0, 0, 0, layer.width, viz._glPatch.viewBox, viz._glPatch.mouseState);
 };
