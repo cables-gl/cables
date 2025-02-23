@@ -9,6 +9,9 @@ import { Port } from "../core_port.js";
  * @property {Number} numId
  * @property {String} group
  * @property {String} prefix
+ * @property {Number} priority
+ * @property {String} srcBodyFrag
+ * @property {String} srcBodyVert
  */
 
 class CgShader extends Events
@@ -45,6 +48,16 @@ class CgShader extends Events
     {
         this._compileReason = reason;
         this._needsRecompile = true;
+    }
+
+    getWhyCompile()
+    {
+        return this._compileReason;
+    }
+
+    needsRecompile()
+    {
+        return this._needsRecompile;
     }
 
     /**
@@ -155,12 +168,14 @@ class CgShader extends Events
         }
     }
 
+    /**
+     * @param {any} modId
+     */
     hasModule(modId)
     {
         for (let i = 0; i < this._modules.length; i++)
-        {
             if (this._modules[i].id == modId) return true;
-        }
+
         return false;
     }
 

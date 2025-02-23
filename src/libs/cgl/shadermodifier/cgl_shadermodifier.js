@@ -29,6 +29,10 @@ class ShaderModifier
         }
     }
 
+    /**
+     * @param {CglShader} curShader
+     * @param {CglShader} pushShader
+     */
     bind(curShader, pushShader)
     {
         const shader = curShader || this._cgl.getShader();
@@ -42,10 +46,10 @@ class ShaderModifier
             if (!this._boundShader.shader.hasModule(this._mods[0].id)) missingMod = true;
         }
 
-        if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
+        if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader.needsRecompile())
         {
             if (this._boundShader) this._boundShader.shader.dispose();
-            if (shader._needsRecompile) shader.compile();
+            if (shader.needsRecompile()) shader.compile();
             this.needsTexturePush = true;
 
             this._boundShader = this._origShaders[shader.id] =
@@ -272,7 +276,6 @@ class ShaderModifier
         return false;
     }
 
-
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
         if (!this._getUniform(name))
@@ -442,7 +445,6 @@ class ShaderModifier
         }
     }
 
-
     getPrefixedName(name)
     {
         const prefix = this._mods[0].group;
@@ -473,7 +475,6 @@ class ShaderModifier
             shader.toggleDefine(name, this._definesToggled[i]);
         }
     }
-
 
     _updateDefines()
     {
@@ -518,6 +519,5 @@ class ShaderModifier
 
     }
 }
-
 
 export { ShaderModifier };

@@ -150,16 +150,12 @@ class CglShader extends CgShader
     }
 
     /**
-     * enable an extension for the shader
-     * @function enableExtension
-     * @memberof Shader
-     * @instance
-     * @param name extension name
+     * @param {string} name
      */
     enableExtension(name)
     {
         this.setWhyCompile("enable extension " + name);
-        this._needsRecompile = true;
+
         this._extensions.push(name);
     }
 
@@ -247,8 +243,7 @@ class CglShader extends CgShader
             u.resetLoc();
         }
 
-        this.setWhyCompile("copy");
-        shader._needsRecompile = true;
+        shader.setWhyCompile("copy");
         return shader;
     }
 
@@ -259,15 +254,14 @@ class CglShader extends CgShader
      * @instance
      * @param {String} srcVert
      * @param {String} srcFrag
-     * @param {Bool} fromUserInteraction
+     * @param {Boolean} fromUserInteraction
      */
-    setSource(srcVert, srcFrag, fromUserInteraction)
+    setSource(srcVert, srcFrag, fromUserInteraction = false)
     {
         this._fromUserInteraction = fromUserInteraction;
         this.srcVert = srcVert;
         this.srcFrag = srcFrag;
         this.setWhyCompile("Source changed");
-        this._needsRecompile = true;
         this._isValid = true;
     }
 
@@ -529,65 +523,37 @@ class CglShader extends CgShader
             this._log.warn("[cgl shader] has no fragment source!", this._name, this);
             this.srcVert = getDefaultVertexShader();
             this.srcFrag = getDefaultFragmentShader();
-            // return;
         }
 
-        if (this.glslVersion == 300)
-        {
-            vs = "#version 300 es"
-                .endl() + "// "
-                .endl() + "// vertex shader " + this._name
-                .endl() + "// "
-                .endl() + "precision " + this.precision + " float;"
-                .endl() + "precision " + this.precision + " sampler2D;"
-                .endl() + ""
-                .endl() + "#define WEBGL2"
-                .endl() + "#define texture2D texture"
-                .endl() + "#define UNI uniform"
-                .endl() + "#define IN in"
-                .endl() + "#define OUT out"
-                .endl();
+        vs = "#version 300 es"
+            .endl() + "// "
+            .endl() + "// vertex shader " + this._name
+            .endl() + "// "
+            .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " sampler2D;"
+            .endl() + ""
+            .endl() + "#define WEBGL2"
+            .endl() + "#define texture2D texture"
+            .endl() + "#define UNI uniform"
+            .endl() + "#define IN in"
+            .endl() + "#define OUT out"
+            .endl();
 
-            fs = "#version 300 es"
-                .endl() + "// "
-                .endl() + "// fragment shader " + this._name
-                .endl() + "// "
-                .endl() + "precision " + this.precision + " float;"
-                .endl() + "precision " + this.precision + " sampler2D;"
-                .endl() + ""
-                .endl() + "#define WEBGL2"
-                .endl() + "#define texture2D texture"
-                .endl() + "#define IN in"
-                .endl() + "#define OUT out"
-                .endl() + "#define UNI uniform"
-                .endl() + "{{DRAWBUFFER}}"
+        fs = "#version 300 es"
+            .endl() + "// "
+            .endl() + "// fragment shader " + this._name
+            .endl() + "// "
+            .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " sampler2D;"
+            .endl() + ""
+            .endl() + "#define WEBGL2"
+            .endl() + "#define texture2D texture"
+            .endl() + "#define IN in"
+            .endl() + "#define OUT out"
+            .endl() + "#define UNI uniform"
+            .endl() + "{{DRAWBUFFER}}"
 
-                .endl();
-        }
-        else
-        {
-            fs = ""
-                .endl() + "// "
-                .endl() + "// fragment shader " + this._name
-                .endl() + "// "
-                .endl() + "#define WEBGL1"
-                .endl() + "#define texture texture2D"
-                .endl() + "#define outColor gl_FragColor"
-                .endl() + "#define IN varying"
-                .endl() + "#define UNI uniform"
-                .endl();
-
-            vs = ""
-                .endl() + "// "
-                .endl() + "// vertex shader " + this._name
-                .endl() + "// "
-                .endl() + "#define WEBGL1"
-                .endl() + "#define texture texture2D"
-                .endl() + "#define OUT varying"
-                .endl() + "#define IN attribute"
-                .endl() + "#define UNI uniform"
-                .endl();
-        }
+            .endl();
 
         let uniformsStrVert = "\n// cgl generated".endl();
         let uniformsStrFrag = "\n// cgl generated".endl();
@@ -666,12 +632,6 @@ class CglShader extends CgShader
 
         let srcHeadVert = "";
         let srcHeadFrag = "";
-
-        // testing if this breaks things...
-        // this._modules.sort(function (a, b)
-        // {
-        //     return a.group - b.group;
-        // });
 
         this._modules.sort(function (a, b)
         {
@@ -805,14 +765,7 @@ class CglShader extends CgShader
         this._needsRecompile = false;
         this.lastCompile = now();
 
-        // this._cgl.printError("shader compile");
-
         this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
-    }
-
-    hasChanged()
-    {
-        return this._needsRecompile;
     }
 
     bind()
@@ -821,7 +774,7 @@ class CglShader extends CgShader
 
         MESH.lastShader = this;
 
-        if (!this._program || this._needsRecompile) this.compile();
+        if (!this._program || this.needsRecompile()) this.compile();
         if (!this._isValid) return;
 
         if (!this._projMatrixUniform && !this.ignoreMissingUniforms)
@@ -940,11 +893,6 @@ class CglShader extends CgShader
         this._program = null;
     }
 
-    needsRecompile()
-    {
-        return this._needsRecompile;
-    }
-
     setDrawBuffers(arr)
     {
         this._log.warn("useless drawbuffers...?!");
@@ -996,7 +944,6 @@ class CglShader extends CgShader
                 this._uniforms.splice(i, 1);
             }
         }
-        this._needsRecompile = true;
         this.setWhyCompile("remove uniform " + name);
     }
 
@@ -1004,7 +951,6 @@ class CglShader extends CgShader
     {
         this._uniforms.push(uni);
         this.setWhyCompile("add uniform " + name);
-        this._needsRecompile = true;
     }
 
     /**
@@ -1183,6 +1129,9 @@ class CglShader extends CgShader
         return uniforms;
     }
 
+    /**
+     * @param {String} name
+     */
     hasUniform(name)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -1192,6 +1141,10 @@ class CglShader extends CgShader
         return false;
     }
 
+    /**
+     * @param {String} vstr
+     * @param {String} fstr
+     */
     _createProgram(vstr, fstr)
     {
         this._cgl.printError("before _createprogram");
@@ -1239,7 +1192,6 @@ class CglShader extends CgShader
         this._cgl.gl.linkProgram(program);
         this._cgl.printError("gl.linkprogram");
         this._isValid = true;
-
         this._hasErrors = false;
 
         if (this._cgl.patch.config.glValidateShader !== false)
@@ -1284,7 +1236,6 @@ class CglShader extends CgShader
     setFeedbackNames(names)
     {
         this.setWhyCompile("setFeedbackNames");
-        this._needsRecompile = true;
         this._feedBackNames = names;
     }
 
@@ -1304,7 +1255,7 @@ class CglShader extends CgShader
             if (this._attributes[i].name == attr.name && this._attributes[i].nameFrag == attr.nameFrag) return;
         }
         this._attributes.push(attr);
-        this._needsRecompile = true;
+
         this.setWhyCompile("addAttribute");
     }
 

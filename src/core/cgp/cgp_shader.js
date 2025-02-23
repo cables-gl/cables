@@ -35,8 +35,10 @@ export class CgpShader extends CgShader
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
         this.gpuShaderModule = null;
-        this.bindingCounter = -1;
-        this.bindCountlastFrame = -1;
+        this.frameUsageCounter = -1;
+        this.lastFrameUsageCounter = 0;
+
+        this.frameUsageFrame = -1;
         this._bindingIndexCount = 0;
         this._compileCount = 0;
 
@@ -51,12 +53,12 @@ export class CgpShader extends CgShader
 
         if (!this.options.compute)
         {
-            this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNextBindingCounter() });
-            this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "shader": this, "stage": GPUShaderStage.FRAGMENT, "bindingType": "uniform", "index": this.getNextBindingCounter() });
+            this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
+            this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "shader": this, "stage": GPUShaderStage.FRAGMENT, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
         }
         else
         {
-            // this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this._bindingIndexCount++ });
+            this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "shader": this, "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
         }
 
         if (!this.options.compute)
@@ -101,19 +103,24 @@ export class CgpShader extends CgShader
         return this._name;
     }
 
-    getNextBindingCounter()
+    getFrameUsageCount()
     {
-        if (this.bindCountlastFrame != this._cgp.frame) this.bindingCounter = 0;
-        else this.bindingCounter++;
-        this.bindCountlastFrame = this._cgp.frame;
 
-        return this.bindingCounter;
+        if (this.frameUsageFrame != this._cgp.frame)
+        {
+            this.lastFrameUsageCounter = this.frameUsageCounter;
+            this.frameUsageCounter = 0;
+        }
+        else this.frameUsageCounter++;
+        this.frameUsageFrame = this._cgp.frame;
+
+        return this.frameUsageCounter;
     }
 
-    // getNewBindingIndex()
-    // {
-    //     return ++this._bindingIndexCount;
-    // }
+    getNewBindingGroupIndex()
+    {
+        return ++this._bindingIndexCount;
+    }
 
     setSource(src)
     {
@@ -480,6 +487,7 @@ export class CgpShader extends CgShader
         return {
             "class": this.constructor.name,
             "name": this._name,
+            "frameUsageCounter": this.lastFrameUsageCounter,
             "lastCompileReason": this.#lastCompileReason,
             "compileCount": this._compileCount,
             "numUniforms": this.uniforms.length,

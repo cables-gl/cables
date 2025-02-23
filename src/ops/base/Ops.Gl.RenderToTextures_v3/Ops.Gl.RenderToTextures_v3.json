@@ -199,5 +199,6 @@
     "coreLibs": [
         "cgl_rendertargets",
         "cgl_shadermodifier"
-    ]
+    ],
+    "license": "MIT"
 }
