@@ -270,7 +270,7 @@ export class Pipeline
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("pipe updateUniforms", this.#name, { "shader": shader.getInfo() });
 
-            console.log("shader.frameUsageCounter", shader.frameUsageCounter);
+            // console.log("shader.frameUsageCounter", shader.frameUsageCounter);
 
             if (!this.#bindingInstances[shader.frameUsageCounter])
             {
@@ -346,16 +346,19 @@ export class Pipeline
 
             // console.log("shader.bindingCounter", shader.bindingCounter, this.#bindGroups.length);
 
-            for (let i = 0; i < this.#bindingInstances.length; i++)
-            {
-                // console.log("stBG", i, this.#bindGroups[i]);
-                if (!this.#bindingInstances[i])
-                {
-                    console.log("bindgroup " + i + " is undefined?!");
-                    return;
-                }
-                this.#cgp.passEncoder.setBindGroup(i, this.#bindingInstances[i]);
-            }
+            // for (let i = 0; i < this.#bindingInstances.length; i++)
+            // {
+            //     // console.log("stBG", i, this.#bindGroups[i]);
+            //     if (!this.#bindingInstances[i])
+            //     {
+            //         console.log("bindgroup " + i + " is undefined?!");
+            //         // return;
+            //     }
+            //     else
+            //         this.#cgp.passEncoder.setBindGroup(i, this.#bindingInstances[i]);
+            // }
+
+            this.#cgp.passEncoder.setBindGroup(0, this.#bindingInstances[shader.frameUsageCounter]);
 
             if (this.#bindingInstances.length == 0)
             {
@@ -365,7 +368,7 @@ export class Pipeline
             {
                 passEnc.setPipeline(this.#renderPipeline);
 
-                this._bindUniforms(shader, shader.getFrameUsageCount());
+                this._bindUniforms(shader, shader.frameUsageCounter);
             }
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();

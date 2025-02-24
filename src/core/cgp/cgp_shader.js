@@ -112,7 +112,7 @@ export class CgpShader extends CgShader
         return this._name;
     }
 
-    getFrameUsageCount()
+    incFrameUsageCount()
     {
         if (this.frameUsageFrame != this._cgp.frame)
         {
@@ -270,6 +270,8 @@ export class CgpShader extends CgShader
 
     bind()
     {
+
+        this.incFrameUsageCount();
         if (!this.options.compute)
         {
             this.uniModelMatrix.setValue(this._cgp.mMatrix);

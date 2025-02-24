@@ -45,7 +45,6 @@ export class Binding
      * Description
      * @param {CgpContext} cgp
      * @param {String} name
-     * @param {CgpShader} shader
      * @param {CgpBindingOptions} [options]
      */
     constructor(cgp, name, options)
