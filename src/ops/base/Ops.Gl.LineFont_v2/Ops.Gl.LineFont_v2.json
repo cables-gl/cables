@@ -20,6 +20,11 @@
             {
                 "type": 0,
                 "name": "align index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "subType": "integer"
             },
             {
@@ -37,8 +42,6 @@
     },
     "summary": "A Simple way to write text on the screen.",
     "youtubeid": "",
-
-
     "docs": {
         "ports": []
     },
@@ -54,5 +57,6 @@
             "date": 1629396876653
         }
     ],
-    "exampleProjectId": "1JzPLu"
+    "exampleProjectId": "1JzPLu",
+    "license": "MIT"
 }
