@@ -2,6 +2,7 @@ import { Logger } from "cables-shared-client";
 import { Pipeline } from "./cgp_pipeline.js";
 import { CgMesh } from "../cg/cg_mesh.js";
 import { Geometry } from "../cg/cg_geom.js";
+import { CgpShader } from "./cgp_shader.js";
 
 export class CgpMesh extends CgMesh
 {
@@ -111,12 +112,15 @@ export class CgpMesh extends CgMesh
         return attr;
     }
 
+    /**
+     * @param {CgpShader} shader
+     */
     render(shader)
     {
         if (!this._positionBuffer) return;
         if (this.instances <= 0) return;
 
-        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh", "geom " + this._geom.name);
+        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh.render()", "geom " + this._geom.name);
 
         shader = shader || this._cgp.getShader();
         if (shader)shader.bind();
@@ -132,12 +136,12 @@ export class CgpMesh extends CgMesh
 
         if (this._pipe.isValid)
         {
-            if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh draw", "geom " + this._geom.name, {
+            if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh.render().draw", "geom " + this._geom.name, {
                 "geom ": this._geom.getInfo(),
                 "shader ": shader.getInfo(),
                 "numAttributes": this._attributes.length
             });
-
+            // console.log(this._positionBuffer);
             this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
             for (let i = 0; i < this._attributes.length; i++)
                 this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);

@@ -28,7 +28,7 @@ export class Pipeline
     bindGroupLayout = null;
 
     /** @type {Array<GPUBindGroup>} */
-    #bindGroups = [];
+    #bindingInstances = [];
 
     /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
     #passEncoder;
@@ -96,7 +96,7 @@ export class Pipeline
             "name": this.#name,
             "rebuildReason": this.lastRebuildReason,
             "rebuildCount": this.rebuildCount,
-            "numBindgroups": this.#bindGroups.length,
+            "numBindgroups": this.#bindingInstances.length,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries,
         };
 
@@ -144,6 +144,7 @@ export class Pipeline
         if (this.#old.shader != shader)
         {
             this.setShaderListener(this.#old.shader, shader);
+            console.log("shader changed?!@");
             needsRebuildReason = "shader changed";
         }
 
@@ -212,7 +213,7 @@ export class Pipeline
             console.log("rebuild pipe", needsRebuildReason);
             this.#cgp.pushErrorScope("createPipeline", { "logger": this.#log });
 
-            this.#bindGroups = [];
+            this.#bindingInstances = [];
 
             this.#pipeCfg = this.getPipelineObject(shader);
             console.log(this.#pipeCfg);
@@ -269,8 +270,11 @@ export class Pipeline
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("pipe updateUniforms", this.#name, { "shader": shader.getInfo() });
 
-            if (!this.#bindGroups[0])
+            console.log("shader.frameUsageCounter", shader.frameUsageCounter);
+
+            if (!this.#bindingInstances[shader.frameUsageCounter])
             {
+                console.log("create bindgroups....");
                 const bindingGroupEntries = [];
 
                 if (this.#type == Pipeline.TYPE_RENDER && shader.bindingsVert)
@@ -322,7 +326,7 @@ export class Pipeline
                 try
                 {
                     // TODO bindgroup counter somehow ?!?!?!??!
-                    this.#bindGroups[0] = this.#cgp.device.createBindGroup(bg);
+                    this.#bindingInstances[shader.frameUsageCounter] = this.#cgp.device.createBindGroup(bg);
 
                 }
                 catch (e)
@@ -342,18 +346,18 @@ export class Pipeline
 
             // console.log("shader.bindingCounter", shader.bindingCounter, this.#bindGroups.length);
 
-            for (let i = 0; i < this.#bindGroups.length; i++)
+            for (let i = 0; i < this.#bindingInstances.length; i++)
             {
                 // console.log("stBG", i, this.#bindGroups[i]);
-                if (!this.#bindGroups[i])
+                if (!this.#bindingInstances[i])
                 {
                     console.log("bindgroup " + i + " is undefined?!");
                     return;
                 }
-                this.#cgp.passEncoder.setBindGroup(i, this.#bindGroups[i]);
+                this.#cgp.passEncoder.setBindGroup(i, this.#bindingInstances[i]);
             }
 
-            if (this.#bindGroups.length == 0)
+            if (this.#bindingInstances.length == 0)
             {
                 console.warn("No effing bindgroups...");
             }
@@ -392,10 +396,10 @@ export class Pipeline
             for (let i = 0; i < shader.bindingsVert.length; i++)
             {
                 // if (shader.bindingsVert[i] && shader.bindingsVert[i].getSizeBytes() > 0)
-                {
-                    const entry = shader.bindingsVert[i].getBindingGroupLayoutEntry();
-                    if (entry) this.bindingGroupLayoutEntries.push(entry);
-                }
+                // {
+                const entry = shader.bindingsVert[i].getBindingGroupLayoutEntry();
+                if (entry) this.bindingGroupLayoutEntries.push(entry);
+                // }
                 // else this.#log.log("shader defaultBindingVert size 0");
             }
 
@@ -403,10 +407,10 @@ export class Pipeline
             for (let i = 0; i < shader.bindingsFrag.length; i++)
             {
                 // if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
-                {
-                    const entry = shader.bindingsFrag[i].getBindingGroupLayoutEntry();
-                    if (entry) this.bindingGroupLayoutEntries.push(entry);
-                }
+                // {
+                const entry = shader.bindingsFrag[i].getBindingGroupLayoutEntry();
+                if (entry) this.bindingGroupLayoutEntries.push(entry);
+                // }
                 // else this.#log.log("shader defaultBindingFrag size 0");
             }
 
@@ -416,10 +420,10 @@ export class Pipeline
                 console.log("bindingsCompute", i, shader.bindingsCompute[i]);
 
                 // if (shader.bindingsCompute[i] && shader.bindingsCompute[i].getSizeBytes() > 0)
-                {
-                    const entry = shader.bindingsCompute[i].getBindingGroupLayoutEntry();
-                    if (entry) this.bindingGroupLayoutEntries.push(entry);
-                }
+                // {
+                const entry = shader.bindingsCompute[i].getBindingGroupLayoutEntry();
+                if (entry) this.bindingGroupLayoutEntries.push(entry);
+                // }
                 // else this.#log.log("shader defaultBindingCompute size 0");
             }
         // //////////
@@ -546,17 +550,17 @@ export class Pipeline
 
         if (this.#type == Pipeline.TYPE_RENDER)
         {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms vert", { "bindings": this.getBindingsInfo(shader.bindingsVert) });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms vert", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsVert) });
             for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(inst);
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
 
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms frag", { "bindings": this.getBindingsInfo(shader.bindingsFrag) });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms frag", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
             for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(inst);
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
         if (this.#type == Pipeline.TYPE_COMPUTE)
         {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms compute", { "bindings": this.getBindingsInfo(shader.bindingsFrag) });
+            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms compute", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
             for (let i = 0; i < shader.bindingsCompute.length; i++) shader.bindingsCompute[i].update(inst);
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
         }
@@ -592,7 +596,7 @@ export class Pipeline
         this.#passEncoder.setPipeline(this.#renderPipeline);
 
         // TODO BINDGROUPCOUNTER?!
-        this.#passEncoder.setBindGroup(0, this.#bindGroups[0]);
+        this.#passEncoder.setBindGroup(0, this.#bindingInstances[0]);
 
         if (workGroups.length == 1) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8);
         if (workGroups.length == 2) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);

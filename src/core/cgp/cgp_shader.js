@@ -35,10 +35,10 @@ export class CgpShader extends CgShader
         if (!_name) this._log.stack("no shader name given");
         this._name = _name || "unknown";
         this.gpuShaderModule = null;
-        this.frameUsageCounter = -1;
-        this.lastFrameUsageCounter = 0;
-
+        this.frameUsageCounter = 0;
+        this.lastFrameUsageCounter = -2;
         this.frameUsageFrame = -1;
+
         this._bindingIndexCount = 0;
         this._compileCount = 0;
 
