@@ -17,6 +17,7 @@ export class Binding
 {
     #name = "";
     #options = {};
+    #id = CABLES.simpleId();
 
     /** @type {CgpContext} */
     #cgp = null;
@@ -44,7 +45,6 @@ export class Binding
      * Description
      * @param {CgpContext} cgp
      * @param {String} name
-     * @param {CgpShader} shader
      * @param {CgpBindingOptions} [options]
      */
     constructor(cgp, name, options)
@@ -89,7 +89,16 @@ export class Binding
 
     getInfo()
     {
-        return { "class": this.constructor.name, "name": this.#name, "stage": this.getStageString(), "bindingType": this.bindingType, "numUniforms": this.uniforms.length, "bindingIndex": this.getBindingIndex() };
+        return {
+            "class": this.constructor.name,
+            "name": this.#name,
+            "id": this.#id,
+            "stage": this.getStageString(),
+            "bindingType": this.bindingType,
+            "numUniforms": this.uniforms.length,
+            "bindingIndex": this.getBindingIndex(),
+            "numInstances": this.bindingInstances.length
+        };
     }
 
     getBindingIndex()
@@ -307,6 +316,7 @@ export class Binding
             "visibility": this.stage
         };
 
+        this.bindingInstances[inst] = o;
         // if (this.uniforms.length == 0)
         // {
         //     console.log("binding uniforms length 0", this);
@@ -354,8 +364,6 @@ export class Binding
         }
 
         this.isValid = true;
-
-        this.bindingInstances[inst] = o;
 
         // if (o.hasOwnProperty("resource"))
         // {
