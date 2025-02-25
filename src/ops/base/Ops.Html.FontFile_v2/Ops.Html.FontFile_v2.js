@@ -68,7 +68,7 @@ function addStyle(_doc)
     {
         if (doc.fonts)
         {
-            let url = "url(" + op.patch.getFilePath(String(filename.get())) + ")";
+            let url = "url(\"" + op.patch.getFilePath(String(filename.get())) + "\")";
             fontFaceObj = new FontFace(fontname.get(), url);
 
             loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get(), op);
