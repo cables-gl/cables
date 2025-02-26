@@ -1,5 +1,4 @@
 import path, { dirname } from "path";
-import glMatrix from "gl-matrix";
 import webpack from "webpack";
 import { fileURLToPath } from "url";
 import TerserPlugin from "terser-webpack-plugin";
@@ -62,7 +61,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
                 }
             ].filter(Boolean)
         },
-        "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
+        "externals": ["CABLES.UI"],
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [

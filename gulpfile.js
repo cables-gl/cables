@@ -7,7 +7,6 @@ import webpack from "webpack";
 
 import webpackConfig from "./webpack.config.js";
 import webpackLibsConfig from "./webpack.config.libs.js";
-import webpackExternalLibsConfig from "./webpack.config.libs_external.js";
 
 let configLocation = "../cables_api/cables.json";
 if (process.env.npm_config_apiconfig) configLocation = "../cables_api/cables_env_" + process.env.npm_config_apiconfig + ".json";
@@ -70,7 +69,7 @@ function _watch(done)
 {
     const watchOptions = { "usePolling": true, "ignored": (fileName) => { return fileName.includes("node_modules"); } };
     gulp.watch(["src/core/**/*", "../shared/client/**/*"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
-    gulp.watch("libs/**/*", watchOptions, gulp.series(_external_libs, _copy_ui));
+    gulp.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
     gulp.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
 }
@@ -155,24 +154,6 @@ function _core_libs(done)
     });
 }
 
-function _external_libs(done)
-{
-    getBuildInfo((buildInfo) =>
-    {
-        webpack(webpackExternalLibsConfig(isLiveBuild, buildInfo, true, analyze),
-            (err, stats) =>
-            {
-                if (err) throw err;
-                if (stats.hasErrors())
-                {
-                    done(new Error(getWebpackErrorMessage(stats)));
-                }
-                done();
-            }
-        );
-    });
-}
-
 /*
  * -------------------------------------------------------------------------------------------
  * MAIN TASKS
@@ -180,10 +161,7 @@ function _external_libs(done)
  */
 
 const defaultSeries = gulp.series(
-    gulp.parallel(
-        _external_libs,
-        _core_js
-    ),
+    _core_js,
     _core_libs_clean,
     _core_libs,
     _copy_ui,
