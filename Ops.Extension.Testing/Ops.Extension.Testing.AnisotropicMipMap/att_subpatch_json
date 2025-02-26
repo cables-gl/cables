@@ -8,7 +8,7 @@
           "x": 697.5935373074724,
           "y": 3485.9327380469513
         },
-        "subPatch": "pstinvel7",
+        "subPatch": "vd2vfz0bo",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -101,7 +101,7 @@
           "x": 695.5795482354401,
           "y": 2902.6658033071917
         },
-        "subPatch": "pstinvel7",
+        "subPatch": "vd2vfz0bo",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -158,7 +158,7 @@
           "x": 697.5935373074724,
           "y": 3614.8208086375084
         },
-        "subPatch": "pstinvel7",
+        "subPatch": "vd2vfz0bo",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -224,119 +224,10 @@
       ]
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "d8i2wa0kq",
-      "uiAttribs": {
-        "translate": {
-          "x": 757.5935373074724,
-          "y": 3300.530476098142
-        },
-        "loading": false,
-        "comment": null,
-        "subPatch": "pstinvel7",
-        "extendTitle": "uv",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/images/uv.png",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 5
-        },
-        {
-          "name": "Anisotropic",
-          "value": "16"
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "e7wron5zu",
-              "objOut": "d8i2wa0kq"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 1024
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "zvc8a2tfg",
       "uiAttribs": {
-        "subPatch": "pstinvel7",
+        "subPatch": "vd2vfz0bo",
         "translate": {
           "x": 695.5795482354401,
           "y": 2556.669415096536
@@ -364,7 +255,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "aghaejhso",
       "uiAttribs": {
-        "subPatch": "pstinvel7",
+        "subPatch": "vd2vfz0bo",
         "translate": {
           "x": 695.5795482354401,
           "y": 3694.8208086375084
@@ -373,6 +264,41 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+      "id": "s3a30xxzi",
+      "uiAttribs": {
+        "subPatch": "vd2vfz0bo",
+        "translate": {
+          "x": 757.5935373074724,
+          "y": 3365.172688682094
+        },
+        "extendTitle": "#texUv",
+        "title": "var get"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "texUv"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Value",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Value",
+              "objIn": "e7wron5zu",
+              "objOut": "s3a30xxzi"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "s3a30xxzi"
+      }
     }
   ]
 }

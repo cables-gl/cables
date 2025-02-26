@@ -8,7 +8,7 @@
           "x": 819.8598416628007,
           "y": 2897.7341285124808
         },
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -94,114 +94,6 @@
       ]
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "wnhmng4k4",
-      "uiAttribs": {
-        "translate": {
-          "x": 1059.8598416628006,
-          "y": 2757.7341285124808
-        },
-        "loading": false,
-        "subPatch": "fk0wpy1yr",
-        "extendTitle": "uv",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/images/uv.png",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": 0
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "ahbi1sjiw",
-              "objOut": "wnhmng4k4"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 1024
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
       "opId": "9e6328da-457d-4d80-a881-dcab25a0e0f8",
       "id": "sayvgu5nl",
       "uiAttribs": {
@@ -211,7 +103,7 @@
         },
         "comment": "set colorization to red",
         "color": "#5dc0fd",
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "extendTitle": "color (4f)",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -275,7 +167,7 @@
         },
         "comment": "use the same shader but with the beach texture",
         "color": "#5dc0fd",
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "extendTitle": "texDiffuse (t)",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -318,7 +210,7 @@
           "y": 2977.7341285124808
         },
         "comment": "draw rectangle with the uv test texture",
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -405,7 +297,7 @@
           "x": 819.8598416628007,
           "y": 3477.7341285124808
         },
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -471,7 +363,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "3ohp36xc1",
       "uiAttribs": {
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "translate": {
           "x": 819.8598416628007,
           "y": 2677.7341285124808
@@ -499,7 +391,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "l0f3aqqw2",
       "uiAttribs": {
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "translate": {
           "x": 819.8598416628007,
           "y": 3862.2687938601093
@@ -514,7 +406,7 @@
       "id": "pnjnz0k83",
       "uiAttribs": {
         "title": "var set",
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "translate": {
           "x": 1096.0502031554227,
           "y": 3782.2687938601093
@@ -534,7 +426,7 @@
       "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
       "id": "qdcixa5vr",
       "uiAttribs": {
-        "subPatch": "fk0wpy1yr",
+        "subPatch": "h9soj2e3m",
         "translate": {
           "x": 1108.0502031554227,
           "y": 3687.0842010530187
@@ -553,6 +445,10 @@
               "objOut": "qdcixa5vr"
             }
           ]
+        },
+        {
+          "name": "ShortName",
+          "value": "UniformFloat"
         }
       ]
     },
@@ -560,14 +456,16 @@
       "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
       "id": "b0k36f8np",
       "uiAttribs": {
-        "subPatch": "fk0wpy1yr",
+        "title": "var get",
+        "subPatch": "h9soj2e3m",
         "translate": {
           "x": 843.8598416628007,
           "y": 3340
         },
         "extendTitle": "#texBeach",
-        "title": "var get"
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
@@ -586,9 +484,41 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+      "id": "snd21mqs0",
+      "uiAttribs": {
+        "title": "var get",
+        "subPatch": "h9soj2e3m",
+        "translate": {
+          "x": 879.8598416628007,
+          "y": 2818.654264949384
+        },
+        "extendTitle": "#texUv"
+      },
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "texUv"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Value",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Value",
+              "objIn": "ahbi1sjiw",
+              "objOut": "snd21mqs0"
+            }
+          ]
+        }
       ],
       "storage": {
-        "ref": "b0k36f8np"
+        "ref": "snd21mqs0"
       }
     }
   ]
