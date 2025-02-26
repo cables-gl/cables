@@ -1,0 +1,59 @@
+{
+    "id": "36d24fce-190f-47ad-b206-9c858de13b96",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1734602523532
+        },
+        {
+            "message": "Add visible toggle input",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1740571150322
+        },
+        {
+            "message": "New version: element is an output, not an input, works better with ops like appendChild ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1740571736335
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1740571604531,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 0,
+                "name": "Border",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            },
+            {
+                "type": 2,
+                "name": "Element"
+            }
+        ]
+    },
+    "summary": "Add custom HTML Elements into the sidebar",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "CQrFox"
+}
