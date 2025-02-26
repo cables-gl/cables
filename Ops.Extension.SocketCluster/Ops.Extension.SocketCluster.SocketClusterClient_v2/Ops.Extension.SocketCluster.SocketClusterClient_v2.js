@@ -17,13 +17,15 @@
 
 let socket = null;
 
-
-
 op.setPortGroup("Server",[serverHostname,serverSecure,serverPort,serverPath]);
 
-activeIn.onChange = init;
-serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;
-op.init = init;
+op.init =
+    activeIn.onChange =
+    serverHostname.onChange =
+    serverPath.onChange =
+    serverPort.onChange =
+    serverSecure.onChange =
+    initSoon;
 
 function updateUi()
 {
@@ -31,6 +33,16 @@ function updateUi()
 
     if(ready.get())state="connected";
     op.setUiAttrib({ "extendTitle": state});
+}
+
+let toInit=null;
+function initSoon()
+{
+    clearTimeout(toInit);
+    toInit=setTimeout(()=>
+    {
+        init();
+    },100);
 }
 
 function init()
