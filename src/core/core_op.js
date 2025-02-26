@@ -27,7 +27,7 @@ export class Op extends Events
     static OP_VERSION_PREFIX = "_v";
 
     #objName = "";
-    #log = new Logger("core_op");
+    _log = new Logger("core_op");
     #name = "";
     #shortOpName = "";
 
@@ -142,7 +142,7 @@ export class Op extends Events
     set _objName(on)
     {
         this.#objName = on;
-        this.#log = new Logger("op " + on);
+        this._log = new Logger("op " + on);
     }
 
     get objName()
@@ -196,8 +196,8 @@ export class Op extends Events
     {
 
         /*
-         * this.#log.log("settitle", title);
-         * this.#log.log(
+         * this._log.log("settitle", title);
+         * this._log.log(
          *     (new Error()).stack
          * );
          */
@@ -275,9 +275,9 @@ export class Op extends Events
         if (!newAttribs) return;
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-            this.#log.warn("old ui error/warning attribute in " + this.#name + ", use op.setUiError !", newAttribs);
+            this._log.warn("old ui error/warning attribute in " + this.#name + ", use op.setUiError !", newAttribs);
 
-        if (typeof newAttribs != "object") this.#log.error("op.uiAttrib attribs are not of type object");
+        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
         let changed = false;
@@ -1398,7 +1398,7 @@ export class Op extends Events
 
     log()
     {
-        this.#log.log(...arguments);
+        this._log.log(...arguments);
     }
 
     /**
@@ -1406,12 +1406,12 @@ export class Op extends Events
      */
     error()
     {
-        this.#log.error(...arguments);
+        this._log.error(...arguments);
     }
 
     logError()
     {
-        this.#log.error(...arguments);
+        this._log.error(...arguments);
     }
 
     /**
@@ -1419,12 +1419,12 @@ export class Op extends Events
      */
     warn()
     {
-        this.#log.warn(...arguments);
+        this._log.warn(...arguments);
     }
 
     logWarn()
     {
-        this.#log.warn(...arguments);
+        this._log.warn(...arguments);
     }
 
     /**
@@ -1432,12 +1432,12 @@ export class Op extends Events
      */
     verbose()
     {
-        this.#log.verbose(...arguments);
+        this._log.verbose(...arguments);
     }
 
     logVerbose()
     {
-        this.#log.verbose(...arguments);
+        this._log.verbose(...arguments);
     }
 
     profile()
@@ -1489,7 +1489,7 @@ export class Op extends Events
         return false;
 
         /*
-         * this.#log.log("instanced", this.patch.instancing.numCycles());
+         * this._log.log("instanced", this.patch.instancing.numCycles());
          * if (this.patch.instancing.numCycles() === 0) return false;
          */
 
@@ -1573,7 +1573,7 @@ export class Op extends Events
     {
         //         if(this.isInstanced)
         //         {
-        //             this.#log.log('cancel instancing');
+        //             this._log.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
@@ -1590,7 +1590,7 @@ export class Op extends Events
         //                 {
         //
         //                     var i=0;
-        // // this.#log.log('trigger',this._instances.length);
+        // // this._log.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //
@@ -1605,7 +1605,7 @@ export class Op extends Events
     //     {
     //         const port = this.getPortByName(i);
     //         if (port) port.set(obj[i]);
-    //         else this.#log.warn("op.setValues: port not found:", i);
+    //         else this._log.warn("op.setValues: port not found:", i);
     //     }
     // }
 
@@ -1637,7 +1637,7 @@ export class Op extends Events
     // todo: remove
     // setError(id, txt)
     // {
-    //     this.#log.warn("old error message op.error() - use op.setUiError()");
+    //     this._log.warn("old error message op.error() - use op.setUiError()");
     // }
 
     /**
@@ -1667,7 +1667,7 @@ export class Op extends Events
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else this.#log.error("setPortGroup: invalid port!");
+                else this._log.error("setPortGroup: invalid port!");
         }
     }
 

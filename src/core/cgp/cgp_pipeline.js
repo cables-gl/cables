@@ -40,6 +40,7 @@ export class Pipeline
     lastRebuildReason = "first";
     rebuildCount = 0;
     profile = false;
+    #rebuildNumBindingGroups = false;
 
     profiler;
 
@@ -160,6 +161,11 @@ export class Pipeline
             mesh.needsPipelineUpdate = false;
         }
 
+        if (this.#rebuildNumBindingGroups)
+        {
+            needsRebuildReason = "num bindgroups wrong...";
+        }
+
         if (this.#pipeCfg)
         {
             if (this.#type == Pipeline.TYPE_RENDER)
@@ -214,6 +220,7 @@ export class Pipeline
             this.#cgp.pushErrorScope("createPipeline", { "logger": this.#log });
 
             this.#bindingInstances = [];
+            this.#rebuildNumBindingGroups = false;
 
             this.#pipeCfg = this.getPipelineObject(shader);
             console.log(this.#pipeCfg);
@@ -221,6 +228,7 @@ export class Pipeline
             this.#old.device = this.#cgp.device;
             this.#old.shader = shader;
             this.#old.mesh = mesh;
+            this.#isValid = true;
 
             try
             {
@@ -291,7 +299,6 @@ export class Pipeline
                 if (this.#type == Pipeline.TYPE_RENDER && shader.bindingsFrag)
                     for (let i = 0; i < shader.bindingsFrag.length; i++)
                     {
-                        console.log("bindings fraggggggggggg", i);
                         if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
                         {
                             const entry = shader.bindingsFrag[i].getBindingGroupEntry(shader.frameUsageCounter);
@@ -321,6 +328,9 @@ export class Pipeline
                 if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
                 {
                     this.#log.error("bindingGroupEntries.length!= this.bindingGroupLayoutEntries.length", bindingGroupEntries.length, this.bindingGroupLayoutEntries.length);
+                    this.#rebuildNumBindingGroups = true;
+                    this.#isValid = false;
+                    return;
                 }
 
                 try
