@@ -2,13 +2,13 @@ const
     parentPort = op.inObject("link"),
     inElement = op.inObject("Child Element", "element"),
     inItemStyle = op.inBool("Border", true),
+    inVisible = op.inBool("Visible", true),
     siblingsPort = op.outObject("childs");
 
 const el = document.createElement("div");
 el.dataset.op = op.id;
 el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
-// el.classList.add("sidebar__text");
 
 parentPort.onChange = onParentChanged;
 inElement.onChange = updateChild;
@@ -17,6 +17,11 @@ op.onDelete = onDelete;
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 let oldEle = null;
+
+inVisible.onChange = function ()
+{
+    el.style.display = inVisible.get() ? "block" : "none";
+};
 
 inItemStyle.onChange = () =>
 {

@@ -5,9 +5,13 @@ const
     inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
     inAlt = op.inString("Alt Text"),
+    filename2 = op.inUrl("Fallback File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
     outImage = op.outObject("Image Element", null, "element"),
     outWidth = op.outNumber("Width"),
-    outHeight = op.outNumber("Height");
+    outHeight = op.outNumber("Height"),
+    loading = op.outBoolNum("Loading"),
+    outError = op.outBoolNum("Error"),
+    outLoaded = op.outTrigger("Loaded");
 
 let element = op.patch.getDocument().createElement("img");
 
@@ -25,8 +29,14 @@ inStyle.onChange =
 filenameChanged();
 updateStyle();
 
+element.addEventListener("error", function (e)
+{
+    outError.set(true);
+});
+
 element.onload = () =>
 {
+    outError.set(false);
     if (element)
     {
         outWidth.set(element.width);
@@ -37,13 +47,21 @@ element.onload = () =>
         outWidth.set(0);
         outHeight.set(0);
     }
+    loading.set(false);
+    outLoaded.trigger();
 };
+
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
+    if (!url)
+    {
+        return;
+        outError.set(true);
+    }
+    outError.set(false);
 
-    if (cacheBuster)url = CABLES.cacheBust(url);
-
+    loading.set(true);
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     element.setAttribute("crossOrigin", "anonymous");

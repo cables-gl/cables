@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1734602523532
+        },
+        {
+            "message": "Add visible toggle input",
+            "type": "",
+            "author": "pandur",
+            "date": 1740571150322
         }
     ],
     "authorName": "pandur",
@@ -23,6 +29,11 @@
             {
                 "type": 0,
                 "name": "Border",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
                 "subType": "boolean"
             }
         ],

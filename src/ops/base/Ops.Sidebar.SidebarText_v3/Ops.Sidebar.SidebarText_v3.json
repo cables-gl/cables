@@ -18,6 +18,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1731928012091
+        },
+        {
+            "message": "Added visible toggle input",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1740570744747
         }
     ],
     "authorName": "pandur",
@@ -35,6 +41,11 @@
             {
                 "type": 5,
                 "name": "Id"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

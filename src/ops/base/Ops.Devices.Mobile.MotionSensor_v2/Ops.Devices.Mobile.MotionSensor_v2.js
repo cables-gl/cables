@@ -14,6 +14,7 @@ const
     rotRate1 = op.outNumber("Rotation Rate Alpha"),
     rotRate2 = op.outNumber("Rotation Rate Beta"),
     rotRate3 = op.outNumber("Rotation Rate Gamma"),
+    outPermissions = op.outString("Permissions", "no"),
 
     outObj = op.outObject("Object");
 
@@ -43,8 +44,7 @@ function handleDeviceMotion(event)
         rotRate2.set(event.rotationRate.beta || 0);
         rotRate3.set(event.rotationRate.gamma || 0);
 
-        outObj.set(null);
-        outObj.set(obj);
+        outObj.setRef(obj);
     }
 }
 
@@ -57,37 +57,38 @@ function handleDeviceOrientation(event)
         axis2.set((event.beta || 0) * mulAxis.get());
         axis3.set((event.gamma || 0) * mulAxis.get());
 
+        if (evt.webkitCompassHeading) axis1.set(this.deviceAngleDelta = 360 - evt.webkitCompassHeading);
+
         obj.OrientationAlpha = axis1.get();
         obj.OrientationBeta = axis2.get();
         obj.OrientationGamma = axis3.get();
 
-        outObj.set(null);
-        outObj.set(obj);
+        outObj.setRef(obj);
     }
 }
 
 req.onTriggered = function ()
 {
+    outPermissions.set("requested");
+
     if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission)
     {
         window.DeviceMotionEvent.requestPermission()
             .then((response) =>
             {
-                if (response == "granted")
-                {
-                    window.addEventListener("devicemotion", handleDeviceMotion, true);
-                }
-                // else
-                // console.log(response);
+                outPermissions.set(response);
+                if (response == "granted") window.addEventListener("devicemotion", handleDeviceMotion, true);
             })
             .catch((e) =>
             {
+                outPermissions.set("error: " + e.message);
                 console.error(e);
             });
 
         window.DeviceOrientationEvent.requestPermission()
             .then((response) =>
             {
+                outPermissions.set(response);
                 if (response == "granted")
                 {
                     window.addEventListener("deviceorientation", handleDeviceOrientation, true);
@@ -97,6 +98,7 @@ req.onTriggered = function ()
             })
             .catch((e) =>
             {
+                outPermissions.set("error: " + e.message);
                 console.error(e);
             });
     }
@@ -109,6 +111,7 @@ req.onTriggered = function ()
 
 if (window.self !== window.top)
 {
+    // outPermissions.set("iframe");
     op.setUiError("iframe", "MotionSensor does not work in an iframe, open the patch without an iframe to get it to work", 1);
     op.warn("MotionSensor does not work in an iframe, open the patch without an iframe to get it to work");
 }
