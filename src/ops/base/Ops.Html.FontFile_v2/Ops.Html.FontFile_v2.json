@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1723027224789
+        },
+        {
+            "message": "add quotes around css url",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1740477666259
         }
     ],
     "authorName": "pandur",
