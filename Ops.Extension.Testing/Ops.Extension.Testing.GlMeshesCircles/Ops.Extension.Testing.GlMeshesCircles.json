@@ -27,6 +27,12 @@
                 "uititle": "render"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "pfzicf9a4",
+                "uititle": "Frozen String"
+            }
+        ]
     }
 }

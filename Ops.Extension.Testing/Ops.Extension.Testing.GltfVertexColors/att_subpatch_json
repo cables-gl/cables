@@ -10,7 +10,7 @@
         },
         "accBuffersDelete": "vertexpaint_cube",
         "loading": false,
-        "subPatch": "zlhwsqt9x",
+        "subPatch": "kd7y69a2m",
         "extendTitle": "vertexpaint_cube",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -137,7 +137,7 @@
           "x": 826.1223022126512,
           "y": 899.941416955205
         },
-        "subPatch": "zlhwsqt9x",
+        "subPatch": "kd7y69a2m",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -157,12 +157,6 @@
               "portOut": "trigger",
               "objIn": "rx4awvnec",
               "objOut": "g0tkkv6eh"
-            },
-            {
-              "portIn": "Trigger",
-              "portOut": "trigger",
-              "objIn": "697locqi3",
-              "objOut": "g0tkkv6eh"
             }
           ]
         }
@@ -172,7 +166,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "xwhffn47h",
       "uiAttribs": {
-        "subPatch": "zlhwsqt9x",
+        "subPatch": "kd7y69a2m",
         "translate": {
           "x": 826.1223022126512,
           "y": 0
@@ -212,60 +206,19 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "w8560wqax",
       "uiAttribs": {
-        "subPatch": "zlhwsqt9x",
+        "subPatch": "kd7y69a2m",
         "translate": {
-          "x": 826.1223022126512,
-          "y": 1920.1201129174783
+          "x": 1089.204477578563,
+          "y": 1025.6407166733777
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
-      "storage": {}
-    },
-    {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "697locqi3",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "zlhwsqt9x",
-        "translate": {
-          "x": 1190.1035032477862,
-          "y": 657.4423812624927
-        },
-        "extendTitle": "#currentTestName",
-        "blueprintSubpatch2": true
-      },
       "storage": {},
       "portsIn": [
         {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ]
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "y4vpnt8ae",
-      "uiAttribs": {
-        "subPatch": "zlhwsqt9x",
-        "translate": {
-          "x": 1202.1035032477862,
-          "y": 561.0611120290235
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "697locqi3",
-              "objOut": "y4vpnt8ae"
-            }
-          ]
+          "name": "innerIn_omkvad0bg",
+          "title": "Frozen String"
         }
       ]
     }

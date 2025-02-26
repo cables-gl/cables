@@ -27,6 +27,17 @@
                 "uititle": "render"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "j4na3hfde",
+                "uititle": "Frozen String"
+            },
+            {
+                "type": 5,
+                "name": "x5xqdk8ov",
+                "uititle": "Frozen String"
+            }
+        ]
     }
 }

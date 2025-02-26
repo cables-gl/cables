@@ -25,8 +25,19 @@
                 "type": 1,
                 "name": "94uzkbsko",
                 "uititle": "render"
+            },
+            {
+                "type": 5,
+                "name": "150lmjbe5",
+                "uititle": "glb File"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "omkvad0bg",
+                "uititle": "Frozen String"
+            }
+        ]
     }
 }
