@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1574870824963
+            "date": 1574870824963,
+            "type": "new"
         },
         {
-            "message": "Ops.Devices.Mobile.MotionSensor2 renamed to Ops.Devices.Mobile.MotionSensor_v2",
+            "message": "Output status string of permissions",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1587359680382
+            "date": 1740419904960
         }
     ],
     "authorName": "pandur",
@@ -88,6 +90,10 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Permissions"
+            },
+            {
                 "type": 2,
                 "name": "Object"
             }
@@ -95,10 +101,10 @@
     },
     "summary": "get values from the device motion sensor mobile",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "dZ8wQ0"
+    "exampleProjectId": "dZ8wQ0",
+    "license": "MIT"
 }

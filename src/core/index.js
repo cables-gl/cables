@@ -1,3 +1,4 @@
+import { glMatrix, mat2, mat2d, mat3, mat4, quat, quat2, vec2, vec3, vec4 } from "gl-matrix";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
 import { Link } from "./core_link.js";
@@ -16,6 +17,18 @@ import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
 import { AnimKey } from "./anim_key.js";
 import { CGState, CgContext } from "./cg/cg_state.js";
+
+window.glMatrix = glMatrix;
+window.mat2 = mat2;
+window.mat2d = mat2d;
+window.mat3 = mat3;
+window.mat4 = mat4;
+window.quat = quat;
+window.quat2 = quat2;
+window.vec2 = vec2;
+
+window.vec3 = vec3;
+window.vec4 = vec4;
 
 window.CABLES = window.CABLES || {};
 

@@ -118,5 +118,9 @@
                 "name": "Moved"
             }
         ]
+    },
+    "summary": "Mouse replacement",
+    "docs": {
+        "ports": []
     }
 }

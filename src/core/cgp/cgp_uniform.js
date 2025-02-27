@@ -1,8 +1,16 @@
 import { CgUniform } from "../cg/cg_uniform.js";
+import { CgpContext } from "./cgp_state.js";
 
 export class CgpUniform extends CgUniform
 {
+
+    /** @type {CgpContext} */
     #cgp = null;
+
+    /** @type {GPUBuffer} */
+    gpuBuffer = null;
+
+    gpuBufferChanged = false;
 
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
     {
@@ -22,7 +30,6 @@ export class CgpUniform extends CgUniform
             // else if (this.getType() == "3f") this._value = [0, 1, 0];
         }
 
-        this.gpuBuffer = null;
     }
 
     getInfo()
@@ -102,8 +109,12 @@ export class CgpUniform extends CgUniform
 
     updateValueT() {}
 
+    /**
+     * @param {GPUBuffer} b
+     */
     setGpuBuffer(b)
     {
+        this.gpuBufferChanged = true;
         this.gpuBuffer = b;
     }
 

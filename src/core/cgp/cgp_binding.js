@@ -400,9 +400,6 @@ export class Binding
      */
     update(inst)
     {
-
-        // let bindingIndex = this.getBindingIndex();
-
         if (!this.isActive) return;
 
         let b = this.bindingInstances[inst];
@@ -464,7 +461,17 @@ export class Binding
             let off = 0;
             for (let i = 0; i < this.uniforms.length; i++)
             {
+
+                // console.log("o");
+                // if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("copy to", this.getStageString() + " " + this.bindingType, { "info": info });
+
                 this.uniforms[i].copyToBuffer(this.cGpuBuffers[inst].floatArr, off); // todo: check if uniform changed?
+
+                if (this.uniforms[i].gpuBufferChanged)
+                {
+                    console.log("un changed");
+                }
+                // if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
 
                 // console.log(this.cGpuBuffers[inst].floatArr);
 

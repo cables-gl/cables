@@ -138,12 +138,10 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
         viewBox.mouseY * pixelDensity > layer.y + posy &&
         viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
     {
-        hoverX = layer.x + posx;
-        hoverY = layer.y + posy;
-        hoverW = layer.width;
-
         if (mouseState.getButton() == 1)
         {
+            hoverX = layer.x + posx;
+            hoverY = layer.y + posy;
             clicked = { "count": colorCycle, "task": b.task, "name": String(b.name) };
         }
     }
@@ -173,7 +171,7 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
 
     if (hovering && hovering != b)
     {
-        region.rect(hoverX, hoverY, hoverW, hoverH);
+        region.rect(hoverX, hoverY, w, rowHeight);
         ctx.clip(region, "evenodd");
     }
 
