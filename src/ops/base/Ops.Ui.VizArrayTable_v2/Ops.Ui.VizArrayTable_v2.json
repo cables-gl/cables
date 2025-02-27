@@ -50,7 +50,8 @@
                 "name": "Scroll",
                 "subType": "number"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Show the contents of the input array in a table in the patch, useful for debugging",
     "docs": {

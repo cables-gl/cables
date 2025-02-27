@@ -18,142 +18,142 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Number 0"
+                "type": 2,
+                "name": "Input 0"
             },
             {
-                "type": "2",
-                "name": "Number 1"
+                "type": 2,
+                "name": "Input 1"
             },
             {
-                "type": "2",
-                "name": "Number 2"
+                "type": 2,
+                "name": "Input 2"
             },
             {
-                "type": "2",
-                "name": "Number 3"
+                "type": 2,
+                "name": "Input 3"
             },
             {
-                "type": "2",
-                "name": "Number 4"
+                "type": 2,
+                "name": "Input 4"
             },
             {
-                "type": "2",
-                "name": "Number 5"
+                "type": 2,
+                "name": "Input 5"
             },
             {
-                "type": "2",
-                "name": "Number 6"
+                "type": 2,
+                "name": "Input 6"
             },
             {
-                "type": "2",
-                "name": "Number 7"
+                "type": 2,
+                "name": "Input 7"
             },
             {
-                "type": "2",
-                "name": "Number 8"
+                "type": 2,
+                "name": "Input 8"
             },
             {
-                "type": "2",
-                "name": "Number 9"
+                "type": 2,
+                "name": "Input 9"
             },
             {
-                "type": "2",
-                "name": "Number 10"
+                "type": 2,
+                "name": "Input 10"
             },
             {
-                "type": "2",
-                "name": "Number 11"
+                "type": 2,
+                "name": "Input 11"
             },
             {
-                "type": "2",
-                "name": "Number 12"
+                "type": 2,
+                "name": "Input 12"
             },
             {
-                "type": "2",
-                "name": "Number 13"
+                "type": 2,
+                "name": "Input 13"
             },
             {
-                "type": "2",
-                "name": "Number 14"
+                "type": 2,
+                "name": "Input 14"
             },
             {
-                "type": "2",
-                "name": "Number 15"
+                "type": 2,
+                "name": "Input 15"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 0"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 2"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 3"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 4"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 5"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 6"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 7"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 8"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 9"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 10"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 11"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 12"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 13"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 14"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Output 15"
             }
         ]
     },
     "summary": "control order and flow of objects",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

@@ -3,7 +3,7 @@ const inputs = [];
 
 for (let i = 0; i < 16; i++)
 {
-    const inp = op.inObject("Number " + i, 0);
+    const inp = op.inObject("Input " + i, 0);
     const out = op.outObject("Output " + i);
 
     inp.changeAlways = true;
@@ -17,6 +17,6 @@ for (let i = 0; i < inputs.length; i++)
     const inp = inputs[i];
     inp.onChange = function ()
     {
-        for (let j = 0; j < outputs.length; j++) outputs[j].set(inp.get());
+        for (let j = 0; j < outputs.length; j++) outputs[j].setRef(inp.get());
     };
 }

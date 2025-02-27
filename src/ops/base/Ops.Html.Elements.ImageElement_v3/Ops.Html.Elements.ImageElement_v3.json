@@ -101,10 +101,6 @@
             {
                 "type": 5,
                 "name": "Alt Text"
-            },
-            {
-                "type": 5,
-                "name": "Fallback File"
             }
         ],
         "portsOut": [

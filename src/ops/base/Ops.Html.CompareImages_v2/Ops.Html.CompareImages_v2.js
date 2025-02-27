@@ -11,32 +11,68 @@ const
 
 let finished = true;
 let loadingId = 0;
+let canceled = false;
+let to = null;
 inStart.onTriggered = compare;
+
+op.onDelete = () =>
+{
+    clearTimeout(to);
+};
 
 function compare()
 {
     if (!finished)
     {
+        console.log("waiting");
+        clearTimeout(to);
+        canceled = true;
+        to = setTimeout(compare, 50);
         return;
     }
+
+    clearTimeout(to);
 
     finished = false;
 
     if (loadingId)loadingId = op.patch.loading.finished(loadingId);
+    let startTime = performance.now();
 
     loadingId = op.patch.loading.start(op.name, CABLES.uuid(), op);
+    canceled = false;
 
-    resemble(inCanv1.get())
-        .compareTo(inCanv2.get())
-        .onComplete(
-            (data) =>
-            {
-                if (data.getImageDataUrl) outImageUrl.set(data.getImageDataUrl());
-                outSameDimensions.set(data.isSameDimensions);
-                outMatchPercentage.set(data.rawMisMatchPercentage);
-                outData.set(data);
-                outFinished.trigger();
-                finished = true;
-                loadingId = op.patch.loading.finished(loadingId);
-            });
+    try
+    {
+        resemble(inCanv2.get())
+            .compareTo(inCanv1.get())
+            .onComplete(
+                (data) =>
+                {
+                    if (canceled)
+                    {
+                        console.log("cancel");
+                        finished = true;
+                        compare();
+                        return;
+                    }
+                    if (data.getImageDataUrl) outImageUrl.set(data.getImageDataUrl());
+                    outSameDimensions.set(data.isSameDimensions);
+                    outMatchPercentage.set(data.rawMisMatchPercentage);
+                    outData.set(data);
+                    loadingId = op.patch.loading.finished(loadingId);
+                    outFinished.trigger();
+                    console.log("", performance.now() - startTime);
+                    finished = true;
+                    console.log("finishe");
+                    clearTimeout(to);
+                });
+    }
+    catch (e)
+    {
+        console.log("eeeee", e.message);
+        clearTimeout(to);
+        finished = true;
+
+        to = setTimeout(compare, 100);
+    }
 }
