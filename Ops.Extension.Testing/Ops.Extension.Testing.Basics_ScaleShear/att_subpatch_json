@@ -5,12 +5,14 @@
       "id": "rtkmoe9l6",
       "uiAttribs": {
         "translate": {
-          "x": -483.7483342526882,
-          "y": 3763.230173156077
+          "x": 85.64250155270929,
+          "y": 348.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "posX",
@@ -53,22 +55,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "rtkmoe9l6"
-      }
+      ]
     },
     {
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "78w85oh62",
       "uiAttribs": {
         "translate": {
-          "x": -663.7483342526882,
-          "y": 3763.230173156077
+          "x": -94.35749844729071,
+          "y": 348.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "posX",
@@ -111,22 +112,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "78w85oh62"
-      }
+      ]
     },
     {
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "m30xm52gp",
       "uiAttribs": {
         "translate": {
-          "x": -867.7483342526882,
-          "y": 3763.230173156077
+          "x": -298.3574984472907,
+          "y": 348.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "posX",
@@ -169,22 +169,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "m30xm52gp"
-      }
+      ]
     },
     {
       "opId": "50e7f565-0cdb-47ca-912b-87c04e2f00e3",
       "id": "fo7oqnrnk",
       "uiAttribs": {
         "translate": {
-          "x": -663.7483342526882,
-          "y": 3563.230173156077
+          "x": -94.35749844729071,
+          "y": 148.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "scale",
@@ -215,23 +214,22 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "fo7oqnrnk"
-      }
+      ]
     },
     {
       "opId": "02d76d99-67f2-4146-b906-8bce2c3ad6bb",
       "id": "hva0ds6ru",
       "uiAttribs": {
         "translate": {
-          "x": -663.7483342526882,
-          "y": 3843.230173156077
+          "x": -94.35749844729071,
+          "y": 428.26946699828386
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "shearX",
@@ -254,23 +252,22 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "hva0ds6ru"
-      }
+      ]
     },
     {
       "opId": "02d76d99-67f2-4146-b906-8bce2c3ad6bb",
       "id": "zmcxn03oe",
       "uiAttribs": {
         "translate": {
-          "x": -867.7483342526882,
-          "y": 3843.230173156077
+          "x": -298.3574984472907,
+          "y": 428.26946699828386
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "shearX",
@@ -293,23 +290,22 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "zmcxn03oe"
-      }
+      ]
     },
     {
       "opId": "02d76d99-67f2-4146-b906-8bce2c3ad6bb",
       "id": "9cectp2g0",
       "uiAttribs": {
         "translate": {
-          "x": -483.7483342526882,
-          "y": 3883.230173156077
+          "x": 85.64250155270929,
+          "y": 468.26946699828386
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "shearX",
@@ -332,22 +328,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "9cectp2g0"
-      }
+      ]
     },
     {
       "opId": "ec55d252-3843-41b1-b731-0482dbd9e72b",
       "id": "u6scxtttv",
       "uiAttribs": {
         "translate": {
-          "x": -663.7483342526882,
-          "y": 3603.230173156077
+          "x": -94.35749844729071,
+          "y": 188.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "r",
@@ -438,22 +433,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "u6scxtttv"
-      }
+      ]
     },
     {
       "opId": "d69316f1-bde9-4645-8280-c635a8982e0d",
       "id": "k2etaoitu",
       "uiAttribs": {
         "translate": {
-          "x": -483.7483342526882,
-          "y": 3823.230173156077
+          "x": 85.64250155270929,
+          "y": 408.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Diffuse R",
@@ -492,22 +486,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "k2etaoitu"
-      }
+      ]
     },
     {
       "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
       "id": "zj85p0cyc",
       "uiAttribs": {
         "translate": {
-          "x": -483.7483342526882,
-          "y": 3943.230173156077
+          "x": 85.64250155270929,
+          "y": 528.2694669982839
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Render Mesh",
@@ -569,22 +562,21 @@
           "name": "Back",
           "value": 1
         }
-      ],
-      "storage": {
-        "ref": "zj85p0cyc"
-      }
+      ]
     },
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "w1aq7bq49",
       "uiAttribs": {
         "translate": {
-          "x": -663.7483342526882,
-          "y": 3923.230173156077
+          "x": -94.35749844729071,
+          "y": 508.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "render",
@@ -643,22 +635,21 @@
           "name": "num rows",
           "value": 1
         }
-      ],
-      "storage": {
-        "ref": "w1aq7bq49"
-      }
+      ]
     },
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "cdsbwpy0i",
       "uiAttribs": {
         "translate": {
-          "x": -867.7483342526882,
-          "y": 3923.230173156077
+          "x": -298.3574984472907,
+          "y": 508.26946699828386
         },
         "notWorkingMsg": null,
-        "subPatch": "l1cr6z4jr"
+        "subPatch": "a3t1ild9w",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "render",
@@ -717,38 +708,47 @@
           "name": "num rows",
           "value": 1
         }
-      ],
-      "storage": {
-        "ref": "cdsbwpy0i"
-      }
+      ]
     },
     {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "phlld8jt6",
       "uiAttribs": {
-        "subPatch": "l1cr6z4jr",
+        "subPatch": "a3t1ild9w",
         "translate": {
           "x": 0,
           "y": 0
-        }
+        },
+        "blueprintSubpatch2": true
       },
-      "storage": {
-        "ref": "phlld8jt6"
-      }
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_cke3ipv4p",
+          "title": "Trigger_3",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_cke3ipv4p",
+              "objIn": "fo7oqnrnk",
+              "objOut": "phlld8jt6"
+            }
+          ]
+        }
+      ]
     },
     {
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "lr69f765s",
       "uiAttribs": {
-        "subPatch": "l1cr6z4jr",
+        "subPatch": "a3t1ild9w",
         "translate": {
           "x": 0,
           "y": 40
-        }
+        },
+        "blueprintSubpatch2": true
       },
-      "storage": {
-        "ref": "lr69f765s"
-      }
+      "storage": {}
     }
   ]
 }
