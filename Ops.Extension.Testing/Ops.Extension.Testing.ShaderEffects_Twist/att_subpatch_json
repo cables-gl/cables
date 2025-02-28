@@ -1,0 +1,437 @@
+{
+  "ops": [
+    {
+      "opId": "4635abe3-a6b1-413f-9cd1-fbf64f8c4942",
+      "id": "5w6h22524",
+      "uiAttribs": {
+        "translate": {
+          "x": 690.9579530541689,
+          "y": 2407.890747561706
+        },
+        "notWorkingMsg": null,
+        "color": "#5dc0fd",
+        "subPatch": "lyjkbiho4",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Degree",
+          "value": 0.5
+        },
+        {
+          "name": "Height",
+          "value": 1
+        },
+        {
+          "name": "Axis index",
+          "value": 1
+        },
+        {
+          "name": "Axis",
+          "value": "Y"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "Trigger",
+              "objIn": "c8es85fh9",
+              "objOut": "5w6h22524"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "0d83ed06-cdbe-4fe0-87bb-0ccece7fb6e1",
+      "id": "s2y81yk21",
+      "uiAttribs": {
+        "translate": {
+          "x": 690.9579530541689,
+          "y": 2307.890747561706
+        },
+        "notWorkingMsg": null,
+        "subPatch": "lyjkbiho4",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "R",
+          "value": 1
+        },
+        {
+          "name": "G",
+          "value": 1
+        },
+        {
+          "name": "B",
+          "value": 1
+        },
+        {
+          "name": "A",
+          "value": 1
+        },
+        {
+          "name": "Enable",
+          "value": 0
+        },
+        {
+          "name": "Albedo",
+          "value": 0.707
+        },
+        {
+          "name": "Roughness",
+          "value": 0.835
+        },
+        {
+          "name": "Active",
+          "value": 0
+        },
+        {
+          "name": "Fresnel Intensity",
+          "value": 0.7
+        },
+        {
+          "name": "Fresnel Width",
+          "value": 1
+        },
+        {
+          "name": "Fresnel Exponent",
+          "value": 6
+        },
+        {
+          "name": "Fresnel R",
+          "value": 1
+        },
+        {
+          "name": "Fresnel G",
+          "value": 1
+        },
+        {
+          "name": "Fresnel B",
+          "value": 1
+        },
+        {
+          "name": "Emissive Active",
+          "value": 0
+        },
+        {
+          "name": "Color Intensity",
+          "value": 0.3
+        },
+        {
+          "name": "Emissive R",
+          "value": 0.37844687963624346
+        },
+        {
+          "name": "Emissive G",
+          "value": 0.34336566088236076
+        },
+        {
+          "name": "Emissive B",
+          "value": 0.5252317788374132
+        },
+        {
+          "name": "Shininess",
+          "value": 4
+        },
+        {
+          "name": "Specular Amount",
+          "value": 0.5
+        },
+        {
+          "name": "Specular Model index",
+          "value": 0
+        },
+        {
+          "name": "Specular Model",
+          "value": "Blinn"
+        },
+        {
+          "name": "Energy Conservation",
+          "value": 0
+        },
+        {
+          "name": "Double Sided Material",
+          "value": 0
+        },
+        {
+          "name": "Falloff Mode index",
+          "value": 0
+        },
+        {
+          "name": "Falloff Mode",
+          "value": "A"
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "Diffuse Repeat X",
+          "value": 1
+        },
+        {
+          "name": "Diffuse Repeat Y",
+          "value": 1
+        },
+        {
+          "name": "Texture Offset X",
+          "value": 0
+        },
+        {
+          "name": "Texture Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Specular Intensity",
+          "value": 1
+        },
+        {
+          "name": "Normal Map Intensity",
+          "value": 0.5
+        },
+        {
+          "name": "AO Intensity",
+          "value": 1
+        },
+        {
+          "name": "AO UV Channel index",
+          "value": 0
+        },
+        {
+          "name": "AO UV Channel",
+          "value": 1
+        },
+        {
+          "name": "Emissive Intensity",
+          "value": 1
+        },
+        {
+          "name": "Emissive Mask Intensity",
+          "value": 1
+        },
+        {
+          "name": "Env Map Intensity",
+          "value": 1
+        },
+        {
+          "name": "Env Map Blend index",
+          "value": 0
+        },
+        {
+          "name": "Env Map Blend",
+          "value": "Add"
+        },
+        {
+          "name": "Env Mask Intensity",
+          "value": 1
+        },
+        {
+          "name": "Alpha Mask Source index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source",
+          "value": "Luminance"
+        },
+        {
+          "name": "Discard Transparent Pixels",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Trigger Out",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Trigger Out",
+              "objIn": "5w6h22524",
+              "objOut": "s2y81yk21"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "c8es85fh9",
+      "uiAttribs": {
+        "translate": {
+          "x": 690.9579530541689,
+          "y": 2467.890747561706
+        },
+        "accBuffersDelete": "head",
+        "loading": false,
+        "subPatch": "lyjkbiho4",
+        "extendTitle": "head",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "value": "/assets/library/models/head.glb",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 2.5
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 1
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Force Smooth"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Generator",
+          "value": "obj2gltf"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": 0
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "ufruze37i",
+      "uiAttribs": {
+        "subPatch": "lyjkbiho4",
+        "translate": {
+          "x": 710.9579530541689,
+          "y": 1900.2912104114062
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_2put91i6v",
+          "title": "Trigger In",
+          "links": [
+            {
+              "portIn": "Trigger In",
+              "portOut": "innerOut_2put91i6v",
+              "objIn": "s2y81yk21",
+              "objOut": "ufruze37i"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "68b86pipi",
+      "uiAttribs": {
+        "subPatch": "lyjkbiho4",
+        "translate": {
+          "x": 710.9579530541689,
+          "y": 2578.890747561706
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

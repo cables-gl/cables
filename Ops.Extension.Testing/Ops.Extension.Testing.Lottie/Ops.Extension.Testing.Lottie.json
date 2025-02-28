@@ -1,0 +1,44 @@
+{
+    "id": "4d529cf5-4d88-467f-86b4-7b545749af01",
+    "created": 1716904541472,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716904541509
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716904542082
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch0 renamed to Ops.Patch.PAh3NTD.SubPatch02",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560641031
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch02 renamed to Ops.Extension.Testing.Lottie",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732781881
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "nwshu8bql",
+                "uititle": "exe 4"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "id": "1d551192-b8f8-4039-9717-220c37a0dbd9",
+    "created": 1723127914235,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127914276
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch5 renamed to Ops.Patch.PAh3NTD.SubPatch52",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560642719
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch52 renamed to Ops.Extension.Testing.ShaderEffects_Twist",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732842824
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "2put91i6v",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

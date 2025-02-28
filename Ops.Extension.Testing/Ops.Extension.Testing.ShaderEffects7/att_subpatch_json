@@ -1,0 +1,424 @@
+{
+  "ops": [
+    {
+      "opId": "9c14f158-d634-4421-b581-51f3fd2044c5",
+      "id": "jvo61vvr7",
+      "uiAttribs": {
+        "translate": {
+          "x": 766.7526230322194,
+          "y": 2026.4677249951037
+        },
+        "notWorkingMsg": null,
+        "color": "#5dc0fd",
+        "subPatch": "x8zj32p19",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Strength",
+          "value": 2222
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "667htjmei",
+              "objOut": "jvo61vvr7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "667htjmei",
+      "uiAttribs": {
+        "translate": {
+          "x": 766.7526230322194,
+          "y": 2101.1193115057577
+        },
+        "accBuffersDelete": "bunny",
+        "loading": false,
+        "subPatch": "x8zj32p19",
+        "extendTitle": "head2",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "value": "/assets/library/models/head2.glb",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 1.5
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 0
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Auto"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Generator",
+          "value": "Khronos glTF Blender I/O v3.6.27"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": 0
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "0d83ed06-cdbe-4fe0-87bb-0ccece7fb6e1",
+      "id": "hqdgqxmsb",
+      "uiAttribs": {
+        "subPatch": "x8zj32p19",
+        "translate": {
+          "x": 766.7526230322194,
+          "y": 1951.9647578134466
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "R",
+          "value": 0.49422689676606635
+        },
+        {
+          "name": "G",
+          "value": 0.7634488819089864
+        },
+        {
+          "name": "B",
+          "value": 0.7508748163487524
+        },
+        {
+          "name": "A",
+          "value": 1
+        },
+        {
+          "name": "Enable",
+          "value": 0
+        },
+        {
+          "name": "Albedo",
+          "value": 0.707
+        },
+        {
+          "name": "Roughness",
+          "value": 0.835
+        },
+        {
+          "name": "Active",
+          "value": 0
+        },
+        {
+          "name": "Fresnel Intensity",
+          "value": 0.7
+        },
+        {
+          "name": "Fresnel Width",
+          "value": 1
+        },
+        {
+          "name": "Fresnel Exponent",
+          "value": 6
+        },
+        {
+          "name": "Fresnel R",
+          "value": 1
+        },
+        {
+          "name": "Fresnel G",
+          "value": 1
+        },
+        {
+          "name": "Fresnel B",
+          "value": 1
+        },
+        {
+          "name": "Emissive Active",
+          "value": 0
+        },
+        {
+          "name": "Color Intensity",
+          "value": 0.3
+        },
+        {
+          "name": "Emissive R",
+          "value": 0.7822719565789256
+        },
+        {
+          "name": "Emissive G",
+          "value": 0.7422246590609094
+        },
+        {
+          "name": "Emissive B",
+          "value": 0.7595723514459152
+        },
+        {
+          "name": "Shininess",
+          "value": 4
+        },
+        {
+          "name": "Specular Amount",
+          "value": 0.5
+        },
+        {
+          "name": "Specular Model index",
+          "value": 0
+        },
+        {
+          "name": "Specular Model",
+          "value": "Blinn"
+        },
+        {
+          "name": "Energy Conservation",
+          "value": 0
+        },
+        {
+          "name": "Double Sided Material",
+          "value": 0
+        },
+        {
+          "name": "Falloff Mode index",
+          "value": 0
+        },
+        {
+          "name": "Falloff Mode",
+          "value": "A"
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "Diffuse Repeat X",
+          "value": 1
+        },
+        {
+          "name": "Diffuse Repeat Y",
+          "value": 1
+        },
+        {
+          "name": "Texture Offset X",
+          "value": 0
+        },
+        {
+          "name": "Texture Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Specular Intensity",
+          "value": 1
+        },
+        {
+          "name": "Normal Map Intensity",
+          "value": 0.5
+        },
+        {
+          "name": "AO Intensity",
+          "value": 1
+        },
+        {
+          "name": "AO UV Channel index",
+          "value": 0
+        },
+        {
+          "name": "AO UV Channel",
+          "value": 1
+        },
+        {
+          "name": "Emissive Intensity",
+          "value": 1
+        },
+        {
+          "name": "Emissive Mask Intensity",
+          "value": 1
+        },
+        {
+          "name": "Env Map Intensity",
+          "value": 1
+        },
+        {
+          "name": "Env Map Blend index",
+          "value": 0
+        },
+        {
+          "name": "Env Map Blend",
+          "value": "Add"
+        },
+        {
+          "name": "Env Mask Intensity",
+          "value": 1
+        },
+        {
+          "name": "Alpha Mask Source index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source",
+          "value": "Luminance"
+        },
+        {
+          "name": "Discard Transparent Pixels",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Trigger Out",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Trigger Out",
+              "objIn": "jvo61vvr7",
+              "objOut": "hqdgqxmsb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "n9sb3e3us",
+      "uiAttribs": {
+        "subPatch": "x8zj32p19",
+        "translate": {
+          "x": 785.5372107997564,
+          "y": 1791.171214246271
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_o41up594i",
+          "title": "Trigger In",
+          "links": [
+            {
+              "portIn": "Trigger In",
+              "portOut": "innerOut_o41up594i",
+              "objIn": "hqdgqxmsb",
+              "objOut": "n9sb3e3us"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "w5hs89p2h",
+      "uiAttribs": {
+        "subPatch": "x8zj32p19",
+        "translate": {
+          "x": 785.5372107997564,
+          "y": 2212.1193115057577
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

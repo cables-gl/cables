@@ -1,0 +1,39 @@
+{
+    "id": "08293a52-0133-4dd9-a817-057b06fa0a2b",
+    "created": 1723127843256,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127843291
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch4 renamed to Ops.Patch.PAh3NTD.SubPatch42",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560642342
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch42 renamed to Ops.Extension.Testing.Meshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732693736
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "k935a8335",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

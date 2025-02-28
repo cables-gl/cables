@@ -1,0 +1,27 @@
+{
+    "id": "59ad0ec9-6961-4d52-8e89-e380c2731feb",
+    "created": 1740733183953,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740733183977
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch1 renamed to Ops.Extension.Testing.BasicsComparisons",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733206436
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
+}
