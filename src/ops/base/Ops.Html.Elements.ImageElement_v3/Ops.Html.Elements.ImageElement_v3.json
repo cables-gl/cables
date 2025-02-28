@@ -58,10 +58,10 @@
             "date": 1733844174616
         },
         {
-            "message": "Html.ImageElement_v3 renamed to Ops.Html.Elements.ImageElement_v3",
-            "type": "rename",
+            "message": "Added output bool and trigger, when being loaded and finished",
+            "type": "feature",
             "author": "pandur",
-            "date": 1734352761973
+            "date": 1740565406159
         }
     ],
     "layout": {
@@ -118,6 +118,20 @@
                 "type": 0,
                 "name": "Height",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Loaded"
             }
         ]
     },

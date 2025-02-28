@@ -22,12 +22,21 @@
                 "subType": "number"
             },
             {
-                "type": 1,
-                "name": "Trigger_0"
+                "type": 3,
+                "name": "Connected Op Names"
             },
             {
                 "type": 1,
-                "name": "Trigger_1",
+                "name": "Trigger_0",
+                "longPort": 3
+            },
+            {
+                "type": 1,
+                "name": "Trigger_1"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_2",
                 "uititle": "add port"
             }
         ]
@@ -42,6 +51,12 @@
             "type": "new",
             "author": "pandur",
             "date": 1716804897700
+        },
+        {
+            "message": "Output an array of names of connected ops",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1740563305689
         }
     ],
     "license": "MIT",

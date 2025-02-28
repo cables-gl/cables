@@ -3,8 +3,8 @@ const inputs = [];
 
 for (let i = 0; i < 16; i++)
 {
-    const inp = op.inObject("Input " + i, 0);
-    const out = op.outObject("Output " + i);
+    const inp = op.inTexture("Texture " + i, 0);
+    const out = op.outTexture("Output " + i);
 
     inp.changeAlways = true;
 

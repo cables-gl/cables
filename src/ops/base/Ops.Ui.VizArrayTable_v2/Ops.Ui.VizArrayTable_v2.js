@@ -141,10 +141,15 @@ op.renderVizLayer = (ctx, layer) =>
                     str = "{Object}";
                 }
             }
-            else if (v != v || v === undefined)
+            else if (v != v)
             {
                 ctx.fillStyle = "#f00";
-                str = "?";
+                str = "Nan";
+            }
+            else if (v === undefined)
+            {
+                ctx.fillStyle = "#f00";
+                str = "undefined";
             }
 
             ctx.fillText(str,

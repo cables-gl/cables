@@ -36,10 +36,10 @@ function retrySoon()
     if (texChanged)
     {
         if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+        outLoading.set(true);
 
         loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
 
-        outLoading.set(true);
         op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
     }
     inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
@@ -103,9 +103,9 @@ function update()
         outSize.set(Math.ceil(dataString.length * 0.75)); // 6 bit to 8 bit
 
         outLoading.set(false);
-        finished.trigger();
         texChanged = false;
         loadingId = cgl.patch.loading.finished(loadingId);
+        finished.trigger();
     });
 
     if (retry) setTimeout(retrySoon.bind(this), 50);

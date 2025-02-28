@@ -15,6 +15,8 @@ el.classList.add("sidebar__text");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelText = document.createElement("div");// document.createTextNode(labelPort.get());
+const inVisible = op.inBool("Visible", true);
+
 label.appendChild(labelText);
 el.appendChild(label);
 
@@ -26,7 +28,10 @@ op.onDelete = onDelete;
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
-// functions
+inVisible.onChange = function ()
+{
+    el.style.display = inVisible.get() ? "block" : "none";
+};
 
 function onIdChanged()
 {
@@ -50,27 +55,18 @@ function onParentChanged()
     }
     else
     { // detach
-        if (el.parentElement)
-        {
-            el.parentElement.removeChild(el);
-        }
+        if (el.parentElement) el.parentElement.removeChild(el);
     }
 }
 
 function showElement(el)
 {
-    if (el)
-    {
-        el.style.display = "block";
-    }
+    if (el)el.style.display = "block";
 }
 
 function hideElement(el)
 {
-    if (el)
-    {
-        el.style.display = "none";
-    }
+    if (el) el.style.display = "none";
 }
 
 function onDelete()
@@ -80,8 +76,5 @@ function onDelete()
 
 function removeElementFromDOM(el)
 {
-    if (el && el.parentNode && el.parentNode.removeChild)
-    {
-        el.parentNode.removeChild(el);
-    }
+    if (el && el.parentNode && el.parentNode.removeChild) el.parentNode.removeChild(el);
 }

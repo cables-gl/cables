@@ -1,5 +1,5 @@
 {
-    "id": "f3509eea-c42f-4091-961c-95c3d750778d",
+    "id": "36d24fce-190f-47ad-b206-9c858de13b96",
     "changelog": [
         {
             "message": "op created",
@@ -9,22 +9,24 @@
         },
         {
             "message": "Add visible toggle input",
-            "type": "",
+            "type": "feature",
             "author": "pandur",
             "date": 1740571150322
+        },
+        {
+            "message": "New version: element is an output, not an input, works better with ops like appendChild ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1740571736335
         }
     ],
     "authorName": "pandur",
-    "created": 1734602523531,
+    "created": 1740571604531,
     "layout": {
         "portsIn": [
             {
                 "type": 2,
                 "name": "link"
-            },
-            {
-                "type": 2,
-                "name": "Child Element"
             },
             {
                 "type": 0,
@@ -41,6 +43,10 @@
             {
                 "type": 2,
                 "name": "childs"
+            },
+            {
+                "type": 2,
+                "name": "Element"
             }
         ]
     },

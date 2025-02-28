@@ -9,6 +9,7 @@ inObject.onChange =
 
 inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 outObject.ignoreValueSerialize = true;
+op.toWorkPortsNeedsString(inKey);
 
 function update()
 {
