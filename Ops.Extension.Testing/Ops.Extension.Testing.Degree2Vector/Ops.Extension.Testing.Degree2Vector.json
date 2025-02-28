@@ -1,6 +1,6 @@
 {
-    "id": "2d3b9e26-58b6-4ebb-94d0-5c8522b2922b",
-    "created": 1740733109386,
+    "id": "8f55275a-92e9-4534-8608-d68f731010fd",
+    "created": 1740754325764,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -8,13 +8,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1740733109410
+            "date": 1740754325789
         },
         {
-            "message": "Patch.PAh3NTD.SubPatch1 renamed to Ops.Extension.Testing.BasicsValueTests",
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Degree2Vector",
             "type": "rename",
             "author": "pandur",
-            "date": 1740733144015
+            "date": 1740754390864
         }
     ],
     "coreLibs": [
@@ -24,8 +24,8 @@
         "portsIn": [
             {
                 "type": 1,
-                "name": "pxcjhgfwh",
-                "uititle": "Trigger_9"
+                "name": "9avwj5ssn",
+                "uititle": "Trigger_43"
             }
         ],
         "portsOut": []

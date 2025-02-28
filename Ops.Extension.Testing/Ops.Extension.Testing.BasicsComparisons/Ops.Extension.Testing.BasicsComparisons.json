@@ -21,7 +21,13 @@
         "subpatchop"
     ],
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "2ec0yqfgh",
+                "uititle": "Trigger_10"
+            }
+        ],
         "portsOut": []
     }
 }

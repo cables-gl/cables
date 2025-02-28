@@ -1,1 +1,11 @@
-{"ports":[]}
+{
+    "ports": [
+        {
+            "id": "2ec0yqfgh",
+            "title": "Trigger_10",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        }
+    ]
+}
