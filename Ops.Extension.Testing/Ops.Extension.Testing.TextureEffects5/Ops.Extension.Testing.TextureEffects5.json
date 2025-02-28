@@ -1,0 +1,39 @@
+{
+    "id": "71edc4f1-da2b-4c33-85db-347e597e0a25",
+    "created": 1740740358373,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740740358399
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureEfvfects5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740740379360
+        },
+        {
+            "message": "Extension.Testing.TextureEfvfects5 renamed to Ops.Extension.Testing.TextureEffects5",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740740390200
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "jbltpsguv",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

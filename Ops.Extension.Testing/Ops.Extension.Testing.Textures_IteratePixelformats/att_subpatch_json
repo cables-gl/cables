@@ -11,7 +11,7 @@
           "x": 733.2254416220775,
           "y": 3089.2419025563636
         },
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -34,7 +34,7 @@
       "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
       "id": "mu9pm7nk2",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3255.7601803133985
@@ -94,7 +94,7 @@
       "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
       "id": "unx7yewmx",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3469.686052128488
@@ -146,7 +146,11 @@
         },
         {
           "name": "Pixel Format",
-          "value": "RGBA 32bit float"
+          "value": "RGB 5/6/5bit ubyte"
+        },
+        {
+          "name": "Clear",
+          "value": 1
         },
         {
           "name": "R",
@@ -206,7 +210,7 @@
       "opId": "6dada2b7-da7c-47ee-87a9-a12e87055208",
       "id": "y38n1qjin",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3586.584499410697
@@ -258,7 +262,7 @@
       "opId": "ec55d252-3843-41b1-b731-0482dbd9e72b",
       "id": "7adav6z86",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 1043.398670746214,
           "y": 3481.5263077319296
@@ -351,7 +355,7 @@
       "opId": "3996ed5d-8143-4bec-9cfd-c1b193a295af",
       "id": "owe33119g",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3136.191864902921
@@ -399,7 +403,7 @@
         "resizable": true,
         "resizableY": false,
         "stretchPorts": true,
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3342.63969589797
@@ -430,17 +434,6 @@
               "objOut": "pokp8zb4x"
             }
           ]
-        },
-        {
-          "name": "trigger 15",
-          "links": [
-            {
-              "portIn": "Trigger",
-              "portOut": "trigger 15",
-              "objIn": "6ml97dwlk",
-              "objOut": "pokp8zb4x"
-            }
-          ]
         }
       ]
     },
@@ -448,7 +441,7 @@
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "u3ujoj63u",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 1043.398670746214,
           "y": 3562.6396958979703
@@ -521,7 +514,7 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "smx1xed0g",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 1043.398670746214,
           "y": 3418.8657167453553
@@ -575,7 +568,7 @@
       "id": "c8m6mecu0",
       "uiAttribs": {
         "mathTitle": true,
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 1067.398670746214,
           "y": 3329.4286793549563
@@ -603,7 +596,7 @@
       "id": "crqfmxwvi",
       "uiAttribs": {
         "mathTitle": true,
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 758.056970740969,
           "y": 3419.2452041694764
@@ -631,13 +624,14 @@
       "id": "1labjlmxr",
       "uiAttribs": {
         "title": "Repeats",
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 984,
           "y": 3180
         },
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "tempSubOldOpId": null,
+        "extendTitle": 12
       },
       "storage": {},
       "portsIn": [
@@ -676,7 +670,7 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "92g3vr7ur",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 733.2254416220775,
           "y": 3180
@@ -734,7 +728,7 @@
       "id": "v6wfeqrqx",
       "uiAttribs": {
         "mathTitle": true,
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 1079.398670746214,
           "y": 3262.6396958979703
@@ -767,7 +761,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "4b4zgdfad",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 781.5392413225683,
           "y": 2888.678643637031
@@ -795,7 +789,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "n45psmsh1",
       "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
+        "subPatch": "2k8vip1yh",
         "translate": {
           "x": 781.5392413225683,
           "y": 3881.8461123648312
@@ -804,55 +798,6 @@
         "tempSubOldOpId": null
       },
       "storage": {}
-    },
-    {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "6ml97dwlk",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "1oc0u0uq2",
-        "translate": {
-          "x": 1128.340456489322,
-          "y": 3801.8461123648312
-        },
-        "extendTitle": "#currentTestName"
-      },
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ],
-      "storage": {
-        "ref": "6ml97dwlk"
-      }
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "id2ix26y8",
-      "uiAttribs": {
-        "subPatch": "1oc0u0uq2",
-        "translate": {
-          "x": 1140.340456489322,
-          "y": 3706.6615195577406
-        }
-      },
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "6ml97dwlk",
-              "objOut": "id2ix26y8"
-            }
-          ]
-        }
-      ],
-      "storage": {
-        "ref": "id2ix26y8"
-      }
     }
   ]
 }

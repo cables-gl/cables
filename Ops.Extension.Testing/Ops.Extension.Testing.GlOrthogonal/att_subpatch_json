@@ -9,8 +9,7 @@
           "y": 2244.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -68,8 +67,7 @@
           "y": 2504.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -119,8 +117,7 @@
           "y": 2644.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -170,8 +167,7 @@
           "y": 2566.009704567582
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -208,9 +204,8 @@
           "x": 640.7543366835077,
           "y": 2084.4458662219176
         },
-        "color": null,
         "notWorkingMsg": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -272,8 +267,7 @@
           "y": 2184.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -313,12 +307,6 @@
               "portOut": "next",
               "objIn": "m1uuo4tqq",
               "objOut": "0m8y7ldrq"
-            },
-            {
-              "portIn": "Trigger",
-              "portOut": "next",
-              "objIn": "hbo4lc8p8",
-              "objOut": "0m8y7ldrq"
             }
           ]
         }
@@ -333,8 +321,7 @@
           "y": 2384.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -388,8 +375,7 @@
           "y": 2704.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -466,8 +452,7 @@
           "y": 2304.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -558,8 +543,7 @@
           "y": 2444.4458662219176
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -654,8 +638,7 @@
           "y": 2486.009704567582
         },
         "notWorkingMsg": null,
-        "color": null,
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -744,7 +727,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "yzpnh0bi4",
       "uiAttribs": {
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "translate": {
           "x": 652,
           "y": 1982.5701001944824
@@ -772,7 +755,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "dsv7x97ij",
       "uiAttribs": {
-        "subPatch": "kuvzmf2wj",
+        "subPatch": "e604epo3i",
         "translate": {
           "x": 652,
           "y": 2784.4458662219176
@@ -781,55 +764,6 @@
         "tempSubOldOpId": null
       },
       "storage": {}
-    },
-    {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "hbo4lc8p8",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "kuvzmf2wj",
-        "translate": {
-          "x": 844.300200201839,
-          "y": 2229.6821273312353
-        },
-        "extendTitle": "#currentTestName"
-      },
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ],
-      "storage": {
-        "ref": "hbo4lc8p8"
-      }
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "wh9wsio0y",
-      "uiAttribs": {
-        "subPatch": "kuvzmf2wj",
-        "translate": {
-          "x": 856.300200201839,
-          "y": 2134.4975345241437
-        }
-      },
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "hbo4lc8p8",
-              "objOut": "wh9wsio0y"
-            }
-          ]
-        }
-      ],
-      "storage": {
-        "ref": "wh9wsio0y"
-      }
     }
   ]
 }

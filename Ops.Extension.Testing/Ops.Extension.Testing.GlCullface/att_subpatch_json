@@ -8,7 +8,7 @@
           "x": 974.4576870677415,
           "y": 2268.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -66,7 +66,7 @@
           "x": 746.4576870677416,
           "y": 2269.4759137396577
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -124,7 +124,7 @@
           "x": 974.4576870677415,
           "y": 2448.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -201,7 +201,7 @@
           "x": 746.4576870677416,
           "y": 2448.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -278,7 +278,7 @@
           "x": 974.4576870677415,
           "y": 2308.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -320,7 +320,7 @@
           "x": 746.4576870677416,
           "y": 2308.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -362,7 +362,7 @@
           "x": 818.4576870677416,
           "y": 2108.5399246328916
         },
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "notWorkingMsg": null,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -453,12 +453,6 @@
               "portOut": "Next",
               "objIn": "e2tk1haay",
               "objOut": "yzy6ycnqg"
-            },
-            {
-              "portIn": "Trigger",
-              "portOut": "Next",
-              "objIn": "jcftlxl4f",
-              "objOut": "yzy6ycnqg"
             }
           ]
         }
@@ -468,7 +462,7 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "lmr9r0g9o",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 818.4576870677416,
           "y": 2050.194538954322
@@ -525,7 +519,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "1qu4vwgxx",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 818.4576870677416,
           "y": 1912.8112128039484
@@ -553,7 +547,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "xlr2f8nzg",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 831.8544842383916,
           "y": 2528.5399246328916
@@ -564,61 +558,10 @@
       "storage": {}
     },
     {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "jcftlxl4f",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "7xlsi53ay",
-        "translate": {
-          "x": 1215.6558632839156,
-          "y": 2359.6035453754894
-        },
-        "extendTitle": "#currentTestName",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ]
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "xvx7cw5df",
-      "uiAttribs": {
-        "subPatch": "7xlsi53ay",
-        "translate": {
-          "x": 1227.6558632839156,
-          "y": 2264.4189525683983
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "jcftlxl4f",
-              "objOut": "xvx7cw5df"
-            }
-          ]
-        },
-        {
-          "name": "ShortName",
-          "value": "GlCullface"
-        }
-      ]
-    },
-    {
       "opId": "ca3bc984-e596-48fb-b53d-502eb13979b0",
       "id": "3wk2jfoao",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 396,
           "y": 2320
@@ -694,7 +637,7 @@
       "opId": "d082beaf-ef4b-4e57-a900-9ee87c0c9fe4",
       "id": "pvb2r66ku",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 516,
           "y": 2260
@@ -749,7 +692,7 @@
       "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
       "id": "3tqk2se9m",
       "uiAttribs": {
-        "subPatch": "7xlsi53ay",
+        "subPatch": "xklzk6uhq",
         "translate": {
           "x": 396,
           "y": 2404.674328759225

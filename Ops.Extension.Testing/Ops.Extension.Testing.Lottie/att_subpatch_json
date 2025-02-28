@@ -11,8 +11,7 @@
           "x": 608.8689706132692,
           "y": 1907.7791829453222
         },
-        "color": null,
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -25,17 +24,6 @@
               "portIn": "exe",
               "portOut": "trigger 0",
               "objIn": "win05c659",
-              "objOut": "lmvlvc2ez"
-            }
-          ]
-        },
-        {
-          "name": "trigger 9",
-          "links": [
-            {
-              "portIn": "Trigger",
-              "portOut": "trigger 9",
-              "objIn": "wanklri8h",
               "objOut": "lmvlvc2ez"
             }
           ]
@@ -63,7 +51,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -136,7 +124,7 @@
         },
         {
           "name": "Total Frames",
-          "value": 73
+          "value": 0
         }
       ]
     },
@@ -148,9 +136,8 @@
           "x": 632.8689706132692,
           "y": 1967.7791829453222
         },
-        "color": null,
         "loading": false,
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "extendTitle": "lottie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null,
@@ -216,7 +203,7 @@
         },
         {
           "name": "Duration MS",
-          "value": 57
+          "value": 568
         },
         {
           "name": "Status Code",
@@ -236,7 +223,7 @@
           "x": 828,
           "y": 2159.9204578989993
         },
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -309,7 +296,7 @@
           "x": 828,
           "y": 2094.6842562700326
         },
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -395,59 +382,10 @@
       ]
     },
     {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "wanklri8h",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "b2x8374bu",
-        "translate": {
-          "x": 779.0754551277209,
-          "y": 2370.9770142541793
-        },
-        "extendTitle": "#currentTestName",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ]
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "cn3vlch4n",
-      "uiAttribs": {
-        "subPatch": "b2x8374bu",
-        "translate": {
-          "x": 791.0754551277209,
-          "y": 2275.7924214470886
-        },
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "wanklri8h",
-              "objOut": "cn3vlch4n"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "15wxzwpha",
       "uiAttribs": {
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "translate": {
           "x": 632,
           "y": 1721.315626674981
@@ -475,7 +413,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "9syc3g4w9",
       "uiAttribs": {
-        "subPatch": "b2x8374bu",
+        "subPatch": "9g1gequag",
         "translate": {
           "x": 632,
           "y": 2450.9770142541793

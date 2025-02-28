@@ -9,7 +9,7 @@
           "y": 4622.871770759198
         },
         "comment": "vertex coordinates",
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -67,124 +67,14 @@
       ]
     },
     {
-      "opId": "eaf4f7ce-08a3-4d1b-b9f4-ebc0b7b1cde1",
-      "id": "1gu908jyd",
-      "uiAttribs": {
-        "translate": {
-          "x": -670.1589217878086,
-          "y": 4462.871770759198
-        },
-        "subPatch": "cjddd50md",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "min distance",
-          "value": 0.05
-        },
-        {
-          "name": "max distance",
-          "value": 99999
-        },
-        {
-          "name": "min rot y",
-          "value": 0
-        },
-        {
-          "name": "max rot y",
-          "value": 0
-        },
-        {
-          "name": "initial radius",
-          "value": 0.05
-        },
-        {
-          "name": "initial axis y",
-          "value": 0.5
-        },
-        {
-          "name": "initial axis x",
-          "value": 0.25
-        },
-        {
-          "name": "mul",
-          "value": 1
-        },
-        {
-          "name": "Smoothness",
-          "value": 1
-        },
-        {
-          "name": "Speed X",
-          "value": 1
-        },
-        {
-          "name": "Speed Y",
-          "value": 1
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Allow Panning",
-          "value": 1
-        },
-        {
-          "name": "Allow Zooming",
-          "value": 1
-        },
-        {
-          "name": "Allow Rotation",
-          "value": 1
-        },
-        {
-          "name": "restricted",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "7pzhgkjy5",
-              "objOut": "1gu908jyd"
-            },
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "7dp147ct6",
-              "objOut": "1gu908jyd"
-            }
-          ]
-        },
-        {
-          "name": "radius",
-          "value": 0.05
-        },
-        {
-          "name": "Rot X",
-          "value": 90
-        },
-        {
-          "name": "Rot Y",
-          "value": 90
-        }
-      ]
-    },
-    {
       "opId": "cb58f461-a0bd-4159-a3cb-5e396198b4e9",
       "id": "8kr6hw547",
       "uiAttribs": {
         "translate": {
           "x": -490.1589217878086,
-          "y": 5062.871770759198
+          "y": 5104.882371852334
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -253,7 +143,7 @@
           "x": -490.1589217878086,
           "y": 4942.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -345,7 +235,7 @@
           "x": -238.1589217878086,
           "y": 5022.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -375,7 +265,7 @@
           "x": -742.1589217878086,
           "y": 4722.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -434,7 +324,7 @@
           "y": 4782.871770759198
         },
         "comment": "size of texture area per rectangle",
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -467,7 +357,7 @@
           "x": -154.1589217878086,
           "y": 4502.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "extendTitle": 40,
         "blueprintSubpatch2": true
       },
@@ -525,7 +415,7 @@
           "y": 4862.871770759198
         },
         "comment": "texture coordinates positions",
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -583,7 +473,7 @@
           "x": 349.8410782121914,
           "y": 4942.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -624,7 +514,7 @@
           "x": -922.1589217878086,
           "y": 5402.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -667,7 +557,7 @@
           "x": 349.8410782121914,
           "y": 5322.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -693,7 +583,7 @@
           "x": -922.1589217878086,
           "y": 5022.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -749,14 +639,14 @@
           "x": -742.1589217878086,
           "y": 4622.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
         {
           "name": "posX",
-          "value": -0.5
+          "value": -0.96
         },
         {
           "name": "posY",
@@ -768,7 +658,7 @@
         },
         {
           "name": "scale",
-          "value": 0.57
+          "value": 0.82
         },
         {
           "name": "rotX",
@@ -805,7 +695,7 @@
           "x": -1318.1589217878086,
           "y": 5042.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -861,7 +751,7 @@
           "x": -238.1589217878086,
           "y": 4922.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -960,7 +850,7 @@
           "x": -82.1589217878086,
           "y": 4862.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1010,7 +900,7 @@
           "x": -1318.1589217878086,
           "y": 5282.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1082,7 +972,7 @@
           "x": -922.1589217878086,
           "y": 5122.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1206,7 +1096,7 @@
           "x": -1318.1589217878086,
           "y": 5182.871770759198
         },
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1326,7 +1216,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qznfd6jjy",
       "uiAttribs": {
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "translate": {
           "x": -553.4753964178033,
           "y": 4179.168138663448
@@ -1342,7 +1232,13 @@
             {
               "portIn": "render",
               "portOut": "innerOut_vp70q69w9",
-              "objIn": "1gu908jyd",
+              "objIn": "7pzhgkjy5",
+              "objOut": "qznfd6jjy"
+            },
+            {
+              "portIn": "render",
+              "portOut": "innerOut_vp70q69w9",
+              "objIn": "7dp147ct6",
               "objOut": "qznfd6jjy"
             }
           ]
@@ -1353,10 +1249,10 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "rzoyjp0bn",
       "uiAttribs": {
-        "subPatch": "cjddd50md",
+        "subPatch": "8l44lro5q",
         "translate": {
-          "x": -553.4753964178033,
-          "y": 4218.168138663448
+          "x": -284.8286578485404,
+          "y": 4197.16283811688
         },
         "blueprintSubpatch2": true
       },
@@ -1366,14 +1262,16 @@
       "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
       "id": "hr5ddsa8c",
       "uiAttribs": {
-        "subPatch": "cjddd50md",
+        "title": "var get",
+        "subPatch": "8l44lro5q",
         "translate": {
           "x": -996,
           "y": 4600
         },
         "extendTitle": "#texBeach",
-        "title": "var get"
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Variable",
@@ -1404,10 +1302,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "hr5ddsa8c"
-      }
+      ]
     }
   ]
 }

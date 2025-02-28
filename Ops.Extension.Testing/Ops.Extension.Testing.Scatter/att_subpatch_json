@@ -8,7 +8,7 @@
           "x": 523.6507795344727,
           "y": 2533.854173230483
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -58,7 +58,7 @@
           "x": 738.3491188992084,
           "y": 2816.651440268616
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "x": 322.92707886727385,
           "y": 2445.100813896287
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -261,7 +261,7 @@
           "x": 738.3491188992084,
           "y": 3019.6535964460954
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -327,7 +327,7 @@
           "x": 535.6507795344727,
           "y": 2645.970709865628
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -392,7 +392,7 @@
           "x": 738.3491188992084,
           "y": 2736.7457015108776
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -485,7 +485,7 @@
           "x": 322.92707886727385,
           "y": 2573.854173230483
         },
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -530,7 +530,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "iibzkwquo",
       "uiAttribs": {
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "translate": {
           "x": 738.3491188992084,
           "y": 2255.9258437889944
@@ -558,7 +558,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "r91snxgxd",
       "uiAttribs": {
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "translate": {
           "x": 738.3491188992084,
           "y": 3106.6191820780323
@@ -575,7 +575,7 @@
         "resizable": true,
         "resizableY": false,
         "stretchPorts": true,
-        "subPatch": "w3gh1nnrg",
+        "subPatch": "akj7hl48t",
         "translate": {
           "x": 665.1281180500114,
           "y": 2371.276299332801
@@ -616,68 +616,8 @@
               "objOut": "m6kx7ycme"
             }
           ]
-        },
-        {
-          "name": "trigger 15",
-          "links": [
-            {
-              "portIn": "Trigger",
-              "portOut": "trigger 15",
-              "objIn": "bqnnxca35",
-              "objOut": "m6kx7ycme"
-            }
-          ]
         }
       ]
-    },
-    {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "bqnnxca35",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "w3gh1nnrg",
-        "translate": {
-          "x": 1065.0582477519026,
-          "y": 3026.6191820780323
-        },
-        "extendTitle": "#currentTestName"
-      },
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ],
-      "storage": {
-        "ref": "bqnnxca35"
-      }
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "k79an6ewd",
-      "uiAttribs": {
-        "subPatch": "w3gh1nnrg",
-        "translate": {
-          "x": 1077.0582477519026,
-          "y": 2931.4345892709416
-        }
-      },
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "bqnnxca35",
-              "objOut": "k79an6ewd"
-            }
-          ]
-        }
-      ],
-      "storage": {
-        "ref": "k79an6ewd"
-      }
     }
   ]
 }

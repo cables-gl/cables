@@ -8,7 +8,7 @@
           "x": 708.7147974770818,
           "y": 2843.669129057075
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -82,7 +82,7 @@
           "x": 708.7147974770818,
           "y": 2282.496953522097
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -182,7 +182,7 @@
           "x": 708.7147974770818,
           "y": 2360
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -243,7 +243,7 @@
           "x": 708.7147974770818,
           "y": 2740
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -300,7 +300,7 @@
           "x": 708.7147974770818,
           "y": 2622.3443510699562
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -373,7 +373,7 @@
           "x": 708.7147974770818,
           "y": 2541.172175534978
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -451,7 +451,7 @@
           "x": 1068.714797477082,
           "y": 2482.496953522097
         },
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -540,7 +540,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "vzgp1f695",
       "uiAttribs": {
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "translate": {
           "x": 708.7147974770818,
           "y": 1950.3794984466533
@@ -568,7 +568,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "ezgb23rd4",
       "uiAttribs": {
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "translate": {
           "x": 708.7147974770818,
           "y": 2923.669129057075
@@ -579,57 +579,10 @@
       "storage": {}
     },
     {
-      "opId": "d75992b7-65e2-44d8-b264-320d4c5a5630",
-      "id": "czo5k3t62",
-      "uiAttribs": {
-        "title": "var set",
-        "subPatch": "er8rryafc",
-        "translate": {
-          "x": 1437.8539171491161,
-          "y": 2506.1991990749752
-        },
-        "extendTitle": "#currentTestName",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Variable",
-          "value": "currentTestName"
-        }
-      ]
-    },
-    {
-      "opId": "e828a0e1-cd24-4dfb-a0cf-6c944ca88ed4",
-      "id": "v1g22qld7",
-      "uiAttribs": {
-        "subPatch": "er8rryafc",
-        "translate": {
-          "x": 1449.8539171491161,
-          "y": 2411.0146062678846
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "Name",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Name",
-              "objIn": "czo5k3t62",
-              "objOut": "v1g22qld7"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "c1dd6e76-61b4-471a-b8d1-f550a5a9a4f4",
       "id": "sm2ek32ix",
       "uiAttribs": {
-        "subPatch": "er8rryafc",
+        "subPatch": "2smzqoqqx",
         "translate": {
           "x": 708.7147974770818,
           "y": 2142.2319116693234
@@ -679,6 +632,10 @@
           "value": 0
         },
         {
+          "name": "Double Sided",
+          "value": 0
+        },
+        {
           "name": "Screen Space Normals",
           "value": 0
         },
@@ -711,12 +668,6 @@
               "portIn": "Render",
               "portOut": "Next",
               "objIn": "5hwqkft4g",
-              "objOut": "sm2ek32ix"
-            },
-            {
-              "portIn": "Trigger",
-              "portOut": "Next",
-              "objIn": "czo5k3t62",
               "objOut": "sm2ek32ix"
             }
           ]

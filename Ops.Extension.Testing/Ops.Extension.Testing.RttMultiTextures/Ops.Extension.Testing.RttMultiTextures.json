@@ -1,0 +1,33 @@
+{
+    "id": "67336f06-e095-4ea2-bcea-d2fb20c38893",
+    "created": 1740738063166,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740738063190
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.RttMultiTextures",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740738105602
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "mwasf8rcb",
+                "uititle": "add port"
+            }
+        ],
+        "portsOut": []
+    }
+}
