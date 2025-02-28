@@ -5,7 +5,6 @@ const
     inStyle = op.inStringEditor("Style", "", "inline-css"),
     inDisplay = op.inSwitch("CSS Display", ["not set", "none"], "not set"),
     inAlt = op.inString("Alt Text"),
-    filename2 = op.inUrl("Fallback File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
     outImage = op.outObject("Image Element", null, "element"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
