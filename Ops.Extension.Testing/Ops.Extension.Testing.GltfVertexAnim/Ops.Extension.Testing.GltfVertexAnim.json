@@ -1,0 +1,39 @@
+{
+    "id": "d5a69fad-33f4-416c-949a-5a70f14d75d5",
+    "created": 1740754945937,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740754945961
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.VertexAnim",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740754965132
+        },
+        {
+            "message": "Extension.Testing.VertexAnim renamed to Ops.Extension.Testing.GltfVertexAnim",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740755979303
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "fwagmglix",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
