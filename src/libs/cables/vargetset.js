@@ -57,6 +57,7 @@ const VarSetOpWrapper = class
         else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
         else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
         else this._typeId = CABLES.Port.TYPE_VALUE;
+
     }
 
     _updateErrorUi()
