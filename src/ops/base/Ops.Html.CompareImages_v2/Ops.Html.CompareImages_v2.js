@@ -40,7 +40,7 @@ function compare()
 
     loadingId = op.patch.loading.start(op.name, CABLES.uuid(), op);
     canceled = false;
-
+    console.log("inCanv1.get()", inCanv1.get());
     try
     {
         resemble(inCanv2.get())
@@ -61,6 +61,7 @@ function compare()
                     outData.set(data);
                     loadingId = op.patch.loading.finished(loadingId);
                     outFinished.trigger();
+
                     console.log("", performance.now() - startTime);
                     finished = true;
                     console.log("finishe");

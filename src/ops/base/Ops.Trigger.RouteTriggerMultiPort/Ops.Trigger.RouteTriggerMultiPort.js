@@ -21,19 +21,19 @@ function update()
 
 outTrigs.on("onLinkChanged", () =>
 {
-    // console.log("Linkm changed");
-
     const arr = [];
     const trigs = outTrigs.get();
     for (let i = 0; i < trigs.length; i++)
     {
-        console.log(trigs[i]);
         if (trigs[i].isLinked())
         {
             const p = trigs[i].links[0].getOtherPort(trigs[i]);
-            // console.log();
-            arr.push(p.op.shortName);
+            arr.push(p.op.opId);
         }
+        // else
+        // {
+        // arr.push("none");
+        // }
     }
     outArrNames.setRef(arr);
 });
