@@ -25,6 +25,12 @@
             "message": "Ops.Dev.ExrTexture renamed to Ops.Gl.Textures.ExrTexture",
             "author": "pandur",
             "date": 1644228701961
+        },
+        {
+            "message": "Don't crash on wrong fileformat, show exception error message in op params",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741096172275
         }
     ],
     "authorName": "pandur",

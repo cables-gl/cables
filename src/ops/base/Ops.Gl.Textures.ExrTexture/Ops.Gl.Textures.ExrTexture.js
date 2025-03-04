@@ -40,6 +40,7 @@ function loadBin(addCacheBuster)
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
+    op.setUiError("exc", null);
 
     op.patch.loading.addAssetLoadingTask(() =>
     {
@@ -91,7 +92,8 @@ function loadBin(addCacheBuster)
             }
             catch (e)
             {
-                op.logError(e);
+                op.setUiError("exc", e.message);
+                // op.logError(e);
             }
 
             cgl.patch.loading.finished(loadingId);
