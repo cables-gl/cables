@@ -1,0 +1,34 @@
+{
+    "id": "fddf2f43-6a79-42ab-bb4b-a68ba3a9da1d",
+    "created": 1740908232769,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740908232795
+        },
+        {
+            "message": "Patch.PoQ1jhE.HtmlDecde renamed to Ops.String.HtmlDecode",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741000093324
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "result"
+            }
+        ]
+    }
+}

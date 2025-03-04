@@ -1,0 +1,42 @@
+{
+    "id": "d31bd751-3298-4529-9d0d-89e757bc5463",
+    "created": 1740736168391,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740736168415
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "OpId"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "Shortname"
+            },
+            {
+                "type": 0,
+                "name": "Version",
+                "subType": "number"
+            }
+        ]
+    }
+}
