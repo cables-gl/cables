@@ -4,6 +4,7 @@ import { CONSTANTS } from "./constants.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { CglContext } from "./cgl_state.js";
 import { CgMesh } from "../cg/cg_mesh.js";
+import { CgShader } from "../cg/cg_shader.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -655,6 +656,7 @@ class Mesh extends CgMesh
             }
 
             if (attrLocs[i] != -1) this._cgl.gl.disableVertexAttribArray(attrLocs[i]);
+
         }
     }
 
@@ -672,14 +674,20 @@ class Mesh extends CgMesh
         }
     }
 
+    /**
+     * @param {Number} num
+     */
     setNumVertices(num)
     {
-        this._bufVertexAttrib.numItems = num;
+        this._bufVerticesIndizes.numItems = num;
     }
 
+    /**
+     * @returns {Number}
+     */
     getNumVertices()
     {
-        return this._bufVertexAttrib.numItems;
+        return this._bufVerticesIndizes.numItems;
     }
 
     /**
@@ -687,7 +695,7 @@ class Mesh extends CgMesh
      * @memberof Mesh
      * @instance
      * @description draw mesh to screen
-     * @param {Shader} shader
+     * @param {CgShader} shader
      */
     render(shader)
     {
@@ -826,6 +834,7 @@ class Mesh extends CgMesh
              */
 
             if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
+
             if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
             else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
         }
@@ -834,8 +843,8 @@ class Mesh extends CgMesh
             if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0)
             {
-            // console.log("la", this._bufVerticesIndizes.numItems);
-
+                this._bufVertexAttrib.numItems;
+                console.log("yeyeye", this._bufVerticesIndizes);
                 this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
             }
             else
