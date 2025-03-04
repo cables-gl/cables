@@ -106,7 +106,9 @@ function loadImages()
         })
         .catch((err) =>
         {
-            op.error("error", err);
+            // op.error("error", err);
+            cgl.patch.loading.finished(loadingId);
+
             op.setUiError("loadingerror", "Could not load textures!", 2);
         });
 }
