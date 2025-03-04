@@ -370,6 +370,7 @@ export class CgContext extends Events
     // shnould be overwritten...
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
+        console.log("no screenshot function implemented");
     }
 
     saveScreenshot(filename, cb, pw, ph, noclearalpha)
