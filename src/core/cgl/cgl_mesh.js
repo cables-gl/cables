@@ -843,8 +843,6 @@ class Mesh extends CgMesh
             if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0)
             {
-                this._bufVertexAttrib.numItems;
-                console.log("yeyeye", this._bufVerticesIndizes);
                 this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
             }
             else
