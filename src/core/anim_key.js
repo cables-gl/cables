@@ -37,6 +37,9 @@ export class AnimKey
         else console.log("animkey without anim...");
     }
 
+    /**
+     * @param {Number} e
+     */
     setEasing(e)
     {
         this._easing = e;
@@ -70,7 +73,7 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
-        // this._updateBezier = true;
+            // this._updateBezier = true;
             this.ease = AnimKey.easeCubicSpline;
         }
         else
@@ -105,11 +108,11 @@ export class AnimKey
 
             if (obj.b)
             {
-            // this.bezTime = obj.b[0];
-            // this.bezValue = obj.b[1];
-            // this.bezTimeIn = obj.b[2];
-            // this.bezValueIn = obj.b[3];
-            // this._updateBezier = true;
+                // this.bezTime = obj.b[0];
+                // this.bezValue = obj.b[1];
+                // this.bezTimeIn = obj.b[2];
+                // this.bezValueIn = obj.b[3];
+                // this._updateBezier = true;
             }
 
             if (obj.hasOwnProperty("t")) this.time = obj.t;
@@ -121,8 +124,8 @@ export class AnimKey
     }
 
     /**
-     * @returns {Object}
-     */
+   * @returns {Object}
+   */
     getSerialized()
     {
         const obj = {};

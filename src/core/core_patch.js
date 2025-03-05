@@ -28,6 +28,8 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
  * @property {String} [prefixJsPath]
  * @property {Function} [onPatchLoaded]
+ * @property {Object} [canvas]
+ * @property {String} [patchtFile]
  *
  */
 
@@ -82,7 +84,8 @@ export class Patch extends Events
             "onFinishedLoading": null,
             "onFirstFrameRendered": null,
             "onPatchLoaded": null,
-            "fpsLimit": 0
+            "fpsLimit": 0,
+
         };
 
         this.timer = new Timer();

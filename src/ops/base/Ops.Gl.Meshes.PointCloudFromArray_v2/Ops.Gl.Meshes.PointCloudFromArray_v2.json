@@ -106,6 +106,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1726143208685
+        },
+        {
+            "message": "Fixed: num points parameter was not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1741096671287
         }
     ],
     "license": "MIT",

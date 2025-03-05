@@ -1,0 +1,165 @@
+{
+    "id": "c86eb411-a996-47cd-a149-264903dc408c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1668760304023,
+            "type": "new"
+        },
+        {
+            "message": "add normalization switch: more normalizing options",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034156799
+        },
+        {
+            "message": "cleanup op ports and remove stuff thats mostly not used",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034844588
+        },
+        {
+            "message": "better default values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034850149
+        },
+        {
+            "message": "added outputs Movement X/Y outputs the delta of mouse position",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1706698494011
+        },
+        {
+            "message": "Canvas area is now cropped and will not change outside of the canvas area",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1738146229190
+        },
+        {
+            "message": "New Version: Event type selector (mouse/touch/any pointer) /  removed \"touchscreen\" option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741094216249
+        },
+        {
+            "message": "added element input, this element is used instead of area/canvas parameter",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741094248273
+        },
+        {
+            "message": "added event output: html MouseEvent object",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741094305418
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Coordinates index",
+                "values": [
+                    "-1 to 1",
+                    "Pixel Display",
+                    "Pixel",
+                    "0 to 1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "right click prevent default",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Events index",
+                "values": [
+                    "Pointer",
+                    "Touch",
+                    "Mouse"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Passive Events",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "click"
+            },
+            {
+                "type": 1,
+                "name": "click right"
+            },
+            {
+                "type": 0,
+                "name": "Button is down",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mouse is hovering",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Movement X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Movement Y",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Event"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1741093503675,
+    "exampleProjectId": "mDiCq6",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Get mouse coordinates and events",
+    "license": "MIT"
+}
