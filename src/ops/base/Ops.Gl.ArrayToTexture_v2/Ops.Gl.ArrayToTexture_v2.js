@@ -5,7 +5,8 @@ const
     inSizeType = op.inSwitch("Size", ["Manual", "Square", "Row", "Column"], "Manual"),
     inWidth = op.inValueInt("width", 32),
     inHeight = op.inValueInt("height", 32),
-    fillUp = op.inBool("Fill Up", true),
+    fillUp = op.inBool("Fill Up", false),
+    flip = op.inBool("Flip", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "nearest"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
@@ -25,8 +26,9 @@ let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let needsUpdate = true;
 inExe.onTriggered = update;
 
-inStride.onChange =
-inSizeType.onChange =
+flip.onChange =
+    inStride.onChange =
+    inSizeType.onChange =
     inArr.onChange =
     tfilter.onChange =
     inPixel.onChange =
@@ -129,6 +131,22 @@ function update()
 
     if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture" });
 
+    if (flip.get())
+    {
+        const flipped = new Float32Array(pixels.length);
+
+        for (let i = 0; i < pixels.length; i += 4)
+        {
+            flipped[pixels.length - i - 4] = pixels[i];
+            flipped[pixels.length - i - 3] = pixels[i + 1];
+            flipped[pixels.length - i - 2] = pixels[i + 2];
+            flipped[pixels.length - i - 1] = pixels[i + 3];
+        }
+
+        pixels = flipped;
+    }
+
+    console.log(pixels);
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
 
     outWidth.set(w);

@@ -22,6 +22,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1685958892053
+        },
+        {
+            "message": "Added option to reverse/flip pixel data",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741190241037
         }
     ],
     "authorName": "pandur",
@@ -70,6 +76,11 @@
             {
                 "type": 0,
                 "name": "Fill Up",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
                 "subType": "boolean"
             },
             {
