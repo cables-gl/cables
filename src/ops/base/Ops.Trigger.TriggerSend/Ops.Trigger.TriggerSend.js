@@ -1,4 +1,7 @@
-const trigger = op.inTriggerButton("Trigger");
+const
+    trigger = op.inTriggerButton("Trigger"),
+    next = op.outTrigger("Next");
+
 op.varName = op.inValueSelect("Named Trigger", [], "", true);
 
 op.varName.onChange = updateName;
@@ -10,7 +13,6 @@ op.patch.addEventListener("namedTriggersChanged", updateVarNamesDropdown);
 updateVarNamesDropdown();
 
 op.varName.setUiAttribs({ "_triggerSelect": true });
-
 
 function updateVarNamesDropdown()
 {
@@ -79,4 +81,6 @@ function doTrigger()
     {
         arr[i]();
     }
+
+    next.trigger();
 }

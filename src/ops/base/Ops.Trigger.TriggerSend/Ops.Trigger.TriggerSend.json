@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725990438956
+        },
+        {
+            "message": "Added trigger output \"next\" to make op passthrough-able",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741175895479
         }
     ],
     "authorName": "pandur",
@@ -23,7 +29,12 @@
                 "name": "Trigger"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
     },
     "summary": "Allows triggers to be sent to a TriggerReceive op with the same variable name",
     "issues": "",
