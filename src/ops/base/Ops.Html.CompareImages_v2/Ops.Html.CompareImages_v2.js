@@ -70,7 +70,7 @@ function compare()
     }
     catch (e)
     {
-        console.log("eeeee", e.message);
+        // console.log("eeeee", e.message);
         clearTimeout(to);
         finished = true;
 

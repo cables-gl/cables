@@ -23,8 +23,7 @@ let listenerElement = null;
 let areaElement = null;
 
 inPassive.onChange =
-area.onChange = addListeners;
-
+    area.onChange = addListeners;
 inCoords.onChange = updateCoordNormalizing;
 op.onDelete = removeListeners;
 

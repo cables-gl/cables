@@ -30,7 +30,9 @@ function myStringify(o, level = 0)
     else if (typeof o === "number") str += o; //  e.g. in arrays
     else
     {
-        let keys = Object.keys(o);
+        // let keys = Object.keys(o);
+        let keys = [];
+        for (const kk in o) keys.push(kk);
         let numKeys = keys.length;
 
         if (inSort.get())
