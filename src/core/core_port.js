@@ -23,6 +23,7 @@ import { Anim } from "./anim.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {String} [display] internal: do not set manually
+ *
  */
 export class PortUiAttribs {}
 
@@ -93,6 +94,8 @@ export class Port extends Events
 
         /** @type {number} */
         this.type = type || Port.TYPE_VALUE;
+
+        /** @type {PortUiAttribs} */
         this.uiAttribs = uiAttribs || {};
 
         /** @type {Anim} */
@@ -551,9 +554,14 @@ export class Port extends Events
         return obj;
     }
 
-    shouldLink()
+    /**
+     * will be overwritten in ui
+     * @param {Port} port1
+     * @param {Port} port2
+     */
+    shouldLink(port1, port2)
     {
-        return true;
+        return port1 && port2;
     }
 
     /**

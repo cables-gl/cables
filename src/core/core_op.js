@@ -21,7 +21,7 @@ import { Patch } from "./core_patch.js";
  * @property {string} [color]
  * @property {string} [comment]
  * @property {object} [translate]
- * @property {string} [subpatch]
+ * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
  */
 
 export class Op extends Events
@@ -1351,7 +1351,7 @@ export class Op extends Events
 
     /**
      * @param {string} name
-     * @param {boolean} lowerCase
+     * @param {boolean} [lowerCase]
      * @returns {Port}
      */
     getPortByName(name, lowerCase = false)

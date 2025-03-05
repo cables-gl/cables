@@ -679,7 +679,8 @@ class Mesh extends CgMesh
      */
     setNumVertices(num)
     {
-        this._bufVerticesIndizes.numItems = num;
+        // this._bufVerticesIndizes.numItems = num;
+        this._bufVertexAttrib.numItems = num;
     }
 
     /**
@@ -687,7 +688,8 @@ class Mesh extends CgMesh
      */
     getNumVertices()
     {
-        return this._bufVerticesIndizes.numItems;
+        // return this._bufVerticesIndizes.numItems;
+        return this._bufVertexAttrib.numItems;
     }
 
     /**
