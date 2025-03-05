@@ -11,6 +11,8 @@ import { Patch } from "./core_patch.js";
  * configuration object for loading a patch
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
+ * @property {string} [hidePort] hidePort
+ * @property {string} [title] overwrite op title
  * @property {String} [title=''] overwrite title of port (by default this is portname)
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
@@ -33,7 +35,7 @@ export class Op extends Events
 
     opId = ""; // unique op id
 
-    /** @type {Array<CABLES.Port>} */
+    /** @type {Array<Port>} */
     portsOut = [];
 
     /** @type {Patch} */
@@ -116,7 +118,7 @@ export class Op extends Events
          * @function renderVizLayer
          * @instance
          * @memberof Op
-         * @param {ctx} context of canvas 2d
+         * @param {CanvasRenderingContext2D} context of canvas 2d
          * @param {Object} layer info
          * @param {number} layer.x x position on canvas
          * @param {number} layer.y y position on canvas
@@ -995,7 +997,7 @@ export class Op extends Events
     /**
      * create a array input port
      * @param {String} name
-     * @param {array} v
+     * @param {Array|Number} v
      * @param {number} stride
      * @return {Port} created port
      */
