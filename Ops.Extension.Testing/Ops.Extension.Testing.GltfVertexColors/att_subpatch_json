@@ -6,11 +6,11 @@
       "uiAttribs": {
         "translate": {
           "x": 826.1223022126512,
-          "y": 1000.0339743323536
+          "y": 857.0471870410965
         },
         "accBuffersDelete": "vertexpaint_cube",
         "loading": false,
-        "subPatch": "kd7y69a2m",
+        "subPatch": "pz7qsce2d",
         "extendTitle": "vertexpaint_cube",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -23,6 +23,7 @@
         },
         {
           "name": "glb File",
+          "value": "/assets/619e244ce4dff21e0ce04166/vertexpaint_cube.glb",
           "display": "file"
         },
         {
@@ -135,9 +136,9 @@
       "uiAttribs": {
         "translate": {
           "x": 826.1223022126512,
-          "y": 899.941416955205
+          "y": 669.429384109906
         },
-        "subPatch": "kd7y69a2m",
+        "subPatch": "pz7qsce2d",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -166,7 +167,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "xwhffn47h",
       "uiAttribs": {
-        "subPatch": "kd7y69a2m",
+        "subPatch": "pz7qsce2d",
         "translate": {
           "x": 826.1223022126512,
           "y": 0
@@ -187,18 +188,6 @@
               "objOut": "xwhffn47h"
             }
           ]
-        },
-        {
-          "name": "innerOut_150lmjbe5",
-          "title": "glb File",
-          "links": [
-            {
-              "portIn": "glb File",
-              "portOut": "innerOut_150lmjbe5",
-              "objIn": "rx4awvnec",
-              "objOut": "xwhffn47h"
-            }
-          ]
         }
       ]
     },
@@ -206,7 +195,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "w8560wqax",
       "uiAttribs": {
-        "subPatch": "kd7y69a2m",
+        "subPatch": "pz7qsce2d",
         "translate": {
           "x": 1089.204477578563,
           "y": 1025.6407166733777
@@ -214,13 +203,7 @@
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "innerIn_omkvad0bg",
-          "title": "Frozen String"
-        }
-      ]
+      "storage": {}
     }
   ]
 }
