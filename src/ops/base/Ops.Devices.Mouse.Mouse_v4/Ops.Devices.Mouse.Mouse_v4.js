@@ -1,6 +1,6 @@
 const
     inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
-    area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
+    area = op.inValueSelect("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
     inEventType = op.inSwitch("Events", ["Pointer", "Touch", "Mouse"]),
