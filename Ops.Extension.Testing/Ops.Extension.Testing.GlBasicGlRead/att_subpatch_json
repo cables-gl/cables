@@ -8,7 +8,7 @@
           "x": 1800.2906591733004,
           "y": 3192.080451007912
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -83,7 +83,7 @@
           "x": 1612.2501456209916,
           "y": 2959.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -195,7 +195,7 @@
           "x": 1780.2501456209916,
           "y": 2679.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -266,7 +266,7 @@
           "x": 2212.2501456209916,
           "y": 3019.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -323,7 +323,7 @@
           "x": 2236.2501456209916,
           "y": 2679.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -356,7 +356,7 @@
           "x": 2404.2501456209916,
           "y": 2759.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -387,9 +387,9 @@
       "uiAttribs": {
         "translate": {
           "x": 2596.2501456209916,
-          "y": 2839.147337926595
+          "y": 2882.097540234273
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -422,7 +422,7 @@
           "x": 2236.2501456209916,
           "y": 2639.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -455,7 +455,7 @@
           "x": 2404.2501456209916,
           "y": 2719.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -488,7 +488,7 @@
           "x": 2596.2501456209916,
           "y": 2799.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -521,7 +521,7 @@
           "x": 1732.3246358769843,
           "y": 2879.3307239754454
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -630,7 +630,7 @@
           "x": 2800.2501456209916,
           "y": 3639.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -713,10 +713,10 @@
       "id": "uwim8tevj",
       "uiAttribs": {
         "translate": {
-          "x": 2800.2501456209916,
-          "y": 3499.147337926595
+          "x": 2802.117761688995,
+          "y": 3452.456936226512
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -773,7 +773,7 @@
           "x": 2824.2501456209916,
           "y": 3159.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -806,7 +806,7 @@
           "x": 2992.2501456209916,
           "y": 3239.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -839,7 +839,7 @@
           "x": 3184.2501456209916,
           "y": 3319.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -870,9 +870,9 @@
       "uiAttribs": {
         "translate": {
           "x": 2824.2501456209916,
-          "y": 3119.147337926595
+          "y": 3005.2537838292146
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -905,7 +905,7 @@
           "x": 2992.2501456209916,
           "y": 3199.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -938,7 +938,7 @@
           "x": 3184.2501456209916,
           "y": 3279.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -971,7 +971,7 @@
           "x": 2800.2501456209916,
           "y": 3719.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1028,7 +1028,7 @@
           "x": 2068.2501456209916,
           "y": 3359.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1085,7 +1085,7 @@
           "x": 1792.2501456209916,
           "y": 2819.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1194,7 +1194,7 @@
           "x": 3124.2501456209916,
           "y": 4159.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1280,7 +1280,7 @@
           "x": 3124.2501456209916,
           "y": 4019.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1337,7 +1337,7 @@
           "x": 3148.2501456209916,
           "y": 3679.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1370,7 +1370,7 @@
           "x": 3316.2501456209916,
           "y": 3759.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1403,7 +1403,7 @@
           "x": 3508.2501456209916,
           "y": 3839.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1436,7 +1436,7 @@
           "x": 3148.2501456209916,
           "y": 3639.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1469,7 +1469,7 @@
           "x": 3316.2501456209916,
           "y": 3719.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1502,7 +1502,7 @@
           "x": 3508.2501456209916,
           "y": 3799.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1535,7 +1535,7 @@
           "x": 3124.2501456209916,
           "y": 4239.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1592,7 +1592,7 @@
           "x": 2056.2501456209916,
           "y": 3159.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1661,7 +1661,7 @@
           "x": 1864.2501456209916,
           "y": 3559.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1775,11 +1775,11 @@
         },
         {
           "name": "Width",
-          "value": 3.4055859375000006
+          "value": 2.93828125
         },
         {
           "name": "Height",
-          "value": 4.358427220394737
+          "value": 4.0727631578947365
         },
         {
           "name": "Start Y",
@@ -1787,7 +1787,7 @@
         },
         {
           "name": "Num Chars",
-          "value": 15
+          "value": 8
         }
       ]
     },
@@ -1799,7 +1799,7 @@
           "x": 2656.2501456209916,
           "y": 3859.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1913,11 +1913,11 @@
         },
         {
           "name": "Width",
-          "value": 3.5061718750000006
+          "value": 2.8488671875
         },
         {
           "name": "Height",
-          "value": 4.076786595394736
+          "value": 4.0727631578947365
         },
         {
           "name": "Start Y",
@@ -1925,7 +1925,7 @@
         },
         {
           "name": "Num Chars",
-          "value": 15
+          "value": 8
         }
       ]
     },
@@ -1937,7 +1937,7 @@
           "x": 3004.2501456209916,
           "y": 4399.147337926595
         },
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -2051,11 +2051,11 @@
         },
         {
           "name": "Width",
-          "value": 3.9896093749999997
+          "value": 2.1921875
         },
         {
           "name": "Height",
-          "value": 4.358427220394737
+          "value": 4.0727631578947365
         },
         {
           "name": "Start Y",
@@ -2063,7 +2063,7 @@
         },
         {
           "name": "Num Chars",
-          "value": 16
+          "value": 7
         }
       ]
     },
@@ -2071,7 +2071,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "hid0rgq6o",
       "uiAttribs": {
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "translate": {
           "x": 1848.3104802350854,
           "y": 2496.99089099314
@@ -2099,7 +2099,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "bmkv8gqqk",
       "uiAttribs": {
-        "subPatch": "38af2kpd5",
+        "subPatch": "xwqk5bmkc",
         "translate": {
           "x": 1612.2501456209916,
           "y": 4510.147337926595

@@ -6,22 +6,6 @@
             "dir": 0,
             "type": 1,
             "order": 0
-        },
-        {
-            "id": "j4na3hfde",
-            "title": "Frozen String",
-            "dir": 1,
-            "type": 5,
-            "value": "",
-            "order": 1001
-        },
-        {
-            "id": "x5xqdk8ov",
-            "title": "Frozen String",
-            "dir": 1,
-            "type": 5,
-            "value": "Ops.Extension.Testing.GlFrontBackMaterial",
-            "order": 1002
         }
     ]
 }

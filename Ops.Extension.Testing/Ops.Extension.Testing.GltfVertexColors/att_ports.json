@@ -6,23 +6,6 @@
             "dir": 0,
             "type": 1,
             "order": 0
-        },
-        {
-            "id": "150lmjbe5",
-            "title": "glb File",
-            "dir": 0,
-            "type": 5,
-            "uiDisplay": "file",
-            "value": "/assets/664711fbbb71706c00625ead/vertexpaint_cube.glb",
-            "order": 1
-        },
-        {
-            "id": "omkvad0bg",
-            "title": "Frozen String",
-            "dir": 1,
-            "type": 5,
-            "value": "Ops.Extension.Testing.GltfVertexColors",
-            "order": 1002
         }
     ]
 }
