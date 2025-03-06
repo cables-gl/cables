@@ -1,0 +1,45 @@
+{
+    "id": "fdbe0bbc-ab22-4de5-afc1-e237d5f2a388",
+    "created": 1741254582567,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740740031822
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureEffects4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740740051168
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741254582568
+        },
+        {
+            "message": "Patch.PAh3NTD.TextureEffects8 renamed to Ops.Extension.Testing.TextureEffects8",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741254698736
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "pn5m90tob",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}
