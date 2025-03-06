@@ -21,7 +21,7 @@ export class CgpMesh extends CgMesh
         this._pipe = new Pipeline(this._cgp, "pipe mesh " + __geom.name, Pipeline.TYPE_RENDER);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
-        this._bufVerticesIndizes = null;
+
         this._attributes = [];
 
         if (__geom) this.setGeom(__geom);
