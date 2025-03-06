@@ -1,19 +1,25 @@
 {
-    "id": "b3dfae46-687c-417c-b85d-9712111ea022",
-    "created": 1716467098863,
+    "id": "6d12d909-bcbf-45cb-9361-a74c5de3b199",
+    "created": 1716289682986,
     "authorName": "pandur",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1716467098899
+            "date": 1716289683030
         },
         {
             "message": " updated core libs: subpatchop",
             "type": "",
             "author": "pandur",
-            "date": 1716467099532
+            "date": 1716289683400
+        },
+        {
+            "message": "Extension.Testing.GlFrontBackMaterial renamed to Ops.Extension.Testing.MaterialGlFrontBack",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741267204998
         }
     ],
     "coreLibs": [
@@ -23,7 +29,7 @@
         "portsIn": [
             {
                 "type": 1,
-                "name": "mvh7lcans",
+                "name": "d2yd0ra4y",
                 "uititle": "render"
             }
         ],

@@ -1,0 +1,33 @@
+{
+    "id": "87432f74-d824-4b43-b7b4-eb061133dd59",
+    "created": 1741266275062,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741266275087
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Wireframes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741266303108
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "6hwu16nrl",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

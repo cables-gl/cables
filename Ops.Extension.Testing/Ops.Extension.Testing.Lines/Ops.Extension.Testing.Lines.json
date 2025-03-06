@@ -1,0 +1,33 @@
+{
+    "id": "42e8a9f7-ae9c-4190-ade9-3d33f67e3357",
+    "created": 1741266140699,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741266140723
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Lines",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741266178268
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "z6qfzqhdl",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

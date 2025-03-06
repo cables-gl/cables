@@ -1,0 +1,11 @@
+{
+    "ports": [
+        {
+            "id": "1xuq00pwz",
+            "title": "Trigger_24",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        }
+    ]
+}
