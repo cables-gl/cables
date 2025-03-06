@@ -40,7 +40,7 @@ function compare()
 
     loadingId = op.patch.loading.start(op.name, CABLES.uuid(), op);
     canceled = false;
-    console.log("inCanv1.get()", inCanv1.get());
+    // console.log("inCanv1.get()", inCanv1.get());
     try
     {
         resemble(inCanv2.get())
@@ -70,7 +70,7 @@ function compare()
     }
     catch (e)
     {
-        console.log("eeeee", e.message);
+        // console.log("eeeee", e.message);
         clearTimeout(to);
         finished = true;
 

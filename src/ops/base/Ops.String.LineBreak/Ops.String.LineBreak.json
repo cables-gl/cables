@@ -1,0 +1,32 @@
+{
+    "id": "3f87d5bf-bf38-4674-8445-c92191b892cb",
+    "created": 1741174774451,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741174774451
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Outputs a linebreak, or adds a linebreak to a string",
+    "docs": {
+        "ports": []
+    }
+}

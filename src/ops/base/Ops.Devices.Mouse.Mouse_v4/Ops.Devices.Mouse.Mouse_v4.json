@@ -160,6 +160,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Get mouse coordinates and events",
+    "summary": "Get mouse/touchscreen/pointer coordinates and events",
     "license": "MIT"
 }

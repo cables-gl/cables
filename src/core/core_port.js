@@ -7,6 +7,7 @@ import { Anim } from "./anim.js";
 
 /**
  * @property  {String} [title=''] overwrite title of port (by default this is portname)
+ * @property  {String} [display=''] how the port is displayed and interacted in the paramerer panel
  * @property  {Boolean} [greyout=false] port paramater will appear greyed out, can not be
  * @property  {Boolean} [hidePort] port will be hidden from op
  * @property  {Boolean} [hideParam] port params will be hidden from parameter panel
@@ -22,6 +23,7 @@ import { Anim } from "./anim.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {String} [display] internal: do not set manually
+ *
  */
 export class PortUiAttribs {}
 
@@ -63,7 +65,7 @@ export class Port extends Events
      * @param {number} type
      * @param {PortUiAttribs} uiAttribs
      */
-    constructor(___op, name, type, uiAttribs)
+    constructor(___op, name, type, uiAttribs = {})
     {
         super();
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
@@ -92,6 +94,8 @@ export class Port extends Events
 
         /** @type {number} */
         this.type = type || Port.TYPE_VALUE;
+
+        /** @type {PortUiAttribs} */
         this.uiAttribs = uiAttribs || {};
 
         /** @type {Anim} */
@@ -550,9 +554,14 @@ export class Port extends Events
         return obj;
     }
 
-    shouldLink()
+    /**
+     * will be overwritten in ui
+     * @param {Port} port1
+     * @param {Port} port2
+     */
+    shouldLink(port1, port2)
     {
-        return true;
+        return port1 && port2;
     }
 
     /**

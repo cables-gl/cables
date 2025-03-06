@@ -19,6 +19,7 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
  * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
  * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {Boolean} [glCanvasResizeToParent] resize canvas automatically to parent element
  * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
  * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
  * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
@@ -29,9 +30,9 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {String} [prefixJsPath]
  * @property {Function} [onPatchLoaded]
  * @property {Object} [canvas]
- * @property {String} [patchtFile]
- *
- */
+ * @property {String} [patchFile]
+ * @property {String} [subPatch] internal use
+  */
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -740,6 +741,10 @@ export class Patch extends Events
         }
     }
 
+    /**
+     * @param {Object} options
+     * @returns {Object|String}
+     */
     serialize(options)
     {
         const obj = {};
@@ -770,19 +775,14 @@ export class Patch extends Events
         return refOps;
     }
 
+    /**
+     * @param {String} opid
+     * @returns {Op}
+     */
     getOpById(opid)
     {
         return this._opIdCache[opid];
     }
-
-    // getOpsByName(name)
-    // {
-    //     // TODO: is this still needed ? unclear behaviour....
-    //     const arr = [];
-    //     for (const i in this.ops)
-    //         if (this.ops[i].name == name) arr.push(this.ops[i]);
-    //     return arr;
-    // }
 
     /**
      * @param {String} name
@@ -796,7 +796,7 @@ export class Patch extends Events
     }
 
     /**
-     * @param {UUID} opid
+     * @param {String} opid
      */
     getOpsByOpId(opid)
     {
@@ -1164,7 +1164,6 @@ export class Patch extends Events
      */
     setVariable(name, val)
     {
-        // if (this._variables.hasOwnProperty(name))
         if (this._variables[name] !== undefined)
         {
             this._variables[name].setValue(val);
@@ -1199,8 +1198,6 @@ export class Patch extends Events
     hasVar(name)
     {
         return this._variables[name] !== undefined;
-
-        // return this._variables.hasOwnProperty(name);
     }
 
     // used internally
@@ -1230,11 +1227,10 @@ export class Patch extends Events
      * @memberof Patch
      * @instance
      * @param {String} name
-     * @return {Variable} variable
+     * @return {PatchVariable} variable
      */
     getVar(name)
     {
-
         if (this._variables.hasOwnProperty(name)) return this._variables[name];
     }
 
@@ -1252,7 +1248,7 @@ export class Patch extends Events
 
     /**
      * @param {number} t
-     * @returns {any}
+     * @returns {Array<PatchVariable>}
      */
     getVars(t)
     {

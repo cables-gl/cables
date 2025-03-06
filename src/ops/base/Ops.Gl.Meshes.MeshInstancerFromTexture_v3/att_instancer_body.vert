@@ -12,7 +12,6 @@ vec3 scale=vec3(1.0);
     scale*=texture(MOD_texScale,tc).rgb;
 #endif
 
-if(posCol.a<MOD_alphaThresh)scale=vec3(0.0); // use step ?
 
 
 texInstMat[0][0]=
@@ -44,6 +43,16 @@ texInstMat[3][3]=1.0;
 texInstMat[3][0]=MOD_texPos.x;
 texInstMat[3][1]=MOD_texPos.y;
 texInstMat[3][2]=MOD_texPos.z;
+
+
+if(posCol.a<MOD_alphaThresh)
+{
+texInstMat[3][0]=
+texInstMat[3][1]=
+texInstMat[3][2]=999999.0;
+    // scale=vec3(0.0); // use step ?
+}
+
 
 mat4 scalem;
 scalem[0][0]=MOD_scale*scale.x;

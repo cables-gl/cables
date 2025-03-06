@@ -1,6 +1,6 @@
 const
     inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
-    area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element", "Canvas Area"], "Canvas"),
+    area = op.inValueSelect("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
     flipY = op.inValueBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
     inEventType = op.inSwitch("Events", ["Pointer", "Touch", "Mouse"]),
@@ -23,8 +23,7 @@ let listenerElement = null;
 let areaElement = null;
 
 inPassive.onChange =
-area.onChange = addListeners;
-
+    area.onChange = addListeners;
 inCoords.onChange = updateCoordNormalizing;
 op.onDelete = removeListeners;
 
@@ -151,7 +150,7 @@ function updateCoordNormalizing()
 
 function onMouseEnter(e)
 {
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseDown.set(false);
     mouseOver.set(checkHovering(e));
 }
@@ -159,20 +158,20 @@ function onMouseEnter(e)
 function onMouseDown(e)
 {
     if (!checkHovering(e)) return;
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseDown.set(true);
 }
 
 function onMouseUp(e)
 {
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseDown.set(false);
 }
 
 function onClickRight(e)
 {
     if (!checkHovering(e)) return;
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseClickRight.trigger();
     if (rightClickPrevDef.get()) e.preventDefault();
 }
@@ -180,15 +179,55 @@ function onClickRight(e)
 function onmouseclick(e)
 {
     if (!checkHovering(e)) return;
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseClick.trigger();
 }
 
 function onMouseLeave(e)
 {
-    outEvent.set(e);
+    outEvent.setRef(e);
     mouseDown.set(false);
     mouseOver.set(checkHovering(e));
+}
+
+function onmousemove(e)
+{
+    mouseOver.set(checkHovering(e));
+    if (area.get() === "Canvas Area")
+    {
+        const r = areaElement.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+
+        if (x < 0 || x > r.width || y > r.height || y < 0) return;
+    }
+
+    outEvent.setRef(e);
+    setCoords(e);
+
+    outMovementX.set(e.movementX / cgl.pixelDensity);
+    outMovementY.set(e.movementY / cgl.pixelDensity);
+}
+
+function ontouchmove(e)
+{
+    if (event.touches && event.touches.length > 0) setCoords(e.touches[0]);
+    outEvent.setRef(e);
+}
+
+function ontouchstart(event)
+{
+    mouseDown.set(true);
+
+    if (event.touches && event.touches.length > 0) onMouseDown(event.touches[0]);
+    outEvent.setRef(e);
+}
+
+function ontouchend(event)
+{
+    mouseDown.set(false);
+    onMouseUp();
+    outEvent.setRef(e);
 }
 
 /// ////
@@ -225,42 +264,6 @@ function setCoords(e)
     if (flipY.get()) y = areaElement.clientHeight - y;
 
     setValue(x / cgl.pixelDensity, y / cgl.pixelDensity);
-}
-
-function onmousemove(e)
-{
-    mouseOver.set(checkHovering(e));
-    if (area.get() === "Canvas Area")
-    {
-        const r = areaElement.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-
-        if (x < 0 || x > r.width || y > r.height || y < 0) return;
-    }
-
-    setCoords(e);
-
-    outMovementX.set(e.movementX / cgl.pixelDensity);
-    outMovementY.set(e.movementY / cgl.pixelDensity);
-}
-
-function ontouchmove(e)
-{
-    if (event.touches && event.touches.length > 0) setCoords(e.touches[0]);
-}
-
-function ontouchstart(event)
-{
-    mouseDown.set(true);
-
-    if (event.touches && event.touches.length > 0) onMouseDown(event.touches[0]);
-}
-
-function ontouchend(event)
-{
-    mouseDown.set(false);
-    onMouseUp();
 }
 
 function removeListeners()
