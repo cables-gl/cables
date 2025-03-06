@@ -9,7 +9,7 @@
           "y": 4219.057334518758
         },
         "loading": false,
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "extendTitle": "uv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -116,7 +116,7 @@
           "x": 1867.8267967291467,
           "y": 4299.057334518758
         },
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "x": 1867.8267967291467,
           "y": 3619.0573345187577
         },
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -195,7 +195,7 @@
           "x": 1867.8267967291467,
           "y": 4411.280048613936
         },
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -252,7 +252,7 @@
           "x": 1867.8267967291467,
           "y": 4344.613113652929
         },
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -316,7 +316,7 @@
         },
         "accBuffersDelete": "head-multi_UV",
         "loading": false,
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "extendTitle": "head-multi_UV",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -398,7 +398,7 @@
         },
         {
           "name": "Calc Normals",
-          "value": false
+          "value": "Auto"
         },
         {
           "name": "Hide Nodes",
@@ -440,7 +440,7 @@
       "opId": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
       "id": "jxd841o9a",
       "uiAttribs": {
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "translate": {
           "x": 1915.8267967291467,
           "y": 3836.727881637946
@@ -474,7 +474,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "j56nb1kue",
       "uiAttribs": {
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "translate": {
           "x": 1867.8267967291467,
           "y": 0
@@ -502,7 +502,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "8iaa9c9jm",
       "uiAttribs": {
-        "subPatch": "zbigd4i8z",
+        "subPatch": "e1s5wdmzv",
         "translate": {
           "x": 1867.8267967291467,
           "y": 4590.057334518758

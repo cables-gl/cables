@@ -2,13 +2,13 @@
   "ops": [
     {
       "opId": "fac012e2-43c8-4e21-85ac-189fe85d5723",
-      "id": "275bzgwqx",
+      "id": "vpqksu27r",
       "uiAttribs": {
         "translate": {
-          "x": 3661.4850558085714,
-          "y": 3912.5777807502636
+          "x": 3332.084544693129,
+          "y": 4027.79902208873
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -20,8 +20,8 @@
             {
               "portIn": "array",
               "portOut": "Array",
-              "objIn": "qaceyr6gg",
-              "objOut": "275bzgwqx"
+              "objIn": "p4ay9sgbt",
+              "objOut": "vpqksu27r"
             }
           ]
         },
@@ -31,8 +31,8 @@
             {
               "portIn": "number",
               "portOut": "Count",
-              "objIn": "7orooixsg",
-              "objOut": "275bzgwqx"
+              "objIn": "oqtsprhqv",
+              "objOut": "vpqksu27r"
             }
           ]
         }
@@ -40,13 +40,13 @@
     },
     {
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
-      "id": "br7tkpk6i",
+      "id": "26r381fi7",
       "uiAttribs": {
         "translate": {
-          "x": 2689.4850558085714,
-          "y": 4452.577780750264
+          "x": 1930.727381884963,
+          "y": 4065.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -80,8 +80,8 @@
             {
               "portIn": "render",
               "portOut": "trigger",
-              "objIn": "tp1z9k1kq",
-              "objOut": "br7tkpk6i"
+              "objIn": "mv1pj53r8",
+              "objOut": "26r381fi7"
             }
           ]
         }
@@ -89,13 +89,13 @@
     },
     {
       "opId": "ec55d252-3843-41b1-b731-0482dbd9e72b",
-      "id": "tp1z9k1kq",
+      "id": "mv1pj53r8",
       "uiAttribs": {
         "translate": {
-          "x": 2689.4850558085714,
-          "y": 4532.577780750264
+          "x": 1930.727381884963,
+          "y": 4145.947679903408
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -173,8 +173,8 @@
             {
               "portIn": "render",
               "portOut": "trigger",
-              "objIn": "agvlpvjra",
-              "objOut": "tp1z9k1kq"
+              "objIn": "l9vgehpck",
+              "objOut": "mv1pj53r8"
             }
           ]
         }
@@ -182,13 +182,13 @@
     },
     {
       "opId": "afea522b-ab72-4574-b721-5d37f5abaf77",
-      "id": "qaceyr6gg",
+      "id": "p4ay9sgbt",
       "uiAttribs": {
         "translate": {
-          "x": 3025.4850558085714,
-          "y": 4212.577780750264
+          "x": 2266.727381884963,
+          "y": 3825.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -200,8 +200,8 @@
             {
               "portIn": "texture",
               "portOut": "value",
-              "objIn": "tp1z9k1kq",
-              "objOut": "qaceyr6gg"
+              "objIn": "mv1pj53r8",
+              "objOut": "p4ay9sgbt"
             }
           ]
         }
@@ -209,13 +209,13 @@
     },
     {
       "opId": "79934693-5887-4173-8b48-3e3a18fcf225",
-      "id": "vrvjb5bka",
+      "id": "skpagddju",
       "uiAttribs": {
         "translate": {
-          "x": 2677.4850558085714,
-          "y": 4132.577780750264
+          "x": 1918.727381884963,
+          "y": 3745.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -237,8 +237,8 @@
             {
               "portIn": "render",
               "portOut": "trigger",
-              "objIn": "br7tkpk6i",
-              "objOut": "vrvjb5bka"
+              "objIn": "26r381fi7",
+              "objOut": "skpagddju"
             }
           ]
         },
@@ -248,8 +248,8 @@
             {
               "portIn": "posX",
               "portOut": "x",
-              "objIn": "br7tkpk6i",
-              "objOut": "vrvjb5bka"
+              "objIn": "26r381fi7",
+              "objOut": "skpagddju"
             }
           ]
         },
@@ -259,8 +259,8 @@
             {
               "portIn": "posY",
               "portOut": "y",
-              "objIn": "br7tkpk6i",
-              "objOut": "vrvjb5bka"
+              "objIn": "26r381fi7",
+              "objOut": "skpagddju"
             }
           ]
         },
@@ -270,8 +270,8 @@
             {
               "portIn": "index",
               "portOut": "index",
-              "objIn": "qaceyr6gg",
-              "objOut": "vrvjb5bka"
+              "objIn": "p4ay9sgbt",
+              "objOut": "skpagddju"
             }
           ]
         },
@@ -283,13 +283,13 @@
     },
     {
       "opId": "dec567c3-231d-4146-964d-891fde8924f1",
-      "id": "7orooixsg",
+      "id": "oqtsprhqv",
       "uiAttribs": {
         "translate": {
-          "x": 2821.4850558085714,
-          "y": 3892.5777807502636
+          "x": 2062.727381884963,
+          "y": 3505.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -301,8 +301,8 @@
             {
               "portIn": "Number",
               "portOut": "result",
-              "objIn": "xwk9ii3pd",
-              "objOut": "7orooixsg"
+              "objIn": "b116scxr5",
+              "objOut": "oqtsprhqv"
             }
           ]
         }
@@ -310,13 +310,13 @@
     },
     {
       "opId": "15ba7aa9-b1c3-4b20-b6bf-b52a3ba8c8c5",
-      "id": "xwk9ii3pd",
+      "id": "b116scxr5",
       "uiAttribs": {
         "translate": {
-          "x": 2821.4850558085714,
-          "y": 3932.5777807502636
+          "x": 2062.727381884963,
+          "y": 3545.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -328,14 +328,14 @@
             {
               "portIn": "num y",
               "portOut": "Result",
-              "objIn": "vrvjb5bka",
-              "objOut": "xwk9ii3pd"
+              "objIn": "skpagddju",
+              "objOut": "b116scxr5"
             },
             {
               "portIn": "num x",
               "portOut": "Result",
-              "objIn": "vrvjb5bka",
-              "objOut": "xwk9ii3pd"
+              "objIn": "skpagddju",
+              "objOut": "b116scxr5"
             }
           ]
         }
@@ -343,13 +343,13 @@
     },
     {
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
-      "id": "825gagl26",
+      "id": "z8voz9scd",
       "uiAttribs": {
         "translate": {
-          "x": 2689.4850558085714,
-          "y": 3812.5777807502636
+          "x": 1918.727381884963,
+          "y": 3211.4214778599717
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -391,53 +391,8 @@
             {
               "portIn": "exe",
               "portOut": "trigger",
-              "objIn": "vrvjb5bka",
-              "objOut": "825gagl26"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "19b441eb-9f63-4f35-ba08-b87841517c4d",
-      "id": "5y2l7f1za",
-      "uiAttribs": {
-        "translate": {
-          "x": 2677.4850558085714,
-          "y": 3652.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "r",
-          "value": 0.2970052083333333
-        },
-        {
-          "name": "g",
-          "value": 0.2970052083333333
-        },
-        {
-          "name": "b",
-          "value": 0.2970052083333333
-        },
-        {
-          "name": "a",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "825gagl26",
-              "objOut": "5y2l7f1za"
+              "objIn": "skpagddju",
+              "objOut": "z8voz9scd"
             }
           ]
         }
@@ -445,514 +400,72 @@
     },
     {
       "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
-      "id": "iwsjto37q",
+      "id": "xh7xkq7ro",
       "uiAttribs": {
         "resizable": true,
         "resizableY": false,
         "stretchPorts": true,
         "translate": {
-          "x": 2654.4850558085714,
-          "y": 3252.5777807502636
+          "x": 1895.727381884963,
+          "y": 2865.9476799034082
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
       "storage": {},
       "portsOut": [
         {
-          "name": "trigger 3",
+          "name": "trigger 0",
           "links": [
             {
               "portIn": "Render",
-              "portOut": "trigger 3",
-              "objIn": "g4wn9nc2n",
-              "objOut": "iwsjto37q"
+              "portOut": "trigger 0",
+              "objIn": "gx42uy1nc",
+              "objOut": "xh7xkq7ro"
             },
             {
               "portIn": "Render",
-              "portOut": "trigger 3",
-              "objIn": "g0cj7la52",
-              "objOut": "iwsjto37q"
+              "portOut": "trigger 0",
+              "objIn": "9rnehh757",
+              "objOut": "xh7xkq7ro"
             },
             {
               "portIn": "Render",
-              "portOut": "trigger 3",
-              "objIn": "9e3co4jlu",
-              "objOut": "iwsjto37q"
+              "portOut": "trigger 0",
+              "objIn": "rrw9hhgqy",
+              "objOut": "xh7xkq7ro"
             },
             {
               "portIn": "Render",
-              "portOut": "trigger 3",
-              "objIn": "jiep5b2qs",
-              "objOut": "iwsjto37q"
+              "portOut": "trigger 0",
+              "objIn": "yq19uom32",
+              "objOut": "xh7xkq7ro"
             }
           ]
         },
         {
-          "name": "trigger 12",
+          "name": "trigger 15",
           "links": [
             {
               "portIn": "render",
-              "portOut": "trigger 12",
-              "objIn": "5y2l7f1za",
-              "objOut": "iwsjto37q"
+              "portOut": "trigger 15",
+              "objIn": "z8voz9scd",
+              "objOut": "xh7xkq7ro"
             }
           ]
-        }
-      ]
-    },
-    {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "e53be15ox",
-      "uiAttribs": {
-        "translate": {
-          "x": 3553.4850558085714,
-          "y": 3092.5777807502636
-        },
-        "loading": false,
-        "subPatch": "1b15u3dhh",
-        "extendTitle": "beach",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/images/beach.jpg",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": 0
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "Base Texture",
-              "portOut": "Texture",
-              "objIn": "g4wn9nc2n",
-              "objOut": "e53be15ox"
-            },
-            {
-              "portIn": "Base Texture",
-              "portOut": "Texture",
-              "objIn": "g0cj7la52",
-              "objOut": "e53be15ox"
-            },
-            {
-              "portIn": "Base Texture",
-              "portOut": "Texture",
-              "objIn": "9e3co4jlu",
-              "objOut": "e53be15ox"
-            },
-            {
-              "portIn": "Base Texture",
-              "portOut": "Texture",
-              "objIn": "jiep5b2qs",
-              "objOut": "e53be15ox"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 1024
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "opId": "d5efa9e4-d552-42f8-a345-d49e5e861602",
-      "id": "ah2t646gj",
-      "uiAttribs": {
-        "translate": {
-          "x": 3529.4850558085714,
-          "y": 3392.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Blend Mode index",
-          "value": 0
-        },
-        {
-          "name": "Blend Mode",
-          "value": "normal"
-        },
-        {
-          "name": "Amount",
-          "value": 1
-        },
-        {
-          "name": "Intensity",
-          "value": -175.51
-        }
-      ]
-    },
-    {
-      "opId": "ee773dc0-d00c-4d6a-86b7-8fd32f9d72e1",
-      "id": "70r9noy38",
-      "uiAttribs": {
-        "translate": {
-          "x": 3841.4850558085714,
-          "y": 3492.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "extendTitle": "mul",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "width",
-          "value": 0.93
-        },
-        {
-          "name": "Blend Mode index",
-          "value": 3
-        },
-        {
-          "name": "Blend Mode",
-          "value": "multiply"
-        },
-        {
-          "name": "Alpha Mask index",
-          "value": 0
-        },
-        {
-          "name": "Alpha Mask",
-          "value": "Off"
-        },
-        {
-          "name": "Amount",
-          "value": 1
-        },
-        {
-          "name": "Smooth",
-          "value": 0
-        },
-        {
-          "name": "r",
-          "value": 0
-        },
-        {
-          "name": "g",
-          "value": 0.771640625
-        },
-        {
-          "name": "b",
-          "value": 0.005666735839843735
-        },
-        {
-          "name": "Side A",
-          "value": 1
-        },
-        {
-          "name": "Side B",
-          "value": 1
-        },
-        {
-          "name": "Side C",
-          "value": 1
-        },
-        {
-          "name": "Side D",
-          "value": 1
-        }
-      ]
-    },
-    {
-      "opId": "37d66c32-5594-4509-bba0-0ba2cbb706d8",
-      "id": "io1nk74s7",
-      "uiAttribs": {
-        "translate": {
-          "x": 3841.4850558085714,
-          "y": 3372.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "amount",
-          "value": 3
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "Trigger",
-              "objIn": "70r9noy38",
-              "objOut": "io1nk74s7"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "086ca023-af3c-4e3a-9be7-1972adcf63b5",
-      "id": "4wk6ghzq9",
-      "uiAttribs": {
-        "translate": {
-          "x": 4045.4850558085714,
-          "y": 3412.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Blend Mode index",
-          "value": 0
-        },
-        {
-          "name": "Blend Mode",
-          "value": "normal"
-        },
-        {
-          "name": "Amount",
-          "value": 1
-        },
-        {
-          "name": "Mode index",
-          "value": 2
-        },
-        {
-          "name": "Mode",
-          "value": "Remap smooth"
-        },
-        {
-          "name": "Min",
-          "value": 0.3
-        },
-        {
-          "name": "Max",
-          "value": 0.5
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "39bxwhmf7",
-              "objOut": "4wk6ghzq9"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "0abfea0f-1aa9-47bf-b540-f54f89a60a6c",
-      "id": "aa5oqf0x8",
-      "uiAttribs": {
-        "translate": {
-          "x": 4273.485055808571,
-          "y": 3452.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Exponent",
-          "value": 1
-        }
-      ]
-    },
-    {
-      "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
-      "id": "xx79pfvjm",
-      "uiAttribs": {
-        "translate": {
-          "x": 4273.485055808571,
-          "y": 3412.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Repeats",
-          "value": 5
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "Forward"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "Next",
-              "objIn": "aa5oqf0x8",
-              "objOut": "xx79pfvjm"
-            }
-          ]
-        },
-        {
-          "name": "index",
-          "value": 4
-        }
-      ]
-    },
-    {
-      "opId": "942ef040-9be9-4848-9122-61cb28cb7789",
-      "id": "39bxwhmf7",
-      "uiAttribs": {
-        "translate": {
-          "x": 4045.4850558085714,
-          "y": 3512.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Blend Mode index",
-          "value": 0
-        },
-        {
-          "name": "Blend Mode",
-          "value": "normal"
-        },
-        {
-          "name": "Amount",
-          "value": 1
-        },
-        {
-          "name": "Scale X",
-          "value": 1.5
-        },
-        {
-          "name": "Scale Y",
-          "value": 1.5
-        },
-        {
-          "name": "offset X",
-          "value": 0
-        },
-        {
-          "name": "offset Y",
-          "value": 0
-        },
-        {
-          "name": "center X",
-          "value": 0.5
-        },
-        {
-          "name": "center Y",
-          "value": 0.5
-        },
-        {
-          "name": "Clear",
-          "value": 1
         }
       ]
     },
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
-      "id": "agvlpvjra",
+      "id": "l9vgehpck",
       "uiAttribs": {
         "translate": {
-          "x": 2689.4850558085714,
-          "y": 4592.577780750264
+          "x": 1930.727381884963,
+          "y": 4205.947679903408
         },
-        "subPatch": "1b15u3dhh",
+        "subPatch": "t6au0n21k",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1018,34 +531,114 @@
       ]
     },
     {
-      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
-      "id": "g4wn9nc2n",
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "6fynxkxd9",
       "uiAttribs": {
+        "subPatch": "t6au0n21k",
         "translate": {
-          "x": 3553.4850558085714,
-          "y": 3212.5777807502636
+          "x": 1959.9578918443908,
+          "y": 1991.5158547799826
         },
-        "subPatch": "1b15u3dhh",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
       "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_xw08j02i4",
+          "title": "exe",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "innerOut_xw08j02i4",
+              "objIn": "xh7xkq7ro",
+              "objOut": "6fynxkxd9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "v31ufh6go",
+      "uiAttribs": {
+        "subPatch": "t6au0n21k",
+        "translate": {
+          "x": 1895.727381884963,
+          "y": 4316.947679903408
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+      "id": "xigmxz88r",
+      "uiAttribs": {
+        "title": "var get",
+        "subPatch": "t6au0n21k",
+        "translate": {
+          "x": 3971.8867576123375,
+          "y": 2600.011007754486
+        },
+        "extendTitle": "#texBeach",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
       "portsIn": [
         {
-          "name": "Size index",
-          "value": 0
-        },
+          "name": "Variable",
+          "value": "texBeach"
+        }
+      ],
+      "portsOut": [
         {
-          "name": "Size",
-          "value": "Auto"
+          "name": "Value",
+          "links": [
+            {
+              "portIn": "Base Texture",
+              "portOut": "Value",
+              "objIn": "yq19uom32",
+              "objOut": "xigmxz88r"
+            },
+            {
+              "portIn": "Base Texture",
+              "portOut": "Value",
+              "objIn": "gx42uy1nc",
+              "objOut": "xigmxz88r"
+            },
+            {
+              "portIn": "Base Texture",
+              "portOut": "Value",
+              "objIn": "9rnehh757",
+              "objOut": "xigmxz88r"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
+      "id": "l777qk0ib",
+      "uiAttribs": {
+        "translate": {
+          "x": 3636.556095850384,
+          "y": 3142.7266585738544
         },
+        "warning": null,
+        "hint": null,
+        "notWorkingMsg": null,
+        "loading": false,
+        "subPatch": "t6au0n21k",
+        "extendTitle": "wipe_round",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
         {
-          "name": "Width",
-          "value": 640
-        },
-        {
-          "name": "Height",
-          "value": 480
+          "name": "File",
+          "value": "/assets/library/wipes/wipe_round.jpg",
+          "display": "file"
         },
         {
           "name": "Filter index",
@@ -1057,11 +650,327 @@
         },
         {
           "name": "Wrap index",
-          "value": 1
+          "value": 0
         },
         {
           "name": "Wrap",
           "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": 0
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Save Memory",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "image",
+              "portOut": "Texture",
+              "objIn": "on1htiwlf",
+              "objOut": "l777qk0ib"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 512
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "l777qk0ib"
+      }
+    },
+    {
+      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
+      "id": "h5d0dvj5u",
+      "uiAttribs": {
+        "translate": {
+          "x": 3096.556095850384,
+          "y": 3139.828085373142
+        },
+        "warning": null,
+        "hint": null,
+        "notWorkingMsg": null,
+        "loading": false,
+        "subPatch": "t6au0n21k",
+        "extendTitle": "dot",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/images/dot.png",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": 0
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Save Memory",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "image",
+              "portOut": "Texture",
+              "objIn": "fbop86tcf",
+              "objOut": "h5d0dvj5u"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 128
+        },
+        {
+          "name": "Height",
+          "value": 128
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "h5d0dvj5u"
+      }
+    },
+    {
+      "opId": "a971aaa4-565f-47cf-8a4f-61a3a4378183",
+      "id": "on1htiwlf",
+      "uiAttribs": {
+        "translate": {
+          "x": 3612.556095850384,
+          "y": 3202.7266585738544
+        },
+        "notWorkingMsg": null,
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Amount",
+          "value": 1
+        },
+        {
+          "name": "Method index",
+          "value": 0
+        },
+        {
+          "name": "Method",
+          "value": "Override"
+        },
+        {
+          "name": "Invert",
+          "value": 0
+        },
+        {
+          "name": "method index",
+          "value": 0
+        },
+        {
+          "name": "method",
+          "value": "luminance"
+        }
+      ],
+      "storage": {
+        "ref": "on1htiwlf"
+      }
+    },
+    {
+      "opId": "a971aaa4-565f-47cf-8a4f-61a3a4378183",
+      "id": "fbop86tcf",
+      "uiAttribs": {
+        "translate": {
+          "x": 3048.556095850384,
+          "y": 3222.7266585738544
+        },
+        "notWorkingMsg": null,
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Amount",
+          "value": 1
+        },
+        {
+          "name": "Method index",
+          "value": 0
+        },
+        {
+          "name": "Method",
+          "value": "Override"
+        },
+        {
+          "name": "Invert",
+          "value": 0
+        },
+        {
+          "name": "method index",
+          "value": 1
+        },
+        {
+          "name": "method",
+          "value": "image alpha"
+        }
+      ],
+      "storage": {
+        "ref": "fbop86tcf"
+      }
+    },
+    {
+      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
+      "id": "gx42uy1nc",
+      "uiAttribs": {
+        "warning": null,
+        "translate": {
+          "x": 3048.556095850384,
+          "y": 2962.1454209271333
+        },
+        "notWorkingMsg": null,
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Size index",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": "Auto"
+        },
+        {
+          "name": "Width",
+          "value": 628
+        },
+        {
+          "name": "Height",
+          "value": 322
+        },
+        {
+          "name": "Filter index",
+          "value": 1
+        },
+        {
+          "name": "Filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
         },
         {
           "name": "Anisotropic index",
@@ -1107,368 +1016,8 @@
             {
               "portIn": "render",
               "portOut": "Next",
-              "objIn": "ah2t646gj",
-              "objOut": "g4wn9nc2n"
-            }
-          ]
-        },
-        {
-          "name": "texture_out",
-          "links": [
-            {
-              "portIn": "Texture 0",
-              "portOut": "texture_out",
-              "objIn": "275bzgwqx",
-              "objOut": "g4wn9nc2n"
-            }
-          ]
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Texture Width",
-          "value": 1024
-        },
-        {
-          "name": "Texture Height",
-          "value": 1024
-        }
-      ]
-    },
-    {
-      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
-      "id": "g0cj7la52",
-      "uiAttribs": {
-        "translate": {
-          "x": 3841.4850558085714,
-          "y": 3232.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Size index",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": "Auto"
-        },
-        {
-          "name": "Width",
-          "value": 640
-        },
-        {
-          "name": "Height",
-          "value": 480
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 1
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Pixel Format index",
-          "value": 4
-        },
-        {
-          "name": "Pixel Format",
-          "value": "RGBA 8bit ubyte"
-        },
-        {
-          "name": "Clear",
-          "value": 1
-        },
-        {
-          "name": "R",
-          "value": 0
-        },
-        {
-          "name": "G",
-          "value": 0
-        },
-        {
-          "name": "B",
-          "value": 0
-        },
-        {
-          "name": "A",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "Render",
-              "portOut": "Next",
-              "objIn": "io1nk74s7",
-              "objOut": "g0cj7la52"
-            }
-          ]
-        },
-        {
-          "name": "texture_out",
-          "links": [
-            {
-              "portIn": "Texture 1",
-              "portOut": "texture_out",
-              "objIn": "275bzgwqx",
-              "objOut": "g0cj7la52"
-            }
-          ]
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Texture Width",
-          "value": 1024
-        },
-        {
-          "name": "Texture Height",
-          "value": 1024
-        }
-      ]
-    },
-    {
-      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
-      "id": "9e3co4jlu",
-      "uiAttribs": {
-        "translate": {
-          "x": 4045.4850558085714,
-          "y": 3312.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Size index",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": "Auto"
-        },
-        {
-          "name": "Width",
-          "value": 640
-        },
-        {
-          "name": "Height",
-          "value": 480
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 1
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Pixel Format index",
-          "value": 4
-        },
-        {
-          "name": "Pixel Format",
-          "value": "RGBA 8bit ubyte"
-        },
-        {
-          "name": "Clear",
-          "value": 1
-        },
-        {
-          "name": "R",
-          "value": 0
-        },
-        {
-          "name": "G",
-          "value": 0
-        },
-        {
-          "name": "B",
-          "value": 0
-        },
-        {
-          "name": "A",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "Next",
-              "objIn": "4wk6ghzq9",
-              "objOut": "9e3co4jlu"
-            }
-          ]
-        },
-        {
-          "name": "texture_out",
-          "links": [
-            {
-              "portIn": "Texture 2",
-              "portOut": "texture_out",
-              "objIn": "275bzgwqx",
-              "objOut": "9e3co4jlu"
-            }
-          ]
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Texture Width",
-          "value": 1024
-        },
-        {
-          "name": "Texture Height",
-          "value": 1024
-        }
-      ]
-    },
-    {
-      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
-      "id": "jiep5b2qs",
-      "uiAttribs": {
-        "translate": {
-          "x": 4273.485055808571,
-          "y": 3272.5777807502636
-        },
-        "subPatch": "1b15u3dhh",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Size index",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": "Auto"
-        },
-        {
-          "name": "Width",
-          "value": 640
-        },
-        {
-          "name": "Height",
-          "value": 480
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 1
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Pixel Format index",
-          "value": 4
-        },
-        {
-          "name": "Pixel Format",
-          "value": "RGBA 8bit ubyte"
-        },
-        {
-          "name": "Clear",
-          "value": 1
-        },
-        {
-          "name": "R",
-          "value": 0
-        },
-        {
-          "name": "G",
-          "value": 0
-        },
-        {
-          "name": "B",
-          "value": 0
-        },
-        {
-          "name": "A",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "Execute",
-              "portOut": "Next",
-              "objIn": "xx79pfvjm",
-              "objOut": "jiep5b2qs"
+              "objIn": "fbop86tcf",
+              "objOut": "gx42uy1nc"
             }
           ]
         },
@@ -1478,8 +1027,8 @@
             {
               "portIn": "Texture 3",
               "portOut": "texture_out",
-              "objIn": "275bzgwqx",
-              "objOut": "jiep5b2qs"
+              "objIn": "vpqksu27r",
+              "objOut": "gx42uy1nc"
             }
           ]
         },
@@ -1495,49 +1044,550 @@
           "name": "Texture Height",
           "value": 1024
         }
-      ]
+      ],
+      "storage": {
+        "ref": "gx42uy1nc"
+      }
     },
     {
-      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
-      "id": "k8ndf3l2a",
+      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
+      "id": "9rnehh757",
       "uiAttribs": {
-        "subPatch": "1b15u3dhh",
+        "warning": null,
         "translate": {
-          "x": 2654.4850558085714,
-          "y": 0
+          "x": 3612.556095850384,
+          "y": 3002.7266585738544
         },
-        "blueprintSubpatch2": true,
+        "notWorkingMsg": null,
+        "subPatch": "t6au0n21k",
         "tempSubOldOpId": null
       },
-      "storage": {},
+      "portsIn": [
+        {
+          "name": "Size index",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": "Auto"
+        },
+        {
+          "name": "Width",
+          "value": 628
+        },
+        {
+          "name": "Height",
+          "value": 322
+        },
+        {
+          "name": "Filter index",
+          "value": 1
+        },
+        {
+          "name": "Filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Pixel Format index",
+          "value": 4
+        },
+        {
+          "name": "Pixel Format",
+          "value": "RGBA 8bit ubyte"
+        },
+        {
+          "name": "Clear",
+          "value": 1
+        },
+        {
+          "name": "R",
+          "value": 0
+        },
+        {
+          "name": "G",
+          "value": 0
+        },
+        {
+          "name": "B",
+          "value": 0
+        },
+        {
+          "name": "A",
+          "value": 0
+        }
+      ],
       "portsOut": [
         {
-          "name": "innerOut_pn5m90tob",
-          "title": "exe",
+          "name": "Next",
           "links": [
             {
-              "portIn": "exe",
-              "portOut": "innerOut_pn5m90tob",
-              "objIn": "iwsjto37q",
-              "objOut": "k8ndf3l2a"
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "on1htiwlf",
+              "objOut": "9rnehh757"
+            }
+          ]
+        },
+        {
+          "name": "texture_out",
+          "links": [
+            {
+              "portIn": "Texture 2",
+              "portOut": "texture_out",
+              "objIn": "vpqksu27r",
+              "objOut": "9rnehh757"
+            }
+          ]
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Texture Width",
+          "value": 1024
+        },
+        {
+          "name": "Texture Height",
+          "value": 1024
+        }
+      ],
+      "storage": {
+        "ref": "9rnehh757"
+      }
+    },
+    {
+      "opId": "147ed29e-f04e-4f7c-b9d7-133d7c6cbef9",
+      "id": "4cojkj4eq",
+      "uiAttribs": {
+        "translate": {
+          "x": 3779.494135375139,
+          "y": 3508.94084133091
+        },
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Output RGB index",
+          "value": 0
+        },
+        {
+          "name": "Output RGB",
+          "value": "HSB"
+        }
+      ],
+      "storage": {
+        "ref": "4cojkj4eq"
+      }
+    },
+    {
+      "opId": "a04156f6-f636-430f-810e-9cb27199ceeb",
+      "id": "n93to2d46",
+      "uiAttribs": {
+        "translate": {
+          "x": 3466.6273488347606,
+          "y": 3581.2203173196085
+        },
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Blend Mode index",
+          "value": 0
+        },
+        {
+          "name": "Blend Mode",
+          "value": "normal"
+        },
+        {
+          "name": "Amount",
+          "value": 1
+        },
+        {
+          "name": "Alpha Mask index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask",
+          "value": "Off"
+        },
+        {
+          "name": "Offset X",
+          "value": 0
+        },
+        {
+          "name": "Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Zoom",
+          "value": 5
+        },
+        {
+          "name": "Iterations",
+          "value": 50
+        },
+        {
+          "name": "Seed",
+          "value": 5711
+        },
+        {
+          "name": "Spot edge",
+          "value": 0.5
+        },
+        {
+          "name": "Gamma",
+          "value": 0.75
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "y07lm45jq",
+              "objOut": "n93to2d46"
             }
           ]
         }
-      ]
+      ],
+      "storage": {
+        "ref": "n93to2d46"
+      }
     },
     {
-      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
-      "id": "az8mms9li",
+      "opId": "12661ef7-8d41-4c10-8ada-0b00be6498c0",
+      "id": "y07lm45jq",
       "uiAttribs": {
-        "subPatch": "1b15u3dhh",
         "translate": {
-          "x": 2654.4850558085714,
-          "y": 4703.577780750264
+          "x": 3466.6273488347606,
+          "y": 3681.2203173196076
         },
-        "blueprintSubpatch2": true,
+        "subPatch": "t6au0n21k",
+        "extendTitle": "add",
         "tempSubOldOpId": null
       },
-      "storage": {}
+      "portsIn": [
+        {
+          "name": "Blend Mode index",
+          "value": 6
+        },
+        {
+          "name": "Blend Mode",
+          "value": "add"
+        },
+        {
+          "name": "Amount",
+          "value": 1
+        },
+        {
+          "name": "Alpha Mask index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask",
+          "value": "Off"
+        },
+        {
+          "name": "Offset X",
+          "value": 0
+        },
+        {
+          "name": "Offset Y",
+          "value": 0.6
+        },
+        {
+          "name": "Wavyness",
+          "value": 0.5
+        },
+        {
+          "name": "scale",
+          "value": 10
+        },
+        {
+          "name": "Layers",
+          "value": 4
+        },
+        {
+          "name": "AA iterations",
+          "value": 4
+        },
+        {
+          "name": "Frequency",
+          "value": 0.5
+        },
+        {
+          "name": "Frequency step size",
+          "value": 0.5
+        }
+      ],
+      "storage": {
+        "ref": "y07lm45jq"
+      }
+    },
+    {
+      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
+      "id": "yq19uom32",
+      "uiAttribs": {
+        "title": "image compose",
+        "translate": {
+          "x": 3779.494135375139,
+          "y": 3428.94084133091
+        },
+        "warning": "",
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Size index",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": "Auto"
+        },
+        {
+          "name": "Width",
+          "value": 512
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Filter index",
+          "value": 1
+        },
+        {
+          "name": "Filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Pixel Format index",
+          "value": 4
+        },
+        {
+          "name": "Pixel Format",
+          "value": "RGBA 8bit ubyte"
+        },
+        {
+          "name": "Clear",
+          "value": 1
+        },
+        {
+          "name": "R",
+          "value": 0
+        },
+        {
+          "name": "G",
+          "value": 0
+        },
+        {
+          "name": "B",
+          "value": 0
+        },
+        {
+          "name": "A",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "4cojkj4eq",
+              "objOut": "yq19uom32"
+            }
+          ]
+        },
+        {
+          "name": "texture_out",
+          "links": [
+            {
+              "portIn": "Texture 1",
+              "portOut": "texture_out",
+              "objIn": "vpqksu27r",
+              "objOut": "yq19uom32"
+            }
+          ]
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Texture Width",
+          "value": 1024
+        },
+        {
+          "name": "Texture Height",
+          "value": 1024
+        }
+      ],
+      "storage": {
+        "ref": "yq19uom32"
+      }
+    },
+    {
+      "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
+      "id": "rrw9hhgqy",
+      "uiAttribs": {
+        "translate": {
+          "x": 3466.6273488347606,
+          "y": 3461.2203173196085
+        },
+        "subPatch": "t6au0n21k",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "Size index",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": "Auto"
+        },
+        {
+          "name": "Width",
+          "value": 128
+        },
+        {
+          "name": "Height",
+          "value": 128
+        },
+        {
+          "name": "Filter index",
+          "value": 1
+        },
+        {
+          "name": "Filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Pixel Format index",
+          "value": 4
+        },
+        {
+          "name": "Pixel Format",
+          "value": "RGBA 8bit ubyte"
+        },
+        {
+          "name": "Clear",
+          "value": 1
+        },
+        {
+          "name": "R",
+          "value": 0
+        },
+        {
+          "name": "G",
+          "value": 0
+        },
+        {
+          "name": "B",
+          "value": 0
+        },
+        {
+          "name": "A",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "n93to2d46",
+              "objOut": "rrw9hhgqy"
+            }
+          ]
+        },
+        {
+          "name": "texture_out",
+          "links": [
+            {
+              "portIn": "Texture 0",
+              "portOut": "texture_out",
+              "objIn": "vpqksu27r",
+              "objOut": "rrw9hhgqy"
+            }
+          ]
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 2.1639344262295084
+        },
+        {
+          "name": "Texture Width",
+          "value": 1584
+        },
+        {
+          "name": "Texture Height",
+          "value": 732
+        }
+      ],
+      "storage": {
+        "ref": "rrw9hhgqy"
+      }
     }
   ]
 }

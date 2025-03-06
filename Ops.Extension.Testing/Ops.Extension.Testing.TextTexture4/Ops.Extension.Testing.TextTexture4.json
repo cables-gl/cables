@@ -1,0 +1,33 @@
+{
+    "id": "b23f87e6-c869-4b24-8a58-1266eb55cf49",
+    "created": 1741264928601,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741264928626
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch11 renamed to Ops.Extension.Testing.TextTexture4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265076376
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "chk10pfcg",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

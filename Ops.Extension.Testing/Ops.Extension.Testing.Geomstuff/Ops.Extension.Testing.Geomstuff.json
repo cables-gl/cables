@@ -1,0 +1,33 @@
+{
+    "id": "ac311ef2-edde-438e-b040-42035b0106ff",
+    "created": 1741265375385,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741265375416
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Geomstuff",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265404844
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "0j8itoh06",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

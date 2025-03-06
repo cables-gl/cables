@@ -1,0 +1,33 @@
+{
+    "id": "f16acf30-607b-4b4c-91b0-b432a0b6e128",
+    "created": 1741265503414,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741265503520
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.HugeGeoms",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265530700
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "i3lmrdw4p",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
