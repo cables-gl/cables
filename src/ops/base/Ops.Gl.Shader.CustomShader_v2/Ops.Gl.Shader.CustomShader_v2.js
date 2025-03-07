@@ -131,7 +131,6 @@ function parseUniforms(src)
                 words = words.filter(function (el) { return el !== ""; });
                 const type = words[1];
 
-
                 let names = [];
                 if (varnames)
                 {
@@ -368,7 +367,12 @@ function updateShader()
     outShader.setRef(shader);
     needsUpdate = false;
 
-    if (shader.hasErrors()) op.setUiError("compile", "Shader has errors");
+    if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2, { "button": "show",
+        "buttonCb": () =>
+        {
+            console.log("yep");
+            CABLES.UI.showShaderError(shader);
+        } });
     else op.setUiError("compile", null);
 
     outErrors.set(shader.hasErrors());

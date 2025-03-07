@@ -129,6 +129,5 @@ function buildMesh()
     geom.calculateNormals();
     geom.calcTangentsBitangents();
 
-    outGeom.set(null);
-    outGeom.set(geom);
+    outGeom.setRef(geom);
 }

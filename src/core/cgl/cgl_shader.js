@@ -6,6 +6,7 @@ import { CONSTANTS } from "./constants.js";
 import { escapeHTML } from "./cgl_utils.js";
 import { CgShader } from "../cg/cg_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
+import { CglContext } from "./cgl_state.js";
 
 // ---------------------------------------------------------------------------
 
@@ -89,6 +90,7 @@ class CglShader extends CgShader
         this._program = null;
         this._uniforms = [];
         this._drawBuffers = [true];
+        this.error = null;
 
         this.ignoreMissingUniforms = false;
         this._projMatrixUniform = null;
@@ -1202,7 +1204,8 @@ class CglShader extends CgShader
             {
                 // validation failed
                 this._log.log("shaderprogram validation failed...");
-                this._log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+
+                this._cgl.gl.getProgramInfoLog(program);
             }
 
             if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
@@ -1217,8 +1220,9 @@ class CglShader extends CgShader
 
                 this._log.error(this._name + " shader linking fail...");
 
-                this._log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
-                this._log.log(this);
+                this._cgl.gl.getProgramInfoLog(program);
+                if (!CABLES.UI)
+                    this._log.log(this);
                 this._isValid = false;
 
                 this._name = "errorshader";
@@ -1450,23 +1454,16 @@ CglShader.getErrorFragmentShader = function ()
         .endl() + "}";
 };
 
+/**
+ * @param {CglContext} cgl
+ * @param {String} str
+ * @param {number} type
+ * @param {CglShader} cglShader
+ * @returns {CglShader}
+ */
 CglShader.createShader = function (cgl, str, type, cglShader)
 {
     if (cgl.aborted) return;
-
-    // cgl.printError("[Shader.createShader] ", cglShader._name);
-
-    function getBadLines(infoLog)
-    {
-        const basLines = [];
-        const lines = infoLog.split("\n");
-        for (const i in lines)
-        {
-            const divide = lines[i].split(":");
-            if (parseInt(divide[2], 10)) basLines.push(parseInt(divide[2], 10));
-        }
-        return basLines;
-    }
 
     const shader = cgl.gl.createShader(type);
     cgl.gl.shaderSource(shader, str);
@@ -1474,67 +1471,16 @@ CglShader.createShader = function (cgl, str, type, cglShader)
 
     if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
     {
-        let infoLog = cgl.gl.getShaderInfoLog(shader);
-        if (!infoLog)
+        cglShader.error = { "str": str, "infoLog": cgl.gl.getShaderInfoLog(shader) };
+
+        if (!cglShader.error.infoLog)
         {
             this._log.warn("empty shader info log", this._name);
             return;
         }
 
-        const badLines = getBadLines(infoLog);
-        let htmlWarning = "<pre style=\"margin-bottom:0px;\"><code class=\"shaderErrorCode language-glsl\" style=\"padding-bottom:0px;max-height: initial;max-width: initial;\">";
-        const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
-
-        if (!cgl.aborted && infoLog && this._log)
-        {
-            if (type == cgl.gl.VERTEX_SHADER) this._log.log("VERTEX_SHADER");
-            if (type == cgl.gl.FRAGMENT_SHADER) this._log.log("FRAGMENT_SHADER");
-
-            for (const i in lines)
-            {
-                const j = parseInt(i, 10) + 1;
-                const line = j + ": " + lines[i];
-
-                let isBadLine = false;
-                for (const bj in badLines)
-                    if (badLines[bj] == j) isBadLine = true;
-
-                if (isBadLine)
-                {
-                    htmlWarning += "</code></pre>";
-                    htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\"background-color:#660000;padding-top:0px;padding-bottom:0px\">";
-
-                    cglShader._log.log("bad line: `" + line + "`");
-                }
-                htmlWarning += escapeHTML(line);
-
-                if (isBadLine)
-                {
-                    htmlWarning += "</code></pre>";
-                    htmlWarning += "<pre style=\"margin:0\"><code class=\"language-glsl\" style=\";padding-top:0px;padding-bottom:0px\">";
-                }
-            }
-        }
-
-        infoLog = infoLog.replace(/\n/g, "<br/>");
-        if (cgl.patch.isEditorMode()) cglShader._log.warn("Shader error ", cglShader._name, infoLog, this);
-
-        htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
-        htmlWarning += "</code></pre>";
-
-        if (this._fromUserInteraction)
-        {
-            // this._log.log("todo show modal?");
-            // cgl.patch.emitEvent("criticalError", { "title": "Shader error " + cglShader._name, "text": htmlWarning, "exception": { "message": infoLog } });
-        }
-
         cglShader.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
     }
-    else
-    {
-        // this._log.log(name+' shader compiled...');
-    }
-    // cgl.printError("shader create2");
     return shader;
 };
 
