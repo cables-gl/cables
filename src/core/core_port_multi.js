@@ -195,8 +195,8 @@ export class MultiPort extends Port
             for (let i = 0; i < this.ports.length; i++)
             {
                 const po = this.ports[i];
-                po.multiPortChangeListener = po.off(po.multiPortChangeListener);
-                po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
+                if (po.multiPortChangeListener) po.multiPortChangeListener = po.off(po.multiPortChangeListener);
+                if (po.multiLinkChangeListener) po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
             }
         };
 
@@ -212,9 +212,6 @@ export class MultiPort extends Port
 
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
                 po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
-
-                // if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                // po.multiPortTriggerListener = po.on("trigger", this.trigger());
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", () =>

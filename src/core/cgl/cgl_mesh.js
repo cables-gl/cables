@@ -5,6 +5,7 @@ import { Geometry } from "../cg/cg_geom.js";
 import { CglContext } from "./cgl_state.js";
 import { CgMesh } from "../cg/cg_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
+import { CgContext } from "../cg/cg_state.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -41,8 +42,14 @@ MESH.lastMesh = null;
 class Mesh extends CgMesh
 {
 
+    /** @type {CglContext} */
+    #cgl = null;
+
     /** @type {Geometry} */
     #geom = null;
+
+    /** @type {WebGLBuffer} */
+    #bufVerticesIndizes = null;
 
     /**
      * @param {CglContext} _cgl cgl
@@ -52,14 +59,14 @@ class Mesh extends CgMesh
     constructor(_cgl, __geom, _options = {})
     {
         super();
-        this._cgl = _cgl;
+        this.#cgl = _cgl;
 
         let options = _options || {};
         if (CABLES.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
         this._log = new Logger("cgl_mesh");
         this._bufVertexAttrib = null;
-        this._bufVerticesIndizes = this._cgl.gl.createBuffer();
-        this._indexType = this._cgl.gl.UNSIGNED_SHORT;
+        this.#bufVerticesIndizes = this.#cgl.gl.createBuffer();
+        this._indexType = this.#cgl.gl.UNSIGNED_SHORT;
         this._attributes = [];
         this._attribLocs = {};
 
@@ -81,7 +88,7 @@ class Mesh extends CgMesh
 
         this.memFreed = false;
 
-        this._cgl.profileData.addHeavyEvent("mesh constructed", this._name);
+        this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
 
         this._queryExt = null;
     }
@@ -117,6 +124,12 @@ class Mesh extends CgMesh
         this._numVerts = geom.vertices.length / 3;
     }
 
+    /**
+     * @param {String} attrName
+     * @param {String} name
+     * @param {Number} stride
+     * @param {Number} offset
+      */
     setAttributePointer(attrName, name, stride, offset)
     {
         for (let i = 0; i < this._attributes.length; i++)
@@ -138,6 +151,10 @@ class Mesh extends CgMesh
         }
     }
 
+    /**
+     * @param {String} name
+     * @returns {AttributeObject}
+     */
     getAttribute(name)
     {
         for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
@@ -151,13 +168,13 @@ class Mesh extends CgMesh
         if (!attr.name)
             this._log.stack("no attrname?!");
 
-        const gl = this._cgl.gl;
+        const gl = this.#cgl.gl;
 
         gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
-        this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
+        this.#cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
-        this._cgl.profileData.profileSingleMeshAttribute[this._name] = this._cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
-        this._cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
+        this.#cgl.profileData.profileSingleMeshAttribute[this._name] = this.#cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
+        this.#cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
 
         if (attr.numItems < array.length / attr.itemSize)
         {
@@ -167,7 +184,7 @@ class Mesh extends CgMesh
         if (end > array.length && !this.warned)
         {
             this.warned = true;
-            this._log.warn(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+            this._log.warn(this.#cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
             return;
         }
 
@@ -178,7 +195,7 @@ class Mesh extends CgMesh
 
     _resizeAttr(array, attr)
     {
-        const gl = this._cgl.gl;
+        const gl = this.#cgl.gl;
 
         if (attr.buffer)
             gl.deleteBuffer(attr.buffer);
@@ -194,7 +211,7 @@ class Mesh extends CgMesh
         let floatArray = attr.floatArray || null;
         if (!array) return;
 
-        if (this._cgl.debugOneFrame)
+        if (this.#cgl.debugOneFrame)
         {
         console.log("_bufferArray", array.length, attr.name); // eslint-disable-line
         }
@@ -209,15 +226,15 @@ class Mesh extends CgMesh
             {
                 floatArray = new Float32Array(array);
 
-                if (this._cgl.debugOneFrame)
+                if (this.#cgl.debugOneFrame)
                 {
                 console.log("_bufferArray create new float32array", array.length, attr.name); // eslint-disable-line
                 }
 
                 if (array.length > 10000)
                 {
-                    this._cgl.profileData.profileNonTypedAttrib++;
-                    this._cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
+                    this.#cgl.profileData.profileNonTypedAttrib++;
+                    this.#cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
                 }
             }
         }
@@ -226,7 +243,7 @@ class Mesh extends CgMesh
         attr.arrayLength = floatArray.length;
         attr.floatArray = null;// floatArray;
 
-        this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+        this.#cgl.gl.bufferData(this.#cgl.gl.ARRAY_BUFFER, floatArray, this.#cgl.gl.DYNAMIC_DRAW);
     }
 
     /**
@@ -262,7 +279,7 @@ class Mesh extends CgMesh
         let i = 0;
         const numItems = array.length / itemSize;
 
-        this._cgl.profileData.profileMeshAttributes += numItems || 0;
+        this.#cgl.profileData.profileMeshAttributes += numItems || 0;
 
         if (typeof options == "function")
         {
@@ -290,7 +307,7 @@ class Mesh extends CgMesh
                     this._resizeAttr(array, attr);
                 }
 
-                this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+                this.#cgl.gl.bindBuffer(this.#cgl.gl.ARRAY_BUFFER, attr.buffer);
                 this._bufferArray(array, attr);
 
                 return attr;
@@ -299,12 +316,12 @@ class Mesh extends CgMesh
 
         // create new buffer...
 
-        const buffer = this._cgl.gl.createBuffer();
+        const buffer = this.#cgl.gl.createBuffer();
 
-        this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
+        this.#cgl.gl.bindBuffer(this.#cgl.gl.ARRAY_BUFFER, buffer);
         // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 
-        let type = this._cgl.gl.FLOAT;
+        let type = this.#cgl.gl.FLOAT;
         if (options && options.type) type = options.type;
         const attr = {
             "buffer": buffer,
@@ -402,7 +419,7 @@ class Mesh extends CgMesh
      */
     setVertexIndices(vertIndices)
     {
-        if (!this._bufVerticesIndizes)
+        if (!this.#bufVerticesIndizes)
         {
             this._log.warn("no bufVerticesIndizes: " + this._name);
             return;
@@ -420,7 +437,7 @@ class Mesh extends CgMesh
                 }
             }
 
-            this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
+            this.#cgl.gl.bindBuffer(this.#cgl.gl.ELEMENT_ARRAY_BUFFER, this.#bufVerticesIndizes);
 
             /*
              * todo cache this ?
@@ -430,27 +447,27 @@ class Mesh extends CgMesh
             if (vertIndices.length > 65535)
             {
                 this.vertIndicesTyped = new Uint32Array(vertIndices);
-                this._indexType = this._cgl.gl.UNSIGNED_INT;
+                this._indexType = this.#cgl.gl.UNSIGNED_INT;
             }
             else
             if (vertIndices instanceof Uint32Array)
             {
                 this.vertIndicesTyped = vertIndices;
-                this._indexType = this._cgl.gl.UNSIGNED_INT;
+                this._indexType = this.#cgl.gl.UNSIGNED_INT;
             }
             else
             if (!(vertIndices instanceof Uint16Array))
             {
                 this.vertIndicesTyped = new Uint16Array(vertIndices);
-                this._indexType = this._cgl.gl.UNSIGNED_SHORT;
+                this._indexType = this.#cgl.gl.UNSIGNED_SHORT;
             }
             else this.vertIndicesTyped = vertIndices;
 
-            this._cgl.gl.bufferData(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this._cgl.gl.DYNAMIC_DRAW);
-            this._bufVerticesIndizes.itemSize = 1;
-            this._bufVerticesIndizes.numItems = vertIndices.length;
+            this.#cgl.gl.bufferData(this.#cgl.gl.ELEMENT_ARRAY_BUFFER, this.vertIndicesTyped, this.#cgl.gl.DYNAMIC_DRAW);
+            this.#bufVerticesIndizes.itemSize = 1;
+            this.#bufVerticesIndizes.numItems = vertIndices.length;
         }
-        else this._bufVerticesIndizes.numItems = 0;
+        else this.#bufVerticesIndizes.numItems = 0;
     }
 
     /**
@@ -468,7 +485,7 @@ class Mesh extends CgMesh
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
 
         MESH.lastMesh = null;
-        this._cgl.profileData.profileMeshSetGeom++;
+        this.#cgl.profileData.profileMeshSetGeom++;
 
         this._disposeAttributes();
 
@@ -550,16 +567,16 @@ class Mesh extends CgMesh
                 if (attribute._attrLocationLastShaderTime != shader.lastCompile)
                 {
                     attribute._attrLocationLastShaderTime = shader.lastCompile;
-                    attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+                    attrLocs[i] = this.#cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
                     // this._log.log('attribloc',attribute.name,attrLocs[i]);
-                    this._cgl.profileData.profileAttrLoc++;
+                    this.#cgl.profileData.profileAttrLoc++;
                 }
             }
 
             if (attrLocs[i] != -1)
             {
-                this._cgl.gl.enableVertexAttribArray(attrLocs[i]);
-                this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
+                this.#cgl.gl.enableVertexAttribArray(attrLocs[i]);
+                this.#cgl.gl.bindBuffer(this.#cgl.gl.ARRAY_BUFFER, attribute.buffer);
 
                 if (attribute.instanced)
                 {
@@ -568,25 +585,25 @@ class Mesh extends CgMesh
                     {
                         if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("instanced attrib itemsize error", this.#geom.name, attribute);
 
-                        this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
-                        this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
+                        this.#cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
+                        this.#cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
                     }
                     else if (attribute.itemSize == 16)
                     {
                         const stride = 16 * 4;
 
-                        this._cgl.gl.vertexAttribPointer(attrLocs[i], 4, attribute.type, false, stride, 0);
-                        this._cgl.gl.enableVertexAttribArray(attrLocs[i] + 1);
-                        this._cgl.gl.vertexAttribPointer(attrLocs[i] + 1, 4, attribute.type, false, stride, 4 * 4 * 1);
-                        this._cgl.gl.enableVertexAttribArray(attrLocs[i] + 2);
-                        this._cgl.gl.vertexAttribPointer(attrLocs[i] + 2, 4, attribute.type, false, stride, 4 * 4 * 2);
-                        this._cgl.gl.enableVertexAttribArray(attrLocs[i] + 3);
-                        this._cgl.gl.vertexAttribPointer(attrLocs[i] + 3, 4, attribute.type, false, stride, 4 * 4 * 3);
+                        this.#cgl.gl.vertexAttribPointer(attrLocs[i], 4, attribute.type, false, stride, 0);
+                        this.#cgl.gl.enableVertexAttribArray(attrLocs[i] + 1);
+                        this.#cgl.gl.vertexAttribPointer(attrLocs[i] + 1, 4, attribute.type, false, stride, 4 * 4 * 1);
+                        this.#cgl.gl.enableVertexAttribArray(attrLocs[i] + 2);
+                        this.#cgl.gl.vertexAttribPointer(attrLocs[i] + 2, 4, attribute.type, false, stride, 4 * 4 * 2);
+                        this.#cgl.gl.enableVertexAttribArray(attrLocs[i] + 3);
+                        this.#cgl.gl.vertexAttribPointer(attrLocs[i] + 3, 4, attribute.type, false, stride, 4 * 4 * 3);
 
-                        this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
-                        this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 1, 1);
-                        this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 2, 1);
-                        this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 3, 1);
+                        this.#cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
+                        this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 1, 1);
+                        this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 2, 1);
+                        this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 3, 1);
                     }
                     else
                     {
@@ -596,7 +613,7 @@ class Mesh extends CgMesh
                 else
                 {
                     if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("attrib itemsize error", this._name, attribute);
-                    this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
+                    this.#cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
 
                     if (attribute.pointer)
                     {
@@ -605,12 +622,12 @@ class Mesh extends CgMesh
                             const pointer = attribute.pointer[ip];
 
                             if (pointer.loc == -1)
-                                pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                                pointer.loc = this.#cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
 
-                            this._cgl.profileData.profileAttrLoc++;
+                            this.#cgl.profileData.profileAttrLoc++;
 
-                            this._cgl.gl.enableVertexAttribArray(pointer.loc);
-                            this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+                            this.#cgl.gl.enableVertexAttribArray(pointer.loc);
+                            this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
                         }
                     }
                     if (this.bindFeedback) this.bindFeedback(attribute);
@@ -618,7 +635,7 @@ class Mesh extends CgMesh
             }
         }
 
-        if (this._bufVerticesIndizes && this._bufVerticesIndizes.numItems !== 0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
+        if (this.#bufVerticesIndizes && this.#bufVerticesIndizes.numItems !== 0) this.#cgl.gl.bindBuffer(this.#cgl.gl.ELEMENT_ARRAY_BUFFER, this.#bufVerticesIndizes);
     }
 
     unBind()
@@ -640,29 +657,29 @@ class Mesh extends CgMesh
             // todo: easier way to fill mat4 attribs...
                 if (this._attributes[i].itemSize <= 4)
                 {
-                    if (attrLocs[i] != -1) this._cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
-                    if (attrLocs[i] >= 0) this._cgl.gl.disableVertexAttribArray(attrLocs[i]);
+                    if (attrLocs[i] != -1) this.#cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
+                    if (attrLocs[i] >= 0) this.#cgl.gl.disableVertexAttribArray(attrLocs[i]);
                 }
                 else
                 {
-                    this._cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
-                    this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 1, 0);
-                    this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 2, 0);
-                    this._cgl.gl.vertexAttribDivisor(attrLocs[i] + 3, 0);
-                    this._cgl.gl.disableVertexAttribArray(attrLocs[i] + 1);
-                    this._cgl.gl.disableVertexAttribArray(attrLocs[i] + 2);
-                    this._cgl.gl.disableVertexAttribArray(attrLocs[i] + 3);
+                    this.#cgl.gl.vertexAttribDivisor(attrLocs[i], 0);
+                    this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 1, 0);
+                    this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 2, 0);
+                    this.#cgl.gl.vertexAttribDivisor(attrLocs[i] + 3, 0);
+                    this.#cgl.gl.disableVertexAttribArray(attrLocs[i] + 1);
+                    this.#cgl.gl.disableVertexAttribArray(attrLocs[i] + 2);
+                    this.#cgl.gl.disableVertexAttribArray(attrLocs[i] + 3);
                 }
             }
 
-            if (attrLocs[i] != -1) this._cgl.gl.disableVertexAttribArray(attrLocs[i]);
+            if (attrLocs[i] != -1) this.#cgl.gl.disableVertexAttribArray(attrLocs[i]);
 
         }
     }
 
     meshChanged()
     {
-        return this._cgl.lastMesh && this._cgl.lastMesh != this;
+        return this.#cgl.lastMesh && this.#cgl.lastMesh != this;
     }
 
     printDebug(shader)
@@ -693,6 +710,22 @@ class Mesh extends CgMesh
     }
 
     /**
+     * @param {Number} num
+     */
+    setNumIndices(num)
+    {
+        this.#bufVerticesIndizes.numItems = num;
+    }
+
+    /**
+     * @returns {Number}
+     */
+    getNumIndices()
+    {
+        return this.#bufVerticesIndizes.numItems;
+    }
+
+    /**
      * @function render
      * @memberof Mesh
      * @instance
@@ -703,8 +736,8 @@ class Mesh extends CgMesh
     {
         // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
-        if (this._cgl.aborted) return;
-        shader = shader || this._cgl.getShader();
+        if (this.#cgl.aborted) return;
+        shader = shader || this.#cgl.getShader();
 
         if (!shader || !shader.isValid())
         {
@@ -768,36 +801,36 @@ class Mesh extends CgMesh
 
         MESH.lastMesh = this;
 
-        let prim = this._cgl.gl.TRIANGLES;
+        let prim = this.#cgl.gl.TRIANGLES;
         if (this._glPrimitive !== undefined) prim = this._glPrimitive;
         if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
         let elementDiv = 1;
-        let doQuery = this._cgl.profileData.doProfileGlQuery;
+        let doQuery = this.#cgl.profileData.doProfileGlQuery;
         let queryStarted = false;
         if (doQuery)
         {
             let id = this._name + " - " + shader.getName() + " #" + shader.id;
             if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
-            let queryProfilerData = this._cgl.profileData.glQueryData[id];
+            let queryProfilerData = this.#cgl.profileData.glQueryData[id];
 
             if (!queryProfilerData) queryProfilerData = { "id": id, "num": 0 };
 
             if (shader.opId)queryProfilerData.shaderOp = shader.opId;
             if (this.opId)queryProfilerData.meshOp = this.opId;
 
-            this._cgl.profileData.glQueryData[id] = queryProfilerData;
+            this.#cgl.profileData.glQueryData[id] = queryProfilerData;
 
-            if (!this._queryExt && this._queryExt !== false) this._queryExt = this._cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
+            if (!this._queryExt && this._queryExt !== false) this._queryExt = this.#cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
             if (this._queryExt)
             {
                 if (queryProfilerData._drawQuery)
                 {
-                    const available = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT_AVAILABLE);
+                    const available = this.#cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
                     if (available)
                     {
-                        const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
+                        const elapsedNanos = this.#cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
                         const currentTimeGPU = elapsedNanos / 1000000;
 
                         queryProfilerData._times = queryProfilerData._times || 0;
@@ -811,15 +844,15 @@ class Mesh extends CgMesh
 
                 if (!queryProfilerData.queryStarted)
                 {
-                    queryProfilerData._drawQuery = this._cgl.gl.createQuery();
-                    this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+                    queryProfilerData._drawQuery = this.#cgl.gl.createQuery();
+                    this.#cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
                     queryStarted = queryProfilerData.queryStarted = true;
                 }
             }
         }
 
         if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
-        else if (!this._bufVerticesIndizes || this._bufVerticesIndizes.numItems === 0)
+        else if (!this.#bufVerticesIndizes || this.#bufVerticesIndizes.numItems === 0)
         {
 
             /*
@@ -835,47 +868,47 @@ class Mesh extends CgMesh
              * }
              */
 
-            if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
+            if (prim == this.#cgl.gl.TRIANGLES)elementDiv = 3;
 
-            if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
-            else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
+            if (this._numInstances === 0) this.#cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
+            else this.#cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
         }
         else
         {
-            if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
+            if (prim == this.#cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0)
             {
-                this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._indexType, 0);
+                this.#cgl.gl.drawElements(prim, this.#bufVerticesIndizes.numItems, this._indexType, 0);
             }
             else
             {
-                this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+                this.#cgl.gl.drawElementsInstanced(prim, this.#bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
             }
         }
 
-        if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
+        if (this.#cgl.debugOneFrame && this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
         {
             this._log.error("mesh draw gl error");
             this._log.error("mesh", this);
             this._log.error("shader", shader);
 
             const attribNames = [];
-            for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
+            for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
             {
-                const name = this._cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+                const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
                 this._log.error("attrib ", name);
             }
         }
 
-        this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
-        this._cgl.profileData.profileMeshDraw++;
+        this.#cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
+        this.#cgl.profileData.profileMeshDraw++;
 
         if (doQuery && queryStarted)
         {
-            this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
+            this.#cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
         }
 
-        this._cgl.printError("mesh render " + this._name);
+        this.#cgl.printError("mesh render " + this._name);
 
         this.unBind();
     }
@@ -900,7 +933,7 @@ class Mesh extends CgMesh
         {
             if (this._attributes[i].buffer)
             {
-                this._cgl.gl.deleteBuffer(this._attributes[i].buffer);
+                this.#cgl.gl.deleteBuffer(this._attributes[i].buffer);
                 this._attributes[i].buffer = null;
             }
         }
@@ -909,9 +942,9 @@ class Mesh extends CgMesh
 
     dispose()
     {
-        if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this._cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
-        if (this._bufVerticesIndizes) this._cgl.gl.deleteBuffer(this._bufVerticesIndizes);
-        this._bufVerticesIndizes = null;
+        if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this.#cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
+        if (this.#bufVerticesIndizes) this.#cgl.gl.deleteBuffer(this.#bufVerticesIndizes);
+        this.#bufVerticesIndizes = null;
 
         this._disposeAttributes();
     }
