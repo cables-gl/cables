@@ -12,7 +12,7 @@
           "y": 2597.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -62,7 +62,7 @@
           "y": 2957.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -120,7 +120,7 @@
           "y": 2977.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -198,11 +198,11 @@
       "id": "n4n9rpbap",
       "uiAttribs": {
         "translate": {
-          "x": 4215.414184486633,
-          "y": 2757.221622564407
+          "x": 4225.665516916629,
+          "y": 2694.2491519230016
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -260,7 +260,7 @@
           "y": 3057.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -337,7 +337,7 @@
           "y": 2837.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -551,7 +551,7 @@
           "y": 2837.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -764,7 +764,7 @@
           "x": 4215.414184486633,
           "y": 2920.6531043156206
         },
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -849,7 +849,7 @@
           "x": 3831.4141844866326,
           "y": 2891.277011065203
         },
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -934,7 +934,7 @@
           "x": 3831.4141844866326,
           "y": 3077.221622564407
         },
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1011,7 +1011,7 @@
           "y": 2957.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1048,7 +1048,7 @@
           "y": 2817.221622564407
         },
         "notWorkingMsg": null,
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1137,7 +1137,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "dk8xoj413",
       "uiAttribs": {
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "translate": {
           "x": 3603.4141844866326,
           "y": 2159.692566408796
@@ -1165,7 +1165,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "4p6walra0",
       "uiAttribs": {
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "translate": {
           "x": 3255.4141844866326,
           "y": 3188.221622564407
@@ -1183,7 +1183,7 @@
           "x": 3603.4141844866326,
           "y": 2459.939090750443
         },
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1311,7 +1311,7 @@
           "x": 3603.4141844866326,
           "y": 2343.6703836590395
         },
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -1363,7 +1363,7 @@
       "opId": "19b441eb-9f63-4f35-ba08-b87841517c4d",
       "id": "wjqsg8l30",
       "uiAttribs": {
-        "subPatch": "amc4cesss",
+        "subPatch": "opvpivt1z",
         "translate": {
           "x": 3603.4141844866326,
           "y": 2276.9960435602884

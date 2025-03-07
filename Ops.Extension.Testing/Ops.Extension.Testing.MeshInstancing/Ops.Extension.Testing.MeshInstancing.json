@@ -1,0 +1,33 @@
+{
+    "id": "eba07641-6f08-4896-991f-08c2a9e8bb30",
+    "created": 1741349519940,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741349519979
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch9 renamed to Ops.Extension.Testing.MeshInstancing",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741349543316
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "cinpsynpg",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

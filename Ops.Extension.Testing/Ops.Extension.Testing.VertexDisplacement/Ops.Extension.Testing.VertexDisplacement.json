@@ -1,0 +1,33 @@
+{
+    "id": "8fcd6c23-04d5-4f6e-a3e2-fa0bd1ab8f52",
+    "created": 1741349101244,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741349101268
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.VertexDisplacement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741349118180
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "qpmomvgd9",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}
