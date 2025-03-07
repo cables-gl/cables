@@ -1,7 +1,7 @@
 const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
 const resultOut = op.outArray("Output");
-const foundOut = op.outBool("Found");
+const foundOut = op.outBoolNum("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
