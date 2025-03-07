@@ -1,0 +1,33 @@
+{
+    "id": "891f95d1-9e1d-442c-a582-4942682c0afa",
+    "created": 1741347764926,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741347764952
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MeshParametric",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741347783352
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "i1w5a4y1i",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

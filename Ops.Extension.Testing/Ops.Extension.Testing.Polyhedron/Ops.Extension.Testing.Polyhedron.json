@@ -1,0 +1,33 @@
+{
+    "id": "a854f3a3-0c4b-4186-b51a-52a3f734bc06",
+    "created": 1741347941930,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741347941952
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Polyhedron",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741347959762
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "wvz6radmb",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "id": "08be96b3-ec56-4162-a58e-93cea557dc31",
+    "created": 1741346355882,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741346355942
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Shadows",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741346385720
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "0a348cwyd",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

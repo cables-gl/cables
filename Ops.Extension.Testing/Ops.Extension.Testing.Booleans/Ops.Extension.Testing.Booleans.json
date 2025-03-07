@@ -1,0 +1,33 @@
+{
+    "id": "2775e3a1-46a5-4f4b-84de-d5af2639b42f",
+    "created": 1741345592192,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741345592218
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Booleans",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741345613876
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "lacac1n9z",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

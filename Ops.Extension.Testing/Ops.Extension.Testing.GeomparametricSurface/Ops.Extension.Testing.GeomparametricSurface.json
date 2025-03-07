@@ -1,0 +1,33 @@
+{
+    "id": "b42de0e3-c509-45ed-bc13-0a13b7ce0574",
+    "created": 1741347700433,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741347700460
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.GeomparametricSurface",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741347735982
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "abanowndy",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}
