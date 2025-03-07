@@ -4,22 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1591630315193
-        },
-        {
-            "message": "Ops.User.pandur.PreviewTexture renamed to Ops.Admin.PreviewTexture",
-            "author": "pandur",
-            "date": 1591801952881
-        },
-        {
-            "message": "Ops.Admin.PreviewTexture renamed to Ops.Dev.VizTexture",
-            "author": "pandur",
-            "date": 1621835702412
-        },
-        {
-            "message": "Ops.Dev.VizTexture renamed to Ops.Ui.VizTexture",
-            "author": "pandur",
-            "date": 1637834150633
+            "date": 1591630315193,
+            "type": "new"
         },
         {
             "message": "now also uses cubemaps alpha channel",
@@ -28,16 +14,16 @@
             "date": 1671034575804
         },
         {
-            "message": " added core lib: cgl_pixelreader",
-            "type": "",
-            "author": "pandur",
-            "date": 1686651916948
-        },
-        {
             "message": "Show pixel grid when zoomed in ",
             "type": "improvement",
             "author": "pandur",
             "date": 1709801021905
+        },
+        {
+            "message": "Also show pixelcolor when show info is not active / fix crosshair",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741340486744
         }
     ],
     "authorName": "pandur",

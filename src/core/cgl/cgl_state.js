@@ -406,7 +406,7 @@ export class CglContext extends CgContext
 
     /**
      * @deprecated
-     * @param {CgShader|Shader} s
+     * @param {Shader} s
      */
     setShader(s)
     {
@@ -418,7 +418,7 @@ export class CglContext extends CgContext
      * @function pushShader
      * @memberof Context
      * @instance
-     * @param {CglShader} shader
+     * @param {Shader} shader
      * @function
      */
     pushShader(shader)
