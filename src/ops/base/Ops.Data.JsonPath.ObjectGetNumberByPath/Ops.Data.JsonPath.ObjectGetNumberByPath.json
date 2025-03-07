@@ -59,6 +59,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1736850879305
+        },
+        {
+            "message": "change \"found\" port to boolNum type",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1741354771619
         }
     ]
 }

@@ -2,7 +2,7 @@ const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
 const returnPathIn = op.inBool("Return path if missing", false);
 const resultOut = op.outString("Output");
-const foundOut = op.outBool("Found");
+const foundOut = op.outBoolNum("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
