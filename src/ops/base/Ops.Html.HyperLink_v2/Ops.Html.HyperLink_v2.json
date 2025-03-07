@@ -32,15 +32,12 @@
                 "type": 5,
                 "name": "Specs"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "summary": "Open another website",
-    "issues": "",
-
     "docs": {
         "ports": []
     },
-    "youtubeids": [],
-    "exampleProjectId": "ilts7O"
+    "exampleProjectId": "ilts7O",
+    "license": "MIT"
 }

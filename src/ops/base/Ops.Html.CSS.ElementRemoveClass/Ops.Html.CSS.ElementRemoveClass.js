@@ -9,6 +9,5 @@ function update()
     let ele = inEle.get();
     if (!ele || !inClassName.get()) return;
     ele.classList.remove(inClassName.get());
-    outClassList.set([]);
-    if (ele) outClassList.setRef(Array.from(ele.classList));
+    outClassList.setRef(Array.from(ele.classList));
 }
