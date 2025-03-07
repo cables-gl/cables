@@ -740,7 +740,11 @@ export class Port extends Events
                     portTriggered = this.links[i].portIn;
 
                     portTriggered.op.patch.pushTriggerStack(portTriggered);
-                    portTriggered._onTriggered();
+                    if (!portTriggered._onTriggered)
+                    {
+                        console.log(portTriggered, portTriggered._onTriggered);
+                    }
+                    portTriggered._onTriggered(null);
 
                     portTriggered.op.patch.popTriggerStack();
                 }
@@ -976,22 +980,22 @@ export class Port extends Events
         if (this._op.enabled) this.emitEvent("trigger");
     }
 
-    // _onSetProfiling(v)
-    // {
-    //     this._op.patch.profiler.add("port", this);
-    //     this.setValue(v);
-    //     this._op.patch.profiler.add("port", null);
-    // }
+    _onSetProfiling(v) // used in editor: profiler tab
+    {
+        this._op.patch.profiler.add("port", this);
+        this.setValue(v);
+        this._op.patch.profiler.add("port", null);
+    }
 
-    // _onTriggeredProfiling()
-    // {
-    //     if (this._op.enabled && this.onTriggered)
-    //     {
-    //         this._op.patch.profiler.add("port", this);
-    //         this.onTriggered();
-    //         this._op.patch.profiler.add("port", null);
-    //     }
-    // }
+    _onTriggeredProfiling() // used in editor: profiler tab
+    {
+        if (this._op.enabled && this.onTriggered)
+        {
+            this._op.patch.profiler.add("port", this);
+            this.onTriggered();
+            this._op.patch.profiler.add("port", null);
+        }
+    }
 
     // getUiActiveState()
     // {

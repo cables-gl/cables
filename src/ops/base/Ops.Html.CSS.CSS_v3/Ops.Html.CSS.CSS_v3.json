@@ -21,7 +21,8 @@
                 "name": "Active",
                 "subType": "boolean"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "changelog": [
         {
