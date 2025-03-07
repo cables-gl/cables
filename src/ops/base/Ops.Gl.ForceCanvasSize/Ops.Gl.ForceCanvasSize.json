@@ -137,5 +137,6 @@
             }
         ]
     },
-    "exampleProjectId": "f9UbD-"
+    "exampleProjectId": "f9UbD-",
+    "license": "MIT"
 }

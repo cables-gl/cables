@@ -146,7 +146,6 @@ function update()
         pixels = flipped;
     }
 
-    console.log(pixels);
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
 
     outWidth.set(w);

@@ -24,7 +24,7 @@ function compare()
 {
     if (!finished)
     {
-        console.log("waiting");
+        // console.log("waiting");
         clearTimeout(to);
         canceled = true;
         to = setTimeout(compare, 50);
@@ -40,7 +40,6 @@ function compare()
 
     loadingId = op.patch.loading.start(op.name, CABLES.uuid(), op);
     canceled = false;
-    // console.log("inCanv1.get()", inCanv1.get());
     try
     {
         resemble(inCanv2.get())
@@ -50,7 +49,6 @@ function compare()
                 {
                     if (canceled)
                     {
-                        console.log("cancel");
                         finished = true;
                         compare();
                         return;
@@ -62,9 +60,7 @@ function compare()
                     loadingId = op.patch.loading.finished(loadingId);
                     outFinished.trigger();
 
-                    console.log("", performance.now() - startTime);
                     finished = true;
-                    console.log("finishe");
                     clearTimeout(to);
                 });
     }
