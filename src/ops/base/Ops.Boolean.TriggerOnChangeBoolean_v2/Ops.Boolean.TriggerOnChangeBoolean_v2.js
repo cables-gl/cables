@@ -3,13 +3,15 @@ const
     outTrue = op.outTrigger("True"),
     outFalse = op.outTrigger("False");
 
-inBool.onChange = function ()
+inBool.onChange = update;
+
+function update()
 {
     if (inBool.get()) outTrue.trigger();
     else outFalse.trigger();
-};
+}
 
 op.init = () =>
 {
-    if (inBool.isLinked())next.trigger();
+    if (inBool.isLinked())update();
 };

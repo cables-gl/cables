@@ -2,7 +2,7 @@ const
     objectIn = op.inObject("Object"),
     pathIn = op.inString("Path"),
     resultOut = op.outArray("Output"),
-    foundOut = op.outBool("Found");
+    foundOut = op.outBoolNum("Found");
 
 objectIn.onChange =
     pathIn.onChange = update;

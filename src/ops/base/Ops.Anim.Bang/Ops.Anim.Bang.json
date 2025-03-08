@@ -58,5 +58,13 @@
         ]
     },
     "exampleProjectId": "TctR5r",
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741277743673
+        }
+    ]
 }

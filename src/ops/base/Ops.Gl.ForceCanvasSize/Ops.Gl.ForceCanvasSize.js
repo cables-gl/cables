@@ -133,6 +133,9 @@ inTrigger.onTriggered = function ()
     let h = inHeight.get();
 
     let clientRect = cgl.canvas.parentNode.getBoundingClientRect();
+
+    // console.log("clientrect",clientRect);
+
     if (clientRect.height == 0)
     {
         cgl.canvas.parentNode.style.height = "100%";
@@ -221,11 +224,12 @@ inTrigger.onTriggered = function ()
         cgl.canvas.style.transform = "scale(1)";
     }
 
-    if (cgl.canvas.width / cgl.pixelDensity != w || cgl.canvas.height / cgl.pixelDensity != h)
+    if (cgl.canvasWidth != w || cgl.canvasHeight != h)
     {
         outWidth.set(w);
         outHeight.set(h);
         cgl.setSize(w, h);
+        console.log("res ckhange", cgl.canvas.width, w);
     }
     // else
     next.trigger();

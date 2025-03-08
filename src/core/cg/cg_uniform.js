@@ -15,7 +15,7 @@ export class CgUniform
      * @param {Port} _port3
      * @param {Port} _port4
      */
-    constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
+    constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
     {
         this._log = new Logger("cg_uniform");
         this._type = __type;
@@ -24,6 +24,10 @@ export class CgUniform
         this._value = 0.00001;
         this._oldValue = null;
         this._port = null;
+
+        this._structName = _structName;
+        this._structUniformName = _structUniformName;
+        this._propertyName = _propertyName;
 
         this._shader._addUniform(this);
         this.needsUpdate = true;

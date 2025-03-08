@@ -56,7 +56,14 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1736850870069
+        },
+        {
+            "message": "change \"found\" port to boolNum type",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1741354710376
         }
     ],
-    "exampleProjectId": "AapUWr"
+    "exampleProjectId": "AapUWr",
+    "license": "MIT"
 }

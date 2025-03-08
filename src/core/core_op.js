@@ -1631,7 +1631,7 @@ export class Op extends Events
      * @param {string} txt text message
      * @param {number} level level
      */
-    setUiError(id, txt, level = 2)
+    setUiError(id, txt, level = 2, options = {})
     {
         // overwritten in ui: core_extend_op
     }

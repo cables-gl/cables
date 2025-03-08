@@ -27,7 +27,6 @@ updateUi();
 if (CABLES.UI)
 {
     timer.play();
-    // op.checkMainloopExists();
 }
 
 function updateUi()
@@ -62,11 +61,6 @@ function updateDefines()
 
 op.renderVizLayerGl = (ctx, layer) =>
 {
-    // if (firstTime)
-    // {
-    //     firstTime = false;
-    //     op.checkMainloopExists();
-    // }
     if (!inTex.isLinked()) return;
     if (!layer.useGl) return;
 
@@ -314,63 +308,37 @@ op.renderVizLayerGl = (ctx, layer) =>
         }
 
         let info = "";
-        if (port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+        if (inShowInfo.get() && port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
         outInfo.set(info);
 
         if (inPickColor.get())
         {
             info += colorString + "\n";
 
-            // ctx.save();
-            // ctx.scale(layer.scale, layer.scale);
-            // ctx.font = "normal 10px sourceCodePro";
-            // ctx.fillStyle = "#000";
-            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10 + 0.5, layer.y / layer.scale + 10 + 0.5);
-            // ctx.fillStyle = "#aaa";
-            // ctx.fillText("RGBA " + colorString, layer.x / layer.scale + 10, layer.y / layer.scale + 10);
-
-            // ctx.restore();
-
             const x = imgPosX + imgSizeW * inX.get();
             const y = imgPosY + imgSizeH * inY.get();
 
-            ctx.fillStyle = "#000";
-            ctx.fillRect(
-                x - 1,
-                y - 10,
-                3,
-                20);
+            for (let ii = 0; ii < 2; ii++)
+            {
+                if (ii == 0)ctx.fillStyle = "#000";
+                else ctx.fillStyle = "#fff";
 
-            ctx.fillRect(
-                x,
-                y - 1,
-                20,
-                3);
+                ctx.fillRect(
+                    x - 1 + ii,
+                    y - 10 + ii,
+                    1,
+                    20);
 
-            ctx.fillStyle = "#fff";
-            ctx.fillRect(
-                x - 1,
-                y - 10,
-                1,
-                20);
-
-            ctx.fillRect(
-                x - 10,
-                y - 1,
-                20,
-                1);
+                ctx.fillRect(
+                    x - 10 + ii,
+                    y - 1 + ii,
+                    20,
+                    1);
+            }
         }
 
-        if (inShowInfo.get())
+        if (inShowInfo.get() || inPickColor.get())
         {
-        // ctx.save();
-            // ctx.scale(layer.scale, layer.scale);
-            // ctx.font = "normal 10px sourceCodePro";
-            // ctx.fillStyle = "#000";
-            // ctx.fillText(info, layer.x / layer.scale + 5 + 0.5, (layer.y + layer.height) / layer.scale - 5 + 0.5);
-            // ctx.fillStyle = "#aaa";
-            // ctx.fillText(info, layer.x / layer.scale + 5, (layer.y + layer.height) / layer.scale - 5);
-            // ctx.restore();
             op.setUiAttrib({ "comment": info });
         }
 
