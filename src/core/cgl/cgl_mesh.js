@@ -739,9 +739,14 @@ class Mesh extends CgMesh
         if (this.#cgl.aborted) return;
         shader = shader || this.#cgl.getShader();
 
-        if (!shader || !shader.isValid())
+        if (!shader)
         {
             return console.log("shadern not valid");
+        }
+
+        if (!shader.isValid())
+        {
+            shader = this.#cgl.getErrorShader();
         }
 
         this._checkAttrLengths();

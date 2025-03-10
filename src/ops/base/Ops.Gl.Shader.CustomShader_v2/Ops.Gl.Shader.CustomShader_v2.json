@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1557747298207
+            "date": 1557747298207,
+            "type": "new"
         },
         {
             "message": "Show button to show shader errors in the source code",

@@ -36,6 +36,8 @@ class CgShader extends Events
 
     _compileCount = 0;
 
+    logError = true;
+
     constructor()
     {
         super();
@@ -254,6 +256,11 @@ class CgShader extends Events
         this._moduleNumId++;
 
         return mod;
+    }
+
+    isValid()
+    {
+        return this._isValid;
     }
 
     // getAttributeSrc(mod, srcHeadVert, srcVert)

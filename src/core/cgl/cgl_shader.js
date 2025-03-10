@@ -1215,18 +1215,20 @@ class CglShader extends CgShader
                 const infoLogFrag = this._cgl.gl.getShaderInfoLog(this.fshader);
                 const infoLogVert = this._cgl.gl.getShaderInfoLog(this.vshader);
 
+                if (this.logError)
+                    this._log.error(this._name + " shader linking fail...");
+                else
+                    this._log.warn(this._name + " shader linking fail...");
+
                 if (infoLogFrag) this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
                 if (infoLogVert) this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
 
-                this._log.error(this._name + " shader linking fail...");
-
                 this._cgl.gl.getProgramInfoLog(program);
-                if (!CABLES.UI)
-                    this._log.log(this);
+                if (!CABLES.UI) this._log.log(this);
                 this._isValid = false;
 
-                this._name = "errorshader";
-                this.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
+                // this._name = "errorshader";
+                // this.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
                 this._cgl.printError("shader link err");
             }
         }
@@ -1473,6 +1475,8 @@ CglShader.createShader = function (cgl, str, type, cglShader)
     {
         cglShader.error = { "str": str, "infoLog": cgl.gl.getShaderInfoLog(shader) };
 
+        if (CABLES.UI) gui.emitEvent("ShaderError", cglShader);
+
         if (!cglShader.error.infoLog)
         {
             this._log.warn("empty shader info log", this._name);
@@ -1480,6 +1484,9 @@ CglShader.createShader = function (cgl, str, type, cglShader)
         }
 
         cglShader.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
+
+        // CABLES.UI.showShaderError(shader);
+
     }
     return shader;
 };
