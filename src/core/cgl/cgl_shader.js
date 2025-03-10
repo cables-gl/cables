@@ -7,6 +7,8 @@ import { escapeHTML } from "./cgl_utils.js";
 import { CgShader } from "../cg/cg_shader.js";
 import defaultShaderSrcVert from "./cgl_shader_default_glsl.vert";
 import { CglContext } from "./cgl_state.js";
+import { Texture } from "./cgl_texture.js";
+import { Uniform } from "./cgl_shader_uniform.js";
 
 // ---------------------------------------------------------------------------
 
@@ -1227,8 +1229,6 @@ class CglShader extends CgShader
                 if (!CABLES.UI) this._log.log(this);
                 this._isValid = false;
 
-                // this._name = "errorshader";
-                // this.setSource(CglShader.getDefaultVertexShader(), CglShader.getErrorFragmentShader());
                 this._cgl.printError("shader link err");
             }
         }
@@ -1341,9 +1341,9 @@ class CglShader extends CgShader
 
     /**
      * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
-     * @param {uniform} uniform texture uniform
-     * @param {texture} t texture
-     * @param {type} type texture type, can be ignored when TEXTURE_2D
+     * @param {Uniform} uniform texture uniform
+     * @param {Texture} t texture
+     * @param {number} type texture type, can be ignored when TEXTURE_2D
      * @function pushTexture
      * @memberof Shader
      * @instance
@@ -1479,7 +1479,7 @@ CglShader.createShader = function (cgl, str, type, cglShader)
 
         if (!cglShader.error.infoLog)
         {
-            this._log.warn("empty shader info log", this._name);
+            cglShader._log.warn("empty shader info log", this._name);
             return;
         }
 
