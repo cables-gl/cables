@@ -19,7 +19,6 @@ function getCellVertices(cellArr)
     return verts;
 }
 
-op.onDelete = function () { if (mesh)mesh.dispose(); };
 function addFace(verts)
 {
     const colR = Math.random();
