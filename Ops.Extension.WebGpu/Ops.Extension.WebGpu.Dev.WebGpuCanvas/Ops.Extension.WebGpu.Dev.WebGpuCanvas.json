@@ -26,6 +26,11 @@
                 "type": 0,
                 "name": "Catch Errors",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Profile",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -60,6 +65,10 @@
                 "type": 2,
                 "name": "Canvas Prev",
                 "objType": "element"
+            },
+            {
+                "type": 2,
+                "name": "Profiler Data"
             }
         ]
     },

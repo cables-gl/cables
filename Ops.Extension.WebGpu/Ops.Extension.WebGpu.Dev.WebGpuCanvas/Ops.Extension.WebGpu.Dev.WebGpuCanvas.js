@@ -2,13 +2,15 @@ const
     inEnabled = op.inBool("Active", true),
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     inCatchErrs = op.inBool("Catch Errors", true),
+    inDoProfile = op.inBool("Profile", true),
     next = op.outTrigger("Next"),
     next2 = op.outTrigger("Next2"),
     supported = op.outBoolNum("Supported", false),
     outMs = op.outNumber("MS Frame"),
     outLimits = op.outObject("Limits"),
     outEle = op.outObject("Canvas", null, "element"),
-    outElePrev = op.outObject("Canvas Prev", null, "element");
+    outElePrev = op.outObject("Canvas Prev", null, "element"),
+    outProfiler = op.outObject("Profiler Data", null);
 
 const gpu = new CABLES.WebGpuOp(op);
 
@@ -19,7 +21,6 @@ let context = null, pipeline = null, contextPrev = null;
 let container = null;
 let stopped = false;
 let hadError = false;
-
 let renderPreview = !!CABLES.UI;
 
 canvas = document.createElement("canvas");
@@ -83,6 +84,12 @@ op.patch.cgCanvas = new CABLES.CG.CgCanvas(
         "cg": cgp
 
     });
+
+inDoProfile.onChange = () =>
+{
+    cgp.profiler = null;
+    outProfiler.set(null);
+};
 
 function setUnSupported(msg)
 {
@@ -289,6 +296,13 @@ function render(b)
     //     // return;
     // }
 
+    if (inDoProfile.get())
+    {
+        if (!cgp.branchProfiler) cgp.branchProfiler = new CABLES.BranchStack();
+
+        cgp.branchProfiler.start();
+    }
+
     cgp.commandEncoders = [];
     const commandEncoder = device.createCommandEncoder({ "label": op.objName });
     cgp.commandEncoder = commandEncoder;
@@ -303,6 +317,7 @@ function render(b)
                 "view": context.getCurrentTexture().createView(),
                 "loadOp": "clear",
                 "storeOp": "store",
+                "clearValue": { "r": 0.0, "g": 0.5, "b": 1.0, "a": 1.0 }
             },
         ],
         "depthStencilAttachment": {
@@ -332,8 +347,14 @@ function render(b)
     /// //////////////////////////////////////////
     if (renderPreview)
     {
-        gui.patchView.patchRenderer.vizLayer.renderWebGpuPreviews(cgp);
+        // gui.patchView.patchRenderer.vizLayer.renderWebGpuPreviews(cgp);
     }
 
     cgp.device.queue.submit([cgp.commandEncoder.finish()]);
+
+    if (inDoProfile.get() && cgp.branchProfiler)
+    {
+        cgp.branchProfiler.finish();
+        outProfiler.setRef(cgp.branchProfiler);
+    }
 }

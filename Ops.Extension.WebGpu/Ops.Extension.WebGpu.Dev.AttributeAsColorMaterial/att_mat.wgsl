@@ -3,8 +3,7 @@ struct VSUniforms
     modelMatrix: mat4x4<f32>,
     viewMatrix: mat4x4<f32>,
     projMatrix: mat4x4<f32>,
-        normalMatrix: mat4x4<f32>
-
+    normalMatrix: mat4x4<f32>
 };
 
 struct FSUniforms
@@ -12,14 +11,11 @@ struct FSUniforms
     color:vec4<f32>
 };
 
-
-
 struct MyVSInput
 {
     @location(0) position: vec3<f32>,
     @location(1) normal: vec3<f32>,
     @location(2) texcoord: vec2<f32>,
-
 };
 
 struct MyVSOutput

@@ -28,26 +28,6 @@
                     "BiTangents"
                 ],
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "r",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "g",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "b",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "a",
-                "subType": "number"
             }
         ],
         "portsOut": [

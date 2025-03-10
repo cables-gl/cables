@@ -27,6 +27,8 @@ exec.onTriggered = () =>
 
         const commandEncoder = cgp.device.createCommandEncoder();
 
+        if (cgp.branchProfiler) cgp.branchProfiler.push(op.objName, "copyBufferToBuffer ");
+
         commandEncoder.copyBufferToBuffer(
             inPosBuff.get().gpuBuffer /* source buffer */,
             0 /* source offset */,
@@ -46,5 +48,7 @@ exec.onTriggered = () =>
             outArr.setRef(b);
             gpuReadBuffer = null;
         });
+
+        if (cgp.branchProfiler) cgp.branchProfiler.pop();
     }
 };

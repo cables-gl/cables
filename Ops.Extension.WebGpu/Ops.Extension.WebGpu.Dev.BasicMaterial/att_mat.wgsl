@@ -104,6 +104,8 @@ fn myFSMain
 
     {{MODULE_COLOR}}
 
+    col.a=1.0;
+
     return col;//+fsUniforms.color+vec4f(v.texCoord,1.0,1.0);
     // return vec4f(v.texCoord,0.0,1.0);
     // return vec4f(v.normal,1.0);

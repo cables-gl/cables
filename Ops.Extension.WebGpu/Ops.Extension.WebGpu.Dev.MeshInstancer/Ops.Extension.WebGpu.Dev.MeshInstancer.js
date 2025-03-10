@@ -5,7 +5,8 @@ const
     inInstances = op.inInt("Num Instances", 0),
     inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
     inReset = op.inTriggerButton("Reset"),
-    next = op.outTrigger("Next");
+    next = op.outTrigger("Next"),
+    outNum = op.outNumber("Total Instances");
 
 const gpu = new CABLES.WebGpuOp(op);
 
@@ -51,10 +52,14 @@ inTrigger.onTriggered = () =>
     {
         mesh.instances = inInstances.get() || inPosBuff.get().length;
 
-        if (u.gpuBuffer != inPosBuff.get())
+        outNum.set(mesh.instances);
+
+        // console.log("sss",inPosBuff.get().gpuBuffer)
+        // if (u.gpuBuffer != inPosBuff.get())
         {
             oldPosBuff = u.gpuBuffer;
             u.gpuBuffer = inPosBuff.get();
+            u.setGpuBuffer(inPosBuff.get().gpuBuffer);
         }
     }
     else

@@ -49,6 +49,11 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Instances",
+                "subType": "number"
             }
         ]
     },
