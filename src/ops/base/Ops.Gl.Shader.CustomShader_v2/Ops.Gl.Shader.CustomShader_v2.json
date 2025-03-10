@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1557747298207
+        },
+        {
+            "message": "Show button to show shader errors in the source code",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741604106330
         }
     ],
     "authorName": "pandur",

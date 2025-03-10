@@ -370,7 +370,6 @@ function updateShader()
     if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2, { "button": "show",
         "buttonCb": () =>
         {
-            console.log("yep");
             CABLES.UI.showShaderError(shader);
         } });
     else op.setUiError("compile", null);
