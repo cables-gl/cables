@@ -298,7 +298,7 @@ export class Texture extends CgTexture
             this.width = t.width;
             this.height = t.height;
             this.tex = t.tex;
-            this.log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
+            this._log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
             return;
         }
 
