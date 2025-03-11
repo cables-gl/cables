@@ -253,7 +253,7 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         if (this._valueOutPort)
-            if (this._typeId == CABLES.Port.TYPE_ARRAY && this._typeId == CABLES.Port.TYPE_OBJECT)
+            if (this._typeId == CABLES.Port.TYPE_ARRAY && this._typeId == CABLES.Port.TYPE_OBJECT || this._isTexture)
                 this._valueOutPort.setRef(v);
             else
                 this._valueOutPort.set(v);

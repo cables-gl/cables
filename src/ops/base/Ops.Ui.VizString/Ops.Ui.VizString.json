@@ -30,6 +30,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1714486826698
+        },
+        {
+            "message": "Show connected port name as extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741686439258
         }
     ],
     "authorName": "pandur",

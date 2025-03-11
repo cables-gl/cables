@@ -19,6 +19,13 @@ inStr.onLinkChanged = () =>
     {
         lines = [];
         inStr.set(null);
+
+        op.setUiAttrib({ "extendTitle": "" });
+    }
+    else
+    {
+        const pp = inStr.links[0].getOtherPort(inStr);
+        if (pp) op.setUiAttrib({ "extendTitle": pp.name });
     }
 };
 

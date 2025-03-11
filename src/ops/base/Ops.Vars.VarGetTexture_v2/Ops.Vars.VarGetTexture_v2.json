@@ -18,26 +18,21 @@
         "vargetset"
     ],
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Variable",
-                "subType": "string"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Value"
+                "type": 2,
+                "name": "Value",
+                "objType": "texture"
             }
         ]
     },
     "summary": "get a texture from a variable",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "lkS998"
+    "exampleProjectId": "lkS998",
+    "license": "MIT"
 }

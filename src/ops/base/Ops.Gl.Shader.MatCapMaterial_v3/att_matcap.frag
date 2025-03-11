@@ -61,7 +61,8 @@ vec2 getMatCapUV(vec3 viewSpacePosition, vec3 normal) {
 
 void main()
 {
-    vec3 viewSpaceNormal = normalize(transformedNormal);
+    vec3 normal = normalize(transformedNormal);
+    {{MODULE_NORMAL}}
 
 
 
@@ -73,11 +74,11 @@ void main()
 
 
     #ifdef DOUBLE_SIDED
-        if(!gl_FrontFacing) viewSpaceNormal *= -1.0;
+        if(!gl_FrontFacing) normal *= -1.0;
     #endif
 
     #ifdef CALC_SSNORMALS
-        viewSpaceNormal = CalculateScreenSpaceNormals();
+        normal = CalculateScreenSpaceNormals();
     #endif
 
 
@@ -95,28 +96,28 @@ void main()
 
             tangent = c1;
             tangent = normalize(tangent);
-            binormal = cross(viewSpaceNormal, tangent);
+            binormal = cross(normal, tangent);
             binormal = normalize(binormal);
         #endif
 
         #ifndef CALC_TANGENT
             tangent = normalize(normalMatrix * vTangent);
             vec3 bitangent = normalize(normalMatrix * vBiTangent);
-            binormal = normalize(cross(viewSpaceNormal, bitangent));
+            binormal = normalize(cross(normal, bitangent));
         #endif
 
         normalFromMap = normalize(
             tangent * normalFromMap.x
             + binormal * normalFromMap.y
-            + viewSpaceNormal * normalFromMap.z
+            + normal * normalFromMap.z
         );
 
-        vec3 mixedNormal = normalize(viewSpaceNormal + normalFromMap * normalMapIntensity);
+        vec3 mixedNormal = normalize(normal + normalFromMap * normalMapIntensity);
 
-        viewSpaceNormal = mixedNormal;
+        normal = mixedNormal;
     #endif
 
-    vec4 col = texture(texMatcap, getMatCapUV(viewSpacePosition, viewSpaceNormal));
+    vec4 col = texture(texMatcap, getMatCapUV(viewSpacePosition, normal));
 
     #ifdef HAS_DIFFUSE_TEXTURE
         col = col*texture(texDiffuse, texCoords);

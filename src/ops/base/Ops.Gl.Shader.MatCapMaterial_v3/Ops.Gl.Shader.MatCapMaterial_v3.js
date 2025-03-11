@@ -42,9 +42,9 @@ op.setPortGroup("Color", [r, g, b, pOpacity]);
 const shader = new CGL.Shader(cgl, "MatCapMaterialNew3");
 const uniOpacity = new CGL.Uniform(shader, "f", "opacity", pOpacity);
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_NORMAL", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 shader.setSource(attachments.matcap_vert, attachments.matcap_frag);
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 
 const textureMatcapUniform = new CGL.Uniform(shader, "t", "texMatcap");
 let textureDiffuseUniform = null;

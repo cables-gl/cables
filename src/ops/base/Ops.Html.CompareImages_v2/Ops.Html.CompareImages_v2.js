@@ -56,7 +56,7 @@ function compare()
                     if (data.getImageDataUrl) outImageUrl.set(data.getImageDataUrl());
                     outSameDimensions.set(data.isSameDimensions);
                     outMatchPercentage.set(data.rawMisMatchPercentage);
-                    outData.set(data);
+                    outData.setRef(data);
                     loadingId = op.patch.loading.finished(loadingId);
                     outFinished.trigger();
 

@@ -332,7 +332,7 @@ function buildShader()
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody || "");
 
     PBRShader.setSource(vertexShader, fragmentShader);
-    shaderOut.set(PBRShader);
+    shaderOut.setRef(PBRShader);
 
     for (let i = 0; i < PBRLightStack.length; i += 1)
     {

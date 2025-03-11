@@ -26,7 +26,7 @@ function update()
     const q = queryPort.get();
     if (!q)
     {
-        elementPort.set(null);
+        elementPort.setRef(null);
         return;
     }
     const theDocument = inSource.get();
@@ -39,7 +39,7 @@ function update()
         {
             htmlDoc = parser.parseFromString(theDocument, inMimeType.get());
             const el = htmlDoc.querySelector(q);
-            elementPort.set(el);
+            elementPort.setRef(el);
         }
         catch (e)
         {
@@ -52,7 +52,7 @@ function update()
         try
         {
             const el = document.querySelector(q);
-            elementPort.set(el);
+            elementPort.setRef(el);
         }
         catch (e)
         {
