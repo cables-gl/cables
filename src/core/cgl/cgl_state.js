@@ -83,6 +83,8 @@ export class CglContext extends CgContext
         this._oldCanvasWidth = -1;
         this._oldCanvasHeight = -1;
         this._enabledExtensions = {};
+
+        this.errorShader = null;
     }
 
     // set pixelDensity(p)
@@ -1165,12 +1167,18 @@ export class CglContext extends CgContext
         const o = this.gl.getExtension(name);
         this._enabledExtensions[name] = o;
 
-        if (!o)
-            this._log.warn("[cgl_state] extension not available " + name);
-        // else
-            // this._log.log("enabled extension", name);
+        if (!o) this._log.warn("[cgl_state] extension not available " + name);
 
         return o;
+    }
+
+    getErrorShader()
+    {
+        if (this.errorShader) return this.errorShader;
+
+        this.errorShader = new Shader(this, "errormaterial");
+        this.errorShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
+        return this.errorShader;
     }
 
 }

@@ -8,7 +8,8 @@ op.toWorkPortsNeedToBeLinked(render);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl, "basicmaterialnew", this);
+
+const shader = new CGL.Shader(cgl, "basicmaterial", this);
 shader.addAttribute({ "type": "vec3", "name": "vPosition" });
 shader.addAttribute({ "type": "vec2", "name": "attrTexCoord" });
 shader.addAttribute({ "type": "vec3", "name": "attrVertNormal", "nameFrag": "norm" });

@@ -20,6 +20,7 @@ vertexShader.setUiAttribs({ "editorSyntax": "glsl" });
 
 const shader = new CGL.Shader(cgl, "customshader", op);
 
+shader.logError = false;
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 
 op.setPortGroup("Source Code", [fragmentShader, vertexShader]);
@@ -370,7 +371,6 @@ function updateShader()
     if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2, { "button": "show",
         "buttonCb": () =>
         {
-            console.log("yep");
             CABLES.UI.showShaderError(shader);
         } });
     else op.setUiError("compile", null);

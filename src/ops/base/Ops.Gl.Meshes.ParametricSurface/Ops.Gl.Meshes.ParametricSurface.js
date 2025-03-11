@@ -691,6 +691,7 @@ let geom = null;
 
 const create = () =>
 {
+    if (!op.patch.cg) return;
     if (shouldRender)
     {
         const uSegments = inSegmentsU.get();
