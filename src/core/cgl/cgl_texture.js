@@ -32,6 +32,7 @@ export class Texture extends CgTexture
         if (!__cgl) throw new Error("no cgl");
 
         this._cgl = __cgl;
+        this._log = new Logger("tex");
         this.tex = this._cgl.gl.createTexture();
         this.loading = false;
         this.flip = true;
@@ -297,7 +298,7 @@ export class Texture extends CgTexture
             this.width = t.width;
             this.height = t.height;
             this.tex = t.tex;
-            this._log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
+            this.log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
             return;
         }
 
