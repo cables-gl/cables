@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1740999566516
-        },
-        {
-            "message": "Patch.PoQ1jhE.HtmlEncode renamed to Ops.String.HtmlEncode",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1741000077959
         }
     ],
     "layout": {
@@ -30,5 +24,9 @@
                 "name": "result"
             }
         ]
+    },
+    "summary": "encode a string to html",
+    "docs": {
+        "ports": []
     }
 }

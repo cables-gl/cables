@@ -40,7 +40,7 @@ const srcHeadVert = attachments.deformarea_vert;
 
 const srcBodyVert = ""
     .endl() + "pos=MOD_deform(pos,mMatrix,false,norm);"
-    .endl() + "norm=MOD_deform(pos,mMatrix,true,norm).xyz;"
+    // .endl() + "norm=MOD_deform(pos,mMatrix,true,norm).xyz;"
     .endl();
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
