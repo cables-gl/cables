@@ -5,6 +5,20 @@ const
 filename.onChange = async function ()
 {
     const fontFile = op.patch.getFilePath(String(filename.get()));
-    const font = await opentype.load(fontFile);
-    outFont.set(font);
+
+    op.setUiError("exc", null);
+
+    try
+    {
+        const font = await opentype.load(fontFile);
+        outFont.set(font);
+    }
+    catch(e)
+    {
+        console.log(e);
+        let str=e.toString();
+        str=str.replaceAll("<","&lt;");
+        str=str.replaceAll(">","&gt;");
+        op.setUiError("exc", "opentype error "+str);
+    }
 };

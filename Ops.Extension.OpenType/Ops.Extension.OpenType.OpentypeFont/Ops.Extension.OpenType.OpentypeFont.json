@@ -4,49 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1642189439092
-        },
-        {
-            "message": " added lib: opentype.js",
-            "author": "pandur",
-            "date": 1642189461231
-        },
-        {
-            "message": "Ops.User.pandur.Opentype renamed to Ops.Dev.Opentype",
-            "author": "pandur",
-            "date": 1642927521851
-        },
-        {
-            "message": "Ops.Dev.Opentype renamed to Ops.Dev.OpentypeFont",
-            "author": "pandur",
-            "date": 1647541530515
-        },
-        {
-            "message": "Ops.Dev.OpentypeFont renamed to Ops.Dev.Opentype",
-            "author": "pandur",
-            "date": 1647541547697
-        },
-        {
-            "message": "Ops.Dev.Opentype renamed to Ops.Dev.OpentypeFont",
-            "author": "pandur",
-            "date": 1647543302442
-        },
-        {
-            "message": "Ops.Dev.OpentypeFont renamed to Ops.Libs.OpenType.OpentypeFont",
-            "author": "pandur",
-            "date": 1653287660357
-        },
-        {
-            "message": "Ops.Libs.OpenType.OpentypeFont renamed to Ops.Extension.OpenType.OpentypeFont",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915904547
+            "date": 1642189439092,
+            "type": "new"
         },
         {
             "message": "handle prefixassetpath correctly for url input",
             "type": "bugfix",
             "author": "stephan",
             "date": 1733143157266
+        },
+        {
+            "message": "Handle file format error",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741771322842
         }
     ],
     "libs": [
