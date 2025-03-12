@@ -34,7 +34,7 @@ float MOD_sdHexPrism( vec3 p, vec2 h )
 
 /////////////////////
 
-mat4 createTransformMatrix(vec3 translation, vec3 scale) {
+mat4 MOD_createTransformMatrix(vec3 translation, vec3 scale) {
     mat4 matrix = mat4(1.0);
 
     matrix[0][0] = scale.x;
@@ -114,7 +114,7 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
     #ifndef MOD_VIZ
         if(MOD_de>0.000)
         {
-            mat4 m=createTransformMatrix(
+            mat4 m=MOD_createTransformMatrix(
                     MOD_changeTranslate*MOD_de,
                     MOD_changeScale*(MOD_deFO)
                     );
