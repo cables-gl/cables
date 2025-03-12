@@ -5,7 +5,7 @@ IN float attrVertIndex;
 IN vec3 attrVertNormal,attrTangent,attrBiTangent;
 OUT vec2 texCoord;
 OUT vec2 texCoord1;
-OUT vec3 normal;
+OUT vec3 outNormal;
 OUT vec3 tangent;
 OUT vec3 bitangent;
 OUT vec3 outTangent,outBiTangent;
@@ -42,7 +42,7 @@ void main()
     #ifdef SHOW_NORMAL_MAT
         norm=( vec4(norm,1.0)*normalMatrix ).xyz;
     #endif
-    normal=norm;
+    outNormal=norm;
     outTangent=tangent;
     outBiTangent=bitangent;
     outPosition= mMatrix * pos;

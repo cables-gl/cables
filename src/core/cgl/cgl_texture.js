@@ -32,6 +32,7 @@ export class Texture extends CgTexture
         if (!__cgl) throw new Error("no cgl");
 
         this._cgl = __cgl;
+        this._log = new Logger("tex");
         this.tex = this._cgl.gl.createTexture();
         this.loading = false;
         this.flip = true;

@@ -21,15 +21,15 @@ function update()
     let ind = index.get();
     if (ind < 0 || !arr || ind >= arr.length)
     {
-        value.set(emptyTex);
+        value.setRef(emptyTex);
         return;
     }
 
     if (arr[ind])
     {
-        value.set(arr[ind] || emptyTex);
+        value.setRef(arr[ind] || emptyTex);
         last = arr[ind];
     }
     else
-        value.set(emptyTex);
+        value.setRef(emptyTex);
 }

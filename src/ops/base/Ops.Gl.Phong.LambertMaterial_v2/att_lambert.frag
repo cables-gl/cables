@@ -109,6 +109,8 @@ void main()
         if(!gl_FrontFacing) normal = normal*-1.0;
     #endif
 
+    {{MODULE_NORMAL}}
+
     vec3 matColor = materialColor.rgb;
 
     #ifdef HAS_TEXTURES

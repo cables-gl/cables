@@ -1,4 +1,4 @@
-IN vec3 normal;
+IN vec3 outNormal;
 IN vec3 outTangent;
 IN vec3 outBiTangent;
 IN vec4 outPosition;
@@ -20,6 +20,9 @@ void main()
     #ifndef MULMODEL
         vec3 attr;
     #endif
+
+    vec3 normal=outNormal;
+    {{MODULE_NORMAL}}
 
     #ifdef SHOW_NORMALS
         attr.xyz=normal;
