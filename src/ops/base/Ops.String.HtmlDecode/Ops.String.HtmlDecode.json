@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1740908232795
-        },
-        {
-            "message": "Patch.PoQ1jhE.HtmlDecde renamed to Ops.String.HtmlDecode",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1741000093324
         }
     ],
     "layout": {
@@ -30,5 +24,9 @@
                 "name": "result"
             }
         ]
+    },
+    "summary": "convert a html encoded string to a normal UTF8 string",
+    "docs": {
+        "ports": []
     }
 }

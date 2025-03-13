@@ -1,0 +1,84 @@
+{
+    "id": "b328a1d1-1cfd-4192-b0f2-91f26d284a1a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556293017309,
+            "type": "new"
+        },
+        {
+            "message": "Choose between different methods to go to a URL, window.open, document.location or a anchor link",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741792089689
+        },
+        {
+            "message": "Added option to choose the target frame",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741792108999
+        },
+        {
+            "message": "Add input for rel attribute",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1741792124088
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1741791263322,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Open"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "anchor",
+                    "document.location",
+                    "window.open"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "URL"
+            },
+            {
+                "type": 0,
+                "name": "Target index",
+                "values": [
+                    "_blank",
+                    "_self",
+                    "_parent",
+                    "_top",
+                    "frame name"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Frame Name"
+            },
+            {
+                "type": 5,
+                "name": "Win Specs"
+            },
+            {
+                "type": 5,
+                "name": "rel Attribute"
+            }
+        ],
+        "portsOut": []
+    },
+    "summary": "Open another website",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ilts7O",
+    "license": "MIT"
+}

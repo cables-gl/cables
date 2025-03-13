@@ -93,6 +93,11 @@ class Mesh extends CgMesh
         this._queryExt = null;
     }
 
+    get geom()
+    {
+        return this.#geom;
+    }
+
     get numInstances()
     {
         return this._numInstances;

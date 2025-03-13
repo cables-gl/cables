@@ -136,7 +136,7 @@ void main()
     #endif
 
     #ifdef USE_SPECULAR_TEXTURE
-        vec4 spec = texture(texSpecMatCap, getMatCapUV(viewSpacePosition, viewSpaceNormal));
+        vec4 spec = texture(texSpecMatCap, getMatCapUV(viewSpacePosition, normal));
         spec *= texture(texSpec, texCoords);
         col += spec;
     #endif

@@ -45,9 +45,9 @@
         ]
     },
     "summary": "capture all following meshes into one geometry",
-
     "exampleProjectId": "BwxY2f",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
