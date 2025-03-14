@@ -32,6 +32,11 @@
                 "type": 1,
                 "name": "fwagmglix",
                 "uititle": "render"
+            },
+            {
+                "type": 5,
+                "name": "zmd1pqgqt",
+                "uititle": "glb File"
             }
         ],
         "portsOut": []

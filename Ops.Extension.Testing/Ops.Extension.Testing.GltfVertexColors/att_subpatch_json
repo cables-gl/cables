@@ -10,7 +10,7 @@
         },
         "accBuffersDelete": "vertexpaint_cube",
         "loading": false,
-        "subPatch": "pz7qsce2d",
+        "subPatch": "rtb4wcf1t",
         "extendTitle": "vertexpaint_cube",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -23,7 +23,6 @@
         },
         {
           "name": "glb File",
-          "value": "/assets/619e244ce4dff21e0ce04166/vertexpaint_cube.glb",
           "display": "file"
         },
         {
@@ -138,7 +137,7 @@
           "x": 826.1223022126512,
           "y": 669.429384109906
         },
-        "subPatch": "pz7qsce2d",
+        "subPatch": "rtb4wcf1t",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -167,10 +166,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "xwhffn47h",
       "uiAttribs": {
-        "subPatch": "pz7qsce2d",
+        "subPatch": "rtb4wcf1t",
         "translate": {
-          "x": 826.1223022126512,
-          "y": 0
+          "x": 844.8097793999007,
+          "y": 541.2379768677549
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -188,6 +187,18 @@
               "objOut": "xwhffn47h"
             }
           ]
+        },
+        {
+          "name": "innerOut_jgob8i89i",
+          "title": "glb File",
+          "links": [
+            {
+              "portIn": "glb File",
+              "portOut": "innerOut_jgob8i89i",
+              "objIn": "rx4awvnec",
+              "objOut": "xwhffn47h"
+            }
+          ]
         }
       ]
     },
@@ -195,7 +206,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "w8560wqax",
       "uiAttribs": {
-        "subPatch": "pz7qsce2d",
+        "subPatch": "rtb4wcf1t",
         "translate": {
           "x": 1089.204477578563,
           "y": 1025.6407166733777

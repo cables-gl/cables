@@ -9,7 +9,7 @@
           "y": 2237.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "77aqa18i1",
+        "subPatch": "4b3g8c1kq",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -95,69 +95,6 @@
       ]
     },
     {
-      "opId": "e4f3d8f1-8a49-460a-896c-4d7adcda2494",
-      "id": "a7n7krbfc",
-      "uiAttribs": {
-        "loading": false,
-        "translate": {
-          "x": 584.0117228268281,
-          "y": 1995.0808597272003
-        },
-        "notWorkingMsg": null,
-        "subPatch": "77aqa18i1",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "display": "file"
-        },
-        {
-          "name": "Texture width",
-          "value": 2048
-        },
-        {
-          "name": "Texture height",
-          "value": 2048
-        },
-        {
-          "name": "Wrap index",
-          "value": 2
-        },
-        {
-          "name": "Wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Filter index",
-          "value": 1
-        },
-        {
-          "name": "Filter",
-          "value": "linear"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "al3akt2mb",
-              "objOut": "a7n7krbfc"
-            }
-          ]
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        }
-      ]
-    },
-    {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "v6k85waq5",
       "uiAttribs": {
@@ -166,7 +103,7 @@
           "y": 2417.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "77aqa18i1",
+        "subPatch": "4b3g8c1kq",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -235,7 +172,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "1a4lmjwxl",
       "uiAttribs": {
-        "subPatch": "77aqa18i1",
+        "subPatch": "4b3g8c1kq",
         "translate": {
           "x": 524.0117228268281,
           "y": 1802.5017887256229
@@ -275,7 +212,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "c9a8ryr9w",
       "uiAttribs": {
-        "subPatch": "77aqa18i1",
+        "subPatch": "4b3g8c1kq",
         "translate": {
           "x": 576.7960877610235,
           "y": 2709.3513516777552
@@ -284,6 +221,69 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "e4f3d8f1-8a49-460a-896c-4d7adcda2494",
+      "id": "a7n7krbfc",
+      "uiAttribs": {
+        "loading": false,
+        "translate": {
+          "x": 584.0117228268281,
+          "y": 1994.4921096516034
+        },
+        "notWorkingMsg": null,
+        "subPatch": "4b3g8c1kq",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "File",
+          "display": "file"
+        },
+        {
+          "name": "Texture width",
+          "value": 2048
+        },
+        {
+          "name": "Texture height",
+          "value": 2048
+        },
+        {
+          "name": "Wrap index",
+          "value": 2
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Filter index",
+          "value": 1
+        },
+        {
+          "name": "Filter",
+          "value": "linear"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "al3akt2mb",
+              "objOut": "a7n7krbfc"
+            }
+          ]
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        }
+      ]
     }
   ]
 }

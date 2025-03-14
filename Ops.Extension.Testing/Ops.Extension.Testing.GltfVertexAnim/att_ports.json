@@ -1,1 +1,20 @@
-{"ports":[{"id":"fwagmglix","title":"render","dir":0,"type":1}]}
+{
+    "ports": [
+        {
+            "id": "fwagmglix",
+            "title": "render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "zmd1pqgqt",
+            "title": "glb File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/pointanim.glb",
+            "order": 1
+        }
+    ]
+}
