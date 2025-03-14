@@ -65,7 +65,7 @@ export class Op extends Events
     };
 
     shouldWork = {};
-    hasUiErrors = false;
+    hasUiErrors = 0;
 
     /** @type {Object} */
     uiErrors = {};
