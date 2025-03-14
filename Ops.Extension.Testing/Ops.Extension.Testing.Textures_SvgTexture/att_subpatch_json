@@ -9,7 +9,7 @@
           "y": 2237.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "zi9yrj5ye",
+        "subPatch": "77aqa18i1",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -101,10 +101,10 @@
         "loading": false,
         "translate": {
           "x": 584.0117228268281,
-          "y": 2137.812985196992
+          "y": 1995.0808597272003
         },
         "notWorkingMsg": null,
-        "subPatch": "zi9yrj5ye",
+        "subPatch": "77aqa18i1",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -112,7 +112,6 @@
       "portsIn": [
         {
           "name": "File",
-          "value": "/assets/664711fbbb71706c00625ead/cables.svg",
           "display": "file"
         },
         {
@@ -167,7 +166,7 @@
           "y": 2417.812985196992
         },
         "notWorkingMsg": null,
-        "subPatch": "zi9yrj5ye",
+        "subPatch": "77aqa18i1",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -236,10 +235,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "1a4lmjwxl",
       "uiAttribs": {
-        "subPatch": "zi9yrj5ye",
+        "subPatch": "77aqa18i1",
         "translate": {
-          "x": 576.7960877610235,
-          "y": 1753.804945918282
+          "x": 524.0117228268281,
+          "y": 1802.5017887256229
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -260,8 +259,15 @@
         },
         {
           "name": "innerOut_q7rod63s1",
-          "value": "/assets/664711fbbb71706c00625ead/cables.svg",
-          "title": "File"
+          "title": "File",
+          "links": [
+            {
+              "portIn": "File",
+              "portOut": "innerOut_q7rod63s1",
+              "objIn": "a7n7krbfc",
+              "objOut": "1a4lmjwxl"
+            }
+          ]
         }
       ]
     },
@@ -269,7 +275,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "c9a8ryr9w",
       "uiAttribs": {
-        "subPatch": "zi9yrj5ye",
+        "subPatch": "77aqa18i1",
         "translate": {
           "x": 576.7960877610235,
           "y": 2709.3513516777552
