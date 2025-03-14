@@ -9,7 +9,7 @@
           "y": 4219.057334518758
         },
         "loading": false,
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "extendTitle": "uv",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -116,7 +116,7 @@
           "x": 1867.8267967291467,
           "y": 4299.057334518758
         },
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,7 +168,7 @@
           "x": 1867.8267967291467,
           "y": 3619.0573345187577
         },
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -195,7 +195,7 @@
           "x": 1867.8267967291467,
           "y": 4411.280048613936
         },
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -252,7 +252,7 @@
           "x": 1867.8267967291467,
           "y": 4344.613113652929
         },
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -316,7 +316,7 @@
         },
         "accBuffersDelete": "head-multi_UV",
         "loading": false,
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "extendTitle": "head-multi_UV",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -329,7 +329,6 @@
         },
         {
           "name": "glb File",
-          "value": "/assets/615acb0995a0966eb0937a6f/head-multi_UV.glb",
           "display": "file"
         },
         {
@@ -440,7 +439,7 @@
       "opId": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
       "id": "jxd841o9a",
       "uiAttribs": {
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "translate": {
           "x": 1915.8267967291467,
           "y": 3836.727881637946
@@ -474,10 +473,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "j56nb1kue",
       "uiAttribs": {
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "translate": {
-          "x": 1867.8267967291467,
-          "y": 0
+          "x": 1484.4723996851474,
+          "y": 3917.4314076386963
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -495,6 +494,18 @@
               "objOut": "j56nb1kue"
             }
           ]
+        },
+        {
+          "name": "innerOut_kum9etdeb",
+          "title": "glb File",
+          "links": [
+            {
+              "portIn": "glb File",
+              "portOut": "innerOut_kum9etdeb",
+              "objIn": "l8j28n7lf",
+              "objOut": "j56nb1kue"
+            }
+          ]
         }
       ]
     },
@@ -502,7 +513,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "8iaa9c9jm",
       "uiAttribs": {
-        "subPatch": "e1s5wdmzv",
+        "subPatch": "jspv32jho",
         "translate": {
           "x": 1867.8267967291467,
           "y": 4590.057334518758

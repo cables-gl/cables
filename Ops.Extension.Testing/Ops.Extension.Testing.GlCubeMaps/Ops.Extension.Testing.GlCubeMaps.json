@@ -26,6 +26,36 @@
                 "type": 1,
                 "name": "24wczq4w3",
                 "uititle": "exe"
+            },
+            {
+                "type": 5,
+                "name": "6jxk2lid3",
+                "uititle": "posx"
+            },
+            {
+                "type": 5,
+                "name": "4fcnn9spy",
+                "uititle": "negx"
+            },
+            {
+                "type": 5,
+                "name": "wv5o1z0mp",
+                "uititle": "posy"
+            },
+            {
+                "type": 5,
+                "name": "hpe4kbj74",
+                "uititle": "negy"
+            },
+            {
+                "type": 5,
+                "name": "ozkx149s6",
+                "uititle": "posz"
+            },
+            {
+                "type": 5,
+                "name": "xwfw3og4z",
+                "uititle": "negz"
             }
         ],
         "portsOut": []

@@ -1,1 +1,20 @@
-{"ports":[{"id":"3ag0l5i42","title":"exe 0","dir":0,"type":1}]}
+{
+    "ports": [
+        {
+            "id": "3ag0l5i42",
+            "title": "exe 0",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "kum9etdeb",
+            "title": "glb File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/615acb0995a0966eb0937a6f/head-multi_UV.glb",
+            "order": 1
+        }
+    ]
+}

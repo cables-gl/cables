@@ -11,7 +11,7 @@
           "x": 608.8689706132692,
           "y": 1907.7791829453222
         },
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -51,7 +51,7 @@
         },
         "notWorkingMsg": null,
         "color": "#5dc0fd",
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -137,7 +137,7 @@
           "y": 1967.7791829453222
         },
         "loading": false,
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "extendTitle": "lottie",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null,
@@ -147,7 +147,6 @@
       "portsIn": [
         {
           "name": "file",
-          "value": "/assets/664711fbbb71706c00625ead/lottie.json",
           "display": "file",
           "title": "URL"
         },
@@ -203,7 +202,7 @@
         },
         {
           "name": "Duration MS",
-          "value": 568
+          "value": 52
         },
         {
           "name": "Status Code",
@@ -223,7 +222,7 @@
           "x": 828,
           "y": 2159.9204578989993
         },
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -296,7 +295,7 @@
           "x": 828,
           "y": 2094.6842562700326
         },
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -385,10 +384,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "15wxzwpha",
       "uiAttribs": {
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "translate": {
-          "x": 632,
-          "y": 1721.315626674981
+          "x": 608.8689706132692,
+          "y": 1701.168722162914
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -406,6 +405,18 @@
               "objOut": "15wxzwpha"
             }
           ]
+        },
+        {
+          "name": "innerOut_317uc3lxl",
+          "title": "URL",
+          "links": [
+            {
+              "portIn": "file",
+              "portOut": "innerOut_317uc3lxl",
+              "objIn": "wjjnwy3ak",
+              "objOut": "15wxzwpha"
+            }
+          ]
         }
       ]
     },
@@ -413,7 +424,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "9syc3g4w9",
       "uiAttribs": {
-        "subPatch": "9g1gequag",
+        "subPatch": "t8ps45hag",
         "translate": {
           "x": 632,
           "y": 2450.9770142541793

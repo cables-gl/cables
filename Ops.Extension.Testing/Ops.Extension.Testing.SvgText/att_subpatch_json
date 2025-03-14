@@ -8,7 +8,7 @@
           "x": -1966.0177849955298,
           "y": 3532.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -45,7 +45,7 @@
           "x": -1966.0177849955298,
           "y": 3452.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -100,7 +100,7 @@
           "x": -1966.0177849955298,
           "y": 3292.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -137,7 +137,7 @@
           "x": -1966.0177849955298,
           "y": 3172.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -145,7 +145,6 @@
       "portsIn": [
         {
           "name": "Font File",
-          "value": "/assets/6230d3a5e65df56b95088672/roboto-v29-latin-regular.ttf",
           "display": "file"
         }
       ],
@@ -171,7 +170,7 @@
           "x": -2493.01778499553,
           "y": 3532.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -224,7 +223,7 @@
           "x": -2302.01778499553,
           "y": 3432.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -232,11 +231,11 @@
       "portsOut": [
         {
           "name": "Min X",
-          "value": 0
+          "value": 0.06961960345506668
         },
         {
           "name": "Min Y",
-          "value": 0
+          "value": -0.015087840147316456
         },
         {
           "name": "Min Z",
@@ -255,11 +254,11 @@
         },
         {
           "name": "Max Y",
-          "value": 0
+          "value": 1.1639190912246704
         },
         {
           "name": "Max Z",
-          "value": 0
+          "value": 0.20000000298023224
         }
       ]
     },
@@ -274,7 +273,7 @@
           "y": 3492.016629043608
         },
         "comment": "center!",
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -307,7 +306,7 @@
           "x": -1966.0177849955298,
           "y": 3372.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -344,7 +343,7 @@
           "x": -2493.01778499553,
           "y": 3652.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -368,7 +367,7 @@
           "x": -2493.01778499553,
           "y": 3332.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -413,7 +412,7 @@
           "x": -2493.01778499553,
           "y": 3412.016629043608
         },
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -454,10 +453,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "l0euwypnv",
       "uiAttribs": {
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "translate": {
-          "x": -1815.4697849955298,
-          "y": 0
+          "x": -2113.7255058670935,
+          "y": 2612.828135108928
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -475,6 +474,18 @@
               "objOut": "l0euwypnv"
             }
           ]
+        },
+        {
+          "name": "innerOut_502whkmy4",
+          "title": "Font File",
+          "links": [
+            {
+              "portIn": "Font File",
+              "portOut": "innerOut_502whkmy4",
+              "objIn": "c3xbnjxen",
+              "objOut": "l0euwypnv"
+            }
+          ]
         }
       ]
     },
@@ -482,7 +493,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "7wtn1up5z",
       "uiAttribs": {
-        "subPatch": "3z1w0vah4",
+        "subPatch": "8xu552rza",
         "translate": {
           "x": -1815.4697849955298,
           "y": 3763.016629043608

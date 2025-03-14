@@ -1,1 +1,20 @@
-{"ports":[{"id":"nwshu8bql","title":"exe 4","dir":0,"type":1}]}
+{
+    "ports": [
+        {
+            "id": "nwshu8bql",
+            "title": "exe 4",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "317uc3lxl",
+            "title": "URL",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/664711fbbb71706c00625ead/lottie.json",
+            "order": 1
+        }
+    ]
+}
