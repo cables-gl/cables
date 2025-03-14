@@ -61,5 +61,6 @@
             }
         ]
     },
-    "exampleProjectId": "tdRoSP"
+    "exampleProjectId": "tdRoSP",
+    "license": "MIT"
 }

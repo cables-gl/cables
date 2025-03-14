@@ -83,7 +83,7 @@ function initEffect()
     outHeight.set(getHeight());
     outRatio.set(getWidth() / getHeight());
 
-    texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    texOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 
     reInitEffect = false;
     updateUi();
@@ -143,8 +143,8 @@ function updateResolution()
     {
         initEffect();
         effect.setSourceTexture(tex);
-        texOut.set(CGL.Texture.getEmptyTexture(cgl));
-        texOut.set(tex);
+        // texOut.set(CGL.Texture.getEmptyTexture(cgl));
+        texOut.setRef(tex);
         updateResolutionInfo();
         checkTypes();
     }

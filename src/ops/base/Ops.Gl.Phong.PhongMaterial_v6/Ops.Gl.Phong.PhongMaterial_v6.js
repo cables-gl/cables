@@ -329,7 +329,7 @@ function createShader(lightStack)
     }
 }
 
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;

@@ -16,7 +16,7 @@ const shader = new CGL.Shader(cgl, "PhongMaterial3");
 shader.define("NUM_LIGHTS", "1");
 
 const shaderOut = op.outObject("shader");
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 shaderOut.ignoreValueSerialize = true;
 
 r.uniform = new CGL.Uniform(shader, "f", "r", r);
@@ -117,7 +117,6 @@ const updateLights = function ()
     }
 };
 
-
 inColorize.onChange = function ()
 {
     if (inColorize.get()) shader.define("COLORIZE_TEXTURE");
@@ -130,7 +129,6 @@ inDoubleSided.onChange = function ()
     else shader.removeDefine("DOUBLESIDED");
 };
 
-
 function texturingChanged()
 {
     if (diffuseTexture.get() || normalTexture.get() || specTexture.get() || aoTexture.get() || emissiveTexture.get())
@@ -142,7 +140,6 @@ function texturingChanged()
         shader.removeDefine("HAS_TEXTURES");
     }
 }
-
 
 // diffuse texture
 var diffuseTexture = op.inTexture("Diffuse Texture");
@@ -255,7 +252,6 @@ emissiveTexture.onChange = function ()
     }
 };
 
-
 function bindTextures()
 {
     if (diffuseTexture.get())
@@ -289,7 +285,6 @@ function bindTextures()
     }
 }
 
-
 const toggleLambert = op.inValueBool("Toggle Light Shading", true);
 toggleLambert.setUiAttribs({ "hidePort": true });
 toggleLambert.onChange = updateToggles;
@@ -301,7 +296,6 @@ toggleDiffuse.onChange = updateToggles;
 const toggleNormal = op.inValueBool("Toggle Normal Texture", true);
 toggleNormal.setUiAttribs({ "hidePort": true });
 toggleNormal.onChange = updateToggles;
-
 
 // var toggleSpecular=op.inValueBool("Toggle Specular",true);
 // toggleSpecular.setUiAttribs({"hidePort":true});
@@ -319,7 +313,6 @@ const toggleEmissive = op.inValueBool("Toggle Emissive", true);
 toggleEmissive.setUiAttribs({ "hidePort": true });
 toggleEmissive.onChange = updateToggles;
 
-
 const toggleSpecular = op.inValueBool("Toggle Specular", true);
 toggleSpecular.setUiAttribs({ "hidePort": true });
 toggleSpecular.onChange = updateToggles;
@@ -327,7 +320,6 @@ toggleSpecular.onChange = updateToggles;
 const toggleFresnel = op.inValueBool("Toggle Fresnel", true);
 toggleFresnel.setUiAttribs({ "hidePort": true });
 toggleFresnel.onChange = updateToggles;
-
 
 function updateToggles()
 {

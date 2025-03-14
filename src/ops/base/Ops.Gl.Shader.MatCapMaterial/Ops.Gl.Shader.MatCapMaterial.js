@@ -40,7 +40,7 @@ let uniOpacity = new CGL.Uniform(shader, "f", "opacity", pOpacity);
 
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.matcap_vert, attachments.matcap_frag);
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 
 let textureMatcapUniform = null;
 let textureDiffuseUniform = null;

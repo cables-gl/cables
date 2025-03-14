@@ -70,7 +70,7 @@ const
 
 shader.setSource(attachments.pointmat_vert, attachments.pointmat_frag);
 shader.glPrimitive = cgl.gl.POINTS;
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 shaderOut.ignoreValueSerialize = true;
 
 doScale.onChange =

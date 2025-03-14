@@ -16,7 +16,7 @@ let body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 let ctx = canvas.getContext("2d");
 
-textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 
 let arr = [];
 let lastFilter = null;
@@ -110,10 +110,9 @@ function buildTexture()
     if (inLinear.get())filter = CGL.Texture.FILTER_LINEAR;
 
     if (lastFilter == filter && textureOut.get()) textureOut.get().initTexture(canvas, filter);
-    else textureOut.set(new CGL.Texture.createFromImage(op.patch.cgl, canvas, { "filter": filter }));
+    else textureOut.setRef(new CGL.Texture.createFromImage(op.patch.cgl, canvas, { "filter": filter }));
 
-    arrOut.set(null);
-    arrOut.set(arr);
+    arrOut.setRef(arr);
     textureOut.get().unpackAlpha = false;
     lastFilter = filter;
 }
@@ -122,8 +121,8 @@ arrayInPalette.onLinkChanged = function ()
 {
     if (!arrayInPalette.isLinked())
     {
-        arrOut.set(null);
-        textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+        arrOut.setRef([]);
+        textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
         lastFilter = null;
     }
 };

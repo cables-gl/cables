@@ -48,7 +48,7 @@ const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
 shader.uniformColorDiffuse = colUni;
 
 const outShader = op.outObject("Shader");
-outShader.set(shader);
+outShader.setRef(shader);
 
 const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
