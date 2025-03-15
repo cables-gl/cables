@@ -277,7 +277,7 @@ function finishLoading()
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
     }
 
-    if (gltf.bounds)outBounds.set(gltf.bounds);
+    if (gltf.bounds)outBounds.setRef(gltf.bounds);
 
     gltf.timing.push(["calced bounds", Math.round((performance.now() - gltf.startTime))]);
 
@@ -301,7 +301,6 @@ function finishLoading()
         }
 
         gltf.loaded = Date.now();
-        // if (gltf.bounds)outBounds.set(gltf.bounds);
     }
 
     if (gltf)

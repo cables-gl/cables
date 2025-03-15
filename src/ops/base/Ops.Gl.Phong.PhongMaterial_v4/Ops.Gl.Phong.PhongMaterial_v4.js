@@ -14,11 +14,9 @@ function Light(config)
     return this;
 }
 
-
 const cgl = op.patch.cgl;
 
 const inTrigger = op.inTrigger("Trigger In");
-
 
 // * DIFFUSE *
 const inDiffuseR = op.inFloat("R", Math.random());
@@ -37,7 +35,6 @@ inAlbedo.setUiAttribs({ "greyout": true });
 inRoughness.setUiAttribs({ "greyout": true });
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]);
-
 
 inToggleOrenNayar.onChange = function ()
 {
@@ -93,8 +90,6 @@ inSpecularMode.setUiAttribs({ "hidePort": true });
 const specularColors = [inShininess, inSpecularCoefficient, inSpecularMode];
 op.setPortGroup("Specular", specularColors);
 
-
-
 // * LIGHT *
 const inEnergyConservation = op.inValueBool("Energy Conservation", false);
 const inToggleDoubleSided = op.inBool("Double Sided Material", false);
@@ -139,18 +134,15 @@ discardTransPxl.setUiAttribs({ "hidePort": true });
 
 op.setPortGroup("Opacity Texture", [alphaMaskSource, texCoordAlpha, discardTransPxl]);
 
-
-
 const outTrigger = op.outTrigger("Trigger Out");
 const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
-
 
 const shader = new CGL.Shader(cgl, "simosphong");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 
-shaderOut.set(shader);
+shaderOut.setRef(shader);
 
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;
@@ -158,7 +150,6 @@ let normalTextureUniform = null;
 let aoTextureUniform = null;
 let emissiveTextureUniform = null;
 let alphaTextureUniform = null;
-
 
 inColorizeTexture.onChange = function ()
 {
@@ -308,13 +299,11 @@ discardTransPxl.onChange = function ()
     else shader.removeDefine("DISCARDTRANS");
 };
 
-
 texCoordAlpha.onChange = function ()
 {
     if (texCoordAlpha.get()) shader.define("TRANSFORMALPHATEXCOORDS");
     else shader.removeDefine("TRANSFORMALPHATEXCOORDS");
 };
-
 
 inDiffuseTexture.onChange = updateDiffuseTexture;
 inSpecularTexture.onChange = updateSpecularTexture;
@@ -513,6 +502,7 @@ inTrigger.onTriggered = function ()
                                 }
                                 else if (key === "position")
                                 {
+
                                     /* transform for default light */
                                     mat4.invert(inverseViewMat, cgl.vMatrix);
                                     vec3.transformMat4(camPos, vecTemp, inverseViewMat);
@@ -585,4 +575,3 @@ updateSpecularTexture();
 updateNormalTexture();
 updateAoTexture();
 updateAlphaTexture();
-

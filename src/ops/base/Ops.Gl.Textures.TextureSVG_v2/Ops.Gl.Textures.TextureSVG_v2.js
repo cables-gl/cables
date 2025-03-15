@@ -77,6 +77,7 @@ function onWrapChange()
 
 function reload()
 {
+    if (!filename.get()) return;
     op.setUiError("error", null);
     const loadingId = op.patch.loading.start("svg file", filename.get(), op);
     CABLES.ajax(
@@ -93,7 +94,7 @@ function reload()
             else
             {
                 outLoaded.set(false);
-                op.logError("could not load file", op.patch.getFilePath(filename.get()), err);
+                op.logWarn("could not load file", op.patch.getFilePath(filename.get()), err);
                 op.setUiError("error", "Could not load SVG file!");
             }
         }
@@ -111,7 +112,7 @@ function update()
     img.onabort = img.onerror = function (e)
     {
         outLoaded.set(false);
-        op.logError("could not load file",);
+        op.logWarn("could not load file",);
         op.patch.loading.finished(loadingId);
         op.setUiError("error", "Could not load SVG file!");
     };

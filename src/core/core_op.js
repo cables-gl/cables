@@ -8,6 +8,12 @@ import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
 
 /**
+ * @typedef Translation
+ * @property {string} [x]
+ * @property {string} [y]
+ */
+
+/**
  * configuration object for loading a patch
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
@@ -17,10 +23,11 @@ import { Patch } from "./core_patch.js";
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
  * @property {boolean} [bookmarked] internal - do not use manualy
+ * @property {boolean} [selected] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {string} [comment]
- * @property {object} [translate]
+ * @property {Translation} [translate]
  * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
  */
 
@@ -65,7 +72,7 @@ export class Op extends Events
     };
 
     shouldWork = {};
-    hasUiErrors = false;
+    hasUiErrors = 0;
 
     /** @type {Object} */
     uiErrors = {};
