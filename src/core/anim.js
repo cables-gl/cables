@@ -527,11 +527,11 @@ export class Anim extends Events
 
 /**
  * @param {number} time
- * @param {number} q
- * @param {number} animx
- * @param {number} animy
- * @param {number} animz
- * @param {number} animw
+ * @param {glMatrix.quat} q
+ * @param {Anim} animx
+ * @param {Anim} animy
+ * @param {Anim} animz
+ * @param {Anim} animw
  */
 Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
 {

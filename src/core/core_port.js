@@ -4,11 +4,13 @@ import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Op } from "./core_op.js";
 import { Anim } from "./anim.js";
+import { PatchVariable } from "./core_variable.js";
 
 /**
- * @property  {String} [title=''] overwrite title of port (by default this is portname)
- * @property  {String} [display=''] how the port is displayed and interacted in the paramerer panel
- * @property  {Boolean} [greyout=false] port paramater will appear greyed out, can not be
+ * @typedef PortUiAttribs
+ * @property  {String} [title] overwrite title of port (by default this is portname)
+ * @property  {String} [display] how the port is displayed and interacted in the paramerer panel
+ * @property  {Boolean} [greyout] port paramater will appear greyed out, can not be
  * @property  {Boolean} [hidePort] port will be hidden from op
  * @property  {Boolean} [hideParam] port params will be hidden from parameter panel
  * @property  {Boolean} [showIndex] only for dropdowns - show value index (e.g. `0 - normal` )
@@ -25,7 +27,6 @@ import { Anim } from "./anim.js";
  * @property  {String} [display] internal: do not set manually
  *
  */
-export class PortUiAttribs {}
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -438,6 +439,9 @@ export class Port extends Events
         return "Unknown";
     }
 
+    /**
+     * @param {Object} objPort
+     */
     deSerializeSettings(objPort)
     {
         if (!objPort) return;
@@ -469,6 +473,9 @@ export class Port extends Events
         }
     }
 
+    /**
+     * @param {any} v
+     */
     setInitialValue(v)
     {
         if (this.op.preservedPortLinks[this.name])
@@ -775,6 +782,9 @@ export class Port extends Events
         this._log.warn("### execute port: " + this.getName(), this.goals.length);
     }
 
+    /**
+     * @param {string} n
+     */
     setVariableName(n)
     {
         this.#useVariableName = n;
@@ -791,6 +801,9 @@ export class Port extends Events
         return this.#useVariableName;
     }
 
+    /**
+     * @param {String} v
+     */
     setVariable(v)
     {
         this.setAnimated(false);
@@ -836,6 +849,9 @@ export class Port extends Events
         this._op.patch.emitEvent("portSetVariable", this._op, this, v);
     }
 
+    /**
+     * @param {boolean} a
+     */
     _handleNoTriggerOpAnimUpdates(a)
     {
         let hasTriggerPort = false;
@@ -854,7 +870,7 @@ export class Port extends Events
             {
                 this.updateAnim();
             });
-            else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.removeEventListener(this._notriggerAnimUpdate);
+            else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.off(this._notriggerAnimUpdate);
         }
     }
 
@@ -996,17 +1012,6 @@ export class Port extends Events
             this._op.patch.profiler.add("port", null);
         }
     }
-
-    // getUiActiveState()
-    // {
-    //     return this.#uiActiveState;
-    // }
-
-    // setUiActiveState(onoff)
-    // {
-    //     this._uiActiveState = onoff;
-    //     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
-    // }
 
     /**
      * @deprecated
