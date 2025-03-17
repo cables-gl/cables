@@ -38,6 +38,9 @@ export class Link extends Events
         this.ignoreInSerialize = false;
     }
 
+    /**
+     * @param {any} v
+     */
     setValue(v)
     {
         if (v === undefined) this._setValue();

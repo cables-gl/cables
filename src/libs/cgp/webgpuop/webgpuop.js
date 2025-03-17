@@ -14,7 +14,7 @@ export class WebGpuOp
     }
 
     /**
-     * @param {Types.Op} op
+     * @param {Op} op
      * @returns {boolean}
      */
     checkSupport()

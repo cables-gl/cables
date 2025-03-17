@@ -3,7 +3,7 @@ import slots_vert from "./slots.vert";
 import slots_head_frag from "./slots_head.frag";
 import slots_head_vert from "./slots_head.vert";
 
-class RenderTargets
+export class RenderTargets
 {
     constructor(cgl)
     {
@@ -12,7 +12,6 @@ class RenderTargets
         this._slots = ["Default", "Normal"];
         this._name = "rendertargets" + CABLES.uuid();
         this.mod = new CGL.ShaderModifier(cgl, this._name);
-        // this.updateModules();
 
         this.mod.onBind = (currentShader) =>
         {
@@ -123,11 +122,8 @@ class RenderTargets
         }
         else
             for (let i = 0; i < this._numBuffers; i++)
-            {
                 src += this.getSrcString(this._slots[i], i);
-            }
 
-        // console.log(src);
         return src;
     }
 
@@ -161,7 +157,6 @@ class RenderTargets
             if (i != this._numBuffers - 1) this.asString += " | ";
         }
 
-        // this.updateModules();
         this.updateModules();
 
         this.mod.toggleDefine("MOD_UNI_OBJECT_ID", hasObjectId);
@@ -175,5 +170,3 @@ class RenderTargets
         this.mod.toggleDefine("MOD_SLOT_POS_NORMAL_WORLD", hasNormalWorld);
     }
 }
-
-export { RenderTargets };

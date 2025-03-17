@@ -23,47 +23,64 @@
             {
                 "type": 0,
                 "name": "Format index",
+                "values": [
+                    "AB",
+                    "ABC",
+                    "ABCD"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Format"
             },
             {
                 "type": 0,
                 "name": "A index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "A"
             },
             {
                 "type": 0,
                 "name": "B index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "B"
             },
             {
                 "type": 0,
                 "name": "C index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "C"
             },
             {
                 "type": 0,
                 "name": "D index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "D"
             }
         ],
         "portsOut": [
@@ -85,10 +102,10 @@
     },
     "summary": "convert an array1 to array2,3,4 by choosing content for new axis",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "omZrLu"
+    "exampleProjectId": "omZrLu",
+    "license": "MIT"
 }

@@ -31,6 +31,9 @@ import { Patch } from "./core_patch.js";
  * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
  */
 
+/**
+ * @template Op
+ */
 export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";
@@ -77,6 +80,9 @@ export class Op extends Events
     /** @type {Object} */
     uiErrors = {};
     hasAnimPort = false;
+
+    /** @type {Port} */
+    patchId = null; // will be defined by subpatchops
 
     /**
      * Description
@@ -148,6 +154,9 @@ export class Op extends Events
         this.setTitle(n);
     }
 
+    /**
+     * @param {string} on
+     */
     set _objName(on)
     {
         this.#objName = on;
@@ -363,6 +372,9 @@ export class Op extends Events
         return false;
     }
 
+    /**
+     * @param {Port | MultiPort} p
+     */
     addInPort(p)
     {
         if (!(p instanceof Port)) throw new Error("parameter is not a port!");
@@ -389,6 +401,7 @@ export class Op extends Events
      * @function inTrigger
      * @instance
      * @memberof Op
+     * @param {String} name
      * @param {String} v
      * @return {Port} created port
      *
@@ -409,7 +422,6 @@ export class Op extends Events
      * @param {Array} v
      * @return {Port} created port
      */
-
     inTriggerButton(name, v)
     {
         const p = this.addInPort(
@@ -421,6 +433,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {any} v
+     */
     inUiTriggerButtons(name, v)
     {
         const p = this.addInPort(
@@ -522,6 +538,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {string} name
+     * @param {number} type
+     */
     outMultiPort(name, type, uiAttribsPort = {})
     {
         const p = new MultiPort(
@@ -960,6 +980,8 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {Object} v
+     * @param {String} objType
      * @return {Port} created port
      */
     inObject(name, v, objType)
@@ -987,6 +1009,10 @@ export class Op extends Events
         return p;
     }
 
+    /**
+     * @param {Port} p
+     * returns {number}
+     */
     getPortVisibleIndex(p)
     {
         let ports = this.portsIn;
@@ -1071,6 +1097,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
+     * @param {String} v
      * @return {Port} created port
      */
     outTrigger(name, v)
@@ -1348,12 +1375,12 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {boolean} lowerCase
+     * @param {boolean} [lowerCase]
      * @return {Port}
      */
     getPort(name, lowerCase)
     {
-        return this.getPortByName(name, lowerCase);
+        return this.getPortByName(name, lowerCase = false);
     }
 
     /**

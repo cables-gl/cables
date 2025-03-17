@@ -71,6 +71,7 @@ function fillArr(off, meth, stride)
     if (meth == "0")fillArr_0(off, arr.length, stride);
     if (meth == "0-1")fillArr_01(off, arr.length, stride);
     if (meth == "1")fillArr_1(off, arr.length, stride);
+    // -1-1 todo implement
     if (meth == "Input")fillArr_input(off, arr.length, stride);
     if (meth == "index")fillArr_index(off, arr.length, stride);
 }

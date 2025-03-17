@@ -38,6 +38,7 @@ import { CglContext } from "./cgl/cgl_state.js";
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
  * see {@link PatchConfig}
+ * @template Patch,Op
  *
  * @example
  * CABLES.patch=new CABLES.Patch(

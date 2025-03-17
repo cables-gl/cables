@@ -26,6 +26,10 @@ const log = new Logger("cgl_texture");
  */
 export class Texture extends CgTexture
 {
+
+    /**
+     * @param {CglContext} __cgl
+     */
     constructor(__cgl, options = {})
     {
         super(options);
@@ -160,6 +164,9 @@ export class Texture extends CgTexture
         return newTex;
     }
 
+    /**
+     * @param {object} o
+     */
     setFormat(o)
     {
         this.pixelFormat = o.pixelFormat;
@@ -691,13 +698,12 @@ Texture.getRandomFloatTexture = function (cgl)
  * @function getBlackTexture
  * @memberof Texture
  * @static
- * @param cgl
+ * @param {CglContext} cgl
  * @description returns a reference to a black texture
  * @return {Texture}
  */
 Texture.getBlackTexture = function (cgl)
 {
-    if (!cgl) this._log.error("[getBlackTexture] no cgl!");
     if (cgl.blackTexture) return cgl.blackTexture;
 
     const size = 8;
@@ -789,7 +795,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
  * @function createFromImage
  * @memberof Texture
  * @description create texturem from image data (e.g. image or canvas)
- * @param {CGState} cgl
+ * @param {CglContext} cgl
  * @param {Object} img image
  * @param {Object} options
  */
