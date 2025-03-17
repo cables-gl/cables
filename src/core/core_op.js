@@ -20,6 +20,7 @@ import { Patch } from "./core_patch.js";
  * @property {string} [hidePort] hidePort
  * @property {string} [title] overwrite op title
  * @property {String} [title=''] overwrite title of port (by default this is portname)
+ * @property {string} [extendTitle] extended op title, shown in grey next to op name
  * @property {object} [storage] internal - do not use manualy
  * @property {boolean} [working] internal - do not use manualy
  * @property {boolean} [bookmarked] internal - do not use manualy
@@ -373,11 +374,14 @@ export class Op extends Events
     }
 
     /**
-     * @param {Port | MultiPort} p
+     * @param {any|Port | MultiPort} p
      */
     addInPort(p)
     {
-        if (!(p instanceof Port)) throw new Error("parameter is not a port!");
+        // if (!(p instanceof Port)) throw new Error("parameter is not a port!", p);
+        // if (!(p instanceof Port) && !(p instanceof MultiPort)) throw new Error("parameter is not a port!", p);
+
+        // console.log("a", p.constructor.name);
 
         p.direction = Port.DIR_IN;
         p._op = this;
@@ -1768,13 +1772,13 @@ export class Op extends Events
         this.linkTimeRules.needsParentOp = parentOpName;
     }
 
-    // /**
-    //  * show a warning of this op is a child of parentOpName
-    //  * @function
-    //  * @instance
-    //  * @memberof Op
-    //  * @param {String} parentOpName
-    //  */
+    /**
+     * show a warning of this op is a child of parentOpName
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {String} parentOpName
+     */
     toWorkShouldNotBeChild(parentOpName, type)
     {
         if (!this.patch.isEditorMode()) return;

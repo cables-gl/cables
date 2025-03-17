@@ -840,6 +840,11 @@ export class Patch extends Events
         return this.getFirstSubPatchOpByName(patchId, objName);
     }
 
+    /**
+     * @param {string} patchId
+     * @param {string} objName
+     * @returns {Op}
+     */
     getFirstSubPatchOpByName(patchId, objName)
     {
         for (const i in this.ops)
