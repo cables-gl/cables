@@ -38,6 +38,7 @@ import { CglContext } from "./cgl/cgl_state.js";
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
  * see {@link PatchConfig}
+ * @template Patch,Op
  *
  * @example
  * CABLES.patch=new CABLES.Patch(
@@ -839,6 +840,11 @@ export class Patch extends Events
         return this.getFirstSubPatchOpByName(patchId, objName);
     }
 
+    /**
+     * @param {string} patchId
+     * @param {string} objName
+     * @returns {Op}
+     */
     getFirstSubPatchOpByName(patchId, objName)
     {
         for (const i in this.ops)

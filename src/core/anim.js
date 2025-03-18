@@ -64,9 +64,9 @@ export class Anim extends Events
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
 
     /**
-     * @param {AnimCfg} cfg
+     * @param {AnimCfg} [cfg]
      */
-    constructor(cfg)
+    constructor(cfg = {})
     {
         super();
         cfg = cfg || {};

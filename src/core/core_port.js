@@ -25,6 +25,8 @@ import { PatchVariable } from "./core_variable.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {String} [display] internal: do not set manually
+ * @property  {String} [axis] internal: do not set manually
+
  *
  */
 

@@ -133,14 +133,14 @@ export class CgUniform
             this._log.error("Unknown uniform type " + __type);
         }
 
-        if (typeof _value == "object" && _value instanceof Port)
+        if (typeof _value == "object" && _value instanceof CABLES.Port)
         {
             this._port = _value;
             this._value = this._port.get();
 
             if (_port2 && _port3 && _port4)
             {
-                if (!(_port2 instanceof Port) || !(_port3 instanceof Port) || !(_port4 instanceof Port))
+                if (!(_port2 instanceof CABLES.Port) || !(_port3 instanceof CABLES.Port) || !(_port4 instanceof CABLES.Port))
                 {
                     this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
                 }
@@ -160,7 +160,7 @@ export class CgUniform
             }
             else if (_port2 && _port3)
             {
-                if (!(_port2 instanceof Port) || !(_port3 instanceof Port))
+                if (!(_port2 instanceof CABLES.Port) || !(_port3 instanceof CABLES.Port))
                 {
                     this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
                 }
@@ -177,7 +177,7 @@ export class CgUniform
             }
             else if (_port2)
             {
-                if (!(_port2 instanceof Port))
+                if (!(_port2 instanceof CABLES.Port))
                 {
                     this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
                 }

@@ -16,7 +16,15 @@ import { CGP } from "./cgp/index.js";
 import { CG } from "./cg/cg_constants.js";
 import { CGL } from "./cgl/index.js";
 import { AnimKey } from "./anim_key.js";
-import { CGState, CgContext } from "./cg/cg_state.js";
+import { CgContext } from "./cg/cg_state.js";
+import { CglContext } from "./cgl/cgl_state.js";
+import { Uniform } from "./cgl/cgl_shader_uniform.js";
+import { Shader } from "./cgl/cgl_shader.js";
+import { Geometry } from "./cg/cg_geom.js";
+import { Mesh } from "./cgl/cgl_mesh.js";
+import { PatchVariable } from "./core_variable.js";
+import { Texture } from "./cgl/cgl_texture.js";
+import { extendJs } from "./extendjs.js";
 
 window.glMatrix = glMatrix;
 window.mat2 = mat2;
@@ -84,7 +92,8 @@ CABLES = Object.assign(CABLES,
     CONSTANTS.OP
 );
 
-// CABLES.map = utils.map;
 export default CABLES;
+
+export { Port, Op, Patch, Link, Anim, AnimKey, CglContext, Shader, Uniform, Geometry, Mesh, Timer, PatchVariable, Texture, extendJs };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line
