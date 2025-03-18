@@ -6,6 +6,7 @@ import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
+import { Texture } from "./cgl/cgl_texture.js";
 
 /**
  * @typedef Translation
@@ -25,6 +26,7 @@ import { Patch } from "./core_patch.js";
  * @property {boolean} [working] internal - do not use manualy
  * @property {boolean} [bookmarked] internal - do not use manualy
  * @property {boolean} [selected] internal - do not use manualy
+ * @property {boolean} [disabled] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {string} [comment]
@@ -142,7 +144,9 @@ export class Op extends Events
          */
         this.renderVizLayer = null;
 
-        if (this.initUi) this.initUi();
+        this.isInBlueprint2 = null;
+        this.checkLinkTimeWarnings = null;
+
     }
 
     get name()
@@ -292,9 +296,6 @@ export class Op extends Events
     _setUiAttrib(newAttribs)
     {
         if (!newAttribs) return;
-
-        if (newAttribs.error || newAttribs.warning || newAttribs.hint)
-            this._log.warn("old ui error/warning attribute in " + this.#name + ", use op.setUiError !", newAttribs);
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -790,7 +791,7 @@ export class Op extends Events
                 "display": "dropdown",
                 "hidePort": true,
                 "type": "string",
-                values
+                "values": values
             });
 
             p = this.addInPort(valuePort);
@@ -807,6 +808,7 @@ export class Op extends Events
      * @param {String} name
      * @param {Array} values
      * @param {String} v default value
+     * @param {boolean} noindex
      * @return {Port} created port
      */
     inSwitch(name, values, v, noindex)
@@ -1035,12 +1037,14 @@ export class Op extends Events
      * create a array input port
      * @param {String} name
      * @param {Array|Number} v
-     * @param {number} stride
+     * @param {number} _stride
      * @return {Port} created port
      */
-    inArray(name, v, stride)
+    inArray(name, v, _stride = 0)
     {
-        if (!stride && CABLES.isNumeric(v))stride = v;
+        let stride = _stride;
+        // @ts-ignore
+        if (!_stride && CABLES.isNumeric(v))stride = v;
 
         const p = this.addInPort(new Port(this, name, Port.TYPE_ARRAY, { "stride": stride }));
 
@@ -1278,7 +1282,7 @@ export class Op extends Events
                 "display": "texture"
             })
         );
-        if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+        if (v !== undefined) p.setRef(v || Texture.getEmptyTexture(this.patch.cgl));
 
         p.ignoreValueSerialize = true;
         return p;
@@ -1295,11 +1299,11 @@ export class Op extends Events
         {
             if (filter && CABLES.isArray(filter))
             {
-                for (let i = 0; i < filter.length; i++)
-                {
-                    if (p1 == this && p2.type === filter[i]) return true;
-                    if (p2 == this && p1.type === filter[i]) return true;
-                }
+                // for (let i = 0; i < filter.length; i++)
+                // {
+                // if (p1 == this && p2.type === filter[i]) return true;
+                // if (p2 == this && p1.type === filter[i]) return true;
+                // }
                 return false; // types do not match
             }
             return true; // no filter set
@@ -1798,9 +1802,7 @@ export class Op extends Events
      * @function
      * @instance
      * @memberof Op
-     * @param {Port} port1
-     * @param {Port} port2
-     * @param {Port} port3
+     * @param {Array<Port>} port
      */
     toWorkPortsNeedToBeLinked()
     {

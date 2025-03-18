@@ -37,6 +37,7 @@ class CgShader extends Events
     _compileCount = 0;
 
     logError = true;
+    num = -1;
 
     constructor()
     {

@@ -357,6 +357,7 @@ export class Patch extends Events
      * @param {string} identifier
      * @param {string} id
      * @param {string} [opName]
+     * @returns {Op}
      */
     createOp(identifier, id, opName = null)
     {
