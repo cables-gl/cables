@@ -34,7 +34,8 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {Object} [canvas]
  * @property {String} [patchFile]
  * @property {String} [subPatch] internal use
-  */
+ * @property {Number} [masterVolume] 0 for maximum possible frames per second
+*/
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -123,9 +124,6 @@ export class Patch extends Events
         this._frameWasdelayed = true;
         this.tempData = this.frameStore = {};
         this.reqAnimTimeStamp = 0;
-
-        // /** @deprecated */
-        // this.onDelete = null;
 
         this.cgCanvas = null;
 
@@ -657,6 +655,9 @@ export class Patch extends Events
         }
     }
 
+    /**
+     * @param {number} [timestamp]
+     */
     exec(timestamp)
     {
         if (!this.#renderOneFrame && (this._paused || this.aborted)) return;

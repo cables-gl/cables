@@ -1826,6 +1826,8 @@ export class Op extends Events
         }
     }
 
+    checkLinkTimeWarnings() {}
+
     /**
      * refresh op parameters, if current op is selected
      * @function
