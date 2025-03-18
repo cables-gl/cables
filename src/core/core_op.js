@@ -702,7 +702,10 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
+     *
+     * @param {string} name
+     * @param {String} v
+     * @param {String} syntax
      */
     inValueEditor(name, v, syntax, hideFormatButton = true)
     {
@@ -725,6 +728,10 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {any[]} values
+     * @param {string} v
+     * @param {boolean} noindex
      */
     inValueSelect(name, values, v, noindex)
     {
@@ -740,6 +747,7 @@ export class Op extends Events
      * @param {Array} values
      * @param {String} v default value
      * @return {Port} created port
+     * @param {boolean} [noindex]
      */
     inDropDown(name, values, v, noindex)
     {
@@ -770,7 +778,7 @@ export class Op extends Events
 
             valuePort.indexPort = indexPort;
 
-            valuePort.on("change", (val, thePort) =>
+            valuePort.on("change", (/** @type {any} */ val, /** @type {Port} */ thePort) =>
             {
                 if (!thePort.indexPort.isLinked() && thePort.uiAttribs.values)
                 {

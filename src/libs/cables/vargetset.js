@@ -189,8 +189,8 @@ const VarGetOpWrapper = class
 
         if (type == "array") this._typeId = CABLES.Port.TYPE_ARRAY;
         else if (type == "object") this._typeId = CABLES.Port.TYPE_OBJECT;
-        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
         else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
+        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
         else this._typeId = CABLES.Port.TYPE_VALUE;
 
         this._isTexture = valueOutPort.uiAttribs.objType === "texture";
@@ -250,7 +250,6 @@ const VarGetOpWrapper = class
         {
             const varnames = [];
             const vars = this._op.patch.getVars();
-
             for (const i in vars)
                 if (vars[i].type == this._type && i != "0")
                     varnames.push(i);

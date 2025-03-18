@@ -575,10 +575,11 @@ export class Port extends Events
      * will be overwritten in ui
      * @param {Port} port1
      * @param {Port} port2
+     * @returns {boolean}
      */
     shouldLink(port1, port2)
     {
-        return port1 && port2;
+        return !!(port1 && port2);
     }
 
     /**

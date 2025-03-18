@@ -32,9 +32,11 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {String} [prefixJsPath]
  * @property {Function} [onPatchLoaded]
  * @property {Object} [canvas]
+ * @property {Object} [patch]
  * @property {String} [patchFile]
  * @property {String} [subPatch] internal use
  * @property {Number} [masterVolume] 0 for maximum possible frames per second
+ * @property {HTMLCanvasElement} [glCanvas]
 */
 
 /**
@@ -574,7 +576,11 @@ export class Patch extends Events
             if (this.ops[i].id == opid)
             {
                 const op = this.ops[i];
+
+                /** @type {Port} */
                 let reLinkP1 = null;
+
+                /** @type {Port} */
                 let reLinkP2 = null;
 
                 if (op)
@@ -1264,24 +1270,44 @@ export class Patch extends Events
 
     /**
      * @param {number} t
-     * @returns {Array<PatchVariable>}
+     * @returns {Object}
      */
     getVars(t)
     {
         if (t === undefined) return this._variables;
 
         const vars = [];
-        if (t == Port.TYPE_STRING) t = "string";
-        if (t == Port.TYPE_VALUE) t = "number";
-        if (t == Port.TYPE_ARRAY) t = "array";
-        if (t == Port.TYPE_OBJECT) t = "object";
+        let tStr = "";
+        if (t == Port.TYPE_STRING) tStr = "string";
+        else if (t == Port.TYPE_VALUE) tStr = "number";
+        else if (t == Port.TYPE_ARRAY) tStr = "array";
+        else if (t == Port.TYPE_OBJECT) tStr = "object";
+        else console.log("unknown,,,", t);
 
         for (const i in this._variables)
         {
-            if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
+            if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
         return vars;
     }
+
+    // getVars(t)
+    // {
+    //     if (t === undefined) return this._variables;
+
+    //     const vars = [];
+    //     let tStr = "";
+    //     if (t == Port.TYPE_STRING) tStr = "string";
+    //     if (t == Port.TYPE_VALUE) tStr = "number";
+    //     if (t == Port.TYPE_ARRAY) tStr = "array";
+    //     if (t == Port.TYPE_OBJECT) tStr = "object";
+
+    //     for (const i in this._variables)
+    //     {
+    //         if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
+    //     }
+    //     return vars;
+    // }
 
     /**
      * @function preRenderOps
