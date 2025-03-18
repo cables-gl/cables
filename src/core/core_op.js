@@ -35,7 +35,12 @@ import { Texture } from "./cgl/cgl_texture.js";
  */
 
 /**
- * @template Op
+ * @typedef CorePatch
+ * @type Patch
+ */
+
+/**
+ * @template {CorePatch} Patch
  */
 export class Op extends Events
 {
