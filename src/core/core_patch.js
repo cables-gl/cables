@@ -9,6 +9,8 @@ import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { CglContext } from "./cgl/cgl_state.js";
 
+/** @global CABLES.OPS  */
+
 /**
  * @typedef PatchConfig
  * @property {String} [prefixAssetPath=''] prefix for path to assets
