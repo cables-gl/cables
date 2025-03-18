@@ -186,6 +186,7 @@ export class Op extends Events
      */
     require(name)
     {
+        // @ts-ignore
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
             this.setUiError("notstandalone", "This op will only work in cables standalone version", 3);
 
@@ -341,7 +342,11 @@ export class Op extends Events
 
     getName()
     {
-        if (this.uiAttribs.name) return this.uiAttribs.name;
+        if (this.uiAttribs.name)
+        {
+            console.log("uiattr name exist!");// otherwise delete
+            return this.uiAttribs.name;
+        }
         return this.#name;
     }
 

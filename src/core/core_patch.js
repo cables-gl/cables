@@ -818,7 +818,7 @@ export class Patch extends Events
     {
         ajaxSync(
             "/ui/libs/" + which + ".js",
-            (err, res) =>
+            (_err, res) =>
             {
                 const se = document.createElement("script");
                 se.type = "text/javascript";
@@ -1001,7 +1001,7 @@ export class Patch extends Events
                         {
                             for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                             {
-                                const l = this._addLink(
+                                this._addLink(
                                     obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                                     obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                                     obj.ops[iop].portsIn[ipi2].links[ili].portIn,
@@ -1058,7 +1058,7 @@ export class Patch extends Events
                                         if (!dstOp) this._log.warn("could not find op for lost link");
                                         else
                                         {
-                                            const l = this._addLink(
+                                            this._addLink(
                                                 dstOp.id,
                                                 obj.ops[iop].portsOut[ipi2].links[ili].objOut,
 
