@@ -1382,9 +1382,9 @@ export class Op extends Events
      * @param {boolean} [lowerCase]
      * @return {Port}
      */
-    getPort(name, lowerCase)
+    getPort(name, lowerCase = false)
     {
-        return this.getPortByName(name, lowerCase = false);
+        return this.getPortByName(name, lowerCase);
     }
 
     /**
