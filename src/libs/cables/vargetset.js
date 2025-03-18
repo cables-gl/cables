@@ -193,7 +193,7 @@ const VarGetOpWrapper = class
         else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
         else this._typeId = CABLES.Port.TYPE_VALUE;
 
-        this._isTexture = valueOutPort.uiAttribs.objType === "texture";
+        if (valueOutPort) this._isTexture = valueOutPort.uiAttribs.objType === "texture";
 
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
         this._op.on("uiErrorChange", this._updateTitle.bind(this));
