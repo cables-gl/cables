@@ -1275,6 +1275,7 @@ export class Patch extends Events
     getVars(t)
     {
         if (t === undefined) return this._variables;
+        if (t === 1) return {};
 
         const vars = [];
         let tStr = "";
@@ -1282,7 +1283,11 @@ export class Patch extends Events
         else if (t == Port.TYPE_VALUE) tStr = "number";
         else if (t == Port.TYPE_ARRAY) tStr = "array";
         else if (t == Port.TYPE_OBJECT) tStr = "object";
-        else console.log("unknown,,,", t);
+        else
+        {
+            console.log("unknown,,,", t);
+            console.log(new Error().stack);
+        }
 
         for (const i in this._variables)
         {
