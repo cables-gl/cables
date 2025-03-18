@@ -126,7 +126,6 @@ export class Port extends Events
         this.activityCounterStartFrame = 0;
 
         this.canLink = null; // function can be overwritten
-        this.checkLinkTimeWarnings = null; // function can be overwritten
         this.preserveLinks = null;
         this.indexPort = null;
     }

@@ -149,7 +149,6 @@ export class Op extends Events
          */
         this.renderVizLayer = null;
 
-        this.checkLinkTimeWarnings = null;
     }
 
     isInBlueprint2()
