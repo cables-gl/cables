@@ -74,6 +74,7 @@ export class Patch extends Events
     static EVENT_VARIABLES_CHANGED = "variablesChanged";
 
     #renderOneFrame = false;
+    #initialDeserialize = true;
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
@@ -876,25 +877,47 @@ export class Patch extends Events
         return this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
     }
 
-    deSerialize(obj, options)
+    /**
+     * @param {String} s
+     */
+    logStartup(s)
     {
-        options = options || { "genIds": false, "createRef": false };
+        if (window.logStartup)window.logStartup(s);
+    }
+
+    /**
+     * @typedef DeserializeOptions
+     * @property {boolean} [genIds]
+     * @property {boolean} [createRef]
+     */
+
+    /**
+     * Description
+     * @param {Object} obj
+     * @param {DeserializeOptions} options
+     * @returns {any}
+     */
+    deSerialize(obj, options = { "genIds": false, "createRef": false })
+    {
         if (this.aborted) return;
         const newOps = [];
         const loadingId = this.loading.start("core", "deserialize");
 
-        this.namespace = obj.namespace || "";
-        this.name = obj.name || "";
-
         if (typeof obj === "string") obj = JSON.parse(obj);
 
-        this.settings = obj.settings;
+        if (this.#initialDeserialize)
+        {
+            this.#initialDeserialize = false;
+            this.namespace = obj.namespace || "";
+            this.name = obj.name || "";
+            this.settings = obj.settings;
+        }
 
         this.emitEvent("patchLoadStart");
 
         obj.ops = obj.ops || [];
 
-        if (window.logStartup)logStartup("add " + obj.ops.length + " ops... ");
+        this.logStartup("add " + obj.ops.length + " ops... ");
 
         const addedOps = [];
 
@@ -985,7 +1008,7 @@ export class Patch extends Events
             const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
             if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused);
         }
-        if (window.logStartup)logStartup("add ops done");
+        this.logStartup("add ops done");
 
         for (const i in this.ops)
         {
@@ -998,7 +1021,7 @@ export class Patch extends Events
             this.ops[i].emitEvent("loadedValueSet");
         }
 
-        if (window.logStartup)logStartup("creating links");
+        this.logStartup("creating links");
 
         if (options.opsCreated)options.opsCreated(addedOps);
         // create links...
@@ -1116,7 +1139,7 @@ export class Patch extends Events
             }
         }
 
-        if (window.logStartup)logStartup("calling ops onloaded");
+        this.logStartup("calling ops onloaded");
 
         for (const i in this.ops)
         {
@@ -1128,7 +1151,7 @@ export class Patch extends Events
             }
         }
 
-        if (window.logStartup)logStartup("initializing ops...");
+        this.logStartup("initializing ops...");
         for (const i in this.ops)
         {
             if (this.ops[i].init)
@@ -1145,13 +1168,13 @@ export class Patch extends Events
             }
         }
 
-        if (window.logStartup)logStartup("initializing vars...");
+        this.logStartup("initializing vars...");
 
         if (this.config.variables)
             for (const varName in this.config.variables)
                 this.setVarValue(varName, this.config.variables[varName]);
 
-        if (window.logStartup)logStartup("initializing var ports");
+        this.logStartup("initializing var ports");
 
         for (const i in this.ops)
         {

@@ -1055,10 +1055,10 @@ export class Op extends Events
      * create a array input port
      * @param {String} name
      * @param {Array|Number} v
-     * @param {number} _stride
+     * @param {Number} _stride
      * @return {Port} created port
      */
-    inArray(name, v, _stride = 0)
+    inArray(name, v = undefined, _stride = undefined)
     {
         let stride = _stride;
         // @ts-ignore
