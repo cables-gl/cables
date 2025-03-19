@@ -297,6 +297,7 @@ const VarGetOpWrapper = class
 
         this._op.patch.emitEvent("opVariableNameChanged", this._op, this._varnamePort.get());
     }
+
 };
 
 CABLES.VarSetOpWrapper = VarSetOpWrapper;

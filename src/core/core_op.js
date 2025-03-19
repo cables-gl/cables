@@ -148,10 +148,9 @@ export class Op extends Events
          * @param {number} layer.scale current scaling of patchfield view
          */
         this.renderVizLayer = null;
-
     }
 
-    isInBlueprint2()
+    isInBlueprint2() // will be overwritten in ui
     {
         return false;
     }
@@ -193,7 +192,6 @@ export class Op extends Events
      */
     require(name)
     {
-        // @ts-ignore
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
             this.setUiError("notstandalone", "This op will only work in cables standalone version", 3);
 

@@ -145,6 +145,7 @@ export class Patch extends Events
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
         this._variables = {};
+
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
