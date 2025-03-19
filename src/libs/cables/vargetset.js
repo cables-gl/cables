@@ -185,6 +185,15 @@ const VarGetOpWrapper = class
         this._variable = null;
         this._valueOutPort = valueOutPort;
         this._listenerId = null;
+        this._typeId = 0;
+
+        if (type == "array") this._typeId = CABLES.Port.TYPE_ARRAY;
+        else if (type == "object") this._typeId = CABLES.Port.TYPE_OBJECT;
+        else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
+        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
+        else this._typeId = CABLES.Port.TYPE_VALUE;
+
+        if (valueOutPort) this._isTexture = valueOutPort.uiAttribs.objType === "texture";
 
         this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
         this._op.on("uiErrorChange", this._updateTitle.bind(this));
@@ -241,7 +250,6 @@ const VarGetOpWrapper = class
         {
             const varnames = [];
             const vars = this._op.patch.getVars();
-
             for (const i in vars)
                 if (vars[i].type == this._type && i != "0")
                     varnames.push(i);
@@ -253,10 +261,11 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         if (this._valueOutPort)
-            if (this._typeId == CABLES.Port.TYPE_ARRAY && this._typeId == CABLES.Port.TYPE_OBJECT || this._isTexture)
+            if (this._typeId == CABLES.Port.TYPE_ARRAY || this._typeId == CABLES.Port.TYPE_OBJECT || this._isTexture)
                 this._valueOutPort.setRef(v);
             else
                 this._valueOutPort.set(v);
+
     }
 
     _updateTitle()
@@ -266,13 +275,13 @@ const VarGetOpWrapper = class
             this._op.setUiError("unknownvar", null);
             this._op.setTitle("var get");
             this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
-            if (this._valueOutPort) this._valueOutPort.set(this._variable.getValue());
+            if (this._valueOutPort) this._setValueOut(this._variable.getValue());
         }
         else
         {
             this._op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + this._varnamePort.get() + ")");
             this._op.setUiAttrib({ "extendTitle": "#invalid" });
-            if (this._valueOutPort) this._valueOutPort.set(0);
+            if (this._valueOutPort) this._setValueOut(0);
         }
     }
 

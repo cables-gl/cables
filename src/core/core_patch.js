@@ -9,6 +9,8 @@ import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { CglContext } from "./cgl/cgl_state.js";
 
+/** @global CABLES.OPS  */
+
 /**
  * @typedef PatchConfig
  * @property {String} [prefixAssetPath=''] prefix for path to assets
@@ -30,15 +32,24 @@ import { CglContext } from "./cgl/cgl_state.js";
  * @property {String} [prefixJsPath]
  * @property {Function} [onPatchLoaded]
  * @property {Object} [canvas]
+ * @property {Object} [patch]
  * @property {String} [patchFile]
  * @property {String} [subPatch] internal use
-  */
+ * @property {Number} [masterVolume] 0 for maximum possible frames per second
+ * @property {HTMLCanvasElement} [glCanvas]
+*/
 
 /**
+ * @typedef CoreOp
+ * @type Op
+ */
+
+/**
+ * @template {CoreOp} Op
+ *
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
  * see {@link PatchConfig}
- * @template Patch,Op
  *
  * @example
  * CABLES.patch=new CABLES.Patch(
@@ -121,9 +132,6 @@ export class Patch extends Events
         this._frameWasdelayed = true;
         this.tempData = this.frameStore = {};
         this.reqAnimTimeStamp = 0;
-
-        // /** @deprecated */
-        // this.onDelete = null;
 
         this.cgCanvas = null;
 
@@ -357,6 +365,7 @@ export class Patch extends Events
      * @param {string} identifier
      * @param {string} id
      * @param {string} [opName]
+     * @returns {Op}
      */
     createOp(identifier, id, opName = null)
     {
@@ -567,7 +576,11 @@ export class Patch extends Events
             if (this.ops[i].id == opid)
             {
                 const op = this.ops[i];
+
+                /** @type {Port} */
                 let reLinkP1 = null;
+
+                /** @type {Port} */
                 let reLinkP2 = null;
 
                 if (op)
@@ -654,6 +667,9 @@ export class Patch extends Events
         }
     }
 
+    /**
+     * @param {number} [timestamp]
+     */
     exec(timestamp)
     {
         if (!this.#renderOneFrame && (this._paused || this.aborted)) return;
@@ -814,7 +830,7 @@ export class Patch extends Events
     {
         ajaxSync(
             "/ui/libs/" + which + ".js",
-            (err, res) =>
+            (_err, res) =>
             {
                 const se = document.createElement("script");
                 se.type = "text/javascript";
@@ -997,7 +1013,7 @@ export class Patch extends Events
                         {
                             for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                             {
-                                const l = this._addLink(
+                                this._addLink(
                                     obj.ops[iop].portsIn[ipi2].links[ili].objIn,
                                     obj.ops[iop].portsIn[ipi2].links[ili].objOut,
                                     obj.ops[iop].portsIn[ipi2].links[ili].portIn,
@@ -1054,7 +1070,7 @@ export class Patch extends Events
                                         if (!dstOp) this._log.warn("could not find op for lost link");
                                         else
                                         {
-                                            const l = this._addLink(
+                                            this._addLink(
                                                 dstOp.id,
                                                 obj.ops[iop].portsOut[ipi2].links[ili].objOut,
 
@@ -1254,24 +1270,49 @@ export class Patch extends Events
 
     /**
      * @param {number} t
-     * @returns {Array<PatchVariable>}
+     * @returns {Object}
      */
     getVars(t)
     {
         if (t === undefined) return this._variables;
+        if (t === 1) return {};
 
         const vars = [];
-        if (t == Port.TYPE_STRING) t = "string";
-        if (t == Port.TYPE_VALUE) t = "number";
-        if (t == Port.TYPE_ARRAY) t = "array";
-        if (t == Port.TYPE_OBJECT) t = "object";
+        let tStr = "";
+        if (t == Port.TYPE_STRING) tStr = "string";
+        else if (t == Port.TYPE_VALUE) tStr = "number";
+        else if (t == Port.TYPE_ARRAY) tStr = "array";
+        else if (t == Port.TYPE_OBJECT) tStr = "object";
+        else
+        {
+            console.log("unknown,,,", t);
+            console.log(new Error().stack);
+        }
 
         for (const i in this._variables)
         {
-            if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
+            if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
         return vars;
     }
+
+    // getVars(t)
+    // {
+    //     if (t === undefined) return this._variables;
+
+    //     const vars = [];
+    //     let tStr = "";
+    //     if (t == Port.TYPE_STRING) tStr = "string";
+    //     if (t == Port.TYPE_VALUE) tStr = "number";
+    //     if (t == Port.TYPE_ARRAY) tStr = "array";
+    //     if (t == Port.TYPE_OBJECT) tStr = "object";
+
+    //     for (const i in this._variables)
+    //     {
+    //         if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
+    //     }
+    //     return vars;
+    // }
 
     /**
      * @function preRenderOps

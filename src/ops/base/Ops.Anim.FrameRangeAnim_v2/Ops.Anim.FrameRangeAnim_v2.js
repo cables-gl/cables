@@ -29,11 +29,11 @@ function setupAnim(frames)
 
     for (let i = 0; i < frames.length; i++)
     {
-        anim.defaultEasing = CABLES.ANIM.EASING_ABSOLUTE;
+        anim.defaultEasing = CABLES.Anim.EASING_ABSOLUTE;
         if (i < frames.length - 1)
         {
             if (frames[i + 1] == frames[i] + 1 || frames[i + 1] == frames[i] - 1)
-                anim.defaultEasing = CABLES.ANIM.EASING_LINEAR;
+                anim.defaultEasing = CABLES.Anim.EASING_LINEAR;
         }
 
         anim.setValue(i / FPS, frames[i] / FPS);

@@ -85,6 +85,9 @@ CABLES.uniqueArray = utils.uniqueArray;
 CABLES.CGState = CgContext;
 CABLES.CgContext = CgContext;
 
+/** @type {Array<Op>} */
+CABLES.OPS = [];
+
 CABLES = Object.assign(CABLES,
     CONSTANTS.PORT,
     CONSTANTS.PACO,

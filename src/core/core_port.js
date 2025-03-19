@@ -21,12 +21,18 @@ import { PatchVariable } from "./core_variable.js";
  * @property  {Boolean} [useVariable] internal: do not set manually
  * @property  {string} [variableName] internal: do not set manually
  * @property  {Number} [order] internal: do not set manually
+ * @property  {Number} [stride] internal: do not set manually
  * @property  {Boolean} [expose] internal: do not set manually
  * @property  {Boolean} [multiPortManual] internal: do not set manually
+ * @property  {String} [increment] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {String} [display] internal: do not set manually
  * @property  {String} [axis] internal: do not set manually
-
+ * @property  {String} [type] internal: do not set manually
+ * @property  {String} [objType] internal: do not set manually
+ * @property  {String} [filter] internal: do not set manually
+ * @property  {boolean} [preview] internal: do not set manually
+ * @property  {Array<String>} [values] internal: do not set manually
  *
  */
 
@@ -119,8 +125,9 @@ export class Port extends Events
         this.apf = 0;
         this.activityCounterStartFrame = 0;
 
-        this.canLink = null; // function fan be overwritten
-        this.checkLinkTimeWarnings = null; // function fan be overwritten
+        this.canLink = null; // function can be overwritten
+        this.preserveLinks = null;
+        this.indexPort = null;
     }
 
     get parent()
@@ -196,7 +203,7 @@ export class Port extends Events
                 else str += "true";
             }
 
-            str = str.replace(/[\u00A0-\u9999<>\&]/g, function (i)
+            str = str.replace(/[\u00A0-\u9999<>\&]/g, function (/** @type {String} */ i)
             {
                 return "&#" + i.charCodeAt(0) + ";";
             });
@@ -375,7 +382,7 @@ export class Port extends Events
                         this.crashed = true;
 
                         this.setValue = function (_v) {};
-                        this.onTriggered = function () {};
+                        this.onTriggered = function (a) {};
 
                         this._log.error("exception in ", this._op);
                         this._log.error(ex);
@@ -567,10 +574,11 @@ export class Port extends Events
      * will be overwritten in ui
      * @param {Port} port1
      * @param {Port} port2
+     * @returns {boolean}
      */
     shouldLink(port1, port2)
     {
-        return port1 && port2;
+        return !!(port1 && port2);
     }
 
     /**
@@ -604,7 +612,7 @@ export class Port extends Events
      */
     removeLink(link)
     {
-        for (const i in this.links)
+        for (let i = 0; i < this.links.length; i++)
             if (this.links[i] == link)
                 this.links.splice(i, 1);
 
@@ -652,6 +660,9 @@ export class Port extends Events
         return this.name;
     }
 
+    /**
+     * @param {Link} l
+     */
     addLink(l)
     {
         this.#valueBeforeLink = this.value;
@@ -781,7 +792,6 @@ export class Port extends Events
 
     execute()
     {
-        this._log.warn("### execute port: " + this.getName(), this.goals.length);
     }
 
     /**
@@ -998,6 +1008,9 @@ export class Port extends Events
         if (this._op.enabled) this.emitEvent("trigger");
     }
 
+    /**
+     * @param {any} v
+     */
     _onSetProfiling(v) // used in editor: profiler tab
     {
         this._op.patch.profiler.add("port", this);
