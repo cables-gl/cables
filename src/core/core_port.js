@@ -169,6 +169,7 @@ export class Port extends Events
      *  {
      *      if(inArray) inArray.copyLinkedUiAttrib("stride", outArray);
      *  };
+     *
      */
     copyLinkedUiAttrib(which, port)
     {
