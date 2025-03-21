@@ -5,13 +5,13 @@ import { CgpUniform } from "./cgp_uniform.js";
 import { CgpShader } from "./cgp_shader.js";
 
 /**
- * @typedef CgpBindingOptions
- * @property {string} bindingType  "uniform", "storage", "read-only-storage","read-write-storage",
- * @property {string} [define]
- * @property {CgpShader} shader
- * @property {number} stage
- * @property {number} index
- */
+     * @typedef CgpBindingOptions
+     * @property {string} bindingType  "uniform", "storage", "read-only-storage","read-write-storage",
+     * @property {string} [define]
+     * @property {CgpShader} shader
+     * @property {number} stage
+     * @property {number} index
+     */
 
 export class Binding
 {

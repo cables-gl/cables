@@ -615,7 +615,7 @@ export class Pipeline
         this.#passEncoder.setPipeline(this.#renderPipeline);
 
         // TODO BINDGROUPCOUNTER?!
-        this.#passEncoder.setBindGroup(0, this.#bindGroup);
+        // this.#passEncoder.setBindGroup(0, this.#bindGroup);
 
         if (workGroups.length == 1) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8);
         if (workGroups.length == 2) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);

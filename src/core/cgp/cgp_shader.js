@@ -4,6 +4,7 @@ import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
 import { Binding } from "./cgp_binding.js";
 import { CgpContext } from "./cgp_state.js";
+import { BindGroup } from "./binding/bindgroup.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
@@ -42,23 +43,26 @@ export class CgpShader extends CgShader
         this._bindingIndexCount = 0;
         this._compileCount = 0;
 
-        /** @type {Array<Binding>} */
-        this.bindingsFrag = [];
+        /** @type {Array<BindGroup>} */
+        this.bindGroups = [];
 
-        /** @type {Array<Binding>} */
-        this.bindingsVert = [];
+        // /** @type {Array<Binding>} */
+        // this.bindingsFrag = [];
 
-        /** @type {Array<Binding>} */
-        this.bindingsCompute = [];// this.defaultBindingCompute
+        // /** @type {Array<Binding>} */
+        // this.bindingsVert = [];
 
-        /** @type {Binding} */
-        this.defaultBindingCompute = null;
+        // /** @type {Array<Binding>} */
+        // this.bindingsCompute = [];// this.defaultBindingCompute
 
-        /** @type {Binding} */
-        this.defaultBindingVert = null;
+        // /** @type {Binding} */
+        // this.defaultBindingCompute = null;
 
-        /** @type {Binding} */
-        this.defaultBindingFrag = null;
+        // /** @type {Binding} */
+        // this.defaultBindingVert = null;
+
+        // /** @type {Binding} */
+        // this.defaultBindingFrag = null;
 
         if (!this.options.compute)
         {
@@ -105,6 +109,23 @@ export class CgpShader extends CgShader
     get uniforms()
     {
         return this._uniforms;
+    }
+
+    /**
+     * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEncoder
+     * @param {BindGroup} bg
+     */
+    setBindgroup(passEncoder, bg)
+    {
+        let idx = this.bindGroups.indexOf(bg);
+        if (idx == -1)
+        {
+            this.bindGroups.push(bg);
+            idx = this.bindGroups.length - 1;
+        }
+
+        passEncoder.setBindGroup(idx, bg.bindGroup);
+
     }
 
     getName()
