@@ -9,6 +9,10 @@ export class CgpMesh extends CgMesh
     #log = new Logger("cgl_mesh");
     needsPipelineUpdate = false;
 
+    /**
+     * @param {any} _cgp
+     * @param {any} __geom
+     */
     constructor(_cgp, __geom)
     {
         super();
@@ -27,6 +31,11 @@ export class CgpMesh extends CgMesh
         if (__geom) this.setGeom(__geom);
     }
 
+    /**
+     * @param {GPUDevice} device
+     * @param {any} data
+     * @param {any} usage
+     */
     _createBuffer(device, data, usage)
     {
         let bo = {
@@ -141,7 +150,7 @@ export class CgpMesh extends CgMesh
                 "shader ": shader.getInfo(),
                 "numAttributes": this._attributes.length
             });
-            // console.log(this._positionBuffer);
+
             this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
             for (let i = 0; i < this._attributes.length; i++)
                 this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);

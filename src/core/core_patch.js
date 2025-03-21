@@ -1301,6 +1301,8 @@ export class Patch extends Events
         if (t === undefined) return this._variables;
         if (t === 1) return {};
 
+        const perf = gui.uiProfiler.start("[corepatchetend] getVars");
+
         const vars = [];
         let tStr = "";
         if (t == Port.TYPE_STRING) tStr = "string";
@@ -1317,6 +1319,9 @@ export class Patch extends Events
         {
             if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
+
+        perf.finish();
+
         return vars;
     }
 

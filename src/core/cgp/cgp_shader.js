@@ -188,6 +188,11 @@ export class CgpShader extends CgShader
         return vs;
     }
 
+    getDefines()
+    {
+        return this._defines;
+    }
+
     getProcessedSource()
     {
         const defs = {};
