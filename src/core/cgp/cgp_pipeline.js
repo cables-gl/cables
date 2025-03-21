@@ -402,7 +402,7 @@ export class Pipeline
     getPipelineObject(shader)
     {
 
-        /** @type {Array<GPUBindGroupLayoutEntry} */
+        /** @type {Array<GPUBindGroupLayoutEntry>} */
         this.bindingGroupLayoutEntries = [];
 
         if (!shader.bindingsVert)
