@@ -18,17 +18,23 @@ export class Pipeline
     #cgp = null;
     #isValid = true;
 
-    /** @type {GPURenderPipelineDescriptor|GPUComputePipelineDescriptor} */
+    /** @type {string} */
+    presentationFormat = null;
+
+    /** @type {GPURenderPipelineDescriptor|GPURenderPipelineDescriptor} */
     #pipeCfg = null;
 
-    /** @type {GPUComputePipeline|GPURenderPipeline} */
+    /** @type {GPURenderPipeline|GPUComputePipeline} */
     #renderPipeline = null;
+
+    /** @type {GPUComputePipeline} */
+    #computePipeline = null;
 
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
-    /** @type {Array<GPUBindGroup>} */
-    #bindingInstances = [];
+    /** @type {GPUBindGroup} */
+    #bindGroup = null;
 
     /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
     #passEncoder;
@@ -97,7 +103,7 @@ export class Pipeline
             "name": this.#name,
             "rebuildReason": this.lastRebuildReason,
             "rebuildCount": this.rebuildCount,
-            "numBindgroups": this.#bindingInstances.length,
+            // "numBindgroups": this.#bindingInstances.length,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries,
         };
 
@@ -219,7 +225,8 @@ export class Pipeline
             console.log("rebuild pipe", needsRebuildReason);
             this.#cgp.pushErrorScope("createPipeline", { "logger": this.#log });
 
-            this.#bindingInstances = [];
+            // this.#bindingInstances = [];
+
             this.#rebuildNumBindingGroups = false;
 
             this.#pipeCfg = this.getPipelineObject(shader);
@@ -280,7 +287,7 @@ export class Pipeline
 
             // console.log("shader.frameUsageCounter", shader.frameUsageCounter);
 
-            if (!this.#bindingInstances[shader.frameUsageCounter])
+            if (!this.#bindGroup)
             {
                 console.log("create bindgroups....");
                 const bindingGroupEntries = [];
@@ -335,8 +342,7 @@ export class Pipeline
 
                 try
                 {
-                    // TODO bindgroup counter somehow ?!?!?!??!
-                    this.#bindingInstances[shader.frameUsageCounter] = this.#cgp.device.createBindGroup(bg);
+                    this.#bindGroup = this.#cgp.device.createBindGroup(bg);
 
                 }
                 catch (e)
@@ -368,9 +374,9 @@ export class Pipeline
             //         this.#cgp.passEncoder.setBindGroup(i, this.#bindingInstances[i]);
             // }
 
-            this.#cgp.passEncoder.setBindGroup(0, this.#bindingInstances[shader.frameUsageCounter]);
+            this.#cgp.passEncoder.setBindGroup(0, this.#bindGroup);
 
-            if (this.#bindingInstances.length == 0)
+            if (!this.#bindGroup)
             {
                 console.warn("No effing bindgroups...");
             }
@@ -609,7 +615,7 @@ export class Pipeline
         this.#passEncoder.setPipeline(this.#renderPipeline);
 
         // TODO BINDGROUPCOUNTER?!
-        this.#passEncoder.setBindGroup(0, this.#bindingInstances[0]);
+        this.#passEncoder.setBindGroup(0, this.#bindGroup);
 
         if (workGroups.length == 1) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8);
         if (workGroups.length == 2) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);

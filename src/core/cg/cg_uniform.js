@@ -1,13 +1,14 @@
 import { Logger } from "cables-shared-client";
 import { Port } from "../core_port.js";
 import { CgShader } from "./cg_shader.js";
+import { Shader } from "../cgl/cgl_shader.js";
 
 export class CgUniform
 {
 
     /**
      * Description
-     * @param {CgShader} __shader
+     * @param {Shader} __shader
      * @param {string} __type
      * @param {string} __name
      * @param {Number|Port} _value
