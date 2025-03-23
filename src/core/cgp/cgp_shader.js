@@ -13,8 +13,8 @@ import { BindGroup } from "./binding/bindgroup.js";
 
 export class CgpShader extends CgShader
 {
-
     #computePipeline;
+
     #lastCompileReason = "first";
 
     /**
@@ -101,7 +101,8 @@ export class CgpShader extends CgShader
 
     }
 
-    get isValid()
+    /** @returns {boolean} */
+    isValid()
     {
         return this._isValid;
     }
@@ -124,7 +125,7 @@ export class CgpShader extends CgShader
             idx = this.bindGroups.length - 1;
         }
 
-        passEncoder.setBindGroup(idx, bg.bindGroup);
+        passEncoder.setBindGroup(idx, bg.gpuBindGroup);
 
     }
 
