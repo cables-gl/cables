@@ -103,6 +103,8 @@ export class Op extends Events
         super();
 
         this.#name = _name;
+        this.opId = _id;
+        this.objName = _name;
         this.patch = _patch;
 
         this.#shortOpName = CABLES.getShortOpName(_name);
