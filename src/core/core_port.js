@@ -565,7 +565,6 @@ export class Port extends Events
         if (this.type === Port.TYPE_FUNCTION && this.links.length == 0) obj = null;
         if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
 
-        // console.log(obj);
         cleanJson(obj);
 
         return obj;
@@ -868,14 +867,14 @@ export class Port extends Events
     _handleNoTriggerOpAnimUpdates(a)
     {
         let hasTriggerPort = false;
-        for (let i = 0; i < this._op.portsIn.length; i++)
-        {
-            if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
-            {
-                hasTriggerPort = true;
-                break;
-            }
-        }
+        // for (let i = 0; i < this._op.portsIn.length; i++)
+        // {
+        //     if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
+        //     {
+        //         hasTriggerPort = true;
+        //         break;
+        //     }
+        // }
 
         if (!hasTriggerPort)
         {
