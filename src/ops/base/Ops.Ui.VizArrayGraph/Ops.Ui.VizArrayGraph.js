@@ -1,10 +1,16 @@
 const
     inArr = op.inArray("Array Numbers"),
-    inCurve = op.inBool("Curve", false);
+    inCurve = op.inBool("Curve", false),
+    outArr = op.outArray("Passthrough Array");
 
 op.setUiAttrib({ "height": 100, "width": 200, "resizable": true });
 
 const padding = 10;
+
+inArr.onChange = () =>
+{
+    outArr.setRef(inArr.get());
+};
 
 op.renderVizLayer = (ctx, layer) =>
 {

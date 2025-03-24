@@ -6,7 +6,8 @@ const
     inWrap = op.inBool("Wrap lines", false),
     syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css", "sql"], "text"),
     inFontSize = op.inFloat("Font Size", 10),
-    inPos = op.inFloatSlider("Scroll", 0);
+    inPos = op.inFloatSlider("Scroll", 0),
+    outStr = op.outString("Passthrough String");
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 inStr.ignoreValueSerialize = true;
@@ -31,8 +32,12 @@ inStr.onLinkChanged = () =>
 
 inStr.onChange = () =>
 {
-    if (inStr.get()) lines = inStr.get().split("\n");
-    else lines = [];
+    outStr.set(inStr.get());
+    if (CABLES.UI)
+    {
+        if (inStr.get()) lines = inStr.get().split("\n");
+        else lines = [];
+    }
 };
 
 op.renderVizLayer = (ctx, layer, viz) =>
