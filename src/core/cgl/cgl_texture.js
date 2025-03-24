@@ -522,7 +522,7 @@ export class Texture extends CgTexture
  * @static
  * @memberof Texture
  * @description load an image from an url
- * @param {CGState} cgl
+ * @param {CglContext} cgl
  * @param {String} url
  * @param {Function} finishedCallback
  * @param {Object} settings
@@ -578,7 +578,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  * @function getTempTexture
  * @memberof Texture
  * @description returns the default temporary texture (grey diagonal stipes)
- * @param {CGState} cgl
+ // * @param {CglContext} cgl
  * @return {Texture}
  */
 Texture.getTempTexture = function (cgl)
@@ -593,7 +593,7 @@ Texture.getTempTexture = function (cgl)
  * @function getErrorTexture
  * @memberof Texture
  * @description returns the default temporary texture (grey diagonal stipes)
- * @param {CGState} cgl
+ * @param {CglContext} cgl
  * @return {Texture}
  */
 Texture.getErrorTexture = function (cgl)
