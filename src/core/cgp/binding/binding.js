@@ -54,4 +54,9 @@ export class Binding
         return true;
     }
 
+    updateValues()
+    {
+
+    }
+
 }

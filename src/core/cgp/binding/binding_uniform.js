@@ -174,4 +174,13 @@ export class BindingUniform extends Binding
             "buffer": {}
         };
     }
+
+    updateValues()
+    {
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+            if (this.#uniforms[i].needsUpdate) return this.updateBuffer();
+        }
+
+    }
 }

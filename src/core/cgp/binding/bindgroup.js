@@ -123,4 +123,12 @@ export class BindGroup
         }
 
     }
+
+    updateValues()
+    {
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            this.#bindings[i].updateValues();
+        }
+    }
 }

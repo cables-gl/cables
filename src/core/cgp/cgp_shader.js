@@ -60,40 +60,19 @@ export class CgpShader extends CgShader
         /** @type {Array<BindGroup>} */
         this.bindGroups = [this.defaultBindGroup];
 
-        this.defaultUniBindingVert = new BindingUniform(_cgp, "uniVert", {});
-        this.defaultBindGroup.addBinding(this.defaultUniBindingVert);
+        if (!this.options.compute)
+        {
+            this.defaultUniBindingVert = new BindingUniform(_cgp, "uniVert", {});
+            this.defaultBindGroup.addBinding(this.defaultUniBindingVert);
 
-        this.defaultUniBindingFrag = new BindingUniform(_cgp, "uniFrag", {});
-        this.defaultBindGroup.addBinding(this.defaultUniBindingFrag);
-
-        this.defaultUniBindingCompute = new BindingUniform(_cgp, "uniCompute", {});
-        this.defaultBindGroup.addBinding(this.defaultUniBindingCompute);
-
-        // /** @type {Array<Binding>} */
-        // this.bindingsFrag = [];
-
-        // /** @type {Array<Binding>} */
-        // this.bindingsVert = [];
-
-        // /** @type {Array<Binding>} */
-        // this.bindingsCompute = [];// this.defaultBindingCompute
-
-        // /** @type {Binding} */
-        // this.defaultBindingCompute = null;
-
-        // /** @type {Binding} */
-        // this.defaultUniBindingVert = null;
-
-        // /** @type {Binding} */
-
-        // if (!this.options.compute)
-        // {
-        //     this.defaultUniBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
-        // }
-        // else
-        // {
-        //     this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "shader": this, "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
-        // }
+            this.defaultUniBindingFrag = new BindingUniform(_cgp, "uniFrag", {});
+            this.defaultBindGroup.addBinding(this.defaultUniBindingFrag);
+        }
+        else
+        {
+            this.defaultUniBindingCompute = new BindingUniform(_cgp, "uniCompute", {});
+            this.defaultBindGroup.addBinding(this.defaultUniBindingCompute);
+        }
 
         if (!this.options.compute)
         {
@@ -347,6 +326,10 @@ export class CgpShader extends CgShader
             this.uniNormalMatrix.setValue(this._tempNormalMatrix);
         }
 
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            this.bindGroups[i].updateValues();
+        }
         if (this._needsRecompile) this.compile();
     }
 
