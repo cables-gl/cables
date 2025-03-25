@@ -1,8 +1,8 @@
 import { Events, Logger } from "cables-shared-client";
-import { CgpContext, WebGpuContext } from "./cgp_state.js";
+import { CgpContext } from "./cgp_state.js";
 
 /** @typedef GPUBufferOptions
- * @property {number} length
+ * @property {number} [length]
  * @property {GPUBufferDescriptor} [buffCfg]
 */
 

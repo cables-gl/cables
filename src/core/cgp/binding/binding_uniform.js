@@ -82,6 +82,7 @@ export class BindingUniform extends Binding
         let info = { "name": this.#uniforms.length + " uniforms", "stage ": CgpShader.getStageString(this.stage), "uniforms": [] };
 
         const s = this.getSizeBytes() / 4;
+        info.s = this.getSizeBytes();
 
         if (!this.cgpBuffer)
         {
@@ -96,7 +97,7 @@ export class BindingUniform extends Binding
         for (let i = 0; i < this.#uniforms.length; i++)
         {
 
-            this.#uniforms[i].copyToBuffer(this.cgpBuffer.floatArr, off); // todo: check if uniform changed?
+            this.#uniforms[i].copyToBuffer(this.cgpBuffer.floatArr, off);
 
             if (this.#uniforms[i].gpuBufferChanged)
             {
@@ -179,8 +180,9 @@ export class BindingUniform extends Binding
     {
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-            if (this.#uniforms[i].needsUpdate) return this.updateBuffer();
+            // if (this.#uniforms[i].needsUpdate)
         }
+        return this.updateBuffer();
 
     }
 }

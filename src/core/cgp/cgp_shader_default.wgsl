@@ -19,8 +19,8 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var vsOut: MyVSOutput;
     var pos =vec4<f32>(v.position, 1.0);
 
-    var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
-    vsOut.position = vsUniforms.projMatrix * mvMatrix * pos;
+    var mvMatrix=uniVert.viewMatrix * uniVert.modelMatrix;
+    vsOut.position = uniVert.projMatrix * mvMatrix * pos;
 
     vsOut.normal = v.normal;
     vsOut.texcoord = v.texcoord;
@@ -30,6 +30,6 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
 @fragment
 fn myFSMain(v: MyVSOutput) -> @location(0) vec4<f32>
 {
-    return fsUniforms.color+vec4<f32>(.5,.5,.5,1.0);
+    return vec4<f32>(.5,.5,.5,1.0);
 }
 

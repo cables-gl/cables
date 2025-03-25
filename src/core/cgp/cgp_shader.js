@@ -329,6 +329,9 @@ export class CgpShader extends CgShader
         for (let i = 0; i < this.bindGroups.length; i++)
         {
             this.bindGroups[i].updateValues();
+
+            this.bindGroups[i].bind();
+
         }
         if (this._needsRecompile) this.compile();
     }
@@ -412,7 +415,12 @@ export class CgpShader extends CgShader
     {
         if (stage == GPUShaderStage.FRAGMENT) return "frag";
         if (stage == GPUShaderStage.VERTEX) return "vertex";
+        if (stage == (GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX)) return "frag+vertex";
+        if (stage == (GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX | GPUShaderStage.COMPUTE)) return "frag+vertex+comp";
+
         if (stage == GPUShaderStage.COMPUTE) return "compute";
+
+        return "unknown" + stage;
 
     }
 
@@ -424,7 +432,6 @@ export class CgpShader extends CgShader
             "frameUsageCounter": this.lastFrameUsageCounter,
             "lastCompileReason": this.#lastCompileReason,
             "compileCount": this._compileCount,
-            "numUniforms": this.uniforms.length,
             "numDefines": this._defines.length,
             "isCompute": this.options.compute
         };
