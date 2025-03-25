@@ -82,7 +82,12 @@
                 "subType": "number"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Passthrough String"
+            }
+        ]
     },
     "summary": "Displays long input string on the patchfield",
     "docs": {

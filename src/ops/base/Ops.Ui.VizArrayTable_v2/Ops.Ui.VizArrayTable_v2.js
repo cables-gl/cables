@@ -1,10 +1,15 @@
 const
     inArr = op.inArray("Array"),
     inStride = op.inInt("Stride", 0),
-    inScroll = op.inFloatSlider("Scroll", 0);
-    // inScroll.get()*arr.length;//inOffset = op.inInt("Start Row", 0);
+    inScroll = op.inFloatSlider("Scroll", 0),
+    outArr = op.outArray("Passthrough Array");
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+
+inArr.onChange = () =>
+{
+    outArr.setRef(inArr.get());
+};
 
 function getCellValue(v)
 {

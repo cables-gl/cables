@@ -48,7 +48,7 @@ export class Op extends Events
 
     #objName = "";
     _log = new Logger("core_op");
-    #name = "";
+    //    #name = "";
     #shortOpName = "";
 
     opId = ""; // unique op id
@@ -93,19 +93,20 @@ export class Op extends Events
     patchId = null; // will be defined by subpatchops
 
     /**
-     * Description
      * @param {Patch} _patch
-     * @param {String} _name
+     * @param {String} _objName
      * @param {String} _id=null
     */
-    constructor(_patch, _name, _id = null)
+    constructor(_patch, _objName, _id = null)
     {
         super();
 
-        this.#name = _name;
+        // this.#name = _objName;
+        this.opId = _id;
+        this.#objName = _objName;
         this.patch = _patch;
 
-        this.#shortOpName = CABLES.getShortOpName(_name);
+        this.#shortOpName = CABLES.getShortOpName(_objName);
         this.getTitle();
 
         this.id = _id || shortId(); // instance id
@@ -187,10 +188,10 @@ export class Op extends Events
     /**
      * op.require
      *
-     * @param {String} name - module name
+     * @param {String} _name - module name
      * @returns {Object}
      */
-    require(name)
+    require(_name)
     {
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
             this.setUiError("notstandalone", "This op will only work in cables standalone version", 3);
@@ -208,7 +209,7 @@ export class Op extends Events
     /** @returns {string} */
     getTitle()
     {
-        if (!this.uiAttribs) return "nouiattribs" + this.#name;
+        if (!this.uiAttribs) return "nouiattribs" + this.shortName;
 
         /*
          * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
@@ -347,12 +348,12 @@ export class Op extends Events
 
     getName()
     {
-        if (this.uiAttribs.name)
-        {
-            console.log("uiattr name exist!");// otherwise delete
-            return this.uiAttribs.name;
-        }
-        return this.#name;
+        // if (this.uiAttribs.name)
+        // {
+        //     console.log("uiattr name exist!");// otherwise delete
+        //     return this.uiAttribs.name;
+        // }
+        return this.#shortOpName;
     }
 
     /**
@@ -404,7 +405,9 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
+     *
+     * @param {string} name
+     * @param {string} v
      */
     inFunction(name, v)
     {
@@ -1217,6 +1220,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {string} v
      */
     outValueString(name, v)
     {
@@ -1234,6 +1239,7 @@ export class Op extends Events
      * @function outString
      * @instance
      * @memberof Op
+     * @param {string} name
      * @param {String} v
      * @return {Port} created port
      */
@@ -1256,6 +1262,8 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @return {Port} created port
+     * @param {object} v
+     * @param {string} objType
      */
     outObject(name, v, objType)
     {
@@ -1272,6 +1280,8 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @return {Port} created port
+     * @param {array|number} v
+     * @param {number} stride
      */
     outArray(name, v, stride)
     {
@@ -1290,6 +1300,7 @@ export class Op extends Events
      * @memberof Op
      * @param {String} name
      * @return {Port} created port
+     * @param {any} v
      */
     outTexture(name, v)
     {
@@ -1308,6 +1319,10 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {any} filter
+     * @param {any} options
+     * @param {any} v
      */
     inDynamic(name, filter, options, v)
     {
@@ -1385,11 +1400,17 @@ export class Op extends Events
         return opObj;
     }
 
+    /**
+     * @param {number} type
+     */
     getFirstOutPortByType(type)
     {
         for (const ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
     }
 
+    /**
+     * @param {number} type
+     */
     getFirstInPortByType(type)
     {
         for (const ipo in this.portsIn) if (this.portsIn[ipo].type == type) return this.portsIn[ipo];
@@ -1696,12 +1717,6 @@ export class Op extends Events
         // overwritten in ui: core_extend_op
     }
 
-    // todo: remove
-    // setError(id, txt)
-    // {
-    //     this._log.warn("old error message op.error() - use op.setUiError()");
-    // }
-
     /**
      * enable/disable op
      * @function
@@ -1800,6 +1815,7 @@ export class Op extends Events
      * @instance
      * @memberof Op
      * @param {String} parentOpName
+     * @param {number} type
      */
     toWorkShouldNotBeChild(parentOpName, type)
     {
@@ -1854,8 +1870,7 @@ export class Op extends Events
      */
     refreshParams()
     {
-        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp())
-            gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) gui.opParams.show(this);
     }
 
     /**

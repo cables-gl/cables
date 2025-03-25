@@ -12,6 +12,10 @@ import { CglContext } from "./cgl/cgl_state.js";
 /** @global CABLES.OPS  */
 
 /**
+ * @typedef {import("./core_op.js").OpUiAttribs} OpUiAttribs
+ */
+
+/**
  * @typedef PatchConfig
  * @property {String} [prefixAssetPath=''] prefix for path to assets
  * @property {String} [assetPath=''] path to assets
@@ -502,7 +506,6 @@ export class Patch extends Events
             if (uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
             if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
             uiAttribs.subPatch = uiAttribs.subPatch || 0;
-
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
 

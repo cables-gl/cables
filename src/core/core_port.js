@@ -2,7 +2,6 @@ import { Events, Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
-import { Op } from "./core_op.js";
 import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
 
@@ -30,6 +29,9 @@ import { PatchVariable } from "./core_variable.js";
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
  * @property  {String} [objType] internal: do not set manually
+ * @property  {String} [filter] internal: do not set manually
+ * @property  {boolean} [hideFormatButton] internal: do not set manually
+ * @property  {boolean} [editShortcut] internal: do not set manually
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
  * @property  {Array<String>} [values] internal: do not set manually
@@ -565,7 +567,6 @@ export class Port extends Events
         if (this.type === Port.TYPE_FUNCTION && this.links.length == 0) obj = null;
         if (obj && Object.keys(obj).length == 1 && obj.name)obj = null; // obj is null if there is no real information other than name
 
-        // console.log(obj);
         cleanJson(obj);
 
         return obj;
@@ -868,14 +869,14 @@ export class Port extends Events
     _handleNoTriggerOpAnimUpdates(a)
     {
         let hasTriggerPort = false;
-        for (let i = 0; i < this._op.portsIn.length; i++)
-        {
-            if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
-            {
-                hasTriggerPort = true;
-                break;
-            }
-        }
+        // for (let i = 0; i < this._op.portsIn.length; i++)
+        // {
+        //     if (this._op.portsIn[i].type == Port.TYPE_FUNCTION)
+        //     {
+        //         hasTriggerPort = true;
+        //         break;
+        //     }
+        // }
 
         if (!hasTriggerPort)
         {
