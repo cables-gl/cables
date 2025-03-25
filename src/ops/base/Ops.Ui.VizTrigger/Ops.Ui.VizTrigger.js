@@ -2,7 +2,8 @@ const
     inTrigger = op.inTriggerButton("Trigger"),
     inReset = op.inTriggerButton("Reset"),
     inText = op.inBool("Count Overlay", true),
-    outCount = op.outNumber("Count");
+    outCount = op.outNumber("Count"),
+    next = op.outTrigger("Next");
 
 op.setUiAttrib({ "height": 100, "width": 130, "resizable": true });
 
@@ -23,6 +24,8 @@ inTrigger.onTriggered = () =>
     count++;
     if (!inText.get()) op.setUiAttrib({ "extendTitle": String(count) });
     outCount.set(count);
+
+    next.trigger();
 };
 
 inText.onChange = () =>

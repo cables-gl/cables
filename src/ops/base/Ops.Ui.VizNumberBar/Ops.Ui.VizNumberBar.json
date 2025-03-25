@@ -22,15 +22,21 @@
                 "subType": "number"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Passthrough",
+                "subType": "number"
+            }
+        ]
     },
     "summary": "Visualize numbers as a bar in patch, useful for debugging",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "-yFlq4",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

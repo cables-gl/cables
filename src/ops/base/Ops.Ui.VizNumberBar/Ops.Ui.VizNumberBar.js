@@ -1,12 +1,16 @@
 const
-    inNum = op.inFloat("Number", 0);
-    // inDrawBar=op.inBool("Draw Bar",true),
-    // inDrawNUm=op.inBool("Draw Number",true);
+    inNum = op.inFloat("Number", 0),
+    outNum = op.outNumber("Passthrough");
 
 op.setUiAttrib({ "height": 100, "width": 200, "resizable": true });
 
 let max = -Number.MAX_VALUE;
 let min = Number.MAX_VALUE;
+
+inNum.onChange = () =>
+{
+    outNum.set(inNum.get());
+};
 
 inNum.onLinkChanged = () =>
 {

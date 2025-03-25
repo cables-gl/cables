@@ -43,6 +43,10 @@
                 "type": 0,
                 "name": "Count",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Next"
             }
         ]
     },

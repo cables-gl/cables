@@ -95,17 +95,19 @@ export class Op extends Events
     /**
      * Description
      * @param {Patch} _patch
-     * @param {String} _name
+     * @param {String} _objName
      * @param {String} _id=null
     */
-    constructor(_patch, _name, _id = null)
+    constructor(_patch, _objName, _id = null)
     {
         super();
 
-        this.#name = _name;
+        this.#name = _objName;
+        this.opId = _id;
+        this.#objName = _objName;
         this.patch = _patch;
 
-        this.#shortOpName = CABLES.getShortOpName(_name);
+        this.#shortOpName = CABLES.getShortOpName(_objName);
         this.getTitle();
 
         this.id = _id || shortId(); // instance id
