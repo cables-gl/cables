@@ -20,10 +20,12 @@ export class BindGroup
 
     /**
      * @param {CgpContext} cgp
+     * @param {string} name
      */
-    constructor(cgp)
+    constructor(cgp, name)
     {
         this.#cgp = cgp;
+        this.name = name;
     }
 
     /**
@@ -35,11 +37,24 @@ export class BindGroup
     }
 
     /**
-     * @param {any} b
+     * @param {Binding} b
+     * @returns {boolean}
+     */
+    hasBinding(b)
+    {
+        return this.#bindings.includes(b);
+    }
+
+    /**
+     * @param {Binding} b
+     * @returns {Binding}
      */
     addBinding(b)
     {
+        b.bindNum = this.#bindings.length;
         this.#bindings.push(b);
+
+        return b;
     }
 
     /**
@@ -53,7 +68,7 @@ export class BindGroup
     /**
      * @returns {Array<GPUBindGroupLayoutEntry>}
      */
-    getLayout()
+    getLayoutEntries()
     {
         const arr = [];
         for (let i = 0; i < this.#bindings.length; i++)
@@ -84,7 +99,7 @@ export class BindGroup
         /** @type {GPUBindGroupDescriptor} */
         const bg = {
             "label": " " + this.name,
-            "layout": this.getLayout(),
+            "layout": this.getLayoutEntries(),
             "entries": this.getEntries()
         };
 

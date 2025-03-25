@@ -37,7 +37,7 @@ export class CgpGguBuffer extends Events
      * @param {Array} data=null
      * @param {GPUBufferOptions} options={}
      */
-    constructor(cgp, name, data = null, options = null)
+    constructor(cgp, name, data = null, options = {})
     {
         super();
         this.#log = new Logger("cgpGpubuffer");

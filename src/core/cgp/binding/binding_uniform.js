@@ -5,6 +5,7 @@ import { CgpContext } from "../cgp_state.js";
 import { CgpShader } from "../cgp_shader.js";
 import { BindGroup } from "./bindgroup.js";
 
+/** @extends Binding */
 export class BindingUniform extends Binding
 {
 
@@ -14,16 +15,16 @@ export class BindingUniform extends Binding
     /** @type {CgpGguBuffer} */
     cgpBuffer;
 
-    /** @type {CgpContext} */
-    #cgp = null;
-
     /**
+     * Description
      * @param {CgpContext} cgp
+     * @param {string} name
+     * @param {object} options
      */
-    constructor(cgp)
+    constructor(cgp, name, options)
     {
-        super();
-        this.#cgp = cgp;
+        super(cgp, name, options);
+        console.log("bindinguniform", this.name);
     }
 
     /**
@@ -32,12 +33,18 @@ export class BindingUniform extends Binding
     addUniform(u)
     {
         this.#uniforms.push(u);
+
     }
 
-    /** @returns {GPUBufferBinding} */
+    /** @returns {GPUBindingResource} */
     getResource()
     {
-        return null;
+        this.updateBuffer();
+        return {
+            "buffer": this.cgpBuffer.gpuBuffer,
+            "minBindingSize": this.getSizeBytes(),
+            "hasDynamicOffset": 0
+        };
     }
 
     getSizeBytes()
@@ -49,14 +56,37 @@ export class BindingUniform extends Binding
         return size;
     }
 
+    createBuffer()
+    {
+        let buffCfg = {
+            "label": this.name,
+            "size": this.getSizeBytes(),
+            "usage": GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM
+        };
+
+        // if (this.bindingType == "read-write-storage") buffCfg.usage = GPUBufferUsage.MAP_WRITE | GPUBufferUsage.COPY_SRC;
+        // else if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
+        // else if (this.bindingType == "uniform") buffCfg.;
+        // else this._log.warn("unknown binding type", this.bindingType);
+
+        // if (this.cGpuBuffers[inst]) this.cGpuBuffers[inst].dispose();
+
+        // if (this.uniforms.length > 0 && this.uniforms[0].gpuBuffer) this.cGpuBuffers[inst] = this.uniforms[0].gpuBuffer;
+        // else
+        this.cgpBuffer = new CgpGguBuffer(this.cgp, this.name + " buff", null, { "buffCfg": buffCfg });
+
+    }
+
     updateBuffer()
     {
-        let info = { "name": this.#uniforms.length + " uniforms", "stage ": CgpShader.getStageString(this.stage), "inst": inst, "uniforms": [] };
+        let info = { "name": this.#uniforms.length + " uniforms", "stage ": CgpShader.getStageString(this.stage), "uniforms": [] };
 
         const s = this.getSizeBytes() / 4;
 
         if (!this.cgpBuffer)
         {
+
+            this.createBuffer();
             console.log("no cpubuff? ", this.stage, this.name);
             return;
         }
@@ -77,11 +107,11 @@ export class BindingUniform extends Binding
 
             off += this.#uniforms[i].getSizeBytes() / 4;
         }
-        if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("binding update buff", this.getStageString() + " " + this.bindingType, { "info": info });
+        if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("binding update buff", CgpShader.getStageString(this.stage), { "info": info });
 
         this.cgpBuffer.updateGpuBuffer();
 
-        if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
+        if (this.cgp.branchProfiler) this.cgp.branchProfiler.pop();
 
     }
 
@@ -92,8 +122,8 @@ export class BindingUniform extends Binding
     getShaderHeaderCode(shader, bindGroupNum)
     {
         let str = "";
-        let name = this.name;
         let typeStr = "";
+        let name = this.name;
 
         if (!this.isActiveByDefine(shader))
         {
@@ -105,7 +135,7 @@ export class BindingUniform extends Binding
 
         if (this.#uniforms.length > 1)
         {
-            typeStr = "strct_" + this.name;
+            typeStr = "strct_" + name;
             str += "// " + this.#uniforms.length + " uniforms\n";
 
             str += "struct " + typeStr + "\n";
@@ -135,4 +165,13 @@ export class BindingUniform extends Binding
         return str + "\n";
     }
 
+    /** @returns {GPUBindGroupLayoutEntry} */
+    getLayoutEntry()
+    {
+        return {
+            "visibility": this.stage,
+            "binding": this.bindNum,
+            "buffer": {}
+        };
+    }
 }

@@ -1,10 +1,14 @@
 import { Logger } from "cables-shared-client";
+import { mat4 } from "gl-matrix";
 import { CgpUniform } from "./cgp_uniform.js";
 import { preproc } from "../cg/preproc.js";
 import { CgShader } from "../cg/cg_shader.js";
-import { Binding } from "./cgp_binding.js";
 import { CgpContext } from "./cgp_state.js";
 import { BindGroup } from "./binding/bindgroup.js";
+import { BindingUniform } from "./binding/binding_uniform.js";
+import { BindingSampler } from "./binding/binding_sampler.js";
+import { BindingTexture } from "./binding/binding_texture.js";
+import { Binding } from "./binding/binding.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
@@ -16,6 +20,15 @@ export class CgpShader extends CgShader
     #computePipeline;
 
     #lastCompileReason = "first";
+
+    /** @type {CgpUniform} */
+    uniModelMatrix;
+
+    /** @type {CgpUniform} */
+    uniViewMatrix;
+
+    /** @type {CgpUniform} */
+    uniProjMatrix;
 
     /**
      * @param {CgpContext} _cgp
@@ -29,7 +42,6 @@ export class CgpShader extends CgShader
         this._log = new Logger("cgp_shader");
         this._cgp = _cgp;
         this._name = _name;
-        this._uniforms = [];
         this.options = options;
         this.options.compute = this.options.compute || false;
 
@@ -43,8 +55,19 @@ export class CgpShader extends CgShader
         this._bindingIndexCount = 0;
         this._compileCount = 0;
 
+        this.defaultBindGroup = new BindGroup(_cgp, this._name);
+
         /** @type {Array<BindGroup>} */
-        this.bindGroups = [];
+        this.bindGroups = [this.defaultBindGroup];
+
+        this.defaultUniBindingVert = new BindingUniform(_cgp, "uniVert", {});
+        this.defaultBindGroup.addBinding(this.defaultUniBindingVert);
+
+        this.defaultUniBindingFrag = new BindingUniform(_cgp, "uniFrag", {});
+        this.defaultBindGroup.addBinding(this.defaultUniBindingFrag);
+
+        this.defaultUniBindingCompute = new BindingUniform(_cgp, "uniCompute", {});
+        this.defaultBindGroup.addBinding(this.defaultUniBindingCompute);
 
         // /** @type {Array<Binding>} */
         // this.bindingsFrag = [];
@@ -59,28 +82,26 @@ export class CgpShader extends CgShader
         // this.defaultBindingCompute = null;
 
         // /** @type {Binding} */
-        // this.defaultBindingVert = null;
+        // this.defaultUniBindingVert = null;
 
         // /** @type {Binding} */
-        // this.defaultBindingFrag = null;
+
+        // if (!this.options.compute)
+        // {
+        //     this.defaultUniBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
+        // }
+        // else
+        // {
+        //     this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "shader": this, "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
+        // }
 
         if (!this.options.compute)
         {
-            this.defaultBindingVert = new Binding(_cgp, "vsUniforms", { "shader": this, "stage": GPUShaderStage.VERTEX, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
-            this.defaultBindingFrag = new Binding(_cgp, "fsUniforms", { "shader": this, "stage": GPUShaderStage.FRAGMENT, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
-        }
-        else
-        {
-            this.defaultBindingCompute = new Binding(_cgp, "computeUniforms", { "shader": this, "stage": GPUShaderStage.COMPUTE, "bindingType": "uniform", "index": this.getNewBindingGroupIndex() });
-        }
-
-        if (!this.options.compute)
-        {
-            this.uniModelMatrix = this.addUniformVert("m4", "modelMatrix");
-            this.uniViewMatrix = this.addUniformVert("m4", "viewMatrix");
-            this.uniProjMatrix = this.addUniformVert("m4", "projMatrix");
-            this.uniNormalMatrix = this.addUniformVert("m4", "normalMatrix");
-            this.uniModelViewMatrix = this.addUniformVert("m4", "modelViewMatrix");
+            this.uniModelMatrix = this.addUniform(new CgpUniform(this, "m4", "modelMatrix"), GPUShaderStage.VERTEX);
+            this.uniViewMatrix = this.addUniform(new CgpUniform(this, "m4", "viewMatrix"), GPUShaderStage.VERTEX);
+            this.uniProjMatrix = this.addUniform(new CgpUniform(this, "m4", "projMatrix"), GPUShaderStage.VERTEX);
+            this.uniNormalMatrix = this.addUniform(new CgpUniform(this, "m4", "normalMatrix"), GPUShaderStage.VERTEX);
+            this.uniModelViewMatrix = this.addUniform(new CgpUniform(this, "m4", "modelViewMatrix"), GPUShaderStage.VERTEX);
             this._tempNormalMatrix = mat4.create();
             this._tempModelViewMatrix = mat4.create();
         }
@@ -107,11 +128,6 @@ export class CgpShader extends CgShader
         return this._isValid;
     }
 
-    get uniforms()
-    {
-        return this._uniforms;
-    }
-
     /**
      * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEncoder
      * @param {BindGroup} bg
@@ -126,7 +142,6 @@ export class CgpShader extends CgShader
         }
 
         passEncoder.setBindGroup(idx, bg.gpuBindGroup);
-
     }
 
     getName()
@@ -230,26 +245,26 @@ export class CgpShader extends CgShader
 
         if (this.options.compute)
         {
-            let bindingsHeadCompute = "";
-            for (let i = 0; i < this.bindingsCompute.length; i++)
-            {
-                if (!this.bindingsCompute[i]) continue;
-                bindingsHeadCompute += "// bindingsCompute " + i + "\n";
-                bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode();
-            }
+            // let bindingsHeadCompute = "";
+            // for (let i = 0; i < this.bindingsCompute.length; i++)
+            // {
+            //     if (!this.bindingsCompute[i]) continue;
+            //     bindingsHeadCompute += "// bindingsCompute " + i + "\n";
+            //     bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode();
+            // }
 
-            src = bindingsHeadCompute + "\n\n//////////////// \n\n" + src;
+            // src = bindingsHeadCompute + "\n\n//////////////// \n\n" + src;
         }
         else
         {
 
             let bindingsHeadVert = "";
-            for (let i = 0; i < this.bindingsFrag.length; i++)
-                bindingsHeadVert += this.bindingsFrag[i].getShaderHeaderCode();
+            // for (let i = 0; i < this.defaultUniBindingVert.length; i++)
+            bindingsHeadVert += this.defaultUniBindingVert.getShaderHeaderCode(this, 0);
 
             let bindingsHeadFrag = "";
-            for (let i = 0; i < this.bindingsVert.length; i++)
-                bindingsHeadFrag += this.bindingsVert[i].getShaderHeaderCode();
+            // for (let i = 0; i < this.defaultUniBindingFrag.; i++)
+            bindingsHeadFrag += this.defaultUniBindingFrag.getShaderHeaderCode(this, 0);
 
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
@@ -336,110 +351,27 @@ export class CgpShader extends CgShader
     }
 
     /**
-     * add a uniform to the fragment shader
-     * @param {String} type ['f','t', etc]
-     * @param {String} name
-     * @param {any} valueOrPort value or port
-     * @param p2
-     * @param p3
-     * @param p4
-     * @memberof Shader
-     * @instance
-     * @function addUniformFrag
+     * @param {CgpUniform} u
+     * @param {number} stage
      * @returns {CgpUniform}
      */
-    addUniformFrag(type, name, valueOrPort, p2, p3, p4)
+    addUniform(u, stage)
     {
-        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
-        uni.shaderType = "frag";
+        let binding = this.defaultUniBindingFrag;
+        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
+        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
 
-        this.defaultBindingFrag.addUniform(uni);
-        this.needsPipelineUpdate = "add frag uniform";
-
-        return uni;
-    }
-
-    /**
-     * add a uniform to the vertex shader
-     * @param {String} type ['f','t', etc]
-     * @param {String} name
-     * @param {any} valueOrPort value or port
-     * @param p2
-     * @param p3
-     * @param p4
-     * @memberof Shader
-     * @instance
-     * @function addUniformVert
-     * @returns {CgpUniform}
-     */
-    addUniformVert(type, name, valueOrPort, p2, p3, p4)
-    {
-        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
-        uni.shaderType = "vert";
-
-        this.defaultBindingVert.addUniform(uni);
-        this.needsPipelineUpdate = "add vert uniform";
-
-        return uni;
-    }
-
-    /**
-     * @typedef UniformDescriptor
-     * @property {String} name
-     * @property {Number} shaderType GPUShaderStage.FRAGMENT
-     * @property {String} type 4f,f, etc
-     * @property {Array} values ports or numbers
-    */
-
-    /**
-     * @param {UniformDescriptor} o
-     */
-    addUniformObject(o)
-    {
-        if (!o.type) this._log.warn("no uni type: ", o.type);
-        if (!o.name) this._log.warn("no uni name: ", o.name);
-
-        const uni = new CgpUniform(this, o.type, o.name, o.values[0]);
-
-        if (o.shaderType == GPUShaderStage.COMPUTE)
+        if (u.type == "t") this.defaultBindGroup.addBinding(new BindingTexture(this._cgp, u.name, { "uniform": u }));
+        else if (u.type == "sampler") this.defaultBindGroup.addBinding(new BindingSampler(this._cgp, u.name, { "uniform": u }));
+        else
         {
-            this.defaultBindingCompute.addUniform(uni);
-            uni.shaderType = "compute";
+            binding.addUniform(u);
         }
-        else if (o.shaderType == GPUShaderStage.VERTEX)
-        {
-            this.defaultBindingVert.addUniform(uni);
-            uni.shaderType = "vert";
-        }
-        else if (o.shaderType == GPUShaderStage.FRAGMENT)
-        {
-            this.defaultBindingFrag.addUniform(uni);
-            uni.shaderType = "frag";
-        }
-        else this._log.warn("unknown shaderType: ", o.shaderType);
 
-        this.needsPipelineUpdate = "add " + o.shaderType + " uniform";
-        return uni;
-    }
+        this.needsPipelineUpdate = "add uniform";
 
-    /**
-     * @param {CgpUniform} uni
-     */
-    _addUniform(uni)
-    {
-        this._uniforms.push(uni);
-        this.setWhyCompile("add uniform " + name);
-    }
-
-    /**
-     * @param {String} name
-     */
-    getUniform(name)
-    {
-        for (let i = 0; i < this._uniforms.length; i++)
-        {
-            if (this._uniforms[i].getName() == name) return this._uniforms[i];
-        }
+        // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
+        return u;
     }
 
     /**
@@ -457,62 +389,32 @@ export class CgpShader extends CgShader
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
-        shader._modGroupCount = this._modGroupCount;
-        shader._moduleNames = this._moduleNames;
+        // shader._modGroupCount = this._modGroupCount;
+        // shader._moduleNames = this._moduleNames;
 
-        // shader.glPrimitive = this.glPrimitive;
-        // shader.offScreenPass = this.offScreenPass;
-        // shader._extensions = this._extensions;
-        // shader.wireframe = this.wireframe;
-        // shader._attributes = this._attributes;
+        // // shader.glPrimitive = this.glPrimitive;
+        // // shader.offScreenPass = this.offScreenPass;
+        // // shader._extensions = this._extensions;
+        // // shader.wireframe = this.wireframe;
+        // // shader._attributes = this._attributes;
 
-        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
+        // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
-        shader.bindingsFrag = [];
-        for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
-        shader.defaultBindingFrag = this.bindingsFrag[0];
+        // // shader.bindingsFrag = [];
+        // // for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
 
-        shader.bindingsVert = [];
-        for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
-        shader.defaultBindingVert = this.bindingsVert[0];
+        // // shader.bindingsVert = [];
+        // // for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
+        // // shader.defaultUniBindingVert = this.bindingsVert[0];
 
-        shader.bindingsCompute = [];
-        for (let i = 0; i < this.bindingsCompute.length; i++) this.bindingsCompute[i].copy(shader);
-        shader.defaultBindingComp = this.bindingsCompute[0];
+        // // shader.bindingsCompute = [];
+        // // for (let i = 0; i < this.bindingsCompute.length; i++) this.bindingsCompute[i].copy(shader);
+        // // shader.defaultBindingComp = this.bindingsCompute[0];
 
-        console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
+        // console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         this.setWhyCompile("copy");
         return shader;
-    }
-
-    /**
-     * copy all uniform values from another shader
-     * @function copyUniforms
-     * @memberof Shader
-     * @instance
-     * @param origShader uniform values will be copied from this shader
-     */
-    copyUniformValues(origShader)
-    {
-        for (let i = 0; i < origShader._uniforms.length; i++)
-        {
-            if (!this._uniforms[i])
-            {
-                this._log.log("unknown uniform?!");
-                continue;
-            }
-            this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
-        }
-
-        // this.popTextures();
-        // for (let i = 0; i < origShader._textureStackUni.length; i++)
-        // {
-        //     this._textureStackUni[i] = origShader._textureStackUni[i];
-        //     this._textureStackTex[i] = origShader._textureStackTex[i];
-        //     this._textureStackType[i] = origShader._textureStackType[i];
-        //     this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
-        // }
     }
 
     dispose()

@@ -1,6 +1,10 @@
-class BindingSampler
+import { Binding } from "./binding.js";
+
+export class BindingSampler extends Binding
 {
-     smplDesc = {
+
+    /** @type {GPUSamplerDescriptor} */
+    smplDesc = {
         "addressModeU": "mirror-repeat",
         "addressModeV": "mirror-repeat",
         "magFilter": "linear",
@@ -8,19 +12,28 @@ class BindingSampler
         "mipmapFilter": "linear",
     };
 
+    /** @type {GPUSampler} */
+    sampler = null;
+
+    constructor(cgp, name, options)
+    {
+        super(cgp, name, options);
+        this.sampler = this.cgp.device.createSampler(this.smplDesc);
+
+    }
+
     getResource()
     {
-        if (this.uniforms[0].getValue())
-        {
-            if (!this.uniforms[0].getValue().getSampler)
-            {
-                this._log.error("uniform texture does not have function getSampler... not a WebGpu Texture?");
-            }
-            else
-            {
-                smplDesc = this.uniforms[0].getValue().getSampler();
-                const sampler = this.#cgp.device.createSampler(smplDesc);
-                if (sampler)o.resource = sampler;
-            }
-        }}
+        return this.sampler;
+    }
+
+    /** @returns {GPUBindGroupLayoutEntry} */
+    getLayoutEntry()
+    {
+        return {
+            "visibility": this.stage,
+            "binding": this.bindNum,
+            "sampler": {}
+        };
+    }
 }
