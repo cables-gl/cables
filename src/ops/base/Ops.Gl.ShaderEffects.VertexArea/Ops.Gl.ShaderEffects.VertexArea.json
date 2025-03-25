@@ -101,7 +101,7 @@
     "authorName": "pandur",
     "id": "1ddaf940-e911-4ab0-9901-7b828bf7aa79",
     "created": 1741614407677,
-    "summary": "deform a spherical area of a mesh",
+    "summary": "transform an area of a mesh",
     "docs": {
         "ports": []
     },
