@@ -32,15 +32,18 @@ export class Binding
         return null;
     }
 
+    /**
+     * @returns {GPUBindGroupLayoutEntry}
+     */
+    getLayoutEntry() { return null; }
+
     /** @returns {GPUBindGroupEntry} */
-    getBindgroupEntry(options)
+    getBindgroupEntry()
     {
         let label = "layout " + this.name + " [" + this.constructor.name;
-        // for (let i = 0; i < this.uniforms.length; i++) label += this.uniforms[i].getName() + ",";
         label += "]";
 
         return {
-            // "label": label,
             "binding": this.bindNum,
             "resource": this.getResource()
         };

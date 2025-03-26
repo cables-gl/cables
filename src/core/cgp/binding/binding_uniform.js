@@ -24,7 +24,6 @@ export class BindingUniform extends Binding
     constructor(cgp, name, options)
     {
         super(cgp, name, options);
-        console.log("bindinguniform", this.name);
     }
 
     /**
@@ -33,7 +32,6 @@ export class BindingUniform extends Binding
     addUniform(u)
     {
         this.#uniforms.push(u);
-
     }
 
     /** @returns {GPUBindingResource} */
@@ -42,8 +40,8 @@ export class BindingUniform extends Binding
         this.updateBuffer();
         return {
             "buffer": this.cgpBuffer.gpuBuffer,
-            "minBindingSize": this.getSizeBytes(),
-            "hasDynamicOffset": 0
+            // "minBindingSize": this.getSizeBytes(),
+            // "hasDynamicOffset": 0
         };
     }
 

@@ -70,9 +70,6 @@ export class BindGroup
     //     shader.setBindgroup(this);
     // }
 
-    /**
-     * @returns {Array<GPUBindGroupLayoutEntry>}
-     */
     getLayoutEntries()
     {
         const arr = [];
