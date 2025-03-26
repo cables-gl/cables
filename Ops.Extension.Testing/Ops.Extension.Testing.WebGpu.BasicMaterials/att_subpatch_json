@@ -1,0 +1,361 @@
+{
+  "ops": [
+    {
+      "opId": "ef522d4a-9712-4063-8a99-c6b409f26456",
+      "id": "rwybq6ghf",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 623.4554187018413
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "width",
+          "value": 0.9
+        },
+        {
+          "name": "height",
+          "value": 1
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "i66oqcx99",
+              "objOut": "rwybq6ghf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "4g4f7hs4j",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 256.71664931955036
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_ul6di6734",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_ul6di6734",
+              "objIn": "8tnm38zyn",
+              "objOut": "4g4f7hs4j"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+      "id": "8tnm38zyn",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 546.4131043179965
+        },
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 1
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "rwybq6ghf",
+              "objOut": "8tnm38zyn"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "8tnm38zyn"
+      }
+    },
+    {
+      "opId": "ef522d4a-9712-4063-8a99-c6b409f26456",
+      "id": "nznbbt6q1",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 808.1175979161366
+        },
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "width",
+          "value": 0.26
+        },
+        {
+          "name": "height",
+          "value": 0.29
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "u4ugfqohp",
+              "objOut": "nznbbt6q1"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "nznbbt6q1"
+      }
+    },
+    {
+      "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+      "id": "k10y27yf8",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 732.5285565464903
+        },
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 0.5188020833333333
+        },
+        {
+          "name": "g",
+          "value": 0.5188020833333333
+        },
+        {
+          "name": "b",
+          "value": 0.5188020833333333
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "nznbbt6q1",
+              "objOut": "k10y27yf8"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "k10y27yf8"
+      }
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "i66oqcx99",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 680
+        }
+      },
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": 0
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "k10y27yf8",
+              "objOut": "i66oqcx99"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "i66oqcx99"
+      }
+    },
+    {
+      "opId": "ae07830b-91c3-4cbe-a7d6-d3b737392c16",
+      "id": "u4ugfqohp",
+      "uiAttribs": {
+        "subPatch": "p846e4gfy",
+        "translate": {
+          "x": -528.5796696470138,
+          "y": 935.1778277353463
+        }
+      },
+      "portsIn": [
+        {
+          "name": "radius",
+          "value": 0.94
+        },
+        {
+          "name": "innerRadius",
+          "value": 0.84
+        },
+        {
+          "name": "segments",
+          "value": 40
+        },
+        {
+          "name": "percent",
+          "value": 1
+        },
+        {
+          "name": "steps",
+          "value": 0
+        },
+        {
+          "name": "invertSteps",
+          "value": 0
+        },
+        {
+          "name": "mapping index",
+          "value": 0
+        },
+        {
+          "name": "mapping",
+          "value": "flat"
+        },
+        {
+          "name": "Spline",
+          "value": 0
+        },
+        {
+          "name": "Draw",
+          "value": 1,
+          "title": "Render mesh"
+        }
+      ],
+      "storage": {
+        "ref": "u4ugfqohp"
+      }
+    }
+  ]
+}
