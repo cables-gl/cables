@@ -1,5 +1,6 @@
 import { Binding } from "./binding.js";
 
+/** @extends Binding */
 export class BindingSampler extends Binding
 {
 

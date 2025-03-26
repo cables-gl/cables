@@ -5,8 +5,8 @@ import { Binding } from "./binding.js";
 export class BindGroup
 {
 
-    /** @type {GPUBindGroup} */
-    #gpuBindGroup = null;
+    /** @type {Array<GPUBindGroup>} */
+    #gpuBindGroups = [];
 
     /** @type {Array<Binding>} */
     #bindings = [];
@@ -31,15 +31,15 @@ export class BindGroup
     /**
      * @returns {GPUBindGroup}
      */
-    get gpuBindgroup()
-    {
-        if (!this.#gpuBindGroup)
-        {
-            this.create();
-        }
-        // console.log(this.#gpuBindGroup);
-        return this.#gpuBindGroup;
-    }
+    // get gpuBindgroup()
+    // {
+    //     if (!this.#gpuBindGroup)
+    //     {
+    //         this.create();
+    //     }
+    //     // console.log(this.#gpuBindGroup);
+    //     return this.#gpuBindGroup;
+    // }
 
     /**
      * @param {Binding} b
@@ -108,7 +108,7 @@ export class BindGroup
         return bindGroupLayout;
     }
 
-    create()
+    create(inst)
     {
 
         /** @type {GPUBindGroupDescriptor} */
@@ -128,7 +128,7 @@ export class BindGroup
 
         try
         {
-            this.#gpuBindGroup = this.#cgp.device.createBindGroup(bg);
+            this.#gpuBindGroups[inst] = this.#cgp.device.createBindGroup(bg);
 
         }
         catch (e)
@@ -151,8 +151,9 @@ export class BindGroup
      */
     bind()
     {
+        let inst = 0;
 
-        if (!this.#gpuBindGroup) this.create();
-        this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroup);
+        if (!this.#gpuBindGroups[inst]) this.create(inst);
+        this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);
     }
 }
