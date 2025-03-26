@@ -9,6 +9,7 @@ export class Binding
     stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
     define = "";
     log = new Logger("binding");
+    needsRebuildBindgroup = false;
 
     /** @type {CgpContext} */
     cgp = null;

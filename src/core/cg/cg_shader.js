@@ -19,8 +19,6 @@ class CgShader extends Events
     id = simpleId();
     _isValid = true;
 
-    // this._defines.push([name, value]);
-
     /** @type {Array<Array<String>>} */
     _defines = [];
 

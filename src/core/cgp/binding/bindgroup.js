@@ -143,6 +143,7 @@ export class BindGroup
             console.error(e);
         }
 
+        this.updateValues(inst);
     }
 
     /**
@@ -158,6 +159,13 @@ export class BindGroup
 
     bind(inst = 0)
     {
+        for (let i = 0; i < this.#bindings.length; i++)
+            if (this.#bindings[i].needsRebuildBindgroup)
+            {
+                this.#bindings[i].needsRebuildBindgroup = false;
+                this.#gpuBindGroups = [];
+                // todo: dispose
+            }
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
         this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);

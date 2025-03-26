@@ -273,4 +273,9 @@ export class CgUniform
     {
         this.setValue(this._port.get());
     }
+
+    get port()
+    {
+        return this._port;
+    }
 }
