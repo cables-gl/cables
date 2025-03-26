@@ -38,14 +38,14 @@ export class Binding
     getLayoutEntry() { return null; }
 
     /** @returns {GPUBindGroupEntry} */
-    getBindgroupEntry()
+    getBindgroupEntry(inst)
     {
         let label = "layout " + this.name + " [" + this.constructor.name;
         label += "]";
 
         return {
             "binding": this.bindNum,
-            "resource": this.getResource()
+            "resource": this.getResource(inst)
         };
     }
 
@@ -57,7 +57,8 @@ export class Binding
         return true;
     }
 
-    updateValues()
+    /** @param {number} name */
+    updateValues(_inst)
     {
 
     }

@@ -84,12 +84,12 @@ export class BindGroup
     /**
      * @returns {Array<GPUBindGroupEntry>}
      */
-    getEntries()
+    getEntries(inst)
     {
         const arr = [];
         for (let i = 0; i < this.#bindings.length; i++)
         {
-            arr.push(this.#bindings[i].getBindgroupEntry());
+            arr.push(this.#bindings[i].getBindgroupEntry(inst));
         }
 
         return arr;
@@ -113,10 +113,12 @@ export class BindGroup
 
         /** @type {GPUBindGroupDescriptor} */
         const bg = {
-            "label": " " + this.name,
+            "label": " " + this.name + " i" + inst,
             "layout": this.getLayout(),
-            "entries": this.getEntries()
+            "entries": this.getEntries(inst)
         };
+
+        console.log(bg);
 
         // if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
         // {
@@ -139,19 +141,16 @@ export class BindGroup
 
     }
 
-    updateValues()
+    updateValues(inst)
     {
         for (let i = 0; i < this.#bindings.length; i++)
         {
-            this.#bindings[i].updateValues();
+            this.#bindings[i].updateValues(inst);
         }
     }
 
-    /**
-     */
-    bind()
+    bind(inst = 0)
     {
-        let inst = 0;
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
         this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);

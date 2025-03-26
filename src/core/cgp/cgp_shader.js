@@ -328,9 +328,9 @@ export class CgpShader extends CgShader
 
         for (let i = 0; i < this.bindGroups.length; i++)
         {
-            this.bindGroups[i].updateValues();
+            this.bindGroups[i].updateValues(this.frameUsageCounter);
 
-            this.bindGroups[i].bind();
+            this.bindGroups[i].bind(this.frameUsageCounter);
 
         }
         if (this._needsRecompile) this.compile();
