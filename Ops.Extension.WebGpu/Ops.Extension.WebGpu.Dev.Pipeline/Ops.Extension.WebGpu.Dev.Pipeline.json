@@ -29,7 +29,11 @@
             },
             {
                 "type": 5,
-                "name": "Shader Suurce"
+                "name": "Shader Source"
+            },
+            {
+                "type": 3,
+                "name": "defines"
             }
         ]
     },

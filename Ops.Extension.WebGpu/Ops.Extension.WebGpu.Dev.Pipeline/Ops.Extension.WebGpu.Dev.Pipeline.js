@@ -2,7 +2,8 @@ const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next"),
     outPipe = op.outObject("Pipeline"),
-    outShaderSrc = op.outString("Shader Suurce", "", "glsl");
+    outShaderSrc = op.outString("Shader Source", "", "glsl"),
+    outDefines = op.outArray("defines");
 
 exec.onTriggered = () =>
 {
@@ -10,7 +11,11 @@ exec.onTriggered = () =>
 
     const shader = op.patch.cg.getShader();
 
-    if (shader) outShaderSrc.set(shader.getProcessedSource());
+    if (shader)
+    {
+        outShaderSrc.set(shader.getProcessedSource());
+        outDefines.set(shader.getDefines());
+    }
 
     next.trigger();
 };

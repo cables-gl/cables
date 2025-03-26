@@ -55,11 +55,12 @@ inTrigger.onTriggered = () =>
         outNum.set(mesh.instances);
 
         // console.log("sss",inPosBuff.get().gpuBuffer)
-        // if (u.gpuBuffer != inPosBuff.get())
+        if (u.gpuBuffer != inPosBuff.get())
         {
             oldPosBuff = u.gpuBuffer;
-            u.gpuBuffer = inPosBuff.get();
-            u.setGpuBuffer(inPosBuff.get().gpuBuffer);
+            // u.gpuBuffer = inPosBuff.get();
+            u.setGpuBuffer(inPosBuff.get());
+            shader.needsPipelineUpdate = "change gpubuffer uniform";
         }
     }
     else

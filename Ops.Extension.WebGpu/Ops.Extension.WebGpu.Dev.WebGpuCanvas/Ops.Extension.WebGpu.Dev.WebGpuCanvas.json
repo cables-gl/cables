@@ -29,6 +29,11 @@
             },
             {
                 "type": 0,
+                "name": "Stop on Errors",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Profile",
                 "subType": "boolean"
             }

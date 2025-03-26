@@ -1,6 +1,4 @@
 
-
-
 struct MyVSInput
 {
     @location(0) position: vec3f,
@@ -25,7 +23,7 @@ fn myVSMain(
     var vsOut: MyVSOutput;
     var pos=vec4f(v.position, 1.0);
 
-    var modelMatrix=vsUniforms.modelMatrix;
+    var modelMatrix=uniVert.modelMatrix;
 
     #ifdef INSTANCING
         modelMatrix[3][0]+=arr[instIdx].x;
@@ -33,7 +31,7 @@ fn myVSMain(
         modelMatrix[3][2]+=arr[instIdx].z;
     #endif
 
-    var modelViewMatrix=vsUniforms.viewMatrix * modelMatrix;
+    var modelViewMatrix=uniVert.viewMatrix * modelMatrix;
 
 
     #ifdef BILLBOARDING
@@ -41,7 +39,7 @@ fn myVSMain(
         modelViewMatrix[0][0] = 1.0;
         modelViewMatrix[0][1] = 0.0;
         modelViewMatrix[0][2] = 0.0;
-
+// modelMatrix[3][0]+=1;
         // #ifndef BILLBOARDING_CYLINDRIC
             modelViewMatrix[1][0] = 0.0;
             modelViewMatrix[1][1] = 1.0;
@@ -55,7 +53,7 @@ fn myVSMain(
 
     #endif
 
-    vsOut.position = vsUniforms.projMatrix * modelViewMatrix * pos;
+    vsOut.position = uniVert.projMatrix * modelViewMatrix * pos;
     vsOut.normal = v.normal;
     vsOut.texCoord = v.texCoord;
     vsOut.instIdx=instIdx;
@@ -70,18 +68,18 @@ fn myFSMain
     ) -> @location(0) vec4f
 {
 
-    var col:vec4f=fsUniforms.color;
+    var col:vec4f=uniFrag.color;
 
     var tc=v.texCoord;
-    tc*=fsUniforms.texTransform.xy;
-    tc+=fsUniforms.texTransform.zw;
+    tc*=uniFrag.texTransform.xy;
+    tc+=uniFrag.texTransform.zw;
 
     #ifdef HAS_TEXTURE
         // tc=fract(tc); // fake repeat
         col = textureSample(ourTexture,ourSampler, tc);
 
         #ifdef COLORIZE_TEXTURE
-            col*=fsUniforms.color;
+            col*=uniFrag.color;
         #endif
 
     #endif
@@ -104,16 +102,9 @@ fn myFSMain
 
     {{MODULE_COLOR}}
 
-    col.a=1.0;
+    // col.a=1.0;
 
-    return col;//+fsUniforms.color+vec4f(v.texCoord,1.0,1.0);
-    // return vec4f(v.texCoord,0.0,1.0);
-    // return vec4f(v.normal,1.0);
+    return col;//+uniFrag.color+vec4f(v.texCoord,1.0,1.0);
 
-    // if(!is_front)
-    // {
-    //     return fsUniforms.backColor+texCol;
-    // }
-    // return fsUniforms.color+texCol;
 }
 

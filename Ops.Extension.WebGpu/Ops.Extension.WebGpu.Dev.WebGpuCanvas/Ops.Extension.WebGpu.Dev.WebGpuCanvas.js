@@ -2,6 +2,7 @@ const
     inEnabled = op.inBool("Active", true),
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     inCatchErrs = op.inBool("Catch Errors", true),
+    inStopErrs = op.inBool("Stop on Errors", true),
     inDoProfile = op.inBool("Profile", true),
     next = op.outTrigger("Next"),
     next2 = op.outTrigger("Next2"),
@@ -192,8 +193,13 @@ if (navigator.gpu)
                     if (hadError) return;
                     hadError = true;
                     op.logError("A WebGPU error was not captured:", event.error);
-                    // op.patch.aborted = true;
-                    // op.patch.pause();
+
+                    if (inStopErrs.get())
+                    {
+                        console.log("stopping patch on error.....");
+                        op.patch.aborted = true;
+                        op.patch.pause();
+                    }
                 });
 
                 context = canvas.getContext("webgpu");
@@ -290,13 +296,13 @@ function frame()
 
 function render(b)
 {
-    // if(op.patch.aborted||op.patch.paused)
-    // {
-    //     op.setUiError("id", "webgpu error - patch execution halted");
-    //     // return;
-    // }
+    if (op.patch.aborted || op.patch.paused)
+    {
+        op.setUiError("id", "webgpu error - patch execution halted");
+        return;
+    }
 
-    if (inDoProfile.get())
+    if (inDoProfile.get() && CABLES.BranchStack)
     {
         if (!cgp.branchProfiler) cgp.branchProfiler = new CABLES.BranchStack();
 
@@ -317,7 +323,7 @@ function render(b)
                 "view": context.getCurrentTexture().createView(),
                 "loadOp": "clear",
                 "storeOp": "store",
-                "clearValue": { "r": 0.0, "g": 0.5, "b": 1.0, "a": 1.0 }
+                "clearValue": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 }
             },
         ],
         "depthStencilAttachment": {
