@@ -37,8 +37,7 @@ export class BindingTexture extends Binding
 
     getResource()
     {
-        console.log(this.uniform.getValue().gpuTexture);
-        if (this.uniform.getValue().gpuTexture) return this.uniform.getValue().gpuTexture.createView();
+        if (this.uniform.getValue() && this.uniform.getValue().gpuTexture) return this.uniform.getValue().gpuTexture.createView();
         else return this.cgp.getDefaultTexture().createView();
     }
 
