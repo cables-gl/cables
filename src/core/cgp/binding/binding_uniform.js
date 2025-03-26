@@ -34,7 +34,10 @@ export class BindingUniform extends Binding
         this.#uniforms.push(u);
     }
 
-    /** @returns {GPUBindingResource} */
+    /**
+     * @returns {GPUBindingResource}
+     * @param {number} inst
+     */
     getResource(inst)
     {
         this.updateBuffer(inst);
@@ -101,7 +104,6 @@ export class BindingUniform extends Binding
         this.cgpBuffer[inst].updateGpuBuffer();
 
         if (this.cgp.branchProfiler) this.cgp.branchProfiler.pop();
-
     }
 
     /**

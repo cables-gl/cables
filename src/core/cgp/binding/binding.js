@@ -27,8 +27,12 @@ export class Binding
         this.options = options || {};
     }
 
-    getResource()
+    /**
+     * @param {number} _inst
+     */
+    getResource(_inst)
     {
+        // overwrite
         return null;
     }
 
@@ -37,7 +41,10 @@ export class Binding
      */
     getLayoutEntry() { return null; }
 
-    /** @returns {GPUBindGroupEntry} */
+    /**
+     * @returns {GPUBindGroupEntry}
+     * @param {number} inst
+     */
     getBindgroupEntry(inst)
     {
         let label = "layout " + this.name + " [" + this.constructor.name;
@@ -53,14 +60,22 @@ export class Binding
     isActiveByDefine(shader)
     {
         if (!this.define) return true;
-        if (this.define && !shader.hasDefine(this.define)) return false;
+        // if (this.define && !shader.hasDefine(this.define)) return false;
         return true;
     }
 
-    /** @param {number} name */
+    /** @param {number} _inst */
     updateValues(_inst)
     {
-
+        // overwrite
     }
 
+    /**
+     * @param {CgpShader} shader
+     * @param {number} bindGroupNum
+     */
+    getShaderHeaderCode(shader, bindGroupNum)
+    {
+        return "//getShaderHeaderCode function not emplemented ".endl();
+    }
 }

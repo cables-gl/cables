@@ -83,6 +83,7 @@ export class BindGroup
 
     /**
      * @returns {Array<GPUBindGroupEntry>}
+     * @param {number} inst
      */
     getEntries(inst)
     {
@@ -108,6 +109,9 @@ export class BindGroup
         return bindGroupLayout;
     }
 
+    /**
+     * @param {number} inst
+     */
     create(inst)
     {
 
@@ -141,6 +145,9 @@ export class BindGroup
 
     }
 
+    /**
+     * @param {number} inst
+     */
     updateValues(inst)
     {
         for (let i = 0; i < this.#bindings.length; i++)
@@ -154,5 +161,25 @@ export class BindGroup
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
         this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);
+    }
+
+    /**
+     * @param {CgpShader} shader
+     */
+    getShaderHeaderCode(shader)
+    {
+        const srcs = { "vertex": "",
+            "fragment": "" };
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            const bind = this.#bindings[i];
+            const src = bind.getShaderHeaderCode(shader, 0);
+            if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
+            if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fraagment += src;
+            if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
+            // tmp stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
+        }
+
+        return srcs;
     }
 }

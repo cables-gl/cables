@@ -236,14 +236,17 @@ export class CgpShader extends CgShader
         }
         else
         {
-
             let bindingsHeadVert = "";
-            // for (let i = 0; i < this.defaultUniBindingVert.length; i++)
-            bindingsHeadVert += this.defaultUniBindingVert.getShaderHeaderCode(this, 0);
-
             let bindingsHeadFrag = "";
-            // for (let i = 0; i < this.defaultUniBindingFrag.; i++)
-            bindingsHeadFrag += this.defaultUniBindingFrag.getShaderHeaderCode(this, 0);
+            let bindingsHeadCompute = "";
+
+            for (let i = 0; i < this.bindGroups.length; i++)
+            {
+                const src = this.bindGroups[i].getShaderHeaderCode(this);
+                bindingsHeadFrag += src.fragment || "";
+                bindingsHeadVert += src.vertex || "";
+                bindingsHeadCompute += src.compute || "";
+            }
 
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 

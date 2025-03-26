@@ -1,3 +1,4 @@
+import { CgpShader } from "../cgp_shader.js";
 import { Binding } from "./binding.js";
 
 /** @extends Binding */
@@ -36,5 +37,16 @@ export class BindingSampler extends Binding
             "binding": this.bindNum,
             "sampler": {}
         };
+    }
+
+    /**
+     * @param {CgpShader} shader
+     * @param {number} bindGroupNum
+     */
+    getShaderHeaderCode(shader, bindGroupNum)
+    {
+        let str = "@group(" + bindGroupNum + ") @binding(" + this.bindNum + ") ";
+        str += "var " + this.name + ": sampler;".endl();
+        return str;
     }
 }
