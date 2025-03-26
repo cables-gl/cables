@@ -42,6 +42,7 @@ exe.onTriggered = doRender;
 function doRender()
 {
     let shader = cgl.getShader();
+    op.checkGraphicsApi();
 
     if (CABLES.UI && shader)
     {

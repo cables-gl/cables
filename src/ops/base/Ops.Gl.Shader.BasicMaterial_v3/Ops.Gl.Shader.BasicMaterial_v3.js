@@ -90,12 +90,12 @@ op.preRender = function ()
 {
     shader.bind();
     doRender();
+    if (!shader) return;
 };
 
 function doRender()
 {
-    if (!shader) return;
-
+    op.checkGraphicsApi();
     cgl.pushShader(shader);
     shader.popTextures();
 

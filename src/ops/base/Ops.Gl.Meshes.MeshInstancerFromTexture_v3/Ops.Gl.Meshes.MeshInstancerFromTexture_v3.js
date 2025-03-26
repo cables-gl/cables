@@ -145,6 +145,7 @@ function doRender()
     if (!inTex1.get()) return;
     if (!mesh && geom.get())
         mesh = new CGL.Mesh(cgl, geom.get());
+    op.checkGraphicsApi();
 
     if (!mesh) return;
 
