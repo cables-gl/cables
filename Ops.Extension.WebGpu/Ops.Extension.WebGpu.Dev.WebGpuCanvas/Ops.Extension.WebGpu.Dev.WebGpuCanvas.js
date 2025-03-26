@@ -323,7 +323,7 @@ function render(b)
                 "view": context.getCurrentTexture().createView(),
                 "loadOp": "clear",
                 "storeOp": "store",
-                "clearValue": { "r": 0.0, "g": 0.0, "b": 0.0, "a": 1.0 }
+                "clearValue": { "r": 0.1, "g": 0.1, "b": 0.1, "a": 1.0 }
             },
         ],
         "depthStencilAttachment": {

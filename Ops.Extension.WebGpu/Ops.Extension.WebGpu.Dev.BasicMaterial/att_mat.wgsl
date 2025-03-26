@@ -91,6 +91,7 @@ fn myFSMain
         {
             discard;
         }
+        col.a=mask.r;
 
     #endif
 

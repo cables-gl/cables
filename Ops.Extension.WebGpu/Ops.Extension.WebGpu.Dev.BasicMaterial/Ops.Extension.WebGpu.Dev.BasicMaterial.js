@@ -48,11 +48,9 @@ inTrigger.onTriggered = () =>
         // const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE" });
         // const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTex);
         // binTex.addUniform(uniTex);
-        // shader.addUniform(new CGP.Uniform("t", "ourTexture", inTex),GPUShaderStage.FRAGMENT);
-
-        // shader.addUniform(new CGP.Uniform("t", "ourTextureMask", inTex),GPUShaderStage.FRAGMENT);
-
-        // shader.addUniform(new CGP.Uniform("sampler", "ourSampler", inTex),GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "t", "ourTexture", inTex), GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "t", "ourTextureMask", inTexMask), GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTex), GPUShaderStage.FRAGMENT);
 
         // const binSampler = new CGP.Binding(cgp, "sampler", { "stage": GPUShaderStage.FRAGMENT, "shader": shader, "define": "HAS_TEXTURE" });
         // binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTex));
