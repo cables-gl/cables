@@ -2,7 +2,6 @@ import { Events, Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
-import { Op } from "./core_op.js";
 import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
 
@@ -30,6 +29,9 @@ import { PatchVariable } from "./core_variable.js";
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
  * @property  {String} [objType] internal: do not set manually
+ * @property  {String} [filter] internal: do not set manually
+ * @property  {boolean} [hideFormatButton] internal: do not set manually
+ * @property  {boolean} [editShortcut] internal: do not set manually
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
  * @property  {Array<String>} [values] internal: do not set manually

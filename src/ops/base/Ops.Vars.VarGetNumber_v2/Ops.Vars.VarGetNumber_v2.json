@@ -14,7 +14,6 @@
     },
     "summary": "read a variable number",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
@@ -24,5 +23,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1tfFT6"
+    "exampleProjectId": "1tfFT6",
+    "license": "MIT"
 }

@@ -4,22 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1587021606549
-        },
-        {
-            "message": "Ops.Vars.VarSetNumber2 renamed to Ops.Vars.VarSetNumber_v2",
-            "author": "pandur",
-            "date": 1587115375796
-        },
-        {
-            "message": " added core lib: cgl_vars.js",
-            "author": "pandur",
-            "date": 1589536714482
-        },
-        {
-            "message": " added lib: cannon.js",
-            "author": "pandur",
-            "date": 1589536735030
+            "date": 1587021606549,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
@@ -36,7 +22,6 @@
     },
     "summary": "set a variable number",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
@@ -46,5 +31,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1tfFT6"
+    "exampleProjectId": "1tfFT6",
+    "license": "MIT"
 }
