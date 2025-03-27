@@ -17,6 +17,8 @@ let needsbuild = true;
 let needsChange = false;
 let oldPosBuff = null;
 
+let storage = null;
+
 inGeom.onChange =
 inPosBuff.onLinkChanged =
 inReset.onTriggered = () =>
@@ -40,37 +42,40 @@ inTrigger.onTriggered = () =>
     }
 
     const shader = cgp.getShader();
-    const u = shader.getUniform("arr");
-
-    if (!u) return op.log("no uniform");
+    // const u = shader.getUniform("arr");
+    // if (!u) return op.log("no uniform");
 
     shader.toggleDefine("INSTANCING", true);
     shader.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
     shader.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
 
-    if (inPosBuff.isLinked() && inPosBuff.get() && u)
+    if (inPosBuff.isLinked() && inPosBuff.get())
     {
-        mesh.instances = inInstances.get() || inPosBuff.get().length;
-
-        outNum.set(mesh.instances);
-
-        // console.log("sss",inPosBuff.get().gpuBuffer)
-        if (u.gpuBuffer != inPosBuff.get())
+        if (!storage)
         {
-            oldPosBuff = u.gpuBuffer;
-            // u.gpuBuffer = inPosBuff.get();
-            u.setGpuBuffer(inPosBuff.get());
-            shader.needsPipelineUpdate = "change gpubuffer uniform";
+            storage = new CGP.BindingStorage(op.patch.cgp, "arr", inPosBuff.get());
+            shader.defaultBindGroup.addBinding(storage);
         }
+
+        // mesh.instances = inInstances.get() || inPosBuff.get().length;
+
+        // outNum.set(mesh.instances);
+
+        // if (u.gpuBuffer != inPosBuff.get())
+        // {
+        //     oldPosBuff = u.gpuBuffer;
+        //     u.setGpuBuffer(inPosBuff.get());
+        //     shader.needsPipelineUpdate = "change gpubuffer uniform";
+        // }
     }
     else
     {
-        if (u.gpuBuffer != null)
-        {
-            u.gpuBuffer = oldPosBuff;
-            oldPosBuff = null;
-        }
-        u.setGpuBuffer(null);
+        // if (u.gpuBuffer != null)
+        // {
+        //     u.gpuBuffer = oldPosBuff;
+        //     oldPosBuff = null;
+        // }
+        // u.setGpuBuffer(null);
     }
 
     if (mesh)mesh.render();

@@ -1,10 +1,10 @@
-struct VSUniforms
-{
-    modelMatrix: mat4x4<f32>,
-    viewMatrix: mat4x4<f32>,
-    projMatrix: mat4x4<f32>,
-    normalMatrix: mat4x4<f32>,
-};
+// struct uniVert
+// {
+//     modelMatrix: mat4x4<f32>,
+//     viewMatrix: mat4x4<f32>,
+//     projMatrix: mat4x4<f32>,
+//     normalMatrix: mat4x4<f32>,
+// };
 
 struct LambertProperties
 {
@@ -36,13 +36,13 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var vsOut: MyVSOutput;
     var pos=vec4f(v.position, 1.0);
 
-    var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
+    var mvMatrix=uniVert.viewMatrix * uniVert.modelMatrix;
     var mvPos:vec4f = (mvMatrix * pos);
 
-    vsOut.position = vsUniforms.projMatrix * mvPos;
+    vsOut.position = uniVert.projMatrix * mvPos;
 
     vsOut.viewSpacePosition = normalize((mvMatrix * vec4f(v.position, 1.0)).xyz);
-    vsOut.normal = normalize((vec4f(v.normal,0.0) * vsUniforms.normalMatrix).xyz);
+    vsOut.normal = normalize((vec4f(v.normal,0.0) * uniVert.normalMatrix).xyz);
 
     vsOut.texCoord = v.texCoord;
     return vsOut;
@@ -57,11 +57,11 @@ fn myFSMain
     ) -> @location(0) vec4f
 {
 
-    var col:vec4f=fsUniforms.color;
+    var col:vec4f=uniFrag.color;
 
     // var tc=v.texCoord;
-    // tc*=fsUniforms.texTransform.xy;
-    // tc+=fsUniforms.texTransform.zw;
+    // tc*=uniFrag.texTransform.xy;
+    // tc+=uniFrag.texTransform.zw;
 
     #ifdef HAS_TEXTURE
         var mcCoord:vec2f=getMatCapUV(v.viewSpacePosition, v.normal);
@@ -71,8 +71,8 @@ fn myFSMain
 
     #ifdef HAS_TEXTURE_DIFFUSE
         var tc:vec2f=v.texCoord;
-        tc*=fsUniforms.texTransform.xy;
-        tc+=fsUniforms.texTransform.zw;
+        tc*=uniFrag.texTransform.xy;
+        tc+=uniFrag.texTransform.zw;
         col*=textureSample(texDiffuse, ourSampler, tc);
     #endif
 

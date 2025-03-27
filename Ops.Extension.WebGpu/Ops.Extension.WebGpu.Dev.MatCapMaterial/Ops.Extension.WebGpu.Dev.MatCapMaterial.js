@@ -37,21 +37,17 @@ inTrigger.onTriggered = () =>
     {
         shader = new CGP.Shader(cgp, op.name);
         shader.setSource(attachments.mat_wgsl);
-        shader.addUniformFrag("4f", "color", r, g, b, a);
-        shader.addUniformFrag("4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY);
+
+        shader.addUniform(new CGP.Uniform(shader, "4f", "color", r, g, b, a), GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY), GPUShaderStage.FRAGMENT);
+
         updateDefines();
 
-        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE" });
-        binTex.addUniform(new CGP.Uniform(shader, "t", "ourTexture", inTex));
+        shader.addUniform(new CGP.Uniform(shader, "t", "ourTexture", inTex), GPUShaderStage.FRAGMENT);
 
-        const binTexDiff = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE_DIFFUSE" });
-        binTexDiff.addUniform(new CGP.Uniform(shader, "t", "texDiffuse", inTextureDiffuse));
+        shader.addUniform(new CGP.Uniform(shader, "t", "texDiffuse", inTextureDiffuse), GPUShaderStage.FRAGMENT);
 
-        const binSampler = new CGP.Binding(cgp, "sampler", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE" });
-        binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler"));
-
-        console.log(binSampler.getBindingGroupLayoutEntry());
-
+        shader.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTextureDiffuse), GPUShaderStage.FRAGMENT);
     }
 
     cgp.pushShader(shader);
