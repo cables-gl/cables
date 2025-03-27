@@ -5,6 +5,8 @@ import { CgpContext } from "./cgp_state.js";
 export class Texture extends CgTexture
 {
     #log = new Logger("cgp_texture");
+
+    /** @type {CgpContext} */
     #cgp = null;
     gpuTexture = null;
     gpuTextureDescriptor = null;

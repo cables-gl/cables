@@ -78,6 +78,11 @@ export class BindGroup
             arr.push(this.#bindings[i].getLayoutEntry());
         }
 
+        if (arr.length == 0)
+        {
+            console.log("nooooooooooooooooooooooo");
+        }
+        console.log("arrrrrr", arr);
         return arr;
     }
 
@@ -93,6 +98,10 @@ export class BindGroup
             arr.push(this.#bindings[i].getBindgroupEntry(inst));
         }
 
+        if (arr.length == 0)
+        {
+            console.log("nooooooooooooooooooooooo");
+        }
         return arr;
     }
 

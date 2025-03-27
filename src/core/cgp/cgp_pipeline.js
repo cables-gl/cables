@@ -430,6 +430,7 @@ export class Pipeline
             "bindGroupLayouts": bindGroupLayouts
         });
 
+        /** @type {Array<GPUVertexBufferLayout>} */
         let buffers = [
             // position
             {

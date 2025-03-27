@@ -74,16 +74,16 @@ export class CgpContext extends CgContext
             },
         };
 
-        this.DEPTH_FUNCS = [
-            "never",
-            "always",
-            "less",
-            "less-equal",
-            "greater",
-            "greater-equal",
-            "equal",
-            "not-equal"
-        ];
+        // this.DEPTH_FUNCS = [
+        //     "never",
+        //     "always",
+        //     "less",
+        //     "less-equal",
+        //     "greater",
+        //     "greater-equal",
+        //     "equal",
+        //     "not-equal"
+        // ];
 
         this.CULL_MODES = [
             "none",
@@ -91,6 +91,9 @@ export class CgpContext extends CgContext
             "front",
             "none" // both does not exist in webgpu
         ];
+
+        /** @type {GPUTextureFormat} */
+        this.presentationFormat = "bgra8unorm";
     }
 
     get supported()
@@ -268,15 +271,17 @@ export class CgpContext extends CgContext
         this.emitEvent("deviceChange");
     }
 
-    /** @typedef ErrorScoprOptions
-     * @property {string} scope
-     */
+    /**
+     * @typedef ErrorScopeOptions
+     * @property {Logger} [logger]
+     * @property {GPUErrorFilter} [scope]
+    */
 
     /**
      * @param {String} name
-     * @param {ErrorScoprOptions} options
+     * @param {ErrorScopeOptions} options
      */
-    pushErrorScope(name, options = { "scope": "validation" })
+    pushErrorScope(name, options = { })
     {
         if (this.catchErrors)
         {
@@ -397,23 +402,23 @@ export class CgpContext extends CgContext
      * @function pushDepthFunc
      * @memberof Context
      * @instance
-     * @param {string} f depth compare func
+     * @param {GPUCompareFunction} depthFunc depth compare func
      */
-    pushDepthFunc(f)
+    pushDepthFunc(depthFunc)
     {
-        this._stackDepthFunc.push(f);
+        this._stackDepthFunc.push(depthFunc);
     }
 
     /**
      * @function stateDepthFunc
      * @memberof Context
      * @instance
-     * @returns {boolean}
+     * @returns {GPUCompareFunction}
      */
     stateDepthFunc()
     {
         if (this._stackDepthFunc.length > 0) return this._stackDepthFunc[this._stackDepthFunc.length - 1];
-        return false;
+        return "less";
     }
 
     /**
@@ -513,6 +518,9 @@ export class CgpContext extends CgContext
         this._stackBlend.pop();
     }
 
+    /**
+     * @returns {GPUBlendComponent}
+     */
     stateBlend()
     {
         return this._stackBlend[this._stackBlend.length - 1];

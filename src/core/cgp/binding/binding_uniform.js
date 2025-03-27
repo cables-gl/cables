@@ -43,8 +43,6 @@ export class BindingUniform extends Binding
         this.updateBuffer(inst);
         return {
             "buffer": this.cgpBuffer[inst].gpuBuffer,
-            // "minBindingSize": this.getSizeBytes(),
-            // "hasDynamicOffset": 0
         };
     }
 
@@ -69,17 +67,20 @@ export class BindingUniform extends Binding
 
     }
 
+    /**
+     * @param {number} inst
+     */
     updateBuffer(inst)
     {
         let info = { "name": this.#uniforms.length + " uniforms", "stage ": CgpShader.getStageString(this.stage), "uniforms": [] };
 
-        const s = this.getSizeBytes() / 4;
+        let s = this.getSizeBytes() / 4;
         info.s = this.getSizeBytes();
-
+        if (s == 16)s = 16;
         if (!this.cgpBuffer[inst])
         {
             this.createBuffer(inst);
-            // console.log("no cpubuff? ", this.stage, this.name);
+            console.log("no cpubuff? ", s, this.#uniforms);
             // return;
         }
         this.cgpBuffer[inst].setLength(s);
@@ -123,6 +124,7 @@ export class BindingUniform extends Binding
         }
 
         str += "// uniforms:" + this.#uniforms.length + "\n";
+        if (this.#uniforms.length == 0) return str;
 
         if (this.#uniforms.length > 1)
         {
@@ -162,6 +164,8 @@ export class BindingUniform extends Binding
         return {
             "visibility": this.stage,
             "binding": this.bindNum,
+            "minBindingSize": this.getSizeBytes(),
+            "hasDynamicOffset": 0,
             "buffer": {}
         };
     }
