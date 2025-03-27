@@ -178,7 +178,7 @@ export class CgpUniform extends CgUniform
         if (this._type == "4f") return "vec4f";
         if (this._type == "3f") return "vec3f";
         if (this._type == "2f") return "vec2f";
-        if (this._type == "f") return "float";
+        if (this._type == "f") return "f32";
         if (this._type == "f[]") return "array<vec4f>";
         if (this._type == "i") return "int";
         if (this._type == "sampler") return "sampler";

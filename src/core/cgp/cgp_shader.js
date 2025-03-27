@@ -111,17 +111,17 @@ export class CgpShader extends CgShader
      * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEncoder
      * @param {BindGroup} bg
      */
-    setBindgroup(passEncoder, bg)
-    {
-        let idx = this.bindGroups.indexOf(bg);
-        if (idx == -1)
-        {
-            this.bindGroups.push(bg);
-            idx = this.bindGroups.length - 1;
-        }
+    // setBindgroup(passEncoder, bg)
+    // {
+    //     let idx = this.bindGroups.indexOf(bg);
+    //     if (idx == -1)
+    //     {
+    //         this.bindGroups.push(bg);
+    //         idx = this.bindGroups.length - 1;
+    //     }
 
-        passEncoder.setBindGroup(idx, bg.gpuBindGroup);
-    }
+    //     passEncoder.setBindGroup(idx, bg.gpuBindGroup);
+    // }
 
     getName()
     {

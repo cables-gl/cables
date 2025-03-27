@@ -99,7 +99,6 @@ export class CgpContext extends CgContext
     get supported()
     {
         return !!navigator.gpu;
-
     }
 
     /// ////////////////////

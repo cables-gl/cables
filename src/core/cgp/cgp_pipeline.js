@@ -3,6 +3,7 @@ import { Logger } from "cables-shared-client";
 import { CgpContext } from "./cgp_state.js";
 import { CgpShader } from "./cgp_shader.js";
 import { CgpMesh } from "./cgp_mesh.js";
+import { Binding } from "./binding/binding.js";
 
 export class Pipeline
 {
@@ -520,6 +521,9 @@ export class Pipeline
         return pipeCfg;
     }
 
+    /**
+     * @param {Array<Binding>} bings
+     */
     getBindingsInfo(bings)
     {
         const arr = [];

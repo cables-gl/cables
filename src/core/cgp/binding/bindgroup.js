@@ -185,8 +185,7 @@ export class BindGroup
      */
     getShaderHeaderCode(shader)
     {
-        const srcs = { "vertex": "",
-            "fragment": "" };
+        const srcs = { "vertex": "", "fragment": "" };
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
