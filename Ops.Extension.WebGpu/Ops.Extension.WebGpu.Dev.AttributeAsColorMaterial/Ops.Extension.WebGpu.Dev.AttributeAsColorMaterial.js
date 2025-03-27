@@ -3,7 +3,6 @@ const
     inAttr = op.inSwitch("Attribute", ["Position", "TexCoords", "Normals", "Normal Mat", "Tangents", "BiTangents"], "Normals"),
     next = op.outTrigger("Next");
 
-
 let shader = null;
 
 inAttr.onChange = updateDefines;

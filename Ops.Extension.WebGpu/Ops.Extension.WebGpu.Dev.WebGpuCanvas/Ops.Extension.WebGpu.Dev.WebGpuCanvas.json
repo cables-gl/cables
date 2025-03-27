@@ -59,10 +59,6 @@
             },
             {
                 "type": 2,
-                "name": "Limits"
-            },
-            {
-                "type": 2,
                 "name": "Canvas",
                 "objType": "element"
             },

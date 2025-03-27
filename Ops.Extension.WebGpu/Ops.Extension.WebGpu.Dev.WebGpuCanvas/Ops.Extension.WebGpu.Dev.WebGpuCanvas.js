@@ -8,7 +8,6 @@ const
     next2 = op.outTrigger("Next2"),
     supported = op.outBoolNum("Supported", false),
     outMs = op.outNumber("MS Frame"),
-    outLimits = op.outObject("Limits"),
     outEle = op.outObject("Canvas", null, "element"),
     outElePrev = op.outObject("Canvas Prev", null, "element"),
     outProfiler = op.outObject("Profiler Data", null);
@@ -174,10 +173,6 @@ if (navigator.gpu)
                 device = _device;
 
                 //
-
-                const limits = {};
-                for (let i in device.limits) limits[i] = device.limits[i];
-                outLimits.setRef(limits);
 
                 //
 

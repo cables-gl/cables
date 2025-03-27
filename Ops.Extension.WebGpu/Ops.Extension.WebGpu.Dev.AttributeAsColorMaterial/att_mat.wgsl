@@ -6,10 +6,6 @@ struct VSUniforms
     normalMatrix: mat4x4<f32>
 };
 
-struct FSUniforms
-{
-    color:vec4<f32>
-};
 
 struct MyVSInput
 {
@@ -33,14 +29,14 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var vsOut: MyVSOutput;
     var pos =vec4<f32>(v.position, 1.0);
 
-    var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
-    vsOut.position = vsUniforms.projMatrix * mvMatrix * pos;
+    var mvMatrix=uniVert.viewMatrix * uniVert.modelMatrix;
+    vsOut.position = uniVert.projMatrix * mvMatrix * pos;
 
     #ifdef SHOW_POS
         vsOut.attrCol = vec4f(pos.xyz,1.0);
     #endif
     #ifdef SHOW_NORMAL_MAT
-        vsOut.attrCol =  (vec4f(v.normal,0.0)*vsUniforms.normalMatrix) ;
+        vsOut.attrCol =  (vec4f(v.normal,0.0)*uniVert.normalMatrix) ;
     #endif
     #ifdef SHOW_NORMALS
         vsOut.attrCol = vec4f(v.normal,1.0);

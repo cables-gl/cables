@@ -1,0 +1,50 @@
+{
+    "id": "afbd3fa1-5c15-4d31-aa76-260a83fed510",
+    "created": 1743069376170,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743069376170
+        },
+        {
+            "message": "Patch.PELv2yG.WebGpuInfo renamed to Ops.Extension.WebGpu.WebGpuInfo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743069391522
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Limits"
+            },
+            {
+                "type": 5,
+                "name": "Vendor"
+            },
+            {
+                "type": 5,
+                "name": "Architecture"
+            },
+            {
+                "type": 5,
+                "name": "Presentation Format"
+            }
+        ]
+    }
+}
