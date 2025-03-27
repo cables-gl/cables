@@ -24,7 +24,6 @@ export class CgpGguBuffer extends Events
     floatArr = null;
     needsUpdate = true;
     #log;
-    // presentationFormat = null;
 
     static BINDINGTYPE_STORAGE = "storage";
     static BINDINGTYPE_UNIFORM = "uniform";

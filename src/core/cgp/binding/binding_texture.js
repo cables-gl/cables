@@ -4,12 +4,12 @@ import { CgpContext } from "../cgp_state.js";
 import { CgpUniform } from "../cgp_uniform.js";
 import { Binding } from "./binding.js";
 
+/** @extends {Binding} */
 export class BindingTexture extends Binding
 {
 
     /** @type {GPUSampler} */
     sampler = null;
-
     uniform = null;
 
     /**
