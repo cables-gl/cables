@@ -1,5 +1,6 @@
 {
     "name": "Ops.Extension.Trackingjs.",
     "summary": "trackingjs library: A modern approach for Computer Vision on the web",
-    "description": ""
+    "description": "",
+    "visibility": "public"
 }
