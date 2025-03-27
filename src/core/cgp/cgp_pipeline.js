@@ -24,7 +24,7 @@ export class Pipeline
     /** @type {GPURenderPipelineDescriptor|GPURenderPipelineDescriptor} */
     #pipeCfg = null;
 
-    /** @type {GPURenderPipeline|GPUComputePipeline} */
+    /** @type {GPURenderPipeline} */
     #renderPipeline = null;
 
     /** @type {GPUComputePipeline} */
@@ -33,8 +33,8 @@ export class Pipeline
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
-    /** @type {GPUBindGroup} */
-    #bindGroup = null;
+    // /** @type {GPUBindGroup} */
+    // #bindGroup = null;
 
     /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
     #passEncoder;
@@ -287,105 +287,71 @@ export class Pipeline
 
             // console.log("shader.frameUsageCounter", shader.frameUsageCounter);
 
-            if (!this.#bindGroup)
-            {
-                console.log("create bindgroups....");
-                const bindingGroupEntries = [];
+            // if (!this.#bindGroup)
+            // {
+            //     console.log("create bindgroups....");
+            //     let bindingGroupEntries = [];
 
-                if (this.#type == Pipeline.TYPE_RENDER && shader.bindingsVert)
-                    for (let i = 0; i < shader.bindingsVert.length; i++)
-                    {
-                        if (shader.bindingsVert[i] && shader.bindingsVert[i].getSizeBytes() > 0)
-                        {
-                            const entry = shader.bindingsVert[i].getBindingGroupEntry(shader.frameUsageCounter);
-                            if (entry)bindingGroupEntries.push(entry);
-                        }
-                        else this.#log.log("shader defaultBindingVert size 0");
-                    }
+            //     for (let i = 0; i < shader.bindGroups.length; i++)
+            //     {
+            //         bindingGroupEntries = shader.bindGroups[i].getEntries();
 
-                if (this.#type == Pipeline.TYPE_RENDER && shader.bindingsFrag)
-                    for (let i = 0; i < shader.bindingsFrag.length; i++)
-                    {
-                        if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
-                        {
-                            const entry = shader.bindingsFrag[i].getBindingGroupEntry(shader.frameUsageCounter);
-                            if (entry)bindingGroupEntries.push(entry);
-                        }
-                        else this.#log.log("shader defaultBindingFrag size 0");
-                    }
+            //     }
 
-                if (this.#type == Pipeline.TYPE_COMPUTE && shader.bindingsCompute)
-                    for (let i = 0; i < shader.bindingsCompute.length; i++)
-                    {
-                        if (shader.bindingsCompute[i] && shader.bindingsCompute[i].getSizeBytes() > 0)
-                        {
-                            const entry = shader.bindingsCompute[i].getBindingGroupEntry(shader.frameUsageCounter);
-                            if (entry)bindingGroupEntries.push(entry);
-                        }
-                        else this.#log.log("shader defaultBindingCompute size 0");
-                    }
+            //     console.log(bindingGroupEntries);
 
-                /** @type {GPUBindGroupDescriptor} */
-                const bg = {
-                    "label": "pipe bg " + this.#name,
-                    "layout": this.bindGroupLayout,
-                    "entries": bindingGroupEntries
-                };
+            //     /** @type {GPUBindGroupDescriptor} */
+            //     const bg = {
+            //         "label": "pipe bg " + this.#name,
+            //         "layout": this.bindGroupLayout,
+            //         "entries": bindingGroupEntries
+            //     };
 
-                if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
-                {
-                    this.#log.error("bindingGroupEntries.length!= this.bindingGroupLayoutEntries.length", bindingGroupEntries.length, this.bindingGroupLayoutEntries.length);
-                    this.#rebuildNumBindingGroups = true;
-                    this.#isValid = false;
-                    return;
-                }
+            //     if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
+            //     {
+            //         this.#log.error("bindingGroupEntries.length!= this.bindingGroupLayoutEntries.length", bindingGroupEntries.length, this.bindingGroupLayoutEntries.length);
+            //         this.#rebuildNumBindingGroups = true;
+            //         this.#isValid = false;
+            //         return;
+            //     }
 
-                try
-                {
-                    this.#bindGroup = this.#cgp.device.createBindGroup(bg);
+            //     try
+            //     {
+            //         this.#bindGroup = this.#cgp.device.createBindGroup(bg);
 
-                }
-                catch (e)
-                {
-                    this.#errorCount++;
-                    if (this.#errorCount == 3) console.log("stopping error logging for cgp pipeline");
-                    if (this.#errorCount >= 3) return;
+            //     }
+            //     catch (e)
+            //     {
+            //         this.#errorCount++;
+            //         if (this.#errorCount == 3) console.log("stopping error logging for cgp pipeline");
+            //         if (this.#errorCount >= 3) return;
 
-                    console.log(bg);
-                    console.error(e);
-                    console.log("error mesh:", this.#name);
-                }
+            //         console.log(bg);
+            //         console.error(e);
+            //         console.log("error mesh:", this.#name);
+            //     }
 
-            }
+            // }
 
             /// ///////////////////
 
-            // console.log("shader.bindingCounter", shader.bindingCounter, this.#bindGroups.length);
-
-            // for (let i = 0; i < this.#bindingInstances.length; i++)
-            // {
-            //     // console.log("stBG", i, this.#bindGroups[i]);
-            //     if (!this.#bindingInstances[i])
-            //     {
-            //         console.log("bindgroup " + i + " is undefined?!");
-            //         // return;
-            //     }
-            //     else
-            //         this.#cgp.passEncoder.setBindGroup(i, this.#bindingInstances[i]);
-            // }
-
-            this.#cgp.passEncoder.setBindGroup(0, this.#bindGroup);
-
-            if (!this.#bindGroup)
+            shader.bind();
+            for (let i = 0; i < shader.bindGroups.length; i++)
             {
-                console.warn("No effing bindgroups...");
-            }
-            else
-            {
-                passEnc.setPipeline(this.#renderPipeline);
 
-                this._bindUniforms(shader, shader.frameUsageCounter);
+                // this.#cgp.passEncoder.setBindGroup(0, shader.bindGroups[i].gpuBindgroup);
+
+                // if (!this.#bindGroup)
+                //     {
+                //         console.warn("No effing bindgroups...");
+                //     }
+                //     else
+                //     {
+
+                //         this._bindUniforms(shader, shader.frameUsageCounter);
+                //     }
             }
+            passEnc.setPipeline(this.#renderPipeline);
 
             if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
 
@@ -405,59 +371,63 @@ export class Pipeline
         /** @type {Array<GPUBindGroupLayoutEntry>} */
         this.bindingGroupLayoutEntries = [];
 
-        if (!shader.bindingsVert)
-        {
-            console.error("shader has no bindingsvert...");
-            return;
-        }
+        // if (!shader.bindingsVert)
+        // {
+        //     console.error("shader has no bindingsvert...");
+        //     return;
+        // }
 
-        if (shader.bindingsVert)
-            for (let i = 0; i < shader.bindingsVert.length; i++)
-            {
-                // if (shader.bindingsVert[i] && shader.bindingsVert[i].getSizeBytes() > 0)
-                // {
-                const entry = shader.bindingsVert[i].getBindingGroupLayoutEntry();
-                if (entry) this.bindingGroupLayoutEntries.push(entry);
-                // }
-                // else this.#log.log("shader defaultBindingVert size 0");
-            }
+        this.bindingGroupLayoutEntries = shader.defaultBindGroup.getLayoutEntries();
 
-        if (shader.bindingsFrag)
-            for (let i = 0; i < shader.bindingsFrag.length; i++)
-            {
-                // if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
-                // {
-                const entry = shader.bindingsFrag[i].getBindingGroupLayoutEntry();
-                if (entry) this.bindingGroupLayoutEntries.push(entry);
-                // }
-                // else this.#log.log("shader defaultBindingFrag size 0");
-            }
+        // if (shader.bindingsVert)
+        //     for (let i = 0; i < shader.bindingsVert.length; i++)
+        //     {
+        //         // if (shader.bindingsVert[i] && shader.bindingsVert[i].getSizeBytes() > 0)
+        //         // {
+        //         const entry = shader.bindingsVert[i].getBindingGroupLayoutEntry();
+        //         if (entry) this.bindingGroupLayoutEntries.push(entry);
+        //         // }
+        //         // else this.#log.log("shader defaultBindingVert size 0");
+        //     }
 
-        if (shader.bindingsCompute)
-            for (let i = 0; i < shader.bindingsCompute.length; i++)
-            {
-                console.log("bindingsCompute", i, shader.bindingsCompute[i]);
+        // if (shader.bindingsFrag)
+        //     for (let i = 0; i < shader.bindingsFrag.length; i++)
+        //     {
+        //         // if (shader.bindingsFrag[i] && shader.bindingsFrag[i].getSizeBytes() > 0)
+        //         // {
+        //         const entry = shader.bindingsFrag[i].getBindingGroupLayoutEntry();
+        //         if (entry) this.bindingGroupLayoutEntries.push(entry);
+        //         // }
+        //         // else this.#log.log("shader defaultBindingFrag size 0");
+        //     }
 
-                // if (shader.bindingsCompute[i] && shader.bindingsCompute[i].getSizeBytes() > 0)
-                // {
-                const entry = shader.bindingsCompute[i].getBindingGroupLayoutEntry();
-                if (entry) this.bindingGroupLayoutEntries.push(entry);
-                // }
-                // else this.#log.log("shader defaultBindingCompute size 0");
-            }
+        // if (shader.bindingsCompute)
+        //     for (let i = 0; i < shader.bindingsCompute.length; i++)
+        //     {
+        //         console.log("bindingsCompute", i, shader.bindingsCompute[i]);
+
+        //         // if (shader.bindingsCompute[i] && shader.bindingsCompute[i].getSizeBytes() > 0)
+        //         // {
+        //         const entry = shader.bindingsCompute[i].getBindingGroupLayoutEntry();
+        //         if (entry) this.bindingGroupLayoutEntries.push(entry);
+        //         // }
+        //         // else this.#log.log("shader defaultBindingCompute size 0");
+        //     }
         // //////////
 
-        /** @type {GPUBindGroupLayout} */
-        this.bindGroupLayout = this.#cgp.device.createBindGroupLayout(
-            {
-                "label": "bindgrouplayout " + this.#name,
-                "entries": this.bindingGroupLayoutEntries,
-            });
+        // /** @type {GPUBindGroupLayout} */
+        // this.bindGroupLayout = this.#cgp.device.createBindGroupLayout(
+        //     {
+        //         "label": "bindgrouplayout " + this.#name,
+        //         "entries": this.bindingGroupLayoutEntries,
+        //     });
+
+        const bindGroupLayouts = [shader.defaultBindGroup.getLayout()];
 
         /** @type {GPUPipelineLayout} */
         const pipelineLayout = this.#cgp.device.createPipelineLayout({
             "label": "pipe layout " + this.#name,
-            "bindGroupLayouts": [this.bindGroupLayout]
+            "bindGroupLayouts": bindGroupLayouts
         });
 
         let buffers = [
@@ -541,10 +511,10 @@ export class Pipeline
             console.log(computeCfg.compute);
         }
 
-        console.log("bindgrouplayutEntries:", this.bindingGroupLayoutEntries.length);
-        console.log("compute:", shader.bindingsCompute.length);
-        console.log("frag:", shader.bindingsFrag.length);
-        console.log("vert:", shader.bindingsVert.length);
+        // console.log("bindgrouplayutEntries:", this.bindingGroupLayoutEntries.length);
+        // console.log("compute:", shader.bindingsCompute.length);
+        // console.log("frag:", shader.bindingsFrag.length);
+        // console.log("vert:", shader.bindingsVert.length);
 
         return pipeCfg;
     }
@@ -561,28 +531,27 @@ export class Pipeline
 
     /**
      * @param {CgpShader} shader
-     * @param {number} inst
      */
-    _bindUniforms(shader, inst)
+    _bindUniforms(shader)
     {
         shader.bind();
 
-        if (this.#type == Pipeline.TYPE_RENDER)
-        {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms vert", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsVert) });
-            for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(inst);
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
+        // if (this.#type == Pipeline.TYPE_RENDER)
+        // {
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms vert", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsVert) });
+        //     for (let i = 0; i < shader.bindingsVert.length; i++) shader.bindingsVert[i].update(inst);
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
 
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms frag", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
-            for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(inst);
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
-        }
-        if (this.#type == Pipeline.TYPE_COMPUTE)
-        {
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms compute", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
-            for (let i = 0; i < shader.bindingsCompute.length; i++) shader.bindingsCompute[i].update(inst);
-            if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
-        }
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms frag", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
+        //     for (let i = 0; i < shader.bindingsFrag.length; i++) shader.bindingsFrag[i].update(inst);
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
+        // }
+        // if (this.#type == Pipeline.TYPE_COMPUTE)
+        // {
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.push("bind uniforms compute", { "class": this.constructor.name, "name": this.#name, "instance": inst, "bindings": this.getBindingsInfo(shader.bindingsFrag) });
+        //     for (let i = 0; i < shader.bindingsCompute.length; i++) shader.bindingsCompute[i].update(inst);
+        //     if (this.#cgp.branchProfiler) this.#cgp.branchProfiler.pop();
+        // }
     }
 
     /**
@@ -614,8 +583,7 @@ export class Pipeline
 
         this.#passEncoder.setPipeline(this.#renderPipeline);
 
-        // TODO BINDGROUPCOUNTER?!
-        this.#passEncoder.setBindGroup(0, this.#bindGroup);
+        shader.bind();
 
         if (workGroups.length == 1) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8);
         if (workGroups.length == 2) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);

@@ -2,13 +2,14 @@ import { Logger } from "cables-shared-client";
 import { Port } from "../core_port.js";
 import { CgShader } from "./cg_shader.js";
 import { Shader } from "../cgl/cgl_shader.js";
+import { CgpShader } from "../cgp/cgp_shader.js";
 
 export class CgUniform
 {
 
     /**
      * Description
-     * @param {Shader} __shader
+     * @param {CgShader|CgpShader|Shader} __shader
      * @param {string} __type
      * @param {string} __name
      * @param {Number|Port} _value
@@ -30,7 +31,7 @@ export class CgUniform
         this._structUniformName = _structUniformName;
         this._propertyName = _propertyName;
 
-        this._shader._addUniform(this);
+        if (this._shader._addUniform) this._shader._addUniform(this);
         this.needsUpdate = true;
         this.shaderType = null;
         this.comment = null;
@@ -131,7 +132,7 @@ export class CgUniform
         else
         {
             // console.error("unknown");
-            this._log.error("Unknown uniform type " + __type);
+            this._log.error("Unknown uniform type " + __type, __name, typeof this._shader);
         }
 
         if (typeof _value == "object" && _value instanceof CABLES.Port)
@@ -271,5 +272,10 @@ export class CgUniform
     updateFromPort()
     {
         this.setValue(this._port.get());
+    }
+
+    get port()
+    {
+        return this._port;
     }
 }

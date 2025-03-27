@@ -106,6 +106,7 @@ function doRender()
 {
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
+    op.checkGraphicsApi();
 
     cgl.pushShader(shader);
     shader.popTextures();

@@ -272,6 +272,7 @@ function checkUiErrors()
 render.onTriggered = function ()
 {
     checkUiErrors();
+    op.checkGraphicsApi();
 
     if (!cgl.defaultMatcapTex3) updateMatcap();
     shader.popTextures();

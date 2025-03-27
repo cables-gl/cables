@@ -271,6 +271,7 @@ function doRender()
 {
     if (!mesh) return;
     if (recalc) setupArray();
+    op.checkGraphicsApi();
 
     mod.bind();
 

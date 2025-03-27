@@ -8,6 +8,7 @@ import { Texture } from "./cgp_texture.js";
 import { CgTexture } from "../cg/cg_texture.js";
 import { Patch } from "../core_patch.js";
 import { CgpMesh } from "./cgp_mesh.js";
+import { CgpUniform } from "./cgp_uniform.js";
 
 // https://github.com/greggman/webgpu-utils
 // https://developer.chrome.com/blog/from-webgl-to-webgpu/
@@ -119,7 +120,7 @@ export class CgpContext extends CgContext
             this._simpleShader = new CgpShader(this, "simple default shader");
             this._simpleShader.setSource(defaultShaderSrcVert);
 
-            this._simpleShader.addUniformFrag("4f", "color", [1, 1, 0, 1]);
+            this._simpleShader.addUniform(new CgpUniform(this._simpleShader, "4f", "color", [1, 1, 0, 1]), GPUShaderStage.FRAGMENT);
         }
 
         this.fpsCounter.startFrame();

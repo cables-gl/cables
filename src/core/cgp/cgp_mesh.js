@@ -146,8 +146,8 @@ export class CgpMesh extends CgMesh
         if (this._pipe.isValid)
         {
             if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh.render().draw", "geom " + this._geom.name, {
-                "geom ": this._geom.getInfo(),
-                "shader ": shader.getInfo(),
+                "geom": this._geom.getInfo(),
+                "shader": shader.getInfo(),
                 "numAttributes": this._attributes.length
             });
 

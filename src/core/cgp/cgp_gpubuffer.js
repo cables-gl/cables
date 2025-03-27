@@ -1,8 +1,8 @@
 import { Events, Logger } from "cables-shared-client";
-import { CgpContext, WebGpuContext } from "./cgp_state.js";
+import { CgpContext } from "./cgp_state.js";
 
 /** @typedef GPUBufferOptions
- * @property {number} length
+ * @property {number} [length]
  * @property {GPUBufferDescriptor} [buffCfg]
 */
 
@@ -37,7 +37,7 @@ export class CgpGguBuffer extends Events
      * @param {Array} data=null
      * @param {GPUBufferOptions} options={}
      */
-    constructor(cgp, name, data = null, options = null)
+    constructor(cgp, name, data = null, options = {})
     {
         super();
         this.#log = new Logger("cgpGpubuffer");

@@ -1,4 +1,5 @@
 import { CgUniform } from "../cg/cg_uniform.js";
+import { CgpShader } from "./cgp_shader.js";
 import { CgpContext } from "./cgp_state.js";
 
 export class CgpUniform extends CgUniform
@@ -12,6 +13,16 @@ export class CgpUniform extends CgUniform
 
     gpuBufferChanged = false;
 
+    /**
+     * Description
+     * @param {CgpShader} __shader
+     * @param {string} __type
+     * @param {string} __name
+     * @param {any} _value
+     * @param {any} _port2
+     * @param {any} _port3
+     * @param {any} _port4
+     */
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4)
     {
         super(__shader, __type, __name, _value, _port2, _port3, _port4);

@@ -1884,4 +1884,11 @@ export class Op extends Events
     {
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     }
+
+    checkGraphicsApi(api = 0)
+    {
+        if (this.patch.isEditorMode())
+            if (this.patch.cg && this.patch.cg.gApi != api)
+                this.setUiError("wronggapi", "Wrong graphics API", 2);
+    }
 }
