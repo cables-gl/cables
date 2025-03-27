@@ -22,8 +22,8 @@ inTrigger.onTriggered = () =>
     {
         shader = new CGP.Shader(cgp, op.name);
         shader.setSource(attachments.lambert_wgsl);
-        shader.addUniformFrag("4f", "color", r, g, b, a);
-        shader.addUniformFrag("4f", "backColor", r2, g2, b2, a2);
+        shader.addUniform(new CGP.Uniform(shader, "4f", "color", r, g, b, a), GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "4f", "backColor", r2, g2, b2, a2), GPUShaderStage.FRAGMENT);
     }
 
     cgp.pushShader(shader);

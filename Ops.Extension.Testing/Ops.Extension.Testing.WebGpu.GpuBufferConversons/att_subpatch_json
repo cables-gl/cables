@@ -1,0 +1,258 @@
+{
+  "ops": [
+    {
+      "opId": "3d39141f-e9d7-4b83-b5a1-fc7f2902fa40",
+      "id": "n2y1dx0yg",
+      "uiAttribs": {
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 671.4391839444005
+        },
+        "subPatch": "d34c4jlag",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "GPUBuffer",
+          "links": [
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "GPUBuffer",
+              "objIn": "psqgq5zh5",
+              "objOut": "n2y1dx0yg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "8a9fa2c6-c229-49a9-9dc8-247001539217",
+      "id": "ewtdm9bjc",
+      "uiAttribs": {
+        "extendTitle": "100*3",
+        "translate": {
+          "x": 140.51556985159306,
+          "y": 452.2125013927023
+        },
+        "subPatch": "d34c4jlag",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Values",
+          "value": 100
+        },
+        {
+          "name": "Mode index",
+          "value": 2
+        },
+        {
+          "name": "Mode",
+          "value": "ABC"
+        },
+        {
+          "name": "Random Seed ",
+          "value": 0
+        },
+        {
+          "name": "Integer",
+          "value": 0
+        },
+        {
+          "name": "Last == First",
+          "value": 0
+        },
+        {
+          "name": "Min A",
+          "value": -1
+        },
+        {
+          "name": "Max A",
+          "value": 1
+        },
+        {
+          "name": "Min B",
+          "value": -1
+        },
+        {
+          "name": "Max B",
+          "value": 1
+        },
+        {
+          "name": "Min C",
+          "value": -1
+        },
+        {
+          "name": "Max C",
+          "value": 1
+        },
+        {
+          "name": "Min D",
+          "value": -1
+        },
+        {
+          "name": "Max D",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array Out",
+          "links": [
+            {
+              "portIn": "Arr",
+              "portOut": "Array Out",
+              "objIn": "n2y1dx0yg",
+              "objOut": "ewtdm9bjc"
+            },
+            {
+              "portIn": "Array",
+              "portOut": "Array Out",
+              "objIn": "q4josf6j7",
+              "objOut": "ewtdm9bjc"
+            }
+          ]
+        },
+        {
+          "name": "Chunks Amount",
+          "value": 100
+        },
+        {
+          "name": "Array length",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "opId": "53ef08b1-61e2-41d9-a6c6-e0b2dfa48526",
+      "id": "psqgq5zh5",
+      "uiAttribs": {
+        "subPatch": "d34c4jlag",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 765.0339077337212
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "Result",
+              "objIn": "75sq54jfm",
+              "objOut": "psqgq5zh5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "75sq54jfm",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "d34c4jlag",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 867.6393290135754
+        },
+        "extendTitle": "length: 300",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "q4josf6j7",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "d34c4jlag",
+        "translate": {
+          "x": 526.2504323205978,
+          "y": 761.3191535334215
+        },
+        "extendTitle": "length: 300",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "dtk9tn531",
+      "uiAttribs": {
+        "subPatch": "d34c4jlag",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_53nc07ubx",
+          "title": "Trigger",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "innerOut_53nc07ubx",
+              "objIn": "psqgq5zh5",
+              "objOut": "dtk9tn531"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "5rqfr3q62",
+      "uiAttribs": {
+        "subPatch": "d34c4jlag",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 1147.6393290135754
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

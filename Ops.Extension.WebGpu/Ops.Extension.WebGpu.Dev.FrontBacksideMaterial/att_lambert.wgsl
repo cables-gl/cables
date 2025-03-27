@@ -1,9 +1,9 @@
-struct VSUniforms
-{
-    modelMatrix: mat4x4<f32>,
-    viewMatrix: mat4x4<f32>,
-    projMatrix: mat4x4<f32>,
-};
+// struct uniVert
+// {
+//     modelMatrix: mat4x4<f32>,
+//     viewMatrix: mat4x4<f32>,
+//     projMatrix: mat4x4<f32>,
+// };
 
 struct LambertProperties
 {
@@ -32,8 +32,8 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
     var vsOut: MyVSOutput;
     var pos=vec4<f32>(v.position, 1.0);
 
-    var mvMatrix=vsUniforms.viewMatrix * vsUniforms.modelMatrix;
-    vsOut.position = vsUniforms.projMatrix * mvMatrix * pos;
+    var mvMatrix=uniVert.viewMatrix * uniVert.modelMatrix;
+    vsOut.position = uniVert.projMatrix * mvMatrix * pos;
 
     vsOut.normal = v.normal;
     vsOut.texcoord = v.texcoord;
@@ -50,8 +50,8 @@ fn myFSMain
 
     if(!is_front)
     {
-        return fsUniforms.backColor+vec4f(0.1);
+        return uniFrag.backColor+vec4f(0.1);
     }
-    return fsUniforms.color+vec4f(0.1);
+    return uniFrag.color+vec4f(0.1);
 }
 
