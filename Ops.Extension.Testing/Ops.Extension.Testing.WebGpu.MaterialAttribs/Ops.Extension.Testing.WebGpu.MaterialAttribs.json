@@ -1,0 +1,33 @@
+{
+    "id": "0f974923-daac-416f-a9a1-18c4e7cf6384",
+    "created": 1743071036756,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743071036757
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch0 renamed to Ops.Extension.Testing.WebGpu.MaterialAttribs",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743071067087
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "6rv86pwy2",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

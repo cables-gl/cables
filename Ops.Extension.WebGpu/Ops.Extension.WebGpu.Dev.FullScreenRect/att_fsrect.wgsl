@@ -23,7 +23,7 @@ fn myVSMain(
     var vsOut: MyVSOutput;
     var pos=vec4f(v.position, 1.0);
 
-    var modelMatrix=vsUniforms.modelMatrix;
+    var modelMatrix=uniVert.modelMatrix;
 
     #ifdef INSTANCING
         modelMatrix[3][0]+=arr[instIdx].x;
@@ -31,9 +31,9 @@ fn myVSMain(
         modelMatrix[3][2]+=arr[instIdx].z;
     #endif
 
-    var modelViewMatrix=vsUniforms.viewMatrix * modelMatrix;
+    var modelViewMatrix=uniVert.viewMatrix * modelMatrix;
 
-    vsOut.position = vsUniforms.projMatrix * modelViewMatrix * pos;
+    vsOut.position = uniVert.projMatrix * modelViewMatrix * pos;
     vsOut.normal = v.normal;
     vsOut.texCoord = v.texCoord;
     vsOut.instIdx=instIdx;
@@ -51,15 +51,15 @@ fn myFSMain
     var col=vec4f(1.0);
 
     var tc=v.texCoord;
-    // tc*=fsUniforms.texTransform.xy;
-    // tc+=fsUniforms.texTransform.zw;
+    // tc*=uniFrag.texTransform.xy;
+    // tc+=uniFrag.texTransform.zw;
 
     // #ifdef HAS_TEXTURE
         // tc=fract(tc); // fake repeat
         col = textureSample(ourTexture,ourSampler, tc);
 
         #ifdef COLORIZE_TEXTURE
-            col*=fsUniforms.color;
+            col*=uniFrag.color;
         #endif
 
     // #endif
@@ -69,7 +69,7 @@ fn myFSMain
 
     // col=vec4(1.0,0.0,0.0,1.0);
 
-    return col;//+fsUniforms.color+vec4f(v.texCoord,1.0,1.0);
+    return col;//+uniFrag.color+vec4f(v.texCoord,1.0,1.0);
 
 }
 

@@ -29,7 +29,7 @@ inTrigger.onTriggered = () =>
     {
         shader = new CGP.Shader(cgp, op.name);
         shader.setSource(attachments.mat_wgsl);
-        // shader.addUniformFrag("4f", "color", r, g, b, a);
+        shader.addUniform(new CGP.Uniform(shader, "4f", "color", [1, 1, 1, 1]));
         updateDefines();
     }
 

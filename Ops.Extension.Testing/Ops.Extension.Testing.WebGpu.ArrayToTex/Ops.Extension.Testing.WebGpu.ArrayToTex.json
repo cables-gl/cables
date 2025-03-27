@@ -1,0 +1,33 @@
+{
+    "id": "b5b375f2-6f76-4420-b36a-700a2f2bc428",
+    "created": 1743072834899,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743072834900
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.ArrayToTex",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743072850504
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "6a963im08",
+                "uititle": "Update"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "id": "85fbef51-df82-4f6a-87d1-7bda49700888",
+    "created": 1743072237772,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743072237773
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch0 renamed to Ops.Extension.Testing.WebGpu.Fsrect",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743072262321
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "kkegpk5gs",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

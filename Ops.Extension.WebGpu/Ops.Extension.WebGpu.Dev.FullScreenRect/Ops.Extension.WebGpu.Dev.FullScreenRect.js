@@ -88,14 +88,17 @@ function doRender()
 
         shader.setSource(attachments.fsrect_wgsl);
 
-        shader.aspectUni = new CGP.Uniform(shader, "f", "aspectTex", 1);
+        shader.aspectUni = shader.addUniform(new CGP.Uniform(shader, "f", "aspectTex", 1));
 
-        const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT });
-        const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTexture);
-        binTex.addUniform(uniTex);
+        shader.addUniform(new CGP.Uniform(shader, "t", "ourTexture", inTexture), GPUShaderStage.FRAGMENT);
+        shader.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTexture), GPUShaderStage.FRAGMENT);
 
-        const binSampler = new CGP.Binding(cgp, "sampler", { "stage": GPUShaderStage.FRAGMENT, "shader": shader });
-        binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTexture));
+        // const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT });
+        // const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTexture);
+        // binTex.addUniform(uniTex);
+
+        // const binSampler = new CGP.Binding(cgp, "sampler", { "stage": GPUShaderStage.FRAGMENT, "shader": shader });
+        // binSampler.addUniform(new CGP.Uniform(shader, "sampler", "ourSampler", inTexture));
     }
 
     if (cgp.viewPort[2] != w || cgp.viewPort[3] != h || !mesh) rebuild();
