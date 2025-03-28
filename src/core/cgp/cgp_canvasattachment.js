@@ -1,15 +1,15 @@
-import { WebGpuContext } from "./cgp_state.js";
+import { CgpContext, WebGpuContext } from "./cgp_state.js";
 
 export class WebGpuCanvasAttachment
 {
 
-    /** @type {canvas} */
+    /** @type {HTMLCanvasElement} */
     #canvas = null;
 
     /** @type {CgpContext} */
     #cgp = null;
 
-    /** @type {CanvasContext} */
+    /** @type {GPUCanvasContext} */
     #ctx = null;
 
     /**

@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { Pipeline } from "./cgp_pipeline.js";
+import { RenderPipeline } from "./cgp_renderpipeline.js";
 import { CgMesh } from "../cg/cg_mesh.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { CgpShader } from "./cgp_shader.js";
@@ -22,7 +22,7 @@ export class CgpMesh extends CgMesh
         this.numIndex = 0;
         this.instances = 1;
 
-        this._pipe = new Pipeline(this._cgp, "pipe mesh " + __geom.name, Pipeline.TYPE_RENDER);
+        this._pipe = new RenderPipeline(this._cgp, "pipe mesh " + __geom.name);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
 

@@ -1,6 +1,7 @@
 import { Events, Logger } from "cables-shared-client";
 import { generateUUID } from "./utils.js";
 import { Patch } from "./core_patch.js";
+import { Op } from "./core_op.js";
 
 /**
  * LoadingStatus class, manages asynchronous loading jobs
@@ -34,6 +35,9 @@ export class LoadingStatus extends Events
         this._loadingAssetTaskCb = false;
     }
 
+    /**
+     * @param {Function} cb
+     */
     setOnFinishedLoading(cb)
     {
         this._cbFinished.push(cb);
@@ -128,6 +132,9 @@ export class LoadingStatus extends Events
         this._log.groupEnd();
     }
 
+    /**
+     * @param {string} id
+     */
     finished(id)
     {
         const l = this._loadingAssets[id];
@@ -174,6 +181,9 @@ export class LoadingStatus extends Events
         this.emitEvent("addAssetTask");
     }
 
+    /**
+     * @param {string} name
+     */
     existByName(name)
     {
         for (let i in this._loadingAssets)
@@ -183,6 +193,11 @@ export class LoadingStatus extends Events
         }
     }
 
+    /**
+     * @param {string} type
+     * @param {string} name
+     * @param {Op} [op]
+     */
     start(type, name, op)
     {
         if (this._startTime == 0) this._startTime = Date.now();
@@ -191,7 +206,7 @@ export class LoadingStatus extends Events
         name = name || "unknown";
         if (name.length > 100)name = name.substring(0, 100);
 
-        if (op)op.setUiAttribs({ "loading": true });
+        if (op)op.setUiAttrib({ "loading": true });
 
         this._loadingAssets[id] = {
             "id": id,
