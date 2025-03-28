@@ -24,7 +24,6 @@ export class CgpGguBuffer extends Events
     floatArr = null;
     needsUpdate = true;
     #log;
-    // presentationFormat = null;
 
     static BINDINGTYPE_STORAGE = "storage";
     static BINDINGTYPE_UNIFORM = "uniform";
@@ -44,7 +43,7 @@ export class CgpGguBuffer extends Events
         if (!cgp.supported) return;
 
         this.#name = name;
-        this.setData([0, 0, 0, 0]);
+        // this.setData([0, 0, 0, 0]);
 
         if (options.buffCfg) this.buffCfg = options.buffCfg;
         if (data) this.setData(data);

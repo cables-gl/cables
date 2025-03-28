@@ -32,6 +32,8 @@ function update()
 
 exec.onTriggered = function ()
 {
+    op.checkGraphicsApi();
+
     cgl.pushBlendMode(blendMode, inPremul.get());
     cgl.pushBlend(blendMode != CGL.BLEND_NONE);
     next.trigger();

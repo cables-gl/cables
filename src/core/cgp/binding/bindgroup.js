@@ -78,6 +78,11 @@ export class BindGroup
             arr.push(this.#bindings[i].getLayoutEntry());
         }
 
+        if (arr.length == 0)
+        {
+            console.log("nooooooooooooooooooooooo");
+        }
+        console.log("arrrrrr", arr);
         return arr;
     }
 
@@ -93,6 +98,10 @@ export class BindGroup
             arr.push(this.#bindings[i].getBindgroupEntry(inst));
         }
 
+        if (arr.length == 0)
+        {
+            console.log("nooooooooooooooooooooooo");
+        }
         return arr;
     }
 
@@ -176,8 +185,7 @@ export class BindGroup
      */
     getShaderHeaderCode(shader)
     {
-        const srcs = { "vertex": "",
-            "fragment": "" };
+        const srcs = { "vertex": "", "fragment": "" };
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
