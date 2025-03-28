@@ -222,35 +222,22 @@ export class CgpShader extends CgShader
         for (let i = 0; i < this._defines.length; i++)
             strDefs += "// #define " + this._defines[i] + "\n";
 
+        let bindingsHeadVert = "";
+        let bindingsHeadFrag = "";
+        let bindingsHeadCompute = "";
+
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            const src = this.bindGroups[i].getShaderHeaderCode(this);
+            bindingsHeadFrag += src.fragment || "";
+            bindingsHeadVert += src.vertex || "";
+            bindingsHeadCompute += src.compute || "";
+        }
+
         if (this.options.compute)
-        {
-            // let bindingsHeadCompute = "";
-            // for (let i = 0; i < this.bindingsCompute.length; i++)
-            // {
-            //     if (!this.bindingsCompute[i]) continue;
-            //     bindingsHeadCompute += "// bindingsCompute " + i + "\n";
-            //     bindingsHeadCompute += this.bindingsCompute[i].getShaderHeaderCode();
-            // }
-
-            // src = bindingsHeadCompute + "\n\n//////////////// \n\n" + src;
-        }
+            src = bindingsHeadCompute + "\n\n////////////////\n\n" + src;
         else
-        {
-            let bindingsHeadVert = "";
-            let bindingsHeadFrag = "";
-            let bindingsHeadCompute = "";
-
-            for (let i = 0; i < this.bindGroups.length; i++)
-            {
-                const src = this.bindGroups[i].getShaderHeaderCode(this);
-                bindingsHeadFrag += src.fragment || "";
-                bindingsHeadVert += src.vertex || "";
-                bindingsHeadCompute += src.compute || "";
-            }
-
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
-
-        }
 
         src = this._replaceMods(src);
 

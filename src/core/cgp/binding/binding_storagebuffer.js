@@ -58,6 +58,7 @@ export class BindingStorage extends Binding
     {
         let str = "";
 
+        console.log("nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         str += "@group(" + bindGroupNum + ") ";
         str += "@binding(" + this.bindNum + ") ";
         str += "var<storage,read> ";

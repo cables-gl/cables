@@ -185,13 +185,13 @@ export class BindGroup
      */
     getShaderHeaderCode(shader)
     {
-        const srcs = { "vertex": "", "fragment": "" };
+        const srcs = { "vertex": "", "fragment": "", "compute": "" };
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
             const src = bind.getShaderHeaderCode(shader, 0);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
-            if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fraagment += src;
+            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
             // tmp stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
         }
