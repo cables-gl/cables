@@ -74,16 +74,16 @@ export class CgpContext extends CgContext
             },
         };
 
-        // this.DEPTH_FUNCS = [
-        //     "never",
-        //     "always",
-        //     "less",
-        //     "less-equal",
-        //     "greater",
-        //     "greater-equal",
-        //     "equal",
-        //     "not-equal"
-        // ];
+        this.DEPTH_FUNCS = [
+            "never",
+            "always",
+            "less",
+            "less-equal",
+            "greater",
+            "greater-equal",
+            "equal",
+            "not-equal"
+        ];
 
         this.CULL_MODES = [
             "none",

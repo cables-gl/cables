@@ -27,6 +27,7 @@ import { Texture } from "./cgl/cgl_texture.js";
  * @property {boolean} [bookmarked] internal - do not use manualy
  * @property {boolean} [selected] internal - do not use manualy
  * @property {boolean} [disabled] internal - do not use manualy
+ * @property {boolean} [loading] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {string} [comment]
