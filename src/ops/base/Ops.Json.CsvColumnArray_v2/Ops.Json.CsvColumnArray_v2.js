@@ -22,7 +22,7 @@ function update()
     op.setUiError("notfound", null);
     op.setUiError("notnum", null);
 
-    if (iArr[0].hasOwnProperty(iName))
+    if (iArr[0] && iArr[0].hasOwnProperty(iName))
     {
         let arr = [];
 

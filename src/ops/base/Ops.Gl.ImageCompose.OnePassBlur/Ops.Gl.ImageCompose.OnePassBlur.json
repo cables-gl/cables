@@ -17,6 +17,10 @@
             {
                 "type": 0,
                 "name": "Alpha Mask index",
+                "values": [
+                    "Off",
+                    "On"
+                ],
                 "group": "Blending",
                 "subType": "integer"
             },
@@ -53,41 +57,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.Deprecated.Gl.TextureEffects.FastBlur renamed to Ops.Gl.TextureEffects.FastBlur",
+            "message": "mask fades between blurred and unblurred image",
+            "type": "feature",
             "author": "pandur",
-            "date": 1573490089072
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.FastBlur",
-            "author": "pandur",
-            "date": 1650882627103
-        },
-        {
-            "message": "Ops.User.pandur.FastBlurV2 renamed to Ops.Dev.FastBlurV2",
-            "author": "pandur",
-            "date": 1650882706355
-        },
-        {
-            "message": "Ops.Dev.FastBlurV2 renamed to Ops.Gl.TextureEffects.FastBlur_v2",
-            "author": "pandur",
-            "date": 1653286483194
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.FastBlur_v2",
-            "author": "pandur",
-            "date": 1693496692226
-        },
-        {
-            "message": "Ops.Patch.PkiBOaF.OnePassBlur renamed to Ops.Gl.TextureEffects.OnePassBlur",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1693498067290
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.OnePassBlur renamed to Ops.Gl.ImageCompose.OnePassBlur",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855243599
+            "date": 1743338289456
         }
     ],
     "summary": "Blurs a texture  ",
@@ -101,5 +74,6 @@
             }
         ]
     },
-    "exampleProjectId": "xHp9eG"
+    "exampleProjectId": "xHp9eG",
+    "license": "MIT"
 }

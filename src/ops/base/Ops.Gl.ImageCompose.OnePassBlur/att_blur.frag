@@ -1,4 +1,5 @@
 UNI sampler2D tex;
+UNI sampler2D texMask;
 UNI float radius;
 UNI float amount;
 UNI float width;
@@ -64,7 +65,18 @@ void main()
 
 
     {{MODULE_COLOR}}
+    float am=amount;
+    #ifdef USE_MASK
+        float m=texture(texMask,texCoord).r;
 
-    outColor=cgl_blendPixel(base,col * blur,amount);
+        #ifdef MASK_INVERT
+            m=1.0-m;
+        #endif
+
+        am*=m;
+
+    #endif
+
+    outColor=cgl_blendPixel(base,col * blur,am);
 
 }

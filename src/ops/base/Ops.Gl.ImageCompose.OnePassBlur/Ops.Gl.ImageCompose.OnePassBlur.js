@@ -45,7 +45,7 @@ render.onTriggered = function ()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    if (mask.get())cgl.setTexture(0, mask.get().tex);
+    if (mask.get())cgl.setTexture(1, mask.get().tex);
 
     cgl.pushShader(shader);
     uniRadius.setValue(inRadius.get());
