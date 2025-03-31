@@ -6,7 +6,7 @@ export class Binding
 {
     name = "";
     bindNum = 0;
-    stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
+    stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
     define = "";
     log = new Logger("binding");
     needsRebuildBindgroup = false;
@@ -40,8 +40,9 @@ export class Binding
 
     /**
      * @returns {GPUBindGroupLayoutEntry}
+     * @param {CgpShader} shader
      */
-    getLayoutEntry() { return null; }
+    getLayoutEntry(shader) { return null; }
 
     /**
      * @returns {GPUBindGroupEntry}

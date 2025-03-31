@@ -37,13 +37,18 @@ export class BindingStorage extends Binding
         };
     }
 
-    /** @returns {GPUBindGroupLayoutEntry} */
-    getLayoutEntry()
+    /**
+     * @returns {GPUBindGroupLayoutEntry}
+     * @param {CgpShader} [shader]
+     */
+    getLayoutEntry(shader = null)
     {
 
         /** @type {GPUBufferBindingType} */
         let access = "read-only-storage";
-        if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "storage";
+
+        if (this.stage & GPUShaderStage.COMPUTE)
+            if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "storage";
         // else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write-only-storage";
 
         return {
@@ -57,16 +62,17 @@ export class BindingStorage extends Binding
     }
 
     /**
-     * @param {CgpShader} _shader
+     * @param {CgpShader} shader
      * @param {number} bindGroupNum
      */
-    getShaderHeaderCode(_shader, bindGroupNum)
+    getShaderHeaderCode(shader, bindGroupNum)
     {
         let str = "";
 
         let access = "read";
 
-        if (this.options.compute)
+        if (this.stage & GPUShaderStage.COMPUTE)
+        // if (shader && shader.options.compute)
             if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "read_write";
             else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write";
 

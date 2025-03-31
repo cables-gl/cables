@@ -96,12 +96,15 @@ export class BindGroup
     //     shader.setBindgroup(this);
     // }
 
-    getLayoutEntries()
+    /**
+     * @param {CgpShader} [shader]
+     */
+    getLayoutEntries(shader)
     {
         const arr = [];
         for (let i = 0; i < this.#bindings.length; i++)
         {
-            arr.push(this.#bindings[i].getLayoutEntry());
+            arr.push(this.#bindings[i].getLayoutEntry(shader));
         }
 
         if (arr.length == 0)
@@ -131,14 +134,17 @@ export class BindGroup
         return arr;
     }
 
-    getLayout()
+    /**
+     * @param {CgpShader} [shader]
+     */
+    getLayout(shader)
     {
 
         /** @type {GPUBindGroupLayout} */
         const bindGroupLayout = this.#cgp.device.createBindGroupLayout(
             {
                 "label": "bindgrouplayout " + this.name,
-                "entries": this.getLayoutEntries(),
+                "entries": this.getLayoutEntries(shader),
             });
 
         return bindGroupLayout;
@@ -216,14 +222,17 @@ export class BindGroup
     getShaderHeaderCode(shader)
     {
         const srcs = { "vertex": "", "fragment": "", "compute": "" };
+
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
+            console.log("bindddddddddddi ", bind.name);
             const src = bind.getShaderHeaderCode(shader, 0);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
-            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
+            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             // tmp stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
+
         }
 
         return srcs;

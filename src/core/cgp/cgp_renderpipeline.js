@@ -203,9 +203,9 @@ export class RenderPipeline extends Pipeline
     {
 
         this.bindingGroupLayoutEntries = [];
-        this.bindingGroupLayoutEntries = shader.defaultBindGroup.getLayoutEntries();
+        this.bindingGroupLayoutEntries = shader.defaultBindGroup.getLayoutEntries(shader);
 
-        const bindGroupLayouts = [shader.defaultBindGroup.getLayout()];
+        const bindGroupLayouts = [shader.defaultBindGroup.getLayout(shader)];
 
         /** @type {GPUPipelineLayout} */
         const pipelineLayout = this.cgp.device.createPipelineLayout({
