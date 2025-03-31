@@ -66,8 +66,9 @@ export class BindingStorage extends Binding
 
         let access = "read";
 
-        if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "read_write";
-        else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write";
+        if (this.options.compute)
+            if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "read_write";
+            else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write";
 
         str += "@group(" + bindGroupNum + ") ";
         str += "@binding(" + this.bindNum + ") ";

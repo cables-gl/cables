@@ -95,44 +95,40 @@ export class RenderPipeline extends Pipeline
 
         if (this.#pipeCfg)
         {
-            if (this.#type == RenderPipeline.TYPE_RENDER)
+            this.#pipeCfg =/** @type {GPURenderPipelineDescriptor} */ (this.#pipeCfg || {});
+            if (this.#pipeCfg.depthStencil.depthWriteEnabled != this.cgp.stateDepthWrite())
             {
-                this.#pipeCfg =/** @type {GPURenderPipelineDescriptor} */ (this.#pipeCfg || {});
-                if (this.#pipeCfg.depthStencil.depthWriteEnabled != this.cgp.stateDepthWrite())
-                {
-                    needsRebuildReason = "depth changed";
-                    this.#pipeCfg.depthStencil.depthWriteEnabled = !!this.cgp.stateDepthWrite();
-                }
-
-                if (this.#pipeCfg.fragment.targets[0].blend != this.cgp.stateBlend())
-                {
-                    needsRebuildReason = "blend changed";
-                    this.#pipeCfg.fragment.targets[0].blend = this.cgp.stateBlend();
-                }
-
-                if (this.cgp.stateDepthTest() === false)
-                {
-                    if (this.#pipeCfg.depthStencil.depthCompare != "never")
-                    {
-                        this.#pipeCfg.depthStencil.depthCompare = "never";
-                        needsRebuildReason = "depth compare changed";
-                    }
-                }
-                else
-                if (this.#pipeCfg.depthStencil.depthCompare != this.cgp.stateDepthFunc())
-                {
-                    needsRebuildReason = "depth state ";
-                    this.#pipeCfg.depthStencil.depthCompare = this.cgp.stateDepthFunc();
-                }
-
-                // if (this.#pipeCfg.primitive.cullMode != this.#cgp.stateCullFaceFacing())
-                // {
-                //     needsRebuildReason = "cullmode change";
-                //     // this.#pipeCfg.primitive.cullMode = this.#cgp.stateCullFaceFacing();
-                // console.log(this.#cgp.stateCullFaceFacing());
-                // }
-
+                needsRebuildReason = "depth changed";
+                this.#pipeCfg.depthStencil.depthWriteEnabled = !!this.cgp.stateDepthWrite();
             }
+
+            if (this.#pipeCfg.fragment.targets[0].blend != this.cgp.stateBlend())
+            {
+                needsRebuildReason = "blend changed";
+                this.#pipeCfg.fragment.targets[0].blend = this.cgp.stateBlend();
+            }
+
+            if (this.cgp.stateDepthTest() === false)
+            {
+                if (this.#pipeCfg.depthStencil.depthCompare != "never")
+                {
+                    this.#pipeCfg.depthStencil.depthCompare = "never";
+                    needsRebuildReason = "depth compare changed";
+                }
+            }
+            else
+            if (this.#pipeCfg.depthStencil.depthCompare != this.cgp.stateDepthFunc())
+            {
+                needsRebuildReason = "depth state ";
+                this.#pipeCfg.depthStencil.depthCompare = this.cgp.stateDepthFunc();
+            }
+
+            // if (this.#pipeCfg.primitive.cullMode != this.#cgp.stateCullFaceFacing())
+            // {
+            //     needsRebuildReason = "cullmode change";
+            //     // this.#pipeCfg.primitive.cullMode = this.#cgp.stateCullFaceFacing();
+            // console.log(this.#cgp.stateCullFaceFacing());
+            // }
 
         }
 

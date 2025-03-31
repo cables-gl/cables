@@ -17,7 +17,6 @@ import { Binding } from "./binding/binding.js";
 
 export class CgpShader extends CgShader
 {
-    #computePipeline;
 
     #lastCompileReason = "first";
 

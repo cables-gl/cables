@@ -51,11 +51,37 @@ export class BindGroup
     }
 
     /**
+     * @param {string} n
+     * @returns {Binding}
+     */
+    getBindingByName(n)
+    {
+
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            if (this.#bindings[i].name == n) return this.#bindings[i];
+        }
+    }
+
+    removeBinding(b)
+    {
+        const idx = this.#bindings.indexOf(b);
+        this.#bindings.splice(idx, 1);
+    }
+
+    /**
      * @param {Binding} b
      * @returns {Binding}
      */
     addBinding(b)
     {
+        const oldBinding = this.getBindingByName(b.name);
+        if (oldBinding)
+        {
+            console.log("binding already exists");
+            this.removeBinding(oldBinding);
+        }
+        b.needsRebuildBindgroup = true;
         b.bindNum = this.#bindings.length;
         this.#bindings.push(b);
 
