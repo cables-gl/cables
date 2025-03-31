@@ -32,16 +32,6 @@
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.Json.CsvColumnArray",
-            "author": "pandur",
-            "date": 1640618485564
-        },
-        {
-            "message": "Ops.User.pandur.CsvColumnArray_v2 renamed to Ops.Json.CsvColumnArray_v2",
-            "author": "pandur",
-            "date": 1640618533250
-        },
-        {
             "message": "added option to force number type",
             "author": "pandur",
             "date": 1643616875325
@@ -50,6 +40,13 @@
             "message": "show warning if column does not exist",
             "author": "pandur",
             "date": 1643616880935
+        },
+        {
+            "message": "show warning if array is empty",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1743094400500
         }
-    ]
+    ],
+    "license": "MIT"
 }
