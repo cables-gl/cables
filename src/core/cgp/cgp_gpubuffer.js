@@ -25,9 +25,9 @@ export class CgpGguBuffer extends Events
     needsUpdate = true;
     #log;
 
-    static BINDINGTYPE_STORAGE = "storage";
-    static BINDINGTYPE_UNIFORM = "uniform";
-    static BINDINGTYPE_READONLY_STORAGE = "read-only-storage";
+    // static BINDINGTYPE_STORAGE = "storage";
+    // static BINDINGTYPE_UNIFORM = "uniform";
+    // static BINDINGTYPE_READONLY_STORAGE = "read-only-storage";
 
     /**
      * Description
@@ -76,6 +76,14 @@ export class CgpGguBuffer extends Events
         }
     }
 
+    /**
+     * @param {number} flag
+     */
+    hasUsage(flag)
+    {
+        return (this.buffCfg.usage & flag) === flag;
+    }
+
     /** @param {CgpContext} cgp */
     updateGpuBuffer(cgp = null)
     {
@@ -87,7 +95,7 @@ export class CgpGguBuffer extends Events
         }
 
         this.#cgp.pushErrorScope("updateGpuBuffer");
-        if (!this.#gpuBuffer)
+        if (!this.#gpuBuffer || this.buffCfg.mappedAtCreation)
         {
             this.buffCfg = /** @type {GPUBufferDescriptor} */(this.buffCfg || {});
             this.buffCfg.label = "gpuBuffer-" + this.#name;
@@ -98,13 +106,23 @@ export class CgpGguBuffer extends Events
         }
 
         if (this.floatArr)
-            this.#cgp.device.queue.writeBuffer(
-                this.#gpuBuffer,
-                0,
-                this.floatArr.buffer,
-                this.floatArr.byteOffset,
-                this.floatArr.byteLength
-            );
+        {
+            if (this.buffCfg.mappedAtCreation)
+            {
+                new Float32Array(this.#gpuBuffer.getMappedRange()).set(this.floatArr);
+                this.#gpuBuffer.unmap();
+
+            }
+            else
+
+                this.#cgp.device.queue.writeBuffer(
+                    this.#gpuBuffer,
+                    0,
+                    this.floatArr.buffer,
+                    this.floatArr.byteOffset,
+                    this.floatArr.byteLength
+                );
+        }
 
         this.#cgp.popErrorScope();
 

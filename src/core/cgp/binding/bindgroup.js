@@ -166,7 +166,11 @@ export class BindGroup
         }
     }
 
-    bind(inst = 0)
+    /**
+ * @param {number} inst
+ * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEnc
+ */
+    bind(inst = 0, passEnc = null)
     {
         for (let i = 0; i < this.#bindings.length; i++)
             if (this.#bindings[i].needsRebuildBindgroup)
@@ -177,7 +181,7 @@ export class BindGroup
             }
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
-        this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);
+        (passEnc || this.#cgp.passEncoder).setBindGroup(0, this.#gpuBindGroups[inst]);
     }
 
     /**

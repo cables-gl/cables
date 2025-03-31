@@ -1,4 +1,8 @@
-import Geometry from "./cg_geom.js";
+import { mat4, vec3 } from "gl-matrix";
+import { Shader } from "../cgl/cgl_shader.js";
+import { CglContext } from "../cgl/cgl_state.js";
+import { Op } from "../core_op.js";
+import { Geometry } from "./cg_geom.js";
 
 export { BoundingBox };
 
@@ -105,13 +109,12 @@ class BoundingBox
      */
     get maxZ() { return this._max[2]; }
 
-    apply(geom, mat)
+    /**
+     * @param {Geometry} geom
+     */
+    apply(geom)
     {
-        if (!geom)
-        {
-            // console.warn("[boundingbox] no geom/vertices", geom);
-            return;
-        }
+        if (!geom) return;
 
         if (geom instanceof BoundingBox)
         {
@@ -144,6 +147,11 @@ class BoundingBox
         return !(this._max[0] == -Number.MAX_VALUE && this._max[1] == -Number.MAX_VALUE && this._max[2] == -Number.MAX_VALUE);
     }
 
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z
+     */
     applyPos(x, y, z)
     {
         if (x == Number.MAX_VALUE || x == -Number.MAX_VALUE ||
@@ -189,6 +197,9 @@ class BoundingBox
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
     }
 
+    /**
+     * @param {mat4} m
+     */
     mulMat4(m)
     {
         if (this._first)
@@ -207,7 +218,12 @@ class BoundingBox
         this.calcCenterSize();
     }
 
-    render(cgl, shader, op)
+    /**
+     * @param {CglContext} cgl
+     * @param {Shader} _shader
+     * @param {Op} op
+     */
+    render(cgl, _shader, op)
     {
         if (!this._wireMesh) this._wireMesh = new CGL.WireCube(cgl);
 

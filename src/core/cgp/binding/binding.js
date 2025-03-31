@@ -18,7 +18,7 @@ export class Binding
      * Description
      * @param {CgpContext} cgp
      * @param {string} name
-     * @param {string} options
+     * @param {object} options
      */
     constructor(cgp, name, options)
     {
@@ -26,6 +26,7 @@ export class Binding
         this.name = name;
         if (!name) this.log.error("no binding name given");
         this.options = options || {};
+        if (options.hasOwnProperty("stage")) this.stage = options.stage;
     }
 
     /**
@@ -74,6 +75,7 @@ export class Binding
     /**
      * @param {CgpShader} shader
      * @param {number} bindGroupNum
+     * @returns {String}
      */
     getShaderHeaderCode(shader, bindGroupNum)
     {

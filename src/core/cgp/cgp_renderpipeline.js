@@ -182,7 +182,7 @@ export class RenderPipeline extends Pipeline
 
             let passEnc = this.cgp.passEncoder;
 
-            if (this.#type != RenderPipeline.TYPE_RENDER) passEnc = this.#passEncoder;
+            // if (this.#type != RenderPipeline.TYPE_RENDER) passEnc = this.#passEncoder;
 
             if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("pipe updateUniforms", this.name, { "shader": shader.getInfo() });
 

@@ -1,4 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
+import { quat } from "gl-matrix";
 import { uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
@@ -101,9 +102,12 @@ export class Anim extends Events
         return this.loop;
     }
 
-    setLoop(target)
+    /**
+     * @param {boolean} enable
+     */
+    setLoop(enable)
     {
-        this.loop = target;
+        this.loop = enable;
         this.emitEvent("onChange", this);
     }
 
@@ -394,9 +398,7 @@ export class Anim extends Events
         }
 
         if (time < this.keys[0].time)
-        {
             return this.keys[0].value;
-        }
 
         if (this.loop && time > this.keys[this._lastKeyIndex].time)
         {
@@ -527,7 +529,7 @@ export class Anim extends Events
 
 /**
  * @param {number} time
- * @param {glMatrix.quat} q
+ * @param {quat} q
  * @param {Anim} animx
  * @param {Anim} animy
  * @param {Anim} animz

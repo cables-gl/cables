@@ -9,7 +9,7 @@ const
 
 render.onTriggered = function ()
 {
-    const cg = op.patch.cgl;
+    const cg = op.patch.cg || op.patch.cgl;
 
     vec3.transformMat4(pos, empty, cg.mMatrix);
 

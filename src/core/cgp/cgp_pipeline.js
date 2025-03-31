@@ -25,8 +25,8 @@ export class Pipeline
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
-    /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
-    #passEncoder;
+    // /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
+    // #passEncoder;
 
     #shaderListeners = [];
     #old = {};
@@ -57,6 +57,11 @@ export class Pipeline
         // {
         //     this.#renderPipeline = null;
         // });
+    }
+
+    get passEncoder()
+    {
+        return this.#cgp.passEncoder;
     }
 
     get log()
