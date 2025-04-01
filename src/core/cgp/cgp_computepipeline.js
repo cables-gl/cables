@@ -55,7 +55,6 @@ export class ComputePipeline extends Pipeline
             return;
         }
 
-        console.log("setpoop");
         if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("setPipeline", this.name, { "info": this.getInfo(), "shader": shader.getInfo() });
 
         let needsRebuildReason = "";
@@ -83,10 +82,11 @@ export class ComputePipeline extends Pipeline
 
         if (needsRebuildReason != "")
         {
+            this.cgp.profileData.addHeavyEvent("pipeline created", this.name, needsRebuildReason);
+
             this.lastRebuildReason = needsRebuildReason;
             this.rebuildCount++;
             // console.log("needsRebuildReason");
-            console.log("rebuild compute pipe", needsRebuildReason);
             this.cgp.pushErrorScope("createPipeline", { "logger": this.log });
 
             this.#rebuildNumBindingGroups = false;

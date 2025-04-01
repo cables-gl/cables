@@ -78,7 +78,6 @@ export class BindGroup
         const oldBinding = this.getBindingByName(b.name);
         if (oldBinding)
         {
-            console.log("binding already exists");
             this.removeBinding(oldBinding);
         }
         b.needsRebuildBindgroup = true;
@@ -111,7 +110,6 @@ export class BindGroup
         {
             console.log("nooooooooooooooooooooooo");
         }
-        console.log("arrrrrr", arr);
         return arr;
     }
 
@@ -163,7 +161,7 @@ export class BindGroup
             "entries": this.getEntries(inst)
         };
 
-        console.log(bg);
+        this.#cgp.profileData.addHeavyEvent("crease bindgroup inst", this.name);
 
         // if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
         // {
@@ -223,10 +221,10 @@ export class BindGroup
     {
         const srcs = { "vertex": "", "fragment": "", "compute": "" };
 
+        this.#cgp.profileData.addHeavyEvent("bindgroup shadercode", this.name);
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
-            console.log("bindddddddddddi ", bind.name);
             const src = bind.getShaderHeaderCode(shader, 0);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
             if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;

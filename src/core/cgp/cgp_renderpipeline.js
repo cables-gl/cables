@@ -72,7 +72,6 @@ export class RenderPipeline extends Pipeline
         if (this.#old.shader != shader)
         {
             this.setShaderListener(this.#old.shader, shader);
-            console.log("shader changed?!@");
             needsRebuildReason = "shader changed";
         }
 
@@ -136,16 +135,14 @@ export class RenderPipeline extends Pipeline
 
         if (needsRebuildReason != "")
         {
+            this.cgp.profileData.addHeavyEvent("pipeline created", this.name, needsRebuildReason);
             this.lastRebuildReason = needsRebuildReason;
             this.rebuildCount++;
-            // console.log("needsRebuildReason");
-            console.log("rebuild pipe", needsRebuildReason);
             this.cgp.pushErrorScope("createPipeline", { "logger": this.log });
 
             this.#rebuildNumBindingGroups = false;
 
             this.#pipeCfg = this.getPipelineObject(shader);
-            console.log(this.#pipeCfg);
 
             this.#old.device = this.cgp.device;
             this.#old.shader = shader;
