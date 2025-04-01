@@ -37,17 +37,28 @@ export class BindingStorage extends Binding
         };
     }
 
-    /** @returns {GPUBindGroupLayoutEntry} */
-    getLayoutEntry()
+    /**
+     * @returns {GPUBindGroupLayoutEntry}
+     * @param {CgpShader} [shader]
+     */
+    getLayoutEntry(shader = null)
     {
+
+        /** @type {GPUBufferBindingType} */
+        let access = "read-only-storage";
+
+        if (this.stage & GPUShaderStage.COMPUTE)
+            if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "storage";
+        // else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write-only-storage";
+
         return {
             "visibility": this.stage,
             "binding": this.bindNum,
             // "minBindingSize": this.getSizeBytes(),
             // "hasDynamicOffset": 0,
             "buffer": {
-
-                "type": "read-only-storage" } };
+                "type": access
+            } };
     }
 
     /**
@@ -58,15 +69,18 @@ export class BindingStorage extends Binding
     {
         let str = "";
 
-        console.log("nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        let access = "read";
+
+        if (this.stage & GPUShaderStage.COMPUTE)
+        // if (shader && shader.options.compute)
+            if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "read_write";
+            else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write";
+
         str += "@group(" + bindGroupNum + ") ";
         str += "@binding(" + this.bindNum + ") ";
-        str += "var<storage,read> ";
-        // else if (this.bindingType == "read-write")str += "var<storage,read_write> ";
-        // if (this.bindingType.includes("storage") && this.uniforms.length == 0)
-        // {
+
+        str += "var<storage," + access + "> ";
         let typeStr = "array<f32>";
-        // }
         str += this.name + ": " + typeStr + ";\n";
 
         return str + "\n";

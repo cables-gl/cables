@@ -17,13 +17,13 @@ export class ComputePipeline extends Pipeline
     #pipeCfg = null;
 
     /** @type {GPUComputePipeline} */
-    #renderPipeline = null;
+    #computePipeline = null;
 
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
     /** @type {GPUComputePassEncoder} */
-    #passEncoder;
+    #computePassEncoder;
 
     #shaderListeners = [];
     #old = {};
@@ -55,6 +55,7 @@ export class ComputePipeline extends Pipeline
             return;
         }
 
+        console.log("setpoop");
         if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("setPipeline", this.name, { "info": this.getInfo(), "shader": shader.getInfo() });
 
         let needsRebuildReason = "";
@@ -85,7 +86,7 @@ export class ComputePipeline extends Pipeline
             this.lastRebuildReason = needsRebuildReason;
             this.rebuildCount++;
             // console.log("needsRebuildReason");
-            console.log("rebuild pipe", needsRebuildReason);
+            console.log("rebuild compute pipe", needsRebuildReason);
             this.cgp.pushErrorScope("createPipeline", { "logger": this.log });
 
             this.#rebuildNumBindingGroups = false;
@@ -97,10 +98,10 @@ export class ComputePipeline extends Pipeline
             this.#old.shader = shader;
             this.#old.mesh = mesh;
             this.#isValid = true;
-
+            console.log(this.#pipeCfg);
             try
             {
-                this.#renderPipeline = this.cgp.device.createComputePipeline(this.#pipeCfg);
+                this.#computePipeline = this.cgp.device.createComputePipeline(this.#pipeCfg);
             }
             catch (e)
             {
@@ -128,9 +129,9 @@ export class ComputePipeline extends Pipeline
 
         /** @type {Array<GPUBindGroupLayoutEntry>} */
         this.bindingGroupLayoutEntries = [];
-        this.bindingGroupLayoutEntries = shader.defaultBindGroup.getLayoutEntries();
+        this.bindingGroupLayoutEntries = shader.defaultBindGroup.getLayoutEntries(shader);
 
-        const bindGroupLayouts = [shader.defaultBindGroup.getLayout()];
+        const bindGroupLayouts = [shader.defaultBindGroup.getLayout(shader)];
 
         /** @type {GPUPipelineLayout} */
         const pipelineLayout = this.cgp.device.createPipelineLayout({
@@ -142,13 +143,13 @@ export class ComputePipeline extends Pipeline
         let pipeCfg = {
             "label": this.name,
             "layout": pipelineLayout,
-
             "compute":
             {
                 "module": shader.gpuShaderModule,
                 "entryPoint": shader.options.entryPoint || "main"
             }
         };
+        console.log("pipecft", pipeCfg, bindGroupLayouts);
 
         return pipeCfg;
     }
@@ -164,25 +165,28 @@ export class ComputePipeline extends Pipeline
         /** @type {GPUCommandEncoder} */
         const commandEncoder = this.cgp.device.createCommandEncoder();
 
-        this.#passEncoder = commandEncoder.beginComputePass({ "label": "computepass " + shader.getName() });
+        this.#computePassEncoder = commandEncoder.beginComputePass({ "label": "computepass " + shader.getName() });
 
-        if (!this.#renderPipeline) this.setPipeline(shader);
-        if (!this.#renderPipeline)
+        // if (!this.#computePipeline)
+        this.setPipeline(shader);
+
+        if (!this.#computePipeline)
         {
             this.log.warn("no render pipe");
             return;
         }
 
-        this.#passEncoder.setPipeline(this.#renderPipeline);
+        this.#computePassEncoder.setPipeline(this.#computePipeline);
+        shader.bind(this.#computePassEncoder);
 
-        shader.bind();
+        if (workGroups.length == 1) this.#computePassEncoder.dispatchWorkgroups(workGroups[0] || 8);
+        else if (workGroups.length == 2) this.#computePassEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);
+        else if (workGroups.length == 3) this.#computePassEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8, workGroups[2] || 8);
+        else console.log("workgroups length wrong,,,");
 
-        if (workGroups.length == 1) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8);
-        if (workGroups.length == 2) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);
-        if (workGroups.length == 3) this.#passEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8, workGroups[2] || 8);
+        this.#computePassEncoder.end();
 
-        this.#passEncoder.end();
-
+        // console.log("llllllll", shader.defaultBindGroup.getLayout());
         const gpuCommands = commandEncoder.finish();
         this.cgp.device.queue.submit([gpuCommands]);
         this.pushDebug();

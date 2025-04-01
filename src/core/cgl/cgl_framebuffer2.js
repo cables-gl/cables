@@ -1,8 +1,16 @@
 import { Logger } from "cables-shared-client";
 import { Texture } from "./cgl_texture.js";
+import { CglContext } from "./cgl_state.js";
 
 export class Framebuffer2
 {
+
+    /**
+     * @param {CglContext} cgl
+     * @param {number} w
+     * @param {number} h
+     * @param {object} options
+     */
     constructor(cgl, w, h, options)
     {
         this._log = new Logger("cgl_framebuffer2");
@@ -168,6 +176,10 @@ export class Framebuffer2
         this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
     }
 
+    /**
+     * @param {number} w
+     * @param {number} h
+     */
     setSize(w, h)
     {
         if (this._disposed) return this._log.warn("disposed framebuffer setsize...");
@@ -442,7 +454,6 @@ export class Framebuffer2
         this._cgl.popFrameBuffer();
 
         this._cgl.popModelMatrix();
-        // this._cgl.resetViewPort();
         this._cgl.popViewPort();
 
         if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)

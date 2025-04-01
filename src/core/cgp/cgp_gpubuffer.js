@@ -25,9 +25,9 @@ export class CgpGguBuffer extends Events
     needsUpdate = true;
     #log;
 
-    static BINDINGTYPE_STORAGE = "storage";
-    static BINDINGTYPE_UNIFORM = "uniform";
-    static BINDINGTYPE_READONLY_STORAGE = "read-only-storage";
+    // static BINDINGTYPE_STORAGE = "storage";
+    // static BINDINGTYPE_UNIFORM = "uniform";
+    // static BINDINGTYPE_READONLY_STORAGE = "read-only-storage";
 
     /**
      * Description
@@ -45,10 +45,11 @@ export class CgpGguBuffer extends Events
         this.#name = name;
         // this.setData([0, 0, 0, 0]);
 
-        if (options.buffCfg) this.buffCfg = options.buffCfg;
+        this.buffCfg = options.buffCfg || {};
         if (data) this.setData(data);
         if (options.length) this.setLength(options.length);
 
+        this.buffCfg.usage = this.buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
         this.updateGpuBuffer(cgp);
     }
 
@@ -76,6 +77,14 @@ export class CgpGguBuffer extends Events
         }
     }
 
+    /**
+     * @param {number} flag
+     */
+    hasUsage(flag)
+    {
+        return (this.buffCfg.usage & flag) === flag;
+    }
+
     /** @param {CgpContext} cgp */
     updateGpuBuffer(cgp = null)
     {
@@ -87,24 +96,33 @@ export class CgpGguBuffer extends Events
         }
 
         this.#cgp.pushErrorScope("updateGpuBuffer");
-        if (!this.#gpuBuffer)
+        if (!this.#gpuBuffer || this.buffCfg.mappedAtCreation)
         {
             this.buffCfg = /** @type {GPUBufferDescriptor} */(this.buffCfg || {});
             this.buffCfg.label = "gpuBuffer-" + this.#name;
             if (!this.buffCfg.hasOwnProperty("size") && this.floatArr) this.buffCfg.size = this.floatArr.length * 4;
-            this.buffCfg.usage = this.buffCfg.usage || (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC);
 
             this.#gpuBuffer = this.#cgp.device.createBuffer(this.buffCfg);
         }
 
         if (this.floatArr)
-            this.#cgp.device.queue.writeBuffer(
-                this.#gpuBuffer,
-                0,
-                this.floatArr.buffer,
-                this.floatArr.byteOffset,
-                this.floatArr.byteLength
-            );
+        {
+            if (this.buffCfg.mappedAtCreation)
+            {
+                new Float32Array(this.#gpuBuffer.getMappedRange()).set(this.floatArr);
+                this.#gpuBuffer.unmap();
+
+            }
+            else
+
+                this.#cgp.device.queue.writeBuffer(
+                    this.#gpuBuffer,
+                    0,
+                    this.floatArr.buffer,
+                    this.floatArr.byteOffset,
+                    this.floatArr.byteLength
+                );
+        }
 
         this.#cgp.popErrorScope();
 

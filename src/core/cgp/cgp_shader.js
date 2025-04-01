@@ -17,7 +17,6 @@ import { Binding } from "./binding/binding.js";
 
 export class CgpShader extends CgShader
 {
-    #computePipeline;
 
     #lastCompileReason = "first";
 
@@ -279,7 +278,7 @@ export class CgpShader extends CgShader
         this._isValid = false;
     }
 
-    bind()
+    bind(passEnc = null)
     {
 
         this.incFrameUsageCount();
@@ -320,7 +319,7 @@ export class CgpShader extends CgShader
         {
             this.bindGroups[i].updateValues(this.frameUsageCounter);
 
-            this.bindGroups[i].bind(this.frameUsageCounter);
+            this.bindGroups[i].bind(this.frameUsageCounter, passEnc);
 
         }
         if (this._needsRecompile) this.compile();

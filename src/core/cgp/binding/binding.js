@@ -6,7 +6,7 @@ export class Binding
 {
     name = "";
     bindNum = 0;
-    stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
+    stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
     define = "";
     log = new Logger("binding");
     needsRebuildBindgroup = false;
@@ -18,7 +18,7 @@ export class Binding
      * Description
      * @param {CgpContext} cgp
      * @param {string} name
-     * @param {string} options
+     * @param {object} options
      */
     constructor(cgp, name, options)
     {
@@ -26,6 +26,7 @@ export class Binding
         this.name = name;
         if (!name) this.log.error("no binding name given");
         this.options = options || {};
+        if (options.hasOwnProperty("stage")) this.stage = options.stage;
     }
 
     /**
@@ -39,8 +40,9 @@ export class Binding
 
     /**
      * @returns {GPUBindGroupLayoutEntry}
+     * @param {CgpShader} shader
      */
-    getLayoutEntry() { return null; }
+    getLayoutEntry(shader) { return null; }
 
     /**
      * @returns {GPUBindGroupEntry}
@@ -74,6 +76,7 @@ export class Binding
     /**
      * @param {CgpShader} shader
      * @param {number} bindGroupNum
+     * @returns {String}
      */
     getShaderHeaderCode(shader, bindGroupNum)
     {

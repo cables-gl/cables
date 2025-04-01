@@ -51,11 +51,37 @@ export class BindGroup
     }
 
     /**
+     * @param {string} n
+     * @returns {Binding}
+     */
+    getBindingByName(n)
+    {
+
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            if (this.#bindings[i].name == n) return this.#bindings[i];
+        }
+    }
+
+    removeBinding(b)
+    {
+        const idx = this.#bindings.indexOf(b);
+        this.#bindings.splice(idx, 1);
+    }
+
+    /**
      * @param {Binding} b
      * @returns {Binding}
      */
     addBinding(b)
     {
+        const oldBinding = this.getBindingByName(b.name);
+        if (oldBinding)
+        {
+            console.log("binding already exists");
+            this.removeBinding(oldBinding);
+        }
+        b.needsRebuildBindgroup = true;
         b.bindNum = this.#bindings.length;
         this.#bindings.push(b);
 
@@ -70,12 +96,15 @@ export class BindGroup
     //     shader.setBindgroup(this);
     // }
 
-    getLayoutEntries()
+    /**
+     * @param {CgpShader} [shader]
+     */
+    getLayoutEntries(shader)
     {
         const arr = [];
         for (let i = 0; i < this.#bindings.length; i++)
         {
-            arr.push(this.#bindings[i].getLayoutEntry());
+            arr.push(this.#bindings[i].getLayoutEntry(shader));
         }
 
         if (arr.length == 0)
@@ -105,14 +134,17 @@ export class BindGroup
         return arr;
     }
 
-    getLayout()
+    /**
+     * @param {CgpShader} [shader]
+     */
+    getLayout(shader)
     {
 
         /** @type {GPUBindGroupLayout} */
         const bindGroupLayout = this.#cgp.device.createBindGroupLayout(
             {
                 "label": "bindgrouplayout " + this.name,
-                "entries": this.getLayoutEntries(),
+                "entries": this.getLayoutEntries(shader),
             });
 
         return bindGroupLayout;
@@ -166,7 +198,11 @@ export class BindGroup
         }
     }
 
-    bind(inst = 0)
+    /**
+ * @param {number} inst
+ * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEnc
+ */
+    bind(inst = 0, passEnc = null)
     {
         for (let i = 0; i < this.#bindings.length; i++)
             if (this.#bindings[i].needsRebuildBindgroup)
@@ -177,7 +213,7 @@ export class BindGroup
             }
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
-        this.#cgp.passEncoder.setBindGroup(0, this.#gpuBindGroups[inst]);
+        (passEnc || this.#cgp.passEncoder).setBindGroup(0, this.#gpuBindGroups[inst]);
     }
 
     /**
@@ -186,14 +222,17 @@ export class BindGroup
     getShaderHeaderCode(shader)
     {
         const srcs = { "vertex": "", "fragment": "", "compute": "" };
+
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
+            console.log("bindddddddddddi ", bind.name);
             const src = bind.getShaderHeaderCode(shader, 0);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
-            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
+            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             // tmp stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE;
+
         }
 
         return srcs;

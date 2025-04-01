@@ -55,10 +55,9 @@ Math.seededRandom = function (max, min)
 
 /**
  * append a linebreak to a string
- * @function endl
- * @extends String
- * @return {String} string with newline break appended ('\n')
- */
+ * @this {String}
+ * @returns {string} string with newline appended
+*/
 String.prototype.endl = function ()
 {
     return this + "\n";
