@@ -20,9 +20,9 @@ let texChanged = false;
 let loadingId = null;
 outString.ignoreValueSerialize = true;
 
-let pixelReader = new CGL.PixelReader();
+// let pixelReader = new CGL.PixelReader();
 
-start.onTriggered = () => { texChanged = true; retrySoon(); };
+start.onTriggered = () => { update(); };
 
 inQuality.onChange =
 inFormat.onChange =
@@ -31,21 +31,21 @@ inCanvas.onChange = () =>
     texChanged = true;
 };
 
-function retrySoon()
-{
-    if (texChanged)
-    {
-        if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
-        outLoading.set(true);
+// function retrySoon()
+// {
+//     if (texChanged)
+//     {
+//         if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+//         outLoading.set(true);
 
-        loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
+//         loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
 
-        op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
-    }
-    inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
+//         op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
+//     }
+//     inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
 
-    next.trigger();
-}
+//     next.trigger();
+// }
 
 function update()
 {
@@ -70,6 +70,11 @@ function update()
     const ext = inFormat.get().toLowerCase();
 
     // let dataString = "";
+    if (!inCanvas.get().toDataURL)
+    {
+        console.log("canvas has no toDataURL", inCanvas.get());
+        return;
+    }
 
     let dataString = inCanvas.get().toDataURL("image/" + ext, inQuality.get());
 
