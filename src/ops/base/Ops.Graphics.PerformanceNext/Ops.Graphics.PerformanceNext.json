@@ -1,0 +1,92 @@
+{
+    "summary": "Show WebGl Performance Statistics",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Measure GPU",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "top",
+                    "bottom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Open",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Smooth Graph",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "childs"
+            },
+            {
+                "type": 2,
+                "name": "Canvas"
+            },
+            {
+                "type": 0,
+                "name": "FPS",
+                "subType": "number"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "066f5c5f-a11c-42ad-bf7c-567e626c352e",
+    "created": 1743508973060,
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added active toggle to completly disable calculation of performance data",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1731928552752
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743508973061
+        }
+    ]
+}
