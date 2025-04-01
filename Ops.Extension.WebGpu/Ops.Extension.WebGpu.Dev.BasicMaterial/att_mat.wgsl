@@ -26,10 +26,14 @@ fn myVSMain(
     var modelMatrix=uniVert.modelMatrix;
 
     #ifdef INSTANCING
-        modelMatrix[3][0]+=arr[instIdx].x;
-        modelMatrix[3][1]+=arr[instIdx].y;
-        modelMatrix[3][2]+=arr[instIdx].z;
+        modelMatrix[3][0]+=arr[instIdx*3+0];
+        modelMatrix[3][1]+=arr[instIdx*3+1];
+        modelMatrix[3][2]+=arr[instIdx*3+2];
     #endif
+
+    if(instIdx==1){
+modelMatrix[3][0]+=1.0;    }
+
 
     var modelViewMatrix=uniVert.viewMatrix * modelMatrix;
 
@@ -96,10 +100,9 @@ fn myFSMain
     #endif
 
 
-
-    if(v.instIdx==0){
-        // col=vec4(1.0,0.0,0.0,1.0);
-    }
+    // if(v.instIdx==0){
+    //     col=vec4(1.0,0.0,0.0,1.0);
+    // }
 
     {{MODULE_COLOR}}
 

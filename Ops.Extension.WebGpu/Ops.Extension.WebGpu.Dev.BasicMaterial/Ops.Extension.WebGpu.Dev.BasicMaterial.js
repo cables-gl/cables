@@ -24,12 +24,13 @@ let needDefines = true;
 inTex.onChange =
     inTexMask.onLinkChanged =
     inTex.onLinkChanged =
-    colorizeTexture.onChange = () =>
-    {
-        if (shader)shader.needsPipelineUpdate = "basicmat";
-        needDefines = true;
-        // shader=null;
-    };
+     colorizeTexture.onChange =
+     () =>
+     {
+         if (shader)shader.needsPipelineUpdate = "basicmat";
+         needDefines = true;
+         // shader=null;//// trmsnerstmne
+     };
 
 inTrigger.onTriggered = () =>
 {

@@ -8,7 +8,7 @@
           "x": 33.911186050149354,
           "y": 611.0777565096193
         },
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -73,7 +73,7 @@
           "x": 59.88660649673113,
           "y": 498.82802533389736
         },
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -162,7 +162,7 @@
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "q5hqiieoj",
       "uiAttribs": {
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "translate": {
           "x": 33.911186050149354,
           "y": 768.8852604887315
@@ -183,11 +183,11 @@
         },
         {
           "name": "width",
-          "value": 1
+          "value": 2
         },
         {
           "name": "height",
-          "value": 1
+          "value": 2
         },
         {
           "name": "pivot x index",
@@ -235,7 +235,7 @@
       "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
       "id": "net07xcyg",
       "uiAttribs": {
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "translate": {
           "x": 33.911186050149354,
           "y": 728.8852604887315
@@ -300,7 +300,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "q28cbmof9",
       "uiAttribs": {
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "translate": {
           "x": 33.911186050149354,
           "y": 0
@@ -328,7 +328,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "tkwb7fj5x",
       "uiAttribs": {
-        "subPatch": "cevnzwx6a",
+        "subPatch": "e3huq5mui",
         "translate": {
           "x": 33.911186050149354,
           "y": 879.8852604887315

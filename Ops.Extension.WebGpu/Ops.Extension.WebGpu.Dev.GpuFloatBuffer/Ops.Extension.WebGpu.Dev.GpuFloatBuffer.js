@@ -14,12 +14,15 @@ inArr.onChange = () =>
     if (!gpuBuff || gpuBuff.getSizeBytes() != arr.length * 4)
     {
         gpuBuff = new CABLES.CGP.GPUBuffer(op.patch.cgp, "gpuBuffOp", arr, {
-
-            "usage": GPUBufferUsage.MAP_WRITE | GPUBufferUsage.COPY_SRC
-
+            "buffCfg": {
+                "size": arr.length * 4,
+                "usage": GPUBufferUsage.COPY_SRC | GPUBufferUsage.STORAGE,
+                // "usage": GPUBufferUsage.MAP_WRITE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.STORAGE
+                "mappedAtCreation": true
+            }
         });
     }
-
+    //
     gpuBuff.setData(arr);
     gpuBuff.updateGpuBuffer(op.patch.cgp);
     outBuff.setRef(gpuBuff);

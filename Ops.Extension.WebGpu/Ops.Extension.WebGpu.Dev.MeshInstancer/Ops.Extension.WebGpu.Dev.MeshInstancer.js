@@ -21,10 +21,18 @@ let storage = null;
 
 inGeom.onChange =
 inPosBuff.onLinkChanged =
-inReset.onTriggered = () =>
+inReset.onTriggered = reset;
+
+function reset()
 {
+    storage = null;
     needsbuild = true;
     mesh = null;
+}
+
+inPosBuff.onChange = () =>
+{
+    if (storage && storage.cgpBuffer != inPosBuff.get()) reset();
 };
 
 inTrigger.onTriggered = () =>
@@ -38,12 +46,9 @@ inTrigger.onTriggered = () =>
         if (!geom)mesh = CGP.MESHES.getSimpleRect(cgp, "meshInstDefaultRect", 0.1);
         else mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
         needsbuild = false;
-        console.log("new mesh");
     }
 
     const shader = cgp.getShader();
-    // const u = shader.getUniform("arr");
-    // if (!u) return op.log("no uniform");
 
     shader.toggleDefine("INSTANCING", true);
     shader.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
@@ -53,30 +58,16 @@ inTrigger.onTriggered = () =>
     {
         if (!storage)
         {
-            storage = new CGP.BindingStorage(op.patch.cgp, "arr", inPosBuff.get());
+            storage = new CGP.BindingStorage(op.patch.cgp, "arr", { "cgpBuffer": inPosBuff.get() });
             shader.defaultBindGroup.addBinding(storage);
+            shader.needsPipelineUpdate = "bindgroup...";
         }
-
-        // mesh.instances = inInstances.get() || inPosBuff.get().length;
-
-        // outNum.set(mesh.instances);
-
-        // if (u.gpuBuffer != inPosBuff.get())
-        // {
-        //     oldPosBuff = u.gpuBuffer;
-        //     u.setGpuBuffer(inPosBuff.get());
-        //     shader.needsPipelineUpdate = "change gpubuffer uniform";
-        // }
     }
     else
     {
-        // if (u.gpuBuffer != null)
-        // {
-        //     u.gpuBuffer = oldPosBuff;
-        //     oldPosBuff = null;
-        // }
-        // u.setGpuBuffer(null);
+
     }
+    mesh.instances = inInstances.get() || inPosBuff.get().length;
 
     if (mesh)mesh.render();
 
