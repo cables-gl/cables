@@ -1,0 +1,33 @@
+{
+    "id": "582e1560-90ba-47f7-8402-de8119987d4b",
+    "created": 1743517026680,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743517026681
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.MeshInstancer1",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743517059321
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "op5tk4ww9",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}
