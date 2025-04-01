@@ -52,7 +52,7 @@ export class CgpShader extends CgShader
         this.frameUsageFrame = -1;
 
         this._bindingIndexCount = 0;
-        this._compileCount = 0;
+        this.compileCount = 0;
 
         this.defaultBindGroup = new BindGroup(_cgp, this._name);
 
@@ -69,7 +69,7 @@ export class CgpShader extends CgShader
         }
         else
         {
-            this.defaultUniBindingCompute = new BindingUniform(_cgp, "uniCompute", {});
+            this.defaultUniBindingCompute = new BindingUniform(_cgp, "uniCompute", { "stage": GPUShaderStage.COMPUTE });
             this.defaultBindGroup.addBinding(this.defaultUniBindingCompute);
         }
 
@@ -259,6 +259,8 @@ export class CgpShader extends CgShader
 
         if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("shadercompile", this._name, { "info": this.getInfo() });
 
+        this._cgp.profileData.count("shader compile", this._name);
+
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
         this._cgp.popErrorScope(this.error.bind(this));
 
@@ -269,7 +271,8 @@ export class CgpShader extends CgShader
         this.emitEvent("compiled", this._compileReason);
         this._needsRecompile = false;
         this._compileReason = "none";
-        this._compileCount++;
+        this.compileCount++;
+
         if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
     }
 
@@ -420,7 +423,7 @@ export class CgpShader extends CgShader
             "name": this._name,
             "frameUsageCounter": this.lastFrameUsageCounter,
             "lastCompileReason": this.#lastCompileReason,
-            "compileCount": this._compileCount,
+            "compileCount": this.compileCount,
             "numDefines": this._defines.length,
             "isCompute": this.options.compute
         };

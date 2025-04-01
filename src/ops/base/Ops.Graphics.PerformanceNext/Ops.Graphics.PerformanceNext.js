@@ -259,6 +259,7 @@ function updateText()
 {
     if (!inShow.get()) return;
     cgl = op.patch.cg || op.patch.cgl;
+    let html = "";
 
     if (!container)
     {
@@ -269,22 +270,12 @@ function updateText()
 
     if (cgl.profileData)
     {
-        if (cgl.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + cgl.profileData.profileShaderCompileName + ") ";
-        if (cgl.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + cgl.profileData.profileShaderGetUniformName + ")";
-        if (cgl.profileData.profileTextureResize > 0)warn += "Texture resize! ";
-        if (cgl.profileData.profileFrameBuffercreate > 0)warn += "Framebuffer create! ";
-        if (cgl.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
-        if (cgl.profileData.profileTextureDelete > 0)warn += "Texture delete! ";
-        if (cgl.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + cgl.profileData.profileNonTypedAttribNames;
-        if (cgl.profileData.profileTextureNew > 0)warn += "new texture created! ";
-        if (cgl.profileData.profileGenMipMap > 0)warn += "generating mip maps!";
+
     }
     if (warn.length > 0)
     {
         warn = "| <span style=\"color:#f80;\">WARNING: " + warn + "<span>";
     }
-
-    let html = "";
 
     if (opened)
     {
@@ -293,19 +284,17 @@ function updateText()
         html += "<span style=\"color:" + colorOnFrame + "\">■</span> " + Math.round((currentTimeOnFrame) * 100) / 100 + "ms onframe ";
         if (currentTimeGPU) html += "<span style=\"color:" + colorGPU + "\">■</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
         html += warn;
-        element.innerHTML = html;
     }
     else
     {
         html += fps + " fps / ";
         html += "CPU: " + Math.round((cgl.profileData.profileOnAnimFrameOps) * 100) / 100 + "ms / ";
         if (currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
-        element.innerHTML = html;
     }
 
     if (op.patch.loading.getProgress() != 1.0)
     {
-        element.innerHTML += "<br/>loading " + Math.round(op.patch.loading.getProgress() * 100) + "% " + loadingChars[(++loadingCounter) % loadingChars.length];
+        html += "<br/>loading " + Math.round(op.patch.loading.getProgress() * 100) + "% " + loadingChars[(++loadingCounter) % loadingChars.length];
     }
 
     if (opened)
@@ -327,28 +316,16 @@ function updateText()
         avgMs /= count;
         avgMsChilds /= count;
 
-        element.innerHTML += "<br/> " + cgl.canvasWidth + " x " + cgl.canvasHeight + " (x" + cgl.pixelDensity + ") ";
-        element.innerHTML += "<br/>frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
-        element.innerHTML += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
+        html += "<br/> " + cgl.canvasWidth + " x " + cgl.canvasHeight + " (x" + cgl.pixelDensity + ") ";
+        html += "<br/>frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
+        html += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
 
-        element.innerHTML += "<br/>shader binds: " + Math.ceil(cgl.profileData.profileShaderBinds / fps) +
-            " uniforms: " + Math.ceil(cgl.profileData.profileUniformCount / fps) +
-            " mvp_uni_mat4: " + Math.ceil(cgl.profileData.profileMVPMatrixCount / fps) +
-            " num glPrimitives: " + Math.ceil(cgl.profileData.profileMeshNumElements / (fps)) +
-
-            " fenced pixelread: " + Math.ceil(cgl.profileData.profileFencedPixelRead) +
-
-            " mesh.setGeom: " + cgl.profileData.profileMeshSetGeom +
-            " videos: " + cgl.profileData.profileVideosPlaying +
-            " tex preview: " + cgl.profileData.profileTexPreviews;
-
-        element.innerHTML +=
-        " draw meshes: " + Math.ceil(cgl.profileData.profileMeshDraw / fps) +
-        " framebuffer blit: " + Math.ceil(cgl.profileData.profileFramebuffer / fps) +
-        " texeffect blit: " + Math.ceil(cgl.profileData.profileTextureEffect / fps);
-
-        element.innerHTML += " all shader compiletime: " + Math.round(cgl.profileData.shaderCompileTime * 100) / 100;
+        for (let i in cgl.profileData.counts)
+        {
+            html += "<br>" + i + ": " + cgl.profileData.counts[i].length;
+        }
     }
+    element.innerHTML = html;
 
     cgl.profileData.clear();
 }

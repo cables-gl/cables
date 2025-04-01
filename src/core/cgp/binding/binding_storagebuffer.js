@@ -67,6 +67,7 @@ export class BindingStorage extends Binding
      */
     getShaderHeaderCode(shader, bindGroupNum)
     {
+        this.cgp.profileData.count("shadercode storage", this.name);
         let str = "";
 
         let access = "read";
