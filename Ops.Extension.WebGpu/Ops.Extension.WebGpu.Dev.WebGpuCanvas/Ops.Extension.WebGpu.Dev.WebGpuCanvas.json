@@ -19,6 +19,15 @@
             },
             {
                 "type": 0,
+                "name": "MSAA samples index",
+                "values": [
+                    "1",
+                    "4"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Max Pixel Density (DPR)",
                 "subType": "number"
             },

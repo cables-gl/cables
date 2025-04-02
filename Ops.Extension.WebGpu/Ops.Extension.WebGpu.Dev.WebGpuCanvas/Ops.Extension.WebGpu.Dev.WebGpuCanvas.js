@@ -1,5 +1,7 @@
 const
     inEnabled = op.inBool("Active", true),
+    inMsaa = op.inSwitch("MSAA samples", [1, 4], 1),
+
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     inCatchErrs = op.inBool("Catch Errors", true),
     inStopErrs = op.inBool("Stop on Errors", true),
@@ -21,6 +23,7 @@ let context = null, pipeline = null, contextPrev = null;
 let container = null;
 let stopped = false;
 let hadError = false;
+let needCreateTargets = false;
 let renderPreview = !!CABLES.UI;
 
 canvas = document.createElement("canvas");
@@ -36,6 +39,11 @@ outEle.setRef(canvas);
 
 let canvasId = "cablescanvas";
 container = document.getElementById(canvasId);
+
+inMsaa.onChange = () =>
+{
+    needCreateTargets = true;
+};
 
 // const canvas2 = document.createElement("canvas");
 // canvas2.id = "webgpucanvasOut";
@@ -74,7 +82,7 @@ let sizeHeight = 0;
 // new CABLES.WebGpuOp(op);
 
 // const cgp = op.patch.cgp;
-const sampleCount = 1;
+let sampleCount = 1;
 
 cgp.setCanvas(canvas);
 if (op.patch.cgCanvas)console.log("patch cgcanvas already exists..."); // todo add/manage child canvase
@@ -174,8 +182,6 @@ if (navigator.gpu)
 
                 //
 
-                //
-
                 cgp.setDevice(device);
                 cgp.adapter = adapter;
                 cgp.setCanvas(canvas);
@@ -216,6 +222,8 @@ function createTargets(cgp)
 {
     if (!op.patch.isPlaying || stopped || !inEnabled.get()) return;
 
+    cgp.profileData.count("targets created", op.objName);
+
     const devicePixelRatio = 1;// window.devicePixelRatio || 1;
 
     sizeWidth = canvas.clientWidth * devicePixelRatio;
@@ -228,21 +236,19 @@ function createTargets(cgp)
     cgp.presentationFormat = presentationFormat;
 
     context.configure({
-        device,
+        "device": device,
         "format": presentationFormat
     });
 
-    // contextPrev.configure({
-    //     device,
-    //     "format": presentationFormat
-    // });
-
     if (renderTarget)renderTarget.destroy();
     if (depthTexture)depthTexture.destroy();
+
     try
     {
+        sampleCount = parseInt(inMsaa.get());
         renderTarget = device.createTexture(
             {
+                "label": "main",
                 "size": [sizeWidth, sizeHeight],
                 "format": presentationFormat,
                 "sampleCount": sampleCount,
@@ -250,23 +256,26 @@ function createTargets(cgp)
             });
 
         depthTexture = device.createTexture({
+            "label": "main depth",
+
             "size": [sizeWidth, sizeHeight],
             "format": "depth24plus",
             "sampleCount": sampleCount,
             "usage": GPUTextureUsage.RENDER_ATTACHMENT,
         });
 
-        depthTexturePrev = device.createTexture({
-            "size": [sizeWidth, sizeHeight],
-            "format": "depth24plus",
-            "sampleCount": sampleCount,
-            "usage": GPUTextureUsage.RENDER_ATTACHMENT,
-        });
+        // depthTexturePrev = device.createTexture({
+        //     "size": [sizeWidth, sizeHeight],
+        //     "format": "depth24plus",
+        //     "sampleCount": sampleCount,
+        //     "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+        // });
     }
     catch (exc)
     {
         console.log(exc);
     }
+    needCreateTargets = false;
 }
 
 function frame()
@@ -280,7 +289,7 @@ function frame()
     }
 
     const devicePixelRatio = 1;
-    if (sizeWidth != canvas.clientWidth * devicePixelRatio || sizeHeight != canvas.clientHeight * devicePixelRatio)
+    if (needCreateTargets || sizeWidth != canvas.clientWidth * devicePixelRatio || sizeHeight != canvas.clientHeight * devicePixelRatio)
         createTargets(cgp);
 
     // render(true);
@@ -316,22 +325,37 @@ function render(b)
         "colorAttachments": [
             {
                 "view": context.getCurrentTexture().createView(),
+                // "resolveTarget": null,
+                // "resolveTarget": context.getCurrentTexture().createView(),
+                // "view": cgp.textureView,
+
                 "loadOp": "clear",
+                "sampleCount": sampleCount,
+
                 "storeOp": "store",
                 "clearValue": { "r": 0.1, "g": 0.1, "b": 0.1, "a": 1.0 }
             },
         ],
-        "depthStencilAttachment": {
+        "depthStencilAttachment":
+        {
             "view": cgp.canvasInfo.depthTextureView,
             "depthClearValue": 1,
             "depthLoadOp": "clear",
             "depthStoreOp": "store",
         },
     };
+
+    if (sampleCount > 1)
+    {
+        cgp.renderPassDescriptor.colorAttachments[0].view = cgp.textureView;
+        cgp.renderPassDescriptor.colorAttachments[0].resolveTarget = context.getCurrentTexture().createView();
+    }
+
     cgp.passEncoder = commandEncoder.beginRenderPass(cgp.renderPassDescriptor);
 
     op.patch.cg = cgp;
     cgp.renderStart();
+    cgp.pushMultisampling(sampleCount);
 
     const oldCgl = op.patch.cgl;
     op.patch.cgl = null; // force crash if something tries to use it
@@ -342,6 +366,7 @@ function render(b)
 
     op.patch.cgl = oldCgl;
 
+    cgp.popMultisampling();
     cgp.renderEnd();
     cgp.passEncoder.end();
 
