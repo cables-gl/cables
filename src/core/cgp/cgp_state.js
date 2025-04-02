@@ -252,7 +252,7 @@ export class CgpContext extends CgContext
     getShader()
     {
         return this._shaderStack[this._shaderStack.length - 1];
-        // if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
+        if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
         // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
@@ -332,6 +332,13 @@ export class CgpContext extends CgContext
         this._stackDepthTest.push(b);
     }
 
+    getDepthCompare()
+    {
+        let depthComp = this.stateDepthFunc();
+        if (!this.stateDepthTest())depthComp = "always";
+        return depthComp;
+    }
+
     /**
      * current state of depth testing
      * @function stateDepthTest
@@ -373,7 +380,6 @@ export class CgpContext extends CgContext
 
     /**
      * current state of depth writing
-     * @function stateCullFace
      * @returns {Boolean} enabled
      * @memberof Context
      * @instance
@@ -385,7 +391,6 @@ export class CgpContext extends CgContext
 
     /**
      * pop depth writing state
-     * @function popCullFace
      * @memberof Context
      * @instance
      */
@@ -446,37 +451,12 @@ export class CgpContext extends CgContext
         this._stackCullFace.push(b);
     }
 
-    /**
-     * current state of face culling
-     * @function stateCullFace
-     * @returns {Boolean} enabled
-     * @memberof Context
-     * @instance
-     */
-    stateCullFace()
-    {
-        return this._stackCullFace[this._stackCullFace.length - 1];
-    }
-
-    /**
-     * pop face culling enabled state
-     * @function popCullFace
-     * @memberof Context
-     * @instance
-     */
-    popCullFace()
-    {
-        this._stackCullFace.pop();
-    }
-
     // --------------------------------------
     // state CullFace Facing
 
     /**
      * push face culling face side
-     * @function pushCullFaceFacing
-     * @memberof Context
-     * @param b
+     * @param {string} b
      * @instance
      */
     pushCullFaceFacing(b)
@@ -486,10 +466,7 @@ export class CgpContext extends CgContext
 
     /**
      * current state of face culling side
-     * @function stateCullFaceFacing
-     * @returns {Boolean} enabled
-     * @memberof Context
-     * @instance
+     * @returns {string}
      */
     stateCullFaceFacing()
     {

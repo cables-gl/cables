@@ -34,7 +34,6 @@ export class CgpUniform extends CgUniform
             if (this.getType() == "t")
             {
                 this._value = this.#cgp.getEmptyTexture();
-                console.log("TEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", this._value);
             }
             // else if (this.getType() == "2f") this._value = [0, 0];
             // else if (this.getType() == "4f") this._value = [0, 1, 0, 1];
@@ -95,8 +94,8 @@ export class CgpUniform extends CgUniform
 
     setValueT(v)
     {
-        if (this._value != v)
-            this._shader.needsPipelineUpdate = "texture changed"; // todo really needed ? change binding instead?
+        // if (this._value != v)
+        //     this._shader.needsPipelineUpdate = "texture changed"; // todo really needed ? change binding instead?
 
         this.needsUpdate = true;
         this._value = v;

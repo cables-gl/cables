@@ -40,9 +40,9 @@ export class Binding
 
     /**
      * @returns {GPUBindGroupLayoutEntry}
-     * @param {CgpShader} shader
+     * @param {CgpShader} _shader
      */
-    getLayoutEntry(shader) { return null; }
+    getLayoutEntry(_shader) { return null; }
 
     /**
      * @returns {GPUBindGroupEntry}
