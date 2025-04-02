@@ -4,35 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1666461431819
-        },
-        {
-            "message": " added core lib: cgp_compute",
-            "author": "pandur",
-            "date": 1666461894697
-        },
-        {
-            "message": "Ops.User.pandur.Computetest renamed to Ops.Dev.WebGpu.Computetest",
-            "author": "pandur",
-            "date": 1666471553002
-        },
-        {
-            "message": "Ops.Dev.WebGpu.Computetest renamed to Ops.Team.WebGpu.Computetest",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1694617577619
-        },
-        {
-            "message": "Ops.Team.WebGpu.Computetest renamed to Ops.Team.WebGpu.CustomCompute",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1727861015632
-        },
-        {
-            "message": "Team.WebGpu.CustomCompute_v2 renamed to Ops.Extension.WebGpu.CompCompute",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1743583959873
+            "date": 1743583959873,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
@@ -86,5 +59,9 @@
     "coreLibs": [
         "cgp_webgpuop"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "1ff0dH",
+    "docs": {
+        "ports": []
+    }
 }

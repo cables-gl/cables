@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1743580886530
-        },
-        {
-            "message": "Extension.WebGpu.ComputeStorage renamed to Ops.Extension.WebGpu.ComputeStorageOutput",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1743587514968
         }
     ],
     "layout": {

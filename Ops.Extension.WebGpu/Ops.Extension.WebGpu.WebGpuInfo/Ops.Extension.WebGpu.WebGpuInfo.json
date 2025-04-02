@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1743069376170
-        },
-        {
-            "message": "Patch.PELv2yG.WebGpuInfo renamed to Ops.Extension.WebGpu.WebGpuInfo",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1743069391522
         }
     ],
     "layout": {
