@@ -110,8 +110,10 @@ export class RenderPipeline extends Pipeline
             if (this.#pipeCfg.primitive.cullMode != this.cgp.stateCullFaceFacing())
                 needsRebuildReason = "cullmode change";
 
-        }
+            if (this.#pipeCfg.multisample.count != this.cgp.stateMultisampling())
+                needsRebuildReason = "multisample change";
 
+        }
         this.pushDebug();
 
         if (needsRebuildReason != "")
@@ -229,11 +231,15 @@ export class RenderPipeline extends Pipeline
             // "triangle-list",
             // "triangle-strip"
             },
-            // todo: multisamle here
+            "multisample": {
+                "count": this.cgp.stateMultisampling(),
+                "alphaToCoverageEnabled": false // Enable if using alpha testing
+            },
             "depthStencil": {
                 "depthWriteEnabled": this.cgp.stateDepthWrite(),
                 "depthCompare": this.cgp.getDepthCompare(),
                 "format": "depth24plus",
+
             },
             "vertex":
             {

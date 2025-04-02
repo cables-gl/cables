@@ -51,6 +51,7 @@ export class CgpContext extends CgContext
         this._stackErrorScope = [];
         this._stackBlend = [];
         this._stackErrorScopeLogs = [];
+        this._stackMultisampling = [];
 
         this.currentPipeDebug = null;
         this.canvasAttachments = [];
@@ -449,6 +450,29 @@ export class CgpContext extends CgContext
     pushCullFace(b)
     {
         this._stackCullFace.push(b);
+    }
+
+    // --------------------------------------
+    // state multisambling
+    /**
+     * @returns {number}
+     */
+    stateMultisampling()
+    {
+        return this._stackMultisampling[this._stackMultisampling.length - 1];
+    }
+
+    /**
+     * @param {number} samples
+     */
+    pushMultisampling(samples)
+    {
+        this._stackMultisampling.push(samples);
+    }
+
+    popMultisampling()
+    {
+        this._stackMultisampling.pop();
     }
 
     // --------------------------------------
