@@ -1,0 +1,94 @@
+{
+    "id": "1d1fe0c4-1960-4eb2-a526-efbe42c95d75",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1666461431819
+        },
+        {
+            "message": " added core lib: cgp_compute",
+            "author": "pandur",
+            "date": 1666461894697
+        },
+        {
+            "message": "Ops.User.pandur.Computetest renamed to Ops.Dev.WebGpu.Computetest",
+            "author": "pandur",
+            "date": 1666471553002
+        },
+        {
+            "message": "Ops.Dev.WebGpu.Computetest renamed to Ops.Team.WebGpu.Computetest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694617577619
+        },
+        {
+            "message": "Ops.Team.WebGpu.Computetest renamed to Ops.Team.WebGpu.CustomCompute",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1727861015632
+        },
+        {
+            "message": "Team.WebGpu.CustomCompute_v2 renamed to Ops.Extension.WebGpu.CompCompute",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743583959873
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1739872802642,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Compute"
+            },
+            {
+                "type": 5,
+                "name": "Source"
+            },
+            {
+                "type": 3,
+                "name": "Uniforms"
+            },
+            {
+                "type": 0,
+                "name": "Workgroups 1",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroups 2",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroups 3",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Force Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Buffer"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop"
+    ],
+    "license": "MIT"
+}
