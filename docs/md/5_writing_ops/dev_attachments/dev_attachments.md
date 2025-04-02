@@ -89,8 +89,8 @@ worker.onmessage = function (event) {
 
 Running this op (by saving the code), will print this in the dev-console, showing the working echo-service:
 ```
-Received message from main thread: Hello from the main thread!
-Received message from worker: Hello from the main thread!
+Received message from main thread: ECHO
+Received message from worker: ECHO
 ```
 
 ### WASM
