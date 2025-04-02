@@ -5,11 +5,10 @@ const
     inF2 = op.inFloat("Y", 1),
     inF3 = op.inFloat("Z", 1),
     inF4 = op.inFloat("W", 1),
-    next = op.outTrigger("Next"),
-    outBuff = op.outObject("Buffer"),
-    outLen = op.outNumber("Buffer Length");
+    next = op.outTrigger("Next");
 
-let gpuBuff;
+new CABLES.WebGpuOp(op);
+
 let uni;
 let shader;
 let cgp;
@@ -17,7 +16,6 @@ let cgp;
 function init(_shader)
 {
     shader = _shader;
-
     uni = shader.addUniform(new CGP.Uniform(shader, "4f", inName.get(), inF1, inF2, inF3, inF4), GPUShaderStage.COMPUTE);
 }
 
@@ -39,6 +37,5 @@ exec.onTriggered = () =>
             init(cgp.getShader());
             console.log("shader", shader);
         }
-    outBuff.setRef(gpuBuff);
     next.trigger();
 };

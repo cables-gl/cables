@@ -1,6 +1,6 @@
 {
-    "id": "527d0fd2-5495-48c1-9c15-265c02edf3ac",
-    "created": 1743580886529,
+    "id": "1d599995-a83d-4b5f-90ae-901bced792f0",
+    "created": 1743587542060,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -9,6 +9,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1743580886530
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743584055536
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743587542060
         }
     ],
     "layout": {
@@ -22,25 +34,18 @@
                 "name": "Name"
             },
             {
-                "type": 0,
-                "name": "Length",
-                "subType": "integer"
+                "type": 2,
+                "name": "Buffer"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Next"
-            },
-            {
-                "type": 2,
-                "name": "Buffer"
-            },
-            {
-                "type": 0,
-                "name": "Buffer Length",
-                "subType": "number"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgp_webgpuop"
+    ]
 }

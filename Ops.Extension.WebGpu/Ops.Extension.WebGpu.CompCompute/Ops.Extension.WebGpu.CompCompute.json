@@ -48,10 +48,6 @@
                 "name": "Source"
             },
             {
-                "type": 3,
-                "name": "Uniforms"
-            },
-            {
                 "type": 0,
                 "name": "Workgroups 1",
                 "subType": "integer"

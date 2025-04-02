@@ -32,7 +32,7 @@ function reset()
 
 inPosBuff.onChange = () =>
 {
-    if (storage && storage.cgpBuffer != inPosBuff.get()) reset();
+    if (storage && oldPosBuff != inPosBuff.get()) reset();
 };
 
 inTrigger.onTriggered = () =>
@@ -58,6 +58,7 @@ inTrigger.onTriggered = () =>
     {
         if (!storage)
         {
+            oldPosBuff = inPosBuff.get();
             storage = new CGP.BindingStorage(op.patch.cgp, "arr", { "cgpBuffer": inPosBuff.get() });
             shader.defaultBindGroup.addBinding(storage);
             shader.needsPipelineUpdate = "bindgroup...";

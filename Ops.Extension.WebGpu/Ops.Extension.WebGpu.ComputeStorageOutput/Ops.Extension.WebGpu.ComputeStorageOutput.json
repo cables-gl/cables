@@ -1,6 +1,6 @@
 {
-    "id": "b00c2816-0c93-483c-8904-dc3d575c92e2",
-    "created": 1743584055535,
+    "id": "527d0fd2-5495-48c1-9c15-265c02edf3ac",
+    "created": 1743580886529,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -11,10 +11,10 @@
             "date": 1743580886530
         },
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "Extension.WebGpu.ComputeStorage renamed to Ops.Extension.WebGpu.ComputeStorageOutput",
+            "type": "rename",
             "author": "pandur",
-            "date": 1743584055536
+            "date": 1743587514968
         }
     ],
     "layout": {
@@ -29,29 +29,23 @@
             },
             {
                 "type": 0,
-                "name": "X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Z",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "W",
-                "subType": "number"
+                "name": "Length",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Buffer"
+            },
+            {
+                "type": 0,
+                "name": "Buffer Length",
+                "subType": "number"
             }
         ]
     },

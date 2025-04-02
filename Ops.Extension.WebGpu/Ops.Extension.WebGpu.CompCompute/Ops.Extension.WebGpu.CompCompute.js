@@ -1,7 +1,6 @@
 const
     compute = op.inTrigger("Compute"),
     inSrc = op.inStringEditor("Source", op.attachments.compute_wgsl, "glsl"),
-    inUnis = op.inArray("Uniforms"),
     inWg1 = op.inInt("Workgroups 1", 8),
     inWg2 = op.inInt("Workgroups 2", 8),
     inWg3 = op.inInt("Workgroups 3", 0),
@@ -37,7 +36,6 @@ inForce.onTriggered = () =>
     if (shader)shader.needsPipelineUpdate = "force update...";
 };
 
-inUnis.onChange =
 inSrc.onChange = () =>
 {
     needsInit = true;

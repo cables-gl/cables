@@ -6,6 +6,8 @@ const
     outBuff = op.outObject("Buffer"),
     outLen = op.outNumber("Buffer Length");
 
+new CABLES.WebGpuOp(op);
+
 let gpuBuff;
 let binding;
 let shader;
