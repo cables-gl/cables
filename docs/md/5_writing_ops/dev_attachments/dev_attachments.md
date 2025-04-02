@@ -31,6 +31,31 @@ This snippet will output the contents of your attachment (e.g. "hello attachment
 console.log(attachments["my_attachment"]);
 ```
 
+### Using inc_  attachments
+If the name of your attachment starts with `inc_` the contents of the attachment will be included (and executed)
+before your op code. This can be useful to stucture your code, branch things out into classes or just to have
+less "boilerplate" code visible in the op editor.
+
+Given an attachment named `inc_context` with the following code:
+```javascript
+class MyOpContext {
+    getRandomNumber() {
+        return Math.random();
+    }
+}
+```
+
+And an op with the code:
+```javascript
+const context = new MyOpContext();
+console.log("this is in the op:", context.getRandomNumber());
+```
+
+Your console will output something like:
+```
+this is in the op: 0.5711111111111111
+```
+
 ### WebWorkers
 [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) usually reside in separate files from
 their main code to run in different threads. You can use attachments, create specially crafted urls from the content
