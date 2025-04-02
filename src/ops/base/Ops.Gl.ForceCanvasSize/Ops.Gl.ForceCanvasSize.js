@@ -229,7 +229,6 @@ inTrigger.onTriggered = function ()
         outWidth.set(w);
         outHeight.set(h);
         cgl.setSize(w, h);
-        console.log("res ckhange", cgl.canvas.width, w);
     }
     // else
     next.trigger();
