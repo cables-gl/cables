@@ -1,0 +1,33 @@
+{
+    "id": "2a47ce27-8c10-4e13-940a-c9dcdb7cbf46",
+    "created": 1743590040746,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743590040747
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.ComputeInstancer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743590077415
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "x0g812fln",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}
