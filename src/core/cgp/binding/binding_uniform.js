@@ -113,6 +113,7 @@ export class BindingUniform extends Binding
      */
     getShaderHeaderCode(shader, bindGroupNum)
     {
+        this.cgp.profileData.count("shadercode uni", this.name);
         let str = "";
         let typeStr = "";
         let name = this.name;
@@ -149,12 +150,14 @@ export class BindingUniform extends Binding
             name = this.#uniforms[0].name;
         }
 
+        console.log("shadercode uniforms", this.#uniforms[0].name);
         str += "@group(" + bindGroupNum + ") ";
         str += "@binding(" + this.bindNum + ") ";
 
         str += "var<uniform> ";
         str += name + ": " + typeStr + ";\n";
 
+        console.log(str);
         return str + "\n";
     }
 

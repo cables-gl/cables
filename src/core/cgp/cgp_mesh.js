@@ -17,12 +17,12 @@ export class CgpMesh extends CgMesh
     {
         super();
 
-        this._cgp = _cgp;
+        this.cgp = _cgp;
         this._geom = null;
         this.numIndex = 0;
         this.instances = 1;
 
-        this._pipe = new RenderPipeline(this._cgp, "pipe mesh " + __geom.name);
+        this._pipe = new RenderPipeline(this.cgp, "pipe mesh " + __geom.name);
         this._numNonIndexed = 0;
         this._positionBuffer = null;
 
@@ -63,12 +63,12 @@ export class CgpMesh extends CgMesh
         this._geom = geom;
         this._disposeAttributes();
 
-        this._positionBuffer = this._createBuffer(this._cgp.device, new Float32Array(geom.vertices), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
+        this._positionBuffer = this._createBuffer(this.cgp.device, new Float32Array(geom.vertices), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
 
         let vi = geom.verticesIndices;
         if (!geom.isIndexed()) vi = Array.from(Array(geom.vertices.length / 3).keys());
         this._numIndices = vi.length;
-        this._indicesBuffer = this._createBuffer(this._cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
+        this._indicesBuffer = this._createBuffer(this.cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
         if (geom.texCoords && geom.texCoords.length) this.setAttribute("texCoords", geom.texCoords, 2);
         if (geom.vertexNormals && geom.vertexNormals.length) this.setAttribute("normals", geom.vertexNormals, 3);
@@ -109,7 +109,7 @@ export class CgpMesh extends CgMesh
         let instanced = false;
         if (options.instanced) instanced = options.instanced;
 
-        const buffer = this._createBuffer(this._cgp.device, new Float32Array(array), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
+        const buffer = this._createBuffer(this.cgp.device, new Float32Array(array), GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST);
 
         const attr = {
             "buffer": buffer,
@@ -129,9 +129,9 @@ export class CgpMesh extends CgMesh
         if (!this._positionBuffer) return;
         if (this.instances <= 0) return;
 
-        if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh.render()", "geom " + this._geom.name);
+        if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("mesh.render()", "geom " + this._geom.name);
 
-        shader = shader || this._cgp.getShader();
+        shader = shader || this.cgp.getShader();
         if (shader)shader.bind();
 
         if (!shader || !shader.isValid)
@@ -145,35 +145,36 @@ export class CgpMesh extends CgMesh
 
         if (this._pipe.isValid)
         {
-            if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("mesh.render().draw", "geom " + this._geom.name, {
+            if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("mesh.render().draw", "geom " + this._geom.name, {
                 "geom": this._geom.getInfo(),
                 "shader": shader.getInfo(),
                 "numAttributes": this._attributes.length
             });
 
-            this._cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
+            this.cgp.passEncoder.setVertexBuffer(0, this._positionBuffer);
             for (let i = 0; i < this._attributes.length; i++)
-                this._cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
+                this.cgp.passEncoder.setVertexBuffer(i + 1, this._attributes[i].buffer);
 
-            this._cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
+            this.cgp.passEncoder.setIndexBuffer(this._indicesBuffer, "uint32");
 
+            this.cgp.profileData.count("draw mesh", this._name);
             if (this._numNonIndexed)
-                this._cgp.passEncoder.draw(this._numIndices, this.instances);
+                this.cgp.passEncoder.draw(this._numIndices, this.instances);
             else
-                this._cgp.passEncoder.drawIndexed(this._numIndices, this.instances);
+                this.cgp.passEncoder.drawIndexed(this._numIndices, this.instances);
 
-            if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
+            if (this.cgp.branchProfiler) this.cgp.branchProfiler.pop();
         }
         else
         {
-            if (this._cgp.branchProfiler)
+            if (this.cgp.branchProfiler)
             {
-                this._cgp.branchProfiler.push("mesh invalid pipeline ", "geom " + this._geom.name);
-                this._cgp.branchProfiler.pop();
+                this.cgp.branchProfiler.push("mesh invalid pipeline ", "geom " + this._geom.name);
+                this.cgp.branchProfiler.pop();
             }
         }
 
-        if (this._cgp.branchProfiler) this._cgp.branchProfiler.pop();
+        if (this.cgp.branchProfiler) this.cgp.branchProfiler.pop();
 
         // if (shader)shader.unbind();
     }

@@ -55,9 +55,6 @@ export class ComputePipeline extends Pipeline
             return;
         }
 
-        console.log("setpoop");
-        if (this.cgp.branchProfiler) this.cgp.branchProfiler.push("setPipeline", this.name, { "info": this.getInfo(), "shader": shader.getInfo() });
-
         let needsRebuildReason = "";
         if (!this.#pipeCfg)needsRebuildReason = "no pipecfg";
         if (this.#old.mesh != mesh)needsRebuildReason = "no mesh";
@@ -83,10 +80,11 @@ export class ComputePipeline extends Pipeline
 
         if (needsRebuildReason != "")
         {
+            this.cgp.profileData.count("pipeline created", this.name);
+
             this.lastRebuildReason = needsRebuildReason;
             this.rebuildCount++;
             // console.log("needsRebuildReason");
-            console.log("rebuild compute pipe", needsRebuildReason);
             this.cgp.pushErrorScope("createPipeline", { "logger": this.log });
 
             this.#rebuildNumBindingGroups = false;
@@ -186,6 +184,7 @@ export class ComputePipeline extends Pipeline
 
         this.#computePassEncoder.end();
 
+        this.cgp.profileData.count("compute pipe", this.name);
         // console.log("llllllll", shader.defaultBindGroup.getLayout());
         const gpuCommands = commandEncoder.finish();
         this.cgp.device.queue.submit([gpuCommands]);

@@ -32,10 +32,12 @@ class ProfileData
 
         this.doProfileGlQuery = false;
         this.glQueryData = {};
+        this.counts = {};
     }
 
     clear()
     {
+        this.counts = {};
         this.profileSingleMeshAttribute = {};
         this.profileMeshAttributes = 0;
         this.profileUniformCount = 0;
@@ -77,6 +79,21 @@ class ProfileData
         }
     }
 
+    /**
+     * @param {string} event
+     * @param {string} name
+     */
+    count(event, name)
+    {
+        this.counts[event] = this.counts[event] || [];
+        this.counts[event].push(name);
+    }
+
+    /**
+     * @param {string} event
+     * @param {string} name
+     * @param {string} [info]
+     */
     addHeavyEvent(event, name, info)
     {
         const e = { "event": event, "name": name, "info": info, "date": performance.now() };

@@ -36,7 +36,6 @@ export class CglContext extends CgContext
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
         this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
-        this.profileData = new ProfileData(this);
         this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
 
         this.glVersion = 0;

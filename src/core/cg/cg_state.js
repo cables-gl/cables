@@ -2,6 +2,7 @@ import { Events } from "cables-shared-client";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
 import { Patch } from "../core_patch.js";
+import { ProfileData } from "../cgl/cgl_profiledata.js";
 
 export class CgContext extends Events
 {
@@ -38,6 +39,8 @@ export class CgContext extends Events
         this.DEPTH_COMPARE_FUNC_NOTEQUAL = 5;
         this.DEPTH_COMPARE_FUNC_GREATEREQUAL = 6;
         this.DEPTH_COMPARE_FUNC_ALWAYS = 7;
+
+        this.profileData = new ProfileData(this);
 
         /**
          * Current projection matrix
