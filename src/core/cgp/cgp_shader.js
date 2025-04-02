@@ -313,16 +313,25 @@ export class CgpShader extends CgShader
     }
 
     /**
+     * @param {number} stage
+     * @returns {BindingUniform}
+     */
+    getDefaultUniBinding(stage)
+    {
+        let binding = this.defaultUniBindingFrag;
+        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
+        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
+        return binding;
+    }
+
+    /**
      * @param {CgpUniform} u
      * @param {number} stage
      * @returns {CgpUniform}
      */
     addUniform(u, stage)
     {
-        let binding = this.defaultUniBindingFrag;
-        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
-        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
-
+        const binding = this.getDefaultUniBinding(stage);
         if (u.type == "t") this.defaultBindGroup.addBinding(new BindingTexture(this._cgp, u.name, { "uniform": u }));
         else if (u.type == "sampler") this.defaultBindGroup.addBinding(new BindingSampler(this._cgp, u.name, { "uniform": u }));
         else
@@ -334,6 +343,13 @@ export class CgpShader extends CgShader
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;
+    }
+
+    removeUniformByName(name)
+    {
+        const binding = this.getDefaultUniBinding(stage);
+        binding.removeUniformByName(name);
+
     }
 
     /**
