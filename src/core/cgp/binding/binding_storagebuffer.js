@@ -21,9 +21,6 @@ export class BindingStorage extends Binding
     {
         super(cgp, name, options);
         this.cgpbuffer = options.cgpBuffer || new CgpGguBuffer(cgp, "temp", [0, 0, 0, 0]);
-
-        // if (this.bindingType == "read-write-storage") buffCfg.usage = GPUBufferUsage.MAP_WRITE | GPUBufferUsage.COPY_SRC;
-        // else if (this.bindingType == "read-only-storage" || this.bindingType == "storage") buffCfg.usage = GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST;
     }
 
     /**
@@ -39,9 +36,9 @@ export class BindingStorage extends Binding
 
     /**
      * @returns {GPUBindGroupLayoutEntry}
-     * @param {CgpShader} [shader]
+     * @param {CgpShader} [_shader]
      */
-    getLayoutEntry(shader = null)
+    getLayoutEntry(_shader = null)
     {
 
         /** @type {GPUBufferBindingType} */
@@ -62,10 +59,10 @@ export class BindingStorage extends Binding
     }
 
     /**
-     * @param {CgpShader} shader
+     * @param {CgpShader} _shader
      * @param {number} bindGroupNum
      */
-    getShaderHeaderCode(shader, bindGroupNum)
+    getShaderHeaderCode(_shader, bindGroupNum)
     {
         this.cgp.profileData.count("shadercode storage", this.name);
         let str = "";
@@ -73,7 +70,6 @@ export class BindingStorage extends Binding
         let access = "read";
 
         if (this.stage & GPUShaderStage.COMPUTE)
-        // if (shader && shader.options.compute)
             if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_SRC) && this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "read_write";
             else if (this.cgpbuffer.hasUsage(GPUBufferUsage.COPY_DST)) access = "write";
 

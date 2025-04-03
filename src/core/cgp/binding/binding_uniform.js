@@ -55,6 +55,23 @@ export class BindingUniform extends Binding
         return size;
     }
 
+    /**
+     * @param {string} name
+     */
+    removeUniformByName(name)
+    {
+        for (let i = 0; i < this.#uniforms.length; i++)
+            if (this.#uniforms[i].name == name)
+            {
+                this.needsRebuildBindgroup = true;
+                return this.#uniforms.splice(i, 1);
+            }
+
+    }
+
+    /**
+     * @param {number} inst
+     */
     createBuffer(inst)
     {
         let buffCfg = {
