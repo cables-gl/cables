@@ -29,6 +29,12 @@ export class Binding
         if (options.hasOwnProperty("stage")) this.stage = options.stage;
     }
 
+    copy()
+    {
+        const b = new Binding(this.cgp, this.name, this.options);
+        return b;
+    }
+
     /**
      * @param {number} _inst
      */
@@ -42,7 +48,11 @@ export class Binding
      * @returns {GPUBindGroupLayoutEntry}
      * @param {CgpShader} _shader
      */
-    getLayoutEntry(_shader) { return null; }
+    getLayoutEntry(_shader)
+    {
+        this.log.warn("unknown binding type?", this);
+        return null;
+    }
 
     /**
      * @returns {GPUBindGroupEntry}

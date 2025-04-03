@@ -396,20 +396,28 @@ export class CgpShader extends CgShader
      */
     copy()
     {
-        const shader = new CgpShader(this._cgp, this._name + " copy");
+        const shader = new CgpShader(this._cgp, this._name + " copy", this.options);
         shader.setSource(this._src);
 
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
         // shader._modGroupCount = this._modGroupCount;
-        // shader._moduleNames = this._moduleNames;
+        shader._moduleNames = this._moduleNames;
 
         // // shader.glPrimitive = this.glPrimitive;
         // // shader.offScreenPass = this.offScreenPass;
         // // shader._extensions = this._extensions;
         // // shader.wireframe = this.wireframe;
         // // shader._attributes = this._attributes;
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            const bg = this.bindGroups[i].copy(shader);
+            shader.bindGroups.push(bg);
+
+            if (this.bindGroups[i] == this.defaultBindGroup)
+                shader.defaultBindGroup = bg;
+        }
 
         // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
