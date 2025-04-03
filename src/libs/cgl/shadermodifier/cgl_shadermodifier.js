@@ -30,8 +30,8 @@ class ShaderModifier
     }
 
     /**
-     * @param {CglShader} curShader
-     * @param {CglShader} pushShader
+     * @param {Shader} curShader
+     * @param {Shader} pushShader
      */
     bind(curShader, pushShader)
     {
