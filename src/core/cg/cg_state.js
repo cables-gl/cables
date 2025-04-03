@@ -1,4 +1,4 @@
-import { Events } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
 import { Patch } from "../core_patch.js";
@@ -10,6 +10,8 @@ export class CgContext extends Events
     static API_WEBGL = 0;
     static API_WEBGPU = 1;
 
+    gApi = "unknown";
+
     /**
      * Description
      * @param {Patch} _patch
@@ -17,8 +19,11 @@ export class CgContext extends Events
     constructor(_patch)
     {
         super();
+
+        this._log = new Logger("cg_context", { "onError": _patch.config.onError });
+
+        /** @type {object} */
         this.tempData = this.frameStore = this.frameStore || {};
-        // this.canvas = null;
         this.fpsCounter = new CABLES.CG.FpsCounter();
         this._identView = vec3.create();
         this._ident = vec3.create();
@@ -77,7 +82,7 @@ export class CgContext extends Events
         mat4.identity(this.vMatrix);
 
         window.matchMedia("screen and (min-resolution: 2dppx)")
-            .addEventListener("change", (e) =>
+            .addEventListener("change", () =>
             {
                 this.emitEvent("resize");
             });
@@ -138,6 +143,13 @@ export class CgContext extends Events
         if (this._setCanvas) this._setCanvas(canvEle);
 
         this.updateSize();
+    }
+
+    /**
+     * @param {HTMLElement} _canvEle
+     */
+    _setCanvas(_canvEle)
+    {
     }
 
     updateSize()
@@ -335,7 +347,14 @@ export class CgContext extends Events
         if (this._dispose) this._dispose();
     }
 
-    shouldDrawHelpers()
+    _dispose()
+    {
+    }
+
+    /**
+     * @param {any} _op
+     */
+    shouldDrawHelpers(_op)
     {
         return false;
     }
@@ -361,6 +380,9 @@ export class CgContext extends Events
         }
     }
 
+    /**
+     * @param {number} x
+     */
     checkTextureSize(x)
     {
         x = x || 1;

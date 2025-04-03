@@ -162,6 +162,12 @@ export class CgpContext extends CgContext
         this.fpsCounter.endFrame();
     }
 
+    /**
+     * @param {number} x
+     * @param {number} [y]
+     * @param {undefined} [w]
+     * @param {undefined} [h]
+     */
     setViewPort(x, y, w, h)
     {
         this._viewport = [x, y, w, h];
@@ -253,8 +259,6 @@ export class CgpContext extends CgContext
     getShader()
     {
         return this._shaderStack[this._shaderStack.length - 1];
-        if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
-        // for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     }
 
     /**
@@ -555,11 +559,11 @@ export class CgpContext extends CgContext
 
     /**
      * @param {function} cb
-     * @param {boolean} doScreenshotClearAlpha
+     * @param {boolean} _doScreenshotClearAlpha
      * @param {string} mimeType
      * @param {number} quality
      */
-    screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
+    screenShot(cb, _doScreenshotClearAlpha, mimeType, quality)
     {
         if (this.canvas && this.canvas.toBlob)
         {

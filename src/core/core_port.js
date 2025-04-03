@@ -4,6 +4,7 @@ import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
+import { Op } from "./core_op.js";
 
 /**
  * @typedef PortUiAttribs
@@ -35,6 +36,7 @@ import { PatchVariable } from "./core_variable.js";
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
  * @property  {Array<String>} [values] internal: do not set manually
+ * @property  {boolean} [boundToVar] internal: do not set manually
  *
  */
 

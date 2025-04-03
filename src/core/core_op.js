@@ -122,25 +122,16 @@ export class Op extends Events
 
         /**
          * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
-         * @function preRender
-         * @memberof Op
-         * @instance
          */
         this.preRender = null;
 
         /**
          * overwrite this to initialize your op
-         * @function init
-         * @memberof Op
-         * @instance
          */
         this.init = null;
 
         /**
          * Implement to render 2d canvas based graphics from in an op - optionaly defined in op instance
-         * @function renderVizLayer
-         * @instance
-         * @memberof Op
          * @param {CanvasRenderingContext2D} context of canvas 2d
          * @param {Object} layer info
          * @param {number} layer.x x position on canvas
@@ -268,10 +259,7 @@ export class Op extends Events
      * error - error message - showing up in op parameter panel
      * extendTitle - op title extension, e.g. [ + ]
      * </pre>
-     * @function setUiAttrib
      * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
-     * @memberof Op
-     * @instance
      * @example
      * op.setUiAttrib({"extendTitle":str});
      */
@@ -417,9 +405,6 @@ export class Op extends Events
 
     /**
      * create a trigger input port
-     * @function inTrigger
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {String} v
      * @return {Port} created port
@@ -434,9 +419,6 @@ export class Op extends Events
 
     /**
      * create multiple UI trigger buttons
-     * @function inTriggerButton
-     * @memberof Op
-     * @instance
      * @param {String} name
      * @param {Array} v
      * @return {Port} created port
@@ -485,9 +467,6 @@ export class Op extends Events
 
     /**
      * create a number value input port
-     * @function inFloat
-     * @memberof Op
-     * @instance
      * @param {String} name
      * @param {Number} v
      * @return {Port} created port
@@ -511,9 +490,6 @@ export class Op extends Events
 
     /**
      * create a boolean input port, displayed as a checkbox
-     * @function inBool
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {Boolean|number} v
      * @return {Port} created port
@@ -601,9 +577,6 @@ export class Op extends Events
 
     /**
      * create a String value input port
-     * @function inString
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {String} v default value
      * @return {Port} created port
@@ -624,8 +597,6 @@ export class Op extends Events
 
     // /**
     //  * create a String value input port displayed as TextArea
-    //  * @function inValueText
-    //  * @instance
     //  * @memberof Op
     //  * @param {String} name
     //  * @param {String} v default value
@@ -676,9 +647,6 @@ export class Op extends Events
 
     /**
      * create a String value input port displayed as editor
-     * @function inStringEditor
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {String} v default value
      * @param {String} syntax language
@@ -744,9 +712,6 @@ export class Op extends Events
 
     /**
      * create a string select box
-     * @function inDropDown
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {Array} values
      * @param {String} v default value
@@ -824,9 +789,6 @@ export class Op extends Events
 
     /**
      * create a string switch box
-     * @function inSwitch
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {Array} values
      * @param {String} v default value
@@ -911,9 +873,6 @@ export class Op extends Events
 
     /**
      * create a integer input port
-     * @function inInt
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {number} v default value
      * @return {Port} created port
@@ -935,9 +894,6 @@ export class Op extends Events
 
     /**
      * create a file/URL input port
-     * @function inURL
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {String} filter
      * @param {String} v
@@ -982,9 +938,6 @@ export class Op extends Events
 
     /**
      * create a texture input port
-     * @function inTexture
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @return {Port} created port
      */
@@ -1004,9 +957,6 @@ export class Op extends Events
 
     /**
      * create a object input port
-     * @function inObject
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {Object} v
      * @param {String} objType
@@ -1085,9 +1035,6 @@ export class Op extends Events
 
     /**
      * create a value slider input port
-     * @function inFloatSlider
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {number} v
      * @param {number} min
@@ -1123,9 +1070,6 @@ export class Op extends Events
 
     /**
      * create output trigger port
-     * @function outTrigger
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {String} v
      * @return {Port} created port
@@ -1148,9 +1092,6 @@ export class Op extends Events
 
     /**
      * create output value port
-     * @function outNumber
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {number} v default value
      * @return {Port} created port
@@ -1173,9 +1114,6 @@ export class Op extends Events
     /**
      * deprecated create output boolean port
      * @deprecated
-     * @function outBool
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {boolean} v default value
      * @return {Port} created port
@@ -1195,9 +1133,6 @@ export class Op extends Events
 
     /**
      * create output boolean port,value will be converted to 0 or 1
-     * @function outBoolNum
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @return {Port} created port
      */
@@ -1237,9 +1172,6 @@ export class Op extends Events
 
     /**
      * create output string port
-     * @function outString
-     * @instance
-     * @memberof Op
      * @param {string} name
      * @param {String} v
      * @return {Port} created port
@@ -1258,9 +1190,6 @@ export class Op extends Events
 
     /**
      * create output object port
-     * @function outObject
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @return {Port} created port
      * @param {object} v
@@ -1276,9 +1205,6 @@ export class Op extends Events
 
     /**
      * create output array port
-     * @function outArray
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @return {Port} created port
      * @param {array|number} v
@@ -1296,9 +1222,6 @@ export class Op extends Events
 
     /**
      * create output texture port
-     * @function outTexture
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @return {Port} created port
      * @param {any} v
@@ -1419,9 +1342,6 @@ export class Op extends Events
 
     /**
      * return port by the name portName
-     * @function getPort
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {boolean} [lowerCase]
      * @return {Port}
@@ -1462,9 +1382,6 @@ export class Op extends Events
 
     /**
      * return port by the name id
-     * @function getPortById
-     * @instance
-     * @memberof Op
      * @param {String} id
      * @return {Port}
      */
@@ -1695,7 +1612,6 @@ export class Op extends Events
 
     /**
      * return true if op has this error message id
-     * @function hasUiError
      * @param {String} id
      * @returns {Boolean} - has id
      */
@@ -1706,9 +1622,6 @@ export class Op extends Events
 
     /**
      * show op error message - set message to null to remove error message
-     * @function setUiError
-     * @instance
-     * @memberof Op
      * @param {string} id error id
      * @param {string} txt text message
      * @param {number} level level
@@ -1721,8 +1634,6 @@ export class Op extends Events
     /**
      * enable/disable op
      * @function
-     * @instance
-     * @memberof Op
      * @param {boolean} b
      */
     setEnabled(b)
@@ -1734,8 +1645,6 @@ export class Op extends Events
     /**
      * organize ports into a group
      * @function
-     * @instance
-     * @memberof Op
      * @param {String} name
      * @param {Array} ports
      */
@@ -1752,8 +1661,6 @@ export class Op extends Events
     /**
      * visually indicate ports that they are coordinate inputs
      * @function
-     * @instance
-     * @memberof Op
      * @param {Port} px
      * @param {Port} py
      * @param {Port} pz
@@ -1767,9 +1674,6 @@ export class Op extends Events
 
     /**
      * remove port from op
-     * @function removePort
-     * @instance
-     * @memberof Op
      * @param {Port} port to remove
      */
     removePort(port)
@@ -1801,8 +1705,6 @@ export class Op extends Events
     /**
      * show a warning of this op is not a child of parentOpName
      * @function
-     * @instance
-     * @memberof Op
      * @param {String} parentOpName
      */
     toWorkNeedsParent(parentOpName)
@@ -1876,7 +1778,6 @@ export class Op extends Events
 
     /**
      * Returns true if op is selected and parameter are shown in the editor, can only return true if in editor/ui
-     * @function isCurrentUiOp
      * @instance
      * @memberof Op
      * @returns {Boolean} - is current ui op
