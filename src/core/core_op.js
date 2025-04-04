@@ -141,6 +141,7 @@ export class Op extends Events
          * @param {number} layer.scale current scaling of patchfield view
          */
         this.renderVizLayer = null;
+        this.checkLinkTimeWarnings = null;
     }
 
     isInBlueprint2() // will be overwritten in ui

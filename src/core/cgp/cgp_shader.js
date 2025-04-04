@@ -9,6 +9,7 @@ import { BindingUniform } from "./binding/binding_uniform.js";
 import { BindingSampler } from "./binding/binding_sampler.js";
 import { BindingTexture } from "./binding/binding_texture.js";
 import { Binding } from "./binding/binding.js";
+import { now } from "../timer.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
@@ -216,7 +217,7 @@ export class CgpShader extends CgShader
 
         for (let i = 0; i < this.bindGroups.length; i++)
         {
-            const src = this.bindGroups[i].getShaderHeaderCode(this);
+            const src = this.bindGroups[i].getShaderHeaderCode(this, i);
             bindingsHeadFrag += src.fragment || "";
             bindingsHeadVert += src.vertex || "";
             bindingsHeadCompute += src.compute || "";
@@ -285,6 +286,7 @@ export class CgpShader extends CgShader
 
         this.#lastCompileReason = this._compileReason;
 
+        this.lastCompile = now();
         // console.log("#lastCompileReason", this.#lastCompileReason);
 
         this.emitEvent("compiled", this._compileReason);
@@ -389,9 +391,6 @@ export class CgpShader extends CgShader
 
     /**
      * copy current shader
-     * @function copy
-     * @memberof Shader
-     * @instance
      * @returns newShader
      */
     copy()
@@ -413,6 +412,7 @@ export class CgpShader extends CgShader
         for (let i = 0; i < this.bindGroups.length; i++)
         {
             const bg = this.bindGroups[i].copy(shader);
+            shader.bindGroups = [];
             shader.bindGroups.push(bg);
 
             if (this.bindGroups[i] == this.defaultBindGroup)
@@ -445,7 +445,7 @@ export class CgpShader extends CgShader
 
     /**
      * @param {number} stage
-     */
+     // */
     static getStageString(stage)
     {
         if (stage == GPUShaderStage.FRAGMENT) return "frag";

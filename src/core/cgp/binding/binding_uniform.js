@@ -27,6 +27,20 @@ export class BindingUniform extends Binding
     }
 
     /**
+     * @param {CgpShader} shader
+     */
+    copy(shader)
+    {
+        const b = new BindingUniform(this.cgp, this.name, this.options);
+        b.stage = this.stage;
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+            b.addUniform(this.#uniforms[i].copy(shader));
+        }
+        return b;
+    }
+
+    /**
      * @param {CgpUniform} u
      */
     addUniform(u)
@@ -135,19 +149,19 @@ export class BindingUniform extends Binding
         let typeStr = "";
         let name = this.name;
 
+        str += "//   [binding_uniform] - \"" + this.name + "\" uniforms:" + this.#uniforms.length + "\n";
+
         if (!this.isActiveByDefine(shader))
         {
             str += "// " + typeStr + " " + this.name + ": excluded because define " + this.define + "\n";
             return str;
         }
 
-        str += "// uniforms:" + this.#uniforms.length + "\n";
         if (this.#uniforms.length == 0) return str;
 
         if (this.#uniforms.length > 1)
         {
             typeStr = "strct_" + name;
-            str += "// " + this.#uniforms.length + " uniforms\n";
 
             str += "struct " + typeStr + "\n";
             str += "{\n";

@@ -79,10 +79,7 @@ export class BindGroup
     addBinding(b)
     {
         const oldBinding = this.getBindingByName(b.name);
-        if (oldBinding)
-        {
-            this.removeBinding(oldBinding);
-        }
+        if (oldBinding) this.removeBinding(oldBinding);
         b.needsRebuildBindgroup = true;
         b.bindNum = this.#bindings.length;
         this.#bindings.push(b);
@@ -140,7 +137,7 @@ export class BindGroup
      */
     getLayout(shader)
     {
-        console.log(this.getLayoutEntries(shader));
+        // console.log(this.getLayoutEntries(shader));
 
         /** @type {GPUBindGroupLayout} */
         const bindGroupLayout = this.#cgp.device.createBindGroupLayout(
@@ -201,9 +198,9 @@ export class BindGroup
     }
 
     /**
- * @param {number} inst
- * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEnc
- */
+     * @param {number} inst
+     * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEnc
+     */
     bind(inst = 0, passEnc = null)
     {
         for (let i = 0; i < this.#bindings.length; i++)
@@ -222,19 +219,21 @@ export class BindGroup
 
     /**
      * @param {CgpShader} shader
+     * @param {number} idx
      */
-    getShaderHeaderCode(shader)
+    getShaderHeaderCode(shader, idx)
     {
-        const srcs = { "vertex": "", "fragment": "", "compute": "" };
+        const srcs = { "vertex": "// VERT\n ", "fragment": "// FRAG\n", "compute": "// COMP\n" };
 
+        console.log("bgggggg", this);
         this.#cgp.profileData.count("bindgroup shadercode", this.name);
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
-            const src = bind.getShaderHeaderCode(shader, 0);
+            const src = "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n" + bind.getShaderHeaderCode(shader, idx);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
-            // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
-            if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
+            else if (bind.stage === GPUShaderStage.FRAGMENT)srcs.fragment += src;
+            else if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
         }
 
         return srcs;
@@ -248,7 +247,7 @@ export class BindGroup
         const newBg = new BindGroup(this.#cgp, this.name);
         for (let i = 0; i < this.#bindings.length; i++)
         {
-            newBg.addBinding(this.#bindings[i].copy());
+            newBg.addBinding(this.#bindings[i].copy(shader));
         }
         return newBg;
     }

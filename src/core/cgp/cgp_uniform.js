@@ -205,14 +205,17 @@ export class CgpUniform extends CgUniform
         return 4;
     }
 
-    // copy(newShader)
-    // {
-    //     const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4);
-    //     uni.shaderType = this.shaderType;
+    /**
+     * @param {CgpShader} shader
+     */
+    copy(shader)
+    {
+        const uni = new CgpUniform(shader, this._type, this._name, this._value, this._port2, this._port3, this._port4);
+        uni.shaderType = this.shaderType;
 
-    //     console.log(this._name, this._value, uni._value);
+        // console.log(this._name, this._value, uni._value);
 
-    //     return uni;
-    // }
+        return uni;
+    }
 
 }

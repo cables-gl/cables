@@ -34,6 +34,11 @@ class ShaderModifier
             if (!this._boundShader.shader.hasModule(this._mods[0].id)) missingMod = true;
         }
 
+        if (missingMod) console.warn("copy because  (missingMod)");
+        if (!this._boundShader) console.warn("copy because  (!this._boundShader)");
+        else if (shader.lastCompile != this._boundShader.lastCompile) console.warn("copy because  shader.lastCompile");
+        if (this._modulesChanged) console.warn("copy because  this._modulesChanged");
+        if (shader._needsRecompile) console.warn("copy because  shader._needsRecompile ", shader._compileReason);
         if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
@@ -264,7 +269,6 @@ class ShaderModifier
         return false;
     }
 
-
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
         if (!this._getUniform(name))
@@ -434,7 +438,6 @@ class ShaderModifier
         }
     }
 
-
     getPrefixedName(name)
     {
         const prefix = this._mods[0].group;
@@ -465,7 +468,6 @@ class ShaderModifier
             shader.toggleDefine(name, this._definesToggled[i]);
         }
     }
-
 
     _updateDefines()
     {
@@ -510,6 +512,5 @@ class ShaderModifier
 
     }
 }
-
 
 export { ShaderModifier };

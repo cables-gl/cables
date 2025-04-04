@@ -29,12 +29,6 @@ export class Binding
         if (options.hasOwnProperty("stage")) this.stage = options.stage;
     }
 
-    copy()
-    {
-        const b = new Binding(this.cgp, this.name, this.options);
-        return b;
-    }
-
     /**
      * @param {number} _inst
      */
@@ -69,8 +63,8 @@ export class Binding
         };
     }
 
-    /** @param {CgpShader} shader */
-    isActiveByDefine(shader)
+    /** @param {CgpShader} _shader */
+    isActiveByDefine(_shader)
     {
         if (!this.define) return true;
         // if (this.define && !shader.hasDefine(this.define)) return false;
@@ -91,5 +85,13 @@ export class Binding
     getShaderHeaderCode(shader, bindGroupNum)
     {
         return "//getShaderHeaderCode function not emplemented ".endl();
+    }
+
+    /**
+     * @param {CgpShader} _shader
+     */
+    copy(_shader)
+    {
+        // implenented in inheriting classes
     }
 }
