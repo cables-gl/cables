@@ -395,6 +395,7 @@ export class CgpShader extends CgShader
      */
     copy()
     {
+        this.bind();
         const shader = new CgpShader(this._cgp, this._name + " copy", this.options);
         shader.setSource(this._src);
 
@@ -434,7 +435,8 @@ export class CgpShader extends CgShader
 
         // console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
-        this.setWhyCompile("copy");
+        shader.setWhyCompile("copy");
+        shader.compile();
         return shader;
     }
 
