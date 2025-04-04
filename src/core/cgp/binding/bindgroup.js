@@ -63,6 +63,9 @@ export class BindGroup
         }
     }
 
+    /**
+     * @param {Binding} b
+     */
     removeBinding(b)
     {
         const idx = this.#bindings.indexOf(b);
@@ -137,6 +140,7 @@ export class BindGroup
      */
     getLayout(shader)
     {
+        console.log(this.getLayoutEntries(shader));
 
         /** @type {GPUBindGroupLayout} */
         const bindGroupLayout = this.#cgp.device.createBindGroupLayout(
@@ -232,8 +236,20 @@ export class BindGroup
             // if (bind.stage & GPUShaderStage.FRAGMENT)srcs.fragment += src;
             if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
         }
-        console.log(srcs);
 
         return srcs;
+    }
+
+    /**
+     * @param {CgpShader} shader
+     */
+    copy(shader)
+    {
+        const newBg = new BindGroup(this.#cgp, this.name);
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            newBg.addBinding(this.#bindings[i].copy());
+        }
+        return newBg;
     }
 }

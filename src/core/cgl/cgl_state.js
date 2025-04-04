@@ -8,6 +8,8 @@ import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
 import { Geometry } from "../cg/cg_geom.js";
+import { Texture } from "./cgl_texture.js";
+import { Op } from "../core_op.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -33,7 +35,9 @@ export class CglContext extends CgContext
         this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
 
+        /** @deprecated */
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
+        /** @deprecated */
         this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
         this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
@@ -173,6 +177,7 @@ export class CglContext extends CgContext
             // }
 
             // ios
+            // @ts-ignore
             if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
             {
                 if (!this.patch.config.canvas.hasOwnProperty("powerPreference")) this.patch.config.canvas.powerPreference = "high-performance";
@@ -638,7 +643,7 @@ export class CglContext extends CgContext
     {
         this.checkFrameStarted("cgl setTexture");
 
-        if (t === null) t = CGL.Texture.getEmptyTexture(this).tex;
+        if (t === null) t = Texture.getEmptyTexture(this).tex;
 
         if (this._textureslots[slot] != t)
         {
@@ -658,6 +663,9 @@ export class CglContext extends CgContext
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     }
 
+    /**
+     * @param {string} [str]
+     */
     printError(str)
     {
         if (!this.checkGlErrors) return;
@@ -836,14 +844,14 @@ export class CglContext extends CgContext
     /**
      * push face culling face side
      * @function pushCullFaceFacing
-     * @param {Number} cgl.gl.FRONT_AND_BACK, cgl.gl.BACK or cgl.gl.FRONT
+     * @param {Number} face - cgl.gl.FRONT_AND_BACK, cgl.gl.BACK or cgl.gl.FRONT
      * @memberof Context
      * @instance
      */
 
-    pushCullFaceFacing(b)
+    pushCullFaceFacing(face)
     {
-        this._stackCullFaceFacing.push(b);
+        this._stackCullFaceFacing.push(face);
         this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
     }
 
@@ -989,7 +997,7 @@ export class CglContext extends CgContext
 
         const n = this._stackBlendMode.length - 1;
 
-        this.popBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
+        this.popBlend();
 
         if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
     }
@@ -1040,10 +1048,7 @@ export class CglContext extends CgContext
 
     /**
      * should an op now draw helpermeshes
-     * @function shouldDrawHelpers
-     * @memberof Context
-     * @param op
-     * @instance
+     * @param {Op} op
      */
     shouldDrawHelpers(op)
     {
@@ -1127,7 +1132,7 @@ export class CglContext extends CgContext
     }
 
     /**
-     * @param {Geometry} options
+     * @param {Geometry} geom
      * @param {CglMeshOptions} options
      */
     createMesh(geom, options)

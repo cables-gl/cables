@@ -5,6 +5,7 @@ import { Port } from "../core_port.js";
 /**
  * @typedef ShaderModule
  * @property {String} title
+ * @property {String} name
  * @property {Number} id
  * @property {Number} numId
  * @property {String} group
@@ -12,6 +13,7 @@ import { Port } from "../core_port.js";
  * @property {Number} priority
  * @property {String} srcBodyFrag
  * @property {String} srcBodyVert
+ * @property {String} attributes
  */
 
 class CgShader extends Events

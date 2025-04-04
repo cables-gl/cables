@@ -8,7 +8,11 @@ export class Texture extends CgTexture
 
     /** @type {CgpContext} */
     #cgp = null;
+
+    /** @type {GPUTexture} */
     gpuTexture = null;
+
+    /** @type {GPUTextureDescriptor} */
     gpuTextureDescriptor = null;
     name = "unknown";
     width = 8;
@@ -128,7 +132,7 @@ export class Texture extends CgTexture
      * @memberof Texture
      * @instance
      * @description create texturem from rgb data
-     * @param {Array<Number>} data rgb color array [r,g,b,a,r,g,b,a,...]
+     * @param {ArrayBuffer} data rgb color array [r,g,b,a,r,g,b,a,...]
      * @param {Number} w width
      * @param {Number} h height
      * @param {Number} filter
@@ -153,11 +157,17 @@ export class Texture extends CgTexture
             { "width": w, "height": h });
     }
 
+    /**
+     * @param {any} v
+     */
     setWrap(v)
     {
         this.samplerDesc.addressModeU = this.samplerDesc.addressModeV = v;
     }
 
+    /**
+     * @param {any} v
+     */
     setFilter(v)
     {
         this.samplerDesc.minFilter = this.samplerDesc.magFilter = v;
@@ -169,11 +179,10 @@ export class Texture extends CgTexture
  * @static
  * @memberof Texture
  * @description load an image from an url
- * @param {Context} cgp
+ * @param {CgpContext} cgp
  * @param {String} url
  * @param {Function} onFinished
  * @param {Object} settings
- * @return {Texture}
  */
 Texture.load = function (cgp, url, onFinished, settings)
 {

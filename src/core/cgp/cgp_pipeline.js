@@ -25,17 +25,12 @@ export class Pipeline
     /** @type {GPUBindGroupLayout} */
     bindGroupLayout = null;
 
-    // /** @type {GPURenderPassEncoder|GPUComputePassEncoder} */
-    // #passEncoder;
-
+    /** @type {Array<string>} */
     #shaderListeners = [];
-    #old = {};
-    #errorCount = 0;
     #type = -1;
     lastRebuildReason = "first";
     rebuildCount = 0;
     profile = false;
-    #rebuildNumBindingGroups = false;
 
     /** @type {Array<GPUBindGroupLayoutEntry>} */
     bindingGroupLayoutEntries = [];
@@ -93,10 +88,8 @@ export class Pipeline
         for (let i = 0; i < this.#shaderListeners.length; i++) oldShader.off(this.#shaderListeners[i]);
 
         this.#shaderListeners.push(
-            newShader.on("compiled", (reason) =>
+            newShader.on("compiled", (/** @type {string} */ reason) =>
             {
-                // this._log.log("pipe update shader compileeeeeee");
-                // this.needsRebuildReason = "shader changed";
                 this.needsRebuildReason = "shader compiled: " + reason || "???";
             }));
     }

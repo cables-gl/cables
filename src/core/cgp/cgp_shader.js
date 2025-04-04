@@ -30,6 +30,11 @@ export class CgpShader extends CgShader
     uniProjMatrix;
 
     /**
+     * @type {GPUCompilationInfo}
+     */
+    compilationInfo;
+
+    /**
      * @param {CgpContext} _cgp
      * @param {String} _name
      * @param {CgpShaderOptions} options={}
@@ -244,8 +249,38 @@ export class CgpShader extends CgShader
         if (this._cgp.branchProfiler) this._cgp.branchProfiler.push("shadercompile", this._name, { "info": this.getInfo() });
 
         this._cgp.profileData.count("shader compile", this._name);
-
         this.gpuShaderModule = this._cgp.device.createShaderModule({ "code": this.getProcessedSource(), "label": this._name });
+
+        this.gpuShaderModule.getCompilationInfo().then((compInfo) =>
+        {
+            this.compilationInfo = compInfo;
+            if (compInfo.messages.length > 0)
+            {
+                let hasErrors = false;
+                for (const msg of compInfo.messages)
+                {
+                    switch (msg.type)
+                    {
+                    case "error":
+                        console.error("Shader " + msg.type + " at line " + msg.lineNum + ":" + msg.linePos + " :" + msg.message);
+                        hasErrors = true;
+                    case "warning":
+                        console.warn("Shader " + msg.type + " at line " + msg.lineNum + ":" + msg.linePos + " :" + msg.message);
+                        break;
+                    case "info":
+                        console.info("Shader " + msg.type + " at line " + msg.lineNum + ":" + msg.linePos + " :" + msg.message);
+                        break;
+                    }
+                }
+                if (hasErrors)
+                {
+                    console.log("has errrrrrrrrrr");
+                    CABLES.UI.showShaderErrorCgp(this, compInfo, this.getProcessedSource());
+                }
+
+            }
+        });
+
         this._cgp.popErrorScope(this.error.bind(this));
 
         this.#lastCompileReason = this._compileReason;
@@ -361,20 +396,28 @@ export class CgpShader extends CgShader
      */
     copy()
     {
-        const shader = new CgpShader(this._cgp, this._name + " copy");
+        const shader = new CgpShader(this._cgp, this._name + " copy", this.options);
         shader.setSource(this._src);
 
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
         // shader._modGroupCount = this._modGroupCount;
-        // shader._moduleNames = this._moduleNames;
+        shader._moduleNames = this._moduleNames;
 
         // // shader.glPrimitive = this.glPrimitive;
         // // shader.offScreenPass = this.offScreenPass;
         // // shader._extensions = this._extensions;
         // // shader.wireframe = this.wireframe;
         // // shader._attributes = this._attributes;
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            const bg = this.bindGroups[i].copy(shader);
+            shader.bindGroups.push(bg);
+
+            if (this.bindGroups[i] == this.defaultBindGroup)
+                shader.defaultBindGroup = bg;
+        }
 
         // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
@@ -427,5 +470,10 @@ export class CgpShader extends CgShader
             "numDefines": this._defines.length,
             "isCompute": this.options.compute
         };
+    }
+
+    copyUniformValues(orig)
+    {
+
     }
 }
