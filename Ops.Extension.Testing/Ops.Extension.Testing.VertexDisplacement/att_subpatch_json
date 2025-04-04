@@ -8,7 +8,7 @@
           "x": 3900.5838017366195,
           "y": 2752.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -129,7 +129,7 @@
           "x": 3420.5838017366195,
           "y": 2672.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -154,6 +154,12 @@
               "portOut": "Texture",
               "objIn": "oxtz0nbe1",
               "objOut": "xkek82w82"
+            },
+            {
+              "portIn": "Texture In",
+              "portOut": "Texture",
+              "objIn": "6txsa5jly",
+              "objOut": "xkek82w82"
             }
           ]
         }
@@ -167,7 +173,7 @@
           "x": 3420.5838017366195,
           "y": 2792.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -191,7 +197,7 @@
           "x": 3420.5838017366195,
           "y": 2592.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -312,7 +318,7 @@
           "x": 3900.5838017366195,
           "y": 2952.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -385,7 +391,7 @@
           "x": 3900.5838017366195,
           "y": 2632.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -554,7 +560,7 @@
           "x": 3900.5838017366195,
           "y": 2492.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -683,7 +689,7 @@
           "x": 3420.5838017366195,
           "y": 2492.5482233541215
         },
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -778,6 +784,12 @@
               "portOut": "texture_out",
               "objIn": "y46rcpjqm",
               "objOut": "celz5m9zk"
+            },
+            {
+              "portIn": "Texture In",
+              "portOut": "texture_out",
+              "objIn": "2eb98wdse",
+              "objOut": "celz5m9zk"
             }
           ]
         },
@@ -802,7 +814,7 @@
         "resizable": true,
         "resizableY": false,
         "stretchPorts": true,
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "translate": {
           "x": 3648,
           "y": 2400
@@ -816,9 +828,9 @@
           "name": "trigger 0",
           "links": [
             {
-              "portIn": "Render",
+              "portIn": "Execute",
               "portOut": "trigger 0",
-              "objIn": "celz5m9zk",
+              "objIn": "cq074yau6",
               "objOut": "kq4e91g94"
             }
           ]
@@ -841,10 +853,10 @@
       "id": "lk3rgv7xn",
       "uiAttribs": {
         "title": "var get",
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "translate": {
-          "x": 3456.5838017366195,
-          "y": 2315.330774657902
+          "x": 3296.4924157835285,
+          "y": 2279.653265788356
         },
         "extendTitle": "#texBeach",
         "blueprintSubpatch2": true,
@@ -875,7 +887,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qu5uax6k7",
       "uiAttribs": {
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "translate": {
           "x": 3420.5838017366195,
           "y": 0
@@ -903,7 +915,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "t9qmxmr1x",
       "uiAttribs": {
-        "subPatch": "tisnpu2mh",
+        "subPatch": "2rlks1yhd",
         "translate": {
           "x": 3420.5838017366195,
           "y": 3063.5482233541215
@@ -912,6 +924,165 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+      "id": "6txsa5jly",
+      "uiAttribs": {
+        "height": 150,
+        "resizable": true,
+        "subPatch": "2rlks1yhd",
+        "translate": {
+          "x": 3180,
+          "y": 2800
+        },
+        "extendTitle": "Texture"
+      },
+      "portsIn": [
+        {
+          "name": "Show Info",
+          "value": 0
+        },
+        {
+          "name": "Visualize outside 0-1 index",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1",
+          "value": "Anim"
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "A"
+        },
+        {
+          "name": "Show Color",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": 0.5
+        },
+        {
+          "name": "Y",
+          "value": 0.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Info",
+          "value": ""
+        }
+      ],
+      "storage": {
+        "ref": "6txsa5jly"
+      }
+    },
+    {
+      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+      "id": "2eb98wdse",
+      "uiAttribs": {
+        "height": 150,
+        "resizable": true,
+        "subPatch": "2rlks1yhd",
+        "translate": {
+          "x": 2940,
+          "y": 2640
+        },
+        "extendTitle": "texture_out"
+      },
+      "portsIn": [
+        {
+          "name": "Show Info",
+          "value": 0
+        },
+        {
+          "name": "Visualize outside 0-1 index",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1",
+          "value": "Anim"
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "A"
+        },
+        {
+          "name": "Show Color",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": 0.5
+        },
+        {
+          "name": "Y",
+          "value": 0.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Info",
+          "value": ""
+        }
+      ],
+      "storage": {
+        "ref": "2eb98wdse"
+      }
+    },
+    {
+      "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
+      "id": "cq074yau6",
+      "uiAttribs": {
+        "subPatch": "2rlks1yhd",
+        "translate": {
+          "x": 3528,
+          "y": 2460
+        }
+      },
+      "portsIn": [
+        {
+          "name": "Repeats",
+          "value": 5
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "Forward"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "Next",
+              "objIn": "celz5m9zk",
+              "objOut": "cq074yau6"
+            }
+          ]
+        },
+        {
+          "name": "index",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "cq074yau6"
+      }
     }
   ]
 }
