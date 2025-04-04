@@ -35,7 +35,10 @@ export class BindingUniform extends Binding
         b.stage = this.stage;
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-            b.addUniform(this.#uniforms[i].copy(shader));
+            b.addUniform(this.#uniforms[i]);
+
+            // if (this.#uniforms[i].shader.worldUniforms.indexOf(this.#uniforms[i]) == -1)
+            // b.addUniform(this.#uniforms[i].copy(shader));
         }
         return b;
     }
@@ -46,6 +49,7 @@ export class BindingUniform extends Binding
     addUniform(u)
     {
         this.#uniforms.push(u);
+        return u;
     }
 
     /**
@@ -80,7 +84,6 @@ export class BindingUniform extends Binding
                 this.needsRebuildBindgroup = true;
                 return this.#uniforms.splice(i, 1);
             }
-
     }
 
     /**
@@ -95,7 +98,6 @@ export class BindingUniform extends Binding
         };
 
         this.cgpBuffer[inst] = new CgpGguBuffer(this.cgp, this.name + " buff", null, { "buffCfg": buffCfg });
-
     }
 
     /**
@@ -157,17 +159,16 @@ export class BindingUniform extends Binding
             return str;
         }
 
-        if (this.#uniforms.length == 0) return str;
-
         if (this.#uniforms.length > 1)
         {
             typeStr = "strct_" + name;
 
             str += "struct " + typeStr + "\n";
             str += "{\n";
+            // if (this.#uniforms.length == 0) str += "placehoder:1.";
+            // else
             for (let i = 0; i < this.#uniforms.length; i++)
             {
-
                 str += "    " + this.#uniforms[i].name + ": " + this.#uniforms[i].getWgslTypeStr();
                 if (i != this.#uniforms.length - 1)str += ",";
                 str += "\n";
@@ -175,13 +176,19 @@ export class BindingUniform extends Binding
             str += "};\n";
 
         }
-        else
+        else if (this.#uniforms.length == 1)
         {
             typeStr = this.#uniforms[0].getWgslTypeStr();
             name = this.#uniforms[0].name;
         }
+        else if (this.#uniforms.length == 0)
+        {
+            return str;
+            // typeStr = "float";
+            // name = "placeholder";
+        }
 
-        console.log("shadercode uniforms", this.#uniforms[0].name);
+        // console.log("shadercode uniforms", this.#uniforms[0].name);
         str += "@group(" + bindGroupNum + ") ";
         str += "@binding(" + this.bindNum + ") ";
 

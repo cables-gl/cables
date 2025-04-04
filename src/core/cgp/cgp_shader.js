@@ -59,6 +59,7 @@ export class CgpShader extends CgShader
 
         this._bindingIndexCount = 0;
         this.compileCount = 0;
+        this.worldUniforms = [];
 
         this.defaultBindGroup = new BindGroup(_cgp, this._name);
 
@@ -67,6 +68,9 @@ export class CgpShader extends CgShader
 
         if (!this.options.compute)
         {
+            // this.bindingWorld = new BindingUniform(_cgp, "world", { "stage": GPUShaderStage.VERTEX });
+            // this.defaultBindGroup.addBinding(this.bindingWorld);
+
             this.defaultUniBindingVert = new BindingUniform(_cgp, "uniVert", {});
             this.defaultBindGroup.addBinding(this.defaultUniBindingVert);
 
@@ -88,6 +92,7 @@ export class CgpShader extends CgShader
             this.uniModelViewMatrix = this.addUniform(new CgpUniform(this, "m4", "modelViewMatrix"), GPUShaderStage.VERTEX);
             this._tempNormalMatrix = mat4.create();
             this._tempModelViewMatrix = mat4.create();
+            this.worldUniforms.push(this.uniModelMatrix, this.uniViewMatrix, this.uniProjMatrix, this.uniNormalMatrix, this.uniModelViewMatrix);
         }
 
         this._src = "";
@@ -419,7 +424,14 @@ export class CgpShader extends CgShader
             if (this.bindGroups[i] == this.defaultBindGroup)
                 shader.defaultBindGroup = bg;
         }
+        // shader.defaultBindGroup.addBinding(this.bindingWorld);
 
+        shader.defaultBindGroup.setBindingNums();
+
+        // for (let i = 0; i < this.worldUniforms.length; i++)
+        // {
+        //     this.defaultUniBindingVert.addUniform(this.worldUniforms[i]);
+        // }
         // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
         // // shader.bindingsFrag = [];

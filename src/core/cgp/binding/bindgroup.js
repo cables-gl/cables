@@ -251,4 +251,13 @@ export class BindGroup
         }
         return newBg;
     }
+
+    setBindingNums()
+    {
+
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            this.#bindings[i].setBindNum(i);
+        }
+    }
 }

@@ -39,6 +39,15 @@ export class Binding
     }
 
     /**
+     * @param {number} i
+     */
+    setBindNum(i)
+    {
+        if (this.bindNum != i) this.needsRebuildBindgroup = true;
+        this.bindNum = i;
+    }
+
+    /**
      * @returns {GPUBindGroupLayoutEntry}
      * @param {CgpShader} _shader
      */
