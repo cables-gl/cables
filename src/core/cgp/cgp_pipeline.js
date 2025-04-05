@@ -86,7 +86,7 @@ export class Pipeline
     setShaderListener(oldShader, newShader)
     {
         for (let i = 0; i < this.#shaderListeners.length; i++) oldShader.off(this.#shaderListeners[i]);
-
+        this.#shaderListeners = [];
         this.#shaderListeners.push(
             newShader.on("compiled", (/** @type {string} */ reason) =>
             {

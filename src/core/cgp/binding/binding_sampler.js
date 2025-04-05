@@ -24,6 +24,12 @@ export class BindingSampler extends Binding
 
     }
 
+    copy()
+    {
+        const b = new BindingSampler(this.cgp, this.name, this.options);
+        return b;
+    }
+
     getResource()
     {
         return this.sampler;

@@ -35,6 +35,12 @@ export class BindingTexture extends Binding
         console.log(this.uniform);
     }
 
+    copy()
+    {
+        const b = new BindingTexture(this.cgp, this.name, this.options);
+        return b;
+    }
+
     getResource()
     {
         if (this.uniform.getValue() && this.uniform.getValue().gpuTexture) return this.uniform.getValue().gpuTexture.createView();

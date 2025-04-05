@@ -783,7 +783,7 @@ export class Port extends Events
             {
                 if (portTriggered.op.onError) portTriggered.op.onError(ex);
             }
-            this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op);
+            this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op.id);
             this._log.error(ex);
         }
     }

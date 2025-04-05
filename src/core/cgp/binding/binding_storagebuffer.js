@@ -23,6 +23,12 @@ export class BindingStorage extends Binding
         this.cgpbuffer = options.cgpBuffer || new CgpGguBuffer(cgp, "temp", [0, 0, 0, 0]);
     }
 
+    copy()
+    {
+        const b = new BindingStorage(this.cgp, this.name, this.options);
+        return b;
+    }
+
     /**
      * @returns {GPUBindingResource}
      * @param {number} _inst

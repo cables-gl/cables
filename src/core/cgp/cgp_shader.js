@@ -9,6 +9,7 @@ import { BindingUniform } from "./binding/binding_uniform.js";
 import { BindingSampler } from "./binding/binding_sampler.js";
 import { BindingTexture } from "./binding/binding_texture.js";
 import { Binding } from "./binding/binding.js";
+import { now } from "../timer.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
@@ -58,6 +59,7 @@ export class CgpShader extends CgShader
 
         this._bindingIndexCount = 0;
         this.compileCount = 0;
+        this.worldUniforms = [];
 
         this.defaultBindGroup = new BindGroup(_cgp, this._name);
 
@@ -66,6 +68,9 @@ export class CgpShader extends CgShader
 
         if (!this.options.compute)
         {
+            // this.bindingWorld = new BindingUniform(_cgp, "world", { "stage": GPUShaderStage.VERTEX });
+            // this.defaultBindGroup.addBinding(this.bindingWorld);
+
             this.defaultUniBindingVert = new BindingUniform(_cgp, "uniVert", {});
             this.defaultBindGroup.addBinding(this.defaultUniBindingVert);
 
@@ -87,6 +92,7 @@ export class CgpShader extends CgShader
             this.uniModelViewMatrix = this.addUniform(new CgpUniform(this, "m4", "modelViewMatrix"), GPUShaderStage.VERTEX);
             this._tempNormalMatrix = mat4.create();
             this._tempModelViewMatrix = mat4.create();
+            this.worldUniforms.push(this.uniModelMatrix, this.uniViewMatrix, this.uniProjMatrix, this.uniNormalMatrix, this.uniModelViewMatrix);
         }
 
         this._src = "";
@@ -216,7 +222,7 @@ export class CgpShader extends CgShader
 
         for (let i = 0; i < this.bindGroups.length; i++)
         {
-            const src = this.bindGroups[i].getShaderHeaderCode(this);
+            const src = this.bindGroups[i].getShaderHeaderCode(this, i);
             bindingsHeadFrag += src.fragment || "";
             bindingsHeadVert += src.vertex || "";
             bindingsHeadCompute += src.compute || "";
@@ -285,6 +291,7 @@ export class CgpShader extends CgShader
 
         this.#lastCompileReason = this._compileReason;
 
+        this.lastCompile = now();
         // console.log("#lastCompileReason", this.#lastCompileReason);
 
         this.emitEvent("compiled", this._compileReason);
@@ -389,13 +396,11 @@ export class CgpShader extends CgShader
 
     /**
      * copy current shader
-     * @function copy
-     * @memberof Shader
-     * @instance
      * @returns newShader
      */
     copy()
     {
+        this.bind();
         const shader = new CgpShader(this._cgp, this._name + " copy", this.options);
         shader.setSource(this._src);
 
@@ -413,12 +418,20 @@ export class CgpShader extends CgShader
         for (let i = 0; i < this.bindGroups.length; i++)
         {
             const bg = this.bindGroups[i].copy(shader);
+            shader.bindGroups = [];
             shader.bindGroups.push(bg);
 
             if (this.bindGroups[i] == this.defaultBindGroup)
                 shader.defaultBindGroup = bg;
         }
+        // shader.defaultBindGroup.addBinding(this.bindingWorld);
 
+        shader.defaultBindGroup.setBindingNums();
+
+        // for (let i = 0; i < this.worldUniforms.length; i++)
+        // {
+        //     this.defaultUniBindingVert.addUniform(this.worldUniforms[i]);
+        // }
         // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
 
         // // shader.bindingsFrag = [];
@@ -434,7 +447,8 @@ export class CgpShader extends CgShader
 
         // console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
-        this.setWhyCompile("copy");
+        shader.setWhyCompile("copy");
+        shader.compile();
         return shader;
     }
 
@@ -445,7 +459,7 @@ export class CgpShader extends CgShader
 
     /**
      * @param {number} stage
-     */
+     // */
     static getStageString(stage)
     {
         if (stage == GPUShaderStage.FRAGMENT) return "frag";
