@@ -33,12 +33,21 @@ export class BindingUniform extends Binding
     {
         const b = new BindingUniform(this.cgp, this.name, this.options);
         b.stage = this.stage;
+
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-            b.addUniform(this.#uniforms[i]);
+            let foundWorldUni = false;
+            for (let j = 0; j < shader.worldUniforms.length; j++)
+            {
 
-            // if (this.#uniforms[i].shader.worldUniforms.indexOf(this.#uniforms[i]) == -1)
-            // b.addUniform(this.#uniforms[i].copy(shader));
+                if (shader.worldUniforms[j].getName() == this.#uniforms[i].getName())
+                {
+                    b.addUniform(shader.worldUniforms[j]);
+                    foundWorldUni = true;
+                }
+            }
+            if (!foundWorldUni) b.addUniform(this.#uniforms[i]);
+
         }
         return b;
     }

@@ -46,7 +46,7 @@ export class Geometry
 
     /**
      * @param {String} name
-     */
+    */
     constructor(name)
     {
         this.name = name || "unknown";
@@ -254,9 +254,9 @@ export class Geometry
     }
 
     /**
-     * @param x
-     * @param y
-     * @param z
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z
      */
     flipNormals(x, y, z)
     {
@@ -406,7 +406,7 @@ export class Geometry
     /**
      * Calculaten normals
      * @function calculateNormals
-     * @param options
+     * @param {{ smooth?: any; forceZUp?: any; }} options
      */
     calculateNormals(options)
     {
