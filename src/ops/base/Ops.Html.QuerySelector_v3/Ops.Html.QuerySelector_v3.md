@@ -1,0 +1,1 @@
+If you want to do something with an element, you can get it from the DOM using QuerySelector. See [developer.mozilla.org – querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).

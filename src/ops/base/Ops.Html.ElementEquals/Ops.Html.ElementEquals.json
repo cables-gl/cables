@@ -1,0 +1,53 @@
+{
+    "id": "8e35f8a9-90bb-4a85-adfa-c6d1a8e15efb",
+    "created": 1738265597452,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018715513
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            },
+            {
+                "type": 2,
+                "name": "HTML Element 2",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Equal",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Check if two HTML element objects are equal",
+    "exampleProjectId": "LZSRjH",
+    "docs": {
+        "ports": [
+            {
+                "name": "HTML Element",
+                "text": "input element"
+            },
+            {
+                "name": "HTML Element 2",
+                "text": "element to compare with"
+            },
+            {
+                "name": "Equal",
+                "text": "result"
+            }
+        ]
+    }
+}

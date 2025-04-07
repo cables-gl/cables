@@ -1,0 +1,1 @@
+If you want to do something withmultiple elements, you can get it from the DOM using QuerySelectorAll. See [developer.mozilla.org – querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
