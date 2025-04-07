@@ -1,0 +1,1 @@
+Outputs an array containing all the css classes of the connected HTML Element

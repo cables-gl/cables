@@ -58,7 +58,8 @@ function getWebpackErrorMessage(stats)
             {
                 const parts = m.moduleIdentifier.split("|");
                 const filename = parts.length > 0 ? parts[1] : m.moduleIdentifier;
-                errorMessage = filename + ":" + m.loc + " - " + m.message;
+                const em = m.message.split("\n");
+                errorMessage = filename + ":" + m.loc + " - " + em[0] || m.message;
             });
         }
     }

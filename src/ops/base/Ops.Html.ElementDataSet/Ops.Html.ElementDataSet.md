@@ -1,0 +1,1 @@
+The dataset read-only property of the HTMLElement interface provides read/write access to custom data attributes (data-*) on elements. This op outputs and object with properties for each data-* attribute.

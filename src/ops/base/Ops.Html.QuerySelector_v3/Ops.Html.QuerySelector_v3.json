@@ -1,0 +1,72 @@
+{
+    "id": "e943cddc-be72-46db-ae6a-fbd9608029d8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1582126210630,
+            "type": "new"
+        },
+        {
+            "message": "add \"element\" mode",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1744018768896
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1743694966455,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Query"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Document"
+            },
+            {
+                "type": 2,
+                "name": "Input Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Selects an element in the DOM",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
+            },
+            {
+                "name": "Element",
+                "text": "The first element which can be found using the query or null (no results)"
+            }
+        ]
+    },
+    "license": "MIT"
+}

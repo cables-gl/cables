@@ -1,0 +1,52 @@
+{
+    "id": "678dec70-8c45-4f21-b9ed-019c99275c6e",
+    "created": 1738259607120,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018675098
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Query"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "get the closest parent element matching the query selector",
+    "exampleProjectId": "ojHGjH",
+    "docs": {
+        "ports": [
+            {
+                "name": "HTML Element",
+                "text": "input element"
+            },
+            {
+                "name": "Query",
+                "text": "css selector"
+            },
+            {
+                "name": "Element",
+                "text": "closest element"
+            }
+        ]
+    }
+}

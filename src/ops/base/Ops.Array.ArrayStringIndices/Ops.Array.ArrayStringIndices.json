@@ -1,0 +1,59 @@
+{
+    "id": "0ecd5e41-d721-4883-a338-c6bc19320629",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018540727
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1736441837092,
+    "summary": "Return all the indexes of a string in an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array to search through"
+            },
+            {
+                "name": "SearchValue",
+                "text": "value to find"
+            },
+            {
+                "name": "Index",
+                "text": "indexes that the string was found at"
+            },
+            {
+                "name": "Found",
+                "text": "outputs a boolean if found"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "SearchValue"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Index"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "p9sBjH"
+}

@@ -1,0 +1,49 @@
+{
+    "id": "1f0670a2-e239-4657-99dc-2aecd35c54d1",
+    "changelog": [
+        {
+            "message": "Team.ACAR.ElementClassList renamed to Ops.Html.CSS.ElementClassList",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744017151578
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018564634
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1734698328808,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Classes"
+            }
+        ]
+    },
+    "summary": "get css classes of an element",
+    "docs": {
+        "ports": [
+            {
+                "name": "HTML Element",
+                "text": "input element"
+            },
+            {
+                "name": "Classes",
+                "text": "array of css classes"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "ZMlDjH"
+}
