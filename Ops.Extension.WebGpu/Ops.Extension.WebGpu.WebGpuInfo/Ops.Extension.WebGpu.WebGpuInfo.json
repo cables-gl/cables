@@ -40,5 +40,9 @@
                 "name": "Presentation Format"
             }
         ]
+    },
+    "summary": "Output information about WebGPU adapter and implementation",
+    "docs": {
+        "ports": []
     }
 }

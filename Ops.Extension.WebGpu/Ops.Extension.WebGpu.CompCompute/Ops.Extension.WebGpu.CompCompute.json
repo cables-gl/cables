@@ -63,5 +63,6 @@
     "exampleProjectId": "1ff0dH",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Compose a  compute shader "
 }

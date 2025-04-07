@@ -10,5 +10,9 @@
             "author": "pandur",
             "date": 1743596635888
         }
-    ]
+    ],
+    "summary": "cull (do not draw) back or front facing faces/triangles",
+    "docs": {
+        "ports": []
+    }
 }

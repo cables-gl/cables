@@ -8,18 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1743580886530
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1743584055536
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1743587542060
         }
     ],
@@ -47,5 +35,9 @@
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "summary": "Compute shader GPU buffer storage input",
+    "docs": {
+        "ports": []
+    }
 }

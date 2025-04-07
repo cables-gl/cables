@@ -45,5 +45,9 @@
     },
     "coreLibs": [
         "cgp_webgpuop"
-    ]
+    ],
+    "summary": "Compute shader GPU buffer storage output",
+    "docs": {
+        "ports": []
+    }
 }
