@@ -508,7 +508,11 @@ function renderVelocity()
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
     // cgl.setTexture(1, ps.fb.getTextureColorNum(3).tex);
     if (velocityFeedback2.fb)cgl.setTexture(1, velocityFeedback2.fb.getTextureColorNum(0).tex);
-    else op.log("no fb tex");
+    else
+    {
+        cgl.setTexture(1,emptyTex.tex);
+        //op.log("no fb tex");
+    }
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
