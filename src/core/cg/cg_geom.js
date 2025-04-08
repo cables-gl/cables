@@ -4,9 +4,7 @@ import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
- * @namespace external:CGL#Geometry
  * @param {String} name
- * @class
  * @example
  * // create a triangle with all attributes
  * const geom=new Geometry("triangle"),
@@ -136,9 +134,6 @@ export class Geometry
     }
 
     /**
-     * @function clear
-     * @memberof Geometry
-     * @instance
      * @description clear all buffers/set them to length 0
      */
     clear()
@@ -153,10 +148,7 @@ export class Geometry
     }
 
     /**
-     * @function getAttributes
-     @memberof Geometry
-    * @instance
-    * @return {Array<Object>} returns array of attribute objects
+    * @return {Object} returns array of attribute objects
     */
     getAttributes()
     {
@@ -214,6 +206,10 @@ export class Geometry
         this._attributes[name] = attr;
     }
 
+    /**
+     * @param {string} name
+     * @param {Geometry} newgeom
+     */
     copyAttribute(name, newgeom)
     {
         const attr = this.getAttribute(name);
@@ -234,10 +230,7 @@ export class Geometry
     }
 
     /**
-     * @function setTexCoords
-     * @memberof Geometry
-     * @instance
-     * @description set texcoords
+     * set texcoords
      * @param {Array|Float32Array} arr [u,v,u,v,...]
      */
     setTexCoords(arr)
@@ -292,8 +285,7 @@ export class Geometry
     }
 
     /**
-     * @function flipVertDir
-     * @description flip order of vertices in geom faces
+     * flip order of vertices in geom faces
      */
     flipVertDir()
     {
@@ -338,10 +330,7 @@ export class Geometry
 
     /**
      * merge a different geometry into the this geometry
-     * @function merge
      * @param {Geometry} geom
-     * @memberof Geometry
-     * @instance
      */
     merge(geom)
     {
@@ -408,7 +397,7 @@ export class Geometry
      * @function calculateNormals
      * @param {{ smooth?: any; forceZUp?: any; }} options
      */
-    calculateNormals(options)
+    calculateNormals(options = null)
     {
         // todo: should check angle of normals to get edges    https://community.khronos.org/t/calculating-accurate-vertex-normals/28152
         options = options || {};
@@ -903,9 +892,9 @@ Geometry.buildFromFaces = function (arr, name, optimize)
             face[2] = (vertices.length - 1) / 3;
         }
 
-        verticesIndices.push(parseInt(face[0], 10));
-        verticesIndices.push(parseInt(face[1], 10));
-        verticesIndices.push(parseInt(face[2], 10));
+        verticesIndices.push(face[0]);
+        verticesIndices.push(face[1]);
+        verticesIndices.push(face[2]);
     }
 
     const geom = new Geometry(name);

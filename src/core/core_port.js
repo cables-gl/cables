@@ -837,7 +837,7 @@ export class Port extends Events
 
             if (!this._variableIn)
             {
-                this._log.warn("PORT VAR NOT FOUND!!!", v);
+                // this._log.warn("PORT VAR NOT FOUND!!!", v);
             }
             else
             {

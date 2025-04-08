@@ -1,5 +1,5 @@
-import { CgpShader } from "./cgp_shader";
-import { CgpContext } from "./cgp_state";
+import { CgpShader } from "./cgp_shader.js";
+import { CgpContext } from "./cgp_state.js";
 
 class ShaderModifier
 {
