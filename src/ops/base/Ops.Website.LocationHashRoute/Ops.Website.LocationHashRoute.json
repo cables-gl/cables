@@ -4,17 +4,8 @@
         {
             "message": "created op",
             "author": "cables",
-            "date": 1615306114394
-        },
-        {
-            "message": "Ops.User.cables.LocationHash renamed to Ops.Website.LocationHash",
-            "author": "stephan",
-            "date": 1615318804444
-        },
-        {
-            "message": "Ops.Website.LocationHash renamed to Ops.Website.LocationHashRoute",
-            "author": "pandur",
-            "date": 1619518741622
+            "date": 1615306114394,
+            "type": "new"
         },
         {
             "message": "fix crash when using misformed route, show error",

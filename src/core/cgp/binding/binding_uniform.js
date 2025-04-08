@@ -28,6 +28,7 @@ export class BindingUniform extends Binding
 
     /**
      * @param {CgpShader} shader
+     * @returns {Binding}
      */
     copy(shader)
     {

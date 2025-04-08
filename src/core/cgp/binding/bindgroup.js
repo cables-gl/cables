@@ -225,12 +225,12 @@ export class BindGroup
     {
         const srcs = { "vertex": "// VERT\n ", "fragment": "// FRAG\n", "compute": "// COMP\n" };
 
-        console.log("bgggggg", this);
         this.#cgp.profileData.count("bindgroup shadercode", this.name);
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
-            const src = "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n" + bind.getShaderHeaderCode(shader, idx);
+            let src = "";// "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n" +
+            src += bind.getShaderHeaderCode(shader, idx);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
             else if (bind.stage === GPUShaderStage.FRAGMENT)srcs.fragment += src;
             else if (bind.stage & GPUShaderStage.COMPUTE)srcs.compute += src;
