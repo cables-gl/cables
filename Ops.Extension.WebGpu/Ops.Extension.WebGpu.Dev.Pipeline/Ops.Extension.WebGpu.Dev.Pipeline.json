@@ -32,6 +32,15 @@
                 "name": "Shader Source"
             },
             {
+                "type": 0,
+                "name": "compile count",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Shader id"
+            },
+            {
                 "type": 3,
                 "name": "defines"
             }

@@ -3,6 +3,8 @@ const
     next = op.outTrigger("Next"),
     outPipe = op.outObject("Pipeline"),
     outShaderSrc = op.outString("Shader Source", "", "glsl"),
+    outShaderCompileCount = op.outNumber("compile count"),
+    outId = op.outString("Shader id"),
     outDefines = op.outArray("defines");
 
 let compileCount = -1;
@@ -18,6 +20,9 @@ exec.onTriggered = () =>
         oldShader = shader;
         compileCount = -1;
     }
+
+    outShaderCompileCount.set(shader.compileCount);
+    outId.set(shader.id);
 
     if (shader)
     {

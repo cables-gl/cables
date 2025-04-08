@@ -1,8 +1,8 @@
 const
     compute = op.inTrigger("Compute"),
     inSrc = op.inStringEditor("Source", op.attachments.compute_wgsl, "glsl"),
-    inWg1 = op.inInt("Workgroups 1", 8),
-    inWg2 = op.inInt("Workgroups 2", 8),
+    inWg1 = op.inInt("Workgroups 1", 64),
+    inWg2 = op.inInt("Workgroups 2", 64),
     inWg3 = op.inInt("Workgroups 3", 0),
     inForce = op.inTriggerButton("Force Update"),
     next = op.outTrigger("Next"),
@@ -14,7 +14,7 @@ new CABLES.WebGpuOp(op);
 let comp = null;
 let needsInit = true;
 let computePipeline = null;
-let workGroups = [8, 8];
+let workGroups = [64, 64];
 let gpuBuff = null;
 let bindGroup = null;
 let arrSize = 300;

@@ -44,7 +44,7 @@ inTrigger.onTriggered = () =>
         shader.addUniform(new CGP.Uniform(shader, "4f", "color", r, g, b, a), GPUShaderStage.FRAGMENT);
         shader.addUniform(new CGP.Uniform(shader, "4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY), GPUShaderStage.FRAGMENT);
 
-        shader.setModules(["MODULE_COLOR"]);
+        shader.setModules(["MODULE_COLOR", "MODULE_VERTEX_POSITION"]);
 
         // const binTex = new CGP.Binding(cgp, "tex", { "shader": shader, "stage": GPUShaderStage.FRAGMENT, "define": "HAS_TEXTURE" });
         // const uniTex = new CGP.Uniform(shader, "t", "ourTexture", inTex);
@@ -87,7 +87,6 @@ function updateDefines()
         return;
     }
 
-    console.log("has texture", inTex.isLinked());
     shader.toggleDefine("COLORIZE_TEXTURE", colorizeTexture.get());
     shader.toggleDefine("HAS_TEXTURE", inTex.isLinked());
     shader.toggleDefine("HAS_MASK_TEXTURE", inTexMask.isLinked());
