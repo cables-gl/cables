@@ -1,0 +1,34 @@
+{
+    "id": "898adc47-b9e5-4ce4-ad21-644984b44503",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018697664
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1738254641385,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Dataset"
+            }
+        ]
+    },
+    "summary": "Get the data-attributes and values of an HTML element",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "MgdKjH"
+}

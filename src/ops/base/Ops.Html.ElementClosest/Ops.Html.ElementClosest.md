@@ -1,0 +1,1 @@
+Traverses the element and its parents (heading toward the document root) until it finds a node that matches the specified CSS selector.

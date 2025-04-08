@@ -12,12 +12,15 @@
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 5,
                 "name": "URL"
             }
         ]
+    },
+    "summary": "Output the cables URL",
+    "docs": {
+        "ports": []
     }
 }

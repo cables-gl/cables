@@ -22,6 +22,8 @@ export class CgUniform
         this._log = new Logger("cg_uniform");
         this._type = __type;
         this._name = __name;
+
+        /** @type {CgShader} */
         this._shader = __shader;
         this._value = 0.00001;
         this._oldValue = null;

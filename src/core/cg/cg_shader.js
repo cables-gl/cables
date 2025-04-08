@@ -1,6 +1,8 @@
 import { Events } from "cables-shared-client";
 import { simpleId } from "../utils.js";
 import { Port } from "../core_port.js";
+import { CgUniform } from "./cg_uniform.js";
+import { Uniform } from "../cgl/cgl_shader_uniform.js";
 
 /**
  * @typedef ShaderModule
@@ -11,10 +13,13 @@ import { Port } from "../core_port.js";
  * @property {String} group
  * @property {String} prefix
  * @property {Number} priority
+ * @property {Number} num
+ * @property {String} attributes
  * @property {String} srcBodyFrag
  * @property {String} srcBodyVert
- * @property {String} attributes
- */
+ * @property {String} srcHeadFrag
+ * @property {String} srcHeadVert
+  */
 
 class CgShader extends Events
 {
@@ -26,6 +31,9 @@ class CgShader extends Events
 
     /** @type {Array<String>} */
     _moduleNames = [];
+
+    /** @type {Uniform[]} */
+    _uniforms = [];
 
     _moduleNumId = 0;
     _needsRecompile = true;
@@ -62,6 +70,21 @@ class CgShader extends Events
     needsRecompile()
     {
         return this._needsRecompile;
+    }
+
+    /**
+     * @param {string} name
+     */
+    removeUniform(name)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].getName() == name)
+            {
+                this._uniforms.splice(i, 1);
+            }
+        }
+        this.setWhyCompile("remove uniform " + name);
     }
 
     /**
@@ -265,56 +288,6 @@ class CgShader extends Events
         return this._isValid;
     }
 
-    // getAttributeSrc(mod, srcHeadVert, srcVert)
-    // {
-    //     if (mod.attributes)
-    //         for (let k = 0; k < mod.attributes.length; k++)
-    //         {
-    //             const r = this._getAttrSrc(mod.attributes[k], false);
-    //             if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
-    //             if (r.srcVert)srcVert += r.srcVert;
-    //         }
-
-    //     return { "srcHeadVert": srcHeadVert, "srcVert": srcVert };
-    // }
-
-    // replaceModuleSrc()
-    // {
-    //     let srcHeadVert = "";
-
-    //     for (let j = 0; j < this._modules.length; j++)
-    //     {
-    //         const mod = this._modules[j];
-    //         if (mod.name == this._moduleNames[i])
-    //         {
-    //             srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
-
-    //             srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
-
-    //             if (mod.getAttributeSrc)
-    //             {
-    //                 const r = getAttributeSrc(mod, srcHeadVert, srcVert);
-    //                 if (r.srcHeadVert)srcHeadVert += r.srcHeadVert;
-    //                 if (r.srcVert)srcVert += r.srcVert;
-    //             }
-
-    //             srcHeadVert += mod.srcHeadVert || "";
-    //             srcVert += mod.srcBodyVert || "";
-
-    //             srcHeadVert += "\n//---- end mod ------\n";
-
-    //             srcVert += "\n//---- end mod ------\n";
-
-    //             srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
-    //             srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
-
-    //             srcVert = srcVert.replace(/MOD_/g, mod.prefix);
-    //             srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
-    //         }
-    //     }
-
-    //     vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
-    // }
 }
 
 export { CgShader };

@@ -41,5 +41,5 @@ const CONSTANTS = {
     "SHADER": SHADER,
     "BLEND_MODES": BLEND_MODES,
 };
-
-export { CONSTANTS };
+const nl = "\n";// newline
+export { CONSTANTS, nl };

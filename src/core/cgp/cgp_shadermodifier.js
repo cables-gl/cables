@@ -1,26 +1,48 @@
+import { CgpShader } from "./cgp_shader";
+import { CgpContext } from "./cgp_state";
+
 class ShaderModifier
 {
+    onBind = null;
+
+    /**
+     * @param {CgpContext} cgl
+     * @param {string} name
+     * @param {object} options
+     */
     constructor(cgl, name, options)
     {
+
+        /** @type {CgpContext} */
         this._cgl = cgl;
         this._name = name;
         this._origShaders = {};
+
+        /** @type {Array<object>} */
         this._uniforms = [];
         this._structUniforms = [];
         this._definesToggled = {};
         this._defines = {};
         this._mods = [];
         this._textures = [];
+
+        /** @type {object} */
         this._boundShader = null;
         this._changedDefines = true;
         this._changedUniforms = true;
         this._modulesChanged = false;
         this.needsTexturePush = false;
+
+        /** @type {CgpShader} */
         this._lastShader = null;
         this._attributes = [];
         if (options && options.opId) this.opId = options.opId;
     }
 
+    /**
+     * @param {CgpShader} curShader
+     * @param {boolean} pushShader
+     */
     bind(curShader, pushShader)
     {
         const shader = curShader || this._cgl.getShader();
@@ -95,17 +117,19 @@ class ShaderModifier
         return this._boundShader.shader;
     }
 
+    /**
+     * @param {boolean} popShader
+     */
     unbind(popShader)
     {
         if (this._boundShader)
-        {
             if (popShader !== false) this._cgl.popShader();
-            // this._boundShader = null;
-            // return true;
-        }
         this._boundShader = null;
     }
 
+    /**
+     * @param {CgpShader} shader
+     */
     _addModulesToShader(shader)
     {
         let firstMod;
@@ -126,6 +150,9 @@ class ShaderModifier
         this._modulesChanged = true;
     }
 
+    /**
+     * @param {string} title
+     */
     removeModule(title)
     {
         const indicesToRemove = [];
@@ -148,6 +175,9 @@ class ShaderModifier
         this._modulesChanged = true;
     }
 
+    /**
+     * @param {CgpShader} shader
+     */
     _updateUniformsShader(shader)
     {
         for (let i = 0; i < this._uniforms.length; i++)
