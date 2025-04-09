@@ -278,27 +278,6 @@ class ShaderModifier
         return false;
     }
 
-    _getStructUniform(uniName)
-    {
-        for (let i = 0; i < this._structUniforms.length; i += 1)
-            if (this._structUniforms[i].uniformName === uniName) return this._structUniforms[i];
-
-        return null;
-    }
-
-    _isStructUniform(name)
-    {
-        for (let i = 0; i < this._uniforms.length; i++)
-        {
-            if (this._uniforms[i].name == name) return false;
-            if (this._uniforms[i].structName)
-            {
-                if (this._uniforms[i].propertyName == name) return true;
-            }
-        }
-        return false;
-    }
-
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
         if (!this._getUniform(name))
@@ -483,6 +462,9 @@ class ShaderModifier
         return name;
     }
 
+    /**
+     * @param {CgpShader} shader
+     */
     _updateDefinesShader(shader)
     {
         for (const i in this._defines)
@@ -506,6 +488,10 @@ class ShaderModifier
         this._changedDefines = false;
     }
 
+    /**
+     * @param {string | number} what
+     * @param {boolean} value
+     */
     define(what, value)
     {
         if (value === undefined)value = true;
@@ -513,18 +499,28 @@ class ShaderModifier
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     removeDefine(name)
     {
         this._defines[name] = null;
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     hasDefine(name)
     {
         if (this._defines[name] !== null && this._defines[name] !== undefined) return true;
         return false;
     }
 
+    /**
+     * @param {string} name
+     * @param {any} b
+     */
     toggleDefine(name, b)
     {
         this._changedDefines = true;

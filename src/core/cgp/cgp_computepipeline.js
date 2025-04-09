@@ -60,8 +60,6 @@ export class ComputePipeline extends Pipeline
         if (this.#old.mesh != mesh)needsRebuildReason = "no mesh";
         if (this.#old.shader != shader)
         {
-            this.setShaderListener(this.#old.shader, shader);
-            console.log("shader changed?!@");
             needsRebuildReason = "shader changed";
         }
 

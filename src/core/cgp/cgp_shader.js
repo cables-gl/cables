@@ -103,7 +103,6 @@ export class CgpShader extends CgShader
 
             this.gpuShaderModule = null;
             this.setWhyCompile("device changed");
-
         });
     }
 
@@ -161,8 +160,9 @@ export class CgpShader extends CgShader
 
     /**
      * @param {String} vs
+     * @param {{}} defs
      */
-    _replaceMods(vs)
+    _replaceMods(vs, defs)
     {
         let srcHeadVert = "";
         for (let i = 0; i < this._moduleNames.length; i++)
@@ -174,9 +174,9 @@ export class CgpShader extends CgShader
                 const mod = this._modules[j];
                 if (mod.name == this._moduleNames[i])
                 {
-                    srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
+                    srcHeadVert += nl + nl + "//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------" + nl;
 
-                    srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
+                    srcVert += nl + nl + "//---- MOD: " + mod.title + " / " + mod.priority + " ------" + nl;
 
                     if (mod.attributes)
                         for (let k = 0; k < mod.attributes.length; k++)
@@ -189,9 +189,9 @@ export class CgpShader extends CgShader
                     srcHeadVert += mod.srcHead || "";
                     srcVert += mod.srcBody || "";
 
-                    srcHeadVert += "\n//---- end mod ------\n";
+                    srcHeadVert += nl + "//---- end mod ------" + nl;
 
-                    srcVert += "\n//---- end mod ------\n";
+                    srcVert += nl + "//---- end mod ------" + nl;
 
                     srcVert = this._replaceModPrefixes(mod, srcVert);
                     srcHeadVert = this._replaceModPrefixes(mod, srcHeadVert);
@@ -199,9 +199,11 @@ export class CgpShader extends CgShader
                 }
             }
 
+            srcVert = preproc(srcVert, defs);
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
         }
 
+        srcHeadVert = preproc(srcHeadVert, defs);
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         return vs;
     }
@@ -278,7 +280,8 @@ export class CgpShader extends CgShader
         else
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
-        src = this._replaceMods(src);
+        src = this._replaceMods(src, defs);
+
         src = this._replaceVertexOutputs(src);
 
         const strVertOut = "{{VERTEX_OUTPUT";
