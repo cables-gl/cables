@@ -1078,18 +1078,6 @@ class CglShader extends CgShader
     }
 
     /**
-     * @param {String} name
-     */
-    hasUniform(name)
-    {
-        for (let i = 0; i < this._uniforms.length; i++)
-        {
-            if (this._uniforms[i].getName() == name) return true;
-        }
-        return false;
-    }
-
-    /**
      * @param {String} vstr
      * @param {String} fstr
      */

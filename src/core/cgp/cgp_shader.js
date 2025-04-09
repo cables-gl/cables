@@ -10,6 +10,7 @@ import { BindingSampler } from "./binding/binding_sampler.js";
 import { BindingTexture } from "./binding/binding_texture.js";
 import { Binding } from "./binding/binding.js";
 import { now } from "../timer.js";
+import { nl } from "../cgl/constants.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]
@@ -188,6 +189,7 @@ export class CgpShader extends CgShader
 
                     srcVert = srcVert.replace(/MOD_/g, mod.prefix);
                     srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+
                 }
             }
 
@@ -196,6 +198,33 @@ export class CgpShader extends CgShader
 
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         return vs;
+    }
+
+    /**
+     * @param {string} src
+     */
+    _replaceVertexOutputs(src = "")
+    {
+
+        const strVertOut = "{{VERTEX_OUTPUT";
+        const posVertOut = src.indexOf(strVertOut);
+        if (posVertOut > -1)
+        {
+            try
+            {
+                let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
+                let endPos = str.indexOf("}}");
+                let startNum = parseInt(str.substring(0, endPos));
+                let locCode = "@location(" + (startNum) + ") pos:vec4f,";
+
+                src = src.replaceAll(strVertOut + " " + startNum + "}}", locCode);
+            }
+            catch (e)
+            {
+                console.log(e);
+            }
+        }
+        return src;
     }
 
     getDefines()
@@ -234,15 +263,35 @@ export class CgpShader extends CgShader
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
         src = this._replaceMods(src);
+        src = this._replaceVertexOutputs(src);
 
+        const strVertOut = "{{VERTEX_OUTPUT";
+        const posVertOut = src.indexOf(strVertOut);
+        if (posVertOut > -1)
+        {
+            try
+            {
+
+                let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
+                let endPos = str.indexOf("}}");
+                let startNum = parseInt(str.substring(0, endPos));
+                let locCode = "@location(" + (startNum) + ") pos:vec4f, // generated";
+
+                src = src.replaceAll(strVertOut + " " + startNum + "}}", locCode);
+            }
+            catch (e)
+            {
+                console.log(e);
+            }
+        }
         src = strDefs + "\n" + src;
 
-        let srcHead = "//".endl() + "// ";
+        let srcHead = "//" + nl + "// ";
         if (this.options.compute)srcHead += "Compute ";
         else srcHead += "Render ";
 
-        srcHead += "Shader: " + this._name.endl();
-        srcHead += "//".endl().endl();
+        srcHead += "Shader: " + this._name + nl;
+        srcHead += "//" + nl;
 
         return srcHead + src;
     }

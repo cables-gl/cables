@@ -88,6 +88,18 @@ class CgShader extends Events
     }
 
     /**
+     * @param {String} name
+     */
+    hasUniform(name)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].getName() == name) return true;
+        }
+        return false;
+    }
+
+    /**
      * easily enable/disable a define without a value
      * @param {String} name
      * @param {Port} enabled value or port

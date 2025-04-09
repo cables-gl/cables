@@ -1,6 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { CgpShader } from "../cgp_shader.js";
 import { CgpContext } from "../cgp_state.js";
+import { nl } from "../../cgl/constants.js";
 
 export class Binding
 {
@@ -87,20 +88,22 @@ export class Binding
     }
 
     /**
-     * @param {CgpShader} shader
-     * @param {number} bindGroupNum
+     * @param {CgpShader} _shader
+     * @param {number} _bindGroupNum
      * @returns {String}
      */
-    getShaderHeaderCode(shader, bindGroupNum)
+    getShaderHeaderCode(_shader, _bindGroupNum)
     {
-        return "//getShaderHeaderCode function not emplemented ".endl();
+        return "//getShaderHeaderCode function not emplemented " + nl;
     }
 
     /**
      * @param {CgpShader} _shader
+     * @returns {Binding}
      */
     copy(_shader)
     {
         // implenented in inheriting classes
+        return null;
     }
 }

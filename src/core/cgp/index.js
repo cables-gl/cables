@@ -9,6 +9,7 @@ import { MESHES } from "../cgl/cgl_simplerect.js";
 import { WebGpuCanvasAttachment } from "./cgp_canvasattachment.js";
 import { BindingStorage } from "./binding/binding_storagebuffer.js";
 import { ComputePipeline } from "./cgp_computepipeline.js";
+import { ShaderModifier } from "./cgp_shadermodifier.js";
 
 const CGP = {
     "Context": CgpContext,
@@ -27,5 +28,6 @@ window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;
 window.CGP.ComputePipeline = ComputePipeline;
 window.CGP.BindingStorage = BindingStorage;
+window.CGP.ShaderModifier = ShaderModifier;
 
 export { CGP };

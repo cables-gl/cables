@@ -1,4 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
+import { mat4, vec3 } from "gl-matrix";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
 import { Patch } from "../core_patch.js";
@@ -361,9 +362,6 @@ export class CgContext extends Events
 
     /**
      * execute the callback next frame, once
-     * @function addNextFrameOnceCallback
-     * @memberof Context
-     * @instance
      * @param {function} cb
      */
     addNextFrameOnceCallback(cb)
@@ -392,12 +390,19 @@ export class CgContext extends Events
         return x;
     }
 
-    // shnould be overwritten...
+    // should be overwritten...
     screenShot(cb, doScreenshotClearAlpha, mimeType, quality)
     {
         console.log("no screenshot function implemented");
     }
 
+    /**
+     * @param {string} [filename]
+     * @param {function} [cb]
+     * @param {number} [pw]
+     * @param {number} [ph]
+     * @param {boolean} [noclearalpha]
+     */
     saveScreenshot(filename, cb, pw, ph, noclearalpha)
     {
         this.patch.renderOneFrame();
