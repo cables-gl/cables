@@ -12,7 +12,7 @@ struct VertexOutput
     @location(0) normal: vec3f,
     @location(1) texCoord: vec2f,
     @location(2) @interpolate(flat) instIdx: u32,
-    //{{VERTEX_OUTPUT 3}}
+    {{VERTEX_OUTPUT 3}}
 };
 
 @vertex
@@ -76,13 +76,13 @@ fn myVSMain(
 fn myFSMain
     (
         @builtin(front_facing) is_front: bool,
-        v: VertexOutput
+        vertexOut: VertexOutput
     ) -> @location(0) vec4f
 {
 
     var col:vec4f=uniFrag.color;
 
-    var tc=v.texCoord;
+    var tc=vertexOut.texCoord;
     tc*=uniFrag.texTransform.xy;
     tc+=uniFrag.texTransform.zw;
 
