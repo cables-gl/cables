@@ -151,6 +151,15 @@ export class CgpShader extends CgShader
     }
 
     /**
+     * @param {import("../cg/cg_shader.js").ShaderModule} mod
+     * @param {string} src
+     */
+    _replaceModPrefixes(mod, src)
+    {
+        return src.replace(/MOD_/g, mod.prefix);
+    }
+
+    /**
      * @param {String} vs
      */
     _replaceMods(vs)
@@ -184,11 +193,8 @@ export class CgpShader extends CgShader
 
                     srcVert += "\n//---- end mod ------\n";
 
-                    srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
-                    srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
-
-                    srcVert = srcVert.replace(/MOD_/g, mod.prefix);
-                    srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+                    srcVert = this._replaceModPrefixes(mod, srcVert);
+                    srcHeadVert = this._replaceModPrefixes(mod, srcHeadVert);
 
                 }
             }
@@ -205,7 +211,6 @@ export class CgpShader extends CgShader
      */
     _replaceVertexOutputs(src = "")
     {
-
         const strVertOut = "{{VERTEX_OUTPUT";
         const posVertOut = src.indexOf(strVertOut);
         if (posVertOut > -1)
@@ -215,9 +220,20 @@ export class CgpShader extends CgShader
                 let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
                 let endPos = str.indexOf("}}");
                 let startNum = parseInt(str.substring(0, endPos));
-                let locCode = "@location(" + (startNum) + ") pos:vec4f,";
 
-                src = src.replaceAll(strVertOut + " " + startNum + "}}", locCode);
+                for (let j = 0; j < this._modules.length; j++)
+                {
+                    if (!this._modules[j].outputs) continue;
+                    let outs = this._modules[j].outputs;
+                    let l = 0;
+                    while (outs.indexOf("@location(" + l + ")") > -1)
+                    {
+                        outs = outs.replaceAll("@location(" + l + ")", "@location(" + (l + startNum) + ")");
+                    }
+                    outs = this._replaceModPrefixes(this._modules[j], outs);
+                    src = src.replaceAll(strVertOut + " " + startNum + "}}", outs);
+                }
+
             }
             catch (e)
             {
@@ -271,7 +287,6 @@ export class CgpShader extends CgShader
         {
             try
             {
-
                 let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
                 let endPos = str.indexOf("}}");
                 let startNum = parseInt(str.substring(0, endPos));
