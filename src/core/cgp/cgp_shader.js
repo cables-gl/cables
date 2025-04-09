@@ -63,9 +63,10 @@ export class CgpShader extends CgShader
         this.worldUniforms = [];
 
         this.defaultBindGroup = new BindGroup(_cgp, this._name);
+        this.modsBindGroup = new BindGroup(_cgp, "mods");
 
         /** @type {Array<BindGroup>} */
-        this.bindGroups = [this.defaultBindGroup];
+        this.bindGroups = [this.defaultBindGroup, this.modsBindGroup];
 
         if (!this.options.compute)
         {
@@ -100,7 +101,6 @@ export class CgpShader extends CgShader
 
         this._cgp.on("deviceChange", () =>
         {
-
             this.gpuShaderModule = null;
             this.setWhyCompile("device changed");
         });
@@ -415,7 +415,7 @@ export class CgpShader extends CgShader
         {
             this.bindGroups[i].updateValues(this.frameUsageCounter);
 
-            this.bindGroups[i].bind(this.frameUsageCounter, passEnc);
+            this.bindGroups[i].bind(this.frameUsageCounter, passEnc, i);
 
         }
         if (this._needsRecompile) this.compile();
@@ -449,6 +449,7 @@ export class CgpShader extends CgShader
         }
 
         this.needsPipelineUpdate = "add uniform";
+        console.log("adduni", u.name, binding);
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;
@@ -474,45 +475,19 @@ export class CgpShader extends CgShader
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
-        // shader._modGroupCount = this._modGroupCount;
         shader._moduleNames = this._moduleNames;
 
-        // // shader.glPrimitive = this.glPrimitive;
-        // // shader.offScreenPass = this.offScreenPass;
-        // // shader._extensions = this._extensions;
-        // // shader.wireframe = this.wireframe;
-        // // shader._attributes = this._attributes;
+        shader.bindGroups = [];
         for (let i = 0; i < this.bindGroups.length; i++)
         {
             const bg = this.bindGroups[i].copy(shader);
-            shader.bindGroups = [];
             shader.bindGroups.push(bg);
 
-            if (this.bindGroups[i] == this.defaultBindGroup)
-                shader.defaultBindGroup = bg;
+            if (this.bindGroups[i] == this.defaultBindGroup) shader.defaultBindGroup = bg;
+            if (this.bindGroups[i] == this.modsBindGroup) shader.modsBindGroup = bg;
         }
-        // shader.defaultBindGroup.addBinding(this.bindingWorld);
 
         shader.defaultBindGroup.setBindingNums();
-
-        // for (let i = 0; i < this.worldUniforms.length; i++)
-        // {
-        //     this.defaultUniBindingVert.addUniform(this.worldUniforms[i]);
-        // }
-        // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
-
-        // // shader.bindingsFrag = [];
-        // // for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
-
-        // // shader.bindingsVert = [];
-        // // for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
-        // // shader.defaultUniBindingVert = this.bindingsVert[0];
-
-        // // shader.bindingsCompute = [];
-        // // for (let i = 0; i < this.bindingsCompute.length; i++) this.bindingsCompute[i].copy(shader);
-        // // shader.defaultBindingComp = this.bindingsCompute[0];
-
-        // console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         shader.setWhyCompile("copy");
         shader.compile();

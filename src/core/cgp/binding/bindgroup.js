@@ -108,7 +108,7 @@ export class BindGroup
 
         if (arr.length == 0)
         {
-            console.log("nooooooooooooooooooooooo");
+            // console.log("nooooooooooooooooooooooo");
         }
         return arr;
     }
@@ -127,7 +127,7 @@ export class BindGroup
 
         if (arr.length == 0)
         {
-            console.log("nooooooooooooooooooooooo");
+            // console.log("nooooooooooooooooooooooo");
         }
         return arr;
     }
@@ -201,12 +201,12 @@ export class BindGroup
      * @param {number} inst
      * @param {GPURenderPassEncoder|GPUComputePassEncoder} passEnc
      */
-    bind(inst = 0, passEnc = null)
+    bind(inst = 0, passEnc = null, idx = 0)
     {
         for (let i = 0; i < this.#bindings.length; i++)
             if (this.#bindings[i].needsRebuildBindgroup)
             {
-                console.log("rebuild bg");
+                // console.log("rebuild bg");
                 this.create(inst);
                 this.#bindings[i].needsRebuildBindgroup = false;
                 this.#gpuBindGroups = [];
@@ -214,7 +214,7 @@ export class BindGroup
             }
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);
-        (passEnc || this.#cgp.passEncoder).setBindGroup(0, this.#gpuBindGroups[inst]);
+        (passEnc || this.#cgp.passEncoder).setBindGroup(idx, this.#gpuBindGroups[inst]);
     }
 
     /**
@@ -223,13 +223,15 @@ export class BindGroup
      */
     getShaderHeaderCode(shader, idx)
     {
-        const srcs = { "vertex": "// VERT\n ", "fragment": "// FRAG\n", "compute": "// COMP\n" };
+        const srcs = { "vertex": "", "fragment": "", "compute": "" };
 
         this.#cgp.profileData.count("bindgroup shadercode", this.name);
         for (let i = 0; i < this.#bindings.length; i++)
         {
             const bind = this.#bindings[i];
-            let src = "";// "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n" +
+            let src = "";
+            src += "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n";
+
             src += bind.getShaderHeaderCode(shader, idx);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
             else if (bind.stage === GPUShaderStage.FRAGMENT)srcs.fragment += src;
