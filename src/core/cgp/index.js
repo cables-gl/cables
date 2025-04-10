@@ -10,6 +10,9 @@ import { WebGpuCanvasAttachment } from "./cgp_canvasattachment.js";
 import { BindingStorage } from "./binding/binding_storagebuffer.js";
 import { ComputePipeline } from "./cgp_computepipeline.js";
 import { ShaderModifier } from "./cgp_shadermodifier.js";
+import { BindingUniform } from "./binding/binding_uniform.js";
+import { BindingTexture } from "./binding/binding_texture.js";
+import { BindingSampler } from "./binding/binding_sampler.js";
 
 const CGP = {
     "Context": CgpContext,
@@ -27,7 +30,11 @@ window.CGP = CGP;
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;
 window.CGP.ComputePipeline = ComputePipeline;
-window.CGP.BindingStorage = BindingStorage;
 window.CGP.ShaderModifier = ShaderModifier;
+
+window.CGP.BindingStorage = BindingStorage;
+window.CGP.BindingUniform = BindingUniform;
+window.CGP.BindingTexture = BindingTexture;
+window.CGP.BindingSampler = BindingSampler;
 
 export { CGP };

@@ -26,12 +26,12 @@ export class RenderPipeline extends Pipeline
     /** @type {GPURenderPassEncoder} */
     #passEncoder;
 
-    #shaderListeners = [];
+    // #shaderListeners = [];
     #old = {};
-    #errorCount = 0;
     #type = RenderPipeline.TYPE_RENDER;
     lastRebuildReason = "first";
     #rebuildNumBindingGroups = false;
+    #compileCount = -1;
 
     /**
      * Description
@@ -71,7 +71,7 @@ export class RenderPipeline extends Pipeline
         if (this.#old.mesh != mesh)needsRebuildReason = "no mesh";
         if (this.#old.shader != shader)
         {
-            this.setShaderListener(this.#old.shader, shader);
+            // this.setShaderListener(this.#old.shader, shader);
             needsRebuildReason = "shader changed";
         }
 
@@ -114,6 +114,11 @@ export class RenderPipeline extends Pipeline
                 needsRebuildReason = "multisample change";
 
         }
+        if (this.#compileCount != shader.compileCount)
+        {
+            needsRebuildReason = "shader was compiled?! ";
+        }
+
         this.pushDebug();
 
         if (needsRebuildReason != "")
@@ -131,6 +136,7 @@ export class RenderPipeline extends Pipeline
             this.#old.shader = shader;
             this.#old.mesh = mesh;
             this.#isValid = true;
+            this.#compileCount = shader.compileCount;
 
             try
             {

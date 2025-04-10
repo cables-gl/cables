@@ -63,9 +63,10 @@ export class CgpShader extends CgShader
         this.worldUniforms = [];
 
         this.defaultBindGroup = new BindGroup(_cgp, this._name);
+        this.modsBindGroup = new BindGroup(_cgp, "mods");
 
         /** @type {Array<BindGroup>} */
-        this.bindGroups = [this.defaultBindGroup];
+        this.bindGroups = [this.defaultBindGroup, this.modsBindGroup];
 
         if (!this.options.compute)
         {
@@ -100,10 +101,8 @@ export class CgpShader extends CgShader
 
         this._cgp.on("deviceChange", () =>
         {
-
             this.gpuShaderModule = null;
             this.setWhyCompile("device changed");
-
         });
     }
 
@@ -151,9 +150,19 @@ export class CgpShader extends CgShader
     }
 
     /**
-     * @param {String} vs
+     * @param {import("../cg/cg_shader.js").ShaderModule} mod
+     * @param {string} src
      */
-    _replaceMods(vs)
+    _replaceModPrefixes(mod, src)
+    {
+        return src.replace(/MOD_/g, mod.prefix);
+    }
+
+    /**
+     * @param {String} vs
+     * @param {{}} defs
+     */
+    _replaceMods(vs, defs)
     {
         let srcHeadVert = "";
         for (let i = 0; i < this._moduleNames.length; i++)
@@ -165,9 +174,9 @@ export class CgpShader extends CgShader
                 const mod = this._modules[j];
                 if (mod.name == this._moduleNames[i])
                 {
-                    srcHeadVert += "\n//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------\n";
+                    srcHeadVert += nl + nl + "//---- MOD: group:" + mod.group + ": idx:" + j + " - prfx:" + mod.prefix + " - " + mod.title + " ------" + nl;
 
-                    srcVert += "\n\n//---- MOD: " + mod.title + " / " + mod.priority + " ------\n";
+                    srcVert += nl + nl + "//---- MOD: " + mod.title + " / " + mod.priority + " ------" + nl;
 
                     if (mod.attributes)
                         for (let k = 0; k < mod.attributes.length; k++)
@@ -180,22 +189,21 @@ export class CgpShader extends CgShader
                     srcHeadVert += mod.srcHead || "";
                     srcVert += mod.srcBody || "";
 
-                    srcHeadVert += "\n//---- end mod ------\n";
+                    srcHeadVert += nl + "//---- end mod ------" + nl;
 
-                    srcVert += "\n//---- end mod ------\n";
+                    srcVert += nl + "//---- end mod ------" + nl;
 
-                    srcVert = srcVert.replace(/{{mod}}/g, mod.prefix);
-                    srcHeadVert = srcHeadVert.replace(/{{mod}}/g, mod.prefix);
-
-                    srcVert = srcVert.replace(/MOD_/g, mod.prefix);
-                    srcHeadVert = srcHeadVert.replace(/MOD_/g, mod.prefix);
+                    srcVert = this._replaceModPrefixes(mod, srcVert);
+                    srcHeadVert = this._replaceModPrefixes(mod, srcHeadVert);
 
                 }
             }
 
+            srcVert = preproc(srcVert, defs);
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
         }
 
+        srcHeadVert = preproc(srcHeadVert, defs);
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         return vs;
     }
@@ -205,7 +213,6 @@ export class CgpShader extends CgShader
      */
     _replaceVertexOutputs(src = "")
     {
-
         const strVertOut = "{{VERTEX_OUTPUT";
         const posVertOut = src.indexOf(strVertOut);
         if (posVertOut > -1)
@@ -215,9 +222,20 @@ export class CgpShader extends CgShader
                 let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
                 let endPos = str.indexOf("}}");
                 let startNum = parseInt(str.substring(0, endPos));
-                let locCode = "@location(" + (startNum) + ") pos:vec4f,";
 
-                src = src.replaceAll(strVertOut + " " + startNum + "}}", locCode);
+                for (let j = 0; j < this._modules.length; j++)
+                {
+                    if (!this._modules[j].outputs) continue;
+                    let outs = this._modules[j].outputs;
+                    let l = 0;
+                    while (outs.indexOf("@location(" + l + ")") > -1)
+                    {
+                        outs = outs.replaceAll("@location(" + l + ")", "@location(" + (l + startNum) + ")");
+                    }
+                    outs = this._replaceModPrefixes(this._modules[j], outs);
+                    src = src.replaceAll(strVertOut + " " + startNum + "}}", outs);
+                }
+
             }
             catch (e)
             {
@@ -262,7 +280,8 @@ export class CgpShader extends CgShader
         else
             src = bindingsHeadFrag + "\n\n////////////////\n\n" + bindingsHeadVert + "\n\n////////////////\n\n" + src;
 
-        src = this._replaceMods(src);
+        src = this._replaceMods(src, defs);
+
         src = this._replaceVertexOutputs(src);
 
         const strVertOut = "{{VERTEX_OUTPUT";
@@ -271,7 +290,6 @@ export class CgpShader extends CgShader
         {
             try
             {
-
                 let str = src.substring(posVertOut + strVertOut.length, posVertOut + 100);
                 let endPos = str.indexOf("}}");
                 let startNum = parseInt(str.substring(0, endPos));
@@ -397,7 +415,7 @@ export class CgpShader extends CgShader
         {
             this.bindGroups[i].updateValues(this.frameUsageCounter);
 
-            this.bindGroups[i].bind(this.frameUsageCounter, passEnc);
+            this.bindGroups[i].bind(this.frameUsageCounter, passEnc, i);
 
         }
         if (this._needsRecompile) this.compile();
@@ -431,6 +449,7 @@ export class CgpShader extends CgShader
         }
 
         this.needsPipelineUpdate = "add uniform";
+        console.log("adduni", u.name, binding);
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;
@@ -456,45 +475,19 @@ export class CgpShader extends CgShader
         shader._modules = JSON.parse(JSON.stringify(this._modules));
         shader._defines = JSON.parse(JSON.stringify(this._defines));
 
-        // shader._modGroupCount = this._modGroupCount;
         shader._moduleNames = this._moduleNames;
 
-        // // shader.glPrimitive = this.glPrimitive;
-        // // shader.offScreenPass = this.offScreenPass;
-        // // shader._extensions = this._extensions;
-        // // shader.wireframe = this.wireframe;
-        // // shader._attributes = this._attributes;
+        shader.bindGroups = [];
         for (let i = 0; i < this.bindGroups.length; i++)
         {
             const bg = this.bindGroups[i].copy(shader);
-            shader.bindGroups = [];
             shader.bindGroups.push(bg);
 
-            if (this.bindGroups[i] == this.defaultBindGroup)
-                shader.defaultBindGroup = bg;
+            if (this.bindGroups[i] == this.defaultBindGroup) shader.defaultBindGroup = bg;
+            if (this.bindGroups[i] == this.modsBindGroup) shader.modsBindGroup = bg;
         }
-        // shader.defaultBindGroup.addBinding(this.bindingWorld);
 
         shader.defaultBindGroup.setBindingNums();
-
-        // for (let i = 0; i < this.worldUniforms.length; i++)
-        // {
-        //     this.defaultUniBindingVert.addUniform(this.worldUniforms[i]);
-        // }
-        // for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].copy(shader);
-
-        // // shader.bindingsFrag = [];
-        // // for (let i = 0; i < this.bindingsFrag.length; i++) this.bindingsFrag[i].copy(shader);
-
-        // // shader.bindingsVert = [];
-        // // for (let i = 0; i < this.bindingsVert.length; i++) this.bindingsVert[i].copy(shader);
-        // // shader.defaultUniBindingVert = this.bindingsVert[0];
-
-        // // shader.bindingsCompute = [];
-        // // for (let i = 0; i < this.bindingsCompute.length; i++) this.bindingsCompute[i].copy(shader);
-        // // shader.defaultBindingComp = this.bindingsCompute[0];
-
-        // console.log("copyyyyyyyyyy", shader.bindingsVert, this.bindingsVert);
 
         shader.setWhyCompile("copy");
         shader.compile();

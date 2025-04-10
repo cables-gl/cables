@@ -1,3 +1,7 @@
+/**
+ * @param {string} str
+ * @param {object} vars
+ */
 export function preproc(str, vars)
 {
     if (!str)

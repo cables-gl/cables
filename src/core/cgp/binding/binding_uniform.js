@@ -40,7 +40,6 @@ export class BindingUniform extends Binding
             let foundWorldUni = false;
             for (let j = 0; j < shader.worldUniforms.length; j++)
             {
-
                 if (shader.worldUniforms[j].getName() == this.#uniforms[i].getName())
                 {
                     b.addUniform(shader.worldUniforms[j]);
@@ -48,8 +47,8 @@ export class BindingUniform extends Binding
                 }
             }
             if (!foundWorldUni) b.addUniform(this.#uniforms[i]);
-
         }
+
         return b;
     }
 
@@ -120,24 +119,17 @@ export class BindingUniform extends Binding
         let s = this.getSizeBytes() / 4;
         info.s = this.getSizeBytes();
         if (s == 16)s = 16;
-        if (!this.cgpBuffer[inst])
-        {
-            this.createBuffer(inst);
-            console.log("no cpubuff? ", s, this.#uniforms);
-            // return;
-        }
+        if (!this.cgpBuffer[inst]) this.createBuffer(inst);
+
         this.cgpBuffer[inst].setLength(s);
 
         let off = 0;
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-
             this.#uniforms[i].copyToBuffer(this.cgpBuffer[inst].floatArr, off);
 
             if (this.#uniforms[i].gpuBufferChanged)
-            {
                 console.log("un changed", this.cgpBuffer[inst].floatArr);
-            }
 
             info.uniforms.push(this.#uniforms[i].getInfo());
 
@@ -194,8 +186,6 @@ export class BindingUniform extends Binding
         else if (this.#uniforms.length == 0)
         {
             return str;
-            // typeStr = "float";
-            // name = "placeholder";
         }
 
         // console.log("shadercode uniforms", this.#uniforms[0].name);
@@ -205,7 +195,6 @@ export class BindingUniform extends Binding
         str += "var<uniform> ";
         str += name + ": " + typeStr + ";\n";
 
-        console.log(str);
         return str + "\n";
     }
 

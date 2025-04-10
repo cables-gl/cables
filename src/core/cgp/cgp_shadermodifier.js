@@ -1,5 +1,7 @@
+import { Binding } from "./binding/binding.js";
 import { CgpShader } from "./cgp_shader.js";
 import { CgpContext } from "./cgp_state.js";
+import { CgpUniform } from "./cgp_uniform.js";
 
 class ShaderModifier
 {
@@ -37,6 +39,9 @@ class ShaderModifier
         this._lastShader = null;
         this._attributes = [];
         if (options && options.opId) this.opId = options.opId;
+
+        /** @type {Binding[]} */
+        this.bindings = [];
     }
 
     /**
@@ -185,51 +190,16 @@ class ShaderModifier
             const uni = this._uniforms[i];
             const name = this.getPrefixedName(uni.name);
 
-            if (!shader.hasUniform(name) && !uni.structName)
+            if (!shader.hasUniform(name))
             {
-                let un = null;
-                if (uni.shaderType === "both")
-                {
-                    un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
-                    un.comment = "mod: " + this._name;
-                }
-                else if (uni.shaderType === "frag")
-                {
-                    un = shader.addUniformFrag(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
-                    un.comment = "mod: " + this._name;
-                }
-                else if (uni.shaderType === "vert")
-                {
-                    un = shader.addUniformVert(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
-                    un.comment = "mod: " + this._name;
-                }
+                console.log("shadermod uni ", uni.name);
+                const u = new CgpUniform(shader, "3f", uni.name, uni.v1, uni.v2, uni.v3, uni.v4);
+
+                console.log(uni);
+                shader.addUniform(u, uni.stage);
             }
         }
 
-        for (let j = 0; j < this._structUniforms.length; j += 1)
-        {
-            const structUniform = this._structUniforms[j];
-            let structUniformName = structUniform.uniformName;
-            let structName = structUniform.structName;
-
-            const members = structUniform.members;
-
-            structUniformName = this.getPrefixedName(structUniform.uniformName);
-            structName = this.getPrefixedName(structUniform.structName);
-
-            if (structUniform.shaderType === "frag")
-            {
-                shader.addUniformStructFrag(structName, structUniformName, members);
-            }
-            if (structUniform.shaderType === "vert")
-            {
-                shader.addUniformStructVert(structName, structUniformName, members);
-            }
-            if (structUniform.shaderType === "both")
-            {
-                shader.addUniformStructBoth(structName, structUniformName, members);
-            }
-        }
     }
 
     _updateUniforms()
@@ -278,118 +248,100 @@ class ShaderModifier
         return false;
     }
 
-    _getStructUniform(uniName)
-    {
-        for (let i = 0; i < this._structUniforms.length; i += 1)
-            if (this._structUniforms[i].uniformName === uniName) return this._structUniforms[i];
-
-        return null;
-    }
-
-    _isStructUniform(name)
-    {
-        for (let i = 0; i < this._uniforms.length; i++)
-        {
-            if (this._uniforms[i].name == name) return false;
-            if (this._uniforms[i].structName)
-            {
-                if (this._uniforms[i].propertyName == name) return true;
-            }
-        }
-        return false;
-    }
-
-    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
+    /**
+     * @param {any} stage
+     * @param {string} name
+     * @param {any} valOrPort
+     * @param {any} v2
+     * @param {any} v3
+     * @param {any} v4
+     * @param {string} shaderType
+     */
+    addUniform(stage, name, valOrPort, v2, v3, v4, shaderType)
     {
         if (!this._getUniform(name))
         {
-            let _shaderType = "both";
-            if (shaderType) _shaderType = shaderType;
 
             this._uniforms.push(
                 {
-                    "type": type,
                     "name": name,
                     "v1": valOrPort,
                     "v2": v2,
                     "v3": v3,
                     "v4": v4,
-                    "structUniformName": structUniformName,
-                    "structName": structName,
-                    "propertyName": propertyName,
-                    "shaderType": _shaderType,
+                    "stage": stage,
                 });
             this._changedUniforms = true;
         }
     }
 
-    addUniformFrag(type, name, valOrPort, v2, v3, v4)
-    {
-        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "frag");
-        this._changedUniforms = true;
-    }
+    // addUniformFrag(type, name, valOrPort, v2, v3, v4)
+    // {
+    //     this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "frag");
+    //     this._changedUniforms = true;
+    // }
 
-    addUniformVert(type, name, valOrPort, v2, v3, v4)
-    {
-        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "vert");
-        this._changedUniforms = true;
-    }
+    // addUniformVert(type, name, valOrPort, v2, v3, v4)
+    // {
+    //     this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "vert");
+    //     this._changedUniforms = true;
+    // }
 
-    addUniformBoth(type, name, valOrPort, v2, v3, v4)
-    {
-        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "both");
-        this._changedUniforms = true;
-    }
+    // addUniformBoth(type, name, valOrPort, v2, v3, v4)
+    // {
+    //     this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "both");
+    //     this._changedUniforms = true;
+    // }
 
-    addUniformStruct(structName, uniformName, members, shaderType)
-    {
-        for (let i = 0; i < members.length; i += 1)
-        {
-            const member = members[i];
-            if ((member.type === "2i" || member.type === "i" || member.type === "3i") && shaderType === "both")
-                console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
+    // addUniformStruct(structName, uniformName, members, shaderType)
+    // {
+    //     for (let i = 0; i < members.length; i += 1)
+    //     {
+    //         const member = members[i];
+    //         if ((member.type === "2i" || member.type === "i" || member.type === "3i") && shaderType === "both")
+    //             console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
 
-            if (!this._getUniform(uniformName + "." + member.name))
-            {
-                this.addUniform(
-                    member.type,
-                    uniformName + "." + member.name,
-                    member.v1,
-                    member.v2,
-                    member.v3,
-                    member.v4,
-                    uniformName,
-                    structName,
-                    member.name,
-                    shaderType
-                );
-            }
-        }
-        if (!this._getStructUniform(uniformName))
-        {
-            this._structUniforms.push({
-                "structName": structName,
-                "uniformName": uniformName,
-                "members": members,
-                "shaderType": shaderType,
-            });
-        }
-    }
+    //         if (!this._getUniform(uniformName + "." + member.name))
+    //         {
+    //             this.addUniform(
+    //                 member.type,
+    //                 uniformName + "." + member.name,
+    //                 member.v1,
+    //                 member.v2,
+    //                 member.v3,
+    //                 member.v4,
+    //                 uniformName,
+    //                 structName,
+    //                 member.name,
+    //                 shaderType
+    //             );
+    //         }
+    //     }
+    //     if (!this._getStructUniform(uniformName))
+    //     {
+    //         this._structUniforms.push({
+    //             "structName": structName,
+    //             "uniformName": uniformName,
+    //             "members": members,
+    //             "shaderType": shaderType,
+    //         });
+    //     }
+    // }
 
-    addUniformStructVert(structName, uniformName, members)
-    {
-        this.addUniformStruct(structName, uniformName, members, "vert");
-    }
+    // addUniformStructVert(structName, uniformName, members)
+    // {
+    //     this.addUniformStruct(structName, uniformName, members, "vert");
+    // }
 
-    addUniformStructFrag(structName, uniformName, members)
-    {
-        this.addUniformStruct(structName, uniformName, members, "frag");
-    }
+    // addUniformStructFrag(structName, uniformName, members)
+    // {
+    //     this.addUniformStruct(structName, uniformName, members, "frag");
+    // }
 
-    addUniformStructBoth(structName, uniformName, members)
-    {
-        this.addUniformStruct(structName, uniformName, members, "both");
-    }
+    // addUniformStructBoth(structName, uniformName, members)
+    // {
+    //     this.addUniformStruct(structName, uniformName, members, "both");
+    // }
 
     addAttribute(attr)
     {
@@ -483,6 +435,9 @@ class ShaderModifier
         return name;
     }
 
+    /**
+     * @param {CgpShader} shader
+     */
     _updateDefinesShader(shader)
     {
         for (const i in this._defines)
@@ -506,6 +461,10 @@ class ShaderModifier
         this._changedDefines = false;
     }
 
+    /**
+     * @param {string | number} what
+     * @param {boolean} value
+     */
     define(what, value)
     {
         if (value === undefined)value = true;
@@ -513,18 +472,28 @@ class ShaderModifier
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     removeDefine(name)
     {
         this._defines[name] = null;
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     hasDefine(name)
     {
         if (this._defines[name] !== null && this._defines[name] !== undefined) return true;
         return false;
     }
 
+    /**
+     * @param {string} name
+     * @param {any} b
+     */
     toggleDefine(name, b)
     {
         this._changedDefines = true;
