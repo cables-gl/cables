@@ -5,11 +5,13 @@ import fs from "fs";
 import git from "git-last-commit";
 import webpack from "webpack";
 
+import path from "path";
 import webpackConfig from "./webpack.config.js";
 import webpackLibsConfig from "./webpack.config.libs.js";
 
-let configLocation = "../cables_api/cables.json";
-if (process.env.npm_config_apiconfig) configLocation = "../cables_api/cables_env_" + process.env.npm_config_apiconfig + ".json";
+const apiLocation = "../cables_api/";
+let configLocation = path.join(apiLocation, "cables.json");
+if (process.env.npm_config_apiconfig) configLocation = path.join(apiLocation, "cables_env_" + process.env.npm_config_apiconfig + ".json");
 
 let isLiveBuild = false;
 let minify = false;
@@ -96,7 +98,7 @@ function _copy_ui()
 function _core_libs_copy(done)
 {
     const source = "build/libs/";
-    const target = "../cables_api/public/libs_core/";
+    const target = path.join("../cables_api/src/", config.path.corelibs);
 
     if (!process.env.cables_electron || process.env.cables_electron === "false")
     {
