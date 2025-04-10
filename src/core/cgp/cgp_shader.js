@@ -433,6 +433,24 @@ export class CgpShader extends CgShader
         return binding;
     }
 
+    pipelineUpdated()
+    {
+
+        if (this.defaultUniBindingFrag) this.defaultUniBindingFrag.pipelineUpdated();
+        if (this.defaultUniBindingVert) this.defaultUniBindingVert.pipelineUpdated();
+        if (this.defaultUniBindingCompute) this.defaultUniBindingCompute.pipelineUpdated();
+    }
+
+    bindingsNeedPipeUpdate()
+    {
+        return (
+            (this.defaultUniBindingFrag && this.defaultUniBindingFrag.needsPipeUpdate()) ||
+            (this.defaultUniBindingVert && this.defaultUniBindingVert.needsPipeUpdate()) ||
+            (this.defaultUniBindingCompute && this.defaultUniBindingCompute.needsPipeUpdate())
+        );
+
+    }
+
     /**
      * @param {String} name
      * @param {number} stage
@@ -539,15 +557,23 @@ export class CgpShader extends CgShader
 
     getInfo()
     {
-        return {
+        const o = {
             "class": this.constructor.name,
             "name": this._name,
             "frameUsageCounter": this.lastFrameUsageCounter,
             "lastCompileReason": this.#lastCompileReason,
             "compileCount": this.compileCount,
-            "numDefines": this._defines.length,
-            "isCompute": this.options.compute
+            "defines": this._defines,
+            "isCompute": this.options.compute,
+            "bindgroups": []
         };
+
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            o.bindgroups.push(this.bindGroups[i].getInfo());
+        }
+
+        return o;
     }
 
     copyUniformValues(orig)

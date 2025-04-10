@@ -58,6 +58,7 @@ export class BindingUniform extends Binding
     addUniform(u)
     {
         this.#uniforms.push(u);
+        this.needsRebuildBindgroup = true;
         return u;
     }
 
@@ -121,6 +122,17 @@ export class BindingUniform extends Binding
         };
 
         this.cgpBuffer[inst] = new CgpGguBuffer(this.cgp, this.name + " buff", null, { "buffCfg": buffCfg });
+    }
+
+    pipelineUpdated()
+    {
+        this.needsRebuildBindgroup = false;
+
+    }
+
+    needsPipeUpdate()
+    {
+        return this.needsRebuildBindgroup;
     }
 
     /**
@@ -239,5 +251,17 @@ export class BindingUniform extends Binding
         }
         return this.updateBuffer(inst);
 
+    }
+
+    getInfo()
+    {
+        const o = { "name": this.name, "class": this.constructor.name, "uniforms": [] };
+
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+
+            o.uniforms.push(this.#uniforms[i].getInfo());
+        }
+        return o;
     }
 }

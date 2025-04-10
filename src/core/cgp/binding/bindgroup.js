@@ -263,4 +263,14 @@ export class BindGroup
             this.#bindings[i].setBindNum(i);
         }
     }
+
+    getInfo()
+    {
+        const o = { "name": this.name, "bindings": [] };
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            o.bindings.push(this.#bindings[i].getInfo());
+        }
+        return o;
+    }
 }

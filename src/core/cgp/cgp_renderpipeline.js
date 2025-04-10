@@ -92,6 +92,13 @@ export class RenderPipeline extends Pipeline
             needsRebuildReason = "num bindgroup layouts wrong...";
         }
 
+        if (shader.bindingsNeedPipeUpdate())
+        {
+            console.log("binding needs uptate");
+            needsRebuildReason = "bindings needs update";
+            this.needsRebuildBindgroup = true;
+        }
+
         // if (this.#rebuildNumBindingGroups)
         // {
         //     needsRebuildReason = "num bindgroups wrong...";
@@ -142,6 +149,7 @@ export class RenderPipeline extends Pipeline
             this.#old.mesh = mesh;
             this.#isValid = true;
             this.#compileCount = shader.compileCount;
+            shader.pipelineUpdated();
 
             try
             {
