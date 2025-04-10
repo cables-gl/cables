@@ -230,8 +230,6 @@ export class BindGroup
         {
             const bind = this.#bindings[i];
             let src = "";
-            src += "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n";
-
             src += bind.getShaderHeaderCode(shader, idx);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
             else if (bind.stage === GPUShaderStage.FRAGMENT)srcs.fragment += src;
