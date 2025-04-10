@@ -85,6 +85,20 @@ export class BindingUniform extends Binding
     /**
      * @param {string} name
      */
+    getUniform(name)
+    {
+
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+
+            if (this.#uniforms[i].name == name) return this.#uniforms[i];
+        }
+        return null;
+    }
+
+    /**
+     * @param {string} name
+     */
     removeUniformByName(name)
     {
         for (let i = 0; i < this.#uniforms.length; i++)
@@ -119,8 +133,12 @@ export class BindingUniform extends Binding
         let s = this.getSizeBytes() / 4;
         info.s = this.getSizeBytes();
         if (s == 16)s = 16;
-        if (!this.cgpBuffer[inst]) this.createBuffer(inst);
-
+        if (!this.cgpBuffer[inst])
+        {
+            this.createBuffer(inst);
+            // console.log("no cpubuff? ", s, this.#uniforms);
+            // return;
+        }
         this.cgpBuffer[inst].setLength(s);
 
         let off = 0;
@@ -186,6 +204,8 @@ export class BindingUniform extends Binding
         else if (this.#uniforms.length == 0)
         {
             return str;
+            // typeStr = "float";
+            // name = "placeholder";
         }
 
         // console.log("shadercode uniforms", this.#uniforms[0].name);
@@ -195,6 +215,7 @@ export class BindingUniform extends Binding
         str += "var<uniform> ";
         str += name + ": " + typeStr + ";\n";
 
+        // console.log(str);
         return str + "\n";
     }
 

@@ -81,6 +81,9 @@ function getDefaultFragmentShader(r, g, b)
 class CglShader extends CgShader
 {
 
+    /** @type {Uniform[]} */
+    _uniforms = [];
+
     /**
      * @param {CglContext} _cgl
      * @param {string} _name

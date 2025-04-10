@@ -434,6 +434,28 @@ export class CgpShader extends CgShader
     }
 
     /**
+     * @param {String} name
+     * @param {number} stage
+     */
+    hasUniformInStage(name, stage)
+    {
+
+        let binding = this.defaultUniBindingFrag;
+        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
+        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
+        if (!binding) return false;
+        return !!binding.getUniform(name);
+    }
+
+    /**
+     * @param {String} name
+     */
+    hasUniform(name)
+    {
+        return this.hasUniformInStage(name, GPUShaderStage.FRAGMENT) || this.hasUniformInStage(name, GPUShaderStage.VERTEX) || this.hasUniformInStage(name, GPUShaderStage.COMPUTE);
+    }
+
+    /**
      * @param {CgpUniform} u
      * @param {number} stage
      * @returns {CgpUniform}
@@ -449,7 +471,7 @@ export class CgpShader extends CgShader
         }
 
         this.needsPipelineUpdate = "add uniform";
-        console.log("adduni", u.name, binding);
+        console.log("adduni", this._name, u.name, binding);
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;

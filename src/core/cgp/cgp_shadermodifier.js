@@ -1,8 +1,19 @@
 import { CgShader } from "../cg/cg_shader.js";
+import { Uniform } from "../cgl/cgl_shader_uniform.js";
 import { Binding } from "./binding/binding.js";
 import { CgpShader } from "./cgp_shader.js";
 import { CgpContext } from "./cgp_state.js";
 import { CgpUniform } from "./cgp_uniform.js";
+
+/**
+ * @typedef UniformDescrip
+ * @property {string} name
+ * @property {number} stage
+ * @property {any} v1
+ * @property {any} v2
+ * @property {any} v3
+ * @property {any} v4
+ */
 
 class ShaderModifier
 {
@@ -21,7 +32,7 @@ class ShaderModifier
         this._name = name;
         this._origShaders = {};
 
-        /** @type {Array<object>} */
+        /** @type {Array<UniformDescrip>} */
         this._uniforms = [];
         this._structUniforms = [];
         this._definesToggled = {};
@@ -200,7 +211,7 @@ class ShaderModifier
             if (!shader.hasUniform(name))
             {
                 console.log("shadermod uni ", uni.name);
-                const u = new CgpUniform(shader, "3f", uni.name, uni.v1, uni.v2, uni.v3, uni.v4);
+                const u = new CgpUniform(shader, "3f", this.getPrefixedName(uni.name), uni.v1, uni.v2, uni.v3, uni.v4);
 
                 console.log(uni);
                 shader.addUniform(u, uni.stage);
@@ -251,7 +262,7 @@ class ShaderModifier
      */
     hasUniform(name)
     {
-        return this._getUniform(name);
+        return !!this._getUniform(name);
     }
 
     /**
@@ -259,15 +270,12 @@ class ShaderModifier
      */
     _getUniform(name)
     {
+
         for (let i = 0; i < this._uniforms.length; i++)
         {
             if (this._uniforms[i].name == name) return this._uniforms[i];
-            if (this._uniforms[i].structName)
-            {
-                if (this._uniforms[i].propertyName == name) return this._uniforms[i];
-            }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -281,6 +289,7 @@ class ShaderModifier
      */
     addUniform(stage, name, valOrPort, v2, v3, v4, shaderType)
     {
+
         if (!this._getUniform(name))
         {
 

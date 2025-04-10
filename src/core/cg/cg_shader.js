@@ -32,9 +32,6 @@ class CgShader extends Events
     /** @type {Array<String>} */
     _moduleNames = [];
 
-    /** @type {Uniform[]} */
-    _uniforms = [];
-
     _moduleNumId = 0;
     _needsRecompile = true;
     _compileReason = "initial";
@@ -89,14 +86,29 @@ class CgShader extends Events
 
     /**
      * @param {String} name
+     * @param {number} stage
      */
-    hasUniform(name)
+    hasUniformInStage(name, stage)
     {
+
+        let binding = this.defaultUniBindingFrag;
+        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
+        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
+
         for (let i = 0; i < this._uniforms.length; i++)
         {
+
+            console.log("hasuniiiiiiiiiiiiiii", this._uniforms[i].getName(), name);
             if (this._uniforms[i].getName() == name) return true;
         }
         return false;
+    }
+
+    /**
+     * @param {String} name
+     */
+    hasUniform(name)
+    {
     }
 
     /**

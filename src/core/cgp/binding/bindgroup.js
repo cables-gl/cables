@@ -13,6 +13,8 @@ export class BindGroup
 
     name = "";
 
+    needsPipelineUpdate = false;
+
     bla = 1;
 
     /** @type {CgpContext} */
@@ -162,7 +164,7 @@ export class BindGroup
             "entries": this.getEntries(inst)
         };
 
-        this.#cgp.profileData.count("pipeline created", this.name);
+        this.#cgp.profileData.count("bindgroup created", this.name);
 
         // if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
         // {
@@ -175,6 +177,7 @@ export class BindGroup
         try
         {
             this.#gpuBindGroups[inst] = this.#cgp.device.createBindGroup(bg);
+            this.needsRebuildBindgroup = true;
 
         }
         catch (e)
