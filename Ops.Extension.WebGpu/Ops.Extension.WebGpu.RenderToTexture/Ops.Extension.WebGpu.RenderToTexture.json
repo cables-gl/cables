@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1733923049112
+        },
+        {
+            "message": "Extension.WebGpu.Dev.RenderToTexture renamed to Ops.Extension.WebGpu.RenderToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744376835117
         }
     ],
     "layout": {
@@ -69,5 +75,6 @@
     "exampleProjectId": "pyXXKB",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "render into a texture"
 }

@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1733934334012
+        },
+        {
+            "message": "Extension.WebGpu.Dev.ArrayToTexture renamed to Ops.Extension.WebGpu.ArrayToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744377045232
         }
     ],
     "layout": {
@@ -61,5 +67,6 @@
     "summary": "Convert an array of numbers to a webgpu texture",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "hYt34I"
 }

@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1738247518352
+        },
+        {
+            "message": "Extension.WebGpu.Dev.VizTexture renamed to Ops.Extension.WebGpu.VizTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744377916534
         }
     ],
     "layout": {
