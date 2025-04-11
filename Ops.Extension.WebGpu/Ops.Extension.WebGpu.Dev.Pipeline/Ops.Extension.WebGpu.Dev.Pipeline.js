@@ -1,7 +1,9 @@
 const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next"),
+    inForce = op.inTriggerButton("force rebuild"),
     outPipe = op.outObject("Pipeline"),
+    outShader = op.outObject("Shader Info"),
     outShaderSrc = op.outString("Shader Source", "", "glsl"),
     outShaderCompileCount = op.outNumber("compile count"),
     outId = op.outString("Shader id"),
@@ -9,6 +11,16 @@ const
 
 let compileCount = -1;
 let oldShader = null;
+
+inForce.onTriggered = () =>
+{
+    if (oldShader)
+    {
+        console.log("text");
+        oldShader.needsPipelineUpdate = "force rebuild";
+        oldShader.compile();
+    }
+};
 
 exec.onTriggered = () =>
 {
@@ -30,8 +42,10 @@ exec.onTriggered = () =>
         {
             compileCount = shader.compileCount;
             outShaderSrc.set(shader.getProcessedSource());
+            console.log(shader);
         }
         outDefines.set(shader.getDefines());
+        outShader.setRef(shader.getInfo());
     }
 
     next.trigger();

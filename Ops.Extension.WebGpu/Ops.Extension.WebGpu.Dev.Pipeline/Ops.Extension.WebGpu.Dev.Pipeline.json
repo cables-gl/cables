@@ -16,6 +16,10 @@
             {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "force rebuild"
             }
         ],
         "portsOut": [
@@ -26,6 +30,10 @@
             {
                 "type": 2,
                 "name": "Pipeline"
+            },
+            {
+                "type": 2,
+                "name": "Shader Info"
             },
             {
                 "type": 5,
