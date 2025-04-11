@@ -433,6 +433,46 @@ export class CgpShader extends CgShader
         return binding;
     }
 
+    pipelineUpdated()
+    {
+
+        if (this.defaultUniBindingFrag) this.defaultUniBindingFrag.pipelineUpdated();
+        if (this.defaultUniBindingVert) this.defaultUniBindingVert.pipelineUpdated();
+        if (this.defaultUniBindingCompute) this.defaultUniBindingCompute.pipelineUpdated();
+    }
+
+    bindingsNeedPipeUpdate()
+    {
+        return (
+            (this.defaultUniBindingFrag && this.defaultUniBindingFrag.needsPipeUpdate()) ||
+            (this.defaultUniBindingVert && this.defaultUniBindingVert.needsPipeUpdate()) ||
+            (this.defaultUniBindingCompute && this.defaultUniBindingCompute.needsPipeUpdate())
+        );
+
+    }
+
+    /**
+     * @param {String} name
+     * @param {number} stage
+     */
+    hasUniformInStage(name, stage)
+    {
+
+        let binding = this.defaultUniBindingFrag;
+        if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
+        if (stage == GPUShaderStage.COMPUTE) binding = this.defaultUniBindingCompute;
+        if (!binding) return false;
+        return !!binding.getUniform(name);
+    }
+
+    /**
+     * @param {String} name
+     */
+    hasUniform(name)
+    {
+        return this.hasUniformInStage(name, GPUShaderStage.FRAGMENT) || this.hasUniformInStage(name, GPUShaderStage.VERTEX) || this.hasUniformInStage(name, GPUShaderStage.COMPUTE);
+    }
+
     /**
      * @param {CgpUniform} u
      * @param {number} stage
@@ -449,7 +489,7 @@ export class CgpShader extends CgShader
         }
 
         this.needsPipelineUpdate = "add uniform";
-        console.log("adduni", u.name, binding);
+        console.log("adduni", this._name, u.name, binding);
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;
@@ -517,15 +557,23 @@ export class CgpShader extends CgShader
 
     getInfo()
     {
-        return {
+        const o = {
             "class": this.constructor.name,
             "name": this._name,
             "frameUsageCounter": this.lastFrameUsageCounter,
             "lastCompileReason": this.#lastCompileReason,
             "compileCount": this.compileCount,
-            "numDefines": this._defines.length,
-            "isCompute": this.options.compute
+            "defines": this._defines,
+            "isCompute": this.options.compute,
+            "bindgroups": []
         };
+
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            o.bindgroups.push(this.bindGroups[i].getInfo());
+        }
+
+        return o;
     }
 
     copyUniformValues(orig)

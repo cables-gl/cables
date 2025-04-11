@@ -58,6 +58,7 @@ export class BindingUniform extends Binding
     addUniform(u)
     {
         this.#uniforms.push(u);
+        this.needsRebuildBindgroup = true;
         return u;
     }
 
@@ -80,6 +81,20 @@ export class BindingUniform extends Binding
             size += this.#uniforms[i].getSizeBytes();
 
         return size;
+    }
+
+    /**
+     * @param {string} name
+     */
+    getUniform(name)
+    {
+
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+
+            if (this.#uniforms[i].name == name) return this.#uniforms[i];
+        }
+        return null;
     }
 
     /**
@@ -109,6 +124,17 @@ export class BindingUniform extends Binding
         this.cgpBuffer[inst] = new CgpGguBuffer(this.cgp, this.name + " buff", null, { "buffCfg": buffCfg });
     }
 
+    pipelineUpdated()
+    {
+        this.needsRebuildBindgroup = false;
+
+    }
+
+    needsPipeUpdate()
+    {
+        return this.needsRebuildBindgroup;
+    }
+
     /**
      * @param {number} inst
      */
@@ -119,8 +145,12 @@ export class BindingUniform extends Binding
         let s = this.getSizeBytes() / 4;
         info.s = this.getSizeBytes();
         if (s == 16)s = 16;
-        if (!this.cgpBuffer[inst]) this.createBuffer(inst);
-
+        if (!this.cgpBuffer[inst])
+        {
+            this.createBuffer(inst);
+            // console.log("no cpubuff? ", s, this.#uniforms);
+            // return;
+        }
         this.cgpBuffer[inst].setLength(s);
 
         let off = 0;
@@ -186,6 +216,8 @@ export class BindingUniform extends Binding
         else if (this.#uniforms.length == 0)
         {
             return str;
+            // typeStr = "float";
+            // name = "placeholder";
         }
 
         // console.log("shadercode uniforms", this.#uniforms[0].name);
@@ -195,6 +227,7 @@ export class BindingUniform extends Binding
         str += "var<uniform> ";
         str += name + ": " + typeStr + ";\n";
 
+        // console.log(str);
         return str + "\n";
     }
 
@@ -218,5 +251,17 @@ export class BindingUniform extends Binding
         }
         return this.updateBuffer(inst);
 
+    }
+
+    getInfo()
+    {
+        const o = { "name": this.name, "class": this.constructor.name, "uniforms": [] };
+
+        for (let i = 0; i < this.#uniforms.length; i++)
+        {
+
+            o.uniforms.push(this.#uniforms[i].getInfo());
+        }
+        return o;
     }
 }

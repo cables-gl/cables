@@ -87,10 +87,22 @@ export class RenderPipeline extends Pipeline
             mesh.needsPipelineUpdate = false;
         }
 
-        if (this.#rebuildNumBindingGroups)
+        if (this.bindingGroupLayoutEntries.length != shader.defaultBindGroup.getLayoutEntries(shader).length)
         {
-            needsRebuildReason = "num bindgroups wrong...";
+            needsRebuildReason = "num bindgroup layouts wrong...";
         }
+
+        if (shader.bindingsNeedPipeUpdate())
+        {
+            console.log("binding needs uptate");
+            needsRebuildReason = "bindings needs update";
+            this.needsRebuildBindgroup = true;
+        }
+
+        // if (this.#rebuildNumBindingGroups)
+        // {
+        //     needsRebuildReason = "num bindgroups wrong...";
+        // }
 
         if (this.#pipeCfg)
         {
@@ -137,6 +149,7 @@ export class RenderPipeline extends Pipeline
             this.#old.mesh = mesh;
             this.#isValid = true;
             this.#compileCount = shader.compileCount;
+            shader.pipelineUpdated();
 
             try
             {

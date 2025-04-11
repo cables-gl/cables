@@ -106,4 +106,10 @@ export class Binding
         // implenented in inheriting classes
         return null;
     }
+
+    getInfo()
+    {
+        const o = { "name": this.name, "class": this.constructor.name };
+        return o;
+    }
 }

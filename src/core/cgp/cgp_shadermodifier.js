@@ -1,7 +1,19 @@
+import { CgShader } from "../cg/cg_shader.js";
+import { Uniform } from "../cgl/cgl_shader_uniform.js";
 import { Binding } from "./binding/binding.js";
 import { CgpShader } from "./cgp_shader.js";
 import { CgpContext } from "./cgp_state.js";
 import { CgpUniform } from "./cgp_uniform.js";
+
+/**
+ * @typedef UniformDescrip
+ * @property {string} name
+ * @property {number} stage
+ * @property {any} v1
+ * @property {any} v2
+ * @property {any} v3
+ * @property {any} v4
+ */
 
 class ShaderModifier
 {
@@ -20,7 +32,7 @@ class ShaderModifier
         this._name = name;
         this._origShaders = {};
 
-        /** @type {Array<object>} */
+        /** @type {Array<UniformDescrip>} */
         this._uniforms = [];
         this._structUniforms = [];
         this._definesToggled = {};
@@ -144,11 +156,17 @@ class ShaderModifier
         for (let i = 0; i < this._mods.length; i++) shader.addModule(this._mods[i], firstMod);
     }
 
+    /**
+     * @param {import("../cg/cg_shader.js").ShaderModule} mod
+     */
     _removeModulesFromShader(mod)
     {
         for (const j in this._origShaders) this._origShaders[j].shader.removeModule(mod);
     }
 
+    /**
+     * @param {import("../cg/cg_shader.js").ShaderModule} mod
+     */
     addModule(mod)
     {
         this._mods.push(mod);
@@ -193,7 +211,7 @@ class ShaderModifier
             if (!shader.hasUniform(name))
             {
                 console.log("shadermod uni ", uni.name);
-                const u = new CgpUniform(shader, "3f", uni.name, uni.v1, uni.v2, uni.v3, uni.v4);
+                const u = new CgpUniform(shader, "3f", this.getPrefixedName(uni.name), uni.v1, uni.v2, uni.v3, uni.v4);
 
                 console.log(uni);
                 shader.addUniform(u, uni.stage);
@@ -210,6 +228,11 @@ class ShaderModifier
         this._changedUniforms = false;
     }
 
+    /**
+     * @param {CgShader} shader
+     * @param {string} uniformName
+     * @param {number} value
+     */
     _setUniformValue(shader, uniformName, value)
     {
         const uniform = shader.getUniform(uniformName);
@@ -217,6 +240,10 @@ class ShaderModifier
         if (uniform) uniform.setValue(value);
     }
 
+    /**
+     * @param {string} name
+     * @param {number} value
+     */
     setUniformValue(name, value)
     {
         const uni = this._getUniform(name);
@@ -230,22 +257,25 @@ class ShaderModifier
         }
     }
 
+    /**
+     * @param {string} name
+     */
     hasUniform(name)
     {
-        return this._getUniform(name);
+        return !!this._getUniform(name);
     }
 
+    /**
+     * @param {string} name
+     */
     _getUniform(name)
     {
+
         for (let i = 0; i < this._uniforms.length; i++)
         {
             if (this._uniforms[i].name == name) return this._uniforms[i];
-            if (this._uniforms[i].structName)
-            {
-                if (this._uniforms[i].propertyName == name) return this._uniforms[i];
-            }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -259,6 +289,7 @@ class ShaderModifier
      */
     addUniform(stage, name, valOrPort, v2, v3, v4, shaderType)
     {
+
         if (!this._getUniform(name))
         {
 
@@ -360,11 +391,18 @@ class ShaderModifier
         this.needsTexturePush = true;
     }
 
+    /**
+     * @param {string} name
+     * @param {CgShader} shader
+     */
     _removeUniformFromShader(name, shader)
     {
         if (shader.hasUniform(name)) shader.removeUniform(name);
     }
 
+    /**
+     * @param {string} name
+     */
     removeUniform(name)
     {
         if (this._getUniform(name))
@@ -390,36 +428,9 @@ class ShaderModifier
         }
     }
 
-    removeUniformStruct(uniformName)
-    {
-        if (this._getStructUniform(uniformName))
-        {
-            for (let i = this._structUniforms.length - 1; i >= 0; i -= 1)
-            {
-                const structToRemove = this._structUniforms[i];
-
-                if (structToRemove.uniformName === uniformName)
-                {
-                    for (const j in this._origShaders)
-                    {
-                        for (let k = 0; k < structToRemove.members.length; k += 1)
-                        {
-                            const member = structToRemove.members[k];
-                            this._removeUniformFromShader(
-                                this.getPrefixedName(member.name),
-                                this._origShaders[j].shader
-                            );
-                        }
-                    }
-
-                    this._structUniforms.splice(i, 1);
-                }
-            }
-
-            this._changedUniforms = true;
-        }
-    }
-
+    /**
+     * @param {string} name
+     */
     getPrefixedName(name)
     {
         const prefix = this._mods[0].group;

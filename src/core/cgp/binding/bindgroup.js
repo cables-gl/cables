@@ -13,6 +13,8 @@ export class BindGroup
 
     name = "";
 
+    needsPipelineUpdate = false;
+
     bla = 1;
 
     /** @type {CgpContext} */
@@ -162,7 +164,7 @@ export class BindGroup
             "entries": this.getEntries(inst)
         };
 
-        this.#cgp.profileData.count("pipeline created", this.name);
+        this.#cgp.profileData.count("bindgroup created", this.name);
 
         // if (bindingGroupEntries.length != this.bindingGroupLayoutEntries.length)
         // {
@@ -175,6 +177,7 @@ export class BindGroup
         try
         {
             this.#gpuBindGroups[inst] = this.#cgp.device.createBindGroup(bg);
+            this.needsRebuildBindgroup = true;
 
         }
         catch (e)
@@ -230,8 +233,6 @@ export class BindGroup
         {
             const bind = this.#bindings[i];
             let src = "";
-            src += "// bindgroup " + idx + " binding " + i + " \"" + this.name + "\" \n";
-
             src += bind.getShaderHeaderCode(shader, idx);
             if (bind.stage & GPUShaderStage.VERTEX)srcs.vertex += src;
             else if (bind.stage === GPUShaderStage.FRAGMENT)srcs.fragment += src;
@@ -261,5 +262,15 @@ export class BindGroup
         {
             this.#bindings[i].setBindNum(i);
         }
+    }
+
+    getInfo()
+    {
+        const o = { "name": this.name, "bindings": [] };
+        for (let i = 0; i < this.#bindings.length; i++)
+        {
+            o.bindings.push(this.#bindings[i].getInfo());
+        }
+        return o;
     }
 }
