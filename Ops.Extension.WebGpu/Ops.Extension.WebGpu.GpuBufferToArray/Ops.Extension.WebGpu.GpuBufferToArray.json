@@ -1,0 +1,46 @@
+{
+    "id": "53ef08b1-61e2-41d9-a6c6-e0b2dfa48526",
+    "created": 1727706061589,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1727706061590
+        },
+        {
+            "message": "Extension.WebGpu.Dev.GpuBufferToArray renamed to Ops.Extension.WebGpu.GpuBufferToArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375666457
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Pos Buffer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop"
+    ],
+    "exampleProjectId": "bQQYKB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Convert a GpuBuffer to a CPU Array"
+}

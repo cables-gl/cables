@@ -49,5 +49,6 @@
     "summary": "Compute shader GPU buffer storage output",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "1ff0dH"
 }

@@ -44,5 +44,6 @@
     "summary": "Output information about WebGPU adapter and implementation",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "UTES3I"
 }

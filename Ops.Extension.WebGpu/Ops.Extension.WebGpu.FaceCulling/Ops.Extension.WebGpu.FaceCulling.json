@@ -14,5 +14,30 @@
     "summary": "cull (do not draw) back or front facing faces/triangles",
     "docs": {
         "ports": []
-    }
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Discard index",
+                "values": [
+                    "none",
+                    "front",
+                    "back"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "exampleProjectId": "zKLQ3I"
 }
