@@ -142,7 +142,6 @@ export const prefixedHash = function (str, prefix = "id")
 
 /**
  * generate a simple ID
- * @function simpleId
  * @return {Number} new id
  * @static
  */
@@ -155,8 +154,6 @@ export const simpleId = function ()
 
 /**
  * smoothStep a value
- * @function smoothStep
- * @function
  * @param {Number} perc value value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
@@ -170,7 +167,6 @@ export const smoothStep = function (perc)
 
 /**
  * smootherstep a value
- * @function smootherStep
  * @param {Number} perc value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
@@ -184,7 +180,6 @@ export const smootherStep = function (perc)
 
 /**
  * clamp number / make sure its between min/max
- * @function clamp
  * @param {Number} value value to be mapped
  * @param {Number} min minimum value
  * @param {Number} max maximum value
@@ -197,7 +192,6 @@ export const clamp = function (value, min, max)
 
 /**
  * map a value in a range to a value in another range
- * @function map
  * @param {Number} x value to be mapped
  * @param {Number} _oldMin old range minimum value
  * @param {Number} _oldMax old range maximum value
@@ -252,8 +246,7 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0)
 
 /**
  * returns true if parameter is a number
- * @function isNumeric
- * @param {Any} n value The value to check.
+ * @param {any} n value The value to check.
  * @return {Boolean}
  * @static
  */
@@ -278,7 +271,6 @@ export function isArray(v)
 
 /**
  * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
- * @function cacheBust
  * @static
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
@@ -294,7 +286,6 @@ export const cacheBust = function (url = "")
 
 /**
  * copy the content of an array
- * @function copyArray
  * @static
  * @param {Array} src sourceArray
  * @param {Array} dst optional
@@ -313,7 +304,6 @@ export const copyArray = function (src, dst)
 
 /**
  * return the filename part of a url without extension
- * @function basename
  * @static
  * @param {String} url
  * @return {String} just the filename
@@ -330,7 +320,6 @@ export const basename = function (url)
 
 /**
  * output a stacktrace to the console
- * @function logStack
  * @static
  */
 export const logStack = function ()
@@ -340,7 +329,6 @@ export const logStack = function ()
 
 /**
  * return the filename part of a url
- * @function filename
  * @static
  * @param {String} url
  * @return {String} just the filename

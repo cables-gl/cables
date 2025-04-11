@@ -140,7 +140,7 @@ export class CgpMesh extends CgMesh
             return;
         }
 
-        this._pipe.setName("mesh.render " + this._geom.name + " " + shader.getName());
+        this._pipe.setName("mesh.render " + this._geom.name + " " + shader.getName() + " " + shader.id);
         this._pipe.setPipeline(shader, this);
 
         if (this._pipe.isValid)

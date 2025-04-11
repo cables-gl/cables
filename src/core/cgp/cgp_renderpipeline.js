@@ -128,7 +128,7 @@ export class RenderPipeline extends Pipeline
         }
         if (this.#compileCount != shader.compileCount)
         {
-            needsRebuildReason = "shader was compiled?! ";
+            needsRebuildReason = "shader compiled " + shader.compileCount;
         }
 
         this.pushDebug();

@@ -8,6 +8,7 @@ import { CgpUniform } from "./cgp_uniform.js";
 /**
  * @typedef UniformDescrip
  * @property {string} name
+ * @property {string} type
  * @property {number} stage
  * @property {any} v1
  * @property {any} v2
@@ -52,15 +53,13 @@ class ShaderModifier
         this._attributes = [];
         if (options && options.opId) this.opId = options.opId;
 
-        /** @type {Binding[]} */
-        this.bindings = [];
     }
 
     /**
      * @param {CgpShader} curShader
      * @param {boolean} pushShader
      */
-    bind(curShader, pushShader)
+    bind(curShader, pushShader = true)
     {
         const shader = curShader || this._cgl.getShader();
         if (!shader) return;
@@ -78,6 +77,7 @@ class ShaderModifier
         else if (shader.lastCompile != this._boundShader.lastCompile) console.warn("copy because  shader.lastCompile");
         if (this._modulesChanged) console.warn("copy because  this._modulesChanged");
         if (shader._needsRecompile) console.warn("copy because  shader._needsRecompile ", shader._compileReason);
+
         if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
@@ -91,6 +91,8 @@ class ShaderModifier
                 "shader": shader.copy()
             };
 
+            console.log("mod shaderrrrrrrrrrr", shader.getName(), this._boundShader.shader.getName());
+
             this._addModulesToShader(this._boundShader.shader);
             this._updateDefinesShader(this._boundShader.shader);
             this._updateUniformsShader(this._boundShader.shader);
@@ -100,9 +102,13 @@ class ShaderModifier
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
-        if (pushShader !== false) this._cgl.pushShader(this._boundShader.shader);
+        if (pushShader)
+        {
+            this._cgl.pushShader(this._boundShader.shader);
+            // console.log(this._boundShader.shader.id);
+        }
 
-        this._boundShader.shader.copyUniformValues(this._boundShader.orig);
+        // this._boundShader.shader.copyUniformValues(this._boundShader.orig);
 
         if (this.needsTexturePush)
         {
@@ -137,10 +143,11 @@ class ShaderModifier
     /**
      * @param {boolean} popShader
      */
-    unbind(popShader)
+    unbind(popShader = true)
     {
         if (this._boundShader)
-            if (popShader !== false) this._cgl.popShader();
+            if (popShader) this._cgl.popShader();
+
         this._boundShader = null;
     }
 
@@ -210,14 +217,13 @@ class ShaderModifier
 
             if (!shader.hasUniform(name))
             {
-                console.log("shadermod uni ", uni.name);
-                const u = new CgpUniform(shader, "3f", this.getPrefixedName(uni.name), uni.v1, uni.v2, uni.v3, uni.v4);
+                console.log("shadermod uni ", name, shader.id, uni.stage);
+                const u = new CgpUniform(shader, uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
 
                 console.log(uni);
                 shader.addUniform(u, uni.stage);
             }
         }
-
     }
 
     _updateUniforms()
@@ -270,7 +276,6 @@ class ShaderModifier
      */
     _getUniform(name)
     {
-
         for (let i = 0; i < this._uniforms.length; i++)
         {
             if (this._uniforms[i].name == name) return this._uniforms[i];
@@ -279,28 +284,27 @@ class ShaderModifier
     }
 
     /**
-     * @param {any} stage
+     * @param {number} stage
      * @param {string} name
+     * @param {string} type
      * @param {any} valOrPort
      * @param {any} v2
      * @param {any} v3
      * @param {any} v4
-     * @param {string} shaderType
      */
-    addUniform(stage, name, valOrPort, v2, v3, v4, shaderType)
+    addUniform(stage, type, name, valOrPort, v2, v3, v4)
     {
-
         if (!this._getUniform(name))
         {
-
             this._uniforms.push(
                 {
                     "name": name,
+                    "stage": stage,
+                    "type": type,
                     "v1": valOrPort,
                     "v2": v2,
                     "v3": v3,
                     "v4": v4,
-                    "stage": stage,
                 });
             this._changedUniforms = true;
         }
@@ -411,7 +415,7 @@ class ShaderModifier
             {
                 const nameToRemove = name;
 
-                if (this._uniforms[j].name == name && !this._uniforms[j].structName)
+                if (this._uniforms[j].name == name)
                 {
                     for (const k in this._origShaders)
                     {
