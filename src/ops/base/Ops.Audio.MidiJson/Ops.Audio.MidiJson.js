@@ -57,11 +57,6 @@ inTime.onChange = function ()
     if (!midi.tracks) return;
 
     let time = inTime.get();
-    outNames.set(null);
-    outProgress.set(null);
-    outVelocity.set(null);
-    outData.set(null);
-
     let beat = Math.round(inTime.get() / 60 * (bpm));
 
     for (let t = 0; t < midi.tracks.length; t++)
@@ -93,15 +88,15 @@ inTime.onChange = function ()
 
                 };
 
-                outData.set(data);
+                outData.setRef(data);
             }
         }
     }
 
-    outNames.set(arrNames);
+    outNames.setRef(arrNames);
     outNames.setUiAttribs({ "stride": arrNames.length });
-    outProgress.set(arrProgress);
-    outVelocity.set(arrVelocity);
+    outProgress.setRef(arrProgress);
+    outVelocity.setRef(arrVelocity);
 
     outBeat.set(beat);
 };

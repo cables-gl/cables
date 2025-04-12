@@ -10,6 +10,8 @@ const VarSetOpWrapper = class
         this._triggerPort = triggerPort;
         this._nextPort = nextPort;
 
+        this._var = null;
+
         this._btnCreate = op.inTriggerButton("Create new variable");
         this._btnCreate.setUiAttribs({ "hidePort": true });
         this._btnCreate.onTriggered = this._createVar.bind(this);
@@ -75,6 +77,7 @@ const VarSetOpWrapper = class
 
     _updateName()
     {
+        this._var = null;
         const varname = this._varNamePort.get();
         this._op.setTitle("var set");
         this._op.setUiAttrib({ "extendTitle": "#" + varname });
@@ -138,37 +141,39 @@ const VarSetOpWrapper = class
 
     _setVarValue(triggered)
     {
-        const name = this._varNamePort.get();
-
-        if (!name) return;
-
         const v = this._valuePort.get();
+        if (!this._var)
+        {
+            const name = this._varNamePort.get();
+            if (!name) return;
+            this._op.patch.setVarValue(name, v);
+            this._var = this._op.patch.getVar(name);
+        }
 
         if (this._typeId == CABLES.Port.TYPE_VALUE || this._typeId == CABLES.Port.TYPE_STRING)
         {
-            this._op.patch.setVarValue(name, v);
+            this._var.setValue(v);
         }
         else
         if (this._typeId == CABLES.Port.TYPE_ARRAY)
         {
             this._arr = [];
             CABLES.copyArray(v, this._arr);
-            // this._op.patch.setVarValue(name, null);
-            this._op.patch.setVarValue(name, this._arr);
+            this._var.setValue(this._arr);
         }
         else
         {
             if (this._typeId == CABLES.Port.TYPE_OBJECT)
             {
                 if (this._isTexture)
-                    this._op.patch.setVarValue(name, CGL.Texture.getEmptyTexture(this._op.patch.cgl));
+                    this._var.setValue(CGL.Texture.getEmptyTexture(this._op.patch.cgl));
                 else
-                    this._op.patch.setVarValue(name, null);
+                    this._var.setValue(null);
 
                 if (v && v.tex && v._cgl && !this._isTexture) this._op.setUiError("texobj", "Dont use object variables for textures, use varSetTexture");
                 else this._op.setUiError("texobj", null);
             }
-            this._op.patch.setVarValue(name, v);
+            this._var.setValue(v);
         }
 
         if (triggered && this._nextPort) this._nextPort.trigger();

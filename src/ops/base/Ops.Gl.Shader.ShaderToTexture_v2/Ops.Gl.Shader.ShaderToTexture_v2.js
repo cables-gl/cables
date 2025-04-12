@@ -212,12 +212,12 @@ exec.onTriggered = function ()
 
     if (numTextures >= 2)
     {
-        outTex.set(fb.getTextureColorNum(0));
-        outTex2.set(fb.getTextureColorNum(1));
-        outTex3.set(fb.getTextureColorNum(2));
-        outTex4.set(fb.getTextureColorNum(3));
+        outTex.setRef(fb.getTextureColorNum(0));
+        outTex2.setRef(fb.getTextureColorNum(1));
+        outTex3.setRef(fb.getTextureColorNum(2));
+        outTex4.setRef(fb.getTextureColorNum(3));
     }
-    else outTex.set(fb.getTextureColor());
+    else outTex.setRef(fb.getTextureColor());
 
     cgl.popShader();
     cgl.popViewPort();
