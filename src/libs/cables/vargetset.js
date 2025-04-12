@@ -261,10 +261,13 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         if (this._valueOutPort)
+            if (this._typeId == CABLES.Port.TYPE_NUMBER || this._typeId == CABLES.Port.TYPE_STRING)
+                this._valueOutPort.set(v);
+            else
             if (this._typeId == CABLES.Port.TYPE_ARRAY || this._typeId == CABLES.Port.TYPE_OBJECT || this._isTexture)
                 this._valueOutPort.setRef(v);
             else
-                this._valueOutPort.set(v);
+                console.log("unkown type?"); // remove type checks when sure
 
     }
 
