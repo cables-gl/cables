@@ -24,6 +24,9 @@ export class BindingUniform extends Binding
     constructor(cgp, name, options)
     {
         super(cgp, name, options);
+
+        console.log("new binding uniform", this.id);
+        // CABLES.logStack();
     }
 
     /**
@@ -33,6 +36,7 @@ export class BindingUniform extends Binding
     copy(shader)
     {
         const b = new BindingUniform(this.cgp, this.name, this.options);
+        console.log("copybinuni", this.id, b.id);
         b.stage = this.stage;
 
         for (let i = 0; i < this.#uniforms.length; i++)
@@ -59,6 +63,8 @@ export class BindingUniform extends Binding
     {
         this.#uniforms.push(u);
         this.needsRebuildBindgroup = true;
+        console.log(this.#uniforms, this);
+        // CABLES.logStack();
         return u;
     }
 
@@ -88,10 +94,8 @@ export class BindingUniform extends Binding
      */
     getUniform(name)
     {
-
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-
             if (this.#uniforms[i].name == name) return this.#uniforms[i];
         }
         return null;
@@ -127,7 +131,6 @@ export class BindingUniform extends Binding
     pipelineUpdated()
     {
         this.needsRebuildBindgroup = false;
-
     }
 
     needsPipeUpdate()
@@ -183,7 +186,7 @@ export class BindingUniform extends Binding
         let typeStr = "";
         let name = this.name;
 
-        str += "//   [binding_uniform] - \"" + this.name + "\" uniforms:" + this.#uniforms.length + "\n";
+        str += "//   [binding_uniform] - \"" + this.name + "\" " + this.id + " uniforms:" + this.#uniforms.length + "\n";
 
         if (!this.isActiveByDefine(shader))
         {
@@ -243,6 +246,9 @@ export class BindingUniform extends Binding
         };
     }
 
+    /**
+     * @param {number} inst
+     */
     updateValues(inst)
     {
         for (let i = 0; i < this.#uniforms.length; i++)
@@ -255,11 +261,10 @@ export class BindingUniform extends Binding
 
     getInfo()
     {
-        const o = { "name": this.name, "class": this.constructor.name, "uniforms": [] };
+        const o = { "name": this.name, "id": this.id, "stage": this.stage, "class": this.constructor.name, "uniforms": [] };
 
         for (let i = 0; i < this.#uniforms.length; i++)
         {
-
             o.uniforms.push(this.#uniforms[i].getInfo());
         }
         return o;

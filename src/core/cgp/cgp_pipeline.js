@@ -111,6 +111,9 @@ export class Pipeline
     {
         this.#cgp.currentPipeDebug =
         {
+            "name": this.name,
+            "rebuildreason": this.lastRebuildReason,
+            "rebuildCount": this.rebuildCount,
             "cfg": this.#pipeCfg,
             "bindingGroupLayoutEntries": this.bindingGroupLayoutEntries
         };

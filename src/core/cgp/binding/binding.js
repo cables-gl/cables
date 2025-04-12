@@ -2,9 +2,11 @@ import { Logger } from "cables-shared-client";
 import { CgpShader } from "../cgp_shader.js";
 import { CgpContext } from "../cgp_state.js";
 import { nl } from "../../cgl/constants.js";
+import { simpleId } from "../../utils.js";
 
 export class Binding
 {
+    id = simpleId();
     name = "";
     bindNum = 0;
     stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
@@ -109,7 +111,7 @@ export class Binding
 
     getInfo()
     {
-        const o = { "name": this.name, "class": this.constructor.name };
+        const o = { "name": this.name, "id": this.id, "class": this.constructor.name };
         return o;
     }
 }
