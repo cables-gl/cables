@@ -213,7 +213,7 @@ function captureIrradianceCubemap(size)
     irradianceFrameBuffer.renderEnd();
 
     // outTexIrradiance.set(null); // pandur
-    outTexIrradiance.set(irradianceFrameBuffer.getTextureColor());
+    outTexIrradiance.setRef(irradianceFrameBuffer.getTextureColor());
 }
 
 function capturePrefilteredCubemap(size)
@@ -332,7 +332,7 @@ function computeIBLLUT(size)
     fullscreenRectangle.render(IBLLUTShader);
     iblLutFrameBuffer.renderEnd();
     cgl.tempData.renderOffscreen = false;
-    outTexIBLLUT.set(iblLutFrameBuffer.getTextureColor());
+    outTexIBLLUT.setRef(iblLutFrameBuffer.getTextureColor());
 }
 
 inCubemap.onChange = () =>

@@ -16,6 +16,10 @@
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Canvas",
+                    "Manual"
+                ],
                 "group": "Texture Size",
                 "subType": "integer"
             },
@@ -40,6 +44,14 @@
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "group": "Texture settings",
                 "subType": "integer"
             },
@@ -58,6 +70,10 @@
             {
                 "type": 0,
                 "name": "Num Textures index",
+                "values": [
+                    "1",
+                    "4"
+                ],
                 "subType": "integer"
             }
         ],
@@ -139,5 +155,6 @@
             "date": 1702996150218
         }
     ],
-    "exampleProjectId": "vWyGud"
+    "exampleProjectId": "vWyGud",
+    "license": "MIT"
 }
