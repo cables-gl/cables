@@ -72,6 +72,8 @@ export class Anim extends Events
         super();
         cfg = cfg || {};
         this.id = uuid();
+
+        /** @type {AnimKey[]} */
         this.keys = [];
         this.onChange = null;
         this.stayInTimeline = false;

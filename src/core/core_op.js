@@ -30,7 +30,10 @@ import { Texture } from "./cgl/cgl_texture.js";
  * @property {boolean} [loading] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
+ * @property {object} [area]
  * @property {string} [comment]
+ * @property {number} [height]
+ * @property {number} [width]
  * @property {Translation} [translate]
  * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
  */
@@ -260,7 +263,7 @@ export class Op extends Events
      * error - error message - showing up in op parameter panel
      * extendTitle - op title extension, e.g. [ + ]
      * </pre>
-     * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
+     // * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
      * @example
      * op.setUiAttrib({"extendTitle":str});
      */
