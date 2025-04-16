@@ -10,8 +10,8 @@ import { Texture } from "./cgl/cgl_texture.js";
 
 /**
  * @typedef Translation
- * @property {string} [x]
- * @property {string} [y]
+ * @property {number} [x]
+ * @property {number} [y]
  */
 
 /**
