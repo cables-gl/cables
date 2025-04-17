@@ -5,7 +5,7 @@ import TerserPlugin from "terser-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ModuleScopePlugin from "@k88/module-scope-plugin";
 
-export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
+export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceMap = false) =>
 {
     const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -26,7 +26,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
         "entry": [
             path.join(__dirname, "src", "core", "index.js")
         ],
-        "devtool": minify ? "source-map" : false,
+        "devtool": minify ? "source-map" : sourceMap,
         "output": {
             "path": path.join(__dirname, "build"),
             "filename": "cables.js",

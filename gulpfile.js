@@ -71,7 +71,7 @@ function getWebpackErrorMessage(stats)
 function _watch(done)
 {
     const watchOptions = { "usePolling": true, "ignored": (fileName) => { return fileName.includes("node_modules"); } };
-    gulp.watch(["src/core/**/*", "../shared/client/**/*"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
+    gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
     gulp.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
     gulp.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
@@ -116,7 +116,7 @@ function _core_js(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackConfig(isLiveBuild, buildInfo, minify, analyze), (err, stats) =>
+        webpack(webpackConfig(isLiveBuild, buildInfo, minify, analyze, config.sourceMap), (err, stats) =>
         {
             if (err) throw err;
             if (stats.hasErrors())
@@ -132,7 +132,7 @@ function _core_libs(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze),
+        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze, config.sourceMap),
             (err, multiStats) =>
             {
                 if (err) throw err;
