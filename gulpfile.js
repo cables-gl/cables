@@ -24,6 +24,8 @@ if (fs.existsSync(configLocation))
     isLiveBuild = config.env === "live";
     minify = config.hasOwnProperty("minifyJs") ? config.minifyJs : false;
 }
+if (!config.path) config.path = {};
+if (!config.path.corelibs) config.path.corelibs = "../public/js/libs_core/";
 
 function getBuildInfo(cb)
 {
