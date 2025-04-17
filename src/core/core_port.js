@@ -35,6 +35,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [editShortcut] internal: do not set manually
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
+ * @property  {boolean} [colorPick] internal: do not set manually
  * @property  {Array<String>} [values] internal: do not set manually
  * @property  {boolean} [boundToVar] internal: do not set manually
  *
