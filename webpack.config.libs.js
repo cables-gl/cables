@@ -4,7 +4,7 @@ import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
 import ModuleScopePlugin from "@k88/module-scope-plugin";
 
-export default (isLiveBuild, buildInfo, minify = false, analyze = false) =>
+export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceMap = false) =>
 {
     const getDirectories = function (arr)
     {
