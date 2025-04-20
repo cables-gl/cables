@@ -129,22 +129,7 @@ function update()
             else pixels[i * 4 + 3] = 255;
     }
 
-    if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture" });
-
-    if (flip.get())
-    {
-        const flipped = new Float32Array(pixels.length);
-
-        for (let i = 0; i < pixels.length; i += 4)
-        {
-            flipped[pixels.length - i - 4] = pixels[i];
-            flipped[pixels.length - i - 3] = pixels[i + 1];
-            flipped[pixels.length - i - 2] = pixels[i + 2];
-            flipped[pixels.length - i - 1] = pixels[i + 3];
-        }
-
-        pixels = flipped;
-    }
+    if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture", "flip": flip.get() });
 
     tex.initFromData(pixels, w, h, cgl_filter, cgl_wrap);
 
