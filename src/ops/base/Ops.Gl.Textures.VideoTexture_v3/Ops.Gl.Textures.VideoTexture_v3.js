@@ -232,7 +232,7 @@ function updateTexture()
     if (!tex)reInitTexture();
     if (tex.width != videoElement.videoWidth || tex.height != videoElement.videoHeight)
     {
-        op.log("video size", videoElement.videoWidth, videoElement.videoHeight);
+        // op.log("video size", videoElement.videoWidth, videoElement.videoHeight);
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
     }
 
