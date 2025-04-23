@@ -3,7 +3,7 @@ const
     animVal = op.inValue("Value"),
     timeUnit = op.inValueSelect("Unit", ["Seconds", "Frames"], "Seconds"),
     outVal = op.outNumber("Result"),
-    outArr = op.outArray("Anim Array"),
+    outArr = op.outArray("Anim Array", [], 2),
     outEnded = op.outBoolNum("Anim Finished");
 
 inTime.onChange = update;

@@ -182,6 +182,7 @@ export class Anim extends Events
         this._updateLastIndex();
         this._needsSort = false;
         if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
+
     }
 
     hasDuplicates()
