@@ -136,7 +136,7 @@ export class CglContext extends CgContext
         if (!canv) this._log.stack("_setCanvas undef");
 
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
-        if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = false;
+        if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = true;
         if (!this.patch.config.canvas.hasOwnProperty("premultipliedAlpha")) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty("alpha")) this.patch.config.canvas.alpha = false;
 
@@ -341,11 +341,12 @@ export class CglContext extends CgContext
 
         if (this.canvas && this.canvas.toBlob)
         {
-            this.canvas.toBlob((blob) =>
-            {
-                if (cb) cb(blob);
-                else this._log.log("no screenshot callback...");
-            }, mimeType, quality);
+            this.canvas.toBlob(
+                (blob) =>
+                {
+                    if (cb) cb(blob);
+                    else this._log.log("no screenshot callback...");
+                }, mimeType, quality);
         }
     }
 

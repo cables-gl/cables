@@ -432,7 +432,7 @@ export class CgContext extends Events
         if (!filename) filename = "cables_" + dateStr + ".png";
         else filename += ".png";
 
-        this.screenShot(function (blob)
+        this.screenShot((blob) =>
         {
             this.canvas.width = w;
             this.canvas.height = h;
@@ -444,6 +444,7 @@ export class CgContext extends Events
                 anchor.download = filename;
                 anchor.href = URL.createObjectURL(blob);
 
+                console.log("scrrenshot");
                 setTimeout(function ()
                 {
                     anchor.click();
@@ -454,7 +455,7 @@ export class CgContext extends Events
             {
                 this._log.log("screenshot: no blob");
             }
-        }.bind(this));
+        });
     }
 
 }
