@@ -1,0 +1,34 @@
+{
+    "id": "d985b853-b0df-4845-b998-342da515342d",
+    "created": 1745593645483,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745593645483
+        },
+        {
+            "message": "Patch.PImTwnJ.TimelineDebug renamed to Ops.TimeLine.TimelineDebug",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1745595730728
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "data"
+            }
+        ]
+    }
+}

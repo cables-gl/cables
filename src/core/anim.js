@@ -63,6 +63,7 @@ export class Anim extends Events
     static EASING_QUINT_INOUT = 27;
 
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
+    static EVENT_CHANGE = "onChange";
 
     /**
      * @param {AnimCfg} [cfg]
@@ -96,7 +97,7 @@ export class Anim extends Events
     forceChangeCallback()
     {
         if (this.onChange !== null) this.onChange();
-        this.emitEvent("onChange", this);
+        this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
     getLoop()
@@ -110,7 +111,7 @@ export class Anim extends Events
     setLoop(enable)
     {
         this.loop = enable;
-        this.emitEvent("onChange", this);
+        this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
     /**
@@ -173,7 +174,7 @@ export class Anim extends Events
         this._updateLastIndex();
         if (time) this.setValue(time, v);
         if (this.onChange !== null) this.onChange();
-        this.emitEvent("onChange", this);
+        this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
     sortKeys()
@@ -289,7 +290,7 @@ export class Anim extends Events
         }
 
         if (this.onChange) this.onChange();
-        this.emitEvent("onChange", this);
+        this.emitEvent(Anim.EVENT_CHANGE, this);
         this._needsSort = true;
         return found;
     }
@@ -303,7 +304,7 @@ export class Anim extends Events
         if (this.keys[index])
         {
             this.keys[index].setEasing(easing);
-            this.emitEvent("onChange", this);
+            this.emitEvent(Anim.EVENT_CHANGE, this);
         }
     }
 
@@ -454,7 +455,7 @@ export class Anim extends Events
         {
             this.keys.push(k);
             if (this.onChange !== null) this.onChange();
-            this.emitEvent("onChange", this);
+            this.emitEvent(Anim.EVENT_CHANGE, this);
             this._needsSort = true;
         }
         this._updateLastIndex();
