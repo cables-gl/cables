@@ -7,7 +7,7 @@ Youtube tutorial [porting shadertoy to cables part 01](https://youtu.be/j_ins4RW
 Porting shaders from shadertoy isn't that difficult once you know the basics.
 The main ops that you'll need are:
 - [custom shader op](https://cables.gl/op/Ops.Gl.Shader.CustomShader_v2)
-- [shader2Texture op](https://cables.gl/op/Ops.Gl.Shader.ShaderToTexture)
+- [shader2Texture op](https://cables.gl/op/Ops.Gl.Shader.ShaderToTexture_v2)
 
 standard glsl in [shadertoy](https://www.shadertoy.com/) and the equivalent in cables is:
 
