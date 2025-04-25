@@ -72,8 +72,8 @@ function getWebpackErrorMessage(stats)
 
 function _watch(done)
 {
-    const watchOptions = { "usePolling": true, "ignored": (fileName) => { return fileName.includes("node_modules"); } };
-    gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
+    const watchOptions = { "ignored": "./**/node_modules/" };
+    gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
     gulp.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
     gulp.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
