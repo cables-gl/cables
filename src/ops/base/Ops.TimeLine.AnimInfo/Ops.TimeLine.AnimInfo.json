@@ -1,0 +1,34 @@
+{
+    "id": "f57b2d6b-f081-4c2a-a140-3248bd517a5b",
+    "created": 1745918304314,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745918304314
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Anim"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Total Keys",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length Seconds",
+                "subType": "number"
+            }
+        ]
+    }
+}
