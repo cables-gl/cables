@@ -201,10 +201,13 @@ export const clamp = function (value, min, max)
  * @return {Number} mapped value
  * @static
  */
-export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0)
+export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0, clamp = true)
 {
-    if (x >= _oldMax) return _newMax;
-    if (x <= _oldMin) return _newMin;
+    if (clamp)
+    {
+        if (x >= _oldMax) return _newMax;
+        if (x <= _oldMin) return _newMin;
+    }
 
     let reverseInput = false;
     const oldMin = Math.min(_oldMin, _oldMax);
