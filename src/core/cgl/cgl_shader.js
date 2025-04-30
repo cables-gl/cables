@@ -888,7 +888,8 @@ class CglShader extends CgShader
 
     dispose()
     {
-        if (this._program) this._cgl.gl.deleteProgram(this._program);
+
+        if (this._program && this._cgl && this._cgl.gl) this._cgl.gl.deleteProgram(this._program);
         this._program = null;
     }
 

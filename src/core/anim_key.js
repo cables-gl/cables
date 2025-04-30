@@ -99,7 +99,7 @@ export class AnimKey
     {
         if (obj)
         {
-            if (obj.e) this.setEasing(obj.e);
+            if (obj.hasOwnProperty("e")) this.setEasing(obj.e);
             if (obj.cb)
             {
                 this.cb = obj.cb;

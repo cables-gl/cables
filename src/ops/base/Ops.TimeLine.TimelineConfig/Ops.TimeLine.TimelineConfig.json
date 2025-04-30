@@ -1,0 +1,73 @@
+{
+    "id": "a3d3d166-415b-45c7-9ded-e8d1bdd81ff1",
+    "created": 1745998109340,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745593645483
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Duration Unit index",
+                "values": [
+                    "Seconds",
+                    "Frames"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "FPS",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Display Units index",
+                "values": [
+                    "Seconds",
+                    "Frames"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Show beats",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "BPM",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Restrict to frames",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Fade in Frames",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Duration Seconds",
+                "subType": "number"
+            }
+        ]
+    }
+}
