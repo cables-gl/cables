@@ -1,0 +1,41 @@
+{
+    "id": "5e29e1c8-2553-478b-b782-bd564de91e75",
+    "created": 1745917962265,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745917962266
+        },
+        {
+            "message": "Anim.Anim renamed to Ops.TimeLine.Anim",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1745918152303
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "loop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Anim",
+                "objType": "anim"
+            }
+        ]
+    }
+}

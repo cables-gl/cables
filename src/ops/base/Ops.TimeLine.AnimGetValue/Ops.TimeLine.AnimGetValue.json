@@ -1,0 +1,34 @@
+{
+    "id": "52901ccd-ef2f-4a9e-a6ff-5c367159598a",
+    "created": 1745919309329,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745919309329
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Anim"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ]
+    }
+}
