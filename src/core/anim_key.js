@@ -9,6 +9,7 @@ export class AnimKey
         this.value = 0.0;
         this.selected = false;
 
+        /** @type {Anim} */
         this.anim = obj.anim || an || null;
 
         // this.ui = null;
