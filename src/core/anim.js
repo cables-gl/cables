@@ -64,6 +64,7 @@ export class Anim extends Events
 
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
     static EVENT_CHANGE = "onChange";
+    #tlActive = true;
 
     /**
      * @param {AnimCfg} [cfg]
@@ -309,6 +310,20 @@ export class Anim extends Events
     }
 
     /**
+     * @param {object} obj
+     */
+    deserialize(obj)
+    {
+
+        if (obj.loop) this.loop = obj.loop;
+        if (obj.tlActive) this.#tlActive = obj.tlActive;
+        for (const ani in obj.keys)
+        {
+            this.keys.push(new CABLES.AnimKey(obj.keys[ani], this));
+        }
+    }
+
+    /**
      * @returns {Object}
      */
     getSerialized()
@@ -316,6 +331,7 @@ export class Anim extends Events
         const obj = {};
         obj.keys = [];
         obj.loop = this.loop;
+        if (this.#tlActive)obj.tlActive = this.tlActive;
 
         for (let i = 0; i < this.keys.length; i++)
             obj.keys.push(this.keys[i].getSerialized());
@@ -526,6 +542,17 @@ export class Anim extends Events
         };
 
         return port;
+    }
+
+    get tlActive()
+    {
+        return this.#tlActive;
+    }
+
+    set tlActive(b)
+    {
+        this.#tlActive = b;
+        gui.emitEvent("tlActiveChanged", this);
     }
 }
 

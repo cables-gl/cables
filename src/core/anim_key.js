@@ -9,6 +9,7 @@ export class AnimKey
         this.value = 0.0;
         this.selected = false;
 
+        /** @type {Anim} */
         this.anim = obj.anim || an || null;
 
         // this.ui = null;
@@ -99,7 +100,7 @@ export class AnimKey
     {
         if (obj)
         {
-            if (obj.e) this.setEasing(obj.e);
+            if (obj.hasOwnProperty("e")) this.setEasing(obj.e);
             if (obj.cb)
             {
                 this.cb = obj.cb;

@@ -952,6 +952,7 @@ class Mesh extends CgMesh
 
     dispose()
     {
+        if (this.#cgl.aborted) return;
         if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this.#cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
         if (this.#bufVerticesIndizes) this.#cgl.gl.deleteBuffer(this.#bufVerticesIndizes);
         this.#bufVerticesIndizes = null;
