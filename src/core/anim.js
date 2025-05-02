@@ -101,6 +101,11 @@ export class Anim extends Events
         this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
+    forceChangeCallbackSoon()
+    {
+        setTimeout(this.forceChangeCallback.bind(this), 10);
+    }
+
     getLoop()
     {
         return this.loop;
@@ -553,6 +558,7 @@ export class Anim extends Events
     {
         this.#tlActive = b;
         gui.emitEvent("tlActiveChanged", this);
+        this.forceChangeCallbackSoon();
     }
 }
 
