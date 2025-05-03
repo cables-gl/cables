@@ -82,6 +82,7 @@ export class AnimKey
             this._easing = Anim.EASING_LINEAR;
             this.ease = AnimKey.easeLinear;
         }
+        this.anim.forceChangeCallbackSoon();
     }
 
     trigger()
@@ -90,12 +91,19 @@ export class AnimKey
         this.cbTriggered = true;
     }
 
+    /**
+     * @param {number} v
+     */
     setValue(v)
     {
         this.value = v;
         if (this.onChange !== null) this.onChange();
+        this.anim.forceChangeCallbackSoon();
     }
 
+    /**
+     * @param {object} obj
+     */
     set(obj)
     {
         if (obj)
@@ -121,7 +129,8 @@ export class AnimKey
             if (obj.hasOwnProperty("v")) this.value = obj.v;
             else if (obj.hasOwnProperty("value")) this.value = obj.value;
         }
-        if (this.onChange !== null) this.onChange();
+        if (this.onChange) this.onChange();
+        this.anim.forceChangeCallbackSoon();
     }
 
     /**
