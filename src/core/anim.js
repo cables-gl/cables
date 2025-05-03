@@ -6,6 +6,20 @@ import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 
 /**
+ * @typedef SerializedAnim
+ * @property  {boolean} loop
+ * @property  {boolean} tlActive
+ * @property  {SerializedKey[]} keys
+ */
+
+/**
+ * @typedef SerializedKey
+ * @property  {number} v
+ * @property  {number} t
+ * @property  {number} cb
+ */
+
+/**
  * configuration object for loading a patch
  * @typedef {Object} AnimCfg
  * @property {number} [defaultEasing] use easing index as default
@@ -185,7 +199,7 @@ export class Anim extends Events
 
     sortKeys()
     {
-        this.keys.sort((a, b) => { return parseFloat(a.time) - parseFloat(b.time); });
+        this.keys.sort((a, b) => { return a.time - b.time; });
         this._updateLastIndex();
         this._needsSort = false;
         if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
@@ -329,10 +343,12 @@ export class Anim extends Events
     }
 
     /**
-     * @returns {Object}
+     * @returns {SerializedAnim}
      */
     getSerialized()
     {
+
+        /** @type {SerializedAnim} */
         const obj = {};
         obj.keys = [];
         obj.loop = this.loop;

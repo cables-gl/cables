@@ -77,7 +77,7 @@ inMulTex.onChange = function ()
     shader.toggleDefine("DO_MULTEX_MASK", inMulTexMask.get());
 };
 
-textureOut.set(null);
+textureOut.setRef(null);
 inFont.onChange = function ()
 {
     createTexture = true;
@@ -468,7 +468,7 @@ function generateTexture()
 
     font.texture.initTexture(font.canvas, filter);
     font.texture.unpackAlpha = true;
-    textureOut.set(font.texture);
+    textureOut.setRef(font.texture);
 
     font.lastChange = CABLES.now();
 

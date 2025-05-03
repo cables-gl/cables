@@ -49,6 +49,8 @@ import { Texture } from "./cgl/cgl_texture.js";
 export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";
+    static EVENT_INIT = "init";
+    static EVENT_UIATTR_CHANGE = "onUiAttribsChange";
 
     #objName = "";
     _log = new Logger("core_op");
@@ -313,11 +315,8 @@ export class Op extends Events
 
         if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
-            // const doEmitEvent = newAttribs.title != this.getTitle();
             this.uiAttribs.title = newAttribs.title;
-            // if (doEmitEvent) this.emitEvent("onTitleChange", newAttribs.title);
             changed = true;
-            // this.setTitle(newAttribs.title);
         }
 
         if (newAttribs.hasOwnProperty("disabled")) this.setEnabled(!newAttribs.disabled);
@@ -332,7 +331,7 @@ export class Op extends Events
 
         if (changed)
         {
-            this.emitEvent("onUiAttribsChange", newAttribs);
+            this.emitEvent(Op.EVENT_UIATTR_CHANGE, newAttribs);
             this.patch.emitEvent("onUiAttribsChange", this, newAttribs);
         }
 
@@ -1687,7 +1686,7 @@ export class Op extends Events
             if (this.portsIn[ipi] == port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent(Op.EVENT_UIATTR_CHANGE, {});
                 this.emitEvent("onPortRemoved", {});
                 return;
             }
@@ -1697,7 +1696,7 @@ export class Op extends Events
             if (this.portsOut[ipi] == port)
             {
                 this.portsOut.splice(ipi, 1);
-                this.emitEvent("onUiAttribsChange", {});
+                this.emitEvent(Op.EVENT_UIATTR_CHANGE, {});
                 this.emitEvent("onPortRemoved", {});
                 return;
             }

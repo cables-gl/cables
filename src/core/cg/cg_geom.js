@@ -56,6 +56,8 @@ export class Geometry
 
         /** @type {Array|Float32Array} */
         this._vertices = [];
+
+        /** @type {Array} */
         this.verticesIndices = [];
 
         this.isGeometry = true;
@@ -745,9 +747,9 @@ export class Geometry
     }
 
     /**
-     * @param {number} x
-     * @param {number} y
-     * @param {number} z
+     * @param {boolean} x
+     * @param {boolean} y
+     * @param {boolean} z
      * @returns {Array} offset
      */
     center(x, y, z)
