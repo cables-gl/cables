@@ -5,14 +5,13 @@ import { Geometry } from "../cg/cg_geom.js";
 import { CglContext } from "./cgl_state.js";
 import { CgMesh } from "../cg/cg_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
-import { CgContext } from "../cg/cg_state.js";
 
 const MESH = {};
 MESH.lastMesh = null;
 
 /**
  * @typedef {Object} CglMeshAttributeOptions
- * @property {Number} [instanced]
+ * @property {boolean} [instanced]
  * @property {Function} [cb]
  * @property {Function} [type]
  */
@@ -268,7 +267,7 @@ class Mesh extends CgMesh
 
     /**
      * @param {String} name
-     * @param {Array} array
+     * @param {Array|Float32Array} array
      * @param {Number} itemSize Integer
      * @param {CglMeshAttributeOptions} options
      */
@@ -394,9 +393,9 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @param {Array} arr
+     * @param {Array} [arr]
      */
-    _setVertexNumbers(arr)
+    _setVertexNumbers(arr = null)
     {
         if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts || arr)
         {
@@ -407,7 +406,7 @@ class Mesh extends CgMesh
                 for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
             }
 
-            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
+            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (_attr, _geom, shader) =>
             {
                 if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
                 shader.uniformNumVertices.setValue(this._numVerts);
@@ -687,7 +686,7 @@ class Mesh extends CgMesh
         return this.#cgl.lastMesh && this.#cgl.lastMesh != this;
     }
 
-    printDebug(shader)
+    printDebug()
     {
         console.log("--attributes");
         for (let i = 0; i < this._attributes.length; i++)

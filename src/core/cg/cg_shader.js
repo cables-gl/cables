@@ -114,7 +114,7 @@ class CgShader extends Events
     /**
      * easily enable/disable a define without a value
      * @param {String} name
-     * @param {Port} enabled value or port
+     * @param {Port|boolean} enabled value or port
      */
     toggleDefine(name, enabled)
     {
@@ -211,9 +211,7 @@ class CgShader extends Events
             if (this._defines[i][0] == name)
             {
                 this._defines.splice(i, 1);
-
                 this.setWhyCompile("define removed:" + name);
-
                 return;
             }
         }

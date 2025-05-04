@@ -29,6 +29,9 @@ export const now = function ()
  */
 class Timer extends Events
 {
+    static EVENT_PLAY_PAUSE = "playPause";
+    static EVENT_TIME_CHANGED = "timeChanged";
+
     constructor()
     {
         super();
@@ -57,10 +60,13 @@ class Timer extends Events
         return this._lastTime + this._timeOffset;
     }
 
+    /**
+     * @param {number} d
+     */
     setDelay(d)
     {
         this._delay = d;
-        this.emitEvent("timeChange");
+        this.emitEvent(Timer.EVENT_TIME_CHANGED);
     }
 
     /**
@@ -79,7 +85,7 @@ class Timer extends Events
      * @function
      * @memberof Timer
      * @instance
-     * @param ts
+     * @param {any} ts
      * @description update timer
      * @return {Number} time
      */
@@ -145,7 +151,7 @@ class Timer extends Events
         this._timeStart = this._internalNow();
         this._timeOffset = t;
         this._currentTime = t;
-        this.emitEvent("timeChange");
+        this.emitEvent((Timer.EVENT_TIME_CHANGED));
     }
 
     setOffset(val)
@@ -161,7 +167,7 @@ class Timer extends Events
             this._timeOffset += val;
             this._currentTime = this._lastTime + this._timeOffset;
         }
-        this.emitEvent("timeChange");
+        this.emitEvent(Timer.EVENT_TIME_CHANGED);
     }
 
     /**
@@ -174,7 +180,7 @@ class Timer extends Events
     {
         this._timeStart = this._internalNow();
         this._paused = false;
-        this.emitEvent("playPause");
+        this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
 
     /**
@@ -187,7 +193,7 @@ class Timer extends Events
     {
         this._timeOffset = this._currentTime;
         this._paused = true;
-        this.emitEvent("playPause");
+        this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
 }
 

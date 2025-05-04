@@ -1,13 +1,13 @@
 import { Events, Logger } from "cables-shared-client";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
-import { Timer } from "./timer.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { CglContext } from "./cgl/cgl_state.js";
+import { Timer } from "./timer.js";
 
 /** @global CABLES.OPS  */
 
@@ -76,6 +76,9 @@ export class Patch extends Events
     static EVENT_RESUME = "resume";
     static EVENT_PATCHLOADEND = "patchLoadEnd";
     static EVENT_VARIABLES_CHANGED = "variablesChanged";
+    static EVENT_RENDER_FRAME = "onRenderFrame";
+    static EVENT_RENDERED_ONE_FRAME = "renderedOneFrame";
+    static EVENT_LINK = "onLink";
 
     #renderOneFrame = false;
     #initialDeserialize = true;
@@ -211,6 +214,7 @@ export class Patch extends Events
         }
 
         console.log("made with https://cables.gl"); // eslint-disable-line
+        this.cg = undefined;
 
     }
 
@@ -527,7 +531,7 @@ export class Patch extends Events
 
             if (op.init) op.init();
 
-            op.emitEvent("init", fromDeserialize);
+            op.emitEvent(Op.EVENT_INIT, fromDeserialize);
         }
         else
         {
@@ -663,7 +667,7 @@ export class Patch extends Events
         this.reqAnimTimeStamp = timestamp;
         this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
-        this.emitEvent("onRenderFrame", time);
+        this.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
         this._frameNum++;
         if (this._frameNum == 1)
@@ -721,7 +725,7 @@ export class Patch extends Events
         if (this.#renderOneFrame)
         {
             if (this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
-            this.emitEvent("renderedOneFrame");
+            this.emitEvent(Patch.EVENT_RENDERED_ONE_FRAME);
             this._renderOneFrame = false;
         }
 
@@ -758,7 +762,7 @@ export class Patch extends Events
             const link = new Link(this);
             link.link(port1, port2);
 
-            this.emitEvent("onLink", port1, port2, link, fromDeserialize);
+            this.emitEvent(Patch.EVENT_LINK, port1, port2, link, fromDeserialize);
             return link;
         }
     }

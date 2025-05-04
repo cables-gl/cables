@@ -2,6 +2,11 @@ import { Anim } from "./anim.js";
 
 export class AnimKey
 {
+
+    /**
+     * @param {import("./anim.js").SerializedKey} obj
+     * @param {Anim} [an]
+     */
     constructor(obj, an)
     {
         this.id = CABLES.shortId();
@@ -12,7 +17,6 @@ export class AnimKey
         /** @type {Anim} */
         this.anim = obj.anim || an || null;
 
-        // this.ui = null;
         this.onChange = null;
         this._easing = 0;
         // this.bezTangIn = 0;
@@ -102,7 +106,7 @@ export class AnimKey
     }
 
     /**
-     * @param {object} obj
+     * @param {import("./anim.js").SerializedKey} obj
      */
     set(obj)
     {
