@@ -112,7 +112,7 @@ function updateFullscreenButton()
             fsElement.addEventListener("mouseenter", onMouseEnter);
             fsElement.addEventListener("click", function (e)
             {
-                if (CABLES.UI && !e.shiftKey) gui.cycleFullscreen();
+                if (CABLES.UI && !e.shiftKey) gui.toggleMaximizeCanvas();
                 else cgl.fullScreen();
             });
         }
