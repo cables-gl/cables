@@ -1,0 +1,33 @@
+{
+    "id": "097ad05b-5d91-4920-b4a2-a8294f2de245",
+    "created": 1745847791435,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1745847791436
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Toggle maximized"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Maximized",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "maximize renderer to window size",
+    "docs": {
+        "ports": []
+    }
+}
