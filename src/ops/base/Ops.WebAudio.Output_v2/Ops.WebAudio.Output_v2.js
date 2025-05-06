@@ -94,23 +94,16 @@ inAudio.onChange = function ()
     setVolume();
 };
 
-function setVolume(fromMute)
+function setVolume()
 {
     const masterVolume = op.patch.config.masterVolume || 0;
 
     let volume = inGain.get() * masterVolume;
-
     if (op.patch._paused || inMute.get()) volume = 0;
-
-    let addTime = 0.05;
-    if (fromMute) addTime = 0.2;
-
     volume = CABLES.clamp(volume, 0, 1);
 
-    if (!gainNode)
-        op.logError("gainNode undefined");
-
-    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
+    if (!gainNode) op.logError("gainNode undefined");
+    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.05);
 
     outVol.set(volume);
 }
@@ -139,7 +132,7 @@ function mute(b)
         }
     }
 
-    setVolume(true);
+    setVolume();
 }
 
 function updateStateError()
@@ -192,7 +185,7 @@ function updateAudioStateButton()
         if (isSuspended)
         {
             op.log("was suspended - set vol");
-            setVolume(true);
+            setVolume();
         }
     }
 }
