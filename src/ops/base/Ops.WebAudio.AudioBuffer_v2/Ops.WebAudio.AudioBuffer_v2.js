@@ -192,7 +192,7 @@ function onLoadFinished(buffer)
         durationPort.set(buffer.duration);
         numberOfChannelsPort.set(buffer.numberOfChannels);
         sampleRatePort.set(buffer.sampleRate);
-        audioBufferPort.set(buffer);
+        audioBufferPort.setRef(buffer);
         op.setUiError("failedLoading", null);
         finishedLoadingPort.set(true);
         fromData = false;

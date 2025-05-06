@@ -77,5 +77,6 @@
             }
         ]
     },
-    "exampleProjectId": "KlCyYN"
+    "exampleProjectId": "KlCyYN",
+    "license": "MIT"
 }

@@ -65,7 +65,10 @@ inAudio.onChange = function ()
 
         if (connectedToOut)
         {
-            if (gainNode)gainNode.disconnect(destinationNode);
+            if (gainNode)
+            {
+                gainNode.disconnect(destinationNode);
+            }
             connectedToOut = false;
         }
     }
@@ -74,14 +77,20 @@ inAudio.onChange = function ()
         if (inAudio.links.length > 1) op.setUiError("multipleInputs", "You have connected multiple inputs. It is possible that you experience unexpected behaviour. Please use a Mixer op to connect multiple audio streams.", 1);
         else op.setUiError("multipleInputs", null);
 
-        if (inAudio.get().connect) inAudio.get().connect(gainNode);
+        if (inAudio.get().connect)
+        {
+            inAudio.get().connect(gainNode);
+        }
     }
 
     oldAudioIn = inAudio.get();
 
     if (!connectedToOut)
     {
-        if (gainNode)gainNode.connect(destinationNode);
+        if (gainNode)
+        {
+            gainNode.connect(destinationNode);
+        }
         connectedToOut = true;
     }
 
@@ -117,7 +126,7 @@ function mute(b)
         { // make sure that when audio context is suspended node will also be muted
             // this prevents the initial short sound burst being heard when context is suspended
             // and started from user interaction
-            // also note, we have to cancle the already scheduled values as we have no influence over
+            // also note, we have to cancel the already scheduled values as we have no influence over
             // the order in which onchange handlers are executed
 
             if (gainNode)

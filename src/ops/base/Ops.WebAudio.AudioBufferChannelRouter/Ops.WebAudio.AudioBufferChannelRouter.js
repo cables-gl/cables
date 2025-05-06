@@ -34,60 +34,41 @@ inAudioBuffer.onChange = () =>
 
 inChannelIn.onChange = () =>
 {
-    op.setUiError("in_channel_range", null);
     let channel = inChannelIn.get();
     const buffer = inAudioBuffer.get();
     if (channel >= 0)
     {
         if (buffer)
         {
-            const maxChannelIndex = buffer.numberOfChannels - 1;
-            if (channel > maxChannelIndex)
-            {
-                op.setUiError("in_channel_range", "Input has only " + buffer.numberOfChannels + " channels.", 1);
-            }
             mixChannel();
         }
-    }
-    else
-    {
-        op.setUiError("in_channel_range", "Ignoring negative value " + channel + " for input.", 1);
     }
 };
 
 inChannelOut.onChange = () =>
 {
-    op.setUiError("out_channel_range", null);
     let channel = inChannelOut.get();
     const buffer = inAudioBuffer.get();
     if (channel >= 0)
     {
         if (buffer)
         {
-            const maxChannelIndex = destinationNode.channelCount - 1;
-            if (channel > maxChannelIndex)
-            {
-                op.setUiError("out_channel_range", "Output has only " + destinationNode.channelCount + " channels.", 1);
-            }
             mixChannel();
         }
-    }
-    else
-    {
-        op.setUiError("out_channel_range", "Ignoring negative value " + channel + " for output.", 1);
     }
 };
 
 function mixChannel()
 {
+    updateUi();
     const buffer = inAudioBuffer.get();
     if (!buffer) return;
-    const inChannel = inChannelIn.get();
+    const inChannel = inChannelIn.get() || 0;
     if (inChannel < 0) return;
-    const outChannel = inChannelOut.get();
+    const outChannel = inChannelOut.get() || 0;
     const clearOthers = inClearOthers.get();
 
-    let channelCount = audioCtx.destination.channelCount;
+    let channelCount = Math.max(outChannel + 1, buffer.numberOfChannels);
 
     const length = buffer.duration * buffer.sampleRate;
     let arrayBuffer = audioCtx.createBuffer(channelCount, length, buffer.sampleRate);
@@ -123,5 +104,49 @@ function mixChannel()
         if (outChannel >= 0 && (outChannel <= channelCount - 1)) arrayBuffer.copyToChannel(inChannelData, outChannel);
     }
 
+    outChannels.set(arrayBuffer.numberOfChannels);
     outAudioBuffer.setRef(arrayBuffer);
+}
+
+function updateUi()
+{
+    op.setUiError("in_channel_range", null);
+    op.setUiError("out_channel_range", null);
+
+    let channelIn = inChannelIn.get();
+    const bufferIn = inAudioBuffer.get();
+    let channelOut = inChannelOut.get();
+    const bufferOut = inAudioBuffer.get();
+
+    if (channelIn >= 0)
+    {
+        if (bufferIn)
+        {
+            const maxChannelIndex = bufferIn.numberOfChannels - 1;
+            if (channelIn > maxChannelIndex)
+            {
+                op.setUiError("in_channel_range", "Input has only " + bufferIn.numberOfChannels + " channels.", 1);
+            }
+        }
+    }
+    else
+    {
+        op.setUiError("in_channel_range", "Ignoring negative value " + channelIn + " for input.", 1);
+    }
+
+    if (channelOut >= 0)
+    {
+        if (bufferOut)
+        {
+            const maxChannelIndex = destinationNode.channelCount - 1;
+            if (channelOut > maxChannelIndex)
+            {
+                op.setUiError("out_channel_range", "Output has only " + destinationNode.channelCount + " channels.", 1);
+            }
+        }
+    }
+    else
+    {
+        op.setUiError("out_channel_range", "Ignoring negative value " + channelOut + " for output.", 1);
+    }
 }

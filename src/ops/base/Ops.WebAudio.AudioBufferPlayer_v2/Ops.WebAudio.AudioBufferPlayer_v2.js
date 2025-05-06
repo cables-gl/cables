@@ -218,7 +218,7 @@ function createAudioBufferSource(dontStart = false)
     source.connect(gainNode);
     setPlaybackRate();
     setDetune();
-    audioOutPort.set(gainNode);
+    audioOutPort.setRef(gainNode);
 
     isLoading = false;
     outLoading.set(isLoading);
