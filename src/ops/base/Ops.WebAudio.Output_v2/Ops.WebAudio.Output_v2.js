@@ -44,35 +44,32 @@ op.onDelete = () =>
 
 inAudio.onChange = function ()
 {
-    if (!inAudio.get())
+    op.setUiError("multipleInputs", null);
+    if (oldAudioIn)
     {
-        if (oldAudioIn)
+        try
         {
-            try
+            if (oldAudioIn.disconnect)
             {
-                if (oldAudioIn.disconnect)
-                {
-                    oldAudioIn.disconnect(gainNode);
-                }
-            }
-            catch (e)
-            {
-                op.logError(e);
+                oldAudioIn.disconnect(gainNode);
             }
         }
-
-        op.setUiError("multipleInputs", null);
-
-        if (connectedToOut)
+        catch (e)
         {
-            if (gainNode)
-            {
-                gainNode.disconnect(destinationNode);
-            }
-            connectedToOut = false;
+            op.logError(e);
         }
     }
-    else
+
+    if (connectedToOut)
+    {
+        if (gainNode)
+        {
+            gainNode.disconnect(destinationNode);
+        }
+        connectedToOut = false;
+    }
+
+    if (inAudio.get())
     {
         if (inAudio.links.length > 1) op.setUiError("multipleInputs", "You have connected multiple inputs. It is possible that you experience unexpected behaviour. Please use a Mixer op to connect multiple audio streams.", 1);
         else op.setUiError("multipleInputs", null);
