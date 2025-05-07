@@ -14,9 +14,10 @@ import { Port } from "./core_port.js";
 
 /**
  * @typedef SerializedKey
- * @property  {number} v
- * @property  {number} t
- * @property  {number} cb
+ * @property  {number} [v]
+ * @property  {number} [t]
+ * @property  {number} [e]
+ * @property  {number} [cb]
  */
 
 /**

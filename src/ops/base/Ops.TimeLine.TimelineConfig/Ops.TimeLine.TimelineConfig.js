@@ -1,11 +1,12 @@
 const
     inDurUnit = op.inSwitch("Duration Unit", ["Seconds", "Frames"], "Seconds"),
     inDur = op.inInt("Duration", 230),
-    inFps = op.inInt("FPS", 25),
+    inFps = op.inInt("FPS", 30),
     inUnits = op.inSwitch("Display Units", ["Seconds", "Frames"], "Seconds"),
 
     inShowBpm = op.inBool("Show beats"),
     inBpm = op.inInt("BPM", 120),
+    inBpmHl = op.inInt("BPM highlight xth", 4),
 
     inRestrictToFrames = op.inBool("Restrict to frames", true),
 
@@ -18,6 +19,7 @@ inFps.onChange =
     inBpm.onChange =
     inUnits.onChange =
     inDurUnit.onChange =
+    inBpmHl.onChange =
     inDur.onChange = update;
 
 function update()
@@ -32,6 +34,7 @@ function update()
     CABLES.timelineConfig.duration = dur;
     CABLES.timelineConfig.fps = inFps.get();
     CABLES.timelineConfig.bpm = inBpm.get();
+    CABLES.timelineConfig.bpmHlXth = inBpmHl.get();
     CABLES.timelineConfig.showBeats = inShowBpm.get();
 
     CABLES.timelineConfig.fadeInFrames = inFrames.get();
