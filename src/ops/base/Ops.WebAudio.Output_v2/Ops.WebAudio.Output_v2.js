@@ -4,6 +4,7 @@ const
     inMute = op.inBool("Mute", false),
     inShowSusp = op.inBool("Show Audio Suspended Button", true),
     outVol = op.outNumber("Current Volume", 0),
+    outChannels = op.outNumber("Number Of Channels"),
     outState = op.outString("Context State", "unknown");
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
@@ -89,6 +90,15 @@ inAudio.onChange = function ()
             gainNode.connect(destinationNode);
         }
         connectedToOut = true;
+    }
+
+    if (audioCtx && audioCtx.destination)
+    {
+        outChannels.set(audioCtx.destination.maxChannelCount);
+    }
+    else
+    {
+        outChannels.set(0);
     }
 
     setVolume();
