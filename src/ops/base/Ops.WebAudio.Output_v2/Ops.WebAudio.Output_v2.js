@@ -44,67 +44,66 @@ op.onDelete = () =>
 
 inAudio.onChange = function ()
 {
-    if (!inAudio.get())
+    op.setUiError("multipleInputs", null);
+    if (oldAudioIn)
     {
-        if (oldAudioIn)
+        try
         {
-            try
+            if (oldAudioIn.disconnect)
             {
-                if (oldAudioIn.disconnect)
-                {
-                    oldAudioIn.disconnect(gainNode);
-                }
-            }
-            catch (e)
-            {
-                op.logError(e);
+                oldAudioIn.disconnect(gainNode);
             }
         }
-
-        op.setUiError("multipleInputs", null);
-
-        if (connectedToOut)
+        catch (e)
         {
-            if (gainNode)gainNode.disconnect(destinationNode);
-            connectedToOut = false;
+            op.logError(e);
         }
     }
-    else
+
+    if (connectedToOut)
+    {
+        if (gainNode)
+        {
+            gainNode.disconnect(destinationNode);
+        }
+        connectedToOut = false;
+    }
+
+    if (inAudio.get())
     {
         if (inAudio.links.length > 1) op.setUiError("multipleInputs", "You have connected multiple inputs. It is possible that you experience unexpected behaviour. Please use a Mixer op to connect multiple audio streams.", 1);
         else op.setUiError("multipleInputs", null);
 
-        if (inAudio.get().connect) inAudio.get().connect(gainNode);
+        if (inAudio.get().connect)
+        {
+            inAudio.get().connect(gainNode);
+        }
     }
 
     oldAudioIn = inAudio.get();
 
     if (!connectedToOut)
     {
-        if (gainNode)gainNode.connect(destinationNode);
+        if (gainNode)
+        {
+            gainNode.connect(destinationNode);
+        }
         connectedToOut = true;
     }
 
     setVolume();
 };
 
-function setVolume(fromMute)
+function setVolume()
 {
     const masterVolume = op.patch.config.masterVolume || 0;
 
     let volume = inGain.get() * masterVolume;
-
     if (op.patch._paused || inMute.get()) volume = 0;
-
-    let addTime = 0.05;
-    if (fromMute) addTime = 0.2;
-
     volume = CABLES.clamp(volume, 0, 1);
 
-    if (!gainNode)
-        op.logError("gainNode undefined");
-
-    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
+    if (!gainNode) op.logError("gainNode undefined");
+    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.05);
 
     outVol.set(volume);
 }
@@ -117,7 +116,7 @@ function mute(b)
         { // make sure that when audio context is suspended node will also be muted
             // this prevents the initial short sound burst being heard when context is suspended
             // and started from user interaction
-            // also note, we have to cancle the already scheduled values as we have no influence over
+            // also note, we have to cancel the already scheduled values as we have no influence over
             // the order in which onchange handlers are executed
 
             if (gainNode)
@@ -133,7 +132,7 @@ function mute(b)
         }
     }
 
-    setVolume(true);
+    setVolume();
 }
 
 function updateStateError()
@@ -186,7 +185,7 @@ function updateAudioStateButton()
         if (isSuspended)
         {
             op.log("was suspended - set vol");
-            setVolume(true);
+            setVolume();
         }
     }
 }

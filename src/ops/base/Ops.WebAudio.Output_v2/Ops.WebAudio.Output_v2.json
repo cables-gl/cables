@@ -58,19 +58,22 @@
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.WebAudio.Output",
+            "message": "op created",
             "author": "cables",
-            "date": 1606754727181
-        },
-        {
-            "message": "Ops.User.cables.Output_v2 renamed to Ops.WebAudio.Output_v2",
-            "author": "cables",
-            "date": 1606756509626
+            "date": 1606754727181,
+            "type": "new"
         },
         {
             "message": " added core lib: interactionneededbutton",
             "author": "pandur",
-            "date": 1669644919920
+            "date": 1669644919920,
+            "type": "improvement"
+        },
+        {
+            "message": "disconnect audiosource properly with multiple inputs",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1746535503469
         }
     ],
     "exampleProjectId": "teZhCp",
