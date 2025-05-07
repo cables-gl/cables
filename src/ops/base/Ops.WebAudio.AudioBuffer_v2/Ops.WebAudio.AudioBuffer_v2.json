@@ -30,7 +30,7 @@
             {
                 "type": 0,
                 "name": "Finished Loading",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -61,7 +61,6 @@
     },
     "summary": "Holds an audio file / sample in a buffer ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -99,5 +98,6 @@
             }
         ]
     },
-    "exampleProjectId": "xEL0rn"
+    "exampleProjectId": "xEL0rn",
+    "license": "MIT"
 }
