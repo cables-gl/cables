@@ -10,6 +10,7 @@ export class FpsCounter extends Events
         this._fpsCounter = 0;
         this._msCounter = 0;
         this._frameCount = 0;
+        this.logFps = false;
 
         this.stats = { "ms": 0, "fps": 0 };
     }
@@ -41,6 +42,7 @@ export class FpsCounter extends Events
         this.stats.ms = Math.round(this._msCounter / this._fpsCounter * 100) / 100;
 
         this.emitEvent("performance", this.stats);
+        if (this.logFps)console.log(this.stats);
 
         // reset
         this._fpsCounter = 0;

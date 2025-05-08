@@ -32,6 +32,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Number Of Channels",
+                "subType": "number"
+            },
+            {
                 "type": 5,
                 "name": "Context State"
             }
@@ -74,6 +79,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1746535503469
+        },
+        {
+            "message": "add \"number of channels\" outport",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1746634426447
         }
     ],
     "exampleProjectId": "teZhCp",

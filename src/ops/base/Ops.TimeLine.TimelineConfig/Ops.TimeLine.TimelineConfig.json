@@ -53,6 +53,11 @@
             },
             {
                 "type": 0,
+                "name": "BPM highlight xth",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Restrict to frames",
                 "subType": "boolean"
             },

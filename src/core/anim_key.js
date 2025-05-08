@@ -28,6 +28,7 @@ export class AnimKey
 
         this.cb = null;
         this.cbTriggered = false;
+        this.temp = {};
 
         // const bezierAnim = null;
         // this._updateBezier = false;

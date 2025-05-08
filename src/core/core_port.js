@@ -374,7 +374,9 @@ export class Port extends Events
             {
                 if (this.#animated)
                 {
-                    this.anim.setValue(this._op.patch.timer.getTime(), v);
+                    let t = this._op.patch.timer.getTime();
+                    if (CABLES.UI && window.gui.glTimeline)t = window.gui.glTimeline.snapTime(t);
+                    this.anim.setValue(t, v);
                 }
                 else
                 {

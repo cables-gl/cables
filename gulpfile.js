@@ -9,9 +9,8 @@ import path from "path";
 import webpackConfig from "./webpack.config.js";
 import webpackLibsConfig from "./webpack.config.libs.js";
 
-const apiLocation = "../cables_api/";
-let configLocation = path.join(apiLocation, "cables.json");
-if (process.env.npm_config_apiconfig) configLocation = path.join(apiLocation, "cables_env_" + process.env.npm_config_apiconfig + ".json");
+let configLocation = path.join("..", "gen", "cables.json");
+if (process.env.npm_config_apiconfig) configLocation = path.join("..", "gen", "cables_env_" + process.env.npm_config_apiconfig + ".json");
 
 let isLiveBuild = false;
 let minify = false;
