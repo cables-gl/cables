@@ -17,7 +17,10 @@ import { Port } from "./core_port.js";
  * @property  {number} [v]
  * @property  {number} [t]
  * @property  {number} [e]
- * @property  {number} [cb]
+ * @property  {Function} [cb]
+ * @property  {Anim} [anim] do not use
+ * @property  {number} [value] do not use
+ * @property  {number} [time] do not use
  */
 
 /**
@@ -573,9 +576,12 @@ export class Anim extends Events
 
     set tlActive(b)
     {
-        this.#tlActive = b;
-        gui.emitEvent("tlActiveChanged", this);
-        this.forceChangeCallbackSoon();
+        if (CABLES.UI)
+        {
+            this.#tlActive = b;
+            window.gui.emitEvent("tlActiveChanged", this);
+            this.forceChangeCallbackSoon();
+        }
     }
 }
 
