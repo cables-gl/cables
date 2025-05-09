@@ -81,7 +81,7 @@ You should subscribe to the `CABLES.jsLoaded` event to initialize the patch, thi
 
 ### Pausing the Patch
 
-For performance Reasons, you should pause the patch, when its not visible using`patch.pause()` . To Resume rendering use `patch.resume()`
+If you want to pause the patch, e.g. for performance Reasons, when its not visible, you can pause the patch,  using`patch.pause()` . To Resume rendering use `patch.resume()`
 
 ## Patch Option Parameters
 
