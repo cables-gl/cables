@@ -10,6 +10,7 @@ import { CgShader } from "../cg/cg_shader.js";
 import { Geometry } from "../cg/cg_geom.js";
 import { Texture } from "./cgl_texture.js";
 import { Op } from "../core_op.js";
+import { logStack } from "../utils.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -636,6 +637,7 @@ export class CglContext extends CgContext
         if (!this._frameStarted)
         {
             this._log.warn("frame not started " + string);
+            logStack("t");
             this.patch.printTriggerStack();
         }
     }
