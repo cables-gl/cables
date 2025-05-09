@@ -458,4 +458,10 @@ export class CgContext extends Events
         });
     }
 
+    hasFocus()
+    {
+        return this.cgCanvas.hasFocus;
+
+    }
+
 }

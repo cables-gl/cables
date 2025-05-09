@@ -2,6 +2,8 @@ import { Logger } from "cables-shared-client/index.js";
 
 class CgCanvas
 {
+    hasFocus = false;
+
     constructor(options)
     {
         this._log = new Logger("CgCanvas");
@@ -26,6 +28,8 @@ class CgCanvas
         this._oldHeightRp = -1;
 
         this.setSize(this.canvasWidth, this.canvasHeight);
+        this.canvasEle.addEventListener("focus", () => { this.hasFocus = true; });
+        this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
     }
 
     get canvasEle() { return this._canvasEle; }
