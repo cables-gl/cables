@@ -637,7 +637,8 @@ export class CglContext extends CgContext
         if (!this._frameStarted)
         {
             this._log.warn("frame not started " + string);
-            logStack("t");
+
+            Error.stackTraceLimit = 111; logStack();
             this.patch.printTriggerStack();
         }
     }
