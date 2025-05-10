@@ -4,7 +4,7 @@ export class AnimKey
 {
 
     /**
-     * @param {import("./anim.js").SerializedKey} obj
+     * @param {SerializedKey} obj
      * @param {Anim} [an]
      */
     constructor(obj, an)

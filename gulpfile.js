@@ -6,6 +6,7 @@ import git from "git-last-commit";
 import webpack from "webpack";
 
 import path from "path";
+import { BuildWatcher } from "cables-shared-client";
 import webpackConfig from "./webpack.config.js";
 import webpackLibsConfig from "./webpack.config.libs.js";
 
@@ -71,10 +72,11 @@ function getWebpackErrorMessage(stats)
 
 function _watch(done)
 {
+    const buildWatcher = new BuildWatcher(gulp, config, "core");
     const watchOptions = { "ignored": "./**/node_modules/" };
-    gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
-    gulp.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
-    gulp.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
+    buildWatcher.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
+    buildWatcher.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
+    buildWatcher.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     done();
 }
 

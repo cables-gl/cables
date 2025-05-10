@@ -6,31 +6,6 @@ import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 
 /**
- * @typedef SerializedAnim
- * @property  {boolean} loop
- * @property  {boolean} tlActive
- * @property  {SerializedKey[]} keys
- */
-
-/**
- * @typedef SerializedKey
- * @property  {number} [v]
- * @property  {number} [t]
- * @property  {number} [e]
- * @property  {Function} [cb]
- * @property  {Anim} [anim] do not use
- * @property  {number} [value] do not use
- * @property  {number} [time] do not use
- */
-
-/**
- * configuration object for loading a patch
- * @typedef {Object} AnimCfg
- * @property {number} [defaultEasing] use easing index as default
- * @property {string} [name] anim name
- */
-
-/**
  * Keyframed interpolated animation.
  *
  * @class
