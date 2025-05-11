@@ -182,7 +182,6 @@ export class Anim extends Events
         this._updateLastIndex();
         this._needsSort = false;
         if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
-
     }
 
     hasDuplicates()
@@ -388,6 +387,7 @@ export class Anim extends Events
             {
                 this.keys.splice(i, 1);
                 this._updateLastIndex();
+                this.emitEvent(Anim.EVENT_CHANGE, this);
                 return;
             }
         }
