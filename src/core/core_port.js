@@ -66,6 +66,7 @@ export class Port extends Events
 
     #oldAnimVal = -5711;
 
+    lastAnimTime = 0;
     #uiActiveState = true;
     #valueBeforeLink = null;
     // #lastAnimFrame = -1;
@@ -326,8 +327,14 @@ export class Port extends Events
      */
     get()
     {
+        if (this.#animated && this.lastAnimTime == this._op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
+        {
+            return this.value;
+        }
         if (this.#animated && this.lastAnimFrame != this._op.patch.getFrameNum())
         {
+
+            this.lastAnimTime = this._op.patch.timer.getTime();
             this.lastAnimFrame = this._op.patch.getFrameNum();
 
             let animval = this.anim.getValue(this._op.patch.timer.getTime());
@@ -343,6 +350,9 @@ export class Port extends Events
         return this.value;
     }
 
+    /**
+     * @param {object|array} v
+     */
     setRef(v)
     {
         this.forceRefChange = true;
@@ -354,12 +364,17 @@ export class Port extends Events
      * @memberof Port
      * @instance
      * @description set value of port / will send value to all linked ports (only for output ports)
+     * @param {string | number | boolean | any[]} v
      */
     set(v)
     {
+
         this.setValue(v);
     }
 
+    /**
+     * @param {string|boolean|number} v
+     */
     setValue(v)
     {
         if (v === undefined) v = null;
@@ -372,10 +387,10 @@ export class Port extends Events
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
-                if (this.#animated)
+                if (this.#animated && CABLES.UI.keyframeAutoCreate)
                 {
                     let t = this._op.patch.timer.getTime();
-                    if (CABLES.UI && window.gui.glTimeline)t = window.gui.glTimeline.snapTime(t);
+                    if (CABLES.UI && window.gui.glTimeline) t = window.gui.glTimeline.snapTime(t);
                     this.anim.setValue(t, v);
                 }
                 else
@@ -408,17 +423,16 @@ export class Port extends Events
 
     updateAnim()
     {
-        if (this.#animated)
-        {
-            this.value = this.get();
+        if (!this.#animated) return;
+        this.value = this.get();
 
-            if (this.#oldAnimVal != this.value || this.changeAlways)
-            {
-                this.#oldAnimVal = this.value;
-                this.forceChange();
-            }
+        if (this.#oldAnimVal != this.value || this.changeAlways)
+        {
             this.#oldAnimVal = this.value;
+            this.forceChange();
         }
+        this.#oldAnimVal = this.value;
+
     }
 
     forceChange()
@@ -848,6 +862,7 @@ export class Port extends Events
                 {
                     this._varChangeListenerId = this._variableIn.on("change", this.set.bind(this));
                 }
+
                 this.set(this._variableIn.getValue());
             }
             this.#useVariableName = v;
