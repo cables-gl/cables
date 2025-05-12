@@ -1316,6 +1316,7 @@ export class Patch extends Events
         else if (t == Port.TYPE_VALUE) tStr = "number";
         else if (t == Port.TYPE_ARRAY) tStr = "array";
         else if (t == Port.TYPE_OBJECT) tStr = "object";
+        else if (t == Port.TYPE_DYNAMIC) tStr = "dynamic";
         else
         {
             console.log("unknown,,,", t);
