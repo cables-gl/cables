@@ -319,7 +319,11 @@ export class Op extends Events
             changed = true;
         }
 
-        if (newAttribs.hasOwnProperty("disabled")) this.setEnabled(!newAttribs.disabled);
+        if (newAttribs.hasOwnProperty("disabled"))
+        {
+            changed = true;
+            this.setEnabled(!newAttribs.disabled);
+        }
 
         for (const p in newAttribs)
         {
@@ -328,6 +332,7 @@ export class Op extends Events
         }
 
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
+        if (this.uiAttribs.hasOwnProperty("selected")) changed = true;
 
         if (changed)
         {

@@ -64,6 +64,8 @@ export class Port extends Events
     static TYPE_DYNAMIC = 4;
     static TYPE_STRING = 5;
 
+    static EVENT_UIATTRCHANGE = "onUiAttrChange";
+
     #oldAnimVal = -5711;
 
     lastAnimTime = 0;
@@ -286,7 +288,7 @@ export class Port extends Events
 
         if (newAttribs.hasOwnProperty("expose")) this._op.patch.emitEvent("subpatchExpose", this._op.uiAttribs.subPatch);
 
-        if (changed) this.emitEvent("onUiAttrChange", newAttribs, this);
+        if (changed) this.emitEvent(Port.EVENT_UIATTRCHANGE, newAttribs, this);
     }
 
     /**
@@ -327,7 +329,7 @@ export class Port extends Events
      */
     get()
     {
-        if (this.#animated && this.lastAnimTime == this._op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
+        if (CABLES.UI && this.#animated && this.lastAnimTime == this._op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
         {
             return this.value;
         }
@@ -387,11 +389,11 @@ export class Port extends Events
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
-                if (this.#animated && CABLES.UI.keyframeAutoCreate)
+                if (CABLES.UI && this.#animated && CABLES.UI.keyframeAutoCreate)
                 {
                     let t = this._op.patch.timer.getTime();
-                    if (CABLES.UI && window.gui.glTimeline) t = window.gui.glTimeline.snapTime(t);
-                    this.anim.setValue(t, v);
+                    if (CABLES.UI && window.gui.glTimeline) window.gui.glTimeline.createKey(this.anim, t, v);
+                    else this.anim.setValue(t, v);
                 }
                 else
                 {
