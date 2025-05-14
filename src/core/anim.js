@@ -19,6 +19,11 @@ import { Port } from "./core_port.js";
 
 export class Anim extends Events
 {
+    static LOOP_OFF = 0;
+    static LOOP_REPEAT = 1;
+    static LOOP_MIRROR = 2;
+    static LOOP_OFFSET = 3;
+
     static EASING_LINEAR = 0;
     static EASING_ABSOLUTE = 1;
     static EASING_SMOOTHSTEP = 2;
@@ -72,7 +77,8 @@ export class Anim extends Events
         this.keys = [];
         this.onChange = null;
         this.stayInTimeline = false;
-        this.loop = false;
+
+        this.loop = 0;
         this._log = new Logger("Anim");
         this._lastKeyIndex = 0;
         this._cachedIndex = 0;
@@ -105,11 +111,14 @@ export class Anim extends Events
     }
 
     /**
-     * @param {boolean} enable
+     * @param {number} loopType
      */
-    setLoop(enable)
+    setLoop(loopType)
     {
-        this.loop = enable;
+        if (loopType === false)loopType = 0;
+        if (loopType === true)loopType = 1;
+
+        this.loop = loopType;
         this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
@@ -221,10 +230,16 @@ export class Anim extends Events
         }
     }
 
+    getLengthLoop()
+    {
+        if (this.keys.length < 2) return 0;
+        return this.lastKey.time - this.firstKey.time;
+    }
+
     getLength()
     {
         if (this.keys.length === 0) return 0;
-        return this.keys[this.keys.length - 1].time;
+        return this.lastKey.time;
     }
 
     /**
@@ -261,7 +276,7 @@ export class Anim extends Events
     {
         let found = null;
 
-        if (this.keys.length == 0 || time <= this.keys[this.keys.length - 1].time)
+        if (this.keys.length == 0 || time <= this.lastKey.time)
             for (let i = 0; i < this.keys.length; i++)
                 if (this.keys[i].time == time)
                 {
@@ -364,7 +379,7 @@ export class Anim extends Events
     isFinished(time)
     {
         if (this.keys.length <= 0) return true;
-        return time > this.keys[this.keys.length - 1].time;
+        return time > this.lastKey.time;
     }
 
     /**
@@ -373,7 +388,7 @@ export class Anim extends Events
     isStarted(time)
     {
         if (this.keys.length <= 0) return false;
-        return time >= this.keys[0].time;
+        return time >= this.firstKey.time;
     }
 
     /**
@@ -394,6 +409,25 @@ export class Anim extends Events
         console.log("key remove not found", k);
     }
 
+    get lastKey()
+    {
+        return this.keys[this._lastKeyIndex];
+    }
+
+    get firstKey()
+    {
+        return this.keys[0];
+    }
+
+    /**
+     * @param {number} time
+     */
+    getLoopIndex(time)
+    {
+        if (this.keys.length < 2) return 0;
+        return (time - this.firstKey.time) / this.getLengthLoop();
+    }
+
     /**
      * get value at time
      * @function getValue
@@ -404,40 +438,48 @@ export class Anim extends Events
      */
     getValue(time)
     {
-        if (this.keys.length === 0)
-        {
-            return 0;
-        }
+        let valAdd = 0;
+        if (this.keys.length === 0) return 0;
         if (this._needsSort) this.sortKeys();
 
         if (!this.loop && time > this.keys[this._lastKeyIndex].time)
         {
-            if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
+            if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
 
-            return this.keys[this._lastKeyIndex].value;
+            return this.lastKey.value;
         }
 
-        if (time < this.keys[0].time)
-            return this.keys[0].value;
+        if (time < this.firstKey.time) return this.keys[0].value;
 
-        if (this.loop && time > this.keys[this._lastKeyIndex].time)
+        if (this.loop && this.keys.length > 1 && time > this.lastKey.time)
         {
-            const currentLoop = time / this.keys[this._lastKeyIndex].time;
+            const currentLoop = this.getLoopIndex(time);
             if (currentLoop > this._timesLooped)
             {
                 this._timesLooped++;
                 if (this.onLooped) this.onLooped();
             }
-            time = (time - this.keys[0].time) % (this.keys[this._lastKeyIndex].time - this.keys[0].time);
-            time += this.keys[0].time;
+
+            time = (time - this.firstKey.time) % (this.getLengthLoop());
+
+            if (this.loop == Anim.LOOP_REPEAT) { }
+            else if (this.loop == Anim.LOOP_MIRROR)
+            {
+                if (Math.floor(currentLoop) % 2 == 1)time = this.getLengthLoop() - time;
+            }
+            else if (this.loop == Anim.LOOP_OFFSET)
+            {
+                valAdd = this.lastKey.value * currentLoop;
+            }
+
+            time += this.firstKey.time;
         }
 
         const index = this.getKeyIndex(time);
         if (index >= this._lastKeyIndex)
         {
-            if (this.keys[this._lastKeyIndex].cb && !this.keys[this._lastKeyIndex].cbTriggered) this.keys[this._lastKeyIndex].trigger();
-
-            return this.keys[this._lastKeyIndex].value;
+            if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
+            return this.lastKey.value;
         }
 
         const index2 = index + 1;
@@ -450,7 +492,7 @@ export class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
-        return key1.ease(perc, key2);
+        return key1.ease(perc, key2) + valAdd;
     }
 
     _updateLastIndex()

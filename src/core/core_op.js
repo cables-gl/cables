@@ -28,6 +28,7 @@ import { Texture } from "./cgl/cgl_texture.js";
  * @property {boolean} [selected] internal - do not use manualy
  * @property {boolean} [disabled] internal - do not use manualy
  * @property {boolean} [loading] internal - do not use manualy
+ * @property {boolean} [resizable] internal - do not use manualy
  * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
  * @property {string} [color]
  * @property {object} [area]
@@ -36,7 +37,7 @@ import { Texture } from "./cgl/cgl_texture.js";
  * @property {number} [width]
  * @property {Translation} [translate]
  * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
- */
+*/
 
 /**
  * @typedef CorePatch

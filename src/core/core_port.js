@@ -99,6 +99,7 @@ export class Port extends Events
         this.id = String(CABLES.simpleId());
 
         /** @type {Op} */
+
         this._op = ___op;
 
         /** @type {Array<Link>} */
@@ -923,6 +924,7 @@ export class Port extends Events
                 {
                     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
                 });
+                // this.anim.setValue(this._op.patch.timer.getTime(), this.get());
             }
             this._onAnimToggle();
         }

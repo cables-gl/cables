@@ -35,6 +35,16 @@
                 "type": 2,
                 "name": "Anim",
                 "objType": "anim"
+            },
+            {
+                "type": 0,
+                "name": "Loop Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
             }
         ]
     }

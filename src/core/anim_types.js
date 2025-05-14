@@ -1,6 +1,6 @@
 /**
  * @typedef SerializedAnim
- * @property  {boolean} loop
+ * @property  {number} loop
  * @property  {boolean} tlActive
  * @property  {SerializedKey[]} keys
  */

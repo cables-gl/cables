@@ -1,7 +1,9 @@
 const
     animVal = op.inValue("Value"),
     inloop = op.inBool("loop", false),
-    outAnim = op.outObject("Anim", null, "anim");
+    outAnim = op.outObject("Anim", null, "anim"),
+    outLengthLoop = op.outNumber("Loop Length"),
+    outLength = op.outNumber("Length");
 
 animVal.setAnimated(true);
 animVal.onChange = update;
@@ -13,5 +15,16 @@ inloop.onChange = () =>
 
 function update()
 {
-    outAnim.setRef(animVal.anim);
+    const anim = animVal.anim;
+    outAnim.setRef(anim);
+    if (anim.keys.length > 0)
+    {
+        outLengthLoop.set(anim.getLengthLoop());
+        outLength.set(anim.lastKey.time);
+    }
+    else
+    {
+        outLengthLoop.set(0);
+        outLength.set(0);
+    }
 }

@@ -28,6 +28,11 @@
                 "type": 0,
                 "name": "Value",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "subType": "number"
             }
         ]
     }

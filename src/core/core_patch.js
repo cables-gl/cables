@@ -1319,7 +1319,7 @@ export class Patch extends Events
         else if (t == Port.TYPE_DYNAMIC) tStr = "dynamic";
         else
         {
-            console.log("unknown,,,", t);
+            console.log("unknown port type", t);
             console.log(new Error().stack);
         }
 

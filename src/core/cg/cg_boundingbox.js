@@ -16,7 +16,7 @@ class BoundingBox
 {
 
     /**
-     * @param {Geometry} geom
+     * @param {Geometry} [geom]
      */
     constructor(geom)
     {
