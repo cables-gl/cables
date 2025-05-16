@@ -2,7 +2,6 @@ const
     inDurUnit = op.inSwitch("Duration Unit", ["Seconds", "Frames"], "Seconds"),
     inDur = op.inInt("Duration", 230),
     inFps = op.inInt("FPS", 30),
-    inUnits = op.inSwitch("Display Units", ["Seconds", "Frames"], "Seconds"),
 
     inShowBpm = op.inBool("Show beats"),
     inBpm = op.inInt("BPM", 120),
@@ -17,7 +16,6 @@ inShowBpm.onChange =
 inFps.onChange =
     inFrames.onChange =
     inBpm.onChange =
-    inUnits.onChange =
     inDurUnit.onChange =
     inBpmHl.onChange =
     inDur.onChange = update;
@@ -30,7 +28,6 @@ function update()
 
     if (inDurUnit.get() == "Frames") dur /= inFps.get();
 
-    CABLES.timelineConfig.displayUnits = inUnits.get();
     CABLES.timelineConfig.duration = dur;
     CABLES.timelineConfig.fps = inFps.get();
     CABLES.timelineConfig.bpm = inBpm.get();
