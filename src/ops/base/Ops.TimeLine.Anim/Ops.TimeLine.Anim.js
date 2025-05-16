@@ -1,6 +1,7 @@
 const
+    loopstr = ["Off", "Repeat", "Mirror", "Offset"],
     animVal = op.inValue("Value"),
-    inloop = op.inBool("loop", false),
+    inloop = op.inSwitch("loop", loopstr),
     outAnim = op.outObject("Anim", null, "anim"),
     outLengthLoop = op.outNumber("Loop Length"),
     outLength = op.outNumber("Length");
@@ -10,7 +11,7 @@ animVal.onChange = update;
 
 inloop.onChange = () =>
 {
-    animVal.anim.setLoop(inloop.get());
+    animVal.anim.setLoop(loopstr.indexOf(inloop.get()));
 };
 
 function update()

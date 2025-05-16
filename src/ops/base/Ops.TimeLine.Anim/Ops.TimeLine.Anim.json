@@ -26,8 +26,14 @@
             },
             {
                 "type": 0,
-                "name": "loop",
-                "subType": "boolean"
+                "name": "loop index",
+                "values": [
+                    "Off",
+                    "Repeat",
+                    "Mirror",
+                    "Offset"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
