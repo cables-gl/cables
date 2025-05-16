@@ -24,7 +24,7 @@ class BoundingBox
         this._first = true;
         this._wireMesh = null;
 
-        if (geom) this.apply(geom);
+        if (geom) this.applyGeom(geom);
     }
 
     _init()
@@ -110,9 +110,18 @@ class BoundingBox
     get maxZ() { return this._max[2]; }
 
     /**
+     * @deprecated
      * @param {Geometry} geom
      */
     apply(geom)
+    {
+        return this.applyGeom(geom);
+    }
+
+    /**
+     * @param {Geometry} geom
+     */
+    applyGeom(geom)
     {
         if (!geom) return;
 
@@ -125,8 +134,9 @@ class BoundingBox
         }
         else
         {
-            for (let i = 0; i < geom.vertices.length; i += 3)
-                this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
+            if (geom.isGeometry)
+                for (let i = 0; i < geom.vertices.length; i += 3)
+                    this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
         }
         this.calcCenterSize();
     }

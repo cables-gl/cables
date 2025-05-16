@@ -25,6 +25,7 @@ import { Mesh } from "./cgl/cgl_mesh.js";
 import { PatchVariable } from "./core_variable.js";
 import { Texture } from "./cgl/cgl_texture.js";
 import { extendJs } from "./extendjs.js";
+import { FpsCounter } from "./cg/cg_fpscounter.js";
 
 window.glMatrix = glMatrix;
 window.mat2 = mat2;
@@ -97,6 +98,6 @@ CABLES = Object.assign(CABLES,
 
 export default CABLES;
 
-export { Port, Op, Patch, Link, Anim, AnimKey, CglContext, Shader, Uniform, Geometry, Mesh, Timer, PatchVariable, Texture, extendJs };
+export { Port, Op, Patch, Link, Anim, AnimKey, CglContext, FpsCounter, Shader, Uniform, Geometry, Mesh, Timer, PatchVariable, Texture, extendJs };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

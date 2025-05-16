@@ -48,6 +48,6 @@ const CGL = {
     ...CONSTANTS.BLEND_MODES,
 };
 
-window.CGL = CGL;
+window.CGL = window.CGL || CGL;
 
 export { CGL };
