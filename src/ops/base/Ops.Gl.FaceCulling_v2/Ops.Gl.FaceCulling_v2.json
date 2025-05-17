@@ -49,6 +49,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1699428385357
+        },
+        {
+            "message": "Graphics.FaceCulling_v2 renamed to Ops.Gl.FaceCulling_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744373878186
         }
     ],
     "summary": "Disable the rendering of front or back facing triangles with culling",

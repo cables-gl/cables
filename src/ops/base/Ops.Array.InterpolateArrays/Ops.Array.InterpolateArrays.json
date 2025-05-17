@@ -64,8 +64,6 @@
         ]
     },
     "issues": "",
-
-
     "changelog": [
         {
             "message": "Ops.Array.ArrayInterpolate renamed to Ops.Array.InterpolateArrays",
@@ -74,5 +72,6 @@
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "qU2GB3"
+    "exampleProjectId": "qU2GB3",
+    "license": "MIT"
 }

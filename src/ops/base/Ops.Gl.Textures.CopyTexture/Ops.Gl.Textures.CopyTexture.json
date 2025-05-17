@@ -39,6 +39,11 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
@@ -78,5 +83,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "G2_my7"
+    "exampleProjectId": "G2_my7",
+    "license": "MIT"
 }

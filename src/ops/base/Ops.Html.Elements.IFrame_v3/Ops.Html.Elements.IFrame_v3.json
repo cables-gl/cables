@@ -4,18 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1590486860242
-        },
-        {
-            "message": "Ops.User.pandur.iframe_3 renamed to Ops.Html.IFrame_v3",
-            "author": "pandur",
-            "date": 1590487259409
-        },
-        {
-            "message": "Html.IFrame_v3 renamed to Ops.Html.Elements.IFrame_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1734352961202
+            "date": 1590486860242,
+            "type": "new"
         }
     ],
     "authorName": "pandur",

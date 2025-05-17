@@ -7,9 +7,10 @@
             "date": 1557827875562
         },
         {
-            "message": "Ops.Json.ObjectGetArray2 renamed to Ops.Json.ObjectGetArray_v2",
-            "author": "pandur",
-            "date": 1560412731398
+            "message": "return empty array when not found",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1746695791076
         }
     ],
     "authorName": "pandur",

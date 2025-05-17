@@ -4,7 +4,7 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    inPasses = op.inFloat("Passes", 3),
+    inPasses = op.inInt("Passes", 3),
     clamp = op.inBool("Clamp", false),
     direction = op.inDropDown("direction", ["both", "vertical", "horizontal"], "both"),
     mask = op.inTexture("Mask"),

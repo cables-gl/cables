@@ -54,6 +54,14 @@ function fillArr_01(off, num, stride)
 {
     for (let i = 0; i < num; i += stride)
     {
+        arr[i + off] = (i / (num)) * 2 - 1 || 0;
+    }
+}
+
+function fillArr_m1(off, num, stride)
+{
+    for (let i = 0; i < num; i += stride)
+    {
         arr[i + off] = (i / (num)) || 0;
     }
 }
@@ -71,7 +79,7 @@ function fillArr(off, meth, stride)
     if (meth == "0")fillArr_0(off, arr.length, stride);
     if (meth == "0-1")fillArr_01(off, arr.length, stride);
     if (meth == "1")fillArr_1(off, arr.length, stride);
-    // -1-1 todo implement
+    if (meth == "-1-1")fillArr_m1(off, arr.length, stride);
     if (meth == "Input")fillArr_input(off, arr.length, stride);
     if (meth == "index")fillArr_index(off, arr.length, stride);
 }
