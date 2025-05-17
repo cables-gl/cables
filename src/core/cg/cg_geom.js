@@ -41,6 +41,7 @@ import { BoundingBox } from "./cg_boundingbox.js";
 
 export class Geometry
 {
+    isGeometry = true;
 
     /**
      * @param {String} name
@@ -59,8 +60,6 @@ export class Geometry
 
         /** @type {Array} */
         this.verticesIndices = [];
-
-        this.isGeometry = true;
 
         this.morphTargets = [];
     }
