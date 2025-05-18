@@ -2,9 +2,10 @@
     "id": "646f2c46-a802-47c6-8b41-8feea8749ccc",
     "changelog": [
         {
-            "message": "created op",
+            "message": "make routing to more channels than the output device has possible",
             "author": "stephan",
-            "date": 1702653390496
+            "date": 1702653390496,
+            "type": "improvement"
         }
     ],
     "layout": {

@@ -3,7 +3,8 @@ const
     asBytes = op.inValueBool("Bytes"),
     outR = op.outNumber("R"),
     outG = op.outNumber("G"),
-    outB = op.outNumber("B");
+    outB = op.outNumber("B"),
+    outArr = op.outArray("RGB Array");
 
 function hexToR(h)
 {
@@ -45,4 +46,5 @@ function parse()
     outR.set(r);
     outB.set(b);
     outG.set(g);
+    outArr.set([r, g, b]);
 }

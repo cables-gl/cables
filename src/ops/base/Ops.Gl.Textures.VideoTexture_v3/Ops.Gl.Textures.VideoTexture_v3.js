@@ -169,20 +169,20 @@ function updatePlayState()
 
                 if (videoElement.paused && inShowSusp.get())
                 {
-
                     op.setUiError("playvideo", null);
                     interActionNeededButton = true;
                     CABLES.interActionNeededButton.add(op.patch, "videoplayer", () =>
                     {
                         interActionNeededButton = false;
-                        videoElement.play().then(() => {
+                        videoElement.play().then(() =>
+                        {
                             doPlay();
                             CABLES.interActionNeededButton.remove("videoplayer");
-                        }).catch((e) => {
+                        }).catch((e) =>
+                        {
                             op.setUiError("playvideo", e.message);
                             op.logWarn("playvideo", e);
                         });
-
                     });
                 }
                 // Automatic playback failed.

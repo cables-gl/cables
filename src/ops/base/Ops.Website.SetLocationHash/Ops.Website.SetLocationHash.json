@@ -12,9 +12,10 @@
             "date": 1617119533403
         },
         {
-            "message": "Ops.User.stephan.SetLocationHash renamed to Ops.Website.SetLocationHash",
+            "message": "change default state to \"active\"",
+            "type": "improvement",
             "author": "stephan",
-            "date": 1617122196074
+            "date": 1745331962200
         }
     ],
     "authorName": "stephan",
@@ -73,5 +74,6 @@
             }
         ]
     },
-    "exampleProjectId": "EfiWpG"
+    "exampleProjectId": "EfiWpG",
+    "license": "MIT"
 }

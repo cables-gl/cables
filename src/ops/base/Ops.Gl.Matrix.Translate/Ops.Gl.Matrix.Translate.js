@@ -9,7 +9,7 @@ const vec = vec3.create();
 
 render.onTriggered = function ()
 {
-    const cgl = op.patch.cg;
+    const cgl = op.patch.cg || op.patch.cgl;
 
     vec3.set(vec, x.get(), y.get(), z.get());
     cgl.pushModelMatrix();
