@@ -16,7 +16,10 @@ op.toWorkPortsNeedToBeLinked(inUpdate);
 
 updateScroll();
 
-inUpdate.onTriggered = updateScroll;
+inUpdate.onTriggered = () =>
+{
+    updateScroll(true);
+};
 
 inEle.onChange = () =>
 {
@@ -27,7 +30,7 @@ inEle.onChange = () =>
         oldEle.addEventListener("scroll", updateScroll);
 };
 
-function updateScroll()
+function updateScroll(trigNext = false)
 {
     el = inEle.get();
 
@@ -49,7 +52,7 @@ function updateScroll()
     let px = el.scrollLeft / (el.scrollWidth - rCanv.width);
     scrollPercentageY.set(py || 0);
     scrollPercentageX.set(px || 0);
-    next.trigger();
+    if (trigNext === true) next.trigger();
 }
 
 inScrollTop.onTriggered = () =>

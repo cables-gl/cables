@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1610634340065
+            "date": 1610634340065,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.Array1toX renamed to Ops.Array.Array1toX",
+            "message": "fixed -1 to 1 mapping",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1610637166092
+            "date": 1744022351425
         }
     ],
     "authorName": "pandur",

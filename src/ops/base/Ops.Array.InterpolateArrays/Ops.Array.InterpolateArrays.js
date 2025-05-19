@@ -8,15 +8,14 @@ const
 
 let needsCalc = true;
 let resultArr = [];
+op.toWorkPortsNeedToBeLinked(inArr1, inArr2);
+inArr1.onChange = inArr2.onChange = inPerc.onChange = calcLater;
+exe.onTriggered = execute;
 
 function calcLater()
 {
     needsCalc = true;
 }
-
-inArr1.onChange = inArr2.onChange = inPerc.onChange = calcLater;
-
-exe.onTriggered = execute;
 
 function execute()
 {

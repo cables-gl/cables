@@ -4,23 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1655205733018
-        },
-        {
-            "message": "Ops.User.pandur.WebXr renamed to Ops.Dev.WebXrVr",
-            "author": "pandur",
-            "date": 1655208969779
-        },
-        {
-            "message": "Ops.Dev.WebXrVr renamed to Ops.WebXr.Vr.Vr",
-            "author": "pandur",
-            "date": 1665427763309
-        },
-        {
-            "message": "Ops.WebXr.Vr.Vr renamed to Ops.Devices.WebXr.Vr.Vr",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701851242767
+            "date": 1655205733018,
+            "type": "new"
         }
     ],
     "authorName": "pandur",

@@ -4,9 +4,16 @@ const
 
 v.onChange = exec;
 
+let isLinked = false;
+v.onLinkChanged = () =>
+{
+    if (!isLinked && v.isLinked())op.setUiAttribs({ "extendTitle": null });
+    isLinked = v.isLinked();
+};
+
 function exec()
 {
-    if (CABLES.UI) op.setUiAttribs({ "extendTitle": v.get() });
+    if (CABLES.UI && !isLinked) op.setUiAttribs({ "extendTitle": v.get() });
 
     result.set(Number(v.get()));
 }

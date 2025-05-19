@@ -1,7 +1,7 @@
 const
     hashIn = op.inString("Hash", ""),
     inUpdate = op.inTriggerButton("Update"),
-    activeIn = op.inBool("Active", false),
+    activeIn = op.inBool("Active", true),
     silentIn = op.inBool("Silent", true),
     reloadIn = op.inBool("Allow Empty", false);
 

@@ -40,6 +40,7 @@ function update()
     }
     else
     {
+        result.setRef([]);
         arrLength.set(0);
     }
 }

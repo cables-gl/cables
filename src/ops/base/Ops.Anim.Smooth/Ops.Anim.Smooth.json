@@ -28,7 +28,7 @@
             {
                 "type": 0,
                 "name": "Inc factor",
-                "uititle": "Inc factor",
+                "uititle": "Inc/Dec factor",
                 "subType": "number"
             },
             {

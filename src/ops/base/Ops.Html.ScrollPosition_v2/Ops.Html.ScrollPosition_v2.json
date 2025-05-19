@@ -61,5 +61,6 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

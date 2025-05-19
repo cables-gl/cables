@@ -26,6 +26,7 @@ const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
 
+let firstTime = true;
 let autoSize = true;
 let needsUpdate = true;
 let needsUpdateSize = true;
@@ -210,6 +211,7 @@ function initFb()
         });
     }
     needInitFb = false;
+    needsUpdate = true;
 }
 
 let oldGeom = null;
@@ -264,6 +266,7 @@ exec.onTriggered = function ()
 
     if (inTexColor.get())mod.pushTexture("MOD_texColor", inTexColor.get().tex);
 
+    if (firstTime)render(); // first time needs 2x render.,.. but why?
     render();
 
     if (effect)effect.continueEffect();
@@ -281,6 +284,7 @@ function render()
     }
     else op.setUiError("not in mainloop", null);
 
+    firstTime = false;
     const vp = cgl.getViewPort();
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];

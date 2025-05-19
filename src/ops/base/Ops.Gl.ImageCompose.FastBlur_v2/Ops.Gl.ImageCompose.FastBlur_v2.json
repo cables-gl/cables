@@ -11,7 +11,7 @@
             {
                 "type": 0,
                 "name": "Passes",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,
