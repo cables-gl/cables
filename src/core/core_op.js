@@ -146,7 +146,6 @@ export class Op extends Events
          * @param {number} layer.height height of canvas
          * @param {number} layer.scale current scaling of patchfield view
          */
-        this.renderVizLayer = null;
     }
 
     isInBlueprint2() // will be overwritten in ui
@@ -1769,11 +1768,11 @@ export class Op extends Events
         }
     }
 
-    checkLinkTimeWarnings() { return undefined; }
+    checkLinkTimeWarnings() {}
 
     _checkLinksNeededToWork()
     {
-        console.log("linktimewarnings");
+
     }
 
     /**
