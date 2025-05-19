@@ -33,7 +33,7 @@ op.onDelete = removeListeners;
 
 addListeners();
 
-op.onLoadedValueSet(onStart);
+op.on("loadedValueSet", onStart);
 
 inEle.onChange =
 inEle.onLinkChanged = () =>
