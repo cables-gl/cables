@@ -66,9 +66,10 @@
     "issues": "",
     "changelog": [
         {
-            "message": "Ops.Array.ArrayInterpolate renamed to Ops.Array.InterpolateArrays",
+            "message": "shows an error when not both arrays are connected",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1560415284531
+            "date": 1747643422163
         }
     ],
     "youtubeids": [],
