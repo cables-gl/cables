@@ -79,6 +79,7 @@ export class Patch extends Events
     static EVENT_RENDER_FRAME = "onRenderFrame";
     static EVENT_RENDERED_ONE_FRAME = "renderedOneFrame";
     static EVENT_LINK = "onLink";
+    static EVENT_VALUESSET = "loadedValueSet";
 
     #renderOneFrame = false;
     #initialDeserialize = true;
@@ -1019,13 +1020,17 @@ export class Patch extends Events
 
         for (const i in this.ops)
         {
+            // deprecated use event
             if (this.ops[i].onLoadedValueSet)
             {
                 this.ops[i].onLoadedValueSet(this.ops[i]._origData);
                 this.ops[i].onLoadedValueSet = null;
                 this.ops[i]._origData = null;
             }
-            this.ops[i].emitEvent("loadedValueSet");
+
+            // this is only emited when the patch is loaded from serializid data, e.g. loading from api
+            // NOT when op is created by hand!
+            this.ops[i].emitEvent(Patch.EVENT_VALUESSET);
         }
 
         this.logStartup("creating links");
@@ -1152,7 +1157,7 @@ export class Patch extends Events
         {
             if (this.ops[i].onLoaded)
             {
-                // TODO: deprecate!!!
+                // TODO: deprecated - use even
                 this.ops[i].onLoaded();
                 this.ops[i].onLoaded = null;
             }
