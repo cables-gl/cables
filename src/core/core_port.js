@@ -65,8 +65,11 @@ export class Port extends Events
     static TYPE_STRING = 5;
 
     static EVENT_UIATTRCHANGE = "onUiAttrChange";
+    static EVENT_VALUE_CHANGE = "change";
 
     #oldAnimVal = -5711;
+
+    animMuted = false;
 
     lastAnimTime = 0;
     #uiActiveState = true;
@@ -334,9 +337,8 @@ export class Port extends Events
         {
             return this.value;
         }
-        if (this.#animated && this.lastAnimFrame != this._op.patch.getFrameNum())
+        if (!this.animMuted && this.#animated && this.lastAnimFrame != this._op.patch.getFrameNum())
         {
-
             this.lastAnimTime = this._op.patch.timer.getTime();
             this.lastAnimFrame = this._op.patch.getFrameNum();
 
@@ -426,7 +428,7 @@ export class Port extends Events
 
     updateAnim()
     {
-        if (!this.#animated) return;
+        if (!this.#animated || this.animMuted) return;
         this.value = this.get();
 
         if (this.#oldAnimVal != this.value || this.changeAlways)
@@ -449,7 +451,7 @@ export class Port extends Events
          */
         }
         this._activity();
-        this.emitEvent("change", this.value, this);
+        this.emitEvent(Port.EVENT_VALUE_CHANGE, this.value, this);
 
         if (this.onChange) this.onChange(this, this.value);
         else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
@@ -492,7 +494,7 @@ export class Port extends Events
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this._op.hasAnimPort = true;
-            this.anim.on("onChange", () =>
+            this.anim.on(Anim.EVENT_CHANGE, () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });
@@ -920,7 +922,7 @@ export class Port extends Events
             if (this.#animated && !this.anim)
             {
                 this.anim = new Anim({ "name": "port " + this.name });
-                this.anim.on("onChange", () =>
+                this.anim.on(Anim.EVENT_CHANGE, () =>
                 {
                     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
                 });
@@ -946,7 +948,7 @@ export class Port extends Events
         if (this.#animated && !this.anim)
         {
             this.anim = new Anim({ "name": "port " + this.name });
-            this.anim.on("onChange", () =>
+            this.anim.on(Anim.EVENT_CHANGE, () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
             });
