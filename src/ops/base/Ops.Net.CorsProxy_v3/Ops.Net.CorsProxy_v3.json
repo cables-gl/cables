@@ -1,0 +1,38 @@
+{
+    "authorName": "stephan",
+    "id": "160dd983-e533-4b34-bc55-72abd73e9713",
+    "created": 1747755462207,
+    "changelog": [
+        {
+            "message": "add active/inactive toggle, restrict usage to cables editor/patchpage",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1747755601416
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "URL"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "CORS URL"
+            }
+        ]
+    },
+    "summary": "create a cables.gl CORS proxy URL",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "PAedBi"
+}
