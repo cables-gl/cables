@@ -78,6 +78,7 @@ updateStyle();
 op.on("loadedValueSet", delayedInitDevices);
 inActive.onChange = delayedInitDevices;
 
+delayedInitDevices();
 function delayedInitDevices()
 {
     setTimeout(() =>
@@ -306,19 +307,16 @@ function initDevices()
         .then((res) => { return navigator.mediaDevices.enumerateDevices(); })
         .then((devices) =>
         {
-            camInputDevices = devices
-                .filter((device) => { return device.kind === "videoinput"; });
-
+            camInputDevices = devices.filter((device) => { return device.kind === "videoinput"; });
             initingDevices = false;
             inInputDevices.uiAttribs.values = camInputDevices.map((d, idx) => { return d.label || idx; });
             inInputDevices.uiAttribs.values.unshift("Default");
             outDevices.set(inInputDevices.uiAttribs.values);
             cgl.patch.loading.finished(loadingId);
-
             camsLoaded = true;
-
             restartWebcam();
             started = true;
+            op.refreshParams();
         }).catch((e) =>
         {
             initingDevices = false;
@@ -326,6 +324,7 @@ function initDevices()
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
             camsLoaded = false;
+            op.refreshParams();
         });
 }
 
