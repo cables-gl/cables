@@ -52,6 +52,7 @@ let cam = null;
 let boundingPoints = [];
 let gltf = null;
 let maxTime = 0;
+let maxTimeDict = {};
 let time = 0;
 let needsMatUpdate = true;
 let timedLoader = null;
@@ -260,7 +261,6 @@ function finishLoading()
 
     needsMatUpdate = true;
     // op.refreshParams();
-    outAnimLength.set(maxTime);
 
     gltf.bounds = new CABLES.CG.BoundingBox();
     // gltf.bounds.applyPos(0, 0, 0);
@@ -585,6 +585,8 @@ function updateAnimation()
         {
             gltf.nodes[i].setAnimAction(inAnimation.get());
         }
+        maxTime=maxTimeDict[inAnimation.get()];
+        outAnimLength.set(maxTime);
     }
 }
 
