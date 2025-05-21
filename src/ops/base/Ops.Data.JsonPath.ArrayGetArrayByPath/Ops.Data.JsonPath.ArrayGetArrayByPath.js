@@ -24,8 +24,7 @@ function update()
         }
         else
         {
-            const parts = path.split(".");
-            op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
+            op.setUiAttrib({ "extendTitle": path });
             let result = resolve(path, data);
             if (result === undefined)
             {
