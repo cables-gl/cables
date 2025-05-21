@@ -585,7 +585,7 @@ function updateAnimation()
         {
             gltf.nodes[i].setAnimAction(inAnimation.get());
         }
-        maxTime=maxTimeDict[inAnimation.get()];
+        maxTime=maxTimeDict[inAnimation.get()]  ?? -1;
         outAnimLength.set(maxTime);
     }
 }
