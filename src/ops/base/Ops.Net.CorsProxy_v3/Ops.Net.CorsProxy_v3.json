@@ -18,6 +18,11 @@
             },
             {
                 "type": 0,
+                "name": "Use in export",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

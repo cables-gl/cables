@@ -1,11 +1,13 @@
 const
     inUrl = op.inString("URL", ""),
+    inExportActive = op.inBool("Use in export", false),
     inActive = op.inBool("Active", true),
     result = op.outString("CORS URL");
 
 const CORS_CABLES_PROXY = "https://cors.cables.gl/";
 
 inUrl.onChange =
+inExportActive.onChange =
 inActive.onChange = update;
 
 update();
@@ -13,11 +15,19 @@ update();
 function update()
 {
     op.setUiError("editoronly", null);
-    const patchPage = document.location.href.includes("cables.gl") || document.location.href.includes("cables.local");
-    const isActive = inActive.get() && (op.patch.isEditorMode() || patchPage);
+    const inExport = !document.location.href.includes("cables.gl") && !document.location.href.includes("cables.local");
+    const inEditor = op.patch.isEditorMode();
+    const isActive = inActive.get() && (!inExport || inExportActive.get());
     if (isActive)
     {
-        op.setUiError("editoronly", "This op will return the originial URL when exported, use only for testing", 1);
+        if (!inExportActive.get())
+        {
+            op.setUiError("editoronly", "This op will output the originial URL when exported", 0);
+        }
+        else
+        {
+            op.setUiError("editoronly", "This URL will send data to cables servers when exported", 1);
+        }
         result.set(CORS_CABLES_PROXY + encodeURIComponent(inUrl.get()));
     }
     else
