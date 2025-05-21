@@ -16,7 +16,6 @@ function update()
 {
     op.setUiError("editoronly", null);
     const inExport = !document.location.href.includes("cables.gl") && !document.location.href.includes("cables.local");
-    const inEditor = op.patch.isEditorMode();
     const isActive = inActive.get() && (!inExport || inExportActive.get());
     if (isActive)
     {
