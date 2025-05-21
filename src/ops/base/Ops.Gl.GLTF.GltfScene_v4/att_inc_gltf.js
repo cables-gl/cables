@@ -125,7 +125,8 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 function loadAnims(gltf)
 {
     const uniqueAnimNames = {};
-
+    maxTimeDict = {};
+    
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
@@ -184,7 +185,7 @@ function loadAnims(gltf)
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
-                    maxTime = Math.max(bufferIn[j], maxTime);
+                    maxTimeDict[an.name] = bufferIn[j];
 
                     for (let k = 0; k < numComps; k++)
                     {
