@@ -29,6 +29,7 @@ export class AnimKey
         this.cb = null;
         this.cbTriggered = false;
         this.temp = {};
+        this.uiAttribs = {};
 
         // const bezierAnim = null;
         // this._updateBezier = false;
@@ -41,6 +42,16 @@ export class AnimKey
     {
         if (this.anim) this.anim.remove(this);
         else console.log("animkey without anim...");
+    }
+
+    setUiAttribs(o)
+    {
+        console.log("text", o);
+        for (const i in o)
+        {
+            this.uiAttribs[i] = o[i];
+        }
+        this.anim.emitEvent(Anim.EVENT_CHANGE);
     }
 
     /**
@@ -107,7 +118,7 @@ export class AnimKey
     }
 
     /**
-     * @param {import("./anim.js").SerializedKey} obj
+     * @param {SerializedKey} obj
      */
     set(obj)
     {
