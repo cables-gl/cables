@@ -50,6 +50,7 @@ export class AnimKey
         for (const i in o)
         {
             this.uiAttribs[i] = o[i];
+            if (o[i] === null) delete this.uiAttribs[i];
         }
         this.anim.emitEvent(Anim.EVENT_CHANGE);
     }
@@ -144,6 +145,8 @@ export class AnimKey
             if (obj.hasOwnProperty("time")) this.time = obj.time;
             if (obj.hasOwnProperty("v")) this.value = obj.v;
             else if (obj.hasOwnProperty("value")) this.value = obj.value;
+
+            if (obj.hasOwnProperty("uiAttribs")) this.setUiAttribs(obj.uiAttribs);
         }
         if (this.onChange) this.onChange();
         this.anim.forceChangeCallbackSoon();
@@ -158,6 +161,7 @@ export class AnimKey
         obj.t = this.time;
         obj.v = this.value;
         obj.e = this._easing;
+        obj.uiAttribs = this.uiAttribs;
 
         return obj;
     }
