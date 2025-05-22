@@ -81,9 +81,7 @@ function update()
                     foundOut.set(true);
                 }
 
-                const titleParts = pathIn.get().split(".");
-                const extendTitle = titleParts[titleParts.length - 1] + "";
-                op.setUiAttrib({ "extendTitle": extendTitle });
+                op.setUiAttrib({ "extendTitle": pathIn.get() });
             }
             if (foundOut.get())
             {

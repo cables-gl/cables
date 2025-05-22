@@ -40,8 +40,7 @@ function update()
                 }
                 result.push(resolvedData);
             }
-            const titleParts = pathIn.get().split(".");
-            op.setUiAttrib({ "extendTitle": titleParts[titleParts.length - 1] + "" });
+            op.setUiAttrib({ "extendTitle": pathIn.get() });
             if (foundOut.get())
             {
                 resultOut.set(result);

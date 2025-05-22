@@ -71,6 +71,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1741354726032
+        },
+        {
+            "message": "show full path in extended title",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1747829069910
         }
     ],
     "exampleProjectId": "rs0XWr",

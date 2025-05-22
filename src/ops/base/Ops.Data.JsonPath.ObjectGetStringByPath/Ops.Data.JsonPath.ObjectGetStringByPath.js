@@ -30,8 +30,7 @@ function update()
         {
             op.setUiError("notiterable", null);
             let result = data[path];
-            const parts = path.split(".");
-            op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
+            op.setUiAttrib({ "extendTitle": path });
             if (!result) result = resolve(path, data);
             if (result === undefined)
             {

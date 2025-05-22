@@ -63,6 +63,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1736850845190
+        },
+        {
+            "message": "show full path in extended title",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1747829069910
         }
     ]
 }
