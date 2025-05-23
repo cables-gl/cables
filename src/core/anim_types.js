@@ -1,4 +1,8 @@
 /**
+ * @typedef keyUiAttribs
+ * @property  {string} text
+ */
+/**
  * @typedef SerializedAnim
  * @property  {number} loop
  * @property  {boolean} tlActive
@@ -9,6 +13,7 @@
  * @property  {number} [v]
  * @property  {number} [t]
  * @property  {number} [e]
+ * @property  {keyUiAttribs} [uiAttribs]
  * @property  {Function} [cb]
  * @property  {import("./anim.js").Anim} [anim] do not use
  * @property  {number} [value] do not use
