@@ -19,6 +19,9 @@ import { Port } from "./core_port.js";
 
 export class Anim extends Events
 {
+    static EVENT_CHANGE = "onChange";
+    static EVENT_UIATTRIB_CHANGE = "uiattrchange";
+
     static LOOP_OFF = 0;
     static LOOP_REPEAT = 1;
     static LOOP_MIRROR = 2;
@@ -62,9 +65,8 @@ export class Anim extends Events
 
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
 
-    static EVENT_CHANGE = "onChange";
-
     #tlActive = true;
+    uiAttribs = {};
 
     /**
      * @param {AnimCfg} [cfg]
@@ -190,10 +192,24 @@ export class Anim extends Events
 
     sortKeys()
     {
-        this.keys.sort((a, b) => { return a.time - b.time; });
-        this._updateLastIndex();
-        this._needsSort = false;
-        if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
+        let isSorted = true;
+        for (let i = 0; i < this.keys.length - 1; i++)
+            if (this.keys[i].time < this.keys[i + 1].time)
+            {
+                isSorted = false;
+                break;
+            }
+
+        if (!isSorted)
+        {
+            this.keys.sort((a, b) => { return a.time - b.time; });
+            this._updateLastIndex();
+            this._needsSort = false;
+            if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
+
+            this.emitEvent(Anim.EVENT_CHANGE);
+        }
+        return !isSorted;
     }
 
     hasDuplicates()
@@ -603,6 +619,21 @@ export class Anim extends Events
             this.forceChangeCallbackSoon();
         }
     }
+
+    /**
+     * @param {Object} o
+     */
+    setUiAttribs(o)
+    {
+        for (const i in o)
+        {
+            this.uiAttribs[i] = o[i];
+            if (o[i] === null) delete this.uiAttribs[i];
+        }
+
+        this.emitEvent(Anim.EVENT_UIATTRIB_CHANGE);
+    }
+
 }
 
 // ------------------------------
