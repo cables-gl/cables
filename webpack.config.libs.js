@@ -149,7 +149,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         "externals": {
             "cables": "CABLES",
             "cables-shared-client": "CABLES.SHARED",
-            "gl-matrix": "glMatrix"
+            "gl-matrix": "CABLES.GLMatrix"
         },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
