@@ -20,4 +20,4 @@
 
 #### I found a bug! What should I do now?
 
-- [Post a bug report](https://github.com/cables-gl/cables_docs/issues), or describe the issue on the [forums](https://github.com/cables-gl/cables_docs/discussions/122)
+- [Post a bug report](https://github.com/cables-gl/cables/issues)

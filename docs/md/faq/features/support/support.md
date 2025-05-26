@@ -34,14 +34,14 @@ We'd love to show it to the world.
 ## Let us know what's missing!
 
 Bugs bugs bugs, they are everywhere... if you don't bring our attention to them!
-Please report bugs and take part/help others in the discussion [forum](https://github.com/cables-gl/cables_docs/discussions) and [discord](https://discord.gg/cablesgl).
+Please report bugs and take part/help others in the discussion [forum](https://github.com/cables-gl/cables/issues) and [discord](https://discord.gg/cablesgl).
 
 Help us by documenting and sharing patches that illustrate the issues, this makes it easy for us to squash them and not wander around looking for them!
 
 ## Communicate!
 
 Got a cool idea or coded an awesome shader that makes cables.gl better?
-Share it with us and the community by posting in our [Discord](https://github.com/cables-gl/cables_docs/discussions), our Feature Requests or joining our weekly meetups.
+Share it with us and the community by posting in our [Discord](https://github.com/cables-gl/cables/issues), our Feature Requests or joining our weekly meetups.
 
 Weekly meetups? Yes! Bring your friends! Come chat and share your work on [our Discord](https://discord.gg/cablesgl), every Wednesday!
 

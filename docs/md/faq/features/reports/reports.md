@@ -5,7 +5,7 @@ As cables is in constant development, there will be bugs here and there. We also
 
 ## Where to report bugs?
 
-Please keep all bugreports to the [Discussions forum](https://github.com/cables-gl/cables_docs/discussions/categories/bug-reports) .
+Please keep all bugreports to the [Discussions forum](https://github.com/cables-gl/cables/issues) .
 Check out previously submitted bugs first and if you find a related report, vote it up and post about your findings too. That way we have more details and can see how frequently this bug happens!
 
 ## What information to include in my post to GitHub Discussions?
@@ -15,7 +15,7 @@ Check out previously submitted bugs first and if you find a related report, vote
 First and foremost - tell us what operating system and browser your are using.
 Send us the generated link provided on [cables.gl/browser](https://cables.gl/browser) - it will be on top of the page.
 
-Tell us more about your project and how it is running - on mobile? on WordPress? inside the cables.gl editor? 
+Tell us more about your project and how it is running - on mobile? on WordPress? inside the cables.gl editor?
 
 ### A simple step by step explanation that is reproducible
 
@@ -39,4 +39,4 @@ a glimpse into your dev-console would help here also.
 
 ## I have code that fixes the issue!
 
-Awesome! Please post your findings on our [Discussions forum](https://github.com/cables-gl/cables_docs/discussions/categories/bug-reports) and provide your proposed fixes and solutions. We highly appreciate contributors and community members that go above and beyond. Thanks for contributing and expect a token of our thanks in the mail!
+Awesome! Please post your findings on [github](https://github.com/cables-gl/cables/) and provide your proposed fixes and solutions. We highly appreciate contributors and community members that go above and beyond. Thanks for contributing and expect a token of our thanks in the mail!

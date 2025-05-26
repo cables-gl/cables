@@ -7,11 +7,8 @@ This repository contains files of the documentation on the cables.gl website:
 
 ### Issues and discussions
 
-Discuss cables.gl features, ask questions, report problems, show patches etc:
-- https://github.com/cables-gl/cables_docs/discussions
-
-Request feature or report bugs:
-- https://github.com/cables-gl/cables_docs/discussions/new
+Discuss cables.gl features, ask questions, report problems, show patches, request feature or report bugs:
+- https://github.com/cables-gl/cables/issues
 
 ### Issue Workflow
 

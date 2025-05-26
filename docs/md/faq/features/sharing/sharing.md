@@ -7,6 +7,5 @@ Create a simple patch showcasing where you need help, set the [visibility](https
 to either "Public" or "Unlisted - Allow editor" and then share the URL of your patch with the community:
 
 - On [Discord](https://discord.gg/cablesgl), for help and feedback.
-- On [Github Discussions](https://github.com/cables-gl/cables_docs/discussions) for feature requests, help and feedback.
-- On [Github](https://github.com/cables-gl/cables_docs/issues), if you think you found a bug.
+- On [Github](https://github.com/cables-gl/cables/issues), if you think you found a bug.
 
