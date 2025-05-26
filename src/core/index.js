@@ -17,18 +17,6 @@ import { AnimKey } from "./anim_key.js";
 
 import { PatchVariable } from "./core_variable.js";
 
-window.glMatrix = GLMatrix.glMatrix;
-window.mat2 = GLMatrix.mat2;
-window.mat2d = GLMatrix.mat2d;
-window.mat3 = GLMatrix.mat3;
-window.mat4 = GLMatrix.mat4;
-window.quat = GLMatrix.quat;
-window.quat2 = GLMatrix.quat2;
-window.vec2 = GLMatrix.vec2;
-
-window.vec3 = GLMatrix.vec3;
-window.vec4 = GLMatrix.vec4;
-
 CABLES = CABLES || {};
 CABLES = {
     ...CABLES,
