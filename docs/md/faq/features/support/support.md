@@ -43,5 +43,5 @@ Help us by documenting and sharing patches that illustrate the issues, this make
 Got a cool idea or coded an awesome shader that makes cables.gl better?
 Share it with us and the community by posting in our [Discord](https://github.com/cables-gl/cables/issues), our Feature Requests or joining our weekly meetups.
 
-Weekly meetups? Yes! Bring your friends! Come chat and share your work on [our Discord](https://discord.gg/cablesgl), every Wednesday!
+Meetups? Yes! Bring your friends! Come chat and share your work on [our Discord](https://discord.gg/cablesgl), in our regular meetups!
 
