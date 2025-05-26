@@ -71,7 +71,4 @@ String.prototype.contains = function (str)
 
 };
 
-export function extendJs()
-{
-
-}
+export function extendJs() {}

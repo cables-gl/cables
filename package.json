@@ -17,6 +17,7 @@
     "dependencies": {
         "@webgpu/types": "^0.1.53",
         "cables-shared-client": "file:../shared/client/",
+        "cables-corelibs": "file:src/libs/",
         "git-last-commit": "1.0.1",
         "gl-matrix": "3.1.0"
     },
@@ -33,7 +34,8 @@
         "build:live": "gulp build",
         "watch": "gulp watch",
         "start": "gulp",
-        "analyze": "gulp analyze"
+        "analyze": "gulp analyze",
+        "headless": "node ./src/core/index.js"
     },
     "repository": {
         "type": "git",

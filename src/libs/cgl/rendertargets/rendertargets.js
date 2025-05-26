@@ -1,3 +1,4 @@
+import { utils } from "cables";
 import slots_frag from "./slots.frag";
 import slots_vert from "./slots.vert";
 import slots_head_frag from "./slots_head.frag";
@@ -10,7 +11,7 @@ export class RenderTargets
         this._numBuffers = 4;
         this.asString = "";
         this._slots = ["Default", "Normal"];
-        this._name = "rendertargets" + CABLES.uuid();
+        this._name = "rendertargets" + utils.uuid();
         this.mod = new CGL.ShaderModifier(cgl, this._name);
 
         this.mod.onBind = (currentShader) =>

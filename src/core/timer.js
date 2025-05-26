@@ -195,6 +195,11 @@ class Timer extends Events
         this._paused = true;
         this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
+
+    static now()
+    {
+        return window.performance.now();
+    }
 }
 
 export { Timer };

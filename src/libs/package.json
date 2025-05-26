@@ -1,0 +1,11 @@
+{
+    "name": "libs",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "dependencies": {
+        "cables": "file:../../",
+        "cables-shared-client": "file:../../../shared/client/"
+    }
+}

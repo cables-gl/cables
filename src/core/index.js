@@ -1,4 +1,5 @@
 import { glMatrix, mat2, mat2d, mat3, mat4, quat, quat2, vec2, vec3, vec4 } from "gl-matrix";
+import { Events, Logger } from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
 import { Link } from "./core_link.js";
@@ -12,20 +13,9 @@ import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
-import { CGP } from "./cgp/index.js";
-import { CG } from "./cg/cg_constants.js";
-import { CGL } from "./cgl/index.js";
 import { AnimKey } from "./anim_key.js";
-import { CgContext } from "./cg/cg_state.js";
-import { CglContext } from "./cgl/cgl_state.js";
-import { Uniform } from "./cgl/cgl_shader_uniform.js";
-import { Shader } from "./cgl/cgl_shader.js";
-import { Geometry } from "./cg/cg_geom.js";
-import { Mesh } from "./cgl/cgl_mesh.js";
+
 import { PatchVariable } from "./core_variable.js";
-import { Texture } from "./cgl/cgl_texture.js";
-import { extendJs } from "./extendjs.js";
-import { FpsCounter } from "./cg/cg_fpscounter.js";
 
 window.glMatrix = glMatrix;
 window.mat2 = mat2;
@@ -39,11 +29,15 @@ window.vec2 = vec2;
 window.vec3 = vec3;
 window.vec4 = vec4;
 
-window.CABLES = window.CABLES || {};
+CABLES = CABLES || {};
+CABLES = {
+    ...CABLES,
+    ...CONSTANTS.PORT,
+    ...CONSTANTS.PACO,
+    ...CONSTANTS.ANIM,
+    ...CONSTANTS.OP
+};
 
-CABLES.CGL = CGL;
-CABLES.CG = CG;
-CABLES.CGP = CGP;
 CABLES.EMBED = EMBED;
 CABLES.Link = Link;
 CABLES.Port = Port;
@@ -83,21 +77,17 @@ CABLES.isNumeric = utils.isNumeric;
 CABLES.isArray = utils.isArray;
 CABLES.float32Concat = utils.float32Concat;
 CABLES.uniqueArray = utils.uniqueArray;
-CABLES.CGState = CgContext;
-CABLES.CgContext = CgContext;
 
 /** @type {Array<Op>} */
 CABLES.OPS = [];
+CABLES.utils = utils;
+CABLES.CONSTANTS = CONSTANTS;
 
-CABLES = Object.assign(CABLES,
-    CONSTANTS.PORT,
-    CONSTANTS.PACO,
-    CONSTANTS.ANIM,
-    CONSTANTS.OP
-);
+CABLES.SHARED = {};
+CABLES.SHARED.Events = Events;
+CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
-
-export { Port, Op, Patch, Link, Anim, AnimKey, CglContext, FpsCounter, Shader, Uniform, Geometry, Mesh, Timer, PatchVariable, Texture, extendJs };
+export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, WEBAUDIO, now };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

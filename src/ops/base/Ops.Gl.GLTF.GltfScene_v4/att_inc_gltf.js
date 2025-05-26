@@ -126,7 +126,7 @@ function loadAnims(gltf)
 {
     const uniqueAnimNames = {};
     maxTimeDict = {};
-    
+
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
