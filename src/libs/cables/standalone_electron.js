@@ -1,4 +1,4 @@
-const StandaloneElectron = class
+export class StandaloneElectron
 {
     constructor(op)
     {
@@ -9,6 +9,4 @@ const StandaloneElectron = class
             return CABLES.platform.frontendOptions.isElectron;
         };
     }
-};
-
-CABLES.StandaloneElectron = StandaloneElectron;
+}
