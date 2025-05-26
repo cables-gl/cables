@@ -1,5 +1,5 @@
 import { glMatrix, mat2, mat2d, mat3, mat4, quat, quat2, vec2, vec3, vec4 } from "gl-matrix";
-import * as CablesSharedClient from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
 import { Link } from "./core_link.js";
@@ -80,9 +80,12 @@ CABLES.uniqueArray = utils.uniqueArray;
 
 /** @type {Array<Op>} */
 CABLES.OPS = [];
-CABLES.CLIENT = CablesSharedClient;
 CABLES.utils = utils;
 CABLES.CONSTANTS = CONSTANTS;
+
+CABLES.SHARED = {};
+CABLES.SHARED.Events = Events;
+CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
 export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, WEBAUDIO, now };

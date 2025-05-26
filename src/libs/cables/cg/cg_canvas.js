@@ -1,4 +1,4 @@
-import { Logger } from "cables-shared-client/index.js";
+import { Logger } from "cables-shared-client";
 
 export class CgCanvas
 {
