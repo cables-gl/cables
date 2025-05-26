@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1574855237155
-        },
-        {
-            "message": "Ops.User.simod.Crossfade renamed to Ops.Math.Crossfade",
-            "author": "simod",
-            "date": 1574855293589
+            "date": 1574855237155,
+            "type": "new"
         }
     ],
     "authorName": "simod",
