@@ -1,4 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
+import { utils } from "cables";
 import { CgpContext } from "./cgp_state.js";
 
 /** @typedef GPUBufferOptions

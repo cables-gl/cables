@@ -25,29 +25,16 @@ class ShaderTextureMath
         if (this._fb) this._fb.delete();
         this._fb = null;
 
+        this._fb = new CGL.Framebuffer2(this._cgl, w, h, {
+            "isFloatingPointTexture": true,
+            "multisampling": false,
+            "wrap": CGL.Texture.WRAP_REPEAT,
+            "filter": CGL.Texture.FILTER_NEAREST,
+            "depth": true,
+            "multisamplingSamples": 0,
+            "clear": true
+        });
 
-        if (this._cgl.glVersion >= 2)
-        {
-            this._fb = new CGL.Framebuffer2(this._cgl, w, h,
-                {
-                    "isFloatingPointTexture": true,
-                    "multisampling": false,
-                    "wrap": CGL.Texture.WRAP_REPEAT,
-                    "filter": CGL.Texture.FILTER_NEAREST,
-                    "depth": true,
-                    "multisamplingSamples": 0,
-                    "clear": true
-                });
-        }
-        else
-        {
-            this._fb = new CGL.Framebuffer(this._cgl, w, h,
-                {
-                    "isFloatingPointTexture": true,
-                    "filter": CGL.Texture.FILTER_NEAREST,
-                    "wrap": CGL.Texture.WRAP_REPEAT
-                });
-        }
     }
 
     setSize(w, h)
@@ -119,6 +106,5 @@ class ShaderTextureMath
         }
     }
 }
-
 
 export { ShaderTextureMath };

@@ -13,7 +13,6 @@ import { ShaderModifier } from "./cgp_shadermodifier.js";
 import { BindingUniform } from "./binding/binding_uniform.js";
 import { BindingTexture } from "./binding/binding_texture.js";
 import { BindingSampler } from "./binding/binding_sampler.js";
-import { CGL } from "../cgl/index.js";
 
 const CGP = {
     "Context": CgpContext,
