@@ -3,9 +3,12 @@ import fs from "fs";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
 import ModuleScopePlugin from "@k88/module-scope-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceMap = false) =>
 {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+
     const getDirectories = function (arr)
     {
         const names = [];
@@ -34,9 +37,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         return names;
     };
 
-    const raiseFirstChar = (str) => { return str.charAt(0).toUpperCase() + str.substring(1); };
-    const flattenArray = (arr) => { return [].concat.apply([], arr); }; // .flat() only availible in Node 11+
-
     const createOutputEntryObjectsNamespace = (namespace) =>
     {
         const outputs = [];
@@ -55,13 +55,18 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const targetName = namespace === "cables" ? baseName : namespace + "_" + baseName;
             outputs.push(
                 {
-                    "entry": path.join(__dirname, "src", "libs", namespace, file),
+                    "entry": {
+                        "main": {
+                            "import": path.join(__dirname, "src", "libs", namespace, file),
+                            "filename": targetName + ".js"
+                        }
+                    },
                     "output": {
-                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
-                        "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
-                        "libraryExport": raiseFirstChar(namespace),
-                        "libraryTarget": "this"
+                        "library": {
+                            "name": namespace.toUpperCase(),
+                            "type": "assign-properties"
+                        }
                     }
                 }
             );
@@ -73,13 +78,18 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const targetName = namespace === "cables" ? subdir : namespace + "_" + subdir;
             outputs.push(
                 {
-                    "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
+                    "entry": {
+                        "main": {
+                            "import": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
+                            "filename": targetName + ".js"
+                        }
+                    },
                     "output": {
-                        "filename": targetName + ".js",
                         "path": path.join(__dirname, "build", "libs"),
-                        "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
-                        "libraryExport": raiseFirstChar(subdir),
-                        "libraryTarget": "this",
+                        "library": {
+                            "name": namespace.toUpperCase(),
+                            "type": "assign-properties"
+                        }
                     }
                 }
             );
@@ -103,10 +113,9 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             outputObjects.push(createOutputEntryObjectsNamespace(namespace, isLiveBuild));
         }
 
-        return flattenArray(outputObjects);
+        return outputObjects.flat();
     };
 
-    const __dirname = dirname(fileURLToPath(import.meta.url));
     const entryAndOutputObjects = readLibraryFiles(isLiveBuild);
     const defaultConfig = {
         "mode": "production",
@@ -137,6 +146,11 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
                 }
             ].filter(Boolean),
         },
+        "externals": {
+            "cables": "CABLES",
+            "cables-shared-client": "CABLES.SHARED",
+            "gl-matrix": "CABLES.GLMatrix"
+        },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
@@ -150,6 +164,13 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
     for (let i = 0; i < entryAndOutputObjects.length; i++)
     {
         const entryAndOutput = entryAndOutputObjects[i];
+        if (analyze)
+        {
+            if (!entryAndOutput.plugins) entryAndOutput.plugins = [];
+            const baseName = path.basename(entryAndOutput.entry.main.filename, ".js");
+            entryAndOutput.plugins.push(new BundleAnalyzerPlugin({ "analyzerMode": "static", "openAnalyzer": false, "reportTitle": baseName, "reportFilename": path.join(__dirname, "build", baseName + ".html") }));
+        }
+
         configs.push({ ...defaultConfig, ...entryAndOutput });
     }
 

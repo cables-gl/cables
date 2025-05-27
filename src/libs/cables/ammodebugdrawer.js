@@ -1,4 +1,3 @@
-
 const AmmoDebugConstants = {
     "NoDebug": 0,
     "DrawWireframe": 1,
@@ -19,8 +18,7 @@ const AmmoDebugConstants = {
     "MAX_DEBUG_DRAW_MODE": 0xffffffff
 };
 
-
-class AmmoDebugDrawer
+export class AmmoDebugDrawer
 {
     constructor(world, options)
     {
@@ -39,7 +37,6 @@ class AmmoDebugDrawer
         // }
 
         this.enabled = true;
-
 
         this.debugDrawer = new Ammo.DebugDrawer();
         this.debugDrawer.drawLine = this.drawLine.bind(this);
@@ -149,12 +146,10 @@ class AmmoDebugDrawer
         this._pointGeom.vertexColors = this.vertPointCols;
         this._pointMesh.setGeom(this._pointGeom);
 
-
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, this.verts, 3);
         // this._lineMesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", this.vertCols, 4);
     }
-
 
     // virtual void   drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color);
 
@@ -214,7 +209,6 @@ class AmmoDebugDrawer
         this.verts[idx + 0] = fromX;
         this.verts[idx + 1] = fromY;
         this.verts[idx + 2] = fromZ;
-
 
         // setXYZ(this.verticesArray, this.index, fromX, fromY, fromZ);
         // setXYZ(this.colorsArray, this.index++, r, g, b);
@@ -293,5 +287,3 @@ class AmmoDebugDrawer
         return this.debugDrawMode;
     }
 }
-
-CABLES.AmmoDebugDrawer = AmmoDebugDrawer;

@@ -350,7 +350,7 @@ export class Anim extends Events
         if (obj.tlActive) this.#tlActive = obj.tlActive;
         for (const ani in obj.keys)
         {
-            this.keys.push(new CABLES.AnimKey(obj.keys[ani], this));
+            this.keys.push(new AnimKey(obj.keys[ani], this));
         }
     }
 

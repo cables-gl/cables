@@ -1,4 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
+import { CGL } from "cables-corelibs";
 import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
@@ -6,7 +7,6 @@ import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
-import { Texture } from "./cgl/cgl_texture.js";
 
 /**
  * @typedef Translation
@@ -1242,7 +1242,7 @@ export class Op extends Events
                 "display": "texture"
             })
         );
-        if (v !== undefined) p.setRef(v || Texture.getEmptyTexture(this.patch.cgl));
+        if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
 
         p.ignoreValueSerialize = true;
         return p;

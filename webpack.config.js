@@ -24,16 +24,19 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
     return {
         "mode": isLiveBuild ? "production" : "development",
         "entry": [
+            path.join(__dirname, "src", "libs", "cables", "cg", "index.js"),
+            path.join(__dirname, "src", "libs", "cables", "cgl", "index.js"),
+            path.join(__dirname, "src", "libs", "cables", "cgp", "index.js"),
             path.join(__dirname, "src", "core", "index.js")
         ],
         "devtool": minify ? "source-map" : sourceMap,
         "output": {
             "path": path.join(__dirname, "build"),
             "filename": "cables.js",
-            "library": "CABLES",
-            "libraryExport": "default",
-            "libraryTarget": "var",
-            "globalObject": "window"
+            "library": {
+                "name": "CABLES",
+                "type": "assign-properties"
+            },
         },
         "optimization": {
             "concatenateModules": true,

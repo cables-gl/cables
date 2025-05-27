@@ -1,4 +1,6 @@
-const VarSetOpWrapper = class
+import { Port, utils } from "cables";
+
+export class VarSetOpWrapper
 {
     constructor(op, type, valuePort, varNamePort, triggerPort, nextPort)
     {
@@ -54,11 +56,11 @@ const VarSetOpWrapper = class
             this._updateErrorUi();
         };
 
-        if (type == "array") this._typeId = CABLES.Port.TYPE_ARRAY;
-        else if (type == "object") this._typeId = CABLES.Port.TYPE_OBJECT;
-        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
-        else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
-        else this._typeId = CABLES.Port.TYPE_VALUE;
+        if (type == "array") this._typeId = Port.TYPE_ARRAY;
+        else if (type == "object") this._typeId = Port.TYPE_OBJECT;
+        else if (type == "string") this._typeId = Port.TYPE_STRING;
+        else if (type == "texture") this._typeId = Port.TYPE_TEXTURE;
+        else this._typeId = Port.TYPE_VALUE;
 
     }
 
@@ -150,20 +152,20 @@ const VarSetOpWrapper = class
             this._var = this._op.patch.getVar(name);
         }
 
-        if (this._typeId == CABLES.Port.TYPE_VALUE || this._typeId == CABLES.Port.TYPE_STRING)
+        if (this._typeId == Port.TYPE_VALUE || this._typeId == Port.TYPE_STRING)
         {
             this._var.setValue(v);
         }
         else
-        if (this._typeId == CABLES.Port.TYPE_ARRAY)
+        if (this._typeId == Port.TYPE_ARRAY)
         {
             this._arr = [];
-            CABLES.copyArray(v, this._arr);
+            utils.copyArray(v, this._arr);
             this._var.setValue(this._arr);
         }
         else
         {
-            if (this._typeId == CABLES.Port.TYPE_OBJECT)
+            if (this._typeId == Port.TYPE_OBJECT)
             {
                 if (this._isTexture)
                     this._var.setValue(CGL.Texture.getEmptyTexture(this._op.patch.cgl));
@@ -178,9 +180,9 @@ const VarSetOpWrapper = class
 
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
-};
+}
 
-const VarGetOpWrapper = class
+export class VarGetOpWrapper
 {
     constructor(op, type, varnamePort, valueOutPort)
     {
@@ -192,11 +194,11 @@ const VarGetOpWrapper = class
         this._listenerId = null;
         this._typeId = 0;
 
-        if (type == "array") this._typeId = CABLES.Port.TYPE_ARRAY;
-        else if (type == "object") this._typeId = CABLES.Port.TYPE_OBJECT;
-        else if (type == "texture") this._typeId = CABLES.Port.TYPE_TEXTURE;
-        else if (type == "string") this._typeId = CABLES.Port.TYPE_STRING;
-        else this._typeId = CABLES.Port.TYPE_VALUE;
+        if (type == "array") this._typeId = Port.TYPE_ARRAY;
+        else if (type == "object") this._typeId = Port.TYPE_OBJECT;
+        else if (type == "texture") this._typeId = Port.TYPE_TEXTURE;
+        else if (type == "string") this._typeId = Port.TYPE_STRING;
+        else this._typeId = Port.TYPE_VALUE;
 
         if (valueOutPort) this._isTexture = valueOutPort.uiAttribs.objType === "texture";
 
@@ -266,10 +268,10 @@ const VarGetOpWrapper = class
     _setValueOut(v)
     {
         if (this._valueOutPort)
-            if (this._typeId == CABLES.Port.TYPE_NUMBER || this._typeId == CABLES.Port.TYPE_STRING)
+            if (this._typeId == Port.TYPE_NUMBER || this._typeId == Port.TYPE_STRING)
                 this._valueOutPort.set(v);
             else
-            if (this._typeId == CABLES.Port.TYPE_ARRAY || this._typeId == CABLES.Port.TYPE_OBJECT || this._isTexture)
+            if (this._typeId == Port.TYPE_ARRAY || this._typeId == Port.TYPE_OBJECT || this._isTexture)
                 this._valueOutPort.setRef(v);
             else
                 console.log("unkown type?"); // remove type checks when sure
@@ -306,7 +308,4 @@ const VarGetOpWrapper = class
         this._op.patch.emitEvent("opVariableNameChanged", this._op, this._varnamePort.get());
     }
 
-};
-
-CABLES.VarSetOpWrapper = VarSetOpWrapper;
-CABLES.VarGetOpWrapper = VarGetOpWrapper;
+}

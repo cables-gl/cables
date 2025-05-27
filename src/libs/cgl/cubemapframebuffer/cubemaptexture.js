@@ -1,10 +1,12 @@
+import { utils } from "cables";
+
 const DEFAULT_TEXTURE_SIZE = 8;
 
 export class CubemapTexture
 {
     constructor(cgl, options)
     {
-        this.id = CABLES.uuid();
+        this.id = utils.uuid();
         this.name = options.name || "unknown cubemap texture";
         this._cgl = cgl;
         this.textureType = CGL.Texture.TYPE_DEFAULT;

@@ -1,3 +1,5 @@
+import { CGP } from "../../cables/cgp/index.js";
+
 export class WebGpuOp
 {
     constructor(op)
@@ -7,14 +9,13 @@ export class WebGpuOp
 
         if (!op.patch.cgp)
         {
-            op.patch.cgp = new CABLES.CGP.Context(op.patch);
+            op.patch.cgp = new CGP.Context(op.patch);
         }
 
         this.checkSupport();
     }
 
     /**
-     * @param {Op} op
      * @returns {boolean}
      */
     checkSupport()

@@ -1,4 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
+import { CGL } from "cables-corelibs";
 import { ajax, ajaxSync, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
@@ -6,7 +7,6 @@ import { Profiler } from "./core_profiler.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
-import { CglContext } from "./cgl/cgl_state.js";
 import { Timer } from "./timer.js";
 
 /** @global CABLES.OPS  */
@@ -158,7 +158,7 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new CglContext(this);
+        this.cgl = new CGL.Context(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};

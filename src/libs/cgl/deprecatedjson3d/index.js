@@ -1,5 +1,7 @@
 // deprecated json3d loader geomgetry helper
 
+import { Geometry } from "../../cables/cg/index.js";
+
 const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 // Use a lookup table to find the index.
@@ -65,11 +67,10 @@ function b64decTypedArray(base64)
     return arraybuffer;
 }
 
-
 // TODO: not needed anymore ?! move to deprecated ops?
 CABLES.CG.Geometry.json2geom = function (jsonMesh)
 {
-    const geom = new CABLES.CG.Geometry("jsonMeshGeom");
+    const geom = new Geometry("jsonMeshGeom");
     geom.verticesIndices = [];
 
     geom.vertices = jsonMesh.vertices || [];
@@ -102,4 +103,3 @@ CABLES.CG.Geometry.json2geom = function (jsonMesh)
 
     return geom;
 };
-

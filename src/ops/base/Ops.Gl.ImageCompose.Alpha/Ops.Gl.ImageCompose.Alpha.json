@@ -16,6 +16,12 @@
             {
                 "type": 0,
                 "name": "Method index",
+                "values": [
+                    "Set",
+                    "Add",
+                    "Sub",
+                    "Mul"
+                ],
                 "subType": "integer"
             },
             {
@@ -51,10 +57,10 @@
     ],
     "summary": "Modify current alpha/opacity ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "y6f1ei"
+    "exampleProjectId": "y6f1ei",
+    "license": "MIT"
 }

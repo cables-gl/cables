@@ -1,6 +1,7 @@
 import { Events } from "cables-shared-client";
+import { Anim, now } from "cables";
 
-const Plan = class extends Events
+export class Plan extends Events
 {
     constructor(op)
     {
@@ -13,7 +14,7 @@ const Plan = class extends Events
         this.durationOut = 0.5;
 
         this._anims = {};
-        this._anims.__level = new CABLES.Anim();
+        this._anims.__level = new Anim();
 
         this._data = null;
         this._currentPlaceName = "";
@@ -47,14 +48,14 @@ const Plan = class extends Events
 
     getProgress(name)
     {
-        this._anims[name] = this._anims[name] || new CABLES.Anim();
-        return this._anims[name].getValue(CABLES.now() / 1000);
+        this._anims[name] = this._anims[name] || new Anim();
+        return this._anims[name].getValue(now() / 1000);
     }
 
     _animPlace(name, from, to)
     {
         let dur = this.durationIn;
-        this._anims[name] = this._anims[name] || new CABLES.Anim();
+        this._anims[name] = this._anims[name] || new Anim();
 
         if (to == 0)
         {
@@ -68,8 +69,8 @@ const Plan = class extends Events
         }
 
         this._anims[name].clear();
-        this._anims[name].setValue(CABLES.now() / 1000, from);
-        this._anims[name].setValue(CABLES.now() / 1000 + dur, to);
+        this._anims[name].setValue(now() / 1000, from);
+        this._anims[name].setValue(now() / 1000 + dur, to);
     }
 
     setCurrentPlaceName(name)
@@ -81,7 +82,7 @@ const Plan = class extends Events
 
         this._currentPlaceName = name;
 
-        this._animPlace("__level", this._anims.__level.getValue(CABLES.now() / 1000), this.getCurrentPlace().level);
+        this._animPlace("__level", this._anims.__level.getValue(now() / 1000), this.getCurrentPlace().level);
         this._animPlace("__levelAnim" + this.getCurrentPlace().level, 0, 1);
 
         this.emitEvent("stateChanged");
@@ -179,6 +180,4 @@ const Plan = class extends Events
     {
         if (patch.plans && patch.plans[name]) return patch.plans[name];
     }
-};
-
-CABLES.Plan = Plan;
+}

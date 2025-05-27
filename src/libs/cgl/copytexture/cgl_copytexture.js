@@ -1,3 +1,5 @@
+import { CGL } from "cables";
+
 class CopyTexture
 {
     constructor(cgl, name, options)
@@ -65,7 +67,7 @@ class CopyTexture
         new CGL.Uniform(this.bgShader, "t", "tex2", 2);
         new CGL.Uniform(this.bgShader, "t", "tex3", 3);
 
-        this.mesh = CABLES.CGL.MESHES.getSimpleRect(this.cgl, "texEffectRect");
+        this.mesh = CGL.MESHES.getSimpleRect(this.cgl, "texEffectRect");
     }
 
     setSize(w, h)

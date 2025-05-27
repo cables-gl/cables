@@ -166,91 +166,87 @@ export class Link extends Events
 
         return obj;
     }
+
+    /**
+     * return a text message with human readable reason if ports can not be linked, or can be
+     *
+     * @param {Port} p1 port1
+     * @param {Port} p2 port2
+     */
+    static canLinkText(p1, p2)
+    {
+        if (p1.direction == p2.direction)
+        {
+            let txt = "(out)";
+            if (p2.direction == Port.DIR_IN) txt = "(in)";
+            return "can not link: same direction " + txt;
+        }
+        if (p1.op == p2.op) return "can not link: same op";
+        if (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)
+        {
+            if (p1.type != p2.type) return "can not link: different type";
+        }
+
+        if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
+        {
+            if (p1.uiAttribs.objType && p2.uiAttribs.objType)
+                if (p1.uiAttribs.objType != p2.uiAttribs.objType)
+                    return "incompatible objects";
+        }
+
+        if (!p1) return "can not link: port 1 invalid";
+        if (!p2) return "can not link: port 2 invalid";
+
+        if (p1.direction == Port.DIR_IN && p1.isAnimated()) return "can not link: is animated";
+        if (p2.direction == Port.DIR_IN && p2.isAnimated()) return "can not link: is animated";
+
+        if (p1.isLinkedTo(p2)) return "ports already linked";
+
+        if ((p1.canLink && !p1.canLink(p2)) || (p2.canLink && !p2.canLink(p1))) return "Incompatible";
+
+        return "can link";
+    }
+
+    /**
+     * return true if ports can be linked
+     *
+     * @param {Port} p1 port1
+     * @param {Port} p2 port2
+     * @returns {Boolean}
+     */
+    static canLink(p1, p2)
+    {
+        if (!p1) return false;
+        if (!p2) return false;
+        if (p1.direction == Port.DIR_IN && p1.isAnimated()) return false;
+        if (p2.direction == Port.DIR_IN && p2.isAnimated()) return false;
+
+        if (p1.isHidden() || p2.isHidden()) return false;
+
+        if (p1.isLinkedTo(p2)) return false;
+
+        if (p1.direction == p2.direction) return false;
+
+        if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
+        {
+            if (p1.uiAttribs.objType && p2.uiAttribs.objType)
+            {
+                if (p1.uiAttribs.objType.indexOf("sg_") == 0 && p2.uiAttribs.objType.indexOf("sg_") == 0) return true;
+                if (p1.uiAttribs.objType != p2.uiAttribs.objType)
+                    return false;
+            }
+        }
+
+        if (p1.type != p2.type && (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)) return false;
+        if (p1.type == Port.TYPE_DYNAMIC || p2.type == Port.TYPE_DYNAMIC) return true;
+
+        if (p1.op == p2.op) return false;
+
+        if (p1.canLink && !p1.canLink(p2)) return false;
+        if (p2.canLink && !p2.canLink(p1)) return false;
+
+        return true;
+    }
 }
 
 // --------------------------------------------
-
-/**
- * @function canLinkText
- * @memberof Link
- * @instance
- * @description return a text message with human readable reason if ports can not be linked, or can be
- * @param {Port} p1 port1
- * @param {Port} p2 port2
- */
-Link.canLinkText = function (p1, p2)
-{
-    if (p1.direction == p2.direction)
-    {
-        let txt = "(out)";
-        if (p2.direction == Port.DIR_IN) txt = "(in)";
-        return "can not link: same direction " + txt;
-    }
-    if (p1.op == p2.op) return "can not link: same op";
-    if (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)
-    {
-        if (p1.type != p2.type) return "can not link: different type";
-    }
-
-    if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
-    {
-        if (p1.uiAttribs.objType && p2.uiAttribs.objType)
-            if (p1.uiAttribs.objType != p2.uiAttribs.objType)
-                return "incompatible objects";
-    }
-
-    if (!p1) return "can not link: port 1 invalid";
-    if (!p2) return "can not link: port 2 invalid";
-
-    if (p1.direction == Port.DIR_IN && p1.isAnimated()) return "can not link: is animated";
-    if (p2.direction == Port.DIR_IN && p2.isAnimated()) return "can not link: is animated";
-
-    if (p1.isLinkedTo(p2)) return "ports already linked";
-
-    if ((p1.canLink && !p1.canLink(p2)) || (p2.canLink && !p2.canLink(p1))) return "Incompatible";
-
-    return "can link";
-};
-
-/**
- * @function canLink
- * @memberof Link
- * @instance
- * @description return true if ports can be linked
- * @param {Port} p1 port1
- * @param {Port} p2 port2
- * @returns {Boolean}
- */
-Link.canLink = function (p1, p2)
-{
-    if (!p1) return false;
-    if (!p2) return false;
-    if (p1.direction == Port.DIR_IN && p1.isAnimated()) return false;
-    if (p2.direction == Port.DIR_IN && p2.isAnimated()) return false;
-
-    if (p1.isHidden() || p2.isHidden()) return false;
-
-    if (p1.isLinkedTo(p2)) return false;
-
-    if (p1.direction == p2.direction) return false;
-
-    if (CABLES.UI && p1.type == Port.TYPE_OBJECT && p2.type == Port.TYPE_OBJECT)
-    {
-        if (p1.uiAttribs.objType && p2.uiAttribs.objType)
-        {
-            if (p1.uiAttribs.objType.indexOf("sg_") == 0 && p2.uiAttribs.objType.indexOf("sg_") == 0) return true;
-            if (p1.uiAttribs.objType != p2.uiAttribs.objType)
-                return false;
-        }
-    }
-
-    if (p1.type != p2.type && (p1.type != Port.TYPE_DYNAMIC && p2.type != Port.TYPE_DYNAMIC)) return false;
-    if (p1.type == Port.TYPE_DYNAMIC || p2.type == Port.TYPE_DYNAMIC) return true;
-
-    if (p1.op == p2.op) return false;
-
-    if (p1.canLink && !p1.canLink(p2)) return false;
-    if (p2.canLink && !p2.canLink(p1)) return false;
-
-    return true;
-};

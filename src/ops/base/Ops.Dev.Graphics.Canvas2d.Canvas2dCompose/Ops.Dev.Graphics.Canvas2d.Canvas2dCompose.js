@@ -23,7 +23,6 @@ inHeight.onChange = () =>
 exec.onTriggered = () =>
 {
     op.patch.tempData.canvasCompose = { "canvas": canv, "ctx": ctx };
-    console.log(ctx);
     if (inClear.get())
         ctx.clearRect(0, 0, inWidth.get(), inHeight.get());
     ctx.fillStyle = "grey";
