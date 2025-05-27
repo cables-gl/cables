@@ -22,7 +22,7 @@ export class WebAudio
 
     constructor()
     {
-        this.toneJsInitialized = "bla";
+        this.toneJsInitialized = false;
     }
 
     /**
