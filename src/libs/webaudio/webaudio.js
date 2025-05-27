@@ -62,7 +62,7 @@ export class WebAudio
      * It most cases you should use `createAudioContext`, which just returns the audio context
      * when it has been created already.
      */
-    getAudioContext()
+    _getAudioContext()
     {
         return window.audioContext;
     }
@@ -161,50 +161,6 @@ export class WebAudio
     }
 
     /**
-     * Sometimes it is necessary to replace a node of a port, if so all
-     * connections to this node must be disconnected and connections to the new
-     * node must be made.
-     * Can be used for both Audio ports as well as AudioParam ports
-     * if used with an AudioParam pass e.g. `synth.frequency` as newNode
-     * @param {Port} port - The port where the audio node needs to be replaced
-     * @param oldNode
-     * @param newNode
-     */
-    replaceNodeInPort(port, oldNode, newNode)
-    {
-        const connectedNode = port.webAudio.previousAudioInNode;
-        // check if connected
-        if (connectedNode && connectedNode.disconnect)
-        {
-            try
-            {
-                connectedNode.disconnect(oldNode);
-            }
-            catch (e)
-            {
-                if (e.printStackTrace)
-                {
-                    e.printStackTrace();
-                }
-                throw new Error("replaceNodeInPort: Could not disconnect old audio node. " + e.name + " " + e.message);
-            }
-            port.webAudio.audioNode = newNode;
-            try
-            {
-                connectedNode.connect(newNode);
-            }
-            catch (e)
-            {
-                if (e.printStackTrace)
-                {
-                    e.printStackTrace();
-                }
-                throw new Error("replaceNodeInPort: Could not connect to new node. " + e.name + " " + e.message);
-            }
-        }
-    }
-
-    /**
      * Creates an audio out port which takes care of (dis-)connecting on it’s own
      * @param {Op} op - The op to create an audio out port for
      * @param {string} portName - The name of the port to be created
@@ -231,6 +187,8 @@ export class WebAudio
      * The port accepts other audio nodes as signals as well as values (numbers)
      * When the port is disconnected it will disconnect the previous connected audio node
      * from the op's audio node and restore the number value set before.
+     *
+     * @deprecated
      * @param {Op} op - The operator to create an audio param input port for
      * @param {string} portName - The name of the port to create
      * @param audioNode
@@ -263,27 +221,11 @@ export class WebAudio
 
         op.webAudio.audioInPorts[portName] = port;
 
-        /*
-         * port.onLinkChanged = function() {
-         *   op.log("onLinkChanged");
-         *   if(port.isLinked()) {
-         *
-         *       if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_) { // value
-         *
-         *       } else if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT) { // object
-         *
-         *       }
-         *   } else { // unlinked
-         *
-         *   }
-         * };
-         */
-
-        port.onChange = function ()
+        port.onChange = () =>
         {
             const audioInNode = port.get();
             const node = port.webAudio.audioNode;
-            const audioCtx = WEBAUDIO.getAudioContext();
+            const audioCtx = this._getAudioContext();
 
             if (audioInNode != undefined)
             {
@@ -431,7 +373,7 @@ export class WebAudio
      */
     loadAudioFile(patch, url, onFinished, onError, loadingTask)
     {
-        const audioContext = WEBAUDIO.createAudioContext();
+        const audioContext = this.createAudioContext();
 
         if (!audioContext) onError(new Error("No Audiocontext"));
 
@@ -463,6 +405,7 @@ export class WebAudio
 
     /**
      * Checks if the passed time is a valid time to be used in any of the Tone.js ops.
+     * @deprecated
      * @param {(string|number)} t - The time to check
      * @returns {boolean} - True if time is valid, false if not
      */
@@ -481,6 +424,7 @@ export class WebAudio
 
     /**
      * Checks if the passed note is a valid note to be used with Tone.js
+     * @deprecated
      * @param {string} note - The note to be checked, e.g. `"C4"`
      * @returns {boolean} - True if the note is a valid note, false otherwise
      */
