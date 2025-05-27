@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { mat4, vec2, vec3 } from "gl-matrix";
+import { vec2, vec3 } from "gl-matrix";
 import { utils } from "cables";
 import { BoundingBox } from "./cg_boundingbox.js";
 

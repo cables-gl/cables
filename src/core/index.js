@@ -1,4 +1,4 @@
-import { glMatrix, mat2, mat2d, mat3, mat4, quat, quat2, vec2, vec3, vec4 } from "gl-matrix";
+import * as GLMatrix from "gl-matrix";
 import { Events, Logger } from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
@@ -16,18 +16,6 @@ import { CONSTANTS } from "./constants.js";
 import { AnimKey } from "./anim_key.js";
 
 import { PatchVariable } from "./core_variable.js";
-
-window.glMatrix = glMatrix;
-window.mat2 = mat2;
-window.mat2d = mat2d;
-window.mat3 = mat3;
-window.mat4 = mat4;
-window.quat = quat;
-window.quat2 = quat2;
-window.vec2 = vec2;
-
-window.vec3 = vec3;
-window.vec4 = vec4;
 
 CABLES = CABLES || {};
 CABLES = {
@@ -83,6 +71,7 @@ CABLES.OPS = [];
 CABLES.utils = utils;
 CABLES.CONSTANTS = CONSTANTS;
 
+CABLES.GLMatrix = GLMatrix;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;

@@ -1,5 +1,5 @@
 import { Events } from "cables-shared-client";
-import { Timer, Anim, now } from "cables";
+import { Anim, now } from "cables";
 
 export class Plan extends Events
 {
