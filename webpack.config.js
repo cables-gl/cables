@@ -24,9 +24,9 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
     return {
         "mode": isLiveBuild ? "production" : "development",
         "entry": [
-            path.join(__dirname, "src", "libs", "cables", "cg", "index.js"),
-            path.join(__dirname, "src", "libs", "cables", "cgl", "index.js"),
-            path.join(__dirname, "src", "libs", "cables", "cgp", "index.js"),
+            path.join(__dirname, "src", "libs", "cg", "index.js"),
+            path.join(__dirname, "src", "libs", "cgl", "index.js"),
+            path.join(__dirname, "src", "libs", "cgp", "index.js"),
             path.join(__dirname, "src", "core", "index.js")
         ],
         "devtool": minify ? "source-map" : sourceMap,

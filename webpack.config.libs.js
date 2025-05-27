@@ -9,7 +9,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
 {
     const __dirname = dirname(fileURLToPath(import.meta.url));
 
-    const getDirectories = function (arr)
+    const getDirectories = function (arr, namespace)
     {
         const names = [];
         for (let i = 0; i < arr.length; i++)
@@ -17,7 +17,14 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const dirent = arr[i];
             if (dirent.isDirectory() && !dirent.name.startsWith("."))
             {
-                names.push(dirent.name);
+                const hasIndexJs = fs.existsSync(path.join(dirent.path, dirent.name, "index.js"));
+                const hasNamespaceJs = fs.existsSync(path.join(dirent.path, dirent.name, dirent.name + ".js"));
+                const isSubDir = dirent.path.endsWith(namespace);
+                const isCoreLib = hasIndexJs || (hasNamespaceJs && !isSubDir);
+                if (isCoreLib)
+                {
+                    names.push(dirent.name);
+                }
             }
         }
         return names;
@@ -44,15 +51,16 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             path.join(__dirname, "src", "libs", namespace),
             { "withFileTypes": true }
         );
+        console.log("DIRCONTENT", namespace);
 
         const namespaceFiles = getJsFiles(dirContent);
-        const namespaceSubDirectories = getDirectories(dirContent);
+        const namespaceSubDirectories = getDirectories(dirContent, namespace);
 
         for (let i = 0; i < namespaceFiles.length; i++)
         {
             const file = namespaceFiles[i];
             const baseName = file.split(".")[0];
-            const targetName = namespace === "cables" ? baseName : namespace + "_" + baseName;
+            const targetName = namespace === "cables" ? baseName : namespace;
             outputs.push(
                 {
                     "entry": {
@@ -71,6 +79,8 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
                 }
             );
         }
+
+        console.log("SUBDIRS", namespace, namespaceFiles, namespaceSubDirectories);
 
         for (let i = 0; i < namespaceSubDirectories.length; i++)
         {
