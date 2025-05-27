@@ -136,7 +136,7 @@ function _core_libs(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze, config.sourceMap),
+        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, false, config.sourceMap),
             (err, multiStats) =>
             {
                 if (err) throw err;

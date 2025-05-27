@@ -358,6 +358,9 @@ export const filename = function (url)
     return name || "";
 };
 
+/**
+ * @deprecated
+ */
 export const ajaxSync = function (url, cb, method, post, contenttype)
 {
     request({

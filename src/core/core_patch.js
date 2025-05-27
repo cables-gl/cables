@@ -834,6 +834,7 @@ export class Patch extends Events
     }
 
     /**
+     * @deprecated
      * @param {String} which
      */
     loadLib(which)
