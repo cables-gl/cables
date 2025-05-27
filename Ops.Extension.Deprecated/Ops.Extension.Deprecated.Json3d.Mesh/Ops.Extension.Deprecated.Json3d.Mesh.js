@@ -46,7 +46,8 @@ function reload()
 
         currentIndex = indx;
 
-        if (CABLES.isNumeric(indx))
+        const isNumeric = CABLES.isNumeric || CABLES.UTILS.isNumeric;
+        if (isNumeric(indx))
         {
             if (indx < 0 || indx >= cgl.frameStore.currentScene.getValue().meshes.length)
             {

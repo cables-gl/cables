@@ -32,7 +32,8 @@ function exec()
         for (let i = 0; i < arr.length; i++)
         {
             arr[i] = Number(arr[i]);
-            if (!CABLES.isNumeric(arr[i]))
+            const isNumeric = CABLES.isNumeric || CABLES.UTILS.isNumeric;
+            if (!isNumeric(arr[i]))
             {
                 hasStrings = true;
             }
