@@ -537,3 +537,25 @@ export function uniqueArray(arr)
     }
     return a;
 }
+
+const htmlEscapes = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;",
+};
+
+/** Used to match HTML entities and HTML characters. */
+const reUnescapedHtml = /[&<>"']/g;
+const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+
+// from https://github.com/lodash/lodash/blob/master/escape.js
+/*  eslint-disable */
+export const escapeHTML = function(string)
+{
+    return string && reHasUnescapedHtml.test(string) ?
+        string.replace(reUnescapedHtml, function(chr) { return htmlEscapes[chr]; })
+        : string || "";
+}
+/* eslint-enable */

@@ -27,37 +27,35 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
  * @param {MouseEvent} event
  * @return {Number} normalized delta
  */
-export const isWindows = window.navigator.userAgent.includes("Windows");
-const getWheelDelta_ = function (event)
-{
-    let normalized;
-    if (event.wheelDelta)
-    {
-        // chrome
-        normalized = (event.wheelDelta % 120) - 0 == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
-        normalized *= -1.5;
-        if (isWindows) normalized *= 2;
-    }
-    else
-    {
-        // firefox
-        let d = event.deltaY;
-        if (event.shiftKey) d = event.deltaX;
-        const rawAmmount = d || event.detail;
-        normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
-        normalized *= -3;
-    }
+// export const isWindows = window.navigator.userAgent.includes("Windows");
+// const getWheelDelta_ = function (event)
+// {
+//     let normalized;
+//     if (event.wheelDelta)
+//     {
+//         // chrome
+//         normalized = (event.wheelDelta % 120) - 0 == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
+//         normalized *= -1.5;
+//         if (isWindows) normalized *= 2;
+//     }
+//     else
+//     {
+//         // firefox
+//         let d = event.deltaY;
+//         if (event.shiftKey) d = event.deltaX;
+//         const rawAmmount = d || event.detail;
+//         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
+//         normalized *= -3;
+//     }
 
-    if (normalized > 20) normalized = 20;
-    if (normalized < -20) normalized = -20;
+//     if (normalized > 20) normalized = 20;
+//     if (normalized < -20) normalized = -20;
 
-    return normalized;
-};
+//     return normalized;
+// };
 
-export const getWheelSpeed = getWheelDelta_;
-export const getWheelDelta = getWheelDelta_;
-
-// from https://github.com/lodash/lodash/blob/master/escape.js
+// export const getWheelSpeed = getWheelDelta_;
+// export const getWheelDelta = getWheelDelta_;
 
 const htmlEscapes = {
     "&": "&amp;",
@@ -67,6 +65,7 @@ const htmlEscapes = {
     "'": "&#39;",
 };
 
+// from https://github.com/lodash/lodash/blob/master/escape.js
 /** Used to match HTML entities and HTML characters. */
 const reUnescapedHtml = /[&<>"']/g;
 const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
