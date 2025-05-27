@@ -56,25 +56,3 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
 
 // export const getWheelSpeed = getWheelDelta_;
 // export const getWheelDelta = getWheelDelta_;
-
-const htmlEscapes = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "\"": "&quot;",
-    "'": "&#39;",
-};
-
-// from https://github.com/lodash/lodash/blob/master/escape.js
-/** Used to match HTML entities and HTML characters. */
-const reUnescapedHtml = /[&<>"']/g;
-const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
-
-/*  eslint-disable */
-export const escapeHTML = function(string)
-{
-    return string && reHasUnescapedHtml.test(string) ?
-        string.replace(reUnescapedHtml, function(chr) { return htmlEscapes[chr]; })
-        : string || "";
-}
-/* eslint-enable */
