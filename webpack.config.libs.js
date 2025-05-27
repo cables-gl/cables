@@ -51,7 +51,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             path.join(__dirname, "src", "libs", namespace),
             { "withFileTypes": true }
         );
-        console.log("DIRCONTENT", namespace);
 
         const namespaceFiles = getJsFiles(dirContent);
         const namespaceSubDirectories = getDirectories(dirContent, namespace);
@@ -79,8 +78,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
                 }
             );
         }
-
-        console.log("SUBDIRS", namespace, namespaceFiles, namespaceSubDirectories);
 
         for (let i = 0; i < namespaceSubDirectories.length; i++)
         {

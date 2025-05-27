@@ -27,6 +27,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             path.join(__dirname, "src", "libs", "cg", "index.js"),
             path.join(__dirname, "src", "libs", "cgl", "index.js"),
             path.join(__dirname, "src", "libs", "cgp", "index.js"),
+            path.join(__dirname, "src", "libs", "webaudio", "webaudio.js"),
             path.join(__dirname, "src", "core", "index.js")
         ],
         "devtool": minify ? "source-map" : sourceMap,

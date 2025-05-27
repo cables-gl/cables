@@ -499,7 +499,6 @@ export class WebAudio
 }
 
 const WEBAUDIO = new WebAudio();
-console.log("HERE", WEBAUDIO);
 
 window.CABLES = window.CABLES || {};
 window.CABLES.WEBAUDIO = WEBAUDIO;
