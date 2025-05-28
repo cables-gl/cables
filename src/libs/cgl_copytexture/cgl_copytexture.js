@@ -1,6 +1,6 @@
 import { CGL } from "cables";
 
-class CopyTexture
+export class CopyTexture
 {
     constructor(cgl, name, options)
     {
@@ -139,5 +139,3 @@ class CopyTexture
         if (this.mesh) this.mesh.dispose();
     }
 }
-
-export { CopyTexture };

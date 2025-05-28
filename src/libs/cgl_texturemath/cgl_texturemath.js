@@ -1,4 +1,4 @@
-class ShaderTextureMath
+export class ShaderTextureMath
 {
     constructor(cgl, name, options)
     {
@@ -106,5 +106,3 @@ class ShaderTextureMath
         }
     }
 }
-
-export { ShaderTextureMath };

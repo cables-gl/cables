@@ -1,6 +1,6 @@
 import { Logger } from "cables-shared-client";
 
-class PixelReader
+export class PixelReader
 {
     constructor()
     {
@@ -150,5 +150,3 @@ class PixelReader
         return true;
     }
 }
-
-export { PixelReader };
