@@ -46,7 +46,6 @@ export class AnimKey
 
     setUiAttribs(o)
     {
-        console.log("text", o);
         for (const i in o)
         {
             this.uiAttribs[i] = o[i];

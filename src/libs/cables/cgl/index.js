@@ -6,7 +6,7 @@ import { ShaderLibMods } from "./cgl_shader_lib.js";
 import { UniColorShader } from "./cgl_unicolorshader.js";
 import { Shader } from "./cgl_shader.js";
 import { MESHES } from "./cgl_simplerect.js";
-import { isWindows, getWheelSpeed, getWheelDelta, onLoadingAssetsFinished } from "./cgl_utils.js";
+import { getWheelSpeed, getWheelDelta, onLoadingAssetsFinished } from "./cgl_utils.js";
 import { Texture } from "./cgl_texture.js";
 import { TextureEffect } from "./cgl_textureeffect.js";
 import { CONSTANTS } from "./constants.js";
@@ -28,12 +28,11 @@ const CGL = {
     "Shader": Shader,
     "Uniform": Uniform,
     "MESHES": MESHES,
+    "getWheelSpeed": getWheelSpeed,
+    "getWheelDelta": getWheelDelta,
     "Context": CglContext,
     "Texture": Texture,
     "TextureEffect": TextureEffect,
-    "isWindows": isWindows,
-    "getWheelSpeed": getWheelSpeed,
-    "getWheelDelta": getWheelDelta,
     "onLoadingAssetsFinished": onLoadingAssetsFinished,
     "ProfileData": ProfileData,
     "UniColorShader": UniColorShader,
