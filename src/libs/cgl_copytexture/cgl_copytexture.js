@@ -1,4 +1,4 @@
-import { CGL } from "../../cables/cgl/index.js";
+import { CGL } from "../cgl/index.js";
 
 export class CopyTexture
 {
