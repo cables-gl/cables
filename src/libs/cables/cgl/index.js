@@ -43,7 +43,7 @@ const CGL = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGL = CGL;
-window.CGL = CGL;
+window.CABLES.CGL = window.CABLES.CGL || CGL;
+window.CGL = window.CGL || CGL;
 
 export { CGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
