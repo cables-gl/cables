@@ -488,7 +488,7 @@ export class Anim extends Events
             }
             else if (this.loop == Anim.LOOP_OFFSET)
             {
-                valAdd = this.lastKey.value * currentLoop;
+                valAdd = (this.lastKey.value - this.keys[0].value) * Math.floor(currentLoop);
             }
 
             time += this.firstKey.time;
