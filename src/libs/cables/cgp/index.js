@@ -25,8 +25,8 @@ const CGP = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGP = CGP;
-window.CGP = CGP;
+window.CABLES.CGP = window.CABLES.CGP || CGP;
+window.CGP = window.CGP || CGP;
 
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;

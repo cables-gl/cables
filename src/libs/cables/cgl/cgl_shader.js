@@ -1,6 +1,6 @@
 import { Logger } from "cables-shared-client";
 import { mat4 } from "gl-matrix";
-import { now, Op, Timer } from "cables";
+import { now, Op } from "cables";
 import { ShaderLibMods } from "./cgl_shader_lib.js";
 import { MESH } from "./cgl_mesh.js";
 import { CONSTANTS, nl } from "./constants.js";
