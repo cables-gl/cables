@@ -55,13 +55,10 @@ CABLES.copyArray = utils.copyArray;
 CABLES.basename = utils.basename;
 CABLES.logStack = utils.logStack;
 CABLES.filename = utils.filename;
-CABLES.ajaxSync = utils.ajaxSync;
 CABLES.ajax = utils.ajax;
 CABLES.request = utils.request;
 CABLES.logErrorConsole = utils.logErrorConsole;
 CABLES.isNumeric = utils.isNumeric;
-CABLES.isArray = utils.isArray;
-CABLES.float32Concat = utils.float32Concat;
 CABLES.uniqueArray = utils.uniqueArray;
 
 /** @type {Array<Op>} */

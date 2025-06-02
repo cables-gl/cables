@@ -1,6 +1,6 @@
 import { Events, Logger } from "cables-shared-client";
 import { CGL } from "cables-corelibs";
-import { ajax, ajaxSync, prefixedHash, cleanJson, shortId, map } from "./utils.js";
+import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
