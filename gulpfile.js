@@ -75,9 +75,10 @@ function _watch(done)
     const buildWatcher = new BuildWatcher(gulp, config, "core");
     const watchOptions = { "ignored": (file) => { return file.includes("/node_modules/"); } };
     buildWatcher.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
-    buildWatcher.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
     buildWatcher.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
-    if (config.watchOps) buildWatcher.notify(["src/ops/**/*.js", "src/ops/**/att_*"], watchOptions, "opchange");
+    if (config.watchOps) buildWatcher.notify(["src/ops/**/*.js"], watchOptions, "opchange");
+    if (config.watchOps) buildWatcher.notify(["src/ops/**/att_*"], watchOptions, "attachmentchange");
+
     done();
 }
 
