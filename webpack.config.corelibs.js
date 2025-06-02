@@ -58,7 +58,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
     const createOutputEntryObjectsNamespace = (namespace) =>
     {
         const outputs = [];
-        const dirContent = fs.readdirSync(path.join(__dirname, "src", "libs", namespace), { "withFileTypes": true });
+        const dirContent = fs.readdirSync(path.join(__dirname, "src", "corelibs", namespace), { "withFileTypes": true });
 
         const namespaceEntryFile = getEntryFile(dirContent, namespace);
         const namespaceParts = namespace.split("_");
@@ -75,18 +75,16 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             });
         }
 
-        console.log("NAMESPACE", namespace, namespaceEntryFile, namespaceParts, libraryNamespace);
-
         outputs.push(
             {
                 "entry": {
                     "main": {
-                        "import": path.join(__dirname, "src", "libs", namespace, namespaceEntryFile),
+                        "import": path.join(__dirname, "src", "corelibs", namespace, namespaceEntryFile),
                         "filename": namespace + ".js"
                     }
                 },
                 "output": {
-                    "path": path.join(__dirname, "build", "libs"),
+                    "path": path.join(__dirname, "build", "corelibs"),
                     "library": {
                         "name": libraryNamespace.toUpperCase(),
                         "type": "assign-properties"
@@ -100,7 +98,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
 
     const readLibraryFiles = () =>
     {
-        const LIBDIR_ENTRIES = fs.readdirSync(path.join(__dirname, "src", "libs"), { "withFileTypes": true });
+        const LIBDIR_ENTRIES = fs.readdirSync(path.join(__dirname, "src", "corelibs"), { "withFileTypes": true });
         const NAMESPACE_DIRS = getDirectories(LIBDIR_ENTRIES);
 
         const outputObjects = [];
@@ -151,7 +149,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
-                new ModuleScopePlugin.default("src/libs/"),
+                new ModuleScopePlugin.default("src/corelibs/"),
             ],
         },
     };

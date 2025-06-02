@@ -833,25 +833,6 @@ export class Patch extends Events
         return arr;
     }
 
-    /**
-     * @deprecated
-     * @param {String} which
-     */
-    loadLib(which)
-    {
-        ajaxSync(
-            "/ui/libs/" + which + ".js",
-            (_err, res) =>
-            {
-                const se = document.createElement("script");
-                se.type = "text/javascript";
-                se.text = res;
-                document.getElementsByTagName("head")[0].appendChild(se);
-            },
-            "GET",
-        );
-    }
-
     getSubPatchOpsByName(patchId, objName)
     {
         const arr = [];
