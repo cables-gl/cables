@@ -14,7 +14,7 @@ inNum.onChange =
     inNum3.onChange =
     inNum4.onChange =
     inNum5.onChange =
-    inNum6.onChange = update;
+    inNum6.onChange = inNum7.onChange = inNum8.onChange = update;
 update();
 
 function update()

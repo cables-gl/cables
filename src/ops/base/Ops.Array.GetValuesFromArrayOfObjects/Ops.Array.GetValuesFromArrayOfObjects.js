@@ -34,7 +34,7 @@ function exec()
     {
         const obj = arr[i];
 
-        if (obj)
+        if (obj && typeof obj === "object")
         {
             if (!(key in obj)) continue;
 
