@@ -1,6 +1,6 @@
 // deprecated json3d loader geomgetry helper
 
-import { Geometry } from "../../cables/cg/index.js";
+import { Geometry } from "../cg/index.js";
 
 const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 

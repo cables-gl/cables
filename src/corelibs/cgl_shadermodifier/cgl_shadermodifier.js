@@ -1,4 +1,4 @@
-class ShaderModifier
+export class ShaderModifier
 {
     constructor(cgl, name, options)
     {
@@ -519,5 +519,3 @@ class ShaderModifier
 
     }
 }
-
-export { ShaderModifier };

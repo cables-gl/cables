@@ -258,18 +258,6 @@ export function isNumeric(n)
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-/**
- * returns true if parameter is array
- * @function isArray
- * @param {any} v value Value to check
- * @return {Boolean}
- * @static
- */
-export function isArray(v)
-{
-    return Object.prototype.toString.call(v) === "[object Array]";
-}
-
 // ----------------------------------------------------------------
 
 /**
@@ -356,18 +344,6 @@ export const filename = function (url)
     }
 
     return name || "";
-};
-
-export const ajaxSync = function (url, cb, method, post, contenttype)
-{
-    request({
-        "url": url,
-        "cb": cb,
-        "method": method,
-        "data": post,
-        "contenttype": contenttype,
-        "sync": true,
-    });
 };
 
 /**

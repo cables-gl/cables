@@ -9,7 +9,6 @@ import { EMBED } from "./embedding.js";
 import { Profiler } from "./core_profiler.js";
 import { Patch } from "./core_patch.js";
 import { LoadingStatus } from "./loadingstatus.js";
-import { WEBAUDIO } from "./webaudio.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
@@ -33,7 +32,6 @@ CABLES.Op = Op;
 CABLES.Profiler = Profiler;
 CABLES.Patch = Patch;
 CABLES.Timer = Timer;
-CABLES.WEBAUDIO = WEBAUDIO;
 CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
@@ -57,13 +55,10 @@ CABLES.copyArray = utils.copyArray;
 CABLES.basename = utils.basename;
 CABLES.logStack = utils.logStack;
 CABLES.filename = utils.filename;
-CABLES.ajaxSync = utils.ajaxSync;
 CABLES.ajax = utils.ajax;
 CABLES.request = utils.request;
 CABLES.logErrorConsole = utils.logErrorConsole;
 CABLES.isNumeric = utils.isNumeric;
-CABLES.isArray = utils.isArray;
-CABLES.float32Concat = utils.float32Concat;
 CABLES.uniqueArray = utils.uniqueArray;
 
 /** @type {Array<Op>} */
@@ -77,6 +72,6 @@ CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
-export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, WEBAUDIO, now };
+export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

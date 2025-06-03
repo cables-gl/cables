@@ -59,6 +59,7 @@ const srcBodyFrag = ""
     .endl() + "#endif"
     .endl();
 
+console.log("CGL", CGL);
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule({
     "title": op.name,

@@ -9,7 +9,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
 {
     const __dirname = dirname(fileURLToPath(import.meta.url));
 
-    const getDirectories = function (arr)
+    const getDirectories = function (arr, namespace)
     {
         const names = [];
         for (let i = 0; i < arr.length; i++)
@@ -17,93 +17,88 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const dirent = arr[i];
             if (dirent.isDirectory() && !dirent.name.startsWith("."))
             {
-                names.push(dirent.name);
+                const hasIndexJs = fs.existsSync(path.join(dirent.path, dirent.name, "index.js"));
+                const hasNamespaceJs = fs.existsSync(path.join(dirent.path, dirent.name, dirent.name + ".js"));
+                const isSubDir = dirent.path.endsWith(namespace);
+                const isCoreLib = hasIndexJs || (hasNamespaceJs && !isSubDir);
+                if (isCoreLib)
+                {
+                    names.push(dirent.name);
+                }
             }
         }
         return names;
     };
 
-    const getJsFiles = function (arr)
+    const getEntryFile = function (arr, namespace)
     {
+        let entryFile = "index.js";
+        const possibleEntryFiles = ["index.js", namespace + ".js"];
         const names = [];
         for (let i = 0; i < arr.length; i++)
         {
             const dirent = arr[i];
-            if (!dirent.isDirectory() && !dirent.name.startsWith(".") && dirent.name.endsWith(".js"))
+            const fileName = dirent.name;
+            if (!dirent.isDirectory() && !fileName.startsWith(".") && fileName.endsWith(".js"))
             {
                 names.push(dirent.name);
             }
         }
-        return names;
+        if (names.includes("index.js"))
+        {
+            entryFile = "index.js";
+        }
+        else
+        {
+            entryFile = names.find((name) => { return possibleEntryFiles.includes(name); });
+        }
+        return entryFile;
     };
 
     const createOutputEntryObjectsNamespace = (namespace) =>
     {
         const outputs = [];
-        const dirContent = fs.readdirSync(
-            path.join(__dirname, "src", "libs", namespace),
-            { "withFileTypes": true }
+        const dirContent = fs.readdirSync(path.join(__dirname, "src", "corelibs", namespace), { "withFileTypes": true });
+
+        const namespaceEntryFile = getEntryFile(dirContent, namespace);
+        const namespaceParts = namespace.split("_");
+
+        let libraryNamespace = "CABLES";
+        if (namespaceParts.length > 1)
+        {
+            libraryNamespace = "";
+            namespaceParts.pop();
+            namespaceParts.forEach((part, i) =>
+            {
+                if (i > 0) libraryNamespace += ".";
+                libraryNamespace += part.toUpperCase();
+            });
+        }
+
+        outputs.push(
+            {
+                "entry": {
+                    "main": {
+                        "import": path.join(__dirname, "src", "corelibs", namespace, namespaceEntryFile),
+                        "filename": namespace + ".js"
+                    }
+                },
+                "output": {
+                    "path": path.join(__dirname, "build", "corelibs"),
+                    "library": {
+                        "name": libraryNamespace.toUpperCase(),
+                        "type": "assign-properties"
+                    }
+                }
+            }
         );
 
-        const namespaceFiles = getJsFiles(dirContent);
-        const namespaceSubDirectories = getDirectories(dirContent);
-
-        for (let i = 0; i < namespaceFiles.length; i++)
-        {
-            const file = namespaceFiles[i];
-            const baseName = file.split(".")[0];
-            const targetName = namespace === "cables" ? baseName : namespace + "_" + baseName;
-            outputs.push(
-                {
-                    "entry": {
-                        "main": {
-                            "import": path.join(__dirname, "src", "libs", namespace, file),
-                            "filename": targetName + ".js"
-                        }
-                    },
-                    "output": {
-                        "path": path.join(__dirname, "build", "libs"),
-                        "library": {
-                            "name": namespace.toUpperCase(),
-                            "type": "assign-properties"
-                        }
-                    }
-                }
-            );
-        }
-
-        for (let i = 0; i < namespaceSubDirectories.length; i++)
-        {
-            const subdir = namespaceSubDirectories[i];
-            const targetName = namespace === "cables" ? subdir : namespace + "_" + subdir;
-            outputs.push(
-                {
-                    "entry": {
-                        "main": {
-                            "import": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
-                            "filename": targetName + ".js"
-                        }
-                    },
-                    "output": {
-                        "path": path.join(__dirname, "build", "libs"),
-                        "library": {
-                            "name": namespace.toUpperCase(),
-                            "type": "assign-properties"
-                        }
-                    }
-                }
-            );
-        }
         return outputs;
     };
 
     const readLibraryFiles = () =>
     {
-        const LIBDIR_ENTRIES = fs.readdirSync(
-            path.join(__dirname, "src", "libs"),
-            { "withFileTypes": true }
-        );
-
+        const LIBDIR_ENTRIES = fs.readdirSync(path.join(__dirname, "src", "corelibs"), { "withFileTypes": true });
         const NAMESPACE_DIRS = getDirectories(LIBDIR_ENTRIES);
 
         const outputObjects = [];
@@ -154,7 +149,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
-                new ModuleScopePlugin.default("src/libs/"),
+                new ModuleScopePlugin.default("src/corelibs/"),
             ],
         },
     };

@@ -10,3 +10,6 @@ export class StandaloneElectron
         };
     }
 }
+
+// do not remove this: workaround to not change corelib filename but still have this in CABLES namespace
+CABLES.StandaloneElectron = StandaloneElectron;

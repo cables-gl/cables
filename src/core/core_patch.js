@@ -1,6 +1,6 @@
 import { Events, Logger } from "cables-shared-client";
 import { CGL } from "cables-corelibs";
-import { ajax, ajaxSync, prefixedHash, cleanJson, shortId, map } from "./utils.js";
+import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
 import { Profiler } from "./core_profiler.js";
@@ -831,24 +831,6 @@ export class Patch extends Events
         for (const i in this.ops)
             if (this.ops[i].opId == opid) arr.push(this.ops[i]);
         return arr;
-    }
-
-    /**
-     * @param {String} which
-     */
-    loadLib(which)
-    {
-        ajaxSync(
-            "/ui/libs/" + which + ".js",
-            (_err, res) =>
-            {
-                const se = document.createElement("script");
-                se.type = "text/javascript";
-                se.text = res;
-                document.getElementsByTagName("head")[0].appendChild(se);
-            },
-            "GET",
-        );
     }
 
     getSubPatchOpsByName(patchId, objName)

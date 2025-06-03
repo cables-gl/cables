@@ -8,7 +8,7 @@ import webpack from "webpack";
 import path from "path";
 import { BuildWatcher } from "cables-shared-client";
 import webpackConfig from "./webpack.config.js";
-import webpackLibsConfig from "./webpack.config.libs.js";
+import webpackLibsConfig from "./webpack.config.corelibs.js";
 
 let configLocation = path.join("..", "gen", "cables.json");
 if (process.env.npm_config_apiconfig) configLocation = path.join("..", "gen", "cables_env_" + process.env.npm_config_apiconfig + ".json");
@@ -75,8 +75,7 @@ function _watch(done)
     const buildWatcher = new BuildWatcher(gulp, config, "core");
     const watchOptions = { "ignored": (file) => { return file.includes("/node_modules/"); } };
     buildWatcher.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
-    buildWatcher.watch("libs/**/*", watchOptions, gulp.series(_copy_ui));
-    buildWatcher.watch("src/libs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
+    buildWatcher.watch("src/corelibs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
     if (config.watchOps) buildWatcher.notify(["src/ops/**/*.js"], watchOptions, "opchange");
     if (config.watchOps) buildWatcher.notify(["src/ops/**/att_*"], watchOptions, "attachmentchange");
 
@@ -91,19 +90,19 @@ function _analyze(done)
 
 function _core_libs_clean(done)
 {
-    const dir = "build/libs/";
+    const dir = "build/corelibs/";
     if (fs.existsSync(dir)) fs.rmSync(dir, { "recursive": true });
     done();
 }
 
 function _copy_ui()
 {
-    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/libs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
+    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/corelibs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
 function _core_libs_copy(done)
 {
-    const source = "build/libs/";
+    const source = "build/corelibs/";
     const target = path.join("../cables_api/src/", config.path.corelibs);
 
     if (!process.env.cables_electron || process.env.cables_electron === "false")
@@ -138,7 +137,7 @@ function _core_libs(done)
 {
     getBuildInfo((buildInfo) =>
     {
-        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, analyze, config.sourceMap),
+        webpack(webpackLibsConfig(isLiveBuild, buildInfo, false, false, config.sourceMap),
             (err, multiStats) =>
             {
                 if (err) throw err;
