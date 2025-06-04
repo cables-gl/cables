@@ -196,7 +196,6 @@ export class Port extends Events
     }
 
     /*
-     * sdjksdjklsd
      * TODO make extend class for ports, like for ops only for ui
      */
     getValueForDisplay()
@@ -227,8 +226,13 @@ export class Port extends Events
         }
         else
         {
-            str = this.value;
+            str = String(this.value);
         }
+        // if (this.type == Port.TYPE_NUMBER)
+        // {
+        //     if (isNaN(this.value)) return "NaN";
+
+        // }
         return str;
     }
 

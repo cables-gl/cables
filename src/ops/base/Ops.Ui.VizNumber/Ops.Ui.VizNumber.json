@@ -32,7 +32,6 @@
     "created": 1637676964149,
     "summary": "Displays input string on the patchfield",
     "issues": "",
-
     "youtubeids": [
         "-1vMiU6BcDg"
     ],
@@ -40,5 +39,6 @@
         "ports": []
     },
     "exampleProjectId": "gkySnR",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }
