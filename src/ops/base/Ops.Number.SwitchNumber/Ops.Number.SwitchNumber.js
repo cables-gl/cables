@@ -6,15 +6,16 @@ idx.onChange = update;
 
 for (let i = 0; i < 16; i++)
 {
-    let p = op.inValue("Value " + i);
+    let p = op.inValueFloat("Value " + i);
     valuePorts.push(p);
     p.onChange = update;
 }
 
 function update()
 {
-    if (idx.get() >= 0 && valuePorts[idx.get()])
+    const i = idx.get();
+    if (i >= 0 && valuePorts[i])
     {
-        result.set(valuePorts[idx.get()].get());
+        result.set(valuePorts[i].get());
     }
 }

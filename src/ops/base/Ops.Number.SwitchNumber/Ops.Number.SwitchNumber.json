@@ -125,9 +125,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [
         "TdHgjqOLpnM"
     ],
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }
