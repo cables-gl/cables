@@ -5,7 +5,9 @@ const
     inErrorFloat2 = op.inFloat("Float", 0),
     inErrorFloat = op.inTriggerButton("Array Exception"),
     inPromiseFailEx = op.inTriggerButton("Promise Fail"),
-    inShaderCrash = op.inTriggerButton("Shader Error");
+    inShaderCrash = op.inTriggerButton("Shader Error"),
+    outNan = op.outNumber("NaN", parseFloat()),
+    outInf = op.outNumber("Infinity", Infinity);
 
 exec.onTriggered = () =>
 {

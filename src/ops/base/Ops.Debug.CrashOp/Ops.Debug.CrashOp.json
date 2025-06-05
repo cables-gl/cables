@@ -43,7 +43,18 @@
                 "name": "Shader Error"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "NaN",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Infinity",
+                "subType": "number"
+            }
+        ]
     },
     "summary": "Crash the editor in many ways ",
     "docs": {

@@ -3,7 +3,7 @@ const
     inDur = op.inInt("Duration", 230),
     inFps = op.inInt("FPS", 30),
 
-    inShowBpm = op.inBool("Show beats"),
+    inShowBpm = op.inBool("Show beats", true),
     inBpm = op.inInt("BPM", 120),
     inBpmHl = op.inInt("BPM highlight xth", 4),
 

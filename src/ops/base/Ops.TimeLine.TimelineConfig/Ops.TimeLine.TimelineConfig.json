@@ -34,15 +34,6 @@
             },
             {
                 "type": 0,
-                "name": "Display Units index",
-                "values": [
-                    "Seconds",
-                    "Frames"
-                ],
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Show beats",
                 "subType": "boolean"
             },
