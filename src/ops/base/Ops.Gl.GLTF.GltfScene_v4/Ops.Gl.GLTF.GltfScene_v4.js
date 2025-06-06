@@ -261,6 +261,7 @@ function finishLoading()
 
     needsMatUpdate = true;
     // op.refreshParams();
+    // outAnimLength.set(maxTime);
 
     gltf.bounds = new CABLES.CG.BoundingBox();
     // gltf.bounds.applyPos(0, 0, 0);
@@ -585,7 +586,8 @@ function updateAnimation()
         {
             gltf.nodes[i].setAnimAction(inAnimation.get());
         }
-        maxTime = maxTimeDict[inAnimation.get()] ?? -1;
+        const animName = inAnimation.get() || Object.keys(maxTimeDict)[0];
+        maxTime = maxTimeDict[animName] || -1;
         outAnimLength.set(maxTime);
     }
 }
