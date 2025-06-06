@@ -185,6 +185,7 @@ function loadAnims(gltf)
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
+                    // maxTime = Math.max(bufferIn[j], maxTime);
                     maxTimeDict[an.name] = bufferIn[j];
 
                     for (let k = 0; k < numComps; k++)
