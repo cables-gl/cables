@@ -581,7 +581,7 @@ export class Patch extends Events
     deleteOp(opid, tryRelink, reloadingOp)
     {
         let found = false;
-        for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
         {
             if (this.ops[i].id == opid)
             {
@@ -779,7 +779,7 @@ export class Patch extends Events
         options = options || {};
         obj.ops = [];
         obj.settings = this.settings;
-        for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
         {
             const op = this.ops[i];
             if (op && op.getSerialized)obj.ops.push(op.getSerialized());
@@ -817,7 +817,8 @@ export class Patch extends Events
     getOpsByObjName(name)
     {
         const arr = [];
-        for (const i in this.ops)
+        // for (const i in this.ops
+        for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].objName == name) arr.push(this.ops[i]);
         return arr;
     }
@@ -828,7 +829,8 @@ export class Patch extends Events
     getOpsByOpId(opid)
     {
         const arr = [];
-        for (const i in this.ops)
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].opId == opid) arr.push(this.ops[i]);
         return arr;
     }
@@ -836,7 +838,8 @@ export class Patch extends Events
     getSubPatchOpsByName(patchId, objName)
     {
         const arr = [];
-        for (const i in this.ops)
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
                 arr.push(this.ops[i]);
 
@@ -855,11 +858,11 @@ export class Patch extends Events
      */
     getFirstSubPatchOpByName(patchId, objName)
     {
-        for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
                 return this.ops[i];
 
-        return false;
+        return null;
     }
 
     _addLink(opinid, opoutid, inName, outName)
@@ -938,60 +941,64 @@ export class Patch extends Events
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
-                for (const ipi in opData.portsIn)
-                {
-                    const objPort = opData.portsIn[ipi];
-                    if (objPort && objPort.hasOwnProperty("name"))
+                // for (const ipi in opData.portsIn)
+                if (opData.portsIn)
+                    for (let ipi = 0; ipi < opData.portsIn.length; ipi++)
                     {
-                        const port = op.getPort(objPort.name);
-
-                        if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
-                        if (port && objPort.value !== undefined && port.type != Port.TYPE_TEXTURE) port.set(objPort.value);
-
-                        if (port)
+                        const objPort = opData.portsIn[ipi];
+                        if (objPort && objPort.hasOwnProperty("name"))
                         {
-                            port.deSerializeSettings(objPort);
-                        }
-                        else
-                        {
+                            const port = op.getPort(objPort.name);
 
-                            /*
+                            if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value == true ? 1 : 0;
+                            if (port && objPort.value !== undefined && port.type != Port.TYPE_TEXTURE) port.set(objPort.value);
+
+                            if (port)
+                            {
+                                port.deSerializeSettings(objPort);
+                            }
+                            else
+                            {
+
+                                /*
                              * if (port.uiAttribs.hasOwnProperty("title"))
                              * {
                              *     op.preservedPortTitles = op.preservedPortTitles || {};
                              *     op.preservedPortTitles[port.name] = port.uiAttribs.title;
                              * }
                              */
-                            op.preservedPortValues = op.preservedPortValues || {};
-                            op.preservedPortValues[objPort.name] = objPort.value;
-                        }
-                    }
-                }
-
-                for (const ipo in opData.portsOut)
-                {
-                    const objPort = opData.portsOut[ipo];
-                    if (objPort && objPort.hasOwnProperty("name"))
-                    {
-                        const port2 = op.getPort(objPort.name);
-
-                        if (port2)
-                        {
-                            port2.deSerializeSettings(objPort);
-
-                            if (port2.uiAttribs.hasOwnProperty("title"))
-                            {
-                                op.preservedPortTitles = op.preservedPortTitles || {};
-                                op.preservedPortTitles[port2.name] = port2.uiAttribs.title;
+                                op.preservedPortValues = op.preservedPortValues || {};
+                                op.preservedPortValues[objPort.name] = objPort.value;
                             }
-
-                            if (port2.type != Port.TYPE_TEXTURE && objPort.hasOwnProperty("value"))
-                                port2.set(obj.ops[iop].portsOut[ipo].value);
-
-                            if (objPort.expose) port2.setUiAttribs({ "expose": true });
                         }
                     }
-                }
+
+                // for (const ipo in opData.portsOut)
+                if (opData.portsOut)
+                    for (let ipo = 0; ipo < opData.portsOut.length; ipo++)
+                    {
+                        const objPort = opData.portsOut[ipo];
+                        if (objPort && objPort.hasOwnProperty("name"))
+                        {
+                            const port2 = op.getPort(objPort.name);
+
+                            if (port2)
+                            {
+                                port2.deSerializeSettings(objPort);
+
+                                if (port2.uiAttribs.hasOwnProperty("title"))
+                                {
+                                    op.preservedPortTitles = op.preservedPortTitles || {};
+                                    op.preservedPortTitles[port2.name] = port2.uiAttribs.title;
+                                }
+
+                                if (port2.type != Port.TYPE_TEXTURE && objPort.hasOwnProperty("value"))
+                                    port2.set(obj.ops[iop].portsOut[ipo].value);
+
+                                if (objPort.expose) port2.setUiAttribs({ "expose": true });
+                            }
+                        }
+                    }
                 newOps.push(op);
             }
 
@@ -1000,7 +1007,8 @@ export class Patch extends Events
         }
         this.logStartup("add ops done");
 
-        for (const i in this.ops)
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
         {
             // deprecated use event
             if (this.ops[i].onLoadedValueSet)
@@ -1135,7 +1143,8 @@ export class Patch extends Events
 
         this.logStartup("calling ops onloaded");
 
-        for (const i in this.ops)
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
         {
             if (this.ops[i].onLoaded)
             {
@@ -1146,7 +1155,8 @@ export class Patch extends Events
         }
 
         this.logStartup("initializing ops...");
-        for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
+        // for (const i in this.ops)
         {
             if (this.ops[i].init)
             {
@@ -1170,7 +1180,8 @@ export class Patch extends Events
 
         this.logStartup("initializing var ports");
 
-        for (const i in this.ops)
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
         {
             this.ops[i].initVarPorts();
             delete this.ops[i].uiAttribs.pasted;
@@ -1186,10 +1197,9 @@ export class Patch extends Events
     profile(enable)
     {
         this.profiler = new Profiler(this);
-        for (const i in this.ops)
-        {
-            this.ops[i].profile(enable);
-        }
+        // for (const i in this.ops)
+        for (let i = 0; i < this.ops.length; i++)
+            this.ops[i].profile();
     }
 
     // ----------------------
