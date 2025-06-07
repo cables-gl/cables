@@ -36,7 +36,7 @@ import { Patch } from "./core_patch.js";
  * @property {number} [height]
  * @property {number} [width]
  * @property {Translation} [translate]
- * @property {string} [subPatch] internal - do not use manualy - use op.setUiError
+ * @property {string|number} [subPatch] internal - do not use manualy - use op.setUiError
 */
 
 /**
@@ -1336,7 +1336,8 @@ export class Op extends Events
      */
     getFirstOutPortByType(type)
     {
-        for (const ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
+        for (let i = 0; i < this.portsOut.length; i++)
+            if (this.portsOut[i].type == type) return this.portsOut[i];
     }
 
     /**
@@ -1344,7 +1345,8 @@ export class Op extends Events
      */
     getFirstInPortByType(type)
     {
-        for (const ipo in this.portsIn) if (this.portsIn[ipo].type == type) return this.portsIn[ipo];
+        for (let i = 0; i < this.portsIn.length; i++)
+            if (this.portsIn[i].type == type) return this.portsIn[i];
     }
 
     /**
@@ -1456,23 +1458,6 @@ export class Op extends Events
             this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
         }
     }
-
-    // findParent(objName)
-    // {
-    //     for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-    //     {
-    //         if (this.portsIn[ipi].isLinked())
-    //         {
-    //             if (this.portsIn[ipi].links[0].portOut.parent.objName == objName)
-    //                 return this.portsIn[ipi].links[0].portOut.parent;
-
-    //             let found = null;
-    //             found = this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
-    //             if (found) return found;
-    //         }
-    //     }
-    //     return null;
-    // }
 
     // todo: check instancing stuff?
     cleanUp()
@@ -1659,9 +1644,8 @@ export class Op extends Events
     {
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i])
-                if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else this._log.error("setPortGroup: invalid port!");
+            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+            else this._log.error("setPortGroup: invalid port!");
         }
     }
 
@@ -1763,17 +1747,11 @@ export class Op extends Events
     initVarPorts()
     {
         for (let i = 0; i < this.portsIn.length; i++)
-        {
             if (this.portsIn[i].getVariableName()) this.portsIn[i].setVariable(this.portsIn[i].getVariableName());
-        }
     }
 
     checkLinkTimeWarnings() {}
-
-    _checkLinksNeededToWork()
-    {
-
-    }
+    _checkLinksNeededToWork() { }
 
     /**
      * refresh op parameters, if current op is selected
