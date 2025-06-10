@@ -23,7 +23,7 @@ borderBottom.onChange =
 borderLeft.onChange =
 borderRight.onChange =
 inEle.onChange =
-    inEle.onLinkChanged =
+inEle.onLinkChanged =
 inThick.onChange =
 inRadius.onChange =
     r.onChange = g.onChange = b.onChange = a.onChange =
@@ -51,7 +51,7 @@ function update()
 
     if (ele && ele.style)
     {
-        let rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + Math.floor(a.get()) + ")";
+        let rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + a.get() + ")";
 
         if (borderTop.get() && borderBottom.get() && borderRight.get() && borderLeft.get())
         {
