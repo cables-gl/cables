@@ -1579,7 +1579,7 @@ Patch.replaceOpIds = function (json, options)
         if (json.ops[i].storage && json.ops[i].storage.subPatchVer)
         {
             // for (const k in json.ops[i].portsInckkkkk
-            for (let k = 0; k < json.ops[k].portsIn.length; k++)
+            for (let k = 0; k < json.ops[i].portsIn.length; k++)
             {
                 if (json.ops[i].portsIn[k].name === "patchId")
                 {
