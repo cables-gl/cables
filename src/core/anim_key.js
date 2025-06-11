@@ -216,7 +216,7 @@ AnimKey.cubicSpline = function (/** @type {number} */ t, /** @type {AnimKey} */ 
 
 AnimKey.linear = function (perc, key1, key2)
 {
-    return parseFloat(key1.value) + parseFloat(key2.value - key1.value) * perc;
+    return (key1.value) + (key2.value - key1.value) * perc;
 };
 
 export const easeExpoIn = function (t)
