@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { quat } from "gl-matrix";
 import { uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
@@ -650,8 +649,8 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
 {
     if (!Anim.slerpQuaternion.q1)
     {
-        Anim.slerpQuaternion.q1 = quat.create();
-        Anim.slerpQuaternion.q2 = quat.create();
+        Anim.slerpQuaternion.q1 = Anim._createQuat();
+        Anim.slerpQuaternion.q2 = Anim._createQuat();
     }
 
     const i1 = animx.getKeyIndex(time);
@@ -668,11 +667,77 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
         const key2Time = animx.keys[i2].time;
         const perc = (time - key1Time) / (key2Time - key1Time);
 
-        quat.set(Anim.slerpQuaternion.q1, animx.keys[i1].value, animy.keys[i1].value, animz.keys[i1].value, animw.keys[i1].value);
+        // quart.slerp(out, a, b, t) from "gl-matrix"
 
-        quat.set(Anim.slerpQuaternion.q2, animx.keys[i2].value, animy.keys[i2].value, animz.keys[i2].value, animw.keys[i2].value);
+        Anim.slerpQuaternion.q1[0] = animx.keys[i1].value;
+        Anim.slerpQuaternion.q1[1] = animy.keys[i1].value;
+        Anim.slerpQuaternion.q1[2] = animz.keys[i1].value;
+        Anim.slerpQuaternion.q1[3] = animw.keys[i1].value;
 
-        quat.slerp(q, Anim.slerpQuaternion.q1, Anim.slerpQuaternion.q2, perc);
+        Anim.slerpQuaternion.q2[0] = animx.keys[i2].value;
+        Anim.slerpQuaternion.q2[1] = animy.keys[i2].value;
+        Anim.slerpQuaternion.q2[2] = animz.keys[i2].value;
+        Anim.slerpQuaternion.q2[3] = animw.keys[i2].value;
+
+        let ax = Anim.slerpQuaternion.q1[0],
+            ay = Anim.slerpQuaternion.q1[1],
+            az = Anim.slerpQuaternion.q1[2],
+            aw = Anim.slerpQuaternion.q1[3];
+        let bx = Anim.slerpQuaternion.q2[0],
+            by = Anim.slerpQuaternion.q2[1],
+            bz = Anim.slerpQuaternion.q2[2],
+            bw = Anim.slerpQuaternion.q2[3];
+        let omega, cosom, sinom, scale0, scale1; // calc cosine
+
+        cosom = ax * bx + ay * by + az * bz + aw * bw; // adjust signs (if necessary)
+
+        if (cosom < 0.0)
+        {
+            cosom = -cosom;
+            bx = -bx;
+            by = -by;
+            bz = -bz;
+            bw = -bw;
+        } // calculate coefficients
+
+        // var EPSILON = 0.000001;
+        if (1.0 - cosom > 0.000001)
+        {
+            // standard case (slerp)
+            omega = Math.acos(cosom);
+            sinom = Math.sin(omega);
+            scale0 = Math.sin((1.0 - perc) * omega) / sinom;
+            scale1 = Math.sin(perc * omega) / sinom;
+        }
+        else
+        {
+            // "from" and "to" quaternions are very close
+            //  ... so we can do a linear interpolation
+            scale0 = 1.0 - perc;
+            scale1 = perc;
+        } // calculate final values
+
+        q[0] = scale0 * ax + scale1 * bx;
+        q[1] = scale0 * ay + scale1 * by;
+        q[2] = scale0 * az + scale1 * bz;
+        q[3] = scale0 * aw + scale1 * bw;
+
     }
     return q;
+};
+
+Anim._createQuat = function ()
+{
+    const arrayType = typeof Float32Array !== "undefined" ? Float32Array : Array;
+    let out = new arrayType(4);
+
+    if (arrayType != Float32Array)
+    {
+        out[0] = 0;
+        out[1] = 0;
+        out[2] = 0;
+    }
+
+    out[3] = 1;
+    return out;
 };

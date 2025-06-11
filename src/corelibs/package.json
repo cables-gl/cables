@@ -6,6 +6,7 @@
     "main": "index.js",
     "dependencies": {
         "cables": "file:../../",
-        "cables-shared-client": "file:../../../shared/client/"
+        "cables-shared-client": "file:../../../shared/client/",
+        "gl-matrix": "3.1.0"
     }
 }

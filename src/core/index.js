@@ -1,4 +1,3 @@
-import * as GLMatrix from "gl-matrix";
 import { Events, Logger } from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
@@ -66,7 +65,6 @@ CABLES.OPS = [];
 CABLES.utils = utils;
 CABLES.CONSTANTS = CONSTANTS;
 
-CABLES.GLMatrix = GLMatrix;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
