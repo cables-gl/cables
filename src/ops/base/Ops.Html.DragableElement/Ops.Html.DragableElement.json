@@ -1,0 +1,51 @@
+{
+    "id": "c36594f2-8fa1-4b5b-816e-32dbb097c522",
+    "created": 1749562386831,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1749562386832
+        },
+        {
+            "message": "Patch.PIfMAIN.DragaleElement renamed to Ops.Html.DragableElement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1749566127721
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "inX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "inY",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            }
+        ]
+    }
+}
