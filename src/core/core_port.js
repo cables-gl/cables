@@ -398,6 +398,12 @@ export class Port extends Events
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
+                if (CABLES.UI && this.#animated)
+                {
+                    CABLES.UI.PREVISKEYVAL = null;
+                    if (!CABLES.UI.keyframeAutoCreate) CABLES.UI.PREVISKEYVAL = v;
+                }
+
                 if (CABLES.UI && this.#animated && CABLES.UI.keyframeAutoCreate)
                 {
                     let t = this._op.patch.timer.getTime();
