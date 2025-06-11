@@ -10,7 +10,7 @@ const
 
     imageAlpha = op.inTexture("Mask"),
     alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance"),
-    invAlphaChannel = op.inValueBool("Invert alpha channel"),
+    invAlphaChannel = op.inBool("Invert alpha channel"),
 
     inAspect = op.inValueBool("Aspect Ratio", false),
     inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X"),
@@ -25,8 +25,8 @@ const shader = new CGL.Shader(cgl, "drawimage");
 
 imageAlpha.onLinkChanged = updateAlphaPorts;
 
-op.setPortGroup("Mask", [imageAlpha, alphaSrc, invAlphaChannel]);
 op.setPortGroup("Aspect Ratio", [inAspect, inAspectPos, inAspectCrop, inAspectAxis]);
+op.setPortGroup("Mask", [imageAlpha, alphaSrc, invAlphaChannel]);
 
 function updateAlphaPorts()
 {
