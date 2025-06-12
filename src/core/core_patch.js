@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
@@ -89,8 +88,6 @@ export class Patch extends Events
     {
         super();
 
-        this._log = new Logger("core_patch", { "onError": cfg.onError });
-
         /** @type {Array<Op>} */
         this.ops = [];
         this.settings = {};
@@ -107,8 +104,9 @@ export class Patch extends Events
             "onFirstFrameRendered": null,
             "onPatchLoaded": null,
             "fpsLimit": 0,
-
         };
+
+        this._log = new Logger("core_patch", { "onError": this.config.onError });
 
         this.timer = new Timer();
         this.freeTimer = new Timer();
@@ -158,18 +156,21 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new CGL.Context(this);
+        this.cgl = CABLES.CGL ? new CABLES.CGL.Context(this) : null;
         this.cgp = null;
 
         this._subpatchOpCache = {};
 
-        this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
-        if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
-        if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
+        if (this.cgl)
+        {
+            this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
+            if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
+            if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
+        }
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
-        if (this.cgl.aborted) this.aborted = true;
-        if (this.cgl.silent) this.silent = true;
+        if (this.cgl && this.cgl.aborted) this.aborted = true;
+        if (this.cgl && this.cgl.silent) this.silent = true;
 
         if (!CABLES.OPS)
         {
@@ -428,10 +429,9 @@ export class Patch extends Events
             {
                 // fallback: create by objname!
                 objName = identifier;
-                const parts = identifier.split(".");
                 const opObj = Patch.getOpClass(objName);
 
-                if (!opObj)
+                if (!opObj || !opObj.f)
                 {
                     this.emitEvent("criticalError", { "title": "unknown op" + objName, "text": "unknown op: " + objName });
 
@@ -440,16 +440,7 @@ export class Patch extends Events
                 }
                 else
                 {
-                    if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName, id);
-                    else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName, id);
-                    else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName, id);
-                    else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName, id);
-                    else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName, id);
-                    else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName, id);
-                    else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
-                    else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
-                    else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                    else console.log("parts.length", parts.length);
+                    op = new opObj.f(this, objName, id);
                 }
 
                 if (op)
@@ -712,7 +703,7 @@ export class Patch extends Events
 
         if (this.#renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
         {
-            this.renderFrame(timestamp);
+            if (this.cgl) this.renderFrame(timestamp);
 
             if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
         }
@@ -1428,6 +1419,12 @@ export class Patch extends Events
 
 Patch.getOpClass = function (objName)
 {
+    if (CABLES.OPS)
+    {
+        const opByName = Object.values(CABLES.OPS).find((op) => { return op.objName === objName; });
+        if (opByName) return opByName;
+    }
+
     const parts = objName.split(".");
     let opObj = null;
 

@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
 import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
@@ -1229,7 +1228,12 @@ export class Op extends Events
                 "display": "texture"
             })
         );
-        if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+        if (v !== undefined)
+        {
+            let ref = v;
+            if (CABLES.CGL) ref = v || CABLES.CGL.Texture.getEmptyTexture(this.patch.cgl);
+            p.setRef(ref);
+        }
 
         p.ignoreValueSerialize = true;
         return p;
