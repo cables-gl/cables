@@ -649,15 +649,15 @@ export class Patch extends Events
         this.freeTimer.update(this.reqAnimTimeStamp);
         const time = this.timer.getTime();
         const startTime = performance.now();
-        this.cgl.frameStartTime = this.timer.getTime();
+        if (this.cgl) this.cgl.frameStartTime = this.timer.getTime();
 
         const delta = timestamp - this.reqAnimTimeStamp || timestamp;
 
         this.emitOnAnimFrameEvent(null, delta);
 
-        this.cgl.profileData.profileFrameDelta = delta;
+        if (this.cgl) this.cgl.profileData.profileFrameDelta = delta;
         this.reqAnimTimeStamp = timestamp;
-        this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
+        if (this.cgl) this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
         this.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
@@ -703,7 +703,7 @@ export class Patch extends Events
 
         if (this.#renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
         {
-            if (this.cgl) this.renderFrame(timestamp);
+            this.renderFrame(timestamp);
 
             if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
         }
@@ -721,7 +721,17 @@ export class Patch extends Events
             this._renderOneFrame = false;
         }
 
-        if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
+        if (this.config.doRequestAnimation)
+        {
+            if (this.cgl)
+            {
+                this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
+            }
+            else if (window.setImmediate)
+            {
+                this._animReq = window.setImmediate(this.exec.bind(this));
+            }
+        }
     }
 
     /**

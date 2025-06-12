@@ -10,9 +10,9 @@ global.window = {
             return Date.now();
         }
     },
-    "addEventListener": function () { return; }
+    "addEventListener": function () { return; },
+    "setImmediate": setImmediate
 };
-global.bier = "bier";
 global.CABLES = {};
 global.cancelAnimationFrame = () =>
 {
@@ -32,6 +32,6 @@ import("./core/index.js").then((c) =>
     // eslint-disable-next-line no-new-func
     let evalFunc = new Function(ops).bind(global);
     evalFunc();
-    const patch = new c.Patch({ "patch": patchData, "doRequestAnimation": false });
+    const patch = new c.Patch({ "patch": patchData });
     patch.exec(0);
 });
