@@ -1644,8 +1644,10 @@ export class Op extends Events
     {
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-            else this._log.error("setPortGroup: invalid port!");
+            console.log("text", ports, this.name);
+            if (ports[i])
+                if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
+                else this._log.error("setPortGroup: invalid port!");
         }
     }
 

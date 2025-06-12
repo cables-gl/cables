@@ -19,20 +19,16 @@ export class AnimKey
 
         this.onChange = null;
         this._easing = 0;
-        // this.bezTangIn = 0;
-        // this.bezTangOut = 0;
-        // this.bezTime = 0.5;
-        // this.bezValue = 0;
-        // this.bezTimeIn = -0.5;
-        // this.bezValueIn = 0;
+
+        this.bezCp1X = Math.random();
+        this.bezCp1Y = Math.random();
+        this.bezCp2X = Math.random();
+        this.bezCp2Y = Math.random();
 
         this.cb = null;
         this.cbTriggered = false;
         this.temp = {};
         this.uiAttribs = {};
-
-        // const bezierAnim = null;
-        // this._updateBezier = false;
 
         this.setEasing(Anim.EASING_LINEAR);
         this.set(obj);
@@ -61,8 +57,8 @@ export class AnimKey
     {
         this._easing = e;
 
-        if (this._easing == Anim.EASING_LINEAR) this.ease = AnimKey.easeLinear;
-        else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = AnimKey.easeAbsolute;
+        if (this._easing == Anim.EASING_LINEAR) this.ease = this.easeLinear;
+        else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = this.easeAbsolute;
         else if (this._easing == Anim.EASING_SMOOTHSTEP) this.ease = AnimKey.easeSmoothStep;
         else if (this._easing == Anim.EASING_SMOOTHERSTEP) this.ease = AnimKey.easeSmootherStep;
         else if (this._easing == Anim.EASING_CUBIC_IN) this.ease = AnimKey.easeCubicIn;
@@ -91,12 +87,12 @@ export class AnimKey
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
             // this._updateBezier = true;
-            this.ease = AnimKey.easeCubicSpline;
+            this.ease = this.easeCubicSpline;
         }
         else
         {
             this._easing = Anim.EASING_LINEAR;
-            this.ease = AnimKey.easeLinear;
+            this.ease = this.easeLinear;
         }
         this.anim.forceChangeCallbackSoon();
     }
@@ -131,13 +127,12 @@ export class AnimKey
                 this.cbTriggered = false;
             }
 
-            if (obj.b)
+            if (obj.hasOwnProperty("cp1x"))
             {
-                // this.bezTime = obj.b[0];
-                // this.bezValue = obj.b[1];
-                // this.bezTimeIn = obj.b[2];
-                // this.bezValueIn = obj.b[3];
-                // this._updateBezier = true;
+                this.bezCp1X = obj.cp1x;
+                this.bezCp1Y = obj.cp1y;
+                this.bezCp2X = obj.cp2x;
+                this.bezCp2Y = obj.cp2y;
             }
 
             if (obj.hasOwnProperty("t")) this.time = obj.t;
@@ -162,6 +157,14 @@ export class AnimKey
         obj.e = this._easing;
         obj.uiAttribs = this.uiAttribs;
 
+        if (this._easing === Anim.EASING_CUBICSPLINE)
+        {
+            obj.cp1x = this.bezCp1X;
+            obj.cp1y = this.bezCp1Y;
+            obj.cp2x = this.bezCp2X;
+            obj.cp2y = this.bezCp2Y;
+        }
+
         return obj;
     }
 
@@ -169,40 +172,51 @@ export class AnimKey
     {
         return this._easing;
     }
+
+    /**
+     * @param {number} perc
+     * @param {AnimKey} key2
+     */
+    easeCubicSpline(perc, key2)
+    {
+        return AnimKey.cubicSpline(perc, this, key2);
+    }
+
+    /**
+     * @param {number} perc
+     * @param {AnimKey} key2
+     */
+    easeLinear(perc, key2)
+    {
+        return AnimKey.linear(perc, this, key2);
+    }
+
+    easeAbsolute()
+    {
+        return this.value;
+    }
 }
 
-AnimKey.cubicSpline = function (perc, key1, key2)
+AnimKey.cubicSpline = function (/** @type {number} */ t, /** @type {AnimKey} */ key1, /** @type {AnimKey} */ key2)
 {
-    let
-        previousPoint = key1.value,
-        previousTangent = key1.bezTangOut,
-        nextPoint = key2.value,
-        nextTangent = key2.bezTangIn;
-    let t = perc;
-    let t2 = t * t;
-    let t3 = t2 * t;
+    const tInv = 1 - t;
+    const tInvSq = tInv * tInv;
+    const tSq = t * t;
 
-    return (2 * t3 - 3 * t2 + 1) * previousPoint + (t3 - 2 * t2 + t) * previousTangent + (-2 * t3 + 3 * t2) * nextPoint + (t3 - t2) * nextTangent;
-};
+    const c0 = tInvSq * tInv;
+    const c1 = 3 * tInvSq * t;
+    const c2 = 3 * tInv * tSq;
+    const c3 = tSq * t;
 
-AnimKey.easeCubicSpline = function (perc, key2)
-{
-    return AnimKey.cubicSpline(perc, this, key2);
+    const x = c0 * key1.time + c1 * key1.bezCp1X + c2 * key2.time + c3 * key2.bezCp2X;
+    const y = c0 * key1.value + c1 * key1.bezCp1Y + c2 * key2.value + c3 * key2.bezCp2Y;
+
+    return y;
 };
 
 AnimKey.linear = function (perc, key1, key2)
 {
-    return parseFloat(key1.value) + parseFloat(key2.value - key1.value) * perc;
-};
-
-AnimKey.easeLinear = function (perc, key2)
-{
-    return AnimKey.linear(perc, this, key2);
-};
-
-AnimKey.easeAbsolute = function (perc, key2)
-{
-    return this.value;
+    return (key1.value) + (key2.value - key1.value) * perc;
 };
 
 export const easeExpoIn = function (t)
