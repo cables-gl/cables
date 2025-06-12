@@ -51,8 +51,8 @@ Automatic backups **ARE** created:
 
 - before every export
 - on loading of the patch
-  - if there was a save after the laste backup
-  - AND the last backup is older than 30 minutes
+  - if there was a save after the last backup
+  - **AND** the last backup is older than 30 minutes
 
 Automatic backups are **NOT** created:
 
