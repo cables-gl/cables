@@ -24,8 +24,10 @@ This might be a good time to create a [new version](../../5_writing_ops/dev_rena
 ## Backups
 
 Exporting and importing patches can be used as a simple way to create backups of different versions of a patch. The format of cables
-backups is exactly the same as the ["Patch" export option](../dev_embed/export_standalone/export_standalone). Any export of that
-type can be treated as a backup of the patch.
+backups is exactly the same as the ["Patch" export option](../dev_embed/export_standalone/export_standalone). Any export of that type can be treated as a backup of the patch.
+
+Backups thus contain all assets of the patch, used or unused, all ["custom ops"](../../5_1_permissions/3_ops/ops) and all
+the subpatchops **at the time of creation of the backup**.
 
 ### Manual Backups
 
@@ -48,7 +50,9 @@ Cables will create automatic backups for you as long as you are not out of backu
 Automatic backups **ARE** created:
 
 - before every export
-- on save if the last backup is older than 30 minutes
+- on loading of the patch
+  - if there was a save after the laste backup
+  - AND the last backup is older than 30 minutes
 
 Automatic backups are **NOT** created:
 
@@ -63,8 +67,15 @@ To prevent any automatically created backup from deletion, you can "Keep this ba
 
 ![](img/keep_backup.png)
 
-### Managing Backups
+**All backups, manual and automatic, are deleted when you delete the patch!**
+
+### Restoring / Managing Backups
+
+To restore a backup that you downloaded, you can simply import the backup as described above. For any automatic or manual
+backups created on cables.gl you can select "Restore to new patch" from the list of backups. Doing this will create a new
+patch with the same rules applied as described for imports above.
 
 You can manage the backups of all your patches via ["My Data"](/mydata#backups) from the cables.gl menu. This page will give you an overview
 of your currently used storage space, your current limits and let you delete/clean up backups that are not needed anymore...
 freeing up space for more.
+

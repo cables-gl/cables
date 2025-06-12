@@ -33,9 +33,6 @@ these files included in the export.
 - Single Javascript File: packages and minifies everything into one single javascript file to include
 - Multiple Files: will keep the patch configuration, your code, and core code in seperate files
 
-### Skip Backups
-
-- When deselecting this option, the export will include JSON-files for all the versions of your patch that can be re-imported into cables later.
 
 ### Export without subdirectories
 
