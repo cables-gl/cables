@@ -344,11 +344,6 @@ export class Op extends Events
 
     getName()
     {
-        // if (this.uiAttribs.name)
-        // {
-        //     console.log("uiattr name exist!");// otherwise delete
-        //     return this.uiAttribs.name;
-        // }
         return this.#shortOpName;
     }
 
@@ -386,11 +381,6 @@ export class Op extends Events
      */
     addInPort(p)
     {
-        // if (!(p instanceof Port)) throw new Error("parameter is not a port!", p);
-        // if (!(p instanceof Port) && !(p instanceof MultiPort)) throw new Error("parameter is not a port!", p);
-
-        // console.log("a", p.constructor.name);
-
         p.direction = Port.DIR_IN;
         p._op = this;
 
@@ -596,7 +586,6 @@ export class Op extends Events
             })
         );
         v = v || "";
-        // p.value = v;
 
         p.setInitialValue(v);
         return p;
@@ -749,7 +738,6 @@ export class Op extends Events
                     "values": values
                 },
                 n
-
             );
 
             valuePort.indexPort = indexPort;
@@ -888,8 +876,7 @@ export class Op extends Events
     {
         // old
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, {
-                "increment": "integer" })
+            new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" })
         );
         if (v !== undefined)
         {
@@ -1644,7 +1631,6 @@ export class Op extends Events
     {
         for (let i = 0; i < ports.length; i++)
         {
-            console.log("text", ports, this.name);
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
                 else this._log.error("setPortGroup: invalid port!");
