@@ -1,4 +1,5 @@
 import fs from "fs";
+import * as blessed from "blessed";
 
 global.window = {
     "navigator": {
@@ -26,6 +27,12 @@ import("./core/index.js").then((c) =>
     {
         if (txt) console.log("ERROR in", this.name, level, id, txt, options);
     };
+    global.CABLES.Op.prototype.require = function (moduleName)
+    {
+        console.log("B", blessed);
+        return blessed.default;
+    };
+    console.log("S", global.CABLES.Op.require);
     const args = process.argv ? process.argv.slice(2) : [];
     const patchData = fs.readFileSync(args[0]).toString();
     const ops = fs.readFileSync(args[1]).toString();
