@@ -1,5 +1,4 @@
-import * as GLMatrix from "gl-matrix";
-import { Events, Logger } from "cables-shared-client";
+import * as SharedClient from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
 import { Link } from "./core_link.js";
@@ -18,6 +17,7 @@ import { PatchVariable } from "./core_variable.js";
 
 CABLES = CABLES || {};
 CABLES = {
+    ...SharedClient,
     ...CABLES,
     ...CONSTANTS.PORT,
     ...CONSTANTS.PACO,
@@ -65,11 +65,6 @@ CABLES.uniqueArray = utils.uniqueArray;
 CABLES.OPS = [];
 CABLES.utils = utils;
 CABLES.CONSTANTS = CONSTANTS;
-
-CABLES.GLMatrix = GLMatrix;
-CABLES.SHARED = {};
-CABLES.SHARED.Events = Events;
-CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
 export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now };

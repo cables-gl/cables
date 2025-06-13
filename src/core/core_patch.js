@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
@@ -158,18 +157,17 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new CGL.Context(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};
 
-        this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
-        if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
-        if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
+        if (this.cgl) this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
+        if (this.cgl) if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
+        if (this.cgl) if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
-        if (this.cgl.aborted) this.aborted = true;
-        if (this.cgl.silent) this.silent = true;
+        if (this.cgl && this.cgl.aborted) this.aborted = true;
+        if (this.cgl && this.cgl.silent) this.silent = true;
 
         if (!CABLES.OPS)
         {
@@ -363,7 +361,7 @@ export class Patch extends Events
     clear()
     {
         this.emitEvent("patchClearStart");
-        this.cgl.TextureEffectMesh = null;
+        if (this.cgl) this.cgl.TextureEffectMesh = null;
         this.animFrameOps.length = 0;
         this.timer = new Timer();
         while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
@@ -658,15 +656,15 @@ export class Patch extends Events
         this.freeTimer.update(this.reqAnimTimeStamp);
         const time = this.timer.getTime();
         const startTime = performance.now();
-        this.cgl.frameStartTime = this.timer.getTime();
+        if (this.cgl) this.cgl.frameStartTime = this.timer.getTime();
 
         const delta = timestamp - this.reqAnimTimeStamp || timestamp;
 
         this.emitOnAnimFrameEvent(null, delta);
 
-        this.cgl.profileData.profileFrameDelta = delta;
+        if (this.cgl) this.cgl.profileData.profileFrameDelta = delta;
         this.reqAnimTimeStamp = timestamp;
-        this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
+        if (this.cgl) this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
         this.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
@@ -730,7 +728,7 @@ export class Patch extends Events
             this._renderOneFrame = false;
         }
 
-        if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
+        if (this.cgl && this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
     }
 
     /**
@@ -1379,7 +1377,7 @@ export class Patch extends Events
     {
         this.pause();
         this.clear();
-        this.cgl.dispose();
+        if (this.cgl) this.cgl.dispose();
     }
 
     pushTriggerStack(p)
@@ -1422,7 +1420,12 @@ export class Patch extends Events
      */
     getDocument()
     {
-        return this.cgl.canvas.ownerDocument;
+        return this.cgl ? this.cgl.canvas.ownerDocument : null;
+    }
+
+    getCGLContext()
+    {
+        return null;
     }
 }
 

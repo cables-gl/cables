@@ -1,4 +1,4 @@
-import { Anim } from "cables";
+import { Anim, Op, Patch, Port } from "cables";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
@@ -85,5 +85,29 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     }
     return q;
 };
+
+Op.prototype.outTexture = function (name, v)
+{
+
+    const p = this.addOutPort(
+        new Port(this, name, Port.TYPE_OBJECT, {
+            "preview": true,
+            "objType": "texture",
+            "display": "texture"
+        })
+    );
+    if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
+
+    p.ignoreValueSerialize = true;
+    return p;
+};
+
+Object.defineProperty(Patch.prototype, "cgl", {
+    "get": function cgl()
+    {
+        if (!this._cgl) this._cgl = new CGL.Context(this);
+        return this._cgl;
+    }
+});
 
 export { CGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };

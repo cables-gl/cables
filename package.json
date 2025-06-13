@@ -17,9 +17,7 @@
     "dependencies": {
         "@webgpu/types": "^0.1.53",
         "cables-shared-client": "file:../shared/client/",
-        "cables-corelibs": "file:src/corelibs/",
-        "git-last-commit": "1.0.1",
-        "gl-matrix": "3.1.0"
+        "git-last-commit": "1.0.1"
     },
     "devDependencies": {
         "@k88/module-scope-plugin": "1.1.0",
