@@ -1,0 +1,40 @@
+{
+    "id": "876a8baa-51ad-4d8c-8909-ba71d04a693c",
+    "created": 1745925525192,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1745919309329
+        },
+        {
+            "message": "TimeLine.AnimStretch renamed to Ops.Dev.TimeLine.AnimStretch",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750071575703
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Anim"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ]
+    }
+}
