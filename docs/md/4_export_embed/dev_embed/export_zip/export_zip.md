@@ -1,8 +1,8 @@
-# Export a ZIP file
+# HTML Export
 
-Select the "DOWNLOAD" option in the export dialog:
+Select the "Download HTML" option in the export dialog:
 
-![Button](../img/export_zip.png)
+![Button](../img/export_html.png)
 
 If you just want to download your patch and put it on any webserver that you can upload files to, this
 is your best option. 
