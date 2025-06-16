@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1740571736335
+        },
+        {
+            "message": "op Sidebar.SidebarElement_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1750068369385
         }
     ],
     "authorName": "pandur",

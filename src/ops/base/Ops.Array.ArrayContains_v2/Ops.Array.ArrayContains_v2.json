@@ -28,7 +28,6 @@
     "authorName": "simod",
     "id": "b982d7e3-c9cf-41dd-aead-66daad785fa8",
     "created": 1619617451517,
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -61,5 +60,6 @@
             "date": 1619617730748
         }
     ],
-    "exampleProjectId": "8pZ8GA"
+    "exampleProjectId": "8pZ8GA",
+    "license": "MIT"
 }

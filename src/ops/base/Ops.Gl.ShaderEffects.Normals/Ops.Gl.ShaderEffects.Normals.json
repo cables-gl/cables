@@ -16,7 +16,6 @@
     "authorName": "pandur",
     "id": "f0927dcc-a3c5-4d4b-813a-e421b4fed240",
     "created": 1741688762469,
-    "summary": "Fog as a shadereffect applied to a material",
     "docs": {
         "ports": []
     },
@@ -26,18 +25,11 @@
             "type": "new op",
             "author": "pandur",
             "date": 1741688762470
-        },
-        {
-            "message": "Patch.PlwK53F.Normals renamed to Ops.Gl.ShaderEffects.Normals",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1741697134155
         }
     ],
     "coreLibs": [
         "cgl_shadermodifier"
     ],
-    "issues": "",
-    "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "recalculate face normals in vertex shader"
 }

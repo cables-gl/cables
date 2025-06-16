@@ -1,1 +1,0 @@
-Adds or removes the specified class from the HTML element, depending on wether or not that element already has that class.

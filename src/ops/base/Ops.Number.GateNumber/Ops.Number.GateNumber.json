@@ -71,6 +71,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1712929293359
+        },
+        {
+            "message": "update on changing custom default value",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1749032363942
         }
     ],
     "issues": "",
@@ -78,5 +84,6 @@
     "youtubeids": [
         "gT1jXP5As9A"
     ],
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

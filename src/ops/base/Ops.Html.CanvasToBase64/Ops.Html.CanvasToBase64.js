@@ -20,8 +20,6 @@ let texChanged = false;
 let loadingId = null;
 outString.ignoreValueSerialize = true;
 
-// let pixelReader = new CGL.PixelReader();
-
 start.onTriggered = () => { update(); };
 
 inQuality.onChange =
@@ -31,50 +29,15 @@ inCanvas.onChange = () =>
     texChanged = true;
 };
 
-// function retrySoon()
-// {
-//     if (texChanged)
-//     {
-//         if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
-//         outLoading.set(true);
-
-//         loadingId = cgl.patch.loading.start(op.name, CABLES.uuid(), op);
-
-//         op.patch.cgl.addNextFrameOnceCallback(update.bind(this));
-//     }
-//     inQuality.setUiAttribs({ "greyout": inFormat.get() == "PNG" });
-
-//     next.trigger();
-// }
-
 function update()
 {
     op.uiAttr({ "error": null });
 
     if (!inCanvas.get()) return;
-    // const width = inCanvas.get().width;
-    // const height = inCanvas.get().height;
-
-    // const context = canvas.getContext("2d");
-    // const imageData = context.createImageData(width, height);
-    // imageData.data.set(pixel);
-
-    //     const data2 = imageData.data;
-
-    // flip image
-    // Array.from({ "length": height }, (val, i) => { return data2.slice(i * width * 4, (i + 1) * width * 4); })
-    // .forEach((val, i) => { return data2.set(val, (height - i - 1) * width * 4); });
-
-    // context.putImageData(imageData, 0, 0);
 
     const ext = inFormat.get().toLowerCase();
 
-    // let dataString = "";
-    if (!inCanvas.get().toDataURL)
-    {
-        console.log("canvas has no toDataURL", inCanvas.get());
-        return;
-    }
+    if (!inCanvas.get().toDataURL) return op.setUiError("error", "elment has no toDataURL");
 
     let dataString = inCanvas.get().toDataURL("image/" + ext, inQuality.get());
 
@@ -90,9 +53,4 @@ function update()
     texChanged = false;
     loadingId = cgl.patch.loading.finished(loadingId);
     finished.trigger();
-    // });
-
-    // if (retry) setTimeout(retrySoon.bind(this), 50);
 }
-
-//

@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "stephan",
             "date": 1744018675098
+        },
+        {
+            "message": "Html.ElementClosest renamed to Ops.Html.ElementGetClosest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750067663395
         }
     ],
     "layout": {

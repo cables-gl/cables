@@ -11,7 +11,7 @@ const
 
 const cgl = op.patch.cgl;
 const geom = new CGL.Geometry("simplespline");
-outGeom.set(geom);
+outGeom.setRef(geom);
 
 geom.vertices = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let mesh = new CGL.Mesh(cgl, geom);
@@ -59,6 +59,7 @@ function rebuild()
     }
 
     attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
+    geom.vertices = points;
 
     op.setUiError("wrongvcnum", null);
 
@@ -126,8 +127,10 @@ function rebuild()
             }
         }
         const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD, bufTexCoord, 2);
+        geom.texCoords = points;
     }
 
+    outGeom.setRef(geom);
     needsRebuild = false;
 }
 

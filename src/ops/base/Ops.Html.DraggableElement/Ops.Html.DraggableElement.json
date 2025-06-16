@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1749566127721
+        },
+        {
+            "message": "Html.DragableElement renamed to Ops.Html.DraggableElement",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750071018394
         }
     ],
     "layout": {
@@ -23,19 +29,13 @@
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
-            },
-            {
-                "type": 0,
-                "name": "inX",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "inY",
-                "subType": "number"
             }
         ],
         "portsOut": [
+            {
+                "type": 2,
+                "name": "Element out"
+            },
             {
                 "type": 0,
                 "name": "X",
@@ -47,5 +47,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Make a HTML element draggable to move it around with the mouse",
+    "docs": {
+        "ports": []
     }
 }

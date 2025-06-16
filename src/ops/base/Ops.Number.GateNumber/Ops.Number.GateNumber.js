@@ -7,6 +7,7 @@ const
 
 valueInPort.onChange = update;
 passThroughPort.onChange = update;
+inCustomNot.onChange = update;
 
 valueInPort.changeAlways =
     valueOutPort.changeAlways = true;
