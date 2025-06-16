@@ -35,5 +35,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "get the animated value at time x of an animation object",
+    "docs": {
+        "ports": []
     }
 }

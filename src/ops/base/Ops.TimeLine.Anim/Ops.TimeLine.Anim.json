@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1745917962266
-        },
-        {
-            "message": "Anim.Anim renamed to Ops.TimeLine.Anim",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1745918152303
         }
     ],
     "layout": {
@@ -53,5 +47,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "timeline keyframable animation object",
+    "docs": {
+        "ports": []
     }
 }
