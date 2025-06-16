@@ -186,6 +186,7 @@ function updateClass()
 
     oldClassesStr = inClass.get();
     warning();
+    outElement.setRef(div);
 }
 
 function onMouseEnter(e)

@@ -6,6 +6,7 @@ const
     valueOutPort = op.outString("String Out", "");
 
 valueInPort.onChange =
+    inCustomNot.onChange =
     passThroughPort.onChange = update;
 
 inIfNot.onChange = updateUi;

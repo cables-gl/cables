@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "stephan",
             "date": 1744018540727
+        },
+        {
+            "message": "Array.ArrayStringIndices renamed to Ops.Array.ArrayFindStrings",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750065452813
         }
     ],
     "authorName": "stephan",

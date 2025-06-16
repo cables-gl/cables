@@ -87,6 +87,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1743508973061
+        },
+        {
+            "message": "Graphics.PerformanceNext renamed to Ops.Dev.Graphics.PerformanceNext",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750064591175
         }
     ]
 }
