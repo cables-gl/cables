@@ -41,8 +41,7 @@ To prevent any automatically created backup from deletion, you can "Keep this ba
 
 To create a manual backup of your patch, all the ops and all the assets, click on "Create Backup" in the editor.
 Depending on your [supporter level](/support) you will be guided to the [patch export page](../dev_embed/export_standalone/export_standalone)
-or be able to give your backup a name. Once the backup was created you can store it on your local system and restore it
-as described in the above section.
+or be able to give your backup a name. 
 
 ![](img/create_backup.png)
 
@@ -53,7 +52,7 @@ in the editor and can be restored (or downloaded) from there as well:
 
 ### Restoring / Managing Backups
 
-To restore a backup that you downloaded, you can simply import the backup as described above. For any automatic or manual
+To restore a backup that you downloaded, you can simply [import the backup](../import/import) to create a new patch. For any automatic or manual
 backups created on cables.gl you can select "Restore to new patch" from the list of backups. Doing this will create a new
 patch with the same rules applied as described for imports above.
 
