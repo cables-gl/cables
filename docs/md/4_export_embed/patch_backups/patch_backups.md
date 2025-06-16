@@ -54,7 +54,7 @@ in the editor and can be restored (or downloaded) from there as well:
 
 To restore a backup that you downloaded, you can simply [import the backup](../import/import) to create a new patch. For any automatic or manual
 backups created on cables.gl you can select "Restore to new patch" from the list of backups. Doing this will create a new
-patch with the same rules applied as described for imports above.
+patch with the same rules applied when [importing](../import/import).
 
 You can manage the backups of all your patches via ["My Data"](/mydata#backups) from the cables.gl menu. This page will give you an overview
 of your currently used storage space, your current limits and let you delete/clean up backups that are not needed anymore...
