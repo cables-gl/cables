@@ -20,10 +20,9 @@ export class AnimKey
         this.onChange = null;
         this._easing = 0;
 
-        this.bezCp1X = Math.random();
-        this.bezCp1Y = Math.random();
-        this.bezCp2X = Math.random();
-        this.bezCp2Y = Math.random();
+        this.bezCp1 = null;
+        this.bezCp2 = null;
+        this.bezAn = null;
 
         this.cb = null;
         this.cbTriggered = false;
@@ -34,12 +33,25 @@ export class AnimKey
         this.set(obj);
     }
 
+    emitChange()
+    {
+        this.bezAn = null;
+        if (this.onChange !== null) this.onChange();
+        this.anim.forceChangeCallbackSoon();
+        for (let i = 0; i < this.anim.keys.length; i++)
+            this.anim.keys[i].bezAn = null;
+
+    }
+
     delete()
     {
         if (this.anim) this.anim.remove(this);
         else console.log("animkey without anim...");
     }
 
+    /**
+     * @param {Object} o
+     */
     setUiAttribs(o)
     {
         for (const i in o)
@@ -86,15 +98,18 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
-            // this._updateBezier = true;
             this.ease = this.easeCubicSpline;
+
+            this.bezCp1 = this.bezCp1 || [-0.5, 0];
+            this.bezCp2 = this.bezCp2 || [0.5, 0];
+            this.bezAn = null;
         }
         else
         {
             this._easing = Anim.EASING_LINEAR;
             this.ease = this.easeLinear;
         }
-        this.anim.forceChangeCallbackSoon();
+        this.emitChange();
     }
 
     trigger()
@@ -109,8 +124,27 @@ export class AnimKey
     setValue(v)
     {
         this.value = v;
-        if (this.onChange !== null) this.onChange();
-        this.anim.forceChangeCallbackSoon();
+        this.emitChange();
+    }
+
+    /**
+     * @param {number} t
+     * @param {number} v
+     */
+    setBezCp1(t, v)
+    {
+        this.bezCp1 = [t, v];
+        this.emitChange();
+    }
+
+    /**
+     * @param {number} t
+     * @param {number} v
+     */
+    setBezCp2(t, v)
+    {
+        this.bezCp2 = [t, v];
+        this.emitChange();
     }
 
     /**
@@ -127,12 +161,10 @@ export class AnimKey
                 this.cbTriggered = false;
             }
 
-            if (obj.hasOwnProperty("cp1x"))
+            if (obj.hasOwnProperty("cp1"))
             {
-                this.bezCp1X = obj.cp1x;
-                this.bezCp1Y = obj.cp1y;
-                this.bezCp2X = obj.cp2x;
-                this.bezCp2Y = obj.cp2y;
+                this.bezCp1 = obj.cp1;
+                this.bezCp2 = obj.cp2;
             }
 
             if (obj.hasOwnProperty("t")) this.time = obj.t;
@@ -142,8 +174,7 @@ export class AnimKey
 
             if (obj.hasOwnProperty("uiAttribs")) this.setUiAttribs(obj.uiAttribs);
         }
-        if (this.onChange) this.onChange();
-        this.anim.forceChangeCallbackSoon();
+        this.emitChange();
     }
 
     /**
@@ -159,10 +190,8 @@ export class AnimKey
 
         if (this._easing === Anim.EASING_CUBICSPLINE)
         {
-            obj.cp1x = this.bezCp1X;
-            obj.cp1y = this.bezCp1Y;
-            obj.cp2x = this.bezCp2X;
-            obj.cp2y = this.bezCp2Y;
+            obj.cp1 = this.bezCp1;
+            obj.cp2 = this.bezCp2;
         }
 
         return obj;
@@ -179,7 +208,22 @@ export class AnimKey
      */
     easeCubicSpline(perc, key2)
     {
-        return AnimKey.cubicSpline(perc, this, key2);
+        if (!this.bezAn)
+        {
+            const samples = 30;
+
+            const prevKey = this.anim.getPrevKey(this.time);
+            this.bezAn = new Anim();
+            for (let i = 0; i <= samples + 1; i++)
+            {
+                const c = AnimKey.cubicSpline(i / samples, prevKey, this, key2);
+                this.bezAn.setValue(c[0], c[1]);
+            }
+            console.log("bea", this.bezAn);
+        }
+
+        return this.bezAn.getValue(this.time + perc * (key2.time - this.time));
+        // return AnimKey.cubicSpline(perc, this, key2);
     }
 
     /**
@@ -197,7 +241,7 @@ export class AnimKey
     }
 }
 
-AnimKey.cubicSpline = function (/** @type {number} */ t, /** @type {AnimKey} */ key1, /** @type {AnimKey} */ key2)
+AnimKey.cubicSpline = function (t, key0, key1, key2)
 {
     const tInv = 1 - t;
     const tInvSq = tInv * tInv;
@@ -208,10 +252,21 @@ AnimKey.cubicSpline = function (/** @type {number} */ t, /** @type {AnimKey} */ 
     const c2 = 3 * tInv * tSq;
     const c3 = tSq * t;
 
-    const x = c0 * key1.time + c1 * key1.bezCp1X + c2 * key2.time + c3 * key2.bezCp2X;
-    const y = c0 * key1.value + c1 * key1.bezCp1Y + c2 * key2.value + c3 * key2.bezCp2Y;
+    key1.bezCp1 = key1.bezCp1 || [0, 0];
+    key2.bezCp2 = key2.bezCp2 || [0, 0];
+    key1.bezCp1 = key1.bezCp1 || [0, 0];
+    key2.bezCp2 = key2.bezCp2 || [0, 0];
 
-    return y;
+    const x1 = Math.min(key2.time, key1.bezCp2[0] + key1.time);
+    const xp = Math.max(key0.time, key2.bezCp1[0] + key2.time);
+    // const xp = key2.bezCp1[0] + key2.time;
+    // console.log("textjjjj", key2.time, key0.time);
+
+    // const x = c0 + c1 * (key1.bezCp2[0]) + c2 * (key2.bezCp1[0]) + c3;
+    const x = c0 * key1.time + c1 * (x1) + c2 * (xp) + c3 * (key2.time);
+    const y = c0 * key1.value + c1 * (key1.bezCp2[1] + key1.value) + c2 * (key2.bezCp1[1] + key2.value) + c3 * (key2.value);
+
+    return [x, y];
 };
 
 AnimKey.linear = function (perc, key1, key2)

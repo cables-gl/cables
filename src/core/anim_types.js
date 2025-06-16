@@ -18,10 +18,8 @@
  * @property  {import("./anim.js").Anim} [anim] do not use
  * @property  {number} [value] do not use
  * @property  {number} [time] do not use
- * @property  {number} [cp1x]
- * @property  {number} [cp1y]
- * @property  {number} [cp2x]
- * @property  {number} [cp2y]
+ * @property  {number[]} [cp1]
+ * @property  {number[]} [cp2]
  */
 
 /**
