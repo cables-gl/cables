@@ -58,7 +58,7 @@
     "authorName": "pandur",
     "id": "3e679c17-f050-4bc8-bfe5-5b9190e7ce40",
     "created": 1540922733116,
-    "exampleProjectId": "R8YGag",
+    "exampleProjectId": "c5uYnO",
     "changelog": [
         {
             "message": "Ops.Gl.TextureEffects.FXAA renamed to Ops.Gl.ImageCompose.FXAA",
@@ -66,5 +66,6 @@
             "author": "pandur",
             "date": 1701854775052
         }
-    ]
+    ],
+    "license": "MIT"
 }

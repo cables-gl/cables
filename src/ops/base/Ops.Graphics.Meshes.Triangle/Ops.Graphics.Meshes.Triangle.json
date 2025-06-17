@@ -62,5 +62,13 @@
     "authorName": "pandur",
     "id": "331bc9dc-d44c-43bd-be18-a2673fba124e",
     "created": 1524850945993,
-    "exampleProjectId": "RnNiQ6"
+    "exampleProjectId": "RnNiQ6",
+    "changelog": [
+        {
+            "message": "Gl.Meshes.Triangle renamed to Ops.Graphics.Meshes.Triangle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750166749093
+        }
+    ]
 }

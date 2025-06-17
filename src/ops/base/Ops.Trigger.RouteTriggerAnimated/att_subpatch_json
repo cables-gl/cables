@@ -4,7 +4,7 @@
       "opId": "44ceb5d8-b040-4722-b189-a6fb8172517d",
       "id": "mpvfm6g3x",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -264.0214073662488,
           "y": 287.28319710106143
@@ -149,6 +149,10 @@
               "objOut": "mpvfm6g3x"
             }
           ]
+        },
+        {
+          "name": "Highest Index",
+          "value": 11
         }
       ]
     },
@@ -156,7 +160,7 @@
       "opId": "44ceb5d8-b040-4722-b189-a6fb8172517d",
       "id": "1d7nx9622",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 530.9755941311255,
           "y": 263.7583961668417
@@ -168,7 +172,7 @@
       "portsOut": [
         {
           "name": "Switched Value",
-          "value": 0
+          "value": 1
         },
         {
           "name": "Trigger 0",
@@ -301,50 +305,10 @@
               "objOut": "1d7nx9622"
             }
           ]
-        }
-      ]
-    },
-    {
-      "opId": "f5c8c433-ce13-49c4-9a33-74e98f110ed0",
-      "id": "yvm8dnrk7",
-      "uiAttribs": {
-        "subPatch": "uyoggpqnl",
-        "translate": {
-          "x": 283.97171475667534,
-          "y": -586.5189760062061
-        },
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "reset",
-              "portOut": "Next",
-              "objIn": "j1f4avukd",
-              "objOut": "yvm8dnrk7"
-            },
-            {
-              "portIn": "reset",
-              "portOut": "Next",
-              "objIn": "0nin377vm",
-              "objOut": "yvm8dnrk7"
-            }
-          ]
         },
         {
-          "name": "Number",
-          "links": [
-            {
-              "portIn": "Value",
-              "portOut": "Number",
-              "objIn": "cbk13xl8z",
-              "objOut": "yvm8dnrk7"
-            }
-          ]
+          "name": "Highest Index",
+          "value": 11
         }
       ]
     },
@@ -352,7 +316,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "vcg7s3djw",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -35.86815839218056,
           "y": -900.2297800412684
@@ -369,7 +333,7 @@
             {
               "portIn": "Value",
               "portOut": "innerOut_ip34w2ny0",
-              "objIn": "yvm8dnrk7",
+              "objIn": "9yfe0pkxs",
               "objOut": "vcg7s3djw"
             }
           ]
@@ -404,7 +368,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "xa9a2c9tx",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 156.74720975989365,
           "y": 514.02229507125
@@ -472,7 +436,10 @@
       "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
       "id": "2zlac8bz5",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -23.86815839218056,
           "y": -584.2682290681564
@@ -526,7 +493,7 @@
       "opId": "01716872-67bd-4b31-a4a2-e0ccadf48411",
       "id": "cbk13xl8z",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 295.97171475667534,
           "y": 10.568092833846578
@@ -563,7 +530,7 @@
       "opId": "5b244b6e-c505-4743-b2cc-8119ef720028",
       "id": "j1f4avukd",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -670.4394153470448,
           "y": -195.18024439296633
@@ -582,15 +549,15 @@
         },
         {
           "name": "loop",
-          "value": false
+          "value": 0
         },
         {
           "name": "Wait for Reset",
-          "value": true
+          "value": 1
         },
         {
           "name": "easing index",
-          "value": 0
+          "value": 11
         },
         {
           "name": "easing",
@@ -611,7 +578,7 @@
         },
         {
           "name": "finished",
-          "value": false
+          "value": true
         }
       ]
     },
@@ -620,8 +587,8 @@
       "id": "7r36rvuiu",
       "uiAttribs": {
         "widthOnlyGrow": true,
-        "extendTitle": " 1",
-        "subPatch": "uyoggpqnl",
+        "extendTitle": "1",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -670.5815114358084,
           "y": -74.90132115544452
@@ -647,7 +614,7 @@
       "opId": "5b244b6e-c505-4743-b2cc-8119ef720028",
       "id": "0nin377vm",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -497.6755661331112,
           "y": -209.77675328577104
@@ -666,11 +633,11 @@
         },
         {
           "name": "loop",
-          "value": false
+          "value": 0
         },
         {
           "name": "Wait for Reset",
-          "value": true
+          "value": 1
         },
         {
           "name": "easing index",
@@ -695,7 +662,7 @@
         },
         {
           "name": "finished",
-          "value": false
+          "value": true
         }
       ]
     },
@@ -704,8 +671,8 @@
       "id": "ootclx44p",
       "uiAttribs": {
         "widthOnlyGrow": true,
-        "extendTitle": " 1",
-        "subPatch": "uyoggpqnl",
+        "extendTitle": "0",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -485.6755661331112,
           "y": -74.90132115544452
@@ -737,7 +704,7 @@
       "opId": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
       "id": "q5q2klxc0",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -264.0214073662488,
           "y": 140.34796471554233
@@ -774,7 +741,7 @@
       "opId": "9989b1c0-1073-4d5f-bfa0-36dd98b66e27",
       "id": "ttpt3akp2",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 533.1013354710371,
           "y": 158.98092065139974
@@ -811,7 +778,7 @@
       "opId": "9e8a4b73-4ba7-4c4f-b266-81c5f9db9b7a",
       "id": "m0e1nn8qn",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 533.1013354710371,
           "y": 49.88156832009409
@@ -837,13 +804,13 @@
       "opId": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
       "id": "eocpn56rh",
       "uiAttribs": {
-        "title": "duration",
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": -488.3251902393844,
           "y": -398.2698439680514
         },
-        "blueprintSubpatch2": true
+        "blueprintSubpatch2": true,
+        "extendTitle": null
       },
       "storage": {},
       "portsOut": [
@@ -870,7 +837,7 @@
       "opId": "9549e2ed-a544-4d33-a672-05c7854ccf5d",
       "id": "x5lzdluen",
       "uiAttribs": {
-        "subPatch": "uyoggpqnl",
+        "subPatch": "cuyljyrg6",
         "translate": {
           "x": 533.1013354710371,
           "y": -140.2482492323043
@@ -891,6 +858,52 @@
           ]
         }
       ]
+    },
+    {
+      "opId": "63ec7ad7-a436-4f72-8b5e-257cc20049d4",
+      "id": "9yfe0pkxs",
+      "uiAttribs": {
+        "subPatch": "cuyljyrg6",
+        "translate": {
+          "x": 283.97171475667534,
+          "y": -586.5189760062061
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "reset",
+              "portOut": "Next",
+              "objIn": "j1f4avukd",
+              "objOut": "9yfe0pkxs"
+            },
+            {
+              "portIn": "reset",
+              "portOut": "Next",
+              "objIn": "0nin377vm",
+              "objOut": "9yfe0pkxs"
+            }
+          ]
+        },
+        {
+          "name": "Number",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Number",
+              "objIn": "cbk13xl8z",
+              "objOut": "9yfe0pkxs"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "9yfe0pkxs"
+      }
     }
   ]
 }
