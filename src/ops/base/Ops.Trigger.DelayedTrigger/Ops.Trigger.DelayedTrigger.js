@@ -1,5 +1,5 @@
 const
-    exe = op.inTrigger("exe"),
+    exe = op.inTriggerButton("exe"),
     delay = op.inValueFloat("delay", 1),
     cancel = op.inTriggerButton("Cancel"),
     next = op.outTrigger("next"),
