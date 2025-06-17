@@ -1,0 +1,95 @@
+{
+    "id": "bc2903a0-ee7f-4918-b1d8-ea3a6262e3ee",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1605626695599
+        },
+        {
+            "message": "Ops.User.pandur.ElementInteraction renamed to Ops.Html.ElementInteraction",
+            "author": "pandur",
+            "date": 1610360181544
+        },
+        {
+            "message": "op Html.ElementInteraction was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1750154315189
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1605626752465,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Mouse Is Down Left",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mouse Is Down Right",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Down Left"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Down Right"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Up Left"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Up Right"
+            },
+            {
+                "type": 0,
+                "name": "Mouse Over",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Enter"
+            },
+            {
+                "type": 1,
+                "name": "Mouse Leave"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Html element interaction events",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "W0WpUr",
+    "license": "MIT"
+}
