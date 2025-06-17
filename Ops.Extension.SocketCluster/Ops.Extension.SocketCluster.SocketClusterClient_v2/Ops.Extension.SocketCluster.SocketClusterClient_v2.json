@@ -180,7 +180,5 @@
             "type": "commonjs"
         }
     ],
-    "libs": [
-        "socketcluster-client.js"
-    ]
+    "libs": []
 }
