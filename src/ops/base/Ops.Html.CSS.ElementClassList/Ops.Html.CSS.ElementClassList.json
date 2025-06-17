@@ -2,12 +2,6 @@
     "id": "1f0670a2-e239-4657-99dc-2aecd35c54d1",
     "changelog": [
         {
-            "message": "Team.ACAR.ElementClassList renamed to Ops.Html.CSS.ElementClassList",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1744017151578
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "stephan",

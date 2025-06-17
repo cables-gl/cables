@@ -4,27 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1643638670612
-        },
-        {
-            "message": " added lib: fflate.js",
-            "author": "pandur",
-            "date": 1643639536682
-        },
-        {
-            "message": "Ops.User.pandur.ExrFile renamed to Ops.Dev.ExrTexture",
-            "author": "pandur",
-            "date": 1643645413360
-        },
-        {
-            "message": " added lib: exrloader.js",
-            "author": "pandur",
-            "date": 1643645515924
-        },
-        {
-            "message": "Ops.Dev.ExrTexture renamed to Ops.Gl.Textures.ExrTexture",
-            "author": "pandur",
-            "date": 1644228701961
+            "date": 1643638670612,
+            "type": "new"
         },
         {
             "message": "Don't crash on wrong fileformat, show exception error message in op params",

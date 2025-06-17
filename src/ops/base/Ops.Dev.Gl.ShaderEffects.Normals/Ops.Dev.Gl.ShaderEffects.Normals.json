@@ -25,6 +25,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1741688762470
+        },
+        {
+            "message": "Gl.ShaderEffects.Normals renamed to Ops.Dev.Gl.ShaderEffects.Normals",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750081741236
         }
     ],
     "coreLibs": [

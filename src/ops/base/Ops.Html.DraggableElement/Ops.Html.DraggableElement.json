@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1749562386832
-        },
-        {
-            "message": "Patch.PIfMAIN.DragaleElement renamed to Ops.Html.DragableElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1749566127721
-        },
-        {
-            "message": "Html.DragableElement renamed to Ops.Html.DraggableElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750071018394
         }
     ],
     "layout": {
@@ -51,5 +39,6 @@
     "summary": "Make a HTML element draggable to move it around with the mouse",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "WSi9iO"
 }

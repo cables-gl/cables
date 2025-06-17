@@ -28,5 +28,6 @@
     "summary": "Outputs a linebreak, or adds a linebreak to a string",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "U7PniO"
 }

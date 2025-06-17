@@ -31,7 +31,7 @@
             }
         ]
     },
-    "summary": "Get intormation about an anim object",
+    "summary": "Get information about an anim object",
     "docs": {
         "ports": []
     }
