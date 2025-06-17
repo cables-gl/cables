@@ -80,6 +80,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1750154385192
+        },
+        {
+            "message": "Graphics.Triangle_v2 renamed to Ops.Graphics.Meshes.Triangle_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750169000118
         }
     ],
     "license": "MIT"
