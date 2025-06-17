@@ -394,6 +394,17 @@ export class Anim extends Events
     /**
      * @param {number} time
      */
+    getPrevKey(time)
+    {
+        let index = this.getKeyIndex(time) - 1;
+        if (index < 0) index = 0;
+
+        return this.keys[index];
+    }
+
+    /**
+     * @param {number} time
+     */
     isFinished(time)
     {
         if (this.keys.length <= 0) return true;

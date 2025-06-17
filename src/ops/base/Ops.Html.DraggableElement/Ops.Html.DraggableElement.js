@@ -3,11 +3,12 @@ const
     inX = op.inFloat("inX"),
     inY = op.inFloat("inY"),
 
+    outEle = op.outObject("Element out"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y");
 
-inX.setUiAttribs({ "hideParam": true });
-inY.setUiAttribs({ "hideParam": true });
+inX.setUiAttribs({ "hidePort": true });
+inY.setUiAttribs({ "hidePort": true });
 
 let elmnt = null;
 let pos1, pos2, pos3, pos4;
@@ -56,7 +57,7 @@ function elementDrag(e)
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
-    /// /
+    ///
 
     const rr = elmnt.getBoundingClientRect();
 
@@ -64,6 +65,7 @@ function elementDrag(e)
     outY.set(rr.top + rr.height / 2 - r.top);
     inX.set(outX.get());
     inY.set(outY.get());
+    outEle.setRef(elmnt);
 }
 
 function closeDragElement()

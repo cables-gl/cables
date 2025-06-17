@@ -38,5 +38,7 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "preview an image URL or a data/base64 URL",
+    "exampleProjectId": "gsP8hO"
 }
