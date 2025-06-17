@@ -1,0 +1,91 @@
+{
+    "id": "6c8d01a2-dc8c-43c3-a569-c2ab0ba42747",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1574855237155,
+            "type": "new"
+        },
+        {
+            "message": "Math.Crossfade renamed to Ops.Anim.Crossfade",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154030920
+        }
+    ],
+    "authorName": "simod",
+    "created": 1574855239568,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Crossfade",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Out Min",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Out Max",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Easing index",
+                "group": "Easing",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "crossfade between 2 values",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Crossfade",
+                "text": "crossfade"
+            },
+            {
+                "name": "Out Min",
+                "text": "minimum out value"
+            },
+            {
+                "name": "Out Max",
+                "text": "maximum out value"
+            },
+            {
+                "name": "Easing",
+                "text": "type of easing"
+            },
+            {
+                "name": "A",
+                "text": "A output "
+            },
+            {
+                "name": "B",
+                "text": "B output"
+            }
+        ]
+    },
+    "exampleProjectId": "U_a2d-",
+    "license": "MIT"
+}

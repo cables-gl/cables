@@ -1,0 +1,133 @@
+{
+    "authorName": "pandur",
+    "id": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
+    "created": 1588860433700,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Render Mesh",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mapping index",
+                "values": [
+                    "Side",
+                    "Cube +-",
+                    "SideWrap"
+                ],
+                "group": "Mapping",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Bias",
+                "group": "Mapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "group": "Mapping",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "group": "Sides",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "group": "Sides",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Left",
+                "group": "Sides",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Right",
+                "group": "Sides",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Front",
+                "group": "Sides",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Back",
+                "group": "Sides",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "summary": "draw a cube",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Executes the op, renders a cube to the canvas."
+            }
+        ]
+    },
+    "exampleProjectId": "0ghhQ6",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Gl.Meshes.Cube_v2 renamed to Ops.Graphics.Meshes.Cube_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154552653
+        }
+    ]
+}

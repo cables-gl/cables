@@ -36,5 +36,6 @@
     "summary": "Remove every occurances of given characters from a string",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "ls8ciO"
 }

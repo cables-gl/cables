@@ -1,0 +1,84 @@
+{
+    "summary": "Draw parameterizable sphere",
+    "author": "5b0e94534b69a27140afdab3",
+    "authorName": "pandur",
+    "id": "6ee346d0-614e-4709-91a5-dc21ae975caf",
+    "created": 1685718747795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "stacks",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "slices",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Filloffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "HvxfQ6",
+    "caniusequery": "",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Meshes.Sphere_v2",
+            "author": "pandur",
+            "date": 1685718747796
+        },
+        {
+            "message": "Ops.Patch.P5DptNt.Sphere3 renamed to Ops.Gl.Meshes.Sphere_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685719218243
+        },
+        {
+            "message": "Gl.Meshes.Sphere_v3 renamed to Ops.Graphics.Sphere_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154406108
+        },
+        {
+            "message": "Graphics.Sphere_v3 renamed to Ops.Graphics.Meshes.Sphere_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154495227
+        }
+    ],
+    "license": "MIT"
+}

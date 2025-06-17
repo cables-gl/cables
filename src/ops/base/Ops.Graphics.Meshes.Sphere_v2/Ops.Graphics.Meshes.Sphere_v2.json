@@ -1,0 +1,66 @@
+{
+    "summary": "Draw parameterizable sphere",
+    "author": "5b0e94534b69a27140afdab3",
+    "authorName": "_LJ_",
+    "id": "450b4d68-2278-4d9f-9849-0abdfa37ef69",
+    "created": 1541417238816,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "stacks",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "slices",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Filloffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "HvxfQ6",
+    "caniusequery": "",
+    "changelog": [
+        {
+            "message": "Gl.Meshes.Sphere_v2 renamed to Ops.Graphics.Meshes.Sphere_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154505539
+        }
+    ]
+}

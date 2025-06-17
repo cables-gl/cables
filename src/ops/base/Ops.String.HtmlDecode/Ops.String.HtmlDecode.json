@@ -28,5 +28,6 @@
     "summary": "convert a html encoded string to a normal UTF8 string",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "jVwciO"
 }

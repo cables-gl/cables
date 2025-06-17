@@ -28,5 +28,6 @@
     "summary": "encode a string to html",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "jVwciO"
 }
