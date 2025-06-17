@@ -1,0 +1,20 @@
+{
+    "id": "25386b3f-3c76-447d-b09b-c826bd1a9ec2",
+    "created": 1750170338191,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1750170338230
+        },
+        {
+            "message": "Extension.WebGpu.Sasel renamed to Ops.Extension.WebGpu.SaselHund",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750170371764
+        }
+    ]
+}
