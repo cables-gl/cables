@@ -101,17 +101,7 @@ export class AnimKey
             if (this.ease != this.easeCubicSpline)
             {
                 this.ease = this.easeCubicSpline;
-
-                let xx = -0.5;
-                const pk = this.anim.getPrevKey(this.time);
-                if (pk)xx = (this.time - pk.time) / 2;
-
-                let x2 = 0.5;
-                const nk = this.anim.getNextKey(this.time);
-                if (pk)x2 = (nk.time - this.time) / 2;
-
-                this.bezCp1 = [-Math.min(xx, x2), 0];
-                this.bezCp2 = [Math.min(xx, x2), 0];
+                this.bezReset();
             }
 
             this.bezAn = null;
@@ -122,6 +112,21 @@ export class AnimKey
             this.ease = this.easeLinear;
         }
         this.emitChange();
+    }
+
+    bezReset()
+    {
+
+        let xx = -0.5;
+        const pk = this.anim.getPrevKey(this.time);
+        if (pk)xx = (this.time - pk.time) / 2;
+
+        let x2 = 0.5;
+        const nk = this.anim.getNextKey(this.time);
+        if (pk)x2 = (nk.time - this.time) / 2;
+
+        this.bezCp1 = [-Math.min(xx, x2), 0];
+        this.bezCp2 = [Math.min(xx, x2), 0];
     }
 
     trigger()
@@ -224,11 +229,11 @@ export class AnimKey
         {
             const samples = 30;
 
-            const prevKey = this.anim.getPrevKey(this.time);
+            // const prevKey = this.anim.getPrevKey(this.time);
             this.bezAn = new Anim();
             for (let i = 0; i <= samples + 1; i++)
             {
-                const c = AnimKey.cubicSpline(i / samples, prevKey, this, key2);
+                const c = AnimKey.cubicSpline(i / samples, this, key2);
                 this.bezAn.setValue(c[0], c[1]);
             }
         }
@@ -252,7 +257,7 @@ export class AnimKey
     }
 }
 
-AnimKey.cubicSpline = function (t, key0, key1, key2)
+AnimKey.cubicSpline = function (t, key1, key2)
 {
     const tInv = 1 - t;
     const tInvSq = tInv * tInv;
@@ -263,15 +268,13 @@ AnimKey.cubicSpline = function (t, key0, key1, key2)
     const c2 = 3 * tInv * tSq;
     const c3 = tSq * t;
 
-    key0.bezCp1 = key0.bezCp1 || [-0.5, 0];
-    key0.bezCp2 = key0.bezCp2 || [0.5, 0];
     key1.bezCp1 = key1.bezCp1 || [-0.5, 0];
     key1.bezCp2 = key1.bezCp2 || [0.5, 0];
     key2.bezCp1 = key2.bezCp1 || [-0.5, 0];
     key2.bezCp2 = key2.bezCp2 || [0.5, 0];
 
     const x1 = Math.min(key2.time, key1.bezCp2[0] + key1.time);
-    const xp = Math.max(key0.time, key2.bezCp1[0] + key2.time);
+    const xp = Math.max(key1.time, key2.bezCp1[0] + key2.time);
     // const xp = key2.bezCp1[0] + key2.time;
     // console.log("textjjjj", key2.time, key0.time);
 
