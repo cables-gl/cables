@@ -67,6 +67,8 @@ export class AnimKey
      */
     setEasing(e)
     {
+        let changed = false;
+        if (this._easing != e)changed = true;
         this._easing = e;
 
         if (this._easing == Anim.EASING_LINEAR) this.ease = this.easeLinear;
@@ -111,7 +113,7 @@ export class AnimKey
             this._easing = Anim.EASING_LINEAR;
             this.ease = this.easeLinear;
         }
-        this.emitChange();
+        if (changed) this.emitChange();
     }
 
     bezReset()
