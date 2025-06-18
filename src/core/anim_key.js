@@ -127,6 +127,7 @@ export class AnimKey
 
         this.bezCp1 = [-Math.min(xx, x2), 0];
         this.bezCp2 = [Math.min(xx, x2), 0];
+        this.emitChange();
     }
 
     trigger()
