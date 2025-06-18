@@ -104,14 +104,14 @@ export class AnimKey
 
                 let xx = -0.5;
                 const pk = this.anim.getPrevKey(this.time);
-                if (pk)xx = -(this.time - pk.time) / 2;
+                if (pk)xx = (this.time - pk.time) / 2;
 
                 let x2 = 0.5;
                 const nk = this.anim.getNextKey(this.time);
                 if (pk)x2 = (nk.time - this.time) / 2;
 
-                this.bezCp1 = [xx, 0];
-                this.bezCp2 = [x2, 0];
+                this.bezCp1 = [-Math.min(xx, x2), 0];
+                this.bezCp2 = [Math.min(xx, x2), 0];
             }
 
             this.bezAn = null;
