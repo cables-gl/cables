@@ -252,10 +252,12 @@ AnimKey.cubicSpline = function (t, key0, key1, key2)
     const c2 = 3 * tInv * tSq;
     const c3 = tSq * t;
 
-    key1.bezCp1 = key1.bezCp1 || [0, 0];
-    key2.bezCp2 = key2.bezCp2 || [0, 0];
-    key1.bezCp1 = key1.bezCp1 || [0, 0];
-    key2.bezCp2 = key2.bezCp2 || [0, 0];
+    key1.bezCp1 = key1.bezCp1 || [-0.5, 0];
+    key1.bezCp2 = key1.bezCp2 || [0.5, 0];
+    key2.bezCp1 = key2.bezCp1 || [-0.5, 0];
+    key2.bezCp2 = key2.bezCp2 || [0.5, 0];
+    key0.bezCp1 = key0.bezCp1 || [-0.5, 0];
+    key0.bezCp2 = key0.bezCp2 || [0.5, 0];
 
     const x1 = Math.min(key2.time, key1.bezCp2[0] + key1.time);
     const xp = Math.max(key0.time, key2.bezCp1[0] + key2.time);
