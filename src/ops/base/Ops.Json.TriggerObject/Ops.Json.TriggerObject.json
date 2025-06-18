@@ -1,0 +1,39 @@
+{
+    "authorName": "pandur",
+    "id": "e437c074-190f-4adb-8265-3fddea27fe33",
+    "created": 1520334722051,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "set output object when triggered",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Json.ObjectTrigger renamed to Ops.Json.TriggerObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750153888819
+        }
+    ]
+}

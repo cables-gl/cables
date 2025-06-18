@@ -42,5 +42,6 @@
     "summary": "Get op name by id",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Hmk7iO"
 }

@@ -37,24 +37,14 @@
         {
             "message": "Ops.User.pandur.FaceCulling_v2 renamed to Ops.Gl.FaceCulling_v2",
             "author": "pandur",
-            "date": 1577014912398
+            "date": 1577014912398,
+            "type": "new"
         },
         {
             "message": "fix: behaves correctly when using stacked cull modes",
             "author": "andro",
-            "date": 1580204641776
-        },
-        {
-            "message": "Ops.Gl.FaceCulling_v2 renamed to Ops.Graphics.FaceCulling_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1699428385357
-        },
-        {
-            "message": "Graphics.FaceCulling_v2 renamed to Ops.Gl.FaceCulling_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1744373878186
+            "date": 1580204641776,
+            "type": "bugfix"
         }
     ],
     "summary": "Disable the rendering of front or back facing triangles with culling",

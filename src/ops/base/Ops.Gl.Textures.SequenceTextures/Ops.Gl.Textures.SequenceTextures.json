@@ -2,27 +2,10 @@
     "id": "6342554e-a332-4711-92c7-f08d3de5499e",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1595152280236
-        },
-        {
-            "message": "Ops.Values.SequenceObjects renamed to Ops.Json.SequenceObjects",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685949698418
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1740573832678
-        },
-        {
-            "message": "Patch.PAh3NTD.SequenceTextures renamed to Ops.Gl.Textures.SequenceTextures",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1740573848506
         }
     ],
     "authorName": "pandur",

@@ -34,16 +34,18 @@
         {
             "message": "added option to force number type",
             "author": "pandur",
-            "date": 1643616875325
+            "date": 1643616875325,
+            "type": "feature"
         },
         {
             "message": "show warning if column does not exist",
             "author": "pandur",
-            "date": 1643616880935
+            "date": 1643616880935,
+            "type": "improvement"
         },
         {
             "message": "show warning if array is empty",
-            "type": "bugfix",
+            "type": "improvement",
             "author": "stephan",
             "date": 1743094400500
         }

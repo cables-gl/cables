@@ -1,0 +1,53 @@
+{
+    "summary": "cables logo mesh/geometry",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Geometry"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "d53b5d7b-99b5-420e-b5a1-2d7c2c1f1ebb",
+    "created": 1540457633048,
+    "exampleProjectId": "xUMq3j",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Gl.Meshes.CablesLogo renamed to Ops.Graphics.CablesLogo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154377816
+        },
+        {
+            "message": "Graphics.CablesLogo renamed to Ops.Graphics.Meshes.CablesLogo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750154481290
+        }
+    ]
+}

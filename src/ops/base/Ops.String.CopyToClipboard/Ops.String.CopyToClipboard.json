@@ -25,15 +25,21 @@
                 "name": "String"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Success",
+                "subType": "boolean"
+            }
+        ]
     },
     "summary": "Copy string to clipboard on trigger",
     "issues": "",
     "caniusequery": "writetext",
-
     "youtubeids": [],
     "exampleProjectId": "Rquam4",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

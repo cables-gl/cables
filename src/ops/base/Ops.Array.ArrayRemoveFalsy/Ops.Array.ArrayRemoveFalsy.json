@@ -33,5 +33,6 @@
     "summary": "Remove falsy items from an array",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "s6p6iO"
 }

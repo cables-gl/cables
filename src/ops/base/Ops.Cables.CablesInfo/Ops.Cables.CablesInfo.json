@@ -19,8 +19,9 @@
             }
         ]
     },
-    "summary": "Output the cables URL",
+    "summary": "Output the cables URL of the current editor environment",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "vaK7iO"
 }

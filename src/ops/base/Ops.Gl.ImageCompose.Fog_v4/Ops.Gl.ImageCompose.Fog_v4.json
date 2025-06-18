@@ -4,28 +4,8 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1604488025107
-        },
-        {
-            "message": "Ops.User.simod.Fog_v3 renamed to Ops.Gl.TextureEffects.Fog_v3",
-            "author": "simod",
-            "date": 1604488474831
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Fog_v3",
-            "author": "pandur",
-            "date": 1654615796969
-        },
-        {
-            "message": "Ops.User.pandur.Fog_v4 renamed to Ops.Gl.TextureEffects.Fog_v4",
-            "author": "pandur",
-            "date": 1654616012411
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Fog_v4 renamed to Ops.Gl.ImageCompose.Fog_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701854746070
+            "date": 1604488025107,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
@@ -134,18 +114,11 @@
         ]
     },
     "summary": "add post processing fog (nebula) to a scene",
-    "issues": "",
-
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
                 "name": "render",
                 "text": "trigger input"
-            },
-            {
-                "name": "blendMode",
-                "text": "choose between different blend modes"
             },
             {
                 "name": "Amount",
@@ -170,14 +143,6 @@
             {
                 "name": "Fog Density",
                 "text": "density of the fog"
-            },
-            {
-                "name": "Fog Mode index",
-                "text": "choose between different fog modes: default (pow2 mode), linear, exp and exp2"
-            },
-            {
-                "name": "Fog Mode",
-                "text": "choose between different fog modes: default (pow2 mode), linear, exp and exp2"
             },
             {
                 "name": "nearplane",
@@ -209,5 +174,6 @@
             }
         ]
     },
-    "exampleProjectId": "L6GbDe"
+    "exampleProjectId": "I6pZnO",
+    "license": "MIT"
 }
