@@ -106,7 +106,7 @@ export class Anim extends Events
     forceChangeCallbackSoon()
     {
         clearTimeout(this.forcecbto);
-        this.forcecbto = setTimeout(this.forceChangeCallback.bind(this), 10);
+        this.forcecbto = setTimeout(this.forceChangeCallback.bind(this), 50);
     }
 
     getLoop()

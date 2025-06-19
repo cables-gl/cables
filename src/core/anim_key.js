@@ -67,6 +67,8 @@ export class AnimKey
      */
     setEasing(e)
     {
+        let changed = false;
+        if (this._easing != e)changed = true;
         this._easing = e;
 
         if (this._easing == Anim.EASING_LINEAR) this.ease = this.easeLinear;
@@ -98,10 +100,12 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
-            this.ease = this.easeCubicSpline;
+            if (this.ease != this.easeCubicSpline)
+            {
+                this.ease = this.easeCubicSpline;
+                this.bezReset();
+            }
 
-            this.bezCp1 = this.bezCp1 || [-0.5, 0];
-            this.bezCp2 = this.bezCp2 || [0.5, 0];
             this.bezAn = null;
         }
         else
@@ -109,6 +113,22 @@ export class AnimKey
             this._easing = Anim.EASING_LINEAR;
             this.ease = this.easeLinear;
         }
+        if (changed) this.emitChange();
+    }
+
+    bezReset()
+    {
+
+        let xx = -0.5;
+        const pk = this.anim.getPrevKey(this.time);
+        if (pk)xx = (this.time - pk.time) / 2;
+
+        let x2 = 0.5;
+        const nk = this.anim.getNextKey(this.time);
+        if (pk)x2 = (nk.time - this.time) / 2;
+
+        this.bezCp1 = [-Math.min(xx, x2), 0];
+        this.bezCp2 = [Math.min(xx, x2), 0];
         this.emitChange();
     }
 
@@ -212,14 +232,13 @@ export class AnimKey
         {
             const samples = 30;
 
-            const prevKey = this.anim.getPrevKey(this.time);
+            // const prevKey = this.anim.getPrevKey(this.time);
             this.bezAn = new Anim();
             for (let i = 0; i <= samples + 1; i++)
             {
-                const c = AnimKey.cubicSpline(i / samples, prevKey, this, key2);
+                const c = AnimKey.cubicSpline(i / samples, this, key2);
                 this.bezAn.setValue(c[0], c[1]);
             }
-            console.log("bea", this.bezAn);
         }
 
         return this.bezAn.getValue(this.time + perc * (key2.time - this.time));
@@ -241,7 +260,7 @@ export class AnimKey
     }
 }
 
-AnimKey.cubicSpline = function (t, key0, key1, key2)
+AnimKey.cubicSpline = function (t, key1, key2)
 {
     const tInv = 1 - t;
     const tInvSq = tInv * tInv;
@@ -252,13 +271,13 @@ AnimKey.cubicSpline = function (t, key0, key1, key2)
     const c2 = 3 * tInv * tSq;
     const c3 = tSq * t;
 
-    key1.bezCp1 = key1.bezCp1 || [0, 0];
-    key2.bezCp2 = key2.bezCp2 || [0, 0];
-    key1.bezCp1 = key1.bezCp1 || [0, 0];
-    key2.bezCp2 = key2.bezCp2 || [0, 0];
+    key1.bezCp1 = key1.bezCp1 || [-0.5, 0];
+    key1.bezCp2 = key1.bezCp2 || [0.5, 0];
+    key2.bezCp1 = key2.bezCp1 || [-0.5, 0];
+    key2.bezCp2 = key2.bezCp2 || [0.5, 0];
 
     const x1 = Math.min(key2.time, key1.bezCp2[0] + key1.time);
-    const xp = Math.max(key0.time, key2.bezCp1[0] + key2.time);
+    const xp = Math.max(key1.time, key2.bezCp1[0] + key2.time);
     // const xp = key2.bezCp1[0] + key2.time;
     // console.log("textjjjj", key2.time, key0.time);
 
