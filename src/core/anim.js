@@ -386,7 +386,7 @@ export class Anim extends Events
     getNextKey(time)
     {
         let index = this.getKeyIndex(time) + 1;
-        if (index >= this.keys.length) index = this.keys.length - 1;
+        if (index >= this.keys.length) return null;
 
         return this.keys[index];
     }
@@ -397,7 +397,7 @@ export class Anim extends Events
     getPrevKey(time)
     {
         let index = this.getKeyIndex(time) - 1;
-        if (index < 0) index = 0;
+        if (index < 0) return null;
 
         return this.keys[index];
     }

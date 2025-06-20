@@ -119,13 +119,13 @@ export class AnimKey
     bezReset()
     {
 
-        let xx = -0.5;
+        let xx = 0.5;
         const pk = this.anim.getPrevKey(this.time);
         if (pk)xx = (this.time - pk.time) / 2;
 
         let x2 = 0.5;
         const nk = this.anim.getNextKey(this.time);
-        if (pk)x2 = (nk.time - this.time) / 2;
+        if (nk)x2 = (nk.time - this.time) / 2;
 
         this.bezCp1 = [-Math.min(xx, x2), 0];
         this.bezCp2 = [Math.min(xx, x2), 0];
