@@ -12,18 +12,26 @@ const outListening = op.outBoolNum("Listening", false);
 const outClients = op.outNumber("Clients");
 const outError = op.outString("Error");
 
+op.setUiError("httpserver", null);
+
 let agServer = null;
-let httpServer = http.createServer();
-httpServer.on("error", (e) =>
+let httpServer = null;
+if (http)
 {
-    op.setUiError("httperror", e.message, 2);
-    outError.set(e.message);
-    updateUi();
-});
-
-op.onDelete = stopServer;
-
-startServer();
+    httpServer = http.createServer();
+    httpServer.on("error", (e) =>
+    {
+        op.setUiError("httperror", e.message, 2);
+        outError.set(e.message);
+        updateUi();
+    });
+    startServer();
+    op.onDelete = stopServer;
+}
+else
+{
+    op.setUiError("httpserver", "Cannot start server, this op is for cables standalone only");
+}
 
 function updateUi()
 {
@@ -47,7 +55,8 @@ function startServer()
         try
         {
             httpServer.listen(inPort.get(), inHost.get(), null, onStart);
-        } catch (e)
+        }
+        catch (e)
         {
             op.setUiError("catch2", e.message, 2);
             outError.set(e.message);
@@ -108,7 +117,8 @@ function onStart()
                 updateUi();
             }
         })();
-    } catch (e)
+    }
+    catch (e)
     {
         op.setUiError("catch1", e.message, 2);
         outError.set(e.message);
@@ -137,4 +147,3 @@ inActive.onChange = () =>
         stopServer();
     }
 };
-
