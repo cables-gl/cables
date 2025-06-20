@@ -44,14 +44,7 @@ export class WebAudio
             if (window.Tone && !this.toneJsInitialized)
             {
                 // set current audio context in tone.js, versions >= 15 do not have the setter anymore
-                if (Tone.setContext)
-                {
-                    Tone.setContext(window.audioContext);
-                }
-                else
-                {
-                    Tone.context = window.audioContext;
-                }
+                if (Tone.setContext) Tone.setContext(window.audioContext);
                 this.toneJsInitialized = true;
             }
         }
