@@ -6,7 +6,7 @@ const
     outValidIndex = op.outBoolNum("Valid Index", true);
 
 array.ignoreValueSerialize = true;
-
+op.toWorkPortsNeedToBeLinked(array);
 index.onChange = array.onChange = update;
 
 function update()

@@ -1,0 +1,36 @@
+{
+    "id": "34e343d2-b9ee-480a-b6d0-5afd198ad7be",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1750249932006
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1750249932005,
+    "summary": "push/append a texture to an array",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

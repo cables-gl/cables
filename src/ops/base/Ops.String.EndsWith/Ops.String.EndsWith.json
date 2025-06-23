@@ -1,0 +1,37 @@
+{
+    "id": "fdeed3ad-42fd-478a-9a03-a95495dbb946",
+    "created": 1750249367931,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1750249367931
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Search"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Ends with",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "does a string starts with another string?",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}

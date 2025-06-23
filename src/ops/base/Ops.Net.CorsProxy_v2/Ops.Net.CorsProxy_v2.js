@@ -3,7 +3,7 @@ const
     result = op.outString("CORS URL");
 
 const CORS_CABLES_PROXY = "https://cors.cables.gl/";
-
+a.onLinkChanged =
 a.onChange = update;
 
 update();

@@ -1,0 +1,1 @@
+outputs true if the string begins with search string

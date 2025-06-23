@@ -67,25 +67,8 @@
         {
             "message": "cloned op from Ops.Gl.Meshes.Triangle",
             "author": "pandur",
-            "date": 1686919927743
-        },
-        {
-            "message": "Ops.Patch.P18Mg4z.Triangle2 renamed to Ops.Gl.Meshes.Triangle_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686920112984
-        },
-        {
-            "message": "Gl.Meshes.Triangle_v2 renamed to Ops.Graphics.Triangle_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750154385192
-        },
-        {
-            "message": "Graphics.Triangle_v2 renamed to Ops.Graphics.Meshes.Triangle_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750169000118
+            "date": 1686919927743,
+            "type": "new"
         }
     ],
     "license": "MIT"
