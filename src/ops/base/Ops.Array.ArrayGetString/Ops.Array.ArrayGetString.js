@@ -4,6 +4,7 @@ const
     result = op.outString("result");
 
 array.ignoreValueSerialize = true;
+op.toWorkPortsNeedToBeLinked(array);
 
 array.onChange =
 index.onChange = update;

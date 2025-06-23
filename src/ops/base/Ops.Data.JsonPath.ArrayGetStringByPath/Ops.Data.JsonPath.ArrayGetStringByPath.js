@@ -9,6 +9,7 @@ pathIn.onChange = update;
 returnPathIn.onChange = update;
 
 op.toWorkPortsNeedsString(pathIn);
+op.toWorkPortsNeedToBeLinked(objectIn);
 
 function update()
 {

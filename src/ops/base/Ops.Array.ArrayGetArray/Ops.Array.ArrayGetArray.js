@@ -5,6 +5,7 @@ const
 
 inArrays.onChange =
 index.onChange = update;
+op.toWorkPortsNeedToBeLinked(inArrays);
 
 function update()
 {

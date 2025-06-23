@@ -4,7 +4,7 @@ const
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z");
-
+op.toWorkPortsNeedToBeLinked(pArr);
 pArr.onChange =
     pIndex.onChange = update;
 

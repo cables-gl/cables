@@ -3,6 +3,7 @@ const
     avgX = op.outNumber("Average X"),
     avgY = op.outNumber("Average Y"),
     avgZ = op.outNumber("Average Z");
+op.toWorkPortsNeedToBeLinked(inArr);
 
 inArr.onChange = function ()
 {

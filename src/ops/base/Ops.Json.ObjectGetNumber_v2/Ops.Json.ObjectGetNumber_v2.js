@@ -7,6 +7,7 @@ const
 op.toWorkPortsNeedsString(key);
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
+op.toWorkPortsNeedToBeLinked(data);
 op.setUiAttrib({ "extendTitlePort": key.name });
 key.setUiAttribs({ "stringTrim": true });
 
