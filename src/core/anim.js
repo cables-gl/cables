@@ -18,6 +18,7 @@ import { Port } from "./core_port.js";
 
 export class Anim extends Events
 {
+    static EVENT_KEY_DELETE = "keyDelete";
     static EVENT_CHANGE = "onChange";
     static EVENT_UIATTRIB_CHANGE = "uiattrchange";
 
@@ -429,6 +430,7 @@ export class Anim extends Events
         {
             if (this.keys[i] == k)
             {
+                this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
                 this.keys.splice(i, 1);
                 this._updateLastIndex();
                 this.emitEvent(Anim.EVENT_CHANGE, this);
@@ -644,6 +646,14 @@ export class Anim extends Events
         this.emitEvent(Anim.EVENT_UIATTRIB_CHANGE);
     }
 
+    /**
+     * @param {number} t
+     * @param {number} t2
+     */
+    hasKeyframesBetween(t, t2)
+    {
+        return this.getKeyIndex(t) != this.getKeyIndex(t2);
+    }
 }
 
 // ------------------------------

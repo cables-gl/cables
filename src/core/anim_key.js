@@ -3,31 +3,29 @@ import { Anim } from "./anim.js";
 export class AnimKey
 {
 
+    /** @type {Anim} */
+    anim = null;
+    id = CABLES.shortId();
+    time = 0.0;
+    value = 0.0;
+    selected = false;
+    onChange = null;
+    _easing = 0;
+    bezCp1 = null;
+    bezCp2 = null;
+    bezAn = null;
+    cb = null;
+    cbTriggered = false;
+    temp = {};
+    uiAttribs = {};
+
     /**
      * @param {SerializedKey} obj
      * @param {Anim} [an]
      */
     constructor(obj, an)
     {
-        this.id = CABLES.shortId();
-        this.time = 0.0;
-        this.value = 0.0;
-        this.selected = false;
-
-        /** @type {Anim} */
         this.anim = obj.anim || an || null;
-
-        this.onChange = null;
-        this._easing = 0;
-
-        this.bezCp1 = null;
-        this.bezCp2 = null;
-        this.bezAn = null;
-
-        this.cb = null;
-        this.cbTriggered = false;
-        this.temp = {};
-        this.uiAttribs = {};
 
         this.setEasing(Anim.EASING_LINEAR);
         this.set(obj);
