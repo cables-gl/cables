@@ -6,7 +6,7 @@ const
 
 objectIn.onChange = update;
 pathIn.onChange = update;
-
+op.toWorkPortsNeedToBeLinked(objectIn);
 op.toWorkPortsNeedsString(pathIn);
 pathIn.setUiAttribs({ "stringTrim": true });
 

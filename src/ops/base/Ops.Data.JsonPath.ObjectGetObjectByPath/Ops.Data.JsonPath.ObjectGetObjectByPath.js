@@ -5,7 +5,7 @@ const
     foundOut = op.outBoolNum("Found");
 
 objectIn.onChange = pathIn.onChange = update;
-
+op.toWorkPortsNeedToBeLinked(objectIn);
 op.toWorkPortsNeedsString(pathIn);
 pathIn.setUiAttribs({ "stringTrim": true });
 

@@ -5,6 +5,7 @@ const
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z"),
     outW = op.outNumber("W");
+op.toWorkPortsNeedToBeLinked(pArr);
 
 pArr.onChange =
     pIndex.onChange = update;

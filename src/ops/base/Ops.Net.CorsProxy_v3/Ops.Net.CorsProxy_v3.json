@@ -8,6 +8,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1747755601416
+        },
+        {
+            "message": "check for valid url, output empty string if invalid, show error",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1750765253431
         }
     ],
     "layout": {

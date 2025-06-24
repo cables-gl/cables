@@ -35,7 +35,6 @@
     "created": 1542698784091,
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -67,5 +66,6 @@
             "date": 1560413454880
         }
     ],
-    "exampleProjectId": "5LhTLJ"
+    "exampleProjectId": "5LhTLJ",
+    "license": "MIT"
 }

@@ -46,23 +46,12 @@
     "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
     "changelog": [
         {
-            "message": "Ops.Array.ArrayPushValue3x renamed to Ops.Array.Array3PushNumbers",
-            "author": "pandur",
-            "date": 1567672473987
-        },
-        {
             "message": "cloned op from Ops.Array.Array3PushNumbers",
             "author": "pandur",
             "date": 1619892949713
-        },
-        {
-            "message": "Ops.User.pandur.Array3PushNumbers_v2 renamed to Ops.Array.Array3PushNumbers_v2",
-            "author": "pandur",
-            "date": 1619941765323
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
