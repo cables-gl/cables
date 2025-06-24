@@ -14,7 +14,17 @@ update();
 
 function update()
 {
+    op.setUiError("urlinvalid", null);
     op.setUiError("editoronly", null);
+
+    const url = inUrl.get();
+    if (!url || !(url.startsWith("http://") || url.startsWith("https://")))
+    {
+        op.setUiError("urlinvalid", "Invalid URL, make sure URL starts with http:// or https://");
+        result.set("");
+        return;
+    }
+
     const inExport = !document.location.href.includes("cables.gl") && !document.location.href.includes("cables.local");
     const isActive = inActive.get() && (!inExport || inExportActive.get());
     if (isActive)
@@ -27,10 +37,10 @@ function update()
         {
             op.setUiError("editoronly", "This URL will send data to cables servers when exported", 1);
         }
-        result.set(CORS_CABLES_PROXY + encodeURIComponent(inUrl.get()));
+        result.set(CORS_CABLES_PROXY + encodeURIComponent(url));
     }
     else
     {
-        result.set(inUrl.get());
+        result.set(url);
     }
 }
