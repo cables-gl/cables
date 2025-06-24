@@ -6,6 +6,7 @@ const
     foundOut = op.outBoolNum("Found");
 
 objectIn.ignoreValueSerialize = true;
+op.toWorkPortsNeedToBeLinked(objectIn);
 
 objectIn.onChange =
     pathIn.onChange =

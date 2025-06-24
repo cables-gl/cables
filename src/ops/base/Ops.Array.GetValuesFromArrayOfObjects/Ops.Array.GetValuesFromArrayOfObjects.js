@@ -4,11 +4,13 @@ const
     inignoreNonNums = op.inBool("Numbers Only", false),
     inRemoveInvalid = op.inBool("Remove empty/invalid", false),
     outArray = op.outArray("Result");
+op.toWorkPortsNeedToBeLinked(inArr);
+op.toWorkPortsNeedsString(inKey);
 
 inRemoveInvalid.onChange =
-inKey.onChange =
-inArr.onChange =
-inignoreNonNums.onChange = exec;
+    inKey.onChange =
+    inArr.onChange =
+    inignoreNonNums.onChange = exec;
 
 inKey.setUiAttribs({ "stringTrim": true, "minLength": 1 });
 

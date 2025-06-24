@@ -6,21 +6,14 @@ const
 
 result.ignoreValueSerialize = true;
 data.ignoreValueSerialize = true;
+
 op.setUiAttrib({ "extendTitlePort": key.name });
 key.setUiAttribs({ "stringTrim": true });
 
 op.toWorkPortsNeedsString(key);
-
+op.toWorkPortsNeedToBeLinked(data);
 data.onChange =
     key.onChange = update;
-
-key.on("change", updateUi);
-updateUi();
-function updateUi()
-{
-    if (!key.get())op.setUiError("nokey", "Missing Key Value", 1);
-    else op.setUiError("nokey", null);
-}
 
 function update()
 {
