@@ -43,8 +43,8 @@ export class WebAudio
             // check if tone.js lib is being used
             if (window.Tone && !this.toneJsInitialized)
             {
-                // set current audio context in tone.js, versions >= 15 do not have the setter anymore
-                if (Tone.setContext) Tone.setContext(window.audioContext);
+                // set current audio context in tone.js, and discard potentially audio context created by tone
+                if (Tone.setContext) Tone.setContext(window.audioContext, true);
                 this.toneJsInitialized = true;
             }
         }
