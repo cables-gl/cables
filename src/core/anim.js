@@ -106,8 +106,14 @@ export class Anim extends Events
 
     forceChangeCallbackSoon()
     {
-        clearTimeout(this.forcecbto);
-        this.forcecbto = setTimeout(this.forceChangeCallback.bind(this), 50);
+        // clearTimeout(this.forcecbto);
+        if (!this.forcecbto)
+            this.forcecbto = setTimeout(() =>
+            {
+                this.forceChangeCallback();
+                this.forcecbto = null;
+            },
+            50);
     }
 
     getLoop()
@@ -548,6 +554,11 @@ export class Anim extends Events
             this._needsSort = true;
         }
         this._updateLastIndex();
+    }
+
+    sortSoon()
+    {
+        this._needsSort = true;
     }
 
     /**
