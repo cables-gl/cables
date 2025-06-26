@@ -3,6 +3,7 @@ const
     animVal = op.inValue("Value"),
     inKeys = op.inArray("Key Times"),
     inValues = op.inArray("Key Values"),
+    inText = op.inArray("Key Text"),
     inloop = op.inSwitch("loop", loopstr),
     outAnim = op.outObject("Anim", null, "anim"),
     outLengthLoop = op.outNumber("Loop Length"),
@@ -10,6 +11,7 @@ const
 
 animVal.setAnimated(true);
 inKeys.onChange =
+inText.onChange =
 inValues.onChange = update;
 let anim = animVal.anim;
 
@@ -23,6 +25,7 @@ function update()
     outAnim.setRef(anim);
     const times = inKeys.get();
     const values = inValues.get();
+    const texts = inText.get();
     if (times)
     {
         anim.clear();
@@ -34,6 +37,11 @@ function update()
             if (i == times.length - 1)anim.eventsPaused = false;
 
             anim.setValue(times[i], v);
+            if (texts)
+            {
+                const k = anim.getKey(times[i]);
+                k.setUiAttribs({ "text": texts[i] });
+            }
         }
     }
     if (anim.keys.length > 0)

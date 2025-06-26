@@ -27,6 +27,10 @@
                 "name": "Key Values"
             },
             {
+                "type": 3,
+                "name": "Key Text"
+            },
+            {
                 "type": 0,
                 "name": "loop index",
                 "values": [
