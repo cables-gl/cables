@@ -33,6 +33,7 @@ export class AnimKey
 
     emitChange()
     {
+        if (!this.anim) return;
         this.bezAn = null;
         if (this.onChange !== null) this.onChange();
         this.anim.forceChangeCallbackSoon();
@@ -57,7 +58,7 @@ export class AnimKey
             this.uiAttribs[i] = o[i];
             if (o[i] === null) delete this.uiAttribs[i];
         }
-        this.anim.emitEvent(Anim.EVENT_CHANGE);
+        if (this.anim) this.anim.emitEvent(Anim.EVENT_CHANGE);
     }
 
     /**
