@@ -88,9 +88,7 @@ export class Anim extends Events
         this._cachedIndex = 0;
         this.name = cfg.name || null;
 
-        /**
-         * @type {Number}
-         */
+        /** @type {Number} */
         this.defaultEasing = cfg.defaultEasing || Anim.EASING_LINEAR;
         this.onLooped = null;
 

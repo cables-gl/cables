@@ -22,6 +22,7 @@ inloop.onChange = () =>
 
 function update()
 {
+    anim.setUiAttribs({ "readOnly": true });
     outAnim.setRef(anim);
     const times = inKeys.get();
     const values = inValues.get();
