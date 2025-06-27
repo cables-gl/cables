@@ -88,9 +88,7 @@ export class Anim extends Events
         this._cachedIndex = 0;
         this.name = cfg.name || null;
 
-        /**
-         * @type {Number}
-         */
+        /** @type {Number} */
         this.defaultEasing = cfg.defaultEasing || Anim.EASING_LINEAR;
         this.onLooped = null;
 
@@ -189,6 +187,10 @@ export class Anim extends Events
     {
         let v = 0;
         if (time) v = this.getValue(time);
+
+        for (let i = 0; i < this.keys.length; i++)
+            this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
+
         this.keys.length = 0;
         this._updateLastIndex();
         if (time) this.setValue(time, v);
@@ -430,7 +432,7 @@ export class Anim extends Events
     /**
      * @param {AnimKey} k
      */
-    remove(k)
+    remove(k, events)
     {
         for (let i = 0; i < this.keys.length; i++)
         {
@@ -438,8 +440,11 @@ export class Anim extends Events
             {
                 this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
                 this.keys.splice(i, 1);
-                this._updateLastIndex();
-                this.emitEvent(Anim.EVENT_CHANGE, this);
+                if (events === undefined)
+                {
+                    this._updateLastIndex();
+                    this.emitEvent(Anim.EVENT_CHANGE, this);
+                }
                 return;
             }
         }
