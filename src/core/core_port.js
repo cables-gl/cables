@@ -40,6 +40,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [boundToVar] internal: do not set manually
  * @property  {boolean} [addPort] internal: do not set manually
  * @property  {boolean} [notWorking] internal: do not set manually
+ * @property  {number} [glPortIndex] internal: do not set manually
  *
  */
 
