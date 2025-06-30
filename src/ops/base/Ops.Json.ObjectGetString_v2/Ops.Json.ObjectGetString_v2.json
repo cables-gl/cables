@@ -1,0 +1,52 @@
+{
+    "id": "c04a204d-cd52-401f-80c9-02da396ed676",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567704844833
+        },
+        {
+            "message": "add \"found\" outport, return empty string when not found",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1751294428233
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1751294258355,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "data"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Get string from object by key",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "vargetset"
+    ],
+    "exampleProjectId": "Sn0k9Q",
+    "license": "MIT"
+}

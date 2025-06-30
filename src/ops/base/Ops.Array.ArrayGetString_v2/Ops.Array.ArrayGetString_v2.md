@@ -1,0 +1,1 @@
+Returns one string from an array based upon index.
