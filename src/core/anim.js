@@ -84,7 +84,6 @@ export class Anim extends Events
 
         this.loop = 0;
         this._log = new Logger("Anim");
-        this._lastKeyIndex = 0;
         this._cachedIndex = 0;
         this.name = cfg.name || null;
 
@@ -144,7 +143,7 @@ export class Anim extends Events
     {
         if (this._needsSort) this.sortKeys();
         if (this.keys.length === 0) return true;
-        if (this.keys[this._lastKeyIndex].time <= time) return true;
+        if (this.keys[this.keys.length - 1].time <= time) return true;
         return false;
     }
 
@@ -180,7 +179,6 @@ export class Anim extends Events
             this.keys.splice(0, ki);
             this._needsSort = true;
         }
-        this._updateLastIndex();
     }
 
     /**
@@ -200,7 +198,6 @@ export class Anim extends Events
             this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
 
         this.keys.length = 0;
-        this._updateLastIndex();
         if (time) this.setValue(time, v);
         this._needsSort = true;
         if (this.onChange !== null) this.onChange();
@@ -225,7 +222,6 @@ export class Anim extends Events
         if (!this.checkIsSorted())
         {
             this.keys.sort((a, b) => { return a.time - b.time; });
-            this._updateLastIndex();
             this._needsSort = false;
             if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 
@@ -266,7 +262,6 @@ export class Anim extends Events
                     count++;
                 }
             }
-            this._updateLastIndex();
             this._needsSort = true;
         }
     }
@@ -309,21 +304,20 @@ export class Anim extends Events
 
     /**
      * set value at time
-     * @function setValue
-     * @memberof Anim
-     * @instance
      * @param {Number} time
      * @param {Number} value
      * @param {Function} cb callback
      */
     setValue(time, value, cb = null)
     {
+        if (this._needsSort) this.sortKeys();
         let found = null;
 
         if (this.keys.length == 0 || time <= this.lastKey.time)
             for (let i = 0; i < this.keys.length; i++)
                 if (this.keys[i].time == time)
                 {
+                    console.log("found keyyyyyyyyyy");
                     found = this.keys[i];
                     this.keys[i].setValue(value);
                     this.keys[i].cb = cb;
@@ -343,7 +337,6 @@ export class Anim extends Events
             this.keys.push(found);
 
             // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
-            this._updateLastIndex();
         }
 
         if (this.onChange) this.onChange();
@@ -377,6 +370,7 @@ export class Anim extends Events
         {
             this.keys.push(new AnimKey(obj.keys[ani], this));
         }
+        this.sortKeys();
     }
 
     /**
@@ -465,19 +459,17 @@ export class Anim extends Events
                 this._needsSort = true;
                 if (events === undefined)
                 {
-                    this._updateLastIndex();
                     this.emitEvent(Anim.EVENT_CHANGE, this);
                 }
                 return;
             }
         }
-        console.log("key remove not found", k);
     }
 
     get lastKey()
     {
         if (this._needsSort) this.sortKeys();
-        return this.keys[this._lastKeyIndex];
+        return this.keys[this.keys.length - 1];
     }
 
     get firstKey()
@@ -510,7 +502,7 @@ export class Anim extends Events
         if (this.keys.length === 0) return 0;
         if (this._needsSort) this.sortKeys();
 
-        if (!this.loop && time > this.keys[this._lastKeyIndex].time)
+        if (!this.loop && time > this.keys[this.keys.length - 1].time)
         {
             if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
 
@@ -544,7 +536,7 @@ export class Anim extends Events
         }
 
         const index = this.getKeyIndex(time);
-        if (index >= this._lastKeyIndex)
+        if (index >= this.keys.length - 1)
         {
             if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
             return this.lastKey.value;
@@ -563,11 +555,6 @@ export class Anim extends Events
         return key1.ease(perc, key2) + valAdd;
     }
 
-    _updateLastIndex()
-    {
-        this._lastKeyIndex = this.keys.length - 1;
-    }
-
     /**
      * @param {AnimKey} k
      */
@@ -584,7 +571,6 @@ export class Anim extends Events
             this.emitEvent(Anim.EVENT_CHANGE, this);
             this._needsSort = true;
         }
-        this._updateLastIndex();
     }
 
     sortSoon()
