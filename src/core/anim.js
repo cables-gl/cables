@@ -317,7 +317,6 @@ export class Anim extends Events
             for (let i = 0; i < this.keys.length; i++)
                 if (this.keys[i].time == time)
                 {
-                    console.log("found keyyyyyyyyyy");
                     found = this.keys[i];
                     this.keys[i].setValue(value);
                     this.keys[i].cb = cb;
