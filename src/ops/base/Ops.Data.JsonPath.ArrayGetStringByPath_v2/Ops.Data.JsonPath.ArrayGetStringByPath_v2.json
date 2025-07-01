@@ -1,0 +1,80 @@
+{
+    "authorName": "stephan",
+    "id": "4e76caf9-c420-45a8-b0c2-07b9203d2804",
+    "created": 1751295392874,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 0,
+                "name": "Return path if missing",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Finds a string at a position in an array defined by path",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Object",
+                "text": "json object"
+            },
+            {
+                "name": "Path",
+                "text": "the path (i.e. data.names)"
+            },
+            {
+                "name": "Output",
+                "text": "the string"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850804953
+        },
+        {
+            "message": "change \"found\" port to boolNum type",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1741354726032
+        },
+        {
+            "message": "show full path in extended title",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1747829069910
+        },
+        {
+            "message": "output empty string when not found",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1751295839700
+        }
+    ],
+    "exampleProjectId": "rs0XWr",
+    "license": "MIT"
+}

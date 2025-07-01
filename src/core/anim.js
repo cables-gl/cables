@@ -84,7 +84,6 @@ export class Anim extends Events
 
         this.loop = 0;
         this._log = new Logger("Anim");
-        this._lastKeyIndex = 0;
         this._cachedIndex = 0;
         this.name = cfg.name || null;
 
@@ -142,8 +141,9 @@ export class Anim extends Events
      */
     hasEnded(time)
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length === 0) return true;
-        if (this.keys[this._lastKeyIndex].time <= time) return true;
+        if (this.keys[this.keys.length - 1].time <= time) return true;
         return false;
     }
 
@@ -152,6 +152,7 @@ export class Anim extends Events
      */
     isRising(time)
     {
+        if (this._needsSort) this.sortKeys();
         if (this.hasEnded(time)) return false;
         const ki = this.getKeyIndex(time);
         if (this.keys[ki].value < this.keys[ki + 1].value) return true;
@@ -167,13 +168,17 @@ export class Anim extends Events
      */
     clearBefore(time)
     {
+        if (this._needsSort) this.sortKeys();
         const v = this.getValue(time);
         const ki = this.getKeyIndex(time);
 
         this.setValue(time, v);
 
-        if (ki > 1) this.keys.splice(0, ki);
-        this._updateLastIndex();
+        if (ki > 1)
+        {
+            this.keys.splice(0, ki);
+            this._needsSort = true;
+        }
     }
 
     /**
@@ -185,6 +190,7 @@ export class Anim extends Events
      */
     clear(time)
     {
+        if (this._needsSort) this.sortKeys();
         let v = 0;
         if (time) v = this.getValue(time);
 
@@ -192,32 +198,35 @@ export class Anim extends Events
             this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
 
         this.keys.length = 0;
-        this._updateLastIndex();
         if (time) this.setValue(time, v);
+        this._needsSort = true;
         if (this.onChange !== null) this.onChange();
         this.emitEvent(Anim.EVENT_CHANGE, this);
     }
 
-    sortKeys()
+    checkIsSorted()
     {
         let isSorted = true;
         for (let i = 0; i < this.keys.length - 1; i++)
-            if (this.keys[i].time < this.keys[i + 1].time)
+            if (this.keys[i].time > this.keys[i + 1].time)
             {
                 isSorted = false;
                 break;
             }
 
-        if (!isSorted)
+        return isSorted;
+    }
+
+    sortKeys()
+    {
+        if (!this.checkIsSorted())
         {
             this.keys.sort((a, b) => { return a.time - b.time; });
-            this._updateLastIndex();
             this._needsSort = false;
             if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 
             this.emitEvent(Anim.EVENT_CHANGE);
         }
-        return !isSorted;
     }
 
     hasDuplicates()
@@ -242,7 +251,7 @@ export class Anim extends Events
     {
         if (this.hasDuplicates())
         {
-            this.sortKeys();
+            if (this._needsSort) this.sortKeys();
             let count = 0;
 
             while (this.hasDuplicates())
@@ -253,18 +262,20 @@ export class Anim extends Events
                     count++;
                 }
             }
-            this._updateLastIndex();
+            this._needsSort = true;
         }
     }
 
     getLengthLoop()
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length < 2) return 0;
         return this.lastKey.time - this.firstKey.time;
     }
 
     getLength()
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length === 0) return 0;
         return this.lastKey.time;
     }
@@ -274,6 +285,7 @@ export class Anim extends Events
      */
     getKeyIndex(time)
     {
+        if (this._needsSort) this.sortKeys();
         let index = 0;
         let start = 0;
         if (this._cachedIndex && this.keys.length > this._cachedIndex && time >= this.keys[this._cachedIndex].time) start = this._cachedIndex;
@@ -292,15 +304,13 @@ export class Anim extends Events
 
     /**
      * set value at time
-     * @function setValue
-     * @memberof Anim
-     * @instance
      * @param {Number} time
      * @param {Number} value
      * @param {Function} cb callback
      */
     setValue(time, value, cb = null)
     {
+        if (this._needsSort) this.sortKeys();
         let found = null;
 
         if (this.keys.length == 0 || time <= this.lastKey.time)
@@ -326,7 +336,6 @@ export class Anim extends Events
             this.keys.push(found);
 
             // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
-            this._updateLastIndex();
         }
 
         if (this.onChange) this.onChange();
@@ -360,6 +369,7 @@ export class Anim extends Events
         {
             this.keys.push(new AnimKey(obj.keys[ani], this));
         }
+        this.sortKeys();
     }
 
     /**
@@ -385,6 +395,7 @@ export class Anim extends Events
      */
     getKey(time)
     {
+        if (this._needsSort) this.sortKeys();
         const index = this.getKeyIndex(time);
         return this.keys[index];
     }
@@ -394,6 +405,7 @@ export class Anim extends Events
      */
     getNextKey(time)
     {
+        if (this._needsSort) this.sortKeys();
         let index = this.getKeyIndex(time) + 1;
         if (index >= this.keys.length) return null;
 
@@ -405,6 +417,7 @@ export class Anim extends Events
      */
     getPrevKey(time)
     {
+        if (this._needsSort) this.sortKeys();
         let index = this.getKeyIndex(time) - 1;
         if (index < 0) return null;
 
@@ -416,6 +429,7 @@ export class Anim extends Events
      */
     isFinished(time)
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length <= 0) return true;
         return time > this.lastKey.time;
     }
@@ -425,6 +439,7 @@ export class Anim extends Events
      */
     isStarted(time)
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length <= 0) return false;
         return time >= this.firstKey.time;
     }
@@ -440,24 +455,25 @@ export class Anim extends Events
             {
                 this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
                 this.keys.splice(i, 1);
+                this._needsSort = true;
                 if (events === undefined)
                 {
-                    this._updateLastIndex();
                     this.emitEvent(Anim.EVENT_CHANGE, this);
                 }
                 return;
             }
         }
-        console.log("key remove not found", k);
     }
 
     get lastKey()
     {
-        return this.keys[this._lastKeyIndex];
+        if (this._needsSort) this.sortKeys();
+        return this.keys[this.keys.length - 1];
     }
 
     get firstKey()
     {
+        if (this._needsSort) this.sortKeys();
         return this.keys[0];
     }
 
@@ -466,6 +482,7 @@ export class Anim extends Events
      */
     getLoopIndex(time)
     {
+        if (this._needsSort) this.sortKeys();
         if (this.keys.length < 2) return 0;
         return (time - this.firstKey.time) / this.getLengthLoop();
     }
@@ -484,7 +501,7 @@ export class Anim extends Events
         if (this.keys.length === 0) return 0;
         if (this._needsSort) this.sortKeys();
 
-        if (!this.loop && time > this.keys[this._lastKeyIndex].time)
+        if (!this.loop && time > this.keys[this.keys.length - 1].time)
         {
             if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
 
@@ -518,7 +535,7 @@ export class Anim extends Events
         }
 
         const index = this.getKeyIndex(time);
-        if (index >= this._lastKeyIndex)
+        if (index >= this.keys.length - 1)
         {
             if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
             return this.lastKey.value;
@@ -537,11 +554,6 @@ export class Anim extends Events
         return key1.ease(perc, key2) + valAdd;
     }
 
-    _updateLastIndex()
-    {
-        this._lastKeyIndex = this.keys.length - 1;
-    }
-
     /**
      * @param {AnimKey} k
      */
@@ -558,7 +570,6 @@ export class Anim extends Events
             this.emitEvent(Anim.EVENT_CHANGE, this);
             this._needsSort = true;
         }
-        this._updateLastIndex();
     }
 
     sortSoon()

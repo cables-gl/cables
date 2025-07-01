@@ -1,0 +1,80 @@
+{
+    "authorName": "stephan",
+    "id": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+    "created": 1751295651333,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 0,
+                "name": "Output path if missing",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Finds a string at a position in an object defined by path",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Object",
+                "text": "json object"
+            },
+            {
+                "name": "Path",
+                "text": "the path (i.e. data.names)"
+            },
+            {
+                "name": "Output",
+                "text": "the string"
+            }
+        ]
+    },
+    "exampleProjectId": "eJIqln",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "wrong path is not an error anymore, but a warning",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1736843486845
+        },
+        {
+            "message": "change errorlevels, show hint when no path provided",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1736850845190
+        },
+        {
+            "message": "show full path in extended title",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1747829069910
+        },
+        {
+            "message": "output empty string when not found",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1751295864685
+        }
+    ]
+}
