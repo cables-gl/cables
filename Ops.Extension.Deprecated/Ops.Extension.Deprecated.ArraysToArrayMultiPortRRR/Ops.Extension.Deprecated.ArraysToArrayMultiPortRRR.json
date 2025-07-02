@@ -1,0 +1,62 @@
+{
+    "id": "f7b4fe33-9b5a-4a7d-8ecb-e38a7f395b3f",
+    "created": 1751441970041,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1751441495159
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1751441970041
+        },
+        {
+            "message": "op Array.ArraysToArrayMultiPortRRR was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1751442054266
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Arrays_0",
+                "longPort": 3,
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_1",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_2",
+                "uititle": "add port",
+                "group": "Arrays"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an array from multiple string input ports",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}
