@@ -22,21 +22,22 @@ import { Patch } from "./core_patch.js";
  * @property {string} [title] overwrite op title
  * @property {String} [title=''] overwrite title of port (by default this is portname)
  * @property {string} [extendTitle] extended op title, shown in grey next to op name
- * @property {object} [storage] internal - do not use manualy
- * @property {boolean} [working] internal - do not use manualy
- * @property {boolean} [bookmarked] internal - do not use manualy
- * @property {boolean} [selected] internal - do not use manualy
- * @property {boolean} [disabled] internal - do not use manualy
- * @property {boolean} [loading] internal - do not use manualy
- * @property {boolean} [resizable] internal - do not use manualy
- * @property {object} [uierrors] internal - do not use manualy - use op.setUiError
+ * @property {object} [storage]
+ * @property {boolean} [working]
+ * @property {boolean} [bookmarked]
+ * @property {boolean} [selected]
+ * @property {boolean} [disabled]
+ * @property {boolean} [loading]
+ * @property {boolean} [resizable]
+ * @property {boolean} [hidden]
+ * @property {object} [uierrors]
  * @property {string} [color]
  * @property {object} [area]
  * @property {string} [comment]
  * @property {number} [height]
  * @property {number} [width]
  * @property {Translation} [translate]
- * @property {string|number} [subPatch] internal - do not use manualy - use op.setUiError
+ * @property {string|number} [subPatch]
 */
 
 /**
@@ -274,7 +275,6 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
      * @param {OpUiAttribs} a
      */
     setUiAttribs(a)

@@ -118,6 +118,13 @@
         ]
     },
     "exampleProjectId": "1la6mJ",
-    "changelog": [],
+    "changelog": [
+        {
+            "message": "Fix wrong vertex order in one triangle",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1751465913755
+        }
+    ],
     "license": "MIT"
 }
