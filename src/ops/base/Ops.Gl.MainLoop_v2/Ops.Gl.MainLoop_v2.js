@@ -163,7 +163,6 @@ function render(time)
     {
         if (inFocus.get()) cgl.canvas.focus();
         firstTime = false;
-        console.log("firstttttttt");
     }
 
     outPixel.set(op.patch.cgl.pixelDensity);
