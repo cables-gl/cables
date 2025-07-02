@@ -104,8 +104,7 @@ export class Port extends Events
         this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
-        /** @type {Op} */
-
+        /** @type {Op|UiOp} */
         this._op = ___op;
 
         /** @type {Array<Link>} */
@@ -1078,23 +1077,23 @@ export class Port extends Events
      * @deprecated
      */
     hidePort() {}
-}
 
-/**
- * Returns the port type string, e.g. "value" based on the port type number
- * @function portTypeNumberToString
- * @instance
- * @memberof Port
- * @param {Number} type - The port type number
- * @returns {String} - The port type as string
- */
-Port.portTypeNumberToString = function (type)
-{
-    if (type == Port.TYPE_VALUE) return "value";
-    if (type == Port.TYPE_FUNCTION) return "function";
-    if (type == Port.TYPE_OBJECT) return "object";
-    if (type == Port.TYPE_ARRAY) return "array";
-    if (type == Port.TYPE_STRING) return "string";
-    if (type == Port.TYPE_DYNAMIC) return "dynamic";
-    return "unknown";
-};
+    /**
+     * Returns the port type string, e.g. "value" based on the port type number
+     * @function portTypeNumberToString
+     * @instance
+     * @memberof Port
+     * @param {Number} type - The port type number
+     * @returns {String} - The port type as string
+     */
+    static portTypeNumberToString(type)
+    {
+        if (type == Port.TYPE_VALUE) return "value";
+        if (type == Port.TYPE_FUNCTION) return "function";
+        if (type == Port.TYPE_OBJECT) return "object";
+        if (type == Port.TYPE_ARRAY) return "array";
+        if (type == Port.TYPE_STRING) return "string";
+        if (type == Port.TYPE_DYNAMIC) return "dynamic";
+        return "unknown";
+    }
+}

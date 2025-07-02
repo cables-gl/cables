@@ -121,7 +121,7 @@ function realReload(nocache)
             op.setUiError("urlerror", null);
             CGL.Texture.load(cgl, url, function (err, newTex)
             {
-                cgl.checkFrameStarted("texture inittexture");
+                // cgl.checkFrameStarted("texture inittexture");
 
                 if (filename.get() != fileToLoad)
                 {

@@ -911,7 +911,11 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
+     * create a file/URL input port
+     * @param {String} name
+     * @param {String} filter
+     * @param {String} v
+     * @return {Port} created port
      */
     inUrl(name, filter, v)
     {

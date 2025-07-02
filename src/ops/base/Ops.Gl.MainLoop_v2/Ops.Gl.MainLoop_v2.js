@@ -4,6 +4,7 @@ const
     reduceFocusFPS = op.inValueBool("Reduce FPS unfocussed", false),
     clear = op.inValueBool("Transparent", false),
     active = op.inValueBool("Active", 1),
+    inFocus = op.inValueBool("Focus canvas", 1),
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),
     height = op.outNumber("height"),
@@ -24,6 +25,7 @@ vec3.set(identTranslate, 0, 0, 0);
 const identTranslateView = vec3.create();
 vec3.set(identTranslateView, 0, 0, -2);
 
+let firstTime = true;
 let fsElement = null;
 let winhasFocus = true;
 let winVisible = true;
@@ -157,6 +159,12 @@ function render(time)
 
     if (!cgl.tempData.phong)cgl.tempData.phong = {};
     rframes++;
+    if (firstTime)
+    {
+        if (inFocus.get()) cgl.canvas.focus();
+        firstTime = false;
+        console.log("firstttttttt");
+    }
 
     outPixel.set(op.patch.cgl.pixelDensity);
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;

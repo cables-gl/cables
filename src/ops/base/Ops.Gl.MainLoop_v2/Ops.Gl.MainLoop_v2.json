@@ -34,6 +34,11 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Focus canvas",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
