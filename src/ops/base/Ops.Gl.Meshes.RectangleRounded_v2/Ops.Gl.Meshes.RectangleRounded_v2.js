@@ -168,6 +168,8 @@ function create()
     {
         // bottom left circle
         // for (let i =0; i <= segments; i += 1)
+        lastX = bottomLeftCircleMiddle[0] + r * -1 * Math.cos((segments * Math.PI) / 2 / segments);
+        lastY = bottomLeftCircleMiddle[1] + r * -1 * Math.sin((segments * Math.PI) / 2 / segments);
 
         for (let i = segments; i >= 0; i -= 1)
         {
@@ -175,7 +177,8 @@ function create()
             const y = bottomLeftCircleMiddle[1] + r * -1 * Math.sin((i * Math.PI) / 2 / segments);
 
             circleVerts.push(x, y, 0);
-            if (i < segments)circleVerts.push(lastX, lastY, 0);
+            // if (i < segments)
+            circleVerts.push(lastX, lastY, 0);
 
             circleVerts.push(...bottomLeftCircleMiddle);
 
