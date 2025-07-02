@@ -288,40 +288,7 @@
             }
         ]
     },
-    "changelog": [
-        {
-            "message": "Ops.User.cables.PhongMatNew renamed to Ops.Admin.PhongMaterial_v5",
-            "author": "cables",
-            "date": 1589464726083
-        },
-        {
-            "message": "Ops.Admin.PhongMaterial_v5 renamed to Ops.Gl.Phong.PhongMaterial_v5",
-            "author": "pandur",
-            "date": 1596055546117
-        },
-        {
-            "message": "cloned op from Ops.Gl.Phong.PhongMaterial_v5",
-            "author": "cables",
-            "date": 1618395257484
-        },
-        {
-            "message": "Ops.User.cables.PhangMeteriel renamed to Ops.Gl.Phong.PhongMaterial_v6",
-            "author": "cables",
-            "date": 1618408708676
-        },
-        {
-            "message": " added core lib: ammoworld",
-            "type": "",
-            "author": "pandur",
-            "date": 1698674521575
-        },
-        {
-            "message": " removed core lib: ammoworld",
-            "type": "",
-            "author": "pandur",
-            "date": 1698674548919
-        }
-    ],
+    "changelog": [],
     "summary": "A shaded material for lighting objects",
     "issues": "",
     "youtubeids": [],
