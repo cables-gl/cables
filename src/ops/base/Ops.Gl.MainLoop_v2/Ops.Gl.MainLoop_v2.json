@@ -6,6 +6,12 @@
             "author": "pandur",
             "date": 1713354512152,
             "type": "feature"
+        },
+        {
+            "message": "added \"focus canvas\" option, which enables keyboard listen events without clicking the canvas, but will scroll to that element when embndded on a long website",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1751465708811
         }
     ],
     "layout": {
