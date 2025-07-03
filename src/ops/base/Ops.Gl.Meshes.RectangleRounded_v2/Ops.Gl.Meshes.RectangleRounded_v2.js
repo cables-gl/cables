@@ -166,20 +166,21 @@ function create()
 
     if (inBottomLeftCorner.get())
     {
-    // bottom left circle
-        for (let i = 0; i <= segments; i += 1)
+        // bottom left circle
+        // for (let i =0; i <= segments; i += 1)
+        lastX = bottomLeftCircleMiddle[0] + r * -1 * Math.cos((segments * Math.PI) / 2 / segments);
+        lastY = bottomLeftCircleMiddle[1] + r * -1 * Math.sin((segments * Math.PI) / 2 / segments);
+
+        for (let i = segments; i >= 0; i -= 1)
         {
             const x = bottomLeftCircleMiddle[0] + r * -1 * Math.cos((i * Math.PI) / 2 / segments);
             const y = bottomLeftCircleMiddle[1] + r * -1 * Math.sin((i * Math.PI) / 2 / segments);
 
-            if (i > 1)
-            {
-                circleVerts.push(lastX, lastY, 0);
-            }
-
             circleVerts.push(x, y, 0);
+            // if (i < segments)
+            circleVerts.push(lastX, lastY, 0);
 
-            if (i <= segments - 1) circleVerts.push(...bottomLeftCircleMiddle);
+            circleVerts.push(...bottomLeftCircleMiddle);
 
             lastX = x;
             lastY = y;

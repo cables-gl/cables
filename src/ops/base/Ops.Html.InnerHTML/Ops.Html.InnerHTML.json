@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1732780988444
-        },
-        {
-            "message": "Ops.Patch.PCenipv.InnerHTML renamed to Ops.Html.InnerHTML",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1732781580601
         }
     ],
     "layout": {

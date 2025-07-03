@@ -120,10 +120,10 @@
     "exampleProjectId": "1la6mJ",
     "changelog": [
         {
-            "message": "Ops.Gl.Meshes.RectangleRounded renamed to Ops.Gl.Meshes.RectangleRounded_v2",
-            "type": "rename",
+            "message": "Fix wrong vertex order in one triangle",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1686921980489
+            "date": 1751465913755
         }
     ],
     "license": "MIT"
