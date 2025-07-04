@@ -126,7 +126,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         },
         "module": {
             "rules": [
-                { "sideEffects": false },
                 {
                     "test": /\.frag/,
                     "use": "raw-loader",
