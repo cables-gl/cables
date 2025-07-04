@@ -167,7 +167,7 @@ export class Patch extends Events
         }
 
         this.freeTimer.play();
-        this.renderloop.exec(0);
+        if (this.renderloop) this.renderloop.exec(0);
 
         if (this.config.patch)
         {
@@ -595,8 +595,7 @@ export class Patch extends Events
 
     getFrameNum()
     {
-        if (this.renderloop)
-            return this.renderloop.frameNum;
+        if (this.renderloop) return this.renderloop.frameNum;
     }
 
     /**
