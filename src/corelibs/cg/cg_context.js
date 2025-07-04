@@ -9,10 +9,13 @@ import { FpsCounter } from "./cg_fpscounter.js";
 export class CgContext extends Events
 {
 
-    static API_WEBGL = 0;
-    static API_WEBGPU = 1;
+    static API_UNKNOWN = 0;
+    static API_WEBGL = 1;
+    static API_WEBGPU = 2;
 
-    gApi = "unknown";
+    static EVENT_RESIZE = "resize";
+
+    gApi = 0;
 
     /**
      * Description
@@ -117,7 +120,7 @@ export class CgContext extends Events
 
     getGApiName()
     {
-        return ["WebGL", "WebGPU"][this.gApi];
+        return ["unknown", "WebGL", "WebGPU"][this.gApi];
     }
 
     get canvas()
