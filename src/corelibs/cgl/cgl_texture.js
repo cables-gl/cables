@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { utils } from "cables";
+import { Op, Port, utils } from "cables";
 import { CgTexture } from "../cg/cg_texture.js";
 import { CglContext } from "./cgl_state.js";
 
@@ -1061,3 +1061,18 @@ Texture.isPixelFormatHalfFloat =
     {
         return (pxlFrmtStr || "").includes("float") && (pxlFrmtStr || "").includes("16bit");
     };
+
+Op.prototype.outTexture = function (name, v)
+{
+    const p = this.addOutPort(
+        new Port(this, name, Port.TYPE_OBJECT, {
+            "preview": true,
+            "objType": "texture",
+            "display": "texture"
+        })
+    );
+    if (v !== undefined) p.setRef(v || Texture.getEmptyTexture(this.patch.cgl));
+
+    p.ignoreValueSerialize = true;
+    return p;
+};

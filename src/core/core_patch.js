@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
@@ -80,6 +79,7 @@ export class Patch extends Events
     static EVENT_RENDERED_ONE_FRAME = "renderedOneFrame";
     static EVENT_LINK = "onLink";
     static EVENT_VALUESSET = "loadedValueSet";
+    static EVENT_DISPOSE = "dispose";
 
     #renderOneFrame = false;
     #initialDeserialize = true;
@@ -158,24 +158,21 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new CGL.Context(this);
+        this.cgl = null;// new CGL.Context(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};
 
-        this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
-        if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
-        if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
-        this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
+        window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
 
-        if (this.cgl.aborted) this.aborted = true;
-        if (this.cgl.silent) this.silent = true;
+        this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
         if (!CABLES.OPS)
         {
             this.aborted = true;
             throw new Error("no CABLES.OPS found");
         }
+
         this.freeTimer.play();
         this.exec();
 
@@ -363,7 +360,6 @@ export class Patch extends Events
     clear()
     {
         this.emitEvent("patchClearStart");
-        this.cgl.TextureEffectMesh = null;
         this.animFrameOps.length = 0;
         this.timer = new Timer();
         while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
@@ -1379,7 +1375,7 @@ export class Patch extends Events
     {
         this.pause();
         this.clear();
-        this.cgl.dispose();
+        this.emitEvent(Patch.EVENT_DISPOSE);
     }
 
     pushTriggerStack(p)
@@ -1422,7 +1418,8 @@ export class Patch extends Events
      */
     getDocument()
     {
-        return this.cgl.canvas.ownerDocument;
+        if (this.cgl) return this.cgl.canvas.ownerDocument;
+        else return window.document;
     }
 }
 

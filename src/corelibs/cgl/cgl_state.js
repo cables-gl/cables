@@ -35,6 +35,7 @@ export class CglContext extends CgContext
 
         this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
+        _patch.cgl = this;
 
         /** @deprecated */
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
@@ -91,17 +92,22 @@ export class CglContext extends CgContext
         this._enabledExtensions = {};
 
         this.errorShader = null;
+
+        this.setCanvas(_patch.config.glCanvasId || _patch.config.glCanvas || "glcanvas");
+        if (_patch.config.glCanvasResizeToWindow === true) this.setAutoResize("window");
+        if (_patch.config.glCanvasResizeToParent === true) this.setAutoResize("parent");
+
+        if (this.aborted) _patch.aborted = true;
+
+        _patch.on(Patch.EVENT_DISPOSE, () =>
+        {
+            this.dispose();
+        });
+        _patch.on("patchClearStart", () =>
+        {
+            this.TextureEffectMesh = null;
+        });
     }
-
-    // set pixelDensity(p)
-    // {
-    //     this._pixelDensity = p;
-    // }
-
-    // get pixelDensity()
-    // {
-    //     return this._pixelDensity;
-    // }
 
     get viewPort()
     {

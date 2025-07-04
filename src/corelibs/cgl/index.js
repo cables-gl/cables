@@ -47,6 +47,12 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = window.CABLES.CGL || CGL;
 window.CGL = window.CGL || CGL;
 
+window.addEventListener("INIT_CG", (e) =>
+{
+    const cgl = new CglContext(e.detail);
+
+});
+
 /**
  * @param {number} time
  * @param {quat} q
