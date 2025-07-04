@@ -14,7 +14,6 @@ export class CglRenderLoop extends RenderLoop
     #renderOneFrame;
     #animReq;
 
-    _paused = false;
     _frameNum = 0;
     onOneFrameRendered = null;
     _frameNext = 0;
@@ -38,7 +37,7 @@ export class CglRenderLoop extends RenderLoop
      */
     exec(timestamp)
     {
-        if (!this.#renderOneFrame && (this._paused || this.aborted)) return;
+        // if (!this.#renderOneFrame && (this.paused || this.aborted)) return;
         this.emitEvent("reqAnimFrame");
         cancelAnimationFrame(this.#animReq);
 
@@ -86,8 +85,10 @@ export class CglRenderLoop extends RenderLoop
             this._renderOneFrame = false;
         }
 
-        if (this.#patch.config.doRequestAnimation) this.#animReq = this.#patch.getDocument().defaultView.requestAnimationFrame(this.exec.bind(this));
-
+        if (this.#patch.config.doRequestAnimation)
+        {
+            this.#animReq = this.#patch.getDocument().defaultView.requestAnimationFrame(this.exec.bind(this));
+        }
     }
 
     /**
@@ -95,6 +96,7 @@ export class CglRenderLoop extends RenderLoop
      */
     renderFrame(timestamp)
     {
+        // if (this.paused) return;
         const time = this.#patch.timer.getTime();
         const startTime = performance.now();
         this.#cgl.frameStartTime = this.#patch.timer.getTime();
@@ -107,7 +109,7 @@ export class CglRenderLoop extends RenderLoop
         this.reqAnimTimeStamp = timestamp;
         this.#cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
-        this.emitEvent(Patch.EVENT_RENDER_FRAME, time);
+        this.#patch.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
         this._frameNum++;
         if (this._frameNum == 1)

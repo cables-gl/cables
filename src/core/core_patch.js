@@ -167,7 +167,7 @@ export class Patch extends Events
         }
 
         this.freeTimer.play();
-        // this.exec();
+        this.renderloop.exec(0);
 
         if (this.config.patch)
         {

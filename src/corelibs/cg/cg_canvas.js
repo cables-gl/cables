@@ -47,13 +47,13 @@ export class CgCanvas
      */
     setSize(w, h, ignorestyle = false)
     {
-        let offY = 0;
-        if (this.forceAspect)
-        {
-            let nh = w / this.forceAspect;
-            if (nh < h)offY = (h - nh) / 2;
-            h = nh;
-        }
+        // let offY = 0;
+        // if (this.forceAspect)
+        // {
+        //     let nh = w / this.forceAspect;
+        //     if (nh < h)offY = (h - nh) / 2;
+        //     h = nh;
+        // }
 
         if (this._oldWidthRp != w * this.pixelDensity || this._oldHeightRp != h * this.pixelDensity)
         {
@@ -64,10 +64,12 @@ export class CgCanvas
             {
                 this.canvasEle.style.width = w + "px";
                 this.canvasEle.style.height = h + "px";
-                this.canvasEle.style.marginTop = offY + "px";
+                // this.canvasEle.style.marginTop = offY + "px";
             }
 
+            console.log("pixelden", this.pixelDensity, w, h, this.canvasEle.width);
             this.updateSize();
+            console.log("pixelden", this.pixelDensity, w, h, this.canvasEle.width);
 
             this._cg.emitEvent("resize");
         }

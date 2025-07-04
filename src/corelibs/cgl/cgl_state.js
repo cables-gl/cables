@@ -400,10 +400,7 @@ export class CglContext extends CgContext
             this.emitEvent(CgContext.EVENT_RESIZE);
         }
 
-        if (this._cursor != this._currentCursor)
-        {
-            this._currentCursor = this.canvas.style.cursor = this._cursor;
-        }
+        if (this._cursor != this._currentCursor) this._currentCursor = this.canvas.style.cursor = this._cursor;
 
         this.emitEvent("endframe");
 

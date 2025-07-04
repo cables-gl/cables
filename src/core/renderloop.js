@@ -2,7 +2,7 @@ import { Events } from "cables-shared-client";
 
 export class RenderLoop extends Events
 {
-    paused = true;
+    paused = false;
     frameNum = 0;
 
     /**
