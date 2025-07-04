@@ -12,6 +12,7 @@ import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
 import { AnimKey } from "./anim_key.js";
+import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
 
@@ -70,6 +71,6 @@ CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
-export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now };
+export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

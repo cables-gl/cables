@@ -15,6 +15,7 @@ export class CgContext extends Events
 
     static EVENT_RESIZE = "resize";
 
+    #patch = null;
     gApi = 0;
 
     /**
@@ -90,7 +91,6 @@ export class CgContext extends Events
         {
             this.emitEvent("resize");
         });
-
     }
 
     get canvasWidth()

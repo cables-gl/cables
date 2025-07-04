@@ -7,6 +7,7 @@ import { CgContext } from "../cg/cg_context.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { Texture } from "./cgl_texture.js";
+import { CglRenderLoop } from "./cgl_renderloop.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -32,7 +33,6 @@ export class CglContext extends CgContext
     constructor(_patch)
     {
         super(_patch);
-
         this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
         _patch.cgl = this;
@@ -107,6 +107,9 @@ export class CglContext extends CgContext
         {
             this.TextureEffectMesh = null;
         });
+
+        this.renderLoop = new CglRenderLoop(this, _patch);
+        this.renderLoop.exec(0);
     }
 
     get viewPort()
