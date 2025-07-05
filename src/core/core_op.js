@@ -38,7 +38,8 @@ import { Patch } from "./core_patch.js";
  * @property {number} [width]
  * @property {Translation} [translate]
  * @property {string|number} [subPatch]
-*/
+ * @property {string} [comment_title]
+ */
 
 /**
  * @typedef CorePatch

@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { Op, utils } from "cables";
+import { Op, Patch, utils } from "cables";
 import { CONSTANTS } from "./constants.js";
 import { Shader } from "./cgl_shader.js";
 import { Geometry } from "../cg/cg_geom.js";
@@ -25,6 +25,10 @@ export const BLENDS = {
 // const Context(_patch)
 export class CglContext extends CgContext
 {
+
+    /**
+     * @param {Patch} _patch
+     */
     constructor(_patch)
     {
         super(_patch);
@@ -53,6 +57,8 @@ export class CglContext extends CgContext
         this._isSafariCrap = false;
 
         this.temporaryTexture = null;
+
+        /** @type {WebGL2RenderingContext} */
         this.gl = null;
 
         this._cursor = "auto";
@@ -128,6 +134,9 @@ export class CglContext extends CgContext
         this.mMatrix = m;
     }
 
+    /**
+     * @param {HTMLCanvasElement} canv
+     */
     _setCanvas(canv)
     {
         if (!canv) this._log.stack("_setCanvas undef");
@@ -311,6 +320,12 @@ export class CglContext extends CgContext
     }
 
     // old
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} w
+     * @param {number} h
+     */
     setViewPort(x, y, w, h)
     {
         this._viewPort[0] = Math.round(x);
@@ -373,7 +388,7 @@ export class CglContext extends CgContext
         {
             this._oldCanvasWidth = this.canvasWidth;
             this._oldCanvasHeight = this.canvasHeight;
-            this.emitEvent("resize");
+            this.emitEvent(CgContext.EVENT_RESIZE);
         }
 
         if (this._cursor != this._currentCursor)
@@ -594,6 +609,9 @@ export class CglContext extends CgContext
         this.emitEvent("beginFrame");
     }
 
+    /**
+     * @param {CglContext} cgl
+     */
     renderEnd(cgl)
     {
         this._endMatrixStacks();
@@ -611,6 +629,9 @@ export class CglContext extends CgContext
         this.emitEvent("endFrame");
     }
 
+    /**
+     * @param {number} slot
+     */
     getTexture(slot)
     {
         return this._textureslots[slot];
@@ -625,7 +646,7 @@ export class CglContext extends CgContext
      * log warning to console if the rendering of one frame has not been started / handy to check for async problems
      * @function checkFrameStarted
      * @memberof Context
-     * @param string
+     * @param {string} string
      * @instance
      */
     checkFrameStarted(string)
@@ -640,6 +661,11 @@ export class CglContext extends CgContext
         }
     }
 
+    /**
+     * @param {number} slot
+     * @param {WebGLTexture} t
+     * @param {undefined} [type]
+     */
     setTexture(slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");

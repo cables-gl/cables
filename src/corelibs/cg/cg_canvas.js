@@ -4,6 +4,11 @@ export class CgCanvas
 {
     hasFocus = false;
 
+    forceAspect = 0;
+
+    /**
+     * @param {{ canvasEle: any; cg: any; }} options
+     */
     constructor(options)
     {
         this._log = new Logger("CgCanvas");
@@ -34,11 +39,6 @@ export class CgCanvas
 
     get canvasEle() { return this._canvasEle; }
 
-    setWhyCompile(why)
-    {
-        this._compileReason = why;
-    }
-
     /**
      * @param {Number} w
      * @param {Number} h
@@ -47,6 +47,14 @@ export class CgCanvas
      */
     setSize(w, h, ignorestyle = false)
     {
+        let offY = 0;
+        if (this.forceAspect)
+        {
+            let nh = w / this.forceAspect;
+            if (nh < h)offY = (h - nh) / 2;
+            h = nh;
+        }
+
         if (this._oldWidthRp != w * this.pixelDensity || this._oldHeightRp != h * this.pixelDensity)
         {
             this._oldWidthRp = this.canvasEle.width = w * this.pixelDensity;
@@ -56,6 +64,7 @@ export class CgCanvas
             {
                 this.canvasEle.style.width = w + "px";
                 this.canvasEle.style.height = h + "px";
+                this.canvasEle.style.marginTop = offY + "px";
             }
 
             this.updateSize();
