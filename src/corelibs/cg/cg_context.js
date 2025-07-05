@@ -405,9 +405,9 @@ export class CgContext extends Events
      * @param {function} [cb]
      * @param {number} [pw]
      * @param {number} [ph]
-     * @param {boolean} [noclearalpha]
+     * @param {boolean} [_noclearalpha]
      */
-    saveScreenshot(filename, cb, pw, ph, noclearalpha)
+    saveScreenshot(filename, cb, pw, ph, _noclearalpha)
     {
         this.patch.renderOneFrame();
 
