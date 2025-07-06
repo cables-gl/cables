@@ -1,5 +1,6 @@
 import { Events, Logger } from "cables-shared-client";
 import { CGL } from "cables-corelibs";
+import { CglContext } from "cables-corelibs/cgl/cgl_state.js";
 import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
@@ -1768,7 +1769,7 @@ export class Op extends Events
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     }
 
-    checkGraphicsApi(api = 0)
+    checkGraphicsApi(api = CglContext.API_WEBGL)
     {
         if (this.patch.isEditorMode())
             if (this.patch.cg && this.patch.cg.gApi != api)
