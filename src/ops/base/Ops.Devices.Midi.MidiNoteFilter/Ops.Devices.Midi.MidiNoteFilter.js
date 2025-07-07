@@ -8,7 +8,7 @@ const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 function getMIDINote(dataByte1LSB)
 {
     return dataByte1LSB <= 126
-        ? NOTE_VALUES[dataByte1LSB % 12] + Math.floor(dataByte1LSB / 12) - 2 + " - " + dataByte1LSB
+        ? NOTE_VALUES[dataByte1LSB % 12] + String(Math.floor(dataByte1LSB / 12) - 2) + " - " + dataByte1LSB
         : "NO NOTE";
 }
 
