@@ -1759,7 +1759,11 @@ export class Op extends Events
         if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     }
 
-    checkGraphicsApi(api = 0)
+    /**
+     *
+     * @param {Number} api graphics api, 1 = webgl, 2 = webgpu
+     */
+    checkGraphicsApi(api = 1)
     {
         if (this.patch.isEditorMode())
             if (this.patch.cg && this.patch.cg.gApi != api)

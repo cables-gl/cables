@@ -28,8 +28,18 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Input Opacity",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Set Default"
+            },
+            {
+                "type": 0,
+                "name": "Show Opacity",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -50,6 +60,11 @@
             {
                 "type": 0,
                 "name": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Opacity",
                 "subType": "number"
             },
             {
@@ -95,7 +110,8 @@
         {
             "message": "cloned op from Ops.Sidebar.ColorPicker_v2",
             "author": "pandur",
-            "date": 1629365132839
+            "date": 1629365132839,
+            "type": "new"
         },
         {
             "message": " added lib: colorrick.js",
@@ -105,17 +121,25 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888065820
+            "date": 1643888065820,
+            "type": "improvement"
         },
         {
             "message": "Added newest version of colorRick: added eyeDropper API, native colorpicking on the desktop",
             "type": "feature",
             "author": "pandur",
             "date": 1732872352234
+        },
+        {
+            "message": "add toggle and output for opacity",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1751875141085
         }
     ],
     "libs": [
         "colorrick.js"
     ],
-    "exampleProjectId": "8-XQ5d"
+    "exampleProjectId": "8-XQ5d",
+    "license": "MIT"
 }

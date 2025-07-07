@@ -151,6 +151,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1736416409907
+        },
+        {
+            "message": "fixed problem displaying of notes",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1751873727267
         }
     ],
     "license": "MIT"
