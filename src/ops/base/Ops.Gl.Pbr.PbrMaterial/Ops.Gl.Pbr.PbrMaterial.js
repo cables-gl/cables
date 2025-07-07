@@ -28,7 +28,7 @@ const inThinFilmThickness = op.inFloat("Thin Film Thickness (nm)", 600.0);
 const inTFThicknessTexMin = op.inFloat("Thickness Tex Min", 300.0);
 const inTFThicknessTexMax = op.inFloat("Thickness Tex Max", 600.0);
 
-const inTonemapping = op.inSwitch("Tonemapping", ["sRGB", "HejiDawson", "Photographic"], "sRGB");
+const inTonemapping = op.inSwitch("Tonemapping", ["None", "sRGB", "HejiDawson", "Photographic"], "sRGB");
 const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 
 const inEmissionIntensity = op.inFloat("Emission Intensity", 1.0);
@@ -228,6 +228,7 @@ function updateDefines()
 
     // ALBEDO TEX
     PBRShader.toggleDefine("USE_ALBEDO_TEX", inTexAlbedo.get());
+	PBRShader.toggleDefine("ALBEDO_SRGB", inTexAlbedo.get() && inTexAlbedo.get().pixelFormat == "SRGBA 8bit ubyte");
     inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
     inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
     inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
@@ -259,6 +260,7 @@ function updateDefines()
     PBRShader.toggleDefine("ALPHA_BLEND", inAlphaMode.get() === "Blend");
 
     // tonemapping
+	PBRShader.toggleDefine("TONEMAP_None", inTonemapping.get() === "None");
     PBRShader.toggleDefine("TONEMAP_sRGB", inTonemapping.get() === "sRGB");
     PBRShader.toggleDefine("TONEMAP_HejiDawson", inTonemapping.get() === "HejiDawson");
     PBRShader.toggleDefine("TONEMAP_Photographic", inTonemapping.get() === "Photographic");
