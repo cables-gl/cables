@@ -8,9 +8,10 @@ const defaultColorArr = hexToRgbNorm(DEFAULT_COLOR_HEX);
 const inputRedPort = op.inValueSlider("Input Red", defaultColorArr[0]);
 const inputGreenPort = op.inValueSlider("Input Green", defaultColorArr[1]);
 const inputBluePort = op.inValueSlider("Input Blue", defaultColorArr[2]);
-// const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
+const inputOpaPort = op.inValueSlider("Input Opacity", 1);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const defaultValuePort = op.inValueString("Default", DEFAULT_COLOR_HEX);
+const showOpacity = op.inBool("Show Opacity", false);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
@@ -18,6 +19,7 @@ const siblingsPort = op.outObject("Children");
 const redPort = op.outNumber("Red", 0.0);
 const greenPort = op.outNumber("Green", 0.0);
 const bluePort = op.outNumber("Blue", 0.0);
+const outOpa = op.outNumber("Opacity", 1.0);
 
 const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 
@@ -60,22 +62,16 @@ label.classList.add("sidebar__item-label");
 const labelTextNode = document.createTextNode(labelPort.get());
 label.appendChild(labelTextNode);
 el.appendChild(label);
-// var inputWrapper = document.createElement('div');
-// inputWrapper.classList.add('sidebar__text-input-input-wrapper');
-// el.appendChild(inputWrapper);
+
 const input = document.createElement("input");
 input.classList.add("sidebar__color-picker-input");
-/* input.classList.add('jscolor'); */ /* color picker library */
 input.setAttribute("type", "text");
 input.setAttribute("value", defaultValuePort.get());
-// inputWrapper.appendChild(input);
 el.appendChild(input);
 input.addEventListener("input", onInput);
 const colorInput = document.createElement("div");
 colorInput.classList.add("sidebar__color-picker-color-input");
-// colorInput.setAttribute("type", "color");
 colorInput.style.backgroundColor = defaultValuePort.get();
-// colorInput.addEventListener("change", onColorPickerChange, false);
 
 colorInput.addEventListener("click", function ()
 {
@@ -83,11 +79,20 @@ colorInput.addEventListener("click", function ()
         {
             "ele": this,
             "color": this.style.backgroundColor || "#ff0000",
-            "onChange": (col) =>
+            "opacity": inputOpaPort.get(),
+            "showOpacity": showOpacity.get(),
+            "onChange": (col, opacity) =>
             {
+                console.log("col", opacity);
+                if (opacity != undefined)
+                {
+                    inputOpaPort.set(opacity);
+                    outOpa.set(opacity);
+                }
                 const hex = col.hex();
                 this.style.backgroundColor = hex;
                 setColorOutPorts(hex);
+
                 input.value = hex;
                 outHex.set(hex);
                 setInputsByHex(hex);

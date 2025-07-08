@@ -459,8 +459,12 @@ void main()
     float specK          = AORM.g;
     float metalness      = AORM.b;
     vec3  N              = normalize(internalNormals);
+    #ifndef ALBEDO_SRGB
     vec3  albedo         = pow(AlbedoMap.rgb, vec3(2.2));
-
+    #else
+    vec3  albedo         = AlbedoMap.rgb;
+    #endif
+    
     #ifdef VERTEX_COLORS
         #ifdef VCOL_COLOUR
             albedo.rgb *= pow(vertCol.rgb, vec3(2.2));
@@ -616,7 +620,9 @@ void main()
         //col.rgb = clamp(col.rgb, vec3(0.0), vec3(1.0));
     #endif
 
+	#ifndef TONEMAP_None
     col.rgb = pow(col.rgb, vec3(1.0/2.2));
+	#endif
     {{MODULE_COLOR}}
 
     outColor = col;
