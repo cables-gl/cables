@@ -57,5 +57,6 @@
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "uOzMH7"
+    "exampleProjectId": "uOzMH7",
+    "license": "MIT"
 }
