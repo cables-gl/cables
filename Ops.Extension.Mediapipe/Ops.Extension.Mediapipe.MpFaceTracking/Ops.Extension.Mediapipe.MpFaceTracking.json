@@ -131,6 +131,15 @@
     "youtubeids": [],
     "exampleProjectId": "wznlp4",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Source webcam/video as HTML element"
+            },
+            {
+                "name": "Refine LandMarks",
+                "text": "Enables detailed eyes and lips landmarks and adds landmarks for iris"
+            }
+        ]
     }
 }
