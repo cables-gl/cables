@@ -1,0 +1,42 @@
+{
+    "id": "32a301bb-a59b-41a6-9d87-4a58592b6675",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1752472050560
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1752472050560,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ]
+    },
+    "summary": "set number at key in an object",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
