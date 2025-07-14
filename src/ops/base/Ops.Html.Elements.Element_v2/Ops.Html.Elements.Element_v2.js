@@ -62,7 +62,7 @@ inDisplay.onChange =
 inInteractive.onChange = updateInteractive;
 
 updateText();
-updateStyle();
+updateUiAndStyle();
 warning();
 updateInteractive();
 
