@@ -5,21 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1612768563869
-        },
-        {
-            "message": "Ops.User.pandur.spreadsheet renamed to Ops.Arrays.ArraySpreadSheet",
-            "author": "pandur",
-            "date": 1612769501347
-        },
-        {
-            "message": "Ops.Arrays.ArraySpreadSheet renamed to Ops.Array.ArraySpreadSheet",
-            "author": "pandur",
-            "date": 1617699517176
-        },
-        {
-            "message": "Ops.Array.ArraySpreadSheet renamed to Ops.Dev.Array.ArraySpreadSheet",
-            "author": "pandur",
-            "date": 1618469091426
         }
     ],
     "authorName": "pandur",

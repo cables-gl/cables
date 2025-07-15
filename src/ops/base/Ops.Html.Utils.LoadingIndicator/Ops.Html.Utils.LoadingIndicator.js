@@ -24,7 +24,7 @@ div.style["margin-left"] = "-" + size / 2 + "px";
 div.style["margin-top"] = "-" + size / 2 + "px";
 
 div.style.position = "absolute";
-div.style["z-index"] = "9999999";
+div.style["z-index"] = "999999";
 
 inVisible.onChange = updateVisible;
 
@@ -78,9 +78,6 @@ function remove()
 
 function updateVisible()
 {
-    // remove();
-    // if (inVisible.get()) canvas.appendChild(div);
-
-    // div.style.display = inVisible.get() ? "block" : "none";
-    div.style.opacity = inVisible.get() ? 1 : 0;
+    // div.style.opacity = inVisible.get() ? 1 : 0;
+    div.style.display = inVisible.get() ? "block" : "none";
 }
