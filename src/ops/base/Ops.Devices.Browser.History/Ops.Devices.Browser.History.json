@@ -1,0 +1,27 @@
+{
+    "id": "bb06f695-91f0-425b-a149-57d5d5193e45",
+    "created": 1752580857519,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1752580857544
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Back"
+            },
+            {
+                "type": 1,
+                "name": "Forward"
+            }
+        ],
+        "portsOut": []
+    }
+}
