@@ -1,0 +1,216 @@
+{
+    "authorName": "pandur",
+    "id": "af548d59-d2d8-4ee6-b938-15e79200817c",
+    "created": 1752499803551,
+    "changelog": [
+        {
+            "message": "fix multiple requests loadingstatus",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1684490024882
+        },
+        {
+            "message": "add option to allow sending credentials with request",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1714125448538
+        },
+        {
+            "message": "404 Error will be shown as a warning, not an error anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715676253233
+        },
+        {
+            "message": "Add option to output binary base64 string",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1716367825905
+        },
+        {
+            "message": "Fixed loading status for binary requests",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716367838991
+        },
+        {
+            "message": "JSON parse errors will not throw an exception but show an uiError",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722348809374
+        },
+        {
+            "message": "Show warning if url is empty",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1722493733058
+        },
+        {
+            "message": "new version 4: Switch to fetch, no xmlHttpRequest anymore, cleanup etc.",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1752504141305
+        },
+        {
+            "message": "auto request reacts to all inputs",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1752506006338
+        },
+        {
+            "message": "added \"Has Error\" boolean output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1752506071090
+        },
+        {
+            "message": "greyout unused ports that dont match the current method or response format",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1752506937723
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "URL",
+                "uititle": "URL",
+                "group": "Request"
+            },
+            {
+                "type": 0,
+                "name": "HTTP Method index",
+                "group": "Request",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Request Body",
+                "group": "Request"
+            },
+            {
+                "type": 5,
+                "name": "Content-Type",
+                "group": "Request"
+            },
+            {
+                "type": 0,
+                "name": "Send Credentials",
+                "group": "Request",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "headers",
+                "group": "Request"
+            },
+            {
+                "type": 0,
+                "name": "Response Content index",
+                "values": [
+                    "JSON",
+                    "String",
+                    "Binary Base64"
+                ],
+                "group": "Response",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto request",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Empty output on change",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Response Json Object"
+            },
+            {
+                "type": 5,
+                "name": "Response String"
+            },
+            {
+                "type": 5,
+                "name": "Response Data Url"
+            },
+            {
+                "type": 0,
+                "name": "Status Code",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Is Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            },
+            {
+                "type": 0,
+                "name": "Duration MS",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Loaded"
+            }
+        ]
+    },
+    "summary": "Request a json file and output an object (ajax, url, json,fetch)",
+    "docs": {
+        "ports": [
+            {
+                "name": "HTTP Method index",
+                "text": "the http method to use"
+            },
+            {
+                "name": "Content-Type",
+                "text": "the content type of the body sent (if any)"
+            },
+            {
+                "name": "Auto request",
+                "text": "trigger the request on any value change (or on pagereload)"
+            },
+            {
+                "name": "Send Credentials",
+                "text": "indicates whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates. "
+            },
+            {
+                "name": "headers",
+                "text": "a key/value-object of additional headers to send"
+            },
+            {
+                "name": "reload",
+                "text": "refresh data from remote (overrides an inactive \"auto request\")"
+            },
+            {
+                "name": "Is Loading",
+                "text": "currently loading"
+            },
+            {
+                "name": "Loaded",
+                "text": "triggers when finished"
+            }
+        ]
+    },
+    "exampleProjectId": "5FQ08W",
+    "license": "MIT"
+}

@@ -4,17 +4,26 @@
         {
             "message": "created op",
             "author": "tim",
-            "date": 1579692851160
+            "date": 1579692851160,
+            "type": "new"
         },
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888080304
+            "date": 1643888080304,
+            "type": "improvement"
         },
         {
             "message": "add trigger to set default value",
             "author": "stephan",
-            "date": 1645186240876
+            "date": 1645186240876,
+            "type": "feature"
+        },
+        {
+            "message": "if default value is empty, set result to first value string from array",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1752508746248
         }
     ],
     "authorName": "tim",
