@@ -1,4 +1,4 @@
-const osc=op.require("osc");
+const osc = op.require("osc");
 
 const
     inConn = op.inObject("Connection"),
@@ -8,7 +8,9 @@ const
     myNumber = op.inFloat("Number"),
     exec = op.inTriggerButton("Send");
 
-if(osc)
+op.toWorkPortsNeedToBeLinked(inConn);
+
+if (osc)
 {
     exec.onTriggered = send;
 
@@ -27,5 +29,4 @@ if(osc)
             ]
         }, inIp.get(), inPort.get());
     }
-
 }

@@ -39,7 +39,8 @@
                 "type": 1,
                 "name": "Send"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "coreLibs": [
         "standalone_electron"
