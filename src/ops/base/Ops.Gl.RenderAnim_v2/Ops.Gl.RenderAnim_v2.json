@@ -38,6 +38,7 @@
             {
                 "type": 0,
                 "name": "File Type index",
+                "group": "File",
                 "subType": "integer"
             },
             {
@@ -66,6 +67,11 @@
             {
                 "type": 0,
                 "name": "Duration Type index",
+                "values": [
+                    "Seconds",
+                    "Frames"
+                ],
+                "group": "Timing",
                 "subType": "integer"
             },
             {
