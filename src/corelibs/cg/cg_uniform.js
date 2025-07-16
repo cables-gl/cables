@@ -1,6 +1,8 @@
 import { Logger } from "cables-shared-client";
 import { Port } from "cables";
 import { CgShader } from "./cg_shader.js";
+import { Shader } from "../cgl/cgl_shader.js";
+import { CgpShader } from "../cgp/cgp_shader.js";
 
 export class CgUniform
 {

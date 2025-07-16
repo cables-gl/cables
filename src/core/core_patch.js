@@ -471,7 +471,12 @@ export class Patch extends Events
             if (!this.isEditorMode())
             {
                 this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+
                 // throw new Error("instancing error 1" + objName);
+            }
+            else
+            {
+                if (this.#initialDeserialize) gui.patchView.store.opCrashed = true;
             }
         }
 
@@ -900,7 +905,6 @@ export class Patch extends Events
 
         if (this.#initialDeserialize)
         {
-            this.#initialDeserialize = false;
             this.namespace = obj.namespace || "";
             this.name = obj.name || "";
             this.settings = obj.settings;
@@ -1192,6 +1196,7 @@ export class Patch extends Events
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
+        this.#initialDeserialize = false;
     }
 
     profile(enable)

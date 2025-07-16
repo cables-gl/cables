@@ -37,5 +37,6 @@
     "exampleProjectId": "QuT1X2",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
