@@ -39,5 +39,5 @@ function render()
 
 op.onDelete = () =>
 {
-    fb.dispose();
+    if (fb)fb.dispose();
 };

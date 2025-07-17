@@ -7,6 +7,7 @@ import { CgMesh } from "../cg/cg_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
 
 import { CglContext } from "./cgl_state.js";
+import { Shader } from "./cgl_shader.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -736,7 +737,7 @@ class Mesh extends CgMesh
      * @memberof Mesh
      * @instance
      * @description draw mesh to screen
-     * @param {CgShader} shader
+     * @param {Shader} shader
      */
     render(shader)
     {
