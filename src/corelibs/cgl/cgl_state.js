@@ -152,7 +152,7 @@ export class CglContext extends CgContext
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)))
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && ((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))))
         {
             this._isSafariCrap = true;
             this.glUseHalfFloatTex = true;
