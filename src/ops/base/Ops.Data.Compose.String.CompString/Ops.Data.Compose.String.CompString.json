@@ -4,19 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1689760361275
+            "date": 1689760361275,
+            "type": "new"
         },
         {
-            "message": "Ops.Patch.PGUpzJB.CompString renamed to Ops.Data.Compose.CompString",
-            "type": "rename",
+            "message": "Added clear checkbox and trigger",
+            "type": "feature",
             "author": "pandur",
-            "date": 1689761421758
-        },
-        {
-            "message": "Ops.Data.Compose.CompString renamed to Ops.Data.Compose.String.CompString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706776311052
+            "date": 1752593903797
         }
     ],
     "layout": {
@@ -24,6 +19,15 @@
             {
                 "type": 1,
                 "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -43,5 +47,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "GUpzJB"
+    "exampleProjectId": "GUpzJB",
+    "license": "MIT"
 }

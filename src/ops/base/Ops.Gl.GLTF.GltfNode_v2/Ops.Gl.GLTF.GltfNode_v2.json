@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1592407895084
-        },
-        {
-            "message": "Ops.User.pandur.GltfNode_v2 renamed to Ops.Gl.GLTF.GltfNode_v2",
-            "author": "pandur",
-            "date": 1592409514095
+            "date": 1592407895084,
+            "type": "new"
         }
     ],
     "authorName": "pandur",

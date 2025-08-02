@@ -8,7 +8,7 @@ const
     outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;
-
+inPadding.onChange =
 inEle.onChange =
     inEle.onLinkChanged =
     inPadTop.onChange =
