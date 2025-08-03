@@ -4,26 +4,17 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1572277544559
+            "date": 1572277544559,
+            "type": "new"
         },
         {
-            "message": "cloned op from Ops.Gl.PixelProjection",
-            "author": "pandur",
-            "date": 1687518065568
-        },
-        {
-            "message": "Ops.Patch.P4SCBDz.PixelProjection_v2 renamed to Ops.Gl.PixelProjection_v2",
+            "message": "new version v2",
             "type": "rename",
             "author": "pandur",
             "date": 1687527434344
         },
         {
-            "message": "cloned op from Ops.Gl.PixelProjection_v2",
-            "author": "pandur",
-            "date": 1701098416156
-        },
-        {
-            "message": "Ops.Patch.PenrnhM.PixelProjection_v3 renamed to Ops.Gl.PixelProjection_v3",
+            "message": "new version v3",
             "type": "rename",
             "author": "pandur",
             "date": 1701098558331

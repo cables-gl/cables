@@ -8,10 +8,16 @@
             "type": "new"
         },
         {
-            "message": "fixed probliem becoming invisible on safari sometimes",
+            "message": "fixed problem becoming invisible on safari sometimes",
             "type": "bugfix",
             "author": "pandur",
             "date": 1752153571558
+        },
+        {
+            "message": "added element output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1753343443148
         }
     ],
     "authorName": "pandur",
@@ -25,6 +31,11 @@
             },
             {
                 "type": 0,
+                "name": "Center Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Style index",
                 "values": [
                     "Spinner",
@@ -34,7 +45,13 @@
                 "subType": "integer"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Elment",
+                "objType": "element"
+            }
+        ]
     },
     "summary": "show a typical web loading/progress indicator animation",
     "issues": "",

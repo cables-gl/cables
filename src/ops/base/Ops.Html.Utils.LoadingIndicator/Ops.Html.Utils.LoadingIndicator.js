@@ -1,11 +1,15 @@
 const
     inVisible = op.inBool("Visible", true),
+    inCenter = op.inBool("Center Position", true),
     inStyle = op.inSwitch("Style", ["Spinner", "Ring", "Ellipsis"], "Ring");
 
 const div = document.createElement("div");
 div.dataset.op = op.id;
 const canvas = op.patch.cgl.canvas.parentElement;
 
+const outEle = op.outObject("Elment", div, "element");
+
+inCenter.onChange =
 inStyle.onChange = updateStyle;
 
 div.appendChild(document.createElement("div"));
@@ -16,15 +20,10 @@ const size = 50;
 
 div.style.width = size + "px";
 div.style.height = size + "px";
-div.style.top = "50%";
-div.style.left = "50%";
-div.style["pointer-events"] = "none";
-
-div.style["margin-left"] = "-" + size / 2 + "px";
-div.style["margin-top"] = "-" + size / 2 + "px";
 
 div.style.position = "absolute";
 div.style["z-index"] = "999999";
+div.style["pointer-events"] = "none";
 
 inVisible.onChange = updateVisible;
 
@@ -48,6 +47,21 @@ updateStyle();
 
 function updateStyle()
 {
+    if (inCenter.get())
+    {
+        div.style.top = "50%";
+        div.style.left = "50%";
+        div.style["margin-left"] = "-" + size / 2 + "px";
+        div.style["margin-top"] = "-" + size / 2 + "px";
+    }
+    else
+    {
+        div.style.top = 0;
+        div.style.left = 0;
+        div.style["margin-left"] = 0;
+        div.style["margin-top"] = 0;
+    }
+
     const st = inStyle.get();
     if (st == "Spinner")
     {
@@ -69,6 +83,7 @@ function updateStyle()
         styleEle.textContent = attachments.css_ellipsis_css;
     }
     else div.classList.remove("lds-ellipsis");
+    outEle.setRef(div);
 }
 
 function remove()

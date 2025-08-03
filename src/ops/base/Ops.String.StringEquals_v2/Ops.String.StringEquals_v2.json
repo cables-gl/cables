@@ -1,0 +1,44 @@
+{
+    "id": "0faae4e6-d203-460a-aa2b-232208716fc0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559919671089,
+            "type": "new"
+        },
+        {
+            "message": "fixed wrong default value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1753104714121
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1753104613920,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String 1"
+            },
+            {
+                "type": 5,
+                "name": "String 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "check if content of two strings is the same",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "Nx2zci"
+}

@@ -4,19 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1692307325062
-        },
-        {
-            "message": "Ops.Patch.PB9In5E.InputElement renamed to Ops.Html.InputElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1692309153225
+            "date": 1692307325062,
+            "type": "new"
         },
         {
             "message": "Html.InputElement renamed to Ops.Html.Elements.InputElement",
             "type": "rename",
             "author": "pandur",
             "date": 1734352658965
+        },
+        {
+            "message": "Output trigger, when pressing enter or escape",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1754133008775
         }
     ],
     "authorName": "pandur",
@@ -26,11 +27,21 @@
             {
                 "type": 0,
                 "name": "Element index",
+                "values": [
+                    "Input",
+                    "Textarea"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Type index",
+                "values": [
+                    "Text",
+                    "Number",
+                    "Password",
+                    "Date"
+                ],
                 "subType": "integer"
             },
             {
@@ -62,11 +73,6 @@
                 "type": 0,
                 "name": "Max Length",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Interactive",
-                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -104,6 +110,14 @@
                 "type": 0,
                 "name": "Hover",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Enter pressed"
+            },
+            {
+                "type": 1,
+                "name": "Escape pressed"
             }
         ]
     },
@@ -111,5 +125,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "HTML input/textarea element to allow the user to enter text "
+    "summary": "HTML input/textarea element to allow the user to enter text ",
+    "license": "MIT"
 }
