@@ -4,7 +4,7 @@
 .lds-ellipsis div {
   position: absolute;
   /*top: 33px;*/
-  margin-top:-12px;
+  /*margin-top:12px;*/
   margin-left:-13px;
   width: 13px;
   height: 13px;

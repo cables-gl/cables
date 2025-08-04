@@ -169,6 +169,10 @@
                 "subType": "number"
             },
             {
+                "type": 2,
+                "name": "Fetch Response"
+            },
+            {
                 "type": 1,
                 "name": "Loaded"
             }
