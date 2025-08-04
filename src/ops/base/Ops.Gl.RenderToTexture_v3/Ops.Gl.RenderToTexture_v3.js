@@ -63,7 +63,7 @@ function doRender()
         else if (tfilter.get() == "linear") selectFilter = CGL.Texture.FILTER_LINEAR;
         else if (tfilter.get() == "mipmap") selectFilter = CGL.Texture.FILTER_MIPMAP;
 
-        if (inPixelFormat.get().indexOf("loat") && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Can't use mipmap and float texture at the same time");
+        if (inPixelFormat.get().indexOf("loat") > -1 && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Can't use mipmap and float texture at the same time");
         else op.setUiError("fpmipmap", null);
 
         if (cgl.glVersion >= 2)
@@ -80,17 +80,16 @@ function doRender()
             if (msaa.get() == "4x") msSamples = 4;
             if (msaa.get() == "8x") msSamples = 8;
 
-            fb = new CGL.Framebuffer2(cgl, 8, 8,
-                {
-                    "name": "render2texture " + op.id,
-                    "pixelFormat": inPixelFormat.get(),
-                    "multisampling": ms,
-                    "multisamplingSamples": msSamples,
-                    "wrap": selectedWrap,
-                    "filter": selectFilter,
-                    "depth": depth.get(),
-                    "clear": clear.get()
-                });
+            fb = new CGL.Framebuffer2(cgl, 8, 8, {
+                "name": "render2texture " + op.id,
+                "pixelFormat": inPixelFormat.get(),
+                "multisampling": ms,
+                "multisamplingSamples": msSamples,
+                "wrap": selectedWrap,
+                "filter": selectFilter,
+                "depth": depth.get(),
+                "clear": clear.get()
+            });
         }
         else
         {
