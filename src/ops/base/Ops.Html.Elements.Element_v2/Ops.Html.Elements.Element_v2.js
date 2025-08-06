@@ -18,6 +18,7 @@ const
     inTag = op.inString("Tag Name", "div"),
     inOpacity = op.inFloatSlider("Opacity", 1),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
+    inAddDom = op.inValueBool("Add to DOM", true),
 
     outElement = op.outObject("DOM Element", null, "element"),
     outHover = op.outBoolNum("Hovering"),
@@ -78,6 +79,24 @@ outClicked.onLinkChanged = () =>
     if (outClicked.isLinked() && !isInteractive())
         op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
 };
+
+inAddDom.onChange = () =>
+{
+    if (!inAddDom.get())removeElement();
+    else
+    {
+        createElement();
+        updateAll();
+    }
+};
+
+function updateAll()
+{
+    updateStyle();
+    updateClass();
+    updateText();
+    updateInteractive();
+}
 
 function updateUiAndStyle()
 {
@@ -262,12 +281,9 @@ op.addEventListener("onEnabledChange", (enabled) =>
 {
     removeElement();
     if (!enabled) return;
-
     createElement();
-    updateStyle();
-    updateClass();
-    updateText();
-    updateInteractive();
+
+    updateAll();
 });
 
 function warning()
