@@ -8,7 +8,7 @@ const
     outList = op.outArray("Jobs"),
     loadingFinished = op.outTrigger("Trigger Loading Finished ");
 
-const cgl = op.patch.cgl;
+op.toWorkPortsNeedToBeLinked(exe);
 const patch = op.patch;
 
 let finishedOnce = false;
@@ -18,7 +18,7 @@ let timeout = 0;
 
 document.body.classList.add("cables-loading");
 
-let loadingId = cgl.patch.loading.start("loadingStatusInit", "loadingStatusInit", op);
+let loadingId = patch.loading.start("loadingStatusInit", "loadingStatusInit", op);
 
 op.patch.loading.on("finishedTask", updateStatus.bind(this));
 op.patch.loading.on("startTask", updateStatus.bind(this));
@@ -92,7 +92,7 @@ exe.onTriggered = () =>
 
     if (loadingId)
     {
-        cgl.patch.loading.finished(loadingId);
+        patch.loading.finished(loadingId);
         loadingId = null;
     }
 };

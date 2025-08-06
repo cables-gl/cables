@@ -8,6 +8,9 @@ const outIndex = op.outNumber("Index", -1);
 const eventObjPort = op.outObject("Event Object");
 const eventElementPort = op.outObject("Event Element", null, "element");
 
+op.toWorkPortsNeedsString(eventNamePort);
+op.toWorkPortsNeedToBeLinked(inElements);
+
 op.onDelete = removeListeners;
 
 const indexKey = "op" + op.id + "listenerIndex";

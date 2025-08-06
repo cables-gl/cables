@@ -29,6 +29,11 @@
             {
                 "type": 0,
                 "name": "Mode index",
+                "values": [
+                    "document",
+                    "string input",
+                    "element"
+                ],
                 "subType": "integer"
             },
             {

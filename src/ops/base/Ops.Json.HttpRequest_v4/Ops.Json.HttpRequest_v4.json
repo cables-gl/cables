@@ -68,6 +68,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1752506937723
+        },
+        {
+            "message": "better output of error messages",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1754137253119
         }
     ],
     "layout": {
