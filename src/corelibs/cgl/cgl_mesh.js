@@ -748,7 +748,7 @@ class Mesh extends CgMesh
 
         if (!shader)
         {
-            return console.log("shadern not valid");
+            return console.log("shader not valid");
         }
 
         if (!shader.isValid())

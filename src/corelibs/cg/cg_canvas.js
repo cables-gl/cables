@@ -5,6 +5,9 @@ export class CgCanvas
     hasFocus = false;
 
     forceAspect = 0;
+    pixelDensity = 1;
+    _oldWidthRp = -1;
+    _oldHeightRp = -1;
 
     /**
      * @param {{ canvasEle: any; cg: any; }} options
@@ -25,16 +28,15 @@ export class CgCanvas
         if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
 
         this._cg = options.cg;
-        this.pixelDensity = 1;
-        this.canvasWidth = this.canvasEle.clientWidth;
-        this.canvasHeight = this.canvasEle.clientHeight;
+        if (this.canvasEle)
+        {
+            this.canvasWidth = this.canvasEle.clientWidth;
+            this.canvasHeight = this.canvasEle.clientHeight;
 
-        this._oldWidthRp = -1;
-        this._oldHeightRp = -1;
-
-        this.setSize(this.canvasWidth, this.canvasHeight);
-        this.canvasEle.addEventListener("focus", () => { this.hasFocus = true; });
-        this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
+            this.setSize(this.canvasWidth, this.canvasHeight);
+            this.canvasEle.addEventListener("focus", () => { this.hasFocus = true; });
+            this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
+        }
     }
 
     get canvasEle() { return this._canvasEle; }

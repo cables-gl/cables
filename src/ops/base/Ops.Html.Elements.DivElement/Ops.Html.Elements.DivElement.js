@@ -13,7 +13,7 @@ const outClicked = op.outTrigger("Clicked");
 let listenerElement = null;
 
 let div = document.createElement("div");
-let canvas = op.patch.cgl.canvas.parentElement;
+let canvas = op.patch.containerElement;
 
 canvas.appendChild(div);
 outElement.set(div);

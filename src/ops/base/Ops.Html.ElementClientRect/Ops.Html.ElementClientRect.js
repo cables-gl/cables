@@ -20,7 +20,7 @@ inUpd.onTriggered = () =>
         return;
     }
     const r = ele.getBoundingClientRect();
-    const rCanv = op.patch.cgl.canvas.getBoundingClientRect();
+    const rCanv = op.patch.containerElement.getBoundingClientRect();
 
     let mul = 1.0;
 
