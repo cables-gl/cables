@@ -1,10 +1,10 @@
 const
-    inUpdate = op.inTriggerButton("Update"),
     queryPort = op.inString("Query"),
     inMode = op.inValueSelect("Mode", ["document", "string input", "element"], "document"),
     inMimeType = op.inValueSelect("Type", ["text/html", "text/xml"], "text/html"),
     inSource = op.inStringEditor("Document", "xml"),
     inElement = op.inObject("Element", null, "element"),
+    inUpdate = op.inTriggerButton("Update"),
     elementPort = op.outArray("Elements");
 
 if (inMode.get() === "document")
@@ -13,6 +13,8 @@ if (inMode.get() === "document")
     inMimeType.set("text/html");
     inMimeType.setUiAttribs({ "greyout": true });
 }
+
+op.toWorkPortsNeedsString(queryPort);
 
 inUpdate.onTriggered = update;
 inMode.onChange = modeChange;

@@ -92,6 +92,7 @@ function showEmptyUrlWarning()
 function finishLoadingFail(loadingId, e)
 {
     op.setUiError("jsonerr", "Problem while loading data:<br/>" + e, 1);
+    outError.set(e);
     outIsLoading.set(false);
     outData.setRef(null);
     outHasError.set(true);
@@ -153,7 +154,12 @@ function reload(addCachebuster, force = false)
 
             if (!res.ok) outError.set(res.statusText || "request fail");
 
-            if (resContentType == "JSON")
+            if (outFetchresponse.isLinked())
+            {
+                resetOutputs();
+                finishLoadingSuccess(loadingId);
+            }
+            else if (resContentType == "JSON")
             {
                 res.json().then((b) =>
                 {
@@ -163,7 +169,7 @@ function reload(addCachebuster, force = false)
                 }).catch((e) =>
                 {
                     finishLoadingFail(loadingId, e);
-                    outError.set("Could not parse json");
+                    if (!outError.get())outError.set("Could not parse json");
                 });
             }
             else if (resContentType == "String")

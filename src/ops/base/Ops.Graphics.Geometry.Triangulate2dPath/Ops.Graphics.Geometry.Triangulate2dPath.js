@@ -67,6 +67,7 @@ function tess()
         let changed = true;
 
         if (geom) changed = geom.vertices.length / 3 != res.vertices.length / 2;
+        // console.log("text",res);
 
         if (changed)
         {
@@ -85,9 +86,9 @@ function tess()
         geom.mapTexCoords2d();
         geom.flipVertDir();
 
-        outGeom.set(null);
-        outGeom.set(geom);
+        outGeom.setRef(geom);
     }
+    else outGeom.set(null);
 
     next.trigger();
 }

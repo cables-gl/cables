@@ -19,10 +19,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 1,
-                "name": "Update"
-            },
-            {
                 "type": 5,
                 "name": "Query"
             },
@@ -44,6 +40,10 @@
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Update"
             }
         ],
         "portsOut": [
