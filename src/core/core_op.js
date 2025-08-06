@@ -711,8 +711,8 @@ export class Op extends Events
      * @param {String} name
      * @param {Array} values
      * @param {String} v default value
-     * @return {Port} created port
      * @param {boolean} [noindex]
+     * @return {Port} created port
      */
     inDropDown(name, values, v, noindex)
     {

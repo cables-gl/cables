@@ -5,6 +5,15 @@ const MIN_NUM_PORTS = 2;
 
 export class MultiPort extends Port
 {
+
+    /**
+     * @param {import("./core_op.js").Op<any>} __parent
+     * @param {string} name
+     * @param {number} type
+     * @param {number} dir
+     * @param {import("./core_port.js").PortUiAttribs} uiAttribs
+     * @param {{}} [uiAttribsPorts]
+     */
     constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);

@@ -1,15 +1,15 @@
 {
-    "id": "20f7bcab-ed71-45d1-9fae-d89aacf3961b",
+    "id": "32a301bb-a59b-41a6-9d87-4a58592b6675",
     "changelog": [
         {
-            "message": "created op",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
-            "date": 1559301644607,
-            "type": "new"
+            "date": 1752472050560
         }
     ],
     "authorName": "pandur",
-    "created": 1694609742924,
+    "created": 1752472050560,
     "layout": {
         "portsIn": [
             {
@@ -22,8 +22,8 @@
             },
             {
                 "type": 0,
-                "name": "Number",
-                "subType": "number"
+                "name": "Boolean",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -35,7 +35,6 @@
     },
     "summary": "set number at key in an object",
     "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },

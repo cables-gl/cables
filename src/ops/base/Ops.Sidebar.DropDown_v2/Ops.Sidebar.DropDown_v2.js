@@ -120,6 +120,8 @@ function onValuesPortChange()
 
     outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
+    console.log("options i", options);
+    if (!defaultValue && options && options.length)valuePort.set(options[0]);
 }
 
 let finalIndex = 0;

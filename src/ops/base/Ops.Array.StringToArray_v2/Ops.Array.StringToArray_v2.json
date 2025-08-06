@@ -18,12 +18,12 @@
                 "text": "If set, the values inside the array will be interpreted as numbers (not strings)"
             },
             {
-                "name": "Parsed",
-                "text": "Triggers once the array has been parsed"
-            },
-            {
                 "name": "array",
                 "text": "The parsed array"
+            },
+            {
+                "name": "Parsed",
+                "text": "Triggers once the array has been parsed"
             },
             {
                 "name": "length",
@@ -73,7 +73,6 @@
             }
         ]
     },
-    "issues": "",
     "youtubeids": [
         "Y3qX41TB0bg"
     ],
@@ -90,5 +89,6 @@
             "date": 1685959273973
         }
     ],
-    "exampleProjectId": "U4M4J5"
+    "exampleProjectId": "U4M4J5",
+    "license": "MIT"
 }

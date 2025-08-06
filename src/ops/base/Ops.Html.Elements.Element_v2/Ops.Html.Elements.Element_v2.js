@@ -43,7 +43,7 @@ inTag.onChange = () =>
     removeElement();
     createElement();
     updateClass();
-    updateText();
+    updateText(); updateInteractive();
 };
 
 inSetSize.onChange =
@@ -62,7 +62,7 @@ inDisplay.onChange =
 inInteractive.onChange = updateInteractive;
 
 updateText();
-updateStyle();
+updateUiAndStyle();
 warning();
 updateInteractive();
 
@@ -82,6 +82,7 @@ outClicked.onLinkChanged = () =>
 function updateUiAndStyle()
 {
     inWidth.setUiAttribs({ "greyout": !inSetSize.get() });
+    inSizeUnit.setUiAttribs({ "greyout": !inSetSize.get() });
     inHeight.setUiAttribs({ "greyout": !inSetSize.get() });
     updateStyle();
 }
@@ -153,7 +154,11 @@ function removeClasses()
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
-        if (classes[i]) div.classList.remove(classes[i]);
+        try
+        {
+            if (classes[i]) div.classList.remove(classes[i]);
+        }
+        catch (e) { console.log("e", e); }
     }
     oldClassesStr = "";
 }
@@ -201,7 +206,7 @@ function onMouseLeave(e)
 
 function onKey(e)
 {
-    if (e.keyCode == 13 || e.keyCode == 32)outClicked.trigger();
+    if (e.keyCode == 13 || e.keyCode == 32) outClicked.trigger();
 }
 
 function onMouseClick(e)

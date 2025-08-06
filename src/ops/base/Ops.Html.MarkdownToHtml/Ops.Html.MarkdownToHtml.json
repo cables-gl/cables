@@ -4,17 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1669976272478
+            "date": 1669976272478,
+            "type": "new"
         },
         {
-            "message": " added lib: marked.js",
+            "message": "Added boolean input to disable markdown conversion",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1669976686533
-        },
-        {
-            "message": "Ops.User.pandur.MarkdownToHtml renamed to Ops.Html.MarkdownToHtml",
-            "author": "pandur",
-            "date": 1669976943884
+            "date": 1753689573319
         }
     ],
     "layout": {
@@ -22,6 +19,11 @@
             {
                 "type": 5,
                 "name": "Markdown"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -40,5 +42,6 @@
         "ports": []
     },
     "exampleProjectId": "52Zlij",
-    "authorName": "stephan"
+    "authorName": "stephan",
+    "license": "MIT"
 }
