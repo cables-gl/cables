@@ -41,6 +41,7 @@ import { RenderLoop } from "./renderloop.js";
  * @property {String} [subPatch] internal use
  * @property {Number} [masterVolume] 0 for maximum possible frames per second
  * @property {HTMLCanvasElement} [glCanvas]
+ * @property {HTMLElement} [containerElement]
 */
 
 /**
@@ -1300,6 +1301,11 @@ export class Patch extends Events
         console.groupEnd(); // eslint-disable-line
     }
 
+    get containerElement()
+    {
+        return this.config.containerElement || this.cgl.canvas.parentElement || null;
+    }
+
     /**
      * returns document object of the patch could be != global document object when opening canvas ina popout window
      * @function getDocument
@@ -1309,8 +1315,8 @@ export class Patch extends Events
      */
     getDocument()
     {
-        if (this.cgl) return this.cgl.canvas.ownerDocument;
-        else return window.document;
+        return this.containerElement.ownerDocument;
+        // return this.cgl.canvas.ownerDocument;
     }
 }
 

@@ -142,6 +142,7 @@ export class CgContext extends Events
         if (typeof canvEle === "string") canvEle = document.getElementById(canvEle);
 
         this.cgCanvas = new CgCanvas({ "canvasEle": canvEle, "cg": this });
+        if (!canvEle) return;
 
         canvEle.parentElement.classList.add("cablesContainer");
         if (this._setCanvas) this._setCanvas(canvEle);

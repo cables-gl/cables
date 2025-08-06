@@ -31,7 +31,7 @@ let oldStr = null;
 let prevDisplay = "block";
 let div = null;
 
-const parent = op.patch.cgl.canvas.parentElement;
+const parent = op.patch.containerElement;
 
 createElement();
 
