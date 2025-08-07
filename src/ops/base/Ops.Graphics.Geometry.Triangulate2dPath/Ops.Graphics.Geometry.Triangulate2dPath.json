@@ -65,10 +65,10 @@
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LzTAeT"
+    "exampleProjectId": "LzTAeT",
+    "license": "MIT"
 }

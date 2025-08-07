@@ -14,6 +14,8 @@ if (inMode.get() === "document")
     inMimeType.setUiAttribs({ "greyout": true });
 }
 
+op.toWorkPortsNeedsString(queryPort);
+
 inUpdate.onTriggered =
 queryPort.onChange =
 inMimeType.onChange =
