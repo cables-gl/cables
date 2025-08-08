@@ -7,9 +7,8 @@ const inUrl = op.inUrl("URL"),
     inResContentType = op.inSwitch("Response Content", ["JSON", "String", "Binary Base64"], "JSON"),
     inAutoRequest = op.inBool("Auto request", true),
     inEmptyOutput = op.inBool("Empty output on change", true),
-
+    inRetry = op.inBool("Retry on error", true),
     reloadTrigger = op.inTriggerButton("Reload"),
-
     outData = op.outObject("Response Json Object"),
     outString = op.outString("Response String"),
     outDataUrl = op.outString("Response Data Url"),
@@ -33,6 +32,7 @@ outString.ignoreValueSerialize = true;
 outDataUrl.ignoreValueSerialize = true;
 
 let reloadTimeout = 0;
+let retryTimeout = 0;
 
 outString.onLinkChanged =
     outDataUrl.onLinkChanged =
@@ -47,7 +47,14 @@ inAutoRequest.onChange =
         updateUi();
         delayedReload(false);
     };
-
+outError.onChange = () =>
+{
+    if (inRetry.get())
+    {
+        clearTimeout(retryTimeout);
+        retryTimeout = setTimeout(delayedReload, 1000);
+    }
+};
 inResContentType.onChange = () =>
 {
     delayedReload(false);
@@ -62,6 +69,11 @@ reloadTrigger.onTriggered = () =>
 op.onFileChanged = (fn) =>
 {
     if (inUrl.get() && inUrl.get().indexOf(fn) > -1) reload(true);
+};
+
+op.onDelete = () =>
+{
+    clearTimeout(retryTimeout);
 };
 
 /// ///////////////
