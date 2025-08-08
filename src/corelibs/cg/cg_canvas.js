@@ -25,7 +25,7 @@ export class CgCanvas
         }
 
         if (!options.cg) this._log.error("CgCanvas options has no cg");
-        if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
+        // if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
 
         this._cg = options.cg;
         if (this.canvasEle)
