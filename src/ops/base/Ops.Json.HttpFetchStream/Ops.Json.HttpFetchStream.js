@@ -32,29 +32,12 @@ function read()
     reader.read().then((r) =>
     {
         let done = false;
-        //   const { value, done: readerDone } = r
         if (r.value)
         {
             let chunk = decoder.decode(r.value, { "stream": true }).trim();
 
-            if (chunk.length == 0)done = true;
+             if (chunk.length == 0)done = true;
 
-            // if (!done)
-            //     try
-            //     {
-            //         const json = JSON.parse(chunk);
-            //         outObje.setRef(json);
-            //         outTrig.trigger();
-            //         done = true;
-            //     }
-            //     catch (err)
-            //     {
-            //         console.warn("Error parsing chunk:", chunk);
-
-            //                             done = true;
-
-            //     // this could be ok, continue and try to parse parts...
-            //     }
             if (!done)
             {
                 const parts = chunk.split("\n").filter(Boolean);
@@ -64,11 +47,14 @@ function read()
                     try
                     {
                         if (part.indexOf("data: [DONE]") == 0)done = true; // wtf
+                        if (part.indexOf("[DONE]") == 0)part = part.substr(6); // wtf
                         if (part.indexOf("data: ") == 0)part = part.substr(6); // wtf
-
+                        if(!done)
+                        {
                         const json = JSON.parse(part);
                         outObje.setRef(json);
                         outTrig.trigger();
+                        }
                     }
                     catch (err)
                     {
