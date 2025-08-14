@@ -49,7 +49,7 @@ inAutoRequest.onChange =
     };
 outError.onChange = () =>
 {
-    if (inRetry.get())
+    if (outHasError.get() && inRetry.get())
     {
         clearTimeout(retryTimeout);
         retryTimeout = setTimeout(delayedReload, 1000);
@@ -117,6 +117,8 @@ function finishLoadingSuccess(loadingId)
 {
     op.patch.loading.finished(loadingId);
     outIsLoading.set(false);
+
+    outError.set("");
 }
 
 function resetOutputs()
@@ -152,12 +154,14 @@ function reload(addCachebuster, force = false)
         const startTime = performance.now();
 
         const options = { "method": inMethod.get() };
-        if (inMethod.get() != "GET") options.body = inBody.get();
+        if (inMethod.get() != "GET") options.body = inBody.get(); if (inSendCredentials.get()) options.credentials = "include";
+
         if (inHeaders.isLinked()) options.headers = inHeaders.get();
-        if (inSendCredentials.get()) options.credentials = "include";
+        if (!options.headers)options.headers = {};
+        if (!options.headers["Content-Type"])options.headers["Content-Type"] = inContentType.get();
 
         const resContentType = inResContentType.get();
-
+        console.log("ttttt", options);
         fetch(url, options).then((res) =>
         {
             outDuration.set(Math.round(performance.now() - startTime));

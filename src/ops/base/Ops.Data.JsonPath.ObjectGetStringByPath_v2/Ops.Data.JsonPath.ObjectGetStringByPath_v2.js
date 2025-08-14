@@ -41,7 +41,6 @@ function update()
             {
                 const errorMsg = "could not find element at path " + path;
                 result = "";
-                console.log("hepp", returnPathIn.get(), path);
                 if (returnPathIn.get())
                 {
                     result = path;

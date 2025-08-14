@@ -127,7 +127,6 @@ let finalIndex = 0;
 function setSelectedProperty(defaultinput)
 {
     const optionElements = input.querySelectorAll("option");
-
     let finalEle = null;
 
     optionElements.forEach(function (optionElement, index)
@@ -202,19 +201,13 @@ function onParentChanged()
 
 function showElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "block";
-    }
+    if (ele) ele.style.display = "block";
     setSelectedProperty();
 }
 
 function hideElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "none";
-    }
+    if (ele) ele.style.display = "none";
 }
 
 function onDelete()
@@ -224,10 +217,7 @@ function onDelete()
 
 function removeElementFromDOM(ele)
 {
-    if (ele && ele.parentNode && ele.parentNode.removeChild)
-    {
-        ele.parentNode.removeChild(ele);
-    }
+    if (ele && ele.parentNode && ele.parentNode.removeChild) ele.parentNode.removeChild(ele);
 }
 
 function setDefault()
