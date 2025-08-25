@@ -1,7 +1,8 @@
 const
     inEle = op.inObject("Element", null, "element"),
     inStr = op.inString("Html", ""),
-    exec = op.inTriggerButton("Trigger");
+    exec = op.inTriggerButton("Trigger"),
+    next = op.outTrigger("Next");
 
 exec.onTriggered = () =>
 {
@@ -10,4 +11,6 @@ exec.onTriggered = () =>
     {
         el.innerHTML += inStr.get();
     }
+
+    next.trigger();
 };

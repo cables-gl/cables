@@ -47,14 +47,7 @@ inAutoRequest.onChange =
         updateUi();
         delayedReload(false);
     };
-outError.onChange = () =>
-{
-    if (outHasError.get() && inRetry.get())
-    {
-        clearTimeout(retryTimeout);
-        retryTimeout = setTimeout(delayedReload, 1000);
-    }
-};
+
 inResContentType.onChange = () =>
 {
     delayedReload(false);
@@ -111,6 +104,12 @@ function finishLoadingFail(loadingId, e)
     outString.set("");
     outTrigger.trigger();
     op.patch.loading.finished(loadingId);
+
+    if (outHasError.get() && inRetry.get())
+    {
+        clearTimeout(retryTimeout);
+        retryTimeout = setTimeout(delayedReload, 3000);
+    }
 }
 
 function finishLoadingSuccess(loadingId)
@@ -161,7 +160,6 @@ function reload(addCachebuster, force = false)
         if (!options.headers["Content-Type"])options.headers["Content-Type"] = inContentType.get();
 
         const resContentType = inResContentType.get();
-        console.log("ttttt", options);
         fetch(url, options).then((res) =>
         {
             outDuration.set(Math.round(performance.now() - startTime));
@@ -175,7 +173,8 @@ function reload(addCachebuster, force = false)
                 resetOutputs();
                 finishLoadingSuccess(loadingId);
             }
-            else if (resContentType == "JSON")
+            else
+            if (resContentType == "JSON")
             {
                 res.json().then((b) =>
                 {

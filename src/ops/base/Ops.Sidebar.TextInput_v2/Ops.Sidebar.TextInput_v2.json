@@ -4,12 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1570714576973
+            "date": 1570714576973,
+            "type": "new"
         },
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888164206
+            "date": 1643888164206,
+            "type": "bugfix"
+        },
+        {
+            "message": "can now use type \"search\", this shows an x icon to clear the input field",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1755254411452
         }
     ],
     "authorName": "pandur",
@@ -35,6 +43,11 @@
             {
                 "type": 0,
                 "name": "Type index",
+                "values": [
+                    "text",
+                    "password",
+                    "search"
+                ],
                 "subType": "integer"
             },
             {
@@ -75,7 +88,6 @@
     },
     "summary": "Get a string from an sidebar input field",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -113,5 +125,6 @@
             }
         ]
     },
-    "exampleProjectId": "wa-KH-"
+    "exampleProjectId": "wa-KH-",
+    "license": "MIT"
 }
