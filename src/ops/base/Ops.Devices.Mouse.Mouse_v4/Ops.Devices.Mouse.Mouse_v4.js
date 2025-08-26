@@ -303,7 +303,7 @@ function addListeners()
     }
     else
     {
-        if (area.get() == "Canvas Area")
+        if (area.get() == "Canvas Area" && cgl && cgl.canvas)
         {
             areaElement = cgl.canvas.parentElement;
             listenerElement = document.body;

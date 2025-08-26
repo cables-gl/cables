@@ -70,5 +70,6 @@
             }
         ]
     },
-    "exampleProjectId": "F3r9L5"
+    "exampleProjectId": "F3r9L5",
+    "license": "MIT"
 }
