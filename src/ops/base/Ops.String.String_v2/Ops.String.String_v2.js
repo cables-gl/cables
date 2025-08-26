@@ -1,6 +1,7 @@
 const
     v = op.inString("value", ""),
     result = op.outString("String");
+v.setUiAttribs({ "display": "text" });
 
 v.onChange = function ()
 {

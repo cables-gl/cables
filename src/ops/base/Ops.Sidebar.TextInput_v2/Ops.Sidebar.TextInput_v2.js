@@ -3,7 +3,7 @@ const
     labelPort = op.inString("Text", "Text"),
     defaultValuePort = op.inString("Default", ""),
     inPlaceholder = op.inString("Placeholder", ""),
-    inType = op.inSwitch("Type", ["text", "password"], "text"),
+    inType = op.inSwitch("Type", ["text", "password", "search"], "text"),
     inTextArea = op.inBool("TextArea", false),
     inGreyOut = op.inBool("Grey Out", false),
     inVisible = op.inBool("Visible", true),

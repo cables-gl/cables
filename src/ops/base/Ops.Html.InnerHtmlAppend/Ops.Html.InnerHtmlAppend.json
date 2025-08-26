@@ -27,7 +27,12 @@
                 "name": "Trigger"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
     },
     "cloneOf": "204bc6c0-e31d-427c-9ffd-ad69d8553a4e"
 }

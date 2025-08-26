@@ -573,7 +573,7 @@
 
 .sidebar__slider input[type=text]:active,
 .sidebar__slider input[type=text]:focus,
-.sidebar__slider input[type=text]:hover
+.sidebar__slider input[type=text]:hover,
 .sidebar__slider input[type=password]:active,
 .sidebar__slider input[type=password]:focus,
 .sidebar__slider input[type=password]:hover
@@ -601,6 +601,7 @@
 .sidebar__text-input input[type=date],
 .sidebar__text-input input[type=datetime-local],
 .sidebar__text-input input[type=text],
+.sidebar__text-input input[type=search],
 .sidebar__text-input input[type=password] {
     box-sizing: border-box;
     background-color: #333333;
@@ -635,6 +636,9 @@
 .sidebar__text-input input[type=text]:active,
 .sidebar__text-input input[type=text]:focus,
 .sidebar__text-input input[type=text]:hover,
+.sidebar__text-input input[type=search]:active,
+.sidebar__text-input input[type=search]:focus,
+.sidebar__text-input input[type=search]:hover,
 .sidebar__text-input input[type=password]:active,
 .sidebar__text-input input[type=password]:focus,
 .sidebar__text-input input[type=password]:hover {
