@@ -51,9 +51,9 @@ function read()
                         if (part.indexOf("data: ") == 0)part = part.substr(6); // wtf
                         if(!done)
                         {
-                        const json = JSON.parse(part);
-                        outObje.setRef(json);
-                        outTrig.trigger();
+                            const json = JSON.parse(part);
+                            outObje.setRef(json);
+                            outTrig.trigger();
                         }
                     }
                     catch (err)
