@@ -11,7 +11,7 @@ inEle.onChange =
 inUpd.onTriggered = () =>
 {
     let ele = inEle.get();
-    if (!ele)
+    if (!ele || !ele.getBoundingClientRect)
     {
         outX.set(0);
         outY.set(0);

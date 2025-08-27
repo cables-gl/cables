@@ -1,0 +1,34 @@
+{
+    "id": "31105a8f-3d30-4e13-89cd-77044b06fe9d",
+    "created": 1756137770386,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1756137770386
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Scoll X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scoll Y",
+                "subType": "number"
+            }
+        ]
+    }
+}
