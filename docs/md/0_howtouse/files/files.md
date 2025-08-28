@@ -1,9 +1,9 @@
 # Working with files
 
 You can drag files into the cables editor window to upload them.
-Many Image and Audio files do not need to be converted.
+Many image and audio file formats are natively supported and do not require any conversion.
 Those file formats that do need to be converted for best usage in a browser will be autoconverted by the editor.
-Our editor also includes some handy operations from within the **Files** manager.
+Additionally, the editor also includes some handy manual operations from within the **Files** manager.
 
 ## Supported file types:
 
@@ -23,7 +23,7 @@ MIDI: `.mid`
 
 cables automatically converts files into a more readable web format which can then be read by the ops. You can also manually convert your files and apply operations to make your files smaller.
 
-To convert a file upload it, then click it in the file browser. on the right you can see information about this file the converters are listed.
+To manually convert a file, first upload it, then click to select it in the **Files** manager.  Available file operations are listed in the information panel that is displayed.
 
 
 
@@ -101,7 +101,7 @@ convert `.ttf` to an SDF font format which consists of a .png and a .json instru
 
 ### image resizing and compression
 
-file ending: '.png` , '.jpg`,`.jpeg`
+file ending: `.png`, `.jpg`, `.jpeg`
 
-you can manually apply some simple operations to your image textures such as resizing to next power of two, convert png to jpg, compress png, or convert to webp
+You can manually apply some simple operations to your image textures such as resizing to next power of two, convert png to jpg, compress png, or convert to webp
 
