@@ -21,7 +21,7 @@
             }
         ]
     },
-    "summary": "Only allows an array through if pass through is true",
+    "summary": "Only allow an array through if pass through is true",
     "issues": "",
 
     "youtubeids": [],

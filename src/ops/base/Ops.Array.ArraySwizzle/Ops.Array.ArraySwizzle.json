@@ -115,7 +115,7 @@
             }
         ]
     },
-    "summary": "manage/re-order components of an array (stride)",
+    "summary": "Manage/re-order components of an array (stride)",
     "docs": {
         "ports": []
     },

@@ -50,7 +50,7 @@
     "libs": [
         "perlin.js"
     ],
-    "summary": "Creates An array filled with Simplex noise values (Range: -1, 1)",
+    "summary": "Create an array filled with Simplex noise values (Range: -1, 1)",
     "issues": "",
     "youtubeids": [],
     "docs": {

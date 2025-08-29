@@ -20,7 +20,7 @@
             }
         ]
     },
-    "summary": "sort an array3, by the distance of each point to the previous point",
+    "summary": "Sort an array3, by the distance of each point to the previous point",
     "docs": {
         "ports": [
             {

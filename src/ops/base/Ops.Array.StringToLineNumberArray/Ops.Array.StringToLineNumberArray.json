@@ -29,7 +29,7 @@
             }
         ]
     },
-    "summary": "outputs an array containing a line number for every character",
+    "summary": "Output an array containing a line number for every character",
 
 
     "docs": {

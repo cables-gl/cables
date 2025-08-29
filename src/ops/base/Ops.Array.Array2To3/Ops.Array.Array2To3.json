@@ -27,7 +27,7 @@
             }
         ]
     },
-    "summary": "inserts zeroes every third item",
+    "summary": "Inserts zeroes every third item",
     "docs": {
         "ports": []
     },

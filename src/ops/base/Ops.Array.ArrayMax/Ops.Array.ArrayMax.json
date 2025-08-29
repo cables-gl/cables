@@ -21,7 +21,7 @@
             }
         ]
     },
-    "summary": " Applies a max operation to all values in an array",
+    "summary": "Apply a max operation to all values in an array",
     "docs": {
         "ports": [
             {

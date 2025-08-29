@@ -17,7 +17,7 @@
             }
         ]
     },
-    "summary": "create a copy of an array",
+    "summary": "Create a copy of an array",
     "changelog": [
         {
             "message": "cloned op from Ops.Array.ArrayReverse",

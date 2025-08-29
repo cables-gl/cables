@@ -23,7 +23,7 @@
             }
         ]
     },
-    "summary": "convert an array to a byte buffer (Uint8ClampedArray)",
+    "summary": "Convert an array to a byte buffer (Uint8ClampedArray)",
     "issues": "",
 
     "docs": {
