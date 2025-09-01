@@ -36,4 +36,4 @@ In this example we compose a new image / texture out of one image and some 2d ef
 - [Image Compose](https://cables.gl/op/Ops.Gl.ImageCompose.ImageCompose_v4)
 - [Draw image](https://cables.gl/op/Ops.Gl.ImageCompose.DrawImage_v3)
 - [Basic material](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial_v3)
-- [Rectangle](https://cables.gl/op/Ops.Gl.Meshes.Rectangle_v4)
+- [Rectangle](https://cables.gl/op/Ops.Graphics.Meshes.Rectangle_v4)
