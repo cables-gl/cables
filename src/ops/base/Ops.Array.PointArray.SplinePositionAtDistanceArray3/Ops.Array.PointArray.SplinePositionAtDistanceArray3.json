@@ -50,7 +50,7 @@
             }
         ]
     },
-    "summary": "get position in array3/spline at distance from start",
+    "summary": "Get position in array3/spline at distance from start",
     "docs": {
         "ports": [
             {

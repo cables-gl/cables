@@ -113,7 +113,7 @@
             }
         ]
     },
-    "summary": "create a random array of 1 to 4 dimensions",
+    "summary": "Create a random array of 1 to 4 dimensions",
     "docs": {
         "ports": [
             {

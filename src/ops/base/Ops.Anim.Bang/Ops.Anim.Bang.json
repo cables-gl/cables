@@ -36,7 +36,7 @@
             }
         ]
     },
-    "summary": "trigger a simple bang animation going from 1 to 0",
+    "summary": "Trigger a simple bang animation going from 1 to 0",
     "docs": {
         "ports": [
             {

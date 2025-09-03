@@ -35,7 +35,7 @@
             }
         ]
     },
-    "summary": "recalculate a spline / change number of points of a spline",
+    "summary": "Recalculate a spline / change number of points of a spline",
     "docs": {
         "ports": []
     },

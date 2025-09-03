@@ -22,7 +22,7 @@
             }
         ]
     },
-    "summary": "Reverses an array",
+    "summary": "Reverse an array",
     "license": "MIT",
     "docs": {
         "ports": []

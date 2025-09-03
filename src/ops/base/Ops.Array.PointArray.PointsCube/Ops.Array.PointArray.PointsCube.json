@@ -47,7 +47,7 @@
             }
         ]
     },
-    "summary": "Generates a 3d point field with controllable amount of xyz points (was PointsField3d)",
+    "summary": "Generate a 3d point field with controllable amount of xyz points (was PointsField3d)",
     "issues": "",
     "docs": {
         "ports": [

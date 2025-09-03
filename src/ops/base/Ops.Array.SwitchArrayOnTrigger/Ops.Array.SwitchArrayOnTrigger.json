@@ -77,7 +77,7 @@
             }
         ]
     },
-    "summary": "switch between multiple arrays",
+    "summary": "Switch between multiple arrays on trigger",
     "docs": {
         "ports": []
     }

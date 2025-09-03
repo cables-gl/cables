@@ -33,7 +33,7 @@
             }
         ]
     },
-    "summary": "set a string at index in an array",
+    "summary": "Set a string at index in an array",
     "docs": {
         "ports": [
             {

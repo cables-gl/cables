@@ -21,7 +21,7 @@
             }
         ]
     },
-    "summary": "Returns a number with the total distance between the points/items in an array3",
+    "summary": "Return a number with the total distance between the points/items in an array3",
     "docs": {
         "ports": [
             {
