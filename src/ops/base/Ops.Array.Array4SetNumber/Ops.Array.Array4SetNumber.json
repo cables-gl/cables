@@ -49,7 +49,7 @@
             }
         ]
     },
-    "summary": "set four numbers at index in an array",
+    "summary": "Set four numbers at index in an array",
     "docs": {
         "ports": [
             {

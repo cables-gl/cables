@@ -28,7 +28,7 @@
             }
         ]
     },
-    "summary": "convert an array4 to array3 by dropping every 4th number",
+    "summary": "Convert an array4 to array3 by dropping every 4th number",
     "docs": {
         "ports": []
     },

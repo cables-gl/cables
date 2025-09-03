@@ -1,5 +1,5 @@
 {
-    "summary": "Copies only every x point from an array",
+    "summary": "Copy only every x point from an array",
     "layout": {
         "portsIn": [
             {

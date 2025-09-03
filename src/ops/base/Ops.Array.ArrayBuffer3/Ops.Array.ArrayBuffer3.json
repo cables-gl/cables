@@ -50,7 +50,7 @@
             }
         ]
     },
-    "summary": "circular buffer for xyz values",
+    "summary": "Circular buffer for xyz values",
     "docs": {
         "ports": [
             {

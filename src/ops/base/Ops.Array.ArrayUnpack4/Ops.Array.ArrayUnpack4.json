@@ -1,5 +1,5 @@
 {
-    "summary": "Splits a xyzw array into 4 individual arrays",
+    "summary": "Split an xyzw array into 4 individual arrays",
     "docs": {
         "ports": [
             {

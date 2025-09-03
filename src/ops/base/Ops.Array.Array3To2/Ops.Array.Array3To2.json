@@ -16,7 +16,7 @@
             }
         ]
     },
-    "summary": "remove every 3rd item of an array - changes array length",
+    "summary": "Remove every 3rd item of an array - changes array length",
     "docs": {
         "ports": [
             {

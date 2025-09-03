@@ -40,7 +40,7 @@
             }
         ]
     },
-    "summary": "set three values at position index in an array",
+    "summary": "Set three values at position index in an array",
     "docs": {
         "ports": [
             {

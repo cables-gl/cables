@@ -78,7 +78,7 @@
             }
         ]
     },
-    "summary": "transform (translate,rotate,scale) positions in an array3x ",
+    "summary": "Transform (translate, rotate, scale) positions in an array3x",
     "docs": {
         "ports": []
     },

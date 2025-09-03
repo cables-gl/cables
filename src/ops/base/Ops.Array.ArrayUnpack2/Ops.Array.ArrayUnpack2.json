@@ -32,7 +32,7 @@
             }
         ]
     },
-    "summary": "Unpacks an xy array into separate arrays",
+    "summary": "Unpack an xy array into separate arrays",
     "docs": {
         "ports": [
             {

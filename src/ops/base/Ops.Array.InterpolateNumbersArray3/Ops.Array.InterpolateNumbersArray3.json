@@ -32,7 +32,7 @@
             }
         ]
     },
-    "summary": "get interpolated values between the indices of an array3x",
+    "summary": "Get interpolated values between the indices of an array3x",
     "docs": {
         "ports": [
             {

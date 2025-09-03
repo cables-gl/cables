@@ -42,7 +42,7 @@
             }
         ]
     },
-    "summary": "Packs 3 individual arrays into a xyz array",
+    "summary": "Pack 3 individual arrays into a xyz array",
     "docs": {
         "ports": [
             {

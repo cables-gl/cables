@@ -1,5 +1,5 @@
 {
-    "summary": "get the min, max and average value from an array",
+    "summary": "Min, Max and Average value from an array",
     "layout": {
         "portsIn": [
             {

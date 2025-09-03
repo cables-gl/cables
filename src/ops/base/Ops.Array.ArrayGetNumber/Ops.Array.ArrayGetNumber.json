@@ -1,5 +1,5 @@
 {
-    "summary": "Returns a value from an array",
+    "summary": "Return a value from an array",
     "layout": {
         "portsIn": [
             {
