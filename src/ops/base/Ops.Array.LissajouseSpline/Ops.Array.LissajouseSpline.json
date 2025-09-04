@@ -47,7 +47,7 @@
             }
         ]
     },
-    "summary": "generate spline using lissajous formulas",
+    "summary": "Generate spline using lissajous formulas",
     "docs": {
         "ports": [
             {

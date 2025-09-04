@@ -55,7 +55,7 @@
             }
         ]
     },
-    "summary": "generate coordinates for a rectangular field of points (was Field)",
+    "summary": "Generate coordinates for a rectangular field of points (was Field)",
     "docs": {
         "ports": [
             {

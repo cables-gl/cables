@@ -81,7 +81,7 @@
             }
         ]
     },
-    "summary": "snap at certain points (e.g. while scrolling)",
+    "summary": "Snap at certain points (e.g. while scrolling)",
     "docs": {
         "ports": [
             {

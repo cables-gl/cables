@@ -39,7 +39,7 @@
             }
         ]
     },
-    "summary": "stores values in an array / fifo array buffer",
+    "summary": "Store values in an array / fifo array buffer",
     "docs": {
         "ports": [
             {

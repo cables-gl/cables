@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "Weaves two arrays together (combine, join, merge)",
+    "summary": "Weave two arrays together (combine, join, merge)",
     "docs": {
         "ports": [
             {

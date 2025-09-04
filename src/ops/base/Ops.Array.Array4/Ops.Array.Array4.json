@@ -55,7 +55,7 @@
             }
         ]
     },
-    "summary": "create an array of num quadruples set to default values xyz  ",
+    "summary": "Create an array of num quadruples set to default values xyz  ",
     "docs": {
         "ports": []
     },
