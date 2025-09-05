@@ -1,0 +1,52 @@
+{
+    "id": "cc754210-d25b-4b9e-9662-87b838de06a4",
+    "created": 1756987143881,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1756987143910
+        },
+        {
+            "message": "Patch.PRnyTOV.CssPropertyVar renamed to Ops.Dev.CssPropertyVar",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1756989459507
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "group": "Attributes",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Value Suffix",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    }
+}

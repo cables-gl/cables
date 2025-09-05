@@ -1,0 +1,26 @@
+
+.CABLES_animFadedOut_$CLASSES_ID
+{
+    display:none !important;
+    opacity:0;
+}
+
+.CABLES_animFadeOut_$CLASSES_ID
+{
+    animation: CABLES_keysFadeOut_$CLASSES_ID $LENGTHs normal forwards ease-in-out;
+}
+
+.CABLES_animFadeIn_$CLASSES_ID
+{
+    animation: CABLES_keysFadeIn_$CLASSES_ID $LENGTHs normal forwards ease-in-out;
+}
+
+@keyframes CABLES_keysFadeIn_$CLASSES_ID {
+    from { opacity: 0; }
+    to   { opacity: $FULLOPACITY; }
+}
+
+@keyframes CABLES_keysFadeOut_$CLASSES_ID {
+    from { opacity: $FULLOPACITY; }
+    to   { opacity: 0; }
+}

@@ -1,0 +1,44 @@
+{
+    "id": "0a70d9aa-6e90-4ea9-8ed3-1f197598cb0d",
+    "created": 1756389095553,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1756389095580
+        },
+        {
+            "message": "Patch.PzwNKaV.Copytocanvas renamed to Ops.Dev.Html.GlCopyToCanvas",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1756456877341
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
