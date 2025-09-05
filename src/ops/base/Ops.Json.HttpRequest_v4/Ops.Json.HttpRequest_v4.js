@@ -116,6 +116,7 @@ function finishLoadingSuccess(loadingId)
 {
     op.patch.loading.finished(loadingId);
     outIsLoading.set(false);
+    outTrigger.trigger();
 
     outError.set("");
 }

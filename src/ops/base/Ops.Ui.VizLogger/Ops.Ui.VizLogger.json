@@ -26,6 +26,10 @@
                 "name": "String"
             },
             {
+                "type": 2,
+                "name": "Object"
+            },
+            {
                 "type": 1,
                 "name": "Clear"
             }

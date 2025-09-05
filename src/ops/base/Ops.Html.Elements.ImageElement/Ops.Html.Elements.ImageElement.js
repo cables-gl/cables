@@ -16,6 +16,11 @@ inStyle.onChange = updateStyle;
 
 filename.onChange = filenameChanged;
 
+element.onerror = (e) =>
+{
+    console.log("imageelement error", e, filename.get());
+};
+
 element.onload = () =>
 {
     if (element)
