@@ -1,5 +1,6 @@
 const inNum = op.inFloat("Number", 0);
 const inString = op.inString("String", "");
+const inObject = op.inObject("Object", "");
 const inClear = op.inTriggerButton("Clear");
 
 let lines = 10;
@@ -19,6 +20,11 @@ inString.onChange = () =>
         arr.push("\"" + inString.get() + "\"");
     else
         arr.push("" + inString.get());
+};
+
+inObject.onChange = () =>
+{
+    arr.push(String(inObject.get()));
 };
 
 inNum.onChange = () =>

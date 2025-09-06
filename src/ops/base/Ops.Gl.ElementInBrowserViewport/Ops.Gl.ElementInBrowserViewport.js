@@ -1,13 +1,15 @@
 const
     inUpdate = op.inTriggerButton("Update"),
+    inEle = op.inObject("Element", null, "element"),
+    outNext = op.outTrigger("Next"),
     outResult = op.outBoolNum("Fully Visible"),
     outResultPartly = op.outBoolNum("Partly Visible");
 
 inUpdate.onTriggered = update;
 
-window.addEventListener("DOMContentLoaded load", update);
-window.addEventListener("resize", update);
-window.addEventListener("scroll", update);
+// window.addEventListener("DOMContentLoaded load", update);
+// window.addEventListener("resize", update);
+// window.addEventListener("scroll", update);
 
 // from: https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
 
@@ -23,6 +25,8 @@ function pointInViewport(x, y)
 
 function elementInViewport(el)
 {
+    if (!el.getBoundingClientRect) return;
+
     let rect = el.getBoundingClientRect();
 
     return (
@@ -35,9 +39,13 @@ function elementInViewport(el)
 
 function elementInViewportPartly(el)
 {
+    if (!el.getBoundingClientRect) return;
     let rect = el.getBoundingClientRect();
 
     return (
+        rect.top < 0 && rect.bottom > 0 ||
+        rect.left < 0 && rect.right > 0 ||
+
         pointInViewport(rect.left, rect.top) ||
         pointInViewport(rect.left, rect.bottom) ||
         pointInViewport(rect.right, rect.top) ||
@@ -47,11 +55,12 @@ function elementInViewportPartly(el)
 
 function update()
 {
-    let visible = elementInViewport(op.patch.cgl.canvas);
-    let visiblePartly = elementInViewportPartly(op.patch.cgl.canvas);
+    let visible = elementInViewport(inEle.get() || op.patch.cgl.canvas);
+    let visiblePartly = elementInViewportPartly(inEle.get() || op.patch.cgl.canvas);
 
     outResultPartly.set(visiblePartly);
     outResult.set(visible);
+    outNext.trigger();
 }
 
-update();
+// update();

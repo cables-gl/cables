@@ -1,0 +1,53 @@
+{
+    "authorName": "pandur",
+    "id": "2e3c5de3-d77f-4e11-873d-ce31b39b4689",
+    "created": 1757055266238,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Opacity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "PassThrough",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Is Showing",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "fade html elements in or out",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "fixed: bug when element faded in, when visible is set to false, when loading the page",
+            "author": "pandur",
+            "date": 1556524546620
+        }
+    ],
+    "exampleProjectId": "Whj018",
+    "license": "MIT"
+}

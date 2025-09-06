@@ -42,6 +42,7 @@ function rebuild()
 
     for (let i = 0; i < ports.length; i++)
     {
+        if (ports[i].links.length > 1)console.log("!!!!!!!!!! element childs to many", op.id);
         const ele = ports[i].get();
         if (ele)
         {
