@@ -4,6 +4,10 @@
     display:none !important;
     opacity:0;
 }
+.CABLES_animFadedIn_$CLASSES_ID
+{
+    opacity: $FULLOPACITY;
+}
 
 .CABLES_animFadeOut_$CLASSES_ID
 {
