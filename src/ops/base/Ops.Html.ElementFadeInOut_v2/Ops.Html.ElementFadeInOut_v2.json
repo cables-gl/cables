@@ -45,7 +45,14 @@
         {
             "message": "fixed: bug when element faded in, when visible is set to false, when loading the page",
             "author": "pandur",
-            "date": 1556524546620
+            "date": 1556524546620,
+            "type": "bugfix"
+        },
+        {
+            "message": "fix flickering when changing external css properties",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1757336101902
         }
     ],
     "exampleProjectId": "Whj018",

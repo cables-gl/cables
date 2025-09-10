@@ -17,10 +17,9 @@
                 "type": 5,
                 "name": "Suffix"
             }
-        ],
-        "portsOut": []
+        ]
     },
-    "summary": "set CSS variable string value",
+    "summary": "Set CSS variable number value",
     "docs": {
         "ports": []
     },
