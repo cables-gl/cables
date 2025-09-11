@@ -33,6 +33,7 @@ outDataUrl.ignoreValueSerialize = true;
 
 let reloadTimeout = 0;
 let retryTimeout = 0;
+let requestAfterFinish = false;
 
 outString.onLinkChanged =
     outDataUrl.onLinkChanged =
@@ -56,6 +57,12 @@ inResContentType.onChange = () =>
 
 reloadTrigger.onTriggered = () =>
 {
+    if (outIsLoading.get())
+    {
+        console.log("already loading, waiting...");
+        requestAfterFinish = true;
+        return;
+    }
     delayedReload(true);
 };
 
@@ -117,7 +124,12 @@ function finishLoadingSuccess(loadingId)
     op.patch.loading.finished(loadingId);
     outIsLoading.set(false);
     outTrigger.trigger();
+    if (requestAfterFinish)
+    {
+        requestAfterFinish = false;
 
+        reload(null, true);
+    }
     outError.set("");
 }
 
@@ -131,7 +143,7 @@ function resetOutputs()
 
 function reload(addCachebuster, force = false)
 {
-    if (!inAutoRequest.get() && !force) return;
+    if (!inAutoRequest.get() && !force && !requestAfterFinish) return;
     if (inEmptyOutput.get()) resetOutputs();
 
     showEmptyUrlWarning();

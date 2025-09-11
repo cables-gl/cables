@@ -53,6 +53,11 @@ export class LoadingStatus extends Events
         return this._percent;
     }
 
+    isFinished()
+    {
+        return this._count == this._countFinished;
+    }
+
     checkStatus()
     {
         this._countFinished = 0;
