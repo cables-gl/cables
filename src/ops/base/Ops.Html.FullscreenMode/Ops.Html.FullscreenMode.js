@@ -8,11 +8,13 @@ const
 doExit.onTriggered = exitFs;
 doRequest.onTriggered = startFs;
 
-let countStarts = 0;
+let countStarts = 0; let to = null;
 
 function setState()
 {
     isFullscreen.set(!!document.fullscreenElement);
+    clearTimeout(to);
+    if (isFullscreen.get())to = setTimeout(setState, 500);
 }
 
 function reqErr(e)
