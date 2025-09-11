@@ -5,17 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1617722412332
-        },
-        {
-            "message": "Ops.User.pandur.LoadingStatus2 renamed to Ops.Patch.LoadingStatus_v2",
-            "author": "pandur",
-            "date": 1617727405246
-        },
-        {
-            "message": "Ops.Patch.LoadingStatus_v2 renamed to Ops.Cables.LoadingStatus_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678265639766
         }
     ],
     "authorName": "pandur",
