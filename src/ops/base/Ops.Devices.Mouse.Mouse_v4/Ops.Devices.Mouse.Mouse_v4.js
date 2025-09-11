@@ -158,13 +158,18 @@ function onMouseEnter(e)
 function onMouseDown(e)
 {
     if (!checkHovering(e)) return;
+    setCoords(e);
+    // areaElement.setPointerCapture(e.pointerId);
     outEvent.setRef(e);
     mouseDown.set(true);
 }
 
 function onMouseUp(e)
 {
+    setCoords(e);
     outEvent.setRef(e);
+    // areaElement.releasePointerCapture(e.pointerId);
+
     mouseDown.set(false);
 }
 
@@ -179,6 +184,7 @@ function onClickRight(e)
 function onmouseclick(e)
 {
     if (!checkHovering(e)) return;
+    setCoords(e);
     outEvent.setRef(e);
     mouseClick.trigger();
 }
@@ -220,14 +226,22 @@ function ontouchstart(event)
     mouseDown.set(true);
 
     if (event.touches && event.touches.length > 0) onMouseDown(event.touches[0]);
-    outEvent.setRef(e);
+    outEvent.setRef(event);
 }
 
 function ontouchend(event)
 {
     mouseDown.set(false);
     onMouseUp();
-    outEvent.setRef(e);
+    outEvent.setRef(event);
+}
+
+function onCancel(event)
+{
+    console.log("mouse cancel");
+    mouseDown.set(false);
+    onMouseUp();
+    outEvent.setRef(event);
 }
 
 /// ////
@@ -272,6 +286,7 @@ function removeListeners()
     listenerElement.removeEventListener("touchend", ontouchend);
     listenerElement.removeEventListener("touchstart", ontouchstart);
     listenerElement.removeEventListener("touchmove", ontouchmove);
+    listenerElement.removeEventListener("touchcancel", onCancel);
 
     listenerElement.removeEventListener("mousemove", onmousemove);
     listenerElement.removeEventListener("mouseleave", onMouseLeave);
@@ -284,6 +299,7 @@ function removeListeners()
     listenerElement.removeEventListener("pointerdown", onMouseDown);
     listenerElement.removeEventListener("pointerup", onMouseUp);
     listenerElement.removeEventListener("pointerenter", onMouseEnter);
+    listenerElement.removeEventListener("pointercancel", onCancel);
 
     listenerElement.removeEventListener("click", onmouseclick);
     listenerElement.removeEventListener("contextmenu", onClickRight);
@@ -322,7 +338,7 @@ function addListeners()
     let passive = false;
     if (inPassive.get())passive = { "passive": true };
 
-    if (inEventType.get() == "touch")
+    if (inEventType.get() == "Touch")
     {
         listenerElement.addEventListener("touchend", ontouchend, passive);
         listenerElement.addEventListener("touchstart", ontouchstart, passive);
