@@ -24,7 +24,7 @@ function createTex()
             "anisotropic": parseFloat(aniso.get())
 
         });
-    textureOut.set(tex);
+    textureOut.setRef(tex);
     loadingOut.set(false);
 }
 

@@ -18,6 +18,24 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1755254411452
+        },
+        {
+            "message": "Added focus input trigger port",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757587907316
+        },
+        {
+            "message": "Detect Enter and Escape keypresses and output as trigger",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757587971101
+        },
+        {
+            "message": " \"Enter prevent default\" means in a textarea, it will not add newlines in the text, but trigger the new output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757587977057
         }
     ],
     "authorName": "pandur",
@@ -66,8 +84,22 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Spellcheck",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Enter Key Prevent Default",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Clear"
+            },
+            {
+                "type": 1,
+                "name": "Focus Input"
             }
         ],
         "portsOut": [
@@ -83,6 +115,14 @@
                 "type": 0,
                 "name": "Focus",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Keypress Enter"
+            },
+            {
+                "type": 1,
+                "name": "Keypress ESC"
             }
         ]
     },
