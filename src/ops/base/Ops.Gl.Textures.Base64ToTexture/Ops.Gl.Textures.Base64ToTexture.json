@@ -10,6 +10,11 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
@@ -20,6 +25,14 @@
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
@@ -33,6 +46,11 @@
                 "type": 2,
                 "name": "Texture",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -68,6 +86,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1704977847595
+        },
+        {
+            "message": "Show a UI message, when an Error happened while loading, also has how ah \"Has Error\" output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757579441043
         }
-    ]
+    ],
+    "license": "MIT"
 }

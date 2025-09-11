@@ -5,6 +5,7 @@ const
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     textureOut = op.outTexture("Texture"),
+    outError = op.outBool("Has Error"),
     loadingOut = op.outBool("Loading");
 
 const image = new Image();
@@ -30,6 +31,14 @@ function createTex()
 image.onload = function (e)
 {
     op.patch.cgl.addNextFrameOnceCallback(createTex.bind(this));
+    outError.set(false);
+};
+
+image.onerror = function (e)
+{
+    // sadly there is no usable error message in this error event...
+    op.setUiError("exc", "Error while loading image");
+    outError.set(false);
 };
 
 aniso.onChange =
@@ -55,6 +64,8 @@ twrap.onChange =
 
 function updateTex()
 {
+    op.setUiError("exc", null);
+
     loadingOut.set(true);
     let data = dataIn.get();
     if (data && !data.startsWith("data:"))
