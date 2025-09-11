@@ -143,7 +143,7 @@ function resetOutputs()
 
 function reload(addCachebuster, force = false)
 {
-    if (!inAutoRequest.get() && !force && !requestAfterFinish) return;
+    if (!inAutoRequest.get() && !force) return;
     if (inEmptyOutput.get()) resetOutputs();
 
     showEmptyUrlWarning();
