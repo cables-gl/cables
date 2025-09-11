@@ -39,6 +39,7 @@ const
     inScaleArr = op.inArray("Scalings"),
     inRotArr = op.inArray("Rotations"),
     inColors = op.inArray("Colors"),
+    imPremul = op.inBool("Premultiply", true),
 
     next = op.outTrigger("Next"),
     outArr = op.outArray("Positions Original", null, 3),
@@ -353,14 +354,23 @@ render.onTriggered = function ()
         {
             mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
 
+            if (imPremul.get())
+            {
+                cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
+                cgl.pushBlend(true);
+            }
+
             mesh.render(cgl.getShader());
+            if (imPremul.get())
+            {
+                cgl.popBlend();
+                cgl.popBlendMode();
+            }
         }
 
         cgl.popModelMatrix();
 
-        // cgl.setTexture(0, null);
         cgl.popShader();
-        // cgl.popBlendMode();
     }
 
     next.trigger();
