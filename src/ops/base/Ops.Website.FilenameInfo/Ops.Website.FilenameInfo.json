@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1757578403078
+        },
+        {
+            "message": "Add suffixes for data URLs with mimetype",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757578451440
         }
     ],
     "authorName": "pandur",
