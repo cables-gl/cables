@@ -21,16 +21,16 @@ function isValidUrl(string)
 
 inUrl.onChange = () =>
 {
-    const url = String(inUrl.get()).trim();
+    const url = String(inUrl.get()).trim() || "";
     const isUrl = isValidUrl(url);
     outIsURL.set(isUrl);
-    if (!url) return;
 
     if (url.indexOf(":") > -1)
     {
         const pathArray = url.split(":");
         outProtocol.set(pathArray[0]);
     }
+    else outProtocol.set("");
 
     if (outProtocol.get().startsWith("http"))
     {
@@ -101,7 +101,14 @@ inUrl.onChange = () =>
     }
     else
     {
+        outFullPath.set("");
         if (!isUrl)outFilename.set(url);
         outBasename.set(CABLES.basename(filePart));
+    }
+
+    if (!url)
+    {
+        outFilename.set("");
+        outBasename.set("");
     }
 };
