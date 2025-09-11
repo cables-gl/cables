@@ -9,6 +9,8 @@ const
     outIsURL = op.outString("Is URL"),
     outQuery = op.outString("queryParams");
 
+op.toWorkPortsNeedsString(inUrl);
+
 function isValidUrl(string)
 {
     try { new URL(string); }
@@ -19,7 +21,7 @@ function isValidUrl(string)
 
 inUrl.onChange = () =>
 {
-    const url = inUrl.get();
+    const url = String(inUrl.get()).trim();
     const isUrl = isValidUrl(url);
     outIsURL.set(isUrl);
     if (!url) return;
@@ -30,11 +32,15 @@ inUrl.onChange = () =>
         outProtocol.set(pathArray[0]);
     }
 
-    if (url.indexOf("/") > -1)
+    if (outProtocol.get().startsWith("http"))
     {
-        const hostArr = url.split("/");
-        outHost.set(hostArr[2]);
+        if (url.indexOf("/") > -1)
+        {
+            const hostArr = url.split("/");
+            outHost.set(hostArr[2]);
+        }
     }
+    else outHost.set("");
 
     const hostArr = url.split("/");
 
@@ -60,16 +66,42 @@ inUrl.onChange = () =>
 
     if (url.indexOf("/") > -1)
     {
-        outFilename.set(filePart);
-
-        outBasename.set(CABLES.basename(filePart));
+        if (outProtocol.get() != "data")
+        {
+            outFilename.set(filePart);
+            outBasename.set(CABLES.basename(filePart));
+        }
+        if (outProtocol.get() == "data")
+        {
+            if (url.startsWith("data:text/plain"))outExt.set("txt");
+            else
+            {
+                const a = url.split(":");
+                if (a[0])
+                {
+                    const b = a[1].split("/");
+                    if (b[1])
+                    {
+                        const c = b[1].split(";");
+                        if (c[0])
+                        {
+                            const d = c[0].split(",");
+                            if (d)outExt.set(d);
+                        }
+                    }
+                }
+            }
+        }
 
         hostArr.length -= 1;
-        const fullPath = hostArr.join("/");
-        outFullPath.set(fullPath);
+        let fullPath = hostArr.join("/");
+        fullPath = fullPath.replace(outProtocol.get() + "://", "");
+
+        if (outProtocol.get() != "data") outFullPath.set(fullPath);
     }
     else
     {
         if (!isUrl)outFilename.set(url);
+        outBasename.set(CABLES.basename(filePart));
     }
 };
