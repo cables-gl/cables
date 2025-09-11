@@ -2,7 +2,8 @@ const
     doRequest = op.inTriggerButton("Request Fullscreen"),
     doExit = op.inTriggerButton("Exit Fullscreen"),
     inEle = op.inSwitch("Element", ["Canvas", "Document"], "Canvas"),
-    isFullscreen = op.outBoolNum("Is Fullscreen");
+    isFullscreen = op.outBoolNum("Is Fullscreen"),
+    outSupported = op.outBoolNum("Supported", document.fullscreenEnabled);
 
 doExit.onTriggered = exitFs;
 doRequest.onTriggered = startFs;
@@ -11,8 +12,7 @@ let countStarts = 0;
 
 function setState()
 {
-    const isFull = (!window.screenTop && !window.screenY);
-    isFullscreen.set(isFull);
+    isFullscreen.set(!!document.fullscreenElement);
 }
 
 function reqErr(e)
