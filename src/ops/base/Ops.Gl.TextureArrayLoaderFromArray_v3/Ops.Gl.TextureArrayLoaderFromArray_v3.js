@@ -129,7 +129,7 @@ function realReload(nocache)
         count++;
     }
 
-    console.log("load images ", count);
+    // console.log("load images ", count);
 }
 
 function onFilterChange()
