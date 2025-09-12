@@ -157,6 +157,11 @@
             {
                 "type": 3,
                 "name": "Colors"
+            },
+            {
+                "type": 0,
+                "name": "Premultiply",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -214,6 +219,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1724449386107
+        },
+        {
+            "message": "Add option to set premultiplied blendig to reduce border around text",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757589561691
         }
     ]
 }

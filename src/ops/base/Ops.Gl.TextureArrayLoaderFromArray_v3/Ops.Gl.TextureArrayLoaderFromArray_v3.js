@@ -16,6 +16,7 @@ op.toWorkPortsNeedToBeLinked(filenames);
 
 const cgl = op.patch.cgl;
 const arr = [];
+const arrOldFileNames = [];
 let cgl_filter = CGL.Texture.FILTER_LINEAR;
 let cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
 let loadingId = null;
@@ -103,9 +104,14 @@ function realReload(nocache)
 
     loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid(), op);
     loading.set(true);
-
+    let count = 0;
     for (let i = 0; i < files.length; i++)
     {
+        if (inCaching.get())
+            if (arrOldFileNames[i] == files[i]) continue;
+
+        arrOldFileNames[i] = files[i];
+
         arr[i] = CGL.Texture.getEmptyTexture(cgl);
         let cb = null;
         if (i == files.length - 1)
@@ -114,12 +120,16 @@ function realReload(nocache)
             {
                 loading.set(false);
                 cgl.patch.loading.finished(loadingId);
+                loadingId = null;
             };
         }
 
         if (!files[i]) { if (cb) cb(); }
         else loadImage(i, files[i], nocache, cb);
+        count++;
     }
+
+    console.log("load images ", count);
 }
 
 function onFilterChange()

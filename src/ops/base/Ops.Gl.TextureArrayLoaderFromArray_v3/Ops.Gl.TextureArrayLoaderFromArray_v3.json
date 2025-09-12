@@ -1,8 +1,8 @@
 {
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "f994015c-72ab-42f4-9ef7-a6409a9efb9b",
-    "created": 1677830842446,
+    "id": "27d11476-6849-408f-9d06-df41a4b3f573",
+    "created": 1757597289714,
     "layout": {
         "portsIn": [
             {
@@ -58,7 +58,7 @@
             {
                 "type": 0,
                 "name": "loading",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -78,13 +78,14 @@
         {
             "message": "cloned op from Ops.Gl.TextureArrayLoaderFromArray",
             "author": "pandur",
-            "date": 1677830842446
+            "date": 1677830842446,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.TextureArrayLoaderFromArray2 renamed to Ops.Gl.TextureArrayLoaderFromArray_v2",
-            "type": "rename",
+            "message": "New Version: Works now with data URLs, filenames that dont have changed are not loaded again when caching checkbox is on",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1677831378897
+            "date": 1757602023502
         }
     ],
     "license": "MIT"

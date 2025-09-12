@@ -18,6 +18,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1753343443148
+        },
+        {
+            "message": "new version: new mode automatically shows the indicater when any asset is loading",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757574897374
         }
     ],
     "authorName": "pandur",

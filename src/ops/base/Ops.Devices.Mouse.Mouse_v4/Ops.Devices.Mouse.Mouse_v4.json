@@ -54,6 +54,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1741094305418
+        },
+        {
+            "message": "Coordinates are now set also on click/touch down, even if input does not move",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757575734861
         }
     ],
     "layout": {

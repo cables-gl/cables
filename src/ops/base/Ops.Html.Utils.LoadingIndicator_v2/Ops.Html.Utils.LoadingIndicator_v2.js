@@ -53,8 +53,9 @@ op.patch.loading.on("addAssetTask", updateStatus);
 function updateStatus()
 {
     if (inVisible.get() == "Auto")
-        console.log("status", op.patch.loading.getProgress());
-    updateVisible();
+        updateVisible();
+
+    if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)setTimeout(updateStatus, 100);
 }
 
 function updateStyle()
@@ -105,9 +106,7 @@ function remove()
 
 function updateVisible()
 {
-    if (inVisible.get() == "Auto")div.style.display = op.patch.loading.getProgress() == 1 ? "none" : "block";
+    if (inVisible.get() == "Auto")div.style.display = op.patch.loading.getListJobs().length == 0 ? "none" : "block";
     if (inVisible.get() == "Visible")div.style.display = "block";
     if (inVisible.get() == "Hidden")div.style.display = "none";
-
-    // div.style.display = inVisible.get() ? "block" : "none";
 }
