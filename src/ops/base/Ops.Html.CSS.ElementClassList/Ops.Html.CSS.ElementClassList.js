@@ -8,5 +8,6 @@ function update()
     let ele = inEle.get();
     let classList = [];
     if (ele) classList = Array.from(ele.classList);
+
     outClassList.setRef(classList);
 }
