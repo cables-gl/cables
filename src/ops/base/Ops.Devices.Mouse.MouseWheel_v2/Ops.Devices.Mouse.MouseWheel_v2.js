@@ -101,7 +101,7 @@ function updateArea()
     removeListener();
 
     if (area.get() == "Document") listenerElement = document;
-    if (area.get() == "Parent") listenerElement = cgl.canvas.parentElement;
+    else if (area.get() == "Parent") listenerElement = cgl.canvas.parentElement;
     else listenerElement = cgl.canvas;
 
     if (active.get())addListener();

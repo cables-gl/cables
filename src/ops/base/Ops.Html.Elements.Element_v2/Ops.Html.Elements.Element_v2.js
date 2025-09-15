@@ -132,7 +132,7 @@ function updateText()
     if (oldStr === str) return;
     oldStr = str;
 
-    if (div.innerHTML != str) div.innerHTML = str;
+    if (div && div.innerHTML != str) div.innerHTML = str;
 }
 
 function updateStyle()

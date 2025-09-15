@@ -9,6 +9,7 @@ const
 
     inAutoComplete = op.inBool("Autocomplete", false),
     inMaxLength = op.inInt("Max Length", 0),
+    inEnterPrev = op.inBool("Enter Key Prevent Default", false),
 
     inVisible = op.inValueBool("Visible", true),
 
@@ -248,9 +249,13 @@ function addListeners()
         listenerElement.addEventListener("pointerleave", onMouseLeave);
         listenerElement.addEventListener("pointerenter", onMouseEnter);
 
-        listenerElement.addEventListener("keyup", function (event)
+        listenerElement.addEventListener("keydown", function (event)
         {
-            if (event.key === "Enter") outKeyEnter.trigger();
+            if (event.key === "Enter")
+            {
+                if (inEnterPrev.get())event.preventDefault();
+                outKeyEnter.trigger();
+            }
             if (event.key === "Escape") outKeyEsc.trigger();
         });
     }

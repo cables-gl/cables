@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1754133008775
+        },
+        {
+            "message": "Added \"prevent default\" option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757844422108
         }
     ],
     "authorName": "pandur",
@@ -73,6 +79,11 @@
                 "type": 0,
                 "name": "Max Length",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Enter Key Prevent Default",
+                "subType": "boolean"
             },
             {
                 "type": 0,
