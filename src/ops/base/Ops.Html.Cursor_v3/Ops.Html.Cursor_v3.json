@@ -4,18 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1602571676524
+            "date": 1602571676524,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.Cursor2 renamed to Ops.Html.Cursor_v2",
-            "author": "pandur",
-            "date": 1602572499242
-        },
-        {
-            "message": "added option to also add that cursor to the parent element of canvas, e.g. for using this with forceCanvasSize op",
+            "message": "New Version v2: element input, works without webgl, choose between image or predefined default cursors",
             "type": "feature",
             "author": "pandur",
-            "date": 1711475170563
+            "date": 1757946587846
         }
     ],
     "authorName": "pandur",
