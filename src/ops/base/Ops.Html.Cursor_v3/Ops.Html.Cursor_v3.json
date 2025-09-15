@@ -1,0 +1,75 @@
+{
+    "id": "ef63a344-a24d-4b88-afcf-ba68a907997b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602571676524
+        },
+        {
+            "message": "Ops.User.pandur.Cursor2 renamed to Ops.Html.Cursor_v2",
+            "author": "pandur",
+            "date": 1602572499242
+        },
+        {
+            "message": "added option to also add that cursor to the parent element of canvas, e.g. for using this with forceCanvasSize op",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711475170563
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1757945632952,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "Predefined",
+                    "File"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "CSS Cursors index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "file"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set the mouse cursor",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "_f5W8s",
+    "license": "MIT"
+}
