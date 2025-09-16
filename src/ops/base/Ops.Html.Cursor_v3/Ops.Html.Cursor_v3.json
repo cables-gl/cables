@@ -1,0 +1,71 @@
+{
+    "id": "ef63a344-a24d-4b88-afcf-ba68a907997b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602571676524,
+            "type": "new"
+        },
+        {
+            "message": "New Version v2: element input, works without webgl, choose between image or predefined default cursors",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757946587846
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1757945632952,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "Predefined",
+                    "File"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "CSS Cursors index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "file"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set the mouse cursor",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "_f5W8s",
+    "license": "MIT"
+}
