@@ -294,6 +294,7 @@ export class Op extends Events
     }
 
     /**
+     * @TODO  move to ui extend class.....
      * @param {OpUiAttribs} newAttribs
      */
     _setUiAttrib(newAttribs)
@@ -332,6 +333,8 @@ export class Op extends Events
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (this.uiAttribs.hasOwnProperty("highlighted") && this.uiAttribs.highlighted == false) delete this.uiAttribs.highlighted;
+        if (this.uiAttribs.hasOwnProperty("highlightedMore") && this.uiAttribs.highlightedMore == false) delete this.uiAttribs.highlightedMore;
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (this.uiAttribs.hasOwnProperty("selected")) changed = true;
 
@@ -1281,6 +1284,7 @@ export class Op extends Events
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     }
 
+    // @TODO should be move to extend...
     getSerialized()
     {
         const opObj = {};
@@ -1294,6 +1298,8 @@ export class Op extends Events
         if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
+        if (opObj.uiAttribs.hasOwnProperty("highlighted")) delete opObj.uiAttribs.highlighted;
+        if (opObj.uiAttribs.hasOwnProperty("highlightedMore")) delete opObj.uiAttribs.highlightedMore;
 
         if (opObj.uiAttribs.title === "") delete opObj.uiAttribs.title;
         if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
