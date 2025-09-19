@@ -6,12 +6,6 @@
             "author": "pandur",
             "date": 1738596445108,
             "type": "new"
-        },
-        {
-            "message": "Extension.WebGpu.Dev.WebGpuCanvas renamed to Ops.Extension.WebGpu.WebGpuCanvas",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1744374971305
         }
     ],
     "authorName": "pandur",

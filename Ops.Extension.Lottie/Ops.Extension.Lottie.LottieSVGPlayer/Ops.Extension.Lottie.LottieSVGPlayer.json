@@ -7,11 +7,6 @@
             "date": 1555057855316
         },
         {
-            "message": "Ops.Bodymovin.LottieSVGPlayer renamed to Ops.Lottie.LottieSVGPlayer",
-            "author": "pandur",
-            "date": 1560783156915
-        },
-        {
             "message": " added lib: lottie.js",
             "author": "stephan",
             "date": 1626104391335
@@ -26,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1686915348039
+        },
+        {
+            "message": "rsasrattasr",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1751530238643
         }
     ],
     "authorName": "pandur",

@@ -10,7 +10,7 @@ new CABLES.WebGpuOp(op);
 
 let cgp = null;
 let mesh = null;
-let geom = new CGL.Geometry("fullscreen rectangle");
+let geom = new CG.Geometry("fullscreen rectangle");
 let x = 0, y = 0, w = 0, h = 0;
 
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
