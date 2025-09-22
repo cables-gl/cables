@@ -37,6 +37,9 @@ export class CgCanvas
         this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
     }
 
+    /**
+     * @returns {HTMLElement}
+     */
     get canvasEle() { return this._canvasEle; }
 
     /**
@@ -75,8 +78,9 @@ export class CgCanvas
 
     updateSize()
     {
-        this.canvasEle.width = this.canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
-        this.canvasEle.height = this.canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
+        this.canvasEle.width = this.canvasWidth = Math.ceil(this.canvasEle.clientWidth * this.pixelDensity);
+        this.canvasEle.height = this.canvasHeight = Math.ceil(this.canvasEle.clientHeight * this.pixelDensity);
+        // console.log("text", this.canvasEle.width, this.canvasEle.clientWidth, this.canvasEle.getBoundingClientRect().width);
     }
 
     dispose()
