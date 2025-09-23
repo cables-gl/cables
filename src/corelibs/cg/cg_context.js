@@ -94,12 +94,32 @@ export class CgContext extends Events
 
     get canvasWidth()
     {
-        return this.cgCanvas.canvasWidth;
+        return this.width;
     }
 
     get canvasHeight()
     {
+        return this.height;
+    }
+
+    get width()
+    {
+        return this.cgCanvas.canvasWidth;
+    }
+
+    get height()
+    {
         return this.cgCanvas.canvasHeight;
+    }
+
+    get widthCss()
+    {
+        return this.cgCanvas.canvasWidth / this.pixelDensity;
+    }
+
+    get heightCss()
+    {
+        return this.cgCanvas.canvasHeight / this.pixelDensity;
     }
 
     set pixelDensity(p)
