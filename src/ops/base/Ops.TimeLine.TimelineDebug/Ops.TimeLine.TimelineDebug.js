@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("update"),
-    outobj = op.outObject("data");
+    outobj = op.outObject("data"),
+    outSe = op.outArray("Selected keys");
 
 exec.onTriggered = () =>
 {
@@ -12,4 +13,5 @@ exec.onTriggered = () =>
         o = tl.getDebug();
     }
     outobj.setRef(o);
+    outSe.set(tl.getSelectedKeys());
 };

@@ -70,7 +70,6 @@ export class Port extends Events
 
     static EVENT_UIATTRCHANGE = "onUiAttrChange";
     static EVENT_VALUE_CHANGE = "change";
-    static EVENT_ANIM_UPDATED = "PortAnimUpdate";
 
     #oldAnimVal = -5711;
 
@@ -511,11 +510,9 @@ export class Port extends Events
             this.anim.on(Anim.EVENT_CHANGE, () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-                this.emitEvent(Port.EVENT_ANIM_UPDATED);
             });
             this.anim.deserialize(objPort.anim);
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            this.emitEvent(Port.EVENT_ANIM_UPDATED);
 
             this.anim.sortKeys();
         }
@@ -941,7 +938,6 @@ export class Port extends Events
                 this.anim.on(Anim.EVENT_CHANGE, () =>
                 {
                     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-                    this.emitEvent(Port.EVENT_ANIM_UPDATED);
                 });
                 // this.anim.setValue(this._op.patch.timer.getTime(), this.get());
             }
@@ -968,14 +964,12 @@ export class Port extends Events
             this.anim.on(Anim.EVENT_CHANGE, () =>
             {
                 this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-                this.emitEvent(Port.EVENT_ANIM_UPDATED);
             });
         }
         this.setAnimated(this.#animated);
         this._onAnimToggle();
         this.setUiAttribs({ "isAnimated": this.#animated });
         this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-        this.emitEvent(Port.EVENT_ANIM_UPDATED);
     }
 
     /**
