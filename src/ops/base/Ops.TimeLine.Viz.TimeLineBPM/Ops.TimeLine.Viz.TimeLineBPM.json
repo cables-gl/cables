@@ -1,0 +1,42 @@
+{
+    "id": "cf692b7d-a67f-4dc1-8b39-4feb27a23a49",
+    "created": 1759150111785,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1759147891213
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1759150111785
+        },
+        {
+            "message": "Patch.P5ETmbY.TimeLineBPM renamed to Ops.TimeLine.Viz.TimeLineBPM",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1759153696776
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset",
+                "subType": "number"
+            }
+        ],
+        "portsOut": []
+    },
+    "cloneOf": "524b4a3a-0a40-4600-9071-d5a14f926aa8"
+}

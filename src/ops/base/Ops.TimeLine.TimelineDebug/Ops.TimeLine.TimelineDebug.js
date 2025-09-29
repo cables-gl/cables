@@ -11,7 +11,7 @@ exec.onTriggered = () =>
     if (tl)
     {
         o = tl.getDebug();
+        outSe.set(tl.getSelectedKeys());
     }
     outobj.setRef(o);
-    outSe.set(tl.getSelectedKeys());
 };
