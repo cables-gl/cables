@@ -176,8 +176,8 @@ function updateGeom()
 
     if (mesh && geom1 && geom2 && geom1._vertices && geom2._vertices)
     {
-        mesh.updateAttribute(prfx + "attrMorphTargetB", geom1._vertices);
-        mesh.updateAttribute(prfx + "attrMorphTargetA", geom2._vertices);
+        mesh.setAttribute(prfx + "attrMorphTargetB", geom1._vertices);
+        mesh.setAttribute(prfx + "attrMorphTargetA", geom2._vertices);
     }
 }
 
