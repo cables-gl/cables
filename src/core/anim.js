@@ -362,13 +362,13 @@ export class Anim extends Events
      */
     deserialize(obj)
     {
-
         if (obj.loop) this.loop = obj.loop;
         if (obj.tlActive) this.#tlActive = obj.tlActive;
+        if (obj.height) this.uiAttribs.height = obj.height;
+
         for (const ani in obj.keys)
-        {
             this.keys.push(new AnimKey(obj.keys[ani], this));
-        }
+
         this.sortKeys();
     }
 
@@ -383,6 +383,7 @@ export class Anim extends Events
         obj.keys = [];
         obj.loop = this.loop;
         if (this.#tlActive)obj.tlActive = this.tlActive;
+        if (this.uiAttribs.height)obj.height = this.uiAttribs.height;
 
         for (let i = 0; i < this.keys.length; i++)
             obj.keys.push(this.keys[i].getSerialized());

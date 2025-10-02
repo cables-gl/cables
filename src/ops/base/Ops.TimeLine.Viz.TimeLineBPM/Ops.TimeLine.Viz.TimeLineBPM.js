@@ -6,6 +6,12 @@ animPort.setUiAttribs({ "hidePort": true });
 animPort.setAnimated(true);
 let rects = [];
 
+animPort.on("tlVizDispose", () =>
+{
+    console.log("dispose");
+    disposeRects();
+});
+
 animPort.renderTimeLine = (tl) =>
 {
     const beatDuration = 60 / inBpm.get();
@@ -32,12 +38,18 @@ animPort.renderTimeLine = (tl) =>
     }
 };
 
-op.onDelete = () =>
+function disposeRects()
 {
     for (let i = 0; i < rects.length; i++)
     {
         rects[i].dispose();
     }
+    rects.length = 0;
+}
+
+op.onDelete = () =>
+{
+    disposeRects();
 
     animPort.renderTimeLine = null;
 };

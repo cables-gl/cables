@@ -8,6 +8,20 @@ animPort.setAnimated(true);
 let rect = null;
 
 let rects = [];
+animPort.on("tlVizHide", () =>
+{
+    console.log("heiiiiiiiiiiiide");
+    for (let i = 0; i < rects.length; i++)
+    {
+        rects[i].setVisible(false);
+    }
+});
+
+animPort.on("tlVizDispose", () =>
+{
+    console.log("dispose");
+    disposeRects();
+});
 
 animPort.renderTimeLine = (tl) =>
 {
@@ -29,12 +43,18 @@ animPort.renderTimeLine = (tl) =>
     }
 };
 
-op.onDelete = () =>
+function disposeRects()
 {
     for (let i = 0; i < rects.length; i++)
     {
         rects[i].dispose();
     }
+    rects.length = 0;
+}
+
+op.onDelete = () =>
+{
+    disposeRects();
 
     animPort.renderTimeLine = null;
 };
