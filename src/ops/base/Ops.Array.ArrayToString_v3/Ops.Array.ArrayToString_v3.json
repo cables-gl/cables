@@ -4,19 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1565717313677
-        },
-        {
-            "message": "Ops.String.Join_v2 renamed to Ops.Array.ArrayToString_v3",
-            "author": "pandur",
-            "date": 1567672278393
+            "date": 1565717313677,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
     "created": 1565717348413,
     "summary": "Join array values to a string (concat)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

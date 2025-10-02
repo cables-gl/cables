@@ -9,6 +9,11 @@
             {
                 "type": 0,
                 "name": "Method index",
+                "values": [
+                    "Auto Anim",
+                    "Interpolate Index",
+                    "Interpolate Indices"
+                ],
                 "subType": "integer"
             },
             {
@@ -110,7 +115,7 @@
             {
                 "type": 0,
                 "name": "Finished",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -142,5 +147,6 @@
     "exampleProjectId": "PdhglN",
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "license": "MIT"
 }
