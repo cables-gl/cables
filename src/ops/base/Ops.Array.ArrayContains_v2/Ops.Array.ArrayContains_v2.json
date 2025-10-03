@@ -52,12 +52,8 @@
         {
             "message": "cloned op from Ops.Array.ArrayContains",
             "author": "simod",
-            "date": 1619617451517
-        },
-        {
-            "message": "Ops.User.simod.ArrayContains_v2 renamed to Ops.Array.ArrayContains_v2",
-            "author": "simod",
-            "date": 1619617730748
+            "date": 1619617451517,
+            "type": "new"
         }
     ],
     "exampleProjectId": "8pZ8GA",
