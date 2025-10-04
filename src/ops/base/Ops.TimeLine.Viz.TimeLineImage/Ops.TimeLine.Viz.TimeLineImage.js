@@ -21,13 +21,20 @@ animPort.renderTimeLine = (tl) =>
 
     rect.setSize(endX - newX, tl.animLine.height);
 };
+animPort.on("tlVizDispose", () =>
+{
+    console.log("dispose");
+    disposeRects();
+});
+
+function disposeRects()
+{
+    rect.dispose();
+}
 
 op.onDelete = () =>
 {
-    if (rect)
-    {
-        rect.dispose();
-    }
+    disposeRects();
 
     animPort.renderTimeLine = null;
 };

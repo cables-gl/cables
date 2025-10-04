@@ -632,7 +632,7 @@ export class Anim extends Events
     {
         const port = op.inDropDown(title, Anim.EASINGNAMES, "linear");
         port.set("linear");
-        port.defaultValue = "linear";
+        port.defaultValue = 0;
 
         port.onChange = () =>
         {
