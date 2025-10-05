@@ -2,7 +2,8 @@ const
     animPort = op.inObject("Test"),
     inBpm = op.inFloat("BPM", 80),
     inOffset = op.inFloat("Offset");
-animPort.setUiAttribs({ "hidePort": true });
+animPort.setUiAttribs({ "hidePort": true, "tlDrawKeys": false });
+
 animPort.setAnimated(true);
 let rects = [];
 

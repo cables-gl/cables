@@ -15,7 +15,12 @@
     "authorName": "pandur",
     "created": 1668774377580,
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "update"
+            }
+        ],
         "portsOut": [
             {
                 "type": 0,
@@ -25,9 +30,9 @@
         ]
     },
     "summary": "current set length of the timeline",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "qSMdck"
+    "exampleProjectId": "qSMdck",
+    "license": "MIT"
 }
