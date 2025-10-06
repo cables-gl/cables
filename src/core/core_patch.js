@@ -1299,6 +1299,11 @@ export class Patch extends Events
     }
 
     // used internally
+    /**
+     * @param {string} name
+     * @param {string | number} val
+     * @param {number} [type]
+     */
     setVarValue(name, val, type)
     {
         if (this.hasVar(name))
