@@ -507,13 +507,14 @@ export class Port extends Events
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this._op.hasAnimPort = true;
-            this.anim.on(Anim.EVENT_CHANGE, () =>
-            {
-                this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            });
-            this.anim.deserialize(objPort.anim);
+            // this.anim.on(Anim.EVENT_CHANGE, () =>
+            // {
+            //     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+            // });
+            this.anim.deserialize(objPort.anim, true);
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
 
+            this.bindAnimListeners();
             this.anim.sortKeys();
         }
     }
@@ -914,12 +915,27 @@ export class Port extends Events
 
         if (!hasTriggerPort)
         {
-            if (a) this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
-            {
-                this.updateAnim();
-            });
+            if (a)
+                this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
+                {
+                    this.updateAnim();
+                });
             else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.off(this._notriggerAnimUpdate);
         }
+    }
+
+    bindAnimListeners()
+    {
+        this.anim.on(Anim.EVENT_CHANGE, () =>
+        {
+            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+            this._op.patch.updateAnimMaxTimeSoon();
+        });
+        this.anim.on(Anim.EVENT_KEY_DELETE, () =>
+        {
+            this._op.patch.updateAnimMaxTimeSoon();
+        });
+
     }
 
     /**
@@ -938,10 +954,7 @@ export class Port extends Events
         if (this.#animated && !this.anim)
         {
             this.anim = new Anim({ "name": "port " + this.name });
-            this.anim.on(Anim.EVENT_CHANGE, () =>
-            {
-                this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            });
+            this.bindAnimListeners();
         }
 
         if (this.#animated)
