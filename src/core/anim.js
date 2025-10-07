@@ -67,6 +67,16 @@ export class Anim extends Events
 
     #tlActive = true;
     uiAttribs = {};
+    loop = 0;
+    onLooped = null;
+    _timesLooped = 0;
+    _needsSort = false;
+    _cachedIndex = 0;
+
+    /** @type {AnimKey[]} */
+    keys = [];
+    onChange = null;
+    stayInTimeline = false;
 
     /**
      * @param {AnimCfg} [cfg]
@@ -76,23 +86,11 @@ export class Anim extends Events
         super();
         cfg = cfg || {};
         this.id = uuid();
-
-        /** @type {AnimKey[]} */
-        this.keys = [];
-        this.onChange = null;
-        this.stayInTimeline = false;
-
-        this.loop = 0;
         this._log = new Logger("Anim");
-        this._cachedIndex = 0;
         this.name = cfg.name || null;
 
         /** @type {Number} */
         this.defaultEasing = cfg.defaultEasing || Anim.EASING_LINEAR;
-        this.onLooped = null;
-
-        this._timesLooped = 0;
-        this._needsSort = false;
     }
 
     forceChangeCallback()
@@ -103,7 +101,6 @@ export class Anim extends Events
 
     forceChangeCallbackSoon()
     {
-        // clearTimeout(this.forcecbto);
         if (!this.forcecbto)
             this.forcecbto = setTimeout(() =>
             {
@@ -144,6 +141,18 @@ export class Anim extends Events
         if (this._needsSort) this.sortKeys();
         if (this.keys.length === 0) return true;
         if (this.keys[this.keys.length - 1].time <= time) return true;
+        return false;
+    }
+
+    /**
+     * @param {number} time
+     */
+    hasStarted(time)
+    {
+
+        if (this._needsSort) this.sortKeys();
+        if (this.keys.length === 0) return false;
+        if (time >= this.keys[0].time) return true;
         return false;
     }
 
@@ -310,6 +319,8 @@ export class Anim extends Events
      */
     setValue(time, value, cb = null)
     {
+        if (isNaN(value))CABLES.logStack();
+
         if (this._needsSort) this.sortKeys();
         let found = null;
 
@@ -359,16 +370,18 @@ export class Anim extends Events
 
     /**
      * @param {object} obj
+     * @param {boolean} [clear]
      */
-    deserialize(obj)
+    deserialize(obj, clear)
     {
-
         if (obj.loop) this.loop = obj.loop;
         if (obj.tlActive) this.#tlActive = obj.tlActive;
+        if (obj.height) this.uiAttribs.height = obj.height;
+        if (clear) this.keys.length = 0;
+
         for (const ani in obj.keys)
-        {
             this.keys.push(new AnimKey(obj.keys[ani], this));
-        }
+
         this.sortKeys();
     }
 
@@ -383,6 +396,7 @@ export class Anim extends Events
         obj.keys = [];
         obj.loop = this.loop;
         if (this.#tlActive)obj.tlActive = this.tlActive;
+        if (this.uiAttribs.height)obj.height = this.uiAttribs.height;
 
         for (let i = 0; i < this.keys.length; i++)
             obj.keys.push(this.keys[i].getSerialized());
@@ -446,6 +460,7 @@ export class Anim extends Events
 
     /**
      * @param {AnimKey} k
+     * @param {undefined} [events]
      */
     remove(k, events)
     {
@@ -631,7 +646,7 @@ export class Anim extends Events
     {
         const port = op.inDropDown(title, Anim.EASINGNAMES, "linear");
         port.set("linear");
-        port.defaultValue = "linear";
+        port.defaultValue = 0;
 
         port.onChange = () =>
         {

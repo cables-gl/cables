@@ -62,7 +62,7 @@ function loadImage(_i, _url, nocache, cb)
 
     url = op.patch.getFilePath(url);
 
-    if (!inCaching.get()) if (nocache)url += "?rnd=" + CABLES.generateUUID();
+    // if (!inCaching.get()) if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
     let tex = CGL.Texture.load(cgl, url,
         function (err)

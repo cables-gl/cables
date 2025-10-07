@@ -48,7 +48,7 @@
             }
         ]
     },
-    "summary": "interpolate between two arrays, only a few numbers at the same time",
+    "summary": "Interpolate between two arrays, only a few numbers at the same time",
 
     "docs": {
         "ports": []

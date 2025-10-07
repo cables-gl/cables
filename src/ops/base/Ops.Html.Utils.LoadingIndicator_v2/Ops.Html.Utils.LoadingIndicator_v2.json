@@ -1,0 +1,75 @@
+{
+    "id": "1f5345bd-6dcb-4271-813d-87789291dab5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1605699580894,
+            "type": "new"
+        },
+        {
+            "message": "fixed problem becoming invisible on safari sometimes",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1752153571558
+        },
+        {
+            "message": "added element output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1753343443148
+        },
+        {
+            "message": "new version: new mode automatically shows the indicater when any asset is loading",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757574897374
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1757518823085,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Visible index",
+                "values": [
+                    "Hidden",
+                    "Visible",
+                    "Auto"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Center Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Style index",
+                "values": [
+                    "Spinner",
+                    "Ring",
+                    "Ellipsis"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Elment",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "show a typical web loading/progress indicator animation",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "EsV74q",
+    "license": "MIT"
+}

@@ -56,7 +56,7 @@
             }
         ]
     },
-    "summary": "splits an array up into an array of arrays",
+    "summary": "Split an array up into an array of arrays",
     "docs": {
         "ports": []
     },

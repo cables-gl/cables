@@ -74,6 +74,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1754137253119
+        },
+        {
+            "message": "option to automatic retry to request when there was an error",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1754664138898
         }
     ],
     "layout": {
@@ -130,6 +136,11 @@
             {
                 "type": 0,
                 "name": "Empty output on change",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Retry on error",
                 "subType": "boolean"
             },
             {

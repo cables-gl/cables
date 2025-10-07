@@ -21,7 +21,7 @@
             }
         ]
     },
-    "summary": "get a string from an array at [index]",
+    "summary": "Get a string from an array at [index]",
     "docs": {
         "ports": [
             {

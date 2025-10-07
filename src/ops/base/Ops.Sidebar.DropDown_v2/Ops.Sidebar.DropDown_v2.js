@@ -120,7 +120,6 @@ function onValuesPortChange()
 
     outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
-    console.log("options i", options);
     if (!defaultValue && options && options.length)valuePort.set(options[0]);
 }
 
@@ -128,7 +127,6 @@ let finalIndex = 0;
 function setSelectedProperty(defaultinput)
 {
     const optionElements = input.querySelectorAll("option");
-
     let finalEle = null;
 
     optionElements.forEach(function (optionElement, index)
@@ -203,19 +201,13 @@ function onParentChanged()
 
 function showElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "block";
-    }
+    if (ele) ele.style.display = "block";
     setSelectedProperty();
 }
 
 function hideElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "none";
-    }
+    if (ele) ele.style.display = "none";
 }
 
 function onDelete()
@@ -225,10 +217,7 @@ function onDelete()
 
 function removeElementFromDOM(ele)
 {
-    if (ele && ele.parentNode && ele.parentNode.removeChild)
-    {
-        ele.parentNode.removeChild(ele);
-    }
+    if (ele && ele.parentNode && ele.parentNode.removeChild) ele.parentNode.removeChild(ele);
 }
 
 function setDefault()

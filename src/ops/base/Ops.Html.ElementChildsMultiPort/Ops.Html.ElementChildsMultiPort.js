@@ -6,7 +6,7 @@ const
 
 const oldEles = [];
 let fakeParent = null;
-
+let parent = null;
 inObjs.onChange =
 parentPort.onChange = () =>
 {
@@ -17,7 +17,7 @@ parentPort.onChange = () =>
 function removeOldEles()
 {
     for (let i = 0; i < oldEles.length; i++)
-        oldEles[i].remove();
+        if (oldEles[i])oldEles[i].remove();
 
     oldEles.length = 0;
 }
@@ -25,7 +25,28 @@ function removeOldEles()
 function rebuild()
 {
     const ports = inObjs.get();
-    let parent = parentPort.get();
+    // console.log("oldeles", ports.length, oldEles.length);
+    // if (parentPort.get() != parent)console.log("parentttttttttttt");
+    // if (oldEles.length != ports.length)console.log(oldEles.length, ports.length);
+    if (parent &&
+    parentPort.get() == parent &&
+    ports &&
+    oldEles &&
+    ports.length > 0 &&
+    oldEles.length == ports.length)
+    {
+        let foundDiff = false;
+        for (let i = 0; i < ports.length; i++)
+        {
+            if (ports[i].get() != oldEles[i])
+            {
+                foundDiff = true;
+                // console.log("found diff", ports[i].name, ports[i].get(), "u", oldEles[i]);
+            }
+        }
+        if (!foundDiff) return;
+    }
+    parent = parentPort.get();
 
     if (!parent)
     {
@@ -37,15 +58,16 @@ function rebuild()
         }
         parent = fakeParent;
     }
-
+    // console.log("rebuild all");
     removeOldEles();
 
     for (let i = 0; i < ports.length; i++)
     {
+        if (ports[i].links.length > 1)console.log("!!!!!!!!!! element childs to many", op.id);
         const ele = ports[i].get();
+        oldEles.push(ele);
         if (ele)
         {
-            oldEles.push(ele);
             parent.appendChild(ele);
         }
     }

@@ -25,7 +25,7 @@ export class CgCanvas
         }
 
         if (!options.cg) this._log.error("CgCanvas options has no cg");
-        if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
+        // if (!options.canvasEle) this._log.error("CgCanvas options has no canvasEle");
 
         this._cg = options.cg;
         if (this.canvasEle)
@@ -39,6 +39,9 @@ export class CgCanvas
         }
     }
 
+    /**
+     * @returns {HTMLElement}
+     */
     get canvasEle() { return this._canvasEle; }
 
     /**
@@ -79,8 +82,9 @@ export class CgCanvas
 
     updateSize()
     {
-        this.canvasEle.width = this.canvasWidth = this.canvasEle.clientWidth * this.pixelDensity;
-        this.canvasEle.height = this.canvasHeight = this.canvasEle.clientHeight * this.pixelDensity;
+        this.canvasEle.width = this.canvasWidth = Math.ceil(this.canvasEle.clientWidth * this.pixelDensity);
+        this.canvasEle.height = this.canvasHeight = Math.ceil(this.canvasEle.clientHeight * this.pixelDensity);
+        // console.log("text", this.canvasEle.width, this.canvasEle.clientWidth, this.canvasEle.getBoundingClientRect().width);
     }
 
     dispose()

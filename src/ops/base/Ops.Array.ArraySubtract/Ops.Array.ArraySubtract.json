@@ -1,5 +1,5 @@
 {
-    "summary": " Subtracts one number from all values in an array",
+    "summary": "Subtract one number from all values in an array",
     "docs": {
         "ports": [
             {

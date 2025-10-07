@@ -4,6 +4,7 @@ const
     quoted = op.inBool("Output quoted string", false);
 
 const root = document.documentElement;
+op.toWorkPortsNeedsString(varname);
 
 val.onChange = varname.onChange = quoted.onChange = update;
 

@@ -17,7 +17,7 @@
             }
         ]
     },
-    "summary": "Reverses an array with value triplets [x, y, z, ...]",
+    "summary": "Reverse an array with value triplets [x, y, z, ...]",
     "docs": {
         "ports": [
             {

@@ -82,9 +82,15 @@ export class Patch extends Events
     static EVENT_LINK = "onLink";
     static EVENT_VALUESSET = "loadedValueSet";
     static EVENT_DISPOSE = "dispose";
+    static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
 
     #renderOneFrame = false;
     #initialDeserialize = true;
+
+    /** @type {Array<Op>} */
+    ops = [];
+    settings = {};
+    animMaxTime = 0;
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
@@ -92,10 +98,6 @@ export class Patch extends Events
         super();
 
         this._log = new Logger("core_patch", { "onError": cfg.onError });
-
-        /** @type {Array<Op>} */
-        this.ops = [];
-        this.settings = {};
 
         /** @type {RenderLoop} */
         this.renderloop = null;
@@ -543,6 +545,41 @@ export class Patch extends Events
         }
     }
 
+    updateAnimMaxTimeSoon()
+    {
+        if (this.toAnimMaxTime)clearTimeout(this.toAnimMaxTime);
+        this.toAnimMaxTime = setTimeout(() =>
+        {
+            this.updateAnimMaxTime();
+        }, 50);
+    }
+
+    updateAnimMaxTime()
+    {
+        let maxTime = 0;
+        for (let i = 0; i < this.ops.length; i++)
+        {
+            if (this.ops[i].hasAnimPort)
+            {
+                for (let j = 0; j < this.ops[i].portsIn.length; j++)
+                {
+                    if (this.ops[i].portsIn[j].anim)
+                    {
+                        if (this.ops[i].portsIn[j].anim.lastKey && this.ops[i].portsIn[j].anim.lastKey.time > maxTime)
+                        {
+                            maxTime = this.ops[i].portsIn[j].anim.lastKey.time;
+                        }
+                    }
+                }
+            }
+        }
+        if (maxTime != this.animMaxTime)
+        {
+            this.animMaxTime = maxTime;
+            this.emitEvent(Patch.EVENT_ANIM_MAXTIME_CHANGE);
+        }
+    }
+
     deleteOp(opid, tryRelink, reloadingOp)
     {
         let found = false;
@@ -607,6 +644,7 @@ export class Patch extends Events
     /**
      * @param {number} time
      * @param {number} delta
+     * @param {number} timestamp
      */
     updateAnims(time, delta, timestamp)
     {
@@ -1076,6 +1114,7 @@ export class Patch extends Events
 
         setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
+        this.updateAnimMaxTime();
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
@@ -1139,6 +1178,11 @@ export class Patch extends Events
     }
 
     // used internally
+    /**
+     * @param {string} name
+     * @param {string | number} val
+     * @param {number} [type]
+     */
     setVarValue(name, val, type)
     {
         if (this.hasVar(name))

@@ -50,7 +50,7 @@
     "libs": [
         "perlin.js"
     ],
-    "summary": "Creates An array filled with Perlin noise values",
+    "summary": "Create an array filled with Perlin noise values",
     "issues": "",
 
     "youtubeids": [],

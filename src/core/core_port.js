@@ -105,7 +105,7 @@ export class Port extends Events
         this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
-        /** @type {Op|UiOp} */
+        /** @type {Op} */
         this._op = ___op;
 
         /** @type {Array<Link>} */
@@ -507,13 +507,14 @@ export class Port extends Events
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this._op.hasAnimPort = true;
-            this.anim.on(Anim.EVENT_CHANGE, () =>
-            {
-                this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            });
-            this.anim.deserialize(objPort.anim);
+            // this.anim.on(Anim.EVENT_CHANGE, () =>
+            // {
+            //     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+            // });
+            this.anim.deserialize(objPort.anim, true);
             this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
 
+            this.bindAnimListeners();
             this.anim.sortKeys();
         }
     }
@@ -914,12 +915,27 @@ export class Port extends Events
 
         if (!hasTriggerPort)
         {
-            if (a) this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
-            {
-                this.updateAnim();
-            });
+            if (a)
+                this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
+                {
+                    this.updateAnim();
+                });
             else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.off(this._notriggerAnimUpdate);
         }
+    }
+
+    bindAnimListeners()
+    {
+        this.anim.on(Anim.EVENT_CHANGE, () =>
+        {
+            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+            this._op.patch.updateAnimMaxTimeSoon();
+        });
+        this.anim.on(Anim.EVENT_KEY_DELETE, () =>
+        {
+            this._op.patch.updateAnimMaxTimeSoon();
+        });
+
     }
 
     /**
@@ -927,49 +943,46 @@ export class Port extends Events
      */
     setAnimated(a)
     {
+        let changed = false;
         if (this.#animated != a)
         {
             this.#animated = a;
             this._op.hasAnimPort = true;
-
-            if (this.#animated && !this.anim)
-            {
-                this.anim = new Anim({ "name": "port " + this.name });
-                this.anim.on(Anim.EVENT_CHANGE, () =>
-                {
-                    this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-                });
-                // this.anim.setValue(this._op.patch.timer.getTime(), this.get());
-            }
-            this._onAnimToggle();
+            changed = true;
         }
 
-        this._handleNoTriggerOpAnimUpdates(a);
-        if (!a)
+        if (this.#animated && !this.anim)
+        {
+            this.anim = new Anim({ "name": "port " + this.name });
+            this.bindAnimListeners();
+        }
+
+        if (this.#animated)
+        {
+            let time = 0;
+            if (window.gui && window.gui.glTimeline)time = this._op.patch.timer.getTime();// if timeline is already used otherwise create first key at 0
+
+            if (this.anim.keys.length == 0) this.anim.setValue(time, this.value);
+        }
+        else
         {
             this.anim = null;
         }
 
+        this._handleNoTriggerOpAnimUpdates(a);
+
         this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
 
         this.setUiAttribs({ "isAnimated": this.#animated });
+        if (changed) this._onAnimToggle();
     }
 
     toggleAnim()
     {
-        this.#animated = !this.#animated;
-        if (this.#animated && !this.anim)
-        {
-            this.anim = new Anim({ "name": "port " + this.name });
-            this.anim.on(Anim.EVENT_CHANGE, () =>
-            {
-                this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            });
-        }
-        this.setAnimated(this.#animated);
-        this._onAnimToggle();
+        this.setAnimated(!this.#animated);
         this.setUiAttribs({ "isAnimated": this.#animated });
         this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+        this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
     }
 
     /**

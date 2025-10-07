@@ -1,0 +1,92 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "27d11476-6849-408f-9d06-df41a4b3f573",
+    "created": 1757597289714,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "urls"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Caching",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Asset in patch",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "TextureArray"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "load multiple texture from filenames given as an array",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "jFv097",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureArrayLoaderFromArray",
+            "author": "pandur",
+            "date": 1677830842446,
+            "type": "new"
+        },
+        {
+            "message": "New Version: Works now with data URLs, filenames that dont have changed are not loaded again when caching checkbox is on",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757602023502
+        }
+    ],
+    "license": "MIT"
+}

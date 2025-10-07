@@ -35,7 +35,7 @@
             }
         ]
     },
-    "summary": "iterate over an array of objects",
+    "summary": "Iterate over an array of objects",
     "docs": {
         "ports": [
             {

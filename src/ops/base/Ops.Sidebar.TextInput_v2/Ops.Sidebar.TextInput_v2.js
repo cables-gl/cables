@@ -3,14 +3,19 @@ const
     labelPort = op.inString("Text", "Text"),
     defaultValuePort = op.inString("Default", ""),
     inPlaceholder = op.inString("Placeholder", ""),
-    inType = op.inSwitch("Type", ["text", "password"], "text"),
+    inType = op.inSwitch("Type", ["text", "password", "search"], "text"),
     inTextArea = op.inBool("TextArea", false),
     inGreyOut = op.inBool("Grey Out", false),
     inVisible = op.inBool("Visible", true),
+    // inSpellCheck = op.inBool("Spellcheck", true),
+    inEnterPd = op.inBool("Enter Key Prevent Default", false),
     inClear = op.inTriggerButton("Clear"),
+    inFocus = op.inTriggerButton("Focus Input"),
     siblingsPort = op.outObject("Children"),
     valuePort = op.outString("Result", defaultValuePort.get()),
-    outFocus = op.outBool("Focus");
+    outFocus = op.outBool("Focus"),
+    outKeyEnter = op.outTrigger("Keypress Enter"),
+    outKeyEsc = op.outTrigger("Keypress ESC");
 
 const el = document.createElement("div");
 el.dataset.op = op.id;
@@ -44,6 +49,7 @@ function setAttribs()
     input.setAttribute("type", inType.get());
     input.setAttribute("value", defaultValuePort.get());
     input.setAttribute("placeholder", inPlaceholder.get());
+    // updateSpellcheck();
 }
 
 function creatElement()
@@ -67,7 +73,29 @@ function creatElement()
     input.addEventListener("input", onInput);
     input.addEventListener("focus", onFocus);
     input.addEventListener("blur", onBlur);
+    input.addEventListener("keydown", function (event)
+    {
+        if (event.key === "Enter")
+        {
+            outKeyEnter.trigger();
+            if (inEnterPd.get())event.preventDefault();
+        }
+
+        if (event.key === "Escape")
+        {
+            outKeyEsc.trigger();
+            event.preventDefault();
+        }
+    });
 }
+// sadly not reliable....
+// function updateSpellcheck()
+// {
+//     if (inSpellCheck.get())
+//         input.removeAttribute("spellcheck");
+//     else
+//         input.setAttribute("spellcheck", "true");
+// }
 
 const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
@@ -79,6 +107,10 @@ inClear.onTriggered = () =>
     input.value = "";
     valuePort.set(input.value);
 };
+inFocus.onTriggered = () =>
+{
+    input.focus();
+};
 
 function onFocus()
 {
@@ -89,6 +121,8 @@ function onBlur()
 {
     outFocus.set(false);
 }
+
+// inSpellCheck.onChange = updateSpellcheck;
 
 inPlaceholder.onChange = () =>
 {
@@ -152,18 +186,12 @@ function onParentChanged()
 
 function showElement(el)
 {
-    if (el)
-    {
-        el.style.display = "block";
-    }
+    if (el) el.style.display = "block";
 }
 
 function hideElement(el)
 {
-    if (el)
-    {
-        el.style.display = "none";
-    }
+    if (el)el.style.display = "none";
 }
 
 function onDelete()
@@ -174,7 +202,5 @@ function onDelete()
 function removeElementFromDOM(el)
 {
     if (el && el.parentNode && el.parentNode.removeChild)
-    {
         el.parentNode.removeChild(el);
-    }
 }

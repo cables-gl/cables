@@ -24,7 +24,7 @@
             }
         ]
     },
-    "summary": "check if array contains a number (find,search,indexOf)",
+    "summary": "Check if an array contains a number (find,search,indexOf)",
     "authorName": "simod",
     "id": "b982d7e3-c9cf-41dd-aead-66daad785fa8",
     "created": 1619617451517,
@@ -52,12 +52,8 @@
         {
             "message": "cloned op from Ops.Array.ArrayContains",
             "author": "simod",
-            "date": 1619617451517
-        },
-        {
-            "message": "Ops.User.simod.ArrayContains_v2 renamed to Ops.Array.ArrayContains_v2",
-            "author": "simod",
-            "date": 1619617730748
+            "date": 1619617451517,
+            "type": "new"
         }
     ],
     "exampleProjectId": "8pZ8GA",

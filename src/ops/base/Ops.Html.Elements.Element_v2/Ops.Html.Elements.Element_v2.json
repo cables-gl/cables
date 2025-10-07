@@ -33,6 +33,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1739455623071
+        },
+        {
+            "message": "Added option \"Add to DOM\" - the element will be completly remove from DOM if false",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1754494952995
         }
     ],
     "layout": {
@@ -135,6 +141,11 @@
             {
                 "type": 0,
                 "name": "Propagate Click-Events",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Add to DOM",
                 "subType": "boolean"
             }
         ],

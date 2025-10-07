@@ -7,9 +7,8 @@ const inUrl = op.inUrl("URL"),
     inResContentType = op.inSwitch("Response Content", ["JSON", "String", "Binary Base64"], "JSON"),
     inAutoRequest = op.inBool("Auto request", true),
     inEmptyOutput = op.inBool("Empty output on change", true),
-
+    inRetry = op.inBool("Retry on error", true),
     reloadTrigger = op.inTriggerButton("Reload"),
-
     outData = op.outObject("Response Json Object"),
     outString = op.outString("Response String"),
     outDataUrl = op.outString("Response Data Url"),
@@ -33,6 +32,8 @@ outString.ignoreValueSerialize = true;
 outDataUrl.ignoreValueSerialize = true;
 
 let reloadTimeout = 0;
+let retryTimeout = 0;
+let requestAfterFinish = false;
 
 outString.onLinkChanged =
     outDataUrl.onLinkChanged =
@@ -56,12 +57,23 @@ inResContentType.onChange = () =>
 
 reloadTrigger.onTriggered = () =>
 {
+    if (outIsLoading.get())
+    {
+        console.log("already loading, waiting...");
+        requestAfterFinish = true;
+        return;
+    }
     delayedReload(true);
 };
 
 op.onFileChanged = (fn) =>
 {
     if (inUrl.get() && inUrl.get().indexOf(fn) > -1) reload(true);
+};
+
+op.onDelete = () =>
+{
+    clearTimeout(retryTimeout);
 };
 
 /// ///////////////
@@ -99,12 +111,26 @@ function finishLoadingFail(loadingId, e)
     outString.set("");
     outTrigger.trigger();
     op.patch.loading.finished(loadingId);
+
+    if (outHasError.get() && inRetry.get())
+    {
+        clearTimeout(retryTimeout);
+        retryTimeout = setTimeout(delayedReload, 3000);
+    }
 }
 
 function finishLoadingSuccess(loadingId)
 {
     op.patch.loading.finished(loadingId);
     outIsLoading.set(false);
+    outTrigger.trigger();
+    if (requestAfterFinish)
+    {
+        requestAfterFinish = false;
+
+        reload(null, true);
+    }
+    outError.set("");
 }
 
 function resetOutputs()
@@ -140,12 +166,13 @@ function reload(addCachebuster, force = false)
         const startTime = performance.now();
 
         const options = { "method": inMethod.get() };
-        if (inMethod.get() != "GET") options.body = inBody.get();
+        if (inMethod.get() != "GET") options.body = inBody.get(); if (inSendCredentials.get()) options.credentials = "include";
+
         if (inHeaders.isLinked()) options.headers = inHeaders.get();
-        if (inSendCredentials.get()) options.credentials = "include";
+        if (!options.headers)options.headers = {};
+        if (!options.headers["Content-Type"])options.headers["Content-Type"] = inContentType.get();
 
         const resContentType = inResContentType.get();
-
         fetch(url, options).then((res) =>
         {
             outDuration.set(Math.round(performance.now() - startTime));
@@ -159,7 +186,8 @@ function reload(addCachebuster, force = false)
                 resetOutputs();
                 finishLoadingSuccess(loadingId);
             }
-            else if (resContentType == "JSON")
+            else
+            if (resContentType == "JSON")
             {
                 res.json().then((b) =>
                 {

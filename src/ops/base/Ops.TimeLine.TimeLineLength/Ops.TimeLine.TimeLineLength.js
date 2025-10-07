@@ -1,27 +1,20 @@
-// uses its input port for caching the length of the timeline...
-
 const
-    inLength = op.inFloat("len", 0),
+    inUpdate = op.inTriggerButton("update"),
     outLength = op.outNumber("Length");
 
-inLength.setUiAttribs({ "hidePort": true, "hideParam": true });
+inUpdate.onTriggered = update;
 
-if (CABLES.UI)
+op.on("loadedValueSet", update);
+update();
+
+op.patch.on(CABLES.Patch.EVENT_ANIM_MAXTIME_CHANGE, () =>
 {
-    inLength.set(gui.getTimeLineLength());
-
-    gui.on("timelineControl", (cmd, l) =>
-    {
-        if (cmd === "setLength")
-        {
-            inLength.set(l);
-            outLength.set(inLength.get());
-        }
-    });
-    outLength.set(inLength.get());
-}
-
-op.on("loadedValueSet", () =>
-{
-    outLength.set(inLength.get());
+    console.log("maxtime event");
+    update();
 });
+
+function update()
+{
+    op.patch.updateAnimMaxTime();
+    outLength.set(op.patch.animMaxTime);
+}

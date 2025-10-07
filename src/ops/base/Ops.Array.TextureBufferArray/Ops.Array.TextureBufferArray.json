@@ -36,7 +36,7 @@
             }
         ]
     },
-    "summary": "Stores various textures in an array, starts at the beginning again when end reached",
+    "summary": "Store various textures in an array, starts at the beginning again when end reached",
     "docs": {
         "ports": [
             {

@@ -6,7 +6,7 @@ const
     resetButton = op.inTriggerButton("Reset"),
     outAct = op.outTrigger("Activated"),
     outEnded = op.outTrigger("Ended"),
-    result = op.outBoolNum("Result", false);
+    result = op.outNumber("Result", false);
 
 let lastTimeout = -1;
 

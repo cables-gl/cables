@@ -29,7 +29,7 @@
             }
         ]
     },
-    "summary": "splits a xyz array into 3 individual arrays",
+    "summary": "Split an xyz array into 3 individual arrays",
     "docs": {
         "ports": [
             {

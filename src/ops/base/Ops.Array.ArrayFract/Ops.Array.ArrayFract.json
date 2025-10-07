@@ -16,7 +16,7 @@
             }
         ]
     },
-    "summary": "Returns the fractional remainder of all values in an array",
+    "summary": "Return the fractional remainder of all values in an array",
     "issues": "",
 
 

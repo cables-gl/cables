@@ -24,6 +24,11 @@
                 "type": 0,
                 "name": "Is Fullscreen",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
             }
         ]
     },
@@ -43,11 +48,18 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1723100723437
+        },
+        {
+            "message": "Fix current state output and add \"Supported\" boolean output",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1757586955719
         }
     ],
     "license": "MIT",
     "exampleProjectId": "CCoJji",
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": "Fullscreen API"
 }

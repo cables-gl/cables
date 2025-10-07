@@ -1,0 +1,47 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Fully Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Partly Visible",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "check if webgl canvas element is in the current browser viewport",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "2721f83b-246c-46fa-9ad9-d8c829adb94d",
+    "created": 1558014577123,
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Gl.CanvasInBrowserViewport renamed to Ops.Gl.ElementInBrowserViewport",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1756456897573
+        }
+    ]
+}

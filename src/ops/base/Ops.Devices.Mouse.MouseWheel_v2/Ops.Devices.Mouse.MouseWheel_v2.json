@@ -8,9 +8,10 @@
             "type": "new"
         },
         {
-            "message": "Ops.Devices.MouseWheel2 renamed to Ops.Devices.Mouse.MouseWheel_v2",
+            "message": "Fix bug with area could not be \"document\"",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1587023620405
+            "date": 1757845225167
         }
     ],
     "authorName": "pandur",

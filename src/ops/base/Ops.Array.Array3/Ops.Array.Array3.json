@@ -49,7 +49,7 @@
             }
         ]
     },
-    "summary": "create an array of num triplets set to default values xyz  ",
+    "summary": "Create an array of num triplets set to default values xyz",
     "docs": {
         "ports": []
     },

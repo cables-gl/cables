@@ -21,7 +21,7 @@
             }
         ]
     },
-    "summary": "Adds one number to all values in an array",
+    "summary": "Add one number to all values in an array",
     "docs": {
         "ports": [
             {

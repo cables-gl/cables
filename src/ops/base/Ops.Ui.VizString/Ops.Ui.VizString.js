@@ -35,7 +35,7 @@ inStr.onChange = () =>
     outStr.set(inStr.get());
     if (CABLES.UI)
     {
-        if (inStr.get()) lines = inStr.get().split("\n");
+        if (inStr.get()) lines = (inStr.get() || "").split("\n");
         else lines = [];
     }
 };

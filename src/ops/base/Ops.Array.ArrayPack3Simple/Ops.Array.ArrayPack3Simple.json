@@ -46,7 +46,7 @@
             }
         ]
     },
-    "summary": "Packs 3 individual arrays into an array3 - without needing a trigger",
+    "summary": "Pack 3 individual arrays into an array3 - without needing a trigger",
     "issues": "",
     "caniusequery": "",
 

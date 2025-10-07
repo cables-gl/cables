@@ -1,0 +1,35 @@
+{
+    "id": "4f1fc301-0391-47ee-b411-0c16d4ea64fe",
+    "authorName": "pandur",
+    "created": 1757499393838,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Var Name"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Suffix"
+            }
+        ]
+    },
+    "summary": "Set CSS variable number value",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1757499393838
+        }
+    ],
+    "license": "MIT"
+}
