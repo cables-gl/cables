@@ -117,28 +117,14 @@
         {
             "message": "added offset and center parameters for better positioning",
             "author": "pandur",
-            "date": 1553079125529
+            "date": 1553079125529,
+            "type": "feature"
         },
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.ScaleTexture",
-            "author": "pandur",
-            "date": 1650880873619
-        },
-        {
-            "message": "Ops.User.pandur.ScaleTextureV2 renamed to Ops.Dev.ScaleTextureV2",
-            "author": "pandur",
-            "date": 1650881256300
-        },
-        {
-            "message": "Ops.Dev.ScaleTextureV2 renamed to Ops.Gl.TextureEffects.ScaleTexture_v2",
-            "author": "pandur",
-            "date": 1653286409735
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ScaleTexture_v2 renamed to Ops.Gl.ImageCompose.ScaleTexture_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856148126
+            "message": "texture is cleared in default settings",
+            "type": "bugfix",
+            "author": "garrett",
+            "date": 1759820810314
         }
     ],
     "issues": "",
