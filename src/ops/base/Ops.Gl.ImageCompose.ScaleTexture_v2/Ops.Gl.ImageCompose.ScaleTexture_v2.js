@@ -16,6 +16,7 @@ const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.scale_frag);
+shader.toggleDefine("CLEAR", inClear.get());
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
