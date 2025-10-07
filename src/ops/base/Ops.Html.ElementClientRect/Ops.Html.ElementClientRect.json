@@ -4,18 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1612194768714
-        },
-        {
-            "message": "Ops.User.pandur.ElementClientRect renamed to Ops.Html.ElementClientRect",
-            "author": "pandur",
-            "date": 1613486572367
+            "date": 1612194768714,
+            "type": "new"
         },
         {
             "message": "Added parameter to switch between CSS pixels or Display pixels",
             "type": "feature",
             "author": "pandur",
             "date": 1708341904175
+        },
+        {
+            "message": "New option to select Position source relation: in canvas or absolute in document",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1759754887943
         }
     ],
     "authorName": "pandur",
@@ -37,6 +39,15 @@
                 "values": [
                     "CSS Pixels",
                     "Display Pixels"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Position index",
+                "values": [
+                    "In Canvas",
+                    "Absolute"
                 ],
                 "subType": "integer"
             }
