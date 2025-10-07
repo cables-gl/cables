@@ -592,7 +592,7 @@ export class Patch extends Events
         this.toAnimMaxTime = setTimeout(() =>
         {
             this.updateAnimMaxTime();
-        }, 100);
+        }, 50);
     }
 
     updateAnimMaxTime()
@@ -614,7 +614,7 @@ export class Patch extends Events
                 }
             }
         }
-        if (maxTime > this.animMaxTime)
+        if (maxTime != this.animMaxTime)
         {
             this.animMaxTime = maxTime;
             this.emitEvent(Patch.EVENT_ANIM_MAXTIME_CHANGE);
@@ -1299,6 +1299,11 @@ export class Patch extends Events
     }
 
     // used internally
+    /**
+     * @param {string} name
+     * @param {string | number} val
+     * @param {number} [type]
+     */
     setVarValue(name, val, type)
     {
         if (this.hasVar(name))

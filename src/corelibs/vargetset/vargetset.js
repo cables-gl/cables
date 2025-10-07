@@ -1,4 +1,4 @@
-import { Port, utils } from "cables";
+import { PatchVariable, Port, utils } from "cables";
 
 export class VarSetOpWrapper
 {
@@ -12,6 +12,7 @@ export class VarSetOpWrapper
         this._triggerPort = triggerPort;
         this._nextPort = nextPort;
 
+        /** @type {PatchVariable} */
         this._var = null;
 
         this._btnCreate = op.inTriggerButton("Create new variable");
@@ -143,12 +144,15 @@ export class VarSetOpWrapper
 
     _setVarValue(triggered)
     {
-        const v = this._valuePort.get();
+        let v = this._valuePort.get();
         if (!this._var)
         {
             const name = this._varNamePort.get();
             if (!name) return;
-            this._op.patch.setVarValue(name, v);
+
+            if (this._typeId == Port.TYPE_VALUE && typeof (v) == "string") v = parseFloat(v);
+
+            this._op.patch.setVarValue(name, v, this._type);
             this._var = this._op.patch.getVar(name);
         }
 
@@ -189,6 +193,8 @@ export class VarGetOpWrapper
         this._op = op;
         this._type = type;
         this._varnamePort = varnamePort;
+
+        /** @type {PatchVariable} */
         this._variable = null;
         this._valueOutPort = valueOutPort;
         this._listenerId = null;
@@ -267,6 +273,13 @@ export class VarGetOpWrapper
 
     _setValueOut(v)
     {
+
+        // if (this._typeId == Port.TYPE_VALUE && typeof (v) == "string")
+        // {
+        //     console.warn("num var input is not number!");
+        //     v = parseFloat(v);
+        // }
+
         if (this._valueOutPort)
             if (this._typeId == Port.TYPE_NUMBER || this._typeId == Port.TYPE_STRING)
                 this._valueOutPort.set(v);

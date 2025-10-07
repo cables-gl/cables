@@ -105,7 +105,7 @@ export class Port extends Events
         this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
-        /** @type {Op|UiOp} */
+        /** @type {Op} */
         this._op = ___op;
 
         /** @type {Array<Link>} */
