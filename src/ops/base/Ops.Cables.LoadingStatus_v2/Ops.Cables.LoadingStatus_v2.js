@@ -7,7 +7,6 @@ const
     outProgress = op.outNumber("Progress"),
     outList = op.outArray("Jobs"),
     loadingFinished = op.outTrigger("Trigger Loading Finished ");
-
 op.toWorkPortsNeedToBeLinked(exe);
 const patch = op.patch;
 

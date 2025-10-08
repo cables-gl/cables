@@ -2,6 +2,7 @@ const
     inUpd = op.inTriggerButton("Update"),
     inEle = op.inObject("Element", null, "element"),
     inUnits = op.inSwitch("Pixel Units", ["CSS Pixels", "Display Pixels"], "CSS Pixels"),
+    inPos = op.inSwitch("Position", ["In Canvas", "Absolute"], "In Canvas"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outWidth = op.outNumber("Width"),
@@ -29,8 +30,17 @@ inUpd.onTriggered = () =>
         mul = op.patch.cgl.pixelDensity;
     }
 
-    outX.set(r.left * mul - rCanv.left * mul);
-    outY.set(r.top * mul - rCanv.top * mul);
+    if (inPos.get() == "In Canvas")
+    {
+        outX.set(r.left * mul - rCanv.left * mul);
+        outY.set(r.top * mul - rCanv.top * mul);
+    }
+    else
+    {
+        outX.set(r.left * mul);
+        outY.set(r.top * mul);
+    }
+
     outWidth.set(r.width * mul);
     outHeight.set(r.height * mul);
 };
