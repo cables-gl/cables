@@ -21,6 +21,15 @@
         "portsIn": [
             {
                 "type": 0,
+                "name": "slot",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
                 "name": "Start",
                 "subType": "number"
             },
