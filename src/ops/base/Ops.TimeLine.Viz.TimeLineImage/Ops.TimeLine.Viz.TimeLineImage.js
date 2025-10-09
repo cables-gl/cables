@@ -1,5 +1,6 @@
 const
     inslot = op.inInt("slot", 0),
+    inOpacity = op.inFloatSlider("Opacity", 1),
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     animPort = op.inObject("Test"),
     inStart = op.inFloat("Start", 1),
@@ -55,6 +56,7 @@ animPort.renderTimeLine = (tl) =>
     const endX = tl.tl.view.timeToPixelScreen(inEnd.get());
 
     rect.setPosition(newX, tl.animLine.posY(), -0.1);
+    rect.setOpacity(inOpacity.get());
 
     rect.setSize(endX - newX, tl.animLine.height);
 };

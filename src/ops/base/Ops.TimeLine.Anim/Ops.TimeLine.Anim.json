@@ -28,6 +28,15 @@
                     "Offset"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clip",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Clip Name"
             }
         ],
         "portsOut": [

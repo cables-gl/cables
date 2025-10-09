@@ -2,6 +2,8 @@ const
     loopstr = ["Off", "Repeat", "Mirror", "Offset"],
     animVal = op.inValue("Value"),
     inloop = op.inSwitch("loop", loopstr),
+    inClip = op.inBool("Clip", false),
+    inClipName = op.inString("Clip Name", ""),
     outAnim = op.outObject("Anim", null, "anim"),
     outLengthLoop = op.outNumber("Loop Length"),
     outLength = op.outNumber("Length");
@@ -9,10 +11,18 @@ const
 animVal.setAnimated(true);
 animVal.onChange = update;
 
+inClip.onChange = updateUi;
+updateUi();
+
 inloop.onChange = () =>
 {
     animVal.anim.setLoop(loopstr.indexOf(inloop.get()));
 };
+
+function updateUi()
+{
+    inClipName.setUiAttribs({ "greyout": !inClip.get() });
+}
 
 function update()
 {
