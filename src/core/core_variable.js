@@ -29,7 +29,7 @@ export class PatchVariable extends Events
     }
 
     /**
-     * @returns {String|Number|Boolean}
+     * @returns {String|Number|Boolean|Object}
      */
     getValue()
     {

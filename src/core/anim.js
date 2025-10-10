@@ -565,6 +565,13 @@ export class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
+        if (key1.clip)
+        {
+            // console.log("clippppppp", key1.clip);
+            if (key1.clip.getValue)
+                return key1.clip.getValue(time);
+        }
+
         return key1.ease(perc, key2) + valAdd;
     }
 
