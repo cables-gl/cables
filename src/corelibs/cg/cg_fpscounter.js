@@ -3,51 +3,52 @@ import { now } from "cables";
 
 export class FpsCounter extends Events
 {
+    #timeStartFrame = 0;
+    #timeStartSecond = 0;
+    #fpsCounter = 0;
+    #msCounter = 0;
+    #frameCount = 0;
+    logFps = false;
+
     constructor()
     {
         super();
-        this._timeStartFrame = 0;
-        this._timeStartSecond = 0;
-        this._fpsCounter = 0;
-        this._msCounter = 0;
-        this._frameCount = 0;
-        this.logFps = false;
 
         this.stats = { "ms": 0, "fps": 0 };
     }
 
     get frameCount()
     {
-        return this._frameCount;
+        return this.#frameCount;
     }
 
     startFrame()
     {
-        this._timeStartFrame = now();
+        this.#timeStartFrame = now();
     }
 
     endFrame()
     {
-        this._frameCount++;
-        this._fpsCounter++;
+        this.#frameCount++;
+        this.#fpsCounter++;
 
-        const timeFrame = now() - this._timeStartFrame;
-        this._msCounter += timeFrame;
+        const timeFrame = now() - this.#timeStartFrame;
+        this.#msCounter += timeFrame;
 
-        if (now() - this._timeStartSecond > 1000) this.endSecond();
+        if (now() - this.#timeStartSecond > 1000) this.endSecond();
     }
 
     endSecond()
     {
-        this.stats.fps = this._fpsCounter;
-        this.stats.ms = Math.round(this._msCounter / this._fpsCounter * 100) / 100;
+        this.stats.fps = this.#fpsCounter;
+        this.stats.ms = Math.round(this.#msCounter / this.#fpsCounter * 100) / 100;
 
         this.emitEvent("performance", this.stats);
         if (this.logFps)console.log(this.stats);
 
         // reset
-        this._fpsCounter = 0;
-        this._msCounter = 0;
-        this._timeStartSecond = now();
+        this.#fpsCounter = 0;
+        this.#msCounter = 0;
+        this.#timeStartSecond = now();
     }
 }
