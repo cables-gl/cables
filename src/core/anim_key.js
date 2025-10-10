@@ -36,9 +36,11 @@ export class AnimKey
 
     /**
      * @param {Anim} a
+     * @param {any} clipId
      */
-    setClip(a)
+    setClip(clipId, a)
     {
+        this.clipId = clipId;
         this.clip = a;
         if (this.anim) this.anim.emitEvent(Anim.EVENT_CHANGE);
     }
