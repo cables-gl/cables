@@ -82,6 +82,11 @@ export class AnimKey
         let changed = false;
         if (this._easing != e)changed = true;
         this._easing = e;
+        if (this._easing != Anim.EASING_CLIP)
+        {
+            this.clipId = "";
+            this.clip = null;
+        }
 
         if (this._easing == Anim.EASING_LINEAR) this.ease = this.easeLinear;
         else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = this.easeAbsolute;
@@ -110,6 +115,7 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
         else if (this._easing == Anim.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
+        else if (this._easing == Anim.EASING_CLIP) this.ease = this.easeAbsolute;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
             if (this.ease != this.easeCubicSpline)

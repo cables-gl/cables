@@ -14,6 +14,11 @@ animVal.onChange = update;
 inClip.onChange = updateUi;
 updateUi();
 
+inClipName.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": "#" + inClipName.get() });
+};
+
 inloop.onChange = () =>
 {
     animVal.anim.setLoop(loopstr.indexOf(inloop.get()));
