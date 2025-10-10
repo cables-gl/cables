@@ -149,7 +149,6 @@ export class Anim extends Events
      */
     hasStarted(time)
     {
-
         if (this._needsSort) this.sortKeys();
         if (this.keys.length === 0) return false;
         if (time >= this.keys[0].time) return true;

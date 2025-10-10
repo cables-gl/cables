@@ -19,6 +19,10 @@ export class AnimKey
     temp = {};
     uiAttribs = {};
 
+    /** @type {Anim} */
+    clip = null;
+    clipId = null;
+
     /**
      * @param {SerializedKey} obj
      * @param {Anim} [an]
@@ -26,9 +30,17 @@ export class AnimKey
     constructor(obj, an)
     {
         this.anim = obj.anim || an || null;
-
         this.setEasing(Anim.EASING_LINEAR);
         this.set(obj);
+    }
+
+    /**
+     * @param {Anim} a
+     */
+    setClip(a)
+    {
+        this.clip = a;
+        if (this.anim) this.anim.emitEvent(Anim.EVENT_CHANGE);
     }
 
     emitChange()
@@ -39,7 +51,6 @@ export class AnimKey
         this.anim.forceChangeCallbackSoon();
         for (let i = 0; i < this.anim.keys.length; i++)
             this.anim.keys[i].bezAn = null;
-
     }
 
     delete()
@@ -192,6 +203,7 @@ export class AnimKey
             else if (obj.hasOwnProperty("value")) this.value = obj.value;
 
             if (obj.hasOwnProperty("uiAttribs")) this.setUiAttribs(obj.uiAttribs);
+            if (obj.clipId) this.clip = this.clipId = obj.clipId;
         }
         this.emitChange();
     }
@@ -206,6 +218,7 @@ export class AnimKey
         obj.v = this.value;
         obj.e = this._easing;
         obj.uiAttribs = this.uiAttribs;
+        if (this.clipId)obj.clipId = this.clipId;
 
         if (this._easing === Anim.EASING_CUBICSPLINE)
         {
