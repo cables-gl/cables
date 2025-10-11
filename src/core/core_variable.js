@@ -2,6 +2,7 @@ import { Events } from "cables-shared-client";
 
 export class PatchVariable extends Events
 {
+    #name;
 
     /**
      * @param {String} name
@@ -11,7 +12,7 @@ export class PatchVariable extends Events
     constructor(name, val, type)
     {
         super();
-        this._name = name;
+        this.#name = name;
         this.type = type;
         this.setValue(val);
     }
@@ -28,34 +29,29 @@ export class PatchVariable extends Events
     }
 
     /**
-     * @function Variable.getValue
-     * @memberof PatchVariable
-     * @returns {String|Number|Boolean}
+     * @returns {String|Number|Boolean|Object}
      */
     getValue()
     {
         return this._v;
     }
 
-    /**
-     * @function getName
-     * @memberof PatchVariable
-     * @instance
-     * @returns {String|Number|Boolean}
-     * @function
-     */
-    getName()
+    get name()
     {
-        return this._name;
+        return this.#name;
     }
 
     /**
-     * @function setValue
-     * @memberof PatchVariable
-     * @instance
-     * @param v
+     * @returns {String|Number|Boolean}
+     */
+    getName()
+    {
+        return this.#name;
+    }
+
+    /**
+     * @param {string | number} v
      * @returns {any}
-     * @function
      */
     setValue(v)
     {

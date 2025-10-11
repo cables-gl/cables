@@ -63,7 +63,9 @@ export class Anim extends Events
     static EASING_QUINT_OUT = 26;
     static EASING_QUINT_INOUT = 27;
 
-    static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
+    static EASING_CLIP = 28;
+
+    static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out", "Clip"];
 
     #tlActive = true;
     uiAttribs = {};
@@ -564,6 +566,12 @@ export class Anim extends Events
         if (!key2) return -1;
 
         const perc = (time - key1.time) / (key2.time - key1.time);
+
+        if (key1.clip)
+        {
+            if (key1.clip.getValue)
+                return key1.clip.getValue(time);
+        }
 
         return key1.ease(perc, key2) + valAdd;
     }
