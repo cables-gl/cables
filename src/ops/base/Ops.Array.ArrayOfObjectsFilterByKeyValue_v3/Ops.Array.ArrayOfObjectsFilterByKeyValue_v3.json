@@ -1,0 +1,92 @@
+{
+    "id": "494f0778-189a-4501-ae2e-b36e129e543e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1586863769593,
+            "type": "new"
+        },
+        {
+            "message": "filter array even with empty or null seachvalue, do no longer return full array",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1737648685810
+        },
+        {
+            "message": "Select filter methods: object key valuu string has to equal, startsWith, endsWith or include the filter string",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1760338567594
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1760337378502,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "Filter Key"
+            },
+            {
+                "type": 5,
+                "name": "Filter Value"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "equals",
+                    "startsWith",
+                    "endsWith",
+                    "includes"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert Filter",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "arrayOut"
+            }
+        ]
+    },
+    "summary": "Filter key-value pairs in objects in an array of objects",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array input"
+            },
+            {
+                "name": "Filter Key",
+                "text": "key to use"
+            },
+            {
+                "name": "Filter Value",
+                "text": "value to use"
+            },
+            {
+                "name": "Invert Filter",
+                "text": "invert result (discard all objects that have key-value pair)"
+            },
+            {
+                "name": "arrayOut",
+                "text": "output array"
+            }
+        ]
+    },
+    "exampleProjectId": "HFRsU5",
+    "license": "MIT"
+}
