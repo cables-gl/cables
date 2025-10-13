@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1586863769593
+            "date": 1586863769593,
+            "type": "new"
         },
         {
             "message": "filter array even with empty or null seachvalue, do no longer return full array",

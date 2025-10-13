@@ -37,6 +37,1566 @@
                 "name": "Use As Material",
                 "group": "Options",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "iResolution X",
+                "group": "iResolution",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iResolution Y",
+                "group": "iResolution",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iTime",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSunX",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSkyCompression",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSkyStartY",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSkyRoughness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSkyNoisiness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainDiameter",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainOffset X",
+                "group": "iMountainOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainOffset Y",
+                "group": "iMountainOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainBaseRoughness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainFineRoughness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainIlluminationRoughness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainFineAmount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iAmbientRadiance",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPBRRadiance",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFineNoiseShape",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainCmapOffset",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMountainFineDiameter",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFarMountainSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFarMountainDiameter",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFarMountainY",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFarMountainRoughness",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSampleCount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iVignette",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iReinhardExposure",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iGrain",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneOffset X",
+                "group": "iPlaneOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneOffset Y",
+                "group": "iPlaneOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneOffset Z",
+                "group": "iPlaneOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneRotation X",
+                "group": "iPlaneRotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneRotation Y",
+                "group": "iPlaneRotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneRotation Z",
+                "group": "iPlaneRotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper6",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpper7",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpperSize1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpperSize2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpperSize3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iUpperSize4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFlugzeugOffset X",
+                "group": "iFlugzeugOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFlugzeugOffset Y",
+                "group": "iFlugzeugOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLowerSize1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLowerSize2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLowerSize3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLowerSize4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower6",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLower7",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSide5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth6",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepth7",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepthSize0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepthSize1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepthSize2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iDepthSize3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper6",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpper7",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpperSize0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpperSize1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpperSize2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingUpperSize3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower4",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower5",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower6",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLower7",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLowerSize0",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLowerSize1",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLowerSize2",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingLowerSize3",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingOffset X",
+                "group": "iMainWingOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMainWingOffset Y",
+                "group": "iMainWingOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iWingRotation",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iArschWingOffset X",
+                "group": "iArschWingOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iArschWingOffset Y",
+                "group": "iArschWingOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iArschWingPolySize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iArschPolyQuetschung",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkLeft X",
+                "group": "iLeitwerkLeft",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkLeft Y",
+                "group": "iLeitwerkLeft",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkCenter X",
+                "group": "iLeitwerkCenter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkCenter Y",
+                "group": "iLeitwerkCenter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkRight X",
+                "group": "iLeitwerkRight",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkRight Y",
+                "group": "iLeitwerkRight",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkLeftSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkRightSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkBlendAmount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkAbschneidGrenze",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iLeitwerkAbschnittRotation",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeCenter X",
+                "group": "iStangeCenter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeCenter Y",
+                "group": "iStangeCenter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeCenter Z",
+                "group": "iStangeCenter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeForward X",
+                "group": "iStangeForward",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeForward Y",
+                "group": "iStangeForward",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangeForward Z",
+                "group": "iStangeForward",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iStangenSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootPosition X",
+                "group": "iCenterFootPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootPosition Y",
+                "group": "iCenterFootPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootPosition Z",
+                "group": "iCenterFootPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootOrigin X",
+                "group": "iCenterFootOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootOrigin Y",
+                "group": "iCenterFootOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCenterFootOrigin Z",
+                "group": "iCenterFootOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFootStangenSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFootCapRadius",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFootCapQuetschung",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFootRadius",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardPosition X",
+                "group": "iSideFootForwardPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardPosition Y",
+                "group": "iSideFootForwardPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardPosition Z",
+                "group": "iSideFootForwardPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iReifenBreite",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFootCapVerticalOffset",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardOrigin X",
+                "group": "iSideFootForwardOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardOrigin Y",
+                "group": "iSideFootForwardOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSideFootForwardOrigin Z",
+                "group": "iSideFootForwardOrigin",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iTextOffset X",
+                "group": "iTextOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iTextOffset Y",
+                "group": "iTextOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iTextScale",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iProllstreifenScale",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iProllstreifenRotation",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iProllstreifenOffset X",
+                "group": "iProllstreifenOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iProllstreifenOffset Y",
+                "group": "iProllstreifenOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iWingTextOffset X",
+                "group": "iWingTextOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iWingTextOffset Y",
+                "group": "iWingTextOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iWingTextScale",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPlaneRadianceFactor",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSkewAmount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox1Offset X",
+                "group": "iFBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox1Offset Y",
+                "group": "iFBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox1Size X",
+                "group": "iFBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox1Size Y",
+                "group": "iFBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox2Offset X",
+                "group": "iFBox2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox2Offset Y",
+                "group": "iFBox2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox2Size X",
+                "group": "iFBox2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox2Size Y",
+                "group": "iFBox2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox3Offset X",
+                "group": "iFBox3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox3Offset Y",
+                "group": "iFBox3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox3Size X",
+                "group": "iFBox3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iFBox3Size Y",
+                "group": "iFBox3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox1Offset X",
+                "group": "iRBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox1Offset Y",
+                "group": "iRBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox1Size X",
+                "group": "iRBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox1Size Y",
+                "group": "iRBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iInverseRSkewAmount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox2Offset X",
+                "group": "iRBox2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox2Offset Y",
+                "group": "iRBox2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox2Size X",
+                "group": "iRBox2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox2Size Y",
+                "group": "iRBox2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircleSegment1 X",
+                "group": "iCircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircleSegment1 Y",
+                "group": "iCircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircleSegment1 Z",
+                "group": "iCircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircle1Offset X",
+                "group": "iCircle1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircle1Offset Y",
+                "group": "iCircle1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iCircleSegment1Width",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox3Offset X",
+                "group": "iRBox3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox3Offset Y",
+                "group": "iRBox3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox3Size X",
+                "group": "iRBox3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox3Size Y",
+                "group": "iRBox3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox4Offset X",
+                "group": "iRBox4Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox4Offset Y",
+                "group": "iRBox4Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox4Size X",
+                "group": "iRBox4Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRBox4Size Y",
+                "group": "iRBox4Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMinusBox1Offset X",
+                "group": "iMinusBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMinusBox1Offset Y",
+                "group": "iMinusBox1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMinusBox1Size X",
+                "group": "iMinusBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMinusBox1Size Y",
+                "group": "iMinusBox1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment1 X",
+                "group": "i0CircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment1 Y",
+                "group": "i0CircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment1 Z",
+                "group": "i0CircleSegment1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Circle1Offset X",
+                "group": "i0Circle1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Circle1Offset Y",
+                "group": "i0Circle1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment1Width",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment2 X",
+                "group": "i0CircleSegment2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment2 Y",
+                "group": "i0CircleSegment2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment2 Z",
+                "group": "i0CircleSegment2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Circle2Offset X",
+                "group": "i0Circle2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Circle2Offset Y",
+                "group": "i0Circle2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0CircleSegment2Width",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box1Offset X",
+                "group": "i0Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box1Offset Y",
+                "group": "i0Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box1Size X",
+                "group": "i0Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box1Size Y",
+                "group": "i0Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box2Offset X",
+                "group": "i0Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box2Offset Y",
+                "group": "i0Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box2Size X",
+                "group": "i0Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i0Box2Size Y",
+                "group": "i0Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box1Offset X",
+                "group": "i4Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box1Offset Y",
+                "group": "i4Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box1Size X",
+                "group": "i4Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box1Size Y",
+                "group": "i4Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box2Offset X",
+                "group": "i4Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box2Offset Y",
+                "group": "i4Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box2Size X",
+                "group": "i4Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box2Size Y",
+                "group": "i4Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box3Offset X",
+                "group": "i4Box3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box3Offset Y",
+                "group": "i4Box3Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box3Size X",
+                "group": "i4Box3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4Box3Size Y",
+                "group": "i4Box3Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i4SkewAmount",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box1Offset X",
+                "group": "i1Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box1Offset Y",
+                "group": "i1Box1Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box1Size X",
+                "group": "i1Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box1Size Y",
+                "group": "i1Box1Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box2Offset X",
+                "group": "i1Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box2Offset Y",
+                "group": "i1Box2Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box2Size X",
+                "group": "i1Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1Box2Size Y",
+                "group": "i1Box2Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "i1SkewAmountFickDeineMutter",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPositionLightRadius",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iGreenPositionLightOffset X",
+                "group": "iGreenPositionLightOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iGreenPositionLightOffset Y",
+                "group": "iGreenPositionLightOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRedPositionLightOffset X",
+                "group": "iRedPositionLightOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iRedPositionLightOffset Y",
+                "group": "iRedPositionLightOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPropellorPosition X",
+                "group": "iPropellorPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPropellorPosition Y",
+                "group": "iPropellorPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPropellorSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPropellorScale",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iPropellorBlend",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iScheibenEiPosition X",
+                "group": "iScheibenEiPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iScheibenEiPosition Y",
+                "group": "iScheibenEiPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iScheibenEiRadius",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iScheibenEiQuetschung",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iScheibenMittelteilSize",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSeitenruderLila",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iSeitenruderLilaRotation",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMoonPosition X",
+                "group": "iMoonPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMoonPosition Y",
+                "group": "iMoonPosition",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMoonSmallOffset X",
+                "group": "iMoonSmallOffset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "iMoonSmallOffset Y",
+                "group": "iMoonSmallOffset",
+                "subType": "number"
             }
         ],
         "portsOut": [
