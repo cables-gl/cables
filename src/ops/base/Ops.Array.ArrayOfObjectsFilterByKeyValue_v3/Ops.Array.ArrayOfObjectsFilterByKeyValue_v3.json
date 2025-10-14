@@ -1,5 +1,5 @@
 {
-    "id": "60f77ab9-b6a5-441f-89e1-03e39ab1a958",
+    "id": "494f0778-189a-4501-ae2e-b36e129e543e",
     "changelog": [
         {
             "message": "created op",
@@ -12,10 +12,16 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1737648685810
+        },
+        {
+            "message": "Select filter methods: object key valuu string has to equal, startsWith, endsWith or include the filter string",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1760338567594
         }
     ],
-    "authorName": "stephan",
-    "created": 1737648571985,
+    "authorName": "pandur",
+    "created": 1760337378502,
     "layout": {
         "portsIn": [
             {
@@ -29,6 +35,17 @@
             {
                 "type": 5,
                 "name": "Filter Value"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "equals",
+                    "startsWith",
+                    "endsWith",
+                    "includes"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,
