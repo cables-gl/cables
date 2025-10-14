@@ -30,5 +30,5 @@ function update()
 
     op.patch.emitEvent("timelineConfigChange", CABLES.timelineConfig);
 
-    outDurs.set(dur);
+    // outDurs.set(dur);
 }
