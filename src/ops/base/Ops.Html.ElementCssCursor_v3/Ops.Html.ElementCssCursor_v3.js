@@ -5,11 +5,13 @@ const
     filename = op.inUrl("file"),
     offX = op.inValueInt("Offset X"),
     offY = op.inValueInt("Offset Y"),
+    inUserSelect = op.inSwitch("User Select", ["auto", "text", "none"], "auto"),
     outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;
 
-offX.onChange = offY.onChange =
+inUserSelect.onChange =
+    offX.onChange = offY.onChange =
     type.onChange = filename.onChange =
     inEle.onChange = cursorPort.onChange =
         update;
@@ -20,6 +22,7 @@ function remove()
 {
     if (!ele) return;
     ele.style.removeProperty("cursor");
+    ele.style.removeProperty("user-select");
 }
 
 function update()
@@ -27,11 +30,13 @@ function update()
     remove();
     ele = inEle.get();
 
+    if (!ele) return;
+
     cursorPort.setUiAttribs({ "greyout": type.get() != "Predefined" });
     filename.setUiAttribs({ "greyout": type.get() == "Predefined" });
     offX.setUiAttribs({ "greyout": type.get() == "Predefined" });
     offY.setUiAttribs({ "greyout": type.get() == "Predefined" });
-
+    ele.style.userSelect = inUserSelect.get();
     if (ele && ele.style)
     {
         if (type.get() == "Predefined") ele.style.cursor = cursorPort.get();
