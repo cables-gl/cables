@@ -1,4 +1,5 @@
 import { CONSTANTS } from "./constants.js";
+import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
 const MIN_NUM_PORTS = 2;
@@ -103,6 +104,7 @@ export class MultiPort extends Port
 
         this.countPorts = () =>
         {
+            const gui = Patch.getGui();
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
                 clearTimeout(this.retryTo);
@@ -220,7 +222,7 @@ export class MultiPort extends Port
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
+                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(); });
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", () =>
@@ -244,6 +246,8 @@ export class MultiPort extends Port
 
         this.newPort = () =>
         {
+
+            /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             attrs.type = type;

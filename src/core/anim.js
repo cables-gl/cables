@@ -372,8 +372,9 @@ export class Anim extends Events
     /**
      * @param {object} obj
      * @param {boolean} [clear]
+     * @param {object} [missingClipAnims]
      */
-    deserialize(obj, clear)
+    deserialize(obj, clear, missingClipAnims)
     {
         if (obj.loop) this.loop = obj.loop;
         if (obj.tlActive) this.#tlActive = obj.tlActive;
@@ -381,8 +382,16 @@ export class Anim extends Events
         if (clear) this.keys.length = 0;
 
         for (const ani in obj.keys)
-            this.keys.push(new AnimKey(obj.keys[ani], this));
-
+        {
+            let newKey = new AnimKey(obj.keys[ani], this);
+            this.keys.push(newKey);
+            if (missingClipAnims)
+                if (obj.keys[ani].clipId)
+                {
+                    missingClipAnims[obj.keys[ani].clipId] = missingClipAnims[obj.keys[ani].clipId] || [];
+                    if (missingClipAnims)missingClipAnims[obj.keys[ani].clipId].push(newKey);
+                }
+        }
         this.sortKeys();
     }
 
@@ -567,10 +576,12 @@ export class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
-        if (key1.clip)
+        if (key1.getEasing() == Anim.EASING_CLIP)
         {
-            if (key1.clip.getValue)
+            if (key1.clip && key1.clip.getValue)
                 return key1.clip.getValue(time);
+            else
+                console.log("no clip found");
         }
 
         return key1.ease(perc, key2) + valAdd;
@@ -702,6 +713,26 @@ export class Anim extends Events
     hasKeyframesBetween(t, t2)
     {
         return this.getKeyIndex(t) != this.getKeyIndex(t2);
+    }
+
+    /**
+     * @param {Patch} patch
+     */
+    static initClipsFromVars(patch)
+    {
+        for (const i in patch.missingClipAnims)
+        {
+
+            const v = patch.getVar(i);
+
+            for (let j = 0; j < patch.missingClipAnims[i].length; j++)
+            {
+                patch.missingClipAnims[i].clip = v.getValue();
+                delete patch.missingClipAnims[i];
+            }
+
+        }
+
     }
 }
 

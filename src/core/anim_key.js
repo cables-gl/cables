@@ -211,7 +211,7 @@ export class AnimKey
             else if (obj.hasOwnProperty("value")) this.value = obj.value;
 
             if (obj.hasOwnProperty("uiAttribs")) this.setUiAttribs(obj.uiAttribs);
-            if (obj.clipId) this.clip = this.clipId = obj.clipId;
+            if (obj.clipId) this.clipId = obj.clipId;
         }
         this.emitChange();
     }

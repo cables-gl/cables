@@ -43,4 +43,5 @@ function update()
         outLengthLoop.set(0);
         outLength.set(0);
     }
+    CABLES.Anim.initClipsFromVars(op.patch);
 }
