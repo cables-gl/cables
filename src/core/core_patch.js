@@ -1240,7 +1240,6 @@ export class Patch extends Events
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
         this.#initialDeserialize = false;
-        console.log("slippppppppppp", this.missingClipAnims);
     }
 
     profile(enable)

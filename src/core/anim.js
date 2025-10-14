@@ -712,7 +712,10 @@ export class Anim extends Events
      */
     hasKeyframesBetween(t, t2)
     {
-        return this.getKeyIndex(t) != this.getKeyIndex(t2);
+        for (let i = 0; i < this.keys.length; i++)
+            if (this.keys[i].time >= t && this.keys[i].time <= t2) return true;
+
+        return false;
     }
 
     /**
@@ -735,5 +738,3 @@ export class Anim extends Events
 
     }
 }
-
-// ------------------------------

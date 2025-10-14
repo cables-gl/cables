@@ -23,7 +23,7 @@ function update()
     // if (inDurUnit.get() == "Frames") dur /= inFps.get();
 
     // CABLES.timelineConfig.duration = dur;
-    // CABLES.timelineConfig.fps = inFps.get();
+    CABLES.timelineConfig.fps = inFps.get();
 
     CABLES.timelineConfig.fadeInFrames = inFrames.get();
     CABLES.timelineConfig.restrictToFrames = inRestrictToFrames.get();
