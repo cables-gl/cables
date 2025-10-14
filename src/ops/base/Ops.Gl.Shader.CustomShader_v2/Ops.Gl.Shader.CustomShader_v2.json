@@ -57,7 +57,6 @@
         ]
     },
     "summary": "Write your own custom shader",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -90,6 +89,5 @@
         "Zfhn8xSM0SE"
     ],
     "exampleProjectId": "vWyGud",
-    "coreLibs": [],
     "license": "MIT"
 }
