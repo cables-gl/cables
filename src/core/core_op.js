@@ -392,14 +392,23 @@ export class Op extends Events
     }
 
     /**
-     * @param {any|Port | MultiPort} p
+     * @param {any | Port | MultiPort} p
+     * @param {Port} [afterPort] insert the port after given port
      */
-    addInPort(p)
+    addInPort(p, afterPort)
     {
         p.direction = Port.DIR_IN;
         p._op = this;
 
-        this.portsIn.push(p);
+        if (!afterPort)
+        {
+            this.portsIn.push(p);
+        }
+        else
+        {
+            const idx = this.portsIn.indexOf(afterPort);
+            this.portsIn.splice(idx + 1, 0, p);
+        }
         this.emitEvent("onPortAdd", p);
 
         return p;

@@ -254,10 +254,10 @@ export class MultiPort extends Port
             const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
-            this.ports.push(po);
-            // console.log("CONSTANTS.PORT_DIR_OUT", CONSTANTS.PORT.PORT_DIR_OUT, this.direction);
+
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
-            else this.op.addInPort(po);
+            else this.op.addInPort(po, this.ports[this.ports.length - 1]);
+            this.ports.push(po);
 
             if (type == Port.TYPE_NUMBER) po.setInitialValue(0);
             else if (type == Port.TYPE_STRING) po.setInitialValue("");
