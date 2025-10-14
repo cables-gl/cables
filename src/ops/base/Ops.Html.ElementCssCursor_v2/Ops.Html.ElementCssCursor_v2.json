@@ -16,6 +16,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1711475170563
+        },
+        {
+            "message": "Html.Cursor_v2 renamed to Ops.Html.ElementCssCursor_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1760443999400
         }
     ],
     "authorName": "pandur",

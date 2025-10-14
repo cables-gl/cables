@@ -21,7 +21,8 @@
                 "type": 5,
                 "name": "Class Name"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Create a CSS class for styling other elements",
     "docs": {
