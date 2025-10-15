@@ -1,8 +1,8 @@
 const
     inAnim = op.inObject("Anim"),
     inTime = op.inFloat("Time", 0),
-    outValue = op.outNumber("Index"),
-    outIndex = op.outNumber("Key Value"),
+    outIndex = op.outNumber("Index"),
+    outValue = op.outNumber("Key Value"),
     outTime = op.outNumber("Key Time");
 
 inTime.onChange =
