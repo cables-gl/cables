@@ -24,7 +24,6 @@ animPort.renderTimeLine = (tl) =>
     for (let i = rects.length; i < numbeats; i++)
     {
         rects[i] = tl.rectInstancer.createRect();
-        console.log("create");
     }
 
     const off = inOffset.get();
@@ -38,7 +37,6 @@ animPort.renderTimeLine = (tl) =>
         rects[i].setSize(tl.tl.view.timeToPixel(beatDuration) - 1, tl.animLine.drawAreaHeight);
         rects[i].setPosition(tl.tl.view.timeToPixelScreen(t), tl.animLine.posY(), -0.1);
     }
-    console.log("animlinenheight", tl.animLine.height);
 };
 
 function disposeRects()

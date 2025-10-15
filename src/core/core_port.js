@@ -478,9 +478,9 @@ export class Port extends Events
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this.#op.hasAnimPort = true;
+            this.anim.port = this;
 
-            if (objPort.clipId)
-                console.log("clipiddddd", objPort.clipId);
+            console.log("clipiddddd", objPort.clipId);
             // this.anim.on(Anim.EVENT_CHANGE, () =>
             // {
             //     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
