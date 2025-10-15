@@ -200,9 +200,6 @@ class ShaderGraphOp
 
     /**
  * add a define to a shader, e.g.  #define DO_THIS_THAT 1
- * @function define
- * @memberof Shader
- * @instance
  * @param {String} name
  * @param {Any} value (can be empty)
  */
@@ -253,13 +250,10 @@ class ShaderGraphOp
     }
 
     /**
-  * return true if shader has define
-  * @function hasDefine
-  * @memberof Shader
-  * @instance
-  * @param {String} name
-  * @return {Boolean}
-  */
+      * return true if shader has define
+      * @param {String} name
+      * @return {Boolean}
+      */
     hasDefine(name)
     {
         for (let i = 0; i < this._defines.length; i++)
@@ -267,12 +261,9 @@ class ShaderGraphOp
     }
 
     /**
-  * remove a define from a shader
-  * @param {name} name
-  * @function removeDefine
-  * @memberof Shader
-  * @instance
-  */
+      * remove a define from a shader
+      * @param {name} name
+      */
     removeDefine(name)
     {
         for (let i = 0; i < this._defines.length; i++)

@@ -1,3 +1,4 @@
+import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
 export class SwitchPort extends Port
@@ -48,22 +49,23 @@ export class SwitchPort extends Port
             this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if (this.op.patch.isEditorMode() && performance.now() - (this.lastTime || 0) > 100 && window.gui && gui.patchView.isCurrentOp(this.op))
+            if (this.op.patch.isEditorMode() && performance.now() - (this.lastTime || 0) > 100 && Patch.getGui() && Patch.getGui().patchView.isCurrentOp(this.op))
             {
-                gui.opParams.show(this.op);
+                Patch.getGui().opParams.show(this.op);
                 this.lastTime = performance.now();
             }
         };
     }
 
+    /**
+     * @param {import("./core_port.js").PortUiAttribs} attribs
+     */
     setUiAttribs(attribs)
     {
         const hidePort = attribs.hidePort;
         attribs.hidePort = true;
         super.setUiAttribs(attribs);
         if (typeof hidePort !== "undefined")
-        {
             this.indexPort.setUiAttribs({ hidePort });
-        }
     }
 }

@@ -16,6 +16,8 @@ head.appendChild(styleEle);
 inClassName.onChange =
     inStr.onChange = () =>
     {
+        op.setUiAttrib({ "extendTitle": inClassName.get() });
+
         const content = inStr.get() || "";
         styleEle.textContent = "." + inClassName.get() + " {\n" + content + "\n}\n";
     };

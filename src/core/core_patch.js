@@ -1,5 +1,6 @@
-import { Events, Logger } from "cables-shared-client";
+// import { Events, Logger } from "cables-shared-client";
 import { CGL } from "cables-corelibs";
+import { Events, Logger } from "cables-shared-client";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
@@ -42,6 +43,8 @@ import { Timer } from "./timer.js";
  * @property {Number} [masterVolume] 0 for maximum possible frames per second
  * @property {HTMLCanvasElement} [glCanvas]
  * @property {HTMLElement} [containerElement]
+ * @property {boolean} [editorMode]
+ * @property {Object} [variables] object of key value pairs, that initialize variables
 */
 
 /**
@@ -90,6 +93,7 @@ export class Patch extends Events
     ops = [];
     settings = {};
     animMaxTime = 0;
+    missingClipAnims = {};
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
@@ -219,7 +223,12 @@ export class Patch extends Events
 
         console.log("made with https://cables.gl"); // eslint-disable-line
         this.cg = undefined;
+    }
 
+    static getGui()
+    {
+        // @ts-ignore
+        return window.gui;
     }
 
     isPlaying()
@@ -238,9 +247,6 @@ export class Patch extends Events
 
     /**
      * returns true if patch is opened in editor/gui mode
-     * @function isEditorMode
-     * @memberof Patch
-     * @instance
      * @return {Boolean} editor mode
      */
     isEditorMode()
@@ -250,9 +256,6 @@ export class Patch extends Events
 
     /**
      * pauses patch execution
-     * @function pause
-     * @memberof Patch
-     * @instance
      */
     pause()
     {
@@ -265,9 +268,6 @@ export class Patch extends Events
 
     /**
      * resumes patch execution
-     * @function resume
-     * @memberof Patch
-     * @instance
      */
     resume()
     {
@@ -283,10 +283,7 @@ export class Patch extends Events
 
     /**
      * set volume [0-1]
-     * @function setVolume
      * @param {Number} v volume
-     * @memberof Patch
-     * @instance
      */
     setVolume(v)
     {
@@ -296,10 +293,7 @@ export class Patch extends Events
 
     /**
      * get asset path
-     * @function getAssetPath
-     * @memberof Patch
-     * @param patchId
-     * @instance
+     * @returns {string}
      */
     getAssetPath(patchId = null)
     {
@@ -309,7 +303,7 @@ export class Patch extends Events
         }
         else if (this.isEditorMode())
         {
-            let id = patchId || gui.project()._id;
+            let id = patchId || Patch.getGui().project()._id;
             return "/assets/" + id + "/";
         }
         else if (document.location.href.indexOf("cables.gl") > 0 || document.location.href.indexOf("cables.local") > 0)
@@ -326,9 +320,7 @@ export class Patch extends Events
 
     /**
      * get js path
-     * @function getJsPath
-     * @memberof Patch
-     * @instance
+     * @returns {string}
      */
     getJsPath()
     {
@@ -345,9 +337,6 @@ export class Patch extends Events
     /**
      * get url/filepath for a filename
      * this uses prefixAssetpath in exported patches
-     * @function getFilePath
-     * @memberof Patch
-     * @instance
      * @param {String} filename
      * @return {String} url
      */
@@ -479,7 +468,7 @@ export class Patch extends Events
             }
             else
             {
-                if (this.#initialDeserialize) gui.patchView.store.opCrashed = true;
+                if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
             }
         }
 
@@ -497,9 +486,6 @@ export class Patch extends Events
 
     /**
      * create a new op in patch
-     * @function addOp
-     * @memberof Patch
-     * @instance
      * @param {string} opIdentifier uuid or name, e.g. Ops.Math.Sum
      * @param {OpUiAttribs} uiAttribs Attributes
      * @param {string} [id]
@@ -550,6 +536,9 @@ export class Patch extends Events
         return op;
     }
 
+    /**
+     * @param {Op} op
+     */
     addOnAnimFrame(op)
     {
         for (let i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { return; }
@@ -557,6 +546,9 @@ export class Patch extends Events
         this.animFrameOps.push(op);
     }
 
+    /**
+     * @param {Op} op
+     */
     removeOnAnimFrame(op)
     {
         for (let i = 0; i < this.animFrameOps.length; i++)
@@ -569,11 +561,17 @@ export class Patch extends Events
         }
     }
 
+    /**
+     * @param {function} cb
+     */
     addOnAnimFrameCallback(cb)
     {
         this.animFrameCallbacks.push(cb);
     }
 
+    /**
+     * @param {function} cb
+     */
     removeOnAnimCallback(cb)
     {
         for (let i = 0; i < this.animFrameCallbacks.length; i++)
@@ -621,6 +619,11 @@ export class Patch extends Events
         }
     }
 
+    /**
+     * @param {string} opid
+     * @param {boolean} [tryRelink]
+     * @param {boolean} [reloadingOp]
+     */
     deleteOp(opid, tryRelink, reloadingOp)
     {
         let found = false;
@@ -782,9 +785,6 @@ export class Patch extends Events
 
     /**
      * link two ops/ports
-     * @function link
-     * @memberof Patch
-     * @instance
      * @param {Op} op1
      * @param {String} port1Name
      * @param {Op} op2
@@ -840,11 +840,11 @@ export class Patch extends Events
 
     getOpsByRefId(refId) // needed for instancing ops ?
     {
-        const perf = gui.uiProfiler.start("[corepatchetend] getOpsByRefId");
+        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
-        const ops = gui.corePatch().ops;
-        for (let i = 0; i < ops.length; i++)
-            if (ops[i].storage && ops[i].storage.ref == refId) refOps.push(ops[i]);
+        // const ops = gui.corePatch().ops;
+        for (let i = 0; i < this.ops.length; i++)
+            if (this.ops[i].storage && this.ops[i].storage.ref == refId) refOps.push(this.ops[i]);
         perf.finish();
         return refOps;
     }
@@ -1256,7 +1256,6 @@ export class Patch extends Events
      * set variable value
      * @function setVariable
      * @memberof Patch
-     * @instance
      * @param {String} name of variable
      * @param {Number|String|Boolean} val value
      */
@@ -1288,9 +1287,6 @@ export class Patch extends Events
 
     /**
      * has variable
-     * @function hasVariable
-     * @memberof Patch
-     * @instance
      * @param {String} name of variable
      */
     hasVar(name)
@@ -1326,9 +1322,6 @@ export class Patch extends Events
     }
 
     /**
-     * @function getVar
-     * @memberof Patch
-     * @instance
      * @param {String} name
      * @return {PatchVariable} variable
      */
@@ -1337,6 +1330,9 @@ export class Patch extends Events
         if (this._variables.hasOwnProperty(name)) return this._variables[name];
     }
 
+    /**
+     * @param {string} name
+     */
     deleteVar(name)
     {
         for (let i = 0; i < this.ops.length; i++)
@@ -1358,7 +1354,7 @@ export class Patch extends Events
         if (t === undefined) return this._variables;
         if (t === 1) return {};
 
-        const perf = gui.uiProfiler.start("[corepatchetend] getVars");
+        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
 
         const vars = [];
         let tStr = "";
@@ -1402,11 +1398,7 @@ export class Patch extends Events
     // }
 
     /**
-     * @function preRenderOps
-     * @memberof Patch
-     * @instance
      * @description invoke pre rendering of ops
-     * @function
      */
     preRenderOps()
     {
@@ -1423,9 +1415,6 @@ export class Patch extends Events
     }
 
     /**
-     * @function dispose
-     * @memberof Patch
-     * @instance
      * @description stop, dispose and cleanup patch
      */
     dispose()
@@ -1435,6 +1424,9 @@ export class Patch extends Events
         this.cgl.dispose();
     }
 
+    /**
+     * @param {Port} p
+     */
     pushTriggerStack(p)
     {
         this._triggerStack.push(p);
@@ -1473,9 +1465,6 @@ export class Patch extends Events
 
     /**
      * returns document object of the patch could be != global document object when opening canvas ina popout window
-     * @function getDocument
-     * @memberof Patch
-     * @instance
      * @return {Object} document
      */
     getDocument()
@@ -1483,72 +1472,79 @@ export class Patch extends Events
         return this.containerElement.ownerDocument;
         // return this.cgl.canvas.ownerDocument;
     }
-}
 
-Patch.getOpClass = function (objName)
-{
-    const parts = objName.split(".");
-    let opObj = null;
+    /**
+     * @param {string} objName
+     */
+    static getOpClass(objName)
+    {
+        const parts = objName.split(".");
+        let opObj = null;
 
-    try
-    {
-        if (parts.length == 2) opObj = window[parts[0]][parts[1]];
-        else if (parts.length == 3) opObj = window[parts[0]][parts[1]][parts[2]];
-        else if (parts.length == 4) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]];
-        else if (parts.length == 5) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]];
-        else if (parts.length == 6) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]];
-        else if (parts.length == 7) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]];
-        else if (parts.length == 8) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]];
-        else if (parts.length == 9) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]];
-        else if (parts.length == 10) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]];
-        return opObj;
-    }
-    catch (e)
-    {
-        return null;
-    }
-};
-
-Patch.replaceOpIds = function (json, options)
-{
-    const opids = {};
-    for (const i in json.ops)
-    {
-        opids[json.ops[i].id] = json.ops[i];
-    }
-
-    for (const j in json.ops)
-    {
-        for (const k in json.ops[j].portsOut)
+        try
         {
-            const links = json.ops[j].portsOut[k].links;
-            if (links)
-            {
-                let l = links.length;
+            if (parts.length == 2) opObj = window[parts[0]][parts[1]];
+            else if (parts.length == 3) opObj = window[parts[0]][parts[1]][parts[2]];
+            else if (parts.length == 4) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]];
+            else if (parts.length == 5) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]];
+            else if (parts.length == 6) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]];
+            else if (parts.length == 7) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]];
+            else if (parts.length == 8) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]];
+            else if (parts.length == 9) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]];
+            else if (parts.length == 10) opObj = window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]];
+            return opObj;
+        }
+        catch (e)
+        {
+            return null;
+        }
+    }
 
-                while (l--)
+    /**
+     * @param {Object} json
+     * @param {Object} options
+     */
+    static replaceOpIds(json, options)
+    {
+        const opids = {};
+        for (const i in json.ops)
+        {
+            opids[json.ops[i].id] = json.ops[i];
+        }
+
+        for (const j in json.ops)
+        {
+            for (const k in json.ops[j].portsOut)
+            {
+                const links = json.ops[j].portsOut[k].links;
+                if (links)
                 {
-                    if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
+                    let l = links.length;
+
+                    while (l--)
                     {
-                        if (!options.doNotUnlinkLostLinks)
+                        if (links[l] && (!opids[links[l].objIn] || !opids[links[l].objOut]))
                         {
-                            links.splice(l, 1);
-                        }
-                        else
-                        {
-                            if (options.fixLostLinks)
+                            if (!options.doNotUnlinkLostLinks)
                             {
-                                const op = gui.corePatch().getOpById(links[l].objIn);
-                                if (!op) console.log("op not found!");
-                                else
+                                links.splice(l, 1);
+                            }
+                            else
+                            {
+                                if (options.fixLostLinks)
                                 {
-                                    const outerOp = gui.patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
-                                    if (outerOp)
+                                    const op = Patch.getGui().corePatch().getOpById(links[l].objIn);
+                                    if (!op) console.log("op not found!");
+                                    else
                                     {
-                                        op.storage = op.storage || {};
-                                        op.storage.ref = op.storage.ref || shortId();
-                                        links[l].refOp = op.storage.ref;
-                                        links[l].subOpRef = outerOp.storage.ref;
+                                        const outerOp = Patch.getGui().patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
+                                        if (outerOp)
+                                        {
+                                            op.storage = op.storage || {};
+                                            op.storage.ref = op.storage.ref || shortId();
+                                            links[l].refOp = op.storage.ref;
+                                            links[l].subOpRef = outerOp.storage.ref;
+                                        }
                                     }
                                 }
                             }
@@ -1557,151 +1553,135 @@ Patch.replaceOpIds = function (json, options)
                 }
             }
         }
-    }
 
-    for (const i in json.ops)
-    {
-        const op = json.ops[i];
-        const oldId = op.id;
-        let newId = shortId();
-
-        if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
-
-        else if (options.prefixId) newId = options.prefixId + oldId;
-        else if (options.refAsId) // when saving json
+        for (const i in json.ops)
         {
-            if (op.storage && op.storage.ref)
+            const op = json.ops[i];
+            const oldId = op.id;
+            let newId = shortId();
+
+            if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
+
+            else if (options.prefixId) newId = options.prefixId + oldId;
+            else if (options.refAsId) // when saving json
             {
-                newId = op.storage.ref;
-                delete op.storage.ref;
+                if (op.storage && op.storage.ref)
+                {
+                    newId = op.storage.ref;
+                    delete op.storage.ref;
+                }
+                else
+                {
+                    op.storage = op.storage || {};
+                    op.storage.ref = newId = shortId();
+                }
             }
-            else
+
+            const newID = op.id = newId;
+
+            if (options.oldIdAsRef) // when loading json
             {
                 op.storage = op.storage || {};
-                op.storage.ref = newId = shortId();
+                op.storage.ref = oldId;
+            }
+
+            for (const j in json.ops)
+            {
+                if (json.ops[j].portsIn)
+                    for (const k in json.ops[j].portsIn)
+                    {
+                        if (json.ops[j].portsIn[k].links)
+                        {
+                            let l = json.ops[j].portsIn[k].links.length;
+
+                            while (l--) if (json.ops[j].portsIn[k].links[l] === null) json.ops[j].portsIn[k].links.splice(l, 1);
+
+                            for (l in json.ops[j].portsIn[k].links)
+                            {
+                                if (json.ops[j].portsIn[k].links[l].objIn === oldId) json.ops[j].portsIn[k].links[l].objIn = newID;
+                                if (json.ops[j].portsIn[k].links[l].objOut === oldId) json.ops[j].portsIn[k].links[l].objOut = newID;
+                            }
+                        }
+                    }
+
+                if (json.ops[j].portsOut)
+                    for (const k in json.ops[j].portsOut)
+                    {
+                        if (json.ops[j].portsOut[k].links)
+                        {
+                            let l = json.ops[j].portsOut[k].links.length;
+
+                            while (l--) if (json.ops[j].portsOut[k].links[l] === null) json.ops[j].portsOut[k].links.splice(l, 1);
+
+                            for (l in json.ops[j].portsOut[k].links)
+                            {
+                                if (json.ops[j].portsOut[k].links[l].objIn === oldId) json.ops[j].portsOut[k].links[l].objIn = newID;
+                                if (json.ops[j].portsOut[k].links[l].objOut === oldId) json.ops[j].portsOut[k].links[l].objOut = newID;
+                            }
+                        }
+                    }
             }
         }
 
-        const newID = op.id = newId;
+        // set correct subpatch
+        const subpatchIds = [];
+        const fixedSubPatches = [];
 
-        if (options.oldIdAsRef) // when loading json
+        for (let i = 0; i < json.ops.length; i++)
         {
-            op.storage = op.storage || {};
-            op.storage.ref = oldId;
-        }
-
-        for (const j in json.ops)
-        {
-            if (json.ops[j].portsIn)
-                for (const k in json.ops[j].portsIn)
-                {
-                    if (json.ops[j].portsIn[k].links)
-                    {
-                        let l = json.ops[j].portsIn[k].links.length;
-
-                        while (l--) if (json.ops[j].portsIn[k].links[l] === null) json.ops[j].portsIn[k].links.splice(l, 1);
-
-                        for (l in json.ops[j].portsIn[k].links)
-                        {
-                            if (json.ops[j].portsIn[k].links[l].objIn === oldId) json.ops[j].portsIn[k].links[l].objIn = newID;
-                            if (json.ops[j].portsIn[k].links[l].objOut === oldId) json.ops[j].portsIn[k].links[l].objOut = newID;
-                        }
-                    }
-                }
-
-            if (json.ops[j].portsOut)
-                for (const k in json.ops[j].portsOut)
-                {
-                    if (json.ops[j].portsOut[k].links)
-                    {
-                        let l = json.ops[j].portsOut[k].links.length;
-
-                        while (l--) if (json.ops[j].portsOut[k].links[l] === null) json.ops[j].portsOut[k].links.splice(l, 1);
-
-                        for (l in json.ops[j].portsOut[k].links)
-                        {
-                            if (json.ops[j].portsOut[k].links[l].objIn === oldId) json.ops[j].portsOut[k].links[l].objIn = newID;
-                            if (json.ops[j].portsOut[k].links[l].objOut === oldId) json.ops[j].portsOut[k].links[l].objOut = newID;
-                        }
-                    }
-                }
-        }
-    }
-
-    // set correct subpatch
-    const subpatchIds = [];
-    const fixedSubPatches = [];
-
-    for (let i = 0; i < json.ops.length; i++)
-    {
         // if (CABLES.Op.isSubPatchOpName(json.ops[i].objName))
-        if (json.ops[i].storage && json.ops[i].storage.subPatchVer)
-        {
-            // for (const k in json.ops[i].portsInckkkkk
-            for (let k = 0; k < json.ops[i].portsIn.length; k++)
+            if (json.ops[i].storage && json.ops[i].storage.subPatchVer)
             {
-                if (json.ops[i].portsIn[k].name === "patchId")
+            // for (const k in json.ops[i].portsInckkkkk
+                for (let k = 0; k < json.ops[i].portsIn.length; k++)
                 {
-                    let newId = shortId();
-
-                    if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
-
-                    const oldSubPatchId = json.ops[i].portsIn[k].value;
-                    const newSubPatchId = json.ops[i].portsIn[k].value = newId;
-
-                    subpatchIds.push(newSubPatchId);
-
-                    for (let j = 0; j < json.ops.length; j++)
+                    if (json.ops[i].portsIn[k].name === "patchId")
                     {
-                        // op has no uiAttribs in export, we don't care about subpatches in export though
-                        if (json.ops[j].uiAttribs)
+                        let newId = shortId();
+
+                        if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
+
+                        const oldSubPatchId = json.ops[i].portsIn[k].value;
+                        const newSubPatchId = json.ops[i].portsIn[k].value = newId;
+
+                        subpatchIds.push(newSubPatchId);
+
+                        for (let j = 0; j < json.ops.length; j++)
                         {
-                            if (json.ops[j].uiAttribs.subPatch === oldSubPatchId)
+                        // op has no uiAttribs in export, we don't care about subpatches in export though
+                            if (json.ops[j].uiAttribs)
                             {
-                                json.ops[j].uiAttribs.subPatch = newSubPatchId;
-                                fixedSubPatches.push(json.ops[j].id);
+                                if (json.ops[j].uiAttribs.subPatch === oldSubPatchId)
+                                {
+                                    json.ops[j].uiAttribs.subPatch = newSubPatchId;
+                                    fixedSubPatches.push(json.ops[j].id);
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    for (const kk in json.ops)
-    {
-        let found = false;
-        for (let j = 0; j < fixedSubPatches.length; j++)
+        for (const kk in json.ops)
         {
-            if (json.ops[kk].id === fixedSubPatches[j])
+            let found = false;
+            for (let j = 0; j < fixedSubPatches.length; j++)
             {
-                found = true;
-                break;
+                if (json.ops[kk].id === fixedSubPatches[j])
+                {
+                    found = true;
+                    break;
+                }
             }
+            // op has no uiAttribs in export, we don't care about subpatches in export though
+            if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
+                json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
         }
-        // op has no uiAttribs in export, we don't care about subpatches in export though
-        if (!found && json.ops[kk].uiAttribs && options.parentSubPatchId != null)
-            json.ops[kk].uiAttribs.subPatch = options.parentSubPatchId;
+
+        return json;
     }
-
-    return json;
-};
-
-/**
- * remove an eventlistener
- * @instance
- * @function addEventListener
- * @param {String} name of event
- * @param {function} callback
- */
-
-/**
- * remove an eventlistener
- * @instance
- * @function removeEventListener
- * @param {String} name of event
- * @param {function} callback
- */
+}
 
 /**
  * op added to patch event

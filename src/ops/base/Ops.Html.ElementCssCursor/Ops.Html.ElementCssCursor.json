@@ -16,5 +16,13 @@
     "authorName": "pandur",
     "id": "409f94da-6264-435c-8e73-03e8d2275e04",
     "created": 1537174036326,
-    "exampleProjectId": "_f5W8s"
+    "exampleProjectId": "_f5W8s",
+    "changelog": [
+        {
+            "message": "Html.Cursor renamed to Ops.Html.ElementCssCursor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1760444000071
+        }
+    ]
 }
