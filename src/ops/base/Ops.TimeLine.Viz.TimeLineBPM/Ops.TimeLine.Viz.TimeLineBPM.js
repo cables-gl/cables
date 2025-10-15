@@ -3,6 +3,7 @@ const
     inBpm = op.inFloat("BPM", 80),
     inOffset = op.inFloat("Offset");
 animPort.setUiAttribs({ "hidePort": true, "tlDrawKeys": false });
+op.setUiAttribs({ "tlOrder": -100 });
 
 animPort.setAnimated(true);
 let rects = [];
@@ -34,9 +35,10 @@ animPort.renderTimeLine = (tl) =>
         if (t < 0)rects[i].setColor(0.4, 0.4, 0.4, 0);
         else if ((i + firstBeat) % 4 == 0) rects[i].setColor(0.7, 0.7, 0.7, 1);
         else rects[i].setColor(0.4, 0.4, 0.4, 1);
-        rects[i].setSize(tl.tl.view.timeToPixel(beatDuration) - 1, tl.animLine.height);
+        rects[i].setSize(tl.tl.view.timeToPixel(beatDuration) - 1, tl.animLine.drawAreaHeight);
         rects[i].setPosition(tl.tl.view.timeToPixelScreen(t), tl.animLine.posY(), -0.1);
     }
+    console.log("animlinenheight", tl.animLine.height);
 };
 
 function disposeRects()
