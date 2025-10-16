@@ -7,6 +7,7 @@ const
     inEnd = op.inFloat("End", 7);
 
 animPort.setUiAttribs({ "hidePort": true, "tlDrawKeys": false });
+op.setUiAttribs({ "tlOrder": -100 });
 
 animPort.setAnimated(true);
 animPort.anim.setUiAttribs({ "height": 2 });

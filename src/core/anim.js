@@ -3,6 +3,7 @@ import { uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
+import { Patch } from "./core_patch.js";
 
 /**
  * Keyframed interpolated animation.
@@ -74,6 +75,7 @@ export class Anim extends Events
     _timesLooped = 0;
     _needsSort = false;
     _cachedIndex = 0;
+    port = null;
 
     /** @type {AnimKey[]} */
     keys = [];
@@ -581,7 +583,19 @@ export class Anim extends Events
             if (key1.clip && key1.clip.getValue)
                 return key1.clip.getValue(time);
             else
+            {
+                if (this.port)
+                {
+
+                    /** @type {Patch} */
+                    const patch = this.port.op.patch;
+                    key1.clip = patch.getVar(key1.clipId).getValue();
+                    return key1.clip.getValue(time);
+                }
+
                 console.log("no clip found");
+
+            }
         }
 
         return key1.ease(perc, key2) + valAdd;
