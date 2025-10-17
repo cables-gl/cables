@@ -48,6 +48,7 @@ import { Patch } from "./core_patch.js";
  * @property {string} [hasArea]
  * @property {number} [resizableX]
  * @property {number} [resizableY]
+ * @property {number} [tlOrder]
  */
 
 /**
@@ -908,9 +909,7 @@ export class Op extends Events
     inInt(name, v)
     {
         // old
-        const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" })
-        );
+        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" }));
         if (v !== undefined)
         {
             p.set(v);

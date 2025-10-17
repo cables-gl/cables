@@ -581,7 +581,9 @@ export class Anim extends Events
         if (key1.getEasing() == Anim.EASING_CLIP)
         {
             if (key1.clip && key1.clip.getValue)
+            {
                 return key1.clip.getValue(time);
+            }
             else
             {
                 if (this.port)
@@ -589,8 +591,9 @@ export class Anim extends Events
 
                     /** @type {Patch} */
                     const patch = this.port.op.patch;
-                    key1.clip = patch.getVar(key1.clipId).getValue();
-                    return key1.clip.getValue(time);
+                    const clip = patch.getVar(key1.clipId)?.getValue();
+                    if (clip) key1.clip = clip;
+                    if (key1.clip) return key1.clip.getValue(time);
                 }
 
                 console.log("no clip found");
