@@ -24,6 +24,7 @@ export const BLENDS = {
  */
 export class CglContext extends CgContext
 {
+    #cursor = "auto";
 
     /**
      * @param {Patch} _patch
@@ -60,7 +61,7 @@ export class CglContext extends CgContext
         /** @type {WebGL2RenderingContext} */
         this.gl = null;
 
-        this._cursor = "auto";
+        this.#cursor = "auto";
         this._currentCursor = "";
 
         this._viewPortStack = [];
@@ -390,9 +391,9 @@ export class CglContext extends CgContext
             this.emitEvent(CgContext.EVENT_RESIZE);
         }
 
-        if (this._cursor != this._currentCursor)
+        if (this.#cursor != this._currentCursor)
         {
-            this._currentCursor = this.canvas.style.cursor = this._cursor;
+            this._currentCursor = this.canvas.style.cursor = this.#cursor;
         }
 
         this.emitEvent("endframe");
@@ -1151,7 +1152,7 @@ export class CglContext extends CgContext
 
     /**
      * @param {Geometry} geom
-     * @param {CglMeshOptions} options
+     * @param {import("./cgl_mesh.js").CglMeshOptions} options
      */
     createMesh(geom, options)
     {
@@ -1168,7 +1169,7 @@ export class CglContext extends CgContext
      */
     setCursor(str)
     {
-        this._cursor = str;
+        this.#cursor = str;
     }
 
     /**
