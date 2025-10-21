@@ -1,0 +1,48 @@
+{
+    "id": "db01eb0f-e06e-41b2-ae3a-d0b37961ffa8",
+    "created": 1760622149638,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1760622149639
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Default Output Value index",
+                "values": [
+                    "0",
+                    "Empty String",
+                    "null"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Column Names"
+            }
+        ]
+    }
+}

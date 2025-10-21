@@ -30,6 +30,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1726214283085
+        },
+        {
+            "message": "Show values in cables type colors",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1761044298851
         }
     ],
     "authorName": "pandur",

@@ -126,17 +126,31 @@ op.renderVizLayer = (ctx, layer) =>
 
             ctx.fillStyle = "#ccc";
 
+            if (v == "")
+            {
+                ctx.fillStyle = "#444444";
+                str = "•";
+            }
+            else
             if (typeof v == "string")
             {
+                ctx.fillStyle = "#d57272";
                 str = v;
             }
-            else if (CABLES.isNumeric(v)) str = String(Math.round(v * 10000) / 10000);
+            else
+            if (CABLES.isNumeric(v))
+            {
+                ctx.fillStyle = "#4adab5";
+                str = String(Math.round(v * 10000) / 10000);
+            }
             else if (Array.isArray(v))
             {
                 str = JSON.stringify(v);
             }
             else if (typeof v == "object")
             {
+                ctx.fillStyle = "#AB5A94";
+
                 try
                 {
                     str = JSON.stringify(v);
