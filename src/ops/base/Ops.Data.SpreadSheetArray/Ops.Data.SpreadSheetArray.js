@@ -7,7 +7,7 @@ const
     outHeight = op.outNumber("Height"),
     outColNames = op.outArray("Column Names");
 
-spread.setUiAttribs({ "hidePort": true });
+spread.setUiAttribs({ "hidePort": true, "editShortcut": true });
 outp.setUiAttribs({ "hidePort": true });
 
 outp.onChange =
