@@ -1,3 +1,5 @@
+// UI is based on https://github.com/pandrr/cellmate
+
 const
     spread = op.inArray("Spreadsheet"),
     outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays"], "Flat"),
