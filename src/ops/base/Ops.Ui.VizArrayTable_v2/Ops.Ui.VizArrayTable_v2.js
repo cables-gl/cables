@@ -145,6 +145,7 @@ op.renderVizLayer = (ctx, layer) =>
             }
             else if (Array.isArray(v))
             {
+                ctx.fillStyle = "#8084D4";
                 str = JSON.stringify(v);
             }
             else if (typeof v == "object")
