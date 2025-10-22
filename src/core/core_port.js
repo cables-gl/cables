@@ -4,6 +4,7 @@ import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
+import { Op } from "./core_op.js";
 
 /**
  * @typedef PortUiAttribs

@@ -5,7 +5,7 @@ export class AnimKey
 
     /** @type {Anim} */
     anim = null;
-    id = CABLES.shortId();
+    id = CABLES.simpleId();
     time = 0.0;
     value = 0.0;
     selected = false;
@@ -47,6 +47,7 @@ export class AnimKey
 
     emitChange()
     {
+        if (this.anim.batchMode) return;
         if (!this.anim) return;
         this.bezAn = null;
         if (this.onChange !== null) this.onChange();
