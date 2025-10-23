@@ -79,7 +79,6 @@ export class Profiler
 
                     if (item._timePsStart == 0 || performance.now() > item._timePsStart + 1000)
                     {
-                        console.log("text", item._timePsCount);
                         item.timePsMs = item._timePsMs;
                         item.timePsMsAvg = item._timePsMs / item._timePsCount;
                         item.timePsCount = item._timePsCount;
