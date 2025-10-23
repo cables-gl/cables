@@ -395,7 +395,6 @@ function setVectorValues()
             if (v.num === 2) v.uni.setValue([v.x.get(), v.y.get()]);
             else if (v.num === 3) v.uni.setValue([v.x.get(), v.y.get(), v.z.get()]);
             else if (v.num === 4) v.uni.setValue([v.x.get(), v.y.get(), v.z.get(), v.w.get()]);
-
             else if (v.num > 4)
             {
                 v.uni.setValue(v.port.get());

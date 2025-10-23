@@ -45,6 +45,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [multiPort] internal: do not set manually
  * @property  {boolean} [tlDrawKeys]
  * @property  {number} [longPort]
+ * @property  {boolean} [hover]
 */
 
 /**

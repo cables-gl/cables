@@ -16,6 +16,7 @@ inR.setUiAttribs({ "colorPick": true, "greyout": true });
 inG.setUiAttribs({ "greyout": true });
 inB.setUiAttribs({ "greyout": true });
 inA.setUiAttribs({ "greyout": true });
+op.toWorkPortsNeedToBeLinked(geometry);
 
 geometry.ignoreValueSerialize = true;
 

@@ -89,7 +89,6 @@
         ]
     },
     "summary": "Displays texture at input port",
-    "issues": "",
     "youtubeids": [
         "-1vMiU6BcDg"
     ],
@@ -97,7 +96,6 @@
         "ports": []
     },
     "exampleProjectId": "HOVjnR",
-    "caniusequery": "",
     "coreLibs": [
         "cgl_pixelreader"
     ],
