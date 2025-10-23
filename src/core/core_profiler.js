@@ -1,6 +1,23 @@
 import { Patch } from "./core_patch.js";
 import { now } from "./timer.js";
 
+/**
+ * @typedef ProfilerItem
+ * @property  {String} [title] overwrite title of port (by default this is portname)
+ * @property numTriggers {number}
+ * @property timeUsed {number}
+ * @property timeUsedFrame {number}
+ * @property opid {string}
+ * @property subPatch {string}
+
+ * @property timePsMsAvg {number}
+ * @property timePsMs {number}
+ * @property timePsCount {number}
+ * @property _timePsCount {number}
+ * @property _timePsStart {number}
+ * @property _timePsMs {number}
+ */
+
 export class Profiler
 {
 
@@ -10,6 +27,8 @@ export class Profiler
     constructor(patch)
     {
         this.startFrame = patch.getFrameNum();
+
+        /** @type {Object.<string, ProfilerItem>} */
         this.items = {};
         this.currentId = null;
         this.currentStart = 0;
@@ -23,6 +42,7 @@ export class Profiler
 
     clear()
     {
+        this.currentStart = performance.now();
         if (this.paused) return;
         this.items = {};
     }
@@ -37,6 +57,10 @@ export class Profiler
         }
     }
 
+    /**
+     * @param {any} type
+     * @param {Object} object
+     */
     add(type, object)
     {
         if (this.paused) return;
@@ -45,16 +69,31 @@ export class Profiler
         {
             if (!object || object.id != this.currentId)
             {
-                if (this.items[this.currentId])
+                const item = this.items[this.currentId];
+                if (item)
                 {
-                    this.items[this.currentId].timeUsed += performance.now() - this.currentStart;
+                    item.timeUsed += performance.now() - this.currentStart;
 
-                    if (!this.items[this.currentId].peakTime || now() - this.items[this.currentId].peakTime > 5000)
+                    item._timePsCount++;
+                    item._timePsMs += performance.now() - this.currentStart;
+
+                    if (item._timePsStart == 0 || performance.now() > item._timePsStart + 1000)
                     {
-                        this.items[this.currentId].peak = 0;
-                        this.items[this.currentId].peakTime = now();
+                        console.log("text", item._timePsCount);
+                        item.timePsMs = item._timePsMs;
+                        item.timePsMsAvg = item._timePsMs / item._timePsCount;
+                        item.timePsCount = item._timePsCount;
+                        item._timePsCount = 0;
+                        item._timePsMs = 0;
+                        item._timePsStart = performance.now();
                     }
-                    this.items[this.currentId].peak = Math.max(this.items[this.currentId].peak, performance.now() - this.currentStart);
+
+                    if (!item.peakTime || now() - item.peakTime > 5000)
+                    {
+                        item.peak = 0;
+                        item.peakTime = now();
+                    }
+                    item.peak = Math.max(item.peak, performance.now() - this.currentStart);
                 }
             }
         }
@@ -66,6 +105,13 @@ export class Profiler
                 this.items[object.id] = {
                     "numTriggers": 0,
                     "timeUsed": 0,
+                    "timeUsedFrame": 0,
+
+                    "timePsMsAvg": 0,
+                    "timePsMs": 0,
+                    "_timePsCount": 0,
+                    "_timePsMs": 0,
+                    "_timePsStart": performance.now()
                 };
             }
 
