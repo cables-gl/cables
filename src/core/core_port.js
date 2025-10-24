@@ -43,8 +43,9 @@ import { Op } from "./core_op.js";
  * @property  {number} [glPortIndex] internal: do not set manually
  * @property  {boolean} [readOnly] internal: do not set manually
  * @property  {boolean} [multiPort] internal: do not set manually
- * @property  {boolean} [tlDrawKeys]
  * @property  {number} [longPort]
+ * @property  {boolean} [tlDrawKeys]
+ * @property  {number} [tlEase] default easing when animating parameter
  * @property  {boolean} [hover]
 */
 

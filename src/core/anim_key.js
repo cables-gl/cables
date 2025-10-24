@@ -8,7 +8,6 @@ export class AnimKey
     id = CABLES.simpleId();
     time = 0.0;
     value = 0.0;
-    selected = false;
     onChange = null;
     _easing = 0;
     bezCp1 = null;
