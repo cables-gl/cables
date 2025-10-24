@@ -49,6 +49,8 @@ import { Patch } from "./core_patch.js";
  * @property {number} [resizableX]
  * @property {number} [resizableY]
  * @property {number} [tlOrder]
+ * @property {number} [heatmapIntensity]
+ * @property {string} [commentOverwrite]
  */
 
 /**

@@ -15,6 +15,16 @@
         "portsIn": [
             {
                 "type": 0,
+                "name": "Format index",
+                "values": [
+                    "Flat",
+                    "Objects",
+                    "Arrays"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Default Output Value index",
                 "values": [
                     "0",

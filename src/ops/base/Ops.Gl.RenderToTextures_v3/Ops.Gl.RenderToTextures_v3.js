@@ -61,6 +61,7 @@ function updateDefines()
     for (let i = 0; i < numSlots; i++)
     {
         types.push(slotPorts[i].get());
+        slotPorts[i].setUiAttribs({ "title": "Tex " + i + ": " + (slotPorts[i].get()) });
     }
 
     rt.update(types);
