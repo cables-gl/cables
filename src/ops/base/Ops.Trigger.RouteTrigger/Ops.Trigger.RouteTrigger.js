@@ -8,6 +8,8 @@ const
 const triggerPorts = [];
 exePort.onTriggered = update;
 
+switchPort.setUiAttribs({ "tlEase": 1 });
+
 for (let j = 0; j < NUM_PORTS; j++)
 {
     triggerPorts[j] = op.outTrigger("Trigger " + j);
