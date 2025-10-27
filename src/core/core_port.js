@@ -75,6 +75,9 @@ export class Port extends Events
     static EVENT_UIATTRCHANGE = "onUiAttrChange";
     static EVENT_VALUE_CHANGE = "change";
 
+    static EVENT_LINK_CHANGED = "onLinkChanged";
+    static EVENT_LINK_REMOVED = "onLinkRemoved";
+
     #oldAnimVal = -5711;
 
     animMuted = false;
@@ -231,7 +234,6 @@ export class Port extends Events
         // if (this.type == Port.TYPE_NUMBER)
         // {
         //     if (isNaN(this.value)) return "NaN";
-
         // }
         return str;
     }
@@ -483,12 +485,6 @@ export class Port extends Events
             this.#op.hasAnimPort = true;
             this.anim.port = this;
 
-            console.log("clipiddddd", objPort.clipId);
-            // this.anim.on(Anim.EVENT_CHANGE, () =>
-            // {
-            //     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            // });
-            console.log("ttttttttttttttt", this.op.patch.clipAnims);
             this.anim.deserialize(objPort.anim, true, this.op.patch.clipAnims);
             this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
 
@@ -635,9 +631,9 @@ export class Port extends Events
         try
         {
             if (this.onLinkChanged) this.onLinkChanged();
-            this.emitEvent("onLinkChanged");
-            this.emitEvent("onLinkRemoved");
-            this.#op.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
+            this.emitEvent(Port.EVENT_LINK_REMOVED);
+            this.#op.emitEvent(Port.EVENT_LINK_CHANGED);
         }
         catch (e)
         {
@@ -674,8 +670,8 @@ export class Port extends Events
         try
         {
             if (this.onLinkChanged) this.onLinkChanged();
-            this.emitEvent("onLinkChanged");
-            this.#op.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
+            this.#op.emitEvent(Port.EVENT_LINK_CHANGED);
         }
         catch (e)
         {
@@ -706,8 +702,8 @@ export class Port extends Events
                 if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
 
                 if (this.onLinkChanged) this.onLinkChanged();
-                this.emitEvent("onLinkChanged");
-                this.emitEvent("onLinkRemoved");
+                this.emitEvent(Port.EVENT_LINK_CHANGED);
+                this.emitEvent(Port.EVENT_LINK_REMOVED);
                 return;
             }
         }

@@ -34,9 +34,10 @@ function update()
 
     let r = structuredClone(o.data);
 
-    if (inDefault.get() == "0") for (let i = 0; i < r.length; i++) if (!r[i])r[i] = 0;
-    if (inDefault.get() == "Empty String") for (let i = 0; i < r.length; i++) if (!r[i])r[i] = "";
-    if (inDefault.get() == "null") for (let i = 0; i < r.length; i++) if (!r[i])r[i] = null;
+    if (inDefault.get() == 0 || inDefault.get() == "0") { for (let i = 0; i < r.length; i++) { if (!r[i]) { r[i] = 0; } } }
+    else if (inDefault.get() == "Empty String") { for (let i = 0; i < r.length; i++) { if (!r[i])r[i] = ""; } }
+    else if (inDefault.get() == "null") { for (let i = 0; i < r.length; i++) { if (!r[i])r[i] = null; } }
+    else console.log("unknown", inDefault.get());
 
     if (outp.get() == "Objects")
     {
