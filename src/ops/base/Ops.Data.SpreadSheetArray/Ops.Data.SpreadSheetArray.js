@@ -29,6 +29,13 @@ function update()
     const o = spread.get();
     console.log("spread", o);
 
+    if (!o)
+    {
+        outWidth.set(0);
+        outHeight.set(0);
+        return;
+    }
+
     outWidth.set(o.width);
     outHeight.set(o.height);
 
