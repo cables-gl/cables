@@ -126,10 +126,10 @@ op.renderVizLayer = (ctx, layer) =>
 
             ctx.fillStyle = "#ccc";
 
-            if (v == "")
+            if (v == "" && v !== 0)
             {
-                ctx.fillStyle = "#444444";
-                str = "•";
+                ctx.fillStyle = "#d57272";
+                str = "\"\"";
             }
             else
             if (typeof v == "string")
