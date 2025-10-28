@@ -4,19 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1618323401309
-        },
-        {
-            "message": "Ops.User.pandur.ArrayMergeTrigger renamed to Ops.Array.ArrayMergeTrigger",
-            "author": "pandur",
-            "date": 1618323580125
+            "date": 1618323401309,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
     "created": 1618323456249,
     "summary": "Merge / concatenate arrays by trigger",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

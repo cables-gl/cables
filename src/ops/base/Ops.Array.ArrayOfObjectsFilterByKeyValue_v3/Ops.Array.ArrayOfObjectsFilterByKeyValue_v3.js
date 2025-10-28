@@ -11,16 +11,16 @@ const
     inInvertEquality = op.inBool("Invert Filter", false),
     outArray = op.outArray("arrayOut");
 
-const COMP_FUNC_EQUALS = (obj, comparator, key) => { return obj && obj[key] == comparator; };
-const COMP_FUNC_EQUALS_INV = (obj, comparator, key) => { return obj && (obj[key] != comparator); };
-const COMP_FUNC_INCLUDES = (obj, comparator, key) => { return obj && obj[key].includes(comparator); };
-const COMP_FUNC_INCLUDES_INV = (obj, comparator, key) => { return obj && (!obj[key].includes(comparator)); };
+const COMP_FUNC_EQUALS = (obj, comparator, key) => { return obj && obj[key] && obj[key] == comparator; };
+const COMP_FUNC_EQUALS_INV = (obj, comparator, key) => { return obj && obj[key] && (obj[key] != comparator); };
+const COMP_FUNC_INCLUDES = (obj, comparator, key) => { return obj && obj[key] && obj[key].includes(comparator); };
+const COMP_FUNC_INCLUDES_INV = (obj, comparator, key) => { return obj && obj[key] && (!obj[key].includes(comparator)); };
 
-const COMP_FUNC_STARTSWITH = (obj, comparator, key) => { return obj && obj[key].startsWith(comparator); };
-const COMP_FUNC_STARTSWITH_INV = (obj, comparator, key) => { return obj && (!obj[key].startsWith(comparator)); };
+const COMP_FUNC_STARTSWITH = (obj, comparator, key) => { return obj && obj[key] && obj[key].startsWith(comparator); };
+const COMP_FUNC_STARTSWITH_INV = (obj, comparator, key) => { return obj && obj[key] && (!obj[key].startsWith(comparator)); };
 
-const COMP_FUNC_ENDSWITH = (obj, comparator, key) => { return obj && obj[key].endsWith(comparator); };
-const COMP_FUNC_ENDSWITH_INV = (obj, comparator, key) => { return obj && (!obj[key].endsWith(comparator)); };
+const COMP_FUNC_ENDSWITH = (obj, comparator, key) => { return obj && obj[key] && obj[key].endsWith(comparator); };
+const COMP_FUNC_ENDSWITH_INV = (obj, comparator, key) => { return obj && obj[key] && (!obj[key].endsWith(comparator)); };
 
 inKeyCompare.onChange =
 inArray.onChange =

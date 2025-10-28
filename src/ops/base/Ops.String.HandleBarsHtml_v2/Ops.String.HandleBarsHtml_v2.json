@@ -20,6 +20,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1739870048851
+        },
+        {
+            "message": "Added array input, no need to wrap arrays into objects this way, is accessible in the template as \"array\"",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1760600591802
         }
     ],
     "layout": {
@@ -31,6 +37,10 @@
             {
                 "type": 2,
                 "name": "Data"
+            },
+            {
+                "type": 3,
+                "name": "Array"
             }
         ],
         "portsOut": [

@@ -14,6 +14,9 @@ const
 
     outEle = op.outObject("HTML Element", null, "element");
 
+r.setUiAttribs({ "colorPick": true });
+bgr.setUiAttribs({ "colorPick": true });
+
 let ele = null;
 inEle.onChange =
     inSetCol.onChange =
