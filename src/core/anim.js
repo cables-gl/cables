@@ -605,7 +605,6 @@ export class Anim extends Events
                 }
 
                 console.log("no clip found");
-
             }
         }
 

@@ -160,6 +160,7 @@ export class Patch extends Events
         if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
+        /** @type {Object<string,PatchVariable>} */
         this._variables = {};
 
         this.vars = {};
@@ -1347,7 +1348,7 @@ export class Patch extends Events
 
     /**
      * @param {number} t
-     * @returns {Object}
+     * @returns {PatchVariable[]}
      */
     getVars(t)
     {

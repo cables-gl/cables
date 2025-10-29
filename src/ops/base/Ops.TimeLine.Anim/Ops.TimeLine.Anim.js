@@ -33,6 +33,10 @@ function update()
 {
     const anim = animVal.anim;
     outAnim.setRef(anim);
+    if (inClip.get())
+    {
+        op.patch.setVarValue("_clip" + inClipName.get(), anim);
+    }
     if (anim.keys.length > 0)
     {
         outLengthLoop.set(anim.getLengthLoop());

@@ -61,5 +61,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "sKguKJ"
+    "exampleProjectId": "sKguKJ",
+    "coreLibs": [
+        "vargetset"
+    ]
 }
