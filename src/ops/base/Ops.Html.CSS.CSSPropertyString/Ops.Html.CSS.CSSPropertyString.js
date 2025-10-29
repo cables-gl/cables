@@ -14,7 +14,7 @@ let ele = null;
 
 inEle.onChange = () =>
 {
-    if (inEle.get() == ele) return;
+    // if (inEle.get() == ele) return; //needs to be updated..........
     removeProp();
 };
 

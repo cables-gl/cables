@@ -20,7 +20,6 @@ function update()
     if (ind < 0 || ind > theArray.length - 1)
     {
         result.set(null);
-        op.log("index wrong");
         return;
     }
 

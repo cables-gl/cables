@@ -1,0 +1,108 @@
+{
+    "id": "7347fa0c-7861-408d-8ea0-3904d781e351",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1599661030365
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1761659528327,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "URL"
+            },
+            {
+                "type": 0,
+                "name": "Create Loading Task",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
+            },
+            {
+                "type": 0,
+                "name": "Finished Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Sample Rate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number of Channels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "isLoading",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Holds an audio file / sample in a buffer ",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "URL",
+                "text": "The audio file to load. Mostly you will drag an audio file into the cables window and select it via the file-chooser in the op parameter view. Depending on the browser you use (or user who will see / hear your exported patch) only certain file types can be played back. MP3 seems to be the best supported audio format. It is also possible to pass a data URL (from a local file) to the buffer."
+            },
+            {
+                "name": "Audio Buffer",
+                "text": "The loaded audio buffer, can be connected to e.g. AudioBufferPlayer"
+            },
+            {
+                "name": "Finished Loading",
+                "text": "True when the file is loaded"
+            },
+            {
+                "name": "Sample Rate",
+                "text": "Samples per second of the PCM data stored in the buffer."
+            },
+            {
+                "name": "Length",
+                "text": "Length of the buffer, in sample-frames, of the PCM data stored in the buffer."
+            },
+            {
+                "name": "Duration",
+                "text": "Duration, in seconds, of the PCM data stored in the buffer"
+            },
+            {
+                "name": "Number of Channels",
+                "text": "How many channels the audio file contains, 2 is stereo, 1 is mono"
+            },
+            {
+                "name": "isLoading",
+                "text": "indicates if buffer is currently loading"
+            }
+        ]
+    },
+    "exampleProjectId": "xEL0rn",
+    "license": "MIT"
+}

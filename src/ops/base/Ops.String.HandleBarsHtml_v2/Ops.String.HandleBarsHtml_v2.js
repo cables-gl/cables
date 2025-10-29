@@ -1,12 +1,14 @@
 const
     inTplStr = op.inStringEditor("Template", "", "html"),
     inData = op.inObject("Data"),
+    inArray = op.inArray("Array"),
     outStr = op.outString("Result"),
     outErrors = op.outString("Errors");
 
 let template = null;
 
 inTplStr.onChange = updateString;
+inArray.onChange =
 inData.onChange = render;
 
 function updateString()
@@ -37,7 +39,7 @@ function render()
 {
     if (!template) return;
     const templateData = inData.get() || {};
-
+    if (inArray.isLinked())templateData.array = inArray.get();
     op.setUiError("hbserr", null);
     outErrors.set("");
 
