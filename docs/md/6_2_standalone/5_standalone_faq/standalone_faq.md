@@ -1,5 +1,15 @@
 # Standalone - FAQ
 
+## How can I run cables standalone in fullscreen/presentation mode
+
+To start cables standalone in fullscreen and/or open the renderer in fullscreen on start, use the following
+command line arguments.
+
+- `--fullscreen` open editor in fullscreen window on start
+- `--maximize-renderer` maximize the renderer to window size on start
+
+Use `--help` for more info.
+
 ## Where can I find more information and tutorials to get started?
 
 There are plenty of tutorial videos on our [YouTube channel](https://www.youtube.com/cables_gl), some cover specific standalone topics. Feel free to suggest
