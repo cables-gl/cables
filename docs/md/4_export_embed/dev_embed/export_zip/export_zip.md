@@ -5,7 +5,7 @@ Select the "DOWNLOAD" option in the export dialog:
 ![Button](../img/export_zip.png)
 
 If you just want to download your patch and put it on any webserver that you can upload files to, this
-is your best option. 
+is your best option.
 
 The resulting zip-file will include an example index.html to make integration easier, putting all of this
 on a webserver should give you a running patch in no time.
@@ -48,7 +48,7 @@ these files included in the export.
 
 ### Add Source Maps
 
-- When minifying code, this option will add [source maps](https://developer.chrome.com/blog/sourcemaps) to your javascript files. 
+- When minifying code, this option will add [source maps](https://developer.chrome.com/blog/sourcemaps) to your javascript files.
   This will make the code readable in dev-tools and may help in debugging situations, but will have and additional download for
   people opening the dev-tools of their browser.
 
