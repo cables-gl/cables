@@ -73,7 +73,6 @@ export class Profiler
                 if (item)
                 {
                     item.timeUsed += performance.now() - this.currentStart;
-
                     item._timePsCount++;
                     item._timePsMs += performance.now() - this.currentStart;
 
@@ -105,7 +104,6 @@ export class Profiler
                     "numTriggers": 0,
                     "timeUsed": 0,
                     "timeUsedFrame": 0,
-
                     "timePsMsAvg": 0,
                     "timePsMs": 0,
                     "_timePsCount": 0,

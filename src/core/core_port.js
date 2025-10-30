@@ -1000,6 +1000,25 @@ export class Port extends Events
      */
     _onSetProfiling(v) // used in editor: profiler tab
     {
+        if (this.op.patch.debuggerEnabled)
+        {
+            // console.log(this.op.name + " - port " + this.name + ": set value to " + v);
+            const cv = v;
+
+            this.op.patch.emitEvent("debuggerstep",
+                {
+                    "opname": this.op.name,
+                    "opid": this.op.id,
+                    "portname": this.name,
+                    "log": this.op.name + " - port " + this.name + ": set value to " + v,
+                    "exec": () =>
+                    {
+                        this.setValue(cv);
+                    }
+                });
+            return;
+        }
+
         this.#op.patch.profiler.add("port", this);
         this.setValue(v);
         this.#op.patch.profiler.add("port", null);
@@ -1009,6 +1028,25 @@ export class Port extends Events
     {
         if (this.#op.enabled && this.onTriggered)
         {
+            if (this.op.patch.debuggerEnabled)
+            {
+                console.log();
+                this.op.patch.emitEvent("debuggerstep",
+                    {
+                        "opname": this.op.name,
+                        "opid": this.op.id,
+                        "portname": this.name,
+                        "log": this.op.name + " - triggered " + this.name,
+                        "exec": () =>
+                        {
+                            this.onTriggered();
+                        }
+
+                    });
+                return;
+
+            }
+
             this.#op.patch.profiler.add("port", this);
             this.onTriggered();
             this.#op.patch.profiler.add("port", null);
