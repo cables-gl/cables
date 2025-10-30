@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "tim",
-            "date": 1599661030365
+            "date": 1599661030365,
+            "type": "new"
+        },
+        {
+            "message": "new version: active toggle, start loading file only when set to active",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761659732709
         }
     ],
     "authorName": "pandur",

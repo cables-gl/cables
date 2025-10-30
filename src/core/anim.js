@@ -590,7 +590,7 @@ export class Anim extends Events
         {
             if (key1.clip && key1.clip.getValue)
             {
-                return key1.clip.getValue(time);
+                return key1.clip.getValue(perc * key1.clip.getLength());
             }
             else
             {
@@ -605,7 +605,6 @@ export class Anim extends Events
                 }
 
                 console.log("no clip found");
-
             }
         }
 
