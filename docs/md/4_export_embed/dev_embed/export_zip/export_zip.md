@@ -1,8 +1,8 @@
-# Export a ZIP file
+# HTML Export
 
-Select the "DOWNLOAD" option in the export dialog:
+Select the "Download HTML" option in the export dialog:
 
-![Button](../img/export_zip.png)
+![Button](../img/export_html.png)
 
 If you just want to download your patch and put it on any webserver that you can upload files to, this
 is your best option.
@@ -33,9 +33,6 @@ these files included in the export.
 - Single Javascript File: packages and minifies everything into one single javascript file to include
 - Multiple Files: will keep the patch configuration, your code, and core code in seperate files
 
-### Skip Backups
-
-- When deselecting this option, the export will include JSON-files for all the versions of your patch that can be re-imported into cables later.
 
 ### Export without subdirectories
 

@@ -14,6 +14,8 @@ An attachment file can be created by clicking on an Op and then clicking the cre
 You then need to give your attachment a name that will later be used to access its content in your Op.
 An attachment named `my_attachment` will be accessible in the Op via `attachments["my_attachment"]`
 
+**Hint:** All dots (`.`) in the name entered will be converted to underscores (`_`), so `myattachment.js` will be `attachments["myattachment_js"]`!
+
 ## Editing Attachment
 
 After you created the attachment, the cables-editor will open and let you edit its content.
