@@ -1,6 +1,8 @@
 # Keyframe Animation
 
 
+![](img/timeline.png)
+
 The new Cables timeline offers a powerful, modular environment for keyframe animation, procedural motion, and precise control over object parameters. Below is a guide to its primary features and typical workflow.
 
 ***
