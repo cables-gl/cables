@@ -1,0 +1,104 @@
+{
+    "id": "a8d569d1-5238-4c3e-be3c-4507df51740f",
+    "created": 1736345571633,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1736345571663
+        },
+        {
+            "message": "Html.Event.ElementsArrayEventHandler renamed to Ops.Html.Event.ElementsArrayEventListener",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1761666200929
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Elements"
+            },
+            {
+                "type": 5,
+                "name": "Event Name"
+            },
+            {
+                "type": 0,
+                "name": "Use Capture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Prevent Default",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Stop Propagation",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Event Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Event Object"
+            },
+            {
+                "type": 2,
+                "name": "Event Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "listen to events on multiple html elements",
+    "docs": {
+        "ports": [
+            {
+                "name": "Elements",
+                "text": "The HTML DOM elements to add the listener to"
+            },
+            {
+                "name": "Use Capture",
+                "text": "If multiple elements register an event listener, setting Use Capture will make sure the listener will be called before the regular (bubble) listeners. For more infos read here: javascript.info/bubbling-and-capturing."
+            },
+            {
+                "name": "Prevent Default",
+                "text": "If set the default browser action for the event will not be executed. See [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)"
+            },
+            {
+                "name": "Stop Propagation",
+                "text": "Stops other elements’ event listeneres from getting called. See [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)"
+            },
+            {
+                "name": "Event Trigger",
+                "text": "Triggers when any element receives the event"
+            },
+            {
+                "name": "Index",
+                "text": "Index of triggered element in input array"
+            },
+            {
+                "name": "Event Object",
+                "text": "Event object"
+            },
+            {
+                "name": "Event Element",
+                "text": "The triggered element"
+            }
+        ]
+    }
+}
