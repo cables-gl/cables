@@ -1243,10 +1243,12 @@ export class Patch extends Events
         this.#initialDeserialize = false;
     }
 
+    /**
+     * @param {boolean} enable
+     */
     profile(enable)
     {
         this.profiler = new Profiler(this);
-        // for (const i in this.ops)
         for (let i = 0; i < this.ops.length; i++)
             this.ops[i].profile();
     }

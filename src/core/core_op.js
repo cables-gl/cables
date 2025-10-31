@@ -58,9 +58,6 @@ import { Patch } from "./core_patch.js";
  * @type Patch
  */
 
-/**
- * @template {CorePatch} Patch
- */
 export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";

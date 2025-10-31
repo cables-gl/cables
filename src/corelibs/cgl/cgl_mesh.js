@@ -966,6 +966,7 @@ class Mesh extends CgMesh
         this.#bufVerticesIndizes = null;
 
         this._disposeAttributes();
+        return null;
     }
 }
 
