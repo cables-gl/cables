@@ -59,12 +59,24 @@
             "order": 4
         },
         {
+            "id": "gdgnnalkl",
+            "title": "Auto request",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 0,
+            "value": 0,
+            "uiDisplay": "bool",
+            "order": 5
+        },
+        {
             "id": "4sn5cnszp",
             "title": "Result",
             "dir": 1,
             "type": 5,
             "value": "",
-            "order": 1005
+            "order": 1006
         },
         {
             "id": "i4feefw9n",
@@ -72,7 +84,7 @@
             "dir": 1,
             "type": 2,
             "objType": null,
-            "order": 1006
+            "order": 1007
         },
         {
             "id": "klu6r35ga",
@@ -81,7 +93,7 @@
             "type": 0,
             "uiDisplay": "boolnum",
             "value": 0,
-            "order": 1007
+            "order": 1008
         },
         {
             "id": "xs18z73z0",
@@ -90,7 +102,7 @@
             "type": 0,
             "uiDisplay": "boolnum",
             "value": 0,
-            "order": 1008
+            "order": 1009
         },
         {
             "id": "aosval1gx",
@@ -98,7 +110,7 @@
             "dir": 1,
             "type": 5,
             "value": "",
-            "order": 1009
+            "order": 1010
         }
     ]
 }

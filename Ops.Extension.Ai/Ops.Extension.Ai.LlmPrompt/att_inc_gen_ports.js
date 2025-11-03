@@ -19,6 +19,10 @@ const port_864u0eigc=op.inTrigger("864u0eigc");
 port_864u0eigc.setUiAttribs({title:"Run",display:"button",});
 port_864u0eigc.setUiAttribs({"values":[""]});
 
+const port_gdgnnalkl=op.inFloat("gdgnnalkl",0);
+port_gdgnnalkl.setUiAttribs({title:"Auto request",display:"bool",});
+port_gdgnnalkl.setUiAttribs({"values":[""]});
+
 const port_4sn5cnszp=op.outString("4sn5cnszp");
 port_4sn5cnszp.setUiAttribs({title:"Result",});
 
@@ -63,6 +67,11 @@ port_qbpj78fjk.on("change", (a,v) => { innerOut_qbpj78fjk.set(a); });
 const innerOut_864u0eigc = addedOps[i].outTrigger("innerOut_864u0eigc");
 innerOut_864u0eigc.setUiAttribs({title:"Run"});
 port_864u0eigc.onTriggered = () => { innerOut_864u0eigc.trigger(); };
+
+const innerOut_gdgnnalkl = addedOps[i].outNumber("innerOut_gdgnnalkl");
+innerOut_gdgnnalkl.set(port_gdgnnalkl.get() );
+innerOut_gdgnnalkl.setUiAttribs({title:"Auto request"});
+port_gdgnnalkl.on("change", (a,v) => { innerOut_gdgnnalkl.set(a); });
 
     }
 if(addedOps[i].innerOutput)
