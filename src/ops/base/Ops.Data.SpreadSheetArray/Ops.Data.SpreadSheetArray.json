@@ -66,5 +66,9 @@
                 "name": "Column Names"
             }
         ]
+    },
+    "summary": "Enter data in a spreadsheet table",
+    "docs": {
+        "ports": []
     }
 }
