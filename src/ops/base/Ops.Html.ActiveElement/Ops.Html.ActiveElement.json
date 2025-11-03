@@ -28,5 +28,6 @@
     "summary": "Outputs the currently active/focused element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "0iRDu1"
 }

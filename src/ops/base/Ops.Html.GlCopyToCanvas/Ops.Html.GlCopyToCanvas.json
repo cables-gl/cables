@@ -38,5 +38,6 @@
     "summary": "Copy GL canvas content to another canvas",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "u2vAu1"
 }

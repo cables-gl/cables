@@ -32,5 +32,6 @@
     "summary": "Get information about an element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "0iRDu1"
 }
