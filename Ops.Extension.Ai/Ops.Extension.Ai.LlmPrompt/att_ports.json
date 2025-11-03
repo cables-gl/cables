@@ -1,0 +1,104 @@
+{
+    "ports": [
+        {
+            "id": "13yb9bb9g",
+            "title": "Prompt",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "addUiAttribs": {
+                "display": "text"
+            },
+            "value": "hello who are you?",
+            "order": 0
+        },
+        {
+            "id": "v55wa68l8",
+            "title": "Value",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "value": "openai/gpt-oss-20b:free",
+            "order": 1
+        },
+        {
+            "id": "axcfzi4h8",
+            "title": "API URL",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "value": "https://openrouter.ai/api",
+            "order": 2
+        },
+        {
+            "id": "qbpj78fjk",
+            "title": "Authentication",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "value": "Bearer sk-XXXXXXXXXXXX",
+            "order": 3
+        },
+        {
+            "id": "864u0eigc",
+            "title": "Run",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 1,
+            "uiDisplay": "button",
+            "order": 4
+        },
+        {
+            "id": "4sn5cnszp",
+            "title": "Result",
+            "dir": 1,
+            "type": 5,
+            "value": "",
+            "order": 1005
+        },
+        {
+            "id": "i4feefw9n",
+            "title": "Result Object",
+            "dir": 1,
+            "type": 2,
+            "objType": null,
+            "order": 1006
+        },
+        {
+            "id": "klu6r35ga",
+            "title": "Is Loading",
+            "dir": 1,
+            "type": 0,
+            "uiDisplay": "boolnum",
+            "value": 0,
+            "order": 1007
+        },
+        {
+            "id": "xs18z73z0",
+            "title": "Has Error",
+            "dir": 1,
+            "type": 0,
+            "uiDisplay": "boolnum",
+            "value": 0,
+            "order": 1008
+        },
+        {
+            "id": "aosval1gx",
+            "title": "Error",
+            "dir": 1,
+            "type": 5,
+            "value": "",
+            "order": 1009
+        }
+    ]
+}

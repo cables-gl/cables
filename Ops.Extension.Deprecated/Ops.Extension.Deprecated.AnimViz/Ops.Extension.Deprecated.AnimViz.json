@@ -1,0 +1,30 @@
+{
+    "id": "07fc617b-9a3e-49b1-93ba-b44f51929174",
+    "created": 1750934557603,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1750934557604
+        },
+        {
+            "message": "op TimeLine.AnimViz was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1762180208381
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Anim",
+                "objType": "anim"
+            }
+        ],
+        "portsOut": []
+    }
+}

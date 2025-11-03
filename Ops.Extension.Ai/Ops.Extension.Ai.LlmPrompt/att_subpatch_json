@@ -1,0 +1,1003 @@
+{
+  "ops": [
+    {
+      "opId": "89fc70ea-2350-4a0e-9a24-4efca10cced6",
+      "id": "qbxfx7tun",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1655.1108411143382
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Beautify",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Request Body",
+              "portOut": "Result",
+              "objIn": "lb434upoq",
+              "objOut": "qbxfx7tun"
+            }
+          ]
+        },
+        {
+          "name": "Error",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "j9se8zej8",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1193.0765478416702
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "x0d4nad74",
+              "objOut": "j9se8zej8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "32a301bb-a59b-41a6-9d87-4a58592b6675",
+      "id": "7us9bn3xv",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1476.313506402697
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "stream",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "stream"
+        },
+        {
+          "name": "Boolean",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "qbxfx7tun",
+              "objOut": "7us9bn3xv"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "20ed335d-fb41-459e-b1dc-34d1a92074b5",
+      "id": "ae1ju2szm",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.2234876219893,
+          "y": 2321.069769389352
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "End"
+        },
+        {
+          "name": "Add Break",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a1fde819-2b8e-4520-8086-c08e00e0d2f7",
+      "id": "9t6ajmi3b",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.2234876219893,
+          "y": 2184.695413681378
+        },
+        "subPatch": "e5ow0rm2b",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "clear",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Update",
+              "portOut": "Next",
+              "objIn": "ae1ju2szm",
+              "objOut": "9t6ajmi3b"
+            }
+          ]
+        },
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "innerIn_4sn5cnszp",
+              "portOut": "Result",
+              "objIn": "xrwhrdm97",
+              "objOut": "9t6ajmi3b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "20f7bcab-ed71-45d1-9fae-d89aacf3961b",
+      "id": "0a0p64v61",
+      "uiAttribs": {
+        "translate": {
+          "x": 981.2448079064072,
+          "y": 1527.8296169605364
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "temperature",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "temperature"
+        },
+        {
+          "name": "Number",
+          "value": 0.8
+        }
+      ]
+    },
+    {
+      "opId": "20f7bcab-ed71-45d1-9fae-d89aacf3961b",
+      "id": "l7tgpb9gw",
+      "uiAttribs": {
+        "translate": {
+          "x": 1002.4572663746796,
+          "y": 1588.008734193697
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "max_tokens",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "max_tokens"
+        },
+        {
+          "name": "Number",
+          "value": -1
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "zuimfjvzo",
+      "uiAttribs": {
+        "height": 821.9592221076236,
+        "width": 941.8623267350988,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": 933.7941897254289,
+          "y": 2419.743667624856
+        },
+        "extendTitle": null,
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "625re3kya",
+      "uiAttribs": {
+        "translate": {
+          "x": 730.9889169388885,
+          "y": 2092.3068376217407
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "choices.0.delta.content"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Output",
+              "objIn": "ae1ju2szm",
+              "objOut": "625re3kya"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a9aed302-328a-4d33-bd3f-27e3e6690b9e",
+      "id": "8ybt9n260",
+      "uiAttribs": {
+        "translate": {
+          "x": 1437.167058518869,
+          "y": 1399.1142203747393
+        },
+        "subPatch": "e5ow0rm2b",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Result",
+              "objIn": "bahnzruzs",
+              "objOut": "8ybt9n260"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "eueb0x6eq",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1310.6423485525145
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "8w68bvfmn",
+              "objOut": "eueb0x6eq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "5c8d960c-2072-44e4-b9ad-7f74789fe3df",
+      "id": "1gy4025q6",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1501.444640795132
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Objects_1",
+          "value": 0,
+          "title": "add port"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Array",
+              "objIn": "kmuy6eozh",
+              "objOut": "1gy4025q6"
+            }
+          ]
+        },
+        {
+          "name": "Num Values",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "8w68bvfmn",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1353.9755803427863
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "role",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "role"
+        },
+        {
+          "name": "Value",
+          "value": "user"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "bahnzruzs",
+              "objOut": "8w68bvfmn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "bahnzruzs",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1447.3684059339455
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "content",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "content"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Objects_0",
+              "portOut": "Result Object",
+              "objIn": "1gy4025q6",
+              "objOut": "bahnzruzs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "ac5c6a64-f2af-408a-bbea-bbe7f96a3fb7",
+      "id": "ytwd6dkd0",
+      "uiAttribs": {
+        "translate": {
+          "x": 1059.2234876219893,
+          "y": 1977.2542097936948
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "zuimfjvzo",
+              "objOut": "ytwd6dkd0"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "625re3kya",
+              "objOut": "ytwd6dkd0"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "00l7lgdf5",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        },
+        {
+          "name": "Received Result",
+          "links": [
+            {
+              "portIn": "Update",
+              "portOut": "Received Result",
+              "objIn": "9t6ajmi3b",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        },
+        {
+          "name": "Started",
+          "links": [
+            {
+              "portIn": "Reset",
+              "portOut": "Started",
+              "objIn": "9t6ajmi3b",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "x0d4nad74",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1282.0616561829838
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "model",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "model"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "kmuy6eozh",
+              "objOut": "x0d4nad74"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a52722aa-0ca9-402c-a844-b7e98a6c6e60",
+      "id": "qti1mg6cs",
+      "uiAttribs": {
+        "translate": {
+          "x": 800.8889904770524,
+          "y": 1706.5197273013623
+        },
+        "subPatch": "e5ow0rm2b",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "string2",
+          "value": "/v1/chat/completions"
+        },
+        {
+          "name": "New Line",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "URL",
+              "portOut": "result",
+              "objIn": "lb434upoq",
+              "objOut": "qti1mg6cs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "ma7s9xxnl",
+      "uiAttribs": {
+        "translate": {
+          "x": 1039.412090971906,
+          "y": 896.4760131027332
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "Authorization",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "Authorization"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "headers",
+              "portOut": "Result Object",
+              "objIn": "lb434upoq",
+              "objOut": "ma7s9xxnl"
+            },
+            {
+              "portIn": "innerIn_i4feefw9n",
+              "portOut": "Result Object",
+              "objIn": "xrwhrdm97",
+              "objOut": "ma7s9xxnl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "lrwsjve5a",
+      "uiAttribs": {
+        "translate": {
+          "x": 1021.878553969399,
+          "y": 824.4167886317216
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "ma7s9xxnl",
+              "objOut": "lrwsjve5a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "00l7lgdf5",
+      "uiAttribs": {
+        "translate": {
+          "x": 1322.975638092438,
+          "y": 2232.9189860374668
+        },
+        "subPatch": "e5ow0rm2b",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "error.message"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Output",
+              "objIn": "bjgok3c6v",
+              "objOut": "00l7lgdf5"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "0b4d9229-8024-4a30-9cc0-f6653942c2e4",
+      "id": "bjgok3c6v",
+      "uiAttribs": {
+        "title": "var set",
+        "translate": {
+          "x": 1322.975638092438,
+          "y": 2272.9189860374668
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "#error_stream",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "error_stream"
+        }
+      ]
+    },
+    {
+      "opId": "47dfdb45-3364-451a-a288-acfa02510990",
+      "id": "kmuy6eozh",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1374.8759011881707
+        },
+        "subPatch": "e5ow0rm2b",
+        "extendTitle": "messages",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "messages"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "7us9bn3xv",
+              "objOut": "kmuy6eozh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "af548d59-d2d8-4ee6-b938-15e79200817c",
+      "id": "lb434upoq",
+      "uiAttribs": {
+        "translate": {
+          "x": 897.6479007812607,
+          "y": 1745.6007134439865
+        },
+        "loading": false,
+        "subPatch": "e5ow0rm2b",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "URL",
+          "display": "file",
+          "title": "URL"
+        },
+        {
+          "name": "HTTP Method index",
+          "value": 1
+        },
+        {
+          "name": "HTTP Method",
+          "value": "POST"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Send Credentials",
+          "value": 0
+        },
+        {
+          "name": "Response Content index",
+          "value": 0
+        },
+        {
+          "name": "Response Content",
+          "value": "JSON",
+          "title": "Response Content"
+        },
+        {
+          "name": "Auto request",
+          "value": 0
+        },
+        {
+          "name": "Empty output on change",
+          "value": 1
+        },
+        {
+          "name": "Retry on error",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Status Code",
+          "value": 200
+        },
+        {
+          "name": "Is Loading",
+          "links": [
+            {
+              "portIn": "innerIn_klu6r35ga",
+              "portOut": "Is Loading",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Has Error",
+          "links": [
+            {
+              "portIn": "innerIn_xs18z73z0",
+              "portOut": "Has Error",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Error",
+          "links": [
+            {
+              "portIn": "innerIn_aosval1gx",
+              "portOut": "Error",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Duration MS",
+          "value": 1520
+        },
+        {
+          "name": "Fetch Response",
+          "links": [
+            {
+              "portIn": "Fetch Response",
+              "portOut": "Fetch Response",
+              "objIn": "ytwd6dkd0",
+              "objOut": "lb434upoq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "5ffp4z914",
+      "uiAttribs": {
+        "subPatch": "e5ow0rm2b",
+        "translate": {
+          "x": 730.9889169388885,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_13yb9bb9g",
+          "title": "String",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "innerOut_13yb9bb9g",
+              "objIn": "8ybt9n260",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_v55wa68l8",
+          "title": "Value",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "innerOut_v55wa68l8",
+              "objIn": "x0d4nad74",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_axcfzi4h8",
+          "title": "string1",
+          "links": [
+            {
+              "portIn": "string1",
+              "portOut": "innerOut_axcfzi4h8",
+              "objIn": "qti1mg6cs",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_qbpj78fjk",
+          "title": "Value",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "innerOut_qbpj78fjk",
+              "objIn": "ma7s9xxnl",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_864u0eigc",
+          "title": "Reload",
+          "links": [
+            {
+              "portIn": "Reload",
+              "portOut": "innerOut_864u0eigc",
+              "objIn": "lb434upoq",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "xrwhrdm97",
+      "uiAttribs": {
+        "subPatch": "e5ow0rm2b",
+        "translate": {
+          "x": 730.9889169388885,
+          "y": 3321.7028897324794
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_4sn5cnszp",
+          "title": "Result"
+        },
+        {
+          "name": "innerIn_i4feefw9n",
+          "title": "Result Object"
+        },
+        {
+          "name": "innerIn_klu6r35ga",
+          "title": "Is Loading"
+        },
+        {
+          "name": "innerIn_xs18z73z0",
+          "title": "Has Error"
+        },
+        {
+          "name": "innerIn_aosval1gx",
+          "title": "Error"
+        }
+      ]
+    }
+  ]
+}
