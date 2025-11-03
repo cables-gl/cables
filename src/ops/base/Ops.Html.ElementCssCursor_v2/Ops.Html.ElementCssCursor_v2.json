@@ -4,24 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1602571676524
-        },
-        {
-            "message": "Ops.User.pandur.Cursor2 renamed to Ops.Html.Cursor_v2",
-            "author": "pandur",
-            "date": 1602572499242
+            "date": 1602571676524,
+            "type": "new"
         },
         {
             "message": "added option to also add that cursor to the parent element of canvas, e.g. for using this with forceCanvasSize op",
             "type": "feature",
             "author": "pandur",
             "date": 1711475170563
-        },
-        {
-            "message": "Html.Cursor_v2 renamed to Ops.Html.ElementCssCursor_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1760443999400
         }
     ],
     "authorName": "pandur",

@@ -31,5 +31,6 @@
     "summary": "Trigger the browser to scroll to top or bottom of an element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "JEThu1"
 }

@@ -38,5 +38,6 @@
     "summary": "Append string to the inner html or an element",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "hmTiu1"
 }
