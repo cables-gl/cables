@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1752586930203
-        },
-        {
-            "message": "Patch.Pam1KIQ.HttpFetchStream renamed to Ops.Patch.PIeByHS.HttpFetchStream",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1754135673837
-        },
-        {
-            "message": "Patch.PIeByHS.HttpFetchStream renamed to Ops.Json.HttpFetchStream",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1755103592383
         }
     ],
     "layout": {
@@ -45,5 +33,9 @@
             }
         ]
     },
-    "cloneOf": "1405b11f-78be-4ba2-a969-e4e57e693d45"
+    "cloneOf": "1405b11f-78be-4ba2-a969-e4e57e693d45",
+    "summary": "HttpRequest/Fetch Streaming",
+    "docs": {
+        "ports": []
+    }
 }

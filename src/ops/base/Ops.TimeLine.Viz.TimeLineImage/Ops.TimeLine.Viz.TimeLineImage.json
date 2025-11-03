@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1759147891213
-        },
-        {
-            "message": "Patch.P5ETmbY.TimeLineImage renamed to Ops.TimeLine.Viz.TimeLineImage",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1759153706372
         }
     ],
     "layout": {

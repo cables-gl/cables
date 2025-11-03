@@ -34,5 +34,9 @@
             }
         ]
     },
-    "cloneOf": "204bc6c0-e31d-427c-9ffd-ad69d8553a4e"
+    "cloneOf": "204bc6c0-e31d-427c-9ffd-ad69d8553a4e",
+    "summary": "Append string to the inner html or an element",
+    "docs": {
+        "ports": []
+    }
 }

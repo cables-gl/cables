@@ -26,7 +26,10 @@
                 "type": 1,
                 "name": "Scroll to bottom"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "Trigger the browser to scroll to top or bottom of an element",
+    "docs": {
+        "ports": []
     }
 }

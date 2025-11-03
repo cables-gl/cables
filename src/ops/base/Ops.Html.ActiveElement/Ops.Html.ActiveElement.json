@@ -24,5 +24,9 @@
                 "name": "Active Element"
             }
         ]
+    },
+    "summary": "Outputs the currently active/focused element",
+    "docs": {
+        "ports": []
     }
 }

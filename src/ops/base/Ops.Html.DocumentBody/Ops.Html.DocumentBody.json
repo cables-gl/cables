@@ -12,7 +12,6 @@
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 2,
@@ -20,5 +19,9 @@
                 "objType": "element"
             }
         ]
+    },
+    "summary": "Outputs the current document body element",
+    "docs": {
+        "ports": []
     }
 }

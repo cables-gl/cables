@@ -28,5 +28,9 @@
                 "name": "Id"
             }
         ]
+    },
+    "summary": "Get information about an element",
+    "docs": {
+        "ports": []
     }
 }
