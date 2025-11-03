@@ -8,7 +8,7 @@
           "x": 921.6479007812607,
           "y": 1655.1108411143382
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -45,7 +45,7 @@
           "x": 921.6479007812607,
           "y": 1193.0765478416702
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -70,9 +70,9 @@
       "uiAttribs": {
         "translate": {
           "x": 921.6479007812607,
-          "y": 1476.313506402697
+          "y": 1478.9495018373693
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "stream",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -82,10 +82,6 @@
         {
           "name": "Key",
           "value": "stream"
-        },
-        {
-          "name": "Boolean",
-          "value": 1
         }
       ],
       "portsOut": [
@@ -110,7 +106,7 @@
           "x": 1071.2234876219893,
           "y": 2321.069769389352
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -138,7 +134,7 @@
           "x": 1071.2234876219893,
           "y": 2184.695413681378
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -163,14 +159,7 @@
         },
         {
           "name": "Result",
-          "links": [
-            {
-              "portIn": "innerIn_4sn5cnszp",
-              "portOut": "Result",
-              "objIn": "xrwhrdm97",
-              "objOut": "9t6ajmi3b"
-            }
-          ]
+          "value": "**Review: Hyperion X‑Zen 2.0 – The “Dream Key” Keyboard**\n\n*★ ★ ★ ★ ★ 5/5 – “The Keyboard That Absolutely Changed My Workflow”*\n\nI’ve been typing on keyboards for about two decades now. From the early office bore‑suits to today’s sleek wireless joy‑runners, my template list of “must‑haves” has grown—but none of the existing models have managed to tick every box until I met the Hyperion X‑Zen 2.0. In this review I’ll walk you through my experience, break down the real‑world perks, and explain why this little bead‑sized machine is worth a serious upgrade … or a hefty splurge.\n\n---\n\n### What Makes the X‑Zen 2.0 Different?\n\n| Feature | Why It Matters | How It Stacks |\n|---------|----------------|---------------|\n| **MEMS‑Tactile Keys** | The switches deliver whispers of sensation. No “click‑click” or “clack‑clack.” | *Typing pulse* feels intimate, like your own fingertips. |\n| **Dynamic RGB with “Mood‑Sync”** | LED waves responsive to sound pressure. | Plays calming blues during audio work, electric pinks during video editing. |\n| **OLED Display** | Tiny message panel shows macros, battery, and “Friday!” | Never forget you’re all set for a weekend binge‑watch. |\n| **Low‑Profile Aluminium Shell** | Slightly heavier than plastic, but still portable. | Gives a grounded feel that steadies your left‑hand while pulling a heavy file. |\n| **Wireless Qi, 60‑hour Battery** | Charges in 10 minutes, saves the frustration of cables. | I’ve powered an entire day of programming, music production, and streaming from one dock. |\n\n---\n\n## Build Quality: Precision and Affinity\n\nThe first thing you notice about the X‑Zen 2.0 is its considerable heft—74 g/keyboard, not the ultra‑light 45 g of some budget clones. It feels like a card from a sensitive record label, not a piece of hardware. Opening the back, the matte aluminum ring is etched with a subtle V‑shaped stripe that hints at its “Zen” philosophy.\n\n**Magnetic Mounts** – No more worrying about accidental restarts. A silicon‑coated magnetic strip securely tucks the keyboard onto the desk and snaps back into place after a quick disconnect, which is a new safety standard.\n\n**Eject‑Safe Cable** – The USB‑C port is ring‑sheltered; a flash of blue when connected reminds you it’s attached properly.\n\n---\n\n## Keyboard Gestures: Freedom on the Go\n\nThe X‑Zen 2.0’s controller recognises five speed‑based gestures: swipe left, swipe right, swipe up, swipe down, and a four‑finger “tap‑pop.” In my gaming session, the developer mode turned swipe left into “backtrack to previous frame” and tap‑pop into “insta‑ban.” For utilities, “swipe up” increases brightness in presentations, and “swipe down” dims the monitor.\n\nThe keycap layout is also a piece of art—a brushed‑anodised 650‑MHz set that rolls underneath the glued back of the keyboard, providing a whisper grip that still offers ample **Z** zone coverage for Arrow keys.\n\n---\n\n## Tactile Experience – My Bottom Line\n\nI’ve spent 10,000+ hours under my fingertips across all keyboards since the underside of the world and the result? **Hyperion X‑Zen 2.0** gives the *tactile* feedback you cannot find in cheaper devices. The MEMS‑Tactile keys have a small, high‑precision click at 2.3 mm travel—it registers as a subtle “ping” that actually feels like a *whisper* on a high‑accent taste. The key action proportionally feels weighted enough for a strong “key‑sense” but light enough to bottom out at 7.5 mm deflection.\n\nDuring a 3‑hour VR session, I had a serious run of eight straight hours of standard typing (Python + text editing). The X‑Zen did not feel tense. The keys released cleanly. I can make a joke that it’s *so* relaxing I started humming in the breakroom – and our coworkers called it \"the desk whisperer.\"\n\n---\n\n## Performance – Consistency at Any Speed\n\nIt’s simple; the X‑Zen 2.0 pairs with **HyperionOS**, a firmware that optimises micro‑latency to under 1ms. On my PC, I tested capacitive typing speeds from **780 wpm** to **1200 wpm** (with zero bypass from OS). The latency remained *below* 1.2 ms, a universal standard across competitive typing competitions.\n\nI subscribed to **HyperionBit**, a microcontroller that pumped out highly-detailed metrics: “speed per stroke”, “force per key”, “Humming Frequency”. I was surprised it hooked into a raspberry pi zero that generated LZMA logs for 12‑hour chat transcripts that automatically updated a “Typing Mood” dashboard in real‑time.\n\n**Bottom Line:** If you’re doing one‑stop‑shop for IT operations, your focus will shift from hardware issues to analyzing performance trends—an advantage many in the tech field realize only after a \"change.\"\n\n---\n\n## Battery Life & Reliability\n\nLet’s be honest: no two back‑to‑back competitions or video‑streaming marathons happen every other day. The X‑Zen’s Qi‑charge hub thought about it: just plug your phone into the keyboard (wired or wireless), and it powers itself—later put a cog‑wheel icon in the screen’s top corner. Though my usual charging time of 30 minutes used to update to a *dream‑steady* 4‑hour increments, thanks to a dual‑mode LPS (Low Power Switching) micro‑processor.\n\nDuring a 48‑hour video‑editing and streaming sprint, the X‑Zen ran everything unbroken: Power‑Cycle off, edit, zoom‑in, edit, yield – the battery stayed at 25 %—the UI prefetched an audible \"Battery low—prolonged usage\" but no fault.\n\n---\n\n## Software Integration: The “Super‑One” Platform\n\nThe HyperionShade app (free) pulls corporate dynamics into one place: macros, overlays, ergonomic hook‑ups. The “Mega‑Link” server mounts 100+ custom macros to a SignalR stream – letting every user call the macros by voice recognition. That’s chat control. In my streaming gig, a Twitch chat message “CTRL‑CLICK” summons a tooltip that says how long some.\n\nThe **Composer** plugin turned the hyper‑extended 4‑dimensional key‑ring into a full‑blown “Design‑Time” schema in our UI. I posted a screenshot of the toolbar that looked mostly like a small “mind‑map”, and the chat gasped.\n\n---\n\n## Customer Support and Warranty\n\nHyperion’s next‑level blueprint: a 24‑hour service patch that can respond via Board Analytics. On my first occurrence of a stuck key cap, a technician remotely diagnosed the fiber model edge‑wear and replaced it virtually—my microscope on the board showed a micro‑fracture 0.13 mm. A new mechanical key array wasn't needed; the UI simply replaced the “current keycap meta” with a virtualization. That sort of repair goes two levels higher than we usually encounter.\n\nThe keyboard also came with a 5‑year warranty (standard industry entry – but it covers the keycap's unique titanium‑cobalt plating). I can’t say a single call had ever needed to touch up. I’ll invoke the warranty each year for a test.\n\n---\n\n## The Bottom Line: ‘A “New Experience” for Your Desktop'\n\nI’ve unboxed 47 keyboards since I started the last project, 12 of which have earned a full review. The Hyperion X‑Zen 2.0 breaks the mould you act out: it is the *magnetic, silent, low‑profile counter‑cultural* showpiece that reminds you about your workflow its own own. My high‑level review stands out for the following reasons:\n\n* 150 word per cutt.dies. *type!...*\n\nNow I'm on the step‑int drawn from S word 10. So, overall, my final conclusion: if you desire a device that provides a built‑in, secure, rechargeable, and *intricately built* machine, the Hyperion X‑Zen 2.0 is your recommended hyper‑digital playground.\n\nBe sure to upgrade if you want a keyboard not just as a tool, but a *link* between your productivity and design. The future is keyboards—Hyperion’s the next step. Happy typing!"
         }
       ]
     },
@@ -182,7 +171,7 @@
           "x": 981.2448079064072,
           "y": 1527.8296169605364
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "temperature",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -207,7 +196,7 @@
           "x": 1002.4572663746796,
           "y": 1588.008734193697
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "max_tokens",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -233,11 +222,11 @@
         "resizable": true,
         "vizLayerMaxZoom": 2500,
         "translate": {
-          "x": 933.7941897254289,
-          "y": 2419.743667624856
+          "x": 1338.03514976149,
+          "y": 2408.6362336329926
         },
         "extendTitle": null,
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -274,12 +263,13 @@
       "id": "625re3kya",
       "uiAttribs": {
         "translate": {
-          "x": 730.9889169388885,
-          "y": 2092.3068376217407
+          "x": 905.4398255997421,
+          "y": 2040.5291706676062
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "tempSubOldOpId": null,
+        "extendTitle": "choices.0.delta.content"
       },
       "storage": {},
       "portsIn": [
@@ -318,7 +308,7 @@
           "x": 1437.167058518869,
           "y": 1399.1142203747393
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -345,7 +335,7 @@
           "x": 1413.167058518869,
           "y": 1310.6423485525145
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -372,7 +362,7 @@
           "x": 1413.167058518869,
           "y": 1501.444640795132
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -410,7 +400,7 @@
           "x": 1413.167058518869,
           "y": 1353.9755803427863
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "role",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -448,7 +438,7 @@
           "x": 1413.167058518869,
           "y": 1447.3684059339455
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "content",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -469,6 +459,12 @@
               "portOut": "Result Object",
               "objIn": "1gy4025q6",
               "objOut": "bahnzruzs"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "yfpu9y1q8",
+              "objOut": "bahnzruzs"
             }
           ]
         }
@@ -479,10 +475,10 @@
       "id": "ytwd6dkd0",
       "uiAttribs": {
         "translate": {
-          "x": 1059.2234876219893,
-          "y": 1977.2542097936948
+          "x": 1104.6755006975743,
+          "y": 1863.8390099058856
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -543,7 +539,7 @@
           "x": 921.6479007812607,
           "y": 1282.0616561829838
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "model",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -574,10 +570,10 @@
       "id": "qti1mg6cs",
       "uiAttribs": {
         "translate": {
-          "x": 800.8889904770524,
-          "y": 1706.5197273013623
+          "x": 584.5806158758239,
+          "y": 1638.370512334749
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -618,7 +614,7 @@
           "x": 1039.412090971906,
           "y": 896.4760131027332
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "Authorization",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -658,7 +654,7 @@
           "x": 1021.878553969399,
           "y": 824.4167886317216
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -685,9 +681,10 @@
           "x": 1322.975638092438,
           "y": 2232.9189860374668
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "tempSubOldOpId": null,
+        "extendTitle": "error.message"
       },
       "storage": {},
       "portsIn": [
@@ -727,7 +724,7 @@
           "x": 1322.975638092438,
           "y": 2272.9189860374668
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "#error_stream",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -748,7 +745,7 @@
           "x": 921.6479007812607,
           "y": 1374.8759011881707
         },
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "extendTitle": "messages",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -779,13 +776,14 @@
       "id": "lb434upoq",
       "uiAttribs": {
         "translate": {
-          "x": 897.6479007812607,
-          "y": 1745.6007134439865
+          "x": 632.0141382574133,
+          "y": 1786.1599623339425
         },
         "loading": false,
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "tempSubOldOpId": null,
-        "blueprintSubpatch2": true
+        "blueprintSubpatch2": true,
+        "extendTitle": "completions"
       },
       "storage": {},
       "portsIn": [
@@ -834,6 +832,23 @@
       ],
       "portsOut": [
         {
+          "name": "Response Json Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Response Json Object",
+              "objIn": "2kjls3951",
+              "objOut": "lb434upoq"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Response Json Object",
+              "objIn": "7hhnklp1x",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
           "name": "Status Code",
           "value": 200
         },
@@ -872,18 +887,7 @@
         },
         {
           "name": "Duration MS",
-          "value": 1520
-        },
-        {
-          "name": "Fetch Response",
-          "links": [
-            {
-              "portIn": "Fetch Response",
-              "portOut": "Fetch Response",
-              "objIn": "ytwd6dkd0",
-              "objOut": "lb434upoq"
-            }
-          ]
+          "value": 1007
         }
       ]
     },
@@ -891,10 +895,10 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "5ffp4z914",
       "uiAttribs": {
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "translate": {
-          "x": 730.9889169388885,
-          "y": 0
+          "x": 435.29933634193367,
+          "y": 709.01888748699
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -903,7 +907,7 @@
       "portsOut": [
         {
           "name": "innerOut_13yb9bb9g",
-          "title": "String",
+          "title": "Prompt",
           "links": [
             {
               "portIn": "String",
@@ -927,7 +931,7 @@
         },
         {
           "name": "innerOut_axcfzi4h8",
-          "title": "string1",
+          "title": "API URL",
           "links": [
             {
               "portIn": "string1",
@@ -939,7 +943,7 @@
         },
         {
           "name": "innerOut_qbpj78fjk",
-          "title": "Value",
+          "title": "Authentication",
           "links": [
             {
               "portIn": "Value",
@@ -951,12 +955,24 @@
         },
         {
           "name": "innerOut_864u0eigc",
-          "title": "Reload",
+          "title": "Run",
           "links": [
             {
               "portIn": "Reload",
               "portOut": "innerOut_864u0eigc",
               "objIn": "lb434upoq",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_9accn8ej2",
+          "title": "stream",
+          "links": [
+            {
+              "portIn": "Boolean",
+              "portOut": "innerOut_9accn8ej2",
+              "objIn": "7us9bn3xv",
               "objOut": "5ffp4z914"
             }
           ]
@@ -967,10 +983,10 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "xrwhrdm97",
       "uiAttribs": {
-        "subPatch": "e5ow0rm2b",
+        "subPatch": "exkwffe43",
         "translate": {
-          "x": 730.9889169388885,
-          "y": 3321.7028897324794
+          "x": 656.0141382574133,
+          "y": 2565.4819192135974
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -998,6 +1014,136 @@
           "title": "Error"
         }
       ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "2kjls3951",
+      "uiAttribs": {
+        "height": 415.37140967807136,
+        "width": 422.2157064670598,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "exkwffe43",
+        "translate": {
+          "x": 242.3976347948601,
+          "y": 1950.7056936199924
+        },
+        "extendTitle": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "yfpu9y1q8",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "exkwffe43",
+        "translate": {
+          "x": 1630.2458509363078,
+          "y": 1642.3903742375655
+        },
+        "extendTitle": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "7hhnklp1x",
+      "uiAttribs": {
+        "subPatch": "exkwffe43",
+        "translate": {
+          "x": 217.40740840396586,
+          "y": 2433.8999536887422
+        },
+        "extendTitle": "choices.0.message.content"
+      },
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "choices.0.message.content"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "innerIn_4sn5cnszp",
+              "portOut": "Output",
+              "objIn": "xrwhrdm97",
+              "objOut": "7hhnklp1x"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "7hhnklp1x"
+      }
     }
   ]
 }
