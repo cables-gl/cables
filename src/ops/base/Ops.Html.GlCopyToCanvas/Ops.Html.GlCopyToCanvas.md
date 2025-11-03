@@ -1,0 +1,1 @@
+the content of the current webgl rendering canvas will be copied to another (2d) canvas. this way you can easily render to multiple canvases with one patch. they could even be split out on a long page
