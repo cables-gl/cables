@@ -1,0 +1,51 @@
+{
+    "id": "b2d4d0df-aa1a-47e6-93d4-63c5d878e1ab",
+    "created": 1751890385328,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1751890385356
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "Numbers",
+                    "Strings"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Reverse",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Sort an array of objects by the values of a key",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "shtaz1"
+}

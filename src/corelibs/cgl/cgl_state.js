@@ -22,9 +22,9 @@ export const BLENDS = {
  * @namespace external:CGL
  * @hideconstructor
  */
-// const Context(_patch)
 export class CglContext extends CgContext
 {
+    #cursor = "auto";
 
     /**
      * @param {Patch} _patch
@@ -53,7 +53,7 @@ export class CglContext extends CgContext
         this.maxVaryingVectors = 0;
         this.currentProgram = null;
         this._hadStackError = false;
-        this.glSlowRenderer = false;
+        this.glSlowRendere = false;
         this._isSafariCrap = false;
 
         this.temporaryTexture = null;
@@ -61,7 +61,7 @@ export class CglContext extends CgContext
         /** @type {WebGL2RenderingContext} */
         this.gl = null;
 
-        this._cursor = "auto";
+        this.#cursor = "auto";
         this._currentCursor = "";
 
         this._viewPortStack = [];
@@ -151,8 +151,8 @@ export class CglContext extends CgContext
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
-        // safari stuff..........
-        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPhone/i)))
+        // safari stuff.......... ipad is not detectable,just do it for any safari
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))// && ((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))))
         {
             this._isSafariCrap = true;
             this.glUseHalfFloatTex = true;
@@ -391,9 +391,9 @@ export class CglContext extends CgContext
             this.emitEvent(CgContext.EVENT_RESIZE);
         }
 
-        if (this._cursor != this._currentCursor)
+        if (this.#cursor != this._currentCursor)
         {
-            this._currentCursor = this.canvas.style.cursor = this._cursor;
+            this._currentCursor = this.canvas.style.cursor = this.#cursor;
         }
 
         this.emitEvent("endframe");
@@ -1152,7 +1152,7 @@ export class CglContext extends CgContext
 
     /**
      * @param {Geometry} geom
-     * @param {CglMeshOptions} options
+     * @param {import("./cgl_mesh.js").CglMeshOptions} options
      */
     createMesh(geom, options)
     {
@@ -1169,7 +1169,7 @@ export class CglContext extends CgContext
      */
     setCursor(str)
     {
-        this._cursor = str;
+        this.#cursor = str;
     }
 
     /**

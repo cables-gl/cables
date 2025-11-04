@@ -27,19 +27,10 @@
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Geometry.ScaleGeometry",
+            "message": "new op",
             "author": "pandur",
-            "date": 1660469559287
-        },
-        {
-            "message": "Ops.User.pandur.CopyGeometry renamed to Ops.Gl.Geometry.CopyGeometry",
-            "author": "pandur",
-            "date": 1660469637701
-        },
-        {
-            "message": "Ops.Gl.Geometry.CopyGeometry renamed to Ops.Dev.Gl.Geometry.CopyGeometry",
-            "author": "pandur",
-            "date": 1665467727285
+            "date": 1660469559287,
+            "type": "new"
         }
     ]
 }

@@ -43,12 +43,12 @@
     ],
     "summary": "set number variable by trigger",
     "issues": "",
-
     "youtubeids": [
         "30v_GQc6ajA"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "JEYSfE"
+    "exampleProjectId": "JEYSfE",
+    "license": "MIT"
 }

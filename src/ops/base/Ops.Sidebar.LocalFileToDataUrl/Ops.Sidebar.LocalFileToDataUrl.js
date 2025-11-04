@@ -162,7 +162,7 @@ function handleFileSelect(evt)
                 fileInputButton.innerHTML = numFiles + " files selected";
 
                 clearTimeout(outDelay);
-                outDelay = setTimeout(() => { outDataURLs.setRef(dataUrlArray); }, 100);
+                outDelay = setTimeout(() => { outDataURLs.setRef(dataUrlArray); outFileChanged.trigger(); }, 100);
             };
             readerLoop.readAsDataURL(evt.target.files[i]);
         }

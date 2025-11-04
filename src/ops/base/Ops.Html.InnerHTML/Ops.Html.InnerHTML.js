@@ -3,6 +3,7 @@ const
     inValue = op.inString("Value"),
     inWhat = op.inSwitch("Type", ["HTML", "Text"], "HTML"),
     inActive = op.inBool("Active", true),
+    inClear = op.inTriggerButton("Clear"),
     outEle = op.outObject("HTML Element");
 
 let ele = null;
@@ -45,3 +46,8 @@ function update()
 
     outEle.setRef(ele);
 }
+
+inClear.onTriggered = () =>
+{
+    if (ele)ele.innerHTML = "";
+};

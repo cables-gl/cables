@@ -1,0 +1,41 @@
+{
+    "id": "ac5c6a64-f2af-408a-bbea-bbe7f96a3fb7",
+    "created": 1752586930174,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1752586930203
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Fetch Response"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            },
+            {
+                "type": 1,
+                "name": "Received Result"
+            },
+            {
+                "type": 1,
+                "name": "Started"
+            }
+        ]
+    },
+    "cloneOf": "1405b11f-78be-4ba2-a969-e4e57e693d45",
+    "summary": "HttpRequest/Fetch Streaming",
+    "docs": {
+        "ports": []
+    }
+}

@@ -4,23 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1605699580894
+            "date": 1605699580894,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.loadingicon renamed to Ops.Html.LoadingIcon",
+            "message": "fixed problem becoming invisible on safari sometimes",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1607066550466
+            "date": 1752153571558
         },
         {
-            "message": "Ops.Html.LoadingIcon renamed to Ops.Html.LoadingIndicator",
+            "message": "added element output",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1607066879753
-        },
-        {
-            "message": "Html.LoadingIndicator renamed to Ops.Html.Utils.LoadingIndicator",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1734353105652
+            "date": 1753343443148
         }
     ],
     "authorName": "pandur",
@@ -34,6 +31,11 @@
             },
             {
                 "type": 0,
+                "name": "Center Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Style index",
                 "values": [
                     "Spinner",
@@ -43,7 +45,13 @@
                 "subType": "integer"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Elment",
+                "objType": "element"
+            }
+        ]
     },
     "summary": "show a typical web loading/progress indicator animation",
     "issues": "",
@@ -51,5 +59,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "EsV74q"
+    "exampleProjectId": "EsV74q",
+    "license": "MIT"
 }

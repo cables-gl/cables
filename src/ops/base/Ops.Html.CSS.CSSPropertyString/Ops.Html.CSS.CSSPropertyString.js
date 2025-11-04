@@ -12,8 +12,13 @@ inProperty.onChange = updateProperty;
 inValue.onChange = update;
 let ele = null;
 
-inEle.onChange =
-    outEle.onLinkChanged =
+inEle.onChange = () =>
+{
+    // if (inEle.get() == ele) return; //needs to be updated..........
+    removeProp();
+};
+
+outEle.onLinkChanged =
     inEle.onLinkChanged = removeProp;
 
 inActive.onChange = () =>

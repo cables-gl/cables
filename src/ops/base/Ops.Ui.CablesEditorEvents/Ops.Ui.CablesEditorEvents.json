@@ -12,6 +12,12 @@
             "type": "new",
             "author": "pandur",
             "date": 1715092320586
+        },
+        {
+            "message": "trigger output when any port parameter was changed in the UI",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1759840841305
         }
     ],
     "authorName": "pandur",
@@ -27,6 +33,10 @@
             {
                 "type": 1,
                 "name": "Saving Patch"
+            },
+            {
+                "type": 1,
+                "name": "PortValueEdited"
             }
         ]
     },

@@ -9,10 +9,9 @@ const
     scrollPercentageX = op.outNumber("Percentage X"),
     scrollPercentageY = op.outNumber("Percentage Y");
 
+op.toWorkPortsNeedToBeLinked(inEle);
 let el = null;
 let oldEle = null;
-
-op.toWorkPortsNeedToBeLinked(inUpdate);
 
 updateScroll();
 

@@ -1,0 +1,43 @@
+{
+    "id": "2c3dd5c8-5f93-4640-98a5-165165faeb11",
+    "created": 1754125033429,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1754125033454
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Html"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "cloneOf": "204bc6c0-e31d-427c-9ffd-ad69d8553a4e",
+    "summary": "Append string to the inner html or an element",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "hmTiu1"
+}

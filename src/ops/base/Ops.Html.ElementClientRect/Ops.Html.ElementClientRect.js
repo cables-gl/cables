@@ -2,6 +2,7 @@ const
     inUpd = op.inTriggerButton("Update"),
     inEle = op.inObject("Element", null, "element"),
     inUnits = op.inSwitch("Pixel Units", ["CSS Pixels", "Display Pixels"], "CSS Pixels"),
+    inPos = op.inSwitch("Position", ["In Canvas", "Absolute"], "In Canvas"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outWidth = op.outNumber("Width"),
@@ -11,7 +12,7 @@ inEle.onChange =
 inUpd.onTriggered = () =>
 {
     let ele = inEle.get();
-    if (!ele)
+    if (!ele || !ele.getBoundingClientRect)
     {
         outX.set(0);
         outY.set(0);
@@ -20,7 +21,7 @@ inUpd.onTriggered = () =>
         return;
     }
     const r = ele.getBoundingClientRect();
-    const rCanv = op.patch.cgl.canvas.getBoundingClientRect();
+    const rCanv = op.patch.containerElement.getBoundingClientRect();
 
     let mul = 1.0;
 
@@ -29,8 +30,17 @@ inUpd.onTriggered = () =>
         mul = op.patch.cgl.pixelDensity;
     }
 
-    outX.set(r.left * mul - rCanv.left * mul);
-    outY.set(r.top * mul - rCanv.top * mul);
+    if (inPos.get() == "In Canvas")
+    {
+        outX.set(r.left * mul - rCanv.left * mul);
+        outY.set(r.top * mul - rCanv.top * mul);
+    }
+    else
+    {
+        outX.set(r.left * mul);
+        outY.set(r.top * mul);
+    }
+
     outWidth.set(r.width * mul);
     outHeight.set(r.height * mul);
 };

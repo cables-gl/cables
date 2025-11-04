@@ -1,0 +1,48 @@
+{
+    "id": "0d56fe8d-26ba-4f67-88c9-5133df22e991",
+    "created": 1760529392103,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1760529392104
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Anim"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Key Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Key Time",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Get data from a single key in an animation",
+    "docs": {
+        "ports": []
+    }
+}

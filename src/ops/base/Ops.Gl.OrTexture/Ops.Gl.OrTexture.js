@@ -19,17 +19,18 @@ str0.onChange =
     str7.onChange = exec;
 
 const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
+const errorTex = CGL.Texture.getErrorTexture(op.patch.cgl);
 const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);
 
 function exec()
 {
-    if (str0.get() && str0.get() != emptyTex && str0.get() != defaultTex) result.set(str0.get());
-    else if (str1.get() && str1.get() != emptyTex && str1.get() != defaultTex) result.set(str1.get());
-    else if (str2.get() && str2.get() != emptyTex && str2.get() != defaultTex) result.set(str2.get());
-    else if (str3.get() && str3.get() != emptyTex && str3.get() != defaultTex) result.set(str3.get());
-    else if (str4.get() && str4.get() != emptyTex && str4.get() != defaultTex) result.set(str4.get());
-    else if (str5.get() && str5.get() != emptyTex && str5.get() != defaultTex) result.set(str5.get());
-    else if (str6.get() && str6.get() != emptyTex && str6.get() != defaultTex) result.set(str6.get());
-    else if (str7.get() && str7.get() != emptyTex && str7.get() != defaultTex) result.set(str7.get());
+    if (str0.get() && str0.get() != emptyTex && str0.get() != errorTex && str0.get() != defaultTex) result.set(str0.get());
+    else if (str1.get() && str1.get() != emptyTex && str1.get() != errorTex && str1.get() != defaultTex) result.set(str1.get());
+    else if (str2.get() && str2.get() != emptyTex && str2.get() != errorTex && str2.get() != defaultTex) result.set(str2.get());
+    else if (str3.get() && str3.get() != emptyTex && str3.get() != errorTex && str3.get() != defaultTex) result.set(str3.get());
+    else if (str4.get() && str4.get() != emptyTex && str4.get() != errorTex && str4.get() != defaultTex) result.set(str4.get());
+    else if (str5.get() && str5.get() != emptyTex && str5.get() != errorTex && str5.get() != defaultTex) result.set(str5.get());
+    else if (str6.get() && str6.get() != emptyTex && str6.get() != errorTex && str6.get() != defaultTex) result.set(str6.get());
+    else if (str7.get() && str7.get() != emptyTex && str7.get() != errorTex && str7.get() != defaultTex) result.set(str7.get());
     else result.set(emptyTex);
 }

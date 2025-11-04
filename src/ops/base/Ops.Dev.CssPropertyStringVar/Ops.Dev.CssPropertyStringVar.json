@@ -1,0 +1,40 @@
+{
+    "id": "933a4917-e05a-4ba0-935e-6dffbd346f5f",
+    "created": 1757676064910,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1757676064911
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": 5,
+                "name": "Value",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    }
+}

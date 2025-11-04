@@ -1,0 +1,39 @@
+{
+    "id": "7cb651bf-a057-4b80-a8ec-a41534793164",
+    "created": 1757847314209,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1757847314234
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Has Focus",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Is the connected element currently focused",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "9jTwz1"
+}

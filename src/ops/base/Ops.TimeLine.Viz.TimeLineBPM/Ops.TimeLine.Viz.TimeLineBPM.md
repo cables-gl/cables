@@ -1,0 +1,1 @@
+Synchronize animations to music or rhythm. When you add the Timeline BPM operator, it draws visual beat markers directly in the timeline. Each small rectangle represents a beat, with every fourth beat highlighted to indicate the start of a new bar. Adjusting the BPM value updates the spacing of these markersó

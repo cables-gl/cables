@@ -4,13 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1675766579171
-        },
-        {
-            "message": "Ops.User.pandur.ArrayStrideConvert renamed to Ops.Array.ArraySwizzle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1675769601855
+            "date": 1675766579171,
+            "type": "new"
         }
     ],
     "authorName": "pandur",

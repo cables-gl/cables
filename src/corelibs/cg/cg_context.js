@@ -17,6 +17,12 @@ export class CgContext extends Events
 
     gApi = 0;
 
+    _textureslots = [];
+    _pMatrixStack = new MatrixStack();
+    _mMatrixStack = new MatrixStack();
+    _vMatrixStack = new MatrixStack();
+    canvasScale = 1; // this is not pixeldensity, this is only for command "scale canvas"
+
     /**
      * Description
      * @param {Patch} _patch
@@ -75,13 +81,6 @@ export class CgContext extends Events
          * @type {mat4}
          */
         this.vMatrix = mat4.create();
-        this._textureslots = [];
-
-        this._pMatrixStack = new MatrixStack();
-        this._mMatrixStack = new MatrixStack();
-        this._vMatrixStack = new MatrixStack();
-
-        this.canvasScale = 1;
 
         mat4.identity(this.mMatrix);
         mat4.identity(this.vMatrix);
@@ -163,6 +162,7 @@ export class CgContext extends Events
         if (typeof canvEle === "string") canvEle = document.getElementById(canvEle);
 
         this.cgCanvas = new CgCanvas({ "canvasEle": canvEle, "cg": this });
+        if (!canvEle) return;
 
         canvEle.parentElement.classList.add("cablesContainer");
         if (this._setCanvas) this._setCanvas(canvEle);

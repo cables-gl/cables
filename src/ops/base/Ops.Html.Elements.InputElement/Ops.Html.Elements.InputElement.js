@@ -9,8 +9,8 @@ const
 
     inAutoComplete = op.inBool("Autocomplete", false),
     inMaxLength = op.inInt("Max Length", 0),
+    inEnterPrev = op.inBool("Enter Key Prevent Default", false),
 
-    inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
 
     inFocus = op.inTriggerButton("Focus"),
@@ -20,7 +20,9 @@ const
 
     outElement = op.outObject("DOM Element", null, "element"),
     outString = op.outString("Value"),
-    outHover = op.outBoolNum("Hover");
+    outHover = op.outBoolNum("Hover"),
+    outKeyEnter = op.outTrigger("Enter pressed"),
+    outKeyEsc = op.outTrigger("Escape pressed");
 
 let listenerElement = null;
 let prevDisplay = "block";
@@ -64,7 +66,6 @@ inMaxLength.onChange =
 inPlaceHolder.onChange = inText.onChange = updateText;
 
 inStyle.onChange = updateStyle;
-inInteractive.onChange = updateInteractive;
 inVisible.onChange = updateVisibility;
 
 updateText();
@@ -93,6 +94,8 @@ function createElement()
 
     canvas.appendChild(div);
     outElement.set(div);
+
+    updateInteractive();
 }
 
 function removeElement()
@@ -100,6 +103,7 @@ function removeElement()
     if (div) removeClasses();
     if (div && div.parentNode) div.parentNode.removeChild(div);
     div = null;
+    updateInteractive();
 }
 
 function setCSSVisible(visible)
@@ -216,7 +220,7 @@ function onMouseLeave(e)
 function updateInteractive()
 {
     removeListeners();
-    if (inInteractive.get()) addListeners();
+    addListeners();
 }
 
 inId.onChange = function ()
@@ -244,6 +248,16 @@ function addListeners()
     {
         listenerElement.addEventListener("pointerleave", onMouseLeave);
         listenerElement.addEventListener("pointerenter", onMouseEnter);
+
+        listenerElement.addEventListener("keydown", function (event)
+        {
+            if (event.key === "Enter")
+            {
+                if (inEnterPrev.get())event.preventDefault();
+                outKeyEnter.trigger();
+            }
+            if (event.key === "Escape") outKeyEsc.trigger();
+        });
     }
 }
 

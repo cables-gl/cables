@@ -1,0 +1,1 @@
+Change color and thickness of scrollbars of an element

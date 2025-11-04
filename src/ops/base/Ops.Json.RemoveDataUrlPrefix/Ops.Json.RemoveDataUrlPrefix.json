@@ -1,0 +1,32 @@
+{
+    "id": "57c31044-0670-4d48-bc4d-723c7c154d4c",
+    "created": 1752507068862,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1752507068885
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "String Output"
+            }
+        ]
+    },
+    "summary": "Removes data URL prefix from a string",
+    "docs": {
+        "ports": []
+    }
+}

@@ -80,13 +80,20 @@
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888139245
+            "date": 1643888139245,
+            "type": "bugfix"
         },
         {
-            "message": "Aaccessibility: button has aria-label",
+            "message": "Accessibility: button has aria-label",
             "type": "feature",
             "author": "pandur",
             "date": 1733326962053
+        },
+        {
+            "message": "update number input field when changing value input port",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1752488779977
         }
     ],
     "exampleProjectId": "aDgYX5",

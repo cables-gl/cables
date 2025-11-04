@@ -1,0 +1,119 @@
+{
+    "id": "54a96c97-9d3a-4a4b-93f0-dbc766436193",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1610634340065,
+            "type": "new"
+        },
+        {
+            "message": "fixed -1 to 1 mapping",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1744022351425
+        },
+        {
+            "message": "fixed 0-1 and -1 to 1 ranges were swapped",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1751898355560
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1751898167834,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array1x"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "values": [
+                    "AB",
+                    "ABC",
+                    "ABCD"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "A index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "B index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "C index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "D index",
+                "values": [
+                    "Input",
+                    "index",
+                    "0-1",
+                    "-1-1",
+                    "0",
+                    "1"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array3x"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "convert an array1 to array2,3,4 by choosing content for new axis",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "omZrLu",
+    "license": "MIT"
+}

@@ -44,6 +44,7 @@ function onFilenameChanged()
     }
 
     imageEle.setAttribute("src", fileUrl);
+    imageEle.style.minWidth = "50%";
 }
 
 function onParentChanged()

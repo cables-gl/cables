@@ -7,6 +7,7 @@ import { CgMesh } from "../cg/cg_mesh.js";
 import { CgShader } from "../cg/cg_shader.js";
 
 import { CglContext } from "./cgl_state.js";
+import { Shader } from "./cgl_shader.js";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -166,6 +167,12 @@ class Mesh extends CgMesh
         for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
     }
 
+    /**
+     * @param {AttributeOject} attr
+     * @param { Float32Array } array
+     * @param {number} start
+     * @param {number} end
+     */
     setAttributeRange(attr, array, start, end)
     {
         if (!attr) return;
@@ -736,7 +743,7 @@ class Mesh extends CgMesh
      * @memberof Mesh
      * @instance
      * @description draw mesh to screen
-     * @param {CgShader} shader
+     * @param {Shader} shader
      */
     render(shader)
     {
@@ -747,7 +754,7 @@ class Mesh extends CgMesh
 
         if (!shader)
         {
-            return console.log("shadern not valid");
+            return console.log("shader not valid");
         }
 
         if (!shader.isValid())
@@ -959,6 +966,7 @@ class Mesh extends CgMesh
         this.#bufVerticesIndizes = null;
 
         this._disposeAttributes();
+        return null;
     }
 }
 

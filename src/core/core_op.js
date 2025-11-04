@@ -40,6 +40,17 @@ import { Patch } from "./core_patch.js";
  * @property {Translation} [translate]
  * @property {string|number} [subPatch]
  * @property {string} [comment_title]
+ * @property {boolean} [highlighted]
+ * @property {boolean} [highlightedMore]
+ * @property {string} [mathTitle]
+ * @property {string} [extendTitlePort]
+ * @property {string} [display]
+ * @property {string} [hasArea]
+ * @property {number} [resizableX]
+ * @property {number} [resizableY]
+ * @property {number} [tlOrder]
+ * @property {number} [heatmapIntensity]
+ * @property {string} [commentOverwrite]
  */
 
 /**
@@ -47,9 +58,6 @@ import { Patch } from "./core_patch.js";
  * @type Patch
  */
 
-/**
- * @template {CorePatch} Patch
- */
 export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";
@@ -294,6 +302,7 @@ export class Op extends Events
     }
 
     /**
+     * @TODO  move to ui extend class.....
      * @param {OpUiAttribs} newAttribs
      */
     _setUiAttrib(newAttribs)
@@ -332,6 +341,8 @@ export class Op extends Events
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (this.uiAttribs.hasOwnProperty("highlighted") && this.uiAttribs.highlighted == false) delete this.uiAttribs.highlighted;
+        if (this.uiAttribs.hasOwnProperty("highlightedMore") && this.uiAttribs.highlightedMore == false) delete this.uiAttribs.highlightedMore;
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;
         if (this.uiAttribs.hasOwnProperty("selected")) changed = true;
 
@@ -355,7 +366,9 @@ export class Op extends Events
     addOutPort(p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
-        p._op = this;
+        if (p.op != this)console.error("port op is not this...");
+        // p._op = this; // remove if above does never happen....
+
         this.portsOut.push(p);
         this.emitEvent("onPortAdd", p);
         return p;
@@ -379,14 +392,23 @@ export class Op extends Events
     }
 
     /**
-     * @param {any|Port | MultiPort} p
+     * @param {any | Port | MultiPort} p
+     * @param {Port} [afterPort] insert the port after given port
      */
-    addInPort(p)
+    addInPort(p, afterPort)
     {
         p.direction = Port.DIR_IN;
         p._op = this;
 
-        this.portsIn.push(p);
+        if (!afterPort)
+        {
+            this.portsIn.push(p);
+        }
+        else
+        {
+            const idx = this.portsIn.indexOf(afterPort);
+            this.portsIn.splice(idx + 1, 0, p);
+        }
         this.emitEvent("onPortAdd", p);
 
         return p;
@@ -450,6 +472,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {number} v
      */
     inValueFloat(name, v)
     {
@@ -458,6 +482,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {number} v
      */
     inValue(name, v)
     {
@@ -481,6 +507,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {number | boolean} v
      */
     inValueBool(name, v)
     {
@@ -713,8 +741,8 @@ export class Op extends Events
      * @param {String} name
      * @param {Array} values
      * @param {String} v default value
-     * @return {Port} created port
      * @param {boolean} [noindex]
+     * @return {Port} created port
      */
     inDropDown(name, values, v, noindex)
     {
@@ -861,7 +889,10 @@ export class Op extends Events
     }
 
     /**
+     *
      * @deprecated
+     * @param {string} name
+     * @param {number} v
      */
     inValueInt(name, v)
     {
@@ -877,9 +908,7 @@ export class Op extends Events
     inInt(name, v)
     {
         // old
-        const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" })
-        );
+        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" }));
         if (v !== undefined)
         {
             p.set(v);
@@ -939,6 +968,7 @@ export class Op extends Events
     /**
      * create a texture input port
      * @param {String} name
+     * @param {any} v
      * @return {Port} created port
      */
     inTexture(name, v)
@@ -1027,6 +1057,10 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {number} v
+     * @param {number} min
+     * @param {number} max
      */
     inValueSlider(name, v, min, max)
     {
@@ -1062,6 +1096,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {string} v
      */
     outFunction(name, v)
     {
@@ -1084,6 +1120,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {number} v
      */
     outValue(name, v)
     {
@@ -1105,6 +1143,8 @@ export class Op extends Events
 
     /**
      * @deprecated
+     * @param {string} name
+     * @param {boolean} v
      */
     outValueBool(name, v)
     {
@@ -1134,6 +1174,7 @@ export class Op extends Events
     /**
      * create output boolean port,value will be converted to 0 or 1
      * @param {String} name
+     * @param {string | number | boolean | any[]} v
      * @return {Port} created port
      */
     outBoolNum(name, v)
@@ -1252,17 +1293,9 @@ export class Op extends Events
     {
         const p = new Port(this, name, Port.TYPE_DYNAMIC, options);
 
-        p.shouldLink = (p1, p2) =>
+        p.shouldLink = () =>
         {
-            if (filter && CABLES.isArray(filter))
-            {
-                // for (let i = 0; i < filter.length; i++)
-                // {
-                // if (p1 == this && p2.type === filter[i]) return true;
-                // if (p2 == this && p1.type === filter[i]) return true;
-                // }
-                return false; // types do not match
-            }
+            if (filter && Array.isArray(filter)) return false; // types do not match
             return true; // no filter set
         };
 
@@ -1281,6 +1314,7 @@ export class Op extends Events
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     }
 
+    // @TODO should be move to extend...
     getSerialized()
     {
         const opObj = {};
@@ -1294,6 +1328,8 @@ export class Op extends Events
         if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = JSON.parse(JSON.stringify(this.storage));
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
+        if (opObj.uiAttribs.hasOwnProperty("highlighted")) delete opObj.uiAttribs.highlighted;
+        if (opObj.uiAttribs.hasOwnProperty("highlightedMore")) delete opObj.uiAttribs.highlightedMore;
 
         if (opObj.uiAttribs.title === "") delete opObj.uiAttribs.title;
         if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
@@ -1607,11 +1643,11 @@ export class Op extends Events
 
     /**
      * show op error message - set message to null to remove error message
-     * @param {string} id error id
-     * @param {string} txt text message
-     * @param {number} level level
+     * @param {string} _id error id
+     * @param {string} _txt text message
+     * @param {number} _level level
      */
-    setUiError(id, txt, level = 2, options = {})
+    setUiError(_id, _txt, _level = 2, _options = {})
     {
         // overwritten in ui: core_extend_op
     }
@@ -1697,9 +1733,6 @@ export class Op extends Events
 
     /**
      * show a warning of this op is a child of parentOpName
-     * @function
-     * @instance
-     * @memberof Op
      * @param {String} parentOpName
      * @param {number} type
      */
@@ -1719,9 +1752,6 @@ export class Op extends Events
 
     /**
      * show a small X to indicate op is not working when given ports are not linked
-     * @function
-     * @instance
-     * @memberof Op
      * @param {Array<Port>} port
      */
     toWorkPortsNeedToBeLinked()
@@ -1749,24 +1779,19 @@ export class Op extends Events
 
     /**
      * refresh op parameters, if current op is selected
-     * @function
-     * @instance
-     * @memberof Op
      */
     refreshParams()
     {
-        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) Patch.getGui().opParams.show(this);
     }
 
     /**
      * Returns true if op is selected and parameter are shown in the editor, can only return true if in editor/ui
-     * @instance
-     * @memberof Op
      * @returns {Boolean} - is current ui op
      */
     isCurrentUiOp()
     {
-        if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
+        if (this.patch.isEditorMode()) return Patch.getGui().patchView.isCurrentOp(this);
     }
 
     checkGraphicsApi(api = CglContext.API_WEBGL)

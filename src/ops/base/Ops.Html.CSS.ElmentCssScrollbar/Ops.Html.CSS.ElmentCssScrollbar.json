@@ -1,0 +1,85 @@
+{
+    "id": "eaa9adb2-7348-46ef-bfc3-4528c04b732b",
+    "created": 1757944269444,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1757944269444
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Thin",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Background A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Set CSS properties for scrollbars",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Tapku1"
+}

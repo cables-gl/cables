@@ -5,14 +5,17 @@ const valuesPort = op.inArray("Values");
 const defaultValuePort = op.inString("Default", "");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
+const inMultiple = op.inBool("Multiple Selection", false);
 const inSize = op.inInt("Lines", 1);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
+
 setDefaultValueButtonPort.onTriggered = setDefault;
 
 // outputs
 const siblingsPort = op.outObject("Children");
 const valuePort = op.outString("Result", defaultValuePort.get());
-const outIndex = op.outNumber("Index");
+const outIndex = op.outNumber("Index"),
+    outValues = op.outArray("Selected Values");
 
 defaultValuePort.setUiAttribs({ "title": "Input" });
 
@@ -73,6 +76,7 @@ parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
+
 valuesPort.onChange = onValuesPortChange;
 
 let options = [];
@@ -83,6 +87,14 @@ inSize.onChange = () =>
     input.setAttribute("size", inSize.get());
 };
 
+inMultiple.onChange = () =>
+{
+    if (inMultiple.get())
+        input.setAttribute("multiple", inMultiple.get());
+    else
+        input.removeAttribute("multiple");
+};
+
 op.onLoaded = function ()
 {
     valuePort.set(defaultValuePort.get());
@@ -90,11 +102,9 @@ op.onLoaded = function ()
 
 function onValuesPortChange()
 {
-    // remove all children
     while (input.lastChild)
-    {
         input.removeChild(input.lastChild);
-    }
+
     options = valuesPort.get();
     const defaultValue = defaultValuePort.get();
     if (options)
@@ -120,13 +130,13 @@ function onValuesPortChange()
 
     outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
+    if (!defaultValue && options && options.length)valuePort.set(options[0]);
 }
 
 let finalIndex = 0;
 function setSelectedProperty(defaultinput)
 {
     const optionElements = input.querySelectorAll("option");
-
     let finalEle = null;
 
     optionElements.forEach(function (optionElement, index)
@@ -161,6 +171,14 @@ function setSelectedProperty(defaultinput)
 
 function onInput(ev)
 {
+    const selectedValues = [];
+    const optionElements = input.querySelectorAll("option");
+    optionElements.forEach(function (optionElement, index)
+    {
+        if (optionElement.selected)selectedValues.push(optionElement.value);
+    });
+
+    outValues.set(selectedValues);
     valuePort.set(ev.target.value);
     outIndex.set(options.indexOf(ev.target.value));
     setSelectedProperty();
@@ -192,28 +210,19 @@ function onParentChanged()
     }
     else
     { // detach
-        if (el.parentElement)
-        {
-            el.parentElement.removeChild(el);
-        }
+        if (el.parentElement) el.parentElement.removeChild(el);
     }
 }
 
 function showElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "block";
-    }
+    if (ele) ele.style.display = "block";
     setSelectedProperty();
 }
 
 function hideElement(ele)
 {
-    if (ele)
-    {
-        ele.style.display = "none";
-    }
+    if (ele) ele.style.display = "none";
 }
 
 function onDelete()
@@ -223,10 +232,7 @@ function onDelete()
 
 function removeElementFromDOM(ele)
 {
-    if (ele && ele.parentNode && ele.parentNode.removeChild)
-    {
-        ele.parentNode.removeChild(ele);
-    }
+    if (ele && ele.parentNode && ele.parentNode.removeChild) ele.parentNode.removeChild(ele);
 }
 
 function setDefault()

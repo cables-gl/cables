@@ -1,0 +1,36 @@
+{
+    "id": "f7136579-7fed-4c80-ae45-1ea20feff368",
+    "created": 1754132019144,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1754132019144
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Scroll to top"
+            },
+            {
+                "type": 1,
+                "name": "Scroll to bottom"
+            }
+        ]
+    },
+    "summary": "Trigger the browser to scroll to top or bottom of an element",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "JEThu1"
+}

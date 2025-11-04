@@ -4,12 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1593869457023
+            "date": 1593869457023,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.FilenameSuffix renamed to Ops.Website.FilenameInfo",
+            "message": "Better handling of data URLs/file URLs/simple filenames",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1607066249739
+            "date": 1757578403078
+        },
+        {
+            "message": "Add suffixes for data URLs with mimetype",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757578451440
         }
     ],
     "authorName": "pandur",

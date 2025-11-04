@@ -67,7 +67,6 @@
         ]
     },
     "issues": "",
-
     "todos": [
         {
             "message": "ccc",
@@ -80,5 +79,6 @@
         }
     ],
     "youtubeids": [],
-    "exampleProjectId": "_UEjvr"
+    "exampleProjectId": "_UEjvr",
+    "license": "MIT"
 }

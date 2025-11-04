@@ -1,0 +1,27 @@
+{
+    "id": "bf95148a-832f-4c89-ad31-5acff0d1f214",
+    "created": 1756136021031,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1756136021032
+        }
+    ],
+    "layout": {
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Body",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Outputs the current document body element",
+    "docs": {
+        "ports": []
+    }
+}

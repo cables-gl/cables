@@ -13,6 +13,7 @@
  * @property  {number} [v]
  * @property  {number} [t]
  * @property  {number} [e]
+ * @property  {string} [clipId]
  * @property  {keyUiAttribs} [uiAttribs]
  * @property  {Function} [cb]
  * @property  {import("./anim.js").Anim} [anim] do not use

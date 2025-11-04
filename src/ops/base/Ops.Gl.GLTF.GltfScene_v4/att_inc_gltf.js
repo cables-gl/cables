@@ -168,6 +168,7 @@ function loadAnims(gltf)
                 {
                     const newAnim = new CABLES.Anim();
                     // newAnim.name=an.name;
+                    newAnim.batchMode = true;
                     anims.push(newAnim);
                 }
 
@@ -207,6 +208,7 @@ function loadAnims(gltf)
                         }
                     }
                 }
+                for (let k = 0; k < numComps; k++)anims[k].batchMode = false;
 
                 node.setAnim(chan.target.path, an.name, anims);
             }

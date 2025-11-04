@@ -1,10 +1,20 @@
 import { CONSTANTS } from "./constants.js";
+import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
 const MIN_NUM_PORTS = 2;
 
 export class MultiPort extends Port
 {
+
+    /**
+     * @param {import("./core_op.js").Op<any>} __parent
+     * @param {string} name
+     * @param {number} type
+     * @param {number} dir
+     * @param {import("./core_port.js").PortUiAttribs} uiAttribs
+     * @param {{}} [uiAttribsPorts]
+     */
     constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
@@ -94,6 +104,7 @@ export class MultiPort extends Port
 
         this.countPorts = () =>
         {
+            const gui = Patch.getGui();
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
                 clearTimeout(this.retryTo);
@@ -211,7 +222,7 @@ export class MultiPort extends Port
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
+                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(); });
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", () =>
@@ -235,16 +246,18 @@ export class MultiPort extends Port
 
         this.newPort = () =>
         {
+
+            /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             attrs.type = type;
             const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
-            this.ports.push(po);
-            // console.log("CONSTANTS.PORT_DIR_OUT", CONSTANTS.PORT.PORT_DIR_OUT, this.direction);
+
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
-            else this.op.addInPort(po);
+            else this.op.addInPort(po, this.ports[this.ports.length - 1]);
+            this.ports.push(po);
 
             if (type == Port.TYPE_NUMBER) po.setInitialValue(0);
             else if (type == Port.TYPE_STRING) po.setInitialValue("");

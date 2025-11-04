@@ -38,6 +38,7 @@ export const CONSTANTS = {
         "EASING_QUINT_IN": 25,
         "EASING_QUINT_OUT": 26,
         "EASING_QUINT_INOUT": 27,
+        "EASING_CLIP": 28,
     },
 
     "OP": {

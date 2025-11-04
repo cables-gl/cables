@@ -17,13 +17,15 @@ axisC.onChange =
 axisD.onChange =
 inArr.onChange = update;
 
-format.onChange = function ()
+format.onChange = updateUi;
+
+function updateUi()
 {
     axisC.setUiAttribs({ "greyout": format.get().length < 3 });
     axisD.setUiAttribs({ "greyout": format.get().length < 4 });
 
     update();
-};
+}
 
 function fillArr_0(off, num, stride)
 {
@@ -104,12 +106,7 @@ function update()
     if (stride >= 3) fillArr(2, axisC.get(), stride);
     if (stride >= 4) fillArr(3, axisD.get(), stride);
 
-    // for(var i=0;i<theArray.length;i++)
-    // {
-    //     arr[i*3+0]=i;
-    //     arr[i*3+1]=theArray[i];
-    //     arr[i*3+2]=0;
-    // }
+    outArr.setUiAttribs({ "stride": stride });
 
     outArr.setRef(arr);
     outTotalPoints.set(arr.length / stride);

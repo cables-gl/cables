@@ -188,15 +188,17 @@ op.renderVizLayerGl = (ctx, layer) =>
         ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
 
         let layerHeight = layer.height;
-        let numX = (10 * layer.width / layerHeight);
-        let stepY = (layerHeight / 10);
+        let numX = (10 * layer.width / layerHeight * layer.scale) * 2;
+        let numY = (numX * layer.height / layer.width);
+        let stepY = (layerHeight / numY);
         let stepX = (layer.width / numX);
-        for (let x = 0; x < numX; x++)
-            for (let y = 0; y < 10; y++)
+
+        for (let x = 0; x < numX + 1; x++)
+            for (let y = 0; y < numY + 1; y++)
             {
-                if ((x + y) % 2 == 0)ctx.fillStyle = "#333333";
+                if ((x + y) % 2 == 0) ctx.fillStyle = "#333333";
                 else ctx.fillStyle = "#393939";
-                ctx.fillRect(layer.x + stepX * x, layer.y + stepY * y, stepX, stepY);
+                ctx.fillRect(layer.x - layer.x % stepX * 2 + stepX * x, layer.y - layer.y % stepX * 2 + stepY * y, stepX, stepY);
             }
 
         ctx.fillStyle = "#222";

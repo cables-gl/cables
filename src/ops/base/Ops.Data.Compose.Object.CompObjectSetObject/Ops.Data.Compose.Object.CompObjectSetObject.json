@@ -7,23 +7,6 @@
             "date": 1680618712710
         },
         {
-            "message": "Ops.Team.CreateOps.Dev.CreateObjectSetNumber renamed to Ops.Team.CompOps.Dev.CompObjectSetNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1680625199563
-        },
-        {
-            "message": "cloned op from Ops.Team.CompOps.Dev.CompObjectSetNumber",
-            "author": "pandur",
-            "date": 1680627161559
-        },
-        {
-            "message": "Ops.Team.CompOps.Dev.CompObjectSetArray renamed to Ops.Team.CompOps.CompObjectSetArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686661423538
-        },
-        {
             "message": "cloned op from Ops.Team.CompOps.CompObjectSetArray",
             "author": "pandur",
             "date": 1686670743687

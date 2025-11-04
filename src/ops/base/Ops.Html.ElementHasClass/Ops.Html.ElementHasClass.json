@@ -1,0 +1,42 @@
+{
+    "id": "65bd64bc-ab1b-4d04-8f85-5eccdf7198b4",
+    "created": 1756456942571,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1756456942571
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Classname"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Has Class",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Does the element currenty have a specific class set",
+    "docs": {
+        "ports": []
+    }
+}

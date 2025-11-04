@@ -18,6 +18,7 @@ const
     inTag = op.inString("Tag Name", "div"),
     inOpacity = op.inFloatSlider("Opacity", 1),
     inPropagation = op.inValueBool("Propagate Click-Events", true),
+    inAddDom = op.inValueBool("Add to DOM", true),
 
     outElement = op.outObject("DOM Element", null, "element"),
     outHover = op.outBoolNum("Hovering"),
@@ -31,7 +32,7 @@ let oldStr = null;
 let prevDisplay = "block";
 let div = null;
 
-const parent = op.patch.cgl.canvas.parentElement;
+const parent = op.patch.containerElement;
 
 createElement();
 
@@ -43,7 +44,7 @@ inTag.onChange = () =>
     removeElement();
     createElement();
     updateClass();
-    updateText();
+    updateText(); updateInteractive();
 };
 
 inSetSize.onChange =
@@ -62,7 +63,7 @@ inDisplay.onChange =
 inInteractive.onChange = updateInteractive;
 
 updateText();
-updateStyle();
+updateUiAndStyle();
 warning();
 updateInteractive();
 
@@ -79,9 +80,28 @@ outClicked.onLinkChanged = () =>
         op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
 };
 
+inAddDom.onChange = () =>
+{
+    if (!inAddDom.get())removeElement();
+    else
+    {
+        createElement();
+        updateAll();
+    }
+};
+
+function updateAll()
+{
+    updateStyle();
+    updateClass();
+    updateText();
+    updateInteractive();
+}
+
 function updateUiAndStyle()
 {
     inWidth.setUiAttribs({ "greyout": !inSetSize.get() });
+    inSizeUnit.setUiAttribs({ "greyout": !inSetSize.get() });
     inHeight.setUiAttribs({ "greyout": !inSetSize.get() });
     updateStyle();
 }
@@ -91,6 +111,7 @@ function createElement()
     div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
+    if (inTag.get() != "div")op.setUiAttribs({ "extendTitle": inTag.get() });
 
     parent.appendChild(div);
     outElement.setRef(div);
@@ -112,7 +133,7 @@ function updateText()
     if (oldStr === str) return;
     oldStr = str;
 
-    if (div.innerHTML != str) div.innerHTML = str;
+    if (div && div.innerHTML != str) div.innerHTML = str;
 }
 
 function updateStyle()
@@ -153,7 +174,11 @@ function removeClasses()
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
-        if (classes[i]) div.classList.remove(classes[i]);
+        try
+        {
+            if (classes[i]) div.classList.remove(classes[i]);
+        }
+        catch (e) { console.log("e", e); }
     }
     oldClassesStr = "";
 }
@@ -201,7 +226,7 @@ function onMouseLeave(e)
 
 function onKey(e)
 {
-    if (e.keyCode == 13 || e.keyCode == 32)outClicked.trigger();
+    if (e.keyCode == 13 || e.keyCode == 32) outClicked.trigger();
 }
 
 function onMouseClick(e)
@@ -257,12 +282,9 @@ op.addEventListener("onEnabledChange", (enabled) =>
 {
     removeElement();
     if (!enabled) return;
-
     createElement();
-    updateStyle();
-    updateClass();
-    updateText();
-    updateInteractive();
+
+    updateAll();
 });
 
 function warning()
@@ -276,3 +298,5 @@ function warning()
         op.setUiError("error", null);
     }
 }
+
+//

@@ -99,19 +99,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowModuleWithoutStruct renamed to Ops.Admin.ShadowModuleModifier",
+            "message": "new op",
             "author": "cables",
-            "date": 1593096260561
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "cables",
-            "date": 1593523129570
-        },
-        {
-            "message": "Ops.Admin.ShadowModuleModifier renamed to Ops.Gl.ShaderEffects.Shadow_v2",
-            "author": "pandur",
-            "date": 1596055676603
+            "date": 1593096260561,
+            "type": "new"
         }
     ],
     "coreLibs": [

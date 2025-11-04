@@ -4,12 +4,38 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1570714576973
+            "date": 1570714576973,
+            "type": "new"
         },
         {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
-            "date": 1643888164206
+            "date": 1643888164206,
+            "type": "bugfix"
+        },
+        {
+            "message": "can now use type \"search\", this shows an x icon to clear the input field",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1755254411452
+        },
+        {
+            "message": "Added focus input trigger port",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757587907316
+        },
+        {
+            "message": "Detect Enter and Escape keypresses and output as trigger",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1757587971101
+        },
+        {
+            "message": " \"Enter prevent default\" means in a textarea, it will not add newlines in the text, but trigger the new output",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1757587977057
         }
     ],
     "authorName": "pandur",
@@ -35,6 +61,11 @@
             {
                 "type": 0,
                 "name": "Type index",
+                "values": [
+                    "text",
+                    "password",
+                    "search"
+                ],
                 "subType": "integer"
             },
             {
@@ -53,8 +84,22 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Spellcheck",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Enter Key Prevent Default",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Clear"
+            },
+            {
+                "type": 1,
+                "name": "Focus Input"
             }
         ],
         "portsOut": [
@@ -70,12 +115,19 @@
                 "type": 0,
                 "name": "Focus",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Keypress Enter"
+            },
+            {
+                "type": 1,
+                "name": "Keypress ESC"
             }
         ]
     },
     "summary": "Get a string from an sidebar input field",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -113,5 +165,6 @@
             }
         ]
     },
-    "exampleProjectId": "wa-KH-"
+    "exampleProjectId": "wa-KH-",
+    "license": "MIT"
 }
