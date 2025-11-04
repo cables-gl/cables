@@ -29,5 +29,6 @@
     "summary": "Display current Beat index and BPM timing information as beat rectangles on the timeline",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "gpr6A1"
 }

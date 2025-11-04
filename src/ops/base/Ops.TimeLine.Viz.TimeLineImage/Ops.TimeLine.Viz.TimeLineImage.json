@@ -42,5 +42,6 @@
     "summary": "Display an image on the timeline",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "1DD6A1"
 }
