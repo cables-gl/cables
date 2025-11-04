@@ -273,7 +273,12 @@ export class Anim extends Events
             {
                 for (let i = 0; i < this.keys.length - 1; i++)
                 {
-                    if (this.keys[i].time == this.keys[i + 1].time) this.keys.splice(i, 1);
+                    if (this.keys[i].time == this.keys[i + 1].time)
+                    {
+                        const oldkey = this.keys[i];
+                        this.keys.splice(i, 1);
+                        this.emitEvent(Anim.EVENT_KEY_DELETE, oldkey);
+                    }
                     count++;
                 }
             }

@@ -17,6 +17,11 @@ animPort.on("tlVizDispose", () =>
     disposeRects();
 });
 
+inBpm.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": Math.round(inBpm.get()) });
+};
+
 animPort.renderTimeLine = (tl) =>
 {
     const beatDuration = 60 / inBpm.get();
