@@ -121,8 +121,6 @@ function realReload(nocache)
             op.setUiError("urlerror", null);
             CGL.Texture.load(cgl, url, function (err, newTex)
             {
-                // cgl.checkFrameStarted("texture inittexture");
-
                 if (filename.get() != fileToLoad)
                 {
                     loadingId = cgl.patch.loading.finished(loadingId);
@@ -141,17 +139,11 @@ function realReload(nocache)
                     return;
                 }
 
-                // textureOut.setRef(newTex);
-
                 width.set(newTex.width);
                 height.set(newTex.height);
                 ratio.set(newTex.width / newTex.height);
 
-                // if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
-                // else op.setUiError("npot", null);
-
                 tex = newTex;
-                // textureOut.setRef(null);
                 textureOut.setRef(tex);
 
                 loading.set(false);
