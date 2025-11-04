@@ -1,0 +1,52 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "bool 1",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "bool 2",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs `true` if both input values are `true` (boolean)",
+    "docs": {
+        "ports": [
+            {
+                "name": "bool 1",
+                "text": "The first boolean value"
+            },
+            {
+                "name": "bool 2",
+                "text": "The second boolean value"
+            },
+            {
+                "name": "result",
+                "text": "The result, only `true` when both input values are `true`"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "71b0adce-1b47-4b38-a900-d295476d6130",
+    "created": 1762279361620,
+    "exampleProjectId": "_B91Ms",
+    "changelog": [
+        {
+            "message": "op Boolean.And_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1762279415078
+        }
+    ]
+}
