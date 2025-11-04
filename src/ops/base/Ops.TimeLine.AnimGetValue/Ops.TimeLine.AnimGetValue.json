@@ -39,5 +39,6 @@
     "summary": "get the animated value at time x of an animation object",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "W6EUu1"
 }

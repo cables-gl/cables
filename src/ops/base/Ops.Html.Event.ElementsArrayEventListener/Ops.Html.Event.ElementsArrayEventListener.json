@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "stephan",
             "date": 1761666200929
+        },
+        {
+            "message": "fix unused ports preventDefault and stopPropagation",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1762167268968
         }
     ],
     "layout": {
@@ -100,5 +106,6 @@
                 "text": "The triggered element"
             }
         ]
-    }
+    },
+    "exampleProjectId": "4rKHP0"
 }

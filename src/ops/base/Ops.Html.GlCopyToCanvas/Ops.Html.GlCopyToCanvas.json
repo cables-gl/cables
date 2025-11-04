@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1756389095580
-        },
-        {
-            "message": "Patch.PzwNKaV.Copytocanvas renamed to Ops.Dev.Html.GlCopyToCanvas",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1756456877341
         }
     ],
     "layout": {
@@ -40,5 +34,10 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "Copy GL canvas content to another canvas",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "u2vAu1"
 }

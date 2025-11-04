@@ -8,18 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1756987143910
-        },
-        {
-            "message": "Patch.PRnyTOV.CssPropertyVar renamed to Ops.Dev.CssPropertyVar",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1756989459507
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1757676064911
         }
     ],

@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1760622149639
-        },
-        {
-            "message": "display value type colors ",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1761578188856
-        },
-        {
-            "message": "show object content",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1761578202819
         }
     ],
     "layout": {
@@ -66,5 +54,10 @@
                 "name": "Column Names"
             }
         ]
-    }
+    },
+    "summary": "Enter data in a spreadsheet table",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "wDITt1"
 }

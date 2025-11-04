@@ -36,6 +36,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1761044298851
+        },
+        {
+            "message": "Show a preview/stringified version of object content",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1762168070407
         }
     ],
     "authorName": "pandur",

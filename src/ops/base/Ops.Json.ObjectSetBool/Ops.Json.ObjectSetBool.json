@@ -34,9 +34,9 @@
         ]
     },
     "summary": "set number at key in an object",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "w63Au1"
 }

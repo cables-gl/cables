@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1757847314234
-        },
-        {
-            "message": "Patch.PDVge9W.ElementIsFocused renamed to Ops.Html.ElementIsFocused",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1757848414233
         }
     ],
     "layout": {
@@ -36,5 +30,9 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "summary": "Is the contnected element currently focused",
+    "docs": {
+        "ports": []
     }
 }

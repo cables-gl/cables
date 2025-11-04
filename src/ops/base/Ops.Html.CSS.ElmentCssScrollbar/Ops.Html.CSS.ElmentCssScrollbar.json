@@ -80,5 +80,6 @@
     "summary": "Set CSS properties for scrollbars",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Tapku1"
 }

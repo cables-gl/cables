@@ -40,5 +40,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Get data from a single key in an animation",
+    "docs": {
+        "ports": []
     }
 }

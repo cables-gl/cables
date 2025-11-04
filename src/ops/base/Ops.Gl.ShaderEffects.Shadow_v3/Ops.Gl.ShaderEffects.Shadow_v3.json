@@ -116,18 +116,6 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1761660941521
-        },
-        {
-            "message": "Gl.ShaderEffects.Shadow_v3 renamed to Ops.Gl.ShaderEffects.Shadowaa_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1761900881124
-        },
-        {
-            "message": "Gl.ShaderEffects.Shadowaa_v3 renamed to Ops.Gl.ShaderEffects.Shadow_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1761900950745
         }
     ],
     "coreLibs": [

@@ -8,19 +8,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1759147891213
+            "date": 1759153825476
         },
         {
-            "message": "Patch.P5ETmbY.TimeLineImage renamed to Ops.TimeLine.Viz.TimeLineImage",
+            "message": "TimeLine.Viz.TimeLineRects renamed to Ops.Dev.TimeLine.Viz.TimeLineRects",
             "type": "rename",
             "author": "pandur",
-            "date": 1759153706372
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1759153825476
+            "date": 1762165166577
         }
     ],
     "layout": {

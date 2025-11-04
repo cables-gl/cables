@@ -34,5 +34,9 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "summary": "Does the element currenty have a specific class set",
+    "docs": {
+        "ports": []
     }
 }
