@@ -9,8 +9,7 @@ op.setUiAttrib({ "height": 100, "width": 250, "resizable": true, "vizLayerMaxZoo
 
 v.onChange = function ()
 {
-    // if (!v.isLinked())
-    //     op.setUiAttrib({ "extendTitle": v.get() });
+    op.setUiAttrib({ "extendTitle": "" });
     if (CABLES.UI)
     {
         if (v.get()) lines = (v.get() || "").split("\n");

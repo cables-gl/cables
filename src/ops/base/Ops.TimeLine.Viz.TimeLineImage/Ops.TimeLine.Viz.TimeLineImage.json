@@ -37,7 +37,8 @@
                 "name": "End",
                 "subType": "number"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Display an image on the timeline",
     "docs": {
