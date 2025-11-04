@@ -9,6 +9,7 @@ const
 
 op.setPortGroup("Value Range", [min, max]);
 
+inInteger.onChange =
 exe.onTriggered = genRandom;
 
 genRandom();

@@ -30,10 +30,10 @@ op.renderVizLayer = (ctx, layer, viz) =>
     viz.renderText(ctx, layer, lines, {
         "zoomText": false,
         "showLineNum": false,
-        "fontSize": 10,
-        // "scroll": inPos.get(),
-        // "syntax": syntax.get(),
-        // "showWhitespace": inWhitespace.get(),
+        "fontSize": 12,
+        "scroll": 0,
+        "syntax": "text",
+        "showWhitespace": false,
         "wrap": true
     });
 
