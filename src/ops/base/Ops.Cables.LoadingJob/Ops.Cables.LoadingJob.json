@@ -23,5 +23,6 @@
     "summary": "Create a loading job while input is true",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "bzn9z1"
 }

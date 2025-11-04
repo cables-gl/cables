@@ -46,6 +46,7 @@ op.onDelete = () =>
 
 canvas.appendChild(div);
 updateStyle();
+updateStatus();
 
 op.patch.loading.on("finishedTask", updateStatus);
 op.patch.loading.on("finishedAll", updateStatus);
