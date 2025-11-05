@@ -394,7 +394,12 @@ export class Anim extends Events
         if (obj.loop) this.loop = obj.loop;
         if (obj.tlActive) this.#tlActive = obj.tlActive;
         if (obj.height) this.uiAttribs.height = obj.height;
-        if (clear) this.keys.length = 0;
+        if (clear)
+        {
+            while (this.keys.length) this.keys[0].delete();
+
+            this.keys.length = 0;
+        }
 
         for (const ani in obj.keys)
         {
