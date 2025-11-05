@@ -2,7 +2,7 @@ const
     inObj = op.inObject("Object"),
     inConsole = op.inTriggerButton("console log"),
     inZoomText = op.inBool("ZoomText", false),
-    inLineNums = op.inBool("Line Numbers", true),
+    inLineNums = op.inBool("Line Numbers", false),
     inExpString = op.inBool("Experimental Stringify", true),
     inSort = op.inBool("Sort Keys", false),
     inFontSize = op.inFloat("Font Size", 10),

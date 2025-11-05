@@ -7,6 +7,10 @@ import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 
 /**
+ * @typedef {"text" } PortUiAttribsDisplay // seems not to work
+ */
+
+/**
  * @typedef PortUiAttribs
  * @property  {String} [title] overwrite title of port (by default this is portname)
  * @property  {String} [display] how the port is displayed and interacted in the paramerer panel
@@ -26,7 +30,7 @@ import { Op } from "./core_op.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {String} [increment] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
- * @property  {String} [display] internal: do not set manually
+ * @property  {PortUiAttribsDisplay} display internal: do not set manually
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
  * @property  {String} [objType] internal: do not set manually

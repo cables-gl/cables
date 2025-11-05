@@ -9,7 +9,7 @@ const
     inPos = op.inFloatSlider("Scroll", 0),
     outStr = op.outString("Passthrough String");
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 2100, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 inStr.ignoreValueSerialize = true;
 
 let lines = [];

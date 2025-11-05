@@ -31,8 +31,9 @@
             }
         ]
     },
-    "summary": "Is the contnected element currently focused",
+    "summary": "Is the connected element currently focused",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "9jTwz1"
 }

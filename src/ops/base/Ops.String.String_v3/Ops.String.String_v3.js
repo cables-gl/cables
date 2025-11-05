@@ -9,8 +9,7 @@ op.setUiAttrib({ "height": 100, "width": 250, "resizable": true, "vizLayerMaxZoo
 
 v.onChange = function ()
 {
-    // if (!v.isLinked())
-    //     op.setUiAttrib({ "extendTitle": v.get() });
+    op.setUiAttrib({ "extendTitle": "" });
     if (CABLES.UI)
     {
         if (v.get()) lines = (v.get() || "").split("\n");
@@ -31,10 +30,10 @@ op.renderVizLayer = (ctx, layer, viz) =>
     viz.renderText(ctx, layer, lines, {
         "zoomText": false,
         "showLineNum": false,
-        "fontSize": 10,
-        // "scroll": inPos.get(),
-        // "syntax": syntax.get(),
-        // "showWhitespace": inWhitespace.get(),
+        "fontSize": 12,
+        "scroll": 0,
+        "syntax": "text",
+        "showWhitespace": false,
         "wrap": true
     });
 

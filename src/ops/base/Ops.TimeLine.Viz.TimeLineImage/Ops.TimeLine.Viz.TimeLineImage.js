@@ -3,8 +3,8 @@ const
     inOpacity = op.inFloatSlider("Opacity", 1),
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     animPort = op.inObject("Test"),
-    inStart = op.inFloat("Start", 1),
-    inEnd = op.inFloat("End", 7);
+    inStart = op.inFloat("Start", 0),
+    inEnd = op.inFloat("End", 5);
 
 animPort.setUiAttribs({ "hidePort": true, "tlDrawKeys": false });
 op.setUiAttribs({ "tlOrder": -100 });

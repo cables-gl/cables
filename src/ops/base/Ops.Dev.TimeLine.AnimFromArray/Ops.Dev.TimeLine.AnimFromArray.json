@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1750934158486
+        },
+        {
+            "message": "TimeLine.AnimFromArray renamed to Ops.Dev.TimeLine.AnimFromArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1762241800445
         }
     ],
     "layout": {

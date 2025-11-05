@@ -44,5 +44,6 @@
     "summary": "Get data from a single key in an animation",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "gXgDz1"
 }

@@ -7,7 +7,9 @@ const div = document.createElement("div");
 div.dataset.op = op.id;
 const canvas = op.patch.cgl.canvas.parentElement;
 
-const outEle = op.outObject("Elment", div, "element");
+const
+    outEle = op.outObject("Elment", div, "element"),
+    outReqs = op.outArray("Requests");
 
 inCenter.onChange =
 inStyle.onChange = updateStyle;
@@ -44,6 +46,7 @@ op.onDelete = () =>
 
 canvas.appendChild(div);
 updateStyle();
+updateStatus();
 
 op.patch.loading.on("finishedTask", updateStatus);
 op.patch.loading.on("finishedAll", updateStatus);
@@ -54,7 +57,7 @@ function updateStatus()
 {
     if (inVisible.get() == "Auto")
         updateVisible();
-
+    outReqs.setRef(op.patch.loading.getListJobs());
     if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)setTimeout(updateStatus, 100);
 }
 
