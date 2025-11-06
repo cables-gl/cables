@@ -453,19 +453,26 @@ export class Port extends Events
         else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
     }
 
+    static getTypeString(t)
+    {
+        // todo:needed only in ui ?remove from core?
+
+        if (t == Port.TYPE_VALUE) return "Number";
+        if (t == Port.TYPE_FUNCTION) return "Trigger";
+        if (t == Port.TYPE_OBJECT) return "Object";
+        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
+        if (t == Port.TYPE_ARRAY) return "Array";
+        if (t == Port.TYPE_STRING) return "String";
+        return "Unknown";
+    }
+
     /**
      * @description get port type as string, e.g. "Function","Value"...
      * @return {String} type
      */
     getTypeString()
     {
-        if (this.type == Port.TYPE_VALUE) return "Number";
-        if (this.type == Port.TYPE_FUNCTION) return "Trigger";
-        if (this.type == Port.TYPE_OBJECT) return "Object";
-        if (this.type == Port.TYPE_DYNAMIC) return "Dynamic";
-        if (this.type == Port.TYPE_ARRAY) return "Array";
-        if (this.type == Port.TYPE_STRING) return "String";
-        return "Unknown";
+        return Port.getTypeString(this.type);
     }
 
     /**
