@@ -95,6 +95,11 @@
                 "name": "Opacity Texture",
                 "group": "Opacity Settings",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Cull Backfacing",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
