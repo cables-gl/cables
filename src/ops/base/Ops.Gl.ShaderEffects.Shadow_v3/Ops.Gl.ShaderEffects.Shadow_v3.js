@@ -29,6 +29,8 @@ inOpacityThreshold.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
 inAlphaMaskSource.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
 inSamples.setUiAttribs({ "greyout": true });
 inSpread.setUiAttribs({ "greyout": true });
+const cullface = op.inBool("Cull Backfacing", false);
+
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread, inShadowColorR, inShadowColorG, inShadowColorB]);
 op.setPortGroup("", [inDiscardTransparent]);
@@ -486,11 +488,10 @@ inTrigger.onTriggered = () =>
 
         const cg = op.patch.cg;
 
-        cg.pushCullFace(false);
+        if (cullface.get())cg.pushCullFace(false);
 
         renderShadowPassWithModule();
-
-        cg.popCullFace();
+        if (cullface.get()) cg.popCullFace();
 
         return;
     }
