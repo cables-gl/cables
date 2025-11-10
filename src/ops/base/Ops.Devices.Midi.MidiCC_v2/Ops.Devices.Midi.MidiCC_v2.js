@@ -78,7 +78,7 @@ inEvent.onChange = () =>
             {
                 const value = ccValue / 127;
                 ccValueOut.set(value);
-                ccArray[ccIndex] = ccValue;
+                ccArray[ccIndex] = value;
 
                 if (triggerOn.get() == "Both") triggerOut.trigger();
                 else if (triggerOn.get() == "Down" && ccValue != 0) triggerOut.trigger();
