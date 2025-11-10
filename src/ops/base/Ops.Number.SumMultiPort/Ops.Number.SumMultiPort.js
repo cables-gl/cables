@@ -1,12 +1,12 @@
 const
-    inStrs = op.inMultiPort("Numbers", CABLES.OP_PORT_TYPE_NUMBER),
+    inPorts = op.inMultiPort("Numbers", CABLES.OP_PORT_TYPE_NUMBER),
     outResult = op.outNumber("Number"),
     outNum = op.outNumber("Num Values");
 
-inStrs.onChange = () =>
+inPorts.onChange = () =>
 {
     let sum = 0;
-    const valuePorts = inStrs.get();
+    const valuePorts = inPorts.get();
     for (let i = 0; i < valuePorts.length; i++)
     {
         sum += valuePorts[i].get();

@@ -13,7 +13,7 @@ export class MultiPort extends Port
      * @param {number} type
      * @param {number} dir
      * @param {import("./core_port.js").PortUiAttribs} uiAttribs
-     * @param {{}} [uiAttribsPorts]
+     * @param {import("./core_port.js").PortUiAttribs} [uiAttribsPorts]
      */
     constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
     {

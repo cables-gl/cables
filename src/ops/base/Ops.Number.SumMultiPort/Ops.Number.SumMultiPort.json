@@ -15,25 +15,13 @@
             {
                 "type": 0,
                 "name": "Numbers_0",
-                "longPort": 4,
+                "longPort": 2,
                 "group": "Numbers",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Numbers_1",
-                "group": "Numbers",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Numbers_2",
-                "group": "Numbers",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Numbers_3",
                 "uititle": "add port",
                 "group": "Numbers",
                 "subType": "number"
