@@ -26,6 +26,12 @@
             "author": "pandur",
             "date": 1560332798890,
             "type": "feature"
+        },
+        {
+            "message": "When the op is resized to the minimum height, show the string as extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1762783633912
         }
     ],
     "license": "MIT",
