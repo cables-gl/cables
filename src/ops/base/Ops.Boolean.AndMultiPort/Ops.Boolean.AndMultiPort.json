@@ -41,5 +41,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "summary": "Outputs `true` if all input values are `true` (boolean)",
 }
