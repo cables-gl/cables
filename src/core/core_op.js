@@ -540,17 +540,26 @@ export class Op extends Events
      * @param {string} name
      * @param {number} type
      */
-    inMultiPort(name, type)
+    inMultiPort(name, type, uiAttrs)
     {
+        const attrs =
+            {
+                "addPort": true,
+                "hidePort": true
+            };
+
+        // for (const i in uiAttrs)
+        // {
+        //     attrs[i] = uiAttrs[i];
+        // }
+
         const p = new MultiPort(
             this,
             name,
             type,
             Port.DIR_IN,
-            {
-                "addPort": true,
-                "hidePort": true
-            }
+            attrs,
+            uiAttrs
         );
         p.ignoreValueSerialize = true;
 
