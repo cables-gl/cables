@@ -42,5 +42,5 @@
             }
         ]
     },
-    "summary": "Outputs `true` if all input values are `true` (boolean)",
+    "summary": "Outputs `true` if all input values are `true` (boolean)"
 }
