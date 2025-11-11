@@ -1,0 +1,143 @@
+{
+    "authorName": "pandur",
+    "id": "9b254c2a-108b-40ba-bd63-2f43f34ffd6b",
+    "created": 1762764425501,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "MIDI Event In",
+                "group": "MIDI"
+            },
+            {
+                "type": 0,
+                "name": "MIDI Channel index",
+                "group": "MIDI",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "CC Index",
+                "group": "CC",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Normalize index",
+                "values": [
+                    "none",
+                    "0 to 1",
+                    "-1 to 1"
+                ],
+                "group": "CC",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Trigger On index",
+                "values": [
+                    "Both",
+                    "Down",
+                    "Up"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "learn"
+            },
+            {
+                "type": 1,
+                "name": "clear"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Event"
+            },
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            },
+            {
+                "type": 0,
+                "name": "CC Index Out",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "CC Value Out",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Value Array"
+            }
+        ]
+    },
+    "summary": "read CC value from Midi controller",
+    "issues": "",
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Event In",
+                "text": "the incoming midi event"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "Pick a midi channel from 1 to 16"
+            },
+            {
+                "name": "CC Index",
+                "text": "The selected CC index to output"
+            },
+            {
+                "name": "Normalize",
+                "text": "Enable to normalize values from 0 to 1 or -1 to 1"
+            },
+            {
+                "name": "learn",
+                "text": "Click and then press a cc button/turn a knob on your midi device to automatically select it"
+            },
+            {
+                "name": "clear",
+                "text": "reset op to default state"
+            },
+            {
+                "name": "Event",
+                "text": "Midi event out - passes all midi data through to allow midi ops to be stacked"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Triggers when the selected midi cc comes in"
+            },
+            {
+                "name": "CC Index Out",
+                "text": "If no index has been selected it will output all cc messages else it outputs selected cc index"
+            },
+            {
+                "name": "CC Value Out",
+                "text": "Value is normally between 0-127 unless Normalize Velocity is enabled"
+            }
+        ]
+    },
+    "exampleProjectId": "dfF3DI",
+    "changelog": [
+        {
+            "message": "learned input parameter are transfered to remote viewer",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034729692
+        }
+    ],
+    "license": "MIT"
+}

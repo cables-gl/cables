@@ -7,7 +7,7 @@ import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 
 /**
- * @typedef {"text" } PortUiAttribsDisplay // seems not to work
+ * @typedef {"text"|"tsrne" } PortUiAttribsDisplay // seems not to work
  */
 
 /**
