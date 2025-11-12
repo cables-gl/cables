@@ -3,7 +3,7 @@ name: 'tests'
 on:
   workflow_dispatch:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, edited, synchronize]
 
 jobs:
   run_test:
@@ -13,6 +13,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: validate opdocs
+      - name: install nodejs
+        uses: actions/setup-node@v4
+        with:
+           node-version-file: ".nvmrc"
+           check-latest: false
+      - name: install dependencies
         run: |
-            npm run validate:opdocs
+            npm install --no-save
+      - name: run tests
+        run: |
+            npm run test
