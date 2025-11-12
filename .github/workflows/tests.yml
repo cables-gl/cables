@@ -21,6 +21,6 @@ jobs:
       - name: install dependencies
         run: |
             npm install --no-save
-      - name: validate opdocs
+      - name: run tests
         run: |
-            npm run validate:opdocs
+            npm run test
