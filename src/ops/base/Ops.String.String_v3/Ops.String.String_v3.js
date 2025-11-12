@@ -3,6 +3,7 @@ const
     result = op.outString("String");
 v.setUiAttribs({ "display": "text" });
 
+let hasExtTitle = false;
 let lines = [];
 
 op.setUiAttrib({ "height": 100, "width": 250, "resizable": true, "vizLayerMaxZoom": 2500 });
@@ -20,6 +21,16 @@ v.onChange = function ()
 
 op.renderVizLayer = (ctx, layer, viz) =>
 {
+    if (layer.height < 10)
+    {
+        op.setUiAttrib({ "extendTitle": v.get() });
+        hasExtTitle = true;
+        return;
+    }
+
+    if (hasExtTitle) op.setUiAttrib({ "extendTitle": null });
+    hasExtTitle = false;
+
     viz.clear(ctx, layer);
 
     if (!v.get()) return;
