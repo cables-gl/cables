@@ -7,7 +7,6 @@ import webpack from "webpack";
 
 import path from "path";
 import { BuildWatcher } from "cables-shared-client";
-import jsonSchema from "gulp-json-schema";
 import webpackConfig from "./webpack.config.js";
 import webpackLibsConfig from "./webpack.config.corelibs.js";
 
@@ -163,11 +162,6 @@ function _core_libs(done)
     });
 }
 
-function _validateOpDocs(done)
-{
-    return gulp.src("src/ops/base/**/*.json").pipe(jsonSchema("op.schema.json"));
-}
-
 /*
  * -------------------------------------------------------------------------------------------
  * MAIN TASKS
@@ -197,8 +191,4 @@ gulp.task("default", gulp.series(
 gulp.task("watch", gulp.series(
     defaultSeries,
     _watch
-));
-
-gulp.task("validate:opdocs", gulp.series(
-    _validateOpDocs
 ));
