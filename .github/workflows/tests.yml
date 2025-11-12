@@ -3,7 +3,7 @@ name: 'tests'
 on:
   workflow_dispatch:
   pull_request:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
 
 jobs:
   run_test:
