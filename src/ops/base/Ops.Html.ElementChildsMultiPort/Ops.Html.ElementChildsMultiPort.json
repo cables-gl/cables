@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1720508423690
+        },
+        {
+            "message": "fix bug when it was not readding the child again when parent changed\t",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1762955955615
         }
     ],
     "layout": {
@@ -21,22 +27,12 @@
             {
                 "type": 2,
                 "name": "Childs_0",
-                "longPort": 4,
+                "longPort": 2,
                 "group": "Childs"
             },
             {
                 "type": 2,
                 "name": "Childs_1",
-                "group": "Childs"
-            },
-            {
-                "type": 2,
-                "name": "Childs_2",
-                "group": "Childs"
-            },
-            {
-                "type": 2,
-                "name": "Childs_3",
                 "uititle": "add port",
                 "group": "Childs"
             }

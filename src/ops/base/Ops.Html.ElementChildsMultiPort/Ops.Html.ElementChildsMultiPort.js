@@ -38,7 +38,7 @@ function rebuild()
         let foundDiff = false;
         for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i].get() != oldEles[i])
+            if (ports[i].get() != oldEles[i] || (ports[i].get() && !parent.contains(ports[i].get())))
             {
                 foundDiff = true;
                 // console.log("found diff", ports[i].name, ports[i].get(), "u", oldEles[i]);
