@@ -13,6 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: install dependencies
+        run: |
+            npm install --no-save
       - name: validate opdocs
         run: |
             npm run validate:opdocs
