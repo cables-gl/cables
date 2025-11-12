@@ -13,6 +13,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: install nodejs
+        uses: actions/setup-node@v4
+        with:
+           node-version-file: ".nvmrc"
+           check-latest: false
       - name: install dependencies
         run: |
             npm install --no-save
