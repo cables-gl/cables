@@ -1,7 +1,7 @@
 const
+    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     inslot = op.inInt("slot", 0),
     inOpacity = op.inFloatSlider("Opacity", 1),
-    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     animPort = op.inObject("Test"),
     inStart = op.inFloat("Start", 0),
     inEnd = op.inFloat("End", 5);
