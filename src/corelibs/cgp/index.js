@@ -27,17 +27,17 @@ const CGP = {
 window.CABLES = window.CABLES || {};
 const existing = window.CABLES.CGP;
 window.CABLES.CGP = { ...existing, ...CGP };
+window.CGP = window.CABLES.CGP;
 
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;
 window.CGP.ComputePipeline = ComputePipeline;
-window.CGP.ShaderModifier = ShaderModifier;
 
+window.CGP.ShaderModifier = ShaderModifier;
 window.CGP.BindingStorage = BindingStorage;
 window.CGP.BindingUniform = BindingUniform;
 window.CGP.BindingTexture = BindingTexture;
-window.CGP.BindingSampler = BindingSampler;
 
-window.CGP = window.CABLES.CGP;
+window.CGP.BindingSampler = BindingSampler;
 
 export { CGP };
