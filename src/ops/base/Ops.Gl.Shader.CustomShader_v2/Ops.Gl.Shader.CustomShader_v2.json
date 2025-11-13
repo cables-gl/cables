@@ -37,6 +37,43 @@
                 "name": "Use As Material",
                 "group": "Options",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "w",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "h",
+                "group": "uniforms",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "gPosition",
+                "group": "uniforms"
+            },
+            {
+                "type": 2,
+                "name": "gNormal",
+                "group": "uniforms"
+            },
+            {
+                "type": 2,
+                "name": "texNoise",
+                "group": "uniforms"
+            },
+            {
+                "type": 3,
+                "name": "samples",
+                "group": "uniforms"
+            },
+            {
+                "type": 3,
+                "name": "projection",
+                "group": "uniforms"
             }
         ],
         "portsOut": [
@@ -57,7 +94,6 @@
         ]
     },
     "summary": "Write your own custom shader",
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -90,6 +126,5 @@
         "Zfhn8xSM0SE"
     ],
     "exampleProjectId": "vWyGud",
-    "coreLibs": [],
     "license": "MIT"
 }

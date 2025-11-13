@@ -1,0 +1,39 @@
+{
+    "authorName": "pandur",
+    "id": "eff161f2-6fe2-43a5-a884-af7e7a19a523",
+    "created": 1762184612545,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ]
+    },
+    "summary": "String input/output ",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Show entered text in the patchvield as resizable op",
+            "author": "pandur",
+            "date": 1560332798890,
+            "type": "feature"
+        },
+        {
+            "message": "When the op is resized to the minimum height, show the string as extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1762783633912
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "FXRsii"
+}

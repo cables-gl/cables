@@ -1,0 +1,194 @@
+{
+    "authorName": "pandur",
+    "id": "e8072f45-4e2c-4ae1-ac41-20e1ef968612",
+    "created": 1761660861219,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger In"
+            },
+            {
+                "type": 0,
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Receive Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Algorithm index",
+                "values": [
+                    "Default",
+                    "PCF",
+                    "Poisson",
+                    "VSM"
+                ],
+                "group": "Shadow Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Samples index",
+                "values": [
+                    "1",
+                    "2",
+                    "4",
+                    "8"
+                ],
+                "group": "Shadow Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Sample Distribution",
+                "group": "Shadow Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Discard Transparent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Opacity Threshold",
+                "group": "Opacity Settings",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask Source index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
+                "group": "Opacity Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Opacity Texture",
+                "group": "Opacity Settings",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Cull Backfacing",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowModuleWithoutStruct renamed to Ops.Admin.ShadowModuleModifier",
+            "author": "cables",
+            "date": 1593096260561,
+            "type": "new"
+        },
+        {
+            "message": "turn off face culling for flat meshes",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1761660941521
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "summary": "add shadow capabilities to any material",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger input"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if true, following meshes will cast shadows, if false, following geometries will NOT cast shadows"
+            },
+            {
+                "name": "Receive Shadow",
+                "text": "if true, following meshes will receive shadows"
+            },
+            {
+                "name": "Algorithm index",
+                "text": "index for algorithm"
+            },
+            {
+                "name": "Algorithm",
+                "text": "choose between the 4 algorithms: Default, PCF (Percentage-Closer Filtered Shadows), Poisson, VSM (Variance Shadow Mapping)"
+            },
+            {
+                "name": "Samples",
+                "text": "only active when PCF or Poisson algorithm is used: amount of samples taken to soften shadows"
+            },
+            {
+                "name": "Sample Distribution",
+                "text": "distribution of sampled points, the higher the value, the smaller the \"wash\", if the value is too low, step artefacts can occur"
+            },
+            {
+                "name": "R",
+                "text": "R color channel of the shadow"
+            },
+            {
+                "name": "G",
+                "text": "G color channel of the shadow"
+            },
+            {
+                "name": "B",
+                "text": "B color channel of the shadow"
+            },
+            {
+                "name": "Opacity Threshold",
+                "text": "alpha threshold for discarding pixels "
+            },
+            {
+                "name": "Alpha Mask Source",
+                "text": "source channel of texture for discarding pixels: r, g, b, a or luminance"
+            },
+            {
+                "name": "Opacity Texture",
+                "text": "alpha texture input"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            }
+        ]
+    },
+    "exampleProjectId": "auVl18",
+    "license": "MIT"
+}

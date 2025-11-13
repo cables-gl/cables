@@ -3,6 +3,7 @@ import { uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
+import { Patch } from "./core_patch.js";
 
 /**
  * Keyframed interpolated animation.
@@ -63,20 +64,24 @@ export class Anim extends Events
     static EASING_QUINT_OUT = 26;
     static EASING_QUINT_INOUT = 27;
 
-    static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out"];
+    static EASING_CLIP = 28;
+
+    static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out", "Clip"];
 
     #tlActive = true;
     uiAttribs = {};
     loop = 0;
     onLooped = null;
     _timesLooped = 0;
-    _needsSort = false;
+    #needsSort = false;
     _cachedIndex = 0;
+    port = null;
 
     /** @type {AnimKey[]} */
     keys = [];
     onChange = null;
     stayInTimeline = false;
+    batchMode = false;
 
     /**
      * @param {AnimCfg} [cfg]
@@ -101,6 +106,7 @@ export class Anim extends Events
 
     forceChangeCallbackSoon()
     {
+        if (this.batchMode) return;
         if (!this.forcecbto)
             this.forcecbto = setTimeout(() =>
             {
@@ -138,7 +144,7 @@ export class Anim extends Events
      */
     hasEnded(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length === 0) return true;
         if (this.keys[this.keys.length - 1].time <= time) return true;
         return false;
@@ -149,8 +155,7 @@ export class Anim extends Events
      */
     hasStarted(time)
     {
-
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length === 0) return false;
         if (time >= this.keys[0].time) return true;
         return false;
@@ -161,7 +166,7 @@ export class Anim extends Events
      */
     isRising(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.hasEnded(time)) return false;
         const ki = this.getKeyIndex(time);
         if (this.keys[ki].value < this.keys[ki + 1].value) return true;
@@ -177,7 +182,7 @@ export class Anim extends Events
      */
     clearBefore(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         const v = this.getValue(time);
         const ki = this.getKeyIndex(time);
 
@@ -186,7 +191,7 @@ export class Anim extends Events
         if (ki > 1)
         {
             this.keys.splice(0, ki);
-            this._needsSort = true;
+            this.#needsSort = true;
         }
     }
 
@@ -199,7 +204,7 @@ export class Anim extends Events
      */
     clear(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         let v = 0;
         if (time) v = this.getValue(time);
 
@@ -208,7 +213,7 @@ export class Anim extends Events
 
         this.keys.length = 0;
         if (time) this.setValue(time, v);
-        this._needsSort = true;
+        this.#needsSort = true;
         if (this.onChange !== null) this.onChange();
         this.emitEvent(Anim.EVENT_CHANGE, this);
     }
@@ -228,10 +233,11 @@ export class Anim extends Events
 
     sortKeys()
     {
+        if (this.batchMode) return;
         if (!this.checkIsSorted())
         {
             this.keys.sort((a, b) => { return a.time - b.time; });
-            this._needsSort = false;
+            this.#needsSort = false;
             if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 
             this.emitEvent(Anim.EVENT_CHANGE);
@@ -260,31 +266,36 @@ export class Anim extends Events
     {
         if (this.hasDuplicates())
         {
-            if (this._needsSort) this.sortKeys();
+            if (this.#needsSort) this.sortKeys();
             let count = 0;
 
             while (this.hasDuplicates())
             {
                 for (let i = 0; i < this.keys.length - 1; i++)
                 {
-                    if (this.keys[i].time == this.keys[i + 1].time) this.keys.splice(i, 1);
+                    if (this.keys[i].time == this.keys[i + 1].time)
+                    {
+                        const oldkey = this.keys[i];
+                        this.keys.splice(i, 1);
+                        this.emitEvent(Anim.EVENT_KEY_DELETE, oldkey);
+                    }
                     count++;
                 }
             }
-            this._needsSort = true;
+            this.#needsSort = true;
         }
     }
 
     getLengthLoop()
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length < 2) return 0;
         return this.lastKey.time - this.firstKey.time;
     }
 
     getLength()
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length === 0) return 0;
         return this.lastKey.time;
     }
@@ -294,7 +305,7 @@ export class Anim extends Events
      */
     getKeyIndex(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         let index = 0;
         let start = 0;
         if (this._cachedIndex && this.keys.length > this._cachedIndex && time >= this.keys[this._cachedIndex].time) start = this._cachedIndex;
@@ -321,18 +332,19 @@ export class Anim extends Events
     {
         if (isNaN(value))CABLES.logStack();
 
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         let found = null;
 
-        if (this.keys.length == 0 || time <= this.lastKey.time)
-            for (let i = 0; i < this.keys.length; i++)
-                if (this.keys[i].time == time)
-                {
-                    found = this.keys[i];
-                    this.keys[i].setValue(value);
-                    this.keys[i].cb = cb;
-                    break;
-                }
+        if (!this.batchMode)
+            if (this.keys.length == 0 || time <= this.lastKey.time)
+                for (let i = 0; i < this.keys.length; i++)
+                    if (this.keys[i].time == time)
+                    {
+                        found = this.keys[i];
+                        this.keys[i].setValue(value);
+                        this.keys[i].cb = cb;
+                        break;
+                    }
 
         if (!found)
         {
@@ -349,9 +361,13 @@ export class Anim extends Events
             // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
         }
 
-        if (this.onChange) this.onChange();
-        this.emitEvent(Anim.EVENT_CHANGE, this);
-        this._needsSort = true;
+        if (!this.batchMode)
+        {
+
+            if (this.onChange) this.onChange();
+            this.emitEvent(Anim.EVENT_CHANGE, this);
+            this.#needsSort = true;
+        }
         return found;
     }
 
@@ -371,17 +387,31 @@ export class Anim extends Events
     /**
      * @param {object} obj
      * @param {boolean} [clear]
+     * @param {object} [missingClipAnims]
      */
-    deserialize(obj, clear)
+    deserialize(obj, clear, missingClipAnims)
     {
         if (obj.loop) this.loop = obj.loop;
         if (obj.tlActive) this.#tlActive = obj.tlActive;
         if (obj.height) this.uiAttribs.height = obj.height;
-        if (clear) this.keys.length = 0;
+        if (clear)
+        {
+            while (this.keys.length) this.keys[0].delete();
+
+            this.keys.length = 0;
+        }
 
         for (const ani in obj.keys)
-            this.keys.push(new AnimKey(obj.keys[ani], this));
-
+        {
+            let newKey = new AnimKey(obj.keys[ani], this);
+            this.keys.push(newKey);
+            if (missingClipAnims)
+                if (obj.keys[ani].clipId)
+                {
+                    missingClipAnims[obj.keys[ani].clipId] = missingClipAnims[obj.keys[ani].clipId] || [];
+                    if (missingClipAnims)missingClipAnims[obj.keys[ani].clipId].push(newKey);
+                }
+        }
         this.sortKeys();
     }
 
@@ -409,7 +439,7 @@ export class Anim extends Events
      */
     getKey(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         const index = this.getKeyIndex(time);
         return this.keys[index];
     }
@@ -419,7 +449,7 @@ export class Anim extends Events
      */
     getNextKey(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         let index = this.getKeyIndex(time) + 1;
         if (index >= this.keys.length) return null;
 
@@ -431,7 +461,7 @@ export class Anim extends Events
      */
     getPrevKey(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         let index = this.getKeyIndex(time) - 1;
         if (index < 0) return null;
 
@@ -443,7 +473,7 @@ export class Anim extends Events
      */
     isFinished(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length <= 0) return true;
         return time > this.lastKey.time;
     }
@@ -453,7 +483,7 @@ export class Anim extends Events
      */
     isStarted(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length <= 0) return false;
         return time >= this.firstKey.time;
     }
@@ -470,7 +500,7 @@ export class Anim extends Events
             {
                 this.emitEvent(Anim.EVENT_KEY_DELETE, this.keys[i]);
                 this.keys.splice(i, 1);
-                this._needsSort = true;
+                this.#needsSort = true;
                 if (events === undefined)
                 {
                     this.emitEvent(Anim.EVENT_CHANGE, this);
@@ -482,13 +512,13 @@ export class Anim extends Events
 
     get lastKey()
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         return this.keys[this.keys.length - 1];
     }
 
     get firstKey()
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         return this.keys[0];
     }
 
@@ -497,7 +527,7 @@ export class Anim extends Events
      */
     getLoopIndex(time)
     {
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
         if (this.keys.length < 2) return 0;
         return (time - this.firstKey.time) / this.getLengthLoop();
     }
@@ -514,7 +544,7 @@ export class Anim extends Events
     {
         let valAdd = 0;
         if (this.keys.length === 0) return 0;
-        if (this._needsSort) this.sortKeys();
+        if (this.#needsSort) this.sortKeys();
 
         if (!this.loop && time > this.keys[this.keys.length - 1].time)
         {
@@ -566,6 +596,28 @@ export class Anim extends Events
 
         const perc = (time - key1.time) / (key2.time - key1.time);
 
+        if (key1.getEasing() == Anim.EASING_CLIP)
+        {
+            if (key1.clip && key1.clip.getValue)
+            {
+                return key1.clip.getValue(perc * key1.clip.getLength());
+            }
+            else
+            {
+                if (this.port)
+                {
+
+                    /** @type {Patch} */
+                    const patch = this.port.op.patch;
+                    const clip = patch.getVar(key1.clipId)?.getValue();
+                    if (clip) key1.clip = clip;
+                    if (key1.clip) return key1.clip.getValue(time);
+                }
+
+                console.log("no clip found");
+            }
+        }
+
         return key1.ease(perc, key2) + valAdd;
     }
 
@@ -583,13 +635,13 @@ export class Anim extends Events
             this.keys.push(k);
             if (this.onChange !== null) this.onChange();
             this.emitEvent(Anim.EVENT_CHANGE, this);
-            this._needsSort = true;
+            this.#needsSort = true;
         }
     }
 
     sortSoon()
     {
-        this._needsSort = true;
+        this.#needsSort = true;
     }
 
     /**
@@ -694,8 +746,29 @@ export class Anim extends Events
      */
     hasKeyframesBetween(t, t2)
     {
-        return this.getKeyIndex(t) != this.getKeyIndex(t2);
+        for (let i = 0; i < this.keys.length; i++)
+            if (this.keys[i].time >= t && this.keys[i].time <= t2) return true;
+
+        return false;
+    }
+
+    /**
+     * @param {Patch} patch
+     */
+    static initClipsFromVars(patch)
+    {
+        for (const i in patch.missingClipAnims)
+        {
+
+            const v = patch.getVar(i);
+
+            for (let j = 0; j < patch.missingClipAnims[i].length; j++)
+            {
+                patch.missingClipAnims[i].clip = v.getValue();
+                delete patch.missingClipAnims[i];
+            }
+
+        }
+
     }
 }
-
-// ------------------------------

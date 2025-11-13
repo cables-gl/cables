@@ -241,6 +241,12 @@
             "type": "bugfix",
             "author": "tobyk",
             "date": 1747894217268
+        },
+        {
+            "message": "Faster loading of files with many animation keys",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1761062155489
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

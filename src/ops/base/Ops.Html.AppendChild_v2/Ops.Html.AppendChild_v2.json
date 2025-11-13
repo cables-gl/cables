@@ -49,12 +49,14 @@
         {
             "message": "cloned op from Ops.Html.AppendChild",
             "author": "pandur",
-            "date": 1605277835250
+            "date": 1605277835250,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.AppendChild2 renamed to Ops.Html.AppendChild_v2",
+            "message": "fix bug when it was not readding the child again when parent changed",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1605278069472
+            "date": 1762955836208
         }
     ],
     "license": "MIT",

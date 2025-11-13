@@ -24,6 +24,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1741340486744
+        },
+        {
+            "message": "Render the transparent checkerboard unattached to the op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1762204735610
         }
     ],
     "authorName": "pandur",
@@ -89,7 +95,6 @@
         ]
     },
     "summary": "Displays texture at input port",
-    "issues": "",
     "youtubeids": [
         "-1vMiU6BcDg"
     ],
@@ -97,7 +102,6 @@
         "ports": []
     },
     "exampleProjectId": "HOVjnR",
-    "caniusequery": "",
     "coreLibs": [
         "cgl_pixelreader"
     ],

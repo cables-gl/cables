@@ -9,16 +9,24 @@
             "type": "new op",
             "author": "pandur",
             "date": 1759147891213
-        },
-        {
-            "message": "Patch.P5ETmbY.TimeLineImage renamed to Ops.TimeLine.Viz.TimeLineImage",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1759153706372
         }
     ],
     "layout": {
         "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "slot",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Opacity",
+                "subType": "number"
+            },
             {
                 "type": 0,
                 "name": "Start",
@@ -29,7 +37,14 @@
                 "name": "End",
                 "subType": "number"
             }
-        ],
-        "portsOut": []
-    }
+        ]
+    },
+    "summary": "Display an image on the timeline",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "1DD6A1",
+    "youtubeids": [
+        "BYQ1Ecy-wsU"
+    ]
 }

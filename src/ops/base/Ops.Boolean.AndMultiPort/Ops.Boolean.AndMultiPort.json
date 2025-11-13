@@ -1,0 +1,46 @@
+{
+    "id": "48ce57c0-9c06-4e6e-a95b-a1aad28d5dc0",
+    "created": 1762781802774,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762781802774
+        },
+        {
+            "message": "Patch.Pmrnfc1.AndMultiPort renamed to Ops.Boolean.AndMultiPort",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1762782584482
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Booleans_0",
+                "longPort": 2,
+                "group": "Booleans",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Booleans_1",
+                "uititle": "add port",
+                "group": "Booleans",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs `true` if all input values are `true` (boolean)"
+}

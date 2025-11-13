@@ -1,0 +1,12 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://cables.gl/op.schema.json",
+    "title": "Op",
+    "description": "cables.gl operator",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        }
+    }
+}

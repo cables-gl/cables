@@ -25,7 +25,8 @@
         "raw-loader": "^4.0.2",
         "terser-webpack-plugin": "5.3.10",
         "webpack": "5.91.0",
-        "webpack-bundle-analyzer": "4.10.2"
+        "webpack-bundle-analyzer": "4.10.2",
+        "gulp-json-schema": "1.0.0"
     },
     "scripts": {
         "build": "gulp build",
@@ -33,7 +34,8 @@
         "watch": "gulp watch",
         "start": "gulp",
         "analyze": "gulp analyze",
-        "headless": "node ./src/core/index.js"
+        "headless": "node ./src/core/index.js",
+        "test": "gulp --gulpfile gulpfile_tests.js"
     },
     "repository": {
         "type": "git",

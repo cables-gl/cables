@@ -74,8 +74,7 @@
             }
         ]
     },
-    "summary": "Draws a rectangle with rounded corners",
-    "issues": "",
+    "summary": "Generate an array of points of a rectangle with rounded corners",
     "docs": {
         "ports": [
             {
@@ -118,24 +117,13 @@
     },
     "changelog": [
         {
-            "message": "Fix wrong vertex order in one triangle",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1751465913755
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1751894031405
-        },
-        {
-            "message": "Patch.PA7nLgQ.PointsRectangleRounded_v2 renamed to Ops.Array.PointArray.PointsRectangleRounded_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1751895209070
         }
     ],
     "license": "MIT",
-    "cloneOf": "86c99074-4929-44d0-a826-49e7f8bdf5c4"
+    "cloneOf": "86c99074-4929-44d0-a826-49e7f8bdf5c4",
+    "exampleProjectId": "A7nLgQ"
 }

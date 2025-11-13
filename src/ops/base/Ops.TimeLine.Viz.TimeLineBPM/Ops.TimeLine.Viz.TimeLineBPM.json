@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1759147891213
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1759150111785
-        },
-        {
-            "message": "Patch.P5ETmbY.TimeLineBPM renamed to Ops.TimeLine.Viz.TimeLineBPM",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1759153696776
         }
     ],
     "layout": {
@@ -35,8 +23,15 @@
                 "name": "Offset",
                 "subType": "number"
             }
-        ],
-        "portsOut": []
+        ]
     },
-    "cloneOf": "524b4a3a-0a40-4600-9071-d5a14f926aa8"
+    "cloneOf": "524b4a3a-0a40-4600-9071-d5a14f926aa8",
+    "summary": "Display current Beat index and BPM timing information as beat rectangles on the timeline",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "gpr6A1",
+    "youtubeids": [
+        "BYQ1Ecy-wsU"
+    ]
 }

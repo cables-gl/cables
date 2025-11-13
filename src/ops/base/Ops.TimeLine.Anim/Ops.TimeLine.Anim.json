@@ -28,6 +28,15 @@
                     "Offset"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clip",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Clip Name"
             }
         ],
         "portsOut": [
@@ -52,5 +61,12 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "sKguKJ"
+    "exampleProjectId": "sKguKJ",
+    "coreLibs": [
+        "vargetset"
+    ],
+    "youtubeids": [
+        "zRorQ_ah2eg",
+        "qMKcF54YjJA"
+    ]
 }

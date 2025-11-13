@@ -111,6 +111,7 @@ function createElement()
     div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
+    if (inTag.get() != "div")op.setUiAttribs({ "extendTitle": inTag.get() });
 
     parent.appendChild(div);
     outElement.setRef(div);
@@ -133,6 +134,7 @@ function updateText()
     oldStr = str;
 
     if (div && div.innerHTML != str) div.innerHTML = str;
+    outElement.setRef(div);
 }
 
 function updateStyle()
@@ -297,3 +299,5 @@ function warning()
         op.setUiError("error", null);
     }
 }
+
+//

@@ -5,10 +5,9 @@ export class AnimKey
 
     /** @type {Anim} */
     anim = null;
-    id = CABLES.shortId();
+    id = CABLES.simpleId();
     time = 0.0;
     value = 0.0;
-    selected = false;
     onChange = null;
     _easing = 0;
     bezCp1 = null;
@@ -19,6 +18,10 @@ export class AnimKey
     temp = {};
     uiAttribs = {};
 
+    /** @type {Anim} */
+    clip = null;
+    clipId = null;
+
     /**
      * @param {SerializedKey} obj
      * @param {Anim} [an]
@@ -26,20 +29,30 @@ export class AnimKey
     constructor(obj, an)
     {
         this.anim = obj.anim || an || null;
-
         this.setEasing(Anim.EASING_LINEAR);
         this.set(obj);
     }
 
+    /**
+     * @param {Anim} a
+     * @param {any} clipId
+     */
+    setClip(clipId, a)
+    {
+        this.clipId = clipId;
+        this.clip = a;
+        if (this.anim) this.anim.emitEvent(Anim.EVENT_CHANGE);
+    }
+
     emitChange()
     {
+        if (this.anim.batchMode) return;
         if (!this.anim) return;
         this.bezAn = null;
         if (this.onChange !== null) this.onChange();
         this.anim.forceChangeCallbackSoon();
         for (let i = 0; i < this.anim.keys.length; i++)
             this.anim.keys[i].bezAn = null;
-
     }
 
     delete()
@@ -69,6 +82,11 @@ export class AnimKey
         let changed = false;
         if (this._easing != e)changed = true;
         this._easing = e;
+        if (this._easing != Anim.EASING_CLIP)
+        {
+            this.clipId = "";
+            this.clip = null;
+        }
 
         if (this._easing == Anim.EASING_LINEAR) this.ease = this.easeLinear;
         else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = this.easeAbsolute;
@@ -97,6 +115,7 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
         else if (this._easing == Anim.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
+        else if (this._easing == Anim.EASING_CLIP) this.ease = this.easeAbsolute;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
             if (this.ease != this.easeCubicSpline)
@@ -192,6 +211,7 @@ export class AnimKey
             else if (obj.hasOwnProperty("value")) this.value = obj.value;
 
             if (obj.hasOwnProperty("uiAttribs")) this.setUiAttribs(obj.uiAttribs);
+            if (obj.clipId) this.clipId = obj.clipId;
         }
         this.emitChange();
     }
@@ -206,6 +226,7 @@ export class AnimKey
         obj.v = this.value;
         obj.e = this._easing;
         obj.uiAttribs = this.uiAttribs;
+        if (this.clipId)obj.clipId = this.clipId;
 
         if (this._easing === Anim.EASING_CUBICSPLINE)
         {

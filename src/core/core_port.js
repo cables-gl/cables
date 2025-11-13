@@ -7,6 +7,10 @@ import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 
 /**
+ * @typedef {"text"|"tsrne" } PortUiAttribsDisplay // seems not to work
+ */
+
+/**
  * @typedef PortUiAttribs
  * @property  {String} [title] overwrite title of port (by default this is portname)
  * @property  {String} [display] how the port is displayed and interacted in the paramerer panel
@@ -26,7 +30,7 @@ import { Op } from "./core_op.js";
  * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {String} [increment] internal: do not set manually
  * @property  {Number} [multiPortNum] internal: do not set manually
- * @property  {String} [display] internal: do not set manually
+ * @property  {PortUiAttribsDisplay} display internal: do not set manually
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
  * @property  {String} [objType] internal: do not set manually
@@ -43,7 +47,11 @@ import { Op } from "./core_op.js";
  * @property  {number} [glPortIndex] internal: do not set manually
  * @property  {boolean} [readOnly] internal: do not set manually
  * @property  {boolean} [multiPort] internal: do not set manually
- */
+ * @property  {number} [longPort]
+ * @property  {boolean} [tlDrawKeys]
+ * @property  {number} [tlEase] default easing when animating parameter
+ * @property  {boolean} [hover]
+*/
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -71,6 +79,9 @@ export class Port extends Events
     static EVENT_UIATTRCHANGE = "onUiAttrChange";
     static EVENT_VALUE_CHANGE = "change";
 
+    static EVENT_LINK_CHANGED = "onLinkChanged";
+    static EVENT_LINK_REMOVED = "onLinkRemoved";
+
     #oldAnimVal = -5711;
 
     animMuted = false;
@@ -78,10 +89,11 @@ export class Port extends Events
     lastAnimTime = 0;
     #uiActiveState = true;
     #valueBeforeLink = null;
-    // #lastAnimFrame = -1;
     #animated = false;
-    // #tempLastUiValue = null;
     #useVariableName = null;
+
+    /** @type {Op} */
+    #op = null;
 
     /**
      * @param {Op} ___op
@@ -97,16 +109,13 @@ export class Port extends Events
 
         /**
          * @type {Number}
-         * @name direction
-         * @instance
-         * @memberof Port
          * @description direction of port (input(0) or output(1))
          */
         this.direction = Port.DIR_IN;
         this.id = String(CABLES.simpleId());
 
         /** @type {Op} */
-        this._op = ___op;
+        this.#op = ___op;
 
         /** @type {Array<Link>} */
         this.links = [];
@@ -158,7 +167,7 @@ export class Port extends Events
 
     get op()
     {
-        return this._op;
+        return this.#op;
     }
 
     get val()
@@ -173,11 +182,8 @@ export class Port extends Events
 
     /**
      * copy over a uiattrib from an external connected port to another port
-     * @function copyLinkedUiAttrib
-     * @memberof Port
      * @param {string} which attrib name
      * @param {Port} port source port
-     * @instance
      * @example
      *
      *  inArray.onLinkChanged=()=>
@@ -232,16 +238,12 @@ export class Port extends Events
         // if (this.type == Port.TYPE_NUMBER)
         // {
         //     if (isNaN(this.value)) return "NaN";
-
         // }
         return str;
     }
 
     /**
      * change listener for input value ports, overwrite to react to changes
-     * @function onChange
-     * @memberof Port
-     * @instance
      * @example
      * const myPort=op.inString("MyPort");
      * myPort.onChange=function()
@@ -258,24 +260,17 @@ export class Port extends Events
     }
 
     /**
-     * @function remove
-     * @memberof Port
-     * @instance
      * @description remove port
      */
     remove()
     {
         this.removeLinks();
-        this._op.removePort(this);
+        this.#op.removePort(this);
     }
 
     /**
      * set ui attributes
-     * @function setUiAttribs
-     * @memberof Port
-     * @instance
      * @param {PortUiAttribs} newAttribs
-
      * @example
      * myPort.setUiAttribs({greyout:true});
      */
@@ -297,15 +292,13 @@ export class Port extends Events
             if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
         }
 
-        if (newAttribs.hasOwnProperty("expose")) this._op.patch.emitEvent("subpatchExpose", this._op.uiAttribs.subPatch);
+        if (newAttribs.hasOwnProperty("expose")) this.#op.patch.emitEvent("subpatchExpose", this.#op.uiAttribs.subPatch);
 
         if (changed) this.emitEvent(Port.EVENT_UIATTRCHANGE, newAttribs, this);
     }
 
     /**
      * get ui attributes
-     * @function getUiAttribs
-     * @memberof Port
      * @example
      * myPort.getUiAttribs();
      */
@@ -316,9 +309,6 @@ export class Port extends Events
 
     /**
      * get ui attribute
-     * @function getUiAttrib
-     * @memberof Port
-     * @instance
      * @param {String} attribName
      * <pre>
      * attribName - return value of the ui-attribute, or null on unknown attribute
@@ -333,23 +323,20 @@ export class Port extends Events
     }
 
     /**
-     * @function get
-     * @memberof Port
-     * @instance
      * @description get value of port
      */
     get()
     {
-        if (CABLES.UI && this.#animated && this.lastAnimTime == this._op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
+        if (CABLES.UI && this.#animated && this.lastAnimTime == this.#op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
         {
             return this.value;
         }
-        if (!this.animMuted && this.#animated && this.lastAnimFrame != this._op.patch.getFrameNum())
+        if (!this.animMuted && this.#animated && this.lastAnimFrame != this.#op.patch.getFrameNum())
         {
-            this.lastAnimTime = this._op.patch.timer.getTime();
-            this.lastAnimFrame = this._op.patch.getFrameNum();
+            this.lastAnimTime = this.#op.patch.timer.getTime();
+            this.lastAnimFrame = this.#op.patch.getFrameNum();
 
-            let animval = this.anim.getValue(this._op.patch.timer.getTime());
+            let animval = this.anim.getValue(this.#op.patch.timer.getTime());
 
             if (this.value != animval)
             {
@@ -372,15 +359,11 @@ export class Port extends Events
     }
 
     /**
-     * @function setValue
-     * @memberof Port
-     * @instance
      * @description set value of port / will send value to all linked ports (only for output ports)
      * @param {string | number | boolean | any[]} v
      */
     set(v)
     {
-
         this.setValue(v);
     }
 
@@ -395,7 +378,7 @@ export class Port extends Events
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
                 this._log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
-        if (this._op.enabled && !this.crashed)
+        if (this.#op.enabled && !this.crashed)
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
@@ -407,8 +390,8 @@ export class Port extends Events
 
                 if (CABLES.UI && this.#animated && CABLES.UI.keyframeAutoCreate)
                 {
-                    let t = this._op.patch.timer.getTime();
-                    if (CABLES.UI && window.gui.glTimeline) window.gui.glTimeline.createKey(this.anim, t, v);
+                    let t = this.#op.patch.timer.getTime();
+                    if (CABLES.UI && CABLES.Patch.getGui().glTimeline) CABLES.Patch.getGui().glTimeline.createKey(this.anim, t, v);
                     else this.anim.setValue(t, v);
                 }
                 else
@@ -423,15 +406,15 @@ export class Port extends Events
                         this.crashed = true;
 
                         this.setValue = function (_v) {};
-                        this.onTriggered = function (a) {};
+                        this.onTriggered = function () {};
 
-                        this._log.error("exception in ", this._op);
+                        this._log.error("exception in ", this.#op);
                         this._log.error(ex);
 
-                        this._op.patch.emitEvent("exception", ex, this._op);
+                        this.#op.patch.emitEvent("exception", ex, this.#op);
                     }
 
-                    if (this._op && this._op.patch && this._op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
+                    if (this.#op && this.#op.patch && this.#op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE)CABLES.Patch.getGui().texturePreview().updateTexturePort(this);
                 }
 
                 if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -470,22 +453,26 @@ export class Port extends Events
         else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
     }
 
+    static getTypeString(t)
+    {
+        // todo:needed only in ui ?remove from core?
+
+        if (t == Port.TYPE_VALUE) return "Number";
+        if (t == Port.TYPE_FUNCTION) return "Trigger";
+        if (t == Port.TYPE_OBJECT) return "Object";
+        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
+        if (t == Port.TYPE_ARRAY) return "Array";
+        if (t == Port.TYPE_STRING) return "String";
+        return "Unknown";
+    }
+
     /**
-     * @function getTypeString
-     * @memberof Port
-     * @instance
      * @description get port type as string, e.g. "Function","Value"...
      * @return {String} type
      */
     getTypeString()
     {
-        if (this.type == Port.TYPE_VALUE) return "Number";
-        if (this.type == Port.TYPE_FUNCTION) return "Trigger";
-        if (this.type == Port.TYPE_OBJECT) return "Object";
-        if (this.type == Port.TYPE_DYNAMIC) return "Dynamic";
-        if (this.type == Port.TYPE_ARRAY) return "Array";
-        if (this.type == Port.TYPE_STRING) return "String";
-        return "Unknown";
+        return Port.getTypeString(this.type);
     }
 
     /**
@@ -506,13 +493,11 @@ export class Port extends Events
         if (objPort.anim)
         {
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
-            this._op.hasAnimPort = true;
-            // this.anim.on(Anim.EVENT_CHANGE, () =>
-            // {
-            //     this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            // });
-            this.anim.deserialize(objPort.anim, true);
-            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
+            this.#op.hasAnimPort = true;
+            this.anim.port = this;
+
+            this.anim.deserialize(objPort.anim, true, this.op.patch.clipAnims);
+            this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
 
             this.bindAnimListeners();
             this.anim.sortKeys();
@@ -618,9 +603,6 @@ export class Port extends Events
     }
 
     /**
-     * @function removeLinks
-     * @memberof Port
-     * @instance
      * @description remove all links from port
      */
     removeLinks()
@@ -640,9 +622,6 @@ export class Port extends Events
     }
 
     /**
-     * @function removeLink
-     * @memberof Port
-     * @instance
      * @description remove all link from port
      * @param {Link} link
      */
@@ -658,14 +637,14 @@ export class Port extends Events
             else this.setValue(this.#valueBeforeLink || null);
         }
 
-        if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
+        if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
 
         try
         {
             if (this.onLinkChanged) this.onLinkChanged();
-            this.emitEvent("onLinkChanged");
-            this.emitEvent("onLinkRemoved");
-            this._op.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
+            this.emitEvent(Port.EVENT_LINK_REMOVED);
+            this.#op.emitEvent(Port.EVENT_LINK_CHANGED);
         }
         catch (e)
         {
@@ -674,9 +653,6 @@ export class Port extends Events
     }
 
     /**
-     * @function getName
-     * @memberof Port
-     * @instance
      * @description return port name
      */
     getName()
@@ -685,9 +661,6 @@ export class Port extends Events
     }
 
     /**
-     * @function getTitle
-     * @memberof Port
-     * @instance
      * @description return port name or title
      */
     getTitle()
@@ -703,13 +676,13 @@ export class Port extends Events
     {
         this.#valueBeforeLink = this.value;
         this.links.push(l);
-        if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
+        if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
 
         try
         {
             if (this.onLinkChanged) this.onLinkChanged();
-            this.emitEvent("onLinkChanged");
-            this._op.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
+            this.#op.emitEvent(Port.EVENT_LINK_CHANGED);
         }
         catch (e)
         {
@@ -718,9 +691,6 @@ export class Port extends Events
     }
 
     /**
-     * @function getLinkTo
-     * @memberof Port
-     * @instance
      * @param {Port} p2 otherPort
      * @description return link, which is linked to otherPort
      */
@@ -730,9 +700,6 @@ export class Port extends Events
     }
 
     /**
-     * @function removeLinkTo
-     * @memberof Port
-     * @instance
      * @param {Port} p2 otherPort
      * @description removes link, which is linked to otherPort
      */
@@ -743,20 +710,17 @@ export class Port extends Events
             if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
             {
                 this.links[i].remove();
-                if (CABLES.UI && this._op.checkLinkTimeWarnings) this._op.checkLinkTimeWarnings();
+                if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
 
                 if (this.onLinkChanged) this.onLinkChanged();
-                this.emitEvent("onLinkChanged");
-                this.emitEvent("onLinkRemoved");
+                this.emitEvent(Port.EVENT_LINK_CHANGED);
+                this.emitEvent(Port.EVENT_LINK_REMOVED);
                 return;
             }
         }
     }
 
     /**
-     * @function isLinkedTo
-     * @memberof Port
-     * @instance
      * @param {Port} p2 otherPort
      * @description returns true if port is linked to otherPort
      */
@@ -773,9 +737,6 @@ export class Port extends Events
     }
 
     /**
-     * @function trigger
-     * @memberof Port
-     * @instance
      * @description trigger the linked port (usually invoked on an output function port)
      */
     trigger()
@@ -784,7 +745,7 @@ export class Port extends Events
 
         this._activity();
         if (linksLength === 0) return;
-        if (!this._op.enabled) return;
+        if (!this.#op.enabled) return;
 
         let portTriggered = null;
         try
@@ -800,7 +761,7 @@ export class Port extends Events
                     {
                         console.log(portTriggered, portTriggered._onTriggered);
                     }
-                    portTriggered._onTriggered(null);
+                    portTriggered._onTriggered();
 
                     portTriggered.op.patch.popTriggerStack();
                 }
@@ -811,7 +772,7 @@ export class Port extends Events
         {
             portTriggered.op.enabled = false;
 
-            if (this._op.patch.isEditorMode())
+            if (this.#op.patch.isEditorMode())
             {
                 if (portTriggered.op.onError) portTriggered.op.onError(ex);
             }
@@ -837,7 +798,7 @@ export class Port extends Events
     {
         this.#useVariableName = n;
 
-        this._op.patch.on("variableRename", (oldname, newname) =>
+        this.#op.patch.on("variableRename", (oldname, newname) =>
         {
             if (oldname != this.#useVariableName) return;
             this.#useVariableName = newname;
@@ -865,7 +826,7 @@ export class Port extends Events
 
         if (v)
         {
-            this._variableIn = this._op.patch.getVar(v);
+            this._variableIn = this.#op.patch.getVar(v);
 
             if (!this._variableIn)
             {
@@ -895,7 +856,7 @@ export class Port extends Events
         }
 
         this.setUiAttribs(attr);
-        this._op.patch.emitEvent("portSetVariable", this._op, this, v);
+        this.#op.patch.emitEvent("portSetVariable", this.#op, this, v);
     }
 
     /**
@@ -916,11 +877,11 @@ export class Port extends Events
         if (!hasTriggerPort)
         {
             if (a)
-                this._notriggerAnimUpdate = this._op.patch.on("onRenderFrame", () =>
+                this._notriggerAnimUpdate = this.#op.patch.on("onRenderFrame", () =>
                 {
                     this.updateAnim();
                 });
-            else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this._op.patch.off(this._notriggerAnimUpdate);
+            else if (this._notriggerAnimUpdate) this._notriggerAnimUpdate = this.#op.patch.off(this._notriggerAnimUpdate);
         }
     }
 
@@ -928,12 +889,12 @@ export class Port extends Events
     {
         this.anim.on(Anim.EVENT_CHANGE, () =>
         {
-            this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-            this._op.patch.updateAnimMaxTimeSoon();
+            this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
+            this.#op.patch.updateAnimMaxTimeSoon();
         });
         this.anim.on(Anim.EVENT_KEY_DELETE, () =>
         {
-            this._op.patch.updateAnimMaxTimeSoon();
+            this.#op.patch.updateAnimMaxTimeSoon();
         });
 
     }
@@ -947,7 +908,7 @@ export class Port extends Events
         if (this.#animated != a)
         {
             this.#animated = a;
-            this._op.hasAnimPort = true;
+            this.#op.hasAnimPort = true;
             changed = true;
         }
 
@@ -960,7 +921,7 @@ export class Port extends Events
         if (this.#animated)
         {
             let time = 0;
-            if (window.gui && window.gui.glTimeline)time = this._op.patch.timer.getTime();// if timeline is already used otherwise create first key at 0
+            if (this.#op.patch.gui && this.#op.patch.gui.glTimeline)time = this.#op.patch.timer.getTime();// if timeline is already used otherwise create first key at 0
 
             if (this.anim.keys.length == 0) this.anim.setValue(time, this.value);
         }
@@ -971,7 +932,7 @@ export class Port extends Events
 
         this._handleNoTriggerOpAnimUpdates(a);
 
-        this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
+        this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
 
         this.setUiAttribs({ "isAnimated": this.#animated });
         if (changed) this._onAnimToggle();
@@ -981,8 +942,8 @@ export class Port extends Events
     {
         this.setAnimated(!this.#animated);
         this.setUiAttribs({ "isAnimated": this.#animated });
-        this._op.patch.emitEvent("portAnimUpdated", this._op, this, this.anim);
-        this._op.patch.emitEvent("portAnimToggle", this._op, this, this.anim);
+        this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
+        this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
     }
 
     /**
@@ -995,9 +956,6 @@ export class Port extends Events
      * CABLES.Port.TYPE_DYNAMIC = 4;
      * CABLES.Port.TYPE_STRING = 5;
      * </pre>
-     * @function getType
-     * @memberof Port
-     * @instance
      * @return {Number} type of port
      */
     getType()
@@ -1006,9 +964,6 @@ export class Port extends Events
     }
 
     /**
-     * @function isLinked
-     * @memberof Port
-     * @instance
      * @return {Boolean} true if port is linked
      */
     isLinked()
@@ -1032,9 +987,6 @@ export class Port extends Events
     }
 
     /**
-     * @function isHidden
-     * @memberof Port
-     * @instance
      * @return {Boolean} true if port is hidden
      */
     isHidden()
@@ -1043,19 +995,15 @@ export class Port extends Events
     }
 
     /**
-     * @function onTriggered
-     * @memberof Port
-     * @instance
-     * @param {function} a onTriggeredCallback
      * @description set callback, which will be executed when port was triggered (usually output port)
      */
-    _onTriggered(a)
+    _onTriggered()
     {
         this._activity();
-        this._op.updateAnims();
-        if (this._op.enabled && this.onTriggered) this.onTriggered(a);
+        this.#op.updateAnims();
+        if (this.#op.enabled && this.onTriggered) this.onTriggered();
 
-        if (this._op.enabled) this.emitEvent("trigger");
+        if (this.#op.enabled) this.emitEvent("trigger");
     }
 
     /**
@@ -1063,18 +1011,56 @@ export class Port extends Events
      */
     _onSetProfiling(v) // used in editor: profiler tab
     {
-        this._op.patch.profiler.add("port", this);
+        if (this.op.patch.debuggerEnabled)
+        {
+            // console.log(this.op.name + " - port " + this.name + ": set value to " + v);
+            const cv = v;
+
+            this.op.patch.emitEvent("debuggerstep",
+                {
+                    "opname": this.op.name,
+                    "opid": this.op.id,
+                    "portname": this.name,
+                    "log": this.op.name + " - port " + this.name + ": set value to " + v,
+                    "exec": () =>
+                    {
+                        this.setValue(cv);
+                    }
+                });
+            return;
+        }
+
+        this.#op.patch.profiler.add("port", this);
         this.setValue(v);
-        this._op.patch.profiler.add("port", null);
+        this.#op.patch.profiler.add("port", null);
     }
 
     _onTriggeredProfiling() // used in editor: profiler tab
     {
-        if (this._op.enabled && this.onTriggered)
+        if (this.#op.enabled && this.onTriggered)
         {
-            this._op.patch.profiler.add("port", this);
+            if (this.op.patch.debuggerEnabled)
+            {
+                console.log();
+                this.op.patch.emitEvent("debuggerstep",
+                    {
+                        "opname": this.op.name,
+                        "opid": this.op.id,
+                        "portname": this.name,
+                        "log": this.op.name + " - triggered " + this.name,
+                        "exec": () =>
+                        {
+                            this.onTriggered();
+                        }
+
+                    });
+                return;
+
+            }
+
+            this.#op.patch.profiler.add("port", this);
             this.onTriggered();
-            this._op.patch.profiler.add("port", null);
+            this.#op.patch.profiler.add("port", null);
         }
     }
 
@@ -1094,9 +1080,6 @@ export class Port extends Events
 
     /**
      * Returns the port type string, e.g. "value" based on the port type number
-     * @function portTypeNumberToString
-     * @instance
-     * @memberof Port
      * @param {Number} type - The port type number
      * @returns {String} - The port type as string
      */

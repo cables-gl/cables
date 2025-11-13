@@ -2,22 +2,44 @@ const
     loopstr = ["Off", "Repeat", "Mirror", "Offset"],
     animVal = op.inValue("Value"),
     inloop = op.inSwitch("loop", loopstr),
+    inClip = op.inBool("Clip", false),
+    inClipName = op.inString("Clip Name", ""),
     outAnim = op.outObject("Anim", null, "anim"),
     outLengthLoop = op.outNumber("Loop Length"),
     outLength = op.outNumber("Length");
 
+let to = null;
 animVal.setAnimated(true);
 animVal.onChange = update;
+inClip.onChange = updateUi;
+updateUi();
+
+inClipName.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": "#" + inClipName.get() });
+    clearTimeout(to);
+    to = setTimeout(function () { update(); }, 500);
+};
 
 inloop.onChange = () =>
 {
     animVal.anim.setLoop(loopstr.indexOf(inloop.get()));
 };
 
+function updateUi()
+{
+    inClipName.setUiAttribs({ "greyout": !inClip.get() });
+    update();
+}
+
 function update()
 {
     const anim = animVal.anim;
     outAnim.setRef(anim);
+    if (inClip.get())
+    {
+        op.patch.setVarValue("_clip" + inClipName.get(), anim);
+    }
     if (anim.keys.length > 0)
     {
         outLengthLoop.set(anim.getLengthLoop());
@@ -28,4 +50,5 @@ function update()
         outLengthLoop.set(0);
         outLength.set(0);
     }
+    CABLES.Anim.initClipsFromVars(op.patch);
 }

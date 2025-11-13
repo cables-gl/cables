@@ -33,7 +33,7 @@ function update()
             }
             lastParent = parent;
         }
-        if (child !== lastChild)
+        if (child !== lastChild || !parent.contains(child))
         {
             if (child)
             {

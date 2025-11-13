@@ -1,0 +1,1 @@
+add listeners to every html element in an array and handle these when fired

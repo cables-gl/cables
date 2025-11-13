@@ -24,6 +24,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1752508746248
+        },
+        {
+            "message": "added option to allow multiple options to be selected",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1760299977225
         }
     ],
     "authorName": "tim",
@@ -59,6 +65,11 @@
             },
             {
                 "type": 0,
+                "name": "Multiple Selection",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Lines",
                 "subType": "integer"
             },
@@ -80,6 +91,10 @@
                 "type": 0,
                 "name": "Index",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Selected Values"
             }
         ]
     },

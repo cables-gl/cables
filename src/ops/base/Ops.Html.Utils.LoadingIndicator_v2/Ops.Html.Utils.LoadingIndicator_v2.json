@@ -61,6 +61,10 @@
                 "type": 2,
                 "name": "Elment",
                 "objType": "element"
+            },
+            {
+                "type": 3,
+                "name": "Requests"
             }
         ]
     },

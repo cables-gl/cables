@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1593415973445
-        },
-        {
-            "message": "Ops.User.pandur.ValidTexture renamed to Ops.Gl.ValidTexture",
-            "author": "pandur",
-            "date": 1594019990599
+            "date": 1593415973445,
+            "type": "new"
         }
     ],
     "authorName": "pandur",
@@ -17,27 +13,33 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Default index",
+                "values": [
+                    "Empty",
+                    "Stripes"
+                ],
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Result"
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
             }
         ]
     },
     "summary": "output current input texture or a default texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

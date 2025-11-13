@@ -167,6 +167,12 @@ class Mesh extends CgMesh
         for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
     }
 
+    /**
+     * @param {AttributeOject} attr
+     * @param { Float32Array } array
+     * @param {number} start
+     * @param {number} end
+     */
     setAttributeRange(attr, array, start, end)
     {
         if (!attr) return;
@@ -960,6 +966,7 @@ class Mesh extends CgMesh
         this.#bufVerticesIndizes = null;
 
         this._disposeAttributes();
+        return null;
     }
 }
 

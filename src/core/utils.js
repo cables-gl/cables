@@ -72,7 +72,7 @@ export const shuffleArray = function (array)
  * @return {String} generated ID
  * @static
  */
-
+// WARNING this is slow when done alot !!!
 const _shortIds = {};
 export const shortId = function ()
 {

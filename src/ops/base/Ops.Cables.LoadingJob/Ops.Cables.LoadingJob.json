@@ -1,0 +1,28 @@
+{
+    "id": "12d74371-c63d-4044-a4ff-3a4481c6e1e5",
+    "created": 1762202585509,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762202585535
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Loading Active",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Create a loading job while input is true",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "bzn9z1"
+}

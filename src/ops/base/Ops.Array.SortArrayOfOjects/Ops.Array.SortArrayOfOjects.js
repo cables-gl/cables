@@ -5,10 +5,17 @@ const
     inReverse = op.inBool("Reverse", false),
     outArr = op.outArray("Result");
 
+inKey.onChange = () =>
+{
+    op.setUiAttribs({ "extendTitle": inKey.get() });
+    doSort();
+};
+
 inReverse.onChange =
 inType.onChange =
-inArr.onChange =
-inKey.onChange = () =>
+inArr.onChange = doSort;
+
+function doSort()
 {
     const k = inKey.get();
     const arr = JSON.parse(JSON.stringify(inArr.get())) || [];
@@ -26,4 +33,4 @@ inKey.onChange = () =>
 
     if (arr && inReverse.get())arr.reverse();
     outArr.set(arr);
-};
+}

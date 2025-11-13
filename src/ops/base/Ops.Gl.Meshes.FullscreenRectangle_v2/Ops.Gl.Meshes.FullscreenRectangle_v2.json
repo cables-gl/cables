@@ -9,6 +9,10 @@
             {
                 "type": 0,
                 "name": "Scale index",
+                "values": [
+                    "Stretch",
+                    "Fit"
+                ],
                 "subType": "integer"
             },
             {
@@ -68,7 +72,6 @@
             "date": 1687527468365
         }
     ],
-
-
-    "exampleProjectId": "uKkIeG"
+    "exampleProjectId": "uKkIeG",
+    "license": "MIT"
 }

@@ -1,0 +1,33 @@
+{
+    "id": "b0922cdb-34ca-42ae-9a37-c25049a4ada7",
+    "created": 1759153825476,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1759153825476
+        },
+        {
+            "message": "TimeLine.Viz.TimeLineRects renamed to Ops.Dev.TimeLine.Viz.TimeLineRects",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1762165166577
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 3,
+                "name": "Size"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -21,7 +21,10 @@
                 "type": 1,
                 "name": "Forward"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "summary": "Move back or forward in the browser navigation history",
+    "docs": {
+        "ports": []
     }
 }
