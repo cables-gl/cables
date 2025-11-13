@@ -134,6 +134,7 @@ function updateText()
     oldStr = str;
 
     if (div && div.innerHTML != str) div.innerHTML = str;
+    outElement.setRef(div);
 }
 
 function updateStyle()

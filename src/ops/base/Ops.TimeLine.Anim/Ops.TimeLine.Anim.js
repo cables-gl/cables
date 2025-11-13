@@ -8,15 +8,17 @@ const
     outLengthLoop = op.outNumber("Loop Length"),
     outLength = op.outNumber("Length");
 
+let to = null;
 animVal.setAnimated(true);
 animVal.onChange = update;
-
 inClip.onChange = updateUi;
 updateUi();
 
 inClipName.onChange = () =>
 {
     op.setUiAttrib({ "extendTitle": "#" + inClipName.get() });
+    clearTimeout(to);
+    to = setTimeout(function () { update(); }, 500);
 };
 
 inloop.onChange = () =>
@@ -27,6 +29,7 @@ inloop.onChange = () =>
 function updateUi()
 {
     inClipName.setUiAttribs({ "greyout": !inClip.get() });
+    update();
 }
 
 function update()
