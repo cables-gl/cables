@@ -143,3 +143,4 @@ export class CopyTexture
 window.CABLES = window.CABLES || {};
 window.CABLES.CGL = window.CABLES.CGL || {};
 window.CABLES.CGL.CopyTexture = CopyTexture;
+window.CGL = window.CABLES.CGL;

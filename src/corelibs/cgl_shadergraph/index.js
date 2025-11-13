@@ -7,5 +7,6 @@ window.CABLES.CGL = window.CABLES.CGL || {};
 window.CABLES.CGL.ShaderGraphOp = ShaderGraphOp;
 window.CABLES.CGL.ShaderGraph = ShaderGraph;
 window.CABLES.CGL.ShaderGraphProgram = ShaderGraphProgram;
+window.CGL = window.CABLES.CGL;
 
 export { ShaderGraph, ShaderGraphOp, ShaderGraphProgram };
