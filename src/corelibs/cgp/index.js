@@ -25,8 +25,8 @@ const CGP = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGP = window.CABLES.CGP || CGP;
-window.CGP = window.CGP || CGP;
+const existing = window.CABLES.CGP;
+window.CABLES.CGP = { ...existing, ...CGP };
 
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;
@@ -37,5 +37,7 @@ window.CGP.BindingStorage = BindingStorage;
 window.CGP.BindingUniform = BindingUniform;
 window.CGP.BindingTexture = BindingTexture;
 window.CGP.BindingSampler = BindingSampler;
+
+window.CGP = window.CABLES.CGP;
 
 export { CGP };

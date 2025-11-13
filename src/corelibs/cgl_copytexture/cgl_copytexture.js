@@ -139,3 +139,7 @@ export class CopyTexture
         if (this.mesh) this.mesh.dispose();
     }
 }
+
+window.CABLES = window.CABLES || {};
+window.CABLES.CGL = window.CABLES.CGL || {};
+window.CABLES.CGL.CopyTexture = CopyTexture;

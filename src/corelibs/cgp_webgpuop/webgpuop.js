@@ -30,3 +30,7 @@ export class WebGpuOp
 
     }
 }
+
+window.CABLES = window.CABLES || {};
+window.CABLES.CGP = window.CABLES.CGP || {};
+window.CABLES.CGP.WebGpuOp = WebGpuOp;

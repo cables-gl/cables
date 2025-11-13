@@ -1,6 +1,7 @@
 /** @namespace WEBAUDIO */
 
 import { CONSTANTS, Patch } from "cables";
+import { CG } from "../cg/index.js";
 
 /**
  * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
@@ -445,6 +446,8 @@ export class WebAudio
 const WEBAUDIO = new WebAudio();
 
 window.CABLES = window.CABLES || {};
-window.CABLES.WEBAUDIO = WEBAUDIO;
+const existing = window.CABLES.WEBAUDIO;
+window.CABLES.WEBAUDIO = { ...existing, ...WEBAUDIO };
+window.WEBAUDIO = window.CABLES.WEBAUDIO;
 
 export { WEBAUDIO };

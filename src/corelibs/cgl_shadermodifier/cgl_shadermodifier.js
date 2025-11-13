@@ -519,3 +519,7 @@ export class ShaderModifier
 
     }
 }
+
+window.CABLES = window.CABLES || {};
+window.CABLES.CGL = window.CABLES.CGL || {};
+window.CABLES.CGL.ShaderModifier = ShaderModifier;
