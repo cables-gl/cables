@@ -1,6 +1,6 @@
 import { Logger } from "cables-shared-client";
 import { Op, Port, utils } from "cables";
-import { CgTexture } from "../cg/cg_texture.js";
+import { CgTexture } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 
 const DEFAULT_TEXTURE_SIZE = 8;

@@ -1,15 +1,13 @@
 import { Logger } from "cables-shared-client";
 import { mat4 } from "gl-matrix";
-import { now, Timer } from "cables";
+import { now } from "cables";
 import { CgpUniform } from "./cgp_uniform.js";
-import { preproc } from "../cg/preproc.js";
-import { CgShader } from "../cg/index.js";
+import { CgShader, preproc, nl } from "../cg/index.js";
 import { CgpContext } from "./cgp_state.js";
 import { BindGroup } from "./binding/bindgroup.js";
 import { BindingUniform } from "./binding/binding_uniform.js";
 import { BindingSampler } from "./binding/binding_sampler.js";
 import { BindingTexture } from "./binding/binding_texture.js";
-import { nl } from "../cgl/constants.js";
 
 /** @typedef CgpShaderOptions
  * @property {Boolean} [compute]

@@ -3,7 +3,7 @@ import { mat4 } from "gl-matrix";
 import { now, Op } from "cables";
 import { ShaderLibMods } from "./cgl_shader_lib.js";
 import { MESH } from "./cgl_mesh.js";
-import { CONSTANTS, nl } from "./constants.js";
+import { CONSTANTS, nl } from "../cg/constants.js";
 import { CgShader } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 import { Texture } from "./cgl_texture.js";

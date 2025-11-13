@@ -2,7 +2,7 @@ import { Logger } from "cables-shared-client";
 import { utils } from "cables";
 import { CgpShader } from "../cgp_shader.js";
 import { CgpContext } from "../cgp_state.js";
-import { nl } from "../../cgl/constants.js";
+import { nl } from "../../cg/index.js";
 
 export class Binding
 {

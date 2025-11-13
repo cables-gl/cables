@@ -10,9 +10,8 @@ import { MESHES } from "./cgl_simplerect.js";
 import { getWheelSpeed, getWheelDelta, onLoadingAssetsFinished } from "./cgl_utils.js";
 import { Texture } from "./cgl_texture.js";
 import { TextureEffect } from "./cgl_textureeffect.js";
-import { CONSTANTS } from "./constants.js";
-import { ProfileData } from "./cgl_profiledata.js";
-import { MatrixStack, Geometry, BoundingBox } from "../cg/index.js";
+import { CONSTANTS } from "../cg/constants.js";
+import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 
 const CGL = {

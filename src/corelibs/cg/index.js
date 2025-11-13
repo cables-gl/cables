@@ -9,6 +9,9 @@ import { MatrixStack } from "./cg_matrixstack.js";
 import { CgMesh } from "./cg_mesh.js";
 import { CgShader } from "./cg_shader.js";
 import { CgTexture } from "./cg_texture.js";
+import { ProfileData } from "./cg_profiledata.js";
+import { CONSTANTS, nl } from "./constants.js";
+import { preproc } from "./preproc.js";
 
 const CG = {
 
@@ -49,4 +52,4 @@ window.vec2 = GLMatrix.vec2;
 window.vec3 = GLMatrix.vec3;
 window.vec4 = GLMatrix.vec4;
 
-export { CG, BoundingBox, CgCanvas, CgContext, FpsCounter, Geometry, MatrixStack, CgMesh, CgShader, CgTexture, CgUniform };
+export { CG, BoundingBox, CgCanvas, CgContext, FpsCounter, Geometry, MatrixStack, CgMesh, CgShader, CgTexture, CgUniform, ProfileData, preproc, nl, CONSTANTS };

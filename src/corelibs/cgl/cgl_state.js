@@ -1,9 +1,8 @@
 import { Logger } from "cables-shared-client";
 import { Op, Patch, utils } from "cables";
-import { CONSTANTS } from "./constants.js";
+import { CONSTANTS } from "../cg/constants.js";
 import { Shader } from "./cgl_shader.js";
-import { Geometry } from "../cg/cg_geom.js";
-import { CgContext } from "../cg/cg_context.js";
+import { CgContext, Geometry } from "../cg/index.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { Texture } from "./cgl_texture.js";

@@ -5,7 +5,7 @@ import { RenderPipeline } from "./cgp_renderpipeline.js";
 import { Texture } from "./cgp_texture.js";
 import { CgpUniform } from "./cgp_uniform.js";
 import { CgpGguBuffer } from "./cgp_gpubuffer.js";
-import { MESHES } from "../cgl/cgl_simplerect.js";
+import { MESHES } from "./cgp_simplerect.js";
 import { WebGpuCanvasAttachment } from "./cgp_canvasattachment.js";
 import { BindingStorage } from "./binding/binding_storagebuffer.js";
 import { ComputePipeline } from "./cgp_computepipeline.js";
