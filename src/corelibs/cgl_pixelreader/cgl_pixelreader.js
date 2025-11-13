@@ -154,3 +154,4 @@ export class PixelReader
 window.CABLES = window.CABLES || {};
 window.CABLES.CGL = window.CABLES.CGL || {};
 window.CABLES.CGL.PixelReader = PixelReader;
+window.CGL = window.CABLES.CGL;
