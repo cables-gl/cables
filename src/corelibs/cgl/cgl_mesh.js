@@ -10,6 +10,14 @@ const MESH = {};
 MESH.lastMesh = null;
 
 /**
+ * @typedef AttributeObject
+ * @property {WebGlBuffer} buffer
+ * @property {number} itemSize
+ * @property {number} numItems
+ * @property {string} name
+ */
+
+/**
  * @typedef {Object} CglMeshAttributeOptions
  * @property {boolean} [instanced]
  * @property {Function} [cb]
@@ -71,7 +79,8 @@ class Mesh extends CgMesh
 
         this._lastShader = null;
         this._numInstances = 0;
-        this._glPrimitive = options.glPrimitive;
+
+        this._glPrimitive = options.glPrimitive || null;
 
         this.opId = options.opId || "";
         this._preWireframeGeom = null;
@@ -165,7 +174,7 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @param {AttributeOject} attr
+     * @param {AttributeObject} attr
      * @param { Float32Array } array
      * @param {number} start
      * @param {number} end
@@ -194,7 +203,7 @@ class Mesh extends CgMesh
         if (end > array.length && !this.warned)
         {
             this.warned = true;
-            this._log.warn(this.#cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+            this._log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
             return;
         }
 
@@ -203,6 +212,10 @@ class Mesh extends CgMesh
         gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
     }
 
+    /**
+     * @param {Float32Array} array
+     * @param {AttributeObject} attr
+     */
     _resizeAttr(array, attr)
     {
         const gl = this.#cgl.gl;
@@ -817,7 +830,7 @@ class Mesh extends CgMesh
         MESH.lastMesh = this;
 
         let prim = this.#cgl.gl.TRIANGLES;
-        if (this._glPrimitive !== undefined) prim = this._glPrimitive;
+        if (this._glPrimitive !== null) prim = this._glPrimitive;
         if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
         let elementDiv = 1;

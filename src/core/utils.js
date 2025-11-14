@@ -350,16 +350,16 @@ export const filename = function (url)
  * make an ajax request
  * @static
  * @function ajax
- * @param url
- * @param cb
- * @param method
- * @param post
- * @param contenttype
- * @param jsonP
- * @param headers
- * @param options
+ * @param {string} url
+ * @param {function} cb
+ * @param {string} method
+ * @param {null} post
+ * @param {null} contenttype
+ * @param {boolean} jsonP
+ * @param {object} headers
+ * @param {object} options
  */
-export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
+export function ajax(url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
 {
     const requestOptions = {
         "url": url,
@@ -373,9 +373,9 @@ export const ajax = function (url, cb, method, post, contenttype, jsonP, headers
     };
     if (options && options.credentials) requestOptions.credentials = options.credentials;
     request(requestOptions);
-};
+}
 
-export const request = function (options)
+export function request(options)
 {
     if (!options.hasOwnProperty("asynch")) options.asynch = true;
 
@@ -444,7 +444,7 @@ export const request = function (options)
     {
         if (options.cb) options.cb(true, e.msg, xhr);
     }
-};
+}
 
 // ----------------------------------------------------------------
 
