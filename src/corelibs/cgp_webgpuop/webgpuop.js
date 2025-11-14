@@ -1,4 +1,4 @@
-import { CGP } from "../index.js";
+import { CGP } from "../cgp/index.js";
 
 export class WebGpuOp
 {

@@ -49,9 +49,7 @@ window.CGL = window.CABLES.CGL;
 
 window.addEventListener("INIT_CG", (e) =>
 {
-    console.log("global222");
     const cgl = new CglContext(e.detail);
-
 });
 
 /**
