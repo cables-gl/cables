@@ -381,7 +381,7 @@ function finishLoading()
 function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
-
+    if (!inFile.get()) return;
     if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     let fileToLoad = inFile.get();
