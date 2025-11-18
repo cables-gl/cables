@@ -99,9 +99,9 @@ function _core_libs_clean(done)
     done();
 }
 
-function _copy_ui()
+function _copy_ui(done)
 {
-    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/corelibs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
+    return gulp.src(["build/*", "!build/buildinfo.json", "!build/{corelibs,corelibs/**}", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
 function _core_libs_copy(done)
