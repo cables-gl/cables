@@ -32,7 +32,7 @@
         "build": "gulp build",
         "build:live": "gulp build",
         "watch": "gulp watch",
-        "start": "gulp",
+        "start": "gulp watch",
         "analyze": "gulp analyze",
         "headless": "node ./src/core/index.js",
         "test": "gulp --gulpfile gulpfile_tests.js"
