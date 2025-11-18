@@ -24,7 +24,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_cubemapframebuffer"
+        "cgl_cubemapframebuffer",
+        "cgl"
     ],
     "layout": {
         "portsIn": [

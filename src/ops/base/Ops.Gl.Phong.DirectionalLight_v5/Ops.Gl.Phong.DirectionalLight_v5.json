@@ -3,7 +3,8 @@
     "id": "9f41bf91-f4e0-4ce4-89d8-72627b76261e",
     "created": 1587646911645,
     "coreLibs": [
-        "cgl_light"
+        "cgl_light",
+        "cgl"
     ],
     "layout": {
         "portsIn": [
