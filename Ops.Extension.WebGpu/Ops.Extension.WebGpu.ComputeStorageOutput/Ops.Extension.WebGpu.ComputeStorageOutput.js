@@ -29,12 +29,14 @@ function init(_shader)
     shader.defaultBindGroup.addBinding(binding);
 }
 
+exec.onLinkChanged =
 op.onDelete =
 inLen.onChange =
 inName.onChange = () =>
 {
     if (shader && binding) shader.defaultBindGroup.removeBinding(binding);
-    shader = binding = null;
+    gpuBuff = shader = binding = null;
+    outBuff.setRef(gpuBuff);
 };
 
 exec.onTriggered = () =>

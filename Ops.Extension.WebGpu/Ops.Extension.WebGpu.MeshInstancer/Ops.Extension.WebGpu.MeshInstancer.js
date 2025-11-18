@@ -68,7 +68,7 @@ inTrigger.onTriggered = () =>
     {
 
     }
-    mesh.instances = inInstances.get() || inPosBuff.get().length;
+    mesh.instances = inInstances.get() || inPosBuff.get()?.length;
 
     if (mesh)mesh.render();
 
