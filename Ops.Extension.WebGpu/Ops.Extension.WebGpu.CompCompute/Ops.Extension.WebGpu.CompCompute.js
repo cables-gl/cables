@@ -6,6 +6,7 @@ const
     inWg3 = op.inInt("Workgroups 3", 0),
     inForce = op.inTriggerButton("Force Update"),
     next = op.outTrigger("Next"),
+    outCode = op.outString("Code"),
     outBuff = op.outObject("Buffer"),
     outLen = op.outNumber("Length");
 
@@ -51,6 +52,11 @@ compute.onTriggered = () =>
     next.trigger();
     if (pipe) pipe.compute(shader, this.workGroups);
 
+    if (needsInit)
+        outCode.set(shader.getProcessedSource());
+
+    needsInit = false;
+
     outBuff.setRef(gpuBuff);
     cgp.popShader();
 };
@@ -66,7 +72,7 @@ function init(cgp)
     shader.setSource(inSrc.get());
     shader.addUniform(new CGP.Uniform(shader, "4f", "color", [1, 1, 1, 1]), GPUShaderStage.COMPUTE);
     shader.addUniform(new CGP.Uniform(shader, "4f", "colorw", [1, 1, 1, 1]), GPUShaderStage.COMPUTE);
-
+    // console.log("code",shader.getProcessedSource())
     // gpuBuff = new CABLES.CGP.GPUBuffer(op.patch.cgp, op.objName, [], {
     //     "length": arrSize,
     // });
@@ -79,6 +85,7 @@ function init(cgp)
     // shader.defaultBindGroup.addBinding(binding);
 
     // console.log("shader.defaultBindGroup", shader.defaultBindGroup);
+    outCode.set(shader.getProcessedSource());
 
     needsInit = false;
 

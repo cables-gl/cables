@@ -46,6 +46,10 @@
                 "name": "Next"
             },
             {
+                "type": 5,
+                "name": "Code"
+            },
+            {
                 "type": 2,
                 "name": "Buffer"
             },

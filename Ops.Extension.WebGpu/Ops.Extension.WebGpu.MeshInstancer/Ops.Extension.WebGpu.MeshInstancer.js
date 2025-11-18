@@ -32,7 +32,7 @@ function reset()
 
 inPosBuff.onChange = () =>
 {
-    if (storage && oldPosBuff != inPosBuff.get()) reset();
+    if (storage) reset();
 };
 
 inTrigger.onTriggered = () =>
