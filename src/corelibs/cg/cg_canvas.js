@@ -72,9 +72,7 @@ export class CgCanvas
                 // this.canvasEle.style.marginTop = offY + "px";
             }
 
-            console.log("pixelden", this.pixelDensity, w, h, this.canvasEle.width);
             this.updateSize();
-            console.log("pixelden", this.pixelDensity, w, h, this.canvasEle.width);
 
             this._cg.emitEvent("resize");
         }
