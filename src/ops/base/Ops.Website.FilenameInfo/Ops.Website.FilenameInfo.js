@@ -2,7 +2,7 @@ const
     inUrl = op.inString("URL", ""),
     outProtocol = op.outString("Protocol"),
     outHost = op.outString("Host"),
-    outFullPath = op.outString("Full Path"),
+    outFullPath = op.outString("Full Path"), // path without filename
     outFilename = op.outString("Filename"),
     outBasename = op.outString("basename"),
     outExt = op.outString("Suffix"),
