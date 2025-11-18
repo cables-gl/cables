@@ -1793,14 +1793,4 @@ export class Op extends Events
         if (this.patch.isEditorMode()) return Patch.getGui().patchView.isCurrentOp(this);
     }
 
-    /**
-     *
-     * @param {Number} api graphics api, 1 = webgl, 2 = webgpu
-     */
-    checkGraphicsApi(api = 1)
-    {
-        if (this.patch.isEditorMode())
-            if (this.patch.cg && this.patch.cg.gApi != api)
-                this.setUiError("wronggapi", "Wrong graphics API", 2);
-    }
 }

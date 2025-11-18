@@ -488,4 +488,16 @@ export class CgContext extends Events
 
     }
 
+    /**
+     *
+     * @param {Number} api graphics api, 1 = webgl, 2 = webgpu
+     */
+    checkGraphicsApi(api = CgContext.API_WEBGL)
+    {
+        if (this.patch.isEditorMode())
+            if (this.patch.cg && this.patch.cg.gApi != api)
+                this.setUiError("wronggapi", "Wrong graphics API", 2);
+
+    }
+
 }
