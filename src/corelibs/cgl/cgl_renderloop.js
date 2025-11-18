@@ -14,7 +14,7 @@ export class CglRenderLoop extends RenderLoop
     #renderOneFrame;
     #animReq;
 
-    _frameNum = 0;
+    frameNum = 0;
     onOneFrameRendered = null;
     _frameNext = 0;
     _frameInterval = 0;
@@ -111,8 +111,8 @@ export class CglRenderLoop extends RenderLoop
 
         this.#patch.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
-        this._frameNum++;
-        if (this._frameNum == 1)
+        this.frameNum++;
+        if (this.frameNum == 1)
         {
             if (this.#patch.config.onFirstFrameRendered) this.#patch.config.onFirstFrameRendered();
         }
