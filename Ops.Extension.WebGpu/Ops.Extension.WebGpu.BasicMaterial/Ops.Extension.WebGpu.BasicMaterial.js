@@ -34,7 +34,7 @@ inTex.onChange =
 
 inTrigger.onTriggered = () =>
 {
-    op.patch.cg.checkGraphicsApi(2);
+    op.checkGraphicsApi(2);
 
     const cgp = op.patch.cg;
     if (!shader)
