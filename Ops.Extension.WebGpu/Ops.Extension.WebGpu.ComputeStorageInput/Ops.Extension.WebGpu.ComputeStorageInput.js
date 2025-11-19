@@ -17,8 +17,13 @@ inPosBuff.onChange=()=>
     else
     {
         console.log("yes.....");
+        if(inPosBuff.get())
+        {
+
         storage.cgpbuffer.setData(inPosBuff.get());
         storage.cgpbuffer.updateGpuBuffer(op.patch.cgp);
+
+        }
     }
 };
 
