@@ -59,6 +59,13 @@ export class CgpGguBuffer extends Events
      */
     setData(arr)
     {
+        if (!Array.isArray(arr))
+        {
+
+            console.log("not array", arr);
+            // CABLES.logStack();
+            return;
+        }
         this.floatArr = new Float32Array(arr);
         this.setLength(this.floatArr.length);
 
@@ -108,13 +115,13 @@ export class CgpGguBuffer extends Events
 
         if (this.floatArr)
         {
-            if (this.buffCfg.mappedAtCreation)
-            {
-                new Float32Array(this.#gpuBuffer.getMappedRange()).set(this.floatArr);
-                this.#gpuBuffer.unmap();
+            // if (this.buffCfg.mappedAtCreation)
+            // {
+            //     new Float32Array(this.#gpuBuffer.getMappedRange()).set(this.floatArr);
+            //     this.#gpuBuffer.unmap();
 
-            }
-            else
+            // }
+            // else
             {
                 this.#cgp.device.queue.writeBuffer(
                     this.#gpuBuffer,
@@ -125,6 +132,7 @@ export class CgpGguBuffer extends Events
                 );
             }
         }
+        else console.log("floatarr not");
 
         this.#cgp.popErrorScope();
 
