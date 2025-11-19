@@ -46,8 +46,12 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = window.CABLES.CGL || CGL;
 window.CGL = window.CGL || CGL;
 
+window.cgInitialized = false;
 window.addEventListener("INIT_CG", (e) =>
 {
+    if (window.cgInitialized) return;
+    window.cgInitialized = true;
+
     const cgl = new CglContext(e.detail);
 });
 

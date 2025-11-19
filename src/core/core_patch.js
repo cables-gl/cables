@@ -95,6 +95,8 @@ export class Patch extends Events
     animMaxTime = 0;
     missingClipAnims = {};
 
+    // animFrameCallbacks = [];
+
     /** @param {PatchConfig} cfg */
     constructor(cfg)
     {
@@ -162,6 +164,7 @@ export class Patch extends Events
         this.cgp = null;
 
         this._subpatchOpCache = {};
+        console.log("patch", this);
 
         window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
 
@@ -174,7 +177,7 @@ export class Patch extends Events
         }
 
         this.freeTimer.play();
-        if (this.renderloop) this.renderloop.exec(0);
+        // if (this.renderloop) this.renderloop.exec(0);
 
         if (this.config.patch)
         {
@@ -484,7 +487,7 @@ export class Patch extends Events
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
 
-            if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
+            if (op.hasOwnProperty("onAnimFrame") && op.onAnimFrame) this.addOnAnimFrame(op);
             if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
             if (this._opIdCache[op.id])

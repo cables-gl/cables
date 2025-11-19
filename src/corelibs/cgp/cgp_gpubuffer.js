@@ -115,7 +115,7 @@ export class CgpGguBuffer extends Events
 
             }
             else
-
+            {
                 this.#cgp.device.queue.writeBuffer(
                     this.#gpuBuffer,
                     0,
@@ -123,6 +123,7 @@ export class CgpGguBuffer extends Events
                     this.floatArr.byteOffset,
                     this.floatArr.byteLength
                 );
+            }
         }
 
         this.#cgp.popErrorScope();

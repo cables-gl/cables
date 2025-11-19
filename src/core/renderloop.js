@@ -5,6 +5,8 @@ export class RenderLoop extends Events
     paused = false;
     frameNum = 0;
 
+    frameStartTime = 0;
+
     /**
      * @param {number} _timestamp
      */

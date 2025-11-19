@@ -26,6 +26,8 @@ export class CglContext extends CgContext
 {
     #cursor = "auto";
 
+    frameStartTime = 0;
+
     /**
      * @param {Patch} _patch
      */
@@ -108,7 +110,6 @@ export class CglContext extends CgContext
         });
 
         this.renderLoop = new CglRenderLoop(this, _patch);
-        this.renderLoop.exec(0);
     }
 
     get viewPort()

@@ -23,13 +23,17 @@ export class CglRenderLoop extends RenderLoop
     _frameWasdelayed = true;
     aborted = false;
 
+    /**
+     * @param {CglContext} cgl
+     * @param {Patch<any>} patch
+     */
     constructor(cgl, patch)
     {
         super();
         this.#cgl = cgl;
         this.#patch = patch;
         this.#patch.renderloop = this;
-
+        this.exec(0);
     }
 
     /**
@@ -38,7 +42,7 @@ export class CglRenderLoop extends RenderLoop
     exec(timestamp)
     {
         // if (!this.#renderOneFrame && (this.paused || this.aborted)) return;
-        this.emitEvent("reqAnimFrame");
+        // this.emitEvent("reqAnimFrame");
         cancelAnimationFrame(this.#animReq);
 
         this.#patch.config.fpsLimit = this.#patch.config.fpsLimit || 0;
@@ -65,10 +69,10 @@ export class CglRenderLoop extends RenderLoop
             }
         }
 
+        // console.log("text", frameDelta, this.#renderOneFrame, this.#patch.config.fpsLimit === 0, frameDelta > this._frameInterval, this._frameWasdelayed);
         if (this.#renderOneFrame || this.#patch.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
         {
             this.renderFrame(timestamp);
-
             if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
         }
 
