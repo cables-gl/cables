@@ -24,6 +24,6 @@ inArr.onChange = () =>
     }
     //
     gpuBuff.setData(arr);
-    gpuBuff.updateGpuBuffer(op.patch.cgp);
+    // gpuBuff.updateGpuBuffer(op.patch.cgp);
     outBuff.setRef(gpuBuff);
 };

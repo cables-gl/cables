@@ -54,6 +54,7 @@ exec.onTriggered = () =>
             init(cgp.getShader());
             console.log("shader", shader);
         }
-        // storage?.cgpBuffer?.updateGpuBuffer();
+
+    storage?.cgpBuffer?.updateGpuBuffer(cgp);
     next.trigger();
 };
