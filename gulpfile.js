@@ -73,7 +73,11 @@ function getWebpackErrorMessage(stats)
 function _watch(done)
 {
     const buildWatcher = new BuildWatcher(gulp, config, "core");
-    const watchOptions = { "ignored": (file) => { return file.includes("/node_modules/"); } };
+    const watchOptions = { "ignored": (file) =>
+    {
+        const basename = path.basename(file);
+        return file.includes("/node_modules/") || basename.startsWith(".");
+    } };
     gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), gulp.parallel(_core_libs), _copy_ui, _core_libs_copy));
     gulp.watch("src/corelibs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_js, _copy_ui, _core_libs_copy));
     if (config.watchOps) buildWatcher.notify(["src/ops/**/*.js"], watchOptions, "opchange");
@@ -95,9 +99,9 @@ function _core_libs_clean(done)
     done();
 }
 
-function _copy_ui()
+function _copy_ui(done)
 {
-    return gulp.src(["build/*", "!build/buildinfo.json", "!/build/corelibs/*", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
+    return gulp.src(["build/*", "!build/buildinfo.json", "!build/{corelibs,corelibs/**}", "!build/report_*.html"]).pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
 function _core_libs_copy(done)
