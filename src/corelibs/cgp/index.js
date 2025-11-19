@@ -25,14 +25,12 @@ const CGP = {
 };
 
 window.CABLES = window.CABLES || {};
-const existing = window.CABLES.CGP;
-window.CABLES.CGP = { ...existing, ...CGP };
-window.CGP = window.CABLES.CGP;
+window.CABLES.CGP = window.CABLES.CGP || CGP;
+window.CGP = window.CGP || CGP;
 
 window.CGP.WebGpuCanvasAttachment = WebGpuCanvasAttachment;
 window.CGP.RenderPipeline = RenderPipeline;
 window.CGP.ComputePipeline = ComputePipeline;
-
 window.CGP.ShaderModifier = ShaderModifier;
 window.CGP.BindingStorage = BindingStorage;
 window.CGP.BindingUniform = BindingUniform;

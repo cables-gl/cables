@@ -150,8 +150,3 @@ export class PixelReader
         return true;
     }
 }
-
-window.CABLES = window.CABLES || {};
-window.CABLES.CGL = window.CABLES.CGL || {};
-window.CABLES.CGL.PixelReader = PixelReader;
-window.CGL = window.CABLES.CGL;

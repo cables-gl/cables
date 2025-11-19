@@ -42,13 +42,11 @@ const CGL = {
     ...CONSTANTS.BLEND_MODES,
 };
 
-window.CABLES = window.CABLES || {};
-const existing = window.CABLES.CGL;
-window.CABLES.CGL = { ...existing, ...CGL };
-window.CGL = window.CABLES.CGL;
-
 window.addEventListener("INIT_CG", (e) =>
 {
+    window.CABLES = window.CABLES || {};
+    window.CABLES.CGL = window.CABLES.CGL || CGL;
+    window.CGL = window.CGL || CGL;
     const cgl = new CglContext(e.detail);
 });
 

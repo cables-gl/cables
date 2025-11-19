@@ -106,8 +106,3 @@ export class ShaderTextureMath
         }
     }
 }
-
-window.CABLES = window.CABLES || {};
-window.CABLES.CGL = window.CABLES.CGL || {};
-window.CABLES.CGL.ShaderTextureMath = ShaderTextureMath;
-window.CGL = window.CABLES.CGL;
