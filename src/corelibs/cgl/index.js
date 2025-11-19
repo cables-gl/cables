@@ -49,7 +49,7 @@ window.CGL = window.CGL || CGL;
 window.cgInitialized = false;
 window.addEventListener("INIT_CG", (e) =>
 {
-    if (window.cgInitialized) return;
+    if (window.cgInitialized && !CABLES.UI) return;
     window.cgInitialized = true;
 
     const cgl = new CglContext(e.detail);
