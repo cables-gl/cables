@@ -50,7 +50,7 @@ compute.onTriggered = () =>
     cgp.pushShader(shader);
 
     next.trigger();
-    if (pipe) pipe.compute(shader, this.workGroups);
+    if (pipe) pipe.compute(shader, workGroups);
 
     if (needsInit)
         outCode.set(shader.getProcessedSource());
