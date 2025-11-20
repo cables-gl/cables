@@ -21,7 +21,49 @@ import defaultShaderSrcVert from "./cgp_shader_default.wgsl";
 export class CgpContext extends CgContext
 {
 
+    #log = new Logger("WebGpuContext");
     branchProfiler = null;
+    #stackCullFaceFacing = [];
+    #stackDepthTest = [];
+    #stackCullFace = [];
+    #stackDepthFunc = [];
+    #stackDepthWrite = [];
+    #stackErrorScope = [];
+    #stackBlend = [];
+    #stackErrorScopeLogs = [];
+    #stackMultisampling = [];
+    currentPipeDebug = null;
+    canvasAttachments = [];
+
+    #viewport = [0, 0, 256, 256];
+    #shaderStack = [];
+    #simpleShader = null;
+    frame = 0;
+    catchErrors = true;
+
+    /** @type {GPUDevice} */
+    device = null;
+
+    /** @type {GPURenderPassEncoder} */
+    passEncoder = null;
+
+    DEPTH_FUNCS = [
+        "never",
+        "always",
+        "less",
+        "less-equal",
+        "greater",
+        "greater-equal",
+        "equal",
+        "not-equal"
+    ];
+
+    CULL_MODES = [
+        "none",
+        "back",
+        "front",
+        "none" // both does not exist in webgpu
+    ];
 
     /**
      * @param {Patch} _patch
@@ -33,32 +75,7 @@ export class CgpContext extends CgContext
 
         this.lastErrorMsg = "";
 
-        this._log = new Logger("WebGpuContext");
         this.gApi = CgContext.API_WEBGPU;
-        this._viewport = [0, 0, 256, 256];
-        this._shaderStack = [];
-        this._simpleShader = null;
-        this.frame = 0;
-        this.catchErrors = true;
-
-        this._stackCullFaceFacing = [];
-        this._stackDepthTest = [];
-        this._stackCullFace = [];
-        this._stackDepthFunc = [];
-        this._stackDepthWrite = [];
-        this._stackErrorScope = [];
-        this._stackBlend = [];
-        this._stackErrorScopeLogs = [];
-        this._stackMultisampling = [];
-
-        this.currentPipeDebug = null;
-        this.canvasAttachments = [];
-
-        /** @type {GPUDevice} */
-        this.device = null;
-
-        /** @type {GPURenderPassEncoder} */
-        this.passEncoder = null;
 
         this._defaultBlend = {
             "color": {
@@ -72,24 +89,6 @@ export class CgpContext extends CgContext
                 "dstFactor": "zero",
             },
         };
-
-        this.DEPTH_FUNCS = [
-            "never",
-            "always",
-            "less",
-            "less-equal",
-            "greater",
-            "greater-equal",
-            "equal",
-            "not-equal"
-        ];
-
-        this.CULL_MODES = [
-            "none",
-            "back",
-            "front",
-            "none" // both does not exist in webgpu
-        ];
 
         /** @type {GPUTextureFormat} */
         this.presentationFormat = "bgra8unorm";
@@ -116,12 +115,12 @@ export class CgpContext extends CgContext
         this.pushErrorScope("cgpstate internal", { "scope": "internal" });
         this.pushErrorScope("cgpstate out-of-memory", { "scope": "out-of-memory" });
 
-        if (!this._simpleShader)
+        if (!this.#simpleShader)
         {
-            this._simpleShader = new CgpShader(this, "simple default shader");
-            this._simpleShader.setSource(defaultShaderSrcVert);
+            this.#simpleShader = new CgpShader(this, "simple default shader");
+            this.#simpleShader.setSource(defaultShaderSrcVert);
 
-            this._simpleShader.addUniform(new CgpUniform(this._simpleShader, "4f", "color", [1, 1, 0, 1]), GPUShaderStage.FRAGMENT);
+            this.#simpleShader.addUniform(new CgpUniform(this.#simpleShader, "4f", "color", [1, 1, 0, 1]), GPUShaderStage.FRAGMENT);
         }
 
         this.fpsCounter.startFrame();
@@ -129,7 +128,7 @@ export class CgpContext extends CgContext
         this._startMatrixStacks(identTranslate, identTranslateView);
         this.setViewPort(0, 0, this.canvasWidth, this.canvasHeight);
 
-        this.pushShader(this._simpleShader);
+        this.pushShader(this.#simpleShader);
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc("less-equal");
@@ -153,8 +152,8 @@ export class CgpContext extends CgContext
         this.popErrorScope();
         this.popErrorScope();
 
-        if (this._stackErrorScope.length > 0)console.log("error scope stack length invalid...");
-        this._stackErrorScope.length = 0;
+        if (this.#stackErrorScope.length > 0)console.log("error scope stack length invalid...");
+        this.#stackErrorScope.length = 0;
 
         this.emitEvent("endFrame");
         this.fpsCounter.endFrame();
@@ -163,19 +162,16 @@ export class CgpContext extends CgContext
     /**
      * @param {number} x
      * @param {number} [y]
-     * @param {undefined} [w]
-     * @param {undefined} [h]
+     * @param {number} [w]
+     * @param {number} [h]
      */
     setViewPort(x, y, w, h)
     {
-        this._viewport = [x, y, w, h];
+        this.#viewport = [x, y, w, h];
     }
 
     /**
-     * @function getViewPort
-     * @memberof Context
-     * @instance
-     * @description get current gl viewport
+     * get current gl viewport
      * @returns {Array} array [x,y,w,h]
      */
     getViewPort()
@@ -185,19 +181,15 @@ export class CgpContext extends CgContext
 
     /**
      * @param {Geometry} geom
-     * @param {any} glPrimitive
      * @returns {CgpMesh}
      */
-    createMesh(geom, glPrimitive)
+    createMesh(geom)
     {
         return new CgpMesh(this, geom);
     }
 
     /**
-     * @function popViewPort
-     * @memberof Context
-     * @instance
-     * @description pop viewPort stack
+     * pop viewPort stack
      */
     popViewPort()
     {
@@ -210,10 +202,6 @@ export class CgpContext extends CgContext
     }
 
     /**
-     * @function pushViewPort
-     * @memberof Context
-     * @instance
-     * @description push a new viewport onto stack
      * @param {Number} x
      * @param {Number} y
      * @param {Number} w
@@ -228,35 +216,27 @@ export class CgpContext extends CgContext
 
     /**
      * push a shader to the shader stack
-     * @function pushShader
-     * @memberof Context
-     * @instance
      * @param {Object} shader
-     * @function
     */
     pushShader(shader)
     {
-        this._shaderStack.push(shader);
+        this.#shaderStack.push(shader);
         // currentShader = shader;
     }
 
     /**
      * pop current used shader from shader stack
-     * @function popShader
-     * @memberof Context
-     * @instance
-     * @function
      */
     popShader()
     {
-        if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
-        this._shaderStack.pop();
+        if (this.#shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
+        this.#shaderStack.pop();
         // currentShader = this._shaderStack[this._shaderStack.length - 1];
     }
 
     getShader()
     {
-        return this._shaderStack[this._shaderStack.length - 1];
+        return this.#shaderStack[this.#shaderStack.length - 1];
     }
 
     /**
@@ -274,21 +254,14 @@ export class CgpContext extends CgContext
     }
 
     /**
-     * @typedef ErrorScopeOptions
-     * @property {Logger} [logger]
-     * @property {GPUErrorFilter} [scope]
-    */
-
-    /**
-     * @param {String} name
-     * @param {ErrorScopeOptions} options
+     * @param {string} name
      */
     pushErrorScope(name, options = { })
     {
         if (this.catchErrors)
         {
-            this._stackErrorScope.push(name);
-            this._stackErrorScopeLogs.push(options.logger || null);
+            this.#stackErrorScope.push(name);
+            this.#stackErrorScopeLogs.push(options.logger || null);
             this.device.pushErrorScope(options.scope || "validation");
         }
     }
@@ -300,8 +273,8 @@ export class CgpContext extends CgContext
     {
         if (this.catchErrors)
         {
-            const name = this._stackErrorScope.pop();
-            const logger = this._stackErrorScopeLogs.pop();
+            const name = this.#stackErrorScope.pop();
+            const logger = this.#stackErrorScopeLogs.pop();
             this.device.popErrorScope().then((error) =>
             {
                 if (error)
@@ -312,8 +285,8 @@ export class CgpContext extends CgContext
                     }
                     else
                     {
-                        (logger || this._log).error(error.constructor.name, "in ERROR SCOPE:", name);
-                        (logger || this._log).error(error.message);
+                        (logger || this.#log).error(error.constructor.name, "in ERROR SCOPE:", name);
+                        (logger || this.#log).error(error.message);
                     }
                     this.lastErrorMsg = error.message;
 
@@ -325,14 +298,11 @@ export class CgpContext extends CgContext
 
     /**
      * push depth testing enabled state
-     * @function pushDepthTest
      * @param {Boolean} b enabled
-     * @memberof Context
-     * @instance
      */
     pushDepthTest(b)
     {
-        this._stackDepthTest.push(b);
+        this.#stackDepthTest.push(b);
     }
 
     getDepthCompare()
@@ -344,25 +314,19 @@ export class CgpContext extends CgContext
 
     /**
      * current state of depth testing
-     * @function stateDepthTest
      * @returns {Boolean} enabled
-     * @memberof Context
-     * @instance
      */
     stateDepthTest()
     {
-        return this._stackDepthTest[this._stackDepthTest.length - 1];
+        return this.#stackDepthTest[this.#stackDepthTest.length - 1];
     }
 
     /**
      * pop depth testing state
-     * @function popDepthTest
-     * @memberof Context
-     * @instance
      */
     popDepthTest()
     {
-        this._stackDepthTest.pop();
+        this.#stackDepthTest.pop();
     }
 
     // --------------------------------------
@@ -370,98 +334,74 @@ export class CgpContext extends CgContext
 
     /**
      * push depth write enabled state
-     * @function pushDepthWrite
      * @param {Boolean} b enabled
-     * @memberof Context
-     * @instance
      */
     pushDepthWrite(b)
     {
         b = b || false;
-        this._stackDepthWrite.push(b);
+        this.#stackDepthWrite.push(b);
     }
 
     /**
      * current state of depth writing
      * @returns {Boolean} enabled
-     * @memberof Context
-     * @instance
      */
     stateDepthWrite()
     {
-        return this._stackDepthWrite[this._stackDepthWrite.length - 1];
+        return this.#stackDepthWrite[this.#stackDepthWrite.length - 1];
     }
 
     /**
      * pop depth writing state
-     * @memberof Context
-     * @instance
      */
     popDepthWrite()
     {
-        this._stackDepthWrite.pop();
+        this.#stackDepthWrite.pop();
     }
 
     // --------------------------------------
     // state depthfunc
 
     /**
-     * @function pushDepthFunc
-     * @memberof Context
-     * @instance
      * @param {GPUCompareFunction} depthFunc depth compare func
      */
     pushDepthFunc(depthFunc)
     {
-        this._stackDepthFunc.push(depthFunc);
+        this.#stackDepthFunc.push(depthFunc);
     }
 
     /**
-     * @function stateDepthFunc
-     * @memberof Context
-     * @instance
      * @returns {GPUCompareFunction}
      */
     stateDepthFunc()
     {
-        if (this._stackDepthFunc.length > 0) return this._stackDepthFunc[this._stackDepthFunc.length - 1];
+        if (this.#stackDepthFunc.length > 0) return this.#stackDepthFunc[this.#stackDepthFunc.length - 1];
         return "less";
     }
 
     /**
      * pop depth compare func
-     * @function popDepthFunc
-     * @memberof Context
-     * @instance
      */
     popDepthFunc()
     {
-        this._stackDepthFunc.pop();
+        this.#stackDepthFunc.pop();
     }
-
-    // --------------------------------------
-    // state CullFace
 
     /**
      * push face culling face enabled state
-     * @function pushCullFace
      * @param {Boolean} b enabled
-     * @memberof Context
-     * @instance
      */
     pushCullFace(b)
     {
-        this._stackCullFace.push(b);
+        this.#stackCullFace.push(b);
     }
 
-    // --------------------------------------
-    // state multisambling
     /**
      * @returns {number}
      */
     stateMultisampling()
     {
-        return this._stackMultisampling[this._stackMultisampling.length - 1];
+        return this.#stackMultisampling[this.#stackMultisampling.length - 1];
     }
 
     /**
@@ -469,12 +409,12 @@ export class CgpContext extends CgContext
      */
     pushMultisampling(samples)
     {
-        this._stackMultisampling.push(samples);
+        this.#stackMultisampling.push(samples);
     }
 
     popMultisampling()
     {
-        this._stackMultisampling.pop();
+        this.#stackMultisampling.pop();
     }
 
     // --------------------------------------
@@ -483,11 +423,10 @@ export class CgpContext extends CgContext
     /**
      * push face culling face side
      * @param {string} b
-     * @instance
      */
     pushCullFaceFacing(b)
     {
-        this._stackCullFaceFacing.push(b);
+        this.#stackCullFaceFacing.push(b);
     }
 
     /**
@@ -496,28 +435,25 @@ export class CgpContext extends CgContext
      */
     stateCullFaceFacing()
     {
-        return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
+        return this.#stackCullFaceFacing[this.#stackCullFaceFacing.length - 1];
     }
 
     /**
      * pop face culling face side
-     * @function popCullFaceFacing
-     * @memberof Context
-     * @instance
      */
     popCullFaceFacing()
     {
-        this._stackCullFaceFacing.pop();
+        this.#stackCullFaceFacing.pop();
     }
 
     pushBlend(b)
     {
-        this._stackBlend.push(b);
+        this.#stackBlend.push(b);
     }
 
     popBlend()
     {
-        this._stackBlend.pop();
+        this.#stackBlend.pop();
     }
 
     /**
@@ -525,7 +461,7 @@ export class CgpContext extends CgContext
      */
     stateBlend()
     {
-        return this._stackBlend[this._stackBlend.length - 1];
+        return this.#stackBlend[this.#stackBlend.length - 1];
     }
 
     getEmptyTexture()
@@ -568,7 +504,7 @@ export class CgpContext extends CgContext
             this.canvas.toBlob((blob) =>
             {
                 if (cb) cb(blob);
-                else this._log.log("no screenshot callback...");
+                else this.#log.log("no screenshot callback...");
             }, mimeType, quality);
         }
 

@@ -15,8 +15,6 @@ export class BindGroup
 
     needsPipelineUpdate = false;
 
-    bla = 1;
-
     /** @type {CgpContext} */
     #cgp;
 
@@ -83,8 +81,9 @@ export class BindGroup
         const oldBinding = this.getBindingByName(b.name);
         if (oldBinding) this.removeBinding(oldBinding);
         b.needsRebuildBindgroup = true;
-        b.bindNum = this.#bindings.length;
+        // b.bindNum = this.#bindings.length;
         this.#bindings.push(b);
+        this.setBindingNums();
 
         return b;
     }
@@ -209,11 +208,9 @@ export class BindGroup
         for (let i = 0; i < this.#bindings.length; i++)
             if (this.#bindings[i].needsRebuildBindgroup)
             {
-                // console.log("rebuild bg");
                 this.create(inst);
                 this.#bindings[i].needsRebuildBindgroup = false;
                 this.#gpuBindGroups = [];
-                // todo: dispose
             }
 
         if (!this.#gpuBindGroups[inst]) this.create(inst);

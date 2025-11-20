@@ -25,7 +25,6 @@ export class RenderPipeline extends Pipeline
     /** @type {GPURenderPassEncoder} */
     #passEncoder;
 
-    // #shaderListeners = [];
     #old = {};
     #type = RenderPipeline.TYPE_RENDER;
     lastRebuildReason = "first";
@@ -140,9 +139,7 @@ export class RenderPipeline extends Pipeline
             this.cgp.pushErrorScope("createPipeline", { "logger": this.log });
 
             this.#rebuildNumBindingGroups = false;
-
             this.#pipeCfg = this.getPipelineObject(shader);
-
             this.#old.device = this.cgp.device;
             this.#old.shader = shader;
             this.#old.mesh = mesh;
@@ -283,6 +280,7 @@ export class RenderPipeline extends Pipeline
     dispose()
     {
         // todo...
+        this.bindingGroupLayoutEntries = [];
     }
 
 }
