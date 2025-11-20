@@ -32,6 +32,10 @@
                 "name": "Pos Buffer"
             },
             {
+                "type": 2,
+                "name": "Scale Buffer"
+            },
+            {
                 "type": 0,
                 "name": "Num Instances",
                 "subType": "integer"

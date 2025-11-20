@@ -19,6 +19,7 @@ function init(_shader)
     gpuBuff = new CABLES.CGP.GPUBuffer(cgp, op.objName, [], {
         "length": inLen.get(),
     });
+    op.setUiAttrib({ "extendTitle": inName.get() });
 
     binding = new CGP.BindingStorage(cgp, inName.get(), {
         "stage": GPUShaderStage.COMPUTE,

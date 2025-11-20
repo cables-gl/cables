@@ -2,6 +2,7 @@ const
     inTrigger = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inPosBuff = op.inObject("Pos Buffer"),
+    inScaleBuff = op.inObject("Scale Buffer"),
     inInstances = op.inInt("Num Instances", 0),
     inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
     inReset = op.inTriggerButton("Reset"),
@@ -16,23 +17,27 @@ let cgp = op.patch.cgp;
 let needsbuild = true;
 let needsChange = false;
 let oldPosBuff = null;
-
+let oldScaleBuff = null;
 let storage = null;
+let storageScale = null;
 
 inGeom.onChange =
-inPosBuff.onLinkChanged =
-inReset.onTriggered = reset;
+    inScaleBuff.onLinkChanged =
+    inPosBuff.onLinkChanged =
+    inReset.onTriggered = reset;
 
 function reset()
 {
     storage = null;
+    oldScaleBuff=null;
     needsbuild = true;
     mesh = null;
 }
 
+inScaleBuff.onChange =
 inPosBuff.onChange = () =>
 {
-    if (storage) reset();
+    if (storage||storageScale) reset();
 };
 
 inTrigger.onTriggered = () =>
@@ -49,25 +54,31 @@ inTrigger.onTriggered = () =>
     }
 
     const shader = cgp.getShader();
-
     shader.toggleDefine("INSTANCING", true);
     shader.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
     shader.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
+
 
     if (inPosBuff.isLinked() && inPosBuff.get())
     {
         if (!storage)
         {
-            oldPosBuff = inPosBuff.get();
-            storage = new CGP.BindingStorage(op.patch.cgp, "arr", { "cgpBuffer": inPosBuff.get() });
+            storage = new CGP.BindingStorage(op.patch.cgp, "instPos", { "cgpBuffer": inPosBuff.get() });
             shader.defaultBindGroup.addBinding(storage);
             shader.needsPipelineUpdate = "bindgroup...";
         }
     }
-    else
-    {
 
+    if (inScaleBuff.isLinked() && inScaleBuff.get())
+    {
+        if (!storageScale)
+        {
+            storageScale = new CGP.BindingStorage(op.patch.cgp, "instScale", { "cgpBuffer": inScaleBuff.get() });
+            shader.defaultBindGroup.addBinding(storageScale);
+            shader.needsPipelineUpdate = "bindgroup...";
+        }
     }
+
     mesh.instances = inInstances.get() || inPosBuff.get()?.length;
 
     if (mesh)mesh.render();

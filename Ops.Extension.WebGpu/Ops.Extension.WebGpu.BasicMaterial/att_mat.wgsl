@@ -25,29 +25,67 @@ fn myVSMain(
     var pos=vec4f(v.position, 1.0);
 
     var modelMatrix=uniVert.modelMatrix;
+    var scaleX=1.0;
+    var scaleY=1.0;
+    var scaleZ=1.0;
 
     #ifdef INSTANCING
-        modelMatrix[3][0]+=arr[instIdx*3+0];
-        modelMatrix[3][1]+=arr[instIdx*3+1];
-        modelMatrix[3][2]+=arr[instIdx*3+2];
+
+        // var matInst:mat4x4f;
+        let matInst: mat4x4f = mat4x4f(
+            vec4f(1, 0.0, 0.0, 0.0),
+            vec4f(0.0, 1, 0.0, 0.0),
+            vec4f(0.0, 0.0, 1, 0.0),
+            vec4f(instPos[instIdx*3+0],instPos[instIdx*3+1],instPos[instIdx*3+2], 1.0)
+        );
+
+        // matInst[3][0]=instPos[instIdx*3+0];
+        // matInst[3][1] =instPos[instIdx*3+1];
+        // matInst[3][2]=instPos[instIdx*3+2];
+
+        // modelMatrix[3][0]+=instPos[instIdx*3+0];
+        // modelMatrix[3][1]+=instPos[instIdx*3+1];
+        // modelMatrix[3][2]+=instPos[instIdx*3+2];
+
+        // matInst[1][1]=1.0;
+        // matInst[2][2]=1.0;
+        // matInst[3][3]=1.0;
+
+        // var sc:f32=1.0;
+        // var matScale:mat4x4f;
+        // matScale[0][0]=1.0;//+instScale[instIdx*3+0];
+        // matScale[1][1]=1.0;//+instScale[instIdx*3+1];
+        // matScale[2][2]=1.0;//+instScale[instIdx*3+2];
+        // matScale[3][3]=1.0;
+
+
+        // matInst*=matScale;
+        // modelMatrix=modelMatrix*matInst;
+
+        modelMatrix*=modelMatrix*matInst;
+        // modelMatrix[0][0]=instScale[instIdx*3+0];
+        // modelMatrix[1][1]=instScale[instIdx*3+1];
+        // modelMatrix[2][2]=instScale[instIdx*3+2];
+
+        // pos.x*=4.0;
     #endif
 
     var modelViewMatrix=uniVert.viewMatrix * modelMatrix;
 
     #ifdef BILLBOARDING
-        modelViewMatrix[0][0] = 1.0;
+        modelViewMatrix[0][0] = scaleX;
         modelViewMatrix[0][1] = 0.0;
         modelViewMatrix[0][2] = 0.0;
 
         // #ifndef BILLBOARDING_CYLINDRIC
             modelViewMatrix[1][0] = 0.0;
-            modelViewMatrix[1][1] = 1.0;
+            modelViewMatrix[1][1] = scaleY;
             modelViewMatrix[1][2] = 0.0;
         // #endif
 
         modelViewMatrix[2][0] = 0.0;
         modelViewMatrix[2][1] = 0.0;
-        modelViewMatrix[2][2] = 1.0;
+        modelViewMatrix[2][2] = scaleZ;
     #endif
 
     {{MODULE_VERTEX_POSITION}}

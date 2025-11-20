@@ -1,7 +1,6 @@
 const
     inEnabled = op.inBool("Active", true),
     inMsaa = op.inSwitch("MSAA samples", [1, 4], 1),
-
     hdpi = op.inFloat("Max Pixel Density (DPR)", 2),
     inCatchErrs = op.inBool("Catch Errors", true),
     inStopErrs = op.inBool("Stop on Errors", true),
@@ -222,6 +221,7 @@ function createTargets(cgp)
 {
     if (!op.patch.isPlaying || stopped || !inEnabled.get()) return;
 
+    console.log("crease targets");
     cgp.profileData.count("targets created", op.objName);
 
     const devicePixelRatio = 1;// window.devicePixelRatio || 1;
@@ -246,18 +246,16 @@ function createTargets(cgp)
     try
     {
         sampleCount = parseInt(inMsaa.get());
-        renderTarget = device.createTexture(
-            {
-                "label": "main",
-                "size": [sizeWidth, sizeHeight],
-                "format": presentationFormat,
-                "sampleCount": sampleCount,
-                "usage": GPUTextureUsage.RENDER_ATTACHMENT,
-            });
+        renderTarget = device.createTexture({
+            "label": "main",
+            "size": [sizeWidth, sizeHeight],
+            "format": presentationFormat,
+            "sampleCount": sampleCount,
+            "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+        });
 
         depthTexture = device.createTexture({
             "label": "main depth",
-
             "size": [sizeWidth, sizeHeight],
             "format": "depth24plus",
             "sampleCount": sampleCount,
