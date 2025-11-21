@@ -40,7 +40,7 @@ export class CgCanvas
     }
 
     /**
-     * @returns {HTMLElement}
+     * @returns {HTMLCanvasElement}
      */
     get canvasEle() { return this._canvasEle; }
 

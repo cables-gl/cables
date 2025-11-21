@@ -85,11 +85,6 @@
     },
     "changelog": [
         {
-            "message": "Ops.Devices.Midi.MidiInputDevice2 renamed to Ops.Devices.Midi.MidiInputDevice_v2",
-            "author": "pandur",
-            "date": 1560333646996
-        },
-        {
             "message": "Workaround browser does not return midi access: try again many times ",
             "type": "improvement",
             "author": "pandur",
@@ -100,6 +95,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1731928066909
+        },
+        {
+            "message": " fix \"op not found\" when in learning mode ",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1763632214685
         }
     ],
     "caniusequery": "Web MIDI API",
