@@ -420,7 +420,7 @@ export class CgpShader extends CgShader
      * @param {number} stage
      * @returns {BindingUniform}
      */
-    getDefaultUniBinding(stage)
+    getDefaultUniBinding(stage = null)
     {
         let binding = this.defaultUniBindingFrag;
         if (stage == GPUShaderStage.VERTEX) binding = this.defaultUniBindingVert;
@@ -489,11 +489,13 @@ export class CgpShader extends CgShader
         return u;
     }
 
+    /**
+     * @param {string} name
+     */
     removeUniformByName(name)
     {
-        const binding = this.getDefaultUniBinding(stage);
+        const binding = this.getDefaultUniBinding(null);
         binding.removeUniformByName(name);
-
     }
 
     /**
