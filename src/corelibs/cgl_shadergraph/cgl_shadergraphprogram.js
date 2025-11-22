@@ -2,24 +2,30 @@ import { Events } from "cables-shared-client";
 import { CONSTANTS } from "cables";
 import { ShaderGraph } from "./cgl_shadergraph.js";
 
-const ShaderGraphProgram = class extends Events
+export class ShaderGraphProgram extends Events
 {
-    constructor(op, port, type)
+    uniforms = [];
+    #sg = null;
+    #type = null;
+    #op = null;
+    #port = null;
+
+    _opIdsHeadFuncSrc = {};
+    _opIdsFuncCallSrc = {};
+    _functionIdInHead = {};
+
+    _headFuncSrc = "";
+    _headUniSrc = "";
+    _callFuncStack = [];
+    finalSrc = "";
+
+    constructor(sg, op, port, type)
     {
         super();
-        this._type = type;
-        this._op = op;
-        this._port = port;
-        this.uniforms = [];
-
-        this._opIdsHeadFuncSrc = {};
-        this._opIdsFuncCallSrc = {};
-        this._functionIdInHead = {};
-
-        this._headFuncSrc = "";
-        this._headUniSrc = "";
-        this._callFuncStack = [];
-        this.finalSrc = "";
+        this.#sg = sg;
+        this.#type = type;
+        this.#op = op;
+        this.#port = port;
     }
 
     setOpShaderId(op)
@@ -41,22 +47,13 @@ const ShaderGraphProgram = class extends Events
             return;
         }
 
-        if (this._opIdsHeadFuncSrc[op.id])
-        {
-            return;
-        }
+        if (this._opIdsHeadFuncSrc[op.id]) return;
+
         this._opIdsHeadFuncSrc[op.id] = true;
 
         if (op.sgOp && op.sgOp._defines)
             for (let i = 0; i < op.sgOp._defines.length; i++)
                 this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
-
-        // if (op.shaderSrc)
-        // {
-        //     let src = op.shaderSrc.endl();// +"/* "+op.id+" */".endl();;
-        //     src = this.replaceId(op, src);
-        //     this._headFuncSrc += src;
-        // }
 
         if (op.sgOp.info)
         {
@@ -64,11 +61,9 @@ const ShaderGraphProgram = class extends Events
             for (let i = 0; i < op.sgOp.info.functions.length; i++)
             {
                 const f = op.sgOp.info.functions[i];
-                // console.log("ADD FUNCTION CODE", f.name, f.uniqueName, this._functionIdInHead[f.uniqueName]);
                 if (this._functionIdInHead[f.uniqueName]) continue;
                 if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
                 let src = f.src;
-                // console.log("src", src);
                 src = this.replaceId(op, src);
                 this._headFuncSrc += src;
             }
@@ -122,7 +117,7 @@ const ShaderGraphProgram = class extends Events
         let callstr = "  ";
 
         const varname = "var_" + op.getTitle() + "_" + op.shaderId;
-        if (convertTo)callstr += ShaderGraph.typeConv(convertTo) + " " + varname + " = ";
+        if (convertTo)callstr += this.#sg.typeConv(convertTo) + " " + varname + " = ";
 
         if (this._opIdsFuncCallSrc[op.shaderId])
         {
@@ -168,7 +163,7 @@ const ShaderGraphProgram = class extends Events
                 // }
                 // else
                 // {
-                paramStr = ShaderGraph.getDefaultParameter(p.uiAttribs.objType);
+                paramStr = this.#sg.getDefaultParameter(p.uiAttribs.objType);
                 // }
             }
 
@@ -197,8 +192,7 @@ const ShaderGraphProgram = class extends Events
     {
         let count = 0;
         for (let i = 0; i < op.portsIn.length; i++)
-            if (op.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
-                count++;
+            if (op.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) count++;
         return count;
     }
 
@@ -218,7 +212,7 @@ const ShaderGraphProgram = class extends Events
 
         if (convertTo && convertTo != p.uiAttribs.objType)
         {
-            paramStr = ShaderGraph.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
+            paramStr = this.#sg.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
         }
 
         return paramStr;
@@ -226,7 +220,7 @@ const ShaderGraphProgram = class extends Events
 
     compile()
     {
-        const port = this._port;
+        const port = this.#port;
         const l = port.links;
 
         this.uniforms = [];
@@ -251,12 +245,12 @@ const ShaderGraphProgram = class extends Events
         // console.log("COMPILE", this._type);
         // todo use shader attrib system...
 
-        if (this._type == "frag") src += "IN vec2 texCoord;".endl().endl();
-        if (this._type == "vert") src += "IN vec3 vPosition;".endl() +
+        if (this.#type == "frag") src += "IN vec2 texCoord;".endl().endl();
+        if (this.#type == "vert") src += "IN vec3 vPosition;".endl() +
                 "IN vec2 attrTexCoord;".endl() +
                 "OUT vec2 texCoord;".endl().endl();
 
-        if (this._type == "vert")src += "".endl() +
+        if (this.#type == "vert")src += "".endl() +
                 "UNI mat4 projMatrix;".endl().endl() +
                 "UNI mat4 viewMatrix;".endl().endl() +
                 "UNI mat4 modelMatrix;".endl().endl();
@@ -267,8 +261,8 @@ const ShaderGraphProgram = class extends Events
             "void main()".endl() +
             "{".endl();
 
-        if (this._type == "frag")src += "  {{MODULE_BEGIN_FRAG}}".endl();
-        if (this._type == "vert")src += "  {{MODULE_BEGIN_VERTEX}}".endl();
+        if (this.#type == "frag")src += "  {{MODULE_BEGIN_FRAG}}".endl();
+        if (this.#type == "vert")src += "  {{MODULE_BEGIN_VERTEX}}".endl();
 
         src += callSrc.endl() +
             "}".endl();
@@ -277,6 +271,4 @@ const ShaderGraphProgram = class extends Events
 
         this.emitEvent("compiled");
     }
-};
-
-export { ShaderGraphProgram };
+}
