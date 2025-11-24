@@ -19,17 +19,26 @@
                 "objType": "element"
             },
             {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "linear",
+                    "radial"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Angle",
+                "subType": "number"
+            },
+            {
                 "type": 3,
                 "name": "Color Array"
             },
             {
                 "type": 3,
                 "name": "Color Pos Array"
-            },
-            {
-                "type": 0,
-                "name": "Angle",
-                "subType": "number"
             }
         ],
         "portsOut": [

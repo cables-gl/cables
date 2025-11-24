@@ -1,11 +1,13 @@
 const
     inEle = op.inObject("Element", null, "element"),
+    inType = op.inSwitch("Type", ["linear", "radial"], "linear"),
+    inAngle = op.inFloat("Angle", 0),
     inColors = op.inArray("Color Array"),
     inColorPos = op.inArray("Color Pos Array"),
-    inAngle = op.inFloat("Angle", 0),
     outEle = op.outObject("HTML Element", null, "element");
 
 inAngle.onChange =
+    inType.onChange =
     inColors.onChange =
     inColorPos.onChange =
     inEle.onChange = update;
@@ -27,7 +29,8 @@ function update()
     if (!ele) return;
     if (!arrCols) return;
 
-    let str = "linear-gradient(" + inAngle.get() + "deg,";
+    let str = inType.get() + "-gradient(";
+    if (inType.get() == "linear") str += inAngle.get() + "deg,";
 
     for (let i = 0; i < arrCols.length; i += 3)
     {
