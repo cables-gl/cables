@@ -25,6 +25,11 @@
             {
                 "type": 3,
                 "name": "Color Pos Array"
+            },
+            {
+                "type": 0,
+                "name": "Angle",
+                "subType": "number"
             }
         ],
         "portsOut": [

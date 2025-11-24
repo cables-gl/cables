@@ -2,11 +2,13 @@ const
     inEle = op.inObject("Element", null, "element"),
     inColors = op.inArray("Color Array"),
     inColorPos = op.inArray("Color Pos Array"),
+    inAngle = op.inFloat("Angle", 0),
     outEle = op.outObject("HTML Element", null, "element");
 
-inColors.onChange =
-inColorPos.onChange =
-inEle.onChange = update;
+inAngle.onChange =
+    inColors.onChange =
+    inColorPos.onChange =
+    inEle.onChange = update;
 
 op.onDelete = remove;
 
@@ -15,11 +17,6 @@ update();
 
 function remove()
 {
-    if (ele)
-    {
-        // ele.style.removeProperty("color");
-        // ele.style.removeProperty("background-color");
-    }
 }
 
 function update()
@@ -28,8 +25,9 @@ function update()
     const arrCols = inColors.get();
     const arrPos = inColorPos.get();
     if (!ele) return;
-    remove();
-    let str = "linear-gradient(90deg,";
+    if (!arrCols) return;
+
+    let str = "linear-gradient(" + inAngle.get() + "deg,";
 
     for (let i = 0; i < arrCols.length; i += 3)
     {
