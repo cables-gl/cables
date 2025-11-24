@@ -1,0 +1,58 @@
+{
+    "authorName": "pandur",
+    "id": "a18c0edc-0d4a-48b7-8868-91105dc90056",
+    "created": 1764014424677,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Gradient",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Randomize Colors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Colors"
+            },
+            {
+                "type": 3,
+                "name": "Colors Pos"
+            }
+        ]
+    },
+    "summary": "texture containing a colour gradient that can be altered with an editor",
+    "docs": {
+        "ports": [
+            {
+                "name": "Gradient",
+                "text": "Click this to open the editor for the gradient. See docs for a more in depth explanation."
+            },
+            {
+                "name": "Smoothstep",
+                "text": "Enable smoothstep on changes in gradients."
+            },
+            {
+                "name": "Size",
+                "text": "The resolution of the gradient in pixels. 256 is a good default value"
+            },
+            {
+                "name": "Gradient Array",
+                "text": "An array of Object containing pos,r,g,b,a information (see documentation for format)"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764014424678
+        }
+    ],
+    "license": "MIT"
+}
