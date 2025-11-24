@@ -1,0 +1,38 @@
+{
+    "id": "a8cc7d66-3222-4460-bd47-a8ecf2095eb1",
+    "created": 1764011722402,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764011722403
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 3,
+                "name": "Color Array"
+            },
+            {
+                "type": 3,
+                "name": "Color Pos Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            }
+        ]
+    }
+}
