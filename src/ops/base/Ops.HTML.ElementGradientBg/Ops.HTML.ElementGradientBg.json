@@ -33,12 +33,9 @@
                 "subType": "number"
             },
             {
-                "type": 3,
-                "name": "Color Array"
-            },
-            {
-                "type": 3,
-                "name": "Color Pos Array"
+                "type": 2,
+                "name": "Gradient Object",
+                "objType": "gradient"
             }
         ],
         "portsOut": [
