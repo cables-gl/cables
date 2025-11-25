@@ -1,0 +1,35 @@
+{
+    "id": "5d8a3a4f-02fe-4e27-b474-0b0ab1a32739",
+    "created": 1763997616750,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1763997616751
+        },
+        {
+            "message": "Patch.P2ZWIt3.InnerHtmlGet renamed to Ops.HTML.ElementAsHtmlString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1763998310683
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Parent",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "HTML String"
+            }
+        ]
+    }
+}
