@@ -47,7 +47,7 @@ function update()
         if (i < keys.length - 1) str += ",\n";
     }
     str += ")";
-    console.log("str", str);
+    // console.log("str",str);
 
     ele.style.background = str;
 }
