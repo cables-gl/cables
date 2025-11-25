@@ -1,30 +1,26 @@
 // http://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/
-
 // https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-/* INPUTS */
-
-const deviceSelect = op.inValueSelect("Device", ["none"]);
-
+const deviceSelect = op.inDropDown("Device", ["none"]);
 let learning = false;
 const learn = op.inTriggerButton("Learn");
 const resetIn = op.inTriggerButton("Panic");
 
 op.setPortGroup("Device Select", [deviceSelect]);
 op.setPortGroup("Controls", [learn, resetIn]);
+
 /* OPS */
-const opPrefix = "Ops.Devices.Midi.Midi";
 const OPS = {
-    "CC": { "NAMESPACE": `${opPrefix}CC`, "IN_PORT": "CC Index" },
-    "NRPN": { "NAMESPACE": `${opPrefix}NRPN`, "IN_PORT": "NRPN Index" },
-    "Note": { "NAMESPACE": `${opPrefix}Note`, "IN_PORT": "Note" },
+    "CC": { "NAMESPACE": "Ops.Devices.Midi.MidiCC_v2", "IN_PORT": "CC Index" },
+    "NRPN": { "NAMESPACE": "Ops.Devices.Midi.MidiNRPN", "IN_PORT": "NRPN Index" },
+    "Note": { "NAMESPACE": "Ops.Devices.Midi.MidiNote", "IN_PORT": "Note" },
 };
+
 /* OUTPUTS */
 const OUTPUT_KEYS = [
     "Event",
     "Note",
     "CC",
-
     // "Channel Pressure",
     // "Poly Key Pressure",
     "NRPN",
@@ -50,7 +46,6 @@ op.setPortGroup(
     Object.keys(OUTPUTS).map((key) => { return key !== "Event" && OUTPUTS[key]; }).filter(Boolean),
 );
 
-/* CONSTANTS */
 /* http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI3.shtml */
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -79,7 +74,6 @@ const MESSAGE_TYPES = {
     [CLOCK]: "Clock",
 };
 
-/* UTILITY FUNCTIONS */
 function getMIDIChannel(statusByte)
 {
     return statusByte & 0x0f;
@@ -93,7 +87,7 @@ function getMessageType(statusByte)
 function getMIDINote(dataByte1LSB)
 {
     return dataByte1LSB <= 126
-        ? `${NOTE_VALUES[dataByte1LSB % 12]}${Math.floor(dataByte1LSB / 12) - 2} - ${dataByte1LSB}`
+        ? "" + NOTE_VALUES[dataByte1LSB % 12] + (Math.floor(dataByte1LSB / 12) - 2) + " - " + dataByte1LSB
         : "NO NOTE";
 }
 
@@ -116,6 +110,7 @@ const MSB_START = 9;
 const LSB_START = 10;
 let FIRST_CC = null;
 let ROUTINE_TYPE = null;
+
 /* the state of the current NRPN construction cycle */
 
 const LSBRoutine = (ccIndex, ccValue) =>
@@ -246,6 +241,7 @@ function onMIDIMessage(_event)
     }
 
     const newEvent = {
+
         /* OLD EVENT v */
         deviceName,
         "inputId": 0, // what is this for?
@@ -328,8 +324,6 @@ function setDevice()
     op.setUiAttrib({ "extendTitle": name });
 
     const inputs = midi.inputs.values();
-    //  const outputs = midi.outputs.values();
-
     for (let input = inputs.next(); input && !input.done; input = inputs.next())
     {
         if (input.value.name === name)
@@ -340,11 +334,6 @@ function setDevice()
         else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
     }
     op.setUiError("invalidswitch", null);
-    /* for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
-    if (output.value.name === name) {
-      outputDevice = midi.outputs.get(output.value.id);
-    }
-  } */
 }
 
 function onMIDIFailure(e)
@@ -390,18 +379,6 @@ function request()
         setTimeout(request, 500);
     }
 }
-
-resetIn.onTriggered = () =>
-{
-
-    // TODO: senmd note off to every note
-    /*
-  if (!outputDevice) return;
-  for (let i = 0; i < 12; i += 1) {
-    outputDevice.send([0x90, i, 0]);
-    outputDevice.send([0xb0, i, 0]);
-  } */
-};
 
 learn.onTriggered = () =>
 {

@@ -79,6 +79,9 @@ export class AnimKey
      */
     setEasing(e)
     {
+        if (this.anim.uiAttribs.readOnly) return;
+        if (this.anim.uiAttribs.muted) return;
+
         let changed = false;
         if (this._easing != e)changed = true;
         this._easing = e;
