@@ -1,7 +1,6 @@
 const inGrad = op.inGradient("Gradient"),
     inRandom = op.inTriggerButton("Randomize Colors"),
-    outColors = op.outArray("Colors", null, 3),
-    outColorPos = op.outArray("Colors Pos", null, 1);
+    outGradietObject = op.outObject("Gradient Object", null, "gradient");
 
 let timeout = null;
 inGrad.setUiAttribs({ "editShortcut": true });
@@ -40,43 +39,44 @@ function parseKeys()
     op.setUiError("nodata", null);
     op.setUiError("parse", null);
 
+    let grad = null;
+    if (!inGrad.get() || inGrad.get() === "")
     {
-        let grad = null;
-        if (!inGrad.get() || inGrad.get() === "")
-        {
-            // op.setUiError("nodata", "gradient no data");
-            return null;
-        }
-
-        try
-        {
-            grad = JSON.parse(inGrad.get());
-        }
-        catch (e)
-        {
-            op.setUiError("parse", "could not parse gradient data");
-        }
-
-        if (!grad || !grad.keys)
-        {
-            op.setUiError("nodata", "gradient no data");
-            return null;
-        }
-        keys = grad.keys;
+        return null;
     }
-    return keys;
+
+    try
+    {
+        grad = JSON.parse(inGrad.get());
+    }
+    catch (e)
+    {
+        op.setUiError("parse", "could not parse gradient data");
+    }
+
+    if (!grad || !grad.keys)
+    {
+        op.setUiError("nodata", "gradient no data");
+        return null;
+    }
+
+    return grad.keys;
 }
 
 function updateGradient(keys)
 {
-    const colorArr = [];
+    const obj = { "keys": [] };
     for (let i = 0; i < keys.length - 1; i++)
-        colorArr.push(keys[i].r, keys[i].g, keys[i].b);
+    {
+        const key = {
+            "pos": i / keys.length,
+            "r": keys[i].r,
+            "g": keys[i].g,
+            "b": keys[i].b,
+            "a": 1,
+        };
+        obj.keys.push(key);
+    }
 
-    const colorPosArr = [];
-    for (let i = 0; i < keys.length - 1; i++)
-        colorPosArr.push(keys[i].pos);
-
-    outColors.set(colorArr);
-    outColorPos.set(colorPosArr);
+    outGradietObject.setRef(obj);
 }

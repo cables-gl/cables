@@ -16,12 +16,9 @@
         ],
         "portsOut": [
             {
-                "type": 3,
-                "name": "Colors"
-            },
-            {
-                "type": 3,
-                "name": "Colors Pos"
+                "type": 2,
+                "name": "Gradient Object",
+                "objType": "gradient"
             }
         ]
     },
