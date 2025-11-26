@@ -177,8 +177,6 @@
         ]
     },
     "issues": "",
-
-
     "youtubeids": [],
     "exampleProjectId": "9aF_26",
     "changelog": [
@@ -188,5 +186,8 @@
             "author": "stephan",
             "date": 1701855809567
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

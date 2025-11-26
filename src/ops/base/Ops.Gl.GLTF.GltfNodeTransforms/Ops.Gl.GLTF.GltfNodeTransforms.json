@@ -55,9 +55,11 @@
     },
     "summary": "output all transformations of nodes starting with [search]",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

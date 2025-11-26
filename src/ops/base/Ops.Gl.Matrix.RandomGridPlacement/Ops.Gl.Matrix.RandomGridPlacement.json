@@ -67,5 +67,8 @@
     },
     "issues": "this is slow, you should try the new version:  Ops.Gl.Matrix.RandomGridPlacementArrays",
     "youtubeids": [],
-    "exampleProjectId": "FsZFVB"
+    "exampleProjectId": "FsZFVB",
+    "coreLibs": [
+        "cgl"
+    ]
 }

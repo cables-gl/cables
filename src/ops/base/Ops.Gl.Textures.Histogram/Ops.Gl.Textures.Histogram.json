@@ -31,5 +31,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Z315nc"
+    "exampleProjectId": "Z315nc",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -45,9 +45,11 @@
     },
     "summary": "Outputs current viewport size",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

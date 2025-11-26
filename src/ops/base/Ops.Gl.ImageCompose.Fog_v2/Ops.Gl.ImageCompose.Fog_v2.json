@@ -106,7 +106,6 @@
     },
     "summary": "Render fog as a texture effect using a depth texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -176,5 +175,8 @@
             }
         ]
     },
-    "exampleProjectId": "L6GbDe"
+    "exampleProjectId": "L6GbDe",
+    "coreLibs": [
+        "cgl"
+    ]
 }

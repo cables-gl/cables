@@ -78,5 +78,8 @@
             }
         ]
     },
-    "exampleProjectId": "LAoKVJ"
+    "exampleProjectId": "LAoKVJ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

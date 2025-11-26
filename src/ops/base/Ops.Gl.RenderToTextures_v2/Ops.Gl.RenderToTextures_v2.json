@@ -198,13 +198,12 @@
         }
     ],
     "issues": "requires WebGL2",
-
     "exampleProjectId": "INQQgo",
     "coreLibs": [
         "cgl_rendertargets",
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
-
     "youtubeids": [
         "WQM37Jr_NHI"
     ]

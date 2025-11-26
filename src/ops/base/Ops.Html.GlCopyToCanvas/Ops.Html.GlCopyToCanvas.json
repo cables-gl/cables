@@ -39,5 +39,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "u2vAu1"
+    "exampleProjectId": "u2vAu1",
+    "coreLibs": [
+        "cgl"
+    ]
 }

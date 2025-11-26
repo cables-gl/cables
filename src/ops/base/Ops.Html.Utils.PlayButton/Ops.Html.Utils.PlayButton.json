@@ -99,5 +99,9 @@
             "date": 1734353008932
         }
     ],
-    "exampleProjectId": "WoGy8s"
+    "exampleProjectId": "WoGy8s",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

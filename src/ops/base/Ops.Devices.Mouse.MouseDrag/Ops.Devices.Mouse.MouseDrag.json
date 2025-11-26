@@ -56,5 +56,8 @@
             "date": 1671033321511
         }
     ],
-    "exampleProjectId": "hH8f_6"
+    "exampleProjectId": "hH8f_6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

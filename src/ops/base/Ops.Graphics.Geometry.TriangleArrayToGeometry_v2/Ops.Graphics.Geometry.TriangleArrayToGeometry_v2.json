@@ -45,7 +45,6 @@
     "summary": "Draws multiple triangles using coordinates from an array",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -102,5 +101,8 @@
             "author": "pandur",
             "date": 1685950632196
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

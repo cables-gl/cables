@@ -29,10 +29,12 @@
     ],
     "summary": "set vertex positions from texture color values",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LDfZgL"
+    "exampleProjectId": "LDfZgL",
+    "coreLibs": [
+        "cgl"
+    ]
 }

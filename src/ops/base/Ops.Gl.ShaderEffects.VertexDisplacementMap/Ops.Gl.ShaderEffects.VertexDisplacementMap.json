@@ -76,7 +76,8 @@
         "ports": []
     },
     "youtubeid": "NjG85Qbbl0w",
-
-
-    "exampleProjectId": "aSWlLu"
+    "exampleProjectId": "aSWlLu",
+    "coreLibs": [
+        "cgl"
+    ]
 }

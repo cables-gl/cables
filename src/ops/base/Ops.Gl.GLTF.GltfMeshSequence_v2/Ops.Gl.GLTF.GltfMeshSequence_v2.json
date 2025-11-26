@@ -58,5 +58,8 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "FiJsxn"
+    "exampleProjectId": "FiJsxn",
+    "coreLibs": [
+        "cgl"
+    ]
 }

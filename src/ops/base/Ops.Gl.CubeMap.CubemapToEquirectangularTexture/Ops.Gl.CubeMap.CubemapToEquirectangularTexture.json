@@ -62,7 +62,6 @@
     },
     "summary": "visualize cubemap as folded texture or equirectangular texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -96,5 +95,8 @@
             }
         ]
     },
-    "exampleProjectId": "pNZHYa"
+    "exampleProjectId": "pNZHYa",
+    "coreLibs": [
+        "cgl"
+    ]
 }

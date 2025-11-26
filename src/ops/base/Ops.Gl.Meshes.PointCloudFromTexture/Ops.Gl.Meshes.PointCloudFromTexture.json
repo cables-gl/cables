@@ -81,7 +81,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "Visualize a RGB texture as XYZ coordinates as points",
     "issues": "",

@@ -67,5 +67,8 @@
     "id": "dcc29c06-c3df-434f-9782-736548220bda",
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "dNuMWr"
+    "exampleProjectId": "dNuMWr",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -47,5 +47,8 @@
             "author": "stephan",
             "date": 1701855724111
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

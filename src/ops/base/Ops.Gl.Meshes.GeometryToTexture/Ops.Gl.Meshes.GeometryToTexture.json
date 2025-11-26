@@ -83,7 +83,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [
         "PrkdnENo8wQ"
     ],
@@ -125,7 +124,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "caniusequery": "",
     "exampleProjectId": "t2FVpX"

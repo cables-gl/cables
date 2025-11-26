@@ -194,5 +194,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "PSw73e"
+    "exampleProjectId": "PSw73e",
+    "coreLibs": [
+        "cgl"
+    ]
 }

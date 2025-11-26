@@ -39,11 +39,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "Use vertex color as basecolor/diffuse color",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

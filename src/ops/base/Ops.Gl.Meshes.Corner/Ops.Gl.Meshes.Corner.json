@@ -60,5 +60,8 @@
         "ports": []
     },
     "exampleProjectId": "KWolQ6",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -61,10 +61,12 @@
     "summary": "Generate a SVG path string of a string using an opentype font",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

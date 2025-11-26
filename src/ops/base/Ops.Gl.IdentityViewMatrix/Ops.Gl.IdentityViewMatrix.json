@@ -22,5 +22,8 @@
     "exampleProjectId": "H01Ici",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

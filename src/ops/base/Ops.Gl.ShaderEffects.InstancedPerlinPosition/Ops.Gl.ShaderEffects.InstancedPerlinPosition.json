@@ -46,7 +46,8 @@
         "ports": []
     },
     "youtubeid": "",
-
-
-    "exampleProjectId": "33bSY7"
+    "exampleProjectId": "33bSY7",
+    "coreLibs": [
+        "cgl"
+    ]
 }

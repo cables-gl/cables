@@ -70,7 +70,6 @@
     },
     "summary": "draws a gradient from white to black back to white over distance of the scene",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -108,5 +107,8 @@
             }
         ]
     },
-    "exampleProjectId": "6Z8zJm"
+    "exampleProjectId": "6Z8zJm",
+    "coreLibs": [
+        "cgl"
+    ]
 }

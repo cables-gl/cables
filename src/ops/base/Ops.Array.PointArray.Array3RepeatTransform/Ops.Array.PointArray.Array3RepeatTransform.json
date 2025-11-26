@@ -91,5 +91,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Repeat an array by transforming it x times"
+    "summary": "Repeat an array by transforming it x times",
+    "coreLibs": [
+        "cgl"
+    ]
 }

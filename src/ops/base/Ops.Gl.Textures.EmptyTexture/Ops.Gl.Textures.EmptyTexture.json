@@ -27,5 +27,8 @@
     "authorName": "pandur",
     "id": "fc124913-0916-4f5c-83e0-702ddf66420c",
     "created": 1541052805439,
-    "exampleProjectId": "QuT1X2"
+    "exampleProjectId": "QuT1X2",
+    "coreLibs": [
+        "cgl"
+    ]
 }

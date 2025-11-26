@@ -108,5 +108,8 @@
             "date": 1565622341334
         }
     ],
-    "exampleProjectId": "oOsjJ5"
+    "exampleProjectId": "oOsjJ5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

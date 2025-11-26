@@ -43,6 +43,7 @@
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ]
 }

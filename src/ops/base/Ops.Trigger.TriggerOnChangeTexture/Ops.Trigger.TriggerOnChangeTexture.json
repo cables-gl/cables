@@ -56,7 +56,6 @@
     },
     "summary": "triggers when texture has changed",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -70,5 +69,8 @@
         ]
     },
     "youtubeids": [],
-    "exampleProjectId": "QGqQ7f"
+    "exampleProjectId": "QGqQ7f",
+    "coreLibs": [
+        "cgl"
+    ]
 }

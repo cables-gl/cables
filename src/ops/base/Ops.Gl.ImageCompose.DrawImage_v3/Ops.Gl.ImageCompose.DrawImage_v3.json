@@ -160,5 +160,8 @@
         "ports": []
     },
     "exampleProjectId": "k6ttde",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

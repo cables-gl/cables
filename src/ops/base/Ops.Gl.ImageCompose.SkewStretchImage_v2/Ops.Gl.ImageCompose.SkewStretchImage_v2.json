@@ -88,10 +88,12 @@
     },
     "summary": "skew / stretch an image by rendering scaled sides",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "M2UA7k"
+    "exampleProjectId": "M2UA7k",
+    "coreLibs": [
+        "cgl"
+    ]
 }

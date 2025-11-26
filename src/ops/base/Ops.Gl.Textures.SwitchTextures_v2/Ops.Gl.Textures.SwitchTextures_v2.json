@@ -144,5 +144,8 @@
         ]
     },
     "exampleProjectId": "gsXwVJ",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

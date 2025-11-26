@@ -67,5 +67,8 @@
         "ports": []
     },
     "exampleProjectId": "9COr26",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

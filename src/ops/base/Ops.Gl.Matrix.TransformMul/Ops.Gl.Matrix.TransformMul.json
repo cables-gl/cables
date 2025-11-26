@@ -22,5 +22,8 @@
             }
         ]
     },
-    "summary": "multiply current modelmatrix"
+    "summary": "multiply current modelmatrix",
+    "coreLibs": [
+        "cgl"
+    ]
 }

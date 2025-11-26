@@ -59,8 +59,6 @@
     "id": "c0acfc80-16f9-4f17-978d-bad650f3ed1c",
     "created": 1514932008499,
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -73,5 +71,8 @@
             "author": "pandur",
             "date": 1701856010577
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

@@ -65,8 +65,6 @@
         "ports": []
     },
     "issues": "",
-
-
     "youtubeids": [],
     "exampleProjectId": "J4KL_4",
     "changelog": [
@@ -97,5 +95,8 @@
             "date": 1701855511505
         }
     ],
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

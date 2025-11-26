@@ -104,5 +104,8 @@
             "date": 1559046783572
         }
     ],
-    "exampleProjectId": "MybtXU"
+    "exampleProjectId": "MybtXU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

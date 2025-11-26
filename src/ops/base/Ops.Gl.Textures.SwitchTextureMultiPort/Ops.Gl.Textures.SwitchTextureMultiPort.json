@@ -47,5 +47,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "pDGOrh"
+    "exampleProjectId": "pDGOrh",
+    "coreLibs": [
+        "cgl"
+    ]
 }

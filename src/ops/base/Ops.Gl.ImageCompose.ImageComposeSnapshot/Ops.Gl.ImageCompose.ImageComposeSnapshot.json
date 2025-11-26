@@ -26,7 +26,8 @@
     "authorName": "pandur",
     "created": 1643884097104,
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "layout": {
         "portsIn": [
@@ -50,7 +51,6 @@
     "summary": "capture the current state of an imageCompose branch by copying the texture",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

@@ -57,8 +57,10 @@
         ]
     },
     "summary": "replace a color with transparency",
-
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -48,5 +48,8 @@
         "ports": []
     },
     "exampleProjectId": "NT30kP",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

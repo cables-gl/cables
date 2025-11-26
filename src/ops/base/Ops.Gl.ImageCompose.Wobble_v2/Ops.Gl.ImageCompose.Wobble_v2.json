@@ -95,7 +95,6 @@
     "summary": "waving wobble motion effect",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -132,5 +131,8 @@
             }
         ]
     },
-    "exampleProjectId": "wpgXXG"
+    "exampleProjectId": "wpgXXG",
+    "coreLibs": [
+        "cgl"
+    ]
 }

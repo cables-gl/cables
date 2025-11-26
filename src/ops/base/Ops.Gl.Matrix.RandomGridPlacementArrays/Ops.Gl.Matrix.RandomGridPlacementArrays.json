@@ -69,7 +69,6 @@
     },
     "summary": "Place random objects on a grid",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -79,5 +78,8 @@
             }
         ]
     },
-    "exampleProjectId": "PYUHNP"
+    "exampleProjectId": "PYUHNP",
+    "coreLibs": [
+        "cgl"
+    ]
 }

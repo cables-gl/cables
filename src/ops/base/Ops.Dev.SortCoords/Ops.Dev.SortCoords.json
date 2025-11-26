@@ -39,5 +39,8 @@
             "date": 1710435491832,
             "type": "new"
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

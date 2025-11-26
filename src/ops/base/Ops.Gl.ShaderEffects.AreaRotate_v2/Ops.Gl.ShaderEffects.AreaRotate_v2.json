@@ -80,8 +80,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
-
     "exampleProjectId": "7mss1Q"
 }

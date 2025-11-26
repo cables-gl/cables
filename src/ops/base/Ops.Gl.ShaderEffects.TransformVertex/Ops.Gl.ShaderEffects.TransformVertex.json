@@ -90,7 +90,6 @@
     ],
     "summary": "transform vertices of a mesh via vertex shader",
     "issues": "",
-
     "youtubeids": [
         "SaKWF6RnsyI"
     ],
@@ -98,7 +97,8 @@
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "u1iOhI"
 }

@@ -77,8 +77,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "added area parameter",
@@ -86,5 +84,8 @@
             "date": 1573030793127
         }
     ],
-    "exampleProjectId": "hH8f_6"
+    "exampleProjectId": "hH8f_6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

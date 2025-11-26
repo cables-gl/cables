@@ -106,7 +106,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "NSYy0t"
+    "exampleProjectId": "NSYy0t",
+    "coreLibs": [
+        "cgl"
+    ]
 }

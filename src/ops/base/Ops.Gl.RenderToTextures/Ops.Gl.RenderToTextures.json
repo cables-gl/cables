@@ -95,6 +95,8 @@
     ],
     "youtubeid": "",
     "issues": "requires WebGL2",
-
-    "exampleProjectId": "INQQgo"
+    "exampleProjectId": "INQQgo",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -40,9 +40,11 @@
     "summary": "clamp/restrict the vertex position to min/max values per axis",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RP4O73"
+    "exampleProjectId": "RP4O73",
+    "coreLibs": [
+        "cgl"
+    ]
 }

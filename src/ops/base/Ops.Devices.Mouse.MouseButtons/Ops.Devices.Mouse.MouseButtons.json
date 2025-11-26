@@ -71,12 +71,14 @@
     "authorName": "pandur",
     "id": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
     "created": 1507284375026,
-
     "docs": {
         "ports": []
     },
     "issues": "",
     "youtubeids": [],
     "caniusequery": "",
-    "exampleProjectId": "cLtJLO"
+    "exampleProjectId": "cLtJLO",
+    "coreLibs": [
+        "cgl"
+    ]
 }

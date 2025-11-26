@@ -47,10 +47,12 @@
     "summary": "Adjust aspect ratio of an image compose branch",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "iwX7v4",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

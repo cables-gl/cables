@@ -104,7 +104,6 @@
     "created": 1651742936639,
     "summary": "Creates a procedural texture simulating scratches on a lens",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -158,5 +157,8 @@
             }
         ]
     },
-    "exampleProjectId": "ucr5NX"
+    "exampleProjectId": "ucr5NX",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -109,8 +109,10 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [
         "ZZKdaQw1bMo"
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

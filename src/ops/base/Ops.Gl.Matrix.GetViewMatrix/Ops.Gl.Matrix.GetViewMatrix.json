@@ -25,5 +25,8 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "hDWuci"
+    "exampleProjectId": "hDWuci",
+    "coreLibs": [
+        "cgl"
+    ]
 }

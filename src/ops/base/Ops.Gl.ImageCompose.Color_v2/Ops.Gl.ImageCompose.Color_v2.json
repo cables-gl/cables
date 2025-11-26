@@ -70,8 +70,6 @@
     "id": "6dada2b7-da7c-47ee-87a9-a12e87055208",
     "created": 1650374368022,
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -99,5 +97,8 @@
             "author": "pandur",
             "date": 1701855706492
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

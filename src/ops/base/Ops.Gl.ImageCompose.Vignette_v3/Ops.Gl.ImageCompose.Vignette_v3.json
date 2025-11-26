@@ -107,8 +107,9 @@
         }
     ],
     "issues": "",
-
-
     "youtubeids": [],
-    "exampleProjectId": "WDPlT6"
+    "exampleProjectId": "WDPlT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

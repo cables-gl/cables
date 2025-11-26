@@ -82,8 +82,6 @@
     "docs": {
         "ports": []
     },
-
-
     "changelog": [
         {
             "message": "Ops.Gl.Textures.Text renamed to Ops.Gl.Textures.TextTexture",
@@ -91,5 +89,8 @@
             "date": 1572942535115
         }
     ],
-    "exampleProjectId": "RZsPWU"
+    "exampleProjectId": "RZsPWU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

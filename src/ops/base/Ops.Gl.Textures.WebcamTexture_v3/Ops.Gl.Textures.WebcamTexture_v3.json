@@ -213,7 +213,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "caniusequery": "",
     "exampleProjectId": "iwaEwm",

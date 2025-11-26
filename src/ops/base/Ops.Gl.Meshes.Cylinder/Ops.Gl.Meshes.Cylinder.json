@@ -57,5 +57,8 @@
             "date": 1559045777287
         }
     ],
-    "exampleProjectId": "GxagQ6"
+    "exampleProjectId": "GxagQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

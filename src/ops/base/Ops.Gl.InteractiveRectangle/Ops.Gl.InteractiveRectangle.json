@@ -161,9 +161,11 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [
         "4iPmZlrYRQg"
     ],
-    "exampleProjectId": "P_SED0"
+    "exampleProjectId": "P_SED0",
+    "coreLibs": [
+        "cgl"
+    ]
 }

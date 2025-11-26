@@ -54,9 +54,10 @@
     "authorName": "pandur",
     "id": "f41fabfc-14c0-4472-a00a-6ab1dcdcc4bc",
     "created": 1519138899037,
-
-
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "CW8-I6"
+    "exampleProjectId": "CW8-I6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

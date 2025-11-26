@@ -37,8 +37,6 @@
     "authorName": "tim",
     "id": "0aecef8b-3bcb-44ac-ae62-38ce8cd4051e",
     "created": 1525706396391,
-
-
     "changelog": [
         {
             "message": "Ops.Devices.Keyboard.MidiKeyboard renamed to Ops.Devices.Keyboard.QWERTYtoMidi",
@@ -49,5 +47,8 @@
     "exampleProjectId": "PfZk-4",
     "issues": "",
     "caniusequery": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

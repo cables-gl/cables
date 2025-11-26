@@ -79,5 +79,8 @@
         ]
     },
     "exampleProjectId": "KlCyYN",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

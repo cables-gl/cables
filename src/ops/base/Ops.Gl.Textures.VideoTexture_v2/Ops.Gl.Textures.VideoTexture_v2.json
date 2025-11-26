@@ -139,7 +139,6 @@
     ],
     "summary": "Play a video file and use it as a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -225,5 +224,8 @@
             }
         ]
     },
-    "exampleProjectId": "E0hWmi"
+    "exampleProjectId": "E0hWmi",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -68,11 +68,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "3L3of6"
 }

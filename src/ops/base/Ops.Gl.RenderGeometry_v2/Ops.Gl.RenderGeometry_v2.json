@@ -51,7 +51,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "exampleProjectId": "w6QYlH",
     "changelog": [
         {
@@ -65,5 +64,8 @@
             "author": "pandur",
             "date": 1678359694277
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

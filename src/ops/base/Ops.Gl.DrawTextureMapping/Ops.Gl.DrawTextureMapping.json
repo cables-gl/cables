@@ -29,5 +29,8 @@
     },
     "summary": "draw texture mapping coordinates",
     "exampleProjectId": "Nu7dJ5",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

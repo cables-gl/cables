@@ -60,5 +60,8 @@
             "date": 1701856295151
         }
     ],
-    "exampleProjectId": "S6JnT6"
+    "exampleProjectId": "S6JnT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

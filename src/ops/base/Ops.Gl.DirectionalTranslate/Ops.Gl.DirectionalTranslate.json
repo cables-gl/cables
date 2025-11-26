@@ -29,5 +29,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "5gL9On"
+    "exampleProjectId": "5gL9On",
+    "coreLibs": [
+        "cgl"
+    ]
 }

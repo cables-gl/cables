@@ -187,5 +187,8 @@
         }
     ],
     "exampleProjectId": "SKCL88",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

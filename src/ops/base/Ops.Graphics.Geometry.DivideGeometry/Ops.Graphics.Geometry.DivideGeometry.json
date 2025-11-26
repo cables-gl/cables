@@ -31,5 +31,8 @@
             "date": 1685950724698
         }
     ],
-    "exampleProjectId": "sYIxm1"
+    "exampleProjectId": "sYIxm1",
+    "coreLibs": [
+        "cgl"
+    ]
 }

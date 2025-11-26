@@ -87,7 +87,6 @@
     ],
     "summary": "Translate object positions with a noise function",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -133,5 +132,8 @@
             }
         ]
     },
-    "exampleProjectId": "hDcUC-"
+    "exampleProjectId": "hDcUC-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

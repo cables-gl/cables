@@ -102,5 +102,8 @@
         "ports": []
     },
     "exampleProjectId": "S4VD0H",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

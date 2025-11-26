@@ -94,5 +94,8 @@
             }
         ]
     },
-    "exampleProjectId": "ukO5qe"
+    "exampleProjectId": "ukO5qe",
+    "coreLibs": [
+        "cgl"
+    ]
 }

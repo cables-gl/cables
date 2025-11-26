@@ -60,5 +60,8 @@
         "ports": []
     },
     "exampleProjectId": "EsV74q",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

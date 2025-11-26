@@ -43,7 +43,6 @@
     },
     "summary": "export array of positions from a hierarchy of a branch structure in a gltf, e.g. a skeleton bones",
     "issues": "",
-
     "youtubeids": [
         "I_eD5nml_5A"
     ],
@@ -59,5 +58,8 @@
             }
         ]
     },
-    "exampleProjectId": "3t_mJR"
+    "exampleProjectId": "3t_mJR",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -1,7 +1,7 @@
 // currently only uses mono, if we want to extract stereo data some changes in extractPeaks are needed
 
 // constants
-const SAMPLES_PER_PIXEL_MIN = 100; // might crash when this is too low
+const SAMPLES_PER_PIXEL_MIN = 1; // might crash when this is too low
 
 function findMinMax(array)
 {
@@ -44,6 +44,7 @@ const centerPort = op.inBool("Center Origin", true);
 const widthPort = op.inValue("Width", 30);
 const samplesPerPixelPort = op.inInt("Samples Per Pixel", 10000);
 const inCalculateUV = op.inBool("Calculate Tex Coords", true);
+const outSpline = op.outArray("Spline Points");
 
 op.setPortGroup("Render Options", [renderActivePort, showBottomHalfPort, centerPort]);
 op.setPortGroup("Waveform Settings", [widthPort, samplesPerPixelPort]);
@@ -91,8 +92,8 @@ function calculateUV(meshPoints)
     const minMaxX = findMinMax(xTex);
     const minMaxY = findMinMax(yTex);
 
-    const normalizedTexX = xTex.map((val) => mapRange(val, minMaxX.min, minMaxX.max, 0, 1));
-    const normalizedTexY = yTex.map((val) => mapRange(val, minMaxY.min, minMaxY.max, 0, 1));
+    const normalizedTexX = xTex.map((val) => { return mapRange(val, minMaxX.min, minMaxX.max, 0, 1); });
+    const normalizedTexY = yTex.map((val) => { return mapRange(val, minMaxY.min, minMaxY.max, 0, 1); });
 
     const finalTexCoords = [];
 
@@ -277,6 +278,14 @@ function extractPeaks()
         // resortedArr now looks like: [yTop0, yTop1, ..., yBottom1, yBottom0]
         const meshPoints = createMeshPoints(resortedArr);
         createMesh(meshPoints);
+
+        const outArr = [];
+        for (let i = 0; i < resortedArr.length; i += 3)
+        {
+            // outArr.push(resortedArr[i], 0, resortedArr[i + 2]);
+            outArr.push(resortedArr[i], resortedArr[i + 1], resortedArr[i + 2]);
+        }
+        outSpline.setRef(outArr);
     }
     else
     {

@@ -48,5 +48,8 @@
             "date": 1572941492771
         }
     ],
-    "exampleProjectId": "DutaW6"
+    "exampleProjectId": "DutaW6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

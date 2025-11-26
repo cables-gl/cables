@@ -99,5 +99,8 @@
     },
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "OeGdjT"
+    "exampleProjectId": "OeGdjT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -76,5 +76,8 @@
         ]
     },
     "created": 1540451511431,
-    "exampleProjectId": "xEL0rn"
+    "exampleProjectId": "xEL0rn",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

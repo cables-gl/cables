@@ -80,5 +80,8 @@
     ],
     "youtubeids": [],
     "exampleProjectId": "_UEjvr",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -36,10 +36,11 @@
     },
     "summary": "A Simple way to write text on the screen.",
     "youtubeid": "",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1JzPLu"
+    "exampleProjectId": "1JzPLu",
+    "coreLibs": [
+        "cgl"
+    ]
 }

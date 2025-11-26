@@ -113,5 +113,8 @@
         "ports": []
     },
     "summary": "rendering on webxr virtual reality immersive devices",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

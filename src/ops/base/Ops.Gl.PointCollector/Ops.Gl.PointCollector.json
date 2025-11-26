@@ -30,7 +30,9 @@
     "docs": {
         "ports": []
     },
-
     "issues": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

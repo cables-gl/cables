@@ -79,11 +79,13 @@
     },
     "summary": "Load textures from inside a .glb file",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "exampleProjectId": "PBGKve",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -56,7 +56,9 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "F6Fhyp"
+    "exampleProjectId": "F6Fhyp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

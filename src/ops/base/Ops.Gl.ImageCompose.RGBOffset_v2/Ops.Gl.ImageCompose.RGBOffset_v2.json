@@ -112,7 +112,6 @@
     },
     "summary": "Offsets the xy components of an RGB texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -174,5 +173,8 @@
             }
         ]
     },
-    "exampleProjectId": "pzC9rn"
+    "exampleProjectId": "pzC9rn",
+    "coreLibs": [
+        "cgl"
+    ]
 }

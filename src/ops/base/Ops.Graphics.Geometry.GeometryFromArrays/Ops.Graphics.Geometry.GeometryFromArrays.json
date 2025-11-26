@@ -49,5 +49,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Create a geometry from array data"
+    "summary": "Create a geometry from array data",
+    "coreLibs": [
+        "cgl"
+    ]
 }

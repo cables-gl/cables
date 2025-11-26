@@ -60,7 +60,8 @@
         "ports": []
     },
     "youtubeid": "",
-
-
-    "exampleProjectId": "cfUzre"
+    "exampleProjectId": "cfUzre",
+    "coreLibs": [
+        "cgl"
+    ]
 }

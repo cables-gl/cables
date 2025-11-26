@@ -105,5 +105,8 @@
         "DW9U5tv1GHM"
     ],
     "exampleProjectId": "Ah6Rj6",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

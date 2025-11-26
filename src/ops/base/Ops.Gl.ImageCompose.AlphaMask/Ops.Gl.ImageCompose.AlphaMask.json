@@ -34,7 +34,6 @@
     "summary": "set alphachannel of current imagecompose via a texture mask",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
@@ -45,5 +44,8 @@
             "author": "pandur",
             "date": 1701856156532
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

@@ -80,13 +80,13 @@
     },
     "summary": "colorize instanced meshes using a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "yQJfFj"
 }

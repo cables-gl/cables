@@ -44,7 +44,6 @@
     },
     "summary": "Download the current screen content as png file",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -67,5 +66,8 @@
         ]
     },
     "exampleProjectId": "OB0Qmi",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -94,7 +94,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_pixelreader"
+        "cgl_pixelreader",
+        "cgl"
     ],
     "license": "MIT"
 }

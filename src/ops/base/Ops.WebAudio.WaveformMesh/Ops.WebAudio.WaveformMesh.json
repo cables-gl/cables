@@ -56,6 +56,10 @@
         ],
         "portsOut": [
             {
+                "type": 3,
+                "name": "Spline Points"
+            },
+            {
                 "type": 1,
                 "name": "Next"
             },
@@ -128,7 +132,10 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "VqDkCp"
+    "exampleProjectId": "VqDkCp",
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

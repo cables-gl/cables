@@ -140,5 +140,9 @@
         "ports": []
     },
     "exampleProjectId": "ioiDIR",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

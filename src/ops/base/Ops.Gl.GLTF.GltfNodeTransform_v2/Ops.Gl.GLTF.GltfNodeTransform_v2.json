@@ -66,5 +66,8 @@
         "ports": []
     },
     "exampleProjectId": "yrOJve",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

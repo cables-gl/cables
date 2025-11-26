@@ -71,5 +71,8 @@
         ]
     },
     "exampleProjectId": "mPwnD-",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -142,7 +142,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -156,5 +155,8 @@
             "date": 1606239122057
         }
     ],
-    "exampleProjectId": "h2eBh-"
+    "exampleProjectId": "h2eBh-",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

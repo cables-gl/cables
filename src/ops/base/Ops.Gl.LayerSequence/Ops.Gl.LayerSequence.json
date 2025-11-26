@@ -93,10 +93,12 @@
             }
         ]
     },
-
     "exampleProjectId": "VH4Oxj",
     "docs": {
         "ports": []
     },
-    "summary": "Render Multiple Layers in a specific order"
+    "summary": "Render Multiple Layers in a specific order",
+    "coreLibs": [
+        "cgl"
+    ]
 }

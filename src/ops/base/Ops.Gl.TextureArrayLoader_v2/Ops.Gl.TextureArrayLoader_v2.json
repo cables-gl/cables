@@ -97,7 +97,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -111,5 +110,8 @@
             "date": 1631107797285
         }
     ],
-    "exampleProjectId": "OeGdjT"
+    "exampleProjectId": "OeGdjT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -53,10 +53,12 @@
     "created": 1579615623326,
     "summary": "Simulate fisheye effect",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "qIOrS-"
+    "exampleProjectId": "qIOrS-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

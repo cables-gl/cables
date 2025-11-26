@@ -112,7 +112,6 @@
     },
     "summary": "Generate different texture waveforms. Sine, sawtooth and triangle.",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -170,5 +169,8 @@
             }
         ]
     },
-    "exampleProjectId": "Hfw7yu"
+    "exampleProjectId": "Hfw7yu",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -75,5 +75,8 @@
         ]
     },
     "created": 1558533780684,
-    "exampleProjectId": "nhyACp"
+    "exampleProjectId": "nhyACp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

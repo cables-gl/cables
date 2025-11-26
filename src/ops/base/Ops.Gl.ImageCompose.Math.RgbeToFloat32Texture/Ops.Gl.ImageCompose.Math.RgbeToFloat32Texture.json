@@ -45,7 +45,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "authorName": "pandur",
     "created": 1642868505891,
@@ -93,7 +94,6 @@
     "summary": "Convert a RGBE texture to HDR/floating point texture",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

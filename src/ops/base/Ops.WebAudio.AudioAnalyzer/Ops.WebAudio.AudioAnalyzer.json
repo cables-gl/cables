@@ -50,5 +50,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

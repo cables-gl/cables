@@ -222,5 +222,8 @@
             }
         ]
     },
-    "exampleProjectId": "D5evXU"
+    "exampleProjectId": "D5evXU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

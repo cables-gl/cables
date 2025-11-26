@@ -148,5 +148,8 @@
             "date": 1549122408996
         }
     ],
-    "exampleProjectId": "E0hWmi"
+    "exampleProjectId": "E0hWmi",
+    "coreLibs": [
+        "cgl"
+    ]
 }

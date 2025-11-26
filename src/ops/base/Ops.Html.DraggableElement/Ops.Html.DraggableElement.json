@@ -40,5 +40,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "WSi9iO"
+    "exampleProjectId": "WSi9iO",
+    "coreLibs": [
+        "cgl"
+    ]
 }

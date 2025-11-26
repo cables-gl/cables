@@ -50,10 +50,12 @@
     "summary": "expose geometry from gltf meshes, also possible to expose submaterial geometries",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "XKXmf6",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

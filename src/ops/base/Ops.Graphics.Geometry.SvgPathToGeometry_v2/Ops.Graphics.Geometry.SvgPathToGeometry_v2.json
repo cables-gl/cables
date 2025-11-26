@@ -45,5 +45,8 @@
     "exampleProjectId": "Cp5VS3",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }
