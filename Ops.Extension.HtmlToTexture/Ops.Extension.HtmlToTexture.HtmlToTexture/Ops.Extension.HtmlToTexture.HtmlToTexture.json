@@ -1,0 +1,58 @@
+{
+    "id": "2c976d3c-fd60-4c43-8e60-140aaf331b64",
+    "created": 1762813698224,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762813698253
+        },
+        {
+            "message": "Team.HtmlToTexture.HtmlToTexture renamed to Ops.Extension.HtmlToTexture.HtmlToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764151487890
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Image dataUrl"
+            },
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    },
+    "dependencies": [
+        {
+            "src": "https://unpkg.com/modern-screenshot/dist/index.js",
+            "type": "commonjs"
+        }
+    ],
+    "exampleProjectId": "fPPga2",
+    "docs": {
+        "ports": []
+    }
+}
