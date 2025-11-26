@@ -81,5 +81,8 @@
         "ports": []
     },
     "exampleProjectId": "zHxXMW",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

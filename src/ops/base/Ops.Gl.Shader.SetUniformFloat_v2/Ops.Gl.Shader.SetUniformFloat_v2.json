@@ -71,5 +71,8 @@
             "date": 1662567079136
         }
     ],
-    "exampleProjectId": "5W7X2f"
+    "exampleProjectId": "5W7X2f",
+    "coreLibs": [
+        "cgl"
+    ]
 }

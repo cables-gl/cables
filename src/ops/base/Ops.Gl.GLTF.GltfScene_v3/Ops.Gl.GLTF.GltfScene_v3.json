@@ -218,7 +218,6 @@
     ],
     "summary": "Load GLTF/GLB 3d files",
     "issues": "",
-
     "youtubeids": [
         "QNLw21hSweg"
     ],
@@ -235,7 +234,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "caniusequery": "",
     "exampleProjectId": "XmL8GY"

@@ -28,5 +28,8 @@
                 "name": "Audiocontext State"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "webaudio"
+    ]
 }

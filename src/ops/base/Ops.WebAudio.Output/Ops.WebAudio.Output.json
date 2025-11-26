@@ -45,5 +45,8 @@
             "date": 1643887951231
         }
     ],
-    "exampleProjectId": "teZhCp"
+    "exampleProjectId": "teZhCp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

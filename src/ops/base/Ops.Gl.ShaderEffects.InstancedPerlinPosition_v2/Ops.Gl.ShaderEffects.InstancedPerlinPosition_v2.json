@@ -80,8 +80,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.InstancedPerlinPosition",
@@ -100,7 +98,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "33bSY7"
 }

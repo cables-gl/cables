@@ -30,10 +30,12 @@
     ],
     "summary": "draw a grid on the floor",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LiwB16"
+    "exampleProjectId": "LiwB16",
+    "coreLibs": [
+        "cgl"
+    ]
 }

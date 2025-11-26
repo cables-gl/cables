@@ -68,5 +68,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "DAhGve"
+    "exampleProjectId": "DAhGve",
+    "coreLibs": [
+        "cgl"
+    ]
 }

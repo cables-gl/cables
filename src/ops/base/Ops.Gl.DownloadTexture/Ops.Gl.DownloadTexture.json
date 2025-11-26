@@ -49,6 +49,8 @@
         ]
     },
     "issues": "",
-
-    "exampleProjectId": "15LaTs"
+    "exampleProjectId": "15LaTs",
+    "coreLibs": [
+        "cgl"
+    ]
 }

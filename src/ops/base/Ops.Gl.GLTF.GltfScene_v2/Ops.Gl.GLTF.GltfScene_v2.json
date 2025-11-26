@@ -151,12 +151,14 @@
     ],
     "summary": "Load GLTF/GLB 3d files",
     "issues": "",
-
     "youtubeids": [
         "QNLw21hSweg"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "XmL8GY"
+    "exampleProjectId": "XmL8GY",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -147,5 +147,9 @@
     "youtubeids": [
         "zWfwC-GH7qk"
     ],
-    "exampleProjectId": "ioiDIR"
+    "exampleProjectId": "ioiDIR",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

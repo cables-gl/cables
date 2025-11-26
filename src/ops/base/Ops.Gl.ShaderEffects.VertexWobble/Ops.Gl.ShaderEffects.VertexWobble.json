@@ -66,8 +66,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": " added core lib: cgl_shadermodifier",
@@ -91,7 +89,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "0PxhuO"
 }

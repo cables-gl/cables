@@ -127,5 +127,8 @@
         "tFM2Ixf-ixs"
     ],
     "exampleProjectId": "v8G4Wz",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

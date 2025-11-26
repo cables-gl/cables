@@ -42,9 +42,11 @@
     "summary": "Emboss / bevel effect",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "xsRcay"
+    "exampleProjectId": "xsRcay",
+    "coreLibs": [
+        "cgl"
+    ]
 }

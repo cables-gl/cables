@@ -71,7 +71,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "eqfKTx"
+    "exampleProjectId": "eqfKTx",
+    "coreLibs": [
+        "cgl"
+    ]
 }

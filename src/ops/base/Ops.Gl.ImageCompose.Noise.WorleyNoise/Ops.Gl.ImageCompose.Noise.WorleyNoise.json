@@ -81,7 +81,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "sivDJd",
     "changelog": [
@@ -91,5 +90,8 @@
             "author": "stephan",
             "date": 1701855265149
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

@@ -56,8 +56,6 @@
         "ports": []
     },
     "issues": "",
-
-
     "youtubeids": [],
     "changelog": [
         {
@@ -82,7 +80,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "4wT0J6"
 }

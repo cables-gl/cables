@@ -89,8 +89,6 @@
         "ports": []
     },
     "issues": "",
-
-
     "youtubeids": [],
     "exampleProjectId": "ctPnT6",
     "changelog": [
@@ -115,5 +113,8 @@
             "author": "pandur",
             "date": 1701854850332
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

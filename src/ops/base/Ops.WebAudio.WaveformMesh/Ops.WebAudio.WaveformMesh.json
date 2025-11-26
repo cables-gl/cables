@@ -134,5 +134,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "VqDkCp",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

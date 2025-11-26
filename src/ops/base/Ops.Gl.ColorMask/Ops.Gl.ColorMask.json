@@ -38,7 +38,6 @@
     "id": "44433419-dcf4-46e6-8f40-d331598029ac",
     "created": 1542701267377,
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -69,5 +68,8 @@
     },
     "exampleProjectId": "MqQSR7",
     "caniusequery": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -116,5 +116,8 @@
         }
     ],
     "exampleProjectId": "DAAkQ6",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

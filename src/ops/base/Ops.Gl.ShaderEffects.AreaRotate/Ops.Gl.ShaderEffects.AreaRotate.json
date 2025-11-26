@@ -63,5 +63,8 @@
             "author": "pandur",
             "date": 1596093602153
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

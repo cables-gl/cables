@@ -93,5 +93,9 @@
     ],
     "youtubeids": [],
     "exampleProjectId": "xjHACp",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

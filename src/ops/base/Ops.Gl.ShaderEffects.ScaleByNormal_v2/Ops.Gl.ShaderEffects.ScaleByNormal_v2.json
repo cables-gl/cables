@@ -26,11 +26,10 @@
     "docs": {
         "ports": []
     },
-
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
-
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.ShaderEffects.ScaleByNormal",

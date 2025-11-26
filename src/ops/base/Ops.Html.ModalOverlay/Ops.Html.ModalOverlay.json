@@ -57,10 +57,12 @@
     },
     "summary": "create a modal HTML overlay with a darkened background",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RXU-K2"
+    "exampleProjectId": "RXU-K2",
+    "coreLibs": [
+        "cgl"
+    ]
 }

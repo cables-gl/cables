@@ -103,6 +103,7 @@
         ]
     },
     "coreLibs": [
-        "cgl_texturemath"
+        "cgl_texturemath",
+        "cgl"
     ]
 }

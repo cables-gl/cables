@@ -65,13 +65,13 @@
     ],
     "summary": "bend objects along an axis",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "HtcN9Z"
 }

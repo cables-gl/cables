@@ -99,10 +99,12 @@
     },
     "summary": "use your webcam camera as a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "iwaEwm"
+    "exampleProjectId": "iwaEwm",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -287,5 +287,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "J7YdCp",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

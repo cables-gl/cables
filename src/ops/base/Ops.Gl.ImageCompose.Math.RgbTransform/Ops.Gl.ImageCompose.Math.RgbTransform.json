@@ -128,10 +128,12 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "UJvMbk"
+    "exampleProjectId": "UJvMbk",
+    "coreLibs": [
+        "cgl"
+    ]
 }

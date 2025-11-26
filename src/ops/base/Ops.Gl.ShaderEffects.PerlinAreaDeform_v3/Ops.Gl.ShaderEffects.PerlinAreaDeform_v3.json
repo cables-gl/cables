@@ -84,7 +84,6 @@
     "summary": "Displace vertices using perlin noise animation",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -145,5 +144,8 @@
             }
         ]
     },
-    "exampleProjectId": "8RexP8"
+    "exampleProjectId": "8RexP8",
+    "coreLibs": [
+        "cgl"
+    ]
 }

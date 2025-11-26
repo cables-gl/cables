@@ -76,7 +76,6 @@
     "id": "25467f40-8f78-4dca-ba6c-951ae49cac59",
     "created": 1625738171489,
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -104,6 +103,7 @@
         }
     ],
     "coreLibs": [
-        "cgl_texturemath"
+        "cgl_texturemath",
+        "cgl"
     ]
 }

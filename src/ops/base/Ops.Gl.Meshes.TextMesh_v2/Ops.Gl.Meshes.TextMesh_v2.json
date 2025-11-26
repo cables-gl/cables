@@ -212,5 +212,8 @@
     "youtubeids": [],
     "exampleProjectId": "LzDnH-",
     "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

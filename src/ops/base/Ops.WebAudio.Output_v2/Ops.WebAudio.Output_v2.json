@@ -89,7 +89,8 @@
     ],
     "exampleProjectId": "teZhCp",
     "coreLibs": [
-        "interactionneededbutton"
+        "interactionneededbutton",
+        "webaudio"
     ],
     "license": "MIT"
 }

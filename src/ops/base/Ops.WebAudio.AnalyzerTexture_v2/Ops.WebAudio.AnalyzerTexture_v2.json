@@ -63,7 +63,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -93,5 +92,8 @@
             }
         ]
     },
-    "exampleProjectId": "T_-vCp"
+    "exampleProjectId": "T_-vCp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

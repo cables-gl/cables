@@ -130,5 +130,8 @@
             "date": 1708016457333
         }
     ],
-    "exampleProjectId": "G2_my7"
+    "exampleProjectId": "G2_my7",
+    "coreLibs": [
+        "cgl"
+    ]
 }

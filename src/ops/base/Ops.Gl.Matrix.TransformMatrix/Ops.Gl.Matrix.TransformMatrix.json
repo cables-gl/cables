@@ -91,11 +91,12 @@
     },
     "authorName": "pandur",
     "created": 1684237592389,
-
-
     "exampleProjectId": "A0W1Jx",
     "docs": {
         "ports": []
     },
-    "summary": "transform a matrix (mat4)"
+    "summary": "transform a matrix (mat4)",
+    "coreLibs": [
+        "cgl"
+    ]
 }

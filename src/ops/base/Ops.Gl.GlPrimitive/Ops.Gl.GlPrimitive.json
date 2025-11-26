@@ -35,5 +35,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "a5Mz8i"
+    "exampleProjectId": "a5Mz8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

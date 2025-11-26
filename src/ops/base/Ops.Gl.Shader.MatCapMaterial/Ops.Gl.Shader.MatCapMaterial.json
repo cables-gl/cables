@@ -228,7 +228,9 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "gWkghi"
+    "exampleProjectId": "gWkghi",
+    "coreLibs": [
+        "cgl"
+    ]
 }

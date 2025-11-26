@@ -46,5 +46,8 @@
     "authorName": "pandur",
     "id": "4c5eed58-07f0-497f-bdd3-3b2f1c80b7df",
     "created": 1515175921198,
-    "exampleProjectId": "VYPlJ5"
+    "exampleProjectId": "VYPlJ5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

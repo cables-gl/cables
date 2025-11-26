@@ -53,5 +53,8 @@
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "JeA8ck"
+    "exampleProjectId": "JeA8ck",
+    "coreLibs": [
+        "cgl"
+    ]
 }

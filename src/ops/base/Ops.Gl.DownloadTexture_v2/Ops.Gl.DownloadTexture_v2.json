@@ -45,7 +45,6 @@
     },
     "summary": "Download a texture as png file",
     "issues": "",
-
     "youtubeids": [
         "YFvVsEPirRc"
     ],
@@ -69,5 +68,8 @@
             }
         ]
     },
-    "exampleProjectId": "15LaTs"
+    "exampleProjectId": "15LaTs",
+    "coreLibs": [
+        "cgl"
+    ]
 }

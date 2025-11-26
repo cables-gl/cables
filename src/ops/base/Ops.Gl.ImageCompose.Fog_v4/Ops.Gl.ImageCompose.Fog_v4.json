@@ -175,5 +175,8 @@
         ]
     },
     "exampleProjectId": "I6pZnO",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

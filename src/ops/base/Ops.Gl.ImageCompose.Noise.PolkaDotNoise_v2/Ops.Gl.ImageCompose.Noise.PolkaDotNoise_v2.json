@@ -79,7 +79,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "pKNTub",
     "changelog": [
@@ -104,5 +103,8 @@
             "author": "stephan",
             "date": 1701855099858
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

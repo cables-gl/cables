@@ -41,5 +41,8 @@
                 "text": "The same element as the input"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

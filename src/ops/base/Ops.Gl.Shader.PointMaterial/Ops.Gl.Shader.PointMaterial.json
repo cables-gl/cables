@@ -179,5 +179,8 @@
     "youtubeids": [
         "tFM2Ixf-ixs"
     ],
-    "exampleProjectId": "O9yRO6"
+    "exampleProjectId": "O9yRO6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

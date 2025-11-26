@@ -52,5 +52,8 @@
     "id": "c6a0d570-a0ac-4655-b17d-74d0870b0799",
     "created": 1541225050374,
     "exampleProjectId": "D_eE98",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

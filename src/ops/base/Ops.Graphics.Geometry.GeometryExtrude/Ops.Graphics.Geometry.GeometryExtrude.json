@@ -69,10 +69,12 @@
     "summary": "basic extrusion of flat geometry",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -75,7 +75,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [
         "XmOk70epdf0"
     ],
@@ -87,5 +86,8 @@
             "author": "pandur",
             "date": 1701855450906
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

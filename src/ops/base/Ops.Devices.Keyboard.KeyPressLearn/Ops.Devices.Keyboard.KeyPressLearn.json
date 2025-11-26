@@ -99,5 +99,8 @@
     "caniusequery": "",
     "youtubeids": [],
     "exampleProjectId": "ZRY-x3",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -237,5 +237,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "IPPT7i"
+    "exampleProjectId": "IPPT7i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

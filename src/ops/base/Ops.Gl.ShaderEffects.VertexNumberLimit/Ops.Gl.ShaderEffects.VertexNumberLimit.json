@@ -26,5 +26,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gLrrJV"
+    "exampleProjectId": "gLrrJV",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -147,5 +147,8 @@
         "ports": []
     },
     "exampleProjectId": "P_SED0",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

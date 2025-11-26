@@ -84,7 +84,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "cknm0r",
     "changelog": [
@@ -109,5 +108,8 @@
             "author": "stephan",
             "date": 1701855277011
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

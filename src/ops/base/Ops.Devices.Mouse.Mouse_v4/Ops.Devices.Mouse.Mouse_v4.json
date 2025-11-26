@@ -167,5 +167,8 @@
         "ports": []
     },
     "summary": "Get mouse/touchscreen/pointer coordinates and events",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

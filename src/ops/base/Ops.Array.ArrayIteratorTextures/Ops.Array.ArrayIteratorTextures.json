@@ -61,7 +61,6 @@
         ]
     },
     "issues": "",
-
     "exampleProjectId": "vS5fjz",
     "changelog": [
         {
@@ -75,5 +74,8 @@
             "author": "pandur",
             "date": 1686309822148
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

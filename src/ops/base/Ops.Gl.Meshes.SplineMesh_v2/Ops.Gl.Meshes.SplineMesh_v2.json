@@ -49,5 +49,8 @@
             }
         ]
     },
-    "exampleProjectId": "3l5Uu-"
+    "exampleProjectId": "3l5Uu-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

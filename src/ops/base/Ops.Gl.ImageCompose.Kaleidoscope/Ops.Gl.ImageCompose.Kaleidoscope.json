@@ -75,5 +75,8 @@
             "date": 1701855884879
         }
     ],
-    "exampleProjectId": "n4DaW6"
+    "exampleProjectId": "n4DaW6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

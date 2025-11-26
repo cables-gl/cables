@@ -71,5 +71,8 @@
             }
         ]
     },
-    "exampleProjectId": "SLesr2"
+    "exampleProjectId": "SLesr2",
+    "coreLibs": [
+        "cgl"
+    ]
 }

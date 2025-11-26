@@ -54,10 +54,11 @@
         ]
     },
     "youtubeid": "",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "HtcN9Z"
+    "exampleProjectId": "HtcN9Z",
+    "coreLibs": [
+        "cgl"
+    ]
 }

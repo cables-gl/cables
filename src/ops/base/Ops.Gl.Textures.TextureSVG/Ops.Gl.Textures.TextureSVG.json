@@ -44,5 +44,8 @@
     "authorName": "pandur",
     "id": "ecd162d1-615e-4d97-8376-9edbbc51aee1",
     "created": 1508247676380,
-    "exampleProjectId": "oqCKY6"
+    "exampleProjectId": "oqCKY6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

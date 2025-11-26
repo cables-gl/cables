@@ -60,5 +60,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "PakK8i"
+    "exampleProjectId": "PakK8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

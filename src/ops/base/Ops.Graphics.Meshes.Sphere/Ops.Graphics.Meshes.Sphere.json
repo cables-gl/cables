@@ -58,5 +58,8 @@
             "date": 1750154421969
         }
     ],
-    "exampleProjectId": "HvxfQ6"
+    "exampleProjectId": "HvxfQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

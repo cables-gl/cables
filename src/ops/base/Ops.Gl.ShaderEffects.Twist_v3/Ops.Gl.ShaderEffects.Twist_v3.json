@@ -45,13 +45,13 @@
     ],
     "summary": "twist a mesh around an axis",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "VYPlJ5"
 }

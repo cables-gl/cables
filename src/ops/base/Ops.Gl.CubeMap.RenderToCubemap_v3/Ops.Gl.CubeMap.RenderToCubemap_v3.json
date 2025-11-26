@@ -82,7 +82,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_cubemapframebuffer"
+        "cgl_cubemapframebuffer",
+        "cgl"
     ],
     "exampleProjectId": "Z3KuUQ"
 }

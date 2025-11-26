@@ -111,5 +111,8 @@
             }
         ]
     },
-    "exampleProjectId": "5PFIfu"
+    "exampleProjectId": "5PFIfu",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

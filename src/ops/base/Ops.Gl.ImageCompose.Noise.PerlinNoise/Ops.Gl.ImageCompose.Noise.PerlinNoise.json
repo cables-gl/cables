@@ -122,7 +122,6 @@
     "id": "446442ba-1a7e-4c71-bb43-b12005aa6511",
     "created": 1524157680368,
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -145,5 +144,8 @@
             "date": 1701855351278
         }
     ],
-    "exampleProjectId": "zfzmT6"
+    "exampleProjectId": "zfzmT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

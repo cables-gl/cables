@@ -34,9 +34,11 @@
     },
     "summary": "Get the scalar scaling of a matrix",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

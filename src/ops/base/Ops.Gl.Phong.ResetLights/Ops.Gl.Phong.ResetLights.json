@@ -35,7 +35,6 @@
     },
     "summary": "reset lights for everything triggered after",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -53,5 +52,8 @@
             }
         ]
     },
-    "exampleProjectId": "eU7obI"
+    "exampleProjectId": "eU7obI",
+    "coreLibs": [
+        "cgl"
+    ]
 }

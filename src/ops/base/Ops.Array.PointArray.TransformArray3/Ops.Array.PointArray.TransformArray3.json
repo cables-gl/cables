@@ -106,5 +106,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "NenSet"
+    "exampleProjectId": "NenSet",
+    "coreLibs": [
+        "cgl"
+    ]
 }

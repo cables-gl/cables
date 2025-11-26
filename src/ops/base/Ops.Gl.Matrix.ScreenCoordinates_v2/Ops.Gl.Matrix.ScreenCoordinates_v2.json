@@ -39,7 +39,6 @@
     },
     "summary": "screen/pixel coordinates of the current transform",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -78,5 +77,8 @@
             "author": "pandur",
             "date": 1674816359877
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

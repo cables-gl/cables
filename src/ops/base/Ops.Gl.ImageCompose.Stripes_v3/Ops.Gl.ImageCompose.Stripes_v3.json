@@ -151,5 +151,8 @@
         ]
     },
     "caniusequery": "",
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

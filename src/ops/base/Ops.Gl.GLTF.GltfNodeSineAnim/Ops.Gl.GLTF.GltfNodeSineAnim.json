@@ -69,10 +69,12 @@
     },
     "summary": "sine animate gltf nodes by a filter",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "w1SPcI"
+    "exampleProjectId": "w1SPcI",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -89,11 +89,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "3d space noise for mesh materials",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

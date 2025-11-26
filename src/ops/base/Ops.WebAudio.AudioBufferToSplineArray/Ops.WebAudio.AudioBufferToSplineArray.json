@@ -103,7 +103,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "OcOVBp"
+    "exampleProjectId": "OcOVBp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

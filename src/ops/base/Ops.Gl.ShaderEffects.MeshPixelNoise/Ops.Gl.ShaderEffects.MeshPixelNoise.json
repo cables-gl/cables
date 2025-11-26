@@ -70,7 +70,6 @@
     "id": "3eeb7a13-339c-4409-9de7-3dfcab303663",
     "created": 1505485212802,
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -138,5 +137,8 @@
             "date": 1595498174473
         }
     ],
-    "exampleProjectId": "V7rjQ6"
+    "exampleProjectId": "V7rjQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

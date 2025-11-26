@@ -32,6 +32,8 @@
             }
         ]
     },
-
-    "exampleProjectId": "TVIL7f"
+    "exampleProjectId": "TVIL7f",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -70,7 +70,6 @@
     },
     "summary": "render an equirectangular map or a cubemap as scene background",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -92,5 +91,8 @@
             }
         ]
     },
-    "exampleProjectId": "40hoYa"
+    "exampleProjectId": "40hoYa",
+    "coreLibs": [
+        "cgl"
+    ]
 }

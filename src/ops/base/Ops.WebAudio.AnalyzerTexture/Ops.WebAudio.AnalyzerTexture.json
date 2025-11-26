@@ -47,7 +47,6 @@
     "id": "74212b0b-2260-48bd-9d22-70754db6ccba",
     "created": 1542058221013,
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -56,5 +55,8 @@
             "date": 1608539644010
         }
     ],
-    "exampleProjectId": "T_-vCp"
+    "exampleProjectId": "T_-vCp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

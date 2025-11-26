@@ -46,5 +46,8 @@
             "date": 1610524201832
         }
     ],
-    "exampleProjectId": "F-UNZ4"
+    "exampleProjectId": "F-UNZ4",
+    "coreLibs": [
+        "cgl"
+    ]
 }

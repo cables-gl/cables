@@ -70,5 +70,8 @@
     },
     "youtubeid": "",
     "issues": "",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

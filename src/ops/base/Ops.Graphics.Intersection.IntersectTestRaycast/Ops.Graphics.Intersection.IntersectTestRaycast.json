@@ -127,5 +127,8 @@
     "exampleProjectId": "ffRjjz",
     "youtubeids": [
         "lNbfCp0T55c"
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

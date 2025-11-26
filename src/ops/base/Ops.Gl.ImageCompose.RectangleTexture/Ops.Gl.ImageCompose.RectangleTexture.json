@@ -66,5 +66,8 @@
             "date": 1701856408387
         }
     ],
-    "exampleProjectId": "TmgMD-"
+    "exampleProjectId": "TmgMD-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -36,5 +36,8 @@
     "summary": "convert screen pixel coordinates to range 0-1",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

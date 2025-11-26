@@ -82,5 +82,8 @@
             }
         ]
     },
-    "exampleProjectId": "g3ioXU"
+    "exampleProjectId": "g3ioXU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

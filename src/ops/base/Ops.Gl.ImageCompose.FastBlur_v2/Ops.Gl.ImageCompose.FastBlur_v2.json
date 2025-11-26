@@ -74,5 +74,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "wl2T7i"
+    "exampleProjectId": "wl2T7i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

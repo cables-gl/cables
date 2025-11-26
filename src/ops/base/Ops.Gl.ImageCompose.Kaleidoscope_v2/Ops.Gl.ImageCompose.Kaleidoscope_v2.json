@@ -98,6 +98,8 @@
     "exampleProjectId": "n4DaW6",
     "issues": "",
     "caniusequery": "",
-
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

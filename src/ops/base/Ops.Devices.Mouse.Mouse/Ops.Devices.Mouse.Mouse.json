@@ -134,8 +134,6 @@
         ]
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "fixed: wrong coordinates when using HDPI displays",
@@ -143,5 +141,8 @@
             "date": 1550863318111
         }
     ],
-    "exampleProjectId": "mDiCq6"
+    "exampleProjectId": "mDiCq6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

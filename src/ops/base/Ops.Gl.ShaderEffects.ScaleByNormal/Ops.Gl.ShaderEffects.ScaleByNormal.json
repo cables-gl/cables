@@ -27,7 +27,8 @@
         "ports": []
     },
     "youtubeid": "",
-
-
-    "exampleProjectId": "Ft2xm1"
+    "exampleProjectId": "Ft2xm1",
+    "coreLibs": [
+        "cgl"
+    ]
 }

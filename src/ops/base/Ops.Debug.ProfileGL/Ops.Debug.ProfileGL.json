@@ -23,5 +23,8 @@
     "summary": "dump all gl commands of one frame to console",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

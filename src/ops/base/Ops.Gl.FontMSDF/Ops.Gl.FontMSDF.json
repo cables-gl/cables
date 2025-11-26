@@ -56,10 +56,12 @@
     },
     "summary": "Load MSDF Font data and texture to use ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "9COr26"
+    "exampleProjectId": "9COr26",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -37,7 +37,6 @@
     },
     "summary": "stereo pan an audio signal from left to right",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -55,5 +54,8 @@
             }
         ]
     },
-    "exampleProjectId": "iNue_j"
+    "exampleProjectId": "iNue_j",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

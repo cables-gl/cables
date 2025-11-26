@@ -30,5 +30,8 @@
             }
         ]
     },
-    "exampleProjectId": "rEesag"
+    "exampleProjectId": "rEesag",
+    "coreLibs": [
+        "cgl"
+    ]
 }

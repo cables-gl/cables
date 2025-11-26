@@ -195,12 +195,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_wireframes"
+        "cgl_wireframes",
+        "cgl"
     ],
     "summary": "Generates a texture of Text using one of the font ops",
     "issues": "",
-
-
     "youtubeids": [
         "z1Qf9dE67-w"
     ],

@@ -151,5 +151,8 @@
             }
         ]
     },
-    "exampleProjectId": "u5y0Z5"
+    "exampleProjectId": "u5y0Z5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

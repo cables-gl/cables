@@ -72,10 +72,11 @@
     "authorName": "pandur",
     "created": 1693646482040,
     "summary": "render weighted morph targets/shape keys from a gltf file",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "zon4xF"
+    "exampleProjectId": "zon4xF",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -96,8 +96,6 @@
     "docs": {
         "ports": []
     },
-
-
     "changelog": [
         {
             "message": "fixed - ui redraws slowing down op",
@@ -115,5 +113,8 @@
             "date": 1572942501966
         }
     ],
-    "exampleProjectId": "RZsPWU"
+    "exampleProjectId": "RZsPWU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -78,5 +78,8 @@
         ]
     },
     "summary": "explode a (divided) mesh in the direction of faces normals",
-    "exampleProjectId": "sYIxm1"
+    "exampleProjectId": "sYIxm1",
+    "coreLibs": [
+        "cgl"
+    ]
 }

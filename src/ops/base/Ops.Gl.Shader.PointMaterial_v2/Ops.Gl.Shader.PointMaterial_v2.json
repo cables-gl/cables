@@ -124,7 +124,6 @@
     ],
     "summary": "Draw all vertices as points / circles",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -194,5 +193,8 @@
             }
         ]
     },
-    "exampleProjectId": "O9yRO6"
+    "exampleProjectId": "O9yRO6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

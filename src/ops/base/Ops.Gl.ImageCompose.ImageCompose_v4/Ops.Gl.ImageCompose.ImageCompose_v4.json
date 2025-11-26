@@ -167,7 +167,8 @@
         "ZZKdaQw1bMo"
     ],
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "exampleProjectId": "dNv2r1",
     "license": "MIT"

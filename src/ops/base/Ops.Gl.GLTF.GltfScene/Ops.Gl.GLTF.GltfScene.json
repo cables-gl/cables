@@ -106,7 +106,6 @@
     },
     "summary": "Load GLTF/GLB 3d files",
     "issues": "",
-
     "youtubeids": [
         "QNLw21hSweg"
     ],
@@ -174,5 +173,8 @@
             }
         ]
     },
-    "exampleProjectId": "XmL8GY"
+    "exampleProjectId": "XmL8GY",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -86,10 +86,12 @@
     },
     "summary": "Change the position of all meshes inside of the area of influence",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "yWVQC-"
+    "exampleProjectId": "yWVQC-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

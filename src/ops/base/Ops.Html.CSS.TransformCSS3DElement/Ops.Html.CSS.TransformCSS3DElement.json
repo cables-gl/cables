@@ -55,5 +55,8 @@
         }
     ],
     "exampleProjectId": "jC_6-u",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

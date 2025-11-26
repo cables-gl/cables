@@ -67,6 +67,8 @@
         "ports": []
     },
     "youtubeid": "",
-
-    "exampleProjectId": "oLCaao"
+    "exampleProjectId": "oLCaao",
+    "coreLibs": [
+        "cgl"
+    ]
 }

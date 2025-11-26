@@ -138,5 +138,8 @@
             "date": 1559048514854
         }
     ],
-    "exampleProjectId": "SKCL88"
+    "exampleProjectId": "SKCL88",
+    "coreLibs": [
+        "cgl"
+    ]
 }

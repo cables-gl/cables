@@ -80,9 +80,11 @@
     },
     "summary": "Set up a camera, rotated by a quaternion",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

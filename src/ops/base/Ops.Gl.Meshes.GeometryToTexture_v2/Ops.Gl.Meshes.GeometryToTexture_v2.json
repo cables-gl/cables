@@ -139,7 +139,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "bhWkpX",
     "docs": {

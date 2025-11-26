@@ -39,5 +39,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Zz52On"
+    "exampleProjectId": "Zz52On",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -146,5 +146,8 @@
             }
         ]
     },
-    "exampleProjectId": "2Rue0j"
+    "exampleProjectId": "2Rue0j",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -113,10 +113,12 @@
     },
     "summary": "Get mouse coordinates and events",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "mDiCq6"
+    "exampleProjectId": "mDiCq6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

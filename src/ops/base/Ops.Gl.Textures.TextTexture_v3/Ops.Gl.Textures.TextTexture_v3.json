@@ -174,8 +174,6 @@
     },
     "summary": "Generates a texture which reads Text",
     "issues": "",
-
-
     "youtubeids": [
         "z1Qf9dE67-w"
     ],
@@ -235,5 +233,8 @@
             }
         ]
     },
-    "exampleProjectId": "RZsPWU"
+    "exampleProjectId": "RZsPWU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

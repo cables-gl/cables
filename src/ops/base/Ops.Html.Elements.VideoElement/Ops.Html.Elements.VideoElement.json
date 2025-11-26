@@ -130,5 +130,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "1QTBve"
+    "exampleProjectId": "1QTBve",
+    "coreLibs": [
+        "cgl"
+    ]
 }

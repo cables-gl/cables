@@ -41,10 +41,11 @@
         ]
     },
     "summary": "get the id/index of the current set material",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "PYpQit"
+    "exampleProjectId": "PYpQit",
+    "coreLibs": [
+        "cgl"
+    ]
 }

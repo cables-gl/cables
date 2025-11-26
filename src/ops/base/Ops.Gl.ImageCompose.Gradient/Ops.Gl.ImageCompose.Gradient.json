@@ -111,8 +111,6 @@
     "id": "5ada9bd8-227a-4a1f-87ad-0f879c7aa84d",
     "created": 1520431091087,
     "issues": "",
-
-
     "youtubeids": [],
     "exampleProjectId": "dlSpQ6",
     "changelog": [
@@ -122,5 +120,8 @@
             "author": "pandur",
             "date": 1701856049459
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

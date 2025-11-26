@@ -37,5 +37,8 @@
     },
     "caniusequery": "",
     "exampleProjectId": "jFv097",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -43,5 +43,8 @@
             "date": 1567174544877
         }
     ],
-    "exampleProjectId": "gt0cay"
+    "exampleProjectId": "gt0cay",
+    "coreLibs": [
+        "cgl"
+    ]
 }

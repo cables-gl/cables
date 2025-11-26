@@ -169,7 +169,8 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "H3cEpX",
     "caniusequery": ""

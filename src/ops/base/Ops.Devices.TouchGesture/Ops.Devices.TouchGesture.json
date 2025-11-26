@@ -65,5 +65,8 @@
     "summary": "detect touch gestures like swipe and pan",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

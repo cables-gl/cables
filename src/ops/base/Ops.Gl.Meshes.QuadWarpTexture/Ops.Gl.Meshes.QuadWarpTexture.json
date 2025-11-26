@@ -97,7 +97,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "T2A7zp"
+    "exampleProjectId": "T2A7zp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

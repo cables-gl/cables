@@ -140,5 +140,8 @@
     },
     "exampleProjectId": "M3QiQ6",
     "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

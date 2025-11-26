@@ -105,7 +105,6 @@
     },
     "summary": "Creates a hexagonal noise texture ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -171,5 +170,8 @@
             }
         ]
     },
-    "exampleProjectId": "plbB53"
+    "exampleProjectId": "plbB53",
+    "coreLibs": [
+        "cgl"
+    ]
 }

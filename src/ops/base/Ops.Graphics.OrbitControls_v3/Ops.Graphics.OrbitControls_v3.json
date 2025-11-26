@@ -184,5 +184,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "Krorsh"
+    "exampleProjectId": "Krorsh",
+    "coreLibs": [
+        "cgl"
+    ]
 }

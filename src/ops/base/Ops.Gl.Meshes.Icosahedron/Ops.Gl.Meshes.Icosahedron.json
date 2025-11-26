@@ -42,5 +42,8 @@
     "authorName": "pandur",
     "id": "109cead5-8eda-4726-9e3d-b23afe201abd",
     "created": 1542701625850,
-    "exampleProjectId": "Ie6iQ6"
+    "exampleProjectId": "Ie6iQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -179,7 +179,8 @@
         "ZZKdaQw1bMo"
     ],
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "license": "MIT"
 }

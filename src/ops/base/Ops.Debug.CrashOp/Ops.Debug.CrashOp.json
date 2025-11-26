@@ -60,5 +60,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "9TvUBq"
+    "exampleProjectId": "9TvUBq",
+    "coreLibs": [
+        "cgl"
+    ]
 }

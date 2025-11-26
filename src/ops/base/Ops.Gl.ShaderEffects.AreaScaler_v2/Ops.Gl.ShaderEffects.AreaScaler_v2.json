@@ -101,7 +101,6 @@
     ],
     "summary": "Scales the size of meshes within the area of influence",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -159,5 +158,8 @@
             }
         ]
     },
-    "exampleProjectId": "LXN7D-"
+    "exampleProjectId": "LXN7D-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

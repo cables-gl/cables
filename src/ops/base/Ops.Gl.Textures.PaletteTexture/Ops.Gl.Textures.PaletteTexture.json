@@ -62,5 +62,8 @@
         ]
     },
     "exampleProjectId": "tdRoSP",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

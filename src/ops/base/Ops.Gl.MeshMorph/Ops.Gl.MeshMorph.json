@@ -146,7 +146,8 @@
     ],
     "exampleProjectId": "PdhglN",
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "license": "MIT"
 }

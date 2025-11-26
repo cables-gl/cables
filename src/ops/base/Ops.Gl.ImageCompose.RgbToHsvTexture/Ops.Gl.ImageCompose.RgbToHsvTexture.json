@@ -68,8 +68,10 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "V7z4v4",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

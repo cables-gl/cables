@@ -54,5 +54,8 @@
             }
         ]
     },
-    "exampleProjectId": "Mk3Dv2"
+    "exampleProjectId": "Mk3Dv2",
+    "coreLibs": [
+        "cgl"
+    ]
 }

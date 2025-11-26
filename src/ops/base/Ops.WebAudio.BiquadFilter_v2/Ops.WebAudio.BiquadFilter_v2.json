@@ -128,7 +128,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "nhyACp"
+    "exampleProjectId": "nhyACp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

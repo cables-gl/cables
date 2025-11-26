@@ -69,11 +69,11 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "add fresnel glow to any material",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

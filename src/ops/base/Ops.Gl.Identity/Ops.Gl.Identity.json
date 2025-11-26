@@ -22,5 +22,8 @@
     "exampleProjectId": "KUVJ8i",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

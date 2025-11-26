@@ -30,5 +30,8 @@
         ]
     },
     "summary": "x and y coordinates of a circle",
-    "exampleProjectId": "uAkdL5"
+    "exampleProjectId": "uAkdL5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

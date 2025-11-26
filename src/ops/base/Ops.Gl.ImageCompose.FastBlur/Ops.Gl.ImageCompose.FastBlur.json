@@ -61,7 +61,6 @@
     ],
     "summary": "Blurs a texture  - cheap and fast",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -86,5 +85,8 @@
                 "text": "Trigger out"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

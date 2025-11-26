@@ -111,7 +111,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [
         "F-CUdHq40Pc"
     ],
@@ -122,5 +121,8 @@
             "date": 1560943431105
         }
     ],
-    "exampleProjectId": "SKCL88"
+    "exampleProjectId": "SKCL88",
+    "coreLibs": [
+        "cgl"
+    ]
 }

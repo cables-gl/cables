@@ -168,7 +168,6 @@
         }
     ],
     "issues": "",
-
     "todos": [
         {
             "message": "Add docs",
@@ -180,5 +179,8 @@
             "deletedDate": 1605511996751
         }
     ],
-    "exampleProjectId": "k6ttde"
+    "exampleProjectId": "k6ttde",
+    "coreLibs": [
+        "cgl"
+    ]
 }

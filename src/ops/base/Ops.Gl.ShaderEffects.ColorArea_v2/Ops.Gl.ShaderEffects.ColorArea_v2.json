@@ -111,12 +111,14 @@
     ],
     "summary": "colorize all meshes around current position",
     "issues": "",
-
     "youtubeids": [
         "cUU0fNw3rEg"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "0Ti2gT"
+    "exampleProjectId": "0Ti2gT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

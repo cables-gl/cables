@@ -35,5 +35,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "aySyci"
+    "exampleProjectId": "aySyci",
+    "coreLibs": [
+        "cgl"
+    ]
 }

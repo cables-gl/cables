@@ -149,7 +149,8 @@
         "clmtrackr.js"
     ],
     "coreLibs": [
-        "cgl_wireframes"
+        "cgl_wireframes",
+        "cgl"
     ],
     "exampleProjectId": "mSeJ3E",
     "docs": {

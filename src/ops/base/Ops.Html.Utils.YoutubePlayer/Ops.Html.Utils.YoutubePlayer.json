@@ -88,5 +88,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "aMkD16"
+    "exampleProjectId": "aMkD16",
+    "coreLibs": [
+        "cgl"
+    ]
 }

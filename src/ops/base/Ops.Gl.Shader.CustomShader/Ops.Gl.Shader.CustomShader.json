@@ -47,5 +47,8 @@
     "youtubeids": [
         "Zfhn8xSM0SE"
     ],
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

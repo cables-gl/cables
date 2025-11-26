@@ -84,5 +84,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "HLViQ6"
+    "exampleProjectId": "HLViQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

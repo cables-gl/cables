@@ -76,5 +76,8 @@
     },
     "summary": "Trigger other ops once every frame to create smooth animations",
     "license": "MIT",
-    "exampleProjectId": "uZxfQc"
+    "exampleProjectId": "uZxfQc",
+    "coreLibs": [
+        "cgl"
+    ]
 }
