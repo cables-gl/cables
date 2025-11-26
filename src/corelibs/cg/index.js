@@ -37,9 +37,8 @@ const CG = {
 };
 
 window.CABLES = window.CABLES || {};
-const existing = window.CABLES.CG;
-window.CABLES.CG = { ...existing, ...CG };
-window.CG = window.CABLES.CG;
+window.CABLES.CG = { ...window.CABLES.CG, ...CG };
+window.CG = { ...window.CG, ...CG };
 
 window.glMatrix = GLMatrix.glMatrix;
 window.mat2 = GLMatrix.mat2;
