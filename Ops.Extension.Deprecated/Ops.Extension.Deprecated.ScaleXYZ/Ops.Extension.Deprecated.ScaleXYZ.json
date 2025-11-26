@@ -51,5 +51,8 @@
     ],
     "youtubeids": [
         "5pucC-GuDcs"
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

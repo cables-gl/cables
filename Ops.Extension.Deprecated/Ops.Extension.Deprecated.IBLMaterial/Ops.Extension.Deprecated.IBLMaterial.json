@@ -74,5 +74,8 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

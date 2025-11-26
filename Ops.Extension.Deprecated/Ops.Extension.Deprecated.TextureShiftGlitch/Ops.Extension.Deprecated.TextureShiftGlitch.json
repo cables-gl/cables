@@ -1,5 +1,8 @@
 {
     "id": "f8bac314-bab1-445f-bce6-cb4cd047d4bc",
     "authorName": "pandur",
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

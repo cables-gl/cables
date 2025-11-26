@@ -45,5 +45,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "UTES3I"
+    "exampleProjectId": "UTES3I",
+    "coreLibs": [
+        "cgp"
+    ]
 }

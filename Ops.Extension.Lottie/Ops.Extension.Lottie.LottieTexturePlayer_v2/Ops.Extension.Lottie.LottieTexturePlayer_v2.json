@@ -127,9 +127,11 @@
         "lottie_canvas.min.js"
     ],
     "summary": "Play a Lottie animation in a texture",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "zW0RFn"
+    "exampleProjectId": "zW0RFn",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -104,5 +104,8 @@
                 "text": "cubic or spherical"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

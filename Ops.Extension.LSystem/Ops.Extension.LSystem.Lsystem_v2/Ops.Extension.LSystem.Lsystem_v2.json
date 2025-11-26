@@ -88,8 +88,6 @@
     },
     "summary": "Lsystem generator",
     "issues": "",
-
-
     "youtubeids": [
         "UnnFrRX1QEc"
     ],
@@ -185,5 +183,8 @@
             }
         ]
     },
-    "exampleProjectId": "xk724p"
+    "exampleProjectId": "xk724p",
+    "coreLibs": [
+        "cgl"
+    ]
 }

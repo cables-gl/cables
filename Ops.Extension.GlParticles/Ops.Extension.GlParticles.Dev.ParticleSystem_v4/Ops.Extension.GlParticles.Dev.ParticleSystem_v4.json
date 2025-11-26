@@ -77,7 +77,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "authorName": "pandur",
     "created": 1678368481884,

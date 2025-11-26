@@ -154,7 +154,8 @@
     "exampleProjectId": "kR7_jG",
     "caniusequery": "",
     "coreLibs": [
-        "cgl_deprecatedjson3d"
+        "cgl_deprecatedjson3d",
+        "cgl"
     ],
     "license": "MIT"
 }

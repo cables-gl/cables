@@ -1,8 +1,6 @@
 {
     "summary": "Cellular automata system as feedback loop texture.",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -103,5 +101,8 @@
             "author": "pandur",
             "date": 1671004437249
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

@@ -158,5 +158,8 @@
     },
     "youtubeids": [
         "rAAE9LcFkfw"
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

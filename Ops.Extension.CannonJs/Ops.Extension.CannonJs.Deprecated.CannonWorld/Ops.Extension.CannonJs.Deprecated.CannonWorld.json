@@ -144,7 +144,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_wireframes"
+        "cgl_wireframes",
+        "cgl"
     ],
     "issues": "",
     "youtubeids": []

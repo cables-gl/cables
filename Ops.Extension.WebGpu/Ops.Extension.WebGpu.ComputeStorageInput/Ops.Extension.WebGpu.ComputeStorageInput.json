@@ -34,7 +34,8 @@
         ]
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgp"
     ],
     "summary": "Compute shader GPU buffer storage input",
     "docs": {

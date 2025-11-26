@@ -28,5 +28,8 @@
     },
     "id": "77497755-25a0-4a67-98f4-e869f48cbcd0",
     "authorName": "pandur",
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

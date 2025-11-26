@@ -83,5 +83,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "YndBme"
+    "exampleProjectId": "YndBme",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -121,7 +121,8 @@
     "authorName": "tim",
     "id": "d26c74bd-0c72-4b98-9fdc-2c705b41a861",
     "created": 1520424170655,
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

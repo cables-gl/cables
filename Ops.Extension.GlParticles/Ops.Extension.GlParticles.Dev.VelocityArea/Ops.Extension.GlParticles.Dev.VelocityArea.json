@@ -140,5 +140,8 @@
                 "name": "trigger"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

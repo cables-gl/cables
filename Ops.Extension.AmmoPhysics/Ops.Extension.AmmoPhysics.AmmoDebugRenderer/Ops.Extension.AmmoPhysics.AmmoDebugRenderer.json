@@ -79,12 +79,12 @@
         ]
     },
     "coreLibs": [
-        "ammodebugdrawer"
+        "ammodebugdrawer",
+        "cgl"
     ],
     "summary": "Visualize the physical bodies as lines and points",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {

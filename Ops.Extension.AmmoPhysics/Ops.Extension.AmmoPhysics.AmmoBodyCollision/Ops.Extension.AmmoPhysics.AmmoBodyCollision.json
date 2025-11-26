@@ -79,7 +79,6 @@
     "summary": "Check if physics bodies are colliding",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "S_jPZ4",
     "docs": {
@@ -121,5 +120,8 @@
                 "text": "array of collision objects"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

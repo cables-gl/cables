@@ -167,7 +167,6 @@
     "summary": "Control and move a character in a physics environment",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
@@ -237,5 +236,8 @@
                 "text": "resize meshes underneath to dimensions of this object"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

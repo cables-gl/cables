@@ -3,5 +3,8 @@
     "authorName": "pandur",
     "changelog": [],
     "created": 1724740498037,
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

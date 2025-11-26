@@ -39,5 +39,8 @@
             }
         ]
     },
-    "exampleProjectId": "zKLQ3I"
+    "exampleProjectId": "zKLQ3I",
+    "coreLibs": [
+        "cgl"
+    ]
 }

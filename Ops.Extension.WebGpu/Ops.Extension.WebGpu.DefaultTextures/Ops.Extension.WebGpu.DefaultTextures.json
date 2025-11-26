@@ -39,7 +39,8 @@
         ]
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgp"
     ],
     "exampleProjectId": "nQEVKB",
     "docs": {

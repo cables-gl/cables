@@ -26,5 +26,8 @@
     "docs": {
         "ports": []
     },
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

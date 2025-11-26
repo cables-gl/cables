@@ -68,5 +68,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "hYt34I"
+    "exampleProjectId": "hYt34I",
+    "coreLibs": [
+        "cgp"
+    ]
 }

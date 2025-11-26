@@ -34,5 +34,8 @@
             "date": 1654588384921
         }
     ],
-    "exampleProjectId": "00VeKO"
+    "exampleProjectId": "00VeKO",
+    "coreLibs": [
+        "cgl"
+    ]
 }

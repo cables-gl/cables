@@ -109,7 +109,6 @@
     "summary": "First person camera to use with AmmoCharacter",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "psyNZ4",
     "docs": {
@@ -167,5 +166,8 @@
                 "text": "rotation amount on Y axis"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

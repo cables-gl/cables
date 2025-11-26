@@ -128,5 +128,8 @@
     "summary": "Mouse replacement",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

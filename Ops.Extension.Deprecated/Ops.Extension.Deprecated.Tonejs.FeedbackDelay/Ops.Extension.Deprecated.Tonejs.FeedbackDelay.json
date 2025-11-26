@@ -32,7 +32,8 @@
             }
         ]
     },
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

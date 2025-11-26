@@ -45,5 +45,8 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

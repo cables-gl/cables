@@ -38,5 +38,8 @@
     "authorName": "pandur",
     "id": "b1059b01-539f-4356-b2cc-695cd0f22b0b",
     "created": 1542698229893,
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

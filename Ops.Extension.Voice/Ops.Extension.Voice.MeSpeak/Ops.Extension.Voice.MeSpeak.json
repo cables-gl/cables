@@ -124,5 +124,8 @@
             "src": "./mespeak-core.js",
             "type": "commonjs"
         }
+    ],
+    "coreLibs": [
+        "webaudio"
     ]
 }

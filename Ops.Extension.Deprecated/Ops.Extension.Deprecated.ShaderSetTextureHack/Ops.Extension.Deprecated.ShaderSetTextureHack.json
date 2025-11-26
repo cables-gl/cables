@@ -26,5 +26,8 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

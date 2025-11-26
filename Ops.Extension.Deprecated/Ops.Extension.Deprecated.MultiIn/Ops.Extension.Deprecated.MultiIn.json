@@ -59,5 +59,8 @@
             "author": "pandur",
             "date": 1608539699328
         }
+    ],
+    "coreLibs": [
+        "webaudio"
     ]
 }

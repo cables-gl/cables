@@ -104,5 +104,8 @@
                 "name": "Trigger Out"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

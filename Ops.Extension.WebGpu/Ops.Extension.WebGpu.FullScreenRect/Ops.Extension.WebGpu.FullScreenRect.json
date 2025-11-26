@@ -56,7 +56,8 @@
         ]
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgp"
     ],
     "exampleProjectId": "PNx2LB",
     "docs": {

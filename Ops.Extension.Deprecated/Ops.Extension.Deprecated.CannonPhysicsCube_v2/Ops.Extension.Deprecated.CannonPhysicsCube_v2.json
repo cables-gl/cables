@@ -144,5 +144,8 @@
             }
         ]
     },
-    "exampleProjectId": "9Y8nAQ"
+    "exampleProjectId": "9Y8nAQ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -47,5 +47,9 @@
             "author": "andro",
             "date": 1549890067562
         }
+    ],
+    "coreLibs": [
+        "cgl",
+        "webaudio"
     ]
 }

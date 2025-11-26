@@ -117,8 +117,6 @@
     },
     "summary": "wrapper for echarts-library",
     "issues": "The ECharts WebGL extension library is not supported (yet).",
-
-
     "youtubeids": [
         "moeK10BhmAw"
     ],
@@ -202,5 +200,8 @@
             }
         ]
     },
-    "exampleProjectId": "iY6lbI"
+    "exampleProjectId": "iY6lbI",
+    "coreLibs": [
+        "cgl"
+    ]
 }

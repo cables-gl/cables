@@ -124,5 +124,8 @@
         ]
     },
     "exampleProjectId": "iWzlls",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

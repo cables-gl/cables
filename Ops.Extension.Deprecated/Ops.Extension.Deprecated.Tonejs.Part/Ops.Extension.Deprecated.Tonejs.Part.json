@@ -111,7 +111,8 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

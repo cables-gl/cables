@@ -34,7 +34,8 @@
     "authorName": "tim",
     "id": "3a83de3f-018c-454f-b3c7-ce3533225275",
     "created": 1506352861432,
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

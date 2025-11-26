@@ -20,7 +20,8 @@
         "tone.js"
     ],
     "summary": "Converts a note to a frequency (e.g. C4 to 440)",
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

@@ -48,5 +48,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Render mesh attribultes as color"
+    "summary": "Render mesh attribultes as color",
+    "coreLibs": [
+        "cgp"
+    ]
 }

@@ -86,5 +86,8 @@
         }
     ],
     "exampleProjectId": "00VeKO",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -81,5 +81,8 @@
             }
         ]
     },
-    "exampleProjectId": "h04IN-"
+    "exampleProjectId": "h04IN-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -87,7 +87,9 @@
         "ports": []
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgl",
+        "cgp"
     ],
     "exampleProjectId": "ALyYKB",
     "caniusequery": "webgpu",

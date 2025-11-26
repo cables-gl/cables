@@ -1,8 +1,6 @@
 {
     "summary": "Cellular automata system as feedback loop texture.",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -140,5 +138,8 @@
             "date": 1670509889355
         }
     ],
-    "exampleProjectId": "XLCybk"
+    "exampleProjectId": "XLCybk",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -120,5 +120,8 @@
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "uepop4"
+    "exampleProjectId": "uepop4",
+    "coreLibs": [
+        "cgl"
+    ]
 }

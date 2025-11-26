@@ -274,5 +274,8 @@
         "dF1fP_7fh4Q"
     ],
     "caniusequery": "",
-    "exampleProjectId": "Vtv-1p"
+    "exampleProjectId": "Vtv-1p",
+    "coreLibs": [
+        "cgl"
+    ]
 }

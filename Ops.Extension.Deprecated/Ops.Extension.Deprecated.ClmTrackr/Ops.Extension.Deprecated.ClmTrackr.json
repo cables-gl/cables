@@ -83,5 +83,8 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

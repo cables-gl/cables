@@ -197,5 +197,8 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "amF0KQ"
+    "exampleProjectId": "amF0KQ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

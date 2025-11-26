@@ -126,7 +126,6 @@
     "summary": "Emit Ammo physics bodies by triggering",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "5hQROe",
     "docs": {
@@ -204,5 +203,8 @@
                 "text": "array of quaternion rotations of each object"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

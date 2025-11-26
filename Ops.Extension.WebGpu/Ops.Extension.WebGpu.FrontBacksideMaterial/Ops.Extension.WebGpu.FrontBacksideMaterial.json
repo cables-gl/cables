@@ -75,5 +75,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Show direction of faces as color"
+    "summary": "Show direction of faces as color",
+    "coreLibs": [
+        "cgp"
+    ]
 }

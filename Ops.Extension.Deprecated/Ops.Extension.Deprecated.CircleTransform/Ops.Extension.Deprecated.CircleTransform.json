@@ -115,5 +115,8 @@
     "youtubeids": [
         "1BtgdAfBLlY"
     ],
-    "exampleProjectId": "t4nrH-"
+    "exampleProjectId": "t4nrH-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -83,5 +83,8 @@
             "date": 1694675729161
         }
     ],
-    "exampleProjectId": "4d2t4d"
+    "exampleProjectId": "4d2t4d",
+    "coreLibs": [
+        "cgl"
+    ]
 }

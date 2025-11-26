@@ -163,7 +163,6 @@
     "summary": "Create a physics body/collision shape using a any geometry or select a shape",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "S_jPZ4",
     "docs": {
@@ -241,5 +240,8 @@
                 "text": "connect to geometry objects to automatically resize with cage"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

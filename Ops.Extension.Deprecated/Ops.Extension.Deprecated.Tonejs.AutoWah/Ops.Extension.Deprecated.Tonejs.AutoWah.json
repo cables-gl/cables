@@ -43,7 +43,8 @@
     },
     "id": "48982600-56e8-4d84-9fdd-6caf6ab01247",
     "authorName": "pandur",
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

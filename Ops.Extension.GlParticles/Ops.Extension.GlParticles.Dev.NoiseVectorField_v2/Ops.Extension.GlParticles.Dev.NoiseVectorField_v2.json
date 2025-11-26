@@ -174,5 +174,8 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "tmQeE9"
+    "exampleProjectId": "tmQeE9",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -168,5 +168,8 @@
             "deletedDate": 1605453307857
         }
     ],
-    "exampleProjectId": "mnoRYO"
+    "exampleProjectId": "mnoRYO",
+    "coreLibs": [
+        "cgl"
+    ]
 }

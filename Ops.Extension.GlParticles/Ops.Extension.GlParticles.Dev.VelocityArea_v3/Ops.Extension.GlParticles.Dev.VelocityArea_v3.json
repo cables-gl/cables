@@ -224,5 +224,8 @@
                 "name": "trigger"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

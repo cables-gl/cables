@@ -62,7 +62,6 @@
     "summary": "Create physics bodies from a GLTF File",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Gh2f_4",
     "docs": {
@@ -76,5 +75,8 @@
                 "text": "mass of your physics objects"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

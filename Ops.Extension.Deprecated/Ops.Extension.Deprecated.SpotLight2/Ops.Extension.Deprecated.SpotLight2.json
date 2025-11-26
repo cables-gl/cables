@@ -173,5 +173,8 @@
                 "name": "Arrow Out"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

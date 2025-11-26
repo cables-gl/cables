@@ -71,5 +71,8 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "0X_Eo9"
+    "exampleProjectId": "0X_Eo9",
+    "coreLibs": [
+        "cgl"
+    ]
 }

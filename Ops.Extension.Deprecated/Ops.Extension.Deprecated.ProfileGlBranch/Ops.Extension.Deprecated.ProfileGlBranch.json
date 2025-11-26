@@ -36,5 +36,8 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

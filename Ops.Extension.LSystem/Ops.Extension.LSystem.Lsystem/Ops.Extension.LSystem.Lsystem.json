@@ -208,8 +208,6 @@
         ]
     },
     "issues": "",
-
-
     "youtubeids": [
         "UnnFrRX1QEc"
     ],
@@ -226,5 +224,8 @@
             "date": 1701850813656
         }
     ],
-    "exampleProjectId": "xk724p"
+    "exampleProjectId": "xk724p",
+    "coreLibs": [
+        "cgl"
+    ]
 }

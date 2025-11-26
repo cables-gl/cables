@@ -61,7 +61,8 @@
         ]
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgp"
     ],
     "license": "MIT",
     "exampleProjectId": "1ff0dH",

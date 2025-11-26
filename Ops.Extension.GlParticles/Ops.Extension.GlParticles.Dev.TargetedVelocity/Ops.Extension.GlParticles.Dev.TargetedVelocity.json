@@ -127,5 +127,8 @@
                 "objType": "texture"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -72,5 +72,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "jYheay"
+    "exampleProjectId": "jYheay",
+    "coreLibs": [
+        "cgl"
+    ]
 }

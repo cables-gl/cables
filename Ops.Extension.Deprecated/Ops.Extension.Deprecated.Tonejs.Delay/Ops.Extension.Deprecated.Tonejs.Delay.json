@@ -27,7 +27,8 @@
     "summary": "Audio delay effect",
     "id": "d274e8fe-425b-44b5-aca1-3a7937f883d1",
     "authorName": "pandur",
-    "changelog": [
-
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

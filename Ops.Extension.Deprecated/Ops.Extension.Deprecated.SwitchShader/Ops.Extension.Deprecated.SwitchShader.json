@@ -51,5 +51,8 @@
     "exampleProjectId": "cDlpii",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -83,5 +83,8 @@
             }
         ]
     },
-    "exampleProjectId": "ymwQ2W"
+    "exampleProjectId": "ymwQ2W",
+    "coreLibs": [
+        "cgl"
+    ]
 }

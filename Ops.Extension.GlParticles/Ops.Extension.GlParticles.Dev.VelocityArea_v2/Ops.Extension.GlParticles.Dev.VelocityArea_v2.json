@@ -167,5 +167,8 @@
                 "name": "trigger"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -79,5 +79,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "create an array of div elements"
+    "summary": "create an array of div elements",
+    "coreLibs": [
+        "cgl"
+    ]
 }

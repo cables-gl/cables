@@ -85,7 +85,8 @@
     "issues": "",
     "youtubeids": [],
     "coreLibs": [
-        "cgl_deprecatedjson3d"
+        "cgl_deprecatedjson3d",
+        "cgl"
     ],
     "license": "MIT"
 }

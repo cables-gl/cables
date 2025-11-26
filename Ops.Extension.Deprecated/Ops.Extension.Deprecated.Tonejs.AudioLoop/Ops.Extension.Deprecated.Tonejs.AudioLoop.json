@@ -159,6 +159,8 @@
     },
     "id": "b0dc0d12-702b-474d-a2e7-add74fa37e50",
     "authorName": "pandur",
-    "changelog": [
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
     ]
 }

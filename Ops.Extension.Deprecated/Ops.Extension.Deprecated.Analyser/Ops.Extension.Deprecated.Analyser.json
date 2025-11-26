@@ -41,5 +41,8 @@
     },
     "updated": 1540296734465,
     "created": 1540295388441,
-    "changelog": []
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
 }

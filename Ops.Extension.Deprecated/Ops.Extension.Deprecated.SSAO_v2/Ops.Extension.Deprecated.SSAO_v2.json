@@ -155,5 +155,8 @@
                 "text": "amount of noise over the SSAO effect range"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

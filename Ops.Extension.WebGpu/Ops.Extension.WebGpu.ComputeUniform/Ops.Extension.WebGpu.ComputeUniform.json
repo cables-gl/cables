@@ -50,7 +50,8 @@
         ]
     },
     "coreLibs": [
-        "cgp_webgpuop"
+        "cgp_webgpuop",
+        "cgp"
     ],
     "summary": "Add a uniform input to a compute shader composition",
     "docs": {

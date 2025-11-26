@@ -108,10 +108,12 @@
     },
     "summary": "Play a Lottie animation in a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "7mG8w0"
+    "exampleProjectId": "7mG8w0",
+    "coreLibs": [
+        "cgl"
+    ]
 }

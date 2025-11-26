@@ -122,7 +122,8 @@
         "ammo.wasm.js"
     ],
     "coreLibs": [
-        "ammoworld"
+        "ammoworld",
+        "cgl"
     ],
     "summary": "Simulate physical world",
     "issues": "",
