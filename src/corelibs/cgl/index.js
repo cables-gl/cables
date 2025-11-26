@@ -43,8 +43,8 @@ const CGL = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGL = window.CABLES.CGL || CGL;
-window.CGL = window.CGL || CGL;
+window.CABLES.CGL = { ...window.CABLES.CGL, ...CGL };
+window.CGL = { ...window.CGL, ...CGL };
 
 window.cgInitialized = false;
 window.addEventListener("INIT_CG", (e) =>
