@@ -164,8 +164,6 @@ export class Patch extends Events
         this.cgp = null;
 
         this._subpatchOpCache = {};
-        console.log("patch", this);
-
         window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
 
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
