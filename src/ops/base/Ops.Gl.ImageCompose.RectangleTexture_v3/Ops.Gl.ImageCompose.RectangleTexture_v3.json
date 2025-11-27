@@ -172,5 +172,8 @@
             }
         ]
     },
-    "exampleProjectId": "TmgMD-"
+    "exampleProjectId": "TmgMD-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

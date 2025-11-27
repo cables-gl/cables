@@ -31,5 +31,8 @@
         "ports": []
     },
     "exampleProjectId": "PmTYnO",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

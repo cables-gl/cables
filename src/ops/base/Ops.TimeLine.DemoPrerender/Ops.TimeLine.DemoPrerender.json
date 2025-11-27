@@ -71,11 +71,13 @@
     },
     "summary": "Prerenderer based on timeline progress",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "sewM2h"
+    "exampleProjectId": "sewM2h",
+    "coreLibs": [
+        "cgl"
+    ]
 }

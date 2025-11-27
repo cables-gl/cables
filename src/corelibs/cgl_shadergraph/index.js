@@ -1,5 +1,7 @@
-import { ShaderGraphOp } from "./cgl_shadergraphop.js";
-import { ShaderGraph } from "./cgl_shadergraph.js";
+import { ShaderGraphOp } from "./shadergraphop.js";
+import { ShaderGraphOpCgl } from "./shadergraphop_cgl.js";
+import { ShaderGraphOpCgp } from "./shadergraphop_cgp.js";
 import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
+import { ShaderGraph } from "./cgl_shadergraph.js";
 
-export { ShaderGraph, ShaderGraphOp, ShaderGraphProgram };
+export { ShaderGraph, ShaderGraphOp, ShaderGraphProgram, ShaderGraphOpCgl, ShaderGraphOpCgp };

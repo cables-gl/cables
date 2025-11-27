@@ -140,5 +140,8 @@
         "ports": []
     },
     "exampleProjectId": "M3QiQ6",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

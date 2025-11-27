@@ -24,5 +24,8 @@
     "summary": "shader effect example template",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

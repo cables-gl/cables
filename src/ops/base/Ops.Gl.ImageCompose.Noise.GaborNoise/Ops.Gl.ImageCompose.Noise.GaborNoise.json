@@ -90,5 +90,8 @@
     ],
     "license": "MIT",
     "summary": "Render \"gabor noise\" into a texture",
-    "exampleProjectId": "PWDdQm"
+    "exampleProjectId": "PWDdQm",
+    "coreLibs": [
+        "cgl"
+    ]
 }

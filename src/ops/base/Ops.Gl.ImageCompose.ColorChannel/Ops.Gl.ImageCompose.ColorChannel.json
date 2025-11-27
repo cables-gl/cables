@@ -44,7 +44,6 @@
     "created": 1540831235400,
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -56,5 +55,8 @@
             "author": "pandur",
             "date": 1701856024008
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

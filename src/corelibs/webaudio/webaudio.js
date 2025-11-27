@@ -445,6 +445,7 @@ export class WebAudio
 const WEBAUDIO = new WebAudio();
 
 window.CABLES = window.CABLES || {};
-window.CABLES.WEBAUDIO = WEBAUDIO;
+window.CABLES.WEBAUDIO = { ...window.CABLES.WEBAUDIO, ...WEBAUDIO };
+window.WEBAUDIO = { ...window.WEBAUDIO, ...WEBAUDIO };
 
 export { WEBAUDIO };

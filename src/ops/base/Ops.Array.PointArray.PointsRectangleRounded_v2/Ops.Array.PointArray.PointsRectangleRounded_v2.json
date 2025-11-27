@@ -125,5 +125,8 @@
     ],
     "license": "MIT",
     "cloneOf": "86c99074-4929-44d0-a826-49e7f8bdf5c4",
-    "exampleProjectId": "A7nLgQ"
+    "exampleProjectId": "A7nLgQ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

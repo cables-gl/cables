@@ -68,5 +68,8 @@
         }
     ],
     "exampleProjectId": "xR9zIR",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

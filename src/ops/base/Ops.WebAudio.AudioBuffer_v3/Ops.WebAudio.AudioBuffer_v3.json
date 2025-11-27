@@ -111,5 +111,9 @@
         ]
     },
     "exampleProjectId": "xEL0rn",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

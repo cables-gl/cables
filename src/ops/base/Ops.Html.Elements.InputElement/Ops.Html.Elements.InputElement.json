@@ -137,5 +137,8 @@
         "ports": []
     },
     "summary": "HTML input/textarea element to allow the user to enter text ",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -81,8 +81,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "code cleanup - ports",
@@ -90,5 +88,8 @@
             "date": 1559051604971
         }
     ],
-    "exampleProjectId": "8RexP8"
+    "exampleProjectId": "8RexP8",
+    "coreLibs": [
+        "cgl"
+    ]
 }

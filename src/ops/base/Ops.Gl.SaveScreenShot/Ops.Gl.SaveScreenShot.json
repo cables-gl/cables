@@ -39,5 +39,8 @@
         ]
     },
     "summary": "download the current screen content as png file",
-    "exampleProjectId": "OB0Qmi"
+    "exampleProjectId": "OB0Qmi",
+    "coreLibs": [
+        "cgl"
+    ]
 }

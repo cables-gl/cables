@@ -156,7 +156,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "pdjoOb",
     "changelog": [
@@ -181,5 +180,8 @@
             "author": "stephan",
             "date": 1701855447130
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

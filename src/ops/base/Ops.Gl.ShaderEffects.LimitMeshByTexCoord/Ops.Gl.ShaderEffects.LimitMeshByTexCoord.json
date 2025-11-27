@@ -146,5 +146,8 @@
             "deletedDate": 1605511816392
         }
     ],
-    "exampleProjectId": "pHfgJ5"
+    "exampleProjectId": "pHfgJ5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

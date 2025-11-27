@@ -52,7 +52,6 @@
         "ports": []
     },
     "youtubeid": "",
-
     "changelog": [
         {
             "message": "new output: landscape - true if canvas width > height",
@@ -65,5 +64,8 @@
             "date": 1572939393002
         }
     ],
-    "exampleProjectId": "FcZRn6"
+    "exampleProjectId": "FcZRn6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

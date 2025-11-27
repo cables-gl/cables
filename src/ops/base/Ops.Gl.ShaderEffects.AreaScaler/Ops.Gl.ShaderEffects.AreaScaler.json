@@ -56,5 +56,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LXN7D-"
+    "exampleProjectId": "LXN7D-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

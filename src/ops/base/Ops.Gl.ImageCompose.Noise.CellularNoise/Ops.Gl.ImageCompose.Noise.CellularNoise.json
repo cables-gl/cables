@@ -111,7 +111,6 @@
     "id": "62fa72eb-a607-4397-8b44-f8fd2a6cbe34",
     "created": 1533920280260,
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -131,5 +130,8 @@
             "date": 1701855015628
         }
     ],
-    "exampleProjectId": "9DZmT6"
+    "exampleProjectId": "9DZmT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

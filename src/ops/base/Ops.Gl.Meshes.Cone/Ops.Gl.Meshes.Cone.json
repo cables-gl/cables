@@ -86,5 +86,8 @@
     "youtubeids": [],
     "exampleProjectId": "fGA7W6",
     "caniusequery": "",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -71,7 +71,10 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "WlLDwp"
+    "exampleProjectId": "WlLDwp",
+    "coreLibs": [
+        "cgl",
+        "webaudio"
+    ]
 }

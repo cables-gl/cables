@@ -44,9 +44,11 @@
     },
     "summary": "execute glGetError after every gl command and log to browser console",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -16,7 +16,6 @@
     "created": 1608532639068,
     "summary": "get current set shader",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -39,5 +38,8 @@
             }
         ]
     },
-    "exampleProjectId": "BweOVl"
+    "exampleProjectId": "BweOVl",
+    "coreLibs": [
+        "cgl"
+    ]
 }

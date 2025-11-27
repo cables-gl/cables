@@ -63,5 +63,8 @@
             }
         ]
     },
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

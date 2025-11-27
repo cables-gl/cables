@@ -165,5 +165,8 @@
             }
         ]
     },
-    "exampleProjectId": "sfikWi"
+    "exampleProjectId": "sfikWi",
+    "coreLibs": [
+        "cgl"
+    ]
 }

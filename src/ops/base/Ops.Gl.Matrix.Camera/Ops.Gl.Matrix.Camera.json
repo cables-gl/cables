@@ -185,7 +185,6 @@
         ]
     },
     "youtubeid": "vIeAMFGA96E",
-
     "issues": "",
     "todos": [
         {
@@ -195,5 +194,8 @@
             "date": 1599818244067
         }
     ],
-    "exampleProjectId": "PSw73e"
+    "exampleProjectId": "PSw73e",
+    "coreLibs": [
+        "cgl"
+    ]
 }

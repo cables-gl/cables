@@ -94,5 +94,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "tG4xFs"
+    "exampleProjectId": "tG4xFs",
+    "coreLibs": [
+        "cgl"
+    ]
 }

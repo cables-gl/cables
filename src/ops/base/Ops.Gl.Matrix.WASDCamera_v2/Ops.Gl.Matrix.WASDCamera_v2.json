@@ -189,5 +189,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "oLCaao",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

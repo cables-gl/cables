@@ -107,7 +107,6 @@
     },
     "summary": "record, playback and download audio",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -177,5 +176,8 @@
             }
         ]
     },
-    "exampleProjectId": "nEKhbI"
+    "exampleProjectId": "nEKhbI",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

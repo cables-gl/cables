@@ -158,10 +158,12 @@
     "created": 1646838589132,
     "summary": "Draw 2d circle into texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "asslT6"
+    "exampleProjectId": "asslT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

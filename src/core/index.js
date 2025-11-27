@@ -1,4 +1,3 @@
-import * as GLMatrix from "gl-matrix";
 import { Events, Logger } from "cables-shared-client";
 import * as utils from "./utils.js";
 import { Anim } from "./anim.js";
@@ -13,6 +12,7 @@ import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
 import { AnimKey } from "./anim_key.js";
+import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
 
@@ -38,6 +38,7 @@ CABLES.now = now;
 CABLES.internalNow = internalNow;
 CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
+CABLES.RenderLoop = RenderLoop;
 
 CABLES.shortId = utils.shortId;
 CABLES.uuid = utils.uuid;
@@ -66,12 +67,11 @@ CABLES.OPS = [];
 CABLES.utils = utils;
 CABLES.CONSTANTS = CONSTANTS;
 
-CABLES.GLMatrix = GLMatrix;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
 
 export default CABLES;
-export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now };
+export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

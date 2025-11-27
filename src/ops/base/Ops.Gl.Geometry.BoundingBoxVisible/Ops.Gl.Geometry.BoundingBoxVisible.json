@@ -69,10 +69,12 @@
     },
     "summary": "Test if a boundingbox could be visible in the current viewport",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "DAhGve"
+    "exampleProjectId": "DAhGve",
+    "coreLibs": [
+        "cgl"
+    ]
 }

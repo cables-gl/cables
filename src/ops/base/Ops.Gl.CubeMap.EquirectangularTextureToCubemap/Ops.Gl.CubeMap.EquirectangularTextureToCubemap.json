@@ -30,7 +30,8 @@
     "authorName": "simod",
     "created": 1591782786302,
     "coreLibs": [
-        "cgl_cubemapframebuffer"
+        "cgl_cubemapframebuffer",
+        "cgl"
     ],
     "layout": {
         "portsIn": [
@@ -76,7 +77,6 @@
     },
     "summary": "convert an equirectangular map to a cubemap",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

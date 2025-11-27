@@ -51,7 +51,6 @@
     "summary": "convert screen coordinates to 3d coordinates",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -80,5 +79,8 @@
             }
         ]
     },
-    "exampleProjectId": "mDiCq6"
+    "exampleProjectId": "mDiCq6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

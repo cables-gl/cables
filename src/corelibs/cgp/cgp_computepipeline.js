@@ -87,13 +87,13 @@ export class ComputePipeline extends Pipeline
             this.#rebuildNumBindingGroups = false;
 
             this.#pipeCfg = this.getPipelineObject(shader);
-            console.log(this.#pipeCfg);
+            // console.log(this.#pipeCfg);
 
             this.#old.device = this.cgp.device;
             this.#old.shader = shader;
             this.#old.mesh = mesh;
             this.#isValid = true;
-            console.log(this.#pipeCfg);
+            // console.log(this.#pipeCfg);
             try
             {
                 this.#computePipeline = this.cgp.device.createComputePipeline(this.#pipeCfg);
@@ -144,7 +144,7 @@ export class ComputePipeline extends Pipeline
                 "entryPoint": shader.options.entryPoint || "main"
             }
         };
-        console.log("pipecft", pipeCfg, bindGroupLayouts);
+        // console.log("pipecft", pipeCfg, bindGroupLayouts);
 
         return pipeCfg;
     }
@@ -178,7 +178,7 @@ export class ComputePipeline extends Pipeline
         else if (workGroups.length == 2) this.#computePassEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8);
         else if (workGroups.length == 3) this.#computePassEncoder.dispatchWorkgroups(workGroups[0] || 8, workGroups[1] || 8, workGroups[2] || 8);
         else console.log("workgroups length wrong,,,");
-
+        // console.log("workgr ", workGroups);
         this.#computePassEncoder.end();
 
         this.cgp.profileData.count("compute pipe", this.name);

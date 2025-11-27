@@ -44,11 +44,11 @@
         ]
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "set vertex positions of a mesh from a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

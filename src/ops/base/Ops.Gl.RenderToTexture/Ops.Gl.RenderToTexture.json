@@ -86,7 +86,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [
         "XmOk70epdf0"
     ],
@@ -97,5 +96,8 @@
             "author": "pandur",
             "date": 1694675823213
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

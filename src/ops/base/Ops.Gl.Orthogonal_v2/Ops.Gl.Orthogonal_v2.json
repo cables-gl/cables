@@ -73,7 +73,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "94Aycg"
+    "exampleProjectId": "94Aycg",
+    "coreLibs": [
+        "cgl"
+    ]
 }

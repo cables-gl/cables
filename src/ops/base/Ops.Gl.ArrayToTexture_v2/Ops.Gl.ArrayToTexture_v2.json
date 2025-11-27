@@ -158,5 +158,8 @@
         ]
     },
     "exampleProjectId": "cOlh_C",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

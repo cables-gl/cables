@@ -114,7 +114,6 @@
     },
     "summary": "Create a texture of stripes /lines",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -177,5 +176,8 @@
         ]
     },
     "caniusequery": "",
-    "exampleProjectId": "dYhlT6"
+    "exampleProjectId": "dYhlT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

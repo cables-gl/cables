@@ -78,7 +78,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "flURFr",
     "changelog": [
@@ -103,5 +102,8 @@
             "author": "stephan",
             "date": 1701856192577
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

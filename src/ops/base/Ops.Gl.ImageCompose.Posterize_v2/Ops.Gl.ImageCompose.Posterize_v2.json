@@ -65,5 +65,8 @@
             "date": 1701856320425
         }
     ],
-    "exampleProjectId": "_MMoT6"
+    "exampleProjectId": "_MMoT6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

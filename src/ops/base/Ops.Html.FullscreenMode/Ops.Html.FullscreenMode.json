@@ -61,5 +61,8 @@
     "docs": {
         "ports": []
     },
-    "caniusequery": "Fullscreen API"
+    "caniusequery": "Fullscreen API",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -34,7 +34,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "license": "MIT",
     "summary": "recalculate face normals in vertex shader"

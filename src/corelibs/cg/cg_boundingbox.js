@@ -1,7 +1,6 @@
 import { mat4, vec3 } from "gl-matrix";
 import { Op, utils } from "cables";
 import { Geometry } from "./cg_geom.js";
-import { CglContext } from "../cgl/cgl_state.js";
 
 /**
  * bounding box

@@ -77,7 +77,6 @@
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",
-
     "youtubeids": [
         "xkIrVtSU4FU"
     ],
@@ -106,5 +105,8 @@
         ]
     },
     "exampleProjectId": "ND9kCU",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

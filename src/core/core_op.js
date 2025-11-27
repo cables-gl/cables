@@ -1,6 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
-import { CglContext } from "cables-corelibs/cgl/cgl_state.js";
 import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
@@ -1272,23 +1270,15 @@ export class Op extends Events
 
     /**
      * create output texture port
+     * @abstract
      * @param {String} name
      * @return {Port} created port
      * @param {any} v
      */
     outTexture(name, v)
     {
-        const p = this.addOutPort(
-            new Port(this, name, Port.TYPE_OBJECT, {
-                "preview": true,
-                "objType": "texture",
-                "display": "texture"
-            })
-        );
-        if (v !== undefined) p.setRef(v || CGL.Texture.getEmptyTexture(this.patch.cgl));
-
-        p.ignoreValueSerialize = true;
-        return p;
+        console.log("outtexture not overwritte.,..");
+        return null;
     }
 
     /**
@@ -1803,10 +1793,15 @@ export class Op extends Events
         if (this.patch.isEditorMode()) return Patch.getGui().patchView.isCurrentOp(this);
     }
 
-    checkGraphicsApi(api = CglContext.API_WEBGL)
+    /**
+     *
+     * @param {Number} api graphics api, 1 = webgl, 2 = webgpu
+     */
+    checkGraphicsApi(api = 1)
     {
         if (this.patch.isEditorMode())
             if (this.patch.cg && this.patch.cg.gApi != api)
                 this.setUiError("wronggapi", "Wrong graphics API", 2);
+
     }
 }

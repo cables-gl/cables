@@ -332,7 +332,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "dr8EeE"
+    "exampleProjectId": "dr8EeE",
+    "coreLibs": [
+        "cgl"
+    ]
 }

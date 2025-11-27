@@ -103,13 +103,13 @@
     ],
     "summary": "do not draw pixels inside a defined 3d area",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "GQiw18"
 }

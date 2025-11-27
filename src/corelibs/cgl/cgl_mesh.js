@@ -1,10 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
-import { CONSTANTS } from "./constants.js";
-import { Geometry } from "../cg/cg_geom.js";
-import { CgMesh } from "../cg/cg_mesh.js";
-import { CgShader } from "../cg/cg_shader.js";
+import { CONSTANTS, Geometry, CgMesh, CgShader } from "../cg/index.js";
 
 import { CglContext } from "./cgl_state.js";
 import { Shader } from "./cgl_shader.js";

@@ -119,7 +119,6 @@
     },
     "summary": "3 filters in one - an eq to quickly process an audio signal",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -181,5 +180,8 @@
             }
         ]
     },
-    "exampleProjectId": "tD2Vxp"
+    "exampleProjectId": "tD2Vxp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

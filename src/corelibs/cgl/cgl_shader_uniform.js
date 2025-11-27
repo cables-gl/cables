@@ -1,6 +1,5 @@
 import { Port } from "cables";
-import { CgUniform } from "../cg/cg_uniform.js";
-import { CgShader } from "../cg/cg_shader.js";
+import { CgUniform, CgShader } from "../cg/index.js";
 
 /**
  * Shader uniforms

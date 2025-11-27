@@ -108,11 +108,12 @@
         }
     ],
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RjKQWp"
+    "exampleProjectId": "RjKQWp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

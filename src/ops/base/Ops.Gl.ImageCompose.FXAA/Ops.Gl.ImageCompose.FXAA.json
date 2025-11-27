@@ -67,5 +67,8 @@
             "date": 1701854775052
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

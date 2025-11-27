@@ -99,7 +99,6 @@
     },
     "summary": "Creates a lens dirt like texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -149,5 +148,8 @@
             }
         ]
     },
-    "exampleProjectId": "vwgWMX"
+    "exampleProjectId": "vwgWMX",
+    "coreLibs": [
+        "cgl"
+    ]
 }

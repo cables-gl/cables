@@ -53,5 +53,8 @@
             "date": 1701855752994
         }
     ],
-    "exampleProjectId": "2lC9W6"
+    "exampleProjectId": "2lC9W6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

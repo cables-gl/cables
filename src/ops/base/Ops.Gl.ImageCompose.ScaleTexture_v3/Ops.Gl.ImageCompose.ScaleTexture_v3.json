@@ -130,5 +130,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "kj_Zbx",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

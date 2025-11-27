@@ -144,7 +144,6 @@
     },
     "summary": "Generates different 2d shapes to use as a texture",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -226,5 +225,8 @@
             }
         ]
     },
-    "exampleProjectId": "XBGbPO"
+    "exampleProjectId": "XBGbPO",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -74,5 +74,8 @@
             "date": 1720622799267
         }
     ],
-    "exampleProjectId": "0zHu8i"
+    "exampleProjectId": "0zHu8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

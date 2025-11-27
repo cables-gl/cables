@@ -105,5 +105,8 @@
                 "text": "Returns true if node exists in the GLTF scene op"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -28,5 +28,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "KhFA8i"
+    "exampleProjectId": "KhFA8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

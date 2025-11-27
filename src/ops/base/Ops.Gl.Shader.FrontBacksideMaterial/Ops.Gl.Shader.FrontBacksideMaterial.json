@@ -24,5 +24,8 @@
     },
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "Lm6p9r"
+    "exampleProjectId": "Lm6p9r",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -121,7 +121,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "texture projection on meshes",
     "issues": "",

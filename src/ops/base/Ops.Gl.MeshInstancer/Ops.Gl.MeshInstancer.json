@@ -91,7 +91,9 @@
             }
         ]
     },
-
     "issues": "",
-    "exampleProjectId": "oOsjJ5"
+    "exampleProjectId": "oOsjJ5",
+    "coreLibs": [
+        "cgl"
+    ]
 }

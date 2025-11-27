@@ -42,5 +42,8 @@
             "date": 1548415008544
         }
     ],
-    "exampleProjectId": "aSB6On"
+    "exampleProjectId": "aSB6On",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -70,5 +70,8 @@
     "summary": "Create an image file from a canvas",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

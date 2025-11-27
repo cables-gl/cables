@@ -10,9 +10,8 @@ import { MESHES } from "./cgl_simplerect.js";
 import { getWheelSpeed, getWheelDelta, onLoadingAssetsFinished } from "./cgl_utils.js";
 import { Texture } from "./cgl_texture.js";
 import { TextureEffect } from "./cgl_textureeffect.js";
-import { CONSTANTS } from "./constants.js";
-import { ProfileData } from "./cgl_profiledata.js";
-import { MatrixStack, Geometry, BoundingBox } from "../cg/index.js";
+import { CONSTANTS } from "../cg/constants.js";
+import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 
 const CGL = {
@@ -44,8 +43,17 @@ const CGL = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGL = window.CABLES.CGL || CGL;
-window.CGL = window.CGL || CGL;
+window.CABLES.CGL = { ...window.CABLES.CGL, ...CGL };
+window.CGL = { ...window.CGL, ...CGL };
+
+window.cgInitialized = false;
+window.addEventListener("INIT_CG", (e) =>
+{
+    if (window.cgInitialized && !CABLES.UI) return;
+    window.cgInitialized = true;
+
+    const cgl = new CglContext(e.detail);
+});
 
 /**
  * @param {number} time

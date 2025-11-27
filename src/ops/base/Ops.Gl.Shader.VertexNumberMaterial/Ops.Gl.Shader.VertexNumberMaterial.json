@@ -22,5 +22,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "x2PmHf"
+    "exampleProjectId": "x2PmHf",
+    "coreLibs": [
+        "cgl"
+    ]
 }

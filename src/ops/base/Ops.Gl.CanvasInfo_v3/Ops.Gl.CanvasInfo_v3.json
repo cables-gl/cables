@@ -80,5 +80,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "2yaD8i"
+    "exampleProjectId": "2yaD8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -1,12 +1,12 @@
 import { Logger } from "cables-shared-client";
 import { Op, Patch, utils } from "cables";
-import { CONSTANTS } from "./constants.js";
+import { CONSTANTS } from "../cg/constants.js";
 import { Shader } from "./cgl_shader.js";
-import { Geometry } from "../cg/cg_geom.js";
-import { CgContext } from "../cg/cg_context.js";
+import { CgContext, Geometry } from "../cg/index.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Mesh } from "./cgl_mesh.js";
 import { Texture } from "./cgl_texture.js";
+import { CglRenderLoop } from "./cgl_renderloop.js";
 
 export const BLENDS = {
     "BLEND_NONE": 0,
@@ -26,15 +26,17 @@ export class CglContext extends CgContext
 {
     #cursor = "auto";
 
+    frameStartTime = 0;
+
     /**
      * @param {Patch} _patch
      */
     constructor(_patch)
     {
         super(_patch);
-
         this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
+        _patch.cgl = this;
 
         /** @deprecated */
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
@@ -91,17 +93,24 @@ export class CglContext extends CgContext
         this._enabledExtensions = {};
 
         this.errorShader = null;
+
+        this.setCanvas(_patch.config.glCanvasId || _patch.config.glCanvas || "glcanvas");
+        if (_patch.config.glCanvasResizeToWindow === true) this.setAutoResize("window");
+        if (_patch.config.glCanvasResizeToParent === true) this.setAutoResize("parent");
+
+        if (this.aborted) _patch.aborted = true;
+
+        _patch.on(Patch.EVENT_DISPOSE, () =>
+        {
+            this.dispose();
+        });
+        _patch.on("patchClearStart", () =>
+        {
+            this.TextureEffectMesh = null;
+        });
+
+        this.renderLoop = new CglRenderLoop(this, _patch);
     }
-
-    // set pixelDensity(p)
-    // {
-    //     this._pixelDensity = p;
-    // }
-
-    // get pixelDensity()
-    // {
-    //     return this._pixelDensity;
-    // }
 
     get viewPort()
     {

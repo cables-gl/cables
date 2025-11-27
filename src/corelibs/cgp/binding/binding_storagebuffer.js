@@ -10,6 +10,7 @@ export class BindingStorage extends Binding
     /** @type {CgpGguBuffer} */
     cgpbuffer = null;
     bindingType = "read-only-storage";
+    type = "f32";
 
     /**
      * Description
@@ -20,6 +21,7 @@ export class BindingStorage extends Binding
     constructor(cgp, name, options)
     {
         super(cgp, name, options);
+        if (options.type) this.type = options.type;
         this.cgpbuffer = options.cgpBuffer || new CgpGguBuffer(cgp, "temp", [0, 0, 0, 0]);
     }
 
@@ -83,7 +85,7 @@ export class BindingStorage extends Binding
         str += "@binding(" + this.bindNum + ") ";
 
         str += "var<storage," + access + "> ";
-        let typeStr = "array<f32>";
+        let typeStr = "array<" + this.type + ">";
         str += this.name + ": " + typeStr + ";\n";
 
         return str + "\n";

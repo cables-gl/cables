@@ -155,11 +155,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "Colorize all meshes around current position",
     "issues": "",
-
     "youtubeids": [
         "cUU0fNw3rEg"
     ],

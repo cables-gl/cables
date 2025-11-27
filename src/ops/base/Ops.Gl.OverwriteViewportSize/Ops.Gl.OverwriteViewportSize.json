@@ -28,9 +28,11 @@
     },
     "summary": "Force a manually set viewport size for connected ops",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

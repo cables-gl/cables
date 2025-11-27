@@ -55,7 +55,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_copytexture"
+        "cgl_copytexture",
+        "cgl"
     ],
     "authorName": "pandur",
     "created": 1673434160072,
@@ -125,7 +126,6 @@
     "summary": "screen space ambient occlusion from depth texture",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

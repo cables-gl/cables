@@ -48,8 +48,6 @@
         "ports": []
     },
     "issues": "",
-
-
     "youtubeids": [],
     "exampleProjectId": "J4KL_4",
     "changelog": [
@@ -65,5 +63,8 @@
             "author": "pandur",
             "date": 1701856091561
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

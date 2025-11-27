@@ -15,7 +15,7 @@ const
 
 geomOut.ignoreValueSerialize = true;
 
-const geom = new CGL.Geometry("rectangle");
+const geom = new CG.Geometry("rectangle");
 
 doRender.setUiAttribs({ "title": "Render" });
 render.setUiAttribs({ "title": "Trigger" });

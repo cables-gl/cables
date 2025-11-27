@@ -47,5 +47,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "bg73Qc"
+    "exampleProjectId": "bg73Qc",
+    "coreLibs": [
+        "cgl"
+    ]
 }

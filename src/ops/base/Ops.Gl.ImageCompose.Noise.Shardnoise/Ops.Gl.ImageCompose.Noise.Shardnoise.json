@@ -113,5 +113,8 @@
     ],
     "license": "MIT",
     "exampleProjectId": "GSZtvs",
-    "summary": "Render \"shard noise\" into a texture"
+    "summary": "Render \"shard noise\" into a texture",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -162,5 +162,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "bQhm8i"
+    "exampleProjectId": "bQhm8i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

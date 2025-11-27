@@ -68,10 +68,11 @@
     "created": 1512035659193,
     "summary": "transforms view to look from eye to center ",
     "youtubeid": "vIeAMFGA96E",
-
     "docs": {
         "ports": []
     },
-
-    "exampleProjectId": "_JlGz6"
+    "exampleProjectId": "_JlGz6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

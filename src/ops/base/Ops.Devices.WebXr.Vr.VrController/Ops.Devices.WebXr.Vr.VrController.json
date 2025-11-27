@@ -169,9 +169,11 @@
         ]
     },
     "summary": "tracking of vr hand controller",
-
     "exampleProjectId": "IzKYx5",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

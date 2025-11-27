@@ -168,7 +168,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "GQiw18"
+    "exampleProjectId": "GQiw18",
+    "coreLibs": [
+        "cgl"
+    ]
 }

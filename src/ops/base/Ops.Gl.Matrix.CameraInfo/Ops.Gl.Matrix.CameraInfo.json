@@ -140,7 +140,6 @@
     },
     "summary": "get camera attributes from current camera/orbit controls",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -238,5 +237,8 @@
             }
         ]
     },
-    "exampleProjectId": "YfJ4S-"
+    "exampleProjectId": "YfJ4S-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

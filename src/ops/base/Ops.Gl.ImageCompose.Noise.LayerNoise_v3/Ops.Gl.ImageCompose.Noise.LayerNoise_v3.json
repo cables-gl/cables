@@ -114,7 +114,6 @@
     },
     "summary": "Multilayer perlin noise variation",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -176,5 +175,8 @@
             }
         ]
     },
-    "exampleProjectId": "NSYy0t"
+    "exampleProjectId": "NSYy0t",
+    "coreLibs": [
+        "cgl"
+    ]
 }

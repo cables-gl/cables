@@ -70,11 +70,13 @@
     },
     "summary": "output all transformations of nodes starting with [search]",
     "issues": "",
-
     "youtubeids": [
         "I_eD5nml_5A"
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

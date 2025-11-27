@@ -291,5 +291,8 @@
         ]
     },
     "exampleProjectId": "gWkghi",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

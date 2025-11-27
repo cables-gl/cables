@@ -25,5 +25,8 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "BweOVl"
+    "exampleProjectId": "BweOVl",
+    "coreLibs": [
+        "cgl"
+    ]
 }

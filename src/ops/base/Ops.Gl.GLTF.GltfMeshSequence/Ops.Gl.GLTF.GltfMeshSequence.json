@@ -75,5 +75,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "FiJsxn"
+    "exampleProjectId": "FiJsxn",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -72,5 +72,8 @@
     "exampleProjectId": "RJXV7i",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

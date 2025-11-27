@@ -111,7 +111,6 @@
     "id": "7073186c-b776-48c2-a01e-041df88ad88a",
     "created": 1520431410269,
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "DmWmT6",
     "changelog": [
@@ -121,5 +120,8 @@
             "author": "stephan",
             "date": 1701855168628
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

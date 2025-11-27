@@ -132,5 +132,8 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "fsOPNS"
+    "exampleProjectId": "fsOPNS",
+    "coreLibs": [
+        "cgl"
+    ]
 }

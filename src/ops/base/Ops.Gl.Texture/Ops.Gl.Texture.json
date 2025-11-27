@@ -129,5 +129,8 @@
             "deletedDate": 1645623727624
         }
     ],
-    "exampleProjectId": "iRKrD-"
+    "exampleProjectId": "iRKrD-",
+    "coreLibs": [
+        "cgl"
+    ]
 }

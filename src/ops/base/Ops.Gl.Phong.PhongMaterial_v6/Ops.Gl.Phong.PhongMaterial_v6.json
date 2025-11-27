@@ -505,6 +505,8 @@
         ]
     },
     "exampleProjectId": "L3HqYa",
-    "coreLibs": [],
+    "coreLibs": [
+        "cgl"
+    ],
     "license": "MIT"
 }

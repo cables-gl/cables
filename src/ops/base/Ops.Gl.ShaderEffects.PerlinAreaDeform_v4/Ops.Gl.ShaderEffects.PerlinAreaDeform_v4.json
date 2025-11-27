@@ -104,11 +104,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "Displace vertices using perlin noise animation",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []

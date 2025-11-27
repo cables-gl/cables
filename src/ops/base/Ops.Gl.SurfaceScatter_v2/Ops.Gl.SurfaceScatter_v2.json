@@ -96,7 +96,6 @@
     ],
     "summary": "Scatter an object on the surface of a mesh with different distribution methods",
     "issues": "",
-
     "youtubeids": [
         "tQr9hdNqBmQ"
     ],
@@ -104,5 +103,8 @@
         "ports": []
     },
     "exampleProjectId": "cfUzre",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

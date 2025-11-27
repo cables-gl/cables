@@ -72,5 +72,8 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "oKRY7i"
+    "exampleProjectId": "oKRY7i",
+    "coreLibs": [
+        "cgl"
+    ]
 }

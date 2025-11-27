@@ -104,11 +104,11 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "texture projection on meshes",
     "issues": "",
-
     "youtubeids": [
         "0Xgj7wKl7Ko",
         "DW9U5tv1GHM"

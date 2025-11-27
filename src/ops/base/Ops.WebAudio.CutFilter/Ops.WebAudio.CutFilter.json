@@ -98,7 +98,6 @@
     },
     "summary": "dj style filter (lowpass and highpass)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -144,5 +143,8 @@
             }
         ]
     },
-    "exampleProjectId": "6SsZxp"
+    "exampleProjectId": "6SsZxp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

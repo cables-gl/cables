@@ -92,5 +92,8 @@
             "date": 1701856058064
         }
     ],
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

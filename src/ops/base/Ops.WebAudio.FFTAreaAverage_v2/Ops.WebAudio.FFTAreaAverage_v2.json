@@ -109,7 +109,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -123,5 +122,8 @@
             "date": 1607446280480
         }
     ],
-    "exampleProjectId": "F6Fhyp"
+    "exampleProjectId": "F6Fhyp",
+    "coreLibs": [
+        "cgl"
+    ]
 }

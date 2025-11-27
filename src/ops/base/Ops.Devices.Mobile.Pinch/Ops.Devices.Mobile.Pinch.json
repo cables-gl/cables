@@ -52,5 +52,8 @@
     "summary": "detect two finger pinch gestures on touchscreens",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -67,5 +67,8 @@
         ]
     },
     "exampleProjectId": "SLesr2",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -136,5 +136,8 @@
         }
     ],
     "exampleProjectId": "aDgYX5",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

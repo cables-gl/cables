@@ -181,5 +181,8 @@
         }
     ],
     "exampleProjectId": "wZbb_b",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

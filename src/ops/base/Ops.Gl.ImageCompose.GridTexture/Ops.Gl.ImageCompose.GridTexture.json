@@ -92,8 +92,6 @@
     },
     "summary": "Creates a grid texture",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -167,5 +165,8 @@
             "author": "pandur",
             "date": 1701855998727
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

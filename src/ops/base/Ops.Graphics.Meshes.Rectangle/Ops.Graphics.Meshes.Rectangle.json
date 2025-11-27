@@ -91,5 +91,8 @@
             "date": 1750154525672
         }
     ],
-    "exampleProjectId": "M3QiQ6"
+    "exampleProjectId": "M3QiQ6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

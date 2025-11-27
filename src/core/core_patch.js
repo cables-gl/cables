@@ -1,5 +1,3 @@
-// import { Events, Logger } from "cables-shared-client";
-import { CGL } from "cables-corelibs";
 import { Events, Logger } from "cables-shared-client";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
@@ -9,6 +7,7 @@ import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { Timer } from "./timer.js";
+import { RenderLoop } from "./renderloop.js";
 
 /** @global CABLES.OPS  */
 
@@ -84,6 +83,7 @@ export class Patch extends Events
     static EVENT_RENDERED_ONE_FRAME = "renderedOneFrame";
     static EVENT_LINK = "onLink";
     static EVENT_VALUESSET = "loadedValueSet";
+    static EVENT_DISPOSE = "dispose";
     static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
 
     #renderOneFrame = false;
@@ -95,12 +95,17 @@ export class Patch extends Events
     animMaxTime = 0;
     missingClipAnims = {};
 
+    // animFrameCallbacks = [];
+
     /** @param {PatchConfig} cfg */
     constructor(cfg)
     {
         super();
 
         this._log = new Logger("core_patch", { "onError": cfg.onError });
+
+        /** @type {RenderLoop} */
+        this.renderloop = null;
 
         /** @type {PatchConfig} */
         this.config = cfg ||
@@ -120,7 +125,6 @@ export class Patch extends Events
         this.timer = new Timer();
         this.freeTimer = new Timer();
         this.animFrameOps = [];
-        this.animFrameCallbacks = [];
         this.gui = false;
         CABLES.logSilent = this.silent = true;
         this.profiler = null;
@@ -136,20 +140,10 @@ export class Patch extends Events
         this.loading = new LoadingStatus(this);
 
         this._volumeListeners = [];
-        this._paused = false;
-        this._frameNum = 0;
-        this.onOneFrameRendered = null;
         this.namedTriggers = {};
 
         this._origData = null;
-        this._frameNext = 0;
-        this._frameInterval = 0;
-        this._lastFrameTime = 0;
-        this._frameWasdelayed = true;
         this.tempData = this.frameStore = {};
-        this.reqAnimTimeStamp = 0;
-
-        this.cgCanvas = null;
 
         if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
@@ -166,61 +160,54 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-        this.cgl = new CGL.Context(this);
+        this.cgl = null;// new CGL.Context(this);
         this.cgp = null;
 
         this._subpatchOpCache = {};
+        window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
 
-        this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
-        if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");
-        if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize("parent");
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
-
-        if (this.cgl.aborted) this.aborted = true;
-        if (this.cgl.silent) this.silent = true;
 
         if (!CABLES.OPS)
         {
             this.aborted = true;
             throw new Error("no CABLES.OPS found");
         }
-        this.freeTimer.play();
-        this.exec();
 
-        if (!this.aborted)
+        this.freeTimer.play();
+        // if (this.renderloop) this.renderloop.exec(0);
+
+        if (this.config.patch)
         {
-            if (this.config.patch)
-            {
-                this.deSerialize(this.config.patch);
-            }
-            else if (this.config.patchFile)
-            {
-                ajax(
-                    this.config.patchFile,
-                    (err, _data) =>
-                    {
-                        try
-                        {
-                            const data = JSON.parse(_data);
-                            if (err)
-                            {
-                                const txt = "";
-                                this._log.error("err", err);
-                                this._log.error("data", data);
-                                this._log.error("data", data.msg);
-                                return;
-                            }
-                            this.deSerialize(data);
-                        }
-                        catch (e)
-                        {
-                            this._log.error("could not load/parse patch ", e);
-                        }
-                    }
-                );
-            }
-            this.timer.play();
+            this.deSerialize(this.config.patch);
         }
+        else if (this.config.patchFile)
+        {
+            ajax(
+                this.config.patchFile,
+                (err, _data) =>
+                {
+                    try
+                    {
+                        const data = JSON.parse(_data);
+                        if (err)
+                        {
+                            const txt = "";
+                            this._log.error("err", err);
+                            this._log.error("data", data);
+                            this._log.error("data", data.msg);
+                            return;
+                        }
+                        this.deSerialize(data);
+                    }
+                    catch (e)
+                    {
+                        this._log.error("could not load/parse patch ", e);
+                    }
+                }
+            );
+        }
+        this.timer.play();
 
         console.log("made with https://cables.gl"); // eslint-disable-line
         this.cg = undefined;
@@ -234,16 +221,13 @@ export class Patch extends Events
 
     isPlaying()
     {
-        return !this._paused;
+        if (this.renderloop) return !this.renderloop.paused;
+        return false;
     }
 
     /** @deprecated */
     renderOneFrame()
     {
-        this._paused = true;
-        this._renderOneFrame = true;
-        this.exec();
-        this._renderOneFrame = false;
     }
 
     /**
@@ -260,10 +244,8 @@ export class Patch extends Events
      */
     pause()
     {
-        cancelAnimationFrame(this._animReq);
         this.emitEvent(Patch.EVENT_PAUSE);
-        this._animReq = null;
-        this._paused = true;
+        if (this.renderloop) this.renderloop.pause();
         this.freeTimer.pause();
     }
 
@@ -272,14 +254,9 @@ export class Patch extends Events
      */
     resume()
     {
-        if (this._paused)
-        {
-            cancelAnimationFrame(this._animReq);
-            this._paused = false;
-            this.freeTimer.play();
-            this.emitEvent(Patch.EVENT_RESUME);
-            this.exec();
-        }
+        this.freeTimer.play();
+        this.emitEvent(Patch.EVENT_RESUME);
+        if (this.renderloop) this.renderloop.resume();
     }
 
     /**
@@ -356,7 +333,6 @@ export class Patch extends Events
     clear()
     {
         this.emitEvent("patchClearStart");
-        this.cgl.TextureEffectMesh = null;
         this.animFrameOps.length = 0;
         this.timer = new Timer();
         while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
@@ -509,7 +485,7 @@ export class Patch extends Events
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
 
-            if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
+            if (op.hasOwnProperty("onAnimFrame") && op.onAnimFrame) this.addOnAnimFrame(op);
             if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
             if (this._opIdCache[op.id])
@@ -683,105 +659,25 @@ export class Patch extends Events
 
     getFrameNum()
     {
-        return this._frameNum;
+        if (this.renderloop) return this.renderloop.frameNum;
     }
 
     /**
      * @param {number} time
      * @param {number} delta
+     * @param {number} timestamp
      */
-    emitOnAnimFrameEvent(time, delta)
+    updateAnims(time, delta, timestamp)
     {
-        time = time || this.timer.getTime();
+        if (!this.renderloop) return;
+        this.timer.update(timestamp);
+        this.freeTimer.update(timestamp);
 
-        for (let i = 0; i < this.animFrameCallbacks.length; ++i)
-            if (this.animFrameCallbacks[i])
-                this.animFrameCallbacks[i](time, this._frameNum, delta);
+        time = time || this.timer.getTime();
 
         for (let i = 0; i < this.animFrameOps.length; ++i)
             if (this.animFrameOps[i].onAnimFrame)
-                this.animFrameOps[i].onAnimFrame(time, this._frameNum, delta);
-    }
-
-    renderFrame(timestamp)
-    {
-        this.timer.update(this.reqAnimTimeStamp);
-        this.freeTimer.update(this.reqAnimTimeStamp);
-        const time = this.timer.getTime();
-        const startTime = performance.now();
-        this.cgl.frameStartTime = this.timer.getTime();
-
-        const delta = timestamp - this.reqAnimTimeStamp || timestamp;
-
-        this.emitOnAnimFrameEvent(null, delta);
-
-        this.cgl.profileData.profileFrameDelta = delta;
-        this.reqAnimTimeStamp = timestamp;
-        this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
-
-        this.emitEvent(Patch.EVENT_RENDER_FRAME, time);
-
-        this._frameNum++;
-        if (this._frameNum == 1)
-        {
-            if (this.config.onFirstFrameRendered) this.config.onFirstFrameRendered();
-        }
-    }
-
-    /**
-     * @param {number} [timestamp]
-     */
-    exec(timestamp)
-    {
-        if (!this.#renderOneFrame && (this._paused || this.aborted)) return;
-        this.emitEvent("reqAnimFrame");
-        cancelAnimationFrame(this._animReq);
-
-        this.config.fpsLimit = this.config.fpsLimit || 0;
-        if (this.config.fpsLimit)
-        {
-            this._frameInterval = 1000 / this.config.fpsLimit;
-        }
-
-        const now = CABLES.now();
-        const frameDelta = now - this._frameNext;
-
-        if (this.isEditorMode())
-        {
-            if (!this.#renderOneFrame)
-            {
-                if (now - this._lastFrameTime >= 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed)
-                {
-                    this._lastFrameTime = 0;
-                    setTimeout(this.exec.bind(this), 500);
-                    this.emitEvent("renderDelayStart");
-                    this._frameWasdelayed = true;
-                    return;
-                }
-            }
-        }
-
-        if (this.#renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
-        {
-            this.renderFrame(timestamp);
-
-            if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
-        }
-
-        if (this._frameWasdelayed)
-        {
-            this.emitEvent("renderDelayEnd");
-            this._frameWasdelayed = false;
-        }
-
-        if (this.#renderOneFrame)
-        {
-            if (this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
-            this.emitEvent(Patch.EVENT_RENDERED_ONE_FRAME);
-            this._renderOneFrame = false;
-        }
-
-        if (this.config.doRequestAnimation) this._animReq = this.cgl.canvas.ownerDocument.defaultView.requestAnimationFrame(this.exec.bind(this));
+                this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
     }
 
     /**
@@ -1424,7 +1320,7 @@ export class Patch extends Events
     {
         this.pause();
         this.clear();
-        this.cgl.dispose();
+        this.emitEvent(Patch.EVENT_DISPOSE);
     }
 
     /**

@@ -96,5 +96,8 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "bRlSDe"
+    "exampleProjectId": "bRlSDe",
+    "coreLibs": [
+        "cgl"
+    ]
 }

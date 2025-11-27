@@ -66,5 +66,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "oXke6r"
+    "exampleProjectId": "oXke6r",
+    "coreLibs": [
+        "cgl"
+    ]
 }

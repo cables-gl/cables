@@ -114,5 +114,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "tnUJta"
+    "exampleProjectId": "tnUJta",
+    "coreLibs": [
+        "cgl"
+    ]
 }

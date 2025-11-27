@@ -69,9 +69,11 @@
     },
     "summary": "set transformation of a gltf node",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

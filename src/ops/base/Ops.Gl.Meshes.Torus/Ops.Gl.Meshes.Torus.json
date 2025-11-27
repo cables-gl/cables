@@ -52,6 +52,8 @@
     "exampleProjectId": "ECMhQ6",
     "issues": "",
     "caniusequery": "",
-
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

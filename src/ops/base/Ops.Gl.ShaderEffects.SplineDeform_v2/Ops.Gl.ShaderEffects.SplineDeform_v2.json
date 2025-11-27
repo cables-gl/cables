@@ -62,7 +62,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "exampleProjectId": "F-UNZ4"
 }

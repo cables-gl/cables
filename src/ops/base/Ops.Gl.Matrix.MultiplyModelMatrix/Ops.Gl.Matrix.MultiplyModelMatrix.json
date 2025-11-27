@@ -37,5 +37,8 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "HkYpci"
+    "exampleProjectId": "HkYpci",
+    "coreLibs": [
+        "cgl"
+    ]
 }

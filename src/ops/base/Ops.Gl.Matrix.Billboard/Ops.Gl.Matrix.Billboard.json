@@ -20,5 +20,8 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "GVpkrq"
+    "exampleProjectId": "GVpkrq",
+    "coreLibs": [
+        "cgl"
+    ]
 }

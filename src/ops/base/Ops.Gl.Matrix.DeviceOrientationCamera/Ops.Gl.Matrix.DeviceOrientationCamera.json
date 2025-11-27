@@ -19,7 +19,6 @@
             }
         ]
     },
-
     "docs": {
         "ports": []
     },
@@ -35,5 +34,8 @@
             "date": 1606808243671
         }
     ],
-    "exampleProjectId": "dZ8wQ0"
+    "exampleProjectId": "dZ8wQ0",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -50,8 +50,9 @@
         "ports": []
     },
     "issues": "",
-
-
     "youtubeids": [],
-    "exampleProjectId": "4wT0J6"
+    "exampleProjectId": "4wT0J6",
+    "coreLibs": [
+        "cgl"
+    ]
 }

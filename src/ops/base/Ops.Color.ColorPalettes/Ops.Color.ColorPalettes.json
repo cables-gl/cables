@@ -46,7 +46,9 @@
     },
     "created": 1523828824965,
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "xRvD98"
+    "exampleProjectId": "xRvD98",
+    "coreLibs": [
+        "cgl"
+    ]
 }

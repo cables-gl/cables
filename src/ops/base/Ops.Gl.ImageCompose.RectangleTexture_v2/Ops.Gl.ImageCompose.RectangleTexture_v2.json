@@ -153,5 +153,8 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "TmgMD-",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -83,10 +83,12 @@
     ],
     "summary": "Make one pixel lines thicker via postprocessing",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "3WSXCU"
+    "exampleProjectId": "3WSXCU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

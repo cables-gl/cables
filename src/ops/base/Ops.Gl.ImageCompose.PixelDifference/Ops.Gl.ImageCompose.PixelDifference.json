@@ -128,10 +128,12 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [
         "tGDDUyFIQPU"
     ],
     "exampleProjectId": "LEMBZ4",
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

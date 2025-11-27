@@ -51,7 +51,6 @@
     },
     "summary": "Remove darkest or brightest parts of the image",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -81,5 +80,8 @@
             }
         ]
     },
-    "exampleProjectId": "ukO5qe"
+    "exampleProjectId": "ukO5qe",
+    "coreLibs": [
+        "cgl"
+    ]
 }

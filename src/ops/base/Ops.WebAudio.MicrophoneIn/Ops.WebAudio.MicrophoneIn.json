@@ -25,7 +25,6 @@
     "created": 1513608940511,
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -42,5 +41,8 @@
             }
         ]
     },
-    "exampleProjectId": "xjHACp"
+    "exampleProjectId": "xjHACp",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

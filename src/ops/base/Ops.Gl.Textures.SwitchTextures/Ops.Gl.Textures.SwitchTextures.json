@@ -119,7 +119,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "gsXwVJ"
+    "exampleProjectId": "gsXwVJ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

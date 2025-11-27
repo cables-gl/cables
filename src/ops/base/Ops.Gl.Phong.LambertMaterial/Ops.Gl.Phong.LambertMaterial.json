@@ -58,7 +58,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "PAvm26"
+    "exampleProjectId": "PAvm26",
+    "coreLibs": [
+        "cgl"
+    ]
 }

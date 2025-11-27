@@ -38,10 +38,12 @@
     },
     "summary": "get current transformation of a gltf node",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "yrOJve"
+    "exampleProjectId": "yrOJve",
+    "coreLibs": [
+        "cgl"
+    ]
 }

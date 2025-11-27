@@ -61,7 +61,6 @@
     },
     "summary": "Convert an animation into an array of coordinates",
     "issues": "Currently only supports positional data. \nRotation or scale data will be supported in the near future.",
-
     "youtubeids": [
         "QNLw21hSweg"
     ],
@@ -93,5 +92,8 @@
             }
         ]
     },
-    "exampleProjectId": "py-JK0"
+    "exampleProjectId": "py-JK0",
+    "coreLibs": [
+        "cgl"
+    ]
 }

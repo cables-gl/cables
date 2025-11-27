@@ -89,5 +89,8 @@
             }
         ]
     },
-    "exampleProjectId": "cOlh_C"
+    "exampleProjectId": "cOlh_C",
+    "coreLibs": [
+        "cgl"
+    ]
 }

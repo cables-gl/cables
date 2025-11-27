@@ -145,7 +145,6 @@
     "created": 1612888673498,
     "summary": "send bpm based triggers like a clocked trigger sequencer / clock divider",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -271,5 +270,8 @@
             }
         ]
     },
-    "exampleProjectId": "J8Uccu"
+    "exampleProjectId": "J8Uccu",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

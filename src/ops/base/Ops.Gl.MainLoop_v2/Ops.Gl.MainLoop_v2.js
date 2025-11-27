@@ -93,8 +93,18 @@ function setPixelDensity()
     else op.patch.cgl.pixelDensity = window.devicePixelRatio;
 }
 
-function render(time)
+let lastFrame = -1;
+let duplicate = 0;
+function render(time, frame, delta)
 {
+    if (frame === lastFrame)
+    {
+        if (duplicate < 10)console.warn("duplicate frame?!");
+        duplicate++;
+        return;
+    }
+    lastFrame = frame;
+
     if (!active.get()) return;
     if (cgl.aborted || cgl.canvas.clientWidth === 0 || cgl.canvas.clientHeight === 0) return;
 

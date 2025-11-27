@@ -121,7 +121,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "kj_Zbx"
+    "exampleProjectId": "kj_Zbx",
+    "coreLibs": [
+        "cgl"
+    ]
 }

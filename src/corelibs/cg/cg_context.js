@@ -3,7 +3,7 @@ import { mat4, vec3 } from "gl-matrix";
 import { Patch } from "cables";
 import { CgCanvas } from "./cg_canvas.js";
 import { MatrixStack } from "./cg_matrixstack.js";
-import { ProfileData } from "../cgl/cgl_profiledata.js";
+import { ProfileData } from "./cg_profiledata.js";
 import { FpsCounter } from "./cg_fpscounter.js";
 
 export class CgContext extends Events
@@ -15,6 +15,7 @@ export class CgContext extends Events
 
     static EVENT_RESIZE = "resize";
 
+    #patch = null;
     gApi = 0;
 
     _textureslots = [];
@@ -89,7 +90,6 @@ export class CgContext extends Events
         {
             this.emitEvent("resize");
         });
-
     }
 
     get canvasWidth()

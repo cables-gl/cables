@@ -124,7 +124,8 @@
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier"
+        "cgl_shadermodifier",
+        "cgl"
     ],
     "summary": "add shadow capabilities to any material",
     "issues": "",

@@ -123,7 +123,6 @@
     },
     "summary": "add a delay effect to an audio stream",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -201,5 +200,8 @@
             }
         ]
     },
-    "exampleProjectId": "IUjXgu"
+    "exampleProjectId": "IUjXgu",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

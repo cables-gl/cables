@@ -122,5 +122,8 @@
             "date": 1701855202947
         }
     ],
-    "caniusequery": ""
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ]
 }

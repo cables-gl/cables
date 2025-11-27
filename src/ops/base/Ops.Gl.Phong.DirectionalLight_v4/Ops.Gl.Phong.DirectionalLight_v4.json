@@ -163,5 +163,8 @@
             }
         ]
     },
-    "exampleProjectId": "nEWpXU"
+    "exampleProjectId": "nEWpXU",
+    "coreLibs": [
+        "cgl"
+    ]
 }

@@ -105,5 +105,8 @@
     },
     "license": "MIT",
     "summary": "Align a HTML element to another, keep positioning",
-    "exampleProjectId": "jKcTdv"
+    "exampleProjectId": "jKcTdv",
+    "coreLibs": [
+        "cgl"
+    ]
 }

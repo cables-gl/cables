@@ -45,7 +45,6 @@
     "exampleProjectId": "iYLmJ5",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -57,5 +56,8 @@
             "author": "stephan",
             "date": 1701856175379
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

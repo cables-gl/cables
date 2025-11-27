@@ -48,10 +48,11 @@
     "authorName": "pandur",
     "created": 1681833901074,
     "summary": "output some infos about the current parent GLTF scene",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Z7tacy"
+    "exampleProjectId": "Z7tacy",
+    "coreLibs": [
+        "cgl"
+    ]
 }

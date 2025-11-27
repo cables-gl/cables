@@ -279,7 +279,8 @@
     },
     "exampleProjectId": "RQCm0m",
     "coreLibs": [
-        "interactionneededbutton"
+        "interactionneededbutton",
+        "cgl"
     ],
     "license": "MIT"
 }

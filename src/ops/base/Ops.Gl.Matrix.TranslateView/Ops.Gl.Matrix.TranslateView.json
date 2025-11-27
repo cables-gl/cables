@@ -34,5 +34,8 @@
     "summary": "translate the view/camera matrix",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

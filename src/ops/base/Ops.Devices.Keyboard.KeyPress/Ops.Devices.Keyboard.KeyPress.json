@@ -32,10 +32,11 @@
             }
         ]
     },
-
-
     "exampleProjectId": "lmGgPZ",
     "issues": "",
     "caniusequery": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "coreLibs": [
+        "cgl"
+    ]
 }

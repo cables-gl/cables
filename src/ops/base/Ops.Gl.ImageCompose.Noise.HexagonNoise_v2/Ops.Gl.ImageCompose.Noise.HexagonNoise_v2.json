@@ -181,5 +181,8 @@
         ]
     },
     "exampleProjectId": "plbB53",
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
 }

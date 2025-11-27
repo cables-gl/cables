@@ -40,5 +40,8 @@
             "date": 1572939452440
         }
     ],
-    "exampleProjectId": "JwL86R"
+    "exampleProjectId": "JwL86R",
+    "coreLibs": [
+        "cgl"
+    ]
 }

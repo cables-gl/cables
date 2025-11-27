@@ -24,7 +24,6 @@
     "created": 1542701445023,
     "summary": "Denoise texture effect - used to smooth out noisy images",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -50,5 +49,8 @@
             "author": "pandur",
             "date": 1701854805811
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

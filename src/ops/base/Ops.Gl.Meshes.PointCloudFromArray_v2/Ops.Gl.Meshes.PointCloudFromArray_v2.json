@@ -118,5 +118,8 @@
     "youtubeids": [
         "tFM2Ixf-ixs"
     ],
-    "exampleProjectId": "v8G4Wz"
+    "exampleProjectId": "v8G4Wz",
+    "coreLibs": [
+        "cgl"
+    ]
 }
