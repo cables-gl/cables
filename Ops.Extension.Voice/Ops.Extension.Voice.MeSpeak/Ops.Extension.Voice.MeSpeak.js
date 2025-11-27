@@ -98,11 +98,15 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const gainNode = audioCtx.createGain();
 let audiostream;
 
-// on start function calls
-loadVoice().then(cacheAudio).catch((error) =>
+op.onLoaded = function()
 {
-    op.log("Error loading voice: " + error.message);
-});
+    loadVoice().then(cacheAudio).catch((error) =>
+    {
+        op.log("Error loading voice: " + error.message);
+    });
+};
+
+
 
 // port change calls
 
