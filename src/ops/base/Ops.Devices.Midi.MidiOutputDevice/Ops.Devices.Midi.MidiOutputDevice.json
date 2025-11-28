@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1728638909189
+        },
+        {
+            "message": "Fixed problem when changing computers and having different devices, it was not possible to select the one current device",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1764246947256
         }
     ],
     "authorName": "simod",
