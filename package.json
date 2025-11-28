@@ -29,10 +29,10 @@
         "gulp-json-schema": "1.0.0"
     },
     "scripts": {
+        "postinstall": "cd src/corelibs/ && npm install --no-save --ignore-scripts cables",
         "build": "gulp build",
         "build:live": "gulp build",
         "watch": "gulp watch",
-        "start": "gulp watch",
         "analyze": "gulp analyze",
         "headless": "node ./src/core/index.js",
         "test": "gulp --gulpfile gulpfile_tests.js"
