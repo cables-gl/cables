@@ -4,14 +4,9 @@
 const deviceSelect = op.inDropDown("Device", ["none"]);
 let learning = false;
 const learn = op.inTriggerButton("Learn");
-const resetIn = op.inTriggerButton("Panic");
 
-op.setPortGroup("Device Select", [deviceSelect]);
-op.setPortGroup("Controls", [learn, resetIn]);
-
-/* OPS */
 const OPS = {
-    "CC": { "NAMESPACE": "Ops.Devices.Midi.MidiCC_v2", "IN_PORT": "CC Index" },
+    "CC": { "NAMESPACE": "Ops.Devices.Midi.MidiCC_v3", "IN_PORT": "CC Index" },
     "NRPN": { "NAMESPACE": "Ops.Devices.Midi.MidiNRPN", "IN_PORT": "NRPN Index" },
     "Note": { "NAMESPACE": "Ops.Devices.Midi.MidiNote", "IN_PORT": "Note" },
 };
@@ -306,13 +301,11 @@ function onMIDIMessage(_event)
     // pressure / tilt on
     // pressure: 176, cmd 11:
     // bend: 224, cmd: 14
-    OUTPUTS.Event.set(null);
-    OUTPUTS.Event.set(newEvent);
+    OUTPUTS.Event.setRef(newEvent);
 
     if (messageType !== "UNKNOWN" && !NOT_YET_USED.includes(messageType))
     {
-        OUTPUTS[messageType].set(null);
-        OUTPUTS[messageType].set(newEvent);
+        OUTPUTS[messageType].setRef(newEvent);
     }
 }
 

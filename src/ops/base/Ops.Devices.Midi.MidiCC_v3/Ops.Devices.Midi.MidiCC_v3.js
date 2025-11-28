@@ -5,7 +5,7 @@ const
     midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1),
     ccIndexDropdown = op.inValueInt("CC Index", 0),
     inSpeed = op.inFloat("Speed", 1),
-    normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "none"),
+    normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "0 to 1"),
     triggerOn = op.inSwitch("Trigger On", ["Both", "Down", "Up"], "Both"),
     learn = op.inTriggerButton("learn"),
     clear = op.inTriggerButton("clear");
@@ -15,10 +15,6 @@ const
     eventOut = op.outObject("Event"),
     triggerOut = op.outTrigger("Trigger Out"),
     ccIndexOut = op.outNumber("CC Index Out");
-
-ccIndexDropdown.set(0);
-midiChannelDropdown.set(1);
-normalizeDropdown.set(normalizeDropdown.get("none"));
 
 let learning = false;
 learn.onTriggered = () =>
@@ -30,7 +26,7 @@ clear.onTriggered = () =>
 {
     ccIndexDropdown.set(0);
     midiChannelDropdown.set(1);
-    normalizeDropdown.set(normalizeDropdown.get("none"));
+    normalizeDropdown.set(normalizeDropdown.get("0 to 1"));
     op.refreshParams();
 };
 
@@ -53,7 +49,6 @@ inEvent.onChange = () =>
             gui.emitEvent("portValueEdited", op, ccIndexDropdown, ccIndexDropdown.get());
             gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
 
-            op.uiAttr({ "info": `bound to CC: ${ccIndexDropdown.get()}` });
             op.refreshParams();
         }
     }
