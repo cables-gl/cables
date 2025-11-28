@@ -1329,6 +1329,7 @@ export class Op extends Events
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
         if (opObj.uiAttribs.hasOwnProperty("highlighted")) delete opObj.uiAttribs.highlighted;
         if (opObj.uiAttribs.hasOwnProperty("highlightedMore")) delete opObj.uiAttribs.highlightedMore;
+        if (opObj.uiAttribs.hasOwnProperty("heatmapIntensity")) delete opObj.uiAttribs.heatmapIntensity;
 
         if (opObj.uiAttribs.title === "") delete opObj.uiAttribs.title;
         if (opObj.uiAttribs.color === null) delete opObj.uiAttribs.color;
