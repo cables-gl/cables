@@ -621,7 +621,7 @@ export class CglContext extends CgContext
     /**
      * @param {CglContext} cgl
      */
-    renderEnd(cgl)
+    renderEnd(cgl, endFrame = true)
     {
         this._endMatrixStacks();
 
@@ -633,7 +633,7 @@ export class CglContext extends CgContext
         this.popBlend();
         this.popBlendMode();
 
-        cgl.endFrame();
+        if (endFrame)cgl.endFrame();
 
         this.emitEvent("endFrame");
     }

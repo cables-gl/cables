@@ -1,0 +1,148 @@
+{
+    "summary": "Render into an Image",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "values": [
+                    "Canvas",
+                    "Manual"
+                ],
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Auto Aspect",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "values": [
+                    "Clamp",
+                    "Repeat",
+                    "Mirror"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "MSAA index",
+                "values": [
+                    "none",
+                    "2x",
+                    "4x",
+                    "8x"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "textureDepth",
+                "objType": "texture"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "72e4e7a1-c7a8-48ce-bf88-11b9cf7511f1",
+    "created": 1764099742069,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Render2Texture",
+            "author": "pandur",
+            "date": 1687444885322
+        },
+        {
+            "message": "Ops.Patch.PheLezz.Render2Texture2 renamed to Ops.Gl.Render2Texture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687445363475
+        },
+        {
+            "message": "cloned op from Ops.Gl.Render2Texture_v2",
+            "author": "pandur",
+            "date": 1687516885456
+        },
+        {
+            "message": "Ops.Patch.P4SCBDz.Render2Texture_v3 renamed to Ops.Gl.Render2Texture_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1687527344944
+        },
+        {
+            "message": "Ops.Gl.Render2Texture_v3 renamed to Ops.Gl.RenderToTexture_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694675884792
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764099742069
+        }
+    ],
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}
