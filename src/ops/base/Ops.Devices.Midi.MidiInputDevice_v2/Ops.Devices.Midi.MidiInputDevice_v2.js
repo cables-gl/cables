@@ -15,7 +15,7 @@ op.setPortGroup("Controls", [learn, resetIn]);
 /* OPS */
 const opPrefix = "Ops.Devices.Midi.Midi";
 const OPS = {
-    "CC": { "NAMESPACE": `${opPrefix}CC`, "IN_PORT": "CC Index" },
+    "CC": { "NAMESPACE": `${opPrefix}CC_v2`, "IN_PORT": "CC Index" },
     "NRPN": { "NAMESPACE": `${opPrefix}NRPN`, "IN_PORT": "NRPN Index" },
     "Note": { "NAMESPACE": `${opPrefix}Note`, "IN_PORT": "Note" },
 };
