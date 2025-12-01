@@ -53,6 +53,10 @@
             {
                 "type": 1,
                 "name": "Reset"
+            },
+            {
+                "type": 1,
+                "name": "test"
             }
         ],
         "portsOut": [

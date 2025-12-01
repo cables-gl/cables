@@ -6,6 +6,7 @@ const
     inInstances = op.inInt("Num Instances", 0),
     inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
     inReset = op.inTriggerButton("Reset"),
+    inTest = op.inTriggerButton("test"),
     next = op.outTrigger("Next"),
     outNum = op.outNumber("Total Instances");
 
@@ -20,6 +21,7 @@ let oldPosBuff = null;
 let oldScaleBuff = null;
 let storage = null;
 let storageScale = null;
+let refresh = false;
 
 inGeom.onChange =
     inScaleBuff.onLinkChanged =
@@ -29,7 +31,7 @@ inGeom.onChange =
 function reset()
 {
     storage = null;
-    oldScaleBuff=null;
+    oldScaleBuff = null;
     needsbuild = true;
     mesh = null;
 }
@@ -37,7 +39,7 @@ function reset()
 inScaleBuff.onChange =
 inPosBuff.onChange = () =>
 {
-    if (storage||storageScale) reset();
+    if (storage || storageScale) reset();
 };
 
 inTrigger.onTriggered = () =>
@@ -58,14 +60,14 @@ inTrigger.onTriggered = () =>
     shader.toggleDefine("BILLBOARDING", inBillboarding.get() != "Off");
     shader.toggleDefine("BILLBOARDING_CYLINDRIC", inBillboarding.get() == "Cylindrical");
 
-
     if (inPosBuff.isLinked() && inPosBuff.get())
     {
         if (!storage)
         {
             storage = new CGP.BindingStorage(op.patch.cgp, "instPos", { "cgpBuffer": inPosBuff.get() });
             shader.defaultBindGroup.addBinding(storage);
-            shader.needsPipelineUpdate = "bindgroup...";
+            shader.needsPipelineUpdate = "bindgroup..."; shader.compile();
+            shader.needsRecompile();// why is this needed
         }
     }
 
@@ -76,12 +78,23 @@ inTrigger.onTriggered = () =>
             storageScale = new CGP.BindingStorage(op.patch.cgp, "instScale", { "cgpBuffer": inScaleBuff.get() });
             shader.defaultBindGroup.addBinding(storageScale);
             shader.needsPipelineUpdate = "bindgroup...";
+            shader.needsRecompile(); // why is this needed
         }
     }
 
     mesh.instances = inInstances.get() || inPosBuff.get()?.length;
 
+    if (refresh)
+    {
+        // shader.needsPipelineUpdate = "bindgroup...";
+        shader.compile();
+        refresh = false;
+    }
     if (mesh)mesh.render();
 
     next.trigger();
+};
+inTest.onTriggered = () =>
+{
+    refresh = true;
 };
