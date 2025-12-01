@@ -1,13 +1,13 @@
 const
     exec = op.inTrigger("Trigger"),
     myNumber = op.inFloat("Number"),
-    next = op.outTrigger("Next"),
-    result = op.outNumber("Result");
+    inPosX = op.inFloat("Position X"),
+    next = op.outTrigger("Next");
 
 const threeOp = new CABLES.ThreeOp(op);
 
 let mesh = null;
-let geometry = null;// new THREE.TorusKnotGeometry(10, 3, 200, 32).toNonIndexed();
+let geometry = null;
 
 myNumber.onChange = updateGeom;
 
@@ -29,8 +29,12 @@ exec.onTriggered = () =>
         threeOp.setSceneObject(mesh);
     }
 
-    threeOp.trigger();
+    mesh.position.set(inPosX.get(), 0, 0);
+
+    threeOp.push();
 
     if (mesh) mesh.rotation.x += 0.005;
     next.trigger();
+
+    threeOp.pop();
 };

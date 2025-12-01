@@ -1,6 +1,6 @@
 {
-    "id": "190304bb-af31-4378-a3f8-d6b7e42c90fc",
-    "created": 1764169447789,
+    "id": "cae75dd6-6d1b-419c-a046-2cebc057b1de",
+    "created": 1764591288273,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1764583837393
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764591288273
         }
     ],
     "layout": {
@@ -25,12 +31,17 @@
             },
             {
                 "type": 0,
-                "name": "Number",
+                "name": "Position X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Position X",
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
                 "subType": "number"
             }
         ],

@@ -7,6 +7,7 @@ const
 
 const threeOp = new CABLES.ThreeOp(op);
 
+const container = new THREE.Object3D();
 let light = null;
 
 inPosX.onChange =
@@ -23,11 +24,13 @@ exec.onTriggered = () =>
     {
         light = new THREE.PointLight(0xffffff, 1, 100);
         light.position.set(0, 0, 0);
+        container.add(light);
 
-        threeOp.setSceneObject(light);
+        threeOp.setSceneObject(container);
     }
 
-    threeOp.trigger();
+    threeOp.push();
 
     next.trigger();
+    threeOp.pop();
 };

@@ -1,0 +1,76 @@
+{
+    "id": "a09d3b89-230d-4f86-87c3-62a5a001f688",
+    "created": 1764591996738,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764169447790
+        },
+        {
+            "message": "Patch.PAjelF3.Three.Knot renamed to Ops.Extension.Three.Knot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764583837393
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588236583
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588670322
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764591996738
+        },
+        {
+            "message": "Extension.Three.Camera renamed to Ops.Extension.Three.PerspectiveCamera",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764592031377
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color B",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}
