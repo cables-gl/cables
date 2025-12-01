@@ -11,10 +11,10 @@
             "date": 1764169447790
         },
         {
-            "message": "Patch.PAjelF3.Three.Knot renamed to Ops.Extension.Three.Knot",
+            "message": "Extension.Three.Knot renamed to Ops.Extension.Three.Mesh",
             "type": "rename",
             "author": "pandur",
-            "date": 1764583837393
+            "date": 1764597989300
         }
     ],
     "layout": {
@@ -25,13 +25,18 @@
             },
             {
                 "type": 0,
-                "name": "Number",
+                "name": "Position X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Position X",
+                "name": "Scale",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "threeGeometry"
             }
         ],
         "portsOut": [

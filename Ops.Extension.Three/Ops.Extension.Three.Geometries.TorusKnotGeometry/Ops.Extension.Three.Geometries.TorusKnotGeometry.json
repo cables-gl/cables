@@ -1,0 +1,55 @@
+{
+    "id": "2cff4d54-dce1-4a5d-8f57-61dcf33e17cf",
+    "created": 1764597840729,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tube",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "tubularSegments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "radialSegments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Winds",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Interior Winds",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    }
+}
