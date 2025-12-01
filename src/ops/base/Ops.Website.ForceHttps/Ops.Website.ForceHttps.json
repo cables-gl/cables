@@ -5,16 +5,25 @@
             "message": "created op",
             "author": "pandur",
             "date": 1585908071988
+        },
+        {
+            "message": "do not change protocol when in editor, fix for standalone",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1764598004414
         }
     ],
     "authorName": "pandur",
     "created": 1585908153315,
     "summary": "will redirect to same URL using https protocol",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "layout": {}
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    },
+    "license": "MIT"
 }
