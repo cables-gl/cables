@@ -48,6 +48,21 @@
                 "type": 0,
                 "name": "Scale",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "subType": "number"
             }
         ],
         "portsOut": [

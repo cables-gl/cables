@@ -17,6 +17,8 @@ r.setUiAttribs({ "colorPick": true });
 const threeOp = new CABLES.ThreeOp(op);
 
 const container = new THREE.Object3D();
+threeOp.setSceneObject(container);
+
 let light = null;
 
 inPosX.onChange =
@@ -45,7 +47,7 @@ function updateColor()
 
 function recreate()
 {
-    container.remove(light);
+    if (light)container.remove(light);
     light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(0, 0, 0);
 
@@ -71,8 +73,6 @@ exec.onTriggered = () =>
     if (!light)
     {
         recreate();
-
-        threeOp.setSceneObject(container);
     }
 
     threeOp.push();
