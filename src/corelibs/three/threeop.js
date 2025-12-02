@@ -58,14 +58,17 @@ export class ThreeOp
         if (this.#currentParent === null)
         {
             this.#currentParent = parentObject;
-            parentObject.add(this.#object);
+            if (this.#object)parentObject.add(this.#object);
 
             this.#renderer.add(this);
         }
 
         this.#lastTrigger = this.#op.patch.cg.frameStore.three.frame;
-        this.#object.material = this.#renderer.currentMaterial;
-        this.#renderer.pushObject(this.#object);
+        if (this.#object)
+        {
+            this.#object.material = this.#renderer.currentMaterial;
+            this.#renderer.pushObject(this.#object);
+        }
     }
 
     pop()
@@ -88,6 +91,52 @@ export class ThreeOp
 
             console.log("remove from scene...");
         }
+    }
+
+    static bindColor(op, object, paramName, options)
+    {
+        op.threeBinds = op.threeBinds || {};
+
+        const values = [1, 1, 1, 1];
+        if (options.values == "random")
+        {
+            values[0] = Math.random();
+            values[1] = Math.random();
+            values[2] = Math.random();
+            values[3] = Math.random();
+        }
+        if (options.values == "0")
+        {
+            values[0] = values[1] = values[2] = 0;
+        }
+
+        const a = op.threeBinds[paramName] || {
+            "inR": op.inFloatSlider(paramName + " R", values[0]),
+            "inG": op.inFloatSlider(paramName + " G", values[1]),
+            "inB": op.inFloatSlider(paramName + " B", values[2]),
+            "inA": op.inFloatSlider(paramName + " A", values[3]),
+        };
+
+        a.inR.setUiAttribs({ "colorPick": true });
+        if (op.threeBinds[paramName])
+        {
+            // unbind ?s
+        }
+
+        op.threeBinds[paramName] = a;
+
+        function update()
+        {
+            object[paramName].set(a.inR.get(), a.inG.get(), a.inB.get(), a.inA.get());
+
+        }
+
+        a.inR.onChange =
+        a.inG.onChange =
+        a.inB.onChange =
+        a.inA.onChange = update;
+
+        update();
     }
 
 }
