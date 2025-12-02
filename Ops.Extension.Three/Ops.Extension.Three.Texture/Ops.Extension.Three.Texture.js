@@ -1,7 +1,7 @@
 const
     inUrl = op.inUrl("File"),
-    next = op.outTrigger("Next"),
-    result = op.outObject("Texture", null, "three texture");
+    result = op.outObject("Texture", null, "three texture"),
+    next = op.outTrigger("Next");
 
 const loader = new THREE.TextureLoader();
 let loadingId = null;

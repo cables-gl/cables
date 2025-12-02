@@ -20,13 +20,13 @@
         ],
         "portsOut": [
             {
-                "type": 1,
-                "name": "Next"
-            },
-            {
                 "type": 2,
                 "name": "Texture",
                 "objType": "three texture"
+            },
+            {
+                "type": 1,
+                "name": "Next"
             }
         ]
     }
