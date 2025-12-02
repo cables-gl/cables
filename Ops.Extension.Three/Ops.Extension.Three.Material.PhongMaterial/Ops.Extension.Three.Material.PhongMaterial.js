@@ -1,8 +1,8 @@
 const
     exec = op.inTrigger("Trigger"),
-    inR = op.inFloatSlider("Color R", 0),
-    inG = op.inFloatSlider("Color G", 0),
-    inB = op.inFloatSlider("Color B", 0),
+    inR = op.inFloatSlider("Color R", Math.random()),
+    inG = op.inFloatSlider("Color G", Math.random()),
+    inB = op.inFloatSlider("Color B", Math.random()),
     inA = op.inFloatSlider("Color A", 1),
     inWire = op.inBool("Wireframe", false),
     inFlat = op.inBool("Flat Shading", false),
@@ -36,6 +36,8 @@ inSpecularB.onChange = setSpecularColor;
 inMap.onChange =
 inWire.onChange =
 inFlat.onChange = recreate;
+
+recreate();
 
 inShiny.onChange = () =>
 {
