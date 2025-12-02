@@ -4,6 +4,7 @@ export class WebGpuOp
 {
     constructor(op)
     {
+
         this._op = op;
         this.supported = !!navigator.gpu;
 
