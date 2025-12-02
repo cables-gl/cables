@@ -1,6 +1,6 @@
 {
-    "id": "fe748b48-de78-4994-a5b4-95468b23894e",
-    "created": 1764588670322,
+    "id": "f7304600-e620-41bf-8099-b5a79078a805",
+    "created": 1764605985008,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -26,7 +26,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1764588670322
+            "date": 1764605985009
+        },
+        {
+            "message": "Extension.Three.Light.SpotLight renamed to Ops.Extension.Three.Light.DirectionalLight",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764606042902
         }
     ],
     "layout": {
@@ -37,63 +43,43 @@
             },
             {
                 "type": 0,
-                "name": "Color R",
+                "name": "Intensity",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color G",
+                "name": "Position X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color B",
+                "name": "Position Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Wireframe",
+                "name": "Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cast Shadow",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Flat Shading",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Shininess",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Emissive R",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Emissive G",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Emissive B",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular R",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular G",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular B",
-                "subType": "number"
             }
         ],
         "portsOut": [
