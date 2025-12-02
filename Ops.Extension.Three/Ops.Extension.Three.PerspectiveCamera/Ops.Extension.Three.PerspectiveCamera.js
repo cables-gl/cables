@@ -6,7 +6,7 @@ const
     next = op.outTrigger("Next");
 
 const threeOp = new CABLES.ThreeOp(op);
-const camera = new THREE.PerspectiveCamera(120, 1.777, 0.1, 10);
+const camera = new THREE.PerspectiveCamera(120, 1.777, 0.001, 100);
 threeOp.setSceneObject(camera);
 
 inR.onChange =

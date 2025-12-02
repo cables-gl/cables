@@ -3,6 +3,7 @@ const
     inPosX = op.inFloat("Position X"),
     inPosY = op.inFloat("Position Y"),
     inPosZ = op.inFloat("Position Z"),
+    inScale = op.inFloat("Scale", 1),
     next = op.outTrigger("Next");
 
 const threeOp = new CABLES.ThreeOp(op);
@@ -17,7 +18,8 @@ exec.onTriggered = () =>
         threeOp.setSceneObject(obj);
     }
 
-    obj.position.set(inPosX.get(), 0, 0);
+    obj.position.set(inPosX.get(), inPosY.get(), inPosZ.get());
+    obj.scale.x = obj.scale.y = obj.scale.z = inScale.get();
 
     threeOp.push();
 

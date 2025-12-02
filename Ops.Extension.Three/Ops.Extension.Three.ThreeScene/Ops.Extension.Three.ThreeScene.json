@@ -16,6 +16,21 @@
             {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "ShadowMap",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Cables Matrices",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -24,5 +39,12 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "dependencies": [
+        {
+            "src": "https://threejs.org/build/three.module.js",
+            "type": "module",
+            "export": "THREE"
+        }
+    ]
 }

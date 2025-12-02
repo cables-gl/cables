@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Trigger"),
     inPosX = op.inFloat("Position X"),
     inScale = op.inFloat("Scale"),
+    inRot = op.inBool("Rot", false),
     inGeo = op.inObject("Geometry", null, "threeGeometry"),
     next = op.outTrigger("Next");
 
@@ -31,7 +32,8 @@ exec.onTriggered = () =>
         updateGeom();
 
         mesh = new THREE.Mesh(geometry || threeOp.renderer.defaultGeometry);
-
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
         threeOp.setSceneObject(mesh);
     }
     if (mesh.geometry != geometry)
@@ -44,7 +46,7 @@ exec.onTriggered = () =>
 
     threeOp.push();
 
-    if (mesh) mesh.rotation.x += 0.005;
+    if (inRot.get() && mesh) mesh.rotation.x += 0.005;
     next.trigger();
 
     threeOp.pop();

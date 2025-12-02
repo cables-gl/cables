@@ -43,6 +43,11 @@
                 "type": 0,
                 "name": "Position Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
             }
         ],
         "portsOut": [

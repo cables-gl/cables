@@ -5,7 +5,7 @@ const
     inB = op.inFloatSlider("Color B", 0),
     next = op.outTrigger("Next");
 
-const material = new THREE.MeshPhongMaterial({ "color": 0xffff00 });
+const material = new THREE.MeshPhongMaterial({ "color": 0xffff00		 });
 
 inR.onChange =
 inG.onChange =
