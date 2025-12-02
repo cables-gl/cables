@@ -57,6 +57,11 @@
             },
             {
                 "type": 0,
+                "name": "shininess",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "emissive R",
                 "subType": "number"
             },
@@ -104,11 +109,6 @@
                 "type": 0,
                 "name": "Flat Shading",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Shininess",
-                "subType": "number"
             },
             {
                 "type": 2,

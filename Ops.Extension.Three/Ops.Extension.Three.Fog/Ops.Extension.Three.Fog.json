@@ -1,0 +1,58 @@
+{
+    "id": "d8dd4360-8f76-4443-9810-7c0356719007",
+    "created": 1764694016128,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764694016129
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "near",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "far",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
