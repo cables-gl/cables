@@ -31,6 +31,11 @@
             },
             {
                 "type": 0,
+                "name": "Intensity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Position X",
                 "subType": "number"
             },
@@ -42,6 +47,26 @@
             {
                 "type": 0,
                 "name": "Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
                 "subType": "number"
             }
         ],
