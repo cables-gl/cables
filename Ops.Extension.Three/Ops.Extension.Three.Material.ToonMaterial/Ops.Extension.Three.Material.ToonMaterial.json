@@ -1,0 +1,91 @@
+{
+    "id": "8474bae4-83cb-4309-806f-a1c69b7b1deb",
+    "created": 1764688533916,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764169447790
+        },
+        {
+            "message": "Patch.PAjelF3.Three.Knot renamed to Ops.Extension.Three.Knot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764583837393
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588236583
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588670322
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764688265263
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764688533917
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wireframe",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Map",
+                "objType": "three texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}
