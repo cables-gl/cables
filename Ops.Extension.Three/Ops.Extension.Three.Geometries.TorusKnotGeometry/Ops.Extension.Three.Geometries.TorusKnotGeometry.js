@@ -8,6 +8,7 @@ const
     outGeom = op.outObject("geometry", null, "threeGeometry");
 
 let geometry = null;
+let to = null;
 
 inRadius.onChange =
     inP.onChange =
@@ -20,12 +21,22 @@ updateSoon();
 
 function updateSoon()
 {
-    update();
+    clearTimeout(to);
+    to = setTimeout(() =>
+    {
+        update();
+    }, 30);
 }
 
 function update()
 {
-    geometry = new THREE.TorusKnotGeometry(inRadius.get(), inTube.get(),
-        inTubularSegments.get(), inRadialSegments.get(), inP.get(), inQ.get());
+    geometry = new THREE.TorusKnotGeometry(
+        inRadius.get(),
+        inTube.get(),
+        inTubularSegments.get(),
+        inRadialSegments.get(),
+        inP.get(),
+        inQ.get());
+
     outGeom.setRef(geometry);
 }
