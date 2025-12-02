@@ -21,7 +21,7 @@ export class ThreeRenderer
     constructor(op)
     {
         this.#op = op;
-        this.#defaultCamera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 10);
+        this.#defaultCamera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.001, 50);
         this.#defaultCamera.position.z = 1.5;
         this.#defaultMaterial = new THREE.MeshBasicMaterial();
         this.#defaultGeometry = new THREE.BoxGeometry(1, 1, 1);
@@ -30,18 +30,6 @@ export class ThreeRenderer
     get defaultGeometry()
     {
         return this.#defaultGeometry;
-    }
-
-    renderPre()
-    {
-
-        this.#frame++;
-        this.#op.patch.cg.frameStore.three = this.#op.patch.cg.frameStore.Three || {};
-        this.#op.patch.cg.frameStore.three.scene = this.#scene;
-        this.#op.patch.cg.frameStore.three.frame = this.#frame;
-        this.#op.patch.cg.frameStore.three.renderer = this;
-
-        this.#startRender();
     }
 
     #startRender()
@@ -61,6 +49,9 @@ export class ThreeRenderer
 
     }
 
+    /**
+     * @param {Object3D} o
+     */
     pushObject(o)
     {
         this.#stackObjects.push(o);
@@ -102,14 +93,36 @@ export class ThreeRenderer
         return this.#stackCameras.pop();
     }
 
-    render()
+    get renderer()
     {
+        return this.#renderer;
+    }
+
+    get scene()
+    {
+        return this.#scene;
+    }
+
+    renderPre()
+    {
+
         if (!this.#scene)
         {
             this.#scene = new THREE.Scene();
             this.#renderer = new THREE.WebGLRenderer({ "canvas": this.#op.patch.cg.canvas, "context": this.#op.patch.cgl.gl, "alpha": true });
             this.#renderer.autoClear = false;
         }
+        this.#frame++;
+        this.#op.patch.cg.frameStore.three = this.#op.patch.cg.frameStore.Three || {};
+        this.#op.patch.cg.frameStore.three.scene = this.#scene;
+        this.#op.patch.cg.frameStore.three.frame = this.#frame;
+        this.#op.patch.cg.frameStore.three.renderer = this;
+
+        this.#startRender();
+    }
+
+    render()
+    {
         this.#op.patch.cgl.lastMesh = null;
         if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
@@ -117,10 +130,6 @@ export class ThreeRenderer
 
         const r = container.getBoundingClientRect();
         this.#renderer.setSize(r.width, r.height);
-
-        // framestore.threeframe=this.#frame
-        // childstuff..
-        // renderer.render()
 
         this.#op.patch.cg.frameStore.three = null;
         this.#renderer.render(this.#scene, this.currentCamera || this.#defaultCamera);
@@ -143,6 +152,9 @@ export class ThreeRenderer
         }
     }
 
+    /**
+     * @param {ThreeOp} threeOp
+     */
     add(threeOp)
     {
 

@@ -8,6 +8,9 @@ export class ThreeOp
     #lastTrigger = -1;
     #renderer = null;
 
+    /**
+     * @param {Op} op
+     */
     constructor(op)
     {
         this.#op = op;
@@ -29,6 +32,9 @@ export class ThreeOp
         return this.#renderer || this.#op.patch.cg.frameStore.three.renderer;
     }
 
+    /**
+     * @param {any} object
+     */
     setSceneObject(object)
     {
         this.remove();
