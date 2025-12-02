@@ -2,7 +2,6 @@ const
     exec = op.inTrigger("Trigger"),
     inPosX = op.inFloat("Position X"),
     inScale = op.inFloat("Scale"),
-    inRot = op.inBool("Rot", false),
     inGeo = op.inObject("Geometry", null, "threeGeometry"),
     next = op.outTrigger("Next");
 
@@ -10,13 +9,7 @@ const threeOp = new CABLES.ThreeOp(op);
 
 let mesh = null;
 let geometry = null;
-// myNumber.onChange = updateGeom;
 
-// function updateGeom()
-// {
-//     // geometry = new THREE.TorusKnotGeometry(myNumber.get(), 3, 200, 32);
-//     // if (mesh)mesh.geometry = geometry.toNonIndexed();
-// }
 inGeo.onLinkChanged =
 inGeo.onChange = updateGeom;
 
@@ -46,7 +39,6 @@ exec.onTriggered = () =>
 
     threeOp.push();
 
-    if (inRot.get() && mesh) mesh.rotation.x += 0.005;
     next.trigger();
 
     threeOp.pop();

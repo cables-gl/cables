@@ -37,22 +37,62 @@
             },
             {
                 "type": 0,
-                "name": "Color R",
+                "name": "color R",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color G",
+                "name": "color G",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color B",
+                "name": "color B",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Color A",
+                "name": "color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "emissive R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "emissive G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "emissive B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "emissive A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "specular R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "specular G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "specular B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "specular A",
                 "subType": "number"
             },
             {
@@ -74,36 +114,6 @@
                 "type": 2,
                 "name": "Map",
                 "objType": "three texture"
-            },
-            {
-                "type": 0,
-                "name": "Emissive R",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Emissive G",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Emissive B",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular R",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular G",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Specular B",
-                "subType": "number"
             }
         ],
         "portsOut": [

@@ -34,11 +34,6 @@
                 "subType": "number"
             },
             {
-                "type": 0,
-                "name": "Rot",
-                "subType": "boolean"
-            },
-            {
                 "type": 2,
                 "name": "Geometry",
                 "objType": "threeGeometry"
