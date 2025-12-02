@@ -52,6 +52,11 @@
             },
             {
                 "type": 0,
+                "name": "Color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Wireframe",
                 "subType": "boolean"
             },
@@ -64,6 +69,11 @@
                 "type": 0,
                 "name": "Shininess",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Map",
+                "objType": "three texture"
             },
             {
                 "type": 0,

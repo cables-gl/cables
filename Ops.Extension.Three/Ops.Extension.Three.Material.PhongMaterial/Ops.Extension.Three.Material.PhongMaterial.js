@@ -3,54 +3,71 @@ const
     inR = op.inFloatSlider("Color R", 0),
     inG = op.inFloatSlider("Color G", 0),
     inB = op.inFloatSlider("Color B", 0),
+    inA = op.inFloatSlider("Color A", 1),
 
     inWire = op.inBool("Wireframe", false),
     inFlat = op.inBool("Flat Shading", false),
     inShiny = op.inFloat("Shininess", 30),
 
+    inMap = op.inObject("Map", null, "three texture"),
+
     inEmissiveR = op.inFloatSlider("Emissive R", 0),
     inEmissiveG = op.inFloatSlider("Emissive G", 0),
     inEmissiveB = op.inFloatSlider("Emissive B", 0),
 
-    inSpecularR = op.inFloatSlider("Specular R", 0),
-    inSpecularG = op.inFloatSlider("Specular G", 0),
-    inSpecularB = op.inFloatSlider("Specular B", 0),
+    inSpecularR = op.inFloatSlider("Specular R", 1),
+    inSpecularG = op.inFloatSlider("Specular G", 1),
+    inSpecularB = op.inFloatSlider("Specular B", 1),
 
     next = op.outTrigger("Next");
 
 inR.setUiAttribs({ "colorPick": true });
 
-const material = new THREE.MeshPhongMaterial({ "color": 0xffff00		 });
+let material = new THREE.MeshPhongMaterial({ "color": 0xffff00		 });
+
+function recreate()
+{
+    const params = { "color": 0xffff00		 };
+    console.log("recreate...");
+    if (inMap.get())params.map = inMap.get();
+    material = new THREE.MeshPhongMaterial(params);
+    material.flatShading = inFlat.get();
+    material.wireframe = inWire.get();
+    setColor();
+    setEmissiveColor();
+    setSpecularColor();
+}
 
 inR.onChange =
 inG.onChange =
-inB.onChange = () =>
+inB.onChange = setColor;
+
+function setColor()
 {
     material.color.set(inR.get(), inG.get(), inB.get());
-};
+}
 
 inEmissiveR.onChange =
 inEmissiveG.onChange =
-inEmissiveB.onChange = () =>
+inEmissiveB.onChange = setEmissiveColor;
+
+function setEmissiveColor()
 {
     material.emissive.set(inEmissiveR.get(), inEmissiveG.get(), inEmissiveB.get());
-};
+}
 
 inSpecularR.onChange =
 inSpecularG.onChange =
-inSpecularB.onChange = () =>
+inSpecularB.onChange = setSpecularColor;
+
+function setSpecularColor()
 {
     material.specular.set(inSpecularR.get(), inSpecularG.get(), inSpecularB.get());
-};
+}
 
-inFlat.onChange = () =>
-{
-    material.flatShading = inFlat.get();
-};
-inWire.onChange = () =>
-{
-    material.wireframe = inWire.get();
-};
+inMap.onChange =
+inWire.onChange =
+inFlat.onChange = recreate;
 
 inShiny.onChange = () =>
 {
