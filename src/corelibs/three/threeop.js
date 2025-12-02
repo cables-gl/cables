@@ -93,6 +93,66 @@ export class ThreeOp
         }
     }
 
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {boolean} defaultValue
+     * @param {Object} options
+     */
+    static bindBool(op, object, paramName, defaultValue, options)
+    {
+
+        op.threeBinds = op.threeBinds || {};
+
+        const a = op.threeBinds[paramName] || {
+            "in": op.inBool(paramName, defaultValue)
+        };
+        op.threeBinds[paramName] = a;
+
+        function update()
+        {
+            object[paramName] = a.in.get();
+        }
+
+        a.in.onChange = update;
+
+        update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {boolean} defaultValue
+     * @param {Object} options
+     */
+    static bindFloat(op, object, paramName, defaultValue, options)
+    {
+
+        op.threeBinds = op.threeBinds || {};
+
+        const a = op.threeBinds[paramName] || {
+            "in": op.inFloat(paramName, defaultValue)
+        };
+        op.threeBinds[paramName] = a;
+
+        function update()
+        {
+            object[paramName] = a.in.get();
+        }
+
+        a.in.onChange = update;
+
+        update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {Object} options
+     */
     static bindColor(op, object, paramName, options)
     {
         op.threeBinds = op.threeBinds || {};
@@ -103,7 +163,7 @@ export class ThreeOp
             values[0] = Math.random();
             values[1] = Math.random();
             values[2] = Math.random();
-            values[3] = Math.random();
+            values[3] = 1;
         }
         if (options.values == "0")
         {
