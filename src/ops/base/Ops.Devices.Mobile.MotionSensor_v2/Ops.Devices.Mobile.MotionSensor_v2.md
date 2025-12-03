@@ -1,7 +1,9 @@
-- alpha value represents the motion of the device around the z axis, represented in degrees with values ranging from 0 to 360.
+alpha value represents the motion of the device around the z axis, represented in degrees with values ranging from 0 to 360.
 
-- beta value represents the motion of the device around the x axis, represented in degrees with values ranging from -180 to 180. 
+beta value represents the motion of the device around the x axis, represented in degrees with values ranging from -180 to 180. 
 This represents a front to back motion of the device.
 
-- gamma value represents the motion of the device around the y axis, represented in degrees with values ranging from -90 to 90. 
+gamma value represents the motion of the device around the y axis, represented in degrees with values ranging from -90 to 90. 
 This represents a left to right motion of the device.
+
+to use in an iframe, make sure it has [gyroscope](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy/gyroscope) and [accelerometer](rhttps://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy/accelerometer) permissions enabled.
