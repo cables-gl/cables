@@ -1,57 +1,25 @@
-const
-    exec = op.inTrigger("Trigger"),
-    inIntens = op.inFloat("Intensity", 1),
-    inPosX = op.inFloat("Position X"),
-    inPosY = op.inFloat("Position Y"),
-    inPosZ = op.inFloat("Position Z"),
-    inCastShadow = op.inBool("Cast Shadow", false),
-
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-
-    next = op.outTrigger("Next");
-
-r.setUiAttribs({ "colorPick": true });
-
 const threeOp = new CABLES.ThreeOp(op);
+let light = new THREE.PointLight(0xffffff, 1, 100);
+
+const exec = op.inTrigger("Trigger");
+
+bind();
+
+const next = op.outTrigger("Next");
 
 const container = new THREE.Object3D();
+container.add(light);
+
 threeOp.setSceneObject(container);
 
-let light = null;
-
-inPosX.onChange =
-inPosY.onChange =
-inPosZ.onChange = updatePos;
-
-inIntens.onChange =
-r.onChange =
-g.onChange =
-b.onChange = updateColor;
-
-inCastShadow.onChange = recreate;
-
-function updatePos()
-{
-    if (light)
-        light.position.set(inPosX.get(), inPosY.get(), inPosZ.get());
-}
-
-function updateColor()
+function bind()
 {
     if (!light) return;
-    light.color.set(r.get(), g.get(), b.get());
-    light.intensity = inIntens.get();
-}
+    CABLES.ThreeOp.bindFloat(op, light, "intensity", 1);
+    CABLES.ThreeOp.bindVec(op, light, "position");
+    CABLES.ThreeOp.bindColor(op, light, "color");
+    CABLES.ThreeOp.bindBool(op, light, "castShadow", true);
 
-function recreate()
-{
-    if (light)container.remove(light);
-    light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(0, 0, 0);
-
-    light.castShadow = inCastShadow.get();
     light.shadow.camera.top = 5;
     light.shadow.camera.bottom = -5;
     light.shadow.camera.left = -5;
@@ -62,18 +30,12 @@ function recreate()
 
     light.shadow.mapSize.width = 2048;
     light.shadow.mapSize.height = 2048;
-
-    container.add(light);
-    updateColor();
-    updatePos();
 }
 
 exec.onTriggered = () =>
 {
     if (!light)
-    {
         recreate();
-    }
 
     threeOp.push();
 

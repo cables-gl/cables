@@ -31,43 +31,48 @@
             },
             {
                 "type": 0,
-                "name": "Intensity",
+                "name": "intensity",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Position X",
+                "name": "position X",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Position Y",
+                "name": "position Y",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Position Z",
+                "name": "position Z",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Cast Shadow",
+                "name": "color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color A",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "castShadow",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "r",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "g",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "b",
-                "subType": "number"
             }
         ],
         "portsOut": [

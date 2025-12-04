@@ -12,9 +12,15 @@ CABLES.ThreeOp.bindFloat(op, fog, "far", 30);
 exec.onTriggered = () =>
 {
     if (threeOp.renderer.scene.fog != fog) threeOp.renderer.scene.fog = fog;
-    // threeOp.push();
+    threeOp.push();
 
     next.trigger();
 
-    // threeOp.pop();
+    threeOp.pop();
 };
+
+threeOp.on("inactive", () =>
+{
+    console.log("inactive......");
+    threeOp.renderer.scene.fog = null;
+});
