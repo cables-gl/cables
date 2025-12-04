@@ -376,7 +376,27 @@ export class Patch extends Events
                 if (CABLES.OPS[opId])
                 {
                     objName = CABLES.OPS[opId].objName;
-                    op = new CABLES.OPS[opId].f(this, objName, id, opId);
+                    try
+                    {
+                        op = new CABLES.OPS[opId].f(this, objName, id, opId);
+                    }
+                    catch (e)
+                    {
+                        this._crashedOps.push(objName);
+                        this._log.error("[instancing error] constructor: " + objName, e);
+                        if (!this.isEditorMode())
+                        {
+                            this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+                        }
+                        else
+                        {
+                            // construct a "empty" op, use CABLES.Op here to get UiOp class in editor
+                            op = new CABLES.Op(this, objName, id);
+                            op.setUiError("instancingError", "Failed to instanciate op", 3);
+                            op.setEnabled(false);
+                            if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
+                        }
+                    }
                     op.opId = opId;
                 }
                 else

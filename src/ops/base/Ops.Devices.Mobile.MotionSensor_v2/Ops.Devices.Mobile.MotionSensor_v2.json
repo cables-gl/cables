@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1740419904960
+        },
+        {
+            "message": "fix null pointer exception in event handler, add triggerbutton to \"request permissions\"",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1764756355207
         }
     ],
     "authorName": "pandur",
@@ -100,8 +106,6 @@
         ]
     },
     "summary": "get values from the device motion sensor mobile",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
