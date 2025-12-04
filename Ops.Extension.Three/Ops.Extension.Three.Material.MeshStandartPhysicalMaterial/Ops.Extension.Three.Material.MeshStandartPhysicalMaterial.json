@@ -88,7 +88,77 @@
             },
             {
                 "type": 2,
-                "name": "Map",
+                "name": "map",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "aoMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 0,
+                "name": "aoMapIntensity",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "alphaMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "bumpMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "displacementMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 0,
+                "name": "displacementScale",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "emissiveMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "envMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 0,
+                "name": "envMapIntensity",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "lightMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 0,
+                "name": "lightMapIntensity",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "metalnessMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "normalMap",
+                "objType": "three texture"
+            },
+            {
+                "type": 2,
+                "name": "roughnessMap",
                 "objType": "three texture"
             }
         ],

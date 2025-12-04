@@ -5,10 +5,7 @@ const exec = op.inTrigger("Trigger");
 bind();
 
 const
-    inMap = op.inObject("Map", null, "three texture"),
     next = op.outTrigger("Next");
-
-inMap.onChange = recreate;
 
 recreate();
 
@@ -28,12 +25,26 @@ function bind()
     CABLES.ThreeOp.bindBool(op, material, "flatShading", false, { "needsUpdate": true });
     CABLES.ThreeOp.bindBool(op, material, "wireframe", false, { "needsUpdate": true });
     CABLES.ThreeOp.bindBool(op, material, "fog", true, { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "map", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "aoMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindFloat(op, material, "aoMapIntensity", 1);
+    CABLES.ThreeOp.bindObject(op, material, "alphaMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "bumpMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "displacementMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindFloat(op, material, "displacementScale", 1);
+    CABLES.ThreeOp.bindObject(op, material, "emissiveMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "envMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindFloat(op, material, "envMapIntensity", 1);
+
+    CABLES.ThreeOp.bindObject(op, material, "lightMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindFloat(op, material, "lightMapIntensity", 1);
+    CABLES.ThreeOp.bindObject(op, material, "metalnessMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "normalMap", "three texture", { "needsUpdate": true });
+    CABLES.ThreeOp.bindObject(op, material, "roughnessMap", "three texture", { "needsUpdate": true });
 }
 
 function recreate()
 {
-    const params = { "color": 0xffff00		 };
-    if (inMap.get())params.map = inMap.get();
-    material = new THREE.MeshStandardMaterial(params);
+    material = new THREE.MeshStandardMaterial({});
     bind();
 }

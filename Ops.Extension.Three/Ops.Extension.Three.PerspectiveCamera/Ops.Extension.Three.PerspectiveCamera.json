@@ -46,21 +46,6 @@
             {
                 "type": 1,
                 "name": "Trigger"
-            },
-            {
-                "type": 0,
-                "name": "Color R",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Color G",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Color B",
-                "subType": "number"
             }
         ],
         "portsOut": [

@@ -1,19 +1,10 @@
 const
     exec = op.inTrigger("Trigger"),
-    inR = op.inFloatSlider("Color R", 0),
-    inG = op.inFloatSlider("Color G", 0),
-    inB = op.inFloatSlider("Color B", 0),
     next = op.outTrigger("Next");
 
 const threeOp = new CABLES.ThreeOp(op);
 const camera = new THREE.PerspectiveCamera(120, 1.777, 0.001, 100);
 threeOp.setSceneObject(camera);
-
-inR.onChange =
-inG.onChange =
-inB.onChange = () =>
-{
-};
 
 exec.onTriggered = () =>
 {
