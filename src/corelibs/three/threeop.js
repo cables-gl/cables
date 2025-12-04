@@ -105,19 +105,20 @@ export class ThreeOp extends Events
      * @param {boolean} defaultValue
      * @param {Object} options
      */
-    static bindBool(op, object, paramName, defaultValue, options)
+    static bindBool(op, object, paramName, defaultValue, options = {})
     {
-
         op.threeBinds = op.threeBinds || {};
 
         const a = op.threeBinds[paramName] || {
-            "in": op.inBool(paramName, defaultValue)
+            "in": op.inBool(paramName, defaultValue),
+            "options": options
         };
         op.threeBinds[paramName] = a;
 
         function update()
         {
-            object[paramName] = a.in.get();
+            object[paramName] = !!a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
         }
 
         a.in.onChange = update;
@@ -132,19 +133,20 @@ export class ThreeOp extends Events
      * @param {boolean} defaultValue
      * @param {Object} options
      */
-    static bindFloat(op, object, paramName, defaultValue, options)
+    static bindFloat(op, object, paramName, defaultValue, options = {})
     {
-
         op.threeBinds = op.threeBinds || {};
 
         const a = op.threeBinds[paramName] || {
-            "in": op.inFloat(paramName, defaultValue)
+            "in": op.inFloat(paramName, defaultValue),
+            "options": options
         };
         op.threeBinds[paramName] = a;
 
         function update()
         {
             object[paramName] = a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
         }
 
         a.in.onChange = update;
