@@ -40,11 +40,7 @@
             }
         ]
     },
-    "dependencies": [
-        {
-            "src": "https://threejs.org/build/three.module.js",
-            "type": "module",
-            "export": "THREE"
-        }
+    "coreLibs": [
+        "three"
     ]
 }
