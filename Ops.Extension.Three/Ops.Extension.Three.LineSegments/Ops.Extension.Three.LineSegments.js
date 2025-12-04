@@ -1,34 +1,39 @@
 const
     exec = op.inTrigger("Trigger"),
-    inGeom = op.inObject("Geometry", null, "threeGeometry"),
+    inPosX = op.inFloat("Position X"),
+    inScale = op.inFloat("Scale"),
+    inGeo = op.inObject("Geometry", null, "threeGeometry"),
     next = op.outTrigger("Next");
 
 const threeOp = new CABLES.ThreeOp(op);
 
-let obj = null;
-let to = null;
+let lines = null;
+let geometry = null;
 
-inGeom.onChange = updateSoon;
+inGeo.onChange = updateGeom;
 
-function updateSoon()
+function updateGeom()
 {
-    clearTimeout(to);
-    to = setTimeout(() =>
-    {
-        update();
-    }, 30);
-}
-
-function update()
-{
-    const geom = inGeom.get() || undefined; // set to undefined to use default geom from constructor
-    obj = new THREE.LineSegments(geom, threeOp.renderer.currentMaterial);
-    threeOp.setSceneObject(obj);
+    geometry = inGeo.get();
 }
 
 exec.onTriggered = () =>
 {
-    if (!obj) update();
+    if (!lines)
+    {
+        updateGeom();
+
+        lines = new THREE.LineSegments(geometry || threeOp.renderer.defaultGeometry, threeOp.renderer.currentMaterial);
+        threeOp.setSceneObject(lines);
+    }
+
+    if (lines.geometry != geometry)
+    {
+        lines.geometry = geometry || threeOp.renderer.defaultGeometry;
+    }
+
+    lines.position.set(inPosX.get(), 0, 0);
+    lines.scale.x = lines.scale.y = lines.scale.z = inScale.get();
 
     threeOp.push();
     next.trigger();

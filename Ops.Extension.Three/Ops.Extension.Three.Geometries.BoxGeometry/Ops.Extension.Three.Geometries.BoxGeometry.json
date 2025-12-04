@@ -33,6 +33,21 @@
                 "type": 0,
                 "name": "Depth",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Depth Segments",
+                "subType": "integer"
             }
         ],
         "portsOut": [

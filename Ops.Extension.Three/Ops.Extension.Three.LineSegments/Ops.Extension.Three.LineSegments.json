@@ -66,6 +66,16 @@
                 "name": "Trigger"
             },
             {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "Geometry",
                 "objType": "threeGeometry"
