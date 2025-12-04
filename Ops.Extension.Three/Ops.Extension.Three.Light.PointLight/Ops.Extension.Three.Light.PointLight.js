@@ -1,11 +1,11 @@
 const threeOp = new CABLES.ThreeOp(op);
+const
+    exec = op.inTrigger("Trigger"),
+    next = op.outTrigger("Next");
+
 let light = new THREE.PointLight(0xffffff, 1, 100);
 
-const exec = op.inTrigger("Trigger");
-
 bind();
-
-const next = op.outTrigger("Next");
 
 const container = new THREE.Object3D();
 container.add(light);
@@ -34,11 +34,7 @@ function bind()
 
 exec.onTriggered = () =>
 {
-    if (!light)
-        recreate();
-
     threeOp.push();
-
     next.trigger();
     threeOp.pop();
 };
