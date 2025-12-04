@@ -7,6 +7,7 @@
     "dependencies": {
         "cables": "file:../../",
         "cables-shared-client": "file:../../../shared/client/",
-        "gl-matrix": "3.1.0"
+        "gl-matrix": "3.1.0",
+        "three": "0.181.2"
     }
 }
