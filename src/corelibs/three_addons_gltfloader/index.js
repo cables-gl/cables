@@ -1,4 +1,4 @@
-import { GLTFLoader } from "three/addons/loaders";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 window.THREE = window.THREE || {};
 

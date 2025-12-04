@@ -1,4 +1,4 @@
-import { AnaglyphEffect, AsciiEffect, OutlineEffect, ParallaxBarrierEffect, StereoEffect } from "three/addons/effects";
+import { AnaglyphEffect, AsciiEffect, OutlineEffect, ParallaxBarrierEffect, StereoEffect } from "three/addons";
 
 window.THREE = window.THREE || {};
 
