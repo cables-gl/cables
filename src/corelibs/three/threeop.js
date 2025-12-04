@@ -1,6 +1,7 @@
+import { Events } from "cables-shared-client";
 import { ThreeRenderer } from "./threerenderer.js";
 
-export class ThreeOp
+export class ThreeOp extends Events
 {
     #op;
     #currentParent = null;
@@ -13,6 +14,7 @@ export class ThreeOp
      */
     constructor(op)
     {
+        super();
         this.#op = op;
         op.onDelete = () =>
         {
@@ -91,6 +93,7 @@ export class ThreeOp
 
             console.log("remove from scene...");
         }
+        this.emitEvent("inactive");
     }
 
     /**
@@ -153,7 +156,7 @@ export class ThreeOp
      * @param {string} paramName
      * @param {Object} options
      */
-    static bindColor(op, object, paramName, options)
+    static bindColor(op, object, paramName, options = {})
     {
         op.threeBinds = op.threeBinds || {};
 
@@ -197,6 +200,42 @@ export class ThreeOp
         a.inA.onChange = update;
 
         update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {Object} options
+     */
+    static bindVec(op, object, paramName, options = {})
+    {
+        op.threeBinds = op.threeBinds || {};
+
+        const values = [0, 0, 0];
+
+        const a = op.threeBinds[paramName] || {
+            "inX": op.inFloat(paramName + " X", values[0]),
+            "inY": op.inFloat(paramName + " Y", values[1]),
+            "inZ": op.inFloat(paramName + " Z", values[2]),
+        };
+        function update()
+        {
+            object[paramName].set(a.inX.get(), a.inY.get(), a.inZ.get());
+
+        }
+
+        if (!op.threeBinds[paramName])
+        {
+
+            op.threeBinds[paramName] = a;
+
+            a.inX.onChange =
+        a.inY.onChange =
+        a.inZ.onChange = update;
+
+            update();
+        }
     }
 
 }
