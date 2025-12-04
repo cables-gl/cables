@@ -102,12 +102,17 @@
             },
             {
                 "type": 0,
-                "name": "Wireframe",
+                "name": "flatShading",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Flat Shading",
+                "name": "wireframe",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "fog",
                 "subType": "boolean"
             },
             {
