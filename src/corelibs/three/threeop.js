@@ -130,6 +130,34 @@ export class ThreeOp extends Events
      * @param {Op} op
      * @param {Object3D} object
      * @param {string} paramName
+     * @param {object} defaultValue
+     * @param {Object} options
+     */
+    static bindObject(op, object, paramName, objType, options = {})
+    {
+        op.threeBinds = op.threeBinds || {};
+
+        const a = op.threeBinds[paramName] || {
+            "in": op.inObject(paramName, null, objType),
+            "options": options
+        };
+        op.threeBinds[paramName] = a;
+
+        function update()
+        {
+            object[paramName] = a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
+        }
+
+        a.in.onChange = update;
+
+        update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
      * @param {boolean} defaultValue
      * @param {Object} options
      */
