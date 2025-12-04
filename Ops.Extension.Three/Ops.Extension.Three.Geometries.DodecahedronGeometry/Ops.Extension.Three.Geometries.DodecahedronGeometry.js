@@ -1,15 +1,13 @@
 const
-    inW = op.inFloat("Width", 0.4),
-    inH = op.inFloat("Height", 0.4),
-    inD = op.inFloat("Depth", 0.4),
+    inRadius = op.inFloat("Radius", 1),
+    inDetail = op.inFloat("Detail", 0),
     outGeom = op.outObject("geometry", null, "threeGeometry");
 
 let geometry = null;
 let to = null;
 
-inW.onChange =
-    inH.onChange =
-    inD.onChange = updateSoon;
+inRadius.onChange =
+inDetail.onChange = updateSoon;
 
 updateSoon();
 
@@ -24,6 +22,9 @@ function updateSoon()
 
 function update()
 {
-    geometry = new THREE.BoxGeometry(inW.get(), inH.get(), inD.get());
+    geometry = new THREE.CylinderGeometry(
+        inRadius.get(),
+        inDetail.get()
+    );
     outGeom.setRef(geometry);
 }

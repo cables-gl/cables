@@ -1,8 +1,8 @@
 {
-    "id": "25d24fbe-fa4e-42e3-bb7a-b018ea11477d",
-    "created": 1764598683628,
+    "id": "7b232c63-28e7-4dea-a894-7832bb918746",
+    "created": 1764686869071,
     "license": "MIT",
-    "authorName": "pandur",
+    "authorName": "stephan",
     "changelog": [
         {
             "message": "op created",
@@ -15,13 +15,19 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 0,
-                "name": "Width",
+                "name": "Radius",
                 "subType": "number"
             },
             {
@@ -31,7 +37,17 @@
             },
             {
                 "type": 0,
-                "name": "Depth",
+                "name": "Curve Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radial Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
                 "subType": "number"
             }
         ],

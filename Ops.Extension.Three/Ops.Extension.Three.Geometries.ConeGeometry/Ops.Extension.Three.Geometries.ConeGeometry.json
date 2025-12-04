@@ -1,0 +1,87 @@
+{
+    "id": "629ecf46-c5d4-4449-8541-c22472d06118",
+    "created": 1764687396358,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687176931
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687396359
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radial Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Open Ended",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Theta Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Length",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}

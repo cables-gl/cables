@@ -1,0 +1,72 @@
+{
+    "id": "500395f8-db83-4ea6-8bf0-3bdd894672cb",
+    "created": 1764688251902,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687176931
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687396359
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687999901
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764688204664
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764688251903
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "threeGeometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Wireframe",
+                "objType": "threeGeometry"
+            }
+        ]
+    }
+}

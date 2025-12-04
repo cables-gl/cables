@@ -1,0 +1,86 @@
+{
+    "id": "69095ba5-56a3-4d6f-bb59-f0a115309ca6",
+    "created": 1764693039974,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687176931
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687396359
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687999901
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764688204664
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764688251903
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764693039974
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "threeGeometry"
+            },
+            {
+                "type": 0,
+                "name": "Threshold Angle",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Wireframe",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}

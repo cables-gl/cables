@@ -1,8 +1,8 @@
 {
-    "id": "25d24fbe-fa4e-42e3-bb7a-b018ea11477d",
-    "created": 1764598683628,
+    "id": "da00b4a6-55ac-43f9-9e17-257e3fcd6d42",
+    "created": 1764687176931,
     "license": "MIT",
-    "authorName": "pandur",
+    "authorName": "stephan",
     "changelog": [
         {
             "message": "op created",
@@ -15,23 +15,40 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687176931
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 0,
-                "name": "Width",
+                "name": "Radius",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Height",
+                "name": "Segments",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Depth",
+                "name": "Theta Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Length",
                 "subType": "number"
             }
         ],

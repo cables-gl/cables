@@ -1,0 +1,98 @@
+{
+    "id": "0c3016da-b80a-4997-adfa-7d3382aac36e",
+    "created": 1764687999900,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764598683628
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687176931
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687396359
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764687999901
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radius Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radial Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Open Ended",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Theta Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Length",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}
