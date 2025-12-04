@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import { ThreeOp } from "./threeop.js";
 
 export class ThreeRenderer
