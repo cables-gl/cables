@@ -1,6 +1,6 @@
 const
     mulAxis = op.inValue("Mul Orientation", 1),
-    req = op.inTrigger("Request Permissions"),
+    req = op.inTriggerButton("Request Permissions"),
     axis1 = op.outNumber("Orientation Alpha"),
     axis2 = op.outNumber("Orientation Beta"),
     axis3 = op.outNumber("Orientation Gamma"),
@@ -57,7 +57,7 @@ function handleDeviceOrientation(event)
         axis2.set((event.beta || 0) * mulAxis.get());
         axis3.set((event.gamma || 0) * mulAxis.get());
 
-        if (evt.webkitCompassHeading) axis1.set(this.deviceAngleDelta = 360 - evt.webkitCompassHeading);
+        if (event.webkitCompassHeading) axis1.set(this.deviceAngleDelta = 360 - event.webkitCompassHeading);
 
         obj.OrientationAlpha = axis1.get();
         obj.OrientationBeta = axis2.get();
@@ -112,6 +112,6 @@ req.onTriggered = function ()
 if (window.self !== window.top)
 {
     // outPermissions.set("iframe");
-    op.setUiError("iframe", "MotionSensor does not work in an iframe, open the patch without an iframe to get it to work", 1);
-    op.warn("MotionSensor does not work in an iframe, open the patch without an iframe to get it to work");
+    op.setUiError("iframe", "MotionSensor may not work in an iframe, open the patch without an iframe to get it to work", 1);
+    op.warn("MotionSensor may not work in an iframe, open the patch without an iframe to get it to work");
 }
