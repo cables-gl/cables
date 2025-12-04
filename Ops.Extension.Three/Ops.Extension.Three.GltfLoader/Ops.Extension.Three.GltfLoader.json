@@ -1,0 +1,39 @@
+{
+    "id": "8649403c-44c5-467e-af8c-114dcacb5f49",
+    "created": 1764683334276,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764683334276
+        },
+        {
+            "message": "Patch.PAjelF3.ThreeGltf renamed to Ops.Extension.Three.GltfLoader",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764844516917
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    }
+}
