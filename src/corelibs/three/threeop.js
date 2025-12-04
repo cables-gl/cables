@@ -8,6 +8,7 @@ export class ThreeOp extends Events
     #object = null;
     #lastTrigger = -1;
     #renderer = null;
+    isInScene = false;
 
     /**
      * @param {Op} op
@@ -20,8 +21,8 @@ export class ThreeOp extends Events
         {
             console.log("ondeleteeeeeeeeee");
             this.remove();
-
         };
+
     }
 
     get lastTrigger()
@@ -94,6 +95,7 @@ export class ThreeOp extends Events
             console.log("remove from scene...");
         }
         this.emitEvent("inactive");
+        this.isInScene = false;
     }
 
     /**

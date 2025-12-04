@@ -145,10 +145,13 @@ export class ThreeRenderer
     {
         for (let i = 0; i < this.#sceneThreeOps.length; i++)
         {
-            if (this.#frame != this.#sceneThreeOps[i].lastTrigger)
-            {
-                this.#sceneThreeOps[i].remove();
-            }
+            if (this.#sceneThreeOps[i].isInScene)
+                if (this.#frame != this.#sceneThreeOps[i].lastTrigger)
+                {
+                    this.#sceneThreeOps[i].remove();
+                    this.#sceneThreeOps[i].isInScene = false;
+                // todo:really remove
+                }
         }
     }
 
@@ -157,8 +160,9 @@ export class ThreeRenderer
      */
     add(threeOp)
     {
-
+        if (!threeOp) return;
         this.#sceneThreeOps.push(threeOp);
+        threeOp.isInScene = true;
     }
 
 }
