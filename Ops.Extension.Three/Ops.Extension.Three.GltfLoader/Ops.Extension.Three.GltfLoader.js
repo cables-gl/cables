@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Trigger"),
-    inUrl = op.inUrl("File"),
+    inUrl = op.inUrl("File", [".glb"]),
     next = op.outTrigger("Next"),
     result = op.outNumber("Result");
 
@@ -19,12 +19,10 @@ inUrl.onChange = () =>
     {
         console.log("errrrrrr");
     });
-
 };
 
-
-exec.onTriggered=() => {
-
+exec.onTriggered = () =>
+{
     threeOp.push();
     next.trigger();
     threeOp.pop();

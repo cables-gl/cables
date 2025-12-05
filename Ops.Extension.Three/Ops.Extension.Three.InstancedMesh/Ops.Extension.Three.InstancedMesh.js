@@ -1,7 +1,9 @@
 const
     exec = op.inTrigger("Trigger"),
-    inScale = op.inFloat("Scale"),
+    inScaleGeo = op.inFloat("Scale Geom", 1),
     inPositions = op.inArray("Positions", null, 3),
+    inScale = op.inArray("Scalings", null, 3),
+    inColors = op.inArray("Colors", null, 3),
     inGeo = op.inObject("Geometry", null, "threeGeometry"),
     next = op.outTrigger("Next");
 
@@ -10,6 +12,7 @@ const threeOp = new CABLES.ThreeOp(op);
 let mesh = null;
 let geometry = null;
 let currentMaterial = null;
+
 inGeo.onLinkChanged =
 inGeo.onChange = updateGeom;
 
@@ -18,6 +21,8 @@ function updateGeom()
     geometry = inGeo.get();
 }
 
+inScaleGeo.onChange =
+inScale.onChange =
 inPositions.onChange = () =>
 {
     updateMats();
@@ -27,16 +32,20 @@ function updateMats()
 {
     if (!mesh) return;
     const arr = inPositions.get() || [];
+    const arrScale = inScale.get() || [];
+    const matrix = new THREE.Matrix4();
 
-        	const matrix = new THREE.Matrix4();
-    console.log("pos");
     for (let i = 0; i < arr.length / 3; i++)
     {
+    	if (arrScale) matrix.makeScale(arrScale[i * 3 + 0] * inScaleGeo.get(), arrScale[i * 3 + 1] * inScaleGeo.get(), arrScale[i * 3 + 2] * inScaleGeo.get());
+    	else matrix.makeScale(inScaleGeo.get(), inScaleGeo.get(), inScaleGeo.get());
+
     	matrix.setPosition(arr[i * 3 + 0], arr[i * 3 + 1], arr[i * 3 + 2]);
+
         mesh.setMatrixAt(i, matrix);
         mesh.setColorAt(i, new THREE.Color(1, 0, 0));
-        // console.log("mat", matrix);
     }
+
     mesh.instanceColor.needsUpdate = true;
     mesh.instanceMatrix.needsUpdate = true;
     mesh.needsUpdate = true;
@@ -47,39 +56,29 @@ exec.onTriggered = () =>
 {
     const arr = inPositions.get();
 
-    if (!arr || !geometry)
-    {
-        return;
-    }
+    if (!arr || !geometry) return;
 
     if (!mesh || currentMaterial != threeOp.renderer.currentMaterial)
     {
         if (mesh)mesh.remove();
         updateGeom();
-        // const material = new THREE.MeshPhongMaterial({ "color": 0xffffff });
+
         mesh = new THREE.InstancedMesh(geometry || threeOp.renderer.defaultGeometry, threeOp.renderer.currentMaterial, arr.length / 3);
         mesh.frustumCulled = false;
         currentMaterial = threeOp.renderer.currentMaterial;
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        // mesh.frustumCulled=false;
+
         updateMats();
         threeOp.setSceneObject(mesh);
-        // 			mesh.setColorAt( i, color );
     }
     if (mesh.geometry != geometry)
     {
         mesh.geometry = geometry || threeOp.renderer.defaultGeometry;
-
         updateMats();
     }
 
-    // mesh.position.set(inPosX.get(), 0, 0);
-    mesh.scale.x = mesh.scale.y = mesh.scale.z = inScale.get();
-
     threeOp.push();
-
     next.trigger();
-
     threeOp.pop();
 };

@@ -1,6 +1,6 @@
 {
-    "id": "327d5ed4-4aa8-4fb7-a56a-6b72c8854357",
-    "created": 1764885103205,
+    "id": "3b98667a-d210-4fd9-b5bb-4aaf6edd61fd",
+    "created": 1764930646396,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -11,16 +11,28 @@
             "date": 1764169447790
         },
         {
-            "message": "Extension.Three.Knot renamed to Ops.Extension.Three.Mesh",
+            "message": "Patch.PAjelF3.Three.Knot renamed to Ops.Extension.Three.Knot",
             "type": "rename",
             "author": "pandur",
-            "date": 1764597989300
+            "date": 1764583837393
         },
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1764885103206
+            "date": 1764588236583
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588670322
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764930646397
         }
     ],
     "layout": {
@@ -31,25 +43,23 @@
             },
             {
                 "type": 0,
-                "name": "Scale Geom",
-                "subType": "number"
+                "name": "flatShading",
+                "subType": "boolean"
             },
             {
-                "type": 3,
-                "name": "Positions"
+                "type": 0,
+                "name": "wireframe",
+                "subType": "boolean"
             },
             {
-                "type": 3,
-                "name": "Scalings"
-            },
-            {
-                "type": 3,
-                "name": "Colors"
+                "type": 0,
+                "name": "fog",
+                "subType": "boolean"
             },
             {
                 "type": 2,
-                "name": "Geometry",
-                "objType": "threeGeometry"
+                "name": "Map",
+                "objType": "three texture"
             }
         ],
         "portsOut": [
