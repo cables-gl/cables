@@ -7,38 +7,8 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
-            "date": 1764597840730
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1764598683628
-        },
-        {
-            "message": "op created",
-            "type": "new op",
             "author": "stephan",
             "date": 1764686869072
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687176931
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687396359
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687999901
         }
     ],
     "layout": {
@@ -94,5 +64,43 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "summary": "Create a cylinder geometry",
+    "exampleProjectId": "8nYKq4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the cylinder at the top"
+            },
+            {
+                "name": "Radius Bottom",
+                "text": "Radius of the cylinder at the bottom"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the cylinder"
+            },
+            {
+                "name": "Radial Segments",
+                "text": "Number of segmented faces around the circumference of the cylinder"
+            },
+            {
+                "name": "Height Segments",
+                "text": "Number of rows of faces along the height of the cylinder"
+            },
+            {
+                "name": "Open Ended",
+                "text": "Whether the base of the cylinder is open or capped"
+            },
+            {
+                "name": "Theta Start",
+                "text": "Start angle for first segment, in radians"
+            },
+            {
+                "name": "Theta Length",
+                "text": "The central angle, often called theta, of the circular sector, in radians"
+            }
+        ]
+    }
 }

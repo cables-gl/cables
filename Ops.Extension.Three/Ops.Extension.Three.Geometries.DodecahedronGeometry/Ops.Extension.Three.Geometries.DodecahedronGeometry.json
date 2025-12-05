@@ -7,44 +7,8 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
-            "date": 1764597840730
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1764598683628
-        },
-        {
-            "message": "op created",
-            "type": "new op",
             "author": "stephan",
             "date": 1764686869072
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687176931
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687396359
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764687999901
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "stephan",
-            "date": 1764688204664
         }
     ],
     "layout": {
@@ -70,5 +34,19 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "summary": "Creates a dodecahedron geometry",
+    "exampleProjectId": "8nYKq4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the dodecahedron"
+            },
+            {
+                "name": "Detail",
+                "text": "Adds vertices making it no longer a dodecahedron"
+            }
+        ]
+    }
 }

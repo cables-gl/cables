@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764597840730
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1764598683628
         }
     ],
     "layout": {
@@ -60,5 +54,35 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "summary": "Create a box/cube geometry",
+    "exampleProjectId": "8nYKq4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Width",
+                "text": "The length of the edges parallel to the X axis"
+            },
+            {
+                "name": "Height",
+                "text": "The length of the edges parallel to the Y axis"
+            },
+            {
+                "name": "Depth",
+                "text": "The length of the edges parallel to the Z axis"
+            },
+            {
+                "name": "Width Segments",
+                "text": "Number of segmented rectangular faces along the width of the sides"
+            },
+            {
+                "name": "Height Segments",
+                "text": "Number of segmented rectangular faces along the height of the sides"
+            },
+            {
+                "name": "Depth Segments",
+                "text": "Number of segmented rectangular faces along the depth of the sides"
+            }
+        ]
+    }
 }
