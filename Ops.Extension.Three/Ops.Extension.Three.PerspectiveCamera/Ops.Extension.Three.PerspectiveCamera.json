@@ -46,6 +46,41 @@
             {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "fov",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "zoom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "position Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "near",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "far",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -7,10 +7,7 @@ let light = new THREE.PointLight(0xffffff, 1, 100);
 
 bind();
 
-const container = new THREE.Object3D();
-container.add(light);
-
-threeOp.setSceneObject(container);
+threeOp.setSceneObject(light);
 
 function bind()
 {
@@ -34,7 +31,7 @@ function bind()
 
 exec.onTriggered = () =>
 {
-    threeOp.push();
+    threeOp.push(false);
     next.trigger();
     threeOp.pop();
 };
