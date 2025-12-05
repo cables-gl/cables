@@ -36,7 +36,6 @@
         "three"
     ],
     "summary": "Get the edges of a geometry",
-    "exampleProjectId": "8nYKq4",
     "docs": {
         "ports": []
     }
