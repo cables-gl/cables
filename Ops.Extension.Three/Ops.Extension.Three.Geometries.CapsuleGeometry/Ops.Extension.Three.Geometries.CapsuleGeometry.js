@@ -1,7 +1,7 @@
 const
     inRadius = op.inFloat("Radius", 1),
     inHeight = op.inFloat("Height", 1),
-    inCurveSegments = op.inFloat("Curve Segments", 4),
+    inCapSegments = op.inFloat("Cap Segments", 4),
     inRadialSegments = op.inFloat("Radial Segments", 8),
     inHeightSegments = op.inFloat("Height Segments", 1),
     outGeom = op.outObject("geometry", null, "threeGeometry");
@@ -11,7 +11,7 @@ let to = null;
 
 inRadius.onChange =
 inHeight.onChange =
-inCurveSegments.onChange =
+inCapSegments.onChange =
 inRadialSegments.onChange =
 inHeightSegments.onChange = updateSoon;
 
@@ -28,6 +28,6 @@ function updateSoon()
 
 function update()
 {
-    geometry = new THREE.CapsuleGeometry(inRadius.get(), inHeight.get(), inCurveSegments.get(), inRadialSegments.get(), inHeightSegments.get());
+    geometry = new THREE.CapsuleGeometry(inRadius.get(), inHeight.get(), inCapSegments.get(), inRadialSegments.get(), inHeightSegments.get());
     outGeom.setRef(geometry);
 }

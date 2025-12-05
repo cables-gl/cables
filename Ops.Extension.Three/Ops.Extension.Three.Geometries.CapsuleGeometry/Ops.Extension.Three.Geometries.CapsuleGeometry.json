@@ -25,7 +25,7 @@
             },
             {
                 "type": 0,
-                "name": "Curve Segments",
+                "name": "Cap Segments",
                 "subType": "number"
             },
             {
@@ -74,5 +74,6 @@
                 "text": "Number of rows of faces along the height of the middle section"
             }
         ]
-    }
+    },
+    "exampleProjectId": "Fwh6w4"
 }
