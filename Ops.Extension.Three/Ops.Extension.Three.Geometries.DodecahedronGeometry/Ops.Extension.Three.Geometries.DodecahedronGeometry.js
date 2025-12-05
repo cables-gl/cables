@@ -22,7 +22,7 @@ function updateSoon()
 
 function update()
 {
-    geometry = new THREE.CylinderGeometry(
+    geometry = new THREE.DodecahedronGeometry(
         inRadius.get(),
         inDetail.get()
     );

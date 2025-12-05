@@ -1,1 +1,1 @@
-https://threejs.org/docs/?q=OctahedronGeometry#IcosahedronGeometry
+https://threejs.org/docs/?q=OctahedronGeometry#OctahedronGeometry
