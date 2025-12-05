@@ -1,6 +1,6 @@
 {
-    "id": "da00b4a6-55ac-43f9-9e17-257e3fcd6d42",
-    "created": 1764687176931,
+    "id": "68dcf402-75e8-4a96-a577-15c2ffac07d7",
+    "created": 1764937952000,
     "license": "MIT",
     "authorName": "stephan",
     "changelog": [
@@ -8,29 +8,34 @@
             "message": "op created",
             "type": "new op",
             "author": "stephan",
-            "date": 1764686869072
+            "date": 1764937952000
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 0,
-                "name": "Radius",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Segments",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Theta Start",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Theta Length",
+                "name": "Radius",
                 "subType": "number"
             }
         ],
@@ -43,27 +48,31 @@
         ]
     },
     "coreLibs": [
-        "three"
+        "three",
+        "three_addons_geometries"
     ],
-    "summary": "Create a circle geometry",
-    "exampleProjectId": "8nYKq4",
+    "summary": "Create a rounded box/cube geometry",
     "docs": {
         "ports": [
             {
-                "name": "Radius",
-                "text": "Radius of the circle"
+                "name": "Width",
+                "text": "The width along the X axis"
+            },
+            {
+                "name": "Height",
+                "text": "The height along the Y axis"
+            },
+            {
+                "name": "Depth",
+                "text": "The depth along the Z axis"
             },
             {
                 "name": "Segments",
-                "text": "Number of segments (triangles)"
+                "text": "Number of segments that form the rounded corners"
             },
             {
-                "name": "Theta Start",
-                "text": "Start angle for first segment"
-            },
-            {
-                "name": "Theta Length",
-                "text": "The central angle of the circular sector"
+                "name": "Radius",
+                "text": "The radius of the rounded corners"
             }
         ]
     }

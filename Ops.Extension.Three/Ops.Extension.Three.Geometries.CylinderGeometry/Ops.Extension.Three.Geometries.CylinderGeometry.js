@@ -5,8 +5,8 @@ const
     inRadialSegments = op.inInt("Radial Segments", 32),
     inHeightSegments = op.inInt("Height Segments", 1),
     inOpenEnded = op.inBool("Open Ended", false),
-    inThetaStart = op.inFloat("Theta Start", 0),
-    inThetaLength = op.inFloat("Theta Length", Math.PI * 2),
+    inThetaStart = op.inFloatSlider("Theta Start", 0, 0, 1),
+    inThetaLength = op.inFloatSlider("Theta Length", 1, 0, 1),
     outGeom = op.outObject("geometry", null, "threeGeometry");
 
 let geometry = null;
@@ -34,6 +34,9 @@ function updateSoon()
 
 function update()
 {
+    const thetaStart = inThetaStart.get() * (Math.PI * 2);
+    const thetaLength = inThetaLength.get() * (Math.PI * 2);
+
     geometry = new THREE.CylinderGeometry(
         inRadius.get(),
         inRadiusBottom.get(),
@@ -41,8 +44,8 @@ function update()
         inRadialSegments.get(),
         inHeightSegments.get(),
         inOpenEnded.get(),
-        inThetaStart.get(),
-        inThetaLength.get()
+        thetaStart,
+        thetaLength
     );
     outGeom.setRef(geometry);
 }

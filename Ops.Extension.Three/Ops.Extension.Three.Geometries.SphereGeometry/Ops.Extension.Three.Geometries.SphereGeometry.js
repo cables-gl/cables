@@ -1,9 +1,9 @@
 const
     inRadius = op.inFloat("Radius", 1),
-    inHeight = op.inFloat("Height", 1),
-    inRadialSegments = op.inFloat("Radial Segments", 32),
-    inHeightSegments = op.inFloat("Height Segments", 1),
-    inOpenEnded = op.inBool("Open Ended", false),
+    inWidthSegments = op.inInt("Width Segments", 32),
+    inHeightSegments = op.inInt("Height Segments", 16),
+    inPhiStart = op.inFloatSlider("Phi Start", 0, 0, 1),
+    inPhiLength = op.inFloatSlider("Phi Length", 1, 0, 1),
     inThetaStart = op.inFloatSlider("Theta Start", 0, 0, 1),
     inThetaLength = op.inFloatSlider("Theta Length", 1, 0, 1),
     outGeom = op.outObject("geometry", null, "threeGeometry");
@@ -12,10 +12,10 @@ let geometry = null;
 let to = null;
 
 inRadius.onChange =
-inHeight.onChange =
-inRadialSegments.onChange =
+inWidthSegments.onChange =
 inHeightSegments.onChange =
-inOpenEnded.onChange =
+inPhiStart.onChange =
+inPhiLength.onChange =
 inThetaStart.onChange =
 inThetaLength.onChange = updateSoon;
 
@@ -32,15 +32,18 @@ function updateSoon()
 
 function update()
 {
+    const phiStart = inPhiStart.get() * (Math.PI * 2);
+    const phiLength = inPhiLength.get() * (Math.PI * 2);
+
     const thetaStart = inThetaStart.get() * (Math.PI * 2);
     const thetaLength = inThetaLength.get() * (Math.PI * 2);
 
-    geometry = new THREE.ConeGeometry(
+    geometry = new THREE.SphereGeometry(
         inRadius.get(),
-        inHeight.get(),
-        inRadialSegments.get(),
+        inWidthSegments.get(),
         inHeightSegments.get(),
-        inOpenEnded.get(),
+        phiStart,
+        phiLength,
         thetaStart,
         thetaLength
     );

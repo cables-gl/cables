@@ -1,6 +1,6 @@
 {
-    "id": "629ecf46-c5d4-4449-8541-c22472d06118",
-    "created": 1764687396358,
+    "id": "4e0970bd-fd8a-404e-bae7-c77777b85ee6",
+    "created": 1764934310020,
     "license": "MIT",
     "authorName": "stephan",
     "changelog": [
@@ -8,7 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "stephan",
-            "date": 1764686869072
+            "date": 1764934310021
         }
     ],
     "layout": {
@@ -20,23 +20,23 @@
             },
             {
                 "type": 0,
-                "name": "Height",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Radial Segments",
-                "subType": "number"
+                "name": "Width Segments",
+                "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Height Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Phi Start",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Open Ended",
-                "subType": "boolean"
+                "name": "Phi Length",
+                "subType": "number"
             },
             {
                 "type": 0,
@@ -60,37 +60,36 @@
     "coreLibs": [
         "three"
     ],
-    "summary": "Create a cone geometry",
-    "exampleProjectId": "8nYKq4",
+    "summary": "Create a sphere geometry",
     "docs": {
         "ports": [
             {
                 "name": "Radius",
-                "text": "Radius of the cone base"
+                "text": "The sphere radius"
             },
             {
-                "name": "Height",
-                "text": "Height of the cone"
-            },
-            {
-                "name": "Radial Segments",
-                "text": "Number of segmented faces around the circumference of the cone"
+                "name": "Width Segments",
+                "text": "The number of horizontal segments"
             },
             {
                 "name": "Height Segments",
-                "text": "Number of rows of faces along the height of the cone"
+                "text": "The number of vertical segments"
             },
             {
-                "name": "Open Ended",
-                "text": "Whether the base of the cone is open or capped"
+                "name": "Phi Start",
+                "text": "The horizontal starting angle"
+            },
+            {
+                "name": "Phi Length",
+                "text": "The horizontal sweep angle size"
             },
             {
                 "name": "Theta Start",
-                "text": "Start angle for first segment"
+                "text": "The vertical starting angle"
             },
             {
                 "name": "Theta Length",
-                "text": "The central angle, often called theta, of the circular sector"
+                "text": "The vertical sweep angle size"
             }
         ]
     }

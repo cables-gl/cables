@@ -1,8 +1,8 @@
 const
     inRadius = op.inFloat("Radius", 1),
     inSegments = op.inFloat("Segments", 32),
-    inThetaStart = op.inFloat("Theta Start", 0),
-    inThetaLength = op.inFloat("Theta Length", Math.PI * 2),
+    inThetaStart = op.inFloatSlider("Theta Start", 0, 0, 1),
+    inThetaLength = op.inFloatSlider("Theta Length", 1, 0, 1),
     outGeom = op.outObject("geometry", null, "threeGeometry");
 
 let geometry = null;
@@ -26,6 +26,8 @@ function updateSoon()
 
 function update()
 {
-    geometry = new THREE.CircleGeometry(inRadius.get(), inSegments.get(), inThetaStart.get(), inThetaLength.get());
+    const thetaLength = inThetaLength.get() * (Math.PI * 2);
+    const thetaStart = inThetaStart.get() * (Math.PI * 2);
+    geometry = new THREE.CircleGeometry(inRadius.get(), inSegments.get(), thetaStart, thetaLength);
     outGeom.setRef(geometry);
 }
