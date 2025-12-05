@@ -26,6 +26,11 @@
             {
                 "type": 5,
                 "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Rescale Size",
+                "subType": "number"
             }
         ],
         "portsOut": [

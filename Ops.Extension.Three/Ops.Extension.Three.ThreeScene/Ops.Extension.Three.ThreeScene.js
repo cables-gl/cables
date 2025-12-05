@@ -5,6 +5,7 @@ const
     inMat = op.inBool("Cables Matrices", false),
     next = op.outTrigger("Next");
 
+let aspect = 1;
 let camera = null;
 const renderer = new CABLES.ThreeRenderer(op);
 
@@ -23,7 +24,15 @@ exec.onTriggered = () =>
 
 function setCablesViewMatrix()
 {
-    if (!camera) camera = new THREE.PerspectiveCamera(120, 1.777, 0.001, 100);
+    if (!camera) camera = new THREE.PerspectiveCamera(50, 1.777, 0.001, 100);
+
+    aspect = op.patch.cg.canvas.width / op.patch.cg.canvas.height;
+    if (camera.aspect != aspect)
+    {
+        camera.aspect = aspect;
+        camera.updateProjectionMatrix();
+    }
+
     op.patch.cg.frameStore.three.renderer.currentCamera = camera;
 
     camera.matrixAutoUpdate = false;
