@@ -9,7 +9,7 @@ const threeOp = new CABLES.ThreeOp(op);
 
 let mesh = null;
 let geometry = null;
-
+let currentMaterial = null;
 inGeo.onLinkChanged =
 inGeo.onChange = updateGeom;
 
@@ -18,9 +18,15 @@ function updateGeom()
     geometry = inGeo.get();
 }
 
+inPositions.onChange = () =>
+{
+    updateMats();
+};
+
 function updateMats()
 {
-    const arr = inPositions.get();
+    if (!mesh) return;
+    const arr = inPositions.get() || [];
 
         	const matrix = new THREE.Matrix4();
     console.log("pos");
@@ -28,11 +34,11 @@ function updateMats()
     {
     	matrix.setPosition(arr[i * 3 + 0], arr[i * 3 + 1], arr[i * 3 + 2]);
         mesh.setMatrixAt(i, matrix);
-        mesh.setColorAt(i, new THREE.Color(0x330000));
+        mesh.setColorAt(i, new THREE.Color(1, 0, 0));
         // console.log("mat", matrix);
     }
-        						mesh.instanceColor.needsUpdate = true;
-        						mesh.instanceMatrix.needsUpdate = true;
+    mesh.instanceColor.needsUpdate = true;
+    mesh.instanceMatrix.needsUpdate = true;
     mesh.needsUpdate = true;
     mesh.computeBoundingSphere();
 }
@@ -41,18 +47,19 @@ exec.onTriggered = () =>
 {
     const arr = inPositions.get();
 
-    if (!arr)
+    if (!arr || !geometry)
     {
         return;
     }
 
-    if (!mesh)
+    if (!mesh || currentMaterial != threeOp.renderer.currentMaterial)
     {
+        if (mesh)mesh.remove();
         updateGeom();
-
-        mesh = new THREE.InstancedMesh(geometry || threeOp.renderer.defaultGeometry, arr.length / 3);
+        // const material = new THREE.MeshPhongMaterial({ "color": 0xffffff });
+        mesh = new THREE.InstancedMesh(geometry || threeOp.renderer.defaultGeometry, threeOp.renderer.currentMaterial, arr.length / 3);
         mesh.frustumCulled = false;
-
+        currentMaterial = threeOp.renderer.currentMaterial;
         mesh.castShadow = true;
         mesh.receiveShadow = true;
         // mesh.frustumCulled=false;
