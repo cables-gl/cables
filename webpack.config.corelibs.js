@@ -75,23 +75,31 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             });
         }
 
-        outputs.push(
-            {
-                "entry": {
-                    "main": {
-                        "import": path.join(__dirname, "src", "corelibs", namespace, namespaceEntryFile),
-                        "filename": namespace + ".js"
-                    }
-                },
-                "output": {
-                    "path": path.join(__dirname, "build", "corelibs"),
-                    "library": {
-                        "name": libraryNamespace.toUpperCase(),
-                        "type": "assign-properties"
-                    }
+        const output = {
+            "entry": {
+                "main": {
+                    "import": path.join(__dirname, "src", "corelibs", namespace, namespaceEntryFile),
+                    "filename": namespace + ".js"
+                }
+            },
+            "output": {
+                "path": path.join(__dirname, "build", "corelibs"),
+                "library": {
+                    "name": libraryNamespace.toUpperCase(),
+                    "type": "assign-properties"
                 }
             }
-        );
+        };
+        const libraryExternals = {
+            "cables": "CABLES",
+            "cables-shared-client": "CABLES.SHARED",
+        };
+        if (libraryNamespace.startsWith("THREE."))
+        {
+            libraryExternals.three = "THREE";
+        }
+        output.externals = libraryExternals;
+        outputs.push(output);
 
         return outputs;
     };
@@ -140,10 +148,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
                 }
             ].filter(Boolean),
         },
-        "externals": {
-            "cables": "CABLES",
-            "cables-shared-client": "CABLES.SHARED"
-        },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
@@ -163,7 +167,6 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const baseName = path.basename(entryAndOutput.entry.main.filename, ".js");
             entryAndOutput.plugins.push(new BundleAnalyzerPlugin({ "analyzerMode": "static", "openAnalyzer": false, "reportTitle": baseName, "reportFilename": path.join(__dirname, "build", baseName + ".html") }));
         }
-
         configs.push({ ...defaultConfig, ...entryAndOutput });
     }
 

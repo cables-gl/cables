@@ -1,25 +1,28 @@
+import { Events } from "cables-shared-client";
 import { ThreeRenderer } from "./threerenderer.js";
 
-export class ThreeOp
+export class ThreeOp extends Events
 {
     #op;
     #currentParent = null;
     #object = null;
     #lastTrigger = -1;
     #renderer = null;
+    isInScene = false;
 
     /**
      * @param {Op} op
      */
     constructor(op)
     {
+        super();
         this.#op = op;
         op.onDelete = () =>
         {
             console.log("ondeleteeeeeeeeee");
             this.remove();
-
         };
+
     }
 
     get lastTrigger()
@@ -91,6 +94,8 @@ export class ThreeOp
 
             console.log("remove from scene...");
         }
+        this.emitEvent("inactive");
+        this.isInScene = false;
     }
 
     /**
@@ -100,19 +105,48 @@ export class ThreeOp
      * @param {boolean} defaultValue
      * @param {Object} options
      */
-    static bindBool(op, object, paramName, defaultValue, options)
+    static bindBool(op, object, paramName, defaultValue, options = {})
     {
-
         op.threeBinds = op.threeBinds || {};
 
         const a = op.threeBinds[paramName] || {
-            "in": op.inBool(paramName, defaultValue)
+            "in": op.inBool(paramName, defaultValue),
+            "options": options
+        };
+        op.threeBinds[paramName] = a;
+
+        function update()
+        {
+            object[paramName] = !!a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
+        }
+
+        a.in.onChange = update;
+
+        update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {object} defaultValue
+     * @param {Object} options
+     */
+    static bindObject(op, object, paramName, objType, options = {})
+    {
+        op.threeBinds = op.threeBinds || {};
+
+        const a = op.threeBinds[paramName] || {
+            "in": op.inObject(paramName, null, objType),
+            "options": options
         };
         op.threeBinds[paramName] = a;
 
         function update()
         {
             object[paramName] = a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
         }
 
         a.in.onChange = update;
@@ -127,19 +161,20 @@ export class ThreeOp
      * @param {boolean} defaultValue
      * @param {Object} options
      */
-    static bindFloat(op, object, paramName, defaultValue, options)
+    static bindFloat(op, object, paramName, defaultValue, options = {})
     {
-
         op.threeBinds = op.threeBinds || {};
 
         const a = op.threeBinds[paramName] || {
-            "in": op.inFloat(paramName, defaultValue)
+            "in": op.inFloat(paramName, defaultValue),
+            "options": options
         };
         op.threeBinds[paramName] = a;
 
         function update()
         {
             object[paramName] = a.in.get();
+            if (a.options.needsUpdate) object.needsUpdate = true;
         }
 
         a.in.onChange = update;
@@ -153,7 +188,7 @@ export class ThreeOp
      * @param {string} paramName
      * @param {Object} options
      */
-    static bindColor(op, object, paramName, options)
+    static bindColor(op, object, paramName, options = {})
     {
         op.threeBinds = op.threeBinds || {};
 
@@ -197,6 +232,42 @@ export class ThreeOp
         a.inA.onChange = update;
 
         update();
+    }
+
+    /**
+     * @param {Op} op
+     * @param {Object3D} object
+     * @param {string} paramName
+     * @param {Object} options
+     */
+    static bindVec(op, object, paramName, options = {})
+    {
+        op.threeBinds = op.threeBinds || {};
+
+        const values = [0, 0, 0];
+
+        const a = op.threeBinds[paramName] || {
+            "inX": op.inFloat(paramName + " X", values[0]),
+            "inY": op.inFloat(paramName + " Y", values[1]),
+            "inZ": op.inFloat(paramName + " Z", values[2]),
+        };
+        function update()
+        {
+            object[paramName].set(a.inX.get(), a.inY.get(), a.inZ.get());
+
+        }
+
+        if (!op.threeBinds[paramName])
+        {
+
+            op.threeBinds[paramName] = a;
+
+            a.inX.onChange =
+        a.inY.onChange =
+        a.inZ.onChange = update;
+
+            update();
+        }
     }
 
 }
