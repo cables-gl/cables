@@ -3,10 +3,18 @@ import { ThreeRenderer } from "./threerenderer.js";
 
 export class ThreeOp extends Events
 {
+
+    /** @type {Op} */
     #op;
-    #currentParent = null;
-    #object = null;
     #lastTrigger = -1;
+
+    /** @type {Object3D} */
+    #currentParent = null;
+
+    /** @type {Object3D} */
+    #object = null;
+
+    /** @type {ThreeRenderer} */
     #renderer = null;
     isInScene = false;
 
@@ -17,6 +25,7 @@ export class ThreeOp extends Events
     {
         super();
         this.#op = op;
+        op.threeOp = this;
         op.onDelete = () =>
         {
             console.log("ondeleteeeeeeeeee");
@@ -32,7 +41,7 @@ export class ThreeOp extends Events
 
     get renderer()
     {
-        return this.#renderer || this.#op.patch.cg.frameStore.three.renderer;
+        return this.#renderer || this.#op.patch?.cg?.frameStore?.three.renderer;
     }
 
     /**
@@ -42,9 +51,10 @@ export class ThreeOp extends Events
     {
         this.remove();
         this.#object = object;
+        object.userData.op = this.#op.id;
     }
 
-    push()
+    push(asParent = true)
     {
         const parentObject = this.#op.patch.cg.frameStore.three.renderer.currentObject;
         if (!parentObject) return;
@@ -54,9 +64,7 @@ export class ThreeOp extends Events
         if (!this.#renderer) return;
 
         if (this.#currentParent != parentObject)
-        {
             this.remove();
-        }
 
         if (this.#currentParent === null)
         {
@@ -70,7 +78,7 @@ export class ThreeOp extends Events
         if (this.#object)
         {
             this.#object.material = this.#renderer.currentMaterial;
-            this.#renderer.pushObject(this.#object);
+            if (asParent) this.#renderer.pushObject(this.#object);
         }
     }
 
@@ -250,10 +258,12 @@ export class ThreeOp extends Events
             "inX": op.inFloat(paramName + " X", values[0]),
             "inY": op.inFloat(paramName + " Y", values[1]),
             "inZ": op.inFloat(paramName + " Z", values[2]),
+            "options": options
         };
         function update()
         {
             object[paramName].set(a.inX.get(), a.inY.get(), a.inZ.get());
+            if (a.options.needsUpdate) object.needsUpdate = true;
 
         }
 

@@ -1,7 +1,8 @@
 import * as THREE from "three";
+import { Events } from "cables-shared-client";
 import { ThreeOp } from "./threeop.js";
 
-export class ThreeRenderer
+export class ThreeRenderer extends Events
 {
     #frame = 0;
 
@@ -21,6 +22,7 @@ export class ThreeRenderer
 
     constructor(op)
     {
+        super();
         this.#op = op;
         this.#defaultCamera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.001, 50);
         this.#defaultCamera.position.z = 1.5;
@@ -151,6 +153,7 @@ export class ThreeRenderer
                 {
                     this.#sceneThreeOps[i].remove();
                     this.#sceneThreeOps[i].isInScene = false;
+                    this.emitEvent("change");
                 // todo:really remove
                 }
         }
@@ -164,6 +167,7 @@ export class ThreeRenderer
         if (!threeOp) return;
         this.#sceneThreeOps.push(threeOp);
         threeOp.isInScene = true;
+        this.emitEvent("change");
     }
 
 }
