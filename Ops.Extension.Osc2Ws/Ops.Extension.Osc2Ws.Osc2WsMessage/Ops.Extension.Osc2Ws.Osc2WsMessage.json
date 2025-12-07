@@ -11,6 +11,18 @@
             "message": "Ops.Devices.OSC.OscMessage renamed to Ops.Extension.Osc.OscMessage",
             "author": "stephan",
             "date": 1671009456013
+        },
+        {
+            "message": "Extension.Osc.OscMessage renamed to Ops.Extension.Osc.Osc2WsMessage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105083456
+        },
+        {
+            "message": "Extension.Osc.Osc2WsMessage renamed to Ops.Extension.Osc2Ws.Osc2WsMessage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105186750
         }
     ],
     "authorName": "pandur",

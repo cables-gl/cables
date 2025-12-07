@@ -1,24 +1,31 @@
 {
-    "id": "e5518c84-5e68-4dc5-98a4-fb4a1a0f230d",
+    "id": "441207d6-f3d5-444e-ac12-32bee2c33651",
     "changelog": [
         {
             "message": "created op",
-            "author": "pandur",
-            "date": 1567752105838
+            "author": "andro",
+            "date": 1570544585161
         },
         {
-            "message": "Ops.User.pandur.OscNumber renamed to Ops.Devices.OSC.OscNumber",
-            "author": "pandur",
-            "date": 1567752725197
-        },
-        {
-            "message": "Ops.Devices.OSC.OscNumber renamed to Ops.Extension.Osc.OscNumber",
+            "message": "Ops.Devices.OSC.OscArray renamed to Ops.Extension.Osc.OscArray",
             "author": "stephan",
-            "date": 1671009403780
+            "date": 1671009436589
+        },
+        {
+            "message": "Extension.Osc.OscArray renamed to Ops.Extension.Osc.Osc2WsArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105055289
+        },
+        {
+            "message": "Extension.Osc.Osc2WsArray renamed to Ops.Extension.Osc2Ws.Osc2WsArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105175035
         }
     ],
-    "authorName": "pandur",
-    "created": 1567752275874,
+    "authorName": "andro",
+    "created": 1570544607041,
     "layout": {
         "portsIn": [
             {
@@ -40,8 +47,12 @@
                 "name": "Result Message"
             },
             {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
                 "type": "0",
-                "name": "Value",
+                "name": "Array length",
                 "subType": "number"
             },
             {
@@ -50,9 +61,8 @@
             }
         ]
     },
-    "summary": "Outputs a single number from a user defined OSC address",
+    "summary": "Outputs an array of data from a user defined OSC address",
     "issues": "",
-
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],
@@ -76,8 +86,12 @@
                 "text": "Incoming Osc message"
             },
             {
-                "name": "Value",
-                "text": "Number out"
+                "name": "Array out",
+                "text": "Array out "
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array"
             },
             {
                 "name": "Received",

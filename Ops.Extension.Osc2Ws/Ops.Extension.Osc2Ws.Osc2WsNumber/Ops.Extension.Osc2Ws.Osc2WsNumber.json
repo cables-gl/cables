@@ -1,19 +1,27 @@
 {
-    "id": "441207d6-f3d5-444e-ac12-32bee2c33651",
+    "id": "e5518c84-5e68-4dc5-98a4-fb4a1a0f230d",
     "changelog": [
         {
             "message": "created op",
-            "author": "andro",
-            "date": 1570544585161
+            "author": "pandur",
+            "date": 1567752105838,
+            "type": "new"
         },
         {
-            "message": "Ops.Devices.OSC.OscArray renamed to Ops.Extension.Osc.OscArray",
-            "author": "stephan",
-            "date": 1671009436589
+            "message": "Extension.Osc.OscNumber renamed to Ops.Extension.Osc.Osc2WsNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105115934
+        },
+        {
+            "message": "Extension.Osc.Osc2WsNumber renamed to Ops.Extension.Osc2Ws.Osc2WsNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105181383
         }
     ],
-    "authorName": "andro",
-    "created": 1570544607041,
+    "authorName": "pandur",
+    "created": 1567752275874,
     "layout": {
         "portsIn": [
             {
@@ -35,12 +43,8 @@
                 "name": "Result Message"
             },
             {
-                "type": "3",
-                "name": "Array out"
-            },
-            {
                 "type": "0",
-                "name": "Array length",
+                "name": "Value",
                 "subType": "number"
             },
             {
@@ -49,9 +53,8 @@
             }
         ]
     },
-    "summary": "Outputs an array of data from a user defined OSC address",
+    "summary": "Outputs a single number from a user defined OSC address",
     "issues": "",
-
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],
@@ -75,12 +78,8 @@
                 "text": "Incoming Osc message"
             },
             {
-                "name": "Array out",
-                "text": "Array out "
-            },
-            {
-                "name": "Array length",
-                "text": "Length of array"
+                "name": "Value",
+                "text": "Number out"
             },
             {
                 "name": "Received",

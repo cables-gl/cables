@@ -10,6 +10,18 @@
             "message": "Ops.Devices.OSC.OscNumbers renamed to Ops.Extension.Osc.OscNumbers",
             "author": "stephan",
             "date": 1671009419895
+        },
+        {
+            "message": "Extension.Osc.OscNumbers renamed to Ops.Extension.Osc.Osc2WsNumbers",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105136996
+        },
+        {
+            "message": "Extension.Osc.Osc2WsNumbers renamed to Ops.Extension.Osc2Ws.Osc2WsNumbers",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105191763
         }
     ],
     "authorName": "andro",
@@ -62,7 +74,6 @@
     },
     "summary": "Outputs up to 4 numbers from a user defined OSC address",
     "issues": "",
-
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"
     ],
