@@ -71,12 +71,26 @@
             {
                 "type": 1,
                 "name": "Randomize Colors"
+            },
+            {
+                "type": 0,
+                "name": "Alpha index",
+                "values": [
+                    "Mask",
+                    "combined"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Alpha Mask",
                 "objType": "texture"
             },
             {
@@ -169,6 +183,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725011824866
+        },
+        {
+            "message": "Gradient ops now show inline gradient in the op parameter panel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1765063184758
+        },
+        {
+            "message": "Select opacity per color, output black and white opacity mask",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1765104755974
         }
     ],
     "license": "MIT",

@@ -273,8 +273,8 @@ export class ThreeOp extends Events
             op.threeBinds[paramName] = a;
 
             a.inX.onChange =
-        a.inY.onChange =
-        a.inZ.onChange = update;
+            a.inY.onChange =
+            a.inZ.onChange = update;
 
             update();
         }
