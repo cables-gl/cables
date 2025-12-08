@@ -8,18 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1764169447790
-        },
-        {
-            "message": "Extension.Three.Knot renamed to Ops.Extension.Three.Mesh",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1764597989300
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1764885103206
         }
     ],
@@ -61,5 +49,10 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "summary": "Instanced rendering of meshes",
+    "exampleProjectId": "6p48N4",
+    "docs": {
+        "ports": []
+    }
 }
