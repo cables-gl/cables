@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764683334276
-        },
-        {
-            "message": "Patch.PAjelF3.ThreeGltf renamed to Ops.Extension.Three.GltfLoader",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1764844516917
         }
     ],
     "layout": {
@@ -48,5 +42,9 @@
     "coreLibs": [
         "three",
         "three_addons_gltfloader"
-    ]
+    ],
+    "exampleProjectId": "Wy3aN4",
+    "docs": {
+        "ports": []
+    }
 }

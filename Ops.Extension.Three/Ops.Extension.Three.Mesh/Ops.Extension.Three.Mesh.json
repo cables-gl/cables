@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764169447790
-        },
-        {
-            "message": "Extension.Three.Knot renamed to Ops.Extension.Three.Mesh",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1764597989300
         }
     ],
     "layout": {
@@ -48,5 +42,9 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "exampleProjectId": "5IUbw4",
+    "docs": {
+        "ports": []
+    }
 }

@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inPosX = op.inFloat("Position X"),
-    inScale = op.inFloat("Scale"),
+    inScale = op.inFloat("Scale", 1),
     inGeo = op.inObject("Geometry", null, "threeGeometry"),
     next = op.outTrigger("Next");
 

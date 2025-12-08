@@ -23,6 +23,8 @@ recreate();
 
 exec.onTriggered = () =>
 {
+    if (!op.patch.cg.frameStore.three) return;
+    if (!op.patch.cg.frameStore.three.renderer) return;
     op.patch.cg.frameStore.three.renderer.pushMaterial(material);
     next.trigger();
     op.patch.cg.frameStore.three.renderer.popMaterial();

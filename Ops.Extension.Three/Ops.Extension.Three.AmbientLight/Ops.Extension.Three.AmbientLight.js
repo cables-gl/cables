@@ -1,46 +1,26 @@
 const
     exec = op.inTrigger("Trigger"),
-    inIntens = op.inFloat("Intensity", 1),
-    r = op.inValueSlider("r", 0.1),
-    g = op.inValueSlider("g", 0.1),
-    b = op.inValueSlider("b", 0.1),
     next = op.outTrigger("Next");
 
-r.setUiAttribs({ "colorPick": true });
-
 const threeOp = new CABLES.ThreeOp(op);
-
 const container = new THREE.Object3D();
 
-let light = null;
+let init = true;
+let light = new THREE.AmbientLight(0xffffff, 4);
+container.add(light);
 
-inIntens.onChange =
-r.onChange =
-g.onChange =
-b.onChange = updateColor;
-
-function updateColor()
-{
-    if (!light) return;
-    light.color.set(r.get(), g.get(), b.get());
-    light.intensity = inIntens.get();
-}
+CABLES.ThreeOp.bindFloat(op, light, "intensity", 1);
+CABLES.ThreeOp.bindColor(op, light, "color");
 
 exec.onTriggered = () =>
 {
-    if (!light)
+    if (init)
     {
-        light = new THREE.AmbientLight(0xffffff, 4);
-
-        container.add(light);
-
-        updateColor();
-
         threeOp.setSceneObject(container);
+        init = false;
     }
 
     threeOp.push();
-
     next.trigger();
     threeOp.pop();
 };

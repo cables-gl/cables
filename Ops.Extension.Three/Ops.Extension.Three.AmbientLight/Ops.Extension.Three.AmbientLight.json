@@ -19,22 +19,27 @@
             },
             {
                 "type": 0,
-                "name": "Intensity",
+                "name": "intensity",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "r",
+                "name": "color R",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "g",
+                "name": "color G",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "b",
+                "name": "color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color A",
                 "subType": "number"
             }
         ],
@@ -47,5 +52,9 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "exampleProjectId": "GrCMN4",
+    "docs": {
+        "ports": []
+    }
 }

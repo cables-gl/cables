@@ -42,5 +42,9 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "exampleProjectId": "9mbse4",
+    "docs": {
+        "ports": []
+    }
 }
