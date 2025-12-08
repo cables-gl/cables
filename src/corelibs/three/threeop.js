@@ -87,6 +87,9 @@ export class ThreeOp extends Events
     pop()
     {
 
+        if (!this.#op.patch.cg.frameStore.three) return;
+        if (!this.#op.patch.cg.frameStore.three.renderer) return;
+
         /** @type {ThreeRenderer} */
         this.#renderer = this.#op.patch.cg.frameStore.three.renderer;
         this.#renderer.popObject();
