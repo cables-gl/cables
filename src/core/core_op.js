@@ -62,6 +62,11 @@ export class Op extends Events
     static EVENT_INIT = "init";
     static EVENT_UIATTR_CHANGE = "onUiAttribsChange";
 
+    static UI_ERRORLEVEL_HINT = 0;
+    static UI_ERRORLEVEL_WARNING = 1;
+    static UI_ERRORLEVEL_ERROR = 2;
+    static UI_ERRORLEVEL_NOTWORKING = 3;
+
     #objName = "";
     _log = new Logger("core_op");
     //    #name = "";

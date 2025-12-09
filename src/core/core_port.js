@@ -770,7 +770,10 @@ export class Port extends Events
         }
         catch (ex)
         {
+            if (!portTriggered) return console.error("unknown port error");
+
             portTriggered.op.enabled = false;
+            portTriggered.op.setUiError("crash", "op crashed, port exception " + portTriggered.name, 3);
 
             if (this.#op.patch.isEditorMode())
             {
