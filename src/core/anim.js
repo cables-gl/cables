@@ -1,9 +1,11 @@
 import { Events, Logger } from "cables-shared-client";
-import { uuid } from "./utils.js";
+import { logStack, uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { Patch } from "./core_patch.js";
+
+let counts = {};
 
 /**
  * Keyframed interpolated animation.
@@ -540,8 +542,17 @@ export class Anim extends Events
      * @param {Number} [time] time
      * @returns {Number} interpolated value at time
      */
-    getValue(time)
+    getValue(time = 0)
     {
+        // if (isNaN(time))time = 0;
+        // counts[this.name] = counts[this.name] || 0;
+        // if (counts[this.name] < 10 && this.port)
+        // {
+        //     console.log("getvalue", this.name, time, this);
+        //     CABLES.logStack();
+        //     counts[this.name]++;
+        // }
+
         let valAdd = 0;
         if (this.keys.length === 0) return 0;
         if (this.#needsSort) this.sortKeys();

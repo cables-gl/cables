@@ -23,41 +23,38 @@ export const now = function ()
 
 /**
  * Measuring time
- * @namespace external:CABLES#Timer
- * @hideconstructor
- * @class
  */
 class Timer extends Events
 {
     static EVENT_PLAY_PAUSE = "playPause";
     static EVENT_TIME_CHANGED = "timeChanged";
 
+    #lastTime = 0;
+    #timeOffset = 0;
+    #currentTime = 0;
+    #paused = true;
+    #delay = 0;
+    #timeStart = 0;
+    #ts;
+
     constructor()
     {
         super();
 
-        /**
-         * @private
-         */
-        this._timeStart = internalNow();
-        this._timeOffset = 0;
-        this._currentTime = 0;
-        this._lastTime = 0;
-        this._paused = true;
-        this._delay = 0;
+        this.#timeStart = 0;
         this.overwriteTime = -1;
     }
 
-    _internalNow()
+    #internalNow()
     {
-        if (this._ts) return this._ts;
+        if (this.#ts) return this.#ts;
         return internalNow();
     }
 
-    _getTime()
+    #getTime()
     {
-        this._lastTime = (this._internalNow() - this._timeStart) / 1000;
-        return this._lastTime + this._timeOffset;
+        this.#lastTime = (this.#internalNow() - this.#timeStart) / 1000;
+        return this.#lastTime + this.#timeOffset;
     }
 
     /**
@@ -65,43 +62,34 @@ class Timer extends Events
      */
     setDelay(d)
     {
-        this._delay = d;
+        this.#delay = d;
         this.emitEvent(Timer.EVENT_TIME_CHANGED);
     }
 
     /**
-     * @function
-     * @memberof Timer
-     * @instance
      * @description returns true if timer is playing
      * @return {Boolean} value
      */
     isPlaying()
     {
-        return !this._paused;
+        return !this.#paused;
     }
 
     /**
-     * @function
-     * @memberof Timer
-     * @instance
-     * @param {any} ts
      * @description update timer
+     * @param {any} ts
      * @return {Number} time
      */
     update(ts)
     {
-        if (ts) this._ts = ts;
-        if (this._paused) return;
-        this._currentTime = this._getTime();
+        if (ts) this.#ts = ts;
+        if (this.#paused) return;
+        this.#currentTime = this.#getTime();
 
-        return this._currentTime;
+        return this.#currentTime;
     }
 
     /**
-     * @function
-     * @memberof Timer
-     * @instance
      * @return {Number} time in milliseconds
      */
     getMillis()
@@ -110,9 +98,6 @@ class Timer extends Events
     }
 
     /**
-     * @function
-     * @memberof Timer
-     * @instance
      * @return {Number} value time in seconds
      */
     get()
@@ -122,77 +107,68 @@ class Timer extends Events
 
     getTime()
     {
-        if (this.overwriteTime >= 0) return this.overwriteTime - this._delay;
-        return this._currentTime - this._delay;
+        if (this.overwriteTime >= 0) return this.overwriteTime - this.#delay;
+        return this.#currentTime - this.#delay;
     }
 
     /**
      * toggle between play/pause state
-     * @function
-     * @memberof Timer
-     * @instance
      */
     togglePlay()
     {
-        if (this._paused) this.play();
+        if (this.#paused) this.play();
         else this.pause();
     }
 
     /**
      * set current time
-     * @function
-     * @memberof Timer
-     * @instance
      * @param {Number} t
      */
     setTime(t)
     {
         if (isNaN(t) || t < 0) t = 0;
-        this._timeStart = this._internalNow();
-        this._timeOffset = t;
-        this._currentTime = t;
+        this.#timeStart = this.#internalNow();
+        this.#timeOffset = t;
+        this.#currentTime = t;
         this.emitEvent((Timer.EVENT_TIME_CHANGED));
     }
 
+    /**
+     * @param {number} val
+     */
     setOffset(val)
     {
-        if (this._currentTime + val < 0)
+        if (this.#currentTime + val < 0)
         {
-            this._timeStart = this._internalNow();
-            this._timeOffset = 0;
-            this._currentTime = 0;
+            this.#timeStart = this.#internalNow();
+            this.#timeOffset = 0;
+            this.#currentTime = 0;
         }
         else
         {
-            this._timeOffset += val;
-            this._currentTime = this._lastTime + this._timeOffset;
+            this.#timeOffset += val;
+            this.#currentTime = this.#lastTime + this.#timeOffset;
         }
         this.emitEvent(Timer.EVENT_TIME_CHANGED);
     }
 
     /**
      * (re)starts the timer
-     * @function
-     * @memberof Timer
-     * @instance
      */
     play()
     {
-        this._timeStart = this._internalNow();
-        this._paused = false;
+        this.#timeStart = this.#internalNow();
+        this.#paused = false;
         this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
 
     /**
      * pauses the timer
-     * @function
-     * @memberof Timer
-     * @instance
      */
     pause()
     {
-        this._timeOffset = this._currentTime;
-        this._paused = true;
+        this.#timeOffset = this.#currentTime;
+        this.#paused = true;
         this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
 
