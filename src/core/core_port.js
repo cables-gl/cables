@@ -999,14 +999,15 @@ export class Port extends Events
 
     /**
      * @description set callback, which will be executed when port was triggered (usually output port)
+     * @param {string} [name] used for tribberButtons (multiple buttons...)
      */
-    _onTriggered()
+    _onTriggered(name)
     {
         this._activity();
         this.#op.updateAnims();
         if (this.#op.enabled && this.onTriggered) this.onTriggered();
 
-        if (this.#op.enabled) this.emitEvent("trigger");
+        if (this.#op.enabled) this.emitEvent("trigger", name);
     }
 
     /**

@@ -21,7 +21,7 @@ export class VarSetOpWrapper
 
         this._helper = op.inUiTriggerButtons("", ["Rename"]);
         this._helper.setUiAttribs({ "hidePort": true });
-        this._helper.onTriggered = (which) => { if (which == "Rename") CABLES.CMD.PATCH.renameVariable(op.varName.get()); };
+        this._helper.onTriggered = (which) => { CABLES.CMD.PATCH.renameVariable(op.varName.get()); };
 
         this._op.setPortGroup("Variable", [this._helper, this._varNamePort, this._btnCreate]);
 
