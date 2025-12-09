@@ -56,6 +56,8 @@ export class ThreeOp extends Events
 
     push(asParent = true)
     {
+        if (!this.#op.patch.cg.frameStore.three) return;
+        if (!this.#op.patch.cg.frameStore.three.renderer) return;
         const parentObject = this.#op.patch.cg.frameStore.three.renderer.currentObject;
         if (!parentObject) return;
 
@@ -84,6 +86,9 @@ export class ThreeOp extends Events
 
     pop()
     {
+
+        if (!this.#op.patch.cg.frameStore.three) return;
+        if (!this.#op.patch.cg.frameStore.three.renderer) return;
 
         /** @type {ThreeRenderer} */
         this.#renderer = this.#op.patch.cg.frameStore.three.renderer;
