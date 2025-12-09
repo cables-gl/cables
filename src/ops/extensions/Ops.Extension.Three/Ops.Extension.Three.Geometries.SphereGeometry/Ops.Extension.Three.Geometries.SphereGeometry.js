@@ -27,7 +27,7 @@ function updateSoon()
     to = setTimeout(() =>
     {
         update();
-    }, 30);
+    }, 17);
 }
 
 function update()
