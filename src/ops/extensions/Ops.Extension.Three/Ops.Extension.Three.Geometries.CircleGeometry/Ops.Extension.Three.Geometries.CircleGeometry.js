@@ -17,6 +17,7 @@ updateSoon();
 
 function updateSoon()
 {
+    // test live change
     clearTimeout(to);
     to = setTimeout(() =>
     {
