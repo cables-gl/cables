@@ -6,7 +6,7 @@ const
     ccIndexDropdown = op.inValueInt("CC Index", 0),
     inSpeed = op.inFloat("Speed", 1),
     normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "0 to 1"),
-    triggerOn = op.inSwitch("Trigger On", ["Both", "Down", "Up"], "Both"),
+    triggerOn = op.inSwitch("Trigger On", ["Both", "Down", "Up"], "Down"),
     learn = op.inTriggerButton("learn"),
     clear = op.inTriggerButton("clear");
 

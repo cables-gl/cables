@@ -53,11 +53,7 @@ element.onload = () =>
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
-    if (!url)
-    {
-        return;
-        outError.set(true);
-    }
+    if (!url) return outError.set(true);
     outError.set(false);
 
     loading.set(true);

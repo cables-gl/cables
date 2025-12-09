@@ -335,13 +335,11 @@ function onMIDIFailure(e)
     if (e) op.logWarn("No midi found", e);
 }
 
-function onMIDISuccess(midiAccess)
+function deviceList()
 {
-    if (midi) return;
-    midi = midiAccess;
     const inputs = midi.inputs.values();
 
-    const deviceNames = [];
+    const deviceNames = ["none"];
 
     for (let input = inputs.next(); input && !input.done; input = inputs.next())
     {
@@ -350,8 +348,17 @@ function onMIDISuccess(midiAccess)
 
     deviceSelect.uiAttribs.values = deviceNames;
     op.setUiError("invalidswitch", null);
-
     op.refreshParams();
+}
+
+function onMIDISuccess(midiAccess)
+{
+    if (midi) return;
+    midi = midiAccess;
+
+    midiAccess.onstatechange = deviceList;
+    deviceList();
+
     setDevice();
 }
 

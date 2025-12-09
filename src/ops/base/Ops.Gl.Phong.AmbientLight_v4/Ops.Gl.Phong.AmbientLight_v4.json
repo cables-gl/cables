@@ -85,5 +85,6 @@
     "exampleProjectId": "g3ioXU",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

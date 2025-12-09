@@ -1,16 +1,14 @@
 const inTrigger = op.inTrigger("Trigger In");
-const inR = op.inValueSlider("R", 0.1);
-inR.setUiAttribs({ "colorPick": true });
-const inG = op.inValueSlider("G", 0.125);
-const inB = op.inValueSlider("B", 0.15);
+const inR = op.inValueSlider("R", 1);
+const inG = op.inValueSlider("G", 1);
+const inB = op.inValueSlider("B", 1);
 const inIntensity = op.inValueSlider("Intensity", 1);
 const colorIn = [inR, inG, inB];
 op.setPortGroup("Color", colorIn);
 
+inR.setUiAttribs({ "colorPick": true });
+
 const outTrigger = op.outTrigger("Trigger Out");
-// your new op
-// have a look at the documentation at:
-// https://docs.cables.gl/dev_hello_op/dev_hello_op.html
 
 function Light(config)
 {
