@@ -1,0 +1,33 @@
+{
+    "id": "f69d5d28-78d1-4b39-8322-638171570e21",
+    "created": 1741264872031,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741264872059
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch9 renamed to Ops.Extension.Testing.TextTexture2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265054796
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "c3ptroons",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

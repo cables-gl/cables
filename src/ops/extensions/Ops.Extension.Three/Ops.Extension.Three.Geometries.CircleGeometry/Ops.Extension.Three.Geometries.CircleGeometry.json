@@ -1,0 +1,70 @@
+{
+    "id": "da00b4a6-55ac-43f9-9e17-257e3fcd6d42",
+    "created": 1764687176931,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Length",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a circle geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the circle"
+            },
+            {
+                "name": "Segments",
+                "text": "Number of segments (triangles)"
+            },
+            {
+                "name": "Theta Start",
+                "text": "Start angle for first segment"
+            },
+            {
+                "name": "Theta Length",
+                "text": "The central angle of the circular sector"
+            }
+        ]
+    },
+    "exampleProjectId": "gDR7w4"
+}

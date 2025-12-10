@@ -1,0 +1,33 @@
+{
+    "id": "2d3b9e26-58b6-4ebb-94d0-5c8522b2922b",
+    "created": 1740733109386,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740733109410
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch1 renamed to Ops.Extension.Testing.BasicsValueTests",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733144015
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "pxcjhgfwh",
+                "uititle": "Trigger_9"
+            }
+        ],
+        "portsOut": []
+    }
+}

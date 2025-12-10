@@ -1,0 +1,274 @@
+{
+  "ops": [
+    {
+      "opId": "2c042efa-3604-4717-b8f4-5ad08d6740e5",
+      "id": "god7rroc6",
+      "uiAttribs": {
+        "translate": {
+          "x": 3390.7076044601013,
+          "y": 2670.2106108345924
+        },
+        "subPatch": "muqcsdifs",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "text",
+          "value": "hund a katze b maus c"
+        },
+        {
+          "name": "Draw Mesh",
+          "value": 1
+        },
+        {
+          "name": "Scale Mesh",
+          "value": 1
+        },
+        {
+          "name": "Size index",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": "Manual"
+        },
+        {
+          "name": "Width",
+          "value": 512
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Auto Height",
+          "value": 0
+        },
+        {
+          "name": "Auto Line Breaks",
+          "value": 1
+        },
+        {
+          "name": "font",
+          "value": "Arial"
+        },
+        {
+          "name": "weight",
+          "value": "normal"
+        },
+        {
+          "name": "fontSize",
+          "value": 111
+        },
+        {
+          "name": "align index",
+          "value": 0
+        },
+        {
+          "name": "align",
+          "value": "left"
+        },
+        {
+          "name": "Vertical align index",
+          "value": 1
+        },
+        {
+          "name": "Vertical align",
+          "value": "Middle"
+        },
+        {
+          "name": "Letter Spacing",
+          "value": 0
+        },
+        {
+          "name": "Line Height Add",
+          "value": 0
+        },
+        {
+          "name": "Padding Y Top",
+          "value": 3
+        },
+        {
+          "name": "Padding Y Bottom",
+          "value": 3
+        },
+        {
+          "name": "Padding X",
+          "value": 0
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 2
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": 0
+        },
+        {
+          "name": "Reuse Texture",
+          "value": 1
+        },
+        {
+          "name": "Show Debug",
+          "value": 0
+        },
+        {
+          "name": "Redraw On Font Load",
+          "value": 1
+        },
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 1
+        },
+        {
+          "name": "Opacity",
+          "value": 1
+        },
+        {
+          "name": "background R",
+          "value": 0
+        },
+        {
+          "name": "background G",
+          "value": 0
+        },
+        {
+          "name": "background B",
+          "value": 0
+        },
+        {
+          "name": "background A",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Ratio",
+          "value": 1.01171875
+        },
+        {
+          "name": "Aspect",
+          "value": 0.9884169884169884
+        },
+        {
+          "name": "Num Lines",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "2p8bicukm",
+      "uiAttribs": {
+        "subPatch": "muqcsdifs",
+        "translate": {
+          "x": 3390.7076044601013,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_c3ptroons",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_c3ptroons",
+              "objIn": "ee18kzszy",
+              "objOut": "2p8bicukm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "dwy2vzdwo",
+      "uiAttribs": {
+        "subPatch": "muqcsdifs",
+        "translate": {
+          "x": 3390.7076044601013,
+          "y": 2781.2106108345924
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "19b441eb-9f63-4f35-ba08-b87841517c4d",
+      "id": "ee18kzszy",
+      "uiAttribs": {
+        "translate": {
+          "x": 3390.7076044601013,
+          "y": 1194.752961529588
+        },
+        "subPatch": "muqcsdifs",
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 0.683359375
+        },
+        {
+          "name": "g",
+          "value": 0.683359375
+        },
+        {
+          "name": "b",
+          "value": 0.683359375
+        },
+        {
+          "name": "a",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "god7rroc6",
+              "objOut": "ee18kzszy"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "ee18kzszy"
+      }
+    }
+  ]
+}

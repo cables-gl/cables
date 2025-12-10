@@ -1,0 +1,38 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Calculates a modulo of a audio signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Signal"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "69b1ae71-ac87-43eb-aac1-5b31a336abf7",
+    "authorName": "pandur",
+    "coreLibs": [
+        "webaudio"
+    ],
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1719844250480
+        }
+    ]
+}

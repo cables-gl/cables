@@ -1,0 +1,38 @@
+{
+    "summary": "triggers every x seconds  interval  and outputs percentage",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "Interval",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Delay",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "percent",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ]
+    },
+    "updated": 1537871189096,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "5ac2cf80-18f7-4390-b0ce-ebdad22d2a80",
+    "created": 1505413550795,
+    "changelog": []
+}

@@ -1,0 +1,46 @@
+{
+    "id": "e7e487df-30ad-41b6-81f4-4f9afea953eb",
+    "created": 1743596635887,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743596635888
+        }
+    ],
+    "summary": "cull (do not draw) back or front facing faces/triangles",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Discard index",
+                "values": [
+                    "none",
+                    "front",
+                    "back"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "exampleProjectId": "zKLQ3I",
+    "coreLibs": [
+        "cgl"
+    ]
+}

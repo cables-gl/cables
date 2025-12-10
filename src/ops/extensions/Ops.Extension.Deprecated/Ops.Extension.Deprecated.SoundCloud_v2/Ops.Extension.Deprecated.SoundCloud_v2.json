@@ -1,0 +1,109 @@
+{
+    "id": "1b6b0679-4f26-4886-af31-ee696936ea8f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1558349539832
+        },
+        {
+            "message": "Ops.Api.SoundCloud.SoundCloud_v2 renamed to Ops.Deprecated.Api.SoundCloud.SoundCloud_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1685949907152
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1558349546239,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "SoundCloud URL"
+            },
+            {
+                "type": 5,
+                "name": "SoundCloud Client Id"
+            },
+            {
+                "type": 5,
+                "name": "SoundCloud Client Secret"
+            },
+            {
+                "type": 0,
+                "name": "Formats index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Stream URL"
+            },
+            {
+                "type": 5,
+                "name": "Artwork URL"
+            },
+            {
+                "type": 5,
+                "name": "Title"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Get infos / stream URL from a regular SoundCloud-track URL",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "SoundCloud URL",
+                "text": "soundcloud URL copied from browser window"
+            },
+            {
+                "name": "SoundCloud Client Id",
+                "text": "your soundcloud clientid"
+            },
+            {
+                "name": "SoundCloud Client Secret",
+                "text": "your soundcloud client secret"
+            },
+            {
+                "name": "Formats index",
+                "text": "available formats for given track (available after fetch)"
+            },
+            {
+                "name": "Stream URL",
+                "text": "stream url for given format (or first one available)"
+            },
+            {
+                "name": "Artwork URL",
+                "text": "track artwork url"
+            },
+            {
+                "name": "Title",
+                "text": "track title"
+            },
+            {
+                "name": "Result",
+                "text": "soundcloud track info object"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "add exception asuierror",
+            "author": "cables",
+            "id": "756cfb6b-d8d2-4111-817f-aaa6fb6371db",
+            "date": 1605427298180,
+            "deleted": true,
+            "deletedBy": "stephan",
+            "deletedDate": 1629885255297
+        }
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "em3BZ4",
+    "caniusequery": ""
+}

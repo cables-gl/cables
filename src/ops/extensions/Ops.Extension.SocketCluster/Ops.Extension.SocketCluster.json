@@ -1,0 +1,9 @@
+{
+    "name": "Ops.Extension.SocketCluster",
+    "summary": "Connect to a SocketCluster server and manage the connection",
+    "licence": {
+        "name": "MIT"
+    },
+    "description": "",
+    "visibility": "public"
+}

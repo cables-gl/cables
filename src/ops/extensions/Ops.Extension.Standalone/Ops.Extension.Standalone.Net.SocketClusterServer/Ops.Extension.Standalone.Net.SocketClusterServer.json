@@ -1,0 +1,88 @@
+{
+    "id": "de44ac6d-4882-484a-8fd9-ea22d2e40aff",
+    "created": 1732118909582,
+    "license": "MIT",
+    "dependencies": [
+        {
+            "type": "npm",
+            "src": "socketcluster-server"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Hostname"
+            },
+            {
+                "type": 0,
+                "name": "Port",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Receiving"
+            },
+            {
+                "type": 2,
+                "name": "Data",
+                "objType": "socketcluster-raw-data"
+            },
+            {
+                "type": 0,
+                "name": "Listening",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clients",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    },
+    "authorName": "stephan",
+    "summary": "start a socketcluster server",
+    "docs": {
+        "ports": [
+            {
+                "name": "Hostname",
+                "text": "optionally define hotname or ip-address to listen to"
+            },
+            {
+                "name": "Path",
+                "text": "http path of the server"
+            },
+            {
+                "name": "Data",
+                "text": "raw data of everything on the connection"
+            },
+            {
+                "name": "Clients",
+                "text": "number of clients"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "stephan",
+            "date": 1738583457089
+        }
+    ]
+}

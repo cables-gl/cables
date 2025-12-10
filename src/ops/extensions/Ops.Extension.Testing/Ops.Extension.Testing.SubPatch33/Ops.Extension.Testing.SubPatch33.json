@@ -1,0 +1,20 @@
+{
+    "id": "f1f3afa9-a58d-4a74-99ec-96152730762b",
+    "created": 1716970928044,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716970928076
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
+}

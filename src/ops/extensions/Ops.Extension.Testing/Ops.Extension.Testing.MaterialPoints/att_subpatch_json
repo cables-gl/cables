@@ -1,0 +1,265 @@
+{
+  "ops": [
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "h3n6h068w",
+      "uiAttribs": {
+        "translate": {
+          "x": -355.95068654278157,
+          "y": 4184.5490875956075
+        },
+        "subPatch": "y27s5693a",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": -1.68
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": 209.964
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "0dg5sqbd2",
+              "objOut": "h3n6h068w"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "bfe60760-6cf6-43d0-96da-b4848c2b146a",
+      "id": "toidamwq5",
+      "uiAttribs": {
+        "translate": {
+          "x": -355.95068654278157,
+          "y": 4364.5490875956075
+        },
+        "subPatch": "y27s5693a",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "sides",
+          "value": 14
+        },
+        {
+          "name": "rings",
+          "value": 12
+        },
+        {
+          "name": "innerRadius",
+          "value": 0.5
+        },
+        {
+          "name": "outerRadius",
+          "value": 1
+        },
+        {
+          "name": "Draw",
+          "value": 1,
+          "title": "Render mesh"
+        }
+      ]
+    },
+    {
+      "opId": "e44df958-00c7-46e4-95bb-3e6ac6c4188f",
+      "id": "0dg5sqbd2",
+      "uiAttribs": {
+        "translate": {
+          "x": -355.95068654278157,
+          "y": 4305.104778357955
+        },
+        "subPatch": "y27s5693a",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "PointSize",
+          "value": 12.35
+        },
+        {
+          "name": "Size in Pixels",
+          "value": 0
+        },
+        {
+          "name": "Random Size",
+          "value": 0
+        },
+        {
+          "name": "Round",
+          "value": 1
+        },
+        {
+          "name": "Round Antialias",
+          "value": 0
+        },
+        {
+          "name": "Scale by Distance",
+          "value": 0
+        },
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 0.5747126436781609
+        },
+        {
+          "name": "b",
+          "value": 0
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Vertex Colors",
+          "value": 0
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "Mask Channel index",
+          "value": 0
+        },
+        {
+          "name": "Mask Channel",
+          "value": "R"
+        },
+        {
+          "name": "Colorize Randomize",
+          "value": 1
+        },
+        {
+          "name": "Point Size Channel index",
+          "value": 0
+        },
+        {
+          "name": "Point Size Channel",
+          "value": "R"
+        },
+        {
+          "name": "Texture Point Size Mul",
+          "value": 1
+        },
+        {
+          "name": "Map Size 0 index",
+          "value": 0
+        },
+        {
+          "name": "Map Size 0",
+          "value": "Black"
+        },
+        {
+          "name": "Flip Texture",
+          "value": 0
+        },
+        {
+          "name": "Atlas Cross Fade",
+          "value": 0
+        },
+        {
+          "name": "Atlas Repeat X ",
+          "value": 1
+        },
+        {
+          "name": "Min Point Size",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "toidamwq5",
+              "objOut": "0dg5sqbd2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "hkefz2x2d",
+      "uiAttribs": {
+        "subPatch": "y27s5693a",
+        "translate": {
+          "x": -250.15068654278156,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_ry8b92ii7",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_ry8b92ii7",
+              "objIn": "h3n6h068w",
+              "objOut": "hkefz2x2d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "9dikje39f",
+      "uiAttribs": {
+        "subPatch": "y27s5693a",
+        "translate": {
+          "x": -250.15068654278156,
+          "y": 4475.5490875956075
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

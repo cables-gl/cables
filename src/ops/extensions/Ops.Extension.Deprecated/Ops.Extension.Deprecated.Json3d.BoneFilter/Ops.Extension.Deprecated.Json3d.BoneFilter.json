@@ -1,0 +1,41 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c7d25c25-accb-45da-ba6a-a1d634f89e6f",
+    "created": 1514024096775,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Joint index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Filter the bones joints and expose them for you to use its position to attach a mesh to it.",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.Bones.BoneFilter renamed to Ops.Deprecated.Json3d.Bones.BoneFilter",
+            "author": "pandur",
+            "date": 1654587702546
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

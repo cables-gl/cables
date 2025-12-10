@@ -1,0 +1,52 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "CPS",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Triggers every x milliseconds. Can be used e.g. to create a strobe effect.",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Triggers the Frequency-op"
+            },
+            {
+                "name": "frequency",
+                "text": "How often `Trigger` is called, in milliseconds (1second = 1000 milliseconds)"
+            },
+            {
+                "name": "trigger",
+                "text": "Triggers all child ops in the specified frequency"
+            },
+            {
+                "name": "CPS",
+                "text": "Calls per Second"
+            }
+        ]
+    },
+    "updated": 1540917388424,
+    "authorName": "pandur",
+    "id": "c72a160d-55f5-427c-a516-cf6753201d56",
+    "created": 1540917326448,
+    "changelog": []
+}

@@ -44,7 +44,11 @@ exe.onTriggered = function ()
             outStates.set(null);
             outStates.set(states);
 
-            if (taps.length > 0) bpm.set(millisToBpm(avgMillis));
+            if (taps.length > 0)
+            {
+                bpm.set(millisToBpm(avgMillis));
+                op.setUiAttrib({ "extendTitle": bpm.get() });
+            }
         }
 
         lastFlash = op.patch.freeTimer.get() * 1000;

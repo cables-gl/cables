@@ -1,0 +1,38 @@
+{
+    "id": "007e3e44-93ce-465c-931d-4d2a6099f215",
+    "created": 1741265656585,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741265656619
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.SvgText",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265755172
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "o44faoari",
+                "uititle": "render"
+            },
+            {
+                "type": 5,
+                "name": "502whkmy4",
+                "uititle": "Font File"
+            }
+        ],
+        "portsOut": []
+    }
+}

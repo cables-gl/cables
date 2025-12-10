@@ -1,7 +1,6 @@
 .DS_Store
 src/ops/users
 src/ops/teams
-src/ops/extensions
 src/ops/patches
 .idea/
 node_modules

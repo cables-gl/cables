@@ -1,0 +1,44 @@
+{
+    "id": "cd84771e-af78-481e-a589-f38cb002abbb",
+    "created": 1725892278542,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1725892278542
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Default Path"
+            },
+            {
+                "type": 1,
+                "name": "Select File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Choose a file on your hard drive",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "M58UAs"
+}

@@ -1,0 +1,43 @@
+{
+    "id": "62f15fa7-6e50-4f8d-acdf-02753bcb5788",
+    "created": 1716890341133,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716890341175
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716890341905
+        },
+        {
+            "message": "Extension.Testing.SvgTexture renamed to Ops.Extension.Testing.Textures_SvgTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732482890
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "m57hn1hvy",
+                "uititle": "render"
+            },
+            {
+                "type": 5,
+                "name": "q7rod63s1",
+                "uititle": "File"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "id": "45b2747b-5097-411d-bbbb-a93fb36d5582",
+    "created": 1740735782640,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740735782667
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.TexturesBase64",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740735800024
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    }
+}

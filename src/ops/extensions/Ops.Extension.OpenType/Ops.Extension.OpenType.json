@@ -1,0 +1,6 @@
+{
+    "name": "Ops.Extension.OpenType.",
+    "summary": "load OTF & TTF fonts via OpenType library",
+    "description": "",
+    "visibility": "public"
+}

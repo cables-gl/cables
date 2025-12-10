@@ -1,0 +1,50 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "AutoWah connects a Follower to a bandpass filter (Filter)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Gain"
+            },
+            {
+                "type": "4",
+                "name": "Quality"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Base Frequency"
+            },
+            {
+                "type": "0",
+                "name": "Sensitivity"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "48982600-56e8-4d84-9fdd-6caf6ab01247",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

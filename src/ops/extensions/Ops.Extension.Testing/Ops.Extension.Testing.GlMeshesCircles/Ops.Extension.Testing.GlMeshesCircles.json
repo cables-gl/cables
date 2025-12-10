@@ -1,0 +1,32 @@
+{
+    "id": "e166eed2-d2dc-4576-afc7-993685bffe3c",
+    "created": 1716294893586,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716294893622
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716294894385
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "jbbxi2uxh",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

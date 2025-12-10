@@ -1,0 +1,58 @@
+{
+    "id": "dd3cf0b4-3dbc-41e1-9320-87befc0a0774",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550675561530
+        },
+        {
+            "message": "Ops.String.StringNew2Old renamed to Ops.Deprecated.String.StringNew2Old",
+            "author": "pandur",
+            "date": 1671008047162
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550675602988,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "temporary string port converter",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in - new format"
+            },
+            {
+                "name": "Result",
+                "text": "String out - old format"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Make example",
+            "author": "andro",
+            "id": "46895679-889e-4acf-a992-f3ddb055edf7",
+            "date": 1558358563165,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605511607184
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "summary": "Outputs a musical scale array (major, minor, ...)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Base Tone",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Scale Type",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Append Octave",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Octave",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Include High Base Tone",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Scale Array"
+            }
+        ]
+    },
+    "updated": 1542058140376,
+    "authorName": "pandur",
+    "id": "ee6e1d9c-f831-47c2-8fe6-d4c9bbcc8107",
+    "created": 1542058134821,
+    "changelog": [
+        {
+            "message": "Ops.WebAudio.Scale.ScaleArray renamed to Ops.Deprecated.WebAudio.Scale.ScaleArray",
+            "author": "pandur",
+            "date": 1613549219812
+        }
+    ]
+}

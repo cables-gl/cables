@@ -1,0 +1,111 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "6bf26be8-8735-46ff-ac1e-fce304ac07b1",
+    "created": 1511867976490,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 1"
+            },
+            {
+                "type": 2,
+                "name": "Geometry 2"
+            },
+            {
+                "type": 0,
+                "name": "Fade",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Normals",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "morph between two geometries and render it",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Geometry 1",
+                "text": "Geometry in 1"
+            },
+            {
+                "name": "Geometry 2",
+                "text": "Geometry in 1"
+            },
+            {
+                "name": "Fade",
+                "text": "Interpolation amount between the two geometries "
+            },
+            {
+                "name": "Normals",
+                "text": "Enable normals"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "needs example",
+            "author": "pandur",
+            "id": "a7ba9852-c01c-47d1-bc85-72cdbaa9c647",
+            "date": 1558040011370,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605512013179
+        },
+        {
+            "message": "Needs example very low poly",
+            "author": "andro",
+            "id": "822bd9f0-c8ca-445c-9907-26f2dd9731b3",
+            "date": 1558367198294,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605512014773
+        }
+    ],
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "stephan",
+            "date": 1652716400934
+        },
+        {
+            "message": "Ops.Gl.MorphGeometries renamed to Ops.Deprecated.Gl.MorphGeometries",
+            "author": "pandur",
+            "date": 1671005404571
+        },
+        {
+            "message": "use  Ops.Gl.MeshMorph",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1671035197667
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier",
+        "cgl"
+    ]
+}

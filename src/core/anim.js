@@ -1,9 +1,11 @@
 import { Events, Logger } from "cables-shared-client";
-import { uuid } from "./utils.js";
+import { logStack, uuid } from "./utils.js";
 import { AnimKey } from "./anim_key.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { Patch } from "./core_patch.js";
+
+let counts = {};
 
 /**
  * Keyframed interpolated animation.
@@ -75,6 +77,8 @@ export class Anim extends Events
     _timesLooped = 0;
     #needsSort = false;
     _cachedIndex = 0;
+
+    /** @type {Port} */
     port = null;
 
     /** @type {AnimKey[]} */
@@ -540,13 +544,22 @@ export class Anim extends Events
      * @param {Number} [time] time
      * @returns {Number} interpolated value at time
      */
-    getValue(time)
+    getValue(time = 0)
     {
+        // if (isNaN(time))time = 0;
+        // counts[this.name] = counts[this.name] || 0;
+        // if (counts[this.name] < 10 && this.port)
+        // {
+        //     console.log("getvalue", this.name, time, this);
+        //     CABLES.logStack();
+        //     counts[this.name]++;
+        // }
+
         let valAdd = 0;
         if (this.keys.length === 0) return 0;
         if (this.#needsSort) this.sortKeys();
 
-        if (!this.loop && time > this.keys[this.keys.length - 1].time)
+        if (!this.loop && time > this.lastKey.time)
         {
             if (this.lastKey.cb && !this.lastKey.cbTriggered) this.lastKey.trigger();
 
@@ -598,22 +611,19 @@ export class Anim extends Events
 
         if (key1.getEasing() == Anim.EASING_CLIP)
         {
+            if (!key1.clip && this.port)
+            {
+
+                const patch = this.port.op.patch;
+                const clip = patch.getVar(key1.clipId)?.getValue();
+                if (clip) key1.clip = clip;
+            }
             if (key1.clip && key1.clip.getValue)
             {
                 return key1.clip.getValue(perc * key1.clip.getLength());
             }
             else
             {
-                if (this.port)
-                {
-
-                    /** @type {Patch} */
-                    const patch = this.port.op.patch;
-                    const clip = patch.getVar(key1.clipId)?.getValue();
-                    if (clip) key1.clip = clip;
-                    if (key1.clip) return key1.clip.getValue(time);
-                }
-
                 console.log("no clip found");
             }
         }

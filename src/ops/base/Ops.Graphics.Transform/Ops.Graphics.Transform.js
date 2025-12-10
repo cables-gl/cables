@@ -103,8 +103,6 @@ function updateTranslation()
 
 function updateScale()
 {
-    // doScale=false;
-    // if(scale.get()!==0.0)
     doScale = true;
     vec3.set(vScale, scale.get(), scale.get(), scale.get());
     scaleChanged = false;

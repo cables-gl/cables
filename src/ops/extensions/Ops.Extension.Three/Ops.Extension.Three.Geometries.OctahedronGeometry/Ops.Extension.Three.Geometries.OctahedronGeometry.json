@@ -1,0 +1,52 @@
+{
+    "id": "4d63bbbe-4bd4-4c7d-809a-787a9f50c120",
+    "created": 1764937062456,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764937062456
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Detail",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a octahedron geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the octahedron"
+            },
+            {
+                "name": "Detail",
+                "text": "Add vertices"
+            }
+        ]
+    },
+    "exampleProjectId": "K7F5x4"
+}

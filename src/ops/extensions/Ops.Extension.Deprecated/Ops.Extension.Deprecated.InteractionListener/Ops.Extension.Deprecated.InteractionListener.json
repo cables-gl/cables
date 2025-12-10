@@ -1,0 +1,46 @@
+{
+    "summary": "Was there mouse movement the last x [duration] seconds?",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Events",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Duration",
+                "text": "Duration in seconds"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "1dcb1c53-1e7f-41a6-9917-e625ea803f6c",
+    "created": 1558014659247,
+    "changelog": [
+        {
+            "message": "Ops.InteractionListener renamed to Ops.Deprecated.InteractionListener",
+            "author": "pandur",
+            "date": 1671005715640
+        },
+        {
+            "message": "",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1671035420600
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

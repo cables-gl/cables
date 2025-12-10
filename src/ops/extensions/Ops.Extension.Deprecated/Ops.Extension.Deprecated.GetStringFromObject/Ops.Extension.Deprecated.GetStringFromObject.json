@@ -1,0 +1,59 @@
+{
+    "id": "6562a543-2147-485d-8fd3-58fe3357684e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550658667375
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1721042553943
+        },
+        {
+            "message": "renamed Ops.Json.GetStringFromObject to Ops.Extension.Deprecated.GetStringFromObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1721042558961
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550658681332,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "data"
+            },
+            {
+                "type": 5,
+                "name": "key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "result"
+            }
+        ]
+    },
+    "summary": "get string from object",
+    "youtubeid": "",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "Add docs and example patch",
+            "author": "andro",
+            "id": "443120cc-3245-4d12-aabf-df5ecd3a75ec",
+            "date": 1558358447255,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605453397165
+        }
+    ]
+}

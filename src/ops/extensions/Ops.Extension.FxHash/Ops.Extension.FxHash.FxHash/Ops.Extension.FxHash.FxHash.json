@@ -1,0 +1,79 @@
+{
+    "id": "090355fe-6ad9-457c-8192-9e306a9fe1eb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1651555847047
+        },
+        {
+            "message": "Ops.User.pandur.FxHash renamed to Ops.Api.FxHash.FxHash",
+            "author": "pandur",
+            "date": 1651557823577
+        },
+        {
+            "message": "Ops.Api.FxHash.FxHash renamed to Ops.Extension.FxHash.FxHash",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686914842429
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1651555980507,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Hash"
+            },
+            {
+                "type": 1,
+                "name": "Randomize Hash"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "fxhash"
+            },
+            {
+                "type": 0,
+                "name": "fxrand 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "fxrand 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "fxrand 3",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "fxrand 4",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Random Numbers"
+            },
+            {
+                "type": 0,
+                "name": "fxhash environment",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "FxHash simulator / generator of seeded random numbers",
+    "issues": "",
+    "caniusequery": "",
+
+    "youtubeids": [],
+    "exampleProjectId": "dnDl82",
+    "docs": {
+        "ports": []
+    }
+}

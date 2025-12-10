@@ -1,0 +1,294 @@
+{
+    "id": "6d4b6af5-dab2-46ec-9834-a928c5933270",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642868426174,
+            "type": "new"
+        },
+        {
+            "message": "Added Precision Switch to switch between 32/16bit textures",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1704979030668
+        },
+        {
+            "message": "added Pre-render/warm up functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1705055024898
+        },
+        {
+            "message": "Ops.Team.Particles.ParticleSystem_v5 renamed to Ops.Team.Particles.ParticleSystem_v7",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1705598998978
+        },
+        {
+            "message": "Ops.Extension.GlParticles.ParticleSystem_v8 renamed to Ops.Extension.GlParticles.Dev.ParticleSystem_v8",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1729509945999
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture",
+        "cgl"
+    ],
+    "authorName": "pandur",
+    "created": 1731407224029,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Lifetime index",
+                "values": [
+                    "spawn+die",
+                    "static"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Num Particles",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Spawn Rate",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Randomize Spawn",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Min Lifetime",
+                "group": "Particle Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Lifetime",
+                "group": "Particle Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reset Randomize Age",
+                "group": "Particle Properties",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Particles Lifetime",
+                "group": "Particle Properties",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mass Min",
+                "group": "Particle Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mass Max",
+                "group": "Particle Properties",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Particles Mass",
+                "group": "Particle Properties",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Velocity X",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Y",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Z",
+                "group": "Constant Velocity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Spawn Positions",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Spawn Energy",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Spawn Directions",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Drag",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Pass Through 1",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Pass Through 2",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Pre Warm Seconds",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset+Prewarm"
+            },
+            {
+                "type": 0,
+                "name": "Respawn",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Precision index",
+                "values": [
+                    "32 Bit",
+                    "16 Bit"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Positions",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Timing",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Timing Internal",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Feedback Velocity Out",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Absolute Velocity",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Misc",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Result Pass Through 1",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Result Pass Through 2",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Tex Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "GPU Particle System ",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

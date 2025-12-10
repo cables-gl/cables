@@ -1,0 +1,52 @@
+{
+    "authorName": "pandur",
+    "id": "5e255dde-7425-442a-a22a-b4d108803204",
+    "created": 1519817247190,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Diagram"
+            },
+            {
+                "type": "0",
+                "name": "Extrude Cell Center",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Border Cells",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Calc Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Meshes.VoronoiMesh renamed to Ops.Deprecated.Gl.Meshes.VoronoiMesh",
+            "author": "pandur",
+            "date": 1606807629422
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

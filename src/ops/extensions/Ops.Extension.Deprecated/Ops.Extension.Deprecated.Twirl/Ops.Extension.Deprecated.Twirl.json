@@ -1,0 +1,45 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "times",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "twirl image effect",
+    "updated": 1521445064658,
+    "authorName": "pandur",
+    "id": "2c321015-1af1-49da-b5a6-1664b5ad9a35",
+    "created": 1521444097779,
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
+}

@@ -1,0 +1,3 @@
+A simple shape of Euclidean geometry. It is constructed from a number of triangular segments that are oriented around a central point and extend as far out as a given radius. It is built counter-clockwise from a start angle and a given central angle. It can also be used to create regular polygons, where the number of segments determines the number of sides.
+
+https://threejs.org/docs/?q=CircleGeometry#CircleGeometry

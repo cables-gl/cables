@@ -1,0 +1,39 @@
+{
+    "id": "042f44ae-a3dd-4b19-8890-e9707866d344",
+    "created": 1740733315764,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740733315784
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Patch.PAh3NTD.GlPointCloud",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733342300
+        },
+        {
+            "message": "Patch.PAh3NTD.GlPointCloud renamed to Ops.Extension.Testing.GlPointCloud",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733432456
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "vp70q69w9",
+                "uititle": "Trigger_57"
+            }
+        ],
+        "portsOut": []
+    }
+}

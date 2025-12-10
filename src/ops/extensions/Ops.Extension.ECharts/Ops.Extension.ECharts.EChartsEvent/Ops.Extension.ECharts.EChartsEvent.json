@@ -1,0 +1,123 @@
+{
+    "id": "70116802-623a-461b-8aad-59aaa3bd9d3c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1614945678734
+        },
+        {
+            "message": "Ops.User.stephan.EChartsEvent renamed to Ops.Libs.EChartsEvent",
+            "author": "stephan",
+            "date": 1614949335649
+        },
+        {
+            "message": "Ops.Libs.EChartsEvent renamed to Ops.Libs.ECharts.EChartsEvent",
+            "author": "stephan",
+            "date": 1614949376276
+        },
+        {
+            "message": "Ops.Libs.ECharts.EChartsEvent renamed to Ops.Extension.ECharts.EChartsEvent",
+            "author": "stephan",
+            "date": 1671008782661
+        }
+    ],
+    "authorName": "kikohs",
+    "created": 1614945706574,
+    "libs": [
+        "echarts.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "ECharts instance"
+            },
+            {
+                "type": 5,
+                "name": "Event name"
+            },
+            {
+                "type": 5,
+                "name": "Query string"
+            },
+            {
+                "type": 2,
+                "name": "Query object"
+            },
+            {
+                "type": 1,
+                "name": "Refresh event binding"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Out Chart"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Event params"
+            },
+            {
+                "type": 0,
+                "name": "Dirty (needs rebind)",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "capture echart-library-events",
+    "issues": "",
+
+    "relatedops": [
+        "Ops.Libs.ECharts.ECharts"
+    ],
+    "youtubeids": [
+        "moeK10BhmAw"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "ECharts instance",
+                "text": "The ECharts instance"
+            },
+            {
+                "name": "Event name",
+                "text": "Name of the event e.g \"click\""
+            },
+            {
+                "name": "Query string",
+                "text": "Ëlement selector e.g \"series.bar\""
+            },
+            {
+                "name": "Query object",
+                "text": "Optional: More complex selection of elements to bind the event"
+            },
+            {
+                "name": "Refresh event binding",
+                "text": "Trigger if the reference to the chart changed or if you add/delete event dynamically"
+            },
+            {
+                "name": "Out Chart",
+                "text": "ECharts instance"
+            },
+            {
+                "name": "Trigger",
+                "text": "Event was triggered"
+            },
+            {
+                "name": "Event params",
+                "text": "Event parameters"
+            },
+            {
+                "name": "Dirty (needs rebind)",
+                "text": "Check whether the event needs to be rebounded to the ECharts instance object"
+            }
+        ]
+    },
+    "exampleProjectId": "iY6lbI"
+}

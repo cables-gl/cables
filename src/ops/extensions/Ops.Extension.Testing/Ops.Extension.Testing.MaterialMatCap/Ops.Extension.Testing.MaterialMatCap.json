@@ -1,0 +1,33 @@
+{
+    "id": "57b3fb9e-9610-44fe-9db2-73bee7e27960",
+    "created": 1741266860726,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741266860749
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MaterialMatCap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741266886198
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "illl1hd86",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

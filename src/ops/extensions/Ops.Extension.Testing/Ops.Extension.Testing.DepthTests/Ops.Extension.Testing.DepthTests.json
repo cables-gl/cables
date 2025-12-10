@@ -1,0 +1,32 @@
+{
+    "id": "65502cf2-03e6-46f8-970b-9a81ffa95a71",
+    "created": 1716890786349,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716890786383
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716890786902
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "iswjcorus",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

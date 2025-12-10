@@ -1,0 +1,33 @@
+{
+    "id": "5f49b6e7-911d-4ed3-8a35-d92cb229816e",
+    "created": 1743095245516,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743095245516
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.R2t",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743095262889
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "i6rbmf1c7",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

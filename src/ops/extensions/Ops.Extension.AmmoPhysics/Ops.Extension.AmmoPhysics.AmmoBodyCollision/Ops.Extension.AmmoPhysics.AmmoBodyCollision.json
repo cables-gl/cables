@@ -1,0 +1,127 @@
+{
+    "id": "6fd02be3-0c73-4fbd-88a1-d60313ad5622",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1648817065927
+        },
+        {
+            "message": "Ops.User.pandur.AmmoBodyCollision renamed to Ops.Dev.AmmoBodyCollision",
+            "author": "pandur",
+            "date": 1648823918763
+        },
+        {
+            "message": "Ops.Dev.AmmoBodyCollision renamed to Ops.Physics.Ammo.AmmoBodyCollision",
+            "author": "pandur",
+            "date": 1652089882662
+        },
+        {
+            "message": "add matching parameters to name1/name2",
+            "author": "stephan",
+            "date": 1664891342565
+        },
+        {
+            "message": "Ops.Physics.Ammo.AmmoBodyCollision renamed to Ops.Extension.AmmoPhysics.AmmoBodyCollision",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677123827
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1648817104183,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "update"
+            },
+            {
+                "type": 5,
+                "name": "Name 1"
+            },
+            {
+                "type": 0,
+                "name": "Match Name 1 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Name 2"
+            },
+            {
+                "type": 0,
+                "name": "Match Name 2 index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Colliding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Collisions",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Collisions"
+            }
+        ]
+    },
+    "summary": "Check if physics bodies are colliding",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "S_jPZ4",
+    "docs": {
+        "ports": [
+            {
+                "name": "update",
+                "text": "execute operation"
+            },
+            {
+                "name": "Name 1",
+                "text": "name of physics object"
+            },
+            {
+                "name": "Match Name 1 index",
+                "text": "match name 1"
+            },
+            {
+                "name": "Name 2",
+                "text": "name of physics object (optional)"
+            },
+            {
+                "name": "Match Name 2 index",
+                "text": "match name 2 (if set)"
+            },
+            {
+                "name": "Next",
+                "text": "next"
+            },
+            {
+                "name": "Colliding",
+                "text": "collision detected (Boolean)"
+            },
+            {
+                "name": "Num Collisions",
+                "text": "number of collisions"
+            },
+            {
+                "name": "Collisions",
+                "text": "array of collision objects"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}

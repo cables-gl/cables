@@ -1,0 +1,527 @@
+{
+  "ops": [
+    {
+      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
+      "id": "hpz4pwm83",
+      "uiAttribs": {
+        "translate": {
+          "x": 1939.8267967291467,
+          "y": 4219.057334518758
+        },
+        "loading": false,
+        "subPatch": "jspv32jho",
+        "extendTitle": "uv",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/images/uv.png",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 1
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Save Memory",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "tex",
+              "portOut": "Texture",
+              "objIn": "f8b36nfgh",
+              "objOut": "hpz4pwm83"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 1024
+        },
+        {
+          "name": "Height",
+          "value": 1024
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a165fc89-a35b-4d39-8930-7345b098bd9d",
+      "id": "f8b36nfgh",
+      "uiAttribs": {
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 4299.057334518758
+        },
+        "subPatch": "jspv32jho",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Fragment Code",
+          "value": "UNI int idx;\nUNI int showTc;\nUNI sampler2D tex;\nIN vec2 texCoord;\nIN vec2 texCoord1;\nIN vec2 texCoord2;\nIN vec2 texCoord3;\nIN vec2 texCoord4;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n \n vec2 tc=texCoord;\n    \n    if(idx==0)    tc=texCoord;\n    if(idx==1)    tc=texCoord1;\n    if(idx==2)    tc=texCoord2;\n    if(idx==3)    tc=texCoord3;\n    if(idx==4)    tc=texCoord4;\n    \n    col=texture2D(tex,tc);\n    \n    if(showTc>0)col=vec4(tc,0.0,1.0);\n\n\n    {{MODULE_COLOR}}\n    outColor = col;\n}"
+        },
+        {
+          "name": "Vertex Code",
+          "value": "\n{{MODULES_HEAD}}\nIN vec3 vPosition;\nIN vec2 attrTexCoord;\nIN vec2 attrTexCoord1;\nIN vec2 attrTexCoord2;\nIN vec2 attrTexCoord3;\nIN vec2 attrTexCoord4;\n\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec2 texCoord1;\nOUT vec2 texCoord2;\nOUT vec2 texCoord3;\nOUT vec2 texCoord4;\n\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\nvoid main()\n{\n    texCoord=attrTexCoord;\n    texCoord1=attrTexCoord1;\n    texCoord2=attrTexCoord2;\n    texCoord3=attrTexCoord3;\n    texCoord4=attrTexCoord4;\n    \n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    {{MODULE_VERTEX_POSITION}}\n    gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;\n}"
+        },
+        {
+          "name": "Use As Material",
+          "value": 1
+        },
+        {
+          "name": "showTc",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "xcm4acxsk",
+              "objOut": "f8b36nfgh"
+            }
+          ]
+        },
+        {
+          "name": "Has Errors",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+      "id": "0yti5q4k0",
+      "uiAttribs": {
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 3619.0573345187577
+        },
+        "subPatch": "jspv32jho",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger 0",
+              "objIn": "f8b36nfgh",
+              "objOut": "0yti5q4k0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "unisq6pfe",
+      "uiAttribs": {
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 4411.280048613936
+        },
+        "subPatch": "jspv32jho",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 0.63
+        },
+        {
+          "name": "rotX",
+          "value": -3.5
+        },
+        {
+          "name": "rotY",
+          "value": -73
+        },
+        {
+          "name": "rotZ",
+          "value": -1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "l8j28n7lf",
+              "objOut": "unisq6pfe"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "7a78e163-d28c-4f70-a6d0-6d952da79f50",
+      "id": "xcm4acxsk",
+      "uiAttribs": {
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 4344.613113652929
+        },
+        "subPatch": "jspv32jho",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Axis index",
+          "value": 0
+        },
+        {
+          "name": "Axis",
+          "value": "Vertical"
+        },
+        {
+          "name": "fov y",
+          "value": 38.5,
+          "title": "FOV Degrees"
+        },
+        {
+          "name": "frustum near",
+          "value": 0.01
+        },
+        {
+          "name": "frustum far",
+          "value": 26
+        },
+        {
+          "name": "Auto Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "unisq6pfe",
+              "objOut": "xcm4acxsk"
+            }
+          ]
+        },
+        {
+          "name": "Aspect",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "l8j28n7lf",
+      "uiAttribs": {
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 4479.057334518758
+        },
+        "accBuffersDelete": "head-multi_UV",
+        "loading": false,
+        "subPatch": "jspv32jho",
+        "extendTitle": "head-multi_UV",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 2.5
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 0
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Auto"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Generator",
+          "value": "Khronos glTF Blender I/O v1.5.17"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": 0
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "8fb2bb5d-665a-4d0a-8079-12710ae453be",
+      "id": "jxd841o9a",
+      "uiAttribs": {
+        "subPatch": "jspv32jho",
+        "translate": {
+          "x": 1915.8267967291467,
+          "y": 3836.727881637946
+        },
+        "extendTitle": 1,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "value",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "idx",
+              "portOut": "result",
+              "objIn": "f8b36nfgh",
+              "objOut": "jxd841o9a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "j56nb1kue",
+      "uiAttribs": {
+        "subPatch": "jspv32jho",
+        "translate": {
+          "x": 1484.4723996851474,
+          "y": 3917.4314076386963
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_3ag0l5i42",
+          "title": "exe 0",
+          "links": [
+            {
+              "portIn": "exe 0",
+              "portOut": "innerOut_3ag0l5i42",
+              "objIn": "0yti5q4k0",
+              "objOut": "j56nb1kue"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_kum9etdeb",
+          "title": "glb File",
+          "links": [
+            {
+              "portIn": "glb File",
+              "portOut": "innerOut_kum9etdeb",
+              "objIn": "l8j28n7lf",
+              "objOut": "j56nb1kue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "8iaa9c9jm",
+      "uiAttribs": {
+        "subPatch": "jspv32jho",
+        "translate": {
+          "x": 1867.8267967291467,
+          "y": 4590.057334518758
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

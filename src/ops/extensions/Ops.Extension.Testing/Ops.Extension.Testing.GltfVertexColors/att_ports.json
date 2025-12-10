@@ -1,0 +1,20 @@
+{
+    "ports": [
+        {
+            "id": "94uzkbsko",
+            "title": "render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "jgob8i89i",
+            "title": "glb File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/619e244ce4dff21e0ce04166/vertexpaint_cube.glb",
+            "order": 1
+        }
+    ]
+}

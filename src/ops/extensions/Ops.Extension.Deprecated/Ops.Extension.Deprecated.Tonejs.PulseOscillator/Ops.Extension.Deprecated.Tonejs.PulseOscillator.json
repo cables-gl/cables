@@ -1,0 +1,78 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Pulse oscillator with control over pulse width",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Width"
+            },
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Detune"
+            },
+            {
+                "type": "0",
+                "name": "Phase",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sync Frequency",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Start Time",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Stop"
+            },
+            {
+                "type": "0",
+                "name": "Stop Time",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Auto Start",
+                "subType": "boolean"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            },
+            {
+                "type": "0",
+                "name": "Mute",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "updated": 1524590499215,
+    "authorName": "tim",
+    "id": "065e2202-b79f-41e6-bf0b-1f2d769de872",
+    "created": 1524588539972,
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

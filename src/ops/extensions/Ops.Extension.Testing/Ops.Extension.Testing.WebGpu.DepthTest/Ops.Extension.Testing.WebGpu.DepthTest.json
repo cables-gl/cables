@@ -1,0 +1,33 @@
+{
+    "id": "b2481638-f2fb-471b-87bf-240f73dffae8",
+    "created": 1743596041520,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743596041521
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.DepthTest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743596064089
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "ak22at9pn",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

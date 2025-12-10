@@ -1,0 +1,81 @@
+{
+    "authorName": "stephan",
+    "id": "03d2c172-5492-48c1-8093-f3335f665c67",
+    "created": 1584698125849,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "topic"
+            },
+            {
+                "type": 2,
+                "name": "data"
+            },
+            {
+                "type": 0,
+                "name": "delay (ms)",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "send"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Sent Data"
+            }
+        ]
+    },
+    "summary": "sends an object via socketcluster/websocket",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "send",
+                "text": "execute"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "data",
+                "text": "object"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Net.SocketCluster.SocketClusterSendObject renamed to Ops.Extension.SocketCluster.SocketClusterSendObject",
+            "author": "stephan",
+            "date": 1671003478246
+        },
+        {
+            "message": "Added output that will be triggered, when data was sent",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713180932922
+        },
+        {
+            "message": "An error will be shown if the socket is not allowed to send data",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713181442707
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "EJvr0a"
+}

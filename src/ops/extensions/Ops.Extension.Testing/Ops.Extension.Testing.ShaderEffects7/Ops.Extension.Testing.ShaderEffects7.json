@@ -1,0 +1,39 @@
+{
+    "id": "73b39264-94f1-40b3-98ad-add0b82c95e9",
+    "created": 1723127837092,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127837134
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch3 renamed to Ops.Patch.PAh3NTD.SubPatch32",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560641986
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch32 renamed to Ops.Extension.Testing.ShaderEffects7",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732815574
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "o41up594i",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,518 @@
+{
+  "ops": [
+    {
+      "opId": "6d4b6af5-dab2-46ec-9834-a928c5933270",
+      "id": "oqpr01yv8",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 3168,
+          "y": 1638.7673933326607
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Play",
+          "value": 0
+        },
+        {
+          "name": "Lifetime index",
+          "value": 1
+        },
+        {
+          "name": "Lifetime",
+          "value": "static"
+        },
+        {
+          "name": "Num Particles",
+          "value": 111
+        },
+        {
+          "name": "Speed",
+          "value": 1
+        },
+        {
+          "name": "Spawn Rate",
+          "value": 1
+        },
+        {
+          "name": "Randomize Spawn",
+          "value": 1
+        },
+        {
+          "name": "Min Lifetime",
+          "value": 0.5
+        },
+        {
+          "name": "Max Lifetime",
+          "value": 2
+        },
+        {
+          "name": "Reset Randomize Age",
+          "value": 1
+        },
+        {
+          "name": "Mass Min",
+          "value": 0
+        },
+        {
+          "name": "Mass Max",
+          "value": 0
+        },
+        {
+          "name": "Velocity X",
+          "value": 0
+        },
+        {
+          "name": "Velocity Y",
+          "value": 0
+        },
+        {
+          "name": "Velocity Z",
+          "value": 0
+        },
+        {
+          "name": "Gravity X",
+          "value": 0
+        },
+        {
+          "name": "Gravity Y",
+          "value": 0
+        },
+        {
+          "name": "Gravity Z",
+          "value": 0
+        },
+        {
+          "name": "Position X",
+          "value": 0
+        },
+        {
+          "name": "Position Y",
+          "value": 0
+        },
+        {
+          "name": "Position Z",
+          "value": 0
+        },
+        {
+          "name": "Spawn Energy",
+          "value": 3
+        },
+        {
+          "name": "Velocity Drag",
+          "value": 1
+        },
+        {
+          "name": "Pre Warm Seconds",
+          "value": 0
+        },
+        {
+          "name": "Respawn",
+          "value": 1
+        },
+        {
+          "name": "Precision index",
+          "value": 0
+        },
+        {
+          "name": "Precision",
+          "value": "32 Bit"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Positions",
+          "links": [
+            {
+              "portIn": "Texture",
+              "portOut": "Positions",
+              "objIn": "rmng0cjao",
+              "objOut": "oqpr01yv8"
+            }
+          ]
+        },
+        {
+          "name": "Tex Size",
+          "value": 11
+        },
+        {
+          "name": "Time",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "e44df958-00c7-46e4-95bb-3e6ac6c4188f",
+      "id": "64r7s8dlw",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 2785.13147798064,
+          "y": 1411.623330312766
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "PointSize",
+          "value": 30.83
+        },
+        {
+          "name": "Size in Pixels",
+          "value": 1
+        },
+        {
+          "name": "Random Size",
+          "value": 0
+        },
+        {
+          "name": "Round",
+          "value": 1
+        },
+        {
+          "name": "Round Antialias",
+          "value": 0
+        },
+        {
+          "name": "Scale by Distance",
+          "value": 0
+        },
+        {
+          "name": "r",
+          "value": 0.6705882352941175
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 0
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Vertex Colors",
+          "value": 0
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "Mask Channel index",
+          "value": 0
+        },
+        {
+          "name": "Mask Channel",
+          "value": "R"
+        },
+        {
+          "name": "Colorize Randomize",
+          "value": 0
+        },
+        {
+          "name": "Point Size Channel index",
+          "value": 0
+        },
+        {
+          "name": "Point Size Channel",
+          "value": "R"
+        },
+        {
+          "name": "Texture Point Size Mul",
+          "value": 1
+        },
+        {
+          "name": "Map Size 0 index",
+          "value": 0
+        },
+        {
+          "name": "Map Size 0",
+          "value": "Black"
+        },
+        {
+          "name": "Flip Texture",
+          "value": 0
+        },
+        {
+          "name": "Atlas Cross Fade",
+          "value": 0
+        },
+        {
+          "name": "Atlas Repeat X ",
+          "value": 1
+        },
+        {
+          "name": "Min Point Size",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "rmng0cjao",
+              "objOut": "64r7s8dlw"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "qn38hadnp",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 2844,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_x7cr93vn5",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_x7cr93vn5",
+              "objIn": "64r7s8dlw",
+              "objOut": "qn38hadnp"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "kbp5p2j4e",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 2844,
+          "y": 2911
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "0816c999-f2db-466b-9777-2814573574c5",
+      "id": "9qsbwuvf1",
+      "uiAttribs": {
+        "title": ">Preframe",
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 3168,
+          "y": 1560
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Named Trigger",
+          "value": "Preframe"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Triggered",
+          "links": [
+            {
+              "portIn": "Execute",
+              "portOut": "Triggered",
+              "objIn": "oqpr01yv8",
+              "objOut": "9qsbwuvf1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "105d8812-e641-47f2-bbaf-e45d5bc3ea8b",
+      "id": "rmng0cjao",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 2785.13147798064,
+          "y": 1825.2629521141826
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Points",
+          "value": 0
+        },
+        {
+          "name": "Axis index",
+          "value": 0
+        },
+        {
+          "name": "Axis",
+          "value": "XYZ"
+        },
+        {
+          "name": "Normalize",
+          "value": 0
+        },
+        {
+          "name": "Remove Point at 0",
+          "value": 0
+        },
+        {
+          "name": "Ignore Alpha 0",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Total Points",
+          "value": 121
+        }
+      ]
+    },
+    {
+      "opId": "b781bc6b-b2cf-44fe-80eb-a840e430d27d",
+      "id": "jtuj5ujsv",
+      "uiAttribs": {
+        "subPatch": "4szxa09xh",
+        "translate": {
+          "x": 3432,
+          "y": 1320
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Width",
+          "value": 11
+        },
+        {
+          "name": "Height",
+          "value": 11
+        },
+        {
+          "name": "Filter index",
+          "value": 0
+        },
+        {
+          "name": "Filter",
+          "value": "nearest"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Color",
+          "value": 1
+        },
+        {
+          "name": "Pixel Format index",
+          "value": 11
+        },
+        {
+          "name": "Pixel Format",
+          "value": "RGBA 32bit float"
+        },
+        {
+          "name": "Integer",
+          "value": 0
+        },
+        {
+          "name": "Seed",
+          "value": 1.5
+        },
+        {
+          "name": "Channel R",
+          "value": 1
+        },
+        {
+          "name": "Min R",
+          "value": -1
+        },
+        {
+          "name": "Max R",
+          "value": 1
+        },
+        {
+          "name": "Channel G",
+          "value": 1
+        },
+        {
+          "name": "Min G",
+          "value": -1
+        },
+        {
+          "name": "Max G",
+          "value": 1
+        },
+        {
+          "name": "Channel B",
+          "value": 1
+        },
+        {
+          "name": "Min B",
+          "value": -1
+        },
+        {
+          "name": "Max B",
+          "value": 1
+        },
+        {
+          "name": "Channel A",
+          "value": 1
+        },
+        {
+          "name": "Min A",
+          "value": 1
+        },
+        {
+          "name": "Max A",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "Spawn Positions",
+              "portOut": "Texture",
+              "objIn": "oqpr01yv8",
+              "objOut": "jtuj5ujsv"
+            }
+          ]
+        },
+        {
+          "name": "Total Pixel",
+          "value": 121
+        }
+      ]
+    }
+  ]
+}

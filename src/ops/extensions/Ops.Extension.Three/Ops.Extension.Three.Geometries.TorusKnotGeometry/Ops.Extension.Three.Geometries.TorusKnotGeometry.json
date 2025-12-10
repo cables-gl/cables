@@ -1,0 +1,88 @@
+{
+    "id": "2cff4d54-dce1-4a5d-8f57-61dcf33e17cf",
+    "created": 1764597840729,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tube",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "tubularSegments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "radialSegments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Winds",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Interior Winds",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Creates as torus knot",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the torus knot"
+            },
+            {
+                "name": "Tube",
+                "text": "Radius of the tube"
+            },
+            {
+                "name": "tubularSegments",
+                "text": "The number of tubular segments"
+            },
+            {
+                "name": "radialSegments",
+                "text": "The number of radial segments"
+            },
+            {
+                "name": "Rot Winds",
+                "text": "How many times the geometry winds around its axis of rotational symmetry"
+            },
+            {
+                "name": "Interior Winds",
+                "text": "How many times the geometry winds around a circle in the interior of the torus"
+            }
+        ]
+    },
+    "exampleProjectId": "5IUbw4"
+}

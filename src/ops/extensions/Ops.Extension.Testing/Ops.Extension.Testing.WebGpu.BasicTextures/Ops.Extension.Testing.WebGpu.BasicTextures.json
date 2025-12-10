@@ -1,0 +1,33 @@
+{
+    "id": "8607374d-02a1-427d-84b5-2e8662e9d64b",
+    "created": 1743006746133,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743006746134
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch0 renamed to Ops.Extension.Testing.WebGpu.BasicTextures",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743006784671
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "c5uj0ttk2",
+                "uititle": "Trigger"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,155 @@
+{
+    "id": "c602003d-990e-492f-8eb6-0347fe53bfb0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1677766845497
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "type": "",
+            "author": "pandur",
+            "date": 1678202736498
+        },
+        {
+            "message": "Ops.User.pandur.SuperShapezGpu renamed to Ops.Team.SuperShapes.SuperShapezGpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678356174548
+        },
+        {
+            "message": "Ops.Team.SuperShapes.SuperShapezGpu renamed to Ops.Team.SuperShapes.SuperShapesGpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694524455611
+        },
+        {
+            "message": "Ops.Team.SuperShapes.SuperShapesGpu renamed to Ops.Extension.SuperShapes.SuperShapesGpu",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1706271940142
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1677766871103,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Shape index",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Tesselation",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Param 0",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 3",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 4",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 5",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 6",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 7",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 8",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 9",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 10",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 11",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 12",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 13",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 14",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Param 15",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier",
+        "cgl"
+    ],
+    "exampleProjectId": "ka9Vxq",
+    "docs": {
+        "ports": []
+    }
+}

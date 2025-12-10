@@ -1,0 +1,33 @@
+{
+    "id": "a5f50b17-5835-4f06-8cbf-f5c0e2ac25df",
+    "created": 1740735107282,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740735107305
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.RttDepthTextures",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740735147178
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "scd98fe9x",
+                "uititle": "add port"
+            }
+        ],
+        "portsOut": []
+    }
+}

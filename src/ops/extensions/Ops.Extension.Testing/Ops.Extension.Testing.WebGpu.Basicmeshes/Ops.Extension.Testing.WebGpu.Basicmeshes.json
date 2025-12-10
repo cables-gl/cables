@@ -1,0 +1,45 @@
+{
+    "id": "90d71a1f-5019-47db-8780-40869860aa49",
+    "created": 1742988658416,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1742988658416
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch0 renamed to Ops.Extension.Testing.Webgpu.Basicmeshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1742989407656
+        },
+        {
+            "message": "Extension.Testing.Webgpu.Basicmeshes renamed to Ops.Extension.Testing.WebGpu.Basicmesheswww",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1742990257135
+        },
+        {
+            "message": "Extension.Testing.WebGpu.Basicmesheswww renamed to Ops.Extension.Testing.WebGpu.Basicmeshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1742990270787
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "ul6di6734",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

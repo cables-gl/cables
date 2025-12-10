@@ -1,0 +1,67 @@
+{
+    "id": "18a2f804-20ad-4cb9-87b9-b097ad23f518",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Port",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Message Received"
+            },
+            {
+                "type": 2,
+                "name": "Message"
+            },
+            {
+                "type": 2,
+                "name": "Connection"
+            },
+            {
+                "type": 5,
+                "name": "Status"
+            }
+        ]
+    },
+    "license": "MIT",
+    "created": 1734114250725,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724247727467
+        },
+        {
+            "message": "fixed port input / fixed status output not resetting /  fixed problems with reconnecting after deleting op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1727253693386
+        },
+        {
+            "message": "fixed ops not working as before under osc2ws",
+            "type": "improvement",
+            "author": "bloomingbridges",
+            "date": 1734114250725
+        }
+    ],
+    "dependencies": [
+        {
+            "type": "npm",
+            "src": "osc"
+        }
+    ],
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "OSC Connection",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "exampleProjectId": "PCZCun"
+}

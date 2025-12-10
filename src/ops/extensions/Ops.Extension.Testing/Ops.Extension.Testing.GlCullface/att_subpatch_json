@@ -1,0 +1,767 @@
+{
+  "ops": [
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "2t7tovj1w",
+      "uiAttribs": {
+        "translate": {
+          "x": 974.4576870677415,
+          "y": 2268.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0.94
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 22
+        },
+        {
+          "name": "rotY",
+          "value": 22
+        },
+        {
+          "name": "rotZ",
+          "value": 44
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "lvso9clh6",
+              "objOut": "2t7tovj1w"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "e2tk1haay",
+      "uiAttribs": {
+        "translate": {
+          "x": 746.4576870677416,
+          "y": 2269.4759137396577
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": -0.651
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 22
+        },
+        {
+          "name": "rotY",
+          "value": 22
+        },
+        {
+          "name": "rotZ",
+          "value": 44
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "1zf0ivfft",
+              "objOut": "e2tk1haay"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
+      "id": "czh9ia574",
+      "uiAttribs": {
+        "translate": {
+          "x": 974.4576870677415,
+          "y": 2448.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Render Mesh",
+          "value": 1
+        },
+        {
+          "name": "Width",
+          "value": 1.4
+        },
+        {
+          "name": "Length",
+          "value": 1.4
+        },
+        {
+          "name": "Height",
+          "value": 1.4
+        },
+        {
+          "name": "Center",
+          "value": 1
+        },
+        {
+          "name": "Mapping index",
+          "value": 0
+        },
+        {
+          "name": "Mapping",
+          "value": "Side"
+        },
+        {
+          "name": "Bias",
+          "value": 0
+        },
+        {
+          "name": "Flip X",
+          "value": 1
+        },
+        {
+          "name": "Top",
+          "value": 1
+        },
+        {
+          "name": "Bottom",
+          "value": 1
+        },
+        {
+          "name": "Left",
+          "value": 1
+        },
+        {
+          "name": "Right",
+          "value": 1
+        },
+        {
+          "name": "Front",
+          "value": 1
+        },
+        {
+          "name": "Back",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
+      "id": "zcvdfucqx",
+      "uiAttribs": {
+        "translate": {
+          "x": 746.4576870677416,
+          "y": 2448.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Render Mesh",
+          "value": 1
+        },
+        {
+          "name": "Width",
+          "value": 1.4
+        },
+        {
+          "name": "Length",
+          "value": 1.4
+        },
+        {
+          "name": "Height",
+          "value": 1.4
+        },
+        {
+          "name": "Center",
+          "value": 1
+        },
+        {
+          "name": "Mapping index",
+          "value": 0
+        },
+        {
+          "name": "Mapping",
+          "value": "Side"
+        },
+        {
+          "name": "Bias",
+          "value": 0
+        },
+        {
+          "name": "Flip X",
+          "value": 1
+        },
+        {
+          "name": "Top",
+          "value": 1
+        },
+        {
+          "name": "Bottom",
+          "value": 1
+        },
+        {
+          "name": "Left",
+          "value": 1
+        },
+        {
+          "name": "Right",
+          "value": 1
+        },
+        {
+          "name": "Front",
+          "value": 1
+        },
+        {
+          "name": "Back",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "9dfd0ee4-81e1-438c-8a99-4894c64f41cb",
+      "id": "lvso9clh6",
+      "uiAttribs": {
+        "translate": {
+          "x": 974.4576870677415,
+          "y": 2308.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Discard index",
+          "value": 0
+        },
+        {
+          "name": "Discard",
+          "value": "Back Sides"
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "czh9ia574",
+              "objOut": "lvso9clh6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "9dfd0ee4-81e1-438c-8a99-4894c64f41cb",
+      "id": "1zf0ivfft",
+      "uiAttribs": {
+        "translate": {
+          "x": 746.4576870677416,
+          "y": 2308.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Discard index",
+          "value": 1
+        },
+        {
+          "name": "Discard",
+          "value": "Front Sides"
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "zcvdfucqx",
+              "objOut": "1zf0ivfft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c1dd6e76-61b4-471a-b8d1-f550a5a9a4f4",
+      "id": "yzy6ycnqg",
+      "uiAttribs": {
+        "translate": {
+          "x": 818.4576870677416,
+          "y": 2108.5399246328916
+        },
+        "subPatch": "xklzk6uhq",
+        "notWorkingMsg": null,
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 1
+        },
+        {
+          "name": "Opacity",
+          "value": 1
+        },
+        {
+          "name": "AO Intensity",
+          "value": 1
+        },
+        {
+          "name": "Normal Map Intensity",
+          "value": 1
+        },
+        {
+          "name": "Repeat X",
+          "value": 1
+        },
+        {
+          "name": "Repeat Y",
+          "value": 1
+        },
+        {
+          "name": "Offset X",
+          "value": 0
+        },
+        {
+          "name": "Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Double Sided",
+          "value": 0
+        },
+        {
+          "name": "Screen Space Normals",
+          "value": 0
+        },
+        {
+          "name": "Calc normal tangents",
+          "value": 1
+        },
+        {
+          "name": "Opacity TexCoords Transform",
+          "value": 0
+        },
+        {
+          "name": "Discard Transparent Pixels",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source",
+          "value": "Luminance"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "2t7tovj1w",
+              "objOut": "yzy6ycnqg"
+            },
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "e2tk1haay",
+              "objOut": "yzy6ycnqg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "lmr9r0g9o",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 818.4576870677416,
+          "y": 2050.194538954322
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 0.8
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": 0
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "yzy6ycnqg",
+              "objOut": "lmr9r0g9o"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "1qu4vwgxx",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 818.4576870677416,
+          "y": 1912.8112128039484
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_drjqxb2ae",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_drjqxb2ae",
+              "objIn": "lmr9r0g9o",
+              "objOut": "1qu4vwgxx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "xlr2f8nzg",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 831.8544842383916,
+          "y": 2528.5399246328916
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "ca3bc984-e596-48fb-b53d-502eb13979b0",
+      "id": "3wk2jfoao",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 396,
+          "y": 2320
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "num",
+          "value": 100
+        },
+        {
+          "name": "round",
+          "value": 0
+        },
+        {
+          "name": "size",
+          "value": 10
+        },
+        {
+          "name": "scaleX",
+          "value": 1
+        },
+        {
+          "name": "scaleY",
+          "value": 1
+        },
+        {
+          "name": "scaleZ",
+          "value": 1
+        },
+        {
+          "name": "Rotate X",
+          "value": 1
+        },
+        {
+          "name": "Rotate Y",
+          "value": 1
+        },
+        {
+          "name": "Rotate Z",
+          "value": 1
+        },
+        {
+          "name": "Scroll X",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "3tqk2se9m",
+              "objOut": "3wk2jfoao"
+            }
+          ]
+        },
+        {
+          "name": "index",
+          "value": 99
+        },
+        {
+          "name": "rnd",
+          "value": 0.09204576739067893
+        }
+      ]
+    },
+    {
+      "opId": "d082beaf-ef4b-4e57-a900-9ee87c0c9fe4",
+      "id": "pvb2r66ku",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 516,
+          "y": 2260
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "min",
+          "value": 0
+        },
+        {
+          "name": "max",
+          "value": 1
+        },
+        {
+          "name": "Integer",
+          "value": 0
+        },
+        {
+          "name": "No consecutive duplicates",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "next",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "next",
+              "objIn": "3wk2jfoao",
+              "objOut": "pvb2r66ku"
+            }
+          ]
+        },
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "random seed",
+              "portOut": "result",
+              "objIn": "3wk2jfoao",
+              "objOut": "pvb2r66ku"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "37b92ba4-cea5-42ae-bf28-a513ca28549c",
+      "id": "3tqk2se9m",
+      "uiAttribs": {
+        "subPatch": "xklzk6uhq",
+        "translate": {
+          "x": 396,
+          "y": 2404.674328759225
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Render Mesh",
+          "value": 1
+        },
+        {
+          "name": "Width",
+          "value": 1
+        },
+        {
+          "name": "Length",
+          "value": 1
+        },
+        {
+          "name": "Height",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": 1
+        },
+        {
+          "name": "Mapping index",
+          "value": 0
+        },
+        {
+          "name": "Mapping",
+          "value": "Side"
+        },
+        {
+          "name": "Bias",
+          "value": 0
+        },
+        {
+          "name": "Flip X",
+          "value": 1
+        },
+        {
+          "name": "Top",
+          "value": 1
+        },
+        {
+          "name": "Bottom",
+          "value": 1
+        },
+        {
+          "name": "Left",
+          "value": 1
+        },
+        {
+          "name": "Right",
+          "value": 1
+        },
+        {
+          "name": "Front",
+          "value": 1
+        },
+        {
+          "name": "Back",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

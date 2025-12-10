@@ -94,6 +94,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1763632214685
+        },
+        {
+            "message": "Refresh list when a new device connects",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1765284460334
         }
     ],
     "caniusequery": "Web MIDI API",

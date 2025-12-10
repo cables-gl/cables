@@ -1,0 +1,348 @@
+{
+  "ops": [
+    {
+      "opId": "ae07830b-91c3-4cbe-a7d6-d3b737392c16",
+      "id": "qox6mljbu",
+      "uiAttribs": {
+        "translate": {
+          "x": 143.19393381707278,
+          "y": 708.8546923133936
+        },
+        "subPatch": "xbcv50qt5",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "radius",
+          "value": 0.15
+        },
+        {
+          "name": "innerRadius",
+          "value": 0.528
+        },
+        {
+          "name": "segments",
+          "value": 40
+        },
+        {
+          "name": "percent",
+          "value": 1
+        },
+        {
+          "name": "steps",
+          "value": 0
+        },
+        {
+          "name": "invertSteps",
+          "value": 0
+        },
+        {
+          "name": "mapping index",
+          "value": 0
+        },
+        {
+          "name": "mapping",
+          "value": "flat"
+        },
+        {
+          "name": "Spline",
+          "value": 0
+        },
+        {
+          "name": "Draw",
+          "value": 0,
+          "title": "Render mesh"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "hts2fwh2w",
+              "objOut": "qox6mljbu"
+            }
+          ]
+        },
+        {
+          "name": "geometry",
+          "links": [
+            {
+              "portIn": "Geometry",
+              "portOut": "geometry",
+              "objIn": "hts2fwh2w",
+              "objOut": "qox6mljbu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "3d39141f-e9d7-4b83-b5a1-fc7f2902fa40",
+      "id": "efquztzll",
+      "uiAttribs": {
+        "translate": {
+          "x": 341.0318641765899,
+          "y": 729.2313244546481
+        },
+        "subPatch": "xbcv50qt5",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "GPUBuffer",
+          "links": [
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "GPUBuffer",
+              "objIn": "hts2fwh2w",
+              "objOut": "efquztzll"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "8a9fa2c6-c229-49a9-9dc8-247001539217",
+      "id": "78la7a19k",
+      "uiAttribs": {
+        "extendTitle": "101*4",
+        "translate": {
+          "x": 341.0318641765899,
+          "y": 621.608978643744
+        },
+        "subPatch": "xbcv50qt5",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Values",
+          "value": 101
+        },
+        {
+          "name": "Mode index",
+          "value": 3
+        },
+        {
+          "name": "Mode",
+          "value": "ABCD"
+        },
+        {
+          "name": "Random Seed ",
+          "value": 12.55
+        },
+        {
+          "name": "Integer",
+          "value": 0
+        },
+        {
+          "name": "Last == First",
+          "value": 0
+        },
+        {
+          "name": "Min A",
+          "value": -1
+        },
+        {
+          "name": "Max A",
+          "value": 1
+        },
+        {
+          "name": "Min B",
+          "value": -1
+        },
+        {
+          "name": "Max B",
+          "value": 1
+        },
+        {
+          "name": "Min C",
+          "value": -1
+        },
+        {
+          "name": "Max C",
+          "value": 1
+        },
+        {
+          "name": "Min D",
+          "value": -1
+        },
+        {
+          "name": "Max D",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array Out",
+          "links": [
+            {
+              "portIn": "Arr",
+              "portOut": "Array Out",
+              "objIn": "efquztzll",
+              "objOut": "78la7a19k"
+            }
+          ]
+        },
+        {
+          "name": "Chunks Amount",
+          "value": 101
+        },
+        {
+          "name": "Array length",
+          "value": 404
+        }
+      ]
+    },
+    {
+      "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+      "id": "xg90v2r3a",
+      "uiAttribs": {
+        "translate": {
+          "x": 143.19393381707278,
+          "y": 595.0533694105532
+        },
+        "subPatch": "xbcv50qt5",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 0.7852927419997009
+        },
+        {
+          "name": "g",
+          "value": 0.08486678081891186
+        },
+        {
+          "name": "b",
+          "value": 0.9092909341961897
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "qox6mljbu",
+              "objOut": "xg90v2r3a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "daf22c14-6ba3-4c63-83d2-27e9e60d3dbf",
+      "id": "hts2fwh2w",
+      "uiAttribs": {
+        "translate": {
+          "x": 143.19393381707278,
+          "y": 842.3500899254645
+        },
+        "disabled": false,
+        "subPatch": "xbcv50qt5",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Instances",
+          "value": 20
+        },
+        {
+          "name": "Billboarding index",
+          "value": 0
+        },
+        {
+          "name": "Billboarding",
+          "value": "Off"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Total Instances",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "22gv18o7z",
+      "uiAttribs": {
+        "subPatch": "xbcv50qt5",
+        "translate": {
+          "x": 143.19393381707278,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_op5tk4ww9",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_op5tk4ww9",
+              "objIn": "xg90v2r3a",
+              "objOut": "22gv18o7z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "28pjiv7p6",
+      "uiAttribs": {
+        "subPatch": "xbcv50qt5",
+        "translate": {
+          "x": 143.19393381707278,
+          "y": 953.3500899254645
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+    "id": "b364b5ba-0383-4a03-be13-ce4ac50c016f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1638459882125
+        },
+        {
+            "message": "Ops.User.pandur.MidiProgrammChangeOut renamed to Ops.Dev.MidiProgrammChangeOut",
+            "author": "pandur",
+            "date": 1638459904655
+        },
+        {
+            "message": "Ops.Dev.MidiProgrammChangeOut renamed to Ops.Dev.MidiProgramChangeOut",
+            "author": "pandur",
+            "date": 1638460808293
+        },
+        {
+            "message": "Ops.Dev.MidiProgramChangeOut renamed to Ops.Deprecated.MidiProgramChangeOut",
+            "author": "pandur",
+            "date": 1666623293899
+        },
+        {
+            "message": "op Ops.Deprecated.MidiProgramChangeOut was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1724836700028
+        }
+    ],
+    "authorName": "lofiddler",
+    "created": 1638459885857,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "MIDI Channel index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Program Change Value",
+                "group": "Program Change",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Min In Value",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max In Value",
+                "group": "Value Range",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "MIDI Event Out"
+            }
+        ]
+    }
+}

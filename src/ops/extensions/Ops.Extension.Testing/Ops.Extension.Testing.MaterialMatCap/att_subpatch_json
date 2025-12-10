@@ -1,0 +1,346 @@
+{
+  "ops": [
+    {
+      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
+      "id": "67ad3nt0k",
+      "uiAttribs": {
+        "warning": "",
+        "translate": {
+          "x": -307.3682729351206,
+          "y": 4076.150417627263
+        },
+        "loading": false,
+        "subPatch": "vcu311crs",
+        "extendTitle": "thuglee-03",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/matcaps/thuglee-03.jpg",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": 0
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Save Memory",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "MatCap",
+              "portOut": "Texture",
+              "objIn": "i0sbrif2s",
+              "objOut": "67ad3nt0k"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 512
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c1dd6e76-61b4-471a-b8d1-f550a5a9a4f4",
+      "id": "i0sbrif2s",
+      "uiAttribs": {
+        "translate": {
+          "x": -331.3682729351206,
+          "y": 4136.150417627263
+        },
+        "subPatch": "vcu311crs",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 1
+        },
+        {
+          "name": "g",
+          "value": 1
+        },
+        {
+          "name": "b",
+          "value": 1
+        },
+        {
+          "name": "Opacity",
+          "value": 1
+        },
+        {
+          "name": "AO Intensity",
+          "value": 1
+        },
+        {
+          "name": "Normal Map Intensity",
+          "value": 1
+        },
+        {
+          "name": "Repeat X",
+          "value": 1
+        },
+        {
+          "name": "Repeat Y",
+          "value": 1
+        },
+        {
+          "name": "Offset X",
+          "value": 0
+        },
+        {
+          "name": "Offset Y",
+          "value": 0
+        },
+        {
+          "name": "Double Sided",
+          "value": 0
+        },
+        {
+          "name": "Screen Space Normals",
+          "value": 0
+        },
+        {
+          "name": "Calc normal tangents",
+          "value": 1
+        },
+        {
+          "name": "Opacity TexCoords Transform",
+          "value": 0
+        },
+        {
+          "name": "Discard Transparent Pixels",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source index",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mask Source",
+          "value": "Luminance"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "sswac3fct",
+              "objOut": "i0sbrif2s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "bfe60760-6cf6-43d0-96da-b4848c2b146a",
+      "id": "sswac3fct",
+      "uiAttribs": {
+        "translate": {
+          "x": -331.3682729351206,
+          "y": 4191.8734400882
+        },
+        "subPatch": "vcu311crs",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "sides",
+          "value": 32
+        },
+        {
+          "name": "rings",
+          "value": 32
+        },
+        {
+          "name": "innerRadius",
+          "value": 0.5
+        },
+        {
+          "name": "outerRadius",
+          "value": 1
+        },
+        {
+          "name": "Draw",
+          "value": 1,
+          "title": "Render mesh"
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "q6it21tbo",
+      "uiAttribs": {
+        "subPatch": "vcu311crs",
+        "translate": {
+          "x": -209.59627293512062,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_illl1hd86",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_illl1hd86",
+              "objIn": "i7833m7zx",
+              "objOut": "q6it21tbo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "ih772i4xg",
+      "uiAttribs": {
+        "subPatch": "vcu311crs",
+        "translate": {
+          "x": -209.59627293512062,
+          "y": 4302.8734400882
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "i7833m7zx",
+      "uiAttribs": {
+        "subPatch": "vcu311crs",
+        "translate": {
+          "x": -324,
+          "y": 4040
+        }
+      },
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": -0.81
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": 0
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "i0sbrif2s",
+              "objOut": "i7833m7zx"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "i7833m7zx"
+      }
+    }
+  ]
+}

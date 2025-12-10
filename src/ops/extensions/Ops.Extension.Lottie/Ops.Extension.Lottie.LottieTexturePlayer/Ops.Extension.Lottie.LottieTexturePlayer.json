@@ -1,0 +1,119 @@
+{
+    "changelog": [
+        {
+            "message": " added lib: lottie_canvas.min.js",
+            "author": "pandur",
+            "date": 1581087097615
+        },
+        {
+            "message": "Ops.User.pandur.LottiePlayer2 renamed to Ops.Admin.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1581088057174
+        },
+        {
+            "message": "Ops.Admin.LottieTexturePlayer renamed to Ops.Lottie.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1587367524875
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104402127
+        },
+        {
+            "message": "Ops.Lottie.LottieTexturePlayer renamed to Ops.Libs.Lottie.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1655965726685
+        },
+        {
+            "message": "Ops.Libs.Lottie.LottieTexturePlayer renamed to Ops.Extension.Lottie.LottieTexturePlayer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915401040
+        }
+    ],
+    "libs": [
+        "lottie.js"
+    ],
+    "authorName": "pandur",
+    "id": "e9946c8c-afb8-4ab5-b534-3fe53ed45dcf",
+    "created": 1581087518936,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "scale index",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "rewind"
+            },
+            {
+                "type": 0,
+                "name": "speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "frame",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Total Frames",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Play a Lottie animation in a texture",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "7mG8w0",
+    "coreLibs": [
+        "cgl"
+    ]
+}

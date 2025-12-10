@@ -1,0 +1,38 @@
+{
+    "id": "4b176cf7-8f55-42dc-8db3-21a4ed91ad76",
+    "created": 1740737966213,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740737966258
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.RttCubemaps",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740738036014
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "48k2xaj9e",
+                "uititle": "add port"
+            },
+            {
+                "type": 1,
+                "name": "e29uthtcy",
+                "uititle": "Execute"
+            }
+        ],
+        "portsOut": []
+    }
+}

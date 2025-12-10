@@ -1,0 +1,58 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9ba52457-5f0d-4b20-a97c-4ec4856b8e29",
+    "created": 1506603360839,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "enlarge or shrink objects by a scale factor for every axis",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548414796525
+        },
+        {
+            "message": "added non uniform axis scaling parameters for convenience1",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711463607262
+        }
+    ],
+    "youtubeids": [
+        "5pucC-GuDcs"
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

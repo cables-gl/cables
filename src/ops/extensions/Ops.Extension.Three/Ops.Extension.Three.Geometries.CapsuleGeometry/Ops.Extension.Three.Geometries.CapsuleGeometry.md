@@ -1,0 +1,1 @@
+https://threejs.org/docs/?q=CapsuleGeometry#CapsuleGeometry

@@ -1,0 +1,124 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 1,
+                "name": "Initialize"
+            },
+            {
+                "type": 5,
+                "name": "Model URL"
+            },
+            {
+                "type": 2,
+                "name": "Webcam texture"
+            },
+            {
+                "type": 0,
+                "name": "Flip image",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Initialized"
+            },
+            {
+                "type": 3,
+                "name": "Classifier"
+            },
+            {
+                "type": 3,
+                "name": "Pose positions"
+            },
+            {
+                "type": 0,
+                "name": "Image flipped",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Use the Teachable Machines pose detection with your webcam. Insert the uploaded model URL.",
+    "author": "mick",
+    "authorName": "mick",
+    "id": "0391393f-c1cd-4cff-b580-bc5eddfa74c5",
+    "created": 1605703736459,
+    "changelog": [
+        {
+            "message": " added lib: teachablemachine_tf_speech_image_pose.js",
+            "author": "mick",
+            "date": 1605703409690
+        },
+        {
+            "message": "Ops.Api.TeachableMachines.PoseDetection renamed to Ops.Libs.TeachableMachines.PoseDetection",
+            "author": "pandur",
+            "date": 1655965852080
+        },
+        {
+            "message": "Ops.Libs.TeachableMachines.PoseDetection renamed to Ops.Extension.TeachableMachines.PoseDetection",
+            "author": "stephan",
+            "date": 1671009182711
+        }
+    ],
+    "libs": [
+        "teachablemachine_tf_speech_image_pose.js"
+    ],
+    "issues": "",
+
+
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "trigger prediction"
+            },
+            {
+                "name": "Initialize",
+                "text": "trigger inizialization of model"
+            },
+            {
+                "name": "Model URL",
+                "text": "model base url"
+            },
+            {
+                "name": "Webcam texture",
+                "text": "webcam"
+            },
+            {
+                "name": "Flip image",
+                "text": "flip the webcam image"
+            },
+            {
+                "name": "Trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "Initialized",
+                "text": "init done"
+            },
+            {
+                "name": "Classifier",
+                "text": "prediction classes and scores"
+            },
+            {
+                "name": "Pose positions",
+                "text": "2d positions of recognized poses"
+            },
+            {
+                "name": "Image flipped",
+                "text": "image flipped?"
+            }
+        ]
+    },
+    "exampleProjectId": "xOStrn"
+}

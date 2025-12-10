@@ -1,0 +1,143 @@
+{
+    "id": "2836cef3-acc0-4bd2-bc8e-0c5c0cdb3d76",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1620286190064
+        },
+        {
+            "message": "Ops.User.stephan.SocketClusterTopicInfo renamed to Ops.Net.SocketCluster.SocketClusterTopicInfo",
+            "author": "stephan",
+            "date": 1620295318322
+        },
+        {
+            "message": "Ops.Net.SocketCluster.SocketClusterTopicInfo renamed to Ops.Extension.SocketCluster.SocketClusterTopicInfo",
+            "author": "stephan",
+            "date": 1671003433017
+        },
+        {
+            "message": "Added toggle to receive my own data",
+            "type": "",
+            "author": "pandur",
+            "date": 1713181273974
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1620286209885,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "Topic"
+            },
+            {
+                "type": 0,
+                "name": "Timeout",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Soft Timeout",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Retain Messages",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Receive My Data",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Active Clients"
+            },
+            {
+                "type": 2,
+                "name": "Will Time Out"
+            },
+            {
+                "type": 3,
+                "name": "Timed Out Clients"
+            },
+            {
+                "type": 2,
+                "name": "Messages"
+            },
+            {
+                "type": 1,
+                "name": "Updated"
+            }
+        ]
+    },
+    "summary": "get info for clients listening on a socketcluster topic",
+    "issues": "",
+    "relatedops": [
+        "Ops.Net.SocketCluster.SocketCluster"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "Topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "Timeout",
+                "text": "timeout in ms"
+            },
+            {
+                "name": "Soft Timeout",
+                "text": "soft timeout in ms (should be smaller than timeout)"
+            },
+            {
+                "name": "Retain Messages",
+                "text": "retain x messages of every client, keep this small (but not 0)"
+            },
+            {
+                "name": "Update",
+                "text": "trigger updates"
+            },
+            {
+                "name": "Active Clients",
+                "text": "array of active client ids"
+            },
+            {
+                "name": "Will Time Out",
+                "text": "object of clients that will timeout soon, if they do not send a new message. provides lastmessage timestamp, when it will timeout and a progress to the timeout from 0 to 1"
+            },
+            {
+                "name": "Timed Out Clients",
+                "text": "former clients that are not active anymore"
+            },
+            {
+                "name": "Messages",
+                "text": "object of retained messages for every client, with the clientid as a key"
+            },
+            {
+                "name": "Updated",
+                "text": "triggers on update of any of the above lists"
+            }
+        ]
+    },
+    "exampleProjectId": "EJvr0a",
+    "license": "MIT"
+}

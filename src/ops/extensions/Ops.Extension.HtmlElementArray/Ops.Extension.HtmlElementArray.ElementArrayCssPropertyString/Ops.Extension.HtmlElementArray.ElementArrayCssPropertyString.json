@@ -1,0 +1,56 @@
+{
+    "id": "4bd6fda1-5bd0-47d4-a14c-68f2b6f88be8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1650464390903
+        },
+        {
+            "message": "Ops.User.pandur.CSSPropertyStringReckless renamed to Ops.Extension.RecklessHtml.RecklessCssPropertyString",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671291829245
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1650464404935,
+    "summary": "set css properties",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "Value",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "Value Suffix",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ]
+    }
+}

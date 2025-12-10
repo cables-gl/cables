@@ -1,0 +1,65 @@
+{
+    "id": "3b25fb24-2a1f-4e5a-a18e-e08911a94030",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1612191620429
+        },
+        {
+            "message": "Ops.User.stephan.ImportSubPatch renamed to Ops.Ui.ImportSubPatch",
+            "author": "stephan",
+            "date": 1612191902723
+        },
+        {
+            "message": "Ops.Ui.ImportSubPatch renamed to Ops.Ui.Blueprint",
+            "author": "stephan",
+            "date": 1612347940715
+        },
+        {
+            "message": "Ops.Ui.Blueprint renamed to Ops.Cables.Blueprint",
+            "author": "stephan",
+            "date": 1612348048446
+        },
+        {
+            "message": "Ops.Cables.Blueprint renamed to Ops.Admin.Blueprint",
+            "author": "stephan",
+            "date": 1612453888214
+        },
+        {
+            "message": "Ops.Admin.Blueprint renamed to Ops.Dev.Blueprint",
+            "author": "pandur",
+            "date": 1628151858201
+        },
+        {
+            "message": "op was deprecated",
+            "type": "deprecation",
+            "author": "stephan",
+            "date": 1719916000744
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1612191633099,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "loading",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "include subpatches from other patchs",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Makes kick and tom sounds using a single oscillator",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Oscillator Type"
+            },
+            {
+                "type": "2",
+                "name": "Envelope"
+            },
+            {
+                "type": "0",
+                "name": "Octaves"
+            },
+            {
+                "type": "0",
+                "name": "Pitch Decay"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "ad9b730b-1774-42e3-9582-974b3cefb356",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

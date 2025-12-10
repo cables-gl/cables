@@ -1,0 +1,7 @@
+{
+  "name": "Ops.Extension.ECharts",
+  "summary": "Wrapper for Apache ECharts-library",
+  "licence": {
+    "name": "Apache License 2.0"
+  }
+}

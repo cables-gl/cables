@@ -1,0 +1,60 @@
+{
+    "id": "9e855b27-a0ca-4303-9949-c083fee658d3",
+    "created": 1764686836961,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764686836962
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "intensity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "color A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "exampleProjectId": "GrCMN4",
+    "docs": {
+        "ports": []
+    }
+}

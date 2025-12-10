@@ -1,0 +1,45 @@
+{
+    "updated": 1522317632345,
+    "authorName": "pandur",
+    "id": "63fd43af-e773-42a9-ae78-427b7fe8649c",
+    "created": 1516130100009,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "1",
+                "name": "exec"
+            },
+            {
+                "type": "0",
+                "name": "Beat Position",
+                "subType": "integer"
+            },
+            {
+                "type": "3",
+                "name": "Seq"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Seq Out"
+            }
+        ]
+    },
+    "summary": "",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.LaunchPadSequencer renamed to Ops.Deprecated.Devices.Midi.LaunchPadSequencer",
+            "author": "pandur",
+            "date": 1596093793586
+        }
+    ]
+}

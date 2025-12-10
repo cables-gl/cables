@@ -1,0 +1,45 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "Fill the current ImageCompose with a color",
+    "updated": 1542698229323,
+    "authorName": "pandur",
+    "id": "b1059b01-539f-4356-b2cc-695cd0f22b0b",
+    "created": 1542698229893,
+    "changelog": [],
+    "coreLibs": [
+        "cgl"
+    ]
+}

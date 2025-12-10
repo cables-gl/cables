@@ -1,0 +1,78 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Monophonic synth composed of two MonoSynths run in parallel",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "4",
+                "name": "Frequency"
+            },
+            {
+                "type": "4",
+                "name": "Vibrato Amount"
+            },
+            {
+                "type": "4",
+                "name": "Vibrato Rate"
+            },
+            {
+                "type": "4",
+                "name": "Harmonicity"
+            },
+            {
+                "type": "0",
+                "name": "Portamento"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Frequency",
+                "text": "The frequency control"
+            },
+            {
+                "name": "Vibrato Amount",
+                "text": "The amount of vibrato"
+            },
+            {
+                "name": "Vibrato Rate",
+                "text": "The vibrato frequency"
+            },
+            {
+                "name": "Harmonicity",
+                "text": "Harmonicity is the ratio between the two voices. A harmonicity of 1 is no change. Harmonicity = 2 means a change of an octave."
+            },
+            {
+                "name": "Portamento",
+                "text": "The glide time between notes."
+            },
+            {
+                "name": "Volume",
+                "text": "How loud"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The audio output"
+            }
+        ]
+    },
+    "id": "7dabec99-7c31-4f6e-954f-598532cbd257",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "1d599995-a83d-4b5f-90ae-901bced792f0",
+    "created": 1743587542060,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743587542060
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 2,
+                "name": "Buffer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgp"
+    ],
+    "summary": "Compute shader GPU buffer storage input",
+    "docs": {
+        "ports": []
+    }
+}

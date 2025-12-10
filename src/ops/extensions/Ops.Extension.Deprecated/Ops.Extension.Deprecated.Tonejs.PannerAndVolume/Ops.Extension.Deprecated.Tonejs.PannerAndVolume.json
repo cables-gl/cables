@@ -1,0 +1,54 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Left-right panner + volume",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Panning"
+            },
+            {
+                "type": "4",
+                "name": "Volume"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to pan"
+            },
+            {
+                "name": "Panning",
+                "text": "Where the audio signal should be heard, `-1` = fully left, `0` = center, `1` = fully right"
+            },
+            {
+                "name": "Volume",
+                "text": "How loud it should be (in dB)"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The panned audio signal"
+            }
+        ]
+    },
+    "id": "1c0a9ad3-18f8-4ddf-8eb6-dccac67e7d0f",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

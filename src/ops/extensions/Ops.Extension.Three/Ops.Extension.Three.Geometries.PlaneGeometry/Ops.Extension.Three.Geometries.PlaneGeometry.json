@@ -1,0 +1,75 @@
+{
+    "id": "d828ff21-9857-4665-bb64-07f2863c3203",
+    "created": 1764937259174,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764597840730
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764937259175
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a box/cube geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Width",
+                "text": "The width along the X axis"
+            },
+            {
+                "name": "Height",
+                "text": "The height along the Y axis"
+            },
+            {
+                "name": "Width Segments",
+                "text": "The number of segments along the X axis"
+            },
+            {
+                "name": "Height Segments",
+                "text": "The number of segments along the Y axis"
+            }
+        ]
+    }
+}

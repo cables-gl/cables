@@ -1,0 +1,128 @@
+{
+    "id": "fa0418ee-ea51-446b-9be0-141f88d75e94",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647160167033
+        },
+        {
+            "message": "Ops.User.pandur.AmmoRaycast renamed to Ops.Dev.AmmoRaycast",
+            "author": "pandur",
+            "date": 1647173906900
+        },
+        {
+            "message": "Ops.Dev.AmmoRaycast renamed to Ops.Physics.Ammo.AmmoRaycast",
+            "author": "pandur",
+            "date": 1652089912921
+        },
+        {
+            "message": "Ops.Physics.Ammo.AmmoRaycast renamed to Ops.Extension.AmmoPhysics.AmmoRaycast",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677098591
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Ray Coordinates index",
+                "values": [
+                    "Screen XY",
+                    "Points 3d"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Screen X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Screen Y",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Ray Points"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Change Cursor",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Has Hit",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Hit Body Name"
+            },
+            {
+                "type": 0,
+                "name": "Hit X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Z",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1647160233425,
+    "summary": "Cast a ray and detect colliding bodies",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "Gh2f_4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Screen X",
+                "text": "Normalize screencoordinates on X Axis (0-1)"
+            },
+            {
+                "name": "Screen Y",
+                "text": "Normalize screencoordinates on Y Axis (0-1)"
+            },
+            {
+                "name": "Has Hit",
+                "text": "Boolean value reporting if there is an object at coordinates"
+            },
+            {
+                "name": "Hit Body Name",
+                "text": "report name of object at coordinates"
+            }
+        ]
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}

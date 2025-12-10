@@ -1,0 +1,207 @@
+{
+    "id": "576db162-78fc-422d-86df-0d4a4e66a44e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1614945454218
+        },
+        {
+            "message": "Ops.User.stephan.ECharts renamed to Ops.Libs.ECharts",
+            "author": "stephan",
+            "date": 1614949304600
+        },
+        {
+            "message": "Ops.Libs.ECharts renamed to Ops.Libs.ECharts.ECharts",
+            "author": "stephan",
+            "date": 1614949392117
+        },
+        {
+            "message": "Ops.Libs.ECharts.ECharts renamed to Ops.Extension.ECharts.ECharts",
+            "author": "stephan",
+            "date": 1671008802472
+        }
+    ],
+    "authorName": "kikohs",
+    "created": 1614945508201,
+    "libs": [
+        "echarts.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Create"
+            },
+            {
+                "type": 2,
+                "name": "Parent DOM element"
+            },
+            {
+                "type": 5,
+                "name": "Id"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Chart Object"
+            },
+            {
+                "type": 2,
+                "name": "Merge options"
+            },
+            {
+                "type": 0,
+                "name": "Renderer index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Renderer"
+            },
+            {
+                "type": 0,
+                "name": "Theme index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Theme"
+            },
+            {
+                "type": 2,
+                "name": "Custom theme obj"
+            },
+            {
+                "type": 2,
+                "name": "Init extra Options"
+            },
+            {
+                "type": 0,
+                "name": "Style",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "DOM Element"
+            },
+            {
+                "type": 2,
+                "name": "ECharts instance"
+            },
+            {
+                "type": 1,
+                "name": "Chart updated"
+            },
+            {
+                "type": 1,
+                "name": "Theme changed"
+            }
+        ]
+    },
+    "summary": "wrapper for echarts-library",
+    "issues": "The ECharts WebGL extension library is not supported (yet).",
+    "youtubeids": [
+        "moeK10BhmAw"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Create",
+                "text": "Trigger to create the chart."
+            },
+            {
+                "name": "Parent DOM element",
+                "text": "Sets the chart as a child of the parent DOM element"
+            },
+            {
+                "name": "Id",
+                "text": "ID of the element for selection if you have multiple charts"
+            },
+            {
+                "name": "Width",
+                "text": "Width in pixel"
+            },
+            {
+                "name": "Height",
+                "text": "Height in pixel"
+            },
+            {
+                "name": "Chart Object",
+                "text": "Main configuration object, the \"options\" parameters of the ECharts library"
+            },
+            {
+                "name": "Merge options",
+                "text": "Optional: Sets how to update the chart if new data comes in: https://echarts.apache.org/en/api.html#echartsInstance.setOption"
+            },
+            {
+                "name": "Renderer index",
+                "text": "0 = canvas, 1 = svg"
+            },
+            {
+                "name": "Renderer",
+                "text": "canvas or svg"
+            },
+            {
+                "name": "Theme index",
+                "text": "0 = default, 1 = light, 2 = dark"
+            },
+            {
+                "name": "Theme",
+                "text": "default, light, dark"
+            },
+            {
+                "name": "Custom theme obj",
+                "text": "Optional, if you set this object it overrides the theme of the chart. Create your theme here: https://echarts.apache.org/en/theme-builder.html"
+            },
+            {
+                "name": "Init extra Options",
+                "text": "Optional chart configuration, see opts object here: https://echarts.apache.org/en/api.html#echarts"
+            },
+            {
+                "name": "Style",
+                "text": "Custom CSS to position the chart, width and height will be overridden by the Width and Height input ports"
+            },
+            {
+                "name": "Visible",
+                "text": "Sets whether the chart is visible or not"
+            },
+            {
+                "name": "DOM Element",
+                "text": "Div element containing the chart"
+            },
+            {
+                "name": "ECharts instance",
+                "text": "ECharts object"
+            },
+            {
+                "name": "Chart updated",
+                "text": "Triggered if the chart has been modified, useful if you continuously update data and refresh the chart"
+            },
+            {
+                "name": "Theme changed",
+                "text": "Triggered if the theme has changed"
+            }
+        ]
+    },
+    "exampleProjectId": "iY6lbI",
+    "coreLibs": [
+        "cgl"
+    ]
+}

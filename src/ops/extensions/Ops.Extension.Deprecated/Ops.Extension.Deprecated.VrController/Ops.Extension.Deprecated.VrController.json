@@ -1,0 +1,61 @@
+{
+    "id": "62d07814-d8a9-4e86-a6a1-e8ce58140c0b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1558872106245
+        },
+        {
+            "message": "Ops.Gl.Vr.VrController renamed to Ops.Deprecated.Gl.Vr.VrController",
+            "author": "pandur",
+            "date": 1665557343854
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1558872158170,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "update"
+            },
+            {
+                "type": "2",
+                "name": "Controller"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Valid",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "VR Controller / Currently not being developed due to XR update",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

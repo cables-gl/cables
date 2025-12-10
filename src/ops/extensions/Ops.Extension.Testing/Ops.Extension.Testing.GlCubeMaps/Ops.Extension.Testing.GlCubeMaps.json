@@ -1,0 +1,63 @@
+{
+    "id": "75bbebed-251b-44b3-89fa-d7aac4b435cc",
+    "created": 1740733553886,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740733553921
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.GlCubeMaps",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733574492
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "24wczq4w3",
+                "uititle": "exe"
+            },
+            {
+                "type": 5,
+                "name": "6jxk2lid3",
+                "uititle": "posx"
+            },
+            {
+                "type": 5,
+                "name": "4fcnn9spy",
+                "uititle": "negx"
+            },
+            {
+                "type": 5,
+                "name": "wv5o1z0mp",
+                "uititle": "posy"
+            },
+            {
+                "type": 5,
+                "name": "hpe4kbj74",
+                "uititle": "negy"
+            },
+            {
+                "type": 5,
+                "name": "ozkx149s6",
+                "uititle": "posz"
+            },
+            {
+                "type": 5,
+                "name": "xwfw3og4z",
+                "uititle": "negz"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "id": "21f41920-cb4b-4f73-9209-aebc2602d264",
+    "created": 1740738461088,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740738461120
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TexEffectFog",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740738518471
+        },
+        {
+            "message": "Extension.Testing.TexEffectFog renamed to Ops.Extension.Testing.TextureEffectFog",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740739113066
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "vh3ct2j6k",
+                "uititle": "add port"
+            }
+        ],
+        "portsOut": []
+    }
+}

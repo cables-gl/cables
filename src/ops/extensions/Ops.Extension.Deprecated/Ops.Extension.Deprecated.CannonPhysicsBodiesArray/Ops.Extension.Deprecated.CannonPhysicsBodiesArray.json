@@ -1,0 +1,138 @@
+{
+    "id": "bd2218d1-b9ac-476b-bc6b-05d675385fcf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1594122826202
+        },
+        {
+            "message": "Ops.User.pandur.PhysicsBodies renamed to Ops.Exp.Gl.Physics.PhysicsBodiesArray",
+            "author": "pandur",
+            "date": 1594124060331
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.PhysicsBodiesArray renamed to Ops.Physics.PhysicsBodiesArray",
+            "author": "pandur",
+            "date": 1595851365537
+        },
+        {
+            "message": "Ops.Physics.PhysicsBodiesArray renamed to Ops.Physics.Cannon.CannonPhysicsBodiesArray",
+            "author": "pandur",
+            "date": 1654586038411
+        },
+        {
+            "message": "Ops.Physics.Cannon.CannonPhysicsBodiesArray renamed to Ops.Deprecated.Physics.Cannon.CannonPhysicsBodiesArray",
+            "author": "pandur",
+            "date": 1671007929196
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1594122828303,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "sizeZ",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Simulated Positions"
+            },
+            {
+                "type": 3,
+                "name": "Names"
+            },
+            {
+                "type": 0,
+                "name": "Total Bodies",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an array of physics bodies and add them to current world",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Positions",
+                "text": "Array3 input for physics collision cages"
+            },
+            {
+                "name": "Name",
+                "text": "name of objects in the array"
+            },
+            {
+                "name": "Mass",
+                "text": "Mass of objects"
+            },
+            {
+                "name": "sizeX",
+                "text": "objects' size on X dimension"
+            },
+            {
+                "name": "sizeY",
+                "text": "objects' size on Y dimension"
+            },
+            {
+                "name": "sizeZ",
+                "text": "objects' size on Z dimension"
+            },
+            {
+                "name": "Simulated Positions",
+                "text": "positions of objects after physics simulation"
+            },
+            {
+                "name": "Names",
+                "text": "Names of each of the objects (the name you set in parameters followed by a number)"
+            },
+            {
+                "name": "Total Bodies",
+                "text": "number of physics objects generated from a given array"
+            }
+        ]
+    },
+    "exampleProjectId": "-O4Ive",
+    "coreLibs": [
+        "cgl"
+    ]
+}

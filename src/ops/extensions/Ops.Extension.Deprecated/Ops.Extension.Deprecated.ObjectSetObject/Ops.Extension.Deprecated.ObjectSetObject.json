@@ -1,0 +1,56 @@
+{
+    "authorName": "pandur",
+    "id": "ba7cad72-f226-4c27-b5e6-b20dabb8a3a4",
+    "created": 1587020829460,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.ObjectKeyObject renamed to Ops.User.pandur.ObjectSetObject",
+            "author": "pandur",
+            "date": 1587020854846
+        },
+        {
+            "message": "Ops.User.pandur.ObjectSetObject renamed to Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1623846340859
+        },
+        {
+            "message": "Ops.Json.ObjectSetObject renamed to Ops.Deprecated.Json.ObjectSetObject",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694610733817
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 2,
+                "name": "Object Value"
+            },
+            {
+                "type": 1,
+                "name": "Set Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Object"
+            }
+        ]
+    },
+    "summary": "set object as value in an object",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "uA23cI"
+}

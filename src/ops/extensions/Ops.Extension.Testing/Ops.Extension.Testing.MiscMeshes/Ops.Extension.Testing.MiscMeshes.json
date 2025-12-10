@@ -1,0 +1,33 @@
+{
+    "id": "1c8456d0-09e8-4fe7-9bb7-9d74b2701819",
+    "created": 1741265998682,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741265998708
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MiscMeshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741266024838
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "s4byq8yde",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "id": "4ab46b28-1dfb-4a7c-94a7-e7ab1934d2a9",
+    "created": 1741253867812,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741253867838
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.GlParticles1",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741253895208
+        },
+        {
+            "message": "Extension.Testing.GlParticles1 renamed to Ops.Extension.Testing.Particles1",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741254919106
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "x7cr93vn5",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

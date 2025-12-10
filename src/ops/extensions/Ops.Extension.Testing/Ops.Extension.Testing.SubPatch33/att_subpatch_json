@@ -1,0 +1,57 @@
+{
+  "ops": [
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "4wr6j168v",
+      "uiAttribs": {
+        "subPatch": "p5ljf5w9a",
+        "translate": {
+          "x": -9999999,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "ccdufpx2v",
+      "uiAttribs": {
+        "subPatch": "p5ljf5w9a",
+        "translate": {
+          "x": -9999999,
+          "y": 215.91028801475022
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "11768b89-9ca6-40a3-a0fb-5ee548bf4cad",
+      "id": "uxnnd9avr",
+      "uiAttribs": {
+        "subPatchOp": {
+          "version": 2
+        },
+        "translate": {
+          "x": -10000019.380300764,
+          "y": 135.91028801475022
+        },
+        "subPatch": "p5ljf5w9a"
+      },
+      "storage": {
+        "blueprintVer": 2,
+        "subPatchVer": 2,
+        "ref": "uxnnd9avr"
+      },
+      "portsIn": [
+        {
+          "name": "patchId",
+          "value": "y84kq8rlg"
+        }
+      ]
+    }
+  ]
+}

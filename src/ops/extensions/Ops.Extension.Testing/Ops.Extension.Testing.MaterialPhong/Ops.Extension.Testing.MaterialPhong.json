@@ -1,0 +1,33 @@
+{
+    "id": "d0a4ff79-4193-479a-90e4-28fd32f4ee23",
+    "created": 1741266642765,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741266642795
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MaterialPhong",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741266680871
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "1xuq00pwz",
+                "uititle": "Trigger_24"
+            }
+        ],
+        "portsOut": []
+    }
+}

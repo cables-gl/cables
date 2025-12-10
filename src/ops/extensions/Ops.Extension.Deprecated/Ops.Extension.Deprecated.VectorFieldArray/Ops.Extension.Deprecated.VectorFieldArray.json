@@ -1,0 +1,75 @@
+{
+    "authorName": "pandur",
+    "id": "fba86dad-f37f-482e-a8fb-2abc76723ecf",
+    "created": 1519812602106,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Columns",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rows",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Spacing Columns",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Spacing Rows",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Translate Z",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "use pixel luminance texture to rotate/scale a mesh in a grid field",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.VectorFieldArray renamed to Ops.Deprecated.Exp.Gl.VectorFieldArray",
+            "author": "pandur",
+            "date": 1628150606938
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

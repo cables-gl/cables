@@ -1,0 +1,86 @@
+{
+    "id": "935b0d02-1dce-4d5c-87a8-f1fa36c5d25e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1640252606576
+        },
+        {
+            "message": "Ops.User.pandur.MpSingleHand renamed to Ops.Dev.MpSingleHand",
+            "author": "pandur",
+            "date": 1640254839456
+        },
+        {
+            "message": "Ops.Dev.MpSingleHand renamed to Ops.Dev.MpHand",
+            "author": "pandur",
+            "date": 1640255032460
+        },
+        {
+            "message": "Ops.Dev.MpHand renamed to Ops.Libs.Mediapipe.MpHand",
+            "author": "pandur",
+            "date": 1652089088413
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpHand renamed to Ops.Extension.Mediapipe.MpHand",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915556644
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1640252727827,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Hands Result"
+            },
+            {
+                "type": 0,
+                "name": "Hand index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Min Score",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 3,
+                "name": "Lines"
+            },
+            {
+                "type": 2,
+                "name": "Data"
+            },
+            {
+                "type": 0,
+                "name": "Found Hand",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Score",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Get points and lines for left/right hand from mediapipe",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpHandTracking"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
+    "docs": {
+        "ports": []
+    }
+}

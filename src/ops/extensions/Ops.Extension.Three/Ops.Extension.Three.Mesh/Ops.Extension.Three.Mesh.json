@@ -1,0 +1,50 @@
+{
+    "id": "190304bb-af31-4378-a3f8-d6b7e42c90fc",
+    "created": 1764169447789,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764169447790
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "threeGeometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "exampleProjectId": "5IUbw4",
+    "docs": {
+        "ports": []
+    }
+}

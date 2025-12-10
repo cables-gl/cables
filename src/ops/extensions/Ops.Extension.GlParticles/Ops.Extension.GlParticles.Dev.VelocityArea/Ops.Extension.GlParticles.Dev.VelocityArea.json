@@ -1,0 +1,147 @@
+{
+    "id": "be0e39ec-18a8-43f7-88c8-8ec9bbe453fe",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1675001723497
+        },
+        {
+            "message": "Ops.User.pandur.ParticleSystemVelocityArea renamed to Ops.Dev.ParticleSystem.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1675089991071
+        },
+        {
+            "message": "Ops.Dev.ParticleSystem.VelocityArea renamed to Ops.Team.Particles.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678366891284
+        },
+        {
+            "message": "Ops.Team.Particles.VelocityArea renamed to Ops.Team.Particles.VelocityArea_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678371096845
+        },
+        {
+            "message": "Ops.Team.Particles.VelocityArea_v2 renamed to Ops.Team.Particles.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1678371369145
+        },
+        {
+            "message": "Ops.Extension.GlParticles.VelocityArea renamed to Ops.Extension.GlParticles.Dev.VelocityArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1729510187035
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1675001756647,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Velocity Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Noise Strength",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Positions",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}

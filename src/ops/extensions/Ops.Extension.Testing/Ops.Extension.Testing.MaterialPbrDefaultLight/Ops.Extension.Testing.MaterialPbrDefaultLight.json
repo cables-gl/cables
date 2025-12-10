@@ -1,0 +1,33 @@
+{
+    "id": "07197ff8-ecce-478d-a635-ff8a79deebd4",
+    "created": 1740740208981,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740740209005
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MaterialPbrDefaultLight",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740740230056
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "5a0o2s03n",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

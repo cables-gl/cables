@@ -1,0 +1,68 @@
+{
+    "id": "63286e09-ef59-4026-ba46-e8bf38fc9bd9",
+    "created": 1737384687637,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1737384687638
+        },
+        {
+            "message": "Extension.WebGpu.Dev.FullScreenRect renamed to Ops.Extension.WebGpu.FullScreenRect",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375015112
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Scale index",
+                "values": [
+                    "Stretch",
+                    "Fit"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgp"
+    ],
+    "exampleProjectId": "PNx2LB",
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "webgpu",
+    "summary": "Render a rectangle that fills the whole canvas"
+}

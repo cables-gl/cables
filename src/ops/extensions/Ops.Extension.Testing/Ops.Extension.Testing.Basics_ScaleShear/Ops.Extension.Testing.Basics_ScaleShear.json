@@ -1,0 +1,33 @@
+{
+    "id": "90ac775d-194b-43bb-8edd-438093eb07cc",
+    "created": 1740733016848,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740733016876
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch1 renamed to Ops.Extension.Testing.Basics_ScaleShear",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740733063681
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "cke3ipv4p",
+                "uititle": "Trigger_3"
+            }
+        ],
+        "portsOut": []
+    }
+}

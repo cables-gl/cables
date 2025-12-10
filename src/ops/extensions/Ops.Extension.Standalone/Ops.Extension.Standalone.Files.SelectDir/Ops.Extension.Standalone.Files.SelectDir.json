@@ -1,0 +1,43 @@
+{
+    "id": "8e840fa5-32f4-477b-9da6-3705d62ae695",
+    "created": 1725634236660,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1725632978898
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Default Path"
+            },
+            {
+                "type": 1,
+                "name": "Select Directory"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Choose a directory on your hard drive",
+    "docs": {
+        "ports": []
+    }
+}

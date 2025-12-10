@@ -1,0 +1,105 @@
+{
+    "id": "490004c1-7860-4422-9c8b-67a719080e53",
+    "created": 1762181456694,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762181456725
+        },
+        {
+            "message": "Patch.Pp8qZu1.SubPatch0 renamed to Ops.Extension.Ai.LlmPrompt",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1762181493078
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "13yb9bb9g",
+                "uititle": "Prompt",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 5,
+                "name": "v55wa68l8",
+                "uititle": "Value",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 5,
+                "name": "axcfzi4h8",
+                "uititle": "API URL",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 5,
+                "name": "qbpj78fjk",
+                "uititle": "Authentication",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 1,
+                "name": "864u0eigc",
+                "uititle": "Run",
+                "values": [
+                    ""
+                ]
+            },
+            {
+                "type": 0,
+                "name": "gdgnnalkl",
+                "uititle": "Auto request",
+                "values": [
+                    ""
+                ],
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "4sn5cnszp",
+                "uititle": "Result"
+            },
+            {
+                "type": 2,
+                "name": "i4feefw9n",
+                "uititle": "Result Object"
+            },
+            {
+                "type": 0,
+                "name": "klu6r35ga",
+                "uititle": "Is Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "xs18z73z0",
+                "uititle": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "aosval1gx",
+                "uititle": "Error"
+            }
+        ]
+    }
+}

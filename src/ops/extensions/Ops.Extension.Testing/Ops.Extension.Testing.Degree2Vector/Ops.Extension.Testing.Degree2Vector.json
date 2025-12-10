@@ -1,0 +1,33 @@
+{
+    "id": "8f55275a-92e9-4534-8608-d68f731010fd",
+    "created": 1740754325764,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740754325789
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Degree2Vector",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740754390864
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "9avwj5ssn",
+                "uititle": "Trigger_43"
+            }
+        ],
+        "portsOut": []
+    }
+}

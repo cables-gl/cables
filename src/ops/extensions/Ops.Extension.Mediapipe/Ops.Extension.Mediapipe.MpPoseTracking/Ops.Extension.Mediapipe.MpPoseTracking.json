@@ -1,0 +1,127 @@
+{
+    "id": "279774b0-9897-4f36-840e-5f823cfc988a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1608577899421,
+            "type": "new"
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpPoseTracking renamed to Ops.Extension.Mediapipe.MpPoseTracking",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915628676
+        },
+        {
+            "message": "Fixed: found output was not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1714980766719
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1640184895626,
+    "libs": [
+        "mp_pose.js",
+        "mp_camera_utils.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Model Complexity index",
+                "values": [
+                    "0",
+                    "1",
+                    "2"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Smooth Landmarks",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Min Detection Confidence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Tracking Confidence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Enable Segmentation",
+                "group": "Segmentation",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Update Texture",
+                "group": "Segmentation"
+            },
+            {
+                "type": 0,
+                "name": "Smooth Segmentation",
+                "group": "Segmentation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "group": "Segmentation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "group": "Segmentation",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 2,
+                "name": "Segmentation Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 3,
+                "name": "Landmarks"
+            },
+            {
+                "type": 3,
+                "name": "Lines"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Get pose-data (points/landmarks/lines) from webcam using mediapipe library",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "",
+    "exampleProjectId": "uepop4",
+    "coreLibs": [
+        "cgl"
+    ]
+}

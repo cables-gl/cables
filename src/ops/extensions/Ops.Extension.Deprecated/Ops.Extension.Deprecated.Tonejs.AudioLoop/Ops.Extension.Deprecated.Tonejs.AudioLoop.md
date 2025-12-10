@@ -1,0 +1,1 @@
+Creates a looped callback at the specified interval. This can e.g. be used to play notes in other ops. The callback can be started, stopped and scheduled along the Transport's timeline. Every time the event happens, the output-port `Time` will be set and `Trigger` will be triggered.

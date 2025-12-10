@@ -1,0 +1,33 @@
+{
+    "id": "c6bf0e78-e825-4df3-a9e2-32f84f34ac83",
+    "created": 1741266989920,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741266989944
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MaterialPoints",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741267069256
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "ry8b92ii7",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "id": "0ddb4db4-5b7a-4bb6-ab1c-cde27db42481",
+    "created": 1741264968483,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741264968506
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch13 renamed to Ops.Extension.Testing.TextTexture6",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265167145
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "jd8puqrj9",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

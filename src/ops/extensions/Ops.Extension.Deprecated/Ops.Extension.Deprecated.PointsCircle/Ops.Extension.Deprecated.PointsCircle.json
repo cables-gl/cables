@@ -1,0 +1,62 @@
+{
+    "summary": "calculates a circle path, outputs array3x",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "percent",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "radius",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array lengths",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "ef54ba67-8b1d-41b0-8140-bb97061eaa97",
+    "created": 1518184894733,
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Points.PointsCircle renamed to Ops.Array.PointArray.PointsCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701854407046
+        },
+        {
+            "message": "op was deprecated - use Ops.Array.PointArray.CircularPoints",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764714259
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

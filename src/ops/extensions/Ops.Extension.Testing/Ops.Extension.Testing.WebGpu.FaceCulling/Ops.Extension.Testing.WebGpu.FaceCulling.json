@@ -1,0 +1,33 @@
+{
+    "id": "b5da7959-6453-4890-b5cb-fdf046b96f38",
+    "created": 1743596965747,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743596965748
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.FaceCulling",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743596987844
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "zueqdoz7i",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

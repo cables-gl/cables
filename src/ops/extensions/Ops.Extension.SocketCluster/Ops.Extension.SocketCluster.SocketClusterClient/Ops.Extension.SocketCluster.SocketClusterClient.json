@@ -1,0 +1,151 @@
+{
+    "id": "82482405-6345-41c7-a6d2-1c63f01b09fb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1584534300415
+        },
+        {
+            "message": " added lib: socketcluster-client.js",
+            "author": "stephan",
+            "date": 1584534406220
+        },
+        {
+            "message": "Ops.Net.SocketCluster.SocketCluster renamed to Ops.Extension.SocketCluster.SocketCluster",
+            "author": "stephan",
+            "date": 1671005182035
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1584534305112,
+    "libs": [
+        "socketcluster-client.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "server hostname"
+            },
+            {
+                "type": 5,
+                "name": "server path"
+            },
+            {
+                "type": 0,
+                "name": "server port",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "use ssl",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "allow send",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "allow multiple senders",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "channel"
+            },
+            {
+                "type": 0,
+                "name": "delay send (ms)",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Additional server-data"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "ready",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "own client id"
+            },
+            {
+                "type": 0,
+                "name": "can send",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "error"
+            }
+        ]
+    },
+    "summary": "connect to a socketcluster server and manage the connection",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "server hostname",
+                "text": "socketcluster server"
+            },
+            {
+                "name": "server path",
+                "text": "socketcluster path (defaults to \"/socketcluster\")"
+            },
+            {
+                "name": "server port",
+                "text": "socketcluster port (usually 443 for ssl)"
+            },
+            {
+                "name": "allow send",
+                "text": "allow sending of messages"
+            },
+            {
+                "name": "allow multiple senders",
+                "text": "send when other clients are allowed to send"
+            },
+            {
+                "name": "channel",
+                "text": "name of channel"
+            },
+            {
+                "name": "delay send (ms)",
+                "text": "delay sending of all messages by number of ms"
+            },
+            {
+                "name": "Additional server-data",
+                "text": "add data outside the payload for the socketcluster server to read, can be used for auth-token or sessiondata"
+            },
+            {
+                "name": "ready",
+                "text": "connection is ready"
+            },
+            {
+                "name": "socket",
+                "text": "socket object for send/receive ops"
+            },
+            {
+                "name": "can send",
+                "text": "whether this client is allowed to send"
+            },
+            {
+                "name": "error",
+                "text": "error"
+            }
+        ]
+    },
+    "exampleProjectId": ""
+}

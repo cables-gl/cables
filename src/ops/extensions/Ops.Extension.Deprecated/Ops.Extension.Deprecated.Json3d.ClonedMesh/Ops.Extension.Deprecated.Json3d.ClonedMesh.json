@@ -1,0 +1,36 @@
+{
+    "updated": 1524496838335,
+    "authorName": "pandur",
+    "id": "3a29d06c-77bb-4c0f-8a75-33b2188b9ab9",
+    "created": 1516189863314,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "transformations"
+            }
+        ]
+    },
+    "summary": "internal op for json3d instanced/clones meshes",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.ClonedMesh renamed to Ops.Deprecated.Json3d.ClonedMesh",
+            "author": "pandur",
+            "date": 1654587872940
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

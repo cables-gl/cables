@@ -1,0 +1,52 @@
+{
+    "id": "e15e544b-7c68-4abb-8c40-3238846e5689",
+    "created": 1764688204664,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Detail",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Creates a dodecahedron geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the dodecahedron"
+            },
+            {
+                "name": "Detail",
+                "text": "Add vertices"
+            }
+        ]
+    },
+    "exampleProjectId": "0gw4x4"
+}

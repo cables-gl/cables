@@ -1,0 +1,99 @@
+{
+    "id": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1666073725225,
+            "type": "new"
+        },
+        {
+            "message": "Extension.WebGpu.Dev.BasicMaterial renamed to Ops.Extension.WebGpu.BasicMaterial",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375139327
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1666073740087,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Colorize Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "diffuseRepeatX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "diffuseRepeatY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tex Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tex Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgp"
+    ],
+    "exampleProjectId": "J0HjQB",
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "webgpu",
+    "summary": "A simple material without shading"
+}

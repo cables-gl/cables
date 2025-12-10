@@ -1,0 +1,91 @@
+{
+    "id": "e5518c84-5e68-4dc5-98a4-fb4a1a0f230d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567752105838,
+            "type": "new"
+        },
+        {
+            "message": "Extension.Osc.OscNumber renamed to Ops.Extension.Osc.Osc2WsNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105115934
+        },
+        {
+            "message": "Extension.Osc.Osc2WsNumber renamed to Ops.Extension.Osc2Ws.Osc2WsNumber",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765105181383
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567752275874,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Message"
+            },
+            {
+                "type": "5",
+                "name": "Address"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Message"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Received"
+            }
+        ]
+    },
+    "summary": "Outputs a single number from a user defined OSC address",
+    "issues": "",
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Address",
+                "text": "Address to filter data from"
+            },
+            {
+                "name": "Learn",
+                "text": "Click to learn. Op automatically listens to the next Osc message that comes in"
+            },
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Value",
+                "text": "Number out"
+            },
+            {
+                "name": "Received",
+                "text": "Triggers when a message change occurs"
+            }
+        ]
+    },
+    "exampleProjectId": "F77YvQ"
+}

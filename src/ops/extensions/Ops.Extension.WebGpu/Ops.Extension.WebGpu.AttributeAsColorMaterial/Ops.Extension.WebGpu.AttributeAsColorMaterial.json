@@ -1,0 +1,55 @@
+{
+    "id": "9f577404-ad81-4e02-9c96-08b42ebd9734",
+    "changelog": [
+        {
+            "message": "Op created1",
+            "type": "new",
+            "author": "pandur",
+            "date": 1738596408366
+        },
+        {
+            "message": "Extension.WebGpu.Dev.AttributeAsColorMaterial renamed to Ops.Extension.WebGpu.AttributeAsColorMaterial",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375126547
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1726060079939,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Attribute index",
+                "values": [
+                    "Position",
+                    "TexCoords",
+                    "Normals",
+                    "Normal Mat",
+                    "Tangents",
+                    "BiTangents"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "FM4hQB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Render mesh attribultes as color",
+    "coreLibs": [
+        "cgp"
+    ]
+}

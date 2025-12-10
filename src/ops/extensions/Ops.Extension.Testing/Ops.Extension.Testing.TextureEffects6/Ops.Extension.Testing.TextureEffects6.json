@@ -1,0 +1,33 @@
+{
+    "id": "c339c669-4ae1-41f1-bbbc-9cd64f41c33f",
+    "created": 1740740547117,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740740547153
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureEffects6",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740740568372
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "3bpya44sy",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

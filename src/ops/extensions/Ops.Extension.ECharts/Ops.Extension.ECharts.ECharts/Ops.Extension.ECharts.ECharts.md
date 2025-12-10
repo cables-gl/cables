@@ -1,0 +1,1 @@
+This OP wraps the ECharts data visualization library: https://echarts.apache.org/en/tutorial.html and allows to create more than a hundred charts with a single configuration object, focusing on the description of the charts instead of its implementation.

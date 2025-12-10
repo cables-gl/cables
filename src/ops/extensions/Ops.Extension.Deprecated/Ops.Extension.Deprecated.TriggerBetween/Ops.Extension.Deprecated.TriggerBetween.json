@@ -1,0 +1,50 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exe"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Number 1",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Number 2",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Fract",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "trigger if value is between number 1 and number 2",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "dadb4526-f751-4ee3-9acb-1fd41274fe6d",
+    "created": 1558014749755,
+    "changelog": [
+        {
+            "message": "Ops.Trigger.TriggerBetween renamed to Ops.Deprecated.Trigger.TriggerBetween",
+            "author": "pandur",
+            "date": 1638260885248
+        }
+    ]
+}

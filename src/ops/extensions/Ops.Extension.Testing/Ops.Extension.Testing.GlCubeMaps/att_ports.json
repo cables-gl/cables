@@ -1,0 +1,65 @@
+{
+    "ports": [
+        {
+            "id": "24wczq4w3",
+            "title": "exe",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "6jxk2lid3",
+            "title": "posx",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/px__1_.webp",
+            "order": 1
+        },
+        {
+            "id": "4fcnn9spy",
+            "title": "negx",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/nx__1_.webp",
+            "order": 2
+        },
+        {
+            "id": "wv5o1z0mp",
+            "title": "posy",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/py__1_.webp",
+            "order": 3
+        },
+        {
+            "id": "hpe4kbj74",
+            "title": "negy",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/ny__1_.webp",
+            "order": 4
+        },
+        {
+            "id": "ozkx149s6",
+            "title": "posz",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/pz__1_.webp",
+            "order": 5
+        },
+        {
+            "id": "xwfw3og4z",
+            "title": "negz",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/67bed8fd280089832fce1e2e/nz__1_.webp",
+            "order": 6
+        }
+    ]
+}

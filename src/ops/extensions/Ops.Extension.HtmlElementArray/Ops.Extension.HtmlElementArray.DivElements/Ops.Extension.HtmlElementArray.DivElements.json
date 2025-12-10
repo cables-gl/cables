@@ -1,0 +1,86 @@
+{
+    "id": "adcf03e3-66ec-48d4-b339-5859900268cb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612449831580
+        },
+        {
+            "message": "Ops.User.pandur.DivElements renamed to Ops.Dev.DivElements",
+            "author": "pandur",
+            "date": 1663058891936
+        },
+        {
+            "message": "Ops.Dev.DivElements renamed to Ops.Extension.RecklessHtml.DivElements",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671291869494
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1612449871821,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 2,
+                "name": "Parent",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Num",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 3,
+                "name": "Text"
+            },
+            {
+                "type": 1,
+                "name": "Reset Hover"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Elements"
+            },
+            {
+                "type": 0,
+                "name": "Index Clicked",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Element Clicked"
+            },
+            {
+                "type": 1,
+                "name": "Pointer Up"
+            },
+            {
+                "type": 0,
+                "name": "Index Hovered",
+                "subType": "number"
+            }
+        ]
+    },
+    "exampleProjectId": "lYLMwk",
+    "docs": {
+        "ports": []
+    },
+    "summary": "create an array of div elements",
+    "coreLibs": [
+        "cgl"
+    ]
+}

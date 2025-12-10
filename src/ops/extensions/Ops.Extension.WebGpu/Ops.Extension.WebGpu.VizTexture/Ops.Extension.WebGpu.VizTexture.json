@@ -1,0 +1,40 @@
+{
+    "id": "30527328-7d50-4220-9f88-7a0d27100345",
+    "created": 1738247518351,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1738247518352
+        },
+        {
+            "message": "Extension.WebGpu.Dev.VizTexture renamed to Ops.Extension.WebGpu.VizTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744377916534
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Texture In",
+                "objType": "texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgl",
+        "cgp"
+    ],
+    "exampleProjectId": "tk5uLB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Vizualize a webgpu texture on the patchfield",
+    "caniusequery": "webgpu"
+}

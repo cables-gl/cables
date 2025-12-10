@@ -1,0 +1,137 @@
+{
+    "id": "2fc89999-18bc-4d68-a81e-79d2280051c0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655121696557
+        },
+        {
+            "message": "Ops.User.pandur.LottieTexturePlayer2 renamed to Ops.Dev.LottieTexturePlayer2",
+            "author": "pandur",
+            "date": 1655123313551
+        },
+        {
+            "message": " added lib: bodymovin.js",
+            "author": "pandur",
+            "date": 1655133292573
+        },
+        {
+            "message": " removed lib: bodymovin.js",
+            "author": "pandur",
+            "date": 1655133325710
+        },
+        {
+            "message": " added lib: lottie_canvas.min.js",
+            "author": "pandur",
+            "date": 1655133339478
+        },
+        {
+            "message": "Ops.Dev.LottieTexturePlayer2 renamed to Ops.Libs.Lottie.LottieTexturePlayer_v2",
+            "author": "pandur",
+            "date": 1666274900697
+        },
+        {
+            "message": "Ops.Libs.Lottie.LottieTexturePlayer_v2 renamed to Ops.Extension.Lottie.LottieTexturePlayer_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915370579
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1655121700358,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 2,
+                "name": "JSON Data"
+            },
+            {
+                "type": 0,
+                "name": "Play Mode index",
+                "group": "Player Timing",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "frame",
+                "group": "Player Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "play",
+                "group": "Player Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Rewind",
+                "group": "Player Timing"
+            },
+            {
+                "type": 0,
+                "name": "speed",
+                "group": "Player Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "group": "Texture Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "scale index",
+                "group": "Texture Settings",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Total Frames",
+                "subType": "number"
+            }
+        ]
+    },
+    "libs": [
+        "lottie_canvas.min.js"
+    ],
+    "summary": "Play a Lottie animation in a texture",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "zW0RFn",
+    "coreLibs": [
+        "cgl"
+    ]
+}

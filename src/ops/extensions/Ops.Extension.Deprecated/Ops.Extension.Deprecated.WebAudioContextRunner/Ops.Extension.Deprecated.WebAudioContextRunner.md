@@ -1,0 +1,3 @@
+Some browser have a strict autoplay policy. In Google Chrome and mobile iOS audio cannot be played unless the playback was initiated by a user gesture (click / tap). To free the audio context from the so called `suspended` state, a user interaction is needed which triggers the `ResumeAudioContext` op.
+It has two modes – in the default one `Show  Overlay: true` it will show an overlay over the cables canvas with a play button when the audio context is suspended. 
+When `Show  Overlay` is set to `false` you have to manually take care of the user interaction (e.g. by adding a button yourself), registering a click / touch even listener and finally triggering `Resume` on this op.

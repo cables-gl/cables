@@ -1,0 +1,33 @@
+{
+    "id": "79f45385-b2c5-4997-b9db-6f7843491ff7",
+    "created": 1740754672967,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740754672993
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.GltfGeom",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740754701917
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "19shyyfqi",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Simple distortion effect",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Distortion"
+            },
+            {
+                "type": "0",
+                "name": "Oversample"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "398a6047-e595-4525-becd-57992721081d",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

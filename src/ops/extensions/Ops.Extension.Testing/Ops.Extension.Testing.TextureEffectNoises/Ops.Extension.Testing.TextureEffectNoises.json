@@ -1,0 +1,33 @@
+{
+    "id": "31b96060-e014-4d07-b533-b2869fad0c1c",
+    "created": 1740739544418,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740739544451
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureEffectNoises",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740739563804
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "z2muwpq37",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

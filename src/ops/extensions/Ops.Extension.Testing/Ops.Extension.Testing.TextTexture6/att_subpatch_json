@@ -1,0 +1,411 @@
+{
+  "ops": [
+    {
+      "opId": "19b441eb-9f63-4f35-ba08-b87841517c4d",
+      "id": "k7yu7ub5r",
+      "uiAttribs": {
+        "translate": {
+          "x": 3713.1446509299203,
+          "y": 3241.4390464063604
+        },
+        "subPatch": "0a2268on6",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 0.683359375
+        },
+        {
+          "name": "g",
+          "value": 0.683359375
+        },
+        {
+          "name": "b",
+          "value": 0.683359375
+        },
+        {
+          "name": "a",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "5znxjoct4",
+              "objOut": "k7yu7ub5r"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c19ebc53-82d5-429c-a6cc-ff350a2c5d3e",
+      "id": "vjno206v2",
+      "uiAttribs": {
+        "translate": {
+          "x": 3881.1446509299203,
+          "y": 3241.4390464063604
+        },
+        "subPatch": "0a2268on6",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "String",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "String",
+              "objIn": "fv27do6lm",
+              "objOut": "vjno206v2"
+            }
+          ]
+        },
+        {
+          "name": "HTML String",
+          "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pretium tempor enim, sit amet elementum ex sodales eu. Nulla porttitor, ante vel condimentum volutpat, nisi est faucibus enim, sed pulvinar arcu justo eget eros. Vivamus blandit ex et ipsum ornare bibendum. Proin rutrum nisl est, eu pellentesque enim fermentum vel. Praesent tempor eget ligula sed lacinia. Curabitur at interdum nibh. Mauris porta ultricies eros, eu varius nisi.<br/><br/>Maecenas quis sapien eget eros luctus lacinia in quis turpis. Fusce luctus, nibh ac dictum elementum, turpis libero tincidunt nulla, a facilisis nulla erat scelerisque felis. In hac habitasse platea dictumst. Vestibulum cursus malesuada diam ut laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis arcu leo, ut ornare nunc ultrices a. Curabitur pellentesque odio ac est aliquet porta. Morbi metus felis, ornare vitae dictum sit amet, elementum sed dolor. Duis quis commodo dolor. Cras nec ipsum semper, lobortis libero et, finibus felis. Donec ipsum felis, fermentum et congue non, rhoncus non risus. Nullam et lacus eu eros imperdiet blandit in sed arcu. Nullam a massa nec turpis consequat aliquam. Nulla nec purus a sem convallis mattis.<br/><br/>Phasellus sed interdum risus. Aliquam fermentum nulla eget egestas condimentum. Vestibulum et nulla et leo suscipit facilisis. Pellentesque ut lectus porttitor, facilisis quam eu, ultrices nulla. Maecenas dapibus aliquet suscipit. Sed pretium justo molestie purus vehicula hendrerit. Quisque auctor tempus ipsum, ut tincidunt libero dapibus vel. Sed faucibus mi at nisi tristique, id efficitur nunc commodo. Quisque ac erat tincidunt, iaculis augue eu, imperdiet magna. Donec tempor facilisis placerat. Nam sed turpis molestie, efficitur dolor vitae, sollicitudin quam.<br/><br/>Nunc vehicula, nisl et egestas euismod, eros eros mollis lacus, sit amet vehicula quam mi ac massa. Integer pellentesque interdum porta. Cras iaculis velit orci, ut volutpat ex scelerisque id. Sed tincidunt massa eget lectus molestie eleifend. Nam egestas maximus urna, a volutpat felis. Mauris vehicula molestie justo vel accumsan. Nulla facilisi.<br/><br/>Praesent eu hendrerit nulla. Suspendisse quam risus, tincidunt ut viverra in, tristique ut massa. Integer dignissim consequat commodo. Integer mollis risus vitae augue congue, et fermentum tellus vehicula. Praesent sit amet posuere eros. Vivamus vulputate massa a augue luctus facilisis. Donec purus ipsum, venenatis ut commodo in, pretium ac erat. Donec vulputate tortor ut ante consequat molestie. Vestibulum tempus felis quam, vitae fringilla nulla facilisis non. Integer porttitor condimentum lacinia. Maecenas porttitor ullamcorper augue nec scelerisque. Etiam mattis felis eget lacus porta, sit amet lacinia diam efficitur."
+        }
+      ]
+    },
+    {
+      "opId": "6e994ba8-01d1-4da6-98b4-af7e822a2e6c",
+      "id": "fv27do6lm",
+      "uiAttribs": {
+        "translate": {
+          "x": 3881.1446509299203,
+          "y": 3321.4390464063604
+        },
+        "subPatch": "0a2268on6",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Start",
+          "value": 0
+        },
+        {
+          "name": "End",
+          "value": 555
+        },
+        {
+          "name": "End of string",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "text",
+              "portOut": "Result",
+              "objIn": "5znxjoct4",
+              "objOut": "fv27do6lm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+      "id": "fga65aizw",
+      "uiAttribs": {
+        "height": 300,
+        "resizable": true,
+        "translate": {
+          "x": 3905.1446509299203,
+          "y": 3561.4390464063604
+        },
+        "comment": "",
+        "width": 264,
+        "subPatch": "0a2268on6",
+        "extendTitle": "",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Show Info",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1 index",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1",
+          "value": "Anim"
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "A"
+        },
+        {
+          "name": "Show Color",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": 0.5
+        },
+        {
+          "name": "Y",
+          "value": 0.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Info",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "opId": "2c042efa-3604-4717-b8f4-5ad08d6740e5",
+      "id": "5znxjoct4",
+      "uiAttribs": {
+        "translate": {
+          "x": 3713.1446509299203,
+          "y": 3421.4390464063604
+        },
+        "subPatch": "0a2268on6",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Draw Mesh",
+          "value": 1
+        },
+        {
+          "name": "Scale Mesh",
+          "value": 1
+        },
+        {
+          "name": "Size index",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": "Manual"
+        },
+        {
+          "name": "Width",
+          "value": 512
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Auto Height",
+          "value": 1
+        },
+        {
+          "name": "Auto Line Breaks",
+          "value": 1
+        },
+        {
+          "name": "font",
+          "value": "Arial"
+        },
+        {
+          "name": "weight",
+          "value": "normal"
+        },
+        {
+          "name": "fontSize",
+          "value": 33
+        },
+        {
+          "name": "align index",
+          "value": 0
+        },
+        {
+          "name": "align",
+          "value": "left"
+        },
+        {
+          "name": "Vertical align index",
+          "value": 0
+        },
+        {
+          "name": "Vertical align",
+          "value": "Top"
+        },
+        {
+          "name": "Letter Spacing",
+          "value": 0
+        },
+        {
+          "name": "Line Height Add",
+          "value": 0
+        },
+        {
+          "name": "Padding Y Top",
+          "value": 100
+        },
+        {
+          "name": "Padding Y Bottom",
+          "value": 100
+        },
+        {
+          "name": "Padding X",
+          "value": 100
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "Wrap index",
+          "value": 2
+        },
+        {
+          "name": "Wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": 0
+        },
+        {
+          "name": "Reuse Texture",
+          "value": 1
+        },
+        {
+          "name": "Show Debug",
+          "value": 0
+        },
+        {
+          "name": "Redraw On Font Load",
+          "value": 1
+        },
+        {
+          "name": "r",
+          "value": 0
+        },
+        {
+          "name": "g",
+          "value": 0
+        },
+        {
+          "name": "b",
+          "value": 0
+        },
+        {
+          "name": "Opacity",
+          "value": 1
+        },
+        {
+          "name": "background R",
+          "value": 1
+        },
+        {
+          "name": "background G",
+          "value": 1
+        },
+        {
+          "name": "background B",
+          "value": 1
+        },
+        {
+          "name": "background A",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Ratio",
+          "value": 1.2415730337078652
+        },
+        {
+          "name": "texture",
+          "links": [
+            {
+              "portIn": "Texture In",
+              "portOut": "texture",
+              "objIn": "fga65aizw",
+              "objOut": "5znxjoct4"
+            }
+          ]
+        },
+        {
+          "name": "Aspect",
+          "value": 0.8054298642533937
+        },
+        {
+          "name": "Num Lines",
+          "value": 18
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "8cm88ksya",
+      "uiAttribs": {
+        "subPatch": "0a2268on6",
+        "translate": {
+          "x": 4322.155853440745,
+          "y": 2151.1240576908003
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_jd8puqrj9",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_jd8puqrj9",
+              "objIn": "k7yu7ub5r",
+              "objOut": "8cm88ksya"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "cp28qdfsp",
+      "uiAttribs": {
+        "subPatch": "0a2268on6",
+        "translate": {
+          "x": 3713.1446509299203,
+          "y": 3941.4390464063604
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

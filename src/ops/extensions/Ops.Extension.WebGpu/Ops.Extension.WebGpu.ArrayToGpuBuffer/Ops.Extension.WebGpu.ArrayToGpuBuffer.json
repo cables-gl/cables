@@ -1,0 +1,44 @@
+{
+    "id": "3d39141f-e9d7-4b83-b5a1-fc7f2902fa40",
+    "created": 1727355853068,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new",
+            "author": "pandur",
+            "date": 1727355853068
+        },
+        {
+            "message": "Extension.WebGpu.Dev.GpuFloatBuffer renamed to Ops.Extension.WebGpu.ArrayToGpuBuffer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375089938
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Arr"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "GPUBuffer"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgp"
+    ],
+    "caniusequery": "webgpu",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Upload an array to the GPU as a GpuBuffer",
+    "exampleProjectId": "VShX3I"
+}

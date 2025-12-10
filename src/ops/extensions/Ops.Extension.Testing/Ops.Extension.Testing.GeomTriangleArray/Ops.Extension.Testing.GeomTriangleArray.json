@@ -1,0 +1,33 @@
+{
+    "id": "c5027fbf-e388-4170-9123-28f95fcc9ad2",
+    "created": 1741347990147,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741347990172
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.GeomTriangleArray",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741348013544
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "r4g16i129",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

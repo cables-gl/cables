@@ -1,0 +1,104 @@
+{
+    "id": "5251e50f-abaf-4ca3-a809-61f8ca58ec35",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1608577899421
+        },
+        {
+            "message": " added lib: hands.js",
+            "author": "pandur",
+            "date": 1608577918392
+        },
+        {
+            "message": " added lib: camera_utils.js",
+            "author": "pandur",
+            "date": 1608578877969
+        },
+        {
+            "message": "Ops.User.cables.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1608582896776
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.MpHands renamed to Ops.Libs.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1611052266069
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
+            "author": "stephan",
+            "date": 1613553560896
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.MpHands renamed to Ops.Dev.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1623913601812
+        },
+        {
+            "message": "Ops.Dev.Mediapipe.MpHands renamed to Ops.Dev.Mediapipe.MpHandTracking",
+            "author": "pandur",
+            "date": 1640255004460
+        },
+        {
+            "message": "Ops.Dev.Mediapipe.MpHandTracking renamed to Ops.Libs.Mediapipe.MpHandTracking",
+            "author": "stephan",
+            "date": 1654013381206
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpHandTracking renamed to Ops.Extension.Mediapipe.MpHandTracking",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915615795
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1608577908279,
+    "libs": [
+        "mp_hands.js",
+        "mp_camera_utils.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Min Confidence Detect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Confidence Tracking",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Found Hands",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Get hand data from mediapipe library, use with MpHand",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.Mediapipe.MpHand",
+        "Ops.Libs.Mediapipe.MpHandCoordinate"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "a5xfp4",
+    "docs": {
+        "ports": []
+    }
+}

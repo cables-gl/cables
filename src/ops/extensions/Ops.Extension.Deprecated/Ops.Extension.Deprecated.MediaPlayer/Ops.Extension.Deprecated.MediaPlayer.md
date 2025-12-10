@@ -1,0 +1,1 @@
+Plays an audio-file and allows you to seek / jump to a position. Audio files can be uploaded via drag’n’dropping to the cables-window. When upload is complete you can select it in the project-file-browser. Should also work with audio-files which are hosted somewhere else (untested).

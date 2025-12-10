@@ -1,0 +1,35 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Max Line Chars",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "insert linebreaks into a string after [num] chars",
+    "updated": 1533987495662,
+    "authorName": "pandur",
+    "id": "0e2e4bed-bf76-4e37-80cd-7fa813f5cd72",
+    "created": 1533986724260,
+    "changelog": [
+        {
+            "message": "Ops.String.StringBreak renamed to Ops.Deprecated.String.StringBreak",
+            "author": "pandur",
+            "date": 1596094388169
+        }
+    ]
+}

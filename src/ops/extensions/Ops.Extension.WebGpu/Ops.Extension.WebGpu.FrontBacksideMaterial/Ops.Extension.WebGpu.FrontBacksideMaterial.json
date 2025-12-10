@@ -1,0 +1,82 @@
+{
+    "id": "8685cc29-ac57-44e7-b237-e51ac8598e4d",
+    "created": 1726653169519,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1726653169521
+        },
+        {
+            "message": "Extension.WebGpu.Dev.FrontBacksideMaterial renamed to Ops.Extension.WebGpu.FrontBacksideMaterial",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744375024505
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "r 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a 2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "exampleProjectId": "1Jm1LB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Show direction of faces as color",
+    "coreLibs": [
+        "cgp"
+    ]
+}

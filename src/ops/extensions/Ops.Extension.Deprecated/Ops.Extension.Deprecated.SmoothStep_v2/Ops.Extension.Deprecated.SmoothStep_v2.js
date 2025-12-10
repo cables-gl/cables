@@ -1,0 +1,14 @@
+const
+    result = op.outNumber("result"),
+    number = op.inValueFloat("number", 0),
+    min = op.inValueFloat("min", 0),
+    max = op.inValueFloat("max", 1);
+
+number.onChange = max.onChange = min.onChange = exec;
+exec();
+
+function exec()
+{
+    let x = Math.max(0, Math.min(1, (number.get() - min.get()) / (max.get() - min.get())));
+    result.set(x * x * (3 - 2) * (max.get() - min.get())); // smoothstep
+}

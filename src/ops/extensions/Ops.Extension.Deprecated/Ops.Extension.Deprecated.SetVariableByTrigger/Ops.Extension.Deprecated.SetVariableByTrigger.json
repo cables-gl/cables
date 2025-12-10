@@ -1,0 +1,39 @@
+{
+    "authorName": "pandur",
+    "id": "a7864596-cd4b-41a0-8bb6-76f3d4b33035",
+    "created": 1521569075357,
+    "summary": "set variable only after being triggered",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Variable index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Set Variable"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Vars.SetVariableByTrigger renamed to Ops.Deprecated.Vars.SetVariableByTrigger",
+            "author": "pandur",
+            "date": 1628149977365
+        }
+    ]
+}

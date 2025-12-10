@@ -1,0 +1,696 @@
+{
+  "ops": [
+    {
+      "opId": "53ef08b1-61e2-41d9-a6c6-e0b2dfa48526",
+      "id": "xpja2dzcd",
+      "uiAttribs": {
+        "translate": {
+          "x": 598.3514990062057,
+          "y": 698.769325764955
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "Result",
+              "objIn": "8ppop50t8",
+              "objOut": "xpja2dzcd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+      "id": "22xav7f1s",
+      "uiAttribs": {
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 565.007600427459
+        },
+        "subPatch": "95r9wmssi",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "Compute",
+              "portOut": "trigger 0",
+              "objIn": "0h6839qhh",
+              "objOut": "22xav7f1s"
+            }
+          ]
+        },
+        {
+          "name": "trigger 10",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger 10",
+              "objIn": "1d1qrvz2n",
+              "objOut": "22xav7f1s"
+            }
+          ]
+        },
+        {
+          "name": "trigger 14",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger 14",
+              "objIn": "xpja2dzcd",
+              "objOut": "22xav7f1s"
+            }
+          ]
+        },
+        {
+          "name": "trigger 15",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger 15",
+              "objIn": "ie0cjkufb",
+              "objOut": "22xav7f1s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "8ppop50t8",
+      "uiAttribs": {
+        "height": 719.2390057002956,
+        "width": 355.08934439104155,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": 598.3514990062057,
+          "y": 777.4061222118564
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "0000d68b-b85f-4493-b8d6-4a2b76e25ab6",
+      "id": "k930znxb2",
+      "uiAttribs": {
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 970.5644184973653
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Shader Source",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Shader Source",
+              "objIn": "jau1d5hsu",
+              "objOut": "k930znxb2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "jau1d5hsu",
+      "uiAttribs": {
+        "height": 855.3367245770562,
+        "width": 770.6719431382761,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": -66.26049156508702,
+          "y": 1175.2965229943222
+        },
+        "subPatch": "95r9wmssi",
+        "extendTitle": "Shader Source",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Passthrough String",
+          "value": "//\n// Compute Shader: CompCompute\n//\n\n\n// uniforms:3\n// 3 uniforms\nstruct strct_uniCompute\n{\n    color: vec4f,\n    colorw: vec4f,\n    sasel: vec4f\n};\n@group(0) @binding(0) var<uniform> uniCompute: strct_uniCompute;\n\n@group(0) @binding(1) var<storage,read_write> resultMatrix: array<f32>;\n\n@group(0) @binding(2) var<storage,read_write> wurst: array<f32>;\n\n\n\n////////////////\n\n\n\nfn rand( co: vec2<f32>) -> f32\n{\n    return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\n@compute @workgroup_size(32)\nfn main(@builtin(global_invocation_id) global_id : vec3<u32>)\n{\n    wurst[global_id.x]=uniCompute.sasel.x;\n    \n    resultMatrix[global_id.x] = sin(f32(global_id.x)*uniCompute.sasel.y)*uniCompute.sasel.z;\n    \n}"
+        }
+      ]
+    },
+    {
+      "opId": "53ef08b1-61e2-41d9-a6c6-e0b2dfa48526",
+      "id": "ie0cjkufb",
+      "uiAttribs": {
+        "translate": {
+          "x": 1007.4930350138462,
+          "y": 599.5699621743054
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "Result",
+              "objIn": "ll2dsokgi",
+              "objOut": "ie0cjkufb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "ll2dsokgi",
+      "uiAttribs": {
+        "height": 248.87043887674395,
+        "width": 275.753293586097,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": 1007.4930350138462,
+          "y": 684.8146474515902
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+      "id": "1d1qrvz2n",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.1222062400075,
+          "y": 1148.5057839528645
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "r",
+          "value": 0.6959226934853626
+        },
+        {
+          "name": "g",
+          "value": 0.8177380128863743
+        },
+        {
+          "name": "b",
+          "value": 0.4623743394306652
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "3s2ypzyrz",
+              "objOut": "1d1qrvz2n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "ae07830b-91c3-4cbe-a7d6-d3b737392c16",
+      "id": "3s2ypzyrz",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.1222062400075,
+          "y": 1225.5116135864355
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "radius",
+          "value": 0.14
+        },
+        {
+          "name": "innerRadius",
+          "value": 0.485
+        },
+        {
+          "name": "segments",
+          "value": 40
+        },
+        {
+          "name": "percent",
+          "value": 1
+        },
+        {
+          "name": "steps",
+          "value": 0
+        },
+        {
+          "name": "invertSteps",
+          "value": 0
+        },
+        {
+          "name": "mapping index",
+          "value": 0
+        },
+        {
+          "name": "mapping",
+          "value": "flat"
+        },
+        {
+          "name": "Spline",
+          "value": 0
+        },
+        {
+          "name": "Draw",
+          "value": 0,
+          "title": "Render mesh"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "yffkhteov",
+              "objOut": "3s2ypzyrz"
+            }
+          ]
+        },
+        {
+          "name": "geometry",
+          "links": [
+            {
+              "portIn": "Geometry",
+              "portOut": "geometry",
+              "objIn": "yffkhteov",
+              "objOut": "3s2ypzyrz"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "daf22c14-6ba3-4c63-83d2-27e9e60d3dbf",
+      "id": "yffkhteov",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.1222062400075,
+          "y": 1304.2414580470227
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Instances",
+          "value": 0
+        },
+        {
+          "name": "Billboarding index",
+          "value": 1
+        },
+        {
+          "name": "Billboarding",
+          "value": "Spherical"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Total Instances",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "1d1fe0c4-1960-4eb2-a526-efbe42c95d75",
+      "id": "0h6839qhh",
+      "uiAttribs": {
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 630.9548751597548
+        },
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Source",
+          "value": "\n\nfn rand( co: vec2<f32>) -> f32\n{\n    return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\n@compute @workgroup_size(32)\nfn main(@builtin(global_invocation_id) global_id : vec3<u32>)\n{\n    wurst[global_id.x]=uniCompute.sasel.x;\n    \n    resultMatrix[global_id.x] = sin(f32(global_id.x)*uniCompute.sasel.y)*uniCompute.sasel.z;\n    \n}"
+        },
+        {
+          "name": "Workgroups 1",
+          "value": 8
+        },
+        {
+          "name": "Workgroups 2",
+          "value": 8
+        },
+        {
+          "name": "Workgroups 3",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "Next",
+              "objIn": "qasjpfozq",
+              "objOut": "0h6839qhh"
+            }
+          ]
+        },
+        {
+          "name": "Length",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "opId": "b00c2816-0c93-483c-8904-dc3d575c92e2",
+      "id": "qasjpfozq",
+      "uiAttribs": {
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 733.1527644874134
+        },
+        "disabled": false,
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": "sasel"
+        },
+        {
+          "name": "X",
+          "value": 1
+        },
+        {
+          "name": "Y",
+          "value": 1.7
+        },
+        {
+          "name": "Z",
+          "value": 0.7
+        },
+        {
+          "name": "W",
+          "value": 0.9
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "Next",
+              "objIn": "hxp0uuj57",
+              "objOut": "qasjpfozq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "527d0fd2-5495-48c1-9c15-265c02edf3ac",
+      "id": "hxp0uuj57",
+      "uiAttribs": {
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 797.9215050489149
+        },
+        "disabled": false,
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": "resultMatrix"
+        },
+        {
+          "name": "Length",
+          "value": 120
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "Next",
+              "objIn": "v9xamj4z7",
+              "objOut": "hxp0uuj57"
+            }
+          ]
+        },
+        {
+          "name": "Buffer",
+          "links": [
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "Buffer",
+              "objIn": "xpja2dzcd",
+              "objOut": "hxp0uuj57"
+            },
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "Buffer",
+              "objIn": "yffkhteov",
+              "objOut": "hxp0uuj57"
+            }
+          ]
+        },
+        {
+          "name": "Buffer Length",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "527d0fd2-5495-48c1-9c15-265c02edf3ac",
+      "id": "v9xamj4z7",
+      "uiAttribs": {
+        "translate": {
+          "x": 93.67716050973036,
+          "y": 890.034944794804
+        },
+        "disabled": false,
+        "subPatch": "95r9wmssi",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": "wurst"
+        },
+        {
+          "name": "Length",
+          "value": 12
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "Next",
+              "objIn": "k930znxb2",
+              "objOut": "v9xamj4z7"
+            }
+          ]
+        },
+        {
+          "name": "Buffer",
+          "links": [
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "Buffer",
+              "objIn": "ie0cjkufb",
+              "objOut": "v9xamj4z7"
+            }
+          ]
+        },
+        {
+          "name": "Buffer Length",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "266lvb4g3",
+      "uiAttribs": {
+        "subPatch": "95r9wmssi",
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_x0g812fln",
+          "title": "exe",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "innerOut_x0g812fln",
+              "objIn": "22xav7f1s",
+              "objOut": "266lvb4g3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "virrsxy1s",
+      "uiAttribs": {
+        "subPatch": "95r9wmssi",
+        "translate": {
+          "x": 0,
+          "y": 2110.6332475713784
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

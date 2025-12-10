@@ -1,0 +1,33 @@
+{
+    "id": "c37ed8f7-1b6e-4026-94d4-fffca8211da7",
+    "created": 1740739316922,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740739316945
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureGenerationops",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740739340676
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "9y725kusw",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

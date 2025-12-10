@@ -1,0 +1,62 @@
+{
+  "ops": [
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "ct4ccbgij",
+      "uiAttribs": {
+        "subPatch": "vly2dtrxr",
+        "translate": {
+          "x": 2784,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_gingsriom",
+          "title": "Input_0",
+          "links": [
+            {
+              "portIn": "Input_0",
+              "portOut": "innerOut_gingsriom",
+              "objIn": "p4863wgm0",
+              "objOut": "ct4ccbgij"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "4h8rmtqdf",
+      "uiAttribs": {
+        "subPatch": "vly2dtrxr",
+        "translate": {
+          "x": 2784,
+          "y": 2551
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "be066ff6-85e2-408a-9570-59fb7abff7b2",
+      "id": "p4863wgm0",
+      "uiAttribs": {
+        "subPatch": "vly2dtrxr",
+        "translate": {
+          "x": 2770.962425025411,
+          "y": 1027.592070998816
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {
+        "ref": "p4863wgm0"
+      }
+    }
+  ]
+}

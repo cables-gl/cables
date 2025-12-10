@@ -1,0 +1,1318 @@
+{
+  "ops": [
+    {
+      "opId": "89fc70ea-2350-4a0e-9a24-4efca10cced6",
+      "id": "qbxfx7tun",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1655.1108411143382
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Beautify",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Request Body",
+              "portOut": "Result",
+              "objIn": "lb434upoq",
+              "objOut": "qbxfx7tun"
+            },
+            {
+              "portIn": "String",
+              "portOut": "Result",
+              "objIn": "n702oohd3",
+              "objOut": "qbxfx7tun"
+            }
+          ]
+        },
+        {
+          "name": "Error",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "j9se8zej8",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1193.0765478416702
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "x0d4nad74",
+              "objOut": "j9se8zej8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "32a301bb-a59b-41a6-9d87-4a58592b6675",
+      "id": "7us9bn3xv",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1478.9495018373693
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "stream",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "stream"
+        },
+        {
+          "name": "Boolean",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "qbxfx7tun",
+              "objOut": "7us9bn3xv"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "20ed335d-fb41-459e-b1dc-34d1a92074b5",
+      "id": "ae1ju2szm",
+      "uiAttribs": {
+        "translate": {
+          "x": 1071.2234876219893,
+          "y": 2321.069769389352
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "End"
+        },
+        {
+          "name": "Add Break",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a1fde819-2b8e-4520-8086-c08e00e0d2f7",
+      "id": "9t6ajmi3b",
+      "uiAttribs": {
+        "translate": {
+          "x": 1085.7331104187742,
+          "y": 2188.3228193805744
+        },
+        "subPatch": "6bhplsqxf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "clear",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Update",
+              "portOut": "Next",
+              "objIn": "ae1ju2szm",
+              "objOut": "9t6ajmi3b"
+            }
+          ]
+        },
+        {
+          "name": "Result",
+          "value": "**Review: Hyperion X‑Zen 2.0 – The “Dream Key” Keyboard**\n\n*★ ★ ★ ★ ★ 5/5 – “The Keyboard That Absolutely Changed My Workflow”*\n\nI’ve been typing on keyboards for about two decades now. From the early office bore‑suits to today’s sleek wireless joy‑runners, my template list of “must‑haves” has grown—but none of the existing models have managed to tick every box until I met the Hyperion X‑Zen 2.0. In this review I’ll walk you through my experience, break down the real‑world perks, and explain why this little bead‑sized machine is worth a serious upgrade … or a hefty splurge.\n\n---\n\n### What Makes the X‑Zen 2.0 Different?\n\n| Feature | Why It Matters | How It Stacks |\n|---------|----------------|---------------|\n| **MEMS‑Tactile Keys** | The switches deliver whispers of sensation. No “click‑click” or “clack‑clack.” | *Typing pulse* feels intimate, like your own fingertips. |\n| **Dynamic RGB with “Mood‑Sync”** | LED waves responsive to sound pressure. | Plays calming blues during audio work, electric pinks during video editing. |\n| **OLED Display** | Tiny message panel shows macros, battery, and “Friday!” | Never forget you’re all set for a weekend binge‑watch. |\n| **Low‑Profile Aluminium Shell** | Slightly heavier than plastic, but still portable. | Gives a grounded feel that steadies your left‑hand while pulling a heavy file. |\n| **Wireless Qi, 60‑hour Battery** | Charges in 10 minutes, saves the frustration of cables. | I’ve powered an entire day of programming, music production, and streaming from one dock. |\n\n---\n\n## Build Quality: Precision and Affinity\n\nThe first thing you notice about the X‑Zen 2.0 is its considerable heft—74 g/keyboard, not the ultra‑light 45 g of some budget clones. It feels like a card from a sensitive record label, not a piece of hardware. Opening the back, the matte aluminum ring is etched with a subtle V‑shaped stripe that hints at its “Zen” philosophy.\n\n**Magnetic Mounts** – No more worrying about accidental restarts. A silicon‑coated magnetic strip securely tucks the keyboard onto the desk and snaps back into place after a quick disconnect, which is a new safety standard.\n\n**Eject‑Safe Cable** – The USB‑C port is ring‑sheltered; a flash of blue when connected reminds you it’s attached properly.\n\n---\n\n## Keyboard Gestures: Freedom on the Go\n\nThe X‑Zen 2.0’s controller recognises five speed‑based gestures: swipe left, swipe right, swipe up, swipe down, and a four‑finger “tap‑pop.” In my gaming session, the developer mode turned swipe left into “backtrack to previous frame” and tap‑pop into “insta‑ban.” For utilities, “swipe up” increases brightness in presentations, and “swipe down” dims the monitor.\n\nThe keycap layout is also a piece of art—a brushed‑anodised 650‑MHz set that rolls underneath the glued back of the keyboard, providing a whisper grip that still offers ample **Z** zone coverage for Arrow keys.\n\n---\n\n## Tactile Experience – My Bottom Line\n\nI’ve spent 10,000+ hours under my fingertips across all keyboards since the underside of the world and the result? **Hyperion X‑Zen 2.0** gives the *tactile* feedback you cannot find in cheaper devices. The MEMS‑Tactile keys have a small, high‑precision click at 2.3 mm travel—it registers as a subtle “ping” that actually feels like a *whisper* on a high‑accent taste. The key action proportionally feels weighted enough for a strong “key‑sense” but light enough to bottom out at 7.5 mm deflection.\n\nDuring a 3‑hour VR session, I had a serious run of eight straight hours of standard typing (Python + text editing). The X‑Zen did not feel tense. The keys released cleanly. I can make a joke that it’s *so* relaxing I started humming in the breakroom – and our coworkers called it \"the desk whisperer.\"\n\n---\n\n## Performance – Consistency at Any Speed\n\nIt’s simple; the X‑Zen 2.0 pairs with **HyperionOS**, a firmware that optimises micro‑latency to under 1ms. On my PC, I tested capacitive typing speeds from **780 wpm** to **1200 wpm** (with zero bypass from OS). The latency remained *below* 1.2 ms, a universal standard across competitive typing competitions.\n\nI subscribed to **HyperionBit**, a microcontroller that pumped out highly-detailed metrics: “speed per stroke”, “force per key”, “Humming Frequency”. I was surprised it hooked into a raspberry pi zero that generated LZMA logs for 12‑hour chat transcripts that automatically updated a “Typing Mood” dashboard in real‑time.\n\n**Bottom Line:** If you’re doing one‑stop‑shop for IT operations, your focus will shift from hardware issues to analyzing performance trends—an advantage many in the tech field realize only after a \"change.\"\n\n---\n\n## Battery Life & Reliability\n\nLet’s be honest: no two back‑to‑back competitions or video‑streaming marathons happen every other day. The X‑Zen’s Qi‑charge hub thought about it: just plug your phone into the keyboard (wired or wireless), and it powers itself—later put a cog‑wheel icon in the screen’s top corner. Though my usual charging time of 30 minutes used to update to a *dream‑steady* 4‑hour increments, thanks to a dual‑mode LPS (Low Power Switching) micro‑processor.\n\nDuring a 48‑hour video‑editing and streaming sprint, the X‑Zen ran everything unbroken: Power‑Cycle off, edit, zoom‑in, edit, yield – the battery stayed at 25 %—the UI prefetched an audible \"Battery low—prolonged usage\" but no fault.\n\n---\n\n## Software Integration: The “Super‑One” Platform\n\nThe HyperionShade app (free) pulls corporate dynamics into one place: macros, overlays, ergonomic hook‑ups. The “Mega‑Link” server mounts 100+ custom macros to a SignalR stream – letting every user call the macros by voice recognition. That’s chat control. In my streaming gig, a Twitch chat message “CTRL‑CLICK” summons a tooltip that says how long some.\n\nThe **Composer** plugin turned the hyper‑extended 4‑dimensional key‑ring into a full‑blown “Design‑Time” schema in our UI. I posted a screenshot of the toolbar that looked mostly like a small “mind‑map”, and the chat gasped.\n\n---\n\n## Customer Support and Warranty\n\nHyperion’s next‑level blueprint: a 24‑hour service patch that can respond via Board Analytics. On my first occurrence of a stuck key cap, a technician remotely diagnosed the fiber model edge‑wear and replaced it virtually—my microscope on the board showed a micro‑fracture 0.13 mm. A new mechanical key array wasn't needed; the UI simply replaced the “current keycap meta” with a virtualization. That sort of repair goes two levels higher than we usually encounter.\n\nThe keyboard also came with a 5‑year warranty (standard industry entry – but it covers the keycap's unique titanium‑cobalt plating). I can’t say a single call had ever needed to touch up. I’ll invoke the warranty each year for a test.\n\n---\n\n## The Bottom Line: ‘A “New Experience” for Your Desktop'\n\nI’ve unboxed 47 keyboards since I started the last project, 12 of which have earned a full review. The Hyperion X‑Zen 2.0 breaks the mould you act out: it is the *magnetic, silent, low‑profile counter‑cultural* showpiece that reminds you about your workflow its own own. My high‑level review stands out for the following reasons:\n\n* 150 word per cutt.dies. *type!...*\n\nNow I'm on the step‑int drawn from S word 10. So, overall, my final conclusion: if you desire a device that provides a built‑in, secure, rechargeable, and *intricately built* machine, the Hyperion X‑Zen 2.0 is your recommended hyper‑digital playground.\n\nBe sure to upgrade if you want a keyboard not just as a tool, but a *link* between your productivity and design. The future is keyboards—Hyperion’s the next step. Happy typing!"
+        }
+      ]
+    },
+    {
+      "opId": "20f7bcab-ed71-45d1-9fae-d89aacf3961b",
+      "id": "0a0p64v61",
+      "uiAttribs": {
+        "translate": {
+          "x": 981.2448079064072,
+          "y": 1527.8296169605364
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "temperature",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "temperature"
+        },
+        {
+          "name": "Number",
+          "value": 0.8
+        }
+      ]
+    },
+    {
+      "opId": "20f7bcab-ed71-45d1-9fae-d89aacf3961b",
+      "id": "l7tgpb9gw",
+      "uiAttribs": {
+        "translate": {
+          "x": 1002.4572663746796,
+          "y": 1588.008734193697
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "max_tokens",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "max_tokens"
+        },
+        {
+          "name": "Number",
+          "value": -1
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "625re3kya",
+      "uiAttribs": {
+        "translate": {
+          "x": 905.4398255997421,
+          "y": 2040.5291706676062
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null,
+        "extendTitle": "choices.0.delta.content"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "choices.0.delta.content"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Output",
+              "objIn": "ae1ju2szm",
+              "objOut": "625re3kya"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a9aed302-328a-4d33-bd3f-27e3e6690b9e",
+      "id": "8ybt9n260",
+      "uiAttribs": {
+        "translate": {
+          "x": 1437.167058518869,
+          "y": 1399.1142203747393
+        },
+        "subPatch": "6bhplsqxf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Result",
+              "objIn": "bahnzruzs",
+              "objOut": "8ybt9n260"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "eueb0x6eq",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1310.6423485525145
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "8w68bvfmn",
+              "objOut": "eueb0x6eq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "5c8d960c-2072-44e4-b9ad-7f74789fe3df",
+      "id": "1gy4025q6",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1501.444640795132
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Objects_1",
+          "value": 0,
+          "title": "add port"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Array",
+              "objIn": "kmuy6eozh",
+              "objOut": "1gy4025q6"
+            }
+          ]
+        },
+        {
+          "name": "Num Values",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "8w68bvfmn",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1353.9755803427863
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "role",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "role"
+        },
+        {
+          "name": "Value",
+          "value": "user"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "bahnzruzs",
+              "objOut": "8w68bvfmn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "bahnzruzs",
+      "uiAttribs": {
+        "translate": {
+          "x": 1413.167058518869,
+          "y": 1447.3684059339455
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "content",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "content"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Objects_0",
+              "portOut": "Result Object",
+              "objIn": "1gy4025q6",
+              "objOut": "bahnzruzs"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "yfpu9y1q8",
+              "objOut": "bahnzruzs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "ac5c6a64-f2af-408a-bbea-bbe7f96a3fb7",
+      "id": "ytwd6dkd0",
+      "uiAttribs": {
+        "translate": {
+          "x": 1104.6755006975743,
+          "y": 1863.8390099058856
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "625re3kya",
+              "objOut": "ytwd6dkd0"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "00l7lgdf5",
+              "objOut": "ytwd6dkd0"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "zuimfjvzo",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        },
+        {
+          "name": "Received Result",
+          "links": [
+            {
+              "portIn": "Update",
+              "portOut": "Received Result",
+              "objIn": "9t6ajmi3b",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        },
+        {
+          "name": "Started",
+          "links": [
+            {
+              "portIn": "Reset",
+              "portOut": "Started",
+              "objIn": "9t6ajmi3b",
+              "objOut": "ytwd6dkd0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "x0d4nad74",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1282.0616561829838
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "model",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "model"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "kmuy6eozh",
+              "objOut": "x0d4nad74"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a52722aa-0ca9-402c-a844-b7e98a6c6e60",
+      "id": "qti1mg6cs",
+      "uiAttribs": {
+        "translate": {
+          "x": 568.3042952983727,
+          "y": 1478.1209116206162
+        },
+        "subPatch": "6bhplsqxf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "string2",
+          "value": "/v1/chat/completions"
+        },
+        {
+          "name": "New Line",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "URL",
+              "portOut": "result",
+              "objIn": "lb434upoq",
+              "objOut": "qti1mg6cs"
+            },
+            {
+              "portIn": "String",
+              "portOut": "result",
+              "objIn": "mag9vsavh",
+              "objOut": "qti1mg6cs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1ed8f375-c3d7-4662-88c7-1afbc3dc6129",
+      "id": "ma7s9xxnl",
+      "uiAttribs": {
+        "translate": {
+          "x": 1039.412090971906,
+          "y": 896.4760131027332
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "Authorization",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "Authorization"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "headers",
+              "portOut": "Result Object",
+              "objIn": "lb434upoq",
+              "objOut": "ma7s9xxnl"
+            },
+            {
+              "portIn": "innerIn_i4feefw9n",
+              "portOut": "Result Object",
+              "objIn": "xrwhrdm97",
+              "objOut": "ma7s9xxnl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1b98cb80-8487-47d8-9a50-40a645c4e2b4",
+      "id": "lrwsjve5a",
+      "uiAttribs": {
+        "translate": {
+          "x": 1021.878553969399,
+          "y": 824.4167886317216
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result",
+              "objIn": "ma7s9xxnl",
+              "objOut": "lrwsjve5a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "00l7lgdf5",
+      "uiAttribs": {
+        "translate": {
+          "x": 1322.975638092438,
+          "y": 2232.9189860374668
+        },
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null,
+        "extendTitle": "error.message"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "error.message"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "Output",
+              "objIn": "bjgok3c6v",
+              "objOut": "00l7lgdf5"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "0b4d9229-8024-4a30-9cc0-f6653942c2e4",
+      "id": "bjgok3c6v",
+      "uiAttribs": {
+        "title": "var set",
+        "translate": {
+          "x": 1322.975638092438,
+          "y": 2272.9189860374668
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "#error_stream",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Variable",
+          "value": "error_stream"
+        }
+      ]
+    },
+    {
+      "opId": "47dfdb45-3364-451a-a288-acfa02510990",
+      "id": "kmuy6eozh",
+      "uiAttribs": {
+        "translate": {
+          "x": 921.6479007812607,
+          "y": 1374.8759011881707
+        },
+        "subPatch": "6bhplsqxf",
+        "extendTitle": "messages",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Key",
+          "value": "messages"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Result Object",
+              "objIn": "7us9bn3xv",
+              "objOut": "kmuy6eozh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "af548d59-d2d8-4ee6-b938-15e79200817c",
+      "id": "lb434upoq",
+      "uiAttribs": {
+        "translate": {
+          "x": 632.0141382574133,
+          "y": 1786.1599623339425
+        },
+        "loading": false,
+        "subPatch": "6bhplsqxf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true,
+        "extendTitle": "completions"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "URL",
+          "display": "file",
+          "title": "URL"
+        },
+        {
+          "name": "HTTP Method index",
+          "value": 1
+        },
+        {
+          "name": "HTTP Method",
+          "value": "POST"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Send Credentials",
+          "value": 0
+        },
+        {
+          "name": "Response Content index",
+          "value": 0
+        },
+        {
+          "name": "Response Content",
+          "value": "JSON",
+          "title": "Response Content"
+        },
+        {
+          "name": "Auto request",
+          "value": 0
+        },
+        {
+          "name": "Empty output on change",
+          "value": 1
+        },
+        {
+          "name": "Retry on error",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Response Json Object",
+          "links": [
+            {
+              "portIn": "Object",
+              "portOut": "Response Json Object",
+              "objIn": "7hhnklp1x",
+              "objOut": "lb434upoq"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Response Json Object",
+              "objIn": "2kjls3951",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Status Code",
+          "value": 200
+        },
+        {
+          "name": "Is Loading",
+          "links": [
+            {
+              "portIn": "innerIn_klu6r35ga",
+              "portOut": "Is Loading",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Has Error",
+          "links": [
+            {
+              "portIn": "innerIn_xs18z73z0",
+              "portOut": "Has Error",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Error",
+          "links": [
+            {
+              "portIn": "innerIn_aosval1gx",
+              "portOut": "Error",
+              "objIn": "xrwhrdm97",
+              "objOut": "lb434upoq"
+            }
+          ]
+        },
+        {
+          "name": "Duration MS",
+          "value": 768
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "5ffp4z914",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 435.29933634193367,
+          "y": 709.01888748699
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_13yb9bb9g",
+          "title": "Prompt",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "innerOut_13yb9bb9g",
+              "objIn": "8ybt9n260",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_v55wa68l8",
+          "title": "Value",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "innerOut_v55wa68l8",
+              "objIn": "x0d4nad74",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_axcfzi4h8",
+          "title": "API URL",
+          "links": [
+            {
+              "portIn": "string1",
+              "portOut": "innerOut_axcfzi4h8",
+              "objIn": "qti1mg6cs",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_qbpj78fjk",
+          "title": "Authentication",
+          "links": [
+            {
+              "portIn": "Value",
+              "portOut": "innerOut_qbpj78fjk",
+              "objIn": "ma7s9xxnl",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_864u0eigc",
+          "title": "Run",
+          "links": [
+            {
+              "portIn": "Reload",
+              "portOut": "innerOut_864u0eigc",
+              "objIn": "lb434upoq",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_gdgnnalkl",
+          "title": "Auto request",
+          "links": [
+            {
+              "portIn": "boolean",
+              "portOut": "innerOut_gdgnnalkl",
+              "objIn": "mpmqiz8q2",
+              "objOut": "5ffp4z914"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "xrwhrdm97",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 656.0141382574133,
+          "y": 2565.4819192135974
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_4sn5cnszp",
+          "title": "Result"
+        },
+        {
+          "name": "innerIn_i4feefw9n",
+          "title": "Result Object"
+        },
+        {
+          "name": "innerIn_klu6r35ga",
+          "title": "Is Loading"
+        },
+        {
+          "name": "innerIn_xs18z73z0",
+          "title": "Has Error"
+        },
+        {
+          "name": "innerIn_aosval1gx",
+          "title": "Error"
+        }
+      ]
+    },
+    {
+      "opId": "3f5167c5-5875-4a73-9e4b-443219c48c43",
+      "id": "7hhnklp1x",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 217.40740840396586,
+          "y": 2433.8999536887422
+        },
+        "extendTitle": "choices.0.message.content",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Path",
+          "value": "choices.0.message.content"
+        },
+        {
+          "name": "Output path if missing",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Output",
+          "links": [
+            {
+              "portIn": "innerIn_4sn5cnszp",
+              "portOut": "Output",
+              "objIn": "xrwhrdm97",
+              "objOut": "7hhnklp1x"
+            }
+          ]
+        },
+        {
+          "name": "Found",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "874380ae-4a10-4a53-92d9-4982f4c1f3a2",
+      "id": "n702oohd3",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 139.01980983174292,
+          "y": 1393.323766725153
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Changed",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "Changed",
+              "objIn": "q6wz4y59o",
+              "objOut": "n702oohd3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "874380ae-4a10-4a53-92d9-4982f4c1f3a2",
+      "id": "mag9vsavh",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 280.2619340777252,
+          "y": 1307.7292560184599
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Changed",
+          "links": [
+            {
+              "portIn": "exe 1",
+              "portOut": "Changed",
+              "objIn": "q6wz4y59o",
+              "objOut": "mag9vsavh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+      "id": "q6wz4y59o",
+      "uiAttribs": {
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 212.03087596625514,
+          "y": 1537.0349265713292
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "Cancel",
+              "portOut": "trigger 0",
+              "objIn": "umanmek31",
+              "objOut": "q6wz4y59o"
+            }
+          ]
+        },
+        {
+          "name": "trigger 2",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "trigger 2",
+              "objIn": "umanmek31",
+              "objOut": "q6wz4y59o"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "f4ff66b0-8500-46f7-9117-832aea0c2750",
+      "id": "umanmek31",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 213.95950175116792,
+          "y": 1658.1346260045639
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "delay",
+          "value": 0.1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "next",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "next",
+              "objIn": "mpmqiz8q2",
+              "objOut": "umanmek31"
+            }
+          ]
+        },
+        {
+          "name": "Delaying",
+          "value": false
+        }
+      ]
+    },
+    {
+      "opId": "9549e2ed-a544-4d33-a672-05c7854ccf5d",
+      "id": "mpmqiz8q2",
+      "uiAttribs": {
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 432,
+          "y": 1740
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "then",
+          "links": [
+            {
+              "portIn": "Reload",
+              "portOut": "then",
+              "objIn": "lb434upoq",
+              "objOut": "mpmqiz8q2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "zuimfjvzo",
+      "uiAttribs": {
+        "height": 821.9592221076236,
+        "width": 941.8623267350988,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": 1338.03514976149,
+          "y": 2408.6362336329926
+        },
+        "extendTitle": null,
+        "subPatch": "6bhplsqxf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "2kjls3951",
+      "uiAttribs": {
+        "height": 415.37140967807136,
+        "width": 422.2157064670598,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 242.3976347948601,
+          "y": 1950.7056936199924
+        },
+        "extendTitle": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 0
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "yfpu9y1q8",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "6bhplsqxf",
+        "translate": {
+          "x": 1630.2458509363078,
+          "y": 1642.3903742375655
+        },
+        "extendTitle": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

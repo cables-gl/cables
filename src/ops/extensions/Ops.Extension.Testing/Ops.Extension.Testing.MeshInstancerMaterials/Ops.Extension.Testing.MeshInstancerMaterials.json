@@ -1,0 +1,32 @@
+{
+    "id": "3d1d2e98-b47d-46ac-b0a0-8410d00ae384",
+    "created": 1716466895677,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716466895716
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716466896326
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "svlvq58ex",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

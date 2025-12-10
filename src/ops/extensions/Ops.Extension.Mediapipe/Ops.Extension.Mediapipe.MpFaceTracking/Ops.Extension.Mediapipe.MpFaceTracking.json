@@ -1,0 +1,145 @@
+{
+    "id": "57df26fc-916c-469b-a343-83572c731025",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1608577899421
+        },
+        {
+            "message": " added lib: hands.js",
+            "author": "pandur",
+            "date": 1608577918392
+        },
+        {
+            "message": " added lib: camera_utils.js",
+            "author": "pandur",
+            "date": 1608578877969
+        },
+        {
+            "message": "Ops.User.cables.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1608582896776
+        },
+        {
+            "message": "cloned op from Ops.Admin.Mediapipe.MpHands",
+            "author": "cables",
+            "date": 1608589845823
+        },
+        {
+            "message": " added lib: mp_face_mesh.js",
+            "author": "cables",
+            "date": 1608589859863
+        },
+        {
+            "message": "Ops.User.cables.MpFace renamed to Ops.Admin.Mediapipe.MpFace",
+            "author": "cables",
+            "date": 1608591149628
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.MpFace",
+            "author": "pandur",
+            "date": 1611052249165
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpFace renamed to Ops.Admin.Mediapipe.MpFace",
+            "author": "stephan",
+            "date": 1613553553746
+        },
+        {
+            "message": "Ops.Admin.Mediapipe.MpFace renamed to Ops.Dev.Mediapipe.MpFace",
+            "author": "pandur",
+            "date": 1623913587428
+        },
+        {
+            "message": " removed lib: mp_hands.js",
+            "author": "pandur",
+            "date": 1651570340371
+        },
+        {
+            "message": " removed lib: mp_face_mesh.js",
+            "author": "pandur",
+            "date": 1651570491801
+        },
+        {
+            "message": " added lib: mp_face.js",
+            "author": "pandur",
+            "date": 1651570499544
+        },
+        {
+            "message": "Ops.Dev.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.Mediapipe.MpFace",
+            "author": "pandur",
+            "date": 1652089128241
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.MpFace",
+            "author": "pandur",
+            "date": 1652089519018
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpFace renamed to Ops.Libs.Mediapipe.MpFaceTracking",
+            "author": "stephan",
+            "date": 1654013238224
+        },
+        {
+            "message": "Ops.Libs.Mediapipe.MpFaceTracking renamed to Ops.Extension.Mediapipe.MpFaceTracking",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915589785
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1608589845823,
+    "libs": [
+        "mp_camera_utils.js",
+        "mp_face.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Refine LandMarks",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Get face mesh from webcam/video using mediapipe library",
+    "issues": "",
+    "caniusequery": "",
+    "relatedops": [
+        "Ops.Libs.Mediapipe.FaceMesh"
+    ],
+    "youtubeids": [],
+    "exampleProjectId": "wznlp4",
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Source webcam/video as HTML element"
+            },
+            {
+                "name": "Refine LandMarks",
+                "text": "Enables detailed eyes and lips landmarks and adds landmarks for iris"
+            }
+        ]
+    }
+}

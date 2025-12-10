@@ -1,0 +1,33 @@
+{
+    "id": "6e4fe1c0-7841-46bd-b924-495e1379aec6",
+    "created": 1740738135336,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740738135361
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.RttAntiAlias",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740738156440
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "np6phy22o",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

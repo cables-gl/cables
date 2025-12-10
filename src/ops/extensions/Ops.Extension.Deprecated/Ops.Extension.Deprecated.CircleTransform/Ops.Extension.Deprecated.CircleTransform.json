@@ -1,0 +1,122 @@
+{
+    "summary": "Transform following Meshes around a Circle",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "percent",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Absolute",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "index",
+                "subType": "number"
+            }
+        ]
+    },
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "4e96d5a2-a1ec-4f83-954d-7c34a9021e9c",
+    "created": 1512035143187,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "segments",
+                "text": "Amount of segments to render"
+            },
+            {
+                "name": "radius",
+                "text": "Radius of the transform from the center"
+            },
+            {
+                "name": "percent",
+                "text": "Percentage of segments to render "
+            },
+            {
+                "name": "Absolute",
+                "text": "Mirror the segments with absolute co-ordinates"
+            },
+            {
+                "name": "Flip",
+                "text": "Flip the segments"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate each segment with the transform"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "index",
+                "text": "index number of each transform"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added absolute number mode",
+            "author": "pandur",
+            "date": 1574692630839
+        },
+        {
+            "message": "Ops.Gl.Matrix.CircleTransform renamed to Ops.Deprecated.Gl.Matrix.CircleTransform",
+            "author": "pandur",
+            "date": 1671004752128
+        },
+        {
+            "message": "deprecated, use Ops.Array.PointArray.CircularPoints",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1671033974564
+        }
+    ],
+    "issues": "",
+    "youtubeids": [
+        "1BtgdAfBLlY"
+    ],
+    "exampleProjectId": "t4nrH-",
+    "coreLibs": [
+        "cgl"
+    ]
+}

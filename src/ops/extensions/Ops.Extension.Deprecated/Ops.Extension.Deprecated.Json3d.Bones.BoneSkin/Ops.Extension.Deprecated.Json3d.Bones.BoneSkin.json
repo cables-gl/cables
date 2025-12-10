@@ -1,0 +1,49 @@
+{
+    "authorName": "pandur",
+    "id": "aef4eb37-53ca-43b4-a9db-3bbd8aa00906",
+    "created": 1515411727085,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "MeshIndex",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Uses a geometry with baked joints animations in conjunction with the BoneSystem op to bind your geometry mesh to your joints animations. ",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.Bones.BoneSkin renamed to Ops.Deprecated.Json3d.Bones.BoneSkin",
+            "author": "pandur",
+            "date": 1654587790564
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

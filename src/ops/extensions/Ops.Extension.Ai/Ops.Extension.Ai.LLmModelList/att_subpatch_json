@@ -1,0 +1,336 @@
+{
+  "ops": [
+    {
+      "opId": "7c06a818-9c07-493a-8c4f-04eb2c7796f5",
+      "id": "5zcj8ogu5",
+      "uiAttribs": {
+        "extendTitlePort": "key",
+        "translate": {
+          "x": 1475.6503176205433,
+          "y": -380.019732403277
+        },
+        "subPatch": "4za3cfppf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "key",
+          "value": "data"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "innerIn_z2gtag4y7",
+              "portOut": "result",
+              "objIn": "fvupjn6yi",
+              "objOut": "5zcj8ogu5"
+            }
+          ]
+        },
+        {
+          "name": "Length",
+          "value": 342
+        }
+      ]
+    },
+    {
+      "opId": "d09bc53e-9f52-4872-94c7-4ef777512222",
+      "id": "zm9tstg5m",
+      "uiAttribs": {
+        "height": 251.81906382145257,
+        "width": 671.4797561104158,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "translate": {
+          "x": 1840.311912073764,
+          "y": -432.96524258012494
+        },
+        "extendTitle": null,
+        "subPatch": "4za3cfppf",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Experimental Stringify",
+          "value": 1
+        },
+        {
+          "name": "Sort Keys",
+          "value": 0
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "a52722aa-0ca9-402c-a844-b7e98a6c6e60",
+      "id": "4s26phq0n",
+      "uiAttribs": {
+        "translate": {
+          "x": 1541.7676092705597,
+          "y": -644.8246007652048
+        },
+        "subPatch": "4za3cfppf",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "string2",
+          "value": "/v1/models"
+        },
+        {
+          "name": "New Line",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "URL",
+              "portOut": "result",
+              "objIn": "0b8dh9rcf",
+              "objOut": "4s26phq0n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "af548d59-d2d8-4ee6-b938-15e79200817c",
+      "id": "0b8dh9rcf",
+      "uiAttribs": {
+        "translate": {
+          "x": 1475.6503176205433,
+          "y": -504.0080319763008
+        },
+        "loading": false,
+        "subPatch": "4za3cfppf",
+        "extendTitle": "models",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "URL",
+          "display": "file",
+          "title": "URL"
+        },
+        {
+          "name": "HTTP Method index",
+          "value": 0
+        },
+        {
+          "name": "HTTP Method",
+          "value": "GET"
+        },
+        {
+          "name": "Request Body",
+          "value": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Send Credentials",
+          "value": 0
+        },
+        {
+          "name": "Response Content index",
+          "value": 0
+        },
+        {
+          "name": "Response Content",
+          "value": "JSON",
+          "title": "Response Content"
+        },
+        {
+          "name": "Auto request",
+          "value": 1
+        },
+        {
+          "name": "Empty output on change",
+          "value": 1
+        },
+        {
+          "name": "Retry on error",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Response Json Object",
+          "links": [
+            {
+              "portIn": "data",
+              "portOut": "Response Json Object",
+              "objIn": "5zcj8ogu5",
+              "objOut": "0b8dh9rcf"
+            },
+            {
+              "portIn": "Object",
+              "portOut": "Response Json Object",
+              "objIn": "zm9tstg5m",
+              "objOut": "0b8dh9rcf"
+            }
+          ]
+        },
+        {
+          "name": "Status Code",
+          "value": 200
+        },
+        {
+          "name": "Is Loading",
+          "links": [
+            {
+              "portIn": "innerIn_42rvai2nv",
+              "portOut": "Is Loading",
+              "objIn": "fvupjn6yi",
+              "objOut": "0b8dh9rcf"
+            }
+          ]
+        },
+        {
+          "name": "Has Error",
+          "links": [
+            {
+              "portIn": "innerIn_jcju8npa2",
+              "portOut": "Has Error",
+              "objIn": "fvupjn6yi",
+              "objOut": "0b8dh9rcf"
+            }
+          ]
+        },
+        {
+          "name": "Error",
+          "links": [
+            {
+              "portIn": "innerIn_ozg9pnd1z",
+              "portOut": "Error",
+              "objIn": "fvupjn6yi",
+              "objOut": "0b8dh9rcf"
+            }
+          ]
+        },
+        {
+          "name": "Duration MS",
+          "value": 205
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "as0j9o6tv",
+      "uiAttribs": {
+        "subPatch": "4za3cfppf",
+        "translate": {
+          "x": 1475.6503176205433,
+          "y": -724.8246007652048
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_30ya1e4g1",
+          "title": "string1",
+          "links": [
+            {
+              "portIn": "string1",
+              "portOut": "innerOut_30ya1e4g1",
+              "objIn": "4s26phq0n",
+              "objOut": "as0j9o6tv"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_ksiv4yqm7",
+          "title": "headers",
+          "links": [
+            {
+              "portIn": "headers",
+              "portOut": "innerOut_ksiv4yqm7",
+              "objIn": "0b8dh9rcf",
+              "objOut": "as0j9o6tv"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_my3mcj546",
+          "title": "Reload",
+          "links": [
+            {
+              "portIn": "Reload",
+              "portOut": "innerOut_my3mcj546",
+              "objIn": "0b8dh9rcf",
+              "objOut": "as0j9o6tv"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "fvupjn6yi",
+      "uiAttribs": {
+        "subPatch": "4za3cfppf",
+        "translate": {
+          "x": 1475.6503176205433,
+          "y": 40
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_z2gtag4y7",
+          "title": "result"
+        },
+        {
+          "name": "innerIn_42rvai2nv",
+          "title": "Is Loading"
+        },
+        {
+          "name": "innerIn_jcju8npa2",
+          "title": "Has Error"
+        },
+        {
+          "name": "innerIn_ozg9pnd1z",
+          "title": "Error"
+        }
+      ]
+    }
+  ]
+}

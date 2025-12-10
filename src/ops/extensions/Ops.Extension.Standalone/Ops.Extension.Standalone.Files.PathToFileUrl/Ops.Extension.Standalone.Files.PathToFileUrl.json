@@ -1,0 +1,46 @@
+{
+    "id": "b47d48bc-5b10-43af-be44-fd7de3a93cc1",
+    "created": 1727174106619,
+    "license": "MIT",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "values": [
+                    "System",
+                    "Windows",
+                    "Posix"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "FileUrl"
+            }
+        ]
+    },
+    "authorName": "stephan",
+    "summary": "convert local path to file-url",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1727176572264
+        }
+    ],
+    "exampleProjectId": "pekPAs"
+}

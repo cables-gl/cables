@@ -1,0 +1,41 @@
+{
+    "id": "c67f656a-0028-4ad2-894a-fb6c903e30e3",
+    "created": 1724231959419,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724229085946
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Path"
+            },
+            {
+                "type": 1,
+                "name": "Execute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Exists",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Check if a file exists on the local file system",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "XlQrun"
+}

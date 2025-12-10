@@ -1,0 +1,45 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Max Circles",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "index",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "radius",
+                "subType": "number"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "f71b2cda-9097-4bfb-883b-f6fe4c33937f",
+    "created": 1619965849429,
+    "changelog": []
+}

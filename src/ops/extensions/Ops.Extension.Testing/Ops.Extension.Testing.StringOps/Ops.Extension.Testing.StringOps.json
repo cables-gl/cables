@@ -1,0 +1,33 @@
+{
+    "id": "6810f58d-307d-42a9-8f90-f4d80a99f6fd",
+    "created": 1740753599653,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740753599673
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.StringOps",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740753643002
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "xawjsc4dm",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

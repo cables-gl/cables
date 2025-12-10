@@ -1,0 +1,57 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Interpolate smoothly between two input values",
+    "authorName": "pandur",
+    "id": "b5c41eea-ac30-4ac7-9481-eefe42e8199c",
+    "created": 1651821384844,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "ntfPz6",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Math.SmoothStep",
+            "author": "pandur",
+            "date": 1651821384844
+        },
+        {
+            "message": "Ops.User.pandur.SmoothStepV2 renamed to Ops.Math.SmoothStep_v2",
+            "author": "pandur",
+            "date": 1651821441925
+        },
+        {
+            "message": "op Math.SmoothStep_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1762249056566
+        }
+    ],
+    "caniusequery": ""
+}

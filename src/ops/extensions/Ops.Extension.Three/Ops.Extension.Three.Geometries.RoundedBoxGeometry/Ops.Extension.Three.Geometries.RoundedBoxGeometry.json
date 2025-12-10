@@ -1,0 +1,79 @@
+{
+    "id": "68dcf402-75e8-4a96-a577-15c2ffac07d7",
+    "created": 1764937952000,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764937952000
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Depth",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three",
+        "three_addons_geometries"
+    ],
+    "summary": "Create a rounded box/cube geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Width",
+                "text": "The width along the X axis"
+            },
+            {
+                "name": "Height",
+                "text": "The height along the Y axis"
+            },
+            {
+                "name": "Depth",
+                "text": "The depth along the Z axis"
+            },
+            {
+                "name": "Segments",
+                "text": "Number of segments that form the rounded corners"
+            },
+            {
+                "name": "Radius",
+                "text": "The radius of the rounded corners"
+            }
+        ]
+    }
+}

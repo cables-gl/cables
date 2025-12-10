@@ -1,0 +1,52 @@
+{
+    "id": "db9473e3-3942-4682-897d-f6bb7076d278",
+    "created": 1764936470346,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764934310021
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Detail",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a icosahedron geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the icosahedron"
+            },
+            {
+                "name": "Detail",
+                "text": "Add vertices"
+            }
+        ]
+    },
+    "exampleProjectId": "5ws5x4"
+}

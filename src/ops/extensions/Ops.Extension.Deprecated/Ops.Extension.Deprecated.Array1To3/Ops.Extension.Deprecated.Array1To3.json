@@ -1,0 +1,62 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0d67fdf1-8e60-465e-9897-6aae6676e4c9",
+    "created": 1513607081124,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array1x"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array3x"
+            },
+            {
+                "type": 0,
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "convert array1 to array3",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array1x",
+                "text": "[12,12,12]"
+            },
+            {
+                "name": "Array3x",
+                "text": " [1,12,0,2,12,0,3,12,0]"
+            },
+            {
+                "name": "Total points",
+                "text": "12"
+            },
+            {
+                "name": "Array length",
+                "text": "3"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "MFBXQx",
+    "changelog": [
+        {
+            "message": "op was deprecated - use Ops.Array.ArraySwizzle",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1715764790899
+        }
+    ]
+}

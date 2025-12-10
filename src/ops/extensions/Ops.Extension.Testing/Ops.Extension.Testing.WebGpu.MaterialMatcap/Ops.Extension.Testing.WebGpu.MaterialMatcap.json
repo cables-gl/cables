@@ -1,0 +1,33 @@
+{
+    "id": "f4b6189c-36f2-4e45-8632-0160f0fe45dc",
+    "created": 1743090918587,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743090918588
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.MaterialMatcap",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743090948011
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "qw7jefyox",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

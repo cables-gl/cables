@@ -1,0 +1,81 @@
+{
+    "id": "436442d9-0fc2-4567-bf70-3299f146c59a",
+    "created": 1733923049112,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1733923049112
+        },
+        {
+            "message": "Extension.WebGpu.Dev.RenderToTexture renamed to Ops.Extension.WebGpu.RenderToTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1744376835117
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Size index",
+                "values": [
+                    "Canvas",
+                    "Manual"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgp_webgpuop",
+        "cgp"
+    ],
+    "exampleProjectId": "pyXXKB",
+    "docs": {
+        "ports": []
+    },
+    "summary": "render into a texture"
+}

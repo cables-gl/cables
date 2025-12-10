@@ -1,0 +1,33 @@
+{
+    "id": "65861ba3-132d-4e11-8693-7bf232948378",
+    "created": 1740736009084,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740736009110
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch7 renamed to Ops.Extension.Testing.GlBasicGlRead",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740736044931
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "vhnd3kxi8",
+                "uititle": "exe"
+            }
+        ],
+        "portsOut": []
+    }
+}

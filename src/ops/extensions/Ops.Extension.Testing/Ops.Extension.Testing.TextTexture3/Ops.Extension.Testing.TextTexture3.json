@@ -1,0 +1,33 @@
+{
+    "id": "db316ddf-f195-4556-ad3c-8ced6f05e67d",
+    "created": 1741264921447,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741264921471
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch10 renamed to Ops.Extension.Testing.TextTexture3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265064630
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "xi5tmkdx1",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

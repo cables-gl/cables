@@ -1,0 +1,52 @@
+{
+    "id": "f85574bb-3869-4a14-8dcc-70414bd8cfcd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1642189439092,
+            "type": "new"
+        },
+        {
+            "message": "handle prefixassetpath correctly for url input",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1733143157266
+        },
+        {
+            "message": "Handle file format error",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1741771322842
+        }
+    ],
+    "libs": [
+        "opentype.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Font File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Opentype Font",
+                "objType": "opentype"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1642189494325,
+    "summary": "Load OTF & TTF fonts via OpenType library",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

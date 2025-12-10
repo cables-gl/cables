@@ -1,0 +1,63 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Language"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Confidence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "New Result"
+            },
+            {
+                "type": 0,
+                "name": "Started",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "e7ccd7a9-54e9-4637-b8cb-011708dfc0dd",
+    "created": 1537933698978,
+    "summary": "speech to text recognition",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+
+    "youtubeids": [],
+    "exampleProjectId": "9p7kw4",
+    "changelog": [
+        {
+            "message": "Ops.Audio.SpeechRecognition renamed to Ops.Extension.Voice.SpeechRecognition",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686916595118
+        }
+    ]
+}

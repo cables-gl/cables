@@ -1,0 +1,109 @@
+{
+  "ops": [
+    {
+      "opId": "a16c565a-574d-48d2-a95e-1bdce96dc00f",
+      "id": "yew5y1k4m",
+      "uiAttribs": {
+        "translate": {
+          "x": 762.5325621922866,
+          "y": 2791.6249828988803
+        },
+        "subPatch": "lityixi2i",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "pnlajyuok",
+              "objOut": "yew5y1k4m"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "6ee346d0-614e-4709-91a5-dc21ae975caf",
+      "id": "pnlajyuok",
+      "uiAttribs": {
+        "subPatch": "lityixi2i",
+        "translate": {
+          "x": 762.5325621922866,
+          "y": 2945.904792328928
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "radius",
+          "value": 1
+        },
+        {
+          "name": "stacks",
+          "value": 4
+        },
+        {
+          "name": "slices",
+          "value": 4
+        },
+        {
+          "name": "Filloffset",
+          "value": 1
+        },
+        {
+          "name": "Render",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "qgxk5vc2q",
+      "uiAttribs": {
+        "subPatch": "lityixi2i",
+        "translate": {
+          "x": 762.5325621922866,
+          "y": 2499.4874625991947
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_mvh7lcans",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_mvh7lcans",
+              "objIn": "yew5y1k4m",
+              "objOut": "qgxk5vc2q"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "0a3sp9hei",
+      "uiAttribs": {
+        "subPatch": "lityixi2i",
+        "translate": {
+          "x": 762.5325621922866,
+          "y": 3197.5446618951146
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

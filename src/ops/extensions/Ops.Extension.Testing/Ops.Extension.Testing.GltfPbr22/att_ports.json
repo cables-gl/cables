@@ -1,0 +1,47 @@
+{
+    "ports": [
+        {
+            "id": "si0ni96ke",
+            "title": "exe",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "sctq1r681",
+            "title": "glb File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/654a1089765b6f277db8e991/DamagedHelmet.glb",
+            "order": 1
+        },
+        {
+            "id": "s8gc9utlu",
+            "title": "File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/664711fbbb71706c00625ead/helm_albedo.webp",
+            "order": 2
+        },
+        {
+            "id": "1q0owu3w6",
+            "title": "File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/664711fbbb71706c00625ead/helm_aorm.webp",
+            "order": 3
+        },
+        {
+            "id": "hs0fvs2ks",
+            "title": "File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/664711fbbb71706c00625ead/helm_normal.webp",
+            "order": 4
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "4e65d957-4502-4de1-baec-aa23843dbd3c",
+    "created": 1741267318149,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741267318171
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.MaterialAttributes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741267352210
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "xan6v4mbi",
+                "uititle": "exe 6"
+            }
+        ],
+        "portsOut": []
+    }
+}

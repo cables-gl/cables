@@ -1,0 +1,79 @@
+{
+    "id": "7b232c63-28e7-4dea-a894-7832bb918746",
+    "created": 1764686869071,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cap Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radial Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a capsule geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the capsule"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the middle section"
+            },
+            {
+                "name": "Curve Segments",
+                "text": "Number of curve segments used to build each cap"
+            },
+            {
+                "name": "Radial Segments",
+                "text": "Number of segmented faces around the circumference of the capsule"
+            },
+            {
+                "name": "Height Segments",
+                "text": "Number of rows of faces along the height of the middle section"
+            }
+        ]
+    },
+    "exampleProjectId": "Fwh6w4"
+}

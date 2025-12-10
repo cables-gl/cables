@@ -1,0 +1,131 @@
+{
+    "id": "062f3b4d-1ab0-41c3-bb46-0b81243b028e",
+    "created": 1746054984326,
+    "license": "MIT",
+    "authorName": "sonofluiz",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "sonofluiz",
+            "date": 1746054984352
+        },
+        {
+            "message": "Patch.PhORckJ.MeSpeak renamed to Ops.Extension.Voice.MeSpeak",
+            "type": "rename",
+            "author": "sonofluiz",
+            "date": 1763808237652
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 1,
+                "name": "Say"
+            },
+            {
+                "type": 0,
+                "name": "Amplitude",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pitch",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Speed (WPM)",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Voice index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Word Gap",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Variants index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Line-break length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Capitals",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Punctuation"
+            },
+            {
+                "type": 0,
+                "name": "No Stop",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "UTF16",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "SSML",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Log Console",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pan",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Out",
+                "objType": "audioNode"
+            },
+            {
+                "type": 0,
+                "name": "Speaking",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Voice Loaded",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "dependencies": [
+        {
+            "src": "./mespeak.js",
+            "type": "commonjs"
+        },
+        {
+            "src": "./mespeak-core.js",
+            "type": "commonjs"
+        }
+    ],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

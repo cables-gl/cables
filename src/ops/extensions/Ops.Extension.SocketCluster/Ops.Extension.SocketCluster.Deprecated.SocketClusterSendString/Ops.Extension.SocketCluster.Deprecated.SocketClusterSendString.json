@@ -1,0 +1,60 @@
+{
+    "authorName": "stephan",
+    "id": "eb36749d-dbd2-444d-a5cf-b15f7067198c",
+    "created": 1584697994599,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "send"
+            },
+            {
+                "type": 2,
+                "name": "socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "topic"
+            },
+            {
+                "type": 5,
+                "name": "data"
+            },
+            {
+                "type": 0,
+                "name": "delay (ms)",
+                "subType": "integer"
+            }
+        ]
+    },
+    "summary": "sends a string via socketcluster/websocket",
+    "docs": {
+        "ports": [
+            {
+                "name": "send",
+                "text": "execute"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "data",
+                "text": "string"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Net.SocketCluster.SocketClusterSendString renamed to Ops.Extension.SocketCluster.SocketClusterSendString",
+            "author": "stephan",
+            "date": 1671003500870
+        }
+    ],
+    "license": "MIT"
+}

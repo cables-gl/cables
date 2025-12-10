@@ -1,0 +1,33 @@
+{
+    "id": "74aa6c81-7edb-44ce-865f-40937fd0c705",
+    "created": 1743091277674,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743091277675
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.MaterialFrontBackside",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743091300062
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "olwxqen5n",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

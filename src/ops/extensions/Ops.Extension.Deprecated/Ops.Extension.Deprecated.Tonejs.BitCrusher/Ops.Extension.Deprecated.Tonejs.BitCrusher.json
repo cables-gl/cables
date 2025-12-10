@@ -1,0 +1,34 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Bitcrusher downsamples the incoming signal to a different bitdepth",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Bits"
+            },
+            {
+                "type": "4",
+                "name": "Wet"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "b8d1dd48-4299-4b6f-b0ee-bf30f9fa95ad",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

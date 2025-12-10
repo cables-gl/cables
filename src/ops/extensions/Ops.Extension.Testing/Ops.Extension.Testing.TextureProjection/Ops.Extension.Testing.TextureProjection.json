@@ -1,0 +1,32 @@
+{
+    "id": "fa1cb7ea-440d-4b5c-bbaf-3c2c070fa6c1",
+    "created": 1716890501096,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716890501133
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1716890501607
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "f6bg8yipf",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

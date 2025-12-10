@@ -1,0 +1,1 @@
+World operator is a container for a physics simulation and/or your Cast Ray setup for 3D navigation. After adjusting your simulation settings, you will need to reset the World to have the new settings take effect.

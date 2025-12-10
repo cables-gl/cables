@@ -1,0 +1,39 @@
+{
+    "summary": "triggers when object input has changed",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "andro",
+    "id": "d1985c9e-b537-4c71-b75f-d634ade4b970",
+    "created": 1538643612629,
+    "changelog": [
+        {
+            "message": "Ops.ObjectChanged renamed to Ops.Deprecated.ObjectChanged",
+            "author": "pandur",
+            "date": 1671005801047
+        },
+        {
+            "message": "use Ops.Trigger.TriggerOnChangeObject",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1671035467551
+        },
+        {
+            "message": "op Ops.Deprecated.ObjectChanged was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1724836754401
+        }
+    ]
+}

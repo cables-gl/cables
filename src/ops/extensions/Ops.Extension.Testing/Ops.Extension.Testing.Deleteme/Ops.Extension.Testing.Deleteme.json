@@ -1,0 +1,33 @@
+{
+    "id": "5c3fae37-2de5-4e45-b08c-6bfc852aecf6",
+    "created": 1741349244822,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741349244845
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch9 renamed to Ops.Extension.Testing.Deleteme",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741349284073
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "gingsriom",
+                "uititle": "Input_0"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "id": "39e753ab-6f29-4d71-8a39-d89cbe89b228",
+    "created": 1740739844436,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740739844465
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.TextureEffectGradients",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740739865141
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "xnpopxzzg",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

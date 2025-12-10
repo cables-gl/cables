@@ -1,0 +1,53 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "474d4806-ef96-4898-84f7-1d062684dfd0",
+    "created": 1505309334253,
+    "summary": "Use custom shader as a texture effect",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "youtubeids": [],
+    "exampleProjectId": "EeNqXV",
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.CustomTextureEffectShader renamed to Ops.Deprecated.Gl.TextureEffects.CustomTextureEffectShader",
+            "author": "pandur",
+            "date": 1665557282781
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

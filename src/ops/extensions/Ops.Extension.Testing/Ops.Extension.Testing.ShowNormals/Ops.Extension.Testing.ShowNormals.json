@@ -1,0 +1,33 @@
+{
+    "id": "16dc1569-7eb8-45ce-9b7b-b4502094a57a",
+    "created": 1741265576059,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741265576080
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.ShowNormals",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741265601452
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "iyiwyqeey",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

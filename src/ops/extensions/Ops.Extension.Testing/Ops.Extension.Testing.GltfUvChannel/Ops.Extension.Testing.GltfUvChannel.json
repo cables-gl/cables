@@ -1,0 +1,38 @@
+{
+    "id": "5a4fba20-3949-480c-94c2-52468ffc3b5d",
+    "created": 1740754540234,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740754540258
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.GltfUvChannel",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740754569821
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "3ag0l5i42",
+                "uititle": "exe 0"
+            },
+            {
+                "type": 5,
+                "name": "kum9etdeb",
+                "uititle": "glb File"
+            }
+        ],
+        "portsOut": []
+    }
+}

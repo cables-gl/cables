@@ -1,0 +1,33 @@
+{
+    "id": "45b4aec6-7546-4a63-9445-791a13a6e7d3",
+    "created": 1741349679865,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741349679887
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch9 renamed to Ops.Extension.Testing.OldOpsMeshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1741349703452
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "0q6kaxu7e",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

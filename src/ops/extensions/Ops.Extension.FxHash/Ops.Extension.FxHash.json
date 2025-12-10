@@ -1,0 +1,6 @@
+{
+    "name": "Ops.Extension.FxHash.",
+    "summary": "collection of ops to use cables with fxhash nft platform",
+    "description": "docs: https://cables.gl/op/Ops.Extension.FxHash.FxHash",
+    "visibility": "public"
+}

@@ -1,0 +1,66 @@
+{
+    "id": "81134360-e885-4e0a-b236-d8983d3f2388",
+    "created": 1762186117088,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762186117119
+        },
+        {
+            "message": "Patch.Pp8qZu1.SubPatch0 renamed to Ops.Extension.Ai.LLmModelList",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1762187007613
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "30ya1e4g1",
+                "uititle": "string1"
+            },
+            {
+                "type": 2,
+                "name": "ksiv4yqm7",
+                "uititle": "headers"
+            },
+            {
+                "type": 1,
+                "name": "my3mcj546",
+                "uititle": "Reload"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "z2gtag4y7",
+                "uititle": "result"
+            },
+            {
+                "type": 0,
+                "name": "42rvai2nv",
+                "uititle": "Is Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "jcju8npa2",
+                "uititle": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "ozg9pnd1z",
+                "uititle": "Error"
+            }
+        ]
+    }
+}

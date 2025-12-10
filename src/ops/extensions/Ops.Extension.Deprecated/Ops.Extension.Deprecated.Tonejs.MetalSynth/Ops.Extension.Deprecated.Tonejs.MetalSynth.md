@@ -1,0 +1,1 @@
+A highly inharmonic and spectrally complex source with a highpass filter and amplitude envelope which is good for making metalophone sounds. Based on CymbalSynth by [@polyrhythmatic](https://github.com/polyrhythmatic). Inspiration from [Sound on Sound](http://www.soundonsound.com/sos/jul02/articles/synthsecrets0702.asp).

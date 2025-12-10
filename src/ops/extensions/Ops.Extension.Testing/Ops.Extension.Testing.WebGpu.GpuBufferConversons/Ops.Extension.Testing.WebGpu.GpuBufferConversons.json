@@ -1,0 +1,33 @@
+{
+    "id": "d5db0346-2e78-417c-ba31-5051df766c9c",
+    "created": 1743093764935,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1743093764935
+        },
+        {
+            "message": "Patch.PELv2yG.SubPatch1 renamed to Ops.Extension.Testing.WebGpu.GpuBufferConversons",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1743093870540
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "53nc07ubx",
+                "uititle": "Trigger"
+            }
+        ],
+        "portsOut": []
+    }
+}

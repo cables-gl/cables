@@ -1,0 +1,62 @@
+{
+    "id": "49d8890b-1f47-444a-9f67-4d059b877ad4",
+    "created": 1737711008844,
+    "license": "MIT",
+    "authorName": "pandur",
+    "summary": "",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "nqa9m1uyx",
+                "uititle": "Value"
+            },
+            {
+                "type": 2,
+                "name": "v956ql4r2",
+                "uititle": "texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": []
+    },
+    "hasExample": false,
+    "libs": [],
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1737711008871
+        },
+        {
+            "message": "Patch.PngoTMA.SubPatch2 renamed to Ops.Patch.PngoTMA.Testing",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1737711232898
+        },
+        {
+            "message": "Patch.PngoTMA.Testing renamed to Ops.Patch.PAh3NTD.Testing2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560972997
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1742375928537
+        },
+        {
+            "message": "Patch.P0wPDSF.Testing2 renamed to Ops.Extension.Testing.TestSystem",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1742377545664
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "id": "629ecf46-c5d4-4449-8541-c22472d06118",
+    "created": 1764687396358,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Radial Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Open Ended",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Theta Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Theta Length",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "geometry",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Create a cone geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Radius",
+                "text": "Radius of the cone base"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the cone"
+            },
+            {
+                "name": "Radial Segments",
+                "text": "Number of segmented faces around the circumference of the cone"
+            },
+            {
+                "name": "Height Segments",
+                "text": "Number of rows of faces along the height of the cone"
+            },
+            {
+                "name": "Open Ended",
+                "text": "Whether the base of the cone is open or capped"
+            },
+            {
+                "name": "Theta Start",
+                "text": "Start angle for first segment"
+            },
+            {
+                "name": "Theta Length",
+                "text": "The central angle, often called theta, of the circular sector"
+            }
+        ]
+    }
+}

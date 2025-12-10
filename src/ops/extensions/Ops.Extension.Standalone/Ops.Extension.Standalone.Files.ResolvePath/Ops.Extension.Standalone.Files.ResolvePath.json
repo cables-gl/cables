@@ -1,0 +1,35 @@
+{
+    "id": "5512713d-4db7-46bf-9b99-f0049b316a4d",
+    "created": 1724854393422,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724854393423
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Resolves a paths into an absolute path",
+    "docs": {
+        "ports": []
+    }
+}

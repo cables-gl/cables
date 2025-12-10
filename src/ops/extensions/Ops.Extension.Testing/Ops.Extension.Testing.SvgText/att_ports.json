@@ -1,0 +1,20 @@
+{
+    "ports": [
+        {
+            "id": "o44faoari",
+            "title": "render",
+            "dir": 0,
+            "type": 1,
+            "order": 0
+        },
+        {
+            "id": "502whkmy4",
+            "title": "Font File",
+            "dir": 0,
+            "type": 5,
+            "uiDisplay": "file",
+            "value": "/assets/6230d3a5e65df56b95088672/roboto-v29-latin-regular.ttf",
+            "order": 1
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "5f96fa56-1a97-4e63-ad1f-7e2ed737bc13",
+    "created": 1740752262066,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740752262092
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch8 renamed to Ops.Extension.Testing.Cables",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740752283388
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "zouv6d394",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

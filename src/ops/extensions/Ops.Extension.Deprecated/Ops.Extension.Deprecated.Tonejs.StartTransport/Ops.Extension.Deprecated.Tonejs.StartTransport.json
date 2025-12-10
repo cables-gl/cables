@@ -1,0 +1,28 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Use Transport-op instead",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            },
+            {
+                "type": "0",
+                "name": "Offset"
+            }
+        ]
+    },
+    "id": "73c048ec-95e6-4b00-a1bd-aba776138b47",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

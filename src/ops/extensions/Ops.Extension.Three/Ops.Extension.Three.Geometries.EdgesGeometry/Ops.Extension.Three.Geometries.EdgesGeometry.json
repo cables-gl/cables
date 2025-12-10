@@ -1,0 +1,42 @@
+{
+    "id": "69095ba5-56a3-4d6f-bb59-f0a115309ca6",
+    "created": 1764693039974,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1764686869072
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "threeGeometry"
+            },
+            {
+                "type": 0,
+                "name": "Threshold Angle",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Wireframe",
+                "objType": "threeGeometry"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ],
+    "summary": "Get the edges of a geometry",
+    "docs": {
+        "ports": []
+    }
+}

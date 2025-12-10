@@ -1,0 +1,33 @@
+{
+    "id": "fa0e40ce-19e8-49af-87d0-9a08d797c7b2",
+    "created": 1764683700894,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764683700895
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "three texture"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

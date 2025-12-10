@@ -1,0 +1,80 @@
+{
+    "authorName": "stephan",
+    "id": "a1e9afb6-a0f8-4ec6-a86c-86f50a441bee",
+    "created": 1584698303551,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "socket",
+                "objType": "socketcluster"
+            },
+            {
+                "type": 5,
+                "name": "topic"
+            },
+            {
+                "type": 0,
+                "name": "Receive Own Data",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use named Trigger",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "client id"
+            },
+            {
+                "type": 5,
+                "name": "Trigger name"
+            },
+            {
+                "type": 1,
+                "name": "received"
+            }
+        ]
+    },
+    "summary": "Receives trigger from the socketcluster socket/topic",
+    "docs": {
+        "ports": [
+            {
+                "name": "socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "Use named Trigger",
+                "text": "also execute triggers with name in payload (created with TriggerSend)"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
+            },
+            {
+                "name": "Trigger name",
+                "text": "the name of the executed trigger"
+            },
+            {
+                "name": "received",
+                "text": "received message"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Net.SocketCluster.SocketClusterRecieveTrigger renamed to Ops.Extension.SocketCluster.SocketClusterRecieveTrigger",
+            "author": "stephan",
+            "date": 1671003660905
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "mecjP3"
+}

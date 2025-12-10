@@ -1,0 +1,34 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Follows the amplitude of an incoming signal, can be used as a signal",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "0",
+                "name": "Attack"
+            },
+            {
+                "type": "0",
+                "name": "Release"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "id": "59ce796d-db03-4c4f-b7db-0650c3a40a09",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

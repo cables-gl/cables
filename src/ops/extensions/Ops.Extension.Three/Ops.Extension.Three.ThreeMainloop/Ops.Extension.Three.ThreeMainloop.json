@@ -1,0 +1,84 @@
+{
+    "id": "d6101977-3da4-449a-9387-4a1f63594de5",
+    "created": 1764611120504,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764611120505
+        },
+        {
+            "message": "Patch.PAjelF3.NoCglMainloop renamed to Ops.Extension.Three.NoCglMainloop",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764612845299
+        },
+        {
+            "message": "Extension.Three.NoCglMainloop renamed to Ops.Extension.Three.ThreeMainloop",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764670037913
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Max Pixel Density (DPR)",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "FPS Limit",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reduce FPS unfocussed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Transparent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Focus canvas",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Density",
+                "subType": "number"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}

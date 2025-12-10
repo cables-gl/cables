@@ -1,0 +1,75 @@
+{
+    "id": "3b98667a-d210-4fd9-b5bb-4aaf6edd61fd",
+    "created": 1764930646396,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764169447790
+        },
+        {
+            "message": "Patch.PAjelF3.Three.Knot renamed to Ops.Extension.Three.Knot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1764583837393
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588236583
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764588670322
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764930646397
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "flatShading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "wireframe",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "fog",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Map",
+                "objType": "three texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "three"
+    ]
+}

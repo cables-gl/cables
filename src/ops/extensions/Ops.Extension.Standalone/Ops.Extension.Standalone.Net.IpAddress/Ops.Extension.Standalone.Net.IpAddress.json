@@ -1,0 +1,44 @@
+{
+    "id": "b6330f54-d765-47d7-b157-e391f173a57c",
+    "layout": {
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Local IP"
+            },
+            {
+                "type": 5,
+                "name": "Interface"
+            },
+            {
+                "type": 2,
+                "name": "Data"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "license": "MIT",
+    "created": 1724312944376,
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1724312944377
+        },
+        {
+            "message": "Ops.Extension.Standalone.Net.IpAdress renamed to Ops.Extension.Standalone.Net.IpAddress",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1725527886689
+        }
+    ],
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Outputs your local IP Adress",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "lCYxun"
+}

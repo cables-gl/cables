@@ -1,0 +1,560 @@
+{
+  "ops": [
+    {
+      "opId": "e64b035c-133e-43b0-9ff8-fcd03ee5f26e",
+      "id": "goyz5p42w",
+      "uiAttribs": {
+        "translate": {
+          "x": 2225.471033473827,
+          "y": 3978.9714763546767
+        },
+        "subPatch": "3as5jhfyt",
+        "extendTitle": "Cube",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Node Name",
+          "value": "Cube"
+        },
+        {
+          "name": "Scene Time",
+          "value": 0
+        },
+        {
+          "name": "Time",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Found Node",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "28ot5n185",
+      "uiAttribs": {
+        "translate": {
+          "x": 2213.471033473827,
+          "y": 3718.9714763546767
+        },
+        "subPatch": "3as5jhfyt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0.42
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 0.11
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": -75
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "r1x5egro3",
+              "objOut": "28ot5n185"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "e64b035c-133e-43b0-9ff8-fcd03ee5f26e",
+      "id": "27kdgcl0f",
+      "uiAttribs": {
+        "translate": {
+          "x": 2429.471033473827,
+          "y": 3978.9714763546767
+        },
+        "subPatch": "3as5jhfyt",
+        "extendTitle": "Cube",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Node Name",
+          "value": "Cube"
+        },
+        {
+          "name": "Scene Time",
+          "value": 0
+        },
+        {
+          "name": "Time",
+          "value": 23.5
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Found Node",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "8r9vqz153",
+      "uiAttribs": {
+        "translate": {
+          "x": 2429.471033473827,
+          "y": 3858.9714763546767
+        },
+        "subPatch": "3as5jhfyt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 0
+        },
+        {
+          "name": "posY",
+          "value": 0
+        },
+        {
+          "name": "posZ",
+          "value": 2.54
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": 0
+        },
+        {
+          "name": "rotY",
+          "value": 0
+        },
+        {
+          "name": "rotZ",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger",
+              "objIn": "27kdgcl0f",
+              "objOut": "8r9vqz153"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a5234947-f65a-41e2-a691-b81382903a71",
+      "id": "a5hhmt620",
+      "uiAttribs": {
+        "translate": {
+          "x": 2213.471033473827,
+          "y": 3658.9714763546767
+        },
+        "subPatch": "3as5jhfyt",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "R",
+          "value": 0.039311857414540796
+        },
+        {
+          "name": "G",
+          "value": 0.753272754039733
+        },
+        {
+          "name": "B",
+          "value": 0.662238763321878
+        },
+        {
+          "name": "A",
+          "value": 1
+        },
+        {
+          "name": "Roughness",
+          "value": 0.5
+        },
+        {
+          "name": "Metalness",
+          "value": 0
+        },
+        {
+          "name": "Alpha Mode index",
+          "value": 3
+        },
+        {
+          "name": "Alpha Mode",
+          "value": "Blend"
+        },
+        {
+          "name": "Use Clear Coat",
+          "value": 0
+        },
+        {
+          "name": "Clear Coat Intensity",
+          "value": 1
+        },
+        {
+          "name": "Clear Coat Roughness",
+          "value": 0.5
+        },
+        {
+          "name": "Use Normal map for Clear Coat",
+          "value": 0
+        },
+        {
+          "name": "Use Thin Film",
+          "value": 0
+        },
+        {
+          "name": "Thin Film Intensity",
+          "value": 1
+        },
+        {
+          "name": "Thin Film IOR",
+          "value": 1.3
+        },
+        {
+          "name": "Thin Film Thickness (nm)",
+          "value": 600
+        },
+        {
+          "name": "Thickness Tex Min",
+          "value": 300
+        },
+        {
+          "name": "Thickness Tex Max",
+          "value": 600
+        },
+        {
+          "name": "Tonemapping index",
+          "value": 0
+        },
+        {
+          "name": "Tonemapping",
+          "value": "sRGB"
+        },
+        {
+          "name": "Exposure",
+          "value": 1
+        },
+        {
+          "name": "Emission Intensity",
+          "value": 1
+        },
+        {
+          "name": "Disable geometric roughness",
+          "value": 0
+        },
+        {
+          "name": "Use roughness from normal map",
+          "value": 0
+        },
+        {
+          "name": "Use Vertex Colours",
+          "value": 0
+        },
+        {
+          "name": "Vertex Colour Mode index",
+          "value": 0
+        },
+        {
+          "name": "Vertex Colour Mode",
+          "value": "colour"
+        },
+        {
+          "name": "Height Intensity",
+          "value": 1
+        },
+        {
+          "name": "Faster heightmapping",
+          "value": 0
+        },
+        {
+          "name": "Double Sided",
+          "value": 0
+        },
+        {
+          "name": "Num mip levels",
+          "value": 0
+        },
+        {
+          "name": "Diffuse Intensity",
+          "value": 1
+        },
+        {
+          "name": "Specular Intensity",
+          "value": 1
+        },
+        {
+          "name": "Lightmap is RGBE",
+          "value": 0
+        },
+        {
+          "name": "Lightmap Intensity",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "28ot5n185",
+              "objOut": "a5hhmt620"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "ybybt9i35",
+      "uiAttribs": {
+        "subPatch": "3as5jhfyt",
+        "translate": {
+          "x": 2213.471033473827,
+          "y": 3503.8865309998637
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_fwagmglix",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "innerOut_fwagmglix",
+              "objIn": "a5hhmt620",
+              "objOut": "ybybt9i35"
+            }
+          ]
+        },
+        {
+          "name": "innerOut_zmd1pqgqt",
+          "title": "glb File",
+          "links": [
+            {
+              "portIn": "glb File",
+              "portOut": "innerOut_zmd1pqgqt",
+              "objIn": "r1x5egro3",
+              "objOut": "ybybt9i35"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "y7uoukhap",
+      "uiAttribs": {
+        "subPatch": "3as5jhfyt",
+        "translate": {
+          "x": 2213.471033473827,
+          "y": 4089.9714763546767
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "r1x5egro3",
+      "uiAttribs": {
+        "subPatch": "3as5jhfyt",
+        "translate": {
+          "x": 2213.471033473827,
+          "y": 3778.9669579093907
+        },
+        "accBuffersDelete": "pointanim",
+        "loading": false,
+        "extendTitle": "pointanim",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null,
+        "disabled": false
+      },
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 0.75
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 2
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Never"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "8r9vqz153",
+              "objOut": "r1x5egro3"
+            },
+            {
+              "portIn": "Render",
+              "portOut": "Next",
+              "objIn": "goyz5p42w",
+              "objOut": "r1x5egro3"
+            }
+          ]
+        },
+        {
+          "name": "Generator",
+          "value": "Khronos glTF Blender I/O v3.3.32"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": 2
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ],
+      "storage": {
+        "ref": "r1x5egro3"
+      }
+    }
+  ]
+}

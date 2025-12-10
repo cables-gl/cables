@@ -1,0 +1,43 @@
+{
+    "summary": "Pans an audio signal between left and right",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Audio In"
+            },
+            {
+                "type": "4",
+                "name": "Panning"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "The audio signal to pan"
+            },
+            {
+                "name": "Panning",
+                "text": "Where the audio signal should be heard, `-1` = fully left, `0` = center, `1` = fully right"
+            },
+            {
+                "name": "Audio Out",
+                "text": "The panned audio signal"
+            }
+        ]
+    },
+    "id": "31765f1f-3f29-4750-8f5c-614fa8eedfc5",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}

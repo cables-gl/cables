@@ -1,0 +1,515 @@
+{
+  "ops": [
+    {
+      "opId": "3d39141f-e9d7-4b83-b5a1-fc7f2902fa40",
+      "id": "n2y1dx0yg",
+      "uiAttribs": {
+        "translate": {
+          "x": 122.69087949669432,
+          "y": 639.4976697889141
+        },
+        "subPatch": "258xw7f6i",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "GPUBuffer",
+          "links": [
+            {
+              "portIn": "Pos Buffer",
+              "portOut": "GPUBuffer",
+              "objIn": "psqgq5zh5",
+              "objOut": "n2y1dx0yg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "8a9fa2c6-c229-49a9-9dc8-247001539217",
+      "id": "ewtdm9bjc",
+      "uiAttribs": {
+        "extendTitle": "100*3",
+        "translate": {
+          "x": 139.51118744016742,
+          "y": 481.2827488250648
+        },
+        "subPatch": "258xw7f6i",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Num Values",
+          "value": 100
+        },
+        {
+          "name": "Mode index",
+          "value": 2
+        },
+        {
+          "name": "Mode",
+          "value": "ABC"
+        },
+        {
+          "name": "Random Seed ",
+          "value": 0
+        },
+        {
+          "name": "Integer",
+          "value": 0
+        },
+        {
+          "name": "Last == First",
+          "value": 0
+        },
+        {
+          "name": "Min A",
+          "value": -1
+        },
+        {
+          "name": "Max A",
+          "value": 1
+        },
+        {
+          "name": "Min B",
+          "value": -1
+        },
+        {
+          "name": "Max B",
+          "value": 1
+        },
+        {
+          "name": "Min C",
+          "value": -1
+        },
+        {
+          "name": "Max C",
+          "value": 1
+        },
+        {
+          "name": "Min D",
+          "value": -1
+        },
+        {
+          "name": "Max D",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array Out",
+          "links": [
+            {
+              "portIn": "Arr",
+              "portOut": "Array Out",
+              "objIn": "n2y1dx0yg",
+              "objOut": "ewtdm9bjc"
+            },
+            {
+              "portIn": "Array",
+              "portOut": "Array Out",
+              "objIn": "q4josf6j7",
+              "objOut": "ewtdm9bjc"
+            },
+            {
+              "portIn": "array 1",
+              "portOut": "Array Out",
+              "objIn": "l3y9jxs29",
+              "objOut": "ewtdm9bjc"
+            }
+          ]
+        },
+        {
+          "name": "Chunks Amount",
+          "value": 100
+        },
+        {
+          "name": "Array length",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "opId": "53ef08b1-61e2-41d9-a6c6-e0b2dfa48526",
+      "id": "psqgq5zh5",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 765.0339077337212
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "Result",
+              "objIn": "75sq54jfm",
+              "objOut": "psqgq5zh5"
+            },
+            {
+              "portIn": "array 0",
+              "portOut": "Result",
+              "objIn": "l3y9jxs29",
+              "objOut": "psqgq5zh5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "75sq54jfm",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": -602.9967120430393,
+          "y": 820.503845288076
+        },
+        "extendTitle": "length: 300",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "6c3bf614-a734-4539-98cd-7a7d5bfc38c9",
+      "id": "q4josf6j7",
+      "uiAttribs": {
+        "height": 200,
+        "width": 400,
+        "resizable": true,
+        "vizLayerMaxZoom": 2500,
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": -618.7969284256799,
+          "y": 471.60837551327893
+        },
+        "extendTitle": "length: 300",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Stride",
+          "value": 3
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "dtk9tn531",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_53nc07ubx",
+          "title": "Trigger",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "innerOut_53nc07ubx",
+              "objIn": "3qf6pg5jj",
+              "objOut": "dtk9tn531"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "5rqfr3q62",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 97.1376681723051,
+          "y": 1147.6393290135754
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "f31a1764-ce14-41de-9b3f-dc2fe249bb52",
+      "id": "l3y9jxs29",
+      "uiAttribs": {
+        "extendTitle": "-",
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 869.6436944562405,
+          "y": 313.3028977613973
+        }
+      },
+      "portsIn": [
+        {
+          "name": "Math function index",
+          "value": 1
+        },
+        {
+          "name": "Math function",
+          "value": "-"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Array result",
+          "links": [
+            {
+              "portIn": "Array",
+              "portOut": "Array result",
+              "objIn": "dw35h8hl7",
+              "objOut": "l3y9jxs29"
+            }
+          ]
+        },
+        {
+          "name": "Array length",
+          "value": 300
+        }
+      ],
+      "storage": {
+        "ref": "l3y9jxs29"
+      }
+    },
+    {
+      "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+      "id": "3qf6pg5jj",
+      "uiAttribs": {
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 144.34068821369442,
+          "y": 191.86696750338672
+        }
+      },
+      "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "trigger 0",
+              "objIn": "psqgq5zh5",
+              "objOut": "3qf6pg5jj"
+            }
+          ]
+        },
+        {
+          "name": "trigger 15",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger 15",
+              "objIn": "r0xaurc1x",
+              "objOut": "3qf6pg5jj"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "3qf6pg5jj"
+      }
+    },
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "zvpiw6b5e",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 803.1369337296992,
+          "y": 591.5740635681284
+        }
+      },
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ],
+      "storage": {
+        "ref": "zvpiw6b5e"
+      }
+    },
+    {
+      "opId": "681ffbbf-cdf4-4d4f-ad7c-934b3a601a80",
+      "id": "r0xaurc1x",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 803.1369337296992,
+          "y": 529.2027642594736
+        }
+      },
+      "portsIn": [
+        {
+          "name": "g",
+          "value": 0.398
+        },
+        {
+          "name": "b",
+          "value": 0.389
+        },
+        {
+          "name": "a",
+          "value": 1
+        },
+        {
+          "name": "Colorize Texture",
+          "value": 0
+        },
+        {
+          "name": "diffuseRepeatX",
+          "value": 1
+        },
+        {
+          "name": "diffuseRepeatY",
+          "value": 1
+        },
+        {
+          "name": "Tex Offset X",
+          "value": 0
+        },
+        {
+          "name": "Tex Offset Y",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "zvpiw6b5e",
+              "objOut": "r0xaurc1x"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "r0xaurc1x"
+      }
+    },
+    {
+      "opId": "5593ea29-19d3-4161-af0c-b8d62079487d",
+      "id": "dw35h8hl7",
+      "uiAttribs": {
+        "subPatch": "258xw7f6i",
+        "translate": {
+          "x": 869.6436944562405,
+          "y": 409.9035325777847
+        },
+        "comment": "should be 0"
+      },
+      "portsOut": [
+        {
+          "name": "Sum",
+          "links": [
+            {
+              "portIn": "r",
+              "portOut": "Sum",
+              "objIn": "r0xaurc1x",
+              "objOut": "dw35h8hl7"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "dw35h8hl7"
+      }
+    }
+  ]
+}

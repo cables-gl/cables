@@ -1,0 +1,39 @@
+{
+    "id": "0e5e2a99-112a-4f11-bc27-7e3e301955aa",
+    "created": 1723128116625,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723128116668
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch6 renamed to Ops.Patch.PAh3NTD.SubPatch62",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740560643236
+        },
+        {
+            "message": "Patch.PAh3NTD.SubPatch62 renamed to Ops.Extension.Testing.ShaderEffects_DivideExplode",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1740732876424
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "03ppcwk5o",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

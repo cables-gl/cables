@@ -1,0 +1,36 @@
+{
+    "libs": [
+        "tone.js"
+    ],
+    "summary": "Triggers the Attack-part of a Synth ADSR",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Synth"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Arrack"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Time"
+            }
+        ]
+    },
+    "id": "02c72ee1-b7ce-4cf1-af5b-1b774a705a78",
+    "authorName": "pandur",
+    "changelog": [],
+    "coreLibs": [
+        "webaudio"
+    ]
+}
