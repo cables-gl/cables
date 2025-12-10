@@ -7,10 +7,17 @@ let dia = null;
 const learn = op.inTriggerButton("Learn");
 
 const OPS = {
-    "CC": { "NAMESPACE": "Ops.Devices.Midi.MidiCC_v3", "IN_PORT": "CC Index" },
-    "NRPN": { "NAMESPACE": "Ops.Devices.Midi.MidiNRPN", "IN_PORT": "NRPN Index" },
-    "Note": { "NAMESPACE": "Ops.Devices.Midi.MidiNote", "IN_PORT": "Note" },
+    "CC": { "NAMESPACE": "", "IN_PORT": "CC Index" },
+    "NRPN": { "NAMESPACE": "", "IN_PORT": "NRPN Index" },
+    "Note": { "NAMESPACE": "", "IN_PORT": "Note" },
 };
+
+if (CABLES.UI)
+{
+    OPS.Note.NAMESPACE = gui.defaultOps.defaultOpNames.MidiNote;
+    OPS.NRPN.NAMESPACE = gui.defaultOps.defaultOpNames.MidiNRPN;
+    OPS.CC.NAMESPACE = gui.defaultOps.defaultOpNames.MidiCC;
+}
 
 /* OUTPUTS */
 const OUTPUT_KEYS = [

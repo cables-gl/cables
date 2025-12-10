@@ -23,8 +23,8 @@ learn.onTriggered = () =>
     if (CABLES.UI)
     {
         dia = new CABLES.UI.ModalDialog({
-            "title": "Learn Key...",
-            "text": "Just press any key" });
+            "title": "Learn Midi...",
+            "text": "Just rotate a knob or press a button on your midi device" });
 
         dia.on("close", () =>
         {
