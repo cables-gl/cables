@@ -16,9 +16,25 @@ const
     triggerOut = op.outTrigger("Trigger Out"),
     ccIndexOut = op.outNumber("CC Index Out");
 
+let dia = null;
 let learning = false;
 learn.onTriggered = () =>
 {
+    if (CABLES.UI)
+    {
+        dia = new CABLES.UI.ModalDialog({
+            "title": "Learn Key...",
+            "text": "Just press any key" });
+
+        dia.on("close", () =>
+        {
+            learning = false;
+            removeListeners();
+            addListener();
+            dia = null;
+        });
+    }
+
     learning = true;
 };
 
@@ -43,6 +59,8 @@ inEvent.onChange = () =>
         midiChannelDropdown.set(event.channel + 1);
 
         learning = false;
+        if (dia)dia.close();
+        dia = null;
 
         if (CABLES.UI)
         {

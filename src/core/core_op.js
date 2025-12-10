@@ -167,6 +167,11 @@ export class Op extends Events
         return false;
     }
 
+    getSubPatch()// will be overwritten in ui
+    {
+        return 0;
+    }
+
     get name()
     {
         return this.getTitle();

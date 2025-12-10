@@ -3,6 +3,7 @@
 
 const deviceSelect = op.inDropDown("Device", ["none"]);
 let learning = false;
+let dia = null;
 const learn = op.inTriggerButton("Learn");
 
 const OPS = {
@@ -292,6 +293,8 @@ function onMIDIMessage(_event)
             }
         }
         learning = false;
+        if (dia)dia.close();
+        dia = null;
     }
     // if (normalize.get()) event.velocity /= 127;
 
@@ -384,4 +387,15 @@ learn.onTriggered = () =>
 {
     if (!outputDevice) return;
     learning = true;
+
+    if (!CABLES.UI) return;
+
+    dia = new CABLES.UI.ModalDialog({
+        "title": "Learn Midi...",
+        "text": "Just rotate a knob or press a button on your midi device" });
+
+    dia.on("close", () =>
+    {
+        learning = false;
+    });
 };
