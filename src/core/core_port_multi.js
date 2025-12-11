@@ -19,7 +19,7 @@ export class MultiPort extends Port
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
-        this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1, "multiPortManual": true });
+        this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
         this._uiAttribsPorts = uiAttribsPorts;
@@ -46,11 +46,16 @@ export class MultiPort extends Port
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
+                // let opacity;// undefined to remove/not set it
+                // let grey;// undefined to remove/not set it
                 let addPort = false;
                 let title;
                 let o = {};
 
+                // console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
                 if (this.op.preservedPortTitles && this.op.preservedPortTitles[this.ports[i].name]) title = this.op.preservedPortTitles[this.ports[i].name];
+
+                // if (!this.uiAttribs.multiPortManual)grey = true;
                 if (i == 0) lp = this.ports.length;
 
                 if (!this.uiAttribs.multiPortManual)
@@ -62,7 +67,9 @@ export class MultiPort extends Port
                     }
 
                 for (const attin in this._uiAttribsPorts)
+                {
                     o[attin] = this._uiAttribsPorts[attin];
+                }
 
                 o.addPort = addPort;
                 o.longPort = lp;
@@ -77,7 +84,9 @@ export class MultiPort extends Port
         this.removeInvalidPorts = () =>
         {
             for (let i = 0; i < this.ports.length; i++)
+            {
                 if (!this.ports[i]) this.ports.splice(i, 1);
+            }
 
             if (!this.uiAttribs.multiPortManual)
             {
@@ -141,6 +150,8 @@ export class MultiPort extends Port
                     {
                         if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
                         {
+                            // console.log("found hole!");
+
                             // found hole
                             const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
                             this.ports[i].links[0].remove();
@@ -211,7 +222,7 @@ export class MultiPort extends Port
                 po.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
                 if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
+                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(); });
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
                 po.multiLinkChangeListener = po.on("onLinkChanged", () =>

@@ -548,7 +548,6 @@ export class Op extends Events
     /**
      * @param {string} name
      * @param {number} type
-     * @param {import("./core_port.js").PortUiAttribs} uiAttrs
      */
     inMultiPort(name, type, uiAttrs)
     {
