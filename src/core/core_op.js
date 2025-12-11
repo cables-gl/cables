@@ -616,6 +616,31 @@ export class Op extends Events
 
     /**
      * @param {string} name
+     * @param {number} type
+     */
+    outMultiPort2(name, type, uiAttribsPort = {})
+    {
+        const p = new MultiPort2(
+            this,
+            name,
+            type,
+            CONSTANTS.PORT.PORT_DIR_OUT,
+            {
+                "display": "multiport",
+                "hidePort": true
+            },
+            uiAttribsPort
+        );
+        p.ignoreValueSerialize = true;
+
+        this.addOutPort(p);
+        p.initPorts();
+
+        return p;
+    }
+
+    /**
+     * @param {string} name
      * @param {string} v
      */
     inValueString(name, v)
