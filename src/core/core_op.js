@@ -6,6 +6,7 @@ import { SwitchPort } from "./core_port_switch.js";
 import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
+import { MultiPort2 } from "./core_port_multi2.js";
 
 /**
  * @typedef Translation
@@ -557,14 +558,30 @@ export class Op extends Events
                 "hidePort": true
             };
 
-        const p = new MultiPort(
-            this,
-            name,
-            type,
-            Port.DIR_IN,
-            attrs,
-            uiAttrs
-        );
+        const p = new MultiPort(this, name, type, Port.DIR_IN, attrs, uiAttrs);
+
+        p.ignoreValueSerialize = true;
+
+        this.addInPort(p);
+        p.initPorts();
+
+        return p;
+    }
+
+    /**
+     * @param {string} name
+     * @param {number} type
+     * @param {import("./core_port.js").PortUiAttribs} uiAttrs
+     */
+    inMultiPort2(name, type, uiAttrs)
+    {
+        const attrs =
+            {
+                "addPort": true,
+                "hidePort": true
+            };
+
+        const p = new MultiPort2(this, name, type, Port.DIR_IN, attrs, uiAttrs);
         p.ignoreValueSerialize = true;
 
         this.addInPort(p);
