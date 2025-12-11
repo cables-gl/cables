@@ -1,0 +1,45 @@
+{
+    "id": "0f325bc5-0b7f-466c-902b-ad278225b539",
+    "created": 1765450022744,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1739871286964
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Objects_0",
+                "longPort": 2,
+                "group": "Objects"
+            },
+            {
+                "type": 2,
+                "name": "Objects_1",
+                "uititle": "add port",
+                "group": "Objects"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "summary": "create an array with multiple objects"
+}

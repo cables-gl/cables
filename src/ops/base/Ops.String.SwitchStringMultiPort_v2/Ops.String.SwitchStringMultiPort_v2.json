@@ -1,0 +1,51 @@
+{
+    "id": "ac62cd52-169a-4fdd-bb62-1a559e5c73da",
+    "created": 1765450010455,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716884678364
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Strings_0",
+                "longPort": 2,
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_1",
+                "uititle": "add port",
+                "group": "Strings"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "switch between multiple string inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "TwZ1sh"
+}

@@ -1,0 +1,53 @@
+{
+    "id": "b7654e88-e6d3-4840-8fef-3d5ba0f462b6",
+    "created": 1765450403356,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716884900493
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Numbers_0",
+                "longPort": 2,
+                "group": "Numbers",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Numbers_1",
+                "uititle": "add port",
+                "group": "Numbers",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Switch between multiple number inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
+}
