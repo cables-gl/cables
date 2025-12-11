@@ -20,8 +20,6 @@ export class MultiPort extends Port
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1, "multiPortManual": true });
-
-        /** @type {Port[]} */
         this.ports = [];
         this.direction = dir;
         this._uiAttribsPorts = uiAttribsPorts;
@@ -78,17 +76,18 @@ export class MultiPort extends Port
 
         this.removeInvalidPorts = () =>
         {
-
             for (let i = 0; i < this.ports.length; i++)
                 if (!this.ports[i]) this.ports.splice(i, 1);
 
-            if (!this.uiAttribs.multiPortManual && this.ports.length > MIN_NUM_PORTS)
+            if (!this.uiAttribs.multiPortManual)
             {
-                for (let i = this.ports.length - 1; i > 1; i--)
-                {
-                    if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
-                    else break;
-                }
+                if (this.ports.length > MIN_NUM_PORTS)
+
+                    for (let i = this.ports.length - 1; i > 1; i--)
+                    {
+                        if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
+                        else break;
+                    }
             }
 
             updateArray();
@@ -134,6 +133,7 @@ export class MultiPort extends Port
             {
                 this.ports[this.ports.length - 1].uiAttribs.addPort = false;
                 this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + 1 });
+
             }
 
             if (!this.uiAttribs.multiPortManual)
@@ -141,6 +141,7 @@ export class MultiPort extends Port
                 let foundHole = true;
                 while (foundHole)
                 {
+                    // console.log("search holes...");
                     foundHole = false;
 
                     for (let i = this.ports.length - 1; i > 1; i--)
@@ -155,6 +156,7 @@ export class MultiPort extends Port
 
                             if (po && this.ports[i])
                             {
+                                // console.log("move ", this.ports[i].name, "to", po.name);
                                 this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
                                 foundHole = true;
                                 redo = true;
@@ -224,8 +226,12 @@ export class MultiPort extends Port
                 if (po.multiLinkRemoveListener)po.multiLinkRemoveListener = po.off(po.multiLinkRemoveListener);
                 po.multiLinkRemoveListener = po.on("onLinkRemoved", () =>
                 {
+                    // this.removeInvalidPorts();
+                    // this.checkNum();
+                    // this.countPorts();
                     updateUi();
                     this.emitEvent("onLinkChanged");
+                    // this.countPorts.bind(this);
                 });
             }
         };
@@ -274,16 +280,12 @@ export class MultiPort extends Port
             while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
 
             this.removeInvalidPorts();
-            if (this.ports.length > 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked())
-            {
-                this.ports[this.ports.length - 1].removeLinks();
-                console.log("found invalid");
-            }
         };
 
         this.incDec = (incDir) =>
         {
             this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
+            // console.log("this.uiAttribs.multiPortNum", this.uiAttribs.multiPortNum, this.uiAttribs.multiPortNum + incDir);
             this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
 
