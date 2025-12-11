@@ -20,6 +20,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1716826556596
+        },
+        {
+            "message": "dont show error console, when camera was not found",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1765358932860
         }
     ],
     "layout": {
