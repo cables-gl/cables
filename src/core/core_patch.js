@@ -1379,7 +1379,10 @@ export class Patch extends Events
 
     get containerElement()
     {
-        return this.config.containerElement || this.cgl.canvas.parentElement || null;
+        if (this.config.containerElement) return this.config.containerElement;
+        if (this.cg && this.cg.canvas.parentElement) return this.cg.canvas.parentElement;
+        if (this.cgl && this.cgl.canvas.parentElement) return this.cgl.canvas.parentElement;
+        return document.body;
     }
 
     /**

@@ -1,18 +1,21 @@
-const learnedKeyCode = op.inValueInt("key code");
-const canvasOnly = op.inValueBool("canvas only", true);
-const modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none");
-const inEnable = op.inValueBool("Enabled", true);
-const preventDefault = op.inValueBool("Prevent Default");
-const learn = op.inTriggerButton("learn");
-const onPress = op.outTrigger("on press");
-const onRelease = op.outTrigger("on release");
-const outPressed = op.outBoolNum("Pressed", false);
-const outKey = op.outString("Key");
+const
+    learnedKeyCode = op.inValueInt("key code"),
+    canvasOnly = op.inValueBool("canvas only", true),
+    modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none"),
+    inEnable = op.inValueBool("Enabled", true),
+    preventDefault = op.inValueBool("Prevent Default"),
+    learn = op.inTriggerButton("learn"),
+    onPress = op.outTrigger("on press"),
+    onRelease = op.outTrigger("on release"),
+    outPressed = op.outBoolNum("Pressed", false),
+    outKey = op.outString("Key");
 
 const cgl = op.patch.cgl;
 let learning = false;
-
+let dia = null;
 modKey.onChange = learnedKeyCode.onChange = updateKeyName;
+
+addCanvasListener();
 
 function onKeyDown(e)
 {
@@ -21,9 +24,9 @@ function onKeyDown(e)
         learnedKeyCode.set(e.keyCode);
         if (CABLES.UI)
         {
+            if (dia)dia.close();
             op.refreshParams();
         }
-        // op.log("Learned key code: " + learnedKeyCode.get());
         learning = false;
         removeListeners();
         addListener();
@@ -78,16 +81,22 @@ op.onDelete = function ()
 
 learn.onTriggered = function ()
 {
-    // op.log("Listening for key...");
+    if (!CABLES.UI) return;
+
     learning = true;
     addDocumentListener();
 
-    setTimeout(function ()
+    dia = new CABLES.UI.ModalDialog({
+        "title": "Learn Key...",
+        "text": "Just press any key" });
+
+    dia.on("close", () =>
     {
         learning = false;
         removeListeners();
         addListener();
-    }, 3000);
+        dia = null;
+    });
 };
 
 function addListener()
@@ -200,5 +209,3 @@ function keyCodeToName(keyCode)
         return String.fromCharCode(keyCode);
     }
 }
-
-addCanvasListener();

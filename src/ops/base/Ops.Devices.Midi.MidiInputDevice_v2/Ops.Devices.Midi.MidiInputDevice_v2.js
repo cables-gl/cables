@@ -3,13 +3,21 @@
 
 const deviceSelect = op.inDropDown("Device", ["none"]);
 let learning = false;
+let dia = null;
 const learn = op.inTriggerButton("Learn");
 
 const OPS = {
-    "CC": { "NAMESPACE": "Ops.Devices.Midi.MidiCC_v3", "IN_PORT": "CC Index" },
-    "NRPN": { "NAMESPACE": "Ops.Devices.Midi.MidiNRPN", "IN_PORT": "NRPN Index" },
-    "Note": { "NAMESPACE": "Ops.Devices.Midi.MidiNote", "IN_PORT": "Note" },
+    "CC": { "NAMESPACE": "", "IN_PORT": "CC Index" },
+    "NRPN": { "NAMESPACE": "", "IN_PORT": "NRPN Index" },
+    "Note": { "NAMESPACE": "", "IN_PORT": "Note" },
 };
+
+if (CABLES.UI)
+{
+    OPS.Note.NAMESPACE = gui.defaultOps.defaultOpNames.MidiNote;
+    OPS.NRPN.NAMESPACE = gui.defaultOps.defaultOpNames.MidiNRPN;
+    OPS.CC.NAMESPACE = gui.defaultOps.defaultOpNames.MidiCC;
+}
 
 /* OUTPUTS */
 const OUTPUT_KEYS = [
@@ -292,6 +300,8 @@ function onMIDIMessage(_event)
             }
         }
         learning = false;
+        if (dia)dia.close();
+        dia = null;
     }
     // if (normalize.get()) event.velocity /= 127;
 
@@ -384,4 +394,15 @@ learn.onTriggered = () =>
 {
     if (!outputDevice) return;
     learning = true;
+
+    if (!CABLES.UI) return;
+
+    dia = new CABLES.UI.ModalDialog({
+        "title": "Learn Midi...",
+        "text": "Just rotate a knob or press a button on your midi device" });
+
+    dia.on("close", () =>
+    {
+        learning = false;
+    });
 };
