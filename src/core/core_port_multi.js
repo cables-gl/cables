@@ -29,7 +29,7 @@ export class MultiPort extends Port
             const arr = [];
 
             let ll = 1;
-            if (this.uiAttribs.multiPortManual)ll = 0;
+            // if (this.uiAttribs.multiPortManual)ll = 0;
 
             for (let i = 0; i < this.ports.length - ll; i++)
                 arr[i] = this.ports[i];
@@ -53,13 +53,13 @@ export class MultiPort extends Port
                 if (this.op.preservedPortTitles && this.op.preservedPortTitles[this.ports[i].name]) title = this.op.preservedPortTitles[this.ports[i].name];
                 if (i == 0) lp = this.ports.length;
 
-                if (!this.uiAttribs.multiPortManual)
-                    if (i == this.ports.length - 1)
-                    {
-                        title = "add port";
-                        addPort = true;
-                        grey = true;
-                    }
+                // if (!this.uiAttribs.multiPortManual)
+                if (i == this.ports.length - 1)
+                {
+                    title = "add port";
+                    addPort = true;
+                    grey = true;
+                }
 
                 for (const attin in this._uiAttribsPorts)
                     o[attin] = this._uiAttribsPorts[attin];
@@ -129,6 +129,13 @@ export class MultiPort extends Port
                 }
             }
 
+            if (this.ports.length > 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked())
+            {
+                this.ports[this.ports.length - 1].uiAttribs.addPort = false;
+                this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + 1 });
+
+            }
+
             if (!this.uiAttribs.multiPortManual)
             {
                 let foundHole = true;
@@ -157,11 +164,8 @@ export class MultiPort extends Port
                             }
                         }
                     }
-
-                    // this.checkNum();
                 }
 
-                // this.removeInvalidPorts();
             }
 
             if (!this.uiAttribs.multiPortManual) // if auto
@@ -173,7 +177,6 @@ export class MultiPort extends Port
                     {
                         this.ports[i].setUiAttribs({ "removed": true });
                         this.ports[i].remove();
-                        // this.ports[i] = null;
                         this.ports.splice(i, 1);
                     }
                 }
