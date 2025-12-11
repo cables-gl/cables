@@ -15,6 +15,7 @@
             {
                 "type": 1,
                 "name": "Trigger_0",
+                "longPort": 2,
                 "group": "Trigger"
             },
             {

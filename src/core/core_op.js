@@ -547,6 +547,7 @@ export class Op extends Events
     /**
      * @param {string} name
      * @param {number} type
+     * @param {import("./core_port.js").PortUiAttribs} uiAttrs
      */
     inMultiPort(name, type, uiAttrs)
     {
@@ -555,11 +556,6 @@ export class Op extends Events
                 "addPort": true,
                 "hidePort": true
             };
-
-        // for (const i in uiAttrs)
-        // {
-        //     attrs[i] = uiAttrs[i];
-        // }
 
         const p = new MultiPort(
             this,
