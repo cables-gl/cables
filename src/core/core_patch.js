@@ -52,7 +52,7 @@ import { RenderLoop } from "./renderloop.js";
  */
 
 /**
- * @template {CoreOp} Op
+ * @template T Op
  *
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -768,7 +768,7 @@ export class Patch extends Events
 
     /**
      * @param {String} opid
-     * @returns {Op}
+     * @returns {T}
      */
     getOpById(opid)
     {
