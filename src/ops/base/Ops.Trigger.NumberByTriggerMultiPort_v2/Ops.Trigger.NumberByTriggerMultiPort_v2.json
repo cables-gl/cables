@@ -1,0 +1,46 @@
+{
+    "id": "c683258b-0b25-40e3-a43a-ae73c1f968fd",
+    "created": 1765447227109,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716804979762
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger_0",
+                "longPort": 2,
+                "group": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_1",
+                "uititle": "add port",
+                "group": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Number Triggered",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "output a number by triggering an index port ",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "ubuysh"
+}

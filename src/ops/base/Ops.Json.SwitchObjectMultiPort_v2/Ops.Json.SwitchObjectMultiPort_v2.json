@@ -1,0 +1,51 @@
+{
+    "id": "d2f1977d-34c8-40e2-b9b8-22a8c7cad3e2",
+    "created": 1765450003893,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716885207102
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Objects_0",
+                "longPort": 2,
+                "group": "Objects"
+            },
+            {
+                "type": 2,
+                "name": "Objects_1",
+                "uititle": "add port",
+                "group": "Objects"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Switch between multiple object inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "PI2xsh"
+}

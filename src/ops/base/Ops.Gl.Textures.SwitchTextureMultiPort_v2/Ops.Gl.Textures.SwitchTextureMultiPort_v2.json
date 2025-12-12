@@ -1,0 +1,55 @@
+{
+    "id": "3a63ecc6-9323-4c74-a023-403ed429be12",
+    "created": 1765451039907,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716885476681
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Textures_0",
+                "longPort": 2,
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_1",
+                "uititle": "add port",
+                "group": "Textures"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Num Textures",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Switch between multiple textures",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "pDGOrh",
+    "coreLibs": [
+        "cgl"
+    ]
+}

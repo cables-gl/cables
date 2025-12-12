@@ -1,0 +1,47 @@
+{
+    "id": "9c3ccf47-5745-4acb-9b6d-2a8e83ca2a4a",
+    "created": 1765450436342,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716814979204
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Input_0",
+                "longPort": 2,
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_1",
+                "uititle": "add port",
+                "group": "Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Output_0",
+                "longPort": 2
+            },
+            {
+                "type": 1,
+                "name": "Output_1",
+                "uititle": "add port"
+            }
+        ]
+    },
+    "summary": "sequence trigger",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "F5L0sh"
+}

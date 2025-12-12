@@ -1,0 +1,48 @@
+{
+    "id": "fa57dcbe-3c5a-4e9c-93d0-b1b41b41dde4",
+    "created": 1765449359955,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716805378772
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Numbers_0",
+                "longPort": 2,
+                "group": "Numbers",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Numbers_1",
+                "uititle": "add port",
+                "group": "Numbers",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Create an array from multiple number inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "mCTLrh"
+}

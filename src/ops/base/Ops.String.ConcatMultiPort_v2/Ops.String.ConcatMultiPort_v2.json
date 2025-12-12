@@ -1,0 +1,58 @@
+{
+    "id": "f44bfe36-c44a-45f3-a2e7-a71399c22733",
+    "created": 1765449951634,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "new op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1716804941340
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Seperator index",
+                "values": [
+                    "None",
+                    "LineBreak",
+                    "Space",
+                    ",",
+                    "/"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Strings_0",
+                "longPort": 2,
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_1",
+                "uititle": "add port",
+                "group": "Strings"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Num Strings",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "concatinate/join multiple string inputs",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "PBHPrh"
+}

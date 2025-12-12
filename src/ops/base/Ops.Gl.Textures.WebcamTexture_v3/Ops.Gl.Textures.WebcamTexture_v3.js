@@ -284,7 +284,7 @@ function restartWebcam()
             .catch((error) =>
             {
                 restarting = false;
-                op.logError(error.name + ": " + error.message, error);
+                op.logWarn(error.name + ": " + error.message, error);
                 outError.set(error.name + ": " + error.message);
             });
     }
@@ -320,7 +320,7 @@ function initDevices()
         }).catch((e) =>
         {
             initingDevices = false;
-            op.error("error", e);
+            // op.error("error", e);
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
             camsLoaded = false;

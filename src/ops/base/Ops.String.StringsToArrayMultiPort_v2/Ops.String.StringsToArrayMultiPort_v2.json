@@ -1,0 +1,46 @@
+{
+    "id": "11916b36-71b0-441f-993e-f3f963b14d56",
+    "created": 1765449912835,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716817549725
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Strings_0",
+                "longPort": 2,
+                "group": "Strings"
+            },
+            {
+                "type": 5,
+                "name": "Strings_1",
+                "uititle": "add port",
+                "group": "Strings"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an array from multiple string input ports",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "oBPhsh"
+}
