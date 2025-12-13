@@ -9,6 +9,11 @@
             "type": "new op",
             "author": "pandur",
             "date": 1760622149639
+        },
+        {
+            "message": "Added buttons to insert or delete a line",
+            "type": "feature",
+            "date": 1765553569663
         }
     ],
     "layout": {

@@ -56,7 +56,6 @@ import { MultiPort2 } from "./core_port_multi2.js";
  * @typedef CorePatch
  * @type Patch
  */
-
 export class Op extends Events
 {
     static OP_VERSION_PREFIX = "_v";

@@ -78,8 +78,10 @@ function _watch(done)
         const basename = path.basename(file);
         return file.includes("/node_modules/") || basename.startsWith(".");
     } };
-    gulp.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(gulp.parallel(_core_js), _copy_ui));
-    gulp.watch("src/corelibs/**/*", watchOptions, gulp.series(_core_libs_clean, gulp.parallel(_core_libs), _core_libs_copy));
+
+    buildWatcher.watch([".git/HEAD"], watchOptions, gulp.series(_core_js, _copy_ui));
+    buildWatcher.watch(["src/core/**/*", "../shared/shared_constants.json", "../shared/client/**/*.js"], watchOptions, gulp.series(_core_js, _copy_ui));
+    buildWatcher.watch("src/corelibs/**/*", watchOptions, gulp.series(_core_libs_clean, _core_libs, _core_libs_copy));
     if (config.watchOps) buildWatcher.notify(["src/ops/**/*.js"], watchOptions, "opchange");
     if (config.watchOps) buildWatcher.notify(["src/ops/**/att_*"], watchOptions, "attachmentchange");
 
