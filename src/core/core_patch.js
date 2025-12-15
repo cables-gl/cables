@@ -641,12 +641,13 @@ export class Patch extends Events
                     found = true;
                     if (tryRelink)
                     {
-                        if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
+                        if (op.portsIn.length > 0 && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut().isLinked()))
                         {
-                            if (op.portsIn[0].getType() == op.portsOut[0].getType() && op.portsIn[0].links[0])
+                            if (op.getFirstPortIn().getType() == op.getFirstPortOut().getType() &&
+                                op.getFirstPortIn().isLinked())
                             {
-                                reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
-                                reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);
+                                reLinkP1 = op.getFirstPortIn().links[0].getOtherPort(op.getFirstPortIn());
+                                reLinkP2 = op.getFirstPortOut().links[0].getOtherPort(op.getFirstPortOut());
                             }
                         }
                     }
