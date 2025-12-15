@@ -37,6 +37,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764014424678
+        },
+        {
+            "message": "Fix output position of color ",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1765801585944
         }
     ],
     "license": "MIT",
