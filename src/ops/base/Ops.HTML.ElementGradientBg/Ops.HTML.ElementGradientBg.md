@@ -1,0 +1,1 @@
+converts a cables gradient object to a css gradient

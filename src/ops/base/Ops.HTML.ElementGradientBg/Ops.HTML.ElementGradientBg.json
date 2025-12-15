@@ -45,5 +45,9 @@
                 "objType": "element"
             }
         ]
+    },
+    "summary": "Use a cables gradient as HTML element background",
+    "docs": {
+        "ports": []
     }
 }

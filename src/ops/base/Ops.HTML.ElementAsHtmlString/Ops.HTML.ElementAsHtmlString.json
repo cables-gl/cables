@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1763997616751
-        },
-        {
-            "message": "Patch.P2ZWIt3.InnerHtmlGet renamed to Ops.HTML.ElementAsHtmlString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1763998310683
         }
     ],
     "layout": {
@@ -31,5 +25,9 @@
                 "name": "HTML String"
             }
         ]
+    },
+    "summary": "Serialize HTML/SVG elements to a string",
+    "docs": {
+        "ports": []
     }
 }

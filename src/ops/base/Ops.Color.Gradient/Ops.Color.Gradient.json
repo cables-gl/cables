@@ -22,24 +22,12 @@
             }
         ]
     },
-    "summary": "texture containing a colour gradient that can be altered with an editor",
+    "summary": "gradient editor,outputs an objects with gradient information",
     "docs": {
         "ports": [
             {
                 "name": "Gradient",
                 "text": "Click this to open the editor for the gradient. See docs for a more in depth explanation."
-            },
-            {
-                "name": "Smoothstep",
-                "text": "Enable smoothstep on changes in gradients."
-            },
-            {
-                "name": "Size",
-                "text": "The resolution of the gradient in pixels. 256 is a good default value"
-            },
-            {
-                "name": "Gradient Array",
-                "text": "An array of Object containing pos,r,g,b,a information (see documentation for format)"
             }
         ]
     },
