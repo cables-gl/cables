@@ -2,9 +2,9 @@ name: 'webhook dev'
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - develop
+  # push:
+  #   branches:
+  #     - develop
 
 jobs:
   webhook-dev:
