@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1764011722403
+        },
+        {
+            "message": "Added color space selection",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1765801044769
         }
     ],
     "layout": {
@@ -23,8 +29,14 @@
                 "name": "Type index",
                 "values": [
                     "linear",
-                    "radial"
+                    "radial",
+                    "conic"
                 ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Rect Color Space index",
                 "subType": "integer"
             },
             {
@@ -43,6 +55,10 @@
                 "type": 2,
                 "name": "HTML Element",
                 "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "CSS String"
             }
         ]
     },

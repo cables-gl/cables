@@ -24,6 +24,7 @@ inRandom.onTriggered = () =>
         });
         const newKeys = JSON.stringify({ "keys": keys });
         inGrad.set(newKeys);
+        if (CABLES.UI)op.refreshParams();
     }
 };
 
