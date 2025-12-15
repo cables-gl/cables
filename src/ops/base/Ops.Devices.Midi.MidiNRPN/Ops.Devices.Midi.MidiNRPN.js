@@ -16,7 +16,7 @@ op.setPortGroup("", [learn, clear]);
 /* OUT */
 const eventOut = op.outObject("MIDI Event Out");
 const triggerOut = op.outTrigger("Trigger Out");
-const nrpnIndexOut = op.outNumber("NRPN Index");
+const nrpnIndexOut = op.outNumber("NRPN Index Out");
 const nrpnValueOut = op.outNumber("NRPN Value");
 
 op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);
