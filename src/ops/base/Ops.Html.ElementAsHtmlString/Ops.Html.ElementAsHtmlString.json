@@ -29,5 +29,6 @@
     "summary": "Serialize HTML/SVG elements to a string",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "3kGgr5"
 }

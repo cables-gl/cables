@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "sonofluiz",
             "date": 1746054984352
-        },
-        {
-            "message": "Patch.PhORckJ.MeSpeak renamed to Ops.Extension.Voice.MeSpeak",
-            "type": "rename",
-            "author": "sonofluiz",
-            "date": 1763808237652
         }
     ],
     "layout": {
@@ -127,5 +121,9 @@
     ],
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "summary": "uses mespeak.js to convert text-to-speech",
+    "docs": {
+        "ports": []
+    }
 }
