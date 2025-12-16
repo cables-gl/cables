@@ -24,6 +24,7 @@ inRandom.onTriggered = () =>
         });
         const newKeys = JSON.stringify({ "keys": keys });
         inGrad.set(newKeys);
+        if (CABLES.UI)op.refreshParams();
     }
 };
 
@@ -69,7 +70,7 @@ function updateGradient(keys)
     for (let i = 0; i < keys.length - 1; i++)
     {
         const key = {
-            "pos": i / keys.length,
+            "pos": keys[i].pos,
             "r": keys[i].r,
             "g": keys[i].g,
             "b": keys[i].b,

@@ -47,7 +47,7 @@
             },
             {
                 "type": 0,
-                "name": "NRPN Index",
+                "name": "NRPN Index Out",
                 "subType": "number"
             },
             {
@@ -104,5 +104,6 @@
             }
         ]
     },
-    "exampleProjectId": "dfF3DI"
+    "exampleProjectId": "dfF3DI",
+    "license": "MIT"
 }

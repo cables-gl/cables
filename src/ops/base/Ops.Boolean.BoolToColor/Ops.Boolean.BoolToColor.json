@@ -1,0 +1,89 @@
+{
+    "id": "ec9d2ec6-a0f9-4035-aae5-7bbc438cd464",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1765793602063
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1765793602063,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "R True",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G True",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B True",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A True",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "R False",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G False",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B False",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A False",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Convert boolean to RGB color",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

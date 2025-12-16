@@ -31,6 +31,7 @@ function update()
     lastElement = element;
     lastEventName = eventName;
     lastUseCapture = useCapture;
+    op.setUiAttrib({ "extendTitle": eventNamePort.get() });
 }
 
 function removeListener()

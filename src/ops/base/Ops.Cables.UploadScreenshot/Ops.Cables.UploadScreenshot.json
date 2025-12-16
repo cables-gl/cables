@@ -29,5 +29,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "summary": "Upload an image as screentshot in cables",
+    "docs": {
+        "ports": []
     }
 }
