@@ -1525,17 +1525,6 @@ export class Op extends Events
         this._log.verbose(...arguments);
     }
 
-    // @todo move to ui ?
-    profile()
-    {
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-        {
-            const p = this.portsIn[ipi];
-            this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
-            this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
-        }
-    }
-
     // todo: check instancing stuff?
     cleanUp()
     {
@@ -1854,9 +1843,15 @@ export class Op extends Events
 
     }
 
-    newPort()
+    /**
+     * @param {Op} op
+     * @param {string} name
+     * @param {number} type
+     * @param {import("./core_port.js").PortUiAttribs} [uiAttribs]
+     */
+    newPort(op, name, type, uiAttribs)
     {
-        return new CABLES.Port(...arguments);
+        return new CABLES.Port(op, name, type, uiAttribs);
     }
 
 }

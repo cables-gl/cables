@@ -642,7 +642,7 @@ export class Patch extends Events
                     found = true;
                     if (tryRelink)
                     {
-                        if (op.portsIn.length > 0 && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut().isLinked()))
+                        if (op.portsIn.length > 0 && op.getFirstPortIn() && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut() && op.getFirstPortOut().isLinked()))
                         {
                             if (op.getFirstPortIn().getType() == op.getFirstPortOut().getType() &&
                                 op.getFirstPortIn().isLinked())
@@ -1159,16 +1159,6 @@ export class Patch extends Events
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);
         this.#initialDeserialize = false;
-    }
-
-    /**
-     * @param {boolean} enable
-     */
-    profile(enable)
-    {
-        this.profiler = new Profiler(this);
-        for (let i = 0; i < this.ops.length; i++)
-            this.ops[i].profile();
     }
 
     // ----------------------
