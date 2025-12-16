@@ -34,8 +34,8 @@ export class AnimKey
     }
 
     /**
-     * @param {Anim} a
      * @param {any} clipId
+     * @param {Anim} a
      */
     setClip(clipId, a)
     {

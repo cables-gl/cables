@@ -198,6 +198,7 @@ export const clamp = function (value, min, max)
  * @param {Number} _newMin new range minimum value
  * @param {Number} _newMax new range maximum value
  * @param {Number} _easing
+ * @param {Boolean} clamp
  * @return {Number} mapped value
  * @static
  */
