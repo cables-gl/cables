@@ -1065,7 +1065,7 @@ Texture.isPixelFormatHalfFloat =
 Op.prototype.outTexture = function (name, v)
 {
     const p = this.addOutPort(
-        new Port(this, name, Port.TYPE_OBJECT, {
+        this.newPort(this, name, Port.TYPE_OBJECT, {
             "preview": true,
             "objType": "texture",
             "display": "texture"

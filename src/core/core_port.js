@@ -759,9 +759,10 @@ export class Port extends Events
                     portTriggered.op.patch.pushTriggerStack(portTriggered);
                     if (!portTriggered._onTriggered)
                     {
-                        console.log(portTriggered, portTriggered._onTriggered);
+                        console.log("no porttriggered?!", portTriggered, portTriggered._onTriggered);
                     }
-                    portTriggered._onTriggered();
+                    else
+                        portTriggered._onTriggered();
 
                     portTriggered.op.patch.popTriggerStack();
                 }
@@ -1011,64 +1012,6 @@ export class Port extends Events
     }
 
     /**
-     * @param {any} v
-     */
-    _onSetProfiling(v) // used in editor: profiler tab
-    {
-        if (this.op.patch.debuggerEnabled)
-        {
-            // console.log(this.op.name + " - port " + this.name + ": set value to " + v);
-            const cv = v;
-
-            this.op.patch.emitEvent("debuggerstep",
-                {
-                    "opname": this.op.name,
-                    "opid": this.op.id,
-                    "portname": this.name,
-                    "log": this.op.name + " - port " + this.name + ": set value to " + v,
-                    "exec": () =>
-                    {
-                        this.setValue(cv);
-                    }
-                });
-            return;
-        }
-
-        this.#op.patch.profiler.add("port", this);
-        this.setValue(v);
-        this.#op.patch.profiler.add("port", null);
-    }
-
-    _onTriggeredProfiling() // used in editor: profiler tab
-    {
-        if (this.#op.enabled && this.onTriggered)
-        {
-            if (this.op.patch.debuggerEnabled)
-            {
-                console.log();
-                this.op.patch.emitEvent("debuggerstep",
-                    {
-                        "opname": this.op.name,
-                        "opid": this.op.id,
-                        "portname": this.name,
-                        "log": this.op.name + " - triggered " + this.name,
-                        "exec": () =>
-                        {
-                            this.onTriggered();
-                        }
-
-                    });
-                return;
-
-            }
-
-            this.#op.patch.profiler.add("port", this);
-            this.onTriggered();
-            this.#op.patch.profiler.add("port", null);
-        }
-    }
-
-    /**
      * @deprecated
      * @param {function} cb
      */
@@ -1097,4 +1040,5 @@ export class Port extends Events
         if (type == Port.TYPE_DYNAMIC) return "dynamic";
         return "unknown";
     }
+
 }

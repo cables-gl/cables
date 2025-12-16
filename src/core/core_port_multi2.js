@@ -235,7 +235,7 @@ export class MultiPort2 extends Port
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             attrs.type = type;
-            const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
+            const po = this.op.newPort(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
 

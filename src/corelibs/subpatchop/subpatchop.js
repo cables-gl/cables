@@ -7,7 +7,7 @@ export class SubPatchOp
         options = options || {};
         this._op = op;
 
-        op.patchId = op.addInPort(new Port(op, "patchId", CONSTANTS.OP.OP_PORT_TYPE_STRING, { "display": "readonly", "hidePort": true, "hideParam": true }));
+        op.patchId = op.addInPort(op.newPort(op, "patchId", CONSTANTS.OP.OP_PORT_TYPE_STRING, { "display": "readonly", "hidePort": true, "hideParam": true }));
 
         op.setUiAttribs({ "subPatchOp": { "version": 2 } });
 
