@@ -2,39 +2,10 @@
     "id": "91f30465-4a4c-4447-9b16-072252f0a977",
     "changelog": [
         {
-            "message": "created op",
+            "message": "added pixelformat selection",
+            "type": "feature",
             "author": "pandur",
-            "date": 1642868426174
-        },
-        {
-            "message": " added core lib: cgl_texturecopy",
-            "author": "pandur",
-            "date": 1642868439042
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1642869069922
-        },
-        {
-            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1642869809458
-        },
-        {
-            "message": "cloned op from Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1643797752609
-        },
-        {
-            "message": "Ops.User.pandur.TextureToCoordinateGrid renamed to Ops.Dev.TextureToCoordinateGrid",
-            "author": "pandur",
-            "date": 1643797942632
-        },
-        {
-            "message": "Ops.Dev.TextureToCoordinateGrid renamed to Ops.Gl.Textures.TextureToCoordinateGrid",
-            "author": "pandur",
-            "date": 1644229037728
+            "date": 1765974967213
         }
     ],
     "coreLibs": [
@@ -64,6 +35,11 @@
                 "type": 0,
                 "name": "Threshold",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -97,5 +73,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "nMBUVW"
+    "exampleProjectId": "nMBUVW",
+    "license": "MIT"
 }
