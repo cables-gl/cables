@@ -1,0 +1,43 @@
+{
+    "id": "fd6da32a-642f-41e2-a47b-579b87d9fcd2",
+    "created": 1765895307868,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1765895307869
+        },
+        {
+            "message": "Patch.PiLdXx5.StepDebug renamed to Ops.Debug.StepDebugger.StepDebugTrigger",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1765969180296
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Title"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
