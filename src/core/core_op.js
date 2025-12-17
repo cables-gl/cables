@@ -571,7 +571,7 @@ export class Op extends Events
      * @param {number} type
      * @param {import("./core_port.js").PortUiAttribs} uiAttrs
      */
-    inMultiPort2(name, type, uiAttrs)
+    inMultiPort2(name, type, uiAttrs, minNum = 2)
     {
         const attrs =
             {
@@ -579,7 +579,7 @@ export class Op extends Events
                 "hidePort": true
             };
 
-        const p = new MultiPort2(this, name, type, Port.DIR_IN, attrs, uiAttrs);
+        const p = new MultiPort2(this, name, type, Port.DIR_IN, attrs, uiAttrs, minNum);
         p.ignoreValueSerialize = true;
 
         this.addInPort(p);
