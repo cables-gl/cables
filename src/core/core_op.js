@@ -441,7 +441,7 @@ export class Op extends Events
      */
     inTrigger(name, v)
     {
-        const p = this.addInPort(new Port(this, name, Port.TYPE_FUNCTION));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -455,7 +455,7 @@ export class Op extends Events
     inTriggerButton(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_FUNCTION, {
+            this.newPort(this, name, Port.TYPE_FUNCTION, {
                 "display": "button"
             })
         );
@@ -470,7 +470,7 @@ export class Op extends Events
     inUiTriggerButtons(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_FUNCTION, {
+            this.newPort(this, name, Port.TYPE_FUNCTION, {
                 "display": "buttons"
             })
         );
@@ -506,7 +506,7 @@ export class Op extends Events
      */
     inFloat(name, v)
     {
-        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_VALUE));
 
         p.setInitialValue(v);
 
@@ -532,7 +532,7 @@ export class Op extends Events
     inBool(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_NUMBER, {
+            this.newPort(this, name, Port.TYPE_NUMBER, {
                 "display": "bool"
             })
         );
@@ -645,7 +645,7 @@ export class Op extends Events
     inValueString(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "type": "string"
             })
         );
@@ -664,7 +664,7 @@ export class Op extends Events
     inString(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_STRING, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "type": "string"
             })
         );
@@ -684,7 +684,7 @@ export class Op extends Events
     // inValueText(name, v)
     // {
     //     const p = this.addInPort(
-    //         new Port(this, name, Port.TYPE_VALUE, {
+    //         this.newPort(this, name, Port.TYPE_VALUE, {
     //             "type": "string",
     //             "display": "text"
     //         })
@@ -710,7 +710,7 @@ export class Op extends Events
     inTextarea(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_STRING, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "type": "string",
                 "display": "text"
             })
@@ -735,7 +735,7 @@ export class Op extends Events
     inStringEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_STRING, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "type": "string",
                 "display": "editor",
                 "editShortcut": true,
@@ -761,7 +761,7 @@ export class Op extends Events
     inValueEditor(name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_NUMBER, {
+            this.newPort(this, name, Port.TYPE_NUMBER, {
                 "type": "string",
                 "display": "editor",
                 "editorSyntax": syntax,
@@ -802,7 +802,7 @@ export class Op extends Events
         let p = null;
         if (!noindex)
         {
-            const indexPort = new Port(this, name + " index", Port.TYPE_NUMBER, {
+            const indexPort = this.newPort(this, name + " index", Port.TYPE_NUMBER, {
                 "increment": "integer",
                 "hideParam": true
             });
@@ -852,7 +852,7 @@ export class Op extends Events
         }
         else
         {
-            const valuePort = new Port(this, name, Port.TYPE_VALUE, {
+            const valuePort = this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "dropdown",
                 "hidePort": true,
                 "type": "string",
@@ -879,7 +879,7 @@ export class Op extends Events
         if (!noindex)
         {
             if (!v)v = values[0];
-            const indexPort = new Port(this, name + " index", Port.TYPE_VALUE, {
+            const indexPort = this.newPort(this, name + " index", Port.TYPE_VALUE, {
                 "increment": "integer",
                 "values": values,
                 "hideParam": true
@@ -929,7 +929,7 @@ export class Op extends Events
         }
         else
         {
-            const switchPort = new Port(this, name, Port.TYPE_STRING, {
+            const switchPort = this.newPort(this, name, Port.TYPE_STRING, {
                 "display": "switch",
                 "hidePort": true,
                 "type": "string",
@@ -961,7 +961,7 @@ export class Op extends Events
     inInt(name, v)
     {
         // old
-        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE, { "increment": "integer" }));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_VALUE, { "increment": "integer" }));
         if (v !== undefined)
         {
             p.set(v);
@@ -980,7 +980,7 @@ export class Op extends Events
     inFile(name, filter, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "file",
                 "type": "string",
                 "filter": filter
@@ -1004,7 +1004,7 @@ export class Op extends Events
     inUrl(name, filter, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_STRING, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "display": "file",
                 "type": "string",
                 "filter": filter
@@ -1027,7 +1027,7 @@ export class Op extends Events
     inTexture(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_OBJECT, {
+            this.newPort(this, name, Port.TYPE_OBJECT, {
                 "display": "texture",
                 "objType": "texture",
                 "preview": true
@@ -1047,7 +1047,7 @@ export class Op extends Events
      */
     inObject(name, v, objType)
     {
-        const p = this.addInPort(new Port(this, name, Port.TYPE_OBJECT, { "objType": objType }));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_OBJECT, { "objType": objType }));
         p.ignoreValueSerialize = true;
 
         if (v !== undefined) p.set(v);
@@ -1061,7 +1061,7 @@ export class Op extends Events
     inGradient(name, v)
     {
         const p = this.addInPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "gradient"
                 // "hidePort": true
             })
@@ -1101,7 +1101,7 @@ export class Op extends Events
         // @ts-ignore
         if (!_stride && CABLES.isNumeric(v))stride = v;
 
-        const p = this.addInPort(new Port(this, name, Port.TYPE_ARRAY, { "stride": stride }));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_ARRAY, { "stride": stride }));
 
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 
@@ -1138,7 +1138,7 @@ export class Op extends Events
             uiattribs.max = max;
         }
 
-        const p = this.addInPort(new Port(this, name, Port.TYPE_VALUE, uiattribs));
+        const p = this.addInPort(this.newPort(this, name, Port.TYPE_VALUE, uiattribs));
         if (v !== undefined)
         {
             p.set(v);
@@ -1166,7 +1166,7 @@ export class Op extends Events
     outTrigger(name, v)
     {
         // old
-        const p = this.addOutPort(new Port(this, name, Port.TYPE_FUNCTION));
+        const p = this.addOutPort(this.newPort(this, name, Port.TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -1189,7 +1189,7 @@ export class Op extends Events
      */
     outNumber(name, v)
     {
-        const p = this.addOutPort(new Port(this, name, Port.TYPE_VALUE));
+        const p = this.addOutPort(this.newPort(this, name, Port.TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
     }
@@ -1215,7 +1215,7 @@ export class Op extends Events
     {
         // old: use outBoolNum
         const p = this.addOutPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "bool"
             })
         );
@@ -1233,7 +1233,7 @@ export class Op extends Events
     outBoolNum(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "boolnum"
             })
         );
@@ -1256,7 +1256,7 @@ export class Op extends Events
     outValueString(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_VALUE, {
                 "type": "string"
             })
         );
@@ -1273,7 +1273,7 @@ export class Op extends Events
     outString(name, v)
     {
         const p = this.addOutPort(
-            new Port(this, name, Port.TYPE_STRING, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "type": "string"
             })
         );
@@ -1291,7 +1291,7 @@ export class Op extends Events
      */
     outObject(name, v, objType)
     {
-        const p = this.addOutPort(new Port(this, name, Port.TYPE_OBJECT, { "objType": objType || null }));
+        const p = this.addOutPort(this.newPort(this, name, Port.TYPE_OBJECT, { "objType": objType || null }));
         p.set(v || null);
         p.ignoreValueSerialize = true;
         return p;
@@ -1307,7 +1307,7 @@ export class Op extends Events
     outArray(name, v, stride)
     {
         if (!stride && CABLES.isNumeric(v))stride = v;
-        const p = this.addOutPort(new Port(this, name, Port.TYPE_ARRAY, { "stride": stride }));
+        const p = this.addOutPort(this.newPort(this, name, Port.TYPE_ARRAY, { "stride": stride }));
         if (v !== undefined && (Array.isArray(v) || v == null)) p.set(v);
 
         p.ignoreValueSerialize = true;
@@ -1336,7 +1336,7 @@ export class Op extends Events
      */
     inDynamic(name, filter, options, v)
     {
-        const p = new Port(this, name, Port.TYPE_DYNAMIC, options);
+        const p = this.newPort(this, name, Port.TYPE_DYNAMIC, options);
 
         p.shouldLink = () =>
         {
@@ -1523,15 +1523,6 @@ export class Op extends Events
     logVerbose()
     {
         this._log.verbose(...arguments);
-    }
-
-    profile()
-    {
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-        {
-            this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
-            this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
-        }
     }
 
     // todo: check instancing stuff?
@@ -1851,4 +1842,16 @@ export class Op extends Events
                 this.setUiError("wronggapi", "Wrong graphics API", 2);
 
     }
+
+    /**
+     * @param {Op} op
+     * @param {string} name
+     * @param {number} type
+     * @param {import("./core_port.js").PortUiAttribs} [uiAttribs]
+     */
+    newPort(op, name, type, uiAttribs)
+    {
+        return new CABLES.Port(op, name, type, uiAttribs);
+    }
+
 }

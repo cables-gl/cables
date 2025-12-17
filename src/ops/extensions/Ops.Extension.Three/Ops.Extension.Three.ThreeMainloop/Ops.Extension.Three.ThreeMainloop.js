@@ -31,7 +31,6 @@ document.addEventListener("visibilitychange", () => { winVisible = !document.hid
 
 testMultiMainloop();
 
-// op.patch.cgl.cgCanvas.forceAspect = 1.7777777;
 op.patch.tempData.mainloopOp = this;
 
 function updateHdpi()
