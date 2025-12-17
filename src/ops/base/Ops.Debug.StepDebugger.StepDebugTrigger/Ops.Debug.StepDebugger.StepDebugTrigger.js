@@ -19,7 +19,7 @@ exec.onTriggered = () =>
     op.patch.tempData.continueStepDebugLog.push({
         "time": performance.now(),
         "port": exec,
-        "action": "Start debug " + inTitle.get()
+        "action": "Start stepDebugTrigger " + inTitle.get()
     });
 
     next.trigger();

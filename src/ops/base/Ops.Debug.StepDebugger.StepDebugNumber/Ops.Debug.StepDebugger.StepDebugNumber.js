@@ -17,7 +17,7 @@ inNum.onChange = () =>
     op.patch.tempData.continueStepDebugLog = op.patch.tempData.continueStepDebugLog || [];
     op.patch.tempData.continueStepDebugLog.push({
         "time": performance.now(),
-        "action": "Start debug " + inTitle.get()
+        "action": "Start stepDebugNumber " + inTitle.get()
     });
 
     outNum.set(inNum.get());
