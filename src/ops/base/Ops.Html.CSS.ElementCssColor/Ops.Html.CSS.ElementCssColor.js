@@ -1,15 +1,15 @@
 const
     inEle = op.inObject("Element", null, "element"),
     inSetCol = op.inBool("Set Color", true),
-    r = op.inValueSlider("Color R", 0),
-    g = op.inValueSlider("Color G", 0),
-    b = op.inValueSlider("Color B", 0),
-    a = op.inValueSlider("Color A", 1),
+    r = op.inFloatSlider("Color R", 0),
+    g = op.inFloatSlider("Color G", 0),
+    b = op.inFloatSlider("Color B", 0),
+    a = op.inFloatSlider("Color A", 1),
     inSetBg = op.inBool("Set Background", true),
-    bgr = op.inValueSlider("Background Color R", 1),
-    bgg = op.inValueSlider("Background Color G", 1),
-    bgb = op.inValueSlider("Background Color B", 1),
-    bga = op.inValueSlider("Background Color A", 1),
+    bgr = op.inFloatSlider("Background Color R", 1),
+    bgg = op.inFloatSlider("Background Color G", 1),
+    bgb = op.inFloatSlider("Background Color B", 1),
+    bga = op.inFloatSlider("Background Color A", 1),
     outEle = op.outObject("HTML Element", null, "element");
 
 r.setUiAttribs({ "colorPick": true });

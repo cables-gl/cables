@@ -104,6 +104,8 @@ export class Op extends Events
         "needsParentOp": null
     };
 
+    inValueSlider = this.inFloatSlider;
+
     /* minimalcore:end */
 
     shouldWork = {};
@@ -336,18 +338,6 @@ export class Op extends Events
     inValueInt(name, v)
     {
         return this.inInt(name, v);
-    }
-
-    /**
-     * @deprecated
-     * @param {string} name
-     * @param {number} v
-     * @param {number} min
-     * @param {number} max
-     */
-    inValueSlider(name, v, min, max)
-    {
-        return this.inFloatSlider(name, v, min, max);
     }
 
     /**

@@ -32,7 +32,6 @@ CABLES.Op = Op;
 CABLES.Profiler = Profiler;
 CABLES.Patch = Patch;
 CABLES.Timer = Timer;
-CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
 CABLES.internalNow = internalNow;
@@ -59,6 +58,7 @@ CABLES.filename = utils.filename;
 CABLES.ajax = utils.ajax;
 CABLES.cacheBust = utils.cacheBust;
 CABLES.shuffleArray = utils.shuffleArray;
+CABLES.Variable = Variable;
 
 /* minimalcore:end */
 

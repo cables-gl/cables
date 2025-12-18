@@ -429,6 +429,7 @@ export class Anim extends Events
     getSerialized()
     {
 
+        /* minimalcore:start */
         /** @type {SerializedAnim} */
         const obj = {};
         obj.keys = [];
@@ -440,6 +441,8 @@ export class Anim extends Events
             obj.keys.push(this.keys[i].getSerialized());
 
         return obj;
+
+    /* minimalcore:end */
     }
 
     /**
@@ -550,14 +553,6 @@ export class Anim extends Events
      */
     getValue(time = 0)
     {
-        // if (isNaN(time))time = 0;
-        // counts[this.name] = counts[this.name] || 0;
-        // if (counts[this.name] < 10 && this.port)
-        // {
-        //     console.log("getvalue", this.name, time, this);
-        //     CABLES.logStack();
-        //     counts[this.name]++;
-        // }
 
         let valAdd = 0;
         if (this.keys.length === 0) return 0;
@@ -617,7 +612,6 @@ export class Anim extends Events
         {
             if (!key1.clip && this.port)
             {
-
                 const patch = this.port.op.patch;
                 const clip = patch.getVar(key1.clipId)?.getValue();
                 if (clip) key1.clip = clip;
@@ -669,6 +663,7 @@ export class Anim extends Events
         if (str == "smoothstep") return Anim.EASING_SMOOTHSTEP;
         if (str == "smootherstep") return Anim.EASING_SMOOTHERSTEP;
 
+        /* minimalcore:start */
         if (str == "Cubic In") return Anim.EASING_CUBIC_IN;
         if (str == "Cubic Out") return Anim.EASING_CUBIC_OUT;
         if (str == "Cubic In Out") return Anim.EASING_CUBIC_INOUT;
@@ -699,6 +694,7 @@ export class Anim extends Events
         if (str == "Quint In") return Anim.EASING_QUINT_IN;
         if (str == "Quint In Out") return Anim.EASING_QUINT_INOUT;
 
+        /* minimalcore:end */
         console.log("unknown anim easing?", str);
     }
 
