@@ -384,6 +384,8 @@ export class Patch extends Events
                     {
                         this._crashedOps.push(objName);
                         this._log.error("[instancing error] constructor: " + objName, e);
+
+                        /* minimalcore:start */
                         if (!this.isEditorMode())
                         {
                             this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
@@ -396,6 +398,8 @@ export class Patch extends Events
                             op.setEnabled(false);
                             if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
                         }
+
+                        /* minimalcore:end */
                     }
                     op.opId = opId;
                 }
@@ -457,6 +461,7 @@ export class Patch extends Events
 
             this._log.error("[instancing error] " + objName, e);
 
+            /* minimalcore:start */
             if (!this.isEditorMode())
             {
                 this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
@@ -467,6 +472,8 @@ export class Patch extends Events
             {
                 if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
             }
+
+            /* minimalcore:end */
         }
 
         if (op)
@@ -740,6 +747,8 @@ export class Patch extends Events
      */
     serialize(options)
     {
+
+        /* minimalcore:start */
         const obj = {};
 
         options = options || {};
@@ -755,8 +764,11 @@ export class Patch extends Events
 
         if (options.asObject) return obj;
         return JSON.stringify(obj);
+
+        /* minimalcore:end */
     }
 
+    /* minimalcore:start */
     getOpsByRefId(refId) // needed for instancing ops ?
     {
         const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
@@ -767,6 +779,8 @@ export class Patch extends Events
         perf.finish();
         return refOps;
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {String} opid
@@ -1260,6 +1274,7 @@ export class Patch extends Events
      * @param {number} t
      * @returns {PatchVariable[]}
      */
+    /* minimalcore:start */
     getVars(t)
     {
         if (t === undefined) return this._variables;
@@ -1290,23 +1305,7 @@ export class Patch extends Events
         return vars;
     }
 
-    // getVars(t)
-    // {
-    //     if (t === undefined) return this._variables;
-
-    //     const vars = [];
-    //     let tStr = "";
-    //     if (t == Port.TYPE_STRING) tStr = "string";
-    //     if (t == Port.TYPE_VALUE) tStr = "number";
-    //     if (t == Port.TYPE_ARRAY) tStr = "array";
-    //     if (t == Port.TYPE_OBJECT) tStr = "object";
-
-    //     for (const i in this._variables)
-    //     {
-    //         if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
-    //     }
-    //     return vars;
-    // }
+    /* minimalcore:end */
 
     /**
      * @description invoke pre rendering of ops
@@ -1443,6 +1442,8 @@ export class Patch extends Events
                             {
                                 links.splice(l, 1);
                             }
+
+                            /* minimalcore:start */
                             else
                             {
                                 if (options.fixLostLinks)
@@ -1462,6 +1463,8 @@ export class Patch extends Events
                                     }
                                 }
                             }
+
+                            /* minimalcore:end */
                         }
                     }
                 }

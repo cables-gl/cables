@@ -157,6 +157,8 @@ export class Link extends Events
 
     getSerialized()
     {
+
+        /* minimalcore:start */
         const obj = {};
 
         obj.portIn = this.portIn.getName();
@@ -165,6 +167,8 @@ export class Link extends Events
         obj.objOut = this.portOut.op.id;
 
         return obj;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -175,6 +179,8 @@ export class Link extends Events
      */
     static canLinkText(p1, p2)
     {
+
+        /* minimalcore:start */
         if (p1.direction == p2.direction)
         {
             let txt = "(out)";
@@ -205,6 +211,8 @@ export class Link extends Events
         if ((p1.canLink && !p1.canLink(p2)) || (p2.canLink && !p2.canLink(p1))) return "Incompatible";
 
         return "can link";
+
+        /* minimalcore:end */
     }
 
     /**
@@ -216,6 +224,8 @@ export class Link extends Events
      */
     static canLink(p1, p2)
     {
+
+        /* minimalcore:start */
         if (!p1) return false;
         if (!p2) return false;
         if (p1.direction == Port.DIR_IN && p1.isAnimated()) return false;
@@ -245,6 +255,7 @@ export class Link extends Events
         if (p1.canLink && !p1.canLink(p2)) return false;
         if (p2.canLink && !p2.canLink(p1)) return false;
 
+        /* minimalcore:end */
         return true;
     }
 }

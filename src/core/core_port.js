@@ -453,19 +453,6 @@ export class Port extends Events
         else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
     }
 
-    static getTypeString(t)
-    {
-        // todo:needed only in ui ?remove from core?
-
-        if (t == Port.TYPE_VALUE) return "Number";
-        if (t == Port.TYPE_FUNCTION) return "Trigger";
-        if (t == Port.TYPE_OBJECT) return "Object";
-        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
-        if (t == Port.TYPE_ARRAY) return "Array";
-        if (t == Port.TYPE_STRING) return "String";
-        return "Unknown";
-    }
-
     /**
      * @description get port type as string, e.g. "Function","Value"...
      * @return {String} type
@@ -533,6 +520,8 @@ export class Port extends Events
 
     getSerialized()
     {
+
+        /* minimalcore:start */
         let obj = { "name": this.getName() };
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
@@ -589,6 +578,8 @@ export class Port extends Events
         cleanJson(obj);
 
         return obj;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -944,10 +935,14 @@ export class Port extends Events
 
     toggleAnim()
     {
+
+        /* minimalcore:start */
         this.setAnimated(!this.#animated);
         this.setUiAttribs({ "isAnimated": this.#animated });
         this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
         this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1032,6 +1027,8 @@ export class Port extends Events
      */
     static portTypeNumberToString(type)
     {
+
+        /* minimalcore:start */
         if (type == Port.TYPE_VALUE) return "value";
         if (type == Port.TYPE_FUNCTION) return "function";
         if (type == Port.TYPE_OBJECT) return "object";
@@ -1039,6 +1036,24 @@ export class Port extends Events
         if (type == Port.TYPE_STRING) return "string";
         if (type == Port.TYPE_DYNAMIC) return "dynamic";
         return "unknown";
+
+        /* minimalcore:end */
+    }
+
+    static getTypeString(t)
+    {
+        // todo:needed only in ui ?remove from core?
+
+        /* minimalcore:start */
+        if (t == Port.TYPE_VALUE) return "Number";
+        if (t == Port.TYPE_FUNCTION) return "Trigger";
+        if (t == Port.TYPE_OBJECT) return "Object";
+        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
+        if (t == Port.TYPE_ARRAY) return "Array";
+        if (t == Port.TYPE_STRING) return "String";
+        return "Unknown";
+
+        /* minimalcore:end */
     }
 
 }

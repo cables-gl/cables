@@ -97,11 +97,14 @@ export class Op extends Events
     preservedPortValues = {};
     preservedPortLinks = {};
 
+    /* minimalcore:start */
     linkTimeRules = {
         "needsLinkedToWork": [],
         "needsStringToWork": [],
         "needsParentOp": null
     };
+
+    /* minimalcore:end */
 
     shouldWork = {};
     hasUiErrors = 0;
@@ -122,7 +125,6 @@ export class Op extends Events
     {
         super();
 
-        // this.#name = _objName;
         this.opId = _id;
         this.#objName = _objName;
         this.patch = _patch;
@@ -162,15 +164,21 @@ export class Op extends Events
          */
     }
 
+    /* minimalcore:start */
     isInBlueprint2() // will be overwritten in ui
     {
         return false;
     }
 
+    /* minimalcore:end */
+
+    /* minimalcore:start */
     getSubPatch()// will be overwritten in ui
     {
         return 0;
     }
+
+    /* minimalcore:end */
 
     get name()
     {
@@ -207,6 +215,7 @@ export class Op extends Events
      * @param {String} _name - module name
      * @returns {Object}
      */
+    /* minimalcore:start */
     require(_name)
     {
         if (CABLES.platform && CABLES.StandaloneElectron && !CABLES.platform.frontendOptions.isElectron)
@@ -215,6 +224,9 @@ export class Op extends Events
         return null;
     }
 
+    /* minimalcore:end */
+
+    /* minimalcore:start */
     checkMainloopExists()
     {
         if (!CABLES.UI) return;
@@ -222,15 +234,12 @@ export class Op extends Events
         else this.setUiError("nomainloop", null);
     }
 
+    /* minimalcore:end */
+
     /** @returns {string} */
     getTitle()
     {
         if (!this.uiAttribs) return "nouiattribs" + this.shortName;
-
-        /*
-         * if ((this.uiAttribs.title === undefined || this.uiAttribs.title === "") && this.objName.indexOf("Ops.Ui.") == -1)
-         *     this.uiAttribs.title = this._shortOpName;
-         */
 
         return this.uiAttribs.title || this.#shortOpName;
     }
@@ -241,16 +250,10 @@ export class Op extends Events
     setTitle(title)
     {
 
-        /*
-         * this._log.log("settitle", title);
-         * this._log.log(
-         *     (new Error()).stack
-         * );
-         */
-
         if (title != this.getTitle()) this._setUiAttrib({ "title": title });
     }
 
+    /* minimalcore:start */
     /**
      * @param {Object} newAttribs
      */
@@ -268,6 +271,8 @@ export class Op extends Events
 
         if (changed) this.emitEvent("onStorageChange", newAttribs);
     }
+
+    /* minimalcore:end */
 
     isSubPatchOp()
     {
@@ -315,6 +320,7 @@ export class Op extends Events
      */
     _setUiAttrib(newAttribs)
     {
+
         if (!newAttribs) return;
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
@@ -361,6 +367,7 @@ export class Op extends Events
         }
 
         if (emitMove) this.emitEvent("move");
+
     }
 
     getName()
@@ -1362,6 +1369,8 @@ export class Op extends Events
     // @TODO should be move to extend...
     getSerialized()
     {
+
+        /* minimalcore:start */
         const opObj = {};
 
         if (this.opId) opObj.opId = this.opId;
@@ -1404,6 +1413,8 @@ export class Op extends Events
         cleanJson(opObj);
 
         return opObj;
+
+        /* minimalcore:end */
     }
 
     /**

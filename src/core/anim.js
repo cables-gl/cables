@@ -34,6 +34,8 @@ export class Anim extends Events
     static EASING_ABSOLUTE = 1;
     static EASING_SMOOTHSTEP = 2;
     static EASING_SMOOTHERSTEP = 3;
+
+    /* minimalcore:start */
     static EASING_CUBICSPLINE = 4;
 
     static EASING_CUBIC_IN = 5;
@@ -65,6 +67,8 @@ export class Anim extends Events
     static EASING_QUINT_IN = 25;
     static EASING_QUINT_OUT = 26;
     static EASING_QUINT_INOUT = 27;
+
+    /* minimalcore:end */
 
     static EASING_CLIP = 28;
 

@@ -3,6 +3,8 @@ import { generateUUID } from "./utils.js";
 
 const EMBED = {};
 
+/* minimalcore:start */
+
 /**
  * add patch into html element (will create canvas and set size to fill containerElement)
  * @name CABLES.EMBED#addPatch
@@ -58,3 +60,5 @@ EMBED.addPatch = function (_element, options)
 };
 
 export { EMBED };
+
+/* minimalcore:end */
