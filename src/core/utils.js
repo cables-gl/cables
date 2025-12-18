@@ -2,6 +2,7 @@
  * @namespace external:CABLES#Utils
  */
 
+import { helper } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { extendJs } from "./extendjs.js";
 
@@ -93,18 +94,9 @@ export const shortId = function ()
  * @return {UUID} generated UUID
  * @static
  */
-export const uuid = function ()
-{
-    let d = new Date().getTime();
-    const uuidStr = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
-    {
-        const r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    });
-    return uuidStr;
-};
+export const uuid = helper.uuid;
 export const generateUUID = uuid;
+export const isNumeric = helper.isNumeric;
 
 export function cleanJson(obj)
 {
@@ -245,19 +237,6 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0,
 
     return r;
 };
-
-// ----------------------------------------------------------------
-
-/**
- * returns true if parameter is a number
- * @param {any} n value The value to check.
- * @return {Boolean}
- * @static
- */
-export function isNumeric(n)
-{
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
 
 // ----------------------------------------------------------------
 
