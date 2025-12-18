@@ -1,8 +1,8 @@
 const
-    inTrigs = op.inMultiPort2("Input", CABLES.OP_PORT_TYPE_FUNCTION),
-    outTrigs = op.outMultiPort2("Output", CABLES.OP_PORT_TYPE_FUNCTION);
+    inTrigs = op.inMultiPort2("Input", CABLES.OP_PORT_TYPE_FUNCTION, null, 4),
+    outTrigs = op.outMultiPort2("Output", CABLES.OP_PORT_TYPE_FUNCTION, 4);
 
-op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
+// op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
 
 inTrigs.onTriggered = (index) =>
 {

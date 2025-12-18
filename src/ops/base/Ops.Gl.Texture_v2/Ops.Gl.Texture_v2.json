@@ -110,7 +110,8 @@
         {
             "message": "Ops.User.pandur.Texture_v2 renamed to Ops.Gl.Texture_v2",
             "author": "pandur",
-            "date": 1581607147784
+            "date": 1581607147784,
+            "type": "new"
         },
         {
             "message": "typing in the url input will not blur element",
