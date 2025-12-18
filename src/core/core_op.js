@@ -305,6 +305,7 @@ export class Op extends Events
         this._setUiAttrib(a);
     }
 
+    /* minimalcore:start */
     /**
      * @deprecated
      * @param {OpUiAttribs} a
@@ -315,12 +316,142 @@ export class Op extends Events
     }
 
     /**
+     * @deprecated
+     * @param {string} name
+     * @param {any[]} values
+     * @param {string} v
+     * @param {boolean} noindex
+     */
+    inValueSelect(name, values, v, noindex)
+    {
+        return this.inDropDown(name, values, v, noindex);
+    }
+
+    /**
+     *
+     * @deprecated
+     * @param {string} name
+     * @param {number} v
+     */
+    inValueInt(name, v)
+    {
+        return this.inInt(name, v);
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {number} v
+     * @param {number} min
+     * @param {number} max
+     */
+    inValueSlider(name, v, min, max)
+    {
+        return this.inFloatSlider(name, v, min, max);
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {string} v
+     */
+    outFunction(name, v)
+    {
+        return this.outTrigger(name, v);
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {number} v
+     */
+    outValue(name, v)
+    {
+        return this.outNumber(name, v);
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {boolean} v
+     */
+    outValueBool(name, v)
+    {
+        return this.outBool(name, v);
+    }
+
+    /**
+     * deprecated create output boolean port
+     * @deprecated
+     * @param {String} name
+     * @param {boolean} v default value
+     * @return {Port} created port
+     */
+    outBool(name, v)
+    {
+        // old: use outBoolNum
+        const p = this.addOutPort(
+            this.newPort(this, name, Port.TYPE_VALUE, {
+                "display": "bool"
+            })
+        );
+        if (v !== undefined) p.set(v);
+        else p.set(0);
+        return p;
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {string} v
+     */
+    outValueString(name, v)
+    {
+        const p = this.addOutPort(
+            this.newPort(this, name, Port.TYPE_VALUE, {
+                "type": "string"
+            })
+        );
+        if (v !== undefined) p.set(v);
+        return p;
+    }
+
+    /**
+     * @deprecated
+     * @param {string} name
+     * @param {any} filter
+     * @param {any} options
+     * @param {any} v
+     */
+    inDynamic(name, filter, options, v)
+    {
+        const p = this.newPort(this, name, Port.TYPE_DYNAMIC, options);
+
+        p.shouldLink = () =>
+        {
+            if (filter && Array.isArray(filter)) return false; // types do not match
+            return true; // no filter set
+        };
+
+        this.addInPort(p);
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    }
+
+    /* minimalcore:end */
+
+    /**
      * @TODO  move to ui extend class.....
      * @param {OpUiAttribs} newAttribs
      */
     _setUiAttrib(newAttribs)
     {
 
+        /* minimalcore:start */
         if (!newAttribs) return;
 
         if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
@@ -368,6 +499,8 @@ export class Op extends Events
 
         if (emitMove) this.emitEvent("move");
 
+        /* minimalcore:end */
+
     }
 
     getName()
@@ -389,6 +522,7 @@ export class Op extends Events
         return p;
     }
 
+    /* minimalcore:start */
     hasDynamicPort()
     {
         let i = 0;
@@ -405,6 +539,8 @@ export class Op extends Events
 
         return false;
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {any | Port | MultiPort} p
@@ -485,6 +621,7 @@ export class Op extends Events
         return p;
     }
 
+    /* minimalcore:start */
     /**
      * @deprecated
      * @param {string} name
@@ -506,6 +643,18 @@ export class Op extends Events
     }
 
     /**
+     * @deprecated
+     * @param {string} name
+     * @param {number | boolean} v
+     */
+    inValueBool(name, v)
+    {
+        return this.inBool(name, v);
+    }
+
+    /* minimalcore:end */
+
+    /**
      * create a number value input port
      * @param {String} name
      * @param {Number} v
@@ -518,16 +667,6 @@ export class Op extends Events
         p.setInitialValue(v);
 
         return p;
-    }
-
-    /**
-     * @deprecated
-     * @param {string} name
-     * @param {number | boolean} v
-     */
-    inValueBool(name, v)
-    {
-        return this.inBool(name, v);
     }
 
     /**
@@ -785,18 +924,6 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
-     * @param {string} name
-     * @param {any[]} values
-     * @param {string} v
-     * @param {boolean} noindex
-     */
-    inValueSelect(name, values, v, noindex)
-    {
-        return this.inDropDown(name, values, v, noindex);
-    }
-
-    /**
      * create a string select box
      * @param {String} name
      * @param {Array} values
@@ -946,17 +1073,6 @@ export class Op extends Events
         }
 
         return p;
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param {string} name
-     * @param {number} v
-     */
-    inValueInt(name, v)
-    {
-        return this.inInt(name, v);
     }
 
     /**
@@ -1116,18 +1232,6 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
-     * @param {string} name
-     * @param {number} v
-     * @param {number} min
-     * @param {number} max
-     */
-    inValueSlider(name, v, min, max)
-    {
-        return this.inFloatSlider(name, v, min, max);
-    }
-
-    /**
      * create a value slider input port
      * @param {String} name
      * @param {number} v
@@ -1155,16 +1259,6 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
-     * @param {string} name
-     * @param {string} v
-     */
-    outFunction(name, v)
-    {
-        return this.outTrigger(name, v);
-    }
-
-    /**
      * create output trigger port
      * @param {String} name
      * @param {String} v
@@ -1179,16 +1273,6 @@ export class Op extends Events
     }
 
     /**
-     * @deprecated
-     * @param {string} name
-     * @param {number} v
-     */
-    outValue(name, v)
-    {
-        return this.outNumber(name, v);
-    }
-
-    /**
      * create output value port
      * @param {String} name
      * @param {number} v default value
@@ -1198,36 +1282,6 @@ export class Op extends Events
     {
         const p = this.addOutPort(this.newPort(this, name, Port.TYPE_VALUE));
         if (v !== undefined) p.set(v);
-        return p;
-    }
-
-    /**
-     * @deprecated
-     * @param {string} name
-     * @param {boolean} v
-     */
-    outValueBool(name, v)
-    {
-        return this.outBool(name, v);
-    }
-
-    /**
-     * deprecated create output boolean port
-     * @deprecated
-     * @param {String} name
-     * @param {boolean} v default value
-     * @return {Port} created port
-     */
-    outBool(name, v)
-    {
-        // old: use outBoolNum
-        const p = this.addOutPort(
-            this.newPort(this, name, Port.TYPE_VALUE, {
-                "display": "bool"
-            })
-        );
-        if (v !== undefined) p.set(v);
-        else p.set(0);
         return p;
     }
 
@@ -1252,22 +1306,6 @@ export class Op extends Events
 
         if (v !== undefined) p.set(v);
         else p.set(0);
-        return p;
-    }
-
-    /**
-     * @deprecated
-     * @param {string} name
-     * @param {string} v
-     */
-    outValueString(name, v)
-    {
-        const p = this.addOutPort(
-            this.newPort(this, name, Port.TYPE_VALUE, {
-                "type": "string"
-            })
-        );
-        if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -1334,32 +1372,6 @@ export class Op extends Events
         return null;
     }
 
-    /**
-     * @deprecated
-     * @param {string} name
-     * @param {any} filter
-     * @param {any} options
-     * @param {any} v
-     */
-    inDynamic(name, filter, options, v)
-    {
-        const p = this.newPort(this, name, Port.TYPE_DYNAMIC, options);
-
-        p.shouldLink = () =>
-        {
-            if (filter && Array.isArray(filter)) return false; // types do not match
-            return true; // no filter set
-        };
-
-        this.addInPort(p);
-        if (v !== undefined)
-        {
-            p.set(v);
-            p.defaultValue = v;
-        }
-        return p;
-    }
-
     removeLinks()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
@@ -1377,9 +1389,9 @@ export class Op extends Events
         if (this.patch.storeObjNames) opObj.objName = this.objName;
 
         opObj.id = this.id;
-        opObj.uiAttribs = JSON.parse(JSON.stringify(this.uiAttribs)) || {};
+        opObj.uiAttribs = structuredClone(this.uiAttribs) || {};
 
-        if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = JSON.parse(JSON.stringify(this.storage));
+        if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = structuredClone(this.storage);
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (opObj.uiAttribs.hasOwnProperty("uierrors")) delete opObj.uiAttribs.uierrors;
         if (opObj.uiAttribs.hasOwnProperty("highlighted")) delete opObj.uiAttribs.highlighted;
@@ -1497,15 +1509,27 @@ export class Op extends Events
         this._log.log(...arguments);
     }
 
-    /**
-     * @deprecated
-     */
-    error()
+    logError()
     {
         this._log.error(...arguments);
     }
 
-    logError()
+    logWarn()
+    {
+        this._log.warn(...arguments);
+    }
+
+    logVerbose()
+    {
+        this._log.verbose(...arguments);
+    }
+
+    /* minimalcore:start */
+
+    /**
+     * @deprecated
+     */
+    error()
     {
         this._log.error(...arguments);
     }
@@ -1518,11 +1542,6 @@ export class Op extends Events
         this._log.warn(...arguments);
     }
 
-    logWarn()
-    {
-        this._log.warn(...arguments);
-    }
-
     /**
      * @deprecated
      */
@@ -1531,14 +1550,12 @@ export class Op extends Events
         this._log.verbose(...arguments);
     }
 
-    logVerbose()
-    {
-        this._log.verbose(...arguments);
-    }
-
+    /* minimalcore:end */
     // todo: check instancing stuff?
     cleanUp()
     {
+
+        /* minimalcore:start */
         if (this._instances)
         {
             for (let i = 0; i < this._instances.length; i++)
@@ -1551,6 +1568,8 @@ export class Op extends Events
             this.portsIn[i].setAnimated(false);
 
         if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
+
+    /* minimalcore:end */
     }
 
     // todo: check instancing stuff?
@@ -1686,7 +1705,11 @@ export class Op extends Events
      */
     hasUiError(id)
     {
+
+        /* minimalcore:start */
         return this.uiErrors.hasOwnProperty(id) && this.uiErrors[id];
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1719,12 +1742,16 @@ export class Op extends Events
      */
     setPortGroup(name, ports)
     {
+
+        /* minimalcore:start */
         for (let i = 0; i < ports.length; i++)
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
                 else this._log.error("setPortGroup: invalid port!");
         }
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1736,9 +1763,13 @@ export class Op extends Events
      */
     setUiAxisPorts(px, py, pz)
     {
+
+        /* minimalcore:start */
         if (px) px.setUiAttribs({ "axis": "X" });
         if (py) py.setUiAttribs({ "axis": "Y" });
         if (pz) pz.setUiAttribs({ "axis": "Z" });
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1776,7 +1807,11 @@ export class Op extends Events
      */
     toWorkNeedsParent(parentOpName)
     {
+
+        /* minimalcore:start */
         this.linkTimeRules.needsParentOp = parentOpName;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1786,16 +1821,24 @@ export class Op extends Events
      */
     toWorkShouldNotBeChild(parentOpName, type)
     {
+
+        /* minimalcore:start */
         if (!this.patch.isEditorMode()) return;
         this.linkTimeRules.forbiddenParent = parentOpName;
         if (type != undefined) this.linkTimeRules.forbiddenParentType = type;
+
+        /* minimalcore:end */
     }
 
     toWorkPortsNeedsString()
     {
+
+        /* minimalcore:start */
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
             if (this.linkTimeRules.needsStringToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsStringToWork.push(arguments[i]);
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1804,16 +1847,24 @@ export class Op extends Events
      */
     toWorkPortsNeedToBeLinked()
     {
+
+        /* minimalcore:start */
         if (!this.patch.isEditorMode()) return;
         for (let i = 0; i < arguments.length; i++)
             if (this.linkTimeRules.needsLinkedToWork.indexOf(arguments[i]) == -1) this.linkTimeRules.needsLinkedToWork.push(arguments[i]);
+
+        /* minimalcore:end */
     }
 
     toWorkPortsNeedToBeLinkedReset()
     {
+
+        /* minimalcore:start */
         if (!this.patch.isEditorMode()) return;
         this.linkTimeRules.needsLinkedToWork.length = 0;
         if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
+
+        /* minimalcore:end */
     }
 
     initVarPorts()
@@ -1830,7 +1881,11 @@ export class Op extends Events
      */
     refreshParams()
     {
+
+        /* minimalcore:start */
         if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) Patch.getGui().opParams.show(this);
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1839,7 +1894,11 @@ export class Op extends Events
      */
     isCurrentUiOp()
     {
+
+        /* minimalcore:start */
         if (this.patch.isEditorMode()) return Patch.getGui().patchView.isCurrentOp(this);
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1848,9 +1907,13 @@ export class Op extends Events
      */
     checkGraphicsApi(api = 1)
     {
+
+        /* minimalcore:start */
         if (this.patch.isEditorMode())
             if (this.patch.cg && this.patch.cg.gApi != api)
                 this.setUiError("wronggapi", "Wrong graphics API", 2);
+
+        /* minimalcore:end */
 
     }
 

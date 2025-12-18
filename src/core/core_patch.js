@@ -647,6 +647,8 @@ export class Patch extends Events
                 if (op)
                 {
                     found = true;
+
+                    /* minimalcore:start */
                     if (tryRelink)
                     {
                         if (op.portsIn.length > 0 && op.getFirstPortIn() && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut() && op.getFirstPortOut().isLinked()))
@@ -660,6 +662,8 @@ export class Patch extends Events
                         }
                     }
 
+                    /* minimalcore:end */
+
                     const opToDelete = this.ops[i];
                     opToDelete.removeLinks();
 
@@ -672,10 +676,13 @@ export class Patch extends Events
                     if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                     opToDelete.cleanUp();
 
+                    /* minimalcore:start */
                     if (reLinkP1 !== null && reLinkP2 !== null)
                     {
                         this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                     }
+
+                    /* minimalcore:end */
 
                     delete this._opIdCache[opid];
                     break;
@@ -720,14 +727,21 @@ export class Patch extends Events
      */
     link(op1, port1Name, op2, port2Name, lowerCase = false, fromDeserialize = false)
     {
+
+        /* minimalcore:start */
         if (!op1) return this._log.warn("link: op1 is null ");
         if (!op2) return this._log.warn("link: op2 is null");
+
+        /* minimalcore:end */
 
         const port1 = op1.getPort(port1Name, lowerCase);
         const port2 = op2.getPort(port2Name, lowerCase);
 
+        /* minimalcore:start */
         if (!port1) return this._log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
         if (!port2) return this._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+
+        /* minimalcore:end */
 
         if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
 
@@ -771,12 +785,13 @@ export class Patch extends Events
     /* minimalcore:start */
     getOpsByRefId(refId) // needed for instancing ops ?
     {
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
+
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
         // const ops = gui.corePatch().ops;
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].storage && this.ops[i].storage.ref == refId) refOps.push(this.ops[i]);
-        perf.finish();
+        // perf.finish();
         return refOps;
     }
 
@@ -916,7 +931,7 @@ export class Patch extends Events
                 addedOps.push(op);
                 if (options.genIds) op.id = shortId();
                 op.portsInData = opData.portsIn;
-                op._origData = JSON.parse(JSON.stringify(opData));
+                op._origData = structuredClone(opData);
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
@@ -938,21 +953,12 @@ export class Patch extends Events
                             }
                             else
                             {
-
-                                /*
-                             * if (port.uiAttribs.hasOwnProperty("title"))
-                             * {
-                             *     op.preservedPortTitles = op.preservedPortTitles || {};
-                             *     op.preservedPortTitles[port.name] = port.uiAttribs.title;
-                             * }
-                             */
                                 op.preservedPortValues = op.preservedPortValues || {};
                                 op.preservedPortValues[objPort.name] = objPort.value;
                             }
                         }
                     }
 
-                // for (const ipo in opData.portsOut)
                 if (opData.portsOut)
                     for (let ipo = 0; ipo < opData.portsOut.length; ipo++)
                     {
@@ -1280,7 +1286,7 @@ export class Patch extends Events
         if (t === undefined) return this._variables;
         if (t === 1) return {};
 
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
 
         const vars = [];
         let tStr = "";
@@ -1300,7 +1306,7 @@ export class Patch extends Events
             if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
 
-        perf.finish();
+        // perf.finish();
 
         return vars;
     }
