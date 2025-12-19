@@ -384,6 +384,8 @@ export class Patch extends Events
                     {
                         this._crashedOps.push(objName);
                         this._log.error("[instancing error] constructor: " + objName, e);
+
+                        /* minimalcore:start */
                         if (!this.isEditorMode())
                         {
                             this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
@@ -396,6 +398,8 @@ export class Patch extends Events
                             op.setEnabled(false);
                             if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
                         }
+
+                        /* minimalcore:end */
                     }
                     op.opId = opId;
                 }
@@ -429,16 +433,7 @@ export class Patch extends Events
                 }
                 else
                 {
-                    if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName, id);
-                    else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName, id);
-                    else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName, id);
-                    else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName, id);
-                    else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName, id);
-                    else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName, id);
-                    else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
-                    else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
-                    else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                    else console.log("parts.length", parts.length);
+                    op = new opObj(this, objName, id);
                 }
 
                 if (op)
@@ -457,6 +452,7 @@ export class Patch extends Events
 
             this._log.error("[instancing error] " + objName, e);
 
+            /* minimalcore:start */
             if (!this.isEditorMode())
             {
                 this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
@@ -467,6 +463,8 @@ export class Patch extends Events
             {
                 if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
             }
+
+            /* minimalcore:end */
         }
 
         if (op)
@@ -640,6 +638,8 @@ export class Patch extends Events
                 if (op)
                 {
                     found = true;
+
+                    /* minimalcore:start */
                     if (tryRelink)
                     {
                         if (op.portsIn.length > 0 && op.getFirstPortIn() && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut() && op.getFirstPortOut().isLinked()))
@@ -653,6 +653,8 @@ export class Patch extends Events
                         }
                     }
 
+                    /* minimalcore:end */
+
                     const opToDelete = this.ops[i];
                     opToDelete.removeLinks();
 
@@ -665,10 +667,13 @@ export class Patch extends Events
                     if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                     opToDelete.cleanUp();
 
+                    /* minimalcore:start */
                     if (reLinkP1 !== null && reLinkP2 !== null)
                     {
                         this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                     }
+
+                    /* minimalcore:end */
 
                     delete this._opIdCache[opid];
                     break;
@@ -713,14 +718,21 @@ export class Patch extends Events
      */
     link(op1, port1Name, op2, port2Name, lowerCase = false, fromDeserialize = false)
     {
+
+        /* minimalcore:start */
         if (!op1) return this._log.warn("link: op1 is null ");
         if (!op2) return this._log.warn("link: op2 is null");
+
+        /* minimalcore:end */
 
         const port1 = op1.getPort(port1Name, lowerCase);
         const port2 = op2.getPort(port2Name, lowerCase);
 
+        /* minimalcore:start */
         if (!port1) return this._log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
         if (!port2) return this._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+
+        /* minimalcore:end */
 
         if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
 
@@ -740,6 +752,8 @@ export class Patch extends Events
      */
     serialize(options)
     {
+
+        /* minimalcore:start */
         const obj = {};
 
         options = options || {};
@@ -755,18 +769,24 @@ export class Patch extends Events
 
         if (options.asObject) return obj;
         return JSON.stringify(obj);
+
+        /* minimalcore:end */
     }
 
+    /* minimalcore:start */
     getOpsByRefId(refId) // needed for instancing ops ?
     {
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
+
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
         // const ops = gui.corePatch().ops;
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].storage && this.ops[i].storage.ref == refId) refOps.push(this.ops[i]);
-        perf.finish();
+        // perf.finish();
         return refOps;
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {String} opid
@@ -902,7 +922,7 @@ export class Patch extends Events
                 addedOps.push(op);
                 if (options.genIds) op.id = shortId();
                 op.portsInData = opData.portsIn;
-                op._origData = JSON.parse(JSON.stringify(opData));
+                op._origData = structuredClone(opData);
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
@@ -924,21 +944,12 @@ export class Patch extends Events
                             }
                             else
                             {
-
-                                /*
-                             * if (port.uiAttribs.hasOwnProperty("title"))
-                             * {
-                             *     op.preservedPortTitles = op.preservedPortTitles || {};
-                             *     op.preservedPortTitles[port.name] = port.uiAttribs.title;
-                             * }
-                             */
                                 op.preservedPortValues = op.preservedPortValues || {};
                                 op.preservedPortValues[objPort.name] = objPort.value;
                             }
                         }
                     }
 
-                // for (const ipo in opData.portsOut)
                 if (opData.portsOut)
                     for (let ipo = 0; ipo < opData.portsOut.length; ipo++)
                     {
@@ -1260,12 +1271,13 @@ export class Patch extends Events
      * @param {number} t
      * @returns {PatchVariable[]}
      */
+    /* minimalcore:start */
     getVars(t)
     {
         if (t === undefined) return this._variables;
         if (t === 1) return {};
 
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
 
         const vars = [];
         let tStr = "";
@@ -1285,28 +1297,12 @@ export class Patch extends Events
             if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
 
-        perf.finish();
+        // perf.finish();
 
         return vars;
     }
 
-    // getVars(t)
-    // {
-    //     if (t === undefined) return this._variables;
-
-    //     const vars = [];
-    //     let tStr = "";
-    //     if (t == Port.TYPE_STRING) tStr = "string";
-    //     if (t == Port.TYPE_VALUE) tStr = "number";
-    //     if (t == Port.TYPE_ARRAY) tStr = "array";
-    //     if (t == Port.TYPE_OBJECT) tStr = "object";
-
-    //     for (const i in this._variables)
-    //     {
-    //         if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
-    //     }
-    //     return vars;
-    // }
+    /* minimalcore:end */
 
     /**
      * @description invoke pre rendering of ops
@@ -1443,6 +1439,8 @@ export class Patch extends Events
                             {
                                 links.splice(l, 1);
                             }
+
+                            /* minimalcore:start */
                             else
                             {
                                 if (options.fixLostLinks)
@@ -1462,6 +1460,8 @@ export class Patch extends Events
                                     }
                                 }
                             }
+
+                            /* minimalcore:end */
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 // todo: old... remove this from ops...
 
+/* minimalcore:start */
 /**
  * todo: old... remove this from ops...
  *
@@ -36,3 +37,5 @@ const Variable = function ()
 };
 
 export { Variable };
+
+/* minimalcore:end */

@@ -19,7 +19,6 @@ export class MultiPort2 extends Port
 
         this.setUiAttribs({ "multiPort2": true, "multiPort": true, "group": this.name, "order": -1, "multiPortManual": true });
         this.minNumPorts = minNumPorts;
-        console.log("min ports", minNumPorts);
 
         /** @type {Port[]} */
         this.ports = [];
@@ -40,10 +39,6 @@ export class MultiPort2 extends Port
 
         const updateUi = () =>
         {
-
-            console.log("updateui", this.ports.length);
-            // if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT)grey = false;
-
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
@@ -87,7 +82,6 @@ export class MultiPort2 extends Port
         this.countPorts = () =>
         {
             const gui = Patch.getGui();
-            console.log("count ports");
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
                 clearTimeout(this.retryTo);
@@ -121,12 +115,10 @@ export class MultiPort2 extends Port
                 }
             }
 
-            console.log("jaja??? ", this.ports.length >= 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked());
             const idxLastPort = this.ports.length - 1;
 
             if (this.ports.length >= 1 && this.ports[idxLastPort].uiAttribs.addPort && this.ports[idxLastPort].isLinked())
             {
-                console.log("lastportthing......");
                 this.newPort();
                 this.setUiAttribs({ "multiPortNum": this.ports.length });
             }
@@ -183,8 +175,6 @@ export class MultiPort2 extends Port
         this.newPort = (reason) =>
         {
 
-            console.log("new port", reason);
-
             /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
@@ -230,7 +220,6 @@ export class MultiPort2 extends Port
             if (this.ports.length > 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked())
             {
                 this.ports[this.ports.length - 1].removeLinks();
-                console.log("found invalid");
             }
         };
 

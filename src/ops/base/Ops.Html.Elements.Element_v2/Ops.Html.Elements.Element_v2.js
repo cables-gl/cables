@@ -3,7 +3,7 @@ const
     inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
     inInteractive = op.inSwitch("Interactive", ["True", "False", "No Pointer Events"], "True"),
 
-    inSetSize = op.inValueBool("Set Size", false),
+    inSetSize = op.inBool("Set Size", false),
     inWidth = op.inFloat("Width", 100),
     inHeight = op.inFloat("Height", 100),
     inSizeUnit = op.inSwitch("Size  Units", ["px", "%", "vwh"], "px"),
@@ -17,8 +17,8 @@ const
     inDisplay = op.inDropDown("Display", ["None", "Block", "Inline", "inline-block", "flex", "inline-flex", "grid", "inline-grid", "flow-root"], "Block"),
     inTag = op.inString("Tag Name", "div"),
     inOpacity = op.inFloatSlider("Opacity", 1),
-    inPropagation = op.inValueBool("Propagate Click-Events", true),
-    inAddDom = op.inValueBool("Add to DOM", true),
+    inPropagation = op.inBool("Propagate Click-Events", true),
+    inAddDom = op.inBool("Add to DOM", true),
 
     outElement = op.outObject("DOM Element", null, "element"),
     outHover = op.outBoolNum("Hovering"),

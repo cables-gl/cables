@@ -3,18 +3,11 @@ const
     inFamily = op.inString("Font Family", "sans serif"),
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
-
     inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right", "Justify"], "Left"),
-
     inOverflow = op.inBool("Overflow Ellipsis", false),
-
     inLetterSpace = op.inFloat("Letter Spacing", 0),
-
     inLineHeight = op.inFloat("Line Height", 0),
-
     inUserSelectNone = op.inBool("Disable Text Select", false),
-
-    // in1 = op.inSwitch("White Space",["Initial","no-wrap"], "Initial"),
     outEle = op.outObject("HTML Element", null, "element");
 
 let ele = null;

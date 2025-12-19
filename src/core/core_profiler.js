@@ -21,6 +21,7 @@ import { now } from "./timer.js";
 export class Profiler
 {
 
+    /* minimalcore:start */
     /**
      * @param {Patch} patch
      */
@@ -137,4 +138,6 @@ export class Profiler
             console.log(this.items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed);
         }
     }
+
+    /* minimalcore:end */
 }

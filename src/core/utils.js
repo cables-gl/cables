@@ -2,6 +2,7 @@
  * @namespace external:CABLES#Utils
  */
 
+import { helper } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { extendJs } from "./extendjs.js";
 
@@ -54,6 +55,7 @@ export const getShortOpName = function (fullname)
  * @return {Array|Float32Array} shuffled array
  * @static
  */
+/* minimalcore:start */
 export const shuffleArray = function (array)
 {
     for (let i = array.length - 1; i > 0; i--)
@@ -65,6 +67,8 @@ export const shuffleArray = function (array)
     }
     return array;
 };
+
+/* minimalcore:end */
 
 /**
  * generate a short "relativly unique" id
@@ -93,19 +97,11 @@ export const shortId = function ()
  * @return {UUID} generated UUID
  * @static
  */
-export const uuid = function ()
-{
-    let d = new Date().getTime();
-    const uuidStr = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
-    {
-        const r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    });
-    return uuidStr;
-};
+export const uuid = helper.uuid;
 export const generateUUID = uuid;
+export const isNumeric = helper.isNumeric;
 
+/* minimalcore:start */
 export function cleanJson(obj)
 {
     for (const i in obj)
@@ -119,6 +115,7 @@ export function cleanJson(obj)
     return obj;
 }
 
+/* minimalcore:end */
 /**
  * @see http://stackoverflow.com/q/7616461/940217
  * @param {string} str
@@ -249,24 +246,12 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0,
 // ----------------------------------------------------------------
 
 /**
- * returns true if parameter is a number
- * @param {any} n value The value to check.
- * @return {Boolean}
- * @static
- */
-export function isNumeric(n)
-{
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-// ----------------------------------------------------------------
-
-/**
  * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
  * @static
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
+/* minimalcore:start */
 export const cacheBust = function (url = "")
 {
     if (!url) return "";
@@ -275,6 +260,8 @@ export const cacheBust = function (url = "")
     else url += "?";
     return url + "cache=" + CABLES.uuid();
 };
+
+/* minimalcore:end */
 
 /**
  * copy the content of an array
@@ -347,6 +334,7 @@ export const filename = function (url)
     return name || "";
 };
 
+/* minimalcore:start */
 /**
  * make an ajax request
  * @static
@@ -447,6 +435,7 @@ export function request(options)
     }
 }
 
+/* minimalcore:end */
 // ----------------------------------------------------------------
 
 export const logErrorConsole = function (initiator)

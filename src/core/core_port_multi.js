@@ -7,6 +7,7 @@ const MIN_NUM_PORTS = 2;
 export class MultiPort extends Port
 {
 
+    /* minimalcore:start */
     /**
      * @param {import("./core_op.js").Op<any>} __parent
      * @param {string} name
@@ -105,12 +106,14 @@ export class MultiPort extends Port
         this.countPorts = () =>
         {
             const gui = Patch.getGui();
+
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
                 clearTimeout(this.retryTo);
                 this.retryTo = setTimeout(this.countPorts.bind(this));
                 return;
             }
+
             this.retryTo = null;
 
             let redo = false;
@@ -324,4 +327,6 @@ export class MultiPort extends Port
         this.removeInvalidPorts();
         updateUi();
     }
+
+/* minimalcore:end */
 }

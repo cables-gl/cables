@@ -49,11 +49,14 @@ export class SwitchPort extends Port
             this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
+            /* minimalcore:start */
             if (this.op.patch.isEditorMode() && performance.now() - (this.lastTime || 0) > 100 && Patch.getGui() && Patch.getGui().patchView.isCurrentOp(this.op))
             {
                 Patch.getGui().opParams.show(this.op);
                 this.lastTime = performance.now();
             }
+
+            /* minimalcore:end */
         };
     }
 

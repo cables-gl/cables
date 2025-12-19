@@ -9,6 +9,7 @@ export const CONSTANTS = {
         "EASING_SMOOTHERSTEP": 3,
         "EASING_CUBICSPLINE": 4,
 
+        /* minimalcore:start */
         "EASING_CUBIC_IN": 5,
         "EASING_CUBIC_OUT": 6,
         "EASING_CUBIC_INOUT": 7,
@@ -38,6 +39,8 @@ export const CONSTANTS = {
         "EASING_QUINT_IN": 25,
         "EASING_QUINT_OUT": 26,
         "EASING_QUINT_INOUT": 27,
+
+        /* minimalcore:end */
         "EASING_CLIP": 28,
     },
 

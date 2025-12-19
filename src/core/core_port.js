@@ -194,12 +194,16 @@ export class Port extends Events
      */
     copyLinkedUiAttrib(which, port)
     {
+
+        /* minimalcore:start */
         if (!CABLES.UI) return;
         if (!this.isLinked()) return;
 
         const attr = {};
         attr[which] = this.links[0].getOtherPort(this).getUiAttrib(which);
         port.setUiAttribs(attr);
+
+    /* minimalcore:end */
     }
 
     /*
@@ -207,6 +211,8 @@ export class Port extends Events
      */
     getValueForDisplay()
     {
+
+        /* minimalcore:start */
         let str = this.value;
 
         if (typeof this.value === "string" || this.value instanceof String)
@@ -235,11 +241,9 @@ export class Port extends Events
         {
             str = String(this.value);
         }
-        // if (this.type == Port.TYPE_NUMBER)
-        // {
-        //     if (isNaN(this.value)) return "NaN";
-        // }
         return str;
+
+    /* minimalcore:end */
     }
 
     /**
@@ -276,6 +280,8 @@ export class Port extends Events
      */
     setUiAttribs(newAttribs)
     {
+
+        /* minimalcore:start */
         let changed = false;
         if (!this.uiAttribs) this.uiAttribs = {};
 
@@ -295,6 +301,8 @@ export class Port extends Events
         if (newAttribs.hasOwnProperty("expose")) this.#op.patch.emitEvent("subpatchExpose", this.#op.uiAttribs.subPatch);
 
         if (changed) this.emitEvent(Port.EVENT_UIATTRCHANGE, newAttribs, this);
+
+    /* minimalcore:end */
     }
 
     /**
@@ -318,8 +326,12 @@ export class Port extends Events
      */
     getUiAttrib(attribName)
     {
+
+        /* minimalcore:start */
         if (!this.uiAttribs || !this.uiAttribs.hasOwnProperty(attribName)) return null;
         return this.uiAttribs[attribName];
+
+    /* minimalcore:end */
     }
 
     /**
@@ -453,19 +465,6 @@ export class Port extends Events
         else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
     }
 
-    static getTypeString(t)
-    {
-        // todo:needed only in ui ?remove from core?
-
-        if (t == Port.TYPE_VALUE) return "Number";
-        if (t == Port.TYPE_FUNCTION) return "Trigger";
-        if (t == Port.TYPE_OBJECT) return "Object";
-        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
-        if (t == Port.TYPE_ARRAY) return "Array";
-        if (t == Port.TYPE_STRING) return "String";
-        return "Unknown";
-    }
-
     /**
      * @description get port type as string, e.g. "Function","Value"...
      * @return {String} type
@@ -483,9 +482,13 @@ export class Port extends Events
         if (!objPort) return;
         if (objPort.animated) this.setAnimated(objPort.animated);
         if (objPort.useVariable) this.setVariableName(objPort.useVariable);
+
+        /* minimalcore:start */
         if (objPort.title) this.setUiAttribs({ "title": objPort.title });
         if (objPort.expose) this.setUiAttribs({ "expose": true });
         if (objPort.order) this.setUiAttribs({ "order": objPort.order });
+
+        /* minimalcore:end */
 
         if (objPort.multiPortManual) this.setUiAttribs({ "multiPortManual": objPort.multiPortManual });
         if (objPort.multiPortNum) this.setUiAttribs({ "multiPortNum": objPort.multiPortNum });
@@ -533,6 +536,8 @@ export class Port extends Events
 
     getSerialized()
     {
+
+        /* minimalcore:start */
         let obj = { "name": this.getName() };
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
@@ -589,6 +594,8 @@ export class Port extends Events
         cleanJson(obj);
 
         return obj;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -611,12 +618,16 @@ export class Port extends Events
         while (this.links.length > 0)
         {
             count++;
+
+            /* minimalcore:start */
             if (count > 5000)
             {
                 this._log.warn("could not delete links... / infinite loop");
                 this.links.length = 0;
                 break;
             }
+
+            /* minimalcore:end */
             this.links[0].remove();
         }
     }
@@ -637,7 +648,10 @@ export class Port extends Events
             else this.setValue(this.#valueBeforeLink || null);
         }
 
+        /* minimalcore:start */
         if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
+
+        /* minimalcore:end */
 
         try
         {
@@ -676,7 +690,11 @@ export class Port extends Events
     {
         this.#valueBeforeLink = this.value;
         this.links.push(l);
+
+        /* minimalcore:start */
         if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
+
+        /* minimalcore:end */
 
         try
         {
@@ -710,7 +728,11 @@ export class Port extends Events
             if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
             {
                 this.links[i].remove();
+
+                /* minimalcore:start */
                 if (CABLES.UI && this.#op.checkLinkTimeWarnings) this.#op.checkLinkTimeWarnings();
+
+                /* minimalcore:end */
 
                 if (this.onLinkChanged) this.onLinkChanged();
                 this.emitEvent(Port.EVENT_LINK_CHANGED);
@@ -773,6 +795,7 @@ export class Port extends Events
         {
             if (!portTriggered) return console.error("unknown port error");
 
+            /* minimalcore:start */
             portTriggered.op.enabled = false;
             portTriggered.op.setUiError("crash", "op crashed, port exception " + portTriggered.name, 3);
 
@@ -780,16 +803,21 @@ export class Port extends Events
             {
                 if (portTriggered.op.onError) portTriggered.op.onError(ex);
             }
+
+            /* minimalcore:end */
             this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op.id);
             this._log.error(ex);
         }
     }
 
+    /* minimalcore:start */
     call()
     {
         this._log.warn("call deprecated - use trigger() ");
         this.trigger();
     }
+
+    /* minimalcore:end */
 
     execute()
     {
@@ -944,10 +972,14 @@ export class Port extends Events
 
     toggleAnim()
     {
+
+        /* minimalcore:start */
         this.setAnimated(!this.#animated);
         this.setUiAttribs({ "isAnimated": this.#animated });
         this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
         this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1032,6 +1064,8 @@ export class Port extends Events
      */
     static portTypeNumberToString(type)
     {
+
+        /* minimalcore:start */
         if (type == Port.TYPE_VALUE) return "value";
         if (type == Port.TYPE_FUNCTION) return "function";
         if (type == Port.TYPE_OBJECT) return "object";
@@ -1039,6 +1073,24 @@ export class Port extends Events
         if (type == Port.TYPE_STRING) return "string";
         if (type == Port.TYPE_DYNAMIC) return "dynamic";
         return "unknown";
+
+        /* minimalcore:end */
+    }
+
+    static getTypeString(t)
+    {
+        // todo:needed only in ui ?remove from core?
+
+        /* minimalcore:start */
+        if (t == Port.TYPE_VALUE) return "Number";
+        if (t == Port.TYPE_FUNCTION) return "Trigger";
+        if (t == Port.TYPE_OBJECT) return "Object";
+        if (t == Port.TYPE_DYNAMIC) return "Dynamic";
+        if (t == Port.TYPE_ARRAY) return "Array";
+        if (t == Port.TYPE_STRING) return "String";
+        return "Unknown";
+
+        /* minimalcore:end */
     }
 
 }
