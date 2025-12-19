@@ -76,12 +76,13 @@ void main()
             atlasIdx=texture(texAtlasLookup,texCoord).r;
         #endif
 
+        float anx=min(0.0001,atlasNumX);
         #ifdef ATLAS_XFADE
             vec2 pointCoord2=vec2(origPointCoord);
-            pointCoord2.x=origPointCoord.x/atlasNumX+ceil(atlasIdx)*(1.0/atlasNumX);
+            pointCoord2.x=origPointCoord.x/anx+ceil(atlasIdx)*(1.0/anx);
         #endif
 
-        pointCoord.x=origPointCoord.x/atlasNumX+floor(atlasIdx)*(1.0/atlasNumX);
+        pointCoord.x=origPointCoord.x/anx+floor(atlasIdx)*(1.0/anx);
 
 
     #endif
@@ -104,17 +105,19 @@ void main()
         	mask = dot(texture(texMask,pointCoord).rgb, lumcoeff);
         #endif
 
-        #ifdef ATLAS_XFADE
-            float mask2=texture(texMask,pointCoord2).r;
+        #ifdef USE_ATLAS
+            #ifdef ATLAS_XFADE
+                float mask2=texture(texMask,pointCoord2).r;
 
-            #ifdef TEXTURE_MASK_A
-                mask2=texture(texMask,pointCoord2).a;
-            #endif
-            #ifdef TEXTURE_MASK_LUMI
-            	mask2 = dot(texture(texMask,pointCoord2).rgb, lumcoeff);
-            #endif
+                #ifdef TEXTURE_MASK_A
+                    mask2=texture(texMask,pointCoord2).a;
+                #endif
+                #ifdef TEXTURE_MASK_LUMI
+                	mask2 = dot(texture(texMask,pointCoord2).rgb, lumcoeff);
+                #endif
 
-            mask=mix(mask,mask2,fract(atlasIdx));
+                mask=mix(mask,mask2,fract(atlasIdx));
+            #endif
         #endif
     #endif
 
@@ -122,9 +125,11 @@ void main()
 
         col=texture(diffTex,pointCoord);
 
-        #ifdef ATLAS_XFADE
-            vec4 col2=texture(diffTex,pointCoord2);
-            col=mix(col,col2,fract(atlasIdx));
+        #ifdef USE_ATLAS
+            #ifdef ATLAS_XFADE
+                vec4 col2=texture(diffTex,pointCoord2);
+                col=mix(col,col2,fract(atlasIdx));
+            #endif
         #endif
 
         #ifdef COLORIZE_TEXTURE

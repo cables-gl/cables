@@ -132,7 +132,7 @@ function useAtlas()
 
 function updateUi()
 {
-    inAtlasRepeatX.setUiAttribs({ "greyout": !useAtlas() });
+    // inAtlasRepeatX.setUiAttribs({ "greyout": !useAtlas() });
     texMaskChan.setUiAttribs({ "greyout": !textureMask.isLinked() });
 
     texturePointSizeChannel.setUiAttribs({ "greyout": !texturePointSize.isLinked() });
