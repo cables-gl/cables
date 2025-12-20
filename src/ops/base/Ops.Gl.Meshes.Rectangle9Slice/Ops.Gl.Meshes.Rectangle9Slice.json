@@ -74,16 +74,18 @@
         {
             "message": "cloned op from Ops.Gl.Meshes.Corner",
             "author": "pandur",
-            "date": 1695109910942
+            "date": 1695109910942,
+            "type": "new"
         },
         {
-            "message": "Ops.Patch.PWkQpIG.Rectangle9Slice renamed to Ops.Gl.Meshes.Rectangle9Slice",
-            "type": "rename",
+            "message": "fixed issues with scale influencing the texturecoords, resulting in stretched visuals at the bottom border",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1695112138726
+            "date": 1766137930051
         }
     ],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

@@ -13,7 +13,7 @@ v.onLinkChanged = () =>
 
 function exec()
 {
-    if (CABLES.UI && !isLinked) op.setUiAttribs({ "extendTitle": v.get() });
+    if (CABLES.UI && !isLinked) op.setUiAttribs({ "extendTitle": Math.round(10000 * v.get()) / 10000 });
 
     result.set(Number(v.get()));
 }

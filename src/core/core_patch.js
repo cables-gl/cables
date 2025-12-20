@@ -145,6 +145,7 @@ export class Patch extends Events
         this._origData = null;
         this.tempData = this.frameStore = {};
 
+        /* minimalcore:start */
         if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
         if (this.config.hasOwnProperty("silent")) this.silent = CABLES.logSilent = this.config.silent;
@@ -153,6 +154,8 @@ export class Patch extends Events
         if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
         if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
+
+        /* minimalcore:end */
 
         /** @type {Object<string,PatchVariable>} */
         this._variables = {};
@@ -1195,6 +1198,8 @@ export class Patch extends Events
 
     _sortVars()
     {
+
+        /* minimalcore:start */
         if (!this.isEditorMode()) return;
         const ordered = {};
         Object.keys(this._variables).sort(
@@ -1205,6 +1210,8 @@ export class Patch extends Events
             ordered[key] = this._variables[key];
         });
         this._variables = ordered;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1346,6 +1353,8 @@ export class Patch extends Events
 
     printTriggerStack()
     {
+
+        /* minimalcore:start */
         if (this._triggerStack.length == 0)
         {
             // console.log("stack length", this._triggerStack.length); // eslint-disable-line
@@ -1363,6 +1372,7 @@ export class Patch extends Events
 
         console.table(rows); // eslint-disable-line
         console.groupEnd(); // eslint-disable-line
+        /* minimalcore:end */
     }
 
     get containerElement()
