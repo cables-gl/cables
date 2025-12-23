@@ -90,6 +90,7 @@ export class Anim extends Events
     onChange = null;
     stayInTimeline = false;
     batchMode = false;
+    #log = new Logger("Anim");
 
     /**
      * @param {AnimCfg} [cfg]
@@ -99,7 +100,6 @@ export class Anim extends Events
         super();
         cfg = cfg || {};
         this.id = uuid();
-        this._log = new Logger("Anim");
         this.name = cfg.name || null;
 
         /** @type {Number} */
@@ -246,7 +246,6 @@ export class Anim extends Events
         {
             this.keys.sort((a, b) => { return a.time - b.time; });
             this.#needsSort = false;
-            if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 
             this.emitEvent(Anim.EVENT_CHANGE);
         }
@@ -366,7 +365,6 @@ export class Anim extends Events
                 });
             this.keys.push(found);
 
-            // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
         }
 
         if (!this.batchMode)
@@ -622,7 +620,7 @@ export class Anim extends Events
             }
             else
             {
-                console.log("no clip found");
+                this.#log.warn("no clip found");
             }
         }
 
@@ -636,7 +634,7 @@ export class Anim extends Events
     {
         if (k.time === undefined)
         {
-            this._log.warn("key time undefined, ignoring!");
+            this.#log.warn("key time undefined, ignoring!");
         }
         else
         {
@@ -695,7 +693,7 @@ export class Anim extends Events
         if (str == "Quint In Out") return Anim.EASING_QUINT_INOUT;
 
         /* minimalcore:end */
-        console.log("unknown anim easing?", str);
+        this.#log.warn("unknown anim easing?", str);
     }
 
     /**

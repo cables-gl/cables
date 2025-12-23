@@ -82,6 +82,7 @@ export class Port extends Events
     static EVENT_LINK_CHANGED = "onLinkChanged";
     static EVENT_LINK_REMOVED = "onLinkRemoved";
 
+    #log = new Logger("core_port");
     #oldAnimVal = -5711;
 
     animMuted = false;
@@ -105,7 +106,6 @@ export class Port extends Events
     {
         super();
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
-        this._log = new Logger("core_port");
 
         /**
          * @type {Number}
@@ -156,7 +156,7 @@ export class Port extends Events
 
     get parent()
     {
-        this._log.stack("use port.op, not .parent");
+        this.#log.stack("use port.op, not .parent");
         return this.op;
     }
 
@@ -230,7 +230,7 @@ export class Port extends Events
                 else str += "true";
             }
 
-            str = str.replace(/[\u00A0-\u9999<>\&]/g, function (/** @type {String} */ i)
+            str = str.replace(/[\u00A0-\u9999<>&]/g, function (/** @type {String} */ i)
             {
                 return "&#" + i.charCodeAt(0) + ";";
             });
@@ -388,7 +388,7 @@ export class Port extends Events
 
         if (CABLES.UI && CABLES.UI.showDevInfos)
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
-                this._log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
+                this.#log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
         if (this.#op.enabled && !this.crashed)
         {
@@ -420,8 +420,8 @@ export class Port extends Events
                         this.setValue = function (_v) {};
                         this.onTriggered = function () {};
 
-                        this._log.error("exception in ", this.#op);
-                        this._log.error(ex);
+                        this.#log.error("exception in ", this.#op);
+                        this.#log.error(ex);
 
                         this.#op.patch.emitEvent("exception", ex, this.#op);
                     }
@@ -622,7 +622,7 @@ export class Port extends Events
             /* minimalcore:start */
             if (count > 5000)
             {
-                this._log.warn("could not delete links... / infinite loop");
+                this.#log.warn("could not delete links... / infinite loop");
                 this.links.length = 0;
                 break;
             }
@@ -662,7 +662,7 @@ export class Port extends Events
         }
         catch (e)
         {
-            this._log.error(e);
+            this.#log.error(e);
         }
     }
 
@@ -704,7 +704,7 @@ export class Port extends Events
         }
         catch (e)
         {
-            this._log.error(e);
+            this.#log.error(e);
         }
     }
 
@@ -781,7 +781,7 @@ export class Port extends Events
                     portTriggered.op.patch.pushTriggerStack(portTriggered);
                     if (!portTriggered._onTriggered)
                     {
-                        console.log("no porttriggered?!", portTriggered, portTriggered._onTriggered);
+                        this.#log.log("no porttriggered?!", portTriggered, portTriggered._onTriggered); // eslint-disable-line
                     }
                     else
                         portTriggered._onTriggered();
@@ -793,7 +793,7 @@ export class Port extends Events
         }
         catch (ex)
         {
-            if (!portTriggered) return console.error("unknown port error");
+            if (!portTriggered) return this.#log.error("unknown port error");
 
             /* minimalcore:start */
             portTriggered.op.enabled = false;
@@ -805,15 +805,15 @@ export class Port extends Events
             }
 
             /* minimalcore:end */
-            this._log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op.id);
-            this._log.error(ex);
+            this.#log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op.id);
+            this.#log.error(ex);
         }
     }
 
     /* minimalcore:start */
     call()
     {
-        this._log.warn("call deprecated - use trigger() ");
+        this.#log.warn("call deprecated - use trigger() ");
         this.trigger();
     }
 

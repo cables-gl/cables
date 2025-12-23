@@ -195,13 +195,13 @@ export const clamp = function (value, min, max)
  * @param {Number} _newMin new range minimum value
  * @param {Number} _newMax new range maximum value
  * @param {Number} _easing
- * @param {Boolean} clamp
+ * @param {Boolean} clampval
  * @return {Number} mapped value
  * @static
  */
-export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0, clamp = true)
+export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0, clampval = true)
 {
-    if (clamp)
+    if (clampval)
     {
         if (x >= _oldMax) return _newMax;
         if (x <= _oldMin) return _newMin;
@@ -303,6 +303,7 @@ export const basename = function (url)
  */
 export const logStack = function ()
 {
+    // eslint-disable-next-line
     console.log("logstack", (new Error()).stack);
 };
 

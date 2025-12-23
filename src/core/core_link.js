@@ -1,4 +1,4 @@
-import { Events } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
@@ -10,6 +10,7 @@ import { Port } from "./core_port.js";
  */
 export class Link extends Events
 {
+    #log = new Logger("link");
 
     /**
      * @param {Patch} p
@@ -131,7 +132,7 @@ export class Link extends Events
     {
         if (!Link.canLink(p1, p2))
         {
-            console.warn("[core_link] cannot link ports!", p1, p2);
+            this.#log.warn("[core_link] cannot link ports!", p1, p2);
             return false;
         }
 

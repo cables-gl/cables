@@ -68,7 +68,7 @@ export class Op extends Events
     static UI_ERRORLEVEL_NOTWORKING = 3;
 
     #objName = "";
-    _log = new Logger("core_op");
+    #log = new Logger("core_op");
     //    #name = "";
     #shortOpName = "";
 
@@ -198,7 +198,7 @@ export class Op extends Events
     set _objName(on)
     {
         this.#objName = on;
-        this._log = new Logger("op " + on);
+        this.#log = new Logger("op " + on);
     }
 
     get objName()
@@ -444,7 +444,7 @@ export class Op extends Events
         /* minimalcore:start */
         if (!newAttribs) return;
 
-        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
+        if (typeof newAttribs != "object") this.#log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
 
         let changed = false;
@@ -504,7 +504,7 @@ export class Op extends Events
     addOutPort(p)
     {
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
-        if (p.op != this)console.error("port op is not this...");
+        if (p.op != this) this.#log.error("port op is not this...");
         // p._op = this; // remove if above does never happen....
 
         this.portsOut.push(p);
@@ -1358,7 +1358,7 @@ export class Op extends Events
      */
     outTexture(name, v)
     {
-        console.log("outtexture not overwritte.,..");
+        // overwrite in gui...
         return null;
     }
 
@@ -1496,22 +1496,22 @@ export class Op extends Events
 
     log()
     {
-        this._log.log(...arguments);
+        this.#log.log(...arguments);
     }
 
     logError()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     logWarn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     logVerbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     /* minimalcore:start */
@@ -1521,7 +1521,7 @@ export class Op extends Events
      */
     error()
     {
-        this._log.error(...arguments);
+        this.#log.error(...arguments);
     }
 
     /**
@@ -1529,7 +1529,7 @@ export class Op extends Events
      */
     warn()
     {
-        this._log.warn(...arguments);
+        this.#log.warn(...arguments);
     }
 
     /**
@@ -1537,7 +1537,7 @@ export class Op extends Events
      */
     verbose()
     {
-        this._log.verbose(...arguments);
+        this.#log.verbose(...arguments);
     }
 
     /* minimalcore:end */
@@ -1738,7 +1738,7 @@ export class Op extends Events
         {
             if (ports[i])
                 if (ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else this._log.error("setPortGroup: invalid port!");
+                else this.#log.error("setPortGroup: invalid port!");
         }
 
         /* minimalcore:end */

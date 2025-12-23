@@ -50,8 +50,8 @@ Math.seededRandom = function (max, min)
 };
 
 /**
-     * @namespace String
-     */
+ * @namespace String
+ */
 
 /**
  * append a linebreak to a string
@@ -63,12 +63,14 @@ String.prototype.endl = function ()
     return this + "\n";
 };
 
+/* minimalcore:start */
 String.prototype.contains = function (str)
 {
-    console.warn("string.contains deprecated, use string.includes");
-    console.log((new Error()).stack);
+    console.warn("string.contains deprecated, use string.includes"); // eslint-disable-line
+    console.log((new Error()).stack); // eslint-disable-line
     return this.includes(str);
-
 };
+
+/* minimalcore:end */
 
 export function extendJs() {}

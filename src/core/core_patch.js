@@ -86,6 +86,7 @@ export class Patch extends Events
     static EVENT_DISPOSE = "dispose";
     static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
 
+    #log;
     #renderOneFrame = false;
     #initialDeserialize = true;
 
@@ -95,14 +96,25 @@ export class Patch extends Events
     animMaxTime = 0;
     missingClipAnims = {};
 
-    // animFrameCallbacks = [];
+    profiler = null;
+    aborted = false;
+    _crashedOps = [];
+    animFrameOps = [];
+    _animReq = null;
+    _opIdCache = {};
+    _triggerStack = [];
+    storeObjNames = false; // remove after may release
+    _volumeListeners = [];
+    namedTriggers = {};
+
+    _origData = null;
+    tempData = {};
+    frameStore = {};
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
     {
         super();
-
-        this._log = new Logger("core_patch", { "onError": cfg.onError });
 
         /** @type {RenderLoop} */
         this.renderloop = null;
@@ -122,31 +134,17 @@ export class Patch extends Events
 
         };
 
+        this.#log = new Logger("core_patch", { "onError": cfg.onError });
         this.timer = new Timer();
         this.freeTimer = new Timer();
-        this.animFrameOps = [];
         this.gui = false;
         CABLES.logSilent = this.silent = true;
-        this.profiler = null;
-        this.aborted = false;
-        this._crashedOps = [];
-
-        this._animReq = null;
-        this._opIdCache = {};
-        this._triggerStack = [];
-        this.storeObjNames = false; // remove after may release
 
         /** @type {LoadingStatus} */
         this.loading = new LoadingStatus(this);
 
-        this._volumeListeners = [];
-        this.namedTriggers = {};
-
-        this._origData = null;
-        this.tempData = this.frameStore = {};
-
         /* minimalcore:start */
-        if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
+        if (!(function () { return !this; }())) this.#log.warn("not in strict mode: core patch");
 
         if (this.config.hasOwnProperty("silent")) this.silent = CABLES.logSilent = this.config.silent;
         if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
@@ -196,16 +194,16 @@ export class Patch extends Events
                         if (err)
                         {
                             const txt = "";
-                            this._log.error("err", err);
-                            this._log.error("data", data);
-                            this._log.error("data", data.msg);
+                            this.#log.error("err", err);
+                            this.#log.error("data", data);
+                            this.#log.error("data", data.msg);
                             return;
                         }
                         this.deSerialize(data);
                     }
                     catch (e)
                     {
-                        this._log.error("could not load/parse patch ", e);
+                        this.#log.error("could not load/parse patch ", e);
                     }
                 }
             );
@@ -363,8 +361,8 @@ export class Patch extends Events
         {
             if (!identifier)
             {
-                console.error("createop identifier false", identifier);
-                console.log((new Error()).stack);
+                console.error("createop identifier false", identifier);// eslint-disable-line
+                console.log((new Error()).stack);// eslint-disable-line
                 return;
             }
             if (identifier.indexOf("Ops.") === -1)
@@ -386,12 +384,12 @@ export class Patch extends Events
                     catch (e)
                     {
                         this._crashedOps.push(objName);
-                        this._log.error("[instancing error] constructor: " + objName, e);
+                        this.#log.error("[instancing error] constructor: " + objName, e);
 
                         /* minimalcore:start */
                         if (!this.isEditorMode())
                         {
-                            this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+                            this.#log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
                         }
                         else
                         {
@@ -411,7 +409,7 @@ export class Patch extends Events
                     if (opName)
                     {
                         identifier = opName;
-                        this._log.warn("could not find op by id: " + opId);
+                        this.#log.warn("could not find op by id: " + opId);
                     }
                     else
                     {
@@ -431,7 +429,7 @@ export class Patch extends Events
                 {
                     this.emitEvent("criticalError", { "title": "Unknown op: " + objName, "text": "Unknown op: " + objName });
 
-                    this._log.error("unknown op: " + objName);
+                    this.#log.error("unknown op: " + objName);
                     throw new Error("unknown op: " + objName);
                 }
                 else
@@ -453,12 +451,12 @@ export class Patch extends Events
         {
             this._crashedOps.push(objName);
 
-            this._log.error("[instancing error] " + objName, e);
+            this.#log.error("[instancing error] " + objName, e);
 
             /* minimalcore:start */
             if (!this.isEditorMode())
             {
-                this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+                this.#log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
 
                 // throw new Error("instancing error 1" + objName);
             }
@@ -477,7 +475,7 @@ export class Patch extends Events
         }
         else
         {
-            this._log.log("no op was created!?", identifier, id);
+            this.#log.log("no op was created!?", identifier, id);
         }
         return op;
     }
@@ -511,7 +509,7 @@ export class Patch extends Events
 
             if (this._opIdCache[op.id])
             {
-                this._log.warn("opid with id " + op.id + " already exists in patch!");
+                this.#log.warn("opid with id " + op.id + " already exists in patch!");
                 this.deleteOp(op.id); // strange with subpatch ops: why is this needed, somehow ops get added twice ???.....
                 // return;
             }
@@ -528,7 +526,7 @@ export class Patch extends Events
         }
         else
         {
-            this._log.error("addop: op could not be created: ", opIdentifier);
+            this.#log.error("addop: op could not be created: ", opIdentifier);
         }
 
         return op;
@@ -684,7 +682,7 @@ export class Patch extends Events
             }
         }
 
-        if (!found) this._log.warn("core patch deleteop: not found...", opid);
+        if (!found) this.#log.warn("core patch deleteop: not found...", opid);
     }
 
     getFrameNum()
@@ -723,8 +721,8 @@ export class Patch extends Events
     {
 
         /* minimalcore:start */
-        if (!op1) return this._log.warn("link: op1 is null ");
-        if (!op2) return this._log.warn("link: op2 is null");
+        if (!op1) return this.#log.warn("link: op1 is null ");
+        if (!op2) return this.#log.warn("link: op2 is null");
 
         /* minimalcore:end */
 
@@ -732,8 +730,8 @@ export class Patch extends Events
         const port2 = op2.getPort(port2Name, lowerCase);
 
         /* minimalcore:start */
-        if (!port1) return this._log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
-        if (!port2) return this._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+        if (!port1) return this.#log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
+        if (!port2) return this.#log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
         /* minimalcore:end */
 
@@ -916,7 +914,7 @@ export class Patch extends Events
             }
             catch (e)
             {
-                this._log.error("[instancing error] op data:", opData, e);
+                this.#log.error("[instancing error] op data:", opData, e);
                 // throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
             }
 
@@ -982,7 +980,7 @@ export class Patch extends Events
             }
 
             const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-            if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused);
+            if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused); // eslint-disable-line
         }
         this.logStartup("add ops done");
 
@@ -1072,7 +1070,7 @@ export class Patch extends Events
                                             }
                                         }
 
-                                        if (!dstOp) this._log.warn("could not find op for lost link");
+                                        if (!dstOp) this.#log.warn("could not find op for lost link");
                                         else
                                         {
                                             this._addLink(
@@ -1092,8 +1090,8 @@ export class Patch extends Events
                                             const op1 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objIn);
                                             const op2 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
 
-                                            if (!op1)console.log("could not find link op1");
-                                            if (!op2)console.log("could not find link op2");
+                                            if (!op1)console.log("could not find link op1");// eslint-disable-line
+                                            if (!op2)console.log("could not find link op2");// eslint-disable-line
 
                                             const p1Name = obj.ops[iop].portsOut[ipi2].links[ili].portIn;
 
@@ -1146,7 +1144,7 @@ export class Patch extends Events
                 }
                 catch (e)
                 {
-                    console.error("op.init crash", e);
+                    console.error("op.init crash", e); // eslint-disable-line
                 }
             }
         }
@@ -1192,7 +1190,7 @@ export class Patch extends Events
         }
         else
         {
-            this._log.warn("variable " + name + " not found!");
+            this.#log.warn("variable " + name + " not found!");
         }
     }
 
@@ -1295,8 +1293,8 @@ export class Patch extends Events
         else if (t == Port.TYPE_DYNAMIC) tStr = "dynamic";
         else
         {
-            console.log("unknown port type", t);
-            console.log(new Error().stack);
+            console.log("unknown port type", t); // eslint-disable-line
+            console.log(new Error().stack); // eslint-disable-line
         }
 
         for (const i in this._variables)
@@ -1316,14 +1314,14 @@ export class Patch extends Events
      */
     preRenderOps()
     {
-        this._log.log("prerendering...");
+        this.#log.log("prerendering...");
 
         for (let i = 0; i < this.ops.length; i++)
         {
             if (this.ops[i].preRender)
             {
                 this.ops[i].preRender();
-                this._log.log("prerender " + this.ops[i].objName);
+                this.#log.log("prerender " + this.ops[i].objName);
             }
         }
     }
@@ -1456,7 +1454,7 @@ export class Patch extends Events
                                 if (options.fixLostLinks)
                                 {
                                     const op = Patch.getGui().corePatch().getOpById(links[l].objIn);
-                                    if (!op) console.log("op not found!");
+                                    if (!op) console.log("op not found!"); // eslint-disable-line
                                     else
                                     {
                                         const outerOp = Patch.getGui().patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
