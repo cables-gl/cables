@@ -1,0 +1,139 @@
+{
+    "id": "9c660fea-f0a9-4791-a2fc-02a12a6b8b45",
+    "authorName": "pandur",
+    "created": 1766470311217,
+    "summary": "Parse a string into an array (create, split string, stringToArray)",
+    "docs": {
+        "ports": [
+            {
+                "name": "text",
+                "text": "The array-data you want to use, e.g. `100,200,300`"
+            },
+            {
+                "name": "separator",
+                "text": "The separator to use, e.g. `,` (comma) when your text is `foo,bar,baz`"
+            },
+            {
+                "name": "Numbers",
+                "text": "If set, the values inside the array will be interpreted as numbers (not strings)"
+            },
+            {
+                "name": "array",
+                "text": "The parsed array"
+            },
+            {
+                "name": "Parsed",
+                "text": "Triggers once the array has been parsed"
+            },
+            {
+                "name": "length",
+                "text": "The number of elements in the resulting array"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "text"
+            },
+            {
+                "type": 0,
+                "name": "Separator index",
+                "values": [
+                    ",",
+                    ";",
+                    "Line Break",
+                    "Tab"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Line Breaks index",
+                "values": [
+                    "Separator",
+                    "Ignore"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "Auto",
+                    "Numbers",
+                    "Strings"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Trim",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Replacn Nan",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Replace Nan Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "array"
+            },
+            {
+                "type": 1,
+                "name": "Parsed"
+            },
+            {
+                "type": 0,
+                "name": "length",
+                "subType": "number"
+            }
+        ]
+    },
+    "youtubeids": [
+        "Y3qX41TB0bg"
+    ],
+    "changelog": [
+        {
+            "message": "enhancement: ignore comma after last value",
+            "author": "pandur",
+            "date": 1566813445790,
+            "type": "improvement"
+        },
+        {
+            "message": "Switch for separator values",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1766472217131
+        },
+        {
+            "message": "Option to auto detect types of values",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1766472235493
+        },
+        {
+            "message": "Option to handle Nan (Not a number) values, this will set a replacement value",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1766472271791
+        },
+        {
+            "message": "Treat line breaks as separator additionally to the selected separator",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1766472294057
+        }
+    ],
+    "exampleProjectId": "U4M4J5",
+    "license": "MIT"
+}
