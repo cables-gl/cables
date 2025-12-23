@@ -172,7 +172,7 @@ export class CglContext extends CgContext
         if (!this.gl || this.gl.isContextLost())
         {
             this.aborted = true;
-            this._log.error("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
+            this._log.warn("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
 
