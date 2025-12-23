@@ -34,11 +34,11 @@ navigator.gpu.requestAdapter(
                     "format": presentationFormat,
                 });
                 op.patch.frameStore.minigpu =
-    {
-        "device": device,
-        "presentationFormat": presentationFormat
+                {
+                    "device": device,
+                    "presentationFormat": presentationFormat
 
-    };
+                };
 
                 requestAnimationFrame(frame);
             });
@@ -64,10 +64,12 @@ function frame()
 
     next.trigger();
 
-    passEncoder.draw(3);
+    passEncoder.draw(6);
     passEncoder.end();
 
     device.queue.submit([commandEncoder.finish()]);
+
+    requestAnimationFrame(frame);
 }
 
 op.onDelete = () =>
