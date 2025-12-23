@@ -63,7 +63,7 @@ inTrigger.onTriggered = doRender;
 
 // outputs
 const outTrigger = op.outTrigger("Next");
-const shaderOut = op.outObject("Shader");
+const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 // UI stuff
 op.toWorkPortsNeedToBeLinked(inTrigger);
@@ -228,7 +228,7 @@ function updateDefines()
 
     // ALBEDO TEX
     PBRShader.toggleDefine("USE_ALBEDO_TEX", inTexAlbedo.get());
-	PBRShader.toggleDefine("ALBEDO_SRGB", inTexAlbedo.get() && inTexAlbedo.get().pixelFormat == "SRGBA 8bit ubyte");
+    PBRShader.toggleDefine("ALBEDO_SRGB", inTexAlbedo.get() && inTexAlbedo.get().pixelFormat == "SRGBA 8bit ubyte");
     inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
     inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
     inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
@@ -260,7 +260,7 @@ function updateDefines()
     PBRShader.toggleDefine("ALPHA_BLEND", inAlphaMode.get() === "Blend");
 
     // tonemapping
-	PBRShader.toggleDefine("TONEMAP_None", inTonemapping.get() === "None");
+    PBRShader.toggleDefine("TONEMAP_None", inTonemapping.get() === "None");
     PBRShader.toggleDefine("TONEMAP_sRGB", inTonemapping.get() === "sRGB");
     PBRShader.toggleDefine("TONEMAP_HejiDawson", inTonemapping.get() === "HejiDawson");
     PBRShader.toggleDefine("TONEMAP_Photographic", inTonemapping.get() === "Photographic");
