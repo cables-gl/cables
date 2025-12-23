@@ -1,0 +1,36 @@
+{
+    "id": "6705a26e-b065-4ea6-ba75-85115170b93b",
+    "created": 1766496080520,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766496080521
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Fragment Shader"
+            },
+            {
+                "type": 5,
+                "name": "Vertex Shader"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}
