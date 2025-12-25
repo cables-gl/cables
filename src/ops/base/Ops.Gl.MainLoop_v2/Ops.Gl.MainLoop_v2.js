@@ -33,11 +33,16 @@ let winVisible = true;
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
+if (CABLES.UI)gui.canvasManager.addCgContext(op.patch.cgl);
 
 testMultiMainloop();
 
 // op.patch.cgl.cgCanvas.forceAspect = 1.7777777;
 op.patch.tempData.mainloopOp = this;
+
+op.patch.cgl.canvas.classList.add("cablescontext");
+op.patch.cgl.canvas.dataset.contextname = "cgl";
+op.patch.cgl.canvas.dataset.api = "webgl";
 
 function updateHdpi()
 {

@@ -121,5 +121,6 @@
     "exampleProjectId": "",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

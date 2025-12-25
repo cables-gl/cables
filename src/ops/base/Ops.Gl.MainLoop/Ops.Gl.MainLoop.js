@@ -40,6 +40,8 @@ active.onChange = function ()
 };
 
 const cgl = op.patch.cgl;
+if (CABLES.UI)gui.canvasManager.addCgContext(op.patch.cgl);
+
 let rframes = 0;
 let rframeStart = 0;
 let timeOutTest = null;

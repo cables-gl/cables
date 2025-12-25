@@ -37,9 +37,6 @@ export class CgCanvas
             this.canvasEle.addEventListener("focus", () => { this.hasFocus = true; });
             this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
 
-            this.canvasEle.classList.add("cablescontext");
-            this.canvasEle.dataset.contextname = "cgl";
-            this.canvasEle.dataset.api = "webgl";
         }
     }
 
