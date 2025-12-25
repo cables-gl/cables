@@ -2,7 +2,13 @@ const
     next = op.outTrigger("next");
 
 const canvas = document.createElement("canvas");
-canvas.dataset.engine = "minigpu";
+/* minimalcore:start */
+canvas.classList.add("cablescontext");
+canvas.dataset.contextname = "minigpu";
+canvas.dataset.api = "webgpu";
+
+/* minimalcore:end */
+
 let device = null;
 let context = null;
 let pipeline = null;
@@ -64,7 +70,6 @@ function frame()
 
     next.trigger();
 
-    passEncoder.draw(6);
     passEncoder.end();
 
     device.queue.submit([commandEncoder.finish()]);
@@ -72,7 +77,9 @@ function frame()
     requestAnimationFrame(frame);
 }
 
+/* minimalcore:start */
 op.onDelete = () =>
 {
     canvas.remove();
 };
+/* minimalcore:edn */

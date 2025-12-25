@@ -35,6 +35,7 @@ exec.onTriggered = () =>
 
     if (!pipe) return console.log("no pipe");
     op.patch.frameStore.minigpu.passEncoder.setPipeline(pipe);
+    op.patch.frameStore.minigpu.passEncoder.draw(3);
 
     next.trigger();
 };
