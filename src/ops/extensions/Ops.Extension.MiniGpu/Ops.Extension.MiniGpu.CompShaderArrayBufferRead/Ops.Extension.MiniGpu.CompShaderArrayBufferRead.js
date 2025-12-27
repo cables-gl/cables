@@ -4,6 +4,8 @@ const
     inO = op.inObject("GpuBuffer"),
     next = op.outTrigger("Next");
 
+let buffer = null;
+
 exec.onTriggered = () =>
 {
     next.trigger();

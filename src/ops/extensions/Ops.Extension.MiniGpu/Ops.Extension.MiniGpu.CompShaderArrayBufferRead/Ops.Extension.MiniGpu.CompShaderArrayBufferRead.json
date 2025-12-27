@@ -1,6 +1,6 @@
 {
-    "id": "e510b9cd-e5dc-4616-9acc-bd110168e049",
-    "created": 1766818286514,
+    "id": "732ba10a-d0d9-47b9-802e-cbbe7201621d",
+    "created": 1766826216385,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -21,6 +21,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1766818500401
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderArrayBuffer renamed to Ops.Extension.MiniGpu.CompShaderArrayBufferStorage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766826196027
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766826216385
         }
     ],
     "layout": {

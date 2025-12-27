@@ -1,6 +1,6 @@
 {
-    "id": "41b185cf-d080-4bcf-9050-3e2902046530",
-    "created": 1766818539382,
+    "id": "93340307-7883-4169-ac02-1295f2455308",
+    "created": 1766825765097,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1766818539382
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766825765097
         }
     ],
     "layout": {
@@ -19,11 +25,7 @@
             },
             {
                 "type": 5,
-                "name": "Fragment Shader"
-            },
-            {
-                "type": 5,
-                "name": "Vertex Shader"
+                "name": "Code"
             }
         ],
         "portsOut": [

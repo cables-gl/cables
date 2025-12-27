@@ -2,21 +2,12 @@ const
     exec = op.inTrigger("Trigger"),
     inFrag = op.inStringEditor("Fragment Shader", "", "wgsl"),
     inVert = op.inStringEditor("Vertex Shader", "", "wgsl"),
-    inf = op.inFloat("r", 0),
 
     next = op.outTrigger("Next"),
     result = op.outObject("Result");
 
 let s = null;
 const shaderStack = new CABLES.Stack();
-
-inf.onChange = () =>
-{
-    if (s)
-    {
-        s.constants.red = inf.get();
-    }
-};
 
 exec.onTriggered = () =>
 {
@@ -36,9 +27,9 @@ exec.onTriggered = () =>
                 },
             ],
             "constants": {
-                "red": inf.get(),
-                "green": 0.5,
-                "blue": 1,
+                "red": 0.5,
+                "green": 0,
+                "blue": 0,
             },
         },
 
