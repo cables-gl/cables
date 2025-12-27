@@ -1,0 +1,58 @@
+{
+    "id": "f38bf43a-606f-46cc-80d3-37c5a6ab4f65",
+    "created": 1766818138330,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818138331
+        },
+        {
+            "message": "Extension.MiniGpu.PipeUniformFloat renamed to Ops.Extension.MiniGpu.CompShaderUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766818488035
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "W",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

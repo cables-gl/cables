@@ -15,6 +15,7 @@ import { AnimKey } from "./anim_key.js";
 import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
+import { Stack } from "./stack.js";
 
 CABLES = CABLES || {};
 CABLES = {
@@ -65,6 +66,7 @@ CABLES.Variable = Variable;
 CABLES.logErrorConsole = utils.logErrorConsole;
 CABLES.isNumeric = utils.isNumeric;
 CABLES.uniqueArray = utils.uniqueArray;
+CABLES.Stack = Stack;
 
 /** @type {Array<Op>} */
 CABLES.OPS = [];

@@ -68,6 +68,8 @@ function frame()
     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
     op.patch.frameStore.minigpu.passEncoder = passEncoder;
 
+    op.patch.frameStore.shader = new CABLES.Stack();
+
     next.trigger();
 
     passEncoder.end();

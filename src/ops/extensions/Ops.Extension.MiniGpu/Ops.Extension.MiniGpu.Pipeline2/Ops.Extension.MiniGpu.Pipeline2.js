@@ -1,35 +1,33 @@
 const
     exec = op.inTrigger("Trigger"),
-    inFrag = op.inStringEditor("Fragment Shader", "", "wgsl"),
-    inVert = op.inStringEditor("Vertex Shader", "", "wgsl"),
+    inShader = op.inObject("Shader"),
     next = op.outTrigger("Next");
 
 let pipe = null;
 
+inShader.onChange = () =>
+{
+    pipe = null;
+};
+
 exec.onTriggered = () =>
 {
+    if (!inShader.get()) return;
     if (!pipe)
     {
         pipe = op.patch.frameStore.minigpu.device.createRenderPipeline({
             "layout": "auto",
-            "vertex": {
-                "module": op.patch.frameStore.minigpu.device.createShaderModule({
-                    "code": inVert.get(),
-                }),
-            },
-            "fragment": {
-                "module": op.patch.frameStore.minigpu.device.createShaderModule({
-                    "code": inFrag.get(),
-                }),
-                "targets": [
-                    {
-                        "format": op.patch.frameStore.minigpu.presentationFormat,
-                    },
-                ],
-            },
+            "vertex": inShader.get().vertex,
+            "fragment": inShader.get().fragment,
             "primitive": {
                 "topology": "triangle-list",
             },
+            // "depthStencil": {
+            //     "depthWriteEnabled": true,
+            //     "depthCompare": "less-equal",
+            //     "format": "depth24plus"
+            // }
+
         });
     }
 
