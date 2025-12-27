@@ -2,6 +2,7 @@ const
     next = op.outTrigger("next");
 
 const canvas = document.createElement("canvas");
+
 /* minimalcore:start */
 canvas.classList.add("cablescontext");
 canvas.dataset.contextname = "minigpu";
@@ -9,6 +10,7 @@ canvas.dataset.api = "webgpu";
 
 /* minimalcore:end */
 
+let presentationFormat = null;
 let device = null;
 let context = null;
 let pipeline = null;
@@ -33,16 +35,16 @@ navigator.gpu.requestAdapter(
                 const devicePixelRatio = window.devicePixelRatio;
                 canvas.width = canvas.clientWidth * devicePixelRatio;
                 canvas.height = canvas.clientHeight * devicePixelRatio;
-                const presentationFormat = navigator.gpu.getPreferredCanvasFormat();
+                presentationFormat = navigator.gpu.getPreferredCanvasFormat();
 
                 context.configure({
                     device,
                     "format": presentationFormat,
                 });
-                op.patch.frameStore.minigpu =
+                op.patch.frameStore.mgpu =
                 {
                     "device": device,
-                    "presentationFormat": presentationFormat
+                    "format": presentationFormat
 
                 };
 
@@ -66,9 +68,13 @@ function frame()
         ],
     };
     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
-    op.patch.frameStore.minigpu.passEncoder = passEncoder;
 
-    op.patch.frameStore.shader = new CABLES.Stack();
+    if (!presentationFormat) return;
+    op.patch.frameStore.mgpu = {
+        "shader": new CABLES.Stack(),
+        "passEncoder": passEncoder,
+        "device": device,
+        "format": presentationFormat };
 
     next.trigger();
 
@@ -84,4 +90,5 @@ op.onDelete = () =>
 {
     canvas.remove();
 };
-/* minimalcore:edn */
+
+/* minimalcore:end */

@@ -18,11 +18,17 @@ export class Stack
     clear()
     {
         this.#arr.length = 0;
+        return this;
     }
 
     current()
     {
         return this.#arr[this.#arr.length - 1];
+    }
+
+    array()
+    {
+        return this.#arr;
     }
 
 }

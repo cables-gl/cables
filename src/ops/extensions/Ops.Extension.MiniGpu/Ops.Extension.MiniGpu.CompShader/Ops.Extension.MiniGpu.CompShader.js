@@ -13,17 +13,17 @@ exec.onTriggered = () =>
 {
     s = {
         "vertex": {
-            "module": op.patch.frameStore.minigpu.device.createShaderModule({
+            "module": op.patch.frameStore.mgpu.device.createShaderModule({
                 "code": inVert.get(),
             }),
         },
         "fragment": {
-            "module": op.patch.frameStore.minigpu.device.createShaderModule({
+            "module": op.patch.frameStore.mgpu.device.createShaderModule({
                 "code": inFrag.get(),
             }),
             "targets": [
                 {
-                    "format": op.patch.frameStore.minigpu.presentationFormat,
+                    "format": op.patch.frameStore.mgpu.format,
                 },
             ],
             "constants": {
@@ -35,10 +35,10 @@ exec.onTriggered = () =>
 
     };
 
-    op.patch.frameStore.shader = shaderStack;
-    op.patch.frameStore.shader.push(s);
+    op.patch.frameStore.mgpu.shader = shaderStack;
+    op.patch.frameStore.mgpu.shader.push(s);
     next.trigger();
-    op.patch.frameStore.shader.pop();
+    op.patch.frameStore.mgpu.shader.pop();
 
     result.setRef(s);
 };

@@ -12,10 +12,10 @@ inShader.onChange = () =>
 
 exec.onTriggered = () =>
 {
-    if (!inShader.get()) return;
+    if (!inShader.get() || !inShader.get().fragment) return;
     if (!pipe)
     {
-        pipe = op.patch.frameStore.minigpu.device.createRenderPipeline({
+        const o = {
             "layout": "auto",
             "vertex": inShader.get().vertex,
             "fragment": inShader.get().fragment,
@@ -27,13 +27,14 @@ exec.onTriggered = () =>
             //     "depthCompare": "less-equal",
             //     "format": "depth24plus"
             // }
+        };
 
-        });
+        pipe = op.patch.frameStore.mgpu.device.createRenderPipeline(o);
     }
 
     if (!pipe) return console.log("no pipe");
-    op.patch.frameStore.minigpu.passEncoder.setPipeline(pipe);
-    op.patch.frameStore.minigpu.passEncoder.draw(3);
+    op.patch.frameStore.mgpu.passEncoder.setPipeline(pipe);
+    op.patch.frameStore.mgpu.passEncoder.draw(3);
 
     next.trigger();
 };

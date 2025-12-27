@@ -10,20 +10,20 @@ exec.onTriggered = () =>
 {
     if (!pipe)
     {
-        pipe = op.patch.frameStore.minigpu.device.createRenderPipeline({
+        pipe = op.patch.frameStore.mgpu.device.createRenderPipeline({
             "layout": "auto",
             "vertex": {
-                "module": op.patch.frameStore.minigpu.device.createShaderModule({
+                "module": op.patch.frameStore.mgpu.device.createShaderModule({
                     "code": inVert.get(),
                 }),
             },
             "fragment": {
-                "module": op.patch.frameStore.minigpu.device.createShaderModule({
+                "module": op.patch.frameStore.mgpu.device.createShaderModule({
                     "code": inFrag.get(),
                 }),
                 "targets": [
                     {
-                        "format": op.patch.frameStore.minigpu.presentationFormat,
+                        "format": op.patch.frameStore.mgpu.presentationFormat,
                     },
                 ],
             },
@@ -34,8 +34,8 @@ exec.onTriggered = () =>
     }
 
     if (!pipe) return console.log("no pipe");
-    op.patch.frameStore.minigpu.passEncoder.setPipeline(pipe);
-    op.patch.frameStore.minigpu.passEncoder.draw(3);
+    op.patch.frameStore.mgpu.passEncoder.setPipeline(pipe);
+    op.patch.frameStore.mgpu.passEncoder.draw(3);
 
     next.trigger();
 };
