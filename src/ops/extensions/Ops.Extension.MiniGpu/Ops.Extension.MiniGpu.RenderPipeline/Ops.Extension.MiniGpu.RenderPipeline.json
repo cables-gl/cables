@@ -15,6 +15,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1766820910225
+        },
+        {
+            "message": "Extension.MiniGpu.Pipeline2 renamed to Ops.Extension.MiniGpu.RenderPipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766855626187
         }
     ],
     "layout": {

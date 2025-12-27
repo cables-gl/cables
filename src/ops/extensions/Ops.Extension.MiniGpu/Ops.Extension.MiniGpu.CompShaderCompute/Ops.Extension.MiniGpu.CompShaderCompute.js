@@ -9,7 +9,13 @@ const
 let s = null;
 const binds = new CABLES.Stack();
 let bindHead = "";
-let reInit = false;
+let reInit = true;
+
+inCode.onChange = () =>
+{
+    reInit = true;
+};
+
 function bind()
 {
     let bhead = "";
@@ -26,6 +32,8 @@ function bind()
 
 exec.onTriggered = () =>
 {
+    const mgpu = op.patch.frameStore.mgpu;
+
     if (reInit)
     {
         s = {
@@ -37,14 +45,15 @@ exec.onTriggered = () =>
                 "constants": {},
             },
         };
+        reInit = false;
 
     }
 
-    op.patch.frameStore.mgpu.shader.push(s);
-    op.patch.frameStore.mgpu.bindings = binds.clear();
+    mgpu.shader.push(s);
+    mgpu.bindings = binds.clear();
     next.trigger();
     bind();
-    op.patch.frameStore.mgpu.shader.pop();
+    mgpu.shader.pop();
 
     result.setRef(s);
 };
