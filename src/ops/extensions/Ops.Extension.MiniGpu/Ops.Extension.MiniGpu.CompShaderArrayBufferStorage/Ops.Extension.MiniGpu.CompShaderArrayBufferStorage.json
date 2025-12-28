@@ -38,6 +38,11 @@
             {
                 "type": 5,
                 "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "integer"
             }
         ],
         "portsOut": [

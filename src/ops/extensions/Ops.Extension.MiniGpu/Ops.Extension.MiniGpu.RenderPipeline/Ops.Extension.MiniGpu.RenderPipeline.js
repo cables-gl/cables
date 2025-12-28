@@ -4,10 +4,12 @@ const
     next = op.outTrigger("Next");
 
 let pipe = null;
+let oldShader = null;
 
 inShader.onChange = () =>
 {
-    pipe = null;
+    if (inShader.get() != oldShader)pipe = null;
+    oldShader = inShader.get();
 };
 
 exec.onTriggered = () =>

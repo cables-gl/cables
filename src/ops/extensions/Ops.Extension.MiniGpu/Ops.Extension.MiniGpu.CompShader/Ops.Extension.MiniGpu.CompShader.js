@@ -11,29 +11,32 @@ const shaderStack = new CABLES.Stack();
 
 exec.onTriggered = () =>
 {
-    s = {
-        "vertex": {
-            "module": op.patch.frameStore.mgpu.device.createShaderModule({
-                "code": inVert.get(),
-            }),
-        },
-        "fragment": {
-            "module": op.patch.frameStore.mgpu.device.createShaderModule({
-                "code": inFrag.get(),
-            }),
-            "targets": [
-                {
-                    "format": op.patch.frameStore.mgpu.format,
-                },
-            ],
-            "constants": {
-                "red": 0.5,
-                "green": 0,
-                "blue": 0,
+    if (!s)
+    {
+        s = {
+            "vertex": {
+                "module": op.patch.frameStore.mgpu.device.createShaderModule({
+                    "code": inVert.get(),
+                }),
             },
-        },
+            "fragment": {
+                "module": op.patch.frameStore.mgpu.device.createShaderModule({
+                    "code": inFrag.get(),
+                }),
+                "targets": [
+                    {
+                        "format": op.patch.frameStore.mgpu.format,
+                    },
+                ],
+                "constants": {
+                    "red": 0.5,
+                    "green": 0,
+                    "blue": 0,
+                },
+            },
 
-    };
+        };
+    }
 
     op.patch.frameStore.mgpu.shader = shaderStack;
     op.patch.frameStore.mgpu.shader.push(s);

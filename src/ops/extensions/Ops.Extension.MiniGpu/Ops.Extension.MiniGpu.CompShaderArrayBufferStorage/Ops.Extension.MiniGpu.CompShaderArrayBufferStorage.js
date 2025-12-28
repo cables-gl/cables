@@ -1,28 +1,40 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
+    inLength = op.inInt("Length"),
     next = op.outTrigger("Next"),
     outO = op.outObject("GpuBuffer");
 
 let buffer = null;
-let size = 0;
+let binding = null;
+
+inLength.onChange =
+inName.onChange = () =>
+{
+    buffer = null;
+};
 
 exec.onTriggered = () =>
 {
+    const mgpu = op.patch.frameStore.mgpu;
     if (!buffer)
     {
-        const device = op.patch.frameStore.mgpu.device;
-        buffer = device.createBuffer({
+        console.log("create buffer", inLength.get());
+        buffer = mgpu.device.createBuffer({
         //   label: 'compute-generated vertices',
-            "size": size,
-            "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.VERTEX,
+            "size": inLength.get() * 4,
+            // "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.VERTEX|GPUBufferUsage.,
+            "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
         });
-        const binding = {
-            "header": "var<storage, read_write> vertices : array<Vertex>;",
-            "resource": { "buffer": buffer }
 
+        binding = {
+            "header": "var<storage, read_write> " + inName.get() + " : array<Vertex>;",
+            "resource": { "buffer": buffer }
         };
+        outO.setRef(buffer);
     }
+
+    mgpu.bindings.push(binding);
 
     next.trigger();
 };

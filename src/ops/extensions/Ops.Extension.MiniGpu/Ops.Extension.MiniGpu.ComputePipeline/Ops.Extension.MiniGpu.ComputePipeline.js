@@ -6,12 +6,12 @@ const
 let pipe = null;
 let commandEncoder;
 let oldShader = null;
+let computeBindGroup = null;
 
 inShader.onChange = () =>
 {
     if (inShader.get() != oldShader)
     {
-
         pipe = null;
         oldShader = inShader.get();
     }
@@ -20,30 +20,55 @@ inShader.onChange = () =>
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    if (!mgpu || !inShader.get() || !inShader.get().compute) return;
+    if (!mgpu) return console.log("no mgpu");
+    if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
     if (!pipe)
     {
-        commandEncoder = mgpu.device.createCommandEncoder();
+        console.log("create comp pipe");
+        const s = inShader.get();
         const o = {
             "layout": "auto",
-            "compute": inShader.get().compute,
+            "compute": s.shader.compute,
         };
 
-        pipe = op.patch.frameStore.mgpu.device.createComputePipeline(o);
+        pipe = mgpu.device.createComputePipeline(o);
+
+        const bg = {
+            "layout": pipe.getBindGroupLayout(0),
+            "entries": []
+        };
+
+        for (let i = 0; i < s.bindings.array().length; i++)
+        {
+            console.log("resourceeeeeeeeee", s.bindings.array()[i].resource);
+            bg.entries.push(
+                {
+                    "binding": i,
+                    "resource": s.bindings.array()[i].resource
+                    // "resource": { "buffer": s.bindings[i] },
+                },
+            );
+        }
+        console.log("ginnnnnnnnnnnnnnnnn", bg);
+        computeBindGroup = mgpu.device.createBindGroup(bg);
+
         console.log("compute created...");
     }
 
     if (!pipe) return console.log("no pipe");
+    commandEncoder = mgpu.device.createCommandEncoder();
 
     const pass = commandEncoder.beginComputePass();
 
     pass.setPipeline(pipe);
 
+    pass.setBindGroup(0, computeBindGroup);
     const workgroupSize = 64;
-    const numWorkgroups = Math.ceil(1000 / workgroupSize);
+    const numWorkgroups = Math.ceil(workgroupSize);
     pass.dispatchWorkgroups(numWorkgroups);
     pass.end();
+    const gpuCommands = commandEncoder.finish();
+    mgpu.device.queue.submit([gpuCommands]);
 
     next.trigger();
-
 };

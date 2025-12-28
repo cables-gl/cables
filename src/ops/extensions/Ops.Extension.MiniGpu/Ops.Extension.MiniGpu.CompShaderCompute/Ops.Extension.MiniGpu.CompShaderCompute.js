@@ -10,13 +10,14 @@ let s = null;
 const binds = new CABLES.Stack();
 let bindHead = "";
 let reInit = true;
+let o = null;
 
 inCode.onChange = () =>
 {
     reInit = true;
 };
 
-function bind()
+function genBindHeadSrc()
 {
     let bhead = "";
     for (let i = 0; i < binds.array().length; i++)
@@ -27,33 +28,41 @@ function bind()
 
     if (bhead != bindHead) reInit = true;
     bindHead = bhead;
-
 }
+
+let oldBindings = [];
+// setupBinds();
+// {
+// }
 
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
 
-    if (reInit)
-    {
-        s = {
-            "layout": "auto",
-            "compute": {
-                "module": op.patch.frameStore.mgpu.device.createShaderModule({
-                    "code": inCode.get(),
-                }),
-                "constants": {},
-            },
-        };
-        reInit = false;
-
-    }
-
     mgpu.shader.push(s);
     mgpu.bindings = binds.clear();
     next.trigger();
-    bind();
     mgpu.shader.pop();
 
-    result.setRef(s);
+    if (o && o.bindings != mgpu.bindings)reInit = true;
+
+    if (reInit)
+    {
+        console.log("reinit bind");
+
+        s = {
+            "layout": "auto",
+            "compute": {
+                "module": mgpu.device.createShaderModule({
+                    "code": inCode.get(),
+                }),
+                "constants": {},
+            }
+        };
+
+        reInit = false;
+        genBindHeadSrc();
+        o = { "shader": s, "bindings": mgpu.bindings };
+        result.setRef(o);
+    }
 };
