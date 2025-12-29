@@ -1,6 +1,8 @@
 const
     exec = op.inTrigger("Trigger"),
     inShader = op.inObject("Shader"),
+    inNum = op.inInt("Num", 64),
+
     next = op.outTrigger("Next");
 
 let pipe = null;
@@ -54,7 +56,7 @@ exec.onTriggered = () =>
 
     pass.setBindGroup(0, computeBindGroup);
     const workgroupSize = 64;
-    const numWorkgroups = Math.ceil(1000 / workgroupSize);
+    const numWorkgroups = Math.ceil(inNum.get() / workgroupSize);
     pass.dispatchWorkgroups(numWorkgroups);
     pass.end();
     const gpuCommands = commandEncoder.finish();

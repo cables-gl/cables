@@ -45,6 +45,16 @@
             },
             {
                 "type": 0,
+                "name": "Init index",
+                "values": [
+                    "0",
+                    "1",
+                    "R"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Length",
                 "subType": "integer"
             }

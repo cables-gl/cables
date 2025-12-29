@@ -38,6 +38,11 @@
             {
                 "type": 2,
                 "name": "Shader"
+            },
+            {
+                "type": 0,
+                "name": "Num",
+                "subType": "integer"
             }
         ],
         "portsOut": [

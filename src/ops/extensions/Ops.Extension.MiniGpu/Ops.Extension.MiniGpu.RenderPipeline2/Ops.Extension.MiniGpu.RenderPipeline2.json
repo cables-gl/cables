@@ -44,6 +44,11 @@
                 "name": "Vert"
             },
             {
+                "type": 0,
+                "name": "Instances",
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }

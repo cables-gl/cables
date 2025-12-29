@@ -42,19 +42,6 @@
                 "name": "Trigger"
             },
             {
-                "type": 5,
-                "name": "Name"
-            },
-            {
-                "type": 5,
-                "name": "Type"
-            },
-            {
-                "type": 0,
-                "name": "Length",
-                "subType": "integer"
-            },
-            {
                 "type": 2,
                 "name": "Buffer"
             }

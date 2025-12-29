@@ -1,20 +1,10 @@
 const
     exec = op.inTrigger("Trigger"),
-    inName = op.inString("Name", ""),
-    inType = op.inString("Type", "vec4f"),
-    inLength = op.inInt("Length"),
     next = op.outTrigger("Next"),
     outO = op.inObject("Buffer");
 
 let buffer = null;
 let binding = null;
-
-inLength.onChange =
-inType.onChange =
-inName.onChange = () =>
-{
-    buffer = null;
-};
 
 exec.onTriggered = () =>
 {
@@ -22,6 +12,9 @@ exec.onTriggered = () =>
     if (!buffer)
     {
         buffer = outO.get();
+        /* minimalcore:start */
+        op.setUiAttrib({ "extendTitle": buffer.label });
+        /* minimalcore:end */
 
         const layout = {
             "visibility": GPUShaderStage.VERTEX,
@@ -31,12 +24,14 @@ exec.onTriggered = () =>
             },
         };
 
+        const p = (buffer.label || "").split(",");
+
         binding = {
-            "header": "var<storage,read> " + inName.get() + " : array<" + inType.get() + ">;",
+            "header": "var<storage,read> " + p[0] + " : array<" + p[1] + ">;",
             "resource": { "buffer": buffer },
             "layout": layout
         };
-        outO.setRef(buffer);
+        // outO.setRef(buffer);
     }
 
     mgpu.bindings.push(binding);

@@ -736,14 +736,14 @@ export class Patch extends Events
         if (!port1) return this.#log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
         if (!port2) return this.#log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
-        /* minimalcore:end */
-
         if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
 
+        /* minimalcore:end */
         if (Link.canLink(port1, port2))
         {
             const link = new Link(this);
-            link.link(port1, port2);
+            if (port1 && port2)
+                link.link(port1, port2);
 
             this.emitEvent(Patch.EVENT_LINK, port1, port2, link, fromDeserialize);
             return link;

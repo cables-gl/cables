@@ -1,5 +1,5 @@
 const
-    v = op.inValueFloat("value"),
+    v = op.inFloat("value"),
     result = op.outNumber("result");
 
 v.onChange = exec;

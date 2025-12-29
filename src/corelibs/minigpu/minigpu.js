@@ -21,6 +21,7 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
         // "layout": 0,
         "entries": []
     };
+    console.log("text");
 
     for (let i = 0; i < bindings.length; i++)
     {

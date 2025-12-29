@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Trigger"),
     inShader = op.inObject("Frag"),
     inShaderVert = op.inObject("Vert"),
+    inInstances = op.inInt("Instances", 100),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next");
 
@@ -63,7 +64,7 @@ exec.onTriggered = () =>
     mgpu.passEncoder.setPipeline(pipe);
     mgpu.passEncoder.setBindGroup(0, bindGroup);
 
-    mgpu.passEncoder.draw(12, 100);
+    mgpu.passEncoder.draw(6, inInstances.get());
 
     next.trigger();
 };

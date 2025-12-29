@@ -21,19 +21,13 @@ export class Link extends Events
 
         this.id = CABLES.simpleId();
 
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portIn = null;
 
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portOut = null;
 
-        /**
-         * @type {Patch}
-         */
+        /** @type {Patch} */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;
