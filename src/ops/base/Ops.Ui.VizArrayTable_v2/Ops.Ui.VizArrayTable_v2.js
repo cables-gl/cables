@@ -1,3 +1,5 @@
+/* minimalcore:start */
+
 const
     inArr = op.inArray("Array"),
     inStride = op.inInt("Stride", 0),
@@ -220,3 +222,4 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.restore();
 };
+/* minimalcore:end */

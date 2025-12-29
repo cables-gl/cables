@@ -1,3 +1,5 @@
+/* minimalcore:start */
+
 const
     inStr = op.inStringEditor("String"),
     inZoomText = op.inBool("ZoomText", false),
@@ -11,6 +13,7 @@ const
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
 inStr.ignoreValueSerialize = true;
+outStr.ignoreValueSerialize = true;
 
 let lines = [];
 
@@ -61,3 +64,4 @@ op.renderVizLayer = (ctx, layer, viz) =>
 
     ctx.restore();
 };
+/* minimalcore:end */

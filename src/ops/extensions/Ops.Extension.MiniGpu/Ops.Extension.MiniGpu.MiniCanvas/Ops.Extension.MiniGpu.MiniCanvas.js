@@ -1,6 +1,5 @@
 const
     next = op.outTrigger("next");
-
 const canvas = document.createElement("canvas");
 
 /* minimalcore:start */
@@ -25,7 +24,6 @@ navigator.gpu.requestAdapter(
             (_device) =>
             {
                 device = _device;
-                // quitIfWebGPUNotAvailable(adapter, device);
                 document.getElementById("cablescanvas").appendChild(canvas);
                 canvas.style.width = "100%";
                 canvas.style.height = "100%";

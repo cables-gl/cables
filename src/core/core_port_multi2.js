@@ -81,6 +81,8 @@ export class MultiPort2 extends Port
 
         this.countPorts = () =>
         {
+
+            /* minimalcore:start */
             const gui = Patch.getGui();
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
@@ -88,6 +90,8 @@ export class MultiPort2 extends Port
                 this.retryTo = setTimeout(this.countPorts.bind(this));
                 return;
             }
+
+            /* minimalcore:end */
             this.retryTo = null;
 
             let redo = false;

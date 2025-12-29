@@ -10,6 +10,10 @@ const
 
 const binds = new CABLES.Stack();
 
+/* minimalcore:start */
+outCode.ignoreValueSerialize = true;
+/* minimalcore:end */
+
 let s = null;
 let bindHead = "";
 let reInit = true;
@@ -19,7 +23,9 @@ let lastChange = 0;
 inStage.onChange =
 inCode.onChange = () =>
 {
+    /* minimalcore:start */
     op.setUiAttrib({ "extendTitle": inStage.get() });
+    /* minimalcore:end */
 
     reInit = true;
 };
@@ -61,8 +67,6 @@ exec.onTriggered = () =>
 
     if (reInit)
     {
-        console.log("reinit bind");
-
         s = {
             "layout": "auto",
         };

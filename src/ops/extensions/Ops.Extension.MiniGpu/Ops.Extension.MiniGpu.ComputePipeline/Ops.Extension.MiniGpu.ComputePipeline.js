@@ -17,23 +17,6 @@ inShader.onChange = () =>
     }
 };
 
-// function createBgLayout(mgpu, bindings)
-// {
-//     console.log("bindings", bindings);
-//     const layoutEntries = [];
-//     for (let i = 0; i < bindings.length; i++)
-//     {
-//         bindings[i].layout.binding = i;
-//         layoutEntries.push(bindings[i].layout);
-//         console.log("iiii", bindings[i].layout);
-//     }
-//     const bindGroupLayout = mgpu.device.createBindGroupLayout({
-//         "entries": layoutEntries,
-//     });
-
-//     return bindGroupLayout;
-// }
-
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
@@ -41,7 +24,7 @@ exec.onTriggered = () =>
     if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
     if (!pipe)
     {
-        console.log("create comp pipe");
+        // console.log("create comp pipe");
         const s = inShader.get();
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, s.bindings.array());
 
@@ -60,7 +43,6 @@ exec.onTriggered = () =>
 
         /// ///////////////////////////////////
         computeBindGroup = MGPU.createBindGroup(mgpu, s.bindings.array(), bindGroupLayout);
-        console.log("compute created", computeBindGroup);
     }
 
     if (!pipe) return console.log("no pipe");

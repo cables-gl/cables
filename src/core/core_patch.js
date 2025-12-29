@@ -214,11 +214,14 @@ export class Patch extends Events
         this.cg = undefined;
     }
 
+    /* minimalcore:start */
     static getGui()
     {
         // @ts-ignore
         return window.gui;
     }
+
+    /* minimalcore:end */
 
     isPlaying()
     {

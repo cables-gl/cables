@@ -105,6 +105,7 @@ export class MultiPort extends Port
 
         this.countPorts = () =>
         {
+
             const gui = Patch.getGui();
 
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
