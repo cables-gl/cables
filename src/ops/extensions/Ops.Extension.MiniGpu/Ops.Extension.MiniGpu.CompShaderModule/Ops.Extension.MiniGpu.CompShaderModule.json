@@ -42,6 +42,10 @@
                     "COMPUTE"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [

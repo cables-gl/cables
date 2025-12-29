@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Trigger"),
     inCode = op.inStringEditor("Code", "", "glsl"),
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
+    inReset = op.inTriggerButton("Reset"),
 
     next = op.outTrigger("Next"),
     result = op.outObject("Result"),
@@ -22,7 +23,10 @@ inCode.onChange = () =>
 
     reInit = true;
 };
-
+inReset.onTriggered = () =>
+{
+    reInit = true;
+};
 function genBindHeadSrc()
 {
     let bhead = "";

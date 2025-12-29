@@ -7,6 +7,7 @@ const
 
 let pipe = null;
 let oldShader = null;
+let bindGroup = null;
 
 inReset.onTriggered = () =>
 {
@@ -28,10 +29,18 @@ exec.onTriggered = () =>
 
     if (!pipe)
     {
+        const binds = [...inShader.get().bindings.array(), ...inShaderVert.get().bindings.array()];
+        console.log("binds", binds);
+        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, binds);
+
         console.log("inShaderVert", inShaderVert.get());
         console.log("inShaderVert", inShader.get());
+
         const o = {
-            "layout": "auto",
+
+            "layout": mgpu.device.createPipelineLayout({
+                "bindGroupLayouts": [bindGroupLayout],
+            }),
             "vertex": inShaderVert.get().shader.vertex,
             "fragment": inShader.get().shader.fragment,
             "primitive": {
@@ -45,11 +54,14 @@ exec.onTriggered = () =>
             // }
         };
         console.log("ooooooooo", o);
+        bindGroup = MGPU.createBindGroup(mgpu, binds, bindGroupLayout);
+
         pipe = mgpu.device.createRenderPipeline(o);
     }
 
     if (!pipe) return console.log("no pipe");
     mgpu.passEncoder.setPipeline(pipe);
+    mgpu.passEncoder.setBindGroup(0, bindGroup);
 
     mgpu.passEncoder.draw(12);
 
