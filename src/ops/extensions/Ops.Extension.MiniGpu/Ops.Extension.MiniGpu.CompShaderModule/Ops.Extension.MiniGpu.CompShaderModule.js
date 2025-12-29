@@ -13,6 +13,7 @@ let s = null;
 let bindHead = "";
 let reInit = true;
 let o = null;
+let lastChange = 0;
 
 inStage.onChange =
 inCode.onChange = () =>
@@ -46,6 +47,8 @@ exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
     mgpu.shader.push(s);
+    mgpu.constants = {};
+
     mgpu.bindings = binds.clear();
     next.trigger();
     mgpu.shader.pop();
@@ -70,7 +73,7 @@ exec.onTriggered = () =>
                 },
             ],
 
-            "constants": {},
+            "constants": mgpu.constants,
         };
 
         reInit = false;

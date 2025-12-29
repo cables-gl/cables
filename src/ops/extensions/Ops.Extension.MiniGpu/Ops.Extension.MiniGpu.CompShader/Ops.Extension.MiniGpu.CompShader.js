@@ -48,6 +48,7 @@ exec.onTriggered = () =>
     mgpu.bindings = binds.clear();
 
     mgpu.shader = shaderStack;
+    mgpu.constants = [];
     mgpu.shader.push(s);
     next.trigger();
 
@@ -89,8 +90,7 @@ exec.onTriggered = () =>
                         "format": mgpu.format,
                     },
                 ],
-                "constants": {
-                },
+                "constants": mgpu.constants,
             },
 
         };

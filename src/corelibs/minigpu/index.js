@@ -1,5 +1,7 @@
-import { genBindHeadSrc } from "./minigpu.js";
+import { createBindGroup, createBindGroupLayout } from "./minigpu.js";
 
 window.MGPU = {
-    "genBindHeadSrc": genBindHeadSrc
+    "createBindGroupLayout": createBindGroupLayout,
+    "createBindGroup": createBindGroup
+
 };

@@ -6,8 +6,9 @@ const
 
 exec.onTriggered = () =>
 {
-    if (op.patch.frameStore.mgpu.shader)
-        op.patch.frameStore.mgpu.shader.current().constants[inName.get()] = inV.get();
+    const mgpu = op.patch.frameStore.mgpu;
+    if (mgpu.constants)
+        mgpu.constants[inName.get()] = inV.get();
 
     next.trigger();
 };

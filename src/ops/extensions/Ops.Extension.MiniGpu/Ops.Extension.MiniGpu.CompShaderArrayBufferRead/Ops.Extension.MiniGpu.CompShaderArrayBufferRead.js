@@ -39,7 +39,7 @@ exec.onTriggered = () =>
         };
 
         binding = {
-            "header": "var<storage, read_write> " + inName.get() + " : array<" + inType.get() + ">;",
+            "header": "var< read> " + inName.get() + " : array<" + inType.get() + ">;",
             "resource": { "buffer": buffer },
             "layout": layout
         };

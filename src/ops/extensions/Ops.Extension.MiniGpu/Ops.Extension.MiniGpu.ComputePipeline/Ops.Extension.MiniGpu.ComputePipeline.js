@@ -17,6 +17,23 @@ inShader.onChange = () =>
     }
 };
 
+// function createBgLayout(mgpu, bindings)
+// {
+//     console.log("bindings", bindings);
+//     const layoutEntries = [];
+//     for (let i = 0; i < bindings.length; i++)
+//     {
+//         bindings[i].layout.binding = i;
+//         layoutEntries.push(bindings[i].layout);
+//         console.log("iiii", bindings[i].layout);
+//     }
+//     const bindGroupLayout = mgpu.device.createBindGroupLayout({
+//         "entries": layoutEntries,
+//     });
+
+//     return bindGroupLayout;
+// }
+
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
@@ -26,17 +43,7 @@ exec.onTriggered = () =>
     {
         console.log("create comp pipe");
         const s = inShader.get();
-
-        const layoutEntries = [];
-        for (let i = 0; i < s.bindings.array().length; i++)
-        {
-            s.bindings.array()[i].layout.binding = i;
-            layoutEntries.push(s.bindings.array()[i].layout);
-            console.log("iiii", s.bindings.array()[i].layout);
-        }
-        const bindGroupLayout = mgpu.device.createBindGroupLayout({
-            "entries": layoutEntries,
-        });
+        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, s.bindings.array());
 
         const o = {
             // "layout": "auto",
@@ -52,29 +59,8 @@ exec.onTriggered = () =>
         pipe = mgpu.device.createComputePipeline(o);
 
         /// ///////////////////////////////////
-
-        const bg = {
-            "layout": bindGroupLayout,
-
-            // "layout": 0,
-            "entries": []
-        };
-
-        for (let i = 0; i < s.bindings.array().length; i++)
-        {
-            console.log("resourceeeeeeeeee", s.bindings.array()[i].resource);
-            bg.entries.push(
-                {
-                    "binding": i,
-                    "resource": s.bindings.array()[i].resource
-                    // "resource": { "buffer": s.bindings[i] },
-                },
-            );
-        }
-        console.log("ginnnnnnnnnnnnnnnnn", bg);
-        computeBindGroup = mgpu.device.createBindGroup(bg);
-
-        console.log("compute created...");
+        computeBindGroup = MGPU.createBindGroup(mgpu, s.bindings.array(), bindGroupLayout);
+        console.log("compute created", computeBindGroup);
     }
 
     if (!pipe) return console.log("no pipe");
