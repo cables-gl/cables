@@ -63,7 +63,7 @@ exec.onTriggered = () =>
     mgpu.passEncoder.setPipeline(pipe);
     mgpu.passEncoder.setBindGroup(0, bindGroup);
 
-    mgpu.passEncoder.draw(12);
+    mgpu.passEncoder.draw(12, 100);
 
     next.trigger();
 };
