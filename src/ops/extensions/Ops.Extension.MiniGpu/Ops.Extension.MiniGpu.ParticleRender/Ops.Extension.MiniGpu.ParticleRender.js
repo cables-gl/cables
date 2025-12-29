@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inShader = op.inObject("Shader"),
+    inVertex = op.inObject("Vertex Buffer"),
     next = op.outTrigger("Next");
 
 let pipe = null;
@@ -37,9 +38,8 @@ exec.onTriggered = () =>
 
     if (!pipe) return console.log("no pipe");
     op.patch.frameStore.mgpu.passEncoder.setPipeline(pipe);
-    // op.patch.frameStore.mgpu.passEncoder.setVertexBuffer(0, inVertex.get());
-    // op.patch.frameStore.mgpu.passEncoder.draw(inVertex.get().size / 12);
-    op.patch.frameStore.mgpu.passEncoder.draw(12);
+    op.patch.frameStore.mgpu.passEncoder.setVertexBuffer(0, inVertex.get());
+    op.patch.frameStore.mgpu.passEncoder.draw(inVertex.get().size / 12);
 
     next.trigger();
 };

@@ -26,15 +26,37 @@ exec.onTriggered = () =>
     {
         console.log("create comp pipe");
         const s = inShader.get();
+
+        const layoutEntries = [];
+        for (let i = 0; i < s.bindings.array().length; i++)
+        {
+            s.bindings.array()[i].layout.binding = i;
+            layoutEntries.push(s.bindings.array()[i].layout);
+            console.log("iiii", s.bindings.array()[i].layout);
+        }
+        const bindGroupLayout = mgpu.device.createBindGroupLayout({
+            "entries": layoutEntries,
+        });
+
         const o = {
-            "layout": "auto",
+            // "layout": "auto",
+            // "layout": bindGroupLayout,
+            "layout": mgpu.device.createPipelineLayout({
+                "bindGroupLayouts": [bindGroupLayout],
+            }),
             "compute": s.shader.compute,
         };
 
+        /// ////////////////////
+
         pipe = mgpu.device.createComputePipeline(o);
 
+        /// ///////////////////////////////////
+
         const bg = {
-            "layout": pipe.getBindGroupLayout(0),
+            "layout": bindGroupLayout,
+
+            // "layout": 0,
             "entries": []
         };
 
@@ -64,7 +86,7 @@ exec.onTriggered = () =>
 
     pass.setBindGroup(0, computeBindGroup);
     const workgroupSize = 64;
-    const numWorkgroups = Math.ceil(workgroupSize);
+    const numWorkgroups = Math.ceil(1000 / workgroupSize);
     pass.dispatchWorkgroups(numWorkgroups);
     pass.end();
     const gpuCommands = commandEncoder.finish();

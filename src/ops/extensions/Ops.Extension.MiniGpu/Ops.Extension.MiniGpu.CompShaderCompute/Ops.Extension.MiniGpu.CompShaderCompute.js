@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Trigger"),
-    inCode = op.inStringEditor("Code", "", "wgsl"),
+    inCode = op.inStringEditor("Code", "", "glsl"),
 
     next = op.outTrigger("Next"),
     result = op.outObject("Result"),
@@ -23,17 +23,19 @@ function genBindHeadSrc()
     for (let i = 0; i < binds.array().length; i++)
     {
         const b = binds.array()[i];
-        bhead += "@group(0) @binding(" + i + ") " + b.header;
+        bhead += "@group(0) @binding(" + i + ") " + b.header + "\n";
     }
 
     if (bhead != bindHead) reInit = true;
     bindHead = bhead;
+
+    let code = inCode.get();
+    code = code.replaceAll("{{BINDINGS}}", bhead);
+    outCode.set(code);
+    return code;
 }
 
 let oldBindings = [];
-// setupBinds();
-// {
-// }
 
 exec.onTriggered = () =>
 {
@@ -54,14 +56,13 @@ exec.onTriggered = () =>
             "layout": "auto",
             "compute": {
                 "module": mgpu.device.createShaderModule({
-                    "code": inCode.get(),
+                    "code": genBindHeadSrc(),
                 }),
                 "constants": {},
             }
         };
 
         reInit = false;
-        genBindHeadSrc();
         o = { "shader": s, "bindings": mgpu.bindings };
         result.setRef(o);
     }

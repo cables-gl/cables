@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
-    inFrag = op.inStringEditor("Fragment Shader", "", "wgsl"),
-    inVert = op.inStringEditor("Vertex Shader", "", "wgsl"),
+    inFrag = op.inStringEditor("Fragment Shader", "", "glsl"),
+    inVert = op.inStringEditor("Vertex Shader", "", "glsl"),
 
     next = op.outTrigger("Next"),
     result = op.outObject("Result");
@@ -18,6 +18,19 @@ exec.onTriggered = () =>
                 "module": op.patch.frameStore.mgpu.device.createShaderModule({
                     "code": inVert.get(),
                 }),
+                // "buffers": [
+                //     {
+                //         "arrayStride": 3 * 4,
+                //         "stepMode": "vertex",
+                //         "attributes": [
+                //             {
+                //                 "shaderLocation": 0,
+                //                 "offset": 0,
+                //                 "format": "float32x3",
+                //             },
+                //         ],
+                //     },
+                // ],
             },
             "fragment": {
                 "module": op.patch.frameStore.mgpu.device.createShaderModule({
