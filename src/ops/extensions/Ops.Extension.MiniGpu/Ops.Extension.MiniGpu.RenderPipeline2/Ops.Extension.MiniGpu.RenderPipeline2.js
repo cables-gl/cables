@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
-    inShader = op.inObject("Shader"),
+    inShader = op.inObject("Frag"),
+    inShaderVert = op.inObject("Vert"),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next");
 
@@ -20,13 +21,19 @@ inShader.onChange = () =>
 
 exec.onTriggered = () =>
 {
-    if (!inShader.get() || !inShader.get().fragment) return;
+    if (!inShader.get() || !inShaderVert.get()) return;
+    if (!inShader.get().shader || !inShaderVert.get().shader) return;
+
+    const mgpu = op.patch.frameStore.mgpu;
+
     if (!pipe)
     {
+        console.log("inShaderVert", inShaderVert.get());
+        console.log("inShaderVert", inShader.get());
         const o = {
             "layout": "auto",
-            "vertex": inShader.get().vertex,
-            "fragment": inShader.get().fragment,
+            "vertex": inShaderVert.get().shader.vertex,
+            "fragment": inShader.get().shader.fragment,
             "primitive": {
                 "topology": "triangle-list",
                 // "topology": "point-list",
@@ -37,24 +44,14 @@ exec.onTriggered = () =>
             //     "format": "depth24plus"
             // }
         };
-
-        pipe = op.patch.frameStore.mgpu.device.createRenderPipeline(o);
+        console.log("ooooooooo", o);
+        pipe = mgpu.device.createRenderPipeline(o);
     }
 
     if (!pipe) return console.log("no pipe");
-    op.patch.frameStore.mgpu.passEncoder.setPipeline(pipe);
-    // op.patch.frameStore.mgpu.passEncoder.setVertexBuffer(0, inVertex.get());
-    // op.patch.frameStore.mgpu.passEncoder.draw(inVertex.get().size / 12);
-    op.patch.frameStore.mgpu.passEncoder.draw(12);
+    mgpu.passEncoder.setPipeline(pipe);
+
+    mgpu.passEncoder.draw(12);
 
     next.trigger();
 };
-
-//   primitive: {
-//     topology: 'line-list',
-//   },
-//   depthStencil: {
-//     depthWriteEnabled: true,
-//     depthCompare: 'less-equal',
-//     format: depthFormat,
-//   },

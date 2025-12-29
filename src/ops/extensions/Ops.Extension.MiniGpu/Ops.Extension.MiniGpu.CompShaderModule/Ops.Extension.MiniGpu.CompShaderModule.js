@@ -1,19 +1,24 @@
 const
     exec = op.inTrigger("Trigger"),
     inCode = op.inStringEditor("Code", "", "glsl"),
+    inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
 
     next = op.outTrigger("Next"),
     result = op.outObject("Result"),
     outCode = op.outString("Final Code");
 
-let s = null;
 const binds = new CABLES.Stack();
+
+let s = null;
 let bindHead = "";
 let reInit = true;
 let o = null;
 
+inStage.onChange =
 inCode.onChange = () =>
 {
+    op.setUiAttrib({ "extendTitle": inStage.get() });
+
     reInit = true;
 };
 
@@ -40,7 +45,6 @@ let oldBindings = [];
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-
     mgpu.shader.push(s);
     mgpu.bindings = binds.clear();
     next.trigger();
@@ -54,16 +58,23 @@ exec.onTriggered = () =>
 
         s = {
             "layout": "auto",
-            "compute": {
-                "module": mgpu.device.createShaderModule({
-                    "code": genBindHeadSrc(),
-                }),
-                "constants": {},
-            }
+        };
+
+        s[inStage.get().toLowerCase()] = {
+            "module": mgpu.device.createShaderModule({
+                "code": genBindHeadSrc(),
+            }),
+            "targets": [// only frag??
+                {
+                    "format": mgpu.format,
+                },
+            ],
+
+            "constants": {},
         };
 
         reInit = false;
-        o = { "shader": s, "bindings": mgpu.bindings };
+        o = { "shader": s, "bindings": mgpu.bindings, "constants": [] };
         result.setRef(o);
     }
 };

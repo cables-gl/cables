@@ -1,6 +1,6 @@
 {
-    "id": "211459cf-da59-4dad-a332-b8b2dfe87d69",
-    "created": 1766820910225,
+    "id": "d48853ac-d5b4-4c9c-9680-92e9eecf14fc",
+    "created": 1767016696486,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1766855626187
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767016696486
         }
     ],
     "layout": {
@@ -31,7 +37,11 @@
             },
             {
                 "type": 2,
-                "name": "Shader"
+                "name": "Frag"
+            },
+            {
+                "type": 2,
+                "name": "Vert"
             },
             {
                 "type": 1,

@@ -15,6 +15,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1766825765097
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderCompute renamed to Ops.Extension.MiniGpu.CompShaderModule",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1767016780129
         }
     ],
     "layout": {
@@ -26,6 +32,16 @@
             {
                 "type": 5,
                 "name": "Code"
+            },
+            {
+                "type": 0,
+                "name": "Stage index",
+                "values": [
+                    "VERTEX",
+                    "FRAGMENT",
+                    "COMPUTE"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
