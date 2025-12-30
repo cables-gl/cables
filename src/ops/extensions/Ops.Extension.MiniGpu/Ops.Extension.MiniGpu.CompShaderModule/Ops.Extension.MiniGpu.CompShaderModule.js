@@ -8,12 +8,13 @@ const
     result = op.outObject("Result"),
     outCode = op.outString("Final Code");
 
-const binds = new CABLES.Stack();
-
 /* minimalcore:start */
 outCode.ignoreValueSerialize = true;
+
 /* minimalcore:end */
 
+const binds = new CABLES.Stack();
+let oldBindings = [];
 let s = null;
 let bindHead = "";
 let reInit = true;
@@ -23,8 +24,10 @@ let lastChange = 0;
 inStage.onChange =
 inCode.onChange = () =>
 {
+
     /* minimalcore:start */
     op.setUiAttrib({ "extendTitle": inStage.get() });
+
     /* minimalcore:end */
 
     reInit = true;
@@ -33,6 +36,7 @@ inReset.onTriggered = () =>
 {
     reInit = true;
 };
+
 function genBindHeadSrc()
 {
     let bhead = "";
@@ -51,13 +55,12 @@ function genBindHeadSrc()
     return code;
 }
 
-let oldBindings = [];
-
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
     mgpu.shader.push(s);
     mgpu.constants = {};
+    mgpu.stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
 
     mgpu.bindings = binds.clear();
     next.trigger();
@@ -67,9 +70,7 @@ exec.onTriggered = () =>
 
     if (reInit)
     {
-        s = {
-            "layout": "auto",
-        };
+        s = { "layout": "auto", };
 
         s[inStage.get().toLowerCase()] = {
             "module": mgpu.device.createShaderModule({

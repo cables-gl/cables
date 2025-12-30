@@ -17,8 +17,6 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
 
     const bg = {
         "layout": bindGroupLayout,
-
-        // "layout": 0,
         "entries": []
     };
     console.log("text");
@@ -29,7 +27,6 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
             {
                 "binding": i,
                 "resource": bindings[i].resource
-                // "resource": { "buffer": s.bindings[i] },
             }
         );
     }

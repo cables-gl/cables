@@ -17,7 +17,7 @@ exec.onTriggered = () =>
         /* minimalcore:end */
 
         const layout = {
-            "visibility": GPUShaderStage.VERTEX,
+            "visibility": mgpu.stage,
 
             "buffer": {
                 "type": "read-only-storage",
