@@ -4,11 +4,23 @@ const
     inV = op.inFloat("Value"),
     next = op.outTrigger("Next");
 
+let reninit = true;
+
+inName.onChange =
+inV.onChange = () =>
+{
+    reninit = true;
+};
+
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    if (mgpu.constants)
+
+    if (reninit && mgpu.constants)
+    {
         mgpu.constants[inName.get()] = inV.get();
+        mgpu.shader.updated = true;
+    }
 
     next.trigger();
 };

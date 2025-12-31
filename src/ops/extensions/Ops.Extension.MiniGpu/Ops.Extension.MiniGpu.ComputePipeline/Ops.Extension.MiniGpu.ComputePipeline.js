@@ -1,5 +1,4 @@
-const
-    exec = op.inTrigger("Trigger"),
+const exec = op.inTrigger("Trigger"),
     inShader = op.inObject("Shader"),
     inNum = op.inInt("Num", 64),
 

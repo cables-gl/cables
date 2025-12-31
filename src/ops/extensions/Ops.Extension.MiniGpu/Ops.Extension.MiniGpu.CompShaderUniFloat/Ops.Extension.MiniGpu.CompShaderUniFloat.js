@@ -43,7 +43,10 @@ exec.onTriggered = () =>
             "resource": { "buffer": uniformBuffer },
             "layout": layout
         };
+
+        mgpu.shader.updated = true;
     }
+
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
     mgpu.bindings.push(binding);

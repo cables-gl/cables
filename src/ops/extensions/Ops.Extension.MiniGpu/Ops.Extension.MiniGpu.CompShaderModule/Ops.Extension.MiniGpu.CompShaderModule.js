@@ -22,9 +22,9 @@ let o = null;
 let lastChange = 0;
 
 inStage.onChange =
+inStage.onChange =
 inCode.onChange = () =>
 {
-
     /* minimalcore:start */
     op.setUiAttrib({ "extendTitle": inStage.get() });
 
@@ -40,10 +40,14 @@ inReset.onTriggered = () =>
 function genBindHeadSrc()
 {
     let bhead = "";
+    let g = 0;
+    if (inStage.get() == "FRAGMENT")g = 1;
+
+    console.log("stage", inStage.indexPort.get());
     for (let i = 0; i < binds.array().length; i++)
     {
         const b = binds.array()[i];
-        bhead += "@group(0) @binding(" + i + ") " + b.header + "\n";
+        bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
     }
 
     if (bhead != bindHead) reInit = true;
@@ -60,13 +64,14 @@ exec.onTriggered = () =>
     const mgpu = op.patch.frameStore.mgpu;
     mgpu.shader.push(s);
     mgpu.constants = {};
-    mgpu.stage = GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT;
+    mgpu.stage = GPUShaderStage[inStage.get()];
 
     mgpu.bindings = binds.clear();
     next.trigger();
     mgpu.shader.pop();
 
     if (o && o.bindings != mgpu.bindings)reInit = true;
+    if (s && s.updated)reInit = true;
 
     if (reInit)
     {
@@ -86,7 +91,8 @@ exec.onTriggered = () =>
         };
 
         reInit = false;
-        o = { "shader": s, "bindings": mgpu.bindings, "constants": [] };
+        o = { "updated": performance.now(), "shader": s, "bindings": mgpu.bindings, "constants": [] };
         result.setRef(o);
+        s.updated = false;
     }
 };
