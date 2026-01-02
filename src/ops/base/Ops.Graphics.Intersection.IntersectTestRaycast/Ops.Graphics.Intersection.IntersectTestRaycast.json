@@ -4,19 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1686493404401
-        },
-        {
-            "message": "Ops.Patch.PU3A3qy.CollisionRayCast renamed to Ops.Team.CollisionOps.CollisionRayCast",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686495541255
-        },
-        {
-            "message": "Ops.Team.CollisionOps.CollisionRayCast renamed to Ops.Graphics.Intersection.IntersectRaycast",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687166309889
+            "date": 1686493404401,
+            "type": "new"
         },
         {
             "message": "switchable to XYZ-XYZ coordinate mode: 3d rays, not only from screencoordinates",
@@ -29,16 +18,22 @@
             "type": "feature",
             "author": "pandur",
             "date": 1708014146773
+        },
+        {
+            "message": "Active toggle now works as expected",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1767347331684
         }
     ],
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Coordinate Format index",
                 "values": [
                     "-1 to 1",
@@ -47,72 +42,72 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "To X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "To Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "To Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Change Cursor",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Has Hit",
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Hit Body Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hit X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hit Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Hit Z",
                 "subType": "number"
             }
@@ -130,5 +125,6 @@
     ],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }
