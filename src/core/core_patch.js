@@ -137,7 +137,7 @@ export class Patch extends Events
         this.#log = new Logger("core_patch", { "onError": cfg.onError });
         this.timer = new Timer();
         this.freeTimer = new Timer();
-        this.gui = false;
+        this.gui = null;
         CABLES.logSilent = this.silent = true;
 
         /** @type {LoadingStatus} */

@@ -1,11 +1,14 @@
 const
     next = op.outTrigger("next");
-const canvas = document.createElement("canvas");
+let canvas = document.createElement("canvas");
 
 /* minimalcore:start */
+canvas = canvas || document.body;
 canvas.classList.add("cablescontext");
 canvas.dataset.contextname = "minigpu";
 canvas.dataset.api = "webgpu";
+
+if (!op.patch.config.containerElement)console.error("patch options need containerElement for minigpu");
 
 /* minimalcore:end */
 
@@ -24,7 +27,7 @@ navigator.gpu.requestAdapter(
             (_device) =>
             {
                 device = _device;
-                document.getElementById("cablescanvas").appendChild(canvas);
+                op.patch.config.containerElement.appendChild(canvas);
                 canvas.style.width = "100%";
                 canvas.style.height = "100%";
 
