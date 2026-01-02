@@ -27,7 +27,7 @@ export const now = function ()
 class Timer extends Events
 {
     static EVENT_PLAY_PAUSE = "playPause";
-    static EVENT_TIME_CHANGED = "timeChanged";
+    static EVENT_TIME_CHANGED = "timeChange";
 
     #lastTime = 0;
     #timeOffset = 0;
