@@ -1,41 +1,42 @@
 const exec = op.inTrigger("Trigger"),
-    inShader = op.inObject("Shader"),
     inNum = op.inInt("Num", 64),
 
-    next = op.outTrigger("Next");
+    childx = op.outTrigger("childx");
 
 let pipe = null;
 let commandEncoder;
 let oldShader = null;
 let computeBindGroup = null;
 
-inShader.onChange = () =>
-{
-    if (inShader.get() != oldShader)
-    {
-        pipe = null;
-        oldShader = inShader.get();
-    }
-};
+// inShader.onChange = () =>
+// {
+//     if (inShader.get() != oldShader)
+//     {
+//         pipe = null;
+//         oldShader = inShader.get();
+//     }
+// };
 
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
     if (!mgpu) return console.log("no mgpu");
-    if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
-    if (!pipe)
-    {
-        // console.log("create comp pipe");
-        const s = inShader.get();
-        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, s.bindings.array());
 
+    mgpu.shaderModules = {};
+    childx.trigger();
+    if (!mgpu.shaderModules.compute) return;
+    // if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
+    if (!pipe || mgpu.rebuildPipeline)
+    {
+        console.log("create compute pipe", mgpu.rebuildPipeline);
+        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
         const o = {
             // "layout": "auto",
             // "layout": bindGroupLayout,
             "layout": mgpu.device.createPipelineLayout({
                 "bindGroupLayouts": [bindGroupLayout],
             }),
-            "compute": s.shader.compute,
+            "compute": mgpu.shaderModules.compute.shader.compute,
         };
 
         /// ////////////////////
@@ -43,7 +44,7 @@ exec.onTriggered = () =>
         pipe = mgpu.device.createComputePipeline(o);
 
         /// ///////////////////////////////////
-        computeBindGroup = MGPU.createBindGroup(mgpu, s.bindings.array(), bindGroupLayout);
+        computeBindGroup = MGPU.createBindGroup(mgpu, mgpu.shaderModules.compute.bindings.array(), bindGroupLayout);
     }
 
     if (!pipe) return console.log("no pipe");
@@ -60,6 +61,4 @@ exec.onTriggered = () =>
     pass.end();
     const gpuCommands = commandEncoder.finish();
     mgpu.device.queue.submit([gpuCommands]);
-
-    next.trigger();
 };

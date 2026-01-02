@@ -5,7 +5,6 @@ const
     inReset = op.inTriggerButton("Reset"),
 
     next = op.outTrigger("Next"),
-    result = op.outObject("Result"),
     outCode = op.outString("Final Code");
 
 /* minimalcore:start */
@@ -61,20 +60,18 @@ function genBindHeadSrc()
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    mgpu.shader.push(s);
+
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
-
     mgpu.bindings = binds.clear();
+
     next.trigger();
     mgpu.shader.pop();
-
     if (o && o.bindings != mgpu.bindings)reInit = true;
-    if (s && s.updated)reInit = true;
 
-    if (reInit)
+    if (reInit || mgpu.rebuildShaderModule)
     {
-        console.log("create compute pipe");
+        console.log("create module", inStage.get(), mgpu.rebuildShaderModule);
         s = { "layout": "auto", };
 
         s[inStage.get().toLowerCase()] = {
@@ -84,15 +81,19 @@ exec.onTriggered = () =>
             "targets": [// only frag??
                 {
                     "format": mgpu.format,
-                },
+                }
             ],
-
             "constants": mgpu.constants,
         };
 
-        reInit = false;
         o = { "updated": performance.now(), "shader": s, "bindings": mgpu.bindings, "constants": [] };
-        result.setRef(o);
-        s.updated = false;
+
+        mgpu.rebuildPipeline = "module rebuild ";
+        mgpu.rebuildShaderModule = false;
+
+        reInit = false;
     }
+
+    mgpu.shaderModules[inStage.get().toLowerCase()] = o;
+    mgpu.shaderModules.updated = false;
 };

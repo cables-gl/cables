@@ -36,14 +36,6 @@
                 "name": "Trigger"
             },
             {
-                "type": 2,
-                "name": "Frag"
-            },
-            {
-                "type": 2,
-                "name": "Vert"
-            },
-            {
                 "type": 0,
                 "name": "Instances",
                 "subType": "integer"
@@ -56,7 +48,7 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
+                "name": "Childs"
             }
         ]
     }

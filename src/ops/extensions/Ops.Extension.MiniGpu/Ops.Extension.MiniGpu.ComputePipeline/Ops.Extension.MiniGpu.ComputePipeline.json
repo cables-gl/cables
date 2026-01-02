@@ -36,10 +36,6 @@
                 "name": "Trigger"
             },
             {
-                "type": 2,
-                "name": "Shader"
-            },
-            {
                 "type": 0,
                 "name": "Num",
                 "subType": "integer"
@@ -48,7 +44,7 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
+                "name": "childx"
             }
         ]
     },

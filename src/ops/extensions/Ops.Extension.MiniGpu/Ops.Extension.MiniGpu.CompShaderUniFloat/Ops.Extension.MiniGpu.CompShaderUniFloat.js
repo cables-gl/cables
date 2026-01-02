@@ -11,13 +11,13 @@ let binding = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
 
+exec.onLinkChanged = () =>
+{
+    binding = null;
+};
+
 exec.onTriggered = () =>
 {
-    uniformArray[0] = inX.get();
-    uniformArray[1] = inY.get();
-    uniformArray[2] = inZ.get();
-    uniformArray[3] = inW.get();
-
     const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
     {
@@ -44,8 +44,13 @@ exec.onTriggered = () =>
             "layout": layout
         };
 
-        mgpu.shader.updated = true;
+        mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }
+
+    uniformArray[0] = inX.get();
+    uniformArray[1] = inY.get();
+    uniformArray[2] = inZ.get();
+    uniformArray[3] = inW.get();
 
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 

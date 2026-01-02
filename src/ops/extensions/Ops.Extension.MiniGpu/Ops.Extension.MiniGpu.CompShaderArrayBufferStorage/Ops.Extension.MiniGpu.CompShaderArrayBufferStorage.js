@@ -44,6 +44,7 @@ exec.onTriggered = () =>
         const rndarr = [];
         if (inInit.get() == "R")
             for (let i = 0; i < inLength.get(); i++) rndarr[i] = Math.random();
+
         if (inInit.get() == "1")
             for (let i = 0; i < inLength.get(); i++) rndarr[i] = 1;
 
@@ -63,6 +64,8 @@ exec.onTriggered = () =>
             "layout": layout
         };
         outO.setRef(buffer);
+
+        mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }
 
     mgpu.bindings.push(binding);

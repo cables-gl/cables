@@ -1,10 +1,10 @@
 const
     exec = op.inTrigger("Trigger"),
-    inShaderFrag = op.inObject("Frag"),
-    inShaderVert = op.inObject("Vert"),
+    // inShaderFrag = op.inObject("Frag"),
+    // inShaderVert = op.inObject("Vert"),
     inInstances = op.inInt("Instances", 100),
     inReset = op.inTriggerButton("Reset"),
-    next = op.outTrigger("Next");
+    next = op.outTrigger("Childs");
 
 let pipe = null;
 let oldShader = null;
@@ -20,40 +20,44 @@ inReset.onTriggered = () =>
     pipe = null;
 };
 
-inShaderFrag.onChange = () =>
-{
-    if (inShaderFrag.get() != oldShader)pipe = null;
-    oldShader = inShaderFrag.get();
-};
+// inShaderFrag.onChange = () =>
+// {
+//     if (inShaderFrag.get() != oldShader)pipe = null;
+//     oldShader = inShaderFrag.get();
+// };
 
 exec.onTriggered = () =>
 {
-    if (!inShaderFrag.get() || !inShaderVert.get()) return;
-    if (!inShaderFrag.get().shader || !inShaderVert.get().shader) return;
-    if (updatedVert != inShaderVert.get().updated)pipe = null;
-    if (updatedFrag != inShaderFrag.get().updated)pipe = null;
+    // if (!inShaderFrag.get() || !inShaderVert.get()) return;
+    // if (!mgpu.shaderModules.fragment.shader || !mgpu.shaderModules.vertex.shader) return;
+    // if (updatedVert != mgpu.shaderModules.vertex.updated)pipe = null;
+    // if (updatedFrag != mgpu.shaderModules.fragment.updated)pipe = null;
 
     const mgpu = op.patch.frameStore.mgpu;
+    mgpu.shaderModules = {};
 
-    if (!pipe)
+    next.trigger();
+    // if (!mgpu.shaderModules.fragment || !mgpu.shaderModules.vertex) return;
+
+    if (!pipe || mgpu.rebuildPipeline)
     {
-        console.log("create renderpipe");
-        const bindsFrag = inShaderFrag.get().bindings.array();
-        const bindsVert = inShaderVert.get().bindings.array();
+        console.log("create renderpipe", mgpu.rebuildPipeline);
+        const bindsFrag = mgpu.shaderModules.fragment.bindings.array();
+        const bindsVert = mgpu.shaderModules.vertex.bindings.array();
 
         bindGroupLayoutFrag = MGPU.createBindGroupLayout(mgpu, bindsFrag);
         bindGroupLayoutVert = MGPU.createBindGroupLayout(mgpu, bindsVert);
 
-        updatedVert = inShaderVert.get().updated;
-        updatedFrag = inShaderFrag.get().updated;
+        updatedVert = mgpu.shaderModules.vertex.updated;
+        updatedFrag = mgpu.shaderModules.fragment.updated;
 
         const o = {
 
             "layout": mgpu.device.createPipelineLayout({
                 "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag],
             }),
-            "vertex": inShaderVert.get().shader.vertex,
-            "fragment": inShaderFrag.get().shader.fragment,
+            "vertex": mgpu.shaderModules.vertex.shader.vertex,
+            "fragment": mgpu.shaderModules.fragment.shader.fragment,
             "primitive": {
                 "topology": "triangle-list",
                 // "topology": "point-list",
@@ -76,6 +80,4 @@ exec.onTriggered = () =>
     mgpu.passEncoder.setBindGroup(0, bindGroupVert);
 
     mgpu.passEncoder.draw(6, inInstances.get());
-
-    next.trigger();
 };

@@ -31,7 +31,7 @@ exec.onTriggered = () =>
             "resource": { "buffer": buffer },
             "layout": layout
         };
-        // outO.setRef(buffer);
+        mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
     }
 
     mgpu.bindings.push(binding);
