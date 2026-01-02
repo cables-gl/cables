@@ -43,7 +43,6 @@ function genBindHeadSrc()
     let g = 0;
     if (inStage.get() == "FRAGMENT")g = 1;
 
-    console.log("stage", inStage.indexPort.get());
     for (let i = 0; i < binds.array().length; i++)
     {
         const b = binds.array()[i];
@@ -75,6 +74,7 @@ exec.onTriggered = () =>
 
     if (reInit)
     {
+        console.log("create compute pipe");
         s = { "layout": "auto", };
 
         s[inStage.get().toLowerCase()] = {

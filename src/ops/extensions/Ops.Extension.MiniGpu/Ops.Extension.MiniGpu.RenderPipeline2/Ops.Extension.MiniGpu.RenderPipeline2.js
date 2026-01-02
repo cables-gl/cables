@@ -37,15 +37,13 @@ exec.onTriggered = () =>
 
     if (!pipe)
     {
+        console.log("create renderpipe");
         const bindsFrag = inShaderFrag.get().bindings.array();
         const bindsVert = inShaderVert.get().bindings.array();
-        // console.log("binds", bindsFrag);
 
         bindGroupLayoutFrag = MGPU.createBindGroupLayout(mgpu, bindsFrag);
         bindGroupLayoutVert = MGPU.createBindGroupLayout(mgpu, bindsVert);
 
-        console.log("inShaderVert", inShaderVert.get());
-        console.log("inShaderVert", inShaderFrag.get());
         updatedVert = inShaderVert.get().updated;
         updatedFrag = inShaderFrag.get().updated;
 
@@ -66,7 +64,6 @@ exec.onTriggered = () =>
             //     "format": "depth24plus"
             // }
         };
-        console.log("ooooooooo", o);
         bindGroupFrag = MGPU.createBindGroup(mgpu, bindsFrag, bindGroupLayoutFrag);
         bindGroupVert = MGPU.createBindGroup(mgpu, bindsVert, bindGroupLayoutVert);
 

@@ -12,14 +12,13 @@ export function createBindGroupLayout(mgpu, bindings)
 
     return bindGroupLayout;
 }
+
 export function createBindGroup(mgpu, bindings, bindGroupLayout)
 {
-
     const bg = {
         "layout": bindGroupLayout,
         "entries": []
     };
-    console.log("text");
 
     for (let i = 0; i < bindings.length; i++)
     {
@@ -31,5 +30,4 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
         );
     }
     return mgpu.device.createBindGroup(bg);
-
 }
