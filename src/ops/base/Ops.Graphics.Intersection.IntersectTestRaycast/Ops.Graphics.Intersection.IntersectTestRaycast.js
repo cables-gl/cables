@@ -46,7 +46,7 @@ function doRender()
 {
     next.trigger();
 
-    if (cgl.tempData.collisionWorld)
+    if (cgl.tempData.collisionWorld && active.get())
     {
         let origin = vec3.create();
 
