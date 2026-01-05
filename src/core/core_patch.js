@@ -694,9 +694,9 @@ export class Patch extends Events
     }
 
     /**
-     * @param {number} time
-     * @param {number} delta
-     * @param {number} timestamp
+     * @param {number} [time]
+     * @param {number} [delta]
+     * @param {number} [timestamp]
      */
     updateAnims(time, delta, timestamp)
     {

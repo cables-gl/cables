@@ -143,7 +143,8 @@ function onXRFrame(hrTime, xrFrame)
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
-        CABLES.patch.emitOnAnimFrameEvent();
+        // CABLES.patch.emitOnAnimFrameEvent();
+        op.patch.updateAnims();
 
         cgl.renderStart(cgl);
 
