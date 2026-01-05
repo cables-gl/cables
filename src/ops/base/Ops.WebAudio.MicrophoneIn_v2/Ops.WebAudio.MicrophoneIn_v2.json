@@ -95,7 +95,6 @@
     "exampleProjectId": "xjHACp",
     "license": "MIT",
     "coreLibs": [
-        "cgl",
         "webaudio"
     ]
 }

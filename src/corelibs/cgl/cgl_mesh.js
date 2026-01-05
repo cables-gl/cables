@@ -1,7 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
-import { CONSTANTS, Geometry, CgMesh, CgShader } from "../cg/index.js";
+import { CONSTANTS, Geometry, CgMesh } from "../cg/index.js";
 
 import { CglContext } from "./cgl_state.js";
 import { Shader } from "./cgl_shader.js";
@@ -101,7 +101,6 @@ class Mesh extends CgMesh
         this.setGeom(__geom);
 
         this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
-
     }
 
     get geom()
