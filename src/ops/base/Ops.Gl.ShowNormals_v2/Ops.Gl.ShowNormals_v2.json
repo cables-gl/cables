@@ -1,5 +1,5 @@
 {
-    "authorName": "simod",
+    "authorName": "pandur",
     "id": "3d68b4d4-2945-48bf-8fc9-30567946deda",
     "created": 1582113072428,
     "layout": {
@@ -85,8 +85,6 @@
         }
     ],
     "summary": "visualize normals, tangents or bitangents",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {

@@ -12,7 +12,7 @@ const
     outClicked = op.outBoolNum("Clicked", false),
     outClickedTrigger = op.outTrigger("Clicked Trigger");
 
-op.toWorkPortsNeedToBeLinked(inExec);
+// op.toWorkPortsNeedToBeLinked(inExec);
 let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 const canvas = op.patch.cgl.canvas.parentElement;

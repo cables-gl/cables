@@ -16,7 +16,7 @@ inCapture.onTriggered = () =>
 
         const old = CGL.Mesh.prototype.render;
         CGL.Mesh.prototype.render = meshCapture;
-
+        // debugger;
         next.trigger();
 
         CGL.Mesh.prototype.render = old;

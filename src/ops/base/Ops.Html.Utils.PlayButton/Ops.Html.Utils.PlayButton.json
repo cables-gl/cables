@@ -103,5 +103,6 @@
     "coreLibs": [
         "cgl",
         "webaudio"
-    ]
+    ],
+    "license": "MIT"
 }
