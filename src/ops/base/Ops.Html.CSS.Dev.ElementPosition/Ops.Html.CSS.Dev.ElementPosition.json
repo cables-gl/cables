@@ -1,0 +1,162 @@
+{
+    "id": "09e57118-2abc-4b0d-aa7f-89dd33b81df5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1613408280888,
+            "type": "new"
+        },
+        {
+            "message": "Added pass through element output port",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720518609063
+        },
+        {
+            "message": "Show error when element is not positioned absolute",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1720610207925
+        },
+        {
+            "message": "fixed zindex parameter was not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1729176882936
+        },
+        {
+            "message": "Ops.Html.ElementCssTransform_v2 renamed to Ops.Html.CSS.ElementCssTransform_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1730274143429
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767867921741
+        },
+        {
+            "message": "Html.CSS.ElementPosition renamed to Ops.Html.CSS.Dev.ElementPosition",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1767874140664
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1767867921741,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Translate Active",
+                "group": "Translation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Left Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Right",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Right Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Top Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Bottom Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Set Origin",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z Index Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Z Index",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Passthrough",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "translate,scale and rotate a HTML element using css transform",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
