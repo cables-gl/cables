@@ -1,3 +1,4 @@
+import { Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
@@ -20,6 +21,7 @@ export class MultiPort extends Port
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
+        this._log = new Logger("multiport old");
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
