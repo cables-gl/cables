@@ -20,6 +20,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1767958143781
+        },
+        {
+            "message": "better input of numbers and text in general",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768301118880
         }
     ],
     "layout": {

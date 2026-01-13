@@ -16,7 +16,9 @@ inNodeName.onChange = function ()
     outGeom.setRef(null);
     mesh = null;
     outFound.set(false);
-    op.setUiAttrib({ "extendTitle": inNodeName.get() + "." + inSubmesh.get() });
+    let title = inNodeName.get();
+    if (inSubmesh.get())title += "." + inSubmesh.get();
+    op.setUiAttrib({ "extendTitle": title });
 };
 
 exec.onTriggered = () =>
@@ -50,6 +52,9 @@ exec.onTriggered = () =>
                 }
             }
         }
+
+        if (!outFound.get())op.setUiError("notfound", "geometry not found", 1);
+        else op.setUiError("notfound", null);
     }
 
     next.trigger();

@@ -124,6 +124,9 @@ function update()
         }
     }
 
+    if (posCounter == 0) op.setUiError("notfound", "no nodes found", 1);
+    else op.setUiError("notfound", null);
+
     outPos.setRef(arrPos);
     outScale.setRef(arrScale);
     outNames.setRef(arrNames);

@@ -4,33 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1587737466134
+            "date": 1587737466134,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.GltfNodeTransforms renamed to Ops.Gl.GLTF.GltfNodeTransforms",
+            "message": "Show warning when no nodes found",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1587794804783
-        },
-        {
-            "message": "cloned op from Ops.Gl.GLTF.GltfNodeTransforms",
-            "author": "pandur",
-            "date": 1617902808681
-        },
-        {
-            "message": "Ops.User.pandur.GltfNodeTransforms2 renamed to Ops.Gl.GLTF.GltfNodeTransforms_v2",
-            "author": "pandur",
-            "date": 1617903101851
-        },
-        {
-            "message": "cloned op from Ops.Gl.GLTF.GltfNodeTransforms_v2",
-            "author": "pandur",
-            "date": 1682493073710
-        },
-        {
-            "message": "Ops.Patch.PoYAmYu.GltfNodeTransforms3 renamed to Ops.Gl.GLTF.GltfNodeTransforms_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1682601539920
+            "date": 1768302294446
         }
     ],
     "authorName": "pandur",
@@ -48,11 +29,19 @@
             {
                 "type": 0,
                 "name": "Order index",
+                "values": [
+                    "None",
+                    "AlphaNumerical"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Space index",
+                "values": [
+                    "GLTF",
+                    "World"
+                ],
                 "subType": "integer"
             },
             {
@@ -94,5 +83,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }
