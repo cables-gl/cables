@@ -14,6 +14,12 @@
             "message": "Added buttons to insert or delete a line",
             "type": "feature",
             "date": 1765553569663
+        },
+        {
+            "message": "Added output format vertical arrays",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1767958143781
         }
     ],
     "layout": {
@@ -24,7 +30,8 @@
                 "values": [
                     "Flat",
                     "Objects",
-                    "Arrays"
+                    "Arrays",
+                    "Arrays Vert"
                 ],
                 "subType": "integer"
             },

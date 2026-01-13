@@ -13,7 +13,7 @@ let currentSceneLoaded = null;
 inSubmesh.onChange =
 inNodeName.onChange = function ()
 {
-    outGeom.set(null);
+    outGeom.setRef(null);
     mesh = null;
     outFound.set(false);
     op.setUiAttrib({ "extendTitle": inNodeName.get() + "." + inSubmesh.get() });
@@ -31,7 +31,7 @@ exec.onTriggered = () =>
             return;
         }
         outFound.set(false);
-        outGeom.set(null);
+        outGeom.setRef(null);
         const name = inNodeName.get();
 
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
@@ -46,7 +46,7 @@ exec.onTriggered = () =>
                 if (mesh.meshes[idx] && mesh.meshes[idx].geom)
                 {
                     outFound.set(true);
-                    outGeom.set(mesh.meshes[idx].geom);
+                    outGeom.setRef(mesh.meshes[idx].geom);
                 }
             }
         }

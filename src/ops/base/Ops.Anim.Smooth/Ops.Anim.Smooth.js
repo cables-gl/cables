@@ -74,6 +74,7 @@ inVal.onChange = function ()
 {
     finished = false;
     let oldGoal = goal;
+
     goal = inVal.get();
 };
 

@@ -1,12 +1,13 @@
-const inElements = op.inArray("Elements", null, "element");
-const eventNamePort = op.inString("Event Name", "click");
-const useCapturePort = op.inValueBool("Use Capture", false);
-const preventDefaultPort = op.inValueBool("Prevent Default", true);
-const stopPropagationPort = op.inValueBool("Stop Propagation", true);
-const triggerPort = op.outTrigger("Event Trigger");
-const outIndex = op.outNumber("Index", -1);
-const eventObjPort = op.outObject("Event Object");
-const eventElementPort = op.outObject("Event Element", null, "element");
+const
+    inElements = op.inArray("Elements", null, "element"),
+    eventNamePort = op.inString("Event Name", "click"),
+    useCapturePort = op.inValueBool("Use Capture", false),
+    preventDefaultPort = op.inValueBool("Prevent Default", true),
+    stopPropagationPort = op.inValueBool("Stop Propagation", true),
+    triggerPort = op.outTrigger("Event Trigger"),
+    outIndex = op.outNumber("Index", -1),
+    eventObjPort = op.outObject("Event Object"),
+    eventElementPort = op.outObject("Event Element", null, "element");
 
 op.toWorkPortsNeedsString(eventNamePort);
 op.toWorkPortsNeedToBeLinked(inElements);
