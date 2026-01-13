@@ -266,6 +266,8 @@ let gltfMesh = class
 
     setGeom(geom)
     {
+        geom.vertexNormals = geom.vertexNormals || [];
+
         if (inNormFormat.get() == "X-ZY")
         {
             for (let i = 0; i < geom.vertexNormals.length; i += 3)
@@ -285,49 +287,59 @@ let gltfMesh = class
                 geom.vertices[i + 1] = t;
             }
         }
-
-        if (this.primitive == this.TRIANGLES)
+        try
         {
-            if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
-            else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
-
-            if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
+            if (this.primitive == this.TRIANGLES)
             {
-                const bitan = vec3.create();
-                const tan = vec3.create();
+                if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
+                else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
 
-                const tangents = geom.tangents;
-                geom.tangents = new Float32Array(tangents.length / 4 * 3);
-                geom.biTangents = new Float32Array(tangents.length / 4 * 3);
-
-                for (let i = 0; i < tangents.length; i += 4)
+                if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
                 {
-                    const idx = i / 4 * 3;
+                    const bitan = vec3.create();
+                    const tan = vec3.create();
 
-                    vec3.cross(
-                        bitan,
-                        [geom.vertexNormals[idx], geom.vertexNormals[idx + 1], geom.vertexNormals[idx + 2]],
-                        [tangents[i], tangents[i + 1], tangents[i + 2]]
-                    );
+                    const tangents = geom.tangents;
+                    geom.tangents = new Float32Array(tangents.length / 4 * 3);
+                    geom.biTangents = new Float32Array(tangents.length / 4 * 3);
 
-                    vec3.div(bitan, bitan, [tangents[i + 3], tangents[i + 3], tangents[i + 3]]);
-                    vec3.normalize(bitan, bitan);
+                    for (let i = 0; i < tangents.length; i += 4)
+                    {
+                        const idx = i / 4 * 3;
 
-                    geom.biTangents[idx + 0] = bitan[0];
-                    geom.biTangents[idx + 1] = bitan[1];
-                    geom.biTangents[idx + 2] = bitan[2];
+                        vec3.cross(
+                            bitan,
+                            [geom.vertexNormals[idx], geom.vertexNormals[idx + 1], geom.vertexNormals[idx + 2]],
+                            [tangents[i], tangents[i + 1], tangents[i + 2]]
+                        );
 
-                    geom.tangents[idx + 0] = tangents[i + 0];
-                    geom.tangents[idx + 1] = tangents[i + 1];
-                    geom.tangents[idx + 2] = tangents[i + 2];
+                        vec3.div(bitan, bitan, [tangents[i + 3], tangents[i + 3], tangents[i + 3]]);
+                        vec3.normalize(bitan, bitan);
+
+                        geom.biTangents[idx + 0] = bitan[0];
+                        geom.biTangents[idx + 1] = bitan[1];
+                        geom.biTangents[idx + 2] = bitan[2];
+
+                        geom.tangents[idx + 0] = tangents[i + 0];
+                        geom.tangents[idx + 1] = tangents[i + 1];
+                        geom.tangents[idx + 2] = tangents[i + 2];
+                    }
+                }
+
+                if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
+                {
+                // console.log("[gltf ]no tangents... calculating tangents...");
+                    geom.calcTangentsBitangents();
                 }
             }
-
-            if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
+            else
             {
-                // console.log("[gltf ]no tangents... calculating tangents...");
-                geom.calcTangentsBitangents();
+                console.warn("GLFT unknown primitive", this.primitive);
             }
+        }
+        catch (e)
+        {
+            console.error("e", e);
         }
 
         this.geom = geom;

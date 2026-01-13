@@ -60,6 +60,7 @@ let loadingId = null;
 let data = null;
 const scale = vec3.create();
 let lastTime = 0;
+let unknownCount = 0;
 let doCenter = false;
 const boundsCenter = vec3.create();
 
@@ -384,6 +385,7 @@ function loadBin(addCacheBuster)
     if (!inFile.get()) return;
     if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
+    unknownCount = 0;
     let fileToLoad = inFile.get();
 
     if (!fileToLoad || fileToLoad == "null") return;

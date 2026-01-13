@@ -5,19 +5,18 @@ const gltfMeshGroup = class
         this.bounds = new CABLES.CG.BoundingBox();
         this.meshes = [];
 
-        m.name = m.name || ("unknown mesh " + CABLES.simpleId());
+        m.name = m.name || ("unknown mesh " + unknownCount);
 
         this.name = m.name;
         const prims = m.primitives;
 
         for (let i = 0; i < prims.length; i++)
         {
-            const mesh = new gltfMesh(this.name, prims[i], gltf,
-                (mesh) =>
-                {
-                    mesh.extras = m.extras;
-                    this.bounds.apply(mesh.bounds);
-                });
+            const mesh = new gltfMesh(this.name, prims[i], gltf, (mesh) =>
+            {
+                mesh.extras = m.extras;
+                this.bounds.apply(mesh.bounds);
+            });
 
             mesh.submeshIndex = i;
             this.meshes.push(mesh);
