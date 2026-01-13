@@ -22,6 +22,6 @@ function ()
     if (r && checkUndefined.get() && str === undefined) r = false;
     if (r && checkEmpty.get() && str === "") r = false;
 
-    result.set(r);
     if (r)outStr.set(str);
+    result.set(r);
 };

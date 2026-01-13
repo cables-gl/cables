@@ -10,9 +10,13 @@ const
 op.onDelete = () =>
 {
     window.removeEventListener("hashchange", hashChange);
+    window.removeEventListener("popstate", hashChange);
+    window.removeEventListener("history_change", hashChange);
 };
 
 window.addEventListener("hashchange", hashChange);
+window.addEventListener("popstate", hashChange);
+window.addEventListener("history_change", hashChange);
 
 const l = document.location;
 outUrl.set(l.href);
