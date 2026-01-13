@@ -75,15 +75,16 @@ export class Plan extends Events
 
     setCurrentPlaceName(name)
     {
-        this._animPlace("__levelAnim" + this.getCurrentPlace().level, 1, 0);
+        const level = this.getCurrentPlace().level || 0;
+        this._animPlace("__levelAnim" + level, 1, 0);
 
         this._animPlace(this._currentPlaceName, 1, 0);
         this._animPlace(name, 0, 1);
 
         this._currentPlaceName = name;
 
-        this._animPlace("__level", this._anims.__level.getValue(now() / 1000), this.getCurrentPlace().level);
-        this._animPlace("__levelAnim" + this.getCurrentPlace().level, 0, 1);
+        this._animPlace("__level", this._anims.__level.getValue(now() / 1000), level);
+        this._animPlace("__levelAnim" + level, 0, 1);
 
         this.emitEvent("stateChanged");
     }
