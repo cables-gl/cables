@@ -1,13 +1,14 @@
 const
     text = op.inStringEditor("text", "1,2,3"),
 
-    separator = op.inSwitch("Separator", [",", ";", "Line Break", "Tab"], ","),
+    separator = op.inSwitch("Separator", [",", ";", "Line Break", "Tab", "Custom"], ","),
+    inCustSep = op.inString("Custom Separator", ""),
     inLines = op.inSwitch("Line Breaks", ["Separator", "Ignore"], "Separator"), // "As Arrays",
 
     inTypes = op.inSwitch("Type", ["Auto", "Numbers", "Strings"], "Auto"),
     trim = op.inValueBool("Trim", true),
 
-    inReplNan = op.inValueBool("Replacn Nan", true),
+    inReplNan = op.inValueBool("Replace Nan", true),
     inNan = op.inFloat("Replace Nan Value", -1),
 
     arr = op.outArray("array"),
@@ -16,20 +17,25 @@ const
 
 text.setUiAttribs({ "ignoreBigPort": true });
 
+inCustSep.onChange =
 inNan.onChange =
     text.onChange =
-    separator.onChange =
     trim.onChange = parse;
 
+separator.onChange =
 inTypes.onChange =
-inReplNan.onChange = () =>
+inReplNan.onChange = updateUi;
+
+function updateUi()
 {
+    inCustSep.setUiAttribs({ "greyout": separator.get() != "Custom" });
+
     inNan.setUiAttribs({ "greyout": !inReplNan.get() || inTypes.get() != "Numbers" });
     inReplNan.setUiAttribs({ "greyout": inTypes.get() != "Numbers" });
     parse();
-};
+}
 
-parse();
+updateUi();
 
 function parse()
 {
@@ -56,6 +62,7 @@ function parse()
 
     if (separator.get() === "Line Break") sep = "\n";
     if (separator.get() === "Tab") sep = "\t";
+    if (separator.get() == "Custom")sep = inCustSep.get();
 
     r = textInput.split(sep);
 

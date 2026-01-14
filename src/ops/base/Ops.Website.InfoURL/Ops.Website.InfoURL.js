@@ -9,27 +9,29 @@ const
 
 op.onDelete = () =>
 {
-    window.removeEventListener("hashchange", hashChange);
-    window.removeEventListener("popstate", hashChange);
-    window.removeEventListener("history_change", hashChange);
+    window.removeEventListener("hashchange", update);
+    window.removeEventListener("popstate", update);
+    window.removeEventListener("pushstate", update);
+    window.removeEventListener("replacestate", update);
 };
 
-window.addEventListener("hashchange", hashChange);
-window.addEventListener("popstate", hashChange);
-window.addEventListener("history_change", hashChange);
+window.addEventListener("hashchange", update);
+window.addEventListener("popstate", update);
+window.addEventListener("pushstate", update);
+window.addEventListener("replacestate", update);
 
-const l = document.location;
-outUrl.set(l.href);
-outHost.set(l.host);
-outHash.set(l.hash);
-outPathname.set(l.pathname);
-outProtocol.set(l.protocol);
-outPort.set(l.port);
-
-function hashChange()
+function update(triggerChange = true)
 {
+    console.log("EVENT");
     const l = document.location;
+    outUrl.set(l.href);
+    outHost.set(l.host);
     outHash.set(l.hash);
+    outPathname.set(l.pathname);
+    outProtocol.set(l.protocol);
+    outPort.set(l.port);
 
-    outChangeHash.trigger();
+    if (triggerChange) outChangeHash.trigger();
 }
+
+update(false);
