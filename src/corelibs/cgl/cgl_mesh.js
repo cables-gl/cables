@@ -902,19 +902,20 @@ class Mesh extends CgMesh
             }
         }
 
-        if (this.#cgl.debugOneFrame && this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
-        {
-            this.#log.error("mesh draw gl error");
-            this.#log.error("mesh", this);
-            this.#log.error("shader", shader);
-
-            const attribNames = [];
-            for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
+        if (this.#cgl.debugOneFrame)
+            if (this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
             {
-                const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
-                this.#log.error("attrib ", name);
+                this.#log.error("mesh draw gl error");
+                this.#log.error("mesh", this);
+                this.#log.error("shader", shader);
+
+                const attribNames = [];
+                for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
+                {
+                    const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+                    this.#log.error("attrib ", name);
+                }
             }
-        }
 
         this.#cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
         this.#cgl.profileData.profileMeshDraw++;
