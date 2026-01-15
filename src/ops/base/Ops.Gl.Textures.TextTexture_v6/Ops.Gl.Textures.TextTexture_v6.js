@@ -287,7 +287,7 @@ function refresh()
 
     ctx.fillStyle = rgbString;
     let fontSize = parseFloat(inFontSize.get());
-    let fontname = font.get();
+    let fontname = font.get() || "arial";
     if (fontname.indexOf(SPACE) > -1) fontname = "\"" + fontname + "\"";
     ctx.font = weight.get() + SPACE + fontSize + "px " + fontname + "";
 
