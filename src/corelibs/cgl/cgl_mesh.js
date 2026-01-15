@@ -903,6 +903,10 @@ class Mesh extends CgMesh
         }
 
         if (this.#cgl.debugOneFrame)
+        {
+
+            console.log("this.#cgl.debugOneFrame", this.#cgl.debugOneFrame);
+
             if (this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
             {
                 this.#log.error("mesh draw gl error");
@@ -916,7 +920,7 @@ class Mesh extends CgMesh
                     this.#log.error("attrib ", name);
                 }
             }
-
+        }
         this.#cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
         this.#cgl.profileData.profileMeshDraw++;
 
