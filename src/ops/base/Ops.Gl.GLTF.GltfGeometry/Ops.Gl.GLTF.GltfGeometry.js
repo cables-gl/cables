@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Update"),
     inNodeName = op.inString("Name", "default"),
+    inNameMatch = op.inSwitch("Name Match", ["exact", "starts with"], "exact"),
     inSubmesh = op.inInt("Submesh", 0),
     next = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry", null, "geometry"),
@@ -10,6 +11,7 @@ const cgl = op.patch.cgl;
 let mesh = null;
 let currentSceneLoaded = null;
 
+inNameMatch.onChange =
 inSubmesh.onChange =
 inNodeName.onChange = function ()
 {
@@ -29,19 +31,27 @@ exec.onTriggered = () =>
     if (!mesh)
     {
         if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes || !cgl.tempData.currentScene.loaded)
-        {
             return;
-        }
+
         outFound.set(false);
         outGeom.setRef(null);
         const name = inNodeName.get();
+        let numMatches = 0;
 
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
         for (let i = 0; i < cgl.tempData.currentScene.meshes.length; i++)
         {
-            if (cgl.tempData.currentScene.meshes[i].name == name)
+            let matches = false;
+
+            if (inNameMatch.get() == "exact")
+                matches = cgl.tempData.currentScene.meshes[i].name == name;
+            else
+                matches = cgl.tempData.currentScene.meshes[i].name.startsWith(name);
+
+            if (matches)
             {
+                numMatches++;
                 mesh = cgl.tempData.currentScene.meshes[i];
 
                 const idx = Math.abs(inSubmesh.get());
@@ -53,7 +63,9 @@ exec.onTriggered = () =>
             }
         }
 
-        if (!outFound.get())op.setUiError("notfound", "geometry not found", 1);
+        if (!outFound.get())op.setUiError("notfound", "Geometry not found", 1);
+        else
+        if (numMatches > 1)op.setUiError("notfound", "Multiple matches found", 1);
         else op.setUiError("notfound", null);
     }
 

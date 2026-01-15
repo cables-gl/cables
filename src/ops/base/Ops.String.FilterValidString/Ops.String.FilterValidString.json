@@ -21,7 +21,6 @@
     "created": 1584353798919,
     "summary": "filter valid strings (not null,undefined or empty)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -61,8 +60,9 @@
             {
                 "type": 0,
                 "name": "Is Valid",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }

@@ -44,9 +44,14 @@
                     ",",
                     ";",
                     "Line Break",
-                    "Tab"
+                    "Tab",
+                    "Custom"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Custom Separator"
             },
             {
                 "type": 0,
@@ -74,7 +79,7 @@
             },
             {
                 "type": 0,
-                "name": "Replacn Nan",
+                "name": "Replace Nan",
                 "subType": "boolean"
             },
             {

@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1768302326756
+        },
+        {
+            "message": "Added match option to select geometry which name starts with the entered string",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768310694683
         }
     ],
     "authorName": "pandur",
@@ -25,6 +31,15 @@
             {
                 "type": 5,
                 "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Name Match index",
+                "values": [
+                    "exact",
+                    "starts with"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,
