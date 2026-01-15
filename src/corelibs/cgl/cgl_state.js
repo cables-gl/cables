@@ -1072,6 +1072,10 @@ export class CglContext extends CgContext
 
     // --------------------------------------
 
+    /**
+     * @param {WebGLProgram} prog
+     * @param {string} name
+     */
     glGetAttribLocation(prog, name)
     {
         const l = this.gl.getAttribLocation(prog, name);
@@ -1093,6 +1097,10 @@ export class CglContext extends CgContext
         return gui.shouldDrawOverlay;
     }
 
+    /**
+     * @param {number} blendMode
+     * @param {boolean} premul
+     */
     _setBlendMode(blendMode, premul)
     {
         const gl = this.gl;

@@ -637,12 +637,19 @@ class Mesh extends CgMesh
                             const pointer = attribute.pointer[ip];
 
                             if (pointer.loc == -1)
+                            {
+
                                 pointer.loc = this.#cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                            }
 
-                            this.#cgl.profileData.profileAttrLoc++;
+                            if (pointer.loc > -1)
+                            {
+                                this.#cgl.profileData.profileAttrLoc++;
 
-                            this.#cgl.gl.enableVertexAttribArray(pointer.loc);
-                            this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+                                this.#cgl.gl.enableVertexAttribArray(pointer.loc);
+                                this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+
+                            }
                         }
                     }
                     if (this.bindFeedback) this.bindFeedback(attribute);
@@ -904,9 +911,6 @@ class Mesh extends CgMesh
 
         if (this.#cgl.debugOneFrame)
         {
-
-            console.log("this.#cgl.debugOneFrame", this.#cgl.debugOneFrame);
-
             if (this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
             {
                 this.#log.error("mesh draw gl error");

@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1768302294446
+        },
+        {
+            "message": "Added an option to ignore all nodes that have a scale of 0,0,0",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1768474838066
         }
     ],
     "authorName": "pandur",
@@ -48,6 +54,16 @@
                 "type": 0,
                 "name": "Time",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Remove 0 Scale Nodes",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Force Update",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
