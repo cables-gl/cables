@@ -1,0 +1,61 @@
+{
+    "id": "26e9b9cd-4069-4e0c-b2ee-ee1c5474c004",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1601641292287
+        },
+        {
+            "message": "Ops.User.pandur.ArrayMerge2 renamed to Ops.Array.ArrayMerge_v3",
+            "author": "pandur",
+            "date": 1606733924664
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1768473210492
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1768473210492,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Arrays_0",
+                "longPort": 3,
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_1",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_2",
+                "uititle": "add port",
+                "group": "Arrays"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Merge multiple arrays - in consecutive order",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}
