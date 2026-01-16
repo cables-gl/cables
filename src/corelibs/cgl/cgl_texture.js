@@ -211,7 +211,7 @@ export class Texture extends CgTexture
         this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        this._cgl.profileData.profileTextureResize++;
+        this._cgl.profileData.count("textureResize");
 
         const uarr = null;
 
@@ -354,7 +354,7 @@ export class Texture extends CgTexture
         this.deleted = true;
         this.width = 0;
         this.height = 0;
-        this._cgl.profileData.profileTextureDelete++;
+        this._cgl.profileData.count("textureDelete");
         this._cgl.gl.deleteTexture(this.tex);
         this.image = null;
 
@@ -745,7 +745,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
     cgl.profileData.count("texturecreated");
 
     cgl.gl.bindTexture(target, tex);
-    cgl.profileData.profileTextureResize++;
+    cgl.profileData.count("textureResize");
 
     for (let i = 0; i < 6; i += 1)
     {

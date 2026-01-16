@@ -82,7 +82,7 @@ export class CubemapTexture
         this.height = h;
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        this._cgl.profileData.profileTextureResize++;
+        this._cgl.profileData.count("textureResize");
 
         const info = CGL.Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
         this.pixelFormat = info.pixelFormat;
