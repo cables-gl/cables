@@ -10,6 +10,7 @@ const
     inScaleGraph = op.inFloat("Scale", 3),
     inSizeGraph = op.inFloat("Size", 128),
     outCanv = op.outObject("Canvas"),
+    outCounts = op.outObject("Count Per Second Data"),
     outFPS = op.outNumber("FPS");
 
 const cgl = op.patch.cgl;
@@ -258,18 +259,21 @@ function createCanvas()
 
 function updateText()
 {
+    outCounts.setRef(op.patch.cgl.profileData.counts);
+
     if (!inShow.get()) return;
     let warn = "";
 
-    if (op.patch.cgl.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
-    if (op.patch.cgl.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
-    if (op.patch.cgl.profileData.profileTextureResize > 0)warn += "Texture resize! ";
+    if (op.patch.cgl.profileData.getCount("shaderCompile") > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
+    if (op.patch.cgl.profileData.getCount("uniformGet") > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
+    if (op.patch.cgl.profileData.getCount("textureResize") > 0)warn += "Texture resize! ";
     if (op.patch.cgl.profileData.profileFrameBuffercreate > 0)warn += "Framebuffer create! ";
     if (op.patch.cgl.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
-    if (op.patch.cgl.profileData.profileTextureDelete > 0)warn += "Texture delete! ";
+    if (op.patch.cgl.profileData.getCount("textureDelete") > 0)warn += "Texture delete! ";
     if (op.patch.cgl.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + op.patch.cgl.profileData.profileNonTypedAttribNames;
-    if (op.patch.cgl.profileData.profileTextureNew > 0)warn += "new texture created! ";
-    if (op.patch.cgl.profileData.profileGenMipMap > 0)warn += "generating mip maps!";
+    if (op.patch.cgl.profileData.getCount("texturecreated") > 0)warn += "new texture created! ";
+    if (op.patch.cgl.profileData.getCount("textureGenMipMap") > 0)warn += "generating mip maps!";
+    if (op.patch.cgl.profileData.getCount("videoPlaying") > 120)warn += " playing " + op.patch.cgl.profileData.getCount("videoPlaying") + " videos";
 
     if (warn.length > 0)
     {
@@ -319,25 +323,27 @@ function updateText()
         avgMs /= count;
         avgMsChilds /= count;
 
-        element.innerHTML += "<br/> " + cgl.canvasWidth + " x " + cgl.canvasHeight + " (x" + cgl.pixelDensity + ") ";
-        element.innerHTML += "<br/>frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
-        element.innerHTML += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
+        let str = "";
+        str += "<br/> " + cgl.canvasWidth + " x " + cgl.canvasHeight + " (x" + cgl.pixelDensity + ") ";
+        str += " frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
+        str += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
+        element.innerHTML = str;
+        // element.innerHTML += "<br/>" +
+        // " shader binds: " + Math.ceil(op.patch.cgl.profileData.profileShaderBinds / fps) +
+        // " uniforms: " + Math.ceil(op.patch.cgl.profileData.profileUniformCount / fps) +
+        // " mvp_uni_mat4: " + Math.ceil(op.patch.cgl.profileData.profileMVPMatrixCount / fps) +
+        // " num glPrimitives: " + Math.ceil(op.patch.cgl.profileData.profileMeshNumElements / (fps)) +
 
-        element.innerHTML += "<br/>shader binds: " + Math.ceil(op.patch.cgl.profileData.profileShaderBinds / fps) +
-            " uniforms: " + Math.ceil(op.patch.cgl.profileData.profileUniformCount / fps) +
-            " mvp_uni_mat4: " + Math.ceil(op.patch.cgl.profileData.profileMVPMatrixCount / fps) +
-            " num glPrimitives: " + Math.ceil(op.patch.cgl.profileData.profileMeshNumElements / (fps)) +
+        // " fenced pixelread: " + Math.ceil(op.patch.cgl.profileData.profileFencedPixelRead) +
 
-            " fenced pixelread: " + Math.ceil(op.patch.cgl.profileData.profileFencedPixelRead) +
+        // " mesh.setGeom: " + op.patch.cgl.profileData.profileMeshSetGeom +
+        // " videoPlaying: " + op.patch.cgl.profileData.getCount("videoPlaying");
+        // " tex preview: " + op.patch.cgl.profileData.profileTexPreviews;
 
-            " mesh.setGeom: " + op.patch.cgl.profileData.profileMeshSetGeom +
-            " videos: " + op.patch.cgl.profileData.profileVideosPlaying +
-            " tex preview: " + op.patch.cgl.profileData.profileTexPreviews;
-
-        element.innerHTML +=
-        " draw meshes: " + Math.ceil(op.patch.cgl.profileData.profileMeshDraw / fps) +
-        " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps) +
-        " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
+        // element.innerHTML +=
+        // " draw meshes: " + Math.ceil(op.patch.cgl.profileData.profileMeshDraw / fps) +
+        // " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps);
+        // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
         element.innerHTML += " all shader compiletime: " + Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100;
     }

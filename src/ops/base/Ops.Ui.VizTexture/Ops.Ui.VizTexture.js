@@ -72,7 +72,7 @@ op.renderVizLayerGl = (ctx, layer) =>
     const cgl = port.op.patch.cgl;
 
     if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
-    port.op.patch.cgl.profileData.profileTexPreviews++;
+    port.op.patch.cgl.profileData.count("vizTexPreviews");
 
     const portTex = port.get() || CGL.Texture.getEmptyTexture(cgl);
 

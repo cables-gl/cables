@@ -44,9 +44,7 @@ export class CubemapTexture
 
         this.pixelFormat = options.pixelFormat;
 
-        // if (options.isFloatingPointTexture) this.textureType = Texture.TYPE_FLOAT;
-
-        this._cgl.profileData.profileTextureNew++;
+        cgl.profileData.count("texturecreated");
 
         this.setSize(options.width, options.height);
     }
@@ -56,6 +54,10 @@ export class CubemapTexture
         return { "pixelFormat": this.pixelFormat };
     }
 
+    /**
+     * @param {number} w
+     * @param {number} h
+     */
     setSize(w, h)
     {
         // if (this.width == w && this.height == h) return;
@@ -80,7 +82,7 @@ export class CubemapTexture
         this.height = h;
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        this._cgl.profileData.profileTextureResize++;
+        this._cgl.profileData.count("textureResize");
 
         const info = CGL.Texture.setUpGlPixelFormat(this._cgl, this._options.pixelFormat);
         this.pixelFormat = info.pixelFormat;
@@ -232,7 +234,7 @@ export class CubemapTexture
         {
             this._cgl.gl.bindTexture(this.texTarget, this.tex);
             this._cgl.gl.generateMipmap(this.texTarget);
-            this._cgl.profileData.profileGenMipMap++;
+            this._cgl.profileData.count("textureGenMipMap");
         }
     }
 

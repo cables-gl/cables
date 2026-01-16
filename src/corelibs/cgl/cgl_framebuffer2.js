@@ -410,7 +410,7 @@ export class Framebuffer2
         if (this._disposed) return this._log.warn("disposed framebuffer renderEnd...");
         this._cgl.popPMatrix();
 
-        this._cgl.profileData.profileFramebuffer++;
+        this._cgl.profileData.count("framebufferBlit");
 
         if (this._numRenderBuffers <= 1)
         {

@@ -362,20 +362,20 @@ export class Port extends Events
     }
 
     /**
-     * @param {object|array} v
-     */
-    setRef(v)
-    {
-        this.forceRefChange = true;
-        this.set(v);
-    }
-
-    /**
      * @description set value of port / will send value to all linked ports (only for output ports)
      * @param {string | number | boolean | any[]} v
      */
     set(v)
     {
+        this.setValue(v);
+    }
+
+    /**
+     * @param {object|array} v
+     */
+    setRef(v)
+    {
+        this.forceRefChange = true;
         this.setValue(v);
     }
 
