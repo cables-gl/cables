@@ -13,7 +13,6 @@ let dumpFrame = false;
 
 const started = false;
 
-
 exec.onTriggered = function ()
 {
     if (dumpFrame)
@@ -73,6 +72,7 @@ function profile(func, funcName)
             branches[branchName].counts[funcName] = branches[branchName].counts[funcName] || 0;
             branches[branchName].counts[funcName]++;
         }
+        if (funcName == "getError")CABLES.logStack();
 
         durations[funcName] += duration;
         counts[funcName]++;

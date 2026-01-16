@@ -427,7 +427,7 @@ inTrigger.onTriggered = function ()
             IrradianceSizeChanged = false;
         }
     }
-
+    if (!iblLutFrameBuffer) return console.log("hund");
     pbrEnv.texIBLLUT = iblLutFrameBuffer.getTextureColor();
     pbrEnv.texDiffIrr = irradianceFrameBuffer.getTextureColor();// outTexIrradiance.get();
     pbrEnv.texPreFiltered = prefilteredFrameBuffer.getTextureColor();// outTexPrefiltered.get();

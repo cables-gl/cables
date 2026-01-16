@@ -347,6 +347,11 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
+    bindMaterial()
+    {
+
+    }
+
     render(cgl, ignoreMaterial, skinRenderer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
@@ -438,9 +443,7 @@ let gltfMesh = class
 
             if (inUseMatProps.get())
             {
-                if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
-                if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
-                if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
+                this.setMatProps(cgl);
             }
 
             if (useMat) cgl.popShader();
@@ -449,5 +452,18 @@ let gltfMesh = class
         {
             console.log("no mesh......");
         }
+    }
+
+    setMatProps(cgl)
+    {
+        const currentShader = cgl.getShader() || {};
+        const uniDiff = currentShader.uniformColorDiffuse;
+
+        const uniPbrMetalness = currentShader.uniformPbrMetalness;
+        const uniPbrRoughness = currentShader.uniformPbrRoughness;
+
+        if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
+        if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
+        if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
     }
 };

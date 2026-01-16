@@ -258,8 +258,8 @@ inTrigger.onTriggered = function ()
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         newLight.blurAmount = inBlur.get();
-        outTexture.set(null);
-        outTexture.set(newLight.getShadowMapDepth());
+        // outTexture.set(null);
+        outTexture.setRef(newLight.getShadowMapDepth());
         // remove light from stack and readd it with shadow map & mvp matrix
         cgl.tempData.lightStack.pop();
 

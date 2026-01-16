@@ -22,7 +22,6 @@ window.addEventListener("replacestate", update);
 
 function update(triggerChange = true)
 {
-    console.log("EVENT");
     const l = document.location;
     outUrl.set(l.href);
     outHost.set(l.host);

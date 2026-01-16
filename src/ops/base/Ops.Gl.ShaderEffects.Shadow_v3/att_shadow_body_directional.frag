@@ -21,6 +21,8 @@
                     MOD_shadowFactor{{LIGHT_INDEX}} = clamp((MOD_shadowFactor{{LIGHT_INDEX}} + ((1. - shadowStrength{{LIGHT_INDEX}}))), 0., 1.);
                     vec3 MOD_shadowColor{{LIGHT_INDEX}} = (1. - MOD_shadowFactor{{LIGHT_INDEX}}) * (vec3(1.) - MOD_shadowColor);
                     col.rgb -= (1. - MOD_shadowFactor{{LIGHT_INDEX}}) * (vec3(1.) - MOD_shadowColor);
+
+                    // col.rg=shadowMapLookup{{LIGHT_INDEX}};
                 #endif
 
                 #ifdef MODE_POISSON
@@ -40,6 +42,9 @@
                     vec3 MOD_shadowColor{{LIGHT_INDEX}} = (1. - MOD_shadowFactor{{LIGHT_INDEX}}) * (vec3(1.) - MOD_shadowColor);
                     col.rgb -= (1. - MOD_shadowFactor{{LIGHT_INDEX}}) * (vec3(1.) - MOD_shadowColor);
                 #endif
+
             }
+
+
     #endif
 #endif
