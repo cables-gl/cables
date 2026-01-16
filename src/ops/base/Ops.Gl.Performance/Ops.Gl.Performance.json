@@ -61,6 +61,10 @@
                 "name": "Canvas"
             },
             {
+                "type": 2,
+                "name": "Count Data"
+            },
+            {
                 "type": 0,
                 "name": "FPS",
                 "subType": "number"

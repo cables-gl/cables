@@ -113,7 +113,7 @@ export class PixelReader
             gl.bufferData(gl.PIXEL_PACK_BUFFER, this._pixelData.byteLength, gl.DYNAMIC_READ);
             gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
             gl.bindBuffer(gl.PIXEL_PACK_BUFFER, this._pbo);
-            cgl.profileData.profileFencedPixelRead++;
+            cgl.profileData.count("textureFencedPixelRead");
 
             if (this._size != numItems * bytesPerItem)
                 this._log.error("buffer size invalid", numItems, w, h, bytesPerItem);

@@ -79,7 +79,8 @@ export class Texture extends CgTexture
 
         if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
 
-        this._cgl.profileData.profileTextureNew++;
+        // this._cgl.profileData.profileTextureNew++;
+        this._cgl.profileData.count("texturecreated");
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
@@ -275,7 +276,7 @@ export class Texture extends CgTexture
         if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)
         {
             this._cgl.gl.generateMipmap(this.texTarget);
-            this._cgl.profileData.profileGenMipMap++;
+            this._cgl.profileData.count("textureGenMipMap");
         }
     }
 
@@ -741,7 +742,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const width = 8;
     const height = 8;
 
-    cgl.profileData.profileTextureNew++;
+    cgl.profileData.count("texturecreated");
 
     cgl.gl.bindTexture(target, tex);
     cgl.profileData.profileTextureResize++;

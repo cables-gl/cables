@@ -500,7 +500,7 @@ class Mesh extends CgMesh
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
 
         MESH.lastMesh = null;
-        this.#cgl.profileData.profileMeshSetGeom++;
+        this.#cgl.profileData.count("meshSetGeom");
 
         this._disposeAttributes();
 
@@ -925,8 +925,8 @@ class Mesh extends CgMesh
                 }
             }
         }
-        this.#cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
-        this.#cgl.profileData.profileMeshDraw++;
+        this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1));
+        this.#cgl.profileData.count("meshDrawCalls");
 
         if (doQuery && queryStarted)
         {

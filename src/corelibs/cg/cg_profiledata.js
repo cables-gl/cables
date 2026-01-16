@@ -1,5 +1,11 @@
+import { CgContext } from "./cg_context.js";
+
 export class ProfileData
 {
+
+    /**
+     * @param {CgContext} cgl
+     */
     constructor(cgl)
     {
         this._cgl = cgl;
@@ -27,7 +33,7 @@ export class ProfileData
         this.shaderCompileTime = 0;
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
-        this.profileSingleMeshAttribute = [];
+        this.profileSingleMeshAttribute = {};
         this.heavyEvents = [];
 
         this.doProfileGlQuery = false;
@@ -37,30 +43,31 @@ export class ProfileData
 
     clear()
     {
-        this.counts = {};
-        this.profileSingleMeshAttribute = {};
-        this.profileMeshAttributes = 0;
-        this.profileUniformCount = 0;
-        this.profileShaderGetUniform = 0;
-        this.profileShaderCompiles = 0;
-        this.profileShaderBinds = 0;
-        this.profileTextureResize = 0;
-        this.profileFrameBuffercreate = 0;
-        this.profileEffectBuffercreate = 0;
-        this.profileTextureDelete = 0;
-        this.profileMeshSetGeom = 0;
-        this.profileVideosPlaying = 0;
-        this.profileMVPMatrixCount = 0;
-        this.profileNonTypedAttrib = 0;
-        this.profileNonTypedAttribNames = "";
-        this.profileTextureNew = 0;
-        this.profileGenMipMap = 0;
-        this.profileFramebuffer = 0;
-        this.profileMeshDraw = 0;
-        this.profileTextureEffect = 0;
-        this.profileTexPreviews = 0;
-        this.profileMeshNumElements = 0;
-        this.profileFencedPixelRead = 0;
+        for (const i in this.counts) this.counts[i] = 0;
+
+    //     this.profileSingleMeshAttribute = {};
+    //     this.profileMeshAttributes = 0;
+    //     this.profileUniformCount = 0;
+    //     this.profileShaderGetUniform = 0;
+    //     this.profileShaderCompiles = 0;
+    //     this.profileShaderBinds = 0;
+    //     this.profileTextureResize = 0;
+    //     this.profileFrameBuffercreate = 0;
+    //     this.profileEffectBuffercreate = 0;
+    //     this.profileTextureDelete = 0;
+    //     this.profileMeshSetGeom = 0;
+    //     this.profileVideosPlaying = 0;
+    //     this.profileMVPMatrixCount = 0;
+    //     this.profileNonTypedAttrib = 0;
+    //     this.profileNonTypedAttribNames = "";
+    //     this.profileTextureNew = 0;
+    //     this.profileGenMipMap = 0;
+    //     this.profileFramebuffer = 0;
+    //     this.profileMeshDraw = 0;
+    //     this.profileTextureEffect = 0;
+    //     this.profileTexPreviews = 0;
+    //     this.profileMeshNumElements = 0;
+    //     this.profileFencedPixelRead = 0;
     }
 
     clearGlQuery()
@@ -81,12 +88,20 @@ export class ProfileData
 
     /**
      * @param {string} event
-     * @param {string} name
+     * @param {number} [count]
      */
-    count(event, name)
+    count(event, count = 1)
     {
-        this.counts[event] = this.counts[event] || [];
-        this.counts[event].push(name);
+        this.counts[event] = this.counts[event] || 0;
+        this.counts[event] += count;
+    }
+
+    /**
+     * @param {string } event
+     */
+    getCount(event)
+    {
+        return this.counts[event];
     }
 
     /**

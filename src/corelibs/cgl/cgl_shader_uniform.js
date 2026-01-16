@@ -124,7 +124,8 @@ export class Uniform extends CgUniform
         else this.needsUpdate = false;
 
         this._shader.getCgl().gl.uniform1f(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
+
     }
 
     setValueF(v)
@@ -142,7 +143,7 @@ export class Uniform extends CgUniform
         else this.needsUpdate = false;
 
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     updateValue2I()
@@ -159,7 +160,7 @@ export class Uniform extends CgUniform
         this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
 
         this.needsUpdate = false;
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     updateValue3I()
@@ -174,7 +175,7 @@ export class Uniform extends CgUniform
 
         this._shader.getCgl().gl.uniform3i(this._loc, this._value[0], this._value[1], this._value[2]);
         this.needsUpdate = false;
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     updateValue4I()
@@ -186,7 +187,7 @@ export class Uniform extends CgUniform
             this._cgl.profileData.profileShaderGetUniformName = this._name;
         }
         this._shader.getCgl().gl.uniform4i(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueI(v)
@@ -247,7 +248,7 @@ export class Uniform extends CgUniform
         else this.needsUpdate = false;
         this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0);
 
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueBool(v)
@@ -272,7 +273,7 @@ export class Uniform extends CgUniform
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform4fv(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueArray3F(v)
@@ -288,7 +289,7 @@ export class Uniform extends CgUniform
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform3fv(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueArray2F(v)
@@ -304,7 +305,7 @@ export class Uniform extends CgUniform
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform2fv(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueArrayF(v)
@@ -320,7 +321,7 @@ export class Uniform extends CgUniform
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform1fv(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueArrayT(v)
@@ -341,7 +342,7 @@ export class Uniform extends CgUniform
 
         this._shader.getCgl().gl.uniform3f(this._loc, this._value[0], this._value[1], this._value[2]);
         this.needsUpdate = false;
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValue3F(v)
@@ -376,7 +377,7 @@ export class Uniform extends CgUniform
 
         this._shader.getCgl().gl.uniform2f(this._loc, this._value[0], this._value[1]);
         this.needsUpdate = false;
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValue2F(v)
@@ -413,7 +414,7 @@ export class Uniform extends CgUniform
 
         this.needsUpdate = false;
         this._shader.getCgl().gl.uniform4f(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValue4F(v)
@@ -448,7 +449,7 @@ export class Uniform extends CgUniform
         if (!this._value || this._value.length % 16 != 0) return console.log("this.name", this._name, this._value);
 
         this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     setValueM4(v)
@@ -464,7 +465,7 @@ export class Uniform extends CgUniform
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform1iv(this._loc, this._value);
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
     }
 
     updateValueT()
@@ -476,7 +477,7 @@ export class Uniform extends CgUniform
             this._cgl.profileData.profileShaderGetUniformName = this._name;
         }
 
-        this._cgl.profileData.profileUniformCount++;
+        this._cgl.profileData.count("uniformUpdate");
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
         this.needsUpdate = false;
     }

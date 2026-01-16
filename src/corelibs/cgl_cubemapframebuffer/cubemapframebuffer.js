@@ -180,13 +180,11 @@ class CubemapFramebuffer
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
-
         if (!this._cgl.gl.isFramebuffer(this._framebuffer))
         {
             console.error("invalid framebuffer...");
             // throw new Error("Invalid framebuffer");
         }
-
 
         // * NOTE: if we check for the error in Safari, we get error code 36059 aka 0x8CDB
         // * NOTE: an error that is found in a WebGL extension (WEBGL_draw_buffers) not supported by most iOS devices
@@ -298,7 +296,7 @@ class CubemapFramebuffer
 
     renderEnd()
     {
-        this._cgl.profileData.profileFramebuffer++;
+        this._cgl.profileData.count("frameBufferBlit");
 
         if (this._cgl.glVersion !== 1)
         {

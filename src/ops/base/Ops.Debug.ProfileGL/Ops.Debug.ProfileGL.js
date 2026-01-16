@@ -1,6 +1,7 @@
 const exec = op.inTrigger("Exec");
 const next = op.outTrigger("Next");
 const dump = op.inTriggerButton("Debug one Frame");
+const outObj = op.outObject("Profile Data");
 
 const gl = op.patch.cgl.gl;
 const cgl = op.patch.cgl;
@@ -12,7 +13,6 @@ let branches = {};
 let dumpFrame = false;
 
 const started = false;
-
 
 exec.onTriggered = function ()
 {
