@@ -1,4 +1,4 @@
-import { Anim } from "cables";
+import { Anim, Patch } from "cables";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
@@ -46,13 +46,13 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = { ...window.CABLES.CGL, ...CGL };
 window.CGL = { ...window.CGL, ...CGL };
 
-window.cgInitialized = false;
-window.addEventListener("INIT_CG", (e) =>
+window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
 {
-    if (window.cgInitialized && !CABLES.UI) return;
-    window.cgInitialized = true;
+    const patch = e?.detail;
+    if (!patch || (patch.tempData.cglInitialized && !CABLES.UI)) return;
+    patch.tempData.cglInitialized = true;
 
-    const cgl = new CglContext(e.detail);
+    const cgl = new CglContext(patch);
 });
 
 /**

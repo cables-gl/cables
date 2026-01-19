@@ -85,6 +85,7 @@ export class Patch extends Events
     static EVENT_VALUESSET = "loadedValueSet";
     static EVENT_DISPOSE = "dispose";
     static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
+    static EVENT_INIT_CGL = "INIT_CGL";
 
     #log;
     #renderOneFrame = false;
@@ -165,7 +166,7 @@ export class Patch extends Events
         this.cgp = null;
 
         this._subpatchOpCache = {};
-        window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
+        window.dispatchEvent(new CustomEvent(Patch.EVENT_INIT_CGL, { "detail": this }));
 
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
