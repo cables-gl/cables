@@ -18,13 +18,17 @@ const
     outSleeping = op.outBoolNum("Sleeping"),
     outPos = op.outArray("Result Positions", [], 3),
     outSize = op.outArray("Result Size", [], 3),
-    outRot = op.outArray("Result Rotations", [], 4);
+    outRot = op.outArray("Result Rotations", [], 4),
+    outCollider = op.outArray("Collider");
+
 let needsSetup, lastWorld, oldShape;
 let rigidBodies = [];
+let colliders = [];
 let tmpOrigin = vec3.create();
 
 exec.onLinkChanged = removeBodies;
 let setPosition = false;
+let eventQueue = null;
 
 inGeom.onChange =
 inName.onChange =
@@ -50,6 +54,37 @@ exec.onTriggered = () =>
 {
     const world = op.patch.cgl.frameStore.rapierWorld;
     if (!world) return;
+
+    // if (!eventQueue)
+    {
+        eventQueue = op.patch.cgl.frameStore.rapierEventQueue;
+        if (eventQueue)
+        {
+            // console.log("reg collision callback");
+            eventQueue.drainCollisionEvents((handle1, handle2, started) =>
+            {
+                // if (started) {
+                //   if (
+                //     (handle1 === colliderA.handle && handle2 === colliderB.handle) ||
+                //     (handle1 === colliderB.handle && handle2 === colliderA.handle)
+                //   ) {
+                //     onBodiesCollide(bodyA, bodyB);
+                //   }
+                // console.log("colliders[i].handle", colliders[i].handle);
+
+                for (let i = 0; i < colliders.length; i++)
+                {
+                    if (colliders[i].handle == handle1 ||
+                    colliders[i].handle == handle2
+                    )
+                    {
+                        // console.log("text");
+                    }
+                }
+            });
+        }
+        else console.log("no eventQueue");
+    }
 
     if (world != lastWorld)needsSetup = true;
     if (rigidBodies.length == 0) needsSetup = true;
@@ -199,6 +234,7 @@ function setup(world)
         colliderDesc
             .setMass(10)
             // .setDensity(1)
+
             .setFriction(1);
         // .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0})
         // .setGravityScale(0.5)
@@ -212,7 +248,14 @@ function setup(world)
         rigidBodies.push(rigidBody);
 
         collider = world.createCollider(colliderDesc, rigidBody);
+        colliders.push(collider);
+
+        colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+        collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
     }
+
+    // console.log("colliders", colliders);
+    outCollider.setRef(colliders);
 
     needsSetup = false;
     updateUi();
@@ -227,7 +270,15 @@ function removeBodies()
         {
             lastWorld.removeRigidBody(rigidBodies[i]);
         }
+
+        for (let i = 0; i < colliders.length; i++)
+        {
+            lastWorld.removeCollider(colliders[i]);
+        }
         rigidBodies.length = 0;
+
+        colliders.length = 0;
+        eventQueue = null;
     }
 }
 

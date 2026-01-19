@@ -17,6 +17,7 @@ const
 
 text.setUiAttribs({ "ignoreBigPort": true });
 
+inLines.onChange =
 inCustSep.onChange =
 inNan.onChange =
     text.onChange =

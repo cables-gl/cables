@@ -109,6 +109,10 @@
             {
                 "type": 3,
                 "name": "Result Rotations"
+            },
+            {
+                "type": 3,
+                "name": "Collider"
             }
         ]
     },

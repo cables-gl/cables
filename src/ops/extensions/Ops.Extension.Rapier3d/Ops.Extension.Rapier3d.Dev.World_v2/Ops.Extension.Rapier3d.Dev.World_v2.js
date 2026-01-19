@@ -11,6 +11,7 @@ const
 const cgl = op.patch.cgl;
 let rigidBody;
 let world;
+let eventQueue;
 wait();
 
 function wait()
@@ -33,6 +34,7 @@ async function init()
 
     world = new RAPIER.World(gravity);
     // console.log(world);
+    eventQueue = new RAPIER.EventQueue(true);
 
     outVersion.set(RAPIER.version());
 
@@ -75,8 +77,9 @@ exec.onTriggered = () =>
 
     const oldWorld = cgl.frameStore.rapierWorld;
     cgl.frameStore.rapierWorld = world;
+    cgl.frameStore.rapierEventQueue = eventQueue;
 
-    world.step();
+    world.step(eventQueue);
 
     const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
     const result = world.castRay(ray);

@@ -1,6 +1,7 @@
 const inGrad = op.inGradient("Gradient"),
     inRandom = op.inTriggerButton("Randomize Colors"),
-    outGradietObject = op.outObject("Gradient Object", null, "gradient");
+    outGradietObject = op.outObject("Gradient Object", null, "gradient"),
+    outColorArray = op.outArray("Color Array");
 
 let timeout = null;
 inGrad.setUiAttribs({ "editShortcut": true });
@@ -67,6 +68,8 @@ function parseKeys()
 function updateGradient(keys)
 {
     const obj = { "keys": [] };
+    const cols = [];
+
     for (let i = 0; i < keys.length - 1; i++)
     {
         const key = {
@@ -77,7 +80,17 @@ function updateGradient(keys)
             "a": 1,
         };
         obj.keys.push(key);
+
+        if (i > 0)
+        {
+            cols[(i - 1) * 4] = keys[i].r;
+            cols[(i - 1) * 4 + 1] = keys[i].g;
+            cols[(i - 1) * 4 + 2] = keys[i].b;
+            cols[(i - 1) * 4 + 3] = 1;
+        }
     }
+
+    outColorArray.setRef(cols);
 
     outGradietObject.setRef(obj);
 }
