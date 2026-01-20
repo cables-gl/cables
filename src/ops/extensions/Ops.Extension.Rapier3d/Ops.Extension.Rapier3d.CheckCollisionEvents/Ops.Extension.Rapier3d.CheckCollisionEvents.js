@@ -12,7 +12,7 @@ exec.onTriggered = () =>
 {
     const arr1 = inColl1.get();
     const arr2 = inColl2.get();
-    const world = op.patch.cgl.frameStore.rapierWorld;
+    const world = op.patch.frameStore.rapierWorld;
     const r1 = [];
     const r2 = [];
 
@@ -20,7 +20,7 @@ exec.onTriggered = () =>
         return outHasColl.set(false);
 
     outHasColl.set(false);
-    const events = op.patch.cgl.frameStore.rapierCollisionEvents;
+    const events = op.patch.frameStore.rapierCollisionEvents;
 
     for (let i = 0; i < arr1.length; i++)
         r1[i] = 0;

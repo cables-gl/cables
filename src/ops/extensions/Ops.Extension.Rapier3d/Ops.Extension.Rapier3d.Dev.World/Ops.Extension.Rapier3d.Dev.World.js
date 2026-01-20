@@ -7,7 +7,6 @@ const
     outDebugColors = op.outArray("Debug Colors"),
     outVersion = op.outString("Version");
 
-const cgl = op.patch.cgl;
 let rigidBody;
 let world;
 wait();
@@ -73,8 +72,8 @@ exec.onTriggered = () =>
 {
     if (!world) return;
 
-    const oldWorld = cgl.frameStore.rapierWorld;
-    cgl.frameStore.rapierWorld = world;
+    const oldWorld = op.patch.frameStore.rapierWorld;
+    op.patch.frameStore.rapierWorld = world;
 
     world.step();
 
@@ -88,5 +87,5 @@ exec.onTriggered = () =>
 
     next.trigger();
 
-    cgl.frameStore.rapierWorld = oldWorld;
+    op.patch.frameStore.rapierWorld = oldWorld;
 };

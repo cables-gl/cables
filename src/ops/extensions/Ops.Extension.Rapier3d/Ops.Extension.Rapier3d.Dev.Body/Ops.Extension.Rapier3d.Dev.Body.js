@@ -63,12 +63,12 @@ inTranslX.onChange =
 
 exec.onTriggered = () =>
 {
-    const world = op.patch.cgl.frameStore.rapierWorld;
+    const world = op.patch.frameStore.rapierWorld;
     if (!world) return;
 
     // if (!eventQueue)
     {
-        eventQueue = op.patch.cgl.frameStore.rapierEventQueue;
+        eventQueue = op.patch.frameStore.rapierEventQueue;
         if (eventQueue)
         {
             // console.log("reg collision callback");
@@ -89,7 +89,7 @@ exec.onTriggered = () =>
         if (rigidBodies[i].isSleeping()) sleepCount++;
 
     outSleeping.set(sleepCount != rigidBodies.length);
-    mat4.getTranslation(tmpOrigin, op.patch.cgl.mMatrix);
+    mat4.getTranslation(tmpOrigin, op.patch.cg.mMatrix);
 
     if (setPosition == true)
     {

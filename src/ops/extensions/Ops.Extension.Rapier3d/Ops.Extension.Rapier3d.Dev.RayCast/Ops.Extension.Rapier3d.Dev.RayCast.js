@@ -35,7 +35,7 @@ let isScreenCoords = true;
 
 function update()
 {
-    world = cgl.frameStore.rapierWorld;
+    world = op.patch.frameStore.rapierWorld;
 
     if (!world) return;
 

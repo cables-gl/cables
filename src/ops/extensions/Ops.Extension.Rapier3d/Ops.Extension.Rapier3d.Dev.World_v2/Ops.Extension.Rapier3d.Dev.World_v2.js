@@ -1,5 +1,3 @@
-// QQQQQQQQQ
-
 const
     exec = op.inTrigger("Execute"),
     inReset = op.inTriggerButton("Reset"),
@@ -8,7 +6,6 @@ const
     outDebugColors = op.outArray("Debug Colors"),
     outVersion = op.outString("Version");
 
-const cgl = op.patch.cgl;
 let rigidBody;
 let world;
 let eventQueue;
@@ -78,9 +75,9 @@ exec.onTriggered = () =>
 {
     if (!world) return;
 
-    const oldWorld = cgl.frameStore.rapierWorld;
-    cgl.frameStore.rapierWorld = world;
-    cgl.frameStore.rapierEventQueue = eventQueue;
+    const oldWorld = op.patch.frameStore.rapierWorld;
+    op.patch.frameStore.rapierWorld = world;
+    op.patch.frameStore.rapierEventQueue = eventQueue;
 
     world.step(eventQueue);
 
@@ -117,10 +114,10 @@ exec.onTriggered = () =>
     });
 
     // console.log("collo",collisions.length);
-    cgl.frameStore.rapierCollisionEvents = collisions;
+    op.patch.frameStore.rapierCollisionEvents = collisions;
     // console.log("text", collisions);
 
     next.trigger();
 
-    cgl.frameStore.rapierWorld = oldWorld;
+    op.patch.frameStore.rapierWorld = oldWorld;
 };
