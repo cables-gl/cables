@@ -12,6 +12,8 @@ const cgl = op.patch.cgl;
 let rigidBody;
 let world;
 let eventQueue;
+let collisions = {};
+
 wait();
 
 function wait()
@@ -37,6 +39,7 @@ async function init()
     eventQueue = new RAPIER.EventQueue(true);
 
     outVersion.set(RAPIER.version());
+    collisions = {};
 
     // let rigidBodyDesc = RAPIER.RigidBodyDesc.fixed().setTranslation(0,0,0);
     // let colliderDesc = RAPIER.ColliderDesc.cuboid(0.3, 0.3, 0.3);
@@ -88,6 +91,34 @@ exec.onTriggered = () =>
     const dbg = world.debugRender();
     outDebugPoints.set(dbg.vertices);
     outDebugColors.set(dbg.colors);
+    eventQueue.drainCollisionEvents((handle1, handle2, started) =>
+    {
+        // if (started) {
+        //   if (
+        //     (handle1 === colliderA.handle && handle2 === colliderB.handle) ||
+        //     (handle1 === colliderB.handle && handle2 === colliderA.handdle)
+        //   ) {
+        //     onBodiesCollide(bodyA, bodyB);
+        //   }
+        // console.log("colliders[i].handle", handle1);
+        const id = Math.min(handle1, handle2) + "_" + Math.max(handle2, handle1);
+
+        collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
+        if (!started) delete collisions[id];
+        // for (let i = 0; i < colliders.length; i++)
+        // {
+        //     if (colliders[i].handle == handle1 ||
+        //     colliders[i].handle == handle2
+        //     )
+        //     {
+        //         // console.log("text");
+        //     }
+        // }
+    });
+
+    // console.log("collo",collisions.length);
+    cgl.frameStore.rapierCollisionEvents = collisions;
+    // console.log("text", collisions);
 
     next.trigger();
 

@@ -4,7 +4,14 @@ const
     inCollShape = op.inDropDown("Body Shape", ["Cuboid", "Ball", "Cylinder", "Capsule", "Tri Mesh", "Convex Hull"], "Cuboid"),
     inType = op.inDropDown("Type", ["Dynamic", "Fixed", "KinematicPositionBased", "KinematicVelocityBased"], "Dynamic"),
     inGeom = op.inObject("Geometry", null, "geometry"),
+
+    inMass = op.inFloat("Mass", 10),
+    inFriction = op.inFloat("Friction", 1),
+    inDensity = op.inFloat("Density", 1),
+    inSensor = op.inBool("Sensor", false),
+
     inCollRadius = op.inFloat("Radius", 0.5),
+
     inCollSizeX = op.inFloat("Size X", 0.5),
     inCollSizeY = op.inFloat("Size Y", 0.5),
     inCollSizeZ = op.inFloat("Size Z", 0.5),
@@ -30,10 +37,14 @@ exec.onLinkChanged = removeBodies;
 let setPosition = false;
 let eventQueue = null;
 
-inGeom.onChange =
-inName.onChange =
-inPositions.onChange =
-inType.onChange =
+inMass.onChange =
+    inSensor.onChange =
+    inFriction.onChange =
+    inDensity.onChange =
+    inGeom.onChange =
+    inName.onChange =
+    inPositions.onChange =
+    inType.onChange =
     inCollSizeX.onChange =
     inCollSizeY.onChange =
     inCollSizeZ.onChange =
@@ -61,27 +72,6 @@ exec.onTriggered = () =>
         if (eventQueue)
         {
             // console.log("reg collision callback");
-            eventQueue.drainCollisionEvents((handle1, handle2, started) =>
-            {
-                // if (started) {
-                //   if (
-                //     (handle1 === colliderA.handle && handle2 === colliderB.handle) ||
-                //     (handle1 === colliderB.handle && handle2 === colliderA.handle)
-                //   ) {
-                //     onBodiesCollide(bodyA, bodyB);
-                //   }
-                // console.log("colliders[i].handle", colliders[i].handle);
-
-                for (let i = 0; i < colliders.length; i++)
-                {
-                    if (colliders[i].handle == handle1 ||
-                    colliders[i].handle == handle2
-                    )
-                    {
-                        // console.log("text");
-                    }
-                }
-            });
         }
         else console.log("no eventQueue");
     }
@@ -233,9 +223,9 @@ function setup(world)
 
         colliderDesc
             .setMass(10)
-            // .setDensity(1)
-
-            .setFriction(1);
+            .setDensity(1)
+            .setFriction(1)
+            .setSensor(inSensor.get());
         // .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0})
         // .setGravityScale(0.5)
         // .setCanSleep(true)

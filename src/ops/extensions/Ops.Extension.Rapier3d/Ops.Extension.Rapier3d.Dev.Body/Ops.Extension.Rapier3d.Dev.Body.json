@@ -50,6 +50,26 @@
             },
             {
                 "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Density",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sensor",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Radius",
                 "subType": "number"
             },
