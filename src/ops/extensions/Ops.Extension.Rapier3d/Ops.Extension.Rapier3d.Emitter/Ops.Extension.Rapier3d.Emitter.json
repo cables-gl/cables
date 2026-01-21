@@ -94,6 +94,10 @@
             {
                 "type": 1,
                 "name": "Emit"
+            },
+            {
+                "type": 1,
+                "name": "Remove"
             }
         ],
         "portsOut": [

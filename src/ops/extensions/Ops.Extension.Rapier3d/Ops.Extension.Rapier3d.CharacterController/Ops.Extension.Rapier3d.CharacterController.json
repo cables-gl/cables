@@ -84,6 +84,10 @@
                 "type": 0,
                 "name": "Z",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Collider"
             }
         ]
     },

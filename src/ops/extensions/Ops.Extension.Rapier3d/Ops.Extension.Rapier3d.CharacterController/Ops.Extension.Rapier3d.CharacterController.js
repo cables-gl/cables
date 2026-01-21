@@ -5,14 +5,14 @@ const
     reset = op.inTriggerButton("Reset"),
     inHeight = op.inFloat("Height", 1),
     inWidth = op.inFloat("Width", 0.2),
-
     inVecX = op.inFloat("Vector X"),
-    inVecY = op.inFloat("Vector Y"),
+    inVecY = op.inFloat("Vector Y", -0.05),
     inVecZ = op.inFloat("Vector Z"),
     next = op.outTrigger("Next"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
-    outZ = op.outNumber("Z");
+    outZ = op.outNumber("Z"),
+    outCollider = op.outArray("Collider");
 
 let characterController = null;
 let world = null;
@@ -21,6 +21,8 @@ let collider = null;
 let needsSetup = true;
 let pos = null;
 let movement = null;
+
+op.onDelete = remove;
 
 inWidth.onChange =
     inHeight.onChange =
@@ -45,13 +47,15 @@ exec.onTriggered = () =>
 
     if (needsSetup)
     {
-        let colliderDesc = RAPIER.ColliderDesc.capsule(inHeight.get(), inWidth.get());
+        const colliderDesc = RAPIER.ColliderDesc.capsule(inHeight.get(), inWidth.get());
         // const rigidBodyDesc = RAPIER.RigidBodyDesc.kinematicVelocityBased().setTranslation(-1.5,1.32,0);
         const rigidBodyDesc = RAPIER.RigidBodyDesc.kinematicPositionBased().setTranslation(-1.5, 2.32, 0);
         rigidBody = world.createRigidBody(rigidBodyDesc);
 
+        colliderDesc.setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.ALL);
         colliderDesc.setFriction(0.1);
         collider = world.createCollider(colliderDesc, rigidBody);
+        outCollider.setRef([collider]);
 
         characterController = world.createCharacterController(0.01);
         characterController.setCharacterMass(1);
@@ -87,8 +91,8 @@ exec.onTriggered = () =>
     movement.y += inVecY.get();
     movement.z += inVecZ.get();
 
-    characterController.computeColliderMovement(collider, movement);
-
+    characterController.computeColliderMovement(collider, movement, RAPIER.QueryFilterFlags.EXCLUDE_SENSORS);
+    // RAPIER.QueryFilterFlags.EXCLUDE_SENSORS
     // for (let i = 0; i < characterController.numComputedCollisions(); i++) {
     // let collision = characterController.computedCollision(i);
     // Do something with that collision information.
@@ -122,11 +126,10 @@ exec.onTriggered = () =>
 
 function remove()
 {
-    if (world && rigidBody)world.removeRigidBody(rigidBody);
-    if (world && characterController)world.removeCharacterController(characterController);
+    if (world && rigidBody) world.removeRigidBody(rigidBody);
+    if (world && characterController) world.removeCharacterController(characterController);
+    if (world && collider)world.removeCollider(collider);
     characterController = null;
 
     rigidBody = null;
 }
-
-//

@@ -22,12 +22,14 @@ const
 
     inPositions = op.inArray("Positions"),
     inEvents = op.inBool("Events", true),
+    inActive = op.inBool("Active", true),
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
     outPos = op.outArray("Result Positions", [], 3),
     outSize = op.outArray("Result Size", [], 3),
     outRot = op.outArray("Result Rotations", [], 4),
-    outCollider = op.outArray("Collider");
+    outCollider = op.outArray("Collider"),
+    outBodies = op.outArray("Bodies");
 
 let needsSetup, lastWorld, oldShape;
 let rigidBodies = [];
@@ -65,12 +67,23 @@ inTranslX.onChange =
         {
             setPosition = true;
         }
+        else
+        {
+            needsSetup = true;
+        }
     };
+
+inActive.onChange = () =>
+{
+    if (!inActive.get()) removeBodies();
+    needsSetup = true;
+};
 
 exec.onTriggered = () =>
 {
     const world = op.patch.frameStore.rapier.world;
     if (!world) return;
+    if (!inActive.get()) return;
 
     // if (!eventQueue)
     {
@@ -262,6 +275,7 @@ function setup(world)
 
     // console.log("colliders", colliders);
     outCollider.setRef(colliders);
+    outBodies.setRef(rigidBodies);
 
     needsSetup = false;
     updateUi();

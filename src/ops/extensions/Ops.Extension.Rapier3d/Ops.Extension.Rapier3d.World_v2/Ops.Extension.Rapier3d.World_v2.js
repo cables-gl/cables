@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
     inReset = op.inTriggerButton("Reset"),
+    inDebug = op.inBool("Debug", true),
     next = op.outTrigger("Next"),
     outDebugPoints = op.outArray("Debug Splines"),
     outDebugColors = op.outArray("Debug Colors"),
@@ -51,9 +52,13 @@ exec.onTriggered = () =>
     const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
     const result = world.castRay(ray);
 
-    const dbg = world.debugRender();
-    outDebugPoints.set(dbg.vertices);
-    outDebugColors.set(dbg.colors);
+    if (inDebug.get() && outDebugPoints.isLinked())
+    {
+        const dbg = world.debugRender();
+        outDebugPoints.set(dbg.vertices);
+        outDebugColors.set(dbg.colors);
+    }
+
     eventQueue.drainCollisionEvents((handle1, handle2, started) =>
     {
         const id = Math.min(handle1, handle2) + "_" + Math.max(handle2, handle1);

@@ -117,6 +117,11 @@
                 "type": 0,
                 "name": "Events",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -144,6 +149,10 @@
             {
                 "type": 3,
                 "name": "Collider"
+            },
+            {
+                "type": 3,
+                "name": "Bodies"
             }
         ]
     },

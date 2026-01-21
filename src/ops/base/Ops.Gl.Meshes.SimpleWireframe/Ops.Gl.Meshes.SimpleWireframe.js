@@ -1,7 +1,10 @@
 const
     render = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
-    next = op.outTrigger("Next");
+    inDraw = op.inBool("Draw", true),
+    next = op.outTrigger("Next"),
+    outGeom = op.outObject("Wire Geometry", null, "geometry");
+
 const cgl = op.patch.cgl;
 
 op.toWorkPortsNeedToBeLinked(inGeom);
@@ -84,6 +87,8 @@ inGeom.onChange = function ()
     geom.setTexCoords(tc);
     geom.vertexNormals = normals;
 
+    outGeom.setRef(geom);
+
     mesh = new CGL.Mesh(cgl, geom, prim);
 };
 
@@ -94,7 +99,7 @@ function doRender()
 
     let oldPrim = shader.glPrimitive;
     shader.glPrimitive = prim;
-    if (mesh) mesh.render(shader);
+    if (inDraw.get() && mesh) mesh.render(shader);
     shader.glPrimitive = oldPrim;
     next.trigger();
 }

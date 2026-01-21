@@ -15,21 +15,22 @@ exec.onTriggered = () =>
     if (!arr1 || !world)
         return outHasColl.set(false);
 
-    outHasColl.set(false);
+    let hasCollision = false;
     const events = op.patch.frameStore.rapier.collisionEvents;
 
     for (let i = 0; i < arr1.length; i++)
     {
         r1[i] = 0;
-        for (let e in events)//= 0; e < events.length; e++)
+        for (let e in events)
         {
             if (arr1[i].handle == events[e].handle1 || arr1[i].handle == events[e].handle2)
             {
-                outHasColl.set(true);
+                hasCollision = true;
                 r1[i] = 1;
             }
         }
     }
+    outHasColl.set(true);
 
     outColl1.setRef(r1);
 };

@@ -21,6 +21,7 @@ const
     inLifetime = op.inFloat("Lifetime", 0),
 
     inEmit = op.inTriggerButton("Emit"),
+    inClear = op.inTriggerButton("Remove"),
 
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
@@ -52,9 +53,9 @@ inMass.onChange =
     inCollRadius.onChange = () =>
     {
         op.setUiAttrib({ "extendTitle": inName.get() });
-        // needsSetup = true;
     };
 
+inClear.onTriggered = removeBodies;
 inEmit.onTriggered = emitOne;
 
 inTranslX.onChange =
@@ -69,7 +70,9 @@ inTranslX.onChange =
 
 exec.onTriggered = () =>
 {
+    if (!exec.isLinked()) return;
     const world = op.patch.frameStore.rapierWorld;
+
     if (!world) return;
 
     // if (!eventQueue)
@@ -167,6 +170,8 @@ function updateUi()
 
 function emitOne()
 {
+    if (!exec.isLinked()) return;
+
     const world = lastWorld;
     if (!world) return;
 
