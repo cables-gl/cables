@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1721052214271
-        },
-        {
-            "message": "Team.Rapier3d.RayCast renamed to Ops.Team.Rapier3d.Dev.RayCast",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768323709235
-        },
-        {
-            "message": "Team.Rapier3d.Dev.RayCast renamed to Ops.Extension.Rapier3d.Dev.RayCast",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324209168
         }
     ],
     "layout": {
@@ -78,5 +66,9 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "exampleProjectId": "PSX4W8",
+    "docs": {
+        "ports": []
+    }
 }

@@ -1,6 +1,6 @@
 {
-    "id": "ebf685bd-4301-40f1-93b7-614d86d851f1",
-    "created": 1768916110015,
+    "id": "eaa1fc4a-be59-4df3-a231-8fbfed3d0245",
+    "created": 1768995130142,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -15,6 +15,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768916110015
+        },
+        {
+            "message": "Extension.Rapier3d.CheckCollisionEvents renamed to Ops.Extension.Rapier3d.CheckCollisionPairsEvents",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1768995078404
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1768995130142
         }
     ],
     "layout": {
@@ -26,10 +38,6 @@
             {
                 "type": 3,
                 "name": "Colliders 1"
-            },
-            {
-                "type": 3,
-                "name": "Colliders 2"
             }
         ],
         "portsOut": [
@@ -41,10 +49,6 @@
             {
                 "type": 3,
                 "name": "Collisions 1"
-            },
-            {
-                "type": 3,
-                "name": "Collisions 2"
             }
         ]
     }

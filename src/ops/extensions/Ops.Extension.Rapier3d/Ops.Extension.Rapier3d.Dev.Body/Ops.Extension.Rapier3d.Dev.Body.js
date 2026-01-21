@@ -21,6 +21,7 @@ const
     inTranslZ = op.inFloat("Translate Z", 0.0),
 
     inPositions = op.inArray("Positions"),
+    inEvents = op.inBool("Events", true),
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
     outPos = op.outArray("Result Positions", [], 3),
@@ -37,6 +38,7 @@ exec.onLinkChanged = removeBodies;
 let setPosition = false;
 let eventQueue = null;
 
+inEvents.onChange =
 inMass.onChange =
     inSensor.onChange =
     inFriction.onChange =
@@ -124,6 +126,10 @@ exec.onTriggered = () =>
         outRot.setRef(rotArray);
         outSize.setRef(sizeArray);
     }
+
+    if (!inEvents.get())
+        for (let i = 0; i < rigidBodies.length; i++)
+            op.patch.frameStore.rapier.ignoreEventHandles.push(rigidBodies[i].handle);
 
     next.trigger();
 };
@@ -230,10 +236,9 @@ function setup(world)
             .setDensity(1)
             .setFriction(1)
             .setSensor(inSensor.get());
-        // .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0})
-        // .setGravityScale(0.5)
-        // .setCanSleep(true)
-        // .setCcdEnabled(false);
+
+        // if (!inEvents.get())
+        // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.NONE);
 
         const rigidBody = world.createRigidBody(rigidBodyDesc);
 
@@ -244,8 +249,15 @@ function setup(world)
         collider = world.createCollider(colliderDesc, rigidBody);
         colliders.push(collider);
 
-        colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
-        collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+        // if (!inEvents.get())
+        // {
+        //     collider.setActiveEvents(RAPIER.ActiveEvents.NONE);
+        // }
+        // else
+        {
+            collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+            // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+        }
     }
 
     // console.log("colliders", colliders);
