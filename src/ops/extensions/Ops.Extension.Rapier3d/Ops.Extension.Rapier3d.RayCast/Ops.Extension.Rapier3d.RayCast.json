@@ -1,0 +1,80 @@
+{
+    "id": "ba8fb07c-0123-4822-8ec3-f76de307fd82",
+    "created": 1721052214222,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1721052214271
+        },
+        {
+            "message": "Extension.Rapier3d.Dev.RayCast renamed to Ops.Extension.Rapier3d.RayCast",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1769004847235
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Screen X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Screen Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 0,
+                "name": "Has Hit",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Hit Body Name"
+            },
+            {
+                "type": 0,
+                "name": "Hit X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hit Z",
+                "subType": "number"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "exampleProjectId": "PSX4W8",
+    "docs": {
+        "ports": []
+    }
+}

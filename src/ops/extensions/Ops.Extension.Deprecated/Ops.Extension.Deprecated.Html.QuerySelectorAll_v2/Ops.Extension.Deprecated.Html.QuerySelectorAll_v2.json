@@ -1,0 +1,73 @@
+{
+    "id": "1a1d80e0-0de8-4c4d-8eaa-e2a0eac6239a",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018678272
+        },
+        {
+            "message": "add \"element\" mode ",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1744018702489
+        },
+        {
+            "message": "op Html.QuerySelectorAll_v2 was deprecated (use Ops.Html.Elements.ElementQuery)",
+            "type": "deprecation",
+            "author": "stephan",
+            "date": 1769000107793
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1738262411099,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Query"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Document"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Elements"
+            }
+        ]
+    },
+    "summary": "Selects all matching elements in the DOM",
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "QTs5GH"
+}

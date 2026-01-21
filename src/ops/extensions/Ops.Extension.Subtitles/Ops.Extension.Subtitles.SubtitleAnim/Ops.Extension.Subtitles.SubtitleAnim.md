@@ -1,0 +1,1 @@
+To be used with input from ParseSubtitles. Puts the subtitles as keyframes on the timeline and creates an animation that can be uses with Ops.TimeLine.AnimGetValue.

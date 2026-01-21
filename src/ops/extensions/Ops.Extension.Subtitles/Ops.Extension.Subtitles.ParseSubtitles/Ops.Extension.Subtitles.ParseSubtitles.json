@@ -1,0 +1,57 @@
+{
+    "id": "d31f4503-7a07-430d-b684-849eb81c1a6f",
+    "created": 1768836949731,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1768566313254
+        },
+        {
+            "message": "Team.Schwarzcity.ParseSubtitles renamed to Ops.Extension.Subtitles.ParseSubtitles",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1768998887683
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Subbtitle data"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Structure",
+                "objType": "subtitles"
+            },
+            {
+                "type": 3,
+                "name": "Subtitles"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Subbtitle data",
+                "text": "SRT or VTT data"
+            },
+            {
+                "name": "Structure",
+                "text": "JSON structure of subtitles and metadata"
+            },
+            {
+                "name": "Subtitles",
+                "text": "Subtitle lines"
+            }
+        ]
+    },
+    "summary": "parse srt/vtt subtitle-files",
+    "exampleProjectId": "3rB4t8"
+}

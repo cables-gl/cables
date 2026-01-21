@@ -1,0 +1,91 @@
+{
+    "id": "8b959bfc-0708-4f72-beb6-152ac735e91d",
+    "created": 1768317822655,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720885489958
+        },
+        {
+            "message": "Updated to new version of rapier, v0.19.3",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768319801510
+        },
+        {
+            "message": "Team.Rapier3d.World_v2 renamed to Ops.Extension.Rapier3d.World_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1768324034961
+        },
+        {
+            "message": "Extension.Rapier3d.World_v2 renamed to Ops.Extension.Rapier3d.Dev.World_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1768324308900
+        },
+        {
+            "message": "Extension.Rapier3d.Dev.World_v2 renamed to Ops.Extension.Rapier3d.Dev.Worldy_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1768324398703
+        },
+        {
+            "message": "Extension.Rapier3d.Dev.Worldy_v2 renamed to Ops.Extension.Rapier3d.Dev.World_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1768324440098
+        },
+        {
+            "message": "Extension.Rapier3d.Dev.World_v2 renamed to Ops.Extension.Rapier3d.World_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1769004862614
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Debug Splines"
+            },
+            {
+                "type": 3,
+                "name": "Debug Colors"
+            },
+            {
+                "type": 5,
+                "name": "Version"
+            }
+        ]
+    },
+    "exampleProjectId": "V66gqi",
+    "docs": {},
+    "coreLibs": [
+        "cgl"
+    ],
+    "dependencies": [
+        {
+            "src": "./rapier.js",
+            "type": "commonjs"
+        }
+    ]
+}

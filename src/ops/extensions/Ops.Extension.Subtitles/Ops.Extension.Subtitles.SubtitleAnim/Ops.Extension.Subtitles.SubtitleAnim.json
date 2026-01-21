@@ -1,0 +1,50 @@
+{
+    "id": "8a8f3375-fddf-4d60-8f3b-c61c495bb450",
+    "created": 1768838038335,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1768566313254
+        },
+        {
+            "message": "Team.Schwarzcity.SubtitleAnim renamed to Ops.Extension.Subtitles.SubtitleAnim",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1768998910226
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Structure",
+                "objType": "subtitles"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Anim",
+                "objType": "anim"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Structure",
+                "text": "Subtitle structure data"
+            },
+            {
+                "name": "Anim",
+                "text": "Animation object"
+            }
+        ]
+    },
+    "summary": "Create timeline animation form subtitle data",
+    "exampleProjectId": "3rB4t8"
+}
