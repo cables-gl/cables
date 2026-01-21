@@ -68,7 +68,7 @@ function init(world)
 exec.onTriggered = () =>
 {
     const world = op.patch.frameStore.rapierWorld;
-
+    if (lastWorld != world)remove();
     if (inArr.get() && inArr.get().length && world && !groundBody)
         init(world);
 

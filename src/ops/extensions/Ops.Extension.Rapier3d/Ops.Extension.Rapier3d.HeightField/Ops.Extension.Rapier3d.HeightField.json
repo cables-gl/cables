@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768923753870
-        },
-        {
-            "message": "Extension.Rapier3d.HeightMap renamed to Ops.Extension.Rapier3d.HeightField",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768928769588
         }
     ],
     "layout": {
@@ -59,5 +53,9 @@
                 "name": "Next"
             }
         ]
+    },
+    "exampleProjectId": "k6NCV8",
+    "docs": {
+        "ports": []
     }
 }

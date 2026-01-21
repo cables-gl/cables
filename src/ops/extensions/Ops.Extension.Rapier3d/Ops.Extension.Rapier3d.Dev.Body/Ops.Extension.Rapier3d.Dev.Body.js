@@ -49,7 +49,11 @@ inMass.onChange =
     inCollSizeY.onChange =
     inCollSizeZ.onChange =
     inCollShape.onChange =
-    inCollRadius.onChange = () => { needsSetup = true; };
+    inCollRadius.onChange = () =>
+    {
+        op.setUiAttrib({ "extendTitle": inName.get() });
+        needsSetup = true;
+    };
 
 inTranslX.onChange =
     inTranslY.onChange =
