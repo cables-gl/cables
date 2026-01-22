@@ -68,13 +68,15 @@ inTranslX.onChange =
         }
     };
 
+exec.onLinkChanged = removeBodies;
+
 exec.onTriggered = () =>
 {
     if (!exec.isLinked()) return;
     const world = op.patch.frameStore.rapierWorld;
 
     if (!world) return;
-
+    if (world != lastWorld)removeBodies();
     // if (!eventQueue)
     {
         eventQueue = op.patch.frameStore.rapierEventQueue;
@@ -235,6 +237,10 @@ function removeBodies()
         colliders.length = 0;
         eventQueue = null;
     }
+
+    outPos.setRef([]);
+    outRot.setRef([]);
+    outSize.setRef([]);
 }
 
 op.onDelete = () =>

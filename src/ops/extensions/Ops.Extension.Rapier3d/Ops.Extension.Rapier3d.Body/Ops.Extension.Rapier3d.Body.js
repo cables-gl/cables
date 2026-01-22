@@ -85,15 +85,12 @@ exec.onTriggered = () =>
     if (!world) return;
     if (!inActive.get()) return;
 
-    // if (!eventQueue)
+    eventQueue = op.patch.frameStore.rapierEventQueue;
+    if (eventQueue)
     {
-        eventQueue = op.patch.frameStore.rapierEventQueue;
-        if (eventQueue)
-        {
-            // console.log("reg collision callback");
-        }
-        else console.log("no eventQueue");
+        // console.log("reg collision callback");
     }
+    else console.log("no eventQueue");
 
     if (world != lastWorld)needsSetup = true;
     if (rigidBodies.length == 0) needsSetup = true;
