@@ -7,7 +7,6 @@ const
     inMass = op.inFloat("Mass", 10),
     inFriction = op.inFloat("Friction", 1),
     inDensity = op.inFloat("Density", 1),
-    inSensor = op.inBool("Sensor", false),
 
     inCollRadius = op.inFloat("Radius", 0.5),
 
@@ -19,12 +18,15 @@ const
     inTranslY = op.inFloat("Spawn Y", 0.0),
     inTranslZ = op.inFloat("Spawn Z", 0.0),
     inLifetime = op.inFloat("Lifetime", 0),
+    inMaxNum = op.inFloat("Max Num Objects", 0),
 
     inEmit = op.inTriggerButton("Emit"),
     inClear = op.inTriggerButton("Remove"),
+    inSensor = op.inBool("Sensor", false),
 
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
+    outNumObjects = op.outNumber("Num Objects"),
     outPos = op.outArray("Result Positions", [], 3),
     outSize = op.outArray("Result Size", [], 3),
     outRot = op.outArray("Result Rotations", [], 4),
@@ -173,6 +175,7 @@ function updateUi()
 function emitOne()
 {
     if (!exec.isLinked()) return;
+    if (inMaxNum.get() > 0 && inMaxNum.get() <= rigidBodies.length) return;
 
     const world = lastWorld;
     if (!world) return;
@@ -215,6 +218,7 @@ function emitOne()
     colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
     collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
     outCollider.setRef(colliders);
+    outNumObjects.set(rigidBodies.length);
 }
 
 function removeBody(i)
@@ -229,11 +233,9 @@ function removeBodies()
 {
     if (lastWorld)
     {
-        while (rigidBodies.length)
-            removeBody(0);
+        while (rigidBodies.length) removeBody(0);
 
         rigidBodies.length = 0;
-
         colliders.length = 0;
         eventQueue = null;
     }

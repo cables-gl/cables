@@ -113,9 +113,20 @@ exec.onTriggered = () =>
 
     if (setPosition == true)
     {
+        const posArr = inPositions.get();
         for (let i = 0; i < rigidBodies.length; i++)
         {
-            rigidBodies[i].setTranslation({ "x": inTranslX.get(), "y": inTranslY.get(), "z": inTranslZ.get() }, true);
+            let posx = inTranslX.get();
+            let posy = inTranslY.get();
+            let posz = inTranslZ.get();
+            if (posArr && posArr.length > i * 3)
+            {
+                posx += posArr[i * 3 + 0];
+                posy += posArr[i * 3 + 1];
+                posz += posArr[i * 3 + 2];
+            }
+
+            rigidBodies[i].setTranslation({ "x": posx, "y": posy, "z": posz }, true);
 
             setPosition = false;
         }

@@ -48,11 +48,6 @@
             },
             {
                 "type": 0,
-                "name": "Sensor",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Radius",
                 "subType": "number"
             },
@@ -92,12 +87,22 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Max Num Objects",
+                "subType": "number"
+            },
+            {
                 "type": 1,
                 "name": "Emit"
             },
             {
                 "type": 1,
                 "name": "Remove"
+            },
+            {
+                "type": 0,
+                "name": "Sensor",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -109,6 +114,11 @@
                 "type": 0,
                 "name": "Sleeping",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Num Objects",
+                "subType": "number"
             },
             {
                 "type": 3,

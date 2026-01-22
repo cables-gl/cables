@@ -29,7 +29,6 @@ function onKeyDown(e)
         }
         if (e.keyCode == 83)
         {
-            console.log("down!");
             pressedDown.set(true);
             triggerDown.trigger();
         }
@@ -91,7 +90,6 @@ function setDegrees()
 
 function onKeyUp(e)
 {
-    console.log("uyp", e);
     if (keysWasd.get())
     {
         if (e.keyCode == 87)
