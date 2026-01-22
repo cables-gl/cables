@@ -55,7 +55,11 @@ inMass.onChange =
     inCollShape.onChange =
     inCollRadius.onChange = () =>
     {
-        op.setUiAttrib({ "extendTitle": inName.get() });
+        let title = "";
+        title += inType.get() + " ";
+        if (inSensor.get())title += "sensor ";
+        title += inName.get();
+        op.setUiAttrib({ "extendTitle": title });
         needsSetup = true;
     };
 
@@ -275,6 +279,7 @@ function setup(world)
     outBodies.setRef(rigidBodies);
 
     needsSetup = false;
+    setPosition = true;
     updateUi();
     lastWorld = world;
 }

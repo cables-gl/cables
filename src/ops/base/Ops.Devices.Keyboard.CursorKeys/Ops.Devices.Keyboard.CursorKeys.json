@@ -98,6 +98,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1724335223757
+        },
+        {
+            "message": "Fix \"hanging key\" problem, when resizing/changing focus of the canvas rapidly",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1769079610813
         }
     ],
     "license": "MIT",
