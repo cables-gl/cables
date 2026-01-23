@@ -3,10 +3,12 @@ const
     inAttractors = op.inArray("Attractor"),
     inBodies = op.inArray("Bodies"),
     inApply = op.inBool("Apply", true),
+    inClear = op.inBool("Reset Forces", true),
     inStrength = op.inFloat("Strength", 3),
     inMinDist = op.inFloat("Min Distance", 1),
     inMaxDist = op.inFloat("Max Distance", 10),
     next = op.outTrigger("Next"),
+    outNum = op.outNumber("Num Bodies"),
     result = op.outNumber("Result");
 
 exec.onTriggered = () =>
@@ -18,24 +20,25 @@ exec.onTriggered = () =>
     if (!attractors || !attractors.length) return;
     const world = op.patch.frameStore.rapier?.world;
 
-    for (let i = 0; i < bodies.length; i++)
-    {
+    if (inClear.get())
+        for (let i = 0; i < bodies.length; i++)
+        {
         // if (world.bodies.get(bodies[i].handle))
         // { /* OK */ }
         // else
         // {
         //     return;
         // }
-        try
-        {
-            bodies[i].resetForces();
+            try
+            {
+                bodies[i].resetForces();
+            }
+            catch (e)
+            {
+                console.log("noooooooooo");
+                return;
+            }
         }
-        catch (e)
-        {
-            console.log("noooooooooo");
-            return;
-        }
-    }
 
     if (inApply.get())
     {
@@ -87,4 +90,7 @@ exec.onTriggered = () =>
             }
         }
     }
+    outNum.set(bodies.length);
+
+    next.trigger();
 };

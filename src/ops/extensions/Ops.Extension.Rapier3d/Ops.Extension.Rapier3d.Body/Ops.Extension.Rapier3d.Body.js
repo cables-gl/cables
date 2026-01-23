@@ -25,6 +25,7 @@ const
     inTranslZ = op.inFloat("Translate Z", 0.0),
 
     inPositions = op.inArray("Positions"),
+    inRots = op.inArray("Rotations"),
     inEvents = op.inBool("Events", true),
     inActive = op.inBool("Active", true),
     next = op.outTrigger("Next"),
@@ -44,6 +45,7 @@ exec.onLinkChanged = removeBodies;
 let setPosition = false;
 let eventQueue = null;
 
+inRots.onChange =
 inDampLin.onChange =
 inDampAng.onChange =
 inEvents.onChange =
@@ -129,6 +131,7 @@ exec.onTriggered = () =>
             let posx = inTranslX.get();
             let posy = inTranslY.get();
             let posz = inTranslZ.get();
+
             if (posArr && posArr.length > i * 3)
             {
                 posx += posArr[i * 3 + 0];
@@ -150,7 +153,6 @@ exec.onTriggered = () =>
             const rot = rigidBodies[i].rotation();
 
             posArray.push(pos.x, pos.y, pos.z);
-
             rotArray.push(rot.x, rot.y, rot.z, rot.w);
 
             if (inCollShape.get() == "Ball") sizeArray.push(inCollRadius.get(), inCollRadius.get(), inCollRadius.get());
@@ -216,6 +218,7 @@ function setup(world)
     removeBodies();
 
     const pos = getPositions();
+    const rot = inRots.get();
     let colliderDesc, collider;
     if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(inCollSizeY.get(), inCollRadius.get());
     else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(inCollSizeY.get(), inCollRadius.get());
@@ -268,6 +271,18 @@ function setup(world)
             .setAngularDamping(inDampAng.get())
 
             .setTranslation(pos[i + 0], pos[i + 1], pos[i + 2]);
+
+        if (rot && rot.length > i / 3 * 4)
+        {
+            rigidBodyDesc.setRotation(
+                {
+                    "x": rot[(i / 3) * 4 + 0],
+                    "y": rot[(i / 3) * 4 + 1],
+                    "z": rot[(i / 3) * 4 + 2],
+                    "w": rot[(i / 3) * 4 + 3]
+
+                }, true);
+        }
 
         colliderDesc
             .setMass(inMass.get())
@@ -322,8 +337,13 @@ function removeBodies()
             lastWorld.removeCollider(colliders[i]);
         }
         rigidBodies.length = 0;
-
         colliders.length = 0;
+
+        outCollider.setRef([]);
+        outBodies.setRef([]);
+        outPos.setRef([]);
+        outRot.setRef([]);
+        outSize.setRef([]);
         eventQueue = null;
     }
 }

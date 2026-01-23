@@ -124,6 +124,10 @@
                 "name": "Positions"
             },
             {
+                "type": 3,
+                "name": "Rotations"
+            },
+            {
                 "type": 0,
                 "name": "Events",
                 "subType": "boolean"

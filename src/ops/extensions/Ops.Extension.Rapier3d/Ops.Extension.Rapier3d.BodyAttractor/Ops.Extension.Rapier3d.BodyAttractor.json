@@ -44,6 +44,11 @@
             },
             {
                 "type": 0,
+                "name": "Reset Forces",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Strength",
                 "subType": "number"
             },
@@ -62,6 +67,11 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Num Bodies",
+                "subType": "number"
             },
             {
                 "type": 0,

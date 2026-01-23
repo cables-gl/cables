@@ -135,6 +135,10 @@
             {
                 "type": 3,
                 "name": "Collider"
+            },
+            {
+                "type": 3,
+                "name": "Bodies"
             }
         ]
     },

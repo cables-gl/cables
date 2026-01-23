@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1667504160840
+            "date": 1667504160840,
+            "type": "new"
         },
         {
             "message": "Added direction clockwise/anti-clockwise toggle",
@@ -23,6 +24,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1719469386805
+        },
+        {
+            "message": "Fixed rotations in other axis option than XY",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1769212318571
         }
     ],
     "authorName": "pandur",
