@@ -1,6 +1,6 @@
 {
-    "id": "53d38d6b-94cc-4ff7-b66b-00842adba7f9",
-    "created": 1769174945956,
+    "id": "bed8222c-f679-47b6-9900-c2ab10a3d1ae",
+    "created": 1769176990458,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1769174945956
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1769176990458
         }
     ],
     "layout": {
@@ -46,8 +52,9 @@
                 "subType": "number"
             },
             {
-                "type": 1,
-                "name": "Apply"
+                "type": 0,
+                "name": "Apply",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -62,7 +69,6 @@
             }
         ]
     },
-    "exampleProjectId": "FdTk89",
     "docs": {
         "ports": []
     },
