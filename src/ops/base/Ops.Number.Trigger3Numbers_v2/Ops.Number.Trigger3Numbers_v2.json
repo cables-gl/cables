@@ -1,0 +1,85 @@
+{
+    "authorName": "pandur",
+    "id": "984ba632-0869-4aa6-9837-01b309633330",
+    "created": 1769095264766,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "exe"
+            },
+            {
+                "type": 0,
+                "name": "value x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "value y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "value z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result x",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "result y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "result z",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Stores a 3D coordinate (was Value3)",
+    "docs": {
+        "ports": [
+            {
+                "name": "value x",
+                "text": "X value, will be copied to the output port"
+            },
+            {
+                "name": "value y",
+                "text": "Y value, will be copied to the output port"
+            },
+            {
+                "name": "value z",
+                "text": "Z value, will be copied to the output port"
+            },
+            {
+                "name": "result x",
+                "text": "Same as input `Value X`"
+            },
+            {
+                "name": "result y",
+                "text": "Same as input `Value Y`"
+            },
+            {
+                "name": "result z",
+                "text": "Same as input `Value Z`"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.Value3x renamed to Ops.Value.Value3",
+            "author": "pandur",
+            "date": 1560411340628,
+            "type": "new"
+        }
+    ],
+    "issues": "",
+    "youtubeids": [],
+    "license": "MIT"
+}
