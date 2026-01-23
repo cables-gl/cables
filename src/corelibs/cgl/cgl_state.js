@@ -18,9 +18,6 @@ export const BLENDS = {
 
 /**
  * cables gl context/state manager
- * @class
- * @namespace external:CGL
- * @hideconstructor
  */
 export class CglContext extends CgContext
 {

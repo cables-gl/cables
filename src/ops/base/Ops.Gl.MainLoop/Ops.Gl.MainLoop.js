@@ -41,6 +41,7 @@ active.onChange = function ()
 
 const cgl = op.patch.cgl;
 if (CABLES.UI)gui.canvasManager.addCgContext(op.patch.cgl);
+if (CABLES.UI)gui.setLayout();
 
 let rframes = 0;
 let rframeStart = 0;

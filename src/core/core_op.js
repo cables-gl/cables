@@ -3,7 +3,6 @@ import { cleanJson, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
-import { ValueSelectPort } from "./core_port_select.js";
 import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
 import { MultiPort2 } from "./core_port_multi2.js";
@@ -934,7 +933,7 @@ export class Op extends Events
 
             if (values) for (let i = 0; i < values.length; i++) values[i] = String(values[i]);
 
-            const valuePort = new ValueSelectPort(
+            const valuePort = new SwitchPort(
                 this,
                 name,
                 Port.TYPE_NUMBER,
@@ -958,10 +957,11 @@ export class Op extends Events
                 }
             });
 
-            indexPort.onLinkChanged = () =>
+            indexPort.on(Port.EVENT_LINK_CHANGED, () =>
             {
                 valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
-            };
+                valuePort.forceChange();
+            });
 
             p = this.addInPort(valuePort);
 
@@ -1035,12 +1035,13 @@ export class Op extends Events
                     if (idx > -1) thePort.indexPort.set(idx);
                 }
             });
+            p = this.addInPort(switchPort);
 
-            indexPort.onLinkChanged = function ()
+            indexPort.on(Port.EVENT_LINK_CHANGED, () =>
             {
                 switchPort.setUiAttribs({ "greyout": indexPort.isLinked() });
-            };
-            p = this.addInPort(switchPort);
+                switchPort.forceChange();
+            });
 
             if (v !== undefined)
             {
