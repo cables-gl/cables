@@ -106,5 +106,6 @@
     "caniusequery": "",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

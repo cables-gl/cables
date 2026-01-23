@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768998437659
+        },
+        {
+            "message": "Extension.Rapier3d.JointRevolute renamed to Ops.Extension.Rapier3d.Joint",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1769100109531
         }
     ],
     "layout": {
@@ -24,6 +30,16 @@
             {
                 "type": 3,
                 "name": "Objects B"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "Revolute",
+                    "Prismatic",
+                    "Spherical"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -73,6 +89,21 @@
             {
                 "type": 0,
                 "name": "Axis Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Limit",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Limit Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Limit End",
                 "subType": "number"
             }
         ],

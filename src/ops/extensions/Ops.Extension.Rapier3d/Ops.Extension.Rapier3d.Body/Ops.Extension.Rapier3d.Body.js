@@ -55,7 +55,11 @@ inMass.onChange =
     inCollShape.onChange =
     inCollRadius.onChange = () =>
     {
-        op.setUiAttrib({ "extendTitle": inName.get() });
+        let title = "";
+        title += inType.get() + " ";
+        if (inSensor.get())title += "sensor ";
+        title += inName.get();
+        op.setUiAttrib({ "extendTitle": title });
         needsSetup = true;
     };
 
@@ -85,15 +89,12 @@ exec.onTriggered = () =>
     if (!world) return;
     if (!inActive.get()) return;
 
-    // if (!eventQueue)
+    eventQueue = op.patch.frameStore.rapierEventQueue;
+    if (eventQueue)
     {
-        eventQueue = op.patch.frameStore.rapierEventQueue;
-        if (eventQueue)
-        {
-            // console.log("reg collision callback");
-        }
-        else console.log("no eventQueue");
+        // console.log("reg collision callback");
     }
+    else console.log("no eventQueue");
 
     if (world != lastWorld)needsSetup = true;
     if (rigidBodies.length == 0) needsSetup = true;
@@ -112,9 +113,20 @@ exec.onTriggered = () =>
 
     if (setPosition == true)
     {
+        const posArr = inPositions.get();
         for (let i = 0; i < rigidBodies.length; i++)
         {
-            rigidBodies[i].setTranslation({ "x": inTranslX.get(), "y": inTranslY.get(), "z": inTranslZ.get() }, true);
+            let posx = inTranslX.get();
+            let posy = inTranslY.get();
+            let posz = inTranslZ.get();
+            if (posArr && posArr.length > i * 3)
+            {
+                posx += posArr[i * 3 + 0];
+                posy += posArr[i * 3 + 1];
+                posz += posArr[i * 3 + 2];
+            }
+
+            rigidBodies[i].setTranslation({ "x": posx, "y": posy, "z": posz }, true);
 
             setPosition = false;
         }
@@ -278,6 +290,7 @@ function setup(world)
     outBodies.setRef(rigidBodies);
 
     needsSetup = false;
+    setPosition = true;
     updateUi();
     lastWorld = world;
 }
