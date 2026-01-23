@@ -85,7 +85,7 @@ inActive.onChange = () =>
 
 exec.onTriggered = () =>
 {
-    const world = op.patch.frameStore.rapier.world;
+    const world = op.patch.frameStore.rapier?.world;
     if (!world) return;
     if (!inActive.get()) return;
 
