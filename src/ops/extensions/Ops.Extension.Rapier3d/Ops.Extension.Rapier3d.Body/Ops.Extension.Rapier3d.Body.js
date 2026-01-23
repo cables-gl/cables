@@ -8,6 +8,10 @@ const
     inMass = op.inFloat("Mass", 10),
     inFriction = op.inFloat("Friction", 1),
     inDensity = op.inFloat("Density", 1),
+
+    inDampLin = op.inFloat("Linear Damping", 1),
+    inDampAng = op.inFloat("Angular Damping", 1),
+
     inSensor = op.inBool("Sensor", false),
 
     inCollRadius = op.inFloat("Radius", 0.5),
@@ -40,6 +44,8 @@ exec.onLinkChanged = removeBodies;
 let setPosition = false;
 let eventQueue = null;
 
+inDampLin.onChange =
+inDampAng.onChange =
 inEvents.onChange =
 inMass.onChange =
     inSensor.onChange =
@@ -253,13 +259,16 @@ function setup(world)
     {
         const rigidBodyDesc = RAPIER.RigidBodyDesc
             .dynamic()
-            // .setAdditionalMass(0.5)
+            // .setAdditionalMass(1)
+            .setLinearDamping(inDampLin.get())
+            .setAngularDamping(inDampAng.get())
+
             .setTranslation(pos[i + 0], pos[i + 1], pos[i + 2]);
 
         colliderDesc
-            .setMass(10)
-            .setDensity(1)
-            .setFriction(1)
+            .setMass(inMass.get())
+            .setDensity(inDensity.get())
+            .setFriction(inFriction.get())
             .setSensor(inSensor.get());
 
         // if (!inEvents.get())
