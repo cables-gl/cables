@@ -16,6 +16,26 @@ exec.onTriggered = () =>
 
     if (!bodies || !bodies.length) return;
     if (!attractors || !attractors.length) return;
+    const world = op.patch.frameStore.rapier?.world;
+
+    for (let i = 0; i < bodies.length; i++)
+    {
+        // if (world.bodies.get(bodies[i].handle))
+        // { /* OK */ }
+        // else
+        // {
+        //     return;
+        // }
+        try
+        {
+            bodies[i].resetForces();
+        }
+        catch (e)
+        {
+            console.log("noooooooooo");
+            return;
+        }
+    }
 
     if (inApply.get())
     {
@@ -30,8 +50,6 @@ exec.onTriggered = () =>
 
             for (let i = 0; i < bodies.length; i++)
             {
-                // console.log("text", attractor.translation());
-
                 const objectPos = bodies[i].translation();
 
                 const dx = attractorPos.x - objectPos.x;
@@ -59,7 +77,6 @@ exec.onTriggered = () =>
                 }
 
                 // console.log("text", dirX, dirY, dirZ);
-                bodies[i].resetForces();
                 bodies[i].addForce({
                     "x": dirX * forceMagnitude,
                     "y": dirY * forceMagnitude,

@@ -102,7 +102,11 @@ exec.onTriggered = () =>
     }
     else console.log("no eventQueue");
 
-    if (world != lastWorld)needsSetup = true;
+    if (world != lastWorld)
+    {
+        needsSetup = true;
+        removeBodies();
+    }
     if (rigidBodies.length == 0) needsSetup = true;
     if (needsSetup)setup(world);
 
