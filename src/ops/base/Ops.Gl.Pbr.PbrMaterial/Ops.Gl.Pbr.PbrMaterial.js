@@ -107,6 +107,8 @@ const defaultLightStack = [{
     "falloff": 0.5,
     "radius": 60,
     "castLight": 1,
+    "nearFar": [0.01, 100],
+
 }];
 
 if (cgl.glVersion == 1)

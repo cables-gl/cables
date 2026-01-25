@@ -19,76 +19,76 @@ exec.onTriggered = () =>
     if (!bodies || !bodies.length) return;
     if (!attractors || !attractors.length) return;
     const world = op.patch.frameStore.rapier?.world;
-
-    if (inClear.get())
-        for (let i = 0; i < bodies.length; i++)
-        {
-        // if (world.bodies.get(bodies[i].handle))
-        // { /* OK */ }
-        // else
-        // {
-        //     return;
-        // }
-            try
-            {
-                bodies[i].resetForces();
-            }
-            catch (e)
-            {
-                console.log("noooooooooo");
-                return;
-            }
-        }
-
-    if (inApply.get())
+    try
     {
-        const K = inStrength.get();
-        const minDistance = inMinDist.get();
-        const maxDistance = inMaxDist.get();
-
-        for (let j = 0; j < attractors.length; j++)
-        {
-            const attractor = attractors[j];
-            const attractorPos = attractor.translation();
-
+        if (inClear.get())
             for (let i = 0; i < bodies.length; i++)
             {
-                const objectPos = bodies[i].translation();
+                // if (world.bodies.get(bodies[i].handle))
+                // { /* OK */ }
+                // else
+                // {
+                //     return;
+                // }
 
-                const dx = attractorPos.x - objectPos.x;
-                const dy = attractorPos.y - objectPos.y;
-                const dz = attractorPos.z - objectPos.z;
+                bodies[i].resetForces();
+            }
 
-                const distSquared = dx * dx + dy * dy + dz * dz;
-                const distance = Math.sqrt(distSquared);
+        if (inApply.get())
+        {
+            const K = inStrength.get();
+            const minDistance = inMinDist.get();
+            const maxDistance = inMaxDist.get();
 
-                if (distance < minDistance || distance > maxDistance) continue;
+            for (let j = 0; j < attractors.length; j++)
+            {
+                const attractor = attractors[j];
+                const attractorPos = attractor.translation();
 
-                const dirX = dx / distance;
-                const dirY = dy / distance;
-                const dirZ = dz / distance;
-
-                let forceMagnitude = 0;
-
-                if (distance < minDistance)
+                for (let i = 0; i < bodies.length; i++)
                 {
-                    forceMagnitude = K / (distance * distance);
-                }
-                else
-                {
-                    forceMagnitude = K / (distance + 0.1);
-                }
+                    const objectPos = bodies[i].translation();
 
-                // console.log("text", dirX, dirY, dirZ);
-                bodies[i].addForce({
-                    "x": dirX * forceMagnitude,
-                    "y": dirY * forceMagnitude,
-                    "z": dirZ * forceMagnitude
-                }, true);
+                    const dx = attractorPos.x - objectPos.x;
+                    const dy = attractorPos.y - objectPos.y;
+                    const dz = attractorPos.z - objectPos.z;
+
+                    const distSquared = dx * dx + dy * dy + dz * dz;
+                    const distance = Math.sqrt(distSquared);
+
+                    if (distance < minDistance || distance > maxDistance) continue;
+
+                    const dirX = dx / distance;
+                    const dirY = dy / distance;
+                    const dirZ = dz / distance;
+
+                    let forceMagnitude = 0;
+
+                    if (distance < minDistance)
+                    {
+                        forceMagnitude = K / (distance * distance);
+                    }
+                    else
+                    {
+                        forceMagnitude = K / (distance + 0.1);
+                    }
+
+                    // console.log("text", dirX, dirY, dirZ);
+                    bodies[i].addForce({
+                        "x": dirX * forceMagnitude,
+                        "y": dirY * forceMagnitude,
+                        "z": dirZ * forceMagnitude
+                    }, true);
 
                 // else bodies[i].applyTorqueForce({ "x": myVecX.get(), "y": myVecY.get(), "z": myVecZ.get() }, true);
+                }
             }
         }
+    }
+    catch (e)
+    {
+        // console.log("rust exc",e);
+        // return;
     }
     outNum.set(bodies.length);
 

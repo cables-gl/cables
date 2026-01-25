@@ -26,6 +26,7 @@ const
 
     inPositions = op.inArray("Positions"),
     inRots = op.inArray("Rotations"),
+
     inEvents = op.inBool("Events", true),
     inActive = op.inBool("Active", true),
     next = op.outTrigger("Next"),
