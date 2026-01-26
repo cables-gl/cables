@@ -132,6 +132,11 @@ const GltfTargetsRenderer = class
 
         this.tex = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "targetsTexture" });
 
+        if (w > gl.getParameter(gl.MAX_TEXTURE_SIZE) || h > gl.getParameter(gl.MAX_TEXTURE_SIZE)) console.error("gltf morph texture size too big...");
+
+        w = Math.min(w, gl.getParameter(gl.MAX_TEXTURE_SIZE));
+        h = Math.min(h, gl.getParameter(gl.MAX_TEXTURE_SIZE));
+
         this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
 
         // console.log("morphTargets generated texture", w, h);
