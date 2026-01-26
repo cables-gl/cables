@@ -858,6 +858,11 @@ export class Geometry
 /** @deprecated */
 Geometry.buildFromFaces = function (arr, name, optimize)
 {
+    function compareFloat(a, b)
+    {
+        return a - b < 0.001;
+    }
+
     const vertices = [];
     const verticesIndices = [];
 
@@ -871,9 +876,9 @@ Geometry.buildFromFaces = function (arr, name, optimize)
         if (optimize)
             for (let iv = 0; iv < vertices.length; iv += 3)
             {
-                if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
-                if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
-                if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
+                if (compareFloat(vertices[iv + 0], a[0]) && compareFloat(vertices[iv + 1], a[1]) && compareFloat(vertices[iv + 2], a[2])) face[0] = iv / 3;
+                if (compareFloat(vertices[iv + 0], b[0]) && compareFloat(vertices[iv + 1], b[1]) && compareFloat(vertices[iv + 2], b[2])) face[1] = iv / 3;
+                if (compareFloat(vertices[iv + 0], c[0]) && compareFloat(vertices[iv + 1], c[1]) && compareFloat(vertices[iv + 2], c[2])) face[2] = iv / 3;
             }
 
         if (face[0] == -1)
