@@ -860,7 +860,7 @@ Geometry.buildFromFaces = function (arr, name, optimize)
 {
     function compareFloat(a, b)
     {
-        return Math.abs(a - b) < 0.0001;
+        return Math.abs(a - b) > 0.0001;
     }
 
     const vertices = [];
