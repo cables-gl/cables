@@ -644,8 +644,6 @@ export class Geometry
 
     /**
      * @function unIndex
-     * @memberof Geometry
-     * @instance
      * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals
@@ -860,7 +858,7 @@ Geometry.buildFromFaces = function (arr, name, optimize)
 {
     function compareFloat(a, b)
     {
-        return Math.abs(a - b) > 0.0001;
+        return Math.abs(a - b) < 0.0001;
     }
 
     const vertices = [];
