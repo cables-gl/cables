@@ -71,6 +71,16 @@
             },
             {
                 "type": 0,
+                "name": "Linear Damping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Angular Damping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Sensor",
                 "subType": "boolean"
             },
@@ -112,6 +122,10 @@
             {
                 "type": 3,
                 "name": "Positions"
+            },
+            {
+                "type": 3,
+                "name": "Rotations"
             },
             {
                 "type": 0,

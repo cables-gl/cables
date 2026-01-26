@@ -60,17 +60,20 @@ function calcArray()
         switch (planeSelection.get())
         {
         case "XY":
+            rots.push(0, 0, (degInRad - offsetRotRad) * (180 / Math.PI)); // Rotation in degrees, adjusted for offset
             points.push(posx, posy, posz);
             break;
         case "XZ":
+            rots.push(0, -(degInRad - offsetRotRad) * (180 / Math.PI), 0); // Rotation in degrees, adjusted for offset
+
             points.push(posx, posz, posy);
             break;
         case "YZ":
+            rots.push((degInRad - offsetRotRad) * (180 / Math.PI), 0, 0); // Rotation in degrees, adjusted for offset
+
             points.push(posz, posx, posy);
             break;
         }
-
-        rots.push(0, 0, (degInRad - offsetRotRad) * (180 / Math.PI)); // Rotation in degrees, adjusted for offset
     }
 
     if (inClose.get())

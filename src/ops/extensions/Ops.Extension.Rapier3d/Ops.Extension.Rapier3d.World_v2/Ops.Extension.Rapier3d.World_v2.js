@@ -2,6 +2,11 @@ const
     exec = op.inTrigger("Execute"),
     inReset = op.inTriggerButton("Reset"),
     inDebug = op.inBool("Debug", true),
+
+    inGravX = op.inFloat("Gravity X", 0),
+    inGravY = op.inFloat("Gravity Y", -9.81),
+    inGravZ = op.inFloat("Gravity Z", 0),
+
     next = op.outTrigger("Next"),
     outDebugPoints = op.outArray("Debug Splines"),
     outDebugColors = op.outArray("Debug Colors"),
@@ -11,6 +16,16 @@ let rigidBody;
 let world;
 let eventQueue;
 let collisions = {};
+let gravity = { "x": 0.0, "y": 0.0, "z": 0.0 };
+
+inGravX.onChange =
+ inGravY.onChange =
+ inGravZ.onChange = () =>
+ {
+     gravity.x = inGravX.get();
+     gravity.y = inGravY.get();
+     gravity.z = inGravZ.get();
+ };
 
 wait();
 
@@ -29,7 +44,6 @@ inReset.onTriggered = init;
 async function init()
 {
     if (world)world.free();
-    let gravity = { "x": 0.0, "y": -9.81, "z": 0.0 };
     await RAPIER.init();
 
     world = new RAPIER.World(gravity);

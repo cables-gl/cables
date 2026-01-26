@@ -30,7 +30,8 @@ const
     outPos = op.outArray("Result Positions", [], 3),
     outSize = op.outArray("Result Size", [], 3),
     outRot = op.outArray("Result Rotations", [], 4),
-    outCollider = op.outArray("Collider");
+    outCollider = op.outArray("Collider"),
+    outBodies = op.outArray("Bodies");
 
 let needsSetup, lastWorld, oldShape;
 let rigidBodies = [];
@@ -219,6 +220,7 @@ function emitOne()
     collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
     outCollider.setRef(colliders);
     outNumObjects.set(rigidBodies.length);
+    outBodies.setRef(rigidBodies);
 }
 
 function removeBody(i)
@@ -227,6 +229,7 @@ function removeBody(i)
     lastWorld.removeCollider(colliders[i]);
     rigidBodies.splice(i, 1);
     colliders.splice(i, 1);
+    outBodies.setRef(rigidBodies);
 }
 
 function removeBodies()
@@ -243,6 +246,7 @@ function removeBodies()
     outPos.setRef([]);
     outRot.setRef([]);
     outSize.setRef([]);
+    outBodies.setRef(rigidBodies);
 }
 
 op.onDelete = () =>

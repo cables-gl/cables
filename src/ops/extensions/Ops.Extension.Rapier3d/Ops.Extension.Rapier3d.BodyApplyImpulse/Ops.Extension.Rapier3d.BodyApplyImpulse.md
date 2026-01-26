@@ -1,0 +1,1 @@
+Applies an impulse at the center-of-mass of rigid bodies.

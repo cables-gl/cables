@@ -6,8 +6,8 @@ const CMP_ENDSWITH = "endsWith";
 const
     inArray = op.inArray("Array"),
     inKeyToFilterBy = op.inString("Filter Key", ""),
-    inFilterStr = op.inString("Filter Value", ""),
     inKeyCompare = op.inSwitch("Method", [CMP_EQUALS, CMP_STARTSWITH, CMP_ENDSWITH, CMP_INCLUDES], CMP_EQUALS),
+    inFilterStr = op.inString("Filter Value", ""),
     inInvertEquality = op.inBool("Invert Filter", false),
     outArray = op.outArray("arrayOut");
 
@@ -29,6 +29,9 @@ inKeyToFilterBy.onChange =
 inFilterStr.onChange = function ()
 {
     const inValue = inArray.get();
+
+    op.setUiAttrib({ "extendTitle": inKeyToFilterBy.get() + " " + inKeyCompare.get() + " " + inFilterStr.get() });
+
     if (!inValue) return;
 
     if (Array.isArray(inValue))

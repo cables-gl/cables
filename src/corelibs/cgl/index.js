@@ -43,8 +43,8 @@ const CGL = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGL = { ...window.CABLES.CGL, ...CGL };
-window.CGL = { ...window.CGL, ...CGL };
+window.CABLES.CGL = { ...CGL, ...window.CABLES.CGL };
+window.CGL = { ...CGL, ...window.CABLES.CGL, ...window.CGL };
 
 window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
 {

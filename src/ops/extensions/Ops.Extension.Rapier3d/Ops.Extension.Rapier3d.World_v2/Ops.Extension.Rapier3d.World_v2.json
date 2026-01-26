@@ -61,6 +61,21 @@
                 "type": 0,
                 "name": "Debug",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
