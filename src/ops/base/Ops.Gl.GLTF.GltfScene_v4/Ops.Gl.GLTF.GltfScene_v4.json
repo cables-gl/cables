@@ -255,6 +255,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1768298508137
+        },
+        {
+            "message": "Show warning in editor if the morphtarget texture is bigger then browsers max texture size",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769429440778
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
