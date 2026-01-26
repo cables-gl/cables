@@ -1,11 +1,13 @@
 const
     exec = op.inTrigger("Execute"),
-    inReset = op.inTriggerButton("Reset"),
     inDebug = op.inBool("Debug", true),
 
     inGravX = op.inFloat("Gravity X", 0),
     inGravY = op.inFloat("Gravity Y", -9.81),
     inGravZ = op.inFloat("Gravity Z", 0),
+
+    inTimes = op.inInt("Simulate times", 1),
+    inReset = op.inTriggerButton("Reset"),
 
     next = op.outTrigger("Next"),
     outDebugPoints = op.outArray("Debug Splines"),
@@ -17,15 +19,16 @@ let world;
 let eventQueue;
 let collisions = {};
 let gravity = { "x": 0.0, "y": 0.0, "z": 0.0 };
+let params = null;
 
 inGravX.onChange =
- inGravY.onChange =
- inGravZ.onChange = () =>
- {
-     gravity.x = inGravX.get();
-     gravity.y = inGravY.get();
-     gravity.z = inGravZ.get();
- };
+inGravY.onChange =
+inGravZ.onChange = () =>
+{
+    gravity.x = inGravX.get();
+    gravity.y = inGravY.get();
+    gravity.z = inGravZ.get();
+};
 
 wait();
 
@@ -46,10 +49,15 @@ async function init()
     if (world)world.free();
     await RAPIER.init();
 
+    params = new RAPIER.IntegrationParameters();
+
     world = new RAPIER.World(gravity);
     eventQueue = new RAPIER.EventQueue(true);
 
     outVersion.set(RAPIER.version());
+
+    // console.log(world.step.toString());
+
     collisions = {};
 }
 
@@ -61,7 +69,12 @@ exec.onTriggered = () =>
     op.patch.frameStore.rapierWorld = world;
     op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
 
-    world.step(eventQueue);
+    // console.log("params", params);
+
+    for (let i = 0; i < inTimes.get(); i++)
+    {
+        world.step();
+    }
 
     const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
     const result = world.castRay(ray);

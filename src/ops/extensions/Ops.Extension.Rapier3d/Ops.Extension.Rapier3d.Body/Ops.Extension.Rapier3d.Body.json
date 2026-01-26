@@ -71,6 +71,11 @@
             },
             {
                 "type": 0,
+                "name": "Restitution",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Linear Damping",
                 "subType": "number"
             },

@@ -36,6 +36,14 @@
                 "name": "beat"
             },
             {
+                "type": 1,
+                "name": "beat2"
+            },
+            {
+                "type": 1,
+                "name": "beat4"
+            },
+            {
                 "type": 0,
                 "name": "Bpm",
                 "subType": "number"
