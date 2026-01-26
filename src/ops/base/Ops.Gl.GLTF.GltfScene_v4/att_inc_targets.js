@@ -66,6 +66,12 @@ const GltfTargetsRenderer = class
         let h = 0;
         this.numRowsPerTarget = 0;
 
+        const gl = cgl.gl;
+        if (w > gl.getParameter(gl.MAX_TEXTURE_SIZE) || h > gl.getParameter(gl.MAX_TEXTURE_SIZE)) console.error("gltf morph texture size too big...");
+
+        w = Math.min(w, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
+        h = Math.min(h, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
+
         if (geom.morphTargets[0].vertices && geom.morphTargets[0].vertices.length) this.numRowsPerTarget++;
         if (geom.morphTargets[0].vertexNormals && geom.morphTargets[0].vertexNormals.length) this.numRowsPerTarget++;
         if (geom.morphTargets[0].tangents && geom.morphTargets[0].tangents.length) this.numRowsPerTarget++;
@@ -131,11 +137,6 @@ const GltfTargetsRenderer = class
         }
 
         this.tex = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "targetsTexture" });
-
-        if (w > gl.getParameter(gl.MAX_TEXTURE_SIZE) || h > gl.getParameter(gl.MAX_TEXTURE_SIZE)) console.error("gltf morph texture size too big...");
-
-        w = Math.min(w, gl.getParameter(gl.MAX_TEXTURE_SIZE));
-        h = Math.min(h, gl.getParameter(gl.MAX_TEXTURE_SIZE));
 
         this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
 

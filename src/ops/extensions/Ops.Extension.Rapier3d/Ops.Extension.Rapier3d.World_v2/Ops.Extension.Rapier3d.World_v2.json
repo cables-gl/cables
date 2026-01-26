@@ -54,10 +54,6 @@
                 "name": "Execute"
             },
             {
-                "type": 1,
-                "name": "Reset"
-            },
-            {
                 "type": 0,
                 "name": "Debug",
                 "subType": "boolean"
@@ -76,6 +72,15 @@
                 "type": 0,
                 "name": "Gravity Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Simulate times",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [

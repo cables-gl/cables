@@ -8,6 +8,7 @@ const
     inMass = op.inFloat("Mass", 10),
     inFriction = op.inFloat("Friction", 1),
     inDensity = op.inFloat("Density", 1),
+    inRestitution = op.inFloat("Restitution", 0.3),
 
     inDampLin = op.inFloat("Linear Damping", 1),
     inDampAng = op.inFloat("Angular Damping", 1),
@@ -287,6 +288,7 @@ function setup(world)
 
         colliderDesc
             .setMass(inMass.get())
+            .setRestitution(inRestitution.get())
             .setDensity(inDensity.get())
             .setFriction(inFriction.get())
             .setSensor(inSensor.get());
