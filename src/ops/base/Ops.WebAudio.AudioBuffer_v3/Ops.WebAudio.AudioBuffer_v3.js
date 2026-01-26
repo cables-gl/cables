@@ -31,7 +31,7 @@ inUrlPort.onChange = () =>
 
 if (!audioBufferPort.isLinked())
 {
-    op.setUiError("notConnected", "To play back sound, connect this op to a playback operator such as SamplePlayer or AudioBufferPlayer.", 0);
+    op.setUiError("notConnected", "To play back sound, connect this op to AudioBufferPlayer.", 0);
 }
 else
 {
@@ -46,7 +46,7 @@ audioBufferPort.onLinkChanged = () =>
     }
     else
     {
-        op.setUiError("notConnected", "To play back sound, connect this op to a playback operator such as SamplePlayer or AudioBufferPlayer.", 0);
+        op.setUiError("notConnected", "To play back sound, connect this op to AudioBufferPlayer.", 0);
     }
 };
 
@@ -70,6 +70,8 @@ function loadAudioFile(url, loadFromData)
     currentFileUrl = url;
     isLoading = true;
     outLoading.set(isLoading);
+
+    op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
 
     if (!loadFromData)
     {

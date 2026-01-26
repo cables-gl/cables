@@ -1,10 +1,12 @@
+const gravity = { "x": 0.0, "y": -9.81, "z": 0.0 };
+
 const
     exec = op.inTrigger("Execute"),
     inDebug = op.inBool("Debug", true),
 
-    inGravX = op.inFloat("Gravity X", 0),
-    inGravY = op.inFloat("Gravity Y", -9.81),
-    inGravZ = op.inFloat("Gravity Z", 0),
+    inGravX = op.inFloat("Gravity X", gravity.x),
+    inGravY = op.inFloat("Gravity Y", gravity.y),
+    inGravZ = op.inFloat("Gravity Z", gravity.z),
 
     inTimes = op.inInt("Simulate times", 1),
     inReset = op.inTriggerButton("Reset"),
@@ -18,7 +20,6 @@ let rigidBody;
 let world;
 let eventQueue;
 let collisions = {};
-let gravity = { "x": 0.0, "y": 0.0, "z": 0.0 };
 let params = null;
 
 inGravX.onChange =
@@ -55,8 +56,6 @@ async function init()
     eventQueue = new RAPIER.EventQueue(true);
 
     outVersion.set(RAPIER.version());
-
-    // console.log(world.step.toString());
 
     collisions = {};
 }

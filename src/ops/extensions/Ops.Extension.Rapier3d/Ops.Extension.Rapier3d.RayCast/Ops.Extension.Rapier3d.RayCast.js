@@ -96,6 +96,7 @@ function update()
             }
             else
             {
+                outName.set("unknown");
                 outHasHit.set(false);
             }
         }

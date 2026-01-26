@@ -23,6 +23,10 @@
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Auto",
+                    "Manual"
+                ],
                 "subType": "integer"
             },
             {
@@ -68,12 +72,22 @@
             {
                 "type": 0,
                 "name": "align index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "group": "Font",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Vertical align index",
+                "values": [
+                    "Top",
+                    "Middle",
+                    "Bottom"
+                ],
                 "group": "Font",
                 "subType": "integer"
             },
@@ -107,6 +121,11 @@
             {
                 "type": 0,
                 "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             },
@@ -119,6 +138,14 @@
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "group": "Texture",
                 "subType": "integer"
             },
@@ -393,5 +420,6 @@
         ]
     },
     "exampleProjectId": "RZsPWU",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT"
 }

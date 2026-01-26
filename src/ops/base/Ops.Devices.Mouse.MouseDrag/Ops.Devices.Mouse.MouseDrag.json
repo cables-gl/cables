@@ -5,39 +5,54 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input Type index",
+                "values": [
+                    "All",
+                    "Mouse",
+                    "Touch"
+                ],
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Area index",
+                "values": [
+                    "Canvas Area",
+                    "Canvas",
+                    "Document"
+                ],
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Delta X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Delta Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "Abs Movement",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Is Dragging",
                 "subType": "number"
             }
@@ -59,5 +74,6 @@
     "exampleProjectId": "hH8f_6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

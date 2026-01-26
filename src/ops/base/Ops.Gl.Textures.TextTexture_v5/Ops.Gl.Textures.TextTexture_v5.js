@@ -159,7 +159,7 @@ document.fonts.ready.then(() =>
     if (reloadOnFont.get())
     {
         needsRefresh = true;
-        console.log("reload on font...");
+        // console.log("reload on font...");
     }
 });
 
@@ -168,7 +168,7 @@ document.fonts.onloadingdone = function (fontFaceSetEvent)
     if (reloadOnFont.get())
     {
         needsRefresh = true;
-        console.log("reload on font...");
+        // console.log("reload on font...");
     }
 };
 

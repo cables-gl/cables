@@ -5,6 +5,7 @@ const
     area = op.inSwitch("Area", ["Canvas Area", "Canvas", "Document"], "Canvas Area"),
     outDeltaX = op.outNumber("Delta X"),
     outDeltaY = op.outNumber("Delta Y"),
+    outAbs = op.outNumber("Abs Movement"),
     outDragging = op.outNumber("Is Dragging");
 
 let listenerElement = null;
@@ -15,6 +16,8 @@ let pressed = false;
 let lastX = 0;
 let lastY = 0;
 let firstMove = true;
+let startX = 0;
+let startY = 0;
 
 inputType.onChange =
 area.onChange = updateArea;
@@ -53,17 +56,26 @@ function onMouseMove(e)
             outDeltaY.set(0);
             outDeltaX.set(deltaX);
             outDeltaY.set(deltaY);
-        }
 
-        firstMove = false;
+            outAbs.set(Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY));
+        }
 
         lastX = e.clientX;
         lastY = e.clientY;
+        if (firstMove)
+        {
+            startX = lastX;
+            startY = lastY;
+        }
+
+        firstMove = false;
     }
 }
 
 function onMouseDown(e)
 {
+    outAbs.set(0);
+
     try { listenerElement.setPointerCapture(e.pointerId); }
     catch (_e) {}
 

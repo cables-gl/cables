@@ -20,6 +20,19 @@
                 "type": 0,
                 "name": "Loop",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rewind on play",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Play Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Pause"
             }
         ],
         "portsOut": [
@@ -55,6 +68,13 @@
             "type": "rename",
             "author": "pandur",
             "date": 1734352723387
+        },
+        {
+            "message": "Added simple play trigger input button",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1769442324448
         }
-    ]
+    ],
+    "license": "MIT"
 }

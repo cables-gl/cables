@@ -56,7 +56,7 @@ exec.onTriggered = () =>
 function updateCopy()
 {
     // if(tc)return
-    console.log("inPixelFormat.get(),", inPixelFormat.get());
+    // console.log("inPixelFormat.get(),", inPixelFormat.get());
     tc = new CGL.CopyTexture(op.patch.cgl, op.objName,
         {
             "shader": attachments.rgbe2fp_frag,

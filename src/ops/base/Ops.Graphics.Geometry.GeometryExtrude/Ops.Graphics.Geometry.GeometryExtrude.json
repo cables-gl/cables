@@ -76,5 +76,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }
