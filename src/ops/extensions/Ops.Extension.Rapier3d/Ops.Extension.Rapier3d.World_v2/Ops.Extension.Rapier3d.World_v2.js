@@ -21,6 +21,7 @@ let world;
 let eventQueue;
 let collisions = {};
 let params = null;
+let needsReset = true;
 
 inGravX.onChange =
 inGravY.onChange =
@@ -43,36 +44,44 @@ function wait()
     else init();
 }
 
-inReset.onTriggered = init;
+inReset.onTriggered = () => { needsReset = true; };
 
 async function init()
 {
-    if (world)world.free();
-    await RAPIER.init();
-
-    params = new RAPIER.IntegrationParameters();
-
-    world = new RAPIER.World(gravity);
-    eventQueue = new RAPIER.EventQueue(true);
-
-    outVersion.set(RAPIER.version());
-
-    collisions = {};
+    if (!CABLES.rapierInited)
+    {
+        CABLES.rapierInited = 1;
+        console.log("init rapier.......");
+        await RAPIER.init();
+        CABLES.rapierInited = 2;
+    }
 }
 
 exec.onTriggered = () =>
 {
+    if (needsReset && window.RAPIER && CABLES.rapierInited == 2 && window.RAPIER.IntegrationParameters)
+    {
+        if (world)world.free();
+
+        params = new RAPIER.IntegrationParameters();
+        world = new RAPIER.World(gravity);
+        eventQueue = new RAPIER.EventQueue(true);
+        outVersion.set(RAPIER.version());
+        collisions = {};
+        needsReset = false;
+    }
+
     if (!world) return;
 
     const oldWorld = op.patch.frameStore.rapierWorld;
     op.patch.frameStore.rapierWorld = world;
     op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
 
-    // console.log("params", params);
-
     for (let i = 0; i < inTimes.get(); i++)
     {
-        world.step();
+        if (world)
+
+            world.step();
     }
 
     const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
