@@ -20,13 +20,12 @@ const cgl = op.patch.cgl;
 let wasClicked = false;
 
 const bones = [
-    // Thumb
+
     ["wrist", "thumb-metacarpal"],
     ["thumb-metacarpal", "thumb-phalanx-proximal"],
     ["thumb-phalanx-proximal", "thumb-phalanx-distal"],
     ["thumb-phalanx-distal", "thumb-tip"],
 
-    // Index
     ["wrist", "index-finger-metacarpal"],
     ["index-finger-metacarpal", "index-finger-phalanx-proximal"],
     ["index-finger-phalanx-proximal", "index-finger-phalanx-intermediate"],
@@ -78,9 +77,6 @@ inUpdate.onTriggered = () =>
             {
                 found = true;
 
-                // outGp.setRef(inputSources[i]);
-                // if (inputSources[i].gamepad)setGamepadValues(inputSources[i].gamepad);
-
                 const jointPositions = {};
                 for (const [jointName, jointSpace] of inputSources[i].hand)
                 { // XRHand is iterable
@@ -92,8 +88,6 @@ inUpdate.onTriggered = () =>
                 outGp.setRef(jointPositions);
 
                 /// ///////////////////
-
-                // console.log("disttttttttttt",dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]));
 
                 if (dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.06)
                 {

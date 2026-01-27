@@ -6,6 +6,7 @@ const
     inMainloop = op.inTrigger("Mainloop"),
     inStart = op.inTriggerButton("Start"),
     inStop = op.inTriggerButton("Stop"),
+    inImmersion = op.inSwitch("Immersion", ["VR", "AR"], "VR"),
     inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\ntransform: translate(-50%,-50%);\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");", "inline-css"),
     inRender2Tex = op.inBool("Render to texture", false),
@@ -46,7 +47,7 @@ inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-if (xr) xr.isSessionSupported("immersive-vr").then(
+if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
     {
         outVr.set(true);
@@ -87,38 +88,36 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-vr", {
-
+    xr.requestSession("immersive-" + inImmersion.get().toLowerCase(), {
         "optionalFeatures": ["hand-tracking", "local-floor"]
-    })
-        .then(
-            async (session) =>
-            {
-                xrSession = session;
-                outSession.set(true);
+    }).then(
+        async (session) =>
+        {
+            xrSession = session;
+            outSession.set(true);
 
-                xrSession.requestReferenceSpace("local").then(
-                    (refSpace) =>
-                    {
-                        xrReferenceSpace = refSpace;
-                    });
-
-                if (xrSession)
+            xrSession.requestReferenceSpace("local").then(
+                (refSpace) =>
                 {
-                    await cgl.gl.makeXRCompatible();
+                    xrReferenceSpace = refSpace;
+                });
 
-                    let canvas = cgl.canvas;
-                    webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
-
-                    xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
-                    xrSession.requestAnimationFrame(onXRFrame);
-                }
-            },
-            (err) =>
+            if (xrSession)
             {
-                // error....
-                op.error(err);
-            });
+                await cgl.gl.makeXRCompatible();
+
+                let canvas = cgl.canvas;
+                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+
+                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+                xrSession.requestAnimationFrame(onXRFrame);
+            }
+        },
+        (err) =>
+        {
+            // error....
+            op.error(err);
+        });
 }
 
 function onXRFrame(hrTime, xrFrame)
@@ -154,7 +153,9 @@ function onXRFrame(hrTime, xrFrame)
 
         if (inRender2Tex.get()) r2texStart();
 
-        cgl.gl.clearColor(0, 0, 0, 1);
+        if (inImmersion.get() == "VR") cgl.gl.clearColor(0, 0, 0, 1);
+        else cgl.gl.clearColor(0, 0, 0, 0);
+
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         op.patch.cg = cgl;
