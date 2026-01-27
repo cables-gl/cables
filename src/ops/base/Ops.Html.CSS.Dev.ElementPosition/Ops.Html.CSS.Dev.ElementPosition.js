@@ -4,22 +4,20 @@ const
     inEle = op.inObject("Element", null, "element"),
     inDoTranslate = op.inBool("Translate Active", true),
 
-    inTransX = op.inFloat("Pos Left", 0),
+    inTransYU = op.inSwitch("Pos Top Unit", ["Off", "px", "%"], "px"),
     inTransXU = op.inSwitch("Pos Left Unit", ["Off", "px", "%"], "px"),
-
-    inTransXR = op.inFloat("Pos Right", 0),
-    inTransXRU = op.inSwitch("Pos Right Unit", ["Off", "px", "%"], "px"),
+    inTransXRU = op.inSwitch("Pos Right Unit", ["Off", "px", "%"], "Off"),
+    inTransYBU = op.inSwitch("Pos Bottom Unit", ["Off", "px", "%"], "Off"),
 
     inTransY = op.inFloat("Pos Top", 0),
-    inTransYU = op.inSwitch("Pos Top Unit", ["Off", "px", "%"], "Off"),
-
+    inTransX = op.inFloat("Pos Left", 0),
+    inTransXR = op.inFloat("Pos Right", 0),
     inTransYB = op.inFloat("Pos Bottom", 0),
-    inTransYBU = op.inSwitch("Pos Bottom Unit", ["Off", "px", "%"], "Off"),
 
     inDoOrigin = op.inBool("Set Origin", true),
 
-    inOffsetX = op.inFloat("Offset X", 0),
-    inOffsetY = op.inFloat("Offset Y", 0),
+    inOriginX = op.inSwitch("Origin X", ["Left", "Center", "Right"]),
+    inOriginY = op.inSwitch("Origin Y", ["Top", "Center", "Bottom"]),
 
     inDoZ = op.inBool("Z Index Active", false),
     inZ = op.inFloat("Z Index", 100),
@@ -29,16 +27,13 @@ const
 op.setPortGroup("Element", [inEle]);
 op.setPortGroup("Translation", [inDoTranslate]);
 
-// inTransUnit.onChange =
-
-inOffsetX.onChange =
-inOffsetY.onChange =
-inTransX.onChange =
+inOriginX.onChange =
+    inOriginY.onChange =
+    inTransX.onChange =
     inTransXR.onChange =
     inTransY.onChange =
     inTransYB.onChange =
-    inZ.onChange =
-    update;
+    inZ.onChange = update;
 
 let ele = null;
 let timeoutUpd = null;
@@ -50,7 +45,6 @@ inTransXU.onChange =
 
 inDoTranslate.onChange =
     inDoOrigin.onChange =
-
     inDoZ.onChange = updateUi;
 
 updateUi();
@@ -79,6 +73,9 @@ function updateUi()
     inTransX.setUiAttribs({ "greyout": inTransXU.get() == "Off" });
     inTransXR.setUiAttribs({ "greyout": inTransXRU.get() == "Off" });
 
+    inOriginX.setUiAttribs({ "greyout": !inDoOrigin.get() });
+    inOriginY.setUiAttribs({ "greyout": !inDoOrigin.get() });
+
     update();
 }
 
@@ -106,8 +103,23 @@ function update()
 
         try
         {
-            str += "translate(" + inOffsetX.get() + "% , " + inOffsetY.get() + "%) ";
-            ele.style.transform = str;
+            if (inDoOrigin.get())
+            {
+                let x = "0%";
+                let y = "0%";
+                if (inOriginX.get() == "Center")x = "-50%";
+                if (inOriginX.get() == "Right")x = "-100%";
+                if (inOriginY.get() == "Bottom")y = "-100%";
+                if (inOriginY.get() == "Center")y = "-50%";
+
+                str += "translate(";
+                str += x + " , ";
+                str += y + "";
+                str += ") ";
+                ele.style.transform = str;
+            }
+            else
+                ele.style.transform = "";
         }
         catch (e)
         {
