@@ -1,0 +1,103 @@
+{
+    "id": "1b61a034-dc6f-447e-b781-d0a6b59b4a61",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1655275440788
+        },
+        {
+            "message": "Ops.User.pandur.WebXrVrController renamed to Ops.Dev.WebXrVrController",
+            "author": "pandur",
+            "date": 1655279100239
+        },
+        {
+            "message": "Ops.Dev.WebXrVrController renamed to Ops.WebXr.Vr.VrController",
+            "author": "pandur",
+            "date": 1665427740042
+        },
+        {
+            "message": "now correctly registers all button interactions",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1671034929002
+        },
+        {
+            "message": "Ops.WebXr.Vr.VrController renamed to Ops.Devices.WebXr.Vr.VrController",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1701851262305
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1769525326491
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1769525326491,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Handedness index",
+                "values": [
+                    "left",
+                    "right"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Hand Object"
+            },
+            {
+                "type": 3,
+                "name": "Bones"
+            },
+            {
+                "type": 1,
+                "name": "Transformed Position"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "tracking of vr hand controller",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

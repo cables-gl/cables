@@ -1,0 +1,124 @@
+const
+    inUpdate = op.inTrigger("Update"),
+    inHand = op.inSwitch("Handedness", ["left", "right"], "right"),
+    next = op.outTrigger("Next"),
+
+    outX = op.outNumber("Position X"),
+    outY = op.outNumber("Position Y"),
+    outZ = op.outNumber("Position Z"),
+
+    outGp = op.outObject("Hand Object"),
+    outBones = op.outArray("Bones"),
+
+    outTransformed = op.outTrigger("Transformed Position"),
+
+    outFound = op.outBoolNum("Found");
+
+const cgl = op.patch.cgl;
+
+const bones = [
+    // Thumb
+    ["wrist", "thumb-metacarpal"],
+    ["thumb-metacarpal", "thumb-phalanx-proximal"],
+    ["thumb-phalanx-proximal", "thumb-phalanx-distal"],
+    ["thumb-phalanx-distal", "thumb-tip"],
+
+    // Index
+    ["wrist", "index-finger-metacarpal"],
+    ["index-finger-metacarpal", "index-finger-phalanx-proximal"],
+    ["index-finger-phalanx-proximal", "index-finger-phalanx-intermediate"],
+    ["index-finger-phalanx-intermediate", "index-finger-phalanx-distal"],
+    ["index-finger-phalanx-distal", "index-finger-tip"],
+
+    ["wrist", "middle-finger-metacarpal"],
+    ["middle-finger-metacarpal", "middle-finger-phalanx-proximal"],
+    ["middle-finger-phalanx-proximal", "middle-finger-phalanx-intermediate"],
+    ["middle-finger-phalanx-intermediate", "middle-finger-phalanx-distal"],
+    ["middle-finger-phalanx-distal", "middle-finger-tip"],
+
+    ["wrist", "ring-finger-metacarpal"],
+    ["ring-finger-metacarpal", "ring-finger-phalanx-proximal"],
+    ["ring-finger-phalanx-proximal", "ring-finger-phalanx-intermediate"],
+    ["ring-finger-phalanx-intermediate", "ring-finger-phalanx-distal"],
+    ["ring-finger-phalanx-distal", "ring-finger-tip"],
+
+    ["wrist", "pinky-finger-metacarpal"],
+    ["pinky-finger-metacarpal", "pinky-finger-phalanx-proximal"],
+    ["pinky-finger-phalanx-proximal", "pinky-finger-phalanx-intermediate"],
+    ["pinky-finger-phalanx-intermediate", "pinky-finger-phalanx-distal"],
+    ["pinky-finger-phalanx-distal", "pinky-finger-tip"],
+
+];
+
+inUpdate.onTriggered = () =>
+{
+    let found = false;
+
+    if (op.patch.cgl.tempData.xrSession)
+    {
+        let xrSession = op.patch.cgl.tempData.xrSession;
+
+        const inputSources = xrSession.inputSources;
+
+        for (let i = 0; i < inputSources.length; i++)
+        {
+            if (inputSources[i].hand && inputSources[i].handedness === inHand.get())
+            {
+                found = true;
+
+                // outGp.setRef(inputSources[i]);
+                // if (inputSources[i].gamepad)setGamepadValues(inputSources[i].gamepad);
+
+                const jointPositions = {};
+                for (const [jointName, jointSpace] of inputSources[i].hand)
+                { // XRHand is iterable
+                    const pose = cgl.tempData.xrFrame.getJointPose(jointSpace, cgl.tempData.xrReferenceSpace);
+                    if (!pose) continue;
+
+                    const { x, y, z } = pose.transform.position;
+                    jointPositions[jointName] = [x, y, z];
+                }
+                outGp.setRef(jointPositions);
+
+                /// ////////////////////
+
+                const boneArray = [];
+
+                for (const [a, b] of bones)
+                {
+                    const pa = jointPositions[a];
+                    const pb = jointPositions[b];
+                    if (!pa || !pb) continue;
+
+                    boneArray.push(pa[0], pa[1], pa[2]);
+                    boneArray.push(pb[0], pb[1], pb[2]);
+                }
+
+                outBones.setRef(boneArray);
+
+                let controlPose = cgl.tempData.xrFrame.getPose(inputSources[i].gripSpace, cgl.tempData.xrReferenceSpace);
+                if (controlPose && controlPose.transform)
+                {
+                    cgl.pushModelMatrix();
+
+                    mat4.multiply(cgl.mMatrix, cgl.mMatrix, controlPose.transform.matrix);
+                    outX.set(controlPose.transform.position.x);
+                    outY.set(controlPose.transform.position.y);
+                    outZ.set(controlPose.transform.position.z);
+
+                    outTransformed.trigger();
+
+                    cgl.popModelMatrix();
+                }
+                else op.log("vr controller: no controlpose transform?!");
+
+                break;
+            }
+        }
+    }
+    if (!found) outGp.setRef(null);
+
+    outFound.set(found);
+
+    next.trigger();
+};

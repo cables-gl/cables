@@ -4,6 +4,7 @@ https://web.dev/vr-comes-to-the-web-pt-ii/
 
 const
     inMainloop = op.inTrigger("Mainloop"),
+    inStart = op.inTriggerButton("Start"),
     inStop = op.inTriggerButton("Stop"),
     inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\ntransform: translate(-50%,-50%);\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");", "inline-css"),
@@ -41,6 +42,7 @@ let xrReferenceSpace = null;
 let vmat = mat4.create();
 let xrViewerPose = null;
 
+inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
@@ -85,7 +87,10 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-vr", {})
+    xr.requestSession("immersive-vr", {
+
+        "optionalFeatures": ["hand-tracking", "local-floor"]
+    })
         .then(
             async (session) =>
             {
@@ -134,8 +139,7 @@ function onXRFrame(hrTime, xrFrame)
 
         if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 
-        outPose.set(null);
-        outPose.set(xrViewerPose);
+        outPose.setRef(xrViewerPose);
 
         if (xrViewerPose)
         {

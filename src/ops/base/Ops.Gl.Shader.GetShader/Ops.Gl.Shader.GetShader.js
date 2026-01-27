@@ -20,8 +20,7 @@ inTrigger.onTriggered = () =>
 
     mod.bind();
     const sh = op.patch.cgl.getShader();
-    // sh.bind();
-    outShader.set(sh);
+    outShader.setRef(sh);
     mod.unbind();
     next.trigger();
 };
