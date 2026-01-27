@@ -2,33 +2,6 @@
     "id": "1b61a034-dc6f-447e-b781-d0a6b59b4a61",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1655275440788
-        },
-        {
-            "message": "Ops.User.pandur.WebXrVrController renamed to Ops.Dev.WebXrVrController",
-            "author": "pandur",
-            "date": 1655279100239
-        },
-        {
-            "message": "Ops.Dev.WebXrVrController renamed to Ops.WebXr.Vr.VrController",
-            "author": "pandur",
-            "date": 1665427740042
-        },
-        {
-            "message": "now correctly registers all button interactions",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1671034929002
-        },
-        {
-            "message": "Ops.WebXr.Vr.VrController renamed to Ops.Devices.WebXr.Vr.VrController",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701851262305
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
@@ -74,6 +47,10 @@
                 "subType": "number"
             },
             {
+                "type": 1,
+                "name": "click"
+            },
+            {
                 "type": 2,
                 "name": "Hand Object"
             },
@@ -92,7 +69,6 @@
             }
         ]
     },
-    "summary": "tracking of vr hand controller",
     "docs": {
         "ports": []
     },

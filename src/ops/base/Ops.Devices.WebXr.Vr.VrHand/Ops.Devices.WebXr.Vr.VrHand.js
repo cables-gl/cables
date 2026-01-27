@@ -7,6 +7,8 @@ const
     outY = op.outNumber("Position Y"),
     outZ = op.outNumber("Position Z"),
 
+    outClicked = op.outTrigger("click"),
+
     outGp = op.outObject("Hand Object"),
     outBones = op.outArray("Bones"),
 
@@ -15,6 +17,7 @@ const
     outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
+let wasClicked = false;
 
 const bones = [
     // Thumb
@@ -50,6 +53,15 @@ const bones = [
 
 ];
 
+function dist3d(a, b)
+{
+    const xd = b[0] - a[0];
+    const yd = b[1] - a[1];
+    const zd = b[2] - a[2];
+
+    return Math.sqrt(xd * xd + yd * yd + zd * zd);
+}
+
 inUpdate.onTriggered = () =>
 {
     let found = false;
@@ -75,10 +87,26 @@ inUpdate.onTriggered = () =>
                     const pose = cgl.tempData.xrFrame.getJointPose(jointSpace, cgl.tempData.xrReferenceSpace);
                     if (!pose) continue;
 
-                    const { x, y, z } = pose.transform.position;
-                    jointPositions[jointName] = [x, y, z];
+                    jointPositions[jointName] = [pose.transform.position.x, pose.transform.position.y, pose.transform.position.z];
                 }
                 outGp.setRef(jointPositions);
+
+                /// ///////////////////
+
+                // console.log("disttttttttttt",dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]));
+
+                if (dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.06)
+                {
+                    if (!wasClicked)
+                    {
+                        wasClicked = true;
+                        outClicked.trigger();
+                    }
+                }
+                else
+                {
+                    wasClicked = false;
+                }
 
                 /// ////////////////////
 
