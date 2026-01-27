@@ -1,0 +1,89 @@
+{
+    "id": "dbd46acc-d915-4800-980d-5868577859bd",
+    "changelog": [
+        {
+            "message": "added pixelformat selection",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1765974967213
+        },
+        {
+            "message": "Added scale parameter to control the width/height of the resulting grid",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1769505653738
+        }
+    ],
+    "coreLibs": [
+        "cgl_copytexture",
+        "cgl"
+    ],
+    "authorName": "pandur",
+    "created": 1769504440461,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "RGBE Texture",
+                "uititle": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Aspect",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Threshold",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeats",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeats Spacing",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "HDR Texture",
+                "objType": "texture"
+            }
+        ]
+    },
+    "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "PrkdnENo8wQ"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "nMBUVW",
+    "license": "MIT"
+}
