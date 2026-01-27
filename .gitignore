@@ -2,6 +2,7 @@
 src/ops/users
 src/ops/teams
 src/ops/patches
+src/ops/extensions_develop
 .idea/
 node_modules
 /dist/
