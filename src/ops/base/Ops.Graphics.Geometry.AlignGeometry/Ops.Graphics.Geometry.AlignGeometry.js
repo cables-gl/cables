@@ -1,8 +1,8 @@
 const
     geometry = op.inObject("Geometry"),
-    x = op.inValueSelect("X", ["Ignore", "Center", "Max", "Min"], "Ignore"),
-    y = op.inValueSelect("Y", ["Ignore", "Center", "Max", "Min"], "Ignore"),
-    z = op.inValueSelect("Z", ["Ignore", "Center", "Max", "Min"], "Ignore"),
+    x = op.inSwitch("X", ["Ignore", "Center", "Max", "Min"], "Ignore"),
+    y = op.inSwitch("Y", ["Ignore", "Center", "Max", "Min"], "Ignore"),
+    z = op.inSwitch("Z", ["Ignore", "Center", "Max", "Min"], "Ignore"),
     outGeom = op.outObject("Result");
 
 x.onChange = y.onChange = z.onChange = geometry.onChange = update;

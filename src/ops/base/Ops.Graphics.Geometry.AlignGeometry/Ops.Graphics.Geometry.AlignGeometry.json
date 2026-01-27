@@ -24,16 +24,34 @@
             {
                 "type": 0,
                 "name": "X index",
+                "values": [
+                    "Ignore",
+                    "Center",
+                    "Max",
+                    "Min"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Y index",
+                "values": [
+                    "Ignore",
+                    "Center",
+                    "Max",
+                    "Min"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Z index",
+                "values": [
+                    "Ignore",
+                    "Center",
+                    "Max",
+                    "Min"
+                ],
                 "subType": "integer"
             }
         ],
@@ -71,5 +89,6 @@
         ]
     },
     "youtubeids": [],
-    "exampleProjectId": "FbXQ-G"
+    "exampleProjectId": "FbXQ-G",
+    "license": "MIT"
 }
