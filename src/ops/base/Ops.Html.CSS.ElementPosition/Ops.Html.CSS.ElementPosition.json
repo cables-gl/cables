@@ -128,7 +128,6 @@
             }
         ]
     },
-    "summary": "translate,scale and rotate a HTML element using css transform",
     "docs": {
         "ports": []
     },
