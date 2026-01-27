@@ -1,5 +1,3 @@
-import { CGP } from "../cgp/index.js";
-
 export class WebGpuOp
 {
     constructor(op)
