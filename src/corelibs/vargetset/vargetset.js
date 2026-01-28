@@ -254,6 +254,8 @@ export class VarGetOpWrapper
         this._varnamePort.set(newname);
         this._updateVarNamesDropdown();
         this._updateTitle();
+
+        if (!this._variable) this._variable = this._op.patch.getVar(newname);
         this._listenerId = this._variable.on("change", this._setValueOut.bind(this));
     }
 
