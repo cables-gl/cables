@@ -652,8 +652,8 @@ export class Patch extends Events
                             if (op.getFirstPortIn().getType() == op.getFirstPortOut().getType() &&
                                 op.getFirstPortIn().isLinked())
                             {
-                                reLinkP1 = op.getFirstPortIn().links[0].getOtherPort(op.getFirstPortIn());
-                                reLinkP2 = op.getFirstPortOut().links[0].getOtherPort(op.getFirstPortOut());
+                                reLinkP1 = op.getFirstPortIn()?.links[0]?.getOtherPort(op.getFirstPortIn());
+                                reLinkP2 = op.getFirstPortOut()?.links[0]?.getOtherPort(op.getFirstPortOut());
                             }
                         }
                     }
@@ -673,7 +673,7 @@ export class Patch extends Events
                     opToDelete.cleanUp();
 
                     /* minimalcore:start */
-                    if (reLinkP1 !== null && reLinkP2 !== null)
+                    if (reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
                     {
                         this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                     }
