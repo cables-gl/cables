@@ -657,7 +657,7 @@ export class CglContext extends CgContext
      */
     checkFrameStarted(string)
     {
-        if (!this._frameStarted)
+        if (CABLES.UI && CABLES.UI.showDevInfo && !this._frameStarted)
         {
             this._log.warn("frame not started " + string);
 
