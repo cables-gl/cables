@@ -6,6 +6,18 @@
             "author": "pandur",
             "date": 1655205733018,
             "type": "new"
+        },
+        {
+            "message": "Toggle between immersion AR and VR, choose AR to have a pass through mode on supporting headsets, like quest 3",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1769530114260
+        },
+        {
+            "message": "Better positioning of VR camera, much more exact overlaying when rendering nearby objects",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769592362782
         }
     ],
     "authorName": "pandur",
@@ -18,7 +30,20 @@
             },
             {
                 "type": 1,
+                "name": "Start"
+            },
+            {
+                "type": 1,
                 "name": "Stop"
+            },
+            {
+                "type": 0,
+                "name": "Immersion index",
+                "values": [
+                    "VR",
+                    "AR"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,
