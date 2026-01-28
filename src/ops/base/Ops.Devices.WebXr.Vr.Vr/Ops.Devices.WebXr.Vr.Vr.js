@@ -1,7 +1,3 @@
-/*
-https://web.dev/vr-comes-to-the-web-pt-ii/
-*/
-
 const
     inMainloop = op.inTrigger("Mainloop"),
     inStart = op.inTriggerButton("Start"),
@@ -256,7 +252,7 @@ function renderEye(view)
 
     cgl.pushViewMatrix();
 
-    mat4.invert(cgl.vMatrix, xrViewerPose.transform.matrix);
+    mat4.invert(cgl.vMatrix, view.transform.matrix);
 
     let viewport = glLayer.getViewport(view);
     cgl.gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
@@ -348,7 +344,7 @@ function r2texEnd()
 
 let geom = new CGL.Geometry("webxr final texture draw rectangle");
 let mesh = null;
-const shader = new CGL.Shader(cgl, "fullscreenrectangle");
+const shader = new CGL.Shader(cgl, "vr rect");
 shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
 shader.setSource(attachments.present_vert, attachments.present_frag);
 
