@@ -1,10 +1,8 @@
-/*
-https://web.dev/vr-comes-to-the-web-pt-ii/
-*/
-
 const
     inMainloop = op.inTrigger("Mainloop"),
+    inStart = op.inTriggerButton("Start"),
     inStop = op.inTriggerButton("Stop"),
+    inImmersion = op.inSwitch("Immersion", ["VR", "AR"], "VR"),
     inShowButton = op.inBool("Show Button", true),
     inButtonStyle = op.inStringEditor("Button Style", "padding:10px;\nposition:absolute;\nleft:50%;\ntop:50%;\ntransform: translate(-50%,-50%);\nwidth:50px;\nheight:50px;\ncursor:pointer;\nborder-radius:40px;\nbackground:#444;\nbackground-repeat:no-repeat;\nbackground-size:70%;\nbackground-position:center center;\nz-index:9999;\nbackground-image:url(data:image/svg+xml," + attachments.icon_svg + ");", "inline-css"),
     inRender2Tex = op.inBool("Render to texture", false),
@@ -29,22 +27,26 @@ op.setPortGroup("Startbutton", [inButtonStyle, inShowButton]);
 op.setPortGroup("Texture", [inRender2Tex, msaa]);
 
 let msEyes = [0, 0];
-let xr = navigator.xr;
+const xr = navigator.xr;
 let fb = null;
-
 let hadError = false;
 let buttonEle = null;
 let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
 let xrReferenceSpace = null;
-let vmat = mat4.create();
 let xrViewerPose = null;
+let geom = new CGL.Geometry("webxr final texture draw rectangle");
+let mesh = null;
+const shader = new CGL.Shader(cgl, "vr rect");
+shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
+shader.setSource(attachments.present_vert, attachments.present_frag);
 
+inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-if (xr) xr.isSessionSupported("immersive-vr").then(
+if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
     {
         outVr.set(true);
@@ -85,35 +87,36 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-vr", {})
-        .then(
-            async (session) =>
-            {
-                xrSession = session;
-                outSession.set(true);
+    xr.requestSession("immersive-" + inImmersion.get().toLowerCase(), {
+        "optionalFeatures": ["hand-tracking", "local-floor"]
+    }).then(
+        async (session) =>
+        {
+            xrSession = session;
+            outSession.set(true);
 
-                xrSession.requestReferenceSpace("local").then(
-                    (refSpace) =>
-                    {
-                        xrReferenceSpace = refSpace;
-                    });
-
-                if (xrSession)
+            xrSession.requestReferenceSpace("local").then(
+                (refSpace) =>
                 {
-                    await cgl.gl.makeXRCompatible();
+                    xrReferenceSpace = refSpace;
+                });
 
-                    let canvas = cgl.canvas;
-                    webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
-
-                    xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
-                    xrSession.requestAnimationFrame(onXRFrame);
-                }
-            },
-            (err) =>
+            if (xrSession)
             {
-                // error....
-                op.error(err);
-            });
+                await cgl.gl.makeXRCompatible();
+
+                let canvas = cgl.canvas;
+                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+
+                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+                xrSession.requestAnimationFrame(onXRFrame);
+            }
+        },
+        (err) =>
+        {
+            // error....
+            op.error(err);
+        });
 }
 
 function onXRFrame(hrTime, xrFrame)
@@ -134,8 +137,7 @@ function onXRFrame(hrTime, xrFrame)
 
         if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 
-        outPose.set(null);
-        outPose.set(xrViewerPose);
+        outPose.setRef(xrViewerPose);
 
         if (xrViewerPose)
         {
@@ -143,13 +145,15 @@ function onXRFrame(hrTime, xrFrame)
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
-        CABLES.patch.emitOnAnimFrameEvent();
+        op.patch.updateAnims();
 
         cgl.renderStart(cgl);
 
         if (inRender2Tex.get()) r2texStart();
 
-        cgl.gl.clearColor(0, 0, 0, 1);
+        if (inImmersion.get() == "VR") cgl.gl.clearColor(0, 0, 0, 1);
+        else cgl.gl.clearColor(0, 0, 0, 0);
+
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         op.patch.cg = cgl;
@@ -200,7 +204,7 @@ function onXRFrame(hrTime, xrFrame)
 
         cgl.renderEnd(cgl);
 
-        outMs.set(msEyes);
+        outMs.setRef(msEyes);
 
         CGL.MESH.lastShader = null;
         CGL.MESH.lastMesh = null;
@@ -215,10 +219,7 @@ function onXRFrame(hrTime, xrFrame)
 
 inMainloop.onTriggered = () =>
 {
-    if (!xrSession)
-    {
-        next.trigger();
-    }
+    if (!xrSession) next.trigger();
 };
 
 function renderPre()
@@ -250,7 +251,7 @@ function renderEye(view)
 
     cgl.pushViewMatrix();
 
-    mat4.invert(cgl.vMatrix, xrViewerPose.transform.matrix);
+    mat4.invert(cgl.vMatrix, view.transform.matrix);
 
     let viewport = glLayer.getViewport(view);
     cgl.gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
@@ -340,18 +341,8 @@ function r2texEnd()
     outTex.set(fb.getTextureColor());
 }
 
-let geom = new CGL.Geometry("webxr final texture draw rectangle");
-let mesh = null;
-const shader = new CGL.Shader(cgl, "fullscreenrectangle");
-shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
-shader.setSource(attachments.present_vert, attachments.present_frag);
-
 function rebuildRectangle()
 {
-    // const currentViewPort = cgl.getViewPort();
-
-    // if (currentViewPort[2] == w && currentViewPort[3] == h && mesh) return;
-
     let xx = 0, xy = 0;
 
     const w = glLayer.framebufferWidth;
@@ -366,14 +357,6 @@ function rebuildRectangle()
 
     let tc = null;
 
-    // if (flipY.get())
-    //     tc = new Float32Array([
-    //         1.0, 0.0,
-    //         0.0, 0.0,
-    //         1.0, 1.0,
-    //         0.0, 1.0
-    //     ]);
-    // else
     tc = new Float32Array([
         1.0, 1.0,
         0.0, 1.0,
@@ -381,20 +364,12 @@ function rebuildRectangle()
         0.0, 0.0
     ]);
 
-    // if (flipX.get())
-    // {
-    //     tc[0] = 0.0;
-    //     tc[2] = 1.0;
-    //     tc[4] = 0.0;
-    //     tc[6] = 1.0;
-    // }
-
     geom.setTexCoords(tc);
 
     geom.verticesIndices = new Uint16Array([2, 1, 0, 3, 1, 2]);
-    geom.vertexNormals = new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,]);
+    geom.vertexNormals = new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]);
     geom.tangents = new Float32Array([-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0]);
-    geom.biTangents == new Float32Array([0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]);
+    geom.biTangents = new Float32Array([0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]);
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);
