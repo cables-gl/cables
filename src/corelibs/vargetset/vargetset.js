@@ -256,6 +256,7 @@ export class VarGetOpWrapper
         {
             console.log("rename has no var", oldname, newname);
             this._init();
+            if (!this._variable) return console.error("variable rename not found", oldname, newname, this);
         }
         this._updateVarNamesDropdown();
         this._updateTitle();
