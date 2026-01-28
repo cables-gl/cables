@@ -35,9 +35,13 @@ let buttonEle = null;
 let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
+<<<<<<< HEAD
 let refSpaceLocal = null;
 let refSpaceLocalFloor = null;
 
+=======
+let xrReferenceSpace = null;
+>>>>>>> 1026dc6c6eae8cb3090e6165b177db0125bcc740
 let xrViewerPose = null;
 let geom = new CGL.Geometry("webxr final texture draw rectangle");
 let mesh = null;

@@ -337,7 +337,7 @@ export class Anim extends Events
      */
     setValue(time, value, cb = null)
     {
-        if (isNaN(value))CABLES.logStack();
+        if (CABLES.UI && CABLES.UI.showDevInfos) if (isNaN(value)) CABLES.logStack();
 
         if (this.#needsSort) this.sortKeys();
         let found = null;
