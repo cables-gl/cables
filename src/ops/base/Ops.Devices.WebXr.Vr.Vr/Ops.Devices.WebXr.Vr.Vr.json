@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1769530114260
+        },
+        {
+            "message": "Better positioning of VR camera, much more exact overlaying when rendering nearby objects",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769592362782
         }
     ],
     "authorName": "pandur",
