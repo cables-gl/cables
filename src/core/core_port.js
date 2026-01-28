@@ -388,7 +388,7 @@ export class Port extends Events
 
         if (CABLES.UI && CABLES.UI.showDevInfos)
         {
-            CABLES.UI.countSetWarns = CABLES.UI.countSetWarns == 0;
+            CABLES.UI.countSetWarns = CABLES.UI.countSetWarns || 0;
             if (CABLES.UI.countSetWarns < 20 && this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
             {
                 this.#log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
