@@ -49,6 +49,19 @@ inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
+const overlayEle = op.patch.getDocument().createElement("div");
+// overlayEle.style.background = "rgba(0,0,0,0)";
+// overlayEle.style.position = "absolute";
+// overlayEle.style.top = "0";
+// overlayEle.style.bottom = "0";
+// overlayEle.style.left = "0";
+// overlayEle.style.right = "0";
+// overlayEle.style.display = "none";
+// overlayEle.style.contain = "paint !important";
+
+outElement.setRef(overlayEle);
+document.body.appendChild(overlayEle);
+
 if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
     {
@@ -90,9 +103,13 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-" + inImmersion.get().toLowerCase(), {
-        "optionalFeatures": ["hand-tracking", "local-floor"]
-    }).then(
+    xr.requestSession(
+        "immersive-" + inImmersion.get().toLowerCase(),
+        {
+            "optionalFeatures": ["hand-tracking", "local-floor", "dom-overlay"],
+            "domOverlay": { "root": overlayEle }
+        }
+    ).then(
         async (session) =>
         {
             xrSession = session;
@@ -103,12 +120,14 @@ function startVr()
                 {
                     refSpaceLocal = refSpace;
                 });
+
             xrSession.requestReferenceSpace("local-floor").then(
                 (refSpace) =>
                 {
                     refSpaceLocalFloor = refSpace;
                     outHasLocalFloor.set(true);
                 });
+
             if (xrSession)
             {
                 await cgl.gl.makeXRCompatible();
@@ -118,6 +137,10 @@ function startVr()
 
                 xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
                 xrSession.requestAnimationFrame(onXRFrame);
+
+                overlayEle.style.display = "block";
+
+                console.log("enabledFeatures", xrSession.enabledFeatures);
             }
         },
         (err) =>
