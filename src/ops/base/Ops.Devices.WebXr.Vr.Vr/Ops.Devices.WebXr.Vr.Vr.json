@@ -18,6 +18,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1769592362782
+        },
+        {
+            "message": "Now automatically uses local-floor reference space if available, 0,0,0 is then always attached to your real world floor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1769596342728
         }
     ],
     "authorName": "pandur",
@@ -97,6 +103,11 @@
                 "type": 0,
                 "name": "Eye Index",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Local Floor Ref",
+                "subType": "boolean"
             },
             {
                 "type": 0,

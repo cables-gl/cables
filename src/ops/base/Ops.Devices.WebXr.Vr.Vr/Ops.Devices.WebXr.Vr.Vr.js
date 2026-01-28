@@ -12,6 +12,7 @@ const
     nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
     outEyeIndex = op.outNumber("Eye Index"),
+    outHasLocalFloor = op.outBoolNum("Local Floor Ref"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
     outElement = op.outObject("DOM Overlay Ele", null, "element"),
@@ -27,17 +28,22 @@ op.setPortGroup("Startbutton", [inButtonStyle, inShowButton]);
 op.setPortGroup("Texture", [inRender2Tex, msaa]);
 
 let msEyes = [0, 0];
-let xr = navigator.xr;
+const xr = navigator.xr;
 let fb = null;
-
 let hadError = false;
 let buttonEle = null;
 let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
-let xrReferenceSpace = null;
-let vmat = mat4.create();
+let refSpaceLocal = null;
+let refSpaceLocalFloor = null;
+
 let xrViewerPose = null;
+let geom = new CGL.Geometry("webxr final texture draw rectangle");
+let mesh = null;
+const shader = new CGL.Shader(cgl, "vr rect");
+shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
+shader.setSource(attachments.present_vert, attachments.present_frag);
 
 inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
@@ -95,9 +101,14 @@ function startVr()
             xrSession.requestReferenceSpace("local").then(
                 (refSpace) =>
                 {
-                    xrReferenceSpace = refSpace;
+                    refSpaceLocal = refSpace;
                 });
-
+            xrSession.requestReferenceSpace("local-floor").then(
+                (refSpace) =>
+                {
+                    refSpaceLocalFloor = refSpace;
+                    outHasLocalFloor.set(true);
+                });
             if (xrSession)
             {
                 await cgl.gl.makeXRCompatible();
@@ -125,12 +136,14 @@ function onXRFrame(hrTime, xrFrame)
 
     try
     {
-        xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
+        xrViewerPose = xrFrame.getViewerPose(refSpaceLocalFloor || refSpaceLocal);
 
         cgl.tempData.xrSession = xrSession;
         cgl.tempData.xrFrame = xrFrame;
         cgl.tempData.xrViewerPose = xrViewerPose;
-        cgl.tempData.xrReferenceSpace = xrReferenceSpace;
+
+        if (refSpaceLocalFloor) cgl.tempData.xrReferenceSpace = refSpaceLocalFloor;
+        else cgl.tempData.xrReferenceSpace = refSpaceLocal;
 
         if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 
@@ -142,7 +155,6 @@ function onXRFrame(hrTime, xrFrame)
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
-        // CABLES.patch.emitOnAnimFrameEvent();
         op.patch.updateAnims();
 
         cgl.renderStart(cgl);
@@ -202,7 +214,7 @@ function onXRFrame(hrTime, xrFrame)
 
         cgl.renderEnd(cgl);
 
-        outMs.set(msEyes);
+        outMs.setRef(msEyes);
 
         CGL.MESH.lastShader = null;
         CGL.MESH.lastMesh = null;
@@ -217,10 +229,7 @@ function onXRFrame(hrTime, xrFrame)
 
 inMainloop.onTriggered = () =>
 {
-    if (!xrSession)
-    {
-        next.trigger();
-    }
+    if (!xrSession) next.trigger();
 };
 
 function renderPre()
@@ -342,18 +351,8 @@ function r2texEnd()
     outTex.set(fb.getTextureColor());
 }
 
-let geom = new CGL.Geometry("webxr final texture draw rectangle");
-let mesh = null;
-const shader = new CGL.Shader(cgl, "vr rect");
-shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
-shader.setSource(attachments.present_vert, attachments.present_frag);
-
 function rebuildRectangle()
 {
-    // const currentViewPort = cgl.getViewPort();
-
-    // if (currentViewPort[2] == w && currentViewPort[3] == h && mesh) return;
-
     let xx = 0, xy = 0;
 
     const w = glLayer.framebufferWidth;
@@ -368,14 +367,6 @@ function rebuildRectangle()
 
     let tc = null;
 
-    // if (flipY.get())
-    //     tc = new Float32Array([
-    //         1.0, 0.0,
-    //         0.0, 0.0,
-    //         1.0, 1.0,
-    //         0.0, 1.0
-    //     ]);
-    // else
     tc = new Float32Array([
         1.0, 1.0,
         0.0, 1.0,
@@ -383,20 +374,12 @@ function rebuildRectangle()
         0.0, 0.0
     ]);
 
-    // if (flipX.get())
-    // {
-    //     tc[0] = 0.0;
-    //     tc[2] = 1.0;
-    //     tc[4] = 0.0;
-    //     tc[6] = 1.0;
-    // }
-
     geom.setTexCoords(tc);
 
     geom.verticesIndices = new Uint16Array([2, 1, 0, 3, 1, 2]);
-    geom.vertexNormals = new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,]);
+    geom.vertexNormals = new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]);
     geom.tangents = new Float32Array([-1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0]);
-    geom.biTangents == new Float32Array([0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]);
+    geom.biTangents = new Float32Array([0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]);
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);
