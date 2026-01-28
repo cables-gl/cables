@@ -30,7 +30,6 @@ inCoords.onChange = updateCoordNormalizing;
 op.onDelete = removeListeners;
 
 addListeners();
-console.log("1qqqqq1");
 
 op.on("loadedValueSet", onStart);
 
