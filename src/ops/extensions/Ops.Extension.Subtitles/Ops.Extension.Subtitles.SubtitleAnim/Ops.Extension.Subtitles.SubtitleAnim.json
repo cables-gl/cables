@@ -23,6 +23,11 @@
                 "type": 2,
                 "name": "Structure",
                 "objType": "subtitles"
+            },
+            {
+                "type": 0,
+                "name": "Offset",
+                "subType": "number"
             }
         ],
         "portsOut": [
