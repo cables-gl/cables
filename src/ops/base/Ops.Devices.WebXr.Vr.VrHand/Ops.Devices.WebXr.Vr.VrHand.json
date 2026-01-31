@@ -59,6 +59,14 @@
                 "name": "Bones"
             },
             {
+                "type": 3,
+                "name": "Index Ray"
+            },
+            {
+                "type": 3,
+                "name": "Wrist Ray"
+            },
+            {
                 "type": 1,
                 "name": "Transformed Position"
             },

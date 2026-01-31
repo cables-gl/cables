@@ -25,6 +25,15 @@
             },
             {
                 "type": 0,
+                "name": "Coordinates index",
+                "values": [
+                    "Screen",
+                    "World"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Screen X",
                 "subType": "number"
             },
@@ -32,6 +41,10 @@
                 "type": 0,
                 "name": "Screen Y",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Ray Points"
             },
             {
                 "type": 0,

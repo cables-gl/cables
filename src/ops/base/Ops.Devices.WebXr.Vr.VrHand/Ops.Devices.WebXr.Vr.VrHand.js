@@ -11,6 +11,8 @@ const
 
     outGp = op.outObject("Hand Object"),
     outBones = op.outArray("Bones"),
+    outIndexRay = op.outArray("Index Ray"),
+    outWristRay = op.outArray("Wrist Ray"),
 
     outTransformed = op.outTrigger("Transformed Position"),
 
@@ -18,6 +20,9 @@ const
 
 const cgl = op.patch.cgl;
 let wasClicked = false;
+
+inHand.onChange = updateUi;
+updateUi();
 
 const bones = [
 
@@ -52,6 +57,11 @@ const bones = [
 
 ];
 
+function updateUi()
+{
+    op.setUiAttrib({ "extendTitle": inHand.get() });
+}
+
 function dist3d(a, b)
 {
     const xd = b[0] - a[0];
@@ -79,7 +89,7 @@ inUpdate.onTriggered = () =>
 
                 const jointPositions = {};
                 for (const [jointName, jointSpace] of inputSources[i].hand)
-                { // XRHand is iterable
+                {
                     const pose = cgl.tempData.xrFrame.getJointPose(jointSpace, cgl.tempData.xrReferenceSpace);
                     if (!pose) continue;
 
@@ -89,7 +99,28 @@ inUpdate.onTriggered = () =>
 
                 /// ///////////////////
 
-                if (dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.06)
+                outIndexRay.setRef(
+                    [
+                        jointPositions["index-finger-phalanx-intermediate"][0],
+                        jointPositions["index-finger-phalanx-intermediate"][1],
+                        jointPositions["index-finger-phalanx-intermediate"][2],
+                        jointPositions["index-finger-tip"][0],
+                        jointPositions["index-finger-tip"][1],
+                        jointPositions["index-finger-tip"][2]
+                    ]);
+
+                outWristRay.setRef(
+                    [
+                        jointPositions.wrist[0],
+                        jointPositions.wrist[1],
+                        jointPositions.wrist[2],
+                        jointPositions["index-finger-phalanx-proximal"][0],
+                        jointPositions["index-finger-phalanx-proximal"][1],
+                        jointPositions["index-finger-phalanx-proximal"][2]
+
+                    ]);
+
+                if (dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.01)
                 {
                     if (!wasClicked)
                     {

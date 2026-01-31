@@ -12,18 +12,13 @@ function flip()
 {
     let oldGeom = geometry.get();
 
-    if (!oldGeom)
-    {
-        outGeom.set(null);
-        return;
-    }
+    if (!oldGeom) return outGeom.setRef(null);
 
     let geom = oldGeom.copy();
 
     if (doFlip.get())
     {
-        for (let i = 0; i < geom.vertexNormals.length; i++)
-            geom.vertexNormals[i] *= -1;
+        for (let i = 0; i < geom.vertexNormals.length; i++) geom.vertexNormals[i] *= -1;
 
         if (doNormalize.get())
         {
@@ -35,6 +30,7 @@ function flip()
                     geom.vertexNormals[i + 0],
                     geom.vertexNormals[i + 1],
                     geom.vertexNormals[i + 2]);
+
                 vec3.normalize(vec, vec);
 
                 geom.vertexNormals[i + 0] = vec[0];
@@ -44,5 +40,5 @@ function flip()
         }
     }
 
-    outGeom.set(geom);
+    outGeom.setRef(geom);
 }
