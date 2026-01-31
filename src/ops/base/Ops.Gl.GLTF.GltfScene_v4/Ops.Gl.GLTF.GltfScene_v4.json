@@ -261,6 +261,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1769429440778
+        },
+        {
+            "message": "List max of 100 childs for performance reasons, showing \"more\" button when more",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769867973100
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
