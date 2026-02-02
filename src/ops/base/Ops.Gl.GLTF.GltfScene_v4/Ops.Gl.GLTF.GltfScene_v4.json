@@ -267,6 +267,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1769867973100
+        },
+        {
+            "message": "When hiding nodes, all nodes with that name will be hidden, not only the first",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770025549256
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

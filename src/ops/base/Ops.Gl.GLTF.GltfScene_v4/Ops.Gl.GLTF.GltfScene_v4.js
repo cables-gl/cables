@@ -555,9 +555,13 @@ function hideNodesFromData()
     {
         for (const i in data.hiddenNodes)
         {
-            const n = gltf.getNode(i);
-            if (n) n.hidden = true;
-            else op.verbose("node to be hidden not found", i, n);
+            const n = gltf.getNodes(i);
+            for (let j = 0; j < n.length; j++)
+            {
+                if (n[j]) n[j].hidden = true;
+
+                if (n.length === 0) op.verbose("node to be hidden not found", i, n);
+            }
         }
     }
     hideNodesFromArray();
