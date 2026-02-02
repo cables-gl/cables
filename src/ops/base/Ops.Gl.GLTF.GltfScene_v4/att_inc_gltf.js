@@ -25,6 +25,16 @@ const Gltf = class
         }
     }
 
+    getNodes(n)
+    {
+        const arr = [];
+        for (let i = 0; i < this.nodes.length; i++)
+        {
+            if (this.nodes[i].name == n) arr.push(this.nodes[i]);
+        }
+        return arr;
+    }
+
     unHideAll()
     {
         for (let i = 0; i < this.nodes.length; i++)

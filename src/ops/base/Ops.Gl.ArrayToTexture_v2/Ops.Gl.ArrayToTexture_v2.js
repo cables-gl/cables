@@ -38,8 +38,7 @@ flip.onChange =
     inHeight.onChange = () =>
     {
         needsUpdate = true;
-        if (tex)tex.delete();
-        tex = null;
+
         arrayResized = true;
 
         if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
@@ -55,7 +54,6 @@ flip.onChange =
 function update()
 {
     if (!needsUpdate) return outNext.trigger();
-
     // fillUp.setUiAttribs({greyout:inSizeType.get()!="Manual"});
     inWidth.setUiAttribs({ "greyout": inSizeType.get() != "Manual" });
     inHeight.setUiAttribs({ "greyout": inSizeType.get() != "Manual" });
@@ -128,7 +126,11 @@ function update()
             if (isFp) pixels[i * 4 + 3] = 1.0;
             else pixels[i * 4 + 3] = 255;
     }
-
+    if (tex && (w != tex.width || h != tex.height))
+    {
+        if (tex)tex.delete();
+        tex = null;
+    }
     if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture" });
 
     if (flip.get())

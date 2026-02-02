@@ -36,8 +36,11 @@ function updateDefines()
 
 render.onTriggered = function ()
 {
-    if (atc) cgl.gl.enable(cgl.gl.SAMPLE_ALPHA_TO_COVERAGE);
-
+    if (atc)
+    {
+        cgl.gl.enable(cgl.gl.SAMPLE_ALPHA_TO_COVERAGE);
+        cgl.gl.sampleCoverage(1.0, false);
+    }
     mod.bind();
     next.trigger();
     mod.unbind();

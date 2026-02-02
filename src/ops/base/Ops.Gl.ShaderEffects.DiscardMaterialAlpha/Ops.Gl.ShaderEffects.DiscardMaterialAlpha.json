@@ -6,6 +6,12 @@
             "author": "pandur",
             "date": 1655223615705,
             "type": "new"
+        },
+        {
+            "message": "Fixed bug where it did not work in renderToTexture branches",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1769634227508
         }
     ],
     "authorName": "pandur",
@@ -19,6 +25,14 @@
             {
                 "type": 0,
                 "name": "Method index",
+                "values": [
+                    "Normal",
+                    "Discard",
+                    "Coverage",
+                    "Cov. Sharp",
+                    "Dither",
+                    "None"
+                ],
                 "subType": "integer"
             },
             {
@@ -35,9 +49,6 @@
         ]
     },
     "summary": "discard transparent pixels in material textures",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
     "exampleProjectId": "3r_lf6",
     "docs": {
         "ports": []
@@ -45,5 +56,6 @@
     "coreLibs": [
         "cgl_shadermodifier",
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

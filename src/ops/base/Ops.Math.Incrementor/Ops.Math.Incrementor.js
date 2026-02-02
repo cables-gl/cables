@@ -3,6 +3,7 @@ const
     decrement = op.inTriggerButton("Decrement"),
     inLimit = op.inBool("Limit", false),
     inLength = op.inValueInt("Length"),
+    inStep = op.inFloat("Step", 1),
     inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind"),
     inDefault = op.inValueInt("Default", 0),
     reset = op.inTriggerButton("Reset"),
@@ -53,7 +54,7 @@ function doReset()
 
 decrement.onTriggered = function ()
 {
-    val--;
+    val -= inStep.get();
     if (inLimit.get())
     {
         if (mode == MODE_REWIND && val < 0)val = inLength.get() - 1;
@@ -66,7 +67,7 @@ decrement.onTriggered = function ()
 
 increment.onTriggered = function ()
 {
-    val++;
+    val += inStep.get();
     if (inLimit.get())
     {
         if (mode == MODE_REWIND && val >= inLength.get())

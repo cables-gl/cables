@@ -283,7 +283,7 @@ exec.onTriggered = () =>
     if (cgl.currentTextureEffect || op.patch.cgl._glFrameBufferStack.length > 0)
     {
         hasError = true;
-        op.setUiError("fbProblem", "Particlesystem should not be below a framebuffer (RenderToTexture, ImageCompose, etc.) op ");
+        op.setUiError("fbProblem", "Particlesystem should not be below a framebuffer (RenderToTexture, ImageCompose, etc.) op ", 1);
     }
     else if (hasError)
     {
@@ -510,8 +510,8 @@ function renderVelocity()
     if (velocityFeedback2.fb)cgl.setTexture(1, velocityFeedback2.fb.getTextureColorNum(0).tex);
     else
     {
-        cgl.setTexture(1,emptyTex.tex);
-        //op.log("no fb tex");
+        cgl.setTexture(1, emptyTex.tex);
+        // op.log("no fb tex");
     }
 
     cgl.currentTextureEffect.finish();

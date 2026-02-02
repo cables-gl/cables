@@ -98,9 +98,7 @@ function setupMesh()
     currentNum = num;
 
     let verts = new Float32Array(num * 3);
-
     let texCoords = new Float32Array(num * 2);
-
     let bias = 0.5 * (1.0 / inTex.get().width);
 
     for (let x = 0; x < inTex.get().width; x++)
