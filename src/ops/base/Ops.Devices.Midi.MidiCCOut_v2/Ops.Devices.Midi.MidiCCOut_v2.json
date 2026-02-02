@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1571227742167
-        },
-        {
-            "message": "Ops.User.simod.MidiCCOut renamed to Ops.Devices.Midi.MidiCCOut",
-            "author": "simod",
-            "date": 1571309165529
+            "date": 1571227742167,
+            "type": "new"
         }
     ],
     "authorName": "simod",

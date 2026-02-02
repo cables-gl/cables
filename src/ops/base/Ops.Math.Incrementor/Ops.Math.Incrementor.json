@@ -22,6 +22,11 @@
             },
             {
                 "type": 0,
+                "name": "Step",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Mode index",
                 "values": [
                     "Rewind",
@@ -61,5 +66,14 @@
     "exampleProjectId": "OdcvGu",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added step size input",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1769646661791
+        }
+    ]
 }

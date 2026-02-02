@@ -8,7 +8,7 @@ const
 
 const anim = new CABLES.Anim();
 let startTime = CABLES.now();
-op.toWorkPortsNeedToBeLinked(inUpdate);
+op.toWorkPortsNeedToBeLinked(inUpdate, inBang);
 
 let needsReset = false;
 

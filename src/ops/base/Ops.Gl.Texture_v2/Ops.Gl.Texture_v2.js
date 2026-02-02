@@ -93,9 +93,9 @@ function realReload(nocache)
 {
     op.checkMainloopExists();
     if (!active.get()) return;
-    if (loadingId)loadingId = cgl.patch.loading.finished(loadingId);
+    if (loadingId)loadingId = op.patch.loading.finished(loadingId);
 
-    loadingId = cgl.patch.loading.start(op.objName, filename.get(), op);
+    loadingId = op.patch.loading.start(op.objName, filename.get(), op);
 
     let url = op.patch.getFilePath(String(filename.get()));
 
@@ -116,14 +116,14 @@ function realReload(nocache)
         op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
         if (needsRefresh) op.refreshParams();
 
-        cgl.patch.loading.addAssetLoadingTask(() =>
+        op.patch.loading.addAssetLoadingTask(() =>
         {
             op.setUiError("urlerror", null);
             CGL.Texture.load(cgl, url, function (err, newTex)
             {
                 if (filename.get() != fileToLoad)
                 {
-                    loadingId = cgl.patch.loading.finished(loadingId);
+                    loadingId = op.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -135,7 +135,7 @@ function realReload(nocache)
                     textureOut.setRef(t);
 
                     op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
-                    loadingId = cgl.patch.loading.finished(loadingId);
+                    loadingId = op.patch.loading.finished(loadingId);
                     return;
                 }
 
@@ -153,7 +153,7 @@ function realReload(nocache)
 
                 if (loadingId)
                 {
-                    loadingId = cgl.patch.loading.finished(loadingId);
+                    loadingId = op.patch.loading.finished(loadingId);
                 }
                 op.checkMainloopExists();
             }, {
@@ -171,7 +171,7 @@ function realReload(nocache)
     else
     {
         setTempTexture();
-        loadingId = cgl.patch.loading.finished(loadingId);
+        loadingId = op.patch.loading.finished(loadingId);
     }
 }
 

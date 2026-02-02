@@ -50,10 +50,14 @@ async function init()
 {
     if (!CABLES.rapierInited)
     {
+        const loadingId = op.patch.loading.start(op.objName, "rapierlib", op);
+
         CABLES.rapierInited = 1;
         console.log("init rapier.......");
         await RAPIER.init();
         CABLES.rapierInited = 2;
+
+        op.patch.loading.finished(loadingId);
     }
 }
 
