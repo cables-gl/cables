@@ -34,6 +34,12 @@
             "type": "deprecation",
             "author": "pandur",
             "date": 1770027239050
+        },
+        {
+            "message": "op Extension.Deprecated.ShuffleArray3_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1770027810322
         }
     ]
 }

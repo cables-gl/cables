@@ -33,10 +33,10 @@
             "date": 1711377158581
         },
         {
-            "message": "op Array.ShuffleArray3_v3 was deprecated",
+            "message": "ShuffleArray3_v3 was deprecated please use shuffle array with the stride parameter!",
             "type": "deprecation",
             "author": "pandur",
-            "date": 1770027238783
+            "date": 1770027809456
         }
     ],
     "license": "MIT",
