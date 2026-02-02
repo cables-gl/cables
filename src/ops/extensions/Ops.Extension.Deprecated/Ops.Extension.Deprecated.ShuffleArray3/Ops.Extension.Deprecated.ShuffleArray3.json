@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1569072607714
+        },
+        {
+            "message": "op Array.ShuffleArray3 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1770027239226
         }
     ],
     "authorName": "pandur",
@@ -30,7 +36,6 @@
     },
     "summary": "Shuffle/Randomize the order of an array of triplets",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

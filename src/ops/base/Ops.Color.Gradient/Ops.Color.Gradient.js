@@ -90,6 +90,7 @@ function updateGradient(keys)
         }
     }
 
+    outColorArray.setUiAttribs({ "stride": 4 });
     outColorArray.setRef(cols);
 
     outGradietObject.setRef(obj);

@@ -31,6 +31,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1711377158581
+        },
+        {
+            "message": "op Array.ShuffleArray3_v3 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1770027238783
         }
     ],
     "license": "MIT",

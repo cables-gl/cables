@@ -23,10 +23,17 @@
     },
     "summary": "Shuffle/Randomize the order of an array of triplets",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "BVnweT"
+    "exampleProjectId": "BVnweT",
+    "changelog": [
+        {
+            "message": "op Array.ShuffleArray3_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1770027239050
+        }
+    ]
 }
