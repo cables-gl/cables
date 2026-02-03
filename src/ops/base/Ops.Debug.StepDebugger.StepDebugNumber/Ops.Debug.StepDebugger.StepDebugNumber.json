@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1765895307869
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1765969138930
-        },
-        {
-            "message": "Patch.PiLdXx5.StepDebugNumber renamed to Ops.Debug.StepDebugger.StepDebugNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1765969188192
         }
     ],
     "layout": {

@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1765895307869
-        },
-        {
-            "message": "Patch.PiLdXx5.StepDebug renamed to Ops.Debug.StepDebugger.StepDebugTrigger",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1765969180296
         }
     ],
     "layout": {
@@ -31,6 +25,10 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Open"
             }
         ],
         "portsOut": [
@@ -39,5 +37,9 @@
                 "name": "Next"
             }
         ]
+    },
+    "summary": "Debug what happens when a trigger happens",
+    "docs": {
+        "ports": []
     }
 }
