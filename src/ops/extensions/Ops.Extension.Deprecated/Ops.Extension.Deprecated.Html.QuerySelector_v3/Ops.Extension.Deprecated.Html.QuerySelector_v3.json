@@ -1,0 +1,83 @@
+{
+    "id": "e943cddc-be72-46db-ae6a-fbd9608029d8",
+    "changelog": [
+        {
+            "message": "Created op",
+            "author": "tim",
+            "date": 1582126210630,
+            "type": "new"
+        },
+        {
+            "message": "Add \"element\" mode",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1744018768896
+        },
+        {
+            "message": "Op Html.QuerySelector_v3 was deprecated (use Ops.Html.Elements.ElementQuery)",
+            "author": "stephan",
+            "date": 1769000063889,
+            "type": "deprecation"
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1743694966455,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Query"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "values": [
+                    "document",
+                    "string input",
+                    "element"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Document"
+            },
+            {
+                "type": 2,
+                "name": "Input Element",
+                "objType": "element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Selects an element in the DOM",
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
+            },
+            {
+                "name": "Element",
+                "text": "The first element which can be found using the query or null (no results)"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "C6z3GH"
+}

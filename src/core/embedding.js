@@ -3,6 +3,8 @@ import { generateUUID } from "./utils.js";
 
 const EMBED = {};
 
+/* minimalcore:start */
+
 /**
  * add patch into html element (will create canvas and set size to fill containerElement)
  * @name CABLES.EMBED#addPatch
@@ -21,7 +23,7 @@ EMBED.addPatch = function (_element, options)
 
         if (!el)
         {
-            console.error(id + " Polyshape Container Element not found!");
+            console.error(id + " Container Element not found!"); // eslint-disable-line
             return;
         }
     }
@@ -35,8 +37,8 @@ EMBED.addPatch = function (_element, options)
         "resize",
         function ()
         {
-            this.setAttribute("width", el.clientWidth);
             this.height = el.clientHeight;
+            this.width = el.clientWidth;
         }.bind(canvEl),
     );
 
@@ -49,7 +51,7 @@ EMBED.addPatch = function (_element, options)
     {
         options.onError = function (err)
         {
-            console.error(err);
+            console.error(err);// eslint-disable-line
         };
     }
 
@@ -58,3 +60,5 @@ EMBED.addPatch = function (_element, options)
 };
 
 export { EMBED };
+
+/* minimalcore:end */

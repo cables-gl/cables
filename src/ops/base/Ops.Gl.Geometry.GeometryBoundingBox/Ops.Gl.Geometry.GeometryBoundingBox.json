@@ -71,5 +71,6 @@
     "exampleProjectId": "DAhGve",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

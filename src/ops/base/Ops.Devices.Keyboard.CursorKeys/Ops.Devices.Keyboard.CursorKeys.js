@@ -16,6 +16,8 @@ const
 
 const cgl = op.patch.cgl;
 
+op.patch.cgl.on("resize", onBlur);
+
 function onKeyDown(e)
 {
     if (keysWasd.get())
@@ -66,7 +68,7 @@ function onKeyDown(e)
     }
 
     setDegrees();
-    outPressed.set(pressedUp.get() || pressedDown.get() || pressedLeft.get() || pressedRight.get());
+    updateAny();
 }
 
 function setDegrees()
@@ -136,6 +138,11 @@ function onKeyUp(e)
     }
 
     setDegrees();
+    updateAny();
+}
+
+function updateAny()
+{
     outPressed.set(pressedUp.get() || pressedDown.get() || pressedLeft.get() || pressedRight.get());
 }
 
@@ -159,6 +166,7 @@ function onBlur()
     pressedDown.set(false);
     pressedLeft.set(false);
     pressedRight.set(false);
+    updateAny();
 }
 
 inActive.onChange = () =>
@@ -167,7 +175,7 @@ inActive.onChange = () =>
     pressedDown.set(false);
     pressedLeft.set(false);
     pressedRight.set(false);
-
+    updateAny();
     removeListeners();
     if (inActive.get())addListeners();
 };

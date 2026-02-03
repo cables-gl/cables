@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1760338567594
+        },
+        {
+            "message": "Added readable extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769101165296
         }
     ],
     "authorName": "pandur",
@@ -33,10 +39,6 @@
                 "name": "Filter Key"
             },
             {
-                "type": 5,
-                "name": "Filter Value"
-            },
-            {
                 "type": 0,
                 "name": "Method index",
                 "values": [
@@ -46,6 +48,10 @@
                     "includes"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Filter Value"
             },
             {
                 "type": 0,

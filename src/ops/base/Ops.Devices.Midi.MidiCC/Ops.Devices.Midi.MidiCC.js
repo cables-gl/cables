@@ -129,8 +129,6 @@ inEvent.onChange = () =>
         }
     }
 
-    // arrayOut.set(null);
     arrayOut.setRef(ccArray);
-    // eventOut.set(null);
     eventOut.setRef(event);
 };

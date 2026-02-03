@@ -37,3 +37,5 @@ outTrigs.on("onLinkChanged", () =>
     }
     outArrNames.setRef(arr);
 });
+
+// ....

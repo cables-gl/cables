@@ -1,0 +1,56 @@
+{
+    "id": "732ba10a-d0d9-47b9-802e-cbbe7201621d",
+    "created": 1766826216385,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818138331
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818286515
+        },
+        {
+            "message": "Extension.MiniGpu.PipeArrayBuffer renamed to Ops.Extension.MiniGpu.CompShaderArrayBuffer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766818500401
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderArrayBuffer renamed to Ops.Extension.MiniGpu.CompShaderArrayBufferStorage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766826196027
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766826216385
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Buffer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

@@ -321,7 +321,7 @@ function createUniforms()
         shaderModule.addUniformStructFrag("MOD_Light", "MOD_light" + i, [
             { "type": "3f", "name": "position", "v1": null },
             { "type": "2i", "name": "typeCastShadow", "v1": null },
-            { "type": "4f", "name": "shadowProperties", "v1": [light.nearFar[0], light.nearFar[1], 512, light.shadowBias] },
+            { "type": "4f", "name": "shadowProperties", "v1": [light.nearFar[0], light.nearFar[1], 512, light.shadowBias || 0] },
             { "type": "f", "name": "shadowStrength", "v1": light.shadowStrength },
         ]);
 

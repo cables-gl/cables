@@ -114,7 +114,7 @@ function setUnSupported(msg)
 
 if (CABLES.UI)
 {
-    gui.canvasManager.addContext(cgp);
+    gui.canvasManager.addCgContext(cgp);
     gui.canvasManager.setCurrentCanvas(cgp);
 
     // setTimeout(() =>

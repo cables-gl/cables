@@ -113,6 +113,7 @@ function create()
     l = uvLeft;
     r = 1 - uvRight;
     t = 1 - uvTop;
+    b = uvBottom;
     const uvh = 1;
     const uvw = 1;
 

@@ -314,14 +314,9 @@ function setup()
         }
     }
 
-    outArrScale.set(null);
-    outArrScale.set(arrScale);
-
-    outArrRotations.set(null);
-    outArrRotations.set(arrRotations);
-
-    outArrPositions.set(null);
-    outArrPositions.set(arrPositions);
+    outArrScale.setRef(arrScale);
+    outArrRotations.setRef(arrRotations);
+    outArrPositions.setRef(arrPositions);
 }
 
 function reset()

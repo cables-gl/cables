@@ -644,8 +644,6 @@ export class Geometry
 
     /**
      * @function unIndex
-     * @memberof Geometry
-     * @instance
      * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals

@@ -34,21 +34,7 @@ exe.onTriggered = doTrigger;
 function doTrigger(_time)
 {
     let spl = 0;
-
     let outIndex = Math.round(current.get() - 0.5);
-
-    // if (window.gui)
-    // {
-    // if (current.get() != lastUiValue)
-    // {
-    // lastUiValue = current.get();
-    // for (spl = 0; spl < triggers.length; spl++)
-    // {
-    // if (spl == lastUiValue) triggers[spl].setUiActiveState(true);
-    // else triggers[spl].setUiActiveState(false);
-    // }
-    // }
-    // }
 
     if (current.anim)
     {

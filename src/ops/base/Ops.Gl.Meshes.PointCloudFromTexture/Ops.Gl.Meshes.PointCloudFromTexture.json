@@ -114,5 +114,6 @@
             }
         ]
     },
-    "exampleProjectId": "bhWkpX"
+    "exampleProjectId": "bhWkpX",
+    "license": "MIT"
 }

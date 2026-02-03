@@ -12,6 +12,7 @@ const
     nextPre = op.outTrigger("Render After Eyes"),
     outPose = op.outObject("Viewer Pose"),
     outEyeIndex = op.outNumber("Eye Index"),
+    outHasLocalFloor = op.outBoolNum("Local Floor Ref"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
     outElement = op.outObject("DOM Overlay Ele", null, "element"),
@@ -34,7 +35,9 @@ let buttonEle = null;
 let glLayer = null;
 let xrSession = null;
 let webGLRenContext = null;
-let xrReferenceSpace = null;
+let refSpaceLocal = null;
+let refSpaceLocalFloor = null;
+
 let xrViewerPose = null;
 let geom = new CGL.Geometry("webxr final texture draw rectangle");
 let mesh = null;
@@ -45,6 +48,19 @@ shader.setSource(attachments.present_vert, attachments.present_frag);
 inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
+
+const overlayEle = op.patch.getDocument().createElement("div");
+// overlayEle.style.background = "rgba(0,0,0,0)";
+// overlayEle.style.position = "absolute";
+// overlayEle.style.top = "0";
+// overlayEle.style.bottom = "0";
+// overlayEle.style.left = "0";
+// overlayEle.style.right = "0";
+// overlayEle.style.display = "none";
+// overlayEle.style.contain = "paint !important";
+
+outElement.setRef(overlayEle);
+document.body.appendChild(overlayEle);
 
 if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
@@ -87,9 +103,13 @@ function startVr()
         return;
     }
 
-    xr.requestSession("immersive-" + inImmersion.get().toLowerCase(), {
-        "optionalFeatures": ["hand-tracking", "local-floor"]
-    }).then(
+    xr.requestSession(
+        "immersive-" + inImmersion.get().toLowerCase(),
+        {
+            "optionalFeatures": ["hand-tracking", "local-floor", "dom-overlay"],
+            "domOverlay": { "root": overlayEle }
+        }
+    ).then(
         async (session) =>
         {
             xrSession = session;
@@ -98,7 +118,14 @@ function startVr()
             xrSession.requestReferenceSpace("local").then(
                 (refSpace) =>
                 {
-                    xrReferenceSpace = refSpace;
+                    refSpaceLocal = refSpace;
+                });
+
+            xrSession.requestReferenceSpace("local-floor").then(
+                (refSpace) =>
+                {
+                    refSpaceLocalFloor = refSpace;
+                    outHasLocalFloor.set(true);
                 });
 
             if (xrSession)
@@ -110,6 +137,10 @@ function startVr()
 
                 xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
                 xrSession.requestAnimationFrame(onXRFrame);
+
+                overlayEle.style.display = "block";
+
+                console.log("enabledFeatures", xrSession.enabledFeatures);
             }
         },
         (err) =>
@@ -128,12 +159,14 @@ function onXRFrame(hrTime, xrFrame)
 
     try
     {
-        xrViewerPose = xrFrame.getViewerPose(xrReferenceSpace);
+        xrViewerPose = xrFrame.getViewerPose(refSpaceLocalFloor || refSpaceLocal);
 
         cgl.tempData.xrSession = xrSession;
         cgl.tempData.xrFrame = xrFrame;
         cgl.tempData.xrViewerPose = xrViewerPose;
-        cgl.tempData.xrReferenceSpace = xrReferenceSpace;
+
+        if (refSpaceLocalFloor) cgl.tempData.xrReferenceSpace = refSpaceLocalFloor;
+        else cgl.tempData.xrReferenceSpace = refSpaceLocal;
 
         if (xrViewerPose) outMat.set(xrViewerPose.transform.matrix);
 

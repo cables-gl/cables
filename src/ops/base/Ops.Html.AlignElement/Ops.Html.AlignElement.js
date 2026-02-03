@@ -38,12 +38,19 @@ inEle.onChange = update;
 
 update();
 
+if (op.patch.cgl)op.patch.cgl.on("resize", () =>
+{
+    oldTop = null;
+    update();
+});
+
 function remove()
 {
     if (eleAlign)
     {
         eleAlign.style.removeProperty("top");
         eleAlign.style.removeProperty("left");
+        oldTop = null;
     }
 }
 

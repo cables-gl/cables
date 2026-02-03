@@ -3,6 +3,8 @@ const
     inTex = op.inTexture("RGBE Texture"),
     inAspect = op.inFloat("Aspect", 1),
     inThreshold = op.inFloatSlider("Threshold", 0.2),
+    inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA16F),
+
     inRepeatZ = op.inInt("Repeats", 1),
     inRepeatSpace = op.inFloat("Repeats Spacing", 0.1),
 
@@ -10,21 +12,16 @@ const
     outFpTex = op.outTexture("HDR Texture");
 
 inTex.setUiAttribs({ "title": "Texture" });
-
-const tc = new CGL.CopyTexture(op.patch.cgl, op.objName,
-    {
-        "shader": attachments.rgbe2fp_frag,
-        "isFloatingPointTexture": true,
-        "filter": CGL.Texture.FILTER_NEAREST,
-
-    });
+let tc = null;
+inPixelFormat.onChange = updateCopy;
 
 let needsUpdate = true;
 let height = 0;
-const uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect);
-const uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
-new CGL.Uniform(tc.bgShader, "f", "repeatsY", inRepeatZ);
-new CGL.Uniform(tc.bgShader, "f", "repeatsSpace", inRepeatSpace);
+let uni1;
+let uni2;
+let uni3;
+let uni4;
+updateCopy();
 
 inTex.onChange =
     inRepeatSpace.onChange =
@@ -56,3 +53,22 @@ exec.onTriggered = () =>
 
     next.trigger();
 };
+function updateCopy()
+{
+    // if(tc)return
+    // console.log("inPixelFormat.get(),", inPixelFormat.get());
+    tc = new CGL.CopyTexture(op.patch.cgl, op.objName,
+        {
+            "shader": attachments.rgbe2fp_frag,
+            "isFloatingPointTexture": true,
+            "pixelFormat": inPixelFormat.get(),
+            "filter": CGL.Texture.FILTER_NEAREST,
+
+        });
+    needsUpdate = true;
+
+    uni1 = new CGL.Uniform(tc.bgShader, "f", "aspect", inAspect);
+    uni2 = new CGL.Uniform(tc.bgShader, "f", "threshold", inThreshold);
+    uni3 = new CGL.Uniform(tc.bgShader, "f", "repeatsY", inRepeatZ);
+    uni4 = new CGL.Uniform(tc.bgShader, "f", "repeatsSpace", inRepeatSpace);
+}

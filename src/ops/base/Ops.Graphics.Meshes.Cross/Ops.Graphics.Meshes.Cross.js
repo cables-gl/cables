@@ -176,7 +176,6 @@ function buildMesh()
 
     // mesh = new CGL.Mesh(cgl, geom);
     mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
-
     geomOut.setRef(geom);
 }
 

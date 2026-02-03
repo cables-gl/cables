@@ -188,7 +188,7 @@ export class TextureEffect
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
 
-        this._cgl.profileData.profileTextureEffect++;
+        this._cgl.profileData.count("textureEffect");
 
         if (this._textureTarget.filter == Texture.FILTER_MIPMAP)
         {

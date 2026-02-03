@@ -252,8 +252,15 @@ export class VarGetOpWrapper
     {
         if (oldname != this._varnamePort.get()) return;
         this._varnamePort.set(newname);
+        if (!this._variable)
+        {
+            console.log("rename has no var", oldname, newname);
+            this._init();
+            if (!this._variable) return console.error("variable rename not found", oldname, newname, this);
+        }
         this._updateVarNamesDropdown();
         this._updateTitle();
+
         this._listenerId = this._variable.on("change", this._setValueOut.bind(this));
     }
 

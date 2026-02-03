@@ -18,9 +18,6 @@ export const BLENDS = {
 
 /**
  * cables gl context/state manager
- * @class
- * @namespace external:CGL
- * @hideconstructor
  */
 export class CglContext extends CgContext
 {
@@ -172,7 +169,7 @@ export class CglContext extends CgContext
         if (!this.gl || this.gl.isContextLost())
         {
             this.aborted = true;
-            this._log.error("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
+            this._log.warn("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
 
@@ -660,7 +657,7 @@ export class CglContext extends CgContext
      */
     checkFrameStarted(string)
     {
-        if (!this._frameStarted)
+        if (CABLES.UI && CABLES.UI.showDevInfo && !this._frameStarted)
         {
             this._log.warn("frame not started " + string);
 
@@ -1072,13 +1069,14 @@ export class CglContext extends CgContext
 
     // --------------------------------------
 
+    /**
+     * @param {WebGLProgram} prog
+     * @param {string} name
+     */
     glGetAttribLocation(prog, name)
     {
         const l = this.gl.getAttribLocation(prog, name);
-        // if (l == -1)
-        // {
-        //     this._log.warn("get attr loc -1 ", name);
-        // }
+        if (l == -1) this.profileData.count("invalidAttribLoc");
         return l;
     }
 
@@ -1093,6 +1091,10 @@ export class CglContext extends CgContext
         return gui.shouldDrawOverlay;
     }
 
+    /**
+     * @param {number} blendMode
+     * @param {boolean} premul
+     */
     _setBlendMode(blendMode, premul)
     {
         const gl = this.gl;

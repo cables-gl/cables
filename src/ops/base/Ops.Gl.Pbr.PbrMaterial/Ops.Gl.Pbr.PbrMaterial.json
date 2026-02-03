@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1725553568070
+        },
+        {
+            "message": "set shader output port object type to \"shader\"",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1766392560135
         }
     ],
     "layout": {
@@ -138,6 +144,7 @@
                 "type": 0,
                 "name": "Tonemapping index",
                 "values": [
+                    "None",
                     "sRGB",
                     "HejiDawson",
                     "Photographic"
@@ -305,7 +312,8 @@
             },
             {
                 "type": 2,
-                "name": "Shader"
+                "name": "Shader",
+                "objType": "shader"
             }
         ]
     },

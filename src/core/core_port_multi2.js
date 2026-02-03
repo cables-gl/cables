@@ -1,8 +1,7 @@
+import { Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
-
-const MIN_NUM_PORTS = 2;
 
 export class MultiPort2 extends Port
 {
@@ -15,11 +14,13 @@ export class MultiPort2 extends Port
      * @param {import("./core_port.js").PortUiAttribs} uiAttribs
      * @param {import("./core_port.js").PortUiAttribs} [uiAttribsPorts]
      */
-    constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts)
+    constructor(__parent, name, type, dir, uiAttribs, uiAttribsPorts, minNumPorts = 1)
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
+        this._log = new Logger("multiport2");
         this.setUiAttribs({ "multiPort2": true, "multiPort": true, "group": this.name, "order": -1, "multiPortManual": true });
+        this.minNumPorts = minNumPorts;
 
         /** @type {Port[]} */
         this.ports = [];
@@ -30,7 +31,7 @@ export class MultiPort2 extends Port
         {
             const arr = [];
 
-            let ll = 1;
+            let ll = 1;// do not include addport
 
             for (let i = 0; i < this.ports.length - ll; i++)
                 arr[i] = this.ports[i];
@@ -40,15 +41,12 @@ export class MultiPort2 extends Port
 
         const updateUi = () =>
         {
-            let grey = !this.uiAttribs.multiPortManual;
-
-            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT)grey = false;
-
             for (let i = 0; i < this.ports.length; i++)
             {
                 let lp; // undefined to remove/not set it
                 let addPort = false;
                 let title;
+                let grey = false;
                 let o = {};
 
                 if (this.op.preservedPortTitles && this.op.preservedPortTitles[this.ports[i].name]) title = this.op.preservedPortTitles[this.ports[i].name];
@@ -80,20 +78,13 @@ export class MultiPort2 extends Port
             for (let i = 0; i < this.ports.length; i++)
                 if (!this.ports[i]) this.ports.splice(i, 1);
 
-            // if (!this.uiAttribs.multiPortManual && this.ports.length > MIN_NUM_PORTS)
-            // {
-            //     for (let i = this.ports.length - 1; i > 1; i--)
-            //     {
-            //         if (!this.ports[i].isLinked()) this.uiAttribs.multiPortNum = i;
-            //         else break;
-            //     }
-            // }
-
             updateArray();
         };
 
         this.countPorts = () =>
         {
+
+            /* minimalcore:start */
             const gui = Patch.getGui();
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
@@ -101,6 +92,8 @@ export class MultiPort2 extends Port
                 this.retryTo = setTimeout(this.countPorts.bind(this));
                 return;
             }
+
+            /* minimalcore:end */
             this.retryTo = null;
 
             let redo = false;
@@ -128,59 +121,15 @@ export class MultiPort2 extends Port
                 }
             }
 
-            if (this.ports.length > 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked())
+            const idxLastPort = this.ports.length - 1;
+
+            if (this.ports.length >= 1 && this.ports[idxLastPort].uiAttribs.addPort && this.ports[idxLastPort].isLinked())
             {
-                this.ports[this.ports.length - 1].uiAttribs.addPort = false;
-                this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + 1 });
+                this.newPort();
+                this.setUiAttribs({ "multiPortNum": this.ports.length });
             }
 
-            // if (!this.uiAttribs.multiPortManual)
-            // {
-            //     let foundHole = true;
-            //     while (foundHole)
-            //     {
-            //         foundHole = false;
-
-            //         for (let i = this.ports.length - 1; i > 1; i--)
-            //         {
-            //             if (this.ports[i] && this.ports[i].links.length > 0 && this.ports[i - 1].links.length == 0)
-            //             {
-            //                 // found hole
-            //                 const otherPort = this.ports[i].links[0].getOtherPort(this.ports[i]);
-            //                 this.ports[i].links[0].remove();
-
-            //                 const po = this.ports[i - 1];
-
-            //                 if (po && this.ports[i])
-            //                 {
-            //                     this.op.patch.link(this.op, po.name, otherPort.op, otherPort.name);
-            //                     foundHole = true;
-            //                     redo = true;
-            //                     break;
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            // }
-
-            // if (!this.uiAttribs.multiPortManual) // if auto
-            // {
-            //     while (this.ports.length > MIN_NUM_PORTS && !this.ports[this.ports.length - 1].isLinked() && !this.ports[this.ports.length - 2].isLinked())
-            //     {
-            //         let i = this.ports.length - 1;
-            //         if (!this.ports[i].isLinked() && this.ports[i - 1] && !this.ports[i - 1].isLinked())
-            //         {
-            //             this.ports[i].setUiAttribs({ "removed": true });
-            //             this.ports[i].remove();
-            //             this.ports.splice(i, 1);
-            //         }
-            //     }
-            // }
-
             this.removeInvalidPorts();
-
-            if (!this.uiAttribs.multiPortManual && this.ports.length > 0 && this.ports[this.ports.length - 1].isLinked()) this.newPort();
 
             updateArray();
             updateUi();
@@ -223,19 +172,20 @@ export class MultiPort2 extends Port
                 po.multiLinkRemoveListener = po.on("onLinkRemoved", () =>
                 {
                     updateUi();
+                    this.countPorts();
                     this.emitEvent("onLinkChanged");
                 });
             }
         };
 
-        this.newPort = () =>
+        this.newPort = (reason) =>
         {
 
             /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             attrs.type = type;
-            const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
+            const po = this.op.newPort(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
 
@@ -251,7 +201,7 @@ export class MultiPort2 extends Port
             updateUi();
             updateArray();
             this.emitEvent("onLinkChanged");
-            // console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
+
             if (this.op.preservedPortTitles && this.op.preservedPortTitles[po.name]) po.setUiAttribs({ "title": this.op.preservedPortTitles[po.name] });
 
             return po;
@@ -259,29 +209,29 @@ export class MultiPort2 extends Port
 
         this.initPorts = () =>
         {
-            for (let i = 0; i < MIN_NUM_PORTS; i++) this.newPort();
+            while (this.ports.length < this.minNumPorts) this.newPort("init" + this.minNumPorts);
             updateArray();
             updateUi();
         };
 
         this.checkNum = () =>
         {
-            this.uiAttribs.multiPortNum = Math.max(MIN_NUM_PORTS, this.uiAttribs.multiPortNum);
+            this.uiAttribs.multiPortNum ||= this.minNumPorts;
+            this.uiAttribs.multiPortNum = Math.max(this.minNumPorts, this.uiAttribs.multiPortNum);
 
-            while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort();
+            while (this.ports.length < this.uiAttribs.multiPortNum) this.newPort("checknum");
             while (this.ports.length > this.uiAttribs.multiPortNum) if (this.ports[this.ports.length - 1]) this.ports.pop().remove();
 
             this.removeInvalidPorts();
             if (this.ports.length > 1 && this.ports[this.ports.length - 1].uiAttribs.addPort && this.ports[this.ports.length - 1].isLinked())
             {
                 this.ports[this.ports.length - 1].removeLinks();
-                console.log("found invalid");
             }
         };
 
         this.incDec = (incDir) =>
         {
-            this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || MIN_NUM_PORTS;
+            this.uiAttribs.multiPortNum = this.uiAttribs.multiPortNum || this.minNumPorts;
             this.setUiAttribs({ "multiPortNum": this.uiAttribs.multiPortNum + incDir });
             this.checkNum();
 

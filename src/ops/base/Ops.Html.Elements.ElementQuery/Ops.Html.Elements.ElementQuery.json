@@ -1,0 +1,66 @@
+{
+    "id": "ea58834d-55af-4afb-9629-d48d145d11cf",
+    "changelog": [
+        {
+            "message": "Op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1744018678272
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1768910001433,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Parent Element",
+                "objType": "element"
+            },
+            {
+                "type": 5,
+                "name": "Query"
+            },
+            {
+                "type": 1,
+                "name": "Force Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "First element",
+                "objType": "element"
+            },
+            {
+                "type": 3,
+                "name": "Elements"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Selects all matching elements in the DOM",
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "e.g. \".some-classname\", '#some-id' or \"footer\""
+            },
+            {
+                "name": "First element",
+                "text": "first element found"
+            },
+            {
+                "name": "Elements",
+                "text": "array of all elements found"
+            }
+        ]
+    },
+    "license": "MIT",
+    "cloneOf": "1a1d80e0-0de8-4c4d-8eaa-e2a0eac6239a",
+    "exampleProjectId": "OFEKW8"
+}

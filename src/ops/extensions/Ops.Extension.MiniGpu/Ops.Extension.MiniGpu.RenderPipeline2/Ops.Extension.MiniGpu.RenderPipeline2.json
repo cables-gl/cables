@@ -1,0 +1,55 @@
+{
+    "id": "d48853ac-d5b4-4c9c-9680-92e9eecf14fc",
+    "created": 1767016696486,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766496080521
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766820910225
+        },
+        {
+            "message": "Extension.MiniGpu.Pipeline2 renamed to Ops.Extension.MiniGpu.RenderPipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766855626187
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767016696486
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Instances",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Childs"
+            }
+        ]
+    }
+}

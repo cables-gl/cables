@@ -13,7 +13,7 @@
             "date": 1725946236694
         }
     ],
-    "authorName": "simod",
+    "authorName": "pandur",
     "created": 1599664445091,
     "layout": {
         "portsIn": [
@@ -178,7 +178,6 @@
         ]
     },
     "summary": "Easy to use image based lighting Material",
-    "issues": "",
     "youtubeids": [
         "rtDA2S9SPQ4"
     ],
@@ -274,10 +273,6 @@
             },
             {
                 "name": "Alpha Mask Source index",
-                "text": "switch to choose which channel of the texture should be used for alpha mapping"
-            },
-            {
-                "name": "Alpha Mask Source",
                 "text": "switch to choose which channel of the texture should be used for alpha mapping"
             },
             {

@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1761659732709
+        },
+        {
+            "message": "Show short version of filename in extended op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769441745788
         }
     ],
     "authorName": "pandur",

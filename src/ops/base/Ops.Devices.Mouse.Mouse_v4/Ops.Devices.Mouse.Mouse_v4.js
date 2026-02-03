@@ -6,6 +6,7 @@ const
     inEventType = op.inSwitch("Events", ["Pointer", "Touch", "Mouse"]),
     inPassive = op.inValueBool("Passive Events", false),
     inEle = op.inObject("Element", "element"),
+
     active = op.inValueBool("Active", true),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
@@ -16,6 +17,7 @@ const
     outMovementX = op.outNumber("Movement X", 0),
     outMovementY = op.outNumber("Movement Y", 0),
     outEvent = op.outObject("Event");
+    // sssqqqqqqqqq
 
 const cgl = op.patch.cgl;
 let normalize = 1;

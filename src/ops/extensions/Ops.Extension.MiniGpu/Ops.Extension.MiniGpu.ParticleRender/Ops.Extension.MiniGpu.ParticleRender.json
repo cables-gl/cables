@@ -1,0 +1,54 @@
+{
+    "id": "a60107e3-8111-4769-bc8e-69c0805cd6e1",
+    "created": 1767009200735,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766496080521
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766820910225
+        },
+        {
+            "message": "Extension.MiniGpu.Pipeline2 renamed to Ops.Extension.MiniGpu.RenderPipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766855626187
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767009200735
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            },
+            {
+                "type": 2,
+                "name": "Vertex Buffer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

@@ -66,5 +66,6 @@
             }
         ]
     },
-    "exampleProjectId": "EfiWpG"
+    "exampleProjectId": "EfiWpG",
+    "license": "MIT"
 }

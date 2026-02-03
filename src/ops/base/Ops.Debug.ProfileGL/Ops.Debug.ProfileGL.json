@@ -17,6 +17,10 @@
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Profile Data"
             }
         ]
     },
@@ -26,5 +30,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

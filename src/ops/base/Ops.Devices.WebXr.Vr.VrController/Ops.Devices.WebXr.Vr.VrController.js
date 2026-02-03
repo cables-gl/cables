@@ -41,22 +41,21 @@ op.setPortGroup("Gamepad", [
 
 inUpdate.onTriggered = () =>
 {
-    outGp.set(null);
+    let found = false;
 
     if (op.patch.cgl.tempData.xrSession)
     {
-        let found = false;
         let xrSession = op.patch.cgl.tempData.xrSession;
 
         const inputSources = xrSession.inputSources;
 
         for (let i = 0; i < inputSources.length; i++)
         {
-            if (inputSources[i].handedness === inHand.get())
+            if (inputSources[i].gamepad && !inputSources[i].hand && inputSources[i].handedness === inHand.get())
             {
                 found = true;
 
-                if (inputSources[i].gamepad)setGamepadValues(inputSources[i].gamepad);
+                setGamepadValues(inputSources[i].gamepad);
 
                 let controlPose = cgl.tempData.xrFrame.getPose(inputSources[i].gripSpace, cgl.tempData.xrReferenceSpace);
                 if (controlPose && controlPose.transform)
@@ -77,10 +76,9 @@ inUpdate.onTriggered = () =>
                 break;
             }
         }
-
-        outFound.set(found);
     }
-
+    else outGp.setRef(null);
+    outFound.set(found);
     next.trigger();
 };
 
@@ -89,21 +87,21 @@ function setGamepadValues(gp)
     outAxis1.set(gp.axes[0]);
     outAxis2.set(gp.axes[1]);
 
-    outButton1.set(gp.buttons[0].pressed);
-    outButton2.set(gp.buttons[1].pressed);
-    outButton3.set(gp.buttons[2].pressed);
-    outButton4.set(gp.buttons[3].pressed);
-    outButton5.set(gp.buttons[4].pressed);
-    outButton6.set(gp.buttons[5].pressed);
-    outButton7.set(gp.buttons[6].pressed);
+    if (gp.buttons[0])outButton1.set(gp.buttons[0].pressed);
+    if (gp.buttons[1])outButton2.set(gp.buttons[1].pressed);
+    if (gp.buttons[2])outButton3.set(gp.buttons[2].pressed);
+    if (gp.buttons[3])outButton4.set(gp.buttons[3].pressed);
+    if (gp.buttons[4])outButton5.set(gp.buttons[4].pressed);
+    if (gp.buttons[5])outButton6.set(gp.buttons[5].pressed);
+    if (gp.buttons[6])outButton7.set(gp.buttons[6].pressed);
 
-    outButton1Touch.set(gp.buttons[0].touched);
-    outButton2Touch.set(gp.buttons[1].touched);
-    outButton3Touch.set(gp.buttons[2].touched);
-    outButton4Touch.set(gp.buttons[3].touched);
-    outButton5Touch.set(gp.buttons[4].touched);
-    outButton6Touch.set(gp.buttons[5].touched);
-    outButton7Touch.set(gp.buttons[6].touched);
+    if (gp.buttons[0])outButton1Touch.set(gp.buttons[0].touched);
+    if (gp.buttons[1])outButton2Touch.set(gp.buttons[1].touched);
+    if (gp.buttons[2])outButton3Touch.set(gp.buttons[2].touched);
+    if (gp.buttons[3])outButton4Touch.set(gp.buttons[3].touched);
+    if (gp.buttons[4])outButton5Touch.set(gp.buttons[4].touched);
+    if (gp.buttons[5])outButton6Touch.set(gp.buttons[5].touched);
+    if (gp.buttons[6])outButton7Touch.set(gp.buttons[6].touched);
 
     const g = { "buttons": gp.buttons,
         "axes": gp.axes,
@@ -111,5 +109,5 @@ function setGamepadValues(gp)
         "mapping": gp.mapping
     };
 
-    outGp.set(g);
+    outGp.setRef(g);
 }

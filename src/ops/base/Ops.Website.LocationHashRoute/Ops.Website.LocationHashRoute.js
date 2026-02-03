@@ -120,6 +120,11 @@ function hashChange(event, forceUpdate)
         hasMatch = true;
     }
 
+    if (!(parsedOut.get().length === 0 && values.length === 0))
+    {
+        parsedOut.set(values);
+    }
+
     if (hasMatch)
     {
         let paramStr = hash.split("?", 2);
@@ -132,11 +137,6 @@ function hashChange(event, forceUpdate)
     }
 
     outMatching.set(hasMatch);
-
-    if (!(parsedOut.get().length === 0 && values.length === 0))
-    {
-        parsedOut.set(values);
-    }
 
     if (hasMatch && !event.silent)
     {

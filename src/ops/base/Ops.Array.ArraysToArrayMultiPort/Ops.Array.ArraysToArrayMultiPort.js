@@ -11,6 +11,6 @@ inArrays.onChange = () =>
     for (let i = 0; i < arrayPorts.length; i++)
         arr[i] = arrayPorts[i].get() || [];
 
-    outArr.set(arr);
+    outArr.setRef(arr);
     outNum.set(arrayPorts.length);
 };

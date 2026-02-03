@@ -15,6 +15,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1738922831714
+        },
+        {
+            "message": "only remove styles from element with style property",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1768917628316
         }
     ],
     "layout": {

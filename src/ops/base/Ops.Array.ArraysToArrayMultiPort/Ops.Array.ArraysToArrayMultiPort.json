@@ -15,17 +15,12 @@
             {
                 "type": 3,
                 "name": "Arrays_0",
-                "longPort": 3,
+                "longPort": 2,
                 "group": "Arrays"
             },
             {
                 "type": 3,
                 "name": "Arrays_1",
-                "group": "Arrays"
-            },
-            {
-                "type": 3,
-                "name": "Arrays_2",
                 "uititle": "add port",
                 "group": "Arrays"
             }

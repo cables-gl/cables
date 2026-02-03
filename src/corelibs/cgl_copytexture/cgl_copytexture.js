@@ -1,5 +1,3 @@
-import { CGL } from "../cgl/index.js";
-
 export class CopyTexture
 {
     constructor(cgl, name, options)

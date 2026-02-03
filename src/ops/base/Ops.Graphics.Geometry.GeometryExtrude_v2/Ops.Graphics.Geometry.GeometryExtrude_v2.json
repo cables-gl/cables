@@ -1,0 +1,72 @@
+{
+    "id": "2601d4c6-f766-4e78-8bcb-ea0287ce7390",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647367948957,
+            "type": "new"
+        },
+        {
+            "message": "Better normals",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769448359635
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Walls",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1769432272977,
+    "summary": "basic extrusion of flat geometry",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

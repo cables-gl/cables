@@ -4,12 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1655703351713
+            "date": 1655703351713,
+            "type": "new"
         },
         {
-            "message": "Ops.User.pandur.GltfGeometry renamed to Ops.Gl.GLTF.GltfGeometry",
+            "message": "Show warning when no nodes found\t",
+            "type": "feature",
             "author": "pandur",
-            "date": 1655704524417
+            "date": 1768302326756
+        },
+        {
+            "message": "Added match option to select geometry which name starts with the entered string",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768310694683
         }
     ],
     "authorName": "pandur",
@@ -23,6 +31,15 @@
             {
                 "type": 5,
                 "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Name Match index",
+                "values": [
+                    "exact",
+                    "starts with"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -57,5 +74,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

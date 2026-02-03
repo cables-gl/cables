@@ -43,7 +43,7 @@ export class CglRenderLoop extends RenderLoop
     {
         // if (!this.#renderOneFrame && (this.paused || this.aborted)) return;
         // this.emitEvent("reqAnimFrame");
-        cancelAnimationFrame(this.#animReq);
+        // cancelAnimationFrame(this.#animReq);
 
         this.#patch.config.fpsLimit = this.#patch.config.fpsLimit || 0;
         if (this.#patch.config.fpsLimit)

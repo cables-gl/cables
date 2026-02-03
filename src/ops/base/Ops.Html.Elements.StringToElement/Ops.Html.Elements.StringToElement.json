@@ -1,0 +1,48 @@
+{
+    "id": "f392f127-1aa4-40dc-829c-2cbc504342f0",
+    "created": 1768912064452,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1768912064478
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Input"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "values": [
+                    "text/html",
+                    "text/xml"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "convert html/xml string input to an element",
+    "docs": {
+        "ports": [
+            {
+                "name": "Input",
+                "text": "html/xml"
+            }
+        ]
+    },
+    "exampleProjectId": "Bo1JW8"
+}

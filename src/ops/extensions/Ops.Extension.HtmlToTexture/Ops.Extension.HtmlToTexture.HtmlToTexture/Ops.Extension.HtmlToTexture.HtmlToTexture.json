@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1762813698253
-        },
-        {
-            "message": "Team.HtmlToTexture.HtmlToTexture renamed to Ops.Extension.HtmlToTexture.HtmlToTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1764151487890
         }
     ],
     "layout": {

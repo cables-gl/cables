@@ -10,7 +10,7 @@ const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(attachments.normalsmaterial_vert, attachments.normalsmaterial_frag);
-outShader.set(shader);
+outShader.setRef(shader);
 render.onTriggered = doRender;
 updateAttr();
 inMulModel.onChange = inAbs.onChange = inAttr.onChange = updateAttr;

@@ -41,5 +41,6 @@
     "exampleProjectId": "BweOVl",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

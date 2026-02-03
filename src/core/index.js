@@ -15,6 +15,7 @@ import { AnimKey } from "./anim_key.js";
 import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
+import { Stack } from "./stack.js";
 
 CABLES = CABLES || {};
 CABLES = {
@@ -32,7 +33,6 @@ CABLES.Op = Op;
 CABLES.Profiler = Profiler;
 CABLES.Patch = Patch;
 CABLES.Timer = Timer;
-CABLES.Variable = Variable;
 CABLES.LoadingStatus = LoadingStatus;
 CABLES.now = now;
 CABLES.internalNow = internalNow;
@@ -46,21 +46,27 @@ CABLES.getShortOpName = utils.getShortOpName;
 CABLES.simpleId = utils.simpleId;
 CABLES.clamp = utils.clamp;
 CABLES.map = utils.map;
-CABLES.shuffleArray = utils.shuffleArray;
 CABLES.generateUUID = utils.generateUUID;
 CABLES.prefixedHash = utils.prefixedHash;
 CABLES.smoothStep = utils.smoothStep;
 CABLES.smootherStep = utils.smootherStep;
-CABLES.cacheBust = utils.cacheBust;
 CABLES.copyArray = utils.copyArray;
 CABLES.basename = utils.basename;
 CABLES.logStack = utils.logStack;
 CABLES.filename = utils.filename;
+
+/* minimalcore:start */
 CABLES.ajax = utils.ajax;
-// CABLES.request = utils.request;
+CABLES.cacheBust = utils.cacheBust;
+CABLES.shuffleArray = utils.shuffleArray;
+CABLES.Variable = Variable;
+
+/* minimalcore:end */
+
 CABLES.logErrorConsole = utils.logErrorConsole;
 CABLES.isNumeric = utils.isNumeric;
 CABLES.uniqueArray = utils.uniqueArray;
+CABLES.Stack = Stack;
 
 /** @type {Array<Op>} */
 CABLES.OPS = [];

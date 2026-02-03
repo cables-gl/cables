@@ -40,18 +40,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Stride",
                 "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Result"
             }
         ]
@@ -60,5 +60,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Bpx7ck"
+    "exampleProjectId": "Bpx7ck",
+    "license": "MIT"
 }

@@ -1,5 +1,3 @@
-const cgl = op.patch.cgl;
-
 let microphone = null;
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -123,7 +121,7 @@ inInit.onTriggered = function ()
 };
 
 /* INIT FUNCTION */
-loadingId = cgl.patch.loading.start("MIC inputs", "", op);
+loadingId = op.patch.loading.start("MIC inputs", "", op);
 navigator.mediaDevices.getUserMedia({ "audio": true })
     .then((res) =>
     { return navigator.mediaDevices.enumerateDevices(); })
@@ -135,14 +133,15 @@ navigator.mediaDevices.getUserMedia({ "audio": true })
 
         inInputDevices.uiAttribs.values = audioInputDevices;
         op.setUiError("devicesLoaded", "Input devices have been loaded. Please choose a device from the dropdown menu and click the \"Start\" button to activate the microphone input.", 0);
-        cgl.patch.loading.finished(loadingId);
+        op.patch.loading.finished(loadingId);
         audioInputsLoaded = true;
-        outDevices.set(null);
-        outDevices.set(audioInputDevices);
+        outDevices.setRef(audioInputDevices);
     })
     .catch((e) =>
     {
         op.log("error", e);
-        cgl.patch.loading.finished(loadingId);
+        op.patch.loading.finished(loadingId);
         audioInputsLoaded = false;
+
+        outDevices.setRef(null);
     });

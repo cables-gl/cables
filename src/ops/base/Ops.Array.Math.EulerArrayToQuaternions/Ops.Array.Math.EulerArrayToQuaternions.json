@@ -1,0 +1,33 @@
+{
+    "id": "e78ebace-3e13-4b97-9bf1-7e026d5259df",
+    "created": 1769211073039,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1769211073073
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Euler Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Quaternions"
+            }
+        ]
+    },
+    "cloneOf": "e86ec524-b3fc-4e0f-9489-c48091c23178",
+    "summary": "conver an array3 of euler rotations to a array4 of quaternions",
+    "docs": {
+        "ports": []
+    }
+}

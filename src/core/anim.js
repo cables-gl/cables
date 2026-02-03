@@ -34,6 +34,8 @@ export class Anim extends Events
     static EASING_ABSOLUTE = 1;
     static EASING_SMOOTHSTEP = 2;
     static EASING_SMOOTHERSTEP = 3;
+
+    /* minimalcore:start */
     static EASING_CUBICSPLINE = 4;
 
     static EASING_CUBIC_IN = 5;
@@ -66,6 +68,8 @@ export class Anim extends Events
     static EASING_QUINT_OUT = 26;
     static EASING_QUINT_INOUT = 27;
 
+    /* minimalcore:end */
+
     static EASING_CLIP = 28;
 
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out", "Clip"];
@@ -86,6 +90,7 @@ export class Anim extends Events
     onChange = null;
     stayInTimeline = false;
     batchMode = false;
+    #log = new Logger("Anim");
 
     /**
      * @param {AnimCfg} [cfg]
@@ -95,7 +100,6 @@ export class Anim extends Events
         super();
         cfg = cfg || {};
         this.id = uuid();
-        this._log = new Logger("Anim");
         this.name = cfg.name || null;
 
         /** @type {Number} */
@@ -242,7 +246,6 @@ export class Anim extends Events
         {
             this.keys.sort((a, b) => { return a.time - b.time; });
             this.#needsSort = false;
-            if (this.keys.length > 999 && this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
 
             this.emitEvent(Anim.EVENT_CHANGE);
         }
@@ -334,7 +337,7 @@ export class Anim extends Events
      */
     setValue(time, value, cb = null)
     {
-        if (isNaN(value))CABLES.logStack();
+        if (CABLES.UI && CABLES.UI.showDevInfos) if (isNaN(value)) CABLES.logStack();
 
         if (this.#needsSort) this.sortKeys();
         let found = null;
@@ -362,7 +365,6 @@ export class Anim extends Events
                 });
             this.keys.push(found);
 
-            // if (this.keys.length % 1000 == 0)console.log(this.name, this.keys.length);
         }
 
         if (!this.batchMode)
@@ -425,6 +427,7 @@ export class Anim extends Events
     getSerialized()
     {
 
+        /* minimalcore:start */
         /** @type {SerializedAnim} */
         const obj = {};
         obj.keys = [];
@@ -436,6 +439,8 @@ export class Anim extends Events
             obj.keys.push(this.keys[i].getSerialized());
 
         return obj;
+
+    /* minimalcore:end */
     }
 
     /**
@@ -546,14 +551,6 @@ export class Anim extends Events
      */
     getValue(time = 0)
     {
-        // if (isNaN(time))time = 0;
-        // counts[this.name] = counts[this.name] || 0;
-        // if (counts[this.name] < 10 && this.port)
-        // {
-        //     console.log("getvalue", this.name, time, this);
-        //     CABLES.logStack();
-        //     counts[this.name]++;
-        // }
 
         let valAdd = 0;
         if (this.keys.length === 0) return 0;
@@ -613,7 +610,6 @@ export class Anim extends Events
         {
             if (!key1.clip && this.port)
             {
-
                 const patch = this.port.op.patch;
                 const clip = patch.getVar(key1.clipId)?.getValue();
                 if (clip) key1.clip = clip;
@@ -624,7 +620,7 @@ export class Anim extends Events
             }
             else
             {
-                console.log("no clip found");
+                this.#log.warn("no clip found");
             }
         }
 
@@ -638,7 +634,7 @@ export class Anim extends Events
     {
         if (k.time === undefined)
         {
-            this._log.warn("key time undefined, ignoring!");
+            this.#log.warn("key time undefined, ignoring!");
         }
         else
         {
@@ -665,6 +661,7 @@ export class Anim extends Events
         if (str == "smoothstep") return Anim.EASING_SMOOTHSTEP;
         if (str == "smootherstep") return Anim.EASING_SMOOTHERSTEP;
 
+        /* minimalcore:start */
         if (str == "Cubic In") return Anim.EASING_CUBIC_IN;
         if (str == "Cubic Out") return Anim.EASING_CUBIC_OUT;
         if (str == "Cubic In Out") return Anim.EASING_CUBIC_INOUT;
@@ -695,7 +692,8 @@ export class Anim extends Events
         if (str == "Quint In") return Anim.EASING_QUINT_IN;
         if (str == "Quint In Out") return Anim.EASING_QUINT_INOUT;
 
-        console.log("unknown anim easing?", str);
+        /* minimalcore:end */
+        this.#log.warn("unknown anim easing?", str);
     }
 
     /**

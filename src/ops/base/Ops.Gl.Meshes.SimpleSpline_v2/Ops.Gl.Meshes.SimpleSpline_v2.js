@@ -3,11 +3,11 @@ const
     inPoints = op.inArray("Points"),
     numPoints = op.inValueInt("Num Points"),
     strip = op.inBool("Line Strip", true),
-    outGeom = op.outObject("Geometry"),
     texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random", "Fill"], "0"),
     inTexCoords = op.inArray("TexCoords Array"),
     inVertCols = op.inArray("Vertex Colors"),
-    next = op.outTrigger("Next");
+    next = op.outTrigger("Next"),
+    outGeom = op.outObject("Geometry");
 
 const cgl = op.patch.cgl;
 const geom = new CGL.Geometry("simplespline");

@@ -1,3 +1,4 @@
+import { Logger } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
@@ -7,6 +8,7 @@ const MIN_NUM_PORTS = 2;
 export class MultiPort extends Port
 {
 
+    /* minimalcore:start */
     /**
      * @param {import("./core_op.js").Op<any>} __parent
      * @param {string} name
@@ -19,6 +21,7 @@ export class MultiPort extends Port
     {
         super(__parent, name, Port.TYPE_ARRAY, uiAttribs);
 
+        this._log = new Logger("multiport old");
         this.setUiAttribs({ "multiPort": true, "group": this.name, "order": -1 });
         this.ports = [];
         this.direction = dir;
@@ -104,13 +107,16 @@ export class MultiPort extends Port
 
         this.countPorts = () =>
         {
+
             const gui = Patch.getGui();
+
             if (CABLES.UI && !gui.isRemoteClient && gui.patchView && gui.patchView.patchRenderer && gui.patchView.patchRenderer.isDraggingPort())
             {
                 clearTimeout(this.retryTo);
                 this.retryTo = setTimeout(this.countPorts.bind(this));
                 return;
             }
+
             this.retryTo = null;
 
             let redo = false;
@@ -251,7 +257,7 @@ export class MultiPort extends Port
             const attrs = {};
             // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
             attrs.type = type;
-            const po = new Port(this.op, name + "_" + this.ports.length, type, attrs);
+            const po = this.op.newPort(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;
 
@@ -324,4 +330,6 @@ export class MultiPort extends Port
         this.removeInvalidPorts();
         updateUi();
     }
+
+/* minimalcore:end */
 }

@@ -1,0 +1,84 @@
+{
+    "id": "557f962a-00b4-45f2-8da6-6634cfb629d5",
+    "created": 1721061709828,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1721061709865
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vector X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vector Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vector Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Collider"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "exampleProjectId": "sexkbm",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Simulate a character in a physics world"
+}

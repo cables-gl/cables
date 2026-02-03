@@ -85,7 +85,9 @@ export class Patch extends Events
     static EVENT_VALUESSET = "loadedValueSet";
     static EVENT_DISPOSE = "dispose";
     static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
+    static EVENT_INIT_CGL = "INIT_CGL";
 
+    #log;
     #renderOneFrame = false;
     #initialDeserialize = true;
 
@@ -95,14 +97,25 @@ export class Patch extends Events
     animMaxTime = 0;
     missingClipAnims = {};
 
-    // animFrameCallbacks = [];
+    profiler = null;
+    aborted = false;
+    _crashedOps = [];
+    animFrameOps = [];
+    _animReq = null;
+    _opIdCache = {};
+    _triggerStack = [];
+    storeObjNames = false; // remove after may release
+    _volumeListeners = [];
+    namedTriggers = {};
+
+    _origData = null;
+    tempData = {};
+    frameStore = {};
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)
     {
         super();
-
-        this._log = new Logger("core_patch", { "onError": cfg.onError });
 
         /** @type {RenderLoop} */
         this.renderloop = null;
@@ -122,30 +135,17 @@ export class Patch extends Events
 
         };
 
+        this.#log = new Logger("core_patch", { "onError": cfg.onError });
         this.timer = new Timer();
         this.freeTimer = new Timer();
-        this.animFrameOps = [];
-        this.gui = false;
+        this.gui = null;
         CABLES.logSilent = this.silent = true;
-        this.profiler = null;
-        this.aborted = false;
-        this._crashedOps = [];
-
-        this._animReq = null;
-        this._opIdCache = {};
-        this._triggerStack = [];
-        this.storeObjNames = false; // remove after may release
 
         /** @type {LoadingStatus} */
         this.loading = new LoadingStatus(this);
 
-        this._volumeListeners = [];
-        this.namedTriggers = {};
-
-        this._origData = null;
-        this.tempData = this.frameStore = {};
-
-        if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
+        /* minimalcore:start */
+        if (!(function () { return !this; }())) this.#log.warn("not in strict mode: core patch");
 
         if (this.config.hasOwnProperty("silent")) this.silent = CABLES.logSilent = this.config.silent;
         if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
@@ -153,6 +153,8 @@ export class Patch extends Events
         if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
         if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
+
+        /* minimalcore:end */
 
         /** @type {Object<string,PatchVariable>} */
         this._variables = {};
@@ -164,7 +166,7 @@ export class Patch extends Events
         this.cgp = null;
 
         this._subpatchOpCache = {};
-        window.dispatchEvent(new CustomEvent("INIT_CG", { "detail": this }));
+        window.dispatchEvent(new CustomEvent(Patch.EVENT_INIT_CGL, { "detail": this }));
 
         this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
 
@@ -193,16 +195,16 @@ export class Patch extends Events
                         if (err)
                         {
                             const txt = "";
-                            this._log.error("err", err);
-                            this._log.error("data", data);
-                            this._log.error("data", data.msg);
+                            this.#log.error("err", err);
+                            this.#log.error("data", data);
+                            this.#log.error("data", data.msg);
                             return;
                         }
                         this.deSerialize(data);
                     }
                     catch (e)
                     {
-                        this._log.error("could not load/parse patch ", e);
+                        this.#log.error("could not load/parse patch ", e);
                     }
                 }
             );
@@ -213,11 +215,14 @@ export class Patch extends Events
         this.cg = undefined;
     }
 
+    /* minimalcore:start */
     static getGui()
     {
         // @ts-ignore
         return window.gui;
     }
+
+    /* minimalcore:end */
 
     isPlaying()
     {
@@ -360,8 +365,8 @@ export class Patch extends Events
         {
             if (!identifier)
             {
-                console.error("createop identifier false", identifier);
-                console.log((new Error()).stack);
+                console.error("createop identifier false", identifier);// eslint-disable-line
+                console.log((new Error()).stack);// eslint-disable-line
                 return;
             }
             if (identifier.indexOf("Ops.") === -1)
@@ -383,10 +388,12 @@ export class Patch extends Events
                     catch (e)
                     {
                         this._crashedOps.push(objName);
-                        this._log.error("[instancing error] constructor: " + objName, e);
+                        this.#log.error("[instancing error] constructor: " + objName, e);
+
+                        /* minimalcore:start */
                         if (!this.isEditorMode())
                         {
-                            this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+                            this.#log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
                         }
                         else
                         {
@@ -396,6 +403,8 @@ export class Patch extends Events
                             op.setEnabled(false);
                             if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
                         }
+
+                        /* minimalcore:end */
                     }
                     op.opId = opId;
                 }
@@ -404,7 +413,7 @@ export class Patch extends Events
                     if (opName)
                     {
                         identifier = opName;
-                        this._log.warn("could not find op by id: " + opId);
+                        this.#log.warn("could not find op by id: " + opId);
                     }
                     else
                     {
@@ -424,21 +433,12 @@ export class Patch extends Events
                 {
                     this.emitEvent("criticalError", { "title": "Unknown op: " + objName, "text": "Unknown op: " + objName });
 
-                    this._log.error("unknown op: " + objName);
+                    this.#log.error("unknown op: " + objName);
                     throw new Error("unknown op: " + objName);
                 }
                 else
                 {
-                    if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName, id);
-                    else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName, id);
-                    else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName, id);
-                    else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName, id);
-                    else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName, id);
-                    else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName, id);
-                    else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
-                    else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
-                    else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                    else console.log("parts.length", parts.length);
+                    op = new opObj(this, objName, id);
                 }
 
                 if (op)
@@ -455,11 +455,12 @@ export class Patch extends Events
         {
             this._crashedOps.push(objName);
 
-            this._log.error("[instancing error] " + objName, e);
+            this.#log.error("[instancing error] " + objName, e);
 
+            /* minimalcore:start */
             if (!this.isEditorMode())
             {
-                this._log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
+                this.#log.error("INSTANCE_ERR", "Instancing Error: " + objName, e);
 
                 // throw new Error("instancing error 1" + objName);
             }
@@ -467,6 +468,8 @@ export class Patch extends Events
             {
                 if (this.#initialDeserialize) Patch.getGui().patchView.store.opCrashed = true;
             }
+
+            /* minimalcore:end */
         }
 
         if (op)
@@ -476,7 +479,7 @@ export class Patch extends Events
         }
         else
         {
-            this._log.log("no op was created!?", identifier, id);
+            this.#log.log("no op was created!?", identifier, id);
         }
         return op;
     }
@@ -510,7 +513,7 @@ export class Patch extends Events
 
             if (this._opIdCache[op.id])
             {
-                this._log.warn("opid with id " + op.id + " already exists in patch!");
+                this.#log.warn("opid with id " + op.id + " already exists in patch!");
                 this.deleteOp(op.id); // strange with subpatch ops: why is this needed, somehow ops get added twice ???.....
                 // return;
             }
@@ -527,7 +530,7 @@ export class Patch extends Events
         }
         else
         {
-            this._log.error("addop: op could not be created: ", opIdentifier);
+            this.#log.error("addop: op could not be created: ", opIdentifier);
         }
 
         return op;
@@ -616,6 +619,7 @@ export class Patch extends Events
         }
     }
 
+    // @todo move to ui ?
     /**
      * @param {string} opid
      * @param {boolean} [tryRelink]
@@ -639,17 +643,22 @@ export class Patch extends Events
                 if (op)
                 {
                     found = true;
+
+                    /* minimalcore:start */
                     if (tryRelink)
                     {
-                        if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
+                        if (op.portsIn.length > 0 && op.getFirstPortIn() && op.getFirstPortIn().isLinked() && (op.portsOut.length > 0 && op.getFirstPortOut() && op.getFirstPortOut().isLinked()))
                         {
-                            if (op.portsIn[0].getType() == op.portsOut[0].getType() && op.portsIn[0].links[0])
+                            if (op.getFirstPortIn().getType() == op.getFirstPortOut().getType() &&
+                                op.getFirstPortIn().isLinked())
                             {
-                                reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
-                                reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);
+                                reLinkP1 = op.getFirstPortIn()?.links[0]?.getOtherPort(op.getFirstPortIn());
+                                reLinkP2 = op.getFirstPortOut()?.links[0]?.getOtherPort(op.getFirstPortOut());
                             }
                         }
                     }
+
+                    /* minimalcore:end */
 
                     const opToDelete = this.ops[i];
                     opToDelete.removeLinks();
@@ -663,10 +672,13 @@ export class Patch extends Events
                     if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                     opToDelete.cleanUp();
 
-                    if (reLinkP1 !== null && reLinkP2 !== null)
+                    /* minimalcore:start */
+                    if (reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
                     {
                         this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                     }
+
+                    /* minimalcore:end */
 
                     delete this._opIdCache[opid];
                     break;
@@ -674,7 +686,7 @@ export class Patch extends Events
             }
         }
 
-        if (!found) this._log.warn("core patch deleteop: not found...", opid);
+        if (!found) this.#log.warn("core patch deleteop: not found...", opid);
     }
 
     getFrameNum()
@@ -683,9 +695,9 @@ export class Patch extends Events
     }
 
     /**
-     * @param {number} time
-     * @param {number} delta
-     * @param {number} timestamp
+     * @param {number} [time]
+     * @param {number} [delta]
+     * @param {number} [timestamp]
      */
     updateAnims(time, delta, timestamp)
     {
@@ -711,21 +723,28 @@ export class Patch extends Events
      */
     link(op1, port1Name, op2, port2Name, lowerCase = false, fromDeserialize = false)
     {
-        if (!op1) return this._log.warn("link: op1 is null ");
-        if (!op2) return this._log.warn("link: op2 is null");
+
+        /* minimalcore:start */
+        if (!op1) return this.#log.warn("link: op1 is null ");
+        if (!op2) return this.#log.warn("link: op2 is null");
+
+        /* minimalcore:end */
 
         const port1 = op1.getPort(port1Name, lowerCase);
         const port2 = op2.getPort(port2Name, lowerCase);
 
-        if (!port1) return this._log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
-        if (!port2) return this._log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
+        /* minimalcore:start */
+        if (!port1) return this.#log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
+        if (!port2) return this.#log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
         if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
 
+        /* minimalcore:end */
         if (Link.canLink(port1, port2))
         {
             const link = new Link(this);
-            link.link(port1, port2);
+            if (port1 && port2)
+                link.link(port1, port2);
 
             this.emitEvent(Patch.EVENT_LINK, port1, port2, link, fromDeserialize);
             return link;
@@ -738,6 +757,8 @@ export class Patch extends Events
      */
     serialize(options)
     {
+
+        /* minimalcore:start */
         const obj = {};
 
         options = options || {};
@@ -753,18 +774,24 @@ export class Patch extends Events
 
         if (options.asObject) return obj;
         return JSON.stringify(obj);
+
+        /* minimalcore:end */
     }
 
+    /* minimalcore:start */
     getOpsByRefId(refId) // needed for instancing ops ?
     {
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
+
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getOpsByRefId");
         const refOps = [];
         // const ops = gui.corePatch().ops;
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].storage && this.ops[i].storage.ref == refId) refOps.push(this.ops[i]);
-        perf.finish();
+        // perf.finish();
         return refOps;
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {String} opid
@@ -891,7 +918,7 @@ export class Patch extends Events
             }
             catch (e)
             {
-                this._log.error("[instancing error] op data:", opData, e);
+                this.#log.error("[instancing error] op data:", opData, e);
                 // throw new Error("could not create op by id: <b>" + (opData.objName || opData.opId) + "</b> (" + opData.id + ")");
             }
 
@@ -900,7 +927,7 @@ export class Patch extends Events
                 addedOps.push(op);
                 if (options.genIds) op.id = shortId();
                 op.portsInData = opData.portsIn;
-                op._origData = JSON.parse(JSON.stringify(opData));
+                op._origData = structuredClone(opData);
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
@@ -922,21 +949,12 @@ export class Patch extends Events
                             }
                             else
                             {
-
-                                /*
-                             * if (port.uiAttribs.hasOwnProperty("title"))
-                             * {
-                             *     op.preservedPortTitles = op.preservedPortTitles || {};
-                             *     op.preservedPortTitles[port.name] = port.uiAttribs.title;
-                             * }
-                             */
                                 op.preservedPortValues = op.preservedPortValues || {};
                                 op.preservedPortValues[objPort.name] = objPort.value;
                             }
                         }
                     }
 
-                // for (const ipo in opData.portsOut)
                 if (opData.portsOut)
                     for (let ipo = 0; ipo < opData.portsOut.length; ipo++)
                     {
@@ -966,7 +984,7 @@ export class Patch extends Events
             }
 
             const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-            if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused);
+            if (!this.silent && timeused > 5) console.log("long op init ", obj.ops[iop].objName, timeused); // eslint-disable-line
         }
         this.logStartup("add ops done");
 
@@ -1056,7 +1074,7 @@ export class Patch extends Events
                                             }
                                         }
 
-                                        if (!dstOp) this._log.warn("could not find op for lost link");
+                                        if (!dstOp) this.#log.warn("could not find op for lost link");
                                         else
                                         {
                                             this._addLink(
@@ -1076,8 +1094,8 @@ export class Patch extends Events
                                             const op1 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objIn);
                                             const op2 = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
 
-                                            if (!op1)console.log("could not find link op1");
-                                            if (!op2)console.log("could not find link op2");
+                                            if (!op1)console.log("could not find link op1");// eslint-disable-line
+                                            if (!op2)console.log("could not find link op2");// eslint-disable-line
 
                                             const p1Name = obj.ops[iop].portsOut[ipi2].links[ili].portIn;
 
@@ -1130,7 +1148,7 @@ export class Patch extends Events
                 }
                 catch (e)
                 {
-                    console.error("op.init crash", e);
+                    console.error("op.init crash", e); // eslint-disable-line
                 }
             }
         }
@@ -1159,16 +1177,6 @@ export class Patch extends Events
         this.#initialDeserialize = false;
     }
 
-    /**
-     * @param {boolean} enable
-     */
-    profile(enable)
-    {
-        this.profiler = new Profiler(this);
-        for (let i = 0; i < this.ops.length; i++)
-            this.ops[i].profile();
-    }
-
     // ----------------------
 
     /**
@@ -1186,12 +1194,14 @@ export class Patch extends Events
         }
         else
         {
-            this._log.warn("variable " + name + " not found!");
+            this.#log.warn("variable " + name + " not found!");
         }
     }
 
     _sortVars()
     {
+
+        /* minimalcore:start */
         if (!this.isEditorMode()) return;
         const ordered = {};
         Object.keys(this._variables).sort(
@@ -1202,6 +1212,8 @@ export class Patch extends Events
             ordered[key] = this._variables[key];
         });
         this._variables = ordered;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -1268,12 +1280,13 @@ export class Patch extends Events
      * @param {number} t
      * @returns {PatchVariable[]}
      */
+    /* minimalcore:start */
     getVars(t)
     {
         if (t === undefined) return this._variables;
         if (t === 1) return {};
 
-        const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
+        // const perf = Patch.getGui().uiProfiler.start("[corepatchetend] getVars");// todo should work event based
 
         const vars = [];
         let tStr = "";
@@ -1284,8 +1297,8 @@ export class Patch extends Events
         else if (t == Port.TYPE_DYNAMIC) tStr = "dynamic";
         else
         {
-            console.log("unknown port type", t);
-            console.log(new Error().stack);
+            console.log("unknown port type", t); // eslint-disable-line
+            console.log(new Error().stack); // eslint-disable-line
         }
 
         for (const i in this._variables)
@@ -1293,42 +1306,26 @@ export class Patch extends Events
             if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
         }
 
-        perf.finish();
+        // perf.finish();
 
         return vars;
     }
 
-    // getVars(t)
-    // {
-    //     if (t === undefined) return this._variables;
-
-    //     const vars = [];
-    //     let tStr = "";
-    //     if (t == Port.TYPE_STRING) tStr = "string";
-    //     if (t == Port.TYPE_VALUE) tStr = "number";
-    //     if (t == Port.TYPE_ARRAY) tStr = "array";
-    //     if (t == Port.TYPE_OBJECT) tStr = "object";
-
-    //     for (const i in this._variables)
-    //     {
-    //         if (!this._variables[i].type || this._variables[i].type == tStr || this._variables[i].type == t) vars.push(this._variables[i]);
-    //     }
-    //     return vars;
-    // }
+    /* minimalcore:end */
 
     /**
      * @description invoke pre rendering of ops
      */
     preRenderOps()
     {
-        this._log.log("prerendering...");
+        this.#log.log("prerendering...");
 
         for (let i = 0; i < this.ops.length; i++)
         {
             if (this.ops[i].preRender)
             {
                 this.ops[i].preRender();
-                this._log.log("prerender " + this.ops[i].objName);
+                this.#log.log("prerender " + this.ops[i].objName);
             }
         }
     }
@@ -1358,6 +1355,8 @@ export class Patch extends Events
 
     printTriggerStack()
     {
+
+        /* minimalcore:start */
         if (this._triggerStack.length == 0)
         {
             // console.log("stack length", this._triggerStack.length); // eslint-disable-line
@@ -1375,6 +1374,7 @@ export class Patch extends Events
 
         console.table(rows); // eslint-disable-line
         console.groupEnd(); // eslint-disable-line
+        /* minimalcore:end */
     }
 
     get containerElement()
@@ -1451,12 +1451,14 @@ export class Patch extends Events
                             {
                                 links.splice(l, 1);
                             }
+
+                            /* minimalcore:start */
                             else
                             {
                                 if (options.fixLostLinks)
                                 {
                                     const op = Patch.getGui().corePatch().getOpById(links[l].objIn);
-                                    if (!op) console.log("op not found!");
+                                    if (!op) console.log("op not found!"); // eslint-disable-line
                                     else
                                     {
                                         const outerOp = Patch.getGui().patchView.getSubPatchOuterOp(op.uiAttribs.subPatch);
@@ -1470,6 +1472,8 @@ export class Patch extends Events
                                     }
                                 }
                             }
+
+                            /* minimalcore:end */
                         }
                     }
                 }

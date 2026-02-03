@@ -1,7 +1,7 @@
 import { Logger } from "cables-shared-client";
 import { utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
-import { CONSTANTS, Geometry, CgMesh, CgShader } from "../cg/index.js";
+import { CONSTANTS, Geometry, CgMesh } from "../cg/index.js";
 
 import { CglContext } from "./cgl_state.js";
 import { Shader } from "./cgl_shader.js";
@@ -11,7 +11,7 @@ MESH.lastMesh = null;
 
 /**
  * @typedef AttributeObject
- * @property {WebGlBuffer} buffer
+ * @property {WebGLBuffer} buffer
  * @property {number} itemSize
  * @property {number} numItems
  * @property {string} name
@@ -33,9 +33,7 @@ MESH.lastMesh = null;
 
 /**
  * webgl renderable 3d object
- * @class
- * @namespace external:CGL
- * @hideconstructor
+ *
  * @example
  * const cgl=this._cgl
  * const mesh=new CGL.Mesh(cgl, geometry);
@@ -48,6 +46,7 @@ MESH.lastMesh = null;
  */
 class Mesh extends CgMesh
 {
+    #log = new Logger("cgl_mesh");
 
     /** @type {CglContext} */
     #cgl = null;
@@ -57,6 +56,28 @@ class Mesh extends CgMesh
 
     /** @type {WebGLBuffer} */
     #bufVerticesIndizes = null;
+
+    /** @type {number} */
+    #indexType;
+
+    _attributes = [];
+    _attribLocs = {};
+
+    _lastShader = null;
+    _numInstances = 0;
+
+    _preWireframeGeom = null;
+    addVertexNumbers = false;
+
+    feedBackAttributes = [];
+
+    _feedBacks = [];
+    _feedBacksChanged = false;
+    _transformFeedBackLoc = -1;
+    _lastAttrUpdate = 0;
+
+    memFreed = false;
+    _queryExt = null;
 
     /**
      * @param {CglContext} _cgl cgl
@@ -70,35 +91,16 @@ class Mesh extends CgMesh
 
         let options = _options || {};
         if (utils.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
-        this._log = new Logger("cgl_mesh");
         this._bufVertexAttrib = null;
         this.#bufVerticesIndizes = this.#cgl.gl.createBuffer();
-        this._indexType = this.#cgl.gl.UNSIGNED_SHORT;
-        this._attributes = [];
-        this._attribLocs = {};
 
-        this._lastShader = null;
-        this._numInstances = 0;
-
+        this.#indexType = this.#cgl.gl.UNSIGNED_SHORT;
         this._glPrimitive = options.glPrimitive || null;
 
         this.opId = options.opId || "";
-        this._preWireframeGeom = null;
-        this.addVertexNumbers = false;
-
-        this.feedBackAttributes = [];
         this.setGeom(__geom);
 
-        this._feedBacks = [];
-        this._feedBacksChanged = false;
-        this._transformFeedBackLoc = -1;
-        this._lastAttrUpdate = 0;
-
-        this.memFreed = false;
-
         this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
-
-        this._queryExt = null;
     }
 
     get geom()
@@ -185,7 +187,7 @@ class Mesh extends CgMesh
         if (!start && !end) return;
 
         if (!attr.name)
-            this._log.stack("no attrname?!");
+            this.#log.stack("no attrname?!");
 
         const gl = this.#cgl.gl;
 
@@ -203,7 +205,7 @@ class Mesh extends CgMesh
         if (end > array.length && !this.warned)
         {
             this.warned = true;
-            this._log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
+            this.#log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
             return;
         }
 
@@ -229,15 +231,17 @@ class Mesh extends CgMesh
         attr.numItems = array.length / attr.itemSize;// numItems;
     }
 
+    /**
+     * @param {Float32Array|number[]} array
+     * @param {object} attr
+     */
     _bufferArray(array, attr)
     {
         let floatArray = attr.floatArray || null;
         if (!array) return;
 
         if (this.#cgl.debugOneFrame)
-        {
-        console.log("_bufferArray", array.length, attr.name); // eslint-disable-line
-        }
+            console.log("_bufferArray", array.length, attr.name); // eslint-disable-line
 
         if (!(array instanceof Float32Array))
         {
@@ -270,10 +274,7 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function setAttribute
-     * @description update attribute
-     * @memberof Mesh
-     * @instance
+     * update attribute
      * @param {String} name
      * @param {Array} array
      * @param {Number} itemSize
@@ -294,7 +295,7 @@ class Mesh extends CgMesh
     {
         if (!array)
         {
-            this._log.error("mesh addAttribute - no array given! " + name);
+            this.#log.error("mesh addAttribute - no array given! " + name);
             throw new Error();
         }
         let cb = null;
@@ -372,10 +373,7 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function updateTexCoords
-     * @description update texture coordinates only from a geometry
-     * @memberof Mesh
-     * @instance
+     * update texture coordinates only from a geometry
      * @param {Geometry} geom
      */
     updateTexCoords(geom)
@@ -392,10 +390,7 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function updateNormals
-     * @description update normals only from a geometry
-     * @memberof Mesh
-     * @instance
+     * update normals only from a geometry
      * @param {Geometry} geom
      */
     updateNormals(geom)
@@ -434,28 +429,25 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function setVertexIndices
-     * @description update vertex indices / faces
-     * @memberof Mesh
-     * @instance
+     * update vertex indices / faces
      * @param {array} vertIndices
      */
     setVertexIndices(vertIndices)
     {
         if (!this.#bufVerticesIndizes)
         {
-            this._log.warn("no bufVerticesIndizes: " + this._name);
+            this.#log.warn("no bufVerticesIndizes: " + this._name);
             return;
         }
         if (vertIndices.length > 0)
         {
-            if (vertIndices instanceof Float32Array) this._log.warn("vertIndices float32Array: " + this._name);
+            if (vertIndices instanceof Float32Array) this.#log.warn("vertIndices float32Array: " + this._name);
 
             for (let i = 0; i < vertIndices.length; i++)
             {
                 if (vertIndices[i] >= this._numVerts)
                 {
-                    this._log.warn("invalid index in " + this._name, i, vertIndices[i]);
+                    this.#log.warn("invalid index in " + this._name, i, vertIndices[i]);
                     return;
                 }
             }
@@ -470,19 +462,19 @@ class Mesh extends CgMesh
             if (vertIndices.length > 65535)
             {
                 this.vertIndicesTyped = new Uint32Array(vertIndices);
-                this._indexType = this.#cgl.gl.UNSIGNED_INT;
+                this.#indexType = this.#cgl.gl.UNSIGNED_INT;
             }
             else
             if (vertIndices instanceof Uint32Array)
             {
                 this.vertIndicesTyped = vertIndices;
-                this._indexType = this.#cgl.gl.UNSIGNED_INT;
+                this.#indexType = this.#cgl.gl.UNSIGNED_INT;
             }
             else
             if (!(vertIndices instanceof Uint16Array))
             {
                 this.vertIndicesTyped = new Uint16Array(vertIndices);
-                this._indexType = this.#cgl.gl.UNSIGNED_SHORT;
+                this.#indexType = this.#cgl.gl.UNSIGNED_SHORT;
             }
             else this.vertIndicesTyped = vertIndices;
 
@@ -508,7 +500,7 @@ class Mesh extends CgMesh
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
 
         MESH.lastMesh = null;
-        this.#cgl.profileData.profileMeshSetGeom++;
+        this.#cgl.profileData.count("meshSetGeom");
 
         this._disposeAttributes();
 
@@ -606,7 +598,7 @@ class Mesh extends CgMesh
                 // todo: easier way to fill mat4 attribs...
                     if (attribute.itemSize <= 4)
                     {
-                        if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("instanced attrib itemsize error", this.#geom.name, attribute);
+                        if (!attribute.itemSize || attribute.itemSize == 0) this.#log.warn("instanced attrib itemsize error", this.#geom.name, attribute);
 
                         this.#cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
                         this.#cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
@@ -630,12 +622,12 @@ class Mesh extends CgMesh
                     }
                     else
                     {
-                        this._log.warn("unknown instance attrib size", attribute.name);
+                        this.#log.warn("unknown instance attrib size", attribute.name);
                     }
                 }
                 else
                 {
-                    if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("attrib itemsize error", this._name, attribute);
+                    if (!attribute.itemSize || attribute.itemSize == 0) this.#log.warn("attrib itemsize error", this._name, attribute);
                     this.#cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
 
                     if (attribute.pointer)
@@ -645,12 +637,19 @@ class Mesh extends CgMesh
                             const pointer = attribute.pointer[ip];
 
                             if (pointer.loc == -1)
+                            {
+
                                 pointer.loc = this.#cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                            }
 
-                            this.#cgl.profileData.profileAttrLoc++;
+                            if (pointer.loc > -1)
+                            {
+                                this.#cgl.profileData.profileAttrLoc++;
 
-                            this.#cgl.gl.enableVertexAttribArray(pointer.loc);
-                            this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+                                this.#cgl.gl.enableVertexAttribArray(pointer.loc);
+                                this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
+
+                            }
                         }
                     }
                     if (this.bindFeedback) this.bindFeedback(attribute);
@@ -728,7 +727,6 @@ class Mesh extends CgMesh
      */
     getNumVertices()
     {
-        // return this._bufVerticesIndizes.numItems;
         return this._bufVertexAttrib.numItems;
     }
 
@@ -749,10 +747,7 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function render
-     * @memberof Mesh
-     * @instance
-     * @description draw mesh to screen
+     * draw mesh to screen
      * @param {Shader} shader
      */
     render(shader)
@@ -906,30 +901,32 @@ class Mesh extends CgMesh
             if (prim == this.#cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0)
             {
-                this.#cgl.gl.drawElements(prim, this.#bufVerticesIndizes.numItems, this._indexType, 0);
+                this.#cgl.gl.drawElements(prim, this.#bufVerticesIndizes.numItems, this.#indexType, 0);
             }
             else
             {
-                this.#cgl.gl.drawElementsInstanced(prim, this.#bufVerticesIndizes.numItems, this._indexType, 0, this._numInstances);
+                this.#cgl.gl.drawElementsInstanced(prim, this.#bufVerticesIndizes.numItems, this.#indexType, 0, this._numInstances);
             }
         }
 
-        if (this.#cgl.debugOneFrame && this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
+        if (this.#cgl.debugOneFrame)
         {
-            this._log.error("mesh draw gl error");
-            this._log.error("mesh", this);
-            this._log.error("shader", shader);
-
-            const attribNames = [];
-            for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
+            if (this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
             {
-                const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
-                this._log.error("attrib ", name);
+                this.#log.error("mesh draw gl error");
+                this.#log.error("mesh", this);
+                this.#log.error("shader", shader);
+
+                const attribNames = [];
+                for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
+                {
+                    const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+                    this.#log.error("attrib ", name);
+                }
             }
         }
-
-        this.#cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
-        this.#cgl.profileData.profileMeshDraw++;
+        this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1));
+        this.#cgl.profileData.count("meshDrawCalls");
 
         if (doQuery && queryStarted)
         {

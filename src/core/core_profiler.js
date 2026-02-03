@@ -21,6 +21,7 @@ import { now } from "./timer.js";
 export class Profiler
 {
 
+    /* minimalcore:start */
     /**
      * @param {Patch} patch
      */
@@ -131,10 +132,11 @@ export class Profiler
 
     print()
     {
-        console.log("--------");
         for (const i in this.items)
         {
-            console.log(this.items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed);
+            console.log(this.items[i].title + ": " + this.items[i].numTriggers + " / " + this.items[i].timeUsed); // eslint-disable-line
         }
     }
+
+    /* minimalcore:end */
 }

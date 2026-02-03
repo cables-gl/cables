@@ -1,0 +1,65 @@
+{
+    "id": "93340307-7883-4169-ac02-1295f2455308",
+    "created": 1766825765097,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818539382
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766825765097
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderCompute renamed to Ops.Extension.MiniGpu.CompShaderModule",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1767016780129
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Code"
+            },
+            {
+                "type": 0,
+                "name": "Stage index",
+                "values": [
+                    "VERTEX",
+                    "FRAGMENT",
+                    "COMPUTE"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Final Code"
+            }
+        ]
+    },
+    "coreLibs": [
+        "minigpu"
+    ]
+}

@@ -1,0 +1,137 @@
+{
+    "id": "09e57118-2abc-4b0d-aa7f-89dd33b81df5",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767867921741
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1767867921741,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Translate Active",
+                "group": "Translation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos Top Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Left Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Right Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Bottom Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pos Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Right",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Origin",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Origin X index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Origin Y index",
+                "values": [
+                    "Top",
+                    "Center",
+                    "Bottom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Z Index Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Z Index",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Passthrough",
+                "objType": "element"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "summary": "Set position left/right/top/bottom of a HTML element",
+    "exampleProjectId": "JF4w9a"
+}

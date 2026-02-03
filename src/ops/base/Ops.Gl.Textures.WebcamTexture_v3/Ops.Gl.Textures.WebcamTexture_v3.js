@@ -60,7 +60,7 @@ let alreadyRetried = false;
 let constraints = null;
 let tc = null;
 
-textureOut.set(emptyTexture);
+textureOut.setRef(emptyTexture);
 
 flipX.onChange =
 flipY.onChange = initCopyShader;
@@ -199,7 +199,7 @@ function camInitComplete(stream)
         videoElement.setAttribute("width", settings.width);
         videoElement.setAttribute("height", settings.height);
 
-        outElement.set(videoElement);
+        outElement.setRef(videoElement);
 
         tex.setSize(w, h);
 

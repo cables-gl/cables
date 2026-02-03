@@ -4,6 +4,9 @@ const
     volume = op.inValueSlider("Volume"),
 
     doLoop = op.inValueBool("Loop"),
+    doRewind = op.inValueBool("Rewind on play", false),
+    inPlayTrigg = op.inTriggerButton("Play Trigger"),
+    inPauseTrigg = op.inTriggerButton("Pause"),
     outPlaying = op.outNumber("Playing"),
     outEle = op.outObject("Element", null, "element"),
     outEnded = op.outTrigger("Has Ended");
@@ -14,8 +17,22 @@ let playing = false;
 outPlaying.set(false);
 volume.onChange = updateVolume;
 
+inPlayTrigg.onTriggered = play;
+inPauseTrigg.onTriggered = pause;
+op.onDelete = pause;
+op.onMasterVolumeChanged = updateVolume;
+
+function pause()
+{
+    if (audio) audio.pause();
+    playing = false;
+    outPlaying.set(playing);
+}
+
 function play()
 {
+    if (doRewind.get())audio.currentTime = 0;
+
     if (audio)
     {
         playing = true;
@@ -37,11 +54,6 @@ inPlay.onChange = function ()
     outPlaying.set(playing);
 };
 
-this.onDelete = function ()
-{
-    if (audio) audio.pause();
-};
-
 doLoop.onChange = function ()
 {
     if (audio) audio.loop = doLoop.get();
@@ -59,8 +71,6 @@ function updateVolume()
 {
     if (audio)audio.volume = volume.get() * op.patch.config.masterVolume;
 }
-
-op.onMasterVolumeChanged = updateVolume;
 
 fileName.onChange = function ()
 {

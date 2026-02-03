@@ -1,0 +1,48 @@
+{
+    "id": "41b185cf-d080-4bcf-9050-3e2902046530",
+    "created": 1766818539382,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818539382
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Fragment Shader"
+            },
+            {
+                "type": 5,
+                "name": "Vertex Shader"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            },
+            {
+                "type": 5,
+                "name": "Final Code Frag"
+            },
+            {
+                "type": 5,
+                "name": "Final Code Vert"
+            }
+        ]
+    }
+}

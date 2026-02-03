@@ -195,7 +195,7 @@ function updateUi()
     // height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
-        if (CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.");
+        if (CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.", 1);
         else op.setUiError("fpmipmap", null);
 
     updateResolutionInfo();

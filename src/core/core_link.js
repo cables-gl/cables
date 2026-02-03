@@ -1,4 +1,4 @@
-import { Events } from "cables-shared-client";
+import { Events, Logger } from "cables-shared-client";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
@@ -10,6 +10,7 @@ import { Port } from "./core_port.js";
  */
 export class Link extends Events
 {
+    #log = new Logger("link");
 
     /**
      * @param {Patch} p
@@ -20,19 +21,13 @@ export class Link extends Events
 
         this.id = CABLES.simpleId();
 
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portIn = null;
 
-        /**
-         * @type {Port}
-         */
+        /** @type {Port} */
         this.portOut = null;
 
-        /**
-         * @type {Patch}
-         */
+        /** @type {Patch} */
         this._patch = p;
         this.activityCounter = 0;
         this.ignoreInSerialize = false;
@@ -131,7 +126,7 @@ export class Link extends Events
     {
         if (!Link.canLink(p1, p2))
         {
-            console.warn("[core_link] cannot link ports!", p1, p2);
+            this.#log.warn("[core_link] cannot link ports!", p1, p2);
             return false;
         }
 
@@ -157,6 +152,8 @@ export class Link extends Events
 
     getSerialized()
     {
+
+        /* minimalcore:start */
         const obj = {};
 
         obj.portIn = this.portIn.getName();
@@ -165,6 +162,8 @@ export class Link extends Events
         obj.objOut = this.portOut.op.id;
 
         return obj;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -175,6 +174,8 @@ export class Link extends Events
      */
     static canLinkText(p1, p2)
     {
+
+        /* minimalcore:start */
         if (p1.direction == p2.direction)
         {
             let txt = "(out)";
@@ -205,6 +206,8 @@ export class Link extends Events
         if ((p1.canLink && !p1.canLink(p2)) || (p2.canLink && !p2.canLink(p1))) return "Incompatible";
 
         return "can link";
+
+        /* minimalcore:end */
     }
 
     /**
@@ -216,6 +219,8 @@ export class Link extends Events
      */
     static canLink(p1, p2)
     {
+
+        /* minimalcore:start */
         if (!p1) return false;
         if (!p2) return false;
         if (p1.direction == Port.DIR_IN && p1.isAnimated()) return false;
@@ -245,6 +250,7 @@ export class Link extends Events
         if (p1.canLink && !p1.canLink(p2)) return false;
         if (p2.canLink && !p2.canLink(p1)) return false;
 
+        /* minimalcore:end */
         return true;
     }
 }

@@ -1,4 +1,5 @@
 let tab = null;
+let maxChilds = 100;
 
 function closeTab()
 {
@@ -16,6 +17,15 @@ function formatVec(arr)
 
     return nums.join(",");
 }
+
+op.toggleShowAll = () =>
+{
+    if (maxChilds == 100)maxChilds = 9999999;
+    else maxChilds = 100;
+    closeTab();
+    printInfo();
+    console.log("maxChilds", maxChilds);
+};
 
 function printNode(html, node, level)
 {
@@ -124,11 +134,12 @@ function printNode(html, node, level)
 
     html += "</tr>";
 
-    if (node.children)
+    for (let i = 0; i < Math.min(maxChilds, node.children.length); i++)
     {
-        for (let i = 0; i < node.children.length; i++)
-            html = printNode(html, gltf.nodes[node.children[i]], level + 1);
+        html = printNode(html, gltf.nodes[node.children[i]], level + 1);
     }
+    if (node.children.length > maxChilds)
+        html += "<tr ><td></td><td colspan=\"14\"><br/><br/><a onclick=\"gui.corePatch().getOpById('" + op.id + "').toggleShowAll()\" class=\"button-small\">...and many more</a><br/><br/><br/></td></tr>";
 
     return html;
 }
@@ -391,7 +402,6 @@ function printInfo()
         html += "  <th>Interpolation</th>";
         html += "  <th>Keys</th>";
         html += "</tr>";
-
 
         sizes.animations = 0;
 

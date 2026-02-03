@@ -8,6 +8,8 @@ const
     nudgeRight = op.inTriggerButton("nudgeRight"),
     inActive = op.inBool("Active", true),
     beat = op.outTrigger("beat"),
+    beat2 = op.outTrigger("beat2"),
+    beat4 = op.outTrigger("beat4"),
     bpm = op.outNumber("Bpm", DEFAULT_BPM),
     outStates = op.outArray("States"),
     beatNum = op.outNumber("Beat Index");
@@ -40,6 +42,10 @@ exe.onTriggered = function ()
         if (inActive.get())
         {
             beat.trigger();
+
+            if (beatCounter == 1)beat2.trigger();
+            if (beatCounter == 3)beat2.trigger();
+            if (beatCounter == 3)beat4.trigger();
             incrementState();
             outStates.set(null);
             outStates.set(states);

@@ -34,8 +34,8 @@ export class AnimKey
     }
 
     /**
-     * @param {Anim} a
      * @param {any} clipId
+     * @param {Anim} a
      */
     setClip(clipId, a)
     {
@@ -95,6 +95,8 @@ export class AnimKey
         else if (this._easing == Anim.EASING_ABSOLUTE) this.ease = this.easeAbsolute;
         else if (this._easing == Anim.EASING_SMOOTHSTEP) this.ease = AnimKey.easeSmoothStep;
         else if (this._easing == Anim.EASING_SMOOTHERSTEP) this.ease = AnimKey.easeSmootherStep;
+
+        /* minimalcore:start */
         else if (this._easing == Anim.EASING_CUBIC_IN) this.ease = AnimKey.easeCubicIn;
         else if (this._easing == Anim.EASING_CUBIC_OUT) this.ease = AnimKey.easeCubicOut;
         else if (this._easing == Anim.EASING_CUBIC_INOUT) this.ease = AnimKey.easeCubicInOut;
@@ -118,6 +120,8 @@ export class AnimKey
         else if (this._easing == Anim.EASING_QUINT_OUT) this.ease = AnimKey.easeOutQuint;
         else if (this._easing == Anim.EASING_QUINT_IN) this.ease = AnimKey.easeInQuint;
         else if (this._easing == Anim.EASING_QUINT_INOUT) this.ease = AnimKey.easeInOutQuint;
+
+        /* minimalcore:end */
         else if (this._easing == Anim.EASING_CLIP) this.ease = this.easeAbsolute;
         else if (this._easing == Anim.EASING_CUBICSPLINE)
         {
@@ -316,6 +320,7 @@ AnimKey.linear = function (perc, key1, key2)
     return (key1.value) + (key2.value - key1.value) * perc;
 };
 
+/* minimalcore:start */
 export const easeExpoIn = function (t)
 {
     return (t = 2 ** (10 * (t - 1)));
@@ -564,6 +569,7 @@ AnimKey.easeCubicInOut = function (t, key2)
     return AnimKey.linear(t, this, key2);
 };
 
+/* minimalcore:end */
 AnimKey.easeSmoothStep = function (perc, key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));

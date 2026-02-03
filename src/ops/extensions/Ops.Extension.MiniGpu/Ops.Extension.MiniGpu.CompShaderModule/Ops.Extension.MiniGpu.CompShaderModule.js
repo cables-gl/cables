@@ -1,0 +1,99 @@
+const
+    exec = op.inTrigger("Trigger"),
+    inCode = op.inStringEditor("Code", "", "glsl"),
+    inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
+    inReset = op.inTriggerButton("Reset"),
+
+    next = op.outTrigger("Next"),
+    outCode = op.outString("Final Code");
+
+/* minimalcore:start */
+outCode.ignoreValueSerialize = true;
+
+/* minimalcore:end */
+
+const binds = new CABLES.Stack();
+let oldBindings = [];
+let s = null;
+let bindHead = "";
+let reInit = true;
+let o = null;
+let lastChange = 0;
+
+inStage.onChange =
+inStage.onChange =
+inCode.onChange = () =>
+{
+    /* minimalcore:start */
+    op.setUiAttrib({ "extendTitle": inStage.get() });
+
+    /* minimalcore:end */
+
+    reInit = true;
+};
+inReset.onTriggered = () =>
+{
+    reInit = true;
+};
+
+function genBindHeadSrc()
+{
+    let bhead = "";
+    let g = 0;
+    if (inStage.get() == "FRAGMENT")g = 1;
+
+    for (let i = 0; i < binds.array().length; i++)
+    {
+        const b = binds.array()[i];
+        bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
+    }
+
+    if (bhead != bindHead) reInit = true;
+    bindHead = bhead;
+
+    let code = inCode.get();
+    code = code.replaceAll("{{BINDINGS}}", bhead);
+    outCode.set(code);
+    return code;
+}
+
+exec.onTriggered = () =>
+{
+    const mgpu = op.patch.frameStore.mgpu;
+
+    mgpu.constants = {};
+    mgpu.stage = GPUShaderStage[inStage.get()];
+    mgpu.bindings = binds.clear();
+
+    next.trigger();
+    mgpu.shader.pop();
+    if (o && o.bindings != mgpu.bindings)reInit = true;
+
+    if (reInit || mgpu.rebuildShaderModule)
+    {
+        console.log("create module", inStage.get(), mgpu.rebuildShaderModule);
+        s = { "layout": "auto", };
+
+        s[inStage.get().toLowerCase()] = {
+            "module": mgpu.device.createShaderModule({
+                "code": genBindHeadSrc(),
+            }),
+            "targets": [// only frag??
+                {
+                    "format": mgpu.format,
+                }
+            ],
+            "constants": mgpu.constants,
+        };
+
+        o = { "updated": performance.now(), "shader": s, "bindings": mgpu.bindings, "constants": [] };
+
+        mgpu.rebuildPipeline = "module rebuild ";
+        mgpu.rebuildShaderModule = false;
+
+        reInit = false;
+    }
+
+    mgpu.shaderModules[inStage.get().toLowerCase()] = o;
+    mgpu.shaderModules.updated = false;
+};

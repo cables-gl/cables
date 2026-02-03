@@ -40,6 +40,10 @@
             {
                 "type": 0,
                 "name": "Handedness index",
+                "values": [
+                    "left",
+                    "right"
+                ],
                 "subType": "integer"
             }
         ],
@@ -71,72 +75,72 @@
             {
                 "type": 0,
                 "name": "Button 1 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 2 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 3 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 4 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 5 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 6 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 7 Pressed",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 1 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 2 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 3 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 4 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 5 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 6 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button 7 Touched",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -164,7 +168,7 @@
             {
                 "type": 0,
                 "name": "Found",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
@@ -175,5 +179,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

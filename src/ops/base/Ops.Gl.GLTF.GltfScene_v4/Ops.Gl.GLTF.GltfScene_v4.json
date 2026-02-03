@@ -181,12 +181,8 @@
         {
             "message": "Ops.User.pandur.GltfScene3 renamed to Ops.Admin.GltfScene2",
             "author": "pandur",
-            "date": 1580991292936
-        },
-        {
-            "message": "cloned op from Ops.Gl.GLTF.GltfScene_v2",
-            "author": "pandur",
-            "date": 1617707426580
+            "date": 1580991292936,
+            "type": "new"
         },
         {
             "message": "fix animation not playing when using skinned mesh with assigned material shaders",
@@ -247,6 +243,36 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1761062155489
+        },
+        {
+            "message": "Unnamed meshes now will always have the same name",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768297706855
+        },
+        {
+            "message": "Support for files using the KHR_mesh_quantization extension",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1768298508137
+        },
+        {
+            "message": "Show warning in editor if the morphtarget texture is bigger then browsers max texture size",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769429440778
+        },
+        {
+            "message": "List max of 100 childs for performance reasons, showing \"more\" button when more",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769867973100
+        },
+        {
+            "message": "When hiding nodes, all nodes with that name will be hidden, not only the first",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770025549256
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

@@ -2,7 +2,7 @@
 
 const
     spread = op.inArray("Spreadsheet"),
-    outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays"], "Flat"),
+    outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays", "Arrays Vert"], "Flat"),
     inDefault = op.inSwitch("Default Output Value", ["0", "Empty String", "null"], "0"),
     result = op.outArray("Array"),
     outWidth = op.outNumber("Width"),
@@ -55,6 +55,8 @@ function update()
     if (outp.get() == "Objects") r = toJson(r, o.width, o.height, o.colTitles);
     else
     if (outp.get() == "Arrays") r = toArrays(r, o.width, o.height, o.colTitles);
+    else
+    if (outp.get() == "Arrays Vert") r = toArraysVert(r, o.width, o.height, o.colTitles);
 
     if (outp.get() == "Flat") result.setUiAttribs({ "stride": o.width });
     else result.setUiAttribs({ "stride": 1 });
@@ -87,6 +89,18 @@ function toArrays(data, w, h, titles)
     for (let x = 0; x < w; x++)
         for (let y = 0; y < h; y++)
             arr[x][y] = data[x + y * w];
+
+    return arr;
+}
+
+function toArraysVert(data, w, h, titles)
+{
+    const arr = [];
+    for (let y = 0; y < h; y++) arr[y] = [];
+
+    for (let y = 0; y < h; y++)
+        for (let x = 0; x < w; x++)
+            arr[y][x] = data[x + y * w];
 
     return arr;
 }

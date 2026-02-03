@@ -1,3 +1,5 @@
+/* minimalcore:start */
+
 const
     inObj = op.inObject("Object"),
     inConsole = op.inTriggerButton("console log"),
@@ -241,4 +243,4 @@ op.renderVizLayer = (ctx, layer, viz) =>
     ctx.restore();
 };
 
-//
+/* minimalcore:end */

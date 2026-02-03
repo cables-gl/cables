@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1736416059848
+        },
+        {
+            "message": "Update alignment after canvas was resized",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769506456441
         }
     ],
     "authorName": "pandur",

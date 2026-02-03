@@ -79,7 +79,8 @@ export class Texture extends CgTexture
 
         if (this.textureType == Texture.TYPE_DEPTH) this.pixelFormat = Texture.PFORMATSTR_DEPTH;
 
-        this._cgl.profileData.profileTextureNew++;
+        // this._cgl.profileData.profileTextureNew++;
+        this._cgl.profileData.count("texturecreated");
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
@@ -210,7 +211,7 @@ export class Texture extends CgTexture
         this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        this._cgl.profileData.profileTextureResize++;
+        this._cgl.profileData.count("textureResize");
 
         const uarr = null;
 
@@ -275,7 +276,7 @@ export class Texture extends CgTexture
         if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)
         {
             this._cgl.gl.generateMipmap(this.texTarget);
-            this._cgl.profileData.profileGenMipMap++;
+            this._cgl.profileData.count("textureGenMipMap");
         }
     }
 
@@ -353,7 +354,7 @@ export class Texture extends CgTexture
         this.deleted = true;
         this.width = 0;
         this.height = 0;
-        this._cgl.profileData.profileTextureDelete++;
+        this._cgl.profileData.count("textureDelete");
         this._cgl.gl.deleteTexture(this.tex);
         this.image = null;
 
@@ -741,10 +742,10 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const width = 8;
     const height = 8;
 
-    cgl.profileData.profileTextureNew++;
+    cgl.profileData.count("texturecreated");
 
     cgl.gl.bindTexture(target, tex);
-    cgl.profileData.profileTextureResize++;
+    cgl.profileData.count("textureResize");
 
     for (let i = 0; i < 6; i += 1)
     {
@@ -1065,7 +1066,7 @@ Texture.isPixelFormatHalfFloat =
 Op.prototype.outTexture = function (name, v)
 {
     const p = this.addOutPort(
-        new Port(this, name, Port.TYPE_OBJECT, {
+        this.newPort(this, name, Port.TYPE_OBJECT, {
             "preview": true,
             "objType": "texture",
             "display": "texture"

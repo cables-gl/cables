@@ -13,7 +13,7 @@ const points = [];
 inGeom.onChange = () =>
 {
     const bb = new CGL.BoundingBox(inGeom.get());
-    outBB.set(bb);
+    outBB.setRef(bb);
 
     outMinX.set(bb._min[0]);
     outMinY.set(bb._min[1]);

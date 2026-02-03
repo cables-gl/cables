@@ -1,0 +1,44 @@
+{
+    "authorName": "pandur",
+    "id": "4b0e42bf-380b-4504-8857-08e1d451df07",
+    "created": 1711377098200,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array3"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Shuffle/Randomize the order of an array of triplets",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "more random random numbers",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1711377158581
+        },
+        {
+            "message": "ShuffleArray3_v3 was deprecated please use shuffle array with the stride parameter!",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1770027809456
+        }
+    ],
+    "license": "MIT",
+    "exampleProjectId": "tbdwsh"
+}

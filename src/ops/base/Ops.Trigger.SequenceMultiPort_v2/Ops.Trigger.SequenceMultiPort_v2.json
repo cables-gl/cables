@@ -15,12 +15,22 @@
             {
                 "type": 1,
                 "name": "Input_0",
-                "longPort": 2,
+                "longPort": 4,
                 "group": "Input"
             },
             {
                 "type": 1,
                 "name": "Input_1",
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_2",
+                "group": "Input"
+            },
+            {
+                "type": 1,
+                "name": "Input_3",
                 "uititle": "add port",
                 "group": "Input"
             }
@@ -29,12 +39,8 @@
             {
                 "type": 1,
                 "name": "Output_0",
-                "longPort": 2
-            },
-            {
-                "type": 1,
-                "name": "Output_1",
-                "uititle": "add port"
+                "uititle": "add port",
+                "longPort": 1
             }
         ]
     },

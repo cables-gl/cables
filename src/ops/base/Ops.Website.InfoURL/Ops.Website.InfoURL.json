@@ -44,10 +44,10 @@
     },
     "summary": "Information about the current URL",
     "issues": "",
-
     "docs": {
         "ports": []
     },
     "youtubeids": [],
-    "exampleProjectId": "9UM2YG"
+    "exampleProjectId": "9UM2YG",
+    "license": "MIT"
 }

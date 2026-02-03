@@ -7,16 +7,6 @@
             "message": "cloned op from Ops.Html.BrowserSpecificFile",
             "author": "simod",
             "date": 1602764204882
-        },
-        {
-            "message": " added lib: platform.js",
-            "author": "simod",
-            "date": 1602764242276
-        },
-        {
-            "message": "Ops.User.cables.BrowserSpecificFile_v2 renamed to Ops.Html.BrowserSpecificFile_v2",
-            "author": "simod",
-            "date": 1602764377410
         }
     ],
     "layout": {
@@ -66,7 +56,6 @@
     ],
     "summary": "set file dependant on browser",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [

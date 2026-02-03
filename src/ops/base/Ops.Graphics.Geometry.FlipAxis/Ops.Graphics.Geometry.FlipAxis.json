@@ -1,0 +1,53 @@
+{
+    "id": "3260b71f-9d9e-41fa-8a7f-7f57785a938e",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1769502105851
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1769502105850,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 0,
+                "name": "Axis 1 index",
+                "values": [
+                    "NONE",
+                    "XY",
+                    "YZ",
+                    "ZX"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Geometry",
+                "text": "Geometry in"
+            },
+            {
+                "name": "Result",
+                "text": "Geometry out "
+            }
+        ]
+    },
+    "license": "MIT",
+    "summary": "Flip/exchange two axis in a whole geometry, e.g. XYZ to XZY",
+    "exampleProjectId": "Cxxq9a"
+}

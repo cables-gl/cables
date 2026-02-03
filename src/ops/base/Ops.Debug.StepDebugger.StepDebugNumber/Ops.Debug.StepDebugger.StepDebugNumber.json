@@ -1,0 +1,44 @@
+{
+    "id": "0d73339a-48a1-4329-803d-35c4fa088a38",
+    "created": 1765969138930,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1765895307869
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Title"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "cloneOf": "fd6da32a-642f-41e2-a47b-579b87d9fcd2",
+    "summary": "Debug what happens when a change of number parameter happens",
+    "docs": {
+        "ports": []
+    }
+}

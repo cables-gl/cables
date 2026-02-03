@@ -36,6 +36,7 @@ export class CgCanvas
             this.setSize(this.canvasWidth, this.canvasHeight);
             this.canvasEle.addEventListener("focus", () => { this.hasFocus = true; });
             this.canvasEle.addEventListener("blur", () => { this.hasFocus = false; });
+
         }
     }
 

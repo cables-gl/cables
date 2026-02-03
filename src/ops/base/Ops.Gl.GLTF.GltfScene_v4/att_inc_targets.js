@@ -66,6 +66,20 @@ const GltfTargetsRenderer = class
         let h = 0;
         this.numRowsPerTarget = 0;
 
+        const gl = cgl.gl;
+        if (w > gl.getParameter(gl.MAX_TEXTURE_SIZE) || h > gl.getParameter(gl.MAX_TEXTURE_SIZE))
+        {
+            console.error("gltf morph texture size too big...");
+            op.setUiError("mtt", "morphtarget texture bigger then browser max texture size " + w + ">" + gl.getParameter(gl.MAX_TEXTURE_SIZE), 1);
+        }
+        else
+        {
+            op.setUiError("mtt", null, 1);
+        }
+
+        w = Math.min(w, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
+        h = Math.min(h, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
+
         if (geom.morphTargets[0].vertices && geom.morphTargets[0].vertices.length) this.numRowsPerTarget++;
         if (geom.morphTargets[0].vertexNormals && geom.morphTargets[0].vertexNormals.length) this.numRowsPerTarget++;
         if (geom.morphTargets[0].tangents && geom.morphTargets[0].tangents.length) this.numRowsPerTarget++;

@@ -1,0 +1,85 @@
+{
+    "id": "80e40741-9cbf-4c64-aeed-317c1e116c6d",
+    "created": 1754121655158,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1754121655159
+        },
+        {
+            "message": "Grid op moved to core: Ops.Html.GridLayout.Grid",
+            "type": "new",
+            "author": "pandur",
+            "date": 1770028109477
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Columns",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "values": [
+                    "Columns",
+                    "Rows"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Show Helper",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Cell Size_0",
+                "longPort": 3,
+                "group": "Cell Size"
+            },
+            {
+                "type": 5,
+                "name": "Cell Size_1",
+                "group": "Cell Size"
+            },
+            {
+                "type": 2,
+                "name": "Childs_0",
+                "longPort": 3,
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_1",
+                "group": "Childs"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element"
+            }
+        ]
+    },
+    "cloneOf": "ec739a7c-f20b-4d16-8ee2-6474cf0d9e1c",
+    "exampleProjectId": "9dYN7T",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Arrange HTML elmengs in grids, create grids by combining rows and columns",
+    "coreLibs": [
+        "cgl"
+    ]
+}

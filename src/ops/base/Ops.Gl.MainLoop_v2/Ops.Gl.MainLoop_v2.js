@@ -29,15 +29,23 @@ let firstTime = true;
 let fsElement = null;
 let winhasFocus = true;
 let winVisible = true;
-
+let lastFrame = -1;
+let duplicate = 0;
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
+if (CABLES.UI)gui.canvasManager.addCgContext(op.patch.cgl);
 
 testMultiMainloop();
 
 // op.patch.cgl.cgCanvas.forceAspect = 1.7777777;
 op.patch.tempData.mainloopOp = this;
+
+op.patch.cgl.canvas.classList.add("cablescontext");
+op.patch.cgl.canvas.dataset.contextname = "cgl";
+op.patch.cgl.canvas.dataset.api = "webgl";
+
+if (CABLES.UI)gui.setLayout();
 
 function updateHdpi()
 {
@@ -93,8 +101,6 @@ function setPixelDensity()
     else op.patch.cgl.pixelDensity = window.devicePixelRatio;
 }
 
-let lastFrame = -1;
-let duplicate = 0;
 function render(time, frame, delta)
 {
     if (frame === lastFrame)

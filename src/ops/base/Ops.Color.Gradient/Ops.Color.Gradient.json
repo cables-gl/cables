@@ -19,6 +19,10 @@
                 "type": 2,
                 "name": "Gradient Object",
                 "objType": "gradient"
+            },
+            {
+                "type": 3,
+                "name": "Color Array"
             }
         ]
     },
@@ -43,6 +47,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1765801585944
+        },
+        {
+            "message": "output colors as array",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1768841839299
         }
     ],
     "license": "MIT",

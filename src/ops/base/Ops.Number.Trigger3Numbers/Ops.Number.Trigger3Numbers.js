@@ -1,5 +1,5 @@
 const
-    exe = op.inTrigger("exe"),
+    exe = op.inTriggerButton("exe"),
     x = op.inValueFloat("value x"),
     y = op.inValueFloat("value y"),
     z = op.inValueFloat("value z"),
@@ -11,11 +11,6 @@ exe.onTriggered =
     x.onChange =
     y.onChange =
     z.onChange = exec;
-
-function frame(time)
-{
-    exec();
-}
 
 function exec()
 {

@@ -280,7 +280,7 @@ exec.onTriggered = () =>
     if (cgl.currentTextureEffect || op.patch.cgl._glFrameBufferStack.length > 0)
     {
         hasError = true;
-        op.setUiError("fbProblem", "Particlesystem should not be below a framebuffer (RenderToTexture, ImageCompose, etc.) op ");
+        op.setUiError("fbProblem", "Particlesystem should not be below a framebuffer (RenderToTexture, ImageCompose, etc.) op ", 1);
     }
     else if (hasError)
     {

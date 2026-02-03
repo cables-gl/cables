@@ -60,6 +60,7 @@ let loadingId = null;
 let data = null;
 const scale = vec3.create();
 let lastTime = 0;
+let unknownCount = 0;
 let doCenter = false;
 const boundsCenter = vec3.create();
 
@@ -384,6 +385,7 @@ function loadBin(addCacheBuster)
     if (!inFile.get()) return;
     if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
+    unknownCount = 0;
     let fileToLoad = inFile.get();
 
     if (!fileToLoad || fileToLoad == "null") return;
@@ -553,9 +555,13 @@ function hideNodesFromData()
     {
         for (const i in data.hiddenNodes)
         {
-            const n = gltf.getNode(i);
-            if (n) n.hidden = true;
-            else op.verbose("node to be hidden not found", i, n);
+            const n = gltf.getNodes(i);
+            for (let j = 0; j < n.length; j++)
+            {
+                if (n[j]) n[j].hidden = true;
+
+                if (n.length === 0) op.verbose("node to be hidden not found", i, n);
+            }
         }
     }
     hideNodesFromArray();

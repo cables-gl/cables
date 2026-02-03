@@ -25,6 +25,16 @@ const Gltf = class
         }
     }
 
+    getNodes(n)
+    {
+        const arr = [];
+        for (let i = 0; i < this.nodes.length; i++)
+        {
+            if (this.nodes[i].name == n) arr.push(this.nodes[i]);
+        }
+        return arr;
+    }
+
     unHideAll()
     {
         for (let i = 0; i < this.nodes.length; i++)
@@ -203,7 +213,6 @@ function loadAnims(gltf)
                         }
                         else
                         {
-                            // console.log(an.name,k,bufferOut[j * numComps + k]);
                             anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                         }
                     }
@@ -404,11 +413,32 @@ function parseGltf(arrayBuffer)
                             accPos += 2;
                         }
                     }
-                    else if (acc.componentType == 5121) // UNSIGNED_BYTE
+                    else if (acc.componentType == 5121 || acc.componentType == 5120) // UNSIGNED_BYTE
                     {
                         stride = stride || 1;
 
-                        dataBuff = new Uint8Array(num);
+                        if (acc.componentType == 5121) dataBuff = new Uint8Array(num);
+                        else dataBuff = new Int8Array(num);
+
+                        dataBuff.cblStride = stride;
+
+                        for (j = 0; j < num; j++)
+                        {
+                            if (acc.componentType == 5121)
+                                dataBuff[j] = chunks[1].dataView.getUint8(accPos, le);
+                            else
+                                dataBuff[j] = chunks[1].dataView.getInt8(accPos, le);
+
+                            if (stride != 1 && (j + 1) % numComps === 0) accPos += stride - (numComps * 1);
+
+                            accPos += 1;
+                        }
+                    }
+                    else if (acc.componentType == 5120) // SIGNED_BYTE
+                    {
+                        stride = stride || 1;
+
+                        dataBuff = new Int8Array(num);
                         dataBuff.cblStride = stride;
 
                         for (j = 0; j < num; j++)
@@ -420,7 +450,6 @@ function parseGltf(arrayBuffer)
                             accPos += 1;
                         }
                     }
-
                     else
                     {
                         console.error("unknown component type", acc.componentType);
