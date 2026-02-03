@@ -1,4 +1,3 @@
-
 const
     exec = op.inTrigger("Exec"),
     showFrag = op.inTriggerButton("Show Fragment"),
@@ -36,12 +35,12 @@ function showCodeModal(title, code, type)
     html += "<br/><br/>";
 
     code = code || "";
-    code = code.replace(/\</g, "&lt;"); // for <
-    code = code.replace(/\>/g, "&gt;"); // for >
+    code = code.replace(/\</g, "<"); // for <
+    code = code.replace(/\>/g, ">"); // for >
 
     html += "<pre><code class=\"" + (type || "javascript") + "\">" + code + "</code></pre>";
 
-    new ModalDialog({
+    new CABLES.UI.ModalDialog({
         "title": title,
         "html": html
     });

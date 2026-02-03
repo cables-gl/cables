@@ -4,30 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1553685665389
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureFromColorArray",
-            "author": "pandur",
-            "date": 1676027271197
-        },
-        {
-            "message": "Ops.User.pandur.TextureFromColorArray2 renamed to Ops.Gl.TextureFromColorArray_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1676029150176
-        },
-        {
-            "message": "Ops.Gl.TextureFromColorArray_v2 renamed to Ops.Gl.ArrayToTexture_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685958892053
+            "date": 1553685665389,
+            "type": "new"
         },
         {
             "message": "Added option to reverse/flip pixel data",
             "type": "feature",
             "author": "pandur",
             "date": 1741190241037
+        },
+        {
+            "message": "Fixed bug where animated textures would be deleted before being used",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1770031626926
         }
     ],
     "authorName": "pandur",
