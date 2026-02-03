@@ -1,0 +1,1 @@
+To see the actions, press CMD-P and type/choose "patch debugger"

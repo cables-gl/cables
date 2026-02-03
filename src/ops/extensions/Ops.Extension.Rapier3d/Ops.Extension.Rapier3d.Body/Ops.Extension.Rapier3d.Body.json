@@ -9,24 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1720942542489
-        },
-        {
-            "message": "Team.Rapier3d.Body renamed to Ops.Team.Rapier3d.Dev.Body",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768323645187
-        },
-        {
-            "message": "Team.Rapier3d.Dev.Body renamed to Ops.Extension.Rapier3d.Dev.Body",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324254232
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.Body renamed to Ops.Extension.Rapier3d.Body",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769004831588
         }
     ],
     "layout": {
@@ -177,5 +159,9 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "summary": "Create body/bodies in a physics world",
+    "docs": {
+        "ports": []
+    }
 }

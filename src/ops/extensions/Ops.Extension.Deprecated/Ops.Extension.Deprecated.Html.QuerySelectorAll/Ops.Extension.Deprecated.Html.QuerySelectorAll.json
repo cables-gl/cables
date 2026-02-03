@@ -2,7 +2,7 @@
     "id": "001799c7-9ddf-4f3e-b260-e865f0ed2c0e",
     "changelog": [
         {
-            "message": "created op",
+            "message": "Created op",
             "author": "tim",
             "date": 1582126210630,
             "type": "new"
@@ -14,16 +14,10 @@
             "date": 1726147345494
         },
         {
-            "message": "op Html.QuerySelectorAll was deprecated",
+            "message": "Op Html.QuerySelectorAll was deprecated (use Ops.Html.Elements.ElementQuery)",
             "type": "deprecation",
             "author": "stephan",
             "date": 1769000108366
-        },
-        {
-            "message": "op Extension.Deprecated.Html.Elements.QuerySelectorAll was deprecated",
-            "type": "deprecation",
-            "author": "stephan",
-            "date": 1769000129243
         }
     ],
     "authorName": "stephan",

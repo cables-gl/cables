@@ -36,5 +36,9 @@
             }
         ]
     },
-    "cloneOf": "fd6da32a-642f-41e2-a47b-579b87d9fcd2"
+    "cloneOf": "fd6da32a-642f-41e2-a47b-579b87d9fcd2",
+    "summary": "Debug what happens when a change of number parameter happens",
+    "docs": {
+        "ports": []
+    }
 }

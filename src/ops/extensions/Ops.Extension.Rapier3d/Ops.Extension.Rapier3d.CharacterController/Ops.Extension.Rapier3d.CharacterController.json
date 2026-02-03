@@ -9,24 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1721061709865
-        },
-        {
-            "message": "Ops.Team.Rapier3d.CharacterController renamed to Ops.Team.Rapier3d.Dev.CharacterController",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1721640744571
-        },
-        {
-            "message": "Team.Rapier3d.Dev.CharacterController renamed to Ops.Extension.Rapier3d.Dev.CharacterController",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324005768
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.CharacterController renamed to Ops.Extension.Rapier3d.CharacterController",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769004816403
         }
     ],
     "layout": {
@@ -97,5 +79,6 @@
     "exampleProjectId": "sexkbm",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Simulate a character in a physics world"
 }

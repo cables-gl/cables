@@ -9,36 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1720885489958
-        },
-        {
-            "message": "Team.Rapier3d.World renamed to Ops.Extension.Rapier3d.World",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324035170
-        },
-        {
-            "message": "Extension.Rapier3d.World renamed to Ops.Extension.Rapier3d.Dev.World",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324309093
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.World renamed to Ops.Extension.Rapier3d.Dev.Worldy",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324398836
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.Worldy renamed to Ops.Extension.Rapier3d.Dev.World",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324440253
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.World renamed to Ops.Extension.Rapier3d.World",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769004862780
         }
     ],
     "layout": {

@@ -83,5 +83,7 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Get webXr detected hand data",
+    "exampleProjectId": "fy8r9a"
 }

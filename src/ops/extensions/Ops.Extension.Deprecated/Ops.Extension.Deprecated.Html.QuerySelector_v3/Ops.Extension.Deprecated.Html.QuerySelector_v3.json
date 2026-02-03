@@ -2,21 +2,22 @@
     "id": "e943cddc-be72-46db-ae6a-fbd9608029d8",
     "changelog": [
         {
-            "message": "created op",
+            "message": "Created op",
             "author": "tim",
             "date": 1582126210630,
             "type": "new"
         },
         {
-            "message": "add \"element\" mode",
+            "message": "Add \"element\" mode",
             "type": "rename",
             "author": "stephan",
             "date": 1744018768896
         },
         {
-            "message": "op Html.QuerySelector_v3 was deprecated (use Ops.Html.Elements.ElementQuery)",
+            "message": "Op Html.QuerySelector_v3 was deprecated (use Ops.Html.Elements.ElementQuery)",
             "author": "stephan",
-            "date": 1769000063889
+            "date": 1769000063889,
+            "type": "deprecation"
         }
     ],
     "authorName": "stephan",

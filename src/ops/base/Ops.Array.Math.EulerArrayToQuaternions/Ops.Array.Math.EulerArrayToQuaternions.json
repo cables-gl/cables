@@ -25,5 +25,9 @@
             }
         ]
     },
-    "cloneOf": "e86ec524-b3fc-4e0f-9489-c48091c23178"
+    "cloneOf": "e86ec524-b3fc-4e0f-9489-c48091c23178",
+    "summary": "conver an array3 of euler rotations to a array4 of quaternions",
+    "docs": {
+        "ports": []
+    }
 }
