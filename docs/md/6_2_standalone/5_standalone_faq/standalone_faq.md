@@ -7,19 +7,19 @@ command line arguments.
 
 - `--fullscreen`        Open editor in fullscreen window on start
 - `--maximize-renderer` Maximize the renderer to window size on start
+- `--patch=<path>`      Open patch from `.cables` file on start
 
 Use `--help` for more info.
 
 ## How can I let cables standalone run on my internal GPU instead of the dedicated one?
 
 If you need or want to run cables or patches on the internal GPU of your laptop instead of the dedicated one
-(which is forced by default), there is two commandline arguments to control the behaviour:
+(which is forced by default), there are two commandline arguments to control the behaviour:
 
 - `--force-igpu`          Force using integrated GPU when there are multiple GPUs available.
 - `--dont-force-dgpu`     DO NOT force using discrete GPU when there are multiple GPUs available.
 
 Use `--help` for more info.
-
 
 ## Where can I find more information and tutorials to get started?
 
