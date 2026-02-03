@@ -57,5 +57,6 @@
     "exampleProjectId": "k6NCV8",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Create a heightfield physics body"
 }

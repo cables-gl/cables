@@ -2,16 +2,6 @@
     "id": "26e9b9cd-4069-4e0c-b2ee-ee1c5474c004",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1601641292287
-        },
-        {
-            "message": "Ops.User.pandur.ArrayMerge2 renamed to Ops.Array.ArrayMerge_v3",
-            "author": "pandur",
-            "date": 1606733924664
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
@@ -53,9 +43,9 @@
         ]
     },
     "summary": "Merge multiple arrays - in consecutive order",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "T3Ir9a"
 }

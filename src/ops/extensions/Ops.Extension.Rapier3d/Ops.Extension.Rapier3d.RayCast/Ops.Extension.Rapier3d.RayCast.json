@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1721052214271
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.RayCast renamed to Ops.Extension.Rapier3d.RayCast",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769004847235
         }
     ],
     "layout": {
@@ -89,5 +83,6 @@
     "exampleProjectId": "PSX4W8",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Detect intersections of a ray against physic objects"
 }

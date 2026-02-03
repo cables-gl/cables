@@ -15,36 +15,6 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1768319801510
-        },
-        {
-            "message": "Team.Rapier3d.World_v2 renamed to Ops.Extension.Rapier3d.World_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324034961
-        },
-        {
-            "message": "Extension.Rapier3d.World_v2 renamed to Ops.Extension.Rapier3d.Dev.World_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324308900
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.World_v2 renamed to Ops.Extension.Rapier3d.Dev.Worldy_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324398703
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.Worldy_v2 renamed to Ops.Extension.Rapier3d.Dev.World_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1768324440098
-        },
-        {
-            "message": "Extension.Rapier3d.Dev.World_v2 renamed to Ops.Extension.Rapier3d.World_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769004862614
         }
     ],
     "layout": {
@@ -103,7 +73,9 @@
         ]
     },
     "exampleProjectId": "V66gqi",
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "coreLibs": [
         "cgl"
     ],
@@ -112,5 +84,6 @@
             "src": "./rapier.js",
             "type": "commonjs"
         }
-    ]
+    ],
+    "summary": "Physics simulation world "
 }

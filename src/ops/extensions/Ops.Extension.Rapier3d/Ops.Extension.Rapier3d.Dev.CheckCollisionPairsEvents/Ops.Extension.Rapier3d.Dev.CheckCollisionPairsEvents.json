@@ -11,16 +11,10 @@
             "date": 1768837697368
         },
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1768916110015
-        },
-        {
-            "message": "Extension.Rapier3d.CheckCollisionEvents renamed to Ops.Extension.Rapier3d.CheckCollisionPairsEvents",
+            "message": "Extension.Rapier3d.CheckCollisionPairsEvents renamed to Ops.Extension.Rapier3d.Dev.CheckCollisionPairsEvents",
             "type": "rename",
             "author": "pandur",
-            "date": 1768995078404
+            "date": 1770107050460
         }
     ],
     "layout": {

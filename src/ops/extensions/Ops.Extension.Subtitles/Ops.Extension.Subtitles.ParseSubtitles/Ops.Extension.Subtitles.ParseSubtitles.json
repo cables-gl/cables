@@ -5,16 +5,10 @@
     "authorName": "stephan",
     "changelog": [
         {
-            "message": "op created",
+            "message": "Op created",
             "type": "new op",
             "author": "stephan",
             "date": 1768566313254
-        },
-        {
-            "message": "Team.Schwarzcity.ParseSubtitles renamed to Ops.Extension.Subtitles.ParseSubtitles",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1768998887683
         }
     ],
     "layout": {

@@ -11,10 +11,10 @@
             "date": 1768837697368
         },
         {
-            "message": "Extension.Rapier3d.CheckCollision renamed to Ops.Extension.Rapier3d.ContactPairsNope",
-            "type": "rename",
+            "message": "op Extension.Rapier3d.ContactPairsNope was deprecated",
+            "type": "deprecation",
             "author": "pandur",
-            "date": 1768918641306
+            "date": 1770106779463
         }
     ],
     "layout": {

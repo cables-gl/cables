@@ -5,16 +5,10 @@
     "authorName": "stephan",
     "changelog": [
         {
-            "message": "op created",
+            "message": "Op created",
             "type": "new op",
             "author": "stephan",
             "date": 1768566313254
-        },
-        {
-            "message": "Team.Schwarzcity.SubtitleAnim renamed to Ops.Extension.Subtitles.SubtitleAnim",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1768998910226
         }
     ],
     "layout": {

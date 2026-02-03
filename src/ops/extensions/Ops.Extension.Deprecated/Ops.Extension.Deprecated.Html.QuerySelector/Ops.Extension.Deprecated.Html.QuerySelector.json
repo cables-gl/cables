@@ -34,16 +34,10 @@
     "exampleProjectId": "HPRqIR",
     "changelog": [
         {
-            "message": "op Html.QuerySelector was deprecated",
-            "type": "deprecation",
+            "message": "Op Html.QuerySelector was deprecated (use Ops.Html.Elements.ElementQuery)",
             "author": "stephan",
-            "date": 1769000064967
-        },
-        {
-            "message": "op Extension.Deprecated.Html.Elements.QuerySelector was deprecated",
-            "type": "deprecation",
-            "author": "stephan",
-            "date": 1769000149556
+            "date": 1769000064967,
+            "type": "deprecation"
         }
     ]
 }

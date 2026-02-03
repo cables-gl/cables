@@ -8,22 +8,16 @@
             "type": "new"
         },
         {
-            "message": "catch and show errors to the user",
+            "message": "Catch and show errors to the user",
             "type": "improvement",
             "author": "pandur",
             "date": 1726147294928
         },
         {
-            "message": "op Html.QuerySelector_v2 was deprecated",
+            "message": "Op Html.QuerySelector_v2 was deprecated (use Ops.Html.Elements.ElementQuery)",
             "type": "deprecation",
             "author": "stephan",
             "date": 1769000064466
-        },
-        {
-            "message": "op Extension.Deprecated.Html.Elements.QuerySelector_v2 was deprecated",
-            "type": "deprecation",
-            "author": "stephan",
-            "date": 1769000148830
         }
     ],
     "authorName": "tim",

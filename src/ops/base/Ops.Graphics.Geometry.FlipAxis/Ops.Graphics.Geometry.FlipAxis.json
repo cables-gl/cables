@@ -47,5 +47,7 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Flip/exchange two axis in a whole geometry, e.g. XYZ to XZY",
+    "exampleProjectId": "Cxxq9a"
 }

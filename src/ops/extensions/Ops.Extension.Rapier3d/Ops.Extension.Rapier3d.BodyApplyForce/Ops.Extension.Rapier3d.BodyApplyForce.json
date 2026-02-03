@@ -8,12 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1769174945956
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1769176990458
         }
     ],
@@ -72,5 +66,5 @@
     "docs": {
         "ports": []
     },
-    "summary": "Applies an impulse to bodies"
+    "summary": "Applies a force to bodies"
 }

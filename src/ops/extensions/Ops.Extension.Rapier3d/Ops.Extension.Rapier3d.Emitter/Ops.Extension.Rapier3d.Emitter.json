@@ -145,5 +145,6 @@
     "exampleProjectId": "IztVV8",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Spawn new physics bodies by triggering"
 }

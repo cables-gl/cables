@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768998437659
-        },
-        {
-            "message": "Extension.Rapier3d.JointRevolute renamed to Ops.Extension.Rapier3d.Joint",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1769100109531
         }
     ],
     "layout": {
@@ -117,5 +111,6 @@
     "exampleProjectId": "lKlUW8",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Physics Joints: Revolute/Hinge, Prismapic,Spherical/Pendulum"
 }
