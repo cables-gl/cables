@@ -34,7 +34,7 @@
     "exampleProjectId": "HPRqIR",
     "changelog": [
         {
-            "message": "Op Html.QuerySelector was deprecated (use Ops.Html.Elements.ElementQuery)",
+            "message": "op Html.QuerySelector was deprecated (use Ops.Html.Elements.ElementQuery)",
             "author": "stephan",
             "date": 1769000064967,
             "type": "deprecation"

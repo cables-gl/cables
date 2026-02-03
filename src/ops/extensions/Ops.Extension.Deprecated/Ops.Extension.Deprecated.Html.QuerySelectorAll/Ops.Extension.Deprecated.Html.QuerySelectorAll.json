@@ -2,19 +2,19 @@
     "id": "001799c7-9ddf-4f3e-b260-e865f0ed2c0e",
     "changelog": [
         {
-            "message": "Created op",
+            "message": "created op",
             "author": "tim",
             "date": 1582126210630,
             "type": "new"
         },
         {
-            "message": "Catch errors and show them to the user",
+            "message": "catch errors and show them to the user",
             "type": "feature",
             "author": "pandur",
             "date": 1726147345494
         },
         {
-            "message": "Op Html.QuerySelectorAll was deprecated (use Ops.Html.Elements.ElementQuery)",
+            "message": "op Html.QuerySelectorAll was deprecated (use Ops.Html.Elements.ElementQuery)",
             "type": "deprecation",
             "author": "stephan",
             "date": 1769000108366
