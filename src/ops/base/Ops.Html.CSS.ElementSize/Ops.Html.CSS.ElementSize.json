@@ -1,0 +1,70 @@
+{
+    "id": "61f40a94-66c8-4ed8-9be4-9b4dc62ead02",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767867921741
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770208667127
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1770208667126,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Top Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Left Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Passthrough",
+                "objType": "element"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "summary": "Set position left/right/top/bottom of a HTML element"
+}
