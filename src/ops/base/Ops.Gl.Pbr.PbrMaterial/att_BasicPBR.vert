@@ -46,6 +46,7 @@ UNI mat4 modelMatrix;
 void main()
 {
     mat4 mMatrix = modelMatrix; // needed to make vertex effects work
+
     #ifdef USE_LIGHTMAP
         texCoord1 = attrTexCoord1;
     #endif
@@ -60,12 +61,13 @@ void main()
 
 
     mat4 theMMat=mMatrix;
+
     #ifdef INSTANCING
         #ifdef TEXINSTMAT
             theMMat = texInstMat;
         #endif
         #ifndef TEXINSTMAT
-            theMMat = instMat;
+            theMMat = iMat;
         #endif
     #endif
 

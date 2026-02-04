@@ -6,13 +6,13 @@ const
     heightPixel = op.outNumber("Pixel Height"),
     aspect = op.outNumber("Aspect Ratio"),
     landscape = op.outBool("Landscape"),
-    outCanvasEle = op.outObject("Canvas", "element"),
-    outCanvasParentEle = op.outObject("Canvas Parent", "element"),
+    outCanvasEle = op.outObject("Canvas", null, "element"),
+    outCanvasParentEle = op.outObject("Canvas Parent", null, "element"),
     outResize = op.outTrigger("Resized");
 
 let cgl = op.patch.cgl;
-outCanvasEle.set(op.patch.cgl.canvas);
-outCanvasParentEle.set(op.patch.cgl.canvas.parentElement);
+outCanvasEle.setRef(op.patch.cgl.canvas);
+outCanvasParentEle.setRef(op.patch.cgl.canvas.parentElement);
 
 cgl.on("resize", () =>
 {

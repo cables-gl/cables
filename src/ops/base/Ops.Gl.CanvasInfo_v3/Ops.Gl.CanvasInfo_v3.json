@@ -40,11 +40,13 @@
             },
             {
                 "type": 2,
-                "name": "Canvas"
+                "name": "Canvas",
+                "objType": "element"
             },
             {
                 "type": 2,
-                "name": "Canvas Parent"
+                "name": "Canvas Parent",
+                "objType": "element"
             },
             {
                 "type": 1,
@@ -61,7 +63,7 @@
     },
     "changelog": [
         {
-            "message": "new output: landscape - true if canvas width &gt; height",
+            "message": "new output: landscape - true if canvas width & height",
             "author": "pandur",
             "date": 1550644352354,
             "type": "feature"

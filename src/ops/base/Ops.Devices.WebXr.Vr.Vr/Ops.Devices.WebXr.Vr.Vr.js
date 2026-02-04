@@ -15,7 +15,6 @@ const
     outHasLocalFloor = op.outBoolNum("Local Floor Ref"),
     outVr = op.outBoolNum("VR Support"),
     outMat = op.outArray("Matrix"),
-    outElement = op.outObject("DOM Overlay Ele", null, "element"),
     outSession = op.outBoolNum("In Session"),
     outMs = op.outArray("Ms per eye"),
     outTex = op.outTexture("Texture"),
