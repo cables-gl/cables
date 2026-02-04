@@ -48,19 +48,6 @@ inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
 inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
 
-const overlayEle = op.patch.getDocument().createElement("div");
-// overlayEle.style.background = "rgba(0,0,0,0)";
-// overlayEle.style.position = "absolute";
-// overlayEle.style.top = "0";
-// overlayEle.style.bottom = "0";
-// overlayEle.style.left = "0";
-// overlayEle.style.right = "0";
-// overlayEle.style.display = "none";
-// overlayEle.style.contain = "paint !important";
-
-outElement.setRef(overlayEle);
-document.body.appendChild(overlayEle);
-
 if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
     {

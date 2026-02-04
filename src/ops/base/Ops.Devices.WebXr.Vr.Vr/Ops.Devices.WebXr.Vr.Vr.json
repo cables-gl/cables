@@ -119,11 +119,6 @@
                 "name": "Matrix"
             },
             {
-                "type": 2,
-                "name": "DOM Overlay Ele",
-                "objType": "element"
-            },
-            {
                 "type": 0,
                 "name": "In Session",
                 "subType": "boolean"
