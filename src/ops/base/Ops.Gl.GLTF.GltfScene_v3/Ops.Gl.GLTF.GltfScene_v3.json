@@ -33,6 +33,11 @@
             {
                 "type": 0,
                 "name": "Center index",
+                "values": [
+                    "None",
+                    "XYZ",
+                    "XZ"
+                ],
                 "group": "Transform",
                 "subType": "integer"
             },
@@ -69,11 +74,19 @@
             {
                 "type": 0,
                 "name": "Normals Format index",
+                "values": [
+                    "XYZ",
+                    "X-ZY"
+                ],
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Vertices Format index",
+                "values": [
+                    "XYZ",
+                    "XZ-Y"
+                ],
                 "subType": "integer"
             },
             {
@@ -238,5 +251,6 @@
         "cgl"
     ],
     "caniusequery": "",
-    "exampleProjectId": "XmL8GY"
+    "exampleProjectId": "XmL8GY",
+    "license": "MIT"
 }

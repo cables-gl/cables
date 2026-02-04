@@ -12,7 +12,7 @@ inStr.onChange = () =>
 
     if (!str || str.length < 2)
     {
-        outGeom.set(null);
+        outGeom.setRef(null);
         return;
     }
 
@@ -137,7 +137,7 @@ inStr.onChange = () =>
     geom.calculateNormals();
     geom.calcTangentsBitangents();
 
-    outGeom.set(geom);
+    outGeom.setRef(geom);
 };
 
 const PATH_COMMANDS = {

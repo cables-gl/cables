@@ -877,19 +877,19 @@ Geometry.buildFromFaces = function (arr, name, optimize)
         if (face[0] == -1)
         {
             vertices.push(a[0], a[1], a[2]);
-            face[0] = (vertices.length - 1) / 3;
+            face[0] = (vertices.length / 3) - 1;
         }
 
         if (face[1] == -1)
         {
             vertices.push(b[0], b[1], b[2]);
-            face[1] = (vertices.length - 1) / 3;
+            face[1] = (vertices.length / 3) - 1;
         }
 
         if (face[2] == -1)
         {
             vertices.push(c[0], c[1], c[2]);
-            face[2] = (vertices.length - 1) / 3;
+            face[2] = (vertices.length / 3) - 1;
         }
 
         verticesIndices.push(face[0]);
