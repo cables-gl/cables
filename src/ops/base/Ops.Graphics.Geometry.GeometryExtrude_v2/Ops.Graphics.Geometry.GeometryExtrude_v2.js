@@ -169,7 +169,7 @@ inGeom.onChange = () =>
             }
         }
 
-    const newGeom = CGL.Geometry.buildFromFaces(verts, "extrude", false);
+    const newGeom = CGL.Geometry.buildFromFaces(verts, "extrude", true);
     newGeom.calculateNormals();
     newGeom.calcTangentsBitangents();
 

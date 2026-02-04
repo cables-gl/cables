@@ -13,13 +13,13 @@ geometry.onChange = function ()
     let geom = geometry.get();
     if (!geom)
     {
-        outVertices.setRef(null);
-        outFaces.setRef(null);
-        outTextcoords.setRef(null);
-        outNormals.setRef(null);
-        outTangents.setRef(null);
-        outBiTangents.setRef(null);
-        outVertexColors.setRef(null);
+        outVertices.setRef([]);
+        outFaces.setRef([]);
+        outTextcoords.setRef([]);
+        outNormals.setRef([]);
+        outTangents.setRef([]);
+        outBiTangents.setRef([]);
+        outVertexColors.setRef([]);
 
         return;
     }
