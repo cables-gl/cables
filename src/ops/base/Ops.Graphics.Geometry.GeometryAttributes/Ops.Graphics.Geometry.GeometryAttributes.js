@@ -27,8 +27,8 @@ geometry.onChange = function ()
     // convert float32array to array
     let verts = Array.prototype.slice.call(geom.vertices);
 
-    outVertices.setRef(verts);
     outFaces.setRef(geom.verticesIndices);
+    outVertices.setRef(verts);
     outTextcoords.setRef(geom.texCoords);
     outNormals.setRef(geom.vertexNormals);
     outTangents.setRef(geom.tangents);
