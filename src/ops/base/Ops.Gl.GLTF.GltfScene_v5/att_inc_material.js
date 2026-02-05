@@ -23,6 +23,7 @@ let GltfMaterial = class
 
     bind(cgl, currentShader)
     {
+        // console.log("bind mat", this.name, this._matDiffuseColor);
         const uniPbrMetalness = currentShader.uniformPbrMetalness;
         const uniPbrRoughness = currentShader.uniformPbrRoughness;
         const uniDiff = currentShader.uniformColorDiffuse;

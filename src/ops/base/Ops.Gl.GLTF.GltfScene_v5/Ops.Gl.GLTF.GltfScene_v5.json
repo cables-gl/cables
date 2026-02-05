@@ -273,6 +273,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1770025549256
+        },
+        {
+            "message": "New Version 5: \"Use Material Properties\" is enables by default",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770309777285
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

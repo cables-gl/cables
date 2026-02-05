@@ -1,0 +1,50 @@
+{
+    "id": "9d51eb58-90ee-4d0f-8e78-623c41a3a533",
+    "created": 1770304453113,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770304453113
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Material Name"
+            },
+            {
+                "type": 0,
+                "name": "Name Match index",
+                "values": [
+                    "exact",
+                    "starts with"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Properties"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    }
+}
