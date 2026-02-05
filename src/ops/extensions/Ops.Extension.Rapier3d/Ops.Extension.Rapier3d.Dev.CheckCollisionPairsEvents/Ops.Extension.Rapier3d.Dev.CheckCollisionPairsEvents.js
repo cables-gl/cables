@@ -20,10 +20,10 @@ exec.onTriggered = () =>
 
     let hasColl = false;
     const events = op.patch.frameStore.rapier.collisionEvents;
+    console.log("text", events);
 
     for (let i = 0; i < arr1.length; i++) r1[i] = 0;
     for (let j = 0; j < arr2.length; j++) r2[j] = 0;
-
     for (let i = 0; i < arr1.length; i++)
     {
         for (let j = 0; j < arr2.length; j++)

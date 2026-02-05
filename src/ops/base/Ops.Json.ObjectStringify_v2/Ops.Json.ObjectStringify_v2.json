@@ -32,7 +32,15 @@
     },
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
-    "exampleProjectId": "7X58nR"
+    "exampleProjectId": "7X58nR",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Show a warning if the connected object port does not contain an object",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770226461832
+        }
+    ]
 }

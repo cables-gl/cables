@@ -206,6 +206,13 @@ inObj.onChange = () =>
             // console.log(obj);
         }
 
+    if (obj && obj.constructor && (obj.constructor.name == "String" || CABLES.isNumeric(obj) || Array.isArray(obj)))
+    {
+        op.setUiError("notobj", "The connected is not of type object! ", 1);
+        str += "\nnot an object!\n";
+    }
+    else op.setUiError("notobj", null);
+
     str = String(str);
     lines = str.split("\n");
 };
