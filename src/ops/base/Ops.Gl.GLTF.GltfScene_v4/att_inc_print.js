@@ -235,7 +235,7 @@ function printInfo()
 
     // / ///////////////////////
 
-    html += "<div id=\"groupMeshes\">Kesh Geometries (" + gltf.json.meshes.length + ")</div>";
+    html += "<div id=\"groupMeshes\">Mesh Geometries (" + gltf.json.meshes.length + ")</div>";
 
     html += "<table id=\"meshestable\"  class=\"table treetable\">";
     html += "<tr>";

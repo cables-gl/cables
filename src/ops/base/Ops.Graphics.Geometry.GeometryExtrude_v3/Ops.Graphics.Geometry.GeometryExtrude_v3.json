@@ -1,0 +1,78 @@
+{
+    "id": "4037f04b-6d27-436f-b8b4-96efa1125324",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1647367948957,
+            "type": "new"
+        },
+        {
+            "message": "Better normals",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769448359635
+        },
+        {
+            "message": "Even better normals! Now it can have smooth normals",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770225271155
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Walls",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1770225165933,
+    "summary": "basic extrusion of flat geometry",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "Cp5VS3",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}
