@@ -3,8 +3,19 @@ const gltfNode = class
     constructor(node, gltf)
     {
         this.isChild = node.isChild || false;
-        node.name = node.name || "unknown node " + CABLES.simpleId();
+        console.log("nodeee ", node.name);
         this.name = node.name;
+
+        if (!node.name)
+            if (node.hasOwnProperty("mesh"))
+            {
+                this.name = "unnamed";
+            }
+            else
+            {
+                this.name = "unnamed node " + CABLES.simpleId();
+            }
+
         if (node.hasOwnProperty("camera")) this.camera = node.camera;
         this.hidden = false;
         this.mat = mat4.create();
@@ -84,9 +95,6 @@ const gltfNode = class
         if (this._node.hasOwnProperty("mesh"))
         {
             this.mesh = this._gltf.meshes[this._node.mesh];
-            if (this.isCopy)
-            {
-            }
         }
 
         if (this._node.children)

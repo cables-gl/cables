@@ -1,11 +1,12 @@
 const
     inGeom = op.inObject("Geometry", null, "geometry"),
     inHeight = op.inFloat("Height", 0.5),
-    inSmooth = op.inBool("Smooth", true),
     inExtrudeWalls = op.inBool("Walls", true),
     inCapTop = op.inBool("Top", true),
     inCapBottom = op.inBool("Bottom", true),
     outGeom = op.outObject("Result Geometry", null, "geometry");
+
+op.toWorkPortsNeedToBeLinked(inGeom);
 
 function isClockwise(verts)
 {
@@ -37,7 +38,6 @@ function triangleNormal(a, b, c)
     return mag > 0 ? [nx / mag, ny / mag, nz / mag] : [0, 0, 0];
 }
 
-inSmooth.onChange =
 inExtrudeWalls.onChange =
 inCapTop.onChange =
 inCapBottom.onChange =
@@ -195,13 +195,7 @@ inGeom.onChange = () =>
     }
 
     newGeom.flipVertDir();
-
-    // if (!inSmooth.get())
-    // {
-    //     newGeom.unIndex();
-    //     newGeom.calculateNormals();
-    //     newGeom.flipNormals();
-    // }
+    newGeom.calculateNormals();
 
     outGeom.setRef(newGeom);
 };

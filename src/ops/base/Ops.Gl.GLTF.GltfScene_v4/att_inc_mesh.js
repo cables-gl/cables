@@ -40,34 +40,16 @@ let gltfMesh = class
 
             if (this.materialJson && this.materialJson.pbrMetallicRoughness)
             {
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("baseColorFactor"))
-                {
-                    this._matDiffuseColor = [1, 1, 1, 1];
-                }
-                else
-                {
-                    this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
-                }
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = [1, 1, 1, 1];
+                else this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
 
                 this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
 
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("metallicFactor"))
-                {
-                    this._matPbrMetalness = 1.0;
-                }
-                else
-                {
-                    this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
-                }
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = 1.0;
+                else this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
 
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("roughnessFactor"))
-                {
-                    this._matPbrRoughness = 1.0;
-                }
-                else
-                {
-                    this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
-                }
+                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = 1.0;
+                else this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
             }
         }
 

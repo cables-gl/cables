@@ -301,6 +301,7 @@ function parseGltf(arrayBuffer)
     pos += chunks[0].size + CHUNK_HEADER_SIZE;
     gltf.json = chunks[0].data;
 
+    console.log("text", structuredClone(gltf.json));
     gltf.cables = {
         "fileUrl": inFile.get(),
         "shortFileName": CABLES.basename(inFile.get())
@@ -473,7 +474,7 @@ function parseGltf(arrayBuffer)
     {
         for (i = 0; i < gltf.json.meshes.length; i++)
         {
-            const mesh = new gltfMeshGroup(gltf, gltf.json.meshes[i]);
+            const mesh = new gltfMeshGroup(gltf, gltf.json.meshes[i], i);
             gltf.meshes.push(mesh);
         }
     }

@@ -1,11 +1,11 @@
 const gltfMeshGroup = class
 {
-    constructor(gltf, m)
+    constructor(gltf, m, index)
     {
         this.bounds = new CABLES.CG.BoundingBox();
         this.meshes = [];
 
-        m.name = m.name || ("unknown mesh " + unknownCount);
+        m.name = m.name || ("unnamed mesh " + unknownCount++);
 
         this.name = m.name;
         const prims = m.primitives;

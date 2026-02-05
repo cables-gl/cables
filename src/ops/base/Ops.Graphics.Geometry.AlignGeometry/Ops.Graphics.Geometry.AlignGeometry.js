@@ -5,6 +5,8 @@ const
     z = op.inSwitch("Z", ["Ignore", "Center", "Max", "Min"], "Ignore"),
     outGeom = op.outObject("Result");
 
+op.toWorkPortsNeedToBeLinked(geometry);
+
 x.onChange = y.onChange = z.onChange = geometry.onChange = update;
 
 const

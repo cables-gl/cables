@@ -4,28 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1647541367044
+            "date": 1647541367044,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.OpenTypeToSvgPath renamed to Ops.Dev.OpentypeToSvgPath",
+            "message": "Added support for line breaks, added line height parameter",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1647541433414
-        },
-        {
-            "message": "Ops.Dev.OpentypeToSvgPath renamed to Ops.Libs.OpenType.OpentypeToSvgPath",
-            "author": "pandur",
-            "date": 1653287682153
-        },
-        {
-            "message": " added lib: opentype.js",
-            "author": "stephan",
-            "date": 1654181081484
-        },
-        {
-            "message": "Ops.Libs.OpenType.OpentypeToSvgPath renamed to Ops.Extension.OpenType.OpentypeToSvgPath",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915895840
+            "date": 1770292038171
         }
     ],
     "authorName": "pandur",
@@ -43,6 +29,11 @@
             {
                 "type": 0,
                 "name": "Letter Spacing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Height",
                 "subType": "number"
             }
         ],
@@ -67,5 +58,6 @@
     },
     "libs": [
         "opentype.js"
-    ]
+    ],
+    "license": "MIT"
 }
