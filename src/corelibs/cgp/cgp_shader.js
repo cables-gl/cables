@@ -514,6 +514,10 @@ export class CgpShader extends CgShader
 
         shader._moduleNames = this._moduleNames;
 
+        shader.uniformColorDiffuse = this.uniformColorDiffuse;
+        shader.uniformPbrMetalness = this.uniformPbrMetalness;
+        shader.uniformPbrRoughness = this.uniformPbrRoughness;
+
         shader.bindGroups = [];
         for (let i = 0; i < this.bindGroups.length; i++)
         {
