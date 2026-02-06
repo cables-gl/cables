@@ -24,6 +24,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1770385811609
+        },
+        {
+            "message": "Better loading of settings from gltf files / textures",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770386180450
         }
     ],
     "layout": {

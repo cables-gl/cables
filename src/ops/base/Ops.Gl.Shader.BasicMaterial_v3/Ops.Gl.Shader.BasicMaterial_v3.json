@@ -184,6 +184,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1707980494934
+        },
+        {
+            "message": "Rendering of textures from gltf files",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1770386199275
         }
     ],
     "exampleProjectId": "SKCL88",

@@ -279,6 +279,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1770309777285
+        },
+        {
+            "message": "Basic automatic loading and usage of embedded textures",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1770386236474
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
