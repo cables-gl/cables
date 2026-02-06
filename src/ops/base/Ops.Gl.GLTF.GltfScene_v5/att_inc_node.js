@@ -3,18 +3,11 @@ const gltfNode = class
     constructor(node, gltf)
     {
         this.isChild = node.isChild || false;
-        console.log("nodeee ", node.name);
         this.name = node.name;
 
         if (!node.name)
-            if (node.hasOwnProperty("mesh"))
-            {
-                this.name = "unnamed";
-            }
-            else
-            {
-                this.name = "unnamed node " + CABLES.simpleId();
-            }
+            if (node.hasOwnProperty("mesh")) this.name = "unnamed";
+            else this.name = "unnamed node " + CABLES.simpleId();
 
         if (node.hasOwnProperty("camera")) this.camera = node.camera;
         this.hidden = false;

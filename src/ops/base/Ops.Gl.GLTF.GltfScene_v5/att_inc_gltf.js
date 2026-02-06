@@ -11,6 +11,7 @@ const Gltf = class
         this.shaders = [];
         this.timing = [];
         this.cams = [];
+        this.materials = [];
         this.startTime = performance.now();
         this.bounds = new CABLES.CG.BoundingBox();
         this.loaded = Date.now();
@@ -469,6 +470,14 @@ function parseGltf(arrayBuffer)
     gltf.timing.push(["Parse mesh groups", Math.round((performance.now() - gltf.startTime))]);
 
     gltf.json.meshes = gltf.json.meshes || [];
+
+    if (gltf.json.materials)
+    {
+        for (i = 0; i < gltf.json.materials.length; i++)
+        {
+            gltf.materials.push(new GltfMaterial(gltf.json.materials[i]));
+        }
+    }
 
     if (gltf.json.meshes)
     {

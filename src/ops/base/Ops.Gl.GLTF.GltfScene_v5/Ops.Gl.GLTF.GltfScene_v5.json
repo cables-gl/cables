@@ -1,0 +1,308 @@
+{
+    "authorName": "pandur",
+    "id": "111ac45c-a779-4f1c-a409-3a2ff2d686e0",
+    "created": 1770307048327,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "glb File"
+            },
+            {
+                "type": 0,
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Camera index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Animation"
+            },
+            {
+                "type": 1,
+                "name": "Show Structure"
+            },
+            {
+                "type": 0,
+                "name": "Center index",
+                "values": [
+                    "None",
+                    "XYZ",
+                    "XZ"
+                ],
+                "group": "Transform",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Rescale",
+                "group": "Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rescale Size",
+                "group": "Transform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sync to timeline",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Normals Format index",
+                "values": [
+                    "XYZ",
+                    "X-ZY"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Vertices Format index",
+                "values": [
+                    "XYZ",
+                    "XZ-Y"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Calc Normals index",
+                "values": [
+                    "Auto",
+                    "Force Smooth",
+                    "Never"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Materials"
+            },
+            {
+                "type": 3,
+                "name": "Hide Nodes"
+            },
+            {
+                "type": 0,
+                "name": "Use Material Properties",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Render Before"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Generator"
+            },
+            {
+                "type": 0,
+                "name": "GLTF Version",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "GLTF Extensions Used"
+            },
+            {
+                "type": 0,
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Anim Time",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Json"
+            },
+            {
+                "type": 3,
+                "name": "Anims"
+            },
+            {
+                "type": 3,
+                "name": "BoundingPoints"
+            },
+            {
+                "type": 2,
+                "name": "Bounds"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.GltfScene3 renamed to Ops.Admin.GltfScene2",
+            "author": "pandur",
+            "date": 1580991292936,
+            "type": "new"
+        },
+        {
+            "message": "fix animation not playing when using skinned mesh with assigned material shaders",
+            "author": "pandur",
+            "date": 1643616656209,
+            "type": "bugfix"
+        },
+        {
+            "message": "vertex colors: added automatic color conversion linear space ",
+            "author": "pandur",
+            "date": 1643616684822,
+            "type": "improvement"
+        },
+        {
+            "message": "fix problems with different animation interpolation settings",
+            "author": "pandur",
+            "date": 1643616693499,
+            "type": "bugfix"
+        },
+        {
+            "message": "warn user visually when file was not found",
+            "author": "pandur",
+            "date": 1643616715384,
+            "type": "improvement"
+        },
+        {
+            "message": "compatibility with more glb files",
+            "author": "pandur",
+            "date": 1643616726676,
+            "type": "improvement"
+        },
+        {
+            "message": "add support for dataurls",
+            "author": "stephan",
+            "date": 1646674536478,
+            "type": "improvement"
+        },
+        {
+            "message": "Fix bug: GLTF meshes were not rendering the first time it was executed",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1716457266603
+        },
+        {
+            "message": "Fix loading meshes with hi polycount without no face indices",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1736960082039
+        },
+        {
+            "message": "fix problem with wrong animation loop length",
+            "type": "bugfix",
+            "author": "tobyk",
+            "date": 1747894217268
+        },
+        {
+            "message": "Faster loading of files with many animation keys",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1761062155489
+        },
+        {
+            "message": "Unnamed meshes now will always have the same name",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768297706855
+        },
+        {
+            "message": "Support for files using the KHR_mesh_quantization extension",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1768298508137
+        },
+        {
+            "message": "Show warning in editor if the morphtarget texture is bigger then browsers max texture size",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769429440778
+        },
+        {
+            "message": "List max of 100 childs for performance reasons, showing \"more\" button when more",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1769867973100
+        },
+        {
+            "message": "When hiding nodes, all nodes with that name will be hidden, not only the first",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770025549256
+        },
+        {
+            "message": "New Version 5: \"Use Material Properties\" is enables by default",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770309777285
+        }
+    ],
+    "summary": "Load GLTF/GLB 3d files",
+    "issues": "",
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Hide Nodes",
+                "text": "Hide some GLTF nodes by name"
+            },
+            {
+                "name": "Json",
+                "text": "The whole GLTF scene as JSON data"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier",
+        "cgl"
+    ],
+    "caniusequery": "",
+    "exampleProjectId": "XmL8GY",
+    "license": "MIT"
+}

@@ -29,30 +29,6 @@ let gltfMesh = class
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
         gltf.loadingMeshes++;
 
-        this.materialJson =
-            this._matPbrMetalness =
-            this._matPbrRoughness =
-            this._matDiffuseColor = null;
-
-        if (gltf.json.materials)
-        {
-            if (this.material != -1) this.materialJson = gltf.json.materials[this.material];
-
-            if (this.materialJson && this.materialJson.pbrMetallicRoughness)
-            {
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = [1, 1, 1, 1];
-                else this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
-
-                this._matDiffuseColor = this.materialJson.pbrMetallicRoughness.baseColorFactor;
-
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = 1.0;
-                else this._matPbrMetalness = this.materialJson.pbrMetallicRoughness.metallicFactor || null;
-
-                if (!this.materialJson.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = 1.0;
-                else this._matPbrRoughness = this.materialJson.pbrMetallicRoughness.roughnessFactor || null;
-            }
-        }
-
         if (gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
         {
             const view = gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView];
@@ -329,11 +305,6 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
-    bindMaterial()
-    {
-
-    }
-
     render(cgl, ignoreMaterial, skinRenderer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
@@ -376,57 +347,13 @@ let gltfMesh = class
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
-            const currentShader = cgl.getShader() || {};
-            const uniDiff = currentShader.uniformColorDiffuse;
-
-            const uniPbrMetalness = currentShader.uniformPbrMetalness;
-            const uniPbrRoughness = currentShader.uniformPbrRoughness;
-
-            // if (gltf.shaders[this.material] && !inUseMatProps.get())
-            // {
-            //     gltf.shaders[this.material]=null;
-            // }
-
-            if (!gltf.shaders[this.material] && inUseMatProps.get())
-            {
-                if (uniDiff && this._matDiffuseColor)
-                {
-                    this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
-                    uniDiff.setValue(this._matDiffuseColor);
-                }
-
-                if (uniPbrMetalness)
-                    if (this._matPbrMetalness != null)
-                    {
-                        this._matPbrMetalnessOrig = uniPbrMetalness.getValue();
-                        uniPbrMetalness.setValue(this._matPbrMetalness);
-                    }
-                    else
-                        uniPbrMetalness.setValue(0);
-
-                if (uniPbrRoughness)
-                    if (this._matPbrRoughness != null)
-                    {
-                        this._matPbrRoughnessOrig = uniPbrRoughness.getValue();
-                        uniPbrRoughness.setValue(this._matPbrRoughness);
-                    }
-                    else
-                    {
-                        uniPbrRoughness.setValue(0);
-                    }
-            }
-
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
-            if (this.mesh)
-            {
-                this.mesh.render(cgl.getShader(), ignoreMaterial);
-            }
-            if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
-            if (inUseMatProps.get())
-            {
-                this.setMatProps(cgl);
-            }
+            if (inUseMatProps.get()) gltf.materials[this.material].bind(cgl, cgl.getShader());
+            if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
+            if (inUseMatProps.get()) gltf.materials[this.material].unbind(cgl, cgl.getShader());
+
+            if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
             if (useMat) cgl.popShader();
         }
@@ -434,18 +361,5 @@ let gltfMesh = class
         {
             console.log("no mesh......");
         }
-    }
-
-    setMatProps(cgl)
-    {
-        const currentShader = cgl.getShader() || {};
-        const uniDiff = currentShader.uniformColorDiffuse;
-
-        const uniPbrMetalness = currentShader.uniformPbrMetalness;
-        const uniPbrRoughness = currentShader.uniformPbrRoughness;
-
-        if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
-        if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
-        if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
     }
 };

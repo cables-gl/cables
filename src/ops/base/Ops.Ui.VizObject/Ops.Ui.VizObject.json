@@ -30,6 +30,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1733417015433
+        },
+        {
+            "message": "Show a warning if the connected port is not a valid object",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770226343769
         }
     ],
     "authorName": "pandur",
