@@ -33,8 +33,6 @@ r.setUiAttribs({ "colorPick": true });
 // const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 const colUni = shader.addUniformFrag("4f", "color", r, g, b, a);
 
-shader.uniformColorDiffuse = colUni;
-
 // diffuse outTexture
 
 const diffuseTexture = op.inTexture("texture");
@@ -54,6 +52,12 @@ textureOpacity.onChange = updateOpacity;
 
 const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
 const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
+
+shader.materialPropUniforms = {
+    "diffuseTexture": diffuseTexture,
+    "diffuseColor": colUni
+};
+shader.uniformColorDiffuse = colUni;
 
 // texture coords
 const

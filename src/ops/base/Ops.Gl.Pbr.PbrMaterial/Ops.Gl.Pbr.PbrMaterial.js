@@ -39,6 +39,7 @@ const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", 
 const inHeightDepth = op.inFloat("Height Intensity", 1.0);
 const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
 const inDoubleSided = op.inValueBool("Double Sided", false);
+const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -190,6 +191,7 @@ PBRShader.uniformPbrRoughness = inRoughnessUniform; // remove later... backward 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
 inTexAORM.onChange =
+    inMulAlbedo.onChange =
     inDoubleSided.onChange =
     inLightmapRGBE.onChange =
     inUseNormalMapForCC.onChange =
@@ -212,6 +214,7 @@ inTexAORM.onChange =
 
 function updateDefines()
 {
+    PBRShader.toggleDefine("MUL_ALBEDO", inMulAlbedo.get());
     PBRShader.toggleDefine("DOUBLE_SIDED", inDoubleSided.get());
     PBRShader.toggleDefine("USE_OPTIMIZED_HEIGHT", inUseOptimizedHeight.get());
     PBRShader.toggleDefine("USE_CLEAR_COAT", inUseClearCoat.get());
@@ -238,10 +241,10 @@ function updateDefines()
     // ALBEDO TEX
     PBRShader.toggleDefine("USE_ALBEDO_TEX", inTexAlbedo.get());
     PBRShader.toggleDefine("ALBEDO_SRGB", inTexAlbedo.get() && inTexAlbedo.get().pixelFormat == "SRGBA 8bit ubyte");
-    inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
-    inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
-    inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
-    inDiffuseA.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    // inDiffuseR.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    // inDiffuseG.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    // inDiffuseB.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
+    // inDiffuseA.setUiAttribs({ "greyout": inTexAlbedo.isLinked() });
 
     // AORM
     PBRShader.toggleDefine("USE_AORM_TEX", inTexAORM.get());

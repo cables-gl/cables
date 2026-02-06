@@ -43,25 +43,26 @@ exec.onTriggered = () =>
 
         const name = inMatName.get();
 
-        for (let i = 0; i < mats.length; i++)
-        {
-            let matches = false;
-
-            if (inNameMatch.get() == "exact")
-                matches = mats[i].name == name;
-            else
-                matches = mats[i].name.startsWith(name);
-
-            if (matches)
+        if (mats)
+            for (let i = 0; i < mats.length; i++)
             {
-                mat = mats[i];
-                matIdx = i;
-                // console.log("mat", mats[i]);
-                outObj.setRef(mat);
-                outFound.set(true);
-                break;
+                let matches = false;
+
+                if (inNameMatch.get() == "exact")
+                    matches = mats[i].name == name;
+                else
+                    matches = mats[i].name.startsWith(name);
+
+                if (matches)
+                {
+                    mat = mats[i];
+                    matIdx = i;
+                    // console.log("mat", mats[i]);
+                    outObj.setRef(mat);
+                    outFound.set(true);
+                    break;
+                }
             }
-        }
         //     {
         //         let matches = false;
 

@@ -15,9 +15,9 @@ UNI vec3 camPos;
 // mesh maps
 #ifdef USE_ALBEDO_TEX
     UNI sampler2D _AlbedoMap;
-#else
-    UNI vec4 _Albedo;
 #endif
+UNI vec4 _Albedo;
+
 #ifdef USE_NORMAL_TEX
     UNI sampler2D _NormalMap;
 #endif
@@ -405,6 +405,11 @@ void main()
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
         vec4 AlbedoMap   = texture(_AlbedoMap, UV0);
+
+        #ifdef MUL_ALBEDO
+        AlbedoMap*=_Albedo;
+        #endif
+
     #else
         vec4 AlbedoMap   = _Albedo;
     #endif
@@ -464,7 +469,7 @@ void main()
     #else
     vec3  albedo         = AlbedoMap.rgb;
     #endif
-    
+
     #ifdef VERTEX_COLORS
         #ifdef VCOL_COLOUR
             albedo.rgb *= pow(vertCol.rgb, vec3(2.2));
