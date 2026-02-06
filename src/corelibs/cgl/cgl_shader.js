@@ -82,6 +82,8 @@ class CglShader extends CgShader
     /** @type {Uniform[]} */
     _uniforms = [];
 
+    materialPropUniforms = {};
+
     /**
      * @param {CglContext} _cgl
      * @param {string} _name
@@ -243,9 +245,10 @@ class CglShader extends CgShader
             u.resetLoc();
         }
 
-        if (this.uniformColorDiffuse)shader.uniformColorDiffuse = this.getUniform(this.uniformColorDiffuse.name).copy(shader);
-        if (this.uniformPbrMetalness)shader.uniformPbrMetalness = this.getUniform(this.uniformPbrMetalness.name).copy(shader);
-        if (this.uniformPbrRoughness)shader.uniformPbrRoughness = this.getUniform(this.uniformPbrRoughness.name).copy(shader);
+        for (const i in this.materialPropUniforms)
+        {
+            shader.materialPropUniforms[i] = this.getUniform(this.materialPropUniforms[i].name).copy(shader);
+        }
 
         shader.setWhyCompile("copy");
         return shader;
