@@ -237,15 +237,15 @@ class CglShader extends CgShader
         shader.wireframe = this.wireframe;
         shader._attributes = this._attributes;
 
-        shader.uniformColorDiffuse = this.uniformColorDiffuse;
-        shader.uniformPbrMetalness = this.uniformPbrMetalness;
-        shader.uniformPbrRoughness = this.uniformPbrRoughness;
-
         for (let i = 0; i < this._uniforms.length; i++)
         {
             const u = this._uniforms[i].copy(shader);
             u.resetLoc();
         }
+
+        if (this.uniformColorDiffuse)shader.uniformColorDiffuse = this.getUniform(this.uniformColorDiffuse.name).copy(shader);
+        if (this.uniformPbrMetalness)shader.uniformPbrMetalness = this.getUniform(this.uniformPbrMetalness.name).copy(shader);
+        if (this.uniformPbrRoughness)shader.uniformPbrRoughness = this.getUniform(this.uniformPbrRoughness.name).copy(shader);
 
         shader.setWhyCompile("copy");
         return shader;
@@ -906,6 +906,9 @@ class CglShader extends CgShader
         return this._uniforms;
     }
 
+    /**
+     * @param {string} name
+     */
     getUniform(name)
     {
         for (let i = 0; i < this._uniforms.length; i++)

@@ -1,5 +1,6 @@
 import { Port } from "cables";
 import { CgUniform, CgShader } from "../cg/index.js";
+import { Shader } from "./cgl_shader.js";
 
 /**
  * Shader uniforms
@@ -52,6 +53,9 @@ export class Uniform extends CgUniform
         return this._name;
     }
 
+    /**
+     * @param {Shader} newShader
+     */
     copy(newShader)
     {
         const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
