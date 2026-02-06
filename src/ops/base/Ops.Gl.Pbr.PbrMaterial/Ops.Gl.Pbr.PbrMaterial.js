@@ -176,9 +176,16 @@ const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
 const inPCboxMax = new CGL.Uniform(PBRShader, "3f", "_PCboxMax", [1, 1, 1]);
 
-PBRShader.uniformColorDiffuse = inDiffuseColor;
-PBRShader.uniformPbrMetalness = inMetalnessUniform;
-PBRShader.uniformPbrRoughness = inRoughnessUniform;
+PBRShader.materialPropUniforms = {
+    "diffuseTexture": inAlbedoUniform,
+    "normalTexture": inNormalUniform,
+    "diffuseColor": inDiffuseColor,
+    "pbrMetalness": inMetalnessUniform,
+    "pbrRoughness": inRoughnessUniform,
+};
+PBRShader.uniformColorDiffuse = inDiffuseColor; // remove later... backward compat to gltf4 ...
+PBRShader.uniformPbrMetalness = inMetalnessUniform; // remove later... backward compat to gltf4 ...
+PBRShader.uniformPbrRoughness = inRoughnessUniform; // remove later... backward compat to gltf4 ...
 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 

@@ -179,7 +179,8 @@ function printInfo()
 
     html += "File: <a href=\"" + CABLES.platform.getCablesUrl() + "/asset/patches/?filename=" + inFile.get() + "\" target=\"_blank\">" + CABLES.basename(inFile.get()) + "</a><br/>";
 
-    html += "Generator:" + gltf.json.asset.generator;
+    html += "Generator: " + gltf.json.asset.generator + "<br/>";
+    html += "Extensions: " + (gltf.json.extensionsUsed || []).join(",") + "<br/>";
 
     let numNodes = 0;
     if (gltf.json.nodes)numNodes = gltf.json.nodes.length;

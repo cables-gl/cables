@@ -23,13 +23,12 @@ let GltfMaterial = class
 
     bind(cgl, currentShader)
     {
-        // console.log("bind mat", this.name, this._matDiffuseColor);
-        const uniPbrMetalness = currentShader.uniformPbrMetalness;
-        const uniPbrRoughness = currentShader.uniformPbrRoughness;
-        const uniDiff = currentShader.uniformColorDiffuse;
+        if (!currentShader) return console.log("no shader");
+        if (!currentShader.materialPropUniforms) return console.log("noo");
+        const uniPbrMetalness = currentShader.materialPropUniforms.pbrMetalness;
+        const uniPbrRoughness = currentShader.materialPropUniforms.pbrRoughness;
+        const uniDiff = currentShader.materialPropUniforms.diffuseColor;
 
-        // if (!gltf.shaders[this.material] )
-        // {
         if (uniDiff && this._matDiffuseColor)
         {
             this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
@@ -55,11 +54,11 @@ let GltfMaterial = class
             {
                 uniPbrRoughness.setValue(0);
             }
-            // }
     }
 
     unbind(cgl, currentShader)
     {
+        if (!currentShader) return;
         const uniDiff = currentShader.uniformColorDiffuse;
 
         const uniPbrMetalness = currentShader.uniformPbrMetalness;
