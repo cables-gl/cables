@@ -349,9 +349,9 @@ let gltfMesh = class
 
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
 
-            if (inUseMatProps.get()) gltf.materials[this.material].bind(cgl, cgl.getShader());
+            if (inUseMatProps.get()) gltf.materials[this.material]?.bind(cgl, cgl.getShader());
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
-            if (inUseMatProps.get()) gltf.materials[this.material].unbind(cgl, cgl.getShader());
+            if (inUseMatProps.get()) gltf.materials[this.material]?.unbind(cgl, cgl.getShader());
 
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 

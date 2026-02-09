@@ -18,6 +18,18 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1766392560135
+        },
+        {
+            "message": "Added option to multifly albedo texture with diffuse color",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1770385811609
+        },
+        {
+            "message": "Better loading of settings from gltf files / textures",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770386180450
         }
     ],
     "layout": {
@@ -212,6 +224,11 @@
                 "type": 0,
                 "name": "Double Sided",
                 "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Texture Color",
                 "subType": "boolean"
             },
             {
