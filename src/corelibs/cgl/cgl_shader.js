@@ -82,6 +82,7 @@ class CglShader extends CgShader
     /** @type {Uniform[]} */
     _uniforms = [];
 
+    /** @type {Object<String,Uniform>} */
     materialPropUniforms = {};
 
     /**
@@ -247,10 +248,10 @@ class CglShader extends CgShader
 
         for (const i in this.materialPropUniforms)
         {
-            if (this.materialPropUniforms[i])
-                shader.materialPropUniforms[i] = this.getUniform(this.materialPropUniforms[i].name).copy(shader);
-            else
+            if (!this.materialPropUniforms[i] || !this.materialPropUniforms[i].copy)
                 console.log("no matprop", this.materialPropUniforms[i]);
+            else
+                shader.materialPropUniforms[i] = this.materialPropUniforms[i].copy(shader);
         }
 
         shader.setWhyCompile("copy");

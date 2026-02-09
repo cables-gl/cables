@@ -54,7 +54,7 @@ const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
 const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 shader.materialPropUniforms = {
-    "diffuseTexture": diffuseTexture,
+    "diffuseTexture": diffuseTextureUniform,
     "diffuseColor": colUni
 };
 shader.uniformColorDiffuse = colUni;
