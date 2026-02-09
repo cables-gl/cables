@@ -115,25 +115,41 @@ export class BoundingBox
     }
 
     /**
+     * @param {BoundingBox} bb
+     */
+    applyBoundingBox(bb)
+    {
+
+        this.applyPos(bb.maxX, bb.maxY, bb.maxZ);
+        this.applyPos(bb.minX, bb.minY, bb.minZ);
+        this.calcCenterSize();
+    }
+
+    /**
      * @param {Geometry} geom
      */
     applyGeom(geom)
     {
         if (!geom) return;
+        console.log("text", BoundingBox.constructor, geom);
 
-        if (geom instanceof BoundingBox)
-        {
-            const bb = geom;
+        // if (geom instanceof BoundingBox)
+        // {
+        //     const bb = geom;
 
-            this.applyPos(bb.maxX, bb.maxY, bb.maxZ);
-            this.applyPos(bb.minX, bb.minY, bb.minZ);
-        }
+        // }
+        // else
+        // {
+        if (geom.isGeometry)
+            for (let i = 0; i < geom.vertices.length; i += 3)
+                this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
         else
         {
-            if (geom.isGeometry)
-                for (let i = 0; i < geom.vertices.length; i += 3)
-                    this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
+            console.error("not geom", typeof geom, typeof CABLES.CG.BoundingBox, typeof BoundingBox);
+
+            this.applyBoundingBox(geom);
         }
+        // }
         this.calcCenterSize();
     }
 
