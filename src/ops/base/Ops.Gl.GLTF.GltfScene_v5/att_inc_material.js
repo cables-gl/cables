@@ -1,14 +1,16 @@
 let GltfMaterial = class
 {
+    _matDiffuseColor = [1, 1, 1, 1];
+    _matPbrMetalness = 0.0;
+    _matPbrRoughness = 1.0;
+    _matTexNormal = null;
+    _matTexDiffuse = null;
+
     constructor(gltf, obj)
     {
         this.json = obj || {};
 
-        this._matDiffuseColor = [1, 1, 1, 1];
-        this._matPbrMetalness = 0.0;
-        this._matPbrRoughness = 1.0;
-        this._matTexNormal = null;
-        this._matTexDiffuse = null;
+
 
         if (this.json.pbrMetallicRoughness)
         {

@@ -1,0 +1,38 @@
+{
+    "id": "62b13e0a-8f31-457f-bb43-23bf67f44036",
+    "created": 1770387016214,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770387016237
+        },
+        {
+            "message": "Patch.PjmKema.ObjectSearch renamed to Ops.Json.ObjectDeepSearch",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1770388916407
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Search"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ]
+    }
+}

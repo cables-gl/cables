@@ -69,7 +69,6 @@
         ]
     },
     "summary": "Control a single node from the GLTFscene op",
-    "issues": "",
     "youtubeids": [
         "QNLw21hSweg",
         "I_eD5nml_5A"
@@ -80,5 +79,6 @@
     "license": "MIT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "exampleProjectId": "6MsLhR"
 }
