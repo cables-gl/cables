@@ -1,0 +1,90 @@
+{
+    "summary": "enable disable RGB color channels",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "ChannelR index",
+                "values": [
+                    "0",
+                    "1",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "ChannelG index",
+                "values": [
+                    "0",
+                    "1",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "ChannelB index",
+                "values": [
+                    "0",
+                    "1",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "ChannelA index",
+                "values": [
+                    "0",
+                    "1",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "73160057-c523-4191-beae-2809d53c1a1a",
+    "created": 1770730281013,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.ColorChannel",
+            "author": "pandur",
+            "date": 1650525599264,
+            "type": "new op"
+        },
+        {
+            "message": "new version v3: added option to easily switch colorchannels and/or set specific channels to zero or one",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1770730919907
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}
