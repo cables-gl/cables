@@ -14,6 +14,7 @@ import { TextureEffect } from "./cgl_textureeffect.js";
 import { CONSTANTS } from "../cg/constants.js";
 import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
+import { ShaderModifier } from "./cgl_shadermodifier.js";
 
 class WhatTheDog { }
 
@@ -28,6 +29,7 @@ const CGL = {
     "Mesh": Mesh,
     "MESH": MESH,
     "ShaderLibMods": ShaderLibMods,
+    "ShaderModifier": ShaderModifier,
     "Shader": Shader,
     "Uniform": Uniform,
     "MESHES": MESHES,
