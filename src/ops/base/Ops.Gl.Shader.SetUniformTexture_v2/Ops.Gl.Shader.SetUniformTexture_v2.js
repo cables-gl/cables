@@ -30,8 +30,8 @@ inRender.onTriggered = function ()
     {
         // old = shader.setUniformTexture(uniform, inTex.get());
     }
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 
     // console.log("uniformtexture");
 
@@ -55,8 +55,8 @@ inRender.onTriggered = function ()
     next.trigger();
 
     if (uniform && old && oldIdx != -1) cgl.getShader()._textureStackTexCgl[oldIdx] = old;// shader.setUniformTexture(uniform, old);
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 };
 
 inUniName.onChange = function ()

@@ -277,8 +277,8 @@ function renderPre()
 
     // cgl.renderStart(cgl,zero,zero);
 
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 }
 
 function renderPost()

@@ -188,10 +188,10 @@ function onXRFrame(hrTime, xrFrame)
             msEyes[i] = performance.now() - start;
             renderPost();
 
-            if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
+            if (cgl.lastMesh)cgl.lastMesh.unBind();
         }
 
-        if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
+        if (cgl.lastMesh)cgl.lastMesh.unBind();
 
         if (inRender2Tex.get()) r2texEnd();
 
@@ -225,8 +225,8 @@ function onXRFrame(hrTime, xrFrame)
 
         outMs.setRef(msEyes);
 
-        CGL.MESH.lastShader = null;
-        CGL.MESH.lastMesh = null;
+        cgl.lastShader = null;
+        cgl.lastMesh = null;
         op.patch.cg = null;
     }
     catch (e)
@@ -247,8 +247,8 @@ function renderPre()
     cgl.pushDepthWrite(true);
     cgl.pushDepthFunc(cgl.gl.LEQUAL);
 
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 }
 
 function renderPost()

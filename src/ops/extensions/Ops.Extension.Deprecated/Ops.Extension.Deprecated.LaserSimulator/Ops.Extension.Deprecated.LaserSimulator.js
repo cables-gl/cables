@@ -31,8 +31,8 @@ function drawLine(x, y, x2, y2)
 
     let attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
 
-    CGL.MESH.lastMesh = null;
-    CGL.MESH.lastShader = null;
+    cgl.lastMesh = null;
+    cgl.lastShader = null;
     // attr.numItems=3;
     // else attr.numItems=Math.min(numPoints,buff.length/3);
 

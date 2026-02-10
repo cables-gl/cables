@@ -30,14 +30,14 @@ inRender.onTriggered = function ()
     {
         old = shader.setUniformTexture(uniform, inValue.get());
     }
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 
     next.trigger();
 
     if (uniform && old) shader.setUniformTexture(uniform, old);
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 };
 
 inSelect.onChange = function ()

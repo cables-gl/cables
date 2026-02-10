@@ -126,8 +126,8 @@ export class ThreeRenderer extends Events
 
     render()
     {
+        if (this.#op.patch.cgl.lastMesh) this.#op.patch.cgl.lastMesh.unBind();
         this.#op.patch.cgl.lastMesh = null;
-        if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
         const container = document.getElementById("cablescanvas") || document.body;
 

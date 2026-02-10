@@ -143,8 +143,8 @@ function render(time, frame, delta)
         rframes = 0;
         rframeStart = CABLES.now();
     }
-    CGL.MESH.lastShader = null;
-    CGL.MESH.lastMesh = null;
+    cgl.lastShader = null;
+    cgl.lastMesh = null;
 
     cgl.renderStart(cgl, identTranslate, identTranslateView);
 
@@ -155,7 +155,7 @@ function render(time, frame, delta)
 
     trigger.trigger();
 
-    if (CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
+    if (cgl.lastMesh)cgl.lastMesh.unBind();
 
     if (CGL.Texture.previewTexture)
     {

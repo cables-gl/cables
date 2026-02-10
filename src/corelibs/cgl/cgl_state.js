@@ -42,6 +42,7 @@ export class CglContext extends CgContext
 
         this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
 
+        this.lastMesh = null;
         this.glVersion = 0;
         this.glUseHalfFloatTex = false;
         this.clearCanvasTransparent = true;

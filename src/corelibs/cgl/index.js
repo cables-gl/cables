@@ -1,4 +1,5 @@
 import { Anim, Patch } from "cables";
+import { EventListener } from "cables-shared-client/src/eventlistener.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
@@ -13,6 +14,8 @@ import { TextureEffect } from "./cgl_textureeffect.js";
 import { CONSTANTS } from "../cg/constants.js";
 import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
+
+class WhatTheDog { }
 
 const CGL = {
     "Framebuffer2": Framebuffer2,
@@ -46,11 +49,13 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = { ...CGL, ...window.CABLES.CGL };
 window.CGL = { ...CGL, ...window.CABLES.CGL, ...window.CGL };
 
+console.log("cglindexxxxxxxxxxx");
 window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
 {
     const patch = e?.detail;
     if (!patch || (patch.tempData.cglInitialized && !CABLES.UI)) return;
     patch.tempData.cglInitialized = true;
+    console.log("lalalalala");
 
     const cgl = new CglContext(patch);
 });
@@ -94,4 +99,4 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     return q;
 };
 
-export { CGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
+export { WhatTheDog, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
