@@ -19,7 +19,7 @@ const
 
 const cgl = op.patch.cgl;
 
-op.toWorkPortsNeedToBeLinked(textureOut);
+// op.toWorkPortsNeedToBeLinked(textureOut);
 op.setPortGroup("Size", [width, height]);
 
 let loadedFilename = null;
