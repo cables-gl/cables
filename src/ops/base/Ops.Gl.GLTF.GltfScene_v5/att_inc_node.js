@@ -119,7 +119,7 @@ const gltfNode = class
         {
             const bb = this.mesh.bounds.copy();
             bb.mulMat4(localMat);
-            bounds.apply(bb);
+            bounds.applyBoundingBox(bb);
 
             if (bounds.changed)
             {
@@ -135,7 +135,7 @@ const gltfNode = class
             {
                 const b = gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
 
-                bounds.apply(b);
+                bounds.applyBoundingBox(b);
             }
         }
 

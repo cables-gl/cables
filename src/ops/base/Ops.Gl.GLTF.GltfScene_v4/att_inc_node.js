@@ -125,13 +125,12 @@ const gltfNode = class
         {
             const bb = this.mesh.bounds.copy();
             bb.mulMat4(localMat);
-            bounds.apply(bb);
+            bounds.applyBoundingBox(bb);
 
             if (bounds.changed)
             {
                 boundingPoints.push(
-                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0,
-                    bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
             }
         }
 

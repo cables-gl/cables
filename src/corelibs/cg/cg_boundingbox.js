@@ -11,16 +11,19 @@ import { Geometry } from "./cg_geom.js";
 export class BoundingBox
 {
 
+    _first = true;
+    _wireMesh = null;
+
     /**
-     * @param {Geometry} [geom]
+     * @param {Geometry|BoundingBox} [geom]
      */
     constructor(geom)
     {
         this._init();
-        this._first = true;
-        this._wireMesh = null;
 
-        if (geom) this.applyGeom(geom);
+        if (geom)
+            if (geom.isGeometry) this.applyGeom(geom);
+            else this.applyBoundingBox(geom);
     }
 
     _init()
@@ -31,6 +34,11 @@ export class BoundingBox
         this._size = [0, 0, 0];
         this._maxAxis = 0.0;
         this._first = true;
+    }
+
+    get isBoundingBox()
+    {
+        return true;
     }
 
     /**
@@ -111,6 +119,7 @@ export class BoundingBox
      */
     apply(geom)
     {
+        console.warn("boundingbox apply is deprecated, use applyGeom or applyBoundingBox or applyPos");
         return this.applyGeom(geom);
     }
 
@@ -131,25 +140,19 @@ export class BoundingBox
     applyGeom(geom)
     {
         if (!geom) return;
-        console.log("text", BoundingBox.constructor, geom);
 
-        // if (geom instanceof BoundingBox)
-        // {
-        //     const bb = geom;
-
-        // }
-        // else
-        // {
         if (geom.isGeometry)
             for (let i = 0; i < geom.vertices.length; i += 3)
                 this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
         else
         {
-            console.error("not geom", typeof geom, typeof CABLES.CG.BoundingBox, typeof BoundingBox);
 
-            this.applyBoundingBox(geom);
+            console.error("not geom! ");
+            CABLES.logStack();
+
+            if (geom.isGeometry)
+                this.applyBoundingBox(geom);
         }
-        // }
         this.calcCenterSize();
     }
 

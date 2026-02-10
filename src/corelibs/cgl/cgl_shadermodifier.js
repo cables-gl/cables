@@ -1,23 +1,32 @@
+import { Shader } from "./cgl_shader.js";
+import { CglContext } from "./cgl_state.js";
+
 export class ShaderModifier
 {
+    _origShaders = {};
+    _uniforms = [];
+    _structUniforms = [];
+    _definesToggled = {};
+    _defines = {};
+    _mods = [];
+    _textures = [];
+    _boundShader = null;
+    _changedDefines = true;
+    _changedUniforms = true;
+    _modulesChanged = false;
+    needsTexturePush = false;
+    _lastShader = null;
+    _attributes = [];
+
+    /**
+     * @param {CglContext} cgl
+     * @param {string} name
+     * @param {object} options
+     */
     constructor(cgl, name, options)
     {
         this._cgl = cgl;
         this._name = name;
-        this._origShaders = {};
-        this._uniforms = [];
-        this._structUniforms = [];
-        this._definesToggled = {};
-        this._defines = {};
-        this._mods = [];
-        this._textures = [];
-        this._boundShader = null;
-        this._changedDefines = true;
-        this._changedUniforms = true;
-        this._modulesChanged = false;
-        this.needsTexturePush = false;
-        this._lastShader = null;
-        this._attributes = [];
         if (options && options.opId) this.opId = options.opId;
 
         if (this._cgl.glVersion == 1)
@@ -113,6 +122,9 @@ export class ShaderModifier
         this._boundShader = null;
     }
 
+    /**
+     * @param {Shader} shader
+     */
     _addModulesToShader(shader)
     {
         let firstMod;
@@ -133,6 +145,9 @@ export class ShaderModifier
         this._modulesChanged = true;
     }
 
+    /**
+     * @param {string} title
+     */
     removeModule(title)
     {
         const indicesToRemove = [];
@@ -155,6 +170,9 @@ export class ShaderModifier
         this._modulesChanged = true;
     }
 
+    /**
+     * @param {Shader} shader
+     */
     _updateUniformsShader(shader)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -237,11 +255,17 @@ export class ShaderModifier
         }
     }
 
+    /**
+     * @param {String} name
+     */
     hasUniform(name)
     {
         return this._getUniform(name);
     }
 
+    /**
+     * @param {string} name
+     */
     _getUniform(name)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -255,6 +279,9 @@ export class ShaderModifier
         return false;
     }
 
+    /**
+     * @param {string} uniName
+     */
     _getStructUniform(uniName)
     {
         for (let i = 0; i < this._structUniforms.length; i += 1)
@@ -415,6 +442,9 @@ export class ShaderModifier
         }
     }
 
+    /**
+     * @param {string} uniformName
+     */
     removeUniformStruct(uniformName)
     {
         if (this._getStructUniform(uniformName))
@@ -460,6 +490,9 @@ export class ShaderModifier
         return name;
     }
 
+    /**
+     * @param {Shader} shader
+     */
     _updateDefinesShader(shader)
     {
         for (const i in this._defines)
@@ -490,18 +523,28 @@ export class ShaderModifier
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     removeDefine(name)
     {
         this._defines[name] = null;
         this._changedDefines = true;
     }
 
+    /**
+     * @param {string} name
+     */
     hasDefine(name)
     {
         if (this._defines[name] !== null && this._defines[name] !== undefined) return true;
         return false;
     }
 
+    /**
+     * @param {string | number} name
+     * @param {boolean} b
+     */
     toggleDefine(name, b)
     {
         this._changedDefines = true;
