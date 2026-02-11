@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724235837065
+        },
+        {
+            "message": "resolve relative paths to patch directory, add output port",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1770826088390
         }
     ],
     "layout": {
@@ -30,6 +36,10 @@
             {
                 "type": 5,
                 "name": "Content"
+            },
+            {
+                "type": 5,
+                "name": "Resolved path"
             },
             {
                 "type": 0,

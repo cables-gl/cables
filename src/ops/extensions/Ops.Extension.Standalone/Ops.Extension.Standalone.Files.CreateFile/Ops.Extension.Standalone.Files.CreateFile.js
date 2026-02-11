@@ -1,4 +1,5 @@
-op.require("fs");
+const fs = op.require("fs");
+
 const
     inPath = op.inString("Default Path", ""),
     exec = op.inTriggerButton("Create File"),
@@ -11,7 +12,10 @@ exec.onTriggered = () =>
     if (CABLES.UI)
     {
         const fileName = inPath.get() || "newfile.txt";
-        CABLESUILOADER.talkerAPI.send("createFile", { "name": fileName, "content": "" }, (err, dirName) =>
+        CABLESUILOADER.talkerAPI.send("createFile", {
+            "name": fileName,
+            "content": ""
+        }, (err, dirName) =>
         {
             if (err) op.setUiError("dir", err);
             outPath.set(dirName || "");
@@ -19,4 +23,3 @@ exec.onTriggered = () =>
         });
     }
 };
-

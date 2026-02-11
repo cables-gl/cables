@@ -1,22 +1,20 @@
-
-const fs=op.require("fs");
+const fs = op.require("fs");
 
 const
-    inPath=op.inString("Path","/"),
-    inExec=op.inTriggerButton("Execute"),
-    outDir=op.outBoolNum("Exists");
+    inPath = op.inString("Path", "/"),
+    inExec = op.inTriggerButton("Execute"),
+    outDir = op.outBoolNum("Exists");
 
-inExec.onTriggered=
-inPath.onChange= () =>
-{
-    try
+inExec.onTriggered =
+    inPath.onChange = () =>
     {
-        outDir.set(fs.existsSync(inPath.get()));
-    }
-    catch(e)
-    {
-        outDir.set(false);
-    }
+        try
+        {
+            outDir.set(fs.existsSync(inPath.get()));
+        }
+        catch (e)
+        {
+            outDir.set(false);
+        }
 
-};
-
+    };

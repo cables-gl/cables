@@ -1,10 +1,10 @@
-op.require("fs");
+const fs = op.require("fs");
+
 const
-    inPath=op.inString("Path",""),
+    inPath = op.inString("Path", ""),
     exec = op.inTriggerButton("Open File Manager");
 
 exec.onTriggered = () =>
 {
-    CABLESUILOADER.talkerAPI.send("openDir",{dir:inPath.get()});
+    CABLESUILOADER.talkerAPI.send("openDir", { "dir": inPath.get() });
 };
-

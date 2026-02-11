@@ -1,4 +1,3 @@
-
 const fs = op.require("fs");
 
 const paths = op.patch.config.paths || {};
@@ -8,4 +7,4 @@ op.outString("Downloads", paths.downloads);
 op.outString("Documents", paths.documents);
 op.outString("Desktop", paths.desktop);
 op.outString("Exe", paths.exe);
-
+op.outString("Patch", paths.patchPath);

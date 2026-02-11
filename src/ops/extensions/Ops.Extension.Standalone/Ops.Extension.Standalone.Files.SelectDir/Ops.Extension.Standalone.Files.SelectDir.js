@@ -1,4 +1,5 @@
-op.require("fs");
+const fs = op.require("fs");
+
 const
     inPath = op.inString("Default Path", ""),
     exec = op.inTriggerButton("Select Directory"),
@@ -18,4 +19,3 @@ exec.onTriggered = () =>
         });
     }
 };
-

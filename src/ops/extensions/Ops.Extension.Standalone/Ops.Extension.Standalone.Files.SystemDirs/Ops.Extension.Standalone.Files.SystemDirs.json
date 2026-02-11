@@ -21,6 +21,10 @@
             {
                 "type": 5,
                 "name": "Exe"
+            },
+            {
+                "type": 5,
+                "name": "Patch"
             }
         ]
     },
@@ -35,10 +39,10 @@
             "date": 1724316833338
         },
         {
-            "message": "Ops.Standalone.Files.SystemDirs renamed to Ops.Extension.Standalone.Files.SystemDirs",
-            "type": "rename",
-            "author": "",
-            "date": 1724855098710
+            "message": "add patchdir output port",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1770825929988
         }
     ],
     "coreLibs": [
@@ -47,6 +51,31 @@
     "summary": "Get Default System Directories Paths",
     "exampleProjectId": "7hftun",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Home",
+                "text": "OS home directory"
+            },
+            {
+                "name": "Downloads",
+                "text": "OS downloads directory"
+            },
+            {
+                "name": "Documents",
+                "text": "OS documents directory"
+            },
+            {
+                "name": "Desktop",
+                "text": "OS desktop directory"
+            },
+            {
+                "name": "Exe",
+                "text": "location of cables executable"
+            },
+            {
+                "name": "Patch",
+                "text": "directory of currently opened patchfile"
+            }
+        ]
     }
 }

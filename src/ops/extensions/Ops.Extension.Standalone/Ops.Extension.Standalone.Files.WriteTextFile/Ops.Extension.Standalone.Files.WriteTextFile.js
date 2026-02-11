@@ -1,33 +1,57 @@
-const fs=op.require("fs");
+const fs = op.require("fs");
+const path = op.require("path");
+
 const
-    inFilename=op.inString("Filename",""),
-    inStr=op.inString("Content",""),
+    inFilename = op.inString("Filename", ""),
+    inStr = op.inString("Content", ""),
     exec = op.inTriggerButton("Write"),
     next = op.outTrigger("Next"),
+    outFile = op.outString("Resolved path"),
     error = op.outBoolNum("Has Error"),
     errorStr = op.outString("Error");
 
-if(fs)
-exec.onTriggered = ()=>
-{
-    fs.writeFile(inFilename.get(), inStr.get(),
-      {
-        encoding: "utf8",
-        flag: "w"
-      },
-      (err) =>
-      {
-        if(err)
+if (fs)
+    exec.onTriggered = () =>
+    {
+        outFile.set(null);
+        let filename = inFilename.get();
+        if (!path.isAbsolute(filename))
         {
-
-            errorStr.set("Error:"+err.message);
+            const paths = op.patch.config.paths || {};
+            if (paths.patchPath)
+            {
+                filename = path.join(paths.patchPath, inFilename.get());
+            }
         }
-        else
+        filename = path.resolve(filename);
+
+        fs.mkdir(path.dirname(filename), { "recursive": true }, (err) =>
         {
-            errorStr.set();
+            if (err)
+            {
+                errorStr.set("Error:" + err.message);
+            }
+            else
+            {
+                fs.writeFile(filename, inStr.get(), {
+                    "encoding": "utf8",
+                    "flag": "w"
+                }, (err) =>
+                {
+                    if (err)
+                    {
 
-        }
-        next.trigger();
-    });
+                        errorStr.set("Error:" + err.message);
+                    }
+                    else
+                    {
+                        outFile.set(filename);
+                        errorStr.set();
+                    }
+                    next.trigger();
+                });
+            }
 
-};
+        });
+
+    };
