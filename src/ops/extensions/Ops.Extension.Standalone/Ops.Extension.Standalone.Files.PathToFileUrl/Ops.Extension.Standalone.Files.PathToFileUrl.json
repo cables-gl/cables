@@ -40,6 +40,12 @@
             "type": "new op",
             "author": "stephan",
             "date": 1727176572264
+        },
+        {
+            "message": "treat relative paths as relative to patch dir",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1770827066749
         }
     ],
     "exampleProjectId": "pekPAs"

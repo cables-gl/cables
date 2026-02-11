@@ -1,4 +1,6 @@
 const url = op.require("url");
+const path = op.require("path");
+
 const pathToFileURL = url ? url.pathToFileURL : null;
 
 const inFileUrl = op.inString("Path");
@@ -11,11 +13,27 @@ inFormat.onChange =
         op.setUiError("error", "");
         try
         {
-            if (url && inFileUrl.get())
+            let filename = inFileUrl.get();
+            if (url && filename)
             {
-                const options = {};
-                if (inFormat.get() !== "System") options.windows = inFormat.get() === "Windows";
-                outUrl.set(pathToFileURL(inFileUrl.get(), options).href);
+                if(filename.startsWith("file:")) {
+                    outUrl.set(filename);
+                }else{
+                    if (!path.isAbsolute(filename))
+                    {
+                        const paths = op.patch.config.paths || {};
+                        if (paths.patchPath)
+                        {
+                            filename = path.join(paths.patchPath, inFileUrl.get());
+                        }
+                    }
+                    filename = path.resolve(filename);
+
+                    const options = {};
+                    if (inFormat.get() !== "System") options.windows = inFormat.get() === "Windows";
+                    outUrl.set(pathToFileURL(filename, options).href);
+                }
+
             }
             else
             {
