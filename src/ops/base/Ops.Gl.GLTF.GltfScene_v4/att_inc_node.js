@@ -140,7 +140,7 @@ const gltfNode = class
             {
                 const b = gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
 
-                bounds.apply(b);
+                bounds.applyBoundingBox(b);
             }
         }
 

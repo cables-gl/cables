@@ -9,11 +9,10 @@ const gltfMeshGroup = class
 
         for (let i = 0; i < prims.length; i++)
         {
-            const mesh = new gltfMesh(this.name, prims[i], gltf,
-                (mesh) =>
-                {
-                    this.bounds.apply(mesh.bounds);
-                });
+            const mesh = new gltfMesh(this.name, prims[i], gltf, (mesh) =>
+            {
+                this.bounds.applyBoundingBox(mesh.bounds);
+            });
 
             mesh.submeshIndex = i;
             this.meshes.push(mesh);
