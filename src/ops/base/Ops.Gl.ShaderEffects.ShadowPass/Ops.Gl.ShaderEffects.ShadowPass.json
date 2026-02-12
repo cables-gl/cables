@@ -1,0 +1,32 @@
+{
+    "id": "6bd4be7a-4009-4f82-bd31-d7e16f857739",
+    "created": 1770810979482,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770810979483
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next Shadow Pass"
+            },
+            {
+                "type": 1,
+                "name": "Next Normal Pass"
+            }
+        ]
+    }
+}
