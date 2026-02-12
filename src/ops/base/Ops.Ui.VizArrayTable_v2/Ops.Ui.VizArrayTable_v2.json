@@ -42,6 +42,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1762168070407
+        },
+        {
+            "message": "Increase zoom distance when pausing drawing on patchfield",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770915269544
         }
     ],
     "authorName": "pandur",

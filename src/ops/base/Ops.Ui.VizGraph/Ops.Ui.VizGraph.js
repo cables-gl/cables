@@ -1,4 +1,3 @@
-
 const
     inNum1 = op.inFloat("Number 1"),
     inNum2 = op.inFloat("Number 2"),
@@ -11,7 +10,7 @@ const
     inFill = op.inBool("Fill Graph", true),
     inReset = op.inTriggerButton("Reset");
 
-op.setUiAttrib({ "height": 150, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 150, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 let buff = [];
 

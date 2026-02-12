@@ -475,6 +475,7 @@ export class Op extends Events
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (this.uiAttribs.hasOwnProperty("vizLayerMaxZoom") && this.uiAttribs.vizLayerMaxZoom == false) delete this.uiAttribs.vizLayerMaxZoom;
         if (this.uiAttribs.hasOwnProperty("highlighted") && this.uiAttribs.highlighted == false) delete this.uiAttribs.highlighted;
         if (this.uiAttribs.hasOwnProperty("highlightedMore") && this.uiAttribs.highlightedMore == false) delete this.uiAttribs.highlightedMore;
         if (this.uiAttribs.hasOwnProperty("selected") && this.uiAttribs.selected == false) delete this.uiAttribs.selected;

@@ -6,7 +6,7 @@ const
     inScroll = op.inFloatSlider("Scroll", 0),
     outArr = op.outArray("Passthrough Array");
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 inArr.onChange = () =>
 {
@@ -229,4 +229,5 @@ op.renderVizLayer = (ctx, layer) =>
 
     ctx.restore();
 };
+
 /* minimalcore:end */

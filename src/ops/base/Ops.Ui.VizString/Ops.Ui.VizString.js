@@ -11,7 +11,7 @@ const
     inPos = op.inFloatSlider("Scroll", 0),
     outStr = op.outString("Passthrough String");
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 inStr.ignoreValueSerialize = true;
 outStr.ignoreValueSerialize = true;
 
@@ -64,4 +64,5 @@ op.renderVizLayer = (ctx, layer, viz) =>
 
     ctx.restore();
 };
+
 /* minimalcore:end */

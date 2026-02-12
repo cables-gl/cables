@@ -2,7 +2,7 @@ const
     inTex = op.inTexture("Texture"),
     inRow = op.inInt("Row Start", 0);
 
-op.setUiAttrib({ "height": 200, "width": 380, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 200, "width": 380, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 let pixelReader = new CGL.PixelReader();
 let pixelData = null;

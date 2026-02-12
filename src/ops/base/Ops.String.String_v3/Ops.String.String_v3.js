@@ -6,7 +6,7 @@ v.setUiAttribs({ "display": "text" });
 let hasExtTitle = false;
 let lines = [];
 
-op.setUiAttrib({ "height": 100, "width": 250, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 100, "width": 250, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 v.onChange = function ()
 {

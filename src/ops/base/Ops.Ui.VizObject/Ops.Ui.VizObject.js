@@ -13,7 +13,7 @@ const
 let lines = [];
 inConsole.setUiAttribs({ "hidePort": true });
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 function myStringify(o, level = 0)
 {

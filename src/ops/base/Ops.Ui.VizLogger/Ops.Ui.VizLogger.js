@@ -32,14 +32,13 @@ inNum.onChange = () =>
     arr.push("" + inNum.get());
 };
 
-op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 2500 });
+op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 op.renderVizLayer = (ctx, layer) =>
 {
     ctx.fillStyle = "#222";
     ctx.fillRect(
-        layer.x, layer.y,
-        layer.width, layer.height);
+        layer.x, layer.y, layer.width, layer.height);
 
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
