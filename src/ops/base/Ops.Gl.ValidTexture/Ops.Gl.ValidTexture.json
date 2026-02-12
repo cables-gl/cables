@@ -32,6 +32,11 @@
                 "type": 2,
                 "name": "Result",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Is Valid",
+                "subType": "boolean"
             }
         ]
     },

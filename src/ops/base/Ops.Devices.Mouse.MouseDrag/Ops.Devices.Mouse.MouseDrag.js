@@ -1,8 +1,8 @@
 const
-    active = op.inValueBool("Active", true),
     speed = op.inValue("Speed", 0.01),
     inputType = op.inSwitch("Input Type", ["All", "Mouse", "Touch"], "All"),
     area = op.inSwitch("Area", ["Canvas Area", "Canvas", "Document"], "Canvas Area"),
+    active = op.inValueBool("Active", true),
     outDeltaX = op.outNumber("Delta X"),
     outDeltaY = op.outNumber("Delta Y"),
     outAbs = op.outNumber("Abs Movement"),

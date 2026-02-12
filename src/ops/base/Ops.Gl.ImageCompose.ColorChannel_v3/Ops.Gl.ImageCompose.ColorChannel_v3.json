@@ -1,5 +1,5 @@
 {
-    "summary": "enable disable RGB color channels",
+    "summary": "enable, disable or switch RGBA color channels ",
     "layout": {
         "portsIn": [
             {
@@ -86,5 +86,8 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
 }

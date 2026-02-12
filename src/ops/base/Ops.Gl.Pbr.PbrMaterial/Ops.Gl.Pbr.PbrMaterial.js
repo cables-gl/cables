@@ -172,6 +172,7 @@ const inThinFilmThicknessUniform = new CGL.Uniform(PBRShader, "f", "_ThinFilmThi
 
 const inTFThicknessTexMinUniform = new CGL.Uniform(PBRShader, "f", "_TFThicknessTexMin", inTFThicknessTexMin);
 const inTFThicknessTexMaxUniform = new CGL.Uniform(PBRShader, "f", "_TFThicknessTexMax", inTFThicknessTexMax);
+const inUnlitUniform = new CGL.Uniform(PBRShader, "f", "_Unlit", 0);
 
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
@@ -183,6 +184,7 @@ PBRShader.materialPropUniforms = {
     "diffuseColor": inDiffuseColor,
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
+    "unlit": inUnlitUniform
 };
 PBRShader.uniformColorDiffuse = inDiffuseColor; // remove later... backward compat to gltf4 ...
 PBRShader.uniformPbrMetalness = inMetalnessUniform; // remove later... backward compat to gltf4 ...

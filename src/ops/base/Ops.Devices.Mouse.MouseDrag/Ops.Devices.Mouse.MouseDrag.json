@@ -6,11 +6,6 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "Active",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
@@ -33,6 +28,11 @@
                     "Document"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

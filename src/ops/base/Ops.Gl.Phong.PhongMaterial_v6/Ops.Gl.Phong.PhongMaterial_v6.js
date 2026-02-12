@@ -691,7 +691,7 @@ const uniDiffuseColor = new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffus
 const uniTextureIntensities = new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity);
 const uniTextureRepeatOffset = new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY);
 
-shader.uniformColorDiffuse = uniDiffuseColor;
+shader.uniformColorDiffuse = uniDiffuseColor; // todo remove in next version
 
 const lightUniforms = [];
 let oldCount = 0;
@@ -956,6 +956,14 @@ if (cgl.glVersion == 1)
         shader.enableExtension("GL_OES_texture_half_float_linear");
     }
 }
+
+shader.materialPropUniforms = {
+    "diffuseTexture": diffuseTextureUniform,
+    // "normalTexture": inNormalUniform,
+    "diffuseColor": uniDiffuseColor,
+    // "pbrMetalness": inMetalnessUniform,
+    // "pbrRoughness": inRoughnessUniform,
+};
 
 updateDiffuseTexture();
 updateSpecularTexture();

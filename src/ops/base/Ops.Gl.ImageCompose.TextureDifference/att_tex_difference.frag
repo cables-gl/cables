@@ -8,7 +8,7 @@ void main()
 {
 
    vec4 col=texture(tex,texCoord);
-   
+
    vec4 col1=texture(tex1,texCoord);
    vec4 col2=texture(tex2,texCoord);
 

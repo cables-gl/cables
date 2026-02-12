@@ -3,6 +3,7 @@ let GltfMaterial = class
     _matDiffuseColor = [1, 1, 1, 1];
     _matPbrMetalness = 0.0;
     _matPbrRoughness = 1.0;
+    _matUnlit=0;
     _matTexNormal = null;
     _matTexDiffuse = null;
 
@@ -10,10 +11,13 @@ let GltfMaterial = class
     {
         this.json = obj || {};
 
+console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_materials_unlit"));
 
+        if (this.json.extensions&&this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
         if (this.json.pbrMetallicRoughness)
         {
+
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
@@ -49,6 +53,14 @@ let GltfMaterial = class
         const uniDiff = currentShader.materialPropUniforms.diffuseColor;
         const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
         const uniTexNormal = currentShader.materialPropUniforms.normalTexture;
+        const uniUnlit = currentShader.materialPropUniforms.unlit;
+
+        if (uniUnlit)
+        {
+            uniUnlit.setValue(this._matUnlit);
+            // console.log("this._matUnlit",this._matUnlit);
+        }
+
 
         if (uniDiff && this._matDiffuseColor)
         {
@@ -71,8 +83,10 @@ let GltfMaterial = class
                 uniPbrRoughness.setValue(this._matPbrRoughness);
             }
 
+// console.log("text",currentShader.materialPropUniforms);
         if (uniTexDiff && this._matTexDiffuse)
         {
+            // console.log("text",currentShader.materialPropUniforms.diffuseTexture);
             currentShader.pushTexture(currentShader.materialPropUniforms.diffuseTexture, this._matTexDiffuse.tex.tex, cgl.gl.TEXTURE_2D);
         }
 

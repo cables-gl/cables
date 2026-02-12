@@ -8,6 +8,8 @@ precision highp int;
 
 // set by cables
 UNI vec3 camPos;
+UNI float _Unlit;
+
 // utility maps
 #ifdef USE_ENVIRONMENT_LIGHTING
     UNI sampler2D IBL_BRDF_LUT;
@@ -603,6 +605,9 @@ void main()
     #ifdef USE_EMISSION
     col.rgb += texture(_EmissionMap, UV0).rgb * _EmissionIntensity;
     #endif
+
+
+    col.rgb=mix(col.rgb,albedo.rgb,_Unlit);
     col.a   = 1.0;
 
     #ifdef ALPHA_BLEND

@@ -5,14 +5,15 @@ const
     inCustomNot = op.inFloat("Custom Value", 0),
     valueOutPort = op.outNumber("Value Out");
 
-valueInPort.onChange = update;
-passThroughPort.onChange = update;
-inCustomNot.onChange = update;
+valueInPort.onChange =
+    passThroughPort.onChange =
+    inCustomNot.onChange = update;
 
 valueInPort.changeAlways =
     valueOutPort.changeAlways = true;
 
 inIfNot.onChange = updateUi;
+updateUi();
 
 function updateUi()
 {

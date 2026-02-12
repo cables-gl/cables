@@ -8,6 +8,7 @@ op.toWorkPortsNeedToBeLinked(render);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
+let diffuseTextureUniform = null;
 
 const shader = new CGL.Shader(cgl, "basicmaterial", this);
 shader.addAttribute({ "type": "vec3", "name": "vPosition" });
@@ -36,7 +37,6 @@ const colUni = shader.addUniformFrag("4f", "color", r, g, b, a);
 // diffuse outTexture
 
 const diffuseTexture = op.inTexture("texture");
-let diffuseTextureUniform = null;
 diffuseTexture.onChange = updateDiffuseTexture;
 
 const colorizeTexture = op.inValueBool("colorizeTexture", false);
@@ -53,12 +53,12 @@ textureOpacity.onChange = updateOpacity;
 const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
 const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
-shader.materialPropUniforms = {
-    "diffuseTexture": diffuseTextureUniform,
-    "diffuseColor": colUni
-};
-shader.uniformColorDiffuse = colUni;
+shader.uniformColorDiffuse = colUni; // todo remove in next versio
 
+shader.materialPropUniforms = {
+    "diffuseColor": colUni
+
+};
 // texture coords
 const
     diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
@@ -100,11 +100,13 @@ op.preRender = function ()
 function doRender()
 {
     op.checkGraphicsApi();
-    cgl.pushShader(shader);
     shader.popTextures();
 
-    if (diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, diffuseTexture.get());
-    if (textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get());
+    cgl.pushShader(shader);
+
+    if (diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
+    if (textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
+    shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
 
     trigger.trigger();
 
@@ -136,6 +138,8 @@ function updateDiffuseTexture()
     {
         if (!shader.hasDefine("HAS_TEXTURE_DIFFUSE"))shader.define("HAS_TEXTURE_DIFFUSE");
         if (!diffuseTextureUniform)diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
+
+        shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
     }
     else
     {
