@@ -522,6 +522,18 @@ function parseGltf(arrayBuffer)
         gltf.nodes[i].initSkin();
     }
 
+    let variantNames = [];
+    if (gltf.json.extensions && gltf.json.extensions.KHR_materials_variants)
+    {
+        for (i = 0; i < gltf.json.extensions.KHR_materials_variants.variants.length; i++)
+        {
+            console.log("variant", gltf.json.extensions.KHR_materials_variants.variants[i]);
+            variantNames.push(gltf.json.extensions.KHR_materials_variants.variants[i].name);
+        }
+    }
+
+    outVariants.setRef(variantNames);
+
     needsMatUpdate = true;
 
     gltf.timing.push(["load anims", Math.round((performance.now() - gltf.startTime))]);

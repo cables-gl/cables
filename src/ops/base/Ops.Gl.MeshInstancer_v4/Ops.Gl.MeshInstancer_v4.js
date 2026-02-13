@@ -248,7 +248,6 @@ function setupArray()
         for (let a = 0; a < 16; a++) matrixArray[i * 16 + a] = m[a];
     }
 
-    // mesh.numInstances = num;
     mesh.setNumInstances(num);
 
     if (arrayChangedTrans) mesh.addAttribute("instMat", matrixArray, 16);

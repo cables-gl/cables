@@ -141,6 +141,10 @@
                 "name": "GLTF Extensions Used"
             },
             {
+                "type": 3,
+                "name": "Variants Names"
+            },
+            {
                 "type": 0,
                 "name": "Anim Length",
                 "subType": "number"

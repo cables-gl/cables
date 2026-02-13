@@ -122,7 +122,7 @@ function hashChange(event, forceUpdate)
 
     if (!(parsedOut.get().length === 0 && values.length === 0))
     {
-        parsedOut.set(values);
+        parsedOut.setRef(values);
     }
 
     if (hasMatch)

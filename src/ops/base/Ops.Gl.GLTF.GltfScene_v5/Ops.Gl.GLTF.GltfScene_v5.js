@@ -32,6 +32,7 @@ const
 
     outVersion = op.outNumber("GLTF Version"),
     outExtensions = op.outArray("GLTF Extensions Used"),
+    outVariants = op.outArray("Variants Names"),
     outAnimLength = op.outNumber("Anim Length", 0),
     outAnimTime = op.outNumber("Anim Time", 0),
     outJson = op.outObject("Json"),
