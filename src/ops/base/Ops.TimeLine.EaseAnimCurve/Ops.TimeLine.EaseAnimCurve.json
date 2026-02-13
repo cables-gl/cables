@@ -1,0 +1,43 @@
+{
+    "id": "57bac2ea-7d9a-41e0-aef9-782a304aa569",
+    "created": 1770987292062,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770987292090
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Anim",
+                "objType": "anim"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    }
+}
