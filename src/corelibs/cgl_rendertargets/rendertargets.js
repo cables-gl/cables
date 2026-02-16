@@ -38,7 +38,7 @@ export class RenderTargets
 
         this.mod.addModule(
             {
-                "priority": 2,
+                "priority": 12,
                 "title": this._name + "_vert",
                 "name": "MODULE_VERTEX_POSITION",
                 "srcHeadVert": slots_head_vert,

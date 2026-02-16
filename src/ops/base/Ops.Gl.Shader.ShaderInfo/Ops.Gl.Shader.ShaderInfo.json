@@ -68,6 +68,10 @@
             },
             {
                 "type": 3,
+                "name": "Modules"
+            },
+            {
+                "type": 3,
                 "name": "Num Defines"
             }
         ]

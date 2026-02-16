@@ -16,6 +16,7 @@ const
     outNumUniforms = op.outNumber("Num Uniforms"),
     outNumAttributes = op.outNumber("Num Attributes"),
     outAttributeNames = op.outArray("Arributes Names"),
+    outModules = op.outArray("Modules"),
     outDefines = op.outArray("Num Defines");
 
 const cgl = op.patch.cgl;
@@ -141,6 +142,8 @@ exec.onTriggered = function ()
         doStateDump = false;
         stateDump();
     }
+
+    outModules.set(shader.getCurrentModules());
 
     outSrcFrag.set(shader.finalShaderFrag);
     outSrcVert.set(shader.finalShaderVert);

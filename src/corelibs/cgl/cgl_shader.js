@@ -644,7 +644,8 @@ class CglShader extends CgShader
 
         this._modules.sort(function (a, b)
         {
-            return a.priority || 0 - b.priority || 0;
+            // return a.priority || 0 - b.priority || 0;
+            return (a.priority || 0) - (b.priority || 0);
         });
 
         let addedAttribs = false;
