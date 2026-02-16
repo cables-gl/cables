@@ -65,6 +65,11 @@
             {
                 "type": 1,
                 "name": "Trigger Out"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
             }
         ]
     },
@@ -94,5 +99,6 @@
     "exampleProjectId": "40hoYa",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

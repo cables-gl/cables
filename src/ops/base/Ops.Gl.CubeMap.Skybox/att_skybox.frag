@@ -27,7 +27,7 @@ UNI vec2 expGamma;
     #define SAMPLETEX sampleEquirect
 
 #endif
-
+IN vec3 norm;
 IN vec3 worldPos;
 
 vec4 sampleEquirect(sampler2D tex, vec3 direction,float lod) {
@@ -54,7 +54,6 @@ void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
 
-    {{MODULE_COLOR}}
 
     vec3 newPos = worldPos;
 
@@ -72,6 +71,11 @@ void main() {
     finalColor.rgb = vec3(1.0) - exp(-finalColor.rgb * exposure);
 
     finalColor.rgb = pow(finalColor.rgb, vec3(1.0 / gamma));
-    outColor=vec4(finalColor.rgb,1.0);
+
+    col=vec4(finalColor.rgb,1.0);
+        {{MODULE_COLOR}}
+
+
+    outColor=col;
 
 }

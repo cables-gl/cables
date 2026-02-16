@@ -422,7 +422,10 @@ export class CglContext extends CgContext
     {
         if (this._currentShader) if (!this.tempData || ((this.tempData.renderOffscreen === true) == this._currentShader.offScreenPass) === true) return this._currentShader;
 
-        for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.tempData.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
+        for (let i = this._shaderStack.length - 1; i >= 0; i--)
+            if (this._shaderStack[i])
+                if (this.tempData.renderOffscreen == this._shaderStack[i].offScreenPass)
+                    return this._shaderStack[i];
     }
 
     getDefaultShader()

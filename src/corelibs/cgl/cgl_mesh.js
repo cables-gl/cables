@@ -759,6 +759,11 @@ class Mesh extends CgMesh
 
         if (!shader)
         {
+            for (let i = 0; i < this.#cgl._shaderStack.length; i++)
+            {
+                console.log(i + " " + this.#cgl._shaderStack[i].getName());
+
+            }
             return console.log("shader not valid");
         }
 

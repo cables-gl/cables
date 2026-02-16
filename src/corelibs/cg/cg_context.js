@@ -154,7 +154,7 @@ export class CgContext extends Events
     }
 
     /**
-     * @param {HTMLElement} canvEle
+     * @param {String|HTMLElement} canvEle
      */
     setCanvas(canvEle)
     {

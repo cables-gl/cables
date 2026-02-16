@@ -23,6 +23,6 @@ void main()
     worldPos = vec3(mMatrix * pos);
     mat4 rotView = mat4(mat3(viewMatrix)); // remove translation from the view matrix
     vec4 clipPos = projMatrix * rotView * pos;
-
+{{MODULE_VERTEX_MODELVIEW}}
     gl_Position = clipPos.xyww;
 }

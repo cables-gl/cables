@@ -1,17 +1,17 @@
 const
-    cgl = op.patch.cgl,
     inTrigger = op.inTrigger("Trigger In"),
     inRender = op.inBool("Render", true),
     inTexture = op.inTexture("Skybox"),
     inRot = op.inFloat("Rotate", 0),
-
     inRGBE = op.inBool("RGBE Format", false),
     inExposure = op.inFloat("Exposure", 1),
     inGamma = op.inFloat("Gamma", 2.2),
+    outTrigger = op.outTrigger("Trigger Out"),
+    outGeom = op.outObject("Geometry", null, "geometry");
 
-    outTrigger = op.outTrigger("Trigger Out");
+let cgl = op.patch.cgl;
 
-const geometry = new CGL.Geometry("unit cube");
+const geometry = new CG.Geometry("unit cube");
 
 geometry.vertices = new Float32Array([
     // * NOTE: tex coords not needed for cubemapping
@@ -57,6 +57,7 @@ geometry.vertices = new Float32Array([
     -1.0, -1.0, 1.0,
     1.0, -1.0, 1.0
 ]);
+outGeom.setRef(geometry);
 
 const mesh = new CGL.Mesh(cgl, geometry);
 const skyboxShader = new CGL.Shader(cgl, "skybox");
@@ -65,9 +66,9 @@ const uniExposure = new CGL.Uniform(skyboxShader, "2f", "expGamma", inExposure, 
 
 if (cgl.glVersion == 1) skyboxShader.enableExtension("GL_EXT_shader_texture_lod");
 
-skyboxShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+skyboxShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_VERTEX_MODELVIEW"]);
 skyboxShader.setSource(attachments.skybox_vert, attachments.skybox_frag);
-skyboxShader.offScreenPass = true;
+// skyboxShader.offScreenPass = true;
 
 inTexture.onChange =
 inRGBE.onChange = updateDefines;
@@ -90,6 +91,7 @@ inTrigger.onTriggered = () =>
         outTrigger.trigger();
         return;
     }
+    cgl = op.patch.cgl;
 
     skyboxShader.popTextures();
 
@@ -107,7 +109,9 @@ inTrigger.onTriggered = () =>
     else if (inTexture.get().cubemap)
         skyboxShader.pushTexture(uniformSkybox, inTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
 
-    mesh.render(skyboxShader);
+    cgl.pushShader(skyboxShader);
+    mesh.render();
+    cgl.popShader();
 
     cgl.popModelMatrix();
     cgl.popDepthFunc();
