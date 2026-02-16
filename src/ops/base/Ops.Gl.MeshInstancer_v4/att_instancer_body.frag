@@ -1,4 +1,3 @@
-#define INSTANCING
 #ifdef COLORIZE_INSTANCES
     #ifdef BLEND_MODE_MULTIPLY
         col.rgb *= frag_instColor.rgb;

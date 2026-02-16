@@ -12,10 +12,18 @@
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
-    "id": "a6c66f1f-2102-4b68-882b-afd25a4da538",
-    "created": 1512035664875,
+    "id": "25b988c0-7459-49fb-98ee-16eead9b0a08",
+    "created": 1771237759891,
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "New Version v2: Using timeline config FPS for frame calculation from timeline time",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1771237839080
+        }
+    ]
 }

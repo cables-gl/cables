@@ -1,5 +1,5 @@
 {
-    "id": "a5583bca-cb79-4713-9a63-db365cb5e1da",
+    "id": "47608786-0e92-4d75-a183-b228f6849e89",
     "changelog": [
         {
             "message": "created op",
@@ -12,10 +12,21 @@
             "date": 1704364444906
         },
         {
-            "message": "Ops.Dev.StackValues.StackGetNumber renamed to Ops.Data.StackValues.StackGetNumber",
+            "message": "cloned op from Ops.Team.Dev.StackValueGetNumber",
+            "author": "pandur",
+            "date": 1704385300737
+        },
+        {
+            "message": "Ops.Dev.StackValues.StackGetTexture renamed to Ops.Data.StackValues.StackGetTexture",
             "type": "rename",
             "author": "pandur",
-            "date": 1706629155748
+            "date": 1706629142804
+        },
+        {
+            "message": "op Data.StackValues.StackGetTexture was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1771153564128
         }
     ],
     "layout": {
@@ -35,17 +46,20 @@
                 "name": "Next"
             },
             {
-                "type": 0,
-                "name": "Value",
-                "subType": "number"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ]
     },
     "authorName": "pandur",
-    "created": 1704364444905,
+    "created": 1704385300737,
     "summary": "read a value from the stack to use it later in the trigger branch",
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "NT30kP"
+    "exampleProjectId": "NT30kP",
+    "coreLibs": [
+        "cgl"
+    ]
 }

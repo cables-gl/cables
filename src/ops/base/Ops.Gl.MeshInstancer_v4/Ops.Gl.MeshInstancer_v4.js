@@ -38,6 +38,8 @@ let
     arrayChangedTrans = true;
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
+mod.define("INSTANCING");
+
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
     "title": op.name,

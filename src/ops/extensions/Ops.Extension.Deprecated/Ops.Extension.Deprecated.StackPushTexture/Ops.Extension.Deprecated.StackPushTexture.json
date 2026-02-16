@@ -16,6 +16,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1706629166312
+        },
+        {
+            "message": "op Data.StackValues.StackPushTexture was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1771153548275
         }
     ],
     "layout": {

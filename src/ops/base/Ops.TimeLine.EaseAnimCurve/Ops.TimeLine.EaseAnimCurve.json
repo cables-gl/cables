@@ -39,5 +39,9 @@
                 "subType": "number"
             }
         ]
+    },
+    "exampleProjectId": "m82W6b",
+    "docs": {
+        "ports": []
     }
 }

@@ -5,6 +5,12 @@
             "message": "cloned op from Ops.Team.Dev.StackValueGetTexture",
             "author": "pandur",
             "date": 1704960953811
+        },
+        {
+            "message": "op Data.StackValues.StackGetArray was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1771153528509
         }
     ],
     "layout": {
