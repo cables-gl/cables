@@ -1,19 +1,21 @@
 {
     "summary": "Returns the current frame number of the timeline",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
-                "name": "time"
+                "type": 0,
+                "name": "time",
+                "subType": "number"
             }
         ]
     },
-    "updated": 1512035664874,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a6c66f1f-2102-4b68-882b-afd25a4da538",
     "created": 1512035664875,
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

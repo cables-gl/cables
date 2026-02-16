@@ -1,6 +1,6 @@
-    #ifdef INSTANCING
-        mat4 iMat=instMat;
-    #endif
+
+
+iMat=instMat;
 
 #ifdef HAS_TEXCOORDS
     texCoord=(texCoord*instTexCoords.zw)+instTexCoords.xy;

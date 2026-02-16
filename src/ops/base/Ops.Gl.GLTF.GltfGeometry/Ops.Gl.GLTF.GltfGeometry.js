@@ -36,7 +36,6 @@ exec.onTriggered = () =>
         outFound.set(false);
         outGeom.setRef(null);
         const name = inNodeName.get();
-        let numMatches = 0;
 
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
@@ -51,7 +50,6 @@ exec.onTriggered = () =>
 
             if (matches)
             {
-                numMatches++;
                 mesh = cgl.tempData.currentScene.meshes[i];
 
                 const idx = Math.abs(inSubmesh.get());
@@ -60,12 +58,11 @@ exec.onTriggered = () =>
                     outFound.set(true);
                     outGeom.setRef(mesh.meshes[idx].geom);
                 }
+                break;
             }
         }
 
         if (!outFound.get())op.setUiError("notfound", "Geometry not found", 1);
-        else
-        if (numMatches > 1)op.setUiError("notfound", "Multiple matches found", 1);
         else op.setUiError("notfound", null);
     }
 
