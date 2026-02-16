@@ -146,9 +146,6 @@ export class Anim extends Events
      * checks if last key time is < time
      * @param {Number} time
      * @returns {Boolean}
-     * @memberof Anim
-     * @instance
-     * @function
      */
     hasEnded(time)
     {
@@ -184,9 +181,6 @@ export class Anim extends Events
     /**
      * remove all keys from animation before time
      * @param {Number} time
-     * @memberof Anim
-     * @instance
-     * @function
      */
     clearBefore(time)
     {

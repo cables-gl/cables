@@ -449,7 +449,8 @@ export class CglContext extends CgContext
      */
     pushShader(shader)
     {
-        if (this.tempData.forceShaderMods)
+
+        if (this.tempData.forceShaderMods && !this.tempData.shadowPass)
         {
             for (let i = 0; i < this.tempData.forceShaderMods.length; i++)
             {
@@ -481,7 +482,7 @@ export class CglContext extends CgContext
      */
     setPreviousShader()
     {
-        if (this.tempData.forceShaderMods)
+        if (this.tempData.forceShaderMods && !this.tempData.shadowPass)
         {
             for (let i = 0; i < this.tempData.forceShaderMods.length; i++)
             {
