@@ -4,22 +4,26 @@
         {
             "message": "created op",
             "author": "cables",
-            "date": 1591782922945
-        },
-        {
-            "message": "Ops.User.cables.Skybox renamed to Ops.Gl.CubeMap.Skybox",
-            "author": "cables",
-            "date": 1591796283672
+            "date": 1591782922945,
+            "type": "new op"
         },
         {
             "message": "added support for RGBE textures",
             "author": "pandur",
-            "date": 1643616396340
+            "date": 1643616396340,
+            "type": "feature"
         },
         {
             "message": "added exposure and gamma controls",
             "author": "pandur",
-            "date": 1643616408710
+            "date": 1643616408710,
+            "type": "feature"
+        },
+        {
+            "message": "Fix problems not rendering anything when used below renderToTextures op",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1771256147458
         }
     ],
     "authorName": "simod",
