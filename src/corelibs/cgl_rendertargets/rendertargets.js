@@ -1,8 +1,8 @@
 import { utils } from "cables";
-import slots_frag from "./slots.frag";
-import slots_vert from "./slots.vert";
-import slots_head_frag from "./slots_head.frag";
-import slots_head_vert from "./slots_head.vert";
+import slots_frag from "./rendertargets_slots.frag";
+import slots_vert from "./rendertargets_slots.vert";
+import slots_head_frag from "./rendertargets_slots_head.frag";
+import slots_head_vert from "./rendertargets_slots_head.vert";
 
 export class RenderTargets
 {
