@@ -31,6 +31,7 @@ export class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.shaderCompileTime = 0;
+        this.shaderCompileCount = 0;
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
         this.profileSingleMeshAttribute = {};

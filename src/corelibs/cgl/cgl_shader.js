@@ -776,6 +776,7 @@ class CglShader extends CgShader
         this.lastCompile = now();
 
         this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
+        this._cgl.profileData.shaderCompileCount++;
     }
 
     bind()
