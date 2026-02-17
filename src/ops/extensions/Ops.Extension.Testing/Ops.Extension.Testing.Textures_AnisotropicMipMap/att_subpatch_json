@@ -8,7 +8,7 @@
           "x": 697.5935373074724,
           "y": 3485.9327380469513
         },
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -101,7 +101,7 @@
           "x": 695.5795482354401,
           "y": 2902.6658033071917
         },
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -158,7 +158,7 @@
           "x": 697.5935373074724,
           "y": 3614.8208086375084
         },
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -227,7 +227,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "zvc8a2tfg",
       "uiAttribs": {
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "translate": {
           "x": 695.5795482354401,
           "y": 2556.669415096536
@@ -255,7 +255,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "aghaejhso",
       "uiAttribs": {
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "translate": {
           "x": 695.5795482354401,
           "y": 3694.8208086375084
@@ -267,12 +267,12 @@
     },
     {
       "opId": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
-      "id": "s3a30xxzi",
+      "id": "n22a2hvdi",
       "uiAttribs": {
-        "subPatch": "vd2vfz0bo",
+        "subPatch": "hn45iadqc",
         "translate": {
-          "x": 757.5935373074724,
-          "y": 3365.172688682094
+          "x": 828,
+          "y": 3380
         },
         "extendTitle": "#texUv",
         "title": "var get"
@@ -291,13 +291,13 @@
               "portIn": "texture",
               "portOut": "Value",
               "objIn": "e7wron5zu",
-              "objOut": "s3a30xxzi"
+              "objOut": "n22a2hvdi"
             }
           ]
         }
       ],
       "storage": {
-        "ref": "s3a30xxzi"
+        "ref": "n22a2hvdi"
       }
     }
   ]
