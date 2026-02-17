@@ -11,7 +11,8 @@ inNum.onChange = () =>
 
 op.renderVizLayer = (ctx, layer) =>
 {
-    if (layer.width <= 0 || layer.height <= 0) return;
+    ctx.lineWidth = 7 * layer.scale;
+    if (layer.width <= ctx.lineWidth || layer.height <= ctx.lineWidth) return;
 
     ctx.fillStyle = "#222";
     ctx.fillRect(layer.x, layer.y, layer.width, layer.height);
@@ -24,7 +25,6 @@ op.renderVizLayer = (ctx, layer) =>
     circle.arc(layer.x + layer.width / 2, layer.y + layer.height / 2, radius, 0, 2 * Math.PI, false);
 
     ctx.strokeStyle = "#555";
-    ctx.lineWidth = 7 * layer.scale;
     ctx.stroke(circle);
 
     if (isTrue)
