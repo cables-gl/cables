@@ -16,12 +16,16 @@ import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js"
 import { CglContext } from "./cgl_state.js";
 import { ShaderModifier } from "./cgl_shadermodifier.js";
 import { RenderTargets } from "./rendertargets.js";
+import { CubemapFramebuffer } from "./cgl_cubemapframebuffer.js";
+import { CubemapTexture } from "./cgl_cubemaptexture.js";
 
 class WhatTheDog { }
 
 const CGL = {
     "BoundingBox": BoundingBox,
     "Context": CglContext,
+    "CubemapFramebuffer": CubemapFramebuffer,
+    "CubemapTexture": CubemapTexture,
     "Framebuffer2": Framebuffer2,
     "Geometry": Geometry,
     "getWheelDelta": getWheelDelta,
