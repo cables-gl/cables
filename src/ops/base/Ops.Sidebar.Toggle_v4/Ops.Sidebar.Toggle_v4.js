@@ -127,12 +127,12 @@ function onLabelTextChanged()
 
 function onParentChanged()
 {
-    siblingsPort.set(null);
+    siblingsPort.setRef(null);
     const parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
-        siblingsPort.set(parent);
+        siblingsPort.setRef(parent);
     }
     else if (el.parentElement) el.parentElement.removeChild(el);
 }

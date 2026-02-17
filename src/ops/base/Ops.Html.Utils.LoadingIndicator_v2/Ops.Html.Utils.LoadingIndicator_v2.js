@@ -8,7 +8,7 @@ div.dataset.op = op.id;
 const canvas = op.patch.cgl.canvas.parentElement;
 
 const
-    outEle = op.outObject("Elment", div, "element"),
+    outEle = op.outObject("Element", div, "element"),
     outReqs = op.outArray("Requests");
 
 inCenter.onChange =

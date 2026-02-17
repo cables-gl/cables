@@ -3,7 +3,7 @@ let GltfMaterial = class
     _matDiffuseColor = [1, 1, 1, 1];
     _matPbrMetalness = 0.0;
     _matPbrRoughness = 1.0;
-    _matUnlit=0;
+    _matUnlit = 0;
     _matTexNormal = null;
     _matTexDiffuse = null;
 
@@ -11,9 +11,7 @@ let GltfMaterial = class
     {
         this.json = obj || {};
 
-console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_materials_unlit"));
-
-        if (this.json.extensions&&this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
+        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
         if (this.json.pbrMetallicRoughness)
         {
@@ -23,7 +21,6 @@ console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_ma
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorTexture"))
             {
-                console.log("jo start texture", this.json);
                 const idx = this.json.pbrMetallicRoughness.baseColorTexture.index;
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx);
                 this._matTexDiffuse = gltf.textures[idx];
@@ -31,7 +28,6 @@ console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_ma
         }
         if (this.json.hasOwnProperty("normalTexture"))
         {
-            console.log("jo start texture", this.json);
             const idx = this.json.normalTexture.index;
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx);
             this._matTexNormal = gltf.textures[idx];
@@ -61,7 +57,6 @@ console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_ma
             // console.log("this._matUnlit",this._matUnlit);
         }
 
-
         if (uniDiff && this._matDiffuseColor)
         {
             // console.log("joo uniDiff");
@@ -83,7 +78,7 @@ console.log("this.json.extensions",this.json?.extensions?.hasOwnProperty("KHR_ma
                 uniPbrRoughness.setValue(this._matPbrRoughness);
             }
 
-// console.log("text",currentShader.materialPropUniforms);
+        // console.log("text",currentShader.materialPropUniforms);
         if (uniTexDiff && this._matTexDiffuse)
         {
             // console.log("text",currentShader.materialPropUniforms.diffuseTexture);

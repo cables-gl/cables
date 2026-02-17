@@ -69,7 +69,7 @@ function create()
                 div.appendChild(eles[count].get());
                 if (eles[count].get().style.position == "absolute") foundposerr = true;
             }
-            else console.log("child prob", count, eles[count]);
+            // else console.log("child prob", count, eles[count]);
         }
         else
         {

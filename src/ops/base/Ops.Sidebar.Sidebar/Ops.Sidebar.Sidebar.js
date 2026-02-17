@@ -38,7 +38,7 @@ let sidebarEl = doc.querySelector("." + SIDEBAR_ID);
 if (!sidebarEl) sidebarEl = initSidebarElement();
 
 const sidebarItemsEl = sidebarEl.querySelector("." + SIDEBAR_ITEMS_CLASS);
-childrenPort.set({
+childrenPort.setRef({
     "parentElement": sidebarItemsEl,
     "parentOp": op,
 });

@@ -27,7 +27,6 @@ function updateUi()
 function update()
 {
     const o = spread.get();
-    console.log("spread", o);
 
     if (!o)
     {
