@@ -1,3 +1,4 @@
+import { mat4, vec2, vec3 } from "gl-matrix";
 import { CubemapTexture } from "./cgl_cubemaptexture.js";
 
 class CubemapFramebuffer
@@ -160,9 +161,12 @@ class CubemapFramebuffer
         this.dispose();
     }
 
+    /**
+     * @param {number} width
+     * @param {number} height
+     */
     setSize(width, height)
     {
-        // console.log("cubemapframebuffer setsize");
         this._cgl.printError("before cubemap setsize");
 
         this.width = Math.floor(width);

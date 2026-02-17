@@ -1,14 +1,16 @@
-/**
- *
- * @param cgl
- * @param {Object} config config for light
- */
-// function Light(cgl, config)
+import { mat4, vec2, vec3 } from "gl-matrix";
+import { CglContext } from "./cgl_state.js";
+
 export class Light
 {
+
+    /**
+     * @param {CglContext} cgl
+     * @param {object} config
+     */
     constructor(cgl, config)
     {
-    // * common settings for each light
+        // * common settings for each light
         this.type = config.type || "point";
         this.color = config.color || [1, 1, 1];
         this.specular = config.specular || [0, 0, 0];
@@ -142,6 +144,11 @@ export class Light
         return this._framebuffer.getTextureDepth();
     }
 
+    /**
+     * @param {number} width
+     * @param {number} height
+     * @param {{ filter: any; isFloatingPointTexture: boolean; }} options
+     */
     createFramebuffer(width, height, options)
     {
         this.state.isUpdating = true;
@@ -221,11 +228,18 @@ export class Light
         return !!this._cubemap;
     }
 
+    /**
+     * @param {number} size
+     */
     setFramebufferSize(size)
     {
         if (this.hasFramebuffer()) this._framebuffer.setSize(size, size);
     }
 
+    /**
+     * @param {string} vertexShader
+     * @param {string} fragmentShader
+     */
     createShadowMapShader(vertexShader, fragmentShader)
     {
         if (this.hasShadowMapShader()) return;
@@ -265,6 +279,9 @@ export class Light
         this.state.isUpdating = false;
     }
 
+    /**
+     * @param {import("../cg/cg_texture").CglTextureOptions} options
+     */
     createBlurEffect(options)
     {
         if (this.type === "point") return;
@@ -283,6 +300,10 @@ export class Light
         this.state.isUpdating = false;
     }
 
+    /**
+     * @param {string} vertexShader
+     * @param {string} fragmentShader
+     */
     createBlurShader(vertexShader, fragmentShader)
     {
         if (this.hasBlurShader())
@@ -305,6 +326,11 @@ export class Light
         this.state.isUpdating = false;
     }
 
+    /**
+     * @param {number} polygonOffset
+     * @param {number} blurAmount
+     * @param {Function} renderFunction
+     */
     renderPasses(polygonOffset, blurAmount, renderFunction)
     {
         if (this.state.isUpdating) return;
@@ -350,6 +376,9 @@ export class Light
         }
     }
 
+    /**
+     * @param {Function} renderFunction
+     */
     renderShadowPass(renderFunction)
     {
         if (this.state.isUpdating) return;

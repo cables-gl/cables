@@ -1,7 +1,14 @@
+import { mat4, vec2, vec3 } from "gl-matrix";
+import { CglContext } from "./cgl_state.js";
+
 export { WireframeRect };
 
 class WireframeRect
 {
+
+    /**
+     * @param {CglContext} _cgl
+     */
     constructor(_cgl)
     {
         this.cgl = _cgl;
@@ -35,6 +42,11 @@ class WireframeRect
         this._vScale = vec3.create();
     }
 
+    /**
+     * @param {any} _scaleX
+     * @param {any} _scaleY
+     * @param {any} _scaleZ
+     */
     render(_scaleX, _scaleY, _scaleZ)
     {
         this.cgl.pushModelMatrix();
