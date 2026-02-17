@@ -1,17 +1,10 @@
-import {
-    getShadowPassVertexShader,
-    getShadowPassFragmentShader,
-    getBlurPassVertexShader,
-    getBlurPassFragmentShader
-} from "./createshaders.js";
-
 /**
  *
  * @param cgl
  * @param {Object} config config for light
  */
 // function Light(cgl, config)
-class Light
+export class Light
 {
     constructor(cgl, config)
     {
@@ -638,5 +631,3 @@ void main() {
     `;
     }
 }
-
-export { Light };

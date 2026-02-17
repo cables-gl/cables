@@ -18,6 +18,7 @@ import { ShaderModifier } from "./cgl_shadermodifier.js";
 import { RenderTargets } from "./rendertargets.js";
 import { CubemapFramebuffer } from "./cgl_cubemapframebuffer.js";
 import { CubemapTexture } from "./cgl_cubemaptexture.js";
+import { Light } from "./cgl_light.js";
 
 class WhatTheDog { }
 
@@ -30,6 +31,7 @@ const CGL = {
     "Geometry": Geometry,
     "getWheelDelta": getWheelDelta,
     "getWheelSpeed": getWheelSpeed,
+    "Light": Light,
     "Marker": Marker,
     "MatrixStack": MatrixStack,
     "Mesh": Mesh,
@@ -57,13 +59,13 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = { ...CGL, ...window.CABLES.CGL };
 window.CGL = { ...CGL, ...window.CABLES.CGL, ...window.CGL };
 
-console.log("cglindexxxxxxxxxxx");
+console.log("cgl index");
 window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
 {
     const patch = e?.detail;
     if (!patch || (patch.tempData.cglInitialized && !CABLES.UI)) return;
     patch.tempData.cglInitialized = true;
-    console.log("lalalalala");
+    console.log("event cgl init");
 
     const cgl = new CglContext(patch);
 });
