@@ -22,6 +22,7 @@ import { Light } from "./cgl_light.js";
 import { WireframeCube } from "./cgl_wireframecube.js";
 import { WireframeRect } from "./cgl_wireframerect.js";
 import { CopyTexture } from "./cgl_copytexture.js";
+import { PixelReader } from "./cgl_pixelreader.js";
 
 class WhatTheDog { }
 
@@ -43,6 +44,7 @@ const CGL = {
     "MESHES": MESHES,
     "onLoadingAssetsFinished": onLoadingAssetsFinished,
     "ProfileData": ProfileData,
+    "PixelReader": PixelReader,
     "RenderTargets": RenderTargets,
     "Shader": Shader,
     "ShaderLibMods": ShaderLibMods,
