@@ -19,6 +19,8 @@ import { RenderTargets } from "./rendertargets.js";
 import { CubemapFramebuffer } from "./cgl_cubemapframebuffer.js";
 import { CubemapTexture } from "./cgl_cubemaptexture.js";
 import { Light } from "./cgl_light.js";
+import { WireframeCube } from "./cgl_wireframecube.js";
+import { WireframeRect } from "./cgl_wireframerect.js";
 
 class WhatTheDog { }
 
@@ -49,6 +51,8 @@ const CGL = {
     "Uniform": Uniform,
     "WireCube": WireCube,
     "WirePoint": WirePoint,
+    "WireframeCube": WireframeCube,
+    "WireframeRect": WireframeRect,
     ...CONSTANTS.BLEND_MODES,
     ...CONSTANTS.SHADER,
     ...CONSTANTS.MATH,
