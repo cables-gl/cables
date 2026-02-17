@@ -21,12 +21,14 @@ import { CubemapTexture } from "./cgl_cubemaptexture.js";
 import { Light } from "./cgl_light.js";
 import { WireframeCube } from "./cgl_wireframecube.js";
 import { WireframeRect } from "./cgl_wireframerect.js";
+import { CopyTexture } from "./cgl_copytexture.js";
 
 class WhatTheDog { }
 
 const CGL = {
     "BoundingBox": BoundingBox,
     "Context": CglContext,
+    "CopyTexture": CopyTexture,
     "CubemapFramebuffer": CubemapFramebuffer,
     "CubemapTexture": CubemapTexture,
     "Framebuffer2": Framebuffer2,
