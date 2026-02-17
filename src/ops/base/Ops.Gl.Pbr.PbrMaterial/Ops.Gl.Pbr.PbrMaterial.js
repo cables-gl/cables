@@ -138,12 +138,12 @@ if (cgl.glVersion == 1)
 buildShader();
 // uniforms
 
-const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", 0);
-const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", 0);
-const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap", 0);
-const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap", 0);
-const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap", 0);
-const inIBLLUTUniform = new CGL.Uniform(PBRShader, "t", "IBL_BRDF_LUT", 0);
+const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", -1);
+const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", -2);
+const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap");
+const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap");
+const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap");
+const inIBLLUTUniform = new CGL.Uniform(PBRShader, "t", "IBL_BRDF_LUT");
 const inIrradianceUniform = new CGL.Uniform(PBRShader, "tc", "_irradiance", 1);
 const inPrefilteredUniform = new CGL.Uniform(PBRShader, "tc", "_prefilteredEnvironmentColour", 1);
 const inMipLevelsUniform = new CGL.Uniform(PBRShader, "f", "MAX_REFLECTION_LOD", 0);
@@ -153,10 +153,10 @@ const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntens
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", inSpecularIntensity);
 const inIntensity = new CGL.Uniform(PBRShader, "f", "envIntensity", 1);
 
-const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap", 0);
-const inLightmapUniform = new CGL.Uniform(PBRShader, "t", "_Lightmap", 0);
+const inHeightUniform = new CGL.Uniform(PBRShader, "t", "_HeightMap");
+const inLightmapUniform = new CGL.Uniform(PBRShader, "t", "_Lightmap");
 const inLightmapIntensityUniform = new CGL.Uniform(PBRShader, "f", "lightmapIntensity", inLightmapIntensity);
-const inTexThinFilmUniform = new CGL.Uniform(PBRShader, "t", "_ThinFilmMap", 0);
+const inTexThinFilmUniform = new CGL.Uniform(PBRShader, "t", "_ThinFilmMap");
 
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", inRoughness);

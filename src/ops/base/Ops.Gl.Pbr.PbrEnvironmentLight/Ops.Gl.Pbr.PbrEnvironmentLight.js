@@ -148,14 +148,14 @@ if (cgl.glVersion == 1)
 
 let filteringInfo = [0, 0];
 IrradianceShader.offScreenPass = true;
-const uniformIrradianceCubemap = new CGL.Uniform(IrradianceShader, "t", "EquiCubemap", 0);
+const uniformIrradianceCubemap = new CGL.Uniform(IrradianceShader, "t", "EquiCubemap");
 const uniformFilteringInfo = new CGL.Uniform(IrradianceShader, "2f", "filteringInfo", filteringInfo);
 const uniformRotation = new CGL.Uniform(IrradianceShader, "f", "rotation", 0);
 IrradianceShader.setSource(attachments.irradiance_vert, attachments.irradiance_frag);
 
 let prefilteringInfo = [0, 0];
 PrefilteringShader.offScreenPass = true;
-const uniformPrefilteringCubemap = new CGL.Uniform(PrefilteringShader, "t", "EquiCubemap", 0);
+const uniformPrefilteringCubemap = new CGL.Uniform(PrefilteringShader, "t", "EquiCubemap");
 const uniformPrefilteringRoughness = new CGL.Uniform(PrefilteringShader, "f", "roughness", 0);
 const uniformPrefilteringRotation = new CGL.Uniform(PrefilteringShader, "f", "rotation", 0);
 const uniformPrefilteringInfo = new CGL.Uniform(PrefilteringShader, "2f", "filteringInfo", prefilteringInfo);

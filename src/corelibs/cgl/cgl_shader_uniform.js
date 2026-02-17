@@ -77,12 +77,12 @@ export class Uniform extends CgUniform
 
     _isValidLoc()
     {
-        return this._loc != -1;// && this._loc != null;
+        return this._loc != -1 && this._loc != null;
     }
 
     resetLoc()
     {
-        this._loc = -1;
+        this._loc = null;
         this.needsUpdate = true;
     }
 

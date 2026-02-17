@@ -19,8 +19,6 @@ const
     sizeY = op.inFloat("Size Y", 1),
     sizeZ = op.inFloat("Size Z", 1),
     inTex = op.inTexture("Texture"),
-
-    // inWorldSpace = op.inValueBool("WorldSpace", true),
     inSpace = op.inSwitch("Space", ["World", "Model", "UV", "Screen"], "World"),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");

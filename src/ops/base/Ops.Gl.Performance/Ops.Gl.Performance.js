@@ -38,7 +38,6 @@ let initMeasures = true;
 
 const colorRAFSlow = "#007f9c";
 const colorRAFVeruSlow = "#aaaaaa";
-
 const colorBg = "#222222";
 const colorRAF = "#003f5c"; // color: https://learnui.design/tools/data-color-picker.html
 const colorMainloop = "#7a5195";
@@ -345,7 +344,7 @@ function updateText()
         // " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps);
         // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
-        element.innerHTML += " all shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + "}";
+        element.innerHTML += " all shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
     }
 
     op.patch.cgl.profileData.clear();

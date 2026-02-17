@@ -40,6 +40,7 @@ export class ProfileData
         this.doProfileGlQuery = false;
         this.glQueryData = {};
         this.counts = {};
+        this.timeSpent = {};
     }
 
     clear()
@@ -85,6 +86,16 @@ export class ProfileData
                 this.glQueryData[i].lastClear = performance.now();
             }
         }
+    }
+
+    /**
+     * @param {string  } eventName
+     * @param {number} timeMs
+     */
+    addTimeSpend(eventName, timeMs)
+    {
+        this.timeSpent[eventName] = this.timeSpent[eventName] || 0;
+        this.timeSpent[eventName] += timeMs;
     }
 
     /**

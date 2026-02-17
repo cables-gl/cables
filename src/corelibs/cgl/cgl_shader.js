@@ -84,6 +84,7 @@ class CglShader extends CgShader
 
     /** @type {Object<String,Uniform>} */
     materialPropUniforms = {};
+    #validated = false;
 
     /**
      * @param {CglContext} _cgl
@@ -892,6 +893,17 @@ class CglShader extends CgShader
 
         this._bindTextures();
 
+        if (!this.#validated)
+        {
+            this._cgl.gl.validateProgram(this.getProgram());
+
+            if (!this._cgl.gl.getProgramParameter(this.getProgram(), this._cgl.gl.VALIDATE_STATUS))
+            {
+                const str = this._cgl.gl.getProgramInfoLog(this.getProgram());
+                this._log.log("shaderprogram validation problem:", str);
+            }
+
+        }
         return this._isValid;
     }
 
@@ -1157,15 +1169,6 @@ class CglShader extends CgShader
 
         if (this._cgl.patch.config.glValidateShader !== false)
         {
-            this._cgl.gl.validateProgram(program);
-
-            if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.VALIDATE_STATUS))
-            {
-                // validation failed
-                this._log.log("shaderprogram validation failed...");
-
-                this._cgl.gl.getProgramInfoLog(program);
-            }
 
             if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
             {
@@ -1182,13 +1185,16 @@ class CglShader extends CgShader
                 if (infoLogFrag) this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
                 if (infoLogVert) this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
 
-                this._cgl.gl.getProgramInfoLog(program);
+                const str = this._cgl.gl.getProgramInfoLog(program);
+                if (str) this._log.log("shaderprogram link failed:", str);
+
                 if (!CABLES.UI) this._log.log(this);
                 this._isValid = false;
 
                 this._cgl.printError("shader link err");
             }
         }
+        this.#validated = false;
     }
 
     getProgram()
