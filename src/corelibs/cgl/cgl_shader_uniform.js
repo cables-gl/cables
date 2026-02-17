@@ -135,11 +135,9 @@ export class Uniform extends CgUniform
         }
         else this.needsUpdate = false;
 
-        CABLES.shaderUsed = CABLES.shaderUsed || {};
-
-        CABLES.shaderUsed[this._shader.name] = CABLES.shaderUsed[this._shader.name] || {};
-
-        CABLES.shaderUsed[this._shader.name][this.name] = true;
+        // CABLES.shaderUsed = CABLES.shaderUsed || {};
+        // CABLES.shaderUsed[this._shader.name] = CABLES.shaderUsed[this._shader.name] || {};
+        // CABLES.shaderUsed[this._shader.name][this.name] = true;
         if (!this._isValidLoc()) this._cgl.profileData.count("uniformUpdateInvalid");
     }
 
