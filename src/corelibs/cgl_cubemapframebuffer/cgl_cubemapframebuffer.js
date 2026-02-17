@@ -1,7 +1,14 @@
-import { CubemapTexture } from "./cubemaptexture.js";
+import { CubemapTexture } from "./cgl_cubemaptexture.js";
 
 class CubemapFramebuffer
 {
+
+    /**
+     * @param {any} cgl
+     * @param {number} width
+     * @param {number} height
+     * @param {object} options
+     */
     constructor(cgl, width, height, options)
     {
         this._cgl = cgl;
