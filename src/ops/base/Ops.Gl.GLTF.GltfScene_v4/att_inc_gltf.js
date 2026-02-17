@@ -301,7 +301,6 @@ function parseGltf(arrayBuffer)
     pos += chunks[0].size + CHUNK_HEADER_SIZE;
     gltf.json = chunks[0].data;
 
-    console.log("text", structuredClone(gltf.json));
     gltf.cables = {
         "fileUrl": inFile.get(),
         "shortFileName": CABLES.basename(inFile.get())
