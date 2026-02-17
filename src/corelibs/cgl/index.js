@@ -15,32 +15,34 @@ import { CONSTANTS } from "../cg/constants.js";
 import { MatrixStack, Geometry, BoundingBox, ProfileData } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 import { ShaderModifier } from "./cgl_shadermodifier.js";
+import { RenderTargets } from "./rendertargets.js";
 
 class WhatTheDog { }
 
 const CGL = {
+    "BoundingBox": BoundingBox,
+    "Context": CglContext,
     "Framebuffer2": Framebuffer2,
     "Geometry": Geometry,
-    "BoundingBox": BoundingBox,
+    "getWheelDelta": getWheelDelta,
+    "getWheelSpeed": getWheelSpeed,
     "Marker": Marker,
-    "WirePoint": WirePoint,
-    "WireCube": WireCube,
     "MatrixStack": MatrixStack,
     "Mesh": Mesh,
     "MESH": MESH,
-    "ShaderLibMods": ShaderLibMods,
-    "ShaderModifier": ShaderModifier,
-    "Shader": Shader,
-    "Uniform": Uniform,
     "MESHES": MESHES,
-    "getWheelSpeed": getWheelSpeed,
-    "getWheelDelta": getWheelDelta,
-    "Context": CglContext,
-    "Texture": Texture,
-    "TextureEffect": TextureEffect,
     "onLoadingAssetsFinished": onLoadingAssetsFinished,
     "ProfileData": ProfileData,
+    "RenderTargets": RenderTargets,
+    "Shader": Shader,
+    "ShaderLibMods": ShaderLibMods,
+    "ShaderModifier": ShaderModifier,
+    "Texture": Texture,
+    "TextureEffect": TextureEffect,
     "UniColorShader": UniColorShader,
+    "Uniform": Uniform,
+    "WireCube": WireCube,
+    "WirePoint": WirePoint,
     ...CONSTANTS.BLEND_MODES,
     ...CONSTANTS.SHADER,
     ...CONSTANTS.MATH,
