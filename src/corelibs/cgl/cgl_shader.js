@@ -66,12 +66,6 @@ function getDefaultFragmentShader(r, g, b)
 }
 
 /**
- * @class
- * @namespace external:CGL
- * @hideconstructor
- * @param _cgl
- * @param _name
- * @param _op
  * @example
  * var shader=new CGL.Shader(cgl,'MinimalMaterial');
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
@@ -896,6 +890,7 @@ class CglShader extends CgShader
         if (!this.#validated)
         {
             this._cgl.gl.validateProgram(this.getProgram());
+            this.#validated = true;
 
             if (!this._cgl.gl.getProgramParameter(this.getProgram(), this._cgl.gl.VALIDATE_STATUS))
             {

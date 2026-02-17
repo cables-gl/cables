@@ -152,10 +152,10 @@ export class CgUniform
                 this._port3 = _port3;
                 this._port4 = _port4;
 
-                this._port.on("change", this.updateFromPort4f.bind(this));
-                this._port2.on("change", this.updateFromPort4f.bind(this));
-                this._port3.on("change", this.updateFromPort4f.bind(this));
-                this._port4.on("change", this.updateFromPort4f.bind(this));
+                this._port.on("change", () => { console.log("hallo?"); this.updateFromPort4f(); });
+                this._port2.on("change", () => { console.log("hallo?"); this.updateFromPort4f(); });
+                this._port3.on("change", () => { console.log("hallo?"); this.updateFromPort4f(); });
+                this._port4.on("change", () => { console.log("hallo?"); this.updateFromPort4f(); });
 
                 // this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
                 this.updateFromPort4f();

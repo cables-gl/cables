@@ -1329,7 +1329,7 @@ export class Op extends Events
     outObject(name, v, objType)
     {
         const p = this.addOutPort(this.newPort(this, name, Port.TYPE_OBJECT, { "objType": objType || null }));
-        p.setRef(v || null);
+        p.set(v || null);
         p.ignoreValueSerialize = true;
         return p;
     }

@@ -41,6 +41,7 @@ import { Shader } from "./cgl_shader.js";
 
 export class Uniform extends CgUniform
 {
+    #lastShaderCompile = performance.now();
     constructor(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
     {
         super(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName);
@@ -122,16 +123,38 @@ export class Uniform extends CgUniform
         this.setValue(this._port.get());
     }
 
+    #updateLoc()
+    {
+
+        if (!this._isValidLoc())
+        {
+            if (this.#lastShaderCompile == this._shader.lastCompile) return; // ignore until shader changes
+
+            this.#lastShaderCompile = this._shader.lastCompile;
+            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        }
+        else this.needsUpdate = false;
+
+        CABLES.shaderUsed = CABLES.shaderUsed || {};
+
+        CABLES.shaderUsed[this._shader.name] = CABLES.shaderUsed[this._shader.name] || {};
+
+        CABLES.shaderUsed[this._shader.name][this.name] = true;
+        if (!this._isValidLoc()) this._cgl.profileData.count("uniformUpdateInvalid");
+    }
+
     updateValueF()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         this._shader.getCgl().gl.uniform1f(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
-
+        this.needsUpdate = false;
     }
 
+    /**
+     * @param {number} v
+     */
     setValueF(v)
     {
         if (v != this._value)
@@ -143,56 +166,60 @@ export class Uniform extends CgUniform
 
     updateValueI()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     updateValue2I()
     {
         if (!this._value) return;
 
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
 
         this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
 
-        this.needsUpdate = false;
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     updateValue3I()
     {
         if (!this._value) return;
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        this.#updateLoc();
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
 
         this._shader.getCgl().gl.uniform3i(this._loc, this._value[0], this._value[1], this._value[2]);
-        this.needsUpdate = false;
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     updateValue4I()
     {
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
         this._shader.getCgl().gl.uniform4i(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueI(v)
@@ -273,12 +300,12 @@ export class Uniform extends CgUniform
 
     updateValueArray4F()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform4fv(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueArray3F(v)
@@ -289,12 +316,12 @@ export class Uniform extends CgUniform
 
     updateValueArray3F()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform3fv(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueArray2F(v)
@@ -305,12 +332,12 @@ export class Uniform extends CgUniform
 
     updateValueArray2F()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform2fv(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueArrayF(v)
@@ -321,12 +348,12 @@ export class Uniform extends CgUniform
 
     updateValueArrayF()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        this.#updateLoc();
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform1fv(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueArrayT(v)
@@ -338,12 +365,7 @@ export class Uniform extends CgUniform
     updateValue3F()
     {
         if (!this._value) return;
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        this.#updateLoc();
 
         this._shader.getCgl().gl.uniform3f(this._loc, this._value[0], this._value[1], this._value[2]);
         this.needsUpdate = false;
@@ -373,12 +395,13 @@ export class Uniform extends CgUniform
     {
         if (!this._value) return;
 
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
 
         this._shader.getCgl().gl.uniform2f(this._loc, this._value[0], this._value[1]);
         this.needsUpdate = false;
@@ -404,12 +427,13 @@ export class Uniform extends CgUniform
 
     updateValue4F()
     {
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
 
         if (!this._value)
         {
@@ -417,9 +441,9 @@ export class Uniform extends CgUniform
             this._value = [0, 0, 0, 0];
         }
 
-        this.needsUpdate = false;
         this._shader.getCgl().gl.uniform4f(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValue4F(v)
@@ -445,16 +469,18 @@ export class Uniform extends CgUniform
 
     updateValueM4()
     {
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
         if (!this._value || this._value.length % 16 != 0) return console.log("this.name", this._name, this._value);
 
         this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
         this._cgl.profileData.count("uniformUpdate");
+        this.needsUpdate = false;
     }
 
     setValueM4(v)
@@ -465,8 +491,9 @@ export class Uniform extends CgUniform
 
     updateValueArrayT()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+        // if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        // else this.needsUpdate = false;
+        this.#updateLoc();
 
         if (!this._value) return;
         this._shader.getCgl().gl.uniform1iv(this._loc, this._value);
@@ -475,21 +502,25 @@ export class Uniform extends CgUniform
 
     updateValueT()
     {
-        if (!this._isValidLoc())
-        {
-            this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-            this._cgl.profileData.count("uniformGet");
-            this._cgl.profileData.profileShaderGetUniformName = this._name;
-        }
+        // if (!this._isValidLoc())
+        // {
+        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        //     this._cgl.profileData.count("uniformGet");
+        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
+        // }
+        this.#updateLoc();
 
         this._cgl.profileData.count("uniformUpdate");
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
         this.needsUpdate = false;
     }
 
+    /**
+     * @param {any} v
+     */
     setValueT(v)
     {
-        this.needsUpdate = true;
+        if (this._value != v) this.needsUpdate = true;
         this._value = v;
     }
 }

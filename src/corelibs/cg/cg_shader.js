@@ -29,6 +29,7 @@ export class CgShader extends Events
     /** @type {Array<String>} */
     _moduleNames = [];
 
+    _name = "unknown shader";
     _moduleNumId = 0;
     _needsRecompile = true;
     _compileReason = "initial";
@@ -45,6 +46,11 @@ export class CgShader extends Events
     constructor()
     {
         super();
+    }
+
+    get name()
+    {
+        return this._name;
     }
 
     /**
