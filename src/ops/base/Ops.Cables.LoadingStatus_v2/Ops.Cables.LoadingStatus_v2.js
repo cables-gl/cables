@@ -24,6 +24,7 @@ op.patch.loading.on("startTask", updateStatus.bind(this));
 
 function updateStatus()
 {
+    if (!exe.isLinked()) return;
     const jobs = op.patch.loading.getListJobs();
     outProgress.set(patch.loading.getProgress());
 
