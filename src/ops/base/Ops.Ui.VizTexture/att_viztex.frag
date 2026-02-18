@@ -12,11 +12,18 @@ float LinearizeDepth(float d,float zNear,float zFar)
     return 2.0 * zNear / (zFar + zNear - z_n * (zFar - zNear));
 }
 
+vec3 decodeRGBE8(vec4 rgbe)
+{
+    vec3 vDecoded = rgbe.rgb * pow(2.0, rgbe.a * 255.0-128.0);
+    return vDecoded;
+}
+
 void main()
 {
     vec4 col=vec4(vec3(0.),0.0);
 
     vec4 colTex=texture(tex,texCoord);
+
 
 
 
@@ -135,6 +142,11 @@ void main()
     #ifdef ALPHA_INV
         colTex.a=1.0-colTex.a;
     #endif
+
+#ifdef RGBE
+    colTex= vec4(decodeRGBE8(colTex),1.0);
+#endif
+
 
     outColor = mix(col,colTex,colTex.a);
 }

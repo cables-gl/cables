@@ -4,6 +4,7 @@ const
     inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Modulo"], "Anim"),
     inAlpha = op.inSwitch("Alpha", ["A", "1", "1-A"], "A"),
     inPickColor = op.inBool("Show Color", false),
+    inRgbe = op.inBool("Convert RGBE", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
     outTex = op.outTexture("Texture Out"),
@@ -18,6 +19,7 @@ let pixelReader = null;
 let colorString = "";
 let firstTime = true;
 
+inRgbe.onChange =
 inAlpha.onChange =
     inVizRange.onChange = updateDefines;
 
@@ -56,6 +58,8 @@ function updateDefines()
     shader.toggleDefine("ANIM_RANGE", inVizRange.get() == "Anim");
     shader.toggleDefine("ALPHA_INV", inAlpha.get() == "1-A");
     shader.toggleDefine("ALPHA_ONE", inAlpha.get() == "1");
+    shader.toggleDefine("RGBE", inRgbe.get());
+
     // op.checkMainloopExists();
 }
 

@@ -39,8 +39,16 @@
             {
                 "type": 1,
                 "name": "Output_0",
-                "uititle": "add port",
-                "longPort": 1
+                "longPort": 3
+            },
+            {
+                "type": 1,
+                "name": "Output_1"
+            },
+            {
+                "type": 1,
+                "name": "Output_2",
+                "uititle": "add port"
             }
         ]
     },
