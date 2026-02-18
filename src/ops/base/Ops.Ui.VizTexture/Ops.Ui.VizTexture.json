@@ -30,6 +30,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1762204735610
+        },
+        {
+            "message": "Option to visualize RGBE encoded images",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771422697689
         }
     ],
     "authorName": "pandur",
@@ -69,6 +75,11 @@
             {
                 "type": 0,
                 "name": "Show Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Convert RGBE",
                 "subType": "boolean"
             },
             {
