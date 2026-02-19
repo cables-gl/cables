@@ -1,0 +1,40 @@
+{
+    "id": "d8f88a5a-b919-4386-b634-c066f9b02868",
+    "created": 1771502650335,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1771502650335
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 2,
+                "name": "Variables"
+            }
+        ]
+    },
+    "summary": "Set existing variables to values in an object",
+    "exampleProjectId": "UDuPFb",
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Set variables"
+            },
+            {
+                "name": "Variables",
+                "text": "Input object"
+            }
+        ]
+    }
+}
