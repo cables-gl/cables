@@ -26,6 +26,17 @@ void main()
 
 
 
+#ifdef MONO_R
+ colTex.rgb=vec3(colTex.r);
+#endif
+
+#ifdef MONO_G
+ colTex.rgb=vec3(colTex.g);
+#endif
+
+#ifdef MONO_B
+ colTex.rgb=vec3(colTex.b);
+#endif
 
     if(type==1.0)
     {
