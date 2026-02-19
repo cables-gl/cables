@@ -3,9 +3,11 @@ const
     inShowInfo = op.inBool("Show Info", false),
     inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Modulo"], "Anim"),
     inAlpha = op.inSwitch("Alpha", ["A", "1", "1-A"], "A"),
-    inPickColor = op.inBool("Show Color", false),
     inRgbe = op.inBool("Convert RGBE", false),
 
+    inRGB = op.inSwitch("Channels", ["RGB", "R", "G", "B"], "RGB"),
+
+    inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
     outTex = op.outTexture("Texture Out"),
@@ -13,12 +15,16 @@ const
 
 op.setUiAttrib({ "height": 150, "resizable": true });
 
+op.setPortGroup("Show Values", [inPickColor, inX, inY]);
+
 const timer = new CABLES.Timer();
 let shader = null;
 let fb = null;
 let pixelReader = null;
 let colorString = "";
 let firstTime = true;
+
+inRGB.onChange =
 
 inRgbe.onChange =
 inAlpha.onChange =
@@ -61,7 +67,9 @@ function updateDefines()
     shader.toggleDefine("ALPHA_ONE", inAlpha.get() == "1");
     shader.toggleDefine("RGBE", inRgbe.get());
 
-    // op.checkMainloopExists();
+    shader.toggleDefine("MONO_R", inRGB.get() == "R");
+    shader.toggleDefine("MONO_G", inRGB.get() == "G");
+    shader.toggleDefine("MONO_B", inRGB.get() == "B");
 }
 
 op.renderVizLayerGl = (ctx, layer) =>

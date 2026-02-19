@@ -36,6 +36,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1771422697689
+        },
+        {
+            "message": "Option to debug by only visualizing one RGB channel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771517832762
         }
     ],
     "authorName": "pandur",
@@ -74,22 +80,36 @@
             },
             {
                 "type": 0,
-                "name": "Show Color",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Convert RGBE",
                 "subType": "boolean"
             },
             {
                 "type": 0,
+                "name": "Channels index",
+                "values": [
+                    "RGB",
+                    "R",
+                    "G",
+                    "B"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Show Color",
+                "group": "Show Values",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "X",
+                "group": "Show Values",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Y",
+                "group": "Show Values",
                 "subType": "number"
             }
         ],
