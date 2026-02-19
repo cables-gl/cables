@@ -82,25 +82,10 @@
     "exampleProjectId": "flURFr",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.RotateTexture",
+            "message": "new op",
             "author": "pandur",
-            "date": 1650882742849
-        },
-        {
-            "message": "Ops.User.pandur.RotateTextureV2 renamed to Ops.Dev.RotateTextureV2",
-            "author": "pandur",
-            "date": 1650882970487
-        },
-        {
-            "message": "Ops.Dev.RotateTextureV2 renamed to Ops.Gl.TextureEffects.RotateTexture_v2",
-            "author": "pandur",
-            "date": 1653287144876
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RotateTexture_v2 renamed to Ops.Gl.ImageCompose.RotateTexture_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856192577
+            "date": 1650882742849,
+            "type": "new op"
         }
     ],
     "coreLibs": [

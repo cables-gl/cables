@@ -318,17 +318,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Invert",
             "author": "pandur",
             "date": 1620223088189
-        },
-        {
-            "message": "Ops.User.pandur.MultiDrawImage renamed to Ops.Gl.TextureEffects.MultiDrawImage",
-            "author": "pandur",
-            "date": 1620311106730
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.MultiDrawImage renamed to Ops.Gl.ImageCompose.MultiDrawImage",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855267789
         }
     ],
     "issues": "",

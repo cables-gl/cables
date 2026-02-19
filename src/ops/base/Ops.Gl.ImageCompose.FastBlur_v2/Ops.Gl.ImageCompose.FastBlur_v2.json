@@ -48,12 +48,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.FastBlur",
             "author": "pandur",
             "date": 1650882627103
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.FastBlur_v2 renamed to Ops.Gl.ImageCompose.FastBlur_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701854628200
         }
     ],
     "summary": "Blurs a texture  - simple and fast",

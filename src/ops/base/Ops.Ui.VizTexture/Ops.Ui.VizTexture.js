@@ -5,6 +5,7 @@ const
     inAlpha = op.inSwitch("Alpha", ["A", "1", "1-A"], "A"),
     inPickColor = op.inBool("Show Color", false),
     inRgbe = op.inBool("Convert RGBE", false),
+
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
     outTex = op.outTexture("Texture Out"),
