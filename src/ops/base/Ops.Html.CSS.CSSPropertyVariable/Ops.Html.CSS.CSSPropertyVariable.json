@@ -1,0 +1,57 @@
+{
+    "id": "575eb608-58b2-4a9c-86f5-7e56c4176172",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1771600376841
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1771600376841,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": 5,
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": 5,
+                "name": "Variable name",
+                "group": "Attributes"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "HTML Element"
+            }
+        ]
+    },
+    "summary": "Use a CSS variable in a css property of an element",
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Parent element to modify"
+            },
+            {
+                "name": "Property",
+                "text": "Property to modify"
+            }
+        ]
+    },
+    "license": "MIT"
+}
