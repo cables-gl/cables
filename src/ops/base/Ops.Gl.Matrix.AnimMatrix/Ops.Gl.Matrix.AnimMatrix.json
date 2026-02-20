@@ -30,6 +30,15 @@
                 "subType": "number"
             },
             {
+                "type": 2,
+                "name": "Custom Ease Curve"
+            },
+            {
+                "type": 0,
+                "name": "Custom Curve Reverse",
+                "subType": "boolean"
+            },
+            {
                 "type": 0,
                 "name": "easing index",
                 "subType": "integer"
@@ -48,10 +57,10 @@
     },
     "summary": "animate values in a matrix to a new matrix",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "99cg1x"
+    "exampleProjectId": "99cg1x",
+    "license": "MIT"
 }

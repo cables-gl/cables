@@ -1,6 +1,7 @@
 const render = op.inTrigger("render");
 const texture1 = op.inTexture("Texture 1");
 const texture2 = op.inTexture("Texture 2");
+const inThresh = op.inFloatSlider("Threshold", 0);
 
 const trigger = op.outTrigger("Next");
 
@@ -11,6 +12,7 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.tex_difference_fra
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 const unitex1 = new CGL.Uniform(shader, "t", "tex1", 1);
 const unitex2 = new CGL.Uniform(shader, "t", "tex2", 2);
+const unithresh = new CGL.Uniform(shader, "f", "threshold", inThresh);
 
 render.onTriggered = function ()
 {

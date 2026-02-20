@@ -1,8 +1,11 @@
 const
     inTrigger = op.inTrigger("Update"),
     inMat = op.inArray("Next Matrix"),
-    // inStart=op.inTriggerButton("Start Anim"),
+
     inDur = op.inFloat("Duration", 1),
+    inCustomEase = op.inObject("Custom Ease Curve"),
+    inCursomEaseFlip = op.inBool("Custom Curve Reverse", false),
+
     next = op.outTrigger("Next"),
     outArr = op.outArray("Matrix", 4);
 
@@ -29,7 +32,14 @@ inTrigger.onTriggered = () =>
 {
     let t = CABLES.now() / 1000;
 
-    const perc = anim.getValue(t);
+    let perc = anim.getValue(t);
+    if (inCustomEase.get())
+    {
+        const easeAn = inCustomEase.get();
+        if (inCursomEaseFlip.get())perc = 1 - perc;
+        perc = easeAn.getValue(perc * easeAn.getLength());
+        if (inCursomEaseFlip.get())perc = 1 - perc;
+    }
 
     if (arr1 && arr2) ipMat(perc);
 };

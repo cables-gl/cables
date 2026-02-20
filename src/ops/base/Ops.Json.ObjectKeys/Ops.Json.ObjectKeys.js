@@ -15,5 +15,5 @@ inObj.onChange = function ()
 
     let keys = Object.keys(o);
     outNumKeys.set(keys.length);
-    outKeys.set(keys);
+    outKeys.setRef(keys);
 };

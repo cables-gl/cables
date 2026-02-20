@@ -4,19 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1686148942926
-        },
-        {
-            "message": "Ops.Patch.PgJmjmy.CollisionBody renamed to Ops.Team.CollisionOps.CollisionBody",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686155492388
-        },
-        {
-            "message": "Ops.Team.CollisionOps.CollisionBody renamed to Ops.Graphics.Intersection.IntersectBody",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687166259353
+            "date": 1686148942926,
+            "type": "new op"
         },
         {
             "message": "Can now be used in repeat loops/randomcluster etc.",

@@ -96,35 +96,9 @@
     "created": 1645190583290,
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.RgbMultiply",
-            "author": "pandur",
-            "date": 1620994204234
-        },
-        {
-            "message": "Ops.User.pandur.RGBMath renamed to Ops.Gl.TextureEffects.RGBMath",
-            "author": "pandur",
-            "date": 1620998033733
-        },
-        {
             "message": "cloned op from Ops.Gl.TextureEffects.RGBMath",
             "author": "pandur",
             "date": 1645190583290
-        },
-        {
-            "message": "Ops.User.pandur.VertTexTransform renamed to Ops.Dev.VertexTexture.VertTexTransform",
-            "author": "pandur",
-            "date": 1645192511723
-        },
-        {
-            "message": "Ops.Dev.VertexTexture.VertTexTransform renamed to Ops.Gl.TextureEffects.Math.RgbTransform",
-            "author": "pandur",
-            "date": 1670234605102
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Math.RgbTransform renamed to Ops.Gl.ImageCompose.Math.RgbTransform",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701854900963
         }
     ],
     "issues": "",

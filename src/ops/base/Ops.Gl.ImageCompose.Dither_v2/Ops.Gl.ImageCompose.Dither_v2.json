@@ -63,23 +63,8 @@
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Dither",
             "author": "pandur",
-            "date": 1650967311533
-        },
-        {
-            "message": "Ops.User.pandur.DitherV2 renamed to Ops.Dev.DitherV2",
-            "author": "pandur",
-            "date": 1650967351945
-        },
-        {
-            "message": "Ops.Dev.DitherV2 renamed to Ops.Gl.TextureEffects.Dither_v2",
-            "author": "pandur",
-            "date": 1653286686489
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Dither_v2 renamed to Ops.Gl.ImageCompose.Dither_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701854789780
+            "date": 1650967311533,
+            "type": "new op"
         },
         {
             "message": "Added mask texture input to control where dithering is applied and mask source paramter to select the colorchannel",

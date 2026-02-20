@@ -79,26 +79,9 @@
             "date": 1652079766271
         },
         {
-            "message": "Ops.User.pandur.ColorMapRange renamed to Ops.Gl.TextureEffects.ColorMapRange",
-            "author": "pandur",
-            "date": 1652080444151
-        },
-        {
             "message": "set shaderdefines on op load",
             "author": "stephan",
             "date": 1657276183967
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ColorMapRange renamed to Ops.Gl.TextureEffects.Math.ColorMapRange",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685950292840
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Math.ColorMapRange renamed to Ops.Gl.ImageCompose.Math.ColorMapRange",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701854803210
         }
     ],
     "issues": "",

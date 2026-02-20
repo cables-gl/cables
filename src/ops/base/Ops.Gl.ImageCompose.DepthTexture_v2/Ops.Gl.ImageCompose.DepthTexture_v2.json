@@ -66,17 +66,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.DepthTexture",
             "author": "pandur",
             "date": 1654596517300
-        },
-        {
-            "message": "Ops.User.pandur.DepthTexture_v2 renamed to Ops.Gl.TextureEffects.DepthTexture_v2",
-            "author": "pandur",
-            "date": 1671015427040
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.DepthTexture_v2 renamed to Ops.Gl.ImageCompose.DepthTexture_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855556077
         }
     ],
     "coreLibs": [

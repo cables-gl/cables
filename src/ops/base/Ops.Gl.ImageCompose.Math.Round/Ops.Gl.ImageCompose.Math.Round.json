@@ -4,31 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1674725289490
-        },
-        {
-            "message": "Ops.User.pandur.RgbMathSnap renamed to Ops.Dev.RgbMathRound",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1674725852801
-        },
-        {
-            "message": "Ops.Dev.RgbMathRound renamed to Ops.Dev.TexMathRound",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1674725926551
-        },
-        {
-            "message": "Ops.Dev.TexMathRound renamed to Ops.Gl.TextureEffects.Math.Round",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678367178418
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Math.Round renamed to Ops.Gl.ImageCompose.Math.Round",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701854924882
+            "date": 1674725289490,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
