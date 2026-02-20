@@ -9,7 +9,7 @@ const
     showTop = op.inValueBool("Top", true),
     showBottom = op.inValueBool("Bottom", true),
 
-    active = op.inValueBool("Active", true),
+    inDraw = op.inValueBool("Active", true),
 
     trigger = op.outTrigger("Next"),
     geomOut = op.outObject("Geometry");
@@ -17,6 +17,8 @@ const
 const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
+
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 showLeft.onChange =
     showRight.onChange =
@@ -29,7 +31,7 @@ showLeft.onChange =
 render.onTriggered = function ()
 {
     if (!mesh)buildMesh();
-    if (active.get() && mesh) mesh.render();
+    if (inDraw.get() && mesh) mesh.render();
     trigger.trigger();
 };
 

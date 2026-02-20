@@ -11,6 +11,8 @@ op.toWorkPortsNeedToBeLinked(inGeom);
 
 render.onTriggered = doRender;
 
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
+
 let mesh = null;
 let verts = [];
 let tc = [];

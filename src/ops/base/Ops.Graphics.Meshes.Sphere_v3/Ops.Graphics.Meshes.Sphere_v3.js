@@ -24,6 +24,8 @@ let
 updateScale();
 op.onDelete = function () { if (mesh)mesh.dispose(); };
 
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
+
 inTrigger.onTriggered = function ()
 {
     cgl = op.patch.cg || op.patch.cgl;

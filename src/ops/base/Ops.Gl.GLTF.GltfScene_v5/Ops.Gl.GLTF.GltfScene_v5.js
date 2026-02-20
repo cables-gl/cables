@@ -238,6 +238,19 @@ inExec.onTriggered = function ()
     if (cam)cam.end();
 };
 
+function updatetitle()
+{
+    let str = "";
+
+    if (inRender.get()) str += "x ";
+
+    if (inFile.get() && !inFile.get().startsWith("data:"))
+    {
+        str += CABLES.basename(inFile.get());
+    }
+    op.setUiAttrib({ "extendTitle": str });
+}
+
 function finishLoading()
 {
     if (!gltf)
@@ -298,10 +311,7 @@ function finishLoading()
 
     if (gltf)
     {
-        if (inFile.get() && !inFile.get().startsWith("data:"))
-        {
-            op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
-        }
+        updatetitle();
 
         gltf.loaded = Date.now();
     }

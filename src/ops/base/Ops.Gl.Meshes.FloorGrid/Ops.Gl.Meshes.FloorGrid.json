@@ -37,5 +37,6 @@
     "exampleProjectId": "LiwB16",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

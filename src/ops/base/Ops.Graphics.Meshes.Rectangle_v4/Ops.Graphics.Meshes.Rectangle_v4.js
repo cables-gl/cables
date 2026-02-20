@@ -46,6 +46,11 @@ axis.onChange =
     nColumns.onChange = rebuildLater;
 updateScale();
 
+doRender.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": doRender.get() ? "" : "X" });
+};
+
 width.onChange =
     height.onChange =
     () =>

@@ -8,7 +8,7 @@ const
     invertSteps = op.inValueBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"]),
     drawSpline = op.inValueBool("Spline", false),
-    inDraw = op.inValueBool("Draw", true),
+    doRender = op.inValueBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 
@@ -16,7 +16,7 @@ op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
-inDraw.setUiAttribs({ "title": "Render mesh" });
+doRender.setUiAttribs({ "title": "Render mesh" });
 
 mapping.set("flat");
 
@@ -43,6 +43,8 @@ let needsCalc = true;
 render.onTriggered = renderMesh;
 op.onDelete = function () { if (mesh)mesh.dispose(); };
 
+doRender.onChange = () => { op.setUiAttrib({ "extendTitle": doRender.get() ? "" : "x" }); };
+
 op.preRender = () =>
 {
     renderMesh();
@@ -67,7 +69,7 @@ function renderMesh()
 
     if (drawSpline.get()) shader.glPrimitive = cgl.gl.LINE_STRIP;
 
-    if (inDraw.get() && mesh)
+    if (doRender.get() && mesh)
     {
         // mesh.instances = 3;
         mesh.render(shader);

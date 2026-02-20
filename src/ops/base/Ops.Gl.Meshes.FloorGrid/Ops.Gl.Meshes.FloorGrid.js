@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inActive = op.inBool("Active", true),
+    inDraw = op.inBool("Active", true),
     next = op.outTrigger("Next");
 
 const num = 100;
@@ -10,6 +10,8 @@ let mesh = null;
 
 const shader = new CGL.Shader(cgl, "gridMaterial", this);
 shader.setSource(attachments.grid_vert, attachments.grid_frag);
+
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 function init()
 {
@@ -97,7 +99,7 @@ render.onTriggered = function ()
 
     shader.glPrimitive = cgl.gl.LINES;
 
-    if (inActive.get()) mesh.render(shader);
+    if (inDraw.get()) mesh.render(shader);
     cgl.popShader();
 
     shader.glPrimitive = oldPrim;

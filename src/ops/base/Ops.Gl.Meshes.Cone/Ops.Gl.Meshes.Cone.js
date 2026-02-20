@@ -5,11 +5,12 @@ const
     stacks = op.inValue("stacks", 5),
     radius = op.inValue("radius", 1),
     height = op.inValue("height", 2),
-    active = op.inValueBool("Active", true),
+    inDraw = op.inValueBool("Active", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
 
 geomOut.ignoreValueSerialize = true;
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 const cgl = op.patch.cgl;
 let mesh = null;
@@ -28,7 +29,7 @@ function updateMeshLater()
 render.onTriggered = function ()
 {
     if (needsRebuild) updateMesh();
-    if (active.get() && mesh)
+    if (inDraw.get() && mesh)
     {
         mesh.render();
     }

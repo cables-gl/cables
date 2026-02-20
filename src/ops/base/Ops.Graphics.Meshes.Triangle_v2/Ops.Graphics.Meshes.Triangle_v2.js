@@ -3,11 +3,12 @@ const
     trigger = op.outTrigger("trigger"),
     sizeW = op.inValueFloat("width", 1),
     sizeH = op.inValueFloat("height", 1),
-    draw = op.inValueBool("Draw", true),
+    inDraw = op.inValueBool("Draw", true),
     geom = new CGL.Geometry("triangle"),
     geomOut = op.outObject("geometry");
 
 geomOut.ignoreValueSerialize = true;
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 op.toWorkPortsNeedToBeLinked(render);
 op.setPortGroup("Size", [sizeW, sizeH]);
@@ -24,7 +25,7 @@ render.onLinkChanged = () =>
 render.onTriggered = function ()
 {
     if (!mesh)create();
-    if (draw.get() && mesh)mesh.render();
+    if (inDraw.get() && mesh)mesh.render();
     trigger.trigger();
 };
 

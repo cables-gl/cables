@@ -4,11 +4,12 @@ const
     rings = op.inValue("rings", 32),
     innerRadius = op.inValue("innerRadius", 0.25),
     outerRadius = op.inValue("outerRadius", 0.5),
-    indraw = op.inBool("Draw", true),
+    inDraw = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
 
-indraw.setUiAttribs({ "title": "Render mesh" });
+inDraw.setUiAttribs({ "title": "Render mesh" });
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 const UP = vec3.fromValues(0, 1, 0), RIGHT = vec3.fromValues(1, 0, 0);
 let tmpNormal = vec3.create(), tmpVec = vec3.create();
@@ -33,7 +34,7 @@ outerRadius.onChange = function ()
 render.onTriggered = function ()
 {
     if (needsUpdate) updateMesh();
-    if (indraw.get() && mesh !== null) mesh.render();
+    if (inDraw.get() && mesh !== null) mesh.render();
 
     trigger.trigger();
 };

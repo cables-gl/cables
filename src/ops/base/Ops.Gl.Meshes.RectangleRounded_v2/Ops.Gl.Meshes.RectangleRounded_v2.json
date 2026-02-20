@@ -59,7 +59,6 @@
             {
                 "type": 0,
                 "name": "Draw",
-                "group": "Draw",
                 "subType": "boolean"
             }
         ],

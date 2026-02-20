@@ -15,6 +15,7 @@ const
     geom = new CGL.Geometry("cylinder");
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 const
     TAU = Math.PI * 2,

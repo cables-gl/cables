@@ -7,7 +7,7 @@ const
     zDiff = op.inFloat("Peak Z Pos", 0),
     percent = op.inValueSlider("percent", 1),
     fill = op.inValueBool("Fill"),
-    renderMesh = op.inValueBool("Render Mesh", true),
+    inDraw = op.inValueBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
 
@@ -27,10 +27,12 @@ zDiff.onChange =
     fill.onChange =
     outerRadius.onChange = () => { mesh = null; };
 
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
+
 render.onTriggered = function ()
 {
     if (!mesh)calc();
-    if (renderMesh.get() && mesh) mesh.render();
+    if (inDraw.get() && mesh) mesh.render();
     trigger.trigger();
 };
 

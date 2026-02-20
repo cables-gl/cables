@@ -1,22 +1,24 @@
-const render = op.inTrigger("render");
-const inSegments = op.inValueInt("Segments", 24);
-const trigger = op.outTrigger("trigger");
-const sizeW = op.inValueFloat("width", 1);
-const sizeH = op.inValueFloat("height", 1);
-const borderRadius = op.inValueSlider("border radius", 0.5);
+const
+    render = op.inTrigger("render"),
+    inSegments = op.inValueInt("Segments", 24),
+    trigger = op.outTrigger("trigger"),
+    sizeW = op.inValueFloat("width", 1),
+    sizeH = op.inValueFloat("height", 1),
+    borderRadius = op.inValueSlider("border radius", 0.5),
+    geomOut = op.outObject("geometry"),
+    inTopLeftCorner = op.inValueBool("Top Left", true),
+    inTopRightCorner = op.inValueBool("Top Right", true),
+    inBottomLeftCorner = op.inValueBool("Bottom Left", true),
+    inBottomRightCorner = op.inValueBool("Bottom Right", true),
+    inDraw = op.inValueBool("Draw", true);
 
 const geom = new CGL.Geometry("triangle");
-const geomOut = op.outObject("geometry");
 
 geomOut.ignoreValueSerialize = true;
 
 op.toWorkPortsNeedToBeLinked(render);
 op.setPortGroup("Size", [sizeW, sizeH, borderRadius, inSegments]);
 
-const inTopLeftCorner = op.inValueBool("Top Left", true);
-const inTopRightCorner = op.inValueBool("Top Right", true);
-const inBottomLeftCorner = op.inValueBool("Bottom Left", true);
-const inBottomRightCorner = op.inValueBool("Bottom Right", true);
 const CORNER_PORTS = [inTopLeftCorner, inTopRightCorner, inBottomLeftCorner, inBottomRightCorner];
 CORNER_PORTS.forEach((port) =>
 {
@@ -27,21 +29,21 @@ op.setPortGroup("Round Corner", CORNER_PORTS);
 
 op.onDelete = function () { if (mesh)mesh.dispose(); };
 
-const draw = op.inValueBool("Draw", true);
-op.setPortGroup("Draw", [draw]);
-
 const cgl = op.patch.cgl;
 let mesh = null;
-sizeW.onChange = create;
-sizeH.onChange = create;
-borderRadius.onChange = create;
-inSegments.onChange = create;
+
+sizeW.onChange =
+    sizeH.onChange =
+    borderRadius.onChange =
+    inSegments.onChange = create;
+
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 create();
 
 render.onTriggered = function ()
 {
-    if (draw.get()) mesh.render(cgl.getShader());
+    if (inDraw.get()) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 

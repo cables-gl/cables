@@ -38,6 +38,8 @@ width.onChange =
     drawLeft.onChange =
     drawRight.onChange = () => { mesh = null; };
 
+active.onChange = () => { op.setUiAttrib({ "extendTitle": active.get() ? "" : "x" }); };
+
 render.onTriggered = function ()
 {
     if (!mesh) create();

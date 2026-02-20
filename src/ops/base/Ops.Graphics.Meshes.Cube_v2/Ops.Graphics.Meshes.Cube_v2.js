@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    active = op.inValueBool("Render Mesh", true),
+    inDraw = op.inValueBool("Render Mesh", true),
     width = op.inValue("Width", 1),
     len = op.inValue("Length", 1),
     height = op.inValue("Height", 1),
@@ -24,6 +24,8 @@ op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_T
 op.setPortGroup("Mapping", [mapping, mappingBias, inFlipX]);
 op.setPortGroup("Geometry", [width, height, len, center]);
 op.setPortGroup("Sides", [sideTop, sideBottom, sideLeft, sideRight, sideFront, sideBack]);
+
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
 let geom = null,
     mesh = null,
@@ -58,7 +60,7 @@ render.onLinkChanged = function ()
 render.onTriggered = function ()
 {
     if (needsRebuild)buildMesh();
-    if (active.get() && mesh && meshvalid) mesh.render();
+    if (inDraw.get() && mesh && meshvalid) mesh.render();
     trigger.trigger();
 };
 

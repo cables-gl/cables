@@ -8,7 +8,7 @@ const
     inScaleX = op.inValueFloat("Scale X", 1),
     inScaleY = op.inValueFloat("Scale Y", 1),
 
-    dodraw = op.inValueBool("Draw", true),
+    inDraw = op.inValueBool("Draw", true),
     pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]),
     pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]),
 
@@ -38,10 +38,12 @@ width.onChange =
     inUVScalar.onChange =
         () => { mesh = null; };
 
+inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
+
 render.onTriggered = function ()
 {
     if (!mesh)create();
-    if (dodraw.get()) mesh.render(cgl.getShader());
+    if (inDraw.get()) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
