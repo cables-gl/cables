@@ -34,5 +34,6 @@
     "exampleProjectId": "Z315nc",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

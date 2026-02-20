@@ -101,14 +101,20 @@ exe.onTriggered = function ()
         // setup data
         fb.renderStart(cgl);
 
+        cgl.pushShader(shaderPointsR);
+
         cgl.setTexture(0, inTex.get().tex);
+
         meshPoints.render(shaderPointsR);
+
+        cgl.popShader();
+
         meshPoints.render(shaderPointsG);
         meshPoints.render(shaderPointsB);
         meshPoints.render(shaderPointsLumi);
 
         fb.renderEnd(cgl);
-        outTexData.set(fb.getTextureColor());
+        outTexData.setRef(fb.getTextureColor());
 
         // render wave
 

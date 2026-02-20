@@ -1,0 +1,1 @@
+Get all keys and values of data stored in localstorage

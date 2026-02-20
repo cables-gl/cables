@@ -35,6 +35,10 @@ void main()
 
     vec4 model= vec4(strength*2.0-1.0, pos , 0.0,1.0);
 
+
+model=vec4(0.0,0.0, 0.0,1.0);
+
+
     gl_PointSize=1.0;
     gl_Position= model;
 }
