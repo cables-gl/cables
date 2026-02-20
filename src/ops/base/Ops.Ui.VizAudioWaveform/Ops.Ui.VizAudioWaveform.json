@@ -1,0 +1,52 @@
+{
+    "id": "6c6a4c81-eb9d-49bd-af10-6f7ae3044443",
+    "created": 1771607803339,
+    "license": "MIT",
+    "authorName": "60hz",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "60hz",
+            "date": 1771607803340
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio In",
+                "objType": "audioNode"
+            },
+            {
+                "type": 0,
+                "name": "Resolution index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Color"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gain",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Out",
+                "objType": "audioNode"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    }
+}

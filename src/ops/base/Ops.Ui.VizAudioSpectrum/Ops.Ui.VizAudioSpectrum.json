@@ -1,0 +1,57 @@
+{
+    "id": "8a03b765-271f-4554-aa32-e78eb2170b93",
+    "created": 1771607867801,
+    "license": "MIT",
+    "authorName": "60hz",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "60hz",
+            "date": 1771607867801
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio In",
+                "objType": "audioNode"
+            },
+            {
+                "type": 0,
+                "name": "Resolution index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Smoothing",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Color"
+            },
+            {
+                "type": 0,
+                "name": "Curve style",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Display Grid",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Out",
+                "objType": "audioNode"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    }
+}
