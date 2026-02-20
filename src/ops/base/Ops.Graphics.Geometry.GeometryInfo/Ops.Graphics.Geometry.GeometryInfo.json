@@ -66,16 +66,8 @@
     },
     "summary": "information about a geometry",
     "youtubeid": "",
-
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "Ops.Gl.Geometry.GeometryInfo renamed to Ops.Graphics.Geometry.GeometryInfo",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685950745162
-        }
-    ]
+    "changelog": []
 }

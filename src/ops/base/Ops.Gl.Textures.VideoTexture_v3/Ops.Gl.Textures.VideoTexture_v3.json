@@ -136,6 +136,10 @@
                 "subType": "boolean"
             },
             {
+                "type": 1,
+                "name": "Ended"
+            },
+            {
                 "type": 0,
                 "name": "Width",
                 "subType": "number"

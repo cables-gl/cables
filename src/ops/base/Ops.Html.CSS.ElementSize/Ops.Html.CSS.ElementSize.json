@@ -5,12 +5,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1767867921741
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1770208667127
         }
     ],
@@ -30,7 +24,7 @@
             },
             {
                 "type": 0,
-                "name": "Pos Top Unit index",
+                "name": "Width Unit index",
                 "values": [
                     "Off",
                     "px",
@@ -45,7 +39,7 @@
             },
             {
                 "type": 0,
-                "name": "Pos Left Unit index",
+                "name": "Height Unit index",
                 "values": [
                     "Off",
                     "px",
