@@ -28,6 +28,7 @@ const
     loading = op.outBoolNum("Loading"),
     outPlaying = op.outBoolNum("Playing"),
     canPlayThrough = op.outBoolNum("Can Play Through", false),
+    outEnded = op.outTrigger("Ended"),
 
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
@@ -163,7 +164,7 @@ function updatePlayState()
             }).catch(function (error)
             {
                 op.setUiError("playvideo", error.message);
-                op.logWarn("exc", error);
+                op.logWarn("exc", error, filename.get());
                 op.log(error);
                 op.log(videoElement);
 
@@ -359,6 +360,7 @@ function embedVideo(force)
             addedListeners = true;
             videoElement.addEventListener("canplaythrough", initVideo, true);
             videoElement.addEventListener("loadedmetadata", loadedMetaData);
+            videoElement.addEventListener("ended", () => { outEnded.trigger(); }, true);
             videoElement.addEventListener("playing", function () { videoElementPlaying = true; }, true);
             videoElement.onerror = function ()
             {
