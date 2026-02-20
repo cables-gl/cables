@@ -106,70 +106,31 @@
             }
         ]
     },
-    "summary": "Capture desktop windows or screens as a texture DesktopTexture  - Electron only",
+    "summary": "Capture desktop windows or screens as a texture (DesktopTexture) (Electron only)",
     "docs": {
-        "ports": [
-            {
-                "name": "Render",
-                "text": "Trigger to update the texture."
-            },
-            {
-                "name": "Active",
-                "text": "Boolean to start or stop capturing."
-            },
-            {
-                "name": "Refresh Sources",
-                "text": "Trigger to reload the list of available screens and windows."
-            },
-            {
-                "name": "Source index",
-                "text": "Dropdown to select the source to capture."
-            },
-            {
-                "name": "Next",
-                "text": "Trigger for the next op."
-            },
-            {
-                "name": "Texture",
-                "text": "The captured video texture."
-            },
-            {
-                "name": "Ratio",
-                "text": "Aspect ratio of the captured video."
-            },
-            {
-                "name": "Available",
-                "text": "Boolean indicating if the capture is ready."
-            },
-            {
-                "name": "Size Width",
-                "text": "Width of the captured video."
-            },
-            {
-                "name": "Size Height",
-                "text": "Height of the captured video."
-            },
-            {
-                "name": "Error",
-                "text": "Error message if something goes wrong."
-            },
-            {
-                "name": "HTML Element",
-                "text": "The underlying video-element."
-            }
-        ]
+        "ports": []
     },
     "coreLibs": [
-        "cgl",
-        "standalone_electron"
+        "cgl"
     ],
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "Gl.Textures.DesktopCapture renamed to Ops.Gl.Textures.DesktopCapture2",
+            "type": "rename",
+            "author": "",
+            "date": 1767888795759
+        },
+        {
+            "message": "Gl.Textures.DesktopCapture2 renamed to Ops.Gl.Textures.DesktopCapture",
+            "type": "rename",
+            "author": "",
+            "date": 1767888855841
+        },
+        {
+            "message": "Ops.Gl.Textures.DesktopCapture renamed to Ops.Gl.Textures.DesktopTexture",
+            "type": "rename",
             "author": "gemini",
-            "date": 1736416980000
+            "date": 1736417000000
         }
-    ],
-    "license": "MIT"
+    ]
 }
