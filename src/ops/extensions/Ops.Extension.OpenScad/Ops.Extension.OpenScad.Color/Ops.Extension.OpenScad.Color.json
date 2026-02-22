@@ -1,6 +1,6 @@
 {
-    "id": "8710df09-d328-4f1c-867c-b5792efef87b",
-    "created": 1771742992682,
+    "id": "8f08cce4-75ef-4a50-b744-d191f9701478",
+    "created": 1771759413622,
     "license": "MIT",
     "authorName": "",
     "layout": {
@@ -11,13 +11,23 @@
             },
             {
                 "type": 0,
-                "name": "Radius",
+                "name": "r",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Fragments",
-                "subType": "integer"
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -32,7 +42,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1771742992682
+            "date": 1771744335151
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771759413623
         }
     ]
 }

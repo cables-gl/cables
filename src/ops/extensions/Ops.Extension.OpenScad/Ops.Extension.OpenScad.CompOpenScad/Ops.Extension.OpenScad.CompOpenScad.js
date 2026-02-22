@@ -2,12 +2,13 @@
 const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next"),
+    inFn=op.inInt("Fragments",50),
     result = op.outString("Result");
 
 exec.onTriggered = () =>
 {
     op.patch.tempData.compScad={
-        src:"\n",
+        src:"$fn="+inFn.get()+";\n",
         varNames:{},
         indent:0,
         addLine:(s="")=>{

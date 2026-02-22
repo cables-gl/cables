@@ -1,6 +1,8 @@
 const
     update = op.inTrigger("Update"),
     inRadius=op.inFloat("Radius",1),
+        inFn=op.inInt("Fragments",0),
+
     next = op.outTrigger("Next");
 
 update.onTriggered = () =>
@@ -11,6 +13,7 @@ update.onTriggered = () =>
     let src="";
     src += "sphere(";
     src += "r="+os.portValue(inRadius);
+    if(inFn.get()>0)src+=", $fn="+inFn.get()
     src += ");";
 
     os.addLine(src);
