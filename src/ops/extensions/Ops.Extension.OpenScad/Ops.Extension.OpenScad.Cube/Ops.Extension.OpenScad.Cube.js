@@ -8,12 +8,14 @@ const
 
 update.onTriggered = () =>
 {
+
+    const os=op.patch.tempData.compScad;
+    os.op(op);
+
 let src= "cube(";
 
-src += "["+inSizeX.get()+","+inSizeY.get()+","+inSizeZ.get()+"]";
-
+src += "["+os.portValue(inSizeX)+","+os.portValue(inSizeY)+","+os.portValue(inSizeZ)+"]";
 if(inCenter.get()) src += ",center=true";
-
 src += ");";
 
     op.patch.tempData.compScad.addLine(src);

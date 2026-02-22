@@ -1,5 +1,6 @@
 const
     outSaving = op.outTrigger("Saving Patch"),
+    outSel = op.outTrigger("Selection Changed"),
     outEdit = op.outTrigger("PortValueEdited"),
     outOpAdd = op.outTrigger("Op Add"),
     outOpDelete = op.outTrigger("Op Delete"),
@@ -18,10 +19,10 @@ op.patch.on("opReloaded", (opName) =>{outOpReload.trigger()});
 
 
 if (window.gui)
-    window.gui.on("portValueEdited", () =>
-    {
-        outEdit.trigger();
-    });
+{
+    window.gui.on("portValueEdited", () =>{    outEdit.trigger();});
+    window.gui.on("opSelectChange", () =>{    outSel.trigger();});
+}
 
 inTriggerChanged.onTriggered = () =>
 {

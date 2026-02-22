@@ -7,14 +7,16 @@ const
 
 update.onTriggered = () =>
 {
-    op.patch.tempData.compScad.addLine( "translate(["+inX.get()+","+inY.get()+","+inZ.get()+"])");
+    const os=op.patch.tempData.compScad;
+    os.op(op);
+    os.addLine( "translate(["+os.portValue(inX)+","+os.portValue(inY)+","+os.portValue(inZ)+"])");
 
-    op.patch.tempData.compScad.addLine( "{");
-    op.patch.tempData.compScad.indentStart();
+    os.addLine( "{");
+    os.indentStart();
 
     next.trigger();
-    op.patch.tempData.compScad.indentEnd();
+    os.indentEnd();
 
-    op.patch.tempData.compScad.addLine( "}");
-    op.patch.tempData.compScad.addLine( );
+    os.addLine( "}");
+    os.addLine( );
 };
