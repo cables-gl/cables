@@ -1,6 +1,6 @@
 {
-    "id": "8710df09-d328-4f1c-867c-b5792efef87b",
-    "created": 1771742992682,
+    "id": "26526644-ad67-4f29-b47f-2dc989e48cc9",
+    "created": 1771760083634,
     "license": "MIT",
     "authorName": "",
     "layout": {
@@ -10,8 +10,12 @@
                 "name": "Update"
             },
             {
+                "type": 5,
+                "name": "Text"
+            },
+            {
                 "type": 0,
-                "name": "Radius",
+                "name": "Size",
                 "subType": "number"
             },
             {
@@ -32,7 +36,19 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1771742992682
+            "date": 1771746832667
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771757144000
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771760083634
         }
     ]
 }

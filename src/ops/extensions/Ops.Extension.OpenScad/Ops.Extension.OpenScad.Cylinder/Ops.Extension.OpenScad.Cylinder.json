@@ -33,6 +33,11 @@
                 "type": 0,
                 "name": "Center",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Fragments",
+                "subType": "integer"
             }
         ],
         "portsOut": [

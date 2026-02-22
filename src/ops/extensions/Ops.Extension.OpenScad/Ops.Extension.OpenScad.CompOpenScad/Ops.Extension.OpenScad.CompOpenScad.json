@@ -8,6 +8,11 @@
             {
                 "type": 1,
                 "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Fragments",
+                "subType": "integer"
             }
         ],
         "portsOut": [
