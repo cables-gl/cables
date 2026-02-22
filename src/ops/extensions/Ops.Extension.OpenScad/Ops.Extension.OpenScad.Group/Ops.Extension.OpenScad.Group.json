@@ -2,7 +2,7 @@
     "id": "d459bfa7-46fa-44fa-9f99-2188670cb584",
     "created": 1771744932022,
     "license": "MIT",
-    "authorName": "",
+    "authorName": "pandur",
     "layout": {
         "portsIn": [
             {
@@ -44,25 +44,7 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "",
-            "date": 1771742116566
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "",
-            "date": 1771743297503
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "",
-            "date": 1771743705757
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "",
+            "author": "pandur",
             "date": 1771744932022
         }
     ]

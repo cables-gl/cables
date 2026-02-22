@@ -2,7 +2,7 @@
     "id": "119199c5-aec9-4de4-8da4-940bb6a717b8",
     "created": 1771746832667,
     "license": "MIT",
-    "authorName": "",
+    "authorName": "pandur",
     "layout": {
         "portsIn": [
             {
@@ -46,13 +46,7 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "",
-            "date": 1771742116566
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "",
+            "author": "pandur",
             "date": 1771746832667
         }
     ]
