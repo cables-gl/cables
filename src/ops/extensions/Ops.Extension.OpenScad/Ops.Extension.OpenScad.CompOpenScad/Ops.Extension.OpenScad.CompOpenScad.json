@@ -1,0 +1,24 @@
+{
+    "id": "3c34766f-6f78-4dbd-987e-428fb70fc064",
+    "created": 1771741955735,
+    "license": "MIT",
+    "authorName": "",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    }
+}
