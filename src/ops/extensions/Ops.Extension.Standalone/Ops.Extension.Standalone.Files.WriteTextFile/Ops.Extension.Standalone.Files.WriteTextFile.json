@@ -30,6 +30,11 @@
             {
                 "type": 1,
                 "name": "Write"
+            },
+            {
+                "type": 0,
+                "name": "Write on change",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
