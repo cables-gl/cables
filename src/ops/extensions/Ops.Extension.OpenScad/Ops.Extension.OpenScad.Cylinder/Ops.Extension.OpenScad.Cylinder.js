@@ -9,25 +9,29 @@ const
 
 update.onTriggered = () =>
 {
+
 let src= "cylinder(";
+let os=op.patch.tempData.compScad
+
 
 src += "h="+inHeight.get();
 
 if(inRadiusTop.get()==0&&inRadiusBottom.get()==0)
 {
-    src+=",r="+inRadius.get();
+    src+=",r="+os.portValue(inRadius);
 }
 else
 {
-    src += ",r1="+(inRadiusTop.get()+inRadius.get());
-    src += ",r2="+(inRadiusBottom.get()+inRadius.get());
+    src += ",r1="+(os.portValue(inRadiusTop)+"+"+os.portValue(inRadius));
+    src += ",r2="+(os.portValue(inRadiusBottom)+"+"+os.portValue(inRadius));
 }
 
 if(inCenter.get()) src += ",center=true";
 
 src += ");";
 
-op.patch.tempData.compScad.addLine(src);
+os.op(op);
+os.addLine(src);
 
 next.trigger();
 };

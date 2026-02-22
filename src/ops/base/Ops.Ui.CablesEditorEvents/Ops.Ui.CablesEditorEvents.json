@@ -36,6 +36,10 @@
             },
             {
                 "type": 1,
+                "name": "Selection Changed"
+            },
+            {
+                "type": 1,
                 "name": "PortValueEdited"
             },
             {

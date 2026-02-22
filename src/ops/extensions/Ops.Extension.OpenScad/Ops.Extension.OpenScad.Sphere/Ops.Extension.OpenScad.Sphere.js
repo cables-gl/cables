@@ -5,11 +5,15 @@ const
 
 update.onTriggered = () =>
 {
+    const os=op.patch.tempData.compScad;
+    os.op(op);
+
     let src="";
     src += "sphere(";
-    src += "r="+inRadius.get();
+    src += "r="+os.portValue(inRadius);
     src += ");";
 
-    op.patch.tempData.compScad.addLine(src);
+    os.addLine(src);
+
     next.trigger();
 };
