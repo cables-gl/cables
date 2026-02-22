@@ -1,0 +1,48 @@
+{
+    "id": "5d861342-3d23-4ea1-9b7d-5e6469526aae",
+    "created": 1771742116566,
+    "license": "MIT",
+    "authorName": "",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771742116566
+        }
+    ]
+}

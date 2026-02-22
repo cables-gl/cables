@@ -1,0 +1,39 @@
+{
+    "id": "8710df09-d328-4f1c-867c-b5792efef87b",
+    "created": 1771742992682,
+    "license": "MIT",
+    "authorName": "",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771742116566
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771742992682
+        }
+    ]
+}

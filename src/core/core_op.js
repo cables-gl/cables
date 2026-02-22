@@ -753,7 +753,7 @@ export class Op extends Events
      * @param {string} name
      * @param {number} type
      */
-    outMultiPort2(name, type, uiAttribsPort = {})
+    outMultiPort2(name, type, uiAttribsPort = {}, minNum = 2)
     {
         const p = new MultiPort2(
             this,
@@ -764,7 +764,8 @@ export class Op extends Events
                 "display": "multiport",
                 "hidePort": true
             },
-            uiAttribsPort
+            uiAttribsPort,
+            minNum
         );
         p.ignoreValueSerialize = true;
 

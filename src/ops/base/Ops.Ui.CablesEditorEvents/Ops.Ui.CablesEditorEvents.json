@@ -43,6 +43,22 @@
             {
                 "type": 1,
                 "name": "PortValueEdited"
+            },
+            {
+                "type": 1,
+                "name": "Op Add"
+            },
+            {
+                "type": 1,
+                "name": "Op Delete"
+            },
+            {
+                "type": 1,
+                "name": "Op Reload"
+            },
+            {
+                "type": 1,
+                "name": "Port Link"
             }
         ]
     },
