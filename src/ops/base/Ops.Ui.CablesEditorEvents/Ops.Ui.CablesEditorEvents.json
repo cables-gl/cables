@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1759840841305
+        },
+        {
+            "message": "Added events to trigger, when op created/deleted, port linked etc",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771743942896
         }
     ],
     "authorName": "pandur",
