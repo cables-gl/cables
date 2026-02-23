@@ -1,0 +1,59 @@
+{
+    "id": "9e737c19-4bb0-4e8b-94e2-bc6367afbb79",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1771508075337
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1771508075337,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Receive"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Keys"
+            },
+            {
+                "type": 2,
+                "name": "All"
+            },
+            {
+                "type": 0,
+                "name": "Storage Support",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Retrieve all keys (and values) stores in localstorage",
+    "docs": {
+        "ports": [
+            {
+                "name": "Receive",
+                "text": "Trigger update"
+            },
+            {
+                "name": "Keys",
+                "text": "Array for localstorage keys"
+            },
+            {
+                "name": "All",
+                "text": "Key-Value object of everything in localstorage"
+            },
+            {
+                "name": "Storage Support",
+                "text": "boolean to indicate browser support for localstorage"
+            }
+        ]
+    },
+    "license": "MIT",
+    "cloneOf": "f908fc2e-70b6-4ca4-8afd-4302b35ff570"
+}

@@ -165,8 +165,8 @@ function updatePlayState()
             {
                 op.setUiError("playvideo", error.message);
                 op.logWarn("exc", error, filename.get());
-                op.log(error);
-                op.log(videoElement);
+                // op.log(error);
+                // op.log(videoElement);
 
                 if (videoElement.paused && inShowSusp.get())
                 {
