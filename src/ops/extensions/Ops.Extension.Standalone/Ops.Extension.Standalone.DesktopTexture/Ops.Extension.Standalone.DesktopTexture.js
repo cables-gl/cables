@@ -100,7 +100,6 @@ op.on("loadedValueSet", () =>
     refreshSources();
     setTimeout(() =>
     {
-        // console.log("[DesktopTexture] Starting auto-capture after delay");
         startCapture();
     }, 10000);
 });
@@ -160,8 +159,6 @@ inTrigger.onTriggered = () =>
 
 function refreshSources()
 {
-    // console.log("[DesktopTexture] refreshSources called");
-
     let ipc = window.ipcRenderer;
     if (!ipc)
     {
@@ -175,17 +172,16 @@ function refreshSources()
         {
             ipc = window.nodeRequire("electron").ipcRenderer;
         }
-        catch (e) { console.error("[DesktopTexture] Failed to nodeRequire electron", e); }
+        catch (e) { op.error("[DesktopTexture] Failed to nodeRequire electron", e); }
     }
 
     if (!ipc && op.patch.api)
     {
-        // console.log("[DesktopTexture] Using patch.api fallback");
         op.patch.api.send("getDesktopCaptureSources", { "types": ["window", "screen"] }, (err, s) =>
         {
             if (err)
             {
-                console.error("[DesktopTexture] patch.api error:", err);
+                op.error("[DesktopTexture] patch.api error:", err);
                 outError.set("Failed to get sources: " + (err.message || err));
                 return;
             }
@@ -196,12 +192,11 @@ function refreshSources()
 
     if (!ipc)
     {
-        console.error("[DesktopTexture] No IPC found (window.ipcRenderer or op.require)");
+        op.error("[DesktopTexture] No IPC found (window.ipcRenderer or op.require)");
         outError.set("Electron IPC not available");
         return;
     }
 
-    // console.log("[DesktopTexture] Invoking getDesktopCaptureSources via IPC");
     ipc.invoke("getDesktopCaptureSources", { "types": ["window", "screen"] })
         .then((s) =>
         {
@@ -209,17 +204,16 @@ function refreshSources()
         })
         .catch((e) =>
         {
-            console.error("[DesktopTexture] IPC Invoke error:", e);
+            op.error("[DesktopTexture] IPC Invoke error:", e);
             outError.set("Failed to get sources: " + e.message);
         });
 }
 
 function handleSources(s)
 {
-    // console.log("[DesktopTexture] handleSources received:", s);
     if (!s)
     {
-        console.warn("[DesktopTexture] sources is null/undefined");
+        op.warn("[DesktopTexture] sources is null/undefined");
         return;
     }
 
@@ -229,7 +223,7 @@ function handleSources(s)
 
     if (!Array.isArray(sourceList))
     {
-        console.warn("[DesktopTexture] sources is not an array:", sourceList);
+        op.warn("[DesktopTexture] sources is not an array:", sourceList);
         return;
     }
 
@@ -279,7 +273,6 @@ function stopStream()
 
 function startCapture()
 {
-    // console.log("[DesktopTexture] startCapture called");
     if (!inActive.get())
     {
         canceled = true;
@@ -293,8 +286,7 @@ function startCapture()
 
     if (!source)
     {
-        console.warn("[DesktopTexture] startCapture: Source not found", sourceName);
-        // outError.set("Source not found");
+        op.warn("[DesktopTexture] startCapture: Source not found", sourceName);
         return;
     }
 
@@ -326,11 +318,9 @@ function startCapture()
         constraints.video.mandatory.maxWidth = width.get();
     }
 
-    // console.log("[DesktopTexture] Requesting getUserMedia with constraints:", constraints);
     navigator.mediaDevices.getUserMedia(constraints)
         .then((stream) =>
         {
-            // console.log("[DesktopTexture] getUserMedia success");
             videoElement.srcObject = stream;
             videoElement.onloadedmetadata = (e) =>
             {
@@ -341,7 +331,6 @@ function startCapture()
                 if (videoTrack)
                 {
                     const settings = videoTrack.getSettings();
-                    // console.log("[DesktopTexture] Stream settings:", settings);
                     if (settings.width && settings.height)
                     {
                         if (!useConstraints)
@@ -361,7 +350,7 @@ function startCapture()
         })
         .catch((e) =>
         {
-            console.error("[DesktopTexture] GetUserMedia Error:", e);
+            op.error("[DesktopTexture] GetUserMedia Error:", e);
             outError.set("GetUserMedia Error: " + e.message);
             op.logError(e);
         });
