@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1754121655159
-        },
-        {
-            "message": "Grid op moved to core: Ops.Html.GridLayout.Grid",
-            "type": "new",
-            "author": "pandur",
-            "date": 1770028109477
         }
     ],
     "layout": {
@@ -78,7 +72,7 @@
     "docs": {
         "ports": []
     },
-    "summary": "Arrange HTML elmengs in grids, create grids by combining rows and columns",
+    "summary": "Arrange HTML elments in grids, create grids by combining rows and columns",
     "coreLibs": [
         "cgl"
     ]

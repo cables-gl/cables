@@ -20,7 +20,7 @@
             "date": 1766392560135
         },
         {
-            "message": "Added option to multifly albedo texture with diffuse color",
+            "message": "Added option to multiply albedo texture with diffuse color",
             "type": "feature",
             "author": "pandur",
             "date": 1770385811609

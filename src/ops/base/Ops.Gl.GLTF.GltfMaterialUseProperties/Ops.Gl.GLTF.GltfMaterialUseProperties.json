@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1770304453113
-        },
-        {
-            "message": "Gl.GLTF.GltfMaterialProperties renamed to Ops.Gl.GLTF.GltfMaterialUseProperties",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1770812471103
         }
     ],
     "layout": {
@@ -52,5 +46,9 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "summary": "Use GLTF material properties of a material on the current shader ",
+    "docs": {
+        "ports": []
     }
 }

@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1770828707366
-        },
-        {
-            "message": "Patch.PaWuQVa.Unstrip renamed to Ops.Array.PointArray.Unstrip",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1770829525565
         }
     ],
     "layout": {
@@ -30,5 +24,9 @@
                 "name": "Result"
             }
         ]
+    },
+    "summary": "Unstrip an line point array",
+    "docs": {
+        "ports": []
     }
 }
