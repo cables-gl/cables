@@ -95,12 +95,13 @@ function printNode(html, node, level)
     {
         let info = "";
 
-        if (node._node.translation)info += "Translate: `" + formatVec(node._node.translation) + "` || ";
-        if (node._node.rotation)info += "Rotation: `" + formatVec(node._node.rotation) + "` || ";
-        if (node._node.scale)info += "Scale: `" + formatVec(node._node.scale) + "` || ";
+        if (node._node.translation)info += "Translate: " + formatVec(node._node.translation) + " | ";
+        if (node._node.rotation)info += "Rotation: " + formatVec(node._node.rotation) + " | ";
+        if (node._node.scale)info += "Scale: " + formatVec(node._node.scale) + " | ";
 
-        html += "<span class=\"icon icon-gizmo info\" data-info=\"" + info + "\"></span> &nbsp;";
+        html += "<span class=\"icon icon-gizmo tt\" data-tt=\"" + info + "\"></span> &nbsp;";
     }
+    if (node.warning)html += node.warning;
 
     if (node._animRot || node._animScale || node._animTrans)
     {
@@ -109,7 +110,7 @@ function printNode(html, node, level)
         if (node._animScale) info += "Scale ";
         if (node._animTrans) info += "Trans ";
 
-        html += "<span class=\"icon icon-clock info\" data-info=\"" + info + "\"></span>&nbsp;";
+        html += "<span class=\"icon icon-clock tt\" data-tt=\"" + info + "\"></span>&nbsp;";
     }
 
     if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";

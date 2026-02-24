@@ -49,5 +49,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Vizualize an audionode object as a waveform"
+    "summary": "Vizualize an audionode object as a waveform",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

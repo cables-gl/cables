@@ -92,8 +92,7 @@ function startVr()
     xr.requestSession(
         "immersive-" + inImmersion.get().toLowerCase(),
         {
-            "optionalFeatures": ["hand-tracking", "local-floor", "dom-overlay"],
-            "domOverlay": { "root": overlayEle }
+            "optionalFeatures": ["hand-tracking", "local-floor"]
         }
     ).then(
         async (session) =>
@@ -123,8 +122,6 @@ function startVr()
 
                 xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
                 xrSession.requestAnimationFrame(onXRFrame);
-
-                overlayEle.style.display = "block";
 
                 console.log("enabledFeatures", xrSession.enabledFeatures);
             }

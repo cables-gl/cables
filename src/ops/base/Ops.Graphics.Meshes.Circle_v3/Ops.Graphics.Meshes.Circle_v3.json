@@ -91,30 +91,7 @@
         ]
     },
     "issues": "",
-    "changelog": [
-        {
-            "message": "cloned op from Ops.Gl.Meshes.Circle",
-            "author": "pandur",
-            "date": 1684507299088
-        },
-        {
-            "message": "Ops.Patch.PnqjtQw.Circle2 renamed to Ops.Gl.Meshes.Circle_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1684507565222
-        },
-        {
-            "message": "cloned op from Ops.Gl.Meshes.Circle_v2",
-            "author": "pandur",
-            "date": 1702643016625
-        },
-        {
-            "message": "Gl.Meshes.Circle_v3 renamed to Ops.Graphics.Meshes.Circle_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750154573698
-        }
-    ],
+    "changelog": [],
     "exampleProjectId": "DAAkQ6",
     "license": "MIT",
     "coreLibs": [

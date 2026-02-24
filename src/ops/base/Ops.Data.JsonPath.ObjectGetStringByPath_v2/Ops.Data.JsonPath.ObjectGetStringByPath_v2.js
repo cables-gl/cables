@@ -49,6 +49,7 @@ function update()
             }
             else
             {
+                found = true;
                 result = String(result);
             }
         }

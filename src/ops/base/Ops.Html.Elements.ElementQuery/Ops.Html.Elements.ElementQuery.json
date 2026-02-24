@@ -43,7 +43,7 @@
             }
         ]
     },
-    "summary": "Selects all matching elements in the DOM",
+    "summary": "Find all matching elements by query in the DOM",
     "docs": {
         "ports": [
             {
