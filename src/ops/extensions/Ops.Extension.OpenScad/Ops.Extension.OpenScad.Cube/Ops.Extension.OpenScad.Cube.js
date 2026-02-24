@@ -1,9 +1,12 @@
 const
     update = op.inTrigger("Update"),
+            inMod=op.inSwitch("Modifier",["None","Debug","Disable","Only","Transp"],"None"),
+
     inSizeX=op.inFloat("Size X",1),
     inSizeY=op.inFloat("Size Y",1),
     inSizeZ=op.inFloat("Size Z",1),
     inCenter=op.inBool("Center",false),
+
     next = op.outTrigger("Next");
 
 update.onTriggered = () =>

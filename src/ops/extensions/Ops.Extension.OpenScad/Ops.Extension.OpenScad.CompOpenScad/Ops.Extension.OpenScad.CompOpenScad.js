@@ -34,6 +34,14 @@ exec.onTriggered = () =>
                 return p.getVariableName();
             }
             return p.get()
+        },
+        mod:(p)=>{
+            if(p.get()=="None")return ""
+            if(p.get()=="Debug")return "#"
+            if(p.get()=="Disable")return "*"
+            if(p.get()=="Only")return "!"
+            if(p.get()=="Transp")return "%"
+
         }
 
     }

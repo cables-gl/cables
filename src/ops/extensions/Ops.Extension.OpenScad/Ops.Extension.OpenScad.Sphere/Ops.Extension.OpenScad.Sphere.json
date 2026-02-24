@@ -18,6 +18,18 @@
                 "type": 0,
                 "name": "Fragments",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Modifier index",
+                "values": [
+                    "None",
+                    "Debug",
+                    "Disable",
+                    "Only",
+                    "Transp"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
