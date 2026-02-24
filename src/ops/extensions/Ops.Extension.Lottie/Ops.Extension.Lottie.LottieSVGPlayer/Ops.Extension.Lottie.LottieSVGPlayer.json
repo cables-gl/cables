@@ -5,6 +5,22 @@
             "message": "created op",
             "author": "pandur",
             "date": 1555057855316
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104391335
+        },
+        {
+            "message": "Ops.Lottie.LottieSVGPlayer renamed to Ops.Libs.Lottie.LottieSVGPlayer",
+            "author": "pandur",
+            "date": 1655965703061
+        },
+        {
+            "message": "Ops.Libs.Lottie.LottieSVGPlayer renamed to Ops.Extension.Lottie.LottieSVGPlayer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1686915348039
         }
     ],
     "authorName": "pandur",
