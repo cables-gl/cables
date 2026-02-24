@@ -12,6 +12,10 @@
             {
                 "type": 1,
                 "name": "Pause"
+            },
+            {
+                "type": 1,
+                "name": "Toggle"
             }
         ],
         "portsOut": [
@@ -22,9 +26,17 @@
         ]
     },
     "summary": "start timeline",
-
     "exampleProjectId": "3F6DOe",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added trigger to toggle between play/pause",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771841444045
+        }
+    ]
 }

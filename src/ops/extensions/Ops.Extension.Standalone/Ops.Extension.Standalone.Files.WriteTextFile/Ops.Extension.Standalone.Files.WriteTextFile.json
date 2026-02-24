@@ -15,6 +15,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1770826137244
+        },
+        {
+            "message": "Auto write file when string changes",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771743501824
         }
     ],
     "layout": {

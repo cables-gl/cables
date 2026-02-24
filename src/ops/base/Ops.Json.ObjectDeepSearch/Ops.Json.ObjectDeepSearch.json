@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1770387016237
-        },
-        {
-            "message": "Patch.PjmKema.ObjectSearch renamed to Ops.Json.ObjectDeepSearch",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1770388916407
         }
     ],
     "layout": {
@@ -34,5 +28,9 @@
                 "name": "Result"
             }
         ]
+    },
+    "summary": "Search for any value anywhere in an object",
+    "docs": {
+        "ports": []
     }
 }

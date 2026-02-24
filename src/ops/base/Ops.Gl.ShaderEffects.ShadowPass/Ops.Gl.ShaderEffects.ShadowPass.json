@@ -28,5 +28,9 @@
                 "name": "Next Normal Pass"
             }
         ]
+    },
+    "summary": "Route trigger differently when in shadowpass or not",
+    "docs": {
+        "ports": []
     }
 }

@@ -48,5 +48,6 @@
     },
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Vizualize an audionode object as a waveform"
 }

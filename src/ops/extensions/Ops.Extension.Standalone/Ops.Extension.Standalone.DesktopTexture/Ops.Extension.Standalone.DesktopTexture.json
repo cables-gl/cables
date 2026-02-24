@@ -1,6 +1,6 @@
 {
     "id": "7b8d0c2e-4b6a-4d2a-8b8a-9c7f6e5d4a3b",
-    "authorName": "gemini",
+    "authorName": "Uuoocl",
     "created": 1736417000000,
     "layout": {
         "portsIn": [
@@ -106,7 +106,7 @@
             }
         ]
     },
-    "summary": "Capture desktop windows or screens as a texture DesktopTexture  - Electron only",
+    "summary": "Capture desktop windows or screens as a texture DesktopTexture",
     "docs": {
         "ports": [
             {
@@ -167,8 +167,8 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "gemini",
-            "date": 1736416980000
+            "author": "Uuoocl",
+            "date": 1771498594000
         }
     ],
     "license": "MIT"
