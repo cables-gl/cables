@@ -10,8 +10,7 @@ update.onTriggered = () =>
     const os=op.patch.tempData.compScad;
     os.op(op);
 
-    op.patch.tempData.compScad.addLine( meth.get().toLowerCase()+"()");
-    op.patch.tempData.compScad.addLine( "{");
+    op.patch.tempData.compScad.addLine( meth.get().toLowerCase()+"() {");
     op.patch.tempData.compScad.indentStart();
 
     for (let i = 0; i < nexts.get().length; i++)

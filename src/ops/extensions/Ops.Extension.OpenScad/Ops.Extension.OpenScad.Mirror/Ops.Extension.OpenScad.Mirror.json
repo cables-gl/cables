@@ -1,0 +1,55 @@
+{
+    "id": "a4aa7919-5bd6-49f1-89b2-d5fceff2f21c",
+    "created": 1771915144382,
+    "license": "MIT",
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1771744335151
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "",
+            "date": 1771761219687
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1771915144382
+        }
+    ]
+}
