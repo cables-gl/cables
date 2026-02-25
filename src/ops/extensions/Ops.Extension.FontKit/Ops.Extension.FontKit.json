@@ -1,0 +1,5 @@
+{
+    "name": "Ops.Extension.FontKit.",
+    "summary": "Variable font rendering to cables.gl using fontkit.js",
+    "description": "This pipeline brings variable font rendering to cables.gl using fontkit.js, a JavaScript font parsing\nlibrary. It extracts glyph outlines as SVG paths, enabling per-glyph animation of variable font axes\n(weight, width, optical size…), geometric transforms (rotation, scale, position), and multiline text layout\n— all feeding into a custom triangulation op for real-time WebGL rendering.\nThe pipeline is designed around a chainable architecture: each op takes Glyph Paths + Glyph Positions\narrays as input and outputs the same format, allowing arbitrary stacking of effects before final\nrecombination."
+}
