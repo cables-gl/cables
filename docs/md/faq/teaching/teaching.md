@@ -23,6 +23,7 @@ Please send us an [email](mailto:hi@undev.de) or contact us on [discord](https:/
 
 ## Cables was used in the classrooms of these institutions:
 
+- [Accademia di belle arti di Brera](https://www.accademiadibrera.milano.it/), Milan, Italy
 - [Akademie für Theater und Digitalität](https://theater.digital/), Dortmund, Germany
 - [Ecole Supérieure d'Ingénieurs Léonard de Vinci](https://www.esilv.fr/), France
 - [Hochschule Ostfalia](https://www.ostfalia.de), Salzgitter, Germany
