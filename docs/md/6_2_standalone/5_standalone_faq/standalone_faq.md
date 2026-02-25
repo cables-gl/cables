@@ -11,6 +11,20 @@ command line arguments.
 
 Use `--help` for more info.
 
+## How can I force cables standalone to open on a specific display
+
+To start cables standalone on the first external, any specified display or a certain screen offset, use the following
+command line arguments.
+
+- `--screen=external`                   Open cables on first external display
+- `--screen="Built-in Retina Display`   Open standalone on display named "Built-in Retina Display"
+- `--screen=1`                          Open standalone on second display (numbering starts at 0)
+- `--screen=200,200`                    Open standalone on current display 200px from the top left and 200px from the left
+
+This can be combined with the above arguments for presentation mode to always open on a specific display when running
+"on premise" and is handy for startup-scripts. Whenever a display is not found or an argument is not understood, cables
+will fall back to the current display with the current window settings.
+
 ## How can I let cables standalone run on my internal GPU instead of the dedicated one?
 
 If you need or want to run cables or patches on the internal GPU of your laptop instead of the dedicated one
