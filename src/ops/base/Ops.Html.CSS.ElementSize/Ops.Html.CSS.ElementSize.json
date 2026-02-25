@@ -60,5 +60,5 @@
         "ports": []
     },
     "license": "MIT",
-    "summary": "Set position left/right/top/bottom of a HTML element"
+    "summary": "Set Size of a HTML element"
 }

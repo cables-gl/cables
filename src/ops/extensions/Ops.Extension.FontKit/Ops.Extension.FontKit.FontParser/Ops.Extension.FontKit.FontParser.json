@@ -1,0 +1,117 @@
+{
+    "id": "54ddd764-966b-4a67-91a8-e033cea0b33f",
+    "created": 1771117441009,
+    "license": "MIT",
+    "authorName": "bust",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "bust",
+            "date": 1771117441035
+        }
+    ],
+    "dependencies": [
+        {
+            "src": "./fontkit.min.js",
+            "type": "commonjs"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Font File"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Tracking",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Center Lines",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Axis: wght (Weight)",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "SVG Path"
+            },
+            {
+                "type": 2,
+                "name": "Path Data"
+            },
+            {
+                "type": 3,
+                "name": "Glyph Paths"
+            },
+            {
+                "type": 3,
+                "name": "Glyph Positions"
+            },
+            {
+                "type": 2,
+                "name": "Font Object"
+            },
+            {
+                "type": 5,
+                "name": "Text Out"
+            },
+            {
+                "type": 0,
+                "name": "Text Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Text Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Ascender",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Descender",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "UnitsPerEm",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Axes"
+            },
+            {
+                "type": 0,
+                "name": "Tracking Out",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "Fgz9lb",
+    "summary": "Loads a font file, parses it with fontkit.js, and lays out a text string into individual glyph outlines."
+}

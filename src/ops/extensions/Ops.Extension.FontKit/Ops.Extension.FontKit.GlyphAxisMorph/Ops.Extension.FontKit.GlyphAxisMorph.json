@@ -1,0 +1,147 @@
+{
+    "id": "41cd7c16-b839-4fdb-83f7-561f968f00dd",
+    "created": 1771197364191,
+    "license": "MIT",
+    "authorName": "bust",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "bust",
+            "date": 1771117441035
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "bust",
+            "date": 1771170697269
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "bust",
+            "date": 1771197364192
+        },
+        {
+            "message": "Team.Machines.Fontkitglyphmorph renamed to Ops.Team.Machines.FontkitGlyphAxisMorph",
+            "type": "rename",
+            "author": "bust",
+            "date": 1771249523744
+        },
+        {
+            "message": "Team.Machines.FontkitGlyphAxisMorph renamed to Ops.Extension.FontKit.GlyphAxisMorph",
+            "type": "rename",
+            "author": "bust",
+            "date": 1771924087002
+        }
+    ],
+    "dependencies": [
+        {
+            "src": "./fontkit.min.js",
+            "type": "commonjs"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Font Object"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Tracking",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Line Height",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Axis Tag"
+            },
+            {
+                "type": 0,
+                "name": "Axis Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis Max",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Morph Values"
+            },
+            {
+                "type": 0,
+                "name": "Default Morph",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Skip Combined Path",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Center Lines",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Glyph Paths"
+            },
+            {
+                "type": 3,
+                "name": "Glyph Positions"
+            },
+            {
+                "type": 5,
+                "name": "Combined SVG Path"
+            },
+            {
+                "type": 0,
+                "name": "Text Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Text Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Glyph Count",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Text Out"
+            },
+            {
+                "type": 0,
+                "name": "Tracking Out",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Ready",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "exampleProjectId": "Fgz9lb",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Pre-calculates glyph outlines at axis min and max values, then interpolates coordinates arithmetically at render time — zero fontkit calls per frame."
+}

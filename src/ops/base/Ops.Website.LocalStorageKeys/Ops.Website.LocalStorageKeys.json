@@ -33,7 +33,7 @@
             }
         ]
     },
-    "summary": "Retrieve all keys (and values) stores in localstorage",
+    "summary": "Retrieve all keys (and values) stored  in localstorage",
     "docs": {
         "ports": [
             {

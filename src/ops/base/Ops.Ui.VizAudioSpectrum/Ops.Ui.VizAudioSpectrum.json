@@ -54,5 +54,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Vizualize an audionode object spectrum"
+    "summary": "Vizualize an audionode object spectrum",
+    "coreLibs": [
+        "webaudio"
+    ]
 }

@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "Unstrip an line point array",
+    "summary": "Unstrip a line point array",
     "docs": {
         "ports": []
     }
