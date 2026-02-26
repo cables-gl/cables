@@ -11,7 +11,6 @@
             "date": 1771170832261
         }
     ],
-    "dependencies": [],
     "layout": {
         "portsIn": [
             {
@@ -52,5 +51,10 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "exampleProjectId": "767gjb",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Applies geometric transformations per glyph via an array of values. Purely geometric — does not need the font, only Glyph Paths + Glyph Positions."
 }

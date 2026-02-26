@@ -11,7 +11,6 @@
             "date": 1771117441035
         }
     ],
-    "dependencies": [],
     "layout": {
         "portsIn": [
             {
@@ -48,5 +47,10 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "exampleProjectId": "767gjb",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Takes the per-glyph SVG paths and positions arrays and reconstructs a single combined SVG path string, ready for triangulation"
 }
