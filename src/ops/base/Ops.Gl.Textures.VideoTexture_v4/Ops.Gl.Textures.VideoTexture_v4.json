@@ -1,0 +1,283 @@
+{
+    "authorName": "pandur",
+    "id": "d6682ba5-6197-4033-b6db-ac288beeb720",
+    "created": 1772043179083,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "file"
+            },
+            {
+                "type": 0,
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "loop",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "group": "Audio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "mute",
+                "group": "Audio",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear"
+                ],
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "flip",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "speed",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "set time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Rewind",
+                "group": "Timing"
+            },
+            {
+                "type": 0,
+                "name": "Preload",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Interaction needed Button",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Interaction Needed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "CurrentTime",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Can Play Through",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Ended"
+            },
+            {
+                "type": 1,
+                "name": "Texture Updated"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error Message"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.VideoTexture2 renamed to Ops.Gl.Textures.VideoTexture_v2",
+            "author": "pandur",
+            "date": 1600088689393,
+            "type": "improvement"
+        },
+        {
+            "message": "cloned op from Ops.Gl.Textures.VideoTexture_v2",
+            "author": "pandur",
+            "date": 1669641033926,
+            "type": "improvement"
+        },
+        {
+            "message": " added core lib: interactionneededbutton",
+            "author": "pandur",
+            "date": 1669646398470,
+            "type": "improvement"
+        },
+        {
+            "message": "new output port: shows if user interaction is needed to start",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034423872
+        },
+        {
+            "message": "now needs to be triggered to update",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034433444
+        },
+        {
+            "message": "show user interaction button to start like audio output op",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1671034441701
+        },
+        {
+            "message": "Using automatic new frame callback if available for faster/smoother updates",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1715113571377
+        },
+        {
+            "message": "catch and display errors with negative playback rate on some browsers",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1718100994868
+        }
+    ],
+    "summary": "Play a video file and use it as a texture",
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "File to play"
+            },
+            {
+                "name": "play",
+                "text": "Start playback"
+            },
+            {
+                "name": "loop",
+                "text": "Loop file when it reaches the end"
+            },
+            {
+                "name": "Volume",
+                "text": "Audio volume"
+            },
+            {
+                "name": "mute",
+                "text": "mute audio"
+            },
+            {
+                "name": "flip",
+                "text": "Flip the texture"
+            },
+            {
+                "name": "speed",
+                "text": "Speed of playback"
+            },
+            {
+                "name": "set time",
+                "text": "Set time to trigger playback from"
+            },
+            {
+                "name": "Preload",
+                "text": "Load into memory - useful when loading from a URL"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            },
+            {
+                "name": "duration",
+                "text": "Duration of loaded media"
+            },
+            {
+                "name": "progress",
+                "text": "Playback progress"
+            },
+            {
+                "name": "Width",
+                "text": "Width of texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of texture"
+            }
+        ]
+    },
+    "exampleProjectId": "RQCm0m",
+    "coreLibs": [
+        "interactionneededbutton",
+        "cgl"
+    ],
+    "license": "MIT"
+}
