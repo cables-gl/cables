@@ -59,6 +59,7 @@ let active = false;
 let alreadyRetried = false;
 let constraints = null;
 let tc = null;
+let needsUpdate = true;
 
 textureOut.setRef(emptyTexture);
 
@@ -206,6 +207,11 @@ function camInitComplete(stream)
         available.set(true);
         playCam(inGenTex.get());
     };
+
+    videoElement.requestVideoFrameCallback(() =>
+    {
+        needsUpdate = true;
+    });
 }
 
 function isCorrectSize()

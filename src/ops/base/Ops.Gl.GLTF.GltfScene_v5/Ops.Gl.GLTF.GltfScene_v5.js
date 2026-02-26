@@ -242,7 +242,7 @@ function updatetitle()
 {
     let str = "";
 
-    if (inRender.get()) str += "x ";
+    if (!inRender.get()) str += "x ";
 
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {

@@ -1,7 +1,8 @@
 const
     array = op.inArray("array"),
     index = op.inValueInt("index"),
-    value = op.outObject("value");
+    value = op.outObject("value"),
+    found = op.outBoolNum("Found");
 
 let last = null;
 
@@ -18,6 +19,7 @@ function update()
     if (index.get() < 0)
     {
         value.set(null);
+        found.set(false);
         return;
     }
 
@@ -25,6 +27,7 @@ function update()
     if (!arr)
     {
         value.set(null);
+        found.set(false);
         return;
     }
 
@@ -32,11 +35,13 @@ function update()
     if (ind >= arr.length)
     {
         value.set(null);
+        found.set(false);
         return;
     }
     if (arr[ind])
     {
         value.setRef(arr[ind]);
+        found.set(true);
         last = arr[ind];
     }
 }

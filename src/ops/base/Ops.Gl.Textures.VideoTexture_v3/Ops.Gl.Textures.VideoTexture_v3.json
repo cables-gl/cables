@@ -218,6 +218,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1718100994868
+        },
+        {
+            "message": "fix bug where texture was updated too often",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1772044337659
         }
     ],
     "summary": "Play a video file and use it as a texture",

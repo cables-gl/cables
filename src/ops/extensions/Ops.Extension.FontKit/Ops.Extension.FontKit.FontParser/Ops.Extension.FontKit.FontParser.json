@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "bust",
             "date": 1771117441035
-        },
-        {
-            "message": "Team.Machines.FontkitFontParser renamed to Ops.Extension.FontKit.FontParser",
-            "type": "rename",
-            "author": "bust",
-            "date": 1771923985732
         }
     ],
     "dependencies": [

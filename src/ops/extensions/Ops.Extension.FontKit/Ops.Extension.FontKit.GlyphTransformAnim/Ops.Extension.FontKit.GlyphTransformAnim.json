@@ -8,25 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "bust",
-            "date": 1771117441035
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "bust",
-            "date": 1771170697269
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "bust",
             "date": 1771170832261
-        },
-        {
-            "message": "Team.Machines.FontkitGlyphTransformAnim renamed to Ops.Extension.FontKit.GlyphTransformAnim",
-            "type": "rename",
-            "author": "bust",
-            "date": 1771924023419
         }
     ],
     "dependencies": [],

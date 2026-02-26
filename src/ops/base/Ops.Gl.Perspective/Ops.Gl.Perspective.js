@@ -59,10 +59,7 @@ function changed()
 
 function perspectiveFovX(out, fovx, aspect, near, far)
 {
-    let nf;
     let f = 1 / (fovx) * 2;
-    // Math.tan(1 / fovx * 2),
-    // f=Math.max(0,f);
 
     out[0] = f;
     out[1] = 0;
@@ -81,7 +78,7 @@ function perspectiveFovX(out, fovx, aspect, near, far)
 
     if (far != null && far !== Infinity)
     {
-        nf = 1 / (near - far);
+        const nf = 1 / (near - far);
         out[10] = (far + near) * nf;
         out[14] = 2 * far * near * nf;
     }

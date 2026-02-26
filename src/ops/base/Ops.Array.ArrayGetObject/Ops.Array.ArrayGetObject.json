@@ -15,6 +15,11 @@
             {
                 "type": 2,
                 "name": "value"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
             }
         ]
     },
@@ -40,5 +45,14 @@
         ]
     },
     "issues": "",
-    "exampleProjectId": "7npL_M"
+    "exampleProjectId": "7npL_M",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "add \"found\" outport boolean",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1772020533412
+        }
+    ]
 }
