@@ -68,6 +68,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1725632781929
+        },
+        {
+            "message": "add current value of canvas mode as default value",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1772213600994
         }
     ],
     "issues": "",
