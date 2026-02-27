@@ -27,6 +27,7 @@ const
     inTranslZ = op.inFloat("Translate Z", 0.0),
 
     inPositions = op.inArray("Positions"),
+    inScales = op.inArray("Scalings"),
     inRots = op.inArray("Rotations"),
 
     inEvents = op.inBool("Events", true),
@@ -48,6 +49,7 @@ exec.onLinkChanged = removeBodies;
 let setPosition = false;
 let eventQueue = null;
 
+inScales.onChange =
 inRots.onChange =
 inDampLin.onChange =
 inDampAng.onChange =
@@ -167,13 +169,13 @@ function getPositions()
 {
     const translati = vec3.create();
     const scale = vec3.create();
+    let pos = inPositions.get() || [0, 0, 0];
+
     if (inTrans.get())
     {
         mat4.getScaling(scale, op.patch.cgl.mMatrix);
         mat4.getTranslation(translati, op.patch.cgl.mMatrix);
-        console.log("translati", translati);
     }
-    let pos = inPositions.get() || [0, 0, 0];
 
     for (let i = 0; i < pos.length; i += 3)
     {
@@ -229,6 +231,7 @@ function setup(world)
 
     const pos = getPositions();
     const rot = inRots.get();
+    const scal = inScales.get();
     let colliderDesc, collider;
     if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(inCollSizeY.get(), inCollRadius.get());
     else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(inCollSizeY.get(), inCollRadius.get());
@@ -298,6 +301,14 @@ function setup(world)
                     "w": rot[(i / 3) * 4 + 3]
 
                 }, true);
+        }
+
+        if (scal && scal.length >= i)
+        {
+            colliderDesc = RAPIER.ColliderDesc.cuboid(
+                scal[i + 0] / 2,
+                scal[i + 1] / 2,
+                scal[i + 2] / 2);
         }
 
         colliderDesc
