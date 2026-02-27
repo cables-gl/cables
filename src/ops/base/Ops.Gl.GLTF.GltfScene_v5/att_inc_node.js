@@ -30,10 +30,7 @@ const gltfNode = class
         this.skinRenderer = null;
         this.copies = [];
         this.warning = "";
-        if (this._node.scale && this._node.scale[0] < 0 && this._node.scale[1] < 0 && this._node.scale[2] < 0)
-        {
-            this.warning = "NEG SCALE";
-        }
+        if (this._node.scale && this._node.scale[0] < 0 || this._node.scale[1] < 0 || this._node.scale[2] < 0) this.warning = "NEG SCALE";
     }
 
     get skin()

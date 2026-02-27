@@ -31,6 +31,11 @@
                 "objType": "element"
             },
             {
+                "type": 0,
+                "name": "Set Family",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "Font Family"
             },

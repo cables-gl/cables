@@ -1,5 +1,6 @@
 const
     inEle = op.inObject("Element", null, "element"),
+    inSetFam = op.inBool("Set Family", true),
     inFamily = op.inString("Font Family", "sans serif"),
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
@@ -21,6 +22,7 @@ inLetterSpace.onChange =
     inWeight.onChange =
     inAlign.onChange =
     inLineHeight.onChange =
+    inSetFam.onChange =
         update;
 
 op.onDelete = remove;
@@ -43,7 +45,7 @@ function update()
 
     if (ele && ele.style)
     {
-        ele.style["font-family"] = inFamily.get();
+        if (inSetFam.get()) ele.style["font-family"] = inFamily.get();
         ele.style["letter-spacing"] = inLetterSpace.get() + "px";
 
         ele.style["font-weight"] = inWeight.get();

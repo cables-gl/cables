@@ -11,6 +11,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1751294428233
+        },
+        {
+            "message": "add option to output key for missing values",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1772126327968
         }
     ],
     "authorName": "stephan",
@@ -24,6 +30,11 @@
             {
                 "type": 5,
                 "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Output Key if missing",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

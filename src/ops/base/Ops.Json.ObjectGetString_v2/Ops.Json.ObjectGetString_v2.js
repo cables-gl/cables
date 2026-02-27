@@ -1,6 +1,7 @@
 const
     data = op.inObject("data"),
     key = op.inString("Key"),
+    returnKeyIn = op.inBool("Output Key if missing", false),
     result = op.outString("Result"),
     found = op.outBoolNum("Found");
 
@@ -14,29 +15,29 @@ op.setUiAttrib({ "extendTitlePort": key.name });
 key.setUiAttribs({ "stringTrim": true });
 
 key.onChange =
+returnKeyIn.onChange =
 data.onChange = exec;
 
 function exec()
 {
+    let resultString = "";
+    let keyFound = false;
+    if (returnKeyIn.get())
+    {
+        resultString = key.get();
+    }
     if (data.get())
     {
         const value = data.get()[key.get()];
         const isNull = value === undefined || value === null;
 
-        if (isNull)
+        if (!isNull)
         {
-            result.set("");
-            found.set(false);
-        }
-        else
-        {
-            result.set(String(value));
-            found.set(true);
+            resultString = String(value);
+            keyFound = true;
         }
     }
-    else
-    {
-        result.set("");
-        found.set(false);
-    }
+
+    result.set(resultString);
+    found.set(keyFound);
 }
