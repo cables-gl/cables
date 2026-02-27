@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "9d66516f-d234-4114-b1d3-67b8e60f5dc6",
-    "created": 1669641033925,
+    "id": "d6682ba5-6197-4033-b6db-ac288beeb720",
+    "created": 1772043179083,
     "layout": {
         "portsIn": [
             {
@@ -33,12 +33,6 @@
                 "name": "mute",
                 "group": "Audio",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Update FPS",
-                "group": "Texture",
-                "subType": "number"
             },
             {
                 "type": 0,
@@ -140,6 +134,10 @@
                 "name": "Ended"
             },
             {
+                "type": 1,
+                "name": "Texture Updated"
+            },
+            {
                 "type": 0,
                 "name": "Width",
                 "subType": "number"
@@ -157,11 +155,6 @@
             {
                 "type": 0,
                 "name": "Has Error",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Auto FPS",
                 "subType": "boolean"
             },
             {
@@ -218,12 +211,6 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1718100994868
-        },
-        {
-            "message": "fix bug where texture was updated too often",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1772044337659
         }
     ],
     "summary": "Play a video file and use it as a texture",

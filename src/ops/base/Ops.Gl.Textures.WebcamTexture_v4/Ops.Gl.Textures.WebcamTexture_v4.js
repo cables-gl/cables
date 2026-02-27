@@ -207,11 +207,6 @@ function camInitComplete(stream)
         available.set(true);
         playCam(inGenTex.get());
     };
-
-    videoElement.requestVideoFrameCallback(() =>
-    {
-        needsUpdate = true;
-    });
 }
 
 function isCorrectSize()
@@ -338,7 +333,7 @@ inTrigger.onTriggered = () =>
 {
     if (!initingDevices && inActive.get())
     {
-        if (started && camsLoaded && active)
+        if (started && camsLoaded && active && needsUpdate)
         {
             updateTexture();
             outUpdate.trigger();

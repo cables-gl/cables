@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1745918304314
+        },
+        {
+            "message": "output keys of anim as array",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1772020557042
         }
     ],
     "layout": {
@@ -28,6 +34,10 @@
                 "type": 0,
                 "name": "Length Seconds",
                 "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Keys"
             }
         ]
     },

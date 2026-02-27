@@ -9,30 +9,6 @@
             "type": "new op",
             "author": "bust",
             "date": 1771117441035
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "bust",
-            "date": 1771170697269
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "bust",
-            "date": 1771197364192
-        },
-        {
-            "message": "Team.Machines.Fontkitglyphmorph renamed to Ops.Team.Machines.FontkitGlyphAxisMorph",
-            "type": "rename",
-            "author": "bust",
-            "date": 1771249523744
-        },
-        {
-            "message": "Team.Machines.FontkitGlyphAxisMorph renamed to Ops.Extension.FontKit.GlyphAxisMorph",
-            "type": "rename",
-            "author": "bust",
-            "date": 1771924087002
         }
     ],
     "dependencies": [

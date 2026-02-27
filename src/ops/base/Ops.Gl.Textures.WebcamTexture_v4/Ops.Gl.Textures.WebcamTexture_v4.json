@@ -1,0 +1,234 @@
+{
+    "id": "e4209c59-8d78-4fa9-95e4-805fa820c3b6",
+    "authorName": "pandur",
+    "created": 1772043403202,
+    "changelog": [
+        {
+            "message": "now only asks for permission if \"active\"-port is enables",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1671034796647
+        },
+        {
+            "message": "Fixed problem with loading status not finishing the loading",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715838799433
+        },
+        {
+            "message": "Set parentelement to non canvas so popout/external canvas can continue to work",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1716826556596
+        },
+        {
+            "message": "dont show error console, when camera was not found",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1765358932860
+        },
+        {
+            "message": "Texture will only be updated when there was a new frame available to capture from the webcam",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1772044299294
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Generate Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Webcam Input index",
+                "group": "Camera",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Requested Width",
+                "group": "Camera",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Requested Height",
+                "group": "Camera",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show HTML Element",
+                "group": "Video Element",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "CSS",
+                "group": "Video Element"
+            },
+            {
+                "type": 0,
+                "name": "Element Flip X",
+                "group": "Video Element",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Element Flip Y",
+                "group": "Video Element",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Available",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Size Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Height",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            },
+            {
+                "type": 2,
+                "name": "HTML Element",
+                "objType": "element"
+            },
+            {
+                "type": 3,
+                "name": "Available devices"
+            },
+            {
+                "type": 5,
+                "name": "Active device"
+            },
+            {
+                "type": 1,
+                "name": "Texture updated"
+            }
+        ]
+    },
+    "summary": "Use your webcam camera as a texture",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "update the output texture with the current webcam picture"
+            },
+            {
+                "name": "Generate Texture",
+                "text": "activate / inactivate genration of the output texture"
+            },
+            {
+                "name": "Webcam Input index",
+                "text": "index of webcam to use from available cameras"
+            },
+            {
+                "name": "Requested Width",
+                "text": "request width from webcam"
+            },
+            {
+                "name": "Requested Height",
+                "text": "request height from webcam"
+            },
+            {
+                "name": "Show HTML Element",
+                "text": "display the html video element"
+            },
+            {
+                "name": "CSS",
+                "text": "css styles for the html video element"
+            },
+            {
+                "name": "Texture",
+                "text": "texture output"
+            },
+            {
+                "name": "Ratio",
+                "text": "aspect ratio"
+            },
+            {
+                "name": "Available",
+                "text": "webcam ready"
+            },
+            {
+                "name": "Size Width",
+                "text": "output size"
+            },
+            {
+                "name": "Size Height",
+                "text": "output height"
+            },
+            {
+                "name": "HTML Element",
+                "text": "the video element"
+            },
+            {
+                "name": "Available devices",
+                "text": "array of available devices"
+            },
+            {
+                "name": "Texture updated",
+                "text": "output trigger on updated texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_copytexture",
+        "cgl"
+    ],
+    "caniusequery": "",
+    "exampleProjectId": "iwaEwm",
+    "license": "MIT"
+}
