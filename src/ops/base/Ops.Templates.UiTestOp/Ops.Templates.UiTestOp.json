@@ -19,7 +19,7 @@
             },
             {
                 "type": 0,
-                "name": "Loading",
+                "name": "Loading Indicator",
                 "subType": "boolean"
             },
             {
@@ -38,6 +38,11 @@
                 "type": 0,
                 "name": "Hint",
                 "group": "Warnings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Extend Title",
                 "subType": "boolean"
             },
             {

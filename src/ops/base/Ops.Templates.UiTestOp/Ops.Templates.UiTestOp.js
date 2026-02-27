@@ -1,9 +1,10 @@
 const
     inLoadingTask = op.inBool("Loading Task", false),
-    inUiLoading = op.inBool("Loading", false),
+    inUiLoading = op.inBool("Loading Indicator", false),
     inWarning1 = op.inBool("Warning", false),
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
+    inUiExtTitle = op.inBool("Extend Title", false),
     inNotWorking = op.inBool("Not Working", false),
     innum = op.inFloatSlider("Slider", 0),
     inGrad = op.inGradient("Gradient"),
@@ -29,6 +30,14 @@ op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
 op.setPortGroup("Modal", [inPrompt, inModal]);
 
 let loadingId = null;
+
+inUiExtTitle.onChange = () =>
+{
+    if (inUiExtTitle.get())
+        op.setUiAttrib({ "extendTitle": "hello world" });
+    else
+        op.setUiAttrib({ "extendTitle": "" });
+};
 
 op.onDelete = () =>
 {

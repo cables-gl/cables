@@ -745,6 +745,21 @@ export class Geometry
     }
 
     /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} z
+     */
+    scale(x, y, z)
+    {
+        for (let i = 0; i < this.vertices.length; i += 3)
+        {
+            this.vertices[i + 0] *= x;
+            this.vertices[i + 1] *= y;
+            this.vertices[i + 2] *= z;
+        }
+    }
+
+    /**
      * @param {boolean} x
      * @param {boolean} y
      * @param {boolean} z
