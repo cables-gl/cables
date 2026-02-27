@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1720942542489
+        },
+        {
+            "message": "Use current modelmatrix information like translation and scale",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1772191797235
         }
     ],
     "layout": {

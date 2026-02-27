@@ -289,6 +289,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1770386236474
+        },
+        {
+            "message": "Added input field to filter nodes,materials,geometries by name",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772203535449
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

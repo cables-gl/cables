@@ -1,5 +1,7 @@
 let tab = null;
 let maxChilds = 100;
+let nodeFilter = "";
+let nodeFilterTo = null;
 
 function closeTab()
 {
@@ -31,6 +33,14 @@ function printNode(html, node, level)
 {
     if (!gltf) return;
 
+    if (nodeFilter && !node.name.toLowerCase().includes(nodeFilter))
+    {
+        for (let i = 0; i < Math.min(maxChilds, node.children.length); i++)
+            html = printNode(html, gltf.nodes[node.children[i]], level + 1);
+
+        return html;
+    }
+
     html += "<tr class=\"row\">";
 
     let ident = "";
@@ -54,7 +64,14 @@ function printNode(html, node, level)
 
     if (node.mesh)
     {
-        html += "<td>";
+        let namestt = "";
+        for (let i = 0; i < node.mesh.meshes.length; i++)
+        {
+            if (i > 0)namestt += ", ";
+            namestt += node.mesh.meshes[i].name || "";
+        }
+
+        html += "<td style=\"text-overflow:ellipsis;max-width:100px;overflow:hidden;\" class=\"tt\" data-tt=\"" + namestt + "\">";
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
             if (i > 0)html += ", ";
@@ -121,9 +138,9 @@ function printNode(html, node, level)
     let hideclass = "";
     if (node.hidden)hideclass = "node-hidden";
 
-    html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','transform')\" class=\"treebutton\">Transform</a>";
-    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','hierarchy')\" class=\"treebutton\">Hierarchy</a>";
-    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "')\" class=\"treebutton\">Node</a>";
+    html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','transform')\" class=\"iconbutton-small tt\" data-tt=\"Trans\"><span class=\"icon icon-gizmo\"></span></a>";
+    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','hierarchy')\" class=\"iconbutton-small tt\" data-tt=\"Hierarchy\"><span class=\"icon icon-list\"></span></a>";
+    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "')\" class=\"iconbutton-small tt\" data-tt=\"Node\"><span class=\"icon icon-op\"></span></a>";
 
     if (node.hasSkin())
         html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "',false,{skin:true});\" class=\"treebutton\">Skin</a>";
@@ -145,6 +162,8 @@ function printNode(html, node, level)
 
 function printMaterial(mat, idx)
 {
+    if (nodeFilter && !mat.name.toLowerCase().includes(nodeFilter)) return "";
+
     let html = "<tr>";
     html += " <td>" + idx + "</td>";
     html += " <td>" + mat.name + "</td>";
@@ -172,11 +191,12 @@ function printMaterial(mat, idx)
 
 function printInfo()
 {
-    if (!gltf) return;
+    if (!gltf) return tab.html("//");
 
     const startTime = performance.now();
     const sizes = {};
     let html = "<div style=\"overflow:scroll;width:100%;height:100%\">";
+    html += "<input id=\"gltfsearchnodes\" value=\"" + nodeFilter + "\" type=\"search\" style=\"width: 150px;top:40px;margin-right:20px;position:absolute;right:0px;\" placeholder=\"Filter\">";
 
     html += "File: <a href=\"" + CABLES.platform.getCablesUrl() + "/asset/patches/?filename=" + inFile.get() + "\" target=\"_blank\">" + CABLES.basename(inFile.get()) + "</a><br/>";
 
@@ -191,7 +211,7 @@ function printInfo()
 
     html += "<tr>";
     html += " <th colspan=\"21\">Name</th>";
-    html += " <th>Mesh</th>";
+    html += " <th>Mesh Geometry</th>";
     html += " <th>Skin</th>";
     html += " <th>Material</th>";
     html += " <th>Transform</th>";
@@ -243,6 +263,7 @@ function printInfo()
     html += " <th>Material</th>";
     html += " <th>Vertices</th>";
     html += " <th>Attributes</th>";
+    html += " <th>Expose</th>";
     html += "</tr>";
 
     let sizeBufferViews = [];
@@ -251,6 +272,8 @@ function printInfo()
 
     for (let i = 0; i < gltf.json.meshes.length; i++)
     {
+        if (nodeFilter && !gltf.json.meshes[i].name.toLowerCase().includes(nodeFilter)) continue;
+
         html += "<tr>";
         html += "<td>" + gltf.json.meshes[i].name || "?" + "</td>";
 
@@ -310,7 +333,7 @@ function printInfo()
         for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
-            html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeGeom('" + gltf.json.meshes[i].name + "'," + j + ")\" class=\"treebutton\">Geometry</a>";
+
             html += "<br/>";
 
             if (gltf.json.meshes[i].primitives[j].targets)
@@ -322,6 +345,14 @@ function printInfo()
 
                 html += "<br/>";
             }
+        }
+
+        html += "</td>";
+
+        html += "<td>";
+        for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        {
+            html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeGeom('" + gltf.json.meshes[i].name + "')\" class=\"iconbutton tt\" data-tt=\"create geometry op\"><span class=\"icon icon-cube\"></span></a>";
         }
 
         html += "</td>";
@@ -643,6 +674,19 @@ function printInfo()
 
     tab.addEventListener("close", closeTab);
     tab.html(html);
+
+    document.getElementById("gltfsearchnodes").addEventListener("input", () =>
+    {
+        clearTimeout(nodeFilterTo);
+        nodeFilter = document.getElementById("gltfsearchnodes").value;
+        nodeFilterTo = setTimeout(() =>
+        {
+            maxChilds = 9999999;
+
+            closeTab();
+            printInfo();
+        }, 500);
+    });
 
     CABLES.UI.Collapsable.setup(ele.byId("groupNodes"), ele.byId("sectionNodes"), false);
     CABLES.UI.Collapsable.setup(ele.byId("groupMaterials"), ele.byId("materialtable"), true);

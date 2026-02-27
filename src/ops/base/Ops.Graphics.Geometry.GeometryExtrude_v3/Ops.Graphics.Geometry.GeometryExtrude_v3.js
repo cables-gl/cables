@@ -79,7 +79,7 @@ inGeom.onChange = () =>
 
     let verts = [];
     let norms = [];
-    const h = Math.min(inHeight.get(), -inHeight.get());
+    const h = inHeight.get();// Math.min(inHeight.get(), -inHeight.get());
 
     if (inExtrudeWalls.get())
         for (let i = 0; i < geom.verticesIndices.length; i += 3)
