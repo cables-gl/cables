@@ -1,0 +1,1 @@
+Will close the current session of standalone. Will show a warning if patch is in unsaved state.

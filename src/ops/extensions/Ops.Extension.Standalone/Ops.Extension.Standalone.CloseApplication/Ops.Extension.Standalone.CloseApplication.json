@@ -1,0 +1,34 @@
+{
+    "id": "3ec17521-222f-47e5-8495-b2cde4433297",
+    "created": 1772199974439,
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1772199974439
+        }
+    ],
+    "authorName": "stephan",
+    "docs": {
+        "ports": [
+            {
+                "name": "Quit",
+                "text": "Quit standalone"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Quit"
+            }
+        ]
+    },
+    "coreLibs": [
+        "standalone_electron"
+    ],
+    "summary": "Close cables standalone on trigger"
+}
