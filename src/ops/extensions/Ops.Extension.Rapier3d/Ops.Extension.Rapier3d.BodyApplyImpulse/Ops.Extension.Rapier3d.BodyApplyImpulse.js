@@ -34,4 +34,6 @@ exec.onTriggered = () =>
         }
         apply = false;
     }
+
+    next.trigger();
 };
