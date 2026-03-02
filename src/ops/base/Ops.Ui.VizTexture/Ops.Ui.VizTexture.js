@@ -10,6 +10,7 @@ const
     inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
+    inLod = op.inInt("Mip Level", 0),
     outTex = op.outTexture("Texture Out"),
     outInfo = op.outString("Info");
 
@@ -115,6 +116,7 @@ op.renderVizLayerGl = (ctx, layer) =>
         this._shaderTexUniformH = new CGL.Uniform(this._shader, "f", "height", portTex.height);
         this._shaderTypeUniform = new CGL.Uniform(this._shader, "f", "type", 0);
         this._shaderTimeUniform = new CGL.Uniform(this._shader, "f", "time", 0);
+        this._shaderLodUniform = new CGL.Uniform(this._shader, "f", "lod", inLod);
     }
 
     cgl.pushPMatrix();
@@ -258,7 +260,7 @@ op.renderVizLayerGl = (ctx, layer) =>
                     ctx.imageSmoothingEnabled = true;
                 }
                 else
-                if (sizeTex[0] == 1)
+                if (sizeTex[0] == 1 || inLod > 0)
                 {
                     ctx.imageSmoothingEnabled = false;// workaround filtering problems
                     ctx.drawImage(cgl.canvas,
