@@ -8,6 +8,12 @@
             "type": "new",
             "author": "pandur",
             "date": 1716804941340
+        },
+        {
+            "message": "op String.ConcatMultiPort was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1772448173839
         }
     ],
     "layout": {

@@ -1,0 +1,55 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Strings_0",
+                "longPort": 3,
+                "group": "Strings"
+            },
+            {
+                "type": 2,
+                "name": "Strings_1",
+                "group": "Strings"
+            },
+            {
+                "type": 2,
+                "name": "Strings_2",
+                "uititle": "add port",
+                "group": "Strings"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry Result"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "862d2929-41db-42a5-869c-79ef09010150",
+    "created": 1772276061004,
+    "summary": "merge multiple geometries into one",
+    "exampleProjectId": "4gsNve",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Geometry.GeometryMergeSimple renamed to Ops.Graphics.GeometryMergeSimple",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1694677414136
+        },
+        {
+            "message": "new version v2: multiport op instead of only two meshes",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1772448362836
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

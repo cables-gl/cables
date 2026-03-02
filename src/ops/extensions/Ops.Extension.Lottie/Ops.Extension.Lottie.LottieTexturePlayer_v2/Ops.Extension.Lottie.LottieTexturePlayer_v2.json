@@ -4,38 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1655121696557
-        },
-        {
-            "message": "Ops.User.pandur.LottieTexturePlayer2 renamed to Ops.Dev.LottieTexturePlayer2",
-            "author": "pandur",
-            "date": 1655123313551
-        },
-        {
-            "message": " added lib: bodymovin.js",
-            "author": "pandur",
-            "date": 1655133292573
-        },
-        {
-            "message": " removed lib: bodymovin.js",
-            "author": "pandur",
-            "date": 1655133325710
-        },
-        {
-            "message": " added lib: lottie_canvas.min.js",
-            "author": "pandur",
-            "date": 1655133339478
-        },
-        {
-            "message": "Ops.Dev.LottieTexturePlayer2 renamed to Ops.Libs.Lottie.LottieTexturePlayer_v2",
-            "author": "pandur",
-            "date": 1666274900697
-        },
-        {
-            "message": "Ops.Libs.Lottie.LottieTexturePlayer_v2 renamed to Ops.Extension.Lottie.LottieTexturePlayer_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915370579
+            "date": 1655121696557,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
