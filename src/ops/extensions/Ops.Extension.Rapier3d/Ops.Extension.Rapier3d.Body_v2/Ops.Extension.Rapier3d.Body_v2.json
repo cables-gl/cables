@@ -123,6 +123,10 @@
             },
             {
                 "type": 3,
+                "name": "Scalings"
+            },
+            {
+                "type": 3,
                 "name": "Rotations"
             },
             {
