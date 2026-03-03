@@ -24,6 +24,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1769596342728
+        },
+        {
+            "message": "Bug fixes: VR Support output now correctly reflects device support; fixed session restart after error; fixed race condition with reference spaces on first frame; handle external session end (headset removed); proper GPU resource cleanup on session end and op delete",
+            "type": "bugfix",
+            "author": "andrejhronco",
+            "date": 1740960000000
         }
     ],
     "authorName": "pandur",

@@ -21,7 +21,6 @@ const
     outDepth = op.outTexture("Texture Depth");
 
 const cgl = op.patch.cgl;
-const canvas = op.patch.cgl.canvas.parentElement;
 
 op.setPortGroup("Startbutton", [inButtonStyle, inShowButton]);
 op.setPortGroup("Texture", [inRender2Tex, msaa]);
@@ -51,7 +50,7 @@ inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.g
 if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
     (r) =>
     {
-        outVr.set(true);
+        outVr.set(r);
 
         if (r) initButton();
         else removeButton();
@@ -61,6 +60,7 @@ else removeButton();
 op.onDelete = () =>
 {
     removeButton();
+    if (fb) fb.delete();
 };
 
 inShowButton.onChange = () =>
@@ -69,11 +69,15 @@ inShowButton.onChange = () =>
     else initButton();
 };
 
-function stopVr()
+function onSessionEnd()
 {
-    if (xrSession)xrSession.end();
     xrSession = null;
     outSession.set(false);
+    refSpaceLocal = null;
+    refSpaceLocalFloor = null;
+    outHasLocalFloor.set(false);
+
+    if (fb) { fb.delete(); fb = null; }
 
     cgl.tempData.xrSession = null;
     cgl.tempData.xrFrame = null;
@@ -81,8 +85,15 @@ function stopVr()
     cgl.tempData.xrReferenceSpace = null;
 }
 
+function stopVr()
+{
+    if (xrSession) xrSession.end(); // triggers 'end' event → onSessionEnd
+}
+
 function startVr()
 {
+    if (!xr) { op.error("WebXR not supported"); return; }
+
     if (xrSession)
     {
         stopVr();
@@ -98,33 +109,29 @@ function startVr()
         async (session) =>
         {
             xrSession = session;
+            hadError = false;
+            xrSession.addEventListener("end", onSessionEnd);
             outSession.set(true);
 
             xrSession.requestReferenceSpace("local").then(
                 (refSpace) =>
                 {
                     refSpaceLocal = refSpace;
-                });
+                }).catch((e) => { op.error("XR local reference space failed: " + e); });
 
             xrSession.requestReferenceSpace("local-floor").then(
                 (refSpace) =>
                 {
                     refSpaceLocalFloor = refSpace;
                     outHasLocalFloor.set(true);
-                });
+                }).catch(() => { /* local-floor is optional, not all devices support it */ });
 
-            if (xrSession)
-            {
-                await cgl.gl.makeXRCompatible();
+            await cgl.gl.makeXRCompatible();
 
-                let canvas = cgl.canvas;
-                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+            webGLRenContext = cgl.canvas.getContext("webgl2", { "xrCompatible": true });
 
-                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
-                xrSession.requestAnimationFrame(onXRFrame);
-
-                console.log("enabledFeatures", xrSession.enabledFeatures);
-            }
+            xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+            xrSession.requestAnimationFrame(onXRFrame);
         },
         (err) =>
         {
@@ -135,16 +142,19 @@ function startVr()
 
 function onXRFrame(hrTime, xrFrame)
 {
+    if (!xrSession) return;
     if (hadError) return;
 
-    let xrSession = xrFrame.session;
-    xrSession.requestAnimationFrame(onXRFrame);
+    const frameSession = xrFrame.session;
+    frameSession.requestAnimationFrame(onXRFrame);
+
+    if (!refSpaceLocalFloor && !refSpaceLocal) return;
 
     try
     {
         xrViewerPose = xrFrame.getViewerPose(refSpaceLocalFloor || refSpaceLocal);
 
-        cgl.tempData.xrSession = xrSession;
+        cgl.tempData.xrSession = frameSession;
         cgl.tempData.xrFrame = xrFrame;
         cgl.tempData.xrViewerPose = xrViewerPose;
 
@@ -155,14 +165,15 @@ function onXRFrame(hrTime, xrFrame)
 
         outPose.setRef(xrViewerPose);
 
-        if (xrViewerPose)
+        glLayer = frameSession.renderState.baseLayer;
+        if (xrViewerPose && glLayer)
         {
-            glLayer = xrSession.renderState.baseLayer;
             webGLRenContext.bindFramebuffer(webGLRenContext.FRAMEBUFFER, glLayer.framebuffer);
         }
 
         op.patch.updateAnims();
 
+        op.patch.cg = cgl;
         cgl.renderStart(cgl);
 
         if (inRender2Tex.get()) r2texStart();
@@ -171,8 +182,6 @@ function onXRFrame(hrTime, xrFrame)
         else cgl.gl.clearColor(0, 0, 0, 0);
 
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-        op.patch.cg = cgl;
 
         const views = xrViewerPose ? xrViewerPose.views : [];
         for (let i = 0; i < views.length; i++)
@@ -192,7 +201,7 @@ function onXRFrame(hrTime, xrFrame)
 
         if (inRender2Tex.get()) r2texEnd();
 
-        cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, glLayer.framebuffer); // gllayer has a default framebuffer.... interferes with cables fb stack...
+        if (glLayer) cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, glLayer.framebuffer); // gllayer has a default framebuffer.... interferes with cables fb stack...
 
         nextPre.trigger();
 
@@ -230,6 +239,7 @@ function onXRFrame(hrTime, xrFrame)
     {
         op.error(e);
         hadError = true;
+        try { cgl.renderEnd(cgl); } catch (_) {}
     }
 }
 
@@ -281,11 +291,7 @@ function renderEye(view)
 
 function initButton()
 {
-    if (buttonEle)
-    {
-        removeButton();
-        buttonEle = null;
-    }
+    if (buttonEle) removeButton();
 
     buttonEle = document.createElement("div");
     let container = op.patch.cgl.canvas.parentElement;
@@ -297,7 +303,7 @@ function initButton()
 
 function removeButton()
 {
-    if (buttonEle)buttonEle.remove();
+    if (buttonEle) { buttonEle.remove(); buttonEle = null; }
 }
 
 msaa.onChange = () =>
@@ -313,8 +319,6 @@ function r2texStart()
 
     if (!fb)
     {
-        if (fb) fb.delete();
-
         let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
         let selectFilter = CGL.Texture.FILTER_NEAREST;
 
