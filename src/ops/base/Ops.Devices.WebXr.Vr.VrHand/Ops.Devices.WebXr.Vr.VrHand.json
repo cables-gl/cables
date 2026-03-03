@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1769525326491
+        },
+        {
+            "message": "fix crashes when joints not fully tracked, guard gripSpace null, clear stale outputs when hand lost, pre-allocate bone buffer, replace dist3d with squared comparison",
+            "type": "bugfix",
+            "author": "andrejhronco",
+            "date": 1772582400000
         }
     ],
     "authorName": "pandur",

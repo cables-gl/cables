@@ -62,20 +62,22 @@ function updateUi()
     op.setUiAttrib({ "extendTitle": inHand.get() });
 }
 
-function dist3d(a, b)
+function dist3dSq(a, b)
 {
     const xd = b[0] - a[0];
     const yd = b[1] - a[1];
     const zd = b[2] - a[2];
 
-    return Math.sqrt(xd * xd + yd * yd + zd * zd);
+    return xd * xd + yd * yd + zd * zd;
 }
+
+const boneBuffer = new Float32Array(bones.length * 6);
 
 inUpdate.onTriggered = () =>
 {
     let found = false;
 
-    if (op.patch.cgl.tempData.xrSession)
+    if (op.patch.cgl.tempData.xrSession && cgl.tempData.xrFrame)
     {
         let xrSession = op.patch.cgl.tempData.xrSession;
 
@@ -99,43 +101,47 @@ inUpdate.onTriggered = () =>
 
                 /// ///////////////////
 
-                outIndexRay.setRef(
-                    [
-                        jointPositions["index-finger-phalanx-intermediate"][0],
-                        jointPositions["index-finger-phalanx-intermediate"][1],
-                        jointPositions["index-finger-phalanx-intermediate"][2],
-                        jointPositions["index-finger-tip"][0],
-                        jointPositions["index-finger-tip"][1],
-                        jointPositions["index-finger-tip"][2]
-                    ]);
+                if (jointPositions["index-finger-phalanx-intermediate"] && jointPositions["index-finger-tip"])
+                    outIndexRay.setRef(
+                        [
+                            jointPositions["index-finger-phalanx-intermediate"][0],
+                            jointPositions["index-finger-phalanx-intermediate"][1],
+                            jointPositions["index-finger-phalanx-intermediate"][2],
+                            jointPositions["index-finger-tip"][0],
+                            jointPositions["index-finger-tip"][1],
+                            jointPositions["index-finger-tip"][2]
+                        ]);
 
-                outWristRay.setRef(
-                    [
-                        jointPositions.wrist[0],
-                        jointPositions.wrist[1],
-                        jointPositions.wrist[2],
-                        jointPositions["index-finger-phalanx-proximal"][0],
-                        jointPositions["index-finger-phalanx-proximal"][1],
-                        jointPositions["index-finger-phalanx-proximal"][2]
+                if (jointPositions.wrist && jointPositions["index-finger-phalanx-proximal"])
+                    outWristRay.setRef(
+                        [
+                            jointPositions.wrist[0],
+                            jointPositions.wrist[1],
+                            jointPositions.wrist[2],
+                            jointPositions["index-finger-phalanx-proximal"][0],
+                            jointPositions["index-finger-phalanx-proximal"][1],
+                            jointPositions["index-finger-phalanx-proximal"][2]
+                        ]);
 
-                    ]);
-
-                if (dist3d(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.01)
+                if (jointPositions["thumb-tip"] && jointPositions["index-finger-tip"])
                 {
-                    if (!wasClicked)
+                    if (dist3dSq(jointPositions["thumb-tip"], jointPositions["index-finger-tip"]) < 0.0001)
                     {
-                        wasClicked = true;
-                        outClicked.trigger();
+                        if (!wasClicked)
+                        {
+                            wasClicked = true;
+                            outClicked.trigger();
+                        }
                     }
-                }
-                else
-                {
-                    wasClicked = false;
+                    else
+                    {
+                        wasClicked = false;
+                    }
                 }
 
                 /// ////////////////////
 
-                const boneArray = [];
+                let boneCount = 0;
 
                 for (const [a, b] of bones)
                 {
@@ -143,33 +149,46 @@ inUpdate.onTriggered = () =>
                     const pb = jointPositions[b];
                     if (!pa || !pb) continue;
 
-                    boneArray.push(pa[0], pa[1], pa[2]);
-                    boneArray.push(pb[0], pb[1], pb[2]);
+                    boneBuffer[boneCount++] = pa[0];
+                    boneBuffer[boneCount++] = pa[1];
+                    boneBuffer[boneCount++] = pa[2];
+                    boneBuffer[boneCount++] = pb[0];
+                    boneBuffer[boneCount++] = pb[1];
+                    boneBuffer[boneCount++] = pb[2];
                 }
 
-                outBones.setRef(boneArray);
+                outBones.setRef(boneBuffer.subarray(0, boneCount));
 
-                let controlPose = cgl.tempData.xrFrame.getPose(inputSources[i].gripSpace, cgl.tempData.xrReferenceSpace);
-                if (controlPose && controlPose.transform)
+                if (inputSources[i].gripSpace)
                 {
-                    cgl.pushModelMatrix();
+                    let controlPose = cgl.tempData.xrFrame.getPose(inputSources[i].gripSpace, cgl.tempData.xrReferenceSpace);
+                    if (controlPose && controlPose.transform)
+                    {
+                        cgl.pushModelMatrix();
 
-                    mat4.multiply(cgl.mMatrix, cgl.mMatrix, controlPose.transform.matrix);
-                    outX.set(controlPose.transform.position.x);
-                    outY.set(controlPose.transform.position.y);
-                    outZ.set(controlPose.transform.position.z);
+                        mat4.multiply(cgl.mMatrix, cgl.mMatrix, controlPose.transform.matrix);
+                        outX.set(controlPose.transform.position.x);
+                        outY.set(controlPose.transform.position.y);
+                        outZ.set(controlPose.transform.position.z);
 
-                    outTransformed.trigger();
+                        outTransformed.trigger();
 
-                    cgl.popModelMatrix();
+                        cgl.popModelMatrix();
+                    }
                 }
-                else op.log("vr controller: no controlpose transform?!");
 
                 break;
             }
         }
     }
-    if (!found) outGp.setRef(null);
+    if (!found)
+    {
+        outGp.setRef(null);
+        outBones.setRef(null);
+        outIndexRay.setRef(null);
+        outWristRay.setRef(null);
+        wasClicked = false;
+    }
 
     outFound.set(found);
 
