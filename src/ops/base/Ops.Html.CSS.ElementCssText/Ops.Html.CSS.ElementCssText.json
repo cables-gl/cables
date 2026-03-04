@@ -21,6 +21,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1738925035484
+        },
+        {
+            "message": "added text-decoration parameter",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1772548171529
         }
     ],
     "layout": {
@@ -56,6 +62,17 @@
                     "Center",
                     "Right",
                     "Justify"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Text Decoration index",
+                "values": [
+                    "None",
+                    "Underline",
+                    "Overline",
+                    "Line-Through"
                 ],
                 "subType": "integer"
             },

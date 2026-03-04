@@ -50,11 +50,6 @@
                 "subType": "boolean"
             },
             {
-                "type": 0,
-                "name": "Found Skin",
-                "subType": "boolean"
-            },
-            {
                 "type": 3,
                 "name": "Target Names"
             },
@@ -78,5 +73,6 @@
     "exampleProjectId": "zon4xF",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

@@ -107,8 +107,8 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
 
     MOD_de=1.0-MOD_map(
         MOD_de,
-        0.0, 0.000,
-        0.0,1.0
+        -2.0, 8.,
+        0.,5.0
         );
 
     #ifndef MOD_VIZ

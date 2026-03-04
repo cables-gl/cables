@@ -8,6 +8,7 @@ const
     inPlayTrigg = op.inTriggerButton("Play Trigger"),
     inPauseTrigg = op.inTriggerButton("Pause"),
     outPlaying = op.outNumber("Playing"),
+    outDuration = op.outNumber("Duration"),
     outEle = op.outObject("Element", null, "element"),
     outEnded = op.outTrigger("Has Ended");
 
@@ -69,7 +70,7 @@ function playPause()
 
 function updateVolume()
 {
-    if (audio)audio.volume = volume.get() * op.patch.config.masterVolume;
+    if (audio)audio.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
 }
 
 fileName.onChange = function ()
@@ -83,6 +84,8 @@ fileName.onChange = function ()
         audio.pause();
         outPlaying.set(false);
     }
+
+    outDuration.set(0);
     audio = new Audio();
     audio.crossOrigin = "anonymous";
     audio.src = op.patch.getFilePath(fileName.get());
@@ -94,6 +97,7 @@ fileName.onChange = function ()
 
     var canplaythrough = function ()
     {
+        outDuration.set(audio.duration);
         if (inPlay.get()) play();
         op.patch.loading.finished(loadingId);
         audio.removeEventListener("canplaythrough", canplaythrough, false);

@@ -5,6 +5,7 @@ const
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
     inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right", "Justify"], "Left"),
+    inDecoration = op.inSwitch("Text Decoration", ["None", "Underline", "Overline", "Line-Through"], "None"),
     inOverflow = op.inBool("Overflow Ellipsis", false),
     inLetterSpace = op.inFloat("Letter Spacing", 0),
     inLineHeight = op.inFloat("Line Height", 0),
@@ -21,6 +22,7 @@ inLetterSpace.onChange =
     inSize.onChange =
     inWeight.onChange =
     inAlign.onChange =
+    inDecoration.onChange =
     inLineHeight.onChange =
     inSetFam.onChange =
         update;
@@ -50,6 +52,7 @@ function update()
 
         ele.style["font-weight"] = inWeight.get();
         ele.style["text-align"] = inAlign.get().toLowerCase();
+        ele.style["text-decoration"] = inDecoration.get().toLowerCase();
 
         if (inSize.get())ele.style["font-size"] = inSize.get() + "px";
         else ele.style["font-size"] = "";

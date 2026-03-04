@@ -6,6 +6,9 @@ const inGeom = op.inObject("Geometry"),
     outMaxX = op.outNumber("Max X"),
     outMaxY = op.outNumber("Max Y"),
     outMaxZ = op.outNumber("Max Z"),
+    outSizeX = op.outNumber("Size X"),
+    outSizeY = op.outNumber("Size Y"),
+    outSizeZ = op.outNumber("Size Z"),
     outPoints = op.outArray("MaxMin Points");
 
 const points = [];
@@ -40,6 +43,9 @@ inGeom.onChange = () =>
 
         bb._center[0], bb._center[1], bb._center[2]
     );
+    outSizeX.set(bb._size[0]);
+    outSizeY.set(bb._size[1]);
+    outSizeZ.set(bb._size[2]);
 
     outPoints.setRef(points);
 };

@@ -6,7 +6,6 @@ const
     inSubmesh = op.inInt("Submesh", 0),
     inWeights = op.inArray("Target Weights"),
     outFound = op.outBool("Found Node"),
-    outFoundSkin = op.outBool("Found Skin"),
     outTargetnames = op.outArray("Target Names"),
     outTex = op.outTexture("MorphTargets Tex"),
     next = op.outTrigger("Next");
@@ -47,6 +46,7 @@ function update()
         if (cgl.tempData.currentScene.nodes[i].name == name)
         {
             node = cgl.tempData.currentScene.nodes[i];
+            console.log("node", node);
         }
     }
 
@@ -70,6 +70,7 @@ function update()
 
     if (mesh.extras && mesh.extras.targetNames) outTargetnames.set(mesh.extras.targetNames);
     if (mesh.morphTargetsRenderMod) outTex.setRef(mesh.morphTargetsRenderMod.tex);
+    else console.log("has no morthtargetmod");
 
     let time = gltf.time;
     if (!inSceneTime.get())

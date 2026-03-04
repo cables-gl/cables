@@ -42,6 +42,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
@@ -74,6 +79,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1769442324448
+        },
+        {
+            "message": "Clamp volume between 0-1 ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1772548747691
+        },
+        {
+            "message": "Added output for duration of audio file",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772548765960
         }
     ],
     "license": "MIT"
