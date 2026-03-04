@@ -56,12 +56,14 @@ export class Texture extends CgTexture
         this._glDataType = -1;
         this._glInternalFormat = -1;
         this._glDataFormat = -1;
+        this.compression = null;
 
         if (options)
         {
             if (options.isDepthTexture) this.textureType = Texture.TYPE_DEPTH;
             if (options.isFloatingPointTexture === true) this.textureType = Texture.TYPE_FLOAT;
 
+            if ("compression" in options) this.compression = options.compression;
             if ("textureType" in options) this.textureType = options.textureType;
             if ("filter" in options) this.filter = options.filter;
             if ("wrap" in options) this.wrap = options.wrap;
@@ -69,6 +71,13 @@ export class Texture extends CgTexture
             if ("flip" in options) this.flip = options.flip;
             if ("shadowMap" in options) this.shadowMap = options.shadowMap;
             if ("anisotropic" in options) this.anisotropic = options.anisotropic;
+
+            if (options.ktx)
+            {
+
+                this.tex = options.ktx.object;
+                this.texTarget = options.ktx.target;
+            }
         }
         else
         {
@@ -85,7 +94,8 @@ export class Texture extends CgTexture
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
-        this.setSize(options.width, options.height);
+        if (!options.ktx)
+            this.setSize(options.width, options.height);
         this.getInfoOneLine();
     }
 
@@ -186,6 +196,7 @@ export class Texture extends CgTexture
      */
     setSize(w, h)
     {
+        if (this.compression) return;
         if (this._cgl.aborted) return;
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
         if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
@@ -215,13 +226,22 @@ export class Texture extends CgTexture
 
         const uarr = null;
 
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, uarr);
+        this.glTexImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, uarr);
 
         this._setFilter();
 
         this.updateMipMap();
 
         this._cgl.gl.bindTexture(this.texTarget, null);
+    }
+
+    glTexImage2D(...args)
+    {
+        if (this.compression)
+            this._cgl.gl.compressedTexImage2D(...args);
+        else
+            this._cgl.gl.texImage2D(...args);
+
     }
 
     /**
@@ -262,7 +282,7 @@ export class Texture extends CgTexture
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, data);
+        this.glTexImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, data);
 
         this._setFilter();
         this.updateMipMap();
@@ -318,7 +338,7 @@ export class Texture extends CgTexture
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
-        this._cgl.gl.texImage2D(this.texTarget, 0, this._glInternalFormat, this._glDataFormat, this._glDataType, img);
+        this.glTexImage2D(this.texTarget, 0, this._glInternalFormat, this._glDataFormat, this._glDataType, img);
 
         this._setFilter();
         this.updateMipMap();
@@ -792,10 +812,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
 };
 
 /**
- * @static
- * @function createFromImage
- * @memberof Texture
- * @description create texturem from image data (e.g. image or canvas)
+ * create texturem from image data (e.g. image or canvas)
  * @param {CglContext} cgl
  * @param {Object} img image
  * @param {Object} options

@@ -6,7 +6,6 @@ const
     outCanvasMode = op.outNumber("Canvas Mode", window?.gui?.canvasManager?.mode),
     outPatchVisible = op.outBoolNum("Patch Field Visible");
 
-console.log("THE OP");
 if (CABLES.UI)
 {
     outOverlay.set(gui.shouldDrawOverlay);
@@ -18,7 +17,6 @@ if (CABLES.UI)
 
     gui.on("canvasModeChange", () =>
     {
-        console.log("IN OP");
         outCanvasMode.set(gui.canvasManager.mode);
         outPatchVisible.set(gui.patchView.element.classList.contains("hidden"));
     });

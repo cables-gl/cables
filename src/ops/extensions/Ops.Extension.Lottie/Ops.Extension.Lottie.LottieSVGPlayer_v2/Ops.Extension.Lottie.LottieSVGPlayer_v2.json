@@ -9,7 +9,7 @@
         },
         {
             "message": "New Version v2: upgraded lottie.js to version 5.13.0",
-            "type": "feature",
+            "type": "improvement",
             "author": "pandur",
             "date": 1771961398545
         }

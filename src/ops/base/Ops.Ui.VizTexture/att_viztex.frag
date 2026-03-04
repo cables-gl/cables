@@ -5,6 +5,7 @@ UNI float width;
 UNI float height;
 UNI float type;
 UNI float time;
+UNI float lod;
 
 float LinearizeDepth(float d,float zNear,float zFar)
 {
@@ -22,7 +23,8 @@ void main()
 {
     vec4 col=vec4(vec3(0.),0.0);
 
-    vec4 colTex=texture(tex,texCoord);
+    vec4 colTex=textureLod(tex,texCoord,lod);
+    // vec4 colTex=texture(tex,texCoord);
 
 
 
