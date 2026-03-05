@@ -1,7 +1,10 @@
 const
     render = op.inTrigger("render"),
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
 
+    amount = op.inFloatSlider("Amount", 1),
+
+    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    roundNess = op.inFloatSlider("Roundness", 0),
     inViz = op.inBool("Visualize Area", false),
 
     inWorldSpace = op.inValueBool("WorldSpace", false),
@@ -24,6 +27,10 @@ const
     changeScaleX = op.inFloat("Scale X", 0.5),
     changeScaleY = op.inFloat("Scale Y", 0.5),
     changeScaleZ = op.inFloat("Scale Z", 0.5),
+
+    rotX = op.inFloat("Rot X", 0.5),
+    rotY = op.inFloat("Rot Y", 0.5),
+    rotZ = op.inFloat("Rot Z", 0.5),
 
     next = op.outTrigger("trigger");
 
@@ -61,9 +68,11 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_fallOff", 0.5);
 mod.addUniformVert("f", "MOD_radius", inRadius);
+mod.addUniformVert("f", "MOD_amount", amount);
 
 mod.addUniformVert("3f", "MOD_pos", x, y, z);
 mod.addUniformVert("3f", "MOD_scale", sizeX, sizeY, sizeZ);
+mod.addUniformVert("3f", "MOD_rot", rotX, rotY, rotZ);
 mod.addUniformVert("3f", "MOD_changeScale", changeScaleX, changeScaleY, changeScaleZ);
 mod.addUniformVert("3f", "MOD_changeTranslate", changeTranslateX, changeTranslateY, changeTranslateZ);
 

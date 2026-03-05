@@ -7,8 +7,18 @@
             },
             {
                 "type": 0,
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Area index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Roundness",
+                "subType": "number"
             },
             {
                 "type": 0,
@@ -88,6 +98,21 @@
                 "type": 0,
                 "name": "Scale Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -111,10 +136,27 @@
             "type": "new op",
             "author": "pandur",
             "date": 1741614407678
+        },
+        {
+            "message": "added amount toggle, a multipier to the transformation, handy for fading in/out",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705710870
+        },
+        {
+            "message": "Added rotation",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705725472
+        },
+        {
+            "message": "Visualize area does no longer stop the modification, you can now use amount to do that",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705763068
         }
     ],
     "coreLibs": [
-        "cgl_shadermodifier",
         "cgl"
     ],
     "license": "MIT"

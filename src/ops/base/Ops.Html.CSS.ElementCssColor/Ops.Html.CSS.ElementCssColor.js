@@ -35,6 +35,9 @@ function remove()
     }
 }
 
+let oldBg = null;
+let oldCol = null;
+
 function update()
 {
     remove();
@@ -44,12 +47,30 @@ function update()
     {
         let rgbaText = "inherit";
 
-        if (inSetCol.get()) rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + a.get() + ")";
-        ele.style.color = rgbaText;
+        if (inSetCol.get())
+        {
+            rgbaText = "rgba(" + Math.floor(r.get() * 255) + "," + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," + a.get() + ")";
+            oldCol = rgbaText;
+            ele.style.color = rgbaText;
+        }
+        else if (oldCol)
+        {
+            delete ele.style.color;
+            oldCol = null;
+        }
 
         let rgbaBg = "inherit";
-        if (inSetBg.get()) rgbaBg = "rgba(" + Math.floor(bgr.get() * 255) + "," + Math.floor(bgg.get() * 255) + "," + Math.floor(bgb.get() * 255) + ", " + bga.get() + ")";
-        ele.style["background-color"] = rgbaBg;
+        if (inSetBg.get())
+        {
+            rgbaBg = "rgba(" + Math.floor(bgr.get() * 255) + "," + Math.floor(bgg.get() * 255) + "," + Math.floor(bgb.get() * 255) + ", " + bga.get() + ")";
+            oldBg = rgbaBg;
+            ele.style["background-color"] = rgbaBg;
+        }
+        else if (oldBg)
+        {
+            delete ele.style["background-color"];
+            oldBg = null;
+        }
     }
     else
     {
