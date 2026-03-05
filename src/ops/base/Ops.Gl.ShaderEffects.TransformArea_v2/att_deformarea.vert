@@ -124,6 +124,16 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
         0.,1.0
         );
 
+    #ifdef MOD_FALLOFF_SMOOTH
+        MOD_de=smoothstep(0.0,1.0,MOD_de);
+    #endif
+    #ifdef MOD_FALLOFF_POW2
+        MOD_de=pow(MOD_de,2.0);
+    #endif
+    #ifdef MOD_FALLOFF_POW3
+        MOD_de=pow(MOD_de,3.0);
+    #endif
+
     #ifdef MOD_VIZ
         MOD_viz=MOD_de;
     #endif

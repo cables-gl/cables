@@ -8,7 +8,7 @@ const
     sizeX = op.inFloat("Area Size X", 1),
     sizeY = op.inFloat("Area Size Y", 1),
     sizeZ = op.inFloat("Area Size Z", 1),
-
+    inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
     inFalloff = op.inFloat("Falloff", 0),
     x = op.inValue("x"),
     y = op.inValue("y"),
@@ -31,12 +31,13 @@ const
 
 const cgl = op.patch.cgl;
 
-op.setPortGroup("Area Size", [inRadius, sizeX, sizeY, sizeZ, inFalloff]);
+op.setPortGroup("Area Size", [inRadius, sizeX, sizeY, sizeZ]);
 op.setPortGroup("Area Position", [x, y, z]);
+op.setPortGroup("Area Falloff", [inFalloffCurve, inFalloff]);
 
 inViz.onChange =
     inWorldSpace.onChange =
-    // inFalloffCurve.onChange =
+    inFalloffCurve.onChange =
     inArea.onChange = updateDefines;
 
 const srcHeadVert = attachments.deformarea_vert;
@@ -76,9 +77,9 @@ updateDefines();
 
 function updateDefines()
 {
-    // mod.toggleDefine("MOD_FALLOFF_SMOOTH", inFalloffCurve.get() == "Smoothstep");
-    // mod.toggleDefine("MOD_FALLOFF_POW2", inFalloffCurve.get() == "pow2");
-    // mod.toggleDefine("MOD_FALLOFF_POW3", inFalloffCurve.get() == "pow3");
+    mod.toggleDefine("MOD_FALLOFF_SMOOTH", inFalloffCurve.get() == "Smoothstep");
+    mod.toggleDefine("MOD_FALLOFF_POW2", inFalloffCurve.get() == "pow2");
+    mod.toggleDefine("MOD_FALLOFF_POW3", inFalloffCurve.get() == "pow3");
 
     mod.toggleDefine("MOD_AREA_SPHERE", inArea.get() == "Sphere");
     mod.toggleDefine("MOD_AREA_BOX", inArea.get() == "Box");

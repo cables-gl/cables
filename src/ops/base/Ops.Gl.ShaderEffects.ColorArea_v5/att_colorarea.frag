@@ -76,11 +76,9 @@ MOD_de=1.0-MOD_map(
 #endif
 #ifdef MOD_FALLOFF_POW2
     MOD_de=pow(MOD_de,2.0);
-    // MOD_de=smoothstep(0.0,1.0,MOD_de);
 #endif
 #ifdef MOD_FALLOFF_POW3
     MOD_de=pow(MOD_de,3.0);
-    // MOD_de=smoothstep(0.0,1.0,MOD_de);
 #endif
 
 

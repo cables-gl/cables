@@ -46,8 +46,20 @@
             },
             {
                 "type": 0,
+                "name": "Falloff Curve index",
+                "values": [
+                    "Linear",
+                    "Smoothstep",
+                    "pow2",
+                    "pow3"
+                ],
+                "group": "Area Falloff",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Falloff",
-                "group": "Area Size",
+                "group": "Area Falloff",
                 "subType": "number"
             },
             {
