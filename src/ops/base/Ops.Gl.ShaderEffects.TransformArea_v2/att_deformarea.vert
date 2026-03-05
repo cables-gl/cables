@@ -120,10 +120,9 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
 
     MOD_de=1.0-MOD_map(
         MOD_de,
-        -2.0, 8.,
-        0.,5.0
+        0.0, MOD_fallOff,
+        0.,1.0
         );
-
 
     #ifdef MOD_VIZ
         MOD_viz=MOD_de;
@@ -134,19 +133,19 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
     if(MOD_de>0.000)
     {
         mat4 m=MOD_createTransformMatrix(
-                MOD_changeTranslate*MOD_de,
+                MOD_changeTranslate*MOD_de+pos.rgb,
                 MOD_changeScale*(MOD_deFO)
                 );
 
-        if(calcNormal)
-        {
-            mat3 nm = mat3(transpose(inverse(m)));
-            pos=vec4(normalize(nm*norm),0.0);
-        }
-        else
-        {
-            pos=m*pos;
-        }
+        // if(calcNormal)
+        // {
+        //     mat3 nm = mat3(transpose(inverse(m)));
+        //     pos=vec4(normalize(nm*norm),0.0);
+        // }
+        // else
+        // {
+            pos=m*vec4(0.,0.,0.,1.);
+        // }
 
         pos*=rotationMatrix(vec3(1.0,0.0,0.0), MOD_de*MOD_rot.x/57.29577951308232);
         pos*=rotationMatrix(vec3(0.0,1.0,0.0), MOD_de*MOD_rot.y/57.29577951308232);

@@ -111,6 +111,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1741614407678
+        },
+        {
+            "message": "Gl.ShaderEffects.VertexArea renamed to Ops.Gl.ShaderEffects.TransformArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1772706130491
         }
     ],
     "coreLibs": [

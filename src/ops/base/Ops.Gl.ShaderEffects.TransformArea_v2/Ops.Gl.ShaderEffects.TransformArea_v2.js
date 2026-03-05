@@ -1,24 +1,18 @@
 const
     render = op.inTrigger("render"),
-
     amount = op.inFloatSlider("Amount", 1),
-
     inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
-    roundNess = op.inFloatSlider("Roundness", 0),
     inViz = op.inBool("Visualize Area", false),
-
-    inWorldSpace = op.inValueBool("WorldSpace", false),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
-
-    //    inFalloff = op.inFloat("Falloff", 0),
-    // inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
 
     inRadius = op.inValue("Radius", 1),
     sizeX = op.inFloat("Area Size X", 1),
     sizeY = op.inFloat("Area Size Y", 1),
     sizeZ = op.inFloat("Area Size Z", 1),
+
+    inFalloff = op.inFloat("Falloff", 0),
+    x = op.inValue("x"),
+    y = op.inValue("y"),
+    z = op.inValue("z"),
 
     changeTranslateX = op.inFloat("Translate X", 0),
     changeTranslateY = op.inFloat("Translate Y", 0),
@@ -32,11 +26,13 @@ const
     rotY = op.inFloat("Rot Y", 0.5),
     rotZ = op.inFloat("Rot Z", 0.5),
 
+    inWorldSpace = op.inValueBool("WorldSpace", false),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 
-op.setPortGroup("Area", [inRadius, sizeX, sizeY, sizeZ]);
+op.setPortGroup("Area Size", [inRadius, sizeX, sizeY, sizeZ, inFalloff]);
+op.setPortGroup("Area Position", [x, y, z]);
 
 inViz.onChange =
     inWorldSpace.onChange =
@@ -63,10 +59,10 @@ mod.addModule({
     "name": "MODULE_COLOR",
     "srcHeadFrag": "IN float MOD_viz;".endl(),
     // "srcBodyFrag": "col=mix(col,vec4(1.,0.,0.,1.),MOD_viz);"
-    "srcBodyFrag": "#ifdef MOD_VIZ\nif(MOD_viz>0.0001)col=vec4(1.,0.,0.,1.);\n#endif\n"
+    "srcBodyFrag": "#ifdef MOD_VIZ\nif(MOD_viz>0.0001)col=vec4(MOD_viz,0.,1.,1.);\n#endif\n"
 });
 
-mod.addUniformVert("f", "MOD_fallOff", 0.5);
+mod.addUniformVert("f", "MOD_fallOff", inFalloff);
 mod.addUniformVert("f", "MOD_radius", inRadius);
 mod.addUniformVert("f", "MOD_amount", amount);
 
