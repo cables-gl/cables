@@ -178,7 +178,7 @@
             "date": 1772706129819
         },
         {
-            "message": "Added falloff parameter to smoothly mix in the changes to the area bounds, so there is not a hard cut ",
+            "message": "Added falloff and falloff curve parameters to smoothly mix in the changes to the area bounds, so there is not a hard cut ",
             "type": "feature",
             "author": "pandur",
             "date": 1772707270767
