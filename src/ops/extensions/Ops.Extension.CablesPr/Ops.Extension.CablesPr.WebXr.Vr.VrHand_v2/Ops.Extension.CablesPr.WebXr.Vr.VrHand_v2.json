@@ -18,6 +18,12 @@
             "type": "rename",
             "author": "Andrej",
             "date": 1772749254802
+        },
+        {
+            "message": "Extension.CablesPr.WebXr.Vr.VrHand renamed to Ops.Extension.CablesPr.WebXr.Vr.VrHand_v2",
+            "type": "rename",
+            "author": "Andrej",
+            "date": 1772787841066
         }
     ],
     "authorName": "Andrej",
