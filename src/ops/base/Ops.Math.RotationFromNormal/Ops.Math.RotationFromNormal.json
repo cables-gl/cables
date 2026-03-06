@@ -34,8 +34,10 @@
     "summary": "Create rotation matrix from normal",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

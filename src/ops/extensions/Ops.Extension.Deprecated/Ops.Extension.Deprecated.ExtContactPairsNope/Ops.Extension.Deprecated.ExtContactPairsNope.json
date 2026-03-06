@@ -47,5 +47,8 @@
                 "name": "Collisions 2"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

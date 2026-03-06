@@ -30,10 +30,12 @@
     },
     "summary": "outputs an inverted matrix",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "G51FhI"
+    "exampleProjectId": "G51FhI",
+    "coreLibs": [
+        "cgl"
+    ]
 }

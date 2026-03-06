@@ -40,10 +40,12 @@
     },
     "summary": "Outputs the angle between points in 3D space (degree)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Y2_BIR"
+    "exampleProjectId": "Y2_BIR",
+    "coreLibs": [
+        "cgl"
+    ]
 }

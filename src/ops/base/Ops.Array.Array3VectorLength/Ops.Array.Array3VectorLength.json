@@ -43,5 +43,8 @@
             }
         ]
     },
-    "exampleProjectId": "L9tsRJ"
+    "exampleProjectId": "L9tsRJ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

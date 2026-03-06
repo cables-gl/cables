@@ -63,9 +63,11 @@
         ]
     },
     "summary": "multiply XYZ values with a gl matrix vec3 x mat4",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "QlOcck"
+    "exampleProjectId": "QlOcck",
+    "coreLibs": [
+        "cgl"
+    ]
 }

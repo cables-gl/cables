@@ -50,8 +50,6 @@
     "summary": "Generate a point field mapped to the surface of a sphere",
     "youtubeid": "",
     "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -88,5 +86,8 @@
             "author": "pandur",
             "date": 1701854363458
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

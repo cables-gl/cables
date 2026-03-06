@@ -146,5 +146,8 @@
     "docs": {
         "ports": []
     },
-    "summary": "Spawn new physics bodies by triggering"
+    "summary": "Spawn new physics bodies by triggering",
+    "coreLibs": [
+        "cgl"
+    ]
 }

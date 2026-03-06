@@ -52,5 +52,8 @@
             }
         ]
     },
-    "exampleProjectId": "Tbb8xN"
+    "exampleProjectId": "Tbb8xN",
+    "coreLibs": [
+        "cgl"
+    ]
 }
