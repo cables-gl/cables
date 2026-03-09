@@ -18,9 +18,7 @@ UNI mat4 viewMatrix;
 #ifdef VERTEX_COLORS
     in vec4 attrVertColor;
     out vec4 vertCol;
-
 #endif
-
 
 void main()
 {

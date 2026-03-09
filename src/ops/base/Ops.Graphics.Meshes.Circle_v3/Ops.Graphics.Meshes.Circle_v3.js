@@ -21,13 +21,13 @@ doRender.setUiAttribs({ "title": "Render mesh" });
 mapping.set("flat");
 
 mapping.onChange =
-    segments.onChange =
-    radius.onChange =
-    innerRadius.onChange =
-    percent.onChange =
-    steps.onChange =
-    invertSteps.onChange =
-    drawSpline.onChange = calcLater;
+  segments.onChange =
+  radius.onChange =
+  innerRadius.onChange =
+  percent.onChange =
+  steps.onChange =
+  invertSteps.onChange =
+  drawSpline.onChange = calcLater;
 
 geomOut.ignoreValueSerialize = true;
 const cgl = op.patch.cgl;
@@ -212,8 +212,8 @@ function calc()
             }
 
             if (steps.get() === 0.0 ||
-                (count % parseInt(steps.get(), 10) === 0 && !invertSteps.get()) ||
-                (count % parseInt(steps.get(), 10) !== 0 && invertSteps.get()))
+        (count % parseInt(steps.get(), 10) === 0 && !invertSteps.get()) ||
+        (count % parseInt(steps.get(), 10) !== 0 && invertSteps.get()))
             {
                 faces.push(
                     [posxIn, posyIn, 0],

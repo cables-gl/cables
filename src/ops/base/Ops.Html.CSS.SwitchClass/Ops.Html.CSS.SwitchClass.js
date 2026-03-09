@@ -3,6 +3,9 @@ const
     inClassName = op.inString("Classname"),
     inActive = op.inValueBool("Active", true);
 
+op.toWorkPortsNeedsString(inClassName);
+op.toWorkPortsNeedToBeLinked(inEle);
+
 inActive.onChange =
     inClassName.onChange =
     inEle.onChange = update;
@@ -15,6 +18,11 @@ let oldName = null;
 function remove(ele)
 {
     if (ele && ele.classList) ele.classList.remove(oldName);
+}
+
+function updateUi()
+{
+    op.setUiAttrib({ "extendTitle": inClassName.get() + ": " + (inActive.get() ? "true" : "false") });
 }
 
 function update()
@@ -33,4 +41,5 @@ function update()
 
     oldName = cn;
     oldEle = ele;
+    updateUi();
 }

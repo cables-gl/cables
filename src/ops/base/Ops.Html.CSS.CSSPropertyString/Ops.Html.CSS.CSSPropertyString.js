@@ -8,6 +8,8 @@ const
 op.setPortGroup("Element", [inEle]);
 op.setPortGroup("Attributes", [inProperty, inValue]);
 
+op.toWorkPortsNeedsString(inProperty);
+
 inProperty.onChange = updateProperty;
 inValue.onChange = update;
 let ele = null;
@@ -25,18 +27,27 @@ inActive.onChange = () =>
 {
     if (!inActive.get()) removeProp();
     else update();
+
+    updateUi();
 };
 
 function removeProp()
 {
     if (ele && ele.style) ele.style[inProperty.get()] = "initial";
     update();
+    updateUi();
+}
+
+function updateUi()
+{
+    if (!inActive.get()) op.setUiAttrib({ "extendTitle": "x" });
+    else op.setUiAttrib({ "extendTitle": inProperty.get() + "" });
 }
 
 function updateProperty()
 {
     update();
-    op.setUiAttrib({ "extendTitle": inProperty.get() + "" });
+    updateUi();
 }
 
 function update()

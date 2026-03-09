@@ -12,17 +12,28 @@ let to = null;
 let style = null;
 let oldFontName = "";
 
+op.toWorkPortsNeedsString(fontname);
+
 filename.onChange = function ()
 {
     outLoaded.set(false);
     addStyle(null);
+
+    updateUi();
 };
 
 inActive.onChange =
 fontname.onChange = () =>
 {
     loadSoon();
+    updateUi();
 };
+
+function updateUi()
+{
+    if (!inActive.get()) op.setUiAttrib({ "extendTitle": "x" });
+    else op.setUiAttrib({ "extendTitle": CABLES.filename(filename.get()) });
+}
 
 function loadSoon()
 {

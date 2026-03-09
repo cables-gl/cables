@@ -720,6 +720,7 @@ export class Patch extends Events
      * @param {String} port2Name
      * @param {boolean} lowerCase
      * @param {boolean} fromDeserialize
+     * @returns {Link}
      */
     link(op1, port1Name, op2, port2Name, lowerCase = false, fromDeserialize = false)
     {
@@ -737,7 +738,7 @@ export class Patch extends Events
         if (!port1) return this.#log.warn("port1 not found! " + port1Name + " (" + op1.objName + ")");
         if (!port2) return this.#log.warn("port2 not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")", op2);
 
-        if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return false;
+        if (!port1.shouldLink(port1, port2) || !port2.shouldLink(port1, port2)) return null;
 
         /* minimalcore:end */
         if (Link.canLink(port1, port2))

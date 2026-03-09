@@ -24,6 +24,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1730273930983
+        },
+        {
+            "message": "Show property in extended title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773055913230
         }
     ],
     "authorName": "andro",
