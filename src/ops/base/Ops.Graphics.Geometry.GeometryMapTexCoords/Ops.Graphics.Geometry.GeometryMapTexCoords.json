@@ -1,0 +1,47 @@
+{
+    "id": "99139f1e-1a83-4bde-bfe6-6b4caf062a21",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1773064265313
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "values": [
+                    "XY",
+                    "XZ",
+                    "YZ"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result Geometry",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1773064265313,
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT",
+    "summary": "Simple method to generate texture coordinates from object vertex coordinates"
+}
