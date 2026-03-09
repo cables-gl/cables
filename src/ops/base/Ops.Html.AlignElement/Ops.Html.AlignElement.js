@@ -51,6 +51,11 @@ function remove()
         eleAlign.style.removeProperty("top");
         eleAlign.style.removeProperty("left");
         oldTop = null;
+
+        oldTop =
+        oldLeft =
+        oldWidth =
+        oldHeight = -1;
     }
 }
 
@@ -58,7 +63,10 @@ function update()
 {
     let ele = inEle.get();
 
-    if (inEleAlign.get() != eleAlign)remove();
+    if (inEleAlign.get() != eleAlign)
+    {
+        remove();
+    }
     eleAlign = inEleAlign.get();
 
     if (!ele || !eleAlign) return;

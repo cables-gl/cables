@@ -59,7 +59,8 @@ active.onChange = function ()
         width.set(CGL.Texture.getEmptyTexture(cgl).width);
         height.set(CGL.Texture.getEmptyTexture(cgl).height);
         if (tex)tex.delete();
-        op.setUiAttrib({ "extendTitle": "" });
+
+        op.setUiAttrib({ "extendTitle": "x" });
         tex = null;
     }
 };

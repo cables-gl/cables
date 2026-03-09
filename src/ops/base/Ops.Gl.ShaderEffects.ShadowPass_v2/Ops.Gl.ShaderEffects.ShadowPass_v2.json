@@ -1,0 +1,45 @@
+{
+    "id": "8365c9c7-f4ca-4856-a7a2-dd929d42fc9a",
+    "created": 1772807785401,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1770810979483
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Pass index",
+                "values": [
+                    "All",
+                    "Shadow",
+                    "Color"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next Shadow Pass"
+            }
+        ]
+    },
+    "summary": "Route trigger differently when in shadowpass or not",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}

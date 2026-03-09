@@ -23,29 +23,34 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Invalid when 0",
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Invalid when <0",
+                "type": 0,
+                "name": "Invalid when &lt;0",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invalid when Infinity",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Last Valid Number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Valid",
                 "subType": "boolean"
             }
@@ -53,9 +58,9 @@
     },
     "summary": "Filter valid numbers",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
