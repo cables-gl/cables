@@ -21,9 +21,7 @@
                     "Step",
                     "Linear",
                     "SmoothStep",
-                    "Pow1",
-                    "Pow2",
-                    "Pow3"
+                    "SmootherStep"
                 ],
                 "subType": "integer"
             },

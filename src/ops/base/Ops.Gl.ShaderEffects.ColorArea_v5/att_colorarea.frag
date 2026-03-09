@@ -36,8 +36,6 @@ vec4 MOD_vp=MOD_vertPos;
     float MOD_de=MOD_sdHexPrism(MOD_pos.xyz-MOD_vp.xyz,vec2(MOD_size.x,MOD_size.z));
 #endif
 
-
-
 // #ifndef MOD_AREA_SPHERE
 // #ifndef MOD_AREA_BOX
 //     float MOD_de=1.0-smoothstep(MOD_inSizeAmountFalloffSizeX.z*MOD_inSizeAmountFalloffSizeX.x,MOD_inSizeAmountFalloffSizeX.x,MOD_de);

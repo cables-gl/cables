@@ -2,7 +2,7 @@
 
 const inGrad = op.inGradient("Gradient"),
     inDir = op.inValueSelect("Direction", ["X", "XX", "Y", "YY", "XY", "YX", "Radial"], "X"),
-    inIp = op.inSwitch("Interpolation", ["Step", "Linear", "SmoothStep", "Pow1", "Pow2", "Pow3"], "Linear"),
+    inIp = op.inSwitch("Interpolation", ["Step", "Linear", "SmoothStep", "SmootherStep"], "Linear"),
     inFlip = op.inBool("Flip", false),
     inSRGB = op.inBool("sRGB", false),
     inOklab = op.inBool("Oklab", false),
@@ -63,9 +63,10 @@ function ip(p)
     if (i == "Linear") return p;
     else if (i == "Step")p = Math.round(p);
     else if (i == "SmoothStep") p = CABLES.smoothStep(p);
-    else if (i == "Pow1") p = Math.pow(p, 1.2);
-    else if (i == "Pow2") p = Math.pow(p, 2);
-    else if (i == "Pow3") p = Math.pow(p, 3);
+    else if (i == "SmootherStep") p = CABLES.smootherStep(p);
+    // else if (i == "Pow1") p = Math.pow(p, 1.2);
+    // else if (i == "Pow2") p = Math.pow(p, 2);
+    // else if (i == "Pow3") p = Math.pow(p, 3);
     return p;
 }
 
@@ -128,11 +129,7 @@ function parseKeys()
     else
     {
         let grad = null;
-        if (!inGrad.get() || inGrad.get() === "")
-        {
-            // op.setUiError("nodata", "gradient no data");
-            return null;
-        }
+        if (!inGrad.get() || inGrad.get() === "") return null;
 
         try
         {
@@ -428,20 +425,15 @@ function updateGradient(keys)
 
     const colorArr = [];
     for (let i = 0; i < keys.length - 1; i++)
-    {
         colorArr.push(keys[i].r, keys[i].g, keys[i].b);
-    }
 
     const colorPosArr = [];
     for (let i = 0; i < keys.length - 1; i++)
-    {
         colorPosArr.push(keys[i].pos);
-    }
 
     outColors.set(colorArr);
     outColorPos.set(colorPosArr);
 
-    // outTex.set(null);
     outTex.setRef(tex);
     outTexMask.setRef(texAlpha);
 }
