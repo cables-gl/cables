@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1594028866736
+            "date": 1594028866736,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.GeometryBoundingBox renamed to Ops.Gl.Geometry.GeometryBoundingBox",
+            "message": "Added output for axis sizes",
+            "type": "feature",
             "author": "pandur",
-            "date": 1594029475865
+            "date": 1772551308315
         }
     ],
     "authorName": "pandur",
@@ -54,6 +56,21 @@
             {
                 "type": 0,
                 "name": "Max Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
                 "subType": "number"
             },
             {

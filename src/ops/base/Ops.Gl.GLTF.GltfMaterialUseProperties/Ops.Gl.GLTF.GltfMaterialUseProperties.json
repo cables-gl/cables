@@ -50,5 +50,8 @@
     "summary": "Use GLTF material properties of a material on the current shader ",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }

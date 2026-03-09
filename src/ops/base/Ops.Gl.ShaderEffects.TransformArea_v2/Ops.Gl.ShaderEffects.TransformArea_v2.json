@@ -1,0 +1,191 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Visualize Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "group": "Area Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Area Size X",
+                "group": "Area Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Area Size Y",
+                "group": "Area Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Area Size Z",
+                "group": "Area Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Falloff Curve index",
+                "values": [
+                    "Linear",
+                    "Smoothstep",
+                    "pow2",
+                    "pow3"
+                ],
+                "group": "Area Falloff",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Falloff",
+                "group": "Area Falloff",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "48a69680-8a68-4bcb-95bc-a1d1846e363a",
+    "created": 1772641508442,
+    "summary": "Transform an area of a mesh in the vertex shader",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1741614407678
+        },
+        {
+            "message": "New version v2: Added amount toggle, a multipier to the transformation, handy for fading in/out",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705710870
+        },
+        {
+            "message": "Added rotation",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705725472
+        },
+        {
+            "message": "Visualize area does no longer stop the modification, you can now use amount to do that",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772705763068
+        },
+        {
+            "message": "Gl.ShaderEffects.VertexArea renamed to Ops.Gl.ShaderEffects.TransformArea",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1772706129819
+        },
+        {
+            "message": "Added falloff and falloff curve parameters to smoothly mix in the changes to the area bounds, so there is not a hard cut ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772707270767
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

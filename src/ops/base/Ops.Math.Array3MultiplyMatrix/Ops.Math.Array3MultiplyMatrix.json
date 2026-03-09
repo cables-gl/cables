@@ -29,12 +29,14 @@
         "ports": []
     },
     "youtubeid": "",
-
     "changelog": [
         {
             "message": "Ops.Math.Array3xMultiplyMatrix renamed to Ops.Math.Array3MultiplyMatrix",
             "author": "pandur",
             "date": 1561119657386
         }
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

@@ -53,10 +53,12 @@
     },
     "summary": "Animate values in an array to another array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "OwvgkJ"
+    "exampleProjectId": "OwvgkJ",
+    "coreLibs": [
+        "cgl"
+    ]
 }

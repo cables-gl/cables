@@ -71,7 +71,6 @@ function renderMesh()
 
     if (doRender.get() && mesh)
     {
-        // mesh.instances = 3;
         mesh.render(shader);
     }
     trigger.trigger();
@@ -154,10 +153,11 @@ function calc()
             }
             else if (mapping.get() == "round")
             {
-                posxTexCoord = 1.0 - i / segs;
-                posyTexCoord = 0;
-                posxTexCoordIn = posxTexCoord;
+                posxTexCoordIn = i / segs;
                 posyTexCoordIn = 1;
+
+                posxTexCoord = 1.0 - (i + 1) / segs;
+                posyTexCoord = 0;
             }
 
             faces.push(
@@ -167,7 +167,9 @@ function calc()
             );
 
             texCoords.push(
-                posxTexCoordIn, posyTexCoordIn, oldPosXTexCoord, oldPosYTexCoord, posxTexCoord, posyTexCoord
+                posxTexCoordIn, posyTexCoordIn,
+                oldPosXTexCoord, oldPosYTexCoord,
+                posxTexCoord, posyTexCoord
             );
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
@@ -227,8 +229,24 @@ function calc()
                     [posxIn, posyIn, 0]
                 );
 
-                texCoords.push(
-                    posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1, posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
+                if (mapping.get() == "round")
+                {
+                    const t = 1.0 - (i) / segs;
+                    const t2 = 1.0 - (i + 1) / segs;
+                    texCoords.push(
+                        t2, 1, t, 0, t2, 0,
+                        t, 1, t, 0, t2, 1);
+
+                    //                    texCoords.push(
+                    //                        posxTexCoordIn, 1, oldPosXTexCoord, 0, t, 0,
+                    //                        oldPosXTexCoord, 1, oldPosXTexCoordIn, 0, posxTexCoord, 1);
+                }
+                else
+                {
+                    texCoords.push(
+                        posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1,
+                        posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
+                }
 
                 vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
                 tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0);

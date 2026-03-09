@@ -60,7 +60,7 @@ const GltfTargetsRenderer = class
     {
         if (!cgl.gl) return;
 
-        if (!geom.morphTargets || !geom.morphTargets.length) return;
+        if (!geom.morphTargets || !geom.morphTargets.length) return console.log("no morphtargets");
 
         let w = geom.morphTargets[0].vertices.length / 3;
         let h = 0;

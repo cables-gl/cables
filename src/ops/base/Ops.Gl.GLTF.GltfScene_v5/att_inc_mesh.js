@@ -96,6 +96,7 @@ let gltfMesh = class
                     // if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
 
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
+                    console.log("add targetttt");
 
                     // { // calculate normals for final position of morphtarget for later...
                     //     for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
@@ -292,7 +293,7 @@ let gltfMesh = class
             }
             else
             {
-                console.warn("GLFT unknown primitive", this.primitive);
+            //    console.warn("GLTF unknown primitive", this.primitive);
             }
         }
         catch (e)

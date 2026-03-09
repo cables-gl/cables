@@ -79,6 +79,7 @@
         ]
     },
     "coreLibs": [
-        "three"
+        "three",
+        "cgl"
     ]
 }

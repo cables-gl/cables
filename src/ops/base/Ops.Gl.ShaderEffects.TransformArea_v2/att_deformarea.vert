@@ -48,6 +48,19 @@ mat4 MOD_createTransformMatrix(vec3 translation, vec3 scale) {
     return matrix;
 }
 
+mat4 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+
+    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                0.0,                                0.0,                                0.0,                                1.0);
+}
+
 ///////////////////////////////////////////////////////////////
 
 vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
@@ -107,37 +120,52 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
 
     MOD_de=1.0-MOD_map(
         MOD_de,
-        0.0, 0.000,
-        0.0,1.0
+        0.0, MOD_fallOff,
+        0.,1.0
         );
 
-    #ifndef MOD_VIZ
-        if(MOD_de>0.000)
-        {
-            mat4 m=MOD_createTransformMatrix(
-                    MOD_changeTranslate*MOD_de,
-                    MOD_changeScale*(MOD_deFO)
-                    );
-
-            if(calcNormal)
-            {
-                mat3 nm = mat3(transpose(inverse(m)));
-                pos=vec4(normalize(nm*norm),0.0);
-            }
-            else
-            {
-                pos=m*pos;
-            }
-        }
-        else
-        {
-           if(calcNormal)pos= vec4(norm,0.0);
-        }
+    #ifdef MOD_FALLOFF_SMOOTH
+        MOD_de=smoothstep(0.0,1.0,MOD_de);
+    #endif
+    #ifdef MOD_FALLOFF_POW2
+        MOD_de=pow(MOD_de,2.0);
+    #endif
+    #ifdef MOD_FALLOFF_POW3
+        MOD_de=pow(MOD_de,3.0);
     #endif
 
     #ifdef MOD_VIZ
         MOD_viz=MOD_de;
     #endif
+
+    MOD_de*=MOD_amount;
+
+    if(MOD_de>0.000)
+    {
+        mat4 m=MOD_createTransformMatrix(
+                MOD_changeTranslate*MOD_de+pos.rgb,
+                MOD_changeScale*(MOD_deFO)
+                );
+
+        // if(calcNormal)
+        // {
+        //     mat3 nm = mat3(transpose(inverse(m)));
+        //     pos=vec4(normalize(nm*norm),0.0);
+        // }
+        // else
+        // {
+            pos=m*vec4(0.,0.,0.,1.);
+        // }
+
+        pos*=rotationMatrix(vec3(1.0,0.0,0.0), MOD_de*MOD_rot.x/57.29577951308232);
+        pos*=rotationMatrix(vec3(0.0,1.0,0.0), MOD_de*MOD_rot.y/57.29577951308232);
+        pos*=rotationMatrix(vec3(0.0,0.0,1.0), MOD_de*MOD_rot.z/57.29577951308232);
+    }
+    else
+    {
+       if(calcNormal)pos= vec4(norm,0.0);
+    }
+
 
     return pos;
 
