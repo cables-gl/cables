@@ -49,13 +49,6 @@
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],
-    "changelog": [
-        {
-            "message": "Ops.Gl.Geometry.GeometryPoints renamed to Ops.Graphics.Geometry.GeometryAttributes",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685951003927
-        }
-    ],
+    "changelog": [],
     "license": "MIT"
 }

@@ -5,6 +5,14 @@ op.setUiAttrib({ "widthOnlyGrow": true });
 
 inNum.onChange = update;
 
+let title = "";
+inNum.onLinkChanged = () =>
+{
+    if (inNum.isLinked()) title = inNum.links[0].getOtherPort(inNum).name;
+    else title = "";
+    update();
+};
+
 update();
 
 function update()
@@ -25,7 +33,7 @@ function update()
 
     //     op.setUiAttribs({ "extendTitle": str });
     // }
-    op.setUiAttribs({ "extendTitle": inNum.getValueForDisplay() });
+    op.setUiAttribs({ "extendTitle": title + ": " + inNum.getValueForDisplay() });
 
     outNum.set(n);
 }

@@ -213,45 +213,46 @@ function calc()
                 posyTexCoordIn = 1;
             }
 
-            if (steps.get() === 0.0 ||
+            if (i > 0)
+                if (steps.get() === 0.0 ||
         (count % parseInt(steps.get(), 10) === 0 && !invertSteps.get()) ||
         (count % parseInt(steps.get(), 10) !== 0 && invertSteps.get()))
-            {
-                faces.push(
-                    [posxIn, posyIn, 0],
-                    [oldPosX, oldPosY, 0],
-                    [posx, posy, 0]
-                );
-
-                faces.push(
-                    [oldPosXIn, oldPosYIn, 0],
-                    [oldPosX, oldPosY, 0],
-                    [posxIn, posyIn, 0]
-                );
-
-                if (mapping.get() == "round")
                 {
-                    const t = 1.0 - (i) / segs;
-                    const t2 = 1.0 - (i + 1) / segs;
-                    texCoords.push(
-                        t2, 1, t, 0, t2, 0,
-                        t, 1, t, 0, t2, 1);
+                    faces.push(
+                        [posxIn, posyIn, 0],
+                        [oldPosX, oldPosY, 0],
+                        [posx, posy, 0]
+                    );
+
+                    faces.push(
+                        [oldPosXIn, oldPosYIn, 0],
+                        [oldPosX, oldPosY, 0],
+                        [posxIn, posyIn, 0]
+                    );
+
+                    if (mapping.get() == "round")
+                    {
+                        const t = 1.0 - (i) / segs;
+                        const t2 = 1.0 - (i + 1) / segs;
+                        texCoords.push(
+                            t2, 1, t, 0, t2, 0,
+                            t, 1, t, 0, t2, 1);
 
                     //                    texCoords.push(
                     //                        posxTexCoordIn, 1, oldPosXTexCoord, 0, t, 0,
                     //                        oldPosXTexCoord, 1, oldPosXTexCoordIn, 0, posxTexCoord, 1);
-                }
-                else
-                {
-                    texCoords.push(
-                        posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1,
-                        posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
-                }
+                    }
+                    else
+                    {
+                        texCoords.push(
+                            posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1,
+                            posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
+                    }
 
-                vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-                tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0);
-                biTangents.push(0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1);
-            }
+                    vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+                    tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0);
+                    biTangents.push(0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1);
+                }
 
             oldPosXTexCoordIn = posxTexCoordIn;
             oldPosYTexCoordIn = posyTexCoordIn;

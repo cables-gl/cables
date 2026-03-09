@@ -53,6 +53,13 @@ function getCellValue(v)
     return str;
 }
 
+let title = "";
+inArr.onLinkChanged = () =>
+{
+    if (inArr.isLinked()) title = inArr.links[0].getOtherPort(inArr).name;
+    else title = "";
+};
+
 op.renderVizLayer = (ctx, layer) =>
 {
     ctx.fillStyle = "#222";
@@ -69,7 +76,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (inArr.get() === null) op.setUiAttrib({ "extendTitle": "null" });
     else if (inArr.get() === undefined) op.setUiAttrib({ "extendTitle": "undefined" });
-    else op.setUiAttrib({ "extendTitle": "length: " + arr.length });
+    else op.setUiAttrib({ "extendTitle": title + " - length: " + arr.length });
 
     if (inArr.links.length > 0 && inArr.links[0].getOtherPort(inArr))
         stride = inArr.links[0].getOtherPort(inArr).uiAttribs.stride || inStride.get() || 1;

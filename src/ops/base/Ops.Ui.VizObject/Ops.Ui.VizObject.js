@@ -14,6 +14,8 @@ inConsole.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 
+let title = "";
+
 function myStringify(o, level = 0)
 {
     let ind = "   ";
@@ -160,7 +162,7 @@ inObj.onChange = () =>
     let str = "???";
     if (obj && obj.getInfo) obj = obj.getInfo();
 
-    if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": obj.constructor.name });
+    if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": title + " " + obj.constructor.name });
 
     if (obj === undefined)str = "undefined";
     else if (obj === null)str = "null";
@@ -219,11 +221,14 @@ inObj.onChange = () =>
 
 inObj.onLinkChanged = () =>
 {
+    if (inObj.isLinked()) title = inObj.links[0].getOtherPort(inObj).name;
+    else title = "";
+
     if (inObj.isLinked())
     {
         const p = inObj.links[0].getOtherPort(inObj);
 
-        op.setUiAttrib({ "extendTitle": p.uiAttribs.objType });
+        op.setUiAttrib({ "extendTitle": title + " (" + p.uiAttribs.objType + ")" });
     }
 };
 

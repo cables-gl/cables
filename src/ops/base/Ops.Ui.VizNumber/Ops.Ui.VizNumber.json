@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1637676931322
+            "date": 1637676931322,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.VizNum renamed to Ops.Ui.VizNumber",
+            "message": "Show name of connected port for better readability",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1637677608370
+            "date": 1773067790903
         }
     ],
     "layout": {

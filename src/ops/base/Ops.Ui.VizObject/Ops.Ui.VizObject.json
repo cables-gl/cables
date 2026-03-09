@@ -48,6 +48,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1771229940563
+        },
+        {
+            "message": "Show name of connected port for better readability",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773067954188
         }
     ],
     "authorName": "pandur",
