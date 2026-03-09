@@ -10,10 +10,10 @@
             "date": 1712225481950
         },
         {
-            "message": "Ops.Html.CssFile renamed to Ops.Html.CSS.CssFile",
-            "type": "rename",
+            "message": "Reload button added",
+            "type": "feature",
             "author": "pandur",
-            "date": 1730274012366
+            "date": 1773056505093
         }
     ],
     "layout": {
@@ -30,6 +30,10 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
             }
         ],
         "portsOut": []

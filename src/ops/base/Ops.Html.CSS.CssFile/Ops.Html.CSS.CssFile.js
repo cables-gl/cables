@@ -1,7 +1,8 @@
 const
     inFile = op.inUrl("CSS File"),
     inMedia = op.inString("Media", "all"),
-    inActive = op.inBool("Active", true);
+    inActive = op.inBool("Active", true),
+    inReload = op.inTriggerButton("Reload");
 
 let element = null;
 
@@ -18,7 +19,20 @@ inActive.onChange = () =>
 {
     if (!inActive.get())remove();
     else create(true);
+    updateUi();
 };
+
+inReload.onTriggered = () =>
+{
+    remove();
+    create(true);
+};
+
+function updateUi()
+{
+    if (!inActive.get()) op.setUiAttrib({ "extendTitle": "x" });
+    else op.setUiAttrib({ "extendTitle": "" });
+}
 
 function create(refresh)
 {
@@ -30,6 +44,7 @@ function create(refresh)
     let url = inFile.get();
     if (op.patch.isEditorMode() && refresh) url = CABLES.cacheBust(url);
     element.setAttribute("href", url);
+    updateUi();
 }
 
 function setAttribs()
