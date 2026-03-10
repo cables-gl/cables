@@ -9,6 +9,7 @@ const
     inHeight = op.inFloat("Height", 2),
     outTrigger = op.outTrigger("trigger"),
     outCoords = op.outArray("Points"),
+    outColors = op.outArray("Colors"),
     outNum = op.outNumber("Total Points"),
     outMinZ = op.outNumber("Min Z"),
     outMaxZ = op.outNumber("Max Z");
@@ -19,6 +20,7 @@ let
     fb = null,
     pixelData = null,
     coords = null,
+    colors = [],
     texChanged = false;
 tex.onChange = function () { texChanged = true; };
 
@@ -73,6 +75,7 @@ pUpdate.onTriggered = function ()
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     coords.length = 0;
+    colors.length = 0;
 
     let offX = 0;
     let offY = 0;
@@ -102,6 +105,13 @@ pUpdate.onTriggered = function ()
                 const zz = pixelData[(x + (y * realTexture.width)) * 4 + 0] * mulz;
                 coords.push((x - offX) / realTexture.width * w, (y - offY) / realTexture.height * h,
                     zz);
+
+                colors.push(
+                    pixelData[(x + (y * realTexture.width)) * 4 + 0] / 255,
+                    pixelData[(x + (y * realTexture.width)) * 4 + 1] / 255,
+                    pixelData[(x + (y * realTexture.width)) * 4 + 2] / 255,
+                    pixelData[(x + (y * realTexture.width)) * 4 + 3] / 255);
+
                 maxZ = Math.max(zz, maxZ);
                 minZ = Math.min(zz, minZ);
             }
@@ -110,9 +120,9 @@ pUpdate.onTriggered = function ()
 
     outMinZ.set(minZ);
     outMaxZ.set(maxZ);
-    outCoords.set(null);
     outNum.set(coords.length / 3);
-    outCoords.set(coords);
+    outCoords.setRef(coords);
+    outColors.setRef(colors);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     outTrigger.trigger();

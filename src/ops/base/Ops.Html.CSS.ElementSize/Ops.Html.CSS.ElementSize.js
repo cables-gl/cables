@@ -9,7 +9,9 @@ const
     outEle = op.outObject("Passthrough", null, "element");
 
 inHeight.onChange =
-inWidth.onChange = update;
+inWidth.onChange =
+inHeightU.onChange =
+inWidthU.onChange = update;
 
 let ele = null;
 let timeoutUpd = null;

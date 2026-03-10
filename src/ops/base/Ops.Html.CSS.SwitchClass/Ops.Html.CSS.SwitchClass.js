@@ -1,7 +1,8 @@
 const
     inEle = op.inObject("HTML Element"),
     inClassName = op.inString("Classname"),
-    inActive = op.inValueBool("Active", true);
+    inActive = op.inValueBool("Active", true),
+    outEle = op.outObject("Element passthrough");
 
 op.toWorkPortsNeedsString(inClassName);
 op.toWorkPortsNeedToBeLinked(inEle);
@@ -42,4 +43,5 @@ function update()
     oldName = cn;
     oldEle = ele;
     updateUi();
+    outEle.setRef(ele);
 }

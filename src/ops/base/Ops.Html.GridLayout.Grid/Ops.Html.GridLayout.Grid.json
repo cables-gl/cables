@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1754121655159
+        },
+        {
+            "message": "Output new element when updating styles",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1773074069129
         }
     ],
     "layout": {
@@ -29,6 +35,21 @@
             },
             {
                 "type": 0,
+                "name": "Gap",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gap Unit index",
+                "values": [
+                    "Off",
+                    "px",
+                    "%"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Show Helper",
                 "subType": "boolean"
             },
@@ -40,7 +61,7 @@
             {
                 "type": 5,
                 "name": "Cell Size_0",
-                "longPort": 3,
+                "longPort": 5,
                 "group": "Cell Size"
             },
             {
@@ -49,14 +70,44 @@
                 "group": "Cell Size"
             },
             {
+                "type": 5,
+                "name": "Cell Size_2",
+                "group": "Cell Size"
+            },
+            {
+                "type": 5,
+                "name": "Cell Size_3",
+                "group": "Cell Size"
+            },
+            {
+                "type": 5,
+                "name": "Cell Size_4",
+                "group": "Cell Size"
+            },
+            {
                 "type": 2,
                 "name": "Childs_0",
-                "longPort": 3,
+                "longPort": 5,
                 "group": "Childs"
             },
             {
                 "type": 2,
                 "name": "Childs_1",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_2",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_3",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_4",
                 "group": "Childs"
             }
         ],
