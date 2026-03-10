@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1770208667127
+        },
+        {
+            "message": "Update op when changing height/width units",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1773069091830
         }
     ],
     "authorName": "pandur",

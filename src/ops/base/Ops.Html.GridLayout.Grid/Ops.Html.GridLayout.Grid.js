@@ -1,6 +1,8 @@
 const
     numCols = op.inInt("Columns", 3),
     inDir = op.inSwitch("Axis", ["Columns", "Rows"], "Columns"),
+    inGap = op.inFloat("Gap", 0),
+    inGapUnit = op.inSwitch("Gap Unit", ["Off", "px", "%"], "px"),
     inHelper = op.inBool("Show Helper"),
     inActive = op.inBool("Active", true),
     inSizes = op.inMultiPort("Cell Size", CABLES.OP_PORT_TYPE_STRING),
@@ -16,9 +18,13 @@ inObjs.setUiAttribs({ "multiPortManual": true });
 op.patch.cgl.canvas.parentElement.appendChild(div);
 outElement.setRef(div);
 create();
+
 outElement.onLinkChanged =
 inDir.onChange = inActive.onChange =
 numCols.onChange = inObjs.onChange = inHelper.onChange = create;
+
+inGap.onChange =
+inGapUnit.onChange =
 inSizes.onChange = updateStyle;
 
 function updateStyle()
@@ -29,18 +35,29 @@ function updateStyle()
     const colSizes = inSizes.get();
     for (let j = 0; j < numCols.get(); j++) if (colSizes.length >= j && colSizes[j])colStr += (colSizes[j].get() || "1fr") + " ";
 
+    const dir = inDir.get().toLowerCase();
+    let gapKey = "column";
+    if (dir === "rows") gapKey = "row";
     div.style.width = "100%";
     div.style.maxHeight = "100%";
     div.style.height = "100%";
+    div.style["row-gap"] = "initial";
+    div.style["column-gap"] = "initial";
     div.style["grid-template-columns"] = "initial";
     div.style["grid-template-rows"] = "initial";
-    div.style["grid-template-" + inDir.get().toLowerCase()] = colStr;
+    div.style["grid-template-" + dir] = colStr;
+
+    if (inGapUnit.get() !== "Off")
+    {
+        div.style[gapKey + "-gap"] = inGap.get() + inGapUnit.get();
+    }
 
     if (inActive.get()) div.style.display = "grid";
     else div.style.display = "none";
 
     if (!outElement.isLinked()) div.style.position = "absolute";
     else div.style.position = "relative";
+    outElement.setRef(div);
 }
 
 function create()

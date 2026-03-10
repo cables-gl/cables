@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1602053082458
+            "date": 1602053082458,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.Texture2Array3 renamed to Ops.Gl.TextureToPointArray3",
+            "message": "Added output for a color array of the filtered pixels",
+            "type": "feature",
             "author": "pandur",
-            "date": 1602058759969
+            "date": 1773132871128
         }
     ],
     "authorName": "pandur",
@@ -62,6 +64,10 @@
                 "name": "Points"
             },
             {
+                "type": 3,
+                "name": "Colors"
+            },
+            {
                 "type": 0,
                 "name": "Total Points",
                 "subType": "number"
@@ -87,5 +93,6 @@
     "exampleProjectId": "U8IO1k",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

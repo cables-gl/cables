@@ -26,7 +26,12 @@
                 "subType": "boolean"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Element passthrough"
+            }
+        ]
     },
     "summary": "add or remove css class to/from a HTML element",
     "youtubeid": "",
