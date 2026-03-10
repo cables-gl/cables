@@ -628,6 +628,9 @@ export class Patch extends Events
     deleteOp(opid, tryRelink, reloadingOp)
     {
         let found = false;
+        const perf = Patch.getGui()?.uiProfiler.start("[corepatch] delete op");
+
+        this._opIdCache[opid];
         for (let i = 0; i < this.ops.length; i++)
         {
             if (this.ops[i].id == opid)
@@ -673,7 +676,7 @@ export class Patch extends Events
                     opToDelete.cleanUp();
 
                     /* minimalcore:start */
-                    if (reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
+                    if (!reloadingOp && reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
                     {
                         this.link(reLinkP1.op, reLinkP1.getName(), reLinkP2.op, reLinkP2.getName());
                     }
@@ -685,6 +688,7 @@ export class Patch extends Events
                 }
             }
         }
+        perf?.finish();
 
         if (!found) this.#log.warn("core patch deleteop: not found...", opid);
     }

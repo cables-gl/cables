@@ -50,7 +50,7 @@ export class SubPatchOp
             const ops = op.patch.ops;
             for (let i = ops.length - 1; i >= 0; i--)
                 if (ops[i] && ops[i].uiAttribs && ops[i].uiAttribs.subPatch == op.patchId.get())
-                    op.patch.deleteOp(ops[i].id);
+                    op.patch.deleteOp(ops[i].id, false, true);
         });
 
         this._op.isExposableSubpatchOp = () =>

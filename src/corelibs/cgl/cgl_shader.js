@@ -777,6 +777,7 @@ class CglShader extends CgShader
     bind()
     {
         if (!this._isValid || this._cgl.aborted) return;
+        if (this.needsCheckLinkStatus) this.checkLinkStatus();
 
         MESH.lastShader = this;
 
@@ -1164,32 +1165,41 @@ class CglShader extends CgShader
 
         if (this._cgl.patch.config.glValidateShader !== false)
         {
-
-            if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
-            {
-                this._hasErrors = true;
-
-                const infoLogFrag = this._cgl.gl.getShaderInfoLog(this.fshader);
-                const infoLogVert = this._cgl.gl.getShaderInfoLog(this.vshader);
-
-                if (this.logError)
-                    this._log.error(this._name + " shader linking fail...");
-                else
-                    this._log.warn(this._name + " shader linking fail...");
-
-                if (infoLogFrag) this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
-                if (infoLogVert) this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
-
-                const str = this._cgl.gl.getProgramInfoLog(program);
-                if (str) this._log.log("shaderprogram link failed:", str);
-
-                if (!CABLES.UI) this._log.log(this);
-                this._isValid = false;
-
-                this._cgl.printError("shader link err");
-            }
+            this.needsCheckLinkStatus = true;
+            // this.checkLinkStatus(program);
         }
         this.#validated = false;
+    }
+
+    checkLinkStatus(program)
+    {
+        program = program || this._program;
+        if (!program) return;
+        if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
+        {
+            this._hasErrors = true;
+
+            const infoLogFrag = this._cgl.gl.getShaderInfoLog(this.fshader);
+            const infoLogVert = this._cgl.gl.getShaderInfoLog(this.vshader);
+
+            if (this.logError)
+                this._log.error(this._name + " shader linking fail...");
+            else
+                this._log.warn(this._name + " shader linking fail...");
+
+            if (infoLogFrag) this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
+            if (infoLogVert) this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
+
+            const str = this._cgl.gl.getProgramInfoLog(program);
+            if (str) this._log.log("shaderprogram link failed:", str);
+
+            if (!CABLES.UI) this._log.log(this);
+            this._isValid = false;
+
+            this._cgl.printError("shader link err");
+        }
+        this.needsCheckLinkStatus = false;
+
     }
 
     getProgram()
