@@ -16,11 +16,11 @@
     },
     "dependencies": {
         "@webgpu/types": "^0.1.53",
-        "cables-shared-client": "file:../shared/client/",
-        "git-last-commit": "1.0.1"
+        "cables-shared-client": "file:../shared/client/"
     },
     "devDependencies": {
         "@k88/module-scope-plugin": "1.1.0",
+        "git-last-commit": "1.0.1",
         "gulp": "5.0.0",
         "gulp-json-schema": "1.0.0",
         "raw-loader": "^4.0.2",
