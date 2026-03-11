@@ -15,7 +15,7 @@
         "node": "20.13.1"
     },
     "dependencies": {
-        "@webgpu/types": "^0.1.53",
+        "@webgpu/types": "0.1.53",
         "cables-shared-client": "file:../shared/client/"
     },
     "devDependencies": {
