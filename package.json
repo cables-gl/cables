@@ -23,11 +23,11 @@
         "git-last-commit": "1.0.1",
         "gulp": "5.0.0",
         "gulp-json-schema": "1.0.0",
-        "raw-loader": "^4.0.2",
+        "raw-loader": "4.0.2",
         "terser-webpack-plugin": "5.3.10",
         "webpack": "5.91.0",
         "webpack-bundle-analyzer": "4.10.2",
-        "webpack-cli": "^6.0.1"
+        "webpack-cli": "6.0.1"
     },
     "scripts": {
         "postinstall": "cd src/corelibs/ && npm install --no-save --ignore-scripts cables",
