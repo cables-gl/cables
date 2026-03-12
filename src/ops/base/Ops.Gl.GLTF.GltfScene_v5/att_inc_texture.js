@@ -7,6 +7,11 @@ let GltfTexture = class
         if (!gltf.json.images) return;
 
         let img = gltf.json.images[idx];
+        if (!img)
+        {
+            console.log("no image found?!", idx);
+            return;
+        }
 
         const buffView = gltf.json.bufferViews[img.bufferView];
         let dv = gltf.chunks[1].dataView;

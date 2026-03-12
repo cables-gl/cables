@@ -185,6 +185,19 @@ function printMaterial(mat, idx)
     html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
     html += "<td>";
 
+    html += "<td>";
+
+    let texStr = "";
+    if (mat.normalTexture)texStr += "normal ";
+    if (mat.pbrMetallicRoughness)
+    {
+        if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "albedo ";
+        if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "metal/rough ";
+    }
+
+    if (texStr)html += "Textures: " + texStr;
+    html += "</td>";
+
     html += "</tr>";
     return html;
 }
@@ -514,17 +527,23 @@ function printInfo()
 
         for (let i = 0; i < gltf.json.images.length; i++)
         {
+            html += "<tr>";
+            html += "<td>" + i + " " + gltf.json.images[i].name + "</td>";
+            html += "<td>" + gltf.json.images[i].mimeType;
+
             if (gltf.json.images[i].hasOwnProperty("bufferView"))
             {
                 // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
                 // else
                 sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
             }
-            else console.log("image has no bufferview?!");
+            else html += " no bufferview?!";
 
-            html += "<tr>";
-            html += "<td>" + gltf.json.images[i].name + "</td>";
-            html += "<td>" + gltf.json.images[i].mimeType + "</td>";
+            html += "</td>";
+            html += "<td>";
+            if (gltf.textures[i])
+                html += gltf.textures[i].tex.width + " x " + gltf.textures[i].tex.width;
+            html += "</td>";
             html += "<td>";
 
             let name = gltf.json.images[i].name;

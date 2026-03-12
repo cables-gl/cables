@@ -60,6 +60,8 @@ export class Op extends Events
     static OP_VERSION_PREFIX = "_v";
     static EVENT_INIT = "init";
     static EVENT_UIATTR_CHANGE = "onUiAttribsChange";
+    static EVENT_PORT_ADD = "onPortAdd";
+    static EVENT_PORT_REMOVE = "onPortRemove";
 
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
@@ -508,7 +510,7 @@ export class Op extends Events
         // p._op = this; // remove if above does never happen....
 
         this.portsOut.push(p);
-        this.emitEvent("onPortAdd", p);
+        this.emitEvent(Op.EVENT_PORT_ADD, p);
         return p;
     }
 
@@ -550,7 +552,7 @@ export class Op extends Events
             const idx = this.portsIn.indexOf(afterPort);
             this.portsIn.splice(idx + 1, 0, p);
         }
-        this.emitEvent("onPortAdd", p);
+        this.emitEvent(Op.EVENT_PORT_ADD, p);
 
         return p;
     }
