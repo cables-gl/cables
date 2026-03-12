@@ -177,6 +177,7 @@ const inUnlitUniform = new CGL.Uniform(PBRShader, "f", "_Unlit", 0);
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
 const inPCboxMax = new CGL.Uniform(PBRShader, "3f", "_PCboxMax", [1, 1, 1]);
+const uniTexTrans = PBRShader.addUniformFrag("4f", "texTransform", [1, 1, 0, 0]);
 
 PBRShader.materialPropUniforms = {
     "diffuseTexture": inAlbedoUniform,
@@ -185,7 +186,8 @@ PBRShader.materialPropUniforms = {
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
     "occlusion": inLightmapUniform,
-    "unlit": inUnlitUniform
+    "unlit": inUnlitUniform,
+    "texTransform": uniTexTrans
 };
 PBRShader.uniformColorDiffuse = inDiffuseColor; // remove later... backward compat to gltf4 ...
 PBRShader.uniformPbrMetalness = inMetalnessUniform; // remove later... backward compat to gltf4 ...

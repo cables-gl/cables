@@ -25,6 +25,21 @@ _matTexMetalRough=null
                 const idx = this.json.pbrMetallicRoughness.baseColorTexture.index;
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx,this.json.pbrMetallicRoughness.baseColorTexture);
                 this._matTexDiffuse = gltf.textures[idx];
+
+              if(this.json.pbrMetallicRoughness.baseColorTexture.extensions &&
+                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform)
+{
+  this.texTransform=[
+
+                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform.scale[0],
+                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform.scale[1],
+                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform.offset[0],
+                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform.offset[1]
+];
+console.log("textrans",this.texTransform);
+
+  }
+
             }
             if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicRoughnessTexture"))
             {
@@ -71,9 +86,9 @@ _matTexMetalRough=null
             uniUnlit.setValue(this._matUnlit);
             // console.log("this._matUnlit",this._matUnlit);
         }
-if(  uniTexTrans){
-// console.log("textransssssssssssss",uniTexTrans)
-uniTexTrans.setValue(100,100,20,20);
+if(  uniTexTrans&&this.texTransform){
+//console.log("textransssssssssssss",this.texTransform)
+uniTexTrans.setValue(this.texTransform);
   }
 
         if (uniDiff && this._matDiffuseColor)

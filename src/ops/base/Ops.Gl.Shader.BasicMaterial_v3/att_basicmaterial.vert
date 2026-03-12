@@ -10,10 +10,6 @@ UNI mat4 viewMatrix;
 
 #ifdef HAS_TEXTURES
 UNI vec4 texTransform;
-//    UNI float diffuseRepeatX;
-//    UNI float diffuseRepeatY;
-//    UNI float texOffsetX;
-//    UNI float texOffsetY;
 #endif
 
 #ifdef VERTEX_COLORS

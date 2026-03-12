@@ -91,6 +91,8 @@ UNI float tonemappingExposure;
     UNI float _EmissionIntensity;
 #endif
 IN vec2 texCoord;
+IN vec2 texCoordTransformed;
+
 #ifdef USE_LIGHTMAP
     #ifndef ATTRIB_texCoord1
     #ifndef VERTEX_COLORS
@@ -406,7 +408,7 @@ void main()
 
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
-        vec4 AlbedoMap   = texture(_AlbedoMap, UV0);
+        vec4 AlbedoMap   = texture(_AlbedoMap, texCoordTransformed);
 
         #ifdef MUL_ALBEDO
         AlbedoMap*=_Albedo;

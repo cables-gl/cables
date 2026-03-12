@@ -33,7 +33,6 @@ r.setUiAttribs({ "colorPick": true });
 
 // const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 const colUni = shader.addUniformFrag("4f", "color", r, g, b, a);
-
 // diffuse outTexture
 
 const diffuseTexture = op.inTexture("texture");

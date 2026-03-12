@@ -24,6 +24,7 @@ IN vec4 attrVertColor;
 {{MODULES_HEAD}}
 
 OUT vec2 texCoord;
+OUT vec2 texCoordTransformed;
 
 OUT vec4 FragPos;
 OUT mat3 TBN;
@@ -42,6 +43,7 @@ OUT mat3 invTBN;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
+UNI vec4 texTransform;
 
 void main()
 {
@@ -52,6 +54,11 @@ void main()
     #endif
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;
+
+    texCoordTransformed.x=attrTexCoord.x*texTransform.x+texTransform.z;
+    texCoordTransformed.y=(1.0-attrTexCoord.y)*texTransform.y+texTransform.w;
+
+
     vec4 pos = vec4(vPosition,  1.0);
     norm = attrVertNormal;
     vec3 tangent = attrTangent;
