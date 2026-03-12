@@ -45,5 +45,5 @@ function update()
         setTimeout(update, 50);
     }
 
-    outEle.setRef(inEle.get());
+    outEle.setRef(ele);
 }

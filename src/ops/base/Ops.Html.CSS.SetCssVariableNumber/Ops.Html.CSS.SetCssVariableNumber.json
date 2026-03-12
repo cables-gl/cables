@@ -17,7 +17,8 @@
                 "type": 5,
                 "name": "Suffix"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Set CSS variable number value",
     "docs": {
@@ -29,6 +30,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1757499393838
+        },
+        {
+            "message": "Update output when changing suffix",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773246027742
         }
     ],
     "license": "MIT",

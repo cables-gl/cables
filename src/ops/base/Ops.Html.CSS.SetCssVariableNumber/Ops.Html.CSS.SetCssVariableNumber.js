@@ -8,7 +8,7 @@ let decm = 1;
 op.toWorkPortsNeedsString(varname);
 
 const root = document.documentElement;
-val.onChange = varname.onChange = update;
+val.onChange = varname.onChange = suff.onChange = update;
 
 function update()
 {

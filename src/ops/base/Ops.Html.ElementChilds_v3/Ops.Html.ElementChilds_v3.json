@@ -1,6 +1,6 @@
 {
-    "id": "d1929eb8-8839-4d4b-ba3d-7d53a4c17813",
-    "created": 1720508423655,
+    "id": "9b62ed37-249e-4e3b-af05-13d5e176a2f0",
+    "created": 1765449292451,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -27,12 +27,22 @@
             {
                 "type": 2,
                 "name": "Childs_0",
-                "longPort": 2,
+                "longPort": 4,
                 "group": "Childs"
             },
             {
                 "type": 2,
                 "name": "Childs_1",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_2",
+                "group": "Childs"
+            },
+            {
+                "type": 2,
+                "name": "Childs_3",
                 "uititle": "add port",
                 "group": "Childs"
             }

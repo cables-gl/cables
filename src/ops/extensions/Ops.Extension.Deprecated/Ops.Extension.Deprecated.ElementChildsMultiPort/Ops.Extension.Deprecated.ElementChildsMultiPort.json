@@ -1,6 +1,6 @@
 {
-    "id": "9b62ed37-249e-4e3b-af05-13d5e176a2f0",
-    "created": 1765449292451,
+    "id": "d1929eb8-8839-4d4b-ba3d-7d53a4c17813",
+    "created": 1720508423655,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -15,6 +15,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1762955955615
+        },
+        {
+            "message": "op Html.ElementChildsMultiPort was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1773222043033
         }
     ],
     "layout": {
