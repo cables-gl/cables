@@ -295,6 +295,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1772203535449
+        },
+        {
+            "message": "More information about embedded textures and texture loading/binding bugs fixed / loading of occlusion textures",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773333734735
+        },
+        {
+            "message": "Extension KHR_texture_transform added for texture transforms, scaling and offset",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773334121051
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

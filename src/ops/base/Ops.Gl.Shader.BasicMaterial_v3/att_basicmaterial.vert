@@ -9,10 +9,11 @@ UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
 #ifdef HAS_TEXTURES
-    UNI float diffuseRepeatX;
-    UNI float diffuseRepeatY;
-    UNI float texOffsetX;
-    UNI float texOffsetY;
+UNI vec4 texTransform;
+//    UNI float diffuseRepeatX;
+//    UNI float diffuseRepeatY;
+//    UNI float texOffsetX;
+//    UNI float texOffsetY;
 #endif
 
 #ifdef VERTEX_COLORS
@@ -29,8 +30,8 @@ void main()
     texCoordOrig=attrTexCoord;
     texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES
-        texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
-        texCoord.y=(1.0-texCoord.y)*diffuseRepeatY+texOffsetY;
+        texCoord.x=texCoord.x*texTransform.x+texTransform.z;
+        texCoord.y=(1.0-texCoord.y)*texTransform.y+texTransform.w;
     #endif
 
     #ifdef VERTEX_COLORS

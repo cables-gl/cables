@@ -182,17 +182,21 @@ function printMaterial(mat, idx)
 
         html += "<div style=\"width:15px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a>";
     }
-    html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
+    html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>");
+    html += (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeMaterial('" + mat.name + "')\" class=\"treebutton\">Properties</a>");
+    html += "<td>";
+
     html += "<td>";
 
     html += "<td>";
 
     let texStr = "";
-    if (mat.normalTexture)texStr += "normal ";
+    if (mat.normalTexture)texStr += "NORM " + gltf.json.textures[mat.normalTexture.index].source + ", ";
+    if (mat.occlusionTexture)texStr += "OCC" + gltf.json.textures[mat.occlusionTexture.index].source + ", ";
     if (mat.pbrMetallicRoughness)
     {
-        if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "albedo ";
-        if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "metal/rough ";
+        if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + gltf.json.textures[mat.pbrMetallicRoughness.baseColorTexture.index].source + ", ";
+        if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "MR " + gltf.json.textures[mat.pbrMetallicRoughness.metallicRoughnessTexture.index].source + ", ";
     }
 
     if (texStr)html += "Textures: " + texStr;
@@ -238,32 +242,6 @@ function printInfo()
             html = printNode(html, gltf.nodes[i], 1);
     }
     html += "</table>";
-
-    // / //////////////////
-
-    let numMaterials = 0;
-    if (gltf.json.materials)numMaterials = gltf.json.materials.length;
-    html += "<div id=\"groupMaterials\">Materials (" + numMaterials + ")</div>";
-
-    if (!gltf.json.materials || gltf.json.materials.length == 0)
-    {
-    }
-    else
-    {
-        html += "<table id=\"materialtable\"  class=\"table treetable\">";
-        html += "<tr>";
-        html += " <th>Index</th>";
-        html += " <th>Name</th>";
-        html += " <th>Color</th>";
-        html += " <th>Function</th>";
-        html += " <th></th>";
-        html += "</tr>";
-        for (let i = 0; i < gltf.json.materials.length; i++)
-        {
-            html += printMaterial(gltf.json.materials[i], i);
-        }
-        html += "</table>";
-    }
 
     // / ///////////////////////
 
@@ -418,6 +396,82 @@ function printInfo()
     }
     html += "</table>";
 
+    // / //////////////////
+
+    let numMaterials = 0;
+    if (gltf.json.materials)numMaterials = gltf.json.materials.length;
+    html += "<div id=\"groupMaterials\">Materials (" + numMaterials + ")</div>";
+
+    if (!gltf.json.materials || gltf.json.materials.length == 0)
+    {
+    }
+    else
+    {
+        html += "<table id=\"materialtable\"  class=\"table treetable\">";
+        html += "<tr>";
+        html += " <th>Index</th>";
+        html += " <th>Name</th>";
+        html += " <th>Color</th>";
+        html += " <th>Function</th>";
+        html += " <th></th>";
+        html += "</tr>";
+        for (let i = 0; i < gltf.json.materials.length; i++)
+        {
+            html += printMaterial(gltf.json.materials[i], i);
+        }
+        html += "</table>";
+    }
+
+    // / ///////////////////
+
+    let numImages = 0;
+    if (gltf.json.images)numImages = gltf.json.images.length;
+    html += "<div id=\"groupImages\">Images (" + numImages + ")</div>";
+
+    if (gltf.json.images)
+    {
+        html += "<table id=\"sectionImages\" class=\"table treetable\">";
+
+        html += "<tr>";
+        html += "  <th>name</th>";
+        html += "  <th>type</th>";
+        html += "  <th>func</th>";
+        html += "</tr>";
+
+        sizes.images = 0;
+
+        for (let i = 0; i < gltf.json.images.length; i++)
+        {
+            html += "<tr>";
+            html += "<td>" + i + " " + gltf.json.images[i].name + "</td>";
+            html += "<td>" + gltf.json.images[i].mimeType;
+
+            if (gltf.json.images[i].hasOwnProperty("bufferView"))
+            {
+                // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
+                // else
+                sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
+            }
+            else html += " no bufferview?!";
+
+            html += "</td>";
+            html += "<td>";
+            if (gltf.textures[i])
+                html += gltf.textures[i].tex.width + " x " + gltf.textures[i].tex.width;
+            html += "</td>";
+            html += "<td>";
+
+            let name = gltf.json.images[i].name;
+            if (name === undefined)name = gltf.json.images[i].bufferView;
+
+            html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeTexture('" + name + "')\" class=\"treebutton\">Expose</a>";
+            html += "</td>";
+
+            html += "<tr>";
+        }
+        html += "</table>";
+    }
+
     // / //////////////////////////////////
 
     let numSamplers = 0;
@@ -506,57 +560,6 @@ function printInfo()
     {
 
     }
-
-    // / ///////////////////
-
-    let numImages = 0;
-    if (gltf.json.images)numImages = gltf.json.images.length;
-    html += "<div id=\"groupImages\">Images (" + numImages + ")</div>";
-
-    if (gltf.json.images)
-    {
-        html += "<table id=\"sectionImages\" class=\"table treetable\">";
-
-        html += "<tr>";
-        html += "  <th>name</th>";
-        html += "  <th>type</th>";
-        html += "  <th>func</th>";
-        html += "</tr>";
-
-        sizes.images = 0;
-
-        for (let i = 0; i < gltf.json.images.length; i++)
-        {
-            html += "<tr>";
-            html += "<td>" + i + " " + gltf.json.images[i].name + "</td>";
-            html += "<td>" + gltf.json.images[i].mimeType;
-
-            if (gltf.json.images[i].hasOwnProperty("bufferView"))
-            {
-                // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
-                // else
-                sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
-            }
-            else html += " no bufferview?!";
-
-            html += "</td>";
-            html += "<td>";
-            if (gltf.textures[i])
-                html += gltf.textures[i].tex.width + " x " + gltf.textures[i].tex.width;
-            html += "</td>";
-            html += "<td>";
-
-            let name = gltf.json.images[i].name;
-            if (name === undefined)name = gltf.json.images[i].bufferView;
-
-            html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeTexture('" + name + "')\" class=\"treebutton\">Expose</a>";
-            html += "</td>";
-
-            html += "<tr>";
-        }
-        html += "</table>";
-    }
-
     // / ///////////////////////
 
     let numCameras = 0;

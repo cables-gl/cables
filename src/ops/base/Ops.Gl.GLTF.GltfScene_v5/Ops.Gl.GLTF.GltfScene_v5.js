@@ -735,6 +735,18 @@ op.assignMaterial = function (name)
     gui.closeModal();
 };
 
+op.exposeMaterial = function (name)
+{
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfMaterialUseProperties");
+    newop.getPort("Material Name").set(name);
+    op.patch.link(op, next.name, newop, "Update");
+    setNewOpPosition(newop);
+    gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
+
+    gui.closeModal();
+};
+
 op.toggleNodeVisibility = function (name)
 {
     const n = gltf.getNode(name);

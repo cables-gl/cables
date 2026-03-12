@@ -184,6 +184,7 @@ PBRShader.materialPropUniforms = {
     "diffuseColor": inDiffuseColor,
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
+    "occlusion": inLightmapUniform,
     "unlit": inUnlitUniform
 };
 PBRShader.uniformColorDiffuse = inDiffuseColor; // remove later... backward compat to gltf4 ...

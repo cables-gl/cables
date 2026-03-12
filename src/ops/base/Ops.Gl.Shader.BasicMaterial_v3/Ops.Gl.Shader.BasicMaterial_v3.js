@@ -55,10 +55,6 @@ const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 shader.uniformColorDiffuse = colUni; // todo remove in next versio
 
-shader.materialPropUniforms = {
-    "diffuseColor": colUni
-
-};
 // texture coords
 const
     diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
@@ -67,12 +63,13 @@ const
     diffuseOffsetY = op.inValue("Tex Offset Y", 0),
     cropRepeat = op.inBool("Crop TexCoords", false);
 
-shader.addUniformFrag("f", "diffuseRepeatX", diffuseRepeatX);
-shader.addUniformFrag("f", "diffuseRepeatY", diffuseRepeatY);
-shader.addUniformFrag("f", "texOffsetX", diffuseOffsetX);
-shader.addUniformFrag("f", "texOffsetY", diffuseOffsetY);
-
+const texTransUni = shader.addUniformFrag("4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY);
 const doBillboard = op.inValueBool("billboard", false);
+
+shader.materialPropUniforms = {
+    "diffuseColor": colUni,
+    "texTransform": texTransUni
+};
 
 alphaMaskSource.onChange =
     doBillboard.onChange =
@@ -107,6 +104,7 @@ function doRender()
     if (diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
     if (textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
     shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
+    shader.materialPropUniforms.texTransform = texTransUni;
 
     trigger.trigger();
 

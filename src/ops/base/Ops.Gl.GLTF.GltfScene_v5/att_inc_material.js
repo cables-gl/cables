@@ -6,31 +6,44 @@ let GltfMaterial = class
     _matUnlit = 0;
     _matTexNormal = null;
     _matTexDiffuse = null;
+_matTexOcclusion=null
+_matTexMetalRough=null
 
     constructor(gltf, obj)
-    {
+  {
         this.json = obj || {};
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
         if (this.json.pbrMetallicRoughness)
         {
-
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorTexture"))
             {
                 const idx = this.json.pbrMetallicRoughness.baseColorTexture.index;
-                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx);
+                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx,this.json.pbrMetallicRoughness.baseColorTexture);
                 this._matTexDiffuse = gltf.textures[idx];
+            }
+            if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicRoughnessTexture"))
+            {
+                const idx = this.json.pbrMetallicRoughness.metallicRoughnessTexture.index;
+                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx,this.json.pbrMetallicRoughness.metallicRoughnessTexture);
+                this._matTexMetalRough = gltf.textures[idx];
             }
         }
         if (this.json.hasOwnProperty("normalTexture"))
         {
             const idx = this.json.normalTexture.index;
-            gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx);
+            gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx,this.json.normalTexture);
             this._matTexNormal = gltf.textures[idx];
+        }
+        if (this.json.hasOwnProperty("occlusionTexture"))
+        {
+            const idx = this.json.occlusionTexture.index;
+            gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx,this.json.occlusionTexture);
+            this._matTexOcclusion = gltf.textures[idx];
         }
     }
 
@@ -48,14 +61,20 @@ let GltfMaterial = class
         const uniPbrRoughness = currentShader.materialPropUniforms.pbrRoughness;
         const uniDiff = currentShader.materialPropUniforms.diffuseColor;
         const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
+        const uniTexOcc = currentShader.materialPropUniforms.diffuseOcc;
         const uniTexNormal = currentShader.materialPropUniforms.normalTexture;
         const uniUnlit = currentShader.materialPropUniforms.unlit;
+        const uniTexTrans = currentShader.materialPropUniforms.texTransform;
 
         if (uniUnlit)
         {
             uniUnlit.setValue(this._matUnlit);
             // console.log("this._matUnlit",this._matUnlit);
         }
+if(  uniTexTrans){
+// console.log("textransssssssssssss",uniTexTrans)
+uniTexTrans.setValue(100,100,20,20);
+  }
 
         if (uniDiff && this._matDiffuseColor)
         {
@@ -102,5 +121,6 @@ let GltfMaterial = class
         if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
         if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
         if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
-    }
+
+currentShader.popTextures();    }
 };

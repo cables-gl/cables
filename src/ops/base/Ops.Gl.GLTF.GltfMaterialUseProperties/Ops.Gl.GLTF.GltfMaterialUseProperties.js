@@ -58,7 +58,7 @@ exec.onTriggered = () =>
                     mat = mats[i];
                     matIdx = i;
                     // console.log("mat", mats[i]);
-                    outObj.setRef(mat);
+                    outObj.setRef(mat.json);
                     outFound.set(true);
                     break;
                 }
