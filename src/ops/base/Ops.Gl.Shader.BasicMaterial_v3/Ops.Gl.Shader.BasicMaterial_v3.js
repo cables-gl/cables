@@ -67,8 +67,8 @@ const doBillboard = op.inValueBool("billboard", false);
 
 shader.materialPropUniforms = {
     "diffuseColor": colUni,
-    "texTransform": texTransUni
-};
+    "texTransform": texTransUni,
+    "diffuseTexture": diffuseTextureUniform };
 
 alphaMaskSource.onChange =
     doBillboard.onChange =

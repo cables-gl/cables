@@ -9,7 +9,7 @@ IN vec4 vertCol;
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
     #ifdef HAS_TEXTURE_DIFFUSE
-        UNI sampler2D tex;
+        UNI sampler2D texDiffuse;
     #endif
     #ifdef HAS_TEXTURE_OPACITY
         UNI sampler2D texOpacity;
@@ -32,7 +32,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTURE_DIFFUSE
-            col=texture(tex,uv);
+            col=texture(texDiffuse,uv);
 
             #ifdef COLORIZE_TEXTURE
                 col.r*=color.r;

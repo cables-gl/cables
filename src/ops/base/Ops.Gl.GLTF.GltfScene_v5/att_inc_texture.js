@@ -24,11 +24,8 @@ offset=[0,0]
 
         if (texInfo.extensions && texInfo.extensions.KHR_texture_transform)
         {
-            // console.log(texInfo.extensions.KHR_texture_transform.offset);
-            // console.log(texInfo.extensions.KHR_texture_transform.scale);
             this.scale=texInfo.extensions.KHR_texture_transform.scale
             this.offset=texInfo.extensions.KHR_texture_transform.offset
-
         }
 
         if (!buffView) return;

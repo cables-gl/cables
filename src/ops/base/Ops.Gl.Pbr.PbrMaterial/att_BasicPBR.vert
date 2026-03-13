@@ -51,6 +51,9 @@ void main()
 
     #ifdef USE_LIGHTMAP
         texCoord1 = attrTexCoord1;
+          #ifdef USE_LIGHTMAP
+texCoord1.y=1.0-texCoord1.y;
+    #endif
     #endif
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;

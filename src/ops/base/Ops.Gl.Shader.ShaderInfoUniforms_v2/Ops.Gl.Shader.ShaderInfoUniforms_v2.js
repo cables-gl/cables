@@ -24,7 +24,8 @@ function update()
                 {
                     "name": shader._uniforms[i]._name,
                     "type": shader._uniforms[i]._type,
-                    "value": v
+                    "value": v,
+                    "loc": shader._uniforms[i].getLoc()
                 });
         }
 

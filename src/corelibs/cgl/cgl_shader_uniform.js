@@ -78,7 +78,10 @@ export class Uniform extends CgUniform
 
     isValidLoc()
     {
-        return this._loc != -1 && this._loc != null;
+        const v = this._loc != -1 && this._loc != null;
+        // if (!v)console.log("invalid", this);
+        return v;
+
     }
 
     resetLoc()
@@ -132,6 +135,10 @@ export class Uniform extends CgUniform
 
             this.#lastShaderCompile = this._shader.lastCompile;
             this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+            if (this._loc == null)
+            {
+                console.log("loc null", this);
+            }
         }
         else this.needsUpdate = false;
 

@@ -58,6 +58,8 @@ const inTexThinFilm = op.inTexture("Thin Film");
 const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
+
+const inLightMapFlip = op.inBool("Flip lightmap");
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
 inTrigger.onTriggered = doRender;
@@ -74,7 +76,7 @@ inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
 op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inDoubleSided]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexEmission, inTexHeight, inLightmap, inTexThinFilm]);
-op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
+op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightMapFlip, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
 op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
@@ -215,6 +217,7 @@ inTexAORM.onChange =
     inUseVertexColours.onChange =
     inToggleGR.onChange =
     inUseThinFilm.onChange =
+inLightMapFlip.onChange =
     inVertexColourMode.onChange = updateDefines;
 
 function updateDefines()
@@ -226,6 +229,7 @@ function updateDefines()
     PBRShader.toggleDefine("USE_NORMAL_MAP_FOR_CC", inUseNormalMapForCC.get());
     PBRShader.toggleDefine("USE_CC_NORMAL_MAP", inTexClearCoatNormal.isLinked());
     PBRShader.toggleDefine("LIGHTMAP_IS_RGBE", inLightmapRGBE.get());
+    PBRShader.toggleDefine("LIGHTMAP_FLIPY", inLightMapFlip.get());
     PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.isLinked() || inVertexColourMode.get() === "lightmap");
     PBRShader.toggleDefine("USE_NORMAL_TEX", inTexNormal.isLinked());
     PBRShader.toggleDefine("USE_HEIGHT_TEX", inTexHeight.isLinked());
@@ -422,8 +426,11 @@ function doRender()
     }
     else op.setUiError("deflight", null);
 
-    if (cgl.tempData.pbrEnvStack && cgl.tempData.pbrEnvStack.length > 0 &&
-        cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texPreFiltered.tex)
+    if (cgl.tempData.pbrEnvStack &&
+        cgl.tempData.pbrEnvStack.length > 0 &&
+        cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texIBLLUT.tex &&
+        cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texDiffIrr.tex &&
+        cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1].texPreFiltered.tex)
     {
         const pbrEnv = cgl.tempData.pbrEnvStack[cgl.tempData.pbrEnvStack.length - 1];
 
@@ -435,6 +442,7 @@ function doRender()
         inMipLevelsUniform.setValue(pbrEnv.texPreFilteredMipLevels || 7);
 
         PBRShader.toggleDefine("USE_PARALLAX_CORRECTION", pbrEnv.UseParallaxCorrection);
+
         if (pbrEnv.UseParallaxCorrection)
         {
             inPCOrigin.setValue(pbrEnv.PCOrigin);

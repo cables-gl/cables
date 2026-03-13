@@ -725,19 +725,20 @@ Texture.getRandomFloatTexture = function (cgl)
  */
 Texture.getBlackTexture = function (cgl)
 {
-    return Texture.getColorTexture(cgl, 0, 0, 0, 1);
+    if (cgl.blackTexture) return cgl.blackTexture;
+    cgl.blackTexture = Texture.getColorTexture(cgl, 0, 0, 0, 1);
+    return cgl.blackTexture;
 };
+
 Texture.getColorTexture = function (cgl, r, g, b, a)
 {
-    if (cgl.blackTexture) return cgl.blackTexture;
-
     const size = 8;
     const data = Texture.getDefaultTextureData("color", size, { "r": r, "g": g, "b": b, "a": a });
 
-    cgl.blackTexture = new Texture(cgl);
-    cgl.blackTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+    const ctex = new Texture(cgl);
+    ctex.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return cgl.blackTexture;
+    return ctex;
 };
 
 /**
