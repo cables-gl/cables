@@ -1,5 +1,4 @@
 import { Anim, Patch } from "cables";
-import { EventListener } from "cables-shared-client/src/eventlistener.js";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
@@ -23,8 +22,6 @@ import { WireframeCube } from "./cgl_wireframecube.js";
 import { WireframeRect } from "./cgl_wireframerect.js";
 import { CopyTexture } from "./cgl_copytexture.js";
 import { PixelReader } from "./cgl_pixelreader.js";
-
-class WhatTheDog { }
 
 const CGL = {
     "BoundingBox": BoundingBox,
@@ -67,16 +64,25 @@ window.CABLES = window.CABLES || {};
 window.CABLES.CGL = { ...CGL, ...window.CABLES.CGL };
 window.CGL = { ...CGL, ...window.CABLES.CGL, ...window.CGL };
 
-console.log("cgl index");
-window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
+/**
+ * HACK: this needs to be wrapped into a function, exported and be
+ * called when using this as a module, as otherwise as subsequent webpack
+ * build (like cables_ui) might treeshake this whole file away
+ *
+ * if it's not treeshaken away, we call it immediately right after declaration
+ * to register listeners (i.e. in export)
+ */
+const initCGL = () =>
 {
-    const patch = e?.detail;
-    if (!patch || (patch.tempData.cglInitialized && !CABLES.UI)) return;
-    patch.tempData.cglInitialized = true;
-    console.log("event cgl init");
-
-    const cgl = new CglContext(patch);
-});
+    window.addEventListener(Patch.EVENT_INIT_CGL, (e) =>
+    {
+        const patch = e?.detail;
+        if (!patch || patch.tempData.cglInitialized) return;
+        patch.tempData.cglInitialized = true;
+        const cgl = new CglContext(patch);
+    });
+};
+initCGL();
 
 /**
  * @param {number} time
@@ -117,4 +123,4 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     return q;
 };
 
-export { WhatTheDog, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
+export { initCGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
