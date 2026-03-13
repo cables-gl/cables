@@ -15,6 +15,7 @@ const
     outNeedsBarycentric = op.outBoolNum("needsBarycentric"),
     outNumUniforms = op.outNumber("Num Uniforms"),
     outNumAttributes = op.outNumber("Num Attributes"),
+    outBoundTexts = op.outObject("Bound Textures"),
     outAttributeNames = op.outArray("Arributes Names"),
     outModules = op.outArray("Modules"),
     outDefines = op.outArray("Num Defines");
@@ -116,6 +117,14 @@ exec.onTriggered = function ()
         outDefines.set(0);
         outAttributeNames.set(null);
     }
+
+    const tt = { "textureStackCgl": shader._textureStackTexCgl };
+    // for(let i=0;i<cgl._textureStackTexCgl.length;i++)
+    // {
+    // console.log( shader._textureStackTexCgl )
+    // console.log( shader._textureStackTex )
+    // }
+    outBoundTexts.set(tt);
 
     if (doUniformDump)
     {

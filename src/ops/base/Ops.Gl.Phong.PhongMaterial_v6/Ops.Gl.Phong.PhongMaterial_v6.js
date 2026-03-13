@@ -961,6 +961,8 @@ shader.materialPropUniforms = {
     "diffuseTexture": diffuseTextureUniform,
     // "normalTexture": inNormalUniform,
     "diffuseColor": uniDiffuseColor,
+    "occlusionTexture": aoTextureUniform,
+
     // "pbrMetalness": inMetalnessUniform,
     // "pbrRoughness": inRoughnessUniform,
 };

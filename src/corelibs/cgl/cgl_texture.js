@@ -725,10 +725,14 @@ Texture.getRandomFloatTexture = function (cgl)
  */
 Texture.getBlackTexture = function (cgl)
 {
+    return Texture.getColorTexture(cgl, 0, 0, 0, 1);
+};
+Texture.getColorTexture = function (cgl, r, g, b, a)
+{
     if (cgl.blackTexture) return cgl.blackTexture;
 
     const size = 8;
-    const data = Texture.getDefaultTextureData("color", size, { "r": 0, "g": 0, "b": 0 });
+    const data = Texture.getDefaultTextureData("color", size, { "r": r, "g": g, "b": b, "a": a });
 
     cgl.blackTexture = new Texture(cgl);
     cgl.blackTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);

@@ -23,6 +23,7 @@ const
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
     inUseMatProps = op.inBool("Use Material Properties", true),
+    inUseMatTexProps = op.inBool("Use Material Textures", true),
 
     inActive = op.inBool("Active", true),
 

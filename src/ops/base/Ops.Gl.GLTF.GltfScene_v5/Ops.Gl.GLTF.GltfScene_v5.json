@@ -114,6 +114,11 @@
             },
             {
                 "type": 0,
+                "name": "Use Material Textures",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

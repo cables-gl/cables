@@ -392,6 +392,7 @@ void main()
         #else
             #ifndef VCOL_LIGHTMAP
                 vec2 UV1             = texCoord1;
+
             #endif
         #endif
     #endif

@@ -76,7 +76,7 @@ export class Uniform extends CgUniform
         return Uniform.glslTypeString(this._type);
     }
 
-    _isValidLoc()
+    isValidLoc()
     {
         return this._loc != -1 && this._loc != null;
     }
@@ -126,7 +126,7 @@ export class Uniform extends CgUniform
     #updateLoc()
     {
 
-        if (!this._isValidLoc())
+        if (!this.isValidLoc())
         {
             if (this.#lastShaderCompile == this._shader.lastCompile) return; // ignore until shader changes
 
@@ -138,7 +138,7 @@ export class Uniform extends CgUniform
         // CABLES.shaderUsed = CABLES.shaderUsed || {};
         // CABLES.shaderUsed[this._shader.name] = CABLES.shaderUsed[this._shader.name] || {};
         // CABLES.shaderUsed[this._shader.name][this.name] = true;
-        if (!this._isValidLoc()) this._cgl.profileData.count("uniformUpdateInvalid");
+        if (!this.isValidLoc()) this._cgl.profileData.count("uniformUpdateInvalid");
     }
 
     updateValueF()
@@ -274,7 +274,7 @@ export class Uniform extends CgUniform
 
     updateValueBool()
     {
-        if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        if (!this.isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         else this.needsUpdate = false;
         this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0);
 

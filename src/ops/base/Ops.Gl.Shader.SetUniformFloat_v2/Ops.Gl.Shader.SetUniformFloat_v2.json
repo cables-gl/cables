@@ -56,19 +56,9 @@
     },
     "changelog": [
         {
-            "message": "Ops.Exp.Gl.Shader.SetUniformValue renamed to Ops.Gl.Shader.SetUniformValue",
-            "author": "pandur",
-            "date": 1613548289481
-        },
-        {
             "message": "cloned op from Ops.Gl.Shader.SetUniformValue",
             "author": "pandur",
             "date": 1662556221199
-        },
-        {
-            "message": "Ops.User.pandur.SetUniformValue2 renamed to Ops.Gl.Shader.SetUniformFloat_v2",
-            "author": "pandur",
-            "date": 1662567079136
         }
     ],
     "exampleProjectId": "5W7X2f",
