@@ -7,8 +7,6 @@ const
 
 const
     cgl = op.patch.cgl,
-    pos = vec3.create(),
-    identVec = vec3.create(),
     iViewMatrix = mat4.create();
 
 render.onTriggered = update;
@@ -16,11 +14,10 @@ render.onTriggered = update;
 function update()
 {
     mat4.invert(iViewMatrix, cgl.vMatrix);
-    vec3.transformMat4(pos, identVec, iViewMatrix);
 
-    outX.set(pos[0]);
-    outY.set(pos[1]);
-    outZ.set(pos[2]);
+    outX.set(iViewMatrix[12]);
+    outY.set(iViewMatrix[13]);
+    outZ.set(iViewMatrix[14]);
 
     trigger.trigger();
 }
