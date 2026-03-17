@@ -89,7 +89,7 @@ export class RenderTargets
         else if (type == "Position * ModelView") return "    " + outcolor + i + " = vec4(MOD_pos_mv,1.);".endl();
 
         else if (type == "Position Object") return "    " + outcolor + i + " = vec4(MOD_pos_object,1.);".endl();
-        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(MOD_normal_world,1.);".endl();
+        else if (type == "Normal World") return "    " + outcolor + i + " = vec4(normalize(MOD_normal_world),1.);".endl();
         else if (type == "Normal * ModelView") return "    " + outcolor + i + " = vec4(MOD_normal_mv,1.);".endl();
         else if (type == "Material Id") return "    " + outcolor + i + " = vec4(round(materialId),round(instIdx),0.,1.);".endl();
         else if (type == "Object Id") return "    " + outcolor + i + " = vec4(objectId,0.,0.,1.);".endl();
