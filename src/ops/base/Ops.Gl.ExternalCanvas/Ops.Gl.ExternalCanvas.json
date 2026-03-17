@@ -11,6 +11,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1712763041798
+        },
+        {
+            "message": "Add option to open with transparent background",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773420621247
         }
     ],
     "layout": {
@@ -51,6 +57,11 @@
             {
                 "type": 0,
                 "name": "Stretch",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Transparent background",
                 "subType": "boolean"
             },
             {

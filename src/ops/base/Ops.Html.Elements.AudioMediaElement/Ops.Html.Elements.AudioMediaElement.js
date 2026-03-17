@@ -2,13 +2,15 @@ const
     fileName = op.inUrl("file", "audio"),
     inPlay = op.inValueBool("Play"),
     volume = op.inValueSlider("Volume"),
-
+    inTime = op.inFloat("Time"),
     doLoop = op.inValueBool("Loop"),
     doRewind = op.inValueBool("Rewind on play", false),
     inPlayTrigg = op.inTriggerButton("Play Trigger"),
     inPauseTrigg = op.inTriggerButton("Pause"),
+    inRewind = op.inTriggerButton("Rewind"),
     outPlaying = op.outNumber("Playing"),
     outDuration = op.outNumber("Duration"),
+    outCurrentTime = op.outNumber("Current Time"),
     outEle = op.outObject("Element", null, "element"),
     outEnded = op.outTrigger("Has Ended");
 
@@ -22,6 +24,9 @@ inPlayTrigg.onTriggered = play;
 inPauseTrigg.onTriggered = pause;
 op.onDelete = pause;
 op.onMasterVolumeChanged = updateVolume;
+
+inTime.onChange = () => { updateTime(inTime.get()); };
+inRewind.onTriggered = rewind;
 
 function pause()
 {
@@ -38,6 +43,7 @@ function play()
     {
         playing = true;
         audio.play();
+        outPlaying.set(playing);
     }
 }
 
@@ -49,10 +55,8 @@ inPlay.onChange = function ()
     }
     else
     {
-        playing = false;
-        if (audio) audio.pause();
+        pause();
     }
-    outPlaying.set(playing);
 };
 
 doLoop.onChange = function ()
@@ -60,17 +64,31 @@ doLoop.onChange = function ()
     if (audio) audio.loop = doLoop.get();
 };
 
-function playPause()
-{
-    if (!audio) return;
-
-    if (op.patch.timer.isPlaying()) audio.play();
-    else audio.pause();
-}
-
 function updateVolume()
 {
     if (audio)audio.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
+}
+
+function updateTime(goto)
+{
+    if (!audio) return;
+    if (!goto)
+    {
+        goto = getWantedTime();
+    }
+    audio.fastSeek(goto);
+}
+
+function rewind()
+{
+    updateTime(0.0);
+}
+
+function getWantedTime()
+{
+    let goto = inTime.get();
+    if (!goto || goto < 0) goto = 0;
+    return goto;
 }
 
 fileName.onChange = function ()
@@ -92,10 +110,11 @@ fileName.onChange = function ()
     audio.loop = doLoop.get();
     audio.controls = "true";
     audio.crossOrigin = "anonymous";
+    audio.currentTime = getWantedTime();
 
     outEle.set(audio);
 
-    var canplaythrough = function ()
+    var canplaythrough = () =>
     {
         outDuration.set(audio.duration);
         if (inPlay.get()) play();
@@ -104,6 +123,13 @@ fileName.onChange = function ()
     };
 
     audio.addEventListener("canplaythrough", canplaythrough, false);
+
+    const timeupdate = () =>
+    {
+        outCurrentTime.set(audio.currentTime);
+    };
+
+    audio.addEventListener("timeupdate", timeupdate);
 
     audio.addEventListener("ended", function ()
     {

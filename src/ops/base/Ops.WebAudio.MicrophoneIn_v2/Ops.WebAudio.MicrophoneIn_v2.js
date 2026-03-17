@@ -136,12 +136,14 @@ navigator.mediaDevices.getUserMedia({ "audio": true })
         op.patch.loading.finished(loadingId);
         audioInputsLoaded = true;
         outDevices.setRef(audioInputDevices);
+        op.refreshParams();
     })
     .catch((e) =>
     {
         op.log("error", e);
         op.patch.loading.finished(loadingId);
         audioInputsLoaded = false;
+        op.refreshParams();
 
         outDevices.setRef(null);
     });

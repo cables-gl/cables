@@ -139,6 +139,7 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
     #endif
 
     MOD_de*=MOD_amount;
+    // MOD_de=clamp(1.,0.,MOD_de);
 
     if(MOD_de>0.000)
     {

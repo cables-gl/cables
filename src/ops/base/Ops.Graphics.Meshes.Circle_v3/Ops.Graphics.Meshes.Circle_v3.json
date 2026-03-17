@@ -91,14 +91,7 @@
         ]
     },
     "issues": "",
-    "changelog": [
-        {
-            "message": "Fixed texture coordinates when give an inner radius and chose \"round\" mapping",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1772618481070
-        }
-    ],
+    "changelog": [],
     "exampleProjectId": "DAAkQ6",
     "license": "MIT",
     "coreLibs": [

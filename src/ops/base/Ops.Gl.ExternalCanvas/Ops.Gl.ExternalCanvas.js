@@ -7,6 +7,7 @@ const
     inSizeY = op.inInt("Height", 480),
     inSmoothing = op.inBool("Smoothing", true),
     inStretch = op.inBool("Stretch", false),
+    inTransparent = op.inBool("Transparent background"),
     inTitle = op.inString("Title", "cables"),
     inOpen = op.inTriggerButton("Open Window"),
     inFull = op.inTriggerButton("Fullscreen"),
@@ -139,7 +140,9 @@ inOpen.onTriggered = () =>
     document.title = inTitle.get();
 
     let body = document.body;
-    body.style = "padding:0px;margin:0px;background-color:#000;overflow:hidden;";
+    let bgColor = "#000";
+    if (inTransparent.get()) bgColor = "transparent";
+    body.style = "padding:0px;margin:0px;background-color:" + bgColor + ";overflow:hidden;";
     canvas = document.createElement("canvas");
     canvas.style.position = "absolute";
     canvas.width = winWidth;

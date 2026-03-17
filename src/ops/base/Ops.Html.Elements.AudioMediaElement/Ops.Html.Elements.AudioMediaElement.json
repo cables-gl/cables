@@ -18,6 +18,11 @@
             },
             {
                 "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Loop",
                 "subType": "boolean"
             },
@@ -33,6 +38,10 @@
             {
                 "type": 1,
                 "name": "Pause"
+            },
+            {
+                "type": 1,
+                "name": "Rewind"
             }
         ],
         "portsOut": [
@@ -44,6 +53,11 @@
             {
                 "type": 0,
                 "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Current Time",
                 "subType": "number"
             },
             {
@@ -91,6 +105,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1772548765960
+        },
+        {
+            "message": "Add time input port for scrubbing",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773760980368
+        },
+        {
+            "message": "Add current time output port",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773760989516
         }
     ],
     "license": "MIT"

@@ -208,7 +208,9 @@ function printMaterial(mat, idx)
 
 function printInfo()
 {
-    if (!gltf) return tab.html("//");
+    if (!gltf)
+        if (tab) return tab.html("//");
+        else return;
 
     const startTime = performance.now();
     const sizes = {};
@@ -571,7 +573,7 @@ function printInfo()
         html += "<table id=\"sectionCameras\" class=\"table treetable\">";
 
         html += "<tr>";
-        html += "  <th>name</th>";
+        html += "  <th>Node</th>";
         html += "  <th>type</th>";
         html += "  <th>info</th>";
         html += "</tr>";
