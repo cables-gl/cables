@@ -20,6 +20,15 @@
 
 
 #ifdef MOD_SLOT_POS_NORMAL_WORLD
-    MOD_normal_world=(mMatrix*vec4(norm,1.0)).xyz;
+    mat4 MOD_fmMatrix=mMatrix;
+    #ifdef INSTANCING
+        #ifdef TEXINSTMAT
+            MOD_fmMatrix = texInstMat;
+        #endif
+        #ifndef TEXINSTMAT
+            MOD_fmMatrix = iMat;
+        #endif
+    #endif
+    MOD_normal_world=vec3(MOD_fmMatrix * vec4(norm, 0.0));
 #endif
 
