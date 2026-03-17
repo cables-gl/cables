@@ -30,6 +30,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1770386180450
+        },
+        {
+            "message": "Add option to flip the lightmap",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773416612300
         }
     ],
     "layout": {
@@ -325,6 +331,26 @@
                 "type": 0,
                 "name": "Lightmap Intensity",
                 "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture RepeatX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture RepeatY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture Offset Y",
                 "subType": "number"
             }
         ],

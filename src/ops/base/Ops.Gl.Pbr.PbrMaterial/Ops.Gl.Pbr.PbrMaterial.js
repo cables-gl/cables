@@ -62,6 +62,11 @@ const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
 const inLightMapFlip = op.inBool("Flip lightmap");
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
+const inTexTransRepeatX = op.inValue("Texture RepeatX", 1);
+const inTexTransRepeatY = op.inValue("Texture RepeatY", 1);
+const inTexTransOffsetX = op.inValue("Texture Offset X", 0);
+const inTexTransOffsetY = op.inValue("Texture Offset Y", 0);
+
 inTrigger.onTriggered = doRender;
 
 // outputs
@@ -179,7 +184,7 @@ const inUnlitUniform = new CGL.Uniform(PBRShader, "f", "_Unlit", 0);
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
 const inPCboxMax = new CGL.Uniform(PBRShader, "3f", "_PCboxMax", [1, 1, 1]);
-const uniTexTrans = PBRShader.addUniformFrag("4f", "texTransform", [1, 1, 0, 0]);
+const uniTexTrans = PBRShader.addUniformFrag("4f", "texTransform", inTexTransRepeatX, inTexTransRepeatY, inTexTransOffsetX, inTexTransOffsetY);
 
 PBRShader.materialPropUniforms = {
     "diffuseTexture": inAlbedoUniform,

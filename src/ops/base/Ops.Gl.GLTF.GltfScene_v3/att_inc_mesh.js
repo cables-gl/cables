@@ -382,11 +382,10 @@ let gltfMesh = class
             const currentShader = cgl.getShader() || {};
             const uniDiff = currentShader.uniformColorDiffuse;
 
-            const uniPbrMetalness = currentShader.uniformPbrMetalness;
-            const uniPbrRoughness = currentShader.uniformPbrRoughness;
-
             if (!gltf.shaders[this.material] && inUseMatProps.get())
             {
+                const uniPbrMetalness = currentShader.uniformPbrMetalness;
+                const uniPbrRoughness = currentShader.uniformPbrRoughness;
                 if (uniDiff && this._matDiffuseColor)
                 {
                     this._matDiffuseColorOrig = [uniDiff.getValue()[0], uniDiff.getValue()[1], uniDiff.getValue()[2], uniDiff.getValue()[3]];
@@ -394,6 +393,7 @@ let gltfMesh = class
                 }
 
                 if (uniPbrMetalness)
+                {
                     if (this._matPbrMetalness != null)
                     {
                         this._matPbrMetalnessOrig = uniPbrMetalness.getValue();
@@ -401,8 +401,9 @@ let gltfMesh = class
                     }
                     else
                         uniPbrMetalness.setValue(0);
-
+                }
                 if (uniPbrRoughness)
+                {
                     if (this._matPbrRoughness != null)
                     {
                         this._matPbrRoughnessOrig = uniPbrRoughness.getValue();
@@ -412,6 +413,7 @@ let gltfMesh = class
                     {
                         uniPbrRoughness.setValue(0);
                     }
+                }
             }
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
