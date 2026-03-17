@@ -458,8 +458,13 @@ function printInfo()
 
             html += "</td>";
             html += "<td>";
-            if (gltf.textures[i])
-                html += gltf.textures[i].tex.width + " x " + gltf.textures[i].tex.width;
+            for (let ti = 0; ti < gltf.json.textures.length; ti++)
+            {
+                if (gltf.json.textures[ti].source != i) continue;
+                html += gltf.textures[ti].tex.width + " x " + gltf.textures[ti].tex.height;
+                html += "<img style=\"max-width:50%;\" src=\"" + gltf.textures[ti].previewUri + "\"/>";
+                break;
+            }
             html += "</td>";
             html += "<td>";
 
