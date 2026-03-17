@@ -1,0 +1,44 @@
+{
+    "id": "269497d7-143a-4af0-adbd-96f2d03a7ad0",
+    "created": 1773656563587,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1773656563587
+        },
+        {
+            "message": "Link public teams to my teams and vice versa",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773656577944
+        },
+        {
+            "message": "Show icon next to op name if op has an example on ops overview page",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773656588343
+        },
+        {
+            "message": "New concept of \"temporary patches\" (new empty patches, restored backups, ...) they are listed in tab on \"My Patches\" page",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1773656641585
+        },
+        {
+            "message": "Cleanup layout of team page and team-overview pages",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773656658593
+        },
+        {
+            "message": "Disallow deletion of example patches, add warning",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773761165497
+        }
+    ]
+}
