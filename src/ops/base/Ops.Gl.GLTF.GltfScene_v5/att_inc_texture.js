@@ -3,6 +3,7 @@ let GltfTexture = class
 
   scale=[1,1]
 offset=[0,0]
+  previewUri=null
 
     constructor(gltf, _idx, texInfo)
     {
@@ -35,6 +36,9 @@ offset=[0,0]
 
         const blob = new Blob([data.buffer], { "type": img.mimeType });
         const sourceURI = URL.createObjectURL(blob);
+
+      if(CABLES.UI)  this.previewUri=sourceURI
+
 
         let cgl_wrap = CGL.Texture.WRAP_CLAMP;
         // if(scale[0]!=1||scale[1]!=1)
