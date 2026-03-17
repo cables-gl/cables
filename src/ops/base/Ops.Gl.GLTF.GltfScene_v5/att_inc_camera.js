@@ -4,9 +4,12 @@ const gltfCamera = class
     {
         this.node = node;
         this.name = node.name;
-        // console.log(gltf);
-        this.config = gltf.json.cameras[node.camera];
 
+        // console.log("camera node", node);
+        // console.log(gltf);
+
+        this.config = gltf.json.cameras[node.camera];
+        this.config.name = this.name;
         this.pos = vec3.create();
         this.quat = quat.create();
         this.vCenter = vec3.create();

@@ -40,6 +40,11 @@
                 "type": 0,
                 "name": "Show Opacity",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -70,6 +75,11 @@
             {
                 "type": 5,
                 "name": "Hex"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
             }
         ]
     },
@@ -114,11 +124,6 @@
             "type": "new"
         },
         {
-            "message": " added lib: colorrick.js",
-            "author": "pandur",
-            "date": 1629365161529
-        },
-        {
             "message": "react properly to disconnecting parent",
             "author": "stephan",
             "date": 1643888065820,
@@ -135,6 +140,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1751875141085
+        },
+        {
+            "message": "Output the picker HTML element",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773477437022
+        },
+        {
+            "message": "Add option to toggle visibility",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773568725786
         }
     ],
     "libs": [

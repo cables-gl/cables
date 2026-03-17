@@ -7,7 +7,8 @@ const
     inLineNums = op.inBool("Line Numbers", false),
     inSort = op.inBool("Sort Keys", false),
     inFontSize = op.inFloat("Font Size", 10),
-    inPos = op.inFloatSlider("Scroll", 0);
+    inPos = op.inFloatSlider("Scroll", 0),
+    outObj = op.outObject("Object Passthrough");
 
 let lines = [];
 inConsole.setUiAttribs({ "hidePort": true });
@@ -221,15 +222,20 @@ inObj.onChange = () =>
 
 inObj.onLinkChanged = () =>
 {
-    if (inObj.isLinked()) title = inObj.links[0].getOtherPort(inObj).name;
-    else title = "";
-
-    if (inObj.isLinked())
+    if (CABLES.UI)
     {
-        const p = inObj.links[0].getOtherPort(inObj);
+        if (inObj.isLinked()) title = inObj.links[0].getOtherPort(inObj).name;
+        else title = "";
 
-        op.setUiAttrib({ "extendTitle": title + " (" + p.uiAttribs.objType + ")" });
+        if (inObj.isLinked())
+        {
+            const p = inObj.links[0].getOtherPort(inObj);
+
+            op.setUiAttrib({ "extendTitle": title + " (" + p.uiAttribs.objType + ")" });
+        }
     }
+
+    outObj.setRef(inObj.get());
 };
 
 inConsole.onTriggered = () =>

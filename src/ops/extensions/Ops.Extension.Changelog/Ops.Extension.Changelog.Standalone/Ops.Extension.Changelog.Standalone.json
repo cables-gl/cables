@@ -1,0 +1,20 @@
+{
+    "id": "3041441d-a776-4682-a320-8a4fc16dc885",
+    "created": 1773656452899,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1773656452899
+        },
+        {
+            "message": "Add usersetting to open popout- and external-canvas in a transparent window (pull request by Uuoocl, thank you!)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1773656485308
+        }
+    ]
+}

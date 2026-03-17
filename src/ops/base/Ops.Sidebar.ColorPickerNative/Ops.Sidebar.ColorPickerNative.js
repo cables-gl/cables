@@ -11,6 +11,8 @@ const inputBluePort = op.inValueSlider("Input Blue", defaultColorArr[2]);
 // const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const defaultValuePort = op.inValueString("Default", DEFAULT_COLOR_HEX);
+const inVisible = op.inBool("Visible", true);
+
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
@@ -42,6 +44,11 @@ el.addEventListener("dblclick", function ()
         }
     }
 });
+
+inVisible.onChange = function ()
+{
+    el.style.display = inVisible.get() ? "block" : "none";
+};
 
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__color-picker");

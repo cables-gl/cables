@@ -5,55 +5,60 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input Red",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input Green",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input Blue",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Set Default"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Children"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Red",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Green",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Blue",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Hex"
             }
         ]
@@ -91,5 +96,20 @@
             }
         ]
     },
-    "exampleProjectId": "8-XQ5d"
+    "exampleProjectId": "8-XQ5d",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Sidebar.ColorPicker_v2 renamed to Ops.Sidebar.ColorPickerNative",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1773568673124
+        },
+        {
+            "message": "Add option to toggle visibility",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773568716318
+        }
+    ]
 }

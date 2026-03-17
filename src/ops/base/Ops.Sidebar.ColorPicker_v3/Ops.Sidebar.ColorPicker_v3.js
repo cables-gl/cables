@@ -12,6 +12,8 @@ const inputOpaPort = op.inValueSlider("Input Opacity", 1);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const defaultValuePort = op.inValueString("Default", DEFAULT_COLOR_HEX);
 const showOpacity = op.inBool("Show Opacity", false);
+const inVisible = op.inBool("Visible", true);
+
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
@@ -20,8 +22,8 @@ const redPort = op.outNumber("Red", 0.0);
 const greenPort = op.outNumber("Green", 0.0);
 const bluePort = op.outNumber("Blue", 0.0);
 const outOpa = op.outNumber("Opacity", 1.0);
-
 const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
+const outEle = op.outObject("Element", null, "element");
 
 // vars
 const el = document.createElement("div");
@@ -45,6 +47,11 @@ el.addEventListener("dblclick", function ()
         }
     }
 });
+
+inVisible.onChange = function ()
+{
+    el.style.display = inVisible.get() ? "block" : "none";
+};
 
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__color-picker");
@@ -75,7 +82,7 @@ colorInput.style.backgroundColor = defaultValuePort.get();
 
 colorInput.addEventListener("click", function ()
 {
-    new ColorRick(
+    const cr = new ColorRick(
         {
             "ele": this,
             "color": this.style.backgroundColor || "#ff0000",
@@ -100,6 +107,7 @@ colorInput.addEventListener("click", function ()
                 op.refreshParams();
             }
         });
+    outEle.setRef(cr._elContainer);
 });
 
 el.appendChild(colorInput);

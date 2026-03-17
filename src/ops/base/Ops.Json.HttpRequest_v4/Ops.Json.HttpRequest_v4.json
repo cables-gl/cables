@@ -80,6 +80,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1754664138898
+        },
+        {
+            "message": "Removed debug \"response\" out-port",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773661111211
         }
     ],
     "layout": {
@@ -184,10 +190,6 @@
                 "type": 0,
                 "name": "Duration MS",
                 "subType": "number"
-            },
-            {
-                "type": 2,
-                "name": "Fetch Response"
             },
             {
                 "type": 1,

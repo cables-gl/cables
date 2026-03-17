@@ -84,6 +84,15 @@ function updateStatus()
     op.setUiAttribs({ "loading": notFinished });
 }
 
+op.onDelete = () =>
+{
+    if (loadingId)
+    {
+        patch.loading.finished(loadingId);
+        loadingId = null;
+    }
+};
+
 exe.onTriggered = () =>
 {
     updateStatus();

@@ -1,0 +1,56 @@
+{
+    "id": "fe13b4b6-8fb7-42f4-a66d-e2a7423ad898",
+    "created": 1773655929509,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1773655929509
+        },
+        {
+            "message": "Gradient editor: Added simple presets",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773655970706
+        },
+        {
+            "message": "Gradient editor: Added button to reverse all keys in current gradient",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773656286194
+        },
+        {
+            "message": "Added user preference to switch the text editor, added basic support for codemirror and a simple textarea editor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773656311414
+        },
+        {
+            "message": "Speed up subpatch op saving when reloading multiple instances of op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773656323687
+        },
+        {
+            "message": "Optimize shader compilation time, by only checking valid link status when shader is actually used",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773656339510
+        },
+        {
+            "message": "Fix \"take screenshot now\" button, was not working in some cases",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1773656427885
+        },
+        {
+            "message": "Export: Remove reference to non-existant sourcemaps from non-minified exports",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1773656530900
+        }
+    ]
+}

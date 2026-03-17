@@ -86,12 +86,6 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1712913009518
-        },
-        {
-            "message": "Ops.Html.TransformElement renamed to Ops.Html.CSS.TransformElement",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1730274096602
         }
     ],
     "license": "MIT",

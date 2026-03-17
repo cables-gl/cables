@@ -76,8 +76,8 @@
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "ae07830b-91c3-4cbe-a7d6-d3b737392c16",
-    "created": 1702643016625,
+    "id": "a2a92db0-b18a-49ea-8e1b-26b6d848195e",
+    "created": 1773658337506,
     "docs": {
         "ports": [
             {
@@ -91,7 +91,14 @@
         ]
     },
     "issues": "",
-    "changelog": [],
+    "changelog": [
+        {
+            "message": "Fixed texture coordinates when give an inner radius and chose \"round\" mapping",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1772618481070
+        }
+    ],
     "exampleProjectId": "DAAkQ6",
     "license": "MIT",
     "coreLibs": [

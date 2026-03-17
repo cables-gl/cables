@@ -29,7 +29,7 @@ let gltfMesh = class
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
         gltf.loadingMeshes++;
 
-        if (gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
+        if (gltf.useDraco && prim.extensions && prim.extensions.KHR_draco_mesh_compression)
         {
             const view = gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView];
             const num = view.byteLength;
@@ -93,16 +93,8 @@ let gltfMesh = class
                 {
                     const tgeom = new CGL.Geometry("gltf_target_" + j);
 
-                    // if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
-
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
                     console.log("add targetttt");
-
-                    // { // calculate normals for final position of morphtarget for later...
-                    //     for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
-                    //     tgeom.calculateNormals();
-                    //     for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
-                    // }
 
                     this.geom.morphTargets.push(tgeom);
                 }
