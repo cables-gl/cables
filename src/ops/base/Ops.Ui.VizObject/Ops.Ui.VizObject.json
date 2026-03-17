@@ -54,6 +54,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1773067954188
+        },
+        {
+            "message": "Added functionality to string search the whole object",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773769014255
+        },
+        {
+            "message": "Added option to toggle auto hiding many items in arrays",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1773769034285
         }
     ],
     "authorName": "pandur",
@@ -81,6 +93,11 @@
             },
             {
                 "type": 0,
+                "name": "Hide Array Data",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Font Size",
                 "subType": "number"
             },
@@ -88,6 +105,10 @@
                 "type": 0,
                 "name": "Scroll",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Search"
             }
         ],
         "portsOut": [

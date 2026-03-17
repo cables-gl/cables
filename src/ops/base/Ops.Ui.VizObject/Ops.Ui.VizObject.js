@@ -6,16 +6,55 @@ const
     inZoomText = op.inBool("ZoomText", false),
     inLineNums = op.inBool("Line Numbers", false),
     inSort = op.inBool("Sort Keys", false),
+    inHideArr = op.inBool("Hide Array Data", true),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0),
+    inSearch = op.inString("Search"),
+    inSearchNext = op.inTriggerButton("Next"),
     outObj = op.outObject("Object Passthrough");
 
+let hlLines = [];
 let lines = [];
+let searchLine = 0;
+let to = null;
 inConsole.setUiAttribs({ "hidePort": true });
+inSearchNext.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
 
 let title = "";
+
+inSearchNext.onTriggered = () =>
+{
+    setSearchPos(true);
+};
+
+function setSearchPos(click)
+{
+    let newsearchLine = 0;
+
+    clearTimeout(to);
+    if (!click) to = setTimeout(() =>
+    {
+        setSearchPos(true);
+    }, 500);
+
+    if (hlLines.length > 0)
+    {
+        searchLine++;
+        if (searchLine > hlLines.length)searchLine = 0;
+
+        inPos.set(Math.max(0, hlLines[searchLine] - 5) / lines.length);
+    }
+
+    inSearchNext.setUiAttribs({ "title": "next " + searchLine + "/" + hlLines.length });
+
+    if (click)
+    {
+        op.refreshParams();
+        inSearchNext.setUiAttribs({ "greyout": hlLines.length == 0 });
+    }
+}
 
 function myStringify(o, level = 0)
 {
@@ -96,7 +135,7 @@ function myStringify(o, level = 0)
                     }
                     else if (item && (Array.isArray(item) || (item.constructor && item.constructor.name === "Float32Array")))
                     {
-                        const maxItems = 5;
+                        const maxItems = inHideArr.get() ? 5 : item.length + 1;
                         str += "{" + item.constructor.name + "[" + item.length + "]} ";
                         str += "[";
                         for (let a = 0; a < Math.min(maxItems, item.length); a++)
@@ -157,9 +196,13 @@ function myStringify(o, level = 0)
     return str;
 }
 
+inSearch.onChange =
+inHideArr.onChange =
+inSort.onChange =
 inObj.onChange = () =>
 {
     let obj = inObj.get();
+    inPos.set(0);
     let str = "???";
     if (obj && obj.getInfo) obj = obj.getInfo();
 
@@ -218,6 +261,22 @@ inObj.onChange = () =>
 
     str = String(str);
     lines = str.split("\n");
+    hlLines = [];
+
+    const srch = inSearch.get();
+    if (srch)
+    {
+        for (let i = 0; i < lines.length; i++)
+        {
+            if (lines[i].includes(srch))hlLines.push(i);
+        }
+        console.log("search results", hlLines);
+        setSearchPos();
+        // lines = lines.filter((s)=>{return s.includes(inSearch.get());});
+    }
+
+    searchLine = 0;
+    inSearchNext.setUiAttribs({ "title": "next " + searchLine + "/" + hlLines.length });
 };
 
 inObj.onLinkChanged = () =>
@@ -253,6 +312,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
     viz.renderText(ctx, layer, lines, {
         "zoomText": inZoomText.get(),
         "showLineNum": inLineNums.get(),
+        "highlightLines": { "lines": hlLines },
         "syntax": "js",
         "fontSize": inFontSize.get(),
         "scroll": inPos.get()

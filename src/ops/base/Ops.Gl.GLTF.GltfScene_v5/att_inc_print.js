@@ -459,13 +459,13 @@ function printInfo()
             }
             else html += " no bufferview?!";
 
-            html += "</td>";
-            html += "<td>";
+            // html += "</td>";
+            // html += "<td>";
             for (let ti = 0; ti < gltf.json.textures.length; ti++)
             {
                 if (gltf.json.textures[ti].source != i) continue;
-                html += gltf.textures[ti].tex.width + " x " + gltf.textures[ti].tex.height;
-                html += "<img style=\"max-width:50%;\" src=\"" + gltf.textures[ti].previewUri + "\"/>";
+                html += " - " + gltf.textures[ti].tex.width + " x " + gltf.textures[ti].tex.height;
+                html += "<br/><img style=\"max-width:250px;\" src=\"" + gltf.textures[ti].previewUri + "\"/>";
                 break;
             }
             html += "</td>";
@@ -480,6 +480,7 @@ function printInfo()
             html += "<tr>";
         }
         html += "</table>";
+        html += "</div>";
     }
 
     // / //////////////////////////////////
