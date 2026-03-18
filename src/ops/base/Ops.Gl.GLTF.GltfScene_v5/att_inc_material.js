@@ -1,4 +1,5 @@
 let whiteTex = null;
+let greyTex = null;
 
 let GltfMaterial = class
 {
@@ -16,6 +17,7 @@ let GltfMaterial = class
         this.texTransform = [1, 1, 0, 0];
 
         if (!whiteTex)whiteTex = CGL.Texture.getColorTexture(cgl, 255, 255, 255, 1);
+        if (!greyTex)greyTex = CGL.Texture.getColorTexture(cgl, 128, 128, 128, 1);
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
@@ -172,6 +174,13 @@ let GltfMaterial = class
         if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
         if (uniPbrRoughness && this._matPbrRoughnessOrig != undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
 
-        // currentShader.popTextures();
+        const uniTexNormal = currentShader.materialPropUniforms.normalTexture;
+        if (uniTexNormal) currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, greyTex.tex, cgl.gl.TEXTURE_2D);
+
+        const uniTexOcclusion = currentShader.materialPropUniforms.occlusionTexture;
+        if (uniTexOcclusion) currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
+
+        const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
+        if (uniTexDiff) currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
     }
 };
