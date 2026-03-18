@@ -137,7 +137,7 @@ export class Uniform extends CgUniform
             this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
             if (this._loc == null)
             {
-                console.log("loc null", this);
+                // console.log("loc null", this);
             }
         }
         else this.needsUpdate = false;
