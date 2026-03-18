@@ -6,7 +6,8 @@ const
     inRgbe = op.inBool("Convert RGBE", false),
 
     inRGB = op.inSwitch("Channels", ["RGB", "R", "G", "B"], "RGB"),
-
+    inType = op.inSwitch("Type", ["Automatic", "Default", "Depth", "Cubemap"], "Automatic"),
+    
     inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
@@ -131,13 +132,25 @@ op.renderVizLayerGl = (ctx, layer) =>
 
     const oldTex = cgl.getTexture(texSlot);
     const oldTexCubemap = cgl.getTexture(texSlotCubemap);
-
+    
+    let iTexType = inType.get();
     let texType = 0;
     if (portTex)
     {
-        if (portTex.cubemap) texType = 1;
-        if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
-
+        if (iTexType == "Automatic")
+        {
+            if (portTex.cubemap) texType = 1;
+            if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
+        }
+        else if (iTexType == "Depth")
+        {
+            texType = 2;
+        }
+        else if (iTexType == "Cubemap")
+        {
+            texType = 1;
+        }
+        
         if (texType == 0 || texType == 2)
         {
             cgl.setTexture(texSlot, portTex.tex);
