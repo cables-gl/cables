@@ -31,13 +31,17 @@ const gltfCamera = class
                 this.node._animRot[1].getValue(time),
                 this.node._animRot[2].getValue(time),
                 this.node._animRot[3].getValue(time));
+            // console.log("pos",this.pos);
+        }
+        else
+        {
+            console.log("gltf cam no node or anim");
         }
     }
 
     start(time)
     {
         if (cgl.tempData.shadowPass) return;
-
         this.updateAnim(time);
         const asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
 

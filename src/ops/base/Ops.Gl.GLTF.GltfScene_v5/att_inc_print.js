@@ -191,15 +191,18 @@ function printMaterial(mat, idx)
     html += "<td>";
 
     let texStr = "";
-    if (mat.normalTexture)texStr += "NORM " + gltf.json.textures[mat.normalTexture.index].source + ", ";
-    if (mat.occlusionTexture)texStr += "OCC" + gltf.json.textures[mat.occlusionTexture.index].source + ", ";
-    if (mat.pbrMetallicRoughness)
+    if (gltf.json.textures)
     {
-        if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + gltf.json.textures[mat.pbrMetallicRoughness.baseColorTexture.index].source + ", ";
-        if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "MR " + gltf.json.textures[mat.pbrMetallicRoughness.metallicRoughnessTexture.index].source + ", ";
-    }
+        if (mat.normalTexture)texStr += "NORM " + gltf.json.textures[mat.normalTexture.index].source + ", ";
+        if (mat.occlusionTexture)texStr += "OCC " + mat.occlusionTexture.index + " / " + gltf.json.textures[mat.occlusionTexture.index].source + ", ";
+        if (mat.pbrMetallicRoughness)
+        {
+            if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + gltf.json.textures[mat.pbrMetallicRoughness.baseColorTexture.index].source + ", ";
+            if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "MR " + gltf.json.textures[mat.pbrMetallicRoughness.metallicRoughnessTexture.index].source + ", ";
+        }
 
-    if (texStr)html += "Textures: " + texStr;
+        if (texStr)html += "Textures: " + texStr;
+    }
     html += "</td>";
 
     html += "</tr>";
@@ -461,13 +464,20 @@ function printInfo()
 
             // html += "</td>";
             // html += "<td>";
-            for (let ti = 0; ti < gltf.json.textures.length; ti++)
-            {
-                if (gltf.json.textures[ti].source != i) continue;
-                html += " - " + gltf.textures[ti].tex.width + " x " + gltf.textures[ti].tex.height;
-                html += "<br/><img style=\"max-width:250px;\" src=\"" + gltf.textures[ti].previewUri + "\"/>";
-                break;
-            }
+            if (gltf.json.textures)
+                for (let ti = 0; ti < gltf.json.textures.length; ti++)
+                {
+                    if (gltf.json.textures[ti].source != i) continue;
+                    const tidx = i;
+
+                    if (gltf.textures[tidx])
+                    {
+                        html += " - " + tidx + ": " + gltf.textures[tidx].tex.width + " x " + gltf.textures[tidx].tex.height;
+                        html += "<br/><img style=\"max-width:250px;\" src=\"" + gltf.textures[tidx].previewUri + "\"/>";
+                    }
+                    else html += "- tex not loaded";
+                    break;
+                }
             html += "</td>";
             html += "<td>";
 

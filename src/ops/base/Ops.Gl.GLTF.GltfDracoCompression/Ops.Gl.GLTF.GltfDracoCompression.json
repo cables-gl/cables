@@ -4,22 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1629877533436
-        },
-        {
-            "message": " added lib: draco_decoder.js",
-            "author": "pandur",
-            "date": 1629878014750
-        },
-        {
-            "message": "Ops.User.pandur.Draco renamed to Ops.Gl.GLTF.GLTFDracoCompression",
-            "author": "pandur",
-            "date": 1629883379994
-        },
-        {
-            "message": "Ops.Gl.GLTF.GLTFDracoCompression renamed to Ops.Gl.GLTF.GltfDracoCompression",
-            "author": "pandur",
-            "date": 1629883824963
+            "date": 1629877533436,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
@@ -34,7 +20,6 @@
     },
     "summary": "gltf draco compression library",
     "issues": "",
-
     "youtubeids": [
         "Vo3Hs8-p7_I"
     ],
