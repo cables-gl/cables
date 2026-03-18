@@ -2,7 +2,7 @@ const
     fileName = op.inUrl("file", "audio"),
     inPlay = op.inValueBool("Play"),
     volume = op.inValueSlider("Volume"),
-    inTime = op.inFloat("Time"),
+    inTimeOffset = op.inFloat("Offset"),
     doLoop = op.inValueBool("Loop"),
     doRewind = op.inValueBool("Rewind on play", false),
     inPlayTrigg = op.inTriggerButton("Play Trigger"),
@@ -13,6 +13,8 @@ const
     outCurrentTime = op.outNumber("Current Time"),
     outEle = op.outObject("Element", null, "element"),
     outEnded = op.outTrigger("Has Ended");
+
+const timer = new CABLES.Timer();
 
 volume.set(1.0);
 let audio = null;
@@ -25,26 +27,58 @@ inPauseTrigg.onTriggered = pause;
 op.onDelete = pause;
 op.onMasterVolumeChanged = updateVolume;
 
-inTime.onChange = () => { updateTime(inTime.get()); };
+inTimeOffset.onChange = () => { seek(inTimeOffset.get()); };
 inRewind.onTriggered = rewind;
 
 function pause()
 {
-    if (audio) audio.pause();
+    if (audio)
+    {
+        timer.setTime(audio.currentTime);
+        timer.pause();
+        op.patch.removeOnAnimFrame(op);
+        audio.pause();
+    }
     playing = false;
     outPlaying.set(playing);
 }
 
 function play()
 {
-    if (doRewind.get())audio.currentTime = 0;
+    if (doRewind.get())
+    {
+        audio.currentTime = getWantedTime();
+    }
 
     if (audio)
     {
         playing = true;
-        audio.play();
+        timer.setTime(audio.currentTime);
+        timer.play();
+        op.patch.addOnAnimFrame(op);
+        audio.play().catch((e) =>
+        {
+            console.log("err play");
+        });
         outPlaying.set(playing);
     }
+}
+
+function rewind()
+{
+    seek(0.0);
+}
+
+function seek(goto)
+{
+    if (!audio) return;
+    if (!goto)
+    {
+        goto = getWantedTime();
+    }
+    timer.setTime(goto);
+    audio.currentTime = goto;
+    outCurrentTime.set(audio.currentTime);
 }
 
 inPlay.onChange = function ()
@@ -69,24 +103,9 @@ function updateVolume()
     if (audio)audio.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
 }
 
-function updateTime(goto)
-{
-    if (!audio) return;
-    if (!goto)
-    {
-        goto = getWantedTime();
-    }
-    audio.fastSeek(goto);
-}
-
-function rewind()
-{
-    updateTime(0.0);
-}
-
 function getWantedTime()
 {
-    let goto = inTime.get();
+    let goto = inTimeOffset.get();
     if (!goto || goto < 0) goto = 0;
     return goto;
 }
@@ -99,8 +118,7 @@ fileName.onChange = function ()
 
     if (audio)
     {
-        audio.pause();
-        outPlaying.set(false);
+        pause();
     }
 
     outDuration.set(0);
@@ -126,16 +144,26 @@ fileName.onChange = function ()
 
     const timeupdate = () =>
     {
-        outCurrentTime.set(audio.currentTime);
+        timer.setTime(audio.currentTime);
+        // outCurrentTime.set(audio.currentTime);
     };
 
     audio.addEventListener("timeupdate", timeupdate);
 
     audio.addEventListener("ended", function ()
     {
-        outPlaying.set(false);
-        playing = false;
+        pause();
         outEnded.trigger();
         if (doLoop.get()) play();
     }, false);
+};
+
+op.onAnimFrame = (tt, frameNum, deltaMs) =>
+{
+    if (timer.isPlaying())
+    {
+        timer.update();
+        const time = timer.get();
+        outCurrentTime.set(time);
+    }
 };

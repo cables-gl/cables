@@ -6,6 +6,7 @@ const
 const div = document.createElement("div");
 div.dataset.op = op.id;
 const canvas = op.patch.cgl.canvas.parentElement;
+let toUpdate = null;
 
 const
     outEle = op.outObject("Element", div, "element"),
@@ -55,10 +56,11 @@ op.patch.loading.on("addAssetTask", updateStatus);
 
 function updateStatus()
 {
-    if (inVisible.get() == "Auto")
-        updateVisible();
+    if (inVisible.get() == "Auto") updateVisible();
+
     outReqs.setRef(op.patch.loading.getListJobs());
-    if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)setTimeout(updateStatus, 100);
+    clearTimeout(toUpdate);
+    if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)toUpdate = setTimeout(updateStatus, 100);
 }
 
 function updateStyle()

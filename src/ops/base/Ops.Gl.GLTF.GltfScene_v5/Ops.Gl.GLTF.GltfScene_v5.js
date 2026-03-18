@@ -472,7 +472,14 @@ inActive.onChange = () =>
 function reloadSoon(nocache)
 {
     clearTimeout(timedLoader);
-    timedLoader = setTimeout(function () { loadBin(nocache); }, 30);
+    timedLoader = setTimeout(function ()
+    {
+        const preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
+
+        loadBin(nocache);
+
+        cgl.patch.loading.finished(preload);
+    }, 50);
 }
 
 function updateMaterials()
