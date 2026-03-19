@@ -40,6 +40,11 @@
             {
                 "type": 2,
                 "name": "Event Object"
+            },
+            {
+                "type": 2,
+                "name": "Event Element",
+                "objType": "element"
             }
         ]
     },

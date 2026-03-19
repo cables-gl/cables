@@ -468,14 +468,17 @@ inActive.onChange = () =>
         gltf = null;
     }
 };
+let preload = null;
 
 function reloadSoon(nocache)
 {
     clearTimeout(timedLoader);
+    cgl.patch.loading.finished(preload);
+
+    preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
+
     timedLoader = setTimeout(function ()
     {
-        const preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
-
         loadBin(nocache);
 
         cgl.patch.loading.finished(preload);
