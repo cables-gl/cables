@@ -127,7 +127,7 @@ function doRender()
 
 function useAtlas()
 {
-    return inAtlasRepeatX.get() > 0 || inAtlasLookupTex.isLinked();
+    return inAtlasRepeatX.get() > 1 || inAtlasLookupTex.isLinked();
 }
 
 function updateUi()

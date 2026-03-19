@@ -1,7 +1,5 @@
 {{MODULES_HEAD}}
 
-
-
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
@@ -16,9 +14,7 @@ IN float attrPointSize;
 
 OUT vec3 norm;
 OUT float ps;
-
 OUT vec2 texCoord;
-
 
 #ifdef HAS_TEXTURES
 #endif
@@ -31,7 +27,6 @@ OUT vec2 texCoord;
     UNI sampler2D texOpacity;
     OUT float opacity;
 #endif
-
 #ifdef HAS_TEXTURE_POINTSIZE
    UNI sampler2D texPointSize;
    UNI float texPointSizeMul;
