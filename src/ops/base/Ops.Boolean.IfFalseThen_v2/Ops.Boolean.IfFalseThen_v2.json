@@ -1,0 +1,52 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "9ca8be85-651f-4cb5-beca-f295f6437ed1",
+    "created": 1773900568068,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exe"
+            },
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "then"
+            },
+            {
+                "type": 1,
+                "name": "else"
+            }
+        ]
+    },
+    "summary": "Triggers if input value is `false`",
+    "docs": {
+        "ports": [
+            {
+                "name": "Exe",
+                "text": "Executes the op"
+            },
+            {
+                "name": "Boolean",
+                "text": "The boolean value to check for falsiness"
+            },
+            {
+                "name": "then",
+                "text": "Triggers when the input value is `false`"
+            },
+            {
+                "name": "else",
+                "text": "Triggers when the input value is `true`"
+            }
+        ]
+    },
+    "changelog": [],
+    "license": "MIT"
+}

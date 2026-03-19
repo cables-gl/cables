@@ -6,7 +6,8 @@ const
     stopPropagationPort = op.inValueBool("Stop Propagation", true),
     outEle = op.outObject("Element Passthrough"),
     triggerPort = op.outTrigger("Event Trigger"),
-    eventObjPort = op.outObject("Event Object");
+    eventObjPort = op.outObject("Event Object"),
+    eventElePort = op.outObject("Event Element", null, "element");
 
 let lastElement = null; // stores the last connected element, so we can remove prior event listeners
 let lastEventName = "";
@@ -55,5 +56,6 @@ function handleEvent(ev)
     eventObjPort.set(ev);
     if (preventDefaultPort.get()) { ev.preventDefault(); }
     if (stopPropagationPort.get()) { ev.stopPropagation(); }
+    eventElePort.set(ev.target);
     triggerPort.trigger();
 }

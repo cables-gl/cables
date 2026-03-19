@@ -51,6 +51,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1773656530900
+        },
+        {
+            "message": "Vizualisation ops are also suggested when clicking on a cable",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773901201200
         }
     ]
 }
