@@ -230,6 +230,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1726500888715
+        },
+        {
+            "message": "Fix bug with texturemapping",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1773905500229
         }
     ],
     "summary": "Draw all vertices as points / circles",

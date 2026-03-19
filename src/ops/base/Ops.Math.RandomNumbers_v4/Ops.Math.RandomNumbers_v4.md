@@ -1,0 +1,1 @@
+Outputs four generated numbers of a selected seed within the range set by "Min" and "Max" values.

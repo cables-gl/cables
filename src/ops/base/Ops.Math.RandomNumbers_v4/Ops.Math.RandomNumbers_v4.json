@@ -1,0 +1,72 @@
+{
+    "id": "ca8f763e-0f65-47d3-99e7-3202e053edad",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1616093364302,
+            "type": "new op"
+        },
+        {
+            "message": "New version v4: multiport, add new random number outputs ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773906041313
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1773905773627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Random_0",
+                "longPort": 4,
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random_1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random_2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random_3",
+                "uititle": "add port",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Simple way to get random numbers without using arrays",
+    "issues": "",
+    "youtubeids": [
+        "ASp7LEqZUIE"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "W_z9bI",
+    "license": "MIT"
+}
