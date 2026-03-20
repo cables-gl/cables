@@ -1,0 +1,80 @@
+{
+    "authorName": "pandur",
+    "id": "2f4a90a1-998e-4371-93f4-c15703f11667",
+    "created": 1773938021128,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Support ASTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support ETC1",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support S3TC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support BPTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support PVRTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support ASTC HDR",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1773220411271
+        },
+        {
+            "message": "Team.Ktx.CompressedTexture renamed to Ops.Dev.CompressedTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1773936665854
+        },
+        {
+            "message": "Dev.CompressedTexture renamed to Ops.Dev.KtxCompression",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1773936678242
+        },
+        {
+            "message": "Dev.KtxCompressionTemp renamed to Ops.Dev.KtxCompression",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1773938189790
+        }
+    ],
+    "summary": "Load a KTX file as a texture",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ],
+    "dependencies": [
+        {
+            "src": "./libktx_read.js",
+            "type": "commonjs"
+        }
+    ]
+}
