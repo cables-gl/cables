@@ -273,6 +273,19 @@ function loadAfterDraco()
     reloadSoon();
 }
 
+function loadAfterKtx()
+{
+    if (!CABLES.ktx)
+    {
+        setTimeout(() =>
+        {
+            loadAfterKtx();
+        }, 100);
+    }
+
+    reloadSoon();
+}
+
 function parseGltf(arrayBuffer)
 {
     const CHUNK_HEADER_SIZE = 8;
@@ -346,8 +359,22 @@ function parseGltf(arrayBuffer)
         }
     }
 
+    if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_texture_basisu") > -1)
+    {
+        if (!CABLES.ktx)
+        {
+            op.setUiError("gltfktx", "GLTF ktx compression lib not found / add ktxCompression op to your patch!");
+
+            loadAfterKtx();
+            return gltf;
+        }
+        else
+        {
+            gltf.useKtx = true;
+        }
+    }
     op.setUiError("gltfdraco", null);
-    // let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
+    op.setUiError("gltfktx", null);
 
     if (views)
     {
