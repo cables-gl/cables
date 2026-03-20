@@ -194,7 +194,7 @@ function printMaterial(mat, idx)
     if (gltf.json.textures)
     {
         if (mat.normalTexture)texStr += "NORM " + gltf.json.textures[mat.normalTexture.index].source + ", ";
-        if (mat.occlusionTexture)texStr += "OCC " + mat.occlusionTexture.index + " / " + gltf.json.textures[mat.occlusionTexture.index].source + ", ";
+        if (mat.occlusionTexture)texStr += "OCC " + mat.occlusionTexture.index + ", ";
         if (mat.pbrMetallicRoughness)
         {
             if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + gltf.json.textures[mat.pbrMetallicRoughness.baseColorTexture.index].source + ", ";

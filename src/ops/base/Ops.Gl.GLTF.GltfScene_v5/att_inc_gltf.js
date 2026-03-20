@@ -137,13 +137,16 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 function loadAnims(gltf)
 {
     const uniqueAnimNames = {};
+    gltf.anims = {};
     maxTimeDict = {};
 
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
 
-        an.name = an.name || "unknown";
+        an.name = an.name || "unknown anim " + i;
+        const animArr = [];
+        gltf.anims = animArr;
 
         for (let ia = 0; ia < an.channels.length; ia++)
         {
@@ -180,6 +183,8 @@ function loadAnims(gltf)
                 {
                     const newAnim = new CABLES.Anim();
                     // newAnim.name=an.name;
+                    newAnim.name = chan.target.path + " " + k;
+
                     newAnim.batchMode = true;
                     anims.push(newAnim);
                 }
@@ -220,7 +225,7 @@ function loadAnims(gltf)
                     }
                 }
                 for (let k = 0; k < numComps; k++)anims[k].batchMode = false;
-
+                animArr.push(...anims);
                 node.setAnim(chan.target.path, an.name, anims);
             }
             else
