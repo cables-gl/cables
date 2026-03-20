@@ -32,10 +32,8 @@ if (!ktx)
     });
 }
 
-CABLES.loadKtx2Texture = async function (url)
+async function loadKTX2Texture(url)
 {
-    console.log("jajajaj", ktx, url);
-
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
 
@@ -64,7 +62,7 @@ CABLES.loadKtx2Texture = async function (url)
     // gl.texParameteri(target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
     return texture;
-};
+}
 
 function uploadTextureToGl(gl, ktexture)
 {
@@ -192,6 +190,7 @@ let cgl_filter = CGL.Texture.FILTER_MIPMAP;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
 let timedLoader = 0;
+let loadingId = null;
 
 function getPixelFormat()
 {
@@ -203,18 +202,18 @@ function getPixelFormat()
     return CGL.Texture.PFORMATSTR_RGBA8UB;
 }
 
-function realReload(url)
+CABLES.loadKtx = function (url, cb)
 {
-    if (!CABLES.ktx) return;
+    if (!CABLES.ktx) return console.log("no ktx");
     op.checkMainloopExists();
     if (loadingId)loadingId = op.patch.loading.finished(loadingId);
 
-    loadingId = op.patch.loading.start(op.objName, filename.get(), op);
+    loadingId = op.patch.loading.start(op.objName, CABLES.uuid(), op);
 
-    if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
+    // if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
     let needsRefresh = false;
-    loadedFilename = filename.get();
+    // loadedFilename = filename.get();
 
     if (url)
     {
@@ -258,10 +257,11 @@ function realReload(url)
                     const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_MIPMAP, "ktx": texture, "type": texture.target, "compression": true });
                     ctex.width = 100;
                     ctex.height = 100;
-                    textureOut.setRef(ctex);
+                    // textureOut.setRef(ctex);
                     console.log("ktx texture", texture, texture.target);
 
                     //     if (inFreeMemory.get()) tex.image = null;
+                    cb(ctex);
 
                     if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
@@ -289,4 +289,4 @@ function realReload(url)
         setTempTexture();
         loadingId = op.patch.loading.finished(loadingId);
     }
-}
+};

@@ -11,14 +11,13 @@ let GltfTexture = class
             console.log("no json images?");
             return;
         }
-        if (_idx == 2)console.log("occ tex2 !!!!", texInfo);
 
-        let idx = _idx;// gltf.json.textures[_idx].source;
+        let idx = _idx;
 
         let img = gltf.json.images[idx];
         if (!img)
         {
-            console.log("no image found?!", idx);
+            console.log("no image found?!", idx, gltf.json.images);
             return;
         }
 
@@ -38,7 +37,6 @@ let GltfTexture = class
         }
 
         const data = new Uint8Array(buffView.byteLength);
-        if (_idx == 2)console.log("occ tex2 !!!!", buffView.byteLength);
 
         for (let i = 0; i < buffView.byteLength; i++) data[i] = dv.getUint8(buffView.byteOffset + i);
 
@@ -46,8 +44,6 @@ let GltfTexture = class
         const sourceURI = URL.createObjectURL(blob);
 
         if (CABLES.UI) this.previewUri = sourceURI;
-
-        console.log("ui", CABLES.UI);
 
         let cgl_wrap = CGL.Texture.WRAP_CLAMP;
         // if(scale[0]!=1||scale[1]!=1)
@@ -57,23 +53,33 @@ let GltfTexture = class
         const cgl_aniso = 4;
         const loadingId = cgl.patch.loading.start("gltfTexture", CABLES.uuid(), op);
 
-        this.tex = CGL.Texture.load(cgl, sourceURI, (err) =>
+        console.log("img.mimetyp", img.mimeType);
+        if (img.mimeType == "image/ktx2")
         {
-            if (_idx == 2)console.log("occ tex2 finish!!!");
-            cgl.patch.loading.finished(loadingId);
+            this.tex = CGL.Texture.getEmptyTexture(cgl);
 
-            if (err)
+            CABLES.loadKtx(sourceURI, (t) =>
             {
-                console.error("img load error", err);
-                if (!this.tex) return;
-            }
-        }, {
-            "anisotropic": cgl_aniso,
-            "wrap": cgl_wrap,
-            "flip": false,
-            // "unpackAlpha": unpackAlpha.get(),
-            "filter": cgl_filter
-        });
+                this.tex = t;
+            });
+        }
+        else
+            this.tex = CGL.Texture.load(cgl, sourceURI, (err) =>
+            {
+                cgl.patch.loading.finished(loadingId);
+
+                if (err)
+                {
+                    console.error("img load error", err);
+                    if (!this.tex) return;
+                }
+            }, {
+                "anisotropic": cgl_aniso,
+                "wrap": cgl_wrap,
+                "flip": false,
+                // "unpackAlpha": unpackAlpha.get(),
+                "filter": cgl_filter
+            });
         if (!this.tex)console.log("notex!???");
     }
 };
