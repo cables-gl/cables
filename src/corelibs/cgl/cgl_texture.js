@@ -306,9 +306,10 @@ export class Texture extends CgTexture
      * @memberof Texture
      * @instance
      * @param {Object} img image
-     * @param {Number} filter
+     * @param {Number} [filter]
+     * @param {boolean} [noflipping]
      */
-    initTexture(img, filter = null)
+    initTexture(img, filter = null, noflipping)
     {
         this._cgl.printError("before initTexture");
         this._cgl.checkFrameStarted("texture inittexture");
@@ -334,7 +335,7 @@ export class Texture extends CgTexture
 
         this.deleted = false;
         this.flipped = !this.flip;
-        if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
+        if (!noflipping && this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
@@ -344,8 +345,8 @@ export class Texture extends CgTexture
         this.updateMipMap();
 
         this._cgl.gl.bindTexture(this.texTarget, null);
-        this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-        if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
+        if (!noflipping) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        if (!noflipping) if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
         this.getInfoOneLine();
         this._cgl.printError("initTexture");
@@ -558,10 +559,6 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     const texture = new Texture(cgl);
     texture.name = url;
 
-    texture.image = new Image();
-    texture.image.crossOrigin = "anonymous";
-    texture.loading = true;
-
     if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
     if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
     if (settings && settings.hasOwnProperty("wrap")) texture.wrap = settings.wrap;
@@ -569,28 +566,76 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     if (settings && settings.hasOwnProperty("unpackAlpha")) texture.unpackAlpha = settings.unpackAlpha;
     if (settings && settings.hasOwnProperty("pixelFormat")) texture.pixelFormat = settings.pixelFormat;
 
-    texture.image.onabort = texture.image.onerror = (e) =>
+    if (!settings.imgBitmap)
     {
-        console.warn("[cgl.texture.load] error loading texture", url, e);
-        texture.loading = false;
-        if (loadingId) cgl.patch.loading.finished(loadingId);
-        const error = { "error": true };
-        if (finishedCallback) finishedCallback(error, texture);
-    };
 
-    texture.image.onload = function (e)
-    {
-        cgl.addNextFrameOnceCallback(() =>
+        texture.image = new Image();
+        texture.image.crossOrigin = "anonymous";
+        texture.loading = true;
+        texture.image.onabort = texture.image.onerror = (e) =>
         {
-            texture.initTexture(texture.image);
-            if (loadingId) cgl.patch.loading.finished(loadingId);
+            console.warn("[cgl.texture.load] error loading texture", url, e);
             texture.loading = false;
+            if (loadingId) cgl.patch.loading.finished(loadingId);
+            const error = { "error": true };
+            if (finishedCallback) finishedCallback(error, texture);
+        };
 
-            if (finishedCallback) finishedCallback(null, texture);
+        texture.image.onload = function (e)
+        {
+            cgl.addNextFrameOnceCallback(() =>
+            {
+                texture.initTexture(texture.image);
+                if (loadingId) cgl.patch.loading.finished(loadingId);
+                texture.loading = false;
+
+                if (finishedCallback) finishedCallback(null, texture);
+            });
+        };
+        texture.image.src = url;
+
+    }
+    else
+    {
+        fetch(url).then((r) =>
+        {
+            r.blob().then((blob) =>
+            {
+                const bmpOptions = {
+
+                    "colorSpaceConversion": "none" // skip unnecessary color conversion
+                };
+
+                if (!settings.flip) bmpOptions.imageOrientation = "flipY"; // WebGL expects bottom-left origin
+
+                createImageBitmap(blob, bmpOptions).then((bitmap) =>
+                {
+
+                    texture.initTexture(bitmap, null, true);
+                    if (loadingId) cgl.patch.loading.finished(loadingId);
+                    texture.loading = false;
+
+                    if (finishedCallback) finishedCallback(null, texture);
+                    // tex.initFromData(bitmap, bitmap.width, bitmap.height, cgl_filter, cgl_wrap);
+
+                    // if (loadingId)
+                    // {
+                    //     loadingId = op.patch.loading.finished(loadingId);
+                    // }
+
+                    // width.set(tex.width);
+                    // height.set(tex.height);
+                    // ratio.set(tex.width / tex.height);
+
+                    // textureOut.setRef(tex);
+                    // loading.set(false);
+                    // loaded.set(true);
+                    bitmap.close();
+                });
+            });
         });
-    };
-    texture.image.src = url;
 
+    }
     return texture;
 };
 
