@@ -53,7 +53,7 @@ let GltfTexture = class
         const cgl_aniso = 4;
         const loadingId = cgl.patch.loading.start("gltfTexture", CABLES.uuid(), op);
 
-        console.log("img.mimetyp", img.mimeType);
+        // console.log("img.mimetyp", img.mimeType);
         if (img.mimeType == "image/ktx2")
         {
             this.tex = CGL.Texture.getEmptyTexture(cgl);

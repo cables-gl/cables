@@ -26,7 +26,7 @@ if (!ktx)
     }).then(async (_ktx) =>
     {
         ktx = CABLES.ktx = _ktx;
-        console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
+        // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
 
         ktx.GL.makeContextCurrent(ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));
     });
@@ -51,7 +51,7 @@ async function loadKTX2Texture(url)
     // outIsRGB.set(ktex.isSrgb);
 
     const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
-    console.log("tex", ktex, texture);
+    // console.log("tex", ktex, texture);
 
     // ktex.delete();
     // Upload via libktx's GL upload support; returns WebGLTexture + target. [page:3]
@@ -76,7 +76,7 @@ function uploadTextureToGl(gl, ktexture)
 
     const { transcode_fmt } = ktx;
     let formatString;
-    console.log("transcode_fmt", transcode_fmt);
+    // console.log("transcode_fmt", transcode_fmt);
 
     // if (ktexture.isTranscodable)
     {
@@ -153,14 +153,14 @@ function uploadTextureToGl(gl, ktexture)
     //     console.log("not transcodable");
     // }
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    // gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
     const result = ktexture.glUpload();
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
     if (result.error != gl.NO_ERROR)
     {
-        console.log("WebGL error when uploading texture, code = "
-          + result.error.toString(16));
+        console.log("WebGL error when uploading texture, code = " + result.error.toString(16));
         return undefined;
     }
     if (result.object === undefined)
@@ -174,7 +174,7 @@ function uploadTextureToGl(gl, ktexture)
         return undefined;
     }
 
-    console.log("result", result);
+    // console.log("result", result);
 
     return {
         "target": result.target,
@@ -227,7 +227,7 @@ CABLES.loadKtx = function (url, cb)
                     // }
                 // );
 
-                    console.log("Loaded KTX2 texture", texture);
+                    // console.log("Loaded KTX2 texture", texture);
 
                     // CGL.Texture.load(cgl, url, function (err, newTex)
                     // {
@@ -258,7 +258,7 @@ CABLES.loadKtx = function (url, cb)
                     ctex.width = 100;
                     ctex.height = 100;
                     // textureOut.setRef(ctex);
-                    console.log("ktx texture", texture, texture.target);
+                    // console.log("ktx texture", texture, texture.target);
 
                     //     if (inFreeMemory.get()) tex.image = null;
                     cb(ctex);

@@ -222,7 +222,7 @@ inTexAORM.onChange =
     inUseVertexColours.onChange =
     inToggleGR.onChange =
     inUseThinFilm.onChange =
-inLightMapFlip.onChange =
+    inLightMapFlip.onChange =
     inVertexColourMode.onChange = updateDefines;
 
 function updateDefines()

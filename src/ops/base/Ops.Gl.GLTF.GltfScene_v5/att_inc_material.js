@@ -63,7 +63,7 @@ let GltfMaterial = class
             let t = gltf.json.textures[this.json.normalTexture.index];
             if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
             const idx = t.source;
-            // const idx = gltf.json.textures[this.json.normalTexture.index].source;
+
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.normalTexture);
             this._matTexNormal = gltf.textures[idx];
         }
@@ -71,11 +71,9 @@ let GltfMaterial = class
         {
             let t = gltf.json.textures[this.json.occlusionTexture.index];
             if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
-            const idx = t.source;
-            // const idx = this.json.occlusionTexture.index;
-            // const idx = gltf.json.textures[this.json.occlusionTexture.index].source;
 
-            // console.log("occlusion texture", gltf.textures[idx], idx, gltf.json.textures[idx], this.json);
+            const idx = t.source;
+
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.occlusionTexture);
             this._matTexOcclusion = gltf.textures[idx];
 

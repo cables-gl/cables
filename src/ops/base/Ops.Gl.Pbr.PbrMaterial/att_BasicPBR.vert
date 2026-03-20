@@ -51,9 +51,9 @@ void main()
 
     #ifdef USE_LIGHTMAP
         texCoord1 = attrTexCoord1;
-          #ifdef USE_LIGHTMAP
-texCoord1.y=1.0-texCoord1.y;
-    #endif
+        #ifndef LIGHTMAP_FLIPY
+          texCoord1.y=1.0-texCoord1.y;
+        #endif
     #endif
     texCoord = attrTexCoord;
     texCoord.y = 1.0 - texCoord.y;
@@ -61,15 +61,12 @@ texCoord1.y=1.0-texCoord1.y;
     texCoordTransformed.x=attrTexCoord.x*texTransform.x+texTransform.z;
     texCoordTransformed.y=(1.0-attrTexCoord.y)*texTransform.y+texTransform.w;
 
-// texCoordTransformed=texCoord;
-
     vec4 pos = vec4(vPosition,  1.0);
     norm = attrVertNormal;
     vec3 tangent = attrTangent;
     vec3 bitangent = attrBiTangent;
 
     {{MODULE_VERTEX_POSITION}}
-
 
     mat4 theMMat=mMatrix;
 

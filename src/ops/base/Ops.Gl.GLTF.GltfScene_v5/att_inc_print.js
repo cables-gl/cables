@@ -436,7 +436,6 @@ function printInfo()
     if (gltf.json.images)
     {
         html += "<div id=\"sectionImages\">";
-        html += "<a class=\"button-small\">Show images</a>";
 
         html += "<table id=\"\" class=\"table treetable\">";
 
