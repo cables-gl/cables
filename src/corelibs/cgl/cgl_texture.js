@@ -629,7 +629,8 @@ export class Texture extends CgTexture
 
                     /** @type {ImageBitmapOptions} */
                     const bmpOptions = {
-                        "colorSpaceConversion": "none"
+                        "colorSpaceConversion": "none",
+                        "premultiplyAlpha": "none"
                     };
 
                     if (!settings.flip) bmpOptions.imageOrientation = "flipY";
