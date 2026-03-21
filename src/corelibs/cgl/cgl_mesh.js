@@ -961,20 +961,20 @@ class Mesh extends CgMesh
     {
         if (!this._attributes) return;
 
-        window.requestIdleCallback(() =>
+        // window.requestIdleCallback(() =>
+        // {
+
+        for (let i = 0; i < this._attributes.length; i++)
         {
-
-            for (let i = 0; i < this._attributes.length; i++)
+            if (this._attributes[i].buffer)
             {
-                if (this._attributes[i].buffer)
-                {
-                    this.#cgl.gl.deleteBuffer(this._attributes[i].buffer);
-                    this._attributes[i].buffer = null;
-                }
+                this.#cgl.gl.deleteBuffer(this._attributes[i].buffer);
+                this._attributes[i].buffer = null;
             }
-            this._attributes.length = 0;
+        }
+        this._attributes.length = 0;
 
-        });
+        // });
     }
 
     dispose()
