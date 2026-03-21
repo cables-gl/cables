@@ -7,7 +7,6 @@ const
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
-    inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
     addCacheBust = op.inBool("Add Cachebuster", false),
     inReload = op.inTriggerButton("Reload"),
@@ -150,12 +149,8 @@ function realReload(nocache)
                 loading.set(false);
                 loaded.set(true);
 
-                if (inFreeMemory.get()) tex.image = null;
+                if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
-                if (loadingId)
-                {
-                    loadingId = op.patch.loading.finished(loadingId);
-                }
                 op.checkMainloopExists();
             }, {
                 "anisotropic": cgl_aniso,

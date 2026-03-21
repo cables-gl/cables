@@ -56,8 +56,6 @@ export class CglContext extends CgContext
         this.glSlowRendere = false;
         this._isSafariCrap = false;
 
-        this.temporaryTexture = null;
-
         /** @type {WebGL2RenderingContext} */
         this.gl = null;
 
@@ -85,12 +83,18 @@ export class CglContext extends CgContext
         this._simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
         this._currentShader = this._simpleShader;
+        this.errorShader = null;
 
         this._oldCanvasWidth = -1;
         this._oldCanvasHeight = -1;
         this._enabledExtensions = {};
 
-        this.errorShader = null;
+        this.temporaryTexture = null;
+        this.errorTexture = null;
+        this.tempTexture = null;
+        this.blackTexture = null;
+        this.randomTexture = null;
+        this.getRandomFloatTexture = null;
 
         this.setCanvas(_patch.config.glCanvasId || _patch.config.glCanvas || "glcanvas");
         if (_patch.config.glCanvasResizeToWindow === true) this.setAutoResize("window");

@@ -2,12 +2,6 @@ import { utils } from "cables";
 
 const DEFAULT_TEXTURE_SIZE = 8;
 
-/**
- * @typedef {Object} CglTextureOptions
- * @property {number} [width]
- * @property {number} [height]
- * @property {string} [pixelformat]
- */
 export class CgTexture
 {
 

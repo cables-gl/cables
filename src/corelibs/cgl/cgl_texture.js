@@ -8,6 +8,26 @@ const DEFAULT_TEXTURE_SIZE = 8;
 const log = new Logger("cgl_texture");
 
 /**
+ * @typedef CglTextureOptions
+ * @property {string} [name]
+ * @property {string} [pixelFormat]
+ * @property {number} [type]
+ * @property {number} [width]
+ * @property {number} [height]
+ * @property {number} [compression]
+ * @property {number} [textureType]
+ * @property {number} [filter]
+ * @property {number} [wrap]
+ * @property {boolean} [unpackAlpha]
+ * @property {boolean} [flip]
+ * @property {boolean} [shadowMap]
+ * @property {number} [anisotropic]
+ * @property {boolean} [isDepthTexture]
+ * @property {boolean} [isFloatingPointTexture]
+ * @property {Object} [ktx]
+ */
+
+/**
  * A Texture
  * @namespace external:CGL
  * @class
@@ -29,6 +49,7 @@ export class Texture extends CgTexture
 
     /**
      * @param {CglContext} __cgl
+     * @param {CglTextureOptions} options
      */
     constructor(__cgl, options = {})
     {
@@ -39,6 +60,8 @@ export class Texture extends CgTexture
         this._log = new Logger("tex");
         this.tex = this._cgl.gl.createTexture();
         this.loading = false;
+
+        /** @type {boolean} */
         this.flip = true;
         this.flipped = false;
         this.shadowMap = false;
@@ -50,8 +73,11 @@ export class Texture extends CgTexture
         this.texTarget = this._cgl.gl.TEXTURE_2D;
         if (options && options.type) this.texTarget = options.type;
         this.textureType = Texture.TYPE_DEFAULT;
+
+        /** @type {boolean} */
         this.unpackAlpha = true;
         this._fromData = true;
+        this.cubemap = null;
 
         this._glDataType = -1;
         this._glInternalFormat = -1;
@@ -537,9 +563,8 @@ export class Texture extends CgTexture
         this.getInfoOneLine();
         this._cgl.printError("_setFilter");
     }
-}
 
-/**
+    /**
  * @function load
  * @static
  * @memberof Texture
@@ -550,126 +575,133 @@ export class Texture extends CgTexture
  * @param {Object} settings
  * @return {Texture}
  */
-Texture.load = function (cgl, url, finishedCallback, settings)
-{
-    if (!url) return finishedCallback({ "error": true });
-    let loadingId = null;
-    if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url);
-
-    const texture = new Texture(cgl);
-    texture.name = url;
-
-    if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
-    if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
-    if (settings && settings.hasOwnProperty("wrap")) texture.wrap = settings.wrap;
-    if (settings && settings.hasOwnProperty("anisotropic")) texture.anisotropic = settings.anisotropic;
-    if (settings && settings.hasOwnProperty("unpackAlpha")) texture.unpackAlpha = settings.unpackAlpha;
-    if (settings && settings.hasOwnProperty("pixelFormat")) texture.pixelFormat = settings.pixelFormat;
-
-    if (!settings.imgBitmap)
+    static load(cgl, url, finishedCallback, settings)
     {
+        if (!url) return finishedCallback({ "error": true });
+        let loadingId = null;
+        if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url);
 
-        texture.image = new Image();
-        texture.image.crossOrigin = "anonymous";
-        texture.loading = true;
-        texture.image.onabort = texture.image.onerror = (e) =>
-        {
-            console.warn("[cgl.texture.load] error loading texture", url, e);
-            texture.loading = false;
-            if (loadingId) cgl.patch.loading.finished(loadingId);
-            const error = { "error": true };
-            if (finishedCallback) finishedCallback(error, texture);
-        };
+        const texture = new Texture(cgl);
+        texture.name = url;
 
-        texture.image.onload = function (e)
+        if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
+        if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
+        if (settings && settings.hasOwnProperty("wrap")) texture.wrap = settings.wrap;
+        if (settings && settings.hasOwnProperty("anisotropic")) texture.anisotropic = settings.anisotropic;
+        if (settings && settings.hasOwnProperty("unpackAlpha")) texture.unpackAlpha = settings.unpackAlpha;
+        if (settings && settings.hasOwnProperty("pixelFormat")) texture.pixelFormat = settings.pixelFormat;
+
+        if (!settings.imgBitmap)
         {
-            cgl.addNextFrameOnceCallback(() =>
+
+            texture.image = new Image();
+            texture.image.crossOrigin = "anonymous";
+            texture.loading = true;
+            texture.image.onabort = texture.image.onerror = (e) =>
             {
-                texture.initTexture(texture.image);
-                if (loadingId) cgl.patch.loading.finished(loadingId);
+                console.warn("[cgl.texture.load] error loading texture", url, e);
                 texture.loading = false;
+                if (loadingId) cgl.patch.loading.finished(loadingId);
+                const error = { "error": true };
+                if (finishedCallback) finishedCallback(error, texture);
+            };
 
-                if (finishedCallback) finishedCallback(null, texture);
-            });
-        };
-        texture.image.src = url;
-
-    }
-    else
-    {
-        fetch(url).then((r) =>
-        {
-            r.blob().then((blob) =>
+            texture.image.onload = function (e)
             {
-                const bmpOptions = {
-
-                    "colorSpaceConversion": "none" // skip unnecessary color conversion
-                };
-
-                if (!settings.flip) bmpOptions.imageOrientation = "flipY"; // WebGL expects bottom-left origin
-
-                createImageBitmap(blob, bmpOptions).then((bitmap) =>
+                cgl.addNextFrameOnceCallback(() =>
                 {
-
-                    texture.initTexture(bitmap, null, true);
+                    texture.initTexture(texture.image);
                     if (loadingId) cgl.patch.loading.finished(loadingId);
                     texture.loading = false;
 
                     if (finishedCallback) finishedCallback(null, texture);
-                    // tex.initFromData(bitmap, bitmap.width, bitmap.height, cgl_filter, cgl_wrap);
-
-                    // if (loadingId)
-                    // {
-                    //     loadingId = op.patch.loading.finished(loadingId);
-                    // }
-
-                    // width.set(tex.width);
-                    // height.set(tex.height);
-                    // ratio.set(tex.width / tex.height);
-
-                    // textureOut.setRef(tex);
-                    // loading.set(false);
-                    // loaded.set(true);
-                    bitmap.close();
                 });
+            };
+            texture.image.src = url;
+
+        }
+        else
+        {
+            fetch(url).then((r) =>
+            {
+                r.blob().then((blob) =>
+                {
+
+                    /** @type {ImageBitmapOptions} */
+                    const bmpOptions = {
+                        "colorSpaceConversion": "none"
+                    };
+
+                    if (!settings.flip) bmpOptions.imageOrientation = "flipY";
+
+                    createImageBitmap(blob, bmpOptions).then((bitmap) =>
+                    {
+
+                        texture.initTexture(bitmap, null, true);
+                        if (loadingId) cgl.patch.loading.finished(loadingId);
+                        texture.loading = false;
+
+                        if (finishedCallback) finishedCallback(null, texture);
+                        bitmap.close();
+
+                    }).catch((e) =>
+                    {
+                        console.log("tex create err", e);
+                        texture.loading = false;
+                        if (loadingId) cgl.patch.loading.finished(loadingId);
+                        if (finishedCallback) finishedCallback(e, texture);
+                    });
+
+                }).catch((e) =>
+                {
+                    console.log("tex blob err", e);
+                    texture.loading = false;
+                    if (loadingId) cgl.patch.loading.finished(loadingId);
+                    if (finishedCallback) finishedCallback(e, texture);
+                });
+            }).catch((e) =>
+            {
+                console.log("tex fetch err", e);
+                texture.loading = false;
+                if (loadingId) cgl.patch.loading.finished(loadingId);
+                if (finishedCallback) finishedCallback(e, texture);
             });
-        });
 
+        }
+        return texture;
     }
-    return texture;
-};
 
-/**
- * @static
- * @function getTempTexture
- * @memberof Texture
- * @description returns the default temporary texture (grey diagonal stipes)
- // * @param {CglContext} cgl
- * @return {Texture}
- */
-Texture.getTempTexture = function (cgl)
-{
-    if (!cgl) console.error("[getTempTexture] no cgl!");
-    if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
-    return cgl.tempTexture;
-};
+    /**
+     * @static
+     * @function getTempTexture
+     * @memberof Texture
+     * @description returns the default temporary texture (grey diagonal stipes)
+     * @return {Texture}
+     * @param {CglContext} cgl
+     */
+    static getTempTexture(cgl)
+    {
+        if (!cgl) console.error("[getTempTexture] no cgl!");
+        if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.WRAP_REPEAT);
+        return cgl.tempTexture;
+    }
 
-/**
- * @static
- * @function getErrorTexture
- * @memberof Texture
- * @description returns the default temporary texture (grey diagonal stipes)
- * @param {CglContext} cgl
- * @return {Texture}
- */
-Texture.getErrorTexture = function (cgl)
-{
-    if (!cgl) console.error("[getTempTexture] no cgl!");
-    if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT, 1, 0.2, 0.2);
-    return cgl.errorTexture;
-};
+    /**
+     * @static
+     * @function getErrorTexture
+     * @memberof Texture
+     * @description returns the default temporary texture (grey diagonal stipes)
+     * @param {CglContext} cgl
+     * @return {Texture}
+     */
+    static getErrorTexture(cgl)
+    {
+        if (!cgl) console.error("[getTempTexture] no cgl!");
+        if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.WRAP_REPEAT, 1, 0.2, 0.2);
+        return cgl.errorTexture;
+    }
 
-/**
+    /**
  * @function getEmptyTexture
  * @memberof Texture
  * @instance
@@ -678,23 +710,23 @@ Texture.getErrorTexture = function (cgl)
  * @description returns a reference to a small empty (transparent) texture
  * @return {Texture}
  */
-Texture.getEmptyTexture = function (cgl, fp)
-{
-    if (fp) return Texture.getEmptyTextureFloat(cgl);
-    if (!cgl) console.error("[getEmptyTexture] no cgl!");
-    if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
+    static getEmptyTexture(cgl, fp)
+    {
+        if (fp) return Texture.getEmptyTextureFloat(cgl);
+        if (!cgl) console.error("[getEmptyTexture] no cgl!");
+        if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
-    let size = 8;
+        let size = 8;
 
-    cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
-    const data = Texture.getDefaultTextureData("empty", size);
+        cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
+        const data = Texture.getDefaultTextureData("empty", size);
 
-    cgl.tempTextureEmpty.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+        cgl.tempTextureEmpty.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return cgl.tempTextureEmpty;
-};
+        return cgl.tempTextureEmpty;
+    }
 
-/**
+    /**
  * @function getEmptyTextureFloat
  * @memberof Texture
  * @instance
@@ -702,433 +734,460 @@ Texture.getEmptyTexture = function (cgl, fp)
  * @description returns a reference to a small empty (transparent) 32bit texture
  * @return {Texture}
  */
-Texture.getEmptyTextureFloat = function (cgl)
-{
-    if (!cgl) console.error("[getEmptyTextureFloat] no cgl!");
-    if (cgl.tempTextureEmptyFloat) return cgl.tempTextureEmptyFloat;
+    static getEmptyTextureFloat(cgl)
+    {
+        if (!cgl) console.error("[getEmptyTextureFloat] no cgl!");
+        if (cgl.tempTextureEmptyFloat) return cgl.tempTextureEmptyFloat;
 
-    cgl.tempTextureEmptyFloat = new Texture(cgl, { "name": "emptyTexture", "isFloatingPointTexture": true });
-    const data = new Float32Array(8 * 8 * 4).fill(1);
-    for (let i = 0; i < 8 * 8 * 4; i += 4) data[i + 3] = 0;
+        cgl.tempTextureEmptyFloat = new Texture(cgl, { "name": "emptyTexture", "isFloatingPointTexture": true });
+        const data = new Float32Array(8 * 8 * 4).fill(1);
+        for (let i = 0; i < 8 * 8 * 4; i += 4) data[i + 3] = 0;
 
-    cgl.tempTextureEmptyFloat.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+        cgl.tempTextureEmptyFloat.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return cgl.tempTextureEmptyFloat;
-};
+        return cgl.tempTextureEmptyFloat;
+    }
 
-/**
- * @function getRandomTexture
- * @memberof Texture
- * @static
- * @param cgl
- * @description returns a reference to a random texture
- * @return {Texture}
- */
-Texture.getRandomTexture = function (cgl)
-{
-    if (!cgl) console.error("[getRandomTexture] no cgl!");
-    if (cgl.randomTexture) return cgl.randomTexture;
+    /**
+     * @description returns a reference to a random texture
+     * @return {Texture}
+     * @param {CglContext} cgl
+     */
+    static getRandomTexture(cgl)
+    {
+        if (!cgl) console.error("[getRandomTexture] no cgl!");
+        if (cgl.randomTexture) return cgl.randomTexture;
 
-    const size = 256;
-    const data = Texture.getDefaultTextureData("randomUInt", size);
+        const size = 256;
+        const data = Texture.getDefaultTextureData("randomUInt", size);
 
-    cgl.randomTexture = new Texture(cgl);
-    cgl.randomTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+        cgl.randomTexture = new Texture(cgl);
+        cgl.randomTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return cgl.randomTexture;
-};
+        return cgl.randomTexture;
+    }
 
-/**
- * @function getRandomFloatTexture
- * @memberof Texture
- * @static
- * @param cgl
- * @description returns a reference to a texture containing random numbers between -1 and 1
- * @return {Texture}
- */
-Texture.getRandomFloatTexture = function (cgl)
-{
-    if (!cgl) console.error("[getRandomTexture] no cgl!");
-    if (cgl.getRandomFloatTexture) return cgl.getRandomFloatTexture;
+    /**
+     * @description returns a reference to a texture containing random numbers between -1 and 1
+     * @return {Texture}
+     * @param {CglContext} cgl
+     */
+    static getRandomFloatTexture(cgl)
+    {
+        if (!cgl) console.error("[getRandomTexture] no cgl!");
+        if (cgl.getRandomFloatTexture) return cgl.getRandomFloatTexture;
 
-    const size = 256;
-    const data = Texture.getDefaultTextureData("randomFloat", size);
+        const size = 256;
+        const data = Texture.getDefaultTextureData("randomFloat", size);
 
-    cgl.getRandomFloatTexture = new Texture(cgl, { "isFloatingPointTexture": true });
-    cgl.getRandomFloatTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+        cgl.getRandomFloatTexture = new Texture(cgl, { "isFloatingPointTexture": true });
+        cgl.getRandomFloatTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return cgl.getRandomFloatTexture;
-};
+        return cgl.getRandomFloatTexture;
+    }
 
-/**
- * @function getBlackTexture
- * @memberof Texture
- * @static
+    /**
  * @param {CglContext} cgl
  * @description returns a reference to a black texture
  * @return {Texture}
  */
-Texture.getBlackTexture = function (cgl)
-{
-    if (cgl.blackTexture) return cgl.blackTexture;
-    cgl.blackTexture = Texture.getColorTexture(cgl, 0, 0, 0, 1);
-    return cgl.blackTexture;
-};
-
-Texture.getColorTexture = function (cgl, r, g, b, a)
-{
-    const size = 8;
-    const data = Texture.getDefaultTextureData("color", size, { "r": r, "g": g, "b": b, "a": a });
-
-    const ctex = new Texture(cgl);
-    ctex.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
-
-    return ctex;
-};
-
-/**
- * @function getEmptyCubemapTexture
- * @memberof Texture
- * @static
- * @param cgl
- * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
- * @return {Texture}
- */
-Texture.getEmptyCubemapTexture = function (cgl)
-{
-    const faces = [
-        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
-    ];
-
-    const tex = cgl.gl.createTexture();
-    const target = cgl.gl.TEXTURE_CUBE_MAP;
-    const filter = Texture.FILTER_NEAREST;
-    const wrap = Texture.WRAP_CLAMP_TO_EDGE;
-    const width = 8;
-    const height = 8;
-
-    cgl.profileData.count("texturecreated");
-
-    cgl.gl.bindTexture(target, tex);
-    cgl.profileData.count("textureResize");
-
-    for (let i = 0; i < 6; i += 1)
+    static getBlackTexture(cgl)
     {
-        const data = new Uint8Array(8 * 8 * 4);
-
-        cgl.gl.texImage2D(faces[i], 0, cgl.gl.RGBA, 8, 8, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, data);
-        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.NEAREST);
-        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.NEAREST);
-
-        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
-        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+        if (cgl.blackTexture) return cgl.blackTexture;
+        cgl.blackTexture = Texture.getColorTexture(cgl, 0, 0, 0, 1);
+        return cgl.blackTexture;
     }
 
-    cgl.gl.bindTexture(target, null);
+    /**
+     * @param {CglContext} cgl
+     * @param {number} r
+     * @param {number} g
+     * @param {number} b
+     * @param {number} a
+     */
+    static getColorTexture(cgl, r, g, b, a)
+    {
+        const size = 8;
+        const data = Texture.getDefaultTextureData("color", size, { "r": r, "g": g, "b": b, "a": a });
 
-    return {
-        "id": utils.uuid(),
-        "tex": tex,
-        "cubemap": tex,
-        "width": width,
-        "height": height,
-        "filter": filter,
-        "wrap": wrap,
-        "unpackAlpha": true,
-        "flip": true,
-        "_fromData": true,
-        "name": "emptyCubemapTexture",
-        "anisotropic": 0,
-    };
-};
+        const ctex = new Texture(cgl);
+        ctex.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-Texture.getTempGradientTexture = function (cgl) // deprecated...
-{
-    if (!cgl) console.error("[getTempGradientTexture] no cgl!");
-    return Texture.getTempTexture(cgl);
-};
+        return ctex;
+    }
 
-Texture.getTemporaryTexture = function (cgl, size, filter, wrap, r, g, b)
-{
-    const data = Texture.getDefaultTextureData("stripes", 256, { "r": r, "g": g, "b": b });
-    const temptex = new Texture(cgl);
-    temptex.initFromData(data, size, size, filter, wrap);
-    return temptex;
-};
+    /**
+     * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
+     * @return {Texture}
+     * @param {CglContext} cgl
+     */
+    static getEmptyCubemapTexture(cgl)
+    {
+        const faces = [
+            cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+            cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+            cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+            cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+            cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
+        ];
 
-/**
+        const tex = cgl.gl.createTexture();
+        const target = cgl.gl.TEXTURE_CUBE_MAP;
+        const filter = Texture.FILTER_NEAREST;
+        const wrap = Texture.WRAP_CLAMP_TO_EDGE;
+        const width = 8;
+        const height = 8;
+
+        cgl.profileData.count("texturecreated");
+
+        cgl.gl.bindTexture(target, tex);
+        cgl.profileData.count("textureResize");
+
+        for (let i = 0; i < 6; i += 1)
+        {
+            const data = new Uint8Array(8 * 8 * 4);
+
+            cgl.gl.texImage2D(faces[i], 0, cgl.gl.RGBA, 8, 8, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, data);
+            cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.NEAREST);
+            cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.NEAREST);
+
+            cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
+            cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+        }
+
+        cgl.gl.bindTexture(target, null);
+
+        return {
+            "id": utils.uuid(),
+            "tex": tex,
+            "cubemap": tex,
+            "width": width,
+            "height": height,
+            "filter": filter,
+            "wrap": wrap,
+            "unpackAlpha": true,
+            "flip": true,
+            "_fromData": true,
+            "name": "emptyCubemapTexture",
+            "anisotropic": 0,
+        };
+    }
+
+    /**
+     * @deprecated
+     * @param {CglContext} cgl
+     */
+    static getTempGradientTexture(cgl) // deprecated...
+    {
+        if (!cgl) console.error("[getTempGradientTexture] no cgl!");
+        return Texture.getTempTexture(cgl);
+    }
+
+    /**
+     * @param {CglContext} cgl
+     * @param {number} size
+     * @param {number} filter
+     * @param {number} wrap
+     * @param {number} [r]
+     * @param {number} [g]
+     * @param {number} [b]
+     */
+    static getTemporaryTexture(cgl, size, filter, wrap, r, g, b)
+    {
+        const data = Texture.getDefaultTextureData("stripes", 256, { "r": r, "g": g, "b": b });
+        const temptex = new Texture(cgl);
+        temptex.initFromData(data, size, size, filter, wrap);
+        return temptex;
+    }
+
+    /**
  * create texturem from image data (e.g. image or canvas)
  * @param {CglContext} cgl
  * @param {Object} img image
  * @param {Object} options
  */
-Texture.createFromImage = function (cgl, img, options)
-{
-    options = options || {};
-    const texture = new Texture(cgl, options);
-    texture.flip = false;
-    texture.image = img;
-    texture.width = img.videoWidth || img.width || 8;
-    texture.height = img.videoHeight || img.height || 8;
-    if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
+    static createFromImage = function (cgl, img, options)
+    {
+        options = options || {};
+        const texture = new Texture(cgl, options);
+        texture.flip = false;
+        texture.image = img;
+        texture.width = img.videoWidth || img.width || 8;
+        texture.height = img.videoHeight || img.height || 8;
+        if (options.hasOwnProperty("wrap"))texture.wrap = options.wrap;
 
-    texture.initTexture(img, options.filter);
+        texture.initTexture(img, options.filter);
 
-    return texture;
-};
+        return texture;
+    };
 
-// deprecated!
-Texture.fromImage = function (cgl, img, filter, wrap)
-{
-    console.error("deprecated texture from image...");
+    /**
+     * @deprecated
+     * @param {CglContext} cgl
+     * @param {any} img
+     * @param {number} filter
+     * @param {number} wrap
+     */
+    static fromImage(cgl, img, filter, wrap)
+    {
+        console.error("deprecated texture from image...");
 
-    const texture = new Texture(cgl);
-    texture.flip = false;
-    if (filter) texture.filter = filter;
-    if (wrap) texture.wrap = wrap;
-    texture.image = img;
-    texture.initTexture(img);
-    return texture;
-};
+        const texture = new Texture(cgl);
+        texture.flip = false;
+        if (filter) texture.filter = filter;
+        if (wrap) texture.wrap = wrap;
+        texture.image = img;
+        texture.initTexture(img);
+        return texture;
+    }
 
-/**
+    /**
  * @static
- * @function isPowerOfTwo
- * @memberof Texture
  * @description returns true if x is power of two
  * @param {Number} x
  * @return {Boolean}
  */
-Texture.isPowerOfTwo = function (x)
-{
-    return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;
-};
-
-Texture.getTexInfo = function (tex)
-{
-    const obj = {};
-
-    obj.name = tex.name;
-    obj["power of two"] = tex.isPowerOfTwo();
-    obj.size = tex.width + " x " + tex.height;
-
-    let targetString = tex.texTarget;
-    if (tex.texTarget == tex._cgl.gl.TEXTURE_2D) targetString = "TEXTURE_2D";
-    obj.target = targetString;
-
-    obj.unpackAlpha = tex.unpackAlpha;
-
-    if (tex.cubemap)obj.cubemap = true;
-
-    if (tex.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
-    if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
-    else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
-    else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
-    else obj.textureType = "UNKNOWN " + this.textureType;
-
-    if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
-    else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
-    else if (tex.wrap == Texture.WRAP_MIRRORED_REPEAT) obj.wrap = "WRAP_MIRRORED_REPEAT";
-    else obj.wrap = "UNKNOWN";
-
-    if (tex.filter == Texture.FILTER_NEAREST) obj.filter = "FILTER_NEAREST";
-    else if (tex.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
-    else if (tex.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
-    else obj.filter = "UNKNOWN";
-
-    obj.pixelFormat = tex.pixelFormat || "unknown";
-
-    return obj;
-};
-
-Texture.setUpGlPixelFormat = function (cgl, pixelFormatStr)
-{
-    const o = {};
-
-    if (!pixelFormatStr)
+    static isPowerOfTwo(x)
     {
-        cgl._log.error("no pixelformatstr!");
-        cgl._log.log(new Error());
-        pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
+        return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;
     }
 
-    o.pixelFormatBase = pixelFormatStr;
-    o.pixelFormat = pixelFormatStr;
-    o.glDataType = cgl.gl.UNSIGNED_BYTE;
-    o.glInternalFormat = cgl.gl.RGBA8;
-    o.glDataFormat = cgl.gl.RGBA;
-
-    let floatDatatype = cgl.gl.FLOAT;
-
-    if (cgl.glUseHalfFloatTex)
+    /**
+     * @param {Texture} tex
+     */
+    static getTexInfo(tex)
     {
-        if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-        if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-        if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        const obj = {};
+
+        obj.name = tex.name;
+        obj["power of two"] = tex.isPowerOfTwo();
+        obj.size = tex.width + " x " + tex.height;
+
+        let targetString = tex.texTarget;
+        if (tex.texTarget == tex._cgl.gl.TEXTURE_2D) targetString = "TEXTURE_2D";
+        obj.target = targetString;
+
+        obj.unpackAlpha = tex.unpackAlpha;
+
+        if (tex.cubemap)obj.cubemap = true;
+
+        if (tex.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
+        // else if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
+        else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
+        else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
+        else obj.textureType = "UNKNOWN " + tex.textureType;
+
+        if (tex.wrap == Texture.WRAP_CLAMP_TO_EDGE) obj.wrap = "CLAMP_TO_EDGE";
+        else if (tex.wrap == Texture.WRAP_REPEAT) obj.wrap = "WRAP_REPEAT";
+        else if (tex.wrap == Texture.WRAP_MIRRORED_REPEAT) obj.wrap = "WRAP_MIRRORED_REPEAT";
+        else obj.wrap = "UNKNOWN";
+
+        if (tex.filter == Texture.FILTER_NEAREST) obj.filter = "FILTER_NEAREST";
+        else if (tex.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
+        else if (tex.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
+        else obj.filter = "UNKNOWN";
+
+        obj.pixelFormat = tex.pixelFormat || "unknown";
+
+        return obj;
     }
 
-    if (pixelFormatStr.includes("16bit"))
+    /**
+     * @param {CglContext} cgl
+     * @param {string} pixelFormatStr
+     */
+    static setUpGlPixelFormat(cgl, pixelFormatStr)
     {
-        if (cgl.glVersion == 2)
+        const o = {};
+
+        if (!pixelFormatStr)
         {
-            // cgl.enableExtension("OES_texture_half_float");
-            const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+            cgl._log.error("no pixelformatstr!");
+            cgl._log.log(new Error());
+            pixelFormatStr = Texture.PFORMATSTR_RGBA8UB;
+        }
 
-            if (!hasExt)
+        o.pixelFormatBase = pixelFormatStr;
+        o.pixelFormat = pixelFormatStr;
+        o.glDataType = cgl.gl.UNSIGNED_BYTE;
+        o.glInternalFormat = cgl.gl.RGBA8;
+        o.glDataFormat = cgl.gl.RGBA;
+
+        let floatDatatype = cgl.gl.FLOAT;
+
+        if (cgl.glUseHalfFloatTex)
+        {
+            if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        }
+
+        if (pixelFormatStr.includes("16bit"))
+        {
+            if (cgl.glVersion == 2)
             {
-                console.warn("no 16bit extension, fallback to 32bit", pixelFormatStr);
-                // fallback to 32 bit?
-                if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F) pixelFormatStr = Texture.PFORMATSTR_RGBA32F;
-                if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
-                if (pixelFormatStr == Texture.PFORMATSTR_RG16F) pixelFormatStr = Texture.PFORMATSTR_RG32F;
-                if (pixelFormatStr == Texture.PFORMATSTR_R16F) pixelFormatStr = Texture.PFORMATSTR_R32F;
+            // cgl.enableExtension("OES_texture_half_float");
+                const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+
+                if (!hasExt)
+                {
+                    console.warn("no 16bit extension, fallback to 32bit", pixelFormatStr);
+                    // fallback to 32 bit?
+                    if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F) pixelFormatStr = Texture.PFORMATSTR_RGBA32F;
+                    if (pixelFormatStr == Texture.PFORMATSTR_RGB16F) pixelFormatStr = Texture.PFORMATSTR_RGB32F;
+                    if (pixelFormatStr == Texture.PFORMATSTR_RG16F) pixelFormatStr = Texture.PFORMATSTR_RG32F;
+                    if (pixelFormatStr == Texture.PFORMATSTR_R16F) pixelFormatStr = Texture.PFORMATSTR_R32F;
+                }
+                else
+                {
+                    floatDatatype = cgl.gl.HALF_FLOAT;
+                }
+            }
+        }
+
+        if (cgl.glVersion == 1)
+        {
+            o.glInternalFormat = cgl.gl.RGBA;
+
+            if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F || pixelFormatStr == Texture.PFORMATSTR_RG16F || pixelFormatStr == Texture.PFORMATSTR_R16F)
+            {
+                const ext = cgl.enableExtension("OES_texture_half_float");
+                if (!ext) throw new Error("no half float texture extension");
+
+                floatDatatype = ext.HALF_FLOAT_OES;
+            }
+        }
+
+        if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
+        {
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
+        {
+            o.glInternalFormat = cgl.gl.RGB565;
+            o.glDataFormat = cgl.gl.RGB;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_R8UB)
+        {
+            o.glInternalFormat = cgl.gl.R8;
+            o.glDataFormat = cgl.gl.RED;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RG8UB)
+        {
+            o.glInternalFormat = cgl.gl.RG8;
+            o.glDataFormat = cgl.gl.RG;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
+        {
+            o.glInternalFormat = cgl.gl.RGB8;
+            o.glDataFormat = cgl.gl.RGB;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_SRGBA8)
+        {
+            o.glInternalFormat = cgl.gl.SRGB8_ALPHA8;
+        }
+
+        else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
+        {
+            o.glInternalFormat = cgl.gl.R32F;
+            o.glDataFormat = cgl.gl.RED;
+            o.glDataType = floatDatatype;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
+        {
+            o.glInternalFormat = cgl.gl.R16F;
+            o.glDataType = floatDatatype;
+            o.glDataFormat = cgl.gl.RED;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
+        {
+            o.glInternalFormat = cgl.gl.RG16F;
+            o.glDataType = floatDatatype;
+            o.glDataFormat = cgl.gl.RG;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F)
+        {
+            if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
+            else o.glInternalFormat = cgl.gl.RGBA16F;
+            o.glDataType = floatDatatype;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+        {
+            o.glInternalFormat = cgl.gl.R11F_G11F_B10F;
+            o.glDataType = floatDatatype;
+            o.glDataFormat = cgl.gl.RGB;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F)
+        {
+            if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
+            else o.glInternalFormat = cgl.gl.RGBA32F;
+            o.glDataType = floatDatatype;
+        }
+        else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
+        {
+            if (cgl.glVersion == 1)
+            {
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
+                o.glDataType = cgl.gl.UNSIGNED_SHORT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
             }
             else
             {
-                floatDatatype = cgl.gl.HALF_FLOAT;
+                o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
+                o.glDataType = cgl.gl.FLOAT;
+                o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
             }
-        }
-    }
-
-    if (cgl.glVersion == 1)
-    {
-        o.glInternalFormat = cgl.gl.RGBA;
-
-        if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F || pixelFormatStr == Texture.PFORMATSTR_RG16F || pixelFormatStr == Texture.PFORMATSTR_R16F)
-        {
-            const ext = cgl.enableExtension("OES_texture_half_float");
-            if (!ext) throw new Error("no half float texture extension");
-
-            floatDatatype = ext.HALF_FLOAT_OES;
-        }
-    }
-
-    if (pixelFormatStr == Texture.PFORMATSTR_RGBA8UB)
-    {
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RGB565)
-    {
-        o.glInternalFormat = cgl.gl.RGB565;
-        o.glDataFormat = cgl.gl.RGB;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_R8UB)
-    {
-        o.glInternalFormat = cgl.gl.R8;
-        o.glDataFormat = cgl.gl.RED;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RG8UB)
-    {
-        o.glInternalFormat = cgl.gl.RG8;
-        o.glDataFormat = cgl.gl.RG;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RGB8UB)
-    {
-        o.glInternalFormat = cgl.gl.RGB8;
-        o.glDataFormat = cgl.gl.RGB;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_SRGBA8)
-    {
-        o.glInternalFormat = cgl.gl.SRGB8_ALPHA8;
-    }
-
-    else if (pixelFormatStr == Texture.PFORMATSTR_R32F)
-    {
-        o.glInternalFormat = cgl.gl.R32F;
-        o.glDataFormat = cgl.gl.RED;
-        o.glDataType = floatDatatype;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_R16F)
-    {
-        o.glInternalFormat = cgl.gl.R16F;
-        o.glDataType = floatDatatype;
-        o.glDataFormat = cgl.gl.RED;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RG16F)
-    {
-        o.glInternalFormat = cgl.gl.RG16F;
-        o.glDataType = floatDatatype;
-        o.glDataFormat = cgl.gl.RG;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RGBA16F)
-    {
-        if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
-        else o.glInternalFormat = cgl.gl.RGBA16F;
-        o.glDataType = floatDatatype;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
-    {
-        o.glInternalFormat = cgl.gl.R11F_G11F_B10F;
-        o.glDataType = floatDatatype;
-        o.glDataFormat = cgl.gl.RGB;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F)
-    {
-        if (cgl.glVersion == 1) o.glInternalFormat = cgl.gl.RGBA;
-        else o.glInternalFormat = cgl.gl.RGBA32F;
-        o.glDataType = floatDatatype;
-    }
-    else if (pixelFormatStr == Texture.PFORMATSTR_DEPTH)
-    {
-        if (cgl.glVersion == 1)
-        {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT;
-            o.glDataType = cgl.gl.UNSIGNED_SHORT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
         }
         else
         {
-            o.glInternalFormat = cgl.gl.DEPTH_COMPONENT32F;
-            o.glDataType = cgl.gl.FLOAT;
-            o.glDataFormat = cgl.gl.DEPTH_COMPONENT;
+            log.log("unknown pixelformat ", pixelFormatStr);
         }
+
+        /// //////
+
+        if (pixelFormatStr.includes("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+        {
+            if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
+            if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
+
+            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+        }
+
+        o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
+
+        if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) log.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
+
+        return o;
     }
-    else
-    {
-        log.log("unknown pixelformat ", pixelFormatStr);
-    }
 
-    /// //////
-
-    if (pixelFormatStr.includes("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
-    {
-        if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
-        if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
-
-        cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-    }
-
-    o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
-
-    if (!o.glDataType || !o.glInternalFormat || !o.glDataFormat) log.log("pixelformat wrong ?!", pixelFormatStr, o.glDataType, o.glInternalFormat, o.glDataFormat, this);
-
-    return o;
-};
-
-Texture.getPixelFormatNumChannels =
-    (pxlFrmtStr) =>
+    /**
+     * @param {string} pxlFrmtStr
+     */
+    static getPixelFormatNumChannels(pxlFrmtStr)
     {
         if (pxlFrmtStr.startsWith("RGBA")) return 4;
         if (pxlFrmtStr.startsWith("RGB")) return 3;
         if (pxlFrmtStr.startsWith("RG")) return 2;
         return 1;
-    };
+    }
 
-Texture.isPixelFormatFloat =
-    (pxlFrmtStr) =>
+    /**
+     * @param {string} pxlFrmtStr
+     */
+    static isPixelFormatFloat(pxlFrmtStr)
     {
         return (pxlFrmtStr || "").includes("float");
-    };
+    }
 
-Texture.isPixelFormatHalfFloat =
-    (pxlFrmtStr) =>
+    /**
+     * @param {string} pxlFrmtStr
+     */
+    static isPixelFormatHalfFloat(pxlFrmtStr)
     {
         return (pxlFrmtStr || "").includes("float") && (pxlFrmtStr || "").includes("16bit");
-    };
+    }
+
+}
 
 Op.prototype.outTexture = function (name, v)
 {
