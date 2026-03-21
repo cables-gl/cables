@@ -44,11 +44,12 @@ import { MultiPort2 } from "./core_port_multi2.js";
  * @property {string} [extendTitlePort]
  * @property {string} [display]
  * @property {string} [hasArea]
- * @property {number} [resizableX]
- * @property {number} [resizableY]
+ * @property {boolean} [resizableX]
+ * @property {boolean} [resizableY]
  * @property {number} [tlOrder]
  * @property {number} [heatmapIntensity]
  * @property {string} [commentOverwrite]
+ * @property {string} [comment_text]
  */
 
 /**

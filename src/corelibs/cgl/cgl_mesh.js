@@ -177,7 +177,7 @@ class Mesh extends CgMesh
 
     /**
      * @param {AttributeObject} attr
-     * @param { Float32Array } array
+     * @param {Float32Array} array
      * @param {number} start
      * @param {number} end
      */
@@ -202,15 +202,17 @@ class Mesh extends CgMesh
             this._resizeAttr(array, attr);
         }
 
-        if (end > array.length && !this.warned)
+        if (end > array.length)
         {
             this.warned = true;
-            this.#log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
-            return;
+            if (!this.warned) this.#log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
+            // return;
+            end = array.length - 1;
         }
 
         // if (glVersion == 1) gl.bufferSubData(gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
         // else
+        // gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
         gl.bufferSubData(gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
     }
 
@@ -959,15 +961,20 @@ class Mesh extends CgMesh
     {
         if (!this._attributes) return;
 
-        for (let i = 0; i < this._attributes.length; i++)
+        window.requestIdleCallback(() =>
         {
-            if (this._attributes[i].buffer)
+
+            for (let i = 0; i < this._attributes.length; i++)
             {
-                this.#cgl.gl.deleteBuffer(this._attributes[i].buffer);
-                this._attributes[i].buffer = null;
+                if (this._attributes[i].buffer)
+                {
+                    this.#cgl.gl.deleteBuffer(this._attributes[i].buffer);
+                    this._attributes[i].buffer = null;
+                }
             }
-        }
-        this._attributes.length = 0;
+            this._attributes.length = 0;
+
+        });
     }
 
     dispose()
