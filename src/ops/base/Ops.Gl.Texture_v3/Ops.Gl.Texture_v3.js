@@ -20,6 +20,8 @@ const cgl = op.patch.cgl;
 
 op.setPortGroup("Size", [width, height]);
 
+let idle = null;
+let loadSoon = null;
 let loadedFilename = null;
 let loadingId = null;
 let tex = null;
@@ -71,7 +73,7 @@ const setTempTexture = function ()
 
 function reloadSoon(nocache)
 {
-    window.requestIdleCallback(() => { realReload(nocache); });
+    idle = CABLES.idleCallback(idle, () => { realReload(nocache); });
 }
 
 function getPixelFormat()

@@ -470,14 +470,14 @@ inActive.onChange = () =>
 };
 let preload = null;
 
+let idle = null;
 function reloadSoon(nocache)
 {
-    cancelIdleCallback(timedLoader);
     cgl.patch.loading.finished(preload);
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
-    timedLoader = requestIdleCallback(() =>
+    idle = CABLES.idleCallback(idle, () =>
     {
         loadBin(nocache);
 

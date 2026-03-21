@@ -526,3 +526,16 @@ export const escapeHTML = function(string)
         : string || "";
 }
 /* eslint-enable */
+
+export function idleCallback(idleTo, cb)
+{
+    if (idleTo)clearTimeout(idleTo);
+    idleTo = setTimeout(() =>
+    {
+        idleTo = null;
+        requestIdleCallback(cb);
+
+    }, 50);
+    return idleTo;
+
+}

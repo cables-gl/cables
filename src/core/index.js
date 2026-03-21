@@ -39,6 +39,7 @@ CABLES.internalNow = internalNow;
 CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
 CABLES.RenderLoop = RenderLoop;
+CABLES.idleCallback = utils.idleCallback;
 
 CABLES.shortId = utils.shortId;
 CABLES.uuid = utils.uuid;
