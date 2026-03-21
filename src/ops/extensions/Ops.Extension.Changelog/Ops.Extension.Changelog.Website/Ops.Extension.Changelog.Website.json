@@ -39,6 +39,13 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1773761165497
+        },
+        {
+            "message": "Add url-field to op-changelog form",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1774004663693,
+            "url": "https://github.com/cables-gl/cables/issues/8142"
         }
     ]
 }

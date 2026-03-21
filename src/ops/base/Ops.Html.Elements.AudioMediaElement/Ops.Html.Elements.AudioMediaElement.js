@@ -152,9 +152,9 @@ fileName.onChange = function ()
 
     audio.addEventListener("ended", function ()
     {
-        pause();
+        // pause();
         outEnded.trigger();
-        if (doLoop.get()) play();
+        // if (doLoop.get()) play();
     }, false);
 };
 
