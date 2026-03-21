@@ -154,15 +154,14 @@ export class LoadingStatus extends Events
 
     _startAssetTasks()
     {
-        for (let i = 0; i < this._assetTasks.length; i++) this._assetTasks[i]();
+        for (let i = 0; i < this._assetTasks.length; i++)
+            requestIdleCallback(this._assetTasks[i]);
+
         this._assetTasks.length = 0;
     }
 
     /**
      * delay an asset loading task, mainly to wait for ui to be finished loading and showing, and only then start loading assets
-     * @function addAssetLoadingTask
-     * @instance
-     * @memberof LoadingStatus
      * @param {function} cb callback
      */
     addAssetLoadingTask(cb)
@@ -176,7 +175,7 @@ export class LoadingStatus extends Events
         }
         else
         {
-            cb();
+            requestIdleCallback(cb);
         }
         this.emitEvent("addAssetTask");
     }

@@ -410,30 +410,33 @@ function loadBin(addCacheBuster)
     }
     needsMatUpdate = true;
     outLoading.set(true);
-    fetch(url)
-        .then((res) => { return res.arrayBuffer(); })
-        .then((arrayBuffer) =>
-        {
-            if (inFile.get() != fileToLoad)
+    op.patch.loading.addAssetLoadingTask(() =>
+    {
+        fetch(url)
+            .then((res) => { return res.arrayBuffer(); })
+            .then((arrayBuffer) =>
             {
-                cgl.patch.loading.finished(loadingId);
+                if (inFile.get() != fileToLoad)
+                {
+                    cgl.patch.loading.finished(loadingId);
+                    loadingId = null;
+                    return;
+                }
+
+                boundingPoints = [];
+                maxTime = 0;
+                gltf = parseGltf(arrayBuffer);
+                arrayBuffer = null;
+                finishLoading();
+            }).catch((e) =>
+            {
+                if (loadingId)cgl.patch.loading.finished(loadingId);
                 loadingId = null;
-                return;
-            }
+                finishLoading();
 
-            boundingPoints = [];
-            maxTime = 0;
-            gltf = parseGltf(arrayBuffer);
-            arrayBuffer = null;
-            finishLoading();
-        }).catch((e) =>
-        {
-            if (loadingId)cgl.patch.loading.finished(loadingId);
-            loadingId = null;
-            finishLoading();
-
-            op.logError("gltf fetch error", e);
-        });
+                op.logError("gltf fetch error", e);
+            });
+    });
     closeTab();
 
     cgl.patch.loading.addAssetLoadingTask(() =>
