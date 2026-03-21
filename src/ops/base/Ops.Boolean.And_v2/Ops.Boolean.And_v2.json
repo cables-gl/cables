@@ -1,0 +1,46 @@
+{
+    "id": "0b9fa81d-3523-4d83-bd1f-b4cd3cc1b773",
+    "created": 1765450422636,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1762781802774
+        },
+        {
+            "message": "Boolean.AndMultiPort_v2 renamed to Ops.Boolean.And_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774012960100
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Booleans_0",
+                "longPort": 2,
+                "group": "Booleans",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Booleans_1",
+                "uititle": "add port",
+                "group": "Booleans",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs `true` if all input values are `true` (boolean)"
+}

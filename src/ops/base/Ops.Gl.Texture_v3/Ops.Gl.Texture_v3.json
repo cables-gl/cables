@@ -1,0 +1,162 @@
+{
+    "authorName": "pandur",
+    "id": "3ba958d8-b290-4142-baef-6895aaf216da",
+    "created": 1774026692088,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Data Format index",
+                "values": [
+                    "R",
+                    "RG",
+                    "RGB",
+                    "RGBA",
+                    "SRGBA"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Save Memory",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Add Cachebuster",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loaded",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Texture_v2 renamed to Ops.Gl.Texture_v2",
+            "author": "pandur",
+            "date": 1581607147784,
+            "type": "new"
+        },
+        {
+            "message": "typing in the url input will not blur element",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1707381819030
+        },
+        {
+            "message": "Cachebuster option default value is now false. turn on to force a reload of the image every time",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1715952002835
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1774026692089
+        },
+        {
+            "message": "Gl.TextureNew renamed to Ops.Gl.TextureNonBlock",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774027257481
+        },
+        {
+            "message": "Gl.TextureNonBlock renamed to Ops.Gl.Texture_v3",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774029710057
+        },
+        {
+            "message": "Faster and less thread blocking loading of images",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1774029745152
+        }
+    ],
+    "summary": "Load an image as a texture",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}
