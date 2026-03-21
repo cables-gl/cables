@@ -60,11 +60,6 @@
             },
             {
                 "type": 0,
-                "name": "Save Memory",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Add Cachebuster",
                 "subType": "boolean"
             },

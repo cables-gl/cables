@@ -360,4 +360,9 @@ let gltfMesh = class
             console.log("no mesh......");
         }
     }
+
+    dispose()
+    {
+        if (this.mesh) this.mesh.dispose();
+    }
 };

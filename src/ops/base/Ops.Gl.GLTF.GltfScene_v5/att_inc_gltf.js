@@ -44,6 +44,15 @@ const Gltf = class
             this.nodes[i].unHide();
         }
     }
+
+    dispose()
+    {
+        for (let i = 0; i < this.meshes.length; i++)
+            if (this.meshes[i]) this.meshes[i].dispose();
+
+        for (let i = 0; i < this.textures.length; i++)
+            if (this.textures[i]) this.textures[i].dispose();
+    }
 };
 
 function Utf8ArrayToStr(array)

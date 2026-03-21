@@ -82,4 +82,9 @@ let GltfTexture = class
             });
         if (!this.tex)console.log("notex!???");
     }
+
+    dispose()
+    {
+        this.tex = this.tex.dispose();
+    }
 };

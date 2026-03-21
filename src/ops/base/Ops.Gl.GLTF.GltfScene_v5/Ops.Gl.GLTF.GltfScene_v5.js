@@ -123,6 +123,7 @@ inMaterials.onChange = function ()
 
 op.onDelete = function ()
 {
+    if (gltf) gltf.dispose();
     closeTab();
 };
 
@@ -269,7 +270,7 @@ function finishLoading()
     if (gltf.loadingMeshes > 0)
     {
         // op.log("waiting for async meshes...");
-        setTimeout(finishLoading, 100);
+        setTimeout(finishLoading, 50);
         return;
     }
 
@@ -435,10 +436,6 @@ function loadBin(addCacheBuster)
         });
     closeTab();
 
-    const oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.responseType = "arraybuffer";
-
     cgl.patch.loading.addAssetLoadingTask(() =>
     {
 
@@ -472,17 +469,17 @@ let preload = null;
 
 function reloadSoon(nocache)
 {
-    clearTimeout(timedLoader);
+    cancelIdleCallback(timedLoader);
     cgl.patch.loading.finished(preload);
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
-    timedLoader = setTimeout(function ()
+    timedLoader = requestIdleCallback(() =>
     {
         loadBin(nocache);
 
         cgl.patch.loading.finished(preload);
-    }, 50);
+    });
 }
 
 function updateMaterials()

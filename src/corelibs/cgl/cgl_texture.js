@@ -380,13 +380,11 @@ export class Texture extends CgTexture
 
     /**
      * delete texture. use this when texture is no longer needed
-     * @function delete
-     * @memberof Texture
-     * @instance
      */
     dispose()
     {
         this.delete();
+        return CGL.Texture.getTempTexture(this._cgl);
     }
 
     delete()
@@ -402,10 +400,12 @@ export class Texture extends CgTexture
         this.width = 0;
         this.height = 0;
         this._cgl.profileData.count("textureDelete");
-        this._cgl.gl.deleteTexture(this.tex);
         this.image = null;
-
-        this.tex = null;
+        window.requestIdleCallback(() =>
+        {
+            this._cgl.gl.deleteTexture(this.tex);
+            this.tex = null;
+        });
     }
 
     /**
@@ -642,7 +642,11 @@ export class Texture extends CgTexture
                         texture.loading = false;
 
                         if (finishedCallback) finishedCallback(null, texture);
-                        bitmap.close();
+
+                        window.requestIdleCallback(() =>
+                        {
+                            bitmap.close();
+                        });
 
                     }).catch((e) =>
                     {

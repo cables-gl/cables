@@ -1,13 +1,12 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
-    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
+    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA", "SRGBA"], "RGBA"),
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
-    inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
     addCacheBust = op.inBool("Add Cachebuster", false),
     inReload = op.inTriggerButton("Reload"),
@@ -19,7 +18,6 @@ const
 
 const cgl = op.patch.cgl;
 
-// op.toWorkPortsNeedToBeLinked(textureOut);
 op.setPortGroup("Size", [width, height]);
 
 let loadedFilename = null;
@@ -28,9 +26,9 @@ let tex = null;
 let cgl_filter = CGL.Texture.FILTER_MIPMAP;
 let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
-let timedLoader = 0;
 
 unpackAlpha.setUiAttribs({ "hidePort": true });
+
 unpackAlpha.onChange =
     filename.onChange =
     dataFrmt.onChange =
@@ -39,12 +37,12 @@ unpackAlpha.onChange =
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
 
-tfilter.set("mipmap");
-wrap.set("repeat");
-
 textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
 
 inReload.onTriggered = reloadSoon;
+
+onFilterChange();
+onWrapChange();
 
 active.onChange = function ()
 {
@@ -73,11 +71,7 @@ const setTempTexture = function ()
 
 function reloadSoon(nocache)
 {
-    clearTimeout(timedLoader);
-    timedLoader = setTimeout(function ()
-    {
-        realReload(nocache);
-    }, 1);
+    window.requestIdleCallback(() => { realReload(nocache); });
 }
 
 function getPixelFormat()
@@ -150,12 +144,8 @@ function realReload(nocache)
                 loading.set(false);
                 loaded.set(true);
 
-                if (inFreeMemory.get()) tex.image = null;
+                if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
-                if (loadingId)
-                {
-                    loadingId = op.patch.loading.finished(loadingId);
-                }
                 op.checkMainloopExists();
             }, {
                 "anisotropic": cgl_aniso,

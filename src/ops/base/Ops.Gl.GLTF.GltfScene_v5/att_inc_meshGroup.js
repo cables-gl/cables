@@ -37,4 +37,10 @@ const gltfMeshGroup = class
             if (!ignoreMat && useMat) cgl.popShader();
         }
     }
+
+    dispose()
+    {
+        for (let i = 0; i < this.meshes.length; i++) if (this.meshes[i])
+            this.meshes[i].dispose();
+    }
 };

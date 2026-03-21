@@ -73,4 +73,24 @@ String.prototype.contains = function (str)
 
 /* minimalcore:end */
 
+/* minimalcore:start */
+if (!window.requestIdleCallback)
+{
+
+    function shimIdleCb(cb, num)
+    {
+        return setTimeout(cb, num || 50);
+    }
+
+    function shimCancelIdleCb(to)
+    {
+        clearTimeout(to);
+    }
+
+    window.requestIdleCallback = shimIdleCb;
+    window.cancelIdleCallback = shimCancelIdleCb;
+}
+
+/* minimalcore:end */
+
 export function extendJs() {}
