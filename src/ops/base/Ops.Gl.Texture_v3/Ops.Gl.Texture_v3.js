@@ -73,7 +73,7 @@ const setTempTexture = function ()
 
 function reloadSoon(nocache)
 {
-    idle = CABLES.idleCallback(idle, () => { realReload(nocache); });
+    idle = CABLES.idleCallbackSoon(idle, () => { realReload(nocache); });
 }
 
 function getPixelFormat()

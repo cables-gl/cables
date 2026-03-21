@@ -206,8 +206,8 @@ class Mesh extends CgMesh
         {
             this.warned = true;
             if (!this.warned) this.#log.warn(this.#cgl.canvas.id + "'" + attr.name + "' buffersubdata out of bounds ?", array.length, end, start, attr);
-            // return;
-            end = array.length - 1;
+            return;
+            // end = array.length - 1;
         }
 
         // if (glVersion == 1) gl.bufferSubData(gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??

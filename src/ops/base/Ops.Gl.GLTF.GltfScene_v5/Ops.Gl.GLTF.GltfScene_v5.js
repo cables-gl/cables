@@ -477,7 +477,7 @@ function reloadSoon(nocache)
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
-    idle = CABLES.idleCallback(idle, () =>
+    idle = CABLES.idleCallbackSoon(idle, () =>
     {
         loadBin(nocache);
 

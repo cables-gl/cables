@@ -527,13 +527,15 @@ export const escapeHTML = function(string)
 }
 /* eslint-enable */
 
-export function idleCallback(idleTo, cb)
+export function idleCallbackSoon(idleTo, cb)
 {
     if (idleTo)clearTimeout(idleTo);
     idleTo = setTimeout(() =>
     {
         idleTo = null;
-        requestIdleCallback(cb);
+
+        // requestIdleCallback(cb);
+        cb();
 
     }, 50);
     return idleTo;
