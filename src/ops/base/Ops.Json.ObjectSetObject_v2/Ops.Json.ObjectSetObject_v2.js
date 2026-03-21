@@ -17,9 +17,7 @@ function update()
 {
     const obj = inObject.get() || {};
 
-    let newObj = obj;
-    // if(inCopy.get())
-    // newObj = JSON.parse(JSON.stringify(obj));
+    let newObj = structuredClone(obj);
 
     newObj[inKey.get()] = inValue.get();
 

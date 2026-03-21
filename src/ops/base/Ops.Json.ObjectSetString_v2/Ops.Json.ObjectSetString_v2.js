@@ -22,7 +22,7 @@ function update()
 
     const key = inKey.get();
 
-    const newObj = JSON.parse(JSON.stringify(obj));
+    const newObj = structuredClone(obj);
 
     if (key) newObj[key] = inValue.get();
 

@@ -226,8 +226,8 @@ class CglShader extends CgShader
         const shader = new CglShader(this._cgl, this._name + " copy");
         shader.setSource(this.srcVert, this.srcFrag);
 
-        shader._modules = JSON.parse(JSON.stringify(this._modules));
-        shader._defines = JSON.parse(JSON.stringify(this._defines));
+        shader._modules = structuredClone(this._modules);
+        shader._defines = structuredClone(this._defines);
 
         shader._modGroupCount = this._modGroupCount;
         shader._moduleNames = this._moduleNames;
@@ -1417,8 +1417,6 @@ class CglShader extends CgShader
     {
         const info = {};
         info.name = this._name;
-        // info.modules = JSON.parse(JSON.stringify(this._modules));
-        // info.defines = JSON.parse(JSON.stringify(this._defines));
         info.defines = this.getDefines();
         info.hasErrors = this.hasErrors();
 
