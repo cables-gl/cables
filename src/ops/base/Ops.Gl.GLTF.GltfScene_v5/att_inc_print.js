@@ -193,12 +193,12 @@ function printMaterial(mat, idx)
     let texStr = "";
     if (gltf.json.textures)
     {
-        if (mat.normalTexture)texStr += "NORM " + gltf.json.textures[mat.normalTexture.index].source + ", ";
-        if (mat.occlusionTexture)texStr += "OCC " + mat.occlusionTexture.index + ", ";
+        if (mat.normalTexture)texStr += "NORM " + getTextureSourceForIndex(gltf, mat.normalTexture.index) + ", ";
+        if (mat.occlusionTexture)texStr += "OCC " + getTextureSourceForIndex(gltf, mat.occlusionTexture.index) + ", ";
         if (mat.pbrMetallicRoughness)
         {
-            if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + gltf.json.textures[mat.pbrMetallicRoughness.baseColorTexture.index].source + ", ";
-            if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "MR " + gltf.json.textures[mat.pbrMetallicRoughness.metallicRoughnessTexture.index].source + ", ";
+            if (mat.pbrMetallicRoughness.baseColorTexture) texStr += "BASE " + getTextureSourceForIndex(gltf, mat.pbrMetallicRoughness.baseColorTexture.index) + ", ";
+            if (mat.pbrMetallicRoughness.metallicRoughnessTexture) texStr += "MR " + getTextureSourceForIndex(gltf, mat.pbrMetallicRoughness.metallicRoughnessTexture.index) + ", ";
         }
 
         if (texStr)html += "Textures: " + texStr;

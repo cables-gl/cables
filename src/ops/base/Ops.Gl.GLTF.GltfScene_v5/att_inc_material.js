@@ -1,6 +1,14 @@
 let whiteTex = null;
 let greyTex = null;
 
+function getTextureSourceForIndex(gltf, idx)
+{
+    let t = gltf.json.textures[idx];
+    if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
+
+    return t.source;
+}
+
 let GltfMaterial = class
 {
     constructor(gltf, obj)
@@ -28,9 +36,7 @@ let GltfMaterial = class
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorTexture"))
             {
-                let t = gltf.json.textures[this.json.pbrMetallicRoughness.baseColorTexture.index];
-                if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
-                const idx = t.source;
+                const idx = getTextureSourceForIndex(gltf, this.json.pbrMetallicRoughness.baseColorTexture.index);
 
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.pbrMetallicRoughness.baseColorTexture);
                 this._matTexDiffuse = gltf.textures[idx];
@@ -50,30 +56,20 @@ let GltfMaterial = class
             }
             if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicRoughnessTexture"))
             {
-                let t = gltf.json.textures[this.json.pbrMetallicRoughness.metallicRoughnessTexture.index];
-                if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
-                const idx = t.source;
-                // const idx = gltf.json.textures[this.json.pbrMetallicRoughness.metallicRoughnessTexture.index].source;
+                const idx = getTextureSourceForIndex(gltf, this.json.pbrMetallicRoughness.metallicRoughnessTexture.index);
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.pbrMetallicRoughness.metallicRoughnessTexture);
                 this._matTexMetalRough = gltf.textures[idx];
             }
         }
         if (this.json.hasOwnProperty("normalTexture"))
         {
-            let t = gltf.json.textures[this.json.normalTexture.index];
-            if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
-            const idx = t.source;
-
+            const idx = getTextureSourceForIndex(gltf, this.json.normalTexture.index);
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.normalTexture);
             this._matTexNormal = gltf.textures[idx];
         }
         if (this.json.hasOwnProperty("occlusionTexture"))
         {
-            let t = gltf.json.textures[this.json.occlusionTexture.index];
-            if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
-
-            const idx = t.source;
-
+            const idx = getTextureSourceForIndex(gltf, this.json.occlusionTexture.index);
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.occlusionTexture);
             this._matTexOcclusion = gltf.textures[idx];
 
