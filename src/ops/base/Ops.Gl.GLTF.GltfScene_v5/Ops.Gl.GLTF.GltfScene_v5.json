@@ -312,6 +312,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1773334121051
+        },
+        {
+            "message": "Move onFileChanged listener to on(\"fileChanged\")",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1774272066732
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

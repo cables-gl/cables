@@ -451,13 +451,13 @@ function loadBin(addCacheBuster)
 //     if (fn && fn.length > 3 && inFile.get() && inFile.get().indexOf(fn) > -1) reloadSoon(true);
 // };
 
-op.onFileChanged = function (fn)
+op.on("fileChanged", (fn) =>
 {
     if (inFile.get() && inFile.get().indexOf(fn) > -1)
     {
         reloadSoon(true);
     }
-};
+});
 
 inActive.onChange = () =>
 {

@@ -191,7 +191,7 @@ function onWrapChange()
     reloadSoon();
 }
 
-op.onFileChanged = function (fn)
+op.on("fileChanged", (fn) =>
 {
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
@@ -199,4 +199,4 @@ op.onFileChanged = function (fn)
         textureOut.setRef(CGL.Texture.getTempTexture(cgl));
         realReload(true);
     }
-};
+});
