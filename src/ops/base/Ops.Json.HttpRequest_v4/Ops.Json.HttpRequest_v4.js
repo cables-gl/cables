@@ -17,6 +17,7 @@ const inUrl = op.inUrl("URL"),
     outHasError = op.outBoolNum("Has Error", false),
     outError = op.outString("Error"),
     outDuration = op.outNumber("Duration MS", 0),
+    outFetchresponse = op.outObject("Fetch Response"),
     outTrigger = op.outTrigger("Loaded");
 
 inResContentType.setUiAttribs({ "title": "Response Content" });
@@ -176,9 +177,16 @@ function reload(addCachebuster, force = false)
         {
             outDuration.set(Math.round(performance.now() - startTime));
             outStatus.set(res.status);
+            outFetchresponse.set(res);
 
             if (!res.ok) outError.set(res.statusText || "request fail");
 
+            if (outFetchresponse.isLinked())
+            {
+                resetOutputs();
+                finishLoadingSuccess(loadingId);
+            }
+            else
             if (resContentType == "JSON")
             {
                 res.json().then((b) =>
