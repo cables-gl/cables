@@ -11,7 +11,7 @@
           "x": 1076.379993338775,
           "y": 2584.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -29,7 +29,7 @@
             {
               "portIn": "Render",
               "portOut": "trigger 0",
-              "objIn": "mdw8hpgxx",
+              "objIn": "wbpiypmwq",
               "objOut": "bgfiqr7uh"
             }
           ]
@@ -78,7 +78,7 @@
           "y": 2704.535719083833
         },
         "comment": "geometry taken from GLTF scene",
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "extendTitle": "Node",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -140,7 +140,7 @@
           "x": 1848.6985153396417,
           "y": 2791.336655948354
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -185,7 +185,7 @@
           "x": 1280.379993338775,
           "y": 3064.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -226,7 +226,7 @@
           "x": 1280.379993338775,
           "y": 3144.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -290,7 +290,7 @@
           "x": 1856.379993338775,
           "y": 2948.3513681408767
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -390,7 +390,7 @@
           "x": 1901.7204157136362,
           "y": 2873.0465973810606
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -483,7 +483,7 @@
           "x": 1856.379993338775,
           "y": 3224.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -511,7 +511,7 @@
           "y": 3532.556433949571
         },
         "comment": "you can plug any texture into here\nbut as you see in the VizTexture on the left,\nit would be tough to draw meaningful shapes\nwithout proper conversion",
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -558,7 +558,7 @@
           "x": 1100.379993338775,
           "y": 2765.5946856164805
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -652,147 +652,6 @@
       ]
     },
     {
-      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
-      "id": "mdw8hpgxx",
-      "uiAttribs": {
-        "translate": {
-          "x": 716.3799933387751,
-          "y": 2643.4767525511857
-        },
-        "accBuffersDelete": "head",
-        "loading": false,
-        "subPatch": "o4y1im07u",
-        "extendTitle": "head",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "data",
-          "value": ""
-        },
-        {
-          "name": "glb File",
-          "value": "/assets/library/models/head.glb",
-          "display": "file"
-        },
-        {
-          "name": "Draw",
-          "value": 0
-        },
-        {
-          "name": "Camera index",
-          "value": 0
-        },
-        {
-          "name": "Camera",
-          "value": "None"
-        },
-        {
-          "name": "Animation",
-          "value": ""
-        },
-        {
-          "name": "Center index",
-          "value": 1
-        },
-        {
-          "name": "Center",
-          "value": "XYZ"
-        },
-        {
-          "name": "Rescale",
-          "value": 1
-        },
-        {
-          "name": "Rescale Size",
-          "value": 2.5
-        },
-        {
-          "name": "Time",
-          "value": 0
-        },
-        {
-          "name": "Sync to timeline",
-          "value": 0
-        },
-        {
-          "name": "Loop",
-          "value": 1
-        },
-        {
-          "name": "Normals Format index",
-          "value": 0
-        },
-        {
-          "name": "Normals Format",
-          "value": "XYZ"
-        },
-        {
-          "name": "Vertices Format index",
-          "value": 0
-        },
-        {
-          "name": "Vertices Format",
-          "value": "XYZ"
-        },
-        {
-          "name": "Calc Normals index",
-          "value": 2
-        },
-        {
-          "name": "Calc Normals",
-          "value": "Never"
-        },
-        {
-          "name": "Hide Nodes",
-          "value": 0
-        },
-        {
-          "name": "Use Material Properties",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "Render",
-              "portOut": "Next",
-              "objIn": "1q1jszclg",
-              "objOut": "mdw8hpgxx"
-            }
-          ]
-        },
-        {
-          "name": "Generator",
-          "value": "obj2gltf"
-        },
-        {
-          "name": "GLTF Version",
-          "value": 2
-        },
-        {
-          "name": "Anim Length",
-          "value": 0
-        },
-        {
-          "name": "Anim Time",
-          "value": 0
-        },
-        {
-          "name": "Loading",
-          "value": false
-        }
-      ]
-    },
-    {
       "opId": "17212e2b-d692-464c-8f8d-2d511dd3410a",
       "id": "slpo51p17",
       "uiAttribs": {
@@ -800,7 +659,7 @@
           "x": 1280.379993338775,
           "y": 2944.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -926,7 +785,7 @@
           "x": 1856.379993338775,
           "y": 3352.556433949571
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -946,7 +805,7 @@
         },
         {
           "name": "Round",
-          "value": 1
+          "value": 0
         },
         {
           "name": "Round Antialias",
@@ -1047,7 +906,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "qtvzeoxx6",
       "uiAttribs": {
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 1171.3435105283638,
           "y": 2370.1873523625077
@@ -1075,7 +934,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "p9vmm0mmn",
       "uiAttribs": {
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 1171.3435105283638,
           "y": 3643.556433949571
@@ -1089,7 +948,7 @@
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "g3ux0lwn1",
       "uiAttribs": {
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 1848.6985153396417,
           "y": 2683.1768995979423
@@ -1145,7 +1004,7 @@
       "opId": "d69316f1-bde9-4645-8280-c635a8982e0d",
       "id": "3ics2xcie",
       "uiAttribs": {
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 1969.9522361147845,
           "y": 2768.7455580969704
@@ -1188,7 +1047,7 @@
         "width": 400,
         "resizable": true,
         "vizLayerMaxZoom": 2500,
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 2265.9816835172805,
           "y": 3113.0338170154237
@@ -1211,7 +1070,7 @@
           "x": 1856.379993338775,
           "y": 3024.535719083833
         },
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1299,12 +1158,13 @@
       "opId": "6ee346d0-614e-4709-91a5-dc21ae975caf",
       "id": "43nppq6kn",
       "uiAttribs": {
-        "subPatch": "o4y1im07u",
+        "subPatch": "4td4wosbi",
         "translate": {
           "x": 756,
           "y": 2860
         },
-        "blueprintSubpatch2": true
+        "blueprintSubpatch2": true,
+        "extendTitle": "x"
       },
       "storage": {},
       "portsIn": [
@@ -1327,6 +1187,151 @@
         {
           "name": "Render",
           "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "111ac45c-a779-4f1c-a409-3a2ff2d686e0",
+      "id": "wbpiypmwq",
+      "uiAttribs": {
+        "subPatch": "4td4wosbi",
+        "translate": {
+          "x": 716.3799933387751,
+          "y": 2643.4767525511857
+        },
+        "accBuffersDelete": "head",
+        "loading": false,
+        "extendTitle": "x head",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "value": "/assets/library/models/head.glb",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 0
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 2.5
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 2
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Never"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 0
+        },
+        {
+          "name": "Use Material Textures",
+          "value": 1
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "Next",
+              "objIn": "1q1jszclg",
+              "objOut": "wbpiypmwq"
+            }
+          ]
+        },
+        {
+          "name": "Generator",
+          "value": "obj2gltf"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": -1
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
         }
       ]
     }

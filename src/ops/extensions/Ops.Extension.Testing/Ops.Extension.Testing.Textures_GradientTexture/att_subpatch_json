@@ -8,7 +8,7 @@
           "x": 662.0234620434219,
           "y": 3391.104202309542
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -99,9 +99,9 @@
       "uiAttribs": {
         "translate": {
           "x": 1116.175125665975,
-          "y": 3997.1134443919827
+          "y": 3998.2187387875615
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -197,7 +197,7 @@
           "x": 662.0234620434219,
           "y": 3271.104202309542
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -246,7 +246,7 @@
           "x": 1116.175125665975,
           "y": 3877.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -299,7 +299,7 @@
           "x": 1416.175125665975,
           "y": 4037.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -392,7 +392,7 @@
           "x": 1416.175125665975,
           "y": 3917.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -455,7 +455,7 @@
           "x": 1716.175125665975,
           "y": 4197.113444391983
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -548,7 +548,7 @@
           "x": 1716.175125665975,
           "y": 4077.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -607,7 +607,7 @@
           "x": 828.1751256659749,
           "y": 4077.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -700,7 +700,7 @@
           "x": 828.1751256659749,
           "y": 3957.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -738,13 +738,13 @@
             {
               "portIn": "render",
               "portOut": "trigger",
-              "objIn": "xfd0u88ml",
+              "objIn": "hh4xxfeaq",
               "objOut": "qt1qpiw3v"
             },
             {
               "portIn": "render",
               "portOut": "trigger",
-              "objIn": "hh4xxfeaq",
+              "objIn": "xfd0u88ml",
               "objOut": "qt1qpiw3v"
             }
           ]
@@ -759,7 +759,7 @@
           "x": 727.0429329353121,
           "y": 3200
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -816,7 +816,7 @@
           "x": 2097.9507587183125,
           "y": 4196.890838822342
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -909,7 +909,7 @@
           "x": 2097.9507587183125,
           "y": 4076.8908388223417
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -962,7 +962,7 @@
           "x": 1109.446752282027,
           "y": 3517.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null,
         "extendTitle": 4
@@ -1034,7 +1034,7 @@
           "x": 1505.446752282027,
           "y": 3517.1134443919827
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1078,540 +1078,6 @@
       ]
     },
     {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "h5q2t8795",
-      "uiAttribs": {
-        "translate": {
-          "x": 770.0234620434219,
-          "y": 3151.104202309542
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "X"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 0
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 0
-        },
-        {
-          "name": "Oklab",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "63fuf5h31",
-              "objOut": "h5q2t8795"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "qn8muaeys",
-      "uiAttribs": {
-        "translate": {
-          "x": 1176.175125665975,
-          "y": 3797.1134443919827
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "X"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 0
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 1
-        },
-        {
-          "name": "Oklab",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "enz5aan22",
-              "objOut": "qn8muaeys"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "3qjtygi7m",
-      "uiAttribs": {
-        "translate": {
-          "x": 1476.175125665975,
-          "y": 3837.1134443919827
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "X"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 0
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 1
-        },
-        {
-          "name": "Oklab",
-          "value": 1
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "fzbmopek7",
-              "objOut": "3qjtygi7m"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "us394i5it",
-      "uiAttribs": {
-        "translate": {
-          "x": 1776.175125665975,
-          "y": 3997.1134443919827
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 6
-        },
-        {
-          "name": "Direction",
-          "value": "Radial"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 0
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 1
-        },
-        {
-          "name": "Oklab",
-          "value": 1
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "rpc6j83bw",
-              "objOut": "us394i5it"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "9wo11525z",
-      "uiAttribs": {
-        "translate": {
-          "x": 888.1751256659749,
-          "y": 3877.1134443919827
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "X"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 1
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 1
-        },
-        {
-          "name": "Oklab",
-          "value": 0
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "xfd0u88ml",
-              "objOut": "9wo11525z"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "01380a50-2dbb-4465-ae80-86349b0b717a",
-      "id": "zgmyxjfs3",
-      "uiAttribs": {
-        "translate": {
-          "x": 2157.9507587183125,
-          "y": 3996.8908388223417
-        },
-        "subPatch": "k7mdfu59i",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Gradient",
-          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
-        },
-        {
-          "name": "Direction index",
-          "value": 2
-        },
-        {
-          "name": "Direction",
-          "value": "Y"
-        },
-        {
-          "name": "Smoothstep",
-          "value": 0
-        },
-        {
-          "name": "Step",
-          "value": 0
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "sRGB",
-          "value": 1
-        },
-        {
-          "name": "Oklab",
-          "value": 1
-        },
-        {
-          "name": "Size",
-          "value": 256
-        },
-        {
-          "name": "filter index",
-          "value": 1
-        },
-        {
-          "name": "filter",
-          "value": "linear"
-        },
-        {
-          "name": "wrap index",
-          "value": 0
-        },
-        {
-          "name": "wrap",
-          "value": "clamp to edge"
-        },
-        {
-          "name": "Dither",
-          "value": 0
-        },
-        {
-          "name": "Gradient Array",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "texture",
-              "portOut": "Texture",
-              "objIn": "mad03mxy2",
-              "objOut": "zgmyxjfs3"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
       "id": "enmfknisp",
       "uiAttribs": {
@@ -1622,7 +1088,7 @@
           "x": 1478.023462043422,
           "y": 2711.104202309542
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1649,7 +1115,7 @@
           "x": 1478.023462043422,
           "y": 2591.104202309542
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -1706,7 +1172,7 @@
           "x": 828.1751256659749,
           "y": 4177.113444391983
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1775,7 +1241,7 @@
           "x": 1116.175125665975,
           "y": 4097.113444391983
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1844,7 +1310,7 @@
           "x": 1416.175125665975,
           "y": 4137.113444391983
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1913,7 +1379,7 @@
           "x": 1716.175125665975,
           "y": 4297.113444391983
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1982,7 +1448,7 @@
           "x": 2097.9507587183125,
           "y": 4296.890838822342
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -2051,7 +1517,7 @@
           "x": 662.0234620434219,
           "y": 3491.104202309542
         },
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -2116,7 +1582,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "dpnqrpa0f",
       "uiAttribs": {
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "translate": {
           "x": 1505,
           "y": 2428.190448562392
@@ -2144,7 +1610,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "8ytdq1gre",
       "uiAttribs": {
-        "subPatch": "k7mdfu59i",
+        "subPatch": "snfs5kvff",
         "translate": {
           "x": 1505,
           "y": 4377.113444391983
@@ -2153,6 +1619,588 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "10yrei6gi",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 2157.9507587183125,
+          "y": 3996.1011062091634
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 2
+        },
+        {
+          "name": "Direction",
+          "value": "Y"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 1
+        },
+        {
+          "name": "Interpolation",
+          "value": "Linear"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 1
+        },
+        {
+          "name": "Oklab",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "mad03mxy2",
+              "objOut": "10yrei6gi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "ckgnvenj9",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 1176.175125665975,
+          "y": 3797.1134443919827
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "X"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 1
+        },
+        {
+          "name": "Interpolation",
+          "value": "Linear"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 1
+        },
+        {
+          "name": "Oklab",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "enz5aan22",
+              "objOut": "ckgnvenj9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "d2p3j6xue",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 1476.175125665975,
+          "y": 3837.1134443919827
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "X"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 1
+        },
+        {
+          "name": "Interpolation",
+          "value": "Linear"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 1
+        },
+        {
+          "name": "Oklab",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "fzbmopek7",
+              "objOut": "d2p3j6xue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "deqb5hlzt",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 1776.175125665975,
+          "y": 3997.1134443919827
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 6
+        },
+        {
+          "name": "Direction",
+          "value": "Radial"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 1
+        },
+        {
+          "name": "Interpolation",
+          "value": "Linear"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 1
+        },
+        {
+          "name": "Oklab",
+          "value": 1
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "rpc6j83bw",
+              "objOut": "deqb5hlzt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "5vgozxmcr",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 888.1751256659749,
+          "y": 3771.334436459346
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "X"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 2
+        },
+        {
+          "name": "Interpolation",
+          "value": "SmoothStep"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 1
+        },
+        {
+          "name": "Oklab",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "xfd0u88ml",
+              "objOut": "5vgozxmcr"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "d9c49155-113a-472d-b69c-1aff45a20f52",
+      "id": "7lz91jwt3",
+      "uiAttribs": {
+        "subPatch": "snfs5kvff",
+        "translate": {
+          "x": 770.0234620434219,
+          "y": 3151.104202309542
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Gradient",
+          "value": "{\"keys\":[{\"pos\":0,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.012,\"r\":0.96,\"g\":1,\"b\":0},{\"pos\":0.98,\"r\":0,\"g\":0.04000000000000048,\"b\":1},{\"pos\":1,\"r\":0,\"g\":0.04000000000000048,\"b\":1}]}"
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "X"
+        },
+        {
+          "name": "Interpolation index",
+          "value": 1
+        },
+        {
+          "name": "Interpolation",
+          "value": "Linear"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "sRGB",
+          "value": 0
+        },
+        {
+          "name": "Oklab",
+          "value": 0
+        },
+        {
+          "name": "Size",
+          "value": 256
+        },
+        {
+          "name": "filter index",
+          "value": 1
+        },
+        {
+          "name": "filter",
+          "value": "linear"
+        },
+        {
+          "name": "wrap index",
+          "value": 0
+        },
+        {
+          "name": "wrap",
+          "value": "clamp to edge"
+        },
+        {
+          "name": "Dither",
+          "value": 0
+        },
+        {
+          "name": "Gradient Array",
+          "value": 0
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "Mask"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "63fuf5h31",
+              "objOut": "7lz91jwt3"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

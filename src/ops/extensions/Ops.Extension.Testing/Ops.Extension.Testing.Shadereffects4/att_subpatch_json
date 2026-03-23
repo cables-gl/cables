@@ -9,7 +9,7 @@
           "y": 3253.9944740050237
         },
         "notWorkingMsg": null,
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -47,9 +47,10 @@
           "y": 3174.439384977186
         },
         "notWorkingMsg": null,
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "tempSubOldOpId": null,
+        "extendTitle": "x"
       },
       "storage": {},
       "portsIn": [
@@ -137,7 +138,7 @@
           "y": 3054.439384977186
         },
         "notWorkingMsg": null,
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -200,7 +201,7 @@
           "x": 2063.401854976366,
           "y": 3159.3547998928866
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -249,7 +250,7 @@
           "x": 1602.1730012474404,
           "y": 2754.439384977186
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -298,7 +299,7 @@
           "x": 1590.1730012474404,
           "y": 2994.439384977186
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -355,7 +356,7 @@
           "x": 1602.1730012474404,
           "y": 2694.439384977186
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -412,7 +413,7 @@
           "x": 2063.401854976366,
           "y": 3099.065553569261
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -457,7 +458,7 @@
           "x": 2063.401854976366,
           "y": 3059.065553569261
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -514,7 +515,7 @@
           "x": 782.9443247771092,
           "y": 3620.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -614,7 +615,7 @@
           "x": 782.9443247771092,
           "y": 3280.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -694,7 +695,7 @@
         },
         {
           "name": "Tonemapping index",
-          "value": 0
+          "value": 1
         },
         {
           "name": "Tonemapping",
@@ -741,6 +742,10 @@
           "value": 0
         },
         {
+          "name": "Multiply Texture Color",
+          "value": 0
+        },
+        {
           "name": "Num mip levels",
           "value": 0
         },
@@ -757,8 +762,28 @@
           "value": 0
         },
         {
+          "name": "Flip lightmap",
+          "value": 0
+        },
+        {
           "name": "Lightmap Intensity",
           "value": 1
+        },
+        {
+          "name": "Texture RepeatX",
+          "value": 1
+        },
+        {
+          "name": "Texture RepeatY",
+          "value": 1
+        },
+        {
+          "name": "Texture Offset X",
+          "value": 0
+        },
+        {
+          "name": "Texture Offset Y",
+          "value": 0
         }
       ],
       "portsOut": [
@@ -783,7 +808,7 @@
           "x": 782.9443247771092,
           "y": 3340.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -860,7 +885,7 @@
           "x": 782.9443247771092,
           "y": 3400.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -913,7 +938,7 @@
           "x": 782.9443247771092,
           "y": 3680.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -988,7 +1013,7 @@
           "x": 1008.1009555544247,
           "y": 3620.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1081,7 +1106,7 @@
           "x": 782.9443247771092,
           "y": 3460.8483529386513
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1158,7 +1183,7 @@
           "x": 782.9443247771092,
           "y": 3183.4988912789186
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1272,7 +1297,7 @@
           "y": 3394.439384977186
         },
         "notWorkingMsg": null,
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1296,7 +1321,7 @@
           "x": 2063.401854976366,
           "y": 3208.3669847669826
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "disabled": false,
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -1333,7 +1358,7 @@
           "x": 1602.1730012474404,
           "y": 2574.439384977186
         },
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -1382,7 +1407,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "v1x4am229",
       "uiAttribs": {
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "translate": {
           "x": 1602,
           "y": 2305.0214940909345
@@ -1410,7 +1435,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "ea69wtatp",
       "uiAttribs": {
-        "subPatch": "ywvuxdnaq",
+        "subPatch": "ax8t3kgm5",
         "translate": {
           "x": 1602,
           "y": 3760.8483529386513
@@ -1421,20 +1446,64 @@
       "storage": {}
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "gjgcz43uu",
+      "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
+      "id": "6dfjrkxv4",
       "uiAttribs": {
+        "translate": {
+          "x": 1608,
+          "y": 2480
+        },
+        "comment": "todo: cheating!!",
+        "subPatch": "ax8t3kgm5",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Repeats",
+          "value": 3
+        },
+        {
+          "name": "Direction index",
+          "value": 0
+        },
+        {
+          "name": "Direction",
+          "value": "Forward"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "Execute",
+              "portOut": "Next",
+              "objIn": "4ynp2ktkr",
+              "objOut": "6dfjrkxv4"
+            }
+          ]
+        },
+        {
+          "name": "index",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "brxhr2qiq",
+      "uiAttribs": {
+        "subPatch": "ax8t3kgm5",
         "translate": {
           "x": 806.9443247771092,
           "y": 3050.60731433563
         },
         "loading": false,
-        "subPatch": "ywvuxdnaq",
         "extendTitle": "studiosmall",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
-      "storage": {},
       "portsIn": [
         {
           "name": "File",
@@ -1486,10 +1555,6 @@
           "value": 1
         },
         {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
           "name": "Add Cachebuster",
           "value": 0
         }
@@ -1502,7 +1567,7 @@
               "portIn": "RGBE Environment map",
               "portOut": "Texture",
               "objIn": "ibybk0e1q",
-              "objOut": "gjgcz43uu"
+              "objOut": "brxhr2qiq"
             }
           ]
         },
@@ -1526,52 +1591,10 @@
           "name": "Loading",
           "value": 0
         }
-      ]
-    },
-    {
-      "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
-      "id": "6dfjrkxv4",
-      "uiAttribs": {
-        "translate": {
-          "x": 1608,
-          "y": 2480
-        },
-        "comment": "todo: cheating!!",
-        "subPatch": "ywvuxdnaq",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Repeats",
-          "value": 3
-        },
-        {
-          "name": "Direction index",
-          "value": 0
-        },
-        {
-          "name": "Direction",
-          "value": "Forward"
-        }
       ],
-      "portsOut": [
-        {
-          "name": "Next",
-          "links": [
-            {
-              "portIn": "Execute",
-              "portOut": "Next",
-              "objIn": "4ynp2ktkr",
-              "objOut": "6dfjrkxv4"
-            }
-          ]
-        },
-        {
-          "name": "index",
-          "value": 2
-        }
-      ]
+      "storage": {
+        "ref": "brxhr2qiq"
+      }
     }
   ]
 }

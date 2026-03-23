@@ -1,135 +1,6 @@
 {
   "ops": [
     {
-      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
-      "id": "yqq8mejhy",
-      "uiAttribs": {
-        "translate": {
-          "x": 880.2179767326797,
-          "y": 2722.7870117550947
-        },
-        "loading": false,
-        "accBuffersDelete": "DamagedHelmet",
-        "subPatch": "ijxx942fh",
-        "extendTitle": "DamagedHelmet",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "data",
-          "value": ""
-        },
-        {
-          "name": "glb File",
-          "display": "file"
-        },
-        {
-          "name": "Draw",
-          "value": 1
-        },
-        {
-          "name": "Camera index",
-          "value": 0
-        },
-        {
-          "name": "Camera",
-          "value": "None"
-        },
-        {
-          "name": "Animation",
-          "value": ""
-        },
-        {
-          "name": "Center index",
-          "value": 1
-        },
-        {
-          "name": "Center",
-          "value": "XYZ"
-        },
-        {
-          "name": "Rescale",
-          "value": 1
-        },
-        {
-          "name": "Rescale Size",
-          "value": 2.5
-        },
-        {
-          "name": "Time",
-          "value": 0
-        },
-        {
-          "name": "Sync to timeline",
-          "value": 0
-        },
-        {
-          "name": "Loop",
-          "value": 1
-        },
-        {
-          "name": "Normals Format index",
-          "value": 0
-        },
-        {
-          "name": "Normals Format",
-          "value": "XYZ"
-        },
-        {
-          "name": "Vertices Format index",
-          "value": 0
-        },
-        {
-          "name": "Vertices Format",
-          "value": "XYZ"
-        },
-        {
-          "name": "Calc Normals index",
-          "value": 0
-        },
-        {
-          "name": "Calc Normals",
-          "value": "Auto"
-        },
-        {
-          "name": "Hide Nodes",
-          "value": 0
-        },
-        {
-          "name": "Use Material Properties",
-          "value": 1
-        },
-        {
-          "name": "Active",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Generator",
-          "value": "Khronos Blender glTF 2.0 exporter"
-        },
-        {
-          "name": "GLTF Version",
-          "value": 2
-        },
-        {
-          "name": "Anim Length",
-          "value": 0
-        },
-        {
-          "name": "Anim Time",
-          "value": 0
-        },
-        {
-          "name": "Loading",
-          "value": false
-        }
-      ]
-    },
-    {
       "opId": "7110f169-adfd-4649-a77a-c825751eaa9b",
       "id": "9kydssjkl",
       "uiAttribs": {
@@ -137,7 +8,7 @@
           "x": 880.2179767326797,
           "y": 2412.006519975471
         },
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -243,120 +114,6 @@
       ]
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "jsw47so38",
-      "uiAttribs": {
-        "translate": {
-          "x": 628.2179767326797,
-          "y": 2322.7870117550947
-        },
-        "loading": false,
-        "subPatch": "ijxx942fh",
-        "extendTitle": "gravelpath",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "value": "/assets/library/hdr/gravelpath.rgbe.png",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "RGBE Environment map",
-              "portOut": "Texture",
-              "objIn": "9kydssjkl",
-              "objOut": "jsw47so38"
-            },
-            {
-              "portIn": "Skybox",
-              "portOut": "Texture",
-              "objIn": "okon1tupk",
-              "objOut": "jsw47so38"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 1024
-        },
-        {
-          "name": "Height",
-          "value": 512
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 2
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
       "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
       "id": "1mwq42tuk",
       "uiAttribs": {
@@ -364,7 +121,7 @@
           "x": 880.2179767326797,
           "y": 2582.7870117550947
         },
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -406,7 +163,7 @@
             {
               "portIn": "Render",
               "portOut": "trigger",
-              "objIn": "yqq8mejhy",
+              "objIn": "x734wz5rr",
               "objOut": "1mwq42tuk"
             }
           ]
@@ -424,7 +181,7 @@
           "x": 880.2179767326797,
           "y": 2282.7870117550947
         },
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -460,9 +217,9 @@
       "uiAttribs": {
         "translate": {
           "x": 604.2179767326797,
-          "y": 2602.7870117550947
+          "y": 2603.5768467019193
         },
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -494,7 +251,7 @@
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
       "id": "4lhs69mng",
       "uiAttribs": {
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "translate": {
           "x": 888,
           "y": 1768.7581046258415
@@ -523,7 +280,7 @@
             {
               "portIn": "glb File",
               "portOut": "innerOut_sctq1r681",
-              "objIn": "yqq8mejhy",
+              "objIn": "x734wz5rr",
               "objOut": "4lhs69mng"
             }
           ]
@@ -535,7 +292,7 @@
             {
               "portIn": "File",
               "portOut": "innerOut_s8gc9utlu",
-              "objIn": "460yj0j09",
+              "objIn": "3ouulua5c",
               "objOut": "4lhs69mng"
             }
           ]
@@ -547,7 +304,7 @@
             {
               "portIn": "File",
               "portOut": "innerOut_1q0owu3w6",
-              "objIn": "5infvno34",
+              "objIn": "5qnfv90c5",
               "objOut": "4lhs69mng"
             }
           ]
@@ -559,7 +316,7 @@
             {
               "portIn": "File",
               "portOut": "innerOut_hs0fvs2ks",
-              "objIn": "sf4z4cwht",
+              "objIn": "w29pihgkd",
               "objOut": "4lhs69mng"
             }
           ]
@@ -570,7 +327,7 @@
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
       "id": "3egrtb8fj",
       "uiAttribs": {
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "translate": {
           "x": 880.2179767326797,
           "y": 3173.7870117550947
@@ -584,7 +341,7 @@
       "opId": "a4deea80-db97-478f-ad1a-5ee30f2f47cc",
       "id": "2lr4bapbt",
       "uiAttribs": {
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "translate": {
           "x": 888,
           "y": 1940
@@ -626,324 +383,6 @@
       ]
     },
     {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "5infvno34",
-      "uiAttribs": {
-        "subPatch": "ijxx942fh",
-        "translate": {
-          "x": 1355.2384360152948,
-          "y": 2157.783432833258
-        },
-        "loading": false,
-        "extendTitle": "helm_aorm",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "AORM",
-              "portOut": "Texture",
-              "objIn": "a9flifh9f",
-              "objOut": "5infvno34"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 2048
-        },
-        {
-          "name": "Height",
-          "value": 2048
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "460yj0j09",
-      "uiAttribs": {
-        "subPatch": "ijxx942fh",
-        "translate": {
-          "x": 1279.520348628203,
-          "y": 2075.7256427900193
-        },
-        "loading": false,
-        "extendTitle": "helm_albedo",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "Albedo",
-              "portOut": "Texture",
-              "objIn": "a9flifh9f",
-              "objOut": "460yj0j09"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 2048
-        },
-        {
-          "name": "Height",
-          "value": 2048
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "opId": "790f3702-9833-464e-8e37-6f0f813f7e16",
-      "id": "sf4z4cwht",
-      "uiAttribs": {
-        "subPatch": "ijxx942fh",
-        "translate": {
-          "x": 1410.5218805028271,
-          "y": 2212.702472905539
-        },
-        "loading": false,
-        "extendTitle": "helm_normal",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "File",
-          "display": "file"
-        },
-        {
-          "name": "Filter index",
-          "value": 2
-        },
-        {
-          "name": "Filter",
-          "value": "mipmap"
-        },
-        {
-          "name": "Wrap index",
-          "value": 0
-        },
-        {
-          "name": "Wrap",
-          "value": "repeat"
-        },
-        {
-          "name": "Anisotropic index",
-          "value": 0
-        },
-        {
-          "name": "Anisotropic",
-          "value": "0"
-        },
-        {
-          "name": "Data Format index",
-          "value": 3
-        },
-        {
-          "name": "Data Format",
-          "value": "RGBA"
-        },
-        {
-          "name": "Flip",
-          "value": 0
-        },
-        {
-          "name": "Pre Multiplied Alpha",
-          "value": 0
-        },
-        {
-          "name": "Active",
-          "value": 1
-        },
-        {
-          "name": "Save Memory",
-          "value": 1
-        },
-        {
-          "name": "Add Cachebuster",
-          "value": 0
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Texture",
-          "links": [
-            {
-              "portIn": "Normal map",
-              "portOut": "Texture",
-              "objIn": "a9flifh9f",
-              "objOut": "sf4z4cwht"
-            }
-          ]
-        },
-        {
-          "name": "Width",
-          "value": 2048
-        },
-        {
-          "name": "Height",
-          "value": 2048
-        },
-        {
-          "name": "Aspect Ratio",
-          "value": 1
-        },
-        {
-          "name": "Loaded",
-          "value": 1
-        },
-        {
-          "name": "Loading",
-          "value": 0
-        }
-      ]
-    },
-    {
       "opId": "a5234947-f65a-41e2-a691-b81382903a71",
       "id": "a9flifh9f",
       "uiAttribs": {
@@ -951,7 +390,7 @@
           "x": 880.2179767326797,
           "y": 2512.879756987684
         },
-        "subPatch": "ijxx942fh",
+        "subPatch": "quqmd78fn",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -1031,7 +470,7 @@
         },
         {
           "name": "Tonemapping index",
-          "value": 0
+          "value": 1
         },
         {
           "name": "Tonemapping",
@@ -1078,6 +517,10 @@
           "value": 0
         },
         {
+          "name": "Multiply Texture Color",
+          "value": 0
+        },
+        {
           "name": "Num mip levels",
           "value": 0
         },
@@ -1094,8 +537,28 @@
           "value": 0
         },
         {
+          "name": "Flip lightmap",
+          "value": 0
+        },
+        {
           "name": "Lightmap Intensity",
           "value": 1
+        },
+        {
+          "name": "Texture RepeatX",
+          "value": 1
+        },
+        {
+          "name": "Texture RepeatY",
+          "value": 1
+        },
+        {
+          "name": "Texture Offset X",
+          "value": 0
+        },
+        {
+          "name": "Texture Offset Y",
+          "value": 0
         }
       ],
       "portsOut": [
@@ -1111,6 +574,561 @@
           ]
         }
       ]
+    },
+    {
+      "opId": "c9cbb226-46f7-4ca6-8dab-a9d0bdca4331",
+      "id": "x734wz5rr",
+      "uiAttribs": {
+        "subPatch": "quqmd78fn",
+        "translate": {
+          "x": 880.2179767326797,
+          "y": 2722.7870117550947
+        },
+        "loading": false,
+        "accBuffersDelete": "DamagedHelmet",
+        "extendTitle": "DamagedHelmet",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "data",
+          "value": ""
+        },
+        {
+          "name": "glb File",
+          "display": "file"
+        },
+        {
+          "name": "Draw",
+          "value": 1
+        },
+        {
+          "name": "Camera index",
+          "value": 0
+        },
+        {
+          "name": "Camera",
+          "value": "None"
+        },
+        {
+          "name": "Animation",
+          "value": ""
+        },
+        {
+          "name": "Center index",
+          "value": 1
+        },
+        {
+          "name": "Center",
+          "value": "XYZ"
+        },
+        {
+          "name": "Rescale",
+          "value": 1
+        },
+        {
+          "name": "Rescale Size",
+          "value": 2.5
+        },
+        {
+          "name": "Time",
+          "value": 0
+        },
+        {
+          "name": "Sync to timeline",
+          "value": 0
+        },
+        {
+          "name": "Loop",
+          "value": 1
+        },
+        {
+          "name": "Normals Format index",
+          "value": 0
+        },
+        {
+          "name": "Normals Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Vertices Format index",
+          "value": 0
+        },
+        {
+          "name": "Vertices Format",
+          "value": "XYZ"
+        },
+        {
+          "name": "Calc Normals index",
+          "value": 0
+        },
+        {
+          "name": "Calc Normals",
+          "value": "Auto"
+        },
+        {
+          "name": "Hide Nodes",
+          "value": 0
+        },
+        {
+          "name": "Use Material Properties",
+          "value": 1
+        },
+        {
+          "name": "Active",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Generator",
+          "value": "Khronos Blender glTF 2.0 exporter"
+        },
+        {
+          "name": "GLTF Version",
+          "value": 2
+        },
+        {
+          "name": "Anim Length",
+          "value": -1
+        },
+        {
+          "name": "Anim Time",
+          "value": 0
+        },
+        {
+          "name": "Loading",
+          "value": false
+        }
+      ],
+      "storage": {
+        "ref": "x734wz5rr"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "4lq5e9221",
+      "uiAttribs": {
+        "subPatch": "quqmd78fn",
+        "translate": {
+          "x": 628.2179767326797,
+          "y": 2322.7870117550947
+        },
+        "loading": false,
+        "extendTitle": "gravelpath",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/hdr/gravelpath.rgbe.png",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "RGBE Environment map",
+              "portOut": "Texture",
+              "objIn": "9kydssjkl",
+              "objOut": "4lq5e9221"
+            },
+            {
+              "portIn": "Skybox",
+              "portOut": "Texture",
+              "objIn": "okon1tupk",
+              "objOut": "4lq5e9221"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 1024
+        },
+        {
+          "name": "Height",
+          "value": 512
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 2
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "4lq5e9221"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "3ouulua5c",
+      "uiAttribs": {
+        "subPatch": "quqmd78fn",
+        "translate": {
+          "x": 1288.2179767326797,
+          "y": 2075.7256427900193
+        },
+        "loading": false,
+        "extendTitle": "helm_albedo",
+        "blueprintSubpatch2": true
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "Albedo",
+              "portOut": "Texture",
+              "objIn": "a9flifh9f",
+              "objOut": "3ouulua5c"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 2048
+        },
+        {
+          "name": "Height",
+          "value": 2048
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "3ouulua5c"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "5qnfv90c5",
+      "uiAttribs": {
+        "subPatch": "quqmd78fn",
+        "translate": {
+          "x": 1357.2915330469245,
+          "y": 2130.0666229062585
+        },
+        "loading": false,
+        "extendTitle": "helm_aorm",
+        "blueprintSubpatch2": true
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "AORM",
+              "portOut": "Texture",
+              "objIn": "a9flifh9f",
+              "objOut": "5qnfv90c5"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 2048
+        },
+        {
+          "name": "Height",
+          "value": 2048
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "5qnfv90c5"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "w29pihgkd",
+      "uiAttribs": {
+        "subPatch": "quqmd78fn",
+        "translate": {
+          "x": 1410.5218805028271,
+          "y": 2213.492205871203
+        },
+        "loading": false,
+        "extendTitle": "helm_normal",
+        "blueprintSubpatch2": true
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "Normal map",
+              "portOut": "Texture",
+              "objIn": "a9flifh9f",
+              "objOut": "w29pihgkd"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 2048
+        },
+        {
+          "name": "Height",
+          "value": 2048
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "w29pihgkd"
+      }
     }
   ]
 }
