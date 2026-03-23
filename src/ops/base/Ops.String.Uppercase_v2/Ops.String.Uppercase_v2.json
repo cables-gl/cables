@@ -7,6 +7,11 @@
             {
                 "type": 5,
                 "name": "String"
+            },
+            {
+                "type": 0,
+                "name": "Capitalize",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -22,5 +27,14 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "a8qVz6"
+    "exampleProjectId": "a8qVz6",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added toggle for capitalize, only set the first character uppercase",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1774264697857
+        }
+    ]
 }

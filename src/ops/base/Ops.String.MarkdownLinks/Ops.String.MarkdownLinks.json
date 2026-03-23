@@ -1,0 +1,45 @@
+{
+    "id": "77fb3f4c-7035-46ac-a8f0-f01447dc036c",
+    "created": 1774264881216,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1774264881265
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Prefix"
+            },
+            {
+                "type": 5,
+                "name": "Url"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Replace Words as links in markdown strings",
+    "docs": {
+        "ports": []
+    }
+}

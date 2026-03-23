@@ -57,6 +57,19 @@
             "type": "feature",
             "author": "pandur",
             "date": 1773901201200
+        },
+        {
+            "message": "Notify UI of file-upload via cables-cli and refresh file ports",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1774271585578,
+            "url": "https://github.com/cables-gl/cables/issues/8164"
+        },
+        {
+            "message": "Filemanages files are greyed out if not used in current patch",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1774274461806
         }
     ]
 }
