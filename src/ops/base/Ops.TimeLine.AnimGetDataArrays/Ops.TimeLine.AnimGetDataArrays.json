@@ -8,12 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1760529392104
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1774001470090
         }
     ],
@@ -35,7 +29,7 @@
             }
         ]
     },
-    "summary": "Get data from a single key in an animation",
+    "summary": "Get data of an animation as arrays",
     "docs": {
         "ports": []
     }
