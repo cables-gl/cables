@@ -39,27 +39,16 @@ async function loadKTX2Texture(url)
 
     const blob = await res.blob();
     const ab = await blob.arrayBuffer();
-    // .then((blob) => new Uint8Array(blob.arrayBuffer()));
     const bytes = new Uint8Array(ab);
-    // console.log("bytes", bytes);
 
     const ktex = new ktx.texture(bytes);
-
-    // width.set(ktex.baseWidth);
-    // height.set(ktex.baseHeight);
-    // ratio.set(ktex.baseWidth / ktex.baseHeight);
-    // outIsRGB.set(ktex.isSrgb);
+    const gl = op.patch.cgl.gl;
 
     const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
-    // console.log("tex", ktex, texture);
 
-    // ktex.delete();
-    // Upload via libktx's GL upload support; returns WebGLTexture + target. [page:3]
-    // const { texture, target } = tex.glUpload();
-
-    // gl.bindTexture(target, texture);
-    // gl.texParameteri(target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-    // gl.texParameteri(target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.bindTexture(texture.target, texture.object);
+    gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
     return texture;
 }
