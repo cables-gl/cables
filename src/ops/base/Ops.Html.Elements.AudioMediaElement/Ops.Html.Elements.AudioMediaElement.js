@@ -123,11 +123,11 @@ fileName.onChange = function ()
 
     outDuration.set(0);
     audio = new Audio();
-    audio.crossOrigin = "anonymous";
     audio.src = op.patch.getFilePath(fileName.get());
     audio.loop = doLoop.get();
     audio.controls = "true";
     audio.crossOrigin = "anonymous";
+
     audio.currentTime = getWantedTime();
 
     outEle.set(audio);
@@ -136,9 +136,9 @@ fileName.onChange = function ()
     {
         outDuration.set(audio.duration);
         if (inPlay.get()) play();
-        op.patch.loading.finished(loadingId);
         audio.removeEventListener("canplaythrough", canplaythrough, false);
     };
+    op.patch.loading.finished(loadingId);
 
     audio.addEventListener("canplaythrough", canplaythrough, false);
 
@@ -147,7 +147,18 @@ fileName.onChange = function ()
         timer.setTime(audio.currentTime);
         // outCurrentTime.set(audio.currentTime);
     };
-
+    audio.addEventListener("error", function (e)
+    {
+        console.log("error", e);
+    });
+    audio.onerror = (event) =>
+    {
+        console.log("onerror", event);
+    };
+    audio.abort = (event) =>
+    {
+        console.log("abort", event);
+    };
     audio.addEventListener("timeupdate", timeupdate);
 
     audio.addEventListener("ended", function ()

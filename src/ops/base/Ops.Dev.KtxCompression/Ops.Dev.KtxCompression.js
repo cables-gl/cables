@@ -49,6 +49,7 @@ async function loadKTX2Texture(url)
     gl.bindTexture(texture.target, texture.object);
     gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
     gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    ktex.delete();
 
     return texture;
 }

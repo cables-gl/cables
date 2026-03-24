@@ -41,7 +41,8 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoading = op.outBool("Loading");
+    outLoading = op.outBool("Loading"),
+    outLoaded = op.outBool("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -339,7 +340,7 @@ function finishLoading()
     updateAnimation();
 
     outLoading.set(false);
-
+    outLoaded.set(true);
     cgl.patch.loading.finished(loadingId);
     loadingId = null;
 
@@ -473,16 +474,17 @@ let preload = null;
 let idle = null;
 function reloadSoon(nocache)
 {
-    cgl.patch.loading.finished(preload);
+    if (preload)cgl.patch.loading.finished(preload);
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
-    idle = CABLES.idleCallbackSoon(idle, () =>
+    idle = setTimeout(() =>
     {
         loadBin(nocache);
 
         cgl.patch.loading.finished(preload);
-    });
+        preload = null;
+    }, 100);
 }
 
 function updateMaterials()

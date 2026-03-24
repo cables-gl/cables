@@ -183,6 +183,11 @@
                 "type": 0,
                 "name": "Loading",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loaded",
+                "subType": "boolean"
             }
         ]
     },
