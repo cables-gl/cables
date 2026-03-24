@@ -1,0 +1,75 @@
+{
+    "authorName": "pandur",
+    "id": "f5078d64-2c77-42a4-bf24-4465068e5cc6",
+    "created": 1774369978125,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Textures_0",
+                "longPort": 6,
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_1",
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_2",
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_3",
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_4",
+                "group": "Textures"
+            },
+            {
+                "type": 2,
+                "name": "Textures_5",
+                "uititle": "add port",
+                "group": "Textures"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Texture Array"
+            },
+            {
+                "type": 0,
+                "name": "Num Textures",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "create an array of textures",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "code cleanup",
+            "author": "pandur",
+            "date": 1548415252635,
+            "type": "improvement"
+        },
+        {
+            "message": "new version: multiport, dynamic number of input textures",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1774384735727
+        }
+    ],
+    "exampleProjectId": "vS5fjz",
+    "coreLibs": [
+        "cgl_shadergraph"
+    ],
+    "license": "MIT"
+}
