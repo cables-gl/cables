@@ -97,10 +97,11 @@ export class Texture extends CgTexture
             if ("flip" in options) this.flip = options.flip;
             if ("shadowMap" in options) this.shadowMap = options.shadowMap;
             if ("anisotropic" in options) this.anisotropic = options.anisotropic;
+            if ("pixelFormat" in options) this.pixelFormat = options.pixelFormat;
 
             if (options.ktx)
             {
-
+                this._glInternalFormat = this._cgl.gl.SRGB8_ALPHA8;
                 this.tex = options.ktx.object;
                 this.texTarget = options.ktx.target;
             }
@@ -119,6 +120,13 @@ export class Texture extends CgTexture
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
+
+        if (options.ktx)
+        {
+
+            this._glInternalFormat = this._cgl.gl.SRGB8_ALPHA8;
+            this._glDataFormat = this._cgl.gl.COMPRESSED_SRGB8_ALPHA8_ETC2_EAC;
+        }
 
         if (!options.ktx)
             this.setSize(options.width, options.height);

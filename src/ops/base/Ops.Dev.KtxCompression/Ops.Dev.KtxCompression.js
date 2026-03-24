@@ -64,16 +64,32 @@ async function loadKTX2Texture(url)
     return texture;
 }
 
+function chooseBestFormat(ktexture)
+{
+    const formats = {
+        "astc": !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_astc"),
+        "dxt": !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_s3tc"),
+        "pvrtc": !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_pvrtc"),
+        "etc": !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_etc"),
+    };
+
+    const { transcode_fmt } = ktx;
+    console.log("formmmm", transcode_fmt.ETC2_RGBA, transcode_fmt.PVRTC1_4_RGBA);
+    const srgb = ktexture.isSRGB; // true for albedo/color textures
+
+    // Prefer ASTC → DXT → ETC → uncompressed fallback
+    if (formats.astc) return transcode_fmt.ASTC_4x4_RGBA;
+    if (formats.dxt) return srgb
+        ? transcode_fmt.BC3_RGBA // DXT5, sRGB path
+        : transcode_fmt.BC1_OR_3;
+    if (formats.etc) return transcode_fmt.ETC2_RGBA;
+    if (formats.pvrtc) return transcode_fmt.PVRTC1_4_RGBA;
+
+    return transcode_fmt.RGBA32; // uncompressed fallback
+}
+
 function uploadTextureToGl(gl, ktexture)
 {
-    let HDRsupported = false;
-    let astcSupported = !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_astc");
-    let etcSupported = !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_etc1");
-    let dxtSupported = !!op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_s3tc");
-    let bptcSupported = !!op.patch.cgl.gl.getExtension("EXT_texture_compression_bptc");
-    let pvrtcSupported = !!(op.patch.cgl.gl.getExtension("WEBGL_compressed_texture_pvrtc")) || !!(gl.getExtension("WEBKIT_WEBGL_compressed_texture_pvrtc"));
-    if (astcSupported)HDRsupported = gl.getExtension("WEBGL_compressed_texture_astc").getSupportedProfiles().includes("hdr");
-
     const { transcode_fmt } = ktx;
     let formatString;
     // console.log("transcode_fmt", transcode_fmt);
@@ -81,67 +97,19 @@ function uploadTextureToGl(gl, ktexture)
     // if (ktexture.isTranscodable)
     {
         let format;
-        if (ktexture.isHDR)
-        {
-            const model = ktexture.colorModel;
 
-            // const model = ktexture.get
-            if (astcSupported && HDRsupported)
-            {
-                if (ktx.khr_df_model.KHR_DF_MODEL_UASTC_HDR_4x4 == model)
-                {
-                    formatString = "ASTC_HDR_4x4";
-                    format = transcode_fmt.ASTC_HDR_4x4_RGBA;
-                }
-                else
-                {
-                    formatString = "ASTC_HDR_6x6";
-                    format = transcode_fmt.ASTC_HDR_6x6_RGBA;
-                }
-            }
-            else if (bptcSupported)
-            {
-                formatString = "BC6HU";
-                format = transcode_fmt.BC6HU;
-            }
-            else
-            {
-                formatString = "RGBA16F";
-                format = transcode_fmt.RGBA16F;
-            }
-        }
-        else
+        const transferFunction = ktexture.oetf; // KHR_DF_TRANSFER_SRGB or KHR_DF_TRANSFER_LINEAR
+        const isSRGB = ktexture.isHDR;// (transferFunction === LIBKTX.KHR_DF_TRANSFER_SRGB);
+        console.log("ktexture.needsTranscoding", ktexture.needsTranscoding);
+
+        console.log(`Texture is ${isSRGB ? "sRGB" : "linear"}`);
         {
-            if (astcSupported)
-            {
-                formatString = "ASTC";
-                format = transcode_fmt.ASTC_4x4_RGBA;
-            }
-            else if (dxtSupported)
-            {
-                formatString = ktexture.numComponents == 4 ? "BC3" : "BC1";
-                format = transcode_fmt.BC1_OR_3;
-            }
-            else if (pvrtcSupported)
-            {
-                formatString = "PVRTC1";
-                format = transcode_fmt.PVRTC1_4_RGBA;
-            }
-            else if (etcSupported)
-            {
-                formatString = "ETC";
-                format = transcode_fmt.ETC;
-            }
-            else
-            {
-                formatString = "RGBA4444";
-                format = transcode_fmt.RGBA4444;
-            }
-        }
-        /* UASTC_HDR_4x4_RGBA is regular ASTC_HDR_4x4_RGBA so we use directly without transcoding */
-        if (format !== transcode_fmt.ASTC_HDR_4x4_RGBA)
-        {
-            if (ktexture.transcodeBasis(format, 0) != ktx.error_code.SUCCESS)
+            let frmt = chooseBestFormat(ktexture);
+            frmt = ktx.transcode_fmt.RGBA32;
+            frmt = ktx.transcode_fmt.ETC2_RGBA;
+            // frmt = transcode_fmt.ASTC_4x4_RGBA;
+            console.log("format", frmt);
+            if (ktexture.transcodeBasis(frmt, 0) != ktx.error_code.SUCCESS)
             {
                 console.log("Texture transcode failed. See console for details.");
                 return undefined;
@@ -173,8 +141,9 @@ function uploadTextureToGl(gl, ktexture)
         alert("Loaded texture is not a TEXTURE2D.");
         return undefined;
     }
+    op.patch.cgl.gl.generateMipmap(result.target);
 
-    // console.log("result", result);
+    console.log("result", formatString);
 
     return {
         "target": result.target,
@@ -191,16 +160,6 @@ let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
 let timedLoader = 0;
 let loadingId = null;
-
-function getPixelFormat()
-{
-    if (dataFrmt.get() == "R") return CGL.Texture.PFORMATSTR_R8UB;
-    if (dataFrmt.get() == "RG") return CGL.Texture.PFORMATSTR_RG8UB;
-    if (dataFrmt.get() == "RGB") return CGL.Texture.PFORMATSTR_RGB8UB;
-    if (dataFrmt.get() == "SRGBA") return CGL.Texture.PFORMATSTR_SRGBA8;
-
-    return CGL.Texture.PFORMATSTR_RGBA8UB;
-}
 
 CABLES.loadKtx = function (url, cb)
 {
@@ -254,7 +213,7 @@ CABLES.loadKtx = function (url, cb)
                     //     ratio.set(newTex.width / newTex.height);
 
                     //     tex = newTex;
-                    const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_MIPMAP, "ktx": texture, "type": texture.target, "compression": true });
+                    const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
                     ctex.width = 100;
                     ctex.height = 100;
                     // textureOut.setRef(ctex);

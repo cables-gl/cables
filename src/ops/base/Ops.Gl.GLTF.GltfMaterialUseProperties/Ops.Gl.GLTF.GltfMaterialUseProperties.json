@@ -41,6 +41,11 @@
                 "name": "Properties"
             },
             {
+                "type": 2,
+                "name": "Tex Diffuse",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Found",
                 "subType": "boolean"

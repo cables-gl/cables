@@ -4,6 +4,7 @@ const
     inNameMatch = op.inSwitch("Name Match", ["exact", "starts with"], "exact"),
     next = op.outTrigger("Next"),
     outObj = op.outObject("Properties"),
+    outTexDiff = op.outTexture("Tex Diffuse"),
     outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
@@ -56,9 +57,11 @@ exec.onTriggered = () =>
                 if (matches)
                 {
                     mat = mats[i];
+
                     matIdx = i;
-                    // console.log("mat", mats[i]);
+                    console.log("mat", mats[i]);
                     outObj.setRef(mat.json);
+
                     outFound.set(true);
                     break;
                 }
@@ -91,6 +94,7 @@ exec.onTriggered = () =>
 
     if (mat)
     {
+        outTexDiff.setRef(mat._matTexDiffuse.tex);
         mat.bind(op.patch.cgl, cgl.getShader());
         // console.log("laaaaaaa");
     }
