@@ -59,13 +59,15 @@ const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
 
-const inLightMapFlip = op.inBool("Flip lightmap");
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
 const inTexTransRepeatX = op.inValue("Texture RepeatX", 1);
 const inTexTransRepeatY = op.inValue("Texture RepeatY", 1);
 const inTexTransOffsetX = op.inValue("Texture Offset X", 0);
 const inTexTransOffsetY = op.inValue("Texture Offset Y", 0);
+
+const inTexFlip = op.inBool("Flip Textures");
+const inGammaEnc = op.inBool("Gamma encoded");
 
 inTrigger.onTriggered = doRender;
 
@@ -81,7 +83,7 @@ inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
 op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inDoubleSided]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexEmission, inTexHeight, inLightmap, inTexThinFilm]);
-op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightMapFlip, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
+op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
 op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
@@ -222,7 +224,8 @@ inTexAORM.onChange =
     inUseVertexColours.onChange =
     inToggleGR.onChange =
     inUseThinFilm.onChange =
-    inLightMapFlip.onChange =
+    inTexFlip.onChange =
+    inGammaEnc.onChange =
     inVertexColourMode.onChange = updateDefines;
 
 function updateDefines()
@@ -234,7 +237,6 @@ function updateDefines()
     PBRShader.toggleDefine("USE_NORMAL_MAP_FOR_CC", inUseNormalMapForCC.get());
     PBRShader.toggleDefine("USE_CC_NORMAL_MAP", inTexClearCoatNormal.isLinked());
     PBRShader.toggleDefine("LIGHTMAP_IS_RGBE", inLightmapRGBE.get());
-    PBRShader.toggleDefine("LIGHTMAP_FLIPY", inLightMapFlip.get());
     PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.isLinked() || inVertexColourMode.get() === "lightmap");
     PBRShader.toggleDefine("USE_NORMAL_TEX", inTexNormal.isLinked());
     PBRShader.toggleDefine("USE_HEIGHT_TEX", inTexHeight.isLinked());
@@ -243,6 +245,8 @@ function updateDefines()
     PBRShader.toggleDefine("USE_THIN_FILM", inUseThinFilm.get());
     PBRShader.toggleDefine("USE_EMISSION", inTexEmission.get());
     PBRShader.toggleDefine("USE_THIN_FILM_MAP", inTexThinFilm.get());
+    PBRShader.toggleDefine("FLIP_TEX", inTexFlip.get());
+    PBRShader.toggleDefine("GAMMAENC", inGammaEnc.get());
 
     // VERTEX_COLORS
     PBRShader.toggleDefine("VCOL_COLOUR", inVertexColourMode.get() === "colour");

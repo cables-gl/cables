@@ -32,7 +32,7 @@
             "date": 1770386180450
         },
         {
-            "message": "Add option to flip the lightmap",
+            "message": "Add option to flip all textures",
             "type": "feature",
             "author": "pandur",
             "date": 1773416612300
@@ -323,12 +323,6 @@
             },
             {
                 "type": 0,
-                "name": "Flip lightmap",
-                "group": "Lighting",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Lightmap Intensity",
                 "group": "Lighting",
                 "subType": "number"
@@ -352,6 +346,16 @@
                 "type": 0,
                 "name": "Texture Offset Y",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Flip Textures",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Gamma encoded",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

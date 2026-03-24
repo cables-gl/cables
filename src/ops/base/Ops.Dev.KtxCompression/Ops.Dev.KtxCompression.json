@@ -43,24 +43,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1773220411271
-        },
-        {
-            "message": "Team.Ktx.CompressedTexture renamed to Ops.Dev.CompressedTexture",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1773936665854
-        },
-        {
-            "message": "Dev.CompressedTexture renamed to Ops.Dev.KtxCompression",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1773936678242
-        },
-        {
-            "message": "Dev.KtxCompressionTemp renamed to Ops.Dev.KtxCompression",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1773938189790
         }
     ],
     "summary": "Load a KTX file as a texture",

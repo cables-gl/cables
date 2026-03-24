@@ -51,15 +51,19 @@ void main()
 
     #ifdef USE_LIGHTMAP
         texCoord1 = attrTexCoord1;
-        #ifndef LIGHTMAP_FLIPY
+        #ifndef FLIP_TEX
           texCoord1.y=1.0-texCoord1.y;
         #endif
     #endif
     texCoord = attrTexCoord;
-    texCoord.y = 1.0 - texCoord.y;
 
+    #ifdef FLIP_TEX
+      // texCoord.y = texCoord.y;
+    #else
+      texCoord.y = 1.0 - texCoord.y;
+    #endif
     texCoordTransformed.x=attrTexCoord.x*texTransform.x+texTransform.z;
-    texCoordTransformed.y=(1.0-attrTexCoord.y)*texTransform.y+texTransform.w;
+    texCoordTransformed.y=(texCoord.y)*texTransform.y+texTransform.w;
 
     vec4 pos = vec4(vPosition,  1.0);
     norm = attrVertNormal;

@@ -120,8 +120,8 @@ function uploadTextureToGl(gl, ktexture)
     // {
     //     console.log("not transcodable");
     // }
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    // gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    // gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
     const result = ktexture.glUpload();
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
