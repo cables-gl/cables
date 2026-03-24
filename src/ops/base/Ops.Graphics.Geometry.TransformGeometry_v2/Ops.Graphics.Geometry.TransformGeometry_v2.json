@@ -1,0 +1,80 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "959d7293-2b7c-4612-9e65-dac8dcaea28b",
+    "created": 1774384500782,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "geometry"
+            }
+        ]
+    },
+    "summary": "transform vertices of geometry",
+    "exampleProjectId": "aoBFz6",
+    "changelog": [
+        {
+            "message": "Fix rotation order, so it works as normal transform op",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1774384570819
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

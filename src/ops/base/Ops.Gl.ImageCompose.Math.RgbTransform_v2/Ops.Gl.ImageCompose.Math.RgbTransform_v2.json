@@ -1,0 +1,120 @@
+{
+    "summary": "transform RGB values interpreted as XYZ coordinates",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Translate",
+                "group": "Position",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "group": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "7332c577-ff6f-4459-95a5-2d4ba50c52aa",
+    "created": 1774384529332,
+    "changelog": [
+        {
+            "message": "new op",
+            "author": "pandur",
+            "date": 1645190583290,
+            "type": "new op"
+        },
+        {
+            "message": "Fix rotation order, so it works as normal transform op",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1774384610635
+        }
+    ],
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "UJvMbk",
+    "coreLibs": [
+        "cgl"
+    ]
+}
