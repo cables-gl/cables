@@ -1,5 +1,5 @@
 {
-    "id": "16dfdf3c-3eda-4644-b7d8-d9694aa284e0",
+    "id": "9ad188f1-cdc4-40b0-b530-593b3dec5b9e",
     "changelog": [
         {
             "message": "created op",
@@ -42,10 +42,22 @@
             "type": "rename",
             "author": "Andrej",
             "date": 1772787855787
+        },
+        {
+            "message": "op Extension.CablesPr.WebXr.Vr.Vr_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1774426574254
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1774426713652
         }
     ],
-    "authorName": "Andrej",
-    "created": 1772748325300,
+    "authorName": "pandur",
+    "created": 1774426713651,
     "layout": {
         "portsIn": [
             {

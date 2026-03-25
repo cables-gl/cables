@@ -1,5 +1,5 @@
 {
-    "id": "1fee9832-5cca-4b0f-b784-372298ae8b4e",
+    "id": "5643467c-c2a8-4018-88ec-e9dd140124bd",
     "changelog": [
         {
             "message": "op created",
@@ -10,24 +10,12 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "Andrej",
-            "date": 1772748502435
-        },
-        {
-            "message": "User.andrej.WebXr.Vr.VrHand renamed to Ops.Extension.CablesPr.WebXr.Vr.VrHand",
-            "type": "rename",
-            "author": "Andrej",
-            "date": 1772749254802
-        },
-        {
-            "message": "Extension.CablesPr.WebXr.Vr.VrHand renamed to Ops.Extension.CablesPr.WebXr.Vr.VrHand_v2",
-            "type": "rename",
-            "author": "Andrej",
-            "date": 1772787841066
+            "author": "pandur",
+            "date": 1774426691819
         }
     ],
-    "authorName": "Andrej",
-    "created": 1772748502434,
+    "authorName": "pandur",
+    "created": 1774426691819,
     "layout": {
         "portsIn": [
             {
