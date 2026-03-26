@@ -502,7 +502,9 @@ class Mesh extends CgMesh
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
 
         MESH.lastMesh = null;
+
         this.#cgl.profileData.count("meshSetGeom");
+        const measure = this.#cgl.profileData.start("meshSetGeom");
 
         this._disposeAttributes();
 
@@ -525,10 +527,8 @@ class Mesh extends CgMesh
             if (geomAttribs[index].data && geomAttribs[index].data.length)
                 this.setAttribute(attribAssoc[index] || index, geomAttribs[index].data, geomAttribs[index].itemSize);
 
-        if (removeRef)
-        {
-            this.#geom = null;
-        }
+        if (removeRef) this.#geom = null;
+        measure.finish();
     }
 
     _preBind(shader)

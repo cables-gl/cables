@@ -413,6 +413,7 @@ function loadBin(addCacheBuster)
     outLoading.set(true);
     op.patch.loading.addAssetLoadingTask(() =>
     {
+        // console.log("fetch...");
         fetch(url)
             .then((res) => { return res.arrayBuffer(); })
             .then((arrayBuffer) =>
@@ -424,9 +425,14 @@ function loadBin(addCacheBuster)
                     return;
                 }
 
+                // console.log("parse...");
                 boundingPoints = [];
                 maxTime = 0;
+
+                const measure = op.patch.cgl.profileData.start("gltf parse");
                 gltf = parseGltf(arrayBuffer);
+                measure.finish();
+
                 arrayBuffer = null;
                 finishLoading();
             }).catch((e) =>
@@ -470,7 +476,6 @@ inActive.onChange = () =>
     }
 };
 let preload = null;
-
 let idle = null;
 function reloadSoon(nocache)
 {

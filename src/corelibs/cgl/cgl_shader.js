@@ -474,7 +474,9 @@ class CglShader extends CgShader
     {
         if (this._cgl.aborted) return;
         const startTime = performance.now();
+        const measure = this._cgl.profileData.start("shadercompile " + this.name);
 
+        performance.mark("start");
         this._cgl.profileData.count("shaderCompile");
         this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
@@ -774,6 +776,7 @@ class CglShader extends CgShader
 
         this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
         this._cgl.profileData.shaderCompileCount++;
+        measure.finish();
     }
 
     bind()
@@ -792,6 +795,7 @@ class CglShader extends CgShader
             // if (this._countMissingUniforms == 10)this._log.log("stopping getlocation of missing uniforms...", this._name);
             if (this._countMissingUniforms < 10)
             {
+                const measure = this._cgl.profileData.start("shader default uniforms");
                 this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
                 this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
                 this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
@@ -803,6 +807,8 @@ class CglShader extends CgShader
                 this._inverseProjMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVPROJMAT);
                 this._materialIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MATERIALID);
                 this._objectIdUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_OBJECTID);
+
+                measure.finish();
 
                 for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
             }

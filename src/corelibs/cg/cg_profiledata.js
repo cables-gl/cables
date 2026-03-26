@@ -127,4 +127,26 @@ export class ProfileData
         this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }
+
+    start(name)
+    {
+
+        performance.mark("start " + name);
+        return { "finish": () =>
+        {
+            performance.mark("end " + name);
+            performance.measure(name, {
+                "start": "start " + name,
+                "end": "end " + name,
+                "detail": {
+                    "devtools":
+                         {
+                             "dataType": "track-entry",
+                             "track": "cgl",
+                         }
+                }
+            });
+        }
+        };
+    }
 }

@@ -26,7 +26,7 @@ div.style.height = size + "px";
 
 div.style.position = "absolute";
 div.style["z-index"] = "999999";
-div.style["pointer-events"] = "none";
+// div.style["pointer-events"] = "none";
 
 inVisible.onChange = updateVisible;
 
@@ -56,11 +56,11 @@ op.patch.loading.on("addAssetTask", updateStatus);
 
 function updateStatus()
 {
-    if (inVisible.get() == "Auto") updateVisible();
+    updateVisible();
 
     outReqs.setRef(op.patch.loading.getListJobs());
     clearTimeout(toUpdate);
-    if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)toUpdate = setTimeout(updateStatus, 100);
+    if (op.patch.loading.getListJobs().length != 0 || op.patch.loading.getProgress() != 1)toUpdate = setTimeout(updateStatus, 500);
 }
 
 function updateStyle()
@@ -111,7 +111,8 @@ function remove()
 
 function updateVisible()
 {
+    // console.log("indicator", op.patch.loading.getListJobs().length);
     if (inVisible.get() == "Auto")div.style.display = op.patch.loading.getListJobs().length == 0 ? "none" : "block";
-    if (inVisible.get() == "Visible")div.style.display = "block";
-    if (inVisible.get() == "Hidden")div.style.display = "none";
+    else if (inVisible.get() == "Visible")div.style.display = "block";
+    else if (inVisible.get() == "Hidden")div.style.display = "none";
 }

@@ -291,6 +291,7 @@ export class Texture extends CgTexture
      */
     initFromData(data, w, h, filter, wrap)
     {
+        const measure = this._cgl.profileData.start("texture.initfromdata ");
         this.filter = filter;
         this.wrap = wrap;
         if (filter == undefined) this.filter = Texture.FILTER_LINEAR;
@@ -323,6 +324,7 @@ export class Texture extends CgTexture
 
         if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
         this._cgl.gl.bindTexture(this.texTarget, null);
+        measure.finish();
     }
 
     updateMipMap()
@@ -345,6 +347,7 @@ export class Texture extends CgTexture
      */
     initTexture(img, filter = null, noflipping)
     {
+        const measure = this._cgl.profileData.start("texture.initTex ");
         this._cgl.printError("before initTexture");
         this._cgl.checkFrameStarted("texture inittexture");
         this._fromData = false;
@@ -383,6 +386,7 @@ export class Texture extends CgTexture
         if (!noflipping) if (this.flipped) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
 
         this.getInfoOneLine();
+        measure.finish();
         this._cgl.printError("initTexture");
     }
 
@@ -601,6 +605,9 @@ export class Texture extends CgTexture
 
         if (!settings.imgBitmap)
         {
+            console.warn("old texture loader");
+
+            const measure = cgl.profileData.start("old texture load");
 
             texture.image = new Image();
             texture.image.crossOrigin = "anonymous";
@@ -612,6 +619,7 @@ export class Texture extends CgTexture
                 if (loadingId) cgl.patch.loading.finished(loadingId);
                 const error = { "error": true };
                 if (finishedCallback) finishedCallback(error, texture);
+                measure.finish();
             };
 
             texture.image.onload = function (e)
@@ -622,6 +630,7 @@ export class Texture extends CgTexture
                     if (loadingId) cgl.patch.loading.finished(loadingId);
                     texture.loading = false;
 
+                    measure.finish();
                     if (finishedCallback) finishedCallback(null, texture);
                 });
             };

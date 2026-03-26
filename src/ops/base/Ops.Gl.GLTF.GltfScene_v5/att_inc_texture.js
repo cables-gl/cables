@@ -78,6 +78,7 @@ let GltfTexture = class
                 "wrap": cgl_wrap,
                 "flip": false,
                 // "unpackAlpha": unpackAlpha.get(),
+                "imgBitmap": true,
                 "filter": cgl_filter
             });
         if (!this.tex)console.log("notex!???");
