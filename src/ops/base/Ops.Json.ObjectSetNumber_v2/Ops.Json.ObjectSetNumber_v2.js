@@ -16,7 +16,15 @@ function update()
     let obj = inObject.get();
     if (!obj)obj = {};
 
-    const newObj = structuredClone(obj);
+    let newObj = null;
+    try
+    {
+        newObj = structuredClone(obj);
+    }
+    catch (e)
+    {
+        newObj = JSON.parse(JSON.stringify(obj));
+    }
 
     newObj[inKey.get()] = inValue.get();
 

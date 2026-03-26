@@ -36,7 +36,7 @@ function updateTimeInputs()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.tempData.currentScene) return;
+    if (!cgl.tempData.currentScene) return outFound.set(false);
     if (currentSceneLoaded != cgl.tempData.currentScene.loaded) node = null;
 
     if (!node)
@@ -45,16 +45,17 @@ inExec.onTriggered = function ()
 
         if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
         {
-            return;
+            return outFound.set(false);
         }
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
+        let found = false;
 
         for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
         {
             if (cgl.tempData.currentScene.nodes[i].name == name)
             {
+                found = true;
                 node = cgl.tempData.currentScene.nodes[i];
-                outFound.set(true);
 
                 if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom)
                 {
@@ -66,6 +67,8 @@ inExec.onTriggered = function ()
                 }
             }
         }
+
+        outFound.set(found);
     }
 
     cgl.pushModelMatrix();

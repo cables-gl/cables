@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1617800835435
-        },
-        {
-            "message": "Ops.User.pandur.GltfCameraViewMatrix renamed to Ops.Gl.GLTF.GltfCameraViewMatrix",
-            "author": "pandur",
-            "date": 1617802023495
+            "date": 1617800835435,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

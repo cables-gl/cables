@@ -47,5 +47,6 @@
                 "name": "Result Object"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
