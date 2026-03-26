@@ -9,6 +9,14 @@ function getTextureSourceForIndex(gltf, idx)
     return t.source;
 }
 
+function getTextureSamplerForIndex(gltf, idx)
+{
+    let t = gltf.json.textures[idx];
+    if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
+
+    return gltf.json.samplers[t.sampler];
+}
+
 let GltfMaterial = class
 {
     constructor(gltf, obj)
@@ -38,7 +46,8 @@ let GltfMaterial = class
             {
                 const idx = getTextureSourceForIndex(gltf, this.json.pbrMetallicRoughness.baseColorTexture.index);
 
-                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.pbrMetallicRoughness.baseColorTexture);
+                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.pbrMetallicRoughness.baseColorTexture, getTextureSamplerForIndex(gltf, this.json.pbrMetallicRoughness.baseColorTexture.index));
+
                 this._matTexDiffuse = gltf.textures[idx];
 
                 if (this.json.pbrMetallicRoughness.baseColorTexture.extensions &&
