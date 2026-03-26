@@ -471,7 +471,7 @@ function printInfo()
 
                     if (gltf.textures[tidx])
                     {
-                        html += " - " + tidx + ": " + gltf.textures[tidx].tex.width + " x " + gltf.textures[tidx].tex.height;
+                        html += " - " + tidx + ": " + gltf.textures[tidx].getInfoLine();
                         html += "<br/><img style=\"max-width:250px;\" src=\"" + gltf.textures[tidx].previewUri + "\"/>";
                     }
                     else html += "- tex not loaded";

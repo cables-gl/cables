@@ -7,6 +7,8 @@ let GltfTexture = class
         this.previewUri = null;
         this.tex = CGL.Texture.getEmptyTexture(cgl);
         this.sampler = _sampler;
+        this.cgl_filter = CGL.Texture.FILTER_MIPMAP;
+        this.cgl_wrap = CGL.Texture.WRAP_CLAMP;
 
         if (!gltf.json.images) return console.log("no json images?");
 
@@ -35,21 +37,18 @@ let GltfTexture = class
 
         if (CABLES.UI) this.previewUri = sourceURI;
 
-        let cgl_wrap = CGL.Texture.WRAP_CLAMP;
         // if(scale[0]!=1||scale[1]!=1)
-        cgl_wrap = CGL.Texture.WRAP_REPEAT;
-
-        let cgl_filter = CGL.Texture.FILTER_MIPMAP;
+        this.cgl_wrap = CGL.Texture.WRAP_REPEAT;
 
         if (this.sampler)
         {
-            if (this.sampler.minFilter == 9984) cgl_filter = CGL.Texture.FILTER_NEAREST;
-            if (this.sampler.minFilter == 9728) cgl_filter = CGL.Texture.FILTER_NEAREST;
-            if (this.sampler.minFilter == 9729) cgl_filter = CGL.Texture.FILTER_LINEAR;
+            if (this.sampler.minFilter == 9984) this.cgl_filter = CGL.Texture.FILTER_NEAREST;
+            if (this.sampler.minFilter == 9728) this.cgl_filter = CGL.Texture.FILTER_NEAREST;
+            if (this.sampler.minFilter == 9729) this.cgl_filter = CGL.Texture.FILTER_LINEAR;
 
-            if (this.sampler.wrapS == 33071) cgl_filter = CGL.Texture.WRAP_CLAMP;
-            if (this.sampler.wrapS == 10497) cgl_filter = CGL.Texture.WRAP_REPEAT;
-            if (this.sampler.wrapS == 33648) cgl_filter = CGL.Texture.WRAP_MIRRORED_REPEAT;
+            if (this.sampler.wrapS == 33071) this.cgl_wrap = CGL.Texture.WRAP_CLAMP;
+            if (this.sampler.wrapS == 10497) this.cgl_wrap = CGL.Texture.WRAP_REPEAT;
+            if (this.sampler.wrapS == 33648) this.cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
         }
 
         const cgl_aniso = 4;
@@ -77,14 +76,29 @@ let GltfTexture = class
                 }
             }, {
                 "anisotropic": cgl_aniso,
-                "wrap": cgl_wrap,
+                "wrap": this.cgl_wrap,
                 "flip": false,
                 // "unpackAlpha": unpackAlpha.get(),
                 "imgBitmap": true,
-                "filter": cgl_filter
+                "filter": this.cgl_filter
             });
 
         if (!this.tex)console.log("notex!???");
+    }
+
+    getInfoLine()
+    {
+        let str = this.tex.width + " x " + this.tex.height + " ";
+        if (this.cgl_wrap == CGL.Texture.WRAP_CLAMP)str += "clamp";
+        else if (this.cgl_wrap == CGL.Texture.WRAP_REPEAT)str += "repeat";
+        else if (this.cgl_wrap == CGL.Texture.WRAP_MIRRORED_REPEAT)str += "mirror repeat";
+        else str += "unknown wrap";
+        str += ",";
+        if (this.cgl_filter == CGL.Texture.FILTER_LINEAR)str += "linear";
+        else if (this.cgl_filter == CGL.Texture.FILTER_NEAREST)str += "nearest";
+        else if (this.cgl_filter == CGL.Texture.FILTER_MIPMAP)str += "mipmap";
+        else str += "unknown filter";
+        return str;
     }
 
     dispose()
