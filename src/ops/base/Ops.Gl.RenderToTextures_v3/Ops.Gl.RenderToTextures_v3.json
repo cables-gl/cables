@@ -69,6 +69,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 2,
+                "name": "Depth Buffer",
+                "objType": "framebuffer"
+            },
+            {
                 "type": 0,
                 "name": "Slots index",
                 "values": [

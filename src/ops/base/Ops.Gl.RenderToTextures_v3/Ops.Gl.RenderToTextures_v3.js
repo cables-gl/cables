@@ -10,6 +10,7 @@ const
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
     clear = op.inValueBool("Clear", true),
+    inDepth = op.inObject("Depth Buffer", null, "framebuffer"),
     slots = op.inSwitch("Slots", ["1", "2", "3", "4", "5", "6", "7", "8"], "1");
 
 let slotPorts = [];
@@ -115,35 +116,23 @@ function doRender()
 
         floatingPoint = isFloatingPoint();
 
-        if (cgl.glVersion >= 2)
-        {
-            let ms = true;
-            let msSamples = 4;
+        let msSamples = 4;
 
-            if (msaa.get() == "none")
-            {
-                msSamples = 0;
-                ms = false;
-            }
-            if (msaa.get() == "2x")msSamples = 2;
-            if (msaa.get() == "4x")msSamples = 4;
-            if (msaa.get() == "8x")msSamples = 8;
+        if (msaa.get() == "none") msSamples = 0;
+        if (msaa.get() == "2x")msSamples = 2;
+        if (msaa.get() == "4x")msSamples = 4;
+        if (msaa.get() == "8x")msSamples = 8;
 
-            fb = new CGL.Framebuffer2(cgl, 8, 8, {
-                "numRenderBuffers": numSlots,
-                "isFloatingPointTexture": floatingPoint,
-                "multisampling": ms,
-                "depth": true,
-                "multisamplingSamples": msSamples,
-                "wrap": getWrap(),
-                "filter": getFilter(),
-                "clear": clear.get()
-            });
-        }
-        else
-        {
-            fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": floatingPoint });
-        }
+        fb = new CGL.Framebuffer2(cgl, 8, 8, {
+            "numRenderBuffers": numSlots,
+            "isFloatingPointTexture": floatingPoint,
+            "multisampling": msSamples > 0,
+            "depth": true,
+            "multisamplingSamples": msSamples,
+            "wrap": getWrap(),
+            "filter": getFilter(),
+            "clear": clear.get()
+        });
 
         for (let i = 0; i < NUM_BUFFERS; i++)
         {
@@ -169,6 +158,19 @@ function doRender()
     if (fb.getWidth() != Math.ceil(width.get()) || fb.getHeight() != Math.ceil(height.get())) fb.setSize(width.get(), height.get());
 
     fb.renderStart(cgl);
+
+    if (inDepth.get())
+    {
+        cgl.gl.bindFramebuffer(cgl.gl.READ_FRAMEBUFFER, inDepth.get()._frameBuffer);
+        // cgl.gl.bindFramebuffer(cgl.gl.DRAW_FRAMEBUFFER, fb._framebuffer); // or null
+
+        cgl.gl.blitFramebuffer(
+            0, 0, width.get(), height.get(), // src rect
+            0, 0, width.get(), height.get(), // dst rect
+            cgl.gl.DEPTH_BUFFER_BIT, // what to copy
+            cgl.gl.NEAREST // must be NEAREST for depth
+        );
+    }
 
     // fb.clearColors[2] = [0, 0, 1, 1];
     // fb.clear();

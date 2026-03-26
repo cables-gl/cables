@@ -982,11 +982,13 @@ class Mesh extends CgMesh
         window.requestIdleCallback(() =>
         {
             if (this.#cgl.aborted) return;
+            const measure = this.#cgl.profileData.start("mesh dispose " + this._name);
             if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this.#cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
             if (this.#bufVerticesIndizes) this.#cgl.gl.deleteBuffer(this.#bufVerticesIndizes);
             this.#bufVerticesIndizes = null;
 
             this._disposeAttributes();
+            measure.finish();
         });
         return null;
     }

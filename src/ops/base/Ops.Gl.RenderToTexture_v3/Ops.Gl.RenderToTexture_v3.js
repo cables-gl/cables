@@ -10,6 +10,7 @@ const
     trigger = op.outTrigger("trigger"),
     tex = op.outTexture("texture"),
     texDepth = op.outTexture("textureDepth"),
+    outFb = op.outObject("Framebuffer", null, "framebuffer"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
     depth = op.inValueBool("Depth", true),
     clear = op.inValueBool("Clear", true);
@@ -90,6 +91,8 @@ function doRender()
                 "depth": depth.get(),
                 "clear": clear.get()
             });
+
+            outFb.setRef(fb);
         }
         else
         {
