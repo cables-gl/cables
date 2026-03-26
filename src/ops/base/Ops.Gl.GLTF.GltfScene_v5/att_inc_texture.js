@@ -7,20 +7,13 @@ let GltfTexture = class
         this.previewUri = null;
         this.tex = CGL.Texture.getEmptyTexture(cgl);
         this.sampler = _sampler;
-        if (!gltf.json.images)
-        {
-            console.log("no json images?");
-            return;
-        }
+
+        if (!gltf.json.images) return console.log("no json images?");
 
         let idx = _idx;
-
         let img = gltf.json.images[idx];
-        if (!img)
-        {
-            console.log("no image found?!", idx, gltf.json.images);
-            return;
-        }
+
+        if (!img) return console.log("no image found?!", idx, gltf.json.images);
 
         const buffView = gltf.json.bufferViews[img.bufferView];
         let dv = gltf.chunks[1].dataView;
@@ -31,11 +24,7 @@ let GltfTexture = class
             this.offset = texInfo.extensions.KHR_texture_transform.offset;
         }
 
-        if (!buffView)
-        {
-            console.log("no buffview tex");
-            return;
-        }
+        if (!buffView) return console.log("no buffview tex");
 
         const data = new Uint8Array(buffView.byteLength);
 
@@ -52,8 +41,6 @@ let GltfTexture = class
 
         let cgl_filter = CGL.Texture.FILTER_MIPMAP;
 
-        // if(this.sampler.hasOwnProperty("magFilter")
-
         if (this.sampler)
         {
             if (this.sampler.minFilter == 9984) cgl_filter = CGL.Texture.FILTER_NEAREST;
@@ -63,14 +50,11 @@ let GltfTexture = class
             if (this.sampler.wrapS == 33071) cgl_filter = CGL.Texture.WRAP_CLAMP;
             if (this.sampler.wrapS == 10497) cgl_filter = CGL.Texture.WRAP_REPEAT;
             if (this.sampler.wrapS == 33648) cgl_filter = CGL.Texture.WRAP_MIRRORED_REPEAT;
-
-            console.log(this.sampler);
         }
 
         const cgl_aniso = 4;
         const loadingId = cgl.patch.loading.start("gltfTexture", "gltftexture", op);
 
-        // console.log("img.mimetyp", img.mimeType);
         if (img.mimeType == "image/ktx2")
         {
             this.tex = CGL.Texture.getEmptyTexture(cgl);
@@ -99,6 +83,7 @@ let GltfTexture = class
                 "imgBitmap": true,
                 "filter": cgl_filter
             });
+
         if (!this.tex)console.log("notex!???");
     }
 
