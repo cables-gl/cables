@@ -5,7 +5,7 @@ let astcSupported = !!cgl.gl.getExtension("WEBGL_compressed_texture_astc");
 let etcSupported = !!cgl.gl.getExtension("WEBGL_compressed_texture_etc1");
 let dxtSupported = !!cgl.gl.getExtension("WEBGL_compressed_texture_s3tc");
 let bptcSupported = !!cgl.gl.getExtension("EXT_texture_compression_bptc");
-let pvrtcSupported = !!(cgl.gl.getExtension("WEBGL_compressed_texture_pvrtc")) || !!(gl.getExtension("WEBKIT_WEBGL_compressed_texture_pvrtc"));
+let pvrtcSupported = !!(cgl.gl.getExtension("WEBGL_compressed_texture_pvrtc")) || !!(cgl.gl.getExtension("WEBKIT_WEBGL_compressed_texture_pvrtc"));
 if (astcSupported)HDRsupported = cgl.gl.getExtension("WEBGL_compressed_texture_astc").getSupportedProfiles().includes("hdr");
 
 op.outBoolNum("Support ASTC", astcSupported);

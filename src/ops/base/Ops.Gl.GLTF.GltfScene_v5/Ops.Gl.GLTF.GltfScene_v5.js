@@ -478,6 +478,7 @@ function reloadSoon(nocache)
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
+    clearTimeout(idle);
     idle = setTimeout(() =>
     {
         loadBin(nocache);

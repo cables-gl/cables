@@ -1,11 +1,12 @@
 let GltfTexture = class
 {
-    constructor(gltf, _idx, texInfo)
+    constructor(gltf, _idx, texInfo, _sampler)
     {
         this.scale = [1, 1];
         this.offset = [0, 0];
         this.previewUri = null;
         this.tex = CGL.Texture.getEmptyTexture(cgl);
+        this.sampler = _sampler;
         if (!gltf.json.images)
         {
             console.log("no json images?");
@@ -49,9 +50,25 @@ let GltfTexture = class
         // if(scale[0]!=1||scale[1]!=1)
         cgl_wrap = CGL.Texture.WRAP_REPEAT;
 
-        const cgl_filter = CGL.Texture.FILTER_MIPMAP;
+        let cgl_filter = CGL.Texture.FILTER_MIPMAP;
+
+        // if(this.sampler.hasOwnProperty("magFilter")
+
+        if (this.sampler)
+        {
+            if (this.sampler.minFilter == 9984) cgl_filter = CGL.Texture.FILTER_NEAREST;
+            if (this.sampler.minFilter == 9728) cgl_filter = CGL.Texture.FILTER_NEAREST;
+            if (this.sampler.minFilter == 9729) cgl_filter = CGL.Texture.FILTER_LINEAR;
+
+            if (this.sampler.wrapS == 33071) cgl_filter = CGL.Texture.WRAP_CLAMP;
+            if (this.sampler.wrapS == 10497) cgl_filter = CGL.Texture.WRAP_REPEAT;
+            if (this.sampler.wrapS == 33648) cgl_filter = CGL.Texture.WRAP_MIRRORED_REPEAT;
+
+            console.log(this.sampler);
+        }
+
         const cgl_aniso = 4;
-        const loadingId = cgl.patch.loading.start("gltfTexture", CABLES.uuid(), op);
+        const loadingId = cgl.patch.loading.start("gltfTexture", "gltftexture", op);
 
         // console.log("img.mimetyp", img.mimeType);
         if (img.mimeType == "image/ktx2")
@@ -61,6 +78,7 @@ let GltfTexture = class
             CABLES.loadKtx(sourceURI, (t) =>
             {
                 this.tex = t;
+                cgl.patch.loading.finished(loadingId);
             });
         }
         else

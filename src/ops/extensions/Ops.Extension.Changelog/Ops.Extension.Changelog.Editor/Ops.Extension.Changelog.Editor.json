@@ -66,10 +66,16 @@
             "url": "https://github.com/cables-gl/cables/issues/8164"
         },
         {
-            "message": "Filemanages files are greyed out if not used in current patch",
+            "message": "Filemanager: Files are greyed out if not used in current patch",
             "type": "feature",
             "author": "pandur",
             "date": 1774274461806
+        },
+        {
+            "message": "Ignore new annoying chrome pointerlock exceptions",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1774449550770
         }
     ]
 }
