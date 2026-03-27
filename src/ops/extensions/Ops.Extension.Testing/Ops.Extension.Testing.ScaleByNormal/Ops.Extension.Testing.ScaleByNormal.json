@@ -1,0 +1,33 @@
+{
+    "id": "238dacc6-f7df-412d-833a-0cde0e02b7e5",
+    "created": 1723127837092,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127837134
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch3 renamed to Ops.Extension.Testing.ScaleByNormal",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774601030768
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "o41up594i",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

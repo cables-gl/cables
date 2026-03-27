@@ -1,0 +1,33 @@
+{
+    "id": "ffd9145b-782d-449e-817c-25118d69a6b1",
+    "created": 1723127543982,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127544016
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch2 renamed to Ops.Extension.Testing.Slice9",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774603343436
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "yfuee3i7h",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

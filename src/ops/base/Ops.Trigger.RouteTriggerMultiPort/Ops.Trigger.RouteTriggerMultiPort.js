@@ -10,7 +10,7 @@ exePort.onTriggered = update;
 function update()
 {
     const trigs = outTrigs.get();
-    numTrigs.set(trigs.length);
+    numTrigs.set(trigs.length - 1);
 
     const index = Math.floor(switchPort.get());
     if (index >= 0 && index < trigs.length)

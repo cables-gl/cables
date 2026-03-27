@@ -120,27 +120,10 @@
             "date": 1687444885322
         },
         {
-            "message": "Ops.Patch.PheLezz.Render2Texture2 renamed to Ops.Gl.Render2Texture_v2",
-            "type": "rename",
+            "message": "Added output for framebuffer",
+            "type": "feature",
             "author": "pandur",
-            "date": 1687445363475
-        },
-        {
-            "message": "cloned op from Ops.Gl.Render2Texture_v2",
-            "author": "pandur",
-            "date": 1687516885456
-        },
-        {
-            "message": "Ops.Patch.P4SCBDz.Render2Texture_v3 renamed to Ops.Gl.Render2Texture_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687527344944
-        },
-        {
-            "message": "Ops.Gl.Render2Texture_v3 renamed to Ops.Gl.RenderToTexture_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1694675884792
+            "date": 1774599831601
         }
     ],
     "exampleProjectId": "G2_my7",

@@ -1,0 +1,33 @@
+{
+    "id": "83d124cb-6d04-4314-968d-9dcfca9dbd26",
+    "created": 1723127843256,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723127843291
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch4 renamed to Ops.Extension.Testing.DefaultMeshes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774601150040
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "k935a8335",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

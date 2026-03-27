@@ -1,0 +1,33 @@
+{
+    "id": "faa0c837-8271-4dfb-ae96-e161a241f6ca",
+    "created": 1723128116625,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1723128116668
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch6 renamed to Ops.Extension.Testing.Explode",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1774600988902
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "03ppcwk5o",
+                "uititle": "Trigger In"
+            }
+        ],
+        "portsOut": []
+    }
+}

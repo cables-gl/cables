@@ -28,7 +28,7 @@
             {
                 "type": 1,
                 "name": "Trigger_0",
-                "longPort": 18
+                "longPort": 36
             },
             {
                 "type": 1,
@@ -96,7 +96,79 @@
             },
             {
                 "type": 1,
-                "name": "Trigger_17",
+                "name": "Trigger_17"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_18"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_19"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_20"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_21"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_22"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_23"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_24"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_25"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_26"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_27"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_28"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_29"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_30"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_31"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_32"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_33"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_34"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_35",
                 "uititle": "add port"
             }
         ]
