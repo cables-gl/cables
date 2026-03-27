@@ -131,21 +131,21 @@ export class ProfileData
     start(name)
     {
 
-        performance.mark("start " + name);
+        // performance.mark("start " + name);
         return { "finish": () =>
         {
-            performance.mark("end " + name);
-            performance.measure(name, {
-                "start": "start " + name,
-                "end": "end " + name,
-                "detail": {
-                    "devtools":
-                         {
-                             "dataType": "track-entry",
-                             "track": "cgl",
-                         }
-                }
-            });
+            // performance.mark("end " + name);
+            // performance.measure(name, {
+            //     "start": "start " + name,
+            //     "end": "end " + name,
+            //     "detail": {
+            //         "devtools":
+            //              {
+            //                  "dataType": "track-entry",
+            //                  "track": "cgl",
+            //              }
+            //     }
+            // });
         }
         };
     }
