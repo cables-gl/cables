@@ -541,7 +541,7 @@ export function idleCallbackSoon(idleTo, cb)
         // requestIdleCallback(cb);
         cb();
 
-    }, 50);
+    }, 30);
     return idleToNew;
 
 }
@@ -551,6 +551,10 @@ export function idleCallbackSoon(idleTo, cb)
  */
 export function idleCallback(cb)
 {
-    requestIdleCallback(cb);
 
+    const idleToNew = setTimeout(() =>
+    {
+        cb();
+
+    }, 30);
 }
