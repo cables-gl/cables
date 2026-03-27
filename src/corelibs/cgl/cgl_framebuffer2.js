@@ -259,7 +259,6 @@ export class Framebuffer2
 
             if (this._options.multisampling && this._options.multisamplingSamples)
             {
-                console.log("mssssssssssssssss");
                 this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, internFormat, this._width, this._height);
             }
             else

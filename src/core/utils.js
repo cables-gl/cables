@@ -530,14 +530,14 @@ export const escapeHTML = function(string)
 export function idleCallbackSoon(idleTo, cb)
 {
     if (idleTo)clearTimeout(idleTo);
-    idleTo = setTimeout(() =>
+    const idleToNew = setTimeout(() =>
     {
-        idleTo = null;
+        // idleTo = null;
 
         // requestIdleCallback(cb);
         cb();
 
     }, 50);
-    return idleTo;
+    return idleToNew;
 
 }
