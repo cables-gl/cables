@@ -40,7 +40,7 @@ CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
 CABLES.RenderLoop = RenderLoop;
 CABLES.idleCallbackSoon = utils.idleCallbackSoon;
-CABLES.idleCallback = utils.idleCallbackSoon;
+CABLES.idleCallback = utils.idleCallback;
 
 CABLES.shortId = utils.shortId;
 CABLES.uuid = utils.uuid;

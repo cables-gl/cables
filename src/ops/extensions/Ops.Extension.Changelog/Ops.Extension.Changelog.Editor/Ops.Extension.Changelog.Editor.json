@@ -76,6 +76,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1774449550770
+        },
+        {
+            "message": "File manager removes current selection filter when switching to another op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1774618618722
         }
     ]
 }

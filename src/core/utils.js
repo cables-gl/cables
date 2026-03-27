@@ -527,6 +527,10 @@ export const escapeHTML = function(string)
 }
 /* eslint-enable */
 
+/**
+ * @param {string} idleTo
+ * @param {function} cb
+ */
 export function idleCallbackSoon(idleTo, cb)
 {
     if (idleTo)clearTimeout(idleTo);
@@ -539,5 +543,14 @@ export function idleCallbackSoon(idleTo, cb)
 
     }, 50);
     return idleToNew;
+
+}
+
+/**
+ * @param {function} cb
+ */
+export function idleCallback(cb)
+{
+    requestIdleCallback(cb);
 
 }

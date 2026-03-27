@@ -64,7 +64,7 @@ function chooseBestFormat(ktexture)
     };
 
     const { transcode_fmt } = ktx;
-    console.log("formmmm", transcode_fmt.ETC2_RGBA, transcode_fmt.PVRTC1_4_RGBA);
+    // console.log("formmmm", transcode_fmt.ETC2_RGBA, transcode_fmt.PVRTC1_4_RGBA);
     const srgb = ktexture.isSRGB; // true for albedo/color textures
 
     // Prefer ASTC → DXT → ETC → uncompressed fallback
@@ -81,7 +81,7 @@ function chooseBestFormat(ktexture)
 function uploadTextureToGl(gl, ktexture)
 {
     const { transcode_fmt } = ktx;
-    let formatString;
+    // let formatString;
     // console.log("transcode_fmt", transcode_fmt);
 
     // if (ktexture.isTranscodable)
@@ -90,21 +90,21 @@ function uploadTextureToGl(gl, ktexture)
 
         const transferFunction = ktexture.oetf; // KHR_DF_TRANSFER_SRGB or KHR_DF_TRANSFER_LINEAR
         const isSRGB = ktexture.isHDR;// (transferFunction === LIBKTX.KHR_DF_TRANSFER_SRGB);
-        console.log("ktexture.needsTranscoding", ktexture.needsTranscoding);
+        // console.log("ktexture.needsTranscoding", ktexture.needsTranscoding);
 
-        console.log(`Texture is ${isSRGB ? "sRGB" : "linear"}`);
+        // console.log(`Texture is ${isSRGB ? "sRGB" : "linear"}`);
+        // {
+        let frmt = chooseBestFormat(ktexture);
+        frmt = ktx.transcode_fmt.RGBA32;
+        frmt = ktx.transcode_fmt.ETC2_RGBA;
+        // frmt = transcode_fmt.ASTC_4x4_RGBA;
+        // console.log("format", frmt);
+        if (ktexture.transcodeBasis(frmt, 0) != ktx.error_code.SUCCESS)
         {
-            let frmt = chooseBestFormat(ktexture);
-            frmt = ktx.transcode_fmt.RGBA32;
-            frmt = ktx.transcode_fmt.ETC2_RGBA;
-            // frmt = transcode_fmt.ASTC_4x4_RGBA;
-            console.log("format", frmt);
-            if (ktexture.transcodeBasis(frmt, 0) != ktx.error_code.SUCCESS)
-            {
-                console.log("Texture transcode failed. See console for details.");
-                return undefined;
-            }
+            console.log("Texture transcode failed. See console for details.");
+            return undefined;
         }
+        // }
     }
     // else
     // {
@@ -133,12 +133,12 @@ function uploadTextureToGl(gl, ktexture)
     }
     op.patch.cgl.gl.generateMipmap(result.target);
 
-    console.log("result", formatString);
+    // console.log("result", formatString);
 
     return {
         "target": result.target,
         "object": result.object,
-        "format": formatString,
+        // "format": formatString,
         "uvMatrix": null
     };
 }
