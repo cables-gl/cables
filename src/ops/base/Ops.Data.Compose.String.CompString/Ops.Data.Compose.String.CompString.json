@@ -12,6 +12,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1752593903797
+        },
+        {
+            "message": "Fix problem with buffer not being cleared when starting to compose",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1774860630760
         }
     ],
     "layout": {

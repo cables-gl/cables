@@ -20,4 +20,5 @@ update.onTriggered = () =>
     shouldClear = false;
 
     outArr.setRef(op.patch.tempData.compString);
+    op.patch.tempData.compString = "";
 };

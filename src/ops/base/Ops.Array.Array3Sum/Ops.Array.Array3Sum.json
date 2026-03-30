@@ -44,7 +44,6 @@
             }
         ]
     },
-
     "changelog": [
         {
             "message": "Ops.Array.Array3xMultiply renamed to Ops.Array.Array3Multiply",
@@ -62,5 +61,6 @@
             "date": 1668507552676
         }
     ],
-    "exampleProjectId": "D-pQHj"
+    "exampleProjectId": "D-pQHj",
+    "license": "MIT"
 }

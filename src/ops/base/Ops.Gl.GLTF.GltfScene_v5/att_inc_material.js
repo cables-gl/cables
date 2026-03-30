@@ -101,6 +101,7 @@ let GltfMaterial = class
         const uniPbrRoughness = currentShader.materialPropUniforms.pbrRoughness;
         const uniDiff = currentShader.materialPropUniforms.diffuseColor;
         const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
+        const uniTexMr = currentShader.materialPropUniforms.metalRoughnessTexture;
         const uniTexOcc = currentShader.materialPropUniforms.occlusionTexture;
         const uniTexNormal = currentShader.materialPropUniforms.normalTexture;
         const uniUnlit = currentShader.materialPropUniforms.unlit;
@@ -135,43 +136,19 @@ let GltfMaterial = class
         if (inUseMatTexProps.get())
         {
             if (uniTexTrans && this.texTransform)
-            {
-                // console.log("textransssssssssssss",this.texTransform)
                 uniTexTrans.setValue(this.texTransform);
-            }
 
-            // console.log("text",currentShader.materialPropUniforms);
-            if (uniTexDiff)
-            {
-                // console.log("text",currentShader.materialPropUniforms.difuseTexture);
-                // if(this._matTexOcclusion)
-                // currentShader.pushTexture(currentShader.materialPropUniforms.diffuseTexture, this._matTexOcclusion.tex, cgl.gl.TEXTURE_2D);
-                if (uniTexDiff.isValidLoc())
-                    currentShader.setUniformTexture(currentShader.materialPropUniforms.diffuseTexture, (this._matTexDiffuse || whiteTex).tex, cgl.gl.TEXTURE_2D);
-                // else console.log("nivalid texdiff", uniTexDiff);
+            if (uniTexDiff && uniTexDiff.isValidLoc())
+                currentShader.setUniformTexture(currentShader.materialPropUniforms.diffuseTexture, (this._matTexDiffuse || whiteTex).tex, cgl.gl.TEXTURE_2D);
 
-                // console.log("diffuseuni",currentShader.materialPropUniforms.diffuseTexture)
-            }
+            if (uniTexMr && uniTexMr.isValidLoc())
+                currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, (this._matTexMetalRough || whiteTex).tex, cgl.gl.TEXTURE_2D);
 
-            if (uniTexOcc)
-            {
-                // console.log("text",currentShader.materialPropUniforms.diffuseTexture);
-                // if(this._matTexOcclusion)
-                if (uniTexOcc.isValidLoc())
-                {
-                    currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, (this._matTexOcclusion || whiteTex).tex, cgl.gl.TEXTURE_2D);
-                    // console.log("1111");
-                }
-                // else
-                // currentShader.pushTexture(currentS c c chader.materialPropUniforms.diffuseTexture, this._matTexDiffuse.tex, cgl.gl.TEXTURE_2D);
+            if (uniTexOcc && uniTexOcc.isValidLoc())
+                currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, (this._matTexOcclusion || whiteTex).tex, cgl.gl.TEXTURE_2D);
 
-                // console.log("diffuseuni",currentShader.materialPropUniforms.diffuseTexture)
-            }
-            if (uniTexNormal)
-            {
-                if (uniTexNormal.isValidLoc())
-                    currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, (this._matTexNormal || whiteTex).tex, cgl.gl.TEXTURE_2D);
-            }
+            if (uniTexNormal && uniTexNormal.isValidLoc())
+                currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, (this._matTexNormal || whiteTex).tex, cgl.gl.TEXTURE_2D);
         }
     }
 

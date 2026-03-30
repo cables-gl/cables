@@ -434,6 +434,8 @@ void main()
 
     #ifdef USE_AORM_TEX
         vec4 AORM        = texture(_AORMMap, UV0);
+// AORM.g=1.0-AORM.g;
+        // AORM        = texture(_AORMMap, UV0).agra;
     #else
         vec4 AORM        = vec4(1.0, _Roughness, _Metalness, 1.0);
     #endif

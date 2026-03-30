@@ -183,6 +183,8 @@ const inTFThicknessTexMinUniform = new CGL.Uniform(PBRShader, "f", "_TFThickness
 const inTFThicknessTexMaxUniform = new CGL.Uniform(PBRShader, "f", "_TFThicknessTexMax", inTFThicknessTexMax);
 const inUnlitUniform = new CGL.Uniform(PBRShader, "f", "_Unlit", 0);
 
+// const inEmissiveColorUniform = new CGL.Uniform(PBRShader, "3f", "_EmissionColor", [0, 0, 0]);
+
 const inPCOrigin = new CGL.Uniform(PBRShader, "3f", "_PCOrigin", [0, 0, 0]);
 const inPCboxMin = new CGL.Uniform(PBRShader, "3f", "_PCboxMin", [-1, -1, -1]);
 const inPCboxMax = new CGL.Uniform(PBRShader, "3f", "_PCboxMax", [1, 1, 1]);
@@ -191,7 +193,9 @@ const uniTexTrans = PBRShader.addUniformFrag("4f", "texTransform", inTexTransRep
 PBRShader.materialPropUniforms = {
     "diffuseTexture": inAlbedoUniform,
     "normalTexture": inNormalUniform,
+    "metalRoughnessTexture": inAORMUniform,
     "diffuseColor": inDiffuseColor,
+    "pbrMetalness": inMetalnessUniform,
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
     "occlusionTexture": inLightmapUniform,

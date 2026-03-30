@@ -16,7 +16,7 @@ const
 
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
-    inFontSize = op.inValueFloat("fontSize", 300),
+    inFontSize = op.inValueFloat("fontSize", 100),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("Vertical align", ["Top", "Middle", "Bottom"], "Top"),
 

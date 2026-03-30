@@ -1,8 +1,8 @@
 const
     inArr = op.inArray("Array3x", 3),
-    addX = op.inValue("Add X", 1),
-    addY = op.inValue("Add Y", 1),
-    addZ = op.inValue("Add Z", 1),
+    addX = op.inValue("Add X", 0),
+    addY = op.inValue("Add Y", 0),
+    addZ = op.inValue("Add Z", 0),
     outArr = op.outArray("Result");
 
 outArr.setUiAttribs({ "stride": 3 });
