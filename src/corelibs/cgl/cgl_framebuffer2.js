@@ -41,7 +41,6 @@ export class Framebuffer2
         this._options = options || {
             "isFloatingPointTexture": false,
         };
-        throw new Error("iii ");
 
         this.name = this._options.name || "unknown";
 

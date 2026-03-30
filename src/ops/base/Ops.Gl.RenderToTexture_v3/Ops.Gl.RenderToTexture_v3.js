@@ -123,8 +123,8 @@ function doRender()
     if (fb.getWidth() != op.patch.cgl.checkTextureSize(width.get()) || fb.getHeight() != op.patch.cgl.checkTextureSize(height.get()))
     {
         fb.setSize(
-            -1,
-            (height.get()));
+            op.patch.cgl.checkTextureSize(width.get()),
+            op.patch.cgl.checkTextureSize(height.get()));
     }
 
     fb.renderStart(cgl);
