@@ -61,8 +61,8 @@ const CGL = {
 };
 
 window.CABLES = window.CABLES || {};
-window.CABLES.CGL = { ...CGL, ...window.CABLES.CGL };
-window.CGL = { ...CGL, ...window.CABLES.CGL, ...window.CGL };
+window.CABLES.CGL = { ...window.CABLES.CGL, ...CGL };
+window.CGL = { ...window.CABLES.CGL, ...window.CGL, ...CGL };
 
 /**
  * HACK: this needs to be wrapped into a function, exported and be
