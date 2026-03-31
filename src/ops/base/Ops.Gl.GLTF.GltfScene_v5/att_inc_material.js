@@ -37,6 +37,9 @@ let GltfMaterial = class
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
+        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_emissive_strength"))
+            console.log("todo: emissive strength", this.json.extensions.KHR_materials_emissive_strength.emissiveStrength);
+
         if (this.json.pbrMetallicRoughness)
         {
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;

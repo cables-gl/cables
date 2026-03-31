@@ -17,7 +17,8 @@
             "message": "Fix problem with buffer not being cleared when starting to compose",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1774860630760
+            "date": 1774860630760,
+            "url": "https://github.com/cables-gl/cables/issues/8193#issuecomment-4161263196"
         }
     ],
     "layout": {
