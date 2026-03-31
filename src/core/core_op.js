@@ -14,7 +14,11 @@ import { MultiPort2 } from "./core_port_multi2.js";
  */
 
 /**
- * configuration object for loading a patch
+ * @typedef OpAttribs
+ * @property {string[]} [tags] tags
+ */
+
+/**
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
  * @property {string} [hidePort] hidePort
@@ -91,6 +95,10 @@ export class Op extends Events
 
     /** @type {OpUiAttribs} */
     uiAttribs = {};
+
+    /** @type {OpAttribs} */
+    attribs = {};
+
     enabled = true;
 
     onAnimFrame = null;
@@ -194,6 +202,19 @@ export class Op extends Events
         this.setTitle(n);
     }
 
+    get tags()
+    {
+        return this.attribs.tags || [];
+    }
+
+    /**
+     * @param {string[]} n
+     */
+    set tags(n)
+    {
+        this.attribs.tags = n || [];
+    }
+
     /**
      * @param {string} on
      */
@@ -286,13 +307,7 @@ export class Op extends Events
 
     /**
      * setUiAttrib
-     * possible values:
-     * <pre>
-     * warning - warning message - showing up in op parameter panel
-     * error - error message - showing up in op parameter panel
-     * extendTitle - op title extension, e.g. [ + ]
-     * </pre>
-     // * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
+     * @param {OpUiAttribs} newAttribs, e.g. {"attrib":value}
      * @example
      * op.setUiAttrib({"extendTitle":str});
      */
@@ -1385,6 +1400,7 @@ export class Op extends Events
         if (this.patch.storeObjNames) opObj.objName = this.objName;
 
         opObj.id = this.id;
+        opObj.attribs = structuredClone(this.attribs) || {};
         opObj.uiAttribs = structuredClone(this.uiAttribs) || {};
 
         if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = structuredClone(this.storage);

@@ -491,19 +491,19 @@ export class Patch extends Events
      * @param {string} [id]
      * @param {boolean} [fromDeserialize]
      * @param {string} [opName] e.g. Ops.Math.Sum
+     * @param {import("./core_op.js").OpAttribs}
      * @example
      * // add invisible op
      * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
      */
-    addOp(opIdentifier, uiAttribs, id, fromDeserialize = false, opName = null)
+    addOp(opIdentifier, uiAttribs, id, fromDeserialize = false, opName = null, opAttribs = {})
     {
         const op = this.createOp(opIdentifier, id, opName);
 
         if (op)
         {
+            op.attribs = opAttribs;
             uiAttribs = uiAttribs || {};
-            if (uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
-            if (uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
             uiAttribs.subPatch = uiAttribs.subPatch || 0;
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
@@ -918,7 +918,7 @@ export class Patch extends Events
 
             try
             {
-                if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true, opData.objName);
+                if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true, opData.objName, opData.attribs);
                 else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
             }
             catch (e)
