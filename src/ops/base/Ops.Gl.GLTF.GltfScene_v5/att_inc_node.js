@@ -30,6 +30,7 @@ const gltfNode = class
         this.skinRenderer = null;
         this.copies = [];
         this.warning = "";
+        this.extensions = node.extensions || [];
         if (this._node.scale && (this._node.scale[0] < 0 || this._node.scale[1] < 0 || this._node.scale[2] < 0)) this.warning = "NEG SCALE";
     }
 
@@ -126,8 +127,7 @@ const gltfNode = class
             if (bounds.changed)
             {
                 boundingPoints.push(
-                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0,
-                    bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
             }
         }
 

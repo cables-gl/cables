@@ -640,6 +640,49 @@ function findParents(nodes, childNodeIndex)
     }
 }
 
+op.exposePunctualLight = function (name, idx, nodeName)
+{
+    let newop = null;
+    const l = gltf.json.extensions.KHR_lights_punctual.lights[idx];
+
+    if (l.type == "spot")
+        newop = gui.corePatch().addOp("Ops.Gl.Phong.SpotLight_v5");
+    else
+        newop = gui.corePatch().addOp("Ops.Gl.Phong.PointLight_v5");
+
+    console.log("objeeee", gltf.json.extensions.KHR_lights_punctual.lights[idx]);
+
+    newop.getPort("R").set(l.color[0]);
+    newop.getPort("G").set(l.color[1]);
+    newop.getPort("B").set(l.color[2]);
+    newop.getPort("Intensity").set(l.intensity);
+
+    if (l.type == "spot")
+    {
+        // todo: angles need work
+        // todo: point at extraction ?
+        newop.getPort("Cone Angle").set(l.spot.innerConeAngle * CGL.RAD2DEG);
+        newop.getPort("Inner Cone Angle").set(l.spot.outerConeAngle * CGL.RAD2DEG);
+    }
+
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        console.log("text", gltf.nodes[i].extensions);
+        if (gltf.nodes[i].extensions && gltf.nodes[i].extensions.KHR_lights_punctual)
+        {
+
+            console.log("node", gltf.nodes[i].extensions.KHR_lights_punctual.light, gltf.nodes[i].mat);
+            newop.getPort("X").set(gltf.nodes[i].mat[12]);
+            newop.getPort("Y").set(gltf.nodes[i].mat[13]);
+            newop.getPort("Z").set(gltf.nodes[i].mat[14]);
+        }
+    }
+    setNewOpPosition(newop, 1);
+    // op.patch.link(op, next.name, newop, "Render");
+    gui.patchView.testCollision(newop);
+    gui.patchView.centerSelectOp(newop.id, true);
+};
+
 op.exposeTexture = function (name)
 {
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");

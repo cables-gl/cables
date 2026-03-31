@@ -578,6 +578,14 @@ function parseGltf(arrayBuffer)
         }
     }
 
+    if (gltf.json.extensions && gltf.json.extensions.KHR_lights_punctual)
+    {
+        for (i = 0; i < gltf.json.extensions.KHR_lights_punctual.lights.length; i++)
+        {
+
+        }
+    }
+
     outVariants.setRef(variantNames);
 
     needsMatUpdate = true;

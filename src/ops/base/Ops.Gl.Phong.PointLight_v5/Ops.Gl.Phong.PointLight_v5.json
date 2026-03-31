@@ -171,19 +171,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowPointLightCGL renamed to Ops.Admin.ShadowPointLightCGL",
+            "message": "new op",
             "author": "cables",
-            "date": 1588083927621
-        },
-        {
-            "message": "Ops.Admin.ShadowPointLightCGL renamed to Ops.Gl.Phong.PointLight_v5",
-            "author": "pandur",
-            "date": 1596055745231
-        },
-        {
-            "message": " added core lib: cgl_cubemapframebuffer",
-            "author": "cables",
-            "date": 1616587726922
+            "date": 1588083927621,
+            "type": "new op"
         }
     ],
     "summary": "Point light for phong shading",

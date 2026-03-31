@@ -12,12 +12,12 @@
             },
             {
                 "type": 0,
-                "name": "Add Vertex Numbers",
+                "name": "Render Mesh",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Render Mesh",
+                "name": "Add Vertex Numbers",
                 "subType": "boolean"
             }
         ],
@@ -67,5 +67,6 @@
     ],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

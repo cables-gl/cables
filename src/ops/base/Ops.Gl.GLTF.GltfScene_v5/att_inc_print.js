@@ -618,6 +618,47 @@ function printInfo()
         html += "</table>";
     }
 
+    let numLights = 0;
+    let punctualLights = null;
+    if (gltf.json.extensions.KHR_lights_punctual && gltf.json.extensions.KHR_lights_punctual.lights)punctualLights = gltf.json.extensions.KHR_lights_punctual.lights;
+    if (punctualLights)numLights = punctualLights.length;
+
+    html += "<div id=\"groupLights\">Lights (" + numLights + ")</div>";
+
+    if (punctualLights)
+    {
+        html += "<table id=\"sectionLights\" class=\"table treetable\">";
+
+        html += "<tr>";
+        html += "  <th>Node</th>";
+        html += "  <th>type</th>";
+        html += "  <th>info</th>";
+        html += "</tr>";
+
+        for (let i = 0; i < punctualLights.length; i++)
+        {
+            html += "<tr>";
+            html += "<td>" + punctualLights[i].name + "</td>";
+            html += "<td>punctual: " + punctualLights[i].type + "</td>";
+            html += "<td>";
+
+            html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposePunctualLight('" + punctualLights[i].name + "','" + i + "')\" class=\"iconbutton-small tt\" data-tt=\"Trans\"><span class=\"icon icon-op\"></span></a>";
+
+            // if (gltf.json.cameras[i].perspective)
+            // {
+            //     html += "yfov: " + Math.round(gltf.json.cameras[i].perspective.yfov * 100) / 100;
+            //     html += ", ";
+            //     html += "zfar: " + Math.round(gltf.json.cameras[i].perspective.zfar * 100) / 100;
+            //     html += ", ";
+            //     html += "znear: " + Math.round(gltf.json.cameras[i].perspective.znear * 100) / 100;
+            // }
+            html += "</td>";
+
+            html += "<tr>";
+        }
+        html += "</table>";
+    }
+
     // / ////////////////////////////////////
 
     let numSkins = 0;
@@ -739,6 +780,7 @@ function printInfo()
     CABLES.UI.Collapsable.setup(ele.byId("groupSkins"), ele.byId("sectionSkins"), true);
     CABLES.UI.Collapsable.setup(ele.byId("groupBinary"), ele.byId("sectionBinary"), true);
     CABLES.UI.Collapsable.setup(ele.byId("groupTiming"), ele.byId("sectionTiming"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupLights"), ele.byId("sectionLights"), true);
 
     gui.maintabPanel.show(true);
 }
