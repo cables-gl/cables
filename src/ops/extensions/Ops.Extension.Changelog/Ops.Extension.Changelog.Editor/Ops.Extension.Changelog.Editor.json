@@ -82,6 +82,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1774618618722
+        },
+        {
+            "message": "Mute audio will be stored in user preferences now. Added new commands for mute/unmute audio. Muted audio icon is highlighted in the canvas UI bar",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1774946987397,
+            "url": "https://github.com/cables-gl/cables/issues/8199"
         }
     ]
 }
