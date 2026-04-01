@@ -33,6 +33,8 @@ const
 
     inEvents = op.inBool("Events", true),
     inActive = op.inBool("Active", true),
+    inUpdateTrans = op.inTriggerButton("Update Translation"),
+
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
     outPos = op.outArray("Result Positions", [], 3),
@@ -45,6 +47,7 @@ let needsSetup, lastWorld, oldShape;
 let rigidBodies = [];
 let colliders = [];
 let tmpOrigin = vec3.create();
+let needsUpdateTrans = true;
 
 exec.onLinkChanged = removeBodies;
 let setPosition = false;
@@ -373,6 +376,11 @@ function setup(world)
     updateUi();
     lastWorld = world;
 }
+
+inUpdateTrans.onTriggered = () =>
+{
+    setPosition = true;
+};
 
 function removeBodies()
 {
