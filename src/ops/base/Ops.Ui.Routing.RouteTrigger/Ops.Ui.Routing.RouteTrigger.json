@@ -29,5 +29,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "CLMeDg"
+    "exampleProjectId": "CLMeDg",
+    "isReleased": true
 }

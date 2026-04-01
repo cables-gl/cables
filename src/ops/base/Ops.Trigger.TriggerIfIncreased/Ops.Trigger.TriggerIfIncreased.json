@@ -39,5 +39,6 @@
             }
         ]
     },
-    "exampleProjectId": "AFiCfe"
+    "exampleProjectId": "AFiCfe",
+    "isReleased": true
 }

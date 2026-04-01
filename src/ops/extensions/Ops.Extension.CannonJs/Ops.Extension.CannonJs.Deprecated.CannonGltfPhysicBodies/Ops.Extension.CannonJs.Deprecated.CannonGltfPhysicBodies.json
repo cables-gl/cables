@@ -86,5 +86,6 @@
     "exampleProjectId": "YndBme",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -30,5 +30,6 @@
     "exampleProjectId": "Ft2xm1",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

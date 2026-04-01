@@ -40,5 +40,6 @@
         "ports": []
     },
     "summary": "Upload an array to the GPU as a GpuBuffer",
-    "exampleProjectId": "VShX3I"
+    "exampleProjectId": "VShX3I",
+    "isReleased": true
 }

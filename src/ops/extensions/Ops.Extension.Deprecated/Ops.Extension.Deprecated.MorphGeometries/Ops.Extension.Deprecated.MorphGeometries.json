@@ -107,5 +107,6 @@
     "coreLibs": [
         "cgl_shadermodifier",
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

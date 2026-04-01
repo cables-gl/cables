@@ -11,7 +11,6 @@
     "created": 1584025829483,
     "summary": "set a string value by key in an object",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -37,5 +36,6 @@
                 "name": "Result Object"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

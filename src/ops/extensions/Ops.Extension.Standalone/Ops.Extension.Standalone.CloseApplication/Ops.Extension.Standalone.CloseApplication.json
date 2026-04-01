@@ -30,5 +30,6 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "Close cables standalone on trigger"
+    "summary": "Close cables standalone on trigger",
+    "isReleased": true
 }

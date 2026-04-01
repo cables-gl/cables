@@ -46,10 +46,10 @@
     "summary": "Convert an array3 to an array4 by filling it up with 1",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "h_Dbm4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

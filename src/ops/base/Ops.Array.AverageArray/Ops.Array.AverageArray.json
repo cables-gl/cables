@@ -54,7 +54,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "changelog": [
         {
             "message": "Ops.Array.ArraySmooth renamed to Ops.Array.AverageArray",
@@ -62,5 +61,6 @@
             "date": 1567671122131
         }
     ],
-    "exampleProjectId": "t8uSdn"
+    "exampleProjectId": "t8uSdn",
+    "isReleased": true
 }

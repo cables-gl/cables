@@ -70,5 +70,6 @@
     "exampleProjectId": "qIOrS-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

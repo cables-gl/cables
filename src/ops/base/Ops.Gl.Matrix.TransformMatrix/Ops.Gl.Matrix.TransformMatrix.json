@@ -98,5 +98,6 @@
     "summary": "transform a matrix (mat4)",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -70,5 +70,6 @@
     "exampleProjectId": "oLCaao",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

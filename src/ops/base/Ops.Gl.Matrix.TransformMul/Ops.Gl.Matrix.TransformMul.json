@@ -25,5 +25,6 @@
     "summary": "multiply current modelmatrix",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

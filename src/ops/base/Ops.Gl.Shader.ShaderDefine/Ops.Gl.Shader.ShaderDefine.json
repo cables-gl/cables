@@ -33,8 +33,6 @@
     "summary": "Set shader defines",
     "youtubeid": "",
     "issues": "",
-
-
     "docs": {
         "ports": []
     },
@@ -48,5 +46,6 @@
             "deletedBy": "cables",
             "deletedDate": 1605512024212
         }
-    ]
+    ],
+    "isReleased": true
 }

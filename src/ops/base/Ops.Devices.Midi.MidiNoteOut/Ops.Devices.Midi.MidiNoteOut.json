@@ -98,5 +98,6 @@
             }
         ]
     },
-    "exampleProjectId": "VbaQXU"
+    "exampleProjectId": "VbaQXU",
+    "isReleased": true
 }

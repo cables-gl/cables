@@ -64,5 +64,6 @@
     "caniusequery": "Fullscreen API",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

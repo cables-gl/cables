@@ -140,5 +140,6 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "tg7cRx",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

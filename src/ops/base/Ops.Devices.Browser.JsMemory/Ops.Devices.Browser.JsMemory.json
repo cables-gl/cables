@@ -43,10 +43,10 @@
     "summary": "browser js memory consumption",
     "issues": "",
     "caniusequery": "performance.memory",
-
     "youtubeids": [],
     "exampleProjectId": "_UyS0f",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

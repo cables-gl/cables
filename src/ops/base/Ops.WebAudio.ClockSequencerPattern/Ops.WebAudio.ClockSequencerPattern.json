@@ -96,5 +96,6 @@
             }
         ]
     },
-    "exampleProjectId": "KM0Dgu"
+    "exampleProjectId": "KM0Dgu",
+    "isReleased": true
 }

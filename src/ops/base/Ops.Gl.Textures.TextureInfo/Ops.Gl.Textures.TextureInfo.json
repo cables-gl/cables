@@ -85,5 +85,6 @@
     "youtubeid": "",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

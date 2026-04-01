@@ -90,5 +90,6 @@
     "exampleProjectId": "WDPlT6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

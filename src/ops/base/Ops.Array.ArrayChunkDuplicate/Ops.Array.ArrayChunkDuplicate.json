@@ -41,10 +41,10 @@
     "summary": "Repeat chunks of an array multiple times",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Vu22bf",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

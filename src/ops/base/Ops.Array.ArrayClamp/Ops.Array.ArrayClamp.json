@@ -35,7 +35,6 @@
     },
     "summary": "Clamp the values of an array to a min and max value",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -57,5 +56,6 @@
             }
         ]
     },
-    "exampleProjectId": "tyxvSP"
+    "exampleProjectId": "tyxvSP",
+    "isReleased": true
 }

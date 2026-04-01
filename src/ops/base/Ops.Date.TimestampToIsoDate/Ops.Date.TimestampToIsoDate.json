@@ -30,5 +30,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "convert a timestamp to an ISO date string"
+    "summary": "convert a timestamp to an ISO date string",
+    "isReleased": true
 }

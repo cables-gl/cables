@@ -40,5 +40,6 @@
     "exampleProjectId": "HkYpci",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

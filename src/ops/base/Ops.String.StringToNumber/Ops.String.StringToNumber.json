@@ -41,5 +41,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "XMEwci"
+    "exampleProjectId": "XMEwci",
+    "isReleased": true
 }

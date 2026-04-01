@@ -113,5 +113,6 @@
     "exampleProjectId": "yWVQC-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

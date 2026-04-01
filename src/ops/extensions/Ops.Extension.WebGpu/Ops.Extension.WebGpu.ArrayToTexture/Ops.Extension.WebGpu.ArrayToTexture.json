@@ -71,5 +71,6 @@
     "exampleProjectId": "hYt34I",
     "coreLibs": [
         "cgp"
-    ]
+    ],
+    "isReleased": true
 }

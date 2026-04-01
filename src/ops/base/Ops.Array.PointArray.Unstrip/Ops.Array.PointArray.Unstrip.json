@@ -28,5 +28,6 @@
     "summary": "Unstrip a line point array",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

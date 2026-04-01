@@ -25,5 +25,6 @@
     "summary": "Outputs the minimum value since reset has been triggered",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

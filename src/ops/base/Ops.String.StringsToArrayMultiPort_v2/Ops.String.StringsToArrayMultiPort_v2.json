@@ -42,5 +42,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "oBPhsh"
+    "exampleProjectId": "oBPhsh",
+    "isReleased": true
 }

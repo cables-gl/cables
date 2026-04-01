@@ -49,5 +49,6 @@
     "exampleProjectId": "33bSY7",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -69,5 +69,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Compose a  compute shader "
+    "summary": "Compose a  compute shader ",
+    "isReleased": true
 }

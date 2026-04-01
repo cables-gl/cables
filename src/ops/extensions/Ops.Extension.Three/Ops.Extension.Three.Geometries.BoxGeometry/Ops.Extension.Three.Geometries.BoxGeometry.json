@@ -84,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "lCULv4"
+    "exampleProjectId": "lCULv4",
+    "isReleased": true
 }

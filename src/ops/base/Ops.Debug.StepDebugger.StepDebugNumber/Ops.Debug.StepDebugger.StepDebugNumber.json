@@ -40,5 +40,6 @@
     "summary": "Debug what happens when a change of number parameter happens",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

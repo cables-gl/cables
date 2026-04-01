@@ -32,5 +32,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "JEThu1"
+    "exampleProjectId": "JEThu1",
+    "isReleased": true
 }

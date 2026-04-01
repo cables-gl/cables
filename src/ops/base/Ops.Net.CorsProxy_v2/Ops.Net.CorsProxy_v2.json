@@ -28,5 +28,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "PAedBi"
+    "exampleProjectId": "PAedBi",
+    "isReleased": true
 }

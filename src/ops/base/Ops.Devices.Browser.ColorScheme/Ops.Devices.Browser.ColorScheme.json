@@ -47,7 +47,6 @@
     "created": 1698309430889,
     "summary": "Get light/dark color scheme preference of the browser",
     "caniusequery": "prefers-color-scheme",
-
     "docs": {
         "ports": [
             {
@@ -56,5 +55,6 @@
             }
         ]
     },
-    "exampleProjectId": "An48HJ"
+    "exampleProjectId": "An48HJ",
+    "isReleased": true
 }

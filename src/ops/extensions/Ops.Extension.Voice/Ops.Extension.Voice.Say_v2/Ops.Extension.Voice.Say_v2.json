@@ -91,7 +91,6 @@
     ],
     "summary": "Text-to-Speech, speaks different languages (speech synthesis)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -153,5 +152,6 @@
             }
         ]
     },
-    "exampleProjectId": "WubOWc"
+    "exampleProjectId": "WubOWc",
+    "isReleased": true
 }

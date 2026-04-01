@@ -94,5 +94,6 @@
     "summary": "Repeat an array by transforming it x times",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

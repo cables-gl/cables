@@ -60,5 +60,6 @@
     "exampleProjectId": "F6Fhyp",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -33,5 +33,6 @@
     "summary": "An empty Object",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -107,5 +107,6 @@
     "exampleProjectId": "OcOVBp",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -84,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "5IUbw4"
+    "exampleProjectId": "5IUbw4",
+    "isReleased": true
 }

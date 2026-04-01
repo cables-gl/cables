@@ -158,5 +158,6 @@
         ]
     },
     "exampleProjectId": "-h-Rx3",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

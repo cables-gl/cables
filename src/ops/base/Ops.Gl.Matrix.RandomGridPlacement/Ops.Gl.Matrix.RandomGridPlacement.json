@@ -70,5 +70,6 @@
     "exampleProjectId": "FsZFVB",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

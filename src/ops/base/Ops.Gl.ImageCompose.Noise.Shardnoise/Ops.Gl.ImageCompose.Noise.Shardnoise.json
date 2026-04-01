@@ -116,5 +116,6 @@
     "summary": "Render \"shard noise\" into a texture",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -175,5 +175,6 @@
         ]
     },
     "exampleProjectId": "jmm7N-",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

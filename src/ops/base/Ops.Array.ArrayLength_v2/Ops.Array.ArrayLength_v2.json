@@ -21,7 +21,6 @@
     "created": 1695634884437,
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -47,5 +46,6 @@
             "author": "pandur",
             "date": 1695634929223
         }
-    ]
+    ],
+    "isReleased": true
 }

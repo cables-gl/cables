@@ -38,5 +38,6 @@
     "exampleProjectId": "a5Mz8i",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

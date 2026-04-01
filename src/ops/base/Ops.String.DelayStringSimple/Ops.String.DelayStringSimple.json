@@ -41,10 +41,10 @@
     },
     "summary": "delay the output of a string by n seconds",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "kqtJkE"
+    "exampleProjectId": "kqtJkE",
+    "isReleased": true
 }

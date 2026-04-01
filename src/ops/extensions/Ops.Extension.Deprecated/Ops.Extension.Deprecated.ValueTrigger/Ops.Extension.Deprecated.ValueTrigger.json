@@ -27,5 +27,6 @@
     "authorName": "pandur",
     "id": "d9d010c2-2bc9-4eb5-8514-f2adef7ceae4",
     "created": 1515686078871,
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

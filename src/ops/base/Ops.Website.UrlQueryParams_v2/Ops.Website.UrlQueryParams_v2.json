@@ -45,5 +45,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "2SE58i"
+    "exampleProjectId": "2SE58i",
+    "isReleased": true
 }

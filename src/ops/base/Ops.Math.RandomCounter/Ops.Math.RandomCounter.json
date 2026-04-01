@@ -41,10 +41,10 @@
     },
     "summary": "add up random numbers by triggering",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "I8AxeE"
+    "exampleProjectId": "I8AxeE",
+    "isReleased": true
 }

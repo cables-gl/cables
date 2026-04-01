@@ -25,8 +25,6 @@
     },
     "summary": "Sends boolean value via socketcluster/websocket",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -54,5 +52,6 @@
             "author": "stephan",
             "date": 1671003585815
         }
-    ]
+    ],
+    "isReleased": true
 }

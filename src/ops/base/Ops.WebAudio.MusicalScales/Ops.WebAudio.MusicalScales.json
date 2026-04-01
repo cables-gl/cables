@@ -83,7 +83,6 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -129,5 +128,6 @@
             }
         ]
     },
-    "exampleProjectId": "8Ekchu"
+    "exampleProjectId": "8Ekchu",
+    "isReleased": true
 }

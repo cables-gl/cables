@@ -31,5 +31,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

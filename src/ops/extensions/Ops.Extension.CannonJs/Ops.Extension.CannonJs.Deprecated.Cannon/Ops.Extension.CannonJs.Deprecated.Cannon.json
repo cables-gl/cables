@@ -200,5 +200,6 @@
     "exampleProjectId": "amF0KQ",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

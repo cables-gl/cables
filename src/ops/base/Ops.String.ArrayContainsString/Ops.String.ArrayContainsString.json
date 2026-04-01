@@ -62,5 +62,6 @@
         ]
     },
     "exampleProjectId": "VuK4ve",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

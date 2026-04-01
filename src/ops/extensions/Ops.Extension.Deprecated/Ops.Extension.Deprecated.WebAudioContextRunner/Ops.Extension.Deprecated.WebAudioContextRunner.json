@@ -49,5 +49,6 @@
     "coreLibs": [
         "cgl",
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

@@ -182,5 +182,6 @@
         "cgl_copytexture",
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

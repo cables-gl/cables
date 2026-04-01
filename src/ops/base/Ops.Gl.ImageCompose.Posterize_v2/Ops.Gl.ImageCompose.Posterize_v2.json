@@ -68,5 +68,6 @@
     "exampleProjectId": "_MMoT6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

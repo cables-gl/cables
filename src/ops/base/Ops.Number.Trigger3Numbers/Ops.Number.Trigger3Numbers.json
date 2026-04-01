@@ -91,5 +91,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

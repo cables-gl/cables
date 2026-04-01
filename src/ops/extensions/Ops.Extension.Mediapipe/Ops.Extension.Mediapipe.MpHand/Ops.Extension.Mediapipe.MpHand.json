@@ -82,5 +82,6 @@
     "exampleProjectId": "a5xfp4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

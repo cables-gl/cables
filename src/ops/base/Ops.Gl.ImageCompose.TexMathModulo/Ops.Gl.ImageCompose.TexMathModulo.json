@@ -70,5 +70,6 @@
     "exampleProjectId": "FOpoxm",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

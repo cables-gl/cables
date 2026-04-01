@@ -93,5 +93,6 @@
             }
         ]
     },
-    "exampleProjectId": "PV7Ov4"
+    "exampleProjectId": "PV7Ov4",
+    "isReleased": true
 }

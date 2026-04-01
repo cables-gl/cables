@@ -24,5 +24,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Outputs true if the patch is inside of an iframe"
+    "summary": "Outputs true if the patch is inside of an iframe",
+    "isReleased": true
 }

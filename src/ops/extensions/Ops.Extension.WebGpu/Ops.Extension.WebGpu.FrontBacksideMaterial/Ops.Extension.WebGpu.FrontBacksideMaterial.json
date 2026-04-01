@@ -78,5 +78,6 @@
     "summary": "Show direction of faces as color",
     "coreLibs": [
         "cgp"
-    ]
+    ],
+    "isReleased": true
 }

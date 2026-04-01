@@ -176,5 +176,6 @@
     "exampleProjectId": "XmL8GY",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

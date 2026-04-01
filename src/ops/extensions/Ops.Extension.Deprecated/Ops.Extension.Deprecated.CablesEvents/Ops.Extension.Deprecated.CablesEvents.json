@@ -32,5 +32,6 @@
     "summary": "Get current cables events",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

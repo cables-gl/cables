@@ -66,5 +66,6 @@
     "summary": "new subpatches",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

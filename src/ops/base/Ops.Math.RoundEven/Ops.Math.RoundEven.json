@@ -32,7 +32,6 @@
     },
     "summary": "round to the next even number",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -54,5 +53,6 @@
             }
         ]
     },
-    "exampleProjectId": "a0z7hL"
+    "exampleProjectId": "a0z7hL",
+    "isReleased": true
 }

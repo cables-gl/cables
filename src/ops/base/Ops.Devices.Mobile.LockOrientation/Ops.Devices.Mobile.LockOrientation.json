@@ -32,5 +32,6 @@
     "summary": "locks orientation to landscape or portrait mode",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

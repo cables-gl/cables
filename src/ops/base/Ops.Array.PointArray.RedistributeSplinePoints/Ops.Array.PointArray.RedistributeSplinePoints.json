@@ -39,8 +39,7 @@
     "docs": {
         "ports": []
     },
-
     "issues": "",
-
-    "youtubeids": []
+    "youtubeids": [],
+    "isReleased": true
 }

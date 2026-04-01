@@ -35,8 +35,8 @@
     "summary": "Measure the time used to execute all child ops",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

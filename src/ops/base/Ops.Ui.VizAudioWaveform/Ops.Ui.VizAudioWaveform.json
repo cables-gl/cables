@@ -52,5 +52,6 @@
     "summary": "Vizualize an audionode object as a waveform",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

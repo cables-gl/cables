@@ -114,5 +114,6 @@
     "exampleProjectId": "5PFIfu",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

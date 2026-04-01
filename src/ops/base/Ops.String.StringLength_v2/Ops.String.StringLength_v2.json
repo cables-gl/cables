@@ -22,5 +22,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "v9GLji"
+    "exampleProjectId": "v9GLji",
+    "isReleased": true
 }

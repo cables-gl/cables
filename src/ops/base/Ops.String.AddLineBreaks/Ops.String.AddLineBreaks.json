@@ -30,11 +30,11 @@
     },
     "summary": "Insert a line break in a string of words",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "exampleProjectId": "4f-D16",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

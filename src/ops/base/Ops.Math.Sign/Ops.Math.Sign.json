@@ -28,5 +28,6 @@
             }
         ]
     },
-    "exampleProjectId": "pixllg"
+    "exampleProjectId": "pixllg",
+    "isReleased": true
 }

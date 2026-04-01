@@ -28,5 +28,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "05Arii"
+    "exampleProjectId": "05Arii",
+    "isReleased": true
 }

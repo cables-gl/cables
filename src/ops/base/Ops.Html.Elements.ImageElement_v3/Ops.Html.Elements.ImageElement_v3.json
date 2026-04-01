@@ -143,5 +143,6 @@
     "exampleProjectId": "OZaVN8",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -101,5 +101,6 @@
     "exampleProjectId": "0Ti2gT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

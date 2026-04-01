@@ -123,5 +123,6 @@
     "exampleProjectId": "uepop4",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

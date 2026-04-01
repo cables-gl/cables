@@ -93,5 +93,6 @@
     "exampleProjectId": "OZaVN8",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

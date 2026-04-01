@@ -33,7 +33,6 @@
     },
     "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -55,5 +54,6 @@
             }
         ]
     },
-    "exampleProjectId": "7E1hqH"
+    "exampleProjectId": "7E1hqH",
+    "isReleased": true
 }

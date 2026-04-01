@@ -21,5 +21,6 @@
     "summary": "positive numbers become negative and vice versa (negate)",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

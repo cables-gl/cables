@@ -41,5 +41,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Get all attributes from an element an object"
+    "summary": "Get all attributes from an element an object",
+    "isReleased": true
 }

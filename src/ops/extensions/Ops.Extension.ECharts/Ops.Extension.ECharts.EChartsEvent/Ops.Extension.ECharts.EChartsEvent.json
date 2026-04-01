@@ -72,7 +72,6 @@
     },
     "summary": "capture echart-library-events",
     "issues": "",
-
     "relatedops": [
         "Ops.Libs.ECharts.ECharts"
     ],
@@ -119,5 +118,6 @@
             }
         ]
     },
-    "exampleProjectId": "iY6lbI"
+    "exampleProjectId": "iY6lbI",
+    "isReleased": true
 }

@@ -44,5 +44,6 @@
     "exampleProjectId": "xjHACp",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

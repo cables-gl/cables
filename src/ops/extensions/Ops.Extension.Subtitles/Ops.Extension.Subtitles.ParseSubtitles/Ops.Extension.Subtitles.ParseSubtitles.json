@@ -47,5 +47,6 @@
         ]
     },
     "summary": "parse srt/vtt subtitle-files",
-    "exampleProjectId": "3rB4t8"
+    "exampleProjectId": "3rB4t8",
+    "isReleased": true
 }

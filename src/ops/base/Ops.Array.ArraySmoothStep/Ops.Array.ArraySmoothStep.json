@@ -29,7 +29,6 @@
     "summary": "Apply a smoothstep function to the contents of an array ",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -50,5 +49,6 @@
             }
         ]
     },
-    "exampleProjectId": "Cyvm7z"
+    "exampleProjectId": "Cyvm7z",
+    "isReleased": true
 }

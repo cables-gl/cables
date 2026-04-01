@@ -43,5 +43,6 @@
         "cgl"
     ],
     "license": "MIT",
-    "summary": "Simple method to generate texture coordinates from object vertex coordinates"
+    "summary": "Simple method to generate texture coordinates from object vertex coordinates",
+    "isReleased": true
 }

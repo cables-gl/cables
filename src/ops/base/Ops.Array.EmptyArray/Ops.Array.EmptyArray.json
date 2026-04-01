@@ -22,5 +22,6 @@
     "summary": "An Empty Array",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

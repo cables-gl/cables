@@ -19,7 +19,6 @@
     },
     "summary": "parses a date and time in iso format and outputs a millisecond timestamp",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -33,5 +32,6 @@
             }
         ]
     },
-    "exampleProjectId": "nsSRrU"
+    "exampleProjectId": "nsSRrU",
+    "isReleased": true
 }

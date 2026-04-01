@@ -70,5 +70,6 @@
         "ports": []
     },
     "caniusequery": "webgpu",
-    "summary": "Load an image file as a texture"
+    "summary": "Load an image file as a texture",
+    "isReleased": true
 }

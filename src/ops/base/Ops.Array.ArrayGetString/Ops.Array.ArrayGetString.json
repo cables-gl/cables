@@ -39,5 +39,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "aHNk8i"
+    "exampleProjectId": "aHNk8i",
+    "isReleased": true
 }

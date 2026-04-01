@@ -65,5 +65,6 @@
             "type": "commonjs"
         }
     ],
-    "exampleProjectId": "TKQIs7"
+    "exampleProjectId": "TKQIs7",
+    "isReleased": true
 }

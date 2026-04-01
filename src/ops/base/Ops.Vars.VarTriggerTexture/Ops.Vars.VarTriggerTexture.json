@@ -41,5 +41,6 @@
                 "text": "textures, geometry, api request returns, etc"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

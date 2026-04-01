@@ -57,5 +57,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "gLrrJV"
+    "exampleProjectId": "gLrrJV",
+    "isReleased": true
 }

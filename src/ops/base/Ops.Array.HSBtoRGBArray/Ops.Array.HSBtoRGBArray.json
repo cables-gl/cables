@@ -60,7 +60,6 @@
     },
     "summary": "Generate an RGBA array from up to 4 arrays (HSBA)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -102,5 +101,6 @@
             }
         ]
     },
-    "exampleProjectId": "jFyRM-"
+    "exampleProjectId": "jFyRM-",
+    "isReleased": true
 }

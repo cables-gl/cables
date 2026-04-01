@@ -51,5 +51,6 @@
             "src": "./rapierpkg_131.js",
             "type": "commonjs"
         }
-    ]
+    ],
+    "isReleased": true
 }

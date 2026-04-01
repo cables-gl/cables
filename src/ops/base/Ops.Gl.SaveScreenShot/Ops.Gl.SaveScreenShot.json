@@ -42,5 +42,6 @@
     "exampleProjectId": "OB0Qmi",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

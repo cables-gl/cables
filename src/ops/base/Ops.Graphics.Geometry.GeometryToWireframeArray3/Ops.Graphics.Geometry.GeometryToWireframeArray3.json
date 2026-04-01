@@ -36,10 +36,10 @@
     },
     "summary": "generate an array of lines from a mesh to render a wireframe",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "r--xve"
+    "exampleProjectId": "r--xve",
+    "isReleased": true
 }

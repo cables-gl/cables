@@ -23,7 +23,6 @@
     },
     "summary": "Allows a trigger to pass only if the gate is open",
     "issues": "",
-
     "youtubeids": [
         "gT1jXP5As9A"
     ],
@@ -44,5 +43,6 @@
         ]
     },
     "exampleProjectId": "xotJAH",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

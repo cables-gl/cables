@@ -180,5 +180,6 @@
             "type": "commonjs"
         }
     ],
-    "libs": []
+    "libs": [],
+    "isReleased": true
 }

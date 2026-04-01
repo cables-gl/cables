@@ -52,5 +52,6 @@
     "summary": "distance between two 3d points",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

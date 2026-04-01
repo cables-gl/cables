@@ -32,5 +32,6 @@
     "summary": "Get data of an animation as arrays",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -47,5 +47,6 @@
             }
         ],
         "portsOut": []
-    }
+    },
+    "isReleased": true
 }

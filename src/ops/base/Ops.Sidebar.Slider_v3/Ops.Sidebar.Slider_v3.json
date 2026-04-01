@@ -102,5 +102,6 @@
     "youtubeids": [
         "cpRVswVdvI0"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

@@ -54,5 +54,6 @@
             "type": "npm",
             "src": "osc"
         }
-    ]
+    ],
+    "isReleased": true
 }

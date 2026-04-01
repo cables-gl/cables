@@ -25,10 +25,10 @@
     },
     "summary": "outputs a unique identifier string",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ryYQwn"
+    "exampleProjectId": "ryYQwn",
+    "isReleased": true
 }

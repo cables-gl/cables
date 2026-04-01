@@ -161,5 +161,6 @@
     "exampleProjectId": "LXN7D-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

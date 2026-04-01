@@ -28,5 +28,6 @@
     "exampleProjectId": "hDWuci",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -21,7 +21,6 @@
     },
     "summary": "convert geometry to only flat triangles without reusing vertices positions",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -34,5 +33,6 @@
             "author": "pandur",
             "date": 1685951144081
         }
-    ]
+    ],
+    "isReleased": true
 }

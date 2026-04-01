@@ -19,5 +19,6 @@
     "summary": "cast an object port to an array port",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

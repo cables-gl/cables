@@ -20,5 +20,6 @@
     "exampleProjectId": "oNMzci",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

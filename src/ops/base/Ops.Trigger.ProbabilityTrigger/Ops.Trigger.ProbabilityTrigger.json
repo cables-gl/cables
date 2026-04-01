@@ -39,7 +39,6 @@
     },
     "summary": "trigger by chance",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -61,5 +60,6 @@
             }
         ]
     },
-    "exampleProjectId": "I61CCu"
+    "exampleProjectId": "I61CCu",
+    "isReleased": true
 }

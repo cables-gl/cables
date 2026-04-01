@@ -93,5 +93,6 @@
     "exampleProjectId": "PWDdQm",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

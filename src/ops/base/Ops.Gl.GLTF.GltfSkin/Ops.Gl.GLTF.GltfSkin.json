@@ -96,5 +96,6 @@
             }
         ]
     },
-    "exampleProjectId": "TWBC-N"
+    "exampleProjectId": "TWBC-N",
+    "isReleased": true
 }

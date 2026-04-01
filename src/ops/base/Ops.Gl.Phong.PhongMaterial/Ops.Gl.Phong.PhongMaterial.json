@@ -97,5 +97,6 @@
     "exampleProjectId": "L3HqYa",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

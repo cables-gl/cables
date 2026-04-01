@@ -25,5 +25,6 @@
     "summary": "get all values of a CSV column as array of strings",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -201,5 +201,6 @@
     "exampleProjectId": "XBGbPO",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

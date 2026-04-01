@@ -42,5 +42,6 @@
     "exampleProjectId": "Zz52On",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

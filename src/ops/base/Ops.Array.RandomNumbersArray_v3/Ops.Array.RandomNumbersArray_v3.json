@@ -72,7 +72,6 @@
         "generator",
         "random"
     ],
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -106,5 +105,6 @@
             }
         ]
     },
-    "exampleProjectId": "hW4mlJ"
+    "exampleProjectId": "hW4mlJ",
+    "isReleased": true
 }

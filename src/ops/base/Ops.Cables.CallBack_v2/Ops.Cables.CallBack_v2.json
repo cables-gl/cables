@@ -47,7 +47,6 @@
     ],
     "summary": "Executes an external function (external javascript)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -60,5 +59,6 @@
                 "text": "Name of the function to call"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

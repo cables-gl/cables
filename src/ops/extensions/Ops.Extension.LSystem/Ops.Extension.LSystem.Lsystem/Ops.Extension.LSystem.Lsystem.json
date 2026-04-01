@@ -227,5 +227,6 @@
     "exampleProjectId": "xk724p",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

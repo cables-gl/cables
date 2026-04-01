@@ -118,5 +118,6 @@
     "exampleProjectId": "t4nrH-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -31,8 +31,6 @@
     },
     "summary": "sends an array via socketcluster/websocket",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -60,5 +58,6 @@
             "author": "stephan",
             "date": 1671003408408
         }
-    ]
+    ],
+    "isReleased": true
 }

@@ -59,7 +59,6 @@
     },
     "summary": "Smooth out changes in values of an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -77,5 +76,6 @@
             }
         ]
     },
-    "exampleProjectId": "BgtGZK"
+    "exampleProjectId": "BgtGZK",
+    "isReleased": true
 }

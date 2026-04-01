@@ -158,5 +158,6 @@
         "colorrick.js"
     ],
     "exampleProjectId": "8-XQ5d",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

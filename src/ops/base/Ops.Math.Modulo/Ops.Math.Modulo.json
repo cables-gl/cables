@@ -45,5 +45,6 @@
                 "text": "This is a handy little helper. If you e.g. use `Modulo` with the time this can be used to prevent *jumps*, the output will then alternate between smaller and bigger values instead of going up, then to zero and back up again."
             }
         ]
-    }
+    },
+    "isReleased": true
 }

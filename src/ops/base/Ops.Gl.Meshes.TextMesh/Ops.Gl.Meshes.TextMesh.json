@@ -89,5 +89,6 @@
     "exampleProjectId": "LzDnH-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

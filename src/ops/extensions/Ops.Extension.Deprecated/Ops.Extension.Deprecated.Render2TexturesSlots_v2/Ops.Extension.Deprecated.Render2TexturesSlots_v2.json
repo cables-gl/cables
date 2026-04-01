@@ -76,5 +76,6 @@
         "cgl_rendertargets",
         "cgl_shadermodifier",
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

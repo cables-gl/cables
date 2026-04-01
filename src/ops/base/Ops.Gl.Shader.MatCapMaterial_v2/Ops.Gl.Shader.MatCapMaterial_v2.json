@@ -151,5 +151,6 @@
     "exampleProjectId": "gWkghi",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

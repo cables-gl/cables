@@ -27,7 +27,6 @@
     },
     "summary": "Generate a random string of given characters",
     "issues": "",
-
     "docs": {
         "ports": []
     },
@@ -40,5 +39,6 @@
     ],
     "caniusequery": "",
     "youtubeids": [],
-    "exampleProjectId": "xtDYx3"
+    "exampleProjectId": "xtDYx3",
+    "isReleased": true
 }

@@ -53,10 +53,10 @@
     },
     "summary": "Generate an array of random numbers",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "hW4mlJ"
+    "exampleProjectId": "hW4mlJ",
+    "isReleased": true
 }

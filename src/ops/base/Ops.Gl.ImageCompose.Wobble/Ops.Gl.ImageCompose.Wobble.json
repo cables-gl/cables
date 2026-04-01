@@ -111,5 +111,6 @@
     "exampleProjectId": "wpgXXG",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -107,5 +107,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "aSWlLu"
+    "exampleProjectId": "aSWlLu",
+    "isReleased": true
 }

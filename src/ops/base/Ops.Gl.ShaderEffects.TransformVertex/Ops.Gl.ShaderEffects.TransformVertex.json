@@ -100,5 +100,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "u1iOhI"
+    "exampleProjectId": "u1iOhI",
+    "isReleased": true
 }

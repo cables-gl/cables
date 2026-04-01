@@ -12,5 +12,6 @@
             }
         ]
     },
-    "summary": "jump to a key in the timeline"
+    "summary": "jump to a key in the timeline",
+    "isReleased": true
 }

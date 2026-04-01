@@ -74,7 +74,6 @@
         ]
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -133,5 +132,6 @@
             "date": 1560506136993
         }
     ],
-    "exampleProjectId": "El3nlJ"
+    "exampleProjectId": "El3nlJ",
+    "isReleased": true
 }

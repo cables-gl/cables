@@ -34,7 +34,6 @@
     },
     "summary": "Set string variable",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -53,5 +52,6 @@
     "coreLibs": [
         "vargetset"
     ],
-    "exampleProjectId": "W14clJ"
+    "exampleProjectId": "W14clJ",
+    "isReleased": true
 }

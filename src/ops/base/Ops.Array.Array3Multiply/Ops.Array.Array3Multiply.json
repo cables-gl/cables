@@ -57,8 +57,6 @@
         ]
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "Ops.Array.Array3xMultiply renamed to Ops.Array.Array3Multiply",
@@ -66,5 +64,6 @@
             "date": 1560412001933
         }
     ],
-    "exampleProjectId": "8FxmVJ"
+    "exampleProjectId": "8FxmVJ",
+    "isReleased": true
 }

@@ -178,5 +178,6 @@
     "exampleProjectId": "L6GbDe",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

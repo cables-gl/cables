@@ -32,7 +32,6 @@
     },
     "summary": "result is true if number 1 is greater or equals number 2",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -51,5 +50,6 @@
     },
     "caniusequery": "",
     "youtubeids": [],
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "isReleased": true
 }

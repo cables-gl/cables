@@ -19,10 +19,9 @@
     },
     "summary": "Parse a string to a integer number / string to number",
     "issues": "",
-
-
     "docs": {
         "ports": []
     },
-    "youtubeids": []
+    "youtubeids": [],
+    "isReleased": true
 }

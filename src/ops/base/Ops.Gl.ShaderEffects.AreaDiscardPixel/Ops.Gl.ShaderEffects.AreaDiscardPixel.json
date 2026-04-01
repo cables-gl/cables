@@ -172,5 +172,6 @@
     "exampleProjectId": "GQiw18",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

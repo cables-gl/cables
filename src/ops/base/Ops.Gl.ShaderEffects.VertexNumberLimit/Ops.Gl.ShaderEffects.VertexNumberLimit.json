@@ -29,5 +29,6 @@
     "exampleProjectId": "gLrrJV",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

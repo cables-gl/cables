@@ -38,5 +38,6 @@
     "summary": "Get the edges of a geometry",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

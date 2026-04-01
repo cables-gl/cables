@@ -35,10 +35,10 @@
     },
     "summary": "Sum up every number in an array with the sum of the previous",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "udsvLu"
+    "exampleProjectId": "udsvLu",
+    "isReleased": true
 }

@@ -110,5 +110,6 @@
             }
         ]
     },
-    "exampleProjectId": "662MM-"
+    "exampleProjectId": "662MM-",
+    "isReleased": true
 }

@@ -165,5 +165,6 @@
     "exampleProjectId": "MybtXU",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

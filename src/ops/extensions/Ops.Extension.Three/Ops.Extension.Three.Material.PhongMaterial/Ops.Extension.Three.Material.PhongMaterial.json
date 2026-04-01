@@ -130,5 +130,6 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "isReleased": true
 }

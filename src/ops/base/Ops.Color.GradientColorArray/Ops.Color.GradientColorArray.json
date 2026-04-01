@@ -167,5 +167,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "xAdV8x"
+    "exampleProjectId": "xAdV8x",
+    "isReleased": true
 }

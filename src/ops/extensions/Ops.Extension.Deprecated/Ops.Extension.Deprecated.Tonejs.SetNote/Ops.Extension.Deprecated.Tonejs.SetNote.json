@@ -22,7 +22,6 @@
         ]
     },
     "summary": "Change current note of connected instrument",
-    "changelog": [
-
-    ]
+    "changelog": [],
+    "isReleased": true
 }

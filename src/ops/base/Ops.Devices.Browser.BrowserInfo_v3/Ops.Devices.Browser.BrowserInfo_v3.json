@@ -202,5 +202,6 @@
         ]
     },
     "exampleProjectId": "YOJiIk",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

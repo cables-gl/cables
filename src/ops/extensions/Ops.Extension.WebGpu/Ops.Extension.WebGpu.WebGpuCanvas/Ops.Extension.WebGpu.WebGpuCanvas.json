@@ -93,5 +93,6 @@
     ],
     "exampleProjectId": "ALyYKB",
     "caniusequery": "webgpu",
-    "summary": "Create a canvas for WebGPU"
+    "summary": "Create a canvas for WebGPU",
+    "isReleased": true
 }

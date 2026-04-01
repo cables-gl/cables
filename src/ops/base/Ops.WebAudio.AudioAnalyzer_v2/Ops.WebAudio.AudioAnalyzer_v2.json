@@ -158,5 +158,6 @@
     "exampleProjectId": "h2eBh-",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

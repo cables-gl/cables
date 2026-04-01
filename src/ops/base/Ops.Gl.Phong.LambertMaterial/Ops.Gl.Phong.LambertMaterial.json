@@ -62,5 +62,6 @@
     "exampleProjectId": "PAvm26",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

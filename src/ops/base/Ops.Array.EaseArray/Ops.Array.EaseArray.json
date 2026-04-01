@@ -46,10 +46,10 @@
     "summary": "Apply easing curve to numbers in an array",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Mbwkf6",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

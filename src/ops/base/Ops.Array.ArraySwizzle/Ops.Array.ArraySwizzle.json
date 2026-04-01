@@ -115,5 +115,6 @@
         "ports": []
     },
     "exampleProjectId": "MFv6cy",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

@@ -60,5 +60,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "3fOpvs"
+    "exampleProjectId": "3fOpvs",
+    "isReleased": true
 }

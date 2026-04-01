@@ -87,5 +87,6 @@
     "exampleProjectId": "HLViQ6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

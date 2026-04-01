@@ -66,5 +66,6 @@
             }
         ]
     },
-    "exampleProjectId": "gDR7w4"
+    "exampleProjectId": "gDR7w4",
+    "isReleased": true
 }

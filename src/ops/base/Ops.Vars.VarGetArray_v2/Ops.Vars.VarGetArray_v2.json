@@ -19,7 +19,6 @@
     },
     "summary": "Get a variable array",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
@@ -29,5 +28,6 @@
     "coreLibs": [
         "vargetset"
     ],
-    "exampleProjectId": "3LkNp6"
+    "exampleProjectId": "3LkNp6",
+    "isReleased": true
 }

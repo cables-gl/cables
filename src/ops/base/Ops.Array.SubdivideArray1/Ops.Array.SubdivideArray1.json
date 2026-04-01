@@ -40,7 +40,6 @@
     },
     "summary": "For subdividing splines, smoothing lines using cubic bezier interpolation",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -62,5 +61,6 @@
             }
         ]
     },
-    "exampleProjectId": "RJiCqH"
+    "exampleProjectId": "RJiCqH",
+    "isReleased": true
 }

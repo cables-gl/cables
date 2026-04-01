@@ -52,5 +52,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Takes the per-glyph SVG paths and positions arrays and reconstructs a single combined SVG path string, ready for triangulation"
+    "summary": "Takes the per-glyph SVG paths and positions arrays and reconstructs a single combined SVG path string, ready for triangulation",
+    "isReleased": true
 }

@@ -57,5 +57,6 @@
         ]
     },
     "exampleProjectId": "VFAfgg",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

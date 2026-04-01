@@ -37,5 +37,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ls8ciO"
+    "exampleProjectId": "ls8ciO",
+    "isReleased": true
 }

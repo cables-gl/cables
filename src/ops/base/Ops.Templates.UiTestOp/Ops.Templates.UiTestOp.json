@@ -127,5 +127,6 @@
         "ports": []
     },
     "exampleProjectId": "RUUacI",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

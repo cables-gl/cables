@@ -168,5 +168,6 @@
     "exampleProjectId": "sfikWi",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

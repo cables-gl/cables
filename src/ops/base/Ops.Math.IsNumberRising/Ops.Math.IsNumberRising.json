@@ -32,10 +32,10 @@
     },
     "summary": "detect if a number rising or falling ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "UN11cI"
+    "exampleProjectId": "UN11cI",
+    "isReleased": true
 }

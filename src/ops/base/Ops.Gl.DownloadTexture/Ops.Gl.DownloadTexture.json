@@ -52,5 +52,6 @@
     "exampleProjectId": "15LaTs",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

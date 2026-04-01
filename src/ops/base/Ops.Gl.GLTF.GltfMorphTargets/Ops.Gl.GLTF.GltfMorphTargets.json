@@ -74,5 +74,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

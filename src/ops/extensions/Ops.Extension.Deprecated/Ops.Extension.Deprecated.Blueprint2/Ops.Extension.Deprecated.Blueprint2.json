@@ -42,5 +42,6 @@
     "summary": "Template code for blueprint ops",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

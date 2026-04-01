@@ -125,5 +125,6 @@
     "exampleProjectId": "kj_Zbx",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

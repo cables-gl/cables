@@ -142,5 +142,6 @@
             }
         ]
     },
-    "exampleProjectId": "_o2Mue"
+    "exampleProjectId": "_o2Mue",
+    "isReleased": true
 }

@@ -53,10 +53,10 @@
     },
     "summary": "Pack multiple arrays into a new array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "fT3AeT"
+    "exampleProjectId": "fT3AeT",
+    "isReleased": true
 }

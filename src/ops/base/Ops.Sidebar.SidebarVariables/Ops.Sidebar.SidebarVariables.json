@@ -39,10 +39,10 @@
     ],
     "summary": "show values of all variables in a sidebar",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "H2kYgL"
+    "exampleProjectId": "H2kYgL",
+    "isReleased": true
 }

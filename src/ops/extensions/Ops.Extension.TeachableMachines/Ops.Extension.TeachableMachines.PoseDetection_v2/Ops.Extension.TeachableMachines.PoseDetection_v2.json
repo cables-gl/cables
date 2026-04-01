@@ -88,8 +88,6 @@
         "teachablemachine_tf_speech_image_pose.js"
     ],
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -135,5 +133,6 @@
             }
         ]
     },
-    "exampleProjectId": "xOStrn"
+    "exampleProjectId": "xOStrn",
+    "isReleased": true
 }

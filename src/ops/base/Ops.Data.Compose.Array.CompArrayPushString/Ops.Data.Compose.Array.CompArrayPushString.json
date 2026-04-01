@@ -54,5 +54,6 @@
     "summary": "push/append a string to an array",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -49,5 +49,6 @@
         "ports": []
     },
     "exampleProjectId": "KEDALu",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

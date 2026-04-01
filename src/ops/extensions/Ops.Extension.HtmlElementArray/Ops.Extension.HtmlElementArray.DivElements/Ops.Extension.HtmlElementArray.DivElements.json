@@ -82,5 +82,6 @@
     "summary": "create an array of div elements",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

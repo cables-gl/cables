@@ -62,5 +62,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "lmn5Og"
+    "exampleProjectId": "lmn5Og",
+    "isReleased": true
 }

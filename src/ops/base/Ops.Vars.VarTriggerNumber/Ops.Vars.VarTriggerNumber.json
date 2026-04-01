@@ -50,5 +50,6 @@
         "ports": []
     },
     "exampleProjectId": "JEYSfE",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

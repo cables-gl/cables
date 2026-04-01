@@ -28,10 +28,10 @@
     },
     "summary": "creates a mailto: link to open the default email app",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ilts7O"
+    "exampleProjectId": "ilts7O",
+    "isReleased": true
 }

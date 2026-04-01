@@ -111,5 +111,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "GQiw18"
+    "exampleProjectId": "GQiw18",
+    "isReleased": true
 }

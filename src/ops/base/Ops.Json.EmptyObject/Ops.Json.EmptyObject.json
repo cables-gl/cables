@@ -29,5 +29,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "piMxeG"
+    "exampleProjectId": "piMxeG",
+    "isReleased": true
 }

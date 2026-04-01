@@ -85,5 +85,6 @@
         "ports": []
     },
     "exampleProjectId": "nMBUVW",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

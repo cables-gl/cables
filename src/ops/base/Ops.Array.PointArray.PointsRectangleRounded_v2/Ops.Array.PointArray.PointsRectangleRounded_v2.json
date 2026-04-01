@@ -128,5 +128,6 @@
     "exampleProjectId": "A7nLgQ",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

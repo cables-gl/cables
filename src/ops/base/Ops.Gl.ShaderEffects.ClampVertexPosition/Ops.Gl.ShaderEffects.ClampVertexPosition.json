@@ -46,5 +46,6 @@
     "exampleProjectId": "RP4O73",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

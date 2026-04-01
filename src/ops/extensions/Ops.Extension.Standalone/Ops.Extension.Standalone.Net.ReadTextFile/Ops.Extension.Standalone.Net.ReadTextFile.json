@@ -59,5 +59,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "PT9Aun"
+    "exampleProjectId": "PT9Aun",
+    "isReleased": true
 }

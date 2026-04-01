@@ -146,5 +146,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "UyQDCu"
+    "exampleProjectId": "UyQDCu",
+    "isReleased": true
 }

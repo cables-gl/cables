@@ -172,5 +172,6 @@
             }
         ]
     },
-    "exampleProjectId": "auVl18"
+    "exampleProjectId": "auVl18",
+    "isReleased": true
 }

@@ -66,5 +66,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Applies a force to bodies"
+    "summary": "Applies a force to bodies",
+    "isReleased": true
 }

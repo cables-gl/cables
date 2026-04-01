@@ -45,5 +45,6 @@
     "exampleProjectId": "yrOJve",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

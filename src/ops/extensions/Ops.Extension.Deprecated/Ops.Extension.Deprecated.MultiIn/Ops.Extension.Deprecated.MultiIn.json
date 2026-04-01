@@ -62,5 +62,6 @@
     ],
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

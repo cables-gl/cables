@@ -71,5 +71,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "tI0COg"
+    "exampleProjectId": "tI0COg",
+    "isReleased": true
 }

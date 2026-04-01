@@ -98,5 +98,6 @@
     "exampleProjectId": "H3cEpX",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

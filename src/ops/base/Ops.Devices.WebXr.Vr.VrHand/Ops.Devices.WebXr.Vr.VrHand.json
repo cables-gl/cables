@@ -85,5 +85,6 @@
     ],
     "license": "MIT",
     "summary": "Get webXr detected hand data",
-    "exampleProjectId": "fy8r9a"
+    "exampleProjectId": "fy8r9a",
+    "isReleased": true
 }

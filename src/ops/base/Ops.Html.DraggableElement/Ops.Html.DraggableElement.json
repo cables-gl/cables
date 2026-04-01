@@ -43,5 +43,6 @@
     "exampleProjectId": "WSi9iO",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

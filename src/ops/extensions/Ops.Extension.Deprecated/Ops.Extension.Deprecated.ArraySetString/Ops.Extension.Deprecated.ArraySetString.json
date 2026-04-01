@@ -69,5 +69,6 @@
             }
         ]
     },
-    "exampleProjectId": "Rjoave"
+    "exampleProjectId": "Rjoave",
+    "isReleased": true
 }

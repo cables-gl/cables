@@ -35,7 +35,6 @@
             }
         ]
     },
-    "changelog": [
-
-    ]
+    "changelog": [],
+    "isReleased": true
 }

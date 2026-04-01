@@ -44,7 +44,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -52,5 +51,6 @@
             "author": "stephan",
             "date": 1643888105549
         }
-    ]
+    ],
+    "isReleased": true
 }

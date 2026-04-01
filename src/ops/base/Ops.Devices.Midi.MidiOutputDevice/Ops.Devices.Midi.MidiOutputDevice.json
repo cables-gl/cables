@@ -69,5 +69,6 @@
     },
     "caniusequery": "Web MIDI API",
     "exampleProjectId": "VbaQXU",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

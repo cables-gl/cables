@@ -62,5 +62,6 @@
         ]
     },
     "exampleProjectId": "QKe58i",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

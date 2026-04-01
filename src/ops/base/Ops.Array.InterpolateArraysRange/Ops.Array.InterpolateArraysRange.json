@@ -49,7 +49,6 @@
         ]
     },
     "summary": "Interpolate between two arrays, only a few numbers at the same time",
-
     "docs": {
         "ports": []
     },
@@ -62,5 +61,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "3GIOe6"
+    "exampleProjectId": "3GIOe6",
+    "isReleased": true
 }

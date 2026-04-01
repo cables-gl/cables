@@ -84,5 +84,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Detect intersections of a ray against physic objects"
+    "summary": "Detect intersections of a ray against physic objects",
+    "isReleased": true
 }

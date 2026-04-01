@@ -52,5 +52,6 @@
     "summary": "Create a geometry from array data",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

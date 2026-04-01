@@ -24,5 +24,6 @@
     "summary": "overwrite timeline time value",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

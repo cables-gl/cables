@@ -52,5 +52,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "NxGysh"
+    "exampleProjectId": "NxGysh",
+    "isReleased": true
 }

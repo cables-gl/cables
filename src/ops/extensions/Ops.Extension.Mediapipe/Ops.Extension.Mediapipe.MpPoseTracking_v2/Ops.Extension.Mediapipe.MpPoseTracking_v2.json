@@ -139,5 +139,6 @@
         "cgl"
     ],
     "cloneOf": "279774b0-9897-4f36-840e-5f823cfc988a",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

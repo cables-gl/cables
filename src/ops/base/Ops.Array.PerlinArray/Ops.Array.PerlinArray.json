@@ -52,7 +52,6 @@
     ],
     "summary": "Create an array filled with Perlin noise values",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -86,5 +85,6 @@
             }
         ]
     },
-    "exampleProjectId": "Vm8fhL"
+    "exampleProjectId": "Vm8fhL",
+    "isReleased": true
 }

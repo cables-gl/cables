@@ -113,5 +113,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "8RexP8"
+    "exampleProjectId": "8RexP8",
+    "isReleased": true
 }

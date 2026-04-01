@@ -37,7 +37,6 @@
     },
     "summary": "Copy an array with a trigger, reset to use a default array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -63,5 +62,6 @@
             }
         ]
     },
-    "exampleProjectId": "JqSoH-"
+    "exampleProjectId": "JqSoH-",
+    "isReleased": true
 }

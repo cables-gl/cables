@@ -28,10 +28,9 @@
             }
         ]
     },
-
-
     "exampleProjectId": "",
     "issues": "",
     "caniusequery": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "isReleased": true
 }

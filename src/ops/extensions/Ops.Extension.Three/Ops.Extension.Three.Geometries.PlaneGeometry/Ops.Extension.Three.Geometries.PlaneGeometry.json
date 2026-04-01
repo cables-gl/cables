@@ -71,5 +71,6 @@
                 "text": "The number of segments along the Y axis"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

@@ -125,5 +125,6 @@
     "summary": "uses mespeak.js to convert text-to-speech",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

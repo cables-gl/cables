@@ -45,10 +45,9 @@
         ]
     },
     "summary": "Remove a Property from an Object by Key",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "piMxeG"
+    "exampleProjectId": "piMxeG",
+    "isReleased": true
 }

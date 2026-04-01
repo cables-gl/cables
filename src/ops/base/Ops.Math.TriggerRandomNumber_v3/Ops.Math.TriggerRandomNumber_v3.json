@@ -68,5 +68,6 @@
         "ports": []
     },
     "exampleProjectId": "s3FP7f",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

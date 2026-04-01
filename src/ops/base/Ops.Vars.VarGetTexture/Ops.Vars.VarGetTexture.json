@@ -33,5 +33,6 @@
             }
         ]
     },
-    "exampleProjectId": "lkS998"
+    "exampleProjectId": "lkS998",
+    "isReleased": true
 }

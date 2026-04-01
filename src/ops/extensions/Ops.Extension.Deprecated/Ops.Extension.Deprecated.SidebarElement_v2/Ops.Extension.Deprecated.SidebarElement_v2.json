@@ -67,5 +67,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "CQrFox"
+    "exampleProjectId": "CQrFox",
+    "isReleased": true
 }

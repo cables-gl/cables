@@ -70,10 +70,10 @@
     "summary": "FxHash simulator / generator of seeded random numbers",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "dnDl82",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

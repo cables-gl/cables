@@ -61,5 +61,6 @@
     },
     "coreLibs": [
         "minigpu"
-    ]
+    ],
+    "isReleased": true
 }

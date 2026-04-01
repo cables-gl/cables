@@ -110,5 +110,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "d1NUet"
+    "exampleProjectId": "d1NUet",
+    "isReleased": true
 }

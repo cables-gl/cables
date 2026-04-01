@@ -113,5 +113,6 @@
     "exampleProjectId": "dK8td8",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

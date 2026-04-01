@@ -95,5 +95,6 @@
     },
     "exampleProjectId": "WwXZKB",
     "caniusequery": "webgpu",
-    "summary": "Image based material that uses a matcap environment texture"
+    "summary": "Image based material that uses a matcap environment texture",
+    "isReleased": true
 }

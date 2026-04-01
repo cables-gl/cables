@@ -81,5 +81,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "Tapku1"
+    "exampleProjectId": "Tapku1",
+    "isReleased": true
 }

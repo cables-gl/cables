@@ -96,5 +96,6 @@
     "license": "MIT",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

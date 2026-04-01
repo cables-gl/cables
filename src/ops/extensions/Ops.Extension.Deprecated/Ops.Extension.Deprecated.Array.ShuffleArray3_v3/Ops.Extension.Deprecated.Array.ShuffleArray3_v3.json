@@ -40,5 +40,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "tbdwsh"
+    "exampleProjectId": "tbdwsh",
+    "isReleased": true
 }

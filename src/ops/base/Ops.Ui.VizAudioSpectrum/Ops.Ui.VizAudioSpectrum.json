@@ -57,5 +57,6 @@
     "summary": "Vizualize an audionode object spectrum",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

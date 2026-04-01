@@ -63,10 +63,10 @@
     },
     "summary": "Merge multiple arrays - in consecutive order",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "P7siGA"
+    "exampleProjectId": "P7siGA",
+    "isReleased": true
 }

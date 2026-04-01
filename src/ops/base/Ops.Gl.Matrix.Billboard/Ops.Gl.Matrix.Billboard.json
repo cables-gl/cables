@@ -23,5 +23,6 @@
     "exampleProjectId": "GVpkrq",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

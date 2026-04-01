@@ -150,5 +150,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "oOsjJ5"
+    "exampleProjectId": "oOsjJ5",
+    "isReleased": true
 }

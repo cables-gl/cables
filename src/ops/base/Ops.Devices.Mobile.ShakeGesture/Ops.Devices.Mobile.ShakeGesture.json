@@ -37,9 +37,9 @@
     },
     "summary": "Reads the accelerometer data from a mobile device",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -42,7 +42,6 @@
     },
     "summary": "Pack two individual arrays into a new array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -72,5 +71,6 @@
             }
         ]
     },
-    "exampleProjectId": "WaPiSP"
+    "exampleProjectId": "WaPiSP",
+    "isReleased": true
 }

@@ -116,5 +116,6 @@
     "exampleProjectId": "RZsPWU",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

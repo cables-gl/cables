@@ -58,5 +58,6 @@
         "ports": []
     },
     "exampleProjectId": "yJPMCV",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

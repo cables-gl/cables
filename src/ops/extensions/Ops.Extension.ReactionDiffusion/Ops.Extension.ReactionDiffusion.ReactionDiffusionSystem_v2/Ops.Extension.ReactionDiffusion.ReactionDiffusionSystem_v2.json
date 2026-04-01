@@ -141,5 +141,6 @@
     "exampleProjectId": "XLCybk",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

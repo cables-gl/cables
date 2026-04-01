@@ -30,7 +30,6 @@
     "summary": "Convert an array to a string, divided by a separator",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -47,5 +46,6 @@
             }
         ]
     },
-    "exampleProjectId": "U4M4J5"
+    "exampleProjectId": "U4M4J5",
+    "isReleased": true
 }

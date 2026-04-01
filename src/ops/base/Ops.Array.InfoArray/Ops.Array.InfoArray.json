@@ -28,7 +28,6 @@
     "authorName": "pandur",
     "id": "1db230c8-212f-4679-87d6-3531659363da",
     "created": 1542698747467,
-
     "docs": {
         "ports": [
             {
@@ -59,5 +58,6 @@
     "issues": "",
     "youtubeids": [],
     "libs": [],
-    "exampleProjectId": "qySZQx"
+    "exampleProjectId": "qySZQx",
+    "isReleased": true
 }

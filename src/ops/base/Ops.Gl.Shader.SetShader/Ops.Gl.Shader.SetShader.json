@@ -28,5 +28,6 @@
     "exampleProjectId": "BweOVl",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

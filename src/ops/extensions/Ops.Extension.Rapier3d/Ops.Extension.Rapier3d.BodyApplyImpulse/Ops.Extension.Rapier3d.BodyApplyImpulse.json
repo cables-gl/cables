@@ -66,5 +66,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Applies an impulse to bodies"
+    "summary": "Applies an impulse to bodies",
+    "isReleased": true
 }

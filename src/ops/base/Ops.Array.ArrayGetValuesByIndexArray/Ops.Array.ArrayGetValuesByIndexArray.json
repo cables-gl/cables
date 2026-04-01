@@ -33,8 +33,6 @@
     "authorName": "kikohs",
     "created": 1678108947352,
     "summary": "Pick values from input array at given indices and stride",
-
-
     "docs": {
         "ports": [
             {
@@ -74,5 +72,6 @@
             }
         ]
     },
-    "exampleProjectId": "bOBgTq"
+    "exampleProjectId": "bOBgTq",
+    "isReleased": true
 }

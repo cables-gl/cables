@@ -44,5 +44,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "mCTLrh"
+    "exampleProjectId": "mCTLrh",
+    "isReleased": true
 }

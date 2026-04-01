@@ -61,5 +61,6 @@
     "exampleProjectId": "NT30kP",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -32,10 +32,10 @@
     },
     "summary": "return fraction of value by index",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "SV3NPO"
+    "exampleProjectId": "SV3NPO",
+    "isReleased": true
 }

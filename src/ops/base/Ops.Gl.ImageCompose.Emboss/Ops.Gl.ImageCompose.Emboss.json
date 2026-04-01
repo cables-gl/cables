@@ -48,5 +48,6 @@
     "exampleProjectId": "xsRcay",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

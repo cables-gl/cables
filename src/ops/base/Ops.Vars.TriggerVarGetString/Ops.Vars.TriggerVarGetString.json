@@ -22,7 +22,6 @@
     },
     "summary": "Get a string variable value at time of trigger",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
@@ -56,5 +55,6 @@
             "author": "stephan",
             "date": 1691138636639
         }
-    ]
+    ],
+    "isReleased": true
 }

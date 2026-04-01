@@ -67,5 +67,6 @@
     "exampleProjectId": "-GNBD-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

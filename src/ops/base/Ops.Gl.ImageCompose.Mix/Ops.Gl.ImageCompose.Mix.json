@@ -40,5 +40,6 @@
     "exampleProjectId": "CDaQK2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -34,5 +34,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "xFKQet"
+    "exampleProjectId": "xFKQet",
+    "isReleased": true
 }

@@ -64,5 +64,6 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

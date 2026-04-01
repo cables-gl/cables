@@ -50,5 +50,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gAdSN8"
+    "exampleProjectId": "gAdSN8",
+    "isReleased": true
 }

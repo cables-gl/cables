@@ -113,5 +113,6 @@
         "ports": []
     },
     "exampleProjectId": "Fgz9lb",
-    "summary": "Loads a font file, parses it with fontkit.js, and lays out a text string into individual glyph outlines."
+    "summary": "Loads a font file, parses it with fontkit.js, and lays out a text string into individual glyph outlines.",
+    "isReleased": true
 }

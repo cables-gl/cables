@@ -35,10 +35,10 @@
     },
     "summary": "outputs true if being triggered last frame",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "kmXCm6"
+    "exampleProjectId": "kmXCm6",
+    "isReleased": true
 }

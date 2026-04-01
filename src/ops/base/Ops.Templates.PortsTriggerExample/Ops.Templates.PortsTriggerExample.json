@@ -24,5 +24,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "rWJICn"
+    "exampleProjectId": "rWJICn",
+    "isReleased": true
 }

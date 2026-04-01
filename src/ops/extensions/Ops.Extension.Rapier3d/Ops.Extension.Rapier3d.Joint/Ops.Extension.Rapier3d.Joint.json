@@ -112,5 +112,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Physics Joints: Revolute/Hinge, Prismapic,Spherical/Pendulum"
+    "summary": "Physics Joints: Revolute/Hinge, Prismapic,Spherical/Pendulum",
+    "isReleased": true
 }

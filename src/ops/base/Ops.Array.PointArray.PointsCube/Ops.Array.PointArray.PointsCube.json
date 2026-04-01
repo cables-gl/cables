@@ -103,5 +103,6 @@
         "tVphEMCXDb4"
     ],
     "exampleProjectId": "_SC2JB",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

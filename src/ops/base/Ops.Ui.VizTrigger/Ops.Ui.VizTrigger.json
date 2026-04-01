@@ -55,5 +55,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ROKBEe"
+    "exampleProjectId": "ROKBEe",
+    "isReleased": true
 }

@@ -61,5 +61,6 @@
     "exampleProjectId": "FiJsxn",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

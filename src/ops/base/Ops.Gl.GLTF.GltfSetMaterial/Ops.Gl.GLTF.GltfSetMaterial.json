@@ -57,5 +57,6 @@
     "exampleProjectId": "Mk3Dv2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

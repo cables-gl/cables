@@ -148,5 +148,6 @@
     },
     "summary": "Convert vertices of a geometry to a data texture",
     "youtubeid": "PrkdnENo8wQ,",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

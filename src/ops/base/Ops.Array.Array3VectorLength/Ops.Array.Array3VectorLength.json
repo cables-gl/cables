@@ -46,5 +46,6 @@
     "exampleProjectId": "L9tsRJ",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

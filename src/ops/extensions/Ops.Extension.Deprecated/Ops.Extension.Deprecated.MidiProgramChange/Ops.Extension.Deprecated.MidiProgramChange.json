@@ -58,5 +58,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

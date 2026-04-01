@@ -73,5 +73,6 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -47,7 +47,6 @@
     },
     "summary": "steps through numerical or array values one by one",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -85,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "DLV0n6"
+    "exampleProjectId": "DLV0n6",
+    "isReleased": true
 }

@@ -67,5 +67,6 @@
     "exampleProjectId": "Hx09v4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

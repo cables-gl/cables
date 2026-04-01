@@ -149,5 +149,6 @@
     "summary": "Spawn new physics bodies by triggering",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

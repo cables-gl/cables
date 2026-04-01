@@ -115,5 +115,6 @@
             }
         ]
     },
-    "exampleProjectId": "e02kYa"
+    "exampleProjectId": "e02kYa",
+    "isReleased": true
 }

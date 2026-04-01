@@ -42,5 +42,6 @@
     "exampleProjectId": "u2vAu1",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

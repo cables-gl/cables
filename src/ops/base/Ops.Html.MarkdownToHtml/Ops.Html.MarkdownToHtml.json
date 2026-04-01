@@ -43,5 +43,6 @@
     },
     "exampleProjectId": "52Zlij",
     "authorName": "stephan",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

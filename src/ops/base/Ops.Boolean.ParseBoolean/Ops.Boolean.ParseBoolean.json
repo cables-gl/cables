@@ -30,5 +30,6 @@
                 "text": "The input value as a boolean value"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

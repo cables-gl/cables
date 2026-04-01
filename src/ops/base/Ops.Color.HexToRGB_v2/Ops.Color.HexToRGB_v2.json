@@ -50,5 +50,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "IBX1ft"
+    "exampleProjectId": "IBX1ft",
+    "isReleased": true
 }

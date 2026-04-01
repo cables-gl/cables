@@ -100,7 +100,6 @@
     },
     "summary": "Reports the browser being used",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -110,5 +109,6 @@
             }
         ]
     },
-    "exampleProjectId": "YOJiIk"
+    "exampleProjectId": "YOJiIk",
+    "isReleased": true
 }

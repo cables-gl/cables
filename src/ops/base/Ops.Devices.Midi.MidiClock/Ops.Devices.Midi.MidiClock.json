@@ -141,5 +141,6 @@
             }
         ]
     },
-    "exampleProjectId": "dfF3DI"
+    "exampleProjectId": "dfF3DI",
+    "isReleased": true
 }

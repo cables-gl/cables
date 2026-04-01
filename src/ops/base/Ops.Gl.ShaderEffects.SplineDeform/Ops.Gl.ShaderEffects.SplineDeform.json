@@ -49,5 +49,6 @@
     "exampleProjectId": "F-UNZ4",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

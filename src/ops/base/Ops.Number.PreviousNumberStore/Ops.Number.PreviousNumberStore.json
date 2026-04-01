@@ -28,7 +28,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "exampleProjectId": "XhZWfo",
     "changelog": [
@@ -38,5 +37,6 @@
             "author": "pandur",
             "date": 1701852786897
         }
-    ]
+    ],
+    "isReleased": true
 }

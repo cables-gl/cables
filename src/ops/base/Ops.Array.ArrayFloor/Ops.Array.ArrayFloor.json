@@ -1,8 +1,6 @@
 {
     "summary": "Round numbers down",
     "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -33,5 +31,6 @@
         ]
     },
     "youtubeids": [],
-    "exampleProjectId": "7xdJrG"
+    "exampleProjectId": "7xdJrG",
+    "isReleased": true
 }

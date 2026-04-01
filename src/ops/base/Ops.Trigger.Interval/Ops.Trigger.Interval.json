@@ -41,5 +41,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "ZdvX7i"
+    "exampleProjectId": "ZdvX7i",
+    "isReleased": true
 }

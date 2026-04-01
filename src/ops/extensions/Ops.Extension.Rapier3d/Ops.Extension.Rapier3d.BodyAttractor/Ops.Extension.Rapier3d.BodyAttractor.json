@@ -71,5 +71,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Applies an attraction force to a physics body"
+    "summary": "Applies an attraction force to a physics body",
+    "isReleased": true
 }

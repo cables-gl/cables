@@ -30,5 +30,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "BaFBnO"
+    "exampleProjectId": "BaFBnO",
+    "isReleased": true
 }

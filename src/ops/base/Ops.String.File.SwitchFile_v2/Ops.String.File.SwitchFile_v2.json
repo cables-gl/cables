@@ -112,5 +112,6 @@
         "TdHgjqOLpnM"
     ],
     "license": "MIT",
-    "exampleProjectId": "unutii"
+    "exampleProjectId": "unutii",
+    "isReleased": true
 }

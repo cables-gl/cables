@@ -221,5 +221,6 @@
     "exampleProjectId": "hY5lAw",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -53,5 +53,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "VYPlJ5"
+    "exampleProjectId": "VYPlJ5",
+    "isReleased": true
 }

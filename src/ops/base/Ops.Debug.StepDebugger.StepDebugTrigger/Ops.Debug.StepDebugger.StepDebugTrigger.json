@@ -41,5 +41,6 @@
     "summary": "Debug what happens when a trigger happens",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

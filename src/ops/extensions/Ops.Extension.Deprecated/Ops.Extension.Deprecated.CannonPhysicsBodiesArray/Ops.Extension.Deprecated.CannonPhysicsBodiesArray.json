@@ -134,5 +134,6 @@
     "exampleProjectId": "-O4Ive",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

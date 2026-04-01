@@ -49,5 +49,6 @@
     },
     "youtubeids": [],
     "exampleProjectId": "9UM2YG",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

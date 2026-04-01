@@ -43,7 +43,6 @@
     },
     "summary": "Performs logical comparisons on numbers (compare, operators)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -73,5 +72,6 @@
             }
         ]
     },
-    "exampleProjectId": "54YpN-"
+    "exampleProjectId": "54YpN-",
+    "isReleased": true
 }

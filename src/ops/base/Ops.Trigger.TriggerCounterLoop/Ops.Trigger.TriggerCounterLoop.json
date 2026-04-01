@@ -38,7 +38,6 @@
     "summary": "Increments with each trigger and loops depending on min and max loop values.",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -74,5 +73,6 @@
             "date": 1643887814335
         }
     ],
-    "exampleProjectId": "V8TekF"
+    "exampleProjectId": "V8TekF",
+    "isReleased": true
 }

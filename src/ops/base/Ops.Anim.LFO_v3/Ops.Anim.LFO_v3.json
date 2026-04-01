@@ -62,5 +62,6 @@
         "ports": []
     },
     "summary": "Low-frequency oscillation for animations",
-    "exampleProjectId": "9EOrS8"
+    "exampleProjectId": "9EOrS8",
+    "isReleased": true
 }

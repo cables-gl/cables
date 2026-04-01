@@ -31,5 +31,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "yU2Pet"
+    "exampleProjectId": "yU2Pet",
+    "isReleased": true
 }

@@ -123,5 +123,6 @@
     "exampleProjectId": "gsXwVJ",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

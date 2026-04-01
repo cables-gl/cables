@@ -34,7 +34,6 @@
     "summary": "send an object to a websocket connection",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
@@ -45,5 +44,6 @@
             "author": "stephan",
             "date": 1660809267338
         }
-    ]
+    ],
+    "isReleased": true
 }

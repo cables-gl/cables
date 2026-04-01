@@ -179,5 +179,6 @@
     "exampleProjectId": "nEKhbI",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

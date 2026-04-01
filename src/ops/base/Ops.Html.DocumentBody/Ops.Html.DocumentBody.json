@@ -23,5 +23,6 @@
     "summary": "Outputs the current document body element",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

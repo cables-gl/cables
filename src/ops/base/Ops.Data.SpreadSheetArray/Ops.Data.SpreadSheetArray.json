@@ -77,5 +77,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "wDITt1"
+    "exampleProjectId": "wDITt1",
+    "isReleased": true
 }

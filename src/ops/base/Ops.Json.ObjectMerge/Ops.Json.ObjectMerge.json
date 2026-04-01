@@ -34,10 +34,9 @@
         ]
     },
     "summary": "merge key+values of two objects",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "LNJHeG"
+    "exampleProjectId": "LNJHeG",
+    "isReleased": true
 }

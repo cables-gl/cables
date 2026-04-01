@@ -31,5 +31,6 @@
                 "text": "`true` if `Number` is even, `false` otherwise."
             }
         ]
-    }
+    },
+    "isReleased": true
 }

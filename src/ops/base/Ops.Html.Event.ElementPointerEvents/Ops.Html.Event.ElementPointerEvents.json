@@ -99,5 +99,6 @@
     "docs": {
         "ports": []
     },
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

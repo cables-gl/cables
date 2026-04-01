@@ -14,5 +14,6 @@
     "summary": "Helper op for sub-patches",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

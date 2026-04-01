@@ -104,5 +104,6 @@
         "cgl",
         "webaudio"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

@@ -40,5 +40,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "UWCvS8"
+    "exampleProjectId": "UWCvS8",
+    "isReleased": true
 }

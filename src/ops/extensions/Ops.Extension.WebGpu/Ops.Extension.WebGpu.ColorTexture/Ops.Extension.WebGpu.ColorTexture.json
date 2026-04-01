@@ -63,5 +63,6 @@
     "exampleProjectId": "13IW3I",
     "coreLibs": [
         "cgp"
-    ]
+    ],
+    "isReleased": true
 }

@@ -33,5 +33,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "SZdOet"
+    "exampleProjectId": "SZdOet",
+    "isReleased": true
 }

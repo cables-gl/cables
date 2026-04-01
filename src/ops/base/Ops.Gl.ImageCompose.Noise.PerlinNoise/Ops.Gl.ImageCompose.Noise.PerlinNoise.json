@@ -147,5 +147,6 @@
     "exampleProjectId": "zfzmT6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

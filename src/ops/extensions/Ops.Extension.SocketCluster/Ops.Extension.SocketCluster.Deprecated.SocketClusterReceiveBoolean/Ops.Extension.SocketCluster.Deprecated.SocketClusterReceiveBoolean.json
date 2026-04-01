@@ -31,8 +31,6 @@
     },
     "summary": "Receive boolean value from the socketcluster socket/topic",
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -64,5 +62,6 @@
             "author": "stephan",
             "date": 1671003644347
         }
-    ]
+    ],
+    "isReleased": true
 }

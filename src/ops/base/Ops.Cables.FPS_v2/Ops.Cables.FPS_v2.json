@@ -31,5 +31,6 @@
     "exampleProjectId": "KhFA8i",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

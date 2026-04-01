@@ -95,5 +95,6 @@
         "ports": []
     },
     "caniusequery": "webgpu",
-    "summary": "A simple material without shading"
+    "summary": "A simple material without shading",
+    "isReleased": true
 }

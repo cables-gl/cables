@@ -141,5 +141,6 @@
                 "text": "Enables detailed eyes and lips landmarks and adds landmarks for iris"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

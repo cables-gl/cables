@@ -56,7 +56,6 @@
     "libs": [],
     "summary": "Perform date calculations",
     "issues": "There is a dependency on moment.js, but it's not used. I can't find where to remove the dependency",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -86,5 +85,6 @@
             }
         ]
     },
-    "exampleProjectId": "mzfGGl"
+    "exampleProjectId": "mzfGGl",
+    "isReleased": true
 }

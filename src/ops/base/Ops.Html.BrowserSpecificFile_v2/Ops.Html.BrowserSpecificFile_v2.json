@@ -97,5 +97,6 @@
             }
         ]
     },
-    "exampleProjectId": "CfJkIk"
+    "exampleProjectId": "CfJkIk",
+    "isReleased": true
 }

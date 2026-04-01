@@ -34,5 +34,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gu7DBo"
+    "exampleProjectId": "gu7DBo",
+    "isReleased": true
 }

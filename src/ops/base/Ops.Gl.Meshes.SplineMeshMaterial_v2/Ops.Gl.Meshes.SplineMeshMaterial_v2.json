@@ -117,5 +117,6 @@
     "exampleProjectId": "tnUJta",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

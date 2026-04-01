@@ -35,9 +35,9 @@
     "authorName": "pandur",
     "created": 1698315329826,
     "summary": "Creates a copy of a JSON object",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "xJCXJK"
+    "exampleProjectId": "xJCXJK",
+    "isReleased": true
 }

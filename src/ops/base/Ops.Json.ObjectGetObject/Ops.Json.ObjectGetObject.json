@@ -25,8 +25,8 @@
     "summary": "get an object from an object",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

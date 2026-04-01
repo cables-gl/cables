@@ -56,5 +56,6 @@
     "exampleProjectId": "GrCMN4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

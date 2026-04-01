@@ -49,5 +49,6 @@
             }
         ]
     },
-    "exampleProjectId": "bPWV2f"
+    "exampleProjectId": "bPWV2f",
+    "isReleased": true
 }

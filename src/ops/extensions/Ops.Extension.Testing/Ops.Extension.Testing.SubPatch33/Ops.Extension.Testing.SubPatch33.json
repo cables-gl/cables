@@ -16,5 +16,6 @@
     "layout": {
         "portsIn": [],
         "portsOut": []
-    }
+    },
+    "isReleased": true
 }

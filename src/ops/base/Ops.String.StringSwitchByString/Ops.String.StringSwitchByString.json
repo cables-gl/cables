@@ -112,5 +112,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

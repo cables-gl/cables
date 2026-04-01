@@ -92,5 +92,6 @@
             }
         ]
     },
-    "exampleProjectId": "WDoBX8"
+    "exampleProjectId": "WDoBX8",
+    "isReleased": true
 }

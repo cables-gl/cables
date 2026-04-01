@@ -133,5 +133,6 @@
     "exampleProjectId": "1QTBve",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

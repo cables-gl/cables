@@ -44,5 +44,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Ease a value between 0 and 1 over a timeline curve"
+    "summary": "Ease a value between 0 and 1 over a timeline curve",
+    "isReleased": true
 }

@@ -129,5 +129,6 @@
     "exampleProjectId": "bRlSDe",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

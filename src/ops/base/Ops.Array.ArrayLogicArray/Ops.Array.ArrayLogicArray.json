@@ -82,5 +82,6 @@
             }
         ]
     },
-    "exampleProjectId": "T_-NmJ"
+    "exampleProjectId": "T_-NmJ",
+    "isReleased": true
 }

@@ -90,7 +90,6 @@
     },
     "summary": "route input triggers by index to one output",
     "issues": "",
-
     "youtubeids": [
         "TdHgjqOLpnM"
     ],
@@ -170,5 +169,6 @@
             }
         ]
     },
-    "exampleProjectId": "upF4rn"
+    "exampleProjectId": "upF4rn",
+    "isReleased": true
 }

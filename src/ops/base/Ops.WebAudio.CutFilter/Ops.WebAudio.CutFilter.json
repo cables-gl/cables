@@ -146,5 +146,6 @@
     "exampleProjectId": "6SsZxp",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

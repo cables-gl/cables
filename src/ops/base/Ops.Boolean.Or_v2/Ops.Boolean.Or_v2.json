@@ -69,5 +69,6 @@
     "summary": "Outputs true if one of the input values is true (boolean)",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

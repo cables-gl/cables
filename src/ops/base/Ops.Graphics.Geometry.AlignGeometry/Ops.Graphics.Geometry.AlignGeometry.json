@@ -90,5 +90,6 @@
     },
     "youtubeids": [],
     "exampleProjectId": "FbXQ-G",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

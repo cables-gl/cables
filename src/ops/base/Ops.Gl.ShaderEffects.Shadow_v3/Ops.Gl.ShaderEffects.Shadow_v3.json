@@ -191,5 +191,6 @@
         ]
     },
     "exampleProjectId": "auVl18",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

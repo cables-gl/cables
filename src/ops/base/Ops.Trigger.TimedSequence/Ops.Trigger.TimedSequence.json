@@ -178,5 +178,6 @@
         "ports": []
     },
     "exampleProjectId": "GbEqL-",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

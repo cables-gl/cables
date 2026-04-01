@@ -30,7 +30,6 @@
     },
     "summary": "Convert an array of objects into readable string format",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -44,5 +43,6 @@
             }
         ]
     },
-    "exampleProjectId": "HFRsU5"
+    "exampleProjectId": "HFRsU5",
+    "isReleased": true
 }

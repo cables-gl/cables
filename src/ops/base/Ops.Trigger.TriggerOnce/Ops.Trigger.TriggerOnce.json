@@ -30,5 +30,6 @@
     "exampleProjectId": "9Eiyci",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -90,5 +90,6 @@
         "cgl"
     ],
     "license": "MIT",
-    "summary": "Get webXr detected hand data"
+    "summary": "Get webXr detected hand data",
+    "isReleased": true
 }

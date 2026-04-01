@@ -61,5 +61,6 @@
     "exampleProjectId": "zUaRN4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

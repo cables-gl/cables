@@ -48,9 +48,9 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

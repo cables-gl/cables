@@ -43,7 +43,6 @@
         ]
     },
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -72,5 +71,6 @@
             }
         ]
     },
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "isReleased": true
 }

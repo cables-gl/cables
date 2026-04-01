@@ -28,5 +28,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "FXRsii"
+    "exampleProjectId": "FXRsii",
+    "isReleased": true
 }

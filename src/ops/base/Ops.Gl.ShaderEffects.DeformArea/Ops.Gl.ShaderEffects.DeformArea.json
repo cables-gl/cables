@@ -68,5 +68,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "CQ0wmo"
+    "exampleProjectId": "CQ0wmo",
+    "isReleased": true
 }

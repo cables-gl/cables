@@ -163,5 +163,6 @@
     "summary": "Create body/bodies in a physics world",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

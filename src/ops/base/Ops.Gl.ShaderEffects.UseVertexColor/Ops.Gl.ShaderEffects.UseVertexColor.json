@@ -48,5 +48,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ep1Umu"
+    "exampleProjectId": "ep1Umu",
+    "isReleased": true
 }

@@ -75,5 +75,6 @@
         "ports": []
     },
     "summary": "date or datetime picker in the sidebar",
-    "exampleProjectId": "Bkzmci"
+    "exampleProjectId": "Bkzmci",
+    "isReleased": true
 }

@@ -227,5 +227,6 @@
     "exampleProjectId": "E0hWmi",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -54,10 +54,10 @@
     },
     "summary": "adjust appearance of sidebar",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "o1fXgI"
+    "exampleProjectId": "o1fXgI",
+    "isReleased": true
 }

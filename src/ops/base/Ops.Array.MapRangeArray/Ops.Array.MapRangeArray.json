@@ -47,7 +47,6 @@
     },
     "summary": "Map values in an array from one range into another.",
     "issues": "",
-
     "youtubeids": [
         "SKYXdzHYwdI"
     ],
@@ -79,5 +78,6 @@
             }
         ]
     },
-    "exampleProjectId": "ZQI6sU"
+    "exampleProjectId": "ZQI6sU",
+    "isReleased": true
 }

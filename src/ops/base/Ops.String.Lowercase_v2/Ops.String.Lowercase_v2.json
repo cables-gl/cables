@@ -19,9 +19,9 @@
     "summary": "convert all characters to small letters",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "a8qVz6"
+    "exampleProjectId": "a8qVz6",
+    "isReleased": true
 }

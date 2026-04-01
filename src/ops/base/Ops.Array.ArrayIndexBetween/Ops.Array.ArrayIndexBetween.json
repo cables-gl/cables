@@ -36,11 +36,11 @@
     },
     "summary": "Output index where value is greater than number and smaller then next number ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "exampleProjectId": "kH4xLu",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

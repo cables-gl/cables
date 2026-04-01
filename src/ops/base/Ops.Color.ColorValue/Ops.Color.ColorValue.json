@@ -111,5 +111,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "19KZet"
+    "exampleProjectId": "19KZet",
+    "isReleased": true
 }

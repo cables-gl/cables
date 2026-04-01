@@ -64,12 +64,11 @@
     "authorName": "pandur",
     "created": 1686154804127,
     "summary": "Define filters to get colliding and intersecting bodies",
-
-
     "docs": {
         "ports": []
     },
     "youtubeids": [
         "lNbfCp0T55c"
-    ]
+    ],
+    "isReleased": true
 }

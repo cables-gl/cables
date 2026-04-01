@@ -6,7 +6,7 @@
     "credits": [
         {
             "title": "three.js .exr exporter",
-            "author":"mr doob",
+            "author": "mr doob",
             "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/exporters/EXRExporter.js",
             "licence": "MIT"
         }
@@ -61,5 +61,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "convert and download an array of numbers as an .exr image file"
+    "summary": "convert and download an array of numbers as an .exr image file",
+    "isReleased": true
 }

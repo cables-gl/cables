@@ -130,5 +130,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "qt0JiG"
+    "exampleProjectId": "qt0JiG",
+    "isReleased": true
 }

@@ -36,5 +36,6 @@
     "exampleProjectId": "LDfZgL",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

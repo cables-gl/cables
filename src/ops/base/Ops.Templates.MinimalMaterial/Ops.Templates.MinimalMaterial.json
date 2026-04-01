@@ -38,5 +38,6 @@
     "exampleProjectId": "aySyci",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }
