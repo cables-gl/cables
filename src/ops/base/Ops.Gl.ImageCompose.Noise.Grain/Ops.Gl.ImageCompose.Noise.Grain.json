@@ -1,0 +1,126 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode index",
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mask index",
+                "values": [
+                    "Off",
+                    "On"
+                ],
+                "group": "Blending",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Animated",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Normalize",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Multiply",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mean",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Variance",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "White noise pixel effect",
+    "authorName": "pandur",
+    "id": "92300f75-b96f-4872-9b1b-d2a49519ecad",
+    "created": 1774989278659,
+    "docs": {
+        "ports": [
+            {
+                "name": "Blend Mode index",
+                "text": "index of blend mode in drop down"
+            },
+            {
+                "name": "Alpha Mask index",
+                "text": "use alpha channel of Image Compose"
+            },
+            {
+                "name": "Amount",
+                "text": "opacity of effect"
+            },
+            {
+                "name": "Animated",
+                "text": "randomize noise every frame/trigger"
+            },
+            {
+                "name": "RGB",
+                "text": "use colors"
+            },
+            {
+                "name": "Normalize",
+                "text": "offset values of colors into a -1.0 +1.0 range "
+            },
+            {
+                "name": "Multiply",
+                "text": "multiply values by input texture"
+            }
+        ]
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1774989278660
+        }
+    ],
+    "caniusequery": "",
+    "credits": [
+        {
+            "title": "Procedural film grain",
+            "author": "luluco250",
+            "url": "https://www.shadertoy.com/view/4t2fRz",
+            "licence": "MIT"
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}
