@@ -150,5 +150,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "DLV0n6"
+    "exampleProjectId": "DLV0n6",
+    "isReleased": true
 }

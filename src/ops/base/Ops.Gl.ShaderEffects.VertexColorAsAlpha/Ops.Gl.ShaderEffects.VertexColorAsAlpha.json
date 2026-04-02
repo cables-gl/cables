@@ -52,5 +52,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ChcFXk"
+    "exampleProjectId": "ChcFXk",
+    "isReleased": true
 }

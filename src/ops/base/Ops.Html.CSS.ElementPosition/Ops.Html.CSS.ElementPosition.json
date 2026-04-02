@@ -133,5 +133,6 @@
     },
     "license": "MIT",
     "summary": "Set position left/right/top/bottom of a HTML element",
-    "exampleProjectId": "JF4w9a"
+    "exampleProjectId": "JF4w9a",
+    "isReleased": true
 }

@@ -36,5 +36,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "FvIvci"
+    "exampleProjectId": "FvIvci",
+    "isReleased": true
 }

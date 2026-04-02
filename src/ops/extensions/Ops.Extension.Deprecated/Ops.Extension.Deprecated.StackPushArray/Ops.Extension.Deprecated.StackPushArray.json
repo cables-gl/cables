@@ -41,5 +41,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "NT30kP"
+    "exampleProjectId": "NT30kP",
+    "isReleased": true
 }

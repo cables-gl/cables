@@ -41,5 +41,6 @@
     "summary": "Replace Words as links in markdown strings",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -21,5 +21,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "Zc398i"
+    "exampleProjectId": "Zc398i",
+    "isReleased": true
 }

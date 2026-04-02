@@ -95,5 +95,6 @@
     "exampleProjectId": "oOsjJ5",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

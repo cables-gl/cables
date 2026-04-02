@@ -58,10 +58,10 @@
     },
     "summary": "generate random number between min and max (was: random2)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "s3FP7f"
+    "exampleProjectId": "s3FP7f",
+    "isReleased": true
 }

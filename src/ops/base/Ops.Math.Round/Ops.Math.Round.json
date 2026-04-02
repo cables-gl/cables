@@ -41,5 +41,6 @@
             }
         ]
     },
-    "exampleProjectId": "nPvVW2"
+    "exampleProjectId": "nPvVW2",
+    "isReleased": true
 }

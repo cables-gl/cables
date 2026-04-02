@@ -51,5 +51,6 @@
     "summary": "set object as object property",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

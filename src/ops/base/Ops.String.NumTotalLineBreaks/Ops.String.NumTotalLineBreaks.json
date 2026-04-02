@@ -30,5 +30,6 @@
             }
         ]
     },
-    "exampleProjectId": "lkDCeT"
+    "exampleProjectId": "lkDCeT",
+    "isReleased": true
 }

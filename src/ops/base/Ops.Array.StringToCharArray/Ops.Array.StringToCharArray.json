@@ -30,7 +30,6 @@
     },
     "summary": "Turn a string into an array of single characters or ASCII numbers",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -48,5 +47,6 @@
             }
         ]
     },
-    "exampleProjectId": "30a1rn"
+    "exampleProjectId": "30a1rn",
+    "isReleased": true
 }

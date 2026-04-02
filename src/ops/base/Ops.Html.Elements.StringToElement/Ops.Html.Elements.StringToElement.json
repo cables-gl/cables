@@ -44,5 +44,6 @@
             }
         ]
     },
-    "exampleProjectId": "Bo1JW8"
+    "exampleProjectId": "Bo1JW8",
+    "isReleased": true
 }

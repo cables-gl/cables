@@ -42,5 +42,6 @@
     "exampleProjectId": "zKLQ3I",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

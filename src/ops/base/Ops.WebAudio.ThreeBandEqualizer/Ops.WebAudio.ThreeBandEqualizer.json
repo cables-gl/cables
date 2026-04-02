@@ -183,5 +183,6 @@
     "exampleProjectId": "tD2Vxp",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

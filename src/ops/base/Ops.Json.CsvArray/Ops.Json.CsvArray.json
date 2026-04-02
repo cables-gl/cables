@@ -39,5 +39,6 @@
         ]
     },
     "exampleProjectId": "UlL2G1",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

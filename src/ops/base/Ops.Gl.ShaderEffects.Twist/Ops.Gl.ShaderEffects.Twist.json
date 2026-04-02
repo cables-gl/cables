@@ -49,5 +49,6 @@
     "exampleProjectId": "VYPlJ5",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

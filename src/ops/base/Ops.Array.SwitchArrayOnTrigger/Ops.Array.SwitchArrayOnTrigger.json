@@ -80,5 +80,6 @@
     "summary": "Switch between multiple arrays on trigger",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

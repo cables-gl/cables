@@ -36,5 +36,6 @@
     "docs": {
         "ports": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

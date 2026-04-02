@@ -240,5 +240,6 @@
     "exampleProjectId": "IPPT7i",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

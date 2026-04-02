@@ -98,5 +98,6 @@
     "exampleProjectId": "INQQgo",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

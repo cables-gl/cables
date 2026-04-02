@@ -29,5 +29,6 @@
     ],
     "license": "MIT",
     "summary": "Patchfield cable routing helper for array cables",
-    "exampleProjectId": "CLMeDg"
+    "exampleProjectId": "CLMeDg",
+    "isReleased": true
 }

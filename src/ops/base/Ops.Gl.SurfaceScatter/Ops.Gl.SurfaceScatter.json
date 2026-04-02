@@ -63,5 +63,6 @@
     "exampleProjectId": "cfUzre",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

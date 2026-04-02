@@ -30,9 +30,8 @@
         ]
     },
     "summary": "Output an array containing a line number for every character",
-
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

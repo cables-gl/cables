@@ -64,5 +64,6 @@
             }
         ]
     },
-    "exampleProjectId": "bJrH16"
+    "exampleProjectId": "bJrH16",
+    "isReleased": true
 }

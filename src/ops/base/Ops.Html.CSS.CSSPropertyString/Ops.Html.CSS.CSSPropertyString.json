@@ -86,5 +86,6 @@
         ]
     },
     "exampleProjectId": "6leHfe",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

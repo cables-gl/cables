@@ -74,5 +74,6 @@
     "exampleProjectId": "SLesr2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

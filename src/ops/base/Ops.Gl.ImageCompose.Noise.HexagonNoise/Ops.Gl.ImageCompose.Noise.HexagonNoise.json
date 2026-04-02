@@ -173,5 +173,6 @@
     "exampleProjectId": "plbB53",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

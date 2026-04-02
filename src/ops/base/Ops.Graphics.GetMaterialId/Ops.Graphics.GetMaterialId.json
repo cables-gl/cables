@@ -47,5 +47,6 @@
     "exampleProjectId": "PYpQit",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

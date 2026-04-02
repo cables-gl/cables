@@ -114,5 +114,6 @@
     "exampleProjectId": "jKcTdv",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

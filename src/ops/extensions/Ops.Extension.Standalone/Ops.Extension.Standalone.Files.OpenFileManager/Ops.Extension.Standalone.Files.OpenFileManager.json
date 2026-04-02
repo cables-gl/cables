@@ -41,5 +41,6 @@
     "summary": "Open the native file manager application using that path",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

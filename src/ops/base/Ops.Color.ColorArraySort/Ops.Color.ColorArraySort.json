@@ -74,5 +74,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Sort an array of colors by saturation/lightness etc."
+    "summary": "Sort an array of colors by saturation/lightness etc.",
+    "isReleased": true
 }

@@ -43,6 +43,6 @@
                 "text": "Either `true` or `false`"
             }
         ]
-    }
-
+    },
+    "isReleased": true
 }

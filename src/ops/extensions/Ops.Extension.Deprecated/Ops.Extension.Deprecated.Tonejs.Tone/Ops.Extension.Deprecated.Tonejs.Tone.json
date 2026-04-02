@@ -24,7 +24,6 @@
         ]
     },
     "summary": "Converts a note to a frequency e.g. A4 to 440 ",
-    "changelog": [
-
-    ]
+    "changelog": [],
+    "isReleased": true
 }

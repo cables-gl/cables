@@ -34,5 +34,6 @@
     ],
     "license": "MIT",
     "summary": "Patchfield cable routing helper for string cables",
-    "exampleProjectId": "CLMeDg"
+    "exampleProjectId": "CLMeDg",
+    "isReleased": true
 }

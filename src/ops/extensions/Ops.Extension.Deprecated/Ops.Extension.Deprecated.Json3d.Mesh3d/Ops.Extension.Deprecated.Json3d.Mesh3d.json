@@ -157,5 +157,6 @@
         "cgl_deprecatedjson3d",
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

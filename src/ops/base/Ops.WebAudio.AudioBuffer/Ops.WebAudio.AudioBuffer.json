@@ -79,5 +79,6 @@
     "exampleProjectId": "xEL0rn",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

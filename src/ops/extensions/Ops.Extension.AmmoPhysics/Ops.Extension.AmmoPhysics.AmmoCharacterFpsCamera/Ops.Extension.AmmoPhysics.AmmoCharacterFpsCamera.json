@@ -169,5 +169,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

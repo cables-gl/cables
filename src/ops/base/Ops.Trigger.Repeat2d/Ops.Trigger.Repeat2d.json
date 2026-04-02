@@ -98,5 +98,6 @@
             }
         ]
     },
-    "exampleProjectId": "lPZfgg"
+    "exampleProjectId": "lPZfgg",
+    "isReleased": true
 }

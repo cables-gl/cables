@@ -104,5 +104,6 @@
                 "text": "Triggers once the playback has ended"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

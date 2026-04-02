@@ -70,5 +70,6 @@
     ],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

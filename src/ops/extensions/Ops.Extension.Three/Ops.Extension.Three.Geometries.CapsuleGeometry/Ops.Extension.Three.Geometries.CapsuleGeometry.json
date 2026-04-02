@@ -75,5 +75,6 @@
             }
         ]
     },
-    "exampleProjectId": "Fwh6w4"
+    "exampleProjectId": "Fwh6w4",
+    "isReleased": true
 }

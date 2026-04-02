@@ -17,5 +17,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

@@ -187,5 +187,6 @@
     "exampleProjectId": "Krorsh",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -27,5 +27,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

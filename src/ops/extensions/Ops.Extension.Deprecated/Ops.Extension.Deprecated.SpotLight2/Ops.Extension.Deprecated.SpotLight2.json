@@ -176,5 +176,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

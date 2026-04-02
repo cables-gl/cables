@@ -112,5 +112,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "sYIxm1"
+    "exampleProjectId": "sYIxm1",
+    "isReleased": true
 }

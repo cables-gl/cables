@@ -57,12 +57,12 @@
     },
     "summary": "Set css style properties of a html element",
     "issues": "",
-
     "relatedops": [
         "Ops.Html.CSSPropertyString"
     ],
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

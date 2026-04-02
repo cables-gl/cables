@@ -31,7 +31,6 @@
     "docs": {
         "ports": []
     },
-
     "changelog": [
         {
             "message": "Ops.Array.Array2xTo3x renamed to Ops.Array.Array2To3",
@@ -45,7 +44,7 @@
         }
     ],
     "issues": "",
-
     "youtubeids": [],
-    "exampleProjectId": "xAg8P6"
+    "exampleProjectId": "xAg8P6",
+    "isReleased": true
 }

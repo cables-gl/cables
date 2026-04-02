@@ -59,5 +59,6 @@
     },
     "exampleProjectId": "TctR5r",
     "license": "MIT",
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

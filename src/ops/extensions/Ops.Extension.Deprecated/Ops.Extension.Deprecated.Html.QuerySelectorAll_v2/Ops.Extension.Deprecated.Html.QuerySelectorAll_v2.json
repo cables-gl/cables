@@ -69,5 +69,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "QTs5GH"
+    "exampleProjectId": "QTs5GH",
+    "isReleased": true
 }

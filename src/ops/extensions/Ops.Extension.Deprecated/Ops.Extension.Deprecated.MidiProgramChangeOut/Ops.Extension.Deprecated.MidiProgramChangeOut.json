@@ -62,5 +62,6 @@
                 "name": "MIDI Event Out"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

@@ -55,5 +55,6 @@
     "exampleProjectId": "Tbb8xN",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

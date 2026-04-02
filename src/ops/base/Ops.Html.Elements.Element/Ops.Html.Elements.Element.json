@@ -121,5 +121,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "KmnVEm"
+    "exampleProjectId": "KmnVEm",
+    "isReleased": true
 }

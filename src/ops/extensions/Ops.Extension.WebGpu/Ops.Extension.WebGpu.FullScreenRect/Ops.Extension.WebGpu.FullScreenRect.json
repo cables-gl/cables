@@ -64,5 +64,6 @@
         "ports": []
     },
     "caniusequery": "webgpu",
-    "summary": "Render a rectangle that fills the whole canvas"
+    "summary": "Render a rectangle that fills the whole canvas",
+    "isReleased": true
 }

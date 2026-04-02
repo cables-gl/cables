@@ -34,7 +34,6 @@
     "summary": "download a textfile containing the input string",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -52,5 +51,6 @@
             }
         ]
     },
-    "exampleProjectId": "mxybpX"
+    "exampleProjectId": "mxybpX",
+    "isReleased": true
 }

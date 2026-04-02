@@ -42,5 +42,6 @@
     "exampleProjectId": "zCDlTi",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

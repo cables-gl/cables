@@ -65,5 +65,6 @@
     "changelog": [],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -46,5 +46,6 @@
     "exampleProjectId": "-QPf26",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

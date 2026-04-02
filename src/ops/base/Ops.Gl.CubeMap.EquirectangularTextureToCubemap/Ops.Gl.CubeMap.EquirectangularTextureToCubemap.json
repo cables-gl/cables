@@ -105,5 +105,6 @@
             }
         ]
     },
-    "exampleProjectId": "O1NBYa"
+    "exampleProjectId": "O1NBYa",
+    "isReleased": true
 }

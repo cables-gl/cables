@@ -124,5 +124,6 @@
     "exampleProjectId": "SKCL88",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

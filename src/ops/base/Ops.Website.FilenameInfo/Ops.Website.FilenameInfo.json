@@ -69,5 +69,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "RyrLMg"
+    "exampleProjectId": "RyrLMg",
+    "isReleased": true
 }

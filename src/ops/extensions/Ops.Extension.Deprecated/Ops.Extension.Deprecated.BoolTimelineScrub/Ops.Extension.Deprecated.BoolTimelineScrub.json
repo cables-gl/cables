@@ -33,5 +33,6 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

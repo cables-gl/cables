@@ -121,5 +121,6 @@
     "exampleProjectId": "v8G4Wz",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

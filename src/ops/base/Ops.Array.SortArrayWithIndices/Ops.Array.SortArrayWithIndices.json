@@ -44,7 +44,6 @@
     },
     "summary": "Sort an array of numbers and also get sorted indices ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -61,5 +60,6 @@
                 "text": "Sorted array out"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

@@ -40,5 +40,6 @@
     "summary": "configure the timeline for the current patch",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

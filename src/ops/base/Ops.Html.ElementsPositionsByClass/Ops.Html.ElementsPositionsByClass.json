@@ -60,5 +60,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

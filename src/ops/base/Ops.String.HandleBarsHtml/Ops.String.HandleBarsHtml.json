@@ -44,5 +44,6 @@
         "ports": []
     },
     "summary": "string conversion using handlebars template engine",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

@@ -31,10 +31,10 @@
     ],
     "summary": "Converts a number to a string with num decimal places, adds 0's",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ps8ZHq"
+    "exampleProjectId": "ps8ZHq",
+    "isReleased": true
 }

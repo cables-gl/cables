@@ -127,7 +127,6 @@
     },
     "summary": "State management of all parameters connected to it - Create presets of multiple ops",
     "issues": "",
-
     "youtubeids": [
         "2eKIpiTv6ww"
     ],
@@ -187,5 +186,6 @@
             }
         ]
     },
-    "exampleProjectId": "KI3veT"
+    "exampleProjectId": "KI3veT",
+    "isReleased": true
 }

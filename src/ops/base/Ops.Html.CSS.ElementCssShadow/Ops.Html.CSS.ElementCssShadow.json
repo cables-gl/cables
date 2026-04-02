@@ -80,5 +80,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "jcjuii"
+    "exampleProjectId": "jcjuii",
+    "isReleased": true
 }

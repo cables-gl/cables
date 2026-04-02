@@ -43,5 +43,6 @@
     "exampleProjectId": "VgtMji",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

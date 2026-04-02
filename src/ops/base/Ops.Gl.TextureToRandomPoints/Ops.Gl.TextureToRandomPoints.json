@@ -81,5 +81,6 @@
     "exampleProjectId": "LAoKVJ",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

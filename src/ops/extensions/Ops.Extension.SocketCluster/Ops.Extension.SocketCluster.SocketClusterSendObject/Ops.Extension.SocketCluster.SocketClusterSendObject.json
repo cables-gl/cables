@@ -77,5 +77,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "EJvr0a"
+    "exampleProjectId": "EJvr0a",
+    "isReleased": true
 }

@@ -75,11 +75,11 @@
     },
     "summary": "Generate coordinates for a rectangular field / grid of points",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
     "exampleProjectId": "icchV5",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

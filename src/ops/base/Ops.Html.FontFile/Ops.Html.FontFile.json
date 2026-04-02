@@ -32,8 +32,6 @@
         "ports": []
     },
     "youtubeid": "",
-
-
     "changelog": [
         {
             "message": "fixed file loading problems when viewing outside of the editor",
@@ -56,5 +54,6 @@
             "date": 1561037918153
         }
     ],
-    "exampleProjectId": "xR9zIR"
+    "exampleProjectId": "xR9zIR",
+    "isReleased": true
 }

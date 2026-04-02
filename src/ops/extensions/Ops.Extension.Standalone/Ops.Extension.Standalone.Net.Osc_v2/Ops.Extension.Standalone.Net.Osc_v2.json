@@ -63,5 +63,6 @@
         "ports": []
     },
     "authorName": "pandur",
-    "exampleProjectId": "PCZCun"
+    "exampleProjectId": "PCZCun",
+    "isReleased": true
 }

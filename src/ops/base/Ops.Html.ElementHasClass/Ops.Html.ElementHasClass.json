@@ -38,5 +38,6 @@
     "summary": "Does the element currenty have a specific class set",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

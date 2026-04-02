@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1598445281301
-        },
-        {
-            "message": "Ops.User.pandur.VariablesAsObject renamed to Ops.Vars.VariablesAsObject",
-            "author": "pandur",
-            "date": 1600089027300
+            "date": 1598445281301,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
@@ -33,11 +29,9 @@
         ]
     },
     "summary": "outputs an object containing all variables",
-    "issues": "",
-
-
-    "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": false,
+    "license": "MIT"
 }

@@ -277,5 +277,6 @@
     "exampleProjectId": "Vtv-1p",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

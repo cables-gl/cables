@@ -85,5 +85,6 @@
             "type": "commonjs"
         }
     ],
-    "summary": "Physics simulation world "
+    "summary": "Physics simulation world ",
+    "isReleased": true
 }

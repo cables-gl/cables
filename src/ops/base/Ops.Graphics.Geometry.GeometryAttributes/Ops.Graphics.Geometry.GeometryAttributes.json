@@ -50,5 +50,6 @@
     "caniusequery": "",
     "youtubeids": [],
     "changelog": [],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

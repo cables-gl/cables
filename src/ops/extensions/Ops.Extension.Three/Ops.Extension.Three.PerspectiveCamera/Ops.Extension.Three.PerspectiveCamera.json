@@ -92,5 +92,6 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "isReleased": true
 }

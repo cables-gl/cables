@@ -67,6 +67,7 @@ function update()
 
             vec3.normalize(dir, dir);
 
+            // console.log(origin,to);
             ray = new RAPIER.Ray(new RAPIER.Vector3(origin[0], origin[1], origin[2]), new RAPIER.Vector3(dir[0], dir[1], dir[2]));
         }
         else
@@ -83,22 +84,16 @@ function update()
         }
 
         if (ray)
-
         {
             const result = world.castRay(ray, 999, true);
 
             if (result && result.collider)
             {
-            // console.log("cast result.collider",result.collider.parent().userData.name)
-
+                // console.log("cast result.collider",result.collider.parent().userData.name)
                 const parent = result.collider.parent();
 
-                if (parent && parent.userData)
-                {
-                    outName.set(result.collider.parent().userData.name);
-                }
-                else
-                    outName.set("unknown");
+                if (parent && parent.userData) outName.set(result.collider.parent().userData.name);
+                else outName.set("unknown");
 
                 outX.set(origin[0] + dir[0] * result.timeOfImpact);
                 outY.set(origin[1] + dir[1] * result.timeOfImpact);

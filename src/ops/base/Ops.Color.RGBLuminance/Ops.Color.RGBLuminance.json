@@ -44,5 +44,6 @@
     "exampleProjectId": "Du0rvs",
     "libs": [
         "chroma.js"
-    ]
+    ],
+    "isReleased": true
 }

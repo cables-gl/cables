@@ -39,7 +39,6 @@
         "ports": []
     },
     "issues": "",
-
     "youtubeids": [],
     "changelog": [
         {
@@ -49,5 +48,6 @@
         }
     ],
     "caniusequery": "",
-    "exampleProjectId": "2UuCa6"
+    "exampleProjectId": "2UuCa6",
+    "isReleased": true
 }

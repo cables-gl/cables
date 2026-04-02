@@ -73,5 +73,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "HtcN9Z"
+    "exampleProjectId": "HtcN9Z",
+    "isReleased": true
 }

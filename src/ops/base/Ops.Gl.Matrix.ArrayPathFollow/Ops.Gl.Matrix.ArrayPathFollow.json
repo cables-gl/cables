@@ -58,5 +58,6 @@
     "exampleProjectId": "lL9_EF",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

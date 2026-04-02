@@ -69,5 +69,6 @@
     "exampleProjectId": "QlOcck",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -27,10 +27,10 @@
     },
     "summary": "Lorem ipsum dolor sit amet",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "4f-D16"
+    "exampleProjectId": "4f-D16",
+    "isReleased": true
 }

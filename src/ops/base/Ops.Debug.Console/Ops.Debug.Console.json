@@ -35,5 +35,6 @@
     "exampleProjectId": "TVIL7f",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

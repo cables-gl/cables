@@ -21,7 +21,7 @@ if (!ktx)
 {
     createKtxReadModule({ "locateFile": () =>
     {
-        return attachments.libktx_read_wasm_base64;
+        return "data:application/wasm;base64," + staticAttachments.libktx_read_wasm;
     }
     }).then(async (_ktx) =>
     {
@@ -29,6 +29,7 @@ if (!ktx)
         // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
 
         ktx.GL.makeContextCurrent(ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));
+        staticAttachments.libktx_read_wasm = null;
     });
 }
 

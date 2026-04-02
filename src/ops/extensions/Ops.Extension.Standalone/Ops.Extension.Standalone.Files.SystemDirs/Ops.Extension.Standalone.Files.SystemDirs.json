@@ -78,5 +78,6 @@
                 "text": "directory of currently opened patchfile"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

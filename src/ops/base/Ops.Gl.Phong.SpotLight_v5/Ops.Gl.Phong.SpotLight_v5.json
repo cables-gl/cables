@@ -171,24 +171,16 @@
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowSpotTestLightCGL renamed to Ops.Admin.ShadowSpotLightCGL",
+            "message": "New Op",
             "author": "cables",
-            "date": 1587654173156
+            "date": 1587654173156,
+            "type": "new op"
         },
         {
-            "message": " added core lib: vargetset",
-            "author": "stephan",
-            "date": 1589968927218
-        },
-        {
-            "message": " added core lib: cgl_functions",
-            "author": "stephan",
-            "date": 1590495514991
-        },
-        {
-            "message": "Ops.Admin.ShadowSpotLightCGL renamed to Ops.Gl.Phong.SpotLight_v5",
+            "message": "Show second translate gizmo for better control",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1596055767931
+            "date": 1774991833030
         }
     ],
     "summary": "spot light  that emits a cone of light",
@@ -335,5 +327,7 @@
         ]
     },
     "exampleProjectId": "D5evXU",
-    "caniusequery": ""
+    "caniusequery": "",
+    "license": "MIT",
+    "isReleased": true
 }

@@ -75,5 +75,6 @@
     "exampleProjectId": "oKRY7i",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

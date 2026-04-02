@@ -76,5 +76,6 @@
     "youtubeids": [
         "gT1jXP5As9A"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

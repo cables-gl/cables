@@ -144,6 +144,10 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Update Translation"
             }
         ],
         "portsOut": [
@@ -184,5 +188,6 @@
     "summary": "Create body/bodies in a physics world",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

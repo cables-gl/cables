@@ -135,5 +135,6 @@
     "exampleProjectId": "fsOPNS",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

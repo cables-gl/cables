@@ -25,5 +25,6 @@
     "exampleProjectId": "x2PmHf",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

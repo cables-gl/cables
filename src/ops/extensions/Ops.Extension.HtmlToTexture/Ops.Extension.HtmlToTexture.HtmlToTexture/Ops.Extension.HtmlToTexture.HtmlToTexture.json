@@ -48,5 +48,6 @@
     "exampleProjectId": "fPPga2",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

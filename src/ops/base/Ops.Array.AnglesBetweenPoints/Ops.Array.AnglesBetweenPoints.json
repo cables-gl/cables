@@ -47,5 +47,6 @@
     "exampleProjectId": "Y2_BIR",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

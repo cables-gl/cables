@@ -88,5 +88,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "WLpPjs"
+    "exampleProjectId": "WLpPjs",
+    "isReleased": true
 }

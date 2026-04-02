@@ -27,5 +27,6 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

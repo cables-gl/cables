@@ -54,5 +54,6 @@
     "exampleProjectId": "JeKgDp",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

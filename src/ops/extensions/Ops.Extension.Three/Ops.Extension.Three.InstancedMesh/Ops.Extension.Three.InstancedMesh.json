@@ -54,5 +54,6 @@
     "exampleProjectId": "6p48N4",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

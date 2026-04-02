@@ -4,5 +4,6 @@
     "authorName": "pandur",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

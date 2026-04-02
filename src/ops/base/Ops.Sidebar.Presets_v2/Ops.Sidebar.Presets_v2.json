@@ -116,5 +116,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "KKabBN"
+    "exampleProjectId": "KKabBN",
+    "isReleased": true
 }

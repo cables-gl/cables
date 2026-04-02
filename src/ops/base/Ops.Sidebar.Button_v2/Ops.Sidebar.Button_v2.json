@@ -56,5 +56,6 @@
         }
     ],
     "exampleProjectId": "aDgYX5",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

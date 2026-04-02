@@ -139,5 +139,6 @@
     "exampleProjectId": "ucr5NX",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

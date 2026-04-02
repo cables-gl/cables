@@ -82,7 +82,6 @@
     },
     "summary": "Route a boolean to an output port",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -100,5 +99,6 @@
             }
         ]
     },
-    "exampleProjectId": "mS8CX8"
+    "exampleProjectId": "mS8CX8",
+    "isReleased": true
 }

@@ -79,5 +79,6 @@
     "exampleProjectId": "sewM2h",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

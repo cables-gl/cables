@@ -32,5 +32,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "VHW78i"
+    "exampleProjectId": "VHW78i",
+    "isReleased": true
 }

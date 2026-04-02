@@ -23,7 +23,6 @@
     },
     "summary": "Only allow an array through if pass through is true",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -41,5 +40,6 @@
             }
         ]
     },
-    "exampleProjectId": "gOaDAH"
+    "exampleProjectId": "gOaDAH",
+    "isReleased": true
 }

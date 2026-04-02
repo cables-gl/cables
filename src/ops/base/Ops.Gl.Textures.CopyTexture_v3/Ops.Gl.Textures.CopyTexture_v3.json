@@ -133,5 +133,6 @@
     "exampleProjectId": "G2_my7",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -42,12 +42,12 @@
     ],
     "summary": "set string variable by trigger",
     "issues": "",
-
     "youtubeids": [
         "30v_GQc6ajA"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "PlLFcI"
+    "exampleProjectId": "PlLFcI",
+    "isReleased": true
 }

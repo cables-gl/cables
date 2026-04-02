@@ -56,10 +56,10 @@
     "summary": "Pack 2 individual arrays into an array2 - without needing a trigger",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "Udb6eG",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

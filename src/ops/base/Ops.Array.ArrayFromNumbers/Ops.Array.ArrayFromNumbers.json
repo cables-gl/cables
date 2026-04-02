@@ -194,7 +194,6 @@
     },
     "summary": "Simple way to create small arrays of numbers",
     "issues": "",
-
     "youtubeids": [
         "iXKo7mU422M"
     ],
@@ -210,5 +209,6 @@
             }
         ]
     },
-    "exampleProjectId": "ZNPh2B"
+    "exampleProjectId": "ZNPh2B",
+    "isReleased": true
 }

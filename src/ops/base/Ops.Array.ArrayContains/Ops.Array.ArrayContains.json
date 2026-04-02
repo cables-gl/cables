@@ -30,7 +30,6 @@
     "created": 1542698773328,
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -51,5 +50,6 @@
             }
         ]
     },
-    "exampleProjectId": "8pZ8GA"
+    "exampleProjectId": "8pZ8GA",
+    "isReleased": true
 }

@@ -75,5 +75,6 @@
     "exampleProjectId": "eqfKTx",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

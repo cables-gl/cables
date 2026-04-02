@@ -39,5 +39,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "hmTiu1"
+    "exampleProjectId": "hmTiu1",
+    "isReleased": true
 }

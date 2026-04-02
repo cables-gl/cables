@@ -62,5 +62,6 @@
                 "text": "Output port that emits the updated array of objects. This is either a reference to the modified original array or a new array, depending on the value of inCopy."
             }
         ]
-    }
+    },
+    "isReleased": true
 }

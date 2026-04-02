@@ -37,8 +37,8 @@
     "summary": "iterate over every character of a string",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

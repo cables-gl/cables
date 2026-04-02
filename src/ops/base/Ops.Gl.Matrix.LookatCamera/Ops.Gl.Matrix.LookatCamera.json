@@ -74,5 +74,6 @@
     "exampleProjectId": "_JlGz6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

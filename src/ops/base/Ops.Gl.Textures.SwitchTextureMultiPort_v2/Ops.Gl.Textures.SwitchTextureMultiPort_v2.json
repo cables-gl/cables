@@ -51,5 +51,6 @@
     "exampleProjectId": "pDGOrh",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

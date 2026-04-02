@@ -48,5 +48,6 @@
     "exampleProjectId": "teZhCp",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

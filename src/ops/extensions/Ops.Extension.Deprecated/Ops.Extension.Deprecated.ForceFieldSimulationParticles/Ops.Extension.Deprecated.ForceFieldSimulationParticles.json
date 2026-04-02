@@ -84,5 +84,6 @@
     "coreLibs": [
         "cgl_deprecated_meshfeedback",
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -51,7 +51,6 @@
     ],
     "summary": "Remove points from an array, e.g. xth points, random, duplicates",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -69,5 +68,6 @@
             }
         ]
     },
-    "exampleProjectId": "vgRDeT"
+    "exampleProjectId": "vgRDeT",
+    "isReleased": true
 }

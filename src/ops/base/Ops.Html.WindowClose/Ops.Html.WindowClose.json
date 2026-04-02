@@ -22,5 +22,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "WGBCci"
+    "exampleProjectId": "WGBCci",
+    "isReleased": true
 }

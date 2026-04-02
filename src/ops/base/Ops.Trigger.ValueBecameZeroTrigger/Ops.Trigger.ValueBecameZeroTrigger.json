@@ -29,5 +29,6 @@
                 "text": "Triggers when `Value` became zero"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

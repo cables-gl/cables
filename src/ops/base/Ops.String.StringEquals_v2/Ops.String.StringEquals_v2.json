@@ -40,5 +40,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "Nx2zci"
+    "exampleProjectId": "Nx2zci",
+    "isReleased": true
 }

@@ -175,5 +175,6 @@
     "exampleProjectId": "TmgMD-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

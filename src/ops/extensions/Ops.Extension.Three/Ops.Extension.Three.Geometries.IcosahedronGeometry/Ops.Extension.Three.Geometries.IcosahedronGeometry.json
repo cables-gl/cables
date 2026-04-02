@@ -48,5 +48,6 @@
             }
         ]
     },
-    "exampleProjectId": "5ws5x4"
+    "exampleProjectId": "5ws5x4",
+    "isReleased": true
 }

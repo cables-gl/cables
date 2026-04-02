@@ -109,5 +109,6 @@
     "exampleProjectId": "UJvMbk",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

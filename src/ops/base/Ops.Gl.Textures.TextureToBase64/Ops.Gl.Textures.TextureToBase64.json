@@ -70,5 +70,6 @@
     "exampleProjectId": "dNuMWr",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

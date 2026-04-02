@@ -73,7 +73,6 @@
     },
     "summary": "Generate coordinates for a hexagon grid, outputs array3x",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -107,5 +106,6 @@
             }
         ]
     },
-    "exampleProjectId": "GLLdrn"
+    "exampleProjectId": "GLLdrn",
+    "isReleased": true
 }

@@ -39,5 +39,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "NgUvz1"
+    "exampleProjectId": "NgUvz1",
+    "isReleased": true
 }

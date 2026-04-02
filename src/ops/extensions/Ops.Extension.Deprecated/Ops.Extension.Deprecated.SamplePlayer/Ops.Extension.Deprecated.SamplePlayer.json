@@ -127,5 +127,6 @@
     "caniusequery": "",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

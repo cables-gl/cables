@@ -126,5 +126,6 @@
     "exampleProjectId": "pOQqlo",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -32,5 +32,6 @@
     "summary": "Search for any value anywhere in an object",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

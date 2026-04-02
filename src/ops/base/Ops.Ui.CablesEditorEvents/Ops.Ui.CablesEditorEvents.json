@@ -71,5 +71,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gdbdQc"
+    "exampleProjectId": "gdbdQc",
+    "isReleased": true
 }

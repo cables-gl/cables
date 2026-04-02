@@ -66,5 +66,6 @@
         "ports": []
     },
     "license": "MIT",
-    "summary": "Set Size of a HTML element"
+    "summary": "Set Size of a HTML element",
+    "isReleased": true
 }

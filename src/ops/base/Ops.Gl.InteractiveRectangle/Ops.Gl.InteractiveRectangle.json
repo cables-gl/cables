@@ -167,5 +167,6 @@
     "exampleProjectId": "P_SED0",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

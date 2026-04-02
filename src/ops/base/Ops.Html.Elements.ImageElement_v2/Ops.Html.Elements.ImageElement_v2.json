@@ -120,5 +120,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "OZaVN8"
+    "exampleProjectId": "OZaVN8",
+    "isReleased": true
 }

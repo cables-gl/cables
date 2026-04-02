@@ -64,7 +64,6 @@
     "summary": "capture the current input and copy it to the output, even after a reload",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -78,5 +77,6 @@
             }
         ]
     },
-    "exampleProjectId": "MuPepX"
+    "exampleProjectId": "MuPepX",
+    "isReleased": true
 }

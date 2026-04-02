@@ -34,5 +34,6 @@
             "licence": "MIT"
         }
     ],
-    "exampleProjectId": "WFva2K"
+    "exampleProjectId": "WFva2K",
+    "isReleased": true
 }

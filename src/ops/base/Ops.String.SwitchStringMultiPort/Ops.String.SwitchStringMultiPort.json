@@ -46,5 +46,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "TwZ1sh"
+    "exampleProjectId": "TwZ1sh",
+    "isReleased": true
 }

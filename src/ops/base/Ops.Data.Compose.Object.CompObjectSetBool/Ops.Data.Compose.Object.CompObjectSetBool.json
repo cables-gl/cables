@@ -77,5 +77,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ggd-JK"
+    "exampleProjectId": "ggd-JK",
+    "isReleased": true
 }

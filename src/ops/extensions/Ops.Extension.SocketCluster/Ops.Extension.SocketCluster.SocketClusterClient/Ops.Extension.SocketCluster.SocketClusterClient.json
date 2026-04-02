@@ -147,5 +147,6 @@
             }
         ]
     },
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "isReleased": true
 }

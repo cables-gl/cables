@@ -57,5 +57,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "mecjP3"
+    "exampleProjectId": "mecjP3",
+    "isReleased": true
 }

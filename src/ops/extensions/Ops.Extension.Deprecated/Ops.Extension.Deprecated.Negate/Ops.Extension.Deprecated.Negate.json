@@ -30,5 +30,6 @@
     "issues": "",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -50,5 +50,6 @@
         "ports": []
     },
     "exampleProjectId": "kYsAkv",
-    "summary": "Native color picker"
+    "summary": "Native color picker",
+    "isReleased": true
 }

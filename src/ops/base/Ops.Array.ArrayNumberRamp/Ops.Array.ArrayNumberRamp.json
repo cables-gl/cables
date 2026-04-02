@@ -46,5 +46,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "2gGmvs"
+    "exampleProjectId": "2gGmvs",
+    "isReleased": true
 }

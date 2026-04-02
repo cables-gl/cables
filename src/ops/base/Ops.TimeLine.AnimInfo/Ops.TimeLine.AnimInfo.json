@@ -44,5 +44,6 @@
     "summary": "Get information about an anim object",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

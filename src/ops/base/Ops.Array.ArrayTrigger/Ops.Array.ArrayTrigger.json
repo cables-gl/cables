@@ -43,5 +43,6 @@
     },
     "youtubeid": "",
     "issues": "",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

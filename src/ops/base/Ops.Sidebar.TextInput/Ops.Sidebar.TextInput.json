@@ -57,5 +57,6 @@
             }
         ]
     },
-    "exampleProjectId": "wa-KH-"
+    "exampleProjectId": "wa-KH-",
+    "isReleased": true
 }

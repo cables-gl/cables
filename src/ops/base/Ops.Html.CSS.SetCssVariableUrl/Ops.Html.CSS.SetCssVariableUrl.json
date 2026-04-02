@@ -33,5 +33,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "xIpuvs"
+    "exampleProjectId": "xIpuvs",
+    "isReleased": true
 }

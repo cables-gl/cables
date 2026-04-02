@@ -37,7 +37,6 @@
     },
     "summary": "Allows different mathematical operations to be applied to two numbers",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -59,5 +58,6 @@
             }
         ]
     },
-    "exampleProjectId": "mTqdVJ"
+    "exampleProjectId": "mTqdVJ",
+    "isReleased": true
 }

@@ -79,5 +79,6 @@
     "exampleProjectId": "aSWlLu",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

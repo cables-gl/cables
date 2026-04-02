@@ -21,5 +21,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "Ddmsii"
+    "exampleProjectId": "Ddmsii",
+    "isReleased": true
 }

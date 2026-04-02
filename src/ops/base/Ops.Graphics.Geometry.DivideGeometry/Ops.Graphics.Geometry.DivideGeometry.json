@@ -34,5 +34,6 @@
     "exampleProjectId": "sYIxm1",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -69,5 +69,6 @@
     "exampleProjectId": "oXke6r",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

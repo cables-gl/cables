@@ -45,5 +45,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "doUssh"
+    "exampleProjectId": "doUssh",
+    "isReleased": true
 }

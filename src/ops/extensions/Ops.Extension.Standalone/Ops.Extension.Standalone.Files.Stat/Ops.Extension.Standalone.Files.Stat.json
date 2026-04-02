@@ -50,5 +50,6 @@
     "summary": "Get statistics about a file on the local file system",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

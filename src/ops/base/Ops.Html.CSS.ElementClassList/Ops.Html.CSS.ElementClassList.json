@@ -39,5 +39,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "ZMlDjH"
+    "exampleProjectId": "ZMlDjH",
+    "isReleased": true
 }

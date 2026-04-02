@@ -20,7 +20,6 @@
     },
     "summary": "Sum of every number in an array",
     "youtubeid": "",
-
     "docs": {
         "ports": [
             {
@@ -34,5 +33,6 @@
         ]
     },
     "issues": "",
-    "exampleProjectId": "U4M4J5"
+    "exampleProjectId": "U4M4J5",
+    "isReleased": true
 }

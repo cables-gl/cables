@@ -107,5 +107,6 @@
             }
         ]
     },
-    "exampleProjectId": "4rKHP0"
+    "exampleProjectId": "4rKHP0",
+    "isReleased": true
 }

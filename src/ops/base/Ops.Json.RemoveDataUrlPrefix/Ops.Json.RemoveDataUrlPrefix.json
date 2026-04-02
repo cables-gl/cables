@@ -28,5 +28,6 @@
     "summary": "Removes data URL prefix from a string",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -58,5 +58,6 @@
     "exampleProjectId": "T_-vCp",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

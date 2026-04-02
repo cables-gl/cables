@@ -47,5 +47,6 @@
     },
     "coreLibs": [
         "three"
-    ]
+    ],
+    "isReleased": true
 }

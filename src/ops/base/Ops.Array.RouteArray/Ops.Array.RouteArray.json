@@ -70,7 +70,6 @@
     },
     "summary": "Route an array to an output port",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -88,5 +87,6 @@
             }
         ]
     },
-    "exampleProjectId": "pDYxX8"
+    "exampleProjectId": "pDYxX8",
+    "isReleased": true
 }

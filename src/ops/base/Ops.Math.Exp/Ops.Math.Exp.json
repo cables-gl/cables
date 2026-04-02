@@ -30,5 +30,6 @@
                 "text": "The result in the calculation `e^Number`"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

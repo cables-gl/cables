@@ -26,5 +26,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "xmNqci"
+    "exampleProjectId": "xmNqci",
+    "isReleased": true
 }

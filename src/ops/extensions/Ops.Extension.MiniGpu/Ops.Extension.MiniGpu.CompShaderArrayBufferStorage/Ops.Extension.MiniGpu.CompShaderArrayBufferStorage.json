@@ -69,5 +69,6 @@
                 "name": "GpuBuffer"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

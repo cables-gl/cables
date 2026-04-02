@@ -22,5 +22,6 @@
             }
         ]
     },
-    "exampleProjectId": "J0c008"
+    "exampleProjectId": "J0c008",
+    "isReleased": true
 }

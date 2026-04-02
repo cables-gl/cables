@@ -24,7 +24,6 @@
     "summary": "Shift array contents based upon rotate amount",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -48,5 +47,6 @@
             "date": 1567671309381
         }
     ],
-    "exampleProjectId": "r7Av7z"
+    "exampleProjectId": "r7Av7z",
+    "isReleased": true
 }

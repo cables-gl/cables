@@ -98,5 +98,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "RLvmjz"
+    "exampleProjectId": "RLvmjz",
+    "isReleased": true
 }

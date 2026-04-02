@@ -51,5 +51,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "jgArsw"
+    "exampleProjectId": "jgArsw",
+    "isReleased": true
 }

@@ -48,5 +48,6 @@
     "exampleProjectId": "UTES3I",
     "coreLibs": [
         "cgp"
-    ]
+    ],
+    "isReleased": true
 }

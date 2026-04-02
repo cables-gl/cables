@@ -18,5 +18,6 @@
             }
         ]
     },
-    "summary": "parse a string to a integer number"
+    "summary": "parse a string to a integer number",
+    "isReleased": true
 }

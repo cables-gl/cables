@@ -84,7 +84,6 @@
             }
         ]
     },
-
     "changelog": [
         {
             "message": "fixed the columns and rows parameter not resetting the array",
@@ -105,5 +104,6 @@
     ],
     "issues": "",
     "youtubeids": [],
-    "exampleProjectId": "icchV5"
+    "exampleProjectId": "icchV5",
+    "isReleased": true
 }

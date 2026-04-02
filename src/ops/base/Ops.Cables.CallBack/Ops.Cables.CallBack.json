@@ -58,8 +58,6 @@
     },
     "youtubeid": "",
     "issues": "",
-
-
     "changelog": [
         {
             "message": "Ops.Patch.CallBack renamed to Ops.Cables.CallBack",
@@ -67,5 +65,6 @@
             "author": "pandur",
             "date": 1678265320150
         }
-    ]
+    ],
+    "isReleased": true
 }

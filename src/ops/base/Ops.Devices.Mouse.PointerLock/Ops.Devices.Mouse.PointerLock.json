@@ -51,5 +51,6 @@
     "exampleProjectId": "ds6IV2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

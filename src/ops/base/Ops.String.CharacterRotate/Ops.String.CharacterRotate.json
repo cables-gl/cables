@@ -42,10 +42,10 @@
     },
     "summary": "String rotate characters like a split-flap display",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "-IuM8S"
+    "exampleProjectId": "-IuM8S",
+    "isReleased": true
 }

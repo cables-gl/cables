@@ -114,5 +114,6 @@
                 "text": "Current time in frames (30fps)"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

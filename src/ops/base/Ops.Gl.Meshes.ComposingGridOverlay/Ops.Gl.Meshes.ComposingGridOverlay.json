@@ -38,5 +38,6 @@
     "exampleProjectId": "G8mQQ2",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -97,7 +97,6 @@
     },
     "summary": "Request a json file and output an object (ajax, url, json)",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -151,5 +150,6 @@
             }
         ]
     },
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "isReleased": true
 }

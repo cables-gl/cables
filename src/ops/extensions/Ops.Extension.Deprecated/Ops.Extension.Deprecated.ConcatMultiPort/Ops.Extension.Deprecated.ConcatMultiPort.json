@@ -60,5 +60,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "PBHPrh"
+    "exampleProjectId": "PBHPrh",
+    "isReleased": true
 }

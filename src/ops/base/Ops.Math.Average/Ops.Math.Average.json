@@ -26,5 +26,6 @@
     "summary": "average of last two values",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

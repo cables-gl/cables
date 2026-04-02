@@ -57,5 +57,6 @@
     "summary": "Parses string containing ranges of frames and play as coherent animation",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

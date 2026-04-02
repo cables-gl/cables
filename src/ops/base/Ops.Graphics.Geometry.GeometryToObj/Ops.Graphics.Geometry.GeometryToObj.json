@@ -42,9 +42,9 @@
         ]
     },
     "summary": "Generate an .obj file as string from a geometry",
-
     "exampleProjectId": "BwxY2f",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

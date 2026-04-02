@@ -33,7 +33,6 @@
     },
     "summary": "trigger a string",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -55,5 +54,6 @@
             }
         ]
     },
-    "exampleProjectId": "VHsHue"
+    "exampleProjectId": "VHsHue",
+    "isReleased": true
 }

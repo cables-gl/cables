@@ -35,7 +35,6 @@
     "created": 1520347835082,
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -56,5 +55,6 @@
             }
         ]
     },
-    "exampleProjectId": "omrKQm"
+    "exampleProjectId": "omrKQm",
+    "isReleased": true
 }

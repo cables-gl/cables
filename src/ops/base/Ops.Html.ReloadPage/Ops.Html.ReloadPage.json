@@ -15,5 +15,6 @@
     "exampleProjectId": "BPeCci",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

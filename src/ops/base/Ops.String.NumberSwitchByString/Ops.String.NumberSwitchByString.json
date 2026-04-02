@@ -121,10 +121,10 @@
     },
     "summary": "associate numbers by strings",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "CWSBeE"
+    "exampleProjectId": "CWSBeE",
+    "isReleased": true
 }

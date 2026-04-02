@@ -37,5 +37,6 @@
     "summary": "Check an array colliders of bodies collinging against another array of colliders",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

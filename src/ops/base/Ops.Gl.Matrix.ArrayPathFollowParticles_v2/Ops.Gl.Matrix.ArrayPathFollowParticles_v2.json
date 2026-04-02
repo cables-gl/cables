@@ -59,29 +59,29 @@
     "youtubeids": [],
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.Matrix.ArrayPathFollowParticles",
-            "author": "cables",
-            "date": 1610105755288
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "cables",
-            "date": 1610110946709
-        },
-        {
-            "message": "Ops.User.cables.ArrayPathFollowParticles2 renamed to Ops.Gl.Matrix.ArrayPathFollowParticles_v2",
-            "author": "cables",
-            "date": 1610114417937
+            "message": "new op",
+            "author": "pandur",
+            "date": 1610105755288,
+            "type": "new op"
         },
         {
             "message": "add warning if not below a pointmaterial",
             "author": "stephan",
-            "date": 1657534188135
+            "date": 1657534188135,
+            "type": "improvement"
+        },
+        {
+            "message": "Add random texture coordinate per particle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1775128996323
         }
     ],
     "coreLibs": [
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "4wT0J6"
+    "exampleProjectId": "4wT0J6",
+    "isReleased": true,
+    "license": "MIT"
 }

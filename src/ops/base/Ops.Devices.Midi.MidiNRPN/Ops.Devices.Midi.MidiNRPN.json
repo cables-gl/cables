@@ -105,5 +105,6 @@
         ]
     },
     "exampleProjectId": "dfF3DI",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

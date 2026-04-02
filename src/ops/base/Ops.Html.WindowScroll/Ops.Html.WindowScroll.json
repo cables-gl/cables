@@ -34,5 +34,6 @@
     "summary": "Get the current scroll position of the window",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

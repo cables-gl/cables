@@ -65,5 +65,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "J4cYet"
+    "exampleProjectId": "J4cYet",
+    "isReleased": true
 }

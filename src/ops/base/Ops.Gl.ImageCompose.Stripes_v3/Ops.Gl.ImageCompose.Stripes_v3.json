@@ -154,5 +154,6 @@
     "exampleProjectId": "",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

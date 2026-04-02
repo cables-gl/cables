@@ -80,5 +80,6 @@
     "exampleProjectId": "3WSXCU",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

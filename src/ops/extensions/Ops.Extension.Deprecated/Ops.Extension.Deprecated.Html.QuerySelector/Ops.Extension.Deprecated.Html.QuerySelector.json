@@ -39,5 +39,6 @@
             "date": 1769000064967,
             "type": "deprecation"
         }
-    ]
+    ],
+    "isReleased": true
 }

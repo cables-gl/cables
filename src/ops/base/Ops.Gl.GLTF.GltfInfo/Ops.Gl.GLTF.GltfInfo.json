@@ -54,5 +54,6 @@
     "exampleProjectId": "Z7tacy",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

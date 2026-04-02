@@ -197,5 +197,6 @@
     "exampleProjectId": "PSw73e",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

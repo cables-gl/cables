@@ -325,5 +325,6 @@
     "exampleProjectId": "dr8EeE",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

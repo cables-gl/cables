@@ -47,5 +47,6 @@
         "ports": []
     },
     "summary": "Outputs textures",
-    "caniusequery": "webgpu"
+    "caniusequery": "webgpu",
+    "isReleased": true
 }

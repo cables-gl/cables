@@ -39,5 +39,6 @@
             }
         ]
     },
-    "exampleProjectId": "GbEqL-"
+    "exampleProjectId": "GbEqL-",
+    "isReleased": true
 }

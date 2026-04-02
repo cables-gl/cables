@@ -167,5 +167,6 @@
         "ports": []
     },
     "exampleProjectId": "0Ti2gT",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

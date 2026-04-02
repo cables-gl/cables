@@ -47,5 +47,6 @@
             }
         ]
     },
-    "exampleProjectId": "niHmJt"
+    "exampleProjectId": "niHmJt",
+    "isReleased": true
 }

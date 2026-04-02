@@ -77,5 +77,6 @@
                 "text": "The interpolated result"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

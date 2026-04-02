@@ -74,5 +74,6 @@
     "exampleProjectId": "0X_Eo9",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

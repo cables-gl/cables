@@ -348,5 +348,6 @@
     ],
     "caniusequery": "",
     "exampleProjectId": "XmL8GY",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

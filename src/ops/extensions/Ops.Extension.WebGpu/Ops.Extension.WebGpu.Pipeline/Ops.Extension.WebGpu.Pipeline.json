@@ -63,5 +63,6 @@
     "summary": "show content of last used pipeline for debugging",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

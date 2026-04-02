@@ -25,5 +25,6 @@
         "portsIn": [],
         "portsOut": []
     },
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

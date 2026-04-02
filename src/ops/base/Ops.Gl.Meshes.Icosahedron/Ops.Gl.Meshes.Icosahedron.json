@@ -45,5 +45,6 @@
     "exampleProjectId": "Ie6iQ6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -77,5 +77,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "render into a texture"
+    "summary": "render into a texture",
+    "isReleased": true
 }

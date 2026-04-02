@@ -36,8 +36,8 @@
     "summary": "record objects and download as json file",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

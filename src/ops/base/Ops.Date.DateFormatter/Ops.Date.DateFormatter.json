@@ -39,7 +39,6 @@
     },
     "summary": "String representation of a date",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -47,5 +46,6 @@
     "libs": [
         "moment.js"
     ],
-    "exampleProjectId": "mzfGGl"
+    "exampleProjectId": "mzfGGl",
+    "isReleased": true
 }

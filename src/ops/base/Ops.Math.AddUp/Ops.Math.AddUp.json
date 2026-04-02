@@ -32,5 +32,6 @@
     "exampleProjectId": "cWh78i",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -30,5 +30,6 @@
     "exampleProjectId": "QuT1X2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

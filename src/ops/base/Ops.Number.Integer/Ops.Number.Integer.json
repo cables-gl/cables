@@ -33,7 +33,6 @@
     },
     "summary": "Number op which only outputs integers ",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -46,5 +45,6 @@
                 "text": "Integer number output"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

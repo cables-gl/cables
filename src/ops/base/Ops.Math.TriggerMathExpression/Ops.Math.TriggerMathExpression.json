@@ -105,5 +105,6 @@
     "exampleProjectId": "6K7A5f",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

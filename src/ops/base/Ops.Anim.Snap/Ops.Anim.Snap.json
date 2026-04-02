@@ -94,5 +94,6 @@
             }
         ]
     },
-    "exampleProjectId": "7B11U6"
+    "exampleProjectId": "7B11U6",
+    "isReleased": true
 }

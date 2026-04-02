@@ -79,5 +79,6 @@
     "exampleProjectId": "iwaEwm",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

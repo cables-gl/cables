@@ -57,5 +57,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "lfiS8x"
+    "exampleProjectId": "lfiS8x",
+    "isReleased": true
 }

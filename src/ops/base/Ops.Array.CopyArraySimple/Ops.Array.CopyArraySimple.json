@@ -31,9 +31,8 @@
             "date": 1693484960111
         }
     ],
-
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -33,12 +33,12 @@
     },
     "youtubeid": "",
     "issues": "",
-
     "changelog": [
         {
             "message": "added a multiply amount",
             "author": "andro",
             "date": 1558434978061
         }
-    ]
+    ],
+    "isReleased": true
 }

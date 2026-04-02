@@ -43,5 +43,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Convert a GpuBuffer to a CPU Array"
+    "summary": "Convert a GpuBuffer to a CPU Array",
+    "isReleased": true
 }

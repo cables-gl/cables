@@ -42,5 +42,6 @@
     "exampleProjectId": "cTfoii",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

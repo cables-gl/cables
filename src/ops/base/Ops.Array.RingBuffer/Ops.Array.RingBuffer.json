@@ -64,5 +64,6 @@
             }
         ]
     },
-    "exampleProjectId": "NwwS97"
+    "exampleProjectId": "NwwS97",
+    "isReleased": true
 }

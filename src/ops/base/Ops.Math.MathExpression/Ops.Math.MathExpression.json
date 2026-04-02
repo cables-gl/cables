@@ -94,5 +94,6 @@
             }
         ]
     },
-    "exampleProjectId": "s5-tve"
+    "exampleProjectId": "s5-tve",
+    "isReleased": true
 }

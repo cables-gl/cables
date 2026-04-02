@@ -90,7 +90,6 @@
         ]
     },
     "youtubeid": "",
-
     "changelog": [
         {
             "message": "Ops.Html.BrowserCheck renamed to Ops.Html.BrowserInfo",
@@ -109,5 +108,6 @@
             "date": 1701851103177
         }
     ],
-    "exampleProjectId": "YOJiIk"
+    "exampleProjectId": "YOJiIk",
+    "isReleased": true
 }

@@ -95,5 +95,6 @@
     "exampleProjectId": "py-JK0",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

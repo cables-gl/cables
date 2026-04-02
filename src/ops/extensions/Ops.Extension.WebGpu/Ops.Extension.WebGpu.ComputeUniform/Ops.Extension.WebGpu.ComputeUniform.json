@@ -56,5 +56,6 @@
     "summary": "Add a uniform input to a compute shader composition",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

@@ -30,11 +30,10 @@
     "id": "1a8c3535-6fce-4cba-8601-ddb7a5dd7656",
     "created": 1504997489272,
     "issues": "",
-
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "i14QNS"
+    "exampleProjectId": "i14QNS",
+    "isReleased": true
 }

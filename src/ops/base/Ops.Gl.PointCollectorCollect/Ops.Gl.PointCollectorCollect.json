@@ -23,5 +23,6 @@
     "created": 1544360226445,
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

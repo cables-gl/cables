@@ -78,5 +78,6 @@
     "exampleProjectId": "n4DaW6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

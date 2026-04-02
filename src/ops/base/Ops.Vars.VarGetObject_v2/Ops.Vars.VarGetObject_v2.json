@@ -34,12 +34,12 @@
     },
     "summary": "Get a variable object",
     "issues": "",
-
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "0pVTp6"
+    "exampleProjectId": "0pVTp6",
+    "isReleased": true
 }

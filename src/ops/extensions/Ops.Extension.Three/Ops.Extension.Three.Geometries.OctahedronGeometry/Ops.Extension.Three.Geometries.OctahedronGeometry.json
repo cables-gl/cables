@@ -48,5 +48,6 @@
             }
         ]
     },
-    "exampleProjectId": "K7F5x4"
+    "exampleProjectId": "K7F5x4",
+    "isReleased": true
 }

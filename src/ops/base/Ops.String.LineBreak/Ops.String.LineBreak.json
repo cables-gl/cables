@@ -29,5 +29,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "U7PniO"
+    "exampleProjectId": "U7PniO",
+    "isReleased": true
 }

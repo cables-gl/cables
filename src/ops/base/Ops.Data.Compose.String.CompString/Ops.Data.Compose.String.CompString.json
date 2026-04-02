@@ -55,5 +55,6 @@
         "ports": []
     },
     "exampleProjectId": "GUpzJB",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

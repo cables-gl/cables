@@ -23,5 +23,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "zpLrSP"
+    "exampleProjectId": "zpLrSP",
+    "isReleased": true
 }

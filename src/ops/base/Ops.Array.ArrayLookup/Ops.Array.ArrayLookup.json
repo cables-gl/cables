@@ -38,5 +38,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "cwJBEe"
+    "exampleProjectId": "cwJBEe",
+    "isReleased": true
 }

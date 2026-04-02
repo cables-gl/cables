@@ -43,10 +43,10 @@
     "summary": "Custom easing curve via schlick bias and gain",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "FO9IG3",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

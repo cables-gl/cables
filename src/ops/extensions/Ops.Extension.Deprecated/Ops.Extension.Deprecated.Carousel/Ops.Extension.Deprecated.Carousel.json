@@ -53,5 +53,6 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

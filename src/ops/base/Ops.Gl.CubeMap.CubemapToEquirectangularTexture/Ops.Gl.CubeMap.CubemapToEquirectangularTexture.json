@@ -98,5 +98,6 @@
     "exampleProjectId": "pNZHYa",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

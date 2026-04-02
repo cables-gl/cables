@@ -40,5 +40,6 @@
     "summary": "Compute shader GPU buffer storage input",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

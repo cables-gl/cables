@@ -92,5 +92,6 @@
     "exampleProjectId": "cOlh_C",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

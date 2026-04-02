@@ -47,5 +47,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "PI2xsh"
+    "exampleProjectId": "PI2xsh",
+    "isReleased": true
 }

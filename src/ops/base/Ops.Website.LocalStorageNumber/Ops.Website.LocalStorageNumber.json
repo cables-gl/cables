@@ -64,5 +64,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "9di48i"
+    "exampleProjectId": "9di48i",
+    "isReleased": true
 }

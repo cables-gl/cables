@@ -80,5 +80,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Draw the same mesh many times very fast"
+    "summary": "Draw the same mesh many times very fast",
+    "isReleased": true
 }

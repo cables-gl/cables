@@ -60,5 +60,6 @@
         "ports": []
     },
     "summary": "add child elements to another HTML Element",
-    "exampleProjectId": "zC9iWh"
+    "exampleProjectId": "zC9iWh",
+    "isReleased": true
 }

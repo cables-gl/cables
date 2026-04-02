@@ -35,10 +35,10 @@
     },
     "summary": "map geo locations (latitude - longitude) to spherical coordinates",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "BvXW5Q"
+    "exampleProjectId": "BvXW5Q",
+    "isReleased": true
 }

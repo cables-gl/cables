@@ -37,10 +37,10 @@
     },
     "summary": "Value since the time origin in milliseconds (performance.now())",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "dJzVbI"
+    "exampleProjectId": "dJzVbI",
+    "isReleased": true
 }

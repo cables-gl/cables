@@ -59,5 +59,6 @@
     "exampleProjectId": "CW8-I6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

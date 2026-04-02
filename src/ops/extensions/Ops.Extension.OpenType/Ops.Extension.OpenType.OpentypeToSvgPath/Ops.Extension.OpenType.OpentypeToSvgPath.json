@@ -59,5 +59,6 @@
     "libs": [
         "opentype.js"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

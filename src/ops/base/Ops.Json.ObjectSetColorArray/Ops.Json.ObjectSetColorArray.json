@@ -99,5 +99,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "joA-JK"
+    "exampleProjectId": "joA-JK",
+    "isReleased": true
 }

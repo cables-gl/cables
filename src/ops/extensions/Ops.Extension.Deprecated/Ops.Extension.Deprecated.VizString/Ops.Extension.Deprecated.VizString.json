@@ -43,5 +43,6 @@
         "ports": []
     },
     "exampleProjectId": "_5PAIR",
-    "caniusequery": ""
+    "caniusequery": "",
+    "isReleased": true
 }

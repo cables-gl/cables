@@ -124,5 +124,6 @@
     "changelog": [],
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

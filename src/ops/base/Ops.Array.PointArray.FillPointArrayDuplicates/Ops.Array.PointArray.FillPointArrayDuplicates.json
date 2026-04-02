@@ -35,8 +35,8 @@
     "summary": "Fill an XYZ array with existing duplicate points until it reaches the length ",
     "youtubeid": "",
     "issues": "",
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

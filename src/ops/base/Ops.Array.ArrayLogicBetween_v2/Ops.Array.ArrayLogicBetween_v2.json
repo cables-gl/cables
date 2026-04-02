@@ -48,5 +48,6 @@
         ]
     },
     "license": "MIT",
-    "exampleProjectId": "jTqRet"
+    "exampleProjectId": "jTqRet",
+    "isReleased": true
 }

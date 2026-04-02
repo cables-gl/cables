@@ -18,8 +18,6 @@
     },
     "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
     "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -33,5 +31,6 @@
         ]
     },
     "youtubeids": [],
-    "exampleProjectId": "Jdij7z"
+    "exampleProjectId": "Jdij7z",
+    "isReleased": true
 }

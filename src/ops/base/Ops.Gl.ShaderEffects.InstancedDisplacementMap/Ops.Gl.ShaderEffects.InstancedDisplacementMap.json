@@ -133,5 +133,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "yQJfFj"
+    "exampleProjectId": "yQJfFj",
+    "isReleased": true
 }

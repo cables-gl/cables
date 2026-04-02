@@ -135,5 +135,6 @@
     "exampleProjectId": "hDcUC-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

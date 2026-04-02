@@ -40,7 +40,6 @@
     ],
     "summary": "Remove elements from an array from the beginning and/or the end",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -66,5 +65,6 @@
             }
         ]
     },
-    "exampleProjectId": "VbqZTh"
+    "exampleProjectId": "VbqZTh",
+    "isReleased": true
 }

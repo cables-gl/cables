@@ -77,5 +77,6 @@
             }
         ]
     },
-    "exampleProjectId": "3P54t7"
+    "exampleProjectId": "3P54t7",
+    "isReleased": true
 }

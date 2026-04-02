@@ -100,5 +100,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "nCSoG8"
+    "exampleProjectId": "nCSoG8",
+    "isReleased": true
 }

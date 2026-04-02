@@ -41,10 +41,10 @@
     "summary": "Create an array of strings and optionally attach index-number",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "haeXx3",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

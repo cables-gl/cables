@@ -28,7 +28,7 @@ function cutHex(h = "")
 
 exec.onTriggered = () =>
 {
-    if (!EyeDropper) return;
+    if (!window.EyeDropper) return;
     let eyeDropper = new EyeDropper();
 
     try

@@ -29,5 +29,6 @@
             }
         ]
     },
-    "changelog": []
+    "changelog": [],
+    "isReleased": true
 }

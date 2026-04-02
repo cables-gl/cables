@@ -58,5 +58,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Create a heightfield physics body"
+    "summary": "Create a heightfield physics body",
+    "isReleased": true
 }

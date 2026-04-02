@@ -29,5 +29,6 @@
             }
         ],
         "portsOut": []
-    }
+    },
+    "isReleased": true
 }

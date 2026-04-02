@@ -99,5 +99,6 @@
             }
         ]
     },
-    "exampleProjectId": "F77YvQ"
+    "exampleProjectId": "F77YvQ",
+    "isReleased": true
 }

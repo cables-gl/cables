@@ -46,10 +46,10 @@
     },
     "summary": "Find lowest/highest numbers in an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "gamucI"
+    "exampleProjectId": "gamucI",
+    "isReleased": true
 }

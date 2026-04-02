@@ -100,5 +100,6 @@
             "src": "./lottie.js",
             "type": "commonjs"
         }
-    ]
+    ],
+    "isReleased": true
 }

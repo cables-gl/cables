@@ -166,5 +166,6 @@
         ]
     },
     "exampleProjectId": "wa-KH-",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

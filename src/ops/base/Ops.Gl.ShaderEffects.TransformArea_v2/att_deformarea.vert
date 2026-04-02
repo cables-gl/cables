@@ -37,9 +37,11 @@ float MOD_sdHexPrism( vec3 p, vec2 h )
 mat4 MOD_createTransformMatrix(vec3 translation, vec3 scale) {
     mat4 matrix = mat4(1.0);
 
+     #ifndef MOD_WORLDSPACE
     matrix[0][0] = scale.x;
     matrix[1][1] = scale.y;
     matrix[2][2] = scale.z;
+#endif
 
     matrix[3][0] = translation.x;
     matrix[3][1] = translation.y;
@@ -155,8 +157,16 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
         // }
         // else
         // {
-            pos=m*vec4(0.,0.,0.,1.);
+//      #ifndef MOD_WORLDSPACE
+//            // pos=m*vec4(pos.xyz,1.);
+//             pos.rgb-=MOD_pos;
+
+//             pos.rgb*=(MOD_changeScale-vec3(1.))*MOD_de;
+//             pos.rgb+=MOD_pos;
+// #endif
         // }
+
+            pos=m*vec4(pos.rgb,1);
 
         pos*=rotationMatrix(vec3(1.0,0.0,0.0), MOD_de*MOD_rot.x/57.29577951308232);
         pos*=rotationMatrix(vec3(0.0,1.0,0.0), MOD_de*MOD_rot.y/57.29577951308232);

@@ -155,5 +155,6 @@
     "caniusequery": "",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

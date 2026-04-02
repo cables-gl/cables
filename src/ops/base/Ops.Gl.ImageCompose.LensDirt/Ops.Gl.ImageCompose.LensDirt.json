@@ -135,5 +135,6 @@
     "exampleProjectId": "vwgWMX",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

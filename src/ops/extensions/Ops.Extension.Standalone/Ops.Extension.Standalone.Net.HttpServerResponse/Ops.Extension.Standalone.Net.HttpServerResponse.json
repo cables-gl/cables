@@ -34,5 +34,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "lke9pn"
+    "exampleProjectId": "lke9pn",
+    "isReleased": true
 }

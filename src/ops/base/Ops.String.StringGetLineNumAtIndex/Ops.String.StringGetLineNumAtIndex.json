@@ -47,9 +47,8 @@
         ]
     },
     "summary": "output the line number at the character index",
-
-
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

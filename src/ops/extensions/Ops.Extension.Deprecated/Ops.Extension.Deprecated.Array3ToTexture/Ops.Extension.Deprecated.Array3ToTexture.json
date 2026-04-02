@@ -84,5 +84,6 @@
     "exampleProjectId": "h04IN-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

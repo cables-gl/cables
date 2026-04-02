@@ -44,10 +44,10 @@
     },
     "summary": "Combine multiple Values to a new String",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "U4M4J5"
+    "exampleProjectId": "U4M4J5",
+    "isReleased": true
 }

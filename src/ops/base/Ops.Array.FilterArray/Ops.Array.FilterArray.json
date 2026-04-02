@@ -51,7 +51,6 @@
     "summary": "Compare elements from an array and remove not matching ones",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -65,5 +64,6 @@
             }
         ]
     },
-    "exampleProjectId": "Z2dVoX"
+    "exampleProjectId": "Z2dVoX",
+    "isReleased": true
 }

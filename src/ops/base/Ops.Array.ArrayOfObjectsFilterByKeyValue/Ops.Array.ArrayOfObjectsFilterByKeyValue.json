@@ -63,5 +63,6 @@
             }
         ]
     },
-    "exampleProjectId": "HFRsU5"
+    "exampleProjectId": "HFRsU5",
+    "isReleased": true
 }

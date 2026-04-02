@@ -25,5 +25,6 @@
         "ports": []
     },
     "license": "MIT",
-    "exampleProjectId": "ADSKWn"
+    "exampleProjectId": "ADSKWn",
+    "isReleased": true
 }

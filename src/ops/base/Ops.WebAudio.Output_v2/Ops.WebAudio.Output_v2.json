@@ -92,5 +92,6 @@
         "interactionneededbutton",
         "webaudio"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

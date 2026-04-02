@@ -29,7 +29,6 @@
     },
     "summary": "Set a variable array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
@@ -37,5 +36,6 @@
     "coreLibs": [
         "vargetset"
     ],
-    "exampleProjectId": "3LkNp6"
+    "exampleProjectId": "3LkNp6",
+    "isReleased": true
 }

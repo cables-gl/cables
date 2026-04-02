@@ -33,5 +33,6 @@
     "exampleProjectId": "rEesag",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

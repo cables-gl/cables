@@ -178,5 +178,6 @@
     "exampleProjectId": "NSYy0t",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -50,5 +50,6 @@
     "exampleProjectId": "bg73Qc",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

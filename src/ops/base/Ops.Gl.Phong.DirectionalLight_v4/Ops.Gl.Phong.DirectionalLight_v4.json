@@ -166,5 +166,6 @@
     "exampleProjectId": "nEWpXU",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

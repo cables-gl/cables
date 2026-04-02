@@ -73,5 +73,6 @@
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

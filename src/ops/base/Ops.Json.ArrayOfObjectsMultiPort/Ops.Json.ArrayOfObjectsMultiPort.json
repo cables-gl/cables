@@ -46,5 +46,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "create an array with multiple objects"
+    "summary": "create an array with multiple objects",
+    "isReleased": true
 }

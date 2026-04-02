@@ -35,9 +35,9 @@
     },
     "summary": "Filter valid arrays",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

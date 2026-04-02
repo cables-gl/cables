@@ -40,5 +40,6 @@
         "ports": []
     },
     "summary": "preview an image URL or a data/base64 URL",
-    "exampleProjectId": "gsP8hO"
+    "exampleProjectId": "gsP8hO",
+    "isReleased": true
 }

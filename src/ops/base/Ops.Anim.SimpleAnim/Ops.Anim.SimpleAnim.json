@@ -125,5 +125,6 @@
     "youtubeid": "",
     "issues": "",
     "exampleProjectId": "dOlV9L",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

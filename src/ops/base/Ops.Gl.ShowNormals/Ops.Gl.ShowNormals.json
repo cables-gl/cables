@@ -36,5 +36,6 @@
     "exampleProjectId": "4NeG02",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

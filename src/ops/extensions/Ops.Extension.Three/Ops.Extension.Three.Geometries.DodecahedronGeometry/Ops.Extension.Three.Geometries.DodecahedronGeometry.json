@@ -48,5 +48,6 @@
             }
         ]
     },
-    "exampleProjectId": "0gw4x4"
+    "exampleProjectId": "0gw4x4",
+    "isReleased": true
 }

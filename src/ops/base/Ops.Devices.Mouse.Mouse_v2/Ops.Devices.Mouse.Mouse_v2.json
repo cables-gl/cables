@@ -120,5 +120,6 @@
     "exampleProjectId": "mDiCq6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

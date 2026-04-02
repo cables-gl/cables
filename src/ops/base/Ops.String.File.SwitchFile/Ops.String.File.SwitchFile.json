@@ -18,8 +18,6 @@
     "summary": "switch between filenames",
     "youtubeid": "",
     "issues": "",
-
-
     "docs": {
         "ports": []
     },
@@ -99,5 +97,6 @@
             "deletedBy": "cables",
             "deletedDate": 1605512036945
         }
-    ]
+    ],
+    "isReleased": true
 }

@@ -50,10 +50,9 @@
     "authorName": "pandur",
     "created": 1686129047736,
     "summary": "Information about Textures in an array",
-
-
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "vS5fjz"
+    "exampleProjectId": "vS5fjz",
+    "isReleased": true
 }

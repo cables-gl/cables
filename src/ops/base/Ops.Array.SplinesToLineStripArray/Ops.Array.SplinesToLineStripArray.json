@@ -30,7 +30,6 @@
     },
     "summary": "Convert an array of splines to one \"line stripped\" array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -44,5 +43,6 @@
             }
         ]
     },
-    "exampleProjectId": "_UiSmX"
+    "exampleProjectId": "_UiSmX",
+    "isReleased": true
 }

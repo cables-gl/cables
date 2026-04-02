@@ -122,5 +122,6 @@
     "exampleProjectId": "eYNP7-",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

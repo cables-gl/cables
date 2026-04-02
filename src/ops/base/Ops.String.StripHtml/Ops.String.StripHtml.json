@@ -25,10 +25,10 @@
     },
     "summary": "remove html tags from a string",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "5NsMve"
+    "exampleProjectId": "5NsMve",
+    "isReleased": true
 }

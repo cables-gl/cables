@@ -34,5 +34,6 @@
         "ports": []
     },
     "changelog": [],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

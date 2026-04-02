@@ -83,5 +83,6 @@
         }
     ],
     "license": "MIT",
-    "exampleProjectId": "As6p8i"
+    "exampleProjectId": "As6p8i",
+    "isReleased": true
 }

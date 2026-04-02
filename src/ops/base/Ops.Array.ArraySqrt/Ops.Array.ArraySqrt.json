@@ -25,7 +25,6 @@
     },
     "summary": "Return the square root of all values in the array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -39,5 +38,6 @@
             }
         ]
     },
-    "exampleProjectId": "g7ulSP"
+    "exampleProjectId": "g7ulSP",
+    "isReleased": true
 }

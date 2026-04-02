@@ -19,5 +19,6 @@
             }
         ]
     },
-    "summary": "encode a string to base64"
+    "summary": "encode a string to base64",
+    "isReleased": true
 }

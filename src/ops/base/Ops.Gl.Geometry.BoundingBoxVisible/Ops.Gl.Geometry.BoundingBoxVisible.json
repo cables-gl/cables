@@ -76,5 +76,6 @@
     "exampleProjectId": "DAhGve",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

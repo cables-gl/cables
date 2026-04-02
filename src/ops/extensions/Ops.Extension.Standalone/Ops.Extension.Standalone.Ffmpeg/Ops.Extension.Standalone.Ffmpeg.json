@@ -110,5 +110,6 @@
     "summary": "FFmpeg video converter toolbox op",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

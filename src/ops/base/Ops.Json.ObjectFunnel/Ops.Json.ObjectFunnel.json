@@ -35,5 +35,6 @@
     "summary": "outputs the last changed object",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

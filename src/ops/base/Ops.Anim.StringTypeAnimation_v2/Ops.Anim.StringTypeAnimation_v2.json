@@ -85,5 +85,6 @@
             }
         ]
     },
-    "exampleProjectId": "8dB2eH"
+    "exampleProjectId": "8dB2eH",
+    "isReleased": true
 }

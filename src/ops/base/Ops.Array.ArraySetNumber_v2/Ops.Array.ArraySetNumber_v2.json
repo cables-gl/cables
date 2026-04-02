@@ -53,7 +53,6 @@
     },
     "summary": "Set a number at index in an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -83,5 +82,6 @@
             }
         ]
     },
-    "exampleProjectId": "bJrH16"
+    "exampleProjectId": "bJrH16",
+    "isReleased": true
 }

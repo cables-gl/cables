@@ -149,5 +149,6 @@
     "exampleProjectId": "9COr26",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

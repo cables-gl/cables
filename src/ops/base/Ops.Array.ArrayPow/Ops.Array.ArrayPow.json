@@ -1,8 +1,6 @@
 {
     "summary": "Apply a Pow function to an array",
     "issues": "",
-
-
     "docs": {
         "ports": [
             {
@@ -42,5 +40,6 @@
         ]
     },
     "youtubeids": [],
-    "exampleProjectId": "nakc7z"
+    "exampleProjectId": "nakc7z",
+    "isReleased": true
 }

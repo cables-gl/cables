@@ -26,5 +26,6 @@
     "summary": "Move back or forward in the browser navigation history",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

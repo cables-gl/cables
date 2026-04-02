@@ -112,5 +112,6 @@
             }
         ]
     },
-    "exampleProjectId": "DNW-QJ"
+    "exampleProjectId": "DNW-QJ",
+    "isReleased": true
 }

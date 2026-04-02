@@ -60,15 +60,23 @@ function rebuild()
     const num = Math.abs(Math.floor(inParticles.get()) * 3);
     if (!verts || verts.length != num) verts = new Float32Array(num);
 
+    const tc = [];
     for (i = 0; i < verts.length; i += 3)
     {
         verts[i + 0] = (Math.random() - 0.5);
         verts[i + 1] = (Math.random() - 0.5);
         verts[i + 2] = (Math.random() - 0.5);
+        tc[i / 3 * 2 + 1] = Math.random();
+        tc[i / 3 * 2 + 2] = Math.random();
     }
 
-    if (!geom)geom = new CGL.Geometry(op.name);
+    if (!geom)
+    {
+        geom = new CGL.Geometry(op.name);
+    }
     geom.setPointVertices(verts);
+
+    geom.setTexCoords(tc);
 
     if (!mesh)
     {
@@ -77,7 +85,7 @@ function rebuild()
         mesh.addVertexNumbers = true;
         mesh._verticesNumbers = null;
 
-        op.log("NEW MESH");
+        // op.log("NEW MESH");
     }
     else
     {

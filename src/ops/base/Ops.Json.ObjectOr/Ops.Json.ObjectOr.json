@@ -47,5 +47,6 @@
     "summary": "result is first connected valid object",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

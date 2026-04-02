@@ -182,5 +182,6 @@
     "exampleProjectId": "k6ttde",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

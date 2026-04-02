@@ -100,5 +100,6 @@
     "summary": "Render Multiple Layers in a specific order",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

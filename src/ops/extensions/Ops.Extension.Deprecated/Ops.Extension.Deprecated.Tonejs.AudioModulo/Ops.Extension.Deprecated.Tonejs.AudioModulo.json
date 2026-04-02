@@ -26,7 +26,6 @@
     "coreLibs": [
         "webaudio"
     ],
-    "authorName": "pandur",
     "changelog": [
         {
             "message": "op was deprecated",
@@ -34,5 +33,6 @@
             "author": "pandur",
             "date": 1719844250480
         }
-    ]
+    ],
+    "isReleased": true
 }

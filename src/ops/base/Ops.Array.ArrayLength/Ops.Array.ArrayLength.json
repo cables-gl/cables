@@ -20,7 +20,6 @@
     "id": "ea508405-833d-411a-86b4-1a012c135c8a",
     "created": 1514985490845,
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -33,5 +32,6 @@
             }
         ]
     },
-    "exampleProjectId": ""
+    "exampleProjectId": "",
+    "isReleased": true
 }

@@ -45,5 +45,6 @@
     "exampleProjectId": "aSB6On",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

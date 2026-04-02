@@ -203,5 +203,6 @@
     "exampleProjectId": "IUjXgu",
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "isReleased": true
 }

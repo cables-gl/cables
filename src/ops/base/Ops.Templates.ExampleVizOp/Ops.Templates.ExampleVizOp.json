@@ -27,10 +27,10 @@
     "summary": "example how to code a viz layer op",
     "issues": "",
     "caniusequery": "",
-
     "youtubeids": [],
     "exampleProjectId": "",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

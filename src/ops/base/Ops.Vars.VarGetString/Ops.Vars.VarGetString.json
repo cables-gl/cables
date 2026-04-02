@@ -24,7 +24,6 @@
     },
     "summary": "String variable getter",
     "issues": "",
-
     "docs": {
         "ports": [
             {
@@ -43,5 +42,6 @@
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
-    "exampleProjectId": "W14clJ"
+    "exampleProjectId": "W14clJ",
+    "isReleased": true
 }

@@ -132,5 +132,6 @@
         "ports": []
     },
     "summary": "Create arrays for circular shapes, helix, circle, etc.",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

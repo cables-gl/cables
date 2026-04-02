@@ -84,5 +84,6 @@
             }
         ]
     },
-    "exampleProjectId": "WRrXSn"
+    "exampleProjectId": "WRrXSn",
+    "isReleased": true
 }

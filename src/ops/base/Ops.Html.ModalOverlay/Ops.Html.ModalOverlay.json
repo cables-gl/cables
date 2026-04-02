@@ -64,5 +64,6 @@
     "exampleProjectId": "RXU-K2",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

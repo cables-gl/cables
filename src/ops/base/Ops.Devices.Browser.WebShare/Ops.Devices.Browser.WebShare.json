@@ -75,7 +75,6 @@
     "summary": "Opens a sharing dialog to share text and images",
     "issues": "",
     "caniusequery": "web-share",
-
     "youtubeids": [],
     "exampleProjectId": "pQ49m4",
     "docs": {
@@ -97,5 +96,6 @@
                 "text": "true/false for browser support of web-share-api"
             }
         ]
-    }
+    },
+    "isReleased": true
 }

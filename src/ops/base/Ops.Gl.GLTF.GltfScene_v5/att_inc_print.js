@@ -620,7 +620,7 @@ function printInfo()
 
     let numLights = 0;
     let punctualLights = null;
-    if (gltf.json.extensions.KHR_lights_punctual && gltf.json.extensions.KHR_lights_punctual.lights)punctualLights = gltf.json.extensions.KHR_lights_punctual.lights;
+    if (gltf.json.extensions && gltf.json.extensions.KHR_lights_punctual && gltf.json.extensions.KHR_lights_punctual.lights)punctualLights = gltf.json.extensions.KHR_lights_punctual.lights;
     if (punctualLights)numLights = punctualLights.length;
 
     html += "<div id=\"groupLights\">Lights (" + numLights + ")</div>";

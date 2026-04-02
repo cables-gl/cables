@@ -22,7 +22,6 @@
             }
         ]
     },
-    "changelog": [
-
-    ]
+    "changelog": [],
+    "isReleased": true
 }

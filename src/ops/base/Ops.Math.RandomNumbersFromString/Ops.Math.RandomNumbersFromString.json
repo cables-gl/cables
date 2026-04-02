@@ -39,5 +39,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "aAaJgt"
+    "exampleProjectId": "aAaJgt",
+    "isReleased": true
 }

@@ -91,5 +91,6 @@
     "exampleProjectId": "aMkD16",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

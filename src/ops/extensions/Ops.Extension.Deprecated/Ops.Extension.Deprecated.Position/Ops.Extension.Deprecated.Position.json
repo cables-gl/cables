@@ -68,5 +68,6 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

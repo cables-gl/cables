@@ -44,5 +44,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Scroll an area, so the html element is visible/in view"
+    "summary": "Scroll an area, so the html element is visible/in view",
+    "isReleased": true
 }

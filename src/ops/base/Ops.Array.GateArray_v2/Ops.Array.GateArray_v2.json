@@ -53,5 +53,6 @@
         "ports": []
     },
     "caniusequery": "",
-    "exampleProjectId": "gOaDAH"
+    "exampleProjectId": "gOaDAH",
+    "isReleased": true
 }

@@ -225,6 +225,11 @@ function drawHelpers()
             "posY": inPosY,
             "posZ": inPosZ,
         });
+        gui.setTransformGizmo({
+            "posX": inPointAtX,
+            "posY": inPointAtY,
+            "posZ": inPointAtZ,
+        }, 1);
 
         CABLES.GL_MARKER.drawLineSourceDest(
             op,

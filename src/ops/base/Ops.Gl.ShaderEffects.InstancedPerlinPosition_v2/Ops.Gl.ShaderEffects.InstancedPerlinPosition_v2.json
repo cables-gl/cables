@@ -101,5 +101,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "exampleProjectId": "33bSY7"
+    "exampleProjectId": "33bSY7",
+    "isReleased": true
 }

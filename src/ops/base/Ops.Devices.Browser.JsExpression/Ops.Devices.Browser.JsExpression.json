@@ -47,5 +47,6 @@
     "exampleProjectId": "gpp4O8",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

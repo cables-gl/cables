@@ -31,7 +31,6 @@
     },
     "summary": "Interpolate between all values of an array",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": [
@@ -49,5 +48,6 @@
             }
         ]
     },
-    "exampleProjectId": "dbUc-L"
+    "exampleProjectId": "dbUc-L",
+    "isReleased": true
 }

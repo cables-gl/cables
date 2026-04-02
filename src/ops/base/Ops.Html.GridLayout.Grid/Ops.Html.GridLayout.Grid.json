@@ -126,5 +126,6 @@
     "summary": "Arrange HTML elments in grids, create grids by combining rows and columns",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

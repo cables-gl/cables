@@ -80,5 +80,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Simulate a character in a physics worlda"
+    "summary": "Simulate a character in a physics worlda",
+    "isReleased": true
 }

@@ -35,5 +35,6 @@
             }
         ]
     },
-    "exampleProjectId": "3LkNp6"
+    "exampleProjectId": "3LkNp6",
+    "isReleased": true
 }

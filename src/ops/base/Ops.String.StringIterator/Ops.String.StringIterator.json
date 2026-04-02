@@ -34,5 +34,6 @@
             }
         ]
     },
-    "summary": "iterate over every character of a string"
+    "summary": "iterate over every character of a string",
+    "isReleased": true
 }

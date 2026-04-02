@@ -76,5 +76,6 @@
     "exampleProjectId": "w1SPcI",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

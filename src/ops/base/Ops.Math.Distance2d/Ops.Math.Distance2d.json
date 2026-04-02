@@ -59,5 +59,6 @@
             }
         ]
     },
-    "exampleProjectId": "7mTKgg"
+    "exampleProjectId": "7mTKgg",
+    "isReleased": true
 }

@@ -26,5 +26,6 @@
             }
         ]
     },
-    "summary": "generate a random string of given characters"
+    "summary": "generate a random string of given characters",
+    "isReleased": true
 }

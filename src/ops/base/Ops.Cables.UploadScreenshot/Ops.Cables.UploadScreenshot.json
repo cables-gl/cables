@@ -33,5 +33,6 @@
     "summary": "Upload an image as screentshot in cables",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": true
 }

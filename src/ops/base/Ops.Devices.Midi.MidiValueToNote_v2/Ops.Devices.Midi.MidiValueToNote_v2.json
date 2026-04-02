@@ -35,8 +35,6 @@
             "licence": "MIT"
         }
     ],
-
-
     "exampleProjectId": "PfZk-4",
     "issues": "",
     "caniusequery": "",
@@ -57,5 +55,6 @@
             "author": "stephan",
             "date": 1655724245593
         }
-    ]
+    ],
+    "isReleased": true
 }

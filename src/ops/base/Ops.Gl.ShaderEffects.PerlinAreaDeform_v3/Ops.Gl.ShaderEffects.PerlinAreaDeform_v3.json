@@ -147,5 +147,6 @@
     "exampleProjectId": "8RexP8",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

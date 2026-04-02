@@ -33,5 +33,6 @@
     "exampleProjectId": "uAkdL5",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

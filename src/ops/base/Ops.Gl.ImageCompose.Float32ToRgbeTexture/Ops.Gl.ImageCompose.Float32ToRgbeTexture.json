@@ -80,5 +80,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "dXLhW2"
+    "exampleProjectId": "dXLhW2",
+    "isReleased": true
 }

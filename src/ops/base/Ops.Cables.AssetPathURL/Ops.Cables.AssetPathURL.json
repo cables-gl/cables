@@ -29,5 +29,6 @@
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "mwhthf"
+    "exampleProjectId": "mwhthf",
+    "isReleased": true
 }

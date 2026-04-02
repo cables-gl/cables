@@ -179,5 +179,6 @@
     "exampleProjectId": "dYhlT6",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -41,12 +41,12 @@
     ],
     "youtubeid": "",
     "issues": "",
-
     "changelog": [
         {
             "message": "Ops.Value.ValueString renamed to Ops.String.String",
             "author": "pandur",
             "date": 1560332760467
         }
-    ]
+    ],
+    "isReleased": true
 }
