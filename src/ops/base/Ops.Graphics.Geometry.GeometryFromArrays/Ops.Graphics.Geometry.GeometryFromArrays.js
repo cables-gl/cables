@@ -5,7 +5,7 @@ const
     inTexCoords = op.inArray("Texture Coords"),
     inNormals = op.inArray("Normals"),
     next = op.outTrigger("Next"),
-    outGeom = op.outObject("Geometry");
+    outGeom = op.outObject("Geometry", null, "geometry");
 
 let updateVerts = false;
 let updateFaces = false;
