@@ -29,6 +29,8 @@ export class MultiPort2 extends Port
 
         const updateArray = () =>
         {
+            console.log("updatearray");
+            console.trace("hallo");
             const arr = [];
 
             let ll = 1;// do not include addport
@@ -75,10 +77,15 @@ export class MultiPort2 extends Port
         this.removeInvalidPorts = () =>
         {
 
+            let changed = false;
             for (let i = 0; i < this.ports.length; i++)
-                if (!this.ports[i]) this.ports.splice(i, 1);
+                if (!this.ports[i])
+                {
+                    changed = true;
+                    this.ports.splice(i, 1);
+                }
 
-            updateArray();
+            if (changed)updateArray();
         };
 
         this.countPorts = () =>

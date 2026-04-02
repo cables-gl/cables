@@ -40,6 +40,12 @@ let GltfMaterial = class
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_emissive_strength"))
             console.log("todo: emissive strength", this.json.extensions.KHR_materials_emissive_strength.emissiveStrength);
 
+        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_ior"))
+            console.log("todo: ior", this.json.extensions.KHR_materials_ior.ior);
+
+        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_clearcoat"))
+            console.log("todo: clearcoat", this.json.extensions.KHR_materials_clearcoat.clearcoatFactor);
+
         if (this.json.pbrMetallicRoughness)
         {
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;
