@@ -577,21 +577,20 @@ export class Texture extends CgTexture
     }
 
     /**
- * @function load
- * @static
- * @memberof Texture
- * @description load an image from an url
- * @param {CglContext} cgl
- * @param {String} url
- * @param {Function} finishedCallback
- * @param {Object} settings
- * @return {Texture}
- */
-    static load(cgl, url, finishedCallback, settings)
+     * load an image from an url
+     * @param {CglContext} cgl
+     * @param {String} url
+     * @param {Function} finishedCallback
+     * @param {Object} settings
+     * @param {Op} [op]
+
+     * @return {Texture}
+     */
+    static load(cgl, url, finishedCallback, settings, op)
     {
         if (!url) return finishedCallback({ "error": true });
         let loadingId = null;
-        if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url);
+        if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url, op);
 
         const texture = new Texture(cgl);
         texture.name = url;

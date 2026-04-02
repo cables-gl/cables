@@ -1,0 +1,40 @@
+{
+    "id": "8eeaab19-a215-4db1-b63e-5f8976cc8052",
+    "created": 1775139773013,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1775139773014
+        },
+        {
+            "message": "Patch.Pwc2i9f.OpsLoadingStatus renamed to Ops.Cables.Ops.OpsLoadingStatus",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1775142500930
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Ops"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    }
+}

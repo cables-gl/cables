@@ -4,16 +4,30 @@ import { Patch } from "./core_patch.js";
 import { Op } from "./core_op.js";
 
 /**
- * LoadingStatus class, manages asynchronous loading jobs
- *
- * @namespace external:CABLES#LoadingStatus
- * @hideconstructor
- * @class
- * @param patch
+ * @typedef LoadingTask
+ * @property {Op} [op]
+ * @property {String} [id]
+ * @property {string} [type]
  */
 
+/**
+ * LoadingStatus class, manages asynchronous loading jobs
+ */
 export class LoadingStatus extends Events
 {
+
+    _cbFinished = [];
+    _assetTasks = [];
+    _percent = 0;
+    _count = 0;
+    _countFinished = 0;
+    _order = 0;
+    _startTime = 0;
+    _wasFinishedPrinted = false;
+    _loadingAssetTaskCb = false;
+
+    /** @type {Object.<String,LoadingTask>} */
+    _loadingAssets = {};
 
     /**
      * @param {Patch} patch
@@ -22,17 +36,8 @@ export class LoadingStatus extends Events
     {
         super();
         this._log = new Logger("LoadingStatus");
-        this._loadingAssets = {};
-        this._cbFinished = [];
-        this._assetTasks = [];
-        this._percent = 0;
-        this._count = 0;
-        this._countFinished = 0;
-        this._order = 0;
-        this._startTime = 0;
         this._patch = patch;
-        this._wasFinishedPrinted = false;
-        this._loadingAssetTaskCb = false;
+
     }
 
     /**
