@@ -29,8 +29,6 @@ export class MultiPort2 extends Port
 
         const updateArray = () =>
         {
-            console.log("updatearray");
-            console.trace("hallo");
             const arr = [];
 
             let ll = 1;// do not include addport
