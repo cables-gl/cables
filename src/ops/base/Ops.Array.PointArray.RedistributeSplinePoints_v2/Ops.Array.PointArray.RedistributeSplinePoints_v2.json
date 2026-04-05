@@ -35,8 +35,6 @@
     "docs": {
         "ports": []
     },
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
             "message": "New version v2: Automatically update when array changes",
@@ -45,5 +43,6 @@
             "date": 1775137626492
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

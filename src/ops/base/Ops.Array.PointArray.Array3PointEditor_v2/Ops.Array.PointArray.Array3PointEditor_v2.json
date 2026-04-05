@@ -1,19 +1,32 @@
 {
-    "id": "be0e2668-4a03-477b-993c-766aa53a904a",
+    "id": "6ac50240-5cd2-4d79-b9a4-ac6abd54d7dd",
     "created": 1775112621120,
-    "license": "MIT",
     "authorName": "pandur",
-    "summary": "Create an array from multiple number inputs",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1716805378772
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1775112621120
+        },
+        {
+            "message": "Patch.PL0O9sf.SplineEdit renamed to Ops.Array.PointArray.Array3PointEditor_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1775406126614
+        }
+    ],
     "layout": {
         "portsIn": [
             {
                 "type": 1,
                 "name": "Execute"
-            },
-            {
-                "type": 0,
-                "name": "Edit",
-                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -42,19 +55,10 @@
             }
         ]
     },
+    "summary": "Create an array from multiple number inputs",
+    "license": "MIT",
     "docs": {
         "ports": []
     },
-    "hasExample": false,
-    "libs": [],
-    "youtubeids": [],
-    "changelog": [
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1775121233650
-        }
-    ],
-    "cloneOf": "89d50b13-963c-4344-8047-2fb15377d7b0"
+    "cloneOf": "fa57dcbe-3c5a-4e9c-93d0-b1b41b41dde4"
 }
