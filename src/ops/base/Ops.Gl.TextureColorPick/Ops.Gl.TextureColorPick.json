@@ -44,12 +44,12 @@
             {
                 "type": 0,
                 "name": "X",
-                "subType": "integer"
+                "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Y",
-                "subType": "integer"
+                "subType": "number"
             },
             {
                 "type": 2,

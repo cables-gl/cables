@@ -23,7 +23,11 @@ navigator.gpu.requestAdapter(
     }).then(
     (adapter) =>
     {
-        adapter.requestDevice().then(
+        adapter.requestDevice({
+            "requiredLimits": {
+                "maxStorageBuffersInVertexStage": 5, // request up to what's supported
+            },
+        }).then(
             (_device) =>
             {
                 device = _device;
@@ -53,7 +57,7 @@ navigator.gpu.requestAdapter(
             });
     });
 
-function frame()
+function frame(timestamp)
 {
     const commandEncoder = device.createCommandEncoder();
     const textureView = context.getCurrentTexture().createView();
@@ -62,7 +66,7 @@ function frame()
         "colorAttachments": [
             {
                 "view": textureView,
-                "clearValue": [0, 0, 0, 1], // Clear to transparent
+                "clearValue": [0, 0, 0, 1],
                 "loadOp": "clear",
                 "storeOp": "store",
             },

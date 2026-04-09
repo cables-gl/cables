@@ -59,6 +59,8 @@ pUpdate.onTriggered = function ()
     {
         x = Math.min(realTexture.width, realTexture.width * x);
         y = Math.min(realTexture.height, realTexture.height * y);
+        inX.setUiAttribs({ "increment": null });
+        inY.setUiAttribs({ "increment": null });
     }
 
     pixelReader.read(cgl, fb, realTexture.pixelFormat, x, y, 1, 1, (pixel) =>

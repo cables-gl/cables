@@ -10,6 +10,10 @@ inStrs.onChange = () =>
 {
     const stringPorts = inStrs.get();
     let arr = [];
+    if (CABLES.UI && !gui.shouldDrawOverlay)
+        op.setUiError("overlayneed", "to edit, toggle overlay mode with [o]", 2);
+    else
+        op.setUiError("overlayneed", null);
 
     const num = Math.floor(stringPorts.length / 3);
     for (let i = 0; i < num; i++)
@@ -31,7 +35,6 @@ exec.onTriggered = () =>
     if (CABLES.UI && op.isCurrentUiOp())
     {
         numGizmos = num;
-        // console.log("num", num);
         for (let i = 0; i < num; i++)
         {
             gui.setTransformGizmo(
@@ -40,8 +43,6 @@ exec.onTriggered = () =>
                     "posY": stringPorts[i * 3 + 1],
                     "posZ": stringPorts[i * 3 + 2],
                 }, i);
-
-            // arr[i] = stringPorts[i].get() || 0;
         }
     }
 };
