@@ -160,7 +160,7 @@ export class LoadingStatus extends Events
     _startAssetTasks()
     {
         for (let i = 0; i < this._assetTasks.length; i++)
-            requestIdleCallback(this._assetTasks[i]);
+            CABLES.idleCallback(this._assetTasks[i]);
 
         this._assetTasks.length = 0;
     }
@@ -180,7 +180,7 @@ export class LoadingStatus extends Events
         }
         else
         {
-            requestIdleCallback(cb);
+            CABLES.idleCallback(cb);
         }
         this.emitEvent("addAssetTask");
     }
