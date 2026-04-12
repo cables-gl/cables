@@ -29,6 +29,15 @@
             },
             {
                 "type": 0,
+                "name": "Type index",
+                "values": [
+                    "f32",
+                    "vec4f"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },

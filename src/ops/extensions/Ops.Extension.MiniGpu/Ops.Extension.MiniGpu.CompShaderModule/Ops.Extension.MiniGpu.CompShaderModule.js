@@ -19,6 +19,7 @@ let bindHead = "";
 let reInit = true;
 let o = null;
 let lastChange = 0;
+let hasError = false;
 
 inStage.onChange =
 inStage.onChange =
@@ -26,9 +27,9 @@ inCode.onChange = () =>
 {
     /* minimalcore:start */
     op.setUiAttrib({ "extendTitle": inStage.get() });
-
     /* minimalcore:end */
 
+    hasError = false;
     reInit = true;
 };
 inReset.onTriggered = () =>
@@ -60,7 +61,7 @@ function genBindHeadSrc()
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-
+    if (hasError) return;
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
     mgpu.bindings = binds.clear();
@@ -71,13 +72,30 @@ exec.onTriggered = () =>
 
     if (reInit || mgpu.rebuildShaderModule)
     {
+        hasError = false;
         console.log("create module", inStage.get(), mgpu.rebuildShaderModule);
         s = { "layout": "auto", };
+        const module = mgpu.device.createShaderModule({
+            "code": genBindHeadSrc(),
+        });
+        /* minimalcore:start */
+        module.getCompilationInfo().then((a) =>
+        {
+            op.setUiError("shadercomp", null);
+            for (let i = 0; i < a.messages.length; i++)
+            {
+                const msg = a.messages[i];
+                if (msg)
+                {
+                    op.setUiError("shadercomp", msg.type + ": " + msg.message);
+                    if (msg.type == "error")hasError = true;
+                }
+            }
+        });
 
+        /* minimalcore:end */
         s[inStage.get().toLowerCase()] = {
-            "module": mgpu.device.createShaderModule({
-                "code": genBindHeadSrc(),
-            }),
+            "module": module,
             "targets": [// only frag??
                 {
                     "format": mgpu.format,

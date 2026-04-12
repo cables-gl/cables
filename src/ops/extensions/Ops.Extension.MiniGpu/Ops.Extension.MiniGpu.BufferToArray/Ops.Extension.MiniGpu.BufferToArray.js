@@ -44,7 +44,6 @@ exec.onTriggered = () =>
             const arrayBuffer = gpuReadBuffer.getMappedRange();
             const b = new Float32Array(arrayBuffer);
             outArr.setRef(b);
-            // gpuReadBuffer.unmap();
             gpuReadBuffer = null;
             doRead = true;
         });

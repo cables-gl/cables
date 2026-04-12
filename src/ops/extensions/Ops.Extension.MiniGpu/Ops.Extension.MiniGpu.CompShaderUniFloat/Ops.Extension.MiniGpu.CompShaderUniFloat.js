@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
+    inType = op.inSwitch("Type", ["f32", "vec4f"], "vec4f"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
@@ -11,7 +12,9 @@ let binding = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
 
-exec.onLinkChanged = () =>
+inName.onChange =
+inType.onChange =
+exec.onLinkChange = () =>
 {
     binding = null;
 };
@@ -22,7 +25,12 @@ exec.onTriggered = () =>
     if (!binding)
     {
         /* minimalcore:start */
-        op.setUiAttrib({ "extendTitle": inName.get() });
+        op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
+
+        inY.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+        inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+        inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+
         /* minimalcore:end */
 
         const layout = {
@@ -36,10 +44,8 @@ exec.onTriggered = () =>
             "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
         });
 
-        const type = "vec4f";
-
         binding = {
-            "header": "var<uniform> " + inName.get() + " : " + type + ";",
+            "header": "var<uniform> " + inName.get() + " : " + inType.get() + ";",
             "resource": { "buffer": uniformBuffer },
             "layout": layout
         };
