@@ -28,7 +28,7 @@ exec.onTriggered = () =>
     // if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
     if (!pipe || mgpu.rebuildPipeline)
     {
-        console.log("create compute pipe", mgpu.rebuildPipeline);
+        // console.log("create compute pipe", mgpu.rebuildPipeline);
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
         const o = {
             // "layout": "auto",

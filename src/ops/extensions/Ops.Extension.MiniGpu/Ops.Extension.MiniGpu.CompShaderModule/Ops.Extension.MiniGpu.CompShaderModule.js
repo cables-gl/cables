@@ -73,11 +73,8 @@ exec.onTriggered = () =>
     if (reInit || mgpu.rebuildShaderModule)
     {
         hasError = false;
-        console.log("create module", inStage.get(), mgpu.rebuildShaderModule);
         s = { "layout": "auto", };
-        const module = mgpu.device.createShaderModule({
-            "code": genBindHeadSrc(),
-        });
+        const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc(), });
         /* minimalcore:start */
         module.getCompilationInfo().then((a) =>
         {
@@ -87,7 +84,8 @@ exec.onTriggered = () =>
                 const msg = a.messages[i];
                 if (msg)
                 {
-                    op.setUiError("shadercomp", msg.type + ": " + msg.message);
+                    console.log("mst", msg);
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
                     if (msg.type == "error")hasError = true;
                 }
             }

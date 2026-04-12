@@ -12,7 +12,6 @@ exec.onTriggered = () =>
     if (!mgpu || !inPosBuff.get() || !inPosBuff.get().size)
     {
         outArr.setRef([]);
-        console.log("111");
         return;
     }
 
@@ -33,8 +32,7 @@ exec.onTriggered = () =>
             0, inPosBuff.get().size
         );
 
-        const gpuCommands = commandEncoder.finish();
-        mgpu.device.queue.submit([gpuCommands]);
+        mgpu.device.queue.submit([commandEncoder.finish()]);
 
         gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
         {

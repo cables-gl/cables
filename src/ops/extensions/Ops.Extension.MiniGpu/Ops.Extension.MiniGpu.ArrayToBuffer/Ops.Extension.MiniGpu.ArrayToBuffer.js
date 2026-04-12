@@ -1,8 +1,9 @@
 const
     exec = op.inTrigger("Trigger"),
-    buff = op.outObject("Buffer"),
     inName = op.inString("Name"),
-    inArr = op.inArray("Array");
+    inArr = op.inArray("Array"),
+    next = op.outTrigger("Next"),
+    buff = op.outObject("Buffer");
 
 let buffer = null;
 let reInit = true;
@@ -33,4 +34,5 @@ exec.onTriggered = () =>
         mgpu.device.queue.writeBuffer(buffer, 0, arr);
         buff.setRef(buffer);
     }
+    next.trigger();
 };
