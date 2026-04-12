@@ -3,14 +3,14 @@ const
     inName = op.inString("Name", ""),
     inType = op.inString("Type", "vec4f"),
     inInit = op.inSwitch("Init", ["0", "1", "R"], "0"),
-    inLength = op.inInt("Length"),
+    inNum = op.inInt("Length"),
     next = op.outTrigger("Next"),
     outO = op.outObject("GpuBuffer");
 
 let buffer = null;
 let binding = null;
 
-inLength.onChange =
+inNum.onChange =
 inType.onChange =
 inName.onChange = () =>
 {
@@ -22,12 +22,12 @@ exec.onTriggered = () =>
     const mgpu = op.patch.frameStore.mgpu;
     if (!buffer)
     {
-        console.log("create buffer", inLength.get());
+        console.log("create buffer", inNum.get());
         buffer = mgpu.device.createBuffer({
             "label": inName.get() + "," + inType.get(),
 
             //   label: 'compute-generated vertices',
-            "size": inLength.get() * 4,
+            "size": inNum.get() * 4 * 4,
             // "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.VERTEX|GPUBufferUsage.,
             "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
             // "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
@@ -43,10 +43,10 @@ exec.onTriggered = () =>
 
         const rndarr = [];
         if (inInit.get() == "R")
-            for (let i = 0; i < inLength.get(); i++) rndarr[i] = Math.random();
+            for (let i = 0; i < inNum.get(); i++) rndarr[i] = Math.random();
 
         if (inInit.get() == "1")
-            for (let i = 0; i < inLength.get(); i++) rndarr[i] = 1;
+            for (let i = 0; i < inNum.get(); i++) rndarr[i] = 1;
 
         const floatArr = new Float32Array(rndarr);
         mgpu.device.queue.writeBuffer(

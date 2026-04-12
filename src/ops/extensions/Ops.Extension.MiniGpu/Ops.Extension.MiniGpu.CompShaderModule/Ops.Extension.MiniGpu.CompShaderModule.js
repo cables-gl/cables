@@ -61,7 +61,7 @@ function genBindHeadSrc()
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    if (hasError) return;
+    // if (hasError) return;
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
     mgpu.bindings = binds.clear();

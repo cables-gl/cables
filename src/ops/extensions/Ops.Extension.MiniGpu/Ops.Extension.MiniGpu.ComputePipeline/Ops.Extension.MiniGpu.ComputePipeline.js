@@ -57,6 +57,7 @@ exec.onTriggered = () =>
     pass.setBindGroup(0, computeBindGroup);
     const workgroupSize = 64;
     const numWorkgroups = Math.ceil(inNum.get() / workgroupSize);
+    // console.log("workgroups",numWorkgroups);
     pass.dispatchWorkgroups(numWorkgroups);
     pass.end();
     const gpuCommands = commandEncoder.finish();

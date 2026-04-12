@@ -16,12 +16,9 @@ exec.onTriggered = () =>
         return;
     }
 
-    // console.log("inPosBuff.get().size",inPosBuff.get().size);
-
     if (doRead)
     {
         doRead = false;
-        // console.log("buffffffff", inPosBuff.get());
         if (!gpuReadBuffer)
             gpuReadBuffer = mgpu.device.createBuffer({
                 "label": "buffToArr",
@@ -41,9 +38,7 @@ exec.onTriggered = () =>
 
         gpuReadBuffer.mapAsync(GPUMapMode.READ).then(() =>
         {
-            const arrayBuffer = gpuReadBuffer.getMappedRange();
-            const b = new Float32Array(arrayBuffer);
-            outArr.setRef(b);
+            outArr.setRef(new Float32Array(gpuReadBuffer.getMappedRange()));
             gpuReadBuffer = null;
             doRead = true;
         });
