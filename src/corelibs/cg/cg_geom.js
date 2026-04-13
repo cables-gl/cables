@@ -504,17 +504,17 @@ export class Geometry
      */
     calcTangentsBitangents()
     {
-        if (!this.vertices.length)
+        if (!this.vertices || !this.vertices.length)
         {
             // this._log.error("Cannot calculate tangents/bitangents without vertices.");
             return;
         }
-        if (!this.vertexNormals.length)
+        if (!this.vertexNormals || !this.vertexNormals.length)
         {
             // this._log.error("Cannot calculate tangents/bitangents without normals.");
             return;
         }
-        if (!this.texCoords.length)
+        if (!this.texCoords || !this.texCoords.length)
         {
             const texCoordLength = (this.vertices.length / 3) * 2;
             this.texCoords = new Float32Array(texCoordLength);

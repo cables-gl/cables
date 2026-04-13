@@ -53,6 +53,10 @@ let gltfMesh = class
                     if (attr.name === "position") geom.vertices = attr.array;
                     else if (attr.name === "normal") geom.vertexNormals = attr.array;
                     else if (attr.name === "uv") geom.texCoords = attr.array;
+                    else if (attr.name === "uv1") geom.setAttribute("attrTexCoord1", Array.from(attr.array), 2);
+                    else if (attr.name === "uv2") geom.setAttribute("attrTexCoord2", Array.from(attr.array), 2);
+                    else if (attr.name === "uv3") geom.setAttribute("attrTexCoord3", Array.from(attr.array), 2);
+                    else if (attr.name === "uv4") geom.setAttribute("attrTexCoord4", Array.from(attr.array), 2);
                     else if (attr.name === "color") geom.vertexColors = this.calcVertexColors(attr.array);
                     else if (attr.name === "joints") geom.setAttribute("attrJoints", Array.from(attr.array), 4);
                     else if (attr.name === "weights")

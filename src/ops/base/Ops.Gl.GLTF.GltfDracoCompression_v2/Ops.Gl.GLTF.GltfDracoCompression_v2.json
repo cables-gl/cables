@@ -1,0 +1,33 @@
+{
+    "id": "565327f1-a5eb-4f3d-8484-759d85e56424",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1629877533436,
+            "type": "new op"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1776069740750,
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    },
+    "summary": "gltf draco compression library",
+    "youtubeids": [
+        "Vo3Hs8-p7_I"
+    ],
+    "docs": {},
+    "credits": [
+        {
+            "title": "DRACO Compression Loader",
+            "author": "three.js",
+            "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/DRACOLoader.js",
+            "licence": "MIT"
+        }
+    ],
+    "exampleProjectId": "WFva2K",
+    "dependencies": [],
+    "license": "MIT"
+}
