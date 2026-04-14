@@ -413,7 +413,7 @@ export class Texture extends CgTexture
         this.height = 0;
         this._cgl.profileData.count("textureDelete");
         this.image = null;
-        window.requestIdleCallback(() =>
+        CABLES.idleCallback(() =>
         {
             this._cgl.gl.deleteTexture(this.tex);
             this.tex = null;
@@ -660,7 +660,7 @@ export class Texture extends CgTexture
 
                         if (finishedCallback) finishedCallback(null, texture);
 
-                        window.requestIdleCallback(() =>
+                        CABLES.idleCallback(() =>
                         {
                             bitmap.close();
                         });
