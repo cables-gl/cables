@@ -457,6 +457,7 @@ function printInfo()
             {
                 // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
                 // else
+                if (!gltf.json.bufferViews[gltf.json.images[i].bufferView]) continue;
                 sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
             }
             else html += " no bufferview?!";
@@ -527,6 +528,7 @@ function printInfo()
             for (let j = 0; j < gltf.json.animations[i].samplers.length; j++)
             {
                 let bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
+                if (!gltf.json.bufferViews[bufView]) continue;
                 if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);

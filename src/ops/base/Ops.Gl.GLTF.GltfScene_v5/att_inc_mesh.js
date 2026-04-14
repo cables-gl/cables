@@ -329,6 +329,12 @@ let gltfMesh = class
             }
 
             this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim });
+
+            if (freeMem.get() == "All")
+            {
+                this.mesh.disposeGeom();
+                this.geom = null;
+            }
         }
 
         if (this.mesh)

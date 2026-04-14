@@ -977,6 +977,11 @@ class Mesh extends CgMesh
         // });
     }
 
+    disposeGeom()
+    {
+        this.#geom = null;
+    }
+
     dispose()
     {
         // window.requestIdleCallback(() =>
