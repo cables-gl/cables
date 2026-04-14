@@ -347,7 +347,6 @@ function finishLoading()
 
     // if (gltf.chunks.length > 1) gltf.chunks[1] = null;
     // if (gltf.chunks.length > 2) gltf.chunks[2] = null;
-
     // op.setUiAttrib({ "accBuffersDelete": CABLES.basename(inFile.get()) });
 
     if (gltf.accBuffersDelete)
@@ -363,14 +362,12 @@ function finishLoading()
     //     for (let i = 0; i < gltf.nodes.length; i++)
     //     {
     //     // console.log(gltf.nodes[i]);
-
     //         if (gltf.nodes[i].mesh && gltf.nodes[i].mesh.meshes)
     //         {
     //         // console.log(gltf.nodes[i].mesh.meshes.length);
     //             for (let j = 0; j < gltf.nodes[i].mesh.meshes.length; j++)
     //             {
     //                 console.log(gltf.nodes[i].mesh.meshes[j]);
-
     //                 // for (let k = 0; k < gltf.nodes[i].mesh.meshes.length; k++)
     //                 {
     //                     if (gltf.nodes[i].mesh.meshes[j].mesh)
@@ -381,7 +378,6 @@ function finishLoading()
     //                         //     gltf.nodes[i].mesh.meshes[j].mesh._attributes[l] = null;
     //                     }
     //                 }
-
     //                 gltf.nodes[i].mesh.meshes[j].geom.clear();
     //                 console.log("clear!");
     //             }
@@ -431,6 +427,7 @@ function loadBin(addCacheBuster)
                 maxTime = 0;
 
                 const measure = op.patch.cgl.profileData.start("gltf parse");
+                if (gltf)gltf.dispose();
                 gltf = parseGltf(arrayBuffer);
                 measure.finish();
 
