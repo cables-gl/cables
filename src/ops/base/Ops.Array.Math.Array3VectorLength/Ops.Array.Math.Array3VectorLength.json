@@ -1,0 +1,57 @@
+{
+    "id": "2218a974-c3d0-4fcb-9689-3113914edb8e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561043686340
+        },
+        {
+            "message": "Array.Array3VectorLength renamed to Ops.Array.Math.Array3VectorLength",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776157372241
+        }
+    ],
+    "authorName": "andro",
+    "created": 1561043705179,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Array lengths",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Return the length of a vector from an array 3 ",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in",
+                "text": "Array in "
+            },
+            {
+                "name": "Array out",
+                "text": "Array out "
+            }
+        ]
+    },
+    "exampleProjectId": "L9tsRJ",
+    "coreLibs": [
+        "cgl"
+    ],
+    "isReleased": true
+}

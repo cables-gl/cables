@@ -3,6 +3,7 @@ const
     inActive = op.inBool("Active", true),
     outStr = op.outString("Html");
 
+inActive.onChange =
 inStr.onChange = update;
 update();
 

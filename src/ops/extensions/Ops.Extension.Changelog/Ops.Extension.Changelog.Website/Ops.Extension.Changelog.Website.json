@@ -5,12 +5,6 @@
     "authorName": "pandur",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1773656563587
-        },
-        {
             "message": "Link public teams to my teams and vice versa",
             "type": "improvement",
             "author": "stephan",

@@ -1,0 +1,53 @@
+{
+    "authorName": "andro",
+    "id": "fbb78acc-c004-4669-a277-98c47eb59598",
+    "created": 1540369903561,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array In"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array Out"
+            }
+        ]
+    },
+    "summary": "Apply a min operation to all values in an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "The array in"
+            },
+            {
+                "name": "Value",
+                "text": "The value to test the min operation with"
+            },
+            {
+                "name": "Array Out",
+                "text": "Array out returning the minimum value"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "bc0xTn",
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Array.ArrayMin renamed to Ops.Array.Math.ArrayMin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776157120179
+        }
+    ]
+}

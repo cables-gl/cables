@@ -1,0 +1,68 @@
+{
+    "id": "e068629a-7963-48b0-853f-a89348d03654",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1571058125240,
+            "type": "new op"
+        },
+        {
+            "message": "Ops.Array.ArrayOfObjectsValueArray renamed to Ops.Array.GetValuesFromArrayOfObjects",
+            "author": "pandur",
+            "date": 1571077017655,
+            "type": "rename"
+        },
+        {
+            "message": "Array.GetValuesFromArrayOfObjects renamed to Ops.Array.ArrayOfObjectsGetValues",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776151349479
+        },
+        {
+            "message": "Array.ArrayOfObjectsGetValues renamed to Ops.Array.Objects.ArrayOfObjectsGetValues",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776157043599
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1571058175202,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Numbers Only",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Remove empty/invalid",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Get an array of values by key of objects in an array",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "KQGGeT",
+    "license": "MIT",
+    "isReleased": true
+}

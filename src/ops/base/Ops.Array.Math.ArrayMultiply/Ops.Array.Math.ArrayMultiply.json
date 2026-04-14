@@ -1,0 +1,39 @@
+{
+    "summary": "Multiply every number in an array",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "In"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "a01c344b-4129-4b01-9c8f-36cefe86d7cc",
+    "created": 1517320302537,
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "exampleProjectId": "xmNqci",
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Array.ArrayMultiply renamed to Ops.Array.Math.ArrayMultiply",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776157114139
+        }
+    ]
+}

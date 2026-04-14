@@ -66,16 +66,6 @@
             "message": "Now has array length output port",
             "author": "andro",
             "date": 1565014902549
-        },
-        {
-            "message": "cloned op from Ops.Array.Array_v2",
-            "author": "pandur",
-            "date": 1655191858020
-        },
-        {
-            "message": "Ops.User.pandur.Array3 renamed to Ops.Array.Array_v3",
-            "author": "pandur",
-            "date": 1655192706745
         }
     ],
     "exampleProjectId": "P4qAz6",

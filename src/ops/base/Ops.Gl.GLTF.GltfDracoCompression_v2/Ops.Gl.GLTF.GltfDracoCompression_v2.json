@@ -6,19 +6,31 @@
             "author": "pandur",
             "date": 1629877533436,
             "type": "new op"
+        },
+        {
+            "message": "Upgraded library to draco v1.5.7",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776152567014,
+            "url": "https://github.com/google/draco"
+        },
+        {
+            "message": "draco GLTF files now include all texture coordinate/UV channels, not only the first anymore",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1776152603954
         }
     ],
     "authorName": "pandur",
     "created": 1776069740750,
-    "layout": {
-        "portsIn": [],
-        "portsOut": []
-    },
+    "layout": {},
     "summary": "gltf draco compression library",
     "youtubeids": [
         "Vo3Hs8-p7_I"
     ],
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "credits": [
         {
             "title": "DRACO Compression Loader",
@@ -28,6 +40,6 @@
         }
     ],
     "exampleProjectId": "WFva2K",
-    "dependencies": [],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

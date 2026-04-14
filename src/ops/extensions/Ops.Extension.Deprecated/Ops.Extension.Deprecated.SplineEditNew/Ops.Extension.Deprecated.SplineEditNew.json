@@ -46,8 +46,6 @@
         "ports": []
     },
     "hasExample": false,
-    "libs": [],
-    "youtubeids": [],
     "changelog": [
         {
             "message": "op created",
@@ -62,5 +60,6 @@
             "date": 1775406055249
         }
     ],
-    "cloneOf": "89d50b13-963c-4344-8047-2fb15377d7b0"
+    "cloneOf": "89d50b13-963c-4344-8047-2fb15377d7b0",
+    "isReleased": true
 }

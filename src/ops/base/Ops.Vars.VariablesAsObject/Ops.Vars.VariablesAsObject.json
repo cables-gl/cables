@@ -28,10 +28,10 @@
             }
         ]
     },
-    "summary": "outputs an object containing all variables",
+    "summary": "Outputs an object containing all variables",
     "docs": {
         "ports": []
     },
-    "isReleased": false,
+    "isReleased": true,
     "license": "MIT"
 }

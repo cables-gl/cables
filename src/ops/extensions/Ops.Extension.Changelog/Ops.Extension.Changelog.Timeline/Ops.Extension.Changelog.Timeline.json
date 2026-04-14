@@ -16,5 +16,9 @@
             "author": "pandur",
             "date": 1775891025314
         }
-    ]
+    ],
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    }
 }

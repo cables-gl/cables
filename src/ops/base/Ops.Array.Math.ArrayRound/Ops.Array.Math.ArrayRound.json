@@ -1,0 +1,52 @@
+{
+    "authorName": "pandur",
+    "id": "e20fd46f-0644-49ee-bc10-0cf7525627a8",
+    "created": 1701169925086,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "In"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Decimal Places",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "fixed array length is now correctly updated",
+            "author": "andro",
+            "date": 1557302487932
+        }
+    ],
+    "summary": "Round numbers up",
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "7xdJrG",
+    "isReleased": true
+}

@@ -2,51 +2,6 @@
     "id": "a20a9e2f-4b99-48a9-bf67-120604268bb6",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1675001723497
-        },
-        {
-            "message": "Ops.User.pandur.ParticleSystemVelocityArea renamed to Ops.Dev.ParticleSystem.VelocityArea",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1675089991071
-        },
-        {
-            "message": "Ops.Dev.ParticleSystem.VelocityArea renamed to Ops.Team.Particles.VelocityArea",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678366891284
-        },
-        {
-            "message": "cloned op from Ops.Team.Particles.VelocityArea",
-            "author": "pandur",
-            "date": 1678371079277
-        },
-        {
-            "message": "Ops.User.pandur.VelocityArea2 renamed to Ops.Team.Particles.VelocityArea_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678371395379
-        },
-        {
-            "message": "cloned op from Ops.Team.Particles.VelocityArea_v2",
-            "author": "pandur",
-            "date": 1680291857901
-        },
-        {
-            "message": "Ops.Patch.PmAyQPs.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityAreaV3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1680292539791
-        },
-        {
-            "message": "Ops.Team.Particles.VelocityAreaV3 renamed to Ops.Team.Particles.VelocityArea_v3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1680592004894
-        },
-        {
             "message": "Added Timing Texture Input and parameters to activate the Area at a certain Age ",
             "type": "feature",
             "author": "pandur",
@@ -57,23 +12,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1704978944569
-        },
-        {
-            "message": "cloned op from Ops.Team.Particles.VelocityArea_v3",
-            "author": "pandur",
-            "date": 1705502815167
-        },
-        {
-            "message": "Ops.Team.Particles.VelocityArea4 renamed to Ops.Team.Particles.VelocityArea_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705591344598
-        },
-        {
-            "message": "Ops.Extension.GlParticles.VelocityArea_v4 renamed to Ops.Extension.GlParticles.Dev.VelocityArea_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1729510165690
         }
     ],
     "authorName": "pandur",
@@ -233,5 +171,6 @@
     "license": "MIT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

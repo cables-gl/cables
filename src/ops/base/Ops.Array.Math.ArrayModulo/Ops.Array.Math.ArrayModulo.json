@@ -1,0 +1,40 @@
+{
+    "summary": "Apply a modulo operation to all values in an array",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "andro",
+    "id": "30a5568b-31da-4504-9525-578ee404993c",
+    "created": 1540902055226,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array In"
+            },
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array Out"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": [],
+    "exampleProjectId": "uIYNcn",
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Array.ArrayModulo renamed to Ops.Array.Math.ArrayModulo",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776157343567
+        }
+    ]
+}

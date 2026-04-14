@@ -33,7 +33,7 @@
             {
                 "type": 5,
                 "name": "Strings_0",
-                "longPort": 5,
+                "longPort": 3,
                 "group": "Strings"
             },
             {
@@ -44,16 +44,6 @@
             {
                 "type": 5,
                 "name": "Strings_2",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_3",
-                "group": "Strings"
-            },
-            {
-                "type": 5,
-                "name": "Strings_4",
                 "uititle": "add port",
                 "group": "Strings"
             }

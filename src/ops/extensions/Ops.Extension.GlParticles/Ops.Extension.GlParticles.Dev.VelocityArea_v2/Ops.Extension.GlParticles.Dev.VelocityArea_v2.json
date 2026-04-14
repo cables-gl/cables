@@ -1,41 +1,5 @@
 {
     "id": "02cacda1-6f28-4ff4-8bf1-c541cc4f4d2d",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1675001723497
-        },
-        {
-            "message": "Ops.User.pandur.ParticleSystemVelocityArea renamed to Ops.Dev.ParticleSystem.VelocityArea",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1675089991071
-        },
-        {
-            "message": "Ops.Dev.ParticleSystem.VelocityArea renamed to Ops.Team.Particles.VelocityArea",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678366891284
-        },
-        {
-            "message": "cloned op from Ops.Team.Particles.VelocityArea",
-            "author": "pandur",
-            "date": 1678371079277
-        },
-        {
-            "message": "Ops.User.pandur.VelocityArea2 renamed to Ops.Team.Particles.VelocityArea_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1678371395379
-        },
-        {
-            "message": "Ops.Extension.GlParticles.VelocityArea_v2 renamed to Ops.Extension.GlParticles.Dev.VelocityArea_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1729510179561
-        }
-    ],
     "authorName": "pandur",
     "created": 1678371079277,
     "layout": {
@@ -170,5 +134,10 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true,
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    }
 }

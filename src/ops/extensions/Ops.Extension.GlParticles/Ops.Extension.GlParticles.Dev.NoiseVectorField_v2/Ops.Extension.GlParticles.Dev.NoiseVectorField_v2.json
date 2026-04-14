@@ -177,5 +177,6 @@
     "exampleProjectId": "tmQeE9",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

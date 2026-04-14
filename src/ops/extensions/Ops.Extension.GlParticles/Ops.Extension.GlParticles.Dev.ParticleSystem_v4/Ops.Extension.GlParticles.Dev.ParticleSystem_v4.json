@@ -268,11 +268,9 @@
         ]
     },
     "summary": "GPU Particle System ",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": ""
+    "isReleased": true,
+    "license": "MIT"
 }

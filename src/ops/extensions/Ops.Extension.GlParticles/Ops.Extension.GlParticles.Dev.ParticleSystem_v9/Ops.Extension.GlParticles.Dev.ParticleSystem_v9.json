@@ -18,18 +18,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1705055024898
-        },
-        {
-            "message": "Ops.Team.Particles.ParticleSystem_v5 renamed to Ops.Team.Particles.ParticleSystem_v7",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705598998978
-        },
-        {
-            "message": "Ops.Extension.GlParticles.ParticleSystem_v8 renamed to Ops.Extension.GlParticles.Dev.ParticleSystem_v8",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1729509945999
         }
     ],
     "coreLibs": [

@@ -5,12 +5,6 @@
     "authorName": "pandur",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1773655929509
-        },
-        {
             "message": "Gradient editor: Added simple presets",
             "type": "feature",
             "author": "pandur",
@@ -135,7 +129,16 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1775820029484
+        },
+        {
+            "message": "Switched code/text/string editors: Removed ACE editor and switched to CodeMirror 6",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776156402636
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    }
 }

@@ -9,18 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1774950720717
-        },
-        {
-            "message": "Patch.Pwc2i9f.GetOpsByTag renamed to Ops.Cables.GetOpsByTag",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1775142486816
-        },
-        {
-            "message": "Cables.GetOpsByTag renamed to Ops.Cables.Ops.GetOpsByTag",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1775142509285
         }
     ],
     "layout": {

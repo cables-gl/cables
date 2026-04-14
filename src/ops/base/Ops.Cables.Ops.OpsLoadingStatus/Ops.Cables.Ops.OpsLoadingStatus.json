@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1775139773014
-        },
-        {
-            "message": "Patch.Pwc2i9f.OpsLoadingStatus renamed to Ops.Cables.Ops.OpsLoadingStatus",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1775142500930
         }
     ],
     "layout": {

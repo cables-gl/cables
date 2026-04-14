@@ -1,77 +1,6 @@
 {
     "id": "f4d0eb08-ada0-4f6d-8dd9-3a438718f603",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1642868426174
-        },
-        {
-            "message": " added core lib: cgl_texturecopy",
-            "author": "pandur",
-            "date": 1642868439042
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1642869069922
-        },
-        {
-            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1642869809458
-        },
-        {
-            "message": "Ops.Dev.Rgbe2HdrTexture renamed to Ops.Gl.Textures.RgbeToHdrTexture",
-            "author": "pandur",
-            "date": 1644228758190
-        },
-        {
-            "message": "cloned op from Ops.Gl.Textures.RgbeToHdrTexture",
-            "author": "pandur",
-            "date": 1645091427554
-        },
-        {
-            "message": "Ops.User.pandur.ParticleSystem renamed to Ops.Dev.ParticleSystem",
-            "author": "pandur",
-            "date": 1645116302648
-        },
-        {
-            "message": "cloned op from Ops.Dev.ParticleSystem",
-            "author": "pandur",
-            "date": 1674150199205
-        },
-        {
-            "message": "Ops.User.pandur.ParticleSystem2 renamed to Ops.Dev.ParticleSystem_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1674644702432
-        },
-        {
-            "message": "Ops.Dev.ParticleSystem_v2 renamed to Ops.User.pandur.ParticleSystem2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1674645155141
-        },
-        {
-            "message": "Ops.User.pandur.ParticleSystem2 renamed to Ops.Team.Particles.Dev.ParticleSystem_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705598737596
-        },
-        {
-            "message": "Ops.Team.Particles.Dev.ParticleSystem_v2 renamed to Ops.Team.Particles.ParticleSystem_v6",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1705598759890
-        },
-        {
-            "message": "Ops.Extension.GlParticles.ParticleSystem_v6 renamed to Ops.Extension.GlParticles.Dev.ParticleSystem_v6",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1729510062502
-        }
-    ],
+    "changelog": [],
     "coreLibs": [
         "cgl_copytexture",
         "cgl"
@@ -217,14 +146,9 @@
             }
         ]
     },
-    "summary": "",
-    "issues": "",
-    "caniusequery": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": ""
+    "isReleased": true,
+    "license": "MIT"
 }

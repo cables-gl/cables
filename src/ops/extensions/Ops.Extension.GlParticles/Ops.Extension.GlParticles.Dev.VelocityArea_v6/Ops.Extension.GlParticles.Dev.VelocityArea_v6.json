@@ -2,34 +2,10 @@
     "id": "4687ac1f-df37-493e-85f5-4dac0fabd7df",
     "changelog": [
         {
-            "message": "Added Timing Texture Input and parameters to activate the Area at a certain Age ",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1704977784409
-        },
-        {
-            "message": "Added \"Everywhere\" Area",
-            "type": "feature",
-            "author": "pandur",
-            "date": 1704978944569
-        },
-        {
-            "message": "Falloff is added on top of size, as we do with other ops like colorArea ",
-            "type": "improvement",
-            "author": "pandur",
-            "date": 1722432881770
-        },
-        {
             "message": "created op",
             "author": "pandur",
             "date": 1722432912822,
             "type": "new"
-        },
-        {
-            "message": "Ops.Extension.GlParticles.VelocityArea_v5 renamed to Ops.Extension.GlParticles.Dev.VelocityArea_v5",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1729509902364
         }
     ],
     "authorName": "pandur",

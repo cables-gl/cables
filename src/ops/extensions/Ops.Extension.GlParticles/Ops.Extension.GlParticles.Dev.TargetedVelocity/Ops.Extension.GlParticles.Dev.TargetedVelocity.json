@@ -9,24 +9,6 @@
             "type": "new op",
             "author": "kikohs",
             "date": 1733840578773
-        },
-        {
-            "message": "Patch.Pj3sRtw.ParticlePositionLerp renamed to Ops.Patch.Pt2FFzw.ParticlePositionLerp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1733850419510
-        },
-        {
-            "message": "Patch.Pt2FFzw.ParticlePositionLerp renamed to Ops.Patch.PA5I6Lw.ParticlePositionLerp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1734019406429
-        },
-        {
-            "message": "Patch.PA5I6Lw.ParticlePositionLerp renamed to Ops.Extension.GlParticles.Dev.TargetedVelocity",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1734022818955
         }
     ],
     "layout": {

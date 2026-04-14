@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1584356190476
+            "date": 1584356190476,
+            "type": "new op"
+        },
+        {
+            "message": "Added active toggle ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776155627389
         }
     ],
     "authorName": "pandur",
@@ -12,18 +19,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Add Num Breaks",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "HTML"
             }
         ]
@@ -35,5 +47,6 @@
         "ports": []
     },
     "exampleProjectId": "M0BG16",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }
