@@ -25,6 +25,7 @@ const
     inUseMatProps = op.inBool("Use Material Properties", true),
     inUseMatTexProps = op.inBool("Use Material Textures", true),
 
+    freeMem = op.inSwitch("Free Memory", ["None", "All"], "None"),
     inActive = op.inBool("Active", true),
 
     nextBefore = op.outTrigger("Render Before"),
@@ -670,7 +671,6 @@ op.exposePunctualLight = function (name, idx, nodeName)
         console.log("text", gltf.nodes[i].extensions);
         if (gltf.nodes[i].extensions && gltf.nodes[i].extensions.KHR_lights_punctual)
         {
-
             console.log("node", gltf.nodes[i].extensions.KHR_lights_punctual.light, gltf.nodes[i].mat);
             newop.getPort("X").set(gltf.nodes[i].mat[12]);
             newop.getPort("Y").set(gltf.nodes[i].mat[13]);

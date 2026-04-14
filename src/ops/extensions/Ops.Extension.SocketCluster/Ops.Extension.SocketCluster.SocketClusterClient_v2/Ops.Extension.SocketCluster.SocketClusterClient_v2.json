@@ -111,16 +111,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Active",
-                "text": "toggle connected/disconnected state"
+                "name": "Channel",
+                "text": "name of the socketcluster channel"
             },
             {
                 "name": "Server hostname",
                 "text": "hostname"
-            },
-            {
-                "name": "Server path",
-                "text": "path of url"
             },
             {
                 "name": "Server port",
@@ -131,6 +127,10 @@
                 "text": "enable encryption (needs to be supported by server)"
             },
             {
+                "name": "Server path",
+                "text": "path of url"
+            },
+            {
                 "name": "Allow send",
                 "text": "allow sending from this client"
             },
@@ -139,16 +139,16 @@
                 "text": "allow multiple senders"
             },
             {
-                "name": "Channel",
-                "text": "name of the socketcluster channel"
-            },
-            {
                 "name": "Delay send (ms)",
                 "text": "delay sending messages by x ms"
             },
             {
                 "name": "Additional serverdata",
                 "text": "additional data send with every message (can be used for auth-token)"
+            },
+            {
+                "name": "Active",
+                "text": "toggle connected/disconnected state"
             },
             {
                 "name": "Ready",
@@ -180,6 +180,5 @@
             "type": "commonjs"
         }
     ],
-    "libs": [],
     "isReleased": true
 }

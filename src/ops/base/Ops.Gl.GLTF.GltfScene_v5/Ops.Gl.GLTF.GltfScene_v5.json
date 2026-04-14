@@ -119,6 +119,15 @@
             },
             {
                 "type": 0,
+                "name": "Free Memory index",
+                "values": [
+                    "None",
+                    "All"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

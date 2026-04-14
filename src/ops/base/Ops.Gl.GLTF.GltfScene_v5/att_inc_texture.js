@@ -35,6 +35,8 @@ let GltfTexture = class
         const blob = new Blob([data.buffer], { "type": img.mimeType });
         const sourceURI = URL.createObjectURL(blob);
 
+        if (freeMem.get() == "All") gltf.json.bufferViews[img.bufferView] = null;
+
         if (CABLES.UI) this.previewUri = sourceURI;
 
         // if(scale[0]!=1||scale[1]!=1)

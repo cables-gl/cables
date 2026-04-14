@@ -599,5 +599,16 @@ function parseGltf(arrayBuffer)
     if (gltf.json.cameras) loadCams(gltf);
 
     gltf.timing.push(["finished", Math.round((performance.now() - gltf.startTime))]);
+
+    if (freeMem.get() == "All")
+    {
+        gltf.chunks = [];
+        console.log(gltf);
+        for (let i = 0; i < gltf.meshes.length; i++)
+        {
+            gltf.meshes[i].disposeGeometries();
+        }
+        console.log("clear...");
+    }
     return gltf;
 }

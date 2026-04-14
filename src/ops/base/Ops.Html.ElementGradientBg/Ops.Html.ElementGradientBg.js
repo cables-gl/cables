@@ -69,4 +69,5 @@ function update()
     outStr.set(str);
     ele.style.background = "";
     ele.style.background = str;
+    outEle.setRef(inEle.get());
 }

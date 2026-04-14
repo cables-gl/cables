@@ -365,4 +365,10 @@ let gltfMesh = class
     {
         if (this.mesh) this.mesh.dispose();
     }
+
+    disposeGeometries()
+    {
+        // this.geom = null;
+        // this.mesh.geom
+    }
 };

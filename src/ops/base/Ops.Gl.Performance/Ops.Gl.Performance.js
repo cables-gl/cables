@@ -344,7 +344,8 @@ function updateText()
         // " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps);
         // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
-        element.innerHTML += " all shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
+        element.innerHTML += " shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
+        element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "/" + Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + "mb";
     }
 
     op.patch.cgl.profileData.clear();

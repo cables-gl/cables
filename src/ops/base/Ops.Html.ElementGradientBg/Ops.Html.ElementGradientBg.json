@@ -15,6 +15,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1765801044769
+        },
+        {
+            "message": "Fix passthrough of element via outport",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1775840345795
         }
     ],
     "layout": {

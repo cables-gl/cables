@@ -89,6 +89,52 @@
             "author": "pandur",
             "date": 1774946987397,
             "url": "https://github.com/cables-gl/cables/issues/8199"
+        },
+        {
+            "message": "Allow upload of binary as an op-dependency (i.e. for WASM)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1775550105089,
+            "url": "https://github.com/cables-gl/cables/issues/8183"
+        },
+        {
+            "message": "Fix project-settings tabs sometimes not clickable",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1775550131885
+        },
+        {
+            "message": "fixed size of patchbg canvas and cmd+enter now cycles between normal-&gt;patchgg-&gt;maximized ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1775745204411,
+            "url": "https://github.com/cables-gl/cables/issues/8211"
+        },
+        {
+            "message": "popout canvas did not work correctly when adding elements to the patch, because of wrong container element ",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1775748386880,
+            "url": "https://github.com/cables-gl/cables/issues/8203"
+        },
+        {
+            "message": "Gradient editor draggable points would not register a \"pointer up\" event",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1775748571490,
+            "url": "https://github.com/cables-gl/cables/issues/8202"
+        },
+        {
+            "message": "Op search improve colors for loadable op collections (teams/extensions) ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1775807680106
+        },
+        {
+            "message": "Fix bug in updating ui when disconnecting multiplayer client",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1775820029484
         }
     ],
     "isReleased": true

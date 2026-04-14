@@ -35,15 +35,17 @@ if (!ktx)
 
 async function loadKTX2Texture(url)
 {
+    const gl = op.patch.cgl.gl;
+
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
 
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
     const blob = await res.blob();
     const ab = await blob.arrayBuffer();
     const bytes = new Uint8Array(ab);
 
     const ktex = new ktx.texture(bytes);
-    const gl = op.patch.cgl.gl;
 
     const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
 

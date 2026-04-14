@@ -46,6 +46,18 @@
             "author": "stephan",
             "date": 1774004663693,
             "url": "https://github.com/cables-gl/cables/issues/8142"
+        },
+        {
+            "message": "Do not increment export count when creating backup of projects",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1775550004319
+        },
+        {
+            "message": "Add more information to project log, make log-view collapsable",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1775550044654
         }
     ],
     "isReleased": true
