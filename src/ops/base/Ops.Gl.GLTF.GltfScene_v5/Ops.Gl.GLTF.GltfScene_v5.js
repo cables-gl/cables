@@ -473,6 +473,7 @@ inActive.onChange = () =>
 
     if (!inActive.get())
     {
+        if (gltf)gltf.dispose();
         gltf = null;
     }
 };
