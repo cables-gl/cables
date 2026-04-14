@@ -190,7 +190,6 @@ class DracoDecoderClass
                     uvCount++;
                 }
             }
-            console.log("...", dracoGeometry, geometry);
 
             if (geometryType === draco.TRIANGULAR_MESH) geometry.index = decodeIndex(draco, decoder, dracoGeometry);
             else op.warn("unknown draco geometryType", geometryType);
