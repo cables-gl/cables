@@ -39,7 +39,6 @@ const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", 
 const inHeightDepth = op.inFloat("Height Intensity", 1.0);
 const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
 const inDoubleSided = op.inValueBool("Double Sided", false);
-const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -66,6 +65,7 @@ const inTexTransRepeatY = op.inValue("Texture RepeatY", 1);
 const inTexTransOffsetX = op.inValue("Texture Offset X", 0);
 const inTexTransOffsetY = op.inValue("Texture Offset Y", 0);
 
+const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
 const inTexFlip = op.inBool("Flip Textures");
 const inGammaEnc = op.inBool("Gamma encoded");
 

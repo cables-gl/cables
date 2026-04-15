@@ -233,11 +233,6 @@
                 "subType": "boolean"
             },
             {
-                "type": 0,
-                "name": "Multiply Texture Color",
-                "subType": "boolean"
-            },
-            {
                 "type": 2,
                 "name": "IBL LUT",
                 "group": "Lighting",
@@ -346,6 +341,11 @@
                 "type": 0,
                 "name": "Texture Offset Y",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Texture Color",
+                "subType": "boolean"
             },
             {
                 "type": 0,

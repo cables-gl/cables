@@ -441,7 +441,7 @@ class Mesh extends CgMesh
             this.#log.warn("no bufVerticesIndizes: " + this._name);
             return;
         }
-        if (vertIndices.length > 0)
+        if (vertIndices && vertIndices.length > 0)
         {
             if (vertIndices instanceof Float32Array) this.#log.warn("vertIndices float32Array: " + this._name);
 
