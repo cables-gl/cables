@@ -4,18 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1660561563662
-        },
-        {
-            "message": "Ops.User.pandur.Memory renamed to Ops.Browser.JsMemory",
-            "author": "pandur",
-            "date": 1660826433534
-        },
-        {
-            "message": "Ops.Browser.JsMemory renamed to Ops.Devices.Browser.JsMemory",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701851143776
+            "date": 1660561563662,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
