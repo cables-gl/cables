@@ -48,6 +48,7 @@ let rigidBodies = [];
 let colliders = [];
 let tmpOrigin = vec3.create();
 let needsUpdateTrans = true;
+let glScale = vec3.create();
 
 exec.onLinkChanged = removeBodies;
 let setPosition = false;
@@ -135,12 +136,16 @@ exec.onTriggered = () =>
     if (setPosition)
     {
         const posArr = getPositions();// inPositions.get();
+        const rotArr = getRotations();// inPositions.get();
+
+        setPosition = false;
+        const scale = getScaling();
+        if (glScale[0] != scale[0] || glScale[1] != scale[1] || glScale[2] != scale[2]) return needsSetup = true;
+
         for (let i = 0; i < rigidBodies.length; i++)
         {
             rigidBodies[i].setTranslation({ "x": posArr[i * 3 + 0], "y": posArr[i * 3 + 1], "z": posArr[i * 3 + 2] }, true);
-            rigidBodies[i].setRotation({ "x": posArr[i * 3 + 0], "y": posArr[i * 3 + 1], "z": posArr[i * 3 + 2] }, true);
-
-            setPosition = false;
+            rigidBodies[i].setRotation({ "x": rotArr[i * 4 + 0], "y": rotArr[i * 4 + 1], "z": rotArr[i * 4 + 2], "w": rotArr[i * 4 + 3] }, true);
         }
     }
 
@@ -251,6 +256,18 @@ function updateUi()
     }
 }
 
+function getScaling()
+{
+    const scale = vec3.create();
+    vec3.set(scale, 1, 1, 1);
+    if (op.patch.cgl)
+    {
+        mat4.getScaling(scale, op.patch.cgl.mMatrix);
+    }
+
+    return scale;
+}
+
 function setup(world)
 {
     removeBodies();
@@ -258,11 +275,16 @@ function setup(world)
     const pos = getPositions();
     const rot = getRotations();
     const scal = inScales.get();
+
+    glScale = getScaling();
+
+    op.patch.cgl.profileData.addHeavyEvent("rapier body constructed", inName.get());
+
     let colliderDesc, collider;
-    if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(inCollSizeY.get(), inCollRadius.get());
-    else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(inCollSizeY.get(), inCollRadius.get());
-    else if (inCollShape.get() == "Cuboid") colliderDesc = RAPIER.ColliderDesc.cuboid(inCollSizeX.get(), inCollSizeY.get(), inCollSizeZ.get());
-    else if (inCollShape.get() == "Ball") colliderDesc = RAPIER.ColliderDesc.ball(inCollRadius.get());
+    if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(inCollSizeY.get() * glScale[1], inCollRadius.get() * glScale[0]);
+    else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(inCollSizeY.get() * glScale[1], inCollRadius.get() * glScale[0]);
+    else if (inCollShape.get() == "Cuboid") colliderDesc = RAPIER.ColliderDesc.cuboid(inCollSizeX.get() * glScale[0], inCollSizeY.get() * glScale[1], inCollSizeZ.get() * glScale[2]);
+    else if (inCollShape.get() == "Ball") colliderDesc = RAPIER.ColliderDesc.ball(inCollRadius.get() * glScale[0]);
     else if (inCollShape.get() == "Tri Mesh")
     {
         let geom = inGeom.get();
@@ -281,9 +303,7 @@ function setup(world)
                     faces.push(i);
             }
 
-            const scale = vec3.create();
-            mat4.getScaling(scale, op.patch.cgl.mMatrix);
-            geom.scale(scale[0], scale[1], scale[2]);
+            geom.scale(glScale[0], glScale[1], glScale[2]);
 
             colliderDesc = RAPIER.ColliderDesc.trimesh(geom.vertices, faces);
         }
