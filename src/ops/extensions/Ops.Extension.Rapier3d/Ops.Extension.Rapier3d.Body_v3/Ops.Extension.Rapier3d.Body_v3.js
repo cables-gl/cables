@@ -106,7 +106,7 @@ exec.onTriggered = () =>
     if (!world) return;
     if (!inActive.get()) return;
 
-    eventQueue = op.patch.frameStore.rapierEventQueue;
+    eventQueue = op.patch.frameStore.rapier.eventQueue;
     if (eventQueue)
     {
         // console.log("reg collision callback");

@@ -9,7 +9,7 @@ op.toWorkPortsNeedToBeLinked(inColl1);
 exec.onTriggered = () =>
 {
     const arr1 = inColl1.get();
-    const world = op.patch.frameStore.rapierWorld;
+    const world = op.patch.frameStore.rapier.world;
     const r1 = [];
 
     if (!arr1 || !world)

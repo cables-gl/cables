@@ -12,7 +12,7 @@ exec.onTriggered = () =>
 {
     const arr1 = inColl1.get();
     const arr2 = inColl2.get();
-    const world = op.patch.cgl.frameStore.rapierWorld;
+    const world = op.patch.cgl.frameStore.rapier.world;
     const r1 = [];
     const r2 = [];
 

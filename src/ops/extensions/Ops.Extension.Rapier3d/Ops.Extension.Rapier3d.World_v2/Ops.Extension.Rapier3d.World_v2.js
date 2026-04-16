@@ -77,7 +77,7 @@ exec.onTriggered = () =>
 
     if (!world) return;
 
-    const oldWorld = op.patch.frameStore.rapier.world;
+    const oldRapier = op.patch.frameStore.rapier;
     // op.patch.frameStore.rapierWorld = world;
     // op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
 
@@ -121,5 +121,5 @@ exec.onTriggered = () =>
 
     next.trigger();
 
-    op.patch.frameStore.rapierWorld = oldWorld;
+    op.patch.frameStore.rapier = oldRapier;
 };

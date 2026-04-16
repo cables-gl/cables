@@ -76,13 +76,13 @@ exec.onLinkChanged = removeBodies;
 exec.onTriggered = () =>
 {
     if (!exec.isLinked()) return;
-    const world = op.patch.frameStore.rapierWorld;
+    const world = op.patch.frameStore.rapier.world;
 
     if (!world) return;
     if (world != lastWorld)removeBodies();
     // if (!eventQueue)
     {
-        eventQueue = op.patch.frameStore.rapierEventQueue;
+        eventQueue = op.patch.frameStore.rapier.eventQueue;
         if (eventQueue)
         {
             // console.log("reg collision callback");

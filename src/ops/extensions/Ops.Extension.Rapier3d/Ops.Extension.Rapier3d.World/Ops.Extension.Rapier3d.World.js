@@ -72,8 +72,8 @@ exec.onTriggered = () =>
 {
     if (!world) return;
 
-    const oldWorld = op.patch.frameStore.rapierWorld;
-    op.patch.frameStore.rapierWorld = world;
+    const oldWorld = op.patch.frameStore.rapier.world;
+    op.patch.frameStore.rapier.world = world;
 
     world.step();
 
@@ -87,5 +87,5 @@ exec.onTriggered = () =>
 
     next.trigger();
 
-    op.patch.frameStore.rapierWorld = oldWorld;
+    op.patch.frameStore.rapier.world = oldWorld;
 };

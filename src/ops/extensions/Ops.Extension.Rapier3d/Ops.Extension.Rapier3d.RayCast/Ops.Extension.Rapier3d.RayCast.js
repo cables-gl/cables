@@ -31,7 +31,7 @@ function updateUi()
 
 function update()
 {
-    world = op.patch.frameStore.rapierWorld;
+    world = op.patch.frameStore.rapier.world;
 
     if (!world) return;
 
