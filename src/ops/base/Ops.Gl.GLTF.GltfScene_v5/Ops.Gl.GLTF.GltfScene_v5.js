@@ -113,10 +113,16 @@ function updateCenter()
     }
 }
 
-inRescale.onChange = function ()
+inTimeLine.onChange =
+inRescale.onChange =
+inUseMatProps.onChange = updateUi;
+
+function updateUi()
 {
+    inUseMatTexProps.setUiAttribs({ "greyout": !inUseMatProps.get() });
+    inTime.setUiAttribs({ "greyout": inTimeLine.get() });
     inRescaleSize.setUiAttribs({ "greyout": !inRescale.get() });
-};
+}
 
 inMaterials.onChange = function ()
 {
@@ -127,11 +133,6 @@ op.onDelete = function ()
 {
     if (gltf) gltf.dispose();
     closeTab();
-};
-
-inTimeLine.onChange = function ()
-{
-    inTime.setUiAttribs({ "greyout": inTimeLine.get() });
 };
 
 inCamera.onChange = setCam;
