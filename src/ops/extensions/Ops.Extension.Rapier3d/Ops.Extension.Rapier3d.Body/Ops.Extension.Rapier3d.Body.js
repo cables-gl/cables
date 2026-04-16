@@ -293,6 +293,16 @@ function setup(world)
             .setFriction(inFriction.get())
             .setSensor(inSensor.get());
 
+
+        if (!inEvents.get())
+        {
+            colliderDesc.setActiveEvents(RAPIER.ActiveEvents.NONE);
+        }
+        else
+        {
+            // collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+            colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+        }
         // if (!inEvents.get())
         // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.NONE);
 
@@ -304,16 +314,6 @@ function setup(world)
 
         collider = world.createCollider(colliderDesc, rigidBody);
         colliders.push(collider);
-
-        if (!inEvents.get())
-        {
-            collider.setActiveEvents(RAPIER.ActiveEvents.NONE);
-        }
-        else
-        {
-            collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
-            colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
-        }
     }
 
     // console.log("colliders", colliders);

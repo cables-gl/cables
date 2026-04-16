@@ -83,7 +83,7 @@ exec.onTriggered = () =>
 
     for (let i = 0; i < inTimes.get(); i++)
     {
-        if (world) world.step();
+        if (world) world.step(eventQueue);
     }
 
     // const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
