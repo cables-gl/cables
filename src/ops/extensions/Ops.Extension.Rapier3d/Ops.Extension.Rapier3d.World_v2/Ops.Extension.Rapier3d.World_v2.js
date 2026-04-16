@@ -99,13 +99,15 @@ exec.onTriggered = () =>
     eventQueue.drainCollisionEvents((handle1, handle2, started) =>
     {
         const id = Math.min(handle1, handle2) + "_" + Math.max(handle2, handle1);
-        console.log("id", id);
+        // console.log("id", id);
 
-        op.patch.frameStore.rapier.ignoreEventHandles;
-        if (
-            !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle1) &&
-            !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle2))
-            collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
+        // op.patch.frameStore.rapier.ignoreEventHandles;
+        // if (!op.patch.frameStore.rapier.ignoreEventHandles.includes(handle1) &&
+            // !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle2))
+// {
+  collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
+// console.log("coll",collisions[id]);
+  // }
 
         if (!started) delete collisions[id];
     });
