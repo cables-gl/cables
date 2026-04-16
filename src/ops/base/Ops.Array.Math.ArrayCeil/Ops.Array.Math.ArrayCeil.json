@@ -21,17 +21,6 @@
             "message": "fixed array length is now correctly updated",
             "author": "andro",
             "date": 1557302487932
-        },
-        {
-            "message": "",
-            "author": "pandur",
-            "date": 1558001795421
-        },
-        {
-            "message": "Array.ArrayCeil renamed to Ops.Array.Math.ArrayCeil",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157155077
         }
     ],
     "summary": "Round numbers up",

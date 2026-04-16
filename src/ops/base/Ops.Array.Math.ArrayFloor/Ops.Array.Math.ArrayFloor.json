@@ -33,12 +33,5 @@
     "youtubeids": [],
     "exampleProjectId": "7xdJrG",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayFloor renamed to Ops.Array.Math.ArrayFloor",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157136665
-        }
-    ]
+    "changelog": []
 }

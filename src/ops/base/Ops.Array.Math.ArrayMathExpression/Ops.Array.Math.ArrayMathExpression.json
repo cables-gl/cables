@@ -5,17 +5,6 @@
             "message": "created op",
             "author": "simod",
             "date": 1595496753560
-        },
-        {
-            "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
-            "author": "simod",
-            "date": 1595500253680
-        },
-        {
-            "message": "Array.ArrayMathExpression renamed to Ops.Array.Math.ArrayMathExpression",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157356662
         }
     ],
     "authorName": "simod",

@@ -42,14 +42,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1773220411271
-        },
-        {
-            "message": "Load wasm from static-attachment, set null after loading",
-            "type": "improvement",
-            "author": "stephan",
-            "date": 1775052209229,
-            "url": "https://github.com/cables-gl/cables/issues/8183"
+            "date": 1776265399619
         }
     ],
     "summary": "Load a KTX file as a texture",

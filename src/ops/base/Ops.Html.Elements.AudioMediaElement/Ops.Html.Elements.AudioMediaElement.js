@@ -8,6 +8,7 @@ const
     inPlayTrigg = op.inTriggerButton("Play Trigger"),
     inPauseTrigg = op.inTriggerButton("Pause"),
     inRewind = op.inTriggerButton("Rewind"),
+    inActive = op.inBool("Active", true),
     outPlaying = op.outNumber("Playing"),
     outDuration = op.outNumber("Duration"),
     outCurrentTime = op.outNumber("Current Time"),
@@ -19,6 +20,7 @@ const timer = new CABLES.Timer();
 volume.set(1.0);
 let audio = null;
 let playing = false;
+let loadSoonTo = null;
 outPlaying.set(false);
 volume.onChange = updateVolume;
 
@@ -29,6 +31,19 @@ op.onMasterVolumeChanged = updateVolume;
 
 inTimeOffset.onChange = () => { seek(inTimeOffset.get()); };
 inRewind.onTriggered = rewind;
+
+fileName.onChange = loadSoon;
+
+inActive.onChange = () =>
+{
+    if (!inActive.get())
+    {
+        pause();
+        outDuration.set(0);
+        audio = null;
+    }
+    else loadSoon();
+};
 
 function pause()
 {
@@ -45,7 +60,8 @@ function pause()
 
 function play()
 {
-    if (doRewind.get())
+    if (!inActive.get()) return;
+    if (audio && doRewind.get())
     {
         audio.currentTime = getWantedTime();
     }
@@ -83,6 +99,7 @@ function seek(goto)
 
 inPlay.onChange = function ()
 {
+    if (!inActive.get()) return;
     if (inPlay.get())
     {
         play();
@@ -110,8 +127,16 @@ function getWantedTime()
     return goto;
 }
 
-fileName.onChange = function ()
+function loadSoon()
 {
+    clearTimeout(loadSoonTo);
+    loadSoonTo = setTimeout(load, 100);
+}
+
+function load()
+{
+    if (!inActive.get()) return;
+
     if (!fileName.get()) return;
 
     let loadingId = op.patch.loading.start("audioplayer", fileName.get(), op);
@@ -134,9 +159,9 @@ fileName.onChange = function ()
 
     var canplaythrough = () =>
     {
-        outDuration.set(audio.duration);
+        if (audio) outDuration.set(audio.duration);
         if (inPlay.get()) play();
-        audio.removeEventListener("canplaythrough", canplaythrough, false);
+        if (audio)audio.removeEventListener("canplaythrough", canplaythrough, false);
     };
     op.patch.loading.finished(loadingId);
 
@@ -144,7 +169,7 @@ fileName.onChange = function ()
 
     const timeupdate = () =>
     {
-        timer.setTime(audio.currentTime);
+        if (audio)timer.setTime(audio.currentTime);
         // outCurrentTime.set(audio.currentTime);
     };
     audio.addEventListener("error", function (e)
@@ -167,7 +192,7 @@ fileName.onChange = function ()
         outEnded.trigger();
         // if (doLoop.get()) play();
     }, false);
-};
+}
 
 op.onAnimFrame = (tt, frameNum, deltaMs) =>
 {

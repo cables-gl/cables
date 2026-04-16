@@ -12,12 +12,6 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1737648685810
-        },
-        {
-            "message": "Array.ArrayOfObjectsFilterByKeyValue_v2 renamed to Ops.Array.Objects.ArrayOfObjectsFilterByKeyValue_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157069777
         }
     ],
     "authorName": "stephan",

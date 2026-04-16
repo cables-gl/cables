@@ -5,12 +5,6 @@
             "message": "created op",
             "author": "andro",
             "date": 1563286839735
-        },
-        {
-            "message": "Array.LoopArray3 renamed to Ops.Array.PointArray.LoopArray3",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157204277
         }
     ],
     "authorName": "andro",

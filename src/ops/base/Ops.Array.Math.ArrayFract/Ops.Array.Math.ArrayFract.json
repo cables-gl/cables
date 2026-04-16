@@ -33,12 +33,5 @@
     "youtubeids": [],
     "exampleProjectId": "uVzImG",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayFract renamed to Ops.Array.Math.ArrayFract",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157142937
-        }
-    ]
+    "changelog": []
 }

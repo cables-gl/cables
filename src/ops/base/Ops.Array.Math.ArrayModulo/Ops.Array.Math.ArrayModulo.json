@@ -29,12 +29,5 @@
     "youtubeids": [],
     "exampleProjectId": "uIYNcn",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayModulo renamed to Ops.Array.Math.ArrayModulo",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157343567
-        }
-    ]
+    "changelog": []
 }

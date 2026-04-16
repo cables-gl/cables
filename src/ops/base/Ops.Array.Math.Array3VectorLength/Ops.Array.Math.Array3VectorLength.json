@@ -5,12 +5,6 @@
             "message": "created op",
             "author": "andro",
             "date": 1561043686340
-        },
-        {
-            "message": "Array.Array3VectorLength renamed to Ops.Array.Math.Array3VectorLength",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157372241
         }
     ],
     "authorName": "andro",

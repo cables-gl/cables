@@ -59,12 +59,6 @@
             "message": "Ops.Array.ArraySmooth renamed to Ops.Array.AverageArray",
             "author": "pandur",
             "date": 1567671122131
-        },
-        {
-            "message": "Array.AverageArray renamed to Ops.Array.Math.AverageArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157292334
         }
     ],
     "exampleProjectId": "t8uSdn",

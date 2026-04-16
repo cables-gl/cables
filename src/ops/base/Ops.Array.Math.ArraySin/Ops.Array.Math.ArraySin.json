@@ -44,12 +44,5 @@
     "youtubeids": [],
     "exampleProjectId": "x1Hqrq",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArraySin renamed to Ops.Array.Math.ArraySin",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157303034
-        }
-    ]
+    "changelog": []
 }

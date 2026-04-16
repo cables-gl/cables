@@ -83,12 +83,6 @@
             "message": "Ops.Math.LissajouseSpline renamed to Ops.Array.LissajouseSpline",
             "author": "pandur",
             "date": 1560417827056
-        },
-        {
-            "message": "Array.LissajouseSpline renamed to Ops.Array.PointArray.LissajouseSpline",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157199090
         }
     ],
     "exampleProjectId": "Wa8TS3",

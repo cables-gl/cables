@@ -5,12 +5,6 @@
             "message": "created op",
             "author": "andro",
             "date": 1566556430265
-        },
-        {
-            "message": "Array.ArrayClamp renamed to Ops.Array.Math.ArrayClamp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157148091
         }
     ],
     "authorName": "andro",

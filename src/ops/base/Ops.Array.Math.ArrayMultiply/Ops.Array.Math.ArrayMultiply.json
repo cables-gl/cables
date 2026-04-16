@@ -28,12 +28,5 @@
     "license": "MIT",
     "exampleProjectId": "xmNqci",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayMultiply renamed to Ops.Array.Math.ArrayMultiply",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157114139
-        }
-    ]
+    "changelog": []
 }

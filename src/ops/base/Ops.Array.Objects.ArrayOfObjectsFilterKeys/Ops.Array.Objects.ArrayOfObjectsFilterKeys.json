@@ -5,17 +5,6 @@
             "message": "created op",
             "author": "simod",
             "date": 1586866960473
-        },
-        {
-            "message": "Ops.User.simod.ArrayOfObjectsFilterKeys renamed to Ops.Array.ArrayOfObjectsFilterKeys",
-            "author": "simod",
-            "date": 1586878316327
-        },
-        {
-            "message": "Array.ArrayOfObjectsFilterKeys renamed to Ops.Array.Objects.ArrayOfObjectsFilterKeys",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157037060
         }
     ],
     "authorName": "simod",

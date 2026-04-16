@@ -42,6 +42,11 @@
             {
                 "type": 1,
                 "name": "Rewind"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -117,6 +122,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1773760989516
+        },
+        {
+            "message": "Added active toggle, will unload audio when not checked",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776245864243
         }
     ],
     "license": "MIT",

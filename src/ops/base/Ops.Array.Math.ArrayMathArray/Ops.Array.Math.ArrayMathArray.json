@@ -57,12 +57,6 @@
             "message": "optimized - removed function call occurring twice",
             "author": "andro",
             "date": 1558625292186
-        },
-        {
-            "message": "Array.ArrayMathArray renamed to Ops.Array.Math.ArrayMathArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157362104
         }
     ],
     "youtubeids": [],

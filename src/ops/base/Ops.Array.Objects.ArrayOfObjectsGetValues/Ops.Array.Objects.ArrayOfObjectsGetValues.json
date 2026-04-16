@@ -6,24 +6,6 @@
             "author": "pandur",
             "date": 1571058125240,
             "type": "new op"
-        },
-        {
-            "message": "Ops.Array.ArrayOfObjectsValueArray renamed to Ops.Array.GetValuesFromArrayOfObjects",
-            "author": "pandur",
-            "date": 1571077017655,
-            "type": "rename"
-        },
-        {
-            "message": "Array.GetValuesFromArrayOfObjects renamed to Ops.Array.ArrayOfObjectsGetValues",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776151349479
-        },
-        {
-            "message": "Array.ArrayOfObjectsGetValues renamed to Ops.Array.Objects.ArrayOfObjectsGetValues",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157043599
         }
     ],
     "authorName": "pandur",

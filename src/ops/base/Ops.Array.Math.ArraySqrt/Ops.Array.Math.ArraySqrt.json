@@ -5,12 +5,6 @@
             "message": "created op",
             "author": "andro",
             "date": 1567002441146
-        },
-        {
-            "message": "Array.ArraySqrt renamed to Ops.Array.Math.ArraySqrt",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157308200
         }
     ],
     "authorName": "andro",

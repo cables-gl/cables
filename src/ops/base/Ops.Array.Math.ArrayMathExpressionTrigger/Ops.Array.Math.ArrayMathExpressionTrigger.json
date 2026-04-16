@@ -5,32 +5,6 @@
             "message": "created op",
             "author": "simod",
             "date": 1595496753560
-        },
-        {
-            "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
-            "author": "simod",
-            "date": 1595500253680
-        },
-        {
-            "message": "cloned op from Ops.Array.ArrayMathExpression",
-            "author": "pandur",
-            "date": 1664273671849
-        },
-        {
-            "message": "Ops.User.pandur.ArrayMathExpressionTrigger renamed to Ops.Arrays.ArrayMathExpressionTrigger",
-            "author": "pandur",
-            "date": 1664273875169
-        },
-        {
-            "message": "Ops.Arrays.ArrayMathExpressionTrigger renamed to Ops.Array.ArrayMathExpressionTrigger",
-            "author": "pandur",
-            "date": 1665428274696
-        },
-        {
-            "message": "Array.ArrayMathExpressionTrigger renamed to Ops.Array.Math.ArrayMathExpressionTrigger",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157351120
         }
     ],
     "authorName": "pandur",

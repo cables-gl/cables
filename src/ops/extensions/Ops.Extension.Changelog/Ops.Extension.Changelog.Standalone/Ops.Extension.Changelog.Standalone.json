@@ -9,6 +9,12 @@
             "type": "feature",
             "author": "stephan",
             "date": 1773656485308
+        },
+        {
+            "message": "Fix bug where creation of new op was not possible until new project was re-opened once",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1776324471434
         }
     ],
     "isReleased": true

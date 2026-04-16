@@ -3,9 +3,9 @@
 const
     inEle = op.inObject("Element", null, "element"),
     inWidth = op.inFloat("Width", 200),
-    inWidthU = op.inSwitch("Width Unit", ["Off", "px", "%"], "px"),
+    inWidthU = op.inSwitch("Width Unit", ["Off", "px", "%", "vw"], "px"),
     inHeight = op.inFloat("Height", 200),
-    inHeightU = op.inSwitch("Height Unit", ["Off", "px", "%"], "px"),
+    inHeightU = op.inSwitch("Height Unit", ["Off", "px", "%", "vh"], "px"),
     outEle = op.outObject("Passthrough", null, "element");
 
 inHeight.onChange =

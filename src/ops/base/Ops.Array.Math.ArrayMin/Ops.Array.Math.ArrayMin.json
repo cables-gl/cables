@@ -42,12 +42,5 @@
     "youtubeids": [],
     "exampleProjectId": "bc0xTn",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayMin renamed to Ops.Array.Math.ArrayMin",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157120179
-        }
-    ]
+    "changelog": []
 }

@@ -35,12 +35,5 @@
     "issues": "",
     "exampleProjectId": "U4M4J5",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArraySumUp renamed to Ops.Array.Math.ArraySumUp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157297526
-        }
-    ]
+    "changelog": []
 }

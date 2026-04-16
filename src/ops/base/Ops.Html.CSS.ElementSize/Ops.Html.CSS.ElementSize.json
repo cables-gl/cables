@@ -12,6 +12,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1773069091830
+        },
+        {
+            "message": "Add vh and vw to size units",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1776262540408
         }
     ],
     "authorName": "pandur",
@@ -34,7 +40,8 @@
                 "values": [
                     "Off",
                     "px",
-                    "%"
+                    "%",
+                    "vw"
                 ],
                 "subType": "integer"
             },
@@ -49,7 +56,8 @@
                 "values": [
                     "Off",
                     "px",
-                    "%"
+                    "%",
+                    "vh"
                 ],
                 "subType": "integer"
             }

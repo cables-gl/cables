@@ -56,12 +56,5 @@
     },
     "exampleProjectId": "7E1hqH",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayMath renamed to Ops.Array.Math.ArrayMath",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157131249
-        }
-    ]
+    "changelog": []
 }

@@ -42,12 +42,5 @@
     "youtubeids": [],
     "exampleProjectId": "bc0xTn",
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Array.ArrayMax renamed to Ops.Array.Math.ArrayMax",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157125838
-        }
-    ]
+    "changelog": []
 }

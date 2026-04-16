@@ -5,17 +5,6 @@
             "message": "created op",
             "author": "simod",
             "date": 1587052722306
-        },
-        {
-            "message": "Ops.User.cables.ArrayOfObjectsToString renamed to Ops.Array.ArrayOfObjectsToString",
-            "author": "simod",
-            "date": 1587052754622
-        },
-        {
-            "message": "Array.ArrayOfObjectsToString renamed to Ops.Array.Objects.ArrayOfObjectsToString",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776157050073
         }
     ],
     "authorName": "simod",
