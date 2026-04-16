@@ -152,6 +152,7 @@ function load()
     audio.loop = doLoop.get();
     audio.controls = "true";
     audio.crossOrigin = "anonymous";
+    updateVolume();
 
     audio.currentTime = getWantedTime();
 
