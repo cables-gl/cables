@@ -77,19 +77,17 @@ exec.onTriggered = () =>
 
     if (!world) return;
 
-    const oldWorld = op.patch.frameStore.rapierWorld;
-    op.patch.frameStore.rapierWorld = world;
-    op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
+    const oldWorld = op.patch.frameStore.rapier.world;
+    // op.patch.frameStore.rapierWorld = world;
+    // op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
 
     for (let i = 0; i < inTimes.get(); i++)
     {
-        if (world)
-
-            world.step();
+        if (world) world.step();
     }
 
-    const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
-    const result = world.castRay(ray);
+    // const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
+    // const result = world.castRay(ray);
 
     if (inDebug.get() && outDebugPoints.isLinked())
     {
@@ -101,6 +99,7 @@ exec.onTriggered = () =>
     eventQueue.drainCollisionEvents((handle1, handle2, started) =>
     {
         const id = Math.min(handle1, handle2) + "_" + Math.max(handle2, handle1);
+        console.log("id", id);
 
         op.patch.frameStore.rapier.ignoreEventHandles;
         if (
@@ -111,6 +110,7 @@ exec.onTriggered = () =>
         if (!started) delete collisions[id];
     });
 
+    // console.log("collisions",collisions);
     op.patch.frameStore.rapier =
     {
         "ignoreEventHandles": [],
