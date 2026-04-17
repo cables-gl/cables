@@ -33,7 +33,7 @@ inTimeOffset.onChange = () => { seek(inTimeOffset.get()); };
 inRewind.onTriggered = rewind;
 
 fileName.onChange = loadSoon;
-
+outPlaying.set(false);
 inActive.onChange = () =>
 {
     if (!inActive.get())
@@ -136,7 +136,7 @@ function loadSoon()
 function load()
 {
     if (!inActive.get()) return;
-
+    op.setUiAttrib({ "extendTitle": CABLES.basename(fileName.get()) });
     if (!fileName.get()) return;
 
     let loadingId = op.patch.loading.start("audioplayer", fileName.get(), op);
@@ -191,6 +191,7 @@ function load()
     {
         // pause();
         outEnded.trigger();
+        outPlaying.set(false);
         // if (doLoop.get()) play();
     }, false);
 }

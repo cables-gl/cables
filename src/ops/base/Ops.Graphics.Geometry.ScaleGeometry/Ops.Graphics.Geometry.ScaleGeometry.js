@@ -1,6 +1,6 @@
 let geometry = op.inObject("Geometry");
 let scale = op.inValue("Scale", 1);
-let outGeom = op.outObject("Result");
+let outGeom = op.outObject("Result", null, "geometry");
 
 scale.onChange = geometry.onChange = update;
 

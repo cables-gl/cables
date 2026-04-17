@@ -277,6 +277,7 @@ function setup(world)
     const scal = inScales.get();
 
     glScale = getScaling();
+    if (glScale[0] == 0) return;
 
     op.patch.cgl.profileData.addHeavyEvent("rapier body constructed", inName.get());
 

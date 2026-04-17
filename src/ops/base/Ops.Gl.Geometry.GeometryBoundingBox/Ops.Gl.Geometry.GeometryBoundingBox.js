@@ -9,6 +9,9 @@ const inGeom = op.inObject("Geometry"),
     outSizeX = op.outNumber("Size X"),
     outSizeY = op.outNumber("Size Y"),
     outSizeZ = op.outNumber("Size Z"),
+    outSize2X = op.outNumber("HalfSize X"),
+    outSize2Y = op.outNumber("HalfSize Y"),
+    outSize2Z = op.outNumber("HalfSize Z"),
     outPoints = op.outArray("MaxMin Points");
 
 const points = [];
@@ -46,6 +49,9 @@ inGeom.onChange = () =>
     outSizeX.set(bb._size[0]);
     outSizeY.set(bb._size[1]);
     outSizeZ.set(bb._size[2]);
+    outSize2X.set(bb._size[0] / 2);
+    outSize2Y.set(bb._size[1] / 2);
+    outSize2Z.set(bb._size[2] / 2);
 
     outPoints.setRef(points);
 };
