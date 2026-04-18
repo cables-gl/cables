@@ -558,3 +558,18 @@ export function idleCallback(cb)
 
     }, 30);
 }
+
+/**
+ * @param {Object} o
+ */
+export function cloneObject(o)
+{
+    try
+    {
+        return structuredClone(o);
+    }
+    catch (e)
+    {
+        return JSON.parse(JSON.stringify(o));
+    }
+}

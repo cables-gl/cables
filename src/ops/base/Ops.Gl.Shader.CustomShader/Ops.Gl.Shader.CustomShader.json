@@ -5,17 +5,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "fragment",
                 "group": "Source Code",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "vertex",
                 "group": "Source Code",
                 "subType": "number"
@@ -23,11 +23,11 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ]
@@ -51,5 +51,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

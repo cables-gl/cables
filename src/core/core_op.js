@@ -1,5 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
-import { cleanJson, shortId } from "./utils.js";
+import { cleanJson, cloneObject, shortId } from "./utils.js";
 import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
@@ -1400,8 +1400,8 @@ export class Op extends Events
         if (this.patch.storeObjNames) opObj.objName = this.objName;
 
         opObj.id = this.id;
-        opObj.attribs = structuredClone(this.attribs) || {};
-        opObj.uiAttribs = structuredClone(this.uiAttribs) || {};
+        opObj.attribs = cloneObject(this.attribs) || {};
+        opObj.uiAttribs = cloneObject(this.uiAttribs) || {};
 
         if (this.storage && Object.keys(this.storage).length > 0) opObj.storage = structuredClone(this.storage);
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;

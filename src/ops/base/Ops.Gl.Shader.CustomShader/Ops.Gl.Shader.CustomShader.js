@@ -8,9 +8,7 @@ const cgl = op.patch.cgl;
 const uniformInputs = [];
 const uniformTextures = [];
 
-
 op.toWorkPortsNeedToBeLinked(outShader);
-
 
 const shader = new CGL.Shader(cgl, "shaderMaterial");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -89,7 +87,6 @@ const uniformNameBlacklist = [
     "camPos"
 ];
 
-
 function updateShader()
 {
     if (!shader) return;
@@ -100,7 +97,7 @@ function updateShader()
     shader.setSource(vertexShader.get(), fragmentShader.get());
 
     shader.compile();
-
+    shader.bind();
 
     const activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
@@ -184,11 +181,9 @@ function updateShader()
 
     op.refreshParams();
 
-
     outShader.set(null);
     outShader.set(shader);
 }
-
 
 // 0x8B50: 'FLOAT_VEC2',
 // 0x8B51: 'FLOAT_VEC3',
@@ -212,6 +207,5 @@ function updateShader()
 // 0x1404: 'INT',
 // 0x1405: 'UNSIGNED_INT',
 // 0x1406: 'FLOAT'
-
 
 updateShader();

@@ -361,6 +361,7 @@ function updateShader()
         if (uniformInputs[i] && uniformInputs[i].uniform) uniformInputs[i].uniform.needsUpdate = true;
 
     shader.compile();
+    shader.bind();
 
     op.refreshParams();
 
