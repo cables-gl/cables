@@ -74,6 +74,21 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "HalfSize X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "HalfSize Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "HalfSize Z",
+                "subType": "number"
+            },
+            {
                 "type": 3,
                 "name": "MaxMin Points"
             }
