@@ -35,14 +35,7 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "Ops.Gl.TextureEffects.TextureDifference renamed to Ops.Gl.ImageCompose.TextureDifference",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856012713
-        }
-    ],
+    "changelog": [],
     "license": "MIT",
     "exampleProjectId": "zCDlTi",
     "coreLibs": [

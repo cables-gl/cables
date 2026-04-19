@@ -4,30 +4,8 @@
         {
             "message": "created op",
             "author": "kikohs",
-            "date": 1677604479625
-        },
-        {
-            "message": "cloned op from Ops.User.kikohs.ArrayGetValuesByIndexArray",
-            "author": "stephan",
-            "date": 1678108947353
-        },
-        {
-            "message": "Ops.User.stephan.ArrayGetValuesByIndexArray renamed to Ops.Dev.Arrays.ArrayGetValuesByIndexArray",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1678111935114
-        },
-        {
-            "message": "Ops.Dev.Arrays.ArrayGetValuesByIndexArray renamed to Ops.Arrays.ArrayGetValuesByIndexArray",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1678112189375
-        },
-        {
-            "message": "Ops.Arrays.ArrayGetValuesByIndexArray renamed to Ops.Array.ArrayGetValuesByIndexArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701851344994
+            "date": 1677604479625,
+            "type": "new op"
         }
     ],
     "authorName": "kikohs",

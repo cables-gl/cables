@@ -80,22 +80,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Color",
             "author": "pandur",
             "date": 1650374368024
-        },
-        {
-            "message": "Ops.User.pandur.ColorV2 renamed to Ops.Dev.TextureEffects.ColorV2",
-            "author": "pandur",
-            "date": 1650374388166
-        },
-        {
-            "message": "Ops.Dev.TextureEffects.ColorV2 renamed to Ops.Gl.TextureEffects.Color_v2",
-            "author": "pandur",
-            "date": 1653287174827
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Color_v2 renamed to Ops.Gl.ImageCompose.Color_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855706492
         }
     ],
     "coreLibs": [

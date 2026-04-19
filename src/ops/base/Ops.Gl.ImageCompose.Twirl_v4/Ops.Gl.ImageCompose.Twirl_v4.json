@@ -89,12 +89,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Twirl_v3",
             "author": "pandur",
             "date": 1650449268815
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Twirl_v4 renamed to Ops.Gl.ImageCompose.Twirl_v4",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855919150
         }
     ],
     "coreLibs": [

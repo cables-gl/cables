@@ -31,8 +31,8 @@
     "exampleProjectId": "179Jjr",
     "changelog": [
         {
-            "message": "Ops.Gl.TextureEffects.Flip renamed to Ops.Gl.ImageCompose.Flip",
-            "type": "rename",
+            "message": "new op",
+            "type": "new op",
             "author": "pandur",
             "date": 1701855376227
         }

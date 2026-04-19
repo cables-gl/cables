@@ -3,19 +3,9 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "pandur",
-            "date": 1623827070535
-        },
-        {
-            "message": "Ops.User.pandur.ObjectValues renamed to Ops.Json.ObjectValues",
-            "author": "pandur",
-            "date": 1623827116639
-        },
-        {
-            "message": "Ops.Json.ObjectValues renamed to Ops.Json.ObjectValuesAsArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1706775923192
+            "author": "kikohs",
+            "date": 1623827070535,
+            "type": "new op"
         }
     ],
     "authorName": "kikohs",

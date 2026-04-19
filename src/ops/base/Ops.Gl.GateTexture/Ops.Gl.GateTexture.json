@@ -2,10 +2,10 @@
     "id": "bcf93617-0687-4692-b3aa-16318af686ef",
     "changelog": [
         {
-            "message": "cloned op from Ops.Json.GateObject",
+            "message": "op created",
             "author": "pandur",
             "date": 1715862463349,
-            "type": "new"
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

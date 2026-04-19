@@ -4,28 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1552591453971
+            "date": 1552591453971,
+            "type": "new op"
         },
         {
             "message": "added mask texture input",
             "author": "pandur",
-            "date": 1565603054167
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Wobble",
-            "author": "pandur",
-            "date": 1653386207162
-        },
-        {
-            "message": "Ops.User.pandur.WobbleV2 renamed to Ops.Gl.TextureEffects.Wobble_v2",
-            "author": "pandur",
-            "date": 1653386225612
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Wobble_v2 renamed to Ops.Gl.ImageCompose.Wobble_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855735911
+            "date": 1565603054167,
+            "type": "feature"
         }
     ],
     "authorName": "pandur",

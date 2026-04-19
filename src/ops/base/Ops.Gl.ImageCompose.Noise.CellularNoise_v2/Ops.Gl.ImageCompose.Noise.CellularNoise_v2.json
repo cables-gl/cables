@@ -117,33 +117,14 @@
         {
             "message": "added offset texture parameter",
             "author": "pandur",
-            "date": 1643616504006
+            "date": 1643616504006,
+            "type": "feature"
         },
         {
             "message": "added harmonics parameter",
             "author": "pandur",
-            "date": 1643810369349
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.CellularNoise",
-            "author": "pandur",
-            "date": 1650542058962
-        },
-        {
-            "message": "Ops.User.pandur.CellularNoiseV2 renamed to Ops.Dev.CellularNoiseV2",
-            "author": "pandur",
-            "date": 1650542346346
-        },
-        {
-            "message": "Ops.Dev.CellularNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.CellularNoise_v2",
-            "author": "pandur",
-            "date": 1653286186655
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.CellularNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.CellularNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855003417
+            "date": 1643810369349,
+            "type": "feature"
         }
     ],
     "exampleProjectId": "9DZmT6",

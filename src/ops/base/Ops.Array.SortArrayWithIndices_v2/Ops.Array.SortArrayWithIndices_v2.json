@@ -2,30 +2,10 @@
     "id": "92555a62-b644-4bc5-9242-8eaa741965e3",
     "changelog": [
         {
-            "message": "created op",
-            "author": "andro",
-            "date": 1561021078579
-        },
-        {
-            "message": "cloned op from Ops.Array.SortArray",
+            "message": "op created",
             "author": "pandur",
-            "date": 1613657027017
-        },
-        {
-            "message": "Ops.User.pandur.SortArrayKeepIndices renamed to Ops.Array.SortArrayWithIndices",
-            "author": "pandur",
-            "date": 1613657366543
-        },
-        {
-            "message": "cloned op from Ops.Array.SortArrayWithIndices",
-            "author": "pandur",
-            "date": 1683713842636
-        },
-        {
-            "message": "Ops.Patch.PpsW05w.SortArrayWithIndices2 renamed to Ops.Array.SortArrayWithIndices_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1683714190020
+            "date": 1613657366543,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

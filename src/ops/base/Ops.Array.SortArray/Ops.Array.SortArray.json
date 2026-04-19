@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "andro",
-            "date": 1561021078579
+            "date": 1561021078579,
+            "type": "new op"
         },
         {
             "message": "make sorting work with array of strings",

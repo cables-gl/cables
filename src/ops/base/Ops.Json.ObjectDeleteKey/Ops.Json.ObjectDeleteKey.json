@@ -2,26 +2,10 @@
     "id": "57a80386-b565-4915-a365-61b2dccf5ccc",
     "changelog": [
         {
-            "message": "created op",
+            "message": "op created",
             "author": "pandur",
-            "date": 1692282546573
-        },
-        {
-            "message": "Ops.Patch.PUlcN_D.ObjectMerge renamed to Ops.Json.ObjectMerge",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1692282744562
-        },
-        {
-            "message": "cloned op from Ops.Json.ObjectMerge",
-            "author": "pandur",
-            "date": 1692282851977
-        },
-        {
-            "message": "Ops.Patch.PUlcN_D.ObjectDeleteKey renamed to Ops.Json.ObjectDeleteKey",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1692283074999
+            "date": 1692282851977,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

@@ -4,17 +4,8 @@
         {
             "message": "created op",
             "author": "amajesticseaflapflap",
-            "date": 1642599506723
-        },
-        {
-            "message": "Ops.Dev.PbrPrecomputeIbl renamed to Ops.Dev.PbrEnvironmentLight",
-            "author": "pandur",
-            "date": 1643355261731
-        },
-        {
-            "message": "Ops.Dev.PbrEnvironmentLight renamed to Ops.Gl.Pbr.PbrEnvironmentLight",
-            "author": "pandur",
-            "date": 1644228824618
+            "date": 1642599506723,
+            "type": "new op"
         },
         {
             "message": "added workaround for amd cards where cubemaps were rendered wrong, because of clearColor",

@@ -4,28 +4,8 @@
         {
             "message": "created op",
             "author": "andro",
-            "date": 1582302771619
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.HexagonNoise",
-            "author": "pandur",
-            "date": 1651041664493
-        },
-        {
-            "message": "Ops.User.pandur.HexagonNoiseV2 renamed to Ops.Dev.HexagonNoiseV2",
-            "author": "pandur",
-            "date": 1651041687872
-        },
-        {
-            "message": "Ops.Dev.HexagonNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.HexagonNoise_v2",
-            "author": "pandur",
-            "date": 1653285953984
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.HexagonNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.HexagonNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855414434
+            "date": 1582302771619,
+            "type": "new op"
         }
     ],
     "authorName": "andro",

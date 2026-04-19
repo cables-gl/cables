@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768837697368
+        },
+        {
+            "message": "Fix eventsystem",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1776436505141
         }
     ],
     "layout": {
@@ -41,5 +47,10 @@
                 "name": "Collisions 2"
             }
         ]
+    },
+    "isReleased": false,
+    "summary": "Check collision of an array of colliders against another array of colliders from bodies",
+    "docs": {
+        "ports": []
     }
 }

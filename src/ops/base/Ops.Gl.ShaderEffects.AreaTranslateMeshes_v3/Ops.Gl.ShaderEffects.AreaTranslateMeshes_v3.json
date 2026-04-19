@@ -7,26 +7,6 @@
             "message": "cloned op from Ops.Gl.ShaderEffects.AreaTranslateMeshes",
             "author": "pandur",
             "date": 1602169347292
-        },
-        {
-            "message": "Ops.User.pandur.AreaTranslateMeshes renamed to Ops.User.pandur.AreaTranslateMeshesV2",
-            "author": "pandur",
-            "date": 1602169371673
-        },
-        {
-            "message": "Ops.User.pandur.AreaTranslateMeshesV2 renamed to Ops.Gl.ShaderEffects.AreaTranslateMeshes_v2",
-            "author": "pandur",
-            "date": 1605544224526
-        },
-        {
-            "message": "cloned op from Ops.Gl.ShaderEffects.AreaTranslateMeshes_v2",
-            "author": "pandur",
-            "date": 1631620354495
-        },
-        {
-            "message": "Ops.User.pandur.AreaTranslateMeshes_v3 renamed to Ops.Gl.ShaderEffects.AreaTranslateMeshes_v3",
-            "author": "pandur",
-            "date": 1631620741137
         }
     ],
     "layout": {

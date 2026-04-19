@@ -4,28 +4,8 @@
         {
             "message": "created op",
             "author": "_LJ_",
-            "date": 1602251402379
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.LayerNoise_v2 renamed to Ops.Dev.Noise.LayerNoise_v2",
-            "author": "pandur",
-            "date": 1651042224849
-        },
-        {
-            "message": "Ops.Dev.Noise.LayerNoise_v2 renamed to Ops.Dev.Noise.LayerNoiseV3",
-            "author": "pandur",
-            "date": 1651042609449
-        },
-        {
-            "message": "Ops.Dev.Noise.LayerNoiseV3 renamed to Ops.Gl.TextureEffects.Noise.LayerNoise_v3",
-            "author": "pandur",
-            "date": 1653286793536
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.LayerNoise_v3 renamed to Ops.Gl.ImageCompose.Noise.LayerNoise_v3",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855040444
+            "date": 1602251402379,
+            "type": "new op"
         }
     ],
     "authorName": "_LJ_",

@@ -124,22 +124,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.FBMNoise",
             "author": "pandur",
             "date": 1651051381506
-        },
-        {
-            "message": "Ops.User.pandur.FBMNoiseV2 renamed to Ops.Dev.FBMNoiseV2",
-            "author": "pandur",
-            "date": 1651051559947
-        },
-        {
-            "message": "Ops.Dev.FBMNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.FBMNoise_v2",
-            "author": "pandur",
-            "date": 1653286966433
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.FBMNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.FBMNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855159648
         }
     ],
     "coreLibs": [

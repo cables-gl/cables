@@ -3,13 +3,15 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
-            "date": 1563449317441
+            "author": "pandur",
+            "date": 1563449317441,
+            "type": "new op"
         },
         {
             "message": "fix bugs with NaN values",
             "author": "pandur",
-            "date": 1643616950027
+            "date": 1643616950027,
+            "type": "bugfix"
         }
     ],
     "authorName": "pandur",

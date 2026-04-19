@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1642851891013
-        },
-        {
-            "message": "Ops.User.pandur.FilterArray renamed to Ops.Array.FilterArray",
-            "author": "pandur",
-            "date": 1642873653291
+            "date": 1642851891013,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

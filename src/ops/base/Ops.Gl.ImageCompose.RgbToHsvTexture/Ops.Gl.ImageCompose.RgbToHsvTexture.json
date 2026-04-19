@@ -38,22 +38,6 @@
             "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
             "author": "pandur",
             "date": 1560333507524
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.ToNormalMap",
-            "author": "pandur",
-            "date": 1647697092030
-        },
-        {
-            "message": "Ops.User.pandur.RgbToHsvTexture renamed to Ops.Gl.TextureEffects.RgbToHsvTexture",
-            "author": "pandur",
-            "date": 1647699410600
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RgbToHsvTexture renamed to Ops.Gl.ImageCompose.RgbToHsvTexture",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856210670
         }
     ],
     "todos": [

@@ -74,9 +74,10 @@
     "exampleProjectId": "TgoiV6",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.BrightnessContrast",
+            "message": "op created",
             "author": "pandur",
-            "date": 1652079766271
+            "date": 1652079766271,
+            "type": "new op"
         },
         {
             "message": "set shaderdefines on op load",

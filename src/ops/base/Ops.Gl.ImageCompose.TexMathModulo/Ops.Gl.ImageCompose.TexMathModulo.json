@@ -49,20 +49,10 @@
     "created": 1618244630693,
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Invert",
+            "message": "op created",
             "author": "pandur",
-            "date": 1618244630693
-        },
-        {
-            "message": "Ops.User.pandur.ColorModulo renamed to Ops.Gl.TextureEffects.TexMathModulo",
-            "author": "pandur",
-            "date": 1618319907230
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.TexMathModulo renamed to Ops.Gl.ImageCompose.TexMathModulo",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856031218
+            "date": 1618244630693,
+            "type": "new op"
         }
     ],
     "issues": "",

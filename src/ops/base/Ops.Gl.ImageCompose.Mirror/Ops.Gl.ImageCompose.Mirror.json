@@ -44,8 +44,8 @@
     "exampleProjectId": "MVFoT6",
     "changelog": [
         {
-            "message": "Ops.Gl.TextureEffects.Mirror renamed to Ops.Gl.ImageCompose.Mirror",
-            "type": "rename",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
             "date": 1701856261260
         }

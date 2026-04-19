@@ -135,6 +135,19 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1776156402636
+        },
+        {
+            "message": "Allow team-users to see file-infos for uploaded assets",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1776440508252
+        },
+        {
+            "message": "Fix bug with extendet title not showing when falsish value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1776586491015,
+            "url": "https://github.com/cables-gl/cables/issues/8237"
         }
     ],
     "isReleased": true,

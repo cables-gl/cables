@@ -7,42 +7,6 @@
             "date": 1677081476989
         },
         {
-            "message": "Ops.User.pandur.SubpatchNew renamed to Ops.Dev.SubpatchNew",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1677086267515
-        },
-        {
-            "message": " added core lib: subpatchop",
-            "type": "",
-            "author": "pandur",
-            "date": 1677162450837
-        },
-        {
-            "message": "Ops.Dev.SubpatchNew renamed to Ops.Team.GrozBeckert.EmployeeBubbles",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1692693954869
-        },
-        {
-            "message": "Ops.Team.GrozBeckert.EmployeeBubbles renamed to Ops.Dev.SubpatchNew",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1692694149694
-        },
-        {
-            "message": "Ops.Dev.SubpatchNew renamed to Ops.Ui.Subpatch2Temp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1702031078164
-        },
-        {
-            "message": " added core lib: subpatchop",
-            "type": "",
-            "author": "pandur",
-            "date": 1702033709369
-        },
-        {
             "message": "op was deprecated",
             "type": "deprecation",
             "author": "pandur",
@@ -57,15 +21,15 @@
                 "type": 5,
                 "name": "patchId"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "subpatchop"
     ],
-    "summary": "new subpatches",
+    "summary": "internal template when creating new subpatches",
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

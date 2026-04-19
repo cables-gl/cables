@@ -61,25 +61,10 @@
     "exampleProjectId": "qjtoT6",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.ZoomBlur",
+            "message": "op created",
             "author": "pandur",
-            "date": 1650522070432
-        },
-        {
-            "message": "Ops.User.pandur.ZoomBlurV2 renamed to Ops.Dev.ZoomBlurV2",
-            "author": "pandur",
-            "date": 1650523471300
-        },
-        {
-            "message": "Ops.Dev.ZoomBlurV2 renamed to Ops.Gl.TextureEffects.ZoomBlur_v2",
-            "author": "pandur",
-            "date": 1652093307627
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ZoomBlur_v2 renamed to Ops.Gl.ImageCompose.ZoomBlur_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855713562
+            "date": 1650522070432,
+            "type": "new op"
         },
         {
             "message": "fixed problem with masks",

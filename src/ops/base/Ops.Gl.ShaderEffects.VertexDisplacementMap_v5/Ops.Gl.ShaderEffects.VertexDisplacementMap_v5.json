@@ -159,19 +159,10 @@
     },
     "changelog": [
         {
-            "message": " added core lib: cgl_shadermodifier",
+            "message": "op created",
             "author": "pandur",
-            "date": 1599290609650
-        },
-        {
-            "message": "Ops.User.pandur.VertexDisplace4 renamed to Ops.Admin.VertexDisplacementMapNew",
-            "author": "pandur",
-            "date": 1600088767922
-        },
-        {
-            "message": "Ops.Admin.VertexDisplacementMapNew renamed to Ops.Gl.ShaderEffects.VertexDisplacementMap_v4",
-            "author": "pandur",
-            "date": 1613547051220
+            "date": 1599290609650,
+            "type": "new op"
         }
     ],
     "coreLibs": [

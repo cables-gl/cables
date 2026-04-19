@@ -103,12 +103,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1724937693022
-        },
-        {
-            "message": "Ops.Patch.PTMEvPm.Shardnoise renamed to Ops.Gl.ImageCompose.Noise.Shardnoise",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1724939289103
         }
     ],
     "license": "MIT",

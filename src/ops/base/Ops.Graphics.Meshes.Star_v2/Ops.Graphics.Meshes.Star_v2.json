@@ -68,29 +68,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1671034457153
-        },
-        {
-            "message": "cloned op from Ops.Gl.Meshes.Star",
-            "author": "pandur",
-            "date": 1686921439523
-        },
-        {
-            "message": "Ops.Patch.P18Mg4z.Star2 renamed to Ops.Gl.Meshes.Star_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686921595045
-        },
-        {
-            "message": "Gl.Meshes.Star_v2 renamed to Ops.Graphics.Star_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750154392163
-        },
-        {
-            "message": "Graphics.Star_v2 renamed to Ops.Graphics.Meshes.Star_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750154439267
         }
     ],
     "license": "MIT",

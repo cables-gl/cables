@@ -73,22 +73,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.ValueNoise",
             "author": "pandur",
             "date": 1651042831641
-        },
-        {
-            "message": "Ops.User.pandur.ValueNoiseV2 renamed to Ops.Dev.ValueNoiseV2",
-            "author": "pandur",
-            "date": 1651044721050
-        },
-        {
-            "message": "Ops.Dev.ValueNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.ValueNoise_v2",
-            "author": "pandur",
-            "date": 1653286926200
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.ValueNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.ValueNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855541526
         }
     ],
     "coreLibs": [

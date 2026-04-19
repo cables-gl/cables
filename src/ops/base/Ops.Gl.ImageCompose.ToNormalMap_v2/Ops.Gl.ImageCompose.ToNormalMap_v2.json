@@ -40,25 +40,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
+            "message": "new op",
             "author": "pandur",
-            "date": 1560333507524
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.ToNormalMap",
-            "author": "pandur",
-            "date": 1653732124735
-        },
-        {
-            "message": "Ops.User.pandur.ToNormalMapV2 renamed to Ops.Gl.TextureEffects.ToNormalMap_v2",
-            "author": "pandur",
-            "date": 1653733124018
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ToNormalMap_v2 renamed to Ops.Gl.ImageCompose.ToNormalMap_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855993988
+            "date": 1560333507524,
+            "type": "new op"
         }
     ],
     "todos": [

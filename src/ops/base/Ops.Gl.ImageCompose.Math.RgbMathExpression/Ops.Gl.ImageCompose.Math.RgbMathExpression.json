@@ -78,9 +78,10 @@
     "created": 1678981059161,
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Math.RgbMath",
+            "message": "op created",
             "author": "pandur",
-            "date": 1678981059161
+            "date": 1678981059161,
+            "type": "new op"
         },
         {
             "message": "Add parameter to set alpha channel",

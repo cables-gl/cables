@@ -4,18 +4,8 @@
         {
             "message": "created op",
             "author": "lorenzomf",
-            "date": 1685887622147
-        },
-        {
-            "message": "cloned op from Ops.User.lorenzomf.Spring",
-            "author": "lorenzomf",
-            "date": 1686335791917
-        },
-        {
-            "message": "Ops.Patch.PbsbM2y.Spring renamed to Ops.Anim.Spring",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686584818597
+            "date": 1685887622147,
+            "type": "new op"
         }
     ],
     "authorName": "lorenzomf",

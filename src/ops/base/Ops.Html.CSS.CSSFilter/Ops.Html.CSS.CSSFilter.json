@@ -28,8 +28,8 @@
     "exampleProjectId": "xpfcbo",
     "changelog": [
         {
-            "message": "Ops.Html.CSSFilter renamed to Ops.Html.CSS.CSSFilter",
-            "type": "rename",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
             "date": 1730274020282
         }

@@ -36,7 +36,7 @@ exec.onTriggered = function ()
 
         link.click();
     }
-    if (inMeth.get() == "document.location")
+    else if (inMeth.get() == "document.location")
     {
         document.location.href = inUrl.get();
     }

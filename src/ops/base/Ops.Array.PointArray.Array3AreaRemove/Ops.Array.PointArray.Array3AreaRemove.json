@@ -4,18 +4,8 @@
         {
             "message": "created op",
             "author": "simod",
-            "date": 1600853779070
-        },
-        {
-            "message": "Ops.User.simod.PointRemoval renamed to Ops.Array.Array3AreaRemove",
-            "author": "simod",
-            "date": 1601387357399
-        },
-        {
-            "message": "Ops.Array.Array3AreaRemove renamed to Ops.Array.PointArray.Array3AreaRemove",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1722850038352
+            "date": 1600853779070,
+            "type": "new op"
         }
     ],
     "authorName": "simod",

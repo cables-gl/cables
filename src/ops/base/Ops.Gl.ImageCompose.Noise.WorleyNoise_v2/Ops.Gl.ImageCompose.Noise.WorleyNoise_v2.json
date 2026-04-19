@@ -147,27 +147,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.WorleyNoise",
             "author": "pandur",
             "date": 1650544734876
-        },
-        {
-            "message": "Ops.User.pandur.WorleyNoiseV2 renamed to Ops.Dev.WorleyNoiseV2",
-            "author": "pandur",
-            "date": 1650547481836
-        },
-        {
-            "message": "Ops.Dev.WorleyNoiseV2 renamed to Ops.Gl.TextureEffects.WorleyNoise_v2",
-            "author": "pandur",
-            "date": 1652093012785
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.WorleyNoise_v2 renamed to Ops.Gl.TextureEffects.Noise.WorleyNoise_v2",
-            "author": "pandur",
-            "date": 1653286246095
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.WorleyNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.WorleyNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855256858
         }
     ],
     "coreLibs": [

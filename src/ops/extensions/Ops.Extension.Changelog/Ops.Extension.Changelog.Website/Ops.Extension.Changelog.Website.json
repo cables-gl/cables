@@ -52,6 +52,18 @@
             "type": "feature",
             "author": "stephan",
             "date": 1775550044654
+        },
+        {
+            "message": "Fix duplicate inclusion of op dependencies in export",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1776441627375
+        },
+        {
+            "message": "Add team-info to patchlist page",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1776441684118
         }
     ],
     "isReleased": true

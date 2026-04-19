@@ -90,30 +90,10 @@
     },
     "changelog": [
         {
-            "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
+            "message": "op created",
             "author": "pandur",
-            "date": 1560333507524
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.ToNormalMap",
-            "author": "pandur",
-            "date": 1633376809397
-        },
-        {
-            "message": "Ops.User.pandur.Slope renamed to Ops.User.pandur.PixelDiff",
-            "author": "pandur",
-            "date": 1633415076435
-        },
-        {
-            "message": "Ops.User.pandur.PixelDiff renamed to Ops.Gl.TextureEffects.PixelDifference",
-            "author": "pandur",
-            "date": 1633426024046
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.PixelDifference renamed to Ops.Gl.ImageCompose.PixelDifference",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701856243997
+            "date": 1633376809397,
+            "type": "new op"
         }
     ],
     "todos": [

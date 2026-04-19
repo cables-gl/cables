@@ -44,22 +44,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.ColorBalance",
             "author": "pandur",
             "date": 1650967446715
-        },
-        {
-            "message": "Ops.User.pandur.ColorBalanceV2 renamed to Ops.Dev.ColorBalanceV2",
-            "author": "pandur",
-            "date": 1650967514267
-        },
-        {
-            "message": "Ops.Dev.ColorBalanceV2 renamed to Ops.Gl.TextureEffects.ColorBalance_v2",
-            "author": "pandur",
-            "date": 1653286641139
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.ColorBalance_v2 renamed to Ops.Gl.ImageCompose.ColorBalance_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701854821879
         }
     ],
     "coreLibs": [

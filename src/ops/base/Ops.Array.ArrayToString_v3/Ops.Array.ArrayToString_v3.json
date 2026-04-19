@@ -6,6 +6,12 @@
             "author": "pandur",
             "date": 1565717313677,
             "type": "new"
+        },
+        {
+            "message": "Added prefix parameter, e.g. to make lists starting with \"-\"",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776589736124
         }
     ],
     "authorName": "pandur",
@@ -19,26 +25,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Seperator"
             },
             {
-                "type": "0",
+                "type": 5,
+                "name": "Prefix"
+            },
+            {
+                "type": 0,
                 "name": "New Line",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             }
         ]
     },
     "exampleProjectId": "U4M4J5",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

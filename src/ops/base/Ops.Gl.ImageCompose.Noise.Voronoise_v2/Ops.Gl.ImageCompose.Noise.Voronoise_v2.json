@@ -91,33 +91,14 @@
         {
             "message": "code cleanup ports",
             "author": "andro",
-            "date": 1558958462098
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Voronoise",
-            "author": "pandur",
-            "date": 1651050941195
-        },
-        {
-            "message": "Ops.User.pandur.VoronoiseV2 renamed to Ops.Dev.VoronoiseV2",
-            "author": "pandur",
-            "date": 1651050956816
-        },
-        {
-            "message": "Ops.Dev.VoronoiseV2 renamed to Ops.Gl.TextureEffects.Noise.Voronoise_v2",
-            "author": "pandur",
-            "date": 1653286947406
+            "date": 1558958462098,
+            "type": "new op"
         },
         {
             "message": "sync default values between port and shader",
             "author": "stephan",
-            "date": 1658399661808
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.Voronoise_v2 renamed to Ops.Gl.ImageCompose.Noise.Voronoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855130034
+            "date": 1658399661808,
+            "type": "bugfix"
         }
     ],
     "issues": "",

@@ -41,28 +41,8 @@
         {
             "message": "added : Blend modes",
             "author": "andro",
-            "date": 1548344250583
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Posterize",
-            "author": "pandur",
-            "date": 1650883291439
-        },
-        {
-            "message": "Ops.User.pandur.PosterizeV2 renamed to Ops.Dev.PosterizeV2",
-            "author": "pandur",
-            "date": 1650886061699
-        },
-        {
-            "message": "Ops.Dev.PosterizeV2 renamed to Ops.Gl.TextureEffects.Posterize_v2",
-            "author": "pandur",
-            "date": 1653286509361
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Posterize_v2 renamed to Ops.Gl.ImageCompose.Posterize_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701856320425
+            "date": 1548344250583,
+            "type": "feature"
         }
     ],
     "exampleProjectId": "_MMoT6",

@@ -4,17 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1659271130262
-        },
-        {
-            "message": "Ops.User.pandur.TriggerMathExpression renamed to Ops.Dev.Math.TriggerMathExpression",
-            "author": "pandur",
-            "date": 1659271414051
-        },
-        {
-            "message": "Ops.Dev.Math.TriggerMathExpression renamed to Ops.Math.TriggerMathExpression",
-            "author": "pandur",
-            "date": 1665427484006
+            "date": 1659271130262,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

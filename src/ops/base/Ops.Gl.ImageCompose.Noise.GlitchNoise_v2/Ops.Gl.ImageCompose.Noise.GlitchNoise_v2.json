@@ -88,25 +88,10 @@
     "exampleProjectId": "cknm0r",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.GlitchNoise",
+            "message": "op created",
             "author": "pandur",
-            "date": 1651041440771
-        },
-        {
-            "message": "Ops.User.pandur.GlitchNoiseV2 renamed to Ops.Dev.GlitchNoiseV2",
-            "author": "pandur",
-            "date": 1651041459101
-        },
-        {
-            "message": "Ops.Dev.GlitchNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.GlitchNoise_v2",
-            "author": "pandur",
-            "date": 1653286770598
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.GlitchNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.GlitchNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855277011
+            "date": 1651041440771,
+            "type": "new op"
         }
     ],
     "coreLibs": [

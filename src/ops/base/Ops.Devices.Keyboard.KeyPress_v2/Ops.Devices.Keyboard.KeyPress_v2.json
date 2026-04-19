@@ -46,14 +46,15 @@
     "youtubeids": [],
     "changelog": [
         {
-            "message": "Ops.Devices.Keyboard.KeyPress renamed to Ops.Devices.Keyboard.KeyPress_v2",
+            "message": "new version: v2",
             "author": "stephan",
             "date": 1647266078375
         },
         {
             "message": "added area-input, enable/disable and key-name output",
             "author": "stephan",
-            "date": 1647442062066
+            "date": 1647442062066,
+            "type": "improvement"
         }
     ],
     "license": "MIT",

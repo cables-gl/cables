@@ -4,19 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1675708263362
-        },
-        {
-            "message": "Ops.User.pandur.GerMaterialId renamed to Ops.Dev.GetMaterialId",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1675710081603
-        },
-        {
-            "message": "Ops.Dev.GetMaterialId renamed to Ops.Graphics.GetMaterialId",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1687272509713
+            "date": 1675708263362,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

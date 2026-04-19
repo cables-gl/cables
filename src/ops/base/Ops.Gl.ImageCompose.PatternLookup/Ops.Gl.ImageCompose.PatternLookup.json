@@ -47,12 +47,6 @@
             "message": "Ops.User.pandur.PatternLookup renamed to Ops.Gl.TextureEffects.PatternLookup",
             "author": "pandur",
             "date": 1566733308555
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.PatternLookup renamed to Ops.Gl.ImageCompose.PatternLookup",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855843600
         }
     ],
     "summary": "map a pattern to value levels of your texture",

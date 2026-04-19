@@ -72,7 +72,8 @@
                 "type": 5,
                 "name": "rel Attribute"
             }
-        ]
+        ],
+        "portsOut": []
     },
     "summary": "Open another website",
     "docs": {

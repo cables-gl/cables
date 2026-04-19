@@ -68,7 +68,8 @@
         {
             "message": "now reports an error if array length is not divisible by 4",
             "author": "andro",
-            "date": 1565014841078
+            "date": 1565014841078,
+            "type": "improvement"
         }
     ],
     "exampleProjectId": "vl1N_M",

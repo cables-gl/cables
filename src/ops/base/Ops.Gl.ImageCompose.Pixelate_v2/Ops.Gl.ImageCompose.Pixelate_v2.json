@@ -54,22 +54,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.Pixelate",
             "author": "pandur",
             "date": 1650525244555
-        },
-        {
-            "message": "Ops.User.pandur.PixelateV2 renamed to Ops.Dev.PixelateV2",
-            "author": "pandur",
-            "date": 1650525330296
-        },
-        {
-            "message": "Ops.Dev.PixelateV2 renamed to Ops.Gl.TextureEffects.Pixelate_v2",
-            "author": "pandur",
-            "date": 1653286152665
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Pixelate_v2 renamed to Ops.Gl.ImageCompose.Pixelate_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701856216639
         }
     ],
     "coreLibs": [

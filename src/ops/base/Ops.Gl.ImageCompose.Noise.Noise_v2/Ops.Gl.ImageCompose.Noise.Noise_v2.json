@@ -103,23 +103,8 @@
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
             "author": "pandur",
-            "date": 1650541473701
-        },
-        {
-            "message": "Ops.User.pandur.NoiseV2 renamed to Ops.Dev.NoiseV2",
-            "author": "pandur",
-            "date": 1650542073285
-        },
-        {
-            "message": "Ops.Dev.NoiseV2 renamed to Ops.Gl.TextureEffects.Noise.Noise_v2",
-            "author": "pandur",
-            "date": 1653285986379
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.Noise_v2 renamed to Ops.Gl.ImageCompose.Noise.Noise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855202947
+            "date": 1650541473701,
+            "type": "new op"
         }
     ],
     "caniusequery": "",

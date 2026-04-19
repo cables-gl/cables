@@ -4,38 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1569418562571
-        },
-        {
-            "message": "Ops.Admin.ArraySpray renamed to Ops.Gl.ArraySpray",
-            "author": "pandur",
-            "date": 1571078125486
-        },
-        {
-            "message": "Ops.Gl.ArraySpray renamed to Ops.Systens.ArraySpray",
-            "author": "pandur",
-            "date": 1571126063398
-        },
-        {
-            "message": "Ops.Systens.ArraySpray renamed to Ops.Systems.ArraySpray",
-            "author": "pandur",
-            "date": 1571128091069
+            "date": 1569418562571,
+            "type": "new op"
         },
         {
             "message": "Added output trigger",
             "author": "simod",
-            "date": 1571748235057
+            "date": 1571748235057,
+            "type": "improvement"
         },
         {
             "message": "fix bug with centering axis parameters",
             "author": "pandur",
-            "date": 1644336157366
-        },
-        {
-            "message": "Ops.Systems.ArraySpray renamed to Ops.Array.PointArray.ArraySpray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701850704574
+            "date": 1644336157366,
+            "type": "bugfix"
         }
     ],
     "authorName": "pandur",

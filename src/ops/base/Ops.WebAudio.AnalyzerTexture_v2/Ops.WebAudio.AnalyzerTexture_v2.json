@@ -50,16 +50,6 @@
             "message": "cloned op from Ops.WebAudio.AnalyserTexture",
             "author": "cables",
             "date": 1607427491104
-        },
-        {
-            "message": "Ops.User.cables.AnalyzerTexture renamed to Ops.WebAudio.AnalyzerTexture",
-            "author": "cables",
-            "date": 1607441709142
-        },
-        {
-            "message": "Ops.WebAudio.AnalyzerTexture renamed to Ops.WebAudio.AnalyzerTexture_v2",
-            "author": "simod",
-            "date": 1608037518062
         }
     ],
     "issues": "",
