@@ -1,0 +1,28 @@
+{
+    "id": "8c1b6b22-d28c-4e28-9058-96ff2bcc0d54",
+    "created": 1776418598723,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1776418598723
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Volume",
+                "subType": "number"
+            }
+        ]
+    },
+    "isReleased": false,
+    "summary": "Adjusts the volume of all audio ops",
+    "docs": {
+        "ports": []
+    }
+}
