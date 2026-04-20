@@ -40,8 +40,6 @@ inData.onChange = () =>
     else
     {
         animVal.anim.clear();
-        // animVal.anim = new CABLES.Anim();
-        console.log("clear...");
 
         outAnim.setRef(null);
         op.setUiError("invalid_data", "Could not parse SRT/WebVTT data");
