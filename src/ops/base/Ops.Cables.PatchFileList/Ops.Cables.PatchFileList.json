@@ -1,0 +1,39 @@
+{
+    "id": "4af8e3b3-3258-428c-a2a3-ab3ed3ad5ad8",
+    "created": 1776698161645,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1764149495258
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1776698161645
+        },
+        {
+            "message": "Cables.FileList renamed to Ops.Cables.PatchFileList",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1776699068574
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Filenames"
+            }
+        ]
+    },
+    "summary": "Upload an image as screentshot in cables",
+    "docs": {
+        "ports": []
+    }
+}
