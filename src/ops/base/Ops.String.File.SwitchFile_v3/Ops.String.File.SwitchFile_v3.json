@@ -1,0 +1,75 @@
+{
+    "id": "c61d54d3-540c-4351-af9d-9b19f954797c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550643918720,
+            "type": "new op"
+        },
+        {
+            "message": "new version v3: multiport input of files",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776698998194
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1776698481646,
+    "summary": "switch between filenames",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "File_0",
+                "longPort": 5,
+                "group": "File"
+            },
+            {
+                "type": 5,
+                "name": "File_1",
+                "group": "File"
+            },
+            {
+                "type": 5,
+                "name": "File_2",
+                "group": "File"
+            },
+            {
+                "type": 5,
+                "name": "File_3",
+                "group": "File"
+            },
+            {
+                "type": 5,
+                "name": "File_4",
+                "uititle": "add port",
+                "group": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Num Values",
+                "subType": "number"
+            }
+        ]
+    },
+    "youtubeids": [
+        "TdHgjqOLpnM"
+    ],
+    "license": "MIT",
+    "exampleProjectId": "unutii"
+}
