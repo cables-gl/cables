@@ -4,27 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1593236588538
-        },
-        {
-            "message": " added core lib: vargetset",
-            "author": "pandur",
-            "date": 1608654868533
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "pandur",
-            "date": 1608654775834
-        },
-        {
-            "message": "cloned op from Ops.Vars.VarSetArray_v2",
-            "author": "pandur",
-            "date": 1614259605693
-        },
-        {
-            "message": "Ops.User.pandur.VarTriggerArray renamed to Ops.Vars.VarTriggerArray",
-            "author": "pandur",
-            "date": 1614259859431
+            "date": 1593236588538,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

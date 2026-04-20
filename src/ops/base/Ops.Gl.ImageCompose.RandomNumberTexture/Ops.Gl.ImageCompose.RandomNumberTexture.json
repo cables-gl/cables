@@ -114,36 +114,10 @@
     "exampleProjectId": "j_I1TG",
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise",
-            "author": "pandur",
-            "date": 1650541473701
-        },
-        {
-            "message": "Ops.User.pandur.NoiseV2 renamed to Ops.Dev.NoiseV2",
-            "author": "pandur",
-            "date": 1650542073285
-        },
-        {
-            "message": "Ops.Dev.NoiseV2 renamed to Ops.Gl.TextureEffects.Noise.Noise_v2",
-            "author": "pandur",
-            "date": 1653285986379
-        },
-        {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.Noise_v2",
-            "author": "pandur",
-            "date": 1695287848894
-        },
-        {
-            "message": "Ops.Patch.Pj_I1TG.RandomNumberTexture renamed to Ops.Gl.TextureEffects.RandomNumberTexture",
-            "type": "rename",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
             "date": 1695288796622
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.RandomNumberTexture renamed to Ops.Gl.ImageCompose.RandomNumberTexture",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701856376943
         },
         {
             "message": "Fixed: Seed parameter was not changing anything",

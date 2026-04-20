@@ -55,22 +55,6 @@
             "message": "cloned op from Ops.Gl.TextureEffects.AlphaMask",
             "author": "pandur",
             "date": 1650446879263
-        },
-        {
-            "message": "Ops.User.pandur.AlphaMaskV2 renamed to Ops.Dev.AlphaMaskV2",
-            "author": "pandur",
-            "date": 1650447462683
-        },
-        {
-            "message": "Ops.Dev.AlphaMaskV2 renamed to Ops.Gl.TextureEffects.AlphaMask_v2",
-            "author": "pandur",
-            "date": 1652092964635
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.AlphaMask_v2 renamed to Ops.Gl.ImageCompose.AlphaMask_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855768516
         }
     ],
     "license": "MIT",

@@ -15,6 +15,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1775891025314
+        },
+        {
+            "message": "When clicking an op, the timeline scrolls, so the line is visible ",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1776684669136
         }
     ],
     "isReleased": true,

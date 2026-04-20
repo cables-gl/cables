@@ -5,22 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1550643918720
-        },
-        {
-            "message": "cloned op from Ops.Value.SwitchFile",
-            "author": "pandur",
-            "date": 1615474741500
-        },
-        {
-            "message": "Ops.User.pandur.SwitchFile2 renamed to Ops.Value.SwitchFile_v2",
-            "author": "pandur",
-            "date": 1615709712566
-        },
-        {
-            "message": "Ops.Value.SwitchFile_v2 renamed to Ops.String.File.SwitchFile_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701853020605
         }
     ],
     "authorName": "pandur",

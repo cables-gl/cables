@@ -148,6 +148,19 @@
             "author": "pandur",
             "date": 1776586491015,
             "url": "https://github.com/cables-gl/cables/issues/8237"
+        },
+        {
+            "message": "Tooltips are no longer positioned outside of the browser window/ parameter panel tooltips for input ports",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776672133744,
+            "url": "https://github.com/cables-gl/cables/issues/8242"
+        },
+        {
+            "message": "Search toggle: \":animated\" search only over ops that have animated ports",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1776683759408
         }
     ],
     "isReleased": true,
