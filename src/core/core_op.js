@@ -54,6 +54,7 @@ import { MultiPort2 } from "./core_port_multi2.js";
  * @property {number} [heatmapIntensity]
  * @property {string} [commentOverwrite]
  * @property {string} [comment_text]
+ * @property {boolean} [createdLocally]
  */
 
 /**

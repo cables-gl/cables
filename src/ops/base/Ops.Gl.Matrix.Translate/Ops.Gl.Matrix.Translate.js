@@ -6,6 +6,7 @@ const
     z = op.inValue("z");
 
 const vec = vec3.create();
+op.setUiAxisPorts(x, y, z);
 
 render.onTriggered = function ()
 {
