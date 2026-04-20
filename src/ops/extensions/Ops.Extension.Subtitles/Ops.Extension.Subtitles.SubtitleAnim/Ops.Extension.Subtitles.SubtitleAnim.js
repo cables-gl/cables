@@ -1,12 +1,13 @@
 const
+    animVal = op.inValue("SubtitleAnim"),
     inData = op.inObject("Structure", null, "subtitles"),
     inOffset = op.inFloat("Offset"),
-    outAnim = op.outObject("Anim", null, "anim"),
-    animVal = op.inValue("SubtitleAnim");
+    outAnim = op.outObject("Anim", null, "anim");
 
 animVal.setAnimated(true);
 animVal.setUiAttribs({ "hidePort": true, "hideParam": true });
 
+op.init =
 inOffset.onChange =
 inData.onChange = () =>
 {
@@ -16,10 +17,10 @@ inData.onChange = () =>
     if (data)
     {
         const off = inOffset.get() || 0;
-        animVal.anim = null;
-        const anim = new CABLES.Anim({
-            "defaultEasing": CABLES.Anim.EASING_ABSOLUTE
-        });
+
+        animVal.anim.clear();
+        const anim = animVal.anim;
+        anim.defaultEasing = CABLES.Anim.EASING_ABSOLUTE;
         anim.setValue(0, -1);
         for (let i = 0; i < data.keys.length; i++)
         {
@@ -34,11 +35,15 @@ inData.onChange = () =>
             startAnimKey.uiAttribs.color = "#efefef";
             anim.setValue(end, -1);
         }
-        animVal.anim = anim;
         outAnim.setRef(anim);
     }
     else
     {
+        animVal.anim.clear();
+        // animVal.anim = new CABLES.Anim();
+        console.log("clear...");
+
+        outAnim.setRef(null);
         op.setUiError("invalid_data", "Could not parse SRT/WebVTT data");
     }
 };

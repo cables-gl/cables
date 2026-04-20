@@ -52,7 +52,7 @@ import { RenderLoop } from "./renderloop.js";
  */
 
 /**
- * @template T Op
+ * @template T Patch
  *
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -491,7 +491,8 @@ export class Patch extends Events
      * @param {string} [id]
      * @param {boolean} [fromDeserialize]
      * @param {string} [opName] e.g. Ops.Math.Sum
-     * @param {import("./core_op.js").OpAttribs}
+     * @param {import("./core_op.js").OpAttribs} opAttribs
+     * @returns {T} op
      * @example
      * // add invisible op
      * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
