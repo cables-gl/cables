@@ -17,6 +17,8 @@ const
     trigger = op.outTrigger("Next"),
     geomOut = op.outObject("geometry", null, "geometry");
 
+op.setUiAxisPorts(width, height, len);
+
 const cgl = op.patch.cgl;
 op.toWorkPortsNeedToBeLinked(render);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);

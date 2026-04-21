@@ -10,7 +10,34 @@
             },
             {
                 "type": 0,
+                "name": "Method index",
+                "values": [
+                    "Factor",
+                    "Target Size X",
+                    "Target Size Y",
+                    "Target Size Z"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Scale",
+                "uititle": "Target Size Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Z",
                 "subType": "number"
             }
         ],
@@ -32,6 +59,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1685951099728
+        },
+        {
+            "message": "Add scaling multiplier per axis",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776780213543
+        },
+        {
+            "message": "Added option for scaling to a target size for each axis",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776780288029
         }
     ],
     "coreLibs": [
