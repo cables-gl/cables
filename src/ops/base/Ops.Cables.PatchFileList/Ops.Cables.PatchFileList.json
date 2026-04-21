@@ -24,7 +24,23 @@
         }
     ],
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Filter index",
+                "values": [
+                    "None",
+                    "EndsWith",
+                    "StartsWith",
+                    "Includes"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Filter Value"
+            }
+        ],
         "portsOut": [
             {
                 "type": 3,

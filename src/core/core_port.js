@@ -27,9 +27,7 @@ import { Op } from "./core_op.js";
  * @property  {Number} [order] internal: do not set manually
  * @property  {Number} [stride] internal: do not set manually
  * @property  {Boolean} [expose] internal: do not set manually
- * @property  {Boolean} [multiPortManual] internal: do not set manually
  * @property  {String} [increment] internal: do not set manually
- * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {PortUiAttribsDisplay} display internal: do not set manually
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
@@ -46,6 +44,8 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [notWorking] internal: do not set manually
  * @property  {number} [glPortIndex] internal: do not set manually
  * @property  {boolean} [readOnly] internal: do not set manually
+ * @property  {Boolean} [multiPortManual] internal: do not set manually
+ * @property  {Number} [multiPortNum] internal: do not set manually
  * @property  {boolean} [multiPort] internal: do not set manually
  * @property  {number} [longPort]
  * @property  {boolean} [tlDrawKeys]
