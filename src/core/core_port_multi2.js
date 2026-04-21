@@ -62,7 +62,7 @@ export class MultiPort2 extends Port
                 for (const attin in this._uiAttribsPorts)
                     o[attin] = this._uiAttribsPorts[attin];
 
-                if (this.uiAttribs.hidePort)o.hidePort = true;
+                // if (this.uiAttribs.hidePort)o.hidePort = true;
                 o.addPort = addPort;
                 o.longPort = lp;
                 o.title = title;
