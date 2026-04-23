@@ -5,7 +5,8 @@ const
     z = op.inValueFloat("value z"),
     resultX = op.outNumber("result x"),
     resultY = op.outNumber("result y"),
-    resultZ = op.outNumber("result z");
+    resultZ = op.outNumber("result z"),
+    next = op.outTrigger("Next");
 
 exe.onTriggered = exec;
 
@@ -14,4 +15,5 @@ function exec()
     resultX.set(x.get());
     resultY.set(y.get());
     resultZ.set(z.get());
+    next.trigger();
 }

@@ -144,6 +144,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Start Loading Task",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Reload"
             }
@@ -184,6 +189,10 @@
                 "type": 0,
                 "name": "Duration MS",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Fetch Response"
             },
             {
                 "type": 1,

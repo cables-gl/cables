@@ -222,9 +222,9 @@ inExec.onTriggered = function ()
 
             if (inRender.get())
             {
-                for (let i = 0; i < gltf.nodes.length; i++)
-                    if (!gltf.nodes[i].isChild)
-                        gltf.nodes[i].render(cgl);
+                for (let i = 0; i < gltf.sortedNodes.length; i++)
+                    if (!gltf.sortedNodes[i].isChild)
+                        gltf.sortedNodes[i].render(cgl);
             }
             else
             {
@@ -430,6 +430,7 @@ function loadBin(addCacheBuster)
                 const measure = op.patch.cgl.profileData.start("gltf parse");
                 if (gltf)gltf.dispose();
                 gltf = parseGltf(arrayBuffer);
+                sortNodes();
                 measure.finish();
 
                 arrayBuffer = null;
@@ -591,6 +592,23 @@ function hideNodesFromData()
                 if (n[j]) n[j].hidden = true;
 
                 if (n.length === 0) op.verbose("node to be hidden not found", i, n);
+                if (n.length > 1) op.verbose("multiple nodes with name", i, n);
+            }
+        }
+    }
+    hideNodesFromArray();
+
+    if (data && data.nodeOrders)
+    {
+        for (const i in data.nodeOrders)
+        {
+            const n = gltf.getNodes(i);
+            for (let j = 0; j < n.length; j++)
+            {
+                if (n[j]) n[j].order = data.nodeOrders[i];
+
+                if (n.length === 0) op.verbose("node to be hidden not found", i, n);
+                if (n.length > 1) op.verbose("multiple nodes with name", i, n);
             }
         }
     }
@@ -614,6 +632,14 @@ function saveData()
     dataPort.set(JSON.stringify(data));
 }
 
+function sortNodes()
+{
+    if (gltf) gltf.sortedNodes = gltf.nodes.toSorted((a, b) =>
+    {
+        return a.order - b.order;
+    });
+}
+
 function updateAnimation()
 {
     if (gltf && gltf.nodes)
@@ -624,6 +650,7 @@ function updateAnimation()
         }
         const animName = inAnimation.get() || Object.keys(maxTimeDict)[0];
         maxTime = maxTimeDict[animName] || -1;
+        console.log("maxtime", maxTimeDict);
         outAnimLength.set(maxTime);
     }
 }
@@ -806,6 +833,26 @@ op.exposeMaterial = function (name)
     gui.patchView.centerSelectOp(newop.id, true);
 
     gui.closeModal();
+};
+
+op.setOrder = function (name)
+{
+    const n = gltf.getNode(name);
+
+    data.nodeOrders = data.nodeOrders || {};
+
+    new CABLES.UI.ModalDialog({
+        "prompt": true,
+        "title": "Order",
+        "text": "enter a number, smaller number get rendered earlier",
+        "promptValue": n.order,
+        "promptOk": (str) =>
+        {
+            n.order = parseFloat(str);
+            data.nodeOrders[name] = n.order;
+            saveData();
+            reloadSoon();
+        } });
 };
 
 op.toggleNodeVisibility = function (name)

@@ -39,6 +39,10 @@
                 "type": 0,
                 "name": "result z",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Next"
             }
         ]
     },

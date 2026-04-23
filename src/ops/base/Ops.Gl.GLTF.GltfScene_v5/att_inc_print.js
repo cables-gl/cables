@@ -85,20 +85,23 @@ function printNode(html, node, level)
         html += "</td>";
 
         html += "<td>";
+        let matStr = "";
         let countMats = 0;
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
-            if (countMats > 0)html += ", ";
+            if (countMats > 0)matStr += ", ";
             if (gltf.json.materials && node.mesh.meshes[i].hasOwnProperty("material"))
             {
                 if (gltf.json.materials[node.mesh.meshes[i].material])
                 {
-                    html += gltf.json.materials[node.mesh.meshes[i].material].name || "";
+                    matStr += gltf.json.materials[node.mesh.meshes[i].material].name || "";
                     countMats++;
                 }
             }
         }
+        if (countMats > 2)html += "<span class=\"tt\" data-tt=\"" + matStr + "\">" + countMats + " materials</span>";
         if (countMats == 0)html += "none";
+
         html += "</td>";
     }
     else
@@ -132,6 +135,10 @@ function printNode(html, node, level)
 
     if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
 
+    html += "</td>";
+
+    html += "<td>";
+    html += "<span class=\"button-small\" onclick=\"gui.corePatch().getOpById('" + op.id + "').setOrder('" + node.name + "');\">" + node.order + "</span>";
     html += "</td>";
 
     html += "<td>";
@@ -184,8 +191,6 @@ function printMaterial(mat, idx)
     }
     html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>");
     html += (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeMaterial('" + mat.name + "')\" class=\"treebutton\">Properties</a>");
-    html += "<td>";
-
     html += "<td>";
 
     html += "<td>";
@@ -271,9 +276,12 @@ function printInfo()
         if (nodeFilter && !gltf.json.meshes[i].name.toLowerCase().includes(nodeFilter)) continue;
 
         html += "<tr>";
-        html += "<td>" + gltf.json.meshes[i].name || "?" + "</td>";
+        html += "<td>" + gltf.json.meshes[i].name || "?";
+
+        html += "</td>";
 
         html += "<td>";
+
         let count = 0;
         let nodename = "";
         if (gltf.json.nodes)
@@ -282,10 +290,7 @@ function printInfo()
                 if (gltf.json.nodes[j].mesh == i)
                 {
                     count++;
-                    if (count == 1)
-                    {
-                        nodename = gltf.json.nodes[j].name;
-                    }
+                    if (count == 1) nodename = gltf.json.nodes[j].name;
                 }
             }
         if (count > 1) html += (count) + " nodes (" + nodename + " ...)";

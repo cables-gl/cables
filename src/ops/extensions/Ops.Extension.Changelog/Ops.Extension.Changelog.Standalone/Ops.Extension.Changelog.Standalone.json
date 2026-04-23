@@ -15,6 +15,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1776324471434
+        },
+        {
+            "message": "Remove version number from name of executable, always show version number in title",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1776869620611
         }
     ],
     "isReleased": true

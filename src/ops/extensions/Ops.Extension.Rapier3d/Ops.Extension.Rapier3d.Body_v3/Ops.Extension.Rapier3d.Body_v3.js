@@ -234,16 +234,16 @@ function updateUi()
         inCollSizeZ.setUiAttribs({ "greyout": true });
         inCollSizeX.setUiAttribs({ "greyout": true });
     }
-    if (inCollShape.get() != "Ball")
+    if (inCollShape.get() != "Ball" && inCollShape.get() != "Cylinder" && inCollShape.get() != "Capsule")
     {
         inCollRadius.setUiAttribs({ "greyout": true });
     }
-    if (inCollShape.get() != "Cuboid")
-    {
-        inCollSizeX.setUiAttribs({ "greyout": true });
-        inCollSizeY.setUiAttribs({ "greyout": true });
-        inCollSizeZ.setUiAttribs({ "greyout": true });
-    }
+    // if (inCollShape.get() == "Cuboid")
+    // {
+    //     inCollSizeX.setUiAttribs({ "greyout": true });
+    //     inCollSizeY.setUiAttribs({ "greyout": true });
+    //     inCollSizeZ.setUiAttribs({ "greyout": true });
+    // }
 
     if (inCollShape.get() != "Dynamic")
     {
@@ -281,11 +281,15 @@ function setup(world)
 
     op.patch.cgl.profileData.addHeavyEvent("rapier body constructed", inName.get());
 
+    let sizeY = Math.abs(inCollSizeY.get());
+    let sizeX = Math.abs(inCollSizeX.get());
+    let sizeZ = Math.abs(inCollSizeZ.get());
+    let sizeR = Math.abs(inCollRadius.get());
     let colliderDesc, collider;
-    if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(inCollSizeY.get() * glScale[1], inCollRadius.get() * glScale[0]);
-    else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(inCollSizeY.get() * glScale[1], inCollRadius.get() * glScale[0]);
-    else if (inCollShape.get() == "Cuboid") colliderDesc = RAPIER.ColliderDesc.cuboid(inCollSizeX.get() * glScale[0], inCollSizeY.get() * glScale[1], inCollSizeZ.get() * glScale[2]);
-    else if (inCollShape.get() == "Ball") colliderDesc = RAPIER.ColliderDesc.ball(inCollRadius.get() * glScale[0]);
+    if (inCollShape.get() == "Capsule") colliderDesc = RAPIER.ColliderDesc.capsule(sizeY * glScale[1], sizeR * glScale[0]);
+    else if (inCollShape.get() == "Cylinder") colliderDesc = RAPIER.ColliderDesc.cylinder(sizeY * glScale[1], sizeR * glScale[0]);
+    else if (inCollShape.get() == "Cuboid") colliderDesc = RAPIER.ColliderDesc.cuboid(sizeX * glScale[0], sizeY * glScale[1], sizeZ * glScale[2]);
+    else if (inCollShape.get() == "Ball") colliderDesc = RAPIER.ColliderDesc.ball(sizeR * glScale[0]);
     else if (inCollShape.get() == "Tri Mesh")
     {
         let geom = inGeom.get();

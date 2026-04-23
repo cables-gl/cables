@@ -8,6 +8,7 @@ const inUrl = op.inUrl("URL"),
     inAutoRequest = op.inBool("Auto request", true),
     inEmptyOutput = op.inBool("Empty output on change", true),
     inRetry = op.inBool("Retry on error", true),
+    inLoadTask = op.inBool("Start Loading Task", true),
     reloadTrigger = op.inTriggerButton("Reload"),
     outData = op.outObject("Response Json Object"),
     outString = op.outString("Response String"),
@@ -110,7 +111,8 @@ function finishLoadingFail(loadingId, e)
     outHasError.set(true);
     outString.set("");
     outTrigger.trigger();
-    op.patch.loading.finished(loadingId);
+    if (inLoadTask.get())
+        op.patch.loading.finished(loadingId);
 
     if (outHasError.get() && inRetry.get())
     {
@@ -121,7 +123,9 @@ function finishLoadingFail(loadingId, e)
 
 function finishLoadingSuccess(loadingId)
 {
-    op.patch.loading.finished(loadingId);
+    if (inLoadTask.get())
+        op.patch.loading.finished(loadingId);
+
     outIsLoading.set(false);
     outTrigger.trigger();
     if (requestAfterFinish)
@@ -149,7 +153,9 @@ function reload(addCachebuster, force = false)
     showEmptyUrlWarning();
     if (!inUrl.get()) return resetOutputs();
 
-    const loadingId = op.patch.loading.start(op.objName, "" + inUrl.get(), op);
+    let loadingId = null;
+    if (inLoadTask.get())
+        loadingId = op.patch.loading.start(op.objName, "" + inUrl.get(), op);
     outIsLoading.set(true);
     outHasError.set(false);
 

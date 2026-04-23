@@ -610,5 +610,6 @@ function parseGltf(arrayBuffer)
         }
         console.log("clear...");
     }
+
     return gltf;
 }

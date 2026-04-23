@@ -1,316 +1,354 @@
 const gltfNode = class
 {
-    constructor(node, gltf)
-    {
-        this.isChild = node.isChild || false;
-        this.name = node.name;
+      name="new node"
 
-        if (!node.name)
-            if (node.hasOwnProperty("mesh")) this.name = "unnamed";
-            else this.name = "unnamed node " + CABLES.simpleId();
+      copies = [];
 
-        if (node.hasOwnProperty("camera")) this.camera = node.camera;
-        this.hidden = false;
-        this.mat = mat4.create();
-        this._animActions = {};
-        this.animWeights = [];
-        this._animMat = mat4.create();
-        this._tempMat = mat4.create();
-        this._tempQuat = quat.create();
-        this._tempRotmat = mat4.create();
-        this.mesh = null;
-        this.children = [];
-        this._node = node;
-        this._gltf = gltf;
-        this.absMat = mat4.create();
-        this.addTranslate = null;
-        this._tempAnimScale = null;
-        this.addMulMat = null;
-        this.updateMatrix();
-        this.skinRenderer = null;
-        this.copies = [];
-        this.warning = "";
-        this.extensions = node.extensions || [];
-        if (this._node.scale && (this._node.scale[0] < 0 || this._node.scale[1] < 0 || this._node.scale[2] < 0)) this.warning = "NEG SCALE";
-    }
+      warning = "";
 
-    get skin()
-    {
-        if (this._node.hasOwnProperty("skin")) return this._node.skin;
-        else return -1;
-    }
+      order = 0;
 
-    copy()
-    {
-        this.isCopy = true;
-        const n = new gltfNode(this._node, this._gltf);
-        n.copyOf = this;
+      needsSort=true;
 
-        n._animActions = this._animActions;
-        n.children = this.children;
-        if (this.skin) n.skinRenderer = new GltfSkin(this);
+      hidden = false;
 
-        this.updateMatrix();
-        return n;
-    }
+      mat = mat4.create();
 
-    hasSkin()
-    {
-        if (this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name || "unknown";
-        return false;
-    }
+      _animActions = {};
 
-    initSkin()
-    {
-        if (this.skin > -1)
-        {
-            this.skinRenderer = new GltfSkin(this);
-        }
-    }
+      animWeights = [];
 
-    updateMatrix()
-    {
-        mat4.identity(this.mat);
-        if (this._node.translation) mat4.translate(this.mat, this.mat, this._node.translation);
+      _animMat = mat4.create();
 
-        if (this._node.rotation)
-        {
-            const rotmat = mat4.create();
-            this._rot = this._node.rotation;
+      _tempMat = mat4.create();
 
-            mat4.fromQuat(rotmat, this._node.rotation);
-            mat4.mul(this.mat, this.mat, rotmat);
-        }
+      _tempQuat = quat.create();
 
-        if (this._node.scale)
-        {
-            this._scale = this._node.scale;
-            mat4.scale(this.mat, this.mat, this._scale);
-        }
+      _tempRotmat = mat4.create();
 
-        if (this._node.hasOwnProperty("mesh"))
-        {
-            this.mesh = this._gltf.meshes[this._node.mesh];
-        }
+      mesh = null;
 
-        if (this._node.children)
-        {
-            for (let i = 0; i < this._node.children.length; i++)
-            {
-                this._gltf.json.nodes[i].isChild = true;
-                if (this._gltf.nodes[this._node.children[i]]) this._gltf.nodes[this._node.children[i]].isChild = true;
-                this.children.push(this._node.children[i]);
-            }
-        }
-    }
+      children = [];
 
-    unHide()
-    {
-        this.hidden = false;
-        for (let i = 0; i < this.children.length; i++)
-            if (this.children[i].unHide) this.children[i].unHide();
-    }
+      _node = null;
 
-    calcBounds(gltf, mat, bounds)
-    {
-        const localMat = mat4.create();
+      _gltf = null;
 
-        if (mat) mat4.copy(localMat, mat);
-        if (this.mat) mat4.mul(localMat, localMat, this.mat);
+      absMat = mat4.create();
 
-        if (this.mesh)
-        {
-            const bb = this.mesh.bounds.copy();
-            bb.mulMat4(localMat);
-            bounds.applyBoundingBox(bb);
+      addTranslate = null;
 
-            if (bounds.changed)
-            {
-                boundingPoints.push(
-                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
-            }
-        }
+      _tempAnimScale = null;
 
-        for (let i = 0; i < this.children.length; i++)
-        {
-            if (gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
-            {
-                const b = gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
+      addMulMat = null;
 
-                bounds.applyBoundingBox(b);
-            }
-        }
+      skinRenderer = null;
 
-        if (bounds.changed) return bounds;
-        else return null;
-    }
+      constructor(node, gltf)
+      {
+          this._gltf = gltf;
+          this._node = node;
+          this.isChild = node.isChild || false;
+          this.name = node.name;
 
-    setAnimAction(name)
-    {
-        if (!name) return;
+          this.updateMatrix();
 
-        this._currentAnimaction = name;
+          if (!node.name)
+              if (node.hasOwnProperty("mesh")) this.name = "unnamed";
+              else this.name = "unnamed node " + CABLES.simpleId();
 
-        if (name && !this._animActions[name]) return null;
+          if (node.hasOwnProperty("camera")) this.camera = node.camera;
 
-        for (let path in this._animActions[name])
-        {
-            if (path == "translation") this._animTrans = this._animActions[name][path];
-            else if (path == "rotation") this._animRot = this._animActions[name][path];
-            else if (path == "scale") this._animScale = this._animActions[name][path];
-            else if (path == "weights") this.animWeights = this._animActions[name][path];
-        }
-    }
+          this.extensions = node.extensions || [];
+          if (this._node.scale && (this._node.scale[0] < 0 || this._node.scale[1] < 0 || this._node.scale[2] < 0)) this.warning = "NEG SCALE";
+      }
 
-    setAnim(path, name, anims)
-    {
-        if (!path || !name || !anims) return;
+      get skin()
+      {
+          if (this._node.hasOwnProperty("skin")) return this._node.skin;
+          else return -1;
+      }
 
-        this._animActions[name] = this._animActions[name] || {};
+      copy()
+      {
+          this.isCopy = true;
+          const n = new gltfNode(this._node, this._gltf);
+          n.copyOf = this;
 
-        // debugger;
+          n._animActions = this._animActions;
+          n.children = this.children;
+          if (this.skin) n.skinRenderer = new GltfSkin(this);
 
-        // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;
+          this.updateMatrix();
+          return n;
+      }
 
-        if (this._animActions[name][path]) op.log("[gltfNode] animation action path already exists", name, path, this._animActions[name][path]);
+      hasSkin()
+      {
+          if (this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name || "unknown";
+          return false;
+      }
 
-        this._animActions[name][path] = anims;
+      initSkin()
+      {
+          if (this.skin > -1)
+          {
+              this.skinRenderer = new GltfSkin(this);
+          }
+      }
 
-        if (path == "translation") this._animTrans = anims;
-        else if (path == "rotation") this._animRot = anims;
-        else if (path == "scale") this._animScale = anims;
-        else if (path == "weights") this.animWeights = this._animActions[name][path];
-    }
+      updateMatrix()
+      {
+          mat4.identity(this.mat);
+          if (this._node.translation) mat4.translate(this.mat, this.mat, this._node.translation);
 
-    modelMatLocal()
-    {
-        return this._animMat || this.mat;
-    }
+          if (this._node.rotation)
+          {
+              const rotmat = mat4.create();
+              this._rot = this._node.rotation;
 
-    modelMatAbs()
-    {
-        return this.absMat;
-    }
+              mat4.fromQuat(rotmat, this._node.rotation);
+              mat4.mul(this.mat, this.mat, rotmat);
+          }
 
-    transform(cgl, _time)
-    {
-        if (!_time && _time != 0)_time = time;
+          if (this._node.scale)
+          {
+              this._scale = this._node.scale;
+              mat4.scale(this.mat, this.mat, this._scale);
+          }
 
-        this._lastTimeTrans = _time;
+          if (this._node.hasOwnProperty("mesh"))
+          {
+              this.mesh = this._gltf.meshes[this._node.mesh];
+          }
 
-        gltfTransforms++;
+          if (this._node.children)
+          {
+              for (let i = 0; i < this._node.children.length; i++)
+              {
+                  this._gltf.json.nodes[i].isChild = true;
+                  if (this._gltf.nodes[this._node.children[i]]) this._gltf.nodes[this._node.children[i]].isChild = true;
+                  this.children.push(this._node.children[i]);
+              }
+          }
+      }
 
-        if (!this._animTrans && !this._animRot && !this._animScale)
-        {
-            mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
-            this._animMat = null;
-        }
-        else
-        {
-            this._animMat = this._animMat || mat4.create();
-            mat4.identity(this._animMat);
+      unHide()
+      {
+          this.hidden = false;
+          for (let i = 0; i < this.children.length; i++)
+              if (this.children[i].unHide) this.children[i].unHide();
+      }
 
-            const playAnims = true;
+      calcBounds(gltf, mat, bounds)
+      {
+          const localMat = mat4.create();
 
-            if (playAnims && this._animTrans)
-            {
-                mat4.translate(this._animMat, this._animMat, [
-                    this._animTrans[0].getValue(_time),
-                    this._animTrans[1].getValue(_time),
-                    this._animTrans[2].getValue(_time)]);
-            }
-            else
-            if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
+          if (mat) mat4.copy(localMat, mat);
+          if (this.mat) mat4.mul(localMat, localMat, this.mat);
 
-            if (playAnims && this._animRot)
-            {
-                if (this._animRot[0].defaultEasing == CABLES.EASING_LINEAR) CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
-                else if (this._animRot[0].defaultEasing == CABLES.EASING_ABSOLUTE)
-                {
-                    this._tempQuat[0] = this._animRot[0].getValue(_time);
-                    this._tempQuat[1] = this._animRot[1].getValue(_time);
-                    this._tempQuat[2] = this._animRot[2].getValue(_time);
-                    this._tempQuat[3] = this._animRot[3].getValue(_time);
-                }
-                else if (this._animRot[0].defaultEasing == CABLES.EASING_CUBICSPLINE)
-                {
-                    CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
-                }
+          if (this.mesh)
+          {
+              const bb = this.mesh.bounds.copy();
+              bb.mulMat4(localMat);
+              bounds.applyBoundingBox(bb);
 
-                mat4.fromQuat(this._tempMat, this._tempQuat);
-                mat4.mul(this._animMat, this._animMat, this._tempMat);
-            }
-            else if (this._rot)
-            {
-                mat4.fromQuat(this._tempRotmat, this._rot);
-                mat4.mul(this._animMat, this._animMat, this._tempRotmat);
-            }
+              if (bounds.changed)
+              {
+                  boundingPoints.push(
+                      bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+              }
+          }
 
-            if (playAnims && this._animScale)
-            {
-                if (!this._tempAnimScale) this._tempAnimScale = [1, 1, 1];
-                this._tempAnimScale[0] = this._animScale[0].getValue(_time);
-                this._tempAnimScale[1] = this._animScale[1].getValue(_time);
-                this._tempAnimScale[2] = this._animScale[2].getValue(_time);
-                mat4.scale(this._animMat, this._animMat, this._tempAnimScale);
-            }
-            else if (this._scale) mat4.scale(this._animMat, this._animMat, this._scale);
+          for (let i = 0; i < this.children.length; i++)
+          {
+              if (gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
+              {
+                  const b = gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
 
-            mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
-        }
+                  bounds.applyBoundingBox(b);
+              }
+          }
 
-        if (this.animWeights)
-        {
-            this.weights = this.weights || [];
+          if (bounds.changed) return bounds;
+          else return null;
+      }
 
-            let str = "";
-            for (let i = 0; i < this.animWeights.length; i++)
-            {
-                this.weights[i] = this.animWeights[i].getValue(_time);
-                str += this.weights[i] + "/";
-            }
+      setAnimAction(name)
+      {
+          if (!name) return;
 
-            // this.mesh.weights=this.animWeights.get(_time);
-        }
+          this._currentAnimaction = name;
 
-        if (this.addTranslate) mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
+          if (name && !this._animActions[name]) return null;
 
-        if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
+          for (let path in this._animActions[name])
+          {
+              if (path == "translation") this._animTrans = this._animActions[name][path];
+              else if (path == "rotation") this._animRot = this._animActions[name][path];
+              else if (path == "scale") this._animScale = this._animActions[name][path];
+              else if (path == "weights") this.animWeights = this._animActions[name][path];
+          }
+      }
 
-        mat4.copy(this.absMat, cgl.mMatrix);
-    }
+      setAnim(path, name, anims)
+      {
+          if (!path || !name || !anims) return;
 
-    render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
-    {
-        if (!dontTransform) cgl.pushModelMatrix();
+          this._animActions[name] = this._animActions[name] || {};
 
-        if (_time === undefined) _time = gltf.time;
+          // debugger;
 
-        if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
+          // for (let i = 0; i < this.copies.length; i++) this.copies[i]._animActions = this._animActions;
 
-        if (this.hidden && !drawHidden)
-        {
-        }
-        else
-        {
-            if (this.skinRenderer)
-            {
-                this.skinRenderer.time = _time;
-                if (!dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time, this.weights);
-            }
-            else
-            {
-                if (this.mesh && !dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, null, _time, this.weights);
-            }
-        }
+          if (this._animActions[name][path]) op.log("[gltfNode] animation action path already exists", name, path, this._animActions[name][path]);
 
-        if (!ignoreChilds && !this.hidden)
-            for (let i = 0; i < this.children.length; i++)
-                if (gltf.nodes[this.children[i]])
-                    gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
+          this._animActions[name][path] = anims;
 
-        if (!dontTransform)cgl.popModelMatrix();
-    }
+          if (path == "translation") this._animTrans = anims;
+          else if (path == "rotation") this._animRot = anims;
+          else if (path == "scale") this._animScale = anims;
+          else if (path == "weights") this.animWeights = this._animActions[name][path];
+      }
+
+      modelMatLocal()
+      {
+          return this._animMat || this.mat;
+      }
+
+      modelMatAbs()
+      {
+          return this.absMat;
+      }
+
+      transform(cgl, _time)
+      {
+          if (!_time && _time != 0)_time = time;
+
+          this._lastTimeTrans = _time;
+
+          gltfTransforms++;
+
+          if (!this._animTrans && !this._animRot && !this._animScale)
+          {
+              mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
+              this._animMat = null;
+          }
+          else
+          {
+              this._animMat = this._animMat || mat4.create();
+              mat4.identity(this._animMat);
+
+              const playAnims = true;
+
+              if (playAnims && this._animTrans)
+              {
+                  mat4.translate(this._animMat, this._animMat, [
+                      this._animTrans[0].getValue(_time),
+                      this._animTrans[1].getValue(_time),
+                      this._animTrans[2].getValue(_time)]);
+              }
+              else
+              if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
+
+              if (playAnims && this._animRot)
+              {
+                  if (this._animRot[0].defaultEasing == CABLES.EASING_LINEAR) CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                  else if (this._animRot[0].defaultEasing == CABLES.EASING_ABSOLUTE)
+                  {
+                      this._tempQuat[0] = this._animRot[0].getValue(_time);
+                      this._tempQuat[1] = this._animRot[1].getValue(_time);
+                      this._tempQuat[2] = this._animRot[2].getValue(_time);
+                      this._tempQuat[3] = this._animRot[3].getValue(_time);
+                  }
+                  else if (this._animRot[0].defaultEasing == CABLES.EASING_CUBICSPLINE)
+                  {
+                      CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                  }
+
+                  mat4.fromQuat(this._tempMat, this._tempQuat);
+                  mat4.mul(this._animMat, this._animMat, this._tempMat);
+              }
+              else if (this._rot)
+              {
+                  mat4.fromQuat(this._tempRotmat, this._rot);
+                  mat4.mul(this._animMat, this._animMat, this._tempRotmat);
+              }
+
+              if (playAnims && this._animScale)
+              {
+                  if (!this._tempAnimScale) this._tempAnimScale = [1, 1, 1];
+                  this._tempAnimScale[0] = this._animScale[0].getValue(_time);
+                  this._tempAnimScale[1] = this._animScale[1].getValue(_time);
+                  this._tempAnimScale[2] = this._animScale[2].getValue(_time);
+                  mat4.scale(this._animMat, this._animMat, this._tempAnimScale);
+              }
+              else if (this._scale) mat4.scale(this._animMat, this._animMat, this._scale);
+
+              mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
+          }
+
+          if (this.animWeights)
+          {
+              this.weights = this.weights || [];
+
+              let str = "";
+              for (let i = 0; i < this.animWeights.length; i++)
+              {
+                  this.weights[i] = this.animWeights[i].getValue(_time);
+                  str += this.weights[i] + "/";
+              }
+
+          // this.mesh.weights=this.animWeights.get(_time);
+          }
+
+          if (this.addTranslate) mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
+
+          if (this.addMulMat) mat4.mul(cgl.mMatrix, cgl.mMatrix, this.addMulMat);
+
+          mat4.copy(this.absMat, cgl.mMatrix);
+      }
+
+      render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
+      {
+          if (!dontTransform) cgl.pushModelMatrix();
+          if (this.needsSort)
+          {
+              this.sortedChildren = this.children.toSorted((a, b) =>
+              {
+                  return gltf.nodes[a].order - gltf.nodes[b].order;
+              });
+              this.needsSort = false;
+          }
+          if (_time === undefined) _time = gltf.time;
+
+          if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
+
+          if (this.hidden && !drawHidden)
+          {
+          }
+          else
+          {
+              if (this.skinRenderer)
+              {
+                  this.skinRenderer.time = _time;
+                  if (!dontDrawMesh)
+                      this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time, this.weights);
+              }
+              else
+              {
+                  if (this.mesh && !dontDrawMesh)
+                      this.mesh.render(cgl, ignoreMaterial, null, _time, this.weights);
+              }
+          }
+
+          if (!ignoreChilds && !this.hidden)
+              for (let i = 0; i < this.sortedChildren.length; i++)
+              {
+                  // console.log(this.name+" "+i+": - "+this.sortedChildren[i].name);
+                  if (gltf.nodes[this.sortedChildren[i]])
+                      gltf.nodes[this.sortedChildren[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
+              }
+          if (!dontTransform)cgl.popModelMatrix();
+      }
 };

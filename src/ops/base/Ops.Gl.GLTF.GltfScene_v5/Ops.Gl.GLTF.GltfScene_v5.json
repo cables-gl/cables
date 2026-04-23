@@ -328,10 +328,10 @@
             "date": 1773334121051
         },
         {
-            "message": "Move onFileChanged listener to on(\"fileChanged\")",
-            "type": "improvement",
-            "author": "stephan",
-            "date": 1774272066732
+            "message": "Manual reordering of rendering order, set order to negative value in structure view to render nodes earlier, e.g. optimize for transparency ordering",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776928581442
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

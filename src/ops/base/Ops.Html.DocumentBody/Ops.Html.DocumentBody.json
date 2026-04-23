@@ -12,6 +12,7 @@
         }
     ],
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 2,
