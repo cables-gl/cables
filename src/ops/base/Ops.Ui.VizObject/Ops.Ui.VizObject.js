@@ -164,7 +164,7 @@ function myStringify(o, level = 0)
                     if (!item)
                     {
                         str += "/*no item?*/";
-                        console.log("no item????????", item);
+                        // console.log("no item????????", item);
                     }
                     else
                     {
@@ -270,7 +270,7 @@ inObj.onChange = () =>
         {
             if (lines[i].includes(srch))hlLines.push(i);
         }
-        console.log("search results", hlLines);
+        // console.log("search results", hlLines);
         setSearchPos();
         // lines = lines.filter((s)=>{return s.includes(inSearch.get());});
     }

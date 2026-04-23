@@ -125,12 +125,6 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1774029745152
-        },
-        {
-            "message": "Move onFileChanged listener to on(\"fileChanged\")",
-            "type": "improvement",
-            "author": "stephan",
-            "date": 1774272027897
         }
     ],
     "summary": "Load an image as a texture",

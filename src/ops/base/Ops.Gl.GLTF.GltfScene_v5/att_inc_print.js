@@ -62,6 +62,35 @@ function printNode(html, node, level)
 
     html += node.name + "</td><td></td>";
 
+    /// // transformation info
+    html += "<td>";
+
+    if (node._node.translation || node._node.rotation || node._node.scale)
+    {
+        let info = "";
+
+        if (node._node.translation)info += "Translate: " + formatVec(node._node.translation) + " | ";
+        if (node._node.rotation)info += "Rotation: " + formatVec(node._node.rotation) + " | ";
+        if (node._node.scale)info += "Scale: " + formatVec(node._node.scale) + " | ";
+
+        html += "<span class=\"icon icon-gizmo tt\" data-tt=\"" + info + "\"></span> &nbsp;";
+    }
+    if (node.warning)html += node.warning;
+
+    if (node._animRot || node._animScale || node._animTrans)
+    {
+        let info = "Animated: ";
+        if (node._animRot) info += "Rot ";
+        if (node._animScale) info += "Scale ";
+        if (node._animTrans) info += "Trans ";
+
+        html += "<span class=\"icon icon-clock tt\" data-tt=\"" + info + "\"></span>&nbsp;";
+    }
+
+    if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
+
+    html += "</td>";
+    /// //////
     if (node.mesh)
     {
         let namestt = "";
@@ -108,34 +137,6 @@ function printNode(html, node, level)
     {
         html += "<td>-</td><td>-</td><td>-</td>";
     }
-
-    html += "<td>";
-
-    if (node._node.translation || node._node.rotation || node._node.scale)
-    {
-        let info = "";
-
-        if (node._node.translation)info += "Translate: " + formatVec(node._node.translation) + " | ";
-        if (node._node.rotation)info += "Rotation: " + formatVec(node._node.rotation) + " | ";
-        if (node._node.scale)info += "Scale: " + formatVec(node._node.scale) + " | ";
-
-        html += "<span class=\"icon icon-gizmo tt\" data-tt=\"" + info + "\"></span> &nbsp;";
-    }
-    if (node.warning)html += node.warning;
-
-    if (node._animRot || node._animScale || node._animTrans)
-    {
-        let info = "Animated: ";
-        if (node._animRot) info += "Rot ";
-        if (node._animScale) info += "Scale ";
-        if (node._animTrans) info += "Trans ";
-
-        html += "<span class=\"icon icon-clock tt\" data-tt=\"" + info + "\"></span>&nbsp;";
-    }
-
-    if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
-
-    html += "</td>";
 
     html += "<td>";
     html += "<span class=\"button-small\" onclick=\"gui.corePatch().getOpById('" + op.id + "').setOrder('" + node.name + "');\">" + node.order + "</span>";
@@ -238,10 +239,11 @@ function printInfo()
 
     html += "<tr>";
     html += " <th colspan=\"21\">Name</th>";
+    html += " <th></th>";
     html += " <th>Mesh Geometry</th>";
     html += " <th>Skin</th>";
     html += " <th>Material</th>";
-    html += " <th>Transform</th>";
+    html += " <th>Order</th>";
     html += " <th>Expose</th>";
     html += " <th></th>";
     html += "</tr>";
