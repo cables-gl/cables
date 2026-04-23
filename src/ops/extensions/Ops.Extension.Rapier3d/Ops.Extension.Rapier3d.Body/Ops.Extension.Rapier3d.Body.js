@@ -264,6 +264,8 @@ function setup(world)
         colliderDesc = RAPIER.ColliderDesc.cuboid(0.02, 0.02, 0.02);
     }
 
+    colliderDesc.setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT | RAPIER.ActiveCollisionTypes.FIXED_FIXED);
+
     for (let i = 0; i < pos.length; i += 3)
     {
         const rigidBodyDesc = RAPIER.RigidBodyDesc
@@ -292,7 +294,6 @@ function setup(world)
             .setDensity(inDensity.get())
             .setFriction(inFriction.get())
             .setSensor(inSensor.get());
-
 
         if (!inEvents.get())
         {
