@@ -90,7 +90,7 @@ function printNode(html, node, level)
     if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
 
     html += "</td>";
-    /// //////
+    /// ///////has
     if (node.mesh)
     {
         let namestt = "";
@@ -110,7 +110,7 @@ function printNode(html, node, level)
         html += "</td>";
 
         html += "<td>";
-        html += node.hasSkin() || "-";
+        html += node.hasSkin() || "";
         html += "</td>";
 
         html += "<td>";
@@ -128,14 +128,15 @@ function printNode(html, node, level)
                 }
             }
         }
-        if (countMats > 2)html += "<span class=\"tt\" data-tt=\"" + matStr + "\">" + countMats + " materials</span>";
-        if (countMats == 0)html += "none";
+        if (countMats > 1)html += "<span class=\"tt\" data-tt=\"" + matStr + "\">" + countMats + " materials</span>";
+        else if (countMats == 0)html += "none";
+        else html += matStr;
 
         html += "</td>";
     }
     else
     {
-        html += "<td>-</td><td>-</td><td>-</td>";
+        html += "<td></td><td></td><td></td>";
     }
 
     html += "<td>";

@@ -165,15 +165,29 @@ function loadAnims(gltf)
             const sampler = an.samplers[chan.sampler];
 
             const acc = gltf.json.accessors[sampler.input];
-            const bufferIn = gltf.accBuffers[sampler.input];
+            let bufferIn = gltf.accBuffers[sampler.input];
 
             const accOut = gltf.json.accessors[sampler.output];
-            const bufferOut = gltf.accBuffers[sampler.output];
+            let bufferOut = gltf.accBuffers[sampler.output];
 
             gltf.accBuffersDelete.push(sampler.output, sampler.input);
 
+            if (!bufferIn || !bufferOut)
+            {
+                console.log("INcorrect sampler", sampler, acc);
+                const views = gltf.chunks[0].data.bufferViews;
+
+                bufferIn = gltf.accBuffers[views[acc.bufferView].buffer];
+                bufferOut = gltf.accBuffers[views[accOut.bufferView].buffer];
+
+                console.log("vie", views[acc.bufferView], bufferIn, bufferOut);
+                // const accessors = gltf.chunks[0].data.accessors;
+                // console.log(accessors);
+            }
+
             if (bufferIn && bufferOut)
             {
+                console.log("correct sampler", accOut.type, acc.type);
                 let numComps = 1;
                 if (accOut.type === "VEC2")numComps = 2;
                 else if (accOut.type === "VEC3")numComps = 3;
@@ -181,6 +195,7 @@ function loadAnims(gltf)
                 else if (accOut.type === "SCALAR")
                 {
                     numComps = bufferOut.length / bufferIn.length; // is this really the way to find out ? cant find any other way,except number of morph targets, but not really connected...
+                    console.log("numcomps scalar", numComps);
                 }
                 else op.log("[] UNKNOWN accOut.type", accOut.type);
 
