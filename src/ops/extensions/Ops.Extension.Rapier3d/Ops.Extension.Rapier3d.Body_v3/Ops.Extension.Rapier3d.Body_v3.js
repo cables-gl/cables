@@ -32,6 +32,7 @@ const
     inRots = op.inArray("Rotations"),
 
     inEvents = op.inBool("Events", true),
+    inEvtFixFix = op.inBool("Events Fixed-Fixed", false),
     inActive = op.inBool("Active", true),
     inUpdateTrans = op.inTriggerButton("Update Translation"),
 
@@ -55,11 +56,12 @@ let setPosition = false;
 let eventQueue = null;
 
 inScales.onChange =
-inRots.onChange =
-inDampLin.onChange =
-inDampAng.onChange =
-inEvents.onChange =
-inMass.onChange =
+    inEvtFixFix.onChange =
+    inRots.onChange =
+    inDampLin.onChange =
+    inDampAng.onChange =
+    inEvents.onChange =
+    inMass.onChange =
     inSensor.onChange =
     inFriction.onChange =
     inDensity.onChange =
@@ -381,11 +383,15 @@ function setup(world)
         collider = world.createCollider(colliderDesc, rigidBody);
         colliders.push(collider);
 
-        // if (!inEvents.get())
-        // {
-        //     collider.setActiveEvents(RAPIER.ActiveEvents.NONE);
-        // }
-        // else
+        let collTypes = RAPIER.ActiveCollisionTypes.DEFAULT;
+        if (inEvtFixFix.get()) collTypes |= RAPIER.ActiveCollisionTypes.FIXED_FIXED;
+
+        collider.setActiveCollisionTypes(collTypes);
+        if (!inEvents.get())
+        {
+            collider.setActiveEvents(RAPIER.ActiveEvents.NONE);
+        }
+        else
         {
             collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
             // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);

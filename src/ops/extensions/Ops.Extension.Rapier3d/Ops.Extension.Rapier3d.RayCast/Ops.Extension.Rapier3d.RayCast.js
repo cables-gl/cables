@@ -4,6 +4,7 @@ const
     inX = op.inValueFloat("Screen X"),
     inY = op.inValueFloat("Screen Y"),
     inRay = op.inArray("Ray Points"),
+    inExclSensors = op.inBool("Exclude Sensors", false),
     active = op.inBool("Active", true),
     next = op.outTrigger("next"),
 
@@ -85,7 +86,11 @@ function update()
 
         if (ray)
         {
-            const result = world.castRay(ray, 999, true);
+            let filterFlags = null;
+            if (inExclSensors.get())
+                filterFlags = RAPIER.QueryFilterFlags.EXCLUDE_SENSORS;
+
+            const result = world.castRay(ray, 999, true, filterFlags);
 
             if (result && result.collider)
             {

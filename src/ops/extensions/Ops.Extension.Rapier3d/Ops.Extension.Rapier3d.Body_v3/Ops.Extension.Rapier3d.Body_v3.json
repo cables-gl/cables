@@ -21,6 +21,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1774969769006
+        },
+        {
+            "message": "Allow collision detection of fixes vs fixed bodies",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1776954273242
         }
     ],
     "layout": {
@@ -138,6 +144,11 @@
             {
                 "type": 0,
                 "name": "Events",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Events Fixed-Fixed",
                 "subType": "boolean"
             },
             {
