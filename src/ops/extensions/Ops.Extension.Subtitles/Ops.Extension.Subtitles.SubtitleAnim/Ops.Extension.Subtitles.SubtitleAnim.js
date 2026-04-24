@@ -13,35 +13,43 @@ inData.onChange = () =>
 {
     op.setUiError("invalid_data", null);
     const data = inData.get();
-    let duration = 0;
     if (data)
     {
-        const off = inOffset.get() || 0;
-
-        animVal.anim.clear();
-        const anim = animVal.anim;
-        anim.defaultEasing = CABLES.Anim.EASING_ABSOLUTE;
-        anim.setValue(0, -1);
-        for (let i = 0; i < data.keys.length; i++)
+        if (data.keys)
         {
-            const key = data.keys[i];
-            const start = key.start + off;
-            const end = key.end + off;
-            const startAnimKey = anim.setValue(start, i);
-            if (key.lines)
+            const off = inOffset.get() || 0;
+
+            animVal.anim.clear();
+            const anim = animVal.anim;
+            anim.defaultEasing = CABLES.Anim.EASING_ABSOLUTE;
+            anim.setValue(0, -1);
+            for (let i = 0; i < data.keys.length; i++)
             {
-                startAnimKey.uiAttribs.text = key.lines.join("\n");
+                const key = data.keys[i];
+                const start = key.start + off;
+                const end = key.end + off;
+                const startAnimKey = anim.setValue(start, i);
+                if (key.lines)
+                {
+                    startAnimKey.uiAttribs.text = key.lines.join("\n");
+                }
+                startAnimKey.uiAttribs.color = "#efefef";
+                anim.setValue(end, -1);
             }
-            startAnimKey.uiAttribs.color = "#efefef";
-            anim.setValue(end, -1);
+            outAnim.setRef(anim);
         }
-        outAnim.setRef(anim);
+        else
+        {
+            animVal.anim.clear();
+            outAnim.setRef(null);
+            op.setUiError("invalid_data", "Could not parse SRT/WebVTT data");
+        }
+
     }
     else
     {
         animVal.anim.clear();
-
         outAnim.setRef(null);
-        op.setUiError("invalid_data", "Could not parse SRT/WebVTT data");
+        op.setUiError("invalid_data", "No SRT/WebVTT data given", 1);
     }
 };
