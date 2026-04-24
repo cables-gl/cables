@@ -85,7 +85,7 @@ function loadAudioFile(url, loadFromData)
             op.setUiError("wavFormat", null);
         }
 
-        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed, inLoadingTask.get());
+        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed, inLoadingTask.get(), op);
     }
     else
     {

@@ -20,18 +20,28 @@ function updateStatus()
     const ops = inOps.get() || [];
     const jobs = op.patch.loading.getList();
 
-    for (let j = 0; j < jobs.length; j++)
+    if (ops.length)
     {
-        if (jobs[j].op && !jobs[j].finished)
+        let opsInLoading = 0;
+        for (let j = 0; j < jobs.length; j++)
         {
-            for (let i = 0; i < ops.length; i++)
+            if (jobs[j].op && !jobs[j].finished)
             {
-                if (ops[i] == jobs[j].op)
+                for (let i = 0; i < ops.length; i++)
                 {
-                    return outLoading.set(true);
+                    if (ops[i].id == jobs[j].op.id)
+                    {
+                        opsInLoading++;
+                    }
                 }
             }
         }
+        outProgress.set(1 - (opsInLoading / ops.length));
+        outLoading.set(opsInLoading > 0);
     }
-    outLoading.set(false);
+    else
+    {
+        outProgress.set(1);
+        outLoading.set(false);
+    }
 }

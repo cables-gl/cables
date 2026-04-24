@@ -1,6 +1,6 @@
 /** @namespace WEBAUDIO */
 
-import { CONSTANTS, Patch } from "cables";
+import { CONSTANTS, Patch, Op, Port } from "cables";
 
 /**
  * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
@@ -368,10 +368,11 @@ export class WebAudio
      * @param {string} url - The url of the audio file to load
      * @param {function} onFinished - The callback to be called when the loading is finished, passes the AudioBuffer
      * @param {function} onError - The callback when there was an error loading the file, the rror message is passed
-     * @param loadingTask
+     * @param {boolean} loadingTask Create loadingtask
+     * @param {Op} [op] - Op to attach the loadingtask to
      * @see {@link https://developer.mozilla.org/de/docs/Web/API/AudioContext/decodeAudioData}
      */
-    loadAudioFile(patch, url, onFinished, onError, loadingTask)
+    loadAudioFile(patch, url, onFinished, onError, loadingTask, op = null)
     {
         const audioContext = this.createAudioContext();
 
@@ -380,7 +381,7 @@ export class WebAudio
         let loadingId = null;
         if (loadingTask || loadingTask === undefined)
         {
-            loadingId = patch.loading.start("audio", url);
+            loadingId = patch.loading.start("audio", url, op);
             if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
         }
         const request = new XMLHttpRequest();
