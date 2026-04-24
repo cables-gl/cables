@@ -314,10 +314,15 @@ const gltfNode = class
           if (!dontTransform) cgl.pushModelMatrix();
           if (this.needsSort)
           {
-              this.sortedChildren = this.children.toSorted((a, b) =>
-              {
-                  return gltf.nodes[a].order - gltf.nodes[b].order;
-              });
+              this.sortedChildren = this.children;
+              // this.sortedChildren = this.children.toSorted((a, b) =>
+              // {
+              //     return gltf.nodes[a].order - gltf.nodes[b].order;
+              // });
+              // for (let index = 0; index < this.sortedChildren.length; index++)
+              // {
+              //     console.log(this.sortedChildren[index].name, this.children[index].name);
+              // }
               this.needsSort = false;
           }
           if (_time === undefined) _time = gltf.time;

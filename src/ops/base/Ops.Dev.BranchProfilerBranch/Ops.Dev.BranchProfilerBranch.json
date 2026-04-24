@@ -42,7 +42,7 @@
         "ports": []
     },
     "coreLibs": [
-        "cgl_branchprofiler"
+        "branchprofiler"
     ],
     "license": "MIT"
 }

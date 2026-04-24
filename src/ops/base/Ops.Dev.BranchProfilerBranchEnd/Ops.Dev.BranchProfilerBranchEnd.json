@@ -33,6 +33,7 @@
         "ports": []
     },
     "coreLibs": [
-        "cgl"
+        "cgl",
+        "branchprofiler"
     ]
 }

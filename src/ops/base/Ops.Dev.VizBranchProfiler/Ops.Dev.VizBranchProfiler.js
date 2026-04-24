@@ -133,18 +133,18 @@ function drawBranch(ctx, layer, b, level, posx, posy, branchDur, branchWidth, vi
     let w = getWidth(layer, b.dur) * 0.25;
     if (expEle.get()) w = branchWidth;
 
-    if (viewBox.mouseX * pixelDensity > layer.x + posx &&
-        viewBox.mouseX * pixelDensity < layer.x + posx + w &&
-        viewBox.mouseY * pixelDensity > layer.y + posy &&
-        viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
-    {
-        if (mouseState.getButton() == 1)
-        {
-            hoverX = layer.x + posx;
-            hoverY = layer.y + posy;
-            clicked = { "count": colorCycle, "task": b.task, "name": String(b.name) };
-        }
-    }
+    // if (viewBox.mouseX * pixelDensity > layer.x + posx &&
+    //     viewBox.mouseX * pixelDensity < layer.x + posx + w &&
+    //     viewBox.mouseY * pixelDensity > layer.y + posy &&
+    //     viewBox.mouseY * pixelDensity < layer.y + posy + rowHeight)
+    // {
+    //     if (mouseState.getButton() == 1)
+    //     {
+    //         hoverX = layer.x + posx;
+    //         hoverY = layer.y + posy;
+    //         clicked = { "count": colorCycle, "task": b.task, "name": String(b.name) };
+    //     }
+    // }
 
     // if (clicked &&
     //     clicked.x ==posx &&

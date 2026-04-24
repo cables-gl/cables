@@ -174,20 +174,20 @@ function loadAnims(gltf)
 
             if (!bufferIn || !bufferOut)
             {
-                console.log("DRACO INcorrect sampler", sampler, acc);
+                // console.log("DRACO INcorrect sampler", sampler, acc);
                 const views = gltf.chunks[0].data.bufferViews;
 
                 bufferIn = gltf.accBuffers[views[acc.bufferView].buffer];
                 bufferOut = gltf.accBuffers[views[accOut.bufferView].buffer];
 
-                console.log("DRACO", bufferOut);
+                // console.log("DRACO", bufferOut);
                 // console.log("vie", views[acc.bufferView], bufferOut, bufferOut);
                 // const accessors = gltf.chunks[0].data.accessors;
                 // console.log(accessors);
             }
             else
             {
-                console.log("NORMAL", bufferOut);
+                // console.log("NORMAL", bufferOut);
             }
 
             if (bufferIn && bufferOut)

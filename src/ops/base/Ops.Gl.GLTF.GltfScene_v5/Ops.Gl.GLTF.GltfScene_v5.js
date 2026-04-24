@@ -223,8 +223,8 @@ inExec.onTriggered = function ()
             if (inRender.get())
             {
                 for (let i = 0; i < gltf.sortedNodes.length; i++)
-                    if (!gltf.sortedNodes[i].isChild)
-                        gltf.sortedNodes[i].render(cgl);
+                    if (!gltf.nodes[i].isChild)
+                        gltf.nodes[i].render(cgl);
             }
             else
             {

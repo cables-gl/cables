@@ -69,5 +69,8 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "branchprofiler"
+    ]
 }
