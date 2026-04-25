@@ -11,8 +11,9 @@ const
     inCaps = op.inValueBool("Caps", true),
     inFlat = op.inValueBool("Flat Normals", false),
     outTrigger = op.outTrigger("next"),
-    outGeometry = op.outObject("geometry"),
-    geom = new CGL.Geometry("cylinder");
+    outGeometry = op.outObject("geometry", null, "geometry");
+
+const geom = new CGL.Geometry("cylinder");
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
 inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };

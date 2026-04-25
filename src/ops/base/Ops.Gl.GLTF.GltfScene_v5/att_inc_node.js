@@ -314,11 +314,10 @@ const gltfNode = class
           if (!dontTransform) cgl.pushModelMatrix();
           if (this.needsSort)
           {
-              this.sortedChildren = this.children;
-              // this.sortedChildren = this.children.toSorted((a, b) =>
-              // {
-              //     return gltf.nodes[a].order - gltf.nodes[b].order;
-              // });
+              this.children.sort((a, b) =>
+              {
+                  return gltf.nodes[a].order - gltf.nodes[b].order;
+              });
               // for (let index = 0; index < this.sortedChildren.length; index++)
               // {
               //     console.log(this.sortedChildren[index].name, this.children[index].name);
@@ -348,11 +347,11 @@ const gltfNode = class
           }
 
           if (!ignoreChilds && !this.hidden)
-              for (let i = 0; i < this.sortedChildren.length; i++)
+              for (let i = 0; i < this.children.length; i++)
               {
-                  // console.log(this.name+" "+i+": - "+this.sortedChildren[i].name);
-                  if (gltf.nodes[this.sortedChildren[i]])
-                      gltf.nodes[this.sortedChildren[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
+                  // console.log(this.name+" "+i+": - "+this.children[i].name);
+                  if (gltf.nodes[this.children[i]])
+                      gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
               }
           if (!dontTransform)cgl.popModelMatrix();
       }
