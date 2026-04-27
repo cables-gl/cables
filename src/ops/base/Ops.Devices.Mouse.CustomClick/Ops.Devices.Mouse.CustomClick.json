@@ -1,0 +1,54 @@
+{
+    "id": "c99b3922-ad91-4d99-a6d6-651cd1f0f726",
+    "created": 1777292002030,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1777292002031
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Max Duration Button Down",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Movement Pixel",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Button index",
+                "values": [
+                    "Left",
+                    "Middle",
+                    "Right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Click Left"
+            }
+        ]
+    }
+}
