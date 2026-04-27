@@ -19,7 +19,6 @@ const
     outMovementX = op.outNumber("Movement X", 0),
     outMovementY = op.outNumber("Movement Y", 0),
     outEvent = op.outObject("Event");
-    // sssqqqqqqqqq
 
 const cgl = op.patch.cgl;
 let normalize = 1;

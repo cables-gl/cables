@@ -266,7 +266,7 @@ function updateText()
     if (op.patch.cgl.profileData.getCount("shaderCompile") > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
     if (op.patch.cgl.profileData.getCount("uniformGet") > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
     if (op.patch.cgl.profileData.getCount("textureResize") > 0)warn += "Texture resize! ";
-    if (op.patch.cgl.profileData.profileFrameBuffercreate > 0)warn += "Framebuffer create! ";
+    if (op.patch.cgl.profileData.getCount("profileFrameBuffercreate") > 0)warn += "Framebuffer create! ";
     if (op.patch.cgl.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
     if (op.patch.cgl.profileData.getCount("textureDelete") > 0)warn += "Texture delete! ";
     if (op.patch.cgl.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + op.patch.cgl.profileData.profileNonTypedAttribNames;
@@ -276,7 +276,7 @@ function updateText()
 
     if (warn.length > 0)
     {
-        warn = "| <span style=\"color:#f80;\">WARNING: " + warn + "<span>";
+        warn = "<br/><span style=\"color:#f80;\">WARNING: " + warn + "</span>";
     }
 
     let html = "";
@@ -325,8 +325,10 @@ function updateText()
         let str = "";
         str += "<br/> " + cgl.canvasWidth + " x " + cgl.canvasHeight + " (x" + cgl.pixelDensity + ") ";
         str += " frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
-        str += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
-        element.innerHTML = str;
+        // str += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
+
+        str += "<br/>draw calls: " + Math.ceil(op.patch.cgl.profileData.counts.meshDrawCalls / fps);
+        element.innerHTML = html + str;
         // element.innerHTML += "<br/>" +
         // " shader binds: " + Math.ceil(op.patch.cgl.profileData.profileShaderBinds / fps) +
         // " uniforms: " + Math.ceil(op.patch.cgl.profileData.profileUniformCount / fps) +
@@ -344,7 +346,7 @@ function updateText()
         // " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps);
         // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
-        element.innerHTML += " shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
+        element.innerHTML += "<br/>shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
         element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "/" + Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + "mb";
     }
 

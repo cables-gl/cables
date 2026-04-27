@@ -192,7 +192,7 @@ function loadAnims(gltf)
 
             if (bufferIn && bufferOut)
             {
-                console.log("correct sampler", accOut.type, acc.type);
+                // console.log("correct sampler", accOut.type, acc.type);
                 let numComps = 1;
                 if (accOut.type === "VEC2")numComps = 2;
                 else if (accOut.type === "VEC3")numComps = 3;

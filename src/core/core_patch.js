@@ -801,7 +801,7 @@ export class Patch extends Events
 
     /**
      * @param {String} opid
-     * @returns {T}
+     * @returns {Op}
      */
     getOpById(opid)
     {
