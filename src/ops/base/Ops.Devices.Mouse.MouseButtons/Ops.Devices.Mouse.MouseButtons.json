@@ -29,17 +29,17 @@
             {
                 "type": 0,
                 "name": "Button pressed Left",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button pressed Middle",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Button pressed Right",
-                "subType": "number"
+                "subType": "boolean"
             },
             {
                 "type": 1,
@@ -81,5 +81,14 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Only trigger mouseUp outputs when down was pressed while active was true",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1777295605973
+        }
+    ]
 }
