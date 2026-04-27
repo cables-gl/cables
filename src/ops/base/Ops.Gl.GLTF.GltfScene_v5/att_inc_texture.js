@@ -106,6 +106,6 @@ let GltfTexture = class
     dispose()
     {
         this.tex = this.tex.dispose();
-        console.log("tex dispose...");
+        // console.log("tex dispose...");
     }
 };
