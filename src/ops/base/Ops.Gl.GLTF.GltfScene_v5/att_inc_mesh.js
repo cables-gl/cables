@@ -363,7 +363,7 @@ let gltfMesh = class
         }
         else
         {
-            console.log("no mesh......");
+            // console.log("no mesh......");
         }
     }
 
