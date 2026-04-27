@@ -623,12 +623,12 @@ function parseGltf(arrayBuffer)
     if (freeMem.get() == "All")
     {
         gltf.chunks = [];
-        console.log(gltf);
+        // console.log(gltf);
         for (let i = 0; i < gltf.meshes.length; i++)
         {
             gltf.meshes[i].disposeGeometries();
         }
-        console.log("clear...");
+        // console.log("clear...");
     }
 
     return gltf;
