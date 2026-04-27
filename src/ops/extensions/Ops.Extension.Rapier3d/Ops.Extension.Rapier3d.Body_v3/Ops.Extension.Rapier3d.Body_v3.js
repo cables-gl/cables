@@ -151,7 +151,7 @@ exec.onTriggered = () =>
         }
     }
 
-    if (sleepCount != rigidBodies.length)
+    // if (sleepCount != rigidBodies.length)
     {
         for (let i = 0; i < rigidBodies.length; i++)
         {
@@ -223,8 +223,8 @@ function getPositions()
 function updateUi()
 {
     if (!CABLES.UI) return;
-    if (oldShape == inCollShape.get()) return;
-    oldShape = inCollShape.get();
+
+    const refresh = oldShape != inCollShape.get();
 
     inCollRadius.setUiAttribs({ "greyout": false });
     inCollSizeX.setUiAttribs({ "greyout": false });
@@ -247,25 +247,23 @@ function updateUi()
     //     inCollSizeZ.setUiAttribs({ "greyout": true });
     // }
 
-    if (inCollShape.get() != "Dynamic")
-    {
-        inFriction.setUiAttribs({ "greyout": true });
-        inDensity.setUiAttribs({ "greyout": true });
-        inRestitution.setUiAttribs({ "greyout": true });
-        inMass.setUiAttribs({ "greyout": true });
-        inDampLin.setUiAttribs({ "greyout": true });
-        inDampAng.setUiAttribs({ "greyout": true });
-    }
+    const physProps = inType.get() != "Dynamic";
+
+    inFriction.setUiAttribs({ "greyout": physProps });
+    inDensity.setUiAttribs({ "greyout": physProps });
+    inRestitution.setUiAttribs({ "greyout": physProps });
+    inMass.setUiAttribs({ "greyout": physProps });
+    inDampLin.setUiAttribs({ "greyout": physProps });
+    inDampAng.setUiAttribs({ "greyout": physProps });
+
+    op.refreshParams();
 }
 
 function getScaling()
 {
     const scale = vec3.create();
     vec3.set(scale, 1, 1, 1);
-    if (op.patch.cgl)
-    {
-        mat4.getScaling(scale, op.patch.cgl.mMatrix);
-    }
+    if (op.patch.cgl) mat4.getScaling(scale, op.patch.cgl.mMatrix);
 
     return scale;
 }
@@ -356,13 +354,13 @@ function setup(world)
                 }, true);
         }
 
-        if (scal && scal.length >= i)
-        {
-            colliderDesc = RAPIER.ColliderDesc.cuboid(
-                scal[i + 0] / 2,
-                scal[i + 1] / 2,
-                scal[i + 2] / 2);
-        }
+        // if (scal && scal.length >= i)
+        // {
+        //     colliderDesc = RAPIER.ColliderDesc.cuboid(
+        //         scal[i + 0] / 2,
+        //         scal[i + 1] / 2,
+        //         scal[i + 2] / 2);
+        // }
 
         colliderDesc
             .setMass(inMass.get())

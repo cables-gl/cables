@@ -41,17 +41,17 @@ function onMouseDown(e)
 
 function onMouseUp(e)
 {
-    if (e.which == 1)
+    if (e.which == 1 && mouseDownLeft.get())
     {
         mouseDownLeft.set(false);
         triggerMouseUpLeft.trigger();
     }
-    else if (e.which == 2)
+    else if (e.which == 2 && mouseDownMiddle.get())
     {
         mouseDownMiddle.set(false);
         triggerMouseUpMiddle.trigger();
     }
-    else if (e.which == 3)
+    else if (e.which == 3 && mouseDownRight.get())
     {
         mouseDownRight.set(false);
         triggerMouseUpRight.trigger();
