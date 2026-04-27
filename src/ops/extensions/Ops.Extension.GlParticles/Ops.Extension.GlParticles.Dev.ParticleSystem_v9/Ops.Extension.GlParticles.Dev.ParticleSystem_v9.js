@@ -429,7 +429,6 @@ op.patch.on("patchLoadEnd", () =>
 {
     if (!patchLoaded)
     {
-        console.log("patchloadend", patchLoaded);
         patchLoaded = true;
         prewarm = true;
         firstTime = true;

@@ -48,8 +48,6 @@ function update()
             if (inMeth.get() == "Target Size X")s /= bb.size[0];
             if (inMeth.get() == "Target Size Y")s /= bb.size[1];
             if (inMeth.get() == "Target Size Z")s /= bb.size[2];
-
-            console.log(bb);
         }
 
         for (let i = 0; i < geom.vertices.length; i += 3)

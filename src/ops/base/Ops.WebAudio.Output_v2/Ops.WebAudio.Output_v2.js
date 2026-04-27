@@ -148,7 +148,7 @@ function mute(b)
 function updateStateError()
 {
     outState.set(audioCtx.state);
-    op.logVerbose("audioCtx.state change", audioCtx.state);
+    // op.logVerbose("audioCtx.state change", audioCtx.state);
 
     op.setUiError("ctxSusp", null);
     if (audioCtx.state == "suspended")

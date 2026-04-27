@@ -53,7 +53,6 @@ async function init()
         const loadingId = op.patch.loading.start(op.objName, "rapierlib", op);
 
         CABLES.rapierInited = 1;
-        console.log("init rapier.......");
         await RAPIER.init();
         CABLES.rapierInited = 2;
 
@@ -103,11 +102,11 @@ exec.onTriggered = () =>
 
         // op.patch.frameStore.rapier.ignoreEventHandles;
         // if (!op.patch.frameStore.rapier.ignoreEventHandles.includes(handle1) &&
-            // !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle2))
-// {
-  collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
-// console.log("coll",collisions[id]);
-  // }
+        // !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle2))
+        // {
+        collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
+        // console.log("coll",collisions[id]);
+        // }
 
         if (!started) delete collisions[id];
     });

@@ -650,7 +650,6 @@ function updateAnimation()
         }
         const animName = inAnimation.get() || Object.keys(maxTimeDict)[0];
         maxTime = maxTimeDict[animName] || -1;
-        console.log("maxtime", maxTimeDict);
         outAnimLength.set(maxTime);
     }
 }
