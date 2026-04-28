@@ -225,6 +225,8 @@ function updateUi()
     if (!CABLES.UI) return;
 
     const refresh = oldShape != inCollShape.get();
+    // console.log("refresh", oldShape, inCollShape.get());
+    oldShape = inCollShape.get();
 
     inCollRadius.setUiAttribs({ "greyout": false });
     inCollSizeX.setUiAttribs({ "greyout": false });
@@ -256,7 +258,7 @@ function updateUi()
     inDampLin.setUiAttribs({ "greyout": physProps });
     inDampAng.setUiAttribs({ "greyout": physProps });
 
-    op.refreshParams();
+    if (refresh)op.refreshParams();
 }
 
 function getScaling()

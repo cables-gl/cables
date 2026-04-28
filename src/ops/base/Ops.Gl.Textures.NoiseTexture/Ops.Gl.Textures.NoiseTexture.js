@@ -52,8 +52,7 @@ createSoon();
 
 function createSoon()
 {
-    if (loadingId)cgl.patch.loading.finished(loadingId);
-    loadingId = cgl.patch.loading.start("noisetexture", "noisetexture");
+    if (!loadingId) loadingId = cgl.patch.loading.start("noisetexture", "noisetexture");
     cgl.addNextFrameOnceCallback(update);
 }
 
