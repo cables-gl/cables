@@ -243,7 +243,7 @@ export class MultiPort2 extends Port
             updateUi();
         };
 
-        this.on("onUiAttrChange", this.checkNum.bind(this));
+        this.on(Port.EVENT_UIATTRCHANGE, this.checkNum.bind(this));
         this.checkNum();
         this.countPorts();
         this.removeInvalidPorts();

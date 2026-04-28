@@ -224,30 +224,20 @@ function updateUi()
 {
     if (!CABLES.UI) return;
 
-    const refresh = oldShape != inCollShape.get();
-    // console.log("refresh", oldShape, inCollShape.get());
-    oldShape = inCollShape.get();
-
-    inCollRadius.setUiAttribs({ "greyout": false });
-    inCollSizeX.setUiAttribs({ "greyout": false });
-    inCollSizeY.setUiAttribs({ "greyout": false });
-    inCollSizeZ.setUiAttribs({ "greyout": false });
+    let useRadius = false;
+    let useSizeX = false;
+    let useSizeY = false;
+    let useSizeZ = false;
 
     if (inCollShape.get() == "Capsule" || inCollShape.get() == "Cylinder")
     {
-        inCollSizeZ.setUiAttribs({ "greyout": true });
-        inCollSizeX.setUiAttribs({ "greyout": true });
+        useSizeX = true;
+        useSizeZ = true;
     }
     if (inCollShape.get() != "Ball" && inCollShape.get() != "Cylinder" && inCollShape.get() != "Capsule")
     {
-        inCollRadius.setUiAttribs({ "greyout": true });
+        useRadius = true;
     }
-    // if (inCollShape.get() == "Cuboid")
-    // {
-    //     inCollSizeX.setUiAttribs({ "greyout": true });
-    //     inCollSizeY.setUiAttribs({ "greyout": true });
-    //     inCollSizeZ.setUiAttribs({ "greyout": true });
-    // }
 
     const physProps = inType.get() != "Dynamic";
 
@@ -258,7 +248,9 @@ function updateUi()
     inDampLin.setUiAttribs({ "greyout": physProps });
     inDampAng.setUiAttribs({ "greyout": physProps });
 
-    if (refresh)op.refreshParams();
+    inCollRadius.setUiAttribs({ "greyout": !useRadius });
+    inCollSizeX.setUiAttribs({ "greyout": !useSizeX });
+    inCollSizeZ.setUiAttribs({ "greyout": !useSizeZ });
 }
 
 function getScaling()
