@@ -20,10 +20,10 @@
             "date": 1713946385108
         },
         {
-            "message": "Html.VideoElement renamed to Ops.Html.Elements.VideoElement",
-            "type": "rename",
+            "message": "Add volume controls / golabl volume listener",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1734352635961
+            "date": 1777362865312
         }
     ],
     "authorName": "pandur",
@@ -73,6 +73,11 @@
             {
                 "type": 5,
                 "name": "Style"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "subType": "number"
             },
             {
                 "type": 1,
@@ -134,5 +139,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

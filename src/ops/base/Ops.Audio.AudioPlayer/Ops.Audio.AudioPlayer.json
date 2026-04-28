@@ -128,6 +128,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1776245864243
+        },
+        {
+            "message": "Html.Elements.AudioMediaElement renamed to Ops.Audio.AudioPlayer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1777361943224
         }
     ],
     "license": "MIT",

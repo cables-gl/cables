@@ -8,6 +8,8 @@ const
     loop = op.inBool("Loop", false),
     inMuted = op.inBool("Muted", false),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
+    volume = op.inValueSlider("Volume", 1),
+
     rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),
     outPlaying = op.outBool("Playing"),
@@ -42,32 +44,35 @@ function init()
 
 init();
 
-loop.onChange =
+op.onMasterVolumeChanged =
+    loop.onChange =
+    volume.onChange =
     controls.onChange =
     inMuted.onChange = updateVideoSettings;
 
 function updateVideoSettings()
 {
     if (!element) return;
-    if (controls.get()) element.controls = "true";
-    else
-    {
-        element.controls = "true";
-        element.removeAttribute("controls");
-    }
-
-    if (loop.get()) element.loop = "true";
-    else element.removeAttribute("loop");
-
-    if (inMuted.get()) element.muted = "true";
-    else element.removeAttribute("muted");
+    if (!play.get())element.pause();
+    element.controls = !!controls.get();
+    element.autoplay = !!inautoplay.get();
+    element.loop = !!loop.get();
+    element.muted = !!inMuted.get();
+    if (element)element.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
 }
 
 function updatePlay()
 {
     if (!element) return;
-    if (play.get())element.play();
-    else element.pause();
+    try
+    {
+        if (play.get())element.play();
+        else element.pause();
+    }
+    catch (e)
+    {
+        console.log("eee", e);
+    }
 }
 
 play.onChange = () =>
@@ -87,7 +92,7 @@ function addElement()
     element = document.createElement("video");
     element.setAttribute("playsinline", "");
     element.setAttribute("webkit-playsinline", "");
-    element.preload = "true";
+    element.preload = true;
     updateVideoSettings();
     element.setAttribute("crossOrigin", "anonymous");
 
@@ -155,12 +160,16 @@ function updateSoon()
 function updateAttribs()
 {
     if (!element || !src.get()) return;
-    element.setAttribute("style", inStyle.get());
-    element.setAttribute("src", op.patch.getFilePath(String(src.get())));
-    element.setAttribute("id", elId.get());
-
-    if (inautoplay.get())element.setAttribute("autoplay", "");
-    else element.removeAttribute("autoplay");
+    try
+    {
+        element.setAttribute("style", inStyle.get());
+        element.setAttribute("src", op.patch.getFilePath(String(src.get())));
+        element.setAttribute("id", elId.get());
+    }
+    catch (e)
+    {
+        console.log("ee", e);
+    }
 }
 
 function removeEle()
