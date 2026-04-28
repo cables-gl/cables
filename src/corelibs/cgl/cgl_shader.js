@@ -1364,36 +1364,36 @@ class CglShader extends CgShader
         this._textureStackType.push(type);
     }
 
-    setUniformTexture(uni, t)
-    {
-        for (let i = 0; i < this._textureStackUni.length; i++)
-        {
+    // setUniformTexture(uni, t)
+    // {
+    //     for (let i = 0; i < this._textureStackUni.length; i++)
+    //     {
 
-            if (this._textureStackUni[i].name == uni.name)
-            {
-                if (t.tex)
-                {
-                    this._textureStackTexCgl[i] = t;
-                    this._textureStackTex[i] = null;
-                }
-                else
-                {
-                    this._textureStackTexCgl[i] = null;
-                    this._textureStackTex[i] = t;
-                }
-                return;
+    //         if (this._textureStackUni[i].name == uni.name)
+    //         {
+    //             if (t.tex)
+    //             {
+    //                 this._textureStackTexCgl[i] = t;
+    //                 this._textureStackTex[i] = null;
+    //             }
+    //             else
+    //             {
+    //                 this._textureStackTexCgl[i] = null;
+    //                 this._textureStackTex[i] = t;
+    //             }
+    //             return;
 
-            }
-        }
+    //         }
+    //     }
 
-        // console.log("setunitex not found?", uni.name);
-        // for (let i = 0; i < this._textureStackUni.length; i++)
-        // {
-        //     console.log(this._textureStackUni[i].name == uni.name);
-        // }
-        // this.pushTexture(uni, t);
+    //     // console.log("setunitex not found?", uni.name);
+    //     // for (let i = 0; i < this._textureStackUni.length; i++)
+    //     // {
+    //     //     console.log(this._textureStackUni[i].name == uni.name);
+    //     // }
+    //     // this.pushTexture(uni, t);
 
-    }
+    // }
 
     /**
      * pop last texture
