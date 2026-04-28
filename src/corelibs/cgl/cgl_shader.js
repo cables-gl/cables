@@ -1292,35 +1292,31 @@ class CglShader extends CgShader
         }
     }
 
-    /**
-     * @param {Uniform} uni
-     * @param {Texture} tex
-     */
-    setUniformTexture(uni, tex)
-    {
-        if (!uni) return;
-        tex = tex || Texture.getTempTexture(this._cgl);
-        for (let i = 0; i < this._textureStackUni.length; i++)
-            if (this._textureStackUni[i] == uni)
-            {
-                const old = this._textureStackTex[i] || this._textureStackTexCgl[i];
-                if (tex.hasOwnProperty("tex"))
-                {
-                    this._textureStackTexCgl[i] = tex;
-                    this._textureStackTex[i] = null;
-                }
-                else
-                {
-                    this._textureStackTexCgl[i] = null;
-                    this._textureStackTex[i] = tex;
-                }
+    // setUniformTexture(uni, tex)
+    // {
+    //     if (!uni) return;
+    //     tex = tex || Texture.getTempTexture(this._cgl);
+    //     for (let i = 0; i < this._textureStackUni.length; i++)
+    //         if (this._textureStackUni[i] == uni)
+    //         {
+    //             const old = this._textureStackTex[i] || this._textureStackTexCgl[i];
+    //             if (tex.hasOwnProperty("tex"))
+    //             {
+    //                 this._textureStackTexCgl[i] = tex;
+    //                 this._textureStackTex[i] = null;
+    //             }
+    //             else
+    //             {
+    //                 this._textureStackTexCgl[i] = null;
+    //                 this._textureStackTex[i] = tex;
+    //             }
 
-                // this._textureStackTex[i] = tex;
-                // this._cgl.setTexture(i, tex, this._textureStackType[i]);
-                return old;
-            }
-        return null;
-    }
+    //             // this._textureStackTex[i] = tex;
+    //             // this._cgl.setTexture(i, tex, this._textureStackType[i]);
+    //             return old;
+    //         }
+    //     return null;
+    // }
 
     /**
      * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
@@ -1364,36 +1360,42 @@ class CglShader extends CgShader
         this._textureStackType.push(type);
     }
 
-    // setUniformTexture(uni, t)
-    // {
-    //     for (let i = 0; i < this._textureStackUni.length; i++)
-    //     {
+    /**
+     * @param {Uniform} uni
+     * @param {Texture} t
+     */
+    setUniformTexture(uni, t)
+    {
 
-    //         if (this._textureStackUni[i].name == uni.name)
-    //         {
-    //             if (t.tex)
-    //             {
-    //                 this._textureStackTexCgl[i] = t;
-    //                 this._textureStackTex[i] = null;
-    //             }
-    //             else
-    //             {
-    //                 this._textureStackTexCgl[i] = null;
-    //                 this._textureStackTex[i] = t;
-    //             }
-    //             return;
+        if (!uni) return;
+        for (let i = 0; i < this._textureStackUni.length; i++)
+        {
 
-    //         }
-    //     }
+            if (this._textureStackUni[i] && this._textureStackUni[i].name == uni.name)
+            {
+                if (t.tex)
+                {
+                    this._textureStackTexCgl[i] = t;
+                    this._textureStackTex[i] = null;
+                }
+                else
+                {
+                    this._textureStackTexCgl[i] = null;
+                    this._textureStackTex[i] = t;
+                }
+                return;
 
-    //     // console.log("setunitex not found?", uni.name);
-    //     // for (let i = 0; i < this._textureStackUni.length; i++)
-    //     // {
-    //     //     console.log(this._textureStackUni[i].name == uni.name);
-    //     // }
-    //     // this.pushTexture(uni, t);
+            }
+        }
 
-    // }
+        // console.log("setunitex not found?", uni.name);
+        // for (let i = 0; i < this._textureStackUni.length; i++)
+        // {
+        //     console.log(this._textureStackUni[i].name == uni.name);
+        // }
+        // this.pushTexture(uni, t);
+
+    }
 
     /**
      * pop last texture
