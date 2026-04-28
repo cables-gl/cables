@@ -1298,6 +1298,7 @@ class CglShader extends CgShader
      */
     setUniformTexture(uni, tex)
     {
+        if (!uni) return;
         tex = tex || Texture.getTempTexture(this._cgl);
         for (let i = 0; i < this._textureStackUni.length; i++)
             if (this._textureStackUni[i] == uni)
