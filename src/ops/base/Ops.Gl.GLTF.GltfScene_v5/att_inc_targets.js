@@ -11,6 +11,7 @@ const GltfTargetsRenderer = class
 
     renderFinish(cgl)
     {
+        if (!this.tex) return;
         if (!cgl.gl) return;
         cgl.popModelMatrix();
         this._mod.unbind();
@@ -18,6 +19,7 @@ const GltfTargetsRenderer = class
 
     renderStart(cgl, time)
     {
+        if (!this.tex) return;
         if (!cgl.gl) return;
         if (!this._mod)
         {
@@ -71,6 +73,8 @@ const GltfTargetsRenderer = class
         {
             console.error("gltf morph texture size too big...");
             op.setUiError("mtt", "morphtarget texture bigger then browser max texture size " + w + ">" + gl.getParameter(gl.MAX_TEXTURE_SIZE), 1);
+            return this.tex = null;
+
         }
         else
         {

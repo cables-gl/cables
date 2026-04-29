@@ -231,6 +231,7 @@ class Mesh extends CgMesh
         gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
         this._bufferArray(array, attr);
         attr.numItems = array.length / attr.itemSize;// numItems;
+
     }
 
     /**
@@ -304,6 +305,8 @@ class Mesh extends CgMesh
         let instanced = false;
         let i = 0;
         const numItems = array.length / itemSize;
+
+        // if (Math.floor(numItems) != numItems) console.log("scheisse", name, array, itemSize);
 
         this.#cgl.profileData.profileMeshAttributes += numItems || 0;
 
@@ -443,7 +446,12 @@ class Mesh extends CgMesh
         }
         if (vertIndices && vertIndices.length > 0)
         {
-            if (vertIndices instanceof Float32Array) this.#log.warn("vertIndices float32Array: " + this._name);
+            if (vertIndices instanceof Float32Array)
+            {
+
+                this.#log.warn("vertIndices float32Array: " + this._name, this.#geom.name, vertIndices.length, this.#geom.vertices.length);
+                // console.trace("hurzz");
+            }
 
             for (let i = 0; i < vertIndices.length; i++)
             {
@@ -511,7 +519,11 @@ class Mesh extends CgMesh
         this.updateVertices(this.#geom);
         this.setVertexIndices(this.#geom.verticesIndices);
 
-        if (this.addVertexNumbers) this._setVertexNumbers();
+        if (this.addVertexNumbers)
+        {
+            this._setVertexNumbers();
+            console.log("add vertexnumbers", this);
+        }
 
         const geomAttribs = this.#geom.getAttributes();
 
@@ -908,7 +920,14 @@ class Mesh extends CgMesh
             if (prim == this.#cgl.gl.TRIANGLES)elementDiv = 3;
             if (this._numInstances === 0)
             {
+                // console.log("text", this.#bufVerticesIndizes.numItems, this.geom.vertices.length);
+
                 this.#cgl.gl.drawElements(prim, this.#bufVerticesIndizes.numItems, this.#indexType, 0);
+
+                // if (this.#cgl.gl.getError())
+                // {
+                //     console.log("  or", this._verticesNumbers, this.addVertexNumbers, this._attributes);
+                // }
             }
             else
             {

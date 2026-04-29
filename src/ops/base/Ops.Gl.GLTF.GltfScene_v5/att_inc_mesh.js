@@ -175,7 +175,10 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("POSITION")) tgeom.vertices = gltf.accBuffers[attribs.POSITION];
         if (attribs.hasOwnProperty("NORMAL")) tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
         if (attribs.hasOwnProperty("TANGENT")) tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
+        // if ((tgeom.tangents.length / 3) % 1 != 0)
+        //     console.log("tangents shit");
 
+        // console.log("iiii ", tgeom.vertexNormals.length, tgeom.vertices.length);
         // // console.log(gltf.accBuffers[attribs.COLOR_0])
         // console.log(gltf);
 
@@ -363,7 +366,7 @@ let gltfMesh = class
         }
         else
         {
-            // console.log("no mesh......");
+            console.log("no mesh......");
         }
     }
 
