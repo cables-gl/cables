@@ -547,6 +547,7 @@ function parseGltf(arrayBuffer)
                 }
                 else
                 {
+                    gltf.accBuffers.push(new Int8Array(1));
                     // console.log("has no dataview");
                 }
             }
