@@ -1,0 +1,1 @@
+This does the same as the eye icon in the GLTF structure view. It will completly disable rendering and processing of all child nodes
