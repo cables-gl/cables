@@ -535,6 +535,7 @@ export class Geometry
         const triangleCount = this.verticesIndices.length / 3;
         const vertexCount = this.vertices.length / 3;
 
+        if (vertexCount == 0) return;
         this.tangents = new Float32Array(this.vertexNormals.length);
         this.biTangents = new Float32Array(this.vertexNormals.length);
 
