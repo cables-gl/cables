@@ -64,6 +64,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1776441684118
+        },
+        {
+            "message": "Add option to restore backups pointing to original patch assets",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1777375067525
         }
     ],
     "isReleased": true

@@ -1,0 +1,50 @@
+{
+    "id": "cc95ded5-c4d1-455d-92df-3a14e28ec99c",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1777447940210
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1777447940209,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Toggle visibility of GLTF nodes ",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ],
+    "isReleased": false
+}

@@ -45,6 +45,31 @@ const Gltf = class
         }
     }
 
+    setNodeVisibility(n, visible)
+    {
+        n.hidden = !visible;
+        data.hiddenNodes = data.hiddenNodes || {};
+
+        if (n)
+            if (n.hidden)data.hiddenNodes[n.name] = true;
+            else delete data.hiddenNodes[n.name];
+
+        saveData();
+    }
+
+    toggleNodeVisibility(name)
+    {
+        const n = gltf.getNode(name);
+        n.hidden = !n.hidden;
+        data.hiddenNodes = data.hiddenNodes || {};
+
+        if (n)
+            if (n.hidden)data.hiddenNodes[name] = true;
+            else delete data.hiddenNodes[name];
+
+        saveData();
+    }
+
     dispose()
     {
         for (let i = 0; i < this.meshes.length; i++)
