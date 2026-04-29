@@ -541,7 +541,7 @@ export class Geometry
 
         // temporary buffers
         const tempVertices = [];
-        tempVertices.length = vertexCount * 2;
+        tempVertices.length = Math.ceil(vertexCount * 2);
         const v1 = vec3.create();
         const v2 = vec3.create();
         const v3 = vec3.create();
