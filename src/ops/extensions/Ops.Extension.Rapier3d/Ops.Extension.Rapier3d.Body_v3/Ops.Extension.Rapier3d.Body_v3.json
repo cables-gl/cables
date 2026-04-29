@@ -27,6 +27,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1776954273242
+        },
+        {
+            "message": "Fix problems with forcing comple body resetup too often",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1777458339913
+        },
+        {
+            "message": "Added wakeup button",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1777458421743
         }
     ],
     "layout": {
@@ -159,6 +171,10 @@
             {
                 "type": 1,
                 "name": "Update Translation"
+            },
+            {
+                "type": 1,
+                "name": "Force Wakeup"
             }
         ],
         "portsOut": [

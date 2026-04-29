@@ -35,6 +35,7 @@ const
     inEvtFixFix = op.inBool("Events Fixed-Fixed", false),
     inActive = op.inBool("Active", true),
     inUpdateTrans = op.inTriggerButton("Update Translation"),
+    inWakeup = op.inTriggerButton("Force Wakeup"),
 
     next = op.outTrigger("Next"),
     outSleeping = op.outBoolNum("Sleeping"),
@@ -48,16 +49,25 @@ let needsSetup, lastWorld, oldShape;
 let rigidBodies = [];
 let colliders = [];
 let tmpOrigin = vec3.create();
-let needsUpdateTrans = true;
 let glScale = vec3.create();
-
-exec.onLinkChanged = removeBodies;
+let setupReason = "";
 let setPosition = false;
 let eventQueue = null;
 
+exec.onLinkChanged = removeBodies;
+
+inPositions.onChange =
 inScales.onChange =
+    inRots.onChange = () =>
+    {
+        setPosition = true;
+    };
+
+inPositions.onLinkChanged =
+inScales.onLinkChanged =
+    inRots.onLinkChanged =
+
     inEvtFixFix.onChange =
-    inRots.onChange =
     inDampLin.onChange =
     inDampAng.onChange =
     inEvents.onChange =
@@ -67,7 +77,6 @@ inScales.onChange =
     inDensity.onChange =
     inGeom.onChange =
     inName.onChange =
-    inPositions.onChange =
     inType.onChange =
     inCollSizeX.onChange =
     inCollSizeY.onChange =
@@ -75,6 +84,7 @@ inScales.onChange =
     inCollShape.onChange =
     inCollRadius.onChange = () =>
     {
+        setupReason = "paramschanged";
         let title = "";
         title += inType.get() + " ";
         if (inSensor.get())title += "sensor ";
@@ -93,6 +103,8 @@ inTranslX.onChange =
         }
         else
         {
+
+            setupReason = "non fixed body translation change";
             needsSetup = true;
         }
     };
@@ -101,6 +113,18 @@ inActive.onChange = () =>
 {
     if (!inActive.get()) removeBodies();
     needsSetup = true;
+
+    setupReason = "active toggled";
+};
+
+function float32Diff(a, b)
+{
+    return Math.abs(a - b) > 0.0001;
+}
+
+inWakeup.onTriggered = () =>
+{
+    for (let i = 0; i < rigidBodies.length; i++) rigidBodies[i].wakeUp();
 };
 
 exec.onTriggered = () =>
@@ -119,9 +143,15 @@ exec.onTriggered = () =>
     if (world != lastWorld)
     {
         needsSetup = true;
+        setupReason = "world changed";
+
         removeBodies();
     }
-    if (rigidBodies.length == 0) needsSetup = true;
+    if (rigidBodies.length == 0)
+    {
+        setupReason = "no bodies";
+        needsSetup = true;
+    }
     if (needsSetup)setup(world);
 
     const posArray = [];
@@ -142,7 +172,22 @@ exec.onTriggered = () =>
 
         setPosition = false;
         const scale = getScaling();
-        if (glScale[0] != scale[0] || glScale[1] != scale[1] || glScale[2] != scale[2]) return needsSetup = true;
+        if (
+
+            float32Diff(glScale[0], scale[0]) ||
+                       float32Diff(glScale[1], scale[1]) ||
+                       float32Diff(glScale[2], scale[2])
+
+        )
+        {
+            // console.log("gl",
+            //     glScale[0], scale[0],
+            //     glScale[1], scale[1],
+            //     glScale[2], scale[2]
+            // );
+            setupReason = "scale changed...";
+            needsSetup = true;
+        }
 
         for (let i = 0; i < rigidBodies.length; i++)
         {
@@ -224,7 +269,7 @@ function updateUi()
 {
     if (!CABLES.UI) return;
 
-    let useRadius = false;
+    let useRadius = true;
     let useSizeX = false;
     let useSizeY = false;
     let useSizeZ = false;
@@ -236,7 +281,7 @@ function updateUi()
     }
     if (inCollShape.get() != "Ball" && inCollShape.get() != "Cylinder" && inCollShape.get() != "Capsule")
     {
-        useRadius = true;
+        useRadius = false;
     }
 
     const physProps = inType.get() != "Dynamic";
@@ -265,6 +310,8 @@ function getScaling()
 function setup(world)
 {
     removeBodies();
+    // console.log("setupppp", setupReason || "unknown reason");
+    setupReason = "";
 
     const pos = getPositions();
     const rot = getRotations();

@@ -62,11 +62,11 @@ let needsMatUpdate = true;
 let timedLoader = null;
 let loadingId = null;
 let data = null;
-const scale = vec3.create();
 let lastTime = 0;
 let unknownCount = 0;
 let doCenter = false;
 const boundsCenter = vec3.create();
+const scale = vec3.create();
 
 inFile.onChange =
     inVertFormat.onChange =
