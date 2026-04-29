@@ -572,6 +572,7 @@ function hideNodesFromArray()
     {
         const n = gltf.getNode(hideArr[i]);
         if (n)n.hidden = true;
+        else console.log("node to hide not found", hideArr[i]);
     }
 }
 
