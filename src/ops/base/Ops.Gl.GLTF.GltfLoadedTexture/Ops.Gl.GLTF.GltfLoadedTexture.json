@@ -1,0 +1,57 @@
+{
+    "id": "308409d7-c7c9-4c67-a6e1-bb0452fea7b0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592403141954
+        },
+        {
+            "message": "Ops.User.pandur.GltfTexture renamed to Ops.Gl.GLTF.GltfTexture",
+            "author": "pandur",
+            "date": 1592429648315
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1777535166540
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1777535166540,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Load textures from inside a .glb file",
+    "issues": "",
+    "docs": {
+        "ports": []
+    },
+    "caniusequery": "",
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}
