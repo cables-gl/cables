@@ -340,6 +340,9 @@ export class Uniform extends CgUniform
         this.#updateLoc();
 
         if (!this._value) return;
+        // if(!this._value)
+        // console.log("updateValueArrayF", this._value);
+        // console.trace("updateValueArrayF", this._value);
         this._shader.getCgl().gl.uniform1fv(this._loc, this._value);
         this._cgl.profileData.count("uniformUpdate");
         this.needsUpdate = false;

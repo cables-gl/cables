@@ -46,7 +46,7 @@ function update()
         if (cgl.tempData.currentScene.nodes[i].name == name)
         {
             node = cgl.tempData.currentScene.nodes[i];
-            console.log("node", node);
+            // console.log("node", node);
         }
     }
 

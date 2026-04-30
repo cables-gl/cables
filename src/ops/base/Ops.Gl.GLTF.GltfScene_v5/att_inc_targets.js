@@ -5,6 +5,7 @@ const GltfTargetsRenderer = class
         this.mesh = mesh;
         this.tex = null;
         this.numRowsPerTarget = 0;
+        this.numRowsPerGeom = 1;
 
         this.makeTex(mesh.geom);
     }
@@ -17,7 +18,7 @@ const GltfTargetsRenderer = class
         this._mod.unbind();
     }
 
-    renderStart(cgl, time)
+    renderStart(cgl)
     {
         if (!this.tex) return;
         if (!cgl.gl) return;
@@ -46,6 +47,8 @@ const GltfTargetsRenderer = class
             this._mod.setUniformValue("MOD_targetTexInfo", [this.tex.width, this.tex.height, this.numRowsPerTarget, this.mesh.weights.length]);
 
             this._mod.define("MOD_NUM_WEIGHTS", Math.max(1, this.mesh.weights.length));
+            this._mod.define("MOD_ROWSGEOM", this.numRowsPerGeom + ".0");
+            this._mod.define("MOD_ROWSTARGET", this.numRowsPerTarget * this.numRowsPerGeom + ".0");
         }
         else
         {
@@ -61,18 +64,34 @@ const GltfTargetsRenderer = class
     makeTex(geom)
     {
         if (!cgl.gl) return;
-
+        const gl = cgl.gl;
+        const maxSize = 1000;
+        // const maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
         if (!geom.morphTargets || !geom.morphTargets.length) return;
 
         let w = geom.morphTargets[0].vertices.length / 3;
         let h = 0;
         this.numRowsPerTarget = 0;
+        this.numRowsPerGeom = 1;
 
-        const gl = cgl.gl;
-        if (w > gl.getParameter(gl.MAX_TEXTURE_SIZE) || h > gl.getParameter(gl.MAX_TEXTURE_SIZE))
+        if (w > maxSize)
+        {
+            this.numRowsPerGeom = Math.ceil(w / maxSize);
+            w = maxSize;
+            console.log("num rows per geom", this.numRowsPerGeom);
+        }
+
+        if (geom.morphTargets[0].vertices && geom.morphTargets[0].vertices.length) this.numRowsPerTarget++;
+        if (geom.morphTargets[0].vertexNormals && geom.morphTargets[0].vertexNormals.length) this.numRowsPerTarget++;
+        if (geom.morphTargets[0].tangents && geom.morphTargets[0].tangents.length) this.numRowsPerTarget++;
+        if (geom.morphTargets[0].bitangents && geom.morphTargets[0].bitangents.length) this.numRowsPerTarget++;
+
+        h = geom.morphTargets.length * this.numRowsPerTarget * this.numRowsPerGeom;
+
+        if (h > maxSize)
         {
             console.error("gltf morph texture size too big...");
-            op.setUiError("mtt", "morphtarget texture bigger then browser max texture size " + w + ">" + gl.getParameter(gl.MAX_TEXTURE_SIZE), 1);
+            op.setUiError("mtt", "morphtarget texture bigger then browser max texture size " + w + ">" + maxSize, 1);
             return this.tex = null;
 
         }
@@ -81,20 +100,10 @@ const GltfTargetsRenderer = class
             op.setUiError("mtt", null, 1);
         }
 
-        w = Math.min(w, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
-        h = Math.min(h, gl.getParameter(gl.MAX_TEXTURE_SIZE) - 1);
-
-        if (geom.morphTargets[0].vertices && geom.morphTargets[0].vertices.length) this.numRowsPerTarget++;
-        if (geom.morphTargets[0].vertexNormals && geom.morphTargets[0].vertexNormals.length) this.numRowsPerTarget++;
-        if (geom.morphTargets[0].tangents && geom.morphTargets[0].tangents.length) this.numRowsPerTarget++;
-        if (geom.morphTargets[0].bitangents && geom.morphTargets[0].bitangents.length) this.numRowsPerTarget++;
-
-        h = geom.morphTargets.length * this.numRowsPerTarget;
-
-        // console.log("this.numRowsPerTarget", this.numRowsPerTarget);
-
         const pixels = new Float32Array(w * h * 4);
         let row = 0;
+        console.log("numRowsPerGeom", this.numRowsPerGeom, w, h);
+        console.log("numRowsPerTarget", this.numRowsPerTarget);
 
         for (let i = 0; i < geom.morphTargets.length; i++)
         {
@@ -107,7 +116,7 @@ const GltfTargetsRenderer = class
                     pixels[((row * w) + (j / 3)) * 4 + 2] = geom.morphTargets[i].vertices[j + 2];
                     pixels[((row * w) + (j / 3)) * 4 + 3] = 1;
                 }
-                row++;
+                row += this.numRowsPerGeom;
             }
 
             if (geom.morphTargets[i].vertexNormals && geom.morphTargets[i].vertexNormals.length)
@@ -120,7 +129,7 @@ const GltfTargetsRenderer = class
                     pixels[(row * w + j / 3) * 4 + 3] = 1;
                 }
 
-                row++;
+                row += this.numRowsPerGeom;
             }
 
             if (geom.morphTargets[i].tangents && geom.morphTargets[i].tangents.length)
@@ -132,7 +141,7 @@ const GltfTargetsRenderer = class
                     pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].tangents[j + 2];
                     pixels[(row * w + j / 3) * 4 + 3] = 1;
                 }
-                row++;
+                row += this.numRowsPerGeom;
             }
 
             if (geom.morphTargets[i].bitangents && geom.morphTargets[i].bitangents.length)
@@ -144,7 +153,7 @@ const GltfTargetsRenderer = class
                     pixels[(row * w + j / 3) * 4 + 2] = geom.morphTargets[i].bitangents[j + 2];
                     pixels[(row * w + j / 3) * 4 + 3] = 1;
                 }
-                row++;
+                row += this.numRowsPerGeom;
             }
         }
 
