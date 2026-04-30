@@ -40,16 +40,10 @@
         }
     ],
     "exampleProjectId": "2_nZX7",
-    "changelog": [
-        {
-            "message": "Ops.Gl.TextureEffects.LUTMap renamed to Ops.Gl.ImageCompose.LUTMap",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701855805156
-        }
-    ],
+    "changelog": [],
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }
