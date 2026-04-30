@@ -16,7 +16,7 @@ inMaxRenderer.onTriggered = () =>
 {
     if (window.gui)
     {
-        window.gui.toggleMaximizeCanvas();
+        window.gui.toggleMaximized();
     }
 };
 
