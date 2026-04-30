@@ -522,7 +522,7 @@ class Mesh extends CgMesh
         if (this.addVertexNumbers)
         {
             this._setVertexNumbers();
-            console.log("add vertexnumbers", this);
+            // console.log("add vertexnumbers", this);
         }
 
         const geomAttribs = this.#geom.getAttributes();
