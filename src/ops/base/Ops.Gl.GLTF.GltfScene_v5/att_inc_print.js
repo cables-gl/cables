@@ -26,7 +26,7 @@ op.toggleShowAll = () =>
     else maxChilds = 100;
     closeTab();
     printInfo();
-    console.log("maxChilds", maxChilds);
+    // console.log("maxChilds", maxChilds);
 };
 
 function printNode(html, node, level)
@@ -396,7 +396,6 @@ function printInfo()
                         const accessorIdx = gltf.json.meshes[i].primitives[j].targets[k][l];
                         const accessor = gltf.json.accessors[accessorIdx];
                         const bufView2 = accessor.bufferView;
-                        console.log("accessor", accessor);
                         if (sizeBufferViews.indexOf(bufView2) == -1)
                             if (gltf.json.bufferViews[bufView2])
                             {
@@ -463,15 +462,11 @@ function printInfo()
 
             if (gltf.json.images[i].hasOwnProperty("bufferView"))
             {
-                // if (sizeBufferViews.indexOf(gltf.json.images[i].hasOwnProperty("bufferView")) == -1)console.log("image bufferview already there?!");
-                // else
                 if (!gltf.json.bufferViews[gltf.json.images[i].bufferView]) continue;
                 sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
             }
             else html += " no bufferview?!";
 
-            // html += "</td>";
-            // html += "<td>";
             if (gltf.json.textures)
                 for (let ti = 0; ti < gltf.json.textures.length; ti++)
                 {

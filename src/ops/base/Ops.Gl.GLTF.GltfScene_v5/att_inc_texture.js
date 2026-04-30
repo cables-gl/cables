@@ -1,14 +1,16 @@
 let GltfTexture = class
 {
+    scale = [1, 1];
+    offset = [0, 0];
+    previewUri = null;
+    cgl_filter = CGL.Texture.FILTER_MIPMAP;
+    cgl_wrap = CGL.Texture.WRAP_CLAMP;
+    tex = CGL.Texture.getEmptyTexture(cgl);
+    sampler = null;
+
     constructor(gltf, _idx, texInfo, _sampler)
     {
-        this.scale = [1, 1];
-        this.offset = [0, 0];
-        this.previewUri = null;
-        this.tex = CGL.Texture.getEmptyTexture(cgl);
         this.sampler = _sampler;
-        this.cgl_filter = CGL.Texture.FILTER_MIPMAP;
-        this.cgl_wrap = CGL.Texture.WRAP_CLAMP;
 
         if (!gltf.json.images) return console.log("no json images?");
 
@@ -39,7 +41,6 @@ let GltfTexture = class
 
         if (CABLES.UI) this.previewUri = sourceURI;
 
-        // if(scale[0]!=1||scale[1]!=1)
         this.cgl_wrap = CGL.Texture.WRAP_REPEAT;
 
         if (this.sampler)
@@ -106,6 +107,5 @@ let GltfTexture = class
     dispose()
     {
         this.tex = this.tex.dispose();
-        // console.log("tex dispose...");
     }
 };
