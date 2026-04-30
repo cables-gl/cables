@@ -222,7 +222,7 @@ inExec.onTriggered = function ()
 
             if (inRender.get())
             {
-                for (let i = 0; i < gltf.sortedNodes.length; i++)
+                for (let i = 0; i < gltf.nodes.length; i++)
                     if (!gltf.nodes[i].isChild)
                         gltf.nodes[i].render(cgl);
             }
@@ -624,6 +624,7 @@ function loadData()
     else data = JSON.parse(data);
 
     if (gltf)hideNodesFromData();
+    sortNodes();
 
     return data;
 }
@@ -635,10 +636,13 @@ function saveData()
 
 function sortNodes()
 {
-    if (gltf) gltf.sortedNodes = gltf.nodes.toSorted((a, b) =>
-    {
-        return a.order - b.order;
-    });
+    // if (gltf)console.log("text", gltf.nodes);
+    // if (gltf) gltf.nodes.sort((a, b) =>
+    // {
+    //     if (!a.isChild && !b.isChild)
+    //         return a.order - b.order;
+    //     // return gltf.nodes[a].order - gltf.nodes[b].order;
+    // });
 }
 
 function updateAnimation()

@@ -140,7 +140,8 @@ function printNode(html, node, level)
     }
 
     html += "<td>";
-    html += "<span class=\"button-small\" onclick=\"gui.corePatch().getOpById('" + op.id + "').setOrder('" + node.name + "');\">" + node.order + "</span>";
+    if (node.isChild)
+        html += "<span class=\"button-small\" onclick=\"gui.corePatch().getOpById('" + op.id + "').setOrder('" + node.name + "');\">" + node.order + "</span>";
     html += "</td>";
 
     html += "<td>";
