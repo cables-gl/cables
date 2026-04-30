@@ -15,6 +15,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1776436505141
+        },
+        {
+            "message": "Extension.Rapier3d.Dev.CheckCollisionPairsEvents renamed to Ops.Extension.Rapier3d.CheckCollisionPairsEvents",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1777491565586
         }
     ],
     "layout": {
