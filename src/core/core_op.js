@@ -1202,7 +1202,21 @@ export class Op extends Events
         const p = this.addInPort(
             this.newPort(this, name, Port.TYPE_VALUE, {
                 "display": "gradient"
-                // "hidePort": true
+            })
+        );
+        if (v !== undefined) p.set(v);
+        return p;
+    }
+
+    /**
+     * @param {string} name
+     * @param {string} v
+     */
+    inCurve(name, v)
+    {
+        const p = this.addInPort(
+            this.newPort(this, name, Port.TYPE_VALUE, {
+                "display": "curve"
             })
         );
         if (v !== undefined) p.set(v);
