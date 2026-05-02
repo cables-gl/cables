@@ -1,0 +1,40 @@
+{
+    "id": "446cd3a1-1e9c-4036-8f6f-c11ce4f789c7",
+    "created": 1777717029003,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1777717029004
+        },
+        {
+            "message": "Patch.P5F9Obi.CurveEditor renamed to Ops.Array.Cuves.CurveEditor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1777756541171
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Curve",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Curve Object",
+                "objType": "curve"
+            },
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ]
+    }
+}
