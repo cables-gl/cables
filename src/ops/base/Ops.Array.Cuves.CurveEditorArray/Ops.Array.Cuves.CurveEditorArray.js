@@ -3,7 +3,10 @@ const inGrad = op.inCurve("Curve"),
     outArray = op.outArray("Array");
 
 let timeout = null;
-let anim = null;
+let anim = new CABLES.Anim();
+
+anim.createPort(op, "Easing", update);
+
 inGrad.setUiAttribs({ "editShortcut": true, "hidePort": true });
 
 op.onLoaded =
@@ -44,7 +47,9 @@ function parseKeys()
         op.setUiError("nodata", "gradient no data");
         return null;
     }
-    anim = new CABLES.Anim();
+
+    anim.clear();
+    // anim.defaultEasing = CABLES.Anim.EASING_SMOOTHSTEP;
     for (let index = 0; index < grad.keys.length; index++)
     {
         anim.setValue(grad.keys[index].pos, 1 - grad.keys[index].posy);

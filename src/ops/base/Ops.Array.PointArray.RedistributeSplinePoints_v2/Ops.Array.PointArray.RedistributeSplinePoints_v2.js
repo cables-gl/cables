@@ -14,6 +14,15 @@ let needsMapping = true;
 let newArray = [];
 let totalSplineLength = 0;
 
+num.onChange =
+inArr.onChange = function ()
+{
+    needsMapping = true;
+
+    if (needsMapping)mapArrays();
+    buildResultArray();
+};
+
 function dist(x1, y1, z1, x2, y2, z2)
 {
     let xd = x1 - x2;
@@ -86,11 +95,3 @@ function buildResultArray()
     result.set(null);
     result.set(newArray);
 }
-
-inArr.onChange = function ()
-{
-    needsMapping = true;
-
-    if (needsMapping)mapArrays();
-    buildResultArray();
-};

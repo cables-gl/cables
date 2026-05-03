@@ -29,6 +29,11 @@
                 "type": 0,
                 "name": "Array Length",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Easing index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
