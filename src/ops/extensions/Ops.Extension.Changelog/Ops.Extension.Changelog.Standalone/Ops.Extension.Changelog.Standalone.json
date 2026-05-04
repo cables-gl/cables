@@ -5,6 +5,48 @@
     "authorName": "pandur",
     "changelog": [
         {
+            "message": "Build Windows executable in seperate files (not one \"portable\" exe) ",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Fix copypaste of local ops into subpatch ops",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Fix export not working in some cases",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Prevent op-errors when entering directories or files with no permission in file-ports",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Add commandline parameters to control screen/offset to open window",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1772447867005
+        },
+        {
+            "message": "Fix bug when selecting aspect ratio of canvas",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1772447867005
+        },
+        {
+            "message": "Fix location of extension ops when developing in cables-development setup",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1772447867005
+        },
+        {
             "message": "Add usersetting to open popout- and external-canvas in a transparent window (pull request by Uuoocl, thank you!)",
             "type": "feature",
             "author": "stephan",
@@ -21,6 +63,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1776869620611
+        },
+        {
+            "message": "Do not show intro-tour / hints when started as fullscreen or maximized",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1777881236301
         }
     ],
     "isReleased": true

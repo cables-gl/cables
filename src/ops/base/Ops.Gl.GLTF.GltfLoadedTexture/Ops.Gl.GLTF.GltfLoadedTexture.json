@@ -2,16 +2,6 @@
     "id": "308409d7-c7c9-4c67-a6e1-bb0452fea7b0",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1592403141954
-        },
-        {
-            "message": "Ops.User.pandur.GltfTexture renamed to Ops.Gl.GLTF.GltfTexture",
-            "author": "pandur",
-            "date": 1592429648315
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",

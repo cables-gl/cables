@@ -5,6 +5,36 @@
     "authorName": "pandur",
     "changelog": [
         {
+            "message": "Add bulk delete to op-changelog editing mode",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Add icon to unlisted teams",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Fix permission-check for teammembers when restoring backups",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Reorganize /myteams, add tabs",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Suggest deprecated ops on \"op not found\" page for ops of the same name",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
             "message": "Link public teams to my teams and vice versa",
             "type": "improvement",
             "author": "stephan",
@@ -60,7 +90,7 @@
             "date": 1776441627375
         },
         {
-            "message": "Add team-info to patchlist page",
+            "message": "Add team-info to patchlist page, Show team visibility as text on team page",
             "type": "improvement",
             "author": "stephan",
             "date": 1776441684118
@@ -70,6 +100,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1777375067525
+        },
+        {
+            "message": "Add numbers to backups, show in restore and download. Tweak backup intervals.",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1777897754058
         }
     ],
     "isReleased": true

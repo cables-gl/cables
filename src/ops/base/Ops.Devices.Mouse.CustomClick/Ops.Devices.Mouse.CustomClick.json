@@ -50,5 +50,10 @@
                 "name": "Click Left"
             }
         ]
+    },
+    "isReleased": false,
+    "summary": "Configurable mouse click listener",
+    "docs": {
+        "ports": []
     }
 }

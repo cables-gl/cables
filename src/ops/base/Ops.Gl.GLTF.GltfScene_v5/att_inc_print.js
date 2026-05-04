@@ -60,7 +60,10 @@ function printNode(html, node, level)
     if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
     else html += "<span class=\"icon icon-box-select\"></span> &nbsp;";
 
-    html += node.name + "</td><td></td>";
+    html += node.name;
+    if (node.children && node.children.length) html += "<span style=\"opacity:0.5\"> (" + node.children.length + ")</span>";
+
+    html += "</td><td></td>";
 
     /// // transformation info
     html += "<td>";

@@ -8,19 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1777717029004
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1777755865653
-        },
-        {
-            "message": "Patch.P5F9Obi.CurveEditorArray renamed to Ops.Array.Cuves.CurveEditorArray",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1777756531759
         }
     ],
     "layout": {
@@ -43,5 +31,10 @@
             }
         ]
     },
-    "cloneOf": "446cd3a1-1e9c-4036-8f6f-c11ce4f789c7"
+    "cloneOf": "446cd3a1-1e9c-4036-8f6f-c11ce4f789c7",
+    "isReleased": false,
+    "summary": "Edit a simple curve and output as array of numbers",
+    "docs": {
+        "ports": []
+    }
 }
