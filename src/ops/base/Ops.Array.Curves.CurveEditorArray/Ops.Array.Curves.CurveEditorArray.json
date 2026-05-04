@@ -36,5 +36,6 @@
     "summary": "Edit a simple curve and output as array of numbers",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "QoztFi"
 }

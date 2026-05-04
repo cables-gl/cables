@@ -36,8 +36,9 @@
             }
         ]
     },
-    "summary": "Upload an image as screentshot in cables",
+    "summary": "Outputs an array of filenames, that are uploaded to the current patch",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": false
 }
