@@ -690,7 +690,15 @@ export class CglContext extends CgContext
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
-            this.gl.bindTexture(type || this.gl.TEXTURE_2D, t);
+            try
+            {
+
+                this.gl.bindTexture(type || this.gl.TEXTURE_2D, t);
+            }
+            catch (e)
+            {
+                console.log(e, t);
+            }
             this._textureslots[slot] = t;
         }
 

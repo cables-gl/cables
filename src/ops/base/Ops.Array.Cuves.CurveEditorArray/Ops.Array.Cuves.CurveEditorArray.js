@@ -6,11 +6,10 @@ let timeout = null;
 let anim = new CABLES.Anim();
 
 anim.createPort(op, "Easing", update);
-
 inGrad.setUiAttribs({ "editShortcut": true, "hidePort": true });
 
 op.onLoaded =
-inNum.onChange =
+  inNum.onChange =
   inGrad.onChange = update;
 
 inGrad.set("{\"keys\" : [{\"pos\":0,\"r\":0,\"g\":0,\"b\":0},{\"pos\":1,\"r\":1,\"g\":1,\"b\":1}]}");
@@ -28,10 +27,7 @@ function parseKeys()
     op.setUiError("parse", null);
 
     let grad = null;
-    if (!inGrad.get() || inGrad.get() === "")
-    {
-        return null;
-    }
+    if (!inGrad.get() || inGrad.get() === "") return null;
 
     try
     {
@@ -48,8 +44,8 @@ function parseKeys()
         return null;
     }
 
+    inGrad.tempData.curveanim = anim;
     anim.clear();
-    // anim.defaultEasing = CABLES.Anim.EASING_SMOOTHSTEP;
     for (let index = 0; index < grad.keys.length; index++)
     {
         anim.setValue(grad.keys[index].pos, 1 - grad.keys[index].posy);
