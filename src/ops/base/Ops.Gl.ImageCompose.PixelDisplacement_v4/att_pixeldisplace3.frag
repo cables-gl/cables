@@ -1,10 +1,10 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D displaceTex;
+UNI vec2 psize;
 UNI float amountX;
 UNI float amountY;
 UNI float amount;
-
 #ifdef MAPPING_REPEAT
     UNI vec2 repeat;
 #endif
@@ -33,7 +33,7 @@ float getOffset(float offset)
     #endif
 }
 
-void main()
+vec2 getMapping(vec2 texCoord)
 {
     #ifndef MAPPING_REPEAT
         vec4 rgba=texture(displaceTex,texCoord);
@@ -86,9 +86,46 @@ void main()
         y=abs((floor(my)-fract(my)));
     #endif
 
+    return vec2(x,y);
+}
 
+#ifdef USE_MSAA
+const vec2 S16[16] = vec2[](
+    vec2( 1.0,  1.0),
+    vec2(-1.0, -3.0),
+    vec2(-3.0,  2.0),
+    vec2( 4.0, -1.0),
+    vec2(-5.0, -2.0),
+    vec2( 2.0,  5.0),
+    vec2( 5.0,  3.0),
+    vec2( 3.0, -5.0),
+    vec2(-2.0,  6.0),
+    vec2( 0.0, -7.0),
+    vec2(-4.0, -6.0),
+    vec2(-6.0,  4.0),
+    vec2(-8.0,  0.0),
+    vec2( 7.0, -4.0),
+    vec2( 6.0,  7.0),
+    vec2(-7.0, -8.0)
+);
+#endif
 
-    vec4 col=texture(tex,vec2(x,y));
+void main()
+{
+    #ifndef USE_MSAA
+    vec2 texCoordDisplaced = getMapping(texCoord);
+
+    vec4 col=texture(tex,texCoordDisplaced);
+    #else
+    vec4 col = vec4(0.0);
+
+    for (int i = 0; i < S16.length(); ++i) {
+        vec2 s = getMapping(texCoord + S16[i] * psize);
+        col += texture(tex,s);
+    }
+    col = col / float(S16.length());
+    #endif
+
     vec4 base=texture(tex,texCoord);
 
     base.a=0.0;
