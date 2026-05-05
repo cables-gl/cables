@@ -1,5 +1,5 @@
 let geometry = op.inObject("Geometry");
-let outGeom = op.outObject("Result");
+let outGeom = op.outObject("Result", null, "geometry");
 
 geometry.onChange = update;
 

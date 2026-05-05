@@ -8,19 +8,7 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1764149495258
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1776698161645
-        },
-        {
-            "message": "Cables.FileList renamed to Ops.Cables.PatchFileList",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1776699068574
         }
     ],
     "layout": {
@@ -48,8 +36,9 @@
             }
         ]
     },
-    "summary": "Upload an image as screentshot in cables",
+    "summary": "Outputs an array of filenames, that are uploaded to the current patch",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": false
 }

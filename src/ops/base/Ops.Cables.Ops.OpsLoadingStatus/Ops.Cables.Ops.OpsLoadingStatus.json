@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1775139773014
+        },
+        {
+            "message": "Get ops in current patch that have a specific tag",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1777910367948
         }
     ],
     "layout": {
@@ -30,5 +36,10 @@
                 "subType": "boolean"
             }
         ]
+    },
+    "isReleased": false,
+    "summary": "Get loading status of an array of ops",
+    "docs": {
+        "ports": []
     }
 }

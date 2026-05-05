@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1777717029004
-        },
-        {
-            "message": "Patch.P5F9Obi.CurveEditor renamed to Ops.Array.Cuves.CurveEditor",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1777756541171
         }
     ],
     "layout": {
@@ -36,5 +30,10 @@
                 "name": "Array"
             }
         ]
+    },
+    "isReleased": false,
+    "summary": "Edit a simple curve",
+    "docs": {
+        "ports": []
     }
 }

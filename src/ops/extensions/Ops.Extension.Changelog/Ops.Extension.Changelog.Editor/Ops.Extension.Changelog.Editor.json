@@ -5,6 +5,72 @@
     "authorName": "pandur",
     "changelog": [
         {
+            "message": "add a new Canvas floating mode, param panel then becomes full height",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "Changed the zoom for centering ops (c) and clicking findresult to be more zoomed out",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "Editor does not force timeline to play after loading the ui",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "Load op-dependency only once per patch, preventing lot's of requests for parent-op",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Mesh ops show an X in the op title when drawing is deactivated",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "Optimized loading time for patches with many materials/shadermods and effects, only compile shaders when they are needed",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "Rework import and backup-restore workflow, option to not restore/import op-code",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1771844763902
+        },
+        {
+            "message": "Store canvas mode in user preferences, restore when opening the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1771844763902
+        },
+        {
+            "message": "selected op connected cables now have a brighter outline and are move visible when zoomed out",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772447867005
+        },
+        {
+            "message": "op suggestions based on objtype, e.g. audio object outputs",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1772447867005
+        },
+        {
+            "message": "no longer taking a screenshot when changing from automatic to manual screenshots in patch settings",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1772447867005
+        },
+        {
             "message": "Gradient editor: Added simple presets",
             "type": "feature",
             "author": "pandur",
@@ -167,6 +233,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1777964967619
+        },
+        {
+            "message": "Ops can now be tagged, those tags can be queried by ops for meta patch functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1777910486663
         }
     ],
     "isReleased": true,
