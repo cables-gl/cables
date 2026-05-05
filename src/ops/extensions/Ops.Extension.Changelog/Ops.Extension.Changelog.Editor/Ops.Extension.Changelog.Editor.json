@@ -161,6 +161,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1776683759408
+        },
+        {
+            "message": "Math ops now show variablenames when directly set to port",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1777964967619
         }
     ],
     "isReleased": true,
