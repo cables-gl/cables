@@ -385,7 +385,7 @@ void main()
     vec4 col;
 
     // set up interpolated vertex data
-    vec2 UV0             = texCoord;
+    vec2 UV0             = texCoordTransformed;
     #ifdef USE_LIGHTMAP
         #ifndef VERTEX_COLORS
             vec2 UV1             = texCoord1;
@@ -409,7 +409,7 @@ void main()
 
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
-        vec4 AlbedoMap   = texture(_AlbedoMap, texCoordTransformed);
+        vec4 AlbedoMap   = texture(_AlbedoMap, UV0);
 
         #ifdef GAMMAENC
           AlbedoMap = vec4(pow(AlbedoMap.rgb, vec3(1.0/2.2)), AlbedoMap.a);
