@@ -385,7 +385,8 @@ void main()
     vec4 col;
 
     // set up interpolated vertex data
-    vec2 UV0             = texCoordTransformed;
+    vec2 UV0             = texCoord;
+    vec2 UV0_transformed = texCoordTransformed;
     #ifdef USE_LIGHTMAP
         #ifndef VERTEX_COLORS
             vec2 UV1             = texCoord1;
@@ -404,12 +405,13 @@ void main()
         #endif
         #ifndef WEBGL1
             UV0 += RaymarchedParallax(UV0, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
+            UV0_transformed += RaymarchedParallax(UV0_transformed, _HeightMap, _HeightDepth * 0.1, fragTangentViewDir);
         #endif
     #endif
 
     // load relevant mesh maps
     #ifdef USE_ALBEDO_TEX
-        vec4 AlbedoMap   = texture(_AlbedoMap, UV0);
+        vec4 AlbedoMap   = texture(_AlbedoMap, UV0_transformed);
 
         #ifdef GAMMAENC
           AlbedoMap = vec4(pow(AlbedoMap.rgb, vec3(1.0/2.2)), AlbedoMap.a);

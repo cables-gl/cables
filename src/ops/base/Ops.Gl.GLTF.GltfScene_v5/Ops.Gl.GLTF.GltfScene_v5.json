@@ -334,7 +334,7 @@
             "date": 1776928581442
         },
         {
-            "message": "Mesh morph targets now work with more vertixes than the max texture size",
+            "message": "Mesh morph targets now work with more vertices than the max texture size",
             "type": "bugfix",
             "author": "pandur",
             "date": 1777562207603
