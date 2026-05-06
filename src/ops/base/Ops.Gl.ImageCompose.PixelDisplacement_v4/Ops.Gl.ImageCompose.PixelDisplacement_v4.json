@@ -102,6 +102,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1725009718382
+        },
+        {
+            "message": "Added toggle for antialiasing",
+            "type": "feature",
+            "author": "amajesticseaflapflap",
+            "date": 1777986969560
         }
     ],
     "license": "MIT",
