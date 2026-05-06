@@ -34,12 +34,18 @@ UNI vec4 _Albedo;
     UNI float _TFThicknessTexMin;
     UNI float _TFThicknessTexMax;
 #endif
-#ifdef USE_AORM_TEX
-    UNI sampler2D _AORMMap;
-#else
-    UNI float _Roughness;
-    UNI float _Metalness;
+
+
+#ifdef USE_AO_TEX
+    UNI sampler2D _AOMap;
 #endif
+
+#ifdef USE_RM_TEX
+    UNI sampler2D _RMMap;
+#endif
+UNI float _Roughness;
+UNI float _Metalness;
+
 #ifdef USE_LIGHTMAP
     #ifndef VERTEX_COLORS
         UNI sampler2D _Lightmap;
@@ -434,13 +440,15 @@ void main()
 	    discard;
 	#endif
 
-    #ifdef USE_AORM_TEX
-        vec4 AORM        = texture(_AORMMap, UV0);
-// AORM.g=1.0-AORM.g;
-        // AORM        = texture(_AORMMap, UV0).agra;
-    #else
-        vec4 AORM        = vec4(1.0, _Roughness, _Metalness, 1.0);
+    vec4 AORM = vec4(1.0, _Roughness, _Metalness, 1.0);
+
+    #ifdef USE_AO_TEX
+         AORM.r *= texture(_AOMap, UV0).r;
     #endif
+    #ifdef USE_RM_TEX
+         AORM.gb *= texture(_RMMap, UV0).gb;
+    #endif
+
     #ifdef USE_NORMAL_TEX
         vec3 internalNormals = texture(_NormalMap, UV0).rgb;
         internalNormals      = internalNormals * 2.0 - 1.0;
@@ -473,7 +481,7 @@ void main()
         #endif
 
         #ifdef GAMMAENC
-          Lightmap = pow(Lightmap.rgb, vec3(1.0/2.2));
+            Lightmap = pow(Lightmap.rgb, vec3(1.0/2.2));
         #endif
 
     #endif

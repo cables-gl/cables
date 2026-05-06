@@ -264,7 +264,13 @@
             },
             {
                 "type": 2,
-                "name": "AORM",
+                "name": "Occlusion",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Roughness/Metallic",
                 "group": "Textures",
                 "objType": "texture"
             },

@@ -149,7 +149,8 @@ buildShader();
 // uniforms
 
 const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", -1);
-const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", -2);
+const inAOUniform = new CGL.Uniform(PBRShader, "t", "_AOMap", -2);
+const inRMUniform = new CGL.Uniform(PBRShader, "t", "_RMMap", -2);
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap");
 const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap");
 const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap");
@@ -194,12 +195,13 @@ const uniTexTrans = PBRShader.addUniformFrag("4f", "texTransform", inTexTransRep
 PBRShader.materialPropUniforms = {
     "diffuseTexture": inAlbedoUniform,
     "normalTexture": inNormalUniform,
-    "metalRoughnessTexture": inAORMUniform,
+    "metalRoughnessTexture": inRMUniform,
+    "occlusionTexture": inAOUniform,
     "diffuseColor": inDiffuseColor,
     "pbrMetalness": inMetalnessUniform,
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
-    "occlusionTexture": inLightmapUniform,
+    "lightmapTexture": inLightmapUniform,
     "unlit": inUnlitUniform,
     "texTransform": uniTexTrans
 };
@@ -233,6 +235,13 @@ inTexRM.onChange =
     inTexFlip.onChange =
     inGammaEnc.onChange =
     inVertexColourMode.onChange = updateDefines;
+
+inTexAO.onLinkChanged =
+inTexRM.onLinkChanged = () =>
+{
+    inRoughnessUniform.setValue(1);
+    inMetalnessUniform.setValue(1);
+};
 
 function updateDefines()
 {
@@ -272,8 +281,9 @@ function updateDefines()
 
     // AORM
     PBRShader.toggleDefine("USE_RM_TEX", inTexRM.get());
+    PBRShader.toggleDefine("USE_AO_TEX", inTexAO.get());
     inRoughness.setUiAttribs({ "greyout": inTexRM.isLinked() });
-    inMetalness.setUiAttribs({ "greyout": inTeORM.isLinked() });
+    inMetalness.setUiAttribs({ "greyout": inTexRM.isLinked() });
 
     // lightmaps
     PBRShader.toggleDefine("VERTEX_COLORS", inUseVertexColours.get());
