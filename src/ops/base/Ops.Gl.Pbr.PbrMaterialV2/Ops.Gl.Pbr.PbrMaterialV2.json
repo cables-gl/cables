@@ -36,6 +36,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1773416612300
+        },
+        {
+            "message": "Gl.Pbr.PbrMaterial_v2 renamed to Ops.Gl.Pbr.PbrMaterialV2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1778083245137
         }
     ],
     "layout": {
