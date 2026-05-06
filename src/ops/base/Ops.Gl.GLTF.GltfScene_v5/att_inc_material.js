@@ -152,12 +152,12 @@ let GltfMaterial = class
             if (uniTexDiff && uniTexDiff.isValidLoc())
                 currentShader.setUniformTexture(currentShader.materialPropUniforms.diffuseTexture, (this._matTexDiffuse || whiteTex).tex, cgl.gl.TEXTURE_2D);
 
-            if (uniTexMr && uniTexMr.isValidLoc())
-            {
-                uniPbrRoughness.setValue(1);
-                uniPbrMetalness.setValue(1);
-                currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, (this._matTexMetalRough || whiteTex).tex, cgl.gl.TEXTURE_2D);
-            }
+            // if (uniTexMr && uniTexMr.isValidLoc())
+            // {
+            //     uniPbrRoughness?.setValue(1);
+            //     uniPbrMetalness?.setValue(1);
+            //     currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, (this._matTexMetalRough || whiteTex).tex, cgl.gl.TEXTURE_2D);
+            // }
 
             if (uniTexOcc && uniTexOcc.isValidLoc())
                 currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, (this._matTexOcclusion || whiteTex).tex, cgl.gl.TEXTURE_2D);
@@ -190,5 +190,8 @@ let GltfMaterial = class
 
         const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
         if (uniTexDiff) currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
+
+        const uniTexMr = currentShader.materialPropUniforms.metalRoughnessTexture;
+        if (uniTexMr) currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
     }
 };

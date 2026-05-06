@@ -1,0 +1,55 @@
+{
+    "id": "8960aece-4df8-4a9d-9628-620d3137cad2",
+    "created": 1778078130364,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1778078130365
+        },
+        {
+            "message": "Patch.PkNllQg.MyAwesomeOpName renamed to Ops.Gl.GLTF.GltfTextureTest",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1778083190804
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Show tex index",
+                "values": [
+                    "Albedo",
+                    "Normal",
+                    "AO",
+                    "MR"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "shader",
+                "objType": "shader"
+            }
+        ]
+    }
+}
