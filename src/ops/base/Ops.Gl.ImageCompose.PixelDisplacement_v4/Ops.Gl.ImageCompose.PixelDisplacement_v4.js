@@ -9,6 +9,7 @@ const
     inInput = op.inValueSelect("Input", ["Luminance", "RedGreen", "Red", "Green", "Blue"], "Luminance"),
     inZero = op.inSwitch("Zero Displace", ["Grey", "Black"], "Grey"),
     inMapping = op.inSwitch("Pixel Mapping", ["Stretch", "Repeat"], "Stretch"),
+    inMultisample = op.inValueBool("MSAA", false),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Axis Displacement Strength", [amountX, amountY]);
@@ -27,11 +28,13 @@ const
     amountXUniform = new CGL.Uniform(shader, "f", "amountX", amountX),
     amountYUniform = new CGL.Uniform(shader, "f", "amountY", amountY),
     repeatUni = new CGL.Uniform(shader, "2f", "repeat", 1, 1),
-    amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
+    amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
+    uniPSize = new CGL.Uniform(shader, "2f", "psize", 0,0);
 
 inMapping.onChange =
 inZero.onChange =
 inWrap.onChange =
+inMultisample.onChange =
 inInput.onChange = updateDefines;
 
 updateDefines();
@@ -55,6 +58,8 @@ function updateDefines()
     shader.removeDefine("INPUT_REDGREEN");
     shader.removeDefine("INPUT_RED");
     shader.define("INPUT_" + (inInput.get() + "").toUpperCase());
+
+    shader.toggleDefine("USE_MSAA", inMultisample.get());
 }
 
 render.onTriggered = function ()
@@ -65,13 +70,17 @@ render.onTriggered = function ()
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
-
+        
+        let w = cgl.currentTextureEffect.getCurrentSourceTexture().width;
+        let h = cgl.currentTextureEffect.getCurrentSourceTexture().height;
+        
         repeatUni.setValue([
-            cgl.currentTextureEffect.getCurrentSourceTexture().width / displaceTex.get().width,
-            cgl.currentTextureEffect.getCurrentSourceTexture().height / displaceTex.get().height]);
+            w / displaceTex.get().width,
+            h / displaceTex.get().height]);
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
         if (displaceTex.get()) cgl.setTexture(1, displaceTex.get().tex);
+        if (inMultisample.get()) uniPSize.setValue([(1.0/w)*(1.0/16.0),(1.0/h)*(1.0/16.0)]);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();
