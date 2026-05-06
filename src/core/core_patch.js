@@ -1287,7 +1287,7 @@ export class Patch extends Events
      * @returns {PatchVariable[]}
      */
     /* minimalcore:start */
-    getVars(t)
+    getVars(t = undefined)
     {
         if (t === undefined) return this._variables;
         if (t === 1) return {};

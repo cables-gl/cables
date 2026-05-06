@@ -55,6 +55,7 @@ import { MultiPort2 } from "./core_port_multi2.js";
  * @property {string} [commentOverwrite]
  * @property {string} [comment_text]
  * @property {boolean} [createdLocally]
+ * @property {boolean} [stretchPorts]
  */
 
 /**
