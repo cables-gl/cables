@@ -1,0 +1,28 @@
+{
+    "summary": "get timeline time when scrubbing in editor",
+    "authorName": "stephan",
+    "id": "46a9034d-9d1b-48c5-96c2-73ab421c7a45",
+    "created": 1778059151855,
+    "layout": {
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "time",
+                "subType": "number"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1778059151855
+        }
+    ],
+    "license": "MIT",
+    "isReleased": false,
+    "docs": {
+        "ports": []
+    }
+}
