@@ -1,0 +1,524 @@
+{
+    "id": "a3068907-e1cb-4c92-9636-641bcc6eb37c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "amajesticseaflapflap",
+            "date": 1642599258807,
+            "type": "new"
+        },
+        {
+            "message": "Added toggle for double sided, which will flip normals when the face is not front-facing ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1725553568070
+        },
+        {
+            "message": "set shader output port object type to \"shader\"",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1766392560135
+        },
+        {
+            "message": "Added option to multiply albedo texture with diffuse color",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1770385811609
+        },
+        {
+            "message": "Better loading of settings from gltf files / textures",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1770386180450
+        },
+        {
+            "message": "Add option to flip all textures",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1773416612300
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Roughness",
+                "group": "Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Metalness",
+                "group": "Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mode index",
+                "values": [
+                    "Opaque",
+                    "Masked",
+                    "Dithered",
+                    "Blend"
+                ],
+                "group": "Shader Parameters",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Use Clear Coat",
+                "group": "Clear Coat",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear Coat Intensity",
+                "group": "Clear Coat",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clear Coat Roughness",
+                "group": "Clear Coat",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Use Normal map for Clear Coat",
+                "group": "Clear Coat",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Clear Coat Normal map",
+                "group": "Clear Coat",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Use Thin Film",
+                "group": "Thin Film Iridescence",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film Intensity",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film IOR",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thin Film Thickness (nm)",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thickness Tex Min",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Thickness Tex Max",
+                "group": "Thin Film Iridescence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Tonemapping index",
+                "values": [
+                    "None",
+                    "sRGB",
+                    "HejiDawson",
+                    "Photographic"
+                ],
+                "group": "Tonemapping",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Exposure",
+                "group": "Tonemapping",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Emission Intensity",
+                "group": "Advanced Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Disable geometric roughness",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use roughness from normal map",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Use Vertex Colours",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Vertex Colour Mode index",
+                "values": [
+                    "colour",
+                    "AORM",
+                    "AO",
+                    "R",
+                    "M",
+                    "lightmap"
+                ],
+                "group": "Advanced Shader Parameters",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height Intensity",
+                "group": "Advanced Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Faster heightmapping",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Double Sided",
+                "group": "Advanced Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "IBL LUT",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Diffuse Irradiance",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Pre-filtered envmap",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Num mip levels",
+                "group": "Lighting",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Albedo",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "AORM",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Normal map",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Emission",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Height",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Lightmap",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Thin Film",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Diffuse Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Specular Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lightmap is RGBE",
+                "group": "Lighting",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Lightmap Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture RepeatX",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture RepeatY",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Texture Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Texture Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Textures",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Gamma encoded",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Shader",
+                "objType": "shader"
+            }
+        ]
+    },
+    "authorName": "amajesticseaflapflap",
+    "created": 1778073516553,
+    "credits": [
+        {
+            "title": "BabylonJS Shader Code",
+            "author": "Babylon.js",
+            "url": "https://github.com/BabylonJS/Babylon.js/blob/master/license.md",
+            "licence": "Apache License"
+        },
+        {
+            "title": "Filament Code",
+            "author": "google",
+            "url": "https://github.com/google/filament/blob/main/LICENSE",
+            "licence": "Apache License"
+        }
+    ],
+    "summary": "PBR/Physical Based Rendering Material for realistic materials",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [
+        "uwoj7R52yU8"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "R",
+                "text": "amount of red"
+            },
+            {
+                "name": "G",
+                "text": "amount of green"
+            },
+            {
+                "name": "B",
+                "text": "amount of blue"
+            },
+            {
+                "name": "A",
+                "text": "opacity of material. Use Alpha Mode to change how this value is used."
+            },
+            {
+                "name": "Roughness",
+                "text": "roughness of the surface"
+            },
+            {
+                "name": "Metalness",
+                "text": "blend F0 between 0.04 and albedo by this value"
+            },
+            {
+                "name": "Alpha Mode index",
+                "text": "material opacity mode"
+            },
+            {
+                "name": "Use Clear Coat",
+                "text": "add a thick dielectric layer to your material. This layer will ignore the normal map."
+            },
+            {
+                "name": "Clear Coat Roughness",
+                "text": "dielectric layer roughness amount"
+            },
+            {
+                "name": "Tonemapping index",
+                "text": "tone mapping modes"
+            },
+            {
+                "name": "Exposure",
+                "text": "adjust exposure used for tonemapping"
+            },
+            {
+                "name": "Disable geometric roughness",
+                "text": "don't automatically introduce roughness calculated from screen-space geometry density"
+            },
+            {
+                "name": "Use roughness from normal map",
+                "text": "calculate screen-space roughness from normals on top of geometric roughness"
+            },
+            {
+                "name": "Use Vertex Colours",
+                "text": "enable vertex colours then select their purpose"
+            },
+            {
+                "name": "Vertex Colour Mode index",
+                "text": "when using vertex colours, assign their purpose here"
+            },
+            {
+                "name": "Height Intensity",
+                "text": "influence of heighmap texture"
+            },
+            {
+                "name": "Faster heightmapping",
+                "text": "toggle to use less precise but more efficient method"
+            },
+            {
+                "name": "IBL LUT",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Diffuse Irradiance",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Pre-filtered envmap",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Num mip levels",
+                "text": "generally auto set by PBR Environment"
+            },
+            {
+                "name": "Albedo",
+                "text": "sRGB"
+            },
+            {
+                "name": "AORM",
+                "text": "linear bt.709, R: ambient occlusion, G: roughness, B: metalness"
+            },
+            {
+                "name": "Normal map",
+                "text": "linear bt.709, +Y, TS per vertex"
+            },
+            {
+                "name": "Height",
+                "text": "HeightMap input, uses the red channel for height information"
+            },
+            {
+                "name": "Lightmap",
+                "text": "Lightmap input"
+            },
+            {
+                "name": "Diffuse Intensity",
+                "text": "diffuse intensity when using PBR Environment"
+            },
+            {
+                "name": "Specular Intensity",
+                "text": "Specular intensity when using PBR Environment"
+            },
+            {
+                "name": "Lightmap is RGBE",
+                "text": "toggle if your lightmap is an RGBE format texture"
+            },
+            {
+                "name": "Lightmap Intensity",
+                "text": "intensity of lightmap texture"
+            }
+        ]
+    },
+    "exampleProjectId": "9z9kFK",
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}
