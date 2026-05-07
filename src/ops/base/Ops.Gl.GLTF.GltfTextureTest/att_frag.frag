@@ -18,8 +18,11 @@ void main()
 
     #ifdef HAS_TEXTURES
         vec2 uv=texCoord;
+
+    #ifdef CHAN1
+uv=texCoord1;
+#endif
         col=texture(texDiffuse,uv);
-        // col.b=1.0;
     #endif
 
     {{MODULE_COLOR}}

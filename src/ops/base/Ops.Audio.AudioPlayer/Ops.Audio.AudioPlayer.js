@@ -168,11 +168,11 @@ function load()
 
     audio.addEventListener("canplaythrough", canplaythrough, false);
 
-    const timeupdate = () =>
-    {
-        if (audio)timer.setTime(audio.currentTime);
-        // outCurrentTime.set(audio.currentTime);
-    };
+    // const timeupdate = () =>
+    // {
+    //     if (audio)timer.setTime(audio.currentTime);
+    //     // outCurrentTime.set(audio.currentTime);
+    // };
     audio.addEventListener("error", function (e)
     {
         console.log("error", e);
@@ -185,7 +185,7 @@ function load()
     {
         console.log("abort", event);
     };
-    audio.addEventListener("timeupdate", timeupdate);
+    // audio.addEventListener("timeupdate", timeupdate);
 
     audio.addEventListener("ended", function ()
     {

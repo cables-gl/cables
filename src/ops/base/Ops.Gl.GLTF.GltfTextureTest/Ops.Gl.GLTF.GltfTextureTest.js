@@ -67,6 +67,7 @@ function doRender()
         "texTransform": texTransUni,
     };
 
+    shader.toggleDefine("CHAN1", whichTex.get() == "Lightmap");
     if (whichTex.get() == "Albedo")shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
     else if (whichTex.get() == "Normal") shader.materialPropUniforms.normalTexture = diffuseTextureUniform;
     else if (whichTex.get() == "AO")shader.materialPropUniforms.occlusionTexture = diffuseTextureUniform;
@@ -95,6 +96,7 @@ function doRender()
 
 function updateDiffuseTexture()
 {
+
     if (diffuseTexture.get())
     {
 
