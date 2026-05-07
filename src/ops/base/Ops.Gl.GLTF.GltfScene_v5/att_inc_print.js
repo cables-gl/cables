@@ -205,6 +205,9 @@ function printMaterial(mat, idx)
     if (gltf.json.textures)
     {
         if (mat.normalTexture)texStr += "NORM " + getTextureSourceForIndex(gltf, mat.normalTexture.index) + ", ";
+        if (mat.emissiveTexture)texStr += "EMISS " + getTextureSourceForIndex(gltf, mat.emissiveTexture.index) + ", ";
+        if (mat.extensions && mat.extensions.CABLES_material && mat.extensions.CABLES_material.lightMapTexture)
+            texStr += "LIGHT " + getTextureSourceForIndex(gltf, mat.extensions.CABLES_material.lightMapTexture.index) + ", ";
         if (mat.occlusionTexture)texStr += "OCC " + getTextureSourceForIndex(gltf, mat.occlusionTexture.index) + ", ";
         if (mat.pbrMetallicRoughness)
         {

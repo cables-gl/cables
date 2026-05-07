@@ -1,9 +1,11 @@
 const render = op.inTrigger("render");
-const whichTex = op.inSwitch("Show tex", ["Albedo", "Normal", "AO", "MR"], "Albedo");
+
+const diffuseTexture = op.inTexture("texture");
+const whichTex = op.inSwitch("Show tex", ["Albedo", "Normal", "AO", "MR", "Lightmap"], "Albedo");
 const trigger = op.outTrigger("trigger");
 const shaderOut = op.outObject("shader", null, "shader");
 
-op.toWorkPortsNeedToBeLinked(render);
+op.toWorkPortsNeedToBeLinked(render, diffuseTexture);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
@@ -25,7 +27,6 @@ shaderOut.setRef(shader);
 
 render.onTriggered = doRender;
 
-const diffuseTexture = op.inTexture("texture");
 diffuseTexture.onChange = updateDiffuseTexture;
 
 let diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
@@ -56,9 +57,9 @@ function doRender()
         diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
         console.log("no texuniiiiiiiiiiiiii");
     }
+
     if (diffuseTextureUniform && diffuseTexture.get())
     {
-
         shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
     }
 
@@ -67,9 +68,11 @@ function doRender()
     };
 
     if (whichTex.get() == "Albedo")shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
-    if (whichTex.get() == "Normal") shader.materialPropUniforms.normalTexture = diffuseTextureUniform;
-    if (whichTex.get() == "AO")shader.materialPropUniforms.occlusionTexture = diffuseTextureUniform;
-    if (whichTex.get() == "MR")shader.materialPropUniforms.metalRoughnessTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "Normal") shader.materialPropUniforms.normalTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "AO")shader.materialPropUniforms.occlusionTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "MR")shader.materialPropUniforms.metalRoughnessTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "Lightmap")shader.materialPropUniforms.lightmapTexture = diffuseTextureUniform;
+    else console.log("value wrong");
 
     // "normalTexture": diffuseTextureUniform,
     // "metalRoughnessTexture": inRMUniform,
@@ -99,13 +102,13 @@ function updateDiffuseTexture()
     }
     else
     {
-        shader.removeUniform("texDiffuse");
-        shader.removeDefine("HAS_TEXTURE_DIFFUSE");
-        diffuseTextureUniform = null;
+        // shader.removeUniform("texDiffuse");
+        // shader.removeDefine("HAS_TEXTURE_DIFFUSE");
+        // diffuseTextureUniform = null;
     }
 }
 
 function updateDefines()
 {
-    shader.toggleDefine("USE_TEX_ALBEDO", whichTex.get() == "Albedo");
+    // shader.toggleDefine("USE_TEX_ALBEDO", whichTex.get() == "Albedo");
 }

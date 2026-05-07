@@ -1,6 +1,8 @@
 {{MODULES_HEAD}}
 
 IN vec2 texCoord;
+IN vec2 texCoord1;
+
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
@@ -17,7 +19,7 @@ void main()
     #ifdef HAS_TEXTURES
         vec2 uv=texCoord;
         col=texture(texDiffuse,uv);
-        // col.b=0.0;
+        // col.b=1.0;
     #endif
 
     {{MODULE_COLOR}}

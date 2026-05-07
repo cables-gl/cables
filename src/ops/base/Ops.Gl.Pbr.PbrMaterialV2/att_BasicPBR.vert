@@ -51,9 +51,6 @@ void main()
 
     #ifdef USE_LIGHTMAP
         texCoord1 = attrTexCoord1;
-        #ifndef FLIP_TEX
-          texCoord1.y=1.0-texCoord1.y;
-        #endif
     #endif
     texCoord = attrTexCoord;
 

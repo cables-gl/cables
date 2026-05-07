@@ -196,12 +196,13 @@ PBRShader.materialPropUniforms = {
     "diffuseTexture": inAlbedoUniform,
     "normalTexture": inNormalUniform,
     "metalRoughnessTexture": inRMUniform,
+    "lightmapTexture": inLightmapUniform,
+    "emissionTexture": inTexEmission,
     "occlusionTexture": inAOUniform,
     "diffuseColor": inDiffuseColor,
     "pbrMetalness": inMetalnessUniform,
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
-    "lightmapTexture": inLightmapUniform,
     "unlit": inUnlitUniform,
     "texTransform": uniTexTrans
 };

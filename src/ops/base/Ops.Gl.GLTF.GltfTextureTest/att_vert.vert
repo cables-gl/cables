@@ -2,7 +2,10 @@
 {{MODULES_HEAD}}
 
 OUT vec2 texCoord;
+OUT vec2 texCoord1;
 OUT vec2 texCoordOrig;
+IN vec2 attrTexCoord1;
+
 
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
@@ -25,6 +28,7 @@ void main()
     norm=attrVertNormal;
     texCoordOrig=attrTexCoord;
     texCoord=attrTexCoord;
+    texCoord1=attrTexCoord1;
     #ifdef HAS_TEXTURES
         texCoord.x=texCoord.x*texTransform.x+texTransform.z;
         texCoord.y=(1.0-texCoord.y)*texTransform.y+texTransform.w;
