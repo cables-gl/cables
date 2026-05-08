@@ -192,6 +192,7 @@ function load()
         // pause();
         outEnded.trigger();
         outPlaying.set(false);
+        timer.pause();
         // if (doLoop.get()) play();
     }, false);
 }
