@@ -40,6 +40,7 @@ const gltfNode = class
 
         this.extensions = node.extensions || [];
         if (this._node.scale && (this._node.scale[0] < 0 || this._node.scale[1] < 0 || this._node.scale[2] < 0)) this.warning = "NEG SCALE";
+
     }
 
     get skin()
@@ -99,6 +100,11 @@ const gltfNode = class
         if (this._node.hasOwnProperty("mesh"))
         {
             this.mesh = this._gltf.meshes[this._node.mesh];
+            if (this.extensions && this.extensions.EXT_mesh_gpu_instancing)
+            {
+                console.log("mesh instance!", this.extensions.EXT_mesh_gpu_instancing);
+
+            }
         }
 
         if (this._node.children)

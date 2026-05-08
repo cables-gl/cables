@@ -349,6 +349,12 @@ let gltfMesh = class
                 this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
             }
 
+            // if (this.geom && this.geom.morphTargets.length && !this.morphTargetsRenderMod)
+            // {
+            //     this.mesh.addVertexNumbers = true;
+            //     this.morphTargetsRenderMod = new GltfTargetsRenderer(this);
+            // }
+
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
             if (skinRenderer)useMat = false;
 

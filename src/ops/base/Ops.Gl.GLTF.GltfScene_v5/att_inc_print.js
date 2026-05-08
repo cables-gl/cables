@@ -72,12 +72,24 @@ function printNode(html, node, level)
     {
         let info = "";
 
-        if (node._node.translation)info += "Translate: " + formatVec(node._node.translation) + " | ";
-        if (node._node.rotation)info += "Rotation: " + formatVec(node._node.rotation) + " | ";
-        if (node._node.scale)info += "Scale: " + formatVec(node._node.scale) + " | ";
+        if (node._node.translation)info += "Translate: " + formatVec(node._node.translation) + "<br/>";
+        if (node._node.rotation)info += "Rotation: " + formatVec(node._node.rotation) + "<br/>";
+        if (node._node.scale)info += "Scale: " + formatVec(node._node.scale) + "<br/>";
 
         html += "<span class=\"icon icon-gizmo tt\" data-tt=\"" + info + "\"></span> &nbsp;";
     }
+
+    if (node.extensions && node.extensions.EXT_mesh_gpu_instancing)
+    {
+        let info = "instanced<br/>";
+        console.log(node.extensions);
+
+        let count = gltf.json.accessors[node.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION].count;
+        info += "instances:" + count;
+
+        html += "<span class=\"tt\" data-tt=\"" + info + "\">" + count + "x</span> &nbsp;";
+    }
+
     if (node.warning)html += node.warning;
 
     if (node._animRot || node._animScale || node._animTrans)
@@ -90,7 +102,7 @@ function printNode(html, node, level)
         html += "<span class=\"icon icon-clock tt\" data-tt=\"" + info + "\"></span>&nbsp;";
     }
 
-    if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
+    // if (!node._node.translation && !node._node.rotation && !node._node.scale && !node._animRot && !node._animScale && !node._animTrans) html += "-";
 
     html += "</td>";
     /// ///////has
