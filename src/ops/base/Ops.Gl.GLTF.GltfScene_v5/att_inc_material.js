@@ -50,13 +50,13 @@ let GltfMaterial = class
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_clearcoat"))
             console.log("todo: clearcoat", this.json.extensions.KHR_materials_clearcoat.clearcoatFactor);
 
-        if (this.json.extensions && this.json.extensions.hasOwnProperty("CABLES_material"))
+        if (this.json.extensions && this.json.extensions.hasOwnProperty("CABLES_materials_lightmap"))
         {
 
-            if (this.json.extensions.CABLES_material.lightMapTexture)
+            if (this.json.extensions.CABLES_materials_lightmap.lightMapTexture)
             {
-                const idx = getTextureSourceForIndex(gltf, this.json.extensions.CABLES_material.lightMapTexture.index);
-                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.extensions.CABLES_material.lightMapTexture);
+                const idx = getTextureSourceForIndex(gltf, this.json.extensions.CABLES_materials_lightmap.lightMapTexture.index);
+                gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.extensions.CABLES_materials_lightmap.lightMapTexture);
                 this._matTexLightmap = gltf.textures[idx];
             }
 
@@ -75,8 +75,7 @@ let GltfMaterial = class
 
                 this._matTexDiffuse = gltf.textures[idx];
 
-                if (this.json.pbrMetallicRoughness.baseColorTexture.extensions &&
-                 this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform)
+                if (this.json.pbrMetallicRoughness.baseColorTexture.extensions && this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform)
                 {
                     this.texTransform = [
                         this.json.pbrMetallicRoughness.baseColorTexture.extensions.KHR_texture_transform.scale[0],
@@ -99,6 +98,7 @@ let GltfMaterial = class
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.normalTexture);
             this._matTexNormal = gltf.textures[idx];
         }
+
         if (this.json.hasOwnProperty("emissiveTexture"))
         {
             const idx = getTextureSourceForIndex(gltf, this.json.emissiveTexture.index);
@@ -170,9 +170,18 @@ let GltfMaterial = class
 
             if (uniTexMr && uniTexMr.isValidLoc())
             {
-                uniPbrRoughness?.setValue(1);
-                uniPbrMetalness?.setValue(1);
-                currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, (this._matTexMetalRough || whiteTex).tex, cgl.gl.TEXTURE_2D);
+                if (this._matTexMetalRough)
+                {
+                    uniPbrRoughness?.setValue(1);
+                    uniPbrMetalness?.setValue(1);
+                    currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, this._matTexMetalRough.tex, cgl.gl.TEXTURE_2D);
+                }
+                else
+                {
+                    uniPbrRoughness?.setValue(this._matPbrRoughness);
+                    uniPbrMetalness?.setValue(this._matPbrMetalness);
+                    currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
+                }
             }
 
             if (uniTexOcc && uniTexOcc.isValidLoc())
@@ -187,7 +196,11 @@ let GltfMaterial = class
 
             if (uniTexNormal && uniTexNormal.isValidLoc())
             {
-                currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, (this._matTexNormal || neutralNormalTex).tex, cgl.gl.TEXTURE_2D);
+                if (this._matTexNormal)
+                    currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, this._matTexNormal.tex, cgl.gl.TEXTURE_2D);
+                else
+                    currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture, neutralNormalTex.tex, cgl.gl.TEXTURE_2D);
+                // currentShader.setUniformTexture(currentShader.materialPropUniforms.normalTexture,  neutralNormalTex.tex, cgl.gl.TEXTURE_2D);
             }
         }
     }
