@@ -1,13 +1,13 @@
-const GltfTargetsRenderer = class
+const GltfInstancer = class
 {
+    mesh = mesh;
+    tex = null;
+    numRowsPerTarget = 0;
+    numRowsPerGeom = 1;
+
     constructor(mesh)
     {
-        this.mesh = mesh;
-        this.tex = null;
-        this.numRowsPerTarget = 0;
-        this.numRowsPerGeom = 1;
 
-        this.makeTex(mesh.geom);
     }
 
     renderFinish(cgl)
@@ -61,8 +61,4 @@ const GltfTargetsRenderer = class
         if (this.identity)mat4.identity(cgl.mMatrix);
     }
 
-    makeTex(geom)
-    {
-
-    }
 };
