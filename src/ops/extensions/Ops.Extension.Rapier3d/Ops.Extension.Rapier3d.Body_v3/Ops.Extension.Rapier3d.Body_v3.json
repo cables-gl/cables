@@ -39,6 +39,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1777458421743
+        },
+        {
+            "message": "Overlay mode will show body translation dot and information",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778586307106
         }
     ],
     "layout": {
