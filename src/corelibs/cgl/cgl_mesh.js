@@ -953,6 +953,10 @@ class Mesh extends CgMesh
         }
         this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1));
         this.#cgl.profileData.count("meshDrawCalls");
+        if (this.#cgl.profileDrawCalls)
+        {
+            this.#cgl.profileDrawCalls.push({ "name": this._name, "prims": (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1) });
+        }
         // console.log("this", this._name);
 
         if (doQuery && queryStarted)

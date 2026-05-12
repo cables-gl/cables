@@ -1,0 +1,36 @@
+{
+    "id": "e8cff437-5df6-4207-b70a-4e485d614993",
+    "created": 1778600435384,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1778600435385
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 1,
+                "name": "Record one frame"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ]
+    }
+}
