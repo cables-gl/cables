@@ -142,7 +142,7 @@ exec.onTriggered = () =>
 
     if (CABLES.UI)
     {
-        gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get());
+        gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get(), op.uiAttribs.extendTitle);
     }
 
     if (world != lastWorld)

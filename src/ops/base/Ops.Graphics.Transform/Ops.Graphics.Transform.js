@@ -62,15 +62,14 @@ render.onTriggered = function ()
     {
         if (!posX.isLinked() && !posY.isLinked() && !posZ.isLinked())
         {
-            gui.setTransform(op.id, posX.get(), posY.get(), posZ.get());
+            gui.setTransform(op.id, posX.get(), posY.get(), posZ.get(), op.uiAttribs.comment);
 
             if (op.isCurrentUiOp())
-                gui.setTransformGizmo(
-                    {
-                        "posX": posX,
-                        "posY": posY,
-                        "posZ": posZ,
-                    });
+                gui.setTransformGizmo({
+                    "posX": posX,
+                    "posY": posY,
+                    "posZ": posZ,
+                });
         }
     }
 };

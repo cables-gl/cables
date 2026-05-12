@@ -1046,7 +1046,7 @@ export class Texture extends CgTexture
         {
             if (cgl.glVersion == 2)
             {
-            // cgl.enableExtension("OES_texture_half_float");
+                // cgl.enableExtension("OES_texture_half_float");
                 const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
 
                 if (!hasExt)
