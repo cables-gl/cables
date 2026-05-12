@@ -223,8 +223,6 @@ export class Texture extends CgTexture
     /**
      * set pixel size of texture
      * @function setSize
-     * @memberof Texture
-     * @instance
      * @param {Number} w width
      * @param {Number} h height
      */
@@ -1062,7 +1060,7 @@ export class Texture extends CgTexture
                 }
                 else
                 {
-                    floatDatatype = cgl.gl.HALF_FLOAT;
+                    o.floatDatatype = cgl.gl.HALF_FLOAT;
                 }
             }
         }
