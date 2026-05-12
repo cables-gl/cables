@@ -1060,7 +1060,7 @@ export class Texture extends CgTexture
                 }
                 else
                 {
-                    o.floatDatatype = cgl.gl.HALF_FLOAT;
+                    floatDatatype = cgl.gl.HALF_FLOAT;
                 }
             }
         }
