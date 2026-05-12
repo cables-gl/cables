@@ -251,6 +251,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1778567452038
+        },
+        {
+            "message": "Overlay transforms can now display text",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1778586124540
         }
     ],
     "isReleased": true,

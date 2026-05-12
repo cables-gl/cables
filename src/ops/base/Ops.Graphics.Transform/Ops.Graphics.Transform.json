@@ -83,6 +83,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1750154175508
+        },
+        {
+            "message": "Overlay dot will now dislplay the op comment",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778586199413
         }
     ],
     "coreLibs": [

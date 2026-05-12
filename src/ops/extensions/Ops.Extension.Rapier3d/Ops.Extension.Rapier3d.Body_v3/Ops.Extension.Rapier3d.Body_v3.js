@@ -141,9 +141,7 @@ exec.onTriggered = () =>
     else console.log("no eventQueue");
 
     if (CABLES.UI)
-    {
-        gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get(), op.uiAttribs.extendTitle);
-    }
+        gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get());
 
     if (world != lastWorld)
     {
