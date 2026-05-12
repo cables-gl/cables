@@ -229,16 +229,28 @@
             "date": 1776683759408
         },
         {
+            "message": "Ops can now be tagged, those tags can be queried by ops for meta patch functionality",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1777910486663
+        },
+        {
             "message": "Math ops now show variablenames when directly set to port",
             "type": "feature",
             "author": "pandur",
             "date": 1777964967619
         },
         {
-            "message": "Ops can now be tagged, those tags can be queried by ops for meta patch functionality",
-            "type": "feature",
+            "message": "Left Tabpanel/Editor can now be toggled using cmd/ctrl+b hotkey",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1777910486663
+            "date": 1778567347041
+        },
+        {
+            "message": "Port suggestions in opselect dialog now shows \"variable in port\" to directly get variable values into a port without creating a var get op",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778567452038
         }
     ],
     "isReleased": true,

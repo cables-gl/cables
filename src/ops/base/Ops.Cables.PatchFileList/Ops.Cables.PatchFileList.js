@@ -5,6 +5,8 @@ const
     inStrs = op.inMultiPort2("File", CABLES.OP_PORT_TYPE_STRING, { "display": "file", "hidePort": true, "hideParam": true }, 1),
     result = op.outArray("Filenames");
 
+let to = null;
+
 inCache.setUiAttribs({ "hidePort": true, "hideParam": true });
 inStrs.setUiAttribs({ "hidePort": true, "hideParam": true });
 
@@ -15,8 +17,13 @@ op.init = () =>
 
 op.on("fileChanged", update);
 
-inMeth.onChange = inFilterStr.onChange = update;
-update();
+inMeth.onChange = inFilterStr.onChange = updateSoon;
+updateSoon();
+function updateSoon()
+{
+    clearTimeout(to);
+    to = setTimeout(update, 100);
+}
 
 function update()
 {
@@ -24,7 +31,8 @@ function update()
     inFilterStr.setUiAttribs({ "greyout": inMeth.get() == "None" });
 
     if (CABLESUILOADER && CABLESUILOADER.talkerAPI)
-        CABLESUILOADER.talkerAPI.send(CABLESUILOADER.TalkerAPI.CMD_GET_FILE_LIST,
+        CABLESUILOADER.talkerAPI.send(
+            CABLESUILOADER.TalkerAPI.CMD_GET_FILE_LIST,
             { "source": "patch" }, (err, r) =>
             {
                 const arr = [];
@@ -52,5 +60,6 @@ function update()
 
                 inCache.setRef(arr);
                 result.setRef(arr);
-            });
+            }
+        );
 }

@@ -112,8 +112,8 @@ inTranslX.onChange =
 inActive.onChange = () =>
 {
     if (!inActive.get()) removeBodies();
+    setPosition = true;
     needsSetup = true;
-
     setupReason = "active toggled";
 };
 
@@ -139,6 +139,11 @@ exec.onTriggered = () =>
         // console.log("reg collision callback");
     }
     else console.log("no eventQueue");
+
+    if (CABLES.UI)
+    {
+        gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get());
+    }
 
     if (world != lastWorld)
     {
@@ -274,11 +279,13 @@ function updateUi()
     let useSizeY = false;
     let useSizeZ = false;
 
-    if (inCollShape.get() == "Capsule" || inCollShape.get() == "Cylinder")
+    if (inCollShape.get() == "Capsule" || inCollShape.get() == "Cuboid" || inCollShape.get() == "Cylinder")
     {
         useSizeX = true;
+        useSizeY = true;
         useSizeZ = true;
     }
+
     if (inCollShape.get() != "Ball" && inCollShape.get() != "Cylinder" && inCollShape.get() != "Capsule")
     {
         useRadius = false;
@@ -295,6 +302,7 @@ function updateUi()
 
     inCollRadius.setUiAttribs({ "greyout": !useRadius });
     inCollSizeX.setUiAttribs({ "greyout": !useSizeX });
+    inCollSizeY.setUiAttribs({ "greyout": !useSizeY });
     inCollSizeZ.setUiAttribs({ "greyout": !useSizeZ });
 }
 
@@ -385,14 +393,13 @@ function setup(world)
 
         if (rot && rot.length > i / 3 * 4)
         {
-            rigidBodyDesc.setRotation(
-                {
-                    "x": rot[(i / 3) * 4 + 0],
-                    "y": rot[(i / 3) * 4 + 1],
-                    "z": rot[(i / 3) * 4 + 2],
-                    "w": rot[(i / 3) * 4 + 3]
+            rigidBodyDesc.setRotation({
+                "x": rot[(i / 3) * 4 + 0],
+                "y": rot[(i / 3) * 4 + 1],
+                "z": rot[(i / 3) * 4 + 2],
+                "w": rot[(i / 3) * 4 + 3]
 
-                }, true);
+            }, true);
         }
 
         // if (scal && scal.length >= i)

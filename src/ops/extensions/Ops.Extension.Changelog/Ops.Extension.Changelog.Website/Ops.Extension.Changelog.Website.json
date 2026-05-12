@@ -106,6 +106,18 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1777897754058
+        },
+        {
+            "message": "Add summary field to teams, show in overview of public teams",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1778496511953
+        },
+        {
+            "message": "Properly show linebreaks in markdown of team description",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1778496551039
         }
     ],
     "isReleased": true
