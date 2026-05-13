@@ -331,7 +331,7 @@ let gltfMesh = class
                 }
             }
 
-            this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim });
+            this.mesh = op.patch.cg.createMesh(g, { "glPrimitive": glprim, "opId": op.id });
 
             if (freeMem.get() == "All")
             {
