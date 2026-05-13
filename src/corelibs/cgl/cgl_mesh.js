@@ -964,6 +964,7 @@ class Mesh extends CgMesh
         {
             this.#cgl.profileDrawCalls.push({
                 "name": this._name,
+                "shader": shader.name,
                 "verts": (this._bufVertexAttrib.numItems) * (this.#numInstances || 1),
                 "instances": this.#numInstances,
                 "opId": this.opId,

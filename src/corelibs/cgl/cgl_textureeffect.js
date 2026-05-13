@@ -44,6 +44,9 @@ export class TextureEffect
         return this._textureSource.height;
     }
 
+    /**
+     * @param {Texture} tex
+     */
     setSourceTexture(tex)
     {
         if (tex === null)
