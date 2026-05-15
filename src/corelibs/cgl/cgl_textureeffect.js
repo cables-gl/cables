@@ -1,37 +1,44 @@
 import { Logger } from "cables-shared-client";
 import { Texture } from "./cgl_texture.js";
 import { MESHES } from "./cgl_simplerect.js";
+import { CglContext } from "./cgl_state.js";
 
 export class TextureEffect
 {
+    #cgl = null;
+    _textureSource = null;
+    switched = false;
+    depth = false;
+    imgCompVer = 0;
+    aspectRatio = 1;
+    _textureTarget = null;
+
+    /**
+     * @param {CglContext} cgl
+     * @param {object} options
+     */
     constructor(cgl, options)
     {
-        this._cgl = cgl;
+        this.#cgl = cgl;
         this._log = new Logger("cgl_TextureEffect");
 
         if (!cgl.TextureEffectMesh) this.createMesh();
 
-        this._textureSource = null;
         this._options = options;
         this.name = options.name || "unknown";
 
-        this.imgCompVer = 0;
-        this.aspectRatio = 1;
-        this._textureTarget = null; // new CGL.Texture(this._cgl,opts);
-        this._frameBuf = this._cgl.gl.createFramebuffer();
-        this._frameBuf2 = this._cgl.gl.createFramebuffer();
-        this._renderbuffer = this._cgl.gl.createRenderbuffer();
-        this._renderbuffer2 = this._cgl.gl.createRenderbuffer();
-        this.switched = false;
-        this.depth = false;
+        this._frameBuf = this.#cgl.gl.createFramebuffer();
+        this._frameBuf2 = this.#cgl.gl.createFramebuffer();
+        this._renderbuffer = this.#cgl.gl.createRenderbuffer();
+        this._renderbuffer2 = this.#cgl.gl.createRenderbuffer();
     }
 
     dispose()
     {
-        if (this._renderbuffer) this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
-        if (this._frameBuf) this._cgl.gl.deleteFramebuffer(this._frameBuf);
-        if (this._renderbuffer2) this._cgl.gl.deleteRenderbuffer(this._renderbuffer2);
-        if (this._frameBuf2) this._cgl.gl.deleteFramebuffer(this._frameBuf2);
+        if (this._renderbuffer) this.#cgl.gl.deleteRenderbuffer(this._renderbuffer);
+        if (this._frameBuf) this.#cgl.gl.deleteFramebuffer(this._frameBuf);
+        if (this._renderbuffer2) this.#cgl.gl.deleteRenderbuffer(this._renderbuffer2);
+        if (this._frameBuf2) this.#cgl.gl.deleteFramebuffer(this._frameBuf2);
     }
 
     getWidth()
@@ -51,7 +58,7 @@ export class TextureEffect
     {
         if (tex === null)
         {
-            this._textureSource = new Texture(this._cgl);
+            this._textureSource = new Texture(this.#cgl);
             this._textureSource.setSize(16, 16);
         }
         else
@@ -65,42 +72,42 @@ export class TextureEffect
 
             this._textureTarget = this._textureSource.clone();
 
-            this._cgl.profileData.profileEffectBuffercreate++;
+            this.#cgl.profileData.count("effectBuffercreate");
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this._frameBuf);
 
-            this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+            this.#cgl.gl.bindRenderbuffer(this.#cgl.gl.RENDERBUFFER, this._renderbuffer);
 
             // if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._textureSource.width,this._textureSource.height);
             // else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._textureSource.width,this._textureSource.height);
 
-            if (this.depth) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width, this._textureSource.height);
-            this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
-            if (this.depth) this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer);
+            if (this.depth) this.#cgl.gl.renderbufferStorage(this.#cgl.gl.RENDERBUFFER, this.#cgl.gl.DEPTH_COMPONENT16, this._textureSource.width, this._textureSource.height);
+            this.#cgl.gl.framebufferTexture2D(this.#cgl.gl.FRAMEBUFFER, this.#cgl.gl.COLOR_ATTACHMENT0, this.#cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
+            if (this.depth) this.#cgl.gl.framebufferRenderbuffer(this.#cgl.gl.FRAMEBUFFER, this.#cgl.gl.DEPTH_ATTACHMENT, this.#cgl.gl.RENDERBUFFER, this._renderbuffer);
 
             // this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureTarget.tex, 0);
 
-            this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
-            this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+            this.#cgl.gl.bindTexture(this.#cgl.gl.TEXTURE_2D, null);
+            this.#cgl.gl.bindRenderbuffer(this.#cgl.gl.RENDERBUFFER, null);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, null);
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this._frameBuf2);
 
-            this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer2);
+            this.#cgl.gl.bindRenderbuffer(this.#cgl.gl.RENDERBUFFER, this._renderbuffer2);
 
             // if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA32F, this._textureSource.width,this._textureSource.height);
             // else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER,this._cgl.gl.RGBA8, this._textureSource.width,this._textureSource.height);
 
-            if (this.depth) this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._textureSource.width, this._textureSource.height);
-            this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureSource.tex, 0);
+            if (this.depth) this.#cgl.gl.renderbufferStorage(this.#cgl.gl.RENDERBUFFER, this.#cgl.gl.DEPTH_COMPONENT16, this._textureSource.width, this._textureSource.height);
+            this.#cgl.gl.framebufferTexture2D(this.#cgl.gl.FRAMEBUFFER, this.#cgl.gl.COLOR_ATTACHMENT0, this.#cgl.gl.TEXTURE_2D, this._textureSource.tex, 0);
 
-            if (this.depth) this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._renderbuffer2);
+            if (this.depth) this.#cgl.gl.framebufferRenderbuffer(this.#cgl.gl.FRAMEBUFFER, this.#cgl.gl.DEPTH_ATTACHMENT, this.#cgl.gl.RENDERBUFFER, this._renderbuffer2);
 
             // this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._textureSource.tex, 0);
 
-            this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
-            this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+            this.#cgl.gl.bindTexture(this.#cgl.gl.TEXTURE_2D, null);
+            this.#cgl.gl.bindRenderbuffer(this.#cgl.gl.RENDERBUFFER, null);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, null);
         }
 
         this.aspectRatio = this._textureSource.width / this._textureSource.height;
@@ -108,23 +115,23 @@ export class TextureEffect
 
     continueEffect()
     {
-        this._cgl.pushDepthTest(false);
-        this._cgl.pushModelMatrix();
-        this._cgl.pushPMatrix();
+        this.#cgl.pushDepthTest(false);
+        this.#cgl.pushModelMatrix();
+        this.#cgl.pushPMatrix();
         // todo why two pushs?
 
-        this._cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
+        this.#cgl.pushViewPort(0, 0, this.getCurrentTargetTexture().width, this.getCurrentTargetTexture().height);
 
-        mat4.perspective(this._cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0); // todo: why?
+        mat4.perspective(this.#cgl.pMatrix, 45, this.getCurrentTargetTexture().width / this.getCurrentTargetTexture().height, 0.1, 1100.0); // todo: why?
 
-        this._cgl.pushPMatrix();
-        mat4.identity(this._cgl.pMatrix);
+        this.#cgl.pushPMatrix();
+        mat4.identity(this.#cgl.pMatrix);
 
-        this._cgl.pushViewMatrix();
-        mat4.identity(this._cgl.vMatrix);
+        this.#cgl.pushViewMatrix();
+        mat4.identity(this.#cgl.vMatrix);
 
-        this._cgl.pushModelMatrix();
-        mat4.identity(this._cgl.mMatrix);
+        this.#cgl.pushModelMatrix();
+        mat4.identity(this.#cgl.mMatrix);
     }
 
     startEffect(bgTex)
@@ -148,15 +155,15 @@ export class TextureEffect
 
     endEffect()
     {
-        this._cgl.popDepthTest();
-        this._cgl.popModelMatrix();
+        this.#cgl.popDepthTest();
+        this.#cgl.popModelMatrix();
 
-        this._cgl.popPMatrix();
-        this._cgl.popModelMatrix();
-        this._cgl.popViewMatrix();
+        this.#cgl.popPMatrix();
+        this.#cgl.popModelMatrix();
+        this.#cgl.popViewMatrix();
 
-        this._cgl.popPMatrix();
-        this._cgl.popViewPort();
+        this.#cgl.popPMatrix();
+        this.#cgl.popViewPort();
     }
 
     bind()
@@ -169,13 +176,13 @@ export class TextureEffect
 
         if (!this.switched)
         {
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
-            this._cgl.pushGlFrameBuffer(this._frameBuf);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this._frameBuf);
+            this.#cgl.pushGlFrameBuffer(this._frameBuf);
         }
         else
         {
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf2);
-            this._cgl.pushGlFrameBuffer(this._frameBuf2);
+            this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this._frameBuf2);
+            this.#cgl.pushGlFrameBuffer(this._frameBuf2);
         }
     }
 
@@ -187,26 +194,26 @@ export class TextureEffect
             return;
         }
 
-        this._cgl.TextureEffectMesh.render(this._cgl.getShader());
+        this.#cgl.TextureEffectMesh.render(this.#cgl.getShader());
 
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
+        this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this.#cgl.popGlFrameBuffer());
 
-        this._cgl.profileData.count("textureEffect");
+        this.#cgl.profileData.count("textureEffect");
 
         if (this._textureTarget.filter == Texture.FILTER_MIPMAP)
         {
             if (!this.switched)
             {
-                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureTarget.tex);
+                this.#cgl.gl.bindTexture(this.#cgl.gl.TEXTURE_2D, this._textureTarget.tex);
                 this._textureTarget.updateMipMap();
             }
             else
             {
-                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureSource.tex);
+                this.#cgl.gl.bindTexture(this.#cgl.gl.TEXTURE_2D, this._textureSource.tex);
                 this._textureSource.updateMipMap();
             }
 
-            this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+            this.#cgl.gl.bindTexture(this.#cgl.gl.TEXTURE_2D, null);
         }
 
         this.switched = !this.switched;
@@ -231,13 +238,13 @@ export class TextureEffect
     {
         if (this._textureTarget) this._textureTarget.delete();
         if (this._textureSource) this._textureSource.delete();
-        this._cgl.gl.deleteRenderbuffer(this._renderbuffer);
-        this._cgl.gl.deleteFramebuffer(this._frameBuf);
+        this.#cgl.gl.deleteRenderbuffer(this._renderbuffer);
+        this.#cgl.gl.deleteFramebuffer(this._frameBuf);
     }
 
     createMesh()
     {
-        this._cgl.TextureEffectMesh = MESHES.getSimpleRect(this._cgl, "texEffectRect");
+        this.#cgl.TextureEffectMesh = MESHES.getSimpleRect(this.#cgl, "texEffectRect");
     }
 
     // ---------------------------------------------------------------------------------

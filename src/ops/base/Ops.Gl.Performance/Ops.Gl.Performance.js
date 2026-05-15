@@ -267,7 +267,7 @@ function updateText()
     if (op.patch.cgl.profileData.getCount("uniformGet") > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
     if (op.patch.cgl.profileData.getCount("textureResize") > 0)warn += "Texture resize! ";
     if (op.patch.cgl.profileData.getCount("profileFrameBuffercreate") > 0)warn += "Framebuffer create! ";
-    if (op.patch.cgl.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
+    if (op.patch.cgl.profileData.getCount("effectBuffercreate") > 0)warn += "Effectbuffer create! " + op.patch.cgl.profileData.profileEffectBuffercreate;
     if (op.patch.cgl.profileData.getCount("textureDelete") > 0)warn += "Texture delete! ";
     if (op.patch.cgl.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + op.patch.cgl.profileData.profileNonTypedAttribNames;
     if (op.patch.cgl.profileData.getCount("texturecreated") > 0)warn += "new texture created! ";
