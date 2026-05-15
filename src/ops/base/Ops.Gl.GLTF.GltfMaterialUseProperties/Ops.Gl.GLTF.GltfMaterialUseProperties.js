@@ -94,7 +94,7 @@ exec.onTriggered = () =>
 
     if (mat)
     {
-        outTexDiff.setRef(mat._matTexDiffuse.tex);
+        if (mat._matTexDiffuse)outTexDiff.setRef(mat._matTexDiffuse.tex);
         mat.bind(op.patch.cgl, cgl.getShader());
         // console.log("laaaaaaa");
     }

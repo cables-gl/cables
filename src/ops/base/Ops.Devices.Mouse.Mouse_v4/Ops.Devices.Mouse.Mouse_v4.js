@@ -8,7 +8,6 @@ const
     inEventType = op.inSwitch("Events", ["Pointer", "Touch", "Mouse"]),
     inPassive = op.inValueBool("Passive Events", false),
     inEle = op.inObject("Element", "element"),
-
     active = op.inValueBool("Active", true),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
@@ -187,6 +186,7 @@ function onClickRight(e)
 function onmouseclick(e)
 {
     if (!checkHovering(e)) return;
+    if (inEventType.get() == "Mouse" && e.pointerType == "touch") return;
     setCoords(e);
     outEvent.setRef(e);
     mouseClick.trigger();

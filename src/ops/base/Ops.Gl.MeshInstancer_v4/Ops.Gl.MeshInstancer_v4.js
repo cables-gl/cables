@@ -85,6 +85,11 @@ inRotMeth.onChange =
     {
         arrayChangedTrans = true;
         recalc = true;
+
+        const useQuats = inRotMeth.get() == "Quaternions";
+        let stride = 3;
+        if (useQuats)stride = 4;
+        inRot.setUiAttribs({ "stride": stride });
     };
 
 inBillboarding.onChange =
@@ -157,10 +162,6 @@ function setupArray()
     const useQuats = inRotMeth.get() == "Quaternions";
     const useEuler = inRotMeth.get() == "Euler";
     const useNormals = inRotMeth.get() == "Normals";
-
-    let stride = 3;
-    if (useQuats)stride = 4;
-    inRot.setUiAttribs({ "stride": stride });
 
     if (scales && scales.length != transforms.length) op.setUiError("lengthScales", "Scales array has wrong length");
     else op.setUiError("lengthScales", null);

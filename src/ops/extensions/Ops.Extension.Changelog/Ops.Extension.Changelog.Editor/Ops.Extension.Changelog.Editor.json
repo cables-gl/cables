@@ -257,6 +257,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1778586124540
+        },
+        {
+            "message": "Drawcall profiler: new view to see what drawcalls to webgl are currently executed",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1778682466195
+        },
+        {
+            "message": "Text editor appearance will be greyed out when not currently focussed",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778824257377
         }
     ],
     "isReleased": true,

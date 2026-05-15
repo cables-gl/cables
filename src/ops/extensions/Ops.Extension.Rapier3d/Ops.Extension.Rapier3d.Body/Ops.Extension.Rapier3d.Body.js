@@ -87,6 +87,7 @@ inTranslX.onChange =
         }
     };
 
+op.onInit =
 inActive.onChange = () =>
 {
     if (!inActive.get()) removeBodies();
@@ -278,14 +279,13 @@ function setup(world)
 
         if (rot && rot.length > i / 3 * 4)
         {
-            rigidBodyDesc.setRotation(
-                {
-                    "x": rot[(i / 3) * 4 + 0],
-                    "y": rot[(i / 3) * 4 + 1],
-                    "z": rot[(i / 3) * 4 + 2],
-                    "w": rot[(i / 3) * 4 + 3]
+            rigidBodyDesc.setRotation({
+                "x": rot[(i / 3) * 4 + 0],
+                "y": rot[(i / 3) * 4 + 1],
+                "z": rot[(i / 3) * 4 + 2],
+                "w": rot[(i / 3) * 4 + 3]
 
-                }, true);
+            }, true);
         }
 
         colliderDesc

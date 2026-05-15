@@ -14,7 +14,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Value"
+                "name": "Value",
+                "objType": "shader"
             }
         ],
         "portsOut": []
@@ -31,5 +32,6 @@
         "ports": []
     },
     "exampleProjectId": "0pVTp6",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

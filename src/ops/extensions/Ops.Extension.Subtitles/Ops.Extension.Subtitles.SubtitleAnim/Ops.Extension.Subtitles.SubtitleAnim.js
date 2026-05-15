@@ -50,6 +50,5 @@ inData.onChange = () =>
     {
         animVal.anim.clear();
         outAnim.setRef(null);
-        op.setUiError("invalid_data", "No SRT/WebVTT data given", 1);
     }
 };

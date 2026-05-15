@@ -96,10 +96,8 @@ function delayedReload(force = false)
 
 function showEmptyUrlWarning()
 {
-    if (!inUrl.get())
-        op.setUiError("nourl", "URL is empty", 1);
-    else
-        op.setUiError("nourl", null);
+    if (inAutoRequest.get() && !inUrl.get()) op.setUiError("nourl", "URL is empty", 1);
+    else op.setUiError("nourl", null);
 }
 
 function finishLoadingFail(loadingId, e)
@@ -147,10 +145,11 @@ function resetOutputs()
 
 function reload(addCachebuster, force = false)
 {
+    showEmptyUrlWarning();
+
     if (!inAutoRequest.get() && !force) return;
     if (inEmptyOutput.get()) resetOutputs();
 
-    showEmptyUrlWarning();
     if (!inUrl.get()) return resetOutputs();
 
     let loadingId = null;

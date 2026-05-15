@@ -112,6 +112,6 @@ req.onTriggered = function ()
 if (window.self !== window.top)
 {
     // outPermissions.set("iframe");
-    op.setUiError("iframe", "MotionSensor may not work in an iframe, open the patch without an iframe to get it to work", 1);
+    op.setUiError("iframe", "MotionSensor may not work in an iframe, open the patch without an iframe to get it to work", 0);
     op.warn("MotionSensor may not work in an iframe, open the patch without an iframe to get it to work");
 }

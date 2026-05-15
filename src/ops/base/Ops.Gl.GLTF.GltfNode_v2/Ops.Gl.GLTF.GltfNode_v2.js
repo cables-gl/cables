@@ -68,6 +68,9 @@ inExec.onTriggered = function ()
             }
         }
 
+        if (!found)op.setUiError("nf", "Node not found", 1);
+        else op.setUiError("nf", null);
+
         outFound.set(found);
     }
 
