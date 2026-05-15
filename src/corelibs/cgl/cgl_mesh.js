@@ -8,6 +8,7 @@ import { Shader } from "./cgl_shader.js";
 // import { uuid } from "../../core/utils.js";
 // import { uuid } from "../../core/utils.js";
 
+let queryExt = null;
 let globalQueryStartedTime = 0;
 let globalQueryStarted = null;
 const MESH = {};
@@ -83,7 +84,7 @@ class Mesh extends CgMesh
     #lastAttrUpdate = 0;
 
     memFreed = false;
-    #queryExt = null;
+    queryExt = null;
 
     /**
      * @param {CglContext} _cgl cgl
@@ -107,6 +108,7 @@ class Mesh extends CgMesh
         this.setGeom(__geom);
 
         this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
+        if (!queryExt && queryExt !== false) queryExt = this.#cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
     }
 
     get geom()
@@ -858,9 +860,9 @@ class Mesh extends CgMesh
 
         /* minimalcore:start */
         const doQuery = this.#cgl.profileData.doProfileGlQuery;
-        if (doQuery)
+        if (doQuery && queryExt)
         {
-            // let id = this._name + " - " + shader.getName() + " #" + shader.id;
+            let name = this._name + " - " + shader.getName() + " #" + shader.id;
             // if (this.#numInstances) id += " instanced " + this.#numInstances + "x";
 
             // let this.queryProfilerData = this.#cgl.profileData.glQueryData[id];
@@ -873,22 +875,21 @@ class Mesh extends CgMesh
 
             if (!this.queryProfilerData) this.queryProfilerData = { "num": 0 };
 
+            this.queryProfilerData.name = name;
             if (shader.opId) this.queryProfilerData.shaderOp = shader.opId;
             if (this.opId) this.queryProfilerData.meshOp = this.opId;
 
             this.#cgl.profileData.glQueryData[this.#id] = this.queryProfilerData;
 
-            if (!this.#queryExt && this.#queryExt !== false) this.#queryExt = this.#cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
-            if (this.#queryExt)
+            if (queryExt)
             {
 
                 if (!this.queryProfilerData.queryStarted && !globalQueryStarted)
                 {
                     this.queryProfilerData._drawQuery = this.#cgl.gl.createQuery();
-                    this.#cgl.gl.beginQuery(this.#queryExt.TIME_ELAPSED_EXT, this.queryProfilerData._drawQuery);
+                    this.#cgl.gl.beginQuery(queryExt.TIME_ELAPSED_EXT, this.queryProfilerData._drawQuery);
 
                     globalQueryStarted = this.queryProfilerData;
-
                     globalQueryStartedTime = performance.now();
 
                     this.queryProfilerData.queryStarted = true;
@@ -978,37 +979,40 @@ class Mesh extends CgMesh
 
         /* minimalcore:end */
 
-        if (doQuery && queryStarted)
+        if (doQuery)
         {
-            this.#cgl.gl.endQuery(this.#queryExt.TIME_ELAPSED_EXT);
-            queryStarted = false;
-        }
-        if (this.queryProfilerData && this.queryProfilerData._drawQuery && !queryStarted)
-        {
-            // console.log("~~~");
-            const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
-            const disjoint = this.#cgl.gl.getParameter(this.#queryExt.GPU_DISJOINT_EXT);
-            if (disjoint)console.log("disjoint");
-
-            if (available)
+            if (queryStarted)
             {
-                // console.log("available");
-                if (!disjoint)
+                this.#cgl.gl.endQuery(queryExt.TIME_ELAPSED_EXT);
+                queryStarted = false;
+            }
+            if (this.queryProfilerData && this.queryProfilerData._drawQuery)
+            {
+                // console.log("~~~");
+                const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
+                const disjoint = this.#cgl.gl.getParameter(queryExt.GPU_DISJOINT_EXT);
+                if (disjoint)console.log("disjoint");
+
+                if (available)
                 {
-                    const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
-                    const currentTimeGPU = elapsedNanos / 1000000;
+                // console.log("available");
+                    if (!disjoint)
+                    {
+                        const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
+                        const currentTimeGPU = elapsedNanos / 1000000;
 
-                    this.queryProfilerData._times = this.queryProfilerData._times || 0;
-                    this.queryProfilerData._times = currentTimeGPU;
-                    this.queryProfilerData._numcount = 1;
+                        this.queryProfilerData._times = this.queryProfilerData._times || 0;
+                        this.queryProfilerData._times = (this.queryProfilerData._times + currentTimeGPU) / 2;
+                        this.queryProfilerData._numcount = 1;
+                    }
+
+                    this.queryProfilerData.lastTime = performance.now();
+                    this.queryProfilerData._drawQuery = null;
+                    this.queryProfilerData.queryStarted = false;
+                    globalQueryStarted = false;
                 }
-
-                this.queryProfilerData._drawQuery = null;
-                this.queryProfilerData.queryStarted = false;
-                globalQueryStarted = false;
             }
         }
-
         this.#cgl.printError("mesh render " + this._name);
 
         this.unBind();
