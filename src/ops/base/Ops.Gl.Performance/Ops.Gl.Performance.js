@@ -500,7 +500,7 @@ function render()
             for (let i in glQueryData)
             {
                 count++;
-                if (glQueryData[i].time && (performance.now() - glQueryData[i].lastTime) < 1000)
+                if (glQueryData[i].time && (performance.now() - glQueryData[i].lastTime) < 3000)
                     currentTimeGPU += glQueryData[i].time;
             }
         }

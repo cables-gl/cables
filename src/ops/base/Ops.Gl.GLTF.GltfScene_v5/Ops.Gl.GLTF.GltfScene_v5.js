@@ -258,6 +258,7 @@ function updatetitle()
 
 function finishLoading()
 {
+    gltfLoadingError = false;
     if (!gltf)
     {
         finishedLoading = true;
@@ -738,11 +739,10 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib(
-        {
-            "subPatch": op.uiAttribs.subPatch,
-            "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
-        });
+    newOp.setUiAttrib({
+        "subPatch": op.uiAttribs.subPatch,
+        "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
+    });
 }
 
 op.exposeNode = function (name, type, options)

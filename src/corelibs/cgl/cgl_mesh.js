@@ -895,10 +895,8 @@ class Mesh extends CgMesh
                     this.queryProfilerData.queryStarted = true;
                     queryStarted = true;
                     this.queryProfilerData.startedTime = performance.now();
+                    this.queryProfilerData.frameNum = this.#cgl.patch.getFrameNum();
                 }
-
-                // if (this.queryProfilerData)console.log("since", performance.now() - this.queryProfilerData.startedTime);
-
             }
         }
 
@@ -946,6 +944,40 @@ class Mesh extends CgMesh
             }
         }
 
+        if (doQuery)
+        {
+            if (queryStarted)
+            {
+                this.#cgl.gl.endQuery(queryExt.TIME_ELAPSED_EXT);
+                this.#cgl.gl.flush();
+                queryStarted = false;
+            }
+            if (this.queryProfilerData && this.queryProfilerData._drawQuery && this.#cgl.patch.getFrameNum() > this.queryProfilerData.frameNum + 1)
+            {
+                const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
+                const disjoint = this.#cgl.gl.getParameter(queryExt.GPU_DISJOINT_EXT);
+                if (disjoint)console.log("disjoint");
+
+                if (available)
+                {
+                    if (!disjoint)
+                    {
+                        const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
+                        const currentTimeGPU = elapsedNanos / 1000000;
+
+                        this.queryProfilerData._times = this.queryProfilerData._times || 0;
+                        this.queryProfilerData._times = currentTimeGPU;
+                        this.queryProfilerData._numcount = 1;
+                    }
+
+                    this.queryProfilerData.lastTime = performance.now();
+                    this.queryProfilerData._drawQuery = null;
+                    this.queryProfilerData.queryStarted = false;
+                    globalQueryStarted = false;
+                }
+            }
+        }
+
         if (this.#cgl.debugOneFrame)
         {
             if (this.#cgl.gl.getError() != this.#cgl.gl.NO_ERROR)
@@ -978,41 +1010,6 @@ class Mesh extends CgMesh
         }
 
         /* minimalcore:end */
-
-        if (doQuery)
-        {
-            if (queryStarted)
-            {
-                this.#cgl.gl.endQuery(queryExt.TIME_ELAPSED_EXT);
-                queryStarted = false;
-            }
-            if (this.queryProfilerData && this.queryProfilerData._drawQuery)
-            {
-                // console.log("~~~");
-                const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
-                const disjoint = this.#cgl.gl.getParameter(queryExt.GPU_DISJOINT_EXT);
-                if (disjoint)console.log("disjoint");
-
-                if (available)
-                {
-                // console.log("available");
-                    if (!disjoint)
-                    {
-                        const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
-                        const currentTimeGPU = elapsedNanos / 1000000;
-
-                        this.queryProfilerData._times = this.queryProfilerData._times || 0;
-                        this.queryProfilerData._times = (this.queryProfilerData._times + currentTimeGPU) / 2;
-                        this.queryProfilerData._numcount = 1;
-                    }
-
-                    this.queryProfilerData.lastTime = performance.now();
-                    this.queryProfilerData._drawQuery = null;
-                    this.queryProfilerData.queryStarted = false;
-                    globalQueryStarted = false;
-                }
-            }
-        }
         this.#cgl.printError("mesh render " + this._name);
 
         this.unBind();
