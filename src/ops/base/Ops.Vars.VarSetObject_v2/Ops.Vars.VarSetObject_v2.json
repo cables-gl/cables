@@ -14,8 +14,7 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Value",
-                "objType": "shader"
+                "name": "Value"
             }
         ],
         "portsOut": []
