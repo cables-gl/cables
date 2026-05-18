@@ -275,6 +275,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1779090939254
+        },
+        {
+            "message": "Restoring a backup will restore ui attributes of patch (e.g. bookmarks)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779101630019
         }
     ],
     "isReleased": true,
