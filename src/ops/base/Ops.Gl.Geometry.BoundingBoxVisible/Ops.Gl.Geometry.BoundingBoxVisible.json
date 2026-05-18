@@ -4,17 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1594029555069
-        },
-        {
-            "message": "Ops.User.pandur.BoundingBoxVisible renamed to Ops.Gl.Geometry.BoundingBoxVisible",
-            "author": "pandur",
-            "date": 1594032913689
+            "date": 1594029555069,
+            "type": "new op"
         },
         {
             "message": "fixed bugs in calculation",
             "author": "pandur",
-            "date": 1643616786869
+            "date": 1643616786869,
+            "type": "bugfix"
+        },
+        {
+            "message": "Show an error if the object is not a bounding box",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778661941225
         }
     ],
     "authorName": "pandur",
@@ -77,5 +80,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

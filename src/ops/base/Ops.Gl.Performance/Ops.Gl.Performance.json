@@ -92,6 +92,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1768570596586
+        },
+        {
+            "message": "Much more realistic results for GPU timing numbers, in some cases they are still very wrong, probably blame webgl query timer or GPU driver....",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778835413046
         }
     ],
     "coreLibs": [

@@ -186,8 +186,10 @@ exec.onTriggered = () =>
     if (inBB.isLinked() && (!bb || !bb._center || !bb._max))
     {
         result.set(false);
+        op.setUiError("nobb", "not a boundingbox!");
         return;
     }
+    op.setUiError("nobb", null);
 
     if (inDraw.get())
     {

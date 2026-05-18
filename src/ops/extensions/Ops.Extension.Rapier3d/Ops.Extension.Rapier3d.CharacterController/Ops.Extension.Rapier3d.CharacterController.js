@@ -110,6 +110,8 @@ exec.onTriggered = () =>
     pos.y += correctedMovement.y;
     pos.z += correctedMovement.z;
 
+    if (CABLES.UI)
+        gui.setTransform(op.id, pos.x, pos.y, pos.z, op.uiAttribs.comment || "character");
     // console.log(correctedMovement)
 
     // outX.set(pos.x);
