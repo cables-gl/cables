@@ -73,6 +73,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1713181639578
+        },
+        {
+            "message": "Unsubscribe from channel on socket change",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1779111960086
         }
     ],
     "license": "MIT",
