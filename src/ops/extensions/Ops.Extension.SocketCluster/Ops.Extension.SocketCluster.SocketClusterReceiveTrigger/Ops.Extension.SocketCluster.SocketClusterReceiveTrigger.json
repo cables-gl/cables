@@ -73,6 +73,12 @@
             "message": "Ops.Net.SocketCluster.SocketClusterRecieveTrigger renamed to Ops.Extension.SocketCluster.SocketClusterRecieveTrigger",
             "author": "stephan",
             "date": 1671003660905
+        },
+        {
+            "message": "Unsubscribe from channel on socket change",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1779111952573
         }
     ],
     "license": "MIT",

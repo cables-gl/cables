@@ -269,6 +269,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1778824257377
+        },
+        {
+            "message": "Fix name and link to team for extensions in opselect",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1779090939254
+        },
+        {
+            "message": "Restoring a backup will restore ui attributes of patch (e.g. bookmarks)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779101630019
         }
     ],
     "isReleased": true,

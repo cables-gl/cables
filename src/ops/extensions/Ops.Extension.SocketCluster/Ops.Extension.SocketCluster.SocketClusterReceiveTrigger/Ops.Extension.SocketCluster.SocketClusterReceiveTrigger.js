@@ -6,14 +6,21 @@ const clientIdOut = op.outString("client id");
 const triggerNameOut = op.outString("Trigger name");
 const outTrigger = op.outTrigger("received");
 
+let channel = null;
+
 const init = () =>
 {
+    if (channel && channel.close)
+    {
+        channel.close();
+    }
+    channel = null;
     const socket = inSocket.get();
     if (socket)
     {
         (async () =>
         {
-            const channel = socket.subscribe(socket.channelName + "/triggers");
+            channel = socket.subscribe(socket.channelName + "/triggers");
             for await (const obj of channel)
             {
                 if (inReceiveOwn.get() || obj.clientId !== socket.clientId && obj.topic === inTopic.get())

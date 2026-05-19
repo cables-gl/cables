@@ -4,22 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1592407895084
+            "date": 1592407895084,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.GltfNode_v2 renamed to Ops.Gl.GLTF.GltfNode_v2",
+            "message": "Added switch to select between world space and model space",
+            "type": "feature",
             "author": "pandur",
-            "date": 1592409514095
-        },
-        {
-            "message": "cloned op from Ops.Gl.GLTF.GltfNode_v2",
-            "author": "pandur",
-            "date": 1637605603183
-        },
-        {
-            "message": "Ops.User.pandur.GltfNodeTransform renamed to Ops.Gl.GLTF.GltfNodeTransform_v2",
-            "author": "pandur",
-            "date": 1637605939207
+            "date": 1779106465801
         }
     ],
     "authorName": "pandur",
@@ -33,6 +25,15 @@
             {
                 "type": 5,
                 "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Space index",
+                "values": [
+                    "World",
+                    "Model"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 0,

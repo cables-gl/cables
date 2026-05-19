@@ -1,6 +1,7 @@
 const
     inExec = op.inTrigger("Render"),
     inNodeName = op.inString("Node Name"),
+    inSpace = op.inSwitch("Space", ["World", "Model"], "World"),
     next = op.outTrigger("Next"),
     inApply = op.inBool("Set Matrix", true),
     outFound = op.outBool("Found"),
@@ -12,6 +13,7 @@ let node = null;
 let currentSceneLoaded = null;
 const m = mat4.create();
 
+inSpace.onChange =
 inNodeName.onChange = function ()
 {
     node = null;
@@ -55,9 +57,11 @@ inExec.onTriggered = function ()
     {
         // node.transform(cgl, node._lastTimeTrans);
 
-        mat4.copy(m, node.modelMatAbs());
+        if (inSpace.get() == "World") mat4.copy(m, node.modelMatAbs());
+        else mat4.copy(m, node.mat);
 
-        mat4.multiply(cgl.mMatrix, cgl.mMatrix, m);
+        if (inApply.get())
+            mat4.multiply(cgl.mMatrix, cgl.mMatrix, m);
 
         outMat.setRef(m);
     }
