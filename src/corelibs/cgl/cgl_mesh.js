@@ -867,11 +867,7 @@ class Mesh extends CgMesh
 
             // let this.queryProfilerData = this.#cgl.profileData.glQueryData[id];
 
-            if (globalQueryStartedTime != 0 && performance.now() - globalQueryStartedTime > 1000)
-            {
-                console.log("reset gloablquery......");
-                globalQueryStarted = false;
-            }
+            if (globalQueryStartedTime != 0 && performance.now() - globalQueryStartedTime > 1000) globalQueryStarted = false;
 
             if (!this.queryProfilerData) this.queryProfilerData = { "num": 0 };
 

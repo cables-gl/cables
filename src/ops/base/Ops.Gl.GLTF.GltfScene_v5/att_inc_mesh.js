@@ -40,12 +40,16 @@ let gltfMesh = class
                 dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
                 accPos++;
             }
+            // const attribType = attrib.attribute_type(); // 4 = GENERIC
 
+            // if (attribType === decoderModule.GENERIC) {
             const dracoDecoder = window.DracoDecoder;
+
             dracoDecoder.decodeGeometry(dataBuff.buffer, (geometry) =>
             {
                 const geom = new CGL.Geometry("draco mesh " + name);
 
+                // console.log(geometry);
                 for (let i = 0; i < geometry.attributes.length; i++)
                 {
                     const attr = geometry.attributes[i];
@@ -71,7 +75,7 @@ let gltfMesh = class
                         }
                         geom.setAttribute("attrWeights", arr4, 4);
                     }
-                    else op.logWarn("unknown draco attrib", attr);
+                    else console.log("unknown draco attrib", attr);
                 }
 
                 geometry.attributes = null;
@@ -248,10 +252,39 @@ let gltfMesh = class
         }
         try
         {
+
             if (this.primitive == this.TRIANGLES)
             {
+
                 if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
+                else if (inCalcNormals.get() == "Mikkt")
+                {
+
+                    const geo = geom.copy();
+                    geo.unIndex(false, true);
+                    if (
+                        geo.vertices &&
+            geo.vertexNormals &&
+            geo.texCoords &&
+            (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
+              (geo.vertices.length / 3) == (geo.texCoords.length / 2)
+                    )
+                    {
+                        try
+                        {
+
+                            const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
+                            geo.tangents = a;
+
+                            // console.log(a);
+                        }
+                        catch (e) { console.log("mikkt error", e); }
+                    }
+                    else console.log("not all attribs for tang calc");
+                    geom = geo;
+                /// /
+                }
 
                 if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
                 {
@@ -285,9 +318,10 @@ let gltfMesh = class
                     }
                 }
 
-                if (geom.tangents.length === 0 || inCalcNormals.get() != "Never")
+                if (geom.tangents.length === 0 && inCalcNormals.get() != "Never")
                 {
                 // console.log("[gltf ]no tangents... calculating tangents...");
+
                     geom.calcTangentsBitangents();
                 }
             }

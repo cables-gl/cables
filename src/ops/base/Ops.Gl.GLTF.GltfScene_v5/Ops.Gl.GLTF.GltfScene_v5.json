@@ -95,6 +95,7 @@
                 "values": [
                     "Auto",
                     "Force Smooth",
+                    "Mikkt",
                     "Never"
                 ],
                 "subType": "integer"
@@ -341,7 +342,6 @@
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
-    "issues": "",
     "youtubeids": [
         "QNLw21hSweg"
     ],
@@ -361,8 +361,14 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "caniusequery": "",
     "exampleProjectId": "XmL8GY",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./mikktspace.js",
+            "type": "module",
+            "export": "MIKKTSPACE"
+        }
+    ]
 }
