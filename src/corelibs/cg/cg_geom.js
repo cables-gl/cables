@@ -389,7 +389,7 @@ export class Geometry
         for (let i in this._attributes) this.copyAttribute(i, geom);
 
         geom.morphTargets.length = this.morphTargets.length;
-        for (let i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i];
+        for (let i = 0; i < this.morphTargets.length; i++) geom.morphTargets[i] = this.morphTargets[i].copy();
 
         return geom;
     }
