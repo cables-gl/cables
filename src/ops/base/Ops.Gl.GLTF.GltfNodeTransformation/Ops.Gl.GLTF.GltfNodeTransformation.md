@@ -1,0 +1,1 @@
+This OP allows you to grab the transform (position) of a node from your GLTF scene hierarchy by name and outputs values that you can use to, for example, bind other objects to your scene - more geometry or perhaps a camera direction.
