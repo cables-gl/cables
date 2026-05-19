@@ -264,11 +264,12 @@ let gltfMesh = class
                     const geo = geom.copy();
                     geo.unIndex(false, true);
                     if (
-                        geo.vertices &&
-            geo.vertexNormals &&
-            geo.texCoords &&
-            (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
-              (geo.vertices.length / 3) == (geo.texCoords.length / 2)
+                        (!geo.morphTargets || geo.morthTargets.length == 0) &&
+                      geo.vertices &&
+          geo.vertexNormals &&
+          geo.texCoords &&
+          (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
+          (geo.vertices.length / 3) == (geo.texCoords.length / 2)
                     )
                     {
                         try
