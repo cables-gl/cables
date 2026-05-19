@@ -77,7 +77,7 @@ outClicked.onLinkChanged = () =>
 {
     op.setUiError("interactiveProblem", null);
     if (outClicked.isLinked() && !isInteractive())
-        op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
+        op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port", 0);
 };
 
 inAddDom.onChange = () =>
@@ -238,7 +238,7 @@ function onMouseClick(e)
 
 function isInteractive()
 {
-    return inInteractive.get() != "No Pointer Events";
+    return inInteractive.get() == "True";// != "No Pointer Events";
 }
 
 function updateInteractive()

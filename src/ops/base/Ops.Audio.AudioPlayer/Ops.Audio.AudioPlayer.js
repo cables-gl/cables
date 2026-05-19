@@ -92,6 +92,7 @@ function seek(goto)
     {
         goto = getWantedTime();
     }
+    console.log("seeki");
     timer.setTime(goto);
     audio.currentTime = goto;
     outCurrentTime.set(audio.currentTime);
@@ -179,6 +180,7 @@ function load()
     });
     audio.onerror = (event) =>
     {
+        console.log(fileName.get(), op.id);
         console.log("onerror", event);
     };
     audio.abort = (event) =>

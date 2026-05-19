@@ -260,31 +260,31 @@ let gltfMesh = class
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
                 else if (inCalcNormals.get() == "Mikkt")
                 {
-
                     const geo = geom.copy();
                     geo.unIndex(false, true);
                     if (
-                        (!geo.morphTargets || geo.morthTargets.length == 0) &&
-                      geo.vertices &&
-          geo.vertexNormals &&
-          geo.texCoords &&
-          (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
-          (geo.vertices.length / 3) == (geo.texCoords.length / 2)
+                        geo.vertices &&
+                        geo.vertexNormals &&
+                        geo.texCoords &&
+                        (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
+                        (geo.vertices.length / 3) == (geo.texCoords.length / 2)// &&
+                        // (geo.morphTargets.length == 0)
                     )
                     {
+
+                        // for (let i = 0; i < geo.morphTargets.length; i ++) geo.morphTargets[i].unIndex(false,true);
+                        console.log("geo", geo.name, geo.morphTargets.length);
                         try
                         {
-
                             const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
+                            for (let i = 0; i < a.length; i += 4) a[i + 3] *= -1;
                             geo.tangents = a;
-
-                            // console.log(a);
                         }
                         catch (e) { console.log("mikkt error", e); }
+
+                        geom = geo;
                     }
                     else console.log("not all attribs for tang calc");
-                    geom = geo;
-                /// /
                 }
 
                 if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)
@@ -321,8 +321,6 @@ let gltfMesh = class
 
                 if (geom.tangents.length === 0 && inCalcNormals.get() != "Never")
                 {
-                // console.log("[gltf ]no tangents... calculating tangents...");
-
                     geom.calcTangentsBitangents();
                 }
             }

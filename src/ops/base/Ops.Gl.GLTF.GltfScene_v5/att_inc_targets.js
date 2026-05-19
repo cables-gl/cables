@@ -102,8 +102,6 @@ const GltfTargetsRenderer = class
 
         const pixels = new Float32Array(w * h * 4);
         let row = 0;
-        console.log("numRowsPerGeom", this.numRowsPerGeom, w, h);
-        console.log("numRowsPerTarget", this.numRowsPerTarget);
 
         for (let i = 0; i < geom.morphTargets.length; i++)
         {
