@@ -255,6 +255,7 @@ let gltfMesh = class
 
             if (this.primitive == this.TRIANGLES)
             {
+                if (!window.MIKKTSPACE)console.log("GLTF mikktspace not loaded");
 
                 if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
@@ -264,6 +265,7 @@ let gltfMesh = class
                     geo.name = geom.name;
                     geo.unIndex(false, true);
                     if (
+                        window.MIKKTSPACE &&
                         geo.vertices &&
                         geo.vertexNormals &&
                         geo.texCoords &&
