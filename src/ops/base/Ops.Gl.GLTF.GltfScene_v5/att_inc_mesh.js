@@ -269,12 +269,8 @@ let gltfMesh = class
                         geo.texCoords &&
                         (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
                         (geo.vertices.length / 3) == (geo.texCoords.length / 2)// &&
-                        // (geo.morphTargets.length == 0)
                     )
                     {
-
-                        // for (let i = 0; i < geo.morphTargets.length; i ++) geo.morphTargets[i].unIndex(false,true);
-                        console.log("geo", geo.name, geo.morphTargets.length);
                         try
                         {
                             const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
