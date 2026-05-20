@@ -1,4 +1,6 @@
 const inOps = op.inArray("Ops"),
+    inActive = op.inBool("Active", true),
+    inMinOps = op.inInt("Min Num Ops", 0),
     outProgress = op.outNumber("Progress"),
     outLoading = op.outBoolNum("Loading");
 
@@ -10,13 +12,19 @@ op.patch.loading.on("addAssetTask", updateStatusSoon);
 let soon = null;
 updateStatusSoon();
 
+inMinOps.onChange = updateStatus;
+
 function updateStatusSoon()
 {
-    soon = CABLES.idleCallbackSoon(soon, updateStatus);
+    if (inActive.get())
+        soon = CABLES.idleCallbackSoon(soon, updateStatus);
 }
 
 function updateStatus()
 {
+
+    if (!inActive.get()) return;
+
     const ops = inOps.get() || [];
     const jobs = op.patch.loading.getList();
 
@@ -36,8 +44,18 @@ function updateStatus()
                 }
             }
         }
-        outProgress.set(1 - (opsInLoading / ops.length));
-        outLoading.set(opsInLoading > 0);
+
+        if (opsInLoading > inMinOps.get())
+        {
+            outProgress.set(1 - (opsInLoading / ops.length));
+            outLoading.set(opsInLoading > 0);
+        }
+        else
+        {
+
+            outProgress.set(1);
+            outLoading.set(false);
+        }
     }
     else
     {

@@ -149,6 +149,7 @@ function realReload(nocache)
                 if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
                 op.checkMainloopExists();
+
             }, {
                 "anisotropic": cgl_aniso,
                 "wrap": cgl_wrap,

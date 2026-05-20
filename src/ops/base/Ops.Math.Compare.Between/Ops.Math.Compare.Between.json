@@ -24,7 +24,7 @@
             {
                 "type": 0,
                 "name": "result",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
@@ -42,5 +42,6 @@
         ]
     },
     "exampleProjectId": "pixllg",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

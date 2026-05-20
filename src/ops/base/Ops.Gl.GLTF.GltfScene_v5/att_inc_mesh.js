@@ -261,6 +261,7 @@ let gltfMesh = class
                 else if (inCalcNormals.get() == "Mikkt")
                 {
                     const geo = geom.copy();
+                    geo.name = geom.name;
                     geo.unIndex(false, true);
                     if (
                         geo.vertices &&
