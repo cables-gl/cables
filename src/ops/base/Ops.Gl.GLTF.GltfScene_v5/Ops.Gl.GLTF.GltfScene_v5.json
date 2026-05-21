@@ -339,6 +339,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1777562207603
+        },
+        {
+            "message": "Tangents and bitangents are now calculated using the mikktspace algorithm, leading to correct looking normal maps and lighting",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1779290465748
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

@@ -281,6 +281,12 @@
             "type": "feature",
             "author": "stephan",
             "date": 1779101630019
+        },
+        {
+            "message": "Optimize performance spikes when selecting huge amounts of ops",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1779290388588
         }
     ],
     "isReleased": true,
