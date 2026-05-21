@@ -45,6 +45,7 @@ exec.onTriggered = () =>
         const name = inMatName.get();
 
         if (mats)
+        {
             for (let i = 0; i < mats.length; i++)
             {
                 let matches = false;
@@ -59,34 +60,13 @@ exec.onTriggered = () =>
                     mat = mats[i];
 
                     matIdx = i;
-                    console.log("mat", mats[i]);
                     outObj.setRef(mat.json);
 
                     outFound.set(true);
                     break;
                 }
             }
-        //     {
-        //         let matches = false;
-
-        //         if (inNameMatch.get() == "exact")
-        //             matches = cgl.tempData.currentScene.meshes[i].name == name34;
-        //         else
-        //             matches = cgl.tempData.currentScene.meshes[i].name.startsWith(name);
-
-        //         if (matches)
-        //         {
-        //             numMatches++;
-        //             mesh = cgl.tempData.currentScene.meshes[i];
-
-        //             const idx = Math.abs(inSubmesh.get());
-        //             if (mesh.meshes[idx] && mesh.meshes[idx].geom)
-        //             {
-        //                 outFound.set(true);
-        //                 outGeom.setRef(mesh.meshes[idx].geom);
-        //             }
-        //         }
-        //     }
+        }
 
         if (!outFound.get())op.setUiError("notfound", "material not found", 1);
         else op.setUiError("notfound", null);

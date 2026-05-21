@@ -88,11 +88,7 @@ function rewind()
 function seek(goto)
 {
     if (!audio) return;
-    if (!goto)
-    {
-        goto = getWantedTime();
-    }
-    console.log("seeki");
+    if (!goto) goto = getWantedTime();
     timer.setTime(goto);
     audio.currentTime = goto;
     outCurrentTime.set(audio.currentTime);
@@ -159,7 +155,7 @@ function load()
 
     outEle.set(audio);
 
-    var canplaythrough = () =>
+    let canplaythrough = () =>
     {
         if (audio) outDuration.set(audio.duration);
         if (inPlay.get()) play();

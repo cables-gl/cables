@@ -225,7 +225,7 @@ function loadAnims(gltf)
                 else if (accOut.type === "SCALAR")
                 {
                     numComps = bufferOut.length / bufferIn.length; // is this really the way to find out ? cant find any other way,except number of morph targets, but not really connected...
-                    console.log("numcomps scalar", numComps);
+                    if (numComps != 1)console.log("numcomps scalar", numComps);
                 }
                 else op.log("[] UNKNOWN accOut.type", accOut.type);
 

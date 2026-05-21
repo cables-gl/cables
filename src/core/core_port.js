@@ -884,13 +884,11 @@ export class Port extends Events
 
                 this.set(this._variableIn.getValue());
                 this.forceChange();
-                // this.setValue(this._variableIn.getValue());
-                console.log("text", this._variableIn.getValue());
             }
+
             this.#useVariableName = varName;
             attr.useVariable = true;
             attr.variableName = this.#useVariableName;
-
         }
         else
         {
