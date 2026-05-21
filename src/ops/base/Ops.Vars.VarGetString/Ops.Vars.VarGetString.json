@@ -15,9 +15,10 @@
     "authorName": "pandur",
     "created": 1556107994879,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Value"
             }
         ]
@@ -43,5 +44,6 @@
         "sUR6b0zvuSY"
     ],
     "exampleProjectId": "W14clJ",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

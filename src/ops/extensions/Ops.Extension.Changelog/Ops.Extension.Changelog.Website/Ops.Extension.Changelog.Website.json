@@ -118,6 +118,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1778496551039
+        },
+        {
+            "message": "Show op creation date and time on oppage",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1779375261080
         }
     ],
     "isReleased": true

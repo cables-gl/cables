@@ -287,6 +287,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1779290388588
+        },
+        {
+            "message": "Prevent creating ops with illegal names",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1779375286640
         }
     ],
     "isReleased": true,

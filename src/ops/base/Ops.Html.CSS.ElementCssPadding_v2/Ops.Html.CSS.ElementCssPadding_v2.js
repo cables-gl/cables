@@ -17,6 +17,8 @@ inEle.onChange =
     inPadLeft.onChange =
         update;
 
+let to = null;
+
 op.onDelete = remove;
 
 function remove()
@@ -42,7 +44,8 @@ function update()
     }
     else
     {
-        setTimeout(update, 50);
+        clearTimeout(to);
+        to = setTimeout(update, 50);
     }
 
     outEle.setRef(ele);

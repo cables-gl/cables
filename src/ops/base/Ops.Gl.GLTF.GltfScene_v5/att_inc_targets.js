@@ -66,7 +66,7 @@ const GltfTargetsRenderer = class
         if (!cgl.gl) return;
         const gl = cgl.gl;
         // const maxSize = 1000;
-        const maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+        const maxSize = Math.min(2048, gl.getParameter(gl.MAX_TEXTURE_SIZE));
         if (!geom.morphTargets || !geom.morphTargets.length) return;
 
         let w = geom.morphTargets[0].vertices.length / 3;
