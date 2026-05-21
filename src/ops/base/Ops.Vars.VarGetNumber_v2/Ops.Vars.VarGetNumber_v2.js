@@ -3,7 +3,7 @@ op.varName = op.inValueSelect("Variable", [], "", true);
 
 new CABLES.VarGetOpWrapper(op, "number", op.varName, val);
 
-const minimize = op.inTriggerButton("Minimize");
+const minimize = op.inTriggerButton("Assign to port");
 minimize.setUiAttribs({ "hidePort": true });
 minimize.onTriggered = () =>
 {

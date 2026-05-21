@@ -25,5 +25,13 @@
     },
     "exampleProjectId": "1tfFT6",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Add button to directly assign the used variable to the connected port",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1779349967206
+        }
+    ]
 }
