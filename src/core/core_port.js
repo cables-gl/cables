@@ -448,8 +448,8 @@ export class Port extends Events
             this.#oldAnimVal = this.value;
             this.forceChange();
         }
-        this.#oldAnimVal = this.value;
 
+        this.#oldAnimVal = this.value;
     }
 
     forceChange()
@@ -850,9 +850,9 @@ export class Port extends Events
     }
 
     /**
-     * @param {String} v
+     * @param {String} varName
      */
-    setVariable(v)
+    setVariable(varName)
     {
         this.setAnimated(false);
         const attr = { "useVariable": false };
@@ -863,9 +863,9 @@ export class Port extends Events
             this._variableIn = null;
         }
 
-        if (v)
+        if (varName)
         {
-            this._variableIn = this.#op.patch.getVar(v);
+            this._variableIn = this.#op.patch.getVar(varName);
 
             if (!this._variableIn)
             {
@@ -883,10 +883,14 @@ export class Port extends Events
                 }
 
                 this.set(this._variableIn.getValue());
+                this.forceChange();
+                // this.setValue(this._variableIn.getValue());
+                console.log("text", this._variableIn.getValue());
             }
-            this.#useVariableName = v;
+            this.#useVariableName = varName;
             attr.useVariable = true;
             attr.variableName = this.#useVariableName;
+
         }
         else
         {
@@ -895,7 +899,7 @@ export class Port extends Events
         }
 
         this.setUiAttribs(attr);
-        this.#op.patch.emitEvent("portSetVariable", this.#op, this, v);
+        this.#op.patch.emitEvent("portSetVariable", this.#op, this, varName);
     }
 
     /**
