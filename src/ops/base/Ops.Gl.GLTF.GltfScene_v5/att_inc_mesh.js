@@ -261,6 +261,17 @@ let gltfMesh = class
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
                 else if (inCalcNormals.get() == "Mikkt")
                 {
+
+                    if (geom.texCoords.length == 0)
+                    {
+                        geom.texCoords = new Float32Array(geom.vertexNormals.length / 3 * 2);
+                        for (let i = 0; i < geom.vertexNormals.length; i += 3)
+                        {
+                            geom.texCoords[i / 3 * 2] = geom.vertexNormals[i + 0];
+                            geom.texCoords[i / 3 * 2 + 1] = geom.vertexNormals[i + 1];
+                        }
+                    }
+
                     const geo = geom.copy();
                     geo.name = geom.name;
                     geo.unIndex(false, true);
