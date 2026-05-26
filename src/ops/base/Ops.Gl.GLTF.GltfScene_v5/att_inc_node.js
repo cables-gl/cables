@@ -140,8 +140,7 @@ const gltfNode = class
 
             if (bounds.changed)
             {
-                boundingPoints.push(
-                    bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+                boundingPoints.push(bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
             }
         }
 
