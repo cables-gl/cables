@@ -6,7 +6,8 @@ import { Op } from "./core_op.js";
 /**
  * @typedef LoadingTask
  * @property {Op} [op]
- * @property {String} [id]
+ * @property {string} [id]
+ * @property {string} [name]
  * @property {string} [type]
  */
 
@@ -49,11 +50,11 @@ export class LoadingStatus extends Events
      */
     log(str, loadingTask)
     {
-        let lstr = "[load] " + str;
+        let lstr = "[load] " + str + " " + loadingTask.name;
 
         if (loadingTask.op)
         {
-            lstr += "op:" + loadingTask.op.name;
+            lstr += " op:" + loadingTask.op.name;
             if (loadingTask.op.tags) " (tags " + loadingTask.op.tags + ")";
         }
 
@@ -232,6 +233,7 @@ export class LoadingStatus extends Events
 
         if (op)op.setUiAttrib({ "loading": true });
 
+        /** @type {LoadingTask} */
         this._loadingAssets[id] = {
             "id": id,
             "op": op,
