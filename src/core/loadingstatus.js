@@ -16,8 +16,12 @@ import { Op } from "./core_op.js";
 export class LoadingStatus extends Events
 {
 
+    /** @type {Function[]} */
     _cbFinished = [];
+
+    /** @type {Function[]} */
     _assetTasks = [];
+
     _percent = 0;
     _count = 0;
     _countFinished = 0;
@@ -37,7 +41,23 @@ export class LoadingStatus extends Events
         super();
         this._log = new Logger("LoadingStatus");
         this._patch = patch;
+    }
 
+    /**
+     * @param {string} str
+     * @param {LoadingTask} loadingTask
+     */
+    log(str, loadingTask)
+    {
+        let lstr = "[load] " + str;
+
+        if (loadingTask.op)
+        {
+            lstr += "op:" + loadingTask.op.name;
+            if (loadingTask.op.tags) " (tags " + loadingTask.op.tags + ")";
+        }
+
+        console.log(lstr);
     }
 
     /**
@@ -146,11 +166,11 @@ export class LoadingStatus extends Events
         if (l)
         {
             if (l.finished) this._log.warn("loading job was already finished", l);
-
             if (l.op) l.op.setUiAttribs({ "loading": false });
             l.finished = true;
             l.timeEnd = Date.now();
         }
+        this.log("finished", l);
 
         this.checkStatus();
         this.emitEvent("finishedTask");
@@ -222,6 +242,7 @@ export class LoadingStatus extends Events
             "order": this._order,
         };
         this._order++;
+        this.log("start loading", this._loadingAssets[id]);
 
         this.emitEvent("startTask");
 

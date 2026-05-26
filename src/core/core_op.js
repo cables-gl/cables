@@ -402,7 +402,6 @@ export class Op extends Events
      */
     outBool(name, v)
     {
-        console.log("deprecated op.outBool", this.name);
         // old: use outBoolNum
         const p = this.addOutPort(
             this.newPort(this, name, Port.TYPE_VALUE, {
