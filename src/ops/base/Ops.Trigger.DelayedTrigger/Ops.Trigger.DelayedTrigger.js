@@ -3,7 +3,7 @@ const
     delay = op.inValueFloat("delay", 1),
     cancel = op.inTriggerButton("Cancel"),
     next = op.outTrigger("next"),
-    outDelaying = op.outBool("Delaying");
+    outDelaying = op.outBoolNum("Delaying");
 
 let lastTimeout = null;
 
@@ -25,5 +25,6 @@ exe.onTriggered = function ()
             lastTimeout = null;
             next.trigger();
         },
-        delay.get() * 1000);
+        delay.get() * 1000
+    );
 };

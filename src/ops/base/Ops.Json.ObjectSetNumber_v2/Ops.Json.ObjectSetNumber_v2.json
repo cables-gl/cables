@@ -6,6 +6,12 @@
             "author": "pandur",
             "date": 1559301644607,
             "type": "new"
+        },
+        {
+            "message": "handle non numeric input values",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1779780558717
         }
     ],
     "authorName": "pandur",

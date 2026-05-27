@@ -559,6 +559,7 @@ function parseGltf(arrayBuffer)
 
     if (gltf.json.textures)
     {
+
         for (i = 0; i < gltf.json.textures.length; i++)
             if (!gltf.json.textures[i].hasOwnProperty("source") && gltf.json.textures[i].extensions && gltf.json.textures[i].extensions.EXT_texture_webp)
                 gltf.json.textures[i].source = gltf.json.textures[i].extensions.EXT_texture_webp.source;

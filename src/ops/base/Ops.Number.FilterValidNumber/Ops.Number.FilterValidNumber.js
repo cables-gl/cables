@@ -4,7 +4,7 @@ const
     inSmaller = op.inBool("Invalid when <0", false),
     inInfinity = op.inBool("Invalid when Infinity", false),
     outNum = op.outNumber("Last Valid Number"),
-    outValid = op.outBool("Is Valid");
+    outValid = op.outBoolNum("Is Valid");
 
 inZero.onChange =
 inSmaller.onChange =

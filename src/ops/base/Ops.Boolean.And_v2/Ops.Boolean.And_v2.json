@@ -22,13 +22,19 @@
             {
                 "type": 0,
                 "name": "Booleans_0",
-                "longPort": 2,
+                "longPort": 3,
                 "group": "Booleans",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Booleans_1",
+                "group": "Booleans",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Booleans_2",
                 "uititle": "add port",
                 "group": "Booleans",
                 "subType": "boolean"
@@ -38,7 +44,7 @@
             {
                 "type": 0,
                 "name": "Result",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

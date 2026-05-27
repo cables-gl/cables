@@ -1,7 +1,7 @@
 const routeIn = op.inString("Route");
 const parsedOut = op.outObject("Values", {});
 const changedOut = op.outTrigger("Changed");
-const outMatching = op.outBool("Matching");
+const outMatching = op.outBoolNum("Matching");
 
 let lastHref = null;
 let hashChangeListener = null;

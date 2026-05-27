@@ -11,7 +11,7 @@ const
 
     next = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry", null, "geometry"),
-    outFound = op.outBool("Found");
+    outFound = op.outBoolNum("Found");
 const cgl = op.patch.cgl;
 
 let node = null;

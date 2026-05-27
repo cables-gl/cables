@@ -9,7 +9,7 @@ const
     inLength = op.inFloat("Length", 1),
 
     next = op.outTrigger("Next"),
-    result = op.outBool("Visible"),
+    result = op.outBoolNum("Visible"),
 
     cgl = op.patch.cgl,
     trans = vec3.create(),

@@ -12,7 +12,7 @@ const
     inRewind = op.inTriggerButton("Rewind"),
     inEnabled = op.inBool("Active", true),
 
-    outComplete = op.outBool("Completed", false),
+    outComplete = op.outBoolNum("Completed", false),
     outProgress = op.outNumber("Progress"),
     outTotalFrames = op.outNumber("Total Frames");
 

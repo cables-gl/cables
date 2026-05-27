@@ -10,7 +10,7 @@ const
     width = op.outNumber("Width"),
     height = op.outNumber("Height"),
     type = op.outString("Type"),
-    outFound = op.outBool("Found");
+    outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
 let tex = null;

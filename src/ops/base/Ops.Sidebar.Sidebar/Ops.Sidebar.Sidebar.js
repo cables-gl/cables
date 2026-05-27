@@ -31,7 +31,7 @@ let doc = op.patch.cgl.canvas.ownerDocument;
 const childrenPort = op.outObject("childs");
 childrenPort.setUiAttribs({ "title": "Children" });
 
-const isOpenOut = op.outBool("Opfened");
+const isOpenOut = op.outBoolNum("Opfened");
 isOpenOut.setUiAttribs({ "title": "Opened" });
 
 let sidebarEl = doc.querySelector("." + SIDEBAR_ID);

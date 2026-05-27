@@ -4,7 +4,7 @@ const
     inSpace = op.inSwitch("Space", ["World", "Model"], "World"),
     next = op.outTrigger("Next"),
     inApply = op.inBool("Set Matrix", true),
-    outFound = op.outBool("Found"),
+    outFound = op.outBoolNum("Found"),
     outMat = op.outArray("Matrix");
 
 const cgl = op.patch.cgl;

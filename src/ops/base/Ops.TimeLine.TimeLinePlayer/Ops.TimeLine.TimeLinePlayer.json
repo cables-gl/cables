@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "andro",
-            "date": 1566304253144
+            "date": 1566304253144,
+            "type": "new op"
         }
     ],
     "authorName": "andro",
@@ -115,5 +116,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

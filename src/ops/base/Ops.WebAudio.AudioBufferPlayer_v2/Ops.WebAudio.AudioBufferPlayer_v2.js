@@ -14,8 +14,8 @@ op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 
 // output ports
 const audioOutPort = op.outObject("Audio Out", null, "audioNode");
-const outPlaying = op.outBool("Is Playing", false);
-const outLoading = op.outBool("Loading", false);
+const outPlaying = op.outBoolNum("Is Playing", false);
+const outLoading = op.outBoolNum("Loading", false);
 
 // vars
 let source = null;

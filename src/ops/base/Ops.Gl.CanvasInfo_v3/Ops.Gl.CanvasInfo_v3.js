@@ -5,7 +5,7 @@ const
     widthPixel = op.outNumber("Pixel Width"),
     heightPixel = op.outNumber("Pixel Height"),
     aspect = op.outNumber("Aspect Ratio"),
-    landscape = op.outBool("Landscape"),
+    landscape = op.outBoolNum("Landscape"),
     outCanvasEle = op.outObject("Canvas", null, "element"),
     outCanvasParentEle = op.outObject("Canvas Parent", null, "element"),
     outResize = op.outTrigger("Resized");

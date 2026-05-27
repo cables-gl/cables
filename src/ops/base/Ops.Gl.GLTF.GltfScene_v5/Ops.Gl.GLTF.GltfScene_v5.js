@@ -42,8 +42,8 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoading = op.outBool("Loading"),
-    outLoaded = op.outBool("Loaded");
+    outLoading = op.outBoolNum("Loading"),
+    outLoaded = op.outBoolNum("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -481,6 +481,7 @@ let preload = null;
 let idle = null;
 function reloadSoon(nocache)
 {
+    if (!inActive.get()) return;
     if (preload)cgl.patch.loading.finished(preload);
 
     preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);

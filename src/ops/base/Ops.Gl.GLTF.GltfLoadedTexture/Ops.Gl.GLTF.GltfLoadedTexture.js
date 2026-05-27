@@ -2,7 +2,7 @@ const
     inExec = op.inTrigger("Render"),
     imgName = op.inString("Name", ""),
     outTex = op.outTexture("Texture"),
-    outFound = op.outBool("Found");
+    outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
 let tex = null;

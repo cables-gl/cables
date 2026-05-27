@@ -4,7 +4,7 @@ const
     inVisible = op.inBool("Visible", true),
 
     next = op.outTrigger("Next"),
-    outFound = op.outBool("Found");
+    outFound = op.outBoolNum("Found");
 
 const cgl = op.patch.cgl;
 

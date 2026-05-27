@@ -11,7 +11,7 @@ const
     lengthPort = op.outNumber("Length", 0),
     durationPort = op.outNumber("Duration", 0),
     numberOfChannelsPort = op.outNumber("Number of Channels", 0),
-    outLoading = op.outBool("isLoading", 0);
+    outLoading = op.outBoolNum("isLoading", 0);
 
 let currentBuffer = null;
 let isLoading = false;

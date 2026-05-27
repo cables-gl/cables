@@ -7,7 +7,7 @@ const
     outPlayTrigger = op.outTrigger("play trigger"),
     outPauseTrigger = op.outTrigger("pause trigger"),
     outrewindTrigger = op.outTrigger("rewind trigger"),
-    isPlaying = op.outBool("is Playing"),
+    isPlaying = op.outBoolNum("is Playing"),
     outSetTimeTrigger = op.outNumber("set time (seconds)"),
     currentTime = op.outNumber("current time"),
     currentFrame = op.outNumber("current frame");

@@ -26,7 +26,15 @@ function update()
         newObj = JSON.parse(JSON.stringify(obj));
     }
 
-    newObj[inKey.get()] = inValue.get();
+    let v = inValue.get();
+    if (!CABLES.isNumeric(v))
+    {
+        if (v === "" || v === false || v === "false" || v === null || v === undefined)v = 0;
+        else v = 1;
+
+    }
+
+    newObj[inKey.get()] = v;
 
     outObject.setRef(newObj);
 }

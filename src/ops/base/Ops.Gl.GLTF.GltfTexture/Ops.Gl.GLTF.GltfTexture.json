@@ -27,6 +27,11 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
                 "subType": "integer"
             },
             {
@@ -37,6 +42,14 @@
             {
                 "type": 0,
                 "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
@@ -88,5 +101,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -35,6 +35,7 @@ function remove()
     }
 }
 
+let to = null;
 let oldBg = null;
 let oldCol = null;
 
@@ -74,7 +75,8 @@ function update()
     }
     else
     {
-        setTimeout(update, 50);
+        clearTimeout(to);
+        to = setTimeout(update, 50);
     }
 
     outEle.setRef(inEle.get());
