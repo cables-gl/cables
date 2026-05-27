@@ -484,7 +484,6 @@ function reloadSoon(nocache)
     if (!inActive.get()) return;
     if (preload)cgl.patch.loading.finished(preload);
 
-    console.log("activvvvv ", inActive.get());
     // preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
     clearTimeout(idle);
