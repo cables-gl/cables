@@ -915,12 +915,14 @@ export class Patch extends Events
         {
             const start = CABLES.now();
             const opData = obj.ops[iop];
+
+            /** @type {Op} */
             let op = null;
 
             try
             {
                 if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true, opData.objName, opData.attribs);
-                else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
+                else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true, null, opData.attribs);
             }
             catch (e)
             {
