@@ -484,16 +484,17 @@ function reloadSoon(nocache)
     if (!inActive.get()) return;
     if (preload)cgl.patch.loading.finished(preload);
 
-    preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
+    console.log("activvvvv ", inActive.get());
+    // preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
     clearTimeout(idle);
     idle = setTimeout(() =>
     {
         loadBin(nocache);
 
-        cgl.patch.loading.finished(preload);
+        // cgl.patch.loading.finished(preload);
         preload = null;
-    }, 100);
+    }, 50);
 }
 
 function updateMaterials()

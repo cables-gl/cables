@@ -38,6 +38,8 @@ let mesh = null;
 let vertNums = new Float32Array(1);
 let numVerts = 1;
 let gotBounds = false;
+let oldGeom = null;
+let g = null;
 
 inPixelFormat.onChange =
 tfilter.onChange =
@@ -87,30 +89,36 @@ function shuffleArray(array)
 }
 
 inResize.onChange =
-inResizeNewSize.onChange =
-inTexColor.onChange =
-inGeom.onChange = function ()
+    inResizeNewSize.onChange =
+    inTexColor.onChange =
+    inGeom.onChange = reset;
+
+function reset()
 {
     needsUpdateSize = true;
     needsUpdate = true;
     gotBounds = false;
-};
+}
 
 function updateRescale()
 {
     inResizeNewSize.setUiAttribs({ "greyout": inResize.get() != "Rescale" });
 
+    gotBounds = false;
+    mod.setUniformValue("MOD_mul", 1);
     if (inResize.get() == "Rescale")
     {
+
         const g = inGeom.get();
-        if (!g) return;
+        if (!g) return reset();
+
         const b = g.getBounds();
+        console.log("text", inResizeNewSize.get() / b._maxAxis);
 
         mod.setUniformValue("MOD_mul", inResizeNewSize.get() / b._maxAxis);
-        gotBounds = true;
     }
-    else
-        mod.setUniformValue("MOD_mul", 1);
+
+    gotBounds = true;
 }
 
 function updateAttrib()
@@ -214,8 +222,6 @@ function initFb()
     needsUpdate = true;
 }
 
-let oldGeom = null;
-let g = null;
 exec.onTriggered = function ()
 {
     updateSize();
@@ -233,11 +239,9 @@ exec.onTriggered = function ()
         needsUpdate = true;
         return;
     }
-    // if(inUpdateAlways.get()) needsUpdate = true;
 
     if (fb && fb.getWidth() != size) fb.setSize(size, size);
-    // if (oldGeom != geo)
-    // {
+
     oldGeom = geo;
     g = geo.copy();
 
@@ -245,7 +249,7 @@ exec.onTriggered = function ()
 
     g.glPrimitive = cgl.gl.POINTS;
     mesh.setGeom(g);
-    // }
+
     numVerts = g.vertices.length / 3;
 
     if (vertNums.length != numVerts) vertNums = new Float32Array(numVerts);
@@ -306,12 +310,10 @@ function render()
 
     mat4.ortho(
         cgl.pMatrix,
-        0,
-        size,
-        0,
-        size,
-        -1.00,
-        100);
+        0, size,
+        0, size,
+        -1.00, 100
+    );
 
     mod.bind();
     if (!gotBounds) updateRescale();

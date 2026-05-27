@@ -246,6 +246,8 @@ export class LoadingStatus extends Events
         };
         this._order++;
         this.log("start loading", this._loadingAssets[id]);
+        // console.log("text", this._loadingAssets[id]);
+        // console.trace("hurz");
 
         this.emitEvent("startTask");
 
