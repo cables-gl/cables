@@ -1,15 +1,16 @@
 const
     exe = op.inTrigger("exe"),
     startTimeLine = op.inBool("Play Timeline", true),
+    inConLog = op.inBool("Console Logging", false),
     next = op.outTrigger("Next"),
     outInitialFinished = op.outBoolNum("Finished Initial Loading", false),
     outLoading = op.outBoolNum("Loading"),
     outProgress = op.outNumber("Progress"),
     outList = op.outArray("Jobs"),
     loadingFinished = op.outTrigger("Trigger Loading Finished ");
+
 op.toWorkPortsNeedToBeLinked(exe);
 const patch = op.patch;
-
 let finishedOnce = false;
 const preRenderTimes = [];
 let firstTime = true;
@@ -21,6 +22,11 @@ let loadingId = patch.loading.start("loadingStatusInit", "loadingStatusInit", op
 
 op.patch.loading.on("finishedTask", updateStatus.bind(this));
 op.patch.loading.on("startTask", updateStatus.bind(this));
+
+inConLog.onChange = () =>
+{
+    op.patch.loading.consoleLog = inConLog.get();
+};
 
 function updateStatus()
 {

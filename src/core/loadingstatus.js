@@ -16,6 +16,7 @@ import { Op } from "./core_op.js";
  */
 export class LoadingStatus extends Events
 {
+    #patch = null;
 
     /** @type {Function[]} */
     _cbFinished = [];
@@ -34,14 +35,16 @@ export class LoadingStatus extends Events
     /** @type {Object.<String,LoadingTask>} */
     _loadingAssets = {};
 
+    #log = new Logger("LoadingStatus");
+    consoleLog = false;
+
     /**
      * @param {Patch} patch
      */
     constructor(patch)
     {
         super();
-        this._log = new Logger("LoadingStatus");
-        this._patch = patch;
+        this.#patch = patch;
     }
 
     /**
@@ -50,6 +53,8 @@ export class LoadingStatus extends Events
      */
     log(str, loadingTask)
     {
+        if (!this.consoleLog) return;
+
         let lstr = "[load] " + str + " " + loadingTask.name;
 
         if (loadingTask.op)
@@ -104,7 +109,7 @@ export class LoadingStatus extends Events
                 if (this._cbFinished[j])
                 {
                     const cb = this._cbFinished[j];
-                    setTimeout(() => { cb(this._patch); this.emitEvent("finishedAll"); }, 100);
+                    setTimeout(() => { cb(this.#patch); this.emitEvent("finishedAll"); }, 100);
                 }
             }
 
@@ -141,7 +146,7 @@ export class LoadingStatus extends Events
 
     print()
     {
-        if (this._patch.config.silent) return;
+        if (this.#patch.config.silent) return;
 
         const rows = [];
 
@@ -155,9 +160,9 @@ export class LoadingStatus extends Events
             ]);
         }
 
-        this._log.groupCollapsed("finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s");
-        this._log.table(rows);
-        this._log.groupEnd();
+        this.#log.groupCollapsed("finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s");
+        this.#log.table(rows);
+        this.#log.groupEnd();
     }
 
     /**
@@ -168,7 +173,7 @@ export class LoadingStatus extends Events
         const l = this._loadingAssets[id];
         if (l)
         {
-            if (l.finished) this._log.warn("loading job was already finished", l);
+            if (l.finished) this.#log.warn("loading job was already finished", l);
             if (l.op) l.op.setUiAttribs({ "loading": false });
             l.finished = true;
             l.timeEnd = Date.now();
@@ -194,7 +199,7 @@ export class LoadingStatus extends Events
      */
     addAssetLoadingTask(cb)
     {
-        if (this._patch.isEditorMode() && !CABLES.UI.loaded)
+        if (this.#patch.isEditorMode() && !CABLES.UI.loaded)
         {
             this._assetTasks.push(cb);
 

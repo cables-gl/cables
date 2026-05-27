@@ -19,6 +19,11 @@
                 "type": 0,
                 "name": "Play Timeline",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Console Logging",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
