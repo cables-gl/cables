@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1611059265857
+        },
+        {
+            "message": "Add support for sessionStorage",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779895192080
         }
     ],
     "authorName": "pandur",
@@ -20,6 +26,15 @@
                 "name": "String"
             },
             {
+                "type": 0,
+                "name": "Storage index",
+                "values": [
+                    "Local",
+                    "Session"
+                ],
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Store"
             }
@@ -30,13 +45,17 @@
                 "name": "Stored String"
             },
             {
+                "type": 5,
+                "name": "Storage type"
+            },
+            {
                 "type": 0,
                 "name": "Storage Support",
                 "subType": "boolean"
             }
         ]
     },
-    "summary": "Store and retreive a string in browser localstorage",
+    "summary": "Store and retreive a string in browser storage",
     "docs": {
         "ports": [
             {

@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1611058934698
+        },
+        {
+            "message": "Add support for sessionStorage",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779895183223
         }
     ],
     "authorName": "pandur",
@@ -21,6 +27,15 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Storage index",
+                "values": [
+                    "Local",
+                    "Session"
+                ],
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Store"
             }
@@ -32,13 +47,17 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Storage type"
+            },
+            {
                 "type": 0,
                 "name": "Storage Support",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },
-    "summary": "Store and retreive a number in browser localstorage",
+    "summary": "Store and retreive a number in browser storage",
     "docs": {
         "ports": [
             {
@@ -56,6 +75,10 @@
             {
                 "name": "Stored Number",
                 "text": "the stored value"
+            },
+            {
+                "name": "Storage type",
+                "text": "Currrent type of storage"
             },
             {
                 "name": "Storage Support",

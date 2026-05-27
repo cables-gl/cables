@@ -6,12 +6,27 @@
             "type": "new op",
             "author": "stephan",
             "date": 1771508075337
+        },
+        {
+            "message": "Add support for sessionStorage",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779895164823
         }
     ],
     "authorName": "stephan",
     "created": 1771508075337,
     "layout": {
         "portsIn": [
+            {
+                "type": 0,
+                "name": "Storage index",
+                "values": [
+                    "Local",
+                    "Session"
+                ],
+                "subType": "integer"
+            },
             {
                 "type": 1,
                 "name": "Receive"
@@ -27,13 +42,17 @@
                 "name": "All"
             },
             {
+                "type": 5,
+                "name": "Storage type"
+            },
+            {
                 "type": 0,
                 "name": "Storage Support",
                 "subType": "boolean"
             }
         ]
     },
-    "summary": "Retrieve all keys (and values) stored  in localstorage",
+    "summary": "Retrieve all keys (and values) stored in browser storage",
     "docs": {
         "ports": [
             {
@@ -47,6 +66,10 @@
             {
                 "name": "All",
                 "text": "Key-Value object of everything in localstorage"
+            },
+            {
+                "name": "Storage type",
+                "text": "Currrent type of storage"
             },
             {
                 "name": "Storage Support",

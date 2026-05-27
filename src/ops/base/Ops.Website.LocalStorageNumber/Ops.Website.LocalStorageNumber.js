@@ -1,22 +1,28 @@
 const
     inKey = op.inString("Key"),
     inValue = op.inFloat("Number"),
+    inType = op.inSwitch("Storage", ["Local", "Session"], "Local"),
     inStore = op.inTriggerButton("Store"),
     outValue = op.outNumber("Stored Number"),
+    outStorage = op.outString("Storage type"),
     outSupported = op.outBoolNum("Storage Support", true);
 
-inKey.onChange = updateOutput;
-inStore.onTriggered = storeValue;
+let storage = window.localStorage;
+if (inType.get() === "Session") storage = window.sessionStorage;
+outStorage.set(inType.get());
 
-const localStorageSupport = !!window.localStorage;
-if (!localStorageSupport)
+let storageSupport = !!storage;
+if (!storageSupport)
 {
-    op.logError("your browser does not support or blocks access to localStorage, output will be inValue!");
+    op.logError("Your browser does not support or blocks access to storage, output will be inValue!");
     outSupported.set(false);
 }
 
 updateOutput();
 op.onLoaded = updateOutput;
+inKey.onChange = updateOutput;
+inType.onChange = changeStorage;
+inStore.onTriggered = storeValue;
 
 function parse(val)
 {
@@ -39,9 +45,12 @@ function getKey()
 
 function updateOutput()
 {
-    if (localStorageSupport)
+    outStorage.set(inType.get());
+    outSupported.set(storageSupport);
+
+    if (storageSupport)
     {
-        outValue.set(parse(window.localStorage.getItem(getKey())));
+        outValue.set(parse(storage.getItem(getKey())));
     }
     else
     {
@@ -49,17 +58,25 @@ function updateOutput()
     }
 }
 
+function changeStorage()
+{
+    storage = window.localStorage;
+    if (inType.get() === "Session") storage = window.sessionStorage;
+    storageSupport = !!storage;
+    updateOutput();
+}
+
 function storeValue()
 {
+    outSupported.set(storageSupport);
     let val = parse(inValue.get());
-
-    if (localStorageSupport)
+    if (storageSupport)
     {
-        window.localStorage.setItem(getKey(), val);
+        storage.setItem(getKey(), val);
     }
     else
     {
-        op.warn("not storing to localstorage, missing browsersupport!");
+        op.warn("Not storing data, missing browsersupport!");
     }
     outValue.set(val);
     op.patch.emitEvent("localstorageStored", inKey.get(), val);
