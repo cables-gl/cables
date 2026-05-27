@@ -56,7 +56,7 @@ let GltfTexture = class
 
         const cgl_aniso = 4;
         const loadingId = cgl.patch.loading.start("gltfTexture", "gltftex " + CABLES.basename(inFile.get()), op);
-        console.log("gltfTexture", gltf, texInfo);
+        // console.log("gltfTexture", gltf, texInfo);
 
         if (img.mimeType == "image/ktx2")
         {

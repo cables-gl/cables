@@ -55,8 +55,9 @@ export class LoadingStatus extends Events
         if (loadingTask.op)
         {
             lstr += " op:" + loadingTask.op.name;
-            // console.log("op", loadingTask.op, loadingTask.op.tags.join(","));
-            if (loadingTask.op.tags) lstr += " (tags: " + loadingTask.op.tags.join(",") + ")";
+
+            if (loadingTask.op.tags && loadingTask.op.tags.length) lstr += " (tags: " + loadingTask.op.tags.join(",") + ")";
+            else lstr += "(no tags)";
         }
 
         console.log(lstr);
