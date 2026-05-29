@@ -57,6 +57,7 @@ const inTexThinFilm = op.inTexture("Thin Film");
 const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 const inLightmapRGBE = op.inBool("Lightmap is RGBE", false);
+const inLightmapAO = op.inBool("Lightmap AO only", false);
 
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
@@ -83,7 +84,7 @@ inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);
 op.setPortGroup("Advanced Shader Parameters", [inEmissionIntensity, inToggleGR, inToggleNMGR, inUseVertexColours, inVertexColourMode, inHeightDepth, inUseOptimizedHeight, inDoubleSided]);
 op.setPortGroup("Textures", [inTexAlbedo, inTexAORM, inTexNormal, inTexEmission, inTexHeight, inLightmap, inTexThinFilm]);
-op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
+op.setPortGroup("Lighting", [inDiffuseIntensity, inSpecularIntensity, inLightmapIntensity, inLightmapRGBE, inLightmapAO, inTexIBLLUT, inTexIrradiance, inTexPrefiltered, inMipLevels]);
 op.setPortGroup("Tonemapping", [inTonemapping, inTonemappingExposure]);
 op.setPortGroup("Clear Coat", [inUseClearCoat, inClearCoatIntensity, inClearCoatRoughness, inUseNormalMapForCC, inTexClearCoatNormal]);
 op.setPortGroup("Thin Film Iridescence", [inUseThinFilm, inThinFilmIntensity, inThinFilmIOR, inThinFilmThickness, inTFThicknessTexMin, inTFThicknessTexMax]);
@@ -199,6 +200,7 @@ PBRShader.materialPropUniforms = {
     "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
     "occlusionTexture": inLightmapUniform,
+    "lightmapTexture": inLightmapUniform,
     "unlit": inUnlitUniform,
     "texTransform": uniTexTrans
 };
@@ -230,6 +232,7 @@ inTexAORM.onChange =
     inUseThinFilm.onChange =
     inTexFlip.onChange =
     inGammaEnc.onChange =
+    inLightmapAO.onChange =
     inVertexColourMode.onChange = updateDefines;
 
 function updateDefines()
@@ -241,6 +244,7 @@ function updateDefines()
     PBRShader.toggleDefine("USE_NORMAL_MAP_FOR_CC", inUseNormalMapForCC.get());
     PBRShader.toggleDefine("USE_CC_NORMAL_MAP", inTexClearCoatNormal.isLinked());
     PBRShader.toggleDefine("LIGHTMAP_IS_RGBE", inLightmapRGBE.get());
+    PBRShader.toggleDefine("LIGHTMAP_IS_AO", inLightmapAO.get());
     PBRShader.toggleDefine("USE_LIGHTMAP", inLightmap.isLinked() || inVertexColourMode.get() === "lightmap");
     PBRShader.toggleDefine("USE_NORMAL_TEX", inTexNormal.isLinked());
     PBRShader.toggleDefine("USE_HEIGHT_TEX", inTexHeight.isLinked());

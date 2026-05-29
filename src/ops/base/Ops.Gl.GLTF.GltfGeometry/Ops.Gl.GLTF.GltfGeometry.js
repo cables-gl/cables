@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Update"),
     inNodeName = op.inString("Name", "default"),
-    inNameMatch = op.inSwitch("Name Match", ["exact", "starts with"], "exact"),
+    inNameMatch = op.inSwitch("Name Match", ["exact", "starts with", "contains"], "exact"),
     inSubmesh = op.inInt("Submesh", 0),
     next = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry", null, "geometry"),
@@ -33,18 +33,19 @@ exec.onTriggered = () =>
         if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes || !cgl.tempData.currentScene.loaded)
             return;
 
-        outFound.set(false);
-        outGeom.setRef(null);
         const name = inNodeName.get();
+        let found = false;
 
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
 
         for (let i = 0; i < cgl.tempData.currentScene.meshes.length; i++)
         {
             let matches = false;
-
+            // console.log("text",cgl.tempData.currentScene.meshes);
             if (inNameMatch.get() == "exact")
                 matches = cgl.tempData.currentScene.meshes[i].name == name;
+            else if (inNameMatch.get() == "contains")
+                matches = cgl.tempData.currentScene.meshes[i].name.includes(name);
             else
                 matches = cgl.tempData.currentScene.meshes[i].name.startsWith(name);
 
@@ -55,15 +56,31 @@ exec.onTriggered = () =>
                 const idx = Math.abs(inSubmesh.get());
                 if (mesh.meshes[idx] && mesh.meshes[idx].geom)
                 {
-                    outFound.set(true);
+                    found = true;
                     outGeom.setRef(mesh.meshes[idx].geom);
+                }
+                else
+                {
+                    if (mesh.meshes[idx].mesh)
+                    {
+                        found = true;
+                        outGeom.setRef(mesh.meshes[idx].mesh.geom);
+                        console.log("jajaaaaaaaaaaaaaaaaaa", mesh.meshes[idx].mesh);
+                    }
+                    else console.log("nananana.......", mesh.meshes[idx].mesh);
                 }
                 break;
             }
         }
 
-        if (!outFound.get())op.setUiError("notfound", "Geometry not found", 1);
+        if (!found)
+        {
+            op.setUiError("notfound", "Geometry not found", 1);
+            outGeom.setRef(null);
+        }
         else op.setUiError("notfound", null);
+
+        outFound.set(found);
     }
 
     next.trigger();

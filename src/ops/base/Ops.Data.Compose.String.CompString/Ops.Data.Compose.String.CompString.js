@@ -1,5 +1,5 @@
 const
-    update = op.inTrigger("Update"),
+    update = op.inTriggerButton("Update"),
     next = op.outTrigger("Next"),
     clear = op.inBool("clear", true),
     reset = op.inTriggerButton("Reset"),

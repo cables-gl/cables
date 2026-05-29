@@ -37,7 +37,8 @@
                 "name": "Name Match index",
                 "values": [
                     "exact",
-                    "starts with"
+                    "starts with",
+                    "contains"
                 ],
                 "subType": "integer"
             },
