@@ -318,12 +318,6 @@
             },
             {
                 "type": 0,
-                "name": "Lightmap AO only",
-                "group": "Lighting",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Lightmap Intensity",
                 "group": "Lighting",
                 "subType": "number"

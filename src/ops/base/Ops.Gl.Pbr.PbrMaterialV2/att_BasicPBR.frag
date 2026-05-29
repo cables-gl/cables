@@ -480,9 +480,9 @@ void main()
             #endif
         #endif
 
-        #ifdef GAMMAENC
-            Lightmap = pow(Lightmap.rgb, vec3(1.0/2.2));
-        #endif
+        // #ifdef GAMMAENC
+        //     Lightmap = pow(Lightmap.rgb, vec3(1.0/2.2));
+        // #endif
 
     #endif
     // initialize texture values
@@ -579,7 +579,12 @@ void main()
         	Fr *= 1.0 + F0; // TODO: this might be wrong, figure this out
 
         	#ifdef USE_LIGHTMAP
-                vec3 IBLIrradiance = Lightmap * lightmapIntensity;
+                #ifndef LIGHTMAP_IS_AO
+                    vec3 IBLIrradiance = Lightmap * lightmapIntensity;
+                #else
+
+                    vec3 IBLIrradiance = vec3(1.);
+                #endif
             #else
                 vec3 IBLIrradiance = DecodeRGBE8(SAMPLETEX(_irradiance, N, 0.0)) * diffuseIntensity*envIntensity;
         #endif
@@ -623,7 +628,9 @@ void main()
         #endif
     #else
         #ifdef USE_LIGHTMAP
-            col.rgb += (1.0 - metalness) * albedo * Lightmap * lightmapIntensity;
+            #ifndef LIGHTMAP_IS_AO
+              col.rgb += (1.0 - metalness) * albedo * Lightmap * lightmapIntensity;
+            #endif
         #endif
     #endif
     #ifdef USE_EMISSION
@@ -653,6 +660,12 @@ void main()
         col.rgb *= tonemappingExposure;
         //col.rgb = clamp(col.rgb, vec3(0.0), vec3(1.0));
     #endif
+
+      #ifdef USE_LIGHTMAP
+          #ifdef LIGHTMAP_IS_AO
+            col.rgb*=(texture(_Lightmap,UV1).rgb*lightmapIntensity+(1.-lightmapIntensity));
+          #endif
+      #endif
 
 	#ifndef TONEMAP_None
     col.rgb = pow(col.rgb, vec3(1.0/2.2));
