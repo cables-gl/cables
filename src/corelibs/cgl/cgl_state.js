@@ -376,6 +376,7 @@ export class CglContext extends CgContext
 
     endFrame()
     {
+        if (this.pauseRendering) return;
         if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
         this.setPreviousShader();
