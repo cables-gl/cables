@@ -84,7 +84,6 @@ exec.onTriggered = () =>
             outGeom.setRef(null);
         }
         else op.setUiError("notfound", null);
-        console.log("lalalalala", found);
         outFound.set(found);
     }
 

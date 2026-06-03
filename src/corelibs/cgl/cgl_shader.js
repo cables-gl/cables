@@ -1271,7 +1271,12 @@ class CglShader extends CgShader
                 let t = this._textureStackTex[i];
                 if (this._textureStackTexCgl[i])
                 {
-                    t = this._textureStackTexCgl[i].tex || CGL.Texture.getEmptyTexture(this._cgl).tex;
+                    t = this._textureStackTexCgl[i].tex || Texture.getEmptyTexture(this._cgl).tex;
+                }
+                if (!this._cgl.gl.isTexture(t))
+                {
+                    console.log("noooooooooooootex");
+
                 }
 
                 let bindOk = true;
@@ -1280,6 +1285,7 @@ class CglShader extends CgShader
                 {
                     // throw(new Error('no uniform given to texturestack'));
                     this._log.warn("no uniform for pushtexture", this._name);
+
                     bindOk = this._cgl.setTexture(i, t, this._textureStackType[i]);
                 }
                 else
