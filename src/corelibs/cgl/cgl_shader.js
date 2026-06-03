@@ -1275,7 +1275,7 @@ class CglShader extends CgShader
                 }
                 if (!this._cgl.gl.isTexture(t))
                 {
-                    console.log("noooooooooooootex");
+                    console.log("noooooooooooootex", i, this);
 
                 }
 
