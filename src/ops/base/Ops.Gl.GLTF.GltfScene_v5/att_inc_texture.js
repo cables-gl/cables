@@ -71,7 +71,12 @@ let GltfTexture = class
                 this.tex = t;
                 cgl.patch.loading.finished(loadingId);
 
-                gltf.loadingTextures--;
+                setTimeout(() =>
+                {
+
+                    gltf.loadingTextures--;
+
+                }, 400);
             });
         }
         else
