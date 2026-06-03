@@ -1,11 +1,9 @@
 const render = op.inTrigger("render");
 
-const diffuseTexture = op.inTexture("texture");
 const whichTex = op.inSwitch("Show tex", ["Albedo", "Normal", "AO", "MR", "Lightmap"], "Albedo");
 const trigger = op.outTrigger("trigger");
 const shaderOut = op.outObject("shader", null, "shader");
 
-op.toWorkPortsNeedToBeLinked(render, diffuseTexture);
 op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
@@ -26,8 +24,6 @@ shader.define("HAS_TEXTURES");
 shaderOut.setRef(shader);
 
 render.onTriggered = doRender;
-
-diffuseTexture.onChange = updateDiffuseTexture;
 
 let diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
 
@@ -58,10 +54,12 @@ function doRender()
         console.log("no texuniiiiiiiiiiiiii");
     }
 
-    if (diffuseTextureUniform && diffuseTexture.get())
-    {
-        shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
-    }
+    // if (diffuseTextureUniform && diffuseTexture.get())
+    // {
+    //     shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
+    // }
+
+    shader.pushTexture(diffuseTextureUniform, CGL.Texture.getEmptyTexture(op.patch.cgl));
 
     shader.materialPropUniforms = {
         "texTransform": texTransUni,
@@ -97,17 +95,6 @@ function doRender()
 function updateDiffuseTexture()
 {
 
-    if (diffuseTexture.get())
-    {
-
-        // shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
-    }
-    else
-    {
-        // shader.removeUniform("texDiffuse");
-        // shader.removeDefine("HAS_TEXTURE_DIFFUSE");
-        // diffuseTextureUniform = null;
-    }
 }
 
 function updateDefines()

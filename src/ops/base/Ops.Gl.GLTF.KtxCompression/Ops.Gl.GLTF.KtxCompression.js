@@ -19,12 +19,14 @@ let ktx = CABLES.ktx;
 
 if (!ktx)
 {
+    console.log("load ktx");
     createKtxReadModule({ "locateFile": () =>
     {
         return "data:application/wasm;base64," + staticAttachments.libktx_read_wasm;
     }
     }).then(async (_ktx) =>
     {
+        console.log("ktx loaded...", op.patch.cgl.canvas);
         ktx = CABLES.ktx = _ktx;
         // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
 
@@ -33,28 +35,55 @@ if (!ktx)
     });
 }
 
-async function loadKTX2Texture(url)
+function loadKTX2Texture(url, cb)
 {
     const gl = op.patch.cgl.gl;
 
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    fetch(url).then((res) =>
+    {
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
 
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-    const blob = await res.blob();
-    const ab = await blob.arrayBuffer();
-    const bytes = new Uint8Array(ab);
+        res.blob().then((blob) =>
+        {
+            blob.arrayBuffer().then((ab) =>
+            {
+                const bytes = new Uint8Array(ab);
+                const ktex = new ktx.texture(bytes);
 
-    const ktex = new ktx.texture(bytes);
+                console.log("ktex", ktex.baseWidth);
+                // setTimeout(() =>
+                // {
 
-    const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
+                cgl.addNextFrameOnceCallback(() =>
+                {
+                    console.log("frame", op.patch.getFrameNum());
 
-    gl.bindTexture(texture.target, texture.object);
-    gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-    gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    ktex.delete();
+                    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                    const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
 
-    return texture;
+                    // gl.bindTexture(texture.target, texture.object);
+                    // gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+                    // gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+                    // // ktex.delete();
+                    cb(texture, ktex.baseWidth, ktex.baseHeight);
+                });
+                // }, Math.random() * 10000);
+
+            }).catch((e) =>
+            {
+                console.error("errr", e);
+            });
+
+        }).catch((e) =>
+        {
+            console.error("errr", e);
+        });
+
+    }).catch((e) =>
+    {
+        console.error("err fetch", e);
+
+    });
 }
 
 function chooseBestFormat(ktexture)
@@ -72,9 +101,9 @@ function chooseBestFormat(ktexture)
 
     // Prefer ASTC → DXT → ETC → uncompressed fallback
     if (formats.astc) return transcode_fmt.ASTC_4x4_RGBA;
-    if (formats.dxt) return srgb
-        ? transcode_fmt.BC3_RGBA // DXT5, sRGB path
-        : transcode_fmt.BC1_OR_3;
+    if (formats.dxt) return srgb ?
+        transcode_fmt.BC3_RGBA : // DXT5, sRGB path
+        transcode_fmt.BC1_OR_3;
     if (formats.etc) return transcode_fmt.ETC2_RGBA;
     if (formats.pvrtc) return transcode_fmt.PVRTC1_4_RGBA;
 
@@ -117,6 +146,7 @@ function uploadTextureToGl(gl, ktexture)
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
     const result = ktexture.glUpload();
+    // console.log("result", result);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
 
     if (result.error != gl.NO_ERROR)
@@ -134,8 +164,11 @@ function uploadTextureToGl(gl, ktexture)
         alert("Loaded texture is not a TEXTURE2D.");
         return undefined;
     }
-    op.patch.cgl.gl.generateMipmap(result.target);
 
+    // console.log("text", gl.getError());
+    // op.patch.cgl.gl.generateMipmap(result.target);
+
+    gl.getError();
     // console.log("result", formatString);
 
     return {
@@ -148,8 +181,6 @@ function uploadTextureToGl(gl, ktexture)
 
 /// /////////////////////////////////////////////////////
 
-let cgl_filter = CGL.Texture.FILTER_MIPMAP;
-let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
 let timedLoader = 0;
 let loadingId = null;
@@ -173,71 +204,31 @@ CABLES.loadKtx = function (url, cb)
         {
             op.setUiError("urlerror", null);
 
-            loadKTX2Texture(url).then(
-                (texture) =>
-                {
-                    // }
-                // );
-
-                    // console.log("Loaded KTX2 texture", texture);
-
-                    // CGL.Texture.load(cgl, url, function (err, newTex)
-                    // {
-                    //     if (filename.get() != fileToLoad)
-                    //     {
-                    //         loadingId = op.patch.loading.finished(loadingId);
-                    //         return;
-                    //     }
-
-                    //     if (tex)tex.delete();
-
-                    //     if (err)
-                    //     {
-                    //         const t = CGL.Texture.getErrorTexture(cgl);
-                    //         textureOut.setRef(t);
-
-                    //         op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
-                    //         loadingId = op.patch.loading.finished(loadingId);
-                    //         return;
-                    //     }
-
-                    //     width.set(newTex.width);
-                    //     height.set(newTex.height);
-                    //     ratio.set(newTex.width / newTex.height);
-
-                    //     tex = newTex;
-                    const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
-                    ctex.width = 100;
-                    ctex.height = 100;
-                    // textureOut.setRef(ctex);
-                    // console.log("ktx texture", texture, texture.target);
-
-                    //     if (inFreeMemory.get()) tex.image = null;
-                    cb(ctex);
-
-                    if (loadingId) loadingId = op.patch.loading.finished(loadingId);
-
-                    //     op.checkMainloopExists();
-                    // }, {
-                    //     "anisotropic": cgl_aniso,
-                    //     "wrap": cgl_wrap,
-                    //     "flip": flip.get(),
-                    //     "unpackAlpha": unpackAlpha.get(),
-                    //     "pixelFormat": getPixelFormat(),
-                    //     "filter": cgl_filter
-                }).catch((e) =>
+            loadKTX2Texture(url, (texture, w, h) =>
             {
-                console.log("ktxer", e);
+                const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
+                ctex.width = w;
+                ctex.height = h;
 
-                if (loadingId)
-                    loadingId = op.patch.loading.finished(loadingId);
+                cb(ctex);
+
+                if (loadingId) loadingId = op.patch.loading.finished(loadingId);
+
             });
-
-            op.checkMainloopExists();
         });
+        //   ).catch((e) =>
+        // {
+        //     console.log("ktxer", e);
+
+        //     if (loadingId) loadingId = op.patch.loading.finished(loadingId);
+        // });
+
+        op.checkMainloopExists();
+
     }
     else
     {
+        console.log("SET TEMPP TEX");
         setTempTexture();
         loadingId = op.patch.loading.finished(loadingId);
     }

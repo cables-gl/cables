@@ -44,9 +44,8 @@ inExec.onTriggered = function ()
         const name = inNodeName.get();
 
         if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
-        {
             return outFound.set(false);
-        }
+
         currentSceneLoaded = cgl.tempData.currentScene.loaded;
         let found = false;
 
@@ -54,16 +53,29 @@ inExec.onTriggered = function ()
         {
             if (cgl.tempData.currentScene.nodes[i].name == name)
             {
-                found = true;
                 node = cgl.tempData.currentScene.nodes[i];
 
-                if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom)
+                if (node)
                 {
-                    outGeom.setRef(node.mesh.meshes[0].geom);
+                    found = true;
+                    if (node.mesh && node.mesh.meshes)
+                    {
+                        if (node.mesh.meshes[0].geom)
+                        {
+                            outGeom.setRef(node.mesh.meshes[0].geom);
+                        }
+                        else
+                        {
+
+                            outGeom.set(null);
+                        }
+
+                    }
                 }
                 else
                 {
-                    outGeom.set(null);
+
+                    found = false;
                 }
             }
         }

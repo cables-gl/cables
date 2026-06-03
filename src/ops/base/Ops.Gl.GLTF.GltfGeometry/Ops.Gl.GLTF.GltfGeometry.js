@@ -54,22 +54,27 @@ exec.onTriggered = () =>
                 mesh = cgl.tempData.currentScene.meshes[i];
 
                 const idx = Math.abs(inSubmesh.get());
-                if (mesh.meshes[idx] && mesh.meshes[idx].geom)
+
+                if (mesh && mesh.meshes && mesh.meshes[idx] && mesh.meshes[idx].geom)
                 {
                     found = true;
                     outGeom.setRef(mesh.meshes[idx].geom);
                 }
                 else
                 {
-                    if (mesh.meshes[idx].mesh)
+                    if (mesh && mesh.meshes && mesh.meshes[idx] && mesh.meshes[idx].mesh)
                     {
                         found = true;
                         outGeom.setRef(mesh.meshes[idx].mesh.geom);
-                        console.log("jajaaaaaaaaaaaaaaaaaa", mesh.meshes[idx].mesh);
+
                     }
-                    else console.log("nananana.......", mesh.meshes[idx].mesh);
+                    else
+                    {
+                        console.log("ja abernein");
+                        found = false;
+                    }
                 }
-                break;
+                if (found) break;
             }
         }
 
@@ -79,7 +84,7 @@ exec.onTriggered = () =>
             outGeom.setRef(null);
         }
         else op.setUiError("notfound", null);
-
+        console.log("lalalalala", found);
         outFound.set(found);
     }
 

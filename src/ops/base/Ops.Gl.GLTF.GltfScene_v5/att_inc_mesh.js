@@ -21,6 +21,7 @@ let gltfMesh = class
         this.primitive = 4;
         this.morphTargetsRenderMod = null;
         this.weights = prim.weights;
+        this.hasMorphTargets = !!prim.targets;
 
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
 
@@ -227,6 +228,62 @@ let gltfMesh = class
         if (setGeom !== false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
 
+    geomMikkt(geom)
+    {
+
+        if (geom.texCoords.length == 0)
+        {
+            geom.texCoords = new Float32Array(geom.vertexNormals.length / 3 * 2);
+            for (let i = 0; i < geom.vertexNormals.length; i += 3)
+            {
+                geom.texCoords[i / 3 * 2] = geom.vertexNormals[i + 0];
+                geom.texCoords[i / 3 * 2 + 1] = geom.vertexNormals[i + 1];
+            }
+        }
+
+        const geo = geom.copy();
+
+        console.log("geooo", !!geo.morphTargets);
+        geo.name = geom.name;
+        geo.unIndex(false, true);
+        if (!this.hasMorphTargets)
+        {
+            if (window.MIKKTSPACE &&
+                        geo.vertices &&
+                        geo.vertexNormals &&
+                        geo.texCoords &&
+                        (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
+                        (geo.vertices.length / 3) == (geo.texCoords.length / 2)// &&
+            )
+            {
+                try
+                {
+                    const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
+                    for (let i = 0; i < a.length; i += 4) a[i + 3] *= -1;
+                    geo.tangents = a;
+                    // console.log("text",geo.tangents);
+                }
+                catch (e) { console.log("mikkt error", e); }
+
+                return geo;
+            }
+            else
+            {
+                console.log("not all attribs for tang calc", this.name);
+
+                if (!geo.vertices) console.log("no verts");
+                if (!geo.vertexNormals) console.log("no vertNorms");
+                if (!geo.texCoords) console.log("no texcoords");
+                if ((geo.vertices.length / 3) != (geo.vertexNormals.length / 3)) console.log("wrong length");
+                if ((geo.vertices.length / 3) != (geo.texCoords.length / 2)) console.log("wrong texcoord length");
+            }
+        }
+        else console.log("has targets...");
+
+        return geom;
+
+    }
+
     setGeom(geom)
     {
         geom.vertexNormals = geom.vertexNormals || [];
@@ -261,40 +318,7 @@ let gltfMesh = class
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
                 else if (inCalcNormals.get() == "Mikkt")
                 {
-
-                    if (geom.texCoords.length == 0)
-                    {
-                        geom.texCoords = new Float32Array(geom.vertexNormals.length / 3 * 2);
-                        for (let i = 0; i < geom.vertexNormals.length; i += 3)
-                        {
-                            geom.texCoords[i / 3 * 2] = geom.vertexNormals[i + 0];
-                            geom.texCoords[i / 3 * 2 + 1] = geom.vertexNormals[i + 1];
-                        }
-                    }
-
-                    const geo = geom.copy();
-                    geo.name = geom.name;
-                    geo.unIndex(false, true);
-                    if (
-                        window.MIKKTSPACE &&
-                        geo.vertices &&
-                        geo.vertexNormals &&
-                        geo.texCoords &&
-                        (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
-                        (geo.vertices.length / 3) == (geo.texCoords.length / 2)// &&
-                    )
-                    {
-                        try
-                        {
-                            const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
-                            for (let i = 0; i < a.length; i += 4) a[i + 3] *= -1;
-                            geo.tangents = a;
-                        }
-                        catch (e) { console.log("mikkt error", e); }
-
-                        geom = geo;
-                    }
-                    else console.log("not all attribs for tang calc");
+                    geom = this.geomMikkt(geom);
                 }
 
                 if ((!geom.biTangents || geom.biTangents.length == 0) && geom.tangents)

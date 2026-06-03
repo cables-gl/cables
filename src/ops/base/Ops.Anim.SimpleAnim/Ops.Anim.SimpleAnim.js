@@ -9,7 +9,7 @@ const
     waitForReset = op.inValueBool("Wait for Reset", true),
     next = op.outTrigger("Next"),
     result = op.outNumber("result"),
-    finished = op.outNumber("finished"),
+    finished = op.outBoolNum("finished"),
     finishedTrigger = op.outTrigger("Finished Trigger");
 
 const anim = new CABLES.Anim();
