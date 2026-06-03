@@ -23,6 +23,8 @@ inExec.onTriggered = function ()
 
     if (!gltf || !gltf.json || !gltf.chunks) return;
 
+    op.setUiError("id", null);
+
     for (let index = 0; index < gltf.textures.length; index++)
     {
         let name = gltf.json.images[index].name;
@@ -32,6 +34,7 @@ inExec.onTriggered = function ()
             return;
         }
     }
+    op.setUiError("id", "texture not found!", 1);
     outTex.setRef(CGL.Texture.getEmptyTexture(cgl));
 
 // console.log("text",cgl.tempData.currentScene)

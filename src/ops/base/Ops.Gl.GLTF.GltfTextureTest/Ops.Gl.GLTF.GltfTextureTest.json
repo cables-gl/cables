@@ -24,11 +24,6 @@
                 "name": "render"
             },
             {
-                "type": 2,
-                "name": "texture",
-                "objType": "texture"
-            },
-            {
                 "type": 0,
                 "name": "Show tex index",
                 "values": [
