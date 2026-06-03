@@ -38,6 +38,9 @@ let GltfMaterial = class
         if (!whiteTex)whiteTex = CGL.Texture.getColorTexture(cgl, 255, 255, 255, 1);
         if (!neutralNormalTex)neutralNormalTex = CGL.Texture.getColorTexture(cgl, 128, 128, 255, 1);
         if (!greyTex)greyTex = CGL.Texture.getColorTexture(cgl, 128, 128, 128, 1);
+        whiteTex.disposable = false;
+        neutralNormalTex.disposable = false;
+        greyTex.disposable = false;
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 

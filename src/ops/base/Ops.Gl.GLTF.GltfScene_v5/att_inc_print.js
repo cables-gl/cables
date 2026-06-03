@@ -46,6 +46,10 @@ function printNode(html, node, level)
     let ident = "";
     let identSpace = "";
 
+    let hideclass = "";
+    if (node.hidden)hideclass = "node-hidden";
+    html += "<td><span class=\"icon iconhover icon-eye " + hideclass + "\" onclick=\"gui.corePatch().getOpById('" + op.id + "').toggleNodeVisibility('" + node.name + "');this.classList.toggle('node-hidden');\"></span></td>";
+
     for (let i = 1; i < level; i++)
     {
         identSpace += "&nbsp;&nbsp;&nbsp;";
@@ -160,8 +164,6 @@ function printNode(html, node, level)
     html += "</td>";
 
     html += "<td>";
-    let hideclass = "";
-    if (node.hidden)hideclass = "node-hidden";
 
     html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','transform')\" class=\"iconbutton-small tt\" data-tt=\"Trans\"><span class=\"icon icon-gizmo\"></span></a>";
     html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','hierarchy')\" class=\"iconbutton-small tt\" data-tt=\"Hierarchy\"><span class=\"icon icon-list\"></span></a>";
@@ -170,8 +172,6 @@ function printNode(html, node, level)
     if (node.hasSkin())
         html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "',false,{skin:true});\" class=\"treebutton\">Skin</a>";
 
-    html += "</td><td>";
-    html += "&nbsp;<span class=\"icon iconhover icon-eye " + hideclass + "\" onclick=\"gui.corePatch().getOpById('" + op.id + "').toggleNodeVisibility('" + node.name + "');this.classList.toggle('node-hidden');\"></span>";
     html += "</td>";
 
     html += "</tr>";

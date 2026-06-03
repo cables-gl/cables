@@ -55,8 +55,8 @@ let GltfTexture = class
         }
 
         const cgl_aniso = 4;
-        const loadingId = cgl.patch.loading.start("gltfTexture", "gltftex " + CABLES.basename(inFile.get()), op);
-        // console.log("gltfTexture", gltf, texInfo);
+        const loadingId = cgl.patch.loading.start("gltfTexture", "gltfTex " + CABLES.basename(inFile.get()) + ": " + img.name, op);
+        // console.log("gltfTexture", gltf, texInfo,img);
 
         if (img.mimeType == "image/ktx2")
         {
@@ -64,8 +64,10 @@ let GltfTexture = class
 
             CABLES.loadKtx(sourceURI, (t) =>
             {
+                this.cgl_filter = CGL.Texture.FILTER_LINEAR;
                 this.tex = t;
                 cgl.patch.loading.finished(loadingId);
+
             });
         }
         else
