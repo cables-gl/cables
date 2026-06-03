@@ -61,8 +61,6 @@ let GltfTexture = class
         gltf.loadingTextures = CABLES.loadingTextures || 0;
         gltf.loadingTextures++;
 
-        cgl.pauseRendering++;
-
         if (img.mimeType == "image/ktx2")
         {
             this.tex = CGL.Texture.getEmptyTexture(cgl);
@@ -80,11 +78,9 @@ let GltfTexture = class
                     console.log("is not a texture");
                 }
 
-                gltf.loadingTextures--;
-                cgl.pauseRendering--;
                 // }, 300);
 
-                    gltf.loadingTextures--;
+                gltf.loadingTextures--;
 
             });
         }

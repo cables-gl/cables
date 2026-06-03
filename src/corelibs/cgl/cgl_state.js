@@ -23,7 +23,6 @@ export class CglContext extends CgContext
 {
     #cursor = "auto";
 
-    pauseRendering = 0;
     frameStartTime = 0;
 
     /**
@@ -376,7 +375,6 @@ export class CglContext extends CgContext
 
     endFrame()
     {
-        if (this.pauseRendering) return;
         if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
         this.setPreviousShader();
@@ -588,7 +586,6 @@ export class CglContext extends CgContext
 
     renderStart(cgl, identTranslate, identTranslateView)
     {
-        if (this.pauseRendering) return;
         this.fpsCounter.startFrame();
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
@@ -687,7 +684,6 @@ export class CglContext extends CgContext
     setTexture(slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
-        if (this.pauseRendering) return;
 
         if (t === null) t = Texture.getEmptyTexture(this).tex;
 
