@@ -686,6 +686,7 @@ export class CglContext extends CgContext
     setTexture(slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
+        if (this.pauseRendering) return;
 
         if (t === null) t = Texture.getEmptyTexture(this).tex;
 
