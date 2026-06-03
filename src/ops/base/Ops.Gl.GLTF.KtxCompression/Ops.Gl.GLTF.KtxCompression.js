@@ -26,12 +26,16 @@ if (!ktx)
     }
     }).then(async (_ktx) =>
     {
+        // cgl.addNextFrameOnceCallback(() =>
+        // {
         console.log("ktx loaded...", op.patch.cgl.canvas);
-        ktx = CABLES.ktx = _ktx;
         // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
 
-        ktx.GL.makeContextCurrent(ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));
+        _ktx.GL.makeContextCurrent(_ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));
         staticAttachments.libktx_read_wasm = null;
+
+        ktx = CABLES.ktx = _ktx;
+        // });
     });
 }
 
@@ -50,13 +54,13 @@ function loadKTX2Texture(url, cb)
                 const bytes = new Uint8Array(ab);
                 const ktex = new ktx.texture(bytes);
 
-                console.log("ktex", ktex.baseWidth);
+                // console.log("ktex", ktex.baseWidth);
                 // setTimeout(() =>
                 // {
 
                 cgl.addNextFrameOnceCallback(() =>
                 {
-                    console.log("frame", op.patch.getFrameNum());
+                    // console.log("frame", op.patch.getFrameNum());
 
                     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
                     const texture = uploadTextureToGl(op.patch.cgl.gl, ktex);
@@ -64,12 +68,10 @@ function loadKTX2Texture(url, cb)
                     // gl.bindTexture(texture.target, texture.object);
                     // gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
                     // gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-                    // // ktex.delete();
-                    setTimeout(() =>
-                    {
 
-                        cb(texture, ktex.baseWidth, ktex.baseHeight);
-                    }, 1000);
+                    cb(texture, ktex.baseWidth, ktex.baseHeight);
+
+                    // ktex.delete();
                 });
                 // }, Math.random() * 10000);
 
@@ -172,7 +174,7 @@ function uploadTextureToGl(gl, ktexture)
     // console.log("text", gl.getError());
     // op.patch.cgl.gl.generateMipmap(result.target);
 
-    gl.getError();
+    // gl.getError();
     // console.log("result", formatString);
 
     return {
