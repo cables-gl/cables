@@ -1273,10 +1273,11 @@ class CglShader extends CgShader
                 {
                     t = this._textureStackTexCgl[i].tex || Texture.getEmptyTexture(this._cgl).tex;
                 }
-                if (!this._cgl.gl.isTexture(t))
+                if (!this._cgl.gl.isTexture(t) && !this.errrrrrrr)
                 {
                     console.log("noooooooooooootex", i, this);
 
+                    this.errrrrrrr = 1;
                 }
 
                 let bindOk = true;
