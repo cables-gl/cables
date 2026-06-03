@@ -395,7 +395,7 @@ export class Texture extends CgTexture
      */
     dispose()
     {
-        this.delete();
+        // this.delete();
         return Texture.getTempTexture(this._cgl);
     }
 
