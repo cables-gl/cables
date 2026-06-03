@@ -58,6 +58,9 @@ let GltfTexture = class
         const loadingId = cgl.patch.loading.start("gltfTexture", "gltftex " + CABLES.basename(inFile.get()), op);
         // console.log("gltfTexture", gltf, texInfo);
 
+        gltf.loadingTextures = gltf.loadingTextures || 0;
+        gltf.loadingTextures++;
+
         if (img.mimeType == "image/ktx2")
         {
             this.tex = CGL.Texture.getEmptyTexture(cgl);
@@ -66,12 +69,16 @@ let GltfTexture = class
             {
                 this.tex = t;
                 cgl.patch.loading.finished(loadingId);
+
+                gltf.loadingTextures--;
             });
         }
         else
+        {
             this.tex = CGL.Texture.load(cgl, sourceURI, (err) =>
             {
                 cgl.patch.loading.finished(loadingId);
+                gltf.loadingTextures--;
 
                 if (err)
                 {
@@ -86,7 +93,7 @@ let GltfTexture = class
                 "imgBitmap": true,
                 "filter": this.cgl_filter
             });
-
+        }
         if (!this.tex)console.log("notex!???");
     }
 

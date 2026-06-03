@@ -65,7 +65,11 @@ function loadKTX2Texture(url, cb)
                     // gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
                     // gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
                     // // ktex.delete();
-                    cb(texture, ktex.baseWidth, ktex.baseHeight);
+                    setTimeout(() =>
+                    {
+
+                        cb(texture, ktex.baseWidth, ktex.baseHeight);
+                    }, 1000);
                 });
                 // }, Math.random() * 10000);
 

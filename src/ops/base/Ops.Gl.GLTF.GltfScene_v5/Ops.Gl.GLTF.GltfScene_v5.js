@@ -273,7 +273,11 @@ function finishLoading()
 
     if (gltf.loadingMeshes > 0)
     {
-        // op.log("waiting for async meshes...");
+        setTimeout(finishLoading, 50);
+        return;
+    }
+    if (gltf.loadingTextures > 0)
+    {
         setTimeout(finishLoading, 50);
         return;
     }
@@ -479,6 +483,7 @@ inActive.onChange = () =>
 };
 let preload = null;
 let idle = null;
+
 function reloadSoon(nocache)
 {
     if (!inActive.get()) return;
@@ -489,11 +494,12 @@ function reloadSoon(nocache)
     clearTimeout(idle);
     idle = setTimeout(() =>
     {
+        if (!inActive.get()) return;
         loadBin(nocache);
 
         // cgl.patch.loading.finished(preload);
         preload = null;
-    }, 50);
+    }, 100);
 }
 
 function updateMaterials()

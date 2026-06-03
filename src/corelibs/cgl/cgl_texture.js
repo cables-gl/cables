@@ -417,7 +417,7 @@ export class Texture extends CgTexture
         this.image = null;
         CABLES.idleCallback(() =>
         {
-            // this._cgl.gl.deleteTexture(this.tex);
+            this._cgl.gl.deleteTexture(this.tex);
             this.tex = null;
         });
     }
