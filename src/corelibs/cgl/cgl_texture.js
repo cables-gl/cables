@@ -395,7 +395,7 @@ export class Texture extends CgTexture
      */
     dispose()
     {
-        // this.delete();
+        this.delete();
         return Texture.getTempTexture(this._cgl);
     }
 
@@ -417,7 +417,7 @@ export class Texture extends CgTexture
         this.image = null;
         CABLES.idleCallback(() =>
         {
-            this._cgl.gl.deleteTexture(this.tex);
+            // this._cgl.gl.deleteTexture(this.tex);
             this.tex = null;
         });
     }
