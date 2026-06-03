@@ -51,6 +51,9 @@ export class Texture extends CgTexture
      * @param {CglContext} __cgl
      * @param {CglTextureOptions} options
      */
+
+    disposable = true;
+
     constructor(__cgl, options = {})
     {
         super(options);
@@ -123,7 +126,6 @@ export class Texture extends CgTexture
 
         if (options.ktx)
         {
-
             this._glInternalFormat = this._cgl.gl.SRGB8_ALPHA8;
             this._glDataFormat = this._cgl.gl.COMPRESSED_SRGB8_ALPHA8_ETC2_EAC;
         }
@@ -394,11 +396,13 @@ export class Texture extends CgTexture
     dispose()
     {
         this.delete();
-        return CGL.Texture.getTempTexture(this._cgl);
+        return Texture.getTempTexture(this._cgl);
     }
 
     delete()
     {
+        if (!this.disposable) return;
+
         if (this.loading)
         {
             // cant delete texture when still loading
@@ -702,6 +706,7 @@ export class Texture extends CgTexture
     {
         if (!cgl) console.error("[getTempTexture] no cgl!");
         if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.WRAP_REPEAT);
+        cgl.tempTexture.disposable = false;
         return cgl.tempTexture;
     }
 
@@ -717,6 +722,7 @@ export class Texture extends CgTexture
     {
         if (!cgl) console.error("[getTempTexture] no cgl!");
         if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.WRAP_REPEAT, 1, 0.2, 0.2);
+        cgl.tempTexture.disposable = false;
         return cgl.errorTexture;
     }
 

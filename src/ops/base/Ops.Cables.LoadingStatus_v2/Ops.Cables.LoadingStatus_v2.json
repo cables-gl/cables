@@ -2,9 +2,10 @@
     "id": "e62f7f4c-7436-437e-8451-6bc3c28545f7",
     "changelog": [
         {
-            "message": "created op",
+            "message": "option to log loading events to the dev tools console for debugging",
             "author": "pandur",
-            "date": 1617722412332
+            "date": 1617722412332,
+            "type": "feature"
         }
     ],
     "authorName": "pandur",
