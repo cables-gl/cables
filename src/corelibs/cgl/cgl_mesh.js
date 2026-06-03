@@ -776,6 +776,7 @@ class Mesh extends CgMesh
     {
         // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
+        if (this.#cgl.pauseRendering) return;
         if (this.#cgl.aborted) return;
         shader = shader || this.#cgl.getShader();
 

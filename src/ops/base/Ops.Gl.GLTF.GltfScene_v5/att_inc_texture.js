@@ -83,6 +83,9 @@ let GltfTexture = class
                 gltf.loadingTextures--;
                 cgl.pauseRendering--;
                 // }, 300);
+
+                    gltf.loadingTextures--;
+
             });
         }
         else
