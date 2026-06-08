@@ -48,9 +48,10 @@ CABLES.loadKtx = function (url, cb)
             {
                 console.log("text", transcodeResult);
 
-                const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR,
-                    // "type": transcodeResult.type,
-                    "width": transcodeResult.width, "height": transcodeResult.height });
+                const ctex = new CGL.Texture(op.patch.cgl, {
+                    "wrap": CGL.Texture.WRAP_REPEAT,
+                    "width": transcodeResult.width,
+                    "height": transcodeResult.height });
 
                 ctex.setFormat({ "glDataFormat": transcodeResult.format });
 

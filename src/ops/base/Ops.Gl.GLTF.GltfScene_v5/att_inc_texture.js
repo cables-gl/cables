@@ -67,9 +67,8 @@ let GltfTexture = class
 
             CABLES.loadKtx(sourceURI, (t) =>
             {
-                this.cgl_filter = CGL.Texture.FILTER_LINEAR;
-                // setTimeout(() =>
-                // {
+                t.filter = this.cgl_filter;
+                t.wrap = this.cgl_wrap;
 
                 this.tex = t;
                 cgl.patch.loading.finished(loadingId);
@@ -77,8 +76,6 @@ let GltfTexture = class
                 {
                     console.log("is not a texture");
                 }
-
-                // }, 300);
 
                 gltf.loadingTextures--;
 
