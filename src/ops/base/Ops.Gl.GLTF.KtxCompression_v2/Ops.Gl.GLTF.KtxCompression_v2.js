@@ -30,7 +30,7 @@ let cgl_aniso = 0;
 let timedLoader = 0;
 let loadingId = null;
 
-CABLES.loadKtx = function (url, cb)
+CABLES.loadKtx = function (url, cb, opts)
 {
     if (!CABLES.ktx) return console.log("no ktx");
     op.checkMainloopExists();
@@ -49,7 +49,8 @@ CABLES.loadKtx = function (url, cb)
 
                 const ctex = new CGL.Texture(op.patch.cgl, {
                     "compression": true,
-                    "wrap": CGL.Texture.WRAP_REPEAT,
+                    "wrap": opts?.wrap || CGL.Texture.WRAP_REPEAT,
+                    "filter": opts?.filter || CGL.Texture.FILTER_LINEAR,
                     "width": transcodeResult.width,
                     "height": transcodeResult.height });
 

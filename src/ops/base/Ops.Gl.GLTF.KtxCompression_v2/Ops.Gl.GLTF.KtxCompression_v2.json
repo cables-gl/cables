@@ -3,6 +3,7 @@
     "id": "a8cd18dc-9d1e-45d4-943f-20beaa912d3b",
     "created": 1780504189076,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
