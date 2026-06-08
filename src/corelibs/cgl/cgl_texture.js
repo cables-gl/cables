@@ -14,7 +14,7 @@ const log = new Logger("cgl_texture");
  * @property {number} [type]
  * @property {number} [width]
  * @property {number} [height]
- * @property {number} [compression]
+ * @property {boolean} [compression]
  * @property {number} [textureType]
  * @property {number} [filter]
  * @property {number} [wrap]
@@ -24,7 +24,6 @@ const log = new Logger("cgl_texture");
  * @property {number} [anisotropic]
  * @property {boolean} [isDepthTexture]
  * @property {boolean} [isFloatingPointTexture]
- * @property {Object} [ktx]
  */
 
 /**
@@ -85,7 +84,7 @@ export class Texture extends CgTexture
         this._glDataType = -1;
         this._glInternalFormat = -1;
         this._glDataFormat = -1;
-        this.compression = null;
+        this.compression = false;
 
         if (options)
         {
@@ -102,12 +101,6 @@ export class Texture extends CgTexture
             if ("anisotropic" in options) this.anisotropic = options.anisotropic;
             if ("pixelFormat" in options) this.pixelFormat = options.pixelFormat;
 
-            if (options.ktx)
-            {
-                this._glInternalFormat = this._cgl.gl.SRGB8_ALPHA8;
-                this.tex = options.ktx.object;
-                this.texTarget = options.ktx.target;
-            }
         }
         else
         {
@@ -124,14 +117,7 @@ export class Texture extends CgTexture
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
-        if (options.ktx)
-        {
-            this._glInternalFormat = this._cgl.gl.SRGB8_ALPHA8;
-            this._glDataFormat = this._cgl.gl.COMPRESSED_SRGB8_ALPHA8_ETC2_EAC;
-        }
-
-        if (!options.ktx)
-            this.setSize(options.width, options.height);
+        this.setSize(options.width, options.height);
         this.getInfoOneLine();
     }
 
@@ -327,15 +313,16 @@ export class Texture extends CgTexture
         measure.finish();
     }
 
+    /**
+     * @param {Object[]} mips
+     */
     initFromMipMapData(mips)
     {
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-        // this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
         for (let i = 0; i < mips.length; i++)
         {
-            console.log("format", this._glInternalFormat, this._glDataFormat);
-            this._cgl.gl.compressedTexImage2D(this._cgl.gl.TEXTURE_2D, i, this._glDataFormat, mips[i].width, mips[i].height, 0, mips[i].data);
+            this.glTexImage2D(this._cgl.gl.TEXTURE_2D, i, this._glDataFormat, mips[i].width, mips[i].height, 0, mips[i].data);
             this._setFilter();
         }
         this._cgl.gl.bindTexture(this.texTarget, null);

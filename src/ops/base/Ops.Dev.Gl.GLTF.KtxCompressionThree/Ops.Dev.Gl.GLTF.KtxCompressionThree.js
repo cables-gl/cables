@@ -46,9 +46,9 @@ CABLES.loadKtx = function (url, cb)
 
             CABLES.ktx.load(url, (transcodeResult) =>
             {
-                console.log("text", transcodeResult);
 
                 const ctex = new CGL.Texture(op.patch.cgl, {
+                    "compression": true,
                     "wrap": CGL.Texture.WRAP_REPEAT,
                     "width": transcodeResult.width,
                     "height": transcodeResult.height });
@@ -62,11 +62,6 @@ CABLES.loadKtx = function (url, cb)
             {
                 console.log("ktx progress");
             }, (e) => {});
-            // const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
-            // ctex.width = w;
-            // ctex.height = h;
-
-            // console.log("CTEX", ctex);
 
             if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
