@@ -61,7 +61,6 @@ let GltfMaterial = class
                 const idx = getTextureSourceForIndex(gltf, this.json.extensions.CABLES_materials_lightmap.lightMapTexture.index);
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.extensions.CABLES_materials_lightmap.lightMapTexture);
                 this._matTexLightmap = gltf.textures[idx];
-                console.log("lightmap");
             }
 
         }

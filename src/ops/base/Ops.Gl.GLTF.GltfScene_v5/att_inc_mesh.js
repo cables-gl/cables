@@ -103,7 +103,7 @@ let gltfMesh = class
                     const tgeom = new CGL.Geometry("gltf_target_" + j);
 
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
-                    console.log("add targetttt");
+                    // console.log("add targetttt");
 
                     this.geom.morphTargets.push(tgeom);
                 }
@@ -243,7 +243,6 @@ let gltfMesh = class
 
         const geo = geom.copy();
 
-        console.log("geooo", !!geo.morphTargets);
         geo.name = geom.name;
         geo.unIndex(false, true);
         if (!this.hasMorphTargets)

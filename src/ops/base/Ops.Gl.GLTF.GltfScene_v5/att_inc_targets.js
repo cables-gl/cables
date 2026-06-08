@@ -78,7 +78,7 @@ const GltfTargetsRenderer = class
         {
             this.numRowsPerGeom = Math.ceil(w / maxSize);
             w = maxSize;
-            console.log("num rows per geom", this.numRowsPerGeom);
+            // console.log("num rows per geom", this.numRowsPerGeom);
         }
 
         if (geom.morphTargets[0].vertices && geom.morphTargets[0].vertices.length) this.numRowsPerTarget++;
