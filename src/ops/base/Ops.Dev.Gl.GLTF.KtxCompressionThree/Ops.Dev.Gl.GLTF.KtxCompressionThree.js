@@ -24,41 +24,6 @@ if (!ktx && window.KTX2Loader)
     ktx = CABLES.ktx = _ktx;
 }
 
-function loadKTX2Texture(url, cb)
-{
-    const gl = op.patch.cgl.gl;
-    cgl.addNextFrameOnceCallback(() =>
-    {
-        console.log("KTXLOAD", url);
-        CABLES.ktx.load(url, (transcodeResult) =>
-        {
-            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-            console.log("ktx transcodeResult", transcodeResult);
-            // gl.bindTexture(texture.target, texture.object);
-            // gl.texParameteri(texture.target, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
-            // gl.texParameteri(texture.target, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-
-            const ktex = {
-                "object": CGL.Texture.getEmptyTexture(cgl).tex,
-                "target": gl.TEXTURE_2D,
-                "baseWidth": transcodeResult.width,
-                "baseHeight": transcodeResult.height
-            };
-
-            cgl.addNextFrameOnceCallback(() =>
-            {
-                cb(ktex, ktex.baseWidth, ktex.baseHeight);
-            });
-        }, () =>
-        {
-            console.log("ktx progress");
-        }, (e) =>
-        {
-            console.error("ktx err", e);
-        });
-    });
-}
-
 /// /////////////////////////////////////////////////////
 
 let cgl_aniso = 0;
@@ -79,18 +44,31 @@ CABLES.loadKtx = function (url, cb)
         {
             op.setUiError("urlerror", null);
 
-            loadKTX2Texture(url, (texture, w, h) =>
+            CABLES.ktx.load(url, (transcodeResult) =>
             {
-                const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
-                ctex.width = w;
-                ctex.height = h;
+                console.log("text", transcodeResult);
 
-                console.log("CTEX", ctex);
+                const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR,
+                    // "type": transcodeResult.type,
+                    "width": transcodeResult.width, "height": transcodeResult.height });
+
+                ctex.setFormat({ "glDataFormat": transcodeResult.format });
+
+                ctex.initFromMipMapData(transcodeResult.faces[0].mipmaps);
                 cb(ctex);
 
-                if (loadingId) loadingId = op.patch.loading.finished(loadingId);
+            }, () =>
+            {
+                console.log("ktx progress");
+            }, (e) => {});
+            // const ctex = new CGL.Texture(op.patch.cgl, { "filter": CGL.Texture.FILTER_LINEAR, "ktx": texture, "type": texture.target, "compression": true });
+            // ctex.width = w;
+            // ctex.height = h;
 
-            });
+            // console.log("CTEX", ctex);
+
+            if (loadingId) loadingId = op.patch.loading.finished(loadingId);
+
         });
         op.checkMainloopExists();
 

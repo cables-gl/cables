@@ -327,6 +327,20 @@ export class Texture extends CgTexture
         measure.finish();
     }
 
+    initFromMipMapData(mips)
+    {
+        this._cgl.gl.bindTexture(this.texTarget, this.tex);
+
+        // this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
+        for (let i = 0; i < mips.length; i++)
+        {
+            console.log("format", this._glInternalFormat, this._glDataFormat);
+            this._cgl.gl.compressedTexImage2D(this._cgl.gl.TEXTURE_2D, i, this._glDataFormat, mips[i].width, mips[i].height, 0, mips[i].data);
+            this._setFilter();
+        }
+        this._cgl.gl.bindTexture(this.texTarget, null);
+    }
+
     updateMipMap()
     {
         if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)

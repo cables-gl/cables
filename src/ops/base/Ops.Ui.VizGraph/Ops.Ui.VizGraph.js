@@ -36,7 +36,7 @@ op.renderVizLayer = (ctx, layer) =>
 {
     const doFill = inFill.get();
 
-    const colors = ["#7AC4E0", "#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
+    const colors = ["#555555", "#7AC4E0", "#D183BF", "#9091D6", "#FFC395", "#F0D165", "#63A8E8", "#CF5D9D", "#66C984", "#D66AA6", "#515151"];
 
     let fontSize = 10 * layer.pixelDensity;
     ctx.font = "bold " + fontSize + "px sourceCodePro";
@@ -74,18 +74,25 @@ op.renderVizLayer = (ctx, layer) =>
         {
             y = buff[p][i];
 
-            y = CABLES.map(y, min, max, layer.height - 3, 3);
+            y = CABLES.map(y, min, max, layer.height, 3);
             y += layer.y;
             if (i === 0)ctx.moveTo(layer.x, y);
             else ctx.lineTo(layer.x + i * mulX, y);
+
         }
+
+        ctx.lineTo(layer.x + (buff[p].length + 2) * mulX, y + 2);
 
         if (doFill)
         {
-            ctx.lineTo(layer.x + buff[p].length * mulX, layer.y + layer.height);
-            ctx.lineTo(layer.x, layer.y + layer.height);
+            ctx.lineTo(layer.x + (buff[p].length + 1) * mulX, layer.y + layer.height + 2);
+            ctx.lineTo(layer.x, layer.y + layer.height + 2);
             ctx.fillStyle = colors[p];
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#aaaaaa";
             ctx.fill();
+            ctx.stroke();
         }
         else
         {
