@@ -68,6 +68,7 @@ let GltfTexture = class
             CABLES.loadKtx(sourceURI, (t) =>
             {
                 t.filter = this.cgl_filter;
+                // t.filter = CGL.Texture.FILTER_LINEAR;
                 t.wrap = this.cgl_wrap;
 
                 this.tex = t;
@@ -79,7 +80,7 @@ let GltfTexture = class
 
                 gltf.loadingTextures--;
 
-            });
+            }, { "wrap": this.cgl_wrap, "filter": this.cgl_filter });
         }
         else
         {
