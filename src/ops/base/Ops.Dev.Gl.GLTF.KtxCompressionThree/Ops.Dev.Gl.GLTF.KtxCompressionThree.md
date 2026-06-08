@@ -1,0 +1,1 @@
+`toktx --2d --genmipmap  --target_type RGBA --t2 --encode uastc --clevel 5 --qlevel 255 --lower_left_maps_to_s0t0 --assign_oetf linear lala.ktx2 cables_2026224_095303.png`

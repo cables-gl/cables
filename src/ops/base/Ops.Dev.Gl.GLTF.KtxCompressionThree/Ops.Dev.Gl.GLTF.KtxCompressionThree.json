@@ -1,0 +1,77 @@
+{
+    "authorName": "pandur",
+    "id": "a8cd18dc-9d1e-45d4-943f-20beaa912d3b",
+    "created": 1780504189076,
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Support ASTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support ETC1",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support S3TC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support BPTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support PVRTC",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Support ASTC HDR",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1776265399619
+        },
+        {
+            "message": "Gl.GLTF.KtxCompression_v2 renamed to Ops.Dev.Gl.GLTF.KtxCompressionThree",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1780907973101
+        }
+    ],
+    "summary": "Load a KTX file as a texture",
+    "docs": {},
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ],
+    "dependencies": [
+        {
+            "src": "./ktx-parse.module.js",
+            "type": "module",
+            "export": "KTX2ParseModule"
+        },
+        {
+            "src": "./KTX2Loader.js",
+            "type": "module",
+            "export": "KTX2Loader"
+        },
+        {
+            "src": "./zstddec.module.js",
+            "type": "module",
+            "export": "ZSTDDecoder"
+        }
+    ]
+}
