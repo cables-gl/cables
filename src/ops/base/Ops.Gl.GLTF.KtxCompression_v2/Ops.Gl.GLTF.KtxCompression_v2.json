@@ -3,7 +3,6 @@
     "id": "a8cd18dc-9d1e-45d4-943f-20beaa912d3b",
     "created": 1780504189076,
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -41,18 +40,14 @@
         {
             "message": "op created",
             "type": "new op",
-            "author": "pandur",
-            "date": 1776265399619
-        },
-        {
-            "message": "Gl.GLTF.KtxCompression_v2 renamed to Ops.Dev.Gl.GLTF.KtxCompressionThree",
-            "type": "rename",
             "author": "stephan",
-            "date": 1780907973101
+            "date": 1780650574000
         }
     ],
     "summary": "Load a KTX file as a texture",
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "license": "MIT",
     "coreLibs": [
         "cgl"
@@ -73,5 +68,14 @@
             "type": "module",
             "export": "ZSTDDecoder"
         }
-    ]
+    ],
+    "credits": [
+        {
+            "title": "KTX2Loader by three.js",
+            "author": "three.js",
+            "url": "https://github.com/mrdoob/three.js/blob/dev/examples/jsm/loaders/KTX2Loader.js",
+            "licence": "MIT"
+        }
+    ],
+    "isReleased": false
 }
