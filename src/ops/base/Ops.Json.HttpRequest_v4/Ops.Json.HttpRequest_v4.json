@@ -80,6 +80,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1754664138898
+        },
+        {
+            "message": "Skip sending Content-Type header for GET/HEAD, greyout parameters",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1781009248691,
+            "url": "https://github.com/cables-gl/cables/issues/8339"
         }
     ],
     "layout": {
