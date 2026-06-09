@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1615991773550
-        },
-        {
-            "message": "Ops.User.pandur.AnimMatrix renamed to Ops.Gl.Matrix.AnimMatrix",
-            "author": "pandur",
-            "date": 1616005520078
+            "date": 1615991773550,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
