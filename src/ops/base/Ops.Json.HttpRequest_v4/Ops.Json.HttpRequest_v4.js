@@ -32,9 +32,11 @@ outData.ignoreValueSerialize = true;
 outString.ignoreValueSerialize = true;
 outDataUrl.ignoreValueSerialize = true;
 
+const nonBodyMethods = ["GET", "HEAD"];
 let reloadTimeout = 0;
 let retryTimeout = 0;
 let requestAfterFinish = false;
+let sendContentType = true;
 
 outString.onLinkChanged =
     outDataUrl.onLinkChanged =
@@ -81,8 +83,11 @@ op.onDelete = () =>
 
 function updateUi()
 {
+    const noBody = nonBodyMethods.includes(inMethod.get());
+    sendContentType = !noBody;
     inMethod.setUiAttribs({ "greyout": inResContentType.get().includes("Binary") });
-    inBody.setUiAttribs({ "greyout": inMethod.get() == "GET" });
+    inBody.setUiAttribs({ "greyout": noBody });
+    inContentType.setUiAttribs({ "greyout": noBody });
     outString.setUiAttribs({ "greyout": inResContentType.get() != "String" });
     outData.setUiAttribs({ "greyout": inResContentType.get() != "JSON" });
     outDataUrl.setUiAttribs({ "greyout": inResContentType.get() != "Binary Base64" });
@@ -175,7 +180,7 @@ function reload(addCachebuster, force = false)
 
         if (inHeaders.isLinked()) options.headers = inHeaders.get();
         if (!options.headers)options.headers = {};
-        if (!options.headers["Content-Type"])options.headers["Content-Type"] = inContentType.get();
+        if (!options.headers["Content-Type"] && sendContentType) options.headers["Content-Type"] = inContentType.get();
 
         const resContentType = inResContentType.get();
         fetch(url, options).then((res) =>
@@ -247,3 +252,5 @@ function reload(addCachebuster, force = false)
         });
     });
 }
+
+updateUi();
