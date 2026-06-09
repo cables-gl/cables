@@ -375,11 +375,6 @@
                 "type": 0,
                 "name": "Flip Textures",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Gamma encoded",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

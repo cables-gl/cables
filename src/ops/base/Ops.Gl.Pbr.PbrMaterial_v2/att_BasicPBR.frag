@@ -419,10 +419,6 @@ void main()
     #ifdef USE_ALBEDO_TEX
         vec4 AlbedoMap   = texture(_AlbedoMap, UV0_transformed);
 
-        #ifdef GAMMAENC
-          AlbedoMap = vec4(pow(AlbedoMap.rgb, vec3(1.0/2.2)), AlbedoMap.a);
-        #endif
-
         #ifdef MUL_ALBEDO
         AlbedoMap*=_Albedo;
         #endif
@@ -479,10 +475,6 @@ void main()
                 #endif
             #endif
         #endif
-
-        // #ifdef GAMMAENC
-        //     Lightmap = pow(Lightmap.rgb, vec3(1.0/2.2));
-        // #endif
 
     #endif
     // initialize texture values

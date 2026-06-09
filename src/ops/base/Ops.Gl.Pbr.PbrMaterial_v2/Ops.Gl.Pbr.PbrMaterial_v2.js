@@ -69,7 +69,6 @@ const inTexTransOffsetY = op.inValue("Texture Offset Y", 0);
 
 const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
 const inTexFlip = op.inBool("Flip Textures");
-const inGammaEnc = op.inBool("Gamma encoded");
 
 inTrigger.onTriggered = doRender;
 
@@ -235,7 +234,6 @@ inTexRM.onChange =
     inToggleGR.onChange =
     inUseThinFilm.onChange =
     inTexFlip.onChange =
-    inGammaEnc.onChange =
     inLightmapAO.onChange =
     inVertexColourMode.onChange = updateDefines;
 
@@ -265,7 +263,6 @@ function updateDefines()
     PBRShader.toggleDefine("USE_EMISSION", inTexEmission.get());
     PBRShader.toggleDefine("USE_THIN_FILM_MAP", inTexThinFilm.get());
     PBRShader.toggleDefine("FLIP_TEX", inTexFlip.get());
-    PBRShader.toggleDefine("GAMMAENC", inGammaEnc.get());
 
     // VERTEX_COLORS
     PBRShader.toggleDefine("VCOL_COLOUR", inVertexColourMode.get() === "colour");
