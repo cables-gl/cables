@@ -6,6 +6,7 @@ const
 str1.onChange =
 str2.onChange = update;
 update();
+op.setUiAttribs({ "mathTitle": true });
 
 function update()
 {

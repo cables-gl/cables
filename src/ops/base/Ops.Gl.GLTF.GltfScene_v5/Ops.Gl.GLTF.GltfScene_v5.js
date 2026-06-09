@@ -18,7 +18,7 @@ const
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
-    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Mikkt", "Never"], "Auto"),
+    inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Mikkt", "Never"], "Mikkt"),
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
@@ -122,6 +122,7 @@ function updateUi()
     inUseMatTexProps.setUiAttribs({ "greyout": !inUseMatProps.get() });
     inTime.setUiAttribs({ "greyout": inTimeLine.get() });
     inRescaleSize.setUiAttribs({ "greyout": !inRescale.get() });
+    inShow.setUiAttribs({ "greyout": !inActive.get() });
 }
 
 inMaterials.onChange = function ()
@@ -480,6 +481,7 @@ inActive.onChange = () =>
         if (gltf)gltf.dispose();
         gltf = null;
     }
+    updateUi();
 };
 let preload = null;
 let idle = null;
