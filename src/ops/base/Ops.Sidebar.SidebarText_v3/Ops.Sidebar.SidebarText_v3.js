@@ -38,16 +38,26 @@ function onIdChanged()
     el.id = inId.get();
 }
 
+let hasRequest = false;
 function onLabelTextChanged()
 {
-    const labelText = labelPort.get();
-    label.innerHTML = labelText;
+    if (!hasRequest)
+    {
+        hasRequest = true;
+        requestAnimationFrame(() =>
+        {
+            hasRequest = false;
+            const labelText = labelPort.get();
+            label.innerHTML = labelText;
+        });
+    }
 }
 
 function onParentChanged()
 {
     siblingsPort.set(null);
     const parent = parentPort.get();
+    console.log("parent", parent);
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
