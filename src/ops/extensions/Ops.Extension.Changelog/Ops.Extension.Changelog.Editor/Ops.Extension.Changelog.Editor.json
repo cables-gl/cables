@@ -293,6 +293,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1779375286640
+        },
+        {
+            "message": "Make op dependencies editable in editor",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1780928903278
         }
     ],
     "isReleased": true,
