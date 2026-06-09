@@ -1,3 +1,49 @@
+function float32ToFloat16Bits(val)
+{
+    const floatView = new Float32Array(1);
+    const intView = new Uint32Array(floatView.buffer);
+
+    floatView[0] = val;
+    const x = intView[0];
+
+    const sign = (x >> 16) & 0x8000;
+    const mantissa = x & 0x007fffff;
+    let exp = (x >> 23) & 0xff;
+
+    if (exp === 0xff)
+    {
+        if (mantissa !== 0) return sign | 0x7e00;
+        return sign | 0x7c00;
+    }
+
+    exp = exp - 127 + 15;
+
+    if (exp >= 0x1f) return sign | 0x7c00;
+    if (exp <= 0)
+    {
+        if (exp < -10) return sign;
+        let m = mantissa | 0x00800000;
+        let shift = 14 - exp;
+        let half = m >> shift;
+        if ((m >> (shift - 1)) & 1) half += 1;
+        return sign | half;
+    }
+
+    let half = sign | (exp << 10) | (mantissa >> 13);
+    if (mantissa & 0x00001000) half += 1;
+    return half;
+}
+
+function float32ArrayToFloat16Array(src)
+{
+    const dst = new Uint16Array(src.length);
+    for (let i = 0; i < src.length; i++)
+    {
+        dst[i] = float32ToFloat16Bits(src[i]);
+    }
+    return dst;
+}
+
 const GltfTargetsRenderer = class
 {
     constructor(mesh)
@@ -155,9 +201,13 @@ const GltfTargetsRenderer = class
             }
         }
 
-        this.tex = new CGL.Texture(cgl, { "isFloatingPointTexture": true, "name": "targetsTexture" });
-
-        this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_LINEAR, CGL.Texture.WRAP_REPEAT);
+        this.tex = new CGL.Texture(cgl, {
+            // "pixelFormat": CGL.Texture.PFORMATSTR_RGBA16F,
+            "isFloatingPointTexture": true,
+            "name": "targetsTexture" });
+        // const halfBits = float32ArrayToFloat16Array(pixels);
+        // console.log("half", halfBits);
+        this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_REPEAT);
 
         // console.log("morphTargets generated texture", w, h);
     }

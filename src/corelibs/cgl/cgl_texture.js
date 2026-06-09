@@ -303,6 +303,11 @@ export class Texture extends CgTexture
 
         this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
 
+        this.filter = Texture.FILTER_NEAREST;
+
+        // this._glDataType = this._cgl.gl.HALF_FLOAT;
+        console.log("jajajajaj", this._glInternalFormat == this._cgl.gl.RGBA16F, this._glDataFormat == this._cgl.gl.RGBA, this._glDataType == this._cgl.gl.HALF_FLOAT, this.getInfoOneLine());
+
         this.glTexImage2D(this.texTarget, 0, this._glInternalFormat, w, h, 0, this._glDataFormat, this._glDataType, data);
 
         this._setFilter();
@@ -999,6 +1004,7 @@ export class Texture extends CgTexture
         if (tex.cubemap)obj.cubemap = true;
 
         if (tex.textureType == Texture.TYPE_FLOAT) obj.textureType = "TYPE_FLOAT";
+
         // else if (tex.textureType == Texture.TYPE_HALF_FLOAT) obj.textureType = "TYPE_HALF_FLOAT";
         else if (tex.textureType == Texture.TYPE_DEPTH) obj.textureType = "TYPE_DEPTH";
         else if (tex.textureType == Texture.TYPE_DEFAULT) obj.textureType = "TYPE_DEFAULT";
@@ -1042,12 +1048,12 @@ export class Texture extends CgTexture
 
         let floatDatatype = cgl.gl.FLOAT;
 
-        if (cgl.glUseHalfFloatTex)
-        {
-            if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-            if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-            if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
-        }
+        // if (cgl.glUseHalfFloatTex)
+        // {
+        //     if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+        //     if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+        //     if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        // }
 
         if (pixelFormatStr.includes("16bit"))
         {
