@@ -19,7 +19,6 @@ let ktx = CABLES.ktx;
 
 if (!ktx)
 {
-    console.log("load ktx");
     createKtxReadModule({ "locateFile": () =>
     {
         return "data:application/wasm;base64," + staticAttachments.libktx_read_wasm;
@@ -28,7 +27,7 @@ if (!ktx)
     {
         // cgl.addNextFrameOnceCallback(() =>
         // {
-        console.log("ktx loaded...", op.patch.cgl.canvas);
+        // console.log("ktx loaded...", op.patch.cgl.canvas);
         // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
 
         _ktx.GL.makeContextCurrent(_ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));

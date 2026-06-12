@@ -6,6 +6,7 @@ import { SwitchPort } from "./core_port_switch.js";
 import { MultiPort } from "./core_port_multi.js";
 import { Patch } from "./core_patch.js";
 import { MultiPort2 } from "./core_port_multi2.js";
+import { showUiErrors } from "./uierrors.js";
 
 /**
  * @typedef Translation
@@ -1752,7 +1753,9 @@ export class Op extends Events
      */
     setUiError(_id, _txt, _level = 2, _options = {})
     {
+        const a = { _txt };
         // overwritten in ui: core_extend_op
+        if (_level >= 2)showUiErrors(this, _id, _txt, _level, _options);
     }
 
     /**

@@ -19,7 +19,7 @@ let ktx = CABLES.ktx;
 
 if (!ktx && window.KTX2Loader)
 {
-    console.log("load ktx");
+    // console.log("load ktx");
     const _ktx = KTX2Loader.create(cgl, atob(staticAttachments.basis_transcoder_wasm), attachments.basis_transcoder);
     ktx = CABLES.ktx = _ktx;
 }

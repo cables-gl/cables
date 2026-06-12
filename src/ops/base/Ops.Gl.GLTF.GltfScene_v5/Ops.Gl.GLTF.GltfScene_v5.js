@@ -44,7 +44,6 @@ const
     outAnimFinished = op.outTrigger("Finished"),
     outLoading = op.outBoolNum("Loading"),
     outLoaded = op.outBoolNum("Loaded");
-
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
 let cgl = op.patch.cg || op.patch.cgl;
@@ -266,7 +265,7 @@ function finishLoading()
         gltfLoadingError = true;
         cgl.patch.loading.finished(loadingId);
 
-        op.setUiError("nogltf", "GLTF File not found");
+        op.setUiError("nogltf", "GLTF File not found", 2, { "info": inFile.get() });
         return;
     }
 
