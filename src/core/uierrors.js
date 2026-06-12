@@ -20,6 +20,7 @@ export function showUiErrors(op, id, txt, level, options)
     if (simpleLogDiv && !found)
     {
         simpleLogDiv.remove();
+        simpleLogDiv = null;
         return;
     }
     if (!found) return;
