@@ -12,9 +12,9 @@ export function showUiErrors(op, id, txt, level, options)
     {
         if (data[i] && data[i].txt)
         {
-            html += data[i].op.name + ": " + data[i].txt + " " + (data[i].options?.info) || "" + "<br/>";
+            html += data[i].op.name + ": " + data[i].txt + " " + (data[i].options?.info || "") + "<br/>";
             found = true;
-        } // console.log(patch.ops[i].uiAttribs);
+        }
     }
 
     if (simpleLogDiv && !found)
