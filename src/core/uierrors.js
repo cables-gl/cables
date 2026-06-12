@@ -22,6 +22,7 @@ export function showUiErrors(op, id, txt, level, options)
         simpleLogDiv.remove();
         return;
     }
+    if (!found) return;
     if (!simpleLogDiv)
     {
         simpleLogDiv = document.createElement("div");
