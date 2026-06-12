@@ -6,9 +6,24 @@ export function showUiErrors(op, id, txt, level, options)
 
     data[op.id + id] = { "op": op, "txt": txt, "id": id, options };
 
+    let html = "";
+    let found = false;
+    for (const i in data)
+    {
+        if (data[i] && data[i].txt)
+        {
+            html += data[i].op.name + ": " + data[i].txt + " " + (data[i].options?.info) || "" + "<br/>";
+            found = true;
+        } // console.log(patch.ops[i].uiAttribs);
+    }
+
+    if (simpleLogDiv && !found)
+    {
+        simpleLogDiv.remove();
+        return;
+    }
     if (!simpleLogDiv)
     {
-        console.log("errdisp");
         simpleLogDiv = document.createElement("div");
         simpleLogDiv.style.position = "absolute";
         simpleLogDiv.style.border = "1px solid red";
@@ -21,14 +36,6 @@ export function showUiErrors(op, id, txt, level, options)
         document.body.appendChild(simpleLogDiv);
 
     }
-    let html = "";
-    for (const i in data)
-    {
-        if (data[i] && data[i].txt)
-            html += data[i].op.name + ": " + data[i].txt + " " + (data[i].options?.info) || "" + "<br/>";
-        // console.log(patch.ops[i].uiAttribs);
-    }
-
     simpleLogDiv.innerHTML = html;
 
 }
