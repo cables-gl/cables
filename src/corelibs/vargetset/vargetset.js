@@ -97,7 +97,7 @@ export class VarSetOpWrapper
         if (!this._op.patch.hasVar(varname) && varname != 0 && this._triggerPort)
         {
             if (this._type == "string") this._op.patch.setVarValue(varname, "");
-            else if (this._type == "number") this._op.patch.setVarValue(varname, "");
+            else if (this._type == "number") this._op.patch.setVarValue(varname, 0);
             else this._op.patch.setVarValue(varname, null);
         }
 
