@@ -51,6 +51,11 @@
             },
             {
                 "type": 0,
+                "name": "string in float",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Infinity",
                 "subType": "number"
             }

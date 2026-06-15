@@ -728,7 +728,7 @@ export class Texture extends CgTexture
     {
         if (!cgl) console.error("[getTempTexture] no cgl!");
         if (!cgl.errorTexture) cgl.errorTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.WRAP_REPEAT, 1, 0.2, 0.2);
-        cgl.tempTexture.disposable = false;
+        cgl.errorTexture.disposable = false;
         return cgl.errorTexture;
     }
 

@@ -1,5 +1,6 @@
 let simpleLogDiv = null;
 const data = {};
+let lastHtml = "";
 
 export function showUiErrors(op, id, txt, level, options)
 {
@@ -38,6 +39,9 @@ export function showUiErrors(op, id, txt, level, options)
         document.body.appendChild(simpleLogDiv);
 
     }
-    simpleLogDiv.innerHTML = html;
-
+    if (lastHtml != html)
+    {
+        simpleLogDiv.innerHTML = html;
+        lastHtml = html;
+    }
 }

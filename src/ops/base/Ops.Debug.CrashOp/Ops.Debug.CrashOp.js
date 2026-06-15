@@ -7,6 +7,7 @@ const
     inPromiseFailEx = op.inTriggerButton("Promise Fail"),
     inShaderCrash = op.inTriggerButton("Shader Error"),
     outNan = op.outNumber("NaN", parseFloat()),
+    outNumStr = op.outNumber("string in float", "0.1"),
     outInf = op.outNumber("Infinity", Infinity);
 
 exec.onTriggered = () =>
@@ -41,13 +42,15 @@ inUndef.onTriggered = () =>
 
 inPromiseFailEx.onTriggered = () =>
 {
-    fetch("https://dewdewdew",
+    fetch(
+        "https://dewdewdew",
         {
             "mode": "cors",
             "headers": {
                 "Access-Control-Allow-Origin": "*"
             }
-        })
+        }
+    )
         .then((response) => { return response.json(); })
         .then(() => {});
 };

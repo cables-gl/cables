@@ -131,7 +131,7 @@ function realReload(nocache)
                     const t = CGL.Texture.getErrorTexture(cgl);
                     textureOut.setRef(t);
 
-                    op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2);
+                    op.setUiError("urlerror", "could not load texture: \"" + filename.get() + "\"", 2, { "info": filename.get() });
                     loadingId = op.patch.loading.finished(loadingId);
                     return;
                 }
