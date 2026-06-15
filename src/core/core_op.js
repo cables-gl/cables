@@ -963,7 +963,7 @@ export class Op extends Events
             const valuePort = new SwitchPort(
                 this,
                 name,
-                Port.TYPE_NUMBER,
+                Port.TYPE_STRING,
                 {
                     "display": "dropdown",
                     "hidePort": true,
@@ -1003,7 +1003,7 @@ export class Op extends Events
         }
         else
         {
-            const valuePort = this.newPort(this, name, Port.TYPE_VALUE, {
+            const valuePort = this.newPort(this, name, Port.TYPE_STRING, {
                 "display": "dropdown",
                 "hidePort": true,
                 "type": "string",
