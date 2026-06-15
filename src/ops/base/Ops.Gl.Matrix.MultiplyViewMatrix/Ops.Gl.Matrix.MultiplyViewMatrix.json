@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "77749381-b81d-4b73-84d9-2a017ab2b1e1",
-    "created": 1779956792618,
+    "id": "c2833486-717e-4f3c-9dd8-c62cc92ea46e",
+    "created": 1517222044303,
     "layout": {
         "portsIn": [
             {
@@ -31,14 +31,21 @@
     },
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "Ops.Gl.Matrix.mulViewMatrix renamed to Ops.Gl.Matrix.MulViewMatrix",
             "author": "pandur",
-            "date": 1779956792618
+            "date": 1560333452550
+        },
+        {
+            "message": "Gl.Matrix.MulViewMatrix renamed to Ops.Gl.Matrix.MultiplyViewMatrix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1781535727152
         }
     ],
     "license": "MIT",
+    "exampleProjectId": "hDWuci",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

@@ -29,5 +29,13 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Gl.Matrix.SetProjectionMatrix renamed to Ops.Gl.Matrix.MultiplyProjectionMatrix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1781535756697
+        }
+    ]
 }
