@@ -14,7 +14,12 @@ function updateStatusSoon()
     soon = CABLES.idleCallbackSoon(soon, updateStatus);
 }
 
-searchStr.onChange = updateStatus;
+searchStr.onChange = () =>
+{
+    op.setUiAttribs({ "extendTitle": searchStr.get() });
+
+    updateStatus();
+};
 
 function updateStatus()
 {

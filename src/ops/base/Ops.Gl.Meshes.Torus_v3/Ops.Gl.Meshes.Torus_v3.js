@@ -6,7 +6,7 @@ const
     outerRadius = op.inValue("outerRadius", 0.5),
     inDraw = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),
-    geomOut = op.outObject("geometry");
+    geomOut = op.outObject("geometry", null, "geometry");
 
 inDraw.setUiAttribs({ "title": "Render mesh" });
 inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };

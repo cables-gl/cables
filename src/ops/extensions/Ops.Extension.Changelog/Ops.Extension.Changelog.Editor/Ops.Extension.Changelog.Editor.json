@@ -299,6 +299,12 @@
             "type": "feature",
             "author": "stephan",
             "date": 1780928903278
+        },
+        {
+            "message": "Filemanager: highlight latest uploaded file",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1780996399427
         }
     ],
     "isReleased": true,

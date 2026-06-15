@@ -7,6 +7,7 @@ const
     inRemoveScale0 = op.inBool("Remove 0 Scale Nodes", false),
     inForceUpdate = op.inBool("Force Update", false),
     next = op.outTrigger("Next"),
+    outFound = op.outBoolNum("Found"),
     outPos = op.outArray("Positions", null, 3),
     outScale = op.outArray("Scale", null, 3),
     outRot = op.outArray("Rotation", null, 4),
@@ -21,8 +22,8 @@ let needsupdate = true;
 let oldScene = null;
 
 inRemoveScale0.onChange =
-inTime.onChange =
-inSpace.onChange =
+    inTime.onChange =
+    inSpace.onChange =
     inSort.onChange =
     inStr.onChange =
     outPos.onChange = () => { needsupdate = true; };
@@ -31,7 +32,7 @@ inExec.onTriggered = exec;
 
 function exec()
 {
-    if (cgl.tempData.currentScene != oldScene)needsupdate = true;
+    if (cgl.tempData.currentScene != oldScene) needsupdate = true;
     if (needsupdate || inForceUpdate.get()) update();
     next.trigger();
 }
@@ -121,11 +122,12 @@ function update()
     {
         let list = [];
         for (let j = 0; j < arrNames.length; j++)
-            list.push({
-                "name": arrNames[j],
-                "pos": [arrPos[j * 3 + 0], arrPos[j * 3 + 1], arrPos[j * 3 + 2]],
-                "scale": [arrScale[j * 3 + 0], arrScale[j * 3 + 1], arrScale[j * 3 + 2]]
-            });
+            list.push(
+                {
+                    "name": arrNames[j],
+                    "pos": [arrPos[j * 3 + 0], arrPos[j * 3 + 1], arrPos[j * 3 + 2]],
+                    "scale": [arrScale[j * 3 + 0], arrScale[j * 3 + 1], arrScale[j * 3 + 2]]
+                });
 
         list.sort(function (a, b)
         {
@@ -154,6 +156,7 @@ function update()
     outScale.setRef(arrScale);
     outNames.setRef(arrNames);
     outRot.setRef(arrRot);
+    outFound.set(arrPos.length > 0);
 
     needsupdate = false;
 }

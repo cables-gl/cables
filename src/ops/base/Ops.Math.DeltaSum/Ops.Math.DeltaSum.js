@@ -1,5 +1,5 @@
 const
-    inVal = op.inValue("Delta Value"),
+    inVal = op.inFloat("Delta Value"),
     defVal = op.inValue("Default Value", 0),
     inMul = op.inValue("Multiply", 1),
     inReset = op.inTriggerButton("Reset"),
@@ -28,7 +28,7 @@ updateLimit();
 
 function resetValue()
 {
-    let v = defVal.get();
+    let v = defVal.get() || 0;
 
     if (inLimit.get())
     {
@@ -37,7 +37,8 @@ function resetValue()
     }
 
     value = v;
-    outVal.set(value);
+    updateValue();
+
 }
 
 function updateLimit()
@@ -85,28 +86,29 @@ function updateValue()
 
 inVal.onChange = function ()
 {
-    let v = inVal.get();
+    let v = parseFloat(inVal.get());
 
     const rubber = inRubber.get();
 
-    if (rubber !== 0.0)
-    {
-        const min = inMin.get();
-        const max = inMax.get();
-        const minr = inMin.get() - rubber;
-        const maxr = inMax.get() + rubber;
+    if (inLimit.get())
+        if (rubber !== 0.0)
+        {
+            const min = inMin.get();
+            const max = inMax.get();
+            const minr = inMin.get() - rubber;
+            const maxr = inMax.get() + rubber;
 
-        if (value < min)
-        {
-            const aa = Math.abs(value - minr) / rubber;
-            v *= (aa * aa);
+            if (value < min)
+            {
+                const aa = Math.abs(value - minr) / rubber;
+                v *= (aa * aa);
+            }
+            if (value > max)
+            {
+                const aa = Math.abs(maxr - value) / rubber;
+                v *= (aa * aa);
+            }
         }
-        if (value > max)
-        {
-            const aa = Math.abs(maxr - value) / rubber;
-            v *= (aa * aa);
-        }
-    }
 
     lastEvent = CABLES.now();
     value += v * inMul.get();

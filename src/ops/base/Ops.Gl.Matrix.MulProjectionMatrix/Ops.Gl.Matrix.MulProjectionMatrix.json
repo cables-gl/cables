@@ -31,11 +31,6 @@
     },
     "changelog": [
         {
-            "message": "Ops.Gl.Matrix.mulViewMatrix renamed to Ops.Gl.Matrix.MulViewMatrix",
-            "author": "pandur",
-            "date": 1560333452550
-        },
-        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",

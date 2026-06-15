@@ -124,6 +124,13 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1779375261080
+        },
+        {
+            "message": "Add \"Clone Patch\" to patch page and mypatches lists",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1781266232719,
+            "url": "https://github.com/cables-gl/cables/issues/7520"
         }
     ],
     "isReleased": true
