@@ -18,7 +18,7 @@ function reloadSoon()
 inExec.onTriggered = function ()
 {
     const gltf = cgl.tempData.currentScene;
-    if (gltf != oldScene)tex = null;
+    if (gltf != oldScene) tex = null;
     if (tex) return;
 
     if (!gltf || !gltf.json || !gltf.chunks) return;
@@ -30,13 +30,17 @@ inExec.onTriggered = function ()
         let name = gltf.json.images[index].name;
         if (name == imgName.get())
         {
-            outTex.setRef(gltf.textures[index].tex);
-            return;
+            if (gltf.textures[index] && gltf.textures[index])
+            {
+                outTex.setRef(gltf.textures[index].tex);
+                return;
+            }
+            else console.log("no tex ?");
         }
     }
     op.setUiError("id", "texture not found!", 1);
     outTex.setRef(CGL.Texture.getEmptyTexture(cgl));
 
-// console.log("text",cgl.tempData.currentScene)
+    // console.log("text",cgl.tempData.currentScene)
     // outTex.setRef(tex);
 };

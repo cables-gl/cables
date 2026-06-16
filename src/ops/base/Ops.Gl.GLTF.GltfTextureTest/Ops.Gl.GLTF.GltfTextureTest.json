@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1778078130365
-        },
-        {
-            "message": "Patch.PkNllQg.MyAwesomeOpName renamed to Ops.Gl.GLTF.GltfTextureTest",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1778083190804
         }
     ],
     "layout": {
