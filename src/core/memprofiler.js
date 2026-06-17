@@ -17,11 +17,16 @@ export class MemProfiler
 
             if (sum != this.lastLog)
             {
-                console.log("memory " + (sum / 1024 / 1024) + " mb " + count + " items");
+                // console.log("memory " + (sum / 1024 / 1024) + " mb " + count + " items");
                 this.lastLog = sum;
             }
-        }, 10000);
+        }, 2000);
 
+    }
+
+    getUsage()
+    {
+        return this.lastLog;
     }
 
     /**
@@ -40,6 +45,7 @@ export class MemProfiler
 }
 
 const profiler = new MemProfiler();
+CABLES.profilerMem = profiler;
 
 export class MemProfilerItem
 {

@@ -347,7 +347,13 @@ function updateText()
         // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
         element.innerHTML += "<br/>shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
-        if (performance && performance.memory && performance.memory.usedJSHeapSize)element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "/" + Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + "mb";
+        if (performance && performance.memory && performance.memory.usedJSHeapSize)
+        {
+            element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "mb" + " tracked:" + Math.round(CABLES.profilerMem.getUsage() / 1024 / 1024) + "mb";
+
+        }
+
+        // + "/" + Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + "mb";
     }
 
     op.patch.cgl.profileData.clear();
