@@ -741,7 +741,7 @@ function printInfo()
     // / //////////////////////////
 
     let sizeBin = 0;
-    if (gltf.json.buffers)
+    if (gltf.json.buffers && gltf.json.buffers[0])
         sizeBin = gltf.json.buffers[0].byteLength;
 
     html += "<div id=\"groupBinary\">File Size Allocation (" + Math.round(sizeBin / 1024) + "k )</div>";

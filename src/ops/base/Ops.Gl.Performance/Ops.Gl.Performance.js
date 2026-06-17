@@ -349,7 +349,7 @@ function updateText()
         element.innerHTML += "<br/>shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
         if (performance && performance.memory && performance.memory.usedJSHeapSize)
         {
-            element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "mb" + " tracked:" + Math.round(CABLES.profilerMem.getUsage() / 1024 / 1024) + "mb";
+            element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "mb" + " tracked:" + Math.round(CABLES.memProfiler.getUsage() / 1024 / 1024) + "mb";
 
         }
 
