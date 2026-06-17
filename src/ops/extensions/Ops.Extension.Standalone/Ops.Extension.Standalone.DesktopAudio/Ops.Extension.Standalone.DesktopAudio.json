@@ -1,0 +1,111 @@
+{
+    "id": "e2a3c4b5-6a7b-8c9d-0e1f-2a3b4c5d6e7f",
+    "authorName": "Uuoocl",
+    "created": 1736418000000,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Active",
+                "group": "Audio Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Refresh Sources",
+                "group": "Source Settings"
+            },
+            {
+                "type": 0,
+                "name": "Source index",
+                "group": "Source Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "group": "Audio Settings",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Node"
+            },
+            {
+                "type": 2,
+                "name": "MediaStream"
+            },
+            {
+                "type": 0,
+                "name": "Has Audio Track",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Permission Status"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    },
+    "summary": "Capture desktop window or system audio stream using Electron's desktopCapturer",
+    "docs": {
+        "ports": [
+            {
+                "name": "Active",
+                "text": "Toggles capturing active state."
+            },
+            {
+                "name": "Refresh Sources",
+                "text": "Query and populate the list of windows and screens."
+            },
+            {
+                "name": "Source",
+                "text": "Dropdown to select which window or screen's audio is captured."
+            },
+            {
+                "name": "Volume",
+                "text": "Gain multiplier applied to the output Audio Node."
+            },
+            {
+                "name": "Audio Node",
+                "text": "The Web Audio API GainNode outputting the captured stereo audio stream."
+            },
+            {
+                "name": "MediaStream",
+                "text": "Exposes the raw media stream object containing the tracks."
+            },
+            {
+                "name": "Has Audio Track",
+                "text": "True if an audio track is successfully captured and active."
+            },
+            {
+                "name": "Permission Status",
+                "text": "macOS screen recording privacy permission status."
+            },
+            {
+                "name": "Error",
+                "text": "Error diagnostics if capture fails."
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl",
+        "standalone_electron",
+        "webaudio"
+    ],
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "Uuoocl",
+            "date": 1771498594000
+        }
+    ],
+    "license": "MIT",
+    "isReleased": true
+}
