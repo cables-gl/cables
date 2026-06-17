@@ -1202,7 +1202,7 @@ export class Op extends Events
     inGradient(name, v)
     {
         const p = this.addInPort(
-            this.newPort(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "display": "gradient"
             })
         );
@@ -1217,7 +1217,7 @@ export class Op extends Events
     inCurve(name, v)
     {
         const p = this.addInPort(
-            this.newPort(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "display": "curve"
             })
         );
