@@ -6,16 +6,19 @@ const
 
 const cgl = op.patch.cgl;
 let meshPoints = null;
-let fb = new CGL.Framebuffer2(cgl, 256, 8, { "isFloatingPointTexture": true,
-    "filter": CGL.Texture.FILTER_NEAREST,
-    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE });
+let fb = new CGL.Framebuffer2(cgl, 256, 8,
+    {
+        "isFloatingPointTexture": true,
+        "filter": CGL.Texture.FILTER_NEAREST,
+        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+    });
 
 // fb.setFilter(CGL.Texture.FILTER_NEAREST);
 let effect = null;
 
 function initEffect()
 {
-    if (effect)effect.delete();
+    if (effect) effect.delete();
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": false });
 
     let tex = new CGL.Texture(cgl,
@@ -24,7 +27,7 @@ function initEffect()
             "filter": CGL.Texture.FILTER_NEAREST,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
             "width": 256,
-            "height": 256,
+            "height": 256
         });
 
     effect.setSourceTexture(tex);
@@ -109,9 +112,9 @@ exe.onTriggered = function ()
 
         cgl.popShader();
 
-        meshPoints.render(shaderPointsG);
-        meshPoints.render(shaderPointsB);
-        meshPoints.render(shaderPointsLumi);
+        // meshPoints.render(shaderPointsG);
+        // meshPoints.render(shaderPointsB);
+        // meshPoints.render(shaderPointsLumi);
 
         fb.renderEnd(cgl);
         outTexData.setRef(fb.getTextureColor());

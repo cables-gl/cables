@@ -14,7 +14,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Result"
+                "name": "Result",
+                "objType": "geometry"
             },
             {
                 "type": 0,
@@ -39,5 +40,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

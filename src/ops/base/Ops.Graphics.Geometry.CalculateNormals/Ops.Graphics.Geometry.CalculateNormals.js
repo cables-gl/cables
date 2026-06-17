@@ -2,7 +2,7 @@ const
     geometry = op.inObject("Geometry"),
     smoothNormals = op.inValueBool("Smooth"),
     forceZUp = op.inValueBool("Force Z Up"),
-    geomOut = op.outObject("Geometry Out");
+    geomOut = op.outObject("Geometry Out", null, "geometry");
 
 op.toWorkPortsNeedToBeLinked(geometry);
 geomOut.ignoreValueSerialize = true;
@@ -20,11 +20,12 @@ function calc()
 
     let geom = geometry.get().copy();
 
-    if (!smoothNormals.get())geom.unIndex();
+    if (!smoothNormals.get()) geom.unIndex();
 
-    geom.calculateNormals({
-        "forceZUp": forceZUp.get()
-    });
+    geom.calculateNormals(
+        {
+            "forceZUp": forceZUp.get()
+        });
 
     geomOut.setRef(geom);
 }

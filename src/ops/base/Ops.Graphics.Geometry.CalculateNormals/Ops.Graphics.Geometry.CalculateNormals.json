@@ -23,7 +23,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Geometry Out"
+                "name": "Geometry Out",
+                "objType": "geometry"
             }
         ]
     },

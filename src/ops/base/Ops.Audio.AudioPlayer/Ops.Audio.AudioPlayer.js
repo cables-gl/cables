@@ -120,7 +120,7 @@ doLoop.onChange = function ()
 
 function updateVolume()
 {
-    if (audio)audio.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
+    if (audio) audio.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
 }
 
 function getWantedTime()
@@ -164,7 +164,7 @@ function load()
     {
         if (audio) outDuration.set(audio.duration);
         if (inPlay.get()) play();
-        if (audio)audio.removeEventListener("canplaythrough", canplaythrough, false);
+        if (audio) audio.removeEventListener("canplaythrough", canplaythrough, false);
     };
     op.patch.loading.finished(loadingId);
 
@@ -196,6 +196,7 @@ function load()
         outEnded.trigger();
         outPlaying.set(false);
         timer.pause();
+        console.log("ENDED");
         // if (doLoop.get()) play();
     }, false);
 }
