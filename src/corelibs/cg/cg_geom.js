@@ -63,6 +63,8 @@ export class Geometry
         this.verticesIndices = [];
 
         this.morphTargets = [];
+
+        this.memItem = new CABLES.Memp("geom " + name, "geometry");
     }
 
     get vertices()
@@ -173,6 +175,21 @@ export class Geometry
         return null;
     }
 
+    updateMemoryUsage()
+    {
+        let bytes = 0;
+
+        bytes += this._vertices.length * 4;
+        bytes += this.verticesIndices.length * 4;
+
+        for (let i = 0; i < this._attributes.length; i++)
+        {
+            if (this._attributes[i].data)
+                bytes += this._attributes[i].data.length * 4;
+        }
+        this.memItem.setSize(bytes);
+    }
+
     /**
      * @function setAttribute
      * @description create an attribute
@@ -206,6 +223,8 @@ export class Geometry
         };
 
         this._attributes[name] = attr;
+
+        this.updateMemoryUsage();
     }
 
     /**

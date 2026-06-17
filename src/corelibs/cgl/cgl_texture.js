@@ -86,8 +86,6 @@ export class Texture extends CgTexture
         this._glDataFormat = -1;
         this.compression = false;
 
-        console.log("tmemmmmt", "" + MemProfilerItem);
-        console.trace();
         this.memItem = new CABLES.Memp("texture", "bla");
 
         if (options)
@@ -123,6 +121,8 @@ export class Texture extends CgTexture
 
         this.setSize(options.width, options.height);
         this.getInfoOneLine();
+
+        this.updateMemory();
     }
 
     isFloatingPoint()
@@ -215,7 +215,7 @@ export class Texture extends CgTexture
     updateMemory()
     {
 
-        this.memItem.setSize(this.width * this.height * 4);
+        // this.memItem.setSize(this.width * this.height * 4);
     }
 
     /**
@@ -436,6 +436,7 @@ export class Texture extends CgTexture
         this.width = 0;
         this.height = 0;
         this.updateMemory();
+
         this._cgl.profileData.count("textureDelete");
         this.image = null;
         CABLES.idleCallback(() =>
