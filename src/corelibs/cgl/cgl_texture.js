@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { Op, Port, utils } from "cables";
+import { MemProfilerItem, Op, Port, utils } from "cables";
 import { CgTexture } from "../cg/index.js";
 import { CglContext } from "./cgl_state.js";
 
@@ -85,6 +85,10 @@ export class Texture extends CgTexture
         this._glInternalFormat = -1;
         this._glDataFormat = -1;
         this.compression = false;
+
+        console.log("tmemmmmt", "" + MemProfilerItem);
+        console.trace();
+        this.memItem = new CABLES.Memp("texture", "bla");
 
         if (options)
         {
@@ -208,6 +212,12 @@ export class Texture extends CgTexture
         this._glDataType = o.glDataType;
     }
 
+    updateMemory()
+    {
+
+        this.memItem.setSize(this.width * this.height * 4);
+    }
+
     /**
      * set pixel size of texture
      * @function setSize
@@ -251,6 +261,7 @@ export class Texture extends CgTexture
         this._setFilter();
 
         this.updateMipMap();
+        this.updateMemory();
 
         this._cgl.gl.bindTexture(this.texTarget, null);
     }
@@ -316,6 +327,8 @@ export class Texture extends CgTexture
         if (this.flip) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, false);
         this._cgl.gl.bindTexture(this.texTarget, null);
         measure.finish();
+
+        this.updateMemory();
     }
 
     /**
@@ -371,6 +384,8 @@ export class Texture extends CgTexture
             this.height = t.height;
             this.tex = t.tex;
             this._log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
+
+            this.updateMemory();
             return;
         }
 
@@ -386,6 +401,7 @@ export class Texture extends CgTexture
 
         this._setFilter();
         this.updateMipMap();
+        this.updateMemory();
 
         this._cgl.gl.bindTexture(this.texTarget, null);
         if (!noflipping) this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
@@ -419,6 +435,7 @@ export class Texture extends CgTexture
         this.deleted = true;
         this.width = 0;
         this.height = 0;
+        this.updateMemory();
         this._cgl.profileData.count("textureDelete");
         this.image = null;
         CABLES.idleCallback(() =>

@@ -16,6 +16,7 @@ import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
 import { Stack } from "./stack.js";
+import { MemProfilerItem } from "./memprofiler.js";
 
 CABLES = CABLES || {};
 CABLES = {
@@ -79,8 +80,9 @@ CABLES.CONSTANTS = CONSTANTS;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
+CABLES.Memp = MemProfilerItem;
 
 export default CABLES;
-export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop };
+export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop, MemProfilerItem };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

@@ -444,6 +444,8 @@ let gltfMesh = class
 
     dispose()
     {
+
+        this.geom = null;
         if (this.mesh) this.mesh.dispose();
     }
 
