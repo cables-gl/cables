@@ -619,7 +619,8 @@ export class Texture extends CgTexture
         if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url, op);
 
         const texture = new Texture(cgl);
-        texture.name = url;
+        if (url.startsWith("blob:")) texture.name = +"blob";
+        else texture.name = url + "";
 
         if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
         if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;

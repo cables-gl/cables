@@ -649,13 +649,16 @@ function parseGltf(arrayBuffer)
 
     if (freeMem.get() == "All")
     {
+        // gltf.buffers=[]
+        gltf.json.buffers = [];
         gltf.chunks = [];
         // console.log(gltf);
         for (let i = 0; i < gltf.meshes.length; i++)
         {
             gltf.meshes[i].disposeGeometries();
         }
-        // console.log("clear...");
+        outJson.setRef(gltf.json);
+        // console.log("clear...",gltf);
     }
 
     return gltf;
