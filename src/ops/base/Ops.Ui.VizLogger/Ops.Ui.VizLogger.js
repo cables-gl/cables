@@ -16,20 +16,24 @@ inClear.onTriggered = () =>
 
 inString.onChange = () =>
 {
-    if (typeof inString.get() == "string")
-        arr.push("\"" + inString.get() + "\"");
-    else
-        arr.push("" + inString.get());
+    if (CABLES.UI)
+
+        if (typeof inString.get() == "string")
+            arr.push("\"" + inString.get() + "\"");
+        else
+            arr.push("" + inString.get());
 };
 
 inObject.onChange = () =>
 {
-    arr.push(String(inObject.get()));
+    if (CABLES.UI)
+        arr.push(String(inObject.get()));
 };
 
 inNum.onChange = () =>
 {
-    arr.push("" + inNum.get());
+    if (CABLES.UI)
+        arr.push("" + inNum.get());
 };
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
@@ -48,7 +52,8 @@ op.renderVizLayer = (ctx, layer) =>
     ctx.font = "normal 10px sourceCodePro";
     ctx.fillStyle = "#ccc";
 
-    if (lines > 0) while (arr.length - 1 > lines) arr.shift();
+    if (lines > 0)
+        while (arr.length - 1 > lines) arr.shift();
 
     lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
@@ -57,7 +62,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     for (let i = Math.min(lines, arr.length - 1); i >= 0; i--)
     {
-        if (arr[i].length > numChars)arr[i] = arr[i].substr(0, numChars);
+        if (arr[i].length > numChars) arr[i] = arr[i].substr(0, numChars);
         ctx.fillText(arr[i], layer.x / layer.scale + padding, layer.y / layer.scale + 10 * i + padding * 2);
     }
 

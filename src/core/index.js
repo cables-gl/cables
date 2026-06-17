@@ -40,6 +40,7 @@ CABLES.internalNow = internalNow;
 CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
 CABLES.RenderLoop = RenderLoop;
+CABLES.MemProfilerItem = MemProfilerItem;
 CABLES.idleCallbackSoon = utils.idleCallbackSoon;
 CABLES.idleCallback = utils.idleCallback;
 CABLES.cloneObject = utils.cloneObject;
@@ -84,6 +85,8 @@ CABLES.memProfiler = new MemProfiler();
 CABLES.Memp = MemProfilerItem;
 
 export default CABLES;
+// add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...
+// this is because corelibs are build/loaded via webpack and expect these exports to be avaialable on the global CABLES object
 export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop, MemProfilerItem };
 
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line

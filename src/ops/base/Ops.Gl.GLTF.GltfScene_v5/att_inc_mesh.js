@@ -35,7 +35,7 @@ let gltfMesh = class
             const view = gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView];
             const num = view.byteLength;
             const dataBuff = new Int8Array(num);
-            let accPos = (view.byteOffset || 0);// + (acc.byteOffset || 0);
+            let accPos = (view.byteOffset || 0); // + (acc.byteOffset || 0);
             for (let j = 0; j < num; j++)
             {
                 dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
@@ -88,7 +88,7 @@ let gltfMesh = class
                 gltf.loadingMeshes--;
                 gltf.timing.push(["draco decode", Math.round((performance.now() - gltf.startTime))]);
 
-                if (finished)finished(this);
+                if (finished) finished(this);
             }, (error) => { op.logError(error); });
         }
         else
@@ -108,7 +108,7 @@ let gltfMesh = class
                     this.geom.morphTargets.push(tgeom);
                 }
             }
-            if (finished)finished(this);
+            if (finished) finished(this);
         }
     }
 
@@ -206,7 +206,7 @@ let gltfMesh = class
         }
         if (attribs.hasOwnProperty("JOINTS_0"))
         {
-            if (!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
+            if (!gltf.accBuffers[attribs.JOINTS_0]) console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
             tgeom.setAttribute("attrJoints", gltf.accBuffers[attribs.JOINTS_0], 4);
         }
 
@@ -214,22 +214,24 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("NORMAL")) gltf.accBuffersDelete.push(attribs.NORMAL);
         if (attribs.hasOwnProperty("TEXCOORD_0")) gltf.accBuffersDelete.push(attribs.TEXCOORD_0);
         if (attribs.hasOwnProperty("TANGENT")) gltf.accBuffersDelete.push(attribs.TANGENT);
-        if (attribs.hasOwnProperty("COLOR_0"))gltf.accBuffersDelete.push(attribs.COLOR_0);
-        if (attribs.hasOwnProperty("COLOR_0"))gltf.accBuffersDelete.push(attribs.COLOR_0);
-        if (attribs.hasOwnProperty("COLOR_1"))gltf.accBuffersDelete.push(attribs.COLOR_1);
-        if (attribs.hasOwnProperty("COLOR_2"))gltf.accBuffersDelete.push(attribs.COLOR_2);
-        if (attribs.hasOwnProperty("COLOR_3"))gltf.accBuffersDelete.push(attribs.COLOR_3);
+        if (attribs.hasOwnProperty("COLOR_0")) gltf.accBuffersDelete.push(attribs.COLOR_0);
+        if (attribs.hasOwnProperty("COLOR_0")) gltf.accBuffersDelete.push(attribs.COLOR_0);
+        if (attribs.hasOwnProperty("COLOR_1")) gltf.accBuffersDelete.push(attribs.COLOR_1);
+        if (attribs.hasOwnProperty("COLOR_2")) gltf.accBuffersDelete.push(attribs.COLOR_2);
+        if (attribs.hasOwnProperty("COLOR_3")) gltf.accBuffersDelete.push(attribs.COLOR_3);
 
         if (attribs.hasOwnProperty("TEXCOORD_1")) gltf.accBuffersDelete.push(attribs.TEXCOORD_1);
         if (attribs.hasOwnProperty("TEXCOORD_2")) gltf.accBuffersDelete.push(attribs.TEXCOORD_2);
         if (attribs.hasOwnProperty("TEXCOORD_3")) gltf.accBuffersDelete.push(attribs.TEXCOORD_3);
         if (attribs.hasOwnProperty("TEXCOORD_4")) gltf.accBuffersDelete.push(attribs.TEXCOORD_4);
 
-        if (setGeom !== false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
+        if (setGeom !== false)
+            if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
 
     geomMikkt(geom)
     {
+        return geom;
 
         if (geom.texCoords.length == 0)
         {
@@ -248,15 +250,17 @@ let gltfMesh = class
         if (!this.hasMorphTargets)
         {
             if (window.MIKKTSPACE &&
-                        geo.vertices &&
-                        geo.vertexNormals &&
-                        geo.texCoords &&
-                        (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
-                        (geo.vertices.length / 3) == (geo.texCoords.length / 2)// &&
+                geo.vertices &&
+                geo.vertexNormals &&
+                geo.texCoords &&
+                (geo.vertices.length / 3) == (geo.vertexNormals.length / 3) &&
+                (geo.vertices.length / 3) == (geo.texCoords.length / 2) // &&
             )
             {
                 try
                 {
+
+                    console.log("mikkt", geom.tangents.lenth);
                     const a = MIKKTSPACE.generateTangents(geo.vertices, geo.vertexNormals, geo.texCoords);
                     for (let i = 0; i < a.length; i += 4) a[i + 3] *= -1;
                     geo.tangents = a;
@@ -311,11 +315,11 @@ let gltfMesh = class
 
             if (this.primitive == this.TRIANGLES)
             {
-                if (!window.MIKKTSPACE)console.log("GLTF mikktspace not loaded");
+                if (!window.MIKKTSPACE) console.log("GLTF mikktspace not loaded");
 
                 if (inCalcNormals.get() == "Force Smooth" || inCalcNormals.get() == false) geom.calculateNormals();
                 else if (!geom.vertexNormals.length && inCalcNormals.get() == "Auto") geom.calculateNormals({ "smooth": false });
-                else if (inCalcNormals.get() == "Mikkt")
+                else if (inCalcNormals.get() == "Mikkt" && (!geom.tangents.length))
                 {
                     geom = this.geomMikkt(geom);
                 }
@@ -359,7 +363,7 @@ let gltfMesh = class
             }
             else
             {
-            //    console.warn("GLTF unknown primitive", this.primitive);
+                //    console.warn("GLTF unknown primitive", this.primitive);
             }
         }
         catch (e)
@@ -387,10 +391,10 @@ let gltfMesh = class
 
             if (cgl.gl)
             {
-                if (this.primitive == this.TRIANGLES)glprim = cgl.gl.TRIANGLES;
-                else if (this.primitive == this.LINES)glprim = cgl.gl.LINES;
-                else if (this.primitive == this.LINE_STRIP)glprim = cgl.gl.LINE_STRIP;
-                else if (this.primitive == this.POINTS)glprim = cgl.gl.POINTS;
+                if (this.primitive == this.TRIANGLES) glprim = cgl.gl.TRIANGLES;
+                else if (this.primitive == this.LINES) glprim = cgl.gl.LINES;
+                else if (this.primitive == this.LINE_STRIP) glprim = cgl.gl.LINE_STRIP;
+                else if (this.primitive == this.POINTS) glprim = cgl.gl.POINTS;
                 else
                 {
                     op.logWarn("unknown primitive type", this);
@@ -422,7 +426,7 @@ let gltfMesh = class
             // }
 
             let useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
-            if (skinRenderer)useMat = false;
+            if (skinRenderer) useMat = false;
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
