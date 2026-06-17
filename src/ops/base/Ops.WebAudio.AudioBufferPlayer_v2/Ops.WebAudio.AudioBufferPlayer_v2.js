@@ -214,7 +214,11 @@ function createAudioBufferSource(dontStart = false)
     source.buffer = buffer;
     source.onended = onPlaybackEnded;
     source.loop = loopPort.get();
-
+    if (source.loop)
+    {
+        // source.loopStart = offsetPort.get() || 0;
+        // source.loopEnd = source.buffer.duration - 1;
+    }
     source.connect(gainNode);
     setPlaybackRate();
     setDetune();
