@@ -44,9 +44,6 @@ export class MemProfiler
 
 }
 
-const profiler = new MemProfiler();
-CABLES.profilerMem = profiler;
-
 export class MemProfilerItem
 {
     id = CABLES.uuid();
@@ -67,13 +64,13 @@ export class MemProfilerItem
         this.type = type;
         this.size = size || 0;
         this.data = data;
-        profiler.add(this);
+        CABLES.memProfiler.add(this);
     }
 
     dispose()
     {
         this.size = 0;
-        profiler.remove(this);
+        CABLES.memProfiler.remove(this);
     }
 
     /**

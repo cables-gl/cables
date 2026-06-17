@@ -16,7 +16,7 @@ import { RenderLoop } from "./renderloop.js";
 
 import { PatchVariable } from "./core_variable.js";
 import { Stack } from "./stack.js";
-import { MemProfilerItem } from "./memprofiler.js";
+import { MemProfiler, MemProfilerItem } from "./memprofiler.js";
 
 CABLES = CABLES || {};
 CABLES = {
@@ -80,6 +80,7 @@ CABLES.CONSTANTS = CONSTANTS;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
+CABLES.memProfiler = new MemProfiler();
 CABLES.Memp = MemProfilerItem;
 
 export default CABLES;
