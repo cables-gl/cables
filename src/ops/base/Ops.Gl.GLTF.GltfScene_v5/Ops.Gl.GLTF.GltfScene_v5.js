@@ -88,12 +88,8 @@ function updateCamera()
     if (gltf)
     {
         for (let i = 0; i < gltf.nodes.length; i++)
-        {
             if (gltf.nodes[i].camera >= 0)
-            {
                 arr.push(gltf.nodes[i].name);
-            }
-        }
     }
     inCamera.uiAttribs.values = arr;
 }
@@ -113,8 +109,8 @@ function updateCenter()
 }
 
 inTimeLine.onChange =
-inRescale.onChange =
-inUseMatProps.onChange = updateUi;
+    inRescale.onChange =
+    inUseMatProps.onChange = updateUi;
 
 function updateUi()
 {
@@ -144,7 +140,7 @@ function setCam()
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
-        if (gltf.nodes[i].name == inCamera.get())cam = new gltfCamera(gltf, gltf.nodes[i]);
+        if (gltf.nodes[i].name == inCamera.get()) cam = new gltfCamera(gltf, gltf.nodes[i]);
     }
 }
 
@@ -240,7 +236,7 @@ inExec.onTriggered = function ()
 
     cgl.popModelMatrix();
 
-    if (cam)cam.end();
+    if (cam) cam.end();
 };
 
 function updatetitle()
@@ -303,7 +299,7 @@ function finishLoading()
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
     }
 
-    if (gltf.bounds)outBounds.setRef(gltf.bounds);
+    if (gltf.bounds) outBounds.setRef(gltf.bounds);
 
     gltf.timing.push(["calced bounds", Math.round((performance.now() - gltf.startTime))]);
 
@@ -311,7 +307,7 @@ function finishLoading()
 
     gltf.timing.push(["hideNodesFromData", Math.round((performance.now() - gltf.startTime))]);
 
-    if (tab)printInfo();
+    if (tab) printInfo();
 
     gltf.timing.push(["printinfo", Math.round((performance.now() - gltf.startTime))]);
 
@@ -400,7 +396,7 @@ function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
     if (!inFile.get()) return;
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
+    if (!loadingId) loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     unknownCount = 0;
     let fileToLoad = inFile.get();
@@ -410,7 +406,7 @@ function loadBin(addCacheBuster)
     if (!url) return;
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {
-        if (addCacheBuster === true)url += "?rnd=" + CABLES.generateUUID();
+        if (addCacheBuster === true) url += "?rnd=" + CABLES.generateUUID();
     }
     needsMatUpdate = true;
     outLoading.set(true);
@@ -433,7 +429,7 @@ function loadBin(addCacheBuster)
                 maxTime = 0;
 
                 const measure = op.patch.cgl.profileData.start("gltf parse");
-                if (gltf)gltf.dispose();
+                if (gltf) gltf.dispose();
                 gltf = parseGltf(arrayBuffer);
                 sortNodes();
                 measure.finish();
@@ -442,7 +438,7 @@ function loadBin(addCacheBuster)
                 finishLoading();
             }).catch((e) =>
             {
-                if (loadingId)cgl.patch.loading.finished(loadingId);
+                if (loadingId) cgl.patch.loading.finished(loadingId);
                 loadingId = null;
                 finishLoading();
 
@@ -477,7 +473,7 @@ inActive.onChange = () =>
 
     if (!inActive.get())
     {
-        if (gltf)gltf.dispose();
+        if (gltf) gltf.dispose();
         gltf = null;
     }
     updateUi();
@@ -488,7 +484,7 @@ let idle = null;
 function reloadSoon(nocache)
 {
     if (!inActive.get()) return;
-    if (preload)cgl.patch.loading.finished(preload);
+    if (preload) cgl.patch.loading.finished(preload);
 
     // preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
 
@@ -564,7 +560,7 @@ function updateMaterials()
         }
     }
     needsMatUpdate = false;
-    if (tab)printInfo();
+    if (tab) printInfo();
 }
 
 function hideNodesFromArray()
@@ -580,14 +576,14 @@ function hideNodesFromArray()
     for (let i = 0; i < hideArr.length; i++)
     {
         const n = gltf.getNode(hideArr[i]);
-        if (n)n.hidden = true;
+        if (n) n.hidden = true;
         else console.log("node to hide not found", hideArr[i]);
     }
 }
 
 function hideNodesFromData()
 {
-    if (!data)loadData();
+    if (!data) loadData();
     if (!gltf) return;
 
     gltf.unHideAll();
@@ -629,10 +625,10 @@ function loadData()
 {
     data = dataPort.get();
 
-    if (!data || data === "")data = {};
+    if (!data || data === "") data = {};
     else data = JSON.parse(data);
 
-    if (gltf)hideNodesFromData();
+    if (gltf) hideNodesFromData();
     sortNodes();
 
     return data;
@@ -747,10 +743,11 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({
-        "subPatch": op.uiAttribs.subPatch,
-        "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
-    });
+    newOp.setUiAttrib(
+        {
+            "subPatch": op.uiAttribs.subPatch,
+            "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
+        });
 }
 
 op.exposeNode = function (name, type, options)
@@ -806,8 +803,8 @@ op.exposeNode = function (name, type, options)
     else
     {
         let newopname = "Ops.Gl.GLTF.GltfNode_v2";
-        if (options && options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
-        if (type == "transform")newopname = "Ops.Gl.GLTF.GltfNodeTransform_v2";
+        if (options && options.skin) newopname = "Ops.Gl.GLTF.GltfSkin";
+        if (type == "transform") newopname = "Ops.Gl.GLTF.GltfNodeTransform_v2";
 
         gui.serverOps.loadOpLibs(newopname, () =>
         {
@@ -853,18 +850,20 @@ op.setOrder = function (name)
 
     data.nodeOrders = data.nodeOrders || {};
 
-    new CABLES.UI.ModalDialog({
-        "prompt": true,
-        "title": "Order",
-        "text": "enter a number, smaller number get rendered earlier",
-        "promptValue": n.order,
-        "promptOk": (str) =>
+    new CABLES.UI.ModalDialog(
         {
-            n.order = parseFloat(str);
-            data.nodeOrders[name] = n.order;
-            saveData();
-            reloadSoon();
-        } });
+            "prompt": true,
+            "title": "Order",
+            "text": "enter a number, smaller number get rendered earlier",
+            "promptValue": n.order,
+            "promptOk": (str) =>
+            {
+                n.order = parseFloat(str);
+                data.nodeOrders[name] = n.order;
+                saveData();
+                reloadSoon();
+            }
+        });
 };
 
 op.toggleNodeVisibility = function (name)
@@ -874,7 +873,7 @@ op.toggleNodeVisibility = function (name)
     data.hiddenNodes = data.hiddenNodes || {};
 
     if (n)
-        if (n.hidden)data.hiddenNodes[name] = true;
+        if (n.hidden) data.hiddenNodes[name] = true;
         else delete data.hiddenNodes[name];
 
     saveData();
