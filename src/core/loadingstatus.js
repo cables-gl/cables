@@ -177,8 +177,8 @@ export class LoadingStatus extends Events
             if (l.op) l.op.setUiAttribs({ "loading": false });
             l.finished = true;
             l.timeEnd = Date.now();
+            this.log("finished", l);
         }
-        this.log("finished", l);
 
         this.checkStatus();
         this.emitEvent("finishedTask");
