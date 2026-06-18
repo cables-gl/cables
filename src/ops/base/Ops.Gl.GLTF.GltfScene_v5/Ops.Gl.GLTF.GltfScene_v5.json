@@ -345,6 +345,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1779290465748
+        },
+        {
+            "message": "Memory usage/Garbage collection optimized",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1781776824171
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

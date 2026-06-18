@@ -389,7 +389,7 @@ function finishLoading()
 
     if (!(gltf.json.images && gltf.json.images.length)) gltf.chunks = null;
     console.log("gltf", gltf);
-    if (gltf)
+    if (gltf && gltf.chunks && gltf.chunks[1])
     {
         gltf.chunks[1] = null;
     }
@@ -748,10 +748,11 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({
-        "subPatch": op.uiAttribs.subPatch,
-        "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
-    });
+    newOp.setUiAttrib(
+        {
+            "subPatch": op.uiAttribs.subPatch,
+            "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
+        });
 }
 
 op.exposeNode = function (name, type, options)
@@ -854,19 +855,20 @@ op.setOrder = function (name)
 
     data.nodeOrders = data.nodeOrders || {};
 
-    new CABLES.UI.ModalDialog({
-        "prompt": true,
-        "title": "Order",
-        "text": "enter a number, smaller number get rendered earlier",
-        "promptValue": n.order,
-        "promptOk": (str) =>
+    new CABLES.UI.ModalDialog(
         {
-            n.order = parseFloat(str);
-            data.nodeOrders[name] = n.order;
-            saveData();
-            reloadSoon();
-        }
-    });
+            "prompt": true,
+            "title": "Order",
+            "text": "enter a number, smaller number get rendered earlier",
+            "promptValue": n.order,
+            "promptOk": (str) =>
+            {
+                n.order = parseFloat(str);
+                data.nodeOrders[name] = n.order;
+                saveData();
+                reloadSoon();
+            }
+        });
 };
 
 op.toggleNodeVisibility = function (name)
