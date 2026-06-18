@@ -26,7 +26,7 @@ function triangleNormal(a, b, c)
     const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]]; // Edge AB
     const v = [c[0] - a[0], c[1] - a[1], c[2] - a[2]]; // Edge AC
 
-    // Cross product U × V
+    // Cross product U x V
     const nx = u[1] * v[2] - u[2] * v[1];
     const ny = u[2] * v[0] - u[0] * v[2];
     const nz = u[0] * v[1] - u[1] * v[0];
