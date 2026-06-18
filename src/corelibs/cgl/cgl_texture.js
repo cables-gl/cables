@@ -86,7 +86,7 @@ export class Texture extends CgTexture
         this._glDataFormat = -1;
         this.compression = false;
 
-        this.memItem = new CABLES.Memp("texture", "bla");
+        this.memItem = new MemProfilerItem("texture " + this.name, "texture");
 
         if (options)
         {
@@ -120,6 +120,7 @@ export class Texture extends CgTexture
         this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
         this.setSize(options.width, options.height);
+
         this.getInfoOneLine();
 
         this.updateMemory();
@@ -214,8 +215,8 @@ export class Texture extends CgTexture
 
     updateMemory()
     {
-
-        // this.memItem.setSize(this.width * this.height * 4);
+        this.memItem.setSizeGpu(this.width * this.height * 4);
+        this.memItem.name = this.name + " " + this.width + "x" + this.height;
     }
 
     /**
@@ -231,6 +232,7 @@ export class Texture extends CgTexture
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
         if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
+        console.log("setzise", w, h);
         if (w > this._cgl.maxTexSize || h > this._cgl.maxTexSize) this._log.error("texture size too big! " + w + "x" + h + " / max: " + this._cgl.maxTexSize);
 
         w = Math.min(w, this._cgl.maxTexSize);
@@ -343,7 +345,9 @@ export class Texture extends CgTexture
             this.glTexImage2D(this._cgl.gl.TEXTURE_2D, i, this._glDataFormat, mips[i].width, mips[i].height, 0, mips[i].data);
             this._setFilter();
         }
+
         this._cgl.gl.bindTexture(this.texTarget, null);
+        this.updateMemory();
     }
 
     updateMipMap()
@@ -418,6 +422,7 @@ export class Texture extends CgTexture
     dispose()
     {
         this.delete();
+        this.memItem.dispose();
         return Texture.getTempTexture(this._cgl);
     }
 
@@ -623,6 +628,7 @@ export class Texture extends CgTexture
         else texture.name = url + "";
 
         if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
+        if (settings && settings.hasOwnProperty("name")) texture.name = settings.name;
         if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
         if (settings && settings.hasOwnProperty("wrap")) texture.wrap = settings.wrap;
         if (settings && settings.hasOwnProperty("anisotropic")) texture.anisotropic = settings.anisotropic;

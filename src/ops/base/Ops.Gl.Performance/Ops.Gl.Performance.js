@@ -328,7 +328,7 @@ function updateText()
         // str += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
 
         str += "<br/>draw calls: " + Math.ceil(op.patch.cgl.profileData.counts.meshDrawCalls / fps);
-        element.innerHTML = html + str;
+        html += str;
         // element.innerHTML += "<br/>" +
         // " shader binds: " + Math.ceil(op.patch.cgl.profileData.profileShaderBinds / fps) +
         // " uniforms: " + Math.ceil(op.patch.cgl.profileData.profileUniformCount / fps) +
@@ -346,14 +346,17 @@ function updateText()
         // " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps);
         // " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
-        element.innerHTML += "<br/>shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
+        html += "<br/>shader compiletime: " + (Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100) + "(" + op.patch.cgl.profileData.shaderCompileCount + ")";
+
+        let memStr = "<br/>memory: ";
         if (performance && performance.memory && performance.memory.usedJSHeapSize)
-        {
-            element.innerHTML += "<br/>memory: " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "mb" + " tracked:" + Math.round(CABLES.memProfiler.getUsage() / 1024 / 1024) + "mb";
+            memStr += "js : " + Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + "mb";
 
-        }
+        memStr += " tracked: cpu:" + Math.round(CABLES.memProfiler.getUsage() / 1024 / 1024) + "mb";
+        memStr += " gpu:" + Math.round(CABLES.memProfiler.getUsageGpu() / 1024 / 1024) + "mb";
+        html += memStr;
 
-        // + "/" + Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + "mb";
+        element.innerHTML = html;
     }
 
     op.patch.cgl.profileData.clear();

@@ -80,7 +80,11 @@ let GltfTexture = class
 
                 gltf.loadingTextures--;
 
-            }, { "wrap": this.cgl_wrap, "filter": this.cgl_filter });
+            }, {
+                "wrap": this.cgl_wrap,
+                "filter": this.cgl_filter,
+                "name": "gltfTex " + img.name,
+            });
         }
         else
         {
@@ -98,6 +102,7 @@ let GltfTexture = class
                 "anisotropic": cgl_aniso,
                 "wrap": this.cgl_wrap,
                 "flip": false,
+                "name": "gltfTex " + img.name,
                 // "unpackAlpha": unpackAlpha.get(),
                 "imgBitmap": true,
                 "filter": this.cgl_filter

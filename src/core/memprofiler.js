@@ -1,32 +1,37 @@
 export class MemProfiler
 {
-    #items = {};
-    lastLog = 0;
+    items = {};
+    usageCpu = 0;
+    usageGpu = 0;
 
     constructor()
     {
         setInterval(() =>
         {
             let sum = 0;
+            let sumGpu = 0;
             let count = 0;
-            for (const i in this.#items)
+            for (const i in this.items)
             {
-                sum += this.#items[i].size;
+                sumGpu += this.items[i].sizeGpu;
+                sum += this.items[i].size;
                 count++;
             }
 
-            if (sum != this.lastLog)
-            {
-                // console.log("memory " + (sum / 1024 / 1024) + " mb " + count + " items");
-                this.lastLog = sum;
-            }
+            this.usageCpu = sum;
+            this.usageGpu = sumGpu;
         }, 2000);
 
     }
 
     getUsage()
     {
-        return this.lastLog;
+        return this.usageCpu;
+    }
+
+    getUsageGpu()
+    {
+        return this.usageGpu;
     }
 
     /**
@@ -34,22 +39,23 @@ export class MemProfiler
      */
     add(item)
     {
-        this.#items[item.id] = item;
+        this.items[item.id] = item;
     }
 
     remove(item)
     {
-        delete this.#items[item.id];
+        delete this.items[item.id];
     }
-
 }
 
 export class MemProfilerItem
 {
+
     id = CABLES.uuid();
     name = "";
     type = "";
     size = 0;
+    category = 0;
     data = {};
 
     /**
@@ -63,6 +69,7 @@ export class MemProfilerItem
         this.name = name,
         this.type = type;
         this.size = size || 0;
+        this.sizeGpu = 0;
         this.data = data;
         CABLES.memProfiler.add(this);
     }
@@ -79,5 +86,13 @@ export class MemProfilerItem
     setSize(s)
     {
         this.size = s;
+    }
+
+    /**
+     * @param {number} s
+     */
+    setSizeGpu(s)
+    {
+        this.sizeGpu = s;
     }
 }

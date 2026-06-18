@@ -1,6 +1,6 @@
 import { Logger } from "cables-shared-client";
 import { vec2, vec3 } from "gl-matrix";
-import { utils } from "cables";
+import { MemProfilerItem, utils } from "cables";
 import { BoundingBox } from "./cg_boundingbox.js";
 
 /**
@@ -64,7 +64,7 @@ export class Geometry
 
         this.morphTargets = [];
 
-        this.memItem = new CABLES.Memp("geom " + name, "geometry");
+        this.memItem = new MemProfilerItem("geom " + name, "geometry");
     }
 
     get vertices()
@@ -188,6 +188,7 @@ export class Geometry
                 bytes += this._attributes[i].data.length * 4;
         }
         this.memItem.setSize(bytes);
+        return bytes;
     }
 
     /**

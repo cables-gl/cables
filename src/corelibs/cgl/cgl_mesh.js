@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { utils } from "cables";
+import { MemProfilerItem, utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS, Geometry, CgMesh } from "../cg/index.js";
 
@@ -86,6 +86,8 @@ class Mesh extends CgMesh
     memFreed = false;
     queryExt = null;
 
+    memItem = null;
+
     /**
      * @param {CglContext} _cgl cgl
      * @param {Geometry} __geom geometry
@@ -104,6 +106,7 @@ class Mesh extends CgMesh
         this.#indexType = this.#cgl.gl.UNSIGNED_SHORT;
         this._glPrimitive = options.glPrimitive || null;
 
+        this.memItem = new MemProfilerItem("mesh " + __geom.name, "mesh");
         this.opId = options.opId || "";
         this.setGeom(__geom);
 
@@ -513,6 +516,7 @@ class Mesh extends CgMesh
      */
     setGeom(geom, removeRef = false)
     {
+        this.memItem.setSizeGpu(geom.updateMemoryUsage());
         this.#geom = geom;
         if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;

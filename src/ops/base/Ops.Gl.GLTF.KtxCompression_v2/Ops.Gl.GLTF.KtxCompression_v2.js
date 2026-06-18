@@ -46,16 +46,18 @@ CABLES.loadKtx = function (url, cb, opts)
 
             CABLES.ktx.load(url, (transcodeResult) =>
             {
-
                 const ctex = new CGL.Texture(op.patch.cgl, {
                     "compression": true,
                     "wrap": opts?.wrap || CGL.Texture.WRAP_REPEAT,
                     "filter": opts?.filter || CGL.Texture.FILTER_LINEAR,
+                    "name": "ktx " + opts.name + transcodeResult.width + "x" + transcodeResult.height,
                     "width": transcodeResult.width,
                     "height": transcodeResult.height });
 
                 ctex.setFormat({ "glDataFormat": transcodeResult.format });
 
+                ctex.width = transcodeResult.width;
+                ctex.height = transcodeResult.height;
                 ctex.initFromMipMapData(transcodeResult.faces[0].mipmaps);
                 cb(ctex);
 

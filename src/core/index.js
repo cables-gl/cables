@@ -40,7 +40,6 @@ CABLES.internalNow = internalNow;
 CABLES.Anim = Anim;
 CABLES.AnimKey = AnimKey;
 CABLES.RenderLoop = RenderLoop;
-CABLES.MemProfilerItem = MemProfilerItem;
 CABLES.idleCallbackSoon = utils.idleCallbackSoon;
 CABLES.idleCallback = utils.idleCallback;
 CABLES.cloneObject = utils.cloneObject;
@@ -82,7 +81,7 @@ CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
 CABLES.memProfiler = new MemProfiler();
-CABLES.Memp = MemProfilerItem;
+CABLES.MemProfilerItem = MemProfilerItem;
 
 export default CABLES;
 // add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...
