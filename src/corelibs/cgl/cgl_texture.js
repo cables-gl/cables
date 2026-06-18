@@ -232,7 +232,6 @@ export class Texture extends CgTexture
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
         if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
-        console.log("setzise", w, h);
         if (w > this._cgl.maxTexSize || h > this._cgl.maxTexSize) this._log.error("texture size too big! " + w + "x" + h + " / max: " + this._cgl.maxTexSize);
 
         w = Math.min(w, this._cgl.maxTexSize);
