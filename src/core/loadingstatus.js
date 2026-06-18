@@ -55,7 +55,7 @@ export class LoadingStatus extends Events
     {
         if (!this.consoleLog) return;
 
-        let lstr = "[load] " + str + " " + loadingTask.name;
+        let lstr = "[load] " + str + " " + loadingTask?.name;
 
         if (loadingTask.op)
         {
