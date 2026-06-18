@@ -283,10 +283,10 @@ function updateText()
 
     if (opened)
     {
-        html += "<span style=\"color:" + colorRAF + "\">■</span> " + fps + " fps ";
-        html += "<span style=\"color:" + colorMainloop + "\">■</span> " + Math.round(currentTimeMainloop * 100) / 100 + "ms mainloop ";
-        html += "<span style=\"color:" + colorOnFrame + "\">■</span> " + Math.round((currentTimeOnFrame) * 100) / 100 + "ms onframe ";
-        if (currentTimeGPU) html += "<span style=\"color:" + colorGPU + "\">■</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
+        html += "<span style=\"color:" + colorRAF + "\">&block;</span> " + fps + " fps ";
+        html += "<span style=\"color:" + colorMainloop + "\">&block;</span> " + Math.round(currentTimeMainloop * 100) / 100 + "ms mainloop ";
+        html += "<span style=\"color:" + colorOnFrame + "\">&block;</span> " + Math.round((currentTimeOnFrame) * 100) / 100 + "ms onframe ";
+        if (currentTimeGPU) html += "<span style=\"color:" + colorGPU + "\">&block;</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
         html += warn;
         element.innerHTML = html;
     }
