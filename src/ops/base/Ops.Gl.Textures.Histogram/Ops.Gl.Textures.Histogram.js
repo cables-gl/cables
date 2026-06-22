@@ -6,9 +6,14 @@ const
 
 const cgl = op.patch.cgl;
 let meshPoints = null;
-let fb = new CGL.Framebuffer2(cgl, 256, 8,
+
+let fb = new CGL.Framebuffer2(cgl, 256, 4,
     {
-        "isFloatingPointTexture": true,
+        "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+        "multisampling": false,
+        "depth": true,
+        "multisamplingSamples": 0,
+        "clear": true,
         "filter": CGL.Texture.FILTER_NEAREST,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
@@ -24,14 +29,14 @@ function initEffect()
     let tex = new CGL.Texture(cgl,
         {
             "isFloatingPointTexture": false,
-            "filter": CGL.Texture.FILTER_NEAREST,
+            "filter": CGL.Texture.FILTER_LINEAR,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
             "width": 256,
             "height": 256
         });
 
     effect.setSourceTexture(tex);
-    outTex.set(null);
+    outTex.setRef(null);
 }
 
 function setUpPointVerts()
@@ -47,12 +52,15 @@ function setUpPointVerts()
     {
         for (let y = 0; y < res; y++)
         {
-            i++;
             verts[i * 3 + 2] = verts[i * 3 + 1] = verts[i * 3 + 0] = 0;
             texCoords[i * 2] = x / res;
             texCoords[i * 2 + 1] = y / res;
+            i++;
         }
     }
+
+    console.log("verts ", verts, texCoords);
+
     geom.setPointVertices(verts);
     geom.texCoords = texCoords;
 
@@ -62,7 +70,7 @@ function setUpPointVerts()
 
 let shaderWave = new CGL.Shader(cgl, "imgcompose bg");
 shaderWave.setSource(shaderWave.getDefaultVertexShader(), attachments.histogram_wave_frag);
-shaderWave.textureUniform = new CGL.Uniform(shaderWave, "t", "tex", 2);
+shaderWave.textureUniform = new CGL.Uniform(shaderWave, "t", "tex", 0);
 
 let shaderPointsR = new CGL.Shader(cgl, "histogram r");
 shaderPointsR.setSource(attachments.histogram_vert, attachments.histogram_frag);
@@ -92,7 +100,8 @@ exe.onTriggered = function ()
 {
     if (meshPoints && inTex.get())
     {
-        cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
+        // cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
+        cgl.pushBlendMode(CGL.BLEND_ADD, false);
         cgl.pushBlend(true);
 
         let vp = cgl.getViewPort();
@@ -104,11 +113,25 @@ exe.onTriggered = function ()
         // setup data
         fb.renderStart(cgl);
 
-        cgl.pushShader(shaderPointsR);
+        cgl.gl.clearColor(0, 0, 0, 1);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
 
+        cgl.setViewPort(0, 0, 256, 4);
+        // cgl.setViewPort(0, 0, size, size);
+
+        mat4.ortho(
+            cgl.pMatrix,
+            0, 256,
+            0, 4,
+            -1.00, 100
+        );
+
+        // mat4.perspective(cgl.pMatrix, 1, 1, -5, 5);
+
+        cgl.pushShader(shaderPointsR);
         cgl.setTexture(0, inTex.get().tex);
 
-        meshPoints.render(shaderPointsR);
+        meshPoints.render();
 
         cgl.popShader();
 
@@ -117,7 +140,6 @@ exe.onTriggered = function ()
         // meshPoints.render(shaderPointsLumi);
 
         fb.renderEnd(cgl);
-        outTexData.setRef(fb.getTextureColor());
 
         // render wave
 
@@ -128,11 +150,9 @@ exe.onTriggered = function ()
         cgl.pushShader(shaderWave);
         cgl.currentTextureEffect.bind();
 
-        cgl.setTexture(2, fb.getTextureColor().tex);
+        cgl.setTexture(0, fb.getTextureColor().tex);
         cgl.currentTextureEffect.finish();
         cgl.popShader();
-
-        outTex.set(effect.getCurrentSourceTexture());
 
         effect.endEffect();
 
@@ -142,5 +162,9 @@ exe.onTriggered = function ()
         cgl.popBlendMode();
 
         cgl.currentTextureEffect = null;
+
+        outTex.setRef(effect.getCurrentSourceTexture());
+        outTexData.setRef(fb.getTextureColor());
+
     }
 };

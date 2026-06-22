@@ -5,6 +5,7 @@ const
     inTimeOffset = op.inFloat("Offset"),
     doLoop = op.inValueBool("Loop"),
     doRewind = op.inValueBool("Rewind on play", false),
+    inLoadingTask = op.inValueBool("Loading Task", true),
     inPlayTrigg = op.inTriggerButton("Play Trigger"),
     inPauseTrigg = op.inTriggerButton("Pause"),
     inRewind = op.inTriggerButton("Rewind"),
@@ -141,12 +142,10 @@ function load()
     if (!inActive.get()) return;
     if (!fileName.get()) return;
 
-    let loadingId = op.patch.loading.start("audioplayer", fileName.get(), op);
+    let loadingId = null;
+    if (inLoadingTask.get()) loadingId = op.patch.loading.start("audioplayer", "audioplayer" + fileName.get(), op);
 
-    if (audio)
-    {
-        pause();
-    }
+    if (audio) pause();
 
     outDuration.set(0);
     audio = new Audio();
@@ -166,7 +165,8 @@ function load()
         if (inPlay.get()) play();
         if (audio) audio.removeEventListener("canplaythrough", canplaythrough, false);
     };
-    op.patch.loading.finished(loadingId);
+
+    if (loadingId) op.patch.loading.finished(loadingId);
 
     audio.addEventListener("canplaythrough", canplaythrough, false);
 
@@ -196,7 +196,7 @@ function load()
         outEnded.trigger();
         outPlaying.set(false);
         timer.pause();
-        console.log("ENDED");
+        // console.log("ENDED");
         // if (doLoop.get()) play();
     }, false);
 }

@@ -32,6 +32,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Loading Task",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "Play Trigger"
             },
@@ -134,6 +139,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1777361943224
+        },
+        {
+            "message": "Added toggle for creating a loading task when loading a file",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1781875475511
         }
     ],
     "license": "MIT",
