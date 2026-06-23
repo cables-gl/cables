@@ -198,6 +198,10 @@ function printMaterial(mat, idx)
 
     html += "<span class=\"icon icon-info\" onclick=\"new CABLES.UI.ModalDialog({ 'html': '<pre>" + info + "</pre>', 'title': '" + mat.name + "' });\"></span>&nbsp;";
 
+    html += " <td>";
+    if (mat.doubleSided)html += "<span class=\"tt\" data-tt=\"Double Sided\">DS</span>";
+    html += " </td>";
+
     if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
         let rgb = "";
@@ -207,6 +211,7 @@ function printMaterial(mat, idx)
 
         html += "<div style=\"width:15px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a>";
     }
+
     html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>");
     html += (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeMaterial('" + mat.name + "')\" class=\"treebutton\">Properties</a>");
     html += "<td>";

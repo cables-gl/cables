@@ -351,6 +351,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1781776824171
+        },
+        {
+            "message": "\"Double sided\" material setting is now used to cull backfaces or not, when using material properties",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1782200415477
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
