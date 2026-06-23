@@ -9,10 +9,12 @@ float lumi(vec3 color)
 
 void main()
 {
+  gl_PointSize=9.0;
+
     vec2 tc=attrTexCoord;
 
-    float strength;
-    highp float pos=0.0;
+    float strength=0.0;
+    highp float pos=0.5;
     #ifdef HISTOGRAM_R
         strength=texture(tex,tc).r;
         pos=1.0;
@@ -33,12 +35,9 @@ void main()
         pos=0.25;
     #endif
 
-    vec4 model= vec4(strength*2.0-1.0, pos , 0.0,1.0);
+    highp vec4 model=vec4(strength*2.0-1.0, pos , 0.0, 1.0);
 
+    model=vec4(0.5, 0.5, 0, 1.);
 
-model=vec4(0.0,0.0, 0.0,1.0);
-
-
-    gl_PointSize=1.0;
-    gl_Position= model;
+    gl_Position=model;
 }
