@@ -290,7 +290,7 @@ inObj.onLinkChanged = () =>
         {
             const p = inObj.links[0].getOtherPort(inObj);
 
-            op.setUiAttrib({ "extendTitle": title + " (" + p.uiAttribs.objType + ")" });
+            op.setUiAttrib({ "extendTitle": title + " (" + (p.uiAttribs.objType || "generic") + ")" });
         }
     }
 

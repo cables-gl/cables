@@ -26,7 +26,6 @@ op.toggleShowAll = () =>
     else maxChilds = 100;
     closeTab();
     printInfo();
-    // console.log("maxChilds", maxChilds);
 };
 
 function printNode(html, node, level)
@@ -198,9 +197,10 @@ function printMaterial(mat, idx)
 
     html += "<span class=\"icon icon-info\" onclick=\"new CABLES.UI.ModalDialog({ 'html': '<pre>" + info + "</pre>', 'title': '" + mat.name + "' });\"></span>&nbsp;";
 
-    html += " <td>";
-    if (mat.doubleSided)html += "<span class=\"tt\" data-tt=\"Double Sided\">DS</span>";
-    html += " </td>";
+    if (mat.doubleSided)html += "<span class=\"tt\" data-tt=\"Double Sided\">DS </span>&nbsp;";
+
+    html += "</td>";
+    html += "<td>";
 
     if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
@@ -209,22 +209,20 @@ function printMaterial(mat, idx)
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[1] * 255);
         rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[2] * 255);
 
-        html += "<div style=\"width:15px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a>";
+        html += "<div style=\"width:30px;height:15px;background-color:rgb(" + rgb + ");display:inline-block\">&nbsp;</a></div>";
     }
 
-    html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>");
-    html += (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeMaterial('" + mat.name + "')\" class=\"treebutton\">Properties</a>");
-    html += "<td>";
+    html += "</td>";
 
-    html += "<td>";
+    html += "<td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>&nbsp;");
+    html += (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeMaterial('" + mat.name + "')\" class=\"treebutton\">Properties</a>&nbsp;");
 
     let texStr = "";
     if (gltf.json.textures)
     {
         if (mat.normalTexture) texStr += "NORM " + getTextureSourceForIndex(gltf, mat.normalTexture.index) + ", ";
         if (mat.emissiveTexture) texStr += "EMISS " + getTextureSourceForIndex(gltf, mat.emissiveTexture.index) + ", ";
-        if (mat.extensions && mat.extensions.CABLES_materials_lightmap && mat.extensions.CABLES_materials_lightmap.lightMapTexture)
-            texStr += "LIGHT " + getTextureSourceForIndex(gltf, mat.extensions.CABLES_materials_lightmap.lightMapTexture.index) + ", ";
+        if (mat.extensions && mat.extensions.CABLES_materials_lightmap && mat.extensions.CABLES_materials_lightmap.lightMapTexture) texStr += "LIGHT " + getTextureSourceForIndex(gltf, mat.extensions.CABLES_materials_lightmap.lightMapTexture.index) + ", ";
         if (mat.occlusionTexture) texStr += "OCC " + getTextureSourceForIndex(gltf, mat.occlusionTexture.index) + ", ";
         if (mat.pbrMetallicRoughness)
         {
@@ -446,6 +444,7 @@ function printInfo()
         html += "<tr>";
         html += " <th>Index</th>";
         html += " <th>Name</th>";
+        html += " <th>Properties</th>";
         html += " <th>Color</th>";
         html += " <th>Function</th>";
         html += " <th></th>";
