@@ -32,7 +32,7 @@
         ]
     },
     "cloneOf": "446cd3a1-1e9c-4036-8f6f-c11ce4f789c7",
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Edit a simple curve and output as array of numbers",
     "docs": {
         "ports": []

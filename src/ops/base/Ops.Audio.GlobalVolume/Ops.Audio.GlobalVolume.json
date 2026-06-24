@@ -20,7 +20,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Adjusts the volume of all audio ops",
     "docs": {
         "ports": []

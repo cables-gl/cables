@@ -41,5 +41,10 @@
                 "objType": "shader"
             }
         ]
-    }
+    },
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    },
+    "summary": "Show specific GLTF texture channels as color texture"
 }

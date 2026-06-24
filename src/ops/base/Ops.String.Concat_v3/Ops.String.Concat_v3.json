@@ -10,8 +10,8 @@
             "date": 1716804941340
         },
         {
-            "message": "String.ConcatMultiPort_v2 renamed to Ops.String.Concat_v3",
-            "type": "rename",
+            "message": "New version v3: multiport by default",
+            "type": "improvement",
             "author": "pandur",
             "date": 1772448216713
         }

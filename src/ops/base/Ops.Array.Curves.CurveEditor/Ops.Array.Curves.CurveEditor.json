@@ -31,7 +31,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Edit a simple curve",
     "docs": {
         "ports": []

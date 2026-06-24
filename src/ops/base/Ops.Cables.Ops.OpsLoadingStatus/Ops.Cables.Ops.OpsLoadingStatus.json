@@ -47,7 +47,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Get loading status of an array of ops",
     "docs": {
         "ports": []

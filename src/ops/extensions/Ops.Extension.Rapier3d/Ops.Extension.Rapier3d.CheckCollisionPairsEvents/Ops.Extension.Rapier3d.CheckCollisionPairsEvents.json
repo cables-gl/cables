@@ -48,7 +48,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Check collision of an array of colliders against another array of colliders from bodies",
     "docs": {
         "ports": []

@@ -59,7 +59,7 @@
             "date": 1740563305689
         },
         {
-            "message": "Trigger.RouteTriggerMultiPort_v2 renamed to Ops.Trigger.RouteTrigger_v2",
+            "message": "New version v2: Multiport outputs by default",
             "type": "rename",
             "author": "pandur",
             "date": 1779118026673

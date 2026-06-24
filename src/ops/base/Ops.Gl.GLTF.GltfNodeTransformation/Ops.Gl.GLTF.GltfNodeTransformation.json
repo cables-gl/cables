@@ -43,12 +43,12 @@
         ]
     },
     "summary": "Get the transform from the GLTFscene op",
-    "issues": "",
     "docs": {
         "ports": []
     },
     "license": "MIT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

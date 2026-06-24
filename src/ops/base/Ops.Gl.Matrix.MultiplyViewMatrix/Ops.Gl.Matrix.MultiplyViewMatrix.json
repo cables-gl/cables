@@ -29,19 +29,7 @@
     "docs": {
         "ports": []
     },
-    "changelog": [
-        {
-            "message": "Ops.Gl.Matrix.mulViewMatrix renamed to Ops.Gl.Matrix.MulViewMatrix",
-            "author": "pandur",
-            "date": 1560333452550
-        },
-        {
-            "message": "Gl.Matrix.MulViewMatrix renamed to Ops.Gl.Matrix.MultiplyViewMatrix",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1781535727152
-        }
-    ],
+    "changelog": [],
     "license": "MIT",
     "exampleProjectId": "hDWuci",
     "coreLibs": [

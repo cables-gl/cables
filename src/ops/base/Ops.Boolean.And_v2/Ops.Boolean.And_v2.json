@@ -11,10 +11,10 @@
             "date": 1762781802774
         },
         {
-            "message": "Boolean.AndMultiPort_v2 renamed to Ops.Boolean.And_v2",
-            "type": "rename",
+            "message": "New Version v2: Multiport by default",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1774012960100
+            "date": 1782281879146
         }
     ],
     "layout": {

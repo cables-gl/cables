@@ -48,5 +48,6 @@
     "docs": {
         "ports": []
     },
-    "cloneOf": "fa57dcbe-3c5a-4e9c-93d0-b1b41b41dde4"
+    "cloneOf": "fa57dcbe-3c5a-4e9c-93d0-b1b41b41dde4",
+    "isReleased": true
 }

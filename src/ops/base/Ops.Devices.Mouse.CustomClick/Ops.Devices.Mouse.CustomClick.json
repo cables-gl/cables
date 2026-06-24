@@ -51,7 +51,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Configurable mouse click listener",
     "docs": {
         "ports": []

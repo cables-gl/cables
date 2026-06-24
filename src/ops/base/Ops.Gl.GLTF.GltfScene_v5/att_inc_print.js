@@ -111,26 +111,8 @@ function printNode(html, node, level)
     /// ///////has
     if (node.mesh)
     {
-        let namestt = "";
-        for (let i = 0; i < node.mesh.meshes.length; i++)
-        {
-            if (i > 0) namestt += ", ";
-            namestt += node.mesh.meshes[i].name || "";
-        }
 
-        html += "<td style=\"text-overflow:ellipsis;max-width:100px;overflow:hidden;\" class=\"tt\" data-tt=\"" + namestt + "\">";
-        for (let i = 0; i < node.mesh.meshes.length; i++)
-        {
-            if (i > 0) html += ", ";
-            html += node.mesh.meshes[i].name || "";
-        }
-
-        html += "</td>";
-
-        html += "<td>";
-        html += node.hasSkin() || "";
-        html += "</td>";
-
+        // materials
         html += "<td>";
         let matStr = "";
         let countMats = 0;
@@ -150,6 +132,28 @@ function printNode(html, node, level)
         else if (countMats == 0) html += "none";
         else html += matStr;
 
+        html += "</td>";
+
+        // mesh names
+        let namestt = "";
+        for (let i = 0; i < node.mesh.meshes.length; i++)
+        {
+            if (i > 0) namestt += ", ";
+            namestt += node.mesh.meshes[i].name || "";
+        }
+
+        html += "<td style=\"text-overflow:ellipsis;max-width:100px;overflow:hidden;\" class=\"tt\" data-tt=\"" + namestt + "\">";
+        for (let i = 0; i < node.mesh.meshes.length; i++)
+        {
+            if (i > 0) html += ", ";
+            html += node.mesh.meshes[i].name || "";
+        }
+
+        html += "</td>";
+
+        // skin
+        html += "<td>";
+        html += node.hasSkin() || "-";
         html += "</td>";
     }
     else
@@ -197,7 +201,7 @@ function printMaterial(mat, idx)
 
     html += "<span class=\"icon icon-info\" onclick=\"new CABLES.UI.ModalDialog({ 'html': '<pre>" + info + "</pre>', 'title': '" + mat.name + "' });\"></span>&nbsp;";
 
-    if (mat.doubleSided)html += "<span class=\"tt\" data-tt=\"Double Sided\">DS </span>&nbsp;";
+    if (mat.doubleSided) html += "<span class=\"tt\" data-tt=\"Double Sided\">DS </span>&nbsp;";
 
     html += "</td>";
     html += "<td>";
@@ -261,11 +265,14 @@ function printInfo()
     html += "<table id=\"sectionNodes\" class=\"table treetable\">";
 
     html += "<tr>";
+
+    html += " <th></th>";
     html += " <th colspan=\"21\">Name</th>";
     html += " <th></th>";
+
+    html += " <th>Material</th>";
     html += " <th>Mesh Geometry</th>";
     html += " <th>Skin</th>";
-    html += " <th>Material</th>";
     html += " <th>Order</th>";
     html += " <th>Expose</th>";
     html += " <th></th>";
@@ -436,8 +443,7 @@ function printInfo()
     if (gltf.json.materials) numMaterials = gltf.json.materials.length;
     html += "<div id=\"groupMaterials\">Materials (" + numMaterials + ")</div>";
 
-    if (!gltf.json.materials || gltf.json.materials.length == 0)
-    {}
+    if (!gltf.json.materials || gltf.json.materials.length == 0) {}
     else
     {
         html += "<table id=\"materialtable\"  class=\"table treetable\">";

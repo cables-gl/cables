@@ -7,22 +7,48 @@ const
 const cgl = op.patch.cgl;
 let meshPoints = null;
 
-let fb = new CGL.Framebuffer2(cgl, 256, 4,
-    {
-        "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
-        "multisampling": false,
-        "depth": true,
-        "multisamplingSamples": 0,
-        "clear": true,
-        "filter": CGL.Texture.FILTER_NEAREST,
-        "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
-    });
-
-// fb.setFilter(CGL.Texture.FILTER_NEAREST);
+let fb = null;
 let effect = null;
+
+let shaderWave = new CGL.Shader(cgl, "imgcompose bg");
+shaderWave.setSource(shaderWave.getDefaultVertexShader(), attachments.histogram_wave_frag);
+shaderWave.textureUniform = new CGL.Uniform(shaderWave, "t", "tex", 0);
+
+let shaderPointsR = new CGL.Shader(cgl, "histogram r");
+shaderPointsR.setSource(attachments.histogram_vert, attachments.histogram_frag);
+shaderPointsR.textureUniform = new CGL.Uniform(shaderPointsR, "t", "tex", 0);
+shaderPointsR.define("HISTOGRAM_R");
+
+let shaderPointsG = new CGL.Shader(cgl, "histogram g");
+shaderPointsG.setSource(attachments.histogram_vert, attachments.histogram_frag);
+shaderPointsG.textureUniform = new CGL.Uniform(shaderPointsG, "t", "tex", 0);
+shaderPointsG.define("HISTOGRAM_G");
+
+let shaderPointsB = new CGL.Shader(cgl, "histogram b");
+shaderPointsB.setSource(attachments.histogram_vert, attachments.histogram_frag);
+shaderPointsB.textureUniform = new CGL.Uniform(shaderPointsB, "t", "tex", 0);
+shaderPointsB.define("HISTOGRAM_B");
+
+let shaderPointsLumi = new CGL.Shader(cgl, "histogram lumi");
+shaderPointsLumi.setSource(attachments.histogram_vert, attachments.histogram_frag);
+shaderPointsLumi.textureUniform = new CGL.Uniform(shaderPointsLumi, "t", "tex", 0);
+shaderPointsLumi.define("HISTOGRAM_LUMI");
+
+let prevViewPort = [0, 0, 0, 0];
 
 function initEffect()
 {
+    if (!fb) fb = new CGL.Framebuffer2(cgl, 256, 4,
+        {
+            "pixelFormat": CGL.Texture.PFORMATSTR_RGBA32F,
+            "multisampling": false,
+            "depth": true,
+            "multisamplingSamples": 0,
+            "clear": true,
+            "filter": CGL.Texture.FILTER_NEAREST,
+            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+        });
+
     if (effect) effect.delete();
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": false });
 
@@ -68,41 +94,19 @@ function setUpPointVerts()
     meshPoints.setGeom(geom);
 }
 
-let shaderWave = new CGL.Shader(cgl, "imgcompose bg");
-shaderWave.setSource(shaderWave.getDefaultVertexShader(), attachments.histogram_wave_frag);
-shaderWave.textureUniform = new CGL.Uniform(shaderWave, "t", "tex", 0);
-
-let shaderPointsR = new CGL.Shader(cgl, "histogram r");
-shaderPointsR.setSource(attachments.histogram_vert, attachments.histogram_frag);
-shaderPointsR.textureUniform = new CGL.Uniform(shaderPointsR, "t", "tex", 0);
-shaderPointsR.define("HISTOGRAM_R");
-
-let shaderPointsG = new CGL.Shader(cgl, "histogram g");
-shaderPointsG.setSource(attachments.histogram_vert, attachments.histogram_frag);
-shaderPointsG.textureUniform = new CGL.Uniform(shaderPointsG, "t", "tex", 0);
-shaderPointsG.define("HISTOGRAM_G");
-
-let shaderPointsB = new CGL.Shader(cgl, "histogram b");
-shaderPointsB.setSource(attachments.histogram_vert, attachments.histogram_frag);
-shaderPointsB.textureUniform = new CGL.Uniform(shaderPointsB, "t", "tex", 0);
-shaderPointsB.define("HISTOGRAM_B");
-
-let shaderPointsLumi = new CGL.Shader(cgl, "histogram lumi");
-shaderPointsLumi.setSource(attachments.histogram_vert, attachments.histogram_frag);
-shaderPointsLumi.textureUniform = new CGL.Uniform(shaderPointsLumi, "t", "tex", 0);
-shaderPointsLumi.define("HISTOGRAM_LUMI");
-
-setUpPointVerts();
-initEffect();
-let prevViewPort = [0, 0, 0, 0];
-
 exe.onTriggered = function ()
 {
+    if (!fb)
+    {
+        setUpPointVerts();
+        initEffect();
+    }
     if (meshPoints && inTex.get())
     {
-        // cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
-        cgl.pushBlendMode(CGL.BLEND_ADD, false);
-        cgl.pushBlend(true);
+        cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
+        // cgl.pushBlendMode(CGL.BLEND_ADD, false);
+        // cgl.pushBlend(true);
+        cgl.pushBlend(false);
 
         let vp = cgl.getViewPort();
         prevViewPort[0] = vp[0];
@@ -121,9 +125,9 @@ exe.onTriggered = function ()
 
         mat4.ortho(
             cgl.pMatrix,
-            0, 256,
-            0, 4,
-            -1.00, 100
+            -1, 1,
+            -1, 1,
+            -10.0, 10
         );
 
         // mat4.perspective(cgl.pMatrix, 1, 1, -5, 5);

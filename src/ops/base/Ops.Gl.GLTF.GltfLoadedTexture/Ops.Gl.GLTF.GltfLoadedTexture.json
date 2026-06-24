@@ -35,13 +35,12 @@
         ]
     },
     "summary": "Load textures from inside a .glb file",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "caniusequery": "",
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

@@ -62,13 +62,7 @@
             "date": 1729253304467
         },
         {
-            "message": "Ops.Html.BackgroundImage_v2 renamed to Ops.Html.CSS.BackgroundImage_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1730274226837
-        },
-        {
-            "message": "Add input port so set background image or mask image",
+            "message": "Added input port to set background image or mask image",
             "type": "improvement",
             "author": "stephan",
             "date": 1773060962960

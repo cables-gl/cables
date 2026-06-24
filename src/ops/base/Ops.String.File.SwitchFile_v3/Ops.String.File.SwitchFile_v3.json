@@ -8,7 +8,7 @@
             "type": "new op"
         },
         {
-            "message": "new version v3: multiport input of files",
+            "message": "New version v3: multiport input of files",
             "type": "improvement",
             "author": "pandur",
             "date": 1776698998194
@@ -16,7 +16,7 @@
     ],
     "authorName": "pandur",
     "created": 1776698481646,
-    "summary": "switch between filenames",
+    "summary": "Switch between filenames",
     "docs": {
         "ports": []
     },
@@ -71,5 +71,6 @@
         "TdHgjqOLpnM"
     ],
     "license": "MIT",
-    "exampleProjectId": "unutii"
+    "exampleProjectId": "unutii",
+    "isReleased": true
 }

@@ -42,12 +42,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1778166893797
-        },
-        {
-            "message": "Gl.Pbr.PbrMaterialV2 renamed to Ops.Gl.Pbr.PbrMaterial_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1780042488508
         }
     ],
     "layout": {
@@ -406,8 +400,6 @@
         }
     ],
     "summary": "PBR/Physical Based Rendering Material for realistic materials",
-    "issues": "",
-    "caniusequery": "",
     "youtubeids": [
         "uwoj7R52yU8"
     ],
@@ -502,10 +494,6 @@
                 "text": "sRGB"
             },
             {
-                "name": "AORM",
-                "text": "linear bt.709, R: ambient occlusion, G: roughness, B: metalness"
-            },
-            {
                 "name": "Normal map",
                 "text": "linear bt.709, +Y, TS per vertex"
             },
@@ -539,5 +527,6 @@
     "license": "MIT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }
