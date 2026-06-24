@@ -23,7 +23,7 @@
             "date": 1774969769006
         },
         {
-            "message": "Allow collision detection of fixes vs fixed bodies",
+            "message": "Allow collision detection of fixed vs fixed bodies",
             "type": "feature",
             "author": "pandur",
             "date": 1776954273242
@@ -35,7 +35,7 @@
             "date": 1777458339913
         },
         {
-            "message": "Added wakeup button",
+            "message": "Added wakeup trigger input",
             "type": "feature",
             "author": "pandur",
             "date": 1777458421743
