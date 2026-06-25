@@ -46,5 +46,6 @@
     "docs": {
         "ports": []
     },
-    "summary": "Show specific GLTF texture channels as color texture"
+    "summary": "Show specific GLTF texture channels as color texture",
+    "exampleProjectId": "6Jtryn"
 }
