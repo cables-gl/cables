@@ -34,7 +34,7 @@ function updateOutput()
     outStorage.set(inType.get());
     outSupported.set(storageSupport);
 
-    if (!storageSupport)
+    if (storageSupport)
     {
         const keys = [];
         const all = {};

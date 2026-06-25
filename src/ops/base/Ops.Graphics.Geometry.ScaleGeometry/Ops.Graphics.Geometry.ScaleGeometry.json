@@ -22,7 +22,7 @@
             {
                 "type": 0,
                 "name": "Scale",
-                "uititle": "Target Size Y",
+                "uititle": "Target Size X",
                 "subType": "number"
             },
             {
@@ -77,5 +77,6 @@
         "cgl"
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "1o9Lrn"
 }

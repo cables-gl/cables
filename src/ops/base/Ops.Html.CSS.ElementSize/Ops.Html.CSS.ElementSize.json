@@ -14,7 +14,7 @@
             "date": 1773069091830
         },
         {
-            "message": "Add vh and vw to size units",
+            "message": "Added vh and vw to size units",
             "type": "improvement",
             "author": "stephan",
             "date": 1776262540408
@@ -75,5 +75,6 @@
     },
     "license": "MIT",
     "summary": "Set Size of a HTML element",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "Os01yn"
 }

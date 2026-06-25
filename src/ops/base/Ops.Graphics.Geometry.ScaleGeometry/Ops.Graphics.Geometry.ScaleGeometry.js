@@ -11,10 +11,10 @@ const
 op.setUiAxisPorts(scaleX, scaleY, scaleZ);
 
 scaleX.onChange =
-  scaleY.onChange =
-  scaleZ.onChange =
-  scale.onChange =
-  geometry.onChange = update;
+    scaleY.onChange =
+    scaleZ.onChange =
+    scale.onChange =
+    geometry.onChange = update;
 
 inMeth.onChange = () =>
 {
@@ -33,10 +33,6 @@ function update()
     if (oldGeom)
     {
         let geom = oldGeom.copy();
-        let rotVec = vec3.create();
-        let emptyVec = vec3.create();
-        let transVec = vec3.create();
-        let centerVec = vec3.create();
         let s = scale.get();
         let sx = scaleX.get();
         let sy = scaleY.get();
@@ -45,9 +41,9 @@ function update()
         if (inMeth.get().includes("Target Size"))
         {
             const bb = new CGL.BoundingBox(oldGeom);
-            if (inMeth.get() == "Target Size X")s /= bb.size[0];
-            if (inMeth.get() == "Target Size Y")s /= bb.size[1];
-            if (inMeth.get() == "Target Size Z")s /= bb.size[2];
+            if (inMeth.get() == "Target Size X") s /= bb.size[0];
+            if (inMeth.get() == "Target Size Y") s /= bb.size[1];
+            if (inMeth.get() == "Target Size Z") s /= bb.size[2];
         }
 
         for (let i = 0; i < geom.vertices.length; i += 3)

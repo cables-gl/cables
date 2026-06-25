@@ -45,5 +45,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "MbS0yn"
 }

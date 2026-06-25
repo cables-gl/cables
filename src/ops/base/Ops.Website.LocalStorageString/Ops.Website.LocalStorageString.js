@@ -58,7 +58,6 @@ function changeStorage()
 
 function storeValue()
 {
-    console.log("SSS", storage, typeof storage);
     const val = inValue.get();
     if (storageSupport)
     {

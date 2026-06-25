@@ -39,12 +39,11 @@
             }
         ]
     },
-    "summary": "set number at key in an object",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Set number at key in an object",
     "docs": {
         "ports": []
     },
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "1TD5yn"
 }

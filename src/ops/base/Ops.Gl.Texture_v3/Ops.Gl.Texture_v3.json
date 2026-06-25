@@ -128,7 +128,6 @@
         }
     ],
     "summary": "Load an image as a texture",
-    "issues": "",
     "docs": {
         "ports": []
     },
@@ -136,5 +135,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "iRKrD-"
 }
