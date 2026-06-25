@@ -26,7 +26,11 @@ inRemoveScale0.onChange =
     inSpace.onChange =
     inSort.onChange =
     inStr.onChange =
-    outPos.onChange = () => { needsupdate = true; };
+    outPos.onChange = () =>
+    {
+        needsupdate = true;
+        op.setUiAttrib({ "extendTitle": inStr.get() });
+    };
 
 inExec.onTriggered = exec;
 
@@ -57,6 +61,7 @@ function update()
 
     let worldspace = inSpace.get() == "World";
     const remove0 = inRemoveScale0.get();
+    cgl.pushModelMatrix();
 
     for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
     {
@@ -69,7 +74,7 @@ function update()
 
             arrNames.push(n.name);
 
-            node.transform(cgl, inTime.get());
+            node.transform(cgl, inTime.get() % cgl.tempData.currentScene.maxTime);
 
             if (!worldspace) m = node.modelMatLocal();
             else m = node.modelMatAbs();
@@ -94,7 +99,7 @@ function update()
             arrPos[posCounter++] = tr[1];
             arrPos[posCounter++] = tr[2];
 
-            if (node._rot)
+            if (node._rot && !inTime.isLinked())
             {
                 arrRot.push(node._rot[0], node._rot[1], node._rot[2], node._rot[3]);
             }
@@ -117,6 +122,7 @@ function update()
             else arrScale.push(1, 1, 1);
         }
     }
+    cgl.popModelMatrix();
 
     if (inSort.get() === "AlphaNumerical")
     {
@@ -156,7 +162,7 @@ function update()
     outScale.setRef(arrScale);
     outNames.setRef(arrNames);
     outRot.setRef(arrRot);
-    outFound.set(arrPos.length > 0);
+    outFound.set(posCounter > 0);
 
     needsupdate = false;
 }

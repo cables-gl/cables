@@ -42,7 +42,8 @@
             },
             {
                 "type": 2,
-                "name": "geometry"
+                "name": "geometry",
+                "objType": "geometry"
             }
         ]
     },

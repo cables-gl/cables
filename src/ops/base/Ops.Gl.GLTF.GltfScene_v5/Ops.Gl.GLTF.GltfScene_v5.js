@@ -44,6 +44,7 @@ const
     outAnimFinished = op.outTrigger("Finished"),
     outLoading = op.outBoolNum("Loading"),
     outLoaded = op.outBoolNum("Loaded");
+
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
 let cgl = op.patch.cg || op.patch.cgl;
@@ -151,6 +152,8 @@ inExec.onTriggered = function ()
     if (!finishedLoading) return;
     if (!inActive.get()) return;
 
+    cgl.pushModelMatrix();
+
     if (gltfLoadingError)
     {
         if (!gltfLoadingErrorMesh) gltfLoadingErrorMesh = CGL.MESHES.getSimpleCube(cgl, "ErrorCube");
@@ -172,8 +175,6 @@ inExec.onTriggered = function ()
     }
 
     lastTime = time;
-
-    cgl.pushModelMatrix();
 
     outAnimTime.set(time || 0);
 
@@ -231,10 +232,9 @@ inExec.onTriggered = function ()
         }
     }
 
+    cgl.popModelMatrix();
     next.trigger();
     cgl.tempData.currentScene = oldScene;
-
-    cgl.popModelMatrix();
 
     if (cam) cam.end();
 };
@@ -666,6 +666,7 @@ function updateAnimation()
         const animName = inAnimation.get() || Object.keys(maxTimeDict)[0];
         maxTime = maxTimeDict[animName] || -1;
         outAnimLength.set(maxTime);
+        gltf.maxTime = maxTime;
     }
 }
 
@@ -748,10 +749,11 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({
-        "subPatch": op.uiAttribs.subPatch,
-        "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
-    });
+    newOp.setUiAttrib(
+        {
+            "subPatch": op.uiAttribs.subPatch,
+            "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY }
+        });
 }
 
 op.exposeNode = function (name, type, options)
@@ -854,19 +856,20 @@ op.setOrder = function (name)
 
     data.nodeOrders = data.nodeOrders || {};
 
-    new CABLES.UI.ModalDialog({
-        "prompt": true,
-        "title": "Order",
-        "text": "enter a number, smaller number get rendered earlier",
-        "promptValue": n.order,
-        "promptOk": (str) =>
+    new CABLES.UI.ModalDialog(
         {
-            n.order = parseFloat(str);
-            data.nodeOrders[name] = n.order;
-            saveData();
-            reloadSoon();
-        }
-    });
+            "prompt": true,
+            "title": "Order",
+            "text": "enter a number, smaller number get rendered earlier",
+            "promptValue": n.order,
+            "promptOk": (str) =>
+            {
+                n.order = parseFloat(str);
+                data.nodeOrders[name] = n.order;
+                saveData();
+                reloadSoon();
+            }
+        });
 };
 
 op.toggleNodeVisibility = function (name)

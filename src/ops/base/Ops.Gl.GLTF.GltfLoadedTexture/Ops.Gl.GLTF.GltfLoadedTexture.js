@@ -32,12 +32,14 @@ inExec.onTriggered = function ()
         {
             if (gltf.textures[index] && gltf.textures[index])
             {
+                outFound.set(true);
                 outTex.setRef(gltf.textures[index].tex);
                 return;
             }
             else console.log("no tex ?");
         }
     }
+    outFound.set(false);
     op.setUiError("id", "texture not found!", 1);
     outTex.setRef(CGL.Texture.getEmptyTexture(cgl));
 

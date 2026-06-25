@@ -6,12 +6,12 @@ const
     inSmooth = op.inValueBool("Smooth", false),
     inDraw = op.inValueBool("Draw", true),
     trigger = op.outTrigger("trigger"),
-    geomOut = op.outObject("geometry");
+    geomOut = op.outObject("geometry", null, "geometry");
 
 const cgl = op.patch.cgl;
 let geom = null;
 let mesh = null;
-op.onDelete = function () { if (mesh)mesh.dispose(); };
+op.onDelete = function () { if (mesh) mesh.dispose(); };
 sizeW.onChange =
     sizeH.onChange =
     sizeL.onChange =
@@ -19,14 +19,14 @@ sizeW.onChange =
 
 render.onTriggered = function ()
 {
-    if (!mesh)create();
-    if (inDraw.get())mesh.render();
+    if (!mesh) create();
+    if (inDraw.get()) mesh.render();
     trigger.trigger();
 };
 
 function create()
 {
-    if (!geom)geom = new CGL.Geometry(op.name);
+    if (!geom) geom = new CGL.Geometry(op.name);
     let w = sizeW.get();
     let h = sizeH.get();
     let l = sizeL.get();
@@ -57,7 +57,7 @@ function create()
         1.0, 1.0,
         0.0, 1.0,
         0.0, 1.0,
-        0.0, 1.0,
+        0.0, 1.0
     ];
 
     geom.verticesIndices = [
@@ -70,10 +70,10 @@ function create()
         4, 2, 1
     ];
 
-    if (!inSmooth.get())geom.unIndex();
+    if (!inSmooth.get()) geom.unIndex();
     geom.calculateNormals({ "forceZUp": false });
 
-    if (mesh)mesh.dispose();
+    if (mesh) mesh.dispose();
     mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);

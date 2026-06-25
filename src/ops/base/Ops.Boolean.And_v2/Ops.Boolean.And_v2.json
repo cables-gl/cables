@@ -49,5 +49,9 @@
         ]
     },
     "summary": "Outputs `true` if all input values are `true` (boolean)",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "_B91Ms",
+    "docs": {
+        "ports": []
+    }
 }

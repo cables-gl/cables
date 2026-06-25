@@ -12,16 +12,16 @@ let mesh = null;
 let currentSceneLoaded = null;
 
 inNameMatch.onChange =
-inSubmesh.onChange =
-inNodeName.onChange = function ()
-{
-    outGeom.setRef(null);
-    mesh = null;
-    outFound.set(false);
-    let title = inNodeName.get();
-    if (inSubmesh.get())title += "." + inSubmesh.get();
-    op.setUiAttrib({ "extendTitle": title });
-};
+    inSubmesh.onChange =
+    inNodeName.onChange = function ()
+    {
+        outGeom.setRef(null);
+        mesh = null;
+        outFound.set(false);
+        let title = inNodeName.get();
+        if (inSubmesh.get()) title += "." + inSubmesh.get();
+        op.setUiAttrib({ "extendTitle": title });
+    };
 
 exec.onTriggered = () =>
 {
@@ -64,6 +64,7 @@ exec.onTriggered = () =>
                 {
                     if (mesh && mesh.meshes && mesh.meshes[idx] && mesh.meshes[idx].mesh)
                     {
+                        console.log("11", mesh.meshes[idx]);
                         found = true;
                         outGeom.setRef(mesh.meshes[idx].mesh.geom);
 

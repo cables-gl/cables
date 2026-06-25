@@ -49,7 +49,7 @@
             }
         ]
     },
-    "summary": "uniform scaling of geometry vertices",
+    "summary": "Scaling of geometry vertices",
     "docs": {
         "ports": []
     },
