@@ -1201,10 +1201,10 @@ export class Texture extends CgTexture
 
         /// //////
 
-        if (pixelFormatStr.includes("32bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+        if (pixelFormatStr.includes("32bit") || pixelFormatStr.includes("16bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
         {
-            if (cgl.glVersion == 2) cgl.enableExtension("EXT_color_buffer_float");
-            if (cgl.glVersion == 2) cgl.enableExtension("EXT_float_blend");
+            cgl.enableExtension("EXT_color_buffer_float");
+            cgl.enableExtension("EXT_float_blend");
 
             cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
         }
