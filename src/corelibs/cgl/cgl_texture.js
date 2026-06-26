@@ -313,7 +313,7 @@ export class Texture extends CgTexture
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-        this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
+        this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat, this._fromData));
 
         // this.filter = Texture.FILTER_NEAREST;
 
@@ -1053,7 +1053,7 @@ export class Texture extends CgTexture
      * @param {CglContext} cgl
      * @param {string} pixelFormatStr
      */
-    static setUpGlPixelFormat(cgl, pixelFormatStr)
+    static setUpGlPixelFormat(cgl, pixelFormatStr, fromData)
     {
         const o = {};
 
@@ -1072,13 +1072,13 @@ export class Texture extends CgTexture
 
         let floatDatatype = cgl.gl.FLOAT;
 
-        // if (cgl.glUseHalfFloatTex)
-        // {
-        //     const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
-        //     if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-        //     if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-        //     if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
-        // }
+        // const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+        if (cgl.glUseHalfFloatTex && !fromData)
+        {
+            if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        }
 
         if (pixelFormatStr.includes("16bit"))
         {
