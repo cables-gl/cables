@@ -141,17 +141,17 @@ export class Texture extends CgTexture
      */
     compareSettings(tex)
     {
-    // if (!tex) { this._log.warn("compare: no tex"); return false; }
-    // if (tex.width != this.width) this._log.warn("tex.width not equal", tex.width, this.width);
-    // if (tex.height != this.height) this._log.warn("tex.height not equal", tex.height, this.height);
-    // if (tex.filter != this.filter) this._log.warn("tex.filter not equal");
-    // if (tex.wrap != this.wrap) this._log.warn("tex.wrap not equal");
-    // if (tex.textureType != this.textureType) this._log.warn("tex.textureType not equal");
-    // if (tex.unpackAlpha != this.unpackAlpha) this._log.warn("tex.unpackAlpha not equal");
-    // if (tex.anisotropic != this.anisotropic) this._log.warn("tex.anisotropic not equal");
-    // if (tex.shadowMap != this.shadowMap) this._log.warn("tex.shadowMap not equal");
-    // if (tex.texTarget != this.texTarget) this._log.warn("tex.texTarget not equal");
-    // if (tex.flip != this.flip) this._log.warn("tex.flip not equal");
+        // if (!tex) { this._log.warn("compare: no tex"); return false; }
+        // if (tex.width != this.width) this._log.warn("tex.width not equal", tex.width, this.width);
+        // if (tex.height != this.height) this._log.warn("tex.height not equal", tex.height, this.height);
+        // if (tex.filter != this.filter) this._log.warn("tex.filter not equal");
+        // if (tex.wrap != this.wrap) this._log.warn("tex.wrap not equal");
+        // if (tex.textureType != this.textureType) this._log.warn("tex.textureType not equal");
+        // if (tex.unpackAlpha != this.unpackAlpha) this._log.warn("tex.unpackAlpha not equal");
+        // if (tex.anisotropic != this.anisotropic) this._log.warn("tex.anisotropic not equal");
+        // if (tex.shadowMap != this.shadowMap) this._log.warn("tex.shadowMap not equal");
+        // if (tex.texTarget != this.texTarget) this._log.warn("tex.texTarget not equal");
+        // if (tex.flip != this.flip) this._log.warn("tex.flip not equal");
 
         if (!tex) return false;
         return (
@@ -187,7 +187,7 @@ export class Texture extends CgTexture
             "unpackAlpha": this.unpackAlpha,
             "flip": this.flip,
             "width": this.width,
-            "height": this.height,
+            "height": this.height
         });
 
         this._cgl.profileData.addHeavyEvent("texture created", this.name, this.width + "x" + this.height);
@@ -925,7 +925,7 @@ export class Texture extends CgTexture
             "flip": true,
             "_fromData": true,
             "name": "emptyCubemapTexture",
-            "anisotropic": 0,
+            "anisotropic": 0
         };
     }
 
