@@ -1079,6 +1079,14 @@ export class Texture extends CgTexture
         //     if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
         // }
 
+        if (pixelFormatStr.includes("float") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
+        {
+            cgl.enableExtension("EXT_color_buffer_float");
+            cgl.enableExtension("EXT_float_blend");
+
+            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
+        }
+
         if (pixelFormatStr.includes("16bit"))
         {
             if (cgl.glVersion == 2)
@@ -1200,14 +1208,6 @@ export class Texture extends CgTexture
         }
 
         /// //////
-
-        if (pixelFormatStr.includes("32bit") || pixelFormatStr.includes("16bit") || pixelFormatStr == Texture.PFORMATSTR_R11FG11FB10F)
-        {
-            cgl.enableExtension("EXT_color_buffer_float");
-            cgl.enableExtension("EXT_float_blend");
-
-            cgl.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
-        }
 
         o.numColorChannels = Texture.getPixelFormatNumChannels(pixelFormatStr);
 
