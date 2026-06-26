@@ -1072,12 +1072,13 @@ export class Texture extends CgTexture
 
         let floatDatatype = cgl.gl.FLOAT;
 
-        if (cgl.glUseHalfFloatTex)
-        {
-            if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-            if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-            if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
-        }
+        // if (cgl.glUseHalfFloatTex)
+        // {
+        //     const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+        //     if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+        //     if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+        //     if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        // }
 
         if (pixelFormatStr.includes("16bit"))
         {
