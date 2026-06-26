@@ -165,7 +165,7 @@ export class CglContext extends CgContext
         // safari stuff.......... ipad is not detectable,just do it for any safari
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))// && ((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))))
         {
-            this._isSafariCrap = true;
+            // this._isSafariCrap = true;
             // this.glUseHalfFloatTex = true; // 2026 did they fix it ? did hell freeze over ?? maybe remove all the workarouonds ??????
         }
 
