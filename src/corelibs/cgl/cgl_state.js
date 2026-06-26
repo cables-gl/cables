@@ -201,6 +201,10 @@ export class CglContext extends CgContext
             }
 
             this.enableExtension("OES_standard_derivatives");
+
+            this.enableExtension("EXT_color_buffer_float");
+            this.enableExtension("EXT_float_blend");
+            this.enableExtension("OES_texture_float_linear"); // yes, i am sure, this is a webgl 1 and 2 ext
             // this.enableExtension("GL_OES_standard_derivatives");
             const instancingExt = this.enableExtension("ANGLE_instanced_arrays") || this.gl;
             if (instancingExt.vertexAttribDivisorANGLE)
