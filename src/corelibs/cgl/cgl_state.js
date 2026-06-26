@@ -13,7 +13,7 @@ export const BLENDS = {
     "BLEND_NORMAL": 1,
     "BLEND_ADD": 2,
     "BLEND_SUB": 3,
-    "BLEND_MUL": 4
+    "BLEND_MUL": 4,
 };
 
 /**
@@ -166,7 +166,7 @@ export class CglContext extends CgContext
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))// && ((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))))
         {
             this._isSafariCrap = true;
-            // this.glUseHalfFloatTex = true; // 2026 did they fix it ? did hell freeze over ?? maybe remove all the workarouonds ??????
+            this.glUseHalfFloatTex = true; // 2026 did they fix it ? did hell freeze over ?? maybe remove all the workarouonds ??????
         }
 
         if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
