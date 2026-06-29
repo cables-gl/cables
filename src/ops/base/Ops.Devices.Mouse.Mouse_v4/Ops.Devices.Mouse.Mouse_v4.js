@@ -127,17 +127,17 @@ function checkHovering(e)
 }
 
 inEle.onChange =
-inEventType.onChange = function ()
-{
-    area.setUiAttribs({ "greyout": inEle.isLinked() });
-    removeListeners();
-    addListeners();
-};
+    inEventType.onChange = function ()
+    {
+        area.setUiAttribs({ "greyout": inEle.isLinked() });
+        removeListeners();
+        addListeners();
+    };
 
 active.onChange = function ()
 {
-    if (listenerElement)removeListeners();
-    if (active.get())addListeners();
+    if (listenerElement) removeListeners();
+    if (active.get()) addListeners();
 };
 
 function updateCoordNormalizing()
@@ -307,11 +307,12 @@ function removeListeners()
     listenerElement.removeEventListener("click", onmouseclick);
     listenerElement.removeEventListener("contextmenu", onClickRight);
     listenerElement = null;
+
 }
 
 function addListeners()
 {
-    if (listenerElement || !active.get())removeListeners();
+    if (listenerElement || !active.get()) removeListeners();
     if (!active.get()) return;
 
     listenerElement = areaElement = cgl.canvas;
@@ -339,7 +340,7 @@ function addListeners()
     op.setUiError("noarea", null);
 
     let passive = false;
-    if (inPassive.get())passive = { "passive": true };
+    if (inPassive.get()) passive = { "passive": true };
 
     if (inEventType.get() == "Touch")
     {
