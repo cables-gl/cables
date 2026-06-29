@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1763997616751
+        },
+        {
+            "message": "Added switch to select between DOM element outerHTML or XML Serializer API",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1782651285184
         }
     ],
     "layout": {
@@ -17,6 +23,15 @@
                 "type": 2,
                 "name": "Parent",
                 "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "values": [
+                    "outerHtml",
+                    "XML Serializer"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [

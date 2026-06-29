@@ -34,7 +34,7 @@ let duplicate = 0;
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
-if (CABLES.UI)gui.canvasManager.addCgContext(op.patch.cgl);
+if (CABLES.UI) gui.canvasManager.addCgContext(op.patch.cgl);
 
 testMultiMainloop();
 
@@ -45,7 +45,7 @@ op.patch.cgl.canvas.classList.add("cablescontext");
 op.patch.cgl.canvas.dataset.contextname = "cgl";
 op.patch.cgl.canvas.dataset.api = "webgl";
 
-if (CABLES.UI)gui.setLayout();
+if (CABLES.UI) gui.setLayout();
 
 function updateHdpi()
 {
@@ -91,7 +91,7 @@ function getFpsLimit()
 
 op.onDelete = function ()
 {
-    cgl.gl.clearColor(0, 0, 0.0, 0);
+    cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 };
 
@@ -105,7 +105,7 @@ function render(time, frame, delta)
 {
     if (frame === lastFrame)
     {
-        if (duplicate < 10)console.warn("duplicate frame?!");
+        if (duplicate < 10) console.warn("duplicate frame?!");
         duplicate++;
         return;
     }
@@ -139,7 +139,7 @@ function render(time, frame, delta)
     if (CABLES.now() - rframeStart > 1000)
     {
         CGL.fpsReport = CGL.fpsReport || [];
-        if (op.patch.loading.getProgress() >= 1.0 && rframeStart !== 0)CGL.fpsReport.push(rframes);
+        if (op.patch.loading.getProgress() >= 1.0 && rframeStart !== 0) CGL.fpsReport.push(rframes);
         rframes = 0;
         rframeStart = CABLES.now();
     }
@@ -155,7 +155,7 @@ function render(time, frame, delta)
 
     trigger.trigger();
 
-    if (cgl.lastMesh)cgl.lastMesh.unBind();
+    if (cgl.lastMesh) cgl.lastMesh.unBind();
 
     if (CGL.Texture.previewTexture)
     {
@@ -174,7 +174,7 @@ function render(time, frame, delta)
         cgl.gl.colorMask(true, true, true, true);
     }
 
-    if (!cgl.tempData.phong)cgl.tempData.phong = {};
+    if (!cgl.tempData.phong) cgl.tempData.phong = {};
     rframes++;
     if (firstTime)
     {
@@ -195,7 +195,7 @@ function testMultiMainloop()
             if (op.patch.getOpsByObjName(op.name).length > 1)
             {
                 op.setUiError("multimainloop", "there should only be one mainloop op!");
-                if (!addedListener)addedListener = op.patch.addEventListener("onOpDelete", testMultiMainloop);
+                if (!addedListener) addedListener = op.patch.addEventListener("onOpDelete", testMultiMainloop);
             }
             else op.setUiError("multimainloop", null, 1);
         }, 500);
