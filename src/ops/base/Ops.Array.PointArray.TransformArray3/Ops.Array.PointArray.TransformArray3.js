@@ -28,9 +28,9 @@ let centerVec = vec3.create();
 inExec.onTriggered = doTransform;
 
 inArr.onChange =
-transX.onChange = transY.onChange = transZ.onChange =
-scaleX.onChange = scaleY.onChange = scaleZ.onChange =
-rotX.onChange = rotY.onChange = rotZ.onChange = calcLater;
+    transX.onChange = transY.onChange = transZ.onChange =
+    scaleX.onChange = scaleY.onChange = scaleZ.onChange =
+    rotX.onChange = rotY.onChange = rotZ.onChange = calcLater;
 
 function calcLater()
 {

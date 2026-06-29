@@ -807,7 +807,7 @@ export class Op extends Events
     inValueString(name, v)
     {
         const p = this.addInPort(
-            this.newPort(this, name, Port.TYPE_VALUE, {
+            this.newPort(this, name, Port.TYPE_STRING, {
                 "type": "string"
             })
         );
@@ -1753,7 +1753,7 @@ export class Op extends Events
      */
     setUiError(_id, _txt, _level = 2, _options = {})
     {
-        const a = { _txt };
+        const a = { "_txt": _txt };
         // overwritten in ui: core_extend_op
         if (_level >= 2)showUiErrors(this, _id, _txt, _level, _options);
     }

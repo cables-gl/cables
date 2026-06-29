@@ -2,19 +2,21 @@ const
     exec = op.inTrigger("Update"),
     inArr = op.inArray("Array", null, 3),
     inMat = op.inArray("Matrix", null, 16),
+    next = op.outTrigger("Next"),
     outArr = op.outArray("Result", null, 3);
 
 let theArr = [];
 exec.onTriggered = function ()
 {
+
+    let mMat = inMat.get();
     let arr = inArr.get();
-    if (!arr)
+    if (!arr || !mMat)
     {
         outArr.set(null);
         return;
     }
     theArr.length = arr.length;
-    let mMat = inMat.get();
     let vec = vec4.create();
     vec[3] = 1;
 
@@ -32,4 +34,6 @@ exec.onTriggered = function ()
     }
 
     outArr.setRef(theArr);
+    next.trigger();
+
 };

@@ -53,5 +53,6 @@
     "coreLibs": [
         "webaudio"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "MuwFKb"
 }

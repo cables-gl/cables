@@ -5,6 +5,10 @@ const
 
 const arr = [];
 
+strIn.onChange = convertToNumbersBool.onChange = update;
+
+update();
+
 function update()
 {
     const str = strIn.get();
@@ -12,7 +16,6 @@ function update()
     {
         const strLength = str.length;
 
-        arr.length = 0;
         arr.length = strLength;
         if (convertToNumbersBool.get())
         {
@@ -30,15 +33,11 @@ function update()
         }
 
         op.setUiError("null", null);
-        arrOut.set(null);
-        arrOut.set(arr);
+        arrOut.setRef(arr);
     }
     else
     {
         op.setUiError("null", "input is not of type string");
-        arrOut.set(null);
+        arrOut.setRef(null);
     }
 }
-
-update();
-strIn.onChange = convertToNumbersBool.onChange = update;

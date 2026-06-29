@@ -187,7 +187,7 @@ export class Texture extends CgTexture
             "unpackAlpha": this.unpackAlpha,
             "flip": this.flip,
             "width": this.width,
-            "height": this.height,
+            "height": this.height
         });
 
         this._cgl.profileData.addHeavyEvent("texture created", this.name, this.width + "x" + this.height);
@@ -313,9 +313,9 @@ export class Texture extends CgTexture
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-        this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat));
+        this.setFormat(Texture.setUpGlPixelFormat(this._cgl, this.pixelFormat, this._fromData));
 
-        this.filter = Texture.FILTER_NEAREST;
+        // this.filter = Texture.FILTER_NEAREST;
 
         // this._glDataType = this._cgl.gl.HALF_FLOAT;
         // console.log("jajajajaj", this._glInternalFormat == this._cgl.gl.RGBA16F, this._glDataFormat == this._cgl.gl.RGBA, this._glDataType == this._cgl.gl.HALF_FLOAT, this.getInfoOneLine());
@@ -925,7 +925,7 @@ export class Texture extends CgTexture
             "flip": true,
             "_fromData": true,
             "name": "emptyCubemapTexture",
-            "anisotropic": 0,
+            "anisotropic": 0
         };
     }
 
@@ -1053,7 +1053,7 @@ export class Texture extends CgTexture
      * @param {CglContext} cgl
      * @param {string} pixelFormatStr
      */
-    static setUpGlPixelFormat(cgl, pixelFormatStr)
+    static setUpGlPixelFormat(cgl, pixelFormatStr, fromData)
     {
         const o = {};
 
@@ -1072,12 +1072,13 @@ export class Texture extends CgTexture
 
         let floatDatatype = cgl.gl.FLOAT;
 
-        // if (cgl.glUseHalfFloatTex)
-        // {
-        //     if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
-        //     if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
-        //     if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
-        // }
+        // const hasExt = cgl.enableExtension("EXT_color_buffer_half_float");
+        if (cgl.glUseHalfFloatTex && !fromData)
+        {
+            if (pixelFormatStr == Texture.PFORMATSTR_RGBA32F) pixelFormatStr = Texture.PFORMATSTR_RGBA16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_RG32F) pixelFormatStr = Texture.PFORMATSTR_RG16F;
+            if (pixelFormatStr == Texture.PFORMATSTR_R32F) pixelFormatStr = Texture.PFORMATSTR_R16F;
+        }
 
         if (pixelFormatStr.includes("16bit"))
         {
