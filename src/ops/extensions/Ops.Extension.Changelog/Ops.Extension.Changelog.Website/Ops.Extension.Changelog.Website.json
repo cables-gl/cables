@@ -131,6 +131,12 @@
             "author": "stephan",
             "date": 1781266232719,
             "url": "https://github.com/cables-gl/cables/issues/7520"
+        },
+        {
+            "message": "Made deprecated op-libraray error only visible to users with write permissions on op page",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1782731185163
         }
     ],
     "isReleased": true

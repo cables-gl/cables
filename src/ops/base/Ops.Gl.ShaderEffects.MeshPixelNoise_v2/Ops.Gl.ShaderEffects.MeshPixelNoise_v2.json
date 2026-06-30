@@ -21,11 +21,13 @@
             {
                 "type": 0,
                 "name": "Blendmode index",
+                "values": [
+                    "Sub",
+                    "Add",
+                    "Mul",
+                    "Alpha"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Blendmode"
             },
             {
                 "type": 0,
@@ -99,5 +101,6 @@
         "ports": []
     },
     "exampleProjectId": "V7rjQ6",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

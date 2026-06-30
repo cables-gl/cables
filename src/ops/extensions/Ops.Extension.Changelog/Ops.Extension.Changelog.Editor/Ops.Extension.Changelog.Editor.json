@@ -305,6 +305,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1780996399427
+        },
+        {
+            "message": "Unified handling of attachments and libraries in mangage op",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1782731137216
         }
     ],
     "isReleased": true,

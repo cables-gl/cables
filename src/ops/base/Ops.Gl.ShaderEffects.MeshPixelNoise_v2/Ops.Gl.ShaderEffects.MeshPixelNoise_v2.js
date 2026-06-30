@@ -3,7 +3,7 @@ const
     next = op.outTrigger("trigger"),
     inScale = op.inValue("Scale", 10),
     inAmount = op.inValueSlider("Amount", 0.3),
-    inBlend = op.inSwitch("Blendmode", ["Sub", "Add", "Mul"], "Sub"),
+    inBlend = op.inSwitch("Blendmode", ["Sub", "Add", "Mul", "Alpha"], "Sub"),
     inWorldSpace = op.inValueBool("WorldSpace"),
     r = op.inValueSlider("r", 0),
     g = op.inValueSlider("g", 0),
@@ -19,7 +19,7 @@ op.setPortGroup("Position", [x, y, z]);
 const cgl = op.patch.cgl;
 
 inBlend.onChange =
-inWorldSpace.onChange = updateDefines;
+    inWorldSpace.onChange = updateDefines;
 
 const srcHeadVert = ""
     .endl() + "OUT vec4 MOD_pos;"
@@ -48,22 +48,27 @@ const srcBodyFrag = ""
     .endl() + "#ifdef MOD_BLEND_ADD"
     .endl() + "   col.rgb += MOD_rndVal;"
     .endl() + "#endif"
+    .endl() + "#ifdef MOD_BLEND_ALPHA"
+    .endl() + "   col.a = MOD_rndVal.r;"
+    .endl() + "#endif"
     .endl();
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
-mod.addModule({
-    "title": op.name,
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": srcHeadVert,
-    "srcBodyVert": srcBodyVert
-});
+mod.addModule(
+    {
+        "title": op.name,
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": srcHeadVert,
+        "srcBodyVert": srcBodyVert
+    });
 
-mod.addModule({
-    "title": op.name,
-    "name": "MODULE_COLOR",
-    "srcHeadFrag": attachments.pixelnoise_frag,
-    "srcBodyFrag": srcBodyFrag
-});
+mod.addModule(
+    {
+        "title": op.name,
+        "name": "MODULE_COLOR",
+        "srcHeadFrag": attachments.pixelnoise_frag,
+        "srcBodyFrag": srcBodyFrag
+    });
 
 mod.addUniformFrag("f", "MOD_scale", inScale);
 mod.addUniformFrag("f", "MOD_amount", inAmount);
@@ -79,6 +84,7 @@ function updateDefines()
 {
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
 
+    mod.toggleDefine("MOD_BLEND_ALPHA", inBlend.get() == "Alpha");
     mod.toggleDefine("MOD_BLEND_ADD", inBlend.get() == "Add");
     mod.toggleDefine("MOD_BLEND_SUB", inBlend.get() == "Sub");
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");

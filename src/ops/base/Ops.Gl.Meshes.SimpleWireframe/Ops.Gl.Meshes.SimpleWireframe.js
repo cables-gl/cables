@@ -19,7 +19,7 @@ let tc = [];
 let normals = [];
 let prim = cgl.gl.LINE_STRIP;
 
-op.onDelete = function () { if (mesh)mesh.dispose(); };
+op.onDelete = function () { if (mesh) mesh.dispose(); };
 inGeom.onChange = function ()
 {
     let geom = inGeom.get();
@@ -77,6 +77,17 @@ inGeom.onChange = function ()
 
             verts.push(geom.vertices[i + 6], geom.vertices[i + 7], geom.vertices[i + 8]);
             verts.push(geom.vertices[i + 0], geom.vertices[i + 1], geom.vertices[i + 2]);
+
+            const idx = i / 9 * 6;
+
+            tc.push(geom.texCoords[i + 0], geom.texCoords[i + 1]);
+            tc.push(geom.texCoords[i + 2], geom.texCoords[i + 3]);
+
+            tc.push(geom.texCoords[i + 2], geom.texCoords[i + 3]);
+            tc.push(geom.texCoords[i + 4], geom.texCoords[i + 5]);
+
+            tc.push(geom.texCoords[i + 4], geom.texCoords[i + 5]);
+            tc.push(geom.texCoords[i + 0], geom.texCoords[i + 1]);
         }
 
         prim = cgl.gl.LINES;
