@@ -47,6 +47,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677072997
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoWorld was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811929678
         }
     ],
     "layout": {

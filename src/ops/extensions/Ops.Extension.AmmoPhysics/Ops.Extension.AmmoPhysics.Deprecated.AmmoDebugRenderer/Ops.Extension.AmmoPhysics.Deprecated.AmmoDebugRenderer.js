@@ -27,7 +27,7 @@ inRender.onTriggered = () =>
 
     if (!debugDrawer || oldWorld != ammoWorld.world)
     {
-        debugDrawer = new CABLES.AmmoDebugDrawer(ammoWorld.world, { });
+        debugDrawer = new CABLES.AmmoDebugDrawer(ammoWorld.world, {});
         debugDrawer.enable();
         oldWorld = ammoWorld.world;
     }
@@ -41,9 +41,9 @@ inRender.onTriggered = () =>
     if (!ammoWorld) return;
 
     let debugmode = 0;
-    if (inDrawWireframe.get())debugmode |= 1;
-    if (inDrawAABB.get())debugmode |= 2;
-    if (inDrawContacts.get())debugmode |= 8;
+    if (inDrawWireframe.get()) debugmode |= 1;
+    if (inDrawAABB.get()) debugmode |= 2;
+    if (inDrawContacts.get()) debugmode |= 8;
     if (inDrawConstraints.get())
     {
         debugmode |= 2048;

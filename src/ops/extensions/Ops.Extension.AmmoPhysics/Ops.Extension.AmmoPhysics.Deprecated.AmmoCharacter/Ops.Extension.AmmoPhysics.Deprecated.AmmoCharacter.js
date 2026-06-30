@@ -51,7 +51,9 @@ const tmpScale = vec3.create();
 let transMat = mat4.create();
 
 let forceQuat = null;
-let initX = 0, initY = 0, initZ = 0;
+let initX = 0,
+    initY = 0,
+    initZ = 0;
 
 let btOrigin = null;
 let btQuat = null;
@@ -69,7 +71,7 @@ op.onDelete =
 
 inActivate.onTriggered = () =>
 {
-    if (body)body.activate();
+    if (body) body.activate();
 };
 
 function removeBody()
@@ -95,7 +97,7 @@ function updateBodyMeta()
         world.setBodyMeta(body,
             {
                 "name": inName.get(),
-                "mass": inMass.get(),
+                "mass": inMass.get()
             });
 
     op.setUiAttribs({ "extendTitle": inName.get() });
@@ -193,7 +195,9 @@ function update()
         btVelocity = new Ammo.btVector3(0, 0, 0);
     }
 
-    let vx = 0, vy = 0, vz = 0.0;
+    let vx = 0,
+        vy = 0,
+        vz = 0.0;
     let speed = inSpeed.get();
 
     let doMove = false;

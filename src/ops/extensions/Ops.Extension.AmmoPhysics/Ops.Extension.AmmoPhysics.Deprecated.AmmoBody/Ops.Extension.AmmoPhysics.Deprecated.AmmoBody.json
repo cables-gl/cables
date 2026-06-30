@@ -26,6 +26,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677171861
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoBody was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811968656
         }
     ],
     "authorName": "pandur",

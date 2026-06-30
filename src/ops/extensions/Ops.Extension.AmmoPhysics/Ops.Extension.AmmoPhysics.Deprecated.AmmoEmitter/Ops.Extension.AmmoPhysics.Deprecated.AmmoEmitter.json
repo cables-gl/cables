@@ -16,6 +16,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677135395
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoEmitter was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811948258
         }
     ],
     "authorName": "pandur",

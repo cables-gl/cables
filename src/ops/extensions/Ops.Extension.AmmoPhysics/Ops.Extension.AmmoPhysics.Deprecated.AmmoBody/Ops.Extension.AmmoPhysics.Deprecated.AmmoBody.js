@@ -115,12 +115,12 @@ function updateBodyMeta()
         for (let i = 0; i < bodies.length; i++)
         {
             let name = n;
-            if (appendIndex && posArr)name = n + "." + i;
+            if (appendIndex && posArr) name = n + "." + i;
 
             world.setBodyMeta(bodies[i],
                 {
                     "name": name,
-                    "mass": inMass.get(),
+                    "mass": inMass.get()
                 });
         }
 
@@ -136,10 +136,10 @@ function setup()
 
     removeBody();
 
-    if (!tmpTrans)tmpTrans = new Ammo.btTransform();
+    if (!tmpTrans) tmpTrans = new Ammo.btTransform();
     // if (!transform)transform = new Ammo.btTransform();
 
-    if (colShape)Ammo.destroy(colShape);
+    if (colShape) Ammo.destroy(colShape);
     colShape = null;
     // transform.setIdentity();
     // CABLES.AmmoWorld.copyCglTransform(cgl, transform);
@@ -293,7 +293,7 @@ function setPositions()
                 posArr[i * 3 + 0], posArr[i * 3 + 1], posArr[i * 3 + 2]]);
         }
         CABLES.AmmoWorld.copyCglTransform(cgl, tmpTrans);
-        if (posArr)cgl.popModelMatrix();
+        if (posArr) cgl.popModelMatrix();
 
         bodies[i].getMotionState().setWorldTransform(tmpTrans);
         bodies[i].setWorldTransform(tmpTrans);
@@ -374,7 +374,7 @@ function ping()
 
 function update()
 {
-    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0]) == undefined)removeBody();
+    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0]) == undefined) removeBody();
     if (world != cgl.frameStore.ammoWorld) removeBody();
     if (needsRemove)
     {
