@@ -177,9 +177,9 @@ inExec.onTriggered = function ()
     lastTime = time;
 
     outAnimTime.set(time || 0);
-
     if (finishedLoading && gltf && gltf.bounds)
     {
+
         if (inRescale.get())
         {
             let sc = inRescaleSize.get() / gltf.bounds.maxAxis;

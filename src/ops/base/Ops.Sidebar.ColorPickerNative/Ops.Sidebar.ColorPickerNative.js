@@ -17,10 +17,9 @@ defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("Children");
-// const valuePort = op.outValue('Result', defaultValuePort.get());
-const redPort = op.outValue("Red", 0.0);
-const greenPort = op.outValue("Green", 0.0);
-const bluePort = op.outValue("Blue", 0.0);
+const redPort = op.outNumber("Red", 0.0);
+const greenPort = op.outNumber("Green", 0.0);
+const bluePort = op.outNumber("Blue", 0.0);
 
 const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 
@@ -64,7 +63,9 @@ el.appendChild(label);
 // el.appendChild(inputWrapper);
 const input = document.createElement("input");
 input.classList.add("sidebar__color-picker-input");
-/* input.classList.add('jscolor'); */ /* color picker library */
+
+/* input.classList.add('jscolor'); */
+/* color picker library */
 input.setAttribute("type", "text");
 input.setAttribute("value", defaultValuePort.get());
 // inputWrapper.appendChild(input);

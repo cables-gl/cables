@@ -139,5 +139,33 @@
             "date": 1782731185163
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Changelog",
+    "docs": {
+        "ports": []
+    }
 }

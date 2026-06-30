@@ -70,7 +70,7 @@ function update()
 
     if (mesh.extras && mesh.extras.targetNames) outTargetnames.set(mesh.extras.targetNames);
     if (mesh.morphTargetsRenderMod) outTex.setRef(mesh.morphTargetsRenderMod.tex);
-    else op.logError("has no morthtargetmod");
+    // else op.logError("has no morthtargetmod");
 
     let time = gltf.time;
     if (!inSceneTime.get())

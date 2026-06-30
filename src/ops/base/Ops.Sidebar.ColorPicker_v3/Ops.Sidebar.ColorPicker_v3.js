@@ -90,7 +90,6 @@ colorInput.addEventListener("click", function ()
             "showOpacity": showOpacity.get(),
             "onChange": (col, opacity) =>
             {
-                console.log("col", opacity);
                 if (opacity != undefined)
                 {
                     inputOpaPort.set(opacity);
