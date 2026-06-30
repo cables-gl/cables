@@ -79,15 +79,12 @@ exec.onTriggered = () =>
     const world = op.patch.frameStore.rapier.world;
 
     if (!world) return;
-    if (world != lastWorld)removeBodies();
+    if (world != lastWorld) removeBodies();
     // if (!eventQueue)
     {
         eventQueue = op.patch.frameStore.rapier.eventQueue;
         if (eventQueue)
-        {
-            // console.log("reg collision callback");
-        }
-        else console.log("no eventQueue");
+        {}
     }
 
     lastWorld = world;
@@ -194,7 +191,7 @@ function emitOne()
 
     const rigidBodyDesc = RAPIER.RigidBodyDesc
         .dynamic()
-    // .setAdditionalMass(0.5)
+        // .setAdditionalMass(0.5)
         .setTranslation(inTranslX.get(), inTranslY.get(), inTranslZ.get());
 
     colliderDesc

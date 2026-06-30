@@ -18,7 +18,7 @@ let texSlot = 0;
 
 filename.onChange = () =>
 {
-    tex = null;// should be disposed in correct context...
+    tex = null; // should be disposed in correct context...
 };
 
 animPort.renderTimeLine = (tl) =>
@@ -27,7 +27,6 @@ animPort.renderTimeLine = (tl) =>
     const cgl = tl.cgl;
     if (!cgl)
     {
-        console.log("cgl", cgl);
         return;
     }
     if (!rect)
@@ -41,14 +40,12 @@ animPort.renderTimeLine = (tl) =>
 
         tex = CGL.Texture.load(cgl, url, (err, t) =>
         {
-            console.log("loaded image", url);
 
             op.patch.loading.finished(loadingId);
         }, { "flip": false, "filter": CGL.Texture.FILTER_LINEAR });
     }
     else
-    {
-    }
+    {}
 
     tl.rectInstancer.setTexture(texSlot, tex);
     rect.setTexture(texSlot);
@@ -63,13 +60,12 @@ animPort.renderTimeLine = (tl) =>
 };
 animPort.on("tlVizDispose", () =>
 {
-    console.log("dispose");
     disposeRects();
 });
 
 function disposeRects()
 {
-    if (rect)rect.dispose();
+    if (rect) rect.dispose();
 }
 
 op.onDelete = () =>

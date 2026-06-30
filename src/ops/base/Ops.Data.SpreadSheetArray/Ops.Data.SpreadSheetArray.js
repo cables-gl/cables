@@ -12,16 +12,17 @@ const
 spread.setUiAttribs({ "hidePort": true, "editShortcut": true });
 
 outp.onChange =
-inDefault.onChange =
-spread.onChange = update;
+    inDefault.onChange =
+    spread.onChange = update;
 
 updateUi();
 
 function updateUi()
 {
-    spread.setUiAttribs({
-        "display": "spreadsheet"
-    });
+    spread.setUiAttribs(
+        {
+            "display": "spreadsheet"
+        });
 }
 
 function update()
@@ -41,9 +42,9 @@ function update()
     let r = structuredClone(o.data);
 
     if (inDefault.get() == 0 || inDefault.get() == "0") { for (let i = 0; i < r.length; i++) { if (!r[i]) { r[i] = 0; } } }
-    else if (inDefault.get() == "Empty String") { for (let i = 0; i < r.length; i++) { if (!r[i])r[i] = ""; } }
-    else if (inDefault.get() == "null") { for (let i = 0; i < r.length; i++) { if (!r[i])r[i] = null; } }
-    else console.log("unknown", inDefault.get());
+    else if (inDefault.get() == "Empty String") { for (let i = 0; i < r.length; i++) { if (!r[i]) r[i] = ""; } }
+    else if (inDefault.get() == "null") { for (let i = 0; i < r.length; i++) { if (!r[i]) r[i] = null; } }
+    else op.logError("unknown", inDefault.get());
 
     if (outp.get() == "Objects")
     {

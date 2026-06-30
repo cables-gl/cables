@@ -81,7 +81,7 @@ function play()
         op.patch.addOnAnimFrame(op);
         audio.play().catch((e) =>
         {
-            console.log("err play");
+            op.logError("err play");
         });
         outPlaying.set(playing);
     }
@@ -177,16 +177,15 @@ function load()
     // };
     audio.addEventListener("error", function (e)
     {
-        console.log("error", e);
+        op.logError("error", e);
     });
     audio.onerror = (event) =>
     {
-        console.log(fileName.get(), op.id);
-        console.log("onerror", event);
+        op.logError("onerror", event);
     };
     audio.abort = (event) =>
     {
-        console.log("abort", event);
+        // console.log("abort", event);
     };
     // audio.addEventListener("timeupdate", timeupdate);
 

@@ -7,7 +7,6 @@ const minimize = op.inTriggerButton("Assign to port");
 minimize.setUiAttribs({ "hidePort": true });
 minimize.onTriggered = () =>
 {
-    console.log("text");
     for (let i = val.links.length - 1; i >= 0; i--)
     {
         const p = val.links[i].getOtherPort(val);

@@ -42,7 +42,7 @@ let oldGeom = null;
 let g = null;
 
 inPixelFormat.onChange =
-tfilter.onChange =
+    tfilter.onChange =
     twrap.onChange = initFbLater;
 
 inWidth.onChange =
@@ -54,20 +54,22 @@ updateUI();
 
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
-mod.addModule({
-    "priority": 200,
-    "title": vertModTitle,
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": attachments.vertpos_head_vert,
-    "srcBodyVert": attachments.vertpos_vert
-});
+mod.addModule(
+    {
+        "priority": 200,
+        "title": vertModTitle,
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": attachments.vertpos_head_vert,
+        "srcBodyVert": attachments.vertpos_vert
+    });
 
-mod.addModule({
-    "title": op.name,
-    "name": "MODULE_COLOR",
-    "srcHeadFrag": "IN vec3 MOD_pos;",
-    "srcBodyFrag": attachments.fragpos_frag
-});
+mod.addModule(
+    {
+        "title": op.name,
+        "name": "MODULE_COLOR",
+        "srcHeadFrag": "IN vec3 MOD_pos;",
+        "srcBodyFrag": attachments.fragpos_frag
+    });
 mod.addUniformVert("f", "MOD_mul", 1);
 mod.addUniformVert("f", "MOD_texSize", 0);
 mod.addUniformVert("t", "MOD_texColor", 0);
@@ -113,7 +115,6 @@ function updateRescale()
         if (!g) return reset();
 
         const b = g.getBounds();
-        console.log("text", inResizeNewSize.get() / b._maxAxis);
 
         mod.setUniformValue("MOD_mul", inResizeNewSize.get() / b._maxAxis);
     }
@@ -140,8 +141,7 @@ inOrder.onChange = () =>
 };
 
 function warning()
-{
-}
+{}
 
 function updateUI()
 {
@@ -198,25 +198,27 @@ function initFb()
 
     if (cgl.glVersion >= 2)
     {
-        fb = new CGL.Framebuffer2(cgl, size, size, {
-            "name": "geom2tex",
-            "pixelFormat": inPixelFormat.get(),
-            "multisampling": false,
-            "wrap": selectedWrap,
-            "filter": filter,
-            "depth": true,
-            "multisamplingSamples": 0,
-            "clear": true
-        });
+        fb = new CGL.Framebuffer2(cgl, size, size,
+            {
+                "name": "geom2tex",
+                "pixelFormat": inPixelFormat.get(),
+                "multisampling": false,
+                "wrap": selectedWrap,
+                "filter": filter,
+                "depth": true,
+                "multisamplingSamples": 0,
+                "clear": true
+            });
     }
     else
     {
-        fb = new CGL.Framebuffer(cgl, size, size, {
-            "name": "geom2tex",
-            "isFloatingPointTexture": true,
-            "filter": filter,
-            "wrap": selectedWrap
-        });
+        fb = new CGL.Framebuffer(cgl, size, size,
+            {
+                "name": "geom2tex",
+                "isFloatingPointTexture": true,
+                "filter": filter,
+                "wrap": selectedWrap
+            });
     }
     needInitFb = false;
     needsUpdate = true;
@@ -245,7 +247,7 @@ exec.onTriggered = function ()
     oldGeom = geo;
     g = geo.copy();
 
-    if (!mesh)mesh = new CGL.Mesh(cgl, new CGL.Geometry("geom2tex"), cgl.gl.POINTS);
+    if (!mesh) mesh = new CGL.Mesh(cgl, new CGL.Geometry("geom2tex"), cgl.gl.POINTS);
 
     g.glPrimitive = cgl.gl.POINTS;
     mesh.setGeom(g);
@@ -266,14 +268,14 @@ exec.onTriggered = function ()
     outNumVerts.set(numVerts);
 
     const effect = cgl.currentTextureEffect;
-    if (effect)effect.endEffect();
+    if (effect) effect.endEffect();
 
-    if (inTexColor.get())mod.pushTexture("MOD_texColor", inTexColor.get().tex);
+    if (inTexColor.get()) mod.pushTexture("MOD_texColor", inTexColor.get().tex);
 
-    if (firstTime)render(); // first time needs 2x render.,.. but why?
+    if (firstTime) render(); // first time needs 2x render.,.. but why?
     render();
 
-    if (effect)effect.continueEffect();
+    if (effect) effect.continueEffect();
 
     needsUpdate = false;
     next.trigger();

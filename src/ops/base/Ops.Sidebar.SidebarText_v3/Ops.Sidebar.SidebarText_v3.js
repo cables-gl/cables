@@ -14,7 +14,7 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-const labelText = document.createElement("div");// document.createTextNode(labelPort.get());
+const labelText = document.createElement("div"); // document.createTextNode(labelPort.get());
 const inVisible = op.inBool("Visible", true);
 
 label.appendChild(labelText);
@@ -39,6 +39,7 @@ function onIdChanged()
 }
 
 let hasRequest = false;
+
 function onLabelTextChanged()
 {
     if (!hasRequest)
@@ -57,7 +58,6 @@ function onParentChanged()
 {
     siblingsPort.set(null);
     const parent = parentPort.get();
-    console.log("parent", parent);
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
@@ -71,7 +71,7 @@ function onParentChanged()
 
 function showElement(el)
 {
-    if (el)el.style.display = "block";
+    if (el) el.style.display = "block";
 }
 
 function hideElement(el)

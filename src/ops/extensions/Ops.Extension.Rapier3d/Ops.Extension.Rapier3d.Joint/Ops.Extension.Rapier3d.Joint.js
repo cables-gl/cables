@@ -29,8 +29,8 @@ let needsSetup = true;
 const joints = [];
 
 inType.onChange =
-inLimit.onChange =
-inAnchor1x.onChange =
+    inLimit.onChange =
+    inAnchor1x.onChange =
     inAnchor1y.onChange =
     inAnchor1z.onChange =
     inAnchor2x.onChange =
@@ -79,30 +79,20 @@ function setup()
         let params = null;
         if (inType.get() == "Revolute")
         {
-            params = RAPIER.JointData.revolute(
-                { "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() },
-                { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() },
-                { "x": inAxisx.get(), "y": inAxisy.get(), "z": inAxisz.get() });
+            params = RAPIER.JointData.revolute({ "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() }, { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() }, { "x": inAxisx.get(), "y": inAxisy.get(), "z": inAxisz.get() });
         }
         else if (inType.get() == "Prismatic")
         {
-            params = RAPIER.JointData.prismatic(
-                { "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() },
-                { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() },
-                { "x": inAxisx.get(), "y": inAxisy.get(), "z": inAxisz.get() });
+            params = RAPIER.JointData.prismatic({ "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() }, { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() }, { "x": inAxisx.get(), "y": inAxisy.get(), "z": inAxisz.get() });
 
             params.limitsEnabled = inLimit.get();
             params.limits = [inLimitx.get(), inLimity.get()];
         }
         else if (inType.get() == "Spherical")
         {
-            params = RAPIER.JointData.spherical(
-                { "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() },
-                { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() });
+            params = RAPIER.JointData.spherical({ "x": inAnchor1x.get(), "y": inAnchor1y.get(), "z": inAnchor1z.get() }, { "x": inAnchor2x.get(), "y": inAnchor2y.get(), "z": inAnchor2z.get() });
         }
         else return;
-
-        console.log("params", params);
 
         let joint = world.createImpulseJoint(params, arr1[i], arr2[i], true);
         joints.push(joint);
@@ -120,5 +110,5 @@ function setup()
 
 exec.onTriggered = () =>
 {
-    if (needsSetup)setup();
+    if (needsSetup) setup();
 };

@@ -6,9 +6,8 @@ const
 exec.onTriggered = () =>
 {
     if (CABLESUILOADER && CABLESUILOADER.talkerAPI)
-        CABLESUILOADER.talkerAPI.send(CABLESUILOADER.TalkerAPI.CMD_SAVE_PATCH_SCREENSHOT,
-            { "screenshot": inData.get() }, (err, r) =>
-            {
-                console.log("screenshot", err, r);
-            });
+        CABLESUILOADER.talkerAPI.send(CABLESUILOADER.TalkerAPI.CMD_SAVE_PATCH_SCREENSHOT, { "screenshot": inData.get() }, (err, r) =>
+        {
+            // console.log("screenshot", err, r);
+        });
 };

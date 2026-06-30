@@ -62,7 +62,7 @@ function onStart()
         outMouseX.set(areaElement.clientWidth / 2 / cgl.pixelDensity);
         outMouseY.set(areaElement.clientHeight / 2 / cgl.pixelDensity);
     }
-    else console.error("unknown normalize mouse", normalize);
+    else op.logError("unknown normalize mouse", normalize);
 }
 
 function setValue(x, y)
@@ -241,7 +241,6 @@ function ontouchend(event)
 
 function onCancel(event)
 {
-    console.log("mouse cancel");
     mouseDown.set(false);
     onMouseUp();
     outEvent.setRef(event);

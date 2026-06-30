@@ -67,12 +67,9 @@ exec.onTriggered = () =>
         characterController.setMinSlopeSlideAngle(10 * Math.PI / 180);
 
         characterController.enableAutostep(20.9, 0.1, true);
-        console.log("char setup");
 
         characterController.enableSnapToGround(0.3);
         characterController.setApplyImpulsesToDynamicBodies(true);
-
-        console.log(characterController);
 
         pos = null;
         needsSetup = false;
@@ -99,11 +96,9 @@ exec.onTriggered = () =>
     //  }
 
     const isGrounded = characterController.computedGrounded();
-    // console.log(isGrounded);
 
     let correctedMovement = characterController.computedMovement();
 
-    // console.log(correctedMovement);
     // rigidBody.setLinvel(correctedMovement);
 
     pos.x += correctedMovement.x;
@@ -112,7 +107,6 @@ exec.onTriggered = () =>
 
     if (CABLES.UI)
         gui.setTransform(op.id, pos.x, pos.y, pos.z, op.uiAttribs.comment || "character");
-    // console.log(correctedMovement)
 
     // outX.set(pos.x);
     // outY.set(pos.y);
@@ -122,7 +116,6 @@ exec.onTriggered = () =>
     // characterController.computeColliderMovement(collider, new RAPIER.Vector3(0.2,-0.1,0) );
 
     // characterController.setTranslation(pos)
-    // console.log(pos);
     next.trigger();
 };
 
@@ -130,7 +123,7 @@ function remove()
 {
     if (world && rigidBody) world.removeRigidBody(rigidBody);
     if (world && characterController) world.removeCharacterController(characterController);
-    if (world && collider)world.removeCollider(collider);
+    if (world && collider) world.removeCollider(collider);
     characterController = null;
 
     rigidBody = null;

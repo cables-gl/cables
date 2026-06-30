@@ -359,36 +359,7 @@ function finishLoading()
         }
     }
 
-    // setTimeout(() =>
-    // {
-    //     for (let i = 0; i < gltf.nodes.length; i++)
-    //     {
-    //     // console.log(gltf.nodes[i]);
-    //         if (gltf.nodes[i].mesh && gltf.nodes[i].mesh.meshes)
-    //         {
-    //         // console.log(gltf.nodes[i].mesh.meshes.length);
-    //             for (let j = 0; j < gltf.nodes[i].mesh.meshes.length; j++)
-    //             {
-    //                 console.log(gltf.nodes[i].mesh.meshes[j]);
-    //                 // for (let k = 0; k < gltf.nodes[i].mesh.meshes.length; k++)
-    //                 {
-    //                     if (gltf.nodes[i].mesh.meshes[j].mesh)
-    //                     {
-    //                         gltf.nodes[i].mesh.meshes[j].mesh.freeMem();
-    //                         // console.log(gltf.nodes[i].mesh.meshes[j].mesh);
-    //                         // for (let l = 0; l < gltf.nodes[i].mesh.meshes[j].mesh._attributes.length; l++)
-    //                         //     gltf.nodes[i].mesh.meshes[j].mesh._attributes[l] = null;
-    //                     }
-    //                 }
-    //                 gltf.nodes[i].mesh.meshes[j].geom.clear();
-    //                 console.log("clear!");
-    //             }
-    //         }
-    //     }
-    // }, 1000);
-
     if (!(gltf.json.images && gltf.json.images.length)) gltf.chunks = null;
-    console.log("gltf", gltf);
     if (gltf && gltf.chunks && gltf.chunks[1])
     {
         gltf.chunks[1] = null;
@@ -417,7 +388,6 @@ function loadBin(addCacheBuster)
     outLoading.set(true);
     op.patch.loading.addAssetLoadingTask(() =>
     {
-        // console.log("fetch...");
         fetch(url)
             .then((res) => { return res.arrayBuffer(); })
             .then((arrayBuffer) =>
@@ -429,7 +399,6 @@ function loadBin(addCacheBuster)
                     return;
                 }
 
-                // console.log("parse...");
                 boundingPoints = [];
                 maxTime = 0;
 
@@ -582,7 +551,7 @@ function hideNodesFromArray()
     {
         const n = gltf.getNode(hideArr[i]);
         if (n) n.hidden = true;
-        else console.log("node to hide not found", hideArr[i]);
+        else op.logWarn("node to hide not found", hideArr[i]);
     }
 }
 
@@ -646,7 +615,6 @@ function saveData()
 
 function sortNodes()
 {
-    // if (gltf)console.log("text", gltf.nodes);
     // if (gltf) gltf.nodes.sort((a, b) =>
     // {
     //     if (!a.isChild && !b.isChild)
@@ -692,8 +660,6 @@ op.exposePunctualLight = function (name, idx, nodeName)
     else
         newop = gui.corePatch().addOp("Ops.Gl.Phong.PointLight_v5");
 
-    console.log("objeeee", gltf.json.extensions.KHR_lights_punctual.lights[idx]);
-
     newop.getPort("R").set(l.color[0]);
     newop.getPort("G").set(l.color[1]);
     newop.getPort("B").set(l.color[2]);
@@ -709,10 +675,8 @@ op.exposePunctualLight = function (name, idx, nodeName)
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
-        console.log("text", gltf.nodes[i].extensions);
         if (gltf.nodes[i].extensions && gltf.nodes[i].extensions.KHR_lights_punctual)
         {
-            console.log("node", gltf.nodes[i].extensions.KHR_lights_punctual.light, gltf.nodes[i].mat);
             newop.getPort("X").set(gltf.nodes[i].mat[12]);
             newop.getPort("Y").set(gltf.nodes[i].mat[13]);
             newop.getPort("Z").set(gltf.nodes[i].mat[14]);

@@ -9,7 +9,6 @@ update();
 
 op.patch.on(CABLES.Patch.EVENT_ANIM_MAXTIME_CHANGE, () =>
 {
-    console.log("maxtime event");
     update();
 });
 

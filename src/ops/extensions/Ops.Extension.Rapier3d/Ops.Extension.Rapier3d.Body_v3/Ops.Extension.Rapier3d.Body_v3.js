@@ -1,4 +1,3 @@
-// nsnsns
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", "default"),
@@ -57,14 +56,14 @@ let eventQueue = null;
 exec.onLinkChanged = removeBodies;
 
 inPositions.onChange =
-inScales.onChange =
+    inScales.onChange =
     inRots.onChange = () =>
     {
         setPosition = true;
     };
 
 inPositions.onLinkChanged =
-inScales.onLinkChanged =
+    inScales.onLinkChanged =
     inRots.onLinkChanged =
 
     inEvtFixFix.onChange =
@@ -87,7 +86,7 @@ inScales.onLinkChanged =
         setupReason = "paramschanged";
         let title = "";
         title += inType.get() + " ";
-        if (inSensor.get())title += "sensor ";
+        if (inSensor.get()) title += "sensor ";
         title += inName.get();
         op.setUiAttrib({ "extendTitle": title });
         needsSetup = true;
@@ -135,10 +134,7 @@ exec.onTriggered = () =>
 
     eventQueue = op.patch.frameStore.rapier.eventQueue;
     if (eventQueue)
-    {
-        // console.log("reg collision callback");
-    }
-    else console.log("no eventQueue");
+    {}
 
     if (CABLES.UI)
         gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get(), op.uiAttribs.comment || inName.get());
@@ -155,7 +151,7 @@ exec.onTriggered = () =>
         setupReason = "no bodies";
         needsSetup = true;
     }
-    if (needsSetup)setup(world);
+    if (needsSetup) setup(world);
 
     const posArray = [];
     const rotArray = [];
@@ -170,20 +166,19 @@ exec.onTriggered = () =>
 
     if (setPosition)
     {
-        const posArr = getPositions();// inPositions.get();
-        const rotArr = getRotations();// inPositions.get();
+        const posArr = getPositions(); // inPositions.get();
+        const rotArr = getRotations(); // inPositions.get();
 
         setPosition = false;
         const scale = getScaling();
         if (
 
             float32Diff(glScale[0], scale[0]) ||
-                       float32Diff(glScale[1], scale[1]) ||
-                       float32Diff(glScale[2], scale[2])
+            float32Diff(glScale[1], scale[1]) ||
+            float32Diff(glScale[2], scale[2])
 
         )
         {
-            // console.log("gl",
             //     glScale[0], scale[0],
             //     glScale[1], scale[1],
             //     glScale[2], scale[2]
@@ -316,7 +311,6 @@ function getScaling()
 function setup(world)
 {
     removeBodies();
-    // console.log("setupppp", setupReason || "unknown reason");
     setupReason = "";
 
     const pos = getPositions();
@@ -391,13 +385,14 @@ function setup(world)
 
         if (rot && rot.length > i / 3 * 4)
         {
-            rigidBodyDesc.setRotation({
-                "x": rot[(i / 3) * 4 + 0],
-                "y": rot[(i / 3) * 4 + 1],
-                "z": rot[(i / 3) * 4 + 2],
-                "w": rot[(i / 3) * 4 + 3]
+            rigidBodyDesc.setRotation(
+                {
+                    "x": rot[(i / 3) * 4 + 0],
+                    "y": rot[(i / 3) * 4 + 1],
+                    "z": rot[(i / 3) * 4 + 2],
+                    "w": rot[(i / 3) * 4 + 3]
 
-            }, true);
+                }, true);
         }
 
         // if (scal && scal.length >= i)
@@ -442,7 +437,6 @@ function setup(world)
         }
     }
 
-    // console.log("colliders", colliders);
     outCollider.setRef(colliders);
     outBodies.setRef(rigidBodies);
 

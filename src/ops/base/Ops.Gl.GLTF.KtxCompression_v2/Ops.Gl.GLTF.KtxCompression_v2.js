@@ -6,7 +6,7 @@ let etcSupported = !!cgl.gl.getExtension("WEBGL_compressed_texture_etc1");
 let dxtSupported = !!cgl.gl.getExtension("WEBGL_compressed_texture_s3tc");
 let bptcSupported = !!cgl.gl.getExtension("EXT_texture_compression_bptc");
 let pvrtcSupported = !!(cgl.gl.getExtension("WEBGL_compressed_texture_pvrtc")) || !!(cgl.gl.getExtension("WEBKIT_WEBGL_compressed_texture_pvrtc"));
-if (astcSupported)HDRsupported = cgl.gl.getExtension("WEBGL_compressed_texture_astc").getSupportedProfiles().includes("hdr");
+if (astcSupported) HDRsupported = cgl.gl.getExtension("WEBGL_compressed_texture_astc").getSupportedProfiles().includes("hdr");
 
 op.outBoolNum("Support ASTC", astcSupported);
 op.outBoolNum("Support ETC1", etcSupported);
@@ -19,7 +19,6 @@ let ktx = CABLES.ktx;
 
 if (!ktx && window.KTX2Loader)
 {
-    // console.log("load ktx");
     const _ktx = KTX2Loader.create(cgl, atob(staticAttachments.basis_transcoder_wasm), attachments.basis_transcoder);
     ktx = CABLES.ktx = _ktx;
 }
@@ -32,9 +31,9 @@ let loadingId = null;
 
 CABLES.loadKtx = function (url, cb, opts)
 {
-    if (!CABLES.ktx) return console.log("no ktx");
+    if (!CABLES.ktx) return op.logError("no ktx");
     op.checkMainloopExists();
-    if (loadingId)loadingId = op.patch.loading.finished(loadingId);
+    if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
     loadingId = op.patch.loading.start(op.objName, CABLES.uuid(), op);
 
@@ -46,13 +45,15 @@ CABLES.loadKtx = function (url, cb, opts)
 
             CABLES.ktx.load(url, (transcodeResult) =>
             {
-                const ctex = new CGL.Texture(op.patch.cgl, {
-                    "compression": true,
-                    "wrap": opts?.wrap || CGL.Texture.WRAP_REPEAT,
-                    "filter": opts?.filter || CGL.Texture.FILTER_LINEAR,
-                    "name": "ktx " + opts.name + transcodeResult.width + "x" + transcodeResult.height,
-                    "width": transcodeResult.width,
-                    "height": transcodeResult.height });
+                const ctex = new CGL.Texture(op.patch.cgl,
+                    {
+                        "compression": true,
+                        "wrap": opts?.wrap || CGL.Texture.WRAP_REPEAT,
+                        "filter": opts?.filter || CGL.Texture.FILTER_LINEAR,
+                        "name": "ktx " + opts.name + transcodeResult.width + "x" + transcodeResult.height,
+                        "width": transcodeResult.width,
+                        "height": transcodeResult.height
+                    });
 
                 ctex.setFormat({ "glDataFormat": transcodeResult.format });
 
@@ -63,7 +64,7 @@ CABLES.loadKtx = function (url, cb, opts)
 
             }, () =>
             {
-                console.log("ktx progress");
+                // console.log("ktx progress");
             }, (e) => {});
 
             if (loadingId) loadingId = op.patch.loading.finished(loadingId);
@@ -74,7 +75,6 @@ CABLES.loadKtx = function (url, cb, opts)
     }
     else
     {
-        console.log("SET TEMPP TEX");
         setTempTexture();
         loadingId = op.patch.loading.finished(loadingId);
     }

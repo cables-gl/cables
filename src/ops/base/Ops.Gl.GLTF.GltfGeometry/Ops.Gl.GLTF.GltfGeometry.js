@@ -41,7 +41,6 @@ exec.onTriggered = () =>
         for (let i = 0; i < cgl.tempData.currentScene.meshes.length; i++)
         {
             let matches = false;
-            // console.log("text",cgl.tempData.currentScene.meshes);
             if (inNameMatch.get() == "exact")
                 matches = cgl.tempData.currentScene.meshes[i].name == name;
             else if (inNameMatch.get() == "contains")
@@ -64,14 +63,12 @@ exec.onTriggered = () =>
                 {
                     if (mesh && mesh.meshes && mesh.meshes[idx] && mesh.meshes[idx].mesh)
                     {
-                        console.log("11", mesh.meshes[idx]);
                         found = true;
                         outGeom.setRef(mesh.meshes[idx].mesh.geom);
 
                     }
                     else
                     {
-                        console.log("ja abernein");
                         found = false;
                     }
                 }

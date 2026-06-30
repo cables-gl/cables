@@ -30,7 +30,7 @@ let diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
 const texTransUni = shader.addUniformFrag("4f", "texTransform", 1, 1, 0, 0);
 
 shader.materialPropUniforms = {
-    "texTransform": texTransUni,
+    "texTransform": texTransUni
 };
 
 updateDiffuseTexture();
@@ -51,7 +51,6 @@ function doRender()
     if (!diffuseTextureUniform)
     {
         diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
-        console.log("no texuniiiiiiiiiiiiii");
     }
 
     // if (diffuseTextureUniform && diffuseTexture.get())
@@ -62,30 +61,16 @@ function doRender()
     shader.pushTexture(diffuseTextureUniform, CGL.Texture.getEmptyTexture(op.patch.cgl));
 
     shader.materialPropUniforms = {
-        "texTransform": texTransUni,
+        "texTransform": texTransUni
     };
 
     shader.toggleDefine("CHAN1", whichTex.get() == "Lightmap");
-    if (whichTex.get() == "Albedo")shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
+    if (whichTex.get() == "Albedo") shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
     else if (whichTex.get() == "Normal") shader.materialPropUniforms.normalTexture = diffuseTextureUniform;
-    else if (whichTex.get() == "AO")shader.materialPropUniforms.occlusionTexture = diffuseTextureUniform;
-    else if (whichTex.get() == "MR")shader.materialPropUniforms.metalRoughnessTexture = diffuseTextureUniform;
-    else if (whichTex.get() == "Lightmap")shader.materialPropUniforms.lightmapTexture = diffuseTextureUniform;
-    else console.log("value wrong");
-
-    // "normalTexture": diffuseTextureUniform,
-    // "metalRoughnessTexture": inRMUniform,
-    // "occlusionTexture": inAOUniform,
-    // "diffuseColor": inDiffuseColor,
-    // "pbrMetalness": inMetalnessUniform,
-    // "pbrMetalness": inMetalnessUniform,
-    // "pbrRoughness": inRoughnessUniform,
-    // "lightmapTexture": inLightmapUniform,
-    // "unlit": inUnlitUniform,
-    // "texTransform": uniTexTrans
-
-    // shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
-    // shader.materialPropUniforms.texTransform = texTransUni;
+    else if (whichTex.get() == "AO") shader.materialPropUniforms.occlusionTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "MR") shader.materialPropUniforms.metalRoughnessTexture = diffuseTextureUniform;
+    else if (whichTex.get() == "Lightmap") shader.materialPropUniforms.lightmapTexture = diffuseTextureUniform;
+    else op.logError("value wrong");
 
     trigger.trigger();
 

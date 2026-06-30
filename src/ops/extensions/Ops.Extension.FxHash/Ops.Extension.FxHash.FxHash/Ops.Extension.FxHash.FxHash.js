@@ -1,8 +1,8 @@
-if(!window.$fx)
+if (!window.$fx)
 {
-    console.log("$fx not found");
+    op.logError("$fx not found");
 }
-window.$fx=window.$fx||{};
+window.$fx = window.$fx || {};
 
 if (!CABLES.fakefxhash && !window.$fx.hash || CABLES.fakefxhash)
 {
@@ -63,7 +63,10 @@ function init()
         {
             return () =>
             {
-                a |= 0; b |= 0; c |= 0; d |= 0;
+                a |= 0;
+                b |= 0;
+                c |= 0;
+                d |= 0;
                 let t = (a + b | 0) + d | 0;
                 d = d + 1 | 0;
                 a = b ^ b >>> 9;
@@ -92,6 +95,6 @@ function init()
     outRandom4.set(window.$fx.rand());
 
     const arr = [];
-    for (let i = 0; i < 1000; i++)arr.push(window.$fx.rand());
+    for (let i = 0; i < 1000; i++) arr.push(window.$fx.rand());
     outArr.setRef(arr);
 }

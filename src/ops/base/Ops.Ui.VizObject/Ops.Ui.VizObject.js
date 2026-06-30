@@ -42,7 +42,7 @@ function setSearchPos(click)
     if (hlLines.length > 0)
     {
         searchLine++;
-        if (searchLine > hlLines.length)searchLine = 0;
+        if (searchLine > hlLines.length) searchLine = 0;
 
         inPos.set(Math.max(0, hlLines[searchLine] - 5) / lines.length);
     }
@@ -140,14 +140,13 @@ function myStringify(o, level = 0)
                         str += "[";
                         for (let a = 0; a < Math.min(maxItems, item.length); a++)
                         {
-                            if (a > 0)str += ",";
+                            if (a > 0) str += ",";
                             try
                             {
                                 str += myStringify(item[a], level + 1);
                             }
                             catch (e)
                             {
-                            // console.log(e);
                                 str += "exception:" + e.message;
                             }
                         }
@@ -164,7 +163,6 @@ function myStringify(o, level = 0)
                     if (!item)
                     {
                         str += "/*no item?*/";
-                        // console.log("no item????????", item);
                     }
                     else
                     {
@@ -179,7 +177,7 @@ function myStringify(o, level = 0)
                         }
                     }
 
-                    if (keyCounter != numKeys)str += ",";
+                    if (keyCounter != numKeys) str += ",";
                     str += "\n";
                 }
 
@@ -189,7 +187,7 @@ function myStringify(o, level = 0)
         }
         catch (e)
         {
-            console.log(e);
+            op.logError(e);
         }
     }
 
@@ -197,87 +195,85 @@ function myStringify(o, level = 0)
 }
 
 inSearch.onChange =
-inHideArr.onChange =
-inSort.onChange =
-inObj.onChange = () =>
-{
-    let obj = inObj.get();
-    inPos.set(0);
-    let str = "???";
-    if (obj && obj.getInfo) obj = obj.getInfo();
+    inHideArr.onChange =
+    inSort.onChange =
+    inObj.onChange = () =>
+    {
+        let obj = inObj.get();
+        inPos.set(0);
+        let str = "???";
+        if (obj && obj.getInfo) obj = obj.getInfo();
 
-    if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": title + " " + obj.constructor.name });
+        if (obj && obj.constructor && obj.constructor.name != "Object") op.setUiAttribs({ "extendTitle": title + " " + obj.constructor.name });
 
-    if (obj === undefined)str = "undefined";
-    else if (obj === null)str = "null";
-    else if (obj === false)str = "false";
-    else if (obj === 0)str = "0";
-    else
-        try
-        {
-            const cblStringify = Object.getPrototypeOf(obj).constructor.name == "Object";
-
-            if (cblStringify) str = myStringify(obj);
-            else
+        if (obj === undefined) str = "undefined";
+        else if (obj === null) str = "null";
+        else if (obj === false) str = "false";
+        else if (obj === 0) str = "0";
+        else
+            try
             {
-                str = JSON.stringify(obj, false, 4);
+                const cblStringify = Object.getPrototypeOf(obj).constructor.name == "Object";
 
-                if (
-                    obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
-            (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+                if (cblStringify) str = myStringify(obj);
+                else
                 {
-                    str = "could not stringify object: " + obj.constructor.name + "\n";
-
-                    const o = {};
-                    for (const i in obj)
-                    {
-                        if (!obj[i]) continue;
-
-                        if (obj[i].constructor)
-                        {
-                            if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
-                                o[i] = obj[i];
-                        }
-                        else
-                            o[i] = "{???}";
-                    }
-                    obj = o;
                     str = JSON.stringify(obj, false, 4);
+
+                    if (
+                        obj.hasOwnProperty("isTrusted") && Object.keys(obj).length == 1 ||
+                        (str == "{}" && obj && obj.constructor && obj.constructor.name != "Object"))
+                    {
+                        str = "could not stringify object: " + obj.constructor.name + "\n";
+
+                        const o = {};
+                        for (const i in obj)
+                        {
+                            if (!obj[i]) continue;
+
+                            if (obj[i].constructor)
+                            {
+                                if (obj[i].constructor.name == "Number" || obj[i].constructor.name == "String" || obj[i].constructor.name == "Boolean")
+                                    o[i] = obj[i];
+                            }
+                            else
+                                o[i] = "{???}";
+                        }
+                        obj = o;
+                        str = JSON.stringify(obj, false, 4);
+                    }
                 }
             }
-        }
-        catch (e)
+            catch (e)
+            {
+                str = "object can not be displayed as string\n" + e.message;
+            }
+
+        if (obj && obj.constructor && (obj.constructor.name == "String" || CABLES.isNumeric(obj) || Array.isArray(obj)))
         {
-            str = "object can not be displayed as string\n" + e.message;
-            // console.log(obj);
+            op.setUiError("notobj", "The connected is not of type object! ", 1);
+            str += "\nnot an object!\n";
         }
+        else op.setUiError("notobj", null);
 
-    if (obj && obj.constructor && (obj.constructor.name == "String" || CABLES.isNumeric(obj) || Array.isArray(obj)))
-    {
-        op.setUiError("notobj", "The connected is not of type object! ", 1);
-        str += "\nnot an object!\n";
-    }
-    else op.setUiError("notobj", null);
+        str = String(str);
+        lines = str.split("\n");
+        hlLines = [];
 
-    str = String(str);
-    lines = str.split("\n");
-    hlLines = [];
-
-    const srch = inSearch.get();
-    if (srch)
-    {
-        for (let i = 0; i < lines.length; i++)
+        const srch = inSearch.get();
+        if (srch)
         {
-            if (lines[i].includes(srch))hlLines.push(i);
+            for (let i = 0; i < lines.length; i++)
+            {
+                if (lines[i].includes(srch)) hlLines.push(i);
+            }
+            setSearchPos();
+            // lines = lines.filter((s)=>{return s.includes(inSearch.get());});
         }
-        // console.log("search results", hlLines);
-        setSearchPos();
-        // lines = lines.filter((s)=>{return s.includes(inSearch.get());});
-    }
 
-    searchLine = 0;
-    inSearchNext.setUiAttribs({ "title": "next " + searchLine + "/" + hlLines.length });
-};
+        searchLine = 0;
+        inSearchNext.setUiAttribs({ "title": "next " + searchLine + "/" + hlLines.length });
+    };
 
 inObj.onLinkChanged = () =>
 {
@@ -309,14 +305,15 @@ op.renderVizLayer = (ctx, layer, viz) =>
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
 
-    viz.renderText(ctx, layer, lines, {
-        "zoomText": inZoomText.get(),
-        "showLineNum": inLineNums.get(),
-        "highlightLines": { "lines": hlLines },
-        "syntax": "js",
-        "fontSize": inFontSize.get(),
-        "scroll": inPos.get()
-    });
+    viz.renderText(ctx, layer, lines,
+        {
+            "zoomText": inZoomText.get(),
+            "showLineNum": inLineNums.get(),
+            "highlightLines": { "lines": hlLines },
+            "syntax": "js",
+            "fontSize": inFontSize.get(),
+            "scroll": inPos.get()
+        });
 
     ctx.restore();
 };

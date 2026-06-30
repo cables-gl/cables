@@ -24,13 +24,13 @@ let params = null;
 let needsReset = true;
 
 inGravX.onChange =
-inGravY.onChange =
-inGravZ.onChange = () =>
-{
-    gravity.x = inGravX.get();
-    gravity.y = inGravY.get();
-    gravity.z = inGravZ.get();
-};
+    inGravY.onChange =
+    inGravZ.onChange = () =>
+    {
+        gravity.x = inGravX.get();
+        gravity.y = inGravY.get();
+        gravity.z = inGravZ.get();
+    };
 
 wait();
 
@@ -38,7 +38,6 @@ function wait()
 {
     if (!window.RAPIER)
     {
-        console.log("waiting for rapier...");
         setTimeout(wait, 100);
     }
     else init();
@@ -64,7 +63,7 @@ exec.onTriggered = () =>
 {
     if (needsReset && window.RAPIER && CABLES.rapierInited == 2 && window.RAPIER.IntegrationParameters)
     {
-        if (world)world.free();
+        if (world) world.free();
 
         params = new RAPIER.IntegrationParameters();
         world = new RAPIER.World(gravity);
@@ -98,22 +97,18 @@ exec.onTriggered = () =>
     eventQueue.drainCollisionEvents((handle1, handle2, started) =>
     {
         const id = Math.min(handle1, handle2) + "_" + Math.max(handle2, handle1);
-        // console.log("id", id);
 
         // op.patch.frameStore.rapier.ignoreEventHandles;
         // if (!op.patch.frameStore.rapier.ignoreEventHandles.includes(handle1) &&
         // !op.patch.frameStore.rapier.ignoreEventHandles.includes(handle2))
         // {
         collisions[id] = { "handle1": handle1, "handle2": handle2, "started": started };
-        // console.log("coll",collisions[id]);
         // }
 
         if (!started) delete collisions[id];
     });
 
-    // console.log("collisions",collisions);
-    op.patch.frameStore.rapier =
-    {
+    op.patch.frameStore.rapier = {
         "ignoreEventHandles": [],
         "collisionEvents": collisions,
         "world": world,
