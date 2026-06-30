@@ -32,6 +32,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1772044299294
+        },
+        {
+            "message": "New version v5: when inactive or deleted op: \"webcam recording indicator\" will correctly turn off in OS/browser",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1782807607785,
+            "url": "https://github.com/cables-gl/cables/issues/8387"
         }
     ],
     "layout": {
