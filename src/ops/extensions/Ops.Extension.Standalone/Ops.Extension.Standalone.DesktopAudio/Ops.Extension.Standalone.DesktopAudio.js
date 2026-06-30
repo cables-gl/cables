@@ -14,7 +14,6 @@ let stream = null;
 let audioCtx = null;
 let mediaStreamSource = null;
 let gainNode = null;
-let permissionCheckInterval = null;
 
 op.onDelete = cleanup;
 
@@ -38,37 +37,44 @@ inVolume.onChange = () =>
     }
 };
 
-// Periodic check of macOS permission status
 const isMac = (typeof process !== "undefined" && process.platform === "darwin") || 
               (typeof navigator !== "undefined" && /Mac/i.test(navigator.platform || navigator.userAgent));
 const isWindows = (typeof process !== "undefined" && process.platform === "win32") || 
                   (typeof navigator !== "undefined" && /Win/i.test(navigator.platform || navigator.userAgent));
 
-if (isMac)
-{
-    permissionCheckInterval = setInterval(checkPermissionStatus, 5000);
-}
-
 // Initial check
 checkPermissionStatus();
 
-function checkPermissionStatus()
+function getIpcRenderer()
 {
-    let ipc = window.ipcRenderer;
-    if (!ipc)
-    {
-        const electron = op.require("electron");
-        if (electron) ipc = electron.ipcRenderer;
-    }
+    if (window.ipcRenderer) return window.ipcRenderer;
 
-    if (!ipc && window.nodeRequire)
+    if (typeof op.require === "function")
     {
         try
         {
-            ipc = window.nodeRequire("electron").ipcRenderer;
+            const electron = op.require("electron");
+            if (electron && electron.ipcRenderer) return electron.ipcRenderer;
         }
         catch (e) {}
     }
+
+    if (window.nodeRequire)
+    {
+        try
+        {
+            const electron = window.nodeRequire("electron");
+            if (electron && electron.ipcRenderer) return electron.ipcRenderer;
+        }
+        catch (e) {}
+    }
+
+    return null;
+}
+
+function checkPermissionStatus()
+{
+    const ipc = getIpcRenderer();
 
     if (ipc)
     {
@@ -116,6 +122,7 @@ function cleanup()
 
 function startCapture()
 {
+    checkPermissionStatus();
     cleanup();
 
     const handleStream = (s) =>
@@ -134,7 +141,7 @@ function startCapture()
         const audioTracks = stream.getAudioTracks();
         if (audioTracks.length > 0)
         {
-            if (typeof CABLES !== "undefined" && CABLES.WEBAUDIO)
+            if (CABLES.WEBAUDIO)
             {
                 audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
             }
@@ -196,16 +203,7 @@ function startCapture()
     else
     {
         // Fallback for Windows/Linux desktop capture
-        let ipc = window.ipcRenderer;
-        if (!ipc)
-        {
-            const electron = op.require("electron");
-            if (electron) ipc = electron.ipcRenderer;
-        }
-        if (!ipc && window.nodeRequire)
-        {
-            try { ipc = window.nodeRequire("electron").ipcRenderer; } catch (e) {}
-        }
+        const ipc = getIpcRenderer();
 
         const proceedWithSourceId = (sourceId) =>
         {
@@ -243,16 +241,6 @@ function startCapture()
                     proceedWithSourceId(primary.id);
                 })
                 .catch(handleError);
-        }
-        else if (op.patch.api)
-        {
-            op.patch.api.send("getDesktopCaptureSources", { "types": ["screen"] }, (err, sources) =>
-            {
-                if (err) return handleError(err);
-                const s = sources.success && sources.data ? sources.data : sources;
-                const primary = s[0] || { "id": "screen:0:0" };
-                proceedWithSourceId(primary.id);
-            });
         }
         else
         {
