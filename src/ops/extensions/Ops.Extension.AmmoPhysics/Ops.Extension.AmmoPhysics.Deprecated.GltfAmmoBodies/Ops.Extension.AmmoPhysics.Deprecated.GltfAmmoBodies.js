@@ -31,17 +31,17 @@ const meshCube = new CGL.WireCube(cgl);
 let tmpTrans = null;
 
 inMass.onChange =
-inShape.onChange =
-inNames.onChange =
-inExec.onLinkChanged = () =>
-{
-    removeFromWorld();
-    added = false;
-};
+    inShape.onChange =
+    inNames.onChange =
+    inExec.onLinkChanged = () =>
+    {
+        removeFromWorld();
+        added = false;
+    };
 
 inActive.onChange = () =>
 {
-    if (!inActive.get())removeFromWorld();
+    if (!inActive.get()) removeFromWorld();
     update();
 };
 
@@ -50,7 +50,7 @@ function update()
     if (!inActive.get()) return;
     if (!added || world != cgl.frameStore.ammoWorld) addToWorld();
 
-    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0].body) == undefined)removeFromWorld();
+    if (world && bodies.length && bodies[0] && world.getBodyMeta(bodies[0].body) == undefined) removeFromWorld();
 
     ping();
     for (let i = 0; i < bodies.length; i++)
@@ -61,7 +61,7 @@ function update()
 
         mat4.mul(cgl.mMatrix, cgl.mMatrix, bodies[i].node.modelMatAbs());
 
-        if (!tmpTrans)tmpTrans = new Ammo.btTransform();
+        if (!tmpTrans) tmpTrans = new Ammo.btTransform();
 
         CABLES.AmmoWorld.copyCglTransform(cgl, tmpTrans);
 
@@ -172,7 +172,7 @@ function addToWorld()
         world.setBodyMeta(body,
             {
                 "name": scene.nodes[i].name,
-                "mass": inMass.get(),
+                "mass": inMass.get()
 
             });
 

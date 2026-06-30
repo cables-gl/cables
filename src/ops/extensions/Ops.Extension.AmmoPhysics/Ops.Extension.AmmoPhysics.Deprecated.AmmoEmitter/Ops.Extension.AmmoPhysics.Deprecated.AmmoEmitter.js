@@ -42,7 +42,7 @@ let btVelocity = null;
 inRemove.onTriggered = removeAll;
 
 inExec.onLinkChanged =
-inNameIndex.onChange =
+    inNameIndex.onChange =
     op.onDelete = removeAll;
 
 inName.onChange = () => { op.setUiAttribs({ "extendTitle": inName.get() }); };
@@ -144,7 +144,7 @@ function spawn()
     world.addRigidBody(body);
 
     let name = inName.get() + "_" + countAll;
-    if (!inNameIndex.get())name = inName.get();
+    if (!inNameIndex.get()) name = inName.get();
 
     world.setBodyMeta(body,
         {
@@ -198,7 +198,7 @@ inExec.onTriggered = () =>
             {
                 bodies[i].ms.getWorldTransform(tmpTrans);
                 let p = tmpTrans.getOrigin();
-                if (p.y() < -100)bodies.splice(i, 1);
+                if (p.y() < -100) bodies.splice(i, 1);
             }
     }
 

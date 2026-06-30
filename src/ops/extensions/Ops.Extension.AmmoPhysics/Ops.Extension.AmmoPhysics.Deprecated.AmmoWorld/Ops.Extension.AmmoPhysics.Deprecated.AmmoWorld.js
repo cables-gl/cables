@@ -22,7 +22,7 @@ inExec.onTriggered = update;
 
 const cgl = op.patch.cgl;
 let deltaTime, lastTime;
-let ammoWorld = null;// new CABLES.AmmoWorld();
+let ammoWorld = null; // new CABLES.AmmoWorld();
 let loadingId = null;
 let needsReset = true;
 inReset.onTriggered = () =>
@@ -47,7 +47,7 @@ function update()
 {
     if (needsReset)
     {
-        if (ammoWorld)ammoWorld.dispose();
+        if (ammoWorld) ammoWorld.dispose();
         ammoWorld = null;
         needsReset = false;
     }

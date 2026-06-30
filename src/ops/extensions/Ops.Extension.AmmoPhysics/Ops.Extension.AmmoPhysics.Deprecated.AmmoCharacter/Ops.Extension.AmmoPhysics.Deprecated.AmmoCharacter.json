@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677112319
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoCharacter was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811981005
         }
     ],
     "layout": {

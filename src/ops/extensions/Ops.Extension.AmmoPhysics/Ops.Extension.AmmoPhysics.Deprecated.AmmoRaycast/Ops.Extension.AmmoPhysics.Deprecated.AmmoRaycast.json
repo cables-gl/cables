@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677098591
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoRaycast was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811942739
         }
     ],
     "layout": {

@@ -26,6 +26,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677054451
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoCharacterFpsCamera was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811985794
         }
     ],
     "authorName": "pandur",

@@ -20,16 +20,19 @@ op.toWorkPortsNeedToBeLinked(render);
 const cgl = op.patch.cgl;
 const viewMatrix = mat4.create();
 const vPos = vec3.create();
-let speedx = 0, speedy = 0, speedz = 0;
+let speedx = 0,
+    speedy = 0,
+    speedz = 0;
 const movementSpeedFactor = 0.5;
 const canvas = cgl.canvas;
 const DEG2RAD = 3.14159 / 180.0;
 let rotX = 0;
 let rotY = 0;
 let lastMove = 0;
-let mouseNoPL = { "firstMove": true,
+let mouseNoPL = {
+    "firstMove": true,
     "deltaX": 0,
-    "deltaY": 0,
+    "deltaY": 0
 };
 
 initListener();
@@ -80,8 +83,8 @@ render.onTriggered = function ()
         op.log("char body not found!");
     }
 
-    if (rotX < -90)rotX = -90;
-    if (rotX > 90)rotX = 90;
+    if (rotX < -90) rotX = -90;
+    if (rotX > 90) rotX = 90;
 
     mat4.identity(cgl.vMatrix);
 
@@ -132,8 +135,8 @@ function mouseDown(e)
 function lockChangeCallback(e)
 {
     if (document.pointerLockElement === canvas ||
-            document.mozPointerLockElement === canvas ||
-            document.webkitPointerLockElement === canvas)
+        document.mozPointerLockElement === canvas ||
+        document.webkitPointerLockElement === canvas)
     {
         document.addEventListener("pointerdown", mouseDown, false);
         document.addEventListener("pointermove", moveCallback, false);
@@ -155,8 +158,8 @@ function startPointerLock(e)
     {
         document.addEventListener("pointermove", moveCallback, false);
         canvas.requestPointerLock = canvas.requestPointerLock ||
-                                    canvas.mozRequestPointerLock ||
-                                    canvas.webkitRequestPointerLock;
+            canvas.mozRequestPointerLock ||
+            canvas.webkitRequestPointerLock;
         canvas.requestPointerLock();
     }
 }

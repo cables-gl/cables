@@ -118,8 +118,8 @@ function update()
         }
 
         Ammo.destroy(rayCallback);
-        if (afrom)Ammo.destroy(afrom);
-        if (ato)Ammo.destroy(ato);
+        if (afrom) Ammo.destroy(afrom);
+        if (ato) Ammo.destroy(ato);
     }
 
     next.trigger();
