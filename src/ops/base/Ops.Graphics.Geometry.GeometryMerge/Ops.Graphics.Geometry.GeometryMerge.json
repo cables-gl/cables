@@ -6,26 +6,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 2"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Merge"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Geometry Result"
+                "type": 2,
+                "name": "Geometry Result",
+                "objType": "geometry"
             }
         ]
     },
@@ -42,5 +43,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

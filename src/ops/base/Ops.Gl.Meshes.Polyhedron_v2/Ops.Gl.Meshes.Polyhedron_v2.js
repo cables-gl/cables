@@ -1,5 +1,5 @@
 const notation = op.inString("Receipt", "djmeD");
-const outGeom = op.outObject("Geometry");
+const outGeom = op.outObject("Geometry", null, "geometry");
 
 let obj = {};
 let faces = [];

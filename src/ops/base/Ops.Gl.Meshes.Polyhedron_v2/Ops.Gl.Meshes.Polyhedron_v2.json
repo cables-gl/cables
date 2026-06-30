@@ -3,9 +3,7 @@
     "authorName": "pandur",
     "id": "203a3bcd-7fff-4791-aab7-378f2b68bf29",
     "created": 1637079875909,
-    "libs": [
-        "conway-hart.js"
-    ],
+    "libs": [],
     "credits": [
         {
             "title": "conway-heart",
@@ -24,14 +22,13 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Geometry"
+                "name": "Geometry",
+                "objType": "geometry"
             }
         ]
     },
     "summary": "Generate polyhedron meshes ",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.Meshes.Polyhedron",
@@ -45,12 +42,15 @@
         }
     ],
     "exampleProjectId": "VRG6Q6",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
     "license": "MIT",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "type": "commonjs",
+            "src": "./conway-hart.js"
+        }
+    ]
 }

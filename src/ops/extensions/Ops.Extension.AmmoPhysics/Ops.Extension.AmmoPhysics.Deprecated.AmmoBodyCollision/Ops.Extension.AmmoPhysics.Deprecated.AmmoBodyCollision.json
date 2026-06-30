@@ -26,6 +26,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1694677123827
+        },
+        {
+            "message": "op Extension.AmmoPhysics.AmmoBodyCollision was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1782811905319
         }
     ],
     "authorName": "pandur",

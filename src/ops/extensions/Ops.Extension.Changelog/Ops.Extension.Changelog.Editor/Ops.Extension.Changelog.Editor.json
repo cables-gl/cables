@@ -311,6 +311,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1782731137216
+        },
+        {
+            "message": "Most modal dialogs can now be submited by pressing enter",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1782814285312
         }
     ],
     "isReleased": true,
