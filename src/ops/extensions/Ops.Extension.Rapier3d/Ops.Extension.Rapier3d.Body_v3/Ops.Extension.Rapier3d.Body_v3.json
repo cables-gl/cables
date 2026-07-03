@@ -45,6 +45,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1778586307106
+        },
+        {
+            "message": "fixed transformation being wrong, when modelmatrix was scaled/rotated",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1782912144928
         }
     ],
     "layout": {

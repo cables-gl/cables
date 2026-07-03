@@ -145,6 +145,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1781875475511
+        },
+        {
+            "message": "Added better errorhandling, show ui error instead of console output for network and decoding errors",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1782993522077
         }
     ],
     "license": "MIT",

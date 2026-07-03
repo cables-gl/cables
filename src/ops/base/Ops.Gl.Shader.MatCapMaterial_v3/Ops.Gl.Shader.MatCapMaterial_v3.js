@@ -59,8 +59,14 @@ const repeatUniform = new CGL.Uniform(shader, "2f", "texRepeat", repeatX, repeat
 const aoIntensityUniform = new CGL.Uniform(shader, "f", "aoIntensity", aoIntensity);
 const colorUniform = new CGL.Uniform(shader, "4f", "inColor", r, g, b, pOpacity);
 
+shader.materialPropUniforms = {
+    "diffuseColor": colorUniform,
+    // "texTransform": texTransUni,
+    "diffuseTexture": textureDiffuse
+};
+
 inDoubleSided.onChange =
-calcTangents.onChange = updateDefines;
+    calcTangents.onChange = updateDefines;
 updateDefines();
 
 function updateDefines()

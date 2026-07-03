@@ -102,25 +102,25 @@ const lightFragmentHead = attachments.light_head_frag;
 const lightFragmentBodies = {
     "point": attachments.light_body_point_frag,
     "directional": attachments.light_body_directional_frag,
-    "spot": attachments.light_body_spot_frag,
+    "spot": attachments.light_body_spot_frag
 };
 const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
-const createLightFragmentBody = (n, type) =>
-{ return (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n); };
+const createLightFragmentBody = (n, type) => { return (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n); };
 let currentLightCount = -1;
-const defaultLightStack = [{
-    "type": "point",
-    "position": [5, 5, 5],
-    "color": [1, 1, 1],
-    "specular": [1, 1, 1],
-    "intensity": 120,
-    "attenuation": 0,
-    "falloff": 0.5,
-    "radius": 60,
-    "castLight": 1,
-    "nearFar": [0.01, 100],
+const defaultLightStack = [
+    {
+        "type": "point",
+        "position": [5, 5, 5],
+        "color": [1, 1, 1],
+        "specular": [1, 1, 1],
+        "intensity": 120,
+        "attenuation": 0,
+        "falloff": 0.5,
+        "radius": 60,
+        "castLight": 1,
+        "nearFar": [0.01, 100]
 
-}];
+    }];
 
 if (cgl.glVersion == 1)
 {
@@ -201,7 +201,6 @@ PBRShader.materialPropUniforms = {
     "occlusionTexture": inAOUniform,
     "diffuseColor": inDiffuseColor,
     "pbrMetalness": inMetalnessUniform,
-    "pbrMetalness": inMetalnessUniform,
     "pbrRoughness": inRoughnessUniform,
     "unlit": inUnlitUniform,
     "texTransform": uniTexTrans
@@ -213,7 +212,7 @@ PBRShader.uniformPbrRoughness = inRoughnessUniform; // remove later... backward 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
 inTexAO.onChange =
-inTexRM.onChange =
+    inTexRM.onChange =
     inMulAlbedo.onChange =
     inDoubleSided.onChange =
     inLightmapRGBE.onChange =
@@ -238,11 +237,11 @@ inTexRM.onChange =
     inVertexColourMode.onChange = updateDefines;
 
 inTexAO.onLinkChanged =
-inTexRM.onLinkChanged = () =>
-{
-    inRoughnessUniform.setValue(1);
-    inMetalnessUniform.setValue(1);
-};
+    inTexRM.onLinkChanged = () =>
+    {
+        inRoughnessUniform.setValue(1);
+        inMetalnessUniform.setValue(1);
+    };
 
 function updateDefines()
 {
@@ -340,14 +339,14 @@ function updateLightUniforms()
             light.intensity,
             light.attenuation,
             light.falloff,
-            light.radius,
+            light.radius
         ]);
 
         lightUniforms[i].conePointAt.setValue(light.conePointAt);
         lightUniforms[i].spotProperties.setValue([
             light.cosConeAngle,
             light.cosConeAngleInner,
-            light.spotExponent,
+            light.spotExponent
         ]);
 
         lightUniforms[i].castLight.setValue(light.castLight);
@@ -396,7 +395,7 @@ function buildShader()
 
                 "conePointAt": new CGL.Uniform(PBRShader, "3f", "lightOP" + i + ".conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(PBRShader, "3f", "lightOP" + i + ".spotProperties", [0, 0, 0, 0]),
-                "castLight": new CGL.Uniform(PBRShader, "i", "lightOP" + i + ".castLight", 1),
+                "castLight": new CGL.Uniform(PBRShader, "i", "lightOP" + i + ".castLight", 1)
 
             };
         }
@@ -436,14 +435,14 @@ function updateLights()
 
 function doRender()
 {
-    if (!PBRShader)buildShader();
+    if (!PBRShader) buildShader();
     cgl.pushShader(PBRShader);
     let useDefaultLight = false;
 
     PBRShader.popTextures();
 
     let numLights = 0;
-    if (cgl.tempData.lightStack)numLights = cgl.tempData.lightStack.length;
+    if (cgl.tempData.lightStack) numLights = cgl.tempData.lightStack.length;
 
     if ((!cgl.tempData.pbrEnvStack || cgl.tempData.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
     {

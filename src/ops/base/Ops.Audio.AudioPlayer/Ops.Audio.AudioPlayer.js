@@ -81,7 +81,7 @@ function play()
         op.patch.addOnAnimFrame(op);
         audio.play().catch((e) =>
         {
-            op.logError("err play");
+            // op.logError("err play");
         });
         outPlaying.set(playing);
     }
@@ -139,6 +139,8 @@ function loadSoon()
 
 function load()
 {
+    op.setUiError("onerror", null);
+
     if (!inActive.get()) return;
     if (!fileName.get()) return;
 
@@ -175,14 +177,41 @@ function load()
     //     if (audio)timer.setTime(audio.currentTime);
     //     // outCurrentTime.set(audio.currentTime);
     // };
-    audio.addEventListener("error", function (e)
+    audio.addEventListener("error", (event) =>
     {
-        op.logError("error", e);
+        let errorLevel = 2;
+        let errorText = "Unknown audio error";
+
+        const err = audio.error;
+        if (!err)
+        {
+            op.setUiError("onerror", errorText, 2);
+            return;
+        }
+
+        const code = err.code;
+        switch (code)
+        {
+        case MediaError.MEDIA_ERR_ABORTED:
+            errorText = "Audio loading aborted by browser/user";
+            errorLevel = 1;
+            break;
+        case MediaError.MEDIA_ERR_NETWORK:
+            errorText = "Network error while loading audio";
+            break;
+        case MediaError.MEDIA_ERR_DECODE:
+            errorText = "Audio downloaded but could not be decoded";
+            break;
+        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+            errorText = "Audio source missing or unsupported";
+            break;
+        }
+        let info = fileName.get();
+        if (err.message) info += ": " + err.message;
+        op.setUiError("onerror", errorText, errorLevel, { "info": fileName.get() });
+
     });
-    audio.onerror = (event) =>
-    {
-        op.logError("onerror", event);
-    };
+
     audio.abort = (event) =>
     {
         // console.log("abort", event);

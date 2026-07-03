@@ -68,7 +68,8 @@ const doBillboard = op.inValueBool("billboard", false);
 shader.materialPropUniforms = {
     "diffuseColor": colUni,
     "texTransform": texTransUni,
-    "diffuseTexture": diffuseTextureUniform };
+    "diffuseTexture": diffuseTextureUniform
+};
 
 alphaMaskSource.onChange =
     doBillboard.onChange =
@@ -117,7 +118,7 @@ function updateOpacity()
         if (textureOpacityUniform !== null) return;
         shader.removeUniform("texOpacity");
         shader.define("HAS_TEXTURE_OPACITY");
-        if (!textureOpacityUniform)textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity");
+        if (!textureOpacityUniform) textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity");
     }
     else
     {
@@ -133,8 +134,8 @@ function updateDiffuseTexture()
 {
     if (diffuseTexture.get())
     {
-        if (!shader.hasDefine("HAS_TEXTURE_DIFFUSE"))shader.define("HAS_TEXTURE_DIFFUSE");
-        if (!diffuseTextureUniform)diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
+        if (!shader.hasDefine("HAS_TEXTURE_DIFFUSE")) shader.define("HAS_TEXTURE_DIFFUSE");
+        if (!diffuseTextureUniform) diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
 
         shader.materialPropUniforms.diffuseTexture = diffuseTextureUniform;
     }

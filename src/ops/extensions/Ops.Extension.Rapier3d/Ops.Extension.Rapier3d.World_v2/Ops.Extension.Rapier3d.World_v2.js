@@ -78,10 +78,17 @@ exec.onTriggered = () =>
     const oldRapier = op.patch.frameStore.rapier;
     // op.patch.frameStore.rapierWorld = world;
     // op.patch.frameStore.rapierEventQueue = eventQueue; // todo: moved to rapier object
-
-    for (let i = 0; i < inTimes.get(); i++)
+    try
     {
-        if (world) world.step(eventQueue);
+        for (let i = 0; i < inTimes.get(); i++)
+        {
+            if (world) world.step(eventQueue);
+        }
+
+    }
+    catch (e)
+    {
+        console.log("e", e, world);
     }
 
     // const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));

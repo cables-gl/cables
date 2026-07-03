@@ -8,28 +8,10 @@
             "type": "new"
         },
         {
-            "message": "Ops.Libs.Mediapipe.MpPoseTracking renamed to Ops.Extension.Mediapipe.MpPoseTracking",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915628676
-        },
-        {
             "message": "Fixed: found output was not working",
             "type": "bugfix",
             "author": "pandur",
             "date": 1714980766719
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1767351131021
-        },
-        {
-            "message": "Patch.P8q3G87.MpPoseTracking renamed to Ops.Extension.Mediapipe.MpPoseTracking_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1767859026964
         }
     ],
     "authorName": "pandur",
@@ -130,15 +112,14 @@
         ]
     },
     "summary": "Get pose-data (points/landmarks/lines) from webcam using mediapipe library",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "caniusequery": "",
     "coreLibs": [
         "cgl"
     ],
     "cloneOf": "279774b0-9897-4f36-840e-5f823cfc988a",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "uepop4"
 }

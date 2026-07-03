@@ -102,7 +102,6 @@ inTranslX.onChange =
         }
         else
         {
-
             setupReason = "non fixed body translation change";
             needsSetup = true;
         }
@@ -133,8 +132,7 @@ exec.onTriggered = () =>
     if (!inActive.get()) return;
 
     eventQueue = op.patch.frameStore.rapier.eventQueue;
-    if (eventQueue)
-    {}
+    if (eventQueue) {}
 
     if (CABLES.UI)
         gui.setTransform(op.id, inTranslX.get(), inTranslY.get(), inTranslZ.get(), op.uiAttribs.comment || inName.get());
@@ -162,7 +160,6 @@ exec.onTriggered = () =>
         if (rigidBodies[i].isSleeping()) sleepCount++;
 
     outSleeping.set(sleepCount != rigidBodies.length);
-    // mat4.getTranslation(tmpOrigin, op.patch.cg.mMatrix);
 
     if (setPosition)
     {
@@ -171,18 +168,8 @@ exec.onTriggered = () =>
 
         setPosition = false;
         const scale = getScaling();
-        if (
-
-            float32Diff(glScale[0], scale[0]) ||
-            float32Diff(glScale[1], scale[1]) ||
-            float32Diff(glScale[2], scale[2])
-
-        )
+        if (float32Diff(glScale[0], scale[0]) || float32Diff(glScale[1], scale[1]) || float32Diff(glScale[2], scale[2]))
         {
-            //     glScale[0], scale[0],
-            //     glScale[1], scale[1],
-            //     glScale[2], scale[2]
-            // );
             setupReason = "scale changed...";
             needsSetup = true;
         }
@@ -194,24 +181,21 @@ exec.onTriggered = () =>
         }
     }
 
-    // if (sleepCount != rigidBodies.length)
+    for (let i = 0; i < rigidBodies.length; i++)
     {
-        for (let i = 0; i < rigidBodies.length; i++)
-        {
-            const pos = rigidBodies[i].translation();
-            const rot = rigidBodies[i].rotation();
+        const pos = rigidBodies[i].translation();
+        const rot = rigidBodies[i].rotation();
 
-            posArray.push(pos.x, pos.y, pos.z);
-            rotArray.push(rot.x, rot.y, rot.z, rot.w);
+        posArray.push(pos.x, pos.y, pos.z);
+        rotArray.push(rot.x, rot.y, rot.z, rot.w);
 
-            if (inCollShape.get() == "Ball") sizeArray.push(inCollRadius.get(), inCollRadius.get(), inCollRadius.get());
-            else sizeArray.push(inCollSizeX.get() * 2, inCollSizeY.get() * 2, inCollSizeZ.get() * 2);
-        }
-
-        outPos.setRef(posArray);
-        outRot.setRef(rotArray);
-        outSize.setRef(sizeArray);
+        if (inCollShape.get() == "Ball") sizeArray.push(inCollRadius.get(), inCollRadius.get(), inCollRadius.get());
+        else sizeArray.push(inCollSizeX.get() * 2, inCollSizeY.get() * 2, inCollSizeZ.get() * 2);
     }
+
+    outPos.setRef(posArray);
+    outRot.setRef(rotArray);
+    outSize.setRef(sizeArray);
 
     if (!inEvents.get())
         for (let i = 0; i < rigidBodies.length; i++)
@@ -225,10 +209,7 @@ function getRotations()
     const roti = quat.create();
     let rot = inRots.get() || [0, 0, 0, 0];
 
-    if (inTrans.get())
-    {
-        mat4.getRotation(roti, op.patch.cgl.mMatrix);
-    }
+    if (inTrans.get()) mat4.getRotation(roti, op.patch.cgl.mMatrix);
 
     for (let i = 0; i < rot.length; i += 4)
     {
@@ -245,7 +226,8 @@ function getPositions()
 {
     const translati = vec3.create();
     const scale = vec3.create();
-    let pos = inPositions.get() || [0, 0, 0];
+    const posv = vec3.create();
+    let pos = structuredClone(inPositions.get()) || [0, 0, 0];
 
     if (inTrans.get())
     {
@@ -255,11 +237,13 @@ function getPositions()
 
     for (let i = 0; i < pos.length; i += 3)
     {
-        pos[i] += translati[0] + inTranslX.get();
-        pos[i + 1] += translati[1] + inTranslY.get();
-        pos[i + 2] += translati[2] + inTranslZ.get();
-    }
+        vec3.set(posv, pos[i], pos[i + 1], pos[i + 2]);
+        vec3.transformMat4(posv, posv, op.patch.cgl.mMatrix);
 
+        pos[i] = posv[0] + inTranslX.get();
+        pos[i + 1] = posv[1] + inTranslY.get();
+        pos[i + 2] = posv[2] + inTranslZ.get();
+    }
     return pos;
 }
 
@@ -319,6 +303,7 @@ function setup(world)
 
     glScale = getScaling();
     if (glScale[0] == 0) return;
+    if (pos.length == 0) return;
 
     op.patch.cgl.profileData.addHeavyEvent("rapier body constructed", inName.get());
 
@@ -395,14 +380,6 @@ function setup(world)
                 }, true);
         }
 
-        // if (scal && scal.length >= i)
-        // {
-        //     colliderDesc = RAPIER.ColliderDesc.cuboid(
-        //         scal[i + 0] / 2,
-        //         scal[i + 1] / 2,
-        //         scal[i + 2] / 2);
-        // }
-
         colliderDesc
             .setMass(inMass.get())
             .setRestitution(inRestitution.get())
@@ -410,12 +387,9 @@ function setup(world)
             .setFriction(inFriction.get())
             .setSensor(inSensor.get());
 
-        // if (!inEvents.get())
-        // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.NONE);
-
         const rigidBody = world.createRigidBody(rigidBodyDesc);
 
-        rigidBody.userData = { "name": inName.get() + "." + i };
+        rigidBody.userData = { "name": inName.get() + "." + i / 3 };
         rigidBody.setBodyType(inType.indexPort.get());
         rigidBodies.push(rigidBody);
 
@@ -433,7 +407,6 @@ function setup(world)
         else
         {
             collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
-            // colliderDesc.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
         }
     }
 

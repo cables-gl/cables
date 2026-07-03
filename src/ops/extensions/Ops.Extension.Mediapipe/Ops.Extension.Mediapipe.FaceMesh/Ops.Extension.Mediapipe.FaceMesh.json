@@ -4,43 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1608756495961
-        },
-        {
-            "message": "Ops.User.pandur.GeomSetPoints renamed to Ops.User.pandur.FaceMesh",
-            "author": "pandur",
-            "date": 1608765703425
-        },
-        {
-            "message": "Ops.User.pandur.FaceMesh renamed to Ops.Admin.Mediapipe.FaceMesh",
-            "author": "pandur",
-            "date": 1608907343872
-        },
-        {
-            "message": "Ops.Admin.Mediapipe.FaceMesh renamed to Ops.Libs.Mediapipe.FaceMesh",
-            "author": "pandur",
-            "date": 1611052556325
-        },
-        {
-            "message": "Ops.Libs.Mediapipe.FaceMesh renamed to Ops.Admin.Mediapipe.FaceMesh",
-            "author": "stephan",
-            "date": 1613553545365
-        },
-        {
-            "message": "Ops.Admin.Mediapipe.FaceMesh renamed to Ops.Dev.Mediapipe.FaceMesh",
-            "author": "pandur",
-            "date": 1623913682280
-        },
-        {
-            "message": "Ops.Dev.Mediapipe.FaceMesh renamed to Ops.Libs.Mediapipe.FaceMesh",
-            "author": "pandur",
-            "date": 1654015397252
-        },
-        {
-            "message": "Ops.Libs.Mediapipe.FaceMesh renamed to Ops.Extension.Mediapipe.FaceMesh",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915687444
+            "date": 1608756495961,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
