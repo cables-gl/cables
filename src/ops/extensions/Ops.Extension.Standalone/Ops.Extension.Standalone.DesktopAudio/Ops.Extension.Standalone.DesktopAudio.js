@@ -45,31 +45,9 @@ const isWindows = (typeof process !== "undefined" && process.platform === "win32
 // Initial check
 checkPermissionStatus();
 
-function getIpcRenderer()
-{
-    if (window.ipcRenderer) return window.ipcRenderer;
-
-    if (typeof op.require === "function")
-    {
-        try
-        {
-            const electron = op.require("electron");
-            if (electron && electron.ipcRenderer) return electron.ipcRenderer;
-        }
-        catch (e) {}
-    }
-
-    if (window.nodeRequire)
-    {
-        try
-        {
-            const electron = window.nodeRequire("electron");
-            if (electron && electron.ipcRenderer) return electron.ipcRenderer;
-        }
-        catch (e) {}
-    }
-
-    return null;
+function getIpcRenderer() {
+    const electron = op.require("electron");
+    if (!electron || !electron.ipcRenderer) electron.ipcRenderer.send("closeApplication");
 }
 
 function checkPermissionStatus()
