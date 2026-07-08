@@ -44,7 +44,8 @@ inTag.onChange = () =>
     removeElement();
     createElement();
     updateClass();
-    updateText(); updateInteractive();
+    updateText();
+    updateInteractive();
 };
 
 inSetSize.onChange =
@@ -73,16 +74,16 @@ op.onDelete = removeElement;
 outElement.onLinkChanged = updateStyle;
 
 inInteractive.onLinkChanged =
-outClicked.onLinkChanged = () =>
-{
-    op.setUiError("interactiveProblem", null);
-    if (outClicked.isLinked() && !isInteractive())
-        op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port", 0);
-};
+    outClicked.onLinkChanged = () =>
+    {
+        op.setUiError("interactiveProblem", null);
+        if (outClicked.isLinked() && !isInteractive())
+            op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port", 0);
+    };
 
 inAddDom.onChange = () =>
 {
-    if (!inAddDom.get())removeElement();
+    if (!inAddDom.get()) removeElement();
     else
     {
         createElement();
@@ -111,7 +112,7 @@ function createElement()
     div = op.patch.getDocument().createElement(inTag.get() || "div");
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
-    if (inTag.get() != "div")op.setUiAttribs({ "extendTitle": inTag.get() });
+    if (inTag.get() != "div") op.setUiAttribs({ "extendTitle": inTag.get() });
 
     parent.appendChild(div);
     outElement.setRef(div);
@@ -148,7 +149,7 @@ function updateStyle()
     div.style.overflow = inOverflow.get().toLowerCase();
     div.style.display = inDisplay.get();
     div.style.opacity = inOpacity.get();
-    if (inInteractive.get() == "No Pointer Events")div.style.pointerEvents = "none";
+    if (inInteractive.get() == "No Pointer Events") div.style.pointerEvents = "none";
 
     if (inSetSize.get())
     {
@@ -186,6 +187,7 @@ function removeClasses()
 
 function updateClass()
 {
+    if (!inAddDom.get()) return;
     const classes = (inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
@@ -238,7 +240,7 @@ function onMouseClick(e)
 
 function isInteractive()
 {
-    return inInteractive.get() == "True";// != "No Pointer Events";
+    return inInteractive.get() == "True"; // != "No Pointer Events";
 }
 
 function updateInteractive()
@@ -265,7 +267,7 @@ function removeListeners()
 
 function addListeners()
 {
-    if (listenerElement)removeListeners();
+    if (listenerElement) removeListeners();
 
     listenerElement = div;
 

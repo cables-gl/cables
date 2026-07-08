@@ -39,6 +39,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1754494952995
+        },
+        {
+            "message": "Fixed an error when changing css class when element is not active",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1783500909596
         }
     ],
     "layout": {
