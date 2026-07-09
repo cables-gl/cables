@@ -104,7 +104,7 @@ function update()
                 arrRot.push(node._rot[0], node._rot[1], node._rot[2], node._rot[3]);
             }
             else
-            if (node._tempQuat)
+            if (node._tempQuat && node._animRot)
             {
                 arrRot.push(node._tempQuat[0], node._tempQuat[1], node._tempQuat[2], node._tempQuat[3]);
             }
@@ -132,7 +132,8 @@ function update()
                 {
                     "name": arrNames[j],
                     "pos": [arrPos[j * 3 + 0], arrPos[j * 3 + 1], arrPos[j * 3 + 2]],
-                    "scale": [arrScale[j * 3 + 0], arrScale[j * 3 + 1], arrScale[j * 3 + 2]]
+                    "scale": [arrScale[j * 3 + 0], arrScale[j * 3 + 1], arrScale[j * 3 + 2]],
+                    "rot": [arrRot[j * 4 + 0], arrRot[j * 4 + 1], arrRot[j * 4 + 2], arrRot[j * 4 + 3]]
                 });
 
         list.sort(function (a, b)
@@ -152,6 +153,10 @@ function update()
             arrScale[k * 3 + 0] = list[k].scale[0];
             arrScale[k * 3 + 1] = list[k].scale[1];
             arrScale[k * 3 + 2] = list[k].scale[2];
+            arrRot[k * 4 + 0] = list[k].rot[0];
+            arrRot[k * 4 + 1] = list[k].rot[1];
+            arrRot[k * 4 + 2] = list[k].rot[2];
+            arrRot[k * 4 + 3] = list[k].rot[3];
         }
     }
 
