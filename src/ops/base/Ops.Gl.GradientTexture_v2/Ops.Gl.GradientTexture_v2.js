@@ -44,7 +44,7 @@ inGrad.set("{\"keys\" : [{\"pos\":0,\"r\":0,\"g\":0,\"b\":0},{\"pos\":1,\"r\":1,
 op.onLoaded = update;
 op.onDelete = () =>
 {
-    tex.dispose();
+    if (tex) tex.dispose();
 };
 
 inRandom.onTriggered = () =>
@@ -160,7 +160,7 @@ function noise(x, y)
     x %= bluenoiseSize;
     y %= bluenoiseSize;
 
-    return bluenoise[x + y * bluenoiseSize] / 255 - 0.5;
+    return CABLES.bluenoise[x + y * bluenoiseSize] / 255 - 0.5;
 }
 
 function addNoise(pixels, width, height)

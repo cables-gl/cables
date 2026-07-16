@@ -201,6 +201,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1773061733608
+        },
+        {
+            "message": "Fixed a bug when setting dither values",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1784221887837,
+            "url": "https://github.com/cables-gl/cables/issues/8407"
         }
     ],
     "license": "MIT",
