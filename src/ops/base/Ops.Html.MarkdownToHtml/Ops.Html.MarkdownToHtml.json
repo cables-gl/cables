@@ -34,15 +34,16 @@
         ]
     },
     "created": 1669976600784,
-    "libs": [
-        "marked.js"
-    ],
     "summary": "markdown markup language to html parser",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "52Zlij",
     "authorName": "stephan",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./marked.js",
+            "type": "commonjs"
+        }
+    ]
 }
