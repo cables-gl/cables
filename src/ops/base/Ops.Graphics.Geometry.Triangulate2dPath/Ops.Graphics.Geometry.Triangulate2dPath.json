@@ -25,9 +25,6 @@
     ],
     "authorName": "pandur",
     "created": 1567930396375,
-    "libs": [
-        "tess2.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -64,15 +61,17 @@
         ]
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "LzTAeT",
     "license": "MIT",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./tess2.js",
+            "type": "commonjs"
+        }
+    ]
 }
