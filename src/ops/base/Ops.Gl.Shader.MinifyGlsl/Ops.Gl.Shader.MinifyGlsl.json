@@ -24,14 +24,15 @@
             }
         ]
     },
-    "libs": [
-        "glsltokenizer.js"
-    ],
     "summary": "Minify GLSL shader source code",
     "license": "MIT",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "t5H1Qc",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./glsltokenizer.js",
+            "type": "commonjs"
+        }
+    ]
 }
