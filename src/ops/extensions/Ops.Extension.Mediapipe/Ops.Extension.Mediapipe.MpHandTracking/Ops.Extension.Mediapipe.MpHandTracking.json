@@ -56,7 +56,6 @@
     "authorName": "pandur",
     "created": 1608577908279,
     "libs": [
-        "mp_hands.js",
         "mp_camera_utils.js"
     ],
     "layout": {
@@ -90,16 +89,17 @@
         ]
     },
     "summary": "Get hand data from mediapipe library, use with MpHand",
-    "issues": "",
-    "caniusequery": "",
     "relatedops": [
         "Ops.Libs.Mediapipe.MpHand",
         "Ops.Libs.Mediapipe.MpHandCoordinate"
     ],
-    "youtubeids": [],
     "exampleProjectId": "a5xfp4",
-    "docs": {
-        "ports": []
-    },
-    "isReleased": true
+    "docs": {},
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./mp_hands.js",
+            "type": "commonjs"
+        }
+    ]
 }

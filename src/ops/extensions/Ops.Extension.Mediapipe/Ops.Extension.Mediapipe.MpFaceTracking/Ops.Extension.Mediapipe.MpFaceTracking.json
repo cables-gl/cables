@@ -91,8 +91,7 @@
     "authorName": "pandur",
     "created": 1608589845823,
     "libs": [
-        "mp_camera_utils.js",
-        "mp_face.js"
+        "mp_camera_utils.js"
     ],
     "layout": {
         "portsIn": [
@@ -123,12 +122,9 @@
         ]
     },
     "summary": "Get face mesh from webcam/video using mediapipe library",
-    "issues": "",
-    "caniusequery": "",
     "relatedops": [
         "Ops.Libs.Mediapipe.FaceMesh"
     ],
-    "youtubeids": [],
     "exampleProjectId": "wznlp4",
     "docs": {
         "ports": [
@@ -142,5 +138,11 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./mp_face.js",
+            "type": "commonjs"
+        }
+    ]
 }
