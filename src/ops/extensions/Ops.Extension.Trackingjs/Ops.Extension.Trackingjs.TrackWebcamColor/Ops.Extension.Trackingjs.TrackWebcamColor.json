@@ -30,9 +30,6 @@
     ],
     "authorName": "pandur",
     "created": 1640086074317,
-    "libs": [
-        "tracking.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -81,12 +78,13 @@
         ]
     },
     "summary": "Track a position of a specific color in the current webcam stream",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
     "exampleProjectId": "vSwLsT",
-    "docs": {
-        "ports": []
-    },
-    "isReleased": true
+    "docs": {},
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./tracking.js",
+            "type": "commonjs"
+        }
+    ]
 }
