@@ -17,6 +17,7 @@ function remove()
 {
     if (!ele) return;
     ele.style.removeProperty("z-index");
+    outEle.setRef(ele);
 }
 
 function update()
@@ -36,5 +37,5 @@ function update()
         setTimeout(update, 50);
     }
 
-    outEle.setRef(inEle.get());
+    outEle.setRef(ele);
 }
