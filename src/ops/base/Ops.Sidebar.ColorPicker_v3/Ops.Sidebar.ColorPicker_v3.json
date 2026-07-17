@@ -154,10 +154,13 @@
             "date": 1773568725786
         }
     ],
-    "libs": [
-        "colorrick.js"
-    ],
     "exampleProjectId": "8-XQ5d",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./colorrick.js",
+            "type": "commonjs"
+        }
+    ]
 }
