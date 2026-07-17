@@ -93,16 +93,17 @@
             }
         ]
     },
-    "libs": [
-        "lottie_canvas.min.js"
-    ],
     "summary": "Play a Lottie animation in a texture",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "zW0RFn",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./lottie_canvas.min.js",
+            "type": "commonjs"
+        }
+    ]
 }
