@@ -317,6 +317,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1782814285312
+        },
+        {
+            "message": "Fixed bug where commands in palette where not bookmarkable anymore",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1783596975355
         }
     ],
     "isReleased": true,

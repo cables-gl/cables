@@ -182,7 +182,7 @@ function load()
         let errorLevel = 2;
         let errorText = "Unknown audio error";
 
-        const err = audio.error;
+        const err = audio ? audio.error : null;
         if (!err)
         {
             op.setUiError("onerror", errorText, 2);
