@@ -69,21 +69,22 @@
             }
         ]
     },
-    "libs": [
-        "fflate.js",
-        "exrloader.js"
-    ],
     "summary": "load .exr floating point texture files",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "zHxXMW",
     "license": "MIT",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./fflate.js",
+            "type": "commonjs"
+        },
+        {
+            "src": "./exrloader.js",
+            "type": "commonjs"
+        }
+    ]
 }
