@@ -38,14 +38,13 @@
         ]
     },
     "summary": "String representation of a date",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
-    "libs": [
-        "moment.js"
-    ],
+    "docs": {},
     "exampleProjectId": "mzfGGl",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./moment.js",
+            "type": "commonjs"
+        }
+    ]
 }
