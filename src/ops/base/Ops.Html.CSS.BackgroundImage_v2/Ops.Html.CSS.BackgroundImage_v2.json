@@ -66,6 +66,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1773060962960
+        },
+        {
+            "message": "Made it possible to change position without setting a background image (i.e. when added in css/elsewhere)",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1784300525871
         }
     ],
     "summary": "Load a background image and use css styling",
