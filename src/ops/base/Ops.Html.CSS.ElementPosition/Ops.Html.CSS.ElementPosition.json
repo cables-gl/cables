@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1767867921741
+        },
+        {
+            "message": "Removed unused ports for z-index, use Ops.Html.CSS.ElementZIndex",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1784298796701
         }
     ],
     "authorName": "pandur",
@@ -108,16 +114,6 @@
                     "Bottom"
                 ],
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Z Index Active",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Z Index",
-                "subType": "number"
             }
         ],
         "portsOut": [

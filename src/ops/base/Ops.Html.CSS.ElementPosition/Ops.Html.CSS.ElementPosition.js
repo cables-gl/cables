@@ -19,9 +19,6 @@ const
     inOriginX = op.inSwitch("Origin X", ["Left", "Center", "Right"]),
     inOriginY = op.inSwitch("Origin Y", ["Top", "Center", "Bottom"]),
 
-    inDoZ = op.inBool("Z Index Active", false),
-    inZ = op.inFloat("Z Index", 100),
-
     outEle = op.outObject("Passthrough", null, "element");
 
 op.setPortGroup("Element", [inEle]);
@@ -32,8 +29,7 @@ inOriginX.onChange =
     inTransX.onChange =
     inTransXR.onChange =
     inTransY.onChange =
-    inTransYB.onChange =
-    inZ.onChange = update;
+    inTransYB.onChange = update;
 
 let ele = null;
 let timeoutUpd = null;
@@ -44,8 +40,7 @@ inTransXU.onChange =
     inTransYBU.onChange =
 
 inDoTranslate.onChange =
-    inDoOrigin.onChange =
-    inDoZ.onChange = updateUi;
+    inDoOrigin.onChange = updateUi;
 
 updateUi();
 
