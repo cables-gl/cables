@@ -59,12 +59,6 @@ file ending: `.csv`
 
 convert csv to json
 
-### XML to json
-
-file ending: `.xml`
-
-convert xml to json
-
 ### MIDI to json
 
 file ending: `.mid`
@@ -93,7 +87,7 @@ file ending: `.dae`
 
 extract paths/splines from .dar/collada files
 
-### SDF Font 
+### SDF Font
 
 file ending: `.ttf`
 
@@ -104,4 +98,3 @@ convert `.ttf` to an SDF font format which consists of a .png and a .json instru
 file ending: '.png` , '.jpg`,`.jpeg`
 
 you can manually apply some simple operations to your image textures such as resizing to next power of two, convert png to jpg, compress png, or convert to webp
-
