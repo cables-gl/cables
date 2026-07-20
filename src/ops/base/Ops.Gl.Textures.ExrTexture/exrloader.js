@@ -2012,5 +2012,5 @@ class EXRLoader
     // }
 }
 
-
-CABLES.EXRLoader = EXRLoader;
+window.CABLES = window.CABLES || {};
+window.CABLES.EXRLoader = EXRLoader;
