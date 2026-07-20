@@ -17,9 +17,9 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             const dirent = arr[i];
             if (dirent.isDirectory() && !dirent.name.startsWith("."))
             {
-                const hasIndexJs = fs.existsSync(path.join(dirent.path, dirent.name, "index.js"));
-                const hasNamespaceJs = fs.existsSync(path.join(dirent.path, dirent.name, dirent.name + ".js"));
-                const isSubDir = dirent.path.endsWith(namespace);
+                const hasIndexJs = fs.existsSync(path.join(dirent.parentPath, dirent.name, "index.js"));
+                const hasNamespaceJs = fs.existsSync(path.join(dirent.parentPath, dirent.name, dirent.name + ".js"));
+                const isSubDir = dirent.parentPath.endsWith(namespace);
                 const isCoreLib = hasIndexJs || (hasNamespaceJs && !isSubDir);
                 if (isCoreLib)
                 {
