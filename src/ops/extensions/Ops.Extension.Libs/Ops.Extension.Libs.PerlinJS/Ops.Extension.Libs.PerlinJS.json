@@ -1,0 +1,27 @@
+{
+    "id": "6cbf7f00-451c-4b48-8725-caa34e9d199c",
+    "created": 1784561875131,
+    "license": "MIT",
+    "authorName": "stephan",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1784561875142
+        },
+        {
+            "message": "Libs.PerlinJS renamed to Ops.Extension.Libs.PerlinJS",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1784563336697
+        }
+    ],
+    "layout": {},
+    "dependencies": [
+        {
+            "src": "./perlin.js",
+            "type": "commonjs"
+        }
+    ]
+}

@@ -47,12 +47,7 @@
             }
         ]
     },
-    "libs": [
-        "perlin.js"
-    ],
     "summary": "Create an array filled with Perlin noise values",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -86,5 +81,11 @@
         ]
     },
     "exampleProjectId": "Vm8fhL",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "6cbf7f00-451c-4b48-8725-caa34e9d199c",
+            "type": "op"
+        }
+    ]
 }
