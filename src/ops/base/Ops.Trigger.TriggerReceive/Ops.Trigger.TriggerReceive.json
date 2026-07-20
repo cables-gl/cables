@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1725990424430
+        },
+        {
+            "message": "Added missing event to update dropdowns on namechange",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1784560285901
         }
     ],
     "authorName": "pandur",

@@ -43,6 +43,7 @@ op.varName.onChange = function ()
     oldName = op.varName.get();
     updateError();
     op.patch.emitEvent("opTriggerNameChanged", op, op.varName.get());
+    op.patch.emitEvent("namedTriggersChanged");
 };
 
 op.on("uiParamPanel", updateError);
