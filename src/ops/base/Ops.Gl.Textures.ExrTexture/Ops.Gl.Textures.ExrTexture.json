@@ -84,7 +84,8 @@
         },
         {
             "src": "./exrloader.js",
-            "type": "commonjs"
+            "type": "module",
+            "export": "EXR"
         }
     ]
 }

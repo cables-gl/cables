@@ -17,9 +17,9 @@ let
 const cgl = op.patch.cgl;
 
 inFlip.onChange =
-inFilter.onChange =
-inAlpha.onChange =
-inFile.onChange = reloadSoon;
+    inFilter.onChange =
+    inAlpha.onChange =
+    inFile.onChange = reloadSoon;
 
 function reloadSoon(nocache)
 {
@@ -31,10 +31,10 @@ function loadBin(addCacheBuster)
 {
     // if (!inActive.get()) return;
 
-    if (!loadingId)loadingId = op.patch.loading.start("exr" + inFile.get(), inFile.get(), op);
+    if (!loadingId) loadingId = op.patch.loading.start("exr" + inFile.get(), inFile.get(), op);
 
     let url = op.patch.getFilePath(String(inFile.get()));
-    if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
+    if (addCacheBuster) url += "?rnd=" + CABLES.generateUUID();
     finishedLoading = false;
     outLoading.set(true);
     const oReq = new XMLHttpRequest();
@@ -47,8 +47,8 @@ function loadBin(addCacheBuster)
         oReq.onload = (oEvent) =>
         {
             const arrayBuffer = oReq.response;
-            const l = new CABLES.EXRLoader();
-
+            const l = new EXR.EXRLoader();
+            console.log("L", l);
             try
             {
                 const p = l.parse(arrayBuffer);
@@ -61,7 +61,7 @@ function loadBin(addCacheBuster)
                         arr[i] = p.data[i];
 
                     if (inAlpha.get())
-                        for (let i = 3; i < arr.length; i += 4)arr[i] = 1;
+                        for (let i = 3; i < arr.length; i += 4) arr[i] = 1;
 
                     let channels = "";
                     for (let i = 0; i < p.header.channels.length; i++)
@@ -72,12 +72,14 @@ function loadBin(addCacheBuster)
                     let filter = CGL.Texture.FILTER_NEAREST;
                     if (inFilter.get() === "Linear") filter = CGL.Texture.FILTER_LINEAR;
 
-                    const tex = new CGL.Texture(cgl, {
-                        "name": "exr texture",
-                        "filter": filter,
-                        "wrap": filter,
-                        "flip": inFlip.get(),
-                        "isFloatingPointTexture": true });
+                    const tex = new CGL.Texture(cgl,
+                        {
+                            "name": "exr texture",
+                            "filter": filter,
+                            "wrap": filter,
+                            "flip": inFlip.get(),
+                            "isFloatingPointTexture": true
+                        });
 
                     tex.initFromData(arr, p.width, p.height, filter, filter);
                     outTex.set(tex);
