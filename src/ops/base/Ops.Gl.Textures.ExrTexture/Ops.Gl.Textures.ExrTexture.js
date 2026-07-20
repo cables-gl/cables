@@ -48,7 +48,6 @@ function loadBin(addCacheBuster)
         {
             const arrayBuffer = oReq.response;
             const l = new EXR.EXRLoader();
-            console.log("L", l);
             try
             {
                 const p = l.parse(arrayBuffer);
