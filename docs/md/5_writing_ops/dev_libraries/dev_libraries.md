@@ -21,7 +21,7 @@ Pick a type for your library. If unsure, read on [below](#librarytypes). You can
 ### From URL
 
 Pick any library from any source, your own server or a CDN (e.g. [jsDelivr](https://www.jsdelivr.com/) or [cdnjs](https://cdnjs.com/))
-and start using the functionality in your Op. 
+and start using the functionality in your Op.
 
 Pick a type for your library. If unsure, read on [below](#librarytypes).
 
@@ -33,11 +33,11 @@ This is a great way to quickly test libraries in cables, there are a few caveats
 
 ### From Npm (Standalone only)
 
-In the [standalone version](https://cables.gl/standalone) of cables you can add [npm packages](https://www.npmjs.com/) via this tab. 
+In the [standalone version](https://cables.gl/standalone) of cables you can add [npm packages](https://www.npmjs.com/) via this tab.
 Simply enter the name of the package (as you  would do when running `npm install`) and cables will try to install and load the npm.
 
-Be aware that the [NPM ecosystem](https://www.npmjs.com/) is shared between browsers and "backend systems" ([nodejs](https://nodejs.org/)) 
-and some packages cannot  be used by cables, at all. Other packages might be architecture dependent and will not work on all operating systems.
+Be aware that the [NPM ecosystem](https://www.npmjs.com/) is shared between browsers and "backend systems" ([nodejs](https://nodejs.org/))
+and some packages cannot be used by cables, at all. Other packages might be architecture dependent and will not work on all operating systems.
 You will have to consult the documentation of the module to find this kind of information.
 
 ### Op
@@ -53,7 +53,7 @@ ops will fail if/once the op is deleted and they will also not automatically upd
 
 Core-Libs are specific functions of the cables core that went into single modules, small libraries. Since we do not
 want to load a lot of code that is not needed for every patch, some ops use these libraries to enhance their functionality
-with features from cables core (lights, shadows and physics are some examples). 
+with features from cables core (lights, shadows and physics are some examples).
 
 Pick any core-lib from the list to give your Op the additional functionality.
 
@@ -65,9 +65,9 @@ Once you added a library to an op you can start using it right away. The list of
 to delete or download any custom library added.
 
 <a id="librarytypes"></a>
-## Library types
+## File types
 
-By picking the type of the library ("Common JS" or "JS Module") you tell cables how your library needs to be
+By picking the type of the file ("Common JS", "JS Module" or "Static Attachment") you tell cables how your file needs to be
 loaded (sadly you need to know this before, cables cannot guess this from the sourcecode).
 
 By picking "Common JS" your library will be loaded via adding `<script src="mysuperlib.js"/>` to the DOM and
@@ -76,6 +76,9 @@ to use that variable of the library in your Op (e.g. [handlebars](https://handle
 
 If you pick "JS Module" you will be able to define the name of the imported variable, your library will be loaded
 by calling `import * as YourName from "mysuperlib.js"` and you will then be able to use `YourName` in your Op.
+
+Pick "Static Attachment" to have the sourcecode of the uploaded file added to a variable `staticAttchments`encoded
+in base64. This is useful for binary parts of a library or WASM code (see below).
 
 #### How to best-guess the library type?
 
@@ -89,4 +92,52 @@ by calling `import * as YourName from "mysuperlib.js"` and you will then be able
 * * `export declarations may only appear at top level of a module` means you loaded a "JS Module" but have your type as "Common Js"
 * * loading a "Common JS" as a "JS Module" might work, but will not have the right contents in your `YourLib` variable and fail when using it
 
+### Static Attachment / WASM
 
+Files of type "Static Attachment" will be base64 encoded and added to the op in the variable `staticAttachments`. You can get back
+the binary representation by calling `const binary = atob(staticAttachments['my_attachment']);`. For performance reasons it's often a good idea to remove
+the base64 representation after usage/conversion by calling `delete staticAttachments['my_attachment']`;
+
+You can use a "Static Attachment" to work with [WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) modules in your cables Ops.
+
+We will create an op, following the example from [MSDN](https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Using_the_JavaScript_API)
+by uploading their `simple.wasm` and making the base64 encoded content available in the op as `staticAttachments['simple.wasm']`:
+
+Download [simple.wasm](https://raw.githubusercontent.com/mdn/webassembly-examples/master/js-api-examples/simple.wasm), upload it
+as a dependency (as described above) and pick "Static Attachment" as a type.
+
+Now, in the Op code, add this:
+```javascript
+// create data url from base64 wasm code, make sure the mime-type is "application/wasm"
+const simpleWasm = "data:application/wasm;base64," + staticAttachments['simple_wasm'];
+
+// define callable functions
+const importObject = {
+    "my_namespace": { "imported_func": (arg) => { return console.log(arg); } },
+};
+
+// fetch code from dataurl and instantiate wasm
+fetch(simpleWasm).then((g) =>
+{
+    WebAssembly.instantiateStreaming(g, importObject).then(
+        (obj) =>
+        {
+            // call wasm-function
+            obj.instance.exports.exported_func();
+
+            // free up memory after usage of attachment
+            delete staticAttachments['simple_wasm'];
+        }
+    );
+});
+```
+As stated in the example:
+
+"The net result of this is that we call our exported WebAssembly function exported_func, which in turn calls our imported JavaScript function imported_func, which logs the value provided inside the WebAssembly instance (42) to the console."
+
+#### WASM in libraries / best practices
+- Every library does the loading of WASM differently,
+- some libraries implement something like "locateFile" or "wasm" in their init process, this usually takes a dataurl and does the fetch part above for you
+- See [Ops.Gl.GLTF.GltfDracoCompression](https://cables.gl/op/Ops.Gl.GLTF.GltfDracoCompression_v2) for usage of WASM without using fetch (create Uint8Array from base64, and use additional wrapper)
+- See [Ops.Gl.GLTF.KtxCompression](https://cables.gl/op/Ops.Gl.GLTF.KtxCompression_v2) for usage for another way to feed WASM to a library (convert base64 back to binary)
+- Check your library documentation and sourcecode on how it expects wasm to be loaded/defined

@@ -4,13 +4,13 @@
 
 NPM stands for the [node package manager](https://www.npmjs.com/) and is a widely used tool to manage dependencies
 of applications developed in JavaScript. It also features access to a vast collection of libraries written in
-JavaScript that can (potentially) be used in cables standalone. 
+JavaScript that can (potentially) be used in cables standalone.
 
 ## Why NPM?
 
 Cables standalone in not being bound to the browser-sandbox anymore and has more direct access to features of
 the underlying operating system. This makes it possible to you a lot of the packages on [npmjs.com](https://www.npmjs.com/)
-in ops. Features like access to the [file system](https://cables.gl/ops/Ops.Extension.Standalone.Files), [network interfaces](https://cables.gl/ops/Ops.Extension.Standalone.Net), or [native binaries](https://cables.gl/op/Ops.Extension.Standalone.Ffmpeg) opens up a 
+in ops. Features like access to the [file system](https://cables.gl/ops/Ops.Extension.Standalone.Files), [network interfaces](https://cables.gl/ops/Ops.Extension.Standalone.Net), or [native binaries](https://cables.gl/op/Ops.Extension.Standalone.Ffmpeg) opens up a
 whole new set of possibilities to work with cables.
 
 ## How do I add a library to my Op?
@@ -75,7 +75,7 @@ const HfInference = hf.HfInference;
 
 ## Does cables standalone come with built-in libraries?
 
-Cables standalone comes with (at least) the native [nodejs libraries](https://github.com/nodejs/node/tree/v20.13.1/lib) of the node
+Cables standalone comes with (at least) the native [nodejs libraries](https://github.com/nodejs/node/tree/v24.18.0/lib) of the node
 version that was used to build it, this (currently) includes modules like `os`, `fs`, `path`, `http`, `net` and more...
 
 You can use these modules without adding them to the dependencies section in "Manage Op":

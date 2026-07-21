@@ -2,8 +2,7 @@
 
 Attachments are files that can be created and read as a string in the Op they are attached to.
 They can contain any kind of data that your op might need for working. Attachments are a good
-way to separate data from your opcode, add [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 
-or even work with [WASM](https://developer.mozilla.org/en-US/docs/WebAssembly) files.
+way to separate data from your opcode e.g. add [WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
 
 ## Add Attachment
 
@@ -94,40 +93,3 @@ Running this op (by saving the code), will print this in the dev-console, showin
 Received message from main thread: ECHO
 Received message from worker: ECHO
 ```
-
-### WASM
-
-You can use attachments to work with [WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) modules in your cables Ops.
-
-We will create an op, following the example from [MSDN](https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Using_the_JavaScript_API)
-by encoding their `simple.wasm` file to Base64 and storing that into an attachment called "wasm":
-
-```base64
-AGFzbQEAAAABCAJgAX8AYAAAAh4BDG15X25hbWVzcGFjZQ1pbXBvcnRlZF9mdW5jAAADAgEBBxEBDWV4cG9ydGVkX2Z1bmMAAQoIAQYAQSoQAAs=
-```
-
-Now, in the Op code, add this:
-```javascript
-// create data url from base64 wasm code
-const simpleWasm = "data:application/wasm;base64," + attachments.wasm;
-
-// define callable functions
-const importObject = {
-    "my_namespace": { "imported_func": (arg) => { return console.log(arg); } },
-};
-
-// fetch code from dataurl and instantiate wasm
-fetch(simpleWasm).then((g) =>
-{
-    WebAssembly.instantiateStreaming(g, importObject).then(
-        (obj) =>
-        {
-            // call wasm-function
-            obj.instance.exports.exported_func();
-        }
-    );
-});
-```
-As stated in the example:
-
-"The net result of this is that we call our exported WebAssembly function exported_func, which in turn calls our imported JavaScript function imported_func, which logs the value provided inside the WebAssembly instance (42) to the console."
