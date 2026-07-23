@@ -1,7 +1,7 @@
 const
     inExec = op.inTrigger("Render"),
     inNodeName = op.inString("Node Name"),
-    inSpace = inSwitch("Space", ["World", "Model"], "World"),
+    inSpace = op.inSwitch("Space", ["World", "Model"], "World"),
     next = op.outTrigger("Next"),
     inApply = op.inBool("Set Matrix", true),
     outFound = op.outBool("Found"),
