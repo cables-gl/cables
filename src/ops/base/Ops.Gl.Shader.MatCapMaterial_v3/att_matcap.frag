@@ -109,7 +109,7 @@ void main()
         normalFromMap = normalize(
             tangent * normalFromMap.x
             + binormal * normalFromMap.y
-            + normal * normalFromMap.z
+            + norm * normalFromMap.z
         );
 
         vec3 mixedNormal = normalize(norm + normalFromMap * normalMapIntensity);
