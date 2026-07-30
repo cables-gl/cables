@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name"),
+    inType = op.inString("Type", "vec4f"),
     inArr = op.inArray("Array"),
     next = op.outTrigger("Next"),
     buff = op.outObject("Buffer");
@@ -8,10 +9,11 @@ const
 let buffer = null;
 let reInit = true;
 
-inArr.onChange = () =>
-{
-    reInit = true;
-};
+inType.onChange =
+    inArr.onChange = () =>
+    {
+        reInit = true;
+    };
 
 exec.onTriggered = () =>
 {
@@ -25,11 +27,12 @@ exec.onTriggered = () =>
         {
             if (buffer) buffer.destroy();
 
-            buffer = mgpu.device.createBuffer({
-                "size": arr.byteLength,
-                "label": inName.get() + ",vec4f",
-                "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
-            });
+            buffer = mgpu.device.createBuffer(
+                {
+                    "size": arr.byteLength,
+                    "label": inName.get() + "," + inType.get(),
+                    "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
+                });
         }
         mgpu.device.queue.writeBuffer(buffer, 0, arr);
         buff.setRef(buffer);

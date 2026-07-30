@@ -34,8 +34,8 @@ inNum.onChange =
                 strides[i] = stride;
                 allStride += strides[i] || 0;
             }
-
         }
+        outArr.setUiAttribs({ "stride": allStride });
 
         for (let n = 0; n < num; n++)
         {
@@ -46,7 +46,6 @@ inNum.onChange =
                 for (let j = 0; j < strides[i]; j++)
                 {
                     arr[n * allStride + strCount + j] = a[n * strides[i] + j];
-
                 }
 
                 strCount += strides[i];
