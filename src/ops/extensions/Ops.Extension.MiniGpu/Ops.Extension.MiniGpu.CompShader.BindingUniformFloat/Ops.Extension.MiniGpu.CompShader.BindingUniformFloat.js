@@ -13,17 +13,18 @@ let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
 
 inName.onChange =
-inType.onChange =
-exec.onLinkChange = () =>
-{
-    binding = null;
-};
+    inType.onChange =
+    exec.onLinkChange = () =>
+    {
+        binding = null;
+    };
 
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
     {
+
         /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
 
@@ -35,14 +36,16 @@ exec.onTriggered = () =>
 
         const layout = {
             "visibility": mgpu.stage,
-            "buffer": {
-                "type": "uniform",
-            },
+            "buffer":
+            {
+                "type": "uniform"
+            }
         };
-        uniformBuffer = mgpu.device.createBuffer({
-            "size": uniformArray.byteLength,
-            "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
-        });
+        uniformBuffer = mgpu.device.createBuffer(
+            {
+                "size": uniformArray.byteLength,
+                "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+            });
 
         binding = {
             "header": "var<uniform> " + inName.get() + " : " + inType.get() + ";",

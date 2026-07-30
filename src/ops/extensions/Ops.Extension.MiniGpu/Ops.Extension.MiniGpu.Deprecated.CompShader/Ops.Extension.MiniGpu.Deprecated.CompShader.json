@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1766818539382
+        },
+        {
+            "message": "op Extension.MiniGpu.CompShader was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1785422281557
         }
     ],
     "layout": {

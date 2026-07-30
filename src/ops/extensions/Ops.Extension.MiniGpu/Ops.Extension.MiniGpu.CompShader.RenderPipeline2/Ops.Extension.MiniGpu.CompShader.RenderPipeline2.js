@@ -53,15 +53,17 @@ exec.onTriggered = () =>
 
         const o = {
 
-            "layout": mgpu.device.createPipelineLayout({
-                "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag],
-            }),
+            "layout": mgpu.device.createPipelineLayout(
+                {
+                    "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag]
+                }),
             "vertex": mgpu.shaderModules.vertex.shader.vertex,
             "fragment": mgpu.shaderModules.fragment.shader.fragment,
-            "primitive": {
-                "topology": "triangle-list",
+            "primitive":
+            {
+                "topology": "triangle-list"
                 // "topology": "point-list",
-            },
+            }
             // "depthStencil": {
             //     "depthWriteEnabled": true,
             //     "depthCompare": "less-equal",

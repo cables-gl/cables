@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1767016780129
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderModule renamed to Ops.Extension.MiniGpu.CompShader.Module",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422457795
         }
     ],
     "layout": {

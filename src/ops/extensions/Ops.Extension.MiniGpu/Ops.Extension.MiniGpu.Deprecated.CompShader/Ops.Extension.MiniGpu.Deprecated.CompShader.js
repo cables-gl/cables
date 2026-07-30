@@ -14,10 +14,10 @@ const binds = new CABLES.Stack();
 // let bindHead = "";
 
 inVert.onChange =
-inFrag.onChange = () =>
-{
-    s = null;
-};
+    inFrag.onChange = () =>
+    {
+        s = null;
+    };
 
 function genBindHeadSrc(stage, code)
 {
@@ -63,10 +63,12 @@ exec.onTriggered = () =>
         outVert.set(codeVert);
 
         s = {
-            "vertex": {
-                "module": mgpu.device.createShaderModule({
-                    "code": codeVert,
-                }),
+            "vertex":
+            {
+                "module": mgpu.device.createShaderModule(
+                    {
+                        "code": codeVert
+                    })
                 // "buffers": [
                 //     {
                 //         "arrayStride": 3 * 4,
@@ -81,17 +83,19 @@ exec.onTriggered = () =>
                 //     },
                 // ],
             },
-            "fragment": {
-                "module": mgpu.device.createShaderModule({
-                    "code": codeFrag,
-                }),
+            "fragment":
+            {
+                "module": mgpu.device.createShaderModule(
+                    {
+                        "code": codeFrag
+                    }),
                 "targets": [
                     {
-                        "format": mgpu.format,
-                    },
+                        "format": mgpu.format
+                    }
                 ],
-                "constants": mgpu.constants,
-            },
+                "constants": mgpu.constants
+            }
 
         };
     }

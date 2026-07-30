@@ -11,11 +11,11 @@ let buffer = null;
 let binding = null;
 
 inNum.onChange =
-inType.onChange =
-inName.onChange = () =>
-{
-    buffer = null;
-};
+    inType.onChange =
+    inName.onChange = () =>
+    {
+        buffer = null;
+    };
 
 exec.onTriggered = () =>
 {
@@ -23,22 +23,24 @@ exec.onTriggered = () =>
     if (!buffer)
     {
         console.log("create buffer", inNum.get());
-        buffer = mgpu.device.createBuffer({
-            "label": inName.get() + "," + inType.get(),
+        buffer = mgpu.device.createBuffer(
+            {
+                "label": inName.get() + "," + inType.get(),
 
-            //   label: 'compute-generated vertices',
-            "size": inNum.get() * 4 * 4,
-            // "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.VERTEX|GPUBufferUsage.,
-            "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
+                //   label: 'compute-generated vertices',
+                "size": inNum.get() * 4 * 4,
+                // "usage": GPUBufferUsage.STORAGE | GPUBufferUsage.VERTEX|GPUBufferUsage.,
+                "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
             // "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
             //  | BufferUsage.VERTEX
-        });
+            });
 
         const layout = {
             "visibility": GPUShaderStage.COMPUTE,
-            "buffer": {
-                "type": "storage",
-            },
+            "buffer":
+            {
+                "type": "storage"
+            }
         };
 
         const rndarr = [];

@@ -15,6 +15,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1767039477719
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderUniFloat renamed to Ops.Extension.MiniGpu.CompShader.BindingUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422361034
         }
     ],
     "layout": {

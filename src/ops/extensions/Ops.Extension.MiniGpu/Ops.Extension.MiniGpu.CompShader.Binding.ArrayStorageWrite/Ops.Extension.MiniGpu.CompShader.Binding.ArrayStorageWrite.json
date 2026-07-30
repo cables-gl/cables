@@ -1,6 +1,6 @@
 {
-    "id": "732ba10a-d0d9-47b9-802e-cbbe7201621d",
-    "created": 1766826216385,
+    "id": "e510b9cd-e5dc-4616-9acc-bd110168e049",
+    "created": 1766818286514,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -29,10 +29,10 @@
             "date": 1766826196027
         },
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "Extension.MiniGpu.CompShaderArrayBufferStorage renamed to Ops.Extension.MiniGpu.CompShader.Binding.ArrayStorageWrite",
+            "type": "rename",
             "author": "pandur",
-            "date": 1766826216385
+            "date": 1785422406942
         }
     ],
     "layout": {
@@ -42,17 +42,27 @@
                 "name": "Trigger"
             },
             {
-                "type": 2,
-                "name": "Buffer"
-            },
-            {
-                "type": 0,
-                "name": "InOut Buffers",
-                "subType": "boolean"
+                "type": 5,
+                "name": "Name"
             },
             {
                 "type": 5,
-                "name": "Name"
+                "name": "Type"
+            },
+            {
+                "type": 0,
+                "name": "Init index",
+                "values": [
+                    "0",
+                    "1",
+                    "R"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -62,7 +72,7 @@
             },
             {
                 "type": 2,
-                "name": "Out Buffer"
+                "name": "GpuBuffer"
             }
         ]
     },

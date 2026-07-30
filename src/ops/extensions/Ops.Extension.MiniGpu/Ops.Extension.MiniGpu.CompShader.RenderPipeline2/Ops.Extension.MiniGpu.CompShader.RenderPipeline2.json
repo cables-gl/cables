@@ -1,6 +1,6 @@
 {
-    "id": "0d434a4d-acf0-4caa-98ec-dce26fff69a4",
-    "created": 1766855636539,
+    "id": "d48853ac-d5b4-4c9c-9680-92e9eecf14fc",
+    "created": 1767016696486,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -26,7 +26,13 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1766855636540
+            "date": 1767016696486
+        },
+        {
+            "message": "Extension.MiniGpu.RenderPipeline2 renamed to Ops.Extension.MiniGpu.CompShader.RenderPipeline2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422516814
         }
     ],
     "layout": {
@@ -37,19 +43,20 @@
             },
             {
                 "type": 0,
-                "name": "Num",
+                "name": "Instances",
                 "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
-                "name": "childx"
+                "name": "Childs"
             }
         ]
     },
-    "coreLibs": [
-        "minigpu"
-    ],
     "isReleased": true
 }
