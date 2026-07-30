@@ -10,6 +10,9 @@ canvas.dataset.api = "webgpu";
 
 if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
 
+let fpsTime = 0;
+let frames = 0;
+
 /* minimalcore:end */
 
 let presentationFormat = null;
@@ -61,6 +64,14 @@ navigator.gpu.requestAdapter(
 
 function frame(timestamp)
 {
+
+    requestAnimationFrame(frame);
+
+    /* minimalcore:start */
+    const timeStart = performance.now();
+
+    /* minimalcore:end */
+
     const commandEncoder = device.createCommandEncoder();
     const textureView = context.getCurrentTexture().createView();
 
@@ -91,7 +102,17 @@ function frame(timestamp)
 
     device.queue.submit([commandEncoder.finish()]);
 
-    requestAnimationFrame(frame);
+    /* minimalcore:start */
+    canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
+    frames++;
+    if (performance.now() - fpsTime > 1000)
+    {
+        canvas.dataset.perffps = frames;
+        fpsTime = performance.now();
+        frames = 0;
+    }
+
+    /* minimalcore:end */
 }
 
 /* minimalcore:start */
