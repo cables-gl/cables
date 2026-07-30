@@ -59,11 +59,13 @@ if (ffmpeg)
     {
         op.setUiError("exc", null);
 
-        outBusy.set(true);
-        let fn = inFile.get();
-        fn = fn.replaceAll("%20", " ");
+        const srcFile = inFile.get().replaceAll("%20", " ");
+        if (/[;&|`$<>"\n\r]/.test(srcFile) || /[;&|`$<>"\n\r]/.test(inOutFile.get())) { op.setUiError("exc", "Invalid file path"); return; }
+        if (inTime.get() && (!/^[\d:.]+$/.test(inTimeStart.get()) || !/^[\d:.]+$/.test(inTimeDur.get()))) { op.setUiError("exc", "Invalid time value"); return; }
 
-        loadingId = op.patch.loading.start(op.objName, fn, op);
+        outBusy.set(true);
+
+        loadingId = op.patch.loading.start(op.objName, srcFile, op);
 
         try
         {
@@ -82,7 +84,7 @@ if (ffmpeg)
                 loadingId = op.patch.loading.finished(loadingId);
             });
 
-            ff.input(inFile.get());
+            ff.input(srcFile);
 
             if (inBitrate.get())
                 ff.videoBitrate(inBitrateStr.get(), inBitrateConst.get() == 1);
