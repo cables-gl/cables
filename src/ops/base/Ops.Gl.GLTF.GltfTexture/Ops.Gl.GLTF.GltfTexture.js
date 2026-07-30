@@ -65,9 +65,11 @@ inExec.onTriggered = function ()
     }
 
     const buffView = cgl.tempData.currentScene.json.bufferViews[img.bufferView];
-    let dv = cgl.tempData.currentScene.chunks[1].dataView;
+    const chunk = cgl.tempData.currentScene.chunks[1];
+    if (!buffView || !chunk) return;
 
-    if (!buffView) return;
+    let dv = chunk.dataView;
+
     const data = new Uint8Array(buffView.byteLength);
 
     for (let i = 0; i < buffView.byteLength; i++)
