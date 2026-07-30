@@ -13,6 +13,7 @@ const
     outFb = op.outObject("Framebuffer", null, "framebuffer"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
     depth = op.inValueBool("Depth", true),
+    inDepth = op.inObject("Depth Buffer", null, "framebuffer"),
     clear = op.inValueBool("Clear", true);
 
 const cgl = op.patch.cgl;
@@ -128,6 +129,18 @@ function doRender()
     }
 
     fb.renderStart(cgl);
+
+    if (inDepth.get())
+    {
+        cgl.gl.bindFramebuffer(cgl.gl.READ_FRAMEBUFFER, inDepth.get()._frameBuffer);
+
+        cgl.gl.blitFramebuffer(
+            0, 0, width.get(), height.get(), // src rect
+            0, 0, width.get(), height.get(), // dst rect
+            cgl.gl.DEPTH_BUFFER_BIT, // what to copy
+            cgl.gl.NEAREST // must be NEAREST for depth
+        );
+    }
 
     cgl.pushViewPort(0, 0, width.get(), height.get());
 
