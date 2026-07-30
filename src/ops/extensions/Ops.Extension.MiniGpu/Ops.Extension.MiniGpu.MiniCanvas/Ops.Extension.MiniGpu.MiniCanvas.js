@@ -8,7 +8,7 @@ canvas.classList.add("cablescontext");
 canvas.dataset.contextname = "minigpu";
 canvas.dataset.api = "webgpu";
 
-if (!op.patch.config.containerElement)console.error("patch options need containerElement for minigpu");
+if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
 
 /* minimalcore:end */
 
@@ -19,15 +19,17 @@ let pipeline = null;
 
 navigator.gpu.requestAdapter(
     {
-        "featureLevel": "compatibility",
+        "featureLevel": "compatibility"
     }).then(
     (adapter) =>
     {
-        adapter.requestDevice({
-            "requiredLimits": {
-                "maxStorageBuffersInVertexStage": 5, // request up to what's supported
-            },
-        }).then(
+        adapter.requestDevice(
+            {
+                "requiredLimits":
+            {
+                "maxStorageBuffersInVertexStage": 5 // request up to what's supported
+            }
+            }).then(
             (_device) =>
             {
                 device = _device;
@@ -42,12 +44,12 @@ navigator.gpu.requestAdapter(
                 canvas.height = canvas.clientHeight * devicePixelRatio;
                 presentationFormat = navigator.gpu.getPreferredCanvasFormat();
 
-                context.configure({
-                    device,
-                    "format": presentationFormat,
-                });
-                op.patch.frameStore.mgpu =
-                {
+                context.configure(
+                    {
+                        "device": device,
+                        "format": presentationFormat
+                    });
+                op.patch.frameStore.mgpu = {
                     "device": device,
                     "format": presentationFormat
 
@@ -68,9 +70,9 @@ function frame(timestamp)
                 "view": textureView,
                 "clearValue": [0, 0, 0, 1],
                 "loadOp": "clear",
-                "storeOp": "store",
-            },
-        ],
+                "storeOp": "store"
+            }
+        ]
     };
     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
 
@@ -78,8 +80,10 @@ function frame(timestamp)
     op.patch.frameStore.mgpu = {
         "shader": new CABLES.Stack(),
         "passEncoder": passEncoder,
+        "commandEncoder": commandEncoder,
         "device": device,
-        "format": presentationFormat };
+        "format": presentationFormat
+    };
 
     next.trigger();
 

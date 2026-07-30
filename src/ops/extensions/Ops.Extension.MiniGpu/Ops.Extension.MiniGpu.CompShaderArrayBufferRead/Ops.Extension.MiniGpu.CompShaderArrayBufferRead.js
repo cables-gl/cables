@@ -2,7 +2,9 @@ const
     exec = op.inTrigger("Trigger"),
     outO = op.inObject("Buffer"),
     inOut = op.inBool("InOut Buffers", false),
-    next = op.outTrigger("Next");
+    inName = op.inString("Name", ""),
+    next = op.outTrigger("Next"),
+    outBuff = op.outObject("Out Buffer");
 
 let buffer = null;
 let binding = null;
@@ -10,21 +12,34 @@ let binding = null;
 let bufferInOut = null;
 let bindingInOut = null;
 
-inOut.onChange = () =>
-{
-    buffer = null;
-};
+inName.onChange =
+    inOut.onChange = () =>
+    {
+        buffer = null;
+    };
 
 outO.onChange = () =>
 {
-    const newBuffer = outO.get();
-    if (newBuffer != buffer)
-        buffer = null; // when needed.........???
+    // const newBuffer = outO.get();
+    // if (newBuffer != buffer)
+    buffer = null; // when needed.........???
 };
 
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
+
+    if (inOut.get() && buffer && bufferInOut)
+    {
+        const encoder = mgpu.device.createCommandEncoder();
+        encoder.copyBufferToBuffer(bufferInOut, 0, buffer, 0, buffer.size);
+        // encoder.copyBufferToBuffer(buffer, bufferInOut);
+        // console.log("buff",buffer);
+        // encoder.finish();
+        const gpuCommands = encoder.finish();
+        mgpu.device.queue.submit([gpuCommands]);
+    }
+
     if (!buffer)
     {
         buffer = outO.get();
@@ -33,7 +48,7 @@ exec.onTriggered = () =>
         const p = (buffer.label || "").split(",");
 
         /* minimalcore:start */
-        op.setUiAttrib({ "extendTitle": p[0] + "<" + p[1] + ">" });
+        op.setUiAttrib({ "extendTitle": (inName.get() || p[0]) + "<" + p[1] + ">" });
 
         /* minimalcore:end */
 
@@ -46,7 +61,7 @@ exec.onTriggered = () =>
         };
 
         binding = {
-            "header": "var<storage,read> " + p[0] + " : array<" + p[1] + ">;",
+            "header": "var<storage,read> " + (inName.get() || p[0]) + " : array<" + p[1] + ">;",
             "resource": { "buffer": buffer },
             "layout": layout
         };
@@ -62,12 +77,20 @@ exec.onTriggered = () =>
                     "type": "storage"
                 }
             };
+            bufferInOut = mgpu.device.createBuffer(
+                {
+                    "size": buffer.size,
+                    "label": (inName.get() || p[0]) + "Out," + p[1],
+                    "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
+
+                });
 
             bindingInOut = {
-                "header": "var<storage,read_write> " + p[0] + "Out : array<" + p[1] + ">;",
-                "resource": { "buffer": buffer },
+                "header": "var<storage,read_write> " + (inName.get() || p[0]) + "Out : array<" + p[1] + ">;",
+                "resource": { "buffer": bufferInOut },
                 "layout": layout
             };
+            outBuff.setRef(bufferInOut);
         }
         else bindingInOut = null;
     }

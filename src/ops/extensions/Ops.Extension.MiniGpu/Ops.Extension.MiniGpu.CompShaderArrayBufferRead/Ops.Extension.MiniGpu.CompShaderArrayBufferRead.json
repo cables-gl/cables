@@ -49,12 +49,20 @@
                 "type": 0,
                 "name": "InOut Buffers",
                 "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Name"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Out Buffer"
             }
         ]
     },

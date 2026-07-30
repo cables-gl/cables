@@ -33,10 +33,11 @@ exec.onTriggered = () =>
         const o = {
             // "layout": "auto",
             // "layout": bindGroupLayout,
-            "layout": mgpu.device.createPipelineLayout({
-                "bindGroupLayouts": [bindGroupLayout],
-            }),
-            "compute": mgpu.shaderModules.compute.shader.compute,
+            "layout": mgpu.device.createPipelineLayout(
+                {
+                    "bindGroupLayouts": [bindGroupLayout]
+                }),
+            "compute": mgpu.shaderModules.compute.shader.compute
         };
 
         /// ////////////////////

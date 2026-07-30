@@ -28,6 +28,10 @@
             {
                 "type": 3,
                 "name": "Array"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
