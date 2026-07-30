@@ -1,12 +1,17 @@
 const
     inNum = op.inInt("Total Chunks", 0),
-    inFillWgsl = op.inBool("Fill WGSL 32bit", false),
+    inFillWgsl = op.inBool("Fill WGSL 32bit", true),
+    inName = op.inString("Name", "StructName"),
+    inNames = op.inString("MemberNames", "a,b,c,d"),
     inArrays = op.inMultiPort2("Arrays", CABLES.OP_PORT_TYPE_ARRAY),
     outArr = op.outArray("Result"),
-    outChunkSize = op.outNumber("Chunk Size");
+    outChunkSize = op.outNumber("Chunk Size"),
+    outStructString = op.outString("Struct Code");
 
 inFillWgsl.onChange =
     inNum.onChange =
+    inNames.onChange =
+    inName.onChange =
     inArrays.onChange = () =>
     {
         const arrayPorts = inArrays.get();
@@ -17,15 +22,16 @@ inFillWgsl.onChange =
         let allStride = 0;
         let hasError = false;
 
+        console.log("---");
         for (let i = 0; i < arrayPorts.length; i++)
         {
             const a = arrayPorts[i].get();
-            if (!a) continue;
+            if (!a)
+                return;
 
             const stride = a.length / num;
 
             /* minimalcore:start */
-
             if (stride % 1 != 0 || a.length != num * stride)
             {
                 allStride = 0;
@@ -43,10 +49,32 @@ inFillWgsl.onChange =
                 allStride += strides[i] || 0;
             }
         }
+        let structStr = "struct " + inName.get() + "\n{";
+
+        const names = inNames.get().split(",");
+
+        /* minimalcore:start */
+        if (names.length != strides.length) op.setUiError("namelength", "name length != array length");
+        else op.setUiError("namelength", null);
+
+        /* minimalcore:end */
+
+        for (let i = 0; i < names.length; i++)
+        {
+            structStr += "\n  " + names[i] + ": ";
+            if (strides[i])
+            {
+
+                if (strides[i] == 1) structStr += "f32";
+                else structStr += "vec" + strides[i] + "f";
+                structStr += ",";
+            }
+        }
+        outStructString.set(structStr + "\n}\n");
 
         if (inFillWgsl.get())
         {
-            fillChunk = Math.ceil(10 / 4) * 4 - allStride;
+            fillChunk = Math.ceil(allStride / 4) * 4 - allStride;
             allStride += fillChunk;
         }
 

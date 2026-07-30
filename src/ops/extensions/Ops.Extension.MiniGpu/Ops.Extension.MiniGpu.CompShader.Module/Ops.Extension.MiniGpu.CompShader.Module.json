@@ -40,6 +40,10 @@
                 "name": "Code"
             },
             {
+                "type": 5,
+                "name": "Code Prepend"
+            },
+            {
                 "type": 0,
                 "name": "Stage index",
                 "values": [

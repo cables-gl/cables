@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inCode = op.inStringEditor("Code", "", "glsl"),
+    inCodePre = op.inString("Code Prepend", ""),
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
     inReset = op.inTriggerButton("Reset"),
 
@@ -23,6 +24,7 @@ let hasError = false;
 
 inStage.onChange =
     inStage.onChange =
+    inCodePre.onChange =
     inCode.onChange = () =>
     {
 
@@ -34,6 +36,7 @@ inStage.onChange =
         hasError = false;
         reInit = true;
     };
+
 inReset.onTriggered = () =>
 {
     reInit = true;
@@ -54,7 +57,7 @@ function genBindHeadSrc()
     if (bhead != bindHead) reInit = true;
     bindHead = bhead;
 
-    let code = inCode.get();
+    let code = inCodePre.get() + inCode.get();
     code = code.replaceAll("{{BINDINGS}}", bhead);
     outCode.set(code);
     return code;
