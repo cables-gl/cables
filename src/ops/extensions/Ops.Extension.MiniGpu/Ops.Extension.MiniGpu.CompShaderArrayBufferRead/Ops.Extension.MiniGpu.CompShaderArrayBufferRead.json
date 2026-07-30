@@ -44,6 +44,11 @@
             {
                 "type": 2,
                 "name": "Buffer"
+            },
+            {
+                "type": 0,
+                "name": "InOut Buffers",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

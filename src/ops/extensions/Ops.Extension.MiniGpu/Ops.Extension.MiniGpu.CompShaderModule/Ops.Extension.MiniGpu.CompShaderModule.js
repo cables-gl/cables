@@ -22,16 +22,18 @@ let lastChange = 0;
 let hasError = false;
 
 inStage.onChange =
-inStage.onChange =
-inCode.onChange = () =>
-{
-    /* minimalcore:start */
-    op.setUiAttrib({ "extendTitle": inStage.get() });
-    /* minimalcore:end */
+    inStage.onChange =
+    inCode.onChange = () =>
+    {
 
-    hasError = false;
-    reInit = true;
-};
+        /* minimalcore:start */
+        op.setUiAttrib({ "extendTitle": inStage.get() });
+
+        /* minimalcore:end */
+
+        hasError = false;
+        reInit = true;
+    };
 inReset.onTriggered = () =>
 {
     reInit = true;
@@ -41,7 +43,7 @@ function genBindHeadSrc()
 {
     let bhead = "";
     let g = 0;
-    if (inStage.get() == "FRAGMENT")g = 1;
+    if (inStage.get() == "FRAGMENT") g = 1;
 
     for (let i = 0; i < binds.array().length; i++)
     {
@@ -68,13 +70,14 @@ exec.onTriggered = () =>
 
     next.trigger();
     mgpu.shader.pop();
-    if (o && o.bindings != mgpu.bindings)reInit = true;
+    if (o && o.bindings != mgpu.bindings) reInit = true;
 
     if (reInit || mgpu.rebuildShaderModule)
     {
         hasError = false;
-        s = { "layout": "auto", };
-        const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc(), });
+        s = { "layout": "auto" };
+        const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc() });
+
         /* minimalcore:start */
         module.getCompilationInfo().then((a) =>
         {
@@ -86,7 +89,7 @@ exec.onTriggered = () =>
                 {
                     console.log("mst", msg);
                     op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
-                    if (msg.type == "error")hasError = true;
+                    if (msg.type == "error") hasError = true;
                 }
             }
         });
@@ -94,12 +97,12 @@ exec.onTriggered = () =>
         /* minimalcore:end */
         s[inStage.get().toLowerCase()] = {
             "module": module,
-            "targets": [// only frag??
+            "targets": [ // only frag??
                 {
-                    "format": mgpu.format,
+                    "format": mgpu.format
                 }
             ],
-            "constants": mgpu.constants,
+            "constants": mgpu.constants
         };
 
         o = { "updated": performance.now(), "shader": s, "bindings": mgpu.bindings, "constants": [] };

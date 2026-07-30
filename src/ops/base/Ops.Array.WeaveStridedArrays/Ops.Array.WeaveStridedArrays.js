@@ -12,16 +12,20 @@ inFillWgsl.onChange =
         const arrayPorts = inArrays.get();
         const num = inNum.get();
         let arr = [];
+        let strides = [];
         let fillChunk = 0;
         let allStride = 0;
         let hasError = false;
-        let strides = [];
+
         for (let i = 0; i < arrayPorts.length; i++)
         {
             const a = arrayPorts[i].get();
             if (!a) continue;
 
             const stride = a.length / num;
+
+            /* minimalcore:start */
+
             if (stride % 1 != 0 || a.length != num * stride)
             {
                 allStride = 0;
@@ -30,6 +34,8 @@ inFillWgsl.onChange =
             }
             else
                 op.setUiError("arr" + i + "length", null);
+
+            /* minimalcore:end */
 
             if (!hasError)
             {
@@ -44,7 +50,10 @@ inFillWgsl.onChange =
             allStride += fillChunk;
         }
 
+        /* minimalcore:start */
         outArr.setUiAttribs({ "stride": allStride });
+
+        /* minimalcore:end */
 
         for (let n = 0; n < num; n++)
         {
