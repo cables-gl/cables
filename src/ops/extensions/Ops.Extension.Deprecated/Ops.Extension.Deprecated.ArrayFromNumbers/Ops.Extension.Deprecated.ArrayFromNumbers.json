@@ -7,9 +7,16 @@
             "date": 1620389407066
         },
         {
-            "message": "Ops.User.pandur.MyArrayFromNumbers renamed to Ops.Array.ArrayFromNumbers",
+            "message": "use NumbersToArray",
+            "type": "deprecation",
             "author": "pandur",
-            "date": 1620389789245
+            "date": 1785392126540
+        },
+        {
+            "message": "op Array.ArrayFromNumbers was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1785392159389
         }
     ],
     "authorName": "pandur",

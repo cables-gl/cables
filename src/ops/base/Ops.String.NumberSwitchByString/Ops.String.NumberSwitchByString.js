@@ -11,7 +11,9 @@ for (let i = 0; i < numberStrings.length; i++)
 {
     const idx = i + 1;
     const istr = op.inString("String " + idx, numberStrings[i]);
+    istr.onChange = update;
     const inum = op.inFloat("Number " + idx, idx);
+    inum.onChange = update;
 
     strings.push(istr);
     numbers.push(inum);
@@ -20,9 +22,10 @@ for (let i = 0; i < numberStrings.length; i++)
 function update()
 {
     const s = inStr.get();
+    outNum.set(0);
 
     for (let i = 0; i < numberStrings.length; i++)
     {
-        if (strings[i].get() == s)outNum.set(numbers[i].get());
+        if (strings[i].get() == s) outNum.set(numbers[i].get());
     }
 }

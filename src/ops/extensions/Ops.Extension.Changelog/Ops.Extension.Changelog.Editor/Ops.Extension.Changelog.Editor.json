@@ -323,6 +323,18 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1783596975355
+        },
+        {
+            "message": "Unified and improved handling of attachments and other dependencies in manage op tab",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1784296448405
+        },
+        {
+            "message": "much better support of scrolling and pinch/zoom with touchpad (macbook)",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1785221506003
         }
     ],
     "isReleased": true,

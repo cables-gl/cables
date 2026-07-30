@@ -31,5 +31,6 @@
         "standalone_electron"
     ],
     "summary": "Close cables standalone on trigger",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "qKH02q"
 }

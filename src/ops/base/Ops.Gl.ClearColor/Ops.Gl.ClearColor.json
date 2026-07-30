@@ -8,6 +8,11 @@
             },
             {
                 "type": 0,
+                "name": "Clear Depth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "r",
                 "subType": "number"
             },
@@ -84,5 +89,13 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Added toggle to disable depth buffer clear",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1785402669959
+        }
+    ]
 }

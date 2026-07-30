@@ -197,6 +197,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1707747669663
+        },
+        {
+            "message": "Added DepthBuffer framebuffer input port, to reuse an existing depth buffer",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1785402414422
         }
     ],
     "issues": "requires WebGL2",

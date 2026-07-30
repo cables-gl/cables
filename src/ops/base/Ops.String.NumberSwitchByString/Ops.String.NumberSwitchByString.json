@@ -126,5 +126,6 @@
         "ports": []
     },
     "exampleProjectId": "CWSBeE",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }
