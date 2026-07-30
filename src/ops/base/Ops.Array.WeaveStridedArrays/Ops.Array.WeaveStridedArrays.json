@@ -25,6 +25,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Fill WGSL 32bit",
+                "subType": "boolean"
+            },
+            {
                 "type": 3,
                 "name": "Arrays_0",
                 "longPort": 4,

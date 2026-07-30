@@ -1,24 +1,26 @@
 const
     inNum = op.inInt("Total Chunks", 0),
+    inFillWgsl = op.inBool("Fill WGSL 32bit", false),
     inArrays = op.inMultiPort2("Arrays", CABLES.OP_PORT_TYPE_ARRAY),
     outArr = op.outArray("Result"),
     outChunkSize = op.outNumber("Chunk Size");
 
-inNum.onChange =
+inFillWgsl.onChange =
+    inNum.onChange =
     inArrays.onChange = () =>
     {
         const arrayPorts = inArrays.get();
-        let arr = [];
         const num = inNum.get();
-
+        let arr = [];
+        let fillChunk = 0;
         let allStride = 0;
         let hasError = false;
         let strides = [];
         for (let i = 0; i < arrayPorts.length; i++)
         {
             const a = arrayPorts[i].get();
-
             if (!a) continue;
+
             const stride = a.length / num;
             if (stride % 1 != 0 || a.length != num * stride)
             {
@@ -35,6 +37,13 @@ inNum.onChange =
                 allStride += strides[i] || 0;
             }
         }
+
+        if (inFillWgsl.get())
+        {
+            fillChunk = Math.ceil(10 / 4) * 4 - allStride;
+            allStride += fillChunk;
+        }
+
         outArr.setUiAttribs({ "stride": allStride });
 
         for (let n = 0; n < num; n++)
@@ -43,10 +52,12 @@ inNum.onChange =
             for (let i = 0; i < arrayPorts.length; i++)
             {
                 const a = arrayPorts[i].get();
+                if (!a) continue;
                 for (let j = 0; j < strides[i]; j++)
-                {
                     arr[n * allStride + strCount + j] = a[n * strides[i] + j];
-                }
+
+                for (let j = 0; j < fillChunk; j++)
+                    arr[n * allStride + strCount + strides[i] + j] = -1;
 
                 strCount += strides[i];
             }
