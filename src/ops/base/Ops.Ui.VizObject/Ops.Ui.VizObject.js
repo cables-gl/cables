@@ -273,6 +273,7 @@ inSearch.onChange =
 
         searchLine = 0;
         inSearchNext.setUiAttribs({ "title": "next " + searchLine + "/" + hlLines.length });
+        outObj.setRef(inObj.get());
     };
 
 inObj.onLinkChanged = () =>
