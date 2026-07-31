@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "stephan",
             "date": 1770111678838
+        },
+        {
+            "message": "Cache elements of last query to not update on every change",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785498249275
         }
     ],
     "authorName": "stephan",
