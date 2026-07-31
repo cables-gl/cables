@@ -1,0 +1,50 @@
+{
+    "id": "79ef3dc6-bb2d-4774-97f5-2dc1508bdd72",
+    "created": 1785505341938,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766822305990
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767039477719
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderUniFloat renamed to Ops.Extension.MiniGpu.CompShader.BindingUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422361034
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1785505341938
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

@@ -89,6 +89,9 @@ function frame(timestamp)
 
     if (!presentationFormat) return;
     op.patch.frameStore.mgpu = {
+        "matModel": new CABLES.Stack(MGPU.mm.identity()),
+        "matView": new CABLES.Stack(MGPU.mm.identity()),
+        "matProj": new CABLES.Stack(MGPU.mm.perspective(45 * Math.PI / 180, canvas.clientWidth / canvas.clientHeight, 0.1, 100)),
         "shader": new CABLES.Stack(),
         "passEncoder": passEncoder,
         "commandEncoder": commandEncoder,
@@ -97,6 +100,7 @@ function frame(timestamp)
     };
 
     next.trigger();
+    // console.log(canvas.clientWidth, canvas.clientHeight); c
 
     passEncoder.end();
 

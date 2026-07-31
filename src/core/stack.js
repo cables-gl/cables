@@ -2,6 +2,11 @@ export class Stack
 {
     #arr = [];
 
+    constructor(a)
+    {
+        if (a) this.push(a);
+    }
+
     /**
      * @param {any} a
      */

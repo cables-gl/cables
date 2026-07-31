@@ -46,7 +46,7 @@
             {
                 "type": 3,
                 "name": "Arrays_0",
-                "longPort": 7,
+                "longPort": 8,
                 "group": "Arrays"
             },
             {
@@ -77,6 +77,11 @@
             {
                 "type": 3,
                 "name": "Arrays_6",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_7",
                 "uititle": "add port",
                 "group": "Arrays"
             }

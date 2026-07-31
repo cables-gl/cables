@@ -1,7 +1,5 @@
 const
     exec = op.inTrigger("Trigger"),
-    // inShaderFrag = op.inObject("Frag"),
-    // inShaderVert = op.inObject("Vert"),
     inInstances = op.inInt("Instances", 100),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Childs");
@@ -61,8 +59,11 @@ exec.onTriggered = () =>
             "fragment": mgpu.shaderModules.fragment.shader.fragment,
             "primitive":
             {
-                "topology": "triangle-list"
+                "topology": "triangle-list",
                 // "topology": "point-list",
+                // "topology": "line-list",
+                "cullMode": "none"
+
             }
             // "depthStencil": {
             //     "depthWriteEnabled": true,

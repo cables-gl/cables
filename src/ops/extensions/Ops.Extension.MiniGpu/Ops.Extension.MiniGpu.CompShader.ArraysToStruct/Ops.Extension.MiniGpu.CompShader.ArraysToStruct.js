@@ -22,7 +22,6 @@ inFillWgsl.onChange =
         let allStride = 0;
         let hasError = false;
 
-        console.log("---");
         for (let i = 0; i < arrayPorts.length; i++)
         {
             const a = arrayPorts[i].get();
