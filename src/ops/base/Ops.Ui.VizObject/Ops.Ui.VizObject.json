@@ -66,6 +66,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1773769034285
+        },
+        {
+            "message": "Fixed object passtrough not being called on update",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1785497255358
         }
     ],
     "authorName": "pandur",

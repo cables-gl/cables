@@ -11,7 +11,9 @@ op.toWorkPortsNeedsString(inQuery);
 
 inUpdate.onTriggered = () => { update(true); };
 inElement.onChange =
-inQuery.onChange = () => { update(false); };
+    inQuery.onChange = () => { update(false); };
+
+let oldEles = [];
 
 function update(force = false)
 {
@@ -39,10 +41,24 @@ function update(force = false)
             elements = Array.from(els);
             if (elements && elements.length > 0) firstElement = elements[0];
         }
+
+        if (!force)
+        {
+            if (elements && oldEles && elements.length != 0 && oldEles.length === elements.length)
+            {
+                let foundDiff = false;
+                for (let i = 0; i < elements.length; i++)
+                {
+                    if (elements[i] != oldEles[i]) foundDiff = true;
+                }
+                if (!foundDiff) return;
+            }
+        }
         outAll.setRef(elements);
         outFirst.setRef(firstElement);
         found = elements && elements.length > 0;
         outFound.set(elements.length > 0);
+        oldEles = elements;
     }
     catch (e)
     {
