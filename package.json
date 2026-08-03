@@ -12,7 +12,7 @@
     "main": "src/core/index.js",
     "type": "module",
     "engines": {
-        "node": "20.13.1"
+        "node": "24.18.1"
     },
     "dependencies": {
         "@webgpu/types": "0.1.53",
@@ -41,5 +41,9 @@
         "type": "git",
         "url": "git@github.com:cables-gl/cables.git"
     },
-    "author": ""
+    "author": "",
+    "allowScripts": {
+        "core-js@2.6.12": true,
+        "fsevents@2.3.3": true
+    }
 }
