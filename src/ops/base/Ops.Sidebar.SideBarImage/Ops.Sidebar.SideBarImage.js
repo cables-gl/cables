@@ -1,6 +1,6 @@
 const
     parentPort = op.inObject("link"),
-    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
+    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"], ""),
     siblingsPort = op.outObject("childs"),
     outImage = op.outObject("Image Element", null, "element");
 
@@ -16,7 +16,8 @@ label.appendChild(labelText);
 el.appendChild(label);
 let imageEle = null;
 parentPort.onChange = onParentChanged;
-filename.onChange = onFilenameChanged;
+filename.onLinkChange =
+    filename.onChange = onFilenameChanged;
 op.onDelete = onDelete;
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
@@ -27,16 +28,16 @@ function onFilenameChanged()
     if (!fileUrl)
     {
         label.innerHTML = "";
+        console.log("no fileurl");
         return;
     }
 
+    console.log("file", filename.get());
     if (!imageEle)
     {
         let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
         if (base64regex.test(fileUrl))
-        {
             fileUrl = "data:image;base64," + fileUrl;
-        }
 
         label.innerHTML = "<img style=\"max-width:100%\"/>";
         imageEle = label.children[0];

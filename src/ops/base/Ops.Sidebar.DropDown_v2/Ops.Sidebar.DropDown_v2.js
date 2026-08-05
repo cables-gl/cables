@@ -130,10 +130,11 @@ function onValuesPortChange()
 
     outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
-    if (!defaultValue && options && options.length)valuePort.set(options[0]);
+    if (!defaultValue && options && options.length) valuePort.set(options[0]);
 }
 
 let finalIndex = 0;
+
 function setSelectedProperty(defaultinput)
 {
     const optionElements = input.querySelectorAll("option");
@@ -166,6 +167,7 @@ function setSelectedProperty(defaultinput)
     }
 
     if (finalEle) finalEle.setAttribute("selected", "");
+
     outIndex.set(finalIndex);
 }
 
@@ -175,7 +177,7 @@ function onInput(ev)
     const optionElements = input.querySelectorAll("option");
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.selected)selectedValues.push(optionElement.value);
+        if (optionElement.selected) selectedValues.push(optionElement.value);
     });
 
     outValues.set(selectedValues);
