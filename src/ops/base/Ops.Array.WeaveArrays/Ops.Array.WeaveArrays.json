@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "Weave two arrays together (combine, join, merge)",
+    "summary": "weave/interleave two input arrays into one combined array",
     "docs": {
         "ports": [
             {

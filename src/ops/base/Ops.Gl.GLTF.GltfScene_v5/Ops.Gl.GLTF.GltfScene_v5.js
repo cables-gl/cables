@@ -232,8 +232,9 @@ inExec.onTriggered = function ()
         }
     }
 
-    cgl.popModelMatrix();
     next.trigger();
+
+    cgl.popModelMatrix();
     cgl.tempData.currentScene = oldScene;
 
     if (cam) cam.end();

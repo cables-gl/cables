@@ -357,6 +357,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1782200415477
+        },
+        {
+            "message": "Fixed bug with camera animation being off by one frame in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1785872428317
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

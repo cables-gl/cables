@@ -69,6 +69,18 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1777881236301
+        },
+        {
+            "message": "Updated electron version to 43.2.0",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785918384276
+        },
+        {
+            "message": "Add cmd/ctrl-0 shortcut to reset zoom",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785918522712
         }
     ],
     "isReleased": true,
