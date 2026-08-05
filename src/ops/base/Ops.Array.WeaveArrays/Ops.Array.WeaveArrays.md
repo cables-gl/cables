@@ -1,0 +1,2 @@
+- With chunk size 1, it alternates element-by-element: [a1, b1, a2, b2, a3, b3, ...].
+- With a larger chunk size, it takes that many elements from Array 1, then that many from Array 2, then repeats — e.g. chunk size 2: [a1, a2, b1, b2, a3, a4, b3, b4, ...].
