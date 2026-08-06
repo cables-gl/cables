@@ -1249,14 +1249,16 @@ class CglShader extends CgShader
                 // err.line = parseInt(String(parts[1]).trim());
                 err.message = lines[i];
 
-                console.log("error", err);
+                // console.log("error", err);
                 arr.push(err);
             }
             else
             {
 
-                console.log("unknown error ?parts", parts);
+                // console.log("unknown error ?parts", parts);
                 err.message = str;
+
+                arr.push(err);
             }
         }
     }

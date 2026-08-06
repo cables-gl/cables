@@ -32,9 +32,6 @@ vertexShader.set(CGL.Shader.getDefaultVertexShader());
 fragmentShader.onChange = vertexShader.onChange = function ()
 {
     if (fragmentShader.isLinked() && !fragmentShader.get()) return;
-    console.log("shader", shader);
-    fragmentShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
-    vertexShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
     needsUpdate = true;
 };
 
@@ -368,6 +365,8 @@ function updateShader()
 
     shader.compile();
     shader.bind();
+    fragmentShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
+    vertexShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
 
     op.refreshParams();
 
