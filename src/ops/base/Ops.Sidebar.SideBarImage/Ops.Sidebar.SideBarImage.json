@@ -23,6 +23,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1733143177809
+        },
+        {
+            "message": "fixed bug with image not added to sidebar in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1785946640881
         }
     ],
     "authorName": "pandur",

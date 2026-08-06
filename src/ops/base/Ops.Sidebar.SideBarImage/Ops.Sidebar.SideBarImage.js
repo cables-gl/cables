@@ -32,20 +32,17 @@ function onFilenameChanged()
         return;
     }
 
-    console.log("file", filename.get());
-    if (!imageEle)
-    {
-        let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-        if (base64regex.test(fileUrl))
-            fileUrl = "data:image;base64," + fileUrl;
+    let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    if (base64regex.test(fileUrl))
+        fileUrl = "data:image;base64," + fileUrl;
 
-        label.innerHTML = "<img style=\"max-width:100%\"/>";
-        imageEle = label.children[0];
-        outImage.setRef(imageEle);
-    }
+    label.innerHTML = "<img style=\"max-width:100%\"/>";
 
+    imageEle = label.children[0];
+    outImage.setRef(imageEle);
     imageEle.setAttribute("src", fileUrl);
     imageEle.style.minWidth = "50%";
+
 }
 
 function onParentChanged()

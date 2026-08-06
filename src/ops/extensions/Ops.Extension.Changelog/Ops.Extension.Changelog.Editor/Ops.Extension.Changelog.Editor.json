@@ -335,6 +335,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1785221506003
+        },
+        {
+            "message": "Reworked table for op dependencies and attachments in manage op tab",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785946676474
+        },
+        {
+            "message": "Added a new diagnostics panel below text editor, to show errors about the current source code/port input depending on type etc",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1786012817178
         }
     ],
     "isReleased": true,
