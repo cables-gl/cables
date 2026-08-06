@@ -1230,10 +1230,10 @@ class CglShader extends CgShader
 
     /**
      * @param {string} str
+     * @param {import("../../../../cables_ui/src/ui/api/opsserver.js").LinterDiag[]} arr
      */
     parseErrorMsgToDiag(arr, str)
     {
-        console.log("str", str);
         const lines = str.split("\n");
 
         for (let i = 0; i < lines.length; i++)
@@ -1245,20 +1245,18 @@ class CglShader extends CgShader
 
             if (parts[0] == "ERROR")
             {
-                // err.column = parseInt(String(parts[2]).trim());
-                // err.line = parseInt(String(parts[1]).trim());
                 err.message = lines[i];
-
-                // console.log("error", err);
                 arr.push(err);
             }
             else
             {
 
-                // console.log("unknown error ?parts", parts);
-                err.message = str;
-
-                arr.push(err);
+                if (lines[i].length > 1)
+                {
+                    err.message = lines[i];
+                    arr.push(err);
+                }
+                else console.log("unknown error ?parts", parts);
             }
         }
     }

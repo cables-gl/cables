@@ -25,6 +25,7 @@ import { Op } from "./core_op.js";
  * @property  {Boolean} [expose] internal: do not set manually
  * @property  {String} [increment] internal: do not set manually
  * @property  {PortUiAttribsDisplay} display internal: do not set manually
+ * @property  {import("../../../cables_ui/src/ui/api/opsserver.js").LinterDiag[]} [editorDiagnostics] diagnostics
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
  * @property  {String} [objType] internal: do not set manually
