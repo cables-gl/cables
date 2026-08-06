@@ -19,6 +19,7 @@ let presentationFormat = null;
 let device = null;
 let context = null;
 let pipeline = null;
+let depthTexture = null;
 
 navigator.gpu.requestAdapter(
     {
@@ -41,7 +42,6 @@ navigator.gpu.requestAdapter(
                 canvas.style.height = "100%";
 
                 context = canvas.getContext("webgpu");
-
                 const devicePixelRatio = window.devicePixelRatio;
                 canvas.width = canvas.clientWidth * devicePixelRatio;
                 canvas.height = canvas.clientHeight * devicePixelRatio;
@@ -75,6 +75,16 @@ function frame(timestamp)
     const commandEncoder = device.createCommandEncoder();
     const textureView = context.getCurrentTexture().createView();
 
+    if (!depthTexture)
+    {
+        depthTexture = device.createTexture(
+            {
+                "size": [canvas.width, canvas.height],
+                "format": "depth24plus",
+                "usage": GPUTextureUsage.RENDER_ATTACHMENT
+            });
+
+    }
     const renderPassDescriptor = {
         "colorAttachments": [
             {
@@ -83,7 +93,14 @@ function frame(timestamp)
                 "loadOp": "clear",
                 "storeOp": "store"
             }
-        ]
+        ],
+        "depthStencilAttachment":
+        {
+            "view": depthTexture.createView(),
+            "depthClearValue": 1.0,
+            "depthLoadOp": "clear",
+            "depthStoreOp": "store"
+        }
     };
     const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
 

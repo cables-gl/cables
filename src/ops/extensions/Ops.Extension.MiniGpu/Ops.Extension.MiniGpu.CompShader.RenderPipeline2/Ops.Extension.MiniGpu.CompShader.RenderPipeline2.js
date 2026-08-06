@@ -2,6 +2,8 @@ const
     exec = op.inTrigger("Trigger"),
     inVerts = op.inInt("Vertices", 6),
     inInstances = op.inInt("Instances", 1),
+    topology = op.inSwitch("topology", ["triangle-list", "point-list", "line-list"], "triangle-list"),
+    cull = op.inSwitch("cull", ["back", "front"], "back"),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Childs");
 
@@ -14,10 +16,12 @@ let bindGroupVert = null;
 let updatedFrag = 0;
 let updatedVert = 0;
 
-inReset.onTriggered = () =>
-{
-    pipe = null;
-};
+cull.onChange =
+    topology.onChange =
+    inReset.onTriggered = () =>
+    {
+        pipe = null;
+    };
 
 // inShaderFrag.onChange = () =>
 // {
@@ -60,16 +64,15 @@ exec.onTriggered = () =>
             "fragment": mgpu.shaderModules.fragment.shader.fragment,
             "primitive":
             {
-                "topology": "triangle-list",
-                // "topology": "point-list",
-                // "topology": "line-list",
-                "cullMode": "none"
+                "topology": topology.get(),
+                "cullMode": cull.get()
+            },
+            "depthStencil":
+            {
+                "depthWriteEnabled": true,
+                "depthCompare": "less-equal",
+                "format": "depth24plus"
             }
-            // "depthStencil": {
-            //     "depthWriteEnabled": true,
-            //     "depthCompare": "less-equal",
-            //     "format": "depth24plus"
-            // }
         };
         bindGroupFrag = MGPU.createBindGroup(mgpu, bindsFrag, bindGroupLayoutFrag);
         bindGroupVert = MGPU.createBindGroup(mgpu, bindsVert, bindGroupLayoutVert);

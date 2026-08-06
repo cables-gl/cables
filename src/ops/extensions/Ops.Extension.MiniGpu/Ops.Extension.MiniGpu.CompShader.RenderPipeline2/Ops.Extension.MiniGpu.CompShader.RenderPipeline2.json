@@ -52,6 +52,25 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "topology index",
+                "values": [
+                    "triangle-list",
+                    "point-list",
+                    "line-list"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "cull index",
+                "values": [
+                    "back",
+                    "front"
+                ],
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }
