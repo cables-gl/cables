@@ -12,6 +12,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1741604106330
+        },
+        {
+            "message": "Show parse errors in editor diagnostic panel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1786012641749
+        },
+        {
+            "message": "Show shader parse/compile errors in editor diagnostic panel",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1786012671209
         }
     ],
     "authorName": "pandur",

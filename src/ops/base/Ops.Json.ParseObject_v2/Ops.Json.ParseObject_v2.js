@@ -8,6 +8,8 @@ parse();
 
 function parse()
 {
+    str.setUiAttribs({ "editorDiagnostics": [] });
+
     if (!str.get())
     {
         outObj.set(null);
@@ -39,6 +41,12 @@ function parse()
                 outStr = "<span style=\"font-family:monospace;background-color:black;\">" + outStrA + "<span style=\"font-weight:bold;background-color:red;\">" + outStrB + "</span>" + outStrC + " </span>";
             }
         }
+
+        console.log("ex", ex);
+        str.setUiAttribs(
+            {
+                "editorDiagnostics": [{ "message": ex.message, "line": -1, "column": -1, "severity": 2, "fatal": true }]
+            });
 
         op.setUiError("invalidjson", "INVALID JSON<br/>can not parse string to object:<br/><b> " + ex.message + "</b><br/>" + outStr);
     }
