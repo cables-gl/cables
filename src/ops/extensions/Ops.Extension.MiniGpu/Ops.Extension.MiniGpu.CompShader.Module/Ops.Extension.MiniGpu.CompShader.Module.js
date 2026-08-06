@@ -66,7 +66,6 @@ function genBindHeadSrc()
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    // if (hasError) return;
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
     mgpu.bindings = binds.clear();
@@ -91,17 +90,13 @@ exec.onTriggered = () =>
                 const msg = a.messages[i];
                 if (msg)
                 {
-
                     diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": -1, "column": -1, "severity": 2, "fatal": true });
 
                     op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
                     if (msg.type == "error") hasError = true;
                 }
             }
-            inCode.setUiAttribs(
-                {
-                    "editorDiagnostics": diags
-                });
+            inCode.setUiAttribs({ "editorDiagnostics": diags });
 
         });
 

@@ -1755,7 +1755,7 @@ export class Op extends Events
     {
         const a = { "_txt": _txt };
         // overwritten in ui: core_extend_op
-        if (_level >= 2)showUiErrors(this, _id, _txt, _level, _options);
+        if (_level >= 3)showUiErrors(this, _id, _txt, _level, _options);
     }
 
     /**

@@ -26,6 +26,8 @@ exec.onTriggered = () =>
     {
 
         /* minimalcore:start */
+        inX.setUiAttribs({ "colorPick": true });
+
         op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
 
         inY.setUiAttribs({ "greyout": inType.get() != "vec4f" });

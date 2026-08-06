@@ -13,7 +13,7 @@ export const BLENDS = {
     "BLEND_NORMAL": 1,
     "BLEND_ADD": 2,
     "BLEND_SUB": 3,
-    "BLEND_MUL": 4,
+    "BLEND_MUL": 4
 };
 
 /**
@@ -174,7 +174,11 @@ export class CglContext extends CgContext
         if (!this.gl || this.gl.isContextLost())
         {
             this.aborted = true;
-            this._log.warn("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
+            const msg = "Could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.";
+            this._log.warn("NO_WEBGL", msg);
+            CABLES.showUiErrors({ "id": 1, "name": "CGL" }, "nogl", msg, 3);
+            // throw (new Error(msg));
+
             return;
         }
 

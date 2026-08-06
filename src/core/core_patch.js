@@ -131,7 +131,7 @@ export class Patch extends Events
             "onFinishedLoading": null,
             "onFirstFrameRendered": null,
             "onPatchLoaded": null,
-            "fpsLimit": 0,
+            "fpsLimit": 0
 
         };
 
@@ -1371,7 +1371,7 @@ export class Patch extends Events
             return;
         }
         console.groupCollapsed( // eslint-disable-line
-            "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.objName + "." + this._triggerStack[this._triggerStack.length - 1].name,
+            "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].op.objName + "." + this._triggerStack[this._triggerStack.length - 1].name
         );
 
         const rows = [];

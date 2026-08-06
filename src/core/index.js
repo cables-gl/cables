@@ -17,6 +17,7 @@ import { RenderLoop } from "./renderloop.js";
 import { PatchVariable } from "./core_variable.js";
 import { Stack } from "./stack.js";
 import { MemProfiler, MemProfilerItem } from "./memprofiler.js";
+import { showUiErrors } from "./uierrors.js";
 
 CABLES = CABLES || {};
 CABLES = {
@@ -82,6 +83,7 @@ CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
 CABLES.memProfiler = new MemProfiler();
 CABLES.MemProfilerItem = MemProfilerItem;
+CABLES.showUiErrors = showUiErrors;
 
 export default CABLES;
 // add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...

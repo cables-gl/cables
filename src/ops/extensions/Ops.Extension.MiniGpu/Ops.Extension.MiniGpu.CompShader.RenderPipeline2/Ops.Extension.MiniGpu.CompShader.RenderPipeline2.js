@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
-    inInstances = op.inInt("Instances", 100),
+    inVerts = op.inInt("Vertices", 6),
+    inInstances = op.inInt("Instances", 1),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Childs");
 
@@ -63,7 +64,6 @@ exec.onTriggered = () =>
                 // "topology": "point-list",
                 // "topology": "line-list",
                 "cullMode": "none"
-
             }
             // "depthStencil": {
             //     "depthWriteEnabled": true,
@@ -82,5 +82,5 @@ exec.onTriggered = () =>
     mgpu.passEncoder.setBindGroup(1, bindGroupFrag);
     mgpu.passEncoder.setBindGroup(0, bindGroupVert);
 
-    mgpu.passEncoder.draw(6, inInstances.get());
+    mgpu.passEncoder.draw(inVerts.get(), inInstances.get());
 };

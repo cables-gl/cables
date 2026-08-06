@@ -5,7 +5,7 @@ let lastHtml = "";
 export function showUiErrors(op, id, txt, level, options)
 {
 
-    data[op.id + id] = { "op": op, "txt": txt, "id": id, options };
+    data[op.id + id] = { "op": op, "txt": txt, "id": id, "options": options };
 
     let html = "";
     let found = false;
@@ -24,6 +24,7 @@ export function showUiErrors(op, id, txt, level, options)
         simpleLogDiv = null;
         return;
     }
+
     if (!found) return;
     if (!simpleLogDiv)
     {
