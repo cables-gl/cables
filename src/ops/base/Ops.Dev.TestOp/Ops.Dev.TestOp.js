@@ -12,9 +12,12 @@ const lala = op.outObject("Test");
 const cgl = op.patch.cgl;
 const meshRect = new CGL.WireframeRect(cgl);
 
+let hund;
+
 trig.onTriggered = () =>
 {
     meshRect.render();
 };
 
 lala.set(new Float32Array(100));
+console.log("text");

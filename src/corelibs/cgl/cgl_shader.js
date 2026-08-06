@@ -80,6 +80,12 @@ class CglShader extends CgShader
     materialPropUniforms = {};
     #validated = false;
 
+    /** @type {import("../../../../cables_ui/src/ui/api/opsserver.js").LinterDiag[]} */
+    diagnosticsFrag = [];
+
+    /** @type {import("../../../../cables_ui/src/ui/api/opsserver.js").LinterDiag[]} */
+    diagnosticsVert = [];
+
     /**
      * @param {CglContext} _cgl
      * @param {string} _name
@@ -1183,6 +1189,9 @@ class CglShader extends CgShader
         this.#validated = false;
     }
 
+    /**
+     * @param {WebGLProgram} [program]
+     */
     checkLinkStatus(program)
     {
         program = program || this._program;
@@ -1199,6 +1208,11 @@ class CglShader extends CgShader
             else
                 this._log.warn(this._name + " shader linking fail...");
 
+            this.diagnosticsFrag = [];
+            this.diagnosticsVert = [];
+            if (infoLogFrag) this.parseErrorMsgToDiag(this.diagnosticsFrag, this._cgl.gl.getShaderInfoLog(this.fshader));
+            if (infoLogVert) this.parseErrorMsgToDiag(this.diagnosticsVert, this._cgl.gl.getShaderInfoLog(this.vshader));
+
             if (infoLogFrag) this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
             if (infoLogVert) this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
 
@@ -1212,6 +1226,39 @@ class CglShader extends CgShader
         }
         this.needsCheckLinkStatus = false;
 
+    }
+
+    /**
+     * @param {string} str
+     */
+    parseErrorMsgToDiag(arr, str)
+    {
+        console.log("str", str);
+        const lines = str.split("\n");
+
+        for (let i = 0; i < lines.length; i++)
+        {
+            const parts = lines[i].split(":");
+
+            /** @type {import("../../../../cables_ui/src/ui/api/opsserver.js").LinterDiag} */
+            const err = { "line": -1, "column": -1, "message": "unknown", "fatal": true, "severity": 2 };
+
+            if (parts[0] == "ERROR")
+            {
+                // err.column = parseInt(String(parts[2]).trim());
+                // err.line = parseInt(String(parts[1]).trim());
+                err.message = lines[i];
+
+                console.log("error", err);
+                arr.push(err);
+            }
+            else
+            {
+
+                console.log("unknown error ?parts", parts);
+                err.message = str;
+            }
+        }
     }
 
     getProgram()

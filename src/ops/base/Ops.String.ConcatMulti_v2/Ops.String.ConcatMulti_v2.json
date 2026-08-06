@@ -113,5 +113,6 @@
         ]
     },
     "exampleProjectId": "DNW-QJ",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -152,7 +152,7 @@ function setSelectedProperty(defaultinput)
 
     if (defaultinput)
     {
-        const defaultItem = defaultValuePort.get() + "".trim();
+        const defaultItem = (defaultValuePort.get() + "").trim();
 
         optionElements.forEach(function (optionElement, index)
         {

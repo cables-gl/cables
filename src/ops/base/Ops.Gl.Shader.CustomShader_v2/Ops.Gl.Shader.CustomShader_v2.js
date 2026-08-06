@@ -32,6 +32,9 @@ vertexShader.set(CGL.Shader.getDefaultVertexShader());
 fragmentShader.onChange = vertexShader.onChange = function ()
 {
     if (fragmentShader.isLinked() && !fragmentShader.get()) return;
+    console.log("shader", shader);
+    fragmentShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
+    vertexShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
     needsUpdate = true;
 };
 
@@ -64,7 +67,7 @@ op.init = function ()
 function doRender()
 {
     setVectorValues();
-    if (needsUpdate)updateShader();
+    if (needsUpdate) updateShader();
     if (asMaterial.get()) cgl.pushShader(shader);
     pushTextures();
     trigger.trigger();
@@ -81,7 +84,7 @@ function pushTextures()
             shader.pushTexture(uniformTextures[i], CGL.Texture.getEmptyTexture(cgl));
 }
 
-function bindTextures()// old - should be removed in next version ?
+function bindTextures() // old - should be removed in next version ?
 {
     for (let i = 0; i < uniformTextures.length; i++)
         if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
@@ -90,8 +93,10 @@ function bindTextures()// old - should be removed in next version ?
 
 function hasUniformInput(name)
 {
-    for (let i = 0; i < uniformInputs.length; i++) if (uniformInputs[i] && uniformInputs[i].name == name) return true;
-    for (let i = 0; i < uniformTextures.length; i++) if (uniformTextures[i] && uniformTextures[i].name == name) return true;
+    for (let i = 0; i < uniformInputs.length; i++)
+        if (uniformInputs[i] && uniformInputs[i].name == name) return true;
+    for (let i = 0; i < uniformTextures.length; i++)
+        if (uniformTextures[i] && uniformTextures[i].name == name) return true;
     return false;
 }
 
@@ -127,7 +132,8 @@ function parseUniforms(src)
             if (words[0] === "UNI" || words[0] === "uniform")
             {
                 let varnames = words[2];
-                if (words.length > 4) for (let j = 3; j < words.length; j++)varnames += words[j];
+                if (words.length > 4)
+                    for (let j = 3; j < words.length; j++) varnames += words[j];
 
                 words = words.filter(function (el) { return el !== ""; });
                 const type = words[1];
@@ -231,7 +237,7 @@ function parseUniforms(src)
                             const newInputTex = op.inObject(uniName);
 
                             let uniType = "t";
-                            if (type === "samplerCube")uniType = "tc";
+                            if (type === "samplerCube") uniType = "tc";
 
                             newInputTex.uniform = new CGL.Uniform(shader, uniType, uniName, texSlotOff + uniformTextures.length);
                             uniformTextures.push(newInputTex);
@@ -239,7 +245,7 @@ function parseUniforms(src)
                             newInputTex.set(CGL.Texture.getTempTexture(cgl));
                             newInputTex.on("change", (v, p) =>
                             {
-                                if (!v)p.set(CGL.Texture.getTempTexture(cgl));
+                                if (!v) p.set(CGL.Texture.getTempTexture(cgl));
                             });
                             countTexture++;
                         }
@@ -247,12 +253,12 @@ function parseUniforms(src)
                     else if (type === "vec3" || type === "vec2" || type === "vec4")
                     {
                         let num = 2;
-                        if (type === "vec4")num = 4;
-                        if (type === "vec3")num = 3;
+                        if (type === "vec4") num = 4;
+                        if (type === "vec3") num = 3;
                         foundNames.push(uniName + " X");
                         foundNames.push(uniName + " Y");
-                        if (num > 2)foundNames.push(uniName + " Z");
-                        if (num > 3)foundNames.push(uniName + " W");
+                        if (num > 2) foundNames.push(uniName + " Z");
+                        if (num > 3) foundNames.push(uniName + " W");
 
                         if (!hasUniformInput(uniName + " X"))
                         {
@@ -260,7 +266,7 @@ function parseUniforms(src)
                             const vec = {
                                 "name": uniName,
                                 "num": num,
-                                "changed": false,
+                                "changed": false
                             };
                             vectors.push(vec);
                             initVectorUniform(vec);
@@ -309,7 +315,7 @@ function updateShader()
     if (!shader) return;
     let manual = false;
     updateCount++;
-    if (updateCount > 2)manual = true;
+    if (updateCount > 2) manual = true;
 
     // shader.bindTextures = bindTextures.bind(this);
     shader.setSource(vertexShader.get(), fragmentShader.get(), manual);
@@ -323,10 +329,10 @@ function updateShader()
         // cgl.enableExtension('OES_texture_half_float_linear');
 
         shader.enableExtension("GL_OES_standard_derivatives");
-    // shader.enableExtension("GL_OES_texture_float");
-    // shader.enableExtension("GL_OES_texture_float_linear");
-    // shader.enableExtension("GL_OES_texture_half_float");
-    // shader.enableExtension("GL_OES_texture_half_float_linear");
+        // shader.enableExtension("GL_OES_texture_float");
+        // shader.enableExtension("GL_OES_texture_float_linear");
+        // shader.enableExtension("GL_OES_texture_half_float");
+        // shader.enableExtension("GL_OES_texture_half_float_linear");
     }
 
     countTexture = 0;
@@ -369,11 +375,14 @@ function updateShader()
     outShader.setRef(shader);
     needsUpdate = false;
 
-    if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2, { "button": "show",
-        "buttonCb": () =>
+    if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2,
         {
-            CABLES.UI.showShaderError(shader);
-        } });
+            "button": "show",
+            "buttonCb": () =>
+            {
+                CABLES.UI.showShaderError(shader);
+            }
+        });
     else op.setUiError("compile", null);
 
     outErrors.set(shader.hasErrors());
