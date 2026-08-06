@@ -71,6 +71,20 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "depthWriteEnabled",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "depthCompare index",
+                "values": [
+                    "less-equal",
+                    "always"
+                ],
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }

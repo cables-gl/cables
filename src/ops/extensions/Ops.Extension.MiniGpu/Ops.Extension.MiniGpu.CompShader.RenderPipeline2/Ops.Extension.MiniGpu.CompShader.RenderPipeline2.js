@@ -4,6 +4,8 @@ const
     inInstances = op.inInt("Instances", 1),
     topology = op.inSwitch("topology", ["triangle-list", "point-list", "line-list"], "triangle-list"),
     cull = op.inSwitch("cull", ["back", "front"], "back"),
+    depthWriteEnabled = op.inBool("depthWriteEnabled", true),
+    depthCompare = op.inSwitch("depthCompare", ["less-equal", "always"], "less-equal"),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Childs");
 
@@ -16,25 +18,17 @@ let bindGroupVert = null;
 let updatedFrag = 0;
 let updatedVert = 0;
 
-cull.onChange =
+depthCompare.onChange =
+    depthWriteEnabled.onChange =
+    cull.onChange =
     topology.onChange =
     inReset.onTriggered = () =>
     {
         pipe = null;
     };
 
-// inShaderFrag.onChange = () =>
-// {
-//     if (inShaderFrag.get() != oldShader)pipe = null;
-//     oldShader = inShaderFrag.get();
-// };
-
 exec.onTriggered = () =>
 {
-    // if (!inShaderFrag.get() || !inShaderVert.get()) return;
-    // if (!mgpu.shaderModules.fragment.shader || !mgpu.shaderModules.vertex.shader) return;
-    // if (updatedVert != mgpu.shaderModules.vertex.updated)pipe = null;
-    // if (updatedFrag != mgpu.shaderModules.fragment.updated)pipe = null;
 
     const mgpu = op.patch.frameStore.mgpu;
     mgpu.shaderModules = {};
@@ -69,8 +63,8 @@ exec.onTriggered = () =>
             },
             "depthStencil":
             {
-                "depthWriteEnabled": true,
-                "depthCompare": "less-equal",
+                "depthWriteEnabled": depthWriteEnabled.get(),
+                "depthCompare": depthCompare.get(),
                 "format": "depth24plus"
             }
         };
