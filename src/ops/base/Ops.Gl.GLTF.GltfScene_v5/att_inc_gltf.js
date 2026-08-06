@@ -51,7 +51,7 @@ const Gltf = class
         data.hiddenNodes = data.hiddenNodes || {};
 
         if (n)
-            if (n.hidden)data.hiddenNodes[n.name] = true;
+            if (n.hidden) data.hiddenNodes[n.name] = true;
             else delete data.hiddenNodes[n.name];
 
         saveData();
@@ -64,7 +64,7 @@ const Gltf = class
         data.hiddenNodes = data.hiddenNodes || {};
 
         if (n)
-            if (n.hidden)data.hiddenNodes[name] = true;
+            if (n.hidden) data.hiddenNodes[name] = true;
             else delete data.hiddenNodes[name];
 
         saveData();
@@ -95,11 +95,19 @@ function Utf8ArrayToStr(array)
         c = array[i++];
         switch (c >> 4)
         {
-        case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
             // 0xxxxxxx
             out += String.fromCharCode(c);
             break;
-        case 12: case 13:
+        case 12:
+        case 13:
             // 110x xxxx   10xx xxxx
             char2 = array[i++];
             out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
@@ -157,8 +165,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
             outGenerator.set(obj.asset.generator);
         }
         catch (e)
-        {
-        }
+        {}
     }
     else
     {
@@ -219,13 +226,13 @@ function loadAnims(gltf)
             {
                 // console.log("correct sampler", accOut.type, acc.type);
                 let numComps = 1;
-                if (accOut.type === "VEC2")numComps = 2;
-                else if (accOut.type === "VEC3")numComps = 3;
-                else if (accOut.type === "VEC4")numComps = 4;
+                if (accOut.type === "VEC2") numComps = 2;
+                else if (accOut.type === "VEC3") numComps = 3;
+                else if (accOut.type === "VEC4") numComps = 4;
                 else if (accOut.type === "SCALAR")
                 {
                     numComps = bufferOut.length / bufferIn.length; // is this really the way to find out ? cant find any other way,except number of morph targets, but not really connected...
-                    if (numComps != 1)console.log("numcomps scalar", numComps, accOut, an);
+                    if (numComps != 1) console.log("numcomps scalar", numComps, accOut, an);
                 }
                 else op.log("[] UNKNOWN accOut.type", accOut.type);
 
@@ -244,8 +251,10 @@ function loadAnims(gltf)
                 }
 
                 if (sampler.interpolation === "LINEAR") {}
-                else if (sampler.interpolation === "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
-                else if (sampler.interpolation === "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
+                else if (sampler.interpolation === "STEP")
+                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                else if (sampler.interpolation === "CUBICSPLINE")
+                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
                 // console.log(bufferOut)
@@ -257,8 +266,7 @@ function loadAnims(gltf)
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
-                    // maxTime = Math.max(bufferIn[j], maxTime);
-                    maxTimeDict[an.name] = bufferIn[j];
+                    maxTimeDict[an.name] = Math.max(bufferIn[j], maxTimeDict[an.name] || 0);
 
                     for (let k = 0; k < numComps; k++)
                     {
@@ -278,7 +286,7 @@ function loadAnims(gltf)
                         }
                     }
                 }
-                for (let k = 0; k < numComps; k++)anims[k].batchMode = false;
+                for (let k = 0; k < numComps; k++) anims[k].batchMode = false;
                 animArr.push(...anims);
                 node.setAnim(chan.target.path, an.name, anims);
             }
@@ -344,7 +352,8 @@ function parseGltf(arrayBuffer)
 {
     const CHUNK_HEADER_SIZE = 8;
 
-    let j = 0, i = 0;
+    let j = 0,
+        i = 0;
 
     const gltf = new Gltf();
     gltf.timing.push(["Start parsing", Math.round((performance.now() - gltf.startTime))]);
@@ -438,11 +447,11 @@ function parseGltf(arrayBuffer)
             const view = views[acc.bufferView];
 
             let numComps = 0;
-            if (acc.type == "SCALAR")numComps = 1;
-            else if (acc.type == "VEC2")numComps = 2;
-            else if (acc.type == "VEC3")numComps = 3;
-            else if (acc.type == "VEC4")numComps = 4;
-            else if (acc.type == "MAT4")numComps = 16;
+            if (acc.type == "SCALAR") numComps = 1;
+            else if (acc.type == "VEC2") numComps = 2;
+            else if (acc.type == "VEC3") numComps = 3;
+            else if (acc.type == "VEC4") numComps = 4;
+            else if (acc.type == "MAT4") numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
             //   const decoder = new decoderModule.Decoder();
@@ -471,7 +480,7 @@ function parseGltf(arrayBuffer)
                         stride = stride || 4;
 
                         const isInt = acc.componentType == 5125;
-                        if (isInt)dataBuff = new Uint32Array(num);
+                        if (isInt) dataBuff = new Uint32Array(num);
                         else dataBuff = new Float32Array(num);
 
                         dataBuff.cblStride = numComps;
@@ -481,7 +490,7 @@ function parseGltf(arrayBuffer)
                             if (isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
                             else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
 
-                            if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
+                            if (stride != 4 && (j + 1) % numComps === 0) accPos += stride - (numComps * 4);
                             accPos += 4;
                         }
                     }

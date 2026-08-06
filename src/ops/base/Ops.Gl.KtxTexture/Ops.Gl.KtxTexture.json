@@ -1,0 +1,79 @@
+{
+    "id": "89a3bdc0-3d53-4d06-90b0-ebe156b034c2",
+    "created": 1786018230363,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786018230369
+        }
+    ],
+    "dependencies": [
+        {
+            "src": "a8cd18dc-9d1e-45d4-943f-20beaa912d3b",
+            "type": "op"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 0,
+                "name": "Add Cachebuster",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "IsSrgb",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loaded",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    }
+}
