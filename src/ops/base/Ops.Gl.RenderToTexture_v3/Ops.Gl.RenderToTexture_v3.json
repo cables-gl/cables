@@ -117,13 +117,20 @@
         {
             "message": "cloned op from Ops.Gl.Render2Texture",
             "author": "pandur",
-            "date": 1687444885322
+            "date": 1687444885322,
+            "type": "new op"
         },
         {
             "message": "Added output for framebuffer",
             "type": "feature",
             "author": "pandur",
             "date": 1774599831601
+        },
+        {
+            "message": "Added DepthBuffer framebuffer input port, to reuse an existing depth buffer",
+            "type": "feature",
+            "author": "amajesticseaflapflap",
+            "date": 1785919311354
         }
     ],
     "exampleProjectId": "G2_my7",

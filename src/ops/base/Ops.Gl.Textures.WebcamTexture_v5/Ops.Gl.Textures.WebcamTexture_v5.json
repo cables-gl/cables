@@ -4,7 +4,7 @@
     "created": 1782806551152,
     "changelog": [
         {
-            "message": "now only asks for permission if \"active\"-port is enables",
+            "message": "now only asks for permission if \"active\"-port is enabled",
             "type": "improvement",
             "author": "pandur",
             "date": 1671034796647

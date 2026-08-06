@@ -133,10 +133,40 @@
             "url": "https://github.com/cables-gl/cables/issues/7520"
         },
         {
-            "message": "Made deprecated op-libraray error only visible to users with write permissions on op page",
+            "message": "Made deprecated op-library error only visible to users with write permissions on op page",
             "type": "improvement",
             "author": "stephan",
             "date": 1782731185163
+        },
+        {
+            "message": "Updated WASM usage documentation",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785920471624
+        },
+        {
+            "message": "Seperated team namespace settings into tabs",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785920515215
+        },
+        {
+            "message": "Made email confirmation link directly log in user",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785920549768
+        },
+        {
+            "message": "Added info of subpatches user has no permission to to \"my ops\" tab on op page",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785920619256
+        },
+        {
+            "message": "Updated exe-export electron version to 43.2.0",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1785920851108
         }
     ],
     "isReleased": true,

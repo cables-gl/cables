@@ -31,7 +31,7 @@
             }
         ]
     },
-    "summary": "Crop an array",
+    "summary": "Crop/cuts a smaller chunk out of an array.",
     "docs": {
         "ports": [
             {
@@ -48,8 +48,6 @@
             }
         ]
     },
-    "youtubeid": "",
-    "issues": "",
     "changelog": [
         {
             "message": "added start index parameter",
