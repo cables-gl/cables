@@ -82,6 +82,7 @@ exec.onTriggered = () =>
         const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc() });
 
         /* minimalcore:start */
+        const diags = [];
         module.getCompilationInfo().then((a) =>
         {
             op.setUiError("shadercomp", null);
@@ -90,11 +91,18 @@ exec.onTriggered = () =>
                 const msg = a.messages[i];
                 if (msg)
                 {
-                    console.log("mst", msg);
+
+                    diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": -1, "column": -1, "severity": 2, "fatal": true });
+
                     op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
                     if (msg.type == "error") hasError = true;
                 }
             }
+            inCode.setUiAttribs(
+                {
+                    "editorDiagnostics": diags
+                });
+
         });
 
         /* minimalcore:end */

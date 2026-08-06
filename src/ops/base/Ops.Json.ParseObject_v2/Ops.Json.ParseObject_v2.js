@@ -42,7 +42,6 @@ function parse()
             }
         }
 
-        console.log("ex", ex);
         str.setUiAttribs(
             {
                 "editorDiagnostics": [{ "message": ex.message, "line": -1, "column": -1, "severity": 2, "fatal": true }]
