@@ -44,7 +44,7 @@ export class RenderTarget
                     "size": [mgpu.canvas.width, mgpu.canvas.height],
                     // "format": "rgba8uint",
                     "format": mgpu.format,
-                    "usage": GPUTextureUsage.RENDER_ATTACHMENT
+                    "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING
                 });
 
             this.viewColor = this.colorTexture.createView();

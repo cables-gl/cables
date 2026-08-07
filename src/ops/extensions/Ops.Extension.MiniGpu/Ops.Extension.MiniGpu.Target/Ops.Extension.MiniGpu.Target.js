@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("trigger"),
-    next = op.outTrigger("next");
+    next = op.outTrigger("next"),
+    tex = op.outObject("texture color");
 
 let rt = null;
 
@@ -10,10 +11,11 @@ exec.onTriggered = () =>
     if (!rt)
     {
         rt = new MGPU.RenderTarget(mgpu);
+
+        tex.setRef(rt.colorTexture);
     }
 
     rt.start();
     next.trigger();
     rt.end();
-
 };

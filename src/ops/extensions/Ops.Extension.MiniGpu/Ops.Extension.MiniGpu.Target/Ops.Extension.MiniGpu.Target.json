@@ -28,6 +28,10 @@
             {
                 "type": 1,
                 "name": "next"
+            },
+            {
+                "type": 2,
+                "name": "texture color"
             }
         ]
     }

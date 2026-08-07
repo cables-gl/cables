@@ -7,7 +7,7 @@ export function createBindGroupLayout(mgpu, bindings)
         layoutEntries.push(bindings[i].layout);
     }
     const bindGroupLayout = mgpu.device.createBindGroupLayout({
-        "entries": layoutEntries,
+        "entries": layoutEntries
     });
 
     return bindGroupLayout;
@@ -22,12 +22,14 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
 
     for (let i = 0; i < bindings.length; i++)
     {
-        bg.entries.push(
+        const b =
             {
-                "binding": i,
-                "resource": bindings[i].resource
-            }
-        );
+                "binding": i
+            };
+
+        if (bindings[i].resource)b.resource = bindings[i].resource;
+        bg.entries.push(b);
     }
+
     return mgpu.device.createBindGroup(bg);
 }
