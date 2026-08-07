@@ -14,6 +14,8 @@
 
 class MinMat
 {
+    static RAD2DEG = 180 / Math.PI;
+
     static identity()
     {
         return [

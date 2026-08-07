@@ -25,8 +25,7 @@ inFillWgsl.onChange =
         for (let i = 0; i < arrayPorts.length; i++)
         {
             const a = arrayPorts[i].get();
-            if (!a)
-                return;
+            if (!a) return;
 
             const stride = a.length / num;
 

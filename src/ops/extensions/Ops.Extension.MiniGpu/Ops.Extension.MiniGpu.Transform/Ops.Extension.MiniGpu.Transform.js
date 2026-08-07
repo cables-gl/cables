@@ -7,6 +7,9 @@ const
     scaleX = op.inFloat("Scale X", 1),
     scaleY = op.inFloat("Scale Y", 1),
     scaleZ = op.inFloat("Scale Z", 1),
+    rotationX = op.inFloat("Rotation X", 0),
+    rotationY = op.inFloat("Rotation Y", 0),
+    rotationZ = op.inFloat("Rotation Z", 0),
     next = op.outTrigger("Next");
 
 let mat = MGPU.mm.identity();
@@ -16,6 +19,9 @@ scale.onChange =
     scaleX.onChange =
     scaleY.onChange =
     scaleZ.onChange =
+    rotationX.onChange =
+    rotationY.onChange =
+    rotationZ.onChange =
     transX.onChange =
     transY.onChange =
     transZ.onChange = () =>
@@ -31,7 +37,11 @@ exec.onTriggered = () =>
         mat = MGPU.mm.translate(mat, transX.get(), transY.get(), transZ.get());
         const scl = scale.get();
         mat = MGPU.mm.scale(mat, scaleX.get() * scl, scaleY.get() * scl, scaleZ.get() * scl);
-        // console.log("mat", mat);
+
+        mat = MGPU.mm.rotate(mat, [1, 0, 0], rotationX.get() * MGPU.mm.RAD2DEG);
+        mat = MGPU.mm.rotate(mat, [0, 1, 0], rotationY.get() * MGPU.mm.RAD2DEG);
+        mat = MGPU.mm.rotate(mat, [0, 0, 1], rotationZ.get() * MGPU.mm.RAD2DEG);
+
         changed = false;
     }
 
