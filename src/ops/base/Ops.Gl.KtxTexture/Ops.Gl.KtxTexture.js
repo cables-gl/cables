@@ -17,27 +17,6 @@ const cgl = op.patch.cgl;
 op.setPortGroup("Size", [width, height]);
 let ktx = CABLES.ktx;
 
-if (!ktx)
-{
-    createKtxReadModule(
-        {
-            "locateFile": () =>
-            {
-                return "data:application/wasm;base64," + staticAttachments.libktx_read_wasm;
-            }
-        }).then(async (_ktx) =>
-    {
-        ktx = CABLES.ktx = _ktx;
-        // console.log("op.patch.cgl.canvas", op.patch.cgl.canvas);
-
-        ktx.GL.makeContextCurrent(ktx.GL.createContext(op.patch.cgl.canvas, { "majorVersion": 2 }));
-        // ktx.GL.makeContextCurrent(op.patch.cgl.gl, { "majorVersion": 2 });
-
-        staticAttachments.libktx_read_wasm = null;
-        reloadSoon();
-    });
-}
-
 inActive.onChange = () =>
 {
     if (inActive.get()) reloadSoon();
@@ -79,16 +58,6 @@ function reloadSoon(nocache)
     }, 1);
 }
 
-function getPixelFormat()
-{
-    if (dataFrmt.get() == "R") return CGL.Texture.PFORMATSTR_R8UB;
-    if (dataFrmt.get() == "RG") return CGL.Texture.PFORMATSTR_RG8UB;
-    if (dataFrmt.get() == "RGB") return CGL.Texture.PFORMATSTR_RGB8UB;
-    if (dataFrmt.get() == "SRGBA") return CGL.Texture.PFORMATSTR_SRGBA8;
-
-    return CGL.Texture.PFORMATSTR_RGBA8UB;
-}
-
 function realReload(nocache)
 {
     if (!CABLES.ktx) return;
@@ -122,7 +91,6 @@ function realReload(nocache)
 
             loadKtx(url, (t) =>
             {
-                console.log("jlalalala");
                 textureOut.setRef(t);
             }, {});
 
