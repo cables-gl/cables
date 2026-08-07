@@ -1,8 +1,8 @@
 const
-    inSpeed = op.inValue("Speed", 1),
-    playPause = op.inValueBool("Play", true),
+    inSpeed = op.inFloat("Speed", 1),
+    playPause = op.inBool("Play", true),
     reset = op.inTriggerButton("Reset"),
-    inSyncTimeline = op.inValueBool("Sync to timeline", false),
+    inSyncTimeline = op.inBool("Sync to timeline", false),
     outTime = op.outNumber("Time");
 
 op.setPortGroup("Controls", [playPause, reset, inSpeed]);
@@ -76,7 +76,7 @@ op.onAnimFrame = function (tt, frameNum, deltaMs)
             lastTime = timerVal;
 
             time += t * inSpeed.get();
-            if (time != time)time = 0;
+            if (time != time) time = 0;
             outTime.set(time);
         }
     }

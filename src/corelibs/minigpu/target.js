@@ -57,8 +57,8 @@ export class RenderTarget
             "colorAttachments": [
                 {
                     "view": this.viewColor,
-                    // "clearValue": [0, 0, 0, 1],
-                    "loadOp": "clear",
+                    // "clearValue": [0, 1, 0, 0],
+                    "loadOp": options.loadOp || "clear",
                     "storeOp": "store"
                 }
             ],

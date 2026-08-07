@@ -2,9 +2,19 @@ let simpleLogDiv = null;
 const data = {};
 let lastHtml = "";
 
+/**
+ * @param {Op} op
+ * @param {string} id
+ * @param {string} txt
+ * @param {number} level
+ * @param {{}} options
+ */
 export function showUiErrors(op, id, txt, level, options)
 {
 
+    console.log(txt);
+
+    /* minimalcore:start */
     data[op.id + id] = { "op": op, "txt": txt, "id": id, "options": options };
 
     let html = "";
@@ -45,4 +55,6 @@ export function showUiErrors(op, id, txt, level, options)
         simpleLogDiv.innerHTML = html;
         lastHtml = html;
     }
+
+    /* minimalcore:end */
 }

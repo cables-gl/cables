@@ -14,12 +14,12 @@ canvas.classList.add("cablescontext");
 canvas.dataset.contextname = "minigpu";
 canvas.dataset.api = "webgpu";
 
-if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
-
 let fpsTime = 0;
 let frames = 0;
 
 /* minimalcore:end */
+
+if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
 
 navigator.gpu.requestAdapter(
     {

@@ -80,10 +80,17 @@ exec.onTriggered = () =>
         s = { "layout": "auto" };
         const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc() });
 
-        /* minimalcore:start */
+        /* NOPEminimalcore:start */
         const diags = [];
         module.getCompilationInfo().then((a) =>
         {
+            if (a.messages.length)
+            {
+
+                console.log(genBindHeadSrc());
+                console.log(a);
+            }
+
             op.setUiError("shadercomp", null);
             for (let i = 0; i < a.messages.length; i++)
             {
@@ -100,7 +107,7 @@ exec.onTriggered = () =>
 
         });
 
-        /* minimalcore:end */
+        /* NOPEminimalcore:end */
         s[inStage.get().toLowerCase()] = {
             "module": module,
             "targets": [ // only frag??

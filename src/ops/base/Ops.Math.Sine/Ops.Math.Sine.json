@@ -43,5 +43,6 @@
         "ports": []
     },
     "exampleProjectId": "RhfUW2",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

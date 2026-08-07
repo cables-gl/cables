@@ -30,13 +30,18 @@ inFillWgsl.onChange =
 
             const stride = a.length / num;
 
-            /* minimalcore:start */
             if (stride % 1 != 0 || a.length != num * stride)
             {
                 allStride = 0;
                 hasError = true;
+
+                /* minimalcore:start */
                 op.setUiError("arr" + i + "length", "array " + i + " is not correct length");
+
+                /* minimalcore:end */
             }
+
+            /* minimalcore:start */
             else
                 op.setUiError("arr" + i + "length", null);
 
@@ -57,7 +62,7 @@ inFillWgsl.onChange =
         else op.setUiError("namelength", null);
 
         /* minimalcore:end */
-
+        console.log("strides", strides, arrayPorts);
         for (let i = 0; i < names.length; i++)
         {
             structStr += "\n  " + names[i] + ": ";

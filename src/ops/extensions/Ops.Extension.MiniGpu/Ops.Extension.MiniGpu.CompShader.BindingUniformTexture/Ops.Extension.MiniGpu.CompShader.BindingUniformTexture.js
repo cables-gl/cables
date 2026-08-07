@@ -17,7 +17,8 @@ tex.onChange =
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
-    if (!bindingTex && tex.get())
+    const texture = tex.get() || MGPU.getEmptyTexture(mgpu);
+    if (!bindingTex)
     {
 
         /* minimalcore:start */
@@ -44,7 +45,7 @@ exec.onTriggered = () =>
 
         bindingTex = {
             "header": "var " + inName.get() + " : texture_2d<f32>;",
-            "resource": tex.get().createView(),
+            "resource": texture.createView(),
             "layout": layout
         };
         bindingSampler = {

@@ -1,5 +1,5 @@
 import { Stack } from "cables";
-import { createBindGroup, createBindGroupLayout } from "./minigpu.js";
+import { createBindGroup, createBindGroupLayout, getEmptyTexture } from "./minigpu.js";
 import MinMat from "./minimat.js";
 import { RenderTarget } from "./target.js";
 
@@ -20,6 +20,7 @@ import { RenderTarget } from "./target.js";
 window.MGPU = {
     "createBindGroupLayout": createBindGroupLayout,
     "createBindGroup": createBindGroup,
+    "getEmptyTexture": getEmptyTexture,
     "RenderTarget": RenderTarget,
     "mm": MinMat
 

@@ -279,7 +279,6 @@ export class Port extends Events
     setUiAttribs(newAttribs)
     {
 
-        /* minimalcore:start */
         let changed = false;
         if (!this.uiAttribs) this.uiAttribs = {};
 
@@ -300,7 +299,6 @@ export class Port extends Events
 
         if (changed) this.emitEvent(Port.EVENT_UIATTRCHANGE, newAttribs, this);
 
-    /* minimalcore:end */
     }
 
     /**
@@ -543,6 +541,12 @@ export class Port extends Events
     {
 
         /* minimalcore:start */
+
+        // if (this.get() == this.defaultValue)
+        // {
+        //     return "";
+        // }
+
         let obj = { "name": this.getName() };
 
         if (!this.ignoreValueSerialize && this.links.length === 0)

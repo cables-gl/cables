@@ -22,6 +22,15 @@
             {
                 "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 0,
+                "name": "loadOp index",
+                "values": [
+                    "clear",
+                    "load"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -30,6 +30,12 @@
             {
                 "type": 0,
                 "name": "Mode index",
+                "values": [
+                    "A",
+                    "AB",
+                    "ABC",
+                    "ABCD"
+                ],
                 "subType": "integer"
             },
             {

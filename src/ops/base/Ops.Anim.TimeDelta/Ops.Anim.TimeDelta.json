@@ -2,34 +2,33 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smooth",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Seconds",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }
         ]
     },
     "summary": "Measure the time difference between two triggers",
-    "updated": 1542045449176,
     "authorName": "pandur",
     "id": "fba0e516-b50e-4372-9a0c-dc605669ffed",
     "created": 1520347835082,
@@ -56,5 +55,6 @@
         ]
     },
     "exampleProjectId": "omrKQm",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

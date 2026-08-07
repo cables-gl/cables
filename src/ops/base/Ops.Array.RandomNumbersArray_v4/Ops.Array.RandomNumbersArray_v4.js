@@ -1,9 +1,9 @@
 const
-    numValues = op.inValueInt("Num Values", 100),
+    numValues = op.inInt("Num Values", 100),
     inModeSwitch = op.inSwitch("Mode", ["A", "AB", "ABC", "ABCD"], "A"),
-    inSeed = op.inValueFloat("Random Seed ", 0),
+    inSeed = op.inFloat("Random Seed ", 0),
     inInteger = op.inBool("Integer", false),
-    inClosed = op.inValueBool("Last == First"),
+    inClosed = op.inBool("Last == First"),
     outValues = op.outArray("Array Out"),
     outTotalPoints = op.outNumber("Chunks Amount"),
     outArrayLength = op.outNumber("Array length");
@@ -14,8 +14,8 @@ const arr = [];
 const inArray = letters.map(function (value)
 {
     return {
-        "min": op.inValueFloat("Min " + value, -1),
-        "max": op.inValueFloat("Max " + value, 1),
+        "min": op.inFloat("Min " + value, -1),
+        "max": op.inFloat("Max " + value, 1)
     };
 });
 

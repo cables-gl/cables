@@ -33,3 +33,16 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
 
     return mgpu.device.createBindGroup(bg);
 }
+
+export function getEmptyTexture(mgpu)
+{
+
+    return mgpu.device.createTexture(
+        {
+            "size": [2, 2],
+            // "format": "rgba8uint",
+            "format": mgpu.format,
+            "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING
+        });
+
+}
