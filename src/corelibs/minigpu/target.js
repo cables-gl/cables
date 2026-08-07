@@ -1,0 +1,112 @@
+export class RenderTarget
+{
+
+    depthTexture = null;
+    viewColor = null;
+
+    /** @type {GPURenderPassEncoder} */
+    #passEncoder;
+
+    /**
+     * @param {import(".").MgpuState} mgpu
+     * @param {string} label
+     */
+    constructor(mgpu, options = {})
+    {
+
+        /* minimalcore:start */
+        if (!mgpu)console.warn("rendertarget param mgpu missing");
+
+        /* minimalcore:end */
+
+        this.label = options.label || "unknown";
+        this.mgpu = mgpu;
+
+        this.#passEncoder = null;
+        this._everStarted = false;
+
+        this.depthTexture = mgpu.device.createTexture(
+            {
+                "size": [mgpu.canvas.width, mgpu.canvas.height],
+                "format": "depth24plus",
+                "usage": GPUTextureUsage.RENDER_ATTACHMENT
+            });
+
+        if (options.view)
+        {
+            this.viewColor = options.view;
+
+        }
+        else
+        {
+            this.colorTexture = mgpu.device.createTexture(
+                {
+                    "size": [mgpu.canvas.width, mgpu.canvas.height],
+                    // "format": "rgba8uint",
+                    "format": mgpu.format,
+                    "usage": GPUTextureUsage.RENDER_ATTACHMENT
+                });
+
+            this.viewColor = this.colorTexture.createView();
+        }
+
+        /** @type {GPURenderPassDescriptor} */
+        this.renderPassDescriptor = {
+
+            "label": this.label,
+            "colorAttachments": [
+                {
+                    "view": this.viewColor,
+                    // "clearValue": [0, 0, 0, 1],
+                    "loadOp": "clear",
+                    "storeOp": "store"
+                }
+            ],
+            "depthStencilAttachment":
+            {
+                "view": this.depthTexture.createView(),
+                "depthClearValue": 1.0,
+                "depthLoadOp": "clear",
+                "depthStoreOp": "store"
+            }
+        };
+
+    }
+
+    get isOpen()
+    {
+        return this.#passEncoder !== null;
+    }
+
+    start()
+    {
+        if (this.mgpu.target.current()) this.mgpu.target.current().end();
+
+        this.#passEncoder = this.mgpu.commandEncoder.beginRenderPass(this.renderPassDescriptor);
+
+        this.mgpu.target.push(this);
+    }
+
+    get passEncoder()
+    {
+        if (!this.#passEncoder) this.start();
+        return this.#passEncoder;
+
+    }
+
+    end()
+    {
+        if (this.#passEncoder) this.#passEncoder.end();
+
+        this.#passEncoder = null;
+        this.mgpu.target.pop();
+    }
+
+    newFrame()
+    {
+        if (this.#passEncoder)
+            throw new Error("RenderTarget " + this.label + " is still started");
+
+        this._everStarted = false;
+    }
+}
