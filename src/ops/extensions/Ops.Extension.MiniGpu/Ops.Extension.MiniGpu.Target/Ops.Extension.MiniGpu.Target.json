@@ -1,0 +1,34 @@
+{
+    "id": "268b17ff-df87-4eca-8b5c-4278bc6dc468",
+    "created": 1786077644500,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786077644512
+        },
+        {
+            "message": "Extension.MiniGpu.Clear renamed to Ops.Extension.MiniGpu.Target",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786092964798
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            }
+        ]
+    }
+}
