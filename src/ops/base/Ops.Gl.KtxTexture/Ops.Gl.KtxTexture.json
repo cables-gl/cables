@@ -75,5 +75,8 @@
                 "subType": "boolean"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl"
+    ]
 }
