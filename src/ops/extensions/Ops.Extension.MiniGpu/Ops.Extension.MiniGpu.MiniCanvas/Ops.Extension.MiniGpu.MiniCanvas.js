@@ -1,6 +1,12 @@
 const
     next = op.outTrigger("next");
+
 let canvas = document.createElement("canvas");
+let presentationFormat = null;
+let device = null;
+let context = null;
+let pipeline = null;
+let mgpu = {};
 
 /* minimalcore:start */
 canvas = canvas || document.body;
@@ -14,12 +20,6 @@ let fpsTime = 0;
 let frames = 0;
 
 /* minimalcore:end */
-
-let presentationFormat = null;
-let device = null;
-let context = null;
-let pipeline = null;
-let depthTexture = null;
 
 navigator.gpu.requestAdapter(
     {
@@ -52,11 +52,6 @@ navigator.gpu.requestAdapter(
                         "device": device,
                         "format": presentationFormat
                     });
-                op.patch.frameStore.mgpu = {
-                    "device": device,
-                    "format": presentationFormat
-
-                };
 
                 requestAnimationFrame(frame);
             });
@@ -75,55 +70,32 @@ function frame(timestamp)
     const commandEncoder = device.createCommandEncoder();
     const textureView = context.getCurrentTexture().createView();
 
-    if (!depthTexture)
-    {
-        depthTexture = device.createTexture(
-            {
-                "size": [canvas.width, canvas.height],
-                "format": "depth24plus",
-                "usage": GPUTextureUsage.RENDER_ATTACHMENT
-            });
-
-    }
-    const renderPassDescriptor = {
-        "colorAttachments": [
-            {
-                "view": textureView,
-                "clearValue": [0, 0, 0, 1],
-                "loadOp": "clear",
-                "storeOp": "store"
-            }
-        ],
-        "depthStencilAttachment":
-        {
-            "view": depthTexture.createView(),
-            "depthClearValue": 1.0,
-            "depthLoadOp": "clear",
-            "depthStoreOp": "store"
-        }
-    };
-    const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
-
     if (!presentationFormat) return;
-    op.patch.frameStore.mgpu = {
-        "matModel": new CABLES.Stack(MGPU.mm.identity()),
-        "matView": new CABLES.Stack(MGPU.mm.identity()),
-        "matProj": new CABLES.Stack(MGPU.mm.perspective(45 * Math.PI / 180, canvas.clientWidth / canvas.clientHeight, 0.1, 100)),
-        "shader": new CABLES.Stack(),
-        "passEncoder": passEncoder,
-        "commandEncoder": commandEncoder,
-        "device": device,
-        "format": presentationFormat
-    };
+    mgpu.canvas = canvas;
+    mgpu.matModel = new CABLES.Stack("matModel", MGPU.mm.identity());
+    mgpu.matView = new CABLES.Stack("matView", MGPU.mm.identity());
+    mgpu.matProj = new CABLES.Stack("matProj", MGPU.mm.perspective(45 * Math.PI / 180, canvas.clientWidth / canvas.clientHeight, 0.1, 100));
+    mgpu.shader = new CABLES.Stack("shader");
+    mgpu.target = new CABLES.Stack("target");
+    mgpu.commandEncoder = commandEncoder;
+    mgpu.device = device;
+    mgpu.context = context;
+    mgpu.format = presentationFormat;
 
+    op.patch.frameStore.mgpu = mgpu;
+    const rt = new MGPU.RenderTarget(mgpu, { "label": "canvasRt", "view": context.getCurrentTexture().createView() });
+
+    rt.start();
     next.trigger();
-    // console.log(canvas.clientWidth, canvas.clientHeight); c
-
-    passEncoder.end();
+    rt.end();
 
     device.queue.submit([commandEncoder.finish()]);
 
     /* minimalcore:start */
+
+    mgpu.target.checkEmpty();
+    mgpu.shader.checkEmpty();
+
     canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
     frames++;
     if (performance.now() - fpsTime > 1000)

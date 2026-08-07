@@ -38,6 +38,8 @@ exec.onTriggered = () =>
 
     if (!pipe || mgpu.rebuildPipeline)
     {
+        mgpu.rebuildPipeline = false;
+
         console.log("create renderpipe", mgpu.rebuildPipeline);
         const bindsFrag = mgpu.shaderModules.fragment.bindings.array();
         const bindsVert = mgpu.shaderModules.vertex.bindings.array();
@@ -75,9 +77,9 @@ exec.onTriggered = () =>
     }
 
     if (!pipe) return console.log("no pipe");
-    mgpu.passEncoder.setPipeline(pipe);
-    mgpu.passEncoder.setBindGroup(1, bindGroupFrag);
-    mgpu.passEncoder.setBindGroup(0, bindGroupVert);
+    mgpu.target.current().passEncoder.setPipeline(pipe);
+    mgpu.target.current().passEncoder.setBindGroup(1, bindGroupFrag);
+    mgpu.target.current().passEncoder.setBindGroup(0, bindGroupVert);
 
-    mgpu.passEncoder.draw(inVerts.get(), inInstances.get());
+    mgpu.target.current().passEncoder.draw(inVerts.get(), inInstances.get());
 };

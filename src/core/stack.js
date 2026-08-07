@@ -2,9 +2,14 @@ export class Stack
 {
     #arr = [];
 
-    constructor(a)
+    /**
+     * @param {string} name
+     * @param {any} firstItem
+     */
+    constructor(name = "unknown", firstItem)
     {
-        if (a) this.push(a);
+        this.name = name;
+        if (firstItem) this.push(firstItem);
     }
 
     /**
@@ -35,5 +40,19 @@ export class Stack
     {
         return this.#arr;
     }
+
+    get length()
+    {
+        return this.#arr.length;
+    }
+
+    /* minimalcore:start */
+    checkEmpty()
+    {
+        if (this.#arr.length != 0)console.warn(this.name + " should be empty but isnt!");
+
+    }
+
+    /* minimalcore:end */
 
 }
