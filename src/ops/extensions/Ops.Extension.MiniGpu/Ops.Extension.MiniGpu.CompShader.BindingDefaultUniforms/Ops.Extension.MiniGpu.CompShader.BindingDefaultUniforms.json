@@ -27,6 +27,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1785505341938
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.BindingUniformMat4 renamed to Ops.Extension.MiniGpu.CompShader.VertexDefaultBindings",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786281628116
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.VertexDefaultBindings renamed to Ops.Extension.MiniGpu.CompShader.BindingDefaultUniforms",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786283594686
         }
     ],
     "layout": {
@@ -34,10 +46,6 @@
             {
                 "type": 1,
                 "name": "Trigger"
-            },
-            {
-                "type": 5,
-                "name": "Name"
             }
         ],
         "portsOut": [

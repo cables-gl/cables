@@ -38,6 +38,7 @@
                 "name": "Type index",
                 "values": [
                     "f32",
+                    "vec2f",
                     "vec4f"
                 ],
                 "subType": "integer"

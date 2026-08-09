@@ -51,6 +51,13 @@ function genBindHeadSrc()
     for (let i = 0; i < binds.array().length; i++)
     {
         const b = binds.array()[i];
+        if (b.headSrc)
+            bhead += b.headSrc + "\n";
+    }
+
+    for (let i = 0; i < binds.array().length; i++)
+    {
+        const b = binds.array()[i];
         bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
     }
 

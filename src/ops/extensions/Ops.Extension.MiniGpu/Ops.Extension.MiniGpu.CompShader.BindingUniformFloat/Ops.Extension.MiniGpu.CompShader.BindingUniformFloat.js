@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
-    inType = op.inSwitch("Type", ["f32", "vec4f"], "vec4f"),
+    inType = op.inSwitch("Type", ["f32", "vec2f", "vec4f"], "vec4f"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
@@ -30,7 +30,7 @@ exec.onTriggered = () =>
 
         op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
 
-        inY.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+        inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
         inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
         inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
 

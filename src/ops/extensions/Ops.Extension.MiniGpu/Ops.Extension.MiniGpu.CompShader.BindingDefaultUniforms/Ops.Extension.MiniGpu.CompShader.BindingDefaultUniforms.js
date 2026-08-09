@@ -1,17 +1,15 @@
 const
     exec = op.inTrigger("Trigger"),
-    inName = op.inString("Name", ""),
     next = op.outTrigger("Next");
 
 let binding = null;
 let uniformBuffer;
-const uniformArray = new Float32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+const uniformArray = new Float32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
-inName.onChange =
-    exec.onLinkChange = () =>
-    {
-        binding = null;
-    };
+exec.onLinkChange = () =>
+{
+    binding = null;
+};
 
 exec.onTriggered = () =>
 {
@@ -20,7 +18,7 @@ exec.onTriggered = () =>
     {
 
         /* minimalcore:start */
-        op.setUiAttrib({ "extendTitle": inName.get() });
+        // op.setUiAttrib({ "extendTitle": inName.get() });
 
         /* minimalcore:end */
 
@@ -38,22 +36,24 @@ exec.onTriggered = () =>
             });
 
         binding = {
-            "header": "var<uniform> " + inName.get() + " : mat4x4<f32>;",
+            "header": "var<uniform> cables : Cables;",
             "resource": { "buffer": uniformBuffer },
+            "headSrc": "struct Cables{mvp:mat4x4<f32>,resScreen:vec2f,time:f32,timeDelta:f32}\n",
             "layout": layout
         };
 
-        mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
+        mgpu.rebuildShaderModule = "new uniform binding: default uniforms";
     }
 
     let mvp = MGPU.mm.mul(
         op.patch.frameStore.mgpu.matProj.current(),
         op.patch.frameStore.mgpu.matModel.current()
     );
-    // mvp=        op.patch.frameStore.mgpu.matModel.current();
+    uniformArray.set(mvp, 0);
+    uniformArray[16] = mgpu.width;
+    uniformArray[17] = mgpu.height;
 
-    // console.log("text",mvp );
-    mgpu.device.queue.writeBuffer(uniformBuffer, 0, new Float32Array(mvp));
+    mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
     mgpu.bindings.push(binding);
 
