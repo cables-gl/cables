@@ -77,6 +77,7 @@ exec.onTriggered = () =>
 
     if (inWg.get() == "1") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize));
     if (inWg.get() == "2") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize), Math.ceil(inNum2.get() / workgroupSize));
+    if (inWg.get() == "3") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize), Math.ceil(inNum2.get() / workgroupSize), Math.ceil(inNum3.get() / workgroupSize));
 
     pass.end();
     const gpuCommands = commandEncoder.finish();
