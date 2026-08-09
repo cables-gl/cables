@@ -1,0 +1,76 @@
+{
+    "id": "9a6492d2-521a-42f4-ad2d-46772eebfec7",
+    "created": 1775546011564,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818138331
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818286515
+        },
+        {
+            "message": "Extension.MiniGpu.PipeArrayBuffer renamed to Ops.Extension.MiniGpu.CompShaderArrayBuffer",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766818500401
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderArrayBuffer renamed to Ops.Extension.MiniGpu.CompShaderArrayBufferStorage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766826196027
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1775546011564
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderStorageTexture renamed to Ops.Extension.MiniGpu.BindingComputeStorageTexture",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786303721405
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Init index",
+                "values": [
+                    "0",
+                    "1",
+                    "R"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture"
+            }
+        ]
+    }
+}
