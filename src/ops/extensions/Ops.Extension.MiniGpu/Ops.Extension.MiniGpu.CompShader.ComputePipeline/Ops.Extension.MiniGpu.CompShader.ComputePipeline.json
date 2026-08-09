@@ -43,7 +43,32 @@
             },
             {
                 "type": 0,
-                "name": "Num",
+                "name": "Workgroups index",
+                "values": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num Y",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num Z",
                 "subType": "integer"
             }
         ],

@@ -1,5 +1,9 @@
 const exec = op.inTrigger("Trigger"),
-    inNum = op.inInt("Num", 64),
+    inWg = op.inSwitch("Workgroups", ["1", "2", "3"], "1"),
+    inWgSize = op.inInt("Workgroup Size", 64),
+    inNum = op.inInt("Workgroup Num X", 64),
+    inNum2 = op.inInt("Workgroup Num Y", 64),
+    inNum3 = op.inInt("Workgroup Num Z", 64),
 
     childx = op.outTrigger("childx");
 
@@ -16,6 +20,19 @@ let computeBindGroup = null;
 //         oldShader = inShader.get();
 //     }
 // };
+
+/* minimalcore:start */
+function updateUi()
+{
+    inNum2.setUiAttribs({ "greyout": parseInt(inWg.get()) < 2 });
+    inNum3.setUiAttribs({ "greyout": parseInt(inWg.get()) < 3 });
+
+}
+
+inWg.onChange = updateUi;
+updateUi();
+
+/* minimalcore:end */
 
 exec.onTriggered = () =>
 {
@@ -56,10 +73,11 @@ exec.onTriggered = () =>
     pass.setPipeline(pipe);
 
     pass.setBindGroup(0, computeBindGroup);
-    const workgroupSize = 64;
-    const numWorkgroups = Math.ceil(inNum.get() / workgroupSize);
-    // console.log("workgroups",numWorkgroups);
-    pass.dispatchWorkgroups(numWorkgroups);
+    const workgroupSize = inWgSize.get();
+
+    if (inWg.get() == "1") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize));
+    if (inWg.get() == "2") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize), Math.ceil(inNum2.get() / workgroupSize));
+
     pass.end();
     const gpuCommands = commandEncoder.finish();
     mgpu.device.queue.submit([gpuCommands]);

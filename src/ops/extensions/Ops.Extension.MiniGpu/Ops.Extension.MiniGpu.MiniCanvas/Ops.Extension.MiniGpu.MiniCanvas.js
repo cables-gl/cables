@@ -56,7 +56,6 @@ function setSize(width, height, mul = devicePixelRatio)
 
     if (canvas.width != width * mul || canvas.height != height * mul)
     {
-        console.log("setsize", width, height);
         canvas.width = width * mul;
         canvas.height = height * mul;
 
@@ -73,14 +72,12 @@ function setSize(width, height, mul = devicePixelRatio)
 const resizeObserver = new ResizeObserver((entries) =>
 {
     const entry = entries[0];
-    console.log("resi", entry);
     if (entry && entry.contentRect.width && entry.contentRect.height)
     {
 
         setSize(entry.contentRect.width, entry.contentRect.height);
 
     }
-    // console.log(entry.contentRect);
 });
 
 resizeObserver.observe(canvas);
