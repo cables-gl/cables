@@ -1,17 +1,19 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
-    inInit = op.inSwitch("Init", ["0", "1", "R"], "0"),
+    inWidth = op.inInt("Width", 256),
+    inHeight = op.inInt("Height", 256),
     next = op.outTrigger("Next"),
     outTexture = op.outObject("texture");
 
 let texture = null;
 let binding = null;
 
-// inName.onChange = () =>
-// {
-//     buffer = null;
-// };
+inHeight.onChange =
+    inWidth.onChange = () =>
+    {
+        texture = null;
+    };
 
 exec.onTriggered = () =>
 {
@@ -20,7 +22,7 @@ exec.onTriggered = () =>
     {
         texture = mgpu.device.createTexture(
             {
-                "size": [256, 256],
+                "size": [inWidth.get(), inHeight.get()],
                 "format": "rgba8unorm",
                 "usage": GPUTextureUsage.STORAGE_BINDING | GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_SRC
             });

@@ -53,11 +53,6 @@
             },
             {
                 "type": 0,
-                "name": "Workgroup Size",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Workgroup Num X",
                 "subType": "integer"
             },
@@ -69,6 +64,11 @@
             {
                 "type": 0,
                 "name": "Workgroup Num Z",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Size",
                 "subType": "integer"
             }
         ],

@@ -1,8 +1,10 @@
 const
     exec = op.inTrigger("Trigger"),
-    inCode = op.inStringEditor("Code", "", "glsl"),
-    inCodePre = op.inString("Code Prepend", ""),
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
+
+    inCode = op.inStringEditor("Code", "", "glsl"),
+
+    inCodePre = op.inString("Code Prepend", ""),
     inReset = op.inTriggerButton("Reset"),
 
     next = op.outTrigger("Next"),
@@ -85,7 +87,15 @@ exec.onTriggered = () =>
     {
         hasError = false;
         s = { "layout": "auto" };
-        const module = mgpu.device.createShaderModule({ "code": genBindHeadSrc() });
+        const module = mgpu.device.createShaderModule(
+            {
+                "code": genBindHeadSrc()
+            });
+
+        /* minimalcore:start */
+        module.label = op.uiAttribs.comment || op.id;
+
+        /* minimalcore:end */
 
         /* NOPEminimalcore:start */
         const diags = [];
@@ -116,6 +126,7 @@ exec.onTriggered = () =>
 
         /* NOPEminimalcore:end */
         s[inStage.get().toLowerCase()] = {
+
             "module": module,
             "targets": [ // only frag??
                 {

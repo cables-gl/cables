@@ -1,10 +1,10 @@
 const exec = op.inTrigger("Trigger"),
     inWg = op.inSwitch("Workgroups", ["1", "2", "3"], "1"),
-    inWgSize = op.inInt("Workgroup Size", 64),
     inNum = op.inInt("Workgroup Num X", 64),
     inNum2 = op.inInt("Workgroup Num Y", 64),
     inNum3 = op.inInt("Workgroup Num Z", 64),
 
+    inWgSize = op.inInt("Workgroup Size", 64),
     childx = op.outTrigger("childx");
 
 let pipe = null;
@@ -26,7 +26,6 @@ function updateUi()
 {
     inNum2.setUiAttribs({ "greyout": parseInt(inWg.get()) < 2 });
     inNum3.setUiAttribs({ "greyout": parseInt(inWg.get()) < 3 });
-
 }
 
 inWg.onChange = updateUi;
@@ -48,8 +47,6 @@ exec.onTriggered = () =>
         // console.log("create compute pipe", mgpu.rebuildPipeline);
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
         const o = {
-            // "layout": "auto",
-            // "layout": bindGroupLayout,
             "layout": mgpu.device.createPipelineLayout(
                 {
                     "bindGroupLayouts": [bindGroupLayout]
@@ -57,7 +54,10 @@ exec.onTriggered = () =>
             "compute": mgpu.shaderModules.compute.shader.compute
         };
 
-        /// ////////////////////
+        /* minimalcore:start */
+        o.label = op.uiAttribs.comment || op.id;
+
+        /* minimalcore:end */
 
         pipe = mgpu.device.createComputePipeline(o);
 

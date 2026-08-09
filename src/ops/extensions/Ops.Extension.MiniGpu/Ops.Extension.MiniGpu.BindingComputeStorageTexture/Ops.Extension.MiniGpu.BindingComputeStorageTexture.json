@@ -53,12 +53,12 @@
             },
             {
                 "type": 0,
-                "name": "Init index",
-                "values": [
-                    "0",
-                    "1",
-                    "R"
-                ],
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
                 "subType": "integer"
             }
         ],
