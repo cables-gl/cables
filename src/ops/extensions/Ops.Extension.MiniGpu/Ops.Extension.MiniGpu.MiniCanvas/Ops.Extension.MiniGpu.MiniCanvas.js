@@ -57,6 +57,8 @@ navigator.gpu.requestAdapter(
             });
     });
 
+let lastTs = 0;
+
 function frame(timestamp)
 {
 
@@ -81,6 +83,8 @@ function frame(timestamp)
     mgpu.device = device;
     mgpu.context = context;
     mgpu.format = presentationFormat;
+    mgpu.timeDelta = (timestamp - (lastTs || timestamp)) / 1000;
+    lastTs = timestamp;
 
     op.patch.frameStore.mgpu = mgpu;
     const rt = new MGPU.RenderTarget(mgpu, { "label": "canvasRt", "view": context.getCurrentTexture().createView() });

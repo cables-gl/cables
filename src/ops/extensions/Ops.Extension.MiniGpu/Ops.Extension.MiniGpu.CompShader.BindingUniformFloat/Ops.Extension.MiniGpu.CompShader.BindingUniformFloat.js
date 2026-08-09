@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
-    inType = op.inSwitch("Type", ["f32", "vec2f", "vec4f"], "vec4f"),
+    inType = op.inSwitch("Type", ["f32", "vec2f", "vec4f"], "f32"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
@@ -12,10 +12,27 @@ let binding = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
 
+/* minimalcore:start */
+inX.setUiAttribs({ "colorPick": false });
+
+/* minimalcore:end */
+
 inName.onChange =
     inType.onChange =
     exec.onLinkChange = () =>
     {
+
+        /* minimalcore:start */
+
+        op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
+
+        inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
+        inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+        inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+
+        inX.setUiAttribs({ "colorPick": inType.get() == "vec4f" });
+
+        /* minimalcore:end */
         binding = null;
     };
 
@@ -24,17 +41,6 @@ exec.onTriggered = () =>
     const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
     {
-
-        /* minimalcore:start */
-        inX.setUiAttribs({ "colorPick": true });
-
-        op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
-
-        inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
-        inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
-        inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
-
-        /* minimalcore:end */
 
         const layout = {
             "visibility": mgpu.stage,

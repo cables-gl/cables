@@ -4,7 +4,15 @@ const
 
 let binding = null;
 let uniformBuffer;
-const uniformArray = new Float32Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+let time = 0;
+const uniformArray = new Float32Array([
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0]);
+
+op.onAnimFrame = function (t) { time = t; };
 
 exec.onLinkChange = () =>
 {
@@ -38,7 +46,13 @@ exec.onTriggered = () =>
         binding = {
             "header": "var<uniform> cables : Cables;",
             "resource": { "buffer": uniformBuffer },
-            "headSrc": "struct Cables{mvp:mat4x4<f32>,resScreen:vec2f,time:f32,timeDelta:f32}\n",
+            "headSrc": "struct Cables\n" +
+                "{\n" +
+                "  mvp:mat4x4<f32>,\n" +
+                "  resScreen:vec2f,\n" +
+                "  time:f32,\n" +
+                "  timeDelta:f32\n" +
+                "}\n",
             "layout": layout
         };
 
@@ -50,9 +64,12 @@ exec.onTriggered = () =>
         op.patch.frameStore.mgpu.matModel.current()
     );
     uniformArray.set(mvp, 0);
-    uniformArray[16] = mgpu.width;
-    uniformArray[17] = mgpu.height;
+    uniformArray[16] = mgpu.canvas.width;
+    uniformArray[17] = mgpu.canvas.height;
+    uniformArray[18] = time;
+    uniformArray[19] = mgpu.timeDelta;
 
+    // console.log("uniformarray", mgpu.timeDelta);
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
     mgpu.bindings.push(binding);
