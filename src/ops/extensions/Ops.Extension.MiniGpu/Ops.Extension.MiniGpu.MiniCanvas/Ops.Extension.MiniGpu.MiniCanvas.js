@@ -7,6 +7,7 @@ let device = null;
 let context = null;
 let pipeline = null;
 let mgpu = {};
+const devicePixelRatio = window.devicePixelRatio;
 
 /* minimalcore:start */
 canvas = canvas || document.body;
@@ -40,24 +41,50 @@ navigator.gpu.requestAdapter(
                 op.patch.config.containerElement.appendChild(canvas);
                 canvas.style.width = "100%";
                 canvas.style.height = "100%";
-
                 context = canvas.getContext("webgpu");
-                const devicePixelRatio = window.devicePixelRatio;
-                canvas.width = canvas.clientWidth * devicePixelRatio;
-                canvas.height = canvas.clientHeight * devicePixelRatio;
-                presentationFormat = navigator.gpu.getPreferredCanvasFormat();
 
-                context.configure(
-                    {
-                        "device": device,
-                        "format": presentationFormat
-                    });
+                setSize(canvas.clientWidth, canvas.clientHeight);
 
                 requestAnimationFrame(frame);
             });
     });
 
 let lastTs = 0;
+
+function setSize(width, height, mul = devicePixelRatio)
+{
+
+    if (canvas.width != width * mul || canvas.height != height * mul)
+    {
+        console.log("setsize", width, height);
+        canvas.width = width * mul;
+        canvas.height = height * mul;
+
+        presentationFormat = navigator.gpu.getPreferredCanvasFormat();
+        context.configure(
+            {
+                "device": device,
+                "format": presentationFormat
+            });
+    }
+}
+
+/// ///////////
+const resizeObserver = new ResizeObserver((entries) =>
+{
+    const entry = entries[0];
+    console.log("resi", entry);
+    if (entry && entry.contentRect.width && entry.contentRect.height)
+    {
+
+        setSize(entry.contentRect.width, entry.contentRect.height);
+
+    }
+    // console.log(entry.contentRect);
+});
+
+resizeObserver.observe(canvas);
+/// ///////////
 
 function frame(timestamp)
 {
@@ -101,6 +128,7 @@ function frame(timestamp)
     mgpu.shader.checkEmpty();
 
     canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
+
     frames++;
     if (performance.now() - fpsTime > 1000)
     {

@@ -2,15 +2,15 @@ const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next");
 
-let binding = null;
-let uniformBuffer;
-let time = 0;
 const uniformArray = new Float32Array([
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0]);
+let binding = null;
+let uniformBuffer;
+let time = 0;
 
 op.onAnimFrame = function (t) { time = t; };
 
@@ -24,12 +24,6 @@ exec.onTriggered = () =>
     const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
     {
-
-        /* minimalcore:start */
-        // op.setUiAttrib({ "extendTitle": inName.get() });
-
-        /* minimalcore:end */
-
         const layout = {
             "visibility": mgpu.stage,
             "buffer":
