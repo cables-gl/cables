@@ -5,27 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1640252606576
-        },
-        {
-            "message": "Ops.User.pandur.MpSingleHand renamed to Ops.Dev.MpSingleHand",
-            "author": "pandur",
-            "date": 1640254839456
-        },
-        {
-            "message": "Ops.Dev.MpSingleHand renamed to Ops.Dev.MpHand",
-            "author": "pandur",
-            "date": 1640255032460
-        },
-        {
-            "message": "Ops.Dev.MpHand renamed to Ops.Libs.Mediapipe.MpHand",
-            "author": "pandur",
-            "date": 1652089088413
-        },
-        {
-            "message": "Ops.Libs.Mediapipe.MpHand renamed to Ops.Extension.Mediapipe.MpHand",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1686915556644
         }
     ],
     "authorName": "pandur",
