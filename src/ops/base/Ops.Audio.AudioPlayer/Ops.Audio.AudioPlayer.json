@@ -151,6 +151,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1782993522077
+        },
+        {
+            "message": "Remove element on op deletion",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1786348698442
         }
     ],
     "license": "MIT",

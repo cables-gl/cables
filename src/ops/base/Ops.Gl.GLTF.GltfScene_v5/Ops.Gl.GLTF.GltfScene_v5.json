@@ -363,6 +363,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1785872428317
+        },
+        {
+            "message": "Show warning when GLTF sparse accessors are used",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1786379053735
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

@@ -103,9 +103,21 @@ let gltfMesh = class
                     const tgeom = new CGL.Geometry("gltf_target_" + j);
 
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
-                    // console.log("add targetttt");
 
-                    this.geom.morphTargets.push(tgeom);
+                    if (tgeom.vertices.length > 1)
+                    {
+                        this.geom.morphTargets.push(tgeom);
+                    }
+                    else
+                    {
+                        const gg = this.geom.copy();
+                        this.geom.morphTargets.push(gg);
+
+                        for (let i = 0; i < gg.vertices.length; i++)
+                            gg.vertices[i] = 0;
+
+                    }
+
                 }
             }
             if (finished) finished(this);

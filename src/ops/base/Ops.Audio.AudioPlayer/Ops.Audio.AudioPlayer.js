@@ -27,13 +27,18 @@ volume.onChange = updateVolume;
 
 inPlayTrigg.onTriggered = play;
 inPauseTrigg.onTriggered = pause;
-op.onDelete = pause;
 op.onMasterVolumeChanged = updateVolume;
 
 inTimeOffset.onChange = () => { seek(inTimeOffset.get()); };
 inRewind.onTriggered = rewind;
 
 outPlaying.set(false);
+
+op.onDelete = () =>
+{
+    if (audio) audio.remove();
+    pause();
+};
 
 fileName.onChange = () =>
 {

@@ -164,8 +164,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
             chunk.data = obj;
             outGenerator.set(obj.asset.generator);
         }
-        catch (e)
-        {}
+        catch (e) {}
     }
     else
     {
@@ -198,7 +197,6 @@ function loadAnims(gltf)
 
             const acc = gltf.json.accessors[sampler.input];
             let bufferIn = gltf.accBuffers[sampler.input];
-
             const accOut = gltf.json.accessors[sampler.output];
             let bufferOut = gltf.accBuffers[sampler.output];
 
@@ -426,7 +424,7 @@ function parseGltf(arrayBuffer)
     {
         if (!CABLES.ktx)
         {
-            op.setUiError("gltfktx", "GLTF ktx compression lib not found / add ktxCompression op to your patch!");
+            op.setUiError("gltfktx", "GLTF ktx compression lib not found / add ktxCompression op to your patch!", 1);
 
             loadAfterKtx();
             return gltf;
@@ -436,8 +434,10 @@ function parseGltf(arrayBuffer)
             gltf.useKtx = true;
         }
     }
+
     op.setUiError("gltfdraco", null);
     op.setUiError("gltfktx", null);
+    op.setUiError("sparse", null);
 
     if (views)
     {
@@ -445,6 +445,8 @@ function parseGltf(arrayBuffer)
         {
             const acc = accessors[i];
             const view = views[acc.bufferView];
+            if (acc.sparse)
+                op.setUiError("sparse", "Sparse accessors not supported: Disable sparse optimization in your exporter!", 1);
 
             let numComps = 0;
             if (acc.type == "SCALAR") numComps = 1;
