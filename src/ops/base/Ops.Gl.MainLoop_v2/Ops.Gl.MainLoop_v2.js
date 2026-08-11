@@ -14,7 +14,6 @@ op.onAnimFrame = render;
 hdpi.onChange = updateHdpi;
 
 const cgl = op.patch.cg = op.patch.cgl;
-console.log("jaaaaaaaaaaaaaa");
 if (!cgl.gl) op.setUiError("nogl", "No WebGl support in Browser", 3);
 
 let rframes = 0;
