@@ -1,11 +1,13 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS } from "cables";
+import { CONSTANTS, Op } from "cables";
+import { LangWgsl } from "./lang.js";
 // import { ShaderGraph } from "./cgl_shadergraph.js";
 
 let shaderIdCounter = 0;
 
 export class ShaderGraphProgram extends Events
 {
+    lang = new LangWgsl();
     uniforms = [];
     #sg = null;
     #type = null;
@@ -30,17 +32,6 @@ export class ShaderGraphProgram extends Events
         this.#port = port;
     }
 
-    setOpShaderId(op)
-    {
-        if (!op.shaderId) op.shaderId = ShaderGraphProgram.getNewId();
-    }
-
-    replaceId(op, txt)
-    {
-        this.setOpShaderId(op);
-        return txt.replaceAll("_ID", "_" + op.shaderId);
-    }
-
     addOpShaderFuncCode(op)
     {
         if (!op.sgOp)
@@ -59,36 +50,41 @@ export class ShaderGraphProgram extends Events
 
         if (op.sgOp.info)
         {
-            // console.log(op.sgOp.info.name, op.sgOp.info.functions);
             for (let i = 0; i < op.sgOp.info.functions.length; i++)
             {
                 const f = op.sgOp.info.functions[i];
                 if (this._functionIdInHead[f.uniqueName]) continue;
-                if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
+                // if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
                 let src = f.src;
-                src = this.replaceId(op, src);
+                // src = this.replaceId(op, src);
                 this._headFuncSrc += src;
             }
         }
 
     }
 
+    /**
+     * @param {Op} op
+     * @param {string} [convertTo]
+     */
     callFunc(op, convertTo)
     {
-        this.setOpShaderId(op);
+        // this.setOpShaderId(op);
         let callstr = "  ";
 
-        const varname = "var_" + op.getTitle() + "_" + op.shaderId;
-        // if (convertTo)callstr += this.#sg.typeConv(convertTo) + " " + varname + " = ";
+        /** @type {import("./shadergraphop.js").ShaderNode} */
+        const node = op.shaderNode;
+        const varname = "v" + op.getTitle() + "_" + node.id;
+        if (convertTo)callstr += this.lang.typeConv(convertTo) + " " + varname + " = ";
 
-        // if (this._opIdsFuncCallSrc[op.shaderId])
-        // {
-        //     if (varname) return varname;
-        //     return;
-        // }
-        // this._opIdsFuncCallSrc[op.shaderId] = true;
+        if (this._opIdsFuncCallSrc[node.id])
+        {
+            if (varname) return varname;
+            return;
+        }
+        this._opIdsFuncCallSrc[node.id] = true;
 
-        callstr += this.replaceId(op, op.shaderFunc || "") + "(";
+        callstr += this.getFunctionName(node) + "(";
 
         this.addOpShaderFuncCode(op);
 
@@ -111,6 +107,7 @@ export class ShaderGraphProgram extends Events
 
                     // console.log("objtype", p.uiAttribs.objType);
                     this.addOpShaderFuncCode(otherPort.op);
+                    continue;
                 }
             }
             else
@@ -125,31 +122,48 @@ export class ShaderGraphProgram extends Events
                 // }
                 // else
                 // {
-                // paramStr = this.#sg.getDefaultParameter(p.uiAttribs.objType);
+                paramStr = this.lang.getDefaultParameter(p.uiAttribs.objType);
                 // }
             }
 
-            if (p.op.shaderCodeOperator)
-            {
-                callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += " " + p.op.shaderCodeOperator + " ";
-            }
-            else
             if (paramStr)
             {
                 callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += ", ";
             }
+            else
+            if (node.langfunction)
+            {
+                // callstr += paramStr;
+                if (count < numObjectPorts - 1) callstr += " " + node.langfunction + " ";
+            }
+            else
+            if (node.functionname)
+            {
+                // callstr += paramStr;
+                if (count < numObjectPorts - 1) callstr += " " + node.functionname + " ";
+            }
+
+            if (count < numObjectPorts - 1) callstr += ", ";
             count++;
         }
 
         callstr += ");";
 
-        callstr += "// " + op.uiAttribs.comment;
+        if (op.uiAttribs.comment)callstr += "// " + op.uiAttribs.comment;
 
         this._callFuncStack.push(callstr);
 
-        // return varname;
+        return varname;
+    }
+
+    /**
+     * @param {import("./shadergraphop.js").ShaderNode} node
+     */
+    getFunctionName(node)
+    {
+        if (node.langfunction) return node.langfunction;
+        else return node.functionname + node.id;
+
     }
 
     countObjectInputPorts(op)
@@ -164,20 +178,23 @@ export class ShaderGraphProgram extends Events
     {
         let paramStr = "";
 
-        if (p.op.shaderVar)
-        {
-            paramStr = p.op.shaderVar;
-        }
-        else
-        if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
-        {
-            paramStr += this.callFunc(p.op, p.uiAttribs.objType);
-        }
+        // if (p.op.shaderVar)
+        // {
+        //     paramStr = p.op.shaderVar;
+        // }
+        // else
+        // if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+        // {
+        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
+        // }
 
-        if (convertTo && convertTo != p.uiAttribs.objType)
-        {
-            // paramStr = this.#sg.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
-        }
+        // if (convertTo && convertTo != p.uiAttribs.objType)
+        // {
+        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
+        //     // paramStr = this.#sg.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
+        // }
+
+        paramStr += this.callFunc(p.op, p.uiAttribs.objType);
 
         return paramStr;
     }
@@ -199,15 +216,15 @@ export class ShaderGraphProgram extends Events
         for (let i = 0; i < l.length; i++)
         {
             const lnk = l[i];
-            // callSrc +=
-            this.callFunc(lnk.getOtherPort(port).op) + ";";
+            callSrc += this.callFunc(lnk.getOtherPort(port).op) + ";";
             // callSrc += "// " + lnk.getOtherPort(port).op.uiAttribs.comment;
-            // callSrc += "\n";
+            callSrc += "\n";
             // console.log("jlajaja");
         }
 
-        callSrc += this._callFuncStack.join("\n");
+        callSrc = this._callFuncStack.join("\n");
 
+        console.log("this._callFuncStack", this._callFuncStack);
         let src = "";// .endl() + "{{MODULES_HEAD}}".endl().endl();
 
         // console.log("COMPILE", this._type);
@@ -238,10 +255,12 @@ export class ShaderGraphProgram extends Events
         this.finalSrc = src;
 
         this.emitEvent("compiled");
+
+        console.log(this._opIdsFuncCallSrc);
     }
 
     static getNewId()
     {
-        return ++shaderIdCounter;
+        return String(++shaderIdCounter);
     }
 }

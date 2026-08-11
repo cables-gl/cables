@@ -1,8 +1,28 @@
-import { CONSTANTS } from "cables";
+import { CONSTANTS, Port } from "cables";
+import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
+
+/**
+ * @typedef ShaderNodeParam
+ * @property {string} type
+ * @property {Port} port
+ */
+
+/**
+ * @typedef ShaderNode
+ * @property {string} [langfunction]
+ * @property {string} [functionname]
+ * @property {string} id
+ * @property {ShaderNodeParam[]} params
+ * @property {ShaderNodeParam} return
+ */
 
 export class ShaderGraphOp
 {
-    constructor(op, src)
+
+    /**
+     * @param {ShaderNode} shaderNode
+     */
+    constructor(op, shaderNode)
     {
         op.sgOp = this;
         this._op = op;
@@ -12,10 +32,14 @@ export class ShaderGraphOp
         this.enabled = true;
         this.info = null;
 
-        console.log("texs pt", this.parseCode);
+        shaderNode.id = ShaderGraphProgram.getNewId();
 
-        if (src)
-            this.parseCode(src);
+        op.shaderNode = shaderNode;
+
+        // console.log("texs pt", this.parseCode);
+
+        // if (src)
+        //     this.parseCode(src);
 
         this._op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
