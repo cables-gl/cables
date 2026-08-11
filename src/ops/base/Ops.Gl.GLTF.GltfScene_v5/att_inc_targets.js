@@ -26,12 +26,13 @@ const GltfTargetsRenderer = class
         {
             this._mod = new CGL.ShaderModifier(cgl, "gltftarget");
 
-            this._mod.addModule({
-                "priority": -2,
-                "name": "MODULE_VERTEX_POSITION",
-                "srcHeadVert": attachments.targets_head_vert || "",
-                "srcBodyVert": attachments.targets_vert || ""
-            });
+            this._mod.addModule(
+                {
+                    "priority": -2,
+                    "name": "MODULE_VERTEX_POSITION",
+                    "srcHeadVert": attachments.targets_head_vert || "",
+                    "srcBodyVert": attachments.targets_vert || ""
+                });
 
             this._mod.addUniformVert("4f", "MOD_targetTexInfo", [0, 0, 0, 0]);
             this._mod.addUniformVert("t", "MOD_targetTex", 1);
@@ -58,7 +59,7 @@ const GltfTargetsRenderer = class
 
         // draw mesh...
         cgl.pushModelMatrix();
-        if (this.identity)mat4.identity(cgl.mMatrix);
+        if (this.identity) mat4.identity(cgl.mMatrix);
     }
 
     makeTex(geom)
@@ -163,6 +164,9 @@ const GltfTargetsRenderer = class
                 "name": "targetsTexture"
             }
         );
+
+        if (w < 1 || h < 1) console.warn("gltf target texture is very small...");
+        console.log("tex", w, h, geom);
         this.tex.initFromData(pixels, w, h, CGL.Texture.FILTER_NEAREST, CGL.Texture.WRAP_REPEAT);
 
     }
