@@ -1,0 +1,86 @@
+{
+    "id": "022634d8-fb46-4844-b3f2-4c86f5c7cbd5",
+    "created": 1786541627097,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786433102805
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786440227951
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Var renamed to Ops.Extension.ShaderGraph.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539117109
+        },
+        {
+            "message": "Extension.ShaderGraph.Var renamed to Ops.Extension.ShaderGraph.Lang.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539281115
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786541020841
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786541597338
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786541627097
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "number 1",
+                "objType": "sg_gen"
+            },
+            {
+                "type": 2,
+                "name": "number 2",
+                "objType": "sg_gen"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

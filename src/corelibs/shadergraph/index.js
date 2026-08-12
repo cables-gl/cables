@@ -1,4 +1,4 @@
-import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
+import { ShaderGraphProgram } from "./shadergraphprogram.js";
 import { ShaderGraphOp } from "./shadergraphop.js";
 
 import { LangWgsl } from "./lang_wgsl.js";

@@ -1,0 +1,19 @@
+const value = op.inFloat("value", 0);
+
+new CABLES.ShaderGraphOp(this,
+    {
+        "type": "value",
+        "name": "value",
+        "value": value.get(),
+        "params": [
+            { "type": "float", "port": value }
+        ],
+        "result": { "type": "float", "port": op.outObject("result", null, "sg_float") }
+
+    });
+
+value.onChange = () =>
+{
+    op.shaderNode.value = value.get();
+    op.shaderNode.result.port.setRef({});
+};

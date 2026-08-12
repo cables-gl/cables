@@ -62,7 +62,7 @@ export class ShaderGraphProgram extends Events
         /** @type {import("./shadergraphop.js").ShaderNode} */
         const node = p.op.shaderNode;
 
-        this.execNode(p.op, p.uiAttribs.objType);
+        this.execNode(p.op, p.op.shaderNode.result.type);// uiAttribs.objType);
         if (p.op.shaderNode.result)
         {
             paramStr += this.lang.convertTypes(convertTo, node.result.type, node.resultVarName);
@@ -73,7 +73,7 @@ export class ShaderGraphProgram extends Events
 
         if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
         {
-            this.execNode(p.op, p.uiAttribs.objType);
+            this.execNode(p.op, p.op.shaderNode.result.type);// uiAttribs.objType);
         }
 
         // paramStr += this.callFunc(p.op, p.uiAttribs.objType);
@@ -118,7 +118,7 @@ export class ShaderGraphProgram extends Events
         {
             let paramStr = "";
             const p = op.portsIn[i];
-            if (p.uiAttribs.objType == "sg_void") continue;
+            // if (p.uiAttribs.objType == "sg_void") continue;
             if (p.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
             // parameters...
@@ -151,7 +151,7 @@ export class ShaderGraphProgram extends Events
                 // }
                 // else
                 // {
-                paramStr = this.lang.getDefaultParameter(p.uiAttribs.objType);
+                paramStr = this.lang.getDefaultParameter(p.op.shaderNode.result.type);
                 // }
             }
 
@@ -172,7 +172,11 @@ export class ShaderGraphProgram extends Events
                 if (count < numObjectPorts - 1) callstr += " " + node.name + " ";
             }
 
-            if (count < numObjectPorts - 1) callstr += ", ";
+            if (count < numObjectPorts - 1)
+            {
+                if (node.type == "operator")callstr += node.name;
+                else callstr += ", ";
+            }
             count++;
         }
 

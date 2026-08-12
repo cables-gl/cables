@@ -1,5 +1,5 @@
 import { CONSTANTS, Port } from "cables";
-import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
+import { ShaderGraphProgram } from "./shadergraphprogram.js";
 
 /**
  * @typedef ShaderNodeParam

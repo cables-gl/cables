@@ -23,6 +23,13 @@ export class LangWgsl extends Lang
         if (name && !node.result?.type) return name + "=";
         let str = "let " + name + "=";
         // if (node.type == "function") str += "<" + node.result.type + ">";
+        if (node.type == "value")
+        {
+            str += node.value;
+
+            if (node.result.type == "float" && node.value % 1 == 0)str += ".";
+        }
+        //
         return str;
     }
 
@@ -59,7 +66,8 @@ export class LangWgsl extends Lang
 
         // if (typeFrom == "float" && typeTo == "vec2") return this.strTypeVec2 + "(" + paramStr + "," + paramStr + ")";
         // if (typeFrom == "float" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + "," + paramStr + "," + paramStr + ")";
-        if (typeFrom == "f32" && typeTo == "vec4") return this.strTypeVec4 + "<f32>(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
+        if (
+            (typeFrom == "f32" || typeFrom == "float") && typeTo == "vec4") return this.strTypeVec4 + "<f32>(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
 
         return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
     }

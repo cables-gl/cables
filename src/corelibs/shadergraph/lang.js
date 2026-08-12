@@ -3,11 +3,11 @@ export class Lang
 
     getDefaultParameter(type)
     {
-        if (type == "sg_vec4") return this.strTypeVec4 + "(0., 0., 0., 0.)";
-        if (type == "sg_vec3") return this.strTypeVec3 + "(0., 0., 0.)";
-        if (type == "sg_vec2") return this.strTypeVec2 + "(0., 0.)";
-        if (type == "sg_float") return "0.";
-        if (type == "sg_genType") return "0.";
+        if (type == "vec4") return this.strTypeVec4 + "(0., 0., 0., 0.)";
+        if (type == "vec3") return this.strTypeVec3 + "(0., 0., 0.)";
+        if (type == "vec2") return this.strTypeVec2 + "(0., 0.)";
+        if (type == "f32") return "0.";
+        if (type == "genType") return "0.";
         return "/* no default: " + type + "*/";
     }
 }
