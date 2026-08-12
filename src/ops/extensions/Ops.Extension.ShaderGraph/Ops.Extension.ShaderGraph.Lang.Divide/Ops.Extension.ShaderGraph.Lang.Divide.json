@@ -76,7 +76,7 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_float"
+                "objType": "sg_gen"
             }
         ]
     },

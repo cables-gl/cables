@@ -1,6 +1,7 @@
 import { Events } from "cables-shared-client";
 import { CONSTANTS, Op, Port } from "cables";
 import { Lang } from "./lang.js";
+import { StandaloneElectron } from "../standalone_electron/standalone_electron.js";
 
 let shaderIdCounter = 0;
 
@@ -55,6 +56,10 @@ export class ShaderGraphProgram extends Events
 
     }
 
+    /**
+     * @param {Port} p
+     * @param {any} convertTo
+     */
     _getPortParamStr(p, convertTo)
     {
         let paramStr = "";
@@ -66,6 +71,7 @@ export class ShaderGraphProgram extends Events
         if (p.op.shaderNode.result)
         {
             paramStr += this.lang.convertTypes(convertTo, node.result.type, node.resultVarName);
+            paramStr += (this.comment("" + convertTo + " " + node.result.type + " " + node.resultVarName, false));
 
         }
 
@@ -90,7 +96,7 @@ export class ShaderGraphProgram extends Events
         const node = op.shaderNode;
 
         let callstr = "  ";
-        callstr += this.dbg(" " + node.name + " " + node.type) + "";
+        callstr += this.comment(" " + node.name + " " + node.type) + "";
         callstr += "  ";
 
         if (!node.resultVarName)
@@ -127,7 +133,8 @@ export class ShaderGraphProgram extends Events
                     const otherPort = p.links[j].getOtherPort(p);
 
                     console.log("~~~~", p.op.shaderNode.result.type, p.op.shaderNode.name);
-                    paramStr += this._getPortParamStr(otherPort, otherPort.op.shaderNode.result.type);
+                    // paramStr += this._getPortParamStr(otherPort, otherPort.op.shaderNode.result.type);
+                    paramStr += this._getPortParamStr(otherPort, p.op.shaderNode.result.type);
 
                     if (node.result.type == "gen")
                     {
@@ -172,7 +179,10 @@ export class ShaderGraphProgram extends Events
 
             if (count < numObjectPorts - 1)
             {
-                if (node.type == "operator")callstr += node.name;
+                if (node.type == "operator")
+                {
+                    callstr += node.name;
+                }
                 else callstr += ", ";
             }
             count++;
@@ -181,7 +191,7 @@ export class ShaderGraphProgram extends Events
         if (node.type == "function") callstr += ")";
         callstr += ";";
 
-        if (op.uiAttribs.comment)callstr += "// " + op.uiAttribs.comment;
+        if (op.uiAttribs.comment)callstr += this.comment(op.uiAttribs.comment);
 
         callstr += "\n";
         this._callFuncStack.push(callstr);
@@ -197,9 +207,12 @@ export class ShaderGraphProgram extends Events
         return count;
     }
 
-    dbg(str, newline = true)
+    /**
+     * @param {string} str
+     */
+    comment(str, newline = false)
     {
-        str = "/* " + str + "  */";
+        str = " /* " + str + "  */ ";
         if (newline)str += "\n";
         return str;
     }

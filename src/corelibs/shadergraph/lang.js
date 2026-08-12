@@ -1,3 +1,5 @@
+import { Port } from "cables";
+
 export class Lang
 {
 
@@ -11,4 +13,32 @@ export class Lang
         if (type == "genType") return "0.";
         return "/* no default: " + type + "*/";
     }
+
+    /**
+     * @param {Port[]} ports
+     * @param {Port[]} portsSetType
+     */
+    getMaxGenTypeFromPorts(ports, portsSetType)
+    {
+        const types = ["float", "vec2", "vec3", "vec4"];
+        let typeIdx = 0;
+
+        for (let j = 0; j < ports.length; j++)
+        {
+            for (let i = 0; i < ports[j].links.length; i++)
+            {
+                const t = types.indexOf(ports[j].links[i].getOtherPort(ports[j]).op.shaderNode.result.type);
+                typeIdx = Math.max(typeIdx, t);
+            }
+        }
+
+        const t = types[typeIdx];
+
+        if (portsSetType)
+            for (let i = 0; i < portsSetType.length; i++)
+                portsSetType[i].op.shaderNode.type = t;
+
+        return t;
+    }
+
 }

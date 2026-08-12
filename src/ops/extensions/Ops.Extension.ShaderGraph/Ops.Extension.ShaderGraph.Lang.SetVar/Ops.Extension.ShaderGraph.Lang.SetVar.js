@@ -2,7 +2,6 @@ new CABLES.ShaderGraphOp(this,
     {
         "type": "var",
         "name": "color",
-        // "vartype": "vec4f",
         "params": [
             { "type": "vec4", "port": op.inObject("edge 0", null, "sg_gen") }
         ],
