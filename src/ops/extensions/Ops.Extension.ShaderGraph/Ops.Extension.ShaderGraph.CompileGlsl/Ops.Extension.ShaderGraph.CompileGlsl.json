@@ -1,0 +1,53 @@
+{
+    "id": "15e647d4-1682-4d4e-afc9-9101f35786f1",
+    "created": 1786528307330,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786370873917
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786528307331
+        },
+        {
+            "message": "Extension.MiniGpu.SgCompileGlsl renamed to Ops.Extension.ShaderGraph.SgCompileGlsl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539046098
+        },
+        {
+            "message": "Extension.ShaderGraph.SgCompileGlsl renamed to Ops.Extension.ShaderGraph.CompileGlsl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539267897
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Graph"
+            },
+            {
+                "type": 5,
+                "name": "Base Code"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Code"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
