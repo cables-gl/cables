@@ -9,11 +9,12 @@ import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
 
 /**
  * @typedef ShaderNode
- * @property {string} [langfunction]
- * @property {string} [functionname]
+ * @property {string} [type]
+ * @property {string} [name]
+ * @property {string} resultVarName
  * @property {string} id
  * @property {ShaderNodeParam[]} params
- * @property {ShaderNodeParam} return
+ * @property {ShaderNodeParam} result
  */
 
 export class ShaderGraphOp

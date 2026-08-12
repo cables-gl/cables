@@ -44,48 +44,103 @@ export class ShaderGraphProgram extends Events
 
         this._opIdsHeadFuncSrc[op.id] = true;
 
-        if (op.sgOp && op.sgOp._defines)
-            for (let i = 0; i < op.sgOp._defines.length; i++)
-                this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
+        // if (op.sgOp && op.sgOp._defines)
+        //     for (let i = 0; i < op.sgOp._defines.length; i++)
+        //         this._headFuncSrc += "#define " + op.sgOp._defines[i][0] + "\n";
 
-        if (op.sgOp.info)
+        // if (op.sgOp.info)
+        // {
+        //     for (let i = 0; i < op.sgOp.info.functions.length; i++)
+        //     {
+        //         const f = op.sgOp.info.functions[i];
+        //         if (this._functionIdInHead[f.uniqueName]) continue;
+        //         // if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
+        //         let src = f.src;
+        //         // src = this.replaceId(op, src);
+        //         this._headFuncSrc += src;
+        //     }
+        // }
+
+        this._headFuncSrc += op.shaderNode.src || "";
+
+    }
+
+    _getPortParamStr(p, convertTo)
+    {
+        let paramStr = "";
+
+        /** @type {import("./shadergraphop.js").ShaderNode} */
+        const node = p.op.shaderNode;
+
+        // paramStr += this.dbg("jaja ", false);
+
+        console.log("!QAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        // if (p.op.shaderVar)
+        // {
+        //     paramStr = p.op.shaderVar;
+        // }
+        // else
+        // if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+        // {
+        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
+        // }
+
+        // if (convertTo && convertTo != p.uiAttribs.objType)
+        // {
+        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
+        //     // paramStr = this.#sg.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
+        // }
+        // paramStr += "[convertTo:" + convertTo + "]";
+        //
+        // paramStr += this.dbg("hurz"+node.name);
+        this.execNode(p.op, p.uiAttribs.objType);
+        if (p.op.shaderNode.result)
         {
-            for (let i = 0; i < op.sgOp.info.functions.length; i++)
-            {
-                const f = op.sgOp.info.functions[i];
-                if (this._functionIdInHead[f.uniqueName]) continue;
-                // if (!f.name.includes("_ID")) this._functionIdInHead[f.uniqueName] = true;
-                let src = f.src;
-                // src = this.replaceId(op, src);
-                this._headFuncSrc += src;
-            }
+            paramStr += this.lang.convertTypes(convertTo, node.result.type, node.resultVarName);
+            // paramStr += this.dbg("hurz");
+        } // paramStr += "\ncolor.a=1.0;\n";
+        // if (!node.resultVarName)
+        // if (node.functionname || node.langfunction)
+
+        if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+        {
+            this.execNode(p.op, p.uiAttribs.objType);
         }
 
+        // paramStr += this.callFunc(p.op, p.uiAttribs.objType);
+
+        return paramStr;
     }
 
     /**
      * @param {Op} op
      * @param {string} [convertTo]
      */
-    callFunc(op, convertTo)
+    execNode(op, convertTo)
     {
-        // this.setOpShaderId(op);
-        let callstr = "  ";
 
         /** @type {import("./shadergraphop.js").ShaderNode} */
         const node = op.shaderNode;
-        const varname = "v" + op.getTitle() + "_" + node.id;
-        if (convertTo)callstr += this.lang.typeConv(convertTo) + " " + varname + " = ";
 
-        if (this._opIdsFuncCallSrc[node.id])
-        {
-            if (varname) return varname;
-            return;
-        }
+        let callstr = "  ";
+        callstr += this.dbg(" " + node.name + " " + node.type) + "";
+        callstr += "  ";
+
+        if (!node.resultVarName)
+            if (node.type == "var")node.resultVarName = node.name;
+            else node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
+
+        const varDef = this.lang.getVarDef(node);
+
+        if (node.resultVarName) callstr += this.lang.getResultDef(node);
+        else if (varDef)callstr += varDef;// this.lang.typeConv(convertTo) + " " + varname + " = ";
+        else console.log("no var??", op);
+
+        if (this._opIdsFuncCallSrc[node.id]) return;
         this._opIdsFuncCallSrc[node.id] = true;
 
-        callstr += this.getFunctionName(node) + "(";
-
+        if (node.type == "function") callstr += node.name + "(";
+        if (node.type == "string") callstr += node.name;
         this.addOpShaderFuncCode(op);
 
         const numObjectPorts = this.countObjectInputPorts(op);
@@ -103,11 +158,11 @@ export class ShaderGraphProgram extends Events
                 for (let j = 0; j < p.links.length; j++)
                 {
                     const otherPort = p.links[j].getOtherPort(p);
-                    paramStr = this._getPortParamStr(otherPort, p.uiAttribs.objType);
+                    paramStr += this._getPortParamStr(otherPort, node.result.type);
+                    // console.log("otherPort, node.result.type", otherPort, node.result.type);
+                    // callstr += this.dbg("jajajaja");
 
-                    // console.log("objtype", p.uiAttribs.objType);
                     this.addOpShaderFuncCode(otherPort.op);
-                    continue;
                 }
             }
             else
@@ -130,40 +185,32 @@ export class ShaderGraphProgram extends Events
             {
                 callstr += paramStr;
             }
+            // else
+            // if (node.type)
+            // {
+            //     // callstr += paramStr;
+            //     if (count < numObjectPorts - 1) callstr += " " + node.langfunction + " ";
+            // }
             else
-            if (node.langfunction)
+            if (node.type == "function")
             {
                 // callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += " " + node.langfunction + " ";
-            }
-            else
-            if (node.functionname)
-            {
-                // callstr += paramStr;
-                if (count < numObjectPorts - 1) callstr += " " + node.functionname + " ";
+                if (count < numObjectPorts - 1) callstr += " " + node.name + " ";
             }
 
             if (count < numObjectPorts - 1) callstr += ", ";
             count++;
         }
 
-        callstr += ");";
+        if (node.type == "function") callstr += ")";
+        callstr += ";";
 
         if (op.uiAttribs.comment)callstr += "// " + op.uiAttribs.comment;
 
+        callstr += "\n";
         this._callFuncStack.push(callstr);
 
-        return varname;
-    }
-
-    /**
-     * @param {import("./shadergraphop.js").ShaderNode} node
-     */
-    getFunctionName(node)
-    {
-        if (node.langfunction) return node.langfunction;
-        else return node.functionname + node.id;
-
+        return node.resultVarName;
     }
 
     countObjectInputPorts(op)
@@ -174,29 +221,11 @@ export class ShaderGraphProgram extends Events
         return count;
     }
 
-    _getPortParamStr(p, convertTo)
+    dbg(str, newline = true)
     {
-        let paramStr = "";
-
-        // if (p.op.shaderVar)
-        // {
-        //     paramStr = p.op.shaderVar;
-        // }
-        // else
-        // if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
-        // {
-        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
-        // }
-
-        // if (convertTo && convertTo != p.uiAttribs.objType)
-        // {
-        //     paramStr += this.callFunc(p.op, p.uiAttribs.objType);
-        //     // paramStr = this.#sg.convertTypes(convertTo, p.uiAttribs.objType, paramStr);
-        // }
-
-        paramStr += this.callFunc(p.op, p.uiAttribs.objType);
-
-        return paramStr;
+        str = "/* " + str + "  */";
+        if (newline)str += "\n";
+        return str;
     }
 
     compile()
@@ -216,43 +245,13 @@ export class ShaderGraphProgram extends Events
         for (let i = 0; i < l.length; i++)
         {
             const lnk = l[i];
-            callSrc += this.callFunc(lnk.getOtherPort(port).op) + ";";
-            // callSrc += "// " + lnk.getOtherPort(port).op.uiAttribs.comment;
-            callSrc += "\n";
-            // console.log("jlajaja");
+            this.execNode(lnk.getOtherPort(port).op);
         }
 
-        callSrc = this._callFuncStack.join("\n");
-
         console.log("this._callFuncStack", this._callFuncStack);
-        let src = "";// .endl() + "{{MODULES_HEAD}}".endl().endl();
 
-        // console.log("COMPILE", this._type);
-        // todo use shader attrib system...
-
-        // if (this.#type == "frag") src += "IN vec2 texCoord;".endl().endl();
-        // if (this.#type == "vert") src += "IN vec3 vPosition;".endl() +
-        //         "IN vec2 attrTexCoord;".endl() +
-        //         "OUT vec2 texCoord;".endl().endl();
-
-        // if (this.#type == "vert")src += "".endl() +
-        //         "UNI mat4 projMatrix;".endl().endl() +
-        //         "UNI mat4 viewMatrix;".endl().endl() +
-        //         "UNI mat4 modelMatrix;".endl().endl();
-
-        // src +=
-        //     this._headUniSrc.endl().endl() +
-        //     this._headFuncSrc.endl().endl() +
-        //     "void main()".endl() +
-        //     "{".endl();
-
-        // if (this.#type == "frag")src += "  {{MODULE_BEGIN_FRAG}}".endl();
-        // if (this.#type == "vert")src += "  {{MODULE_BEGIN_VERTEX}}".endl();
-
-        src += callSrc;
-        //     "}".endl();
-
-        this.finalSrc = src;
+        this.srcMain = this._callFuncStack.join("\n");
+        this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
 
