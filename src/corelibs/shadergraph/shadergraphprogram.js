@@ -71,7 +71,7 @@ export class ShaderGraphProgram extends Events
         if (p.op.shaderNode.result)
         {
             paramStr += this.lang.convertTypes(convertTo, node.result.type, node.resultVarName);
-            paramStr += (this.comment("" + convertTo + " " + node.result.type + " " + node.resultVarName, false));
+            // paramStr += (this.comment("" + convertTo + " " + node.result.type + " " + node.resultVarName, false));
 
         }
 
@@ -96,12 +96,18 @@ export class ShaderGraphProgram extends Events
         const node = op.shaderNode;
 
         let callstr = "  ";
-        callstr += this.comment(" " + node.name + " " + node.type) + "";
+        callstr += this.comment(" " + node.name + " " + node.type, true) + "";
         callstr += "  ";
 
         if (!node.resultVarName)
             if (node.type == "var")node.resultVarName = node.name;
             else node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
+
+        if (node.type == "operator")
+            node.result.type = this.lang.getMaxGenTypeFromParams(node.params, op.portsOut[0]);
+
+        op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
+        op.setUiAttrib({ "extendTitle": "" + node.result.type });
 
         const varDef = this.lang.getVarDef(node);
 

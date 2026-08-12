@@ -1,6 +1,6 @@
 {
-    "id": "e2f1b85e-8e9e-4e4e-96da-ab2c9157e93a",
-    "created": 1786367312421,
+    "id": "ec0eeadd-5c0f-43a8-a56b-3eb3ed3e6453",
+    "created": 1786553822127,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -17,10 +17,34 @@
             "date": 1786367915194
         },
         {
-            "message": "Extension.MiniGpu.Sg.Smoothstep renamed to Ops.Extension.ShaderGraph.Lang.Smoothstep",
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786434225533
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Sin renamed to Ops.Extension.ShaderGraph.Sin",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539360303
+            "date": 1786539098140
+        },
+        {
+            "message": "Extension.ShaderGraph.Sin renamed to Ops.Extension.ShaderGraph.Lang.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539274029
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786553619914
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786553822128
         }
     ],
     "layout": {
@@ -34,18 +58,13 @@
                 "type": 2,
                 "name": "number 2",
                 "objType": "sg_gen"
-            },
-            {
-                "type": 2,
-                "name": "number 3",
-                "objType": "sg_gen"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_gen"
+                "objType": "sg_vec2"
             }
         ]
     },
