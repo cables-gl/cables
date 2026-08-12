@@ -1,6 +1,6 @@
 {
-    "id": "75102f26-ac4d-47e0-90c9-db146742f363",
-    "created": 1786529001980,
+    "id": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
+    "created": 1786543324017,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -29,32 +29,47 @@
             "date": 1786440227951
         },
         {
+            "message": "Extension.MiniGpu.Sg.Var renamed to Ops.Extension.ShaderGraph.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539117109
+        },
+        {
+            "message": "Extension.ShaderGraph.Var renamed to Ops.Extension.ShaderGraph.Lang.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539281115
+        },
+        {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786526491027
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.DefaultUniforms renamed to Ops.Extension.MiniGpu.Sg.Time",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786526603108
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786529001980
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.FragCoord renamed to Ops.Extension.ShaderGraph.Wgsl.FragCoord",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786539341218
+            "date": 1786543324018
         }
     ],
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "x",
+                "objType": "sg_gen"
+            },
+            {
+                "type": 2,
+                "name": "y",
+                "objType": "sg_gen"
+            },
+            {
+                "type": 2,
+                "name": "z",
+                "objType": "sg_gen"
+            },
+            {
+                "type": 2,
+                "name": "w",
+                "objType": "sg_gen"
+            }
+        ],
         "portsOut": [
             {
                 "type": 2,

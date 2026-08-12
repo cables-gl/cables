@@ -8,9 +8,10 @@ export class LangWgsl extends Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "f32";
 
-    typeConv(a)
+    floatStr(f)
     {
-        return "var";
+        if (f % 1 == 0) return f + ".";
+        else return String(f);
     }
 
     /**
@@ -25,9 +26,27 @@ export class LangWgsl extends Lang
         // if (node.type == "function") str += "<" + node.result.type + ">";
         if (node.type == "value")
         {
-            str += node.value;
 
-            if (node.result.type == "float" && node.value % 1 == 0)str += ".";
+            console.log("aaaaaaaaaaaaaaa", node.result.type);
+            if (node.result.type == "float")
+            {
+                str += this.floatStr(node.value);
+
+            }
+            // else
+            // {
+            //     str += "vec" + node.params.length + "<f32>";
+            //     str += "(";
+            //     for (let i = 0; i < node.params.length; i++)
+            //     {
+
+            //         // str += i;// node.params[i];
+            //         // str += node.params[i].port.op.shaderNode.resultVarName;
+            //         if (i < node.params.length - 1)str += ",";
+            //     }
+            //     str += ");//";
+
+            // }
         }
         //
         return str;
@@ -41,6 +60,11 @@ export class LangWgsl extends Lang
         return this.getVarDef(node, node.resultVarName);
     }
 
+    /**
+     * @param {string} typeTo
+     * @param {string} typeFrom
+     * @param {string} paramStr
+     */
     convertTypes(typeTo, typeFrom, paramStr)
     {
         if (typeFrom == typeTo) return paramStr;
@@ -57,7 +81,7 @@ export class LangWgsl extends Lang
         // if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
         // if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";
 
-        // if (typeFrom == "vec2" && typeTo == "float") return paramStr + ".x";
+        if (typeFrom == "vec2" && typeTo == "float") return paramStr + ".x";
 
         // if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 0.)";
 
@@ -66,10 +90,9 @@ export class LangWgsl extends Lang
 
         // if (typeFrom == "float" && typeTo == "vec2") return this.strTypeVec2 + "(" + paramStr + "," + paramStr + ")";
         // if (typeFrom == "float" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + "," + paramStr + "," + paramStr + ")";
-        if (
-            (typeFrom == "f32" || typeFrom == "float") && typeTo == "vec4") return this.strTypeVec4 + "<f32>(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
+        // if ((typeFrom == "f32" || typeFrom == "float") && typeTo == "vec4") return this.strTypeVec4 + "<f32>(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
 
-        return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
+        return "/* conversionfail: " + paramStr + " " + typeFrom + "->" + typeTo + " */";
     }
 
 }

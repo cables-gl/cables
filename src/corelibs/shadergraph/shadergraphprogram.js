@@ -66,10 +66,8 @@ export class ShaderGraphProgram extends Events
         if (p.op.shaderNode.result)
         {
             paramStr += this.lang.convertTypes(convertTo, node.result.type, node.resultVarName);
-            // paramStr += this.dbg("hurz");
-        } // paramStr += "\ncolor.a=1.0;\n";
-        // if (!node.resultVarName)
-        // if (node.functionname || node.langfunction)
+
+        }
 
         if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
         {
@@ -127,14 +125,14 @@ export class ShaderGraphProgram extends Events
                 for (let j = 0; j < p.links.length; j++)
                 {
                     const otherPort = p.links[j].getOtherPort(p);
-                    paramStr += this._getPortParamStr(otherPort, node.result.type);
+
+                    console.log("~~~~", p.op.shaderNode.result.type, p.op.shaderNode.name);
+                    paramStr += this._getPortParamStr(otherPort, otherPort.op.shaderNode.result.type);
+
                     if (node.result.type == "gen")
                     {
                         node.result.type = otherPort.op.shaderNode.result.type;
                     }
-                    console.log("text", node.result.type);
-                    // console.log("otherPort, node.result.type", otherPort, node.result.type);
-                    // callstr += this.dbg("jajajaja");
 
                     this.addOpShaderFuncCode(otherPort.op);
                 }
@@ -151,7 +149,7 @@ export class ShaderGraphProgram extends Events
                 // }
                 // else
                 // {
-                paramStr = this.lang.getDefaultParameter(p.op.shaderNode.result.type);
+                paramStr = this.lang.getDefaultParameter(p.op.shaderNode.params[i].type);
                 // }
             }
 
@@ -226,14 +224,10 @@ export class ShaderGraphProgram extends Events
             this.execNode(lnk.getOtherPort(port).op);
         }
 
-        console.log("this._callFuncStack", this._callFuncStack);
-
         this.srcMain = this._callFuncStack.join("\n");
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
-
-        console.log(this._opIdsFuncCallSrc);
     }
 
     static getNewId()

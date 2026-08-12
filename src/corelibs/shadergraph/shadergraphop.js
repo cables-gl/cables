@@ -37,11 +37,6 @@ export class ShaderGraphOp
 
         op.shaderNode = shaderNode;
 
-        // console.log("texs pt", this.parseCode);
-
-        // if (src)
-        //     this.parseCode(src);
-
         this._op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
     }
