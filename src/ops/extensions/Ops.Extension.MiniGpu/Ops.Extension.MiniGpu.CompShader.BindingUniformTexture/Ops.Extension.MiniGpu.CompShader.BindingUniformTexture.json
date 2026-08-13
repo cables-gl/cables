@@ -61,5 +61,8 @@
                 "name": "sgtexture"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
 }
