@@ -76,7 +76,7 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_gen"
+                "objType": "sg_vec2"
             }
         ]
     },

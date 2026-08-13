@@ -23,6 +23,7 @@ export class Lang
         params = params || [];
         const types = ["float", "vec2", "vec3", "vec4"];
         let typeIdx = 0;
+        if (!portsSetType) return;
 
         for (let j = 0; j < params.length; j++)
         {

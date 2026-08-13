@@ -13,6 +13,7 @@ import { ShaderGraphProgram } from "./shadergraphprogram.js";
  * @property {string} [name]
  * @property {string} resultVarName
  * @property {string} id
+ * @property {string} src
  * @property {ShaderNodeParam[]} params
  * @property {ShaderNodeParam} result
  */
