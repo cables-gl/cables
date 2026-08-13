@@ -757,14 +757,14 @@ export class Texture extends CgTexture
     }
 
     /**
- * @function getEmptyTexture
- * @memberof Texture
- * @instance
- * @param cgl
- * @param fp
- * @description returns a reference to a small empty (transparent) texture
- * @return {Texture}
- */
+     * @function getEmptyTexture
+     * @memberof Texture
+     * @instance
+     * @param cgl
+     * @param fp
+     * @description returns a reference to a small empty (transparent) texture
+     * @return {Texture}
+     */
     static getEmptyTexture(cgl, fp)
     {
         if (fp) return Texture.getEmptyTextureFloat(cgl);
@@ -782,13 +782,13 @@ export class Texture extends CgTexture
     }
 
     /**
- * @function getEmptyTextureFloat
- * @memberof Texture
- * @instance
- * @param cgl
- * @description returns a reference to a small empty (transparent) 32bit texture
- * @return {Texture}
- */
+     * @function getEmptyTextureFloat
+     * @memberof Texture
+     * @instance
+     * @param cgl
+     * @description returns a reference to a small empty (transparent) 32bit texture
+     * @return {Texture}
+     */
     static getEmptyTextureFloat(cgl)
     {
         if (!cgl) console.error("[getEmptyTextureFloat] no cgl!");
@@ -842,10 +842,10 @@ export class Texture extends CgTexture
     }
 
     /**
- * @param {CglContext} cgl
- * @description returns a reference to a black texture
- * @return {Texture}
- */
+     * @param {CglContext} cgl
+     * @description returns a reference to a black texture
+     * @return {Texture}
+     */
     static getBlackTexture(cgl)
     {
         if (cgl.blackTexture) return cgl.blackTexture;

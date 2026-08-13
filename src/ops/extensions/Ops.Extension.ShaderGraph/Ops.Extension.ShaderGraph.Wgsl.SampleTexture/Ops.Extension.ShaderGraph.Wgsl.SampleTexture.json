@@ -1,0 +1,82 @@
+{
+    "id": "7fc7851d-be93-4992-937e-0e9db384b77b",
+    "created": 1786621510488,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786434225533
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Sin renamed to Ops.Extension.ShaderGraph.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539098140
+        },
+        {
+            "message": "Extension.ShaderGraph.Sin renamed to Ops.Extension.ShaderGraph.Lang.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539274029
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786553619914
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786553822128
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786621510489
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "texture"
+            },
+            {
+                "type": 2,
+                "name": "sampler"
+            },
+            {
+                "type": 2,
+                "name": "coord"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec4"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

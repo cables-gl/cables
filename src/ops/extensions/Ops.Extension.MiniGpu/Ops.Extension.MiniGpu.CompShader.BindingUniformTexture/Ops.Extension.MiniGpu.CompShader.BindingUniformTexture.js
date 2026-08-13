@@ -35,6 +35,7 @@ exec.onTriggered = () =>
                 "multisampled": false
             }
         };
+
         const sampler = mgpu.device.createSampler(
             {
                 "magFilter": "linear",
@@ -61,10 +62,6 @@ exec.onTriggered = () =>
         op.patch.frameStore.mgpu.matProj.current(),
         op.patch.frameStore.mgpu.matModel.current()
     );
-    // mvp=        op.patch.frameStore.mgpu.matModel.current();
-
-    // console.log("text",mvp );
-    // mgpu.device.queue.writeBuffer(uniformBuffer, 0, new Float32Array(mvp));
 
     if (bindingTex)
     {
@@ -73,3 +70,15 @@ exec.onTriggered = () =>
     }
     next.trigger();
 };
+
+/// ////////////////
+
+new CABLES.ShaderGraphOp(this,
+    {
+        "type": "existingvar",
+        "name": "tex",
+        "title": "name",
+        "params": [],
+        "result": { "type": "texture", "port": op.outObject("sgtexture") },
+        "resultVarName": "tex"
+    });

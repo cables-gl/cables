@@ -13,19 +13,17 @@ export class LangWgsl extends Lang
      */
     getVarDef(node, name)
     {
+        if (node.type == "existingvar") return "";
+
         if (name && !node.result?.type) return name + "=";
         let str = "let " + name;
 
-        // str += "<" + node.result.type + ">";
         str += "=";
-        // if (node.type == "function") str += "<" + node.result.type + ">";
         if (node.type == "value")
         {
-
             if (node.result.type == "float")
             {
                 str += this.floatStr(node.value);
-
             }
         }
         return str;
@@ -37,7 +35,6 @@ export class LangWgsl extends Lang
     getResultDef(node)
     {
         return this.getVarDef(node, node.resultVarName);
-
     }
 
     /**

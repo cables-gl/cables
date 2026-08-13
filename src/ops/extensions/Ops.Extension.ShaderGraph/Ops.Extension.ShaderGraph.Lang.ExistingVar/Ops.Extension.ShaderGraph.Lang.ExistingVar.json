@@ -1,0 +1,79 @@
+{
+    "id": "2aea601c-c3d3-4a9a-97cc-932a665b13af",
+    "created": 1786623538140,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786433102805
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786440227951
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Var renamed to Ops.Extension.ShaderGraph.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539117109
+        },
+        {
+            "message": "Extension.ShaderGraph.Var renamed to Ops.Extension.ShaderGraph.Lang.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539281115
+        },
+        {
+            "message": "Extension.ShaderGraph.Lang.Var renamed to Ops.Extension.ShaderGraph.Lang.SetVar",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786545848349
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786623538140
+        },
+        {
+            "message": "Extension.ShaderGraph.Wgsl.Binding renamed to Ops.Extension.ShaderGraph.Lang.ExistingVar",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786631638643
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "var name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

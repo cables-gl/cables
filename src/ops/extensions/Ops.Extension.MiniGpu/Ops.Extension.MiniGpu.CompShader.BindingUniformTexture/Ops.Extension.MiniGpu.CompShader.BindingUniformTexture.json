@@ -53,7 +53,12 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
+                "name": "Next",
+                "objType": "sg_texture"
+            },
+            {
+                "type": 2,
+                "name": "sgtexture"
             }
         ]
     }

@@ -59,7 +59,7 @@ export class ShaderGraphProgram extends Events
      * @param {import("./shadergraphop.js").ShaderNode} node
      * @param {boolean} doConvert
      */
-    _getPortParamStr(p, node, doConvert)
+    _getPortParamStr(p, node, doConvert, convertParam)
     {
         let paramStr = "";
 
@@ -80,7 +80,7 @@ export class ShaderGraphProgram extends Events
         if (otherNode.result)
         {
             if (doConvert)
-                paramStr += this.lang.convertTypes(this.log.bind(this), node.result.type, otherNode.result.type, otherNode.resultVarName);
+                paramStr += this.lang.convertTypes(this.log.bind(this), convertParam.type, otherNode.result.type, otherNode.resultVarName);
             else
                 paramStr += otherNode.resultVarName;
 
@@ -102,8 +102,7 @@ export class ShaderGraphProgram extends Events
         /** @type {import("./shadergraphop.js").ShaderNode} */
         const node = op.shaderNode;
 
-        let callstr = "  ";
-        callstr += "  ";
+        let callstr = "    ";
 
         if (node.type == "var")node.resultVarName = node.name;
         if (!node.resultVarName)
@@ -119,11 +118,11 @@ export class ShaderGraphProgram extends Events
 
         let title = "";
 
-        if (this.options.showId) title += node.id + " ";
+        if (node.title == "name")title += node.name + " ";
 
-        if (node.title == "name")title += "\"" + node.name + "\"";
+        if (this.options.showType) title += node.result.type + " ";
 
-        if (this.options.showType) title += ":" + node.result.type + " ";
+        if (this.options.showId) title += "id" + node.id;
         op.setUiAttrib({ "extendTitle": title });
 
         const varDef = this.lang.getVarDef(node);
@@ -171,7 +170,7 @@ export class ShaderGraphProgram extends Events
                         const otherPort = port.links[j].getOtherPort(port);
 
                         // paramStr += this._getPortParamStr(otherPort, otherPort.op.shaderNode.result.type);
-                        paramStr += this._getPortParamStr(otherPort, node, doConvertTypes);
+                        paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
                         if (node.result.type == "gen")
                             node.result.type = otherPort.op.shaderNode.result.type;
@@ -231,11 +230,12 @@ export class ShaderGraphProgram extends Events
             }
 
         if (node.type == "function") callstr += ")";
-        callstr += ";";
+        if (callstr.trim() != "") callstr += ";";
 
         if (op.uiAttribs.comment)callstr += this.comment(op.uiAttribs.comment);
 
-        callstr += "\n";
+        if (callstr.trim() != "") callstr += "\n";
+
         this.log("execnode " + node.name + " [" + node.type + "]");
         this.log("result type " + node.result.type);
         this._callFuncStack.push(callstr);
