@@ -51,7 +51,11 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "edge 0"
+                "name": "value"
+            },
+            {
+                "type": 5,
+                "name": "var name"
             }
         ],
         "portsOut": [

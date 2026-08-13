@@ -95,9 +95,9 @@ export class ShaderGraphProgram extends Events
         let callstr = "  ";
         callstr += "  ";
 
+        if (node.type == "var")node.resultVarName = node.name;
         if (!node.resultVarName)
-            if (node.type == "var")node.resultVarName = node.name;
-            else node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
+            node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
 
         if (node.type == "operator" || node.maxGen)
         {
@@ -106,7 +106,11 @@ export class ShaderGraphProgram extends Events
         }
 
         op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
-        op.setUiAttrib({ "extendTitle": "" + node.result.type });
+
+        let title = "";
+        if (node.title == "name")title += node.name + " ";
+        title += node.result.type + " ";
+        op.setUiAttrib({ "extendTitle": title });
 
         const varDef = this.lang.getVarDef(node);
 
