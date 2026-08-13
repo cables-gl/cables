@@ -7,21 +7,17 @@ export class LangWgsl extends Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "f32";
 
-    floatStr(f)
-    {
-        if (f % 1 == 0) return f + ".";
-        else return String(f);
-    }
-
     /**
      * @param {import("./shadergraphop").ShaderNode} node
      * @param {string} [name]
      */
     getVarDef(node, name)
     {
-        name = name;
         if (name && !node.result?.type) return name + "=";
-        let str = "let " + name + "=";
+        let str = "let " + name;
+
+        // str += "<" + node.result.type + ">";
+        str += "=";
         // if (node.type == "function") str += "<" + node.result.type + ">";
         if (node.type == "value")
         {
@@ -31,20 +27,6 @@ export class LangWgsl extends Lang
                 str += this.floatStr(node.value);
 
             }
-            // else
-            // {
-            //     str += "vec" + node.params.length + "<f32>";
-            //     str += "(";
-            //     for (let i = 0; i < node.params.length; i++)
-            //     {
-
-            //         // str += i;// node.params[i];
-            //         // str += node.params[i].port.op.shaderNode.resultVarName;
-            //         if (i < node.params.length - 1)str += ",";
-            //     }
-            //     str += ");//";
-
-            // }
         }
         return str;
     }

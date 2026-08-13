@@ -7,25 +7,27 @@ export class LangGlsl extends Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "float";
 
-    typeConv(a)
-    {
-
-        return "var";
-
-    }
-
     /**
      * @param {import("./shadergraphop").ShaderNode} node
      * @param {string} [name]
      */
     getVarDef(node, name)
     {
-        name = name;
         if (name && !node.result?.type) return name + "=";
 
         if (node.result.type == "f32")node.result.type = "float";
         let str = node.result.type + " " + name + "=";
         // if (node.type == "function") str += "<" + node.result.type + ">";
+
+        if (node.type == "value")
+        {
+
+            if (node.result.type == "float")
+            {
+                str += this.floatStr(node.value);
+
+            }
+        }
         return str;
     }
 
@@ -37,7 +39,7 @@ export class LangGlsl extends Lang
         return this.getVarDef(node, node.resultVarName);
     }
 
-    convertTypes(typeTo, typeFrom, paramStr)
+    convertTypes(log, typeTo, typeFrom, paramStr)
     {
         if (typeFrom == typeTo) return paramStr;
         if (typeTo == "sg_genType") return paramStr;
@@ -63,7 +65,8 @@ export class LangGlsl extends Lang
         if (
             (typeFrom == "float" || typeFrom == "f32") && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
 
-        return "/* conversionfail: " + typeFrom + "->" + typeTo + " */";
+        log("conversionfail: " + paramStr + ": " + typeFrom + "->" + typeTo + "  ");
+        return paramStr;
     }
 
 }

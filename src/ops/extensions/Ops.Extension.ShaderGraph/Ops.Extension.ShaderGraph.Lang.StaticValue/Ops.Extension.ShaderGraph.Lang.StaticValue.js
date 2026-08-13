@@ -9,11 +9,11 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "port": value }
         ],
         "result": { "type": "float", "port": op.outObject("result") }
-
     });
 
-value.onChange = () =>
-{
-    op.shaderNode.value = value.get();
-    op.shaderNode.result.port.setRef({});
-};
+op.init =
+    value.onChange = () =>
+    {
+        op.shaderNode.value = value.get();
+        op.shaderNode.result.port.setRef({});
+    };

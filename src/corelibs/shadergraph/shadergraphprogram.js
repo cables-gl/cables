@@ -109,7 +109,8 @@ export class ShaderGraphProgram extends Events
 
         let title = "";
         if (node.title == "name")title += node.name + " ";
-        title += node.result.type + " ";
+
+        if (this.options.types) title += ":" + node.result.type + " ";
         op.setUiAttrib({ "extendTitle": title });
 
         const varDef = this.lang.getVarDef(node);
@@ -249,15 +250,17 @@ export class ShaderGraphProgram extends Events
 
     log(...args)
     {
+        if (!this.options.debug) return;
         const str = "    // " + args.map(String).join(" ");
         this._callFuncStack.push(str);
     }
 
-    compile()
+    compile(options)
     {
         const port = this.#port;
         const l = port.links;
 
+        this.options = options;
         this.uniforms = [];
         this._callFuncStack = [];
         this._functionIdInHead = {};

@@ -38,6 +38,16 @@
             {
                 "type": 5,
                 "name": "Base Code"
+            },
+            {
+                "type": 0,
+                "name": "Debug comments",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Type Title",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -43,4 +43,12 @@ export class Lang
         return t;
     }
 
+    /**
+     * @param {number} f
+     */
+    floatStr(f)
+    {
+        if (f % 1 == 0) return String(f) + ".";
+        else return String(f);
+    }
 }
