@@ -110,23 +110,23 @@ export class ShaderGraphOp
 
 }
 
-ShaderGraphOp.getMaxGenTypeFromPorts = (ports, portsSetType) =>
-{
-    const types = ["sg_float", "sg_vec2", "sg_vec3", "sg_vec4"];
-    let typeIdx = 0;
+// ShaderGraphOp.getMaxGenTypeFromPorts = (ports, portsSetType) =>
+// {
+//     const types = ["sg_float", "sg_vec2", "sg_vec3", "sg_vec4"];
+//     let typeIdx = 0;
 
-    for (let j = 0; j < ports.length; j++)
-        for (let i = 0; i < ports[j].links.length; i++)
-        {
-            const t = types.indexOf(ports[j].links[i].getOtherPort(ports[j]).uiAttribs.objType);
-            typeIdx = Math.max(typeIdx, t);
-        }
+//     for (let j = 0; j < ports.length; j++)
+//         for (let i = 0; i < ports[j].links.length; i++)
+//         {
+//             const t = types.indexOf(ports[j].links[i].getOtherPort(ports[j]).uiAttribs.objType);
+//             typeIdx = Math.max(typeIdx, t);
+//         }
 
-    const t = types[typeIdx];
+//     const t = types[typeIdx];
 
-    if (portsSetType)
-        for (let i = 0; i < portsSetType.length; i++)
-            portsSetType[i].setUiAttribs({ "objType": t });
+//     if (portsSetType)
+//         for (let i = 0; i < portsSetType.length; i++)
+//             portsSetType[i].setUiAttribs({ "objType": t });
 
-    return t;
-};
+//     return t;
+// };

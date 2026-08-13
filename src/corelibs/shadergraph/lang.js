@@ -10,7 +10,7 @@ export class Lang
         if (type == "vec2") return this.strTypeVec2 + "(0., 0.)";
         if (type == "f32") return "0.";
         if (type == "float") return "0.";
-        if (type == "genType") return "0.";
+        if (type == "gen") return "0.";
         return "/* no default: " + type + "*/";
     }
 

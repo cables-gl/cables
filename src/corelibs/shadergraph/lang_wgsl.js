@@ -1,7 +1,6 @@
 import { Lang } from "./lang.js";
 
 export class LangWgsl extends Lang
-
 {
     strTypeVec4 = "vec4";
     strTypeVec3 = "vec3";

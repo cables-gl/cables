@@ -1,6 +1,6 @@
 {
-    "id": "c85a7c5a-7428-445b-9dcb-82106181bc02",
-    "created": 1786527318727,
+    "id": "6a32717f-62ac-4f5f-b5e7-7b09802ad7e3",
+    "created": 1786560693891,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -20,44 +20,55 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786434225533
+            "date": 1786433102805
         },
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786527288419
+            "date": 1786440227951
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Var renamed to Ops.Extension.ShaderGraph.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539117109
+        },
+        {
+            "message": "Extension.ShaderGraph.Var renamed to Ops.Extension.ShaderGraph.Lang.Var",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539281115
         },
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786527318727
+            "date": 1786543324018
         },
         {
-            "message": "Extension.MiniGpu.Sg.Round renamed to Ops.Extension.ShaderGraph.Sl.Round",
-            "type": "rename",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
-            "date": 1786539193626
-        },
-        {
-            "message": "Extension.ShaderGraph.Sl.Round renamed to Ops.Extension.ShaderGraph.Lang.Round",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786539229619
+            "date": 1786560693892
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "number"
+                "name": "x"
+            },
+            {
+                "type": 2,
+                "name": "y"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_vec2"
             }
         ]
     },
