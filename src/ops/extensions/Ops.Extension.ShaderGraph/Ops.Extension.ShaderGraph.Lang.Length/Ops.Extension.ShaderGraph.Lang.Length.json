@@ -45,15 +45,14 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number",
-                "objType": "sg_gen"
+                "name": "number"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_gen"
+                "objType": "sg_float"
             }
         ]
     },

@@ -58,8 +58,7 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "result",
-                "objType": "sg_float"
+                "name": "result"
             }
         ]
     },

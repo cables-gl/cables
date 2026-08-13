@@ -51,23 +51,19 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "x",
-                "objType": "sg_gen"
+                "name": "x"
             },
             {
                 "type": 2,
-                "name": "y",
-                "objType": "sg_gen"
+                "name": "y"
             },
             {
                 "type": 2,
-                "name": "z",
-                "objType": "sg_gen"
+                "name": "z"
             },
             {
                 "type": 2,
-                "name": "w",
-                "objType": "sg_gen"
+                "name": "w"
             }
         ],
         "portsOut": [

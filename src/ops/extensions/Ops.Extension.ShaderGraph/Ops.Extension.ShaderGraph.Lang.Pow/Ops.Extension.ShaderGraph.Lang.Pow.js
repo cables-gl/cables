@@ -3,9 +3,9 @@ new CABLES.ShaderGraphOp(this,
         "type": "function",
         "name": "pow",
         "params": [
-            { "type": "gen", "port": op.inObject("number", null, "sg_gen") },
-            { "type": "gen", "port": op.inObject("number 2", null, "sg_gen") }
+            { "type": "gen", "port": op.inObject("number") },
+            { "type": "gen", "port": op.inObject("number 2") }
         ],
-        "result": { "type": "gen", "port": op.outObject("result", null, "sg_gen") }
+        "result": { "type": "gen", "port": op.outObject("result") }
 
     });

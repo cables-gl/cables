@@ -8,7 +8,7 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "float", "port": value }
         ],
-        "result": { "type": "float", "port": op.outObject("result", null, "sg_float") }
+        "result": { "type": "float", "port": op.outObject("result") }
 
     });
 

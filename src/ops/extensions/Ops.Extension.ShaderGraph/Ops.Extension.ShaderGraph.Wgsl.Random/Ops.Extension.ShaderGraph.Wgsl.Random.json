@@ -39,8 +39,7 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "edge 0",
-                "objType": "sg_float"
+                "name": "edge 0"
             }
         ],
         "portsOut": [

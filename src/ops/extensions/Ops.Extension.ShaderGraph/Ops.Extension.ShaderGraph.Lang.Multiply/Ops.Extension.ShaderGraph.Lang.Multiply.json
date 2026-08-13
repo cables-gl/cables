@@ -57,20 +57,17 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number 1",
-                "objType": "sg_gen"
+                "name": "number 1"
             },
             {
                 "type": 2,
-                "name": "number 2",
-                "objType": "sg_gen"
+                "name": "number 2"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result",
-                "objType": "sg_float"
+                "name": "result"
             }
         ]
     },

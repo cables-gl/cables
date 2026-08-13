@@ -27,25 +27,21 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number",
-                "objType": "sg_gen"
+                "name": "number"
             },
             {
                 "type": 2,
-                "name": "number 2",
-                "objType": "sg_gen"
+                "name": "number 2"
             },
             {
                 "type": 2,
-                "name": "number 3",
-                "objType": "sg_gen"
+                "name": "number 3"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result",
-                "objType": "sg_gen"
+                "name": "result"
             }
         ]
     },
