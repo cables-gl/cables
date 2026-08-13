@@ -46,7 +46,12 @@
             },
             {
                 "type": 0,
-                "name": "Set Type Title",
+                "name": "Show return type ",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show id",
                 "subType": "boolean"
             }
         ],

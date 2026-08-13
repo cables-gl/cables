@@ -3,6 +3,12 @@ import { CONSTANTS, Op, Port } from "cables";
 import { Lang } from "./lang.js";
 import { StandaloneElectron } from "../standalone_electron/standalone_electron.js";
 
+/**
+ * @typedef CompileOptions
+ * @property {boolean} showId
+ * @property {boolean} showType
+ * @property {boolean} debug
+ */
 let shaderIdCounter = 0;
 
 export class ShaderGraphProgram extends Events
@@ -42,13 +48,10 @@ export class ShaderGraphProgram extends Events
 
     addOpShaderFuncCode(op)
     {
-
         if (this._opIdsHeadFuncSrc[op.opId]) return;
 
         this._opIdsHeadFuncSrc[op.opId] = true;
-
         this._headFuncSrc += op.shaderNode.src || "";
-
     }
 
     /**
@@ -64,6 +67,13 @@ export class ShaderGraphProgram extends Events
         const otherNode = p.op.shaderNode;
         this.log("param", p.name, node.result.type, otherNode.name);
         this.log("nodeee", node.type);
+
+        if (otherNode.type == "value" && p.links.length == 1)
+        {
+
+            return this.lang.floatStr(otherNode.value);
+
+        }
 
         this.execNode(p.op, otherNode.result.type);// uiAttribs.objType);
 
@@ -108,9 +118,12 @@ export class ShaderGraphProgram extends Events
         op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
 
         let title = "";
-        if (node.title == "name")title += node.name + " ";
 
-        if (this.options.types) title += ":" + node.result.type + " ";
+        if (this.options.showId) title += node.id + " ";
+
+        if (node.title == "name")title += "\"" + node.name + "\"";
+
+        if (this.options.showType) title += ":" + node.result.type + " ";
         op.setUiAttrib({ "extendTitle": title });
 
         const varDef = this.lang.getVarDef(node);
@@ -255,6 +268,9 @@ export class ShaderGraphProgram extends Events
         this._callFuncStack.push(str);
     }
 
+    /**
+     * @param {CompileOptions} options
+     */
     compile(options)
     {
         const port = this.#port;
