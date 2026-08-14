@@ -42,6 +42,7 @@ export class LangWgsl extends Lang
      */
     convertTypes(log, typeTo, typeFrom, paramStr)
     {
+        log("convert ", typeFrom, typeTo);
         if (typeFrom == typeTo) return paramStr;
         if (typeTo == "gen") return paramStr;
 

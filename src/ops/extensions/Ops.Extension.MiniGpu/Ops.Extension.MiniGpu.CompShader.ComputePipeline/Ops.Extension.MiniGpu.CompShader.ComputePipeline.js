@@ -26,7 +26,6 @@ updateUi();
 /* minimalcore:end */
 inOverrides.onChange = () =>
 {
-    console.log("jajaja");
     pipe = null;
 };
 
@@ -58,7 +57,6 @@ exec.onTriggered = () =>
 
         pipe = mgpu.device.createComputePipeline(o);
 
-        /// ///////////////////////////////////
         computeBindGroup = MGPU.createBindGroup(mgpu, mgpu.shaderModules.compute.bindings.array(), bindGroupLayout);
     }
 

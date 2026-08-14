@@ -8,7 +8,7 @@ export class Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "float";
 
-    convertTypes(arg0, type, type1, resultVarName)
+    convertTypes(log, typeTo, typeFrom, paramStr)
     {
         throw new Error("Method not implemented.");
         return "";
@@ -46,7 +46,7 @@ export class Lang
         params = params || [];
         const types = ["float", "vec2", "vec3", "vec4"];
         let typeIdx = 0;
-        if (!portsSetType) return;
+        // if (!portsSetType) return;
 
         for (let j = 0; j < params.length; j++)
         {

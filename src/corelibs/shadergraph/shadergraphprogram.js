@@ -88,10 +88,21 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const otherNode = p.op.shaderNode;
 
+        // console.log("text")
+        // if (otherNode.result.type == "gen")
+        // {
+        //     otherNode.result.type = this.lang.getMaxGenTypeFromParams(node);
+
+        //     this.log("iiiiii", convertParam.name, p.name, node.name, otherNode.name);
+
+        // }
+
         this.log("param", p.name, node.result.type, otherNode.name);
         this.log("nodeee", node.type);
 
         this.execNode(p.op, otherNode.result?.type);// uiAttribs.objType);
+
+        const tt = this.lang.getMaxGenTypeFromParams(node.params);
 
         if (otherNode.type == "component")
         {
@@ -106,8 +117,11 @@ export class ShaderGraphProgram extends Events
         else
         if (otherNode.result)
         {
+            this.log("doconvert", doConvert);
             if (doConvert)
+            {
                 paramStr += this.lang.convertTypes(this.log.bind(this), convertParam.type, otherNode.result.type, otherNode.resultVarName);
+            }
             else
                 paramStr += otherNode.resultVarName;
 
@@ -191,7 +205,7 @@ export class ShaderGraphProgram extends Events
                 if (port.isLinked())
                 {
                     let doConvertTypes = true;
-                    if (param.type == "gen")doConvertTypes = false;
+                    // if (param.type == "gen")doConvertTypes = false;
 
                     if (node.type == "constructor")
                     {
@@ -215,9 +229,7 @@ export class ShaderGraphProgram extends Events
 
                     if (node.type == "constructor")
                     {
-
                         if (i == op.portsIn.length - 1)paramStr += ")";
-
                     }
                 }
                 else
@@ -232,12 +244,14 @@ export class ShaderGraphProgram extends Events
                     // }
                     // else
                     // {
+                    this.log("defaultvalue ", port.op.shaderNode.params[i].name);
                     paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type);
                 // }
                 }
 
                 if (paramStr)
                 {
+
                     callstr += paramStr;
                 }
                 // else
@@ -255,12 +269,10 @@ export class ShaderGraphProgram extends Events
 
                 if (count < numObjectPorts - 1)
                 {
-                    if (node.type == "operator")
-                    {
-                        callstr += node.name;
-                    }
+                    if (node.type == "operator") callstr += node.name; // math symbol +-/ , NOT var name
                     else callstr += ", ";
                 }
+
                 count++;
             }
 
