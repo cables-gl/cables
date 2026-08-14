@@ -5,21 +5,13 @@ const exec = op.inTrigger("Trigger"),
     inNum3 = op.inInt("Workgroup Num Z", 64),
 
     inWgSize = op.inInt("Workgroup Size", 64),
+    inOverrides = op.inObject("Overrides"),
     childx = op.outTrigger("childx");
 
 let pipe = null;
 let commandEncoder;
 let oldShader = null;
 let computeBindGroup = null;
-
-// inShader.onChange = () =>
-// {
-//     if (inShader.get() != oldShader)
-//     {
-//         pipe = null;
-//         oldShader = inShader.get();
-//     }
-// };
 
 /* minimalcore:start */
 function updateUi()
@@ -32,6 +24,11 @@ inWg.onChange = updateUi;
 updateUi();
 
 /* minimalcore:end */
+inOverrides.onChange = () =>
+{
+    console.log("jajaja");
+    pipe = null;
+};
 
 exec.onTriggered = () =>
 {
@@ -41,10 +38,10 @@ exec.onTriggered = () =>
     mgpu.shaderModules = {};
     childx.trigger();
     if (!mgpu.shaderModules.compute) return;
-    // if (!inShader.get() || !inShader.get().shader.compute) return console.log("no shader");
     if (!pipe || mgpu.rebuildPipeline)
     {
-        // console.log("create compute pipe", mgpu.rebuildPipeline);
+        mgpu.shaderModules.compute.shader.compute.constants = inOverrides.get();
+
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
         const o = {
             "layout": mgpu.device.createPipelineLayout(

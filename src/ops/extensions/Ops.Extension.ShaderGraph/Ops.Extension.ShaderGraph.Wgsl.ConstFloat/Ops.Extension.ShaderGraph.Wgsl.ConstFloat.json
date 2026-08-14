@@ -57,6 +57,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786712036202
+        },
+        {
+            "message": "Extension.ShaderGraph.Wgsl.OverrideFloat renamed to Ops.Extension.ShaderGraph.Wgsl.ConstFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786712901135
         }
     ],
     "layout": {

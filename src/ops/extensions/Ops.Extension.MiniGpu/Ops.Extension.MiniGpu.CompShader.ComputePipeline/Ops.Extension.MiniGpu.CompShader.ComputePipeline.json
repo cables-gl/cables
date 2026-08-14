@@ -70,6 +70,10 @@
                 "type": 0,
                 "name": "Workgroup Size",
                 "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Overrides"
             }
         ],
         "portsOut": [
