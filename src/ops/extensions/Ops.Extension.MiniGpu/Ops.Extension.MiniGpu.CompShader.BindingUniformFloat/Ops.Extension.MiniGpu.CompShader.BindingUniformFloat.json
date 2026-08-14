@@ -37,9 +37,9 @@
                 "type": 0,
                 "name": "Type index",
                 "values": [
-                    "f32",
-                    "vec2f",
-                    "vec4f"
+                    "float",
+                    "vec2",
+                    "vec4"
                 ],
                 "subType": "integer"
             },
@@ -68,7 +68,7 @@
             {
                 "type": 1,
                 "name": "Next",
-                "objType": "sg_float"
+                "objType": "sg_f32"
             },
             {
                 "type": 2,

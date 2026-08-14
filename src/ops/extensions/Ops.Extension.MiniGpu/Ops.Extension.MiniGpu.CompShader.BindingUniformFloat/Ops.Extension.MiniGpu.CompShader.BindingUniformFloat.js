@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
-    inType = op.inSwitch("Type", ["f32", "vec2f", "vec4f"], "f32"),
+    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "f32"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
@@ -22,7 +22,6 @@ inName.onChange =
     inType.onChange =
     exec.onLinkChange = () =>
     {
-
         binding = null;
     };
 
@@ -34,10 +33,10 @@ function updateUi()
     op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
 
     inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
-    inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
-    inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+    inZ.setUiAttribs({ "greyout": inType.get() != "vec4" });
+    inW.setUiAttribs({ "greyout": inType.get() != "vec4" });
 
-    inX.setUiAttribs({ "colorPick": inType.get() == "vec4f" });
+    inX.setUiAttribs({ "colorPick": inType.get() == "vec4" });
 
     /* minimalcore:end */
 }
@@ -61,11 +60,18 @@ exec.onTriggered = () =>
                 "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
             });
 
+        let typestr = inType.get();
+        if (typestr.startsWith("vec")) typestr += "f";
+        else typestr = "f32";
         binding = {
-            "header": "var<uniform> " + inName.get() + " : " + inType.get() + ";",
+            "header": "var<uniform> " + inName.get() + " : " + typestr + ";",
             "resource": { "buffer": uniformBuffer },
             "layout": layout
         };
+
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get();
+        op.shaderNode.result.type = inType.get();
+        op.shaderNode.result.port.setRef({});
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }
