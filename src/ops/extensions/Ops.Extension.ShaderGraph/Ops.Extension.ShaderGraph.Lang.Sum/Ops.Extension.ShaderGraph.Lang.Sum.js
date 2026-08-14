@@ -4,8 +4,8 @@ new CABLES.ShaderGraphOp(this,
         "name": "+",
         "maxGen": true,
         "params": [
-            { "type": "gen", "port": op.inObject("number 1") },
-            { "type": "gen", "port": op.inObject("number 2") }
+            { "type": "gen", "resultType": true, "port": op.inObject("number 1") },
+            { "type": "gen", "resultType": true, "port": op.inObject("number 2") }
         ],
         "result": { "type": "gen", "port": op.outObject("result") }
 

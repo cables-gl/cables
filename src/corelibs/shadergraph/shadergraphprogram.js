@@ -7,6 +7,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @typedef ShaderNodeParam
  * @property {string} type
  * @property {Port} port
+ * @property {boolean} resultType - change to result type when that changes
  */
 
 /**
@@ -133,6 +134,12 @@ export class ShaderGraphProgram extends Events
         return paramStr;
     }
 
+    setNodeResultType(node, type, param)
+    {
+
+        if (param.resultType)param.type = node.result.type;
+    }
+
     /**
      * @param {Op} op
      * @param {string} [convertTo]
@@ -201,6 +208,8 @@ export class ShaderGraphProgram extends Events
 
                 if (port.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
+                this.setNodeResultType(node, node.result.type, param);
+
                 // parameters...
                 if (port.isLinked())
                 {
@@ -222,7 +231,11 @@ export class ShaderGraphProgram extends Events
                         paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
                         if (node.result.type == "gen")
+                        {
+
                             node.result.type = otherPort.op.shaderNode.result.type;
+
+                        }
 
                         this.addOpShaderFuncCode(otherPort.op);
                     }
