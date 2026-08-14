@@ -91,6 +91,15 @@ export class ShaderGraphProgram extends Events
         this.log("param", p.name, node.result.type, otherNode.name);
         this.log("nodeee", node.type);
 
+        // if (otherNode.type == "value")
+        //     if (p.links.length == 1)
+        //     {
+        //         if (otherNode.values) return this.lang.vecStr(otherNode.values);
+        //         else return this.lang.floatStr(otherNode.value);
+        //     }
+
+        this.execNode(p.op, otherNode.result?.type);// uiAttribs.objType);
+
         if (otherNode.type == "component")
         {
             // const otp = convertParam.port.op.shaderNode.params[0].port;// .op.shaderNode.params[0].port;
@@ -104,21 +113,16 @@ export class ShaderGraphProgram extends Events
 
             const otp = otherNode.params[0].port;
             const sourcePort = otp.links[0].getOtherPort(otp);
+
+            this.execNode(sourcePort.op);// uiAttribs.objType);
+
             console.log("otp", otp);
             console.log("sourceport", sourcePort);
-            return sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
+
+            paramStr += sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
 
         }
-
-        if (otherNode.type == "value")
-            if (p.links.length == 1)
-            {
-                if (otherNode.values) return this.lang.vecStr(otherNode.values);
-                else return this.lang.floatStr(otherNode.value);
-            }
-
-        this.execNode(p.op, otherNode.result.type);// uiAttribs.objType);
-
+        else
         if (otherNode.result)
         {
             if (doConvert)
@@ -176,12 +180,13 @@ export class ShaderGraphProgram extends Events
 
         if (this._opIdsFuncCallSrc[node.id]) return;
         this._opIdsFuncCallSrc[node.id] = true;
+
         /// //////
 
         if (node.type == "value")
         {
             if (node.values) callstr += this.lang.vecStr(node.values);
-            else callstr += this.lang.floatStr(node.value);
+            else callstr += "|" + this.lang.floatStr(node.value) + "_";
         }
 
         if (node.type == "function") callstr += node.name + "(";

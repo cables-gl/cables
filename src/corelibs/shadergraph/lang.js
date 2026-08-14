@@ -71,8 +71,9 @@ export class Lang
      */
     floatStr(f)
     {
-        if (f % 1 == 0) return String(f) + ".";
-        else return String(f);
+        let str = String(f);
+        if (!str.includes(".")) str += ".";
+        return str;
     }
 
     vecStr(arr)

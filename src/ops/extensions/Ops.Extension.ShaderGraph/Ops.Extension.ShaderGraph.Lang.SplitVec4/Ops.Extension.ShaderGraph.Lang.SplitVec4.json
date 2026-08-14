@@ -1,0 +1,43 @@
+{
+    "id": "5e856169-1ca7-44e3-b756-25679a03fbe0",
+    "created": 1786695075690,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786695075691
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "vec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "split x"
+            },
+            {
+                "type": 2,
+                "name": "split y"
+            },
+            {
+                "type": 2,
+                "name": "split z"
+            },
+            {
+                "type": 2,
+                "name": "split w"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
