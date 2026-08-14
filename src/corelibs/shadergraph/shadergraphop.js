@@ -9,11 +9,14 @@ import { ShaderGraphProgram } from "./shadergraphprogram.js";
 
 /**
  * @typedef ShaderNode
- * @property {string} [type]
+ * @property {"function"|"value"|"existingvar"|"operator"|"var"} [type]
  * @property {string} [name]
  * @property {string} [title]
  * @property {string} resultVarName
  * @property {string} id
+ * @property {boolean} maxGen
+ * @property {number} value
+ * @property {number[]} values
  * @property {string} src
  * @property {ShaderNodeParam[]} params
  * @property {ShaderNodeParam} result

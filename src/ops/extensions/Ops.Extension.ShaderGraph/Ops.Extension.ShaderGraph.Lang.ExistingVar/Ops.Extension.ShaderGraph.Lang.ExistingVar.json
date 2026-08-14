@@ -64,6 +64,10 @@
             {
                 "type": 5,
                 "name": "var name"
+            },
+            {
+                "type": 5,
+                "name": "var type"
             }
         ],
         "portsOut": [

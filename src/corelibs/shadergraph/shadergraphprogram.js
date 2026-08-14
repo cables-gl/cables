@@ -71,7 +71,20 @@ export class ShaderGraphProgram extends Events
         if (otherNode.type == "value" && p.links.length == 1)
         {
 
-            return this.lang.floatStr(otherNode.value);
+            if (otherNode.values)
+            {
+                let str = "vec" + otherNode.values.length + "(";
+                for (let i = 0; i < otherNode.values.length; i++)
+                {
+                    str += this.lang.floatStr(otherNode.values[i]);
+                    if (i != otherNode.values.length - 1)str += ",";
+                }
+                str += ")";
+                return str;
+
+            }
+            else
+                return this.lang.floatStr(otherNode.value);
 
         }
 
