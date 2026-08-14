@@ -1,7 +1,7 @@
 new CABLES.ShaderGraphOp(this,
     {
         "type": "string",
-        "name": "in.position.xy",
+        "name": "in.uv",
         "result": { "type": "vec2", "port": op.outObject("result") }
 
     });
