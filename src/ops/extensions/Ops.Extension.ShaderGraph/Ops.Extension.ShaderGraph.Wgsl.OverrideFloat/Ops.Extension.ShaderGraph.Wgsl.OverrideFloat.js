@@ -1,0 +1,25 @@
+const name = op.inString("name", "myOverride");
+const value = op.inFloat("value", 0);
+
+new CABLES.ShaderGraphOp(this,
+    {
+        "type": "override",
+        // "name": "value",
+        // "value": value.get(),
+        "params": [
+            { "type": "float", "port": value }
+        ],
+        "result": { "type": "float", "port": op.outObject("result") }
+    });
+
+op.init =
+    name.onChange =
+    value.onChange =
+    () =>
+    {
+        op.shaderNode.value = value.get();
+        op.shaderNode.src = "override " + name.get() + ":f32=" + value.get() + ";";
+        op.shaderNode.resultVarName = name.get();
+
+        op.shaderNode.result.port.setRef({});
+    };
