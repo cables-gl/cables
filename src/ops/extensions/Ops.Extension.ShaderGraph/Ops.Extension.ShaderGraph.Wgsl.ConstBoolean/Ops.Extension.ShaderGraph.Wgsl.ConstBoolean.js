@@ -1,5 +1,5 @@
 const name = op.inString("name", "myOverride");
-const value = op.inFloat("value", 0);
+const value = op.inBool("value", 0);
 
 new CABLES.ShaderGraphOp(this,
     {

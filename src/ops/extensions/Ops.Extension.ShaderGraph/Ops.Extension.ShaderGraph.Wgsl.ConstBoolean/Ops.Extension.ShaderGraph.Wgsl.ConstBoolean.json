@@ -80,7 +80,7 @@
             {
                 "type": 0,
                 "name": "value",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "portsOut": [
