@@ -67,7 +67,12 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next"
+                "name": "Next",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "value"
             }
         ]
     },

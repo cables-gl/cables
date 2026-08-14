@@ -14,6 +14,7 @@ const uniformArray = new Float32Array([0, 0, 0, 0]);
 
 /* minimalcore:start */
 inX.setUiAttribs({ "colorPick": false });
+updateUi();
 
 /* minimalcore:end */
 
@@ -22,19 +23,24 @@ inName.onChange =
     exec.onLinkChange = () =>
     {
 
-        /* minimalcore:start */
-
-        op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
-
-        inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
-        inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
-        inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
-
-        inX.setUiAttribs({ "colorPick": inType.get() == "vec4f" });
-
-        /* minimalcore:end */
         binding = null;
     };
+
+function updateUi()
+{
+
+    /* minimalcore:start */
+
+    op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
+
+    inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
+    inZ.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+    inW.setUiAttribs({ "greyout": inType.get() != "vec4f" });
+
+    inX.setUiAttribs({ "colorPick": inType.get() == "vec4f" });
+
+    /* minimalcore:end */
+}
 
 exec.onTriggered = () =>
 {
@@ -75,3 +81,13 @@ exec.onTriggered = () =>
 
     next.trigger();
 };
+
+new CABLES.ShaderGraphOp(this,
+    {
+        "type": "existingvar",
+        "name": "myfloat",
+        "title": "name",
+        "params": [],
+        "result": { "type": "float", "port": op.outObject("value") },
+        "resultVarName": "myfloat"
+    });

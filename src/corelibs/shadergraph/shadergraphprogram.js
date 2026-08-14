@@ -91,33 +91,14 @@ export class ShaderGraphProgram extends Events
         this.log("param", p.name, node.result.type, otherNode.name);
         this.log("nodeee", node.type);
 
-        // if (otherNode.type == "value")
-        //     if (p.links.length == 1)
-        //     {
-        //         if (otherNode.values) return this.lang.vecStr(otherNode.values);
-        //         else return this.lang.floatStr(otherNode.value);
-        //     }
-
         this.execNode(p.op, otherNode.result?.type);// uiAttribs.objType);
 
         if (otherNode.type == "component")
         {
-            // const otp = convertParam.port.op.shaderNode.params[0].port;// .op.shaderNode.params[0].port;
-            // const ottp = otp.links[0].getOtherPort(otp);
-            // // .op.shaderNode.resultVarName;
-            // // otherNode.params[0].port.links[0].getOtherPort(otherNode.params[0].port).resultVarName;
-            // console.log("ottp", ottp);
-            // console.log("convertParam", convertParam);
-            // // console.log("ppppp", varname);
-            // const varname = ottp.op.shaderNode.name;
-
             const otp = otherNode.params[0].port;
             const sourcePort = otp.links[0].getOtherPort(otp);
 
-            this.execNode(sourcePort.op);// uiAttribs.objType);
-
-            console.log("otp", otp);
-            console.log("sourceport", sourcePort);
+            this.execNode(sourcePort.op);
 
             paramStr += sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
 
