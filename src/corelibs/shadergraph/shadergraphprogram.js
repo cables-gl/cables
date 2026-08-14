@@ -167,7 +167,7 @@ export class ShaderGraphProgram extends Events
         if (node.type == "value")
         {
             if (node.values) callstr += this.lang.vecStr(node.values);
-            else callstr += "|" + this.lang.floatStr(node.value) + "_";
+            // else callstr += "|" + this.lang.floatStr(node.value) + "_";
         }
 
         if (node.type == "function") callstr += node.name + "(";

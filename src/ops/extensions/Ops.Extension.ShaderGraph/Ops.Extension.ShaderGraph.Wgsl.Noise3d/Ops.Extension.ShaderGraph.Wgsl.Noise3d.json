@@ -1,0 +1,62 @@
+{
+    "id": "cf0fa9d8-f49f-428e-92dc-eeae55a76ea6",
+    "created": 1786708810260,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786433102805
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Main renamed to Ops.Extension.MiniGpu.Sg.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786441277694
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Random renamed to Ops.Extension.ShaderGraph.Wgsl.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539331292
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786708810261
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "seed"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

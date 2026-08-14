@@ -68,7 +68,7 @@
             {
                 "type": 1,
                 "name": "Next",
-                "objType": "sg_f32"
+                "objType": "sg_float"
             },
             {
                 "type": 2,

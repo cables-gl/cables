@@ -48,18 +48,18 @@ export class LangWgsl extends Lang
 
         // if (typeFrom == "texture" && typeTo == "vec3") return paramStr + ".xyz";
 
-        // if (typeFrom == "vec4" && typeTo == "vec3") return paramStr + ".xyz";
-        // if (typeFrom == "vec4" && typeTo == "vec2") return paramStr + ".xy";
+        if (typeFrom == "vec4" && typeTo == "vec3") return paramStr + ".xyz";
+        if (typeFrom == "vec4" && typeTo == "vec2") return paramStr + ".xy";
         if (typeFrom == "vec4" && typeTo == "float") return paramStr + ".x";
 
-        // if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
-        // if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";
+        if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
+        if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";
 
         if (typeFrom == "vec2" && typeTo == "float") return paramStr + ".x";
 
-        // if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 0.)";
+        if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ".x," + paramStr + ".y," + paramStr + ".z, 1.)";
 
-        // if (typeFrom == "vec2" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + ", 0.)";
+        if (typeFrom == "vec2" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + ".x," + paramStr + ".y, 0.)";
         if (typeFrom == "vec2" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ".x," + paramStr + ".y, 0., 1.)";
 
         // if (typeFrom == "float" && typeTo == "vec2") return this.strTypeVec2 + "(" + paramStr + "," + paramStr + ")";

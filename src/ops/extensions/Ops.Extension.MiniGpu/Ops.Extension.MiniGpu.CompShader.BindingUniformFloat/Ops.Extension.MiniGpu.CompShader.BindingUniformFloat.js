@@ -22,6 +22,7 @@ inName.onChange =
     inType.onChange =
     exec.onLinkChange = () =>
     {
+        updateUi();
         binding = null;
     };
 
