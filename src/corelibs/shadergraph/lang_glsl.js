@@ -2,13 +2,9 @@ import { Lang } from "./lang.js";
 
 export class LangGlsl extends Lang
 {
-    strTypeVec4 = "vec4";
-    strTypeVec3 = "vec3";
-    strTypeVec2 = "vec2";
-    strTypeFloat = "float";
 
     /**
-     * @param {import("./shadergraphop").ShaderNode} node
+     * @param {import("./shadergraphprogram.js").ShaderNode} node
      * @param {string} [name]
      */
     getVarDef(node, name)
@@ -32,7 +28,7 @@ export class LangGlsl extends Lang
     }
 
     /**
-     * @param {import("./shadergraphop").ShaderNode} node
+     * @param {import("./shadergraphprogram.js").ShaderNode} node
      */
     getResultDef(node)
     {

@@ -2,13 +2,10 @@ import { Lang } from "./lang.js";
 
 export class LangWgsl extends Lang
 {
-    strTypeVec4 = "vec4";
-    strTypeVec3 = "vec3";
-    strTypeVec2 = "vec2";
     strTypeFloat = "f32";
 
     /**
-     * @param {import("./shadergraphop").ShaderNode} node
+     * @param {import("./shadergraphprogram.js").ShaderNode} node
      * @param {string} [name]
      */
     getVarDef(node, name)
@@ -30,7 +27,7 @@ export class LangWgsl extends Lang
     }
 
     /**
-     * @param {import("./shadergraphop").ShaderNode} node
+     * @param {import("./shadergraphprogram.js").ShaderNode} node
      */
     getResultDef(node)
     {
@@ -53,7 +50,7 @@ export class LangWgsl extends Lang
 
         // if (typeFrom == "vec4" && typeTo == "vec3") return paramStr + ".xyz";
         // if (typeFrom == "vec4" && typeTo == "vec2") return paramStr + ".xy";
-        // if (typeFrom == "vec4" && typeTo == "float") return paramStr + ".x";
+        if (typeFrom == "vec4" && typeTo == "float") return paramStr + ".x";
 
         // if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
         // if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";

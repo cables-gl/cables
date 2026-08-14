@@ -3,6 +3,29 @@ import { Port } from "cables";
 export class Lang
 {
 
+    strTypeVec4 = "vec4";
+    strTypeVec3 = "vec3";
+    strTypeVec2 = "vec2";
+    strTypeFloat = "float";
+
+    convertTypes(arg0, type, type1, resultVarName)
+    {
+        throw new Error("Method not implemented.");
+        return "";
+    }
+
+    getResultDef(node)
+    {
+        throw new Error("Method not implemented.");
+        return "";
+    }
+
+    getVarDef(node)
+    {
+        throw new Error("Method not implemented.");
+        return "";
+    }
+
     getDefaultParameter(type)
     {
         if (type == "vec4") return this.strTypeVec4 + "(0., 0., 0., 0.)";
@@ -15,7 +38,7 @@ export class Lang
     }
 
     /**
-     * @param {import("./shadergraphop").ShaderNodeParam[]} params
+     * @param {import("./shadergraphprogram").ShaderNodeParam[]} params
      * @param {Port} portsSetType
      */
     getMaxGenTypeFromParams(params, portsSetType)
@@ -50,5 +73,17 @@ export class Lang
     {
         if (f % 1 == 0) return String(f) + ".";
         else return String(f);
+    }
+
+    vecStr(arr)
+    {
+        let str = "vec" + arr.length + "(";
+        for (let i = 0; i < arr.length; i++)
+        {
+            str += this.floatStr(arr[i]);
+            if (i != arr.length - 1)str += ",";
+        }
+        str += ")";
+        return str;
     }
 }

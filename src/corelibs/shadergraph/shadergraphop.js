@@ -1,32 +1,11 @@
 import { CONSTANTS, Port } from "cables";
 import { ShaderGraphProgram } from "./shadergraphprogram.js";
 
-/**
- * @typedef ShaderNodeParam
- * @property {string} type
- * @property {Port} port
- */
-
-/**
- * @typedef ShaderNode
- * @property {"function"|"value"|"existingvar"|"operator"|"var"} [type]
- * @property {string} [name]
- * @property {string} [title]
- * @property {string} resultVarName
- * @property {string} id
- * @property {boolean} maxGen
- * @property {number} value
- * @property {number[]} values
- * @property {string} src
- * @property {ShaderNodeParam[]} params
- * @property {ShaderNodeParam} result
- */
-
 export class ShaderGraphOp
 {
 
     /**
-     * @param {ShaderNode} shaderNode
+     * @param {import("./shadergraphprogram.js").ShaderNode} shaderNode
      */
     constructor(op, shaderNode)
     {
@@ -39,6 +18,7 @@ export class ShaderGraphOp
         this.info = null;
 
         shaderNode.id = ShaderGraphProgram.getNewId();
+        // shaderNode.op = op;
 
         op.shaderNode = shaderNode;
 

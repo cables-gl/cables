@@ -4,6 +4,28 @@ import { Lang } from "./lang.js";
 import { StandaloneElectron } from "../standalone_electron/standalone_electron.js";
 
 /**
+ * @typedef ShaderNodeParam
+ * @property {string} type
+ * @property {Port} port
+ */
+
+/**
+ * @typedef ShaderNode
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"} [type]
+ * @property {string} [name]
+ * @property {string} [title]
+ * @property {string} resultVarName
+ * @property {string} id
+ * @property {boolean} maxGen
+ * @property {number} value
+ * @property {number[]} values
+ * @property {string} src
+ * @property {ShaderNodeParam[]} params
+ * @property {ShaderNodeParam} result
+ * @property {ShaderNodeParam[]} results
+ */
+
+/**
  * @typedef CompileOptions
  * @property {boolean} showId
  * @property {boolean} showType
@@ -56,37 +78,44 @@ export class ShaderGraphProgram extends Events
 
     /**
      * @param {Port} p
-     * @param {import("./shadergraphop.js").ShaderNode} node
+     * @param {ShaderNode} node
      * @param {boolean} doConvert
      */
     _getPortParamStr(p, node, doConvert, convertParam)
     {
         let paramStr = "";
 
-        /** @type {import("./shadergraphop.js").ShaderNode} */
+        /** @type {ShaderNode} */
         const otherNode = p.op.shaderNode;
+
         this.log("param", p.name, node.result.type, otherNode.name);
         this.log("nodeee", node.type);
 
-        if (otherNode.type == "value" && p.links.length == 1)
+        if (otherNode.type == "component")
         {
+            // const otp = convertParam.port.op.shaderNode.params[0].port;// .op.shaderNode.params[0].port;
+            // const ottp = otp.links[0].getOtherPort(otp);
+            // // .op.shaderNode.resultVarName;
+            // // otherNode.params[0].port.links[0].getOtherPort(otherNode.params[0].port).resultVarName;
+            // console.log("ottp", ottp);
+            // console.log("convertParam", convertParam);
+            // // console.log("ppppp", varname);
+            // const varname = ottp.op.shaderNode.name;
 
-            if (otherNode.values)
-            {
-                let str = "vec" + otherNode.values.length + "(";
-                for (let i = 0; i < otherNode.values.length; i++)
-                {
-                    str += this.lang.floatStr(otherNode.values[i]);
-                    if (i != otherNode.values.length - 1)str += ",";
-                }
-                str += ")";
-                return str;
-
-            }
-            else
-                return this.lang.floatStr(otherNode.value);
+            const otp = otherNode.params[0].port;
+            const sourcePort = otp.links[0].getOtherPort(otp);
+            console.log("otp", otp);
+            console.log("sourceport", sourcePort);
+            return sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
 
         }
+
+        if (otherNode.type == "value")
+            if (p.links.length == 1)
+            {
+                if (otherNode.values) return this.lang.vecStr(otherNode.values);
+                else return this.lang.floatStr(otherNode.value);
+            }
 
         this.execNode(p.op, otherNode.result.type);// uiAttribs.objType);
 
@@ -112,11 +141,12 @@ export class ShaderGraphProgram extends Events
     execNode(op, convertTo)
     {
 
-        /** @type {import("./shadergraphop.js").ShaderNode} */
+        /** @type {ShaderNode} */
         const node = op.shaderNode;
 
         let callstr = "    ";
 
+        if (node.type == "component") return;
         if (node.type == "var")node.resultVarName = node.name;
         if (!node.resultVarName)
             node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
@@ -147,6 +177,12 @@ export class ShaderGraphProgram extends Events
         if (this._opIdsFuncCallSrc[node.id]) return;
         this._opIdsFuncCallSrc[node.id] = true;
         /// //////
+
+        if (node.type == "value")
+        {
+            if (node.values) callstr += this.lang.vecStr(node.values);
+            else callstr += this.lang.floatStr(node.value);
+        }
 
         if (node.type == "function") callstr += node.name + "(";
         if (node.type == "string") callstr += node.name;
