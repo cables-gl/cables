@@ -11,6 +11,7 @@ export class LangWgsl extends Lang
     getVarDef(node, name)
     {
         if (node.type == "existingvar") return "";
+        if (node.type == "override") return "";
 
         if (name && !node.result?.type) return name + "=";
         let str = "let " + name;

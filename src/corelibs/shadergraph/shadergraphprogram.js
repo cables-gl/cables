@@ -11,7 +11,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 
 /**
  * @typedef ShaderNode
- * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"} [type]
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"} [type]
  * @property {string} [name]
  * @property {string} [title]
  * @property {string} resultVarName
