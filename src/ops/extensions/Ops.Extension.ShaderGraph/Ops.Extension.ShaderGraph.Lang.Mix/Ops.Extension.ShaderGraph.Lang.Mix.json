@@ -1,0 +1,58 @@
+{
+    "id": "60de37cf-bb71-46e9-bed9-0bfa6c8c8277",
+    "created": 1786709508149,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Smoothstep renamed to Ops.Extension.ShaderGraph.Lang.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539360303
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786709508150
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value 0"
+            },
+            {
+                "type": 2,
+                "name": "value 1"
+            },
+            {
+                "type": 2,
+                "name": "fade"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
