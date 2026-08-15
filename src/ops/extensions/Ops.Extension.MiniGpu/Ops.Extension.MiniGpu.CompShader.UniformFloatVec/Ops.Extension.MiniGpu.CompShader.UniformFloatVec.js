@@ -23,6 +23,7 @@ inName.onChange =
     {
         updateUi();
         binding = null;
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get();
     };
 
 function updateUi()
