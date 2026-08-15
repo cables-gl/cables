@@ -51,6 +51,7 @@ export class ShaderGraphProgram extends Events
     /** @type {string[]} */
     _callFuncStack = [];
     finalSrc = "";
+    updateableOps = {};
 
     /**
      * @param {Port} port
@@ -135,6 +136,7 @@ export class ShaderGraphProgram extends Events
 
         let callstr = "    ";
 
+        if (node.update) this.updateableOps[node.id] = node;
         if (node.type == "component") return;
         if (node.type == "var")node.resultVarName = node.name;
         if (!node.resultVarName)
@@ -292,6 +294,7 @@ export class ShaderGraphProgram extends Events
         const port = this.#port;
         const l = port.links;
 
+        this.updateableOps = {};
         this.options = options;
         this._callFuncStack = [];
         this._functionIdInHead = {};

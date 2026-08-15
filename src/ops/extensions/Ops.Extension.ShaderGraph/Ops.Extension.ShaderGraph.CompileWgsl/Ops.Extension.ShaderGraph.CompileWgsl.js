@@ -4,7 +4,8 @@ const
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true),
-    outCode = op.outString("Code");
+    outCode = op.outString("Code"),
+    outUniforms = op.outArray("Uniforms");
 
 const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangWgsl());
 
@@ -26,6 +27,8 @@ ids.onChange =
 
         str = str.replaceAll("{{MAIN}}", sgp.srcMain);
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
+
+        outUniforms.setRef(Object.values(sgp.updateableOps));
 
         outCode.set(str);
     };

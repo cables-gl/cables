@@ -53,6 +53,10 @@
             {
                 "type": 5,
                 "name": "Code"
+            },
+            {
+                "type": 3,
+                "name": "Uniforms"
             }
         ]
     },

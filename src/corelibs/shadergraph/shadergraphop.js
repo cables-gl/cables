@@ -40,6 +40,13 @@ export class ShaderGraphOp
 
     updateGraph()
     {
+
+        if (this._op.shaderNode.params)
+            for (let i = 0; i < this._op.shaderNode.params.length; i++)
+            {
+                if (this._op.shaderNode.params[i].port)
+                    this._op.shaderNode.params[i].port.setUiAttribs({ "objType": "sg_" + this._op.shaderNode.params[i].type });
+            }
         for (let i = 0; i < this._op.portsOut.length; i++)
         {
             if (this._op.portsOut[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;

@@ -1,11 +1,11 @@
 const name = op.inString("name", "myOverride");
 const value = op.inFloat("value", 0);
 
+value.setUiAttribs({ "hidePort": true });
+
 new CABLES.ShaderGraphOp(this,
     {
         "type": "override",
-        // "name": "value",
-        // "value": value.get(),
         "params": [
             { "type": "float", "port": value }
         ],

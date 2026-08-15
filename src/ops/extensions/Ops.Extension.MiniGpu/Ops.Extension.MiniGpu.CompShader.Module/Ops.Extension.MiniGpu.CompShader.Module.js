@@ -3,6 +3,7 @@ const
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
 
     inCode = op.inStringEditor("Code", "", "glsl"),
+    inUpdates = op.inArray("Update Values"),
 
     inCodePre = op.inString("Code Prepend", ""),
     inReset = op.inTriggerButton("Reset"),
@@ -78,6 +79,13 @@ exec.onTriggered = () =>
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
     mgpu.bindings = binds.clear();
+
+    const updts = inUpdates.get();
+    for (let i = 0; i < updts.length; i++)
+    {
+        updts[i].update(mgpu);
+
+    }
 
     next.trigger();
     mgpu.shader.pop();

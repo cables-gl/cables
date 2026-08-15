@@ -70,18 +70,12 @@
             {
                 "type": 5,
                 "name": "name"
-            },
-            {
-                "type": 0,
-                "name": "value",
-                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result",
-                "objType": "sg_float"
+                "name": "result"
             }
         ]
     },
