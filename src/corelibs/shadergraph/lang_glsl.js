@@ -38,28 +38,25 @@ export class LangGlsl extends Lang
     convertTypes(log, typeTo, typeFrom, paramStr)
     {
         if (typeFrom == typeTo) return paramStr;
-        if (typeTo == "sg_genType") return paramStr;
+        if (typeTo == "gen") return paramStr;
 
-        // if (typeFrom == "sg_texture" && typeTo == "sg_vec3") return paramStr + ".xyz";
+        // if (typeFrom == "texture" && typeTo == "vec3") return paramStr + ".xyz";
 
-        // if (typeFrom == "sg_vec4" && typeTo == "sg_vec3") return paramStr + ".xyz";
-        // if (typeFrom == "sg_vec4" && typeTo == "sg_vec2") return paramStr + ".xy";
-        // if (typeFrom == "sg_vec4" && typeTo == "sg_float") return paramStr + ".x";
+        if (typeFrom == "vec4" && typeTo == "vec3") return paramStr + ".xyz";
+        if (typeFrom == "vec4" && typeTo == "vec2") return paramStr + ".xy";
+        if (typeFrom == "vec4" && typeTo == "float") return paramStr + ".x";
 
-        // if (typeFrom == "sg_vec3" && typeTo == "sg_vec2") return paramStr + ".xy";
-        // if (typeFrom == "sg_vec3" && typeTo == "sg_float") return paramStr + ".x";
+        if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
+        if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";
+        if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 0.)";
 
-        // if (typeFrom == "sg_vec2" && typeTo == "sg_float") return paramStr + ".x";
-
-        // if (typeFrom == "sg_vec3" && typeTo == "sg_vec4") return this.#lang.strTypeVec4 + "(" + paramStr + ", 0.)";
-
-        // if (typeFrom == "sg_vec2" && typeTo == "sg_vec3") return this.#lang.strTypeVec3 + "(" + paramStr + ", 0.)";
+        if (typeFrom == "vec2" && typeTo == "float") return paramStr + ".x";
+        if (typeFrom == "vec2" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + ", 0.)";
         if (typeFrom == "vec2" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 0., 1.)";
 
-        // if (typeFrom == "sg_float" && typeTo == "sg_vec2") return this.#lang.strTypeVec2 + "(" + paramStr + "," + paramStr + ")";
-        // if (typeFrom == "sg_float" && typeTo == "sg_vec3") return this.#lang.strTypeVec3 + "(" + paramStr + "," + paramStr + "," + paramStr + ")";
-        if (
-            (typeFrom == "float" || typeFrom == "f32") && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
+        if (typeFrom == "float" && typeTo == "vec2") return this.strTypeVec2 + "(" + paramStr + "," + paramStr + ")";
+        if (typeFrom == "float" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + "," + paramStr + "," + paramStr + ")";
+        if ((typeFrom == "float" || typeFrom == "f32") && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + "," + paramStr + "," + paramStr + ", 1.0)";
 
         log("conversionfail: " + paramStr + ": " + typeFrom + "->" + typeTo + "  ");
         return paramStr;

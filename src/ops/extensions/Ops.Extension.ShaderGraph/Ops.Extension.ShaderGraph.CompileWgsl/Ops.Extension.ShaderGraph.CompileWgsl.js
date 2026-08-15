@@ -6,7 +6,7 @@ const
     ids = op.inBool("Show id", true),
     outCode = op.outString("Code");
 
-const sgp = new CABLES.ShaderGraphProgram(op, inO, "frag", new CABLES.LangWgsl());
+const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangWgsl());
 
 ids.onChange =
     types.onChange =
@@ -16,6 +16,13 @@ ids.onChange =
     {
         sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
         let str = inSrc.get();
+
+        /* minimalcore:start */
+
+        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
+        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+
+        /* minimalcore:end */
 
         str = str.replaceAll("{{MAIN}}", sgp.srcMain);
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);

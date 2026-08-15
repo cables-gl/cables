@@ -39,7 +39,6 @@ export class ShaderGraphProgram extends Events
 
     /** @type {Lang} */
     lang = null;
-    #type = null;
     #port = null;
 
     _opIdsHeadFuncSrc = {};
@@ -54,15 +53,12 @@ export class ShaderGraphProgram extends Events
     finalSrc = "";
 
     /**
-     * @param {Op} op
      * @param {Port} port
-     * @param {string} type
      * @param {Lang} lang
      */
-    constructor(op, port, type, lang)
+    constructor(port, lang)
     {
         super();
-        this.#type = type;
         this.#port = port;
         this.lang = lang;
     }
@@ -150,13 +146,16 @@ export class ShaderGraphProgram extends Events
             this.log("set result ", node.name, node.result.type);
         }
 
-        op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
-
         let title = "";
         if (node.title == "name")title += node.name + " ";
         if (this.options.showType) title += node.result.type + " ";
         if (this.options.showId) title += "id" + node.id;
+
+        /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": title });
+        op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
+
+        /* minimalcore:end */
 
         const varDef = this.lang.getVarDef(node);
 
@@ -242,12 +241,19 @@ export class ShaderGraphProgram extends Events
         if (node.type == "function") callstr += ")";
         if (callstr.trim() != "") callstr += ";";
 
+        /* minimalcore:start */
         if (op.uiAttribs.comment)callstr += this.comment(op.uiAttribs.comment);
+
+        /* minimalcore:end */
 
         if (callstr.trim() != "") callstr += "\n";
 
+        /* minimalcore:start */
         this.log("execnode " + node.name + " [" + node.type + "]");
         this.log("->" + node.result.type);
+
+        /* minimalcore:end */
+
         this._callFuncStack.push(callstr);
 
         return node.resultVarName;

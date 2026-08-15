@@ -2,11 +2,11 @@ const
     inO = op.inObject("Graph"),
     inSrc = op.inStringEditor("Base Code", "name"),
     debug = op.inBool("Debug comments", false),
-    types = op.inBool("Show return type ", true),
+    types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true),
     outCode = op.outString("Code");
 
-const sgp = new CABLES.ShaderGraphProgram(op, inO, "frag", new CABLES.LangGlsl());
+const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangGlsl());
 
 ids.onChange =
     types.onChange =
@@ -14,8 +14,15 @@ ids.onChange =
     inSrc.onChange =
     inO.onChange = () =>
     {
-        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get() });
+        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
         let str = inSrc.get();
+
+        /* minimalcore:start */
+
+        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
+        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+
+        /* minimalcore:end */
 
         str = str.replaceAll("{{MAIN}}", sgp.srcMain);
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
