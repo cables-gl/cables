@@ -9,7 +9,6 @@ export class RenderTarget
 
     /**
      * @param {import(".").MgpuState} mgpu
-     * @param {string} label
      */
     constructor(mgpu, options = {})
     {
@@ -19,6 +18,7 @@ export class RenderTarget
 
         /* minimalcore:end */
 
+        this.options = options;
         this.label = options.label || "unknown";
         this.mgpu = mgpu;
 
@@ -53,28 +53,6 @@ export class RenderTarget
             this.viewColor = this.colorTexture.createView();
         }
 
-        /** @type {GPURenderPassDescriptor} */
-        this.renderPassDescriptor = {
-
-            "label": this.label,
-            "colorAttachments": [
-                {
-                    "view": this.viewColor,
-                    // "clearValue": [0, 1, 0, 0],
-                    "loadOp": options.loadOp || "clear",
-                    "storeOp": "store"
-                }
-            ],
-            "depthStencilAttachment":
-            {
-                "view": this.depthTexture.createView(),
-                "depthClearValue": 1.0,
-                "depthLoadOp": "clear",
-                "depthStoreOp": "store"
-            }
-        };
-        if (options.resolveTarget) this.renderPassDescriptor.colorAttachments[0].resolveTarget = options.resolveTarget;
-
     }
 
     get isOpen()
@@ -86,7 +64,29 @@ export class RenderTarget
     {
         if (this.mgpu.target.current()) this.mgpu.target.current().end();
 
-        this.#passEncoder = this.mgpu.commandEncoder.beginRenderPass(this.renderPassDescriptor);
+        /** @type {GPURenderPassDescriptor} */
+        const renderPassDescriptor = {
+
+            "label": this.label,
+            "colorAttachments": [
+                {
+                    "view": this.viewColor,
+                    // "clearValue": [0, 1, 0, 0],
+                    "loadOp": this.options.loadOp || "clear",
+                    "storeOp": "discard"
+                }
+            ],
+            "depthStencilAttachment":
+            {
+                "view": this.depthTexture.createView(),
+                "depthClearValue": 1.0,
+                "depthLoadOp": "clear",
+                "depthStoreOp": "store"
+            }
+        };
+        if (this.options.resolveTarget) renderPassDescriptor.colorAttachments[0].resolveTarget = this.mgpu.context.getCurrentTexture().createView();
+
+        this.#passEncoder = this.mgpu.commandEncoder.beginRenderPass(renderPassDescriptor);
 
         this.mgpu.target.push(this);
     }
@@ -95,7 +95,6 @@ export class RenderTarget
     {
         if (!this.#passEncoder) this.start();
         return this.#passEncoder;
-
     }
 
     end()

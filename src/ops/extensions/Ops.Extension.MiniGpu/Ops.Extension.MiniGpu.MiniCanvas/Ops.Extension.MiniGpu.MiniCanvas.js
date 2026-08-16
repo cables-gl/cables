@@ -7,6 +7,7 @@ let device = null;
 let context = null;
 let pipeline = null;
 let mgpu = {};
+let rt = null;
 const devicePixelRatio = window.devicePixelRatio;
 
 /* minimalcore:start */
@@ -59,6 +60,7 @@ function setSize(width, height, mul = devicePixelRatio)
     {
         canvas.width = width * mul;
         canvas.height = height * mul;
+        rt = null;
 
         presentationFormat = navigator.gpu.getPreferredCanvasFormat();
         context.configure(
@@ -87,8 +89,6 @@ resizeObserver.observe(canvas);
 function frame(timestamp)
 {
 
-    requestAnimationFrame(frame);
-
     /* minimalcore:start */
     const timeStart = performance.now();
 
@@ -112,18 +112,21 @@ function frame(timestamp)
     lastTs = timestamp;
 
     op.patch.frameStore.mgpu = mgpu;
-    const rt = new MGPU.RenderTarget(mgpu,
-        {
-            "label": "canvasRt",
-            "resolveTarget": context.getCurrentTexture(),
-            "sampleCount": 4
-        });
+    if (!rt)
+        rt = new MGPU.RenderTarget(mgpu,
+            {
+                "label": "canvasRt",
+                "resolveTarget": true,
+                "sampleCount": 4
+            });
 
     rt.start();
     next.trigger();
     rt.end();
 
     device.queue.submit([commandEncoder.finish()]);
+
+    requestAnimationFrame(frame);
 
     /* minimalcore:start */
 

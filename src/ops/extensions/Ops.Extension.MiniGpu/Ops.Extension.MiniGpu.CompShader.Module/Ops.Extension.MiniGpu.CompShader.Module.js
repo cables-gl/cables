@@ -164,6 +164,7 @@ exec.onTriggered = () =>
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
 
+        console.log("rebuild module");
         reInit = false;
     }
 
