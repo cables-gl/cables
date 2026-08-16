@@ -138,7 +138,22 @@ exec.onTriggered = () =>
             "module": module,
             "targets": [ // only frag??
                 {
-                    "format": mgpu.format
+                    "format": mgpu.format,
+                    "blend":
+                    {
+                        "color":
+                        {
+                            "srcFactor": "src-alpha",
+                            "dstFactor": "one-minus-src-alpha",
+                            "operation": "add"
+                        },
+                        "alpha":
+                        {
+                            "srcFactor": "one",
+                            "dstFactor": "one-minus-src-alpha",
+                            "operation": "add"
+                        }
+                    }
                 }
             ],
             "constants": mgpu.constants

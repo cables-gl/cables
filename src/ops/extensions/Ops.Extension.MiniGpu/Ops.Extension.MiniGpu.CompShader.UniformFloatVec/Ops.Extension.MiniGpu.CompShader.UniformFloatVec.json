@@ -32,20 +32,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 5,
-                "name": "Name"
-            },
-            {
-                "type": 0,
-                "name": "Type index",
-                "values": [
-                    "float",
-                    "vec2",
-                    "vec4"
-                ],
-                "subType": "integer"
-            },
-            {
                 "type": 0,
                 "name": "X",
                 "subType": "number"
@@ -64,6 +50,10 @@
                 "type": 0,
                 "name": "W",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Name"
             }
         ],
         "portsOut": [

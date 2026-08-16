@@ -1,19 +1,22 @@
 const
     // exec = op.inTrigger("Trigger"),
-    inName = op.inString("Name", "ssss"),
     inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "float"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
-    inW = op.inFloat("W", 1);
+    inW = op.inFloat("W", 1),
+    inName = op.inString("Name", "");
+
 const outValue = op.outObject("value");
 
 let binding = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
+const defaultName = "unif" + CABLES.simpleId();
 
 /* minimalcore:start */
 inX.setUiAttribs({ "colorPick": false });
+inType.setUiAttribs({ "hidePort": true });
 updateUi();
 
 /* minimalcore:end */
@@ -23,7 +26,7 @@ inName.onChange =
     {
         updateUi();
         binding = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get();
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -53,10 +56,7 @@ function update(mgpu)
 
         const layout = {
             "visibility": mgpu.stage,
-            "buffer":
-            {
-                "type": "uniform"
-            }
+            "buffer": { "type": "uniform" }
         };
         uniformBuffer = mgpu.device.createBuffer(
             {
@@ -68,12 +68,12 @@ function update(mgpu)
         if (typestr.startsWith("vec")) typestr += "f";
         else typestr = "f32";
         binding = {
-            "header": "var<uniform> " + inName.get() + " : " + typestr + ";",
+            "header": "var<uniform> " + (inName.get() || defaultName) + " : " + typestr + ";",
             "resource": { "buffer": uniformBuffer },
             "layout": layout
         };
 
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get();
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
         op.shaderNode.result.type = inType.get();
         op.shaderNode.result.port.setRef({});
 
@@ -88,16 +88,15 @@ function update(mgpu)
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
     mgpu.bindings.push(binding);
-
 }
 
 new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
-        "name": inName.get(),
+        "name": inName.get() || defaultName,
         "title": "name",
         "update": update,
         "params": [],
         "result": { "type": "float", "port": outValue },
-        "resultVarName": inName.get()
+        "resultVarName": inName.get() || defaultName
     });

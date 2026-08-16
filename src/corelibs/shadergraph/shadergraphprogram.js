@@ -66,9 +66,9 @@ export class ShaderGraphProgram extends Events
 
     addOpShaderFuncCode(op)
     {
-        if (this._opIdsHeadFuncSrc[op.opId]) return;
+        if (this._opIdsHeadFuncSrc[op.name]) return;
 
-        this._opIdsHeadFuncSrc[op.opId] = true;
+        this._opIdsHeadFuncSrc[op.name] = true;
         this._headFuncSrc += op.shaderNode.src || "";
     }
 

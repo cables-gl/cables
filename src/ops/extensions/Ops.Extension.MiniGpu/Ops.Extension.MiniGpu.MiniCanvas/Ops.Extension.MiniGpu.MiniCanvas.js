@@ -53,6 +53,7 @@ let lastTs = 0;
 
 function setSize(width, height, mul = devicePixelRatio)
 {
+    mul = 1;
 
     if (canvas.width != width * mul || canvas.height != height * mul)
     {
@@ -111,7 +112,12 @@ function frame(timestamp)
     lastTs = timestamp;
 
     op.patch.frameStore.mgpu = mgpu;
-    const rt = new MGPU.RenderTarget(mgpu, { "label": "canvasRt", "view": context.getCurrentTexture().createView() });
+    const rt = new MGPU.RenderTarget(mgpu,
+        {
+            "label": "canvasRt",
+            "resolveTarget": context.getCurrentTexture(),
+            "sampleCount": 4
+        });
 
     rt.start();
     next.trigger();
@@ -124,11 +130,11 @@ function frame(timestamp)
     mgpu.target.checkEmpty();
     mgpu.shader.checkEmpty();
 
-    canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
-
     frames++;
     if (performance.now() - fpsTime > 1000)
     {
+
+        canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
         canvas.dataset.perffps = frames;
         fpsTime = performance.now();
         frames = 0;

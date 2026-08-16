@@ -32,7 +32,8 @@ export class ShaderGraphOp
         {
             if (this._op.portsIn[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
-            if (this._op.portsIn[i].uiAttribs.objType && this._op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0) this._op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
+            if (this._op.portsIn[i].uiAttribs.objType && this._op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0)
+                this._op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
 
             this._op.portsIn[i].on("change", this.updateGraph.bind(this));
         }
@@ -40,13 +41,15 @@ export class ShaderGraphOp
 
     updateGraph()
     {
-
         if (this._op.shaderNode.params)
+        {
             for (let i = 0; i < this._op.shaderNode.params.length; i++)
             {
                 if (this._op.shaderNode.params[i].port)
                     this._op.shaderNode.params[i].port.setUiAttribs({ "objType": "sg_" + this._op.shaderNode.params[i].type });
             }
+        }
+
         for (let i = 0; i < this._op.portsOut.length; i++)
         {
             if (this._op.portsOut[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;

@@ -14,7 +14,10 @@ export class LangWgsl extends Lang
         if (node.type == "override") return "";
 
         if (name && !node.result?.type) return name + "=";
-        let str = "let " + name;
+
+        let str = "let ";
+        if (node.type == "var") str = "var ";
+        str += name;
 
         str += "=";
         if (node.type == "value")

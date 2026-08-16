@@ -29,6 +29,7 @@ export class RenderTarget
             {
                 "size": [mgpu.canvas.width, mgpu.canvas.height],
                 "format": "depth24plus",
+                "sampleCount": 4,
                 "usage": GPUTextureUsage.RENDER_ATTACHMENT
             });
 
@@ -44,7 +45,9 @@ export class RenderTarget
                     "size": [mgpu.canvas.width, mgpu.canvas.height],
                     // "format": "rgba8uint",
                     "format": mgpu.format,
-                    "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING
+                    "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING,
+                    "sampleCount": 4
+
                 });
 
             this.viewColor = this.colorTexture.createView();
@@ -70,6 +73,7 @@ export class RenderTarget
                 "depthStoreOp": "store"
             }
         };
+        if (options.resolveTarget) this.renderPassDescriptor.colorAttachments[0].resolveTarget = options.resolveTarget;
 
     }
 
