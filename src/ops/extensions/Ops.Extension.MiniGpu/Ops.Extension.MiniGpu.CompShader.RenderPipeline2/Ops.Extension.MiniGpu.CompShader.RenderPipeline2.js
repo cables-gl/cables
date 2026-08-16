@@ -68,13 +68,15 @@ exec.onTriggered = () =>
                 "depthWriteEnabled": depthWriteEnabled.get(),
                 "depthCompare": depthCompare.get(),
                 "format": "depth24plus"
-            },
-            "multisample":
-            {
-                "count": 4,
-                "alphaToCoverageEnabled": true
             }
         };
+        if (mgpu.target.current().options.sampleCount > 1)
+        {
+            o.multisample = {
+                "count": mgpu.target.current().options.sampleCount,
+                "alphaToCoverageEnabled": true
+            };
+        }
         bindGroupFrag = MGPU.createBindGroup(mgpu, bindsFrag, bindGroupLayoutFrag);
         bindGroupVert = MGPU.createBindGroup(mgpu, bindsVert, bindGroupLayoutVert);
 

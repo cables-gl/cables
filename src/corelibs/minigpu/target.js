@@ -21,6 +21,7 @@ export class RenderTarget
         this.options = options;
         this.label = options.label || "unknown";
         this.mgpu = mgpu;
+        if (!options.hasOwnProperty("sampleCount"))options.sampleCount = 1;
 
         this.#passEncoder = null;
         this._everStarted = false;
@@ -29,7 +30,7 @@ export class RenderTarget
             {
                 "size": [mgpu.canvas.width, mgpu.canvas.height],
                 "format": "depth24plus",
-                "sampleCount": 4,
+                "sampleCount": options.sampleCount,
                 "usage": GPUTextureUsage.RENDER_ATTACHMENT
             });
 
@@ -46,7 +47,7 @@ export class RenderTarget
                     // "format": "rgba8uint",
                     "format": mgpu.format,
                     "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING,
-                    "sampleCount": 4
+                    "sampleCount": options.sampleCount
 
                 });
 
@@ -73,7 +74,7 @@ export class RenderTarget
                     "view": this.viewColor,
                     // "clearValue": [0, 1, 0, 0],
                     "loadOp": this.options.loadOp || "clear",
-                    "storeOp": "discard"
+                    "storeOp": "store"
                 }
             ],
             "depthStencilAttachment":
@@ -84,7 +85,16 @@ export class RenderTarget
                 "depthStoreOp": "store"
             }
         };
-        if (this.options.resolveTarget) renderPassDescriptor.colorAttachments[0].resolveTarget = this.mgpu.context.getCurrentTexture().createView();
+        if (this.options.copyToCanvas)
+        {
+            if (this.options.sampleCount > 1)
+            {
+                renderPassDescriptor.colorAttachments[0].resolveTarget = this.mgpu.context.getCurrentTexture().createView();
+                renderPassDescriptor.colorAttachments[0].storeOp = "discard";
+            }
+            else
+                renderPassDescriptor.colorAttachments[0].view = this.mgpu.context.getCurrentTexture().createView();
+        }
 
         this.#passEncoder = this.mgpu.commandEncoder.beginRenderPass(renderPassDescriptor);
 

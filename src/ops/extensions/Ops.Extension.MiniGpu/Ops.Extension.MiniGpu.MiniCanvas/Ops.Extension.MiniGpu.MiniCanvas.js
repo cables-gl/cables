@@ -116,8 +116,10 @@ function frame(timestamp)
         rt = new MGPU.RenderTarget(mgpu,
             {
                 "label": "canvasRt",
-                "resolveTarget": true,
-                "sampleCount": 4
+                // "view": context.getCurrentTexture().createView(),
+                "copyToCanvas": true,
+                //  "resolveTarget": true,
+                "sampleCount": 1
             });
 
     rt.start();

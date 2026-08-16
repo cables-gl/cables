@@ -1,13 +1,14 @@
 const
     exec = op.inTrigger("Trigger"),
     tex = op.inObject("texture"),
-    inName = op.inString("name"),
+    inName = op.inString("name", "tex"),
     next = op.outTrigger("Next");
 
 let bindingTex = null;
 let bindingSampler = null;
 
-tex.onChange =
+inName.onChange =
+    tex.onChange =
     exec.onLinkChange = () =>
     {
         bindingTex = null;
@@ -56,6 +57,7 @@ exec.onTriggered = () =>
         };
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
+        op.shaderNode.resultVarName = op.shaderNode.name = inName.get();
     }
 
     let mvp = MGPU.mm.mul(
