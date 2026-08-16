@@ -26,9 +26,11 @@ export class RenderTarget
         this.#passEncoder = null;
         this._everStarted = false;
 
+        const size = [options.width || mgpu.canvas.width, options.height || mgpu.canvas.height];
+
         this.depthTexture = mgpu.device.createTexture(
             {
-                "size": [mgpu.canvas.width, mgpu.canvas.height],
+                "size": size,
                 "format": "depth24plus",
                 "sampleCount": options.sampleCount,
                 "usage": GPUTextureUsage.RENDER_ATTACHMENT
@@ -43,7 +45,7 @@ export class RenderTarget
         {
             this.colorTexture = mgpu.device.createTexture(
                 {
-                    "size": [mgpu.canvas.width, mgpu.canvas.height],
+                    "size": size,
                     // "format": "rgba8uint",
                     "format": mgpu.format,
                     "usage": GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING,
