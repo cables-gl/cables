@@ -10,6 +10,8 @@ let mgpu = {};
 let rt = null;
 const devicePixelRatio = window.devicePixelRatio;
 
+console.log("lalalala");
+
 /* minimalcore:start */
 canvas = canvas || document.body;
 canvas.classList.add("cablescontext");
@@ -21,7 +23,7 @@ let frames = 0;
 
 /* minimalcore:end */
 
-if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
+// if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
 
 navigator.gpu.requestAdapter(
     {
@@ -39,7 +41,7 @@ navigator.gpu.requestAdapter(
             (_device) =>
             {
                 device = _device;
-                op.patch.config.containerElement.appendChild(canvas);
+                (op.patch.config.containerElement || document.body).appendChild(canvas);
                 canvas.style.width = "100%";
                 canvas.style.height = "100%";
                 context = canvas.getContext("webgpu");

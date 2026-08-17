@@ -412,7 +412,8 @@ export class Patch extends Events
                 {
                     if (opName)
                     {
-                        op.opId = identifier = opName;
+                        // op.opId =
+                        identifier = opName;
                         this.#log.warn("could not find op by id: " + opId);
                     }
                     else
