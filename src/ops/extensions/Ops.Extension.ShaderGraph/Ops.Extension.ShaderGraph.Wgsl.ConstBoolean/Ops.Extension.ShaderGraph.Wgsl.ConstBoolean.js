@@ -4,8 +4,6 @@ const value = op.inBool("value", 0);
 new CABLES.ShaderGraphOp(this,
     {
         "type": "override",
-        // "name": "value",
-        // "value": value.get(),
         "params": [
             { "type": "boolean", "port": value }
         ],
@@ -18,7 +16,7 @@ op.init =
     () =>
     {
         op.shaderNode.value = value.get();
-        op.shaderNode.src = "override " + name.get() + ":bool=" + value.get() + ";";
+        op.shaderNode.src = "override " + name.get() + ":bool=" + (value.get() ? "true" : "false") + ";";
         op.shaderNode.resultVarName = name.get();
 
         op.shaderNode.result.port.setRef({});

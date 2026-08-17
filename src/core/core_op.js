@@ -82,7 +82,7 @@ export class Op extends Events
 
     #objName = "";
     #log = new Logger("core_op");
-    //    #name = "";
+
     #shortOpName = "";
 
     opId = ""; // unique op id

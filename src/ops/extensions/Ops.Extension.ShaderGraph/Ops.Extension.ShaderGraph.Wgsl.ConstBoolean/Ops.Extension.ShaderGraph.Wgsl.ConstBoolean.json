@@ -80,13 +80,15 @@
             {
                 "type": 0,
                 "name": "value",
-                "subType": "boolean"
+                "subType": "boolean",
+                "objType": "sg_boolean"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_boolean"
             }
         ]
     },

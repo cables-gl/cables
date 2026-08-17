@@ -1,6 +1,6 @@
 const
     inO = op.inObject("Graph"),
-    inSrc = op.inStringEditor("Base Code", "name"),
+    inSrc = op.inStringEditor("Base Code", "name", "glsl"),
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true),
