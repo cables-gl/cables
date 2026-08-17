@@ -1,6 +1,6 @@
 {
-    "id": "3f3edfb3-bdc3-48b8-815c-79fe1f58d74f",
-    "created": 1786433102805,
+    "id": "d1f8471a-63a8-499b-aa18-8c9b7aeefdfb",
+    "created": 1786981279231,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -33,20 +33,47 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786539331292
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786981279231
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "seed",
+                "name": "value",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "min in",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "max in",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "min out",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "max out",
                 "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_float"
             }
         ]
     },
