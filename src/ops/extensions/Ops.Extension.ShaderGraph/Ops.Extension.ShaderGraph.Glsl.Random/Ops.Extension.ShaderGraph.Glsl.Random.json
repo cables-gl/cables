@@ -45,7 +45,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "seed"
+                "name": "seed",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

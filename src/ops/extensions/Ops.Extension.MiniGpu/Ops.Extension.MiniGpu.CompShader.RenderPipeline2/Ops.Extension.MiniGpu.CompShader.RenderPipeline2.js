@@ -36,6 +36,8 @@ exec.onTriggered = () =>
     next.trigger();
     // if (!mgpu.shaderModules.fragment || !mgpu.shaderModules.vertex) return;
 
+    if (!mgpu.target.current()) return console.log("nono", op.id);
+
     if (!pipe || mgpu.rebuildPipeline)
     {
         mgpu.rebuildPipeline = false;

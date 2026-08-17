@@ -4,11 +4,20 @@ const
     inWidth = op.inInt("Width", 0),
     inHeight = op.inInt("Height", 0),
     loadOp = op.inSwitch("loadOp", ["clear", "load"], "clear"),
+    r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random()),
+    a = op.inValueSlider("a", 1),
     tex = op.outObject("texture color");
 
+r.setUiAttribs({ "colorPick": true });
 let rt = null;
 
-inWidth.onChange =
+r.onChange =
+    g.onChange = // TODO:color change should not resetup the rendertarget........
+    b.onChange =
+    a.onChange =
+    inWidth.onChange =
     inHeight.onChange =
     loadOp.onChange = () =>
     {
@@ -20,10 +29,18 @@ exec.onTriggered = () =>
     const mgpu = op.patch.frameStore.mgpu;
     if (!rt)
     {
-        rt = new MGPU.RenderTarget(mgpu, { "loadOp": loadOp.get(), "width": inWidth.get(), "height": inHeight.get() });
+        rt = new MGPU.RenderTarget(mgpu,
+            {
+                "loadOp": loadOp.get(),
+                "width": inWidth.get(),
+                "height": inHeight.get(),
+
+                "clearColor": [r.get(), g.get(), b.get(), a.get()]
+            });
 
         tex.setRef(rt.colorTexture);
     }
+    // rt.clearColor = [r.get(), g.get(), b.get(), a.get()];
 
     rt.start();
     next.trigger();

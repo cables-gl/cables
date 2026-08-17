@@ -58,6 +58,7 @@ exec.onTriggered = () =>
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
         op.shaderNode.resultVarName = op.shaderNode.name = inName.get();
+        op.shaderNode.result.port.setRef({});
     }
 
     let mvp = MGPU.mm.mul(
@@ -78,9 +79,9 @@ exec.onTriggered = () =>
 new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
-        "name": "tex",
+        "name": inName.get(),
         "title": "name",
         "params": [],
         "result": { "type": "texture", "port": op.outObject("sgtexture") },
-        "resultVarName": "tex"
+        "resultVarName": inName.get()
     });

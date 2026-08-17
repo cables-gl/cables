@@ -69,12 +69,11 @@ export class RenderTarget
 
         /** @type {GPURenderPassDescriptor} */
         const renderPassDescriptor = {
-
             "label": this.label,
             "colorAttachments": [
                 {
                     "view": this.viewColor,
-                    // "clearValue": [0, 1, 0, 0],
+                    "clearValue": this.options.clearColor || [0, 0, 0, 1],
                     "loadOp": this.options.loadOp || "clear",
                     "storeOp": "store"
                 }
@@ -87,6 +86,7 @@ export class RenderTarget
                 "depthStoreOp": "store"
             }
         };
+
         if (this.options.copyToCanvas)
         {
             if (this.options.sampleCount > 1)
