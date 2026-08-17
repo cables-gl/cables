@@ -224,7 +224,11 @@ export class ShaderGraphProgram extends Events
                 {
                     this.addOpShaderFuncCode(port.op);
                     this.log("defaultvalue ", port.op.shaderNode.params[i].name);
-                    paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type);
+
+                    let defaul = null;
+                    if (port.attribs.sg) defaul = port.attribs.sg;
+
+                    paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type, defaul);
                 }
 
                 if (paramStr) callstr += paramStr;

@@ -95,12 +95,17 @@ export class Port extends Events
     tempData = {};
 
     /**
+     * @typedef PortAttribs
+     * @property {string[]} [sgvalues]
+     */
+
+    /**
      * @param {Op} ___op
      * @param {string} name
      * @param {number} type
      * @param {PortUiAttribs} uiAttribs
      */
-    constructor(___op, name, type, uiAttribs = {})
+    constructor(___op, name, type, uiAttribs = {}, attribs = {})
     {
         super();
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
@@ -128,6 +133,9 @@ export class Port extends Events
 
         /** @type {PortUiAttribs} */
         this.uiAttribs = uiAttribs || {};
+
+        /** @type {PortAttribs} */
+        this.attribs = attribs || {};
 
         /** @type {Anim} */
         this.anim = null;
@@ -486,6 +494,8 @@ export class Port extends Events
         if (objPort.animated) this.setAnimated(objPort.animated);
         if (objPort.useVariable) this.setVariableName(objPort.useVariable);
 
+        if (objPort.attribs) this.attribs = objPort.attribs;
+
         /* minimalcore:start */
         if (objPort.title) this.setUiAttribs({ "title": objPort.title });
         if (objPort.expose) this.setUiAttribs({ "expose": true });
@@ -548,6 +558,8 @@ export class Port extends Events
         // }
 
         let obj = { "name": this.getName() };
+
+        if (this.attribs && this.attribs != {}) obj.attribs = this.attribs;
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
         {

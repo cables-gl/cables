@@ -64,22 +64,26 @@
             {
                 "type": 0,
                 "name": "x",
-                "subType": "number"
+                "subType": "number",
+                "objType": "sg_vec4"
             },
             {
                 "type": 0,
                 "name": "y",
-                "subType": "number"
+                "subType": "number",
+                "objType": "sg_float"
             },
             {
                 "type": 0,
                 "name": "z",
-                "subType": "number"
+                "subType": "number",
+                "objType": "sg_float"
             },
             {
                 "type": 0,
                 "name": "w",
-                "subType": "number"
+                "subType": "number",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

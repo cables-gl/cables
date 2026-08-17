@@ -26,14 +26,35 @@ export class Lang
         return "";
     }
 
-    getDefaultParameter(type)
+    /**
+     * @param {string} type
+     * @param {string} value
+     */
+    getDefaultParameter(type, value)
     {
-        if (type == "vec4") return this.strTypeVec4 + "(0., 0., 0., 0.)";
-        if (type == "vec3") return this.strTypeVec3 + "(0., 0., 0.)";
-        if (type == "vec2") return this.strTypeVec2 + "(0., 0.)";
-        if (type == "f32") return "0.";
-        if (type == "float") return "0.";
-        if (type == "gen") return "0.";
+        if (type == "vec4")
+        {
+            const defaultValue = value || "0., 0., 0., 0.";
+            return this.strTypeVec4 + "(" + defaultValue + ")";
+        }
+        if (type == "vec3")
+        {
+
+            const defaultValue = value || "0., 0.";
+            return this.strTypeVec3 + "(" + defaultValue + ")";
+
+        }
+        if (type == "vec2")
+        {
+
+            const defaultValue = value || "0., 0.";
+            return this.strTypeVec2 + "(" + defaultValue + ")";
+
+        }
+        if (type == "f32") return value || "0.";
+        if (type == "float") return value || "0.";
+        if (type == "gen") return value || "0.";
+        if (type == "bool") return value || "false";
         return "/* no default: " + type + "*/";
     }
 
@@ -74,6 +95,19 @@ export class Lang
         let str = String(f);
         if (!str.includes(".")) str += ".";
         return str;
+    }
+
+    /**
+     * @param {string} s
+     */
+    floatStrArr(s)
+    {
+        const arr = s.split(",");
+        for (let i = 0; i < arr.length; i++)
+        {
+            if (!arr[i].includes(".")) arr[i] += ".";
+        }
+        return arr.join(",");
     }
 
     vecStr(arr)

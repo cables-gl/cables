@@ -9,7 +9,7 @@ new CABLES.ShaderGraphOp(this,
         "name": "value",
         "values": [0, 0, 0, 1],
         "params": [
-            { "type": "float", "port": valuex },
+            { "type": "vec4", "port": valuex },
             { "type": "float", "port": valuey },
             { "type": "float", "port": valuez },
             { "type": "float", "port": valuew }

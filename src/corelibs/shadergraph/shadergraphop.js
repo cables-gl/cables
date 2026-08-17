@@ -21,6 +21,7 @@ export class ShaderGraphOp
         shaderNode.id = ShaderGraphProgram.getNewId();
 
         op.shaderNode = shaderNode;
+        op.updateGraph = this.updateGraph.bind(this);
 
         this._op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
