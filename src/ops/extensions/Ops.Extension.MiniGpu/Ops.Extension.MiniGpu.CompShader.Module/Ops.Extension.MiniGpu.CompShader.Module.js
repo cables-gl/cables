@@ -131,7 +131,7 @@ exec.onTriggered = () =>
                 {
                     diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": msg.lineNum, "column": -1, "severity": 2, "fatal": true });
 
-                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message.replaceAll("\n", "<br/>"));
                     if (msg.type == "error") hasError = true;
                 }
             }
