@@ -279,6 +279,25 @@ export class Port extends Events
     }
 
     /**
+     * @param {PortAttribs} newAttribs
+     */
+    setAttribs(newAttribs)
+    {
+        let changed = false;
+        for (const p in newAttribs)
+        {
+            if (newAttribs[p] === undefined)
+            {
+                delete this.attribs[p];
+                continue;
+            }
+            if (this.attribs[p] != newAttribs[p]) changed = true;
+            this.attribs[p] = newAttribs[p];
+
+        }
+    }
+
+    /**
      * set ui attributes
      * @param {PortUiAttribs} newAttribs
      * @example

@@ -70,7 +70,8 @@
             },
             {
                 "type": 2,
-                "name": "texture color"
+                "name": "texture color",
+                "objType": "texture"
             }
         ]
     }

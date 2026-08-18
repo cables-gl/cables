@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Trigger"),
-    tex = op.inObject("texture"),
+    tex = op.inObject("texture", null, "texture"),
     inName = op.inString("name", "tex"),
     magFilter = op.inSwitch("magFilter", ["linear", "nearest"], "linear"),
     minFilter = op.inSwitch("minFilter", ["linear", "nearest"], "linear"),

@@ -223,10 +223,20 @@ export class ShaderGraphProgram extends Events
                 else
                 {
                     this.addOpShaderFuncCode(port.op);
-                    this.log("defaultvalue ", port.op.shaderNode.params[i].name);
+                    // this.log("defaultvalue ", port.op.shaderNode.params[i].name);
 
                     let defaul = null;
                     if (port.attribs.sg) defaul = port.attribs.sg;
+                    else
+                    {
+
+                        /* minimalcore:start */
+                        // if (port.op.shaderNode.params[i].default)port.setAttribs({ "sg": port.op.shaderNode.params[i].default });
+                        // do not set for less data.........
+
+                        /* minimalcore:end */
+                    }
+                    defaul = defaul || port.op.shaderNode.params[i].default;
 
                     paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type, defaul);
                 }

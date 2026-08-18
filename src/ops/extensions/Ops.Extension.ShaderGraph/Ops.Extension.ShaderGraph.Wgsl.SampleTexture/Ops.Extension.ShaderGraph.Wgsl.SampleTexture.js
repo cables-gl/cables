@@ -1,5 +1,6 @@
-const tex = op.inObject("texture");
-const sampler = op.inObject("sampler");
+const
+    tex = op.inObject("texture"),
+    sampler = op.inObject("sampler");
 
 new CABLES.ShaderGraphOp(this,
     {
@@ -16,9 +17,6 @@ new CABLES.ShaderGraphOp(this,
 
 tex.onChange = () =>
 {
-
     if (tex.links[0])
-
         sampler.attribs.sg = tex.links[0].getOtherPort(tex).op.shaderNode.name + "_sampler";
-
 };

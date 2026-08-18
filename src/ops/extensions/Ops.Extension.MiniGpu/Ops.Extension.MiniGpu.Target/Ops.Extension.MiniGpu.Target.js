@@ -8,7 +8,7 @@ const
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
     a = op.inValueSlider("a", 1),
-    tex = op.outObject("texture color");
+    tex = op.outObject("texture color", null, "texture");
 
 r.setUiAttribs({ "colorPick": true });
 let rt = null;
@@ -34,13 +34,11 @@ exec.onTriggered = () =>
                 "loadOp": loadOp.get(),
                 "width": inWidth.get(),
                 "height": inHeight.get(),
-
                 "clearColor": [r.get(), g.get(), b.get(), a.get()]
             });
 
         tex.setRef(rt.colorTexture);
     }
-    // rt.clearColor = [r.get(), g.get(), b.get(), a.get()];
 
     rt.start();
     next.trigger();

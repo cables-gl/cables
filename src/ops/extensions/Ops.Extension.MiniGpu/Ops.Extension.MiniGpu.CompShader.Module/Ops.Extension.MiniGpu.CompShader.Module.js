@@ -6,17 +6,10 @@ const
     inUpdates = op.inArray("Update Values"),
 
     inCodePre = op.inString("Code Prepend", ""),
-    inReset = op.inTriggerButton("Reset"),
     inView = op.inTriggerButton("View Code"),
 
     next = op.outTrigger("Next"),
     outCode = op.outString("Final Code");
-
-/* minimalcore:start */
-outCode.setUiAttribs({ "editorSyntax": "glsl" });
-outCode.ignoreValueSerialize = true;
-
-/* minimalcore:end */
 
 const binds = new CABLES.Stack();
 let oldBindings = [];
@@ -43,14 +36,16 @@ inStage.onChange =
         reInit = true;
     };
 
-inReset.onTriggered = () =>
-{
-    reInit = true;
-};
+//* minimalcore:start */
+outCode.setUiAttribs({ "editorSyntax": "glsl" });
+outCode.ignoreValueSerialize = true;
+
 inView.onTriggered = () =>
 {
     CABLES.UI.codeWatcher(outCode);
 };
+
+/* minimalcore:end */
 
 function genBindHeadSrc()
 {
@@ -117,11 +112,6 @@ exec.onTriggered = () =>
         outCode.setUiAttribs({ "editorDiagnostics": [] });
         module.getCompilationInfo().then((a) =>
         {
-            if (a.messages.length)
-            {
-                // console.log(genBindHeadSrc());
-                console.log(a);
-            }
 
             /* minimalcore:start */
             op.setUiError("shadercomp", null);

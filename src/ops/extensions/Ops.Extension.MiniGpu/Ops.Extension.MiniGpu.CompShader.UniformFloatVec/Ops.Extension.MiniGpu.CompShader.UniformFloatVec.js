@@ -42,7 +42,7 @@ function updateUi()
 
     inX.setUiAttribs({ "colorPick": inType.get() == "vec4" });
 
-    outValue.setUiAttribs({ "objtype": inType.get() });
+    outValue.setUiAttribs({ "objType": "sg_" + inType.get() });
 
     /* minimalcore:end */
 }

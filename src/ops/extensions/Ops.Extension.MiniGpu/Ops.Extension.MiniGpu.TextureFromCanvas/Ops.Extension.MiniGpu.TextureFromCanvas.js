@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Trigger"),
     inCanv = op.inObject("element", null, "element"),
     next = op.outTrigger("next"),
-    outTexture = op.outObject("texture");
+    outTexture = op.outObject("texture", null, "texture");
 
 let texture = null;
 
