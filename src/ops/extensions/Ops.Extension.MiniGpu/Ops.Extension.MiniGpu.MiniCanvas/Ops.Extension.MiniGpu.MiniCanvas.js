@@ -86,6 +86,7 @@ const resizeObserver = new ResizeObserver((entries) =>
     }
 });
 
+op.patch.renderloop = { "frameNum": 0, "resume": () => {}, "pause": () => {}, "paused": false };
 resizeObserver.observe(canvas);
 /// ///////////
 
@@ -93,9 +94,10 @@ function frame(timestamp)
 {
     if (!CABLES.UI)
     {
-        op.patch.renderloop = {};
-        op.patch.updateAnims(null, timestamp - lastTs, timestamp);
+        op.patch.updateAnims(null, timestamp - lastTs || timestamp, timestamp);
     }
+
+    op.patch.renderloop.frameNum++;
 
     /* minimalcore:start */
     const timeStart = performance.now();
@@ -105,6 +107,7 @@ function frame(timestamp)
     const commandEncoder = device.createCommandEncoder();
     const textureView = context.getCurrentTexture().createView();
 
+    op.patch.emitEvent("onRenderFrame", op.patch.timer.getTime());
     if (!presentationFormat) return;
     mgpu.canvas = canvas;
     mgpu.matModel = new CABLES.Stack("matModel", MGPU.mm.identity());

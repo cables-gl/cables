@@ -362,6 +362,7 @@ export class Port extends Events
      */
     get()
     {
+
         if (CABLES.UI && this.#animated && this.lastAnimTime == this.#op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
         {
             return this.value;
@@ -527,6 +528,7 @@ export class Port extends Events
 
         if (objPort.anim)
         {
+
             if (!this.anim) this.anim = new Anim({ "name": "port " + this.name });
             this.#op.hasAnimPort = true;
             this.anim.port = this;
