@@ -1,0 +1,65 @@
+{
+    "id": "c15f2a4d-0a5a-4b43-bdd7-bc82039a6b62",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334784358
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663686975347
+        },
+        {
+            "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663688573149
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.FragColor renamed to Ops.Dev.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1666621294745
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.FragColor renamed to Ops.Team.ShaderGraph.FragColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585004006
+        },
+        {
+            "message": "op Team.ShaderGraph.FragColor was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536493015
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663334861097,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "col",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 0,
+                "name": "Alpha always one",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_void"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ],
+    "license": "MIT"
+}

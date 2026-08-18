@@ -36,7 +36,7 @@ inStage.onChange =
         reInit = true;
     };
 
-//* minimalcore:start */
+/* minimalcore:start */
 outCode.setUiAttribs({ "editorSyntax": "glsl" });
 outCode.ignoreValueSerialize = true;
 

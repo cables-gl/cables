@@ -1,0 +1,69 @@
+{
+    "id": "8772c543-f2f6-4684-8792-2a615cf861b0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334784358
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663686975347
+        },
+        {
+            "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663688573149
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663917559671
+        },
+        {
+            "message": "Ops.User.pandur.SetPosition renamed to Ops.Gl.ShaderGraph.SetPosition",
+            "author": "pandur",
+            "date": 1663929475098
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.SetPosition renamed to Ops.Dev.Gl.ShaderGraph.SetPosition",
+            "author": "pandur",
+            "date": 1666621439655
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.SetPosition renamed to Ops.Team.ShaderGraph.SetPosition",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1688465554144
+        },
+        {
+            "message": "op Team.ShaderGraph.SetPosition was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536598115
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663917559671,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "pos",
+                "objType": "sg_vec4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_void"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

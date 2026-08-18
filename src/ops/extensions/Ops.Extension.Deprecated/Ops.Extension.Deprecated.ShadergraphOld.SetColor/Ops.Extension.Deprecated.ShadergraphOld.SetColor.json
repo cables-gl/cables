@@ -1,0 +1,70 @@
+{
+    "id": "78fd8822-8f1c-4519-9aa6-5d83b202df4f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334784358
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663686975347
+        },
+        {
+            "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663688573149
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.FragColor renamed to Ops.Dev.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1666621294745
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.FragColor renamed to Ops.Team.ShaderGraph.FragColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585004006
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1763825404217
+        },
+        {
+            "message": "op Team.ShaderGraph.WebGPU.SetColor was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536740207
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1763825404216,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "col",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 0,
+                "name": "Alpha always one",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_void"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

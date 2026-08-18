@@ -1,0 +1,52 @@
+{
+    "id": "ebb6af06-42f1-412e-9934-8d62ded783f4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663652520672
+        },
+        {
+            "message": "Ops.User.pandur.SG_custom renamed to Ops.Gl.ShaderGraph.CustomShaderGraphOp",
+            "author": "pandur",
+            "date": 1663684220552
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663828875485
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.CustomShaderGraphOp renamed to Ops.Dev.Gl.ShaderGraph.CustomShaderGraphOp",
+            "author": "pandur",
+            "date": 1666621287407
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.CustomShaderGraphOp renamed to Ops.Team.ShaderGraph.CustomShaderGraphOp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585033233
+        },
+        {
+            "message": "op Team.ShaderGraph.CustomShaderGraphOp was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536428444
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663652578797,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Code"
+            }
+        ],
+        "portsOut": []
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

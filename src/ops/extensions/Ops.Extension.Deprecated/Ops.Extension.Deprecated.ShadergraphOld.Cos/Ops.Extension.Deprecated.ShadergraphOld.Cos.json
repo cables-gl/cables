@@ -1,0 +1,70 @@
+{
+    "id": "f7c19232-5a0a-4e0c-9827-422c3e6576dd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671103261068
+        },
+        {
+            "message": "Ops.User.pandur.Cos renamed to Ops.Dev.Gl.ShaderGraph.Cos",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671103396882
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Cos renamed to Ops.Team.ShaderGraph.Cos",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679584949824
+        },
+        {
+            "message": "op Team.ShaderGraph.Cos was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536442136
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671103261068,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_vec4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec4"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

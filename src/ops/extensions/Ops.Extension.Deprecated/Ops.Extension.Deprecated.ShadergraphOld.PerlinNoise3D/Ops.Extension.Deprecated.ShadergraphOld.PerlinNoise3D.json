@@ -1,0 +1,53 @@
+{
+    "id": "14ddb121-71ba-4996-b00d-9b141fc7f904",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663929595857
+        },
+        {
+            "message": "Ops.User.pandur.PerlinNoise3D renamed to Ops.Gl.ShaderGraph.PerlinNoise3D",
+            "author": "pandur",
+            "date": 1663937990290
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.PerlinNoise3D renamed to Ops.Dev.Gl.ShaderGraph.PerlinNoise3D",
+            "author": "pandur",
+            "date": 1666621342449
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.PerlinNoise3D renamed to Ops.Team.ShaderGraph.PerlinNoise3D",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679661958715
+        },
+        {
+            "message": "op Team.ShaderGraph.PerlinNoise3D was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536581658
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "P",
+                "objType": "sg_vec3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1663929676175,
+    "coreLibs": [
+        "cgl"
+    ]
+}

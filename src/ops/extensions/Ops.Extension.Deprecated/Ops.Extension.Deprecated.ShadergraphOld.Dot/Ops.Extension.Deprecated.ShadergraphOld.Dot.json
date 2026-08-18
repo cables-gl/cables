@@ -1,0 +1,76 @@
+{
+    "id": "d17cd237-2102-44e1-b6ad-a5078c751455",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671100933952
+        },
+        {
+            "message": "Ops.User.pandur.Dot renamed to Ops.Dev.Gl.ShaderGraph.Dot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671101417121
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Dot renamed to Ops.Team.ShaderGraph.Dot",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679584962631
+        },
+        {
+            "message": "op Team.ShaderGraph.Dot was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536473552
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671100933951,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value a",
+                "objType": "sg_genType"
+            },
+            {
+                "type": 2,
+                "name": "value b",
+                "objType": "sg_genType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ],
+    "license": "MIT"
+}

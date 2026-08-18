@@ -1,0 +1,105 @@
+{
+    "id": "dc152eb7-a792-450d-90cf-0563e84e2928",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334994692
+        },
+        {
+            "message": "Ops.User.pandur.SG_Uniform renamed to Ops.User.pandur.SG_UniformVec4",
+            "author": "pandur",
+            "date": 1663567314833
+        },
+        {
+            "message": "Ops.User.pandur.SG_UniformVec4 renamed to Ops.Gl.ShaderGraph.Vec4",
+            "author": "pandur",
+            "date": 1663743280774
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Vec4 renamed to Ops.Gl.ShaderGraph.InputVec4",
+            "author": "pandur",
+            "date": 1663763777482
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.InputVec4 renamed to Ops.Dev.Gl.ShaderGraph.InputVec4",
+            "author": "pandur",
+            "date": 1666621323487
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.InputVec4 renamed to Ops.Team.ShaderGraph.InputVec4",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585053024
+        },
+        {
+            "message": "Ops.Team.ShaderGraph.InputVec4 renamed to Ops.Team.ShaderGraph.Input",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1688491745221
+        },
+        {
+            "message": "op Team.ShaderGraph.Input was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536485116
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663335036343,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "GenType index",
+                "values": [
+                    "float",
+                    "vec2",
+                    "vec3",
+                    "vec4"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Number X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Number W",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 0,
+                "name": "Using Uniform",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}

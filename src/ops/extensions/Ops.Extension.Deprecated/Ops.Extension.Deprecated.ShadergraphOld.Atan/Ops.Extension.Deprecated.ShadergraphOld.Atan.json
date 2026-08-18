@@ -1,0 +1,74 @@
+{
+    "id": "4fea1645-dfab-4856-9cb6-f8c5f620b949",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Sin renamed to Ops.Team.ShaderGraph.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679914946384
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1688488459299
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Modulo",
+            "author": "pandur",
+            "date": 1688547411956
+        },
+        {
+            "message": "op Team.ShaderGraph.Atan was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536408534
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1688547411956,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "x",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "y",
+                "objType": "sg_genType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

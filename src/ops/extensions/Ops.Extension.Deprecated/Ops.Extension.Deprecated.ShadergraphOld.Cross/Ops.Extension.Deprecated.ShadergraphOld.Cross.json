@@ -1,0 +1,80 @@
+{
+    "id": "e6a2c43f-515f-48b5-afb9-1272e32939a2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671100933952
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.Dot",
+            "author": "pandur",
+            "date": 1671101250449
+        },
+        {
+            "message": "Ops.User.pandur.Cross renamed to Ops.Dev.Gl.ShaderGraph.Cross",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671101407258
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Cross renamed to Ops.Team.ShaderGraph.Cross",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679584973956
+        },
+        {
+            "message": "op Team.ShaderGraph.Cross was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536435204
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671101250449,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value a",
+                "objType": "sg_vec3"
+            },
+            {
+                "type": 2,
+                "name": "value b",
+                "objType": "sg_vec3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec3"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

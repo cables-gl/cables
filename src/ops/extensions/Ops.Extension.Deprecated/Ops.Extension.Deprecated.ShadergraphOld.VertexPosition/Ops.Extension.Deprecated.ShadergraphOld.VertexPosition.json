@@ -1,0 +1,37 @@
+{
+    "id": "b48bc4c1-8bd9-4b70-99f4-2de4c5e966f6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663918330929
+        },
+        {
+            "message": "Ops.User.pandur.VertexPosition renamed to Ops.Gl.ShaderGraph.VertexPosition",
+            "author": "pandur",
+            "date": 1663929491489
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.VertexPosition renamed to Ops.Dev.Gl.ShaderGraph.VertexPosition",
+            "author": "pandur",
+            "date": 1666621384857
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.VertexPosition renamed to Ops.Team.ShaderGraph.VertexPosition",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679661946959
+        },
+        {
+            "message": "op Team.ShaderGraph.VertexPosition was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536731065
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663918352931,
+    "coreLibs": [
+        "cgl"
+    ]
+}

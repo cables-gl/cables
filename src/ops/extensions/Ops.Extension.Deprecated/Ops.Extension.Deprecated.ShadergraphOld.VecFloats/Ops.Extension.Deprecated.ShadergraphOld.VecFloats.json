@@ -1,0 +1,69 @@
+{
+    "id": "938618ae-333b-4667-bf9b-77916487cae9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663334784358
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663686975347
+        },
+        {
+            "message": "Ops.User.pandur.SG_fragColor renamed to Ops.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1663688573149
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.FragColor renamed to Ops.Dev.Gl.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1666621294745
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.FragColor renamed to Ops.Team.ShaderGraph.FragColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585004006
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.FragColor",
+            "author": "pandur",
+            "date": 1688490630943
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Desaturate",
+            "author": "pandur",
+            "date": 1688547734358
+        },
+        {
+            "message": "op Team.ShaderGraph.VecFloats was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536726003
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1688547734358,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "col",
+                "objType": "sg_vec3"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

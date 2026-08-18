@@ -1,0 +1,70 @@
+{
+    "id": "22672231-e3d4-499b-825e-77d7e45b480d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663505106203
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.SG_Mul",
+            "author": "pandur",
+            "date": 1663567446198
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687950612
+        },
+        {
+            "message": "Ops.User.pandur.SG_Noise renamed to Ops.Gl.ShaderGraph.SG_Noise",
+            "author": "pandur",
+            "date": 1663688870461
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.SG_Noise renamed to Ops.Dev.Gl.ShaderGraph.SG_Noise",
+            "author": "pandur",
+            "date": 1666621351792
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.SG_Noise renamed to Ops.Extension.ShaderGraph.Noise",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679662096472
+        },
+        {
+            "message": "Ops.Extension.ShaderGraph.Noise renamed to Ops.Team.ShaderGraph.Noise",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679662124575
+        },
+        {
+            "message": "op Team.ShaderGraph.Noise was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536532518
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663567446195,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_vec2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

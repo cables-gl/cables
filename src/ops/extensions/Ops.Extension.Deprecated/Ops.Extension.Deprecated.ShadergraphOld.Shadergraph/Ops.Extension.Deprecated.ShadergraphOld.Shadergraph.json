@@ -1,0 +1,96 @@
+{
+    "id": "3f322387-130c-4efe-9e29-be27f1e7fda3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663331908565
+        },
+        {
+            "message": " added lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663331955754
+        },
+        {
+            "message": " removed lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663334648482
+        },
+        {
+            "message": "Ops.User.pandur.Shadergraph renamed to Ops.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1663611643598
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663738085184
+        },
+        {
+            "message": "Ops.Gl.Shadergraph.Shadergraph renamed to Ops.Dev.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1666621218308
+        },
+        {
+            "message": "Ops.Dev.Gl.Shadergraph.Shadergraph renamed to Ops.Team.ShaderGraph.Shadergraph",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679564650521
+        },
+        {
+            "message": "op Team.ShaderGraph.Shadergraph was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536593237
+        }
+    ],
+    "libs": [],
+    "authorName": "pandur",
+    "created": 1663334732841,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 2,
+                "name": "Fragment",
+                "objType": "sg_void"
+            },
+            {
+                "type": 2,
+                "name": "Vertex",
+                "objType": "sg_void"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Shader",
+                "objType": "shader"
+            },
+            {
+                "type": 5,
+                "name": "Source Fragment"
+            },
+            {
+                "type": 5,
+                "name": "Source Vertex"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ],
+    "exampleProjectId": "V9AD9l",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

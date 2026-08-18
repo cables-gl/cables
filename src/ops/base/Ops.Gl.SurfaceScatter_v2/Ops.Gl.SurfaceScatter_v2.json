@@ -54,16 +54,6 @@
             },
             {
                 "type": 0,
-                "name": "Limit",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Limit Num",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
                 "name": "Random Rotate",
                 "subType": "boolean"
             }

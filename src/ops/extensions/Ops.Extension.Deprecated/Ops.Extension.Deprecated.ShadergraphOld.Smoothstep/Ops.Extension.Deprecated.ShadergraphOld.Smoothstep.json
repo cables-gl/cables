@@ -1,0 +1,101 @@
+{
+    "id": "95db6f2b-423c-409b-baf1-c759426d82af",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671099900086
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.Max",
+            "author": "pandur",
+            "date": 1671099986631
+        },
+        {
+            "message": "Ops.User.pandur.Min renamed to Ops.Dev.Gl.ShaderGraph.Min",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671100287148
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Min",
+            "author": "pandur",
+            "date": 1671101530187
+        },
+        {
+            "message": "Ops.User.pandur.Distance renamed to Ops.Dev.Gl.ShaderGraph.Distance",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671101592322
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Distance renamed to Ops.Team.ShaderGraph.Distance",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679584993818
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Distance",
+            "author": "pandur",
+            "date": 1688545762456
+        },
+        {
+            "message": "op Team.ShaderGraph.Smoothstep was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536624688
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1688545762456,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "edge 0",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "edge 1",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "x",
+                "objType": "sg_genType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

@@ -9,8 +9,6 @@ const
     seed = op.inValueFloat("Random Seed"),
     inSizeMin = op.inValueSlider("Size min", 1.0),
     inSizeMax = op.inValueSlider("Size max", 1.0),
-    inDoLimit = op.inValueBool("Limit", false),
-    inLimit = op.inValueInt("Limit Num", 0),
     inRotateRandom = op.inValueBool("Random Rotate", true),
     outNext = op.outTrigger("Next"),
     outArrPositions = op.outArray("Positions", 3),
@@ -73,7 +71,7 @@ function uniqueIndices(oldCount, newCount, randomize)
         for (let i = 0; i < oldCount; i++) arr[i] = i;
     }
 
-    if (randomize)fisherYatesShuffle(arr);
+    if (randomize) fisherYatesShuffle(arr);
     return arr;
 }
 
@@ -91,14 +89,14 @@ function getEuler(out, quat)
     const test = x * w - y * z;
     if (test > 0.499995 * unit)
     { // TODO: Use glmatrix.EPSILON
-    // singularity at the north pole
+        // singularity at the north pole
         out[0] = Math.PI / 2;
         out[1] = 2 * Math.atan2(y, x);
         out[2] = 0;
     }
     else if (test < -0.499995 * unit)
     { // TODO: Use glmatrix.EPSILON
-    // singularity at the south pole
+        // singularity at the south pole
         out[0] = -Math.PI / 2;
         out[1] = 2 * Math.atan2(y, x);
         out[2] = 0;
@@ -141,9 +139,9 @@ function setup()
     const DISTMODE_TRIANGLE_RANDOM = 3;
 
     let distMode = 0;
-    if (inDistribution.get() == "Triangle Center")distMode = DISTMODE_TRIANGLE_CENTER;
-    else if (inDistribution.get() == "Triangle Side")distMode = DISTMODE_TRIANGLE_SIDE;
-    else if (inDistribution.get() == "Random Triangle Point")distMode = DISTMODE_TRIANGLE_RANDOM;
+    if (inDistribution.get() == "Triangle Center") distMode = DISTMODE_TRIANGLE_CENTER;
+    else if (inDistribution.get() == "Triangle Side") distMode = DISTMODE_TRIANGLE_SIDE;
+    else if (inDistribution.get() == "Random Triangle Point") distMode = DISTMODE_TRIANGLE_RANDOM;
 
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
 
@@ -195,7 +193,7 @@ function setup()
             const which = Math.round(Math.seededRandom() * 3.0);
             const whichA = which;
             let whichB = which + 1;
-            if (whichB > 2)whichB = 0;
+            if (whichB > 2) whichB = 0;
 
             px = (geom.vertices[faces[index3 + whichA] * 3 + 0] + geom.vertices[faces[index3 + whichB] * 3 + 0]) / 2;
             py = (geom.vertices[faces[index3 + whichA] * 3 + 1] + geom.vertices[faces[index3 + whichB] * 3 + 1]) / 2;
@@ -276,8 +274,8 @@ function setup()
             mat4.scale(m, m, [sc, sc, sc]);
 
             arrScale[i * 3 + 0] =
-            arrScale[i * 3 + 1] =
-            arrScale[i * 3 + 2] = sc;
+                arrScale[i * 3 + 1] =
+                arrScale[i * 3 + 2] = sc;
         }
 
         // //quaternion to euler, KINDA works, but not really :/
@@ -326,7 +324,7 @@ function reset()
 
 function doRender()
 {
-    if (recalc)setup();
+    if (recalc) setup();
     recalc = false;
 
     outNext.trigger();

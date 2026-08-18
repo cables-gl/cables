@@ -1,0 +1,76 @@
+{
+    "id": "7c0cc0dc-cc34-436d-88b7-483e6923e4fd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663505945790
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sum renamed to Ops.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1663686278309
+        },
+        {
+            "message": "Ops.ShaderGraph.Sum renamed to Ops.Gl.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1663688885442
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sum renamed to Ops.Dev.Gl.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1666621366893
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Sum renamed to Ops.Team.ShaderGraph.Sum",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679662038663
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Sum",
+            "author": "pandur",
+            "date": 1688587842987
+        },
+        {
+            "message": "op Team.ShaderGraph.Subtract was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536720860
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1688587842986,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "b",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "summary": "sum",
+    "issues": "",
+    "caniusequery": "",
+    "youtubeids": [],
+    "exampleProjectId": "",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}

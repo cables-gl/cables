@@ -1,0 +1,92 @@
+{
+    "id": "0a0b0626-482f-41b2-a37c-72b0aaf87b74",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663331908565
+        },
+        {
+            "message": " added lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663331955754
+        },
+        {
+            "message": " removed lib: shadergraph.js",
+            "author": "pandur",
+            "date": 1663334648482
+        },
+        {
+            "message": "Ops.User.pandur.Shadergraph renamed to Ops.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1663611643598
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663738085184
+        },
+        {
+            "message": "Ops.Gl.Shadergraph.Shadergraph renamed to Ops.Dev.Gl.Shadergraph.Shadergraph",
+            "author": "pandur",
+            "date": 1666621218308
+        },
+        {
+            "message": "Ops.Dev.Gl.Shadergraph.Shadergraph renamed to Ops.Team.ShaderGraph.Shadergraph",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679564650521
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1763759546362
+        },
+        {
+            "message": "op Team.ShaderGraph.ShadergraphWebGPU was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536613910
+        }
+    ],
+    "libs": [],
+    "authorName": "pandur",
+    "created": 1763759546361,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 2,
+                "name": "Fragment",
+                "objType": "sg_void"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            },
+            {
+                "type": 5,
+                "name": "Source Fragment"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgp",
+        "cgl"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

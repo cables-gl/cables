@@ -1,0 +1,71 @@
+{
+    "id": "b4d3e782-6995-43e9-ac9b-2f755d74b2ec",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671100478399
+        },
+        {
+            "message": "Ops.User.pandur.Length renamed to Ops.Dev.Gl.Shadergraph.Length",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671100824011
+        },
+        {
+            "message": "Ops.Dev.Gl.Shadergraph.Length renamed to Ops.Team.ShaderGraph.Length",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679661917709
+        },
+        {
+            "message": "op Team.ShaderGraph.Length was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536510960
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671100478399,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_vec2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ],
+    "license": "MIT"
+}

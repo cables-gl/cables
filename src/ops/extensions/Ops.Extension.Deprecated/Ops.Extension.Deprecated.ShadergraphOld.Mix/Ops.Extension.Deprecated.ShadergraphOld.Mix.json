@@ -1,0 +1,79 @@
+{
+    "id": "ce332b66-cd69-471e-9329-b8334c047513",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663736902910
+        },
+        {
+            "message": "Ops.User.pandur.Mix renamed to Ops.Gl.ShaderGraph.Mix",
+            "author": "pandur",
+            "date": 1663741014904
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Mix renamed to Ops.Dev.Gl.ShaderGraph.Mix",
+            "author": "pandur",
+            "date": 1666621312717
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Mix renamed to Ops.Team.ShaderGraph.Mix",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679585075032
+        },
+        {
+            "message": "op Team.ShaderGraph.Mix was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536565647
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1663736902910,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "x",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "y",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "a",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

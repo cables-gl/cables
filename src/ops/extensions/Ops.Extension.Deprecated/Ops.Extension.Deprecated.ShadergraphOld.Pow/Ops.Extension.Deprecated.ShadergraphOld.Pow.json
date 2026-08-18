@@ -1,0 +1,81 @@
+{
+    "id": "af34322c-1e33-48c6-8114-485b2f7da885",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "cloned op from Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1671101455606
+        },
+        {
+            "message": "Ops.User.pandur.Pow renamed to Ops.Dev.Gl.ShaderGraph.Pow",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1671103407513
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Pow renamed to Ops.Extension.ShaderGraph.Pow",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679661972811
+        },
+        {
+            "message": "Ops.Extension.ShaderGraph.Pow renamed to Ops.Team.ShaderGraph.Pow",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679662140541
+        },
+        {
+            "message": "op Team.ShaderGraph.Pow was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536587304
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1671101455605,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "power",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}

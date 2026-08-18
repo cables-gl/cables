@@ -1,0 +1,74 @@
+{
+    "id": "8f2d6bc8-e3a3-44ed-98a9-f51ed352d444",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1663503060244
+        },
+        {
+            "message": " added core lib: cgl_shadergraph",
+            "author": "pandur",
+            "date": 1663687955934
+        },
+        {
+            "message": "Ops.User.pandur.SG_Sin renamed to Ops.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1663688593576
+        },
+        {
+            "message": "Ops.Gl.ShaderGraph.Sin renamed to Ops.Dev.Gl.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1666621359755
+        },
+        {
+            "message": "Ops.Dev.Gl.ShaderGraph.Sin renamed to Ops.Team.ShaderGraph.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1679914946384
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Sin",
+            "author": "pandur",
+            "date": 1688488970024
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Floor",
+            "author": "pandur",
+            "date": 1688488993329
+        },
+        {
+            "message": "cloned op from Ops.Team.ShaderGraph.Ceil",
+            "author": "pandur",
+            "date": 1688489875744
+        },
+        {
+            "message": "op Team.ShaderGraph.Round was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1786536608359
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1688489875744,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "input",
+                "objType": "sg_genType"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadergraph",
+        "cgl"
+    ]
+}
