@@ -112,7 +112,6 @@ exec.onTriggered = () =>
 
         /* minimalcore:end */
 
-        /* NOPEminimalcore:start */
         const diags = [];
 
         outCode.setUiAttribs({ "editorDiagnostics": [] });
@@ -124,6 +123,7 @@ exec.onTriggered = () =>
                 console.log(a);
             }
 
+            /* minimalcore:start */
             op.setUiError("shadercomp", null);
             for (let i = 0; i < a.messages.length; i++)
             {
@@ -132,7 +132,10 @@ exec.onTriggered = () =>
                 {
                     diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": msg.lineNum, "column": -1, "severity": 2, "fatal": true });
 
-                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message.replaceAll("\n", "<br/>"), 2,
+                    let message = msg.message;
+                    if (message.split("\n") && message.split("\n").length > 1) message = message.split("\n")[0] + "...";
+
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + message.replaceAll("\n", "<br/>"), 2,
                         {
                             "button": "show",
                             "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
@@ -143,6 +146,8 @@ exec.onTriggered = () =>
 
             outCode.setUiAttribs({ "editorDiagnostics": diags });
             inCode.setUiAttribs({ "editorDiagnostics": diags });
+
+            /* minimalcore:end */
         });
 
         /* NOPEminimalcore:end */
