@@ -86,7 +86,10 @@ export class Texture extends CgTexture
         this._glDataFormat = -1;
         this.compression = false;
 
+        /* minimalcore:start */
         this.memItem = new MemProfilerItem("texture " + this.name, "texture");
+
+        /* minimalcore:end */
 
         if (options)
         {
@@ -215,8 +218,12 @@ export class Texture extends CgTexture
 
     updateMemory()
     {
+
+        /* minimalcore:start */
         this.memItem.setSizeGpu(this.width * this.height * 4);
         this.memItem.name = this.name + " " + this.width + "x" + this.height;
+
+        /* minimalcore:end */
     }
 
     /**
@@ -421,7 +428,11 @@ export class Texture extends CgTexture
     dispose()
     {
         this.delete();
+
+        /* minimalcore:start */
         this.memItem.dispose();
+
+        /* minimalcore:end */
         return Texture.getTempTexture(this._cgl);
     }
 

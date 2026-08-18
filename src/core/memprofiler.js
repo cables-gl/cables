@@ -1,5 +1,7 @@
 export class MemProfiler
 {
+
+    /* minimalcore:start */
     items = {};
     usageCpu = 0;
     usageGpu = 0;
@@ -46,11 +48,14 @@ export class MemProfiler
     {
         delete this.items[item.id];
     }
+
+/* minimalcore:end */
 }
 
 export class MemProfilerItem
 {
 
+    /* minimalcore:start */
     id = CABLES.uuid();
     name = "";
     type = "";
@@ -95,4 +100,6 @@ export class MemProfilerItem
     {
         this.sizeGpu = s;
     }
+
+/* minimalcore:end */
 }

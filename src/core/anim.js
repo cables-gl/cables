@@ -628,7 +628,11 @@ export class Anim extends Events
     {
         if (k.time === undefined)
         {
+
+            /* minimalcore:start */
             this.#log.warn("key time undefined, ignoring!");
+
+            /* minimalcore:end */
         }
         else
         {

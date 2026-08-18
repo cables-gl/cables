@@ -23,7 +23,11 @@ CABLES = CABLES || {};
 CABLES = {
     ...CABLES,
     ...CONSTANTS.PORT,
+
+    /* minimalcore:start */
     ...CONSTANTS.PACO,
+
+    /* minimalcore:end */
     ...CONSTANTS.ANIM,
     ...CONSTANTS.OP
 };
@@ -81,9 +85,14 @@ CABLES.CONSTANTS = CONSTANTS;
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
 CABLES.SHARED.Logger = Logger;
+
+CABLES.showUiErrors = showUiErrors;
+
+/* minimalcore:start */
 CABLES.memProfiler = new MemProfiler();
 CABLES.MemProfilerItem = MemProfilerItem;
-CABLES.showUiErrors = showUiErrors;
+
+/* minimalcore:end */
 
 export default CABLES;
 // add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...

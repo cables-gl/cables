@@ -86,7 +86,10 @@ class Mesh extends CgMesh
     memFreed = false;
     queryExt = null;
 
+    /* minimalcore:start */
     memItem = null;
+
+    /* minimalcore:end */
 
     /**
      * @param {CglContext} _cgl cgl
@@ -106,7 +109,11 @@ class Mesh extends CgMesh
         this.#indexType = this.#cgl.gl.UNSIGNED_SHORT;
         this._glPrimitive = options.glPrimitive || null;
 
+        /* minimalcore:start */
         this.memItem = new MemProfilerItem("mesh " + __geom.name, "mesh");
+
+        /* minimalcore:end */
+
         this.opId = options.opId || "";
         this.setGeom(__geom);
 
@@ -170,7 +177,7 @@ class Mesh extends CgMesh
                         "name": name,
                         "stride": stride,
                         "offset": offset,
-                        "instanced": attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
+                        "instanced": attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX
                     }
                 );
             }
@@ -516,7 +523,11 @@ class Mesh extends CgMesh
      */
     setGeom(geom, removeRef = false)
     {
+
+        /* minimalcore:start */
         this.memItem.setSizeGpu(geom.updateMemoryUsage());
+
+        /* minimalcore:end */
         this.#geom = geom;
         if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
         if (this.#geom && this.#geom.name) this._name = "mesh " + this.#geom.name;
@@ -544,7 +555,7 @@ class Mesh extends CgMesh
             "vertexNormals": CONSTANTS.SHADER.SHADERVAR_VERTEX_NORMAL,
             "vertexColors": CONSTANTS.SHADER.SHADERVAR_VERTEX_COLOR,
             "tangents": "attrTangent",
-            "biTangents": "attrBiTangent",
+            "biTangents": "attrBiTangent"
         };
 
         for (const index in geomAttribs)
@@ -1005,7 +1016,7 @@ class Mesh extends CgMesh
                 "shader": shader.name,
                 "verts": (this._bufVertexAttrib.numItems) * (this.#numInstances || 1),
                 "instances": this.#numInstances,
-                "opId": this.opId,
+                "opId": this.opId
             });
         }
 

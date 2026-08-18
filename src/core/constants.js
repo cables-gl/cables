@@ -41,7 +41,7 @@ export const CONSTANTS = {
         "EASING_QUINT_INOUT": 27,
 
         /* minimalcore:end */
-        "EASING_CLIP": 28,
+        "EASING_CLIP": 28
     },
 
     "OP": {
@@ -55,14 +55,15 @@ export const CONSTANTS = {
         "OP_PORT_TYPE_DYNAMIC": 4,
         "OP_PORT_TYPE_STRING": 5,
 
-        "OP_VERSION_PREFIX": "_v",
+        "OP_VERSION_PREFIX": "_v"
     },
 
     "PORT": {
         "PORT_DIR_IN": 0,
-        "PORT_DIR_OUT": 1,
+        "PORT_DIR_OUT": 1
     },
 
+    /* minimalcore:start */
     "PACO": {
         "PACO_CLEAR": 0,
         "PACO_VALUECHANGE": 1,
@@ -81,5 +82,7 @@ export const CONSTANTS = {
         "PACO_PORT_ANIM_UPDATED": 14,
         "PACO_DESERIALIZE": 15,
         "PACO_OP_RELOAD": 16
-    },
+    }
+
+    /* minimalcore:end */
 };

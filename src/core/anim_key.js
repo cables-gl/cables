@@ -570,6 +570,7 @@ AnimKey.easeCubicInOut = function (t, key2)
 };
 
 /* minimalcore:end */
+
 AnimKey.easeSmoothStep = function (perc, key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));

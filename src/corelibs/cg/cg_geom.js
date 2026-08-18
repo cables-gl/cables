@@ -64,7 +64,10 @@ export class Geometry
 
         this.morphTargets = [];
 
+        /* minimalcore:start */
         this.memItem = new MemProfilerItem("geom " + name, "geometry");
+
+        /* minimalcore:end */
     }
 
     get vertices()
@@ -187,7 +190,11 @@ export class Geometry
             if (this._attributes[i].data)
                 bytes += this._attributes[i].data.length * 4;
         }
+
+        /* minimalcore:start */
         this.memItem.setSize(bytes);
+
+        /* minimalcore:end */
         return bytes;
     }
 
@@ -220,7 +227,7 @@ export class Geometry
             "name": name,
             "data": arr,
             "itemSize": itemSize,
-            "type": attrType,
+            "type": attrType
         };
 
         this._attributes[name] = attr;
