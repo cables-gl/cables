@@ -35,6 +35,7 @@ inStage.onChange =
 
         /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": inStage.get() });
+        outCode.setUiAttribs({ "title": "final code " + inStage.get() });
 
         /* minimalcore:end */
 
@@ -119,7 +120,7 @@ exec.onTriggered = () =>
         {
             if (a.messages.length)
             {
-                console.log(genBindHeadSrc());
+                // console.log(genBindHeadSrc());
                 console.log(a);
             }
 
@@ -131,7 +132,11 @@ exec.onTriggered = () =>
                 {
                     diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": msg.lineNum, "column": -1, "severity": 2, "fatal": true });
 
-                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message.replaceAll("\n", "<br/>"));
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message.replaceAll("\n", "<br/>"), 2,
+                        {
+                            "button": "show",
+                            "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
+                        });
                     if (msg.type == "error") hasError = true;
                 }
             }
@@ -172,7 +177,6 @@ exec.onTriggered = () =>
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
 
-        console.log("rebuild module");
         reInit = false;
     }
 

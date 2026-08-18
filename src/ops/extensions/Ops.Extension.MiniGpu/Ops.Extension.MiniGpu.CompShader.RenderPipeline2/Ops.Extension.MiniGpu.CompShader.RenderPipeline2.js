@@ -42,7 +42,6 @@ exec.onTriggered = () =>
     {
         mgpu.rebuildPipeline = false;
 
-        console.log("create renderpipe", mgpu.rebuildPipeline);
         const bindsFrag = mgpu.shaderModules.fragment.bindings.array();
         const bindsVert = mgpu.shaderModules.vertex.bindings.array();
 
