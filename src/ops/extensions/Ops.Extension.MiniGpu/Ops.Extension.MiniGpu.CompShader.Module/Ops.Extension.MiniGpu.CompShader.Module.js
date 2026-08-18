@@ -7,11 +7,13 @@ const
 
     inCodePre = op.inString("Code Prepend", ""),
     inReset = op.inTriggerButton("Reset"),
+    inView = op.inTriggerButton("View Code"),
 
     next = op.outTrigger("Next"),
     outCode = op.outString("Final Code");
 
 /* minimalcore:start */
+outCode.setUiAttribs({ "editorSyntax": "glsl" });
 outCode.ignoreValueSerialize = true;
 
 /* minimalcore:end */
@@ -43,6 +45,10 @@ inStage.onChange =
 inReset.onTriggered = () =>
 {
     reInit = true;
+};
+inView.onTriggered = () =>
+{
+    CABLES.UI.codeWatcher(outCode);
 };
 
 function genBindHeadSrc()
@@ -107,11 +113,12 @@ exec.onTriggered = () =>
 
         /* NOPEminimalcore:start */
         const diags = [];
+
+        outCode.setUiAttribs({ "editorDiagnostics": [] });
         module.getCompilationInfo().then((a) =>
         {
             if (a.messages.length)
             {
-
                 console.log(genBindHeadSrc());
                 console.log(a);
             }
@@ -122,14 +129,15 @@ exec.onTriggered = () =>
                 const msg = a.messages[i];
                 if (msg)
                 {
-                    diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": -1, "column": -1, "severity": 2, "fatal": true });
+                    diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": msg.lineNum, "column": -1, "severity": 2, "fatal": true });
 
                     op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + msg.message);
                     if (msg.type == "error") hasError = true;
                 }
             }
-            inCode.setUiAttribs({ "editorDiagnostics": diags });
 
+            outCode.setUiAttribs({ "editorDiagnostics": diags });
+            inCode.setUiAttribs({ "editorDiagnostics": diags });
         });
 
         /* NOPEminimalcore:end */

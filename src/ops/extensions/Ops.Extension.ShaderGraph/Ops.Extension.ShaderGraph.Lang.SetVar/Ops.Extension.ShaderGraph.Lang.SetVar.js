@@ -4,9 +4,9 @@ new CABLES.ShaderGraphOp(this,
         "name": "color",
         "title": "name",
         "params": [
-            { "type": "vec4", "port": op.inObject("value") }
+            { "type": "gen", "port": op.inObject("value") }
         ],
-        "result": { "type": "vec4", "port": op.outObject("result") }
+        "result": { "type": "gen", "port": op.outObject("result") }
     });
 
 const value = op.inString("var name", "color");
