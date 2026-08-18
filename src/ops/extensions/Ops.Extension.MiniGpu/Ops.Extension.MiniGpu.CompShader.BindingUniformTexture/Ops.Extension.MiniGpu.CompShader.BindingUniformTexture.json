@@ -48,6 +48,43 @@
             {
                 "type": 5,
                 "name": "name"
+            },
+            {
+                "type": 0,
+                "name": "magFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "minFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "mipmapFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeat X index",
+                "values": [
+                    "repeat",
+                    "mirror-repeat",
+                    "clamp-to-edge"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [

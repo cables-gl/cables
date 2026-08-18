@@ -2,12 +2,20 @@ const
     exec = op.inTrigger("Trigger"),
     tex = op.inObject("texture"),
     inName = op.inString("name", "tex"),
+    magFilter = op.inSwitch("magFilter", ["linear", "nearest"], "linear"),
+    minFilter = op.inSwitch("minFilter", ["linear", "nearest"], "linear"),
+    mipmapFilter = op.inSwitch("mipmapFilter", ["linear", "nearest"], "linear"),
+    inRepeat = op.inSwitch("Repeat X", ["repeat", "mirror-repeat", "clamp-to-edge"], "repeat"),
     next = op.outTrigger("Next");
 
 let bindingTex = null;
 let bindingSampler = null;
 
-inName.onChange =
+minFilter.onChange =
+    magFilter.onChange =
+    mipmapFilter.onChange =
+    inRepeat.onChange =
+    inName.onChange =
     tex.onChange =
     exec.onLinkChange = () =>
     {
@@ -39,10 +47,11 @@ exec.onTriggered = () =>
 
         const sampler = mgpu.device.createSampler(
             {
-                "magFilter": "linear",
-                "minFilter": "linear",
-                "addressModeU": "repeat",
-                "addressModeV": "repeat"
+                "magFilter": magFilter.get(),
+                "minFilter": minFilter.get(),
+                "mipmapFilter": mipmapFilter.get(),
+                "addressModeU": inRepeat.get(),
+                "addressModeV": inRepeat.get()
             });
 
         bindingTex = {
