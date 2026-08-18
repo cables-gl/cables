@@ -57,22 +57,24 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "texture"
+                "name": "texture",
+                "objType": "sg_tex"
             },
             {
                 "type": 2,
-                "name": "sampler"
+                "name": "sampler",
+                "objType": "sg_sampler"
             },
             {
                 "type": 2,
-                "name": "coord"
+                "name": "coord",
+                "objType": "sg_vec2"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result",
-                "objType": "sg_vec4"
+                "name": "result"
             }
         ]
     },

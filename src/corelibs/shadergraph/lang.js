@@ -55,6 +55,8 @@ export class Lang
         if (type == "float") return value || "0.";
         if (type == "gen") return value || "0.";
         if (type == "bool") return value || "false";
+        if (type == "sampler") return value;
+
         return "/* no default: " + type + "*/";
     }
 

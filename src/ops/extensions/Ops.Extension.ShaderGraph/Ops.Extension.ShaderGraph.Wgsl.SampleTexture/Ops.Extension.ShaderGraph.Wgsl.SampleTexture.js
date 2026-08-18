@@ -1,13 +1,24 @@
+const tex = op.inObject("texture");
+const sampler = op.inObject("sampler");
+
 new CABLES.ShaderGraphOp(this,
     {
         "type": "function",
         "name": "textureSample",
         "params": [
-            { "type": "tex", "port": op.inObject("texture") },
-            { "type": "sampler", "port": op.inObject("sampler") },
+            { "type": "tex", "port": tex },
+            { "type": "sampler", "port": sampler },
             { "type": "vec2", "port": op.inObject("coord") }
         ],
         "result": { "type": "vec4", "port": op.outObject("result") }
 
     });
-// textureSample(tex,tex_sampler,fragCoord.xy/cables.resScreen);
+
+tex.onChange = () =>
+{
+
+    if (tex.links[0])
+
+        sampler.attribs.sg = tex.links[0].getOtherPort(tex).op.shaderNode.name + "_sampler";
+
+};
