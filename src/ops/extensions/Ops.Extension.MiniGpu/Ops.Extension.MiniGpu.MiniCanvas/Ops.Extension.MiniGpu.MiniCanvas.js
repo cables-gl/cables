@@ -8,9 +8,12 @@ let context = null;
 let pipeline = null;
 let mgpu = {};
 let rt = null;
+let lastTs = 0;
 const devicePixelRatio = window.devicePixelRatio;
 
-console.log("lalalala");
+console.log("hello minicanvas...", op.patch);
+
+document.body.style.margin = "0px";
 
 /* minimalcore:start */
 canvas = canvas || document.body;
@@ -52,8 +55,6 @@ navigator.gpu.requestAdapter(
             });
     });
 
-let lastTs = 0;
-
 function setSize(width, height, mul = devicePixelRatio)
 {
     mul = 1;
@@ -90,6 +91,11 @@ resizeObserver.observe(canvas);
 
 function frame(timestamp)
 {
+    if (!CABLES.UI)
+    {
+        op.patch.renderloop = {};
+        op.patch.updateAnims(null, timestamp - lastTs, timestamp);
+    }
 
     /* minimalcore:start */
     const timeStart = performance.now();

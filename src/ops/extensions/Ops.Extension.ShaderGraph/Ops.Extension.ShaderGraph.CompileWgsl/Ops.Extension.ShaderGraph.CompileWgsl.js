@@ -16,7 +16,7 @@ ids.onChange =
     inO.onChange = () =>
     {
         sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
-        let str = inSrc.get();
+        let str = inSrc.get() || "";
 
         /* minimalcore:start */
 

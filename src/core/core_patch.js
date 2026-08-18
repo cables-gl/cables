@@ -940,7 +940,71 @@ export class Patch extends Events
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
-                // for (const ipi in opData.portsIn)
+                // MIMIMAL CABLES
+                // if (opData.valuesIn)
+                // {
+                //     // console.log("---");
+                //     if (op.portsIn.length != opData.valuesIn.length) console.log("op input num ports", op.objName, op.portsIn.length, opData.valuesIn.length);
+
+                //     // op.portsIn = op.portsIn.sort( (a, b) => { return (a.uiAttribs.order || 0) - (b.uiAttribs.order || 0); });
+
+                //     let i = 0;
+                //     for (let _i = 0; _i < op.portsIn.length; _i++)
+                //     {
+
+                //         if (op.portsIn[_i].type != Port.TYPE_FUNCTION)
+                //         {
+
+                //             if (opData.valuesIn.length > i)
+                //                 if (typeof opData.valuesIn[i] == "object")
+                //                 {
+                //                     op.portsIn[_i].deSerializeSettings(opData.valuesIn[i]);
+                //                 }
+                //                 else
+                //                 {
+
+                //                     if (op.portsIn[_i].type != Port.TYPE_OBJECT)
+                //                     {
+                //                         op.portsIn[_i].set(opData.valuesIn[i]);
+                //                         // console.log("set port", op.portsIn[i].name, ":", opData.valuesIn[i]);
+                //                     }
+                //                     else
+                //                         op.portsIn[_i].attribs.sg = opData.valuesIn[i];
+                //                 }
+
+                //         }
+                //         // else console.log("skip trigger");
+                //         i++;
+                //     }
+
+                // }
+                // if (opData.valuesOut)
+                // {
+                //     let i = 0;
+                //     for (let _i = 0; _i < op.portsOut.length; _i++)
+                //     {
+
+                //         // console.log("text", opData.valuesOut);
+
+                //         if (opData.valuesOut.length > i)
+                //         {
+                //             if (typeof opData.valuesOut[i] == "object")
+                //             {
+                //                 if (opData.valuesOut[i] && opData.valuesOut[i].links)
+                //                 {
+                //                     opData.portsOut = opData.portsOut || [];
+                //                     opData.portsOut[i] = opData.valuesOut[i];
+                //                 }
+                //                 op.portsOut[_i].deSerializeSettings(opData.valuesOut[i]);
+                //             }
+                //             else
+                //             if (op.portsOut[_i].type != Port.TYPE_FUNCTION) op.portsOut[_i].set(opData.valuesOut[i]);
+                //         }
+                //         i++;
+                //     }
+
+                // }
+
                 if (opData.portsIn)
                     for (let ipi = 0; ipi < opData.portsIn.length; ipi++)
                     {
@@ -989,6 +1053,7 @@ export class Patch extends Events
                             }
                         }
                     }
+
                 newOps.push(op);
             }
 

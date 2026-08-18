@@ -2,7 +2,7 @@ new CABLES.ShaderGraphOp(this,
     {
         "type": "component",
         "name": "split",
-        "params": [{ "type": "float", "port": op.inObject("vec") }],
+        "params": [{ "type": "vec4", "port": op.inObject("vec") }],
         "result": { "type": "float" },
         "results": [
             { "type": "float", "port": op.outObject("split x") },

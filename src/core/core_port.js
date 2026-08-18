@@ -578,7 +578,7 @@ export class Port extends Events
 
         let obj = { "name": this.getName() };
 
-        if (this.attribs && this.attribs != {}) obj.attribs = this.attribs;
+        if (this.attribs && Object.keys(this.attribs).length > 0) obj.attribs = this.attribs;
 
         if (!this.ignoreValueSerialize && this.links.length === 0)
         {

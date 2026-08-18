@@ -11,7 +11,7 @@ export class ShaderGraphOp
     constructor(op, shaderNode)
     {
         op.sgOp = this;
-        this._op = op;
+        this.op = op;
         this._inPorts = [];
         this._outPorts = [];
         this._defines = [];
@@ -23,38 +23,46 @@ export class ShaderGraphOp
         op.shaderNode = shaderNode;
         op.updateGraph = this.updateGraph.bind(this);
 
-        this._op.on("onLinkChanged", this.updateGraph.bind(this));
+        this.op.on("onLinkChanged", this.updateGraph.bind(this));
         this.addPortWatcher();
+        this.updateGraph();
+
     }
 
     addPortWatcher()
     {
-        for (let i = 0; i < this._op.portsIn.length; i++)
+        for (let i = 0; i < this.op.portsIn.length; i++)
         {
-            if (this._op.portsIn[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+            if (this.op.portsIn[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
-            if (this._op.portsIn[i].uiAttribs.objType && this._op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0)
-                this._op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
+            if (this.op.portsIn[i].uiAttribs.objType && this.op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0)
+                this.op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
 
-            this._op.portsIn[i].on("change", this.updateGraph.bind(this));
+            this.op.portsIn[i].on("change", this.updateGraph.bind(this));
         }
     }
 
     updateGraph()
     {
-        if (this._op.shaderNode.params)
+
+        /* minimalcore:start */
+        if (this.op.shaderNode.params)
         {
-            for (let i = 0; i < this._op.shaderNode.params.length; i++)
+            for (let i = 0; i < this.op.shaderNode.params.length; i++)
             {
-                if (this._op.shaderNode.params[i].port)
-                    this._op.shaderNode.params[i].port.setUiAttribs({ "objType": "sg_" + this._op.shaderNode.params[i].type });
+                if (this.op.shaderNode.params[i].port)
+                    this.op.shaderNode.params[i].port.setUiAttribs({ "objType": "sg_" + this.op.shaderNode.params[i].type });
             }
+            if (this.op.shaderNode.result.port)
+                this.op.shaderNode.result.port.setUiAttribs({ "objType": "sg_" + this.op.shaderNode.result.type });
         }
 
-        for (let i = 0; i < this._op.portsOut.length; i++)
+        /* minimalcore:end */
+
+        for (let i = 0; i < this.op.portsOut.length; i++)
         {
-            if (this._op.portsOut[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
-            this._op.portsOut[i].setRef({});
+            if (this.op.portsOut[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+            this.op.portsOut[i].setRef({});
         }
     }
 

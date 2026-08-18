@@ -93,20 +93,21 @@ export class ShaderGraphProgram extends Events
         if (otherNode.type == "component")
         {
             const otp = otherNode.params[0].port;
-            const sourcePort = otp.links[0].getOtherPort(otp);
 
-            this.execNode(sourcePort.op);
+            if (otp.links.length)
+            {
+                const sourcePort = otp.links[0].getOtherPort(otp);
 
-            paramStr += sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
+                this.execNode(sourcePort.op);
 
+                paramStr += sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
+            }
         }
         else
         if (otherNode.result)
         {
             if (doConvert)
-            {
                 paramStr += this.lang.convertTypes(this.log.bind(this), convertParam.type, otherNode.result.type, otherNode.resultVarName);
-            }
             else
                 paramStr += otherNode.resultVarName;
 

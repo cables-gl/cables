@@ -1443,6 +1443,8 @@ export class Op extends Events
 
         for (let i = 0; i < this.portsIn.length; i++)
         {
+            // this.getPortByName(this.portsIn[i].name);
+
             const s = this.portsIn[i].getSerialized();
             if (s) opObj.portsIn.push(s);
         }

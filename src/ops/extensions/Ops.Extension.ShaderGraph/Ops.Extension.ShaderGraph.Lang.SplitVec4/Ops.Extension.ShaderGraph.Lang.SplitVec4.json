@@ -16,7 +16,7 @@
             {
                 "type": 2,
                 "name": "vec",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             }
         ],
         "portsOut": [
