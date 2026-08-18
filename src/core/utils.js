@@ -16,6 +16,7 @@ extendJs();
  * @return {Float32Array}
  * @static
  */
+/* minimalcore:start */
 export function float32Concat(first, second)
 {
     if (!(first instanceof Float32Array)) first = new Float32Array(first);
@@ -28,6 +29,8 @@ export function float32Concat(first, second)
 
     return result;
 }
+
+/* minimalcore:end */
 
 /**
  * get op shortname: only last part of fullname and without version
@@ -122,6 +125,7 @@ export function cleanJson(obj)
  * @param {string} prefix
  * @return {string}
  */
+/* minimalcore:start */
 export const prefixedHash = function (str, prefix = "id")
 {
     let hash = 0;
@@ -136,6 +140,8 @@ export const prefixedHash = function (str, prefix = "id")
     }
     return prefix + "" + hash;
 };
+
+/* minimalcore:end */
 
 /**
  * generate a simple ID
@@ -359,7 +365,7 @@ export function ajax(url, cb, method, post, contenttype, jsonP, headers = {}, op
         "contenttype": contenttype,
         "sync": false,
         "jsonP": jsonP,
-        "headers": headers,
+        "headers": headers
     };
     if (options && options.credentials) requestOptions.credentials = options.credentials;
     request(requestOptions);
@@ -425,7 +431,7 @@ export function request(options)
         {
             xhr.setRequestHeader(
                 "Content-type",
-                options.contenttype ? options.contenttype : "application/x-www-form-urlencoded",
+                options.contenttype ? options.contenttype : "application/x-www-form-urlencoded"
             );
             xhr.send(options.data || options.post);
         }
@@ -505,12 +511,13 @@ export function uniqueArray(arr)
     return a;
 }
 
+/* minimalcore:start */
 const htmlEscapes = {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     "\"": "&quot;",
-    "'": "&#39;",
+    "'": "&#39;"
 };
 
 /** Used to match HTML entities and HTML characters. */
@@ -527,6 +534,7 @@ export const escapeHTML = function(string)
 }
 /* eslint-enable */
 
+/* minimalcore:end */
 /**
  * @param {string} idleTo
  * @param {function} cb

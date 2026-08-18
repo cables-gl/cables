@@ -56,7 +56,11 @@ CABLES.simpleId = utils.simpleId;
 CABLES.clamp = utils.clamp;
 CABLES.map = utils.map;
 CABLES.generateUUID = utils.generateUUID;
+
+/* minimalcore:start */
 CABLES.prefixedHash = utils.prefixedHash;
+
+/* minimalcore:end */
 CABLES.smoothStep = utils.smoothStep;
 CABLES.smootherStep = utils.smootherStep;
 CABLES.copyArray = utils.copyArray;

@@ -2,13 +2,13 @@
 
 const
     inCoords = op.inSwitch("Coordinates", ["-1 to 1", "Pixel Display", "Pixel", "0 to 1"], "-1 to 1"),
-    area = op.inValueSelect("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
-    flipY = op.inValueBool("flip y", true),
+    area = op.inDropDown("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
+    flipY = op.inBool("flip y", true),
     rightClickPrevDef = op.inBool("right click prevent default", true),
     inEventType = op.inSwitch("Events", ["Pointer", "Touch", "Mouse"]),
-    inPassive = op.inValueBool("Passive Events", false),
+    inPassive = op.inBool("Passive Events", false),
     inEle = op.inObject("Element", "element"),
-    active = op.inValueBool("Active", true),
+    active = op.inBool("Active", true),
     outMouseX = op.outNumber("x", 0),
     outMouseY = op.outNumber("y", 0),
     mouseClick = op.outTrigger("click"),
@@ -338,6 +338,7 @@ function addListeners()
     }
     op.setUiError("noarea", null);
 
+    if (!listenerElement) return;
     let passive = false;
     if (inPassive.get()) passive = { "passive": true };
 

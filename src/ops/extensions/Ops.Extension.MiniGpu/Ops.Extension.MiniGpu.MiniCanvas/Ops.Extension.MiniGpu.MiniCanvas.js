@@ -1,5 +1,6 @@
 const
-    next = op.outTrigger("next");
+    next = op.outTrigger("next"),
+    click = op.outTrigger("click");
 
 let canvas = document.createElement("canvas");
 let presentationFormat = null;
@@ -14,13 +15,15 @@ const devicePixelRatio = window.devicePixelRatio;
 console.log("hello minicanvas...", op.patch);
 
 document.body.style.margin = "0px";
+document.body.style.backgroundColor = "black";
+
+canvas.addEventListener("pointerdown", () => { click.trigger(); });
 
 /* minimalcore:start */
 canvas = canvas || document.body;
 canvas.classList.add("cablescontext");
 canvas.dataset.contextname = "minigpu";
 canvas.dataset.api = "webgpu";
-
 let fpsTime = 0;
 let frames = 0;
 

@@ -123,6 +123,8 @@ export class Patch extends Events
         /** @type {PatchConfig} */
         this.config = cfg ||
         {
+
+            /* minimalcore:start */
             "glCanvasResizeToWindow": false,
             "prefixAssetPath": "",
             "prefixJsPath": "",
@@ -133,6 +135,7 @@ export class Patch extends Events
             "onPatchLoaded": null,
             "fpsLimit": 0
 
+        /* minimalcore:end */
         };
 
         this.#log = new Logger("core_patch", { "onError": cfg.onError });
@@ -815,7 +818,6 @@ export class Patch extends Events
     getOpsByObjName(name)
     {
         const arr = [];
-        // for (const i in this.ops
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].objName == name) arr.push(this.ops[i]);
         return arr;
@@ -827,7 +829,6 @@ export class Patch extends Events
     getOpsByOpId(opid)
     {
         const arr = [];
-        // for (const i in this.ops)
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].opId == opid) arr.push(this.ops[i]);
         return arr;
@@ -836,7 +837,6 @@ export class Patch extends Events
     getSubPatchOpsByName(patchId, objName)
     {
         const arr = [];
-        // for (const i in this.ops)
         for (let i = 0; i < this.ops.length; i++)
             if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
                 arr.push(this.ops[i]);
@@ -1338,6 +1338,7 @@ export class Patch extends Events
     /**
      * @param {string} name
      */
+    /* minimalcore:start */
     deleteVar(name)
     {
         for (let i = 0; i < this.ops.length; i++)
@@ -1349,6 +1350,8 @@ export class Patch extends Events
         this.emitEvent("variableDeleted", name);
         this.emitEvent("variablesChanged");
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {number} t
@@ -1390,6 +1393,7 @@ export class Patch extends Events
     /**
      * @description invoke pre rendering of ops
      */
+    /* minimalcore:start */
     preRenderOps()
     {
         this.#log.log("prerendering...");
@@ -1403,6 +1407,8 @@ export class Patch extends Events
             }
         }
     }
+
+    /* minimalcore:end */
 
     /**
      * @description stop, dispose and cleanup patch
@@ -1427,10 +1433,10 @@ export class Patch extends Events
         this._triggerStack.pop();
     }
 
+    /* minimalcore:start */
     printTriggerStack()
     {
 
-        /* minimalcore:start */
         if (this._triggerStack.length == 0)
         {
             // console.log("stack length", this._triggerStack.length); // eslint-disable-line
@@ -1448,9 +1454,11 @@ export class Patch extends Events
 
         console.table(rows); // eslint-disable-line
         console.groupEnd(); // eslint-disable-line
-        /* minimalcore:end */
     }
 
+    /* minimalcore:end */
+
+    /* minimalcore:start */
     get containerElement()
     {
         if (this.config.containerElement) return this.config.containerElement;
@@ -1459,6 +1467,9 @@ export class Patch extends Events
         return document.body;
     }
 
+    /* minimalcore:end */
+
+    /* minimalcore:start */
     /**
      * returns document object of the patch could be != global document object when opening canvas ina popout window
      * @return {Object} document
@@ -1468,6 +1479,8 @@ export class Patch extends Events
         return this.containerElement.ownerDocument;
         // return this.cgl.canvas.ownerDocument;
     }
+
+    /* minimalcore:end */
 
     /**
      * @param {string} objName
@@ -1560,6 +1573,7 @@ export class Patch extends Events
             const oldId = op.id;
             let newId = shortId();
 
+            /* minimalcore:start */
             if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
 
             else if (options.prefixId) newId = options.prefixId + oldId;
@@ -1576,6 +1590,8 @@ export class Patch extends Events
                     op.storage.ref = newId = shortId();
                 }
             }
+
+            /* minimalcore:end */
 
             const newID = op.id = newId;
 
@@ -1639,7 +1655,10 @@ export class Patch extends Events
                     {
                         let newId = shortId();
 
+                        /* minimalcore:start */
                         if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
+
+                        /* minimalcore:end */
 
                         const oldSubPatchId = json.ops[i].portsIn[k].value;
                         const newSubPatchId = json.ops[i].portsIn[k].value = newId;
