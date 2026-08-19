@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     outO = op.inObject("Buffer"),
-    type = op.inBool("Type", ["In", "Out", "InOut Flip"], "In"),
+    type = op.inSwitch("Type", ["read", "read_write", "InOut Flip"], "read_write"),
     inName = op.inString("Name", ""),
     next = op.outTrigger("Next"),
     outBuff = op.outObject("Out Buffer");
@@ -50,7 +50,7 @@ exec.onTriggered = () =>
 
         /* minimalcore:end */
 
-        if (type.get() == "In")
+        if (type.get() == "read" || type.get() == "InOut Flip")
         {
 
             const layout = {
@@ -68,10 +68,11 @@ exec.onTriggered = () =>
             };
             mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
 
+            outBuff.setRef(buffer);
         }
-        else if (type.get() == "Out")
+        else
+        if (type.get() == "read_write")
         {
-
             const layout = {
                 "visibility": mgpu.stage,
                 "buffer":
@@ -81,14 +82,16 @@ exec.onTriggered = () =>
             };
 
             binding = {
-                "header": "var<storage,write> " + (inName.get() || p[0]) + " : array<" + p[1] + ">;",
+                "header": "var<storage,read_write> " + (inName.get() || p[0]) + " : array<" + p[1] + ">;",
                 "resource": { "buffer": buffer },
                 "layout": layout
             };
             mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
 
+            outBuff.setRef(buffer);
+
         }
-        else if (type.get() == "InOut Flip")
+        if (type.get() == "InOut Flip")
         {
 
             const layout = {
@@ -98,6 +101,15 @@ exec.onTriggered = () =>
                     "type": "storage"
                 }
             };
+
+            // outBuff.setRef(buffer);
+            // const layout = {
+            //     "visibility": mgpu.stage,
+            //     "buffer":
+            //     {
+            //         "type": "storage"
+            //     }
+            // };
             bufferInOut = mgpu.device.createBuffer(
                 {
                     "size": buffer.size,
@@ -111,9 +123,11 @@ exec.onTriggered = () =>
                 "resource": { "buffer": bufferInOut },
                 "layout": layout
             };
+
+            mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
             outBuff.setRef(bufferInOut);
         }
-        else bindingInOut = null;
+        // else bindingInOut = null;
     }
 
     if (binding) mgpu.bindings.push(binding);

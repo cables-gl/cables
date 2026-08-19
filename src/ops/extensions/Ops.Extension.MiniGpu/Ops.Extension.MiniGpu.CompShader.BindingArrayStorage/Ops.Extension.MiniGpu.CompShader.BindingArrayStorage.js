@@ -66,6 +66,7 @@ exec.onTriggered = () =>
             "layout": layout
         };
         mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
+        outBuff.setRef(buffer);
 
         if (inOut.get())
         {

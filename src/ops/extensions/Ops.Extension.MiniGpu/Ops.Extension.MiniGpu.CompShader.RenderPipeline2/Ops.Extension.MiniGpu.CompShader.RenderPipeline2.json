@@ -57,7 +57,8 @@
                 "values": [
                     "triangle-list",
                     "point-list",
-                    "line-list"
+                    "line-list",
+                    "line-strip"
                 ],
                 "subType": "integer"
             },

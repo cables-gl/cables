@@ -59,8 +59,13 @@
             },
             {
                 "type": 0,
-                "name": "Type",
-                "subType": "boolean"
+                "name": "Type index",
+                "values": [
+                    "read",
+                    "read_write",
+                    "InOut Flip"
+                ],
+                "subType": "integer"
             },
             {
                 "type": 5,

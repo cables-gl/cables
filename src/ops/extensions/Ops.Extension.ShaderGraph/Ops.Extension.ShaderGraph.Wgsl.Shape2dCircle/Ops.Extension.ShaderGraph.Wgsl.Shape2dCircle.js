@@ -4,7 +4,7 @@ new CABLES.ShaderGraphOp(this,
         "name": "shapeCircle",
         "params": [
             { "type": "vec2", "port": op.inObject("uv") },
-            { "type": "vec2", "port": op.inObject("siz") },
+            { "type": "float", "port": op.inObject("siz") },
             { "type": "float", "port": op.inObject("border") }
         ],
         "result": { "type": "float", "port": op.outObject("result") },

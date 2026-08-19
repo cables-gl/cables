@@ -57,7 +57,7 @@
             {
                 "type": 2,
                 "name": "siz",
-                "objType": "sg_vec2"
+                "objType": "sg_float"
             },
             {
                 "type": 2,

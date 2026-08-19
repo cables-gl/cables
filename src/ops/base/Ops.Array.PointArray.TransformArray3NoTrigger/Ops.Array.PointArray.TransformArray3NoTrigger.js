@@ -31,6 +31,7 @@ inArr.onChange =
 function calcLater()
 {
     doTransform();
+    needsCalc = true;
 }
 
 function doTransform()
