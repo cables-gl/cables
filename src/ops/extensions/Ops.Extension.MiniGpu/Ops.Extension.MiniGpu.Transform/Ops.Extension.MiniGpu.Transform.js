@@ -1,8 +1,8 @@
 const
     exec = op.inTrigger("Trigger"),
-    transX = op.inFloat("Translate X"),
-    transY = op.inFloat("Translate Y"),
-    transZ = op.inFloat("Translate Z"),
+    transX = op.inFloat("Translate X", 0),
+    transY = op.inFloat("Translate Y", 0),
+    transZ = op.inFloat("Translate Z", 0),
     scale = op.inFloat("Scale", 1),
     scaleX = op.inFloat("Scale X", 1),
     scaleY = op.inFloat("Scale Y", 1),

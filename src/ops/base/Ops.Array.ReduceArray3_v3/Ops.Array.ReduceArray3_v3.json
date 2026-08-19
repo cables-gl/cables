@@ -11,6 +11,11 @@
             {
                 "type": 0,
                 "name": "Remove index",
+                "values": [
+                    "Xth Item",
+                    "Random",
+                    "Duplicates"
+                ],
                 "subType": "integer"
             },
             {
@@ -69,5 +74,6 @@
         ]
     },
     "exampleProjectId": "vgRDeT",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

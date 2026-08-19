@@ -1,11 +1,11 @@
 const
     inHeight = op.inFloat("Width", 2), // TODO: next version fix this....
     inWidth = op.inFloat("Height", 2),
-    inMult = op.inValueBool("Multiply Num", false),
-    inNumX = op.inValueInt("Rows", 32),
-    inNumY = op.inValueInt("Columns", 32),
+    inMult = op.inBool("Multiply Num", false),
+    inNumX = op.inInt("Rows", 32),
+    inNumY = op.inInt("Columns", 32),
     inRowOffset = op.inFloat("Row Offset", 0),
-    inCenter = op.inValueBool("Center", true),
+    inCenter = op.inBool("Center", true),
     outArr = op.outArray("Result", [], 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length"),

@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("render"),
-    posX = op.inValue("posX", 0),
-    posY = op.inValue("posY", 0),
-    posZ = op.inValue("posZ", 0),
-    scale = op.inValue("scale", 1),
-    rotX = op.inValue("rotX", 0),
-    rotY = op.inValue("rotY", 0),
-    rotZ = op.inValue("rotZ", 0),
+    posX = op.inFloat("posX", 0),
+    posY = op.inFloat("posY", 0),
+    posZ = op.inFloat("posZ", 0),
+    scale = op.inFloat("scale", 1),
+    rotX = op.inFloat("rotX", 0),
+    rotY = op.inFloat("rotY", 0),
+    rotZ = op.inFloat("rotZ", 0),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Rotation", [rotX, rotY, rotZ]);
@@ -65,11 +65,12 @@ render.onTriggered = function ()
             gui.setTransform(op.id, posX.get(), posY.get(), posZ.get(), op.uiAttribs.comment);
 
             if (op.isCurrentUiOp())
-                gui.setTransformGizmo({
-                    "posX": posX,
-                    "posY": posY,
-                    "posZ": posZ,
-                });
+                gui.setTransformGizmo(
+                    {
+                        "posX": posX,
+                        "posY": posY,
+                        "posZ": posZ
+                    });
         }
     }
 };
@@ -82,13 +83,13 @@ render.onTriggered = function ()
 function doUpdateMatrix()
 {
     mat4.identity(transMatrix);
-    if (doTranslate)mat4.translate(transMatrix, transMatrix, vPos);
+    if (doTranslate) mat4.translate(transMatrix, transMatrix, vPos);
 
-    if (rotX.get() !== 0)mat4.rotateX(transMatrix, transMatrix, rotX.get() * CGL.DEG2RAD);
-    if (rotY.get() !== 0)mat4.rotateY(transMatrix, transMatrix, rotY.get() * CGL.DEG2RAD);
-    if (rotZ.get() !== 0)mat4.rotateZ(transMatrix, transMatrix, rotZ.get() * CGL.DEG2RAD);
+    if (rotX.get() !== 0) mat4.rotateX(transMatrix, transMatrix, rotX.get() * CGL.DEG2RAD);
+    if (rotY.get() !== 0) mat4.rotateY(transMatrix, transMatrix, rotY.get() * CGL.DEG2RAD);
+    if (rotZ.get() !== 0) mat4.rotateZ(transMatrix, transMatrix, rotZ.get() * CGL.DEG2RAD);
 
-    if (doScale)mat4.scale(transMatrix, transMatrix, vScale);
+    if (doScale) mat4.scale(transMatrix, transMatrix, vScale);
     rotChanged = false;
 }
 

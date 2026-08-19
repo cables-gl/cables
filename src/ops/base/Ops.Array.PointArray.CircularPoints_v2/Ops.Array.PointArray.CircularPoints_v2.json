@@ -44,7 +44,7 @@
             {
                 "type": 0,
                 "name": "Round Segments",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,

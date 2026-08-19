@@ -1,6 +1,6 @@
 const
-    radius = op.inValue("Radius", 1),
-    segments = op.inValue("Round Segments", 40),
+    radius = op.inFloat("Radius", 1),
+    segments = op.inInt("Round Segments", 40),
     percent = op.inFloat("Rounds", 1),
     inRoundOffset = op.inFloat("Radius Add Round", 0),
     inPointRadOffset = op.inFloat("Radius Add Point", 0),

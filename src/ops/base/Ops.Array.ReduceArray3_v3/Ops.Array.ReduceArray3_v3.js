@@ -1,7 +1,7 @@
 const
     arr = op.inArray("Array"),
     inMeth = op.inSwitch("Remove", ["Xth Item", "Random", "Duplicates"], "Xth Item"),
-    num = op.inValueInt("Every xth Item", 2),
+    num = op.inInt("Every xth Item", 2),
     inThresh = op.inFloatSlider("Threshold", 0.5),
     inSeed = op.inFloat("Seed", 1),
     outArr = op.outArray("Result Array");
@@ -15,9 +15,9 @@ let updateMethod = updateXth;
 
 inMeth.onChange = () =>
 {
-    if (inMeth.get() == "Xth Item")updateMethod = updateXth;
-    if (inMeth.get() == "Random")updateMethod = updateRandom;
-    if (inMeth.get() == "Duplicates")updateMethod = updateDupes;
+    if (inMeth.get() == "Xth Item") updateMethod = updateXth;
+    if (inMeth.get() == "Random") updateMethod = updateRandom;
+    if (inMeth.get() == "Duplicates") updateMethod = updateDupes;
 
     update();
 };
