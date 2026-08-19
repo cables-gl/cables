@@ -1,0 +1,32 @@
+{
+    "id": "73cb8ccf-d539-418c-add7-9f278c916ba2",
+    "created": 1787132125209,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787132125230
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "positions"
+            },
+            {
+                "type": 3,
+                "name": "array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "result"
+            }
+        ]
+    }
+}
