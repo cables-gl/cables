@@ -4,29 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1599741464116
+            "date": 1599741464116,
+            "type": "new op"
         },
         {
-            "message": "Ops.Points.PointsPlane_v2 renamed to Ops.Array.PointArray.PointsPlane_v2",
-            "type": "rename",
+            "message": "Added multiply toggle, number of rows/columns will be multipied with width/height",
+            "type": "feature",
             "author": "pandur",
-            "date": 1701854275766
+            "date": 1787127779593
         }
     ],
     "authorName": "pandur",
     "created": 1599741475800,
     "layout": {
         "portsIn": [
-            {
-                "type": 0,
-                "name": "Rows",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Columns",
-                "subType": "integer"
-            },
             {
                 "type": 0,
                 "name": "Width",
@@ -36,6 +27,21 @@
                 "type": 0,
                 "name": "Height",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Multiply Num",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rows",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Columns",
+                "subType": "integer"
             },
             {
                 "type": 0,
@@ -81,5 +87,6 @@
     },
     "exampleProjectId": "icchV5",
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

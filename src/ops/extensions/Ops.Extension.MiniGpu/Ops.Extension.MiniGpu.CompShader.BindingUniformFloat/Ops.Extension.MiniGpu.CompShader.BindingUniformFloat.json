@@ -67,14 +67,17 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "Next",
-                "objType": "sg_float"
+                "name": "Next"
             },
             {
                 "type": 2,
-                "name": "value"
+                "name": "value",
+                "objType": "sg_float"
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "coreLibs": [
+        "shadergraph"
+    ]
 }

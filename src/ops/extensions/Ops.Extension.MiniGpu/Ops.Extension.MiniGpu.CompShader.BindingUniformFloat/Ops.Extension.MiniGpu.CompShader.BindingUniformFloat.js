@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Trigger"),
     inName = op.inString("Name", ""),
-    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "f32"),
+    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "float"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),

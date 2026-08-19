@@ -1,8 +1,9 @@
 const
+    inHeight = op.inFloat("Width", 2), // TODO: next version fix this....
+    inWidth = op.inFloat("Height", 2),
+    inMult = op.inValueBool("Multiply Num", false),
     inNumX = op.inValueInt("Rows", 32),
     inNumY = op.inValueInt("Columns", 32),
-    inHeight = op.inFloat("Width", 2),
-    inWidth = op.inFloat("Height", 2),
     inRowOffset = op.inFloat("Row Offset", 0),
     inCenter = op.inValueBool("Center", true),
     outArr = op.outArray("Result", [], 3),
@@ -27,8 +28,16 @@ generate();
 function generate()
 {
     arr.length = 0;
-    const numX = Math.floor(Math.max(0, inNumX.get()));
-    const numY = Math.floor(Math.max(0, inNumY.get()));
+
+    let numX = Math.floor(Math.max(0, inNumX.get()));
+    let numY = Math.floor(Math.max(0, inNumY.get()));
+
+    if (inMult.get())
+    {
+        numX *= inWidth.get();
+        numY *= inHeight.get();
+
+    }
 
     if (!CABLES.isNumeric(numX) || !CABLES.isNumeric(numY) || numX < 0 || numY < 0)
     {
@@ -85,7 +94,7 @@ function generate()
         for (let x = 0; x < numX; x++)
         {
             off = 0;
-            if (x % 2 == 0 && offRow)off = offRow;
+            if (x % 2 == 0 && offRow) off = offRow;
 
             arrColNums[i / 3] = y;
             arrRowNums[i / 3] = x;

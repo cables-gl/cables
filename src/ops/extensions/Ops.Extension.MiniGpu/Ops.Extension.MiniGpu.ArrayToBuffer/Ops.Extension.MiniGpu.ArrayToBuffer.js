@@ -14,7 +14,10 @@ let reset = true;
 inType.onChange =
     inArr.onChange = () =>
     {
+        // buffer.destroy()
+        buffer = null;
         reInit = true;
+
     };
 
 inReset.onTriggered = () =>
