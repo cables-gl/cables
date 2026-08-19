@@ -5,6 +5,6 @@ new CABLES.ShaderGraphOp(this,
         "params": [{ "type": "vec2", "port": op.inObject("vec") }],
         "result": { "type": "float" },
         "results": [
-            { "type": "float", "port": op.outObject("split x") },
-            { "type": "float", "port": op.outObject("split y") }]
+            { "type": "float", "port": op.outObject("x") },
+            { "type": "float", "port": op.outObject("y") }]
     });

@@ -3,7 +3,7 @@ const
     inVerts = op.inInt("Vertices", 6),
     inInstances = op.inInt("Instances", 1),
     topology = op.inSwitch("topology", ["triangle-list", "point-list", "line-list"], "triangle-list"),
-    cull = op.inSwitch("cull", ["back", "front"], "back"),
+    cull = op.inSwitch("cull", ["none", "back", "front"], "none"),
     depthWriteEnabled = op.inBool("depthWriteEnabled", true),
     depthCompare = op.inSwitch("depthCompare", ["less-equal", "always"], "less-equal"),
     inReset = op.inTriggerButton("Reset"),

@@ -27,7 +27,6 @@ exec.onTriggered = () =>
 
     if (reInit)
     {
-        reInit = false;
         const arr = new Float32Array(inArr.get() || []);
 
         if (!buffer || arr.length != buffer.size / 4)
@@ -40,11 +39,14 @@ exec.onTriggered = () =>
                     "label": inName.get() + "," + inType.get(),
                     "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
                 });
+
         }
+        reInit = false;
+        reset = true;
     }
+
     if (reset)
     {
-
         const arr = new Float32Array(inArr.get() || []);
         mgpu.device.queue.writeBuffer(buffer, 0, arr);
         buff.setRef(buffer);

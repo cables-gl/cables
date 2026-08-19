@@ -65,6 +65,7 @@
                 "type": 0,
                 "name": "cull index",
                 "values": [
+                    "none",
                     "back",
                     "front"
                 ],

@@ -100,7 +100,8 @@ export class ShaderGraphProgram extends Events
 
                 this.execNode(sourcePort.op);
 
-                paramStr += sourcePort.op.shaderNode.resultVarName + "." + convertParam.port.name;
+                this.log("component", otp.name, convertParam.port.name);
+                paramStr += sourcePort.op.shaderNode.resultVarName + "." + p.name;
             }
         }
         else

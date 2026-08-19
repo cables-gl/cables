@@ -51,11 +51,18 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "uv"
+                "name": "uv",
+                "objType": "sg_vec2"
             },
             {
                 "type": 2,
-                "name": "siz"
+                "name": "siz",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "border",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

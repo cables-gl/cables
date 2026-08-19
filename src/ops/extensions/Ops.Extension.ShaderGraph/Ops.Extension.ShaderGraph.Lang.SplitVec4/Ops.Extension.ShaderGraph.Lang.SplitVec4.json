@@ -22,19 +22,19 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "split x"
+                "name": "x"
             },
             {
                 "type": 2,
-                "name": "split y"
+                "name": "y"
             },
             {
                 "type": 2,
-                "name": "split z"
+                "name": "z"
             },
             {
                 "type": 2,
-                "name": "split w"
+                "name": "w"
             }
         ]
     },

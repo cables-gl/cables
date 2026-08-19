@@ -61,7 +61,7 @@ inFillWgsl.onChange =
         else op.setUiError("namelength", null);
 
         /* minimalcore:end */
-        console.log("strides", strides, arrayPorts);
+        // console.log("strides", strides, arrayPorts);
         for (let i = 0; i < names.length; i++)
         {
             structStr += "\n  " + names[i] + ": ";

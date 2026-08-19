@@ -58,7 +58,6 @@ export const getShortOpName = function (fullname)
  * @return {Array|Float32Array} shuffled array
  * @static
  */
-/* minimalcore:start */
 export const shuffleArray = function (array)
 {
     for (let i = array.length - 1; i > 0; i--)
@@ -70,8 +69,6 @@ export const shuffleArray = function (array)
     }
     return array;
 };
-
-/* minimalcore:end */
 
 /**
  * generate a short "relativly unique" id

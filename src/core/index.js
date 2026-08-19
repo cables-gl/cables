@@ -103,4 +103,6 @@ export default CABLES;
 // this is because corelibs are build/loaded via webpack and expect these exports to be avaialable on the global CABLES object
 export { Anim, AnimKey, CONSTANTS, Link, Op, Patch, Port, Profiler, PatchVariable, EMBED, LoadingStatus, Timer, utils, now, RenderLoop, MemProfilerItem, Stack };
 
+/* minimalcore:start */
 if (!(function () { return !this; }())) console.warn("not in strict mode: index core"); // eslint-disable-line
+/* minimalcore:end */

@@ -14,7 +14,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             "entryOnly": true,
             "footer": true,
             "raw": true,
-            "banner": "\n\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";"
+            "banner": "\n/* minimalcore:start */\nvar CABLES = CABLES || {}; CABLES.build = " + JSON.stringify(buildInfo) + ";/* minimalcore:end*/"
         })
     ];
     if (analyze)
@@ -33,7 +33,7 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
             "library": {
                 "name": "CABLES",
                 "type": "assign-properties"
-            },
+            }
         },
         "optimization": {
             "concatenateModules": true,
@@ -65,8 +65,8 @@ export default (isLiveBuild, buildInfo, minify = false, analyze = false, sourceM
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
             "plugins": [
-                new ModuleScopePlugin.default("src/core/"),
-            ],
+                new ModuleScopePlugin.default("src/core/")
+            ]
         },
         "plugins": plugins
     };
