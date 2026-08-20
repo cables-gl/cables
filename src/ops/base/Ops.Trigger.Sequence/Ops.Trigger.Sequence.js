@@ -2,7 +2,6 @@ const
     exe = op.inTrigger("exe"),
     cleanup = op.inTriggerButton("Clean up connections");
 
-op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
 const
     exes = [],
     triggers = [],
@@ -13,8 +12,13 @@ let
     connectedOuts = [];
 
 exe.onTriggered = triggerAll;
+
+/* minimalcore:start */
 cleanup.onTriggered = clean;
 cleanup.setUiAttribs({ "hideParam": true, "hidePort": true });
+op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
+
+/* minimalcore:end */
 
 for (let i = 0; i < num; i++)
 {
@@ -41,6 +45,8 @@ function updateConnected()
 
 function updateButton()
 {
+
+    /* minimalcore:start */
     updateConnected();
     clearTimeout(updateTimeout);
     updateTimeout = setTimeout(() =>
@@ -53,6 +59,8 @@ function updateButton()
 
         if (op.isCurrentUiOp()) op.refreshParams();
     }, 60);
+
+    /* minimalcore:end */
 }
 
 function triggerAll()
@@ -61,6 +69,7 @@ function triggerAll()
     for (let i = 0; i < connectedOuts.length; i++) connectedOuts[i].trigger();
 }
 
+/* minimalcore:start */
 function clean()
 {
     let count = 0;
@@ -84,3 +93,5 @@ function clean()
     updateButton();
     updateConnected();
 }
+
+/* minimalcore:end */

@@ -8,5 +8,7 @@ fn shapeRectRound(p: vec2<f32>,b:vec2<f32>,rf:f32) -> f32
     let q: vec2f = abs(p) - b + r.x;
       var a=min(max(q.x, q.y), 0.0) + length(max(q, vec2f(0.0))) - r.x;
 
-    return step(a,0.);
+    let aa = fwidth(a);
+    let alpha = 1.0 - smoothstep(-aa, aa, a);
+    return alpha;
 }

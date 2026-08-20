@@ -1,3 +1,4 @@
+/* minimalcore:start */
 const
     animPort = op.inObject("Test"),
     inBpm = op.inFloat("BPM", 80),
@@ -66,7 +67,7 @@ animPort.renderTimeLine = (tl) =>
         const rectW = tl.tl.view.timeToPixel(beatDuration) - 1;
         const cursorX = tl.tl.view.timeToPixel(tl.tl.cursorTime - tl.tl.view.offset);
 
-        if (t < 0)rects[i].setColor(0.2, 0.2, 0.2, 0);
+        if (t < 0) rects[i].setColor(0.2, 0.2, 0.2, 0);
         else if ((i + firstBeat) % 4 == 0) rects[i].setColor(0.5, 0.5, 0.5, 1);
         else rects[i].setColor(0.3, 0.3, 0.3, 1);
 
@@ -95,10 +96,12 @@ function disposeRects()
 
 op.onDelete = () =>
 {
-    if (activeRect)activeRect.dispose();
-    if (cursorTextBgRect)cursorTextBgRect.dispose();
-    if (cursorText)cursorText.dispose();
+    if (activeRect) activeRect.dispose();
+    if (cursorTextBgRect) cursorTextBgRect.dispose();
+    if (cursorText) cursorText.dispose();
     disposeRects();
 
     animPort.renderTimeLine = null;
 };
+
+/* minimalcore:end */

@@ -577,8 +577,7 @@ export class Port extends Events
         {
 
             // console.log("minimize: ignored port");
-            if (this.type != Port.TYPE_OBJECT)
-                return "";
+            if (this.type != Port.TYPE_OBJECT && !this.isAnimated) return "";
         }
 
         let obj = { "name": this.getName() };

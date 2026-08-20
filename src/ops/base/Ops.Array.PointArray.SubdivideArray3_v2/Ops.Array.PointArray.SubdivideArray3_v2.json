@@ -80,5 +80,6 @@
         }
     ],
     "exampleProjectId": "uywtvc",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

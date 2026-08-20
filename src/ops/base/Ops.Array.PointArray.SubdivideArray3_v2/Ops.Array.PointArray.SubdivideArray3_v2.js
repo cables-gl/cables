@@ -1,8 +1,8 @@
 const
     inArr = op.inArray("Points"),
     subDivs = op.inInt("Num Subdivs", 5),
-    bezier = op.inValueBool("Smooth", true),
-    inLoop = op.inValueBool("Loop", false),
+    bezier = op.inBool("Smooth", true),
+    inLoop = op.inBool("Loop", false),
     bezierEndPoints = op.inValueBool("Bezier Start/End Points", true),
     result = op.outArray("Result");
 
@@ -21,7 +21,7 @@ inArr.onLinkChanged = () =>
     inArr.copyLinkedUiAttrib("stride", result);
 };
 
-function ip(x0, x1, x2, t)// Bezier
+function ip(x0, x1, x2, t) // Bezier
 {
     const r = (x0 * (1 - t) * (1 - t) + 2 * x1 * (1 - t) * t + x2 * t * t);
     return r;
@@ -76,7 +76,7 @@ function calc()
     if (subd > 0 && bezier.get())
     {
         let newLen = (inPoints.length - 6) * (subd - 1);
-        if (bezierEndPoints.get())newLen += 6;
+        if (bezierEndPoints.get()) newLen += 6;
 
         if (newLen != arr.length) arr.length = Math.floor(Math.abs(newLen));
         count = 0;
@@ -98,7 +98,7 @@ function calc()
         }
 
         let endi = inPoints.length - 3;
-        if (doLoop)endi = inPoints.length;
+        if (doLoop) endi = inPoints.length;
 
         for (i = 3; i < endi; i += 3)
         {
@@ -123,7 +123,9 @@ function calc()
             arr[count + 0] = arr[0];
             arr[count + 1] = arr[1];
             arr[count + 2] = arr[2];
-            count++; count++; count++;
+            count++;
+            count++;
+            count++;
         }
 
         if (bezierEndPoints.get())

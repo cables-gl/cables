@@ -1,8 +1,8 @@
 const
     inStrip = op.inBool("Line Strip", false),
-    inSegments = op.inValueInt("Segments", 24),
-    sizeW = op.inValueFloat("width", 1),
-    sizeH = op.inValueFloat("height", 1),
+    inSegments = op.inInt("Segments", 24),
+    sizeW = op.inFloat("width", 1),
+    sizeH = op.inFloat("height", 1),
     borderRadius = op.inValueSlider("border radius", 0.5),
     inLoop = op.inBool("Loop", false),
     outArrPoints = op.outArray("Points", 3);
@@ -22,7 +22,7 @@ CORNER_PORTS.forEach((port) =>
 op.setPortGroup("Round Corner", CORNER_PORTS);
 
 inStrip.onChange =
-sizeW.onChange =
+    sizeW.onChange =
     sizeH.onChange =
     borderRadius.onChange =
     inLoop.onChange =
@@ -107,7 +107,7 @@ function create()
     else circleVerts.push(-wiHalf - r, -hiHalf - r, 0);
 
     points = [
-        ...circleVerts,
+        ...circleVerts
     ];
 
     if (inLoop.get())
