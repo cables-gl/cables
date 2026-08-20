@@ -12,7 +12,7 @@ let rt = null;
 let lastTs = 0;
 const devicePixelRatio = window.devicePixelRatio;
 
-console.log("hello minicanvas...", op.patch);
+console.log("hello minicanvas...2");
 
 document.body.style.margin = "0px";
 document.body.style.backgroundColor = "black";

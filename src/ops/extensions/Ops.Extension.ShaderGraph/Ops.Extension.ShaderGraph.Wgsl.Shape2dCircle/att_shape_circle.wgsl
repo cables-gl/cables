@@ -11,7 +11,7 @@ fn shapeCircle(p: vec2<f32>,r:f32,border:f32) -> f32
   {
     let b=length(p) - (r-border);
     let bb = fwidth(a);
-    alpha  -= 1.-smoothstep(-bb, bb, b);
+    alpha  *= smoothstep(-bb, bb, b);
   }
 
   return alpha;

@@ -1,5 +1,5 @@
 const val = op.outNumber("Value");
-op.varName = op.inValueSelect("Variable", [], "", true);
+op.varName = op.inDropDown("Variable", [], "", true);
 
 new CABLES.VarGetOpWrapper(op, "number", op.varName, val);
 
@@ -13,7 +13,6 @@ minimize.onTriggered = () =>
 
         val.links[i].remove();
         p.setVariable(op.varName.get());
-
     }
     op.patch.deleteOp(op.id);
 };

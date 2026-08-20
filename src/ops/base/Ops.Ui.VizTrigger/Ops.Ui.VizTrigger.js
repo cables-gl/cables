@@ -1,3 +1,5 @@
+/* minimalcore:start */
+
 const
     inTrigger = op.inTriggerButton("Trigger"),
     inReset = op.inTriggerButton("Reset"),
@@ -70,3 +72,5 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.fillText(String(count), layer.x + layer.width / 2 - textDimensions.width / 2, layer.y + layer.height / 2 + fntSize / 3);
     }
 };
+
+/* minimalcore:end */
