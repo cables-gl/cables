@@ -32,6 +32,8 @@ function convert(updateUi)
     const srcStride = parseInt(inStride.get());
     const targetStride = parseInt(inResultStride.get());
 
+    /* minimalcore:start */
+
     if (CABLES.UI && updateUi)
     {
         in1.setUiAttribs({ "greyout": targetStride < 1 });
@@ -40,10 +42,10 @@ function convert(updateUi)
         in4.setUiAttribs({ "greyout": targetStride < 4 });
 
         let str = "";
-        if (srcStride == "1")str += "X ";
-        if (srcStride == "2")str += "XY ";
-        if (srcStride == "3")str += "XYZ ";
-        if (srcStride == "4")str += "XYZW ";
+        if (srcStride == "1") str += "X ";
+        if (srcStride == "2") str += "XY ";
+        if (srcStride == "3") str += "XYZ ";
+        if (srcStride == "4") str += "XYZW ";
         str += " > ";
         str += in1.get();
         if (targetStride >= 2) str += in2.get() + " ";
@@ -52,8 +54,12 @@ function convert(updateUi)
         op.setUiAttrib({ "extendTitle": str });
     }
 
+    /* minimalcore:end */
+
     if (!arr) return outArr.set(null);
     const newLength = arr.length / srcStride * targetStride;
+
+    /* minimalcore:start */
 
     if (newLength % 1 != 0)
     {
@@ -62,6 +68,8 @@ function convert(updateUi)
         return;
     }
     op.setUiError("invalidlength", null);
+
+    /* minimalcore:end */
 
     // if (
     //     (contents.indexOf(in1.get()) < 3 && contents.indexOf(in1.get()) > srcStride - 1) ||
@@ -93,50 +101,50 @@ function convert(updateUi)
 
         if (targetStride >= 1)
         {
-            if (index1 === 0)result[idx++] = arr[i + 0];
-            else if (index1 === 1)result[idx++] = arr[i + 1];
-            else if (index1 === 2)result[idx++] = arr[i + 2];
-            else if (index1 === 3)result[idx++] = arr[i + 3];
-            else if (index1 === 4)result[idx++] = 0;
-            else if (index1 === 5)result[idx++] = 1;
-            else if (index1 === 6)result[idx++] = (idx - 1) / (targetStride);
-            else if (index1 === 7)result[idx++] = i / arr.length;
+            if (index1 === 0) result[idx++] = arr[i + 0];
+            else if (index1 === 1) result[idx++] = arr[i + 1];
+            else if (index1 === 2) result[idx++] = arr[i + 2];
+            else if (index1 === 3) result[idx++] = arr[i + 3];
+            else if (index1 === 4) result[idx++] = 0;
+            else if (index1 === 5) result[idx++] = 1;
+            else if (index1 === 6) result[idx++] = (idx - 1) / (targetStride);
+            else if (index1 === 7) result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 2)
         {
-            if (index2 === 0)result[idx++] = arr[i + 0];
-            else if (index2 === 1)result[idx++] = arr[i + 1];
-            else if (index2 === 2)result[idx++] = arr[i + 2];
-            else if (index2 === 3)result[idx++] = arr[i + 3];
-            else if (index2 === 4)result[idx++] = 0;
-            else if (index2 === 5)result[idx++] = 1;
-            else if (index2 === 6)result[idx++] = (idx - 2) / (targetStride);
-            else if (index2 === 7)result[idx++] = i / arr.length;
+            if (index2 === 0) result[idx++] = arr[i + 0];
+            else if (index2 === 1) result[idx++] = arr[i + 1];
+            else if (index2 === 2) result[idx++] = arr[i + 2];
+            else if (index2 === 3) result[idx++] = arr[i + 3];
+            else if (index2 === 4) result[idx++] = 0;
+            else if (index2 === 5) result[idx++] = 1;
+            else if (index2 === 6) result[idx++] = (idx - 2) / (targetStride);
+            else if (index2 === 7) result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 3)
         {
-            if (index3 === 0)result[idx++] = arr[i + 0];
-            else if (index3 === 1)result[idx++] = arr[i + 1];
-            else if (index3 === 2)result[idx++] = arr[i + 2];
-            else if (index3 === 3)result[idx++] = arr[i + 3];
-            else if (index3 === 4)result[idx++] = 0;
-            else if (index3 === 5)result[idx++] = 1;
-            else if (index3 === 6)result[idx++] = (idx - 3) / (targetStride);
-            else if (index3 === 7)result[idx++] = i / arr.length;
+            if (index3 === 0) result[idx++] = arr[i + 0];
+            else if (index3 === 1) result[idx++] = arr[i + 1];
+            else if (index3 === 2) result[idx++] = arr[i + 2];
+            else if (index3 === 3) result[idx++] = arr[i + 3];
+            else if (index3 === 4) result[idx++] = 0;
+            else if (index3 === 5) result[idx++] = 1;
+            else if (index3 === 6) result[idx++] = (idx - 3) / (targetStride);
+            else if (index3 === 7) result[idx++] = i / arr.length;
         }
 
         if (targetStride >= 4)
         {
-            if (index4 === 0)result[idx++] = arr[i + 0];
-            else if (index4 === 1)result[idx++] = arr[i + 1];
-            else if (index4 === 2)result[idx++] = arr[i + 2];
-            else if (index4 === 3)result[idx++] = arr[i + 3];
-            else if (index4 === 4)result[idx++] = 0;
-            else if (index4 === 5)result[idx++] = 1;
-            else if (index4 === 6)result[idx++] = (idx - 4) / (targetStride);
-            else if (index4 === 7)result[idx++] = i / arr.length;
+            if (index4 === 0) result[idx++] = arr[i + 0];
+            else if (index4 === 1) result[idx++] = arr[i + 1];
+            else if (index4 === 2) result[idx++] = arr[i + 2];
+            else if (index4 === 3) result[idx++] = arr[i + 3];
+            else if (index4 === 4) result[idx++] = 0;
+            else if (index4 === 5) result[idx++] = 1;
+            else if (index4 === 6) result[idx++] = (idx - 4) / (targetStride);
+            else if (index4 === 7) result[idx++] = i / arr.length;
         }
     }
 

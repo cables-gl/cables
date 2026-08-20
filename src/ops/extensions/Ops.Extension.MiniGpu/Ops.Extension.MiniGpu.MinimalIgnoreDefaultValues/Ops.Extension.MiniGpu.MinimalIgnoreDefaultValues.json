@@ -1,0 +1,24 @@
+{
+    "id": "caef039b-295d-476e-9617-46eb5b091975",
+    "created": 1787209341172,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787209341184
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Minimize patch json",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": []
+    }
+}

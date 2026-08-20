@@ -1,7 +1,7 @@
 const
-    inLength = op.inValueInt("Array length", 10),
+    inLength = op.inInt("Array length", 10),
     modeSelect = op.inSwitch("Mode select", ["Number", "1,2,3,4", "0-1"], "Number"),
-    inDefaultValue = op.inValueFloat("Default Value"),
+    inDefaultValue = op.inFloat("Default Value"),
     inReverse = op.inBool("Reverse", false),
     outArr = op.outArray("Array"),
     outArrayLength = op.outNumber("Array length out");
@@ -28,9 +28,12 @@ function onFilterChange()
     else if (selectedMode === "1,2,3,4") selectIndex = MODE_1_TO_4;
     else if (selectedMode === "0-1") selectIndex = MODE_0_TO_1;
 
-    inDefaultValue.setUiAttribs({ "greyout": selectIndex !== MODE_NUMBER });
+    /* minimalcore:start */
 
+    inDefaultValue.setUiAttribs({ "greyout": selectIndex !== MODE_NUMBER });
     op.setUiAttrib({ "extendTitle": modeSelect.get() });
+
+    /* minimalcore:end */
 
     reset();
 }
@@ -62,19 +65,21 @@ function reset()
     // mode 2 Normalized array
     else if (selectIndex === MODE_0_TO_1)
     {
-        if (arrLength > 1) { 
-            for (i = 0; i < arrLength; i++)
-                {
-                    arr[i] = i / (arrLength - 1);
-                }
-        } else 
+        if (arrLength > 1)
         {
-            //When array length is only 1 
+            for (i = 0; i < arrLength; i++)
+            {
+                arr[i] = i / (arrLength - 1);
+            }
+        }
+        else
+        {
+            // When array length is only 1
             arr = [0];
         }
     }
 
-    if (inReverse.get())arr = arr.reverse();
+    if (inReverse.get()) arr = arr.reverse();
 
     outArr.setRef(arr);
     outArrayLength.set(arr.length);

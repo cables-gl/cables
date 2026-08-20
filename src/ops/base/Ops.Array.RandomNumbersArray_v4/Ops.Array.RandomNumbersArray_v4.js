@@ -19,6 +19,7 @@ const inArray = letters.map(function (value)
     };
 });
 
+/* minimalcore:start */
 for (let i = 0; i < inArray.length; i += 1)
 {
     const portObj = inArray[i];
@@ -27,17 +28,21 @@ for (let i = 0; i < inArray.length; i += 1)
     op.setPortGroup("Value Range " + letters[i], keys.map(function (key) { return portObj[key]; }));
 
     if (i > 0) keys.forEach(function (key) { portObj[key].setUiAttribs({ "greyout": true }); });
+
 }
+
+/* minimalcore:end */
 
 inModeSwitch.onChange = function ()
 {
+
+    /* minimalcore:start */
+
     const mode = inModeSwitch.get();
     const modes = inModeSwitch.uiAttribs.values;
-
     outValues.setUiAttribs({ "stride": inModeSwitch.get().length });
 
     const index = modes.indexOf(mode);
-
     inArray.forEach(function (portObj, i)
     {
         const keys = Object.keys(portObj);
@@ -47,6 +52,8 @@ inModeSwitch.onChange = function ()
             else portObj[key].setUiAttribs({ "greyout": true });
         });
     });
+
+    /* minimalcore:end */
     init();
 };
 

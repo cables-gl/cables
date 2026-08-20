@@ -573,10 +573,10 @@ export class Port extends Events
 
         /* minimalcore:start */
 
-        // if (this.get() == this.defaultValue)
-        // {
-        //     return "";
-        // }
+        if (CABLES.minimalSeralize && this.get() == this.defaultValue)
+        {
+            return "";
+        }
 
         let obj = { "name": this.getName() };
 

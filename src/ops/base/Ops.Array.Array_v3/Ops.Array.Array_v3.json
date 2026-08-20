@@ -12,6 +12,11 @@
             {
                 "type": 0,
                 "name": "Mode select index",
+                "values": [
+                    "Number",
+                    "1,2,3,4",
+                    "0-1"
+                ],
                 "subType": "integer"
             },
             {
@@ -69,5 +74,6 @@
         }
     ],
     "exampleProjectId": "P4qAz6",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

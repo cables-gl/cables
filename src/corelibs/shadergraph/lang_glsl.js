@@ -1,5 +1,7 @@
 import { Lang } from "./lang.js";
 
+/* minimalcore:start */
+
 export class LangGlsl extends Lang
 {
 
@@ -63,3 +65,5 @@ export class LangGlsl extends Lang
     }
 
 }
+
+/* minimalcore:end */
