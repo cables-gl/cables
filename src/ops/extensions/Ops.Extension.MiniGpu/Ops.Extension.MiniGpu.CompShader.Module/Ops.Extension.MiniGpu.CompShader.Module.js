@@ -83,11 +83,12 @@ exec.onTriggered = () =>
     mgpu.bindings = binds.clear();
 
     const updts = inUpdates.get();
-    for (let i = 0; i < updts.length; i++)
-    {
-        updts[i].update(mgpu);
+    if (updts)
+        for (let i = 0; i < updts.length; i++)
+        {
+            updts[i].update(mgpu);
 
-    }
+        }
 
     next.trigger();
     mgpu.shader.pop();
@@ -125,10 +126,11 @@ exec.onTriggered = () =>
                     let message = msg.message;
                     if (message.split("\n") && message.split("\n").length > 1) message = message.split("\n")[0] + "...";
 
-                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + message.replaceAll("\n", "<br/>"), 2, {
-                        "button": "show",
-                        "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
-                    });
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + message.replaceAll("\n", "<br/>"), 2,
+                        {
+                            "button": "show",
+                            "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
+                        });
                     if (msg.type == "error") hasError = true;
                 }
             }
