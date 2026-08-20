@@ -12,54 +12,54 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 0"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 1"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 2"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 3"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 4"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 5"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 6"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 7"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 8"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 9"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
             }
         ]

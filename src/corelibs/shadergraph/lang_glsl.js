@@ -1,10 +1,9 @@
 import { Lang } from "./lang.js";
 
-/* minimalcore:start */
-
 export class LangGlsl extends Lang
 {
 
+    /* minimalcore:start */
     /**
      * @param {import("./shadergraphprogram.js").ShaderNode} node
      * @param {string} [name]
@@ -64,6 +63,5 @@ export class LangGlsl extends Lang
         return paramStr;
     }
 
-}
-
 /* minimalcore:end */
+}

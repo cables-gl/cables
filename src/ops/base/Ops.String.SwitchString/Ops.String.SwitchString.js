@@ -1,22 +1,22 @@
 const
-    idx=op.inValueInt("Index"),
-    result=op.outString("Result");
+    idx = op.inInt("Index"),
+    result = op.outString("Result");
 
-const valuePorts=[];
+const valuePorts = [];
 
-idx.onChange=update;
+idx.onChange = update;
 
-for(var i=0;i<10;i++)
+for (let i = 0; i < 10; i++)
 {
-    var p=op.inString("String "+i);
-    valuePorts.push( p );
-    p.onChange=update;
+    let p = op.inString("String " + i);
+    valuePorts.push(p);
+    p.onChange = update;
 }
 
 function update()
 {
-    if(idx.get()>=0 && valuePorts[idx.get()])
+    if (idx.get() >= 0 && valuePorts[idx.get()])
     {
-        result.set( valuePorts[idx.get()].get() );
+        result.set(valuePorts[idx.get()].get());
     }
 }

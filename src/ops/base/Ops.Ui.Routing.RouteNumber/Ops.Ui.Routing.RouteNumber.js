@@ -6,7 +6,10 @@ v.onChange = exec;
 
 let wasLinked = false;
 
+/* minimalcore:start */
 op.setUiAttribs({ "display": "reroute" });
+
+/* minimalcore:end */
 
 function exec()
 {

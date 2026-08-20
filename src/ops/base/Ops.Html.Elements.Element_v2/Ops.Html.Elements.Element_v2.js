@@ -32,7 +32,7 @@ let oldStr = null;
 let prevDisplay = "block";
 let div = null;
 
-const parent = op.patch.containerElement;
+const parent = op.patch.containerElement || document.body;
 
 createElement();
 
@@ -109,7 +109,10 @@ function updateUiAndStyle()
 
 function createElement()
 {
-    div = op.patch.getDocument().createElement(inTag.get() || "div");
+    let doc = document;
+    if (op.patch.getDocument) doc = op.patch.getDocument();
+    div = doc.createElement(inTag.get() || "div");
+
     div.dataset.op = op.id;
     div.classList.add("cablesEle");
     if (inTag.get() != "div") op.setUiAttribs({ "extendTitle": inTag.get() });

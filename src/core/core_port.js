@@ -575,7 +575,10 @@ export class Port extends Events
 
         if (CABLES.minimalSeralize && this.get() == this.defaultValue)
         {
-            return "";
+
+            // console.log("minimize: ignored port");
+            if (this.type != Port.TYPE_OBJECT)
+                return "";
         }
 
         let obj = { "name": this.getName() };

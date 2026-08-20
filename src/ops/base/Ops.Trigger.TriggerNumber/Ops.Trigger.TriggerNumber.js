@@ -1,6 +1,6 @@
 const
     setValuePort = op.inTriggerButton("Set"),
-    valuePort = op.inValueFloat("Number"),
+    valuePort = op.inFloat("Number"),
     outNext = op.outTrigger("Next"),
     outValuePort = op.outNumber("Out Value");
 
