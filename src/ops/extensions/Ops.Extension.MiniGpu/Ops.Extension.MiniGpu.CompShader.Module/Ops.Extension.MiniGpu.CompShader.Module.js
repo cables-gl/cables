@@ -125,11 +125,10 @@ exec.onTriggered = () =>
                     let message = msg.message;
                     if (message.split("\n") && message.split("\n").length > 1) message = message.split("\n")[0] + "...";
 
-                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + message.replaceAll("\n", "<br/>"), 2,
-                        {
-                            "button": "show",
-                            "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
-                        });
+                    op.setUiError("shadercomp", msg.type + " line " + msg.lineNum + ": " + message.replaceAll("\n", "<br/>"), 2, {
+                        "button": "show",
+                        "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
+                    });
                     if (msg.type == "error") hasError = true;
                 }
             }
@@ -140,7 +139,6 @@ exec.onTriggered = () =>
             /* minimalcore:end */
         });
 
-        /* NOPEminimalcore:end */
         s[inStage.get().toLowerCase()] = {
 
             "module": module,

@@ -1,3 +1,5 @@
+/* minimalcore:start */
+
 const
     inNum = op.inFloat("Number", 0),
     outNum = op.outNumber("Passthrough");
@@ -30,7 +32,7 @@ op.renderVizLayer = (ctx, layer) =>
         max = Math.max(max, inNum.get());
         min = Math.min(min, inNum.get());
 
-        if (op.uiAttribs.color)ctx.fillStyle = op.uiAttribs.color;
+        if (op.uiAttribs.color) ctx.fillStyle = op.uiAttribs.color;
         else ctx.fillStyle = "#555";
 
         let a = CABLES.map(0, min, max, 0, layer.width);
@@ -47,7 +49,7 @@ op.renderVizLayer = (ctx, layer) =>
     // if(inDrawNUm.get())
     {
         const padding = 10;
-        if (op.uiAttribs.color)ctx.fillStyle = "#fff";
+        if (op.uiAttribs.color) ctx.fillStyle = "#fff";
         else ctx.fillStyle = "#ccc";
 
         const fontSize = layer.height * 0.7;
@@ -55,3 +57,5 @@ op.renderVizLayer = (ctx, layer) =>
         ctx.fillText(Math.round(inNum.get() * 10000) / 10000, layer.x + padding, layer.y + fontSize);
     }
 };
+
+/* minimalcore:end */

@@ -46,8 +46,9 @@ function updateConnected()
 function updateButton()
 {
 
-    /* minimalcore:start */
     updateConnected();
+
+    /* minimalcore:start */
     clearTimeout(updateTimeout);
     updateTimeout = setTimeout(() =>
     {

@@ -3,7 +3,7 @@ const
     subDivs = op.inInt("Num Subdivs", 5),
     bezier = op.inBool("Smooth", true),
     inLoop = op.inBool("Loop", false),
-    bezierEndPoints = op.inValueBool("Bezier Start/End Points", true),
+    bezierEndPoints = op.inBool("Bezier Start/End Points", true),
     result = op.outArray("Result");
 
 op.toWorkPortsNeedToBeLinked(inArr);

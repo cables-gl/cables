@@ -3,16 +3,16 @@ const
     inSegments = op.inInt("Segments", 24),
     sizeW = op.inFloat("width", 1),
     sizeH = op.inFloat("height", 1),
-    borderRadius = op.inValueSlider("border radius", 0.5),
+    borderRadius = op.inFloatSlider("border radius", 0.5),
     inLoop = op.inBool("Loop", false),
     outArrPoints = op.outArray("Points", 3);
 
 op.setPortGroup("Size", [sizeW, sizeH, borderRadius, inSegments]);
 
-const inTopLeftCorner = op.inValueBool("Top Left", true);
-const inTopRightCorner = op.inValueBool("Top Right", true);
-const inBottomLeftCorner = op.inValueBool("Bottom Left", true);
-const inBottomRightCorner = op.inValueBool("Bottom Right", true);
+const inTopLeftCorner = op.inBool("Top Left", true);
+const inTopRightCorner = op.inBool("Top Right", true);
+const inBottomLeftCorner = op.inBool("Bottom Left", true);
+const inBottomRightCorner = op.inBool("Bottom Right", true);
 const CORNER_PORTS = [inTopLeftCorner, inTopRightCorner, inBottomLeftCorner, inBottomRightCorner];
 CORNER_PORTS.forEach((port) =>
 {
