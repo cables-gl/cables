@@ -1,7 +1,7 @@
 const
     inUpdate = op.inTrigger("update"),
     inBang = op.inTriggerButton("Bang"),
-    inDuration = op.inValue("Duration", 0.1),
+    inDuration = op.inFloat("Duration", 0.1),
     invert = op.inBool("Invert", false),
     outTrigger = op.outTrigger("Trigger Out"),
     outValue = op.outNumber("Value");

@@ -15,6 +15,8 @@ const uniformArray = new Float32Array([0, 0, 0, 0]);
 const defaultName = "unif" + CABLES.simpleId();
 
 /* minimalcore:start */
+
+inName.setUiAttribs({ "hidePort": true });
 inX.setUiAttribs({ "colorPick": false });
 inType.setUiAttribs({ "hidePort": true });
 updateUi();

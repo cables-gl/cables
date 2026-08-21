@@ -50,10 +50,6 @@
                 "type": 0,
                 "name": "W",
                 "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "Name"
             }
         ],
         "portsOut": [

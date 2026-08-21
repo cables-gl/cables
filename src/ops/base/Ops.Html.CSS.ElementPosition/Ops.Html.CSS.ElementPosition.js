@@ -39,7 +39,7 @@ inTransXU.onChange =
     inTransYU.onChange =
     inTransYBU.onChange =
 
-inDoTranslate.onChange =
+    inDoTranslate.onChange =
     inDoOrigin.onChange = updateUi;
 
 updateUi();
@@ -63,6 +63,9 @@ inEle.onChange = inEle.onLinkChanged = function ()
 
 function updateUi()
 {
+
+    /* minimalcore:start */
+
     inTransY.setUiAttribs({ "greyout": inTransYU.get() == "Off" });
     inTransYB.setUiAttribs({ "greyout": inTransYBU.get() == "Off" });
     inTransX.setUiAttribs({ "greyout": inTransXU.get() == "Off" });
@@ -70,6 +73,8 @@ function updateUi()
 
     inOriginX.setUiAttribs({ "greyout": !inDoOrigin.get() });
     inOriginY.setUiAttribs({ "greyout": !inDoOrigin.get() });
+
+    /* minimalcore:end */
 
     update();
 }
@@ -102,10 +107,10 @@ function update()
             {
                 let x = "0%";
                 let y = "0%";
-                if (inOriginX.get() == "Center")x = "-50%";
-                if (inOriginX.get() == "Right")x = "-100%";
-                if (inOriginY.get() == "Bottom")y = "-100%";
-                if (inOriginY.get() == "Center")y = "-50%";
+                if (inOriginX.get() == "Center") x = "-50%";
+                if (inOriginX.get() == "Right") x = "-100%";
+                if (inOriginY.get() == "Bottom") y = "-100%";
+                if (inOriginY.get() == "Center") y = "-50%";
 
                 str += "translate(";
                 str += x + " , ";

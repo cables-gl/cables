@@ -71,19 +71,6 @@ function convert(updateUi)
 
     /* minimalcore:end */
 
-    // if (
-    //     (contents.indexOf(in1.get()) < 3 && contents.indexOf(in1.get()) > srcStride - 1) ||
-    //     (contents.indexOf(in2.get()) < 3 && contents.indexOf(in2.get()) > srcStride - 2) ||
-    //     (contents.indexOf(in3.get()) < 3 && contents.indexOf(in3.get()) > srcStride - 3) ||
-    //     (contents.indexOf(in4.get()) < 3 && contents.indexOf(in4.get()) > srcStride - 1)
-    // )
-    // {
-    //     outArr.set(null);
-    //     op.setUiError("outofbounds", "out of bounds access");
-    //     return;
-    // }
-    // op.setUiError("outofbounds", null);
-
     const step = parseInt(inStride.get());
 
     result.length = newLength;

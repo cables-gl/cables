@@ -1,6 +1,6 @@
 const
     exePort = op.inTriggerButton("Execute"),
-    switchPort = op.inValueInt("Switch Value"),
+    switchPort = op.inInt("Switch Value"),
     numTrigs = op.outNumber("Total Connections"),
     outArrNames = op.outArray("Connected Op Names"),
     outTrigs = op.outMultiPort2("Trigger", CABLES.OP_PORT_TYPE_FUNCTION, null, 3);
@@ -30,12 +30,6 @@ outTrigs.on("onLinkChanged", () =>
             const p = trigs[i].links[0].getOtherPort(trigs[i]);
             arr.push(p.op.opId);
         }
-        // else
-        // {
-        // arr.push("none");
-        // }
     }
     outArrNames.setRef(arr);
 });
-
-// ....

@@ -73,6 +73,7 @@ op.onDelete = removeElement;
 
 outElement.onLinkChanged = updateStyle;
 
+/* minimalcore:start */
 inInteractive.onLinkChanged =
     outClicked.onLinkChanged = () =>
     {
@@ -80,6 +81,8 @@ inInteractive.onLinkChanged =
         if (outClicked.isLinked() && !isInteractive())
             op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port", 0);
     };
+
+/* minimalcore:end */
 
 inAddDom.onChange = () =>
 {
@@ -101,9 +104,15 @@ function updateAll()
 
 function updateUiAndStyle()
 {
+
+    /* minimalcore:start */
+
     inWidth.setUiAttribs({ "greyout": !inSetSize.get() });
     inSizeUnit.setUiAttribs({ "greyout": !inSetSize.get() });
     inHeight.setUiAttribs({ "greyout": !inSetSize.get() });
+
+    /* minimalcore:end */
+
     updateStyle();
 }
 
@@ -295,6 +304,9 @@ op.addEventListener("onEnabledChange", (enabled) =>
 
 function warning()
 {
+
+    /* minimalcore:start */
+
     if (inClass.get() && inStyle.get())
     {
         op.setUiError("error", "Element uses external and inline CSS", 1);
@@ -303,6 +315,9 @@ function warning()
     {
         op.setUiError("error", null);
     }
+
+    /* minimalcore:end */
+
 }
 
 //

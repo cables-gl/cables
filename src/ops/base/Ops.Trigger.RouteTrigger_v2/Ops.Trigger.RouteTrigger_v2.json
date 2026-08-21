@@ -28,7 +28,7 @@
             {
                 "type": 1,
                 "name": "Trigger_0",
-                "longPort": 3
+                "longPort": 5
             },
             {
                 "type": 1,
@@ -36,7 +36,15 @@
             },
             {
                 "type": 1,
-                "name": "Trigger_2",
+                "name": "Trigger_2"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_3"
+            },
+            {
+                "type": 1,
+                "name": "Trigger_4",
                 "uititle": "add port"
             }
         ]
