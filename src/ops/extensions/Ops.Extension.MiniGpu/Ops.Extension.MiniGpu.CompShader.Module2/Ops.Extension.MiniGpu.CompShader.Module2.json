@@ -38,16 +38,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
-                "name": "Stage index",
-                "values": [
-                    "VERTEX",
-                    "FRAGMENT",
-                    "COMPUTE"
-                ],
-                "subType": "integer"
-            },
-            {
                 "type": 5,
                 "name": "Code"
             },
@@ -60,8 +50,23 @@
                 "name": "Code Prepend"
             },
             {
-                "type": 1,
-                "name": "View Code"
+                "type": 2,
+                "name": "Graph"
+            },
+            {
+                "type": 0,
+                "name": "Debug comments",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Type Title",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show id",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

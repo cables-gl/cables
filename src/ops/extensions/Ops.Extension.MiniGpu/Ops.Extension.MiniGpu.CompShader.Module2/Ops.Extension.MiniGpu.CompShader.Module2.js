@@ -10,7 +10,19 @@ const
     outModule = op.outObject("Module", null, "shadermodule"),
     outCode = op.outString("Final Code");
 
-const binds = new CABLES.Stack();
+const
+    inO = op.inObject("Graph"),
+    // inSrc = op.inStringEditor("Base Code", "name", "glsl"),
+    debug = op.inBool("Debug comments", false),
+    types = op.inBool("Set Type Title", true),
+    ids = op.inBool("Show id", true);
+
+/* minimalcore:start */
+inStage.setUiAttribs({ "hidePort": true });
+inView.setUiAttribs({ "hidePort": true });
+
+/* minimalcore:end */
+
 let oldBindings = [];
 let s = null;
 let bindHead = "";
@@ -19,10 +31,37 @@ let lastChange = 0;
 
 let sm = null;
 
+const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangWgsl());
+
+ids.onChange =
+    types.onChange =
+    debug.onChange =
+    inCode.onChange =
+    inO.onChange = () =>
+    {
+        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
+        let str = inCode.get() || "";
+
+        /* minimalcore:start */
+
+        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
+        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+
+        /* minimalcore:end */
+
+        str = str.replaceAll("{{MAIN}}", sgp.srcMain);
+        str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
+
+        // outUniforms.setRef(Object.values(sgp.updateableOps));
+
+        if (sm) sm.reInit = true;
+        outCode.set(str);
+    };
+
 inStage.onChange =
     inStage.onChange =
     inCodePre.onChange =
-    inCode.onChange = () =>
+    outCode.onChange = () =>
     {
 
         /* minimalcore:start */
@@ -49,16 +88,20 @@ op.updateShaderModule = (mgpu) =>
 {
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
-    mgpu.bindings = binds.clear();
+    const binds = [];
 
-    const updts = inUpdates.get();
+    const updts = sgp.updateableOps;
+
+    console.log("updaaaa", updts);
     if (updts)
-        for (let i = 0; i < updts.length; i++)
+    {
+        for (const i in updts)
         {
-            updts[i].update(mgpu);
+            updts[i].update(mgpu, binds);
         }
+    }
 
-    if (o && o.bindings != mgpu.bindings) sm.reInit = true;
+    // if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
     if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
@@ -92,11 +135,12 @@ op.updateShaderModule = (mgpu) =>
             /* minimalcore:end */
         };
 
-        sm.code = inCode.get();
+        sm.code = outCode.get();
         sm.codePre = inCodePre.get();
-        sm.bindings = mgpu.bindings.array();
+        sm.bindings = binds;
 
         sm.create(mgpu);
+        console.log("text", sm.bindings, sm.bindings);
 
         const diags = [];
         outCode.setUiAttribs({ "editorDiagnostics": [] });

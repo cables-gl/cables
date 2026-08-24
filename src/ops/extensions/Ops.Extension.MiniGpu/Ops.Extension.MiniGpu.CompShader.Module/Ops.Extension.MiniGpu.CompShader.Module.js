@@ -8,6 +8,8 @@ const
     inCodePre = op.inString("Code Prepend", ""),
     inView = op.inTriggerButton("View Code"),
 
+    outModule = op.outObject("Module", null, "shadermodule"),
+
     next = op.outTrigger("Next"),
     outCode = op.outString("Final Code");
 
@@ -109,6 +111,7 @@ exec.onTriggered = () =>
         mgpu.rebuildShaderModule = false;
 
         sm.reInit = false;
+        outModule.setRef(sm);
     }
 
     mgpu.shaderModules[inStage.get().toLowerCase()] = sm;

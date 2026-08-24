@@ -64,6 +64,11 @@
         ],
         "portsOut": [
             {
+                "type": 2,
+                "name": "Module",
+                "objType": "shadermodule"
+            },
+            {
                 "type": 1,
                 "name": "Next"
             },
