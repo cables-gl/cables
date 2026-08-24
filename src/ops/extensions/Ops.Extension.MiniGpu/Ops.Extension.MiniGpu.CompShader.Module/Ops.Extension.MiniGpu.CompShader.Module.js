@@ -109,7 +109,7 @@ exec.onTriggered = () =>
             /* minimalcore:end */
         });
 
-        o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": sm.bindings, "constants": [] };
+        // o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": sm.bindings, "constants": [] };
 
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
@@ -117,6 +117,6 @@ exec.onTriggered = () =>
         sm.reInit = false;
     }
 
-    mgpu.shaderModules[inStage.get().toLowerCase()] = o;
+    mgpu.shaderModules[inStage.get().toLowerCase()] = sm;
     mgpu.shaderModules.updated = false;
 };
