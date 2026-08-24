@@ -42,8 +42,8 @@ exec.onTriggered = () =>
     {
         mgpu.rebuildPipeline = false;
 
-        const bindsFrag = mgpu.shaderModules.fragment.bindings.array();
-        const bindsVert = mgpu.shaderModules.vertex.bindings.array();
+        const bindsFrag = mgpu.shaderModules.fragment.bindings;
+        const bindsVert = mgpu.shaderModules.vertex.bindings;
 
         bindGroupLayoutFrag = MGPU.createBindGroupLayout(mgpu, bindsFrag);
         bindGroupLayoutVert = MGPU.createBindGroupLayout(mgpu, bindsVert);

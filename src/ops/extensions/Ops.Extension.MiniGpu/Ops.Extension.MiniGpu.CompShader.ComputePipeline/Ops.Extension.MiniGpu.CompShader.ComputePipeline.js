@@ -41,7 +41,7 @@ exec.onTriggered = () =>
     {
         mgpu.shaderModules.compute.objectStructure.constants = inOverrides.get() || {};
 
-        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
+        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings);
         const o = {
             "layout": mgpu.device.createPipelineLayout(
                 {
@@ -57,7 +57,7 @@ exec.onTriggered = () =>
 
         pipe = mgpu.device.createComputePipeline(o);
 
-        computeBindGroup = MGPU.createBindGroup(mgpu, mgpu.shaderModules.compute.bindings.array(), bindGroupLayout);
+        computeBindGroup = MGPU.createBindGroup(mgpu, mgpu.shaderModules.compute.bindings, bindGroupLayout);
     }
 
     if (!pipe) return console.log("no pipe");

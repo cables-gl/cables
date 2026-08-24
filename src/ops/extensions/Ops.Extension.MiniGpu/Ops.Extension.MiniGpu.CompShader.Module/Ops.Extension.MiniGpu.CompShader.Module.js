@@ -48,34 +48,6 @@ inView.onTriggered = () =>
 
 /* minimalcore:end */
 
-// function genBindHeadSrc()
-// {
-//     let bhead = "";
-//     let g = 0;
-//     if (inStage.get() == "FRAGMENT") g = 1;
-
-//     for (let i = 0; i < binds.array().length; i++)
-//     {
-//         const b = binds.array()[i];
-//         if (b.headSrc)
-//             bhead += b.headSrc + "\n";
-//     }
-
-//     for (let i = 0; i < binds.array().length; i++)
-//     {
-//         const b = binds.array()[i];
-//         bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
-//     }
-
-//     if (bhead != bindHead) reInit = true;
-//     bindHead = bhead;
-
-//     let code = inCodePre.get() + inCode.get();
-//     code = code.replaceAll("{{BINDINGS}}", bhead);
-//     outCode.set(code);
-//     return code;
-// }
-
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
@@ -137,34 +109,7 @@ exec.onTriggered = () =>
             /* minimalcore:end */
         });
 
-        s = {
-
-            "layout": "auto",
-            "module": sm.module,
-            "targets": [ // only frag??
-                {
-                    "format": mgpu.format,
-                    "blend":
-                    {
-                        "color":
-                        {
-                            "srcFactor": "src-alpha",
-                            "dstFactor": "one-minus-src-alpha",
-                            "operation": "add"
-                        },
-                        "alpha":
-                        {
-                            "srcFactor": "one",
-                            "dstFactor": "one-minus-src-alpha",
-                            "operation": "add"
-                        }
-                    }
-                }
-            ],
-            "constants": mgpu.constants
-        };
-
-        o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": mgpu.bindings, "constants": [] };
+        o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": sm.bindings, "constants": [] };
 
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
