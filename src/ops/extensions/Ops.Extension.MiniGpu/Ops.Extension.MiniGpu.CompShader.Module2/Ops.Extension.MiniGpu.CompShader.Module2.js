@@ -2,7 +2,7 @@ const
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
 
     inCode = op.inStringEditor("Code", "", "glsl"),
-    inUpdates = op.inArray("Update Values"),
+    // inUpdates = op.inArray("Update Values"),
 
     inCodePre = op.inString("Code Prepend", ""),
     inView = op.inTriggerButton("View Code"),
@@ -12,7 +12,6 @@ const
 
 const
     inO = op.inObject("Graph"),
-    // inSrc = op.inStringEditor("Base Code", "name", "glsl"),
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true);
@@ -52,14 +51,13 @@ ids.onChange =
         str = str.replaceAll("{{MAIN}}", sgp.srcMain);
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
 
-        // outUniforms.setRef(Object.values(sgp.updateableOps));
-
         if (sm) sm.reInit = true;
         outCode.set(str);
+        outModule.setRef(sm);
+
     };
 
 inStage.onChange =
-    inStage.onChange =
     inCodePre.onChange =
     outCode.onChange = () =>
     {
@@ -70,7 +68,8 @@ inStage.onChange =
 
         /* minimalcore:end */
 
-        if (sm) sm.reInit = true;
+        // if (sm) sm.reInit = true;
+        sm = null;
     };
 
 /* minimalcore:start */
@@ -103,7 +102,7 @@ op.updateShaderModule = (mgpu) =>
 
     // if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
-    if (!sm || sm.reInit || mgpu.rebuildShaderModule)
+    if (!sm || sm.reInit)
     {
         sm = new MGPU.ShaderModule(mgpu, { "stage": inStage.get(), "op": op });
         sm.onShaderInfo = (shaderInfo) =>
@@ -140,7 +139,7 @@ op.updateShaderModule = (mgpu) =>
         sm.bindings = binds;
 
         sm.create(mgpu);
-        console.log("text", sm.bindings, sm.bindings);
+        console.log("rebuild moduleeeeeeeeeeeeeee", sm.bindings, sm.bindings);
 
         const diags = [];
         outCode.setUiAttribs({ "editorDiagnostics": [] });

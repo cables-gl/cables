@@ -19,7 +19,8 @@ let bindGroupVert = null;
 let updatedFrag = 0;
 let updatedVert = 0;
 
-depthCompare.onChange =
+inModuleFragment.onChange =
+    depthCompare.onChange =
     depthWriteEnabled.onChange =
     cull.onChange =
     topology.onChange =
