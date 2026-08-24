@@ -3,11 +3,11 @@ new CABLES.ShaderGraphOp(this,
         "type": "function",
         "name": "vec4",
         "params": [
-            { "type": "float", "port": op.inObject("x") },
-            { "type": "float", "port": op.inObject("y") },
-            { "type": "float", "port": op.inObject("z") },
-            { "type": "float", "port": op.inObject("w") }
+            { "type": "float", "name": "x" },
+            { "type": "float", "name": "y" },
+            { "type": "float", "name": "z" },
+            { "type": "float", "name": "w" }
         ],
-        "result": { "type": "vec4", "port": op.outObject("result") }
+        "result": { "type": "vec4", "name": "result" }
 
     });

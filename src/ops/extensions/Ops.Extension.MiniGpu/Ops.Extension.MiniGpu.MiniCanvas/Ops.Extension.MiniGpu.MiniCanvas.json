@@ -19,13 +19,14 @@
                 "name": "next"
             },
             {
-                "type": 1,
-                "name": "click"
-            },
-            {
                 "type": 0,
                 "name": "Supported",
                 "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
             }
         ]
     },

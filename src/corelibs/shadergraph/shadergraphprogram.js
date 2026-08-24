@@ -6,13 +6,14 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 /**
  * @typedef ShaderNodeParam
  * @property {string} type
- * @property {Port} port
+ * @property {string} name
+ * @property {Port} [port]
  * @property {boolean} resultType - change to result type when that changes
  */
 
 /**
  * @typedef ShaderNode
- * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"} [type]
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"} [type]
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -74,24 +75,28 @@ export class ShaderGraphProgram extends Events
     }
 
     /**
-     * @param {Port} p
+     * @param {Port} otherPort
      * @param {ShaderNode} node
      * @param {boolean} doConvert
      */
-    _getPortParamStr(p, node, doConvert, convertParam)
+    _getPortParamStr(otherPort, node, doConvert, convertParam)
     {
         let paramStr = "";
 
         /** @type {ShaderNode} */
-        const otherNode = p.op.shaderNode;
+        const otherNode = otherPort.op.shaderNode;
 
-        this.log("param", p.name, node.result.type, otherNode.name);
+        this.log("param", otherPort.name, node.result.type, otherNode.name);
 
-        this.execNode(p.op, otherNode.result?.type);// uiAttribs.objType);
+        this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name).result?.type);// uiAttribs.objType);
 
         const tt = this.lang.getMaxGenTypeFromParams(node.params);
 
-        if (otherNode.type == "component")
+        if (otherNode.type == "bindstruct")
+        {
+            paramStr += otherPort.op.shaderNode.name + "." + otherPort.name;
+        }
+        else if (otherNode.type == "component")
         {
             const otp = otherNode.params[0].port;
 
@@ -102,7 +107,7 @@ export class ShaderGraphProgram extends Events
                 this.execNode(sourcePort.op);
 
                 this.log("component", otp.name, convertParam.port.name);
-                paramStr += sourcePort.op.shaderNode.resultVarName + "." + p.name;
+                paramStr += sourcePort.op.shaderNode.resultVarName + "." + otherPort.name;
             }
         }
         else
@@ -115,8 +120,9 @@ export class ShaderGraphProgram extends Events
 
         }
 
-        if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
-            this.execNode(p.op, otherNode.result.type);
+        if (otherPort.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+            this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name).result?.type);// uiAttribs.objType);
+        // this.execNode(otherPort.op, otherNode.result.type);
 
         return paramStr;
     }
@@ -141,6 +147,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.update) this.updateableOps[node.id] = node;
         if (node.type == "component") return;
+        if (node.type == "bindstruct") return;
         if (node.type == "var")node.resultVarName = node.name;
         if (!node.resultVarName)
             node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
@@ -152,13 +159,13 @@ export class ShaderGraphProgram extends Events
         }
 
         let title = "";
-        if (node.title == "name")title += node.name + " ";
-        if (this.options.showType) title += node.result.type + " ";
+        if (node.title == "name") title += node.name + " ";
+        if (this.options.showType && node.results.length == 1) title += node.results[0].type + " ";
         if (this.options.showId) title += "id" + node.id;
 
         /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": title || null });
-        op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
+        // op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
 
         /* minimalcore:end */
 
@@ -269,7 +276,7 @@ export class ShaderGraphProgram extends Events
 
         /* minimalcore:start */
         this.log("execnode " + node.name + " [" + node.type + "]");
-        this.log("->" + node.result.type);
+        // this.log("->" + node.result.type);
 
         /* minimalcore:end */
 

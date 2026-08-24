@@ -75,7 +75,13 @@ export class Lang
         {
             for (let i = 0; i < params[j].port.links.length; i++)
             {
-                const t = types.indexOf(params[j].port.links[i].getOtherPort(params[j].port).op.shaderNode.result.type);
+                const otherport = params[j].port.links[i].getOtherPort(params[j].port);
+                const otherop = otherport.op;
+                console.log("op", otherop.name, params[j].port.name);
+                const r = otherop.sgOp.getResult(otherport.name);
+                console.log("rrr", r);
+                const type = r.type;
+                const t = types.indexOf(type);
                 typeIdx = Math.max(typeIdx, t);
             }
         }

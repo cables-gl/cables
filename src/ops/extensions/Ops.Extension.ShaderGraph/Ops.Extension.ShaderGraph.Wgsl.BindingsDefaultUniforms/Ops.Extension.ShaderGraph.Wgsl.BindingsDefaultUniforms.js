@@ -1,7 +1,3 @@
-const
-    exec = op.inTrigger("Trigger"),
-    next = op.outTrigger("Next");
-
 const uniformArray = new Float32Array([
     0, 0, 0, 0,
     0, 0, 0, 0,
@@ -27,14 +23,13 @@ let time = 0;
 
 op.onAnimFrame = function (t) { time = t; };
 
-exec.onLinkChange = () =>
-{
-    binding = null;
-};
+// exec.onLinkChange = () =>
+// {
+//     binding = null;
+// };
 
-exec.onTriggered = () =>
+function update(mgpu)
 {
-    const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
     {
         const layout = {
@@ -53,16 +48,7 @@ exec.onTriggered = () =>
         binding = {
             "header": "var<uniform> cables : Cables;",
             "resource": { "buffer": uniformBuffer },
-            "headSrc": "struct Cables\n" +
-                "{\n" +
-                "  mvp:mat4x4<f32>,\n" +
-                "  proj:mat4x4<f32>,\n" +
-                "  view:mat4x4<f32>,\n" +
-                "  model:mat4x4<f32>,\n" +
-                "  resScreen:vec2f,\n" +
-                "  time:f32,\n" +
-                "  timeDelta:f32\n" +
-                "}\n",
+            "headSrc": attachments.head_wgsl,
             "layout": layout
         };
 
@@ -87,5 +73,21 @@ exec.onTriggered = () =>
 
     mgpu.bindings.push(binding);
 
-    next.trigger();
-};
+    // next.trigger();
+}
+
+new CABLES.ShaderGraphOp(this,
+    {
+        "type": "bindstruct",
+        "name": "cables",
+        "update": update,
+        "results": [
+            { "type": "mat4", "name": "mvp" },
+            { "type": "mat4", "name": "model" },
+            { "type": "mat4", "name": "view" },
+            { "type": "mat4", "name": "proj" },
+            { "type": "vec2", "name": "res" },
+            { "type": "f32", "name": "time" }
+        ]
+
+    });

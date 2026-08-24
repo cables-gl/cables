@@ -1,7 +1,7 @@
 const
     next = op.outTrigger("next"),
-    click = op.outTrigger("click"),
-    outSupported = op.outBoolNum("Supported");
+    outSupported = op.outBoolNum("Supported"),
+    outEle = op.outObject("Canvas", null, "element");
 
 let canvas = document.createElement("canvas");
 let presentationFormat = null;
@@ -13,12 +13,8 @@ let rt = null;
 let lastTs = 0;
 const devicePixelRatio = window.devicePixelRatio;
 
-console.log("hello minicanvas...2");
-
 document.body.style.margin = "0px";
 document.body.style.backgroundColor = "black";
-
-canvas.addEventListener("pointerdown", () => { click.trigger(); });
 
 /* minimalcore:start */
 canvas = canvas || document.body;
@@ -49,7 +45,7 @@ CABLES.idleCallback(() =>
 {
     if (!navigator.gpu)
     {
-        showError("WebGPU is not supported in this browser.");
+        showError("WebGPU is not supported in this browser / make sure of HTTPS");
     }
     else
         navigator.gpu.requestAdapter(
@@ -83,6 +79,7 @@ CABLES.idleCallback(() =>
                             context = canvas.getContext("webgpu");
 
                             setSize(canvas.clientWidth, canvas.clientHeight);
+                            outEle.setRef(canvas);
                             requestAnimationFrame(frame);
                         });
             });
@@ -154,14 +151,16 @@ function frame(timestamp)
 
     op.patch.frameStore.mgpu = mgpu;
     if (!rt)
+    {
         rt = new MGPU.RenderTarget(mgpu,
             {
                 "label": "canvasRt",
-                // "view": context.getCurrentTexture().createView(),
                 "copyToCanvas": true,
-                //  "resolveTarget": true,
                 "sampleCount": 1
+            // "view": context.getCurrentTexture().createView(),
+            //  "resolveTarget": true,
             });
+    }
 
     rt.start();
     next.trigger();

@@ -1,6 +1,6 @@
 {
-    "id": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
-    "created": 1786543324017,
+    "id": "1c2c6c2b-3a94-4e62-beed-56f6ef387b39",
+    "created": 1787555432343,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -45,32 +45,48 @@
             "type": "new op",
             "author": "pandur",
             "date": 1786543324018
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787555432343
         }
     ],
     "layout": {
-        "portsIn": [
+        "portsIn": [],
+        "portsOut": [
             {
                 "type": 2,
-                "name": "x",
-                "objType": "sg_float"
+                "name": "mvp",
+                "objType": "sg_mat4"
             },
             {
                 "type": 2,
-                "name": "y",
-                "objType": "sg_float"
+                "name": "model",
+                "objType": "sg_mat4"
             },
             {
                 "type": 2,
-                "name": "z",
-                "objType": "sg_float"
+                "name": "view",
+                "objType": "sg_mat4"
             },
             {
                 "type": 2,
-                "name": "w",
-                "objType": "sg_float"
+                "name": "proj",
+                "objType": "sg_mat4"
+            },
+            {
+                "type": 2,
+                "name": "res",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "time",
+                "objType": "sg_f32"
             }
-        ],
-        "portsOut": []
+        ]
     },
     "coreLibs": [
         "shadergraph"

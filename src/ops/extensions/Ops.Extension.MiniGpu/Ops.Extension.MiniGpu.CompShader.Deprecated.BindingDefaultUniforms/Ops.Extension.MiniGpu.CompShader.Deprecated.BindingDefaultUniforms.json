@@ -39,6 +39,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786283594686
+        },
+        {
+            "message": "op Extension.MiniGpu.CompShader.BindingDefaultUniforms was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787559017408
         }
     ],
     "layout": {
