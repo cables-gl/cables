@@ -1,6 +1,6 @@
 {
-    "id": "d48853ac-d5b4-4c9c-9680-92e9eecf14fc",
-    "created": 1767016696486,
+    "id": "71e5c8d3-f2af-48cf-bb71-1b96e09e7d8b",
+    "created": 1787598484816,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -33,6 +33,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1785422516814
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.RenderPipeline2 renamed to Ops.Extension.MiniGpu.CompShader.RenderPipeline_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787598376473
         }
     ],
     "layout": {
@@ -87,6 +93,11 @@
                 "subType": "integer"
             },
             {
+                "type": 2,
+                "name": "Fragment Module",
+                "objType": "shadermodule"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }
@@ -98,7 +109,6 @@
             }
         ]
     },
-    "isReleased": true,
     "coreLibs": [
         "minigpu"
     ]

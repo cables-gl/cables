@@ -30,7 +30,7 @@ export class ShaderModule
     constructor(mgpu, o)
     {
         this.cfg = o;
-        this.format = mgpu.format;
+        this.format = mgpu?.format;
     }
 
     getObjectStructure()

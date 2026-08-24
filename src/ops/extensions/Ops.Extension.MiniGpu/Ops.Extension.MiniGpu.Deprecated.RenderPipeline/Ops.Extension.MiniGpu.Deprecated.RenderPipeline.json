@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1766855626187
+        },
+        {
+            "message": "op Extension.MiniGpu.RenderPipeline was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787598365032
         }
     ],
     "layout": {

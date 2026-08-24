@@ -1,5 +1,4 @@
 const
-    exec = op.inTrigger("Trigger"),
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
 
     inCode = op.inStringEditor("Code", "", "glsl"),
@@ -8,16 +7,17 @@ const
     inCodePre = op.inString("Code Prepend", ""),
     inView = op.inTriggerButton("View Code"),
 
-    next = op.outTrigger("Next"),
+    outModule = op.outObject("Module", null, "shadermodule"),
     outCode = op.outString("Final Code");
 
-let sm = null;
 const binds = new CABLES.Stack();
 let oldBindings = [];
 let s = null;
 let bindHead = "";
 let o = null;
 let lastChange = 0;
+
+let sm = null;
 
 inStage.onChange =
     inStage.onChange =
@@ -45,9 +45,8 @@ inView.onTriggered = () =>
 
 /* minimalcore:end */
 
-exec.onTriggered = () =>
+op.updateShaderModule = (mgpu) =>
 {
-    const mgpu = op.patch.frameStore.mgpu;
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
     mgpu.bindings = binds.clear();
@@ -58,9 +57,6 @@ exec.onTriggered = () =>
         {
             updts[i].update(mgpu);
         }
-
-    next.trigger();
-    mgpu.shader.pop();
 
     if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
@@ -109,8 +105,8 @@ exec.onTriggered = () =>
         mgpu.rebuildShaderModule = false;
 
         sm.reInit = false;
+
+        outModule.setRef(sm);
     }
 
-    mgpu.shaderModules[inStage.get().toLowerCase()] = sm;
-    mgpu.shaderModules.updated = false;
 };
