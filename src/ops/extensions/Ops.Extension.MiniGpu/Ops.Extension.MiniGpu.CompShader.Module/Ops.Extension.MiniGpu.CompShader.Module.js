@@ -97,7 +97,7 @@ exec.onTriggered = () =>
 
     if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
-        sm = new MGPU.ShaderModule({ "stage": inStage.get() });
+        sm = new MGPU.ShaderModule({ "stage": inStage.get(), "op": op });
 
         sm.code = inCode.get(),
         sm.codePre = inCodePre.get();
@@ -105,21 +105,12 @@ exec.onTriggered = () =>
 
         hasError = false;
 
-        s = { "layout": "auto" };
-        const module = mgpu.device.createShaderModule(
-            {
-                "code": sm.genSource()
-            });
-
-        /* minimalcore:start */
-        module.label = op.uiAttribs.comment || op.id;
-
-        /* minimalcore:end */
+        sm.create(mgpu);
 
         const diags = [];
 
         outCode.setUiAttribs({ "editorDiagnostics": [] });
-        module.getCompilationInfo().then((a) =>
+        sm.module.getCompilationInfo().then((a) =>
         {
 
             /* minimalcore:start */
@@ -151,7 +142,8 @@ exec.onTriggered = () =>
 
         s = {
 
-            "module": module,
+            "layout": "auto",
+            "module": sm.module,
             "targets": [ // only frag??
                 {
                     "format": mgpu.format,
