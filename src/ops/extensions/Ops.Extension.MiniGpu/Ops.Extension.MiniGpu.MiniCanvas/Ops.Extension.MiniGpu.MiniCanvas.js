@@ -119,10 +119,7 @@ resizeObserver.observe(canvas);
 
 function frame(timestamp)
 {
-    if (!CABLES.UI)
-    {
-        op.patch.updateAnims(null, timestamp - lastTs || timestamp, timestamp);
-    }
+    if (!CABLES.UI) op.patch.updateAnims(null, timestamp - lastTs || timestamp, timestamp);
 
     op.patch.renderloop.frameNum++;
 

@@ -1,7 +1,8 @@
 import { Stack } from "cables";
 import { createBindGroup, createBindGroupLayout, getEmptyTexture } from "./minigpu.js";
-import MinMat from "./minimat.js";
+import { MinMat } from "./minimat.js";
 import { RenderTarget } from "./target.js";
+import { ShaderModule } from "./shadermodule.js";
 
 /** @typedef MgpuState
  * @property {HTMLCanvasElement} canvas
@@ -22,6 +23,7 @@ window.MGPU = {
     "createBindGroup": createBindGroup,
     "getEmptyTexture": getEmptyTexture,
     "RenderTarget": RenderTarget,
+    "ShaderModule": ShaderModule,
     "mm": MinMat
 
 };

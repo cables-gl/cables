@@ -11,11 +11,12 @@ const
     next = op.outTrigger("Next"),
     outCode = op.outString("Final Code");
 
+let sm = null;
 const binds = new CABLES.Stack();
 let oldBindings = [];
 let s = null;
 let bindHead = "";
-let reInit = true;
+// let reInit = true;
 let o = null;
 let lastChange = 0;
 let hasError = false;
@@ -33,7 +34,7 @@ inStage.onChange =
         /* minimalcore:end */
 
         hasError = false;
-        reInit = true;
+        if (sm) sm.reInit = true;
     };
 
 /* minimalcore:start */
@@ -47,33 +48,33 @@ inView.onTriggered = () =>
 
 /* minimalcore:end */
 
-function genBindHeadSrc()
-{
-    let bhead = "";
-    let g = 0;
-    if (inStage.get() == "FRAGMENT") g = 1;
+// function genBindHeadSrc()
+// {
+//     let bhead = "";
+//     let g = 0;
+//     if (inStage.get() == "FRAGMENT") g = 1;
 
-    for (let i = 0; i < binds.array().length; i++)
-    {
-        const b = binds.array()[i];
-        if (b.headSrc)
-            bhead += b.headSrc + "\n";
-    }
+//     for (let i = 0; i < binds.array().length; i++)
+//     {
+//         const b = binds.array()[i];
+//         if (b.headSrc)
+//             bhead += b.headSrc + "\n";
+//     }
 
-    for (let i = 0; i < binds.array().length; i++)
-    {
-        const b = binds.array()[i];
-        bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
-    }
+//     for (let i = 0; i < binds.array().length; i++)
+//     {
+//         const b = binds.array()[i];
+//         bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
+//     }
 
-    if (bhead != bindHead) reInit = true;
-    bindHead = bhead;
+//     if (bhead != bindHead) reInit = true;
+//     bindHead = bhead;
 
-    let code = inCodePre.get() + inCode.get();
-    code = code.replaceAll("{{BINDINGS}}", bhead);
-    outCode.set(code);
-    return code;
-}
+//     let code = inCodePre.get() + inCode.get();
+//     code = code.replaceAll("{{BINDINGS}}", bhead);
+//     outCode.set(code);
+//     return code;
+// }
 
 exec.onTriggered = () =>
 {
@@ -92,15 +93,24 @@ exec.onTriggered = () =>
 
     next.trigger();
     mgpu.shader.pop();
-    if (o && o.bindings != mgpu.bindings) reInit = true;
+    if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
-    if (reInit || mgpu.rebuildShaderModule)
+    if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
+        sm = new MGPU.ShaderModule({ "stage": inStage.get() });
+
+        sm.code = inCode.get(),
+        sm.codePre = inCodePre.get();
+
         hasError = false;
+
         s = { "layout": "auto" };
         const module = mgpu.device.createShaderModule(
             {
-                "code": genBindHeadSrc()
+                "code": sm.genSource(
+                    {
+                        "bindings": binds.array()
+                    })
             });
 
         /* minimalcore:start */
@@ -172,7 +182,7 @@ exec.onTriggered = () =>
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
 
-        reInit = false;
+        sm.reInit = false;
     }
 
     mgpu.shaderModules[inStage.get().toLowerCase()] = o;

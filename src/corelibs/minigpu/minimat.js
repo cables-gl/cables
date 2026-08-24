@@ -12,7 +12,7 @@
 // target matrix as the first argument but do NOT modify it — each returns a
 // new array: result = m * op.
 
-class MinMat
+export class MinMat
 {
     static RAD2DEG = 180 / Math.PI;
 
@@ -132,5 +132,3 @@ class MinMat
         return m;
     }
 }
-
-export default MinMat;

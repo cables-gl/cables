@@ -3,6 +3,7 @@ export function createBindGroupLayout(mgpu, bindings)
     const layoutEntries = [];
     for (let i = 0; i < bindings.length; i++)
     {
+        // bindings[i].layout = {};
         bindings[i].layout.binding = i;
         layoutEntries.push(bindings[i].layout);
     }
