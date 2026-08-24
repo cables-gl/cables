@@ -101,16 +101,14 @@ exec.onTriggered = () =>
 
         sm.code = inCode.get(),
         sm.codePre = inCodePre.get();
+        sm.bindings = mgpu.bindings.array();
 
         hasError = false;
 
         s = { "layout": "auto" };
         const module = mgpu.device.createShaderModule(
             {
-                "code": sm.genSource(
-                    {
-                        "bindings": binds.array()
-                    })
+                "code": sm.genSource()
             });
 
         /* minimalcore:start */
