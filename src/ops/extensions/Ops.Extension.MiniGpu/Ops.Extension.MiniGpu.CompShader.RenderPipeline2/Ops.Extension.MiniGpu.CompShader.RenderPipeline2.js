@@ -57,8 +57,8 @@ exec.onTriggered = () =>
                 {
                     "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag]
                 }),
-            "vertex": mgpu.shaderModules.vertex.shader.vertex,
-            "fragment": mgpu.shaderModules.fragment.shader.fragment,
+            "vertex": mgpu.shaderModules.vertex.shader,
+            "fragment": mgpu.shaderModules.fragment.shader,
             "primitive":
             {
                 "topology": topology.get(),

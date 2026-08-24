@@ -149,7 +149,7 @@ exec.onTriggered = () =>
             /* minimalcore:end */
         });
 
-        s[inStage.get().toLowerCase()] = {
+        s = {
 
             "module": module,
             "targets": [ // only frag??
