@@ -1,6 +1,7 @@
 const
     next = op.outTrigger("next"),
-    click = op.outTrigger("click");
+    click = op.outTrigger("click"),
+    outSupported = op.outBoolNum("Supported");
 
 let canvas = document.createElement("canvas");
 let presentationFormat = null;
@@ -29,34 +30,64 @@ let frames = 0;
 
 /* minimalcore:end */
 
-// if (!op.patch.config.containerElement) console.error("patch options need containerElement for minigpu");
+let errorDiv = null;
 
-navigator.gpu.requestAdapter(
+function showError(msg)
+{
+    if (!errorDiv)
     {
-        "featureLevel": "compatibility"
-    }).then(
-    (adapter) =>
+        errorDiv = document.createElement("div");
+        (op.patch.config.containerElement || document.body).appendChild(errorDiv);
+        errorDiv.style = "position:absolute;top:0px;border:2px solid red;";
+    }
+    errorDiv.innerHTML += msg;
+
+    outSupported.set(false);
+}
+
+CABLES.idleCallback(() =>
+{
+    if (!navigator.gpu)
     {
-        adapter.requestDevice(
+        showError("WebGPU is not supported in this browser.");
+    }
+    else
+        navigator.gpu.requestAdapter(
             {
-                "requiredLimits":
-            {
-                "maxStorageBuffersInVertexStage": 5 // request up to what's supported
-            }
+                "featureLevel": "compatibility"
             }).then(
-            (_device) =>
+            (adapter) =>
             {
-                device = _device;
-                (op.patch.config.containerElement || document.body).appendChild(canvas);
-                canvas.style.width = "100%";
-                canvas.style.height = "100%";
-                context = canvas.getContext("webgpu");
+                if (!adapter)
+                    showError("no suitable webgpu adapter found");
+                else
+                    adapter.requestDevice(
+                        {
+                            "requiredLimits":
+                        {
+                            "maxStorageBuffersInVertexStage": 5
+                        }
+                        }).then(
+                        (_device) =>
+                        {
+                            device = _device;
+                            device.lost.then((info) =>
+                            {
+                                op.logError("WebGPU device lost: " + info.message + " (reason: " + info.reason + ")");
+                            });
 
-                setSize(canvas.clientWidth, canvas.clientHeight);
+                            outSupported.set(true);
+                            (op.patch.config.containerElement || document.body).appendChild(canvas);
+                            canvas.style.width = "100%";
+                            canvas.style.height = "100%";
+                            context = canvas.getContext("webgpu");
 
-                requestAnimationFrame(frame);
+                            setSize(canvas.clientWidth, canvas.clientHeight);
+                            requestAnimationFrame(frame);
+                        });
             });
-    });
+
+});
 
 function setSize(width, height, mul = devicePixelRatio)
 {
@@ -82,11 +113,7 @@ const resizeObserver = new ResizeObserver((entries) =>
 {
     const entry = entries[0];
     if (entry && entry.contentRect.width && entry.contentRect.height)
-    {
-
         setSize(entry.contentRect.width, entry.contentRect.height);
-
-    }
 });
 
 op.patch.renderloop = { "frameNum": 0, "resume": () => {}, "pause": () => {}, "paused": false };
@@ -152,7 +179,6 @@ function frame(timestamp)
     frames++;
     if (performance.now() - fpsTime > 1000)
     {
-
         canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
         canvas.dataset.perffps = frames;
         fpsTime = performance.now();

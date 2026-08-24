@@ -14,6 +14,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @typedef ShaderNode
  * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"} [type]
  * @property {string} [name]
+ * @property {function} [update]
  * @property {string} [title]
  * @property {string} resultVarName
  * @property {string} id
@@ -156,7 +157,7 @@ export class ShaderGraphProgram extends Events
         if (this.options.showId) title += "id" + node.id;
 
         /* minimalcore:start */
-        op.setUiAttrib({ "extendTitle": title });
+        op.setUiAttrib({ "extendTitle": title || null });
         op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
 
         /* minimalcore:end */

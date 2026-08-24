@@ -21,6 +21,11 @@
             {
                 "type": 1,
                 "name": "click"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
             }
         ]
     },

@@ -1,5 +1,4 @@
 const
-    // exec = op.inTrigger("Trigger"),
     inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "float"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
