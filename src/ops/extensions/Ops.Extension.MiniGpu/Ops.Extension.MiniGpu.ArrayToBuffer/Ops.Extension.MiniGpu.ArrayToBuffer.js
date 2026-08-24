@@ -10,6 +10,7 @@ const
 let buffer = null;
 let reInit = true;
 let reset = true;
+let arr = null;
 
 inType.onChange =
     inArr.onChange = () =>
@@ -50,7 +51,12 @@ exec.onTriggered = () =>
 
     if (reset)
     {
-        const arr = new Float32Array(inArr.get() || []);
+        if (inArr.get())
+        {
+            if (!arr || arr.length != inArr.get().length)
+                arr = new Float32Array(inArr.get() || []);
+            arr.set(inArr.get());
+        }
         mgpu.device.queue.writeBuffer(buffer, 0, arr);
         buff.setRef(buffer);
         reset = false;
