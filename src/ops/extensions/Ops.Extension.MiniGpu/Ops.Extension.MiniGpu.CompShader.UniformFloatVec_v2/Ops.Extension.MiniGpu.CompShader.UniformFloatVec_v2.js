@@ -48,8 +48,7 @@ function updateUi()
     /* minimalcore:end */
 }
 
-// exec.onTriggered = () =>
-function update(mgpu)
+function update(mgpu, bindings)
 {
     // const mgpu = op.patch.frameStore.mgpu;
     if (!binding)
@@ -88,7 +87,7 @@ function update(mgpu)
 
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
-    mgpu.bindings.push(binding);
+    if (binding) bindings.push(binding);
 }
 
 new CABLES.ShaderGraphOp(this,

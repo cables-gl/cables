@@ -64,18 +64,13 @@
         ],
         "portsOut": [
             {
-                "type": 2,
-                "name": "Module",
-                "objType": "shadermodule"
-            },
-            {
                 "type": 1,
                 "name": "Next"
             },
             {
                 "type": 5,
                 "name": "Final Code",
-                "uititle": "final code FRAGMENT"
+                "uititle": "final code COMPUTE"
             }
         ]
     },

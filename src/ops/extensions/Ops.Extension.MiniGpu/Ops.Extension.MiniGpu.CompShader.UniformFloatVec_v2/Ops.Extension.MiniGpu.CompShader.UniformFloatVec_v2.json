@@ -1,6 +1,6 @@
 {
-    "id": "f0a04243-a2cf-4655-b0e2-b32a3e8294af",
-    "created": 1786823838421,
+    "id": "8d7b35c8-6d17-45a7-856b-c140e2315b1a",
+    "created": 1787602005059,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -56,7 +56,7 @@
             {
                 "type": 2,
                 "name": "value",
-                "objType": "sg_vec4"
+                "objType": "sg_float"
             }
         ]
     }
