@@ -39,7 +39,7 @@ exec.onTriggered = () =>
     if (!mgpu.shaderModules.compute) return;
     if (!pipe || mgpu.rebuildPipeline)
     {
-        mgpu.shaderModules.compute.shader.constants = inOverrides.get() || {};
+        mgpu.shaderModules.compute.objectStructure.constants = inOverrides.get() || {};
 
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings.array());
         const o = {
@@ -47,7 +47,7 @@ exec.onTriggered = () =>
                 {
                     "bindGroupLayouts": [bindGroupLayout]
                 }),
-            "compute": mgpu.shaderModules.compute.shader
+            "compute": mgpu.shaderModules.compute.objectStructure
         };
 
         /* minimalcore:start */

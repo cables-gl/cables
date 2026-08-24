@@ -69,7 +69,6 @@ export class Lang
         params = params || [];
         const types = ["float", "vec2", "vec3", "vec4"];
         let typeIdx = 0;
-        // if (!portsSetType) return;
 
         for (let j = 0; j < params.length; j++)
         {
@@ -77,9 +76,7 @@ export class Lang
             {
                 const otherport = params[j].port.links[i].getOtherPort(params[j].port);
                 const otherop = otherport.op;
-                console.log("op", otherop.name, params[j].port.name);
                 const r = otherop.sgOp.getResult(otherport.name);
-                console.log("rrr", r);
                 const type = r.type;
                 const t = types.indexOf(type);
                 typeIdx = Math.max(typeIdx, t);

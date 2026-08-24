@@ -10,6 +10,7 @@ export class ShaderModule
     reInit = true;
     code = "";
     codePre = "";
+    updated = performance.now();
 
     /** @type {Binding[]} */
     bindings = [];
@@ -20,11 +21,42 @@ export class ShaderModule
      */
     /**
      * @param {ShaderModuleOptions} o
+     * @param {import(".").MgpuState} mgpu
      */
-    constructor(o)
+    constructor(mgpu, o)
     {
         this.cfg = o;
+        this.format = mgpu.format;
 
+    }
+
+    getObjectStructure()
+    {
+        return {
+            "layout": "auto",
+            "module": this.module,
+            "targets": [ // only frag??
+                {
+                    "format": this.format,
+                    "blend":
+                    {
+                        "color":
+                        {
+                            "srcFactor": "src-alpha",
+                            "dstFactor": "one-minus-src-alpha",
+                            "operation": "add"
+                        },
+                        "alpha":
+                        {
+                            "srcFactor": "one",
+                            "dstFactor": "one-minus-src-alpha",
+                            "operation": "add"
+                        }
+                    }
+                }
+            ],
+            "constants": {}// smgpu.constants
+        };
     }
 
     create(mgpu)
@@ -43,6 +75,7 @@ export class ShaderModule
 
     genSource()
     {
+        this.updated = performance.now();
 
         let bhead = "";
         let g = 0;

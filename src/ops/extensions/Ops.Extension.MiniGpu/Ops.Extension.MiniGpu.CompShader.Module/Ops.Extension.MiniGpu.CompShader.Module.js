@@ -88,7 +88,6 @@ exec.onTriggered = () =>
         for (let i = 0; i < updts.length; i++)
         {
             updts[i].update(mgpu);
-
         }
 
     next.trigger();
@@ -97,18 +96,16 @@ exec.onTriggered = () =>
 
     if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
-        sm = new MGPU.ShaderModule({ "stage": inStage.get(), "op": op });
+        sm = new MGPU.ShaderModule(mgpu, { "stage": inStage.get(), "op": op });
 
         sm.code = inCode.get(),
         sm.codePre = inCodePre.get();
         sm.bindings = mgpu.bindings.array();
 
-        hasError = false;
-
         sm.create(mgpu);
 
         const diags = [];
-
+        hasError = false;
         outCode.setUiAttribs({ "editorDiagnostics": [] });
         sm.module.getCompilationInfo().then((a) =>
         {
@@ -167,7 +164,7 @@ exec.onTriggered = () =>
             "constants": mgpu.constants
         };
 
-        o = { "updated": performance.now(), "shader": s, "bindings": mgpu.bindings, "constants": [] };
+        o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": mgpu.bindings, "constants": [] };
 
         mgpu.rebuildPipeline = "module rebuild ";
         mgpu.rebuildShaderModule = false;
