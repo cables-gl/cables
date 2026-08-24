@@ -8,9 +8,13 @@ export class ShaderModule
 {
     bindHeadSrc = "";
     reInit = true;
+
+    hasError = false;
     code = "";
     codePre = "";
     updated = performance.now();
+
+    onShaderInfo = undefined;
 
     /** @type {Binding[]} */
     bindings = [];
@@ -27,7 +31,6 @@ export class ShaderModule
     {
         this.cfg = o;
         this.format = mgpu.format;
-
     }
 
     getObjectStructure()
@@ -61,6 +64,8 @@ export class ShaderModule
 
     create(mgpu)
     {
+
+        this.hasError = false;
         this.module = mgpu.device.createShaderModule(
             {
                 "code": this.genSource()
@@ -70,6 +75,20 @@ export class ShaderModule
         this.module.label = this.cfg.op.uiAttribs.comment || this.cfg.op.id;
 
         /* minimalcore:end */
+        this.module.getCompilationInfo().then((shaderInfo) =>
+        {
+
+            for (let i = 0; i < shaderInfo.messages.length; i++)
+            {
+                const msg = shaderInfo.messages[i];
+                if (msg)
+                {
+                    if (msg.type == "error") this.hasError = true;
+                }
+            }
+            if (this.onShaderInfo) this.onShaderInfo(shaderInfo);
+
+        });
 
     }
 

@@ -16,10 +16,8 @@ const binds = new CABLES.Stack();
 let oldBindings = [];
 let s = null;
 let bindHead = "";
-// let reInit = true;
 let o = null;
 let lastChange = 0;
-let hasError = false;
 
 inStage.onChange =
     inStage.onChange =
@@ -33,7 +31,6 @@ inStage.onChange =
 
         /* minimalcore:end */
 
-        hasError = false;
         if (sm) sm.reInit = true;
     };
 
@@ -64,29 +61,20 @@ exec.onTriggered = () =>
 
     next.trigger();
     mgpu.shader.pop();
+
     if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
     if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
         sm = new MGPU.ShaderModule(mgpu, { "stage": inStage.get(), "op": op });
-
-        sm.code = inCode.get(),
-        sm.codePre = inCodePre.get();
-        sm.bindings = mgpu.bindings.array();
-
-        sm.create(mgpu);
-
-        const diags = [];
-        hasError = false;
-        outCode.setUiAttribs({ "editorDiagnostics": [] });
-        sm.module.getCompilationInfo().then((a) =>
+        sm.onShaderInfo = (shaderInfo) =>
         {
 
             /* minimalcore:start */
             op.setUiError("shadercomp", null);
-            for (let i = 0; i < a.messages.length; i++)
+            for (let i = 0; i < shaderInfo.messages.length; i++)
             {
-                const msg = a.messages[i];
+                const msg = shaderInfo.messages[i];
                 if (msg)
                 {
                     diags.push({ "message": msg.type + " line " + msg.lineNum + ": " + msg.message, "line": msg.lineNum, "column": -1, "severity": 2, "fatal": true });
@@ -99,7 +87,6 @@ exec.onTriggered = () =>
                             "button": "show",
                             "buttonCb": () => { CABLES.UI.codeWatcher(outCode); }
                         });
-                    if (msg.type == "error") hasError = true;
                 }
             }
 
@@ -107,7 +94,18 @@ exec.onTriggered = () =>
             inCode.setUiAttribs({ "editorDiagnostics": diags });
 
             /* minimalcore:end */
-        });
+        };
+
+        sm.code = inCode.get(),
+        sm.codePre = inCodePre.get();
+        sm.bindings = mgpu.bindings.array();
+
+        sm.create(mgpu);
+
+        const diags = [];
+        outCode.setUiAttribs({ "editorDiagnostics": [] });
+        // sm.module.getCompilationInfo().then((a) =>
+        // {});
 
         // o = { "updated": performance.now(), "objectStructure": sm.getObjectStructure(), "bindings": sm.bindings, "constants": [] };
 
