@@ -221,7 +221,7 @@ export class ShaderGraphProgram extends Events
 
                         paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
-                        if (node.result.type == "gen")
+                        if (node.result.type == "gen" && otherPort.op.shaderNode.result)
                             node.result.type = otherPort.op.shaderNode.result.type;
 
                         this.addOpShaderFuncCode(otherPort.op);
