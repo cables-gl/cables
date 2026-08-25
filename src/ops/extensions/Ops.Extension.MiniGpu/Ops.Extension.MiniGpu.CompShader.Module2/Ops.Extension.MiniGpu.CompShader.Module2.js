@@ -11,7 +11,7 @@ const
     outCode = op.outString("Final Code");
 
 const
-    inO = op.inObject("Graph"),
+    inGraphNodes = op.inObject("Graph"),
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true);
@@ -30,13 +30,14 @@ let lastChange = 0;
 
 let sm = null;
 let gencode = "";
-const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangWgsl());
+const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangWgsl());
 
 ids.onChange =
     types.onChange =
     debug.onChange =
     inCode.onChange =
-    inO.onChange = () =>
+    inGraphNodes.onLinkChanged =
+    inGraphNodes.onChange = () =>
     {
         sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
         let str = inCode.get() || "";

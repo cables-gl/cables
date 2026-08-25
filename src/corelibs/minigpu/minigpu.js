@@ -32,7 +32,16 @@ export function createBindGroup(mgpu, bindings, bindGroupLayout)
         bg.entries.push(b);
     }
 
-    return mgpu.device.createBindGroup(bg);
+    let bgg = null;
+
+    if (!bg.entries)
+    {
+        console.log("no bindgroup entries");
+        return null;
+
+    }
+    bgg = mgpu.device.createBindGroup(bg);
+    return bgg;
 }
 
 export function getEmptyTexture(mgpu)

@@ -44,15 +44,17 @@ exec.onTriggered = () =>
     {
         inModule.links[0].getOtherPort(inModule).op.updateShaderModule(mgpu);
     }
+
     next.trigger();
-    if (!mgpu.shaderModules.compute) return;
-    if (!pipe || mgpu.rebuildPipeline)
+    // if (!mgpu.shaderModules.compute) return;
+    if (module && (!pipe || mgpu.rebuildPipeline))
     {
 
         /* minimalcore:start */
         op.setUiError("nomod", inModule.get() ? null : "no shader module...");
 
         /* minimalcore:end */
+        // console.log("module", module);
 
         const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, module.bindings);
         const o = {
@@ -60,7 +62,7 @@ exec.onTriggered = () =>
                 {
                     "bindGroupLayouts": [bindGroupLayout]
                 }),
-            "compute": mgpu.shaderModules.compute.getObjectStructure()
+            "compute": module.getObjectStructure()
         };
 
         /* minimalcore:start */
@@ -71,7 +73,7 @@ exec.onTriggered = () =>
         pipe = mgpu.device.createComputePipeline(o);
 
         computeBindGroup = MGPU.createBindGroup(mgpu, module.bindings, bindGroupLayout);
-        console.log("bindgroup", computeBindGroup);
+        // console.log("bindgroup", computeBindGroup);
     }
 
     if (!pipe) return console.log("no pipe");
@@ -87,6 +89,8 @@ exec.onTriggered = () =>
     if (inWg.get() == "1") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize));
     if (inWg.get() == "2") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize), Math.ceil(inNum2.get() / workgroupSize));
     if (inWg.get() == "3") pass.dispatchWorkgroups(Math.ceil(inNum.get() / workgroupSize), Math.ceil(inNum2.get() / workgroupSize), Math.ceil(inNum3.get() / workgroupSize));
+
+    // console.log("actually");
 
     pass.end();
     const gpuCommands = commandEncoder.finish();

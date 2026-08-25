@@ -102,6 +102,7 @@ export class ShaderModule
         this.updated = performance.now();
 
         let bhead = "";
+
         let g = 0;
         if (this.cfg.stage == "FRAGMENT") g = 1;
 
@@ -112,19 +113,21 @@ export class ShaderModule
                 bhead += b.headSrc + "\n";
         }
 
+        bhead += "\n// bindings\n";
         for (let i = 0; i < this.bindings.length; i++)
         {
             const b = this.bindings[i];
             bhead += "@group(" + g + ") @binding(" + i + ") " + b.header + "\n";
         }
 
+        bhead += "\n////\n";
         if (bhead != this.bindHeadSrc)
         {
             this.reInit = true;
             this.bindHeadSrc = bhead;
         }
 
-        let finalCode = this.codePre + this.code;
+        let finalCode = "// pre code\n" + this.codePre + "\n/////\n" + this.code;
         finalCode = finalCode.replaceAll("{{BINDINGS}}", bhead);
 
         console.log("replaceeeeeeeep    ", bhead);

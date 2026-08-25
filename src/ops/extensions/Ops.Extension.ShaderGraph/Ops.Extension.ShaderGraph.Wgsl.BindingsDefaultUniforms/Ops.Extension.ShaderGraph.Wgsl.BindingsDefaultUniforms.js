@@ -28,7 +28,7 @@ op.onAnimFrame = function (t) { time = t; };
 //     binding = null;
 // };
 
-function update(mgpu)
+function update(mgpu, bindings)
 {
     if (!binding)
     {
@@ -68,10 +68,11 @@ function update(mgpu)
     uniformArray[66] = time;
     uniformArray[67] = mgpu.timeDelta;
 
+    // console.log("time",time)
     // console.log("uniformarray", mgpu.timeDelta);
     mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
-    mgpu.bindings.push(binding);
+    bindings.push(binding);
 
     // next.trigger();
 }

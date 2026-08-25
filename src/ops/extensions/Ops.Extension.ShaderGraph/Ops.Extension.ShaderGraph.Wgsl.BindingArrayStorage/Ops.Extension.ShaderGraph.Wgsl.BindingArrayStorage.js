@@ -21,33 +21,42 @@ inBuffer.onChange =
         buffer = null;
     };
 
-inBuffer.onChange = () =>
-{
-    buffer = null; // when needed.........???
-};
-
+let inbuffer = null;
 op.updateShaderModule = update;
+
+function copyBuffer(mgpu, src, dst)
+{
+    // console.log("copy",src.size);
+    const encoder = mgpu.device.createCommandEncoder();
+    // encoder.copyBufferToBuffer(src, 0, dst, 0, src.size);
+    encoder.copyBufferToBuffer(src, dst);
+    const gpuCommands = encoder.finish();
+    mgpu.device.queue.submit([gpuCommands]);
+}
 
 function update(mgpu, bindings)
 {
+    inbuffer = inBuffer.get();
     // const mgpu = op.patch.frameStore.mgpu;
     // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG");
-    if (type.get() == "InOut Flip" && buffer && bufferInOut)
-    {
-        const encoder = mgpu.device.createCommandEncoder();
-        encoder.copyBufferToBuffer(bufferInOut, 0, buffer, 0, buffer.size);
-        // encoder.copyBufferToBuffer(buffer, bufferInOut);
-        // console.log("buff",buffer);
-        // encoder.finish();
-        const gpuCommands = encoder.finish();
-        mgpu.device.queue.submit([gpuCommands]);
-    }
+    if (buffer && inBuffer.get().label != buffer.label) console.log("label diff", inBuffer.get().label);
 
-    if (!buffer)
+    if (!buffer && inbuffer)
     {
-        buffer = inBuffer.get();
+
+        buffer = mgpu.device.createBuffer(
+            {
+                "label": inBuffer.get().label,
+                "size": inBuffer.get().size,
+                "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
+
+            });
+
+        copyBuffer(mgpu, inbuffer, buffer);
+        // encoder.copyBufferToBuffer(inbuffer, 0, buffer, 0, inbuffer.size);
 
         const p = (buffer.label || "").split(",");
+        console.log("bufferlabellllllllll", buffer.label);
 
         /* minimalcore:start */
 
@@ -124,6 +133,7 @@ function update(mgpu, bindings)
                     "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
 
                 });
+            copyBuffer(mgpu, inbuffer, bufferInOut);
 
             bindingInOut = {
                 "header": "var<storage,read_write> " + (inName.get() || p[0]) + "Out : array<" + p[1] + ">;",
@@ -131,26 +141,33 @@ function update(mgpu, bindings)
                 "layout": layout
             };
 
-            mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
+            // mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
             outBuff.setRef(bufferInOut);
         }
         // else bindingInOut = null;
 
         op.shaderNode.result.name = op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || p[0];
         op.shaderNode.result.type = p[1];
-        console.log("arraystorage", op.shaderNode);
+        console.log("arraystorage", op.shaderNode, p);
 
         if (bindings && binding) bindings.push(binding);
         if (bindings && bindingInOut) bindings.push(bindingInOut);
 
         console.log("BINDING UPDATE STORAGGGGGGGGGGGGG", bindings);
 
-        op.updateGraph(); // shaderNode.result.port.setRef({});
-    }
+        op.updateGraph();
+        op.shaderNode.result.port.setRef({});
 
+    }
+    // outBuff.setRef(bufferInOut);
     // next.trigger();
     // if (binding) bindings.push(binding);
 
+    if (type.get() == "InOut Flip" && buffer && bufferInOut)
+    {
+        copyBuffer(mgpu, bufferInOut, buffer);
+        // console.log("buffer",buffer c);
+    }
 }
 
 const defaultName = "storage" + CABLES.simpleId();

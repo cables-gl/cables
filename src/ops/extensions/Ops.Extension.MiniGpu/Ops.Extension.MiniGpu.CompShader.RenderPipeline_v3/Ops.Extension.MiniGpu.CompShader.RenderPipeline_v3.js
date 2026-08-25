@@ -40,12 +40,12 @@ exec.onTriggered = () =>
 
     if (!mgpu.target.current()) return; // console.log("nono", op.id);
 
+    let moduleFrag = inModuleFragment.get();
+    if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(mgpu);
+
     if (!pipe || mgpu.rebuildPipeline)
     {
         mgpu.rebuildPipeline = false;
-
-        let moduleFrag = inModuleFragment.get();
-        if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(mgpu);
 
         /* minimalcore:start */
 
