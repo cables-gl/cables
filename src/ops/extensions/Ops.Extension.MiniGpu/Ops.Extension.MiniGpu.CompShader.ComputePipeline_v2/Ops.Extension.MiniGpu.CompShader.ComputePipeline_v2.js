@@ -38,22 +38,23 @@ exec.onTriggered = () =>
     if (!mgpu) return console.log("no mgpu");
 
     mgpu.shaderModules = {};
+
+    let module = inModule.get();
+    if (inModule.isLinked())
+    {
+        inModule.links[0].getOtherPort(inModule).op.updateShaderModule(mgpu);
+    }
     next.trigger();
     if (!mgpu.shaderModules.compute) return;
     if (!pipe || mgpu.rebuildPipeline)
     {
 
-        let module = inModule.get();
-        if (inModule.isLinked()) inModule.links[0].getOtherPort(inModule).op.updateShaderModule(mgpu);
-
         /* minimalcore:start */
-
         op.setUiError("nomod", inModule.get() ? null : "no shader module...");
-        // if (!module) return;
 
         /* minimalcore:end */
 
-        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, mgpu.shaderModules.compute.bindings);
+        const bindGroupLayout = MGPU.createBindGroupLayout(mgpu, module.bindings);
         const o = {
             "layout": mgpu.device.createPipelineLayout(
                 {
@@ -69,7 +70,8 @@ exec.onTriggered = () =>
 
         pipe = mgpu.device.createComputePipeline(o);
 
-        computeBindGroup = MGPU.createBindGroup(mgpu, mgpu.shaderModules.compute.bindings, bindGroupLayout);
+        computeBindGroup = MGPU.createBindGroup(mgpu, module.bindings, bindGroupLayout);
+        console.log("bindgroup", computeBindGroup);
     }
 
     if (!pipe) return console.log("no pipe");

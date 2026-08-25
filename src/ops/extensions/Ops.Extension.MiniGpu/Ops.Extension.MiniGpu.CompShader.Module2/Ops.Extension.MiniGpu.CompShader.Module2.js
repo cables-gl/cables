@@ -68,8 +68,8 @@ inStage.onChange =
 
         /* minimalcore:end */
 
-        // if (sm) sm.reInit = true;
-        sm = null;
+        if (sm) sm.reInit = true;
+        // sm = null;
     };
 
 /* minimalcore:start */
@@ -91,7 +91,7 @@ op.updateShaderModule = (mgpu) =>
 
     const updts = sgp.updateableOps;
 
-    console.log("updaaaa", updts);
+    // console.log("updaaaa", updts);
     if (updts)
     {
         for (const i in updts)
