@@ -19,6 +19,8 @@ inBuffer.onChange =
     type.onChange = () =>
     {
         buffer = null;
+
+        if (bufferInOut) outBuff.setRef(bufferInOut);
     };
 
 let inbuffer = null;
@@ -156,8 +158,8 @@ function update(mgpu, bindings)
 
         console.log("BINDING UPDATE STORAGGGGGGGGGGGGG", bindings);
 
-        op.updateGraph();
-        op.shaderNode.result.port.setRef({});
+        // op.updateGraph();
+        // op.shaderNode.result.port.setRef({});
     }
 
     // outBuff.setRef(bufferInOut);
@@ -169,10 +171,17 @@ function update(mgpu, bindings)
         copyBuffer(mgpu, bufferInOut, buffer);
         // console.log("buffer",buffer );
 
-        if (outBuff.get() != bufferInOut)
-            outBuff.setRef(bufferInOut);
+        if (outBuff.get() && outBuff.get() != bufferInOut) outBuff.setRef(bufferInOut);
         // outBuff.setRef(bufferInOut);
 
+    }
+    else
+    {
+
+        copyBuffer(mgpu, inbuffer, buffer);
+        // console.log("buffer",buffer );
+
+        if (outBuff.get() && outBuff.get() != buffer) outBuff.setRef(buffer);
     }
 }
 

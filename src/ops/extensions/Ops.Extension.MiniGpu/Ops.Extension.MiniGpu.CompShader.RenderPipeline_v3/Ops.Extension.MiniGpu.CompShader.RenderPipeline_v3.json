@@ -98,6 +98,11 @@
                 "objType": "shadermodule"
             },
             {
+                "type": 2,
+                "name": "Vertex Module",
+                "objType": "shadermodule"
+            },
+            {
                 "type": 1,
                 "name": "Reset"
             }

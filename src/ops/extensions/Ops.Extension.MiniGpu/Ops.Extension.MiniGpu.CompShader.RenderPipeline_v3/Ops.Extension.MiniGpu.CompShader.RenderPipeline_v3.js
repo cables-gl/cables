@@ -7,6 +7,7 @@ const
     depthWriteEnabled = op.inBool("depthWriteEnabled", true),
     depthCompare = op.inSwitch("depthCompare", ["less-equal", "always"], "less-equal"),
     inModuleFragment = op.inObject("Fragment Module", null, "shadermodule"),
+    inModuleVertex = op.inObject("Vertex Module", null, "shadermodule"),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Childs");
 
@@ -20,6 +21,7 @@ let updatedFrag = 0;
 let updatedVert = 0;
 
 inModuleFragment.onChange =
+    inModuleVertex.onChange =
     depthCompare.onChange =
     depthWriteEnabled.onChange =
     cull.onChange =
@@ -41,7 +43,9 @@ exec.onTriggered = () =>
     if (!mgpu.target.current()) return; // console.log("nono", op.id);
 
     let moduleFrag = inModuleFragment.get();
+    let moduleVertex = inModuleVertex.get();
     if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(mgpu);
+    if (inModuleVertex.isLinked()) inModuleVertex.links[0].getOtherPort(inModuleVertex).op.updateShaderModule(mgpu);
 
     if (!pipe || mgpu.rebuildPipeline)
     {
@@ -50,17 +54,19 @@ exec.onTriggered = () =>
         /* minimalcore:start */
 
         op.setUiError("nofrag", inModuleFragment.get() ? null : "no fragment module...");
+        op.setUiError("novert", inModuleVertex.get() ? null : "no vertex module...");
         if (!moduleFrag) return;
+        if (!moduleVertex) return;
 
         /* minimalcore:end */
 
         const bindsFrag = moduleFrag.bindings;
-        const bindsVert = mgpu.shaderModules.vertex.bindings;
+        const bindsVert = moduleVertex.bindings;
 
         bindGroupLayoutFrag = MGPU.createBindGroupLayout(mgpu, bindsFrag);
         bindGroupLayoutVert = MGPU.createBindGroupLayout(mgpu, bindsVert);
 
-        updatedVert = mgpu.shaderModules.vertex.updated;
+        updatedVert = moduleVertex.updated;
         updatedFrag = moduleFrag.updated;
 
         const o = {
@@ -69,7 +75,7 @@ exec.onTriggered = () =>
                 {
                     "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag]
                 }),
-            "vertex": mgpu.shaderModules.vertex.getObjectStructure(),
+            "vertex": moduleVertex.getObjectStructure(),
             "fragment": moduleFrag.getObjectStructure(),
             "primitive":
             {
