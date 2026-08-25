@@ -7,7 +7,7 @@ const exec = op.inTrigger("Trigger"),
     inWgSize = op.inInt("Workgroup Size", 64),
     inModule = op.inObject("Shader Module", null, "shadermodule"),
     inOverrides = op.inObject("Overrides"),
-    childx = op.outTrigger("childx");
+    next = op.outTrigger("next");
 
 let pipe = null;
 let commandEncoder;
@@ -25,6 +25,7 @@ inWg.onChange = updateUi;
 updateUi();
 
 /* minimalcore:end */
+
 inModule.onChange =
     inOverrides.onChange = () =>
     {
@@ -37,7 +38,7 @@ exec.onTriggered = () =>
     if (!mgpu) return console.log("no mgpu");
 
     mgpu.shaderModules = {};
-    childx.trigger();
+    next.trigger();
     if (!mgpu.shaderModules.compute) return;
     if (!pipe || mgpu.rebuildPipeline)
     {

@@ -36,6 +36,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1741686439258
+        },
+        {
+            "message": "automatically will enable linenumbers and syntax highlighting, when connected port uses \"editorSyntax\" uiAttrib",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1787637638863
         }
     ],
     "authorName": "pandur",

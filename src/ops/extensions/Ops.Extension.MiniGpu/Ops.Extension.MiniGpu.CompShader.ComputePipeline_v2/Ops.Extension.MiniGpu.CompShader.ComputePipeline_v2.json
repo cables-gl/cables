@@ -84,7 +84,7 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "childx"
+                "name": "next"
             }
         ]
     },

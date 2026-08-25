@@ -25,6 +25,7 @@ inStr.onLinkChanged = () =>
         inStr.set(null);
 
         op.setUiAttrib({ "extendTitle": "" });
+
     }
     else
     {
@@ -35,6 +36,12 @@ inStr.onLinkChanged = () =>
 
 inStr.onChange = () =>
 {
+    if (inStr.isLinked() && inStr.links[0].getOtherPort(inStr).uiAttribs.editorSyntax)
+    {
+        inLineNums.set(true);
+        syntax.set(inStr.links[0].getOtherPort(inStr).uiAttribs.editorSyntax);
+    }
+
     outStr.set(inStr.get());
     if (CABLES.UI)
     {
