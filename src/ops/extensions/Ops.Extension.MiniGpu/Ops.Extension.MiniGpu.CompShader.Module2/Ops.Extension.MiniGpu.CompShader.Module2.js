@@ -29,7 +29,7 @@ let o = null;
 let lastChange = 0;
 
 let sm = null;
-
+let gencode = "";
 const sgp = new CABLES.ShaderGraphProgram(inO, new CABLES.LangWgsl());
 
 ids.onChange =
@@ -52,8 +52,8 @@ ids.onChange =
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
 
         if (sm) sm.reInit = true;
-        outCode.set(str);
         outModule.setRef(sm);
+        gencode = str;
 
     };
 
@@ -134,13 +134,14 @@ op.updateShaderModule = (mgpu) =>
             /* minimalcore:end */
         };
 
-        sm.code = outCode.get();
+        sm.code = gencode;
         sm.codePre = inCodePre.get();
         sm.bindings = binds;
 
         sm.create(mgpu);
         console.log("rebuild moduleeeeeeeeeeeeeee", sm.bindings, sm.bindings);
 
+        outCode.set(sm.finalCode);
         const diags = [];
         outCode.setUiAttribs({ "editorDiagnostics": [] });
 

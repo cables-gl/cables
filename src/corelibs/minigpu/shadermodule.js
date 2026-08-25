@@ -62,13 +62,18 @@ export class ShaderModule
         };
     }
 
+    /**
+     * @param {import(".").MgpuState} mgpu
+     */
     create(mgpu)
     {
 
         this.hasError = false;
+        this.finalCode = this.genSource();
+
         this.module = mgpu.device.createShaderModule(
             {
-                "code": this.genSource()
+                "code": this.finalCode
             });
 
         /* minimalcore:start */
@@ -121,6 +126,8 @@ export class ShaderModule
 
         let finalCode = this.codePre + this.code;
         finalCode = finalCode.replaceAll("{{BINDINGS}}", bhead);
+
+        console.log("replaceeeeeeeep    ", bhead);
         return finalCode;
     }
 
