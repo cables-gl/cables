@@ -1,12 +1,8 @@
 const
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT", "COMPUTE"], "COMPUTE"),
-
     inCode = op.inStringEditor("Code", "", "glsl"),
-    // inUpdates = op.inArray("Update Values"),
-
     inCodePre = op.inString("Code Prepend", ""),
     inView = op.inTriggerButton("View Code"),
-
     outModule = op.outObject("Module", null, "shadermodule"),
     outCode = op.outString("Final Code");
 
@@ -36,7 +32,7 @@ ids.onChange =
     types.onChange =
     debug.onChange =
     inCode.onChange =
-    inGraphNodes.onLinkChanged =
+    // inGraphNodes.onLinkChanged =
     inGraphNodes.onChange = () =>
     {
         sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
@@ -53,14 +49,14 @@ ids.onChange =
         str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
 
         if (sm) sm.reInit = true;
-        outModule.setRef(sm);
         gencode = str;
 
     };
 
 inStage.onChange =
     inCodePre.onChange =
-    outCode.onChange = () =>
+    // outCode.onChange =
+    () =>
     {
 
         /* minimalcore:start */
@@ -88,11 +84,10 @@ op.updateShaderModule = (mgpu) =>
 {
     mgpu.constants = {};
     mgpu.stage = GPUShaderStage[inStage.get()];
-    const binds = [];
 
+    const binds = [];
     const updts = sgp.updateableOps;
 
-    // console.log("updaaaa", updts);
     if (updts)
     {
         for (const i in updts)
@@ -133,25 +128,23 @@ op.updateShaderModule = (mgpu) =>
             inCode.setUiAttribs({ "editorDiagnostics": diags });
 
             /* minimalcore:end */
-        };
 
+            outModule.setRef(sm);
+        };
         sm.code = gencode;
         sm.codePre = inCodePre.get();
         sm.bindings = binds;
 
         sm.create(mgpu);
-        console.log("rebuild moduleeeeeeeeeeeeeee", sm.bindings, sm.bindings);
 
         outCode.set(sm.finalCode);
         const diags = [];
         outCode.setUiAttribs({ "editorDiagnostics": [] });
 
-        mgpu.rebuildPipeline = "module rebuild ";
-        mgpu.rebuildShaderModule = false;
-
         sm.reInit = false;
 
         outModule.setRef(sm);
+
     }
 
 };
