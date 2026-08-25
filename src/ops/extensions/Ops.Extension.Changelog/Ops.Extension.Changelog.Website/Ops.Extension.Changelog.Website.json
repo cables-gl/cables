@@ -167,6 +167,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1785920851108
+        },
+        {
+            "message": "Moved team-namespace and extension settings to tabs",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1787575612634
         }
     ],
     "isReleased": true,
