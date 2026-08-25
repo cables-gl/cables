@@ -39,6 +39,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1785422337012
+        },
+        {
+            "message": "op Extension.MiniGpu.CompShader.BindingArrayStorage was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787643213621
         }
     ],
     "layout": {
