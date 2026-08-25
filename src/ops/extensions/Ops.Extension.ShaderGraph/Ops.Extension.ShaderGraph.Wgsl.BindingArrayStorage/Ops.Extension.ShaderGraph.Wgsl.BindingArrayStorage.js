@@ -28,8 +28,8 @@ function copyBuffer(mgpu, src, dst)
 {
     // console.log("copy",src.size);
     const encoder = mgpu.device.createCommandEncoder();
-    // encoder.copyBufferToBuffer(src, 0, dst, 0, src.size);
-    encoder.copyBufferToBuffer(src, dst);
+    encoder.copyBufferToBuffer(src, 0, dst, 0, src.size);
+    // encoder.copyBufferToBuffer(src, dst);
     const gpuCommands = encoder.finish();
     mgpu.device.queue.submit([gpuCommands]);
 }
@@ -126,6 +126,7 @@ function update(mgpu, bindings)
             //         "type": "storage"
             //     }
             // };
+            console.log("recreate bufferinout");
             bufferInOut = mgpu.device.createBuffer(
                 {
                     "size": buffer.size,
@@ -157,8 +158,8 @@ function update(mgpu, bindings)
 
         op.updateGraph();
         op.shaderNode.result.port.setRef({});
-
     }
+
     // outBuff.setRef(bufferInOut);
     // next.trigger();
     // if (binding) bindings.push(binding);
@@ -166,7 +167,12 @@ function update(mgpu, bindings)
     if (type.get() == "InOut Flip" && buffer && bufferInOut)
     {
         copyBuffer(mgpu, bufferInOut, buffer);
-        // console.log("buffer",buffer c);
+        // console.log("buffer",buffer );
+
+        if (outBuff.get() != bufferInOut)
+            outBuff.setRef(bufferInOut);
+        // outBuff.setRef(bufferInOut);
+
     }
 }
 

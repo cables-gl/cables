@@ -13,6 +13,7 @@ exec.onTriggered = () =>
     if (!mgpu || !inPosBuff.get() || !inPosBuff.get().size)
     {
         outArr.setRef(null);
+        doRead = true;
         return;
     }
 
