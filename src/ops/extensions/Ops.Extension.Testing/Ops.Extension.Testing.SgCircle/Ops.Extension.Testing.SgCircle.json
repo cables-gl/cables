@@ -1,0 +1,33 @@
+{
+    "id": "4255c38a-df50-44ff-9b4a-aefb26d0279a",
+    "created": 1787550316537,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787550316583
+        },
+        {
+            "message": "Patch.PKKnQbt.SubPatch0 renamed to Ops.Extension.Testing.SgCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787550377826
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "d8cka40ch",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}

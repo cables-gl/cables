@@ -1,0 +1,33 @@
+{
+    "id": "148db55a-07e0-4b01-a836-28d0fabfa62b",
+    "created": 1787550020695,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787550020736
+        },
+        {
+            "message": "Patch.PbNT81d.SubPatch0 renamed to Ops.Extension.Testing.TestRunner",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787550058095
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "36nbm6qlt",
+                "uititle": "trigger"
+            }
+        ]
+    }
+}
