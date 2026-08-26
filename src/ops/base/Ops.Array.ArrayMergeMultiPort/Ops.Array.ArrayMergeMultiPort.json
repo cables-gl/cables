@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768473210492
+        },
+        {
+            "message": "Added an array \"group\" output, containing the input index for each merged value",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1787736898077
         }
     ],
     "authorName": "pandur",

@@ -1,0 +1,98 @@
+{
+    "id": "a9991772-133c-48ec-a28c-490d2c0adb4c",
+    "created": 1787752032609,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766822305990
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767039477719
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderUniFloat renamed to Ops.Extension.MiniGpu.CompShader.BindingUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422361034
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1785505341938
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786103553536
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 5,
+                "name": "name"
+            },
+            {
+                "type": 0,
+                "name": "magFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "minFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "mipmapFilter index",
+                "values": [
+                    "linear",
+                    "nearest"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Repeat X index",
+                "values": [
+                    "repeat",
+                    "mirror-repeat",
+                    "clamp-to-edge"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "sgtexture",
+                "objType": "sg_texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

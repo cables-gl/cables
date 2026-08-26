@@ -347,6 +347,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1786012817178
+        },
+        {
+            "message": "Red alert triangle is removed, error ops are shown in patch outline",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1787747910619
+        },
+        {
+            "message": "upgrading ops not loosing animation data anymore",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1787750259856
         }
     ],
     "isReleased": true,

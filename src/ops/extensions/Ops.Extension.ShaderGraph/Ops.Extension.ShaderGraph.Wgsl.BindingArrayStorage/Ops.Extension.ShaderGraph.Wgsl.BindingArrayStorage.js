@@ -1,6 +1,6 @@
 const
     inBuffer = op.inObject("Buffer"),
-    type = op.inSwitch("Type", ["read", "read_write", "InOut Flip"], "read_write"),
+    type = op.inSwitch("Type", ["read", "read_write", "InOut Flip"], "read"),
     inName = op.inString("Name", ""),
     outStorage = op.outObject("Storage"),
     outBuff = op.outObject("Out Buffer");

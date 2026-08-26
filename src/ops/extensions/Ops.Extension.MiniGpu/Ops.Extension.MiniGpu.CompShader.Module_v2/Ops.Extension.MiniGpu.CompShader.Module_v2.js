@@ -7,8 +7,8 @@ const
     outCode = op.outString("Final Code"),
     inGraphNodes = op.inMultiPort2("Graph", CABLES.OP_PORT_TYPE_OBJECT),
     debug = op.inBool("Debug comments", false),
-    types = op.inBool("Set Type Title", true),
-    ids = op.inBool("Show id", true);
+    types = op.inBool("Set Type Title", false),
+    ids = op.inBool("Show id", false);
 
 /* minimalcore:start */
 inStage.setUiAttribs({ "hidePort": true });
