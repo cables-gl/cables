@@ -40,10 +40,12 @@ export class ShaderGraphProgram extends Events
 {
 
     /** @type {Lang} */
-    lang;
+    lang = null;
 
     /** @type {Port} */
-    #port;
+    #port = null;
+
+    _options = null;
 
     _opIdsHeadFuncSrc = {};
     _opIdsFuncCallSrc = {};
@@ -330,16 +332,28 @@ export class ShaderGraphProgram extends Events
         this._headUniSrc = "";
         let callSrc = "";
 
-        for (let i = 0; i < port.ports.length; i++)
+        if (!port.ports)
         {
-            if (port.ports[i].isLinked())
+            // delete this after upgrading "short"
+            const l = port.links;
+            for (let i = 0; i < l.length; i++)
             {
-                const lnk = port.ports[i].links[0];
-                console.log("exec index ", i);
-                this.execNode(lnk.getOtherPort(port.ports[i]).op);
+
+                const lnk = l[i];
+                this.execNode(lnk.getOtherPort(port).op);
             }
         }
-
+        else
+        {
+            for (let i = 0; i < port.ports.length; i++)
+            {
+                if (port.ports[i].isLinked())
+                {
+                    const lnk = port.ports[i].links[0];
+                    this.execNode(lnk.getOtherPort(port.ports[i]).op);
+                }
+            }
+        }
         this.srcMain = this._callFuncStack.join("\n");
         this.srcHeader = this._headFuncSrc;
 

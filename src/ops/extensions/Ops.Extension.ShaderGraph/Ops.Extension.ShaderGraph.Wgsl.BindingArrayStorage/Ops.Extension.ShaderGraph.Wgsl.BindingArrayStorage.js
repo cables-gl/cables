@@ -60,7 +60,6 @@ function update(mgpu, bindings)
     let setbinding = false;
     inbuffer = inBuffer.get();
     // const mgpu = op.patch.frameStore.mgpu;
-    // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG" + op.id);
     if (buffer && inBuffer.get().label != buffer.label) console.log("label diff", inBuffer.get().label);
 
     if (!buffer && inbuffer && inBuffer.get() && inBuffer.get().size)
@@ -77,7 +76,6 @@ function update(mgpu, bindings)
         // encoder.copyBufferToBuffer(inbuffer, 0, buffer, 0, inbuffer.size);
 
         const p = (buffer.label || "").split(",");
-        console.log("bufferlabellllllllll", buffer.label);
 
         /* minimalcore:start */
 
@@ -140,7 +138,6 @@ function update(mgpu, bindings)
             //         "type": "storage"
             //     }
             // };
-            console.log("recreate bufferinout");
             bufferInOut = mgpu.device.createBuffer(
                 {
                     "size": buffer.size,
@@ -164,7 +161,6 @@ function update(mgpu, bindings)
 
         op.shaderNode.result.name = op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || p[0];
         op.shaderNode.result.type = p[1];
-        console.log("arraystorage", op.shaderNode, p);
 
         op.updateGraph();
         // op.shaderNode.result.port.setRef({});
@@ -172,7 +168,6 @@ function update(mgpu, bindings)
     if (bindings && setbinding) bindings.push(binding);
     if (bindings && setbinding && bindingInOut) bindings.push(bindingInOut);
 
-    // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG",           setbinding );
     setbinding = false;
 
     // outBuff.setRef(bufferInOut);
@@ -182,7 +177,6 @@ function update(mgpu, bindings)
     if (type.get() == "InOut Flip" && buffer && bufferInOut)
     {
         copyBuffer(mgpu, bufferInOut, buffer);
-        // console.log("buffer",buffer );
 
         if (outBuff.get() && outBuff.get() != bufferInOut) outBuff.setRef(bufferInOut);
         // outBuff.setRef(bufferInOut);
@@ -192,7 +186,6 @@ function update(mgpu, bindings)
     {
 
         copyBuffer(mgpu, inbuffer, buffer);
-        // console.log("buffer",buffer );
 
         if (outBuff.get() && outBuff.get() != buffer) outBuff.setRef(buffer);
     }

@@ -20,12 +20,9 @@ inView.setUiAttribs({ "hidePort": true });
 
 /* minimalcore:end */
 
-let oldBindings = [];
 let s = null;
 let bindHead = "";
 let o = null;
-let lastChange = 0;
-
 let sm = null;
 let gencode = "";
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangWgsl());

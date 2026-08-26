@@ -48,7 +48,7 @@ import { RenderLoop } from "./renderloop.js";
 
 /**
  * @typedef CoreOp
- * @type Op
+ * @type Op<any>
  */
 
 /**
@@ -91,7 +91,7 @@ export class Patch extends Events
     #renderOneFrame = false;
     #initialDeserialize = true;
 
-    /** @type {Array<Op>} */
+    /** @type {Array<Op<any>>} */
     ops = [];
     settings = {};
     animMaxTime = 0;

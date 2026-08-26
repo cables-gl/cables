@@ -134,7 +134,6 @@ export class ShaderModule extends Events
         let finalCode = "// pre code\n" + this.codePre + "\n/////\n" + this.code;
         finalCode = finalCode.replaceAll("{{BINDINGS}}", bhead);
 
-        console.log("replaceeeeeeeep", bhead);
         return finalCode;
     }
 
