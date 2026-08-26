@@ -27,6 +27,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1767009200735
+        },
+        {
+            "message": "op Extension.MiniGpu.ParticleRender was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787731950448
         }
     ],
     "layout": {

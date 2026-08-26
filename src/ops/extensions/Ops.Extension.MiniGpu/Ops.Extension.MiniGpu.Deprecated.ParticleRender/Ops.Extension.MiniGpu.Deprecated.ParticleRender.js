@@ -9,7 +9,7 @@ let oldShader = null;
 
 inShader.onChange = () =>
 {
-    if (inShader.get() != oldShader)pipe = null;
+    if (inShader.get() != oldShader) pipe = null;
     oldShader = inShader.get();
 };
 
@@ -22,10 +22,11 @@ exec.onTriggered = () =>
             "layout": "auto",
             "vertex": inShader.get().vertex,
             "fragment": inShader.get().fragment,
-            "primitive": {
-                "topology": "triangle-list",
+            "primitive":
+            {
+                "topology": "triangle-list"
                 // "topology": "point-list",
-            },
+            }
             // "depthStencil": {
             //     "depthWriteEnabled": true,
             //     "depthCompare": "less-equal",
