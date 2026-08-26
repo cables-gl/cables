@@ -59,5 +59,8 @@
                 "objType": "sg_float"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
 }
