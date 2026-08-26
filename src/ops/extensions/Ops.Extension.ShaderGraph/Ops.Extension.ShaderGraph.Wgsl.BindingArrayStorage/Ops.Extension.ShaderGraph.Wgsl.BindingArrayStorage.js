@@ -14,13 +14,32 @@ let bufferInOut = null;
 let bindingInOut = null;
 
 op.toWorkPortsNeedToBeLinked(inBuffer);
+
+// outBuff.onLinkChanged = () =>
+// {
+//     if (!outBuff.isLinked())
+//     {
+//         buffer = null;
+//         inbuffer = null;
+//     }
+//     buffer = null;
+//     inbuffer = null;
+// outStorage.setRef(null)
+
+// outBuff.setRef(null)
+// };
+
 inBuffer.onChange =
     inName.onChange =
     type.onChange = () =>
     {
         buffer = null;
+        inbuffer = null;
 
-        if (bufferInOut) outBuff.setRef(bufferInOut);
+        bufferInOut = null;
+        bindingInOut = null;
+        outStorage.setRef(null);
+        outBuff.setRef(null);
     };
 
 let inbuffer = null;
@@ -28,22 +47,23 @@ op.updateShaderModule = update;
 
 function copyBuffer(mgpu, src, dst)
 {
-    // console.log("copy",src.size);
+    if (!src || !dst) return;
     const encoder = mgpu.device.createCommandEncoder();
     encoder.copyBufferToBuffer(src, 0, dst, 0, src.size);
-    // encoder.copyBufferToBuffer(src, dst);
     const gpuCommands = encoder.finish();
     mgpu.device.queue.submit([gpuCommands]);
 }
 
 function update(mgpu, bindings)
 {
+
+    let setbinding = false;
     inbuffer = inBuffer.get();
     // const mgpu = op.patch.frameStore.mgpu;
-    // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG");
+    // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG" + op.id);
     if (buffer && inBuffer.get().label != buffer.label) console.log("label diff", inBuffer.get().label);
 
-    if (!buffer && inbuffer)
+    if (!buffer && inbuffer && inBuffer.get() && inBuffer.get().size)
     {
 
         buffer = mgpu.device.createBuffer(
@@ -51,7 +71,6 @@ function update(mgpu, bindings)
                 "label": inBuffer.get().label,
                 "size": inBuffer.get().size,
                 "usage": (GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC)
-
             });
 
         copyBuffer(mgpu, inbuffer, buffer);
@@ -73,10 +92,7 @@ function update(mgpu, bindings)
 
             const layout = {
                 "visibility": mgpu.stage,
-                "buffer":
-                {
-                    "type": "read-only-storage"
-                }
+                "buffer": { "type": "read-only-storage" }
             };
 
             binding = {
@@ -86,6 +102,7 @@ function update(mgpu, bindings)
             };
             mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
 
+            setbinding = true;
             outBuff.setRef(buffer);
         }
         else
@@ -93,10 +110,7 @@ function update(mgpu, bindings)
         {
             const layout = {
                 "visibility": mgpu.stage,
-                "buffer":
-                {
-                    "type": "storage"
-                }
+                "buffer": { "type": "storage" }
             };
 
             binding = {
@@ -106,6 +120,7 @@ function update(mgpu, bindings)
             };
             mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
 
+            setbinding = true;
             outBuff.setRef(buffer);
 
         }
@@ -114,10 +129,7 @@ function update(mgpu, bindings)
 
             const layout = {
                 "visibility": mgpu.stage,
-                "buffer":
-                {
-                    "type": "storage"
-                }
+                "buffer": { "type": "storage" }
             };
 
             // outBuff.setRef(buffer);
@@ -145,6 +157,7 @@ function update(mgpu, bindings)
             };
 
             // mgpu.rebuildShaderModule = "new buffer read: " + buffer.label;
+            setbinding = true;
             outBuff.setRef(bufferInOut);
         }
         // else bindingInOut = null;
@@ -153,14 +166,14 @@ function update(mgpu, bindings)
         op.shaderNode.result.type = p[1];
         console.log("arraystorage", op.shaderNode, p);
 
-        if (bindings && binding) bindings.push(binding);
-        if (bindings && bindingInOut) bindings.push(bindingInOut);
-
-        console.log("BINDING UPDATE STORAGGGGGGGGGGGGG", bindings);
-
-        // op.updateGraph();
+        op.updateGraph();
         // op.shaderNode.result.port.setRef({});
     }
+    if (bindings && setbinding) bindings.push(binding);
+    if (bindings && setbinding && bindingInOut) bindings.push(bindingInOut);
+
+    // console.log("BINDING UPDATE STORAGGGGGGGGGGGGG",           setbinding );
+    setbinding = false;
 
     // outBuff.setRef(bufferInOut);
     // next.trigger();
@@ -194,6 +207,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "float", "port": outStorage },
+        "result": { "type": "array", "port": outStorage },
         "resultVarName": inName.get() || defaultName
     });

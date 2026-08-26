@@ -62,7 +62,7 @@ export class Lang
 
     /**
      * @param {import("./shadergraphprogram").ShaderNodeParam[]} params
-     * @param {Port} portsSetType
+     * @param {Port} [portsSetType]
      */
     getMaxGenTypeFromParams(params, portsSetType)
     {

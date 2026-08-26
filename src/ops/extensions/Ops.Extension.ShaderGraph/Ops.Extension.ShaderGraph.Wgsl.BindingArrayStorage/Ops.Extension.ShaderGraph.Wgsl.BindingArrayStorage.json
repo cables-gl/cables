@@ -84,7 +84,7 @@
             {
                 "type": 2,
                 "name": "Storage",
-                "objType": "sg_float"
+                "objType": "sg_Particle"
             },
             {
                 "type": 2,

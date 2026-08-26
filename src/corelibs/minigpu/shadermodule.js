@@ -4,7 +4,9 @@
  * @property {string} headSrc
  */
 
-export class ShaderModule
+import { Events } from "cables-shared-client";
+
+export class ShaderModule extends Events
 {
     bindHeadSrc = "";
     reInit = true;
@@ -14,7 +16,7 @@ export class ShaderModule
     codePre = "";
     updated = performance.now();
 
-    onShaderInfo = undefined;
+    // onShaderInfo = undefined;
 
     /** @type {Binding[]} */
     bindings = [];
@@ -29,6 +31,7 @@ export class ShaderModule
      */
     constructor(mgpu, o)
     {
+        super();
         this.cfg = o;
         this.format = mgpu?.format;
     }
@@ -91,7 +94,8 @@ export class ShaderModule
                     if (msg.type == "error") this.hasError = true;
                 }
             }
-            if (this.onShaderInfo) this.onShaderInfo(shaderInfo);
+            // if (this.onShaderInfo) this.onShaderInfo(shaderInfo);
+            this.emitEvent("shaderInfo", shaderInfo);
 
         });
 

@@ -7,7 +7,9 @@ const
     outCode = op.outString("Final Code");
 
 const
-    inGraphNodes = op.inObject("Graph"),
+    // inGraphNodes = op.inObject("Graph"),
+    inGraphNodes = op.inMultiPort2("Graph", CABLES.OP_PORT_TYPE_OBJECT),
+
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true);
@@ -32,7 +34,7 @@ ids.onChange =
     types.onChange =
     debug.onChange =
     inCode.onChange =
-    // inGraphNodes.onLinkChanged =
+    inGraphNodes.onLinkChanged =
     inGraphNodes.onChange = () =>
     {
         sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
@@ -101,7 +103,7 @@ op.updateShaderModule = (mgpu) =>
     if (!sm || sm.reInit)
     {
         sm = new MGPU.ShaderModule(mgpu, { "stage": inStage.get(), "op": op });
-        sm.onShaderInfo = (shaderInfo) =>
+        sm.on("shaderInfo", (shaderInfo) =>
         {
 
             /* minimalcore:start */
@@ -130,7 +132,7 @@ op.updateShaderModule = (mgpu) =>
             /* minimalcore:end */
 
             outModule.setRef(sm);
-        };
+        });
         sm.code = gencode;
         sm.codePre = inCodePre.get();
         sm.bindings = binds;

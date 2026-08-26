@@ -47,7 +47,15 @@
             },
             {
                 "type": 2,
-                "name": "Graph"
+                "name": "Graph_0",
+                "longPort": 2,
+                "group": "Graph"
+            },
+            {
+                "type": 2,
+                "name": "Graph_1",
+                "uititle": "add port",
+                "group": "Graph"
             },
             {
                 "type": 0,
