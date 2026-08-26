@@ -45,6 +45,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1786528756666
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Glsl.TexCoord renamed to Ops.Extension.ShaderGraph.Glsl.TexCoord",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787732001165
         }
     ],
     "layout": {
