@@ -15,35 +15,28 @@ let bindingInOut = null;
 
 op.toWorkPortsNeedToBeLinked(inBuffer);
 
-// outBuff.onLinkChanged = () =>
-// {
-//     if (!outBuff.isLinked())
-//     {
-//         buffer = null;
-//         inbuffer = null;
-//     }
-//     buffer = null;
-//     inbuffer = null;
-// outStorage.setRef(null)
-
-// outBuff.setRef(null)
-// };
+outStorage.onLinkChanged = () =>
+{
+    setTimeout(reset, 200); // WHYYYYYYYYYYYYYYYYYY
+};
 
 inBuffer.onChange =
     inName.onChange =
-    type.onChange = () =>
-    {
-        buffer = null;
-        inbuffer = null;
-
-        bufferInOut = null;
-        bindingInOut = null;
-        outStorage.setRef(null);
-        outBuff.setRef(null);
-    };
+    type.onChange = reset;
 
 let inbuffer = null;
 op.updateShaderModule = update;
+
+function reset()
+{
+    buffer = null;
+    inbuffer = null;
+
+    bufferInOut = null;
+    bindingInOut = null;
+    // outStorage.setRef(null);
+    // outBuff.setRef(null);
+}
 
 function copyBuffer(mgpu, src, dst)
 {

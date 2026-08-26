@@ -40,15 +40,20 @@ export class ShaderGraphProgram extends Events
 {
 
     /** @type {Lang} */
-    lang = null;
+    lang;
 
     /** @type {Port} */
-    #port = null;
+    #port;
 
-    _options = null;
+    _options = {};
 
+    /** @type {Object<String,any>} */
     _opIdsHeadFuncSrc = {};
+
+    /** @type {Object<String,any>} */
     _opIdsFuncCallSrc = {};
+
+    /** @type {Object<String,any>} */
     _functionIdInHead = {};
 
     _headFuncSrc = "";
@@ -70,6 +75,9 @@ export class ShaderGraphProgram extends Events
         this.lang = lang;
     }
 
+    /**
+     * @param {Op<any>} op
+     */
     addOpShaderFuncCode(op)
     {
         if (this._opIdsHeadFuncSrc[op.name]) return;
@@ -82,6 +90,7 @@ export class ShaderGraphProgram extends Events
      * @param {Port} otherPort
      * @param {ShaderNode} node
      * @param {boolean} doConvert
+     * @param {} convertParam
      */
     _getPortParamStr(otherPort, node, doConvert, convertParam)
     {
@@ -104,7 +113,7 @@ export class ShaderGraphProgram extends Events
         {
             const otp = otherNode.params[0].port;
 
-            if (otp.links.length)
+            if (otp && otp.links.length)
             {
                 const sourcePort = otp.links[0].getOtherPort(otp);
 
@@ -113,6 +122,7 @@ export class ShaderGraphProgram extends Events
                 this.log("component", otp.name, convertParam.port.name);
                 paramStr += sourcePort.op.shaderNode.resultVarName + "." + otherPort.name;
             }
+            else console.log("no otp");
         }
         else
         if (otherNode.result)
@@ -323,7 +333,7 @@ export class ShaderGraphProgram extends Events
         const port = this.#port;
 
         this.updateableOps = {};
-        this.options = options;
+        this.options = options || {};
         this._callFuncStack = [];
         this._functionIdInHead = {};
         this._opIdsFuncCallSrc = {};

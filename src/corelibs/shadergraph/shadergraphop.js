@@ -42,6 +42,9 @@ export class ShaderGraphOp
         }
     }
 
+    /**
+     * @param {string} name
+     */
     getResult(name)
     {
         // console.log("getresult ", name);
