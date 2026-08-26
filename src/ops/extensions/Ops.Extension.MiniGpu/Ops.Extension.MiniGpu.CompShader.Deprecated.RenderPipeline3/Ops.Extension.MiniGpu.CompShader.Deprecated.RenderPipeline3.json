@@ -39,6 +39,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1787561356962
+        },
+        {
+            "message": "op Extension.MiniGpu.CompShader.RenderPipeline3 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787731645863
         }
     ],
     "layout": {
