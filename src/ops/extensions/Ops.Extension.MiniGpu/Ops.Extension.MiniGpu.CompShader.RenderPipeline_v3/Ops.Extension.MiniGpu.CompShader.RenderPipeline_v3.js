@@ -19,6 +19,7 @@ let bindGroupFrag = null;
 let bindGroupVert = null;
 let updatedFrag = 0;
 let updatedVert = 0;
+let pipeError = false;
 
 inModuleFragment.onChange =
     inModuleVertex.onChange =
@@ -70,7 +71,7 @@ exec.onTriggered = () =>
         updatedFrag = moduleFrag.updated;
 
         const o = {
-
+            "label": op.id,
             "layout": mgpu.device.createPipelineLayout(
                 {
                     "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag]
@@ -99,8 +100,29 @@ exec.onTriggered = () =>
         bindGroupFrag = MGPU.createBindGroup(mgpu, bindsFrag, bindGroupLayoutFrag);
         bindGroupVert = MGPU.createBindGroup(mgpu, bindsVert, bindGroupLayoutVert);
 
+        pipeError = false;
+
+        /* minimalcore:start */
+        op.setUiError("pipeerror", null);
+        mgpu.device.pushErrorScope("validation");
+        // const pipeline = mgpu.device.createRenderPipeline(descriptor);
+
+        /* minimalcore:end */
         pipe = mgpu.device.createRenderPipeline(o);
 
+        /* minimalcore:start */
+        mgpu.device.popErrorScope().then((error) =>
+        {
+            if (error)
+            {
+                pipeError = true;
+                console.error(error.message);
+                console.error(o);
+                op.setUiError("pipeerror", error.message.replaceAll("\n", "<br/>"));
+            }
+        });
+
+        /* minimalcore:end */
         /* minimalcore:start */
 
         op.setUiError("errfrag", moduleFrag.hasError ? "fragment module error" : null);
@@ -113,6 +135,7 @@ exec.onTriggered = () =>
     if (!moduleFrag || !moduleVertex || moduleFrag.hasError || moduleVertex.hasError) return;
 
     if (!pipe) return console.log("no pipe");
+    if (pipeError) return;
     mgpu.target.current().passEncoder.setPipeline(pipe);
     mgpu.target.current().passEncoder.setBindGroup(1, bindGroupFrag);
     mgpu.target.current().passEncoder.setBindGroup(0, bindGroupVert);

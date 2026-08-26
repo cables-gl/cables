@@ -67,7 +67,7 @@ exec.onTriggered = () =>
     if (!sm || sm.reInit || mgpu.rebuildShaderModule)
     {
         sm = new MGPU.ShaderModule(mgpu, { "stage": inStage.get(), "op": op });
-        sm.onShaderInfo = (shaderInfo) =>
+        sm.on("shaderInfo", (shaderInfo) =>
         {
 
             /* minimalcore:start */
@@ -94,7 +94,7 @@ exec.onTriggered = () =>
             inCode.setUiAttribs({ "editorDiagnostics": diags });
 
             /* minimalcore:end */
-        };
+        });
 
         sm.code = inCode.get();
         sm.codePre = inCodePre.get();

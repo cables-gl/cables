@@ -52,7 +52,7 @@ exec.onTriggered = () =>
         updatedFrag = mgpu.shaderModules.fragment.updated;
 
         const o = {
-
+            "label": op.id,
             "layout": mgpu.device.createPipelineLayout(
                 {
                     "bindGroupLayouts": [bindGroupLayoutVert, bindGroupLayoutFrag]

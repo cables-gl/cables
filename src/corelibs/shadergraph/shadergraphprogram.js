@@ -158,6 +158,7 @@ export class ShaderGraphProgram extends Events
         const node = op.shaderNode;
 
         let callstr = "    ";
+        if (!node) return console.log("no node?");
 
         if (node.update) this.updateableOps[node.id] = node;
         if (node.type == "component") return;

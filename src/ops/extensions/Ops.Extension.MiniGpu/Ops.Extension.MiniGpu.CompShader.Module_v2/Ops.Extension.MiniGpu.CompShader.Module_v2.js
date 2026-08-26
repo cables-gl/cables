@@ -126,6 +126,7 @@ op.updateShaderModule = (mgpu) =>
         sm.codePre = inCodePre.get();
         sm.bindings = binds;
 
+        op.setUiError("nofrag", sm.hasError ? "module error..." : null);
         sm.create(mgpu);
 
         outCode.set(sm.finalCode);
