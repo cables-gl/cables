@@ -84,7 +84,7 @@
             {
                 "type": 2,
                 "name": "Storage",
-                "objType": "sg_Particle"
+                "objType": "sg_array"
             },
             {
                 "type": 2,

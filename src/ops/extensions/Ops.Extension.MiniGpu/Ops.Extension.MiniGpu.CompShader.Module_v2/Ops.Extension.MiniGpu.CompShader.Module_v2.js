@@ -4,12 +4,8 @@ const
     inCodePre = op.inString("Code Prepend", ""),
     inView = op.inTriggerButton("View Code"),
     outModule = op.outObject("Module", null, "shadermodule"),
-    outCode = op.outString("Final Code");
-
-const
-    // inGraphNodes = op.inObject("Graph"),
+    outCode = op.outString("Final Code"),
     inGraphNodes = op.inMultiPort2("Graph", CABLES.OP_PORT_TYPE_OBJECT),
-
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", true),
     ids = op.inBool("Show id", true);
@@ -90,12 +86,8 @@ op.updateShaderModule = (mgpu) =>
     if (updts)
     {
         for (const i in updts)
-        {
             updts[i].update(mgpu, binds);
-        }
     }
-
-    // if (o && o.bindings != mgpu.bindings) sm.reInit = true;
 
     if (!sm || sm.reInit)
     {
@@ -143,7 +135,5 @@ op.updateShaderModule = (mgpu) =>
         sm.reInit = false;
 
         outModule.setRef(sm);
-
     }
-
 };

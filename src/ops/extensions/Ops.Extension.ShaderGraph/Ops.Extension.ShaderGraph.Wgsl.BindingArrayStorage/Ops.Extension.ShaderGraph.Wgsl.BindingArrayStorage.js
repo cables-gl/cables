@@ -1,9 +1,7 @@
 const
-    // exec = op.inTrigger("Trigger"),
     inBuffer = op.inObject("Buffer"),
     type = op.inSwitch("Type", ["read", "read_write", "InOut Flip"], "read_write"),
     inName = op.inString("Name", ""),
-    // next = op.outTrigger("Next"),
     outStorage = op.outObject("Storage"),
     outBuff = op.outObject("Out Buffer");
 
