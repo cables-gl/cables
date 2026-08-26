@@ -54,22 +54,12 @@
             {
                 "type": 2,
                 "name": "Graph_0",
-                "longPort": 4,
+                "longPort": 2,
                 "group": "Graph"
             },
             {
                 "type": 2,
                 "name": "Graph_1",
-                "group": "Graph"
-            },
-            {
-                "type": 2,
-                "name": "Graph_2",
-                "group": "Graph"
-            },
-            {
-                "type": 2,
-                "name": "Graph_3",
                 "uititle": "add port",
                 "group": "Graph"
             },
@@ -98,7 +88,7 @@
             {
                 "type": 5,
                 "name": "Final Code",
-                "uititle": "final code VERTEX"
+                "uititle": "final code FRAGMENT"
             }
         ]
     },

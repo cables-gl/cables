@@ -100,7 +100,17 @@ exec.onTriggered = () =>
         bindGroupVert = MGPU.createBindGroup(mgpu, bindsVert, bindGroupLayoutVert);
 
         pipe = mgpu.device.createRenderPipeline(o);
+
+        /* minimalcore:start */
+
+        op.setUiError("errfrag", moduleFrag.hasError ? "fragment module error" : null);
+        op.setUiError("errvert", moduleVertex.hasError ? "vertex module error" : null);
+
+        /* minimalcore:end */
+
     }
+
+    if (!moduleFrag || !moduleVertex || moduleFrag.hasError || moduleVertex.hasError) return;
 
     if (!pipe) return console.log("no pipe");
     mgpu.target.current().passEncoder.setPipeline(pipe);

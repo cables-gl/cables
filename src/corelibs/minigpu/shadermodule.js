@@ -15,7 +15,7 @@ export class ShaderModule extends Events
     code = "";
     codePre = "";
     updated = performance.now();
-
+    finalCode = "";
     // onShaderInfo = undefined;
 
     /** @type {Binding[]} */
@@ -71,8 +71,11 @@ export class ShaderModule extends Events
     create(mgpu)
     {
 
+        const newCode = this.genSource();
+        if (newCode == this.finalCode) return console.log("code did not change...");
+
         this.hasError = false;
-        this.finalCode = this.genSource();
+        this.finalCode = newCode;
 
         this.module = mgpu.device.createShaderModule(
             {
