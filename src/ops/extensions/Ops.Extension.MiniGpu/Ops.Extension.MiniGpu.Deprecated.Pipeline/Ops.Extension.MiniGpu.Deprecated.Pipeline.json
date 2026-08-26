@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1766496080521
+        },
+        {
+            "message": "op Extension.MiniGpu.Pipeline was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787731379583
         }
     ],
     "layout": {
