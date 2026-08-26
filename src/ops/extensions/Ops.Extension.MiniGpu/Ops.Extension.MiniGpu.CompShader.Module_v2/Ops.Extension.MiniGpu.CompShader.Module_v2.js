@@ -39,8 +39,8 @@ ids.onChange =
 
         /* minimalcore:start */
 
-        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
-        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!", 1);
+        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!", 1);
 
         /* minimalcore:end */
 

@@ -1,3 +1,6 @@
 {
-    "name": "Ops.Extension.ShaderGraph"
+    "name": "Ops.Extension.ShaderGraph",
+    "summary": "",
+    "description": "",
+    "visibility": "private"
 }
