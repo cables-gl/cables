@@ -26,10 +26,10 @@ inExec.onTriggered = () =>
 
     if (reInit)
     {
-
         let srcFrag = inModuleFragment.get().src;
         let srcVert = inModuleVertex.get().src;
         shader.setSource(srcVert, srcFrag, false);
+        reInit = false;
     }
 
     cgl.pushShader(shader);
