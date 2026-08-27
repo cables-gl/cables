@@ -8,7 +8,7 @@ const
 
 const outValue = op.outObject("value");
 
-let binding = null;
+let uni = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
 const defaultName = "unif" + CABLES.simpleId();
@@ -26,7 +26,8 @@ inName.onChange =
     inType.onChange = () =>
     {
         updateUi();
-        binding = null;
+
+        uni = null;
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
@@ -51,16 +52,19 @@ function updateUi()
 function update(shader, bindings)
 {
     // const mgpu = op.patch.frameStore.mgpu;
-    if (!binding)
+    if (!uni)
     {
 
         const name = inName.get() || defaultName;
         // binding=new CGL.Uniform()
-        binding = new CGL.Uniform(shader, "f", name, inX);
+
+        let uniType = "f";
+        if (inType.get() == "vec4") uniType = "4f";
+        if (inType.get() == "vec3") uniType = "3f";
+        if (inType.get() == "vec2") uniType = "2f";
+        uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
         op.shaderNode.src = "uniform " + inType.get() + " " + name + ";";
-        op.updateGraph();
-        console.log("u");
         // const layout = {
         //     "visibility": mgpu.stage,
         //     "buffer": { "type": "uniform" }
@@ -80,10 +84,11 @@ function update(shader, bindings)
         //     "layout": layout
         // };
 
-        // op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        // op.shaderNode.result.type = inType.get();
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+        op.shaderNode.result.type = inType.get();
         // op.shaderNode.result.port.setRef({});
 
+        op.updateGraph();
         // mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }
 
