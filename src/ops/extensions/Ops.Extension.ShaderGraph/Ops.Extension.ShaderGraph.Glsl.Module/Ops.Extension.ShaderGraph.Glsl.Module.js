@@ -17,37 +17,45 @@ inView.setUiAttribs({ "hidePort": true });
 /* minimalcore:end */
 
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangGlsl());
-
+let shader = null;
+let needsUpdate = true;
 inStage.onChange =
     inCode.onChange =
     inCodePre.onChange =
-    inGraphNodes.onChange =
-    () =>
+    inGraphNodes.onChange = () =>
     {
-        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
-        let str = inCode.get();
-
-        /* minimalcore:start */
-
-        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
-        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
-
-        /* minimalcore:end */
-
-        str = str.replaceAll("{{MAIN}}", sgp.srcMain);
-        str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
-
-        outCode.set(str);
-        outModule.setRef(
-            {
-                "src": str
-            });
+        update();
     };
 
-op.updateShaderModule = (shader) =>
+function update()
+{
+    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
+    let str = inCode.get();
+
+    /* minimalcore:start */
+
+    op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
+    op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+
+    /* minimalcore:end */
+
+    str = str.replaceAll("{{MAIN}}", sgp.srcMain);
+    str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
+
+    outCode.set(str);
+    outModule.setRef(
+        {
+            "src": str
+        });
+    console.log("str", str);
+    needsUpdate = false;
+}
+
+op.updateShaderModule = (_shader) =>
 {
     // console.log(sgp.bindings)
     // console.log("update");
+    shader = _shader;
     const updts = sgp.updateableOps;
 
     if (updts)
@@ -56,4 +64,5 @@ op.updateShaderModule = (shader) =>
             updts[i].update(shader);
     }
 
+    if (needsUpdate) update();
 };
