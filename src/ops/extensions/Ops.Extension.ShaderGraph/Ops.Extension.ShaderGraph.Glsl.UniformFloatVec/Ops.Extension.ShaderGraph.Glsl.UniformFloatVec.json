@@ -68,7 +68,7 @@
             {
                 "type": 2,
                 "name": "value",
-                "objType": "sg_vec4"
+                "objType": "sg_float"
             }
         ]
     },

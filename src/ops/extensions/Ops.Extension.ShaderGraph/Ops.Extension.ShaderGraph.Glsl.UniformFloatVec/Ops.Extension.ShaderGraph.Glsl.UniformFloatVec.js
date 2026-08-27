@@ -62,7 +62,8 @@ function update(shader, bindings)
         if (inType.get() == "vec4") uniType = "4f";
         if (inType.get() == "vec3") uniType = "3f";
         if (inType.get() == "vec2") uniType = "2f";
-        uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
+        if (uniType == "f") uni = new CGL.Uniform(shader, uniType, name, inX); // why needed, bug in cgl_uniform
+        else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
         op.shaderNode.src = "uniform " + inType.get() + " " + name + ";";
         // const layout = {
