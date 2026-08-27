@@ -1,0 +1,33 @@
+{
+    "id": "048bc571-15be-4744-a890-a02ff713887b",
+    "created": 1787818384950,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818385057
+        },
+        {
+            "message": "Patch.PKKnQbt.SubPatch0 renamed to Ops.Extension.Testing.UVGradient",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787818411072
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "n6afi71yd",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
