@@ -1,0 +1,49 @@
+{
+    "id": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+    "created": 1787818649508,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818649522
+        },
+        {
+            "message": "Extension.ShaderGraph.ShaderGraphMaterial renamed to Ops.Extension.ShaderGraph.Glsl.ShaderGraphMaterial",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787820954186
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Fragment"
+            },
+            {
+                "type": 2,
+                "name": "Vertex"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}

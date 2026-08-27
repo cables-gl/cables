@@ -1,0 +1,44 @@
+const
+    inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT"], "FRAGMENT"),
+    inCode = op.inStringEditor("Code", "", "glsl"),
+    inCodePre = op.inString("Code Prepend", "", "glsl"),
+    inView = op.inTriggerButton("View Code"),
+    outModule = op.outObject("Module", null, "shadermodule"),
+    outCode = op.outString("Final Code"),
+    inGraphNodes = op.inMultiPort2("Graph", CABLES.OP_PORT_TYPE_OBJECT),
+    debug = op.inBool("Debug comments", false),
+    types = op.inBool("Set Type Title", false),
+    ids = op.inBool("Show id", false);
+
+const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangGlsl());
+
+inStage.onChange =
+    inCode.onChange =
+    inCodePre.onChange =
+    inGraphNodes.onChange =
+    () =>
+    {
+        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
+        let str = inCode.get();
+
+        /* minimalcore:start */
+
+        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!");
+        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!");
+
+        /* minimalcore:end */
+
+        str = str.replaceAll("{{MAIN}}", sgp.srcMain);
+        str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
+
+        outCode.set(str);
+        outModule.setRef(
+            {
+                "src": str
+            });
+    };
+
+op.updateShaderModule = () =>
+{
+    // console.log("update");
+};

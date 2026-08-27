@@ -1003,7 +1003,6 @@ export class Port extends Events
         {
             let time = 0;
             if (this.#op.patch.gui && this.#op.patch.gui.glTimeline)time = this.#op.patch.timer.getTime();// if timeline is already used otherwise create first key at 0
-
             if (this.anim.keys.length == 0) this.anim.setValue(time, this.value);
         }
         else

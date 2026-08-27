@@ -1,0 +1,83 @@
+{
+    "id": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+    "created": 1787818947736,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818649522
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818947736
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Stage index",
+                "values": [
+                    "VERTEX",
+                    "FRAGMENT"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Code"
+            },
+            {
+                "type": 5,
+                "name": "Code Prepend"
+            },
+            {
+                "type": 1,
+                "name": "View Code"
+            },
+            {
+                "type": 2,
+                "name": "Graph_0",
+                "longPort": 2,
+                "group": "Graph"
+            },
+            {
+                "type": 2,
+                "name": "Graph_1",
+                "uititle": "add port",
+                "group": "Graph"
+            },
+            {
+                "type": 0,
+                "name": "Debug comments",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Type Title",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show id",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Module",
+                "objType": "shadermodule"
+            },
+            {
+                "type": 5,
+                "name": "Final Code"
+            }
+        ]
+    }
+}
