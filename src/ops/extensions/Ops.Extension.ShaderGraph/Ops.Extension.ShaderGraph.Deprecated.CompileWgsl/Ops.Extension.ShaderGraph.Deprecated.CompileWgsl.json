@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786539250398
+        },
+        {
+            "message": "op Extension.ShaderGraph.CompileWgsl was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1787821019517
         }
     ],
     "layout": {
