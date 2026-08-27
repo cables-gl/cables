@@ -10,6 +10,8 @@ export class LangGlsl extends Lang
      */
     getVarDef(node, name)
     {
+        if (node.type == "existingvar") return "";
+
         if (name && !node.result?.type) return name + "=";
 
         if (node.result.type == "f32")node.result.type = "float";

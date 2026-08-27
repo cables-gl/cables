@@ -15,19 +15,16 @@
             "type": "new op",
             "author": "pandur",
             "date": 1787818947736
+        },
+        {
+            "message": "Extension.ShaderGraph.Glsl.ShaderGraphShader renamed to Ops.Extension.ShaderGraph.Glsl.Module",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787823470208
         }
     ],
     "layout": {
         "portsIn": [
-            {
-                "type": 0,
-                "name": "Stage index",
-                "values": [
-                    "VERTEX",
-                    "FRAGMENT"
-                ],
-                "subType": "integer"
-            },
             {
                 "type": 5,
                 "name": "Code"
@@ -35,10 +32,6 @@
             {
                 "type": 5,
                 "name": "Code Prepend"
-            },
-            {
-                "type": 1,
-                "name": "View Code"
             },
             {
                 "type": 2,

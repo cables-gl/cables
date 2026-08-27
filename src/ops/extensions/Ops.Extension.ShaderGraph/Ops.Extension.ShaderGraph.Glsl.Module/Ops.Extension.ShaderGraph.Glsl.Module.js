@@ -10,6 +10,12 @@ const
     types = op.inBool("Set Type Title", false),
     ids = op.inBool("Show id", false);
 
+/* minimalcore:start */
+inStage.setUiAttribs({ "hidePort": true });
+inView.setUiAttribs({ "hidePort": true });
+
+/* minimalcore:end */
+
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangGlsl());
 
 inStage.onChange =
@@ -38,7 +44,16 @@ inStage.onChange =
             });
     };
 
-op.updateShaderModule = () =>
+op.updateShaderModule = (shader) =>
 {
+    // console.log(sgp.bindings)
     // console.log("update");
+    const updts = sgp.updateableOps;
+
+    if (updts)
+    {
+        for (const i in updts)
+            updts[i].update(shader);
+    }
+
 };

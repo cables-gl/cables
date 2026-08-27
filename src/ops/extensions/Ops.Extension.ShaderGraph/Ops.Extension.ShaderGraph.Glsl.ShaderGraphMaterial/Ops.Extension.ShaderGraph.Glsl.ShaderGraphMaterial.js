@@ -21,16 +21,18 @@ inExec.onTriggered = () =>
 {
     let moduleFrag = inModuleFragment.get();
     let moduleVertex = inModuleVertex.get();
-    if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule();
-    if (inModuleVertex.isLinked()) inModuleVertex.links[0].getOtherPort(inModuleVertex).op.updateShaderModule();
 
     if (reInit)
     {
-        let srcFrag = inModuleFragment.get().src;
-        let srcVert = inModuleVertex.get().src;
+        let srcFrag = (inModuleFragment.get()?.src) || CGL.Shader.getDefaultFragmentShader();
+        let srcVert = (inModuleVertex.get()?.src) || CGL.Shader.getDefaultVertexShader();
+
         shader.setSource(srcVert, srcFrag, false);
         reInit = false;
     }
+
+    if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(shader);
+    if (inModuleVertex.isLinked()) inModuleVertex.links[0].getOtherPort(inModuleVertex).op.updateShaderModule(shader);
 
     cgl.pushShader(shader);
     // pushTextures();
