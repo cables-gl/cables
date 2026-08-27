@@ -27,7 +27,7 @@ inExec.onTriggered = () =>
         let srcFrag = (inModuleFragment.get()?.src) || CGL.Shader.getDefaultFragmentShader();
         let srcVert = (inModuleVertex.get()?.src) || CGL.Shader.getDefaultVertexShader();
 
-        shader.setSource(srcVert, srcFrag, false);
+        shader.setSource(srcVert, srcFrag, true);
         reInit = false;
     }
 

@@ -1,163 +1,15 @@
 {
   "ops": [
     {
-      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
-      "id": "sqjub00fj",
-      "attribs": {},
-      "uiAttribs": {
-        "height": 615.5499639212067,
-        "width": 788.9174665003493,
-        "resizable": true,
-        "vizLayerMaxZoom": 3500,
-        "translate": {
-          "x": 1403.3312162725995,
-          "y": 1740.5363929322898
-        },
-        "subPatch": "3agt9d8t2",
-        "extendTitle": "Code",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "ZoomText",
-          "value": 0
-        },
-        {
-          "name": "Line Numbers",
-          "value": 1
-        },
-        {
-          "name": "Whitespace",
-          "value": 0
-        },
-        {
-          "name": "Wrap lines",
-          "value": 0
-        },
-        {
-          "name": "Syntax index",
-          "value": 1
-        },
-        {
-          "name": "Syntax",
-          "value": "glsl"
-        },
-        {
-          "name": "Font Size",
-          "value": 10
-        },
-        {
-          "name": "Scroll",
-          "value": 0.07
-        }
-      ]
-    },
-    {
-      "opId": "15e647d4-1682-4d4e-afc9-9101f35786f1",
-      "id": "gf70iem3x",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1419.7361271130103,
-          "y": 1575.6170144057087
-        },
-        "subPatch": "3agt9d8t2",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Base Code",
-          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
-        },
-        {
-          "name": "Debug comments",
-          "value": 1
-        },
-        {
-          "name": "Set Type Title",
-          "value": 1
-        },
-        {
-          "name": "Show id",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Code",
-          "links": [
-            {
-              "portIn": "String",
-              "portOut": "Code",
-              "objIn": "sqjub00fj",
-              "objOut": "gf70iem3x"
-            },
-            {
-              "portIn": "Fragment Code",
-              "portOut": "Code",
-              "objIn": "bvwtvrdhp",
-              "objOut": "gf70iem3x"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "a165fc89-a35b-4d39-8930-7345b098bd9d",
-      "id": "bvwtvrdhp",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1670.1746952330916,
-          "y": 1557.8795961223582
-        },
-        "subPatch": "3agt9d8t2",
-        "tempSubOldOpId": null,
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Vertex Code",
-          "value": "{{MODULES_HEAD}}\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    {{MODULE_VERTEX_POSITION}}\n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    {{MODULE_VERTEX_MODELVIEW}}\n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
-        },
-        {
-          "name": "Use As Material",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "trigger",
-          "links": [
-            {
-              "portIn": "render",
-              "portOut": "trigger",
-              "objIn": "e9lrhjqmn",
-              "objOut": "bvwtvrdhp"
-            }
-          ]
-        },
-        {
-          "name": "Has Errors",
-          "value": false
-        }
-      ]
-    },
-    {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
       "id": "e9lrhjqmn",
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1670.1746952330916,
-          "y": 1646.1134932547018
+          "x": 1436.0795367605128,
+          "y": 1740.5507695625952
         },
-        "subPatch": "3agt9d8t2",
+        "subPatch": "if5p7vepg",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -228,11 +80,11 @@
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1443.7361271130103,
-          "y": 586.9428293239298
+          "x": 1180.7697182157783,
+          "y": 1048.7374986068733
         },
-        "subPatch": "3agt9d8t2",
-        "extendTitle": "vec2 id32",
+        "subPatch": "if5p7vepg",
+        "extendTitle": "id1",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -257,11 +109,11 @@
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1443.7361271130103,
-          "y": 981.6817651585661
+          "x": 1180.7697182157783,
+          "y": 1117.6546400029883
         },
-        "subPatch": "3agt9d8t2",
-        "extendTitle": "vec2 id33",
+        "subPatch": "if5p7vepg",
+        "extendTitle": "id2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -286,11 +138,11 @@
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1504.43157653765,
-          "y": 1225.3615178063221
+          "x": 1181.1753080395895,
+          "y": 1261.278880972773
         },
-        "subPatch": "3agt9d8t2",
-        "extendTitle": "vec4 id34",
+        "subPatch": "if5p7vepg",
+        "extendTitle": "id3",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -329,11 +181,11 @@
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1504.43157653765,
-          "y": 1280.3494839652615
+          "x": 1181.1753080395895,
+          "y": 1316.2668471317124
         },
-        "subPatch": "3agt9d8t2",
-        "extendTitle": "color vec4 id35",
+        "subPatch": "if5p7vepg",
+        "extendTitle": "color id4",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -349,9 +201,9 @@
           "name": "result",
           "links": [
             {
-              "portIn": "Graph",
+              "portIn": "Graph_0",
               "portOut": "result",
-              "objIn": "gf70iem3x",
+              "objIn": "e5gu5w6w4",
               "objOut": "40049jkw8"
             }
           ]
@@ -363,10 +215,10 @@
       "id": "8ff7uzmto",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "3agt9d8t2",
+        "subPatch": "if5p7vepg",
         "translate": {
-          "x": 1443.7361271130103,
-          "y": 1073.4321400034503
+          "x": 1180.7697182157783,
+          "y": 1194.0118592051076
         },
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -402,7 +254,7 @@
       "id": "z4dvt9cym",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "3agt9d8t2",
+        "subPatch": "if5p7vepg",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -417,9 +269,9 @@
           "title": "render",
           "links": [
             {
-              "portIn": "render",
+              "portIn": "Render",
               "portOut": "innerOut_afl5yq365",
-              "objIn": "bvwtvrdhp",
+              "objIn": "6vqdk9q2e",
               "objOut": "z4dvt9cym"
             }
           ]
@@ -431,7 +283,7 @@
       "id": "ap783n2m8",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "3agt9d8t2",
+        "subPatch": "if5p7vepg",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -440,6 +292,104 @@
         "tempSubOldOpId": null
       },
       "storage": {}
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "e5gu5w6w4",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1133.1753080395895,
+          "y": 1454.996078354458
+        },
+        "subPatch": "if5p7vepg",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "6vqdk9q2e",
+              "objOut": "e5gu5w6w4"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_1=texCoord.xy;\n\n    vec2 rSum_2=rUv_1+vec2(0., 0.);\n\n    vec4 rVec4_3=vec4(rSum_2.x, rSum_2.y, 0, 1);\n\n    vec4 color=rVec4_3;\n\n    outColor = color;\n}"
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "6vqdk9q2e",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "if5p7vepg",
+        "translate": {
+          "x": 1436.0795367605128,
+          "y": 1641.034304572308
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "e9lrhjqmn",
+              "objOut": "6vqdk9q2e"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
