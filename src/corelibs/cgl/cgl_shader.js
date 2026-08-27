@@ -1243,9 +1243,18 @@ class CglShader extends CgShader
             /** @type {import("../../../../cables_ui/src/ui/api/opsserver.js").LinterDiag} */
             const err = { "line": -1, "column": -1, "message": "unknown", "fatal": true, "severity": 2 };
 
+            let msg2 = lines[i].match(/^(ERROR|WARNING):\s*(\d+):(\d+):\s*(.*)$/);
+            // errors.push({ severity: m[1], source: +m[2], lineNumber: +m[3], message: m[4] });
+            //
+            // Format: 0(15) : error C1008: message
+            let msg3 = lines[i].match(/^(\d+)\((\d+)\)\s*:\s*(error|warning)\s*(\w+)?:\s*(.*)$/i);
+            //   errors.push({ source: +m[1], lineNumber: +m[2], severity: m[3], code: m[4], message: m[5] });
+
             if (parts[0] == "ERROR")
             {
                 err.message = lines[i];
+                if (msg2)err.line = msg2[3];
+                if (msg3)err.line = msg3[2];
                 arr.push(err);
             }
             else

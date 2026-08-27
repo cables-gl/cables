@@ -40,8 +40,8 @@ inExec.onTriggered = () =>
         shader.setSource(srcVert, srcFrag, false);
         updateModules();
 
-        outCodeFrag.set(srcFrag);
-        outCodeVertex.set(srcVert);
+        outCodeFrag.set(shader.finalShaderFrag);
+        outCodeVertex.set(shader.finalShaderVert);
         outCodeFrag.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
         outCodeVertex.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
 
@@ -50,6 +50,7 @@ inExec.onTriggered = () =>
 
     if (shader.hasErrors())
     {
+        // console.log("shader.diagnosticsFrag", shader.diagnosticsFrag);
         op.setUiError("compile", "Shader has errors", 2, {});
     }
     else

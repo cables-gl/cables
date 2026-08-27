@@ -68,7 +68,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
         for (let i = 0; i < diags.length; i++)
         {
             if (i == 0 && inScrollToDiag.get()) diagScroll = diags[i].line / lines.length;
-            diagStr += diags[i].line + ":" + diags[i].message + "\n";
+            diagStr += diags[i].line + ": " + diags[i].message + "\n";
         }
     }
     op.setUiAttribs({ "comment": diagStr });

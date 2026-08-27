@@ -47,7 +47,6 @@ function update()
         {
             "src": str
         });
-    console.log("str", str);
     needsUpdate = false;
 }
 
