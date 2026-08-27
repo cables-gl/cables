@@ -9,6 +9,7 @@ const
     syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript", "inline-css", "sql"], "text"),
     inFontSize = op.inFloat("Font Size", 10),
     inPos = op.inFloatSlider("Scroll", 0),
+    inScrollToDiag = op.inBool("Scroll to diagnose", true),
     outStr = op.outString("Passthrough String");
 
 op.setUiAttrib({ "height": 200, "width": 400, "resizable": true, "vizLayerMaxZoom": 3500 });
@@ -59,13 +60,27 @@ op.renderVizLayer = (ctx, layer, viz) =>
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
 
+    const diags = inStr.links[0].getOtherPort(inStr).uiAttribs.editorDiagnostics;
+    let diagStr = "";
+    let diagScroll = 0;
+    if (diags && diags.length > 0)
+    {
+        for (let i = 0; i < diags.length; i++)
+        {
+            if (i == 0 && inScrollToDiag.get()) diagScroll = diags[i].line / lines.length;
+            diagStr += diags[i].line + ":" + diags[i].message + "\n";
+        }
+    }
+    op.setUiAttribs({ "comment": diagStr });
+
     viz.renderText(ctx, layer, lines,
         {
             "zoomText": inZoomText.get(),
             "showLineNum": inLineNums.get(),
             "fontSize": inFontSize.get(),
-            "scroll": inPos.get(),
+            "scroll": inPos.get() || diagScroll,
             "syntax": syntax.get(),
+            "diagnostics": diags,
             "showWhitespace": inWhitespace.get(),
             "wrap": inWrap.get()
         });

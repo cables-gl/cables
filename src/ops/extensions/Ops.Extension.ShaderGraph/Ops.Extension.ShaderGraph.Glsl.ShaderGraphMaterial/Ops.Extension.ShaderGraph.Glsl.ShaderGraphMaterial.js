@@ -3,6 +3,8 @@ const
     inModuleFragment = op.inObject("Fragment"),
     inModuleVertex = op.inObject("Vertex"),
     outNext = op.outTrigger("Next"),
+    outCodeFrag = op.outString("Code Fragment", "", "glsl"),
+    outCodeVertex = op.outString("Code Vertex", "", "glsl"),
     outShader = op.outObject("Shader");
 
 const cgl = op.patch.cgl;
@@ -17,8 +19,16 @@ inModuleFragment.onChange =
         reInit = true;
     };
 
+function updateModules()
+{
+    if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(shader);
+    if (inModuleVertex.isLinked()) inModuleVertex.links[0].getOtherPort(inModuleVertex).op.updateShaderModule(shader);
+}
+
 inExec.onTriggered = () =>
 {
+
+    updateModules();
     let moduleFrag = inModuleFragment.get();
     let moduleVertex = inModuleVertex.get();
 
@@ -28,16 +38,33 @@ inExec.onTriggered = () =>
         let srcVert = (inModuleVertex.get()?.src) || CGL.Shader.getDefaultVertexShader();
 
         shader.setSource(srcVert, srcFrag, false);
+        updateModules();
+
+        outCodeFrag.set(srcFrag);
+        outCodeVertex.set(srcVert);
+        outCodeFrag.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
+        outCodeVertex.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
+
         reInit = false;
     }
 
-    if (inModuleFragment.isLinked()) inModuleFragment.links[0].getOtherPort(inModuleFragment).op.updateShaderModule(shader);
-    if (inModuleVertex.isLinked()) inModuleVertex.links[0].getOtherPort(inModuleVertex).op.updateShaderModule(shader);
+    if (shader.hasErrors())
+    {
+        op.setUiError("compile", "Shader has errors", 2, {});
+    }
+    else
+    {
+        op.setUiError("compile", null);
 
-    cgl.pushShader(shader);
-    // pushTextures();
-    outNext.trigger();
-    // shader.popTextures();
-    cgl.popShader();
+        if (shader.isValid())
+        {
+            cgl.pushShader(shader);
+            // pushTextures();
+            outNext.trigger();
+            // shader.popTextures();
+            cgl.popShader();
+
+        }
+    }
 
 };

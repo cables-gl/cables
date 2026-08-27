@@ -1,5 +1,5 @@
 const
-    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "float"),
+    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "vec4"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),
@@ -66,6 +66,7 @@ function update(shader, bindings)
         else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
         op.shaderNode.src = "uniform " + inType.get() + " " + name + ";";
+        console.log("srcccc ", op.shaderNode.src);
         // const layout = {
         //     "visibility": mgpu.stage,
         //     "buffer": { "type": "uniform" }
@@ -110,6 +111,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "float", "port": outValue },
+        "result": { "type": "vec4", "port": outValue },
         "resultVarName": inName.get() || defaultName
     });
