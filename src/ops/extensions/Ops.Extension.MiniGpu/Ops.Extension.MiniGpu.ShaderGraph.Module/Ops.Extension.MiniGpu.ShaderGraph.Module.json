@@ -1,0 +1,87 @@
+{
+    "id": "93340307-7883-4169-ac02-1295f2455308",
+    "created": 1766825765097,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766818539382
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766825765097
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderCompute renamed to Ops.Extension.MiniGpu.CompShaderModule",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1767016780129
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderModule renamed to Ops.Extension.MiniGpu.CompShader.Module",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422457795
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.Module renamed to Ops.Extension.MiniGpu.ShaderGraph.Module",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787816424514
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Stage index",
+                "values": [
+                    "VERTEX",
+                    "FRAGMENT",
+                    "COMPUTE"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Code"
+            },
+            {
+                "type": 3,
+                "name": "Update Values"
+            },
+            {
+                "type": 5,
+                "name": "Code Prepend"
+            },
+            {
+                "type": 1,
+                "name": "View Code"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Final Code",
+                "uititle": "final code FRAGMENT"
+            }
+        ]
+    },
+    "coreLibs": [
+        "minigpu"
+    ],
+    "isReleased": true
+}

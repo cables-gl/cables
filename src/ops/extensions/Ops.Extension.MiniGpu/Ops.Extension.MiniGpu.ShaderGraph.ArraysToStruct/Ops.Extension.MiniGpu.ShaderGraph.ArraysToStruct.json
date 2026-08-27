@@ -1,0 +1,116 @@
+{
+    "id": "1d337c32-b963-47e5-a99c-668f2c06b0ea",
+    "created": 1785391980364,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1785391980376
+        },
+        {
+            "message": "Patch.PYIXVc6.WeaveStridedArrays renamed to Ops.Array.WeaveStridedArrays",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785392000039
+        },
+        {
+            "message": "Array.WeaveStridedArrays renamed to Ops.Extension.MiniGpu.CompShader.ArraysToStruct",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785425533112
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.ArraysToStruct renamed to Ops.Extension.MiniGpu.ShaderGraph.ArraysToStruct",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787816336586
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Total Chunks",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Fill WGSL 32bit",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "MemberNames"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_0",
+                "longPort": 9,
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_1",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_2",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_3",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_4",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_5",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_6",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_7",
+                "group": "Arrays"
+            },
+            {
+                "type": 3,
+                "name": "Arrays_8",
+                "uititle": "add port",
+                "group": "Arrays"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Chunk Size",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Struct Code"
+            }
+        ]
+    }
+}

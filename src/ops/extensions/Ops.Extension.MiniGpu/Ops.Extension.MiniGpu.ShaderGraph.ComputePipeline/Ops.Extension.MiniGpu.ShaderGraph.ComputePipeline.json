@@ -1,0 +1,96 @@
+{
+    "id": "0d434a4d-acf0-4caa-98ec-dce26fff69a4",
+    "created": 1766855636539,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766496080521
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766820910225
+        },
+        {
+            "message": "Extension.MiniGpu.Pipeline2 renamed to Ops.Extension.MiniGpu.RenderPipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1766855626187
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766855636540
+        },
+        {
+            "message": "Extension.MiniGpu.ComputePipeline renamed to Ops.Extension.MiniGpu.CompShader.ComputePipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422546460
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.ComputePipeline renamed to Ops.Extension.MiniGpu.ShaderGraph.ComputePipeline",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787816496244
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Workgroups index",
+                "values": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num X",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num Y",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Num Z",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Workgroup Size",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Overrides"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "childx"
+            }
+        ]
+    },
+    "coreLibs": [
+        "minigpu"
+    ],
+    "isReleased": true
+}

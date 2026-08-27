@@ -18,7 +18,11 @@
                 "name": "Minimize patch json",
                 "subType": "boolean"
             }
-        ],
-        "portsOut": []
+        ]
+    },
+    "isReleased": false,
+    "summary": "sending reduuced patch data to the server by ignoring default values that are unchanged",
+    "docs": {
+        "ports": []
     }
 }
