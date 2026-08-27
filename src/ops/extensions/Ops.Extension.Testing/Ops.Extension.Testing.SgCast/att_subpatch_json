@@ -2,14 +2,14 @@
   "ops": [
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
-      "id": "e9lrhjqmn",
+      "id": "t18dqzrdm",
       "attribs": {},
       "uiAttribs": {
         "translate": {
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "if5p7vepg",
+        "subPatch": "bvqp55h7h",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -75,74 +75,16 @@
       ]
     },
     {
-      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
-      "id": "f5iqt8mnu",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1180.7697182157783,
-          "y": 1048.7374986068733
-        },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id1",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "number 1",
-              "portOut": "result",
-              "objIn": "bfz0fpy3r",
-              "objOut": "f5iqt8mnu"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "79cfee36-a780-4aeb-b121-834f8e79fe2f",
-      "id": "bfz0fpy3r",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1180.7697182157783,
-          "y": 1117.6546400029883
-        },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id2",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "vec",
-              "portOut": "result",
-              "objIn": "8ff7uzmto",
-              "objOut": "bfz0fpy3r"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
-      "id": "jorfhlppj",
+      "id": "eimggnjw2",
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1181.1753080395895,
-          "y": 1261.278880972773
+          "x": 1620.7552498607556,
+          "y": 1260.0778966675368
         },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id3",
+        "subPatch": "bvqp55h7h",
+        "extendTitle": "id35",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -168,82 +110,8 @@
             {
               "portIn": "value",
               "portOut": "result",
-              "objIn": "40049jkw8",
-              "objOut": "jorfhlppj"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "2dc8465c-d58f-4f2d-bc58-099d6cf1d6cf",
-      "id": "40049jkw8",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1181.1753080395895,
-          "y": 1316.2668471317124
-        },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "color id4",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "var name",
-          "value": "color"
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "Graph_0",
-              "portOut": "result",
-              "objIn": "e5gu5w6w4",
-              "objOut": "40049jkw8"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "e9e78e5c-7877-4dd7-b03f-fb57d80d5602",
-      "id": "8ff7uzmto",
-      "attribs": {},
-      "uiAttribs": {
-        "subPatch": "if5p7vepg",
-        "translate": {
-          "x": 1180.7697182157783,
-          "y": 1194.0118592051076
-        },
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "x",
-          "links": [
-            {
-              "portIn": "x",
-              "portOut": "x",
-              "objIn": "jorfhlppj",
-              "objOut": "8ff7uzmto"
-            }
-          ]
-        },
-        {
-          "name": "y",
-          "links": [
-            {
-              "portIn": "y",
-              "portOut": "y",
-              "objIn": "jorfhlppj",
-              "objOut": "8ff7uzmto"
+              "objIn": "4dgkzif38",
+              "objOut": "eimggnjw2"
             }
           ]
         }
@@ -251,10 +119,10 @@
     },
     {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
-      "id": "z4dvt9cym",
+      "id": "7l5mv9qft",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "bvqp55h7h",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -271,8 +139,8 @@
             {
               "portIn": "Render",
               "portOut": "innerOut_afl5yq365",
-              "objIn": "6vqdk9q2e",
-              "objOut": "z4dvt9cym"
+              "objIn": "esbi3zgpd",
+              "objOut": "7l5mv9qft"
             }
           ]
         }
@@ -280,10 +148,10 @@
     },
     {
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
-      "id": "ap783n2m8",
+      "id": "bdscgifcp",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "bvqp55h7h",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -295,14 +163,14 @@
     },
     {
       "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
-      "id": "e5gu5w6w4",
+      "id": "159cyfhjz",
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1133.1753080395895,
-          "y": 1454.996078354458
+          "x": 1596.7552498607556,
+          "y": 1461.8420486366729
         },
-        "subPatch": "if5p7vepg",
+        "subPatch": "bvqp55h7h",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -322,7 +190,7 @@
         },
         {
           "name": "Code",
-          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n{{MAIN}}\noutColor = color;\n}"
         },
         {
           "name": "Code Prepend",
@@ -353,23 +221,30 @@
             {
               "portIn": "Fragment",
               "portOut": "Module",
-              "objIn": "6vqdk9q2e",
-              "objOut": "e5gu5w6w4"
+              "objIn": "esbi3zgpd",
+              "objOut": "159cyfhjz"
             }
           ]
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_1=texCoord.xy;\n\n    vec2 rSum_2=rUv_1+vec2(0., 0.);\n\n    vec4 rVec4_3=vec4(rSum_2.x, rSum_2.y, 0, 1);\n\n    vec4 color=rVec4_3;\n\n    outColor = color;\n}"
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "fvsl2ubbn",
+              "objOut": "159cyfhjz"
+            }
+          ]
         }
       ]
     },
     {
       "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
-      "id": "6vqdk9q2e",
+      "id": "esbi3zgpd",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "bvqp55h7h",
         "translate": {
           "x": 1436.0795367605128,
           "y": 1641.034304572308
@@ -384,12 +259,95 @@
             {
               "portIn": "render",
               "portOut": "Next",
-              "objIn": "e9lrhjqmn",
-              "objOut": "6vqdk9q2e"
+              "objIn": "t18dqzrdm",
+              "objOut": "esbi3zgpd"
             }
           ]
         }
       ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "fvsl2ubbn",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 937.4281761363341,
+        "width": 709.4287243767142,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "bvqp55h7h",
+        "translate": {
+          "x": 1865.0781329549984,
+          "y": 1180.496929453998
+        },
+        "extendTitle": "Final Code"
+      },
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 0
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 0
+        },
+        {
+          "name": "Syntax",
+          "value": "text"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "fvsl2ubbn"
+      }
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "4dgkzif38",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "bvqp55h7h",
+        "translate": {
+          "x": 1620.7552498607556,
+          "y": 1338.1323773146185
+        },
+        "extendTitle": "color id36"
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "159cyfhjz",
+              "objOut": "4dgkzif38"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "4dgkzif38"
+      }
     }
   ]
 }
