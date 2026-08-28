@@ -1,10 +1,10 @@
 const
     inExec = op.inTrigger("Render"),
-    inModuleFragment = op.inObject("Fragment"),
     inModuleVertex = op.inObject("Vertex"),
+    inModuleFragment = op.inObject("Fragment"),
     outNext = op.outTrigger("Next"),
-    outCodeFrag = op.outString("Code Fragment", "", "glsl"),
     outCodeVertex = op.outString("Code Vertex", "", "glsl"),
+    outCodeFrag = op.outString("Code Fragment", "", "glsl"),
     outShader = op.outObject("Shader");
 
 const cgl = op.patch.cgl;
@@ -38,8 +38,10 @@ inExec.onTriggered = () =>
         let srcVert = (inModuleVertex.get()?.src) || CGL.Shader.getDefaultVertexShader();
 
         shader.setSource(srcVert, srcFrag, false);
+
         updateModules();
 
+        shader.compile();
         console.log("text", shader);
         reInit = false;
     }

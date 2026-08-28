@@ -25,6 +25,12 @@ inStage.onChange = debug.onChange =
     inCodePre.onChange =
     inGraphNodes.onChange = () =>
     {
+
+        /* minimalcore:start */
+        op.setUiAttrib({ "extendTitle": inStage.get() });
+
+        /* minimalcore:end */
+
         update();
     };
 

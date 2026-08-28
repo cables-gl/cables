@@ -102,6 +102,7 @@ function update(shader, bindings)
     // mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
 
     // if (binding) bindings.push(binding);
+    // bindings.push(uni);
 }
 
 new CABLES.ShaderGraphOp(this,

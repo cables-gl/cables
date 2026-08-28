@@ -25,11 +25,11 @@
             },
             {
                 "type": 2,
-                "name": "Fragment"
+                "name": "Vertex"
             },
             {
                 "type": 2,
-                "name": "Vertex"
+                "name": "Fragment"
             }
         ],
         "portsOut": [
@@ -39,11 +39,11 @@
             },
             {
                 "type": 5,
-                "name": "Code Fragment"
+                "name": "Code Vertex"
             },
             {
                 "type": 5,
-                "name": "Code Vertex"
+                "name": "Code Fragment"
             },
             {
                 "type": 2,
