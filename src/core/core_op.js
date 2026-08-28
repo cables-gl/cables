@@ -1346,12 +1346,14 @@ export class Op extends Events
      * @param {string} name
      * @param {String} v
      * @return {Port} created port
+     * @param {string} syntax
      */
-    outString(name, v)
+    outString(name, v, syntax)
     {
         const p = this.addOutPort(
             this.newPort(this, name, Port.TYPE_STRING, {
-                "type": "string"
+                "type": "string", "editorSyntax": syntax
+
             })
         );
         if (v !== undefined) p.set(v);

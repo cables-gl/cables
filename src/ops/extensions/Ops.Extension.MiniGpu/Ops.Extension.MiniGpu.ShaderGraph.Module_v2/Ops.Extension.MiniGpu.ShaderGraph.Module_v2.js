@@ -30,7 +30,7 @@ ids.onChange =
     inGraphNodes.onLinkChanged =
     inGraphNodes.onChange = () =>
     {
-        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
+        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get() });
         let str = inCode.get() || "";
 
         /* minimalcore:start */

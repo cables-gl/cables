@@ -19,7 +19,8 @@ inView.setUiAttribs({ "hidePort": true });
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangGlsl());
 let shader = null;
 let needsUpdate = true;
-inStage.onChange =
+inStage.onChange = debug.onChange =
+    types.onChange = ids.onChange =
     inCode.onChange =
     inCodePre.onChange =
     inGraphNodes.onChange = () =>
@@ -29,7 +30,7 @@ inStage.onChange =
 
 function update()
 {
-    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get });
+    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get() });
     let str = inCode.get();
 
     /* minimalcore:start */
@@ -43,10 +44,7 @@ function update()
     str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
 
     outCode.set(str);
-    outModule.setRef(
-        {
-            "src": str
-        });
+    outModule.setRef({ "src": str });
     needsUpdate = false;
 }
 

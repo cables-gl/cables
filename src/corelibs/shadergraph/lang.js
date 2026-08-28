@@ -74,16 +74,18 @@ export class Lang
         {
             for (let i = 0; i < params[j].port.links.length; i++)
             {
-                const otherport = params[j].port.links[i].getOtherPort(params[j].port);
-                const otherop = otherport.op;
-                const r = otherop.sgOp.getResult(otherport.name);
-                const type = r.type;
-                const t = types.indexOf(type);
+                // const otherport = params[j].port.links[i].getOtherPort(params[j].port);
+                // const otherop = otherport.op;
+                // const r = otherop.sgOp.getResult(otherport.name);
+                // const type = r.type;
+                // console.log("type", type);
+                const t = types.indexOf(params[j].type);
                 typeIdx = Math.max(typeIdx, t);
             }
         }
 
         const t = types[typeIdx];
+        console.log("getmaxgentype", params, portsSetType, t);
 
         if (portsSetType)
         //     for (let i = 0; i < portsSetType.length; i++)

@@ -141,12 +141,6 @@ export class ShaderGraphProgram extends Events
         return paramStr;
     }
 
-    setNodeResultType(node, type, param)
-    {
-
-        if (param.resultType)param.type = node.result.type;
-    }
-
     /**
      * @param {Op} op
      * @param {string} [convertTo]
@@ -169,8 +163,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.type == "operator" || node.maxGen)
         {
-            node.result.type = this.lang.getMaxGenTypeFromParams(node.params, op.portsOut[0]);
-            this.log("set result ", node.name, node.result.type);
+            this.setNodeResult(node, this.lang.getMaxGenTypeFromParams(node.params, op.portsOut[0]), "operator maxgen");
         }
 
         let title = "";
@@ -237,8 +230,13 @@ export class ShaderGraphProgram extends Events
                         paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
                         if (node.result.type == "gen" && otherPort.op.shaderNode.result)
-                            node.result.type = otherPort.op.shaderNode.results[0].type;
-                            // node.result.type = otherPort.op.shaderNode.result.type;
+                        {
+
+                            // node.result.type = otherPort.op.shaderNode.results[0].type;
+                            node.result.type = this.getParamFromPort(node, otherPort).type; otherPort.op.shaderNode.results[0].type;
+                            // node.result.type = otherPort.op.shaderNode.results[0].type;
+                        }
+                        // node.result.type = otherPort.op.shaderNode.result.type;
 
                         this.addOpShaderFuncCode(otherPort.op);
                     }
@@ -374,5 +372,40 @@ export class ShaderGraphProgram extends Events
     static getNewId()
     {
         return String(++shaderIdCounter);
+    }
+
+    /**
+     * @param {ShaderNode} node
+     * @param {string} t
+     * @param {string} reason
+     */
+    setNodeResult(node, t, reason)
+    {
+        if (reason) this.log("set node result", reason);
+        node.result.type = t;
+    }
+
+    setNodeResultType(node, type, param)
+    {
+
+        if (param.resultType)param.type = node.result.type;
+    }
+
+    /**
+     * @param {ShaderNode} node
+     * @param {Port} port
+     */
+    getParamFromPort(node, port)
+    {
+        if (node.params)
+            for (let i = 0; i < node.params.length; i++)
+                if (node.params[i].port == port) return node.params[i];
+        if (node.results)
+            for (let i = 0; i < node.results.length; i++)
+                if (node.results[i].port == port) return node.results[i];
+
+        if (node.result) return node.result;
+        console.warn("could not find param for port ", port);
+        return node;
     }
 }

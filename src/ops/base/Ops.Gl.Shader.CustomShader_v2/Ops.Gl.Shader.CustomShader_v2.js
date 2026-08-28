@@ -5,6 +5,8 @@ const
     asMaterial = op.inValueBool("Use As Material", true),
     trigger = op.outTrigger("trigger"),
     outShader = op.outObject("Shader", null, "shader"),
+    outCodeFrag = op.outString("Code Fragment", null, "glsl"),
+    outCodeVertex = op.outString("Code Vertex", null, "glsl"),
     outErrors = op.outBool("Has Errors");
 
 const texSlotOff = 7;
@@ -365,9 +367,6 @@ function updateShader()
 
     shader.compile();
     shader.bind();
-    fragmentShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
-    vertexShader.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
-
     op.refreshParams();
 
     // outShader.set(null);
@@ -383,6 +382,11 @@ function updateShader()
             }
         });
     else op.setUiError("compile", null);
+
+    outCodeFrag.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
+    outCodeVertex.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
+    outCodeFrag.set(shader.finalShaderFrag);
+    outCodeVertex.set(shader.finalShaderVert);
 
     outErrors.set(shader.hasErrors());
 }

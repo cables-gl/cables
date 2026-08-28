@@ -62,6 +62,14 @@
                 "objType": "shader"
             },
             {
+                "type": 5,
+                "name": "Code Fragment"
+            },
+            {
+                "type": 5,
+                "name": "Code Vertex"
+            },
+            {
                 "type": 0,
                 "name": "Has Errors",
                 "subType": "boolean"

@@ -15,6 +15,8 @@ export class LangGlsl extends Lang
         if (name && !node.result?.type) return name + "=";
 
         if (node.result.type == "f32")node.result.type = "float";
+        if (node.result.type == "gen")node.result.type = "float";
+
         let str = node.result.type + " " + name + "=";
         // if (node.type == "function") str += "<" + node.result.type + ">";
 
