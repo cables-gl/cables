@@ -65,44 +65,14 @@ function update(shader, bindings)
         if (uniType == "f") uni = new CGL.Uniform(shader, uniType, name, inX); // why needed, bug in cgl_uniform
         else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
-        op.shaderNode.src = "uniform " + inType.get() + " " + name + ";";
-        console.log("srcccc ", op.shaderNode.src);
-        // const layout = {
-        //     "visibility": mgpu.stage,
-        //     "buffer": { "type": "uniform" }
-        // };
-        // uniformBuffer = mgpu.device.createBuffer(
-        //     {
-        //         "size": uniformArray.byteLength,
-        //         "usage": GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
-        //     });
-
-        // let typestr = inType.get();
-        // if (typestr.startsWith("vec")) typestr += "f";
-        // else typestr = "f32";
-        // binding = {
-        //     "header": "var<uniform> " + (inName.get() || defaultName) + " : " + typestr + ";",
-        //     "resource": { "buffer": uniformBuffer },
-        //     "layout": layout
-        // };
+        op.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
 
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
         op.shaderNode.result.type = inType.get();
-        // op.shaderNode.result.port.setRef({});
 
         op.updateGraph();
-        // mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }
 
-    // uniformArray[0] = inX.get();
-    // uniformArray[1] = inY.get();
-    // uniformArray[2] = inZ.get();
-    // uniformArray[3] = inW.get();
-
-    // mgpu.device.queue.writeBuffer(uniformBuffer, 0, uniformArray);
-
-    // if (binding) bindings.push(binding);
-    // bindings.push(uni);
 }
 
 new CABLES.ShaderGraphOp(this,

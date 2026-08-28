@@ -15,7 +15,6 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 /**
  * @typedef ShaderNode
  * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"} [type]
-
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -24,7 +23,8 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @property {boolean} maxGen
  * @property {number} value
  * @property {number[]} values
- * @property {string} src
+ * @property {string} src - this source code will only appended once (per op name) into the shader header
+ * @property {string} srcUni - this source code will appended once per op instance id
  * @property {ShaderNodeParam[]} params
  * @property {ShaderNodeParam} result
  * @property {ShaderNodeParam[]} results
@@ -51,6 +51,9 @@ export class ShaderGraphProgram extends Events
 
     /** @type {Object<String,any>} */
     _opIdsHeadFuncSrc = {};
+
+    /** @type {Object<String,any>} */
+    _opIdsHeadUniSrc = {};
 
     /** @type {Object<String,any>} */
     _opIdsFuncCallSrc = {};
@@ -82,10 +85,22 @@ export class ShaderGraphProgram extends Events
      */
     addOpShaderFuncCode(op)
     {
-        if (this._opIdsHeadFuncSrc[op.id]) return;
 
-        this._opIdsHeadFuncSrc[op.id] = true;
-        this._headFuncSrc += op.shaderNode.src || "";
+        /** @type {ShaderNode} */
+        const node = op.shaderNode;
+
+        if (node.srcUni && !this._opIdsHeadUniSrc[op.id])
+        {
+            this._headFuncSrc += node.srcUni;
+            this._opIdsHeadUniSrc[op.id] = true;
+        }
+
+        if (node.src && !this._opIdsHeadFuncSrc[op.name])
+        {
+            this._headFuncSrc += node.src || "";
+            this._opIdsHeadFuncSrc[op.name] = true;
+        }
+
     }
 
     /**
@@ -347,6 +362,7 @@ export class ShaderGraphProgram extends Events
         this._functionIdInHead = {};
         this._opIdsFuncCallSrc = {};
         this._opIdsHeadFuncSrc = {};
+        this._opIdsHeadUniSrc = {};
         this._headFuncSrc = "";
         this._headUniSrc = "";
         let callSrc = "";
