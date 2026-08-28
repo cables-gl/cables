@@ -65,7 +65,7 @@ inExec.onTriggered = () =>
             cgl.pushShader(shader);
             // pushTextures();
             outNext.trigger();
-            // shader.popTextures();
+            shader.popTextures();
             cgl.popShader();
 
         }

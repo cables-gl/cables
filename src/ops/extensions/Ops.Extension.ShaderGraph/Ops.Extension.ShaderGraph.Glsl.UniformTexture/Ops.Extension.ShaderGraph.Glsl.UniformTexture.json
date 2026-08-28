@@ -1,0 +1,69 @@
+{
+    "id": "0c8f1ce6-68b1-4940-b3ba-03e73cce7366",
+    "created": 1787927287538,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766822305990
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767039477719
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderUniFloat renamed to Ops.Extension.MiniGpu.CompShader.BindingUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422361034
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786823838421
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.UniformFloatVec_v2 renamed to Ops.Extension.MiniGpu.ShaderGraph.UniformFloatVec_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787816119162
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787821842043
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787927287539
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "value",
+                "objType": "sg_vec4"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
