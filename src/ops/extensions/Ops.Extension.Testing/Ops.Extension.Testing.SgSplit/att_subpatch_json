@@ -9,7 +9,7 @@
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -79,7 +79,7 @@
       "id": "7l5mv9qft",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -108,7 +108,7 @@
       "id": "bdscgifcp",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -127,7 +127,7 @@
           "x": 1540.8555536953684,
           "y": 1403.5450858327513
         },
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -206,7 +206,7 @@
         "width": 709.4287243767142,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 2276.8408800696357,
           "y": 1194.407615490986
@@ -264,7 +264,7 @@
           "x": 1564.8555536953684,
           "y": 678.2195777674146
         },
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "extendTitle": "...",
         "blueprintSubpatch2": true
       },
@@ -292,7 +292,7 @@
           "x": 1564.8555536953684,
           "y": 1266.896877355496
         },
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "extendTitle": "color ",
         "blueprintSubpatch2": true
       },
@@ -316,7 +316,7 @@
       "id": "9koh561t3",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1564.8555536953684,
           "y": 953.6810852151016
@@ -354,7 +354,7 @@
       "id": "n0ataz62g",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1564.8555536953684,
           "y": 1133.5847447254466
@@ -386,7 +386,7 @@
         "width": 593.2283286135394,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 2120.536421438488,
           "y": 791.5980751915617
@@ -440,8 +440,8 @@
       "id": "eppvsrp0f",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "unif2066 ",
-        "subPatch": "smhuwp7li",
+        "extendTitle": "float ",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1619.6920957753637,
           "y": 898.9022496579108
@@ -485,8 +485,8 @@
       "id": "qgafg845u",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "unif2075 ",
-        "subPatch": "smhuwp7li",
+        "extendTitle": "float ",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1588.8555536953684,
           "y": 758.9543730274719
@@ -526,111 +526,11 @@
       ]
     },
     {
-      "opId": "2f0c69c5-7a67-4317-be32-0db1f7b130d7",
-      "id": "xjuvdety9",
-      "attribs": {},
-      "uiAttribs": {
-        "subPatch": "smhuwp7li",
-        "translate": {
-          "x": 1860,
-          "y": 1600
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Graph",
-          "multiPortNum": 2,
-          "multiPortManual": true
-        },
-        {
-          "name": "Stage index",
-          "value": 2
-        },
-        {
-          "name": "Stage",
-          "value": "COMPUTE"
-        },
-        {
-          "name": "Code",
-          "value": ""
-        },
-        {
-          "name": "Code Prepend",
-          "value": ""
-        },
-        {
-          "name": "Graph_0",
-          "value": 0
-        },
-        {
-          "name": "Graph_1",
-          "value": 0,
-          "title": "add port"
-        },
-        {
-          "name": "Debug comments",
-          "value": 0
-        },
-        {
-          "name": "Set Type Title",
-          "value": 0
-        },
-        {
-          "name": "Show id",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "opId": "a165fc89-a35b-4d39-8930-7345b098bd9d",
-      "id": "jzsm9jotz",
-      "attribs": {},
-      "uiAttribs": {
-        "subPatch": "smhuwp7li",
-        "translate": {
-          "x": 1836,
-          "y": 1320
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Fragment Code",
-          "value": "\nIN vec2 texCoord;\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MODULE_COLOR}}\n    outColor = col;\n}"
-        },
-        {
-          "name": "Vertex Code",
-          "value": "{{MODULES_HEAD}}\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    {{MODULE_VERTEX_POSITION}}\n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    {{MODULE_VERTEX_MODELVIEW}}\n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
-        },
-        {
-          "name": "Use As Material",
-          "value": 1
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "Code Fragment",
-          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    \n    outColor = col;\n}"
-        },
-        {
-          "name": "Code Vertex",
-          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
-        },
-        {
-          "name": "Has Errors",
-          "value": false
-        }
-      ]
-    },
-    {
       "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
       "id": "esbi3zgpd",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1436.0795367605128,
           "y": 1641.9851878473578
@@ -672,13 +572,15 @@
       "id": "c3z63lhhk",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "smhuwp7li",
+        "subPatch": "5qqmxwp9g",
         "translate": {
           "x": 1600.8555536953684,
           "y": 1046.1517299465672
         },
-        "extendTitle": "..."
+        "extendTitle": "...",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "value",
@@ -697,10 +599,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "c3z63lhhk"
-      }
+      ]
     }
   ]
 }
