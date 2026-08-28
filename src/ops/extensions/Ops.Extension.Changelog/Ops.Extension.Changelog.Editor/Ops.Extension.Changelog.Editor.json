@@ -359,6 +359,24 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1787750259856
+        },
+        {
+            "message": "Fix problem with patchfield scrolls to wrong position after creating a new op",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1787844124377
+        },
+        {
+            "message": "More op focus animations when op was upgraded/downgraded/replaced",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1787844523910
+        },
+        {
+            "message": "Op search calculates a namespace similarity score and will rank overlapping namespaces higher",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1787898588410
         }
     ],
     "isReleased": true,
