@@ -64,25 +64,47 @@ export class ShaderGraphOp
         /** @type {import("./shadergraphprogram.js").ShaderNode} */
         const shaderNode = this.op.shaderNode;
 
+        if (shaderNode.result && !shaderNode.results)
+        {
+            shaderNode.results = [shaderNode.result];
+        }
+
         if (shaderNode.params)
         {
             for (let i = 0; i < shaderNode.params.length; i++)
             {
 
-                if (!shaderNode.params[i].port)
+                const param = shaderNode.params[i];
+                if (!param.port)
                 {
-                    shaderNode.params[i].port = this.op.inObject(shaderNode.params[i].name, null, "sg");
+                    param.port = this.op.inObject(param.name, null, "sg");
                 }
 
-                if (shaderNode.params[i].port)
-                    shaderNode.params[i].port.setUiAttribs({ "objType": "sg_" + shaderNode.params[i].type });
+                if (param.gen || param.type == "gen")
+                {
+                    param.gen = true;
+
+                    // 1. if linked, get result of connected port
+                    if (param.port.isLinked())
+                    {
+                        const otherParam = ShaderGraphProgram.getParamFromPort(param.port.links[0].getOtherPort(param.port));
+                        param.type = otherParam.type;
+                    }
+                    else
+                    {
+                        const t = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
+                        param.type = t;
+                    }
+
+                    // 2.get max of other inputs
+                }
+                if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
+
+                // if (shaderNode.params[i].port)
+                param.port.setUiAttribs({ "objType": "sg_" + param.type });
+
             }
 
-        }
-
-        if (shaderNode.result && !shaderNode.results)
-        {
-            shaderNode.results = [shaderNode.result];
         }
 
         for (let i = 0; i < shaderNode.results.length; i++)
@@ -91,8 +113,29 @@ export class ShaderGraphOp
             if (!shaderNode.results[i].port)
                 shaderNode.results[i].port = this.op.outObject(shaderNode.results[i].name, null, "sg");
 
-            if (shaderNode.results[i].port)
-                shaderNode.results[i].port.setUiAttribs({ "objType": "sg_" + shaderNode.results[i].type });
+            for (let i = 0; i < shaderNode.results.length; i++)
+            {
+
+                const param = shaderNode.results[i];
+                if (!param.port)
+                {
+                    param.port = this.op.inObject(param.name, null, "sg");
+                }
+
+                if (param.gen || param.type == "gen")
+                {
+                    param.gen = true;
+
+                    const t = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
+                    param.type = t;
+                }
+                if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
+
+                param.port.setUiAttribs({ "objType": "sg_" + param.type });
+
+            }
+
+            shaderNode.results[i].port.setUiAttribs({ "objType": "sg_" + shaderNode.results[i].type });
         }
         // shaderNode.result.port.setUiAttribs({ "objType": "sg_" + shaderNode.result.type });
 

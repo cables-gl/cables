@@ -9,7 +9,7 @@
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -83,8 +83,8 @@
           "x": 1180.7697182157783,
           "y": 1048.7374986068733
         },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id1",
+        "subPatch": "rl36o4wso",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -112,8 +112,8 @@
           "x": 1180.7697182157783,
           "y": 1117.6546400029883
         },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id2",
+        "subPatch": "rl36o4wso",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -141,8 +141,8 @@
           "x": 1181.1753080395895,
           "y": 1261.278880972773
         },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "id3",
+        "subPatch": "rl36o4wso",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -184,8 +184,8 @@
           "x": 1181.1753080395895,
           "y": 1316.2668471317124
         },
-        "subPatch": "if5p7vepg",
-        "extendTitle": "color id4",
+        "subPatch": "rl36o4wso",
+        "extendTitle": "color ",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -215,7 +215,7 @@
       "id": "8ff7uzmto",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "translate": {
           "x": 1180.7697182157783,
           "y": 1194.0118592051076
@@ -254,7 +254,7 @@
       "id": "z4dvt9cym",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -283,7 +283,7 @@
       "id": "ap783n2m8",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -302,7 +302,7 @@
           "x": 1133.1753080395895,
           "y": 1454.996078354458
         },
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -360,7 +360,14 @@
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_1=texCoord.xy;\n\n    vec2 rSum_2=rUv_1+vec2(0., 0.);\n\n    vec4 rVec4_3=vec4(rSum_2.x, rSum_2.y, 0, 1);\n\n    vec4 color=rVec4_3;\n\n    outColor = color;\n}"
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "pyxkgbvg4",
+              "objOut": "e5gu5w6w4"
+            }
+          ]
         }
       ]
     },
@@ -369,7 +376,7 @@
       "id": "6vqdk9q2e",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "if5p7vepg",
+        "subPatch": "rl36o4wso",
         "translate": {
           "x": 1436.0795367605128,
           "y": 1641.034304572308
@@ -388,8 +395,140 @@
               "objOut": "6vqdk9q2e"
             }
           ]
+        },
+        {
+          "name": "Code Fragment",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Code Fragment",
+              "objIn": "a82zlub7y",
+              "objOut": "6vqdk9q2e"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
         }
       ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "a82zlub7y",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 568.8615666281969,
+        "width": 616.9809282784174,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "rl36o4wso",
+        "translate": {
+          "x": 1615.4544476565504,
+          "y": 1480.2203590393194
+        },
+        "extendTitle": "Code Fragment",
+        "comment": "35: ERROR: 0:35: 'x' :  field selection requires structure, vector, or interface block on left hand side\n35: ERROR: 0:35: 'y' :  field selection requires structure, vector, or interface block on left hand side\n37: ERROR: 0:37: '=' : dimension mismatch\n37: ERROR: 0:37: '=' : cannot convert from 'highp 4-component vector of float' to 'highp float'\n39: ERROR: 0:39: '=' : dimension mismatch\n39: ERROR: 0:39: 'assign' : cannot convert from 'highp float' to 'out highp 4-component vector of float'\n",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "pyxkgbvg4",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 611.6576170420499,
+        "width": 693.1905478984729,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "rl36o4wso",
+        "translate": {
+          "x": 980.6232200915367,
+          "y": 1834.5604135185754
+        },
+        "extendTitle": "Final Code",
+        "comment": ""
+      },
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ],
+      "storage": {
+        "ref": "pyxkgbvg4"
+      }
     }
   ]
 }

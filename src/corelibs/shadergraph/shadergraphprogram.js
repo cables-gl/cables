@@ -6,14 +6,16 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 /**
  * @typedef ShaderNodeParam
  * @property {string} type
- * @property {string} name
- * @property {Port} [port]
+ * @property {string} type
+ * @property {boolean} gen
+ * @property {Port} port
  * @property {boolean} resultType - change to result type when that changes
  */
 
 /**
  * @typedef ShaderNode
  * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"} [type]
+
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -103,7 +105,7 @@ export class ShaderGraphProgram extends Events
 
         this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name).result?.type);// uiAttribs.objType);
 
-        const tt = this.lang.getMaxGenTypeFromParams(node.params);
+        const tt = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params);
 
         if (otherNode.type == "bindstruct")
         {
@@ -119,7 +121,7 @@ export class ShaderGraphProgram extends Events
 
                 this.execNode(sourcePort.op);
 
-                this.log("component", otp.name, convertParam.port.name);
+                this.log(node, "component", otp.name, convertParam.port.name);
                 paramStr += sourcePort.op.shaderNode.resultVarName + "." + otherPort.name;
             }
             else console.log("no otp");
@@ -128,7 +130,7 @@ export class ShaderGraphProgram extends Events
         if (otherNode.result)
         {
             if (doConvert)
-                paramStr += this.lang.convertTypes(this.log.bind(this), convertParam.type, otherNode.result.type, otherNode.resultVarName);
+                paramStr += this.lang.convertTypes(this.log.bind(this), convertParam.type, otherNode.result.type, otherNode.resultVarName, node);
             else
                 paramStr += otherNode.resultVarName;
 
@@ -163,7 +165,8 @@ export class ShaderGraphProgram extends Events
 
         if (node.type == "operator" || node.maxGen)
         {
-            this.setNodeResult(node, this.lang.getMaxGenTypeFromParams(node.params, op.portsOut[0]), "operator maxgen");
+
+            // this.setNodeResult(node, ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]), "operator maxgen");
         }
 
         let title = "";
@@ -209,7 +212,7 @@ export class ShaderGraphProgram extends Events
 
                 if (port.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
-                this.setNodeResultType(node, node.result.type, param);
+                // this.setNodeResultType(node, node.result.type, param);
 
                 // parameters...
                 if (port.isLinked())
@@ -220,7 +223,7 @@ export class ShaderGraphProgram extends Events
                     {
                         doConvertTypes = false;
                         if (i == 0) paramStr += node.name + "(";
-                        if (port.links.length > 1) this.log("WARNING: param should only have one connection" + port.name);
+                        if (port.links.length > 1) this.log(node, "WARNING: param should only have one connection" + port.name);
                     }
 
                     for (let j = 0; j < port.links.length; j++)
@@ -229,13 +232,20 @@ export class ShaderGraphProgram extends Events
 
                         paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
-                        if (node.result.type == "gen" && otherPort.op.shaderNode.result)
-                        {
+                        // if (node.result.type == "gen" && otherPort.op.shaderNode.result)
+                        // {
 
-                            // node.result.type = otherPort.op.shaderNode.results[0].type;
-                            node.result.type = this.getParamFromPort(node, otherPort).type; otherPort.op.shaderNode.results[0].type;
-                            // node.result.type = otherPort.op.shaderNode.results[0].type;
-                        }
+                        //     // node.result.type = otherPort.op.shaderNode.results[0].type;
+                        //     // let t = this.getParamFromPort(node, otherPort).type; otherPort.op.shaderNode.results[0].type;
+                        //     let t = this.getTypeFromInputPort(port);
+
+                        //     // if (t == "gen")
+                        //     // {
+                        //     // t = this.lang.getMaxGenTypeFromInputParams(node.params);
+                        //     // }
+                        //     node.result.type = t;
+                        //     // node.result.type = otherPort.op.shaderNode.results[0].type;
+                        // }
                         // node.result.type = otherPort.op.shaderNode.result.type;
 
                         this.addOpShaderFuncCode(otherPort.op);
@@ -289,7 +299,7 @@ export class ShaderGraphProgram extends Events
         if (callstr.trim() != "") callstr += "\n";
 
         /* minimalcore:start */
-        this.log("execnode " + node.name + " [" + node.type + "]");
+        this.log(node, "execnode  [" + node.type + "]");
         // this.log("->" + node.result.type);
 
         /* minimalcore:end */
@@ -317,10 +327,10 @@ export class ShaderGraphProgram extends Events
         return str;
     }
 
-    log(...args)
+    log(node, ...args)
     {
         if (!this.options.debug) return;
-        const str = "    // " + args.map(String).join(" ");
+        const str = "    // " + node.name + ":" + args.map(String).join(" ");
         this._callFuncStack.push(str);
     }
 
@@ -379,27 +389,81 @@ export class ShaderGraphProgram extends Events
      * @param {string} t
      * @param {string} reason
      */
-    setNodeResult(node, t, reason)
-    {
-        if (reason) this.log("set node result", reason);
-        node.result.type = t;
-    }
+    // setNodeResult(node, t, reason)
+    // {
+    //     if (reason) this.log(node, "set node result", reason);
+    //     node.result.type = t;
+    // }
 
-    setNodeResultType(node, type, param)
-    {
+    // setNodeResultType(node, type, param)
+    // {
 
-        if (param.resultType)param.type = node.result.type;
-    }
+    //     if (param.resultType)param.type = node.result.type;
+    // }
+
+    /**
+     * @param {ShaderNode} node
+     * @param {Port} [port]
+     */
+    // getTypeFromInputPort(port)
+    // {
+
+    //     console.log("gettypefrominput", port.op.name + ":" + port.name);
+    //     const node = port.op.shaderNode;
+    //     if (node.params)
+    //         for (let i = 0; i < node.params.length; i++)
+    //             if (node.params[i].port == port)
+    //             {
+    //                 if (node.params[i].type == "gen")
+    //                 {
+    //                     if (port.isLinked())
+    //                     {
+
+    //                         return this.getTypeFromOutputPort(port.links[0].getOtherPort(port));
+    //                     }
+    //                 }
+    //                 console.log("return", node.params[i].type);
+    //                 return node.params[i].type;
+    //             }
+    //     console.log("lalala", port, node);
+    // }
+
+    // getTypeFromOutputPort(port)
+    // {
+
+    //     console.log("gettypefrominput", port.op.name + ":" + port.name);
+    //     const node = port.op.shaderNode;
+    //     if (node.params)
+    //         for (let i = 0; i < node.results.length; i++)
+    //             if (node.results[i].port == port)
+    //             {
+    //                 if (node.results[i].type == "gen")
+    //                 {
+    //                     if (port.isLinked())
+    //                     {
+
+    //                         return this.getTypeFromInputPort(port.links[0].getOtherPort(port));
+    //                     }
+    //                 }
+    //                 this.log(node, "return", node.results[i].type);
+    //                 return node.results[i].type;
+    //             }
+    //     console.log("lalala", port, node);
+    // }
 
     /**
      * @param {ShaderNode} node
      * @param {Port} port
      */
-    getParamFromPort(node, port)
+    static getParamFromPort(port)
     {
+
+        /** @type {ShaderNode} */
+        const node = port.op.shaderNode;
         if (node.params)
             for (let i = 0; i < node.params.length; i++)
                 if (node.params[i].port == port) return node.params[i];
+
         if (node.results)
             for (let i = 0; i < node.results.length; i++)
                 if (node.results[i].port == port) return node.results[i];
@@ -408,4 +472,39 @@ export class ShaderGraphProgram extends Events
         console.warn("could not find param for port ", port);
         return node;
     }
+
+    /**
+     * @param {import("./shadergraphprogram").ShaderNodeParam[]} params
+     * @param {Port} [portsSetType]
+     */
+    static getMaxGenTypeFromInputParams(params, portsSetType)
+    {
+        params = params || [];
+        const types = ["float", "vec2", "vec3", "vec4"];
+        let typeIdx = 0;
+
+        for (let j = 0; j < params.length; j++)
+        {
+            for (let i = 0; i < params[j].port.links.length; i++)
+            {
+                const otherport = params[j].port.links[i].getOtherPort(params[j].port);
+                const otherop = otherport.op;
+                const r = otherop.sgOp.getResult(otherport.name);
+                const type = r.type;
+                // console.log("type", type);
+                const t = types.indexOf(params[j].type);
+                typeIdx = Math.max(typeIdx, t);
+            }
+        }
+
+        const t = types[typeIdx];
+        // console.log("getmaxgentype", params, portsSetType, t);
+
+        if (portsSetType)
+        //     for (let i = 0; i < portsSetType.length; i++)
+            portsSetType.op.shaderNode.result.type = t;
+
+        return t;
+    }
+
 }

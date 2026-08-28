@@ -8,7 +8,7 @@ export class Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "float";
 
-    convertTypes(log, typeTo, typeFrom, paramStr)
+    convertTypes(log, typeTo, typeFrom, paramStr, node)
     {
         throw new Error("Method not implemented.");
         return "";
@@ -58,40 +58,6 @@ export class Lang
         if (type == "sampler") return value;
 
         return "/* no default: " + type + "*/";
-    }
-
-    /**
-     * @param {import("./shadergraphprogram").ShaderNodeParam[]} params
-     * @param {Port} [portsSetType]
-     */
-    getMaxGenTypeFromParams(params, portsSetType)
-    {
-        params = params || [];
-        const types = ["float", "vec2", "vec3", "vec4"];
-        let typeIdx = 0;
-
-        for (let j = 0; j < params.length; j++)
-        {
-            for (let i = 0; i < params[j].port.links.length; i++)
-            {
-                // const otherport = params[j].port.links[i].getOtherPort(params[j].port);
-                // const otherop = otherport.op;
-                // const r = otherop.sgOp.getResult(otherport.name);
-                // const type = r.type;
-                // console.log("type", type);
-                const t = types.indexOf(params[j].type);
-                typeIdx = Math.max(typeIdx, t);
-            }
-        }
-
-        const t = types[typeIdx];
-        console.log("getmaxgentype", params, portsSetType, t);
-
-        if (portsSetType)
-        //     for (let i = 0; i < portsSetType.length; i++)
-            portsSetType.op.shaderNode.result.type = t;
-
-        return t;
     }
 
     /**
