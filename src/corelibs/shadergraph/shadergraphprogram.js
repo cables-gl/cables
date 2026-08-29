@@ -212,6 +212,7 @@ export class ShaderGraphProgram extends Events
         const varDef = this.lang.getVarDef(node);
 
         if (node.resultVarName) callstr += this.lang.getResultDef(node);
+
         else if (varDef)callstr += varDef;
         else callstr += ("/* no var?? */");
 
@@ -230,7 +231,7 @@ export class ShaderGraphProgram extends Events
         const numObjectPorts = this.countObjectInputPorts(op);
         let count = 0;
 
-        if (node.params)
+        if (node.params && node.type != "value")
         {
             for (let i = 0; i < node.params.length; i++)
             {

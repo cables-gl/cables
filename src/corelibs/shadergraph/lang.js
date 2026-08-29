@@ -83,15 +83,19 @@ export class Lang
         return arr.join(",");
     }
 
+    /**
+     * @param {string[]} arr
+     */
     vecStr(arr)
     {
         let str = "vec" + arr.length + "(";
         for (let i = 0; i < arr.length; i++)
         {
-            str += this.floatStr(arr[i]);
+            str += this.floatStr(arr[i] || 0);
             if (i != arr.length - 1)str += ",";
         }
         str += ")";
+        console.log("vecstrrrrrrrrr", str, arr);
         return str;
     }
 }

@@ -48,14 +48,17 @@ export class ShaderGraphOp
     getResult(name)
     {
         // console.log("getresult ", name);
+        let parmnames = "";
         const shaderNode = this.op.shaderNode;
         for (let i = 0; i < shaderNode.results.length; i++)
         {
+            parmnames += shaderNode.results[i].name;
             if (shaderNode.results[i].name == name) return shaderNode.results[i];
         }
 
-        console.error("getresult " + name + " not found?", shaderNode);
-        // if (shaderNode.result) return shaderNode.result; // fallback old/deprecated way
+        console.error("getresult [" + name + "] not found?", parmnames, shaderNode);
+
+        if (shaderNode.results[0]) return shaderNode.results[0]; // fallback old/deprecated way
 
     }
 

@@ -68,13 +68,15 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
+                "type": 0,
                 "name": "x",
+                "subType": "number",
                 "objType": "sg_float"
             },
             {
-                "type": 2,
+                "type": 0,
                 "name": "y",
+                "subType": "number",
                 "objType": "sg_float"
             }
         ],
