@@ -12,7 +12,13 @@
         }
     ],
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
         "portsOut": [
             {
                 "type": 1,

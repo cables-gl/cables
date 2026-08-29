@@ -1,4 +1,5 @@
 const
+    active = op.inBool("Active", true),
     next = op.outTrigger("next"),
     outSupported = op.outBoolNum("Supported"),
     outEle = op.outObject("Canvas", null, "element");
@@ -27,6 +28,7 @@ let frames = 0;
 /* minimalcore:end */
 
 let errorDiv = null;
+active.onChange = start;
 
 function showError(msg)
 {
@@ -41,8 +43,11 @@ function showError(msg)
     outSupported.set(false);
 }
 
-CABLES.idleCallback(() =>
+CABLES.idleCallback(start);
+
+function start()
 {
+    if (!active.get()) return;
     if (!navigator.gpu)
     {
         showError("WebGPU is not supported in this browser / make sure of HTTPS");
@@ -84,7 +89,7 @@ CABLES.idleCallback(() =>
                         });
             });
 
-});
+}
 
 function setSize(width, height, mul = devicePixelRatio)
 {

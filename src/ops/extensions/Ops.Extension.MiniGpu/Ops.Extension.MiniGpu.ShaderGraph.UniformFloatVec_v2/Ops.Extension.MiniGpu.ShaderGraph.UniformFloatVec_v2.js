@@ -97,6 +97,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "float", "port": outValue },
+        "results": [{ "type": "float", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
