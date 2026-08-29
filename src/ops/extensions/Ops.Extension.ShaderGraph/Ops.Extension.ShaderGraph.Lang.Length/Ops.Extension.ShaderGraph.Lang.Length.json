@@ -45,7 +45,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number"
+                "name": "number",
+                "objType": "sg_vec2"
             }
         ],
         "portsOut": [

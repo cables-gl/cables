@@ -58,7 +58,7 @@
             {
                 "type": 2,
                 "name": "number",
-                "objType": "sg_gen"
+                "objType": "sg_vec2"
             }
         ],
         "portsOut": [

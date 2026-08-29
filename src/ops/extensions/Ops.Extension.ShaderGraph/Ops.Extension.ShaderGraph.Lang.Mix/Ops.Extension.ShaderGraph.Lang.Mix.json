@@ -33,22 +33,25 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "value 0"
+                "name": "value 0",
+                "objType": "sg_vec4"
             },
             {
                 "type": 2,
-                "name": "value 1"
+                "name": "value 1",
+                "objType": "sg_vec4"
             },
             {
                 "type": 2,
-                "name": "fade"
+                "name": "fade",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             }
         ]
     },

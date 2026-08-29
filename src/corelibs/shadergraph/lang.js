@@ -95,7 +95,7 @@ export class Lang
             if (i != arr.length - 1)str += ",";
         }
         str += ")";
-        console.log("vecstrrrrrrrrr", str, arr);
+        // console.log("vecstrrrrrrrrr", str, arr);
         return str;
     }
 }

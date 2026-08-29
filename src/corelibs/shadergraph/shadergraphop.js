@@ -47,7 +47,6 @@ export class ShaderGraphOp
      */
     getResult(name)
     {
-        // console.log("getresult ", name);
         let parmnames = "";
         const shaderNode = this.op.shaderNode;
         for (let i = 0; i < shaderNode.results.length; i++)
@@ -55,8 +54,6 @@ export class ShaderGraphOp
             parmnames += shaderNode.results[i].name;
             if (shaderNode.results[i].name == name) return shaderNode.results[i];
         }
-
-        console.error("getresult [" + name + "] not found?", parmnames, shaderNode);
 
         if (shaderNode.results[0]) return shaderNode.results[0]; // fallback old/deprecated way
 
@@ -70,7 +67,7 @@ export class ShaderGraphOp
 
         if (shaderNode.result && !shaderNode.results)
         {
-            console.error("PARAM HAS no resultS", this.op.name);
+            console.warn("PARAM HAS no resultS", this.op.name);
             shaderNode.results = [shaderNode.result];
             delete shaderNode.result;
 
@@ -98,13 +95,13 @@ export class ShaderGraphOp
                     // else
                     {
                         const t = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
-                        console.log("param maxgen", param.port.op.name, param.port.name, t);
+                        // console.log("param maxgen", param.port.op.name, param.port.name, t);
                         param.type = t;
                     }
 
                     // 2.get max of other inputs
                 }
-                if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
+                // if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
 
                 // if (shaderNode.params[i].port)
                 param.port.setUiAttribs({ "objType": "sg_" + param.type });

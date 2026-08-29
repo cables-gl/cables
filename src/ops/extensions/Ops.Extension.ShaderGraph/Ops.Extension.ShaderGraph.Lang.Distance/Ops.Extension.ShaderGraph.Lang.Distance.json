@@ -52,12 +52,12 @@
             {
                 "type": 2,
                 "name": "a",
-                "objType": "sg_gen"
+                "objType": "sg_float"
             },
             {
                 "type": 2,
                 "name": "b",
-                "objType": "sg_gen"
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

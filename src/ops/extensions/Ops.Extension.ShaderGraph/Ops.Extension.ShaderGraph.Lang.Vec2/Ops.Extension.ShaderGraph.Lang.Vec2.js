@@ -4,9 +4,9 @@ new CABLES.ShaderGraphOp(this,
         "name": "vec2",
         "convert": false,
         "params": [
-            { "type": "float", "port": op.inObject("x") },
-            { "type": "float", "port": op.inObject("y") }
+            { "type": "float", "name": "x" },
+            { "type": "float", "name": "y" }
         ],
-        "result": { "type": "vec2", "port": op.outObject("result") }
+        "results": [{ "type": "vec2", "name": "result" }]
 
     });

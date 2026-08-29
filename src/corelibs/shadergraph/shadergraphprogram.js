@@ -526,19 +526,19 @@ export class ShaderGraphProgram extends Events
                 if (r)
                 {
                     const type = r.type;
-                    console.log("type", type);
+                    // console.log("type", type);
                     const t = types.indexOf(r.type);
 
-                    console.log("type", t);
+                    // console.log("type", t);
                     typeIdx = Math.max(typeIdx, t);
-                    console.log("type", typeIdx);
+                    // console.log("type", typeIdx);
                 }
             }
 
         }
 
         const t = types[typeIdx];
-        console.log("getmaxgentype", t, params.length);
+        // console.log("getmaxgentype", t, params.length);
 
         if (portsSetType)
         //     for (let i = 0; i < portsSetType.length; i++)
