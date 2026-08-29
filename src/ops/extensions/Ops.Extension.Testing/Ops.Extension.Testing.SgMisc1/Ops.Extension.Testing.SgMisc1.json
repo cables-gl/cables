@@ -1,0 +1,33 @@
+{
+    "id": "3f214e15-46a0-4ce4-81e8-437631410546",
+    "created": 1788012731763,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788012731775
+        },
+        {
+            "message": "Patch.PaE7dAt.SubPatch0 renamed to Ops.Extension.Testing.SgMisc1",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788012752027
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "2ob7oeqi9",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

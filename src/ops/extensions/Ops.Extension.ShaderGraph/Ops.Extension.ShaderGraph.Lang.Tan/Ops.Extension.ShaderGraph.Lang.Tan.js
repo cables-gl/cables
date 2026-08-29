@@ -1,7 +1,7 @@
 new CABLES.ShaderGraphOp(this,
     {
         "type": "function",
-        "name": "sin",
+        "name": "tan",
         "params": [
             { "type": "gen", "name": "number" }
         ],

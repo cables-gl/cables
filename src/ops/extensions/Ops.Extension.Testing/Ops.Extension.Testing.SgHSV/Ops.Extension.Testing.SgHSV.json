@@ -1,0 +1,33 @@
+{
+    "id": "b0f68969-a209-49a7-9398-6d719997bf45",
+    "created": 1788013649574,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788013649588
+        },
+        {
+            "message": "Patch.PaE7dAt.SubPatch0 renamed to Ops.Extension.Testing.SgHSV",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788013668889
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "n4tyellip",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

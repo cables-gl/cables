@@ -1,0 +1,33 @@
+{
+    "id": "a264824e-e551-4b20-97d6-1112e4f1c38e",
+    "created": 1788013116373,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788013116384
+        },
+        {
+            "message": "Patch.PaE7dAt.SubPatch0 renamed to Ops.Extension.Testing.SgAtan",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788013132717
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "4k6o9el7e",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

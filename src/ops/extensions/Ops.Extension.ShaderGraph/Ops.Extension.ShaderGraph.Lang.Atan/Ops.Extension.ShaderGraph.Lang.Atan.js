@@ -1,9 +1,10 @@
 new CABLES.ShaderGraphOp(this,
     {
         "type": "function",
-        "name": "sin",
+        "name": "atan",
         "params": [
-            { "type": "gen", "name": "number" }
+            { "type": "gen", "name": "y" },
+            { "type": "gen", "name": "x" }
         ],
         "results": [{ "type": "gen", "name": "result" }]
 

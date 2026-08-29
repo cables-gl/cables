@@ -42,7 +42,6 @@ inExec.onTriggered = () =>
         updateModules();
 
         shader.compile();
-        console.log("text", shader);
         reInit = false;
     }
 

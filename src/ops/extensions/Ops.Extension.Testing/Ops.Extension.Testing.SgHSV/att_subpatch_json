@@ -1,0 +1,497 @@
+{
+  "ops": [
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "6hgwa2b6y",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 66.51875776833953,
+          "y": 1327.0195748118992
+        },
+        "subPatch": "vu7wjhcbd",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "vu45y3bbu",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 193.66456604819058,
+          "y": 1012.2738702625003
+        },
+        "subPatch": "vu7wjhcbd",
+        "extendTitle": "FRAGMENT",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "y67xbe8ok",
+              "objOut": "vu45y3bbu"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "value": "\nIN vec2 texCoord;\nvec4 hsb2rgb( float h,float s,float v ){\nvec3 c=vec3(h,s,v);\n    vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),\n                             6.0)-3.0)-1.0,\n                     0.0,\n                     1.0 );\n    rgb = rgb*rgb*(3.0-2.0*rgb);\n    return vec4(c.z * mix( vec3(1.0), rgb, c.y),1.);\n}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_239=texCoord.xy;\n\n    \n    vec4 rHSV2RGB_242=hsb2rgb(rUv_239.x, rUv_239.y, unif15443.x/* conv param [float: value]vec4 value */);\n\n    vec4 color=rHSV2RGB_242/* conv param [vec4: color]vec4 result */;\n\n    outColor = color;\n}"
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "y67xbe8ok",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 66.51875776833953,
+          "y": 1244.3445284229508
+        },
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "6hgwa2b6y",
+              "objOut": "y67xbe8ok"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Code Fragment",
+              "objIn": "txlhaj5o6",
+              "objOut": "y67xbe8ok"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "78pvc1yey",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 217.66456604819058,
+          "y": 952.6692987243407
+        },
+        "extendTitle": "color ",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "vu45y3bbu",
+              "objOut": "78pvc1yey"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
+      "id": "bhas4jikj",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 262.2551047757867,
+          "y": 537.38265716368
+        },
+        "extendTitle": "...",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "vec",
+              "portOut": "result",
+              "objIn": "3jp556mkf",
+              "objOut": "bhas4jikj"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1b9bf0fd-112a-4308-a01b-8eed4d5f012d",
+      "id": "6fuq6lst4",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 348,
+          "y": 760
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "e9e78e5c-7877-4dd7-b03f-fb57d80d5602",
+      "id": "3jp556mkf",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 262.2551047757867,
+          "y": 603.0914985143639
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "x",
+          "links": [
+            {
+              "portIn": "hue",
+              "portOut": "x",
+              "objIn": "cp5mrg169",
+              "objOut": "3jp556mkf"
+            }
+          ]
+        },
+        {
+          "name": "y",
+          "links": [
+            {
+              "portIn": "saturation",
+              "portOut": "y",
+              "objIn": "cp5mrg169",
+              "objOut": "3jp556mkf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "txlhaj5o6",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 653.3274661690938,
+        "width": 650.4720197079057,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 484.6039777915539,
+          "y": 813.5752432410019
+        },
+        "extendTitle": "Code Fragment",
+        "comment": "41: ERROR: 0:41: 'rand' : no matching overloaded function found\n41: ERROR: 0:41: '=' : dimension mismatch\n41: ERROR: 0:41: '=' : cannot convert from 'const mediump float' to 'highp 4-component vector of float'\n",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "778ba4a2-0106-405e-9788-2e1cb9db3016",
+      "id": "cp5mrg169",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 238.25510477578672,
+          "y": 731.3551157757445
+        },
+        "extendTitle": "...",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "78pvc1yey",
+              "objOut": "cp5mrg169"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
+      "id": "tol2wr7r6",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "unif15443 ",
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 456,
+          "y": 640
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Type index",
+          "value": 0
+        },
+        {
+          "name": "Type",
+          "value": "float"
+        },
+        {
+          "name": "X",
+          "value": 1
+        },
+        {
+          "name": "Y",
+          "value": 0
+        },
+        {
+          "name": "Z",
+          "value": 0
+        },
+        {
+          "name": "W",
+          "value": 1
+        },
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "value",
+              "portOut": "value",
+              "objIn": "cp5mrg169",
+              "objOut": "tol2wr7r6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "4z35hthgs",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 66.51875776833953,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_n4tyellip",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_n4tyellip",
+              "objIn": "y67xbe8ok",
+              "objOut": "4z35hthgs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "i6zh8v48o",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vu7wjhcbd",
+        "translate": {
+          "x": 66.51875776833953,
+          "y": 1546.9027094100957
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}

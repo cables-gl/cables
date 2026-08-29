@@ -1,0 +1,1142 @@
+{
+  "ops": [
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "yzhibsq25",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1436.0795367605128,
+          "y": 1740.5507695625952
+        },
+        "subPatch": "to45p59jd",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "hw260ajh5",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "to45p59jd",
+        "translate": {
+          "x": 1403.3312162725995,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_afl5yq365",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_afl5yq365",
+              "objIn": "b4qjlumnd",
+              "objOut": "hw260ajh5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "wjyo6viem",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "to45p59jd",
+        "translate": {
+          "x": 1403.3312162725995,
+          "y": 2436.0863568534965
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "icbm25kbl",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1540.8555536953684,
+          "y": 1403.5450858327513
+        },
+        "subPatch": "to45p59jd",
+        "blueprintSubpatch2": true,
+        "extendTitle": "FRAGMENT"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n{{MAIN}}\noutColor = color;\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "b4qjlumnd",
+              "objOut": "icbm25kbl"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "esow6ilux",
+              "objOut": "icbm25kbl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "47i6aqxjh",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 937.4281761363341,
+        "width": 709.4287243767142,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "to45p59jd",
+        "translate": {
+          "x": 2276.8408800696357,
+          "y": 1194.407615490986
+        },
+        "extendTitle": "Code Fragment",
+        "blueprintSubpatch2": true,
+        "comment": "36: ERROR: 0:36: 'rSampleTexture_60' : syntax error\n"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": 1
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "esow6ilux",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 395.3064394616906,
+        "width": 659.9764848552395,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "to45p59jd",
+        "translate": {
+          "x": 2091.136041834753,
+          "y": 763.4759729619025
+        },
+        "extendTitle": "Final Code",
+        "comment": "",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "b4qjlumnd",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "to45p59jd",
+        "translate": {
+          "x": 1436.0795367605128,
+          "y": 1641.9851878473578
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "yzhibsq25",
+              "objOut": "b4qjlumnd"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n#define HAS_TEXTURES\n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Code Fragment",
+              "objIn": "47i6aqxjh",
+              "objOut": "b4qjlumnd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "65r76e5f3",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 405.4501927627682,
+          "y": 794.2675481571916
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "color "
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "icbm25kbl",
+              "objOut": "65r76e5f3"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "65r76e5f3"
+      }
+    },
+    {
+      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
+      "id": "s36d3ylhx",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 535.5949038781854,
+          "y": 101.49393332050988
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "6tz6ieyh4",
+              "objOut": "s36d3ylhx"
+            },
+            {
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "o4dwmzbzo",
+              "objOut": "s36d3ylhx"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "s36d3ylhx"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "o9a9kao1n",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 405.4501927627682,
+          "y": 152.51959760620827
+        },
+        "loading": false,
+        "subPatch": "to45p59jd",
+        "extendTitle": "beach"
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/images/beach.jpg",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "Texture In",
+              "portOut": "Texture",
+              "objIn": "jnc0fhhfv",
+              "objOut": "o9a9kao1n"
+            },
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "gu9pjhbt4",
+              "objOut": "o9a9kao1n"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 1024
+        },
+        {
+          "name": "Height",
+          "value": 1024
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "o9a9kao1n"
+      }
+    },
+    {
+      "opId": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+      "id": "jnc0fhhfv",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 150,
+        "resizable": true,
+        "translate": {
+          "x": 153.92798690992868,
+          "y": 287.00189893586236
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "Texture"
+      },
+      "portsIn": [
+        {
+          "name": "Show Info",
+          "value": 0
+        },
+        {
+          "name": "Visualize outside 0-1 index",
+          "value": 1
+        },
+        {
+          "name": "Visualize outside 0-1",
+          "value": "Anim"
+        },
+        {
+          "name": "Alpha index",
+          "value": 0
+        },
+        {
+          "name": "Alpha",
+          "value": "A"
+        },
+        {
+          "name": "Convert RGBE",
+          "value": 0
+        },
+        {
+          "name": "Channels index",
+          "value": 0
+        },
+        {
+          "name": "Channels",
+          "value": "RGB"
+        },
+        {
+          "name": "Type index",
+          "value": 0
+        },
+        {
+          "name": "Type",
+          "value": "Automatic"
+        },
+        {
+          "name": "Show Color",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": 0.5
+        },
+        {
+          "name": "Y",
+          "value": 0.5
+        },
+        {
+          "name": "Mip Level",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Info",
+          "value": ""
+        }
+      ],
+      "storage": {
+        "ref": "jnc0fhhfv"
+      }
+    },
+    {
+      "opId": "3ba958d8-b290-4142-baef-6895aaf216da",
+      "id": "wce5yedbz",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 792.9694634379097,
+          "y": 84.57862098374414
+        },
+        "loading": false,
+        "subPatch": "to45p59jd",
+        "extendTitle": "bluenoise_ldr_rgb1_2"
+      },
+      "portsIn": [
+        {
+          "name": "File",
+          "value": "/assets/library/images/bluenoise_ldr_rgb1_2.png",
+          "display": "file"
+        },
+        {
+          "name": "Filter index",
+          "value": 2
+        },
+        {
+          "name": "Filter",
+          "value": "mipmap"
+        },
+        {
+          "name": "Wrap index",
+          "value": 0
+        },
+        {
+          "name": "Wrap",
+          "value": "repeat"
+        },
+        {
+          "name": "Anisotropic index",
+          "value": 0
+        },
+        {
+          "name": "Anisotropic",
+          "value": "0"
+        },
+        {
+          "name": "Data Format index",
+          "value": 3
+        },
+        {
+          "name": "Data Format",
+          "value": "RGBA"
+        },
+        {
+          "name": "Flip",
+          "value": 0
+        },
+        {
+          "name": "Pre Multiplied Alpha",
+          "value": 0
+        },
+        {
+          "name": "Active",
+          "value": 1
+        },
+        {
+          "name": "Add Cachebuster",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Texture",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "Texture",
+              "objIn": "22nlkf4zo",
+              "objOut": "wce5yedbz"
+            }
+          ]
+        },
+        {
+          "name": "Width",
+          "value": 128
+        },
+        {
+          "name": "Height",
+          "value": 128
+        },
+        {
+          "name": "Aspect Ratio",
+          "value": 1
+        },
+        {
+          "name": "Loaded",
+          "value": 1
+        },
+        {
+          "name": "Loading",
+          "value": 0
+        }
+      ],
+      "storage": {
+        "ref": "wce5yedbz"
+      }
+    },
+    {
+      "opId": "79cfee36-a780-4aeb-b121-834f8e79fe2f",
+      "id": "1fbx7v0dv",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 535.5949038781854,
+          "y": 608.068722673107
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "coord",
+              "portOut": "result",
+              "objIn": "mrkex3ty6",
+              "objOut": "1fbx7v0dv"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "1fbx7v0dv"
+      }
+    },
+    {
+      "opId": "a3f98988-054c-4db0-8390-fab31b6cfd0e",
+      "id": "umpjtzeln",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 792.9694634379097,
+          "y": 545.8855843171693
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "result",
+              "objIn": "1fbx7v0dv",
+              "objOut": "umpjtzeln"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "umpjtzeln"
+      }
+    },
+    {
+      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
+      "id": "h0t48fm1n",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "unif3213 ",
+        "translate": {
+          "x": 959.6243875359069,
+          "y": 504.7089086338431
+        },
+        "subPatch": "to45p59jd"
+      },
+      "portsIn": [
+        {
+          "name": "Type index",
+          "value": 1
+        },
+        {
+          "name": "Type",
+          "value": "vec2"
+        },
+        {
+          "name": "X",
+          "value": -0.09
+        },
+        {
+          "name": "Y",
+          "value": -0.11
+        },
+        {
+          "name": "Z",
+          "value": 0
+        },
+        {
+          "name": "W",
+          "value": 1
+        },
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "value",
+              "objIn": "umpjtzeln",
+              "objOut": "h0t48fm1n"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "h0t48fm1n"
+      }
+    },
+    {
+      "opId": "79cfee36-a780-4aeb-b121-834f8e79fe2f",
+      "id": "6tz6ieyh4",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 535.5949038781854,
+          "y": 496.41342073189264
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "1fbx7v0dv",
+              "objOut": "6tz6ieyh4"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "6tz6ieyh4"
+      }
+    },
+    {
+      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
+      "id": "toplhkq0g",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "unif3225 ",
+        "translate": {
+          "x": 547.5949038781854,
+          "y": 426.11904263643464
+        },
+        "subPatch": "to45p59jd"
+      },
+      "portsIn": [
+        {
+          "name": "Type index",
+          "value": 0
+        },
+        {
+          "name": "Type",
+          "value": "float"
+        },
+        {
+          "name": "X",
+          "value": 0.7
+        },
+        {
+          "name": "Y",
+          "value": 0
+        },
+        {
+          "name": "Z",
+          "value": 0
+        },
+        {
+          "name": "W",
+          "value": 1
+        },
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "value",
+              "objIn": "6tz6ieyh4",
+              "objOut": "toplhkq0g"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "toplhkq0g"
+      }
+    },
+    {
+      "opId": "ce088af3-b0c4-4c88-a9c3-69c3aca9d0da",
+      "id": "mrkex3ty6",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 405.4501927627682,
+          "y": 681.5054398225852
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "65r76e5f3",
+              "objOut": "mrkex3ty6"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "mrkex3ty6"
+      }
+    },
+    {
+      "opId": "ce088af3-b0c4-4c88-a9c3-69c3aca9d0da",
+      "id": "00yau0o4b",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 792.9694634379097,
+          "y": 470.09361333070547
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "umpjtzeln",
+              "objOut": "00yau0o4b"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "00yau0o4b"
+      }
+    },
+    {
+      "opId": "0c8f1ce6-68b1-4940-b3ba-03e73cce7366",
+      "id": "gu9pjhbt4",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "theTexture ",
+        "translate": {
+          "x": 405.4501927627682,
+          "y": 287.2885538672087
+        },
+        "subPatch": "to45p59jd"
+      },
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": "theTexture"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "value",
+              "objIn": "mrkex3ty6",
+              "objOut": "gu9pjhbt4"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "gu9pjhbt4"
+      }
+    },
+    {
+      "opId": "0c8f1ce6-68b1-4940-b3ba-03e73cce7366",
+      "id": "22nlkf4zo",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "unif3244 ",
+        "translate": {
+          "x": 792.9694634379097,
+          "y": 215.94658799946458
+        },
+        "subPatch": "to45p59jd"
+      },
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "texture",
+              "portOut": "value",
+              "objIn": "00yau0o4b",
+              "objOut": "22nlkf4zo"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "22nlkf4zo"
+      }
+    },
+    {
+      "opId": "a3f98988-054c-4db0-8390-fab31b6cfd0e",
+      "id": "o4dwmzbzo",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 701.7800709189214,
+          "y": 344.77824827518185
+        },
+        "subPatch": "to45p59jd",
+        "extendTitle": "..."
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "coord",
+              "portOut": "result",
+              "objIn": "00yau0o4b",
+              "objOut": "o4dwmzbzo"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "o4dwmzbzo"
+      }
+    },
+    {
+      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
+      "id": "kct3ybrgl",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "unif3256 ",
+        "translate": {
+          "x": 713.7800709189214,
+          "y": 264.0062955717795
+        },
+        "subPatch": "to45p59jd"
+      },
+      "portsIn": [
+        {
+          "name": "Type index",
+          "value": 0
+        },
+        {
+          "name": "Type",
+          "value": "float"
+        },
+        {
+          "name": "X",
+          "value": 0.68
+        },
+        {
+          "name": "Y",
+          "value": 0
+        },
+        {
+          "name": "Z",
+          "value": 0
+        },
+        {
+          "name": "W",
+          "value": 1
+        },
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "value",
+              "objIn": "o4dwmzbzo",
+              "objOut": "kct3ybrgl"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "kct3ybrgl"
+      }
+    }
+  ]
+}

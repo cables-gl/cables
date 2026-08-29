@@ -3,8 +3,8 @@ new CABLES.ShaderGraphOp(this,
         "type": "function",
         "name": "round",
         "params": [
-            { "type": "f32", "port": op.inObject("number") }
+            { "type": "float", "name": "number" }
         ],
-        "result": { "type": "f32", "port": op.outObject("result") }
+        "results": [{ "type": "float", "name": "result" }]
 
     });

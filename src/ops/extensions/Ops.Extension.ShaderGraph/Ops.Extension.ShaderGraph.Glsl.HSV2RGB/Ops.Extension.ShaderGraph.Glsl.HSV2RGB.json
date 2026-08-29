@@ -1,6 +1,6 @@
 {
-    "id": "6770482b-8c66-42cc-a100-2c226cd904c1",
-    "created": 1786434225533,
+    "id": "778ba4a2-0106-405e-9788-2e1cb9db3016",
+    "created": 1788013338800,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -20,26 +20,48 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786434225533
+            "date": 1786433102805
         },
         {
-            "message": "Extension.MiniGpu.Sg.Sin renamed to Ops.Extension.ShaderGraph.Sin",
+            "message": "Extension.MiniGpu.Sg.Main renamed to Ops.Extension.MiniGpu.Sg.Random",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539098140
+            "date": 1786441277694
         },
         {
-            "message": "Extension.ShaderGraph.Sin renamed to Ops.Extension.ShaderGraph.Lang.Sin",
+            "message": "Extension.MiniGpu.Sg.Random renamed to Ops.Extension.ShaderGraph.Wgsl.Random",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539274029
+            "date": 1786539331292
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786784199212
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788013338801
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "number",
+                "name": "hue",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "saturation",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "value",
                 "objType": "sg_float"
             }
         ],
@@ -47,7 +69,7 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             }
         ]
     },
