@@ -104,7 +104,7 @@ export class ShaderGraphOp
                 // if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
 
                 // if (shaderNode.params[i].port)
-                param.port.setUiAttribs({ "objType": "sg_" + param.type });
+                param.port.setUiAttribs({ "objType": "sg_" + param.type, "display": "sg" });
 
             }
 
