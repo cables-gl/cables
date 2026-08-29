@@ -3,8 +3,8 @@ new CABLES.ShaderGraphOp(this,
         "type": "function",
         "name": "length",
         "params": [
-            { "type": "gen", "port": op.inObject("number") }
+            { "type": "gen", "name": "number" }
         ],
-        "result": { "type": "float", "port": op.outObject("result") }
+        "results": [{ "type": "float", "name": "result" }]
 
     });

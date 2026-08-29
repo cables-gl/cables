@@ -57,11 +57,13 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number 1"
+                "name": "number 1",
+                "objType": "sg_float"
             },
             {
                 "type": 2,
-                "name": "number 2"
+                "name": "number 2",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

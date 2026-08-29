@@ -9,7 +9,7 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "tex", "port": tex },
             { "type": "sampler", "port": sampler },
-            { "type": "vec2", "port": op.inObject("coord") }
+            { "type": "vec2", "name": "coord" }
         ],
         "result": { "type": "vec4", "port": op.outObject("result") }
 

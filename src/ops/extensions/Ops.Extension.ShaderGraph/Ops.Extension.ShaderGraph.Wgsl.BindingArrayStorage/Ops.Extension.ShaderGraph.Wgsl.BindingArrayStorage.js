@@ -191,6 +191,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "array", "port": outStorage },
+        "results": [{ "type": "array", "port": outStorage }],
         "resultVarName": inName.get() || defaultName
     });
