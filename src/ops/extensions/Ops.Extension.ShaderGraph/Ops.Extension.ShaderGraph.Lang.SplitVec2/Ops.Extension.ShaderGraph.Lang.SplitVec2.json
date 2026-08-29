@@ -23,16 +23,18 @@
                 "type": 2,
                 "name": "vec",
                 "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "y",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "x"
-            },
-            {
-                "type": 2,
-                "name": "y"
+                "name": "x",
+                "objType": "sg_float"
             }
         ]
     },

@@ -68,7 +68,7 @@ function update(shader, bindings)
         op.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
 
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.result.type = inType.get();
+        op.shaderNode.results[0].type = inType.get();
 
         op.updateGraph();
     }

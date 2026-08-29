@@ -16,7 +16,7 @@
             {
                 "type": 2,
                 "name": "value",
-                "objType": "sg_gen"
+                "objType": "sg_vec4"
             },
             {
                 "type": 5,

@@ -8,6 +8,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "name": "z" },
             { "type": "float", "name": "w" }
         ],
-        "result": { "type": "vec4", "name": "result" }
+        "results": [{ "type": "vec4", "name": "result" }]
 
     });

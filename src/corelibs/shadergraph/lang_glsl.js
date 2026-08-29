@@ -12,18 +12,18 @@ export class LangGlsl extends Lang
     {
         if (node.type == "existingvar") return "";
 
-        if (name && !node.result?.type) return name + "=";
+        if (name && !node.results[0].type) return name + "=";
 
-        if (node.result.type == "f32")node.result.type = "float";
+        // if (node.result.type == "f32")node.result.type = "float";
         // if (node.result.type == "gen")node.result.type = "float";
 
-        let str = node.result.type + " " + name + "=";
+        let str = node.results[0].type + " " + name + "=";
         // if (node.type == "function") str += "<" + node.result.type + ">";
 
         if (node.type == "value")
         {
 
-            if (node.result.type == "float")
+            if (node.results[0].type == "float")
             {
                 str += this.floatStr(node.value);
 
@@ -43,7 +43,7 @@ export class LangGlsl extends Lang
     convertTypes(log, typeTo, typeFrom, paramStr, node)
     {
         if (typeFrom == typeTo) return paramStr;
-        if (typeTo == "gen") return paramStr;
+        // if (typeTo == "gen") return paramStr;
 
         // if (typeFrom == "texture" && typeTo == "vec3") return paramStr + ".xyz";
 

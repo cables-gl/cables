@@ -58,7 +58,8 @@
             {
                 "type": 0,
                 "name": "value",
-                "subType": "number"
+                "subType": "number",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

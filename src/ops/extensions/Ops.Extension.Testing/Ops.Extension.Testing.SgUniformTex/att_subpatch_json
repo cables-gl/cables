@@ -9,7 +9,7 @@
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -79,7 +79,7 @@
       "id": "gwf9uanjr",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -108,7 +108,7 @@
       "id": "taqdwwuds",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -127,7 +127,7 @@
           "x": 1540.8555536953684,
           "y": 1403.5450858327513
         },
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -206,7 +206,7 @@
         "width": 709.4287243767142,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 2276.8408800696357,
           "y": 1194.407615490986
@@ -223,7 +223,7 @@
         },
         {
           "name": "Line Numbers",
-          "value": true
+          "value": 1
         },
         {
           "name": "Whitespace",
@@ -264,7 +264,7 @@
           "x": 1544.6780762093551,
           "y": 1146.8939849386804
         },
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "extendTitle": "color ",
         "blueprintSubpatch2": true
       },
@@ -292,7 +292,7 @@
         "width": 659.9764848552395,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 2091.136041834753,
           "y": 763.4759729619025
@@ -346,7 +346,7 @@
       "id": "fighibx8z",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1436.0795367605128,
           "y": 1641.9851878473578
@@ -389,7 +389,7 @@
       "attribs": {},
       "uiAttribs": {
         "extendTitle": "theTexture ",
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1487.5222058528395,
           "y": 740.2866549313463
@@ -422,7 +422,7 @@
       "id": "2dgzoeoj2",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1608.7035243655625,
           "y": 829.9995561120941
@@ -450,7 +450,7 @@
       "id": "9kpevzx0l",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1487.5222058528395,
           "y": 605.5176986703459
@@ -560,7 +560,7 @@
       "id": "2wewkvpso",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1564.8555536953684,
           "y": 938.9262178307338
@@ -574,7 +574,7 @@
           "name": "result",
           "links": [
             {
-              "portIn": "value",
+              "portIn": "color",
               "portOut": "result",
               "objIn": "ke3sqz4o2",
               "objOut": "2wewkvpso"
@@ -590,13 +590,15 @@
       "uiAttribs": {
         "height": 150,
         "resizable": true,
-        "subPatch": "x7bif6y8a",
+        "subPatch": "ubrzlruur",
         "translate": {
           "x": 1236,
           "y": 740
         },
-        "extendTitle": "Texture"
+        "extendTitle": "Texture",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Show Info",
@@ -660,10 +662,7 @@
           "name": "Info",
           "value": ""
         }
-      ],
-      "storage": {
-        "ref": "2z5cdzi86"
-      }
+      ]
     }
   ]
 }

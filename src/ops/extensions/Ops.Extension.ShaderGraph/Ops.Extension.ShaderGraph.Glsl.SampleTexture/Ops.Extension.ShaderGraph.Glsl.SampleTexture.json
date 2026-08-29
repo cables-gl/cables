@@ -64,7 +64,7 @@
             {
                 "type": 2,
                 "name": "texture",
-                "objType": "sg_tex"
+                "objType": "sg_texture"
             },
             {
                 "type": 2,

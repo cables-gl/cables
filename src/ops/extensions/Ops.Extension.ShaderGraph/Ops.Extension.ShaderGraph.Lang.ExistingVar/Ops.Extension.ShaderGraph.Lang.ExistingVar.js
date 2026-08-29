@@ -17,6 +17,6 @@ op.init =
     {
         op.shaderNode.name = value.get();
         op.shaderNode.resultVarName = value.get();
-        op.shaderNode.result.type = valueType.get();
-        op.shaderNode.result.port.setRef({});
+        op.shaderNode.results[0].type = valueType.get();
+        op.updateGraph();
     };

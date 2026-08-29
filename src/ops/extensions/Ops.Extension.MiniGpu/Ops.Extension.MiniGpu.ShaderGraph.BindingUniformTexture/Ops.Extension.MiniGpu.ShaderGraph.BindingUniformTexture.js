@@ -67,7 +67,7 @@ exec.onTriggered = () =>
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
         op.shaderNode.resultVarName = op.shaderNode.name = inName.get();
-        op.shaderNode.result.port.setRef({});
+        op.updateGraph();
     }
 
     let mvp = MGPU.mm.mul(

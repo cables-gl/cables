@@ -70,7 +70,13 @@
                 "objType": "sg_float"
             }
         ],
-        "portsOut": []
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec4"
+            }
+        ]
     },
     "coreLibs": [
         "shadergraph"

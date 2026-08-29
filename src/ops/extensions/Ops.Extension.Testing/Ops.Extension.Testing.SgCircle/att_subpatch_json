@@ -9,7 +9,7 @@
           "x": 1211.4806541260807,
           "y": 1480.6067045908512
         },
-        "subPatch": "inkb3ek6k",
+        "subPatch": "ftxn6dfr5",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -83,8 +83,8 @@
           "x": 1132.9146042162215,
           "y": 631.3808393701362
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id6",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -112,8 +112,8 @@
           "x": 1146.5731005820833,
           "y": 343.241959357379
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id7",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -141,8 +141,8 @@
           "x": 1146.5731005820833,
           "y": 255.21483919218957
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id8",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -182,8 +182,8 @@
           "x": 959.6414753566289,
           "y": 653.0630447862719
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id9",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -217,8 +217,8 @@
           "x": 1108.9146042162215,
           "y": 888.4824671603784
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id10",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -258,8 +258,8 @@
           "x": 843.6479741163157,
           "y": 617.763334756915
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id11",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -293,8 +293,8 @@
           "x": 1132.9146042162215,
           "y": 101.15781692003583
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id12",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -322,8 +322,8 @@
           "x": 1132.9146042162215,
           "y": 554.4836832984366
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id13",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -351,8 +351,8 @@
           "x": 1108.9146042162215,
           "y": 972.1502118960335
         },
-        "subPatch": "inkb3ek6k",
-        "extendTitle": "id14",
+        "subPatch": "ftxn6dfr5",
+        "extendTitle": "...",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -370,7 +370,7 @@
           "name": "result",
           "links": [
             {
-              "portIn": "value",
+              "portIn": "color",
               "portOut": "result",
               "objIn": "4d4qjb1au",
               "objOut": "9cbpayvax"
@@ -384,7 +384,7 @@
       "id": "ktfxoflj7",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "inkb3ek6k",
+        "subPatch": "ftxn6dfr5",
         "translate": {
           "x": 0,
           "y": 0
@@ -413,7 +413,7 @@
       "id": "ckt9xwjwn",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "inkb3ek6k",
+        "subPatch": "ftxn6dfr5",
         "translate": {
           "x": 0,
           "y": 2108.0132227847835
@@ -432,8 +432,11 @@
           "x": 1084.9146042162215,
           "y": 1120.9893763481393
         },
-        "subPatch": "inkb3ek6k"
+        "subPatch": "ftxn6dfr5",
+        "blueprintSubpatch2": true,
+        "extendTitle": "FRAGMENT"
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Graph",
@@ -488,24 +491,23 @@
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        float rStaticFloat_11=0.44;\n\n    float rStaticFloat_9=0.29;\n\n    vec2 rUv_12=texCoord.xy;\n\n    float rStaticFloat_8=-0.49;\n\n    vec2 rVec2_7=vec2(rStaticFloat_8, rStaticFloat_8);\n\n    vec2 rSum_13=rUv_12+rVec2_7;\n\n    float rLength_6=length(rSum_13);\n\n    float rSmoothstep_10=smoothstep(rStaticFloat_11, rStaticFloat_9, rLength_6);\n\n    vec4 rVec4_14=vec4(rSmoothstep_10, rSmoothstep_10, rSmoothstep_10, 1);\n\n    vec4 color=rVec4_14;\n\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        float rStaticFloat_11=0.44;\n\n    float rStaticFloat_9=0.29;\n\n    vec2 rUv_12=texCoord.xy;\n\n    float rStaticFloat_8=-0.49;\n\n    vec2 rVec2_7=vec2(rStaticFloat_8/* conv param [float: x]float result */, rStaticFloat_8/* conv param [float: y]float result */);\n\n    vec2 rSum_13=rUv_12/* conv param [vec2: number 1]vec2 result */+rVec2_7/* conv param [vec2: number 2]vec2 result */;\n\n    float rLength_6=length(rSum_13/* conv param [vec2: number]vec2 result */);\n\n    unknown rSmoothstep_10=smoothstep(rStaticFloat_11/* conv param [unknown: number]float result */, rStaticFloat_9/* conv param [unknown: number 2]float result */, rLength_6/* conv param [unknown: number 3]float result */);\n\n    vec4 rVec4_14=vec4(rSmoothstep_10/* conv param [float: x]unknown result */, rSmoothstep_10/* conv param [float: y]unknown result */, rSmoothstep_10/* conv param [float: z]unknown result */, 1);\n\n    vec4 color=rVec4_14/* conv param [vec4: color]vec4 result */;\n\n    outColor = color;\n}"
         }
-      ],
-      "storage": {
-        "ref": "ut3rm89lm"
-      }
+      ]
     },
     {
       "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
       "id": "dfzin9pe0",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "inkb3ek6k",
+        "subPatch": "ftxn6dfr5",
         "translate": {
           "x": 1175.680078348665,
           "y": 1397.931658201903
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Next",
@@ -517,24 +519,31 @@
               "objOut": "dfzin9pe0"
             }
           ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        float rStaticFloat_11=0.44;\n\n    float rStaticFloat_9=0.29;\n\n    vec2 rUv_12=texCoord.xy;\n\n    float rStaticFloat_8=-0.49;\n\n    vec2 rVec2_7=vec2(rStaticFloat_8/* conv param [float: x]float result */, rStaticFloat_8/* conv param [float: y]float result */);\n\n    vec2 rSum_13=rUv_12/* conv param [vec2: number 1]vec2 result */+rVec2_7/* conv param [vec2: number 2]vec2 result */;\n\n    float rLength_6=length(rSum_13/* conv param [vec2: number]vec2 result */);\n\n    unknown rSmoothstep_10=smoothstep(rStaticFloat_11/* conv param [unknown: number]float result */, rStaticFloat_9/* conv param [unknown: number 2]float result */, rLength_6/* conv param [unknown: number 3]float result */);\n\n    vec4 rVec4_14=vec4(rSmoothstep_10/* conv param [float: x]unknown result */, rSmoothstep_10/* conv param [float: y]unknown result */, rSmoothstep_10/* conv param [float: z]unknown result */, 1);\n\n    vec4 color=rVec4_14/* conv param [vec4: color]vec4 result */;\n\n    outColor = color;\n}"
         }
-      ],
-      "storage": {
-        "ref": "dfzin9pe0"
-      }
+      ]
     },
     {
       "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
       "id": "4d4qjb1au",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "inkb3ek6k",
+        "subPatch": "ftxn6dfr5",
         "translate": {
           "x": 1108.9146042162215,
           "y": 1066.6194904826195
         },
-        "extendTitle": "color id40"
+        "extendTitle": "color ",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "result",
@@ -547,10 +556,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "4d4qjb1au"
-      }
+      ]
     }
   ]
 }

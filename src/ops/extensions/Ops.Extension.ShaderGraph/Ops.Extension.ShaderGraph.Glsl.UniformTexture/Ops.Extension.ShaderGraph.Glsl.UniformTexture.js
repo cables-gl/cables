@@ -52,7 +52,7 @@ function update(shader, bindings)
         op.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
 
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.result.type = "texture";
+        op.shaderNode.results[0].type = "texture";
 
         op.updateGraph();
     }
@@ -67,6 +67,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "vec4", "port": outValue },
+        "results": [{ "type": "vec4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });

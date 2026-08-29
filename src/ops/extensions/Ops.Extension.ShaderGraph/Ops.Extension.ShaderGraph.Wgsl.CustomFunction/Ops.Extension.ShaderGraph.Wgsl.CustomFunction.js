@@ -21,5 +21,5 @@ op.init =
         op.shaderNode.name = value.get();
         op.shaderNode.src = code.get();
         op.shaderNode.resultVarName = value.get();
-        op.shaderNode.result.port.setRef({});
+        op.updateGraph();
     };

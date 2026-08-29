@@ -21,7 +21,7 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "value",
+                "name": "color",
                 "objType": "sg_vec4"
             }
         ],

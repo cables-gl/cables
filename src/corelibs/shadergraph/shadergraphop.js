@@ -54,7 +54,8 @@ export class ShaderGraphOp
             if (shaderNode.results[i].name == name) return shaderNode.results[i];
         }
 
-        if (shaderNode.result) return shaderNode.result; // fallback old/deprecated way
+        console.error("getresult " + name + " not found?", shaderNode);
+        // if (shaderNode.result) return shaderNode.result; // fallback old/deprecated way
 
     }
 
@@ -66,7 +67,10 @@ export class ShaderGraphOp
 
         if (shaderNode.result && !shaderNode.results)
         {
+            console.error("PARAM HAS no resultS", this.op.name);
             shaderNode.results = [shaderNode.result];
+            delete shaderNode.result;
+
         }
 
         if (shaderNode.params)
@@ -75,24 +79,24 @@ export class ShaderGraphOp
             {
 
                 const param = shaderNode.params[i];
+                if (!param.name)console.error("PARAM HAS NO NAME", param);
                 if (!param.port)
-                {
                     param.port = this.op.inObject(param.name, null, "sg");
-                }
 
                 if (param.gen || param.type == "gen")
                 {
                     param.gen = true;
 
                     // 1. if linked, get result of connected port
-                    if (param.port.isLinked())
-                    {
-                        const otherParam = ShaderGraphProgram.getParamFromPort(param.port.links[0].getOtherPort(param.port));
-                        param.type = otherParam.type;
-                    }
-                    else
+                    // if (param.port.isLinked())
+                    // {
+                    //     const otherParam = ShaderGraphProgram.getParamFromPort(param.port.links[0].getOtherPort(param.port));
+                    //     param.type = otherParam.type;
+                    // }
+                    // else
                     {
                         const t = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
+                        console.log("param maxgen", param.port.op.name, param.port.name, t);
                         param.type = t;
                     }
 
@@ -119,7 +123,7 @@ export class ShaderGraphOp
                 const param = shaderNode.results[i];
                 if (!param.port)
                 {
-                    param.port = this.op.inObject(param.name, null, "sg");
+                    param.port = this.op.outObject(param.name, null, "sg");
                 }
 
                 if (param.gen || param.type == "gen")

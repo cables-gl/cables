@@ -4,9 +4,9 @@ new CABLES.ShaderGraphOp(this,
         "name": "color",
         "title": "name",
         "params": [
-            { "type": "gen", "port": op.inObject("value") }
+            { "type": "gen", "name": "value" }
         ],
-        "result": { "type": "gen", "port": op.outObject("result") }
+        "results": [{ "type": "gen", "name": "result" }]
     });
 
 const value = op.inString("var name", "color");
@@ -16,5 +16,5 @@ op.init =
     () =>
     {
         op.shaderNode.name = value.get();
-        op.shaderNode.result.port.setRef({});
+        op.updateGraph();
     };

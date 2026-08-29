@@ -9,7 +9,7 @@
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -79,7 +79,7 @@
       "id": "7l5mv9qft",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -108,7 +108,7 @@
       "id": "bdscgifcp",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -127,7 +127,7 @@
           "x": 1540.8555536953684,
           "y": 1403.5450858327513
         },
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -206,7 +206,7 @@
         "width": 709.4287243767142,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 2276.8408800696357,
           "y": 1194.407615490986
@@ -264,7 +264,7 @@
           "x": 1564.8555536953684,
           "y": 678.2195777674146
         },
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "extendTitle": "...",
         "blueprintSubpatch2": true
       },
@@ -292,7 +292,7 @@
           "x": 1564.8555536953684,
           "y": 1266.896877355496
         },
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "extendTitle": "color ",
         "blueprintSubpatch2": true
       },
@@ -316,7 +316,7 @@
       "id": "9koh561t3",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1564.8555536953684,
           "y": 953.6810852151016
@@ -354,7 +354,7 @@
       "id": "n0ataz62g",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1564.8555536953684,
           "y": 1133.5847447254466
@@ -368,7 +368,7 @@
           "name": "result",
           "links": [
             {
-              "portIn": "value",
+              "portIn": "color",
               "portOut": "result",
               "objIn": "lhdrg7fed",
               "objOut": "n0ataz62g"
@@ -386,7 +386,7 @@
         "width": 593.2283286135394,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 2120.536421438488,
           "y": 791.5980751915617
@@ -441,7 +441,7 @@
       "attribs": {},
       "uiAttribs": {
         "extendTitle": "float ",
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1619.6920957753637,
           "y": 898.9022496579108
@@ -486,7 +486,7 @@
       "attribs": {},
       "uiAttribs": {
         "extendTitle": "float ",
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1588.8555536953684,
           "y": 758.9543730274719
@@ -530,7 +530,7 @@
       "id": "esbi3zgpd",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1436.0795367605128,
           "y": 1641.9851878473578
@@ -572,7 +572,7 @@
       "id": "c3z63lhhk",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "5qqmxwp9g",
+        "subPatch": "y3ci98ed6",
         "translate": {
           "x": 1600.8555536953684,
           "y": 1046.1517299465672

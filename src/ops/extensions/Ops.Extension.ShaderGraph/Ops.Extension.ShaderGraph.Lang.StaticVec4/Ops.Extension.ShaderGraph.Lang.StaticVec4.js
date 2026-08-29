@@ -24,5 +24,5 @@ op.init =
     valuex.onChange = () =>
     {
         op.shaderNode.values = [valuex.get(), valuey.get(), valuez.get(), valuew.get()];
-        op.shaderNode.result.port.setRef({});
+        op.updateGraph();
     };

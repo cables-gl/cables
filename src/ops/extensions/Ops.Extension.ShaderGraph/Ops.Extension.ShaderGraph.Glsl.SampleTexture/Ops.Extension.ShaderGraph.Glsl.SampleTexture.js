@@ -6,10 +6,10 @@ new CABLES.ShaderGraphOp(this,
         "type": "function",
         "name": "texture",
         "params": [
-            { "type": "tex", "port": tex },
-            { "type": "vec2", "port": op.inObject("coord") }
+            { "type": "texture", "name": "texture", "port": tex },
+            { "type": "vec2", "name": "coord" }
         ],
-        "result": { "type": "vec4", "port": op.outObject("result") }
+        "results": [{ "type": "vec4", "name": "result" }]
 
     });
 
