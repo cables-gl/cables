@@ -14,10 +14,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
-                "name": "seed"
-            },
-            {
                 "type": 5,
                 "name": "var name"
             },
@@ -29,7 +25,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_vec2"
             }
         ]
     },

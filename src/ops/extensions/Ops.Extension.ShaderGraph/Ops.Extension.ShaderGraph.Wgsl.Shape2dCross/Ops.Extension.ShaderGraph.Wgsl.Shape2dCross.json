@@ -63,15 +63,18 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "uv"
+                "name": "uv",
+                "objType": "sg_vec2"
             },
             {
                 "type": 2,
-                "name": "w"
+                "name": "w",
+                "objType": "sg_float"
             },
             {
                 "type": 2,
-                "name": "r"
+                "name": "r",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

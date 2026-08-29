@@ -13,7 +13,7 @@ export class LangWgsl extends Lang
         if (node.type == "existingvar") return "";
         if (node.type == "override") return "";
 
-        if (name && !node.result?.type) return name + "=";
+        if (name && !node.results[0]?.type) return name + "=";
 
         let str = "let ";
         if (node.type == "var") str = "var ";
@@ -22,7 +22,7 @@ export class LangWgsl extends Lang
         str += "=";
         if (node.type == "value")
         {
-            if (node.result.type == "float")
+            if (node.results[0].type == "float")
             {
                 str += this.floatStr(node.value);
             }

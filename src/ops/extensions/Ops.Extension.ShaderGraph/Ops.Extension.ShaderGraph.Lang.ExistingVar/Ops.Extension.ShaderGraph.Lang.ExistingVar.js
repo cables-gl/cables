@@ -3,7 +3,7 @@ new CABLES.ShaderGraphOp(this,
         "type": "existingvar",
         "name": "color",
         "title": "name",
-        "result": { "type": "vec4", "port": op.outObject("result") }
+        "results": [{ "type": "vec4", "name": "result" }]
     });
 
 const

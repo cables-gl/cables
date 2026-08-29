@@ -79,9 +79,8 @@ export class ShaderGraphOp
             {
 
                 const param = shaderNode.params[i];
-                if (!param.name)console.error("PARAM HAS NO NAME", param);
-                if (!param.port)
-                    param.port = this.op.inObject(param.name, null, "sg");
+                if (!param.port) param.port = this.op.inObject(param.name, null, "sg");
+                if (!param.name)param.name = param.port.name;
 
                 if (param.gen || param.type == "gen")
                 {

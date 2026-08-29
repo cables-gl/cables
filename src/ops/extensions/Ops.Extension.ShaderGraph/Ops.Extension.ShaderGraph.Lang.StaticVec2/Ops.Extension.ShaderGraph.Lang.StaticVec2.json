@@ -68,20 +68,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
+                "type": 2,
                 "name": "x",
-                "subType": "number"
+                "objType": "sg_float"
             },
             {
-                "type": 0,
+                "type": 2,
                 "name": "y",
-                "subType": "number"
+                "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_vec2"
             }
         ]
     },

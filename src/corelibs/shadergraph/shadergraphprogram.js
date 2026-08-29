@@ -213,7 +213,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.resultVarName) callstr += this.lang.getResultDef(node);
         else if (varDef)callstr += varDef;
-        else console.log("no var??", op);
+        else callstr += ("/* no var?? */");
 
         if (this._opIdsFuncCallSrc[node.id]) return;
         this._opIdsFuncCallSrc[node.id] = true;
@@ -524,7 +524,6 @@ export class ShaderGraphProgram extends Events
 
                 if (r)
                 {
-
                     const type = r.type;
                     console.log("type", type);
                     const t = types.indexOf(r.type);
