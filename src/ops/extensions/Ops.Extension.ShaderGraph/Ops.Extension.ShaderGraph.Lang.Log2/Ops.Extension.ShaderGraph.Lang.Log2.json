@@ -1,6 +1,6 @@
 {
-    "id": "c85a7c5a-7428-445b-9dcb-82106181bc02",
-    "created": 1786527318727,
+    "id": "ee6075ee-1eeb-4551-9d5b-3857a69b65d7",
+    "created": 1788080420821,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -45,6 +45,36 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786539229619
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788080318709
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788080344589
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788080393750
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788080407430
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788080420821
         }
     ],
     "layout": {
@@ -52,14 +82,14 @@
             {
                 "type": 2,
                 "name": "number",
-                "objType": "sg_vec4"
+                "objType": "sg_float"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_vec4"
+                "objType": "sg_float"
             }
         ]
     },

@@ -153,20 +153,13 @@ export class ShaderGraphProgram extends Events
                 otherNode.results[0].type,
                 otherNode.resultVarName,
                 otherNode);
-            paramStr += "/* conv " +
-         "param [" + param.type + ": " + param.port.name + "]" + otherNode.results[0].type + " " + otherPort.name +
-            // param.type + "-" +
-            // otherNode.results[0].type +
-            " */";
-            // else
-            //     paramStr += otherNode.resultVarName;
-            // paramStr += "!";
 
+            if (this.options.debug)
+                paramStr += "/* conv " + "param [" + param.type + ": " + param.port.name + "]" + otherNode.results[0].type + " " + otherPort.name + " */";
         }
 
         if (otherPort.direction == CONSTANTS.PORT.PORT_DIR_OUT)
             this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name)?.type);// uiAttribs.objType);
-        // this.execNode(otherPort.op, otherNode.result.type);
 
         return paramStr;
     }
@@ -201,10 +194,10 @@ export class ShaderGraphProgram extends Events
         let title = "";
         if (node.title == "name") title += node.name + " ";
         if (this.options.showType && node.results.length == 1) title += node.results[0].type + " ";
-        if (this.options.showId) title += "id" + node.id;
+        if (this.options.showId) title += " " + node.resultVarName;
 
         /* minimalcore:start */
-        op.setUiAttrib({ "extendTitle": title || "..." });
+        op.setUiAttrib({ "extendTitle": title || "" });
         // op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
 
         /* minimalcore:end */

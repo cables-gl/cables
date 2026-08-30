@@ -1,6 +1,6 @@
 {
-    "id": "c85a7c5a-7428-445b-9dcb-82106181bc02",
-    "created": 1786527318727,
+    "id": "9c25b945-b53a-4969-9870-223c754f0957",
+    "created": 1788080612397,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -17,42 +17,40 @@
             "date": 1786367915194
         },
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786434225533
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786527288419
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786527318727
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.Round renamed to Ops.Extension.ShaderGraph.Sl.Round",
+            "message": "Extension.MiniGpu.Sg.Smoothstep renamed to Ops.Extension.ShaderGraph.Lang.Smoothstep",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539193626
+            "date": 1786539360303
         },
         {
-            "message": "Extension.ShaderGraph.Sl.Round renamed to Ops.Extension.ShaderGraph.Lang.Round",
-            "type": "rename",
+            "message": "op created",
+            "type": "new op",
             "author": "pandur",
-            "date": 1786539229619
+            "date": 1786709508150
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786711711927
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "number",
+                "name": "x",
                 "objType": "sg_vec4"
+            },
+            {
+                "type": 2,
+                "name": "minVal",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "maxVal",
+                "objType": "sg_float"
             }
         ],
         "portsOut": [

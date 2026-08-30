@@ -1,7 +1,7 @@
 new CABLES.ShaderGraphOp(this,
     {
         "type": "function",
-        "name": "round",
+        "name": "exp",
         "params": [
             { "type": "gen", "name": "number" }
         ],

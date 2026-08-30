@@ -1,9 +1,9 @@
 new CABLES.ShaderGraphOp(this,
     {
         "type": "function",
-        "name": "round",
+        "name": "normalize",
         "params": [
-            { "type": "gen", "name": "number" }
+            { "type": "gen", "name": "x" }
         ],
         "results": [{ "type": "gen", "name": "result" }]
 
