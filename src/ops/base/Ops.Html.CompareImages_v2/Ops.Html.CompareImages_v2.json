@@ -14,6 +14,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1716310355994
+        },
+        {
+            "message": "Output mismatch 100, when the resemble library returns undefined instead of a number",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1788014229074
         }
     ],
     "layout": {

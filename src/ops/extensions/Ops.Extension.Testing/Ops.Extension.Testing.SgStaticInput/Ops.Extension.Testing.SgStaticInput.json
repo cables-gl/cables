@@ -1,0 +1,33 @@
+{
+    "id": "3a5149cf-44b4-4a21-912e-d7ddebcb7d32",
+    "created": 1788015799436,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788015799551
+        },
+        {
+            "message": "Patch.PKKnQbt.SubPatch0 renamed to Ops.Extension.Testing.SgStaticInput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788015832565
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "xqbvduifk",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

@@ -35,7 +35,7 @@ function compare()
 
     finished = false;
 
-    if (loadingId)loadingId = op.patch.loading.finished(loadingId);
+    if (loadingId) loadingId = op.patch.loading.finished(loadingId);
     let startTime = performance.now();
 
     loadingId = op.patch.loading.start(op.name, CABLES.uuid(), op);
@@ -55,6 +55,7 @@ function compare()
                     }
                     if (data.getImageDataUrl) outImageUrl.set(data.getImageDataUrl());
                     outSameDimensions.set(data.isSameDimensions);
+                    if (data.rawMisMatchPercentage === undefined) data.rawMisMatchPercentage = 100;
                     outMatchPercentage.set(data.rawMisMatchPercentage);
                     outData.setRef(data);
                     loadingId = op.patch.loading.finished(loadingId);
@@ -70,6 +71,7 @@ function compare()
         clearTimeout(to);
         finished = true;
 
+        outMatchPercentage.set(100);
         to = setTimeout(compare, 100);
     }
 }
