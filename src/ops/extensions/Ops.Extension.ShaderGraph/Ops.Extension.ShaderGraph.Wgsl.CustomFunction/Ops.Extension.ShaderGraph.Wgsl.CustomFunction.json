@@ -50,14 +50,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": 2,
-                "name": "seed"
-            },
-            {
-                "type": 5,
-                "name": "var name"
-            },
-            {
                 "type": 5,
                 "name": "head src"
             }

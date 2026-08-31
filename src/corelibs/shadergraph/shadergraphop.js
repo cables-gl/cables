@@ -26,7 +26,6 @@ export class ShaderGraphOp
         this.op.on("onLinkChanged", this.updateGraph.bind(this));
         this.updateGraph();
         this.addPortWatcher();
-
     }
 
     addPortWatcher()

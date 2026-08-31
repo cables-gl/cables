@@ -63,6 +63,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
     const diags = inStr.links[0].getOtherPort(inStr).uiAttribs.editorDiagnostics;
     let diagStr = "";
     let diagScroll = 0;
+
     if (diags && diags.length > 0)
     {
         for (let i = 0; i < diags.length; i++)
@@ -71,7 +72,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
             diagStr += diags[i].line + ": " + diags[i].message + "\n";
         }
     }
-    op.setUiAttribs({ "comment": diagStr });
+    op.setUiAttribs({ "comment": diagStr + " " });
 
     viz.renderText(ctx, layer, lines,
         {
