@@ -1203,10 +1203,10 @@ class CglShader extends CgShader
             const infoLogFrag = this._cgl.gl.getShaderInfoLog(this.fshader);
             const infoLogVert = this._cgl.gl.getShaderInfoLog(this.vshader);
 
-            if (this.logError)
-                this._log.error(this._name + " shader linking fail...");
-            else
-                this._log.warn(this._name + " shader linking fail...");
+            // if (this.logError)
+            //     this._log.error(this._name + " shader linking fail...");
+            // else
+            this._log.warn(this._name + " shader linking fail...");
 
             this.diagnosticsFrag = [];
             this.diagnosticsVert = [];

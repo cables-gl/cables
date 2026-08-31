@@ -138,7 +138,14 @@ export class ShaderGraphProgram extends Events
                 this.execNode(sourcePort.op);
 
                 this.log(node, "component", otp.name, param.port.name);
-                paramStr += sourcePort.op.shaderNode.resultVarName + "." + otherPort.name;
+
+                paramStr += this.lang.convertTypes(
+                    this.log.bind(this),
+                    param.type,
+                    "float",
+                    sourcePort.op.shaderNode.resultVarName + "." + otherPort.name,
+                    otherNode);
+
             }
             else console.log("no otp");
         }
@@ -159,7 +166,7 @@ export class ShaderGraphProgram extends Events
         }
 
         if (otherPort.direction == CONSTANTS.PORT.PORT_DIR_OUT)
-            this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name)?.type);// uiAttribs.objType);
+            this.execNode(otherPort.op);
 
         return paramStr;
     }

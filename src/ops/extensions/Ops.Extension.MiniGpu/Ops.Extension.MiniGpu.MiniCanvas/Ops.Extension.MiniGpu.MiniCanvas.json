@@ -36,5 +36,8 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "coreLibs": [
+        "minigpu"
+    ]
 }
