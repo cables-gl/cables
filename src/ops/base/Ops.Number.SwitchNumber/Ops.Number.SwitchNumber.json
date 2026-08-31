@@ -124,11 +124,10 @@
             "date": 1701853443527
         }
     ],
-    "issues": "",
     "youtubeids": [
         "TdHgjqOLpnM"
     ],
-    "caniusequery": "",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "8XTz0q"
 }

@@ -1,7 +1,7 @@
 const
     inGeoms = op.inMultiPort2("Strings", CABLES.OP_PORT_TYPE_OBJECT, null, 3),
 
-    outGeom = op.outObject("Geometry Result");
+    outGeom = op.outObject("Geometry Result", null, "geometry");
 
 let geom = new CGL.Geometry(op.name);
 outGeom.set(geom);
@@ -14,7 +14,7 @@ inGeoms.onChange = () =>
     for (let i = 0; i < geomPorts.length; i++)
     {
         if (geomPorts[i].get())
-            if (!geom)geom = geomPorts[i].get().copy();
+            if (!geom) geom = geomPorts[i].get().copy();
             else geom.merge(geomPorts[i].get());
     }
 

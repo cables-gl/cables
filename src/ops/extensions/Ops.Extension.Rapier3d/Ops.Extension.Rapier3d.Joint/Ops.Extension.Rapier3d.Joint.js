@@ -21,6 +21,11 @@ const
     inLimitx = op.inFloat("Limit Start"),
     inLimity = op.inFloat("Limit End"),
 
+    inCfgMoto = op.inBool("Config Motor", false),
+    inCfgMotoAngle = op.inFloat("Motor Angle"),
+    inCfgMotoForce = op.inFloat("Motor Force"),
+    inCfgMotoResist = op.inFloat("Motor resist"),
+
     next = op.outTrigger("Next");
 
 op.toWorkPortsNeedToBeLinked(exec, o1, o2);
@@ -41,6 +46,10 @@ inType.onChange =
     inAxisz.onChange =
     inLimitx.onChange =
     inLimity.onChange =
+    inCfgMoto.onChange =
+    inCfgMotoAngle.onChange =
+    inCfgMotoForce.onChange =
+    inCfgMotoResist.onChange =
     o1.onChange =
     o2.onChange = () =>
     {
@@ -96,7 +105,17 @@ function setup()
 
         let joint = world.createImpulseJoint(params, arr1[i], arr2[i], true);
         joints.push(joint);
+
     }
+
+    if (inCfgMoto.get())
+        for (let i = 0; i < joints.length; i++)
+            joints[i].configureMotorPosition(
+                inCfgMotoAngle.get(), // target angle in radians
+                inCfgMotoForce.get(), // e.g. 50 — how hard it pulls toward target
+                inCfgMotoResist.get() // e.g. 5 — resists oscillation/overshoot
+            );
+
     needsSetup = false;
     lastworld = world;
 

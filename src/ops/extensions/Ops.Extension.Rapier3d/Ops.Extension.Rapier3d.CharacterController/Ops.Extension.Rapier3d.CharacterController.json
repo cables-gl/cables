@@ -33,6 +33,11 @@
             },
             {
                 "type": 0,
+                "name": "Mass",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Vector X",
                 "subType": "number"
             },

@@ -37,8 +37,6 @@
         ]
     },
     "summary": "Remove key-value pairs from objects in an array of objects",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -63,6 +61,6 @@
             }
         ]
     },
-    "exampleProjectId": "HFRsU5",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

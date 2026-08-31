@@ -5,6 +5,7 @@ const
     reset = op.inTriggerButton("Reset"),
     inHeight = op.inFloat("Height", 1),
     inWidth = op.inFloat("Width", 0.2),
+    inMass = op.inFloat("Mass", 1),
     inVecX = op.inFloat("Vector X"),
     inVecY = op.inFloat("Vector Y", -0.05),
     inVecZ = op.inFloat("Vector Z"),
@@ -25,6 +26,7 @@ let movement = null;
 op.onDelete = remove;
 
 inWidth.onChange =
+    inMass.onChange =
     inHeight.onChange =
     reset.onTriggered =
     op.onDelete = () =>
@@ -58,7 +60,7 @@ exec.onTriggered = () =>
         outCollider.setRef([collider]);
 
         characterController = world.createCharacterController(0.01);
-        characterController.setCharacterMass(1);
+        characterController.setCharacterMass(inMass.get());
         characterController.setUp({ "x": 0.0, "y": 1.0, "z": 0.0 }); // Up vector
 
         // Don’t allow climbing slopes larger than 45 degrees.

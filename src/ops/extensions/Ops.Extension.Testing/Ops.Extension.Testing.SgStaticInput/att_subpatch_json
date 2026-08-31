@@ -10,7 +10,7 @@
           "y": 1356.3198032096998
         },
         "tempSubOldOpId": null,
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -81,9 +81,9 @@
       "uiAttribs": {
         "translate": {
           "x": 760.6603337256345,
-          "y": 1012.6104549395523
+          "y": 936.5564951613635
         },
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "extendTitle": "FRAGMENT",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -143,7 +143,7 @@
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    // color:execnode start FragOutColor\n    // vec4:execnode start Vec4\n    // vec4:execnode  [function]\n    vec4 rVec4_101=vec4(1, 0.5, 0., 1);\n\n    // vec4:execnode start Vec4\n    // color:execnode  [var]\n    vec4 color=rVec4_101/* conv param [vec4: color]vec4 result */;\n\noutColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    // color:execnode start FragOutColor\n    // vec4:execnode start Vec4\n    // vec4:execnode  [function]\n    vec4 rVec4_96=vec4(1, 0.5, 0., 1);\n\n    // vec4:execnode start Vec4\n    // color:execnode  [var]\n    vec4 color=rVec4_96/* conv param [vec4: color]vec4 result */;\n\noutColor = color;\n}"
         }
       ]
     },
@@ -156,7 +156,7 @@
           "x": 784.6603337256345,
           "y": 863.034682868434
         },
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "extendTitle": "color ",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -185,7 +185,7 @@
           "x": 733.2176646333078,
           "y": 1257.7542214944624
         },
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -217,12 +217,12 @@
       "id": "alt208pne",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "translate": {
           "x": 784.6603337256345,
           "y": 792.2350958333463
         },
-        "extendTitle": "...",
+        "extendTitle": "",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -272,7 +272,7 @@
       "id": "9hwjqi8n1",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "translate": {
           "x": 733.2176646333078,
           "y": 0
@@ -301,7 +301,7 @@
       "id": "aib1is294",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bwsz7zd79",
+        "subPatch": "dd2xp4yy9",
         "translate": {
           "x": 733.2176646333078,
           "y": 1467.3198032096998

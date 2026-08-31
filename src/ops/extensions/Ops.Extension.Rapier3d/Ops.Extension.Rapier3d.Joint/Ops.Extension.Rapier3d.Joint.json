@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1768998437659
+        },
+        {
+            "message": "Add Motor config options to return to a default angle",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1788190174639
         }
     ],
     "layout": {
@@ -98,6 +104,26 @@
             {
                 "type": 0,
                 "name": "Limit End",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Config Motor",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Motor Angle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Motor Force",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Motor resist",
                 "subType": "number"
             }
         ],
