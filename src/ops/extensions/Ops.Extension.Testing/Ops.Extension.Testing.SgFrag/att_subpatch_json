@@ -1,0 +1,500 @@
+{
+  "ops": [
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "ogxwx7kuw",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1436.0795367605128,
+          "y": 1740.5507695625952
+        },
+        "subPatch": "k7h89mssb",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "oy0r6668j",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1403.3312162725995,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_afl5yq365",
+          "title": "render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_afl5yq365",
+              "objIn": "c37lwvb6e",
+              "objOut": "oy0r6668j"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "4qoy8r8mj",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1403.3312162725995,
+          "y": 2436.0863568534965
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "5sn4xsl1w",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1133.1753080395895,
+          "y": 1454.996078354458
+        },
+        "subPatch": "k7h89mssb",
+        "blueprintSubpatch2": true,
+        "extendTitle": "FRAGMENT"
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 1
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "c37lwvb6e",
+              "objOut": "5sn4xsl1w"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "919wvd74s",
+              "objOut": "5sn4xsl1w"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "c37lwvb6e",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1436.0795367605128,
+          "y": 1641.034304572308
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "ogxwx7kuw",
+              "objOut": "c37lwvb6e"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Code Fragment",
+              "objIn": "fpol7ezf7",
+              "objOut": "c37lwvb6e"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "919wvd74s",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 611.6576170420499,
+        "width": 693.1905478984729,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 980.6232200915367,
+          "y": 1834.5604135185754
+        },
+        "extendTitle": "Final Code",
+        "comment": " ",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "nh1nxt7rl",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1386.1049504009234
+        },
+        "extendTitle": "color ",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "5sn4xsl1w",
+              "objOut": "nh1nxt7rl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "fpol7ezf7",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 801.967094126886,
+        "width": 787.7895369532487,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1760.0790100592428,
+          "y": 1205.8208187331816
+        },
+        "extendTitle": "Code Fragment",
+        "comment": " ",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "f5c18738-1414-41a3-9b95-9e0f2a9810dd",
+      "id": "5h90h3vod",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1199.7995563326645
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "ekxbt49hl",
+              "objOut": "5h90h3vod"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "5h90h3vod"
+      }
+    },
+    {
+      "opId": "022634d8-fb46-4844-b3f2-4c86f5c7cbd5",
+      "id": "ekxbt49hl",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1307.0929291019215
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "nh1nxt7rl",
+              "objOut": "ekxbt49hl"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "ekxbt49hl"
+      }
+    },
+    {
+      "opId": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
+      "id": "922npeh7b",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "k7h89mssb",
+        "translate": {
+          "x": 1169.1753080395895,
+          "y": 1238.7063354698305
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "256"
+          }
+        },
+        {
+          "name": "y",
+          "attribs": {
+            "sg": "256"
+          }
+        },
+        {
+          "name": "z",
+          "attribs": {
+            "sg": "100"
+          }
+        },
+        {
+          "name": "w",
+          "attribs": {
+            "sg": "1"
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "result",
+              "objIn": "ekxbt49hl",
+              "objOut": "922npeh7b"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "922npeh7b"
+      }
+    }
+  ]
+}

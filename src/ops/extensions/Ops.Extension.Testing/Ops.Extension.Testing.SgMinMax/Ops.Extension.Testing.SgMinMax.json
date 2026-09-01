@@ -1,0 +1,39 @@
+{
+    "id": "1a475247-9f16-477e-bb22-2502618ecb68",
+    "created": 1788268298589,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787550320674
+        },
+        {
+            "message": "Patch.PKKnQbt.SubPatch1 renamed to Ops.Extension.Testing.SgUv",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787550359149
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788268298590
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "afl5yq365",
+                "uititle": "render"
+            }
+        ],
+        "portsOut": []
+    }
+}
