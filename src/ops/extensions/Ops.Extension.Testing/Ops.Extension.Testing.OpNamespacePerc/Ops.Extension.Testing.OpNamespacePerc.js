@@ -36,5 +36,3 @@ function update()
     op.setUiAttribs({ "extendTitle": String(Math.round(countFound / count * 100)) + "%" });
 
 }
-
-update();
