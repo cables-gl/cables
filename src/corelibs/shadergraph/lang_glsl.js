@@ -53,7 +53,7 @@ export class LangGlsl extends Lang
 
         if (typeFrom == "vec3" && typeTo == "vec2") return paramStr + ".xy";
         if (typeFrom == "vec3" && typeTo == "float") return paramStr + ".x";
-        if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 0.)";
+        if (typeFrom == "vec3" && typeTo == "vec4") return this.strTypeVec4 + "(" + paramStr + ", 1.)";
 
         if (typeFrom == "vec2" && typeTo == "float") return paramStr + ".x";
         if (typeFrom == "vec2" && typeTo == "vec3") return this.strTypeVec3 + "(" + paramStr + ", 0.)";
