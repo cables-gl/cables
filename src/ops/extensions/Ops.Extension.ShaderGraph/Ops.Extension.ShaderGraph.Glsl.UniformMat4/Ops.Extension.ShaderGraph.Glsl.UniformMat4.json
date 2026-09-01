@@ -64,7 +64,7 @@
             {
                 "type": 2,
                 "name": "value",
-                "objType": "sg_texture"
+                "objType": "sg_mat4"
             }
         ]
     },

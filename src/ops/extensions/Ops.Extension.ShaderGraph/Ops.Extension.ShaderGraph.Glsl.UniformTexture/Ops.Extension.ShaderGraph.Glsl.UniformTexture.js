@@ -1,9 +1,7 @@
 const
     inTexture = op.inTexture("texture"),
-
-    inName = op.inString("Name", "");
-
-const outValue = op.outObject("value");
+    inName = op.inString("Name", ""),
+    outValue = op.outObject("value");
 
 let uni = null;
 let uniformBuffer;
@@ -19,6 +17,7 @@ updateUi();
 // {
 //     if (uni) uni.setTex;
 // };
+
 inName.onChange =
     () =>
     {
@@ -42,17 +41,23 @@ function updateUi()
 
 function update(shader, bindings)
 {
-    // const mgpu = op.patch.frameStore.mgpu;
+    const name = inName.get() || defaultName;
     if (!uni)
     {
 
-        const name = inName.get() || defaultName;
-        uni = new CGL.Uniform(shader, "t", name);
-
         op.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
-
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
         op.shaderNode.results[0].type = "texture";
+    }
+
+    if (!uni && shader)
+    {
+        uni = new CGL.Uniform(shader, "t", name);
+
+        if (shader && uni && inTexture.get())
+        {
+            shader.pushTexture(uni, inTexture.get().tex);
+        }
 
         op.updateGraph();
     }
@@ -65,9 +70,9 @@ new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
         "name": inName.get() || defaultName,
-        "title": "name",
         "update": update,
         "params": [],
         "results": [{ "type": "texture", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
+update();

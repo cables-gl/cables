@@ -51,11 +51,20 @@ function updateUi()
 
 function update(shader, bindings)
 {
-    // const mgpu = op.patch.frameStore.mgpu;
+
+    const name = inName.get() || defaultName;
     if (!uni)
     {
 
-        const name = inName.get() || defaultName;
+        op.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
+
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+        op.shaderNode.results[0].type = inType.get();
+    }
+    // const mgpu = op.patch.frameStore.mgpu;
+    if (!uni && shader)
+    {
+
         // binding=new CGL.Uniform()
 
         let uniType = "f";
@@ -64,11 +73,6 @@ function update(shader, bindings)
         if (inType.get() == "vec2") uniType = "2f";
         if (uniType == "f") uni = new CGL.Uniform(shader, uniType, name, inX); // why needed, bug in cgl_uniform
         else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
-
-        op.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
-
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = inType.get();
 
         op.updateGraph();
     }
@@ -85,3 +89,4 @@ new CABLES.ShaderGraphOp(this,
         "results": [{ "type": "vec4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
+update();

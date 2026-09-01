@@ -69,7 +69,6 @@ export class ShaderGraphOp
             console.warn("PARAM HAS no resultS", this.op.name);
             shaderNode.results = [shaderNode.result];
             delete shaderNode.result;
-
         }
 
         if (shaderNode.params)
@@ -104,9 +103,7 @@ export class ShaderGraphOp
 
                 // if (shaderNode.params[i].port)
                 param.port.setUiAttribs({ "objType": "sg_" + param.type, "display": "sg" });
-
             }
-
         }
 
         for (let i = 0; i < shaderNode.results.length; i++)

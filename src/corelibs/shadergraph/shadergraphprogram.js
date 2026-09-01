@@ -89,9 +89,11 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const node = op.shaderNode;
 
+        // this._headFuncSrc += "// addfunc " + node.name + "::" + node.srcUni + "\n";
+
         if (node.srcUni && this._opIdsHeadUniSrc[op.id] != node.srcUni)
         {
-            this._headFuncSrc += node.srcUni;
+            this._headFuncSrc += node.srcUni || "";
             this._opIdsHeadUniSrc[op.id] = node.srcUni;
         }
 
@@ -119,7 +121,7 @@ export class ShaderGraphProgram extends Events
         // console.log("parammm", param.port.name);
         // this.log(node, "param [", param.port.name, "]", otherPort.name, node.results[0].type, "=>", param.type, otherNode.name);
 
-        this.execNode(otherPort.op, otherPort.op.sgOp.getResult(otherPort.name)?.type);// uiAttribs.objType);
+        this.execNode(otherPort.op);
 
         const tt = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params);
 
@@ -180,6 +182,7 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const node = op.shaderNode;
 
+        this.addOpShaderFuncCode(op);
         this.log(node, "execnode start " + op.name);
         let callstr = "    ";
         if (!node) return console.log("no node?");
@@ -225,8 +228,6 @@ export class ShaderGraphProgram extends Events
 
         if (node.type == "function") callstr += node.name + "(";
         if (node.type == "string") callstr += node.name;
-
-        this.addOpShaderFuncCode(op);
 
         const numObjectPorts = this.countObjectInputPorts(op);
         let count = 0;
@@ -408,6 +409,7 @@ export class ShaderGraphProgram extends Events
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
+        console.log("compile done.");
     }
 
     static getNewId()

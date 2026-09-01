@@ -1,12 +1,11 @@
 const
     inMat = op.inArray("Matrix"),
-
-    inName = op.inString("Name", "");
-
-const outValue = op.outObject("value");
+    inName = op.inString("Name", ""),
+    outValue = op.outObject("value");
 
 let uni = null;
 let uniformBuffer;
+let needInit = true;
 const defaultName = "unif" + CABLES.simpleId();
 
 /* minimalcore:start */
@@ -27,7 +26,6 @@ inName.onChange =
         updateUi();
 
         uni = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -42,17 +40,27 @@ function updateUi()
 
 function update(shader, bindings)
 {
-    // const mgpu = op.patch.frameStore.mgpu;
+    const name = inName.get() || defaultName;
+
     if (!uni)
     {
 
-        const name = inName.get() || defaultName;
+        op.shaderNode.srcUni = "uniform " + "mat4" + " " + name + ";";
+        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+
+        op.shaderNode.results[0].type = "mat4";
+    }
+
+    // const mgpu = op.patch.frameStore.mgpu;
+    if (!uni && shader)
+    {
+
         uni = new CGL.Uniform(shader, "m4", name);
 
-        op.shaderNode.srcUni = "uniform " + "mat4" + " " + name + ";";
+        uni.setValue(inMat.get());
 
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = "texture";
+        console.log("namiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiie", op.shaderNode.srcUni);
+        // op.shaderNode.srcUni = "uniform " + "mat4" + " " + name + ";";
 
         op.updateGraph();
     }
@@ -70,3 +78,4 @@ new CABLES.ShaderGraphOp(this,
         "results": [{ "type": "mat4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
+update();
