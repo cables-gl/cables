@@ -1,0 +1,49 @@
+{
+    "id": "5f2c5f5c-318b-441d-b91c-16673b6c0007",
+    "created": 1787727877893,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787727877893
+        },
+        {
+            "message": "Extension.ShaderGraph.Lang.FragOutColor renamed to Ops.Extension.ShaderGraph.Wgsl.FragOutColor",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788267699159
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 5,
+                "name": "var name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec4"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
