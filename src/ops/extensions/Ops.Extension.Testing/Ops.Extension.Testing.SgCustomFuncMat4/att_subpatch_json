@@ -1,0 +1,515 @@
+{
+  "ops": [
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "a3ikl2q6r",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1290.6308038145003,
+          "y": 1543.8120365574487
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 0
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "duqq0i7zg",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1314.6308038145003,
+          "y": 1272.0072179751326
+        },
+        "subPatch": "adhw1bykt",
+        "extendTitle": "FRAGMENT",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n\n{{MAIN}}\n\noutColor = color;\n\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 1
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "0pcz6fjr8",
+              "objOut": "duqq0i7zg"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "value": "\nIN vec2 texCoord;\n \nfloat sdBox(vec3 p, vec3 b)\n{\n  vec3 q = abs(p) - b;\n  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);\n}\n \nfloat map(vec3 p,mat4 matrix)\n{\n  vec3 pt = (matrix * vec4(p, 1.0)).xyz;\n  return sdBox(pt, vec3(1.0));\n}\n \nvec3 calcNormal(vec3 p,mat4 matrix) \n{\n  vec2 e = vec2(0.001, 0.0);\n  return normalize(vec3(\n    map(p + e.xyy, matrix) - map(p - e.xyy, matrix),\n    map(p + e.yxy, matrix) - map(p - e.yxy, matrix),\n    map(p + e.yyx, matrix) - map(p - e.yyx, matrix)\n  ));\n}\n\n// @name rm\n// @param {vec2} uv\n// @param {mat4} mat\n// @returns {vec4}\nvec4 rm(vec2 uv,mat4 matrix)\n{\n  vec3 ro = vec3(0.0, 0.0, 4.0);\n  vec3 rd = normalize(vec3(uv, -1.5));\n \n  vec3 col = vec3(0.);  \n  float t = 0.0;\n \n  for (int i = 0; i < 100; i++) \n  {\n    vec3 p = ro + rd * t;\n    float d = map(p,matrix);\n    if (d < 0.0015)\n    {\n      vec3 n = calcNormal(p, matrix);\n      vec3 lightDir = normalize(vec3(0.6, 0.7, 0.5));\n      float diff = max(dot(n, lightDir), 0.0);\n      float amb = 0.15;\n      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 2.0);\n      col = vec3(0.25, 0.55, 0.95) * (diff + amb) + vec3(0.3, 0.2, 0.5) * rim * 0.4;\n      break;\n    }\n    t += d;\n    if (t > 20.0) break;\n  }\n \n  return vec4(col, 1.0);\n}\nuniform mat4 uMat4322;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n\n    vec2 rUv_118=texCoord.xy;\n\n    \n    vec4 rm120=rm(rUv_118, uMat4322);\n\n    vec4 color=rm120;\n\n\noutColor = color;\n\n}"
+        }
+      ]
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "io78w70qv",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1338.6308038145003,
+          "y": 1199.6699256701315
+        },
+        "subPatch": "adhw1bykt",
+        "extendTitle": "color  color",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "duqq0i7zg",
+              "objOut": "io78w70qv"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
+      "id": "hyh9u1i0s",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1350.6308038145003,
+          "y": 1022.6502137333869
+        },
+        "subPatch": "adhw1bykt",
+        "extendTitle": " rUv_118",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "uv",
+              "portOut": "result",
+              "objIn": "io3a3faho",
+              "objOut": "hyh9u1i0s"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "0pcz6fjr8",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1290.6308038145003,
+          "y": 1446.362108540624
+        },
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "a3ikl2q6r",
+              "objOut": "0pcz6fjr8"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\n \nfloat sdBox(vec3 p, vec3 b)\n{\n  vec3 q = abs(p) - b;\n  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);\n}\n \nfloat map(vec3 p,mat4 matrix)\n{\n  vec3 pt = (matrix * vec4(p, 1.0)).xyz;\n  return sdBox(pt, vec3(1.0));\n}\n \nvec3 calcNormal(vec3 p,mat4 matrix) \n{\n  vec2 e = vec2(0.001, 0.0);\n  return normalize(vec3(\n    map(p + e.xyy, matrix) - map(p - e.xyy, matrix),\n    map(p + e.yxy, matrix) - map(p - e.yxy, matrix),\n    map(p + e.yyx, matrix) - map(p - e.yyx, matrix)\n  ));\n}\n\n// @name rm\n// @param {vec2} uv\n// @param {mat4} mat\n// @returns {vec4}\nvec4 rm(vec2 uv,mat4 matrix)\n{\n  vec3 ro = vec3(0.0, 0.0, 4.0);\n  vec3 rd = normalize(vec3(uv, -1.5));\n \n  vec3 col = vec3(0.);  \n  float t = 0.0;\n \n  for (int i = 0; i < 100; i++) \n  {\n    vec3 p = ro + rd * t;\n    float d = map(p,matrix);\n    if (d < 0.0015)\n    {\n      vec3 n = calcNormal(p, matrix);\n      vec3 lightDir = normalize(vec3(0.6, 0.7, 0.5));\n      float diff = max(dot(n, lightDir), 0.0);\n      float amb = 0.15;\n      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 2.0);\n      col = vec3(0.25, 0.55, 0.95) * (diff + amb) + vec3(0.3, 0.2, 0.5) * rim * 0.4;\n      break;\n    }\n    t += d;\n    if (t > 20.0) break;\n  }\n \n  return vec4(col, 1.0);\n}\nuniform mat4 uMat3474;\n\n\nvoid main()\n{\n\n    vec2 rUv_111=texCoord.xy;\n\n    \n    vec4 rm113=rm(rUv_111, uMat3474);\n\n    vec4 color=rm113;\n\n\noutColor = color;\n\n}"
+        }
+      ]
+    },
+    {
+      "opId": "3df921b2-94d5-4a51-a8f2-27293409f6f0",
+      "id": "f3vbh8dr3",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "uMat4322  uMat4322",
+        "translate": {
+          "x": 1362.6308038145003,
+          "y": 940.2545057820911
+        },
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Name",
+          "value": ""
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "value",
+          "links": [
+            {
+              "portIn": "mat",
+              "portOut": "value",
+              "objIn": "io3a3faho",
+              "objOut": "f3vbh8dr3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "2ebd0d87-f67a-4101-bdf0-283c610b095a",
+      "id": "um5h3sgnn",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1362.6308038145003,
+          "y": 822.5497051122202
+        },
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Matrix",
+              "portOut": "Result",
+              "objIn": "f3vbh8dr3",
+              "objOut": "um5h3sgnn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "51a9b13c-69a9-4756-82f9-cddb1ff5d69e",
+      "id": "io3a3faho",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1338.6308038145003,
+          "y": 1086.803070022258
+        },
+        "subPatch": "adhw1bykt",
+        "extendTitle": " rm120",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "head src",
+          "value": " \nfloat sdBox(vec3 p, vec3 b)\n{\n  vec3 q = abs(p) - b;\n  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);\n}\n \nfloat map(vec3 p,mat4 matrix)\n{\n  vec3 pt = (matrix * vec4(p, 1.0)).xyz;\n  return sdBox(pt, vec3(1.0));\n}\n \nvec3 calcNormal(vec3 p,mat4 matrix) \n{\n  vec2 e = vec2(0.001, 0.0);\n  return normalize(vec3(\n    map(p + e.xyy, matrix) - map(p - e.xyy, matrix),\n    map(p + e.yxy, matrix) - map(p - e.yxy, matrix),\n    map(p + e.yyx, matrix) - map(p - e.yyx, matrix)\n  ));\n}\n\n// @name rm\n// @param {vec2} uv\n// @param {mat4} mat\n// @returns {vec4}\nvec4 rm(vec2 uv,mat4 matrix)\n{\n  vec3 ro = vec3(0.0, 0.0, 4.0);\n  vec3 rd = normalize(vec3(uv, -1.5));\n \n  vec3 col = vec3(0.);  \n  float t = 0.0;\n \n  for (int i = 0; i < 100; i++) \n  {\n    vec3 p = ro + rd * t;\n    float d = map(p,matrix);\n    if (d < 0.0015)\n    {\n      vec3 n = calcNormal(p, matrix);\n      vec3 lightDir = normalize(vec3(0.6, 0.7, 0.5));\n      float diff = max(dot(n, lightDir), 0.0);\n      float amb = 0.15;\n      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 2.0);\n      col = vec3(0.25, 0.55, 0.95) * (diff + amb) + vec3(0.3, 0.2, 0.5) * rim * 0.4;\n      break;\n    }\n    t += d;\n    if (t > 20.0) break;\n  }\n \n  return vec4(col, 1.0);\n}\n"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "io78w70qv",
+              "objOut": "io3a3faho"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "650baeb1-db2d-4781-9af6-ab4e9d4277be",
+      "id": "plksjrlpn",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1350.6308038145003,
+          "y": 590.380331577263
+        },
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "posX",
+          "value": 1.1
+        },
+        {
+          "name": "posY",
+          "value": 1.07
+        },
+        {
+          "name": "posZ",
+          "value": 0
+        },
+        {
+          "name": "scale",
+          "value": 1
+        },
+        {
+          "name": "rotX",
+          "value": -22
+        },
+        {
+          "name": "rotY",
+          "value": 35
+        },
+        {
+          "name": "rotZ",
+          "value": -20.7
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "trigger",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger",
+              "objIn": "ycdw9f1tx",
+              "objOut": "plksjrlpn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "2d96f0a3-979a-4dc3-8c49-848f08efe0e0",
+      "id": "ycdw9f1tx",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1350.6308038145003,
+          "y": 694.3069301697294
+        },
+        "subPatch": "adhw1bykt",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "matrix",
+          "links": [
+            {
+              "portIn": "Matrix",
+              "portOut": "matrix",
+              "objIn": "um5h3sgnn",
+              "objOut": "ycdw9f1tx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
+      "id": "2ptcz16ob",
+      "attribs": {},
+      "uiAttribs": {
+        "resizable": true,
+        "resizableY": false,
+        "stretchPorts": true,
+        "translate": {
+          "x": 1235.126520705591,
+          "y": 472.19233376194836
+        },
+        "subPatch": "adhw1bykt",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "trigger 0",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "trigger 0",
+              "objIn": "plksjrlpn",
+              "objOut": "2ptcz16ob"
+            }
+          ]
+        },
+        {
+          "name": "trigger 3",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "trigger 3",
+              "objIn": "0pcz6fjr8",
+              "objOut": "2ptcz16ob"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "f5j34xeec",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "adhw1bykt",
+        "translate": {
+          "x": 1235.126520705591,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_5hp2gjnna",
+          "title": "exe",
+          "links": [
+            {
+              "portIn": "exe",
+              "portOut": "innerOut_5hp2gjnna",
+              "objIn": "2ptcz16ob",
+              "objOut": "f5j34xeec"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "vr56z0za7",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "adhw1bykt",
+        "translate": {
+          "x": 1235.126520705591,
+          "y": 1654.8120365574487
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    }
+  ]
+}
