@@ -1,5 +1,5 @@
 const
-    inTexture = op.inTexture("texture"),
+    inMat = op.inArray("Matrix"),
 
     inName = op.inString("Name", "");
 
@@ -15,10 +15,12 @@ inName.setUiAttribs({ "hidePort": true });
 updateUi();
 
 /* minimalcore:end */
-// inTexture.onChange = () =>
-// {
-//     if (uni) uni.setTex;
-// };
+inMat.onChange = () =>
+{
+    // console.log("11",uni);
+    if (uni) uni.setValue(inMat.get());
+};
+
 inName.onChange =
     () =>
     {
@@ -35,8 +37,6 @@ function updateUi()
 
     op.setUiAttrib({ "extendTitle": inName.get() });
 
-    outValue.setUiAttribs({ "objType": "sg_texture" });
-
     /* minimalcore:end */
 }
 
@@ -47,16 +47,16 @@ function update(shader, bindings)
     {
 
         const name = inName.get() || defaultName;
-        uni = new CGL.Uniform(shader, "t", name);
+        uni = new CGL.Uniform(shader, "m4", name);
 
-        op.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
+        op.shaderNode.srcUni = "uniform " + "mat4" + " " + name + ";";
 
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
         op.shaderNode.results[0].type = "texture";
 
         op.updateGraph();
     }
-    if (uni && inTexture.get()) shader.pushTexture(uni, inTexture.get().tex);
+    // if (uni && inMat.get()) shader.pushTexture(uni, inMat.get().tex);
 
 }
 
@@ -67,6 +67,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "results": [{ "type": "texture", "port": outValue }],
+        "results": [{ "type": "mat4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });

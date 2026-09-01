@@ -7,7 +7,7 @@ new CABLES.ShaderGraphOp(this,
     });
 
 const
-    code = op.inStringEditor("head src", "");
+    code = op.inStringEditor("head src", "", "glsl");
 
 op.init =
     code.onChange =
@@ -17,6 +17,8 @@ op.init =
         op.shaderNode.name = def.name;
         op.shaderNode.src = code.get();
         op.shaderNode.params = def.params;
+        op.shaderNode.resultVarName = def.name + op.shaderNode.id;
+
         op.shaderNode.results[0].type = def.returns;
 
         op.updateGraph();
@@ -40,6 +42,6 @@ function parseDef(str)
         }
     }
 
-    console.log("def", def);
+    // console.log("def", def);
     return def;
 }

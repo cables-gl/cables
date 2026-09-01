@@ -89,10 +89,10 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const node = op.shaderNode;
 
-        if (node.srcUni && !this._opIdsHeadUniSrc[op.id])
+        if (node.srcUni && this._opIdsHeadUniSrc[op.id] != node.srcUni)
         {
             this._headFuncSrc += node.srcUni;
-            this._opIdsHeadUniSrc[op.id] = true;
+            this._opIdsHeadUniSrc[op.id] = node.srcUni;
         }
 
         if (node.src && !this._opIdsHeadFuncSrc[op.name])

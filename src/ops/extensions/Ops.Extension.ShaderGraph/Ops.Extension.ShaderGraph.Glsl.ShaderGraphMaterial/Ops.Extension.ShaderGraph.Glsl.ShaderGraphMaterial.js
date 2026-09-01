@@ -42,14 +42,18 @@ inExec.onTriggered = () =>
         updateModules();
 
         shader.compile();
+        outCodeFrag.setUiAttribs({ "editorDiagnostics": null });
+        outCodeVertex.setUiAttribs({ "editorDiagnostics": null });
+
+        outCodeFrag.set(shader.finalShaderFrag);
+        outCodeVertex.set(shader.finalShaderVert);
+
         reInit = false;
     }
 
     if (shader.hasErrors())
     {
 
-        outCodeFrag.set(shader.finalShaderFrag);
-        outCodeVertex.set(shader.finalShaderVert);
         outCodeFrag.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });
         outCodeVertex.setUiAttribs({ "editorDiagnostics": shader.diagnosticsVert });
         // console.log("shader.diagnosticsFrag", shader.diagnosticsFrag);

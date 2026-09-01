@@ -1,0 +1,74 @@
+{
+    "id": "3df921b2-94d5-4a51-a8f2-27293409f6f0",
+    "created": 1788252763990,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1766822305990
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1767039477719
+        },
+        {
+            "message": "Extension.MiniGpu.CompShaderUniFloat renamed to Ops.Extension.MiniGpu.CompShader.BindingUniformFloat",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1785422361034
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786823838421
+        },
+        {
+            "message": "Extension.MiniGpu.CompShader.UniformFloatVec_v2 renamed to Ops.Extension.MiniGpu.ShaderGraph.UniformFloatVec_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787816119162
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787821842043
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787927287539
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788252763990
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Matrix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "value",
+                "objType": "sg_texture"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
