@@ -1,9 +1,11 @@
 const
     inUpd = op.inTriggerButton("Update"),
+    inNs = op.inString("Namespace", "Ops.Extension.ShaderGraph"),
     outPerc = op.outNumber("coverage"),
     outMissing = op.outArray("Missing");
 
-inUpd.onTriggered = update;
+inNs.onChange =
+    inUpd.onTriggered = update;
 
 function update()
 {
@@ -14,10 +16,11 @@ function update()
     // for(const i in CABLES.OPS)
     for (let i = 0; i < gui.opDocs._opDocs.length; i++)
     {
-        if (gui.opDocs._opDocs[i].name.startsWith("Ops.Extension.ShaderGraph"))
+        if (gui.opDocs._opDocs[i].name.startsWith(inNs.get()))
         {
             count++;
             const arr = op.patch.getOpsByOpId(gui.opDocs._opDocs[i].id);
+
             if (arr.length > 0) countFound++;
             else missing.push(gui.opDocs._opDocs[i].name);
             // console.log("arr",gui.opDocs._opDocs[i].id, arr.length);
@@ -30,5 +33,8 @@ function update()
     console.log("found..." + countFound + "/" + count);
     console.log(missing);
     outMissing.setRef(missing);
+    op.setUiAttribs({ "extendTitle": String(Math.round(countFound / count * 100)) + "%" });
 
 }
+
+update();
