@@ -56,6 +56,9 @@ export class Lang
         if (type == "gen") return value || "0.";
         if (type == "bool") return value || "false";
         if (type == "sampler") return value;
+        if (type == "mat4") return "mat4(1.)";
+        if (type == "mat3") return "mat4(1.)";
+        if (type == "mat2") return "mat4(1.)";
 
         return "/* no default: " + type + "*/";
     }
