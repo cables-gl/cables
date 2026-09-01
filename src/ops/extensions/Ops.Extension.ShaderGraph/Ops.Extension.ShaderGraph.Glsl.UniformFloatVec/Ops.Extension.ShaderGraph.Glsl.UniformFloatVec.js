@@ -82,6 +82,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "vec4", "port": outValue },
+        "results": [{ "type": "vec4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });

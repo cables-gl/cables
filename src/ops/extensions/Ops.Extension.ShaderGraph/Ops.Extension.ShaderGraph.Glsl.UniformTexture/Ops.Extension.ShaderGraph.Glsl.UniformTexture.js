@@ -57,6 +57,7 @@ function update(shader, bindings)
         op.updateGraph();
     }
     if (uni && inTexture.get()) shader.pushTexture(uni, inTexture.get().tex);
+    else console.log("not possible to push texture");
 
 }
 
