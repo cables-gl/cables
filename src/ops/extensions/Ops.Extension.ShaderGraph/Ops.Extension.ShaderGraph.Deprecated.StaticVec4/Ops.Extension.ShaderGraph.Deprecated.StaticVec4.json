@@ -1,6 +1,6 @@
 {
-    "id": "6268fadc-4d84-4bbe-ab7f-0af0fe99e210",
-    "created": 1786693804756,
+    "id": "b5203cf3-8b1d-46b1-893c-b85d7475e706",
+    "created": 1786693162762,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -59,10 +59,10 @@
             "date": 1786693213820
         },
         {
-            "message": "op created",
-            "type": "new op",
+            "message": "op Extension.ShaderGraph.Lang.StaticVec4 was deprecated",
+            "type": "deprecation",
             "author": "pandur",
-            "date": 1786693804756
+            "date": 1788271511334
         }
     ],
     "layout": {
@@ -71,11 +71,23 @@
                 "type": 0,
                 "name": "x",
                 "subType": "number",
-                "objType": "sg_float"
+                "objType": "sg_vec4"
             },
             {
                 "type": 0,
                 "name": "y",
+                "subType": "number",
+                "objType": "sg_float"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "subType": "number",
+                "objType": "sg_float"
+            },
+            {
+                "type": 0,
+                "name": "w",
                 "subType": "number",
                 "objType": "sg_float"
             }
@@ -84,7 +96,7 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_vec2"
+                "objType": "sg_vec4"
             }
         ]
     },
