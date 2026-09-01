@@ -93,7 +93,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.srcUni && this._opIdsHeadUniSrc[op.id] != node.srcUni)
         {
-            this._headFuncSrc += node.srcUni || "";
+            this._headFuncSrc += (node.srcUni || "") + "\n";
             this._opIdsHeadUniSrc[op.id] = node.srcUni;
         }
 

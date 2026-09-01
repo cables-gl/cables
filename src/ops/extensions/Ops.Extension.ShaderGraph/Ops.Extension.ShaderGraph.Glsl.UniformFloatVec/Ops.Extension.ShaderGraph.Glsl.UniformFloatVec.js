@@ -11,7 +11,7 @@ const outValue = op.outObject("value");
 let uni = null;
 let uniformBuffer;
 const uniformArray = new Float32Array([0, 0, 0, 0]);
-const defaultName = "unif" + CABLES.simpleId();
+const defaultName = "uF" + CABLES.simpleId();
 
 /* minimalcore:start */
 

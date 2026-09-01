@@ -1,11 +1,13 @@
 const
-    inTexture = op.inTexture("texture"),
+    inMat = op.inArray("Matrix"),
+    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "float"),
     inName = op.inString("Name", ""),
     outValue = op.outObject("value");
 
 let uni = null;
 let uniformBuffer;
-const defaultName = "uTex" + CABLES.simpleId();
+let needInit = true;
+const defaultName = "uMat" + CABLES.simpleId();
 
 /* minimalcore:start */
 
@@ -13,18 +15,18 @@ inName.setUiAttribs({ "hidePort": true });
 updateUi();
 
 /* minimalcore:end */
-// inTexture.onChange = () =>
-// {
-//     if (uni) uni.setTex;
-// };
+inMat.onChange = () =>
+{
+    if (uni) uni.setValue(inMat.get());
+};
 
-inName.onChange =
+inType.onChange =
+    inName.onChange =
     () =>
     {
         updateUi();
 
         uni = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -34,35 +36,30 @@ function updateUi()
 
     op.setUiAttrib({ "extendTitle": inName.get() });
 
-    outValue.setUiAttribs({ "objType": "sg_texture" });
-
     /* minimalcore:end */
 }
 
 function update(shader, bindings)
 {
     const name = inName.get() || defaultName;
+
     if (!uni)
     {
-
-        op.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
+        op.shaderNode.srcUni = "uniform " + "vec4[99]" + " " + name + ";";
         op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = "texture";
+        op.shaderNode.results[0].type = "array";
     }
 
     if (!uni && shader)
     {
-        uni = new CGL.Uniform(shader, "t", name);
-
-        if (shader && uni && inTexture.get())
-        {
-            shader.pushTexture(uni, inTexture.get().tex);
-        }
-
+        let t = "f[]";
+        if (inType.get() == "vec2") t = "2f[]";
+        if (inType.get() == "vec3") t = "3f[]";
+        if (inType.get() == "vec4") t = "4f[]";
+        uni = new CGL.Uniform(shader, t, name);
+        uni.setValue(inMat.get());
         op.updateGraph();
     }
-    if (uni && inTexture.get()) shader.pushTexture(uni, inTexture.get().tex);
-    else console.log("not possible to push texture");
 
 }
 
@@ -70,9 +67,11 @@ new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
         "name": inName.get() || defaultName,
+        "title": "name",
         "update": update,
         "params": [],
-        "results": [{ "type": "texture", "port": outValue }],
+        "results": [{ "type": "array", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
+
 update();
