@@ -74,7 +74,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_vec3"
             }
         ]
     },
