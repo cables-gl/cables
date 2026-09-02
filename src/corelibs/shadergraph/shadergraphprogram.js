@@ -32,6 +32,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 
 /**
  * @typedef CompileOptions
+ * @property {string} name
  * @property {boolean} showId
  * @property {boolean} showType
  * @property {boolean} debug
@@ -178,7 +179,11 @@ export class ShaderGraphProgram extends Events
      */
     execNode(op)
     {
+
+        /* minimalcore:start */
         this.detectLangProblems(this.lang.name, op);
+
+        /* minimalcore:end */
 
         /** @type {ShaderNode} */
         const node = op.shaderNode;
@@ -196,10 +201,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.type == "operator" || node.maxGen)
         {
-
             node.results[0].type = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]);
-
-            // this.setNodeResult(node, ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]), "operator maxgen");
         }
 
         let title = "";
@@ -209,7 +211,6 @@ export class ShaderGraphProgram extends Events
 
         /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": title || "" });
-        // op.portsOut[0].setUiAttribs({ "objType": "sg_" + node.result.type });
 
         /* minimalcore:end */
 
@@ -244,8 +245,6 @@ export class ShaderGraphProgram extends Events
 
                 if (port.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
 
-                // this.setNodeResultType(node, node.result.type, param);
-
                 // parameters...
                 if (port.isLinked())
                 {
@@ -264,22 +263,6 @@ export class ShaderGraphProgram extends Events
 
                         paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
 
-                        // if (node.result.type == "gen" && otherPort.op.shaderNode.result)
-                        // {
-
-                        //     // node.result.type = otherPort.op.shaderNode.results[0].type;
-                        //     // let t = this.getParamFromPort(node, otherPort).type; otherPort.op.shaderNode.results[0].type;
-                        //     let t = this.getTypeFromInputPort(port);
-
-                        //     // if (t == "gen")
-                        //     // {
-                        //     // t = this.lang.getMaxGenTypeFromInputParams(node.params);
-                        //     // }
-                        //     node.result.type = t;
-                        //     // node.result.type = otherPort.op.shaderNode.results[0].type;
-                        // }
-                        // node.result.type = otherPort.op.shaderNode.result.type;
-
                         this.addOpShaderFuncCode(otherPort.op);
                     }
 
@@ -289,19 +272,9 @@ export class ShaderGraphProgram extends Events
                 else
                 {
                     this.addOpShaderFuncCode(port.op);
-                    // this.log("defaultvalue ", port.op.shaderNode.params[i].name);
 
                     let defaul = null;
                     if (port.attribs.sg) defaul = port.attribs.sg;
-                    else
-                    {
-
-                        /* minimalcore:start */
-                        // if (port.op.shaderNode.params[i].default)port.setAttribs({ "sg": port.op.shaderNode.params[i].default });
-                        // do not set for less data.........
-
-                        /* minimalcore:end */
-                    }
                     defaul = defaul || port.op.shaderNode.params[i].default;
 
                     paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type, defaul);
@@ -325,17 +298,11 @@ export class ShaderGraphProgram extends Events
 
         /* minimalcore:start */
         if (op.uiAttribs.comment)callstr += this.comment(op.uiAttribs.comment);
+        this.log(node, "execnode  [" + node.type + "]");
 
         /* minimalcore:end */
 
         if (callstr.trim() != "") callstr += "\n";
-
-        /* minimalcore:start */
-        this.log(node, "execnode  [" + node.type + "]");
-        // this.log("->" + node.result.type);
-
-        /* minimalcore:end */
-
         this._callFuncStack.push(callstr);
 
         return node.resultVarName;
@@ -382,6 +349,7 @@ export class ShaderGraphProgram extends Events
         this._opIdsHeadUniSrc = {};
         this._headFuncSrc = "";
         this._headUniSrc = "";
+
         let callSrc = "";
 
         if (!port.ports)
@@ -410,80 +378,13 @@ export class ShaderGraphProgram extends Events
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
-        console.log("compile done.");
+        console.log("compiled " + this.options.name || "");
     }
 
     static getNewId()
     {
         return String(++shaderIdCounter);
     }
-
-    /**
-     * @param {ShaderNode} node
-     * @param {string} t
-     * @param {string} reason
-     */
-    // setNodeResult(node, t, reason)
-    // {
-    //     if (reason) this.log(node, "set node result", reason);
-    //     node.result.type = t;
-    // }
-
-    // setNodeResultType(node, type, param)
-    // {
-
-    //     if (param.resultType)param.type = node.result.type;
-    // }
-
-    /**
-     * @param {ShaderNode} node
-     * @param {Port} [port]
-     */
-    // getTypeFromInputPort(port)
-    // {
-
-    //     console.log("gettypefrominput", port.op.name + ":" + port.name);
-    //     const node = port.op.shaderNode;
-    //     if (node.params)
-    //         for (let i = 0; i < node.params.length; i++)
-    //             if (node.params[i].port == port)
-    //             {
-    //                 if (node.params[i].type == "gen")
-    //                 {
-    //                     if (port.isLinked())
-    //                     {
-
-    //                         return this.getTypeFromOutputPort(port.links[0].getOtherPort(port));
-    //                     }
-    //                 }
-    //                 console.log("return", node.params[i].type);
-    //                 return node.params[i].type;
-    //             }
-    //     console.log("lalala", port, node);
-    // }
-
-    // getTypeFromOutputPort(port)
-    // {
-
-    //     console.log("gettypefrominput", port.op.name + ":" + port.name);
-    //     const node = port.op.shaderNode;
-    //     if (node.params)
-    //         for (let i = 0; i < node.results.length; i++)
-    //             if (node.results[i].port == port)
-    //             {
-    //                 if (node.results[i].type == "gen")
-    //                 {
-    //                     if (port.isLinked())
-    //                     {
-
-    //                         return this.getTypeFromInputPort(port.links[0].getOtherPort(port));
-    //                     }
-    //                 }
-    //                 this.log(node, "return", node.results[i].type);
-    //                 return node.results[i].type;
-    //             }
-    //     console.log("lalala", port, node);
-    // }
 
     /**
      * @param {ShaderNode} node
@@ -529,40 +430,31 @@ export class ShaderGraphProgram extends Events
                 if (r)
                 {
                     const type = r.type;
-                    // console.log("type", type);
                     const t = types.indexOf(r.type);
-
-                    // console.log("type", t);
                     typeIdx = Math.max(typeIdx, t);
-                    // console.log("type", typeIdx);
                 }
             }
 
         }
 
         const t = types[typeIdx];
-        // console.log("getmaxgentype", t, params.length);
 
         if (portsSetType)
-        //     for (let i = 0; i < portsSetType.length; i++)
-        {
             portsSetType.op.shaderNode.results[0].type = t;
-            // portsSetType.op.shaderNode.result.type = t;
-        }
+
         return t;
     }
 
+    /* minimalcore:start */
     /**
      * @param {string} lang
      * @param {Op} op
      */
     detectLangProblems(lang, op)
     {
-
         if (lang == "glsl" && op.objName.toLowerCase().includes("wgsl") || lang == "wgsl" && op.objName.toLowerCase().includes("glsl"))
-        {
-
             op.setUiError("sglang", "language conflict: seems not to be " + lang);
-        }
     }
+
+    /* minimalcore:end */
 }

@@ -1,0 +1,33 @@
+{
+    "id": "6cdc8f6e-62de-4e0f-93b5-6ed4359c2ba3",
+    "created": 1788351169759,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788351169770
+        },
+        {
+            "message": "Patch.PI1Ix3u.SubPatch0 renamed to Ops.Extension.Testing.MgSgUvGradient",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788351191781
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "odid1j1p6",
+                "uititle": "Trigger"
+            }
+        ],
+        "portsOut": []
+    }
+}

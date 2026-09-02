@@ -1,0 +1,644 @@
+{
+  "ops": [
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "png77thj0",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 1397.1579973982211,
+        "width": 622.0107513228553,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "translate": {
+          "x": 353.5091348736744,
+          "y": 776.1772434122536
+        },
+        "comment": " ",
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "extendTitle": "Final Code",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
+      "id": "zgxmhe849",
+      "attribs": {},
+      "uiAttribs": {
+        "height": 799.5825640058325,
+        "width": 527.1579620194898,
+        "resizable": true,
+        "vizLayerMaxZoom": 3500,
+        "translate": {
+          "x": -263.69374656166656,
+          "y": 1309.2159090639739
+        },
+        "comment": " ",
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "extendTitle": "Final Code",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "ZoomText",
+          "value": 0
+        },
+        {
+          "name": "Line Numbers",
+          "value": true
+        },
+        {
+          "name": "Whitespace",
+          "value": 0
+        },
+        {
+          "name": "Wrap lines",
+          "value": 0
+        },
+        {
+          "name": "Syntax index",
+          "value": 1
+        },
+        {
+          "name": "Syntax",
+          "value": "glsl"
+        },
+        {
+          "name": "Font Size",
+          "value": 10
+        },
+        {
+          "name": "Scroll",
+          "value": 0
+        },
+        {
+          "name": "Scroll to diagnose",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "6468b7c1-f63e-4db4-b809-4b203d27ead3",
+      "id": "brmmn0sp1",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -179.02718086347363,
+          "y": 824.9530040191262
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "value",
+          "value": "\n\nstruct VertexOutput {\n    @builtin(position) position: vec4f,\n    @location(0) uv: vec2f,\n    @location(1) agePerc:f32,\n    @location(2) velocity:vec4f,\n    @location(3) color:vec4f,\n    @location(4) pgroup:f32\n};"
+        },
+        {
+          "name": "Syntax index",
+          "value": 0
+        },
+        {
+          "name": "Syntax",
+          "value": "text"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result",
+          "links": [
+            {
+              "portIn": "Code Prepend",
+              "portOut": "Result",
+              "objIn": "4wdaz7laq",
+              "objOut": "brmmn0sp1"
+            },
+            {
+              "portIn": "Code Prepend",
+              "portOut": "Result",
+              "objIn": "ci7jio37i",
+              "objOut": "brmmn0sp1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1c2c6c2b-3a94-4e62-beed-56f6ef387b39",
+      "id": "3oayuryaf",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -325.09216793243945,
+          "y": 928.2956764329192
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "mvp",
+          "links": [
+            {
+              "portIn": "Graph_1",
+              "portOut": "mvp",
+              "objIn": "ci7jio37i",
+              "objOut": "3oayuryaf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "1c2c6c2b-3a94-4e62-beed-56f6ef387b39",
+      "id": "y2xp1jriu",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -83.43699551864643,
+          "y": 1016.8474005708499
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "mvp",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "mvp",
+              "objIn": "4wdaz7laq",
+              "objOut": "y2xp1jriu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "2f0c69c5-7a67-4317-be32-0db1f7b130d7",
+      "id": "4wdaz7laq",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -107.43699551864643,
+          "y": 1169.9508488467122
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "extendTitle": "VERTEX",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 0
+        },
+        {
+          "name": "Stage",
+          "value": "VERTEX"
+        },
+        {
+          "name": "Code",
+          "value": "{{BINDINGS}}\n\n{{HEADER}}\n\n\n\nfn bump(t: f32) -> f32 {\n    let rise = smoothstep(0.0, 0.5, t);\n    let fall = 1.0 - smoothstep(0.5, 1.0, t);\n    return min(rise, fall);\n}\n\nconst PI: f32 = 3.14159265359;\n\n@vertex\nfn main(\n  @builtin(vertex_index) VertexIndex : u32,\n      @builtin(instance_index) instIdx: u32,\n\n) -> VertexOutput {\n{{MAIN}}    \n    var size:f32=1.;\n\n    var vpos = array<vec2f, 6>(\n      vec2(-size, -size),\n        vec2(size, -size),\n        vec2(-size, size),\n        \n        vec2(size, size),\n        vec2(-size, size),\n        vec2(size, -size)\n    );\n\n  \n    var vuv = array<vec2f, 6>(\n        vec2(0.0, 1.0),\n        vec2(1.0, 1.0),\n        vec2(0.0, 0.0),\n\n        vec2(1.0, 0.0),\n        vec2(0.0, 0.0),\n        vec2(1.0, 1.0)\n    );\n\n      var out: VertexOutput;\n    out.position = cables.mvp * vec4f(vpos[VertexIndex], 0.0, 1.0);\n    out.uv = vuv[VertexIndex];\n    return out;\n  \n  //  return cables.mvp*vec4f(vpos[VertexIndex], 0.0, 1.0);\n\n    // let triangleIndex = VertexIndex / 3u;\n    // let cornerIndex = VertexIndex % 3u;\n    // var pos: vec2<f32>;\n\n    // if (cornerIndex != 0u) {\n    //     let pointOffset = cornerIndex - 1u;\n    //     let segIndex = triangleIndex + pointOffset;\n    //     let angle = (f32(segIndex) / 20) * 2.0 * PI;\n\n    //     pos =  vec2<f32>(cos(angle), sin(angle)) * size;\n    // }\n\n\n    // return cables.mvp*vec4f(pos.x,pos.y,0.0, 1.0);\n    // return vec4f(vpos[VertexIndex], 0.0, 1.0);\n}\n\n"
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Vertex Module",
+              "portOut": "Module",
+              "objIn": "3nxnmjtop",
+              "objOut": "4wdaz7laq"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "title": "final code VERTEX",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "png77thj0",
+              "objOut": "4wdaz7laq"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "5f2c5f5c-318b-441d-b91c-16673b6c0007",
+      "id": "9ulxci7cl",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -337.09216793243945,
+          "y": 1034.2267109156778
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "extendTitle": "color ",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "var name",
+          "value": "color"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "ci7jio37i",
+              "objOut": "9ulxci7cl"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "2f0c69c5-7a67-4317-be32-0db1f7b130d7",
+      "id": "ci7jio37i",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -361.09216793243945,
+          "y": 1128.5715385018843
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "extendTitle": "FRAGMENT",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 3,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "{{BINDINGS}}\n{{HEADER}}\n\n@fragment\nfn main(in:VertexOutput) -> @location(0) vec4f\n{\n{{MAIN}}\nreturn color;\n} "
+        },
+        {
+          "name": "Graph_2",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment Module",
+              "portOut": "Module",
+              "objIn": "3nxnmjtop",
+              "objOut": "ci7jio37i"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "title": "final code FRAGMENT",
+          "links": [
+            {
+              "portIn": "String",
+              "portOut": "Final Code",
+              "objIn": "zgxmhe849",
+              "objOut": "ci7jio37i"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "71e5c8d3-f2af-48cf-bb71-1b96e09e7d8b",
+      "id": "3nxnmjtop",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": -499.712857587612,
+          "y": 1315.6060212605057
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "cdcrwukjh",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Vertices",
+          "value": 6
+        },
+        {
+          "name": "Instances",
+          "value": 1
+        },
+        {
+          "name": "topology index",
+          "value": 0
+        },
+        {
+          "name": "topology",
+          "value": "triangle-list"
+        },
+        {
+          "name": "cull index",
+          "value": 0
+        },
+        {
+          "name": "cull",
+          "value": "none"
+        },
+        {
+          "name": "depthWriteEnabled",
+          "value": 1
+        },
+        {
+          "name": "depthCompare index",
+          "value": 0
+        },
+        {
+          "name": "depthCompare",
+          "value": "less-equal"
+        }
+      ]
+    },
+    {
+      "opId": "5bd21601-e346-4375-9038-a420bb039773",
+      "id": "pi8n0yuad",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": -406.5895433813255,
+          "y": 397.1371022850298
+        },
+        "extendTitle": "",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "vec",
+              "portOut": "result",
+              "objIn": "l53mmqcln",
+              "objOut": "pi8n0yuad"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "h2adwx2ar",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": 0,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_odid1j1p6",
+          "title": "Trigger",
+          "links": [
+            {
+              "portIn": "Trigger",
+              "portOut": "innerOut_odid1j1p6",
+              "objIn": "3nxnmjtop",
+              "objOut": "h2adwx2ar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "puav4on9y",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": 0,
+          "y": 2253.3352408104747
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "e9e78e5c-7877-4dd7-b03f-fb57d80d5602",
+      "id": "l53mmqcln",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": -810.6155784140244,
+          "y": 449.1242210768403
+        }
+      },
+      "portsOut": [
+        {
+          "name": "x",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "x",
+              "objIn": "hg2xj8r7o",
+              "objOut": "l53mmqcln"
+            }
+          ]
+        },
+        {
+          "name": "y",
+          "links": [
+            {
+              "portIn": "z",
+              "portOut": "y",
+              "objIn": "hg2xj8r7o",
+              "objOut": "l53mmqcln"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "l53mmqcln"
+      }
+    },
+    {
+      "opId": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
+      "id": "hg2xj8r7o",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": -810.6155784140244,
+          "y": 629.0278805871853
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "value",
+              "portOut": "result",
+              "objIn": "9ulxci7cl",
+              "objOut": "hg2xj8r7o"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "hg2xj8r7o"
+      }
+    },
+    {
+      "opId": "972954ed-d954-4815-8c41-a5a1e7721020",
+      "id": "tfxeooh5z",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "cdcrwukjh",
+        "translate": {
+          "x": -774.6155784140244,
+          "y": 541.5948658083059
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "value",
+          "value": 0.9
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "w",
+              "portOut": "result",
+              "objIn": "hg2xj8r7o",
+              "objOut": "tfxeooh5z"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "tfxeooh5z"
+      }
+    }
+  ]
+}

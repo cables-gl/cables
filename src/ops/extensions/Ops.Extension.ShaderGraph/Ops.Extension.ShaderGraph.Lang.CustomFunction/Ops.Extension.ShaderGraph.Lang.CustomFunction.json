@@ -45,6 +45,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786633995925
+        },
+        {
+            "message": "Extension.ShaderGraph.Wgsl.CustomFunction renamed to Ops.Extension.ShaderGraph.Lang.CustomFunction",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788352778934
         }
     ],
     "layout": {

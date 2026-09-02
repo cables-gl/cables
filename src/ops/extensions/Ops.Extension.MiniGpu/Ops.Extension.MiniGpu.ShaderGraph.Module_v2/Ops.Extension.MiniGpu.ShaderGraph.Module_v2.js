@@ -30,23 +30,31 @@ ids.onChange =
     inGraphNodes.onLinkChanged =
     inGraphNodes.onChange = () =>
     {
-        sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get() });
-        let str = inCode.get() || "";
-
-        /* minimalcore:start */
-
-        op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!", 1);
-        op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!", 1);
-
-        /* minimalcore:end */
-
-        str = str.replaceAll("{{MAIN}}", sgp.srcMain);
-        str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
-
-        if (sm) sm.reInit = true;
-        gencode = str;
+        op.patch.addOnAnimFrame(op);
+        op.onAnimFrame = compile;
 
     };
+
+function compile()
+{
+    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get(), "name": inStage.get() });
+    let str = inCode.get() || "";
+
+    /* minimalcore:start */
+
+    op.setUiError("nomain", str.includes("{{MAIN}}") ? null : "no {{MAIN}} found!", 1);
+    op.setUiError("noHEADER", str.includes("{{HEADER}}") ? null : "no {{HEADER}} found!", 1);
+
+    /* minimalcore:end */
+
+    str = str.replaceAll("{{MAIN}}", sgp.srcMain);
+    str = str.replaceAll("{{HEADER}}", sgp.srcHeader);
+
+    if (sm) sm.reInit = true;
+    gencode = str;
+
+    op.patch.removeOnAnimFrame(op);
+}
 
 inStage.onChange =
     inCodePre.onChange =

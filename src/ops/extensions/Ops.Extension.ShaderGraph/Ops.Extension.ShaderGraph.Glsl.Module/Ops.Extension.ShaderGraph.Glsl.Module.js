@@ -31,12 +31,15 @@ inStage.onChange = debug.onChange =
 
         /* minimalcore:end */
 
-        update();
+        op.patch.addOnAnimFrame(op);
+        op.onAnimFrame = compile;
+
+        // update();
     };
 
-function update()
+function compile()
 {
-    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get() });
+    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get(), "name": inStage.get() });
     let str = inCode.get();
 
     /* minimalcore:start */
@@ -52,6 +55,8 @@ function update()
     outCode.set(str);
     outModule.setRef({ "src": str });
     needsUpdate = false;
+
+    op.patch.removeOnAnimFrame(op);
 }
 
 op.updateShaderModule = (_shader) =>
