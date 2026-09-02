@@ -2,14 +2,14 @@
   "ops": [
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
-      "id": "3s28bw52i",
+      "id": "q5tk4dlek",
       "attribs": {},
       "uiAttribs": {
         "translate": {
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -75,40 +75,11 @@
       ]
     },
     {
-      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
-      "id": "zrm3nt18o",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 1123.6876660203739,
-          "y": 747.9179276909833
-        },
-        "subPatch": "53e3yee2q",
-        "extendTitle": "",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "vec",
-              "portOut": "result",
-              "objIn": "0xnzp8oxw",
-              "objOut": "zrm3nt18o"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
-      "id": "mc2ovxwgh",
+      "id": "fyy4cqegz",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -125,8 +96,8 @@
             {
               "portIn": "Render",
               "portOut": "innerOut_afl5yq365",
-              "objIn": "dg5i8bgh0",
-              "objOut": "mc2ovxwgh"
+              "objIn": "g1eyruqxy",
+              "objOut": "fyy4cqegz"
             }
           ]
         }
@@ -134,10 +105,10 @@
     },
     {
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
-      "id": "qdla77g3a",
+      "id": "2b2m9or69",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -149,14 +120,14 @@
     },
     {
       "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
-      "id": "vwcuis42z",
+      "id": "b4nfdd5jx",
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1133.1753080395895,
-          "y": 1454.996078354458
+          "x": 1147.3961841734704,
+          "y": 1560.2305617451752
         },
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -190,7 +161,7 @@
         },
         {
           "name": "Debug comments",
-          "value": 1
+          "value": 0
         },
         {
           "name": "Set Type Title",
@@ -208,26 +179,26 @@
             {
               "portIn": "Fragment",
               "portOut": "Module",
-              "objIn": "dg5i8bgh0",
-              "objOut": "vwcuis42z"
+              "objIn": "g1eyruqxy",
+              "objOut": "b4nfdd5jx"
             }
           ]
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\nuniform float uF3838;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        // color:execnode start FragOutColor\n    // step:execnode start Step\n    // mod:execnode start Modulo\n    // split:execnode start SplitVec2\n    // texCoord.xy:execnode start Uv\n    // texCoord.xy:execnode  [string]\n    vec2 rUv_127=texCoord.xy;\n\n    // mod:component vec x\n    // split:execnode start SplitVec2\n    // uF3838:execnode start UniformFloatVec\n    // uF3838:execnode  [existingvar]\n    \n    // uF3838:execnode start UniformFloatVec\n    // mod:execnode  [function]\n    float rModulo_131=mod(rUv_127.x, uF3838/* conv param [float: y]float value */);\n\n    // mod:execnode start Modulo\n    // step:execnode  [function]\n    float rStep_132=step(rModulo_131/* conv param [float: number]float result */, 0.1);\n\n    // step:execnode start Step\n    // color:execnode  [var]\n    vec4 color=vec4(rStep_132,rStep_132,rStep_132, 1.0)/* conv param [vec4: color]float result */;\n\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec3 rVec3_218=vec3(-1., 1., -1.);\n\n    vec3 rVec3_222=vec3(-1., 1., 1.);\n\n    vec3 rCross_220=cross(rVec3_218, rVec3_222);\n\n    vec4 rVec4_224=vec4(rCross_220.x, rCross_220.y, rCross_220.z, 1.);\n\n    vec4 rVec4_226=vec4(rVec4_224.x, rVec4_224.y, rVec4_224.z, rVec4_224.w);\n\n    vec4 color=rVec4_226;\n\n    outColor = color;\n}"
         }
       ]
     },
     {
       "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
-      "id": "dg5i8bgh0",
+      "id": "g1eyruqxy",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
           "x": 1436.0795367605128,
-          "y": 1641.034304572308
+          "y": 1642.1283420309333
         },
         "blueprintSubpatch2": true
       },
@@ -239,8 +210,8 @@
             {
               "portIn": "render",
               "portOut": "Next",
-              "objIn": "3s28bw52i",
-              "objOut": "dg5i8bgh0"
+              "objIn": "q5tk4dlek",
+              "objOut": "g1eyruqxy"
             }
           ]
         },
@@ -254,8 +225,8 @@
             {
               "portIn": "String",
               "portOut": "Code Fragment",
-              "objIn": "u5pk902lf",
-              "objOut": "dg5i8bgh0"
+              "objIn": "6wkq782en",
+              "objOut": "g1eyruqxy"
             }
           ]
         }
@@ -263,13 +234,13 @@
     },
     {
       "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
-      "id": "5uec0j1ba",
+      "id": "vvmlt4pu2",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
           "x": 1157.1753080395895,
-          "y": 1379.7655230071357
+          "y": 1473.374360013421
         },
         "extendTitle": "color ",
         "blueprintSubpatch2": true
@@ -282,8 +253,8 @@
             {
               "portIn": "Graph_0",
               "portOut": "result",
-              "objIn": "vwcuis42z",
-              "objOut": "5uec0j1ba"
+              "objIn": "b4nfdd5jx",
+              "objOut": "vvmlt4pu2"
             }
           ]
         }
@@ -291,17 +262,17 @@
     },
     {
       "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
-      "id": "u5pk902lf",
+      "id": "6wkq782en",
       "attribs": {},
       "uiAttribs": {
-        "height": 568.8615666281969,
-        "width": 616.9809282784174,
+        "height": 1251.3552084563485,
+        "width": 857.8604968479688,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
-          "x": 1760.061771537152,
-          "y": 1205.8365442128832
+          "x": 2006.1430883763885,
+          "y": 848.7444145764891
         },
         "extendTitle": "Code Fragment",
         "comment": " ",
@@ -339,7 +310,7 @@
         },
         {
           "name": "Scroll",
-          "value": 0
+          "value": 0.46
         },
         {
           "name": "Scroll to diagnose",
@@ -348,18 +319,143 @@
       ]
     },
     {
-      "opId": "e9e78e5c-7877-4dd7-b03f-fb57d80d5602",
-      "id": "0xnzp8oxw",
+      "opId": "440aa7ec-f85b-4c87-b74c-42eb5458987c",
+      "id": "9r09o33bn",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
-          "x": 1123.6876660203739,
-          "y": 917.9371439479489
+          "x": 1044.360953215829,
+          "y": 926.0202790596762
         },
-        "blueprintSubpatch2": true
+        "extendTitle": ""
       },
-      "storage": {},
+      "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "-1."
+          }
+        },
+        {
+          "name": "y",
+          "attribs": {
+            "sg": "1."
+          }
+        },
+        {
+          "name": "z",
+          "attribs": {
+            "sg": "-1."
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "result",
+              "objIn": "lfx6d1sh4",
+              "objOut": "9r09o33bn"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "9r09o33bn"
+      }
+    },
+    {
+      "opId": "63083d32-f5f1-4e26-bfd0-7a056386ee6c",
+      "id": "lfx6d1sh4",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vzjeq30lr",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1104.68861783163
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "vec",
+              "portOut": "result",
+              "objIn": "5sl5zp13y",
+              "objOut": "lfx6d1sh4"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "lfx6d1sh4"
+      }
+    },
+    {
+      "opId": "440aa7ec-f85b-4c87-b74c-42eb5458987c",
+      "id": "kwsmpmn5g",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vzjeq30lr",
+        "translate": {
+          "x": 1169.1753080395895,
+          "y": 953.317458194686
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "-1."
+          }
+        },
+        {
+          "name": "y",
+          "attribs": {
+            "sg": "1."
+          }
+        },
+        {
+          "name": "z",
+          "attribs": {
+            "sg": "1."
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "y",
+              "portOut": "result",
+              "objIn": "lfx6d1sh4",
+              "objOut": "kwsmpmn5g"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "kwsmpmn5g"
+      }
+    },
+    {
+      "opId": "4c291dba-c297-4d08-9ddd-879bd55a729b",
+      "id": "5sl5zp13y",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vzjeq30lr",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1198.2207711309393
+        }
+      },
       "portsOut": [
         {
           "name": "x",
@@ -367,118 +463,153 @@
             {
               "portIn": "x",
               "portOut": "x",
-              "objIn": "c2a8mxlsy",
-              "objOut": "0xnzp8oxw"
+              "objIn": "1fcs3k3j8",
+              "objOut": "5sl5zp13y"
             }
           ]
-        }
-      ]
-    },
-    {
-      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
-      "id": "usib3h3i6",
-      "attribs": {},
-      "uiAttribs": {
-        "extendTitle": "uF3838 ",
-        "subPatch": "53e3yee2q",
-        "translate": {
-          "x": 1187.1480008758087,
-          "y": 991.2238877296159
-        },
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "Type index",
-          "value": 0
         },
         {
-          "name": "Type",
-          "value": "float"
-        },
-        {
-          "name": "X",
-          "value": 0.2
-        },
-        {
-          "name": "Y",
-          "value": 0
-        },
-        {
-          "name": "Z",
-          "value": 0
-        },
-        {
-          "name": "W",
-          "value": 1
-        },
-        {
-          "name": "Name",
-          "value": ""
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "value",
+          "name": "y",
           "links": [
             {
               "portIn": "y",
-              "portOut": "value",
-              "objIn": "c2a8mxlsy",
-              "objOut": "usib3h3i6"
+              "portOut": "y",
+              "objIn": "1fcs3k3j8",
+              "objOut": "5sl5zp13y"
+            }
+          ]
+        },
+        {
+          "name": "z",
+          "links": [
+            {
+              "portIn": "z",
+              "portOut": "z",
+              "objIn": "1fcs3k3j8",
+              "objOut": "5sl5zp13y"
             }
           ]
         }
-      ]
+      ],
+      "storage": {
+        "ref": "5sl5zp13y"
+      }
     },
     {
-      "opId": "7df2dfcf-e9e6-4f03-97e9-6a4c4a265c71",
-      "id": "c2a8mxlsy",
+      "opId": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
+      "id": "1fcs3k3j8",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
-          "x": 1123.6876660203739,
-          "y": 1189.4112026316564
+          "x": 1157.1753080395895,
+          "y": 1285.2417957785678
         },
-        "extendTitle": "",
-        "blueprintSubpatch2": true
+        "extendTitle": ""
       },
-      "storage": {},
+      "portsIn": [
+        {
+          "name": "w",
+          "attribs": {
+            "sg": "1."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
           "links": [
             {
-              "portIn": "number",
+              "portIn": "vec",
               "portOut": "result",
-              "objIn": "wh1gg7ntt",
-              "objOut": "c2a8mxlsy"
+              "objIn": "gzk5qke4b",
+              "objOut": "1fcs3k3j8"
             }
           ]
         }
-      ]
+      ],
+      "storage": {
+        "ref": "1fcs3k3j8"
+      }
     },
     {
-      "opId": "ec0eeadd-5c0f-43a8-a56b-3eb3ed3e6453",
-      "id": "wh1gg7ntt",
+      "opId": "5e856169-1ca7-44e3-b756-25679a03fbe0",
+      "id": "gzk5qke4b",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "vzjeq30lr",
         "translate": {
-          "x": 1123.6876660203739,
-          "y": 1283.9456425553071
-        },
-        "extendTitle": "",
-        "blueprintSubpatch2": true
+          "x": 1157.1753080395895,
+          "y": 1341.0409302572605
+        }
       },
-      "storage": {},
+      "portsOut": [
+        {
+          "name": "x",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "x",
+              "objIn": "1rxnbut08",
+              "objOut": "gzk5qke4b"
+            }
+          ]
+        },
+        {
+          "name": "y",
+          "links": [
+            {
+              "portIn": "y",
+              "portOut": "y",
+              "objIn": "1rxnbut08",
+              "objOut": "gzk5qke4b"
+            }
+          ]
+        },
+        {
+          "name": "z",
+          "links": [
+            {
+              "portIn": "z",
+              "portOut": "z",
+              "objIn": "1rxnbut08",
+              "objOut": "gzk5qke4b"
+            }
+          ]
+        },
+        {
+          "name": "w",
+          "links": [
+            {
+              "portIn": "w",
+              "portOut": "w",
+              "objIn": "1rxnbut08",
+              "objOut": "gzk5qke4b"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "gzk5qke4b"
+      }
+    },
+    {
+      "opId": "1215c376-fa45-4f52-ab89-6012ec5f72fe",
+      "id": "1rxnbut08",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "vzjeq30lr",
+        "translate": {
+          "x": 1157.1753080395895,
+          "y": 1412.8291078172056
+        },
+        "extendTitle": ""
+      },
       "portsIn": [
         {
-          "name": "number 2",
+          "name": "w",
           "attribs": {
-            "sg": "0.1"
+            "sg": "1."
           }
         }
       ],
@@ -489,12 +620,15 @@
             {
               "portIn": "color",
               "portOut": "result",
-              "objIn": "5uec0j1ba",
-              "objOut": "wh1gg7ntt"
+              "objIn": "vvmlt4pu2",
+              "objOut": "1rxnbut08"
             }
           ]
         }
-      ]
+      ],
+      "storage": {
+        "ref": "1rxnbut08"
+      }
     }
   ]
 }

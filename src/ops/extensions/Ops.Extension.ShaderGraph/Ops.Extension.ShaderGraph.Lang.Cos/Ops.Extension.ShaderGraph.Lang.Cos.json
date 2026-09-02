@@ -1,6 +1,6 @@
 {
-    "id": "440aa7ec-f85b-4c87-b74c-42eb5458987c",
-    "created": 1787045096643,
+    "id": "7f86500c-57ae-4acb-8ff7-9ae79285eff0",
+    "created": 1788271912307,
     "license": "MIT",
     "authorName": "pandur",
     "changelog": [
@@ -20,54 +20,32 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786433102805
+            "date": 1786434225533
         },
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786440227951
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.Var renamed to Ops.Extension.ShaderGraph.Var",
+            "message": "Extension.MiniGpu.Sg.Sin renamed to Ops.Extension.ShaderGraph.Sin",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539117109
+            "date": 1786539098140
         },
         {
-            "message": "Extension.ShaderGraph.Var renamed to Ops.Extension.ShaderGraph.Lang.Var",
+            "message": "Extension.ShaderGraph.Sin renamed to Ops.Extension.ShaderGraph.Lang.Sin",
             "type": "rename",
             "author": "pandur",
-            "date": 1786539281115
+            "date": 1786539274029
         },
         {
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786543324018
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1787045096644
+            "date": 1788271912307
         }
     ],
     "layout": {
         "portsIn": [
             {
                 "type": 2,
-                "name": "x",
-                "objType": "sg_float"
-            },
-            {
-                "type": 2,
-                "name": "y",
-                "objType": "sg_float"
-            },
-            {
-                "type": 2,
-                "name": "z",
+                "name": "number",
                 "objType": "sg_float"
             }
         ],
@@ -75,7 +53,7 @@
             {
                 "type": 2,
                 "name": "result",
-                "objType": "sg_vec3"
+                "objType": "sg_float"
             }
         ]
     },

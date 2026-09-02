@@ -51,6 +51,18 @@
             "type": "rename",
             "author": "pandur",
             "date": 1786711821800
+        },
+        {
+            "message": "op Extension.ShaderGraph.Lang.StaticFloat was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1788271504933
+        },
+        {
+            "message": "Extension.ShaderGraph.Deprecated.StaticFloat renamed to Ops.Extension.ShaderGraph.Lang.Float",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788271702531
         }
     ],
     "layout": {

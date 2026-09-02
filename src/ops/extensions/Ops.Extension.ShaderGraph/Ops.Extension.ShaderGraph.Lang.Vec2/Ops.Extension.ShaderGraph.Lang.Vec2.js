@@ -1,6 +1,6 @@
 new CABLES.ShaderGraphOp(this,
     {
-        "type": "constructor",
+        "type": "function",
         "name": "vec2",
         "convert": false,
         "params": [

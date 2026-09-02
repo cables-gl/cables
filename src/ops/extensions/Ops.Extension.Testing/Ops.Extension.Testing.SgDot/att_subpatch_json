@@ -2,14 +2,14 @@
   "ops": [
     {
       "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
-      "id": "3s28bw52i",
+      "id": "pr9d9p89c",
       "attribs": {},
       "uiAttribs": {
         "translate": {
           "x": 1436.0795367605128,
           "y": 1740.5507695625952
         },
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
       },
@@ -76,14 +76,14 @@
     },
     {
       "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
-      "id": "zrm3nt18o",
+      "id": "epltetzx6",
       "attribs": {},
       "uiAttribs": {
         "translate": {
           "x": 1123.6876660203739,
           "y": 747.9179276909833
         },
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "extendTitle": "",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -94,10 +94,10 @@
           "name": "result",
           "links": [
             {
-              "portIn": "vec",
+              "portIn": "number 1",
               "portOut": "result",
-              "objIn": "0xnzp8oxw",
-              "objOut": "zrm3nt18o"
+              "objIn": "28wgi6wpn",
+              "objOut": "epltetzx6"
             }
           ]
         }
@@ -105,10 +105,10 @@
     },
     {
       "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
-      "id": "mc2ovxwgh",
+      "id": "5gwmc7w5l",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
           "x": 1403.3312162725995,
           "y": 0
@@ -125,8 +125,8 @@
             {
               "portIn": "Render",
               "portOut": "innerOut_afl5yq365",
-              "objIn": "dg5i8bgh0",
-              "objOut": "mc2ovxwgh"
+              "objIn": "1bi5wdbaw",
+              "objOut": "5gwmc7w5l"
             }
           ]
         }
@@ -134,10 +134,10 @@
     },
     {
       "opId": "02d45073-7936-4830-81ad-59a162febf1f",
-      "id": "qdla77g3a",
+      "id": "p2hppzysz",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
           "x": 1403.3312162725995,
           "y": 2436.0863568534965
@@ -149,14 +149,14 @@
     },
     {
       "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
-      "id": "vwcuis42z",
+      "id": "4836vfj3g",
       "attribs": {},
       "uiAttribs": {
         "translate": {
-          "x": 1133.1753080395895,
-          "y": 1454.996078354458
+          "x": 1170.665416784255,
+          "y": 1575.272056206573
         },
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -190,7 +190,7 @@
         },
         {
           "name": "Debug comments",
-          "value": 1
+          "value": 0
         },
         {
           "name": "Set Type Title",
@@ -208,26 +208,26 @@
             {
               "portIn": "Fragment",
               "portOut": "Module",
-              "objIn": "dg5i8bgh0",
-              "objOut": "vwcuis42z"
+              "objIn": "1bi5wdbaw",
+              "objOut": "4836vfj3g"
             }
           ]
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\nuniform float uF3838;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        // color:execnode start FragOutColor\n    // step:execnode start Step\n    // mod:execnode start Modulo\n    // split:execnode start SplitVec2\n    // texCoord.xy:execnode start Uv\n    // texCoord.xy:execnode  [string]\n    vec2 rUv_127=texCoord.xy;\n\n    // mod:component vec x\n    // split:execnode start SplitVec2\n    // uF3838:execnode start UniformFloatVec\n    // uF3838:execnode  [existingvar]\n    \n    // uF3838:execnode start UniformFloatVec\n    // mod:execnode  [function]\n    float rModulo_131=mod(rUv_127.x, uF3838/* conv param [float: y]float value */);\n\n    // mod:execnode start Modulo\n    // step:execnode  [function]\n    float rStep_132=step(rModulo_131/* conv param [float: number]float result */, 0.1);\n\n    // step:execnode start Step\n    // color:execnode  [var]\n    vec4 color=vec4(rStep_132,rStep_132,rStep_132, 1.0)/* conv param [vec4: color]float result */;\n\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\nuniform float uF5726;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_150=texCoord.xy;\n\n    vec2 rVec2_177=vec2(0.5, 0.5);\n\n    vec2 rSubtract_170=rUv_150-rVec2_177;\n\n    vec2 rVec2_176=vec2(3., 1.);\n\n    vec2 rNormalize_167=normalize(rVec2_176);\n\n    float rDot_169=dot(rSubtract_170, rNormalize_167);\n\n    float rDot_183=dot(rSubtract_170, rVec2_176);\n\n    vec3 rVec3_158=vec3(rDot_169, rDot_183, 0.);\n\n    \n    vec3 rSum_184=rVec3_158+vec3(uF5726,uF5726,uF5726);\n\n    vec4 color=vec4(rSum_184, 1.);\n\n    outColor = color;\n}"
         }
       ]
     },
     {
       "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
-      "id": "dg5i8bgh0",
+      "id": "1bi5wdbaw",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
           "x": 1436.0795367605128,
-          "y": 1641.034304572308
+          "y": 1642.1283420309333
         },
         "blueprintSubpatch2": true
       },
@@ -239,8 +239,8 @@
             {
               "portIn": "render",
               "portOut": "Next",
-              "objIn": "3s28bw52i",
-              "objOut": "dg5i8bgh0"
+              "objIn": "pr9d9p89c",
+              "objOut": "1bi5wdbaw"
             }
           ]
         },
@@ -254,8 +254,8 @@
             {
               "portIn": "String",
               "portOut": "Code Fragment",
-              "objIn": "u5pk902lf",
-              "objOut": "dg5i8bgh0"
+              "objIn": "d0rhrlkfc",
+              "objOut": "1bi5wdbaw"
             }
           ]
         }
@@ -263,13 +263,13 @@
     },
     {
       "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
-      "id": "5uec0j1ba",
+      "id": "81h2pwyo4",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
-          "x": 1157.1753080395895,
-          "y": 1379.7655230071357
+          "x": 1194.665416784255,
+          "y": 1491.1892689465967
         },
         "extendTitle": "color ",
         "blueprintSubpatch2": true
@@ -282,8 +282,8 @@
             {
               "portIn": "Graph_0",
               "portOut": "result",
-              "objIn": "vwcuis42z",
-              "objOut": "5uec0j1ba"
+              "objIn": "4836vfj3g",
+              "objOut": "81h2pwyo4"
             }
           ]
         }
@@ -291,17 +291,17 @@
     },
     {
       "opId": "b4c93fde-85c6-4c7e-9962-a6463a84838b",
-      "id": "u5pk902lf",
+      "id": "d0rhrlkfc",
       "attribs": {},
       "uiAttribs": {
-        "height": 568.8615666281969,
-        "width": 616.9809282784174,
+        "height": 1251.3552084563485,
+        "width": 857.8604968479688,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
-          "x": 1760.061771537152,
-          "y": 1205.8365442128832
+          "x": 2006.1430883763885,
+          "y": 848.7444145764891
         },
         "extendTitle": "Code Fragment",
         "comment": " ",
@@ -339,7 +339,7 @@
         },
         {
           "name": "Scroll",
-          "value": 0
+          "value": 0.46
         },
         {
           "name": "Scroll to diagnose",
@@ -348,46 +348,304 @@
       ]
     },
     {
-      "opId": "e9e78e5c-7877-4dd7-b03f-fb57d80d5602",
-      "id": "0xnzp8oxw",
+      "opId": "440aa7ec-f85b-4c87-b74c-42eb5458987c",
+      "id": "s3da68wbz",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
-          "x": 1123.6876660203739,
-          "y": 917.9371439479489
+          "x": 1194.665416784255,
+          "y": 1248.141037376822
         },
+        "extendTitle": "",
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "z",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
-          "name": "x",
+          "name": "result",
           "links": [
             {
-              "portIn": "x",
-              "portOut": "x",
-              "objIn": "c2a8mxlsy",
-              "objOut": "0xnzp8oxw"
+              "portIn": "number 1",
+              "portOut": "result",
+              "objIn": "8b21shja0",
+              "objOut": "s3da68wbz"
             }
           ]
         }
       ]
     },
     {
-      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
-      "id": "usib3h3i6",
+      "opId": "79c1f902-5139-4afa-b7d7-fec5449a7380",
+      "id": "mhyipd9z7",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "uF3838 ",
-        "subPatch": "53e3yee2q",
+        "subPatch": "hss6zu1i2",
         "translate": {
-          "x": 1187.1480008758087,
-          "y": 991.2238877296159
+          "x": 1231.6603022097427,
+          "y": 930.7377747343683
         },
-        "blueprintSubpatch2": true
+        "extendTitle": ""
       },
-      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "y",
+              "portOut": "result",
+              "objIn": "yadrmd4dq",
+              "objOut": "mhyipd9z7"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "mhyipd9z7"
+      }
+    },
+    {
+      "opId": "bd87ddd8-5277-4e33-ab0f-4b5c7f3107f0",
+      "id": "yadrmd4dq",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1123.6876660203739,
+          "y": 1146.2843000594473
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "result",
+              "objIn": "s3da68wbz",
+              "objOut": "yadrmd4dq"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "yadrmd4dq"
+      }
+    },
+    {
+      "opId": "50b3a9b8-0846-4d21-bd24-6b6d3d0e0c7f",
+      "id": "28wgi6wpn",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1123.6876660203739,
+          "y": 936.88405390871
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "result",
+              "objIn": "yadrmd4dq",
+              "objOut": "28wgi6wpn"
+            },
+            {
+              "portIn": "x",
+              "portOut": "result",
+              "objIn": "vh8h6ncvy",
+              "objOut": "28wgi6wpn"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "28wgi6wpn"
+      }
+    },
+    {
+      "opId": "6a32717f-62ac-4f5f-b5e7-7b09802ad7e3",
+      "id": "x264hekf1",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1261.0270294915194,
+          "y": 797.2047645882058
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "3."
+          }
+        },
+        {
+          "name": "y",
+          "attribs": {
+            "sg": "1."
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "x",
+              "portOut": "result",
+              "objIn": "mhyipd9z7",
+              "objOut": "x264hekf1"
+            },
+            {
+              "portIn": "y",
+              "portOut": "result",
+              "objIn": "vh8h6ncvy",
+              "objOut": "x264hekf1"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "x264hekf1"
+      }
+    },
+    {
+      "opId": "6a32717f-62ac-4f5f-b5e7-7b09802ad7e3",
+      "id": "txz9dq3a3",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1169.6659503969665,
+          "y": 822.6120364731892
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "0.5"
+          }
+        },
+        {
+          "name": "y",
+          "attribs": {
+            "sg": "0.5"
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "result",
+              "objIn": "28wgi6wpn",
+              "objOut": "txz9dq3a3"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "txz9dq3a3"
+      }
+    },
+    {
+      "opId": "bd87ddd8-5277-4e33-ab0f-4b5c7f3107f0",
+      "id": "vh8h6ncvy",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1249.0270294915194,
+          "y": 1144.9475696486318
+        },
+        "extendTitle": ""
+      },
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "y",
+              "portOut": "result",
+              "objIn": "s3da68wbz",
+              "objOut": "vh8h6ncvy"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "vh8h6ncvy"
+      }
+    },
+    {
+      "opId": "79cfee36-a780-4aeb-b121-834f8e79fe2f",
+      "id": "8b21shja0",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1194.665416784255,
+          "y": 1398.0984954992305
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "number 2",
+          "attribs": {
+            "sg": "0.5"
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "81h2pwyo4",
+              "objOut": "8b21shja0"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "8b21shja0"
+      }
+    },
+    {
+      "opId": "96ef796c-1c10-491d-807a-f837749bb5ba",
+      "id": "n4vrxxjo0",
+      "attribs": {},
+      "uiAttribs": {
+        "extendTitle": "uF5726 ",
+        "subPatch": "hss6zu1i2",
+        "translate": {
+          "x": 1206.665416784255,
+          "y": 1320
+        }
+      },
       "portsIn": [
         {
           "name": "Type index",
@@ -399,7 +657,7 @@
         },
         {
           "name": "X",
-          "value": 0.2
+          "value": 0.7
         },
         {
           "name": "Y",
@@ -423,78 +681,17 @@
           "name": "value",
           "links": [
             {
-              "portIn": "y",
+              "portIn": "number 2",
               "portOut": "value",
-              "objIn": "c2a8mxlsy",
-              "objOut": "usib3h3i6"
+              "objIn": "8b21shja0",
+              "objOut": "n4vrxxjo0"
             }
           ]
-        }
-      ]
-    },
-    {
-      "opId": "7df2dfcf-e9e6-4f03-97e9-6a4c4a265c71",
-      "id": "c2a8mxlsy",
-      "attribs": {},
-      "uiAttribs": {
-        "subPatch": "53e3yee2q",
-        "translate": {
-          "x": 1123.6876660203739,
-          "y": 1189.4112026316564
-        },
-        "extendTitle": "",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "number",
-              "portOut": "result",
-              "objIn": "wh1gg7ntt",
-              "objOut": "c2a8mxlsy"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "opId": "ec0eeadd-5c0f-43a8-a56b-3eb3ed3e6453",
-      "id": "wh1gg7ntt",
-      "attribs": {},
-      "uiAttribs": {
-        "subPatch": "53e3yee2q",
-        "translate": {
-          "x": 1123.6876660203739,
-          "y": 1283.9456425553071
-        },
-        "extendTitle": "",
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "number 2",
-          "attribs": {
-            "sg": "0.1"
-          }
         }
       ],
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "color",
-              "portOut": "result",
-              "objIn": "5uec0j1ba",
-              "objOut": "wh1gg7ntt"
-            }
-          ]
-        }
-      ]
+      "storage": {
+        "ref": "n4vrxxjo0"
+      }
     }
   ]
 }

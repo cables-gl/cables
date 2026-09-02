@@ -9,7 +9,7 @@
           "x": 124.66570000639945,
           "y": 1543.4793131426075
         },
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -75,41 +75,6 @@
       ]
     },
     {
-      "opId": "972954ed-d954-4815-8c41-a5a1e7721020",
-      "id": "hjnz11i2b",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 127.36252919251774,
-          "y": 755.5725913587016
-        },
-        "subPatch": "knr564wh2",
-        "extendTitle": "",
-        "tempSubOldOpId": null,
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "value",
-          "value": 0.97
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "number 2",
-              "portOut": "result",
-              "objIn": "fmcjh2i8h",
-              "objOut": "hjnz11i2b"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "e2f1b85e-8e9e-4e4e-96da-ab2c9157e93a",
       "id": "fmcjh2i8h",
       "attribs": {},
@@ -118,7 +83,7 @@
           "x": 275.8115082862505,
           "y": 990.9920137328079
         },
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -151,41 +116,6 @@
       ]
     },
     {
-      "opId": "972954ed-d954-4815-8c41-a5a1e7721020",
-      "id": "w0tf4o37s",
-      "attribs": {},
-      "uiAttribs": {
-        "translate": {
-          "x": 10.54487818634459,
-          "y": 720.2728813293447
-        },
-        "subPatch": "knr564wh2",
-        "extendTitle": "",
-        "tempSubOldOpId": null,
-        "blueprintSubpatch2": true
-      },
-      "storage": {},
-      "portsIn": [
-        {
-          "name": "value",
-          "value": 0.05
-        }
-      ],
-      "portsOut": [
-        {
-          "name": "result",
-          "links": [
-            {
-              "portIn": "number",
-              "portOut": "result",
-              "objIn": "fmcjh2i8h",
-              "objOut": "w0tf4o37s"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
       "id": "zlmmiqscb",
       "attribs": {},
@@ -194,7 +124,7 @@
           "x": 299.8115082862505,
           "y": 203.66736349246548
         },
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -223,7 +153,7 @@
           "x": 275.8115082862505,
           "y": 1074.659758468463
         },
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -260,7 +190,7 @@
           "x": 251.8115082862505,
           "y": 1223.498922920569
         },
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "extendTitle": "FRAGMENT",
         "blueprintSubpatch2": true,
         "tempSubOldOpId": null
@@ -336,7 +266,7 @@
       "id": "7ri82mwvx",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 124.66570000639945,
           "y": 1460.8042667536592
@@ -363,7 +293,7 @@
         },
         {
           "name": "Code Fragment",
-          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nuniform vec2 unif5046;\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        float rStaticFloat_78=0.44;\n\n    float rStaticFloat_76=0.29;\n\n    vec2 rUv_79=texCoord.xy;\n\n    \n    float rDistance_83=distance(rUv_79/* conv param [vec2: a]vec2 result */, unif5046/* conv param [vec2: b]vec2 value */);\n\n    f32 rRound_88=round(rDistance_83/* conv param [f32: number]float result */);\n\n    float rSmoothstep_77=smoothstep(rStaticFloat_78/* conv param [float: number]float result */, rStaticFloat_76/* conv param [float: number 2]float result */, rRound_88/* conv param [float: number 3]f32 result */);\n\n    vec4 rVec4_81=vec4(rSmoothstep_77/* conv param [float: x]float result */, rSmoothstep_77/* conv param [float: y]float result */, rSmoothstep_77/* conv param [float: z]float result */, 1);\n\n    vec4 color=rVec4_81/* conv param [vec4: color]vec4 result */;\n\n    outColor = color;\n}"
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \nIN vec2 texCoord;\nuniform vec2 uF2747;\nuniform float uF2772;\n\n\nvoid main()\n{\n    float rStaticFloat_73=0.05;\n\n    float rStaticFloat_72=0.97;\n\n    vec2 rUv_63=texCoord.xy;\n\n    \n    float rDistance_66=distance(rUv_63, uF2747);\n\n    \n    float rMultiply_69=rDistance_66*uF2772;\n\n    float rRound_68=round(rMultiply_69);\n\n    float rDivide_71=rRound_68 / uF2772;\n\n    float rSmoothstep_62=smoothstep(rStaticFloat_73, rStaticFloat_72, rDivide_71);\n\n    vec4 rVec4_64=vec4(rSmoothstep_62, rSmoothstep_62, rSmoothstep_62, 1);\n\n    vec4 color=rVec4_64;\n\noutColor = color;\n}"
         }
       ]
     },
@@ -372,7 +302,7 @@
       "id": "pvm9cbtm1",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 275.8115082862505,
           "y": 1169.1290370550491
@@ -401,7 +331,7 @@
       "id": "1eggsfndu",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 299.8115082862505,
           "y": 669.5276805022206
@@ -430,8 +360,8 @@
       "id": "wney4fdnr",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "unif2843 ",
-        "subPatch": "knr564wh2",
+        "extendTitle": "uF2747 ",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 311.8115082862505,
           "y": 427.7192733160443
@@ -493,7 +423,7 @@
         "width": 596.5281647366091,
         "resizable": true,
         "vizLayerMaxZoom": 3500,
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 715.8781518742181,
           "y": 991.1857722814541
@@ -548,7 +478,7 @@
       "id": "s1f5igquf",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 299.8115082862505,
           "y": 830.0720315288575
@@ -577,7 +507,7 @@
       "id": "ct9qw86wv",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 299.8115082862505,
           "y": 755.9597560780846
@@ -606,8 +536,8 @@
       "id": "4c7o6q6sy",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "unif2868 ",
-        "subPatch": "knr564wh2",
+        "extendTitle": "uF2772 ",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 445.32377035556146,
           "y": 703.2141710630482
@@ -671,7 +601,7 @@
       "id": "3gwgx0e97",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 299.8115082862505,
           "y": 901.8342646352946
@@ -700,7 +630,7 @@
       "id": "cv4rr2csn",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 10.54487818634459,
           "y": 0
@@ -729,7 +659,7 @@
       "id": "qtsrf19z5",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 10.54487818634459,
           "y": 1801.03124899725
@@ -744,14 +674,20 @@
       "id": "1u9ua5fm0",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 2028.6630848111195,
           "y": 576.7936123385056
         },
-        "extendTitle": "objName"
+        "extendTitle": "objName",
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
+        {
+          "name": "Array",
+          "value": 0
+        },
         {
           "name": "Key",
           "value": "objName"
@@ -777,50 +713,47 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "1u9ua5fm0"
-      }
+      ]
     },
     {
       "opId": "6f80758e-2d7d-4655-9885-d4640740d195",
       "id": "xil13jxi9",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 2028.6630848111195,
           "y": 429.8346065629348
-        }
+        },
+        "blueprintSubpatch2": true
       },
-      "portsOut": [
+      "storage": {},
+      "portsIn": [
         {
-          "name": "Ops",
-          "links": [
-            {
-              "portIn": "Array",
-              "portOut": "Ops",
-              "objIn": "1u9ua5fm0",
-              "objOut": "xil13jxi9"
-            }
-          ]
+          "name": "Namespace",
+          "value": "Ops.Extension.ShaderGraph"
         }
       ],
-      "storage": {
-        "ref": "xil13jxi9"
-      }
+      "portsOut": [
+        {
+          "name": "coverage",
+          "value": 0
+        }
+      ]
     },
     {
       "opId": "16f1ce37-9e0d-4632-a9ba-dfd42c4eb254",
       "id": "5gzf6ldyt",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1881.017143182737,
           "y": 582.645349273899
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Active",
@@ -843,22 +776,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "5gzf6ldyt"
-      }
+      ]
     },
     {
       "opId": "0f8ee026-e094-484d-8403-547c92293be9",
       "id": "hi070nezs",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1881.017143182737,
           "y": 753.021340286052
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "Trigger",
@@ -898,22 +830,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "hi070nezs"
-      }
+      ]
     },
     {
       "opId": "d82e0376-2ff2-4557-b8fa-48c31f27d3ab",
       "id": "idnhsl12h",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1926.034286365474,
           "y": 828.6884532953334
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Search",
@@ -932,37 +863,35 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "idnhsl12h"
-      }
+      ]
     },
     {
       "opId": "90680e4f-e14e-4708-a53b-420c0ea28913",
       "id": "ejsk89sm8",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1881.017143182737,
           "y": 1013.7666035743144
-        }
+        },
+        "blueprintSubpatch2": true
       },
-      "storage": {
-        "ref": "ejsk89sm8"
-      }
+      "storage": {}
     },
     {
       "opId": "9549e2ed-a544-4d33-a672-05c7854ccf5d",
       "id": "7tpt3yrw9",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1881.017143182737,
           "y": 947.3117815161467
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsOut": [
         {
           "name": "then",
@@ -975,22 +904,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "7tpt3yrw9"
-      }
+      ]
     },
     {
       "opId": "c7eafb19-36e8-4574-a5e6-ed83bd8dcb44",
       "id": "iuvsloen6",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 1926.034286365474,
           "y": 895.3555800946967
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Booleans",
@@ -1027,22 +955,21 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "iuvsloen6"
-      }
+      ]
     },
     {
       "opId": "d82e0376-2ff2-4557-b8fa-48c31f27d3ab",
       "id": "qjzoktg4s",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "knr564wh2",
+        "subPatch": "wizw8vszg",
         "translate": {
           "x": 2043.5207714542953,
           "y": 823.5900202027339
-        }
+        },
+        "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "Search",
@@ -1061,9 +988,80 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "opId": "972954ed-d954-4815-8c41-a5a1e7721020",
+      "id": "4ir6v8hwi",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "wizw8vszg",
+        "translate": {
+          "x": 127.36252919251774,
+          "y": 755.5725913587016
+        },
+        "extendTitle": "",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "portsIn": [
+        {
+          "name": "value",
+          "value": 0.97
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number 2",
+              "portOut": "result",
+              "objIn": "fmcjh2i8h",
+              "objOut": "4ir6v8hwi"
+            }
+          ]
+        }
       ],
       "storage": {
-        "ref": "qjzoktg4s"
+        "ref": "4ir6v8hwi"
+      }
+    },
+    {
+      "opId": "972954ed-d954-4815-8c41-a5a1e7721020",
+      "id": "zx5jpfftf",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "wizw8vszg",
+        "translate": {
+          "x": 10.54487818634459,
+          "y": 720.2728813293447
+        },
+        "extendTitle": "",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "portsIn": [
+        {
+          "name": "value",
+          "value": 0.05
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "number",
+              "portOut": "result",
+              "objIn": "fmcjh2i8h",
+              "objOut": "zx5jpfftf"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "zx5jpfftf"
       }
     }
   ]
