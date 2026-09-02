@@ -53,11 +53,18 @@
     "exampleProjectId": "9p7kw4",
     "changelog": [
         {
-            "message": "Ops.Audio.SpeechRecognition renamed to Ops.Extension.Voice.SpeechRecognition",
-            "type": "rename",
+            "message": "Only start when active is true",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1686916595118
+            "date": 1788341027103
+        },
+        {
+            "message": "Show recognition errors in UI",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1788341038862
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

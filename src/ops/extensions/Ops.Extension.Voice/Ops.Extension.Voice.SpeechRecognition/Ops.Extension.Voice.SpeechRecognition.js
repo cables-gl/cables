@@ -4,7 +4,7 @@ const
     inTrigger = op.inTriggerButton("Start"),
     result = op.outString("Result"),
     confidence = op.outNumber("Confidence"),
-    outSupported = op.outBool("Supported", false),
+    outSupported = op.outBool("Supported", !!window.SpeechRecognition),
     outResult = op.outTrigger("New Result", ""),
     outActive = op.outBool("Started", false);
 
@@ -13,7 +13,11 @@ let recognition = null;
 active.onChange = startStop;
 inLang.onChange = changeLang;
 
-startAPI();
+op.on("init", () =>
+{
+    if (active.get()) startAPI();
+
+});
 
 op.init = function ()
 {
@@ -61,7 +65,6 @@ function startAPI()
 {
     if (window.SpeechRecognition)
     {
-        outSupported.set(true);
 
         if (recognition) recognition.abort();
 
@@ -78,7 +81,11 @@ function startAPI()
         recognition.onend = function (event) { outActive.set(false); };
 
         recognition.onresult = function (event) { op.log("recognition result"); };
-        recognition.onerror = function (event) { op.log("recognition error", result); };
+        recognition.onerror = function (event)
+        {
+            op.setUiError("recerr", "recognition error: " + event.error + " " + event.message);
+            console.log("recognition error", event);
+        };
 
         recognition.onresult = function (event)
         {
