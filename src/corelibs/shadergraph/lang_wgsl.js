@@ -2,6 +2,7 @@ import { Lang } from "./lang.js";
 
 export class LangWgsl extends Lang
 {
+    name = "wgsl";
     strTypeFloat = "f32";
 
     /**

@@ -178,6 +178,7 @@ export class ShaderGraphProgram extends Events
      */
     execNode(op)
     {
+        this.detectLangProblems(this.lang.name, op);
 
         /** @type {ShaderNode} */
         const node = op.shaderNode;
@@ -551,4 +552,17 @@ export class ShaderGraphProgram extends Events
         return t;
     }
 
+    /**
+     * @param {string} lang
+     * @param {Op} op
+     */
+    detectLangProblems(lang, op)
+    {
+
+        if (lang == "glsl" && op.objName.toLowerCase().includes("wgsl") || lang == "wgsl" && op.objName.toLowerCase().includes("glsl"))
+        {
+
+            op.setUiError("sglang", "language conflict: seems not to be " + lang);
+        }
+    }
 }

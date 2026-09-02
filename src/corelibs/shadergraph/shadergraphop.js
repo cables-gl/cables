@@ -106,6 +106,8 @@ export class ShaderGraphOp
             }
         }
 
+        // this.detectLangProblems();
+
         for (let i = 0; i < shaderNode.results.length; i++)
         {
 

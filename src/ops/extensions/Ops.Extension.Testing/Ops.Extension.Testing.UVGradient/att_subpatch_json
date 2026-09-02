@@ -9,7 +9,7 @@
           "x": 991.9580320823972,
           "y": 498.5802619919958
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -38,7 +38,7 @@
           "x": 991.9580320823972,
           "y": 710.7706920917158
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -67,7 +67,7 @@
           "x": 991.9580320823972,
           "y": 927.002288513188
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -100,7 +100,7 @@
       "id": "lkxg41mjb",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 991.9580320823972,
           "y": 839.4298376227312
@@ -140,7 +140,7 @@
       "id": "og2vczya4",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 991.9580320823972,
           "y": 759.5236471755677
@@ -169,7 +169,7 @@
       "id": "jk7tsd8gw",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 622.1032098199796,
           "y": 0
@@ -198,7 +198,7 @@
       "id": "ride07wvd",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 622.1032098199796,
           "y": 1304.1084524283042
@@ -217,7 +217,7 @@
           "x": 948.6505798110611,
           "y": 1485.4720498131308
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -291,7 +291,7 @@
           "x": 967.9580320823972,
           "y": 1107.5377941186953
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -350,7 +350,7 @@
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_22=texCoord.xy;\n\n    float rFloat_176=0.;\n\n    vec2 rVec2_28=vec2(rFloat_176, rFloat_176);\n\n    vec2 rSum_23=rUv_22+rVec2_28;\n\n    vec2 rOneMinus_26=1.0-rSum_23;\n\n    vec4 rVec4_24=vec4(rOneMinus_26.x, rOneMinus_26.x, rOneMinus_26.x, 1);\n\n    vec4 color=rVec4_24;\n\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_24=texCoord.xy;\n\n    float rFloat_31=0.;\n\n    vec2 rVec2_30=vec2(rFloat_31, rFloat_31);\n\n    vec2 rSum_25=rUv_24+rVec2_30;\n\n    vec2 rOneMinus_28=1.0-rSum_25;\n\n    vec4 rVec4_26=vec4(rOneMinus_28.x, rOneMinus_28.x, rOneMinus_28.x, 1);\n\n    vec4 color=rVec4_26;\n\n    outColor = color;\n}"
         }
       ]
     },
@@ -359,7 +359,7 @@
       "id": "fzg8ua0s6",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 948.6505798110611,
           "y": 1402.7970034241828
@@ -385,7 +385,7 @@
         },
         {
           "name": "Code Fragment",
-          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_22=texCoord.xy;\n\n    float rStaticFloat_29=0.;\n\n    vec2 rVec2_28=vec2(rStaticFloat_29, rStaticFloat_29);\n\n    vec2 rSum_23=rUv_22+rVec2_28;\n\n    vec2 rOneMinus_26=1.0-rSum_23;\n\n    vec4 rVec4_24=vec4(rOneMinus_26.x, rOneMinus_26.x, rOneMinus_26.x, 1);\n\n    vec4 color=rVec4_24;\n\n    outColor = color;\n}"
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_24=texCoord.xy;\n\n    float rFloat_31=0.;\n\n    vec2 rVec2_30=vec2(rFloat_31, rFloat_31);\n\n    vec2 rSum_25=rUv_24+rVec2_30;\n\n    vec2 rOneMinus_28=1.0-rSum_25;\n\n    vec4 rVec4_26=vec4(rOneMinus_28.x, rOneMinus_28.x, rOneMinus_28.x, 1);\n\n    vec4 color=rVec4_26;\n\n    outColor = color;\n}"
         }
       ]
     },
@@ -394,7 +394,7 @@
       "id": "tywhmrbxt",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 991.9580320823972,
           "y": 1021.9213849531766
@@ -426,7 +426,7 @@
           "x": 1003.9580320823972,
           "y": 635.6929058934898
         },
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -451,7 +451,7 @@
       "id": "pj30xemhc",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "06keznlm8",
+        "subPatch": "hu1saye87",
         "translate": {
           "x": 1003.9580320823972,
           "y": 587.160012900204
@@ -460,6 +460,7 @@
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
+      "storage": {},
       "portsIn": [
         {
           "name": "value",
@@ -484,10 +485,7 @@
             }
           ]
         }
-      ],
-      "storage": {
-        "ref": "pj30xemhc"
-      }
+      ]
     }
   ]
 }

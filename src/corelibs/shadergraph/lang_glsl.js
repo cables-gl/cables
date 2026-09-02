@@ -2,6 +2,7 @@ import { Lang } from "./lang.js";
 
 export class LangGlsl extends Lang
 {
+    name = "glsl";
 
     /* minimalcore:start */
     /**

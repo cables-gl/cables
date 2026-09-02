@@ -2,6 +2,7 @@ import { Port } from "cables";
 
 export class Lang
 {
+    name = "unknown";
 
     strTypeVec4 = "vec4";
     strTypeVec3 = "vec3";
