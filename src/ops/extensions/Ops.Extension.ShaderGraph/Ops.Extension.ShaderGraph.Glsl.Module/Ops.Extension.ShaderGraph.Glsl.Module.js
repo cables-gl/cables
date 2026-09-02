@@ -25,6 +25,7 @@ inStage.onChange = debug.onChange =
     inCodePre.onChange =
     inGraphNodes.onChange = () =>
     {
+        needsUpdate = true;
 
         /* minimalcore:start */
         op.setUiAttrib({ "extendTitle": inStage.get() });
@@ -72,5 +73,6 @@ op.updateShaderModule = (_shader) =>
             updts[i].update(shader);
     }
 
-    if (needsUpdate) update();
+    if (needsUpdate) compile();
+
 };
