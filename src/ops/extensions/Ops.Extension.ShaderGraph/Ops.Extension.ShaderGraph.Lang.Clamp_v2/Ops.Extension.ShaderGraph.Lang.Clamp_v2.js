@@ -7,6 +7,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "port": op.inObject("minVal") },
             { "type": "float", "port": op.inObject("maxVal") }
         ],
-        "result": { "type": "gen", "port": op.outObject("result") }
+        "results": [{ "type": "gen", "port": op.outObject("result") }]
 
     });

@@ -45,11 +45,13 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number"
+                "name": "number",
+                "objType": "sg_vec4"
             },
             {
                 "type": 2,
-                "name": "number 2"
+                "name": "number 2",
+                "objType": "sg_vec4"
             }
         ],
         "portsOut": [

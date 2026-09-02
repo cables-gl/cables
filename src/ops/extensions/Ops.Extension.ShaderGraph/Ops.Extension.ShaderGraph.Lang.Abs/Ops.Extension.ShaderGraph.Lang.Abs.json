@@ -39,13 +39,15 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "number"
+                "name": "number",
+                "objType": "sg_vec4"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "result"
+                "name": "result",
+                "objType": "sg_vec4"
             }
         ]
     },

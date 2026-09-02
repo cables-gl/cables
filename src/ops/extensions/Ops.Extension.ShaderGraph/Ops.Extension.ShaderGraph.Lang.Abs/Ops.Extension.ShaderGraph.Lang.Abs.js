@@ -5,6 +5,6 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "gen", "port": op.inObject("number") }
         ],
-        "result": { "type": "gen", "port": op.outObject("result") }
+        "results": [{ "type": "gen", "port": op.outObject("result") }]
 
     });
