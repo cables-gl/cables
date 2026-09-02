@@ -1,0 +1,33 @@
+{
+    "id": "2f82df37-1831-4df7-b56a-e1cd101b94b7",
+    "created": 1788350240924,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788350240934
+        },
+        {
+            "message": "Patch.PI1Ix3u.SubPatch0 renamed to Ops.Extension.Testing.MgSgCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788350276595
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "tkzlsqhqo",
+                "uititle": "Trigger"
+            }
+        ],
+        "portsOut": []
+    }
+}

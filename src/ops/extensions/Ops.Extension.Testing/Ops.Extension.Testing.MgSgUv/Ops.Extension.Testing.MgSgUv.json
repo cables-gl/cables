@@ -1,0 +1,33 @@
+{
+    "id": "da3f6b53-2bf1-427a-9ffb-bcc87bf0e201",
+    "created": 1788350080790,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788350080800
+        },
+        {
+            "message": "Patch.PI1Ix3u.SubPatch0 renamed to Ops.Extension.Testing.MgSgUv",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788350105425
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "aaa7f6agy",
+                "uititle": "Trigger"
+            }
+        ],
+        "portsOut": []
+    }
+}
