@@ -9,7 +9,7 @@ let template = null;
 
 inTplStr.onChange = updateString;
 inArray.onChange =
-inData.onChange = render;
+    inData.onChange = render;
 
 function isNumeric(n)
 {
@@ -124,10 +124,11 @@ function render()
 {
     if (!template) return;
     const templateData = inData.get() || {};
-    if (inArray.isLinked())templateData.array = inArray.get();
+    if (inArray.isLinked()) templateData.array = inArray.get();
     op.setUiError("hbserr", null);
     outErrors.set("");
 
+    inTplStr.setUiAttribs({ "editorDiagnostics": [] });
     try
     {
         outStr.set(template(templateData));
@@ -137,6 +138,10 @@ function render()
         outStr.set("");
         if (e.message)
         {
+            const match = e.message.match(/line (\d+)/i);
+            if (match)
+                inTplStr.setUiAttribs({ "editorDiagnostics": [{ "severity": 2, "message": e.message, "line": parseInt(match[1], 10) }] });
+
             op.setUiError("hbserr", "<pre>handlebars: " + escapeHtml(JSON.stringify(e.message + "")) + "</pre>");
             outErrors.set(e.message);
         }

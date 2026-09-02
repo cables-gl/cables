@@ -26,6 +26,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1760600591802
+        },
+        {
+            "message": "Inline parsing error diagnostics display",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1788334867930
         }
     ],
     "layout": {
