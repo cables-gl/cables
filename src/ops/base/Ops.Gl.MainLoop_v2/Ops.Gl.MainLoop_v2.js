@@ -186,6 +186,8 @@ function render(time, frame, delta)
 
     outPixel.set(op.patch.cgl.pixelDensity);
     op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
+
+    op.patch.emitEvent("renderedFrame", { "ms": performance.now() - startTime, "type": "webgl", "canvas": cgl.canvas, "name": "cgl" });
 }
 
 function testMultiMainloop()

@@ -874,42 +874,42 @@ class Mesh extends CgMesh
         let queryStarted = false;
 
         /* minimalcore:start */
-        const doQuery = this.#cgl.profileData.doProfileGlQuery;
-        if (doQuery && queryExt)
-        {
-            let name = this._name + " - " + shader.getName() + " #" + shader.id;
-            // if (this.#numInstances) id += " instanced " + this.#numInstances + "x";
+        // const doQuery = this.#cgl.profileData.doProfileGlQuery;
+        // if (doQuery && queryExt)
+        // {
+        //     let name = this._name + " - " + shader.getName() + " #" + shader.id;
+        //     // if (this.#numInstances) id += " instanced " + this.#numInstances + "x";
 
-            // let this.queryProfilerData = this.#cgl.profileData.glQueryData[id];
+        //     // let this.queryProfilerData = this.#cgl.profileData.glQueryData[id];
 
-            if (globalQueryStartedTime != 0 && performance.now() - globalQueryStartedTime > 1000) globalQueryStarted = false;
+        //     if (globalQueryStartedTime != 0 && performance.now() - globalQueryStartedTime > 1000) globalQueryStarted = false;
 
-            if (!this.queryProfilerData) this.queryProfilerData = { "num": 0 };
+        //     if (!this.queryProfilerData) this.queryProfilerData = { "num": 0 };
 
-            this.queryProfilerData.name = name;
-            if (shader.opId) this.queryProfilerData.shaderOp = shader.opId;
-            if (this.opId) this.queryProfilerData.meshOp = this.opId;
+        //     this.queryProfilerData.name = name;
+        //     if (shader.opId) this.queryProfilerData.shaderOp = shader.opId;
+        //     if (this.opId) this.queryProfilerData.meshOp = this.opId;
 
-            this.#cgl.profileData.glQueryData[this.#id] = this.queryProfilerData;
+        //     this.#cgl.profileData.glQueryData[this.#id] = this.queryProfilerData;
 
-            if (queryExt)
-            {
+        //     if (queryExt)
+        //     {
 
-                if (!this.queryProfilerData.queryStarted && !globalQueryStarted)
-                {
-                    this.queryProfilerData._drawQuery = this.#cgl.gl.createQuery();
-                    this.#cgl.gl.beginQuery(queryExt.TIME_ELAPSED_EXT, this.queryProfilerData._drawQuery);
+        //         if (!this.queryProfilerData.queryStarted && !globalQueryStarted)
+        //         {
+        //             this.queryProfilerData._drawQuery = this.#cgl.gl.createQuery();
+        //             this.#cgl.gl.beginQuery(queryExt.TIME_ELAPSED_EXT, this.queryProfilerData._drawQuery);
 
-                    globalQueryStarted = this.queryProfilerData;
-                    globalQueryStartedTime = performance.now();
+        //             globalQueryStarted = this.queryProfilerData;
+        //             globalQueryStartedTime = performance.now();
 
-                    this.queryProfilerData.queryStarted = true;
-                    queryStarted = true;
-                    this.queryProfilerData.startedTime = performance.now();
-                    this.queryProfilerData.frameNum = this.#cgl.patch.getFrameNum();
-                }
-            }
-        }
+        //             this.queryProfilerData.queryStarted = true;
+        //             queryStarted = true;
+        //             this.queryProfilerData.startedTime = performance.now();
+        //             this.queryProfilerData.frameNum = this.#cgl.patch.getFrameNum();
+        //         }
+        //     }
+        // }
 
         /* minimalcore:end */
 
@@ -955,39 +955,39 @@ class Mesh extends CgMesh
             }
         }
 
-        if (doQuery)
-        {
-            if (queryStarted)
-            {
-                this.#cgl.gl.endQuery(queryExt.TIME_ELAPSED_EXT);
-                this.#cgl.gl.flush();
-                queryStarted = false;
-            }
-            if (this.queryProfilerData && this.queryProfilerData._drawQuery && this.#cgl.patch.getFrameNum() > this.queryProfilerData.frameNum + 1)
-            {
-                const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
-                const disjoint = this.#cgl.gl.getParameter(queryExt.GPU_DISJOINT_EXT);
-                if (disjoint)console.log("disjoint");
+        // if (doQuery)
+        // {
+        // if (queryStarted)
+        // {
+        //     this.#cgl.gl.endQuery(queryExt.TIME_ELAPSED_EXT);
+        //     this.#cgl.gl.flush();
+        //     queryStarted = false;
+        // }
+        // if (this.queryProfilerData && this.queryProfilerData._drawQuery && this.#cgl.patch.getFrameNum() > this.queryProfilerData.frameNum + 1)
+        // {
+        //     const available = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT_AVAILABLE);
+        //     const disjoint = this.#cgl.gl.getParameter(queryExt.GPU_DISJOINT_EXT);
+        //     if (disjoint)console.log("disjoint");
 
-                if (available)
-                {
-                    if (!disjoint)
-                    {
-                        const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
-                        const currentTimeGPU = elapsedNanos / 1000000;
+        //     if (available)
+        //     {
+        //         if (!disjoint)
+        //         {
+        //             const elapsedNanos = this.#cgl.gl.getQueryParameter(this.queryProfilerData._drawQuery, this.#cgl.gl.QUERY_RESULT);
+        //             const currentTimeGPU = elapsedNanos / 1000000;
 
-                        this.queryProfilerData._times = this.queryProfilerData._times || 0;
-                        this.queryProfilerData._times = currentTimeGPU;
-                        this.queryProfilerData._numcount = 1;
-                    }
+        //             this.queryProfilerData._times = this.queryProfilerData._times || 0;
+        //             this.queryProfilerData._times = currentTimeGPU;
+        //             this.queryProfilerData._numcount = 1;
+        //         }
 
-                    this.queryProfilerData.lastTime = performance.now();
-                    this.queryProfilerData._drawQuery = null;
-                    this.queryProfilerData.queryStarted = false;
-                    globalQueryStarted = false;
-                }
-            }
-        }
+        //         this.queryProfilerData.lastTime = performance.now();
+        //         this.queryProfilerData._drawQuery = null;
+        //         this.queryProfilerData.queryStarted = false;
+        //         globalQueryStarted = false;
+        //     }
+        // }
+        // }
 
         if (this.#cgl.debugOneFrame)
         {

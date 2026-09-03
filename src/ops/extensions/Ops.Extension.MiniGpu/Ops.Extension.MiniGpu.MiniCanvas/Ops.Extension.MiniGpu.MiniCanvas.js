@@ -185,6 +185,7 @@ function frame(timestamp)
         fpsTime = performance.now();
         frames = 0;
     }
+    op.patch.emitEvent("renderedFrame", { "ms": performance.now() - timeStart, "canvas": canvas, "name": "minigpu" });
 
     /* minimalcore:end */
 }
