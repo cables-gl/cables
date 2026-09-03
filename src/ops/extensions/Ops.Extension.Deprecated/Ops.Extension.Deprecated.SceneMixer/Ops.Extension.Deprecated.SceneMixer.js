@@ -34,7 +34,7 @@ function createInPorts()
 {
     for (let i = 0; i < NUM_PORTS; i++)
     {
-        let port = op.inValueBool("Enable " + i, false);
+        let port = op.inBool("Enable " + i, false);
         enablePorts.push(port);
     }
 }

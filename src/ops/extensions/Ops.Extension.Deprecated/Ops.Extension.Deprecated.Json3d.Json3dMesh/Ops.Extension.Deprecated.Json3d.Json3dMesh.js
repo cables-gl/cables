@@ -5,12 +5,12 @@ cgl.frameStore.currentScene = null;
 let exe = op.inTrigger("Render");
 let filename = op.inFile("file", "3d json");
 let meshIndex = op.inValueInt("Mesh Index", 0);
-let draw = op.inValueBool("Draw", true);
-let centerPivot = op.inValueBool("Center Mesh", true);
+let draw = op.inBool("Draw", true);
+let centerPivot = op.inBool("Center Mesh", true);
 let inSize = op.inFloat("Size", 1);
 let next = op.outTrigger("trigger");
 let geometryOut = op.outObject("Geometry");
-let merge = op.inValueBool("Merge", false);
+let merge = op.inBool("Merge", false);
 let inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no");
 let outScale = op.outValue("Scaling", 1.0);
 

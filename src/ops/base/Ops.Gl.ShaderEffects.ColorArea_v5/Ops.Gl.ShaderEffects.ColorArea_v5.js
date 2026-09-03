@@ -6,7 +6,7 @@ const
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inFloat("Falloff", 0),
     inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
-    inInvert = op.inValueBool("Invert"),
+    inInvert = op.inBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),

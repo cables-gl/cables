@@ -6,7 +6,7 @@ let num = op.inFloat("num", 20);
 let range = op.inFloat("Range Radius", 1);
 let attraction = op.inFloat("attraction");
 let angle = op.inFloat("Angle");
-let show = op.inValueBool("Show");
+let show = op.inBool("Show");
 let seed = op.inFloat("Random Seed");
 
 let posX = op.inFloat("Pos X");

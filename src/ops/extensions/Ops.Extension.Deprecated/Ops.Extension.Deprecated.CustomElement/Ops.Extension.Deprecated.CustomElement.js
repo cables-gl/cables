@@ -121,7 +121,7 @@ let idPort = op.inValueString("Id");
 let classPort = op.inValueString("Class");
 let textPort = op.inValueString("Text");
 let stylePort = op.inValueEditor("Inline Style", "/* e.g. position: absolute; */", "css");
-let visiblePort = op.inValueBool("Visible", true);
+let visiblePort = op.inBool("Visible", true);
 
 // outputs
 let elementPort = op.outObject("DOM Element");

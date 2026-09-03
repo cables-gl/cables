@@ -6,8 +6,8 @@ const
     outerRadius = op.inValue("Length", 1.5),
     zDiff = op.inFloat("Peak Z Pos", 0),
     percent = op.inValueSlider("percent", 1),
-    fill = op.inValueBool("Fill"),
-    inDraw = op.inValueBool("Render Mesh", true),
+    fill = op.inBool("Fill"),
+    inDraw = op.inBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
 

@@ -36,12 +36,12 @@ let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node
 let detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }));
 phasePort.set(PHASE_DEFAULT);
-let syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
+let syncFrequencyPort = op.inBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
 let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-let autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 

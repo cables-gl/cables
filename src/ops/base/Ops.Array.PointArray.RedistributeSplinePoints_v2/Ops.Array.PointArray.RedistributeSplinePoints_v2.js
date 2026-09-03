@@ -1,7 +1,7 @@
 const
     inArr = op.inArray("Array3x"),
     num = op.inValueInt("Num Points", 100),
-    inNormalized = op.inValueBool("Normalized"),
+    inNormalized = op.inBool("Normalized"),
     result = op.outArray("Result"),
     outSplineLength = op.outNumber("Spline Length");
 

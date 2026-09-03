@@ -15,12 +15,12 @@ const
     speedX = op.inValue("Speed X", 1),
     speedY = op.inValue("Speed Y", 1),
 
-    active = op.inValueBool("Active", true),
+    active = op.inBool("Active", true),
 
-    allowPanning = op.inValueBool("Allow Panning", true),
-    allowZooming = op.inValueBool("Allow Zooming", true),
-    allowRotation = op.inValueBool("Allow Rotation", true),
-    restricted = op.inValueBool("restricted", true),
+    allowPanning = op.inBool("Allow Panning", true),
+    allowZooming = op.inBool("Allow Zooming", true),
+    allowRotation = op.inBool("Allow Rotation", true),
+    restricted = op.inBool("restricted", true),
 
     trigger = op.outTrigger("trigger"),
     outRadius = op.outNumber("radius"),

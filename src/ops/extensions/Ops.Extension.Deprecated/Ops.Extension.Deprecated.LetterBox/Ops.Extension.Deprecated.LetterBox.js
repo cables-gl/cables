@@ -10,7 +10,7 @@ ratio.set(1.777777777778);
 
 const cgl = op.patch.cgl;
 
-let blackBars = op.inValueBool("black bars");
+let blackBars = op.inBool("black bars");
 blackBars.set(true);
 
 let x = 0, y = 0, w = 1000, h = 1000;

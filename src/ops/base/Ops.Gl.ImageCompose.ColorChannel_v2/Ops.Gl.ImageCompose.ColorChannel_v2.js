@@ -1,10 +1,10 @@
 const
     render = op.inTrigger("render"),
-    channelR = op.inValueBool("channelR", true),
-    channelG = op.inValueBool("channelG", false),
-    channelB = op.inValueBool("channelB", false),
-    channelA = op.inValueBool("channelA", false),
-    mono = op.inValueBool("mono", false),
+    channelR = op.inBool("channelR", true),
+    channelG = op.inBool("channelG", false),
+    channelB = op.inBool("channelB", false),
+    channelA = op.inBool("channelA", false),
+    mono = op.inBool("mono", false),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

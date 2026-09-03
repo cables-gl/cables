@@ -4,7 +4,7 @@ const
     inHeight = op.inValueInt("Height", 256),
     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "nearest"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
-    inColor = op.inValueBool("Color", false),
+    inColor = op.inBool("Color", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
     inInteger = op.inBool("Integer", false),
     inSeed = op.inFloat("Seed", 1),

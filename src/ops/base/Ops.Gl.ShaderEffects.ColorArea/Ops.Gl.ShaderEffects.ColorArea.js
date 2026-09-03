@@ -9,7 +9,7 @@ const inSize = op.inValue("Size", 1);
 const inAmount = op.inValueSlider("Amount", 0.5);
 
 const inFalloff = op.inValueSlider("Falloff", 0);
-const inInvert = op.inValueBool("Invert");
+const inInvert = op.inBool("Invert");
 const inBlend = op.inSwitch("Blend ", ["Normal", "Multiply"], "Normal");
 
 const r = op.inValueSlider("r", Math.random());
@@ -26,7 +26,7 @@ const sizeX = op.inValueSlider("Size X", 1);
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Color", [inBlend, r, g, b]);
 
-const inWorldSpace = op.inValueBool("WorldSpace", true);
+const inWorldSpace = op.inBool("WorldSpace", true);
 
 let shader = null;
 

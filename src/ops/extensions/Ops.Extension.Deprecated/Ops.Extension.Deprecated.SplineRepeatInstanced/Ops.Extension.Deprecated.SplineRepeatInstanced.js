@@ -9,7 +9,7 @@ let inNum = op.inValueInt("Num", 2000);
 
 let inOffset = op.inFloat("Offset");
 
-let rotPos = op.inValueBool("Rotate by Position", true);
+let rotPos = op.inBool("Rotate by Position", true);
 
 let inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
 let inSpacing = op.inFloat("Spacing", 0.2);

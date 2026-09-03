@@ -8,7 +8,7 @@ let axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X");
 let min = op.inFloat("min", 1);
 let max = op.inFloat("max", 0);
 
-let inUpdateNormals = op.inValueBool("Update Normals");
+let inUpdateNormals = op.inBool("Update Normals");
 
 let srcHeadVert = attachments.stretchHead_vert || "";
 let srcBodyVert = attachments.stretch_vert || "";

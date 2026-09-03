@@ -11,7 +11,7 @@ const easing = op.inValueSelect("Easing", [
     "Cubic in", "Cubic out", "Cubic in out"],
 "Linear");
 
-const reverse = op.inValueBool("Reverse");
+const reverse = op.inBool("Reverse");
 
 const next = op.outTrigger("Next");
 const outArr = op.outArray("Result");

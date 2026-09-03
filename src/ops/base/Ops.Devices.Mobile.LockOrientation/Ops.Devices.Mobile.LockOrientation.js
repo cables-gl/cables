@@ -1,5 +1,5 @@
-const inPortrait = op.inValueBool("Portrait");
-const inLandscape = op.inValueBool("Landscape");
+const inPortrait = op.inBool("Portrait");
+const inLandscape = op.inBool("Landscape");
 
 screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
 

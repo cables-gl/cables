@@ -9,7 +9,7 @@ const
     inInput = op.inValueSelect("Input", ["Luminance", "RedGreen", "Red", "Green", "Blue"], "Luminance"),
     inZero = op.inSwitch("Zero Displace", ["Grey", "Black"], "Grey"),
     inMapping = op.inSwitch("Pixel Mapping", ["Stretch", "Repeat"], "Stretch"),
-    inMultisample = op.inValueBool("MSAA", false),
+    inMultisample = op.inBool("MSAA", false),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Axis Displacement Strength", [amountX, amountY]);

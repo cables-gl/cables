@@ -4,7 +4,7 @@ op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
 const inStrength = op.inValueSlider("Amount", 1);
-const mulColor = op.inValueBool("Multiply Color");
+const mulColor = op.inBool("Multiply Color");
 const inLookup = op.inTexture("Lookup Texture");
 
 let shader = null;

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    inInvert = op.inValueBool("Invert"),
-    inBlackWhite = op.inValueBool("Black White"),
+    inInvert = op.inBool("Invert"),
+    inBlackWhite = op.inBool("Black White"),
     inRemoveAlpha = op.inBool("Remove Alpha", true),
     inRemap = op.inBool("Remap", true),
     thresholdLow = op.inValueSlider("Threshold low ", 0.5),

@@ -39,22 +39,22 @@ let updateStatePorts = op.inTrigger("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
 let timeNoteArrayPort = op.addInPort(new CABLES.Port(op, "Time & Note Array", CABLES.OP_PORT_TYPE_ARRAY, { "type": "string", "display": "editor" }));
 timeNoteArrayPort.set(JSON.stringify(TIME_NOTE_ARRAY_DEFAULT, null, 4));
-let loopPort = op.inValueBool("Loop", LOOP_DEFAULT);
+let loopPort = op.inBool("Loop", LOOP_DEFAULT);
 let iterationsPort = op.inFloat("Loop Iterations", ITERATIONS_DEFAULT);
 let loopStartPort = op.inValueString("Loop Start", LOOP_START_DEFAULT);
 let loopEndPort = op.inValueString("Loop End", LOOP_END_DEFAULT);
 let playbackRatePort = op.inFloat("Playback Rate", PLAYBACK_RATE_DEFAULT);
-let humanizePort = op.inValueBool("Humanize", false);
+let humanizePort = op.inBool("Humanize", false);
 let humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 let probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 let startTriggerPort = op.inTriggerButton("Start");
-let autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 let stopTriggerPort = op.inTriggerButton("Stop");
 let cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
 let cancelTriggerPort = op.inTriggerButton("Cancel");
-let mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
+let mutePort = op.inBool("Mute", MUTE_DEFAULT);
 
 // functions
 

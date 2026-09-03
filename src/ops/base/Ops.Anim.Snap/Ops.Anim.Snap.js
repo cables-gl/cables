@@ -11,7 +11,7 @@ const
     inMax = op.inValue("Max", 0),
 
     inMul = op.inValue("Value Mul", 1),
-    inEnabled = op.inValueBool("Enabled", true),
+    inEnabled = op.inBool("Enabled", true),
 
     outVal = op.outNumber("Result"),
     outDist = op.outNumber("Distance"),

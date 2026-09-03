@@ -10,13 +10,13 @@ let inEnd = op.addInPort(new CABLES.Port(op, "end"));
 let duration = op.addInPort(new CABLES.Port(op, "duration"));
 
 let loop = op.addInPort(new CABLES.Port(op, "loop", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let pingpong = op.inValueBool("Ping Pong", true);
+let pingpong = op.inBool("Ping Pong", true);
 
 let result = op.addOutPort(new CABLES.Port(op, "result"));
 let finished = op.addOutPort(new CABLES.Port(op, "finished", CABLES.OP_PORT_TYPE_VALUE));
 
 let resetted = false;
-let waitForReset = op.inValueBool("Wait for Reset", false);
+let waitForReset = op.inBool("Wait for Reset", false);
 
 let anim = new CABLES.Anim();
 

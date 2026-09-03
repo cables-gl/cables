@@ -4,8 +4,8 @@ const
     max = op.inValue("max", 1),
     outTrig = op.outTrigger("next"),
     result = op.outNumber("result"),
-    inInteger = op.inValueBool("Integer", false),
-    noDupe = op.inValueBool("No consecutive duplicates", false);
+    inInteger = op.inBool("Integer", false),
+    noDupe = op.inBool("No consecutive duplicates", false);
 
 op.setPortGroup("Value Range", [min, max]);
 

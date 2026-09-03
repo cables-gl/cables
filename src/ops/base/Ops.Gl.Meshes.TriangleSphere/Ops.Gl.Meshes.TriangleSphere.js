@@ -8,8 +8,8 @@ const
     next = op.outTrigger("next"),
     inIterations = op.inValue("Iterations", 4),
     geomOut = op.outObject("Geometry"),
-    flat = op.inValueBool("Flat", false),
-    inDraw = op.inValueBool("Draw", true);
+    flat = op.inBool("Flat", false),
+    inDraw = op.inBool("Draw", true);
 
 const cgl = op.patch.cgl;
 let verts = [];

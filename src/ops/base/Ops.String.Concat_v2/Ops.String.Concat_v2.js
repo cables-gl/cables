@@ -1,7 +1,7 @@
 const
     string1 = op.inString("string1", "ABC"),
     string2 = op.inString("string2", "XYZ"),
-    newLine = op.inValueBool("New Line", false),
+    newLine = op.inBool("New Line", false),
     active = op.inBool("Active", true),
     result = op.outString("result");
 

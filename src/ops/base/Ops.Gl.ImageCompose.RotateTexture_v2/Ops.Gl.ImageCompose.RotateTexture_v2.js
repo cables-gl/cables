@@ -3,7 +3,7 @@ const render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
     inRotate = op.inValueSlider("Rotate", 0.125),
-    crop = op.inValueBool("Crop", true),
+    crop = op.inBool("Crop", true),
     inClear = op.inBool("Clear", true),
     trigger = op.outTrigger("trigger");
 

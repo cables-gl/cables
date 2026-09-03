@@ -6,7 +6,7 @@ op.trigger = op.outTrigger("trigger");
 
 let inAmount = op.inValueSlider("Strength", 1.0);
 
-let castShadows = op.inValueBool("Cast Shadow", true);
+let castShadows = op.inBool("Cast Shadow", true);
 
 let shader = null;
 

@@ -4,18 +4,18 @@ const
     amount = op.inValueSlider("amount", 1),
 
     image = op.inTexture("Image"),
-    inAlphaPremul = op.inValueBool("Premultiplied", false),
-    inAlphaMask = op.inValueBool("Alpha Mask", false),
-    removeAlphaSrc = op.inValueBool("removeAlphaSrc", false),
+    inAlphaPremul = op.inBool("Premultiplied", false),
+    inAlphaMask = op.inBool("Alpha Mask", false),
+    removeAlphaSrc = op.inBool("removeAlphaSrc", false),
 
     imageAlpha = op.inTexture("Mask"),
     alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance"),
     invAlphaChannel = op.inBool("Invert alpha channel"),
 
-    inAspect = op.inValueBool("Aspect Ratio", false),
+    inAspect = op.inBool("Aspect Ratio", false),
     inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X"),
     inAspectPos = op.inValueSlider("Position", 0.0),
-    inAspectCrop = op.inValueBool("Crop", false),
+    inAspectCrop = op.inBool("Crop", false),
 
     trigger = op.outTrigger("trigger");
 
@@ -91,14 +91,14 @@ function updateAspectRatio()
 //
 // texture flip
 //
-const flipX = op.inValueBool("flip x");
-const flipY = op.inValueBool("flip y");
+const flipX = op.inBool("flip x");
+const flipY = op.inBool("flip y");
 
 //
 // texture transform
 //
 
-let doTransform = op.inValueBool("Transform");
+let doTransform = op.inBool("Transform");
 
 let scaleX = op.inValueSlider("Scale X", 1);
 let scaleY = op.inValueSlider("Scale Y", 1);
@@ -108,7 +108,7 @@ let posY = op.inValue("Position Y", 0);
 
 let rotate = op.inValue("Rotation", 0);
 
-const inClipRepeat = op.inValueBool("Clip Repeat", false);
+const inClipRepeat = op.inBool("Clip Repeat", false);
 
 const uniScaleX = new CGL.Uniform(shader, "f", "scaleX", scaleX);
 const uniScaleY = new CGL.Uniform(shader, "f", "scaleY", scaleY);

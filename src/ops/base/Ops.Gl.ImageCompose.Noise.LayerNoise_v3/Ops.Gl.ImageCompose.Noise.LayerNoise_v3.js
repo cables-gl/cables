@@ -11,7 +11,7 @@ const
         "logarithmic",
         "linear"
     ], "exponential"),
-    inRGBA = op.inValueBool("RGBA"),
+    inRGBA = op.inBool("RGBA"),
     inScale = op.inValue("scale", 7),
     inNumLayers = op.inValueInt("layers", 3),
     inFactor = op.inFloat("factor", 1),
@@ -19,7 +19,7 @@ const
     inScrollX = op.inFloat("scrollX"),
     inScrollY = op.inFloat("scrollY"),
     inScrollZ = op.inFloat("scrollZ"),
-    tile = op.inValueBool("Tileable", false),
+    tile = op.inBool("Tileable", false),
     outTrigger = op.outTrigger("trigger");
 
 // locals

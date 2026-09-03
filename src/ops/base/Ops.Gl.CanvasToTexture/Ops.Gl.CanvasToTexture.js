@@ -3,8 +3,8 @@ const
     inCanvas = op.inObject("canvas"),
     inTextureFilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear"),
     inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
-    inTextureFlip = op.inValueBool("flip"),
-    inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
+    inTextureFlip = op.inBool("flip"),
+    inUnpackAlpha = op.inBool("unpackPreMultipliedAlpha"),
 
     inForce = op.inTriggerButton("Force Update"),
 

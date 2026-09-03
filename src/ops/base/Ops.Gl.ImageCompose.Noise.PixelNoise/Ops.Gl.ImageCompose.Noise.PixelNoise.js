@@ -6,7 +6,7 @@ const render = op.inTrigger("Render"),
     addX = op.inValue("X", 0),
     addY = op.inValue("Y", 0),
     addZ = op.inValue("Z", 0),
-    inRGB = op.inValueBool("RGB", false);
+    inRGB = op.inBool("RGB", false);
 
 const trigger = op.outTrigger("Next");
 

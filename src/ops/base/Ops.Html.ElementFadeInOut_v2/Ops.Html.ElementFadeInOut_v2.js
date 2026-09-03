@@ -1,6 +1,6 @@
 const
     inEle = op.inObject("HTML Element"),
-    inVisible = op.inValueBool("Visible", true),
+    inVisible = op.inBool("Visible", true),
     inDuration = op.inFloat("Duration", 0.25),
     inOpacity = op.inFloat("Opacity", 1),
     outEle = op.outObject("PassThrough", null, "element"),

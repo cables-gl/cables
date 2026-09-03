@@ -1,5 +1,5 @@
 var inObj=op.inObject("Object");
-var inBeautify=op.inValueBool("beautify");
+var inBeautify=op.inBool("beautify");
 var outString=op.outValue("Result");
 
 inBeautify.onChange=update;

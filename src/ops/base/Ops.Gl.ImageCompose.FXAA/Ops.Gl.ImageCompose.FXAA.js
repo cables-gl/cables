@@ -5,7 +5,7 @@ let trigger = op.outTrigger("trigger");
 let fxaa_span = op.inValueSelect("span", [0, 2, 4, 8, 16, 32, 64]);
 let fxaa_reduceMin = op.inValueFloat("reduceMin");
 let fxaa_reduceMul = op.inValueFloat("reduceMul");
-let useVPSize = op.inValueBool("use viewport size", true);
+let useVPSize = op.inBool("use viewport size", true);
 let texWidth = op.inValueInt("width");
 let texHeight = op.inValueInt("height");
 

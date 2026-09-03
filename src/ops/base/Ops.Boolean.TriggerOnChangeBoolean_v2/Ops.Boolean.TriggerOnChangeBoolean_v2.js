@@ -1,5 +1,5 @@
 const
-    inBool = op.inValueBool("Value"),
+    inBool = op.inBool("Value"),
     outTrue = op.outTrigger("True"),
     outFalse = op.outTrigger("False");
 

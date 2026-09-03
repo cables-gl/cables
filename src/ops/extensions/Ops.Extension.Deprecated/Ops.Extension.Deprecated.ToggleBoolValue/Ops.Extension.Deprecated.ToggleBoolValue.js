@@ -1,5 +1,5 @@
 const
-    bool = op.inValueBool("in bool"),
+    bool = op.inBool("in bool"),
     outbool = op.outBoolNum("out bool");
 
 bool.changeAlways = true;

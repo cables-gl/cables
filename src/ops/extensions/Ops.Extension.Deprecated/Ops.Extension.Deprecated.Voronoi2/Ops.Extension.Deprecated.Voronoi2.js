@@ -1,9 +1,9 @@
 let render = op.inTrigger("render");
 let pSites = op.inArray("Site Points");
 
-let pRender = op.inValueBool("Render", true);
-let pInvert = op.inValueBool("Invert", false);
-let pIgnoreBorderCells = op.inValueBool("Ignore Border Cells", false);
+let pRender = op.inBool("Render", true);
+let pInvert = op.inBool("Invert", false);
+let pIgnoreBorderCells = op.inBool("Ignore Border Cells", false);
 
 let pWidth = op.inFloat("Width", 2);
 let pHeight = op.inFloat("Height", 2);
@@ -13,7 +13,7 @@ let pExtrCenter = op.inFloat("Extrude Cell Center", 0.1);
 let maxSize = op.inFloat("Scale Out Size Start", 0);
 let maxSizeEnd = op.inFloat("Scale Out Size End", 0);
 
-let inCalcNormals = op.inValueBool("Calc Normals", true);
+let inCalcNormals = op.inBool("Calc Normals", true);
 let next = op.outTrigger("Next");
 let outVerts = op.outArray("Points");
 let outCenter = op.outArray("Center Points");

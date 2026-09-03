@@ -12,7 +12,7 @@ const inReflection = op.inTexture("Reflection");
 
 const inNormal = op.inTexture("Normal");
 const inNormalIntensity = op.inValueSlider("Normal Intensity", 1);
-const inNormalFlip = op.inValueBool("Normal Flip", false);
+const inNormalFlip = op.inBool("Normal Flip", false);
 
 const inDiffuse = op.inTexture("Diffuse");
 const inAo = op.inTexture("AO");

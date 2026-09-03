@@ -2,7 +2,7 @@ const
     val = op.inValueFloat("val", 0.5),
     min = op.inValueFloat("min", 0),
     max = op.inValueFloat("max", 1),
-    ignore = op.inValueBool("ignore outside values"),
+    ignore = op.inBool("ignore outside values"),
     result = op.outNumber("result");
 
 val.onChange = min.onChange = max.onChange = clamp;

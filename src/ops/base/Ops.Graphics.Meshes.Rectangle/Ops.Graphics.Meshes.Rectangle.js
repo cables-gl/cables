@@ -11,7 +11,7 @@ let nColumns = op.inValueInt("num columns", 1);
 let nRows = op.inValueInt("num rows", 1);
 let axis = op.inSwitch("axis", ["xy", "xz"], "xy");
 
-let active = op.inValueBool("Active", true);
+let active = op.inBool("Active", true);
 
 let geomOut = op.outObject("geometry");
 geomOut.ignoreValueSerialize = true;

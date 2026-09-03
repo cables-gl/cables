@@ -3,9 +3,9 @@ let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let enableDepth = op.inValueBool("enable depth testing", true);
+let enableDepth = op.inBool("enable depth testing", true);
 
-let fill = op.inValueBool("fill", true);
+let fill = op.inBool("fill", true);
 
 function setDefines()
 {

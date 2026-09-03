@@ -70,9 +70,9 @@ let canvas = op.patch.cgl.canvas;
 
 let outX = op.addOutPort(new CABLES.Port(op, "x"));
 let outY = op.addOutPort(new CABLES.Port(op, "y"));
-let flipY = op.inValueBool("Flip Y", true);
-let kinetic = op.inValueBool("Inertia Movement", true);
-let limit = op.inValueBool("Limit");
+let flipY = op.inBool("Flip Y", true);
+let kinetic = op.inBool("Inertia Movement", true);
+let limit = op.inBool("Limit");
 
 let doReset = op.inTriggerButton("Reset");
 
@@ -83,7 +83,7 @@ let maxX = op.inFloat("maxX", 600);
 let minY = op.inFloat("minY", -600);
 let maxY = op.inFloat("maxY", 600);
 
-let active = op.inValueBool("Active", true);
+let active = op.inBool("Active", true);
 
 let isMoving = op.outValue("isMoving");
 let isPressed = op.outValue("isPressed");

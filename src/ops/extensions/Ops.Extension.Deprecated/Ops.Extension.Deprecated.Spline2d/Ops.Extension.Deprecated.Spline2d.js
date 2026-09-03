@@ -4,7 +4,7 @@ let render = op.inTrigger("Render");
 
 let inThickness = op.inFloat("Thickness", 1);
 
-let inFill = op.inValueBool("Fill");
+let inFill = op.inBool("Fill");
 
 let next = op.outTrigger("Next");
 let inPoints = op.inArray("points");

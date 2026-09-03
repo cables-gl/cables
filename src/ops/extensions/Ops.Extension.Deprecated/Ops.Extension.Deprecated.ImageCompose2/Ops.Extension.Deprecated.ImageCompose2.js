@@ -5,8 +5,8 @@ const height = op.addInPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VA
 const tfilter = op.inValueSelect("filter", ["nearest", "linear"]);// ,'mipmap'
 const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 
-const fpTexture = op.inValueBool("HDR");
-const clear = op.inValueBool("Clear", true);
+const fpTexture = op.inBool("HDR");
+const clear = op.inBool("Clear", true);
 
 const trigger = op.outTrigger("trigger");
 const texOut = op.outTexture("texture_out");

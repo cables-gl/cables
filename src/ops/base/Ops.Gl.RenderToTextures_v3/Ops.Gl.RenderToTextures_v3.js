@@ -9,7 +9,7 @@ const
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
-    clear = op.inValueBool("Clear", true),
+    clear = op.inBool("Clear", true),
     inDepth = op.inObject("Depth Buffer", null, "framebuffer"),
     slots = op.inSwitch("Slots", ["1", "2", "3", "4", "5", "6", "7", "8"], "1");
 

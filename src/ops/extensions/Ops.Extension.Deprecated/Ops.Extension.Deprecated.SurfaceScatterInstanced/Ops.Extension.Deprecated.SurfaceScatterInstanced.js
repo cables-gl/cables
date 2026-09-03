@@ -8,7 +8,7 @@ let inVariety = op.inValueSelect("Selection", ["Random", "Sequential"], "Random"
 let inNum = op.inFloat("Num", 100);
 let inSizeMin = op.inValueSlider("Size min", 1.0);
 let inSizeMax = op.inValueSlider("Size max", 1.0);
-let inRotateRandom = op.inValueBool("Random Rotate", true);
+let inRotateRandom = op.inBool("Random Rotate", true);
 let seed = op.addInPort(new CABLES.Port(op, "Random Seed"));
 
 let mod = null;

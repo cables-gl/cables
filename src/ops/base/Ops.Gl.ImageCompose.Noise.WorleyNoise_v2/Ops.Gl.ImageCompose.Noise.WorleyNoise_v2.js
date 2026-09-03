@@ -8,10 +8,10 @@ const
     z = op.inValue("Z", 0),
     scale = op.inValue("Scale", 6),
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
-    inv = op.inValueBool("Invert", true),
+    inv = op.inBool("Invert", true),
     rangeA = op.inValueSlider("RangeA", 0.4),
     rangeB = op.inValueSlider("RangeB", 0.5),
-    tile = op.inValueBool("Tileable", false),
+    tile = op.inBool("Tileable", false),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

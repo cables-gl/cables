@@ -5,7 +5,7 @@ let axis = op.addInPort(new CABLES.Port(op, "axis", CABLES.OP_PORT_TYPE_VALUE, {
 
 let offset = op.addInPort(new CABLES.Port(op, "offset", CABLES.OP_PORT_TYPE_VALUE));
 
-let smoothed = op.inValueBool("Gradients");
+let smoothed = op.inBool("Gradients");
 
 let r = op.addInPort(new CABLES.Port(op, "r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
 let g = op.addInPort(new CABLES.Port(op, "g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));

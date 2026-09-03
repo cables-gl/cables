@@ -6,9 +6,9 @@ const
     inLines = op.inSwitch("Line Breaks", ["Separator", "Ignore"], "Separator"), // "As Arrays",
 
     inTypes = op.inSwitch("Type", ["Auto", "Numbers", "Strings"], "Auto"),
-    trim = op.inValueBool("Trim", true),
+    trim = op.inBool("Trim", true),
 
-    inReplNan = op.inValueBool("Replace Nan", true),
+    inReplNan = op.inBool("Replace Nan", true),
     inNan = op.inFloat("Replace Nan Value", -1),
 
     arr = op.outArray("array"),

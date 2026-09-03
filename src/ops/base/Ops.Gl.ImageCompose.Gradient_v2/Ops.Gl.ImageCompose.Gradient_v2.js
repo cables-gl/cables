@@ -6,8 +6,8 @@ const
     width = op.inValue("Width", 1),
     gType = op.inSwitch("Type", ["X", "Y", "XY", "Radial"], "X"),
     pos1 = op.inValueSlider("Pos", 0.5),
-    smoothStep = op.inValueBool("Smoothstep", true),
-    inSrgb = op.inValueBool("sRGB", false),
+    smoothStep = op.inBool("Smoothstep", true),
+    inSrgb = op.inBool("sRGB", false),
     inColSpace = op.inSwitch("color space", ["RGB", "Oklab", "OklabG"], "RGB"),
 
     r = op.inValueSlider("r", Math.random()),

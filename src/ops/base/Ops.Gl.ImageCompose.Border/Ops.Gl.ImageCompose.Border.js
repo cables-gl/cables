@@ -4,7 +4,7 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
     trigger = op.outTrigger("trigger"),
-    smooth = op.inValueBool("Smooth", false),
+    smooth = op.inBool("Smooth", false),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),

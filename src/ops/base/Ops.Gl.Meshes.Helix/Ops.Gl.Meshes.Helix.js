@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    draw = op.inValueBool("Draw", true),
+    draw = op.inBool("Draw", true),
     segments = op.inValue("Segments", 40),
     freq = op.inValue("Frequency", 1),
     radius = op.inValue("Radius", 1),

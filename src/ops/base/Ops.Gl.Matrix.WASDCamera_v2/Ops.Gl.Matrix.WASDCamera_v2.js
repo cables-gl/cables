@@ -6,7 +6,7 @@ const
 
     moveSpeed = op.inFloat("Speed", 1),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
-    fly = op.inValueBool("Allow Flying", true),
+    fly = op.inBool("Allow Flying", true),
     inActive = op.inBool("Active", true),
 
     inMoveXPos = op.inBool("Move X+"),

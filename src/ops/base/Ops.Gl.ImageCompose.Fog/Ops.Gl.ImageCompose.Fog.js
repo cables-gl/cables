@@ -2,7 +2,7 @@ let render = op.inTrigger("render");
 let density = op.inValueFloat("density");
 let image = op.inTexture("depth texture");
 let trigger = op.outTrigger("trigger");
-let ignoreInf = op.inValueBool("ignore infinity");
+let ignoreInf = op.inBool("ignore infinity");
 
 ignoreInf.set(false);
 ignoreInf.onChange = function ()

@@ -3,7 +3,7 @@ const
     width = op.inValueFloat("Width", 1),
     height = op.inValueFloat("Height", 1),
     thickness = op.inValueFloat("Thickness", -0.1),
-    dodraw = op.inValueBool("Draw", true),
+    dodraw = op.inBool("Draw", true),
     pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]),
     pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]),
 

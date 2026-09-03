@@ -14,9 +14,9 @@ const
     amount = op.inValueSlider("amount", 0.1),
     inTime = op.inFloat("Time", 0),
     mul = op.inValueFloat("Scale", 3),
-    toAxisX = op.inValueBool("axisX", true),
-    toAxisY = op.inValueBool("axisY", true),
-    toAxisZ = op.inValueBool("axisZ", true),
+    toAxisX = op.inBool("axisX", true),
+    toAxisY = op.inBool("axisY", true),
+    toAxisZ = op.inBool("axisZ", true),
     positive = op.inSwitch("Range", ["-1 to 1", "0 to 1"], "-1 to 1"),
 
     inArea = op.inValueSelect("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
@@ -26,8 +26,8 @@ const
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    inWorldSpace = op.inValueBool("WorldSpace", true),
-    inInvert = op.inValueBool("Invert"),
+    inWorldSpace = op.inBool("WorldSpace", true),
+    inInvert = op.inBool("Invert"),
 
     next = this.outTrigger("trigger");
 

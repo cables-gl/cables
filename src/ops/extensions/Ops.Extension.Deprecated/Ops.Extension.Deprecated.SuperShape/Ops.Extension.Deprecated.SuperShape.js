@@ -2,8 +2,8 @@
 
 const render = op.inTrigger("render");
 
-let pNormalizeSize = op.inValueBool("Normalize Size", true);
-let asPointCloud = op.inValueBool("Point Cloud", false);
+let pNormalizeSize = op.inBool("Normalize Size", true);
+let asPointCloud = op.inBool("Point Cloud", false);
 let pStep = op.inFloat("Step", 0.05);
 
 let a1 = op.inFloat("a1", 1);

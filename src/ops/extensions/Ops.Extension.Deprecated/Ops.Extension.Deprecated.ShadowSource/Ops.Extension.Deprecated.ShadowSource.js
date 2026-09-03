@@ -12,7 +12,7 @@ let znear = op.inValueInt("Z Near", 0.1);
 let zfar = op.inValueInt("Z Far", 300);
 let lookat = op.inArray("Look at");
 
-let showMapArea = op.inValueBool("Show Map Area", false);
+let showMapArea = op.inBool("Show Map Area", false);
 let next = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;

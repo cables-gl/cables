@@ -3,7 +3,7 @@ const
     inY = op.inValue("Y"),
     outX = op.outNumber("Result X"),
     outY = op.outNumber("Result Y"),
-    range = op.inValueBool("-1 to 1");
+    range = op.inBool("-1 to 1");
 
 inX.onChange =
     inY.onChange =

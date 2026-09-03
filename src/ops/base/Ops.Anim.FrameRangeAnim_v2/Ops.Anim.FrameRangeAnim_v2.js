@@ -1,7 +1,7 @@
 const
     inTime = op.inValue("Time"),
     inStr = op.inString("Frames"),
-    inLoop = op.inValueBool("Loop"),
+    inLoop = op.inBool("Loop"),
     inRewind = op.inTriggerButton("Rewind"),
     outValue = op.outNumber("result time"),
     outArr = op.outArray("Expanded Frames"),

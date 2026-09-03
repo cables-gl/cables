@@ -1,18 +1,18 @@
 const
     inTrigger = op.inTrigger("Render"),
     inActive = op.inBool("Active", true),
-    inGenTex = op.inValueBool("Generate Texture", true),
+    inGenTex = op.inBool("Generate Texture", true),
     inInputDevices = op.inDropDown("Webcam Input", ["Default"], "Default"),
     inWidth = op.inValueInt("Requested Width", 1280),
     inHeight = op.inValueInt("Requested Height", 720),
 
-    flipX = op.inValueBool("Flip X", false),
-    flipY = op.inValueBool("Flip Y", false),
+    flipX = op.inBool("Flip X", false),
+    flipY = op.inBool("Flip Y", false),
 
-    inAsDOM = op.inValueBool("Show HTML Element", false),
+    inAsDOM = op.inBool("Show HTML Element", false),
     inCss = op.inStringEditor("CSS", "z-index:99999;\nposition:absolute;\n", "inline-css"),
-    htmlFlipX = op.inValueBool("Element Flip X", false),
-    htmlFlipY = op.inValueBool("Element Flip Y", false),
+    htmlFlipX = op.inBool("Element Flip X", false),
+    htmlFlipY = op.inBool("Element Flip Y", false),
 
     next = op.outTrigger("Next"),
     textureOut = op.outTexture("Texture"),

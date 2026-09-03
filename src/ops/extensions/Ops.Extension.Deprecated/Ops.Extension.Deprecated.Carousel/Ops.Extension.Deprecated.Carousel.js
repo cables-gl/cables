@@ -11,7 +11,7 @@ let scrollValuePort = op.inFloat("Scroll Position");
 let numPort = op.inFloat("Number of Elements", NUM_DEFAULT);
 let sizePort = op.inFloat("Size", DEFAULT_SIZE);
 // var spacingPort = op.inFloat('Spacing Between', 0.2);
-// var loopPort = op.inValueBool('Loop');
+// var loopPort = op.inBool('Loop');
 // var minPort = op.inFloat('Minimum', -80);
 // var maxPort = op.inFloat('Maximum', 80);
 

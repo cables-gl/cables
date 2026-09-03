@@ -2,7 +2,7 @@ const
     render = op.inTriggerButton("render"),
     inTexture = op.inTexture("Texture"),
     inTextureMask = op.inTexture("Alpha Mask"),
-    useVPSize = op.inValueBool("use original size", true),
+    useVPSize = op.inBool("use original size", true),
     width = op.inValueInt("width", 640),
     height = op.inValueInt("height", 360),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),

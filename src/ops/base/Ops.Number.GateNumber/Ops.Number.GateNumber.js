@@ -1,6 +1,6 @@
 const
     valueInPort = op.inValue("Value In", 0),
-    passThroughPort = op.inValueBool("Pass Through"),
+    passThroughPort = op.inBool("Pass Through"),
     inIfNot = op.inSwitch("When False", ["keep last number", "custom"], "keep last number"),
     inCustomNot = op.inFloat("Custom Value", 0),
     valueOutPort = op.outNumber("Value Out");

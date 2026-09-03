@@ -2,8 +2,8 @@
 
 const
     render = op.inTrigger("render"),
-    smooth = op.inValueBool("smooth"),
-    renderMesh = op.inValueBool("Render Mesh", true),
+    smooth = op.inBool("smooth"),
+    renderMesh = op.inBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
 

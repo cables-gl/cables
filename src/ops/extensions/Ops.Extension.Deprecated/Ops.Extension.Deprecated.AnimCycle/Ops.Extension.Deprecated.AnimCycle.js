@@ -2,7 +2,7 @@ let inTime = op.inFloat("Time");
 
 let inStart = op.inValueInt("Frame Start");
 let inEnd = op.inValueInt("Frame End");
-// var inLoop=op.inValueBool
+// var inLoop=op.inBool
 
 let outTime = op.outValue("Result Time");
 let outFrame = op.outValue("Result Frame");

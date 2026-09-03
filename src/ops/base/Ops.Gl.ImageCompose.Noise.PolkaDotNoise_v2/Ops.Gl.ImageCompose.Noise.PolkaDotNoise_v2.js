@@ -3,7 +3,7 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    inBox = op.inValueBool("Square Look", false),
+    inBox = op.inBool("Square Look", false),
     threshhold = op.inValueSlider("Threshold", 0.25),
     radius_low = op.inValueSlider("Radius Low", 0),
     radius_high = op.inValueSlider("Radius High", 1),

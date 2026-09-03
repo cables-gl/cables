@@ -89,7 +89,7 @@ function createPorts()
     {
         event.port = op.outTrigger(event.displayName);
         event.handler = handlerFactory(event);
-        event.togglePort = op.inValueBool(event.displayName + " Active", true);
+        event.togglePort = op.inBool(event.displayName + " Active", true);
         event.togglePort.onChange = toggleHandlerFactory(event);
     });
     op.log(events);

@@ -2,9 +2,9 @@ const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
-    animated = op.inValueBool("Animated", true),
-    inRGB = op.inValueBool("RGB", false),
-    normalize = op.inValueBool("Normalize", false),
+    animated = op.inBool("Animated", true),
+    inRGB = op.inBool("RGB", false),
+    normalize = op.inBool("Normalize", false),
     inTexMul = op.inTexture("Multiply"),
     trigger = op.outTrigger("Next");
 

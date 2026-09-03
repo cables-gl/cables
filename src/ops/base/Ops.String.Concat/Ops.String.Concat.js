@@ -1,6 +1,6 @@
 var string1=op.inValueString("string1","ABC");
 var string2=op.inValueString("string2","XYZ");
-var newLine=op.inValueBool("New Line",false);
+var newLine=op.inBool("New Line",false);
 
 var result=op.outValueString("result");
 

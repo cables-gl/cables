@@ -7,7 +7,7 @@ let inAmount = op.inFloat("Amount", 1);
 let inSize = op.inFloat("Size", 20);
 let inFalloff = op.inValueSlider("Falloff", 0.5);
 let inScale = op.inValueSlider("Scale", 1);
-let inInvert = op.inValueBool("Invert");
+let inInvert = op.inBool("Invert");
 
 {
     // position

@@ -14,16 +14,16 @@ let openCloseBtnIcon = null;
 let headerTitleText = null;
 
 // inputs
-const visiblePort = op.inValueBool("Visible", true);
+const visiblePort = op.inBool("Visible", true);
 const opacityPort = op.inValueSlider("Opacity", 1);
-const defaultMinimizedPort = op.inValueBool("Default Minimized");
+const defaultMinimizedPort = op.inBool("Default Minimized");
 const minimizedOpacityPort = op.inValueSlider("Minimized Opacity", 0.5);
-const undoButtonPort = op.inValueBool("Show undo button", false);
-const inMinimize = op.inValueBool("Show Minimize", false);
+const undoButtonPort = op.inBool("Show undo button", false);
+const inMinimize = op.inBool("Show Minimize", false);
 
 const inTitle = op.inString("Title", "");
-const side = op.inValueBool("Side");
-const addCss = op.inValueBool("Default CSS", true);
+const side = op.inBool("Side");
+const addCss = op.inBool("Default CSS", true);
 
 let doc = op.patch.cgl.canvas.ownerDocument;
 

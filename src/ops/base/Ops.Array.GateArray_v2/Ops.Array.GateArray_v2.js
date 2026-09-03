@@ -1,6 +1,6 @@
 const
     arrayIn = op.inArray("Array in"),
-    passThrough = op.inValueBool("Pass Through", true),
+    passThrough = op.inBool("Pass Through", true),
     inIfNull = op.inSwitch("When False", ["keep last array", "null"], "keep last array"),
     arrayOut = op.outArray("Array Out");
 

@@ -1,7 +1,7 @@
 const
     number1 = op.inValueFloat("number1", 1),
     number2 = op.inValueFloat("number2", 2),
-    pingpong = op.inValueBool("pingpong"),
+    pingpong = op.inBool("pingpong"),
     result = op.outNumber("result");
 
 let calculateFunction = calculateModule;

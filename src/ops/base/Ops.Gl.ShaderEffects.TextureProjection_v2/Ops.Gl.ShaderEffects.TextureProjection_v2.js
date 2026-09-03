@@ -19,8 +19,8 @@ const
     inRotZ = op.inFloat("Rot Z", 0),
 
     inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen", "TexCoords 1", "TexCoords 2", "TexCoords 3"], "XY"),
-    inDiscard = op.inValueBool("Discard"),
-    inWorldSpace = op.inValueBool("WorldSpace");
+    inDiscard = op.inBool("Discard"),
+    inWorldSpace = op.inBool("WorldSpace");
 
 const cgl = op.patch.cgl;
 

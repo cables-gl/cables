@@ -7,7 +7,7 @@ let noteEnd = op.addInPort(new CABLES.Port(op, "Note End"));
 let learnEnd = op.addInPort(new CABLES.Port(op, "Learn End", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 
 let lights = op.addInPort(new CABLES.Port(op, "Light", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let toggle = op.inValueBool("Toggle");
+let toggle = op.inBool("Toggle");
 
 let inValue = op.inFloat("Button Value", 1);
 
@@ -20,7 +20,7 @@ let values = op.addOutPort(new CABLES.Port(op, "Buttons", CABLES.OP_PORT_TYPE_AR
 
 let inClear = op.inTriggerButton("Clear");
 
-let inEnabled = op.inValueBool("enabled", true);
+let inEnabled = op.inBool("enabled", true);
 
 values.ignoreValueSerialize = true;
 

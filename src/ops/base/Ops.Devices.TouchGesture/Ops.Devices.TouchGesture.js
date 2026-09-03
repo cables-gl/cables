@@ -1,7 +1,7 @@
 // inputs
 const inEnabled = op.inBool("Active", true);
-let enableVerticalSwipePort = op.inValueBool("Vertical Swipe", true);
-let enableVerticalPanPort = op.inValueBool("Vertical Pan", true);
+let enableVerticalSwipePort = op.inBool("Vertical Swipe", true);
+let enableVerticalPanPort = op.inBool("Vertical Pan", true);
 
 // outputs
 let pressPort = op.outTrigger("Press");

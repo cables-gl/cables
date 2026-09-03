@@ -3,7 +3,7 @@ const
     inName = op.inString("Name", "Sphere"),
     inMass = op.inFloat("Mass"),
     inRadius = op.inFloat("Radius", 1),
-    doRender = op.inValueBool("Render", true),
+    doRender = op.inBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outRadius = op.outValue("Out Radius"),

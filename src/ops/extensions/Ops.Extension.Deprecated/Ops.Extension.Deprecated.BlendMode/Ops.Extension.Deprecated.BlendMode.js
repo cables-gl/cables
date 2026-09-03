@@ -7,7 +7,7 @@ let inBlend = op.inValueSelect("Blendmode",
         "Subtract",
         "Multiply"
     ], "Normal");
-let inPremul = op.inValueBool("Premultiplied");
+let inPremul = op.inBool("Premultiplied");
 
 let next = op.outTrigger("Next");
 

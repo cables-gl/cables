@@ -2,7 +2,7 @@
 var obj=op.inObject("Object");
 var result=op.outValue("Result");
 
-var pretty=op.inValueBool("Pretty Print",true);
+var pretty=op.inBool("Pretty Print",true);
 
 pretty.onChange=update;
 obj.onChange=update;

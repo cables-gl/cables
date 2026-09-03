@@ -2,8 +2,8 @@ let render = op.inTrigger("Render");
 let inDiagram = op.inObject("Diagram");
 let next = op.outTrigger("Next");
 let pExtrCenter = op.inFloat("Extrude Cell Center", 0.1);
-let pIgnoreBorderCells = op.inValueBool("Ignore Border Cells", false);
-let inCalcNormals = op.inValueBool("Calc Normals", true);
+let pIgnoreBorderCells = op.inBool("Ignore Border Cells", false);
+let inCalcNormals = op.inBool("Calc Normals", true);
 let updatebutton = op.inTriggerButton("Update");
 
 let needsGeomUpdate = false;

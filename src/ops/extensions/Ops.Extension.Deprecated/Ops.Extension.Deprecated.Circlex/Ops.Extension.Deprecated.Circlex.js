@@ -5,10 +5,10 @@ const
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),
     steps = op.inFloat("steps", 0),
-    invertSteps = op.inValueBool("invertSteps", false),
+    invertSteps = op.inBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"], "flat"),
-    drawSpline = op.inValueBool("Spline", false),
-    doRender = op.inValueBool("Render", true),
+    drawSpline = op.inBool("Spline", false),
+    doRender = op.inBool("Render", true),
     trigger = op.outTrigger("next"),
     geomOut = op.outObject("geometry", null, "geometry");
 

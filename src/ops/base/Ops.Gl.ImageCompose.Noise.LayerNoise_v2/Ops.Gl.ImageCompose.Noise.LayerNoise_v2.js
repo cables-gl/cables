@@ -10,7 +10,7 @@ const
         "logarithmic",
         "linear"
     ], "exponential"),
-    inRGBA = op.inValueBool("RGBA"),
+    inRGBA = op.inBool("RGBA"),
     inScale = op.inValue("scale", 4),
     inNumLayers = op.inValueInt("layers", 3),
     inFactor = op.inFloat("factor", 1),
@@ -81,7 +81,7 @@ inTrigger.onTriggered = function ()
     outTrigger.trigger();
 };
 
-const tile = op.inValueBool("Tileable", false);
+const tile = op.inBool("Tileable", false);
 tile.onChange = updateTileable;
 function updateTileable()
 {

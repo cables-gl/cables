@@ -1,7 +1,7 @@
 const
     geometry = op.inObject("Geometry"),
     outGeom = op.outObject("Result"),
-    doFlip = op.inValueBool("Flip", true);
+    doFlip = op.inBool("Flip", true);
 
 doFlip.onChange =
     geometry.onChange = flip;

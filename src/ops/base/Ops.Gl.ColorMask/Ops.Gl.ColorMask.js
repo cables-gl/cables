@@ -1,9 +1,9 @@
 const
     exec = op.inTrigger("Execute"),
-    inR = op.inValueBool("Red", true),
-    inG = op.inValueBool("Green", true),
-    inB = op.inValueBool("Blue", true),
-    inA = op.inValueBool("Alpha", true),
+    inR = op.inBool("Red", true),
+    inG = op.inBool("Green", true),
+    inB = op.inBool("Blue", true),
+    inA = op.inBool("Alpha", true),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

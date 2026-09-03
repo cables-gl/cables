@@ -1,7 +1,7 @@
 const
     data = op.inObject("GamePad Data"),
     outID = op.outString("ID"),
-    digitalAnalog = op.inValueBool("Analog to Digital", true),
+    digitalAnalog = op.inBool("Analog to Digital", true),
     outAxes = op.outArray("Axes"),
 
     pressedLeft = op.outBoolNum("Pad Left"),

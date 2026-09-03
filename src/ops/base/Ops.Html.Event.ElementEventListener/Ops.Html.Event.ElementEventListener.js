@@ -12,9 +12,9 @@ let lastUseCapture = USE_CAPTURE_DEFAULT;
 // inputs
 let elementPort = op.inObject("Element");
 let eventNamePort = op.inValueString("Event Name", EVENT_NAME_DEFAULT);
-let useCapturePort = op.inValueBool("Use Capture", USE_CAPTURE_DEFAULT);
-let preventDefaultPort = op.inValueBool("Prevent Default", PREVENT_DEFAULT_DEFAULT);
-let stopPropagationPort = op.inValueBool("Stop Propagation", STOP_PROPAGATION_DEFAULT);
+let useCapturePort = op.inBool("Use Capture", USE_CAPTURE_DEFAULT);
+let preventDefaultPort = op.inBool("Prevent Default", PREVENT_DEFAULT_DEFAULT);
+let stopPropagationPort = op.inBool("Stop Propagation", STOP_PROPAGATION_DEFAULT);
 
 // outputs
 let triggerPort = op.outTrigger("Event Trigger");

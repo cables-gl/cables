@@ -1,9 +1,9 @@
 const
     inText = op.inString("Text", "Hello Div"),
     inPos = op.inSwitch("Position", ["Absolute", "Static", "Relative", "Fixed"], "Absolute"),
-    inInteractive = op.inValueBool("Interactive", false),
+    inInteractive = op.inBool("Interactive", false),
 
-    inSetSize = op.inValueBool("Set Size", true),
+    inSetSize = op.inBool("Set Size", true),
     inWidth = op.inFloat("Width", 100),
     inHeight = op.inFloat("Height", 100),
     inOverflow = op.inSwitch("Overflow", ["Visible", "Hidden", "Scroll", "Auto"], "Hidden"),
@@ -14,7 +14,7 @@ const
 
     inDisplay = op.inDropDown("Display", ["None", "Block", "Inline", "inline-block", "flex", "inline-flex", "grid", "inline-grid", "flow-root"], "Block"),
     inOpacity = op.inFloatSlider("Opacity", 1),
-    inPropagation = op.inValueBool("Propagate Click-Events", true),
+    inPropagation = op.inBool("Propagate Click-Events", true),
 
     outElement = op.outObject("DOM Element", null, "element"),
     outHover = op.outBoolNum("Hovering"),

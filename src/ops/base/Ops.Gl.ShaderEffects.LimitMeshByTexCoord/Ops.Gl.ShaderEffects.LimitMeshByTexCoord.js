@@ -4,7 +4,7 @@ op.trigger = op.outTrigger("trigger");
 const axis = op.inValueSelect("Axis", ["X", "Y", "XY", "X Inverted", "Y Inverted", "XY Inverted"], "X");
 const inTreshhold = op.inValueSlider("treshhold", 0.3);
 
-const inSinAnim = op.inValueBool("Sine Animation", false);
+const inSinAnim = op.inBool("Sine Animation", false);
 const inTime = op.inValueFloat("Time");
 const inSinAxis = op.inValueSelect("Sine Source", ["Texcoord X", "Texcoord Y"], "Texcoord X");
 

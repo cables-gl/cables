@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    doRender = op.inValueBool("dorender", true),
+    doRender = op.inBool("dorender", true),
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),

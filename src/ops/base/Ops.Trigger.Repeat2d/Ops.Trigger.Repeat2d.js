@@ -3,7 +3,7 @@ const
     numx = op.inValueInt("num x", 5),
     numy = op.inValueInt("num y", 5),
     mul = op.inValueFloat("mul", 1),
-    center = op.inValueBool("center"),
+    center = op.inBool("center"),
     trigger = op.outTrigger("trigger"),
     outX = op.outNumber("x"),
     outY = op.outNumber("y"),

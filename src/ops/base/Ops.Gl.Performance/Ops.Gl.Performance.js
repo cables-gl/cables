@@ -1,8 +1,8 @@
 const
     exe = op.inTrigger("exe"),
-    inActive = op.inValueBool("Active", true),
-    inShow = op.inValueBool("Visible", true),
-    inDoGpu = op.inValueBool("Measure GPU", true),
+    inActive = op.inBool("Active", true),
+    inShow = op.inBool("Visible", true),
+    inDoGpu = op.inBool("Measure GPU", true),
     next = op.outTrigger("childs"),
     position = op.inSwitch("Position", ["top", "bottom"], "top"),
     openDefault = op.inBool("Open", false),

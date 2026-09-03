@@ -2,7 +2,7 @@
 let parentPort = op.inObject("link");
 let labelPort = op.inString("Text", "Group");
 const inShowTitle = op.inBool("Show Title", true);
-let defaultMinimizedPort = op.inValueBool("Default Minimized");
+let defaultMinimizedPort = op.inBool("Default Minimized");
 const inVisible = op.inBool("Visible", true);
 
 // outputs

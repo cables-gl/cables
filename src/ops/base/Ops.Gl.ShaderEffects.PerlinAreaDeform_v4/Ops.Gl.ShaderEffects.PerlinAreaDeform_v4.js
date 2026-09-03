@@ -4,8 +4,8 @@ const
     inScale = op.inValueFloat("Scale", 1),
     inSize = op.inValueFloat("Size", 1),
     inStrength = op.inValueFloat("Strength", 1),
-    inCalcNormals = op.inValueBool("Calc Normals", false),
-    inFlipNormals = op.inValueBool("Flip Normals", false),
+    inCalcNormals = op.inBool("Calc Normals", false),
+    inFlipNormals = op.inBool("Flip Normals", false),
 
     inFalloff = op.inValueSlider("Falloff", 0.5),
     output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", "Mul XYZ",, "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
@@ -23,7 +23,7 @@ const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
 inFlipNormals.onChange =
 inCalcNormals.onChange = updateCalcNormals;
-const inWorldSpace = op.inValueBool("WorldSpace");
+const inWorldSpace = op.inBool("WorldSpace");
 
 const moduleVert = null;
 inPos.onChange =

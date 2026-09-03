@@ -2,7 +2,7 @@ op.name = "voronoi";
 let render = op.inTrigger("render");
 let pSites = op.inArray("Site Points");
 
-let pRender = op.inValueBool("Render", true);
+let pRender = op.inBool("Render", true);
 
 let pWidth = op.inFloat("Width", 2);
 let pHeight = op.inFloat("Height", 2);

@@ -38,8 +38,8 @@ const colUni = shader.addUniformFrag("4f", "color", r, g, b, a);
 const diffuseTexture = op.inTexture("texture");
 diffuseTexture.onChange = updateDiffuseTexture;
 
-const colorizeTexture = op.inValueBool("colorizeTexture", false);
-const vertexColors = op.inValueBool("Vertex Colors", false);
+const colorizeTexture = op.inBool("colorizeTexture", false);
+const vertexColors = op.inBool("Vertex Colors", false);
 
 // opacity texture
 const textureOpacity = op.inTexture("textureOpacity");
@@ -49,8 +49,8 @@ const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G",
 alphaMaskSource.setUiAttribs({ "greyout": true });
 textureOpacity.onChange = updateOpacity;
 
-const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
-const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
+const texCoordAlpha = op.inBool("Opacity TexCoords Transform", false);
+const discardTransPxl = op.inBool("Discard Transparent Pixels");
 
 shader.uniformColorDiffuse = colUni; // todo remove in next versio
 
@@ -63,7 +63,7 @@ const
     cropRepeat = op.inBool("Crop TexCoords", false);
 
 const texTransUni = shader.addUniformFrag("4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY);
-const doBillboard = op.inValueBool("billboard", false);
+const doBillboard = op.inBool("billboard", false);
 
 shader.materialPropUniforms = {
     "diffuseColor": colUni,

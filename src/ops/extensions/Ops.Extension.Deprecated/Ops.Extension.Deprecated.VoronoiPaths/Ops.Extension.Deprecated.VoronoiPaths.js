@@ -1,7 +1,7 @@
 let render = op.inTrigger("Render");
 let inDiagram = op.inObject("Diagram");
 let next = op.outTrigger("Next");
-let pIgnoreBorderCells = op.inValueBool("Ignore Border Cells", false);
+let pIgnoreBorderCells = op.inBool("Ignore Border Cells", false);
 
 let points = op.outArray("path");
 

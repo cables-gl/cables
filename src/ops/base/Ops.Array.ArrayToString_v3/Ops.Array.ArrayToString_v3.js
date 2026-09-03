@@ -2,7 +2,7 @@ const
     inArr = op.inArray("Array"),
     inSeperator = op.inString("Seperator", ","),
     inPrefix = op.inString("Prefix", ""),
-    inNewLine = op.inValueBool("New Line"),
+    inNewLine = op.inBool("New Line"),
     outStr = op.outString("Result");
 
 inArr.onChange = inPrefix.onChange =

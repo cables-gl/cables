@@ -5,7 +5,7 @@ const
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
     inMask = op.inTexture("Mask"),
-    inMaskInvert = op.inValueBool("Mask Invert"),
+    inMaskInvert = op.inBool("Mask Invert"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),

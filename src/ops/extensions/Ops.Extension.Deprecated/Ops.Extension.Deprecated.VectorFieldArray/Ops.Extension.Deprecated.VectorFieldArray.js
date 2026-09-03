@@ -10,11 +10,11 @@ let numColumns = op.inFloat("Columns", 100);
 let numRows = op.inFloat("Rows", 100);
 let spacingColumns = op.inFloat("Spacing Columns", 1);
 let spacingRows = op.inFloat("Spacing Rows", 1);
-let doCenter = op.inValueBool("Center", true);
+let doCenter = op.inBool("Center", true);
 
-let transRotate = op.inValueBool("Rotate", true);
-let transScale = op.inValueBool("Scale", false);
-let transTransZ = op.inValueBool("Translate Z", false);
+let transRotate = op.inBool("Rotate", true);
+let transScale = op.inBool("Scale", false);
+let transTransZ = op.inBool("Translate Z", false);
 
 transTransZ.onChange = updateTransforms;
 transRotate.onChange = updateTransforms;

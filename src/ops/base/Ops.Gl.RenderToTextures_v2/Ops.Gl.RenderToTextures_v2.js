@@ -1,14 +1,14 @@
 const
     render = op.inTrigger("Render"),
     trigger = op.outTrigger("Next"),
-    useVPSize = op.inValueBool("use viewport size", true),
+    useVPSize = op.inBool("use viewport size", true),
     width = op.inValueInt("texture width"),
     height = op.inValueInt("texture height"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
-    clear = op.inValueBool("Clear", true),
+    clear = op.inBool("Clear", true),
     slots = op.inSwitch("Slots", ["1", "2", "3", "4", "5", "6", "7", "8"], "1");
 
 let slotPorts = [];

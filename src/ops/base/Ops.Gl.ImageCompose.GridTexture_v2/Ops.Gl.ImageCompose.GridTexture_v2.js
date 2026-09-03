@@ -13,7 +13,7 @@ const
     offsetX = op.inValue("Offset X", 0.0),
     offsetY = op.inValue("Offset Y", 0.0),
 
-    invertColor = op.inValueBool("Invert color", false),
+    invertColor = op.inBool("Invert color", false),
     r = op.inValueSlider("Line red", Math.random()),
     g = op.inValueSlider("Line green", Math.random()),
     b = op.inValueSlider("Line Blue", Math.random());

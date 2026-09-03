@@ -80,10 +80,10 @@ op.textureOpacity.onChange = function ()
     }
 };
 
-op.doBillboard = op.inValueBool("billboard", false);
+op.doBillboard = op.inBool("billboard", false);
 op.doBillboard.onChange = function ()
 {
     shader.toggleDefine("BILLBOARD", op.doBillboard.get());
 };
 
-const preMultipliedAlpha = op.inValueBool("preMultiplied alpha");
+const preMultipliedAlpha = op.inBool("preMultiplied alpha");

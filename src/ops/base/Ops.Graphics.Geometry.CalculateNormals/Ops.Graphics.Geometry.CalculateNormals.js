@@ -1,7 +1,7 @@
 const
     geometry = op.inObject("Geometry"),
-    smoothNormals = op.inValueBool("Smooth"),
-    forceZUp = op.inValueBool("Force Z Up"),
+    smoothNormals = op.inBool("Smooth"),
+    forceZUp = op.inBool("Force Z Up"),
     geomOut = op.outObject("Geometry Out", null, "geometry");
 
 op.toWorkPortsNeedToBeLinked(geometry);

@@ -29,7 +29,7 @@ let ppqPort = op.inFloat("Pulses Per Quarter Note");
 let startPort = op.addInPort(new CABLES.Port(this, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 let startOffsetPort = op.inValueString("Start Offset", START_OFFSET_DEFAULT);
-let autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let stopPort = op.addInPort(new CABLES.Port(this, "Stop", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 

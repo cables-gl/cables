@@ -3,7 +3,7 @@ const
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
-    unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
+    unpackAlpha = op.inBool("Pre Multiplied Alpha", false),
     textureOut = op.outTexture("Texture"),
     outError = op.outBool("Has Error"),
     loadingOut = op.outBool("Loading");
