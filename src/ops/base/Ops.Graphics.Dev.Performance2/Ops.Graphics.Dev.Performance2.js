@@ -5,7 +5,7 @@ const
 let ctx = null;
 let canvas = null;
 let numBars = 100;
-let height = 30;
+let height = 40;
 let containerEle = document.body;
 let queueCPU = [];
 let queueGPU = [];
@@ -91,24 +91,30 @@ op.on("delete", () =>
     op.patch.off(frameListener);
 });
 
-function drawGraph(posy, q, col)
+function drawGraph(name, posy, q, col)
 {
     ctx.fillStyle = col;
     let k = 0;
-    // numBars = Math.max(0, numBars);
     let hmul = height / 24;
     if (q.length == 0)
         for (let i = 0; i < numBars; i++) q.push({ "ms": 0 });
 
+    let avg = 0;
     for (k = numBars; k >= 0; k--)
     {
         if (q[k])
         {
             const itemHeight = (q[k].ms * hmul);
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
+
+            avg += q[k].ms;
         }
     }
 
+    avg = (avg / numBars).toPrecision(2);
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(name + " " + avg + "ms", 5, posy + 16);
 }
 
 function updateCanvas()
@@ -116,15 +122,17 @@ function updateCanvas()
     // const height = canvas.height;
     // const hmul = inScaleGraph.get();
 
-    const colorBg = "#555555";
+    const colorBg = "#333333";
+
+    ctx.font = "11px monospace";
 
     ctx.fillStyle = colorBg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, height + 1, canvas.width, 1);
 
-    drawGraph(0, queueCPU, "#FFFFFF");
-    drawGraph(height, queueGPU, "#FFFF00");
+    drawGraph("CPU", 0, queueCPU, "#999900");
+    drawGraph("GPU", height, queueGPU, "#007777");
     // console.log("q",queueGPU);
 
     // for (k = numBars; k >= 0; k--)
@@ -150,7 +158,6 @@ function updateCanvas()
     //     ctx.fillRect(canvas.width - 5, y, 5, 1);
     //     ctx.font = "8px arial";
 
-    //     ctx.fillText(i + "ms", canvas.width - 27, y + 3);
     // }
 
     // ctx.fillStyle = "#fff";
