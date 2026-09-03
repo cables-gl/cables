@@ -48,7 +48,7 @@ export class ShaderGraphProgram extends Events
     /** @type {Port} */
     #port;
 
-    _options = {};
+    options = {};
 
     /** @type {Object<String,any>} */
     _opIdsHeadFuncSrc = {};
@@ -358,7 +358,6 @@ export class ShaderGraphProgram extends Events
             const l = port.links;
             for (let i = 0; i < l.length; i++)
             {
-
                 const lnk = l[i];
                 this.execNode(lnk.getOtherPort(port).op);
             }
@@ -378,7 +377,7 @@ export class ShaderGraphProgram extends Events
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
-        console.log("compiled " + this.options.name || "");
+        console.log("compiled " + (this.options.name || ""));
     }
 
     static getNewId()

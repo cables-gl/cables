@@ -1,15 +1,15 @@
 const
     render = op.inTrigger("render"),
-    doRender = op.inValueBool("Render Mesh", true),
-    width = op.inValue("width", 1),
-    height = op.inValue("height", 1),
+    doRender = op.inBool("Render Mesh", true),
+    width = op.inFloat("width", 1),
+    height = op.inFloat("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"], "center"),
     pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"], "center"),
     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
     flipTcX = op.inBool("Flip TexCoord X", false),
     flipTcY = op.inBool("Flip TexCoord Y", true),
-    nColumns = op.inValueInt("num columns", 1),
-    nRows = op.inValueInt("num rows", 1),
+    nColumns = op.inInt("num columns", 1),
+    nRows = op.inInt("num rows", 1),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 
@@ -97,7 +97,7 @@ render.onTriggered = () =>
     trigger.trigger();
 };
 
-op.onDelete = function () { if (mesh)mesh.dispose(); };
+op.onDelete = function () { if (mesh) mesh.dispose(); };
 
 function rebuild()
 {
@@ -148,7 +148,7 @@ function rebuild()
             if (curAxis == AXIS_XZ) verts[idxVert++] = 0;
             verts[idxVert++] = r * stepRow - h / 2 + y;
 
-            if (curAxis == AXIS_XY)verts[idxVert++] = 0;
+            if (curAxis == AXIS_XY) verts[idxVert++] = 0;
 
             tc[idxTc++] = c / numColumns;
             tc[idxTc++] = r / numRows;
@@ -217,8 +217,10 @@ function rebuild()
         }
     }
 
-    if (flipTcY.get()) for (let i = 0; i < tc.length; i += 2)tc[i + 1] = 1.0 - tc[i + 1];
-    if (flipTcX.get()) for (let i = 0; i < tc.length; i += 2)tc[i] = 1.0 - tc[i];
+    if (flipTcY.get())
+        for (let i = 0; i < tc.length; i += 2) tc[i + 1] = 1.0 - tc[i + 1];
+    if (flipTcX.get())
+        for (let i = 0; i < tc.length; i += 2) tc[i] = 1.0 - tc[i];
 
     geom.clear();
     geom.vertices = verts;

@@ -1,14 +1,14 @@
 const
     render = op.inTrigger("render"),
-    radius = op.inValue("radius", 0.5),
-    innerRadius = op.inValueSlider("innerRadius", 0),
-    segments = op.inValueInt("segments", 40),
-    percent = op.inValueSlider("percent", 1),
-    steps = op.inValue("steps", 0),
-    invertSteps = op.inValueBool("invertSteps", false),
+    radius = op.inFloat("radius", 0.5),
+    innerRadius = op.inFloatSlider("innerRadius", 0),
+    segments = op.inInt("segments", 40),
+    percent = op.inFloatSlider("percent", 1),
+    steps = op.inFloat("steps", 0),
+    invertSteps = op.inBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"]),
-    drawSpline = op.inValueBool("Spline", false),
-    doRender = op.inValueBool("Draw", true),
+    drawSpline = op.inBool("Spline", false),
+    doRender = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 
@@ -21,13 +21,13 @@ doRender.setUiAttribs({ "title": "Render mesh" });
 mapping.set("flat");
 
 mapping.onChange =
-  segments.onChange =
-  radius.onChange =
-  innerRadius.onChange =
-  percent.onChange =
-  steps.onChange =
-  invertSteps.onChange =
-  drawSpline.onChange = calcLater;
+    segments.onChange =
+    radius.onChange =
+    innerRadius.onChange =
+    percent.onChange =
+    steps.onChange =
+    invertSteps.onChange =
+    drawSpline.onChange = calcLater;
 
 geomOut.ignoreValueSerialize = true;
 const cgl = op.patch.cgl;
@@ -41,7 +41,7 @@ let shader = null;
 let needsCalc = true;
 
 render.onTriggered = renderMesh;
-op.onDelete = function () { if (mesh)mesh.dispose(); };
+op.onDelete = function () { if (mesh) mesh.dispose(); };
 
 doRender.onChange = () => { op.setUiAttrib({ "extendTitle": doRender.get() ? "" : "x" }); };
 
@@ -59,7 +59,7 @@ render.onLinkChanged = function ()
 function renderMesh()
 {
     if (!op.patch.cg) return;
-    if (needsCalc)calc();
+    if (needsCalc) calc();
 
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
@@ -90,16 +90,24 @@ function calc()
     const tangents = [];
     const biTangents = [];
 
-    let i = 0, degInRad = 0;
-    let oldPosX = 0, oldPosY = 0;
-    let oldPosXTexCoord = 0, oldPosYTexCoord = 0;
+    let i = 0,
+        degInRad = 0;
+    let oldPosX = 0,
+        oldPosY = 0;
+    let oldPosXTexCoord = 0,
+        oldPosYTexCoord = 0;
 
-    let oldPosXIn = 0, oldPosYIn = 0;
-    let oldPosXTexCoordIn = 0, oldPosYTexCoordIn = 0;
+    let oldPosXIn = 0,
+        oldPosYIn = 0;
+    let oldPosXTexCoordIn = 0,
+        oldPosYTexCoordIn = 0;
 
-    let posxTexCoordIn = 0, posyTexCoordIn = 0;
-    let posxTexCoord = 0, posyTexCoord = 0;
-    let posx = 0, posy = 0;
+    let posxTexCoordIn = 0,
+        posyTexCoordIn = 0;
+    let posxTexCoord = 0,
+        posyTexCoord = 0;
+    let posx = 0,
+        posy = 0;
 
     const perc = Math.max(0.0, percent.get());
     const verts = [];
@@ -167,9 +175,7 @@ function calc()
             );
 
             texCoords.push(
-                posxTexCoordIn, posyTexCoordIn,
-                oldPosXTexCoord, oldPosYTexCoord,
-                posxTexCoord, posyTexCoord
+                posxTexCoordIn, posyTexCoordIn, oldPosXTexCoord, oldPosYTexCoord, posxTexCoord, posyTexCoord
             );
             vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1);
             tangents.push(1, 0, 0, 1, 0, 0, 1, 0, 0);
@@ -215,8 +221,8 @@ function calc()
 
             if (i > 0)
                 if (steps.get() === 0.0 ||
-        (count % parseInt(steps.get(), 10) === 0 && !invertSteps.get()) ||
-        (count % parseInt(steps.get(), 10) !== 0 && invertSteps.get()))
+                    (count % parseInt(steps.get(), 10) === 0 && !invertSteps.get()) ||
+                    (count % parseInt(steps.get(), 10) !== 0 && invertSteps.get()))
                 {
                     faces.push(
                         [posxIn, posyIn, 0],
@@ -235,18 +241,16 @@ function calc()
                         const t = 1.0 - (i) / segs;
                         const t2 = 1.0 - (i + 1) / segs;
                         texCoords.push(
-                            t2, 1, t, 0, t2, 0,
-                            t, 1, t, 0, t2, 1);
+                            t2, 1, t, 0, t2, 0, t, 1, t, 0, t2, 1);
 
-                    //                    texCoords.push(
-                    //                        posxTexCoordIn, 1, oldPosXTexCoord, 0, t, 0,
-                    //                        oldPosXTexCoord, 1, oldPosXTexCoordIn, 0, posxTexCoord, 1);
+                        //                    texCoords.push(
+                        //                        posxTexCoordIn, 1, oldPosXTexCoord, 0, t, 0,
+                        //                        oldPosXTexCoord, 1, oldPosXTexCoordIn, 0, posxTexCoord, 1);
                     }
                     else
                     {
                         texCoords.push(
-                            posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1,
-                            posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
+                            posxTexCoord, 0, oldPosXTexCoord, 0, posxTexCoordIn, 1, posxTexCoord, 1, oldPosXTexCoord, 0, oldPosXTexCoordIn, 1);
                     }
 
                     vertexNormals.push(0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1);
