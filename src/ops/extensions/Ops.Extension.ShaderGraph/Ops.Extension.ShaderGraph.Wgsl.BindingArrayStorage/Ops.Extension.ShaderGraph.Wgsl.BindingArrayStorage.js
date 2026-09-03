@@ -156,8 +156,8 @@ function update(mgpu, bindings)
         op.updateGraph();
         // op.shaderNode.result.port.setRef({});
     }
-    if (bindings && setbinding) bindings.push(binding);
-    if (bindings && setbinding && bindingInOut) bindings.push(bindingInOut);
+    if (bindings) bindings.push(binding);
+    if (bindings && bindingInOut) bindings.push(bindingInOut);
 
     setbinding = false;
 

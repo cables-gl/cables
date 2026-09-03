@@ -22,6 +22,8 @@ let o = null;
 let sm = null;
 let gencode = "";
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangWgsl());
+let needsUpdate = true;
+let reason = "init";
 
 ids.onChange =
     types.onChange =
@@ -30,14 +32,16 @@ ids.onChange =
     inGraphNodes.onLinkChanged =
     inGraphNodes.onChange = () =>
     {
+        reason = "port change";
         op.patch.addOnAnimFrame(op);
         op.onAnimFrame = compile;
+        needsUpdate = true;
 
     };
 
 function compile()
 {
-    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get(), "name": inStage.get() });
+    sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get(), "name": inStage.get(), "reason": reason });
     let str = inCode.get() || "";
 
     /* minimalcore:start */
@@ -53,6 +57,7 @@ function compile()
     if (sm) sm.reInit = true;
     gencode = str;
 
+    reason = "unknown";
     op.patch.removeOnAnimFrame(op);
 }
 
@@ -142,7 +147,9 @@ op.updateShaderModule = (mgpu) =>
         outCode.setUiAttribs({ "editorDiagnostics": [] });
 
         sm.reInit = false;
+        if (needsUpdate) compile();
 
+        needsUpdate = false;
         outModule.setRef(sm);
     }
 };

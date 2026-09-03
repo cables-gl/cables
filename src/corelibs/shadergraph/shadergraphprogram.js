@@ -33,6 +33,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 /**
  * @typedef CompileOptions
  * @property {string} name
+ * @property {string} reason
  * @property {boolean} showId
  * @property {boolean} showType
  * @property {boolean} debug
@@ -98,10 +99,10 @@ export class ShaderGraphProgram extends Events
             this._opIdsHeadUniSrc[op.id] = node.srcUni;
         }
 
-        if (node.src && !this._opIdsHeadFuncSrc[op.name])
+        if (node.src && this._opIdsHeadFuncSrc[op.name] != node.src)
         {
             this._headFuncSrc += node.src || "";
-            this._opIdsHeadFuncSrc[op.name] = true;
+            this._opIdsHeadFuncSrc[op.name] = node.src;
         }
 
     }
@@ -377,7 +378,7 @@ export class ShaderGraphProgram extends Events
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
-        console.log("compiled " + (this.options.name || ""));
+        console.log("compiled " + (this.options.name || "") + " " + this.options.reason);
     }
 
     static getNewId()
