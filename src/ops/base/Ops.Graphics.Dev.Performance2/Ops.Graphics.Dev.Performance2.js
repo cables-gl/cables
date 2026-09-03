@@ -5,7 +5,7 @@ const
 let ctx = null;
 let canvas = null;
 let numBars = 100;
-let height = 40;
+let height = 50;
 let containerEle = document.body;
 let queueCPU = [];
 let queueGPU = [];
@@ -21,7 +21,6 @@ let heavyEvents = [];
 
 if (op.patch.cgl)
 {
-
     op.patch.cgl.on("heavyEvent", (e) =>
     {
         heavyEvents.push(e.event);
@@ -30,7 +29,6 @@ if (op.patch.cgl)
 
 trig.onTriggered = () =>
 {
-
     const startTime = performance.now();
 
     if (type == "webgl" && !query)
@@ -42,24 +40,17 @@ trig.onTriggered = () =>
             query = cgl.gl.createQuery();
             cgl.gl.beginQuery(glExt.TIME_ELAPSED_EXT, query);
         }
-        else console.log("no");
     }
 
     next.trigger();
     queueCPU.push({ "ms": performance.now() - startTime });
     queueCPU.shift();
 
-    if (type == "webgl" && glExt && query != null)
-    {
-        cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
-    }
-    // console.log("per",queueCPU[0].ms );
+    if (type == "webgl" && glExt && query != null) cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
 };
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
 {
-    // queue.push({ "ms": e.ms });
-    // queue.shift();
     if (cgl && query)
     {
 
@@ -78,7 +69,6 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         }
         else
         {
-            // console.log("not available");
             glqueryagain++;
             if (glqueryagain > 100)
             {
@@ -90,7 +80,6 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     }
     type = e.type;
     const cr = e.canvas.getBoundingClientRect();
-    // console.log("cr",cr c);
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
@@ -114,6 +103,8 @@ function drawGraph(name, posy, q, col)
     let hmul = height / maxMs;
     if (q.length == 0)
         for (let i = 0; i < numBars; i++) q.push({ "ms": 0 });
+
+    ctx.globalAlpha = 1;
 
     let avg = 0;
     let info = "";
@@ -140,17 +131,18 @@ function drawGraph(name, posy, q, col)
         title += avg + "ms";
     }
 
+    ctx.globalAlpha = 0.6;
     ctx.fillText(title, 5, posy + 16);
     if (info) ctx.fillText(info, 5, posy + 32);
 }
 
 function updateCanvas()
 {
-    const colorBg = "#333333";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.font = "11px monospace";
-
-    ctx.fillStyle = colorBg;
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = "#222222";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "#555555";
@@ -173,6 +165,7 @@ function createCanvas()
     canvas.style.display = "block";
     canvas.style.position = "absolute";
     canvas.style.left = "0px";
+    // canvas.style.opacity = "0.5";
     canvas.style.cursor = "pointer";
     canvas.style.bottom = "0px";
     canvas.style["z-index"] = "99998";
