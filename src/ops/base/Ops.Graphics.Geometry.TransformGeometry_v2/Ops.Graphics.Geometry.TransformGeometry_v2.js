@@ -1,14 +1,14 @@
 const
     geometry = op.inObject("Geometry"),
-    transX = op.inValue("Translate X"),
-    transY = op.inValue("Translate Y"),
-    transZ = op.inValue("Translate Z"),
+    transX = op.inFloat("Translate X"),
+    transY = op.inFloat("Translate Y"),
+    transZ = op.inFloat("Translate Z"),
     scaleX = op.inValueSlider("Scale X", 1),
     scaleY = op.inValueSlider("Scale Y", 1),
     scaleZ = op.inValueSlider("Scale Z", 1),
-    rotX = op.inValue("Rotation X"),
-    rotY = op.inValue("Rotation Y"),
-    rotZ = op.inValue("Rotation Z"),
+    rotX = op.inFloat("Rotation X"),
+    rotY = op.inFloat("Rotation Y"),
+    rotZ = op.inFloat("Rotation Z"),
     outGeom = op.outObject("Result", null, "geometry");
 
 transX.onChange =

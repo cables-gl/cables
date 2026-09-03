@@ -1,15 +1,15 @@
 let render = op.inTrigger("render");
 let segments = op.inValueInt("segments", 40);
-let radius = op.inValueFloat("radius", 1);
-let mulX = op.inValueFloat("mulX", 1);
-let mulY = op.inValueFloat("mulY", 1);
+let radius = op.inFloat("radius", 1);
+let mulX = op.inFloat("mulX", 1);
+let mulY = op.inFloat("mulY", 1);
 let percent = op.inValueSlider("percent");
-let offset = op.inValueFloat("offset");
+let offset = op.inFloat("offset");
 let trigger = op.outTrigger("trigger");
 let index = op.outValue("index");
 let outX = op.outValue("X");
 let outY = op.outValue("Y");
-let speed = op.inValue("speed", 1);
+let speed = op.inFloat("speed", 1);
 
 let startTime = CABLES.now() / 1000;
 let cgl = op.patch.cgl;

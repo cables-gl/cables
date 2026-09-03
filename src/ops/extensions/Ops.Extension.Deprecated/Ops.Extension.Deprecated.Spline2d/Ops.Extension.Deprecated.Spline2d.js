@@ -2,7 +2,7 @@ op.name = "Spline2d";
 
 let render = op.inTrigger("Render");
 
-let inThickness = op.inValue("Thickness", 1);
+let inThickness = op.inFloat("Thickness", 1);
 
 let inFill = op.inValueBool("Fill");
 

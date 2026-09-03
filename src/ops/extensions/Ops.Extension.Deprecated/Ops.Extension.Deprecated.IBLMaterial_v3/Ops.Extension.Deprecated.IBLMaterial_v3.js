@@ -38,8 +38,8 @@ const
 const
     inFresnel = op.inValueBool("Fresnel"),
     inFresnelAmount = op.inValueSlider("Amount", 1.0),
-    inFresnelWidth = op.inValue("Width", 1.0),
-    inFresnelExponent = op.inValue("Exponent", 5.0),
+    inFresnelWidth = op.inFloat("Width", 1.0),
+    inFresnelExponent = op.inFloat("Exponent", 5.0),
     fresnelR = op.inValueSlider("r", Math.random()),
     fresnelG = op.inValueSlider("g", Math.random()),
     fresnelB = op.inValueSlider("b", Math.random());
@@ -47,10 +47,10 @@ fresnelR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Fresnel", [inFresnelAmount, inFresnel, inFresnelWidth, inFresnelExponent, fresnelR, fresnelG, fresnelB]);
 
 const
-    inRepeatX = op.inValue("Repeat X", 1),
-    inRepeatY = op.inValue("Repeat Y", 1),
-    inOffsetX = op.inValue("Offset X", 0),
-    inOffsetY = op.inValue("Offset Y", 0),
+    inRepeatX = op.inFloat("Repeat X", 1),
+    inRepeatY = op.inFloat("Repeat Y", 1),
+    inOffsetX = op.inFloat("Offset X", 0),
+    inOffsetY = op.inFloat("Offset Y", 0),
     inTransfOpacity = op.inValueBool("Transform Opacity", true);
 op.setPortGroup("Texture Transform", [inRepeatX, inRepeatY, inOffsetX, inOffsetY]);
 

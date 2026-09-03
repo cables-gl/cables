@@ -1,8 +1,8 @@
 let update = op.inTriggerButton("update");
 // var trigger=op.inTriggerButton("Trigger");
-let duration = op.inValue("Duration", 1);
-let valueTrue = op.inValue("Value True", 1);
-let valueFalse = op.inValue("Value False", 0);
+let duration = op.inFloat("Duration", 1);
+let valueTrue = op.inFloat("Value True", 1);
+let valueFalse = op.inFloat("Value False", 0);
 
 let result = op.outValue("Result", false);
 

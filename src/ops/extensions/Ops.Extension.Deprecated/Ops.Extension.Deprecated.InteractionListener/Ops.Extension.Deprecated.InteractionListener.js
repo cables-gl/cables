@@ -1,5 +1,5 @@
 const
-    duration = op.inValue("Duration", 0.5),
+    duration = op.inFloat("Duration", 0.5),
     events = op.outValue("Events");
 
 let timeout = 0;

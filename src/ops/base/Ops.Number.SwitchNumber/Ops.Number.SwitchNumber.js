@@ -6,7 +6,7 @@ idx.onChange = update;
 
 for (let i = 0; i < 16; i++)
 {
-    let p = op.inValueFloat("Value " + i);
+    let p = op.inFloat("Value " + i);
     valuePorts.push(p);
     p.onChange = update;
 }

@@ -1,5 +1,5 @@
-let inX = op.inValue("X");
-let inY = op.inValue("Y");
+let inX = op.inFloat("X");
+let inY = op.inFloat("Y");
 
 let outX = op.outValue("Result X");
 let outY = op.outValue("Result Y");

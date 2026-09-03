@@ -1,9 +1,9 @@
 let divisor = 5;
 
 const exec = op.inTrigger("Update");
-const inVal = op.inValue("Value");
+const inVal = op.inFloat("Value");
 const next = op.outTrigger("Next");
-const inDivisor = op.inValue("Divisor", divisor);
+const inDivisor = op.inFloat("Divisor", divisor);
 const result = op.outValue("Result", 0);
 
 let val = 0;

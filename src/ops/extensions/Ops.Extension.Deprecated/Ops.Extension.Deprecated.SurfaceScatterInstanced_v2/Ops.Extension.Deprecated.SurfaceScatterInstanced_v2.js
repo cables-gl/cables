@@ -8,7 +8,7 @@ const
     inSizeMin = op.inValueSlider("Size min", 1.0),
     inSizeMax = op.inValueSlider("Size max", 1.0),
     inRotateRandom = op.inValueBool("Random Rotate", true),
-    seed = op.inValueFloat("Random Seed");
+    seed = op.inFloat("Random Seed");
 
 let mod = null;
 let mesh = null;
@@ -191,7 +191,7 @@ function setup()
 
 // var inTransformations=op.inArray("positions");
 // var inScales=op.inArray("Scale Array");
-// var inScale=op.inValue("Scale",1);
+// var inScale=op.inFloat("Scale",1);
 // var geom=op.inObject("geom");
 // geom.ignoreValueSerialize=true;
 

@@ -2,8 +2,8 @@ op.name = "LaserPacket";
 
 let exe = op.inTriggerButton("Send");
 
-let inLaser = op.inValue("laser id", 0);
-let inSpeed = op.inValue("speed", 7000);
+let inLaser = op.inFloat("laser id", 0);
+let inSpeed = op.inFloat("speed", 7000);
 
 let inDraw = op.inValueBool("Draw");
 let inDrawClamp = op.inValueBool("Draw Clamp");
@@ -18,11 +18,11 @@ let pointRepeat = op.inValueInt("Point Repeat", 1);
 
 let inNeverDrop = op.inValueBool("neverDrop");
 
-let inClampXLeft = op.inValue("Clamp X Left");
-let inClampYTop = op.inValue("Clamp Y Top");
+let inClampXLeft = op.inFloat("Clamp X Left");
+let inClampYTop = op.inFloat("Clamp Y Top");
 
-let inClampX = op.inValue("Clamp X", 4000);
-let inClampY = op.inValue("Clamp Y", 2250);
+let inClampX = op.inFloat("Clamp X", 4000);
+let inClampY = op.inFloat("Clamp Y", 2250);
 
 let objOut = op.outObject("Packet");
 let outNumPoints = op.outValue("Numpoints");

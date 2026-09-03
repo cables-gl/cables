@@ -2,7 +2,7 @@ op.name = "CirclePack";
 
 let render = op.inTrigger("Render");
 
-let max = op.inValue("Max Circles", 200);
+let max = op.inFloat("Max Circles", 200);
 
 let next = op.outTrigger("Next");
 let outIndex = op.outValue("index");

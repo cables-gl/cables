@@ -1,8 +1,8 @@
 const
     outArr = op.outArray("Points", 3),
     percent = op.inValueSlider("percent", 1),
-    segments = op.inValue("segments", 40),
-    radius = op.inValue("radius", 1),
+    segments = op.inFloat("segments", 40),
+    radius = op.inFloat("radius", 1),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array lengths");
 

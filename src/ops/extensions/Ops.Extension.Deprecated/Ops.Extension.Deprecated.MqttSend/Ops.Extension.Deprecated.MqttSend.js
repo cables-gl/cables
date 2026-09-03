@@ -1,5 +1,5 @@
 let mqttObj = op.inObject("MQTT Object");
-let message = op.inValue("Message", "Hello Cables");
+let message = op.inFloat("Message", "Hello Cables");
 let channel = op.inValueString("Channel", "/test");
 let send = op.addInPort(new CABLES.Port(this, "Send", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 

@@ -1,4 +1,4 @@
-const val = op.inValue("Value");
+const val = op.inFloat("Value");
 op.varName = op.inValueSelect("Variable");
 const inExec = op.inTriggerButton("Set Variable");
 

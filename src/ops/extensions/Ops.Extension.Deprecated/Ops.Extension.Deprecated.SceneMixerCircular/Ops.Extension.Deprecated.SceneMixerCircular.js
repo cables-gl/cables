@@ -7,8 +7,8 @@ let numPortsActive = 0;
 
 // inputs
 let exePort = op.inTriggerButton("Execute");
-let selectPort = op.inValue("Select");
-// var numPortsActivePort = op.inValue('Num Active', NUM_PORTS);
+let selectPort = op.inFloat("Select");
+// var numPortsActivePort = op.inFloat('Num Active', NUM_PORTS);
 let overlapPort = op.inValueSlider("Overlap", 0.5);
 
 // outputs

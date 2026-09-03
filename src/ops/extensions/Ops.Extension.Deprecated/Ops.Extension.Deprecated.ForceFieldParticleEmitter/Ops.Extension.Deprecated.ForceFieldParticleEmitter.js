@@ -1,16 +1,16 @@
 let render = op.inTrigger("render");
 let resetButton = op.inTriggerButton("Reset");
-let inSizeX = op.inValue("Size Area X", 3);
-let inSizeY = op.inValue("Size Area Y", 3);
-let inSizeZ = op.inValue("Size Area Z", 3);
-let numPoints = op.inValue("Particles", 300);
-let speed = op.inValue("Speed", 0.2);
-let lifetime = op.inValue("Lifetime", 5);
+let inSizeX = op.inFloat("Size Area X", 3);
+let inSizeY = op.inFloat("Size Area Y", 3);
+let inSizeZ = op.inFloat("Size Area Z", 3);
+let numPoints = op.inFloat("Particles", 300);
+let speed = op.inFloat("Speed", 0.2);
+let lifetime = op.inFloat("Lifetime", 5);
 let fadeInOut = op.inValueSlider("Fade Birth Death", 0.2);
 let show = op.inValueBool("Show");
-let posX = op.inValue("Pos X");
-let posY = op.inValue("Pos Y");
-let posZ = op.inValue("Pos Z");
+let posX = op.inFloat("Pos X");
+let posY = op.inFloat("Pos Y");
+let posZ = op.inFloat("Pos Z");
 
 let cgl = op.patch.cgl;
 let shaderModule = null;

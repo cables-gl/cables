@@ -3,7 +3,7 @@ const cgl = this.patch.cgl;
 const render = op.inTrigger("render");
 const filename = op.inFile("file");
 
-const frame = op.inValueFloat("frame");
+const frame = op.inFloat("frame");
 frame.set(0);
 const trigger = op.outTrigger("trigger");
 

@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
-    amount = op.inValue("Amount", 300),
-    height = op.inValue("Height", 2),
+    amount = op.inFloat("Amount", 300),
+    height = op.inFloat("Height", 2),
     inTex = op.inTexture("Texture"),
     trigger = op.outTrigger("Trigger"),
     axis = op.inSwitch("Axis", ["XZ", "XY", "YZ", "X", "Y", "Z"], "XZ");

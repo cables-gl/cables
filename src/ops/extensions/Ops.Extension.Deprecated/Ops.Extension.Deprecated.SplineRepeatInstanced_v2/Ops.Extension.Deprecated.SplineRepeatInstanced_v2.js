@@ -7,21 +7,21 @@ const geom = op.inObject("geom");
 
 const inNum = op.inValueInt("Num", 2000);
 
-const inOffset = op.inValue("Offset");
+const inOffset = op.inFloat("Offset");
 
 const rotPos = op.inValueBool("Rotate by Position", true);
 
 const inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
-const inSpacing = op.inValue("Spacing", 0.2);
-const inScale = op.inValue("Scale", 1);
-// var inRot=op.inValue("Rotation",0);
-const inRotX = op.inValue("Rot X", 0);
-const inRotY = op.inValue("Rot Y", 0);
-const inRotZ = op.inValue("Rot Z", 1);
+const inSpacing = op.inFloat("Spacing", 0.2);
+const inScale = op.inFloat("Scale", 1);
+// var inRot=op.inFloat("Rotation",0);
+const inRotX = op.inFloat("Rot X", 0);
+const inRotY = op.inFloat("Rot Y", 0);
+const inRotZ = op.inFloat("Rot Z", 1);
 
-const inPreRotX = op.inValue("Pre Rot X", 0);
-const inPreRotY = op.inValue("Pre Rot Y", 0);
-const inPreRotZ = op.inValue("Pre Rot Z", 1);
+const inPreRotX = op.inFloat("Pre Rot X", 0);
+const inPreRotY = op.inFloat("Pre Rot Y", 0);
+const inPreRotZ = op.inFloat("Pre Rot Z", 1);
 
 const texScaling = op.inTexture("Texture Scaling");
 const texRotation = op.inTexture("Texture Rotation");

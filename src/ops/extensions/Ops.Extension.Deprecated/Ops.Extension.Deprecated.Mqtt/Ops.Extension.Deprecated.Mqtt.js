@@ -2,7 +2,7 @@ const mqttClientName = op.inValueString("Client Name", "Carolin Cable");
 const mqttServer = op.inValueString("Broker URL", "broker.shiftr.io");
 const mqttUsername = op.inValueString("Username", "try");
 const mqttPassword = op.inValueString("Password", "try");
-const mqttPort = op.inValue("Port", 443);
+const mqttPort = op.inFloat("Port", 443);
 const useSsl = op.inValueBool("Use SSL", true);
 const reconnect = op.inTriggerButton("Reconnect");
 

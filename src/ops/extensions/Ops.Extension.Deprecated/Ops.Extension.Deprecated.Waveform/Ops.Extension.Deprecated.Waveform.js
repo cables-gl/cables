@@ -12,8 +12,8 @@ const cgl = op.patch.cgl;
 // input
 const renderPort = op.inTrigger("Render");
 const audioBufferPort = op.inObject("Audio Buffer");
-const widthPort = op.inValue("Width", 30);
-const samplesPerPixelPort = op.inValue("Samples Per Pixel", 10000);
+const widthPort = op.inFloat("Width", 30);
+const samplesPerPixelPort = op.inFloat("Samples Per Pixel", 10000);
 const showBottomHalfPort = op.inValueBool("Show bottom half", true);
 const centerPort = op.inValueBool("Center Origin", true);
 const renderActivePort = op.inValueBool("Render Active", true);

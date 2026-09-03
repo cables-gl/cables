@@ -2,10 +2,10 @@ op.name = "Clip2DPathArray";
 
 let inArr = op.inArray("Array2x");
 
-let inLeft = op.inValue("Left");
-let inRight = op.inValue("Right");
-let inTop = op.inValue("Top");
-let inBottom = op.inValue("Bottom");
+let inLeft = op.inFloat("Left");
+let inRight = op.inFloat("Right");
+let inTop = op.inFloat("Top");
+let inBottom = op.inFloat("Bottom");
 
 //----------------------------
 // clip

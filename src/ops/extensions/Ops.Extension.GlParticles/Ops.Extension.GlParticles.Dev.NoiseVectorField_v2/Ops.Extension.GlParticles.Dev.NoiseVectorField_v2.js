@@ -8,21 +8,21 @@ const
 
     inSize = op.inFloat("Size", 11),
     inFalloff = op.inFloat("Falloff", 1),
-    x = op.inValue("x", 0),
-    y = op.inValue("y", 0),
-    z = op.inValue("z", 0),
+    x = op.inFloat("x", 0),
+    y = op.inFloat("y", 0),
+    z = op.inFloat("z", 0),
 
-    noisex = op.inValue("Noise X"),
-    noisey = op.inValue("Noise Y"),
-    noisez = op.inValue("Noise Z"),
+    noisex = op.inFloat("Noise X"),
+    noisey = op.inFloat("Noise Y"),
+    noisez = op.inFloat("Noise Z"),
 
-    mul_x = op.inValue("Multiply X", 1),
-    mul_y = op.inValue("Multiply Y", 1),
-    mul_z = op.inValue("Multiply Z", 1),
+    mul_x = op.inFloat("Multiply X", 1),
+    mul_y = op.inFloat("Multiply Y", 1),
+    mul_z = op.inFloat("Multiply Z", 1),
 
-    scale_x = op.inValue("Size X", 1),
-    scale_y = op.inValue("Size Y", 1),
-    scale_z = op.inValue("Size Z", 1),
+    scale_x = op.inFloat("Size X", 1),
+    scale_y = op.inFloat("Size Y", 1),
+    scale_z = op.inFloat("Size Z", 1),
 
     inTexMultiply = op.inTexture("Multiply"),
     trigger = op.outTrigger("trigger");

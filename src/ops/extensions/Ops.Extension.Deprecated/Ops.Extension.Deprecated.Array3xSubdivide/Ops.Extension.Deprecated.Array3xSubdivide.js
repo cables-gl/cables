@@ -1,5 +1,5 @@
 const inArr = op.inArray("Points");
-const subDivs = op.inValue("Num Subdivs", 5);
+const subDivs = op.inFloat("Num Subdivs", 5);
 const bezier = op.inValueBool("Smooth", true);
 
 const result = op.outArray("Result");

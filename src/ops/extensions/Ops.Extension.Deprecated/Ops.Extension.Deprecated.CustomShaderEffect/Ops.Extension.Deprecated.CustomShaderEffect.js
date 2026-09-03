@@ -113,7 +113,7 @@ function updateShader()
         {
             if (uniform.type == 0x1406) // float
             {
-                let newInput = op.inValue(uniform.name, 0);
+                let newInput = op.inFloat(uniform.name, 0);
                 newInput.onChange = function (p, p2)
                 {
                     p.uniform.needsUpdate = true;

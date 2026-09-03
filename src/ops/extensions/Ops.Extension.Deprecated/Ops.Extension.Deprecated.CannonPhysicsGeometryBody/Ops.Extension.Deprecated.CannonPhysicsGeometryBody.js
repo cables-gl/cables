@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Exec"),
     inShape = op.inSwitch("Shape", ["Box", "Sphere", "ConvexPolyhedron"], "Box"), // , "Trimesh"
     inName = op.inString("Name", ""),
-    inMass = op.inValue("Mass", 0),
+    inMass = op.inFloat("Mass", 0),
     inGeom = op.inObject("Geometry"),
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),

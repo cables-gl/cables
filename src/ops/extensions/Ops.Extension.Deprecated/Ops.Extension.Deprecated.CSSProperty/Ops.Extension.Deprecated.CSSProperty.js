@@ -1,6 +1,6 @@
 let inStyle = op.inValueString("Style");
 let inProperty = op.inValueString("Property");
-let inValue = op.inValue("Value");
+let inValue = op.inFloat("Value");
 let inValueSuffix = op.inValueString("Value Suffix", "px");
 
 let outStyle = op.outValue("Style Result");

@@ -2,14 +2,14 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     depth = op.inTexture("depth texture"),
-    zNear = op.inValue("Frustum Near", 0.1),
-    zFar = op.inValue("Frustum Far", 20),
+    zNear = op.inFloat("Frustum Near", 0.1),
+    zFar = op.inFloat("Frustum Far", 20),
     samples = op.inValueInt("Samples", 4),
-    aoRadius = op.inValue("Ao Radius", 3),
+    aoRadius = op.inFloat("Ao Radius", 3),
     aoClamp = op.inValueSlider("Ao Clamp", 0.25),
     lumInfluence = op.inValueSlider("Luminance Influence", 0.7),
     noise = op.inValueBool("Enable noise", false),
-    noiseamount = op.inValueFloat("Noise amount", 0.0008);
+    noiseamount = op.inFloat("Noise amount", 0.0008);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);

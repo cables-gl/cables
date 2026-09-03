@@ -2,10 +2,10 @@ let exec = op.addInPort(new CABLES.Port(op, "Execute", CABLES.OP_PORT_TYPE_FUNCT
 let trigger = op.outTrigger("Trigger");
 
 let inId = op.inValueString("id");
-let pPointSize = op.inValue("Size Point", 10);
+let pPointSize = op.inFloat("Size Point", 10);
 
 let show = op.inValueBool("show", true);
-let index = op.inValue("index");
+let index = op.inFloat("index");
 let title = op.inValueString("Title");
 
 let inText = op.inValueString("Text");

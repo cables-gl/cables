@@ -3,8 +3,8 @@ const
     inMode = op.inBool("Separate inc/dec", false),
     inVals = op.inArray("Array"),
     next = op.outTrigger("Next"),
-    inDivisorUp = op.inValue("Inc factor", 4),
-    inDivisorDown = op.inValue("Dec factor", 4),
+    inDivisorUp = op.inFloat("Inc factor", 4),
+    inDivisorDown = op.inFloat("Dec factor", 4),
     resultArr = op.outArray("Result");
 
 // let val = 0;

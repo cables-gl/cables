@@ -6,10 +6,10 @@ geom.ignoreValueSerialize = true;
 
 let tex = op.inTexture("Texture");
 
-let numColumns = op.inValue("Columns", 100);
-let numRows = op.inValue("Rows", 100);
-let spacingColumns = op.inValue("Spacing Columns", 1);
-let spacingRows = op.inValue("Spacing Rows", 1);
+let numColumns = op.inFloat("Columns", 100);
+let numRows = op.inFloat("Rows", 100);
+let spacingColumns = op.inFloat("Spacing Columns", 1);
+let spacingRows = op.inFloat("Spacing Rows", 1);
 let doCenter = op.inValueBool("Center", true);
 
 let transRotate = op.inValueBool("Rotate", true);

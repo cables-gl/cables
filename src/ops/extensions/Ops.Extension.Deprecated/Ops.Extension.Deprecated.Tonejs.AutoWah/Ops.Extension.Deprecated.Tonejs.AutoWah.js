@@ -25,9 +25,9 @@ let node = new Tone.AutoWah();
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 let gainPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Gain", node.gain, { "display": "range", "min": GAIN_MIN, "max": GAIN_MAX }, GAIN_DEFAULT);
 let qualityPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Quality", node.Q, { "display": "range", "min": QUALITY_MIN, "max": QUALITY_MIN }, QUALITY_DEFAULT);
-let octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
-let baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
-let sensitivityPort = op.inValue("Sensitivity", SENSITIVITY_DEFAULT);
+let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);
+let baseFrequencyPort = op.inFloat("Base Frequency", BASE_FREQUENCY_DEFAULT);
+let sensitivityPort = op.inFloat("Sensitivity", SENSITIVITY_DEFAULT);
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, WET_DEFAULT);
 
 // change listeners

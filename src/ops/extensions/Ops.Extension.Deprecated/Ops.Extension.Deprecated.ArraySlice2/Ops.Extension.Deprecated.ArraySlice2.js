@@ -1,7 +1,7 @@
 // inputs
 let inArrayPort = op.inArray("Input Array");
-let beginPort = op.inValue("Begin Index", 0);
-let endPort = op.inValue("End Index", 1);
+let beginPort = op.inFloat("Begin Index", 0);
+let endPort = op.inFloat("End Index", 1);
 
 // functions
 function setOutarray()

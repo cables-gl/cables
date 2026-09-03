@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
-    scaleX = op.inValueFloat("x", 1),
-    scaleY = op.inValueFloat("y", 1),
-    scaleZ = op.inValueFloat("z", 1),
+    scaleX = op.inFloat("x", 1),
+    scaleY = op.inFloat("y", 1),
+    scaleZ = op.inFloat("z", 1),
     trigger = op.outTrigger("trigger");
 
 const vScale = vec3.create();

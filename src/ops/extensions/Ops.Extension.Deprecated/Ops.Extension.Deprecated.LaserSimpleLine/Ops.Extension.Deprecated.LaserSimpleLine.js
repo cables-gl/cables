@@ -1,10 +1,10 @@
-const x1 = op.inValue("X 1");
-const y1 = op.inValue("Y 1");
-const z1 = op.inValue("Z 1");
+const x1 = op.inFloat("X 1");
+const y1 = op.inFloat("Y 1");
+const z1 = op.inFloat("Z 1");
 
-const x2 = op.inValue("X 2", 1);
-const y2 = op.inValue("Y 2", 1);
-const z2 = op.inValue("Z 2", 1);
+const x2 = op.inFloat("X 2", 1);
+const y2 = op.inFloat("Y 2", 1);
+const z2 = op.inFloat("Z 2", 1);
 
 const inSubdivs = op.inInt("Subdivs", 10);
 

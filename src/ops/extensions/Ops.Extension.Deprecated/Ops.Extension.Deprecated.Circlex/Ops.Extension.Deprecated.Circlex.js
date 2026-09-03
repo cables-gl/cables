@@ -1,10 +1,10 @@
 const
     render = op.inTrigger("Trigger"),
-    radius = op.inValue("radius", 0.5),
+    radius = op.inFloat("radius", 0.5),
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),
-    steps = op.inValue("steps", 0),
+    steps = op.inFloat("steps", 0),
     invertSteps = op.inValueBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"], "flat"),
     drawSpline = op.inValueBool("Spline", false),

@@ -10,7 +10,7 @@ let maxScale = op.addInPort(new CABLES.Port(op, "Max Scale", CABLES.OP_PORT_TYPE
 
 let useWheel = op.inValueBool("Use Mouse Wheel", true);
 
-let inRadius = op.inValue("Radius", 1);
+let inRadius = op.inFloat("Radius", 1);
 
 let trigger = op.outTrigger("trigger");
 

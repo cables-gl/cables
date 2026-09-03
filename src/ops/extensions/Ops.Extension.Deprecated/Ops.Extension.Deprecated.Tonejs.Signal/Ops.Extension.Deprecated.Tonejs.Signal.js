@@ -7,7 +7,7 @@ let VALUE_DEFAULT = 1;
 let node = new Tone.Signal();
 
 // input ports
-let valuePort = op.inValue("Value", VALUE_DEFAULT);
+let valuePort = op.inFloat("Value", VALUE_DEFAULT);
 
 // change listeners
 valuePort.onChange = function ()

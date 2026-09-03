@@ -2,19 +2,19 @@ const
     render = op.inTrigger("Render"),
 
     inDoTrans = op.inBool("Translate", true),
-    posx = op.inValue("Pos X", 0),
-    posy = op.inValue("Pos Y", 0),
-    posz = op.inValue("Pos Z", 0),
+    posx = op.inFloat("Pos X", 0),
+    posy = op.inFloat("Pos Y", 0),
+    posz = op.inFloat("Pos Z", 0),
 
     inDoScale = op.inBool("Scale", true),
-    scalex = op.inValue("Scale X", 1),
-    scaley = op.inValue("Scale Y", 1),
-    scalez = op.inValue("Scale Z", 1),
+    scalex = op.inFloat("Scale X", 1),
+    scaley = op.inFloat("Scale Y", 1),
+    scalez = op.inFloat("Scale Z", 1),
 
     inDoRot = op.inBool("Rotate", true),
-    rotx = op.inValue("Rotation X", 1),
-    roty = op.inValue("Rotation Y", 1),
-    rotz = op.inValue("Rotation Z", 1),
+    rotx = op.inFloat("Rotation X", 1),
+    roty = op.inFloat("Rotation Y", 1),
+    rotz = op.inFloat("Rotation Z", 1),
 
     inTexMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");

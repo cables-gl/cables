@@ -5,8 +5,8 @@ op.trigger = op.outTrigger("trigger");
 
 let axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X");
 
-let min = op.inValue("min", 1);
-let max = op.inValue("max", 0);
+let min = op.inFloat("min", 1);
+let max = op.inFloat("max", 0);
 
 let inUpdateNormals = op.inValueBool("Update Normals");
 

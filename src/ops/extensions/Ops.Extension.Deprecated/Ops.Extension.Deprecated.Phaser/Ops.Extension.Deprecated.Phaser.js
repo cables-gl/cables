@@ -34,7 +34,7 @@
 // var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
 // var octavesPort = op.addInPort( new CABLES.Port( op, "Octaves", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVES_MIN, 'max': OCTAVES_MAX } ));
 // octavesPort.set(OCTAVES_DEFAULT);
-// var baseFrequencyPort = op.inValue("Base Frequency");
+// var baseFrequencyPort = op.inFloat("Base Frequency");
 // baseFrequencyPort.set(BASE_FREQUENCY_DEFAULT);
 // /*
 // var stagesPort = op.addInPort( new CABLES.Port( op, "Stages", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': STAGES_MIN, 'max': STAGES_MAX } ));

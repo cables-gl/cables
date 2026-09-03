@@ -1,7 +1,7 @@
 op.name = "ArrayIterator 3x";
 let exe = op.addInPort(new CABLES.Port(op, "Execute", CABLES.OP_PORT_TYPE_FUNCTION));
 let arr = op.addInPort(new CABLES.Port(op, "Array", CABLES.OP_PORT_TYPE_ARRAY));
-let mod = op.inValue("Modulo", 1);
+let mod = op.inFloat("Modulo", 1);
 arr.ignoreValueSerialize = true;
 
 let trigger = op.outTrigger("trigger");

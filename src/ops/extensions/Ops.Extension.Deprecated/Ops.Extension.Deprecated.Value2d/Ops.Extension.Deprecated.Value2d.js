@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("exe"),
-    x = op.inValueFloat("value x"),
-    y = op.inValueFloat("value y"),
+    x = op.inFloat("value x"),
+    y = op.inFloat("value y"),
     resultX = op.outNumber("result x"),
     resultY = op.outNumber("result y");
 

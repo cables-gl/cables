@@ -1,8 +1,8 @@
 const
     inExec = op.inTrigger("Update"),
     inCoords = op.inSwitch("Ray Coordinates", ["Screen XY", "Points 3d"], "Screen XY"),
-    inX = op.inValueFloat("Screen X"),
-    inY = op.inValueFloat("Screen Y"),
+    inX = op.inFloat("Screen X"),
+    inY = op.inFloat("Screen Y"),
     inRayPoints = op.inArray("Ray Points"),
     active = op.inBool("Active", true),
     inCursor = op.inBool("Change Cursor", true),

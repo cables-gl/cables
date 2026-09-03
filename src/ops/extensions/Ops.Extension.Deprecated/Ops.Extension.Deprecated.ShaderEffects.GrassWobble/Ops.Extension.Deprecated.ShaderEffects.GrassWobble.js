@@ -1,8 +1,8 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let frequency = op.inValue("frequency", 1);
-let mul = op.inValue("mul", 0.1);
+let frequency = op.inFloat("frequency", 1);
+let mul = op.inFloat("mul", 0.1);
 
 let cgl = op.patch.cgl;
 

@@ -1,11 +1,11 @@
 let exec = op.inTrigger("Exec");
-let range = op.inValue("Range Radius", 1);
-let attraction = op.inValue("attraction");
-let angle = op.inValue("Angle");
+let range = op.inFloat("Range Radius", 1);
+let attraction = op.inFloat("attraction");
+let angle = op.inFloat("Angle");
 let show = op.inValueBool("Show");
-let posX = op.inValue("Pos X");
-let posY = op.inValue("Pos Y");
-let posZ = op.inValue("Pos Z");
+let posX = op.inFloat("Pos X");
+let posY = op.inFloat("Pos Y");
+let posZ = op.inFloat("Pos Z");
 
 let next = op.outTrigger("next");
 

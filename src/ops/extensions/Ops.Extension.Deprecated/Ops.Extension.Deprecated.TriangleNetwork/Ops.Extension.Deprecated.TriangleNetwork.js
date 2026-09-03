@@ -1,9 +1,9 @@
 // in ports
 let pointsPort = op.inArray("Points");
-let maxDistancePort = op.inValue("Max Distance", 0.4);
-let maxTrianglesPerPointPort = op.inValue("Max Triangles Per Point", 2);
-let linesProbabilityPort = op.inValue("Line Probability", 0.09);
-let holeProbabilityPort = op.inValue("Hole Probability", 0.3);
+let maxDistancePort = op.inFloat("Max Distance", 0.4);
+let maxTrianglesPerPointPort = op.inFloat("Max Triangles Per Point", 2);
+let linesProbabilityPort = op.inFloat("Line Probability", 0.09);
+let holeProbabilityPort = op.inFloat("Hole Probability", 0.3);
 
 // out ports
 let trianglesPort = op.outArray("Triangles");

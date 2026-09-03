@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("Trigger");
-let amount = op.inValue("Amount", 300);
-let height = op.inValue("Height", 2);
+let amount = op.inFloat("Amount", 300);
+let height = op.inFloat("Height", 2);
 let inArr = op.inArray("Spline");
 
 let uniAmount = null, uniHeight = null, uniPoints = null;

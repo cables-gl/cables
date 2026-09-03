@@ -1,5 +1,5 @@
 const exe = op.inTrigger("exe");
-const frequency = op.inValue("frequency", 200);
+const frequency = op.inFloat("frequency", 200);
 const trigger = op.outTrigger("trigger");
 const outCPS = op.outValue("CPS");
 

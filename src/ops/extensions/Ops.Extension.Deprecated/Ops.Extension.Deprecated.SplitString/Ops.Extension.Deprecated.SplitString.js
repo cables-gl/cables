@@ -1,6 +1,6 @@
 op.name = "SplitString";
 
-let inString = op.inValue("Input String");
+let inString = op.inFloat("Input String");
 let separator = op.inValueString("Separator", ",");
 // var messageType = op.inValueSelect("Message Type", ["String", "Number", "Boolean"], "String");
 

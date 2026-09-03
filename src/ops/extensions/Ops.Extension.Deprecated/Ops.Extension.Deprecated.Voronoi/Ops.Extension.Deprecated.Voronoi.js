@@ -4,10 +4,10 @@ let pSites = op.inArray("Site Points");
 
 let pRender = op.inValueBool("Render", true);
 
-let pWidth = op.inValue("Width", 2);
-let pHeight = op.inValue("Height", 2);
+let pWidth = op.inFloat("Width", 2);
+let pHeight = op.inFloat("Height", 2);
 
-let pExtrCenter = op.inValue("Extrude Cell Center", 0.1);
+let pExtrCenter = op.inFloat("Extrude Cell Center", 0.1);
 
 let next = op.outTrigger("Next");
 

@@ -1,8 +1,8 @@
 op.name = "PolyValue";
 
-let pDefault = op.inValue("default", 0);
-let pMin = op.inValue("min", 0);
-let pMax = op.inValue("max", 1);
+let pDefault = op.inFloat("default", 0);
+let pMin = op.inFloat("min", 0);
+let pMax = op.inFloat("max", 1);
 
 let pName = op.inValueString("name", "paramname");
 let pTitle = op.inValueString("title", "something readable");

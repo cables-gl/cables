@@ -53,7 +53,7 @@ let node = new Tone.MembraneSynth();
 let oscillatorPort = op.addInPort(new CABLES.Port(op, "Oscillator Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }));
 oscillatorPort.set(OSCILLATOR_TYPE_DEFAULT);
 let envelopePort = op.inObject("Envelope");
-let octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
+let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);
 let pitchDecayPort = op.inValueSlider("Pitch Decay");
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 

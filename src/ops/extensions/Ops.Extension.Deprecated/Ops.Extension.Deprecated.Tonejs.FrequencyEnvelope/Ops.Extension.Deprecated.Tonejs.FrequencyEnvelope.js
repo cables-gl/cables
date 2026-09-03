@@ -39,17 +39,17 @@ let node = new Tone.FrequencyEnvelope();
 
 // in ports
 // var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let baseFrequencyPort = op.inValue("Base Frequency", BASE_FREQUENCY_DEFAULT);
-let octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
+let baseFrequencyPort = op.inFloat("Base Frequency", BASE_FREQUENCY_DEFAULT);
+let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);
 let attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
-let decayPort = op.inValue("Decay", DECAY_DEFAULT);
+let decayPort = op.inFloat("Decay", DECAY_DEFAULT);
 let sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
 let releasePort = op.inValueString("Release", RELEASE_DEFAULT);
 let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);
 let releaseCurvePort = this.addInPort(new CABLES.Port(this, "Release Curve", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
-let exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
+let exponentPort = op.inFloat("Exponent", EXPONENT_DEFAULT);
 
 // value change listeners
 baseFrequencyPort.onChange = function () { setNodeValue("baseFrequency", baseFrequencyPort.get()); };

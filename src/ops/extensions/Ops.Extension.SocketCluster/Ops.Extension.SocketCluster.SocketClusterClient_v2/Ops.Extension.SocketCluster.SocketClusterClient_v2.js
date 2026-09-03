@@ -1,7 +1,7 @@
  const
     channelName = op.inString("Channel", "changeme"),
     serverHostname = op.inString("Server hostname", "socket.cables.gl"),
-    serverPort = op.inValue("Server port", 443),
+    serverPort = op.inFloat("Server port", 443),
     serverSecure = op.inBool("Use SSL", true),
     serverPath = op.inString("Server path", "/socketcluster/"),
     allowSend = op.inBool("Allow send", true),

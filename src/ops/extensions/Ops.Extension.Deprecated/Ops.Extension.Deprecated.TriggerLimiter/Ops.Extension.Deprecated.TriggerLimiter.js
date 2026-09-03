@@ -1,5 +1,5 @@
 let inTriggerPort = op.inTrigger("In Trigger");
-let timePort = op.inValue("Milliseconds", 300);
+let timePort = op.inFloat("Milliseconds", 300);
 
 let outTriggerPort = op.outTrigger("Out Trigger");
 let progress = op.outValue("Progress");

@@ -1,6 +1,6 @@
 const exec = op.inTrigger("Render");
-const inNum = op.inValue("Num", 400);
-const inC = op.inValue("Scale", 0.1);
+const inNum = op.inFloat("Num", 400);
+const inC = op.inFloat("Scale", 0.1);
 
 const next = op.outTrigger("Next");
 const outX = op.outValue("X");

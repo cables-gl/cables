@@ -3,7 +3,7 @@ op.name = "LaserPacketSend";
 let exec = op.inTrigger("Exec");
 let next = op.outTrigger("Next");
 // var laserId=op.inValueInt("Laser Id",0);
-// var inSpeed=op.inValue("speed",15000);
+// var inSpeed=op.inFloat("speed",15000);
 
 let outPacket = op.outObject("out packet");
 let inPacket = op.inObject("Packet");

@@ -7,10 +7,10 @@ let shader = new CGL.Shader(cgl, op.name, op);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.scroller_frag);
 
-let time = op.inValue("Time");
+let time = op.inFloat("Time");
 let uniTime = new CGL.Uniform(shader, "f", "time", time);
 
-let num = op.inValue("num", 20);
+let num = op.inFloat("num", 20);
 let uninum = new CGL.Uniform(shader, "f", "num", num);
 
 let blur = op.inValueSlider("blur", 0.0);

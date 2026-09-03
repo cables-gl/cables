@@ -1,6 +1,6 @@
 const
     exe = op.inTriggerButton("exe"),
-    v = op.inValue("value"),
+    v = op.inFloat("value"),
     next = op.outTrigger("Next"),
     result = op.addOutPort(new CABLES.Port(op, "result"));
 

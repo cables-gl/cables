@@ -2,7 +2,7 @@ let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
 let uniformSelect = op.inValueSelect("Uniform");
-let unival = op.inValue("Value", 0);
+let unival = op.inFloat("Value", 0);
 let cgl = op.patch.cgl;
 let uniformInputs = [];
 let uniformTextures = [];
@@ -75,7 +75,7 @@ function updateShader(theShader)
             {
                 console.log(uniform.name);
                 uniformNames.push(uniform.name);
-                // var newInput=op.inValue(uniform.name,0);
+                // var newInput=op.inFloat(uniform.name,0);
                 // newInput.onChange=function(p)
                 // {
                 //     p.uniform.needsUpdate=true;

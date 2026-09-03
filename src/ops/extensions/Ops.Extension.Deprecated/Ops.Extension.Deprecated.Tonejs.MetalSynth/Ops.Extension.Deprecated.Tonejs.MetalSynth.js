@@ -23,10 +23,10 @@ let envelopePort = op.inObject("Envelope", null, {
 });
 envelopePort.changeAlways = true; // get updates when set was called in connected port
 
-let modulationIndexPort = op.inValue("Modulation Index", node.get("modulationIndex").modulationIndex);
-let harmonicityPort = op.inValue("Harmonicity", node.get("harmonicity").harmonicity);
-let resonancePort = op.inValue("Resonance", node.get("resonance").resonance);
-let octavesPort = op.inValue("Octaves", node.get("octaves").octaves);
+let modulationIndexPort = op.inFloat("Modulation Index", node.get("modulationIndex").modulationIndex);
+let harmonicityPort = op.inFloat("Harmonicity", node.get("harmonicity").harmonicity);
+let resonancePort = op.inFloat("Resonance", node.get("resonance").resonance);
+let octavesPort = op.inFloat("Octaves", node.get("octaves").octaves);
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, node.get("volume").volume);
 
 // functions

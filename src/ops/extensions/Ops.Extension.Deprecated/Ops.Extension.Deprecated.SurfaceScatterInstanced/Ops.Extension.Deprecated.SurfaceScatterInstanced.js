@@ -5,7 +5,7 @@ let geom = op.inObject("Geometry");
 let inDistribution = op.inValueSelect("Distribution", ["Vertex", "Triangle Center", "Triangle Side"], "Vertex");
 let inVariety = op.inValueSelect("Selection", ["Random", "Sequential"], "Random");
 
-let inNum = op.inValue("Num", 100);
+let inNum = op.inFloat("Num", 100);
 let inSizeMin = op.inValueSlider("Size min", 1.0);
 let inSizeMax = op.inValueSlider("Size max", 1.0);
 let inRotateRandom = op.inValueBool("Random Rotate", true);
@@ -170,7 +170,7 @@ function setup()
 
 // var inTransformations=op.inArray("positions");
 // var inScales=op.inArray("Scale Array");
-// var inScale=op.inValue("Scale",1);
+// var inScale=op.inFloat("Scale",1);
 // var geom=op.inObject("geom");
 // geom.ignoreValueSerialize=true;
 

@@ -4,7 +4,7 @@ let DEFAULT_VALUE_DEFAULT = 0;
 
 // inputs
 let inArrayPort = op.inArray("In Array");
-let defaultValuePort = op.inValue("Default Value", DEFAULT_VALUE_DEFAULT);
+let defaultValuePort = op.inFloat("Default Value", DEFAULT_VALUE_DEFAULT);
 
 // outputs
 let valueOutPorts = createValuePorts();

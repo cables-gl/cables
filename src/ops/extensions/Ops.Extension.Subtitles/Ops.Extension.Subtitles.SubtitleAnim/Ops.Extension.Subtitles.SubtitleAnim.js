@@ -1,5 +1,5 @@
 const
-    animVal = op.inValue("SubtitleAnim"),
+    animVal = op.inFloat("SubtitleAnim"),
     inData = op.inObject("Structure", null, "subtitles"),
     inOffset = op.inFloat("Offset"),
     outAnim = op.outObject("Anim", null, "anim");

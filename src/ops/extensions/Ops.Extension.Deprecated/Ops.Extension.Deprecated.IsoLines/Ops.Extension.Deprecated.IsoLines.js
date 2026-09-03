@@ -5,13 +5,13 @@ op.name = "IsoLines";
 let exec = op.inTrigger("Exec");
 let each = op.outTrigger("Each");
 
-let inWidth = op.inValue("Width");
-let inHeight = op.inValue("Height");
+let inWidth = op.inFloat("Width");
+let inHeight = op.inFloat("Height");
 
-let inFieldsX = op.inValue("Fields X");
-let inFieldsY = op.inValue("Fields Y");
+let inFieldsX = op.inFloat("Fields X");
+let inFieldsY = op.inFloat("Fields Y");
 
-let maxPoints = op.inValue("Max LinePoints", 500);
+let maxPoints = op.inFloat("Max LinePoints", 500);
 
 let outPoints = op.outArray("Points");
 let outNumPoints = op.outValue("Num Points");

@@ -1,8 +1,8 @@
 let exec = op.inTrigger("Exec");
 
-let velX = op.inValue("Velocity X");
-let velY = op.inValue("Velocity Y");
-let velZ = op.inValue("Velocity Z");
+let velX = op.inFloat("Velocity X");
+let velY = op.inFloat("Velocity Y");
+let velZ = op.inFloat("Velocity Z");
 
 let doSet = op.inTriggerButton("Set");
 

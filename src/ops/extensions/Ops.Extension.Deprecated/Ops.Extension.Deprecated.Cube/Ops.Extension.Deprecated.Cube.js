@@ -1,9 +1,9 @@
 op.name = "Cube";
 
 let render = op.inTrigger("render");
-let width = op.inValue("width");
-let height = op.inValue("height");
-let lengt = op.inValue("length");
+let width = op.inFloat("width");
+let height = op.inFloat("height");
+let lengt = op.inFloat("length");
 let center = op.inValueBool("center");
 
 let trigger = op.outTrigger("trigger");

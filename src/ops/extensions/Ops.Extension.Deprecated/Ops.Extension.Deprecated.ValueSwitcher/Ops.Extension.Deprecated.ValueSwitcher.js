@@ -19,7 +19,7 @@ for (let i = 0; i < num; i++)
     let newExe = op.inTrigger("Trigger " + i);
     newExe.slot = i;
     newExe.onTriggered = onTrigger.bind(newExe);
-    let newVal = op.inValueFloat("Value " + i);
+    let newVal = op.inFloat("Value " + i);
     inVals.push(newVal);
 }
 

@@ -60,7 +60,7 @@ function indexIsValid(i)
 // input ports
 createBufferInputs();
 let starPort = op.inTriggerButton("Start Buffer");
-let indexPort = op.inValue("Buffer Index", 0);
+let indexPort = op.inFloat("Buffer Index", 0);
 let timePort = op.inValueString("Time", TIME_DEFAULT);
 let fadeInPort = op.inValueString("Fade In Time", FADE_IN_TIME_DEFAULT);
 let offsetPort = op.inValueString("Offset", OFFSET_DEFAULT);

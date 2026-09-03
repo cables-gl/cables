@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
-    posX = op.inValue("X", 0),
-    posY = op.inValue("Y", 0),
-    posZ = op.inValue("Z", 0),
+    posX = op.inFloat("X", 0),
+    posY = op.inFloat("Y", 0),
+    posZ = op.inFloat("Z", 0),
     trigger = op.outTrigger("trigger"),
     outX = op.outNumber("Pos X"),
     outY = op.outNumber("Pos Y"),

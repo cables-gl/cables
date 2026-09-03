@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
-let amount = op.inValue("amount");
+let amount = op.inFloat("amount");
 
-let times = op.inValue("times", 1);
+let times = op.inFloat("times", 1);
 
 let trigger = op.outTrigger("trigger");
 

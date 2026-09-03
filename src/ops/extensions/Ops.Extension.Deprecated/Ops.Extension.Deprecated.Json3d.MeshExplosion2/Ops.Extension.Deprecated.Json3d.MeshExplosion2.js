@@ -1,5 +1,5 @@
 const render = op.inTrigger("Render");
-const expansion = op.inValue("Expansion");
+const expansion = op.inFloat("Expansion");
 const next = op.outTrigger("Next");
 
 const inRotX = op.inValueSlider("Rotation X", 1);

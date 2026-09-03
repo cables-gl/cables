@@ -3,20 +3,20 @@ let cgl = op.patch.cgl;
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-const inStrength = op.inValue("Amount", 1),
-    inStart = op.inValue("Start Index", 0),
-    inWidth = op.inValue("Width", 20),
+const inStrength = op.inFloat("Amount", 1),
+    inStart = op.inFloat("Start Index", 0),
+    inWidth = op.inFloat("Width", 20),
     inHasEnd = op.inValueBool("Ending", true),
-    inTransDist = op.inValue("Transition Distance", 50),
-    inPosX = op.inValue("Pos X", 0),
-    inPosY = op.inValue("Pos Y", 0),
-    inPosZ = op.inValue("Pos Z", 0),
-    inRotX = op.inValue("Rot X", 0),
-    inRotY = op.inValue("Rot Y", 0),
-    inRotZ = op.inValue("Rot Z", 0),
-    inScaleX = op.inValue("Scale X", 1),
-    inScaleY = op.inValue("Scale Y", 1),
-    inScaleZ = op.inValue("Scale Z", 1);
+    inTransDist = op.inFloat("Transition Distance", 50),
+    inPosX = op.inFloat("Pos X", 0),
+    inPosY = op.inFloat("Pos Y", 0),
+    inPosZ = op.inFloat("Pos Z", 0),
+    inRotX = op.inFloat("Rot X", 0),
+    inRotY = op.inFloat("Rot Y", 0),
+    inRotZ = op.inFloat("Rot Z", 0),
+    inScaleX = op.inFloat("Scale X", 1),
+    inScaleY = op.inFloat("Scale Y", 1),
+    inScaleZ = op.inFloat("Scale Z", 1);
 
 let shader = null;
 

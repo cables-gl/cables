@@ -1,6 +1,6 @@
 const
     loopstr = ["Off", "Repeat", "Mirror", "Offset"],
-    animVal = op.inValue("Value"),
+    animVal = op.inFloat("Value"),
     inKeys = op.inArray("Key Times"),
     inValues = op.inArray("Key Values"),
     inText = op.inArray("Key Text"),

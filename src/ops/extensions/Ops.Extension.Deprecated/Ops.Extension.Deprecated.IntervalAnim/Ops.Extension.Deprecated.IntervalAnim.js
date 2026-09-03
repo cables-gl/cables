@@ -1,6 +1,6 @@
 const exe = op.inTrigger("exe");
-const interval = op.inValue("Interval");
-const delay = op.inValue("Delay");
+const interval = op.inFloat("Interval");
+const delay = op.inFloat("Delay");
 const percent = op.outValue("percent");
 const trigger = op.outTrigger("Trigger");
 

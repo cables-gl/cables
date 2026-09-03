@@ -3,10 +3,10 @@
 let divisor = 5;
 
 let exec = op.inTrigger("Update");
-let inVal = op.inValue("Value");
+let inVal = op.inFloat("Value");
 
 let next = op.outTrigger("Next");
-let inDivisor = op.inValue("Divisor", divisor);
+let inDivisor = op.inFloat("Divisor", divisor);
 let result = op.outValue("Result", 0);
 
 let val = 0;

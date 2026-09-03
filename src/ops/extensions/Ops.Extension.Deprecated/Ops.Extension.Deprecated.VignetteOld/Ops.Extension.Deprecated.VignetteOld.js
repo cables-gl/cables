@@ -4,9 +4,9 @@ let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
 let amount = op.inValueSlider("Amount", 1);
-let lensRadius1 = op.inValue("lensRadius1", 0.8);
-let lensRadius2 = op.inValue("lensRadius2", 0.4);
-let ratio = op.inValue("Ratio", 1);
+let lensRadius1 = op.inFloat("lensRadius1", 0.8);
+let lensRadius2 = op.inFloat("lensRadius2", 0.4);
+let ratio = op.inFloat("Ratio", 1);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

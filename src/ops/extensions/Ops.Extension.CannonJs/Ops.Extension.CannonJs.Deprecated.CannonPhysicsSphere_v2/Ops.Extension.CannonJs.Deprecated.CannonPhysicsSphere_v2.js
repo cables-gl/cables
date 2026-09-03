@@ -1,8 +1,8 @@
 const
     exec = op.inTrigger("Exec"),
     inName = op.inString("Name", "Sphere"),
-    inMass = op.inValue("Mass"),
-    inRadius = op.inValue("Radius", 1),
+    inMass = op.inFloat("Mass"),
+    inRadius = op.inFloat("Radius", 1),
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),

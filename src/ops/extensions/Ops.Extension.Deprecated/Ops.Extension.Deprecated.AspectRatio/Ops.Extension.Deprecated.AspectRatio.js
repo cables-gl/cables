@@ -19,7 +19,7 @@ const
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
     inAspect = op.inValueSelect("Aspect Ratio", aspectTitles, aspects[0].title),
-    inCustom = op.inValueFloat("Custom", 1.777777);
+    inCustom = op.inFloat("Custom", 1.777777);
 
 const
     useVPSize = op.inValueBool("use viewport size", true),

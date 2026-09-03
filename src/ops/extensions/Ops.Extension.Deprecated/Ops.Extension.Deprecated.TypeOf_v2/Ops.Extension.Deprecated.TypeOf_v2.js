@@ -1,4 +1,4 @@
-const input = op.inValue("input");
+const input = op.inFloat("input");
 const result = op.outString("result");
 
 input.onChange = update;

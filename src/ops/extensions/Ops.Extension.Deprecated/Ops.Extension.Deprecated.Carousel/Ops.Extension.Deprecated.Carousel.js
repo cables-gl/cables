@@ -7,13 +7,13 @@ let NUM_DEFAULT = 4;
 
 // inputs
 let triggerPort = op.inTrigger("Execute");
-let scrollValuePort = op.inValue("Scroll Position");
-let numPort = op.inValue("Number of Elements", NUM_DEFAULT);
-let sizePort = op.inValue("Size", DEFAULT_SIZE);
-// var spacingPort = op.inValue('Spacing Between', 0.2);
+let scrollValuePort = op.inFloat("Scroll Position");
+let numPort = op.inFloat("Number of Elements", NUM_DEFAULT);
+let sizePort = op.inFloat("Size", DEFAULT_SIZE);
+// var spacingPort = op.inFloat('Spacing Between', 0.2);
 // var loopPort = op.inValueBool('Loop');
-// var minPort = op.inValue('Minimum', -80);
-// var maxPort = op.inValue('Maximum', 80);
+// var minPort = op.inFloat('Minimum', -80);
+// var maxPort = op.inFloat('Maximum', 80);
 
 // outputs
 let triggerItemPort = op.outTrigger("Item Trigger");

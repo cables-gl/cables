@@ -1,8 +1,8 @@
 const
     inExec = op.inTrigger("Update"),
     inType = op.inSwitch("Coordinates", ["Screen", "World"], "Screen"),
-    inX = op.inValueFloat("Screen X"),
-    inY = op.inValueFloat("Screen Y"),
+    inX = op.inFloat("Screen X"),
+    inY = op.inFloat("Screen Y"),
     inRay = op.inArray("Ray Points"),
     inExclSensors = op.inBool("Exclude Sensors", false),
     active = op.inBool("Active", true),

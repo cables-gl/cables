@@ -1,8 +1,8 @@
 const
     exe = op.inTrigger("Render"),
     num = op.inValueInt("Num", 1000),
-    size = op.inValue("Size", 1),
-    seed = op.inValue("Seed", 0),
+    size = op.inFloat("Size", 1),
+    seed = op.inFloat("Seed", 0),
     distRand = op.inValueSlider("Distance Random", 0),
     distrib = op.inValueSelect("Distribution", ["Uniform", "Poles", "Half"]),
     inDoRender = op.inBool("Draw", true),

@@ -1,6 +1,6 @@
 let render = op.inTrigger("Render");
 
-let inIndex = op.inValue("index");
+let inIndex = op.inFloat("index");
 
 let inPoints = op.inArray("points");
 

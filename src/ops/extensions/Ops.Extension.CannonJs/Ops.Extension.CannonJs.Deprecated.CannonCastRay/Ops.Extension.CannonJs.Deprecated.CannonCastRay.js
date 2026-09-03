@@ -1,9 +1,9 @@
 const
     exec = op.inTrigger("Exec"),
 
-    inX = op.inValueFloat("Screen X"),
-    inY = op.inValueFloat("Screen Y"),
-    inZ = op.inValueFloat("Screen Z"),
+    inX = op.inFloat("Screen X"),
+    inY = op.inFloat("Screen Y"),
+    inZ = op.inFloat("Screen Z"),
 
     inCursor = op.inBool("Change Cursor", true),
 

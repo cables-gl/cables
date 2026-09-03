@@ -3,7 +3,7 @@ op.name = "ToneMap";
 let render = op.inTrigger("Render");
 let trigger = op.outTrigger("Trigger");
 let method = op.inValueSelect("Method", ["Linear", "Reinhard", "Hejl Dawson", "Uncharted"], "Linear");
-let exposure = op.inValue("Exposure", 3);
+let exposure = op.inFloat("Exposure", 3);
 let cgl = op.patch.cgl;
 
 let shader = new CGL.Shader(cgl, op.name, op);

@@ -62,10 +62,10 @@ const inLightmapAO = op.inBool("Lightmap AO only", false);
 
 const inLightmapIntensity = op.inFloat("Lightmap Intensity", 1.0);
 
-const inTexTransRepeatX = op.inValue("Texture RepeatX", 1);
-const inTexTransRepeatY = op.inValue("Texture RepeatY", 1);
-const inTexTransOffsetX = op.inValue("Texture Offset X", 0);
-const inTexTransOffsetY = op.inValue("Texture Offset Y", 0);
+const inTexTransRepeatX = op.inFloat("Texture RepeatX", 1);
+const inTexTransRepeatY = op.inFloat("Texture RepeatY", 1);
+const inTexTransOffsetX = op.inFloat("Texture Offset X", 0);
+const inTexTransOffsetY = op.inFloat("Texture Offset Y", 0);
 
 const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
 const inTexFlip = op.inBool("Flip Textures");

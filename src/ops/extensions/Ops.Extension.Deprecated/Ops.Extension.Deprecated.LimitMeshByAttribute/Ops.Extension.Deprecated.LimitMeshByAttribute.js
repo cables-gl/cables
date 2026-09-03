@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 let inAttrib = op.inValueSelect("Attribute", []);
 let inGeom = op.inObject("Geometry");
-let limitMax = op.inValue("Max", 1000);
+let limitMax = op.inFloat("Max", 1000);
 const trigger = op.outTrigger("trigger");
 
 let srcHeadFrag = "";

@@ -1,16 +1,16 @@
 const render = op.inTrigger("render");
 const resetButton = op.inTriggerButton("Reset");
-const inSizeX = op.inValue("Size Area X", 3);
-const inSizeY = op.inValue("Size Area Y", 3);
-const inSizeZ = op.inValue("Size Area Z", 3);
-const numPoints = op.inValue("Particles", 300);
-const speed = op.inValue("Speed", 0.2);
-const lifetime = op.inValue("Lifetime", 5);
+const inSizeX = op.inFloat("Size Area X", 3);
+const inSizeY = op.inFloat("Size Area Y", 3);
+const inSizeZ = op.inFloat("Size Area Z", 3);
+const numPoints = op.inFloat("Particles", 300);
+const speed = op.inFloat("Speed", 0.2);
+const lifetime = op.inFloat("Lifetime", 5);
 const fadeInOut = op.inValueSlider("Fade Birth Death", 0.2);
 const show = op.inValueBool("Show");
-const posX = op.inValue("Pos X");
-const posY = op.inValue("Pos Y");
-const posZ = op.inValue("Pos Z");
+const posX = op.inFloat("Pos X");
+const posY = op.inFloat("Pos Y");
+const posZ = op.inFloat("Pos Z");
 const spawns = op.inArray("Spawn Positions");
 
 let cgl = op.patch.cgl;

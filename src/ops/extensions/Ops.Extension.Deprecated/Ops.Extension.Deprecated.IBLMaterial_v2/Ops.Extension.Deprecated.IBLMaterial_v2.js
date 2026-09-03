@@ -23,8 +23,8 @@ const inOpacity = op.inValueSlider("Opacity", 1);
 
 const inRotation = op.inValueSlider("SampleRotation", 0);
 
-const inRepeatX = op.inValue("Repeat X", 1);
-const inRepeatY = op.inValue("Repeat Y", 1);
+const inRepeatX = op.inFloat("Repeat X", 1);
+const inRepeatY = op.inFloat("Repeat Y", 1);
 
 const trigger = op.outTrigger("trigger");
 const outShader = op.outObject("Shader");

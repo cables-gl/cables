@@ -2,12 +2,12 @@ let exe = op.inTrigger("Render");
 let geom = op.inObject("Geometry");
 
 let num = op.inValueInt("Count", 1000);
-let size = op.inValue("size", 10);
-let spread = op.inValue("Spread", 0);
+let size = op.inFloat("size", 10);
+let spread = op.inFloat("Spread", 0);
 
 let shape = op.inValueSelect("Shape", ["Cube", "Sphere", "Torus"]);
 
-let seed = op.inValue("random seed", 1);
+let seed = op.inFloat("random seed", 1);
 
 let scaleX = op.inValueSlider("Scale X", 1);
 let scaleY = op.inValueSlider("Scale Y", 1);
@@ -36,7 +36,7 @@ let randomsRot = [];
 
 let cgl = op.patch.cgl;
 
-let anim = op.inValue("time");
+let anim = op.inFloat("time");
 
 let transVec = vec3.create();
 

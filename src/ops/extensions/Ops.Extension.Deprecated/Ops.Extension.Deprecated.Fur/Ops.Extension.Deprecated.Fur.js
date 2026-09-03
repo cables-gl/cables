@@ -5,8 +5,8 @@ let cgl = op.patch.cgl;
 
 let inLayer = op.inValueInt("Layer");
 let inNumLayers = op.inValueInt("Num Layers");
-let inStrength = op.inValue("Strength", 1);
-let inTime = op.inValue("Time");
+let inStrength = op.inFloat("Strength", 1);
+let inTime = op.inFloat("Time");
 
 let doRender = function ()
 {

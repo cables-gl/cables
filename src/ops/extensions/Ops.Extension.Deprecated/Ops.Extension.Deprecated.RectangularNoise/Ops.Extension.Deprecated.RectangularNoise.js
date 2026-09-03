@@ -7,10 +7,10 @@ let amount = op.inValueSlider("Amount", 1);
 
 let threshold = op.inValueSlider("Threshold", 0.35);
 
-let x = op.inValue("X", 0);
-let y = op.inValue("Y", 0);
-let z = op.inValue("Z", 0);
-let scale = op.inValue("Scale", 22);
+let x = op.inFloat("X", 0);
+let y = op.inFloat("Y", 0);
+let z = op.inFloat("Z", 0);
+let scale = op.inFloat("Scale", 22);
 
 let trigger = op.outTrigger("trigger");
 

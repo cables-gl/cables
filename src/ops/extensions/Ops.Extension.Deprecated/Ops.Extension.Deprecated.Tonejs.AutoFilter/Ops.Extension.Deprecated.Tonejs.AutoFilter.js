@@ -30,8 +30,8 @@ let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node
 // var filterPort = op.inObject("Filter");
 let typePort = this.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0]));
 typePort.set(OSCILLATOR_TYPES[0]);
-// var minPort = op.inValue("Min", MIN_DEFAULT); // not noticable, tone.js bug?
-let octavesPort = op.inValue("Octaves", OCTAVES_DEFAULT);
+// var minPort = op.inFloat("Min", MIN_DEFAULT); // not noticable, tone.js bug?
+let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, WET_DEFAULT);
 
 // change listeners

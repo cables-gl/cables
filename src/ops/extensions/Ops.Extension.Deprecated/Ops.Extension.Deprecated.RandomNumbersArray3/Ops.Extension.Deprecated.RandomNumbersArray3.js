@@ -1,8 +1,8 @@
 const
     numValues = op.inValueInt("numValues", 100),
-    min = op.inValueFloat("Min", -1),
-    max = op.inValueFloat("Max", 1),
-    seed = op.inValueFloat("random seed"),
+    min = op.inFloat("Min", -1),
+    max = op.inFloat("Max", 1),
+    seed = op.inFloat("random seed"),
     closed = op.inValueBool("Last == First"),
     inInteger = op.inValueBool("Integer", false),
     values = op.outArray("values"),

@@ -1,8 +1,8 @@
 let render = op.inTrigger("Render");
 let pSites = op.inArray("Site Points");
 
-let pWidth = op.inValue("Width", 2);
-let pHeight = op.inValue("Height", 2);
+let pWidth = op.inFloat("Width", 2);
+let pHeight = op.inFloat("Height", 2);
 
 let next = op.outTrigger("Next");
 let outVoronoi = op.outObject("Voronoi");

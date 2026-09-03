@@ -9,10 +9,10 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const inTrigger = op.inTriggerButton("Play Sample");
 const inTriggerStop = op.inTriggerButton("Stop Playback");
-const offsetPort = op.inValue("Offset", 0);
+const offsetPort = op.inFloat("Offset", 0);
 const maxSamples = op.inInt("Buffer Size", 32);
-const playbackRatePort = op.inValue("Playback Rate", 1);
-const detunePort = op.inValue("Detune", 0);
+const playbackRatePort = op.inFloat("Playback Rate", 1);
+const detunePort = op.inFloat("Detune", 0);
 
 op.setPortGroup("Time Controls", [offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);

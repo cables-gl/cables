@@ -4,10 +4,10 @@
 let render = op.inTrigger("Render");
 let inMeshIndex = op.inValueInt("Mesh Index");
 
-let inTime = op.inValue("Time");
+let inTime = op.inFloat("Time");
 
 let inFade = op.inValueSlider("Fade Times");
-let inTime2 = op.inValue("Time2");
+let inTime2 = op.inFloat("Time2");
 
 let next = op.outTrigger("Next");
 let outNumBounes = op.outValue("Num Bones");

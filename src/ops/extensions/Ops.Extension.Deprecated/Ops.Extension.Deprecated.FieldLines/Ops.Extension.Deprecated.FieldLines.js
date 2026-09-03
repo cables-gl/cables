@@ -3,7 +3,7 @@
 let exec = op.inTrigger("Exec");
 let each = op.outTrigger("Each");
 
-let maxPoints = op.inValue("Max LinePoints", 500);
+let maxPoints = op.inFloat("Max LinePoints", 500);
 let outPoints = op.outArray("Points");
 let outNumPoints = op.outValue("Num Points");
 let outCanceled = op.outValue("Canceled lines");

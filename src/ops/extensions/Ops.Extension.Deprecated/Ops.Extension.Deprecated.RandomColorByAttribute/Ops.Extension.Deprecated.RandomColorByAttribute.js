@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 let inAttrib = op.inValueSelect("Attribute", []);
 let inGeom = op.inObject("Geometry");
-let inSeed = op.inValue("Seed", 1000);
+let inSeed = op.inFloat("Seed", 1000);
 let inMin = op.inValueSlider("Min", 0.0);
 let inMax = op.inValueSlider("Max", 1.0);
 

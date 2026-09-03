@@ -1,4 +1,4 @@
-const v = op.inValueFloat("value");
+const v = op.inFloat("value");
 const result = op.outValue("result");
 
 v.onChange = exec;

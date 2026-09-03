@@ -1,12 +1,12 @@
 let exec = op.inTrigger("Exec");
 let doreset = op.inTriggerButton("reset");
 
-// var num=op.inValue("num",20);
+// var num=op.inFloat("num",20);
 let inPoints = op.inArray("Positions");
 
-let range = op.inValue("Range Radius", 1);
-let attraction = op.inValue("attraction");
-let angle = op.inValue("Angle");
+let range = op.inFloat("Range Radius", 1);
+let attraction = op.inFloat("attraction");
+let angle = op.inFloat("Angle");
 let show = op.inValueBool("Show");
 
 let next = op.outTrigger("next");

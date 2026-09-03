@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    radius = op.inValue("radius", 0.5),
+    radius = op.inFloat("radius", 0.5),
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),

@@ -2,10 +2,10 @@ let exe = op.inTrigger("exe");
 let beat = op.inTriggerButton("beat");
 let bang = op.outValue("bang");
 
-let startValue = op.inValueFloat("startValue");
-let endValue = op.inValueFloat("endValue");
+let startValue = op.inFloat("startValue");
+let endValue = op.inFloat("endValue");
 let duration = 0;
-let bpm = op.inValueFloat("bpm");
+let bpm = op.inFloat("bpm");
 
 let anim = new CABLES.Anim();
 

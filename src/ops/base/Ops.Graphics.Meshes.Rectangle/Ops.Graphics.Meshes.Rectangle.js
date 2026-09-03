@@ -1,8 +1,8 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let width = op.inValue("width", 1);
-let height = op.inValue("height", 1);
+let width = op.inFloat("width", 1);
+let height = op.inFloat("height", 1);
 
 let pivotX = op.inSwitch("pivot x", ["left", "center", "right"]);
 let pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]);

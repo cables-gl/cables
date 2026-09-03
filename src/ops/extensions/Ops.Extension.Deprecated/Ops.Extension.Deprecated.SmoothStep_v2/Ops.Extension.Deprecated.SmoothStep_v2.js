@@ -1,8 +1,8 @@
 const
     result = op.outNumber("result"),
-    number = op.inValueFloat("number", 0),
-    min = op.inValueFloat("min", 0),
-    max = op.inValueFloat("max", 1);
+    number = op.inFloat("number", 0),
+    min = op.inFloat("min", 0),
+    max = op.inFloat("max", 1);
 
 number.onChange = max.onChange = min.onChange = exec;
 exec();

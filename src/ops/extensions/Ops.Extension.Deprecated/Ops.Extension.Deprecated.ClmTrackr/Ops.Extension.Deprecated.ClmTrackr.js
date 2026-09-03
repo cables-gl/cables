@@ -4,7 +4,7 @@
 
 const inButton = op.inTriggerButton("Press me");
 const inTexture = op.inTexture("texture");
-const inZValue = op.inValueFloat("z", 0);
+const inZValue = op.inFloat("z", 0);
 
 const faceOutline = op.outArray("Face Outline");
 const rightEyebrow = op.outArray("Right Eyebrow");

@@ -76,12 +76,12 @@ let limit = op.inValueBool("Limit");
 
 let doReset = op.inTriggerButton("Reset");
 
-let mul = op.inValue("mul", 0.1);
+let mul = op.inFloat("mul", 0.1);
 
-let minX = op.inValue("minX", -600);
-let maxX = op.inValue("maxX", 600);
-let minY = op.inValue("minY", -600);
-let maxY = op.inValue("maxY", 600);
+let minX = op.inFloat("minX", -600);
+let maxX = op.inFloat("maxX", 600);
+let minY = op.inFloat("minY", -600);
+let maxY = op.inFloat("maxY", 600);
 
 let active = op.inValueBool("Active", true);
 

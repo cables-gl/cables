@@ -7,21 +7,21 @@ let geom = op.inObject("geom");
 
 let inNum = op.inValueInt("Num", 2000);
 
-let inOffset = op.inValue("Offset");
+let inOffset = op.inFloat("Offset");
 
 let rotPos = op.inValueBool("Rotate by Position", true);
 
 let inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
-let inSpacing = op.inValue("Spacing", 0.2);
-let inScale = op.inValue("Scale", 1);
-// var inRot=op.inValue("Rotation",0);
-let inRotX = op.inValue("Rot X", 0);
-let inRotY = op.inValue("Rot Y", 0);
-let inRotZ = op.inValue("Rot Z", 1);
+let inSpacing = op.inFloat("Spacing", 0.2);
+let inScale = op.inFloat("Scale", 1);
+// var inRot=op.inFloat("Rotation",0);
+let inRotX = op.inFloat("Rot X", 0);
+let inRotY = op.inFloat("Rot Y", 0);
+let inRotZ = op.inFloat("Rot Z", 1);
 
-let inPreRotX = op.inValue("Pre Rot X", 0);
-let inPreRotY = op.inValue("Pre Rot Y", 0);
-let inPreRotZ = op.inValue("Pre Rot Z", 1);
+let inPreRotX = op.inFloat("Pre Rot X", 0);
+let inPreRotY = op.inFloat("Pre Rot Y", 0);
+let inPreRotZ = op.inFloat("Pre Rot Z", 1);
 
 let texScaling = op.inTexture("Texture Scaling");
 let texRotation = op.inTexture("Texture Rotation");

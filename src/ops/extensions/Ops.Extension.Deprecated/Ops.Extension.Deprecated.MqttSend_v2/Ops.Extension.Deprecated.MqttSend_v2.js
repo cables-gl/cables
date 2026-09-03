@@ -1,5 +1,5 @@
 const mqttObj = op.inObject("MQTT Object");
-const message = op.inValue("Message", "Hello Cables");
+const message = op.inFloat("Message", "Hello Cables");
 const channel = op.inString("Channel", "/test");
 const send = op.inTriggerButton("Send");
 

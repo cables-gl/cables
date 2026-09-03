@@ -1,6 +1,6 @@
 const
     loopstr = ["Off", "Repeat", "Mirror", "Offset"],
-    animVal = op.inValue("Value"),
+    animVal = op.inFloat("Value"),
     inloop = op.inSwitch("loop", loopstr),
     inClip = op.inBool("Clip", false),
     inClipName = op.inString("Clip Name", ""),

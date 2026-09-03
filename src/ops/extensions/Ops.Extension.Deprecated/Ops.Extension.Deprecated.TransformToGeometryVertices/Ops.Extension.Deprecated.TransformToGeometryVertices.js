@@ -2,7 +2,7 @@ op.name = "TransformToGeometryVertices";
 let render = op.inTrigger("render");
 let geometry = op.addInPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
 
-let modulo = op.inValue("modulo", 1);
+let modulo = op.inFloat("modulo", 1);
 
 let trigger = op.outTrigger("trigger");
 let x = op.addOutPort(new CABLES.Port(op, "x", CABLES.OP_PORT_TYPE_VALUE));

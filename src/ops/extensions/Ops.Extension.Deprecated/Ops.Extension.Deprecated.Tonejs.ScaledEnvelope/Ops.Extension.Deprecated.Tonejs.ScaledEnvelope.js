@@ -34,9 +34,9 @@ let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLE
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);
 let releaseCurvePort = this.addInPort(new CABLES.Port(this, "Release Curve", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
-let minPort = op.inValue("Min", MIN_DEFAULT);
-let maxPort = op.inValue("Max", MAX_DEFAULT);
-let exponentPort = op.inValue("Exponent", EXPONENT_DEFAULT);
+let minPort = op.inFloat("Min", MIN_DEFAULT);
+let maxPort = op.inFloat("Max", MAX_DEFAULT);
+let exponentPort = op.inFloat("Exponent", EXPONENT_DEFAULT);
 
 // value change listeners
 attackPort.onChange = function ()

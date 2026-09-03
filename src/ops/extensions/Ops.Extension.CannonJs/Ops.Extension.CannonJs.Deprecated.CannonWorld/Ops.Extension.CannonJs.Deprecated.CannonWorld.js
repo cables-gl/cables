@@ -4,9 +4,9 @@ const exec = op.inTrigger("Exec"),
     doDraw = op.inValueBool("Draw Bodies", true),
     groundPlane = op.inValueBool("Groundplane", false),
 
-    gravX = op.inValue("Gravity X"),
-    gravY = op.inValue("Gravity Y", -9.82),
-    gravZ = op.inValue("Gravity Z"),
+    gravX = op.inFloat("Gravity X"),
+    gravY = op.inFloat("Gravity Y", -9.82),
+    gravZ = op.inFloat("Gravity Z"),
 
     inIter = op.inInt("Solver Iterations", 13),
 

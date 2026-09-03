@@ -1,4 +1,4 @@
-let inTime = op.inValue("Time");
+let inTime = op.inFloat("Time");
 
 let inStart = op.inValueInt("Frame Start");
 let inEnd = op.inValueInt("Frame End");

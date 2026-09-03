@@ -1,6 +1,6 @@
 let inGeom = op.inObject("Geometry");
 let inSlices = op.inValueInt("Slices", 5);
-let inDistance = op.inValue("Distance", 0.1);
+let inDistance = op.inFloat("Distance", 0.1);
 let outGeom = op.outObject("Result");
 
 inGeom.onChange = update;

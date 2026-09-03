@@ -21,7 +21,7 @@ let AUTO_START_DEFAULT = true;
 let node = new Tone.Noise(TYPE_DEFAULT);
 
 // inputs
-let playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
+let playbackRatePort = op.inFloat("Playback Rate", PLAYBACK_RATE_DEFAULT);
 let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set(TYPE_DEFAULT);
 let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));

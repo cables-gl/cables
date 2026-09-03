@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("exe"),
-    mul = op.inValue("Multiply", 1),
+    mul = op.inFloat("Multiply", 1),
     outTrigger = op.outTrigger("Trigger out"),
     result = op.outNumber("result");
 

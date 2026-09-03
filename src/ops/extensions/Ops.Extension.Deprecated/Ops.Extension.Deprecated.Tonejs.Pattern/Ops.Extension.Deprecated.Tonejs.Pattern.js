@@ -38,7 +38,7 @@ let stopPort = op.addInPort(new CABLES.Port(this, "Stop", CABLES.OP_PORT_TYPE_FU
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 let humanizePort = op.addInPort(new CABLES.Port(op, "Humanize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 humanizePort.set(HUMANIZE_DEFAULT);
-let humanizeTimePort = op.inValue("Humanize Time");
+let humanizeTimePort = op.inFloat("Humanize Time");
 humanizeTimePort.set(HUMANIZE_TIME_DEFAULT);
 let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 mutePort.set(MUTE_DEFAULT);

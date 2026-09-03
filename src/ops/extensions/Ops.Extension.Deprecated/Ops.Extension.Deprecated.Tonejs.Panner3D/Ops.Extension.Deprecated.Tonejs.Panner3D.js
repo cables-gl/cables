@@ -25,24 +25,24 @@ let node = new Tone.Panner3D(POSITION_X_DEFAULT, POSITION_Y_DEFAULT, POSITION_Z_
 
 // input ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let positionXPort = op.inValue("Position X", POSITION_X_DEFAULT);
-let positionYPort = op.inValue("Position Y", POSITION_Y_DEFAULT);
-let positionZPort = op.inValue("Position Z", POSITION_Z_DEFAULT);
-let orientationXPort = op.inValue("Orientation X", ORIENTATION_X_DEFAULT);
-let orientationYPort = op.inValue("Orientation Y", ORIENTATION_Y_DEFAULT);
-let orientationZPort = op.inValue("Orientation Z", ORIENTATION_Z_DEFAULT);
+let positionXPort = op.inFloat("Position X", POSITION_X_DEFAULT);
+let positionYPort = op.inFloat("Position Y", POSITION_Y_DEFAULT);
+let positionZPort = op.inFloat("Position Z", POSITION_Z_DEFAULT);
+let orientationXPort = op.inFloat("Orientation X", ORIENTATION_X_DEFAULT);
+let orientationYPort = op.inFloat("Orientation Y", ORIENTATION_Y_DEFAULT);
+let orientationZPort = op.inFloat("Orientation Z", ORIENTATION_Z_DEFAULT);
 let panningModelPort = op.addInPort(new CABLES.Port(op, "Panning Model", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": PANNING_MODEL_VALUES }));
 panningModelPort.set(PANNING_MODEL_DEFAULT);
-let referenceDistancePort = op.inValue("Reference Distance", REFERENCE_DISTANCE_DEFAULT);
-let rollOffFactorPort = op.inValue("Roll Off Factor", ROLL_OFF_FACTOR_DEFAULT);
+let referenceDistancePort = op.inFloat("Reference Distance", REFERENCE_DISTANCE_DEFAULT);
+let rollOffFactorPort = op.inFloat("Roll Off Factor", ROLL_OFF_FACTOR_DEFAULT);
 let distanceModelPort = op.addInPort(new CABLES.Port(op, "Distance Model", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": DISTANCE_MODEL_VALUES }));
 distanceModelPort.set(DISTANCE_MODEL_DEFAULT);
 let coneInnerAnglePort = op.addInPort(new CABLES.Port(op, "Cone Inner Angle", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": ANGLE_MIN, "max": ANGLE_MAX }));
 coneInnerAnglePort.set(CONE_INNER_ANGLE_DEFAULT);
 let coneOuterAnglePort = op.addInPort(new CABLES.Port(op, "Cone Outer Angle", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": ANGLE_MIN, "max": ANGLE_MAX }));
 coneOuterAnglePort.set(CONE_OUTER_ANGLE_DEFAULT);
-let coneOuterGainPort = op.inValue("Cone Outer Gain", CONE_OUTER_GAIN_DEFAULT);
-let maximumDistancePort = op.inValue("Maximum Distance", MAXIMUM_DISTANCE_DEFAULT);
+let coneOuterGainPort = op.inFloat("Cone Outer Gain", CONE_OUTER_GAIN_DEFAULT);
+let maximumDistancePort = op.inFloat("Maximum Distance", MAXIMUM_DISTANCE_DEFAULT);
 
 // change listeners
 positionXPort.onChange = function ()

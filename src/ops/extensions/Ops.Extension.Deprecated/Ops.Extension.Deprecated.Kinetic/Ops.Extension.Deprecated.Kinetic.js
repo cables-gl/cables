@@ -1,4 +1,4 @@
-let value = op.inValue("Value", 0);
+let value = op.inFloat("Value", 0);
 let result = op.outValue("Result");
 
 let firstTime = true;

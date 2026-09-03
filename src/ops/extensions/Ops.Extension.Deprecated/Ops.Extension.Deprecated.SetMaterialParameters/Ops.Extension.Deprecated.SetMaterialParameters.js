@@ -37,7 +37,7 @@ function setupPorts(uniforms)
 
         if (!p && uniforms[i].getType() == "f")
         {
-            p = op.inValue(uniforms[i].getName(), uniforms[i].getValue());
+            p = op.inFloat(uniforms[i].getName(), uniforms[i].getValue());
         }
         else if (!p && uniforms[i].getType() == "t")
         {

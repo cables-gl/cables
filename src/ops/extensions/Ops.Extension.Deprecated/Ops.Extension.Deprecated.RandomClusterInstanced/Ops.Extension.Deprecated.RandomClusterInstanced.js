@@ -24,7 +24,7 @@ scaleX.set(1);
 scaleY.set(1);
 scaleZ.set(1);
 
-let anim = op.inValue("time");
+let anim = op.inFloat("time");
 
 let transVec = vec3.create();
 

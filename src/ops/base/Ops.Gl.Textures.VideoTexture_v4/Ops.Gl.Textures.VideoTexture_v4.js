@@ -11,8 +11,8 @@ const
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     flip = op.inValueBool("flip", true),
 
-    speed = op.inValueFloat("speed", 1),
-    time = op.inValueFloat("set time"),
+    speed = op.inFloat("speed", 1),
+    time = op.inFloat("set time"),
     rewind = op.inTriggerButton("Rewind"),
 
     inPreload = op.inValueBool("Preload", true),

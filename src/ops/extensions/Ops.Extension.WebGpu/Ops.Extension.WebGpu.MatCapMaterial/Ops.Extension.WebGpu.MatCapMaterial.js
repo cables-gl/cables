@@ -6,10 +6,10 @@ const
     a = op.inValueSlider("a", 1),
 
     colorizeTexture = op.inBool("Colorize Texture", false),
-    diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
-    diffuseRepeatY = op.inValue("diffuseRepeatY", 1),
-    diffuseOffsetX = op.inValue("Tex Offset X", 0),
-    diffuseOffsetY = op.inValue("Tex Offset Y", 0),
+    diffuseRepeatX = op.inFloat("diffuseRepeatX", 1),
+    diffuseRepeatY = op.inFloat("diffuseRepeatY", 1),
+    diffuseOffsetX = op.inFloat("Tex Offset X", 0),
+    diffuseOffsetY = op.inFloat("Tex Offset Y", 0),
 
     inTex = op.inTexture("Matcap"),
     inTextureDiffuse = op.inTexture("Diffuse"),

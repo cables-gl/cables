@@ -35,8 +35,8 @@ let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node
 let detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set(TYPE_DEFAULT);
-let spreadPort = op.inValue("Spread", SPREAD_DEFAULT);
-let countPort = op.inValue("Count", COUNT_DEFAULT);
+let spreadPort = op.inFloat("Spread", SPREAD_DEFAULT);
+let countPort = op.inFloat("Count", COUNT_DEFAULT);
 let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }));
 phasePort.set(PHASE_DEFAULT);
 let syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);

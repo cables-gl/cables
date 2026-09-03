@@ -5,13 +5,13 @@ let pRender = op.inValueBool("Render", true);
 let pInvert = op.inValueBool("Invert", false);
 let pIgnoreBorderCells = op.inValueBool("Ignore Border Cells", false);
 
-let pWidth = op.inValue("Width", 2);
-let pHeight = op.inValue("Height", 2);
+let pWidth = op.inFloat("Width", 2);
+let pHeight = op.inFloat("Height", 2);
 
 let fill = op.inValueSlider("Fill", 0);
-let pExtrCenter = op.inValue("Extrude Cell Center", 0.1);
-let maxSize = op.inValue("Scale Out Size Start", 0);
-let maxSizeEnd = op.inValue("Scale Out Size End", 0);
+let pExtrCenter = op.inFloat("Extrude Cell Center", 0.1);
+let maxSize = op.inFloat("Scale Out Size Start", 0);
+let maxSizeEnd = op.inFloat("Scale Out Size End", 0);
 
 let inCalcNormals = op.inValueBool("Calc Normals", true);
 let next = op.outTrigger("Next");

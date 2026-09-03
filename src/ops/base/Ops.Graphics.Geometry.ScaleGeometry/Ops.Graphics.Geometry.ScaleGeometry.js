@@ -1,11 +1,11 @@
 const
     geometry = op.inObject("Geometry"),
     inMeth = op.inSwitch("Method", ["Factor", "Target Size X", "Target Size Y", "Target Size Z"], "Factor"),
-    scale = op.inValue("Scale", 1),
+    scale = op.inFloat("Scale", 1),
 
-    scaleX = op.inValue("Multiply X", 1),
-    scaleY = op.inValue("Multiply Y", 1),
-    scaleZ = op.inValue("Multiply Z", 1),
+    scaleX = op.inFloat("Multiply X", 1),
+    scaleY = op.inFloat("Multiply Y", 1),
+    scaleZ = op.inFloat("Multiply Z", 1),
     outGeom = op.outObject("Result", null, "geometry");
 
 op.setUiAxisPorts(scaleX, scaleY, scaleZ);

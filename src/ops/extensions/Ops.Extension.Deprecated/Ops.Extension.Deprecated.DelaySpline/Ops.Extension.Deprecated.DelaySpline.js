@@ -1,9 +1,9 @@
 op.name = "DelaySpline";
 
 let render = op.inTrigger("render");
-let x = op.inValue("X");
-let y = op.inValue("Y");
-let z = op.inValue("Z");
+let x = op.inFloat("X");
+let y = op.inFloat("Y");
+let z = op.inFloat("Z");
 
 let next = op.outTrigger("next");
 let cgl = op.patch.cgl;

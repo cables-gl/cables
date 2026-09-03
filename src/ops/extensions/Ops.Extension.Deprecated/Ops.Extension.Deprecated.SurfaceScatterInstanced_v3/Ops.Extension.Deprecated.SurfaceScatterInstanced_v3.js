@@ -6,7 +6,7 @@ const
     inGeom = op.inObject("Geometry"),
     inDistribution = op.inValueSelect("Distribution", ["Vertex", "Triangle Center", "Triangle Side", "Random Triangle Point"], "Vertex"),
     inVariety = op.inValueSelect("Selection", ["Random", "Sequential"], "Random"),
-    seed = op.inValueFloat("Random Seed"),
+    seed = op.inFloat("Random Seed"),
     inSizeMin = op.inValueSlider("Size min", 1.0),
     inSizeMax = op.inValueSlider("Size max", 1.0),
     inDoLimit = op.inValueBool("Limit", false),

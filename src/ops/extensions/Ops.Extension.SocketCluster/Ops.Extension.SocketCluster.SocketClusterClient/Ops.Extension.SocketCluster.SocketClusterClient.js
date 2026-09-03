@@ -1,6 +1,6 @@
 const serverHostname = op.inString("server hostname", "");
 const serverPath = op.inString("server path", "/socketcluster/");
-const serverPort = op.inValue("server port", 443);
+const serverPort = op.inFloat("server port", 443);
 const serverSecure = op.inBool("use ssl", true);
 const allowSend = op.inBool("allow send", false);
 const allowMultipleSenders = op.inBool("allow multiple senders", false);

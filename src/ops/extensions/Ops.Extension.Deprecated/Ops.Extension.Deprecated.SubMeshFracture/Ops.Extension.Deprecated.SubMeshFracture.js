@@ -3,17 +3,17 @@ let next = op.outTrigger("trigger");
 
 let inArea = op.inValueSelect("Area", ["Sphere", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere");
 
-let inAmount = op.inValue("Amount", 1);
-let inSize = op.inValue("Size", 20);
+let inAmount = op.inFloat("Amount", 1);
+let inSize = op.inFloat("Size", 20);
 let inFalloff = op.inValueSlider("Falloff", 0.5);
 let inScale = op.inValueSlider("Scale", 1);
 let inInvert = op.inValueBool("Invert");
 
 {
     // position
-    var x = op.inValue("x");
-    var y = op.inValue("y");
-    var z = op.inValue("z");
+    var x = op.inFloat("x");
+    var y = op.inFloat("y");
+    var z = op.inFloat("z");
 }
 
 let shader = null;

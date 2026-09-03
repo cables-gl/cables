@@ -4,7 +4,7 @@ let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION))
 
 let varname = op.addInPort(new CABLES.Port(op, "name", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
 let val = op.addOutPort(new CABLES.Port(op, "val", CABLES.OP_PORT_TYPE_VALUE));
-let defaultValue = op.inValue("Default Value", 0);
+let defaultValue = op.inFloat("Default Value", 0);
 
 val.ignoreValueSerialize = true;
 

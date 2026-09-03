@@ -4,7 +4,7 @@ const
     meshIndex = op.inValueInt("Mesh Index", 0),
     inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no"),
     inResize = op.inBool("Resize", true),
-    inSize = op.inValue("New Size", 1),
+    inSize = op.inFloat("New Size", 1),
     centerPivot = op.inValueBool("Center", true),
     merge = op.inValueBool("Merge All", false),
     next = op.outTrigger("trigger"),

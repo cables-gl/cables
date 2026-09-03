@@ -11,7 +11,7 @@ let FREQ_DEFAULT = 0;
 let LOWEST_NOTE = "C-4";
 
 // inputs
-let frequencyPort = op.inValue("Frequency");
+let frequencyPort = op.inFloat("Frequency");
 
 // change listeners
 frequencyPort.onChange = function ()

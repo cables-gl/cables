@@ -1,21 +1,21 @@
 let exec = op.inTrigger("Exec");
 let doreset = op.inTriggerButton("reset");
 
-let num = op.inValue("num", 20);
+let num = op.inFloat("num", 20);
 
-let range = op.inValue("Range Radius", 1);
-let attraction = op.inValue("attraction");
-let angle = op.inValue("Angle");
+let range = op.inFloat("Range Radius", 1);
+let attraction = op.inFloat("attraction");
+let angle = op.inFloat("Angle");
 let show = op.inValueBool("Show");
-let seed = op.inValue("Random Seed");
+let seed = op.inFloat("Random Seed");
 
-let posX = op.inValue("Pos X");
-let posY = op.inValue("Pos Y");
-let posZ = op.inValue("Pos Z");
+let posX = op.inFloat("Pos X");
+let posY = op.inFloat("Pos Y");
+let posZ = op.inFloat("Pos Z");
 
-let areaX = op.inValue("Area X");
-let areaY = op.inValue("Area Y");
-let areaZ = op.inValue("Area Z");
+let areaX = op.inFloat("Area X");
+let areaY = op.inFloat("Area Y");
+let areaZ = op.inFloat("Area Z");
 
 let next = op.outTrigger("next");
 

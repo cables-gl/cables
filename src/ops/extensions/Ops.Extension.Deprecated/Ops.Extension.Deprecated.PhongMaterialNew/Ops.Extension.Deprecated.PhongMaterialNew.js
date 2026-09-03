@@ -9,7 +9,7 @@ let render = this.addInPort(new CABLES.Port(this, "execute", CABLES.OP_PORT_TYPE
 let trigger = this.addOutPort(new CABLES.Port(this, "next", CABLES.OP_PORT_TYPE_FUNCTION));
 let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.OP_PORT_TYPE_OBJECT));
 
-// var specularStrength=op.inValue("Specular Strength",1);
+// var specularStrength=op.inFloat("Specular Strength",1);
 let shininess = op.inValueSlider("Shininess", 0.5);
 let fresnel = op.inValueSlider("Fresnel", 0);
 
@@ -65,7 +65,7 @@ for (var i = 0; i < MAX_LIGHTS; i++)
     // lights[count].depthMVP=new CGL.Uniform(shader,'m4','lights['+count+'].depthMVP',mat4.create());
 }
 
-let normIntensity = op.inValue("Normal Texture Intensity", 1);
+let normIntensity = op.inFloat("Normal Texture Intensity", 1);
 let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIntensity);
 
 function updateShininess()

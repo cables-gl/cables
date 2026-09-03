@@ -1,15 +1,15 @@
 const exe = op.inTrigger("exe");
-const timer = op.inValue("time");
-const num = op.inValue("num", 100);
-const sizeX = op.inValue("Size X");
-const sizeY = op.inValue("Size Y");
-const sizeZ = op.inValue("Size Z");
-const movementX = op.inValue("movement x", 1);
-const movementY = op.inValue("movement y", 1);
-const movementZ = op.inValue("movement z", 1);
+const timer = op.inFloat("time");
+const num = op.inFloat("num", 100);
+const sizeX = op.inFloat("Size X");
+const sizeY = op.inFloat("Size Y");
+const sizeZ = op.inFloat("Size Z");
+const movementX = op.inFloat("movement x", 1);
+const movementY = op.inFloat("movement y", 1);
+const movementZ = op.inFloat("movement z", 1);
 const inReset = op.inTriggerButton("Reset");
-const lifetime = op.inValue("lifetime", 10);
-const lifetimeMin = op.inValue("Lifetime Minimum", 5);
+const lifetime = op.inFloat("lifetime", 10);
+const lifetimeMin = op.inFloat("Lifetime Minimum", 5);
 
 const trigger = op.outTrigger("trigger");
 const idx = op.outValue("index");

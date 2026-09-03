@@ -1,14 +1,14 @@
 op.name = "PointSpray";
 
 let render = op.inTrigger("render");
-let timeIn = op.inValue("time");
-let sizeY = op.inValue("Size Y");
-let sinY = op.inValue("Sin Y");
-let sizeZ = op.inValue("Size Z");
-let sinZ = op.inValue("Sin Z");
-let lifeTime = op.inValue("Lifetime", 2);
-let speed = op.inValue("Speed", 1);
-let numPoints = op.inValue("Num Points", 1000);
+let timeIn = op.inFloat("time");
+let sizeY = op.inFloat("Size Y");
+let sinY = op.inFloat("Sin Y");
+let sizeZ = op.inFloat("Size Z");
+let sinZ = op.inFloat("Sin Z");
+let lifeTime = op.inFloat("Lifetime", 2);
+let speed = op.inFloat("Speed", 1);
+let numPoints = op.inFloat("Num Points", 1000);
 let simTexPosOut = op.outObject("SimPosTex");
 
 let cgl = op.patch.cgl;

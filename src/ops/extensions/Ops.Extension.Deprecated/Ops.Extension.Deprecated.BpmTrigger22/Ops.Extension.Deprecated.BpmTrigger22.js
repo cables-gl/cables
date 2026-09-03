@@ -1,7 +1,7 @@
 let trigger = op.inTrigger("trigger");
 
-let inBpm = op.inValue("BPM", 120);
-let inOffset = op.inValue("Offset", 0);
+let inBpm = op.inFloat("BPM", 120);
+let inOffset = op.inFloat("Offset", 0);
 
 let next = op.outTrigger("trigger out");
 let outBeat = op.outValue("beat num");

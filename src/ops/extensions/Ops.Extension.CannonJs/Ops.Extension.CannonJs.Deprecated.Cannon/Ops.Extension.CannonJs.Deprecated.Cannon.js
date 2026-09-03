@@ -1,18 +1,18 @@
 const exec = op.inTrigger("Exec");
-const inMass = op.inValue("Mass");
-const inRadius = op.inValue("Radius");
+const inMass = op.inFloat("Mass");
+const inRadius = op.inFloat("Radius");
 
 const doRender = op.inValueBool("Render", true);
 
-const posX = op.inValue("Pos X");
-const posY = op.inValue("Pos Y");
-const posZ = op.inValue("Pos Z");
+const posX = op.inFloat("Pos X");
+const posY = op.inFloat("Pos Y");
+const posZ = op.inFloat("Pos Z");
 
-const dirX = op.inValue("dir X");
-const dirY = op.inValue("dir Y");
-const dirZ = op.inValue("dir Z");
+const dirX = op.inFloat("dir X");
+const dirY = op.inFloat("dir Y");
+const dirZ = op.inFloat("dir Z");
 
-const speed = op.inValue("Speed");
+const speed = op.inFloat("Speed");
 
 const inReset = op.inTriggerButton("Reset");
 const inSpawn = op.inTriggerButton("Spawn");

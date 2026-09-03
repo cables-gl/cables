@@ -12,7 +12,7 @@ let synthPort = op.inObject("Synth");
 let startPort = op.addInPort(new CABLES.Port(this, "Start Play", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let stopPort = op.addInPort(new CABLES.Port(this, "Stop Play", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 let notePort = op.inValueString("Note", "C5");
-let velocityPort = op.inValue("Velocity", DEFAULT_VELOCITY);
+let velocityPort = op.inFloat("Velocity", DEFAULT_VELOCITY);
 let timePort = op.inValueString("Time");
 
 // output ports

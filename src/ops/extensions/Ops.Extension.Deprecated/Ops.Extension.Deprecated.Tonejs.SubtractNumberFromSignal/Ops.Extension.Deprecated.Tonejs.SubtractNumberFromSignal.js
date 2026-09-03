@@ -8,7 +8,7 @@ let node = new Tone.Subtract(0);
 
 // input ports
 let signalPort = CABLES.WEBAUDIO.createAudioInPort(op, "Signal 1", node);
-let valuePort = op.inValue("Value", VALUE_DEFAULT);
+let valuePort = op.inFloat("Value", VALUE_DEFAULT);
 
 // listeners
 valuePort.onChange = function ()

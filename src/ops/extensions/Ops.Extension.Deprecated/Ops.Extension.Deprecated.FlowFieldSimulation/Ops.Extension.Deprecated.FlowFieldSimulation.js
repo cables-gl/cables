@@ -3,7 +3,7 @@ let next = op.outTrigger("next");
 
 let inReset = op.inTrigger("Reset");
 let inRespawn = op.inTrigger("Respawn all");
-let inDamping = op.inValue("Damping");
+let inDamping = op.inFloat("Damping");
 
 let outSpeed = op.outValue("Speed");
 let col = op.outValue("color");

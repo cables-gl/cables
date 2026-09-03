@@ -29,8 +29,8 @@ let node = new Tone.LFO(FREQUENCY_DEFAULT, MIN_DEFAULT, MAX_DEFAULT).start();
 // input ports
 let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 let amplitudePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Amplitude", node.amplitude, AMPLITUDE_DEFAULT);
-let minPort = op.inValue("Min", MIN_DEFAULT);
-let maxPort = op.inValue("Max", MAX_DEFAULT);
+let minPort = op.inFloat("Min", MIN_DEFAULT);
+let maxPort = op.inFloat("Max", MAX_DEFAULT);
 let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set("sine");
 let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }, PHASE_DEFAULT));

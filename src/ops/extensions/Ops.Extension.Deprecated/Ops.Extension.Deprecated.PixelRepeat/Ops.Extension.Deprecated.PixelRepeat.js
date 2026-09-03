@@ -12,7 +12,7 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.pixelrepeat_frag);
 let uniMask = new CGL.Uniform(shader, "t", "mask", 1);
 let unTex = new CGL.Uniform(shader, "t", "tex", 0);
 
-let time = op.inValue("Time");
+let time = op.inFloat("Time");
 let uniTime = new CGL.Uniform(shader, "f", "time", time);
 
 let mask = op.addInPort(new CABLES.Port(op, "mask", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
