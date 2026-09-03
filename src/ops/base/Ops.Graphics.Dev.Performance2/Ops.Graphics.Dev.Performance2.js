@@ -109,9 +109,9 @@ op.on("delete", () =>
 
 function drawGraph(name, posy, q, col)
 {
-    ctx.fillStyle = col;
     let k = 0;
-    let hmul = height / 24;
+    let maxMs = 25;
+    let hmul = height / maxMs;
     if (q.length == 0)
         for (let i = 0; i < numBars; i++) q.push({ "ms": 0 });
 
@@ -120,7 +120,9 @@ function drawGraph(name, posy, q, col)
     {
         if (q[k])
         {
-            const itemHeight = ((q[k].ms || q[k].num * 3 || 0) * hmul);
+            const itemHeight = Math.min(maxMs, ((q[k].ms || q[k].num * 3 || 0) * hmul));
+            if (itemHeight == maxMs) ctx.fillStyle = "#ff0000";
+            else ctx.fillStyle = col;
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
 
             avg += q[k].ms || 0;
@@ -150,8 +152,10 @@ function updateCanvas()
 
     ctx.fillStyle = colorBg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0, height + 1, canvas.width, 1);
+
+    ctx.fillStyle = "#555555";
+    for (let y = height; y < canvas.height; y += height)
+        ctx.fillRect(0, y, canvas.width, 1);
 
     drawGraph("CPU", 0, queueCPU, "#999900");
     drawGraph("GPU", height, queueGPU, "#007777");
