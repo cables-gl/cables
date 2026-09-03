@@ -17,14 +17,14 @@ let glExt = null;
 let cgl = null;
 let query = null;
 let glqueryagain = 0;
-let heavyEvents = 0;
+let heavyEvents = [];
 
 if (op.patch.cgl)
 {
 
-    op.patch.cgl.on("heavyEvent", () =>
+    op.patch.cgl.on("heavyEvent", (e) =>
     {
-        heavyEvents++;
+        heavyEvents.push(e.event);
     });
 }
 
@@ -94,9 +94,9 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
-    queueEvents.push({ "num": heavyEvents });
+    queueEvents.push({ "num": heavyEvents.length, "name": heavyEvents.join(",") });
     queueEvents.shift();
-    heavyEvents = 0;
+    heavyEvents = [];
 
     updateCanvas();
 });
@@ -116,6 +116,7 @@ function drawGraph(name, posy, q, col)
         for (let i = 0; i < numBars; i++) q.push({ "ms": 0 });
 
     let avg = 0;
+    let info = "";
     for (k = numBars; k >= 0; k--)
     {
         if (q[k])
@@ -125,12 +126,13 @@ function drawGraph(name, posy, q, col)
             else ctx.fillStyle = col;
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
 
+            if (q[k].name && k > numBars - 30) info += q[k].name;
             avg += q[k].ms || 0;
         }
     }
 
     ctx.fillStyle = "#FFFFFF";
-    let title = name;
+    let title = name + " ";
     if (avg)
     {
         avg = (avg / numBars).toPrecision(2);
@@ -139,13 +141,11 @@ function drawGraph(name, posy, q, col)
     }
 
     ctx.fillText(title, 5, posy + 16);
+    if (info) ctx.fillText(info, 5, posy + 32);
 }
 
 function updateCanvas()
 {
-    // const height = canvas.height;
-    // const hmul = inScaleGraph.get();
-
     const colorBg = "#333333";
 
     ctx.font = "11px monospace";
