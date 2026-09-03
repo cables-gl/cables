@@ -9,6 +9,7 @@ let height = 40;
 let containerEle = document.body;
 let queueCPU = [];
 let queueGPU = [];
+let queueEvents = [];
 createCanvas();
 let type = null;
 
@@ -16,6 +17,17 @@ let glExt = null;
 let cgl = null;
 let query = null;
 let glqueryagain = 0;
+let heavyEvents = 0;
+
+if (op.patch.cgl)
+{
+
+    op.patch.cgl.on("heavyEvent", () =>
+    {
+        heavyEvents++;
+    });
+}
+
 trig.onTriggered = () =>
 {
 
@@ -82,6 +94,10 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
+    queueEvents.push({ "num": heavyEvents });
+    queueEvents.shift();
+    heavyEvents = 0;
+
     updateCanvas();
 });
 
@@ -104,17 +120,23 @@ function drawGraph(name, posy, q, col)
     {
         if (q[k])
         {
-            const itemHeight = (q[k].ms * hmul);
+            const itemHeight = ((q[k].ms || q[k].num * 3 || 0) * hmul);
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
 
-            avg += q[k].ms;
+            avg += q[k].ms || 0;
         }
     }
 
-    avg = (avg / numBars).toPrecision(2);
-
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText(name + " " + avg + "ms", 5, posy + 16);
+    let title = name;
+    if (avg)
+    {
+        avg = (avg / numBars).toPrecision(2);
+
+        title += avg + "ms";
+    }
+
+    ctx.fillText(title, 5, posy + 16);
 }
 
 function updateCanvas()
@@ -133,36 +155,7 @@ function updateCanvas()
 
     drawGraph("CPU", 0, queueCPU, "#999900");
     drawGraph("GPU", height, queueGPU, "#007777");
-    // console.log("q",queueGPU);
-
-    // for (k = numBars; k >= 0; k--)
-    // {
-    //     let sum = 0;
-    //     ctx.fillStyle = colorMainloop;
-    //     sum = timesMainloop[k];
-    //     ctx.fillRect(numBars - k, height - sum * hmul, 1, timesMainloop[k] * hmul);
-
-    //     ctx.fillStyle = colorOnFrame;
-    //     sum += timesOnFrame[k];
-    //     ctx.fillRect(numBars - k, height - sum * hmul, 1, timesOnFrame[k] * hmul);
-
-    //     ctx.fillStyle = colorGPU;
-    //     sum += timesGPU[k];
-    //     ctx.fillRect(numBars - k, height - sum * hmul, 1, timesGPU[k] * hmul);
-    // }
-
-    // for (let i = 10; i < height; i += 10)
-    // {
-    //     ctx.fillStyle = "#888";
-    //     const y = height - (i * hmul);
-    //     ctx.fillRect(canvas.width - 5, y, 5, 1);
-    //     ctx.font = "8px arial";
-
-    // }
-
-    // ctx.fillStyle = "#fff";
-    // ctx.fillRect(canvas.width - 5, height - (1000 / fps * hmul), 5, 1);
-    // ctx.fillText(Math.round(1000 / fps) + "ms", canvas.width - 27, height - (1000 / fps * hmul));
+    drawGraph("EVENTS", height * 2, queueEvents, "#aa7700");
 }
 
 function createCanvas()
@@ -170,7 +163,7 @@ function createCanvas()
     canvas = document.createElement("canvas");
     canvas.id = "performance_";
     canvas.width = numBars;
-    canvas.height = height * 2;
+    canvas.height = height * 3;
     canvas.style.width = numBars + "px";
     canvas.style.height = canvas.height + "px";
     canvas.style.display = "block";
