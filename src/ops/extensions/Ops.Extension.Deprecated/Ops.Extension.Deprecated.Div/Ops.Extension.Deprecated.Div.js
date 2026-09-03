@@ -8,8 +8,8 @@ let classes = op.inValueString("Class");
 let visible = op.addInPort(new CABLES.Port(op, "Visible", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 visible.set(true);
 
-let doCenterX = op.inValueBool("Center X", false);
-let doCenterY = op.inValueBool("Center Y", false);
+let doCenterX = op.inBool("Center X", false);
+let doCenterY = op.inBool("Center Y", false);
 
 let posLeft = op.addInPort(new CABLES.Port(op, "Left", CABLES.OP_PORT_TYPE_VALUE));
 let posTop = op.addInPort(new CABLES.Port(op, "Top", CABLES.OP_PORT_TYPE_VALUE));

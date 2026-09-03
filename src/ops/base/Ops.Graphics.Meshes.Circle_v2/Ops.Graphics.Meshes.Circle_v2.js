@@ -1,15 +1,15 @@
 const
     render = op.inTrigger("render"),
-    inDraw = op.inValueBool("Draw", true),
+    inDraw = op.inBool("Draw", true),
 
     radius = op.inValue("radius", 0.5),
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),
     steps = op.inValue("steps", 0),
-    invertSteps = op.inValueBool("invertSteps", false),
+    invertSteps = op.inBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"]),
-    drawSpline = op.inValueBool("Spline", false),
+    drawSpline = op.inBool("Spline", false),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry", null, "geometry");
 

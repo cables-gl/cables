@@ -1,6 +1,6 @@
 let render = op.inTrigger("Render");
 
-let inSmooth = op.inValueBool("Smooth", true);
+let inSmooth = op.inBool("Smooth", true);
 let next = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;

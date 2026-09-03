@@ -5,8 +5,8 @@ const
     inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "40%", "30%", "25%", "20%", "10%"], "cover"),
     inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
     inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
-    active = op.inValueBool("active", true),
-    inNotUnset = op.inValueBool("Never Unset", false),
+    active = op.inBool("active", true),
+    inNotUnset = op.inBool("Never Unset", false),
     outEle = op.outObject("HTML Element");
 
 op.onLoadedValueSet =

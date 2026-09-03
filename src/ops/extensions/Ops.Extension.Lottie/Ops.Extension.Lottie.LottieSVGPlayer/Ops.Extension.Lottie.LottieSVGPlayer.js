@@ -4,9 +4,9 @@ const
     inPlayMode = op.inSwitch("Play Mode", ["Auto", "Frame"], "Auto"),
 
     inFrame = op.inFloat("Render Frame", 0),
-    inLoop = op.inValueBool("Loop", true),
+    inLoop = op.inBool("Loop", true),
 
-    inPlay = op.inValueBool("Play", true),
+    inPlay = op.inBool("Play", true),
 
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),

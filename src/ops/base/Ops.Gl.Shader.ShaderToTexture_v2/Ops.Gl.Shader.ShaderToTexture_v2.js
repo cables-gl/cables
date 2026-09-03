@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Render"),
     inShader = op.inObject("Shader", null, "shader"),
-    // inVPSize = op.inValueBool("Use Viewport Size", true),
+    // inVPSize = op.inBool("Use Viewport Size", true),
     inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Manual"),
     inWidth = op.inValueInt("Width", 512),
     inHeight = op.inValueInt("Height", 512),

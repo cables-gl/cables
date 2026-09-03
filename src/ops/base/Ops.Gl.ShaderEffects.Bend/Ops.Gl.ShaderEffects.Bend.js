@@ -5,7 +5,7 @@ const rotZ=op.inValue('RotZ');
 const scale=op.inValue('Scale', 1);
 const offset=op.inValue('Offset');
 const amount=op.inValue('Amount');
-const limited=op.inValueBool('Limited', true);
+const limited=op.inBool('Limited', true);
 const next=op.outTrigger("trigger")
 
 const srcHeadVert=attachments.bend_vert;

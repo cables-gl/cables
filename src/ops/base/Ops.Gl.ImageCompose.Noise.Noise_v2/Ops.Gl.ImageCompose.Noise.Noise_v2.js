@@ -4,9 +4,9 @@ const
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
     amount = op.inValueSlider("Amount", 1),
     thresh = op.inValueSlider("Threshold", 0),
-    animated = op.inValueBool("Animated", true),
-    inRGB = op.inValueBool("RGB", false),
-    normalize = op.inValueBool("Normalize", false),
+    animated = op.inBool("Animated", true),
+    inRGB = op.inBool("RGB", false),
+    normalize = op.inBool("Normalize", false),
     inTexMul = op.inTexture("Multiply"),
     trigger = op.outTrigger("Next");
 

@@ -3,7 +3,7 @@ const
     next=op.outTrigger("trigger"),
     inScale=op.inValue("Scale",10),
     inAmount=op.inValueSlider("Amount",0.3),
-    inWorldSpace=op.inValueBool("WorldSpace");
+    inWorldSpace=op.inBool("WorldSpace");
 
 const
     r = op.inValueSlider("r",0),

@@ -2,7 +2,7 @@ const
     render = op.inTriggerButton("Render"),
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
-    maximize = op.inValueBool("Maximize Size", true),
+    maximize = op.inBool("Maximize Size", true),
     inFontSize = op.inValueFloat("fontSize", 30),
     lineDistance = op.inValueFloat("line distance", 1),
     limitLines = op.inValueInt("Limit Lines", 0),
@@ -14,11 +14,11 @@ const
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
     border = op.inValueFloat("border", 0),
-    cachetexture = op.inValueBool("Reuse Texture", true),
+    cachetexture = op.inBool("Reuse Texture", true),
 
-    drawMesh = op.inValueBool("Draw Mesh", true),
+    drawMesh = op.inBool("Draw Mesh", true),
     meshScale = op.inValueFloat("Scale Mesh", 1.0),
-    renderHard = op.inValueBool("Hard Edges", false),
+    renderHard = op.inBool("Hard Edges", false),
 
     inOpacity = op.inFloatSlider("Opacity", 1),
 

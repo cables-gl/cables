@@ -5,7 +5,7 @@ const
     seed = op.inValueFloat("random seed", 1),
     values = op.outArray("values"),
     outArrayLength = op.outNumber("Array length"),
-    inInteger = op.inValueBool("Integer", false);
+    inInteger = op.inBool("Integer", false);
 
 values.ignoreValueSerialize = true;
 op.setPortGroup("Value Range", [min, max]);

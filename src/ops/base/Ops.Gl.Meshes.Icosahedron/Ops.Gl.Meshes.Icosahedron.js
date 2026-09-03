@@ -2,7 +2,7 @@
 
 const
     render = op.inTrigger("render"),
-    smooth = op.inValueBool("smooth"),
+    smooth = op.inBool("smooth"),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
 

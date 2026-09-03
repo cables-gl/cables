@@ -8,10 +8,10 @@ const
 
 op.setPortGroup("Size", [sizeW, sizeH, borderRadius, inSegments]);
 
-const inTopLeftCorner = op.inValueBool("Top Left", true);
-const inTopRightCorner = op.inValueBool("Top Right", true);
-const inBottomLeftCorner = op.inValueBool("Bottom Left", true);
-const inBottomRightCorner = op.inValueBool("Bottom Right", true);
+const inTopLeftCorner = op.inBool("Top Left", true);
+const inTopRightCorner = op.inBool("Top Right", true);
+const inBottomLeftCorner = op.inBool("Bottom Left", true);
+const inBottomRightCorner = op.inBool("Bottom Right", true);
 const CORNER_PORTS = [inTopLeftCorner, inTopRightCorner, inBottomLeftCorner, inBottomRightCorner];
 CORNER_PORTS.forEach((port) =>
 {

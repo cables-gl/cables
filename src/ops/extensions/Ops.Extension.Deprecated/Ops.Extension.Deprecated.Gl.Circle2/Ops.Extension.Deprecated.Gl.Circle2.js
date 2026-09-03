@@ -4,7 +4,7 @@ const
     innerRadius = op.inValueSlider("innerRadius", 0),
     segments = op.inValueInt("segments", 40),
     percent = op.inValueSlider("percent", 1),
-    inDraw = op.inValueBool("Draw", true),
+    inDraw = op.inBool("Draw", true),
     outNext = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry");
 

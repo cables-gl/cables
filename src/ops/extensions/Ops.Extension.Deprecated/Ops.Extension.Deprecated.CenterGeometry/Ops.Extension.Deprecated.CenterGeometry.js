@@ -1,8 +1,8 @@
 let geometry = op.addInPort(new CABLES.Port(op, "Geometry", CABLES.OP_PORT_TYPE_OBJECT));
 
-let x = op.inValueBool("x");
-let y = op.inValueBool("y");
-let z = op.inValueBool("z");
+let x = op.inBool("x");
+let y = op.inBool("y");
+let z = op.inBool("z");
 
 let outGeom = op.outObject("Result");
 

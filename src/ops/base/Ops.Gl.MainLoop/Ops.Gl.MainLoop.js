@@ -3,13 +3,13 @@ const
     trigger = op.outTrigger("trigger"),
     width = op.outNumber("width"),
     height = op.outNumber("height"),
-    reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", false),
-    reduceLoadingFPS = op.inValueBool("Reduce FPS loading"),
-    clear = op.inValueBool("Clear", true),
-    clearAlpha = op.inValueBool("ClearAlpha", true),
-    fullscreen = op.inValueBool("Fullscreen Button", false),
-    active = op.inValueBool("Active", true),
-    hdpi = op.inValueBool("Hires Displays", false),
+    reduceFocusFPS = op.inBool("Reduce FPS not focussed", false),
+    reduceLoadingFPS = op.inBool("Reduce FPS loading"),
+    clear = op.inBool("Clear", true),
+    clearAlpha = op.inBool("ClearAlpha", true),
+    fullscreen = op.inBool("Fullscreen Button", false),
+    active = op.inBool("Active", true),
+    hdpi = op.inBool("Hires Displays", false),
     inUnit = op.inSwitch("Pixel Unit", ["Display", "CSS"], "Display");
 
 op.onAnimFrame = render;

@@ -4,13 +4,13 @@ let trigger = op.outTrigger("Trigger");
 let inId = op.inValueString("id");
 let pPointSize = op.inFloat("Size Point", 10);
 
-let show = op.inValueBool("show", true);
+let show = op.inBool("show", true);
 let index = op.inFloat("index");
 let title = op.inValueString("Title");
 
 let inText = op.inValueString("Text");
 
-let ignore = op.inValueBool("Ignore Mouse");
+let ignore = op.inBool("Ignore Mouse");
 
 let outHovering = op.outValue("Hovering", false);
 let outHoverIndex = op.outValue("Hover Index", -1);

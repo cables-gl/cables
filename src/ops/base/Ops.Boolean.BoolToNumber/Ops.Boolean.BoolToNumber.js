@@ -1,5 +1,5 @@
 const
-    bool = op.inValueBool("bool"),
+    bool = op.inBool("bool"),
     number = op.outNumber("number");
 
 bool.onChange = function ()

@@ -2,14 +2,14 @@ const
     render = op.inTrigger("Render"),
     size = op.inValue("Size", 1),
     thick = op.inValue("Thickness", 0.25),
-    target = op.inValueBool("Crosshair"),
+    target = op.inBool("Crosshair"),
 
-    showLeft = op.inValueBool("Left", true),
-    showRight = op.inValueBool("Right", true),
-    showTop = op.inValueBool("Top", true),
-    showBottom = op.inValueBool("Bottom", true),
+    showLeft = op.inBool("Left", true),
+    showRight = op.inBool("Right", true),
+    showTop = op.inBool("Top", true),
+    showBottom = op.inBool("Bottom", true),
 
-    inDraw = op.inValueBool("Active", true),
+    inDraw = op.inBool("Active", true),
 
     trigger = op.outTrigger("Next"),
     geomOut = op.outObject("Geometry");

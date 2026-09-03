@@ -12,9 +12,9 @@ const
     texDepth = op.outTexture("textureDepth"),
     outFb = op.outObject("Framebuffer", null, "framebuffer"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
-    depth = op.inValueBool("Depth", true),
+    depth = op.inBool("Depth", true),
     inDepth = op.inObject("Depth Buffer", null, "framebuffer"),
-    clear = op.inValueBool("Clear", true);
+    clear = op.inBool("Clear", true);
 
 const cgl = op.patch.cgl;
 let fb = null;

@@ -5,8 +5,8 @@
 const render = op.inTrigger("render");
 const inCubemap = op.inObject("Cubemap");
 const inReflectionCubemap = op.inObject("Reflection Cubemap");
-const inFlipY = op.inValueBool("Flip Y");
-const inFlipX = op.inValueBool("Flip X");
+const inFlipY = op.inBool("Flip Y");
+const inFlipX = op.inBool("Flip X");
 const inRough = op.inTexture("Roughness");
 const inRoughMul = op.inValueSlider("Roughness Amount", 0);
 const inReflection = op.inTexture("Reflection");

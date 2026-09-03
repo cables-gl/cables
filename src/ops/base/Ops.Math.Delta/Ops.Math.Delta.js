@@ -1,6 +1,6 @@
 const
     val = op.inValue("Value"),
-    changeAlwaysPort = op.inValueBool("Change Always", false),
+    changeAlwaysPort = op.inBool("Change Always", false),
     inReset = op.inTrigger("Reset"),
     result = op.outNumber("Delta");
 

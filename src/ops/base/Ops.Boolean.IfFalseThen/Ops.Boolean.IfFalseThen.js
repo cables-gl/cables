@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("Exe"),
-    boolean = op.inValueBool("Boolean", false),
+    boolean = op.inBool("Boolean", false),
     triggerThen = op.outTrigger("then"),
     triggerElse = op.outTrigger("else");
 

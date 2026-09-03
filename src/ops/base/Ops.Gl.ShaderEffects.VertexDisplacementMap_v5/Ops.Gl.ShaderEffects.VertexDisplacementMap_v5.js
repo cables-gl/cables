@@ -13,10 +13,10 @@ const
     offsetY = op.inValueFloat("Offset Y"),
     scale = op.inValueFloat("Scale", 1),
 
-    calcNormals = op.inValueBool("Calc Normals", false),
+    calcNormals = op.inBool("Calc Normals", false),
     calcNormalsAxis = op.inSwitch("Normal Axis", ["X", "Y", "Z"], "Z"),
-    removeZero = op.inValueBool("Discard Zero Values"),
-    colorize = op.inValueBool("colorize", false),
+    removeZero = op.inBool("Discard Zero Values"),
+    colorize = op.inBool("colorize", false),
     colorizeMin = op.inValueSlider("Colorize Min", 0),
     colorizeMax = op.inValueSlider("Colorize Max", 1),
     next = op.outTrigger("trigger");

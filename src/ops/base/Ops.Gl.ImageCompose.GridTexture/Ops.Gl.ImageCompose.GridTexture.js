@@ -10,7 +10,7 @@ const inRotate = op.inValueSlider("Rotate", 0.0);
 const offsetX = op.inValue("Offset X", 0.0);
 const offsetY = op.inValue("Offset Y", 0.0);
 
-const invertColor = op.inValueBool("Invert color", false);
+const invertColor = op.inBool("Invert color", false);
 const r = op.inValueSlider("Line red", Math.random());
 const g = op.inValueSlider("Line green", Math.random());
 const b = op.inValueSlider("Line Blue", Math.random());

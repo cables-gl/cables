@@ -11,7 +11,7 @@ const
     inY = op.inValue("Pos Y", 0),
     fallOff = op.inValueSelect("fallOff", ["Linear", "SmoothStep"], "Linear"),
     inFadeOut = op.inValueSlider("fade Out"),
-    warnOverflow = op.inValueBool("warn overflow", false),
+    warnOverflow = op.inBool("warn overflow", false),
     r = op.inValueSlider("r", 1),
     g = op.inValueSlider("g", 1),
     b = op.inValueSlider("b", 1),

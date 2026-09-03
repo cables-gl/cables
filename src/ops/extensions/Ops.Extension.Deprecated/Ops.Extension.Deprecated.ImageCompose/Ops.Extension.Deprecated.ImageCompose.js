@@ -6,8 +6,8 @@ let width = op.addInPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE)
 let height = op.addInPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
 let tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
 
-let fpTexture = op.inValueBool("HDR");
-let clear = op.inValueBool("Clear", true);
+let fpTexture = op.inBool("HDR");
+let clear = op.inBool("Clear", true);
 
 let trigger = op.outTrigger("trigger");
 let texOut = op.outTexture("texture_out");

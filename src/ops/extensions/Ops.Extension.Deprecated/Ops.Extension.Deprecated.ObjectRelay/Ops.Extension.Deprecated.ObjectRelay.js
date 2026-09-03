@@ -1,6 +1,6 @@
 // input
 let objectInPort = op.inObject("Object In");
-let enabledPort = op.inValueBool("Enabled");
+let enabledPort = op.inBool("Enabled");
 
 // output
 let objectOutPort = op.outObject("Object Out");

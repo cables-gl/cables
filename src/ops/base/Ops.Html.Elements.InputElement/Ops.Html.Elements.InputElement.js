@@ -11,7 +11,7 @@ const
     inMaxLength = op.inInt("Max Length", 0),
     inEnterPrev = op.inBool("Enter Key Prevent Default", false),
 
-    inVisible = op.inValueBool("Visible", true),
+    inVisible = op.inBool("Visible", true),
 
     inFocus = op.inTriggerButton("Focus"),
     inBlur = op.inTriggerButton("Blur"),

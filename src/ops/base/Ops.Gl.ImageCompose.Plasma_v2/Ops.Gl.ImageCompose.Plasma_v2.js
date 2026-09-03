@@ -10,7 +10,7 @@ const
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     time = op.inValue("Time", 1),
-    greyscale = op.inValueBool("Greyscale", true),
+    greyscale = op.inBool("Greyscale", true),
 
     inTexOffsetZ = op.inTexture("Offset"),
     inOffsetMul = op.inFloat("Offset Multiply", 1),

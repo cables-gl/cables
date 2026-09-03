@@ -1,6 +1,6 @@
 const
     hex = op.inString("Hex", "#ff0000"),
-    asBytes = op.inValueBool("Bytes"),
+    asBytes = op.inBool("Bytes"),
     outR = op.outNumber("R"),
     outG = op.outNumber("G"),
     outB = op.outNumber("B"),

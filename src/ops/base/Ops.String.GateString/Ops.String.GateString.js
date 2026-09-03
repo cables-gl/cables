@@ -1,6 +1,6 @@
 const
     valueInPort = op.inString("String In", "hello"),
-    passThroughPort = op.inValueBool("Pass Through", false),
+    passThroughPort = op.inBool("Pass Through", false),
     inIfNot = op.inSwitch("When False", ["keep last string", "custom"], "keep last string"),
     inCustomNot = op.inString("Custom Value"),
     valueOutPort = op.outString("String Out", "");

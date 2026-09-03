@@ -1,7 +1,7 @@
 const
     interval = op.inValue("interval"),
     trigger = op.outTrigger("trigger"),
-    active = op.inValueBool("Active", true);
+    active = op.inBool("Active", true);
 
 active.onChange = function ()
 {

@@ -8,11 +8,11 @@ const
     pivotX = op.inValueSelect("Pivot x", ["center", "left", "right"]),
     pivotY = op.inValueSelect("Pivot y", ["center", "top", "bottom"]),
     axis = op.inValueSelect("Axis", ["xy", "xz"]),
-    isInteractive = op.inValueBool("Is Interactive", true),
-    renderRect = op.inValueBool("Render Rectangle", true),
-    divVisible = op.inValueBool("Show Boundings", true),
+    isInteractive = op.inBool("Is Interactive", true),
+    renderRect = op.inBool("Render Rectangle", true),
+    divVisible = op.inBool("Show Boundings", true),
     cursorPort = op.inValueSelect("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer"),
-    active = op.inValueBool("Render", true);
+    active = op.inBool("Render", true);
 
 const geomOut = op.outObject("geometry");
 geomOut.ignoreValueSerialize = true;

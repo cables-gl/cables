@@ -7,7 +7,7 @@ const
     inNum = op.inValueInt("Num", 100),
     inSizeMin = op.inValueSlider("Size min", 1.0),
     inSizeMax = op.inValueSlider("Size max", 1.0),
-    inRotateRandom = op.inValueBool("Random Rotate", true),
+    inRotateRandom = op.inBool("Random Rotate", true),
     seed = op.inFloat("Random Seed");
 
 let mod = null;

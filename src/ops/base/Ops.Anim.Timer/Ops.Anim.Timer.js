@@ -1,4 +1,4 @@
-var playPause=op.inValueBool("Play",true);
+var playPause=op.inBool("Play",true);
 var reset=op.inTriggerButton("Reset");
 var outTime=op.outValue("Time");
 var inSpeed=op.inValue("Speed",1);

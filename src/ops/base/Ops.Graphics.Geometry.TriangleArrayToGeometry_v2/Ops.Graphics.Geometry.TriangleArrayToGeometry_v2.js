@@ -3,7 +3,7 @@ const
     inArr = op.inArray("Points", 3),
     inVertCols = op.inArray("Vertex Colors", 4),
     inTexCoords = op.inArray("TexCoords", 2),
-    inFlat = op.inValueBool("Flat", false),
+    inFlat = op.inBool("Flat", false),
     inRenderMesh = op.inBool("Render Mesh", true),
     next = op.outTrigger("Next"),
     geomOut = op.outObject("Geometry");

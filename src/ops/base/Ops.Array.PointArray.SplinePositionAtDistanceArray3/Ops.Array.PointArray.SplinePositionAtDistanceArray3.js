@@ -2,7 +2,7 @@ const
     inExec = op.inTriggerButton("Calculate"),
     inArr = op.inArray("Array3x"),
     inDist = op.inValue("Distance"),
-    inNormalized = op.inValueBool("Normalized"),
+    inNormalized = op.inBool("Normalized"),
 
     outNext = op.outTrigger("Next"),
     outX = op.outNumber("X"),

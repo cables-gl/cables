@@ -5,7 +5,7 @@ const height = op.inValueInt("height");
 
 const tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear");
 const twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]);
-const fpTexture = op.inValueBool("HDR");
+const fpTexture = op.inBool("HDR");
 
 const trigger = op.outTrigger("trigger");
 const texOut = op.outTexture("texture_out");

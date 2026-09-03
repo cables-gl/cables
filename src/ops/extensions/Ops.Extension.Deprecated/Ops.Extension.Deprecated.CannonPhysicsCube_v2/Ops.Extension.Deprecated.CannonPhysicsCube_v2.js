@@ -5,7 +5,7 @@ const
     sizeX = op.inFloat("sizeX", 1),
     sizeY = op.inFloat("sizeY", 1),
     sizeZ = op.inFloat("sizeZ", 1),
-    doRender = op.inValueBool("Render", true),
+    doRender = op.inBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outX = op.outValue("X"),

@@ -8,7 +8,7 @@ const
     inScaleX = op.inValueFloat("Scale X", 1),
     inScaleY = op.inValueFloat("Scale Y", 1),
 
-    inDraw = op.inValueBool("Draw", true),
+    inDraw = op.inBool("Draw", true),
     pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]),
     pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]),
 

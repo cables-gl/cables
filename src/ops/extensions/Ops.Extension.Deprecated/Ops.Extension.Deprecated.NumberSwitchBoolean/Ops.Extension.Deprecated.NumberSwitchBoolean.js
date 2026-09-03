@@ -1,5 +1,5 @@
 const
-    inBool = op.inValueBool("Boolean"),
+    inBool = op.inBool("Boolean"),
     valFalse = op.inFloat("Value false", 0),
     valTrue = op.inFloat("Value true", 1),
     outVal = op.outNumber("Result");

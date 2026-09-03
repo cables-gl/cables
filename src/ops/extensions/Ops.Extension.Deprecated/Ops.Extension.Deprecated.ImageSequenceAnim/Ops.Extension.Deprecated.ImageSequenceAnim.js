@@ -6,7 +6,7 @@ let numFrames = op.addInPort(new CABLES.Port(op, "Num Frames", CABLES.OP_PORT_TY
 let numX = op.addInPort(new CABLES.Port(op, "Num X", CABLES.OP_PORT_TYPE_VALUE));
 let numY = op.addInPort(new CABLES.Port(op, "Num Y", CABLES.OP_PORT_TYPE_VALUE));
 
-let play = op.inValueBool("Play", true);
+let play = op.inBool("Play", true);
 
 let texRepeatX = op.addOutPort(new CABLES.Port(op, "Repeat X", CABLES.OP_PORT_TYPE_VALUE));
 let texRepeatY = op.addOutPort(new CABLES.Port(op, "Repeat Y", CABLES.OP_PORT_TYPE_VALUE));

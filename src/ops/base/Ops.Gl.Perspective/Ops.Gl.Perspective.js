@@ -4,7 +4,7 @@ const
     fovY = op.inValueFloat("fov y", 45),
     zNear = op.inValueFloat("frustum near", 0.1),
     zFar = op.inValueFloat("frustum far", 20),
-    autoAspect = op.inValueBool("Auto Aspect Ratio", true),
+    autoAspect = op.inBool("Auto Aspect Ratio", true),
     aspect = op.inValue("Aspect Ratio"),
     trigger = op.outTrigger("trigger"),
     outAsp = op.outNumber("Aspect");

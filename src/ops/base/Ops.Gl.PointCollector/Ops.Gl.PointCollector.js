@@ -6,7 +6,7 @@ const
 
 outPoints.ignoreValueSerialize = true;
 
-let inAbsolute = op.inValueBool("Absolute", true);
+let inAbsolute = op.inBool("Absolute", true);
 
 let points = [];
 let cgl = op.patch.cgl;

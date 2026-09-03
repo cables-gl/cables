@@ -14,13 +14,13 @@ const inRoughness = op.inFloatSlider("Roughness", 0.5);
 const inMetalness = op.inFloatSlider("Metalness", 0.0);
 const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Blend");
 
-const inUseClearCoat = op.inValueBool("Use Clear Coat", false);
+const inUseClearCoat = op.inBool("Use Clear Coat", false);
 const inClearCoatIntensity = op.inFloatSlider("Clear Coat Intensity", 1.0);
 const inClearCoatRoughness = op.inFloatSlider("Clear Coat Roughness", 0.5);
-const inUseNormalMapForCC = op.inValueBool("Use Normal map for Clear Coat", false);
+const inUseNormalMapForCC = op.inBool("Use Normal map for Clear Coat", false);
 const inTexClearCoatNormal = op.inTexture("Clear Coat Normal map");
 
-const inUseThinFilm = op.inValueBool("Use Thin Film", false);
+const inUseThinFilm = op.inBool("Use Thin Film", false);
 const inThinFilmIntensity = op.inFloatSlider("Thin Film Intensity", 1.0);
 const inThinFilmIOR = op.inFloat("Thin Film IOR", 1.3);
 const inThinFilmThickness = op.inFloat("Thin Film Thickness (nm)", 600.0);
@@ -34,11 +34,11 @@ const inTonemappingExposure = op.inFloat("Exposure", 1.0);
 const inEmissionIntensity = op.inFloat("Emission Intensity", 1.0);
 const inToggleGR = op.inBool("Disable geometric roughness", false);
 const inToggleNMGR = op.inBool("Use roughness from normal map", false);
-const inUseVertexColours = op.inValueBool("Use Vertex Colours", false);
+const inUseVertexColours = op.inBool("Use Vertex Colours", false);
 const inVertexColourMode = op.inSwitch("Vertex Colour Mode", ["colour", "AORM", "AO", "R", "M", "lightmap"], "colour");
 const inHeightDepth = op.inFloat("Height Intensity", 1.0);
-const inUseOptimizedHeight = op.inValueBool("Faster heightmapping", false);
-const inDoubleSided = op.inValueBool("Double Sided", false);
+const inUseOptimizedHeight = op.inBool("Faster heightmapping", false);
+const inDoubleSided = op.inBool("Double Sided", false);
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
@@ -67,7 +67,7 @@ const inTexTransRepeatY = op.inFloat("Texture RepeatY", 1);
 const inTexTransOffsetX = op.inFloat("Texture Offset X", 0);
 const inTexTransOffsetY = op.inFloat("Texture Offset Y", 0);
 
-const inMulAlbedo = op.inValueBool("Multiply Texture Color", false);
+const inMulAlbedo = op.inBool("Multiply Texture Color", false);
 const inTexFlip = op.inBool("Flip Textures");
 
 inTrigger.onTriggered = doRender;

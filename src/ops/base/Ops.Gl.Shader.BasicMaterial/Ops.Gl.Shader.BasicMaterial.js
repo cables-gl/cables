@@ -106,7 +106,7 @@ function doRender()
 
 }
 
-op.colorizeTexture = op.inValueBool("colorizeTexture");
+op.colorizeTexture = op.inBool("colorizeTexture");
 op.colorizeTexture.set(false);
 op.colorizeTexture.onChange = function ()
 {
@@ -114,7 +114,7 @@ op.colorizeTexture.onChange = function ()
     else shader.removeDefine("COLORIZE_TEXTURE");
 };
 
-op.doBillboard = op.inValueBool("billboard");
+op.doBillboard = op.inBool("billboard");
 op.doBillboard.set(false);
 
 op.doBillboard.onChange = function ()
@@ -123,7 +123,7 @@ op.doBillboard.onChange = function ()
     else shader.removeDefine("BILLBOARD");
 };
 
-let texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
+let texCoordAlpha = op.inBool("Opacity TexCoords Transform", false);
 
 texCoordAlpha.onChange = function ()
 {
@@ -132,7 +132,7 @@ texCoordAlpha.onChange = function ()
 
 };
 
-let preMultipliedAlpha = op.inValueBool("preMultiplied alpha");
+let preMultipliedAlpha = op.inBool("preMultiplied alpha");
 
 function updateTexRepeat()
 {

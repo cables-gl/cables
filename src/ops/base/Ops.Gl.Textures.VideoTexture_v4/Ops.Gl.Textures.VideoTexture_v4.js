@@ -1,21 +1,21 @@
 const
     inExec = op.inTrigger("Update"),
     filename = op.inUrl("file", "video"),
-    play = op.inValueBool("play"),
-    loop = op.inValueBool("loop", true),
+    play = op.inBool("play"),
+    loop = op.inBool("loop", true),
 
     volume = op.inValueSlider("Volume", 1),
-    muted = op.inValueBool("mute", true),
+    muted = op.inBool("mute", true),
 
     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
-    flip = op.inValueBool("flip", true),
+    flip = op.inBool("flip", true),
 
     speed = op.inFloat("speed", 1),
     time = op.inFloat("set time"),
     rewind = op.inTriggerButton("Rewind"),
 
-    inPreload = op.inValueBool("Preload", true),
+    inPreload = op.inBool("Preload", true),
     inShowSusp = op.inBool("Show Interaction needed Button", true),
 
     outNext = op.outTrigger("Next"),

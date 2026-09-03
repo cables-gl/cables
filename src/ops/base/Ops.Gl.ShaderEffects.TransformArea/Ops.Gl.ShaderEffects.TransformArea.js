@@ -4,7 +4,7 @@ const
 
     inViz = op.inBool("Visualize Area", false),
 
-    inWorldSpace = op.inValueBool("WorldSpace", false),
+    inWorldSpace = op.inBool("WorldSpace", false),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),

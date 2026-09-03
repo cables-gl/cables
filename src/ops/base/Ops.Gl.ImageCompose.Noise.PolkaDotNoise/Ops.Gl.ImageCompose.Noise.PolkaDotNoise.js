@@ -2,7 +2,7 @@ let render = op.inTrigger("Render");
 
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
 let amount = op.inValueSlider("Amount", 1);
-const inBox = op.inValueBool("Square Look", false);
+const inBox = op.inBool("Square Look", false);
 const threshhold = op.inValueSlider("Threshold", 0.25);
 let radius_low = op.inValueSlider("Radius Low", 0);
 let radius_high = op.inValueSlider("Radius High", 1);

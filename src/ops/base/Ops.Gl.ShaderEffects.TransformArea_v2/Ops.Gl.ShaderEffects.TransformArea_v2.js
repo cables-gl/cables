@@ -26,7 +26,7 @@ const
     rotY = op.inFloat("Rot Y", 0.5),
     rotZ = op.inFloat("Rot Z", 0.5),
 
-    inWorldSpace = op.inValueBool("WorldSpace", false),
+    inWorldSpace = op.inBool("WorldSpace", false),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

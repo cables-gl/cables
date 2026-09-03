@@ -4,7 +4,7 @@ let render = op.inTrigger("render");
 let width = op.inFloat("width");
 let height = op.inFloat("height");
 let lengt = op.inFloat("length");
-let center = op.inValueBool("center");
+let center = op.inBool("center");
 
 let trigger = op.outTrigger("trigger");
 let geomOut = op.outObject("geometry");

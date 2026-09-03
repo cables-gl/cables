@@ -2,7 +2,7 @@ const cgl = op.patch.cgl;
 
 const
     render = op.inTrigger("render"),
-    // useVPSize = op.inValueBool("use viewport size", true),
+    // useVPSize = op.inBool("use viewport size", true),
     inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Canvas"),
     width = op.inValueInt("texture width", 512),
     height = op.inValueInt("texture height", 512),
@@ -13,11 +13,11 @@ const
     trigger = op.outTrigger("trigger"),
     tex = op.outTexture("texture"),
     texDepth = op.outTexture("textureDepth"),
-    // fpTexture = op.inValueBool("HDR"),
+    // fpTexture = op.inBool("HDR"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
-    depth = op.inValueBool("Depth", true),
-    clear = op.inValueBool("Clear", true);
+    depth = op.inBool("Depth", true),
+    clear = op.inBool("Clear", true);
 
 let fb = null;
 let reInitFb = true;

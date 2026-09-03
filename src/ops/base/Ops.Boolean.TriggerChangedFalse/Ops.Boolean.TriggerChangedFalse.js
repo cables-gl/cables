@@ -1,4 +1,4 @@
-let val = op.inValueBool("Value", false);
+let val = op.inBool("Value", false);
 let next = op.outTrigger("Next");
 
 let oldVal = 0;

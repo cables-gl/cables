@@ -1,7 +1,7 @@
 const
     ts1 = op.inValue("Timestamp 1"),
     ts2 = op.inValue("Timestamp 2"),
-    stopAtZero = op.inValueBool("Stop at 0"),
+    stopAtZero = op.inBool("Stop at 0"),
     outYear = op.outNumber("Year"),
     outMonth = op.outNumber("Month"),
     outDay = op.outNumber("Day"),

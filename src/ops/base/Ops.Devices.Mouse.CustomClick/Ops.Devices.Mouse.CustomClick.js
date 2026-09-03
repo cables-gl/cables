@@ -5,7 +5,7 @@ const
     inPixel = op.inInt("Max Movement Pixel", 5),
     inButton = op.inSwitch("Button", ["Left", "Middle", "Right"], "Left"),
     inEle = op.inObject("Element", null, "element"),
-    active = op.inValueBool("Active", true);
+    active = op.inBool("Active", true);
 
 const cgl = op.patch.cgl;
 let listenerElement = null;

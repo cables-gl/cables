@@ -1,8 +1,8 @@
 const
     valueInPort = op.inTexture("Object In"),
-    passThroughPort = op.inValueBool("Pass Through", true),
+    passThroughPort = op.inBool("Pass Through", true),
     inIfNull = op.inSwitch("When False", ["keep last texture", "empty texture"], "keep last texture"),
-    onlyValid = op.inValueBool("Only Valid Textures", true),
+    onlyValid = op.inBool("Only Valid Textures", true),
     valueOutPort = op.outTexture("Object Out");
 
 valueInPort.onChange =

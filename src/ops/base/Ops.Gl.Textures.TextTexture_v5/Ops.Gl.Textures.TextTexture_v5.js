@@ -1,7 +1,7 @@
 const
     render = op.inTriggerButton("Render"),
 
-    drawMesh = op.inValueBool("Draw Mesh", true),
+    drawMesh = op.inBool("Draw Mesh", true),
     meshScale = op.inValueFloat("Scale Mesh", 0.5),
 
     texSizeMeth = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
@@ -30,7 +30,7 @@ const
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
-    cachetexture = op.inValueBool("Reuse Texture", true),
+    cachetexture = op.inBool("Reuse Texture", true),
     drawDebug = op.inBool("Show Debug", false),
 
     reloadOnFont = op.inBool("Redraw On Font Load", true),

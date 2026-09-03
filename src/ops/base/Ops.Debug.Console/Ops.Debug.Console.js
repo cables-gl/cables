@@ -1,5 +1,5 @@
 const
-    visible = op.inValueBool("visible", true),
+    visible = op.inBool("visible", true),
     inClear = op.inTriggerButton("Clear"),
     outEle = op.outObject("Element", null, "element");
 

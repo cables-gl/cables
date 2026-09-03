@@ -6,11 +6,11 @@ const
     sizeH = op.inValueFloat("height", 1),
     borderRadius = op.inValueSlider("border radius", 0.5),
     geomOut = op.outObject("geometry"),
-    inTopLeftCorner = op.inValueBool("Top Left", true),
-    inTopRightCorner = op.inValueBool("Top Right", true),
-    inBottomLeftCorner = op.inValueBool("Bottom Left", true),
-    inBottomRightCorner = op.inValueBool("Bottom Right", true),
-    inDraw = op.inValueBool("Draw", true);
+    inTopLeftCorner = op.inBool("Top Left", true),
+    inTopRightCorner = op.inBool("Top Right", true),
+    inBottomLeftCorner = op.inBool("Bottom Left", true),
+    inBottomRightCorner = op.inBool("Bottom Right", true),
+    inDraw = op.inBool("Draw", true);
 
 const geom = new CGL.Geometry("triangle");
 

@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     inSize = op.inValue("Size", 1),
     inStrength = op.inValue("Strength", 1),
-    inSmooth = op.inValueBool("Smooth", true),
+    inSmooth = op.inBool("Smooth", true),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),

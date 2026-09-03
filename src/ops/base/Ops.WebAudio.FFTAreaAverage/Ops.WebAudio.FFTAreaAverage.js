@@ -5,7 +5,7 @@ const
     y = op.inValueSlider("y"),
     w = op.inValueSlider("width", 0.2),
     h = op.inValueSlider("height", 0.2),
-    drawTex = op.inValueBool("Create Texture", true),
+    drawTex = op.inBool("Create Texture", true),
     texOut = op.outTexture("texture_out"),
     value = op.outValue("value");
 

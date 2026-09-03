@@ -4,7 +4,7 @@ const
     inSize = op.inValue("Size", 1),
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
-    inInvert = op.inValueBool("Invert"),
+    inInvert = op.inBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
@@ -18,7 +18,7 @@ const
     sizeZ = op.inFloat("Size Z", 1),
     inTex = op.inTexture("Texture"),
 
-    inWorldSpace = op.inValueBool("WorldSpace", true),
+    inWorldSpace = op.inBool("WorldSpace", true),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 

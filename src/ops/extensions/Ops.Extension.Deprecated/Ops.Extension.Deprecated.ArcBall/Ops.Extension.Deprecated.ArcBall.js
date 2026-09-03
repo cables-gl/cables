@@ -8,7 +8,7 @@ let mulScale = op.addInPort(new CABLES.Port(op, "Mul Scale", CABLES.OP_PORT_TYPE
 let minScale = op.addInPort(new CABLES.Port(op, "Min Scale", CABLES.OP_PORT_TYPE_VALUE));
 let maxScale = op.addInPort(new CABLES.Port(op, "Max Scale", CABLES.OP_PORT_TYPE_VALUE));
 
-let useWheel = op.inValueBool("Use Mouse Wheel", true);
+let useWheel = op.inBool("Use Mouse Wheel", true);
 
 let inRadius = op.inFloat("Radius", 1);
 

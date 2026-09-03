@@ -4,7 +4,7 @@ let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALU
 let outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.OP_PORT_TYPE_OBJECT));
 let isLoading = op.outValue("Is Loading", false);
 
-let jsonp = op.inValueBool("JsonP", false);
+let jsonp = op.inBool("JsonP", false);
 
 outData.ignoreValueSerialize = true;
 let patch = op.patch;

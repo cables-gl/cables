@@ -4,7 +4,7 @@ const
     inSize = op.inValue("Size", 1),
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
-    inInvert = op.inValueBool("Invert"),
+    inInvert = op.inBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
@@ -13,8 +13,8 @@ const
     y = op.inValue("y"),
     z = op.inValue("z"),
     sizeX = op.inValueSlider("Size X", 1),
-    inWorldSpace = op.inValueBool("WorldSpace", true),
-    // inPosAbs = op.inValueBool("Position Absolute", true),
+    inWorldSpace = op.inBool("WorldSpace", true),
+    // inPosAbs = op.inBool("Position Absolute", true),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 

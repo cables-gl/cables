@@ -2,7 +2,7 @@ op.name = "ArcBall";
 
 let render = op.inTrigger("render");
 
-let useWheel = op.inValueBool("Use Mouse Wheel", true);
+let useWheel = op.inBool("Use Mouse Wheel", true);
 let minRadius = op.inFloat("Min Radius", 0.1);
 
 let trigger = op.outTrigger("trigger");

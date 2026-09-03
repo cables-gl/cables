@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     inScale = op.inSwitch("Scale", ["Stretch", "Fit"], "Fit"),
-    flipY = op.inValueBool("Flip Y"),
-    flipX = op.inValueBool("Flip X"),
+    flipY = op.inBool("Flip Y"),
+    flipX = op.inBool("Flip X"),
     inTexture = op.inTexture("Texture"),
     trigger = op.outTrigger("trigger");
 

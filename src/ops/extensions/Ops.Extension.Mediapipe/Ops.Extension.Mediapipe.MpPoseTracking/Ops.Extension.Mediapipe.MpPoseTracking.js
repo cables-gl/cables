@@ -12,8 +12,8 @@ const
     inEnableSegmentation = op.inBool("Enable Segmentation", false),
     inUpdateSeg = op.inTrigger("Update Texture"),
     inSmoothSegmentation = op.inBool("Smooth Segmentation", false),
-    flipX = op.inValueBool("Flip X", false),
-    flipY = op.inValueBool("Flip Y", false),
+    flipX = op.inBool("Flip X", false),
+    flipY = op.inBool("Flip Y", false),
 
     outPoints = op.outArray("Points"),
     outTex = op.outTexture("Segmentation Mask"),

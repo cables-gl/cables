@@ -20,8 +20,8 @@ const
 
     inTex = op.inTexture("Texture"),
     inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen"], "XY"),
-    inDiscard = op.inValueBool("Discard"),
-    inWorldSpace = op.inValueBool("WorldSpace");
+    inDiscard = op.inBool("Discard"),
+    inWorldSpace = op.inBool("WorldSpace");
 
 const cgl = op.patch.cgl;
 

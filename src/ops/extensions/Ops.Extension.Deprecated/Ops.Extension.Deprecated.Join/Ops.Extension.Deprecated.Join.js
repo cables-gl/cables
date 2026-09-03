@@ -1,6 +1,6 @@
 let inArr = op.inArray("Array");
 let inSeperator = op.inValueString("Seperator", ",");
-let inNewLine = op.inValueBool("New Line");
+let inNewLine = op.inBool("New Line");
 let outStr = op.outValue("Result");
 
 inArr.onChange = exec;

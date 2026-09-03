@@ -89,7 +89,7 @@ function updateDiffuseTexture()
     }
 }
 
-const colorizeTexture=op.inValueBool("colorizeTexture",false);
+const colorizeTexture=op.inBool("colorizeTexture",false);
 
 op.setPortGroup("Color Texture",[diffuseTexture,colorizeTexture]);
 
@@ -149,8 +149,8 @@ function updateOpacity()
 };
 
 
-var texCoordAlpha=op.inValueBool("Opacity TexCoords Transform",false);
-const discardTransPxl=op.inValueBool("Discard Transparent Pixels");
+var texCoordAlpha=op.inBool("Opacity TexCoords Transform",false);
+const discardTransPxl=op.inBool("Discard Transparent Pixels");
 
 discardTransPxl.onChange=function()
 {
@@ -193,7 +193,7 @@ op.setPortGroup("Texture Transform",[diffuseRepeatX,diffuseRepeatY,diffuseOffset
 
 
 
-const doBillboard=op.inValueBool("billboard",false);
+const doBillboard=op.inBool("billboard",false);
 
 doBillboard.onChange=function()
 {

@@ -9,15 +9,15 @@ const amount = op.inValueSlider("Amount", 1);
 
 const shapeSelect = op.inValueSelect("Shape", ["circle", "eqi triangle", "iso triangle", "box", "rhombus", "pentagon",
     "hexagon", "octogon", "hexagram"], "circle");
-const mirrorX = op.inValueBool("Mirror X", false);
-const mirrorY = op.inValueBool("Mirror Y", false);
+const mirrorX = op.inBool("Mirror X", false);
+const mirrorY = op.inBool("Mirror Y", false);
 
 const xPos = op.inValueFloat("Offset X", 0.0);
 const yPos = op.inValueFloat("Offset Y", 0.0);
 
-const fillShape = op.inValueBool("fillShape", true);
+const fillShape = op.inBool("fillShape", true);
 const lineThickness = op.inValue("Line thickness", 1.0);
-const invertColor = op.inValueBool("Invert color", false);
+const invertColor = op.inBool("Invert color", false);
 
 const width = op.inValue("width", 0.5);
 const height = op.inValue("height", 0.5);

@@ -1,9 +1,9 @@
 const
     inElements = op.inArray("Elements", null, "element"),
     eventNamePort = op.inString("Event Name", "click"),
-    useCapturePort = op.inValueBool("Use Capture", false),
-    preventDefaultPort = op.inValueBool("Prevent Default", true),
-    stopPropagationPort = op.inValueBool("Stop Propagation", true),
+    useCapturePort = op.inBool("Use Capture", false),
+    preventDefaultPort = op.inBool("Prevent Default", true),
+    stopPropagationPort = op.inBool("Stop Propagation", true),
     triggerPort = op.outTrigger("Event Trigger"),
     outIndex = op.outNumber("Index", -1),
     eventObjPort = op.outObject("Event Object"),

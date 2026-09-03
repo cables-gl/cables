@@ -1,7 +1,7 @@
 const
-    canvasOnly = op.inValueBool("canvas only", true),
-    keysCursor = op.inValueBool("Cursor Keys", true),
-    keysWasd = op.inValueBool("WASD", true),
+    canvasOnly = op.inBool("canvas only", true),
+    keysCursor = op.inBool("Cursor Keys", true),
+    keysWasd = op.inBool("WASD", true),
     inActive = op.inBool("Active", true),
     outDeg = op.outNumber("Degree"),
     pressedUp = op.outBoolNum("Up"),

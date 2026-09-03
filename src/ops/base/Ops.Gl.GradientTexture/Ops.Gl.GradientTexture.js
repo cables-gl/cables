@@ -2,7 +2,7 @@
 
 const inGrad = op.inGradient("Gradient"),
     inDir = op.inValueSelect("Direction", ["X", "XX", "Y", "YY", "XY", "YX", "Radial"], "X"),
-    inSmoothstep = op.inValueBool("Smoothstep", false),
+    inSmoothstep = op.inBool("Smoothstep", false),
     inStep = op.inBool("Step", false),
     inFlip = op.inBool("Flip", false),
     inSRGB = op.inBool("sRGB", false),

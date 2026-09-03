@@ -4,7 +4,7 @@ const
     numPoints = op.inValueInt("Num Points"),
     outTrigger = op.outTrigger("Trigger out"),
     outGeom = op.outObject("Geometry"),
-    pTexCoordRand = op.inValueBool("Scramble Texcoords", true),
+    pTexCoordRand = op.inBool("Scramble Texcoords", true),
     seed = op.inValue("Seed", 1),
     inCoords = op.inArray("Coordinates", 2),
     inPointSizes = op.inArray("Point sizes", 1),

@@ -1,7 +1,7 @@
 let inArr = op.inArray("Points");
 let subDivs = op.inInt("Num Subdivs", 5);
-let bezier = op.inValueBool("Smooth", true);
-let bezierEndPoints = op.inValueBool("Bezier Start/End Points", true);
+let bezier = op.inBool("Smooth", true);
+let bezierEndPoints = op.inBool("Bezier Start/End Points", true);
 
 let result = op.outArray("Result");
 

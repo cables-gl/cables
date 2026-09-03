@@ -3,8 +3,8 @@ const
     min = op.inFloat("Min", -1),
     max = op.inFloat("Max", 1),
     seed = op.inFloat("random seed"),
-    closed = op.inValueBool("Last == First"),
-    inInteger = op.inValueBool("Integer", false),
+    closed = op.inBool("Last == First"),
+    inInteger = op.inBool("Integer", false),
     values = op.outArray("values", null, 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");

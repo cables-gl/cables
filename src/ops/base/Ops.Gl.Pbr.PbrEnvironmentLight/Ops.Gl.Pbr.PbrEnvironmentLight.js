@@ -60,7 +60,7 @@ const inIBLLUTSize = op.inDropDown("Size IBL LUT", [128, 256, 512, 1024], 256);
 const inForce8bitIbl = op.inBool("Force 8bit IBL", true);
 const inToggleRGBE = op.inBool("Environment map does not contain RGBE data", false);
 const inRotation = op.inFloat("Rotation", 0.0);
-const inUseParallaxCorrection = op.inValueBool("Use parallax correction", false);
+const inUseParallaxCorrection = op.inBool("Use parallax correction", false);
 
 const inPCOriginX = op.inFloat("center X", 0);
 const inPCOriginY = op.inFloat("center Y", 1.8);

@@ -5,13 +5,13 @@ const
     inUpdateSize = op.inTriggerButton("Update Size"),
     inSource = op.inDropDown("Source", ["Select Source"], "Select Source"),
 
-    flip = op.inValueBool("Flip Y", true),
+    flip = op.inBool("Flip Y", true),
     fps = op.inValueInt("FPS", 12),
 
     width = op.inValueInt("Requested Width", 200),
     height = op.inValueInt("Requested Height", 720),
 
-    inAsDOM = op.inValueBool("Show HTML Element", false),
+    inAsDOM = op.inBool("Show HTML Element", false),
     inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
 
     next = op.outTrigger("Next"),

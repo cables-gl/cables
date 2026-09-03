@@ -74,7 +74,7 @@ let stopPort = op.inTriggerButton("Stop Buffer");
 let stopAllPort = op.inTriggerButton("Stop All Buffers");
 let fadeOutPort = op.inValueString("Fade Out Time", FADE_OUT_TIME_DEFAULT);
 let volumePort = op.addInPort(new CABLES.Port(op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": VOLUME_MIN, "max": VOLUME_MAX }, VOLUME_DEFAULT));
-let mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
+let mutePort = op.inBool("Mute", MUTE_DEFAULT);
 
 // change listeners
 starPort.onTriggered = function ()

@@ -13,8 +13,8 @@ const
     width = op.inValue("width", 1),
     height = op.inValue("height", 1),
     lengt = op.inValue("length", 1),
-    center = op.inValueBool("center", true),
-    active = op.inValueBool("Active", true),
+    center = op.inBool("center", true),
+    active = op.inBool("Active", true),
     mapping = op.inSwitch("Mapping", ["Default", "Cube", "Cube Biased"], "Default"),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");

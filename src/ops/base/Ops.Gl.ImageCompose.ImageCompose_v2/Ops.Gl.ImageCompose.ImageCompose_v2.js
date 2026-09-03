@@ -5,8 +5,8 @@ const
     height = op.inValueInt("Height", 480),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
-    fpTexture = op.inValueBool("HDR"),
-    inTransp = op.inValueBool("Transparent", false),
+    fpTexture = op.inBool("HDR"),
+    inTransp = op.inBool("Transparent", false),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),

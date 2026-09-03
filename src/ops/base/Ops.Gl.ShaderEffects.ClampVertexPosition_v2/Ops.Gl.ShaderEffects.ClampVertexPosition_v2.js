@@ -4,7 +4,7 @@ const
     axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X"),
     min = op.inValue("min", 0),
     max = op.inValue("max", 1),
-    inUpdateNormals = op.inValueBool("Update Normals");
+    inUpdateNormals = op.inBool("Update Normals");
 
 const cgl = op.patch.cgl;
 
