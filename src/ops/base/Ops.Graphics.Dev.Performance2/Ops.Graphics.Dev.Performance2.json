@@ -1,0 +1,60 @@
+{
+    "summary": "Show WebGl Performance Statistics",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            }
+        ]
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "828a93eb-5837-4aa4-808e-bde07ad83369",
+    "created": 1788434737479,
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added active toggle to completly disable calculation of performance data",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1731928552752
+        },
+        {
+            "message": "Cleanup distplay / output count per second data",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1768570596586
+        },
+        {
+            "message": "Much more realistic results for GPU timing numbers, in some cases they are still very wrong, probably blame webgl query timer or GPU driver....",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1778835413046
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1788434737480
+        },
+        {
+            "message": "Extension.Dev.Performance renamed to Ops.Graphics.Dev.Performance2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1788434770470
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}
