@@ -1,169 +1,172 @@
-const valIn=op.inValue("Value",0);
-const mul=op.inValue("Multiply",1);
-const minUnlimitedPort = op.inBool('Min Unlimited', false);
-minUnlimitedPort.setUiAttribs({ hidePort: true });
-const min=op.inValue("min",-100);
-const maxUnlimitedPort = op.inBool('Max Unlimited', false);
-maxUnlimitedPort.setUiAttribs({ hidePort: true });
-const max=op.inValue("max", 100);
-const smooth=op.inBool("smooth");
-const smoothSpeed=op.inValue("delay",0.3);
-const preventScroll=op.inBool("prevent scroll");
-const flip=op.inBool("Flip Direction");
-const active=op.inBool("active",true);
-const reset=op.inTriggerButton("Reset");
-const area=op.inSwitch("Area",['Canvas','Document'],'Canvas');
+const valIn = op.inValue("Value", 0);
+const mul = op.inValue("Multiply", 1);
+const minUnlimitedPort = op.inBool("Min Unlimited", false);
+minUnlimitedPort.setUiAttribs({ "hidePort": true });
+const min = op.inValue("min", -100);
+const maxUnlimitedPort = op.inBool("Max Unlimited", false);
+maxUnlimitedPort.setUiAttribs({ "hidePort": true });
+const max = op.inValue("max", 100);
+const smooth = op.inBool("smooth");
+const smoothSpeed = op.inValue("delay", 0.3);
+const preventScroll = op.inBool("prevent scroll");
+const flip = op.inBool("Flip Direction");
+const active = op.inBool("active", true);
+const reset = op.inTriggerButton("Reset");
+const area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas");
 
-const absVal=op.outValue("absolute value",0);
-const delta=op.outValue("delta",0);
+const absVal = op.outValue("absolute value", 0);
+const delta = op.outValue("delta", 0);
 
-const cgl=op.patch.cgl;
-var value=0;
+const cgl = op.patch.cgl;
+let value = 0;
 
-var anim=new CABLES.Anim();
-anim.defaultEasing=CABLES.EASING_EXPO_OUT;
+let anim = new CABLES.Anim();
+anim.defaultEasing = CABLES.Anim.EASING_EXPO_OUT;
 
-var startTime=CABLES.now()/1000.0;
-var v=0;
-var smoothTimer=0;
+let startTime = CABLES.now() / 1000.0;
+let v = 0;
+let smoothTimer = 0;
 
 anim.clear();
-anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
-var dir=1;
-var isWindows=navigator.appVersion.indexOf("Win")!=-1;
+anim.setValue(CABLES.now() / 1000.0 - startTime, absVal.get());
+let dir = 1;
+let isWindows = navigator.appVersion.indexOf("Win") != -1;
 
-var listenerElement=null;
+let listenerElement = null;
 
-area.onChange=updateArea;
-var vOut=0;
+area.onChange = updateArea;
+let vOut = 0;
 
 addListener();
 
-min.onChange=function()
+min.onChange = function ()
 {
     checkValue();
-    absVal.set( v );
+    absVal.set(v);
 };
 
-max.onChange=function()
+max.onChange = function ()
 {
     checkValue();
-    absVal.set( v );
+    absVal.set(v);
 };
 
-minUnlimitedPort.onChange = function() {
-    var minUnlimited = minUnlimitedPort.get();
+minUnlimitedPort.onChange = function ()
+{
+    let minUnlimited = minUnlimitedPort.get();
     min.setUiAttribs({
         // hidePort: minUnlimited,
-        greyout: minUnlimited
+        "greyout": minUnlimited
     });
 };
 
-maxUnlimitedPort.onChange = function() {
-    var maxUnlimited = maxUnlimitedPort.get();
+maxUnlimitedPort.onChange = function ()
+{
+    let maxUnlimited = maxUnlimitedPort.get();
     max.setUiAttribs({
         // hidePort: maxUnlimited,
-        greyout: maxUnlimited
+        "greyout": maxUnlimited
     });
 };
 
-reset.onTriggered=function()
+reset.onTriggered = function ()
 {
     anim.clear();
-    anim.setValue(CABLES.now()/1000.0-startTime,valIn.get());
+    anim.setValue(CABLES.now() / 1000.0 - startTime, valIn.get());
     absVal.set(valIn.get());
-    v=0;
+    v = 0;
 };
 
-valIn.onChange=function()
+valIn.onChange = function ()
 {
-    v=valIn.get();
+    v = valIn.get();
 
     checkValue();
 
-    absVal.set( v );
+    absVal.set(v);
 
     anim.clear();
-    anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
+    anim.setValue(CABLES.now() / 1000.0 - startTime, absVal.get());
 
 };
 
 function updateSmooth()
 {
-    var v=anim.getValue( CABLES.now()/1000.0-startTime );
+    let v = anim.getValue(CABLES.now() / 1000.0 - startTime);
 
-    absVal.set( v );
+    absVal.set(v);
 }
 
-smooth.onChange=function()
+smooth.onChange = function ()
 {
-    if(smooth.get()) smoothTimer = setInterval(updateSmooth, 15);
-        else clearTimeout(smoothTimer);
+    if (smooth.get()) smoothTimer = setInterval(updateSmooth, 15);
+    else clearTimeout(smoothTimer);
 };
 
 function checkValue()
 {
-    if(!maxUnlimitedPort.get()) {
-        v=Math.min(max.get(),v);
+    if (!maxUnlimitedPort.get())
+    {
+        v = Math.min(max.get(), v);
     }
-    if(!minUnlimitedPort.get()) {
-        v=Math.max(min.get(),v);
+    if (!minUnlimitedPort.get())
+    {
+        v = Math.max(min.get(), v);
     }
 }
 
-flip.onChange=function()
+flip.onChange = function ()
 {
-    if(flip.get())dir=-1;
-        else dir=1;
+    if (flip.get())dir = -1;
+    else dir = 1;
 };
 
 function onMouseWheel(e)
 {
-    var d= CGL.getWheelSpeed(e)*(dir)*mul.get();
-    if(isWindows)d*=4;
+    let d = CGL.getWheelSpeed(e) * (dir) * mul.get();
+    if (isWindows)d *= 4;
 
     delta.set(0);
     delta.set(d);
-    v-=d;
+    v -= d;
     checkValue();
 
-    if( !smooth.get() )
+    if (!smooth.get())
     {
         absVal.set(v);
     }
     else
     {
         anim.clear();
-        anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
-        anim.setValue(CABLES.now()/1000.0-startTime+smoothSpeed.get(),v);
+        anim.setValue(CABLES.now() / 1000.0 - startTime, absVal.get());
+        anim.setValue(CABLES.now() / 1000.0 - startTime + smoothSpeed.get(), v);
     }
 
-    if(preventScroll.get()) e.preventDefault();
+    if (preventScroll.get()) e.preventDefault();
 }
 
 function updateArea()
 {
     removeListener();
 
-    if(area.get()=='Document') listenerElement = document;
+    if (area.get() == "Document") listenerElement = document;
     else listenerElement = cgl.canvas;
 
-    if(active.get())addListener();
+    if (active.get())addListener();
 }
 
 function addListener()
 {
-    if(!listenerElement)updateArea();
-    listenerElement.addEventListener('wheel', onMouseWheel);
+    if (!listenerElement)updateArea();
+    listenerElement.addEventListener("wheel", onMouseWheel);
 }
 
 function removeListener()
 {
-    if(listenerElement) listenerElement.removeEventListener('wheel', onMouseWheel);
+    if (listenerElement) listenerElement.removeEventListener("wheel", onMouseWheel);
 }
 
-active.onChange=function()
+active.onChange = function ()
 {
     updateArea();
-}
-
+};

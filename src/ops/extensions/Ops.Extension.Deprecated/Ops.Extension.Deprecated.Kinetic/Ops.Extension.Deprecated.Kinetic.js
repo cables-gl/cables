@@ -5,7 +5,7 @@ let firstTime = true;
 let smoothInterval = 0;
 
 let anim = new CABLES.Anim();
-anim.defaultEasing = CABLES.EASING_EXPO_OUT;
+anim.defaultEasing = CABLES.Anim.EASING_EXPO_OUT;
 
 function updateSmooth()
 {

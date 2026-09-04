@@ -23,7 +23,8 @@ CABLES = CABLES || {};
 CABLES = {
     ...CABLES,
 
-    ...CONSTANTS.OP
+    ...CONSTANTS.OP, // @deprecated
+    ...CONSTANTS.ANIM // @deprecated
 };
 
 CABLES.EMBED = EMBED;
