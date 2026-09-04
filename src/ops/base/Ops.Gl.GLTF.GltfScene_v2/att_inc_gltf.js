@@ -1,4 +1,3 @@
-
 const CHUNK_HEADER_SIZE = 8;
 
 const Gltf = class
@@ -78,7 +77,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
     chunk.size = dv.getUint32(offset + 0, le);
 
-
     // chunk.type = new TextDecoder("utf-8").decode(bArr.subarray(offset+4, offset+4+4));
     chunk.type = Utf8ArrayToStr(bArr.subarray(offset + 4, offset + 4 + 4));
 
@@ -147,7 +145,7 @@ function loadAnims(gltf)
             for (k = 0; k < numComps; k++) anims.push(new CABLES.Anim());
 
             if (sampler.interpolation == "LINEAR") {}
-            else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = 0;// CONSTANTS.ANIM.EASING_ABSOLUTE;
+            else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = 0;
             else console.warn("[gltf] unknown interpolation", sampler.interpolation);
 
             for (let j = 0; j < bufferIn.length; j++)
@@ -215,7 +213,6 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse buffers", Math.round((performance.now() - gltf.startTime)));
 
-
     if (views)
     {
         for (i = 0; i < accessors.length; i++)
@@ -235,7 +232,6 @@ function parseGltf(arrayBuffer)
             let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
             let stride = view.byteStride || 0;
             let dataBuff = null;
-
 
             // 5120 (BYTE)	1
             // 5121(UNSIGNED_BYTE)	1
@@ -298,7 +294,6 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
 
-
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
         if (gltf.json.nodes[i].children)
@@ -313,7 +308,6 @@ function parseGltf(arrayBuffer)
         const node = new gltfNode(gltf.json.nodes[i], gltf);
         gltf.nodes.push(node);
     }
-
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
@@ -344,7 +338,6 @@ function parseGltf(arrayBuffer)
     if (gltf.json.cameras) loadCams(gltf);
 
     gltf.timing.push("finished", Math.round((performance.now() - gltf.startTime)));
-
 
     return gltf;
 }

@@ -80,18 +80,6 @@ export class Op extends Events
     static UI_ERRORLEVEL_ERROR = 2;
     static UI_ERRORLEVEL_NOTWORKING = 3;
 
-    static DIR_IN = 0;
-    static DIR_OUT = 1;
-    static TYPE_VALUE = 0;
-    static TYPE_NUMBER = 0;
-    static TYPE_FUNCTION = 1;
-    static TYPE_TRIGGER = 1;
-    static TYPE_OBJECT = 2;
-    static TYPE_TEXTURE = 2;
-    static TYPE_ARRAY = 3;
-    static TYPE_DYNAMIC = 4;
-    static TYPE_STRING = 5;
-
     #objName = "";
     #log = new Logger("core_op");
 

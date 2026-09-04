@@ -5,6 +5,7 @@
 import { helper } from "cables-shared-client";
 import { CONSTANTS } from "./constants.js";
 import { extendJs } from "./extendjs.js";
+import { Op } from "./core_op.js";
 
 extendJs();
 
@@ -43,7 +44,7 @@ export const getShortOpName = function (fullname)
 {
     let name = fullname.split(".")[fullname.split(".").length - 1];
 
-    if (name.includes(CONSTANTS.OP.OP_VERSION_PREFIX))
+    if (name.includes(Op.OP_VERSION_PREFIX))
     {
         const n = name.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
         name = name.substring(0, name.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);

@@ -44,26 +44,28 @@ export const CONSTANTS = {
         "EASING_CLIP": 28
     },
 
-    "OP": {
-        "OP_PORT_TYPE_VALUE": 0,
-        "OP_PORT_TYPE_NUMBER": 0,
-        "OP_PORT_TYPE_FUNCTION": 1,
-        "OP_PORT_TYPE_TRIGGER": 1,
-        "OP_PORT_TYPE_OBJECT": 2,
-        "OP_PORT_TYPE_TEXTURE": 2,
-        "OP_PORT_TYPE_ARRAY": 3,
-        "OP_PORT_TYPE_DYNAMIC": 4,
-        "OP_PORT_TYPE_STRING": 5,
-
-        "OP_VERSION_PREFIX": "_v"
-    },
-
-    "PORT": {
-        "PORT_DIR_IN": 0,
-        "PORT_DIR_OUT": 1
-    },
-
     /* minimalcore:start */
+    "OP": // @deprecated
+     {
+         "OP_PORT_TYPE_VALUE": 0,
+         "OP_PORT_TYPE_NUMBER": 0,
+         "OP_PORT_TYPE_FUNCTION": 1,
+         "OP_PORT_TYPE_TRIGGER": 1,
+         "OP_PORT_TYPE_OBJECT": 2,
+         "OP_PORT_TYPE_TEXTURE": 2,
+         "OP_PORT_TYPE_ARRAY": 3,
+         "OP_PORT_TYPE_DYNAMIC": 4,
+         "OP_PORT_TYPE_STRING": 5,
+
+         "OP_VERSION_PREFIX": "_v"
+     },
+
+    "PORT": // @deprecated
+     {
+         "PORT_DIR_IN": 0,
+         "PORT_DIR_OUT": 1
+     },
+
     "PACO": {
         "PACO_CLEAR": 0,
         "PACO_VALUECHANGE": 1,

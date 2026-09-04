@@ -23,11 +23,6 @@ CABLES = CABLES || {};
 CABLES = {
     ...CABLES,
 
-    /* minimalcore:start */
-    ...CONSTANTS.PACO,
-
-    /* minimalcore:end */
-    ...CONSTANTS.ANIM,
     ...CONSTANTS.OP
 };
 
