@@ -718,7 +718,6 @@ export class Patch extends Events
     updateAnims(time, delta, timestamp)
     {
         if (!this.renderloop) return;
-        let startTime = performance.now();
 
         this.timer.update(timestamp);
         this.freeTimer.update(timestamp);
@@ -727,8 +726,13 @@ export class Patch extends Events
 
         for (let i = 0; i < this.animFrameOps.length; ++i)
             if (this.animFrameOps[i].onAnimFrame)
+            {
+
+                let startTime = performance.now();
                 this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
-        console.log("animupd", performance.now() - startTime);
+
+                console.log("animupd ", this.animFrameOps[i].objName, performance.now() - startTime);
+            }
     }
 
     /**
