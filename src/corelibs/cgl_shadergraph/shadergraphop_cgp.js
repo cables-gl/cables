@@ -1,4 +1,3 @@
-import { CONSTANTS } from "cables";
 import { ShaderGraphOp } from "./shadergraphop.js";
 
 export class ShaderGraphOpCgp extends ShaderGraphOp

@@ -1,5 +1,4 @@
 import { Events, Logger } from "cables-shared-client";
-import { CONSTANTS } from "./constants.js";
 import { cleanJson } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Anim } from "./anim.js";
