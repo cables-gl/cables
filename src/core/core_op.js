@@ -591,12 +591,14 @@ export class Op extends Events
     /**
      * create a trigger input port
      * @param {String} name
+     * @param {any} v
      * @return {Port} created port
      *
      */
-    inTrigger(name)
+    inTrigger(name, v)
     {
         const p = this.addInPort(this.newPort(this, name, Port.TYPE_FUNCTION));
+        if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -1332,7 +1334,7 @@ export class Op extends Events
 
         if (v !== undefined) p.set(v);
         else p.set(0);
-        if (v !== undefined) p.set(v);
+
         return p;
     }
 
