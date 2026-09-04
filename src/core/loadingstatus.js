@@ -156,7 +156,7 @@ export class LoadingStatus extends Events
                 this._loadingAssets[i].order,
                 this._loadingAssets[i].type,
                 this._loadingAssets[i].name,
-                (this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000 + "s",
+                (this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000 + "s"
             ]);
         }
 
@@ -177,7 +177,7 @@ export class LoadingStatus extends Events
             if (l.op) l.op.setUiAttribs({ "loading": false });
             l.finished = true;
             l.timeEnd = Date.now();
-            this.log("finished", l);
+            // this.log("finished", l);
         }
 
         this.checkStatus();
@@ -248,10 +248,10 @@ export class LoadingStatus extends Events
             "name": name,
             "finished": false,
             "timeStart": Date.now(),
-            "order": this._order,
+            "order": this._order
         };
         this._order++;
-        this.log("start loading", this._loadingAssets[id]);
+        // this.log("start loading", this._loadingAssets[id]);
         // console.log("text", this._loadingAssets[id]);
         // console.trace("hurz");
 
