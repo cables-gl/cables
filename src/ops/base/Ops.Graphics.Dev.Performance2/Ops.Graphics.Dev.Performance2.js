@@ -11,20 +11,20 @@ let queueCPU = [];
 let queueGPU = [];
 let queueEvents = [];
 let heavyEvents = [];
+let countersPerFrame = {};
 let gpuTimeMs = 0;
 let fps = 0;
 let fpsCounter = 0;
 let fpsTime = performance.now();
+let countIndex = 0;
+let selectedCounterIndex = "meshDrawCalls";
 
 let type = null;
 let gpuBeginFrame = null;
 let gpuEndFrame = null;
 let gpuUpdate = null;
-let numDrawcallsCounter = 0;
-let numDrawcalls = 0;
 
 op.patch.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
-op.patch.on("renderDrawcall", (e) => { numDrawcallsCounter++; });
 
 createCanvas();
 
@@ -54,6 +54,15 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     queueGPU.push({ "ms": gpuTimeMs });
     queueGPU.shift();
 
+    for (const i in op.patch.cgl.perfProfiler.counts)
+    {
+        countersPerFrame[i] = countersPerFrame[i] || [];
+        countersPerFrame[i].push({ "num": op.patch.cgl.perfProfiler.counts[i] });
+        if (countersPerFrame[i].length > numBars) countersPerFrame[i].shift();
+    }
+
+    op.patch.cgl.perfProfiler.reset();
+
     heavyEvents.length = 0;
 
     if (!gpuBeginFrame && type == "webgl")
@@ -70,8 +79,6 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         fpsTime = performance.now();
         fpsCounter = 0;
     }
-    numDrawcalls = numDrawcallsCounter;
-    numDrawcallsCounter = 0;
     updateCanvas();
 });
 
@@ -83,8 +90,19 @@ op.on("delete", () =>
 
 function drawGraph(name, posy, q, col, fps)
 {
+    let info = "";
     let k = 0;
     let maxMs = 25;
+    if (q[numBars - 1] && q[numBars - 1].num)
+    {
+        info = q[numBars - 1].num;
+        for (k = numBars; k >= 0; k--)
+        {
+            if (q[k])
+                maxMs = Math.max(maxMs, q[k].num * 1.25);
+        }
+        // maxMs = info * 2;
+    }
     let hmul = height / maxMs;
     if (q.length == 0)
         for (let i = 0; i < numBars; i++) q.push({ "ms": 0 });
@@ -92,12 +110,11 @@ function drawGraph(name, posy, q, col, fps)
     ctx.globalAlpha = 1;
 
     let avg = 0;
-    let info = "";
     for (k = numBars; k >= 0; k--)
     {
         if (q[k])
         {
-            const itemHeight = Math.min(maxMs, ((q[k].ms || q[k].num * 3 || 0) * hmul));
+            const itemHeight = Math.min(maxMs, ((q[k].ms || q[k].num || 0) * hmul));
             if (q[k].ms > 30) ctx.fillStyle = "#ff0000";
             else ctx.fillStyle = col;
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
@@ -135,8 +152,12 @@ function updateCanvas()
         ctx.fillRect(0, y, canvas.width, 1);
 
     drawGraph("CPU", 0, queueCPU, "#999900");
-    drawGraph("GPU", height, queueGPU, "#007777");
-    drawGraph(fps + " FPS " + numDrawcalls + " draws", height * 2, queueEvents, "#aa7700");
+    drawGraph("GPU " + fps + " FPS", height, queueGPU, "#007777");
+
+    // console.log(countersPerFrame[selectedCounterIndex])
+
+    if (countersPerFrame[selectedCounterIndex] && countersPerFrame[selectedCounterIndex].length)
+        drawGraph(selectedCounterIndex + "", height * 2, countersPerFrame[selectedCounterIndex], "#aa7700");
 }
 
 function createCanvas()
@@ -156,5 +177,14 @@ function createCanvas()
     canvas.style["z-index"] = "10";
     containerEle.appendChild(canvas);
     ctx = canvas.getContext("2d");
+
     updateCanvas();
+    canvas.addEventListener("pointerdown", () =>
+    {
+        const keys = Object.keys(countersPerFrame);
+        selectedCounterIndex = keys[countIndex];
+        countIndex++;
+        countIndex %= keys.length;
+        console.log("text", countIndex, selectedCounterIndex);
+    });
 }

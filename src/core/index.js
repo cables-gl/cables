@@ -13,6 +13,7 @@ import { Timer, now, internalNow } from "./timer.js";
 import { CONSTANTS } from "./constants.js";
 import { AnimKey } from "./anim_key.js";
 import { RenderLoop } from "./renderloop.js";
+import { PerfProfiler } from "./perfprofiler.js";
 
 import { PatchVariable } from "./core_variable.js";
 import { Stack } from "./stack.js";
@@ -97,6 +98,7 @@ export default CABLES;
 // add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...
 // this is because corelibs are build/loaded via webpack and expect these exports to be avaialable on the global CABLES object
 export { Anim, AnimKey,
+    PerfProfiler,
     CONSTANTS, Link, Op, Patch, Port,
     OpProfiler, PatchVariable, EMBED, LoadingStatus,
     Timer, utils, now, RenderLoop, MemProfilerItem, Stack

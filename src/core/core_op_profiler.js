@@ -9,7 +9,6 @@ import { now } from "./timer.js";
  * @property timeUsedFrame {number}
  * @property opid {string}
  * @property subPatch {string}
-
  * @property timePsMsAvg {number}
  * @property timePsMs {number}
  * @property timePsCount {number}

@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { Op, Patch, utils } from "cables";
+import { PerfProfiler, Op, Patch, utils } from "cables";
 import { CONSTANTS } from "../cg/constants.js";
 import { Shader } from "./cgl_shader.js";
 import { CgContext, Geometry } from "../cg/index.js";
@@ -34,6 +34,7 @@ export class CglContext extends CgContext
         this.gApi = CgContext.API_WEBGL;
         this.aborted = false;
         _patch.cgl = this;
+        this.perfProfiler = new PerfProfiler();
 
         /** @deprecated */
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??

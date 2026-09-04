@@ -534,7 +534,7 @@ class Mesh extends CgMesh
 
         MESH.lastMesh = null;
 
-        this.#cgl.profileData.count("meshSetGeom");
+        this.#cgl.perfProfiler.count("meshSetGeom");
         const measure = this.#cgl.profileData.start("meshSetGeom");
 
         this._disposeAttributes();
@@ -953,7 +953,6 @@ class Mesh extends CgMesh
             {
                 this.#cgl.gl.drawElementsInstanced(prim, this.#bufVerticesIndizes.numItems, this.#indexType, 0, this.#numInstances);
             }
-            this.#cgl.patch.emitEvent("renderDrawcall");
         }
 
         // if (doQuery)
@@ -1008,8 +1007,8 @@ class Mesh extends CgMesh
         }
 
         /* minimalcore:start */
-        // this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1));
-        // this.#cgl.profileData.count("meshDrawCalls");
+        this.#cgl.perfProfiler.count("glprimitives", Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
+        this.#cgl.perfProfiler.count("meshDrawCalls");
         // if (this.#cgl.profileData.profileDrawCalls)
         // {
         //     this.#cgl.profileData.profileDrawCalls.push({
@@ -1071,15 +1070,18 @@ class Mesh extends CgMesh
     {
         // window.requestIdleCallback(() =>
         // {
-        if (this.#cgl.aborted) return;
         // const measure = this.#cgl.profileData.start("mesh dispose " + this._name);
+
+        if (this.#cgl.aborted) return;
         if (this._bufVertexAttrib && this._bufVertexAttrib.buffer) this.#cgl.gl.deleteBuffer(this._bufVertexAttrib.buffer);
         if (this.#bufVerticesIndizes) this.#cgl.gl.deleteBuffer(this.#bufVerticesIndizes);
         this.#bufVerticesIndizes = null;
 
         this._disposeAttributes();
+
         // measure.finish();
         // });
+
         return null;
     }
 }
