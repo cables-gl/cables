@@ -326,7 +326,7 @@ class Mesh extends CgMesh
 
         // if (Math.floor(numItems) != numItems) console.log("scheisse", name, array, itemSize);
 
-        this.#cgl.profileData.profileMeshAttributes += numItems || 0;
+        // this.#cgl.profileData.profileMeshAttributes += numItems || 0;
 
         if (typeof options == "function")
         {
@@ -681,7 +681,7 @@ class Mesh extends CgMesh
 
                             if (pointer.loc > -1)
                             {
-                                this.#cgl.profileData.profileAttrLoc++;
+                                // this.#cgl.profileData.profileAttrLoc++;
 
                                 this.#cgl.gl.enableVertexAttribArray(pointer.loc);
                                 this.#cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
