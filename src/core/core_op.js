@@ -1,6 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
 import { cleanJson, cloneObject, shortId } from "./utils.js";
-import { CONSTANTS } from "./constants.js";
 import { Port } from "./core_port.js";
 import { SwitchPort } from "./core_port_switch.js";
 import { MultiPort } from "./core_port_multi.js";
@@ -149,7 +148,6 @@ export class Op extends Events
         this.patch = _patch;
 
         this.#shortOpName = CABLES.getShortOpName(_objName);
-        this.getTitle();
 
         this.id = _id || shortId(); // instance id
         this.onAddPort = null;
@@ -564,7 +562,7 @@ export class Op extends Events
     addInPort(p, afterPort)
     {
         p.direction = Port.DIR_IN;
-        p._op = this;
+        // p._op = this;
 
         if (!afterPort)
         {
