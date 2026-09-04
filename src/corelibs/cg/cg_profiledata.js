@@ -106,7 +106,7 @@ export class ProfileData
      */
     count(event, count = 1)
     {
-        console.log("event", event);
+        // console.log("event", event);
         // this.counts[event] = this.counts[event] || 0;
         // this.counts[event] += count;
     }
