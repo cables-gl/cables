@@ -173,6 +173,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1787575612634
+        },
+        {
+            "message": "Fixed display of public patches on patch page when not logged in",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1788275571313
         }
     ],
     "isReleased": true,

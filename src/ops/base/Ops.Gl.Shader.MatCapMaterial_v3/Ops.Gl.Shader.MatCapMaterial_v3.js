@@ -9,16 +9,16 @@ const
     textureSpecMatCap = op.inTexture("Specular MatCap"),
     textureAo = op.inTexture("AO Texture"),
     textureOpacity = op.inTexture("Opacity Texture"),
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-    pOpacity = op.inValueSlider("Opacity", 1),
-    aoIntensity = op.inValueSlider("AO Intensity", 1.0),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
+    pOpacity = op.inFloatSlider("Opacity", 1),
+    aoIntensity = op.inFloatSlider("AO Intensity", 1.0),
     normalMapIntensity = op.inFloatSlider("Normal Map Intensity", 1),
-    repeatX = op.inValue("Repeat X", 1),
-    repeatY = op.inValue("Repeat Y", 1),
-    offsetX = op.inValue("Offset X", 0),
-    offsetY = op.inValue("Offset Y", 0),
+    repeatX = op.inFloat("Repeat X", 1),
+    repeatY = op.inFloat("Repeat Y", 1),
+    offsetX = op.inFloat("Offset X", 0),
+    offsetY = op.inFloat("Offset Y", 0),
     inDoubleSided = op.inBool("Double Sided"),
     ssNormals = op.inBool("Screen Space Normals"),
     calcTangents = op.inBool("Calc normal tangents", true),
@@ -62,7 +62,7 @@ const colorUniform = new CGL.Uniform(shader, "4f", "inColor", r, g, b, pOpacity)
 shader.materialPropUniforms = {
     "diffuseColor": colorUniform,
     // "texTransform": texTransUni,
-    "diffuseTexture": textureDiffuse
+    "diffuseTexture": textureDiffuseUniform
 };
 
 inDoubleSided.onChange =

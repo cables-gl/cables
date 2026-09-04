@@ -1,27 +1,6 @@
 {
     "id": "048e852b-62ea-4314-b6f2-9ac5e7cbb066",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1616432696893
-        },
-        {
-            "message": "Ops.User.pandur.AnimArrayBiatch renamed to Ops.Array.AnimArray",
-            "author": "pandur",
-            "date": 1616432874665
-        },
-        {
-            "message": "cloned op from Ops.Array.AnimArray",
-            "author": "cables",
-            "date": 1629276576967
-        },
-        {
-            "message": "Ops.User.cables.AnimArrayFixed renamed to Ops.Array.AnimArray_v2",
-            "author": "cables",
-            "date": 1629277460577
-        }
-    ],
+    "changelog": [],
     "authorName": "pandur",
     "created": 1629276576965,
     "layout": {
@@ -63,5 +42,6 @@
         "ports": []
     },
     "exampleProjectId": "OwvgkJ",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

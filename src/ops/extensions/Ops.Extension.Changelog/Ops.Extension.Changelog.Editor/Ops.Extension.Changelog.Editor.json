@@ -377,6 +377,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1787898588410
+        },
+        {
+            "message": "Drag cables with CMD key down to clone cable (was only possible with alt key)",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1788341791780
+        },
+        {
+            "message": "Timeline value drag not registering mouse up eveng and keeps dragging in some situations",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1788358479658
         }
     ],
     "isReleased": true,

@@ -23,7 +23,7 @@ inTrigger.onTriggered = () =>
 {
     let t = CABLES.now() / 1000;
     const perc = anim.getValue(t);
-    if (arr1 && arr2) ipMat(perc);
+    if (arr1 && arr2) ipArr(perc);
 };
 
 inArr.onLinkChanged = () =>
@@ -52,7 +52,7 @@ function init()
     if (cycle == 1) cycle = 0;
     else cycle = 1;
 
-    if (result.length != lastArr.length)result = copyArray(lastArr);
+    if (result.length != lastArr.length) result = copyArray(lastArr);
 
     if (cycle == 0)
     {
@@ -75,7 +75,7 @@ function ip(val1, val2, perc)
     return ((val2 - val1) * perc + val1);
 }
 
-function ipMat(perc)
+function ipArr(perc)
 {
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
