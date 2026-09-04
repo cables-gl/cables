@@ -3,16 +3,16 @@ let self = this;
 let cgl = this.patch.cgl;
 
 this.name = "DepthOfField";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
-this.depthTex = this.addInPort(new CABLES.Port(this, "depth map", CABLES.OP_PORT_TYPE_TEXTURE));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
+this.depthTex = this.addInPort(new CABLES.Port(this, "depth map", CABLES.Port.TYPE_TEXTURE));
 
-this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.OP_PORT_TYPE_VALUE));
-this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
+this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.Port.TYPE_VALUE));
+this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.Port.TYPE_VALUE));
 
-this.showIntensity = this.addInPort(new CABLES.Port(this, "showIntensity", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+this.showIntensity = this.addInPort(new CABLES.Port(this, "showIntensity", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
+this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.Port.TYPE_VALUE));
 this.iterations.val = 10;
 
 let shader = new CGL.Shader(cgl, op.name, op);

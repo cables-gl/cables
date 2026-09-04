@@ -1,5 +1,5 @@
 const
-    inPorts = op.inMultiPort("Booleans", CABLES.OP_PORT_TYPE_NUMBER, { "display": "bool" }),
+    inPorts = op.inMultiPort("Booleans", CABLES.Port.TYPE_NUMBER, { "display": "bool" }),
     outResult = op.outNumber("Result");
 
 inPorts.onChange = () =>

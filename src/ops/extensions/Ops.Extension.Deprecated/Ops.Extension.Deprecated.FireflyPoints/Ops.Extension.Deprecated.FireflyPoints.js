@@ -1,35 +1,35 @@
 let render = op.inTrigger("render");
 let next = op.outTrigger("trigger");
 
-op.frequency = op.addInPort(new CABLES.Port(op, "frequency", CABLES.OP_PORT_TYPE_VALUE));
+op.frequency = op.addInPort(new CABLES.Port(op, "frequency", CABLES.Port.TYPE_VALUE));
 let uniFrequency = null;
 op.frequency.val = 1.0;
 
-op.amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.OP_PORT_TYPE_VALUE));
+op.amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.Port.TYPE_VALUE));
 let uniAmount = null;
 op.amount.val = 1.0;
 
-op.phase = op.addInPort(new CABLES.Port(op, "phase", CABLES.OP_PORT_TYPE_VALUE));
+op.phase = op.addInPort(new CABLES.Port(op, "phase", CABLES.Port.TYPE_VALUE));
 let uniPhase = null;
 op.phase.val = 1.0;
 
-let mul = op.addInPort(new CABLES.Port(op, "mul", CABLES.OP_PORT_TYPE_VALUE));
+let mul = op.addInPort(new CABLES.Port(op, "mul", CABLES.Port.TYPE_VALUE));
 let uniMul = null;
 mul.set(3.0);
 
-let add = op.addInPort(new CABLES.Port(op, "add", CABLES.OP_PORT_TYPE_VALUE));
+let add = op.addInPort(new CABLES.Port(op, "add", CABLES.Port.TYPE_VALUE));
 let uniAdd = null;
 add.set(0);
 
-op.toAxisX = op.addInPort(new CABLES.Port(op, "axisX", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+op.toAxisX = op.addInPort(new CABLES.Port(op, "axisX", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 op.toAxisX.val = true;
 op.toAxisX.onChange = setDefines;
 
-op.toAxisY = op.addInPort(new CABLES.Port(op, "axisY", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+op.toAxisY = op.addInPort(new CABLES.Port(op, "axisY", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 op.toAxisY.val = true;
 op.toAxisY.onChange = setDefines;
 
-op.toAxisZ = op.addInPort(new CABLES.Port(op, "axisZ", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+op.toAxisZ = op.addInPort(new CABLES.Port(op, "axisZ", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 op.toAxisZ.val = true;
 op.toAxisZ.onChange = setDefines;
 
@@ -39,7 +39,7 @@ let shader = null;
 let module = null;
 let uniTime;
 
-let src = op.addInPort(new CABLES.Port(op, "Source", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown",
+let src = op.addInPort(new CABLES.Port(op, "Source", CABLES.Port.TYPE_VALUE, { "display": "dropdown",
     "values": [
         "X * Z + Time",
         "X * Y + Time",

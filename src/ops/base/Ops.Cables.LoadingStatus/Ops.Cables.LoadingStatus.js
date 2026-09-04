@@ -1,17 +1,17 @@
 const cgl = op.patch.cgl;
 const patch = op.patch;
 
-const exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-const finished = op.addOutPort(new CABLES.Port(op, "finished", CABLES.OP_PORT_TYPE_FUNCTION));
-const result = op.addOutPort(new CABLES.Port(op, "status", CABLES.OP_PORT_TYPE_VALUE));
+const exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
+const finished = op.addOutPort(new CABLES.Port(op, "finished", CABLES.Port.TYPE_FUNCTION));
+const result = op.addOutPort(new CABLES.Port(op, "status", CABLES.Port.TYPE_VALUE));
 const isFinishedPort = op.outValue("all loaded", false);
-const preRenderStatus = op.addOutPort(new CABLES.Port(op, "preRenderStatus", CABLES.OP_PORT_TYPE_VALUE));
-const preRenderTimeFrames = op.addInPort(new CABLES.Port(op, "preRenderTimes", CABLES.OP_PORT_TYPE_VALUE));
+const preRenderStatus = op.addOutPort(new CABLES.Port(op, "preRenderStatus", CABLES.Port.TYPE_VALUE));
+const preRenderTimeFrames = op.addInPort(new CABLES.Port(op, "preRenderTimes", CABLES.Port.TYPE_VALUE));
 const preRenderOps = op.inBool("PreRender Ops");
 const startTimeLine = op.inBool("Play Timeline", true);
 preRenderStatus.set(0);
-const numAssets = op.addOutPort(new CABLES.Port(op, "numAssets", CABLES.OP_PORT_TYPE_VALUE));
-const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.OP_PORT_TYPE_FUNCTION));
+const numAssets = op.addOutPort(new CABLES.Port(op, "numAssets", CABLES.Port.TYPE_VALUE));
+const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.Port.TYPE_FUNCTION));
 const loadingFinished = op.outTrigger("loading finished");
 
 let finishedAll = false;

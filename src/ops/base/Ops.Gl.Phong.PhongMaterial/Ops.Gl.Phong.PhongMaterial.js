@@ -3,10 +3,10 @@ let cgl = this.patch.cgl;
 // adapted from:
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
-let render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+let render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
 
 const trigger = op.outTrigger("trigger");
-let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.OP_PORT_TYPE_OBJECT));
+let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.Port.TYPE_OBJECT));
 
 let specularStrength = op.inValue("Specular Strength", 1);
 let shininess = op.inValue("Shininess", 20);
@@ -75,28 +75,28 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
 {
     // diffuse color
 
-    let r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+    let r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
     r.onChange = function ()
     {
         if (!r.uniform) r.uniform = new CGL.Uniform(shader, "f", "r", r.get());
         else r.uniform.setValue(r.get());
     };
 
-    let g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     g.onChange = function ()
     {
         if (!g.uniform) g.uniform = new CGL.Uniform(shader, "f", "g", g.get());
         else g.uniform.setValue(g.get());
     };
 
-    let b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     b.onChange = function ()
     {
         if (!b.uniform) b.uniform = new CGL.Uniform(shader, "f", "b", b.get());
         else b.uniform.setValue(b.get());
     };
 
-    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     a.onChange = function ()
     {
         if (!a.uniform) a.uniform = new CGL.Uniform(shader, "f", "a", a.get());
@@ -112,7 +112,7 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
 
 
 {
-    let colorizeTex = this.addInPort(new CABLES.Port(this, "colorize texture", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+    let colorizeTex = this.addInPort(new CABLES.Port(this, "colorize texture", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
     colorizeTex.onChange = function ()
     {
         if (colorizeTex.get()) shader.define("COLORIZE_TEXTURE");
@@ -123,7 +123,7 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
 {
     // diffuse texture
 
-    var diffuseTexture = this.addInPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var diffuseTexture = this.addInPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let diffuseTextureUniform = null;
     shader.bindTextures = bindTextures;
 
@@ -144,7 +144,7 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
         }
     };
 
-    var aoTexture = this.addInPort(new CABLES.Port(this, "AO Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var aoTexture = this.addInPort(new CABLES.Port(this, "AO Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let aoTextureUniform = null;
     aoTexture.ignoreValueSerialize = true;
     shader.bindTextures = bindTextures;
@@ -167,7 +167,7 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
     };
 
 
-    var specTexture = this.addInPort(new CABLES.Port(this, "Specular Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var specTexture = this.addInPort(new CABLES.Port(this, "Specular Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let specTextureUniform = null;
 
     specTexture.onChange = function ()
@@ -188,7 +188,7 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
     };
 
 
-    var normalTexture = this.addInPort(new CABLES.Port(this, "Normal Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var normalTexture = this.addInPort(new CABLES.Port(this, "Normal Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let normalTextureUniform = null;
 
     normalTexture.onChange = function ()
@@ -210,8 +210,8 @@ let uniNormIntensity = new CGL.Uniform(shader, "f", "normalTexIntensity", normIn
 
 
 
-    let diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.OP_PORT_TYPE_VALUE));
-    let diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.OP_PORT_TYPE_VALUE));
+    let diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.Port.TYPE_VALUE));
+    let diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.Port.TYPE_VALUE));
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
 

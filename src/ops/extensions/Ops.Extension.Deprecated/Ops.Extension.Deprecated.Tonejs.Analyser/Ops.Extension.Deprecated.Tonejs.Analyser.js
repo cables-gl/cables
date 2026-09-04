@@ -22,19 +22,19 @@ let node = new Tone.Analyser(TYPE_DEFAULT, SIZE_DEFAULT);
 
 // in ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let refreshPort = op.addInPort(new CABLES.Port(this, "Refresh", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-// var sizePort = op.addInPort( new CABLES.Port( this, "Size", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': SIZE_MIN, 'max': SIZE_MAX }, SIZE_DEFAULT ));
-let sizePort = this.addInPort(new CABLES.Port(this, "Size", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": SIZES }));
+let refreshPort = op.addInPort(new CABLES.Port(this, "Refresh", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+// var sizePort = op.addInPort( new CABLES.Port( this, "Size", CABLES.Port.TYPE_VALUE, { 'display': 'range', 'min': SIZE_MIN, 'max': SIZE_MAX }, SIZE_DEFAULT ));
+let sizePort = this.addInPort(new CABLES.Port(this, "Size", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": SIZES }));
 sizePort.set(SIZE_DEFAULT);
-let typePort = this.addInPort(new CABLES.Port(this, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let typePort = this.addInPort(new CABLES.Port(this, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set(TYPE_DEFAULT);
-let smoothingPort = op.addInPort(new CABLES.Port(this, "Smoothing", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": SMOOTHING_MIN, "max": SMOOTHING_MAX }, SMOOTHING_DEFAULT));
+let smoothingPort = op.addInPort(new CABLES.Port(this, "Smoothing", CABLES.Port.TYPE_VALUE, { "display": "range", "min": SMOOTHING_MIN, "max": SMOOTHING_MAX }, SMOOTHING_DEFAULT));
 smoothingPort.set(SMOOTHING_DEFAULT);
-let maxDecibelsPort = op.addInPort(new CABLES.Port(this, "Max Decibels", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": DECIBELS_RANGE_MIN, "max": DECIBELS_RANGE_MAX }, MAX_DECIBELS_DEFAULT));
+let maxDecibelsPort = op.addInPort(new CABLES.Port(this, "Max Decibels", CABLES.Port.TYPE_VALUE, { "display": "range", "min": DECIBELS_RANGE_MIN, "max": DECIBELS_RANGE_MAX }, MAX_DECIBELS_DEFAULT));
 maxDecibelsPort.set(MAX_DECIBELS_DEFAULT);
-let minDecibelsPort = op.addInPort(new CABLES.Port(this, "Min Decibels", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": DECIBELS_RANGE_MIN, "max": DECIBELS_RANGE_MAX }, MIN_DECIBELS_DEFAULT));
+let minDecibelsPort = op.addInPort(new CABLES.Port(this, "Min Decibels", CABLES.Port.TYPE_VALUE, { "display": "range", "min": DECIBELS_RANGE_MIN, "max": DECIBELS_RANGE_MAX }, MIN_DECIBELS_DEFAULT));
 minDecibelsPort.set(MIN_DECIBELS_DEFAULT);
-let returnTypePort = this.addInPort(new CABLES.Port(this, "Return Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": RETURN_TYPES }));
+let returnTypePort = this.addInPort(new CABLES.Port(this, "Return Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": RETURN_TYPES }));
 returnTypePort.set(RETURN_TYPE_DEFAULT);
 
 // output ports

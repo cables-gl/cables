@@ -1,6 +1,6 @@
 // TODO: remove array3xtransformedinstanced....
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 
 let inTransformations = op.inArray("positions");
 let geom = op.inObject("geom");

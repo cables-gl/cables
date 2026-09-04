@@ -16,12 +16,12 @@ let TIME_SUFFIX_KEYS = Object.keys(TIME_SUFFIXES);
 // input ports
 let timeInputPort = op.inFloat("Time");
 let timeTypePort = this.addInPort(
-    new CABLES.Port(this, "Time Type", CABLES.OP_PORT_TYPE_VALUE,
+    new CABLES.Port(this, "Time Type", CABLES.Port.TYPE_VALUE,
         { "display": "dropdown", "values": TIME_SUFFIX_KEYS }
     )
 );
 let nowRelativePort = op.addInPort(
-    new CABLES.Port(this, "Relative To Now", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" })
+    new CABLES.Port(this, "Relative To Now", CABLES.Port.TYPE_VALUE, { "display": "bool" })
 );
 
 // output port

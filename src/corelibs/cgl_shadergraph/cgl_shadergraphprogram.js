@@ -1,5 +1,5 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS, Port } from "cables";
+import { Port } from "cables";
 import { ShaderGraph } from "./cgl_shadergraph.js";
 
 export class ShaderGraphProgram extends Events
@@ -137,7 +137,7 @@ export class ShaderGraphProgram extends Events
             let paramStr = "";
             const p = op.portsIn[i];
             if (p.uiAttribs.objType == "sg_void") continue;
-            if (p.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+            if (p.type != Port.TYPE_OBJECT) continue;
 
             // parameters...
             if (p.isLinked())
@@ -192,7 +192,7 @@ export class ShaderGraphProgram extends Events
     {
         let count = 0;
         for (let i = 0; i < op.portsIn.length; i++)
-            if (op.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) count++;
+            if (op.portsIn[i].type == Port.TYPE_OBJECT) count++;
         return count;
     }
 

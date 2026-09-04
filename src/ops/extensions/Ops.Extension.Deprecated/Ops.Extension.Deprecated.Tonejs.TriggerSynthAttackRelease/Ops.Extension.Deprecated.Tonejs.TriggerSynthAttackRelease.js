@@ -8,7 +8,7 @@ let DURATION_DEFAULT = "4n";
 
 // input
 let nodePort = op.inObject("Synth");
-let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack Release", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack Release", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let notePort = op.inValueString("Note", NOTE_DEFAULT); // frequency also works
 let durationPort = op.inValueString("Duration", DURATION_DEFAULT);
 let timePort = op.inValueString("Time", TIME_DEFAULT);

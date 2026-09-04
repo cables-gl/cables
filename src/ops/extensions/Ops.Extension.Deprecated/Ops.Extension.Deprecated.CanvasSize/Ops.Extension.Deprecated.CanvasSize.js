@@ -1,8 +1,8 @@
 op.name = "CanvasSize";
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let width = op.addOutPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE));
-let height = op.addOutPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
+let width = op.addOutPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
+let height = op.addOutPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
 
 let cgl = op.patch.cgl;
 let w = 0, h = 0;

@@ -1,11 +1,11 @@
-let eventIn = op.addInPort(new CABLES.Port(this, "Event Input", CABLES.OP_PORT_TYPE_OBJECT));
-let value = op.addInPort(new CABLES.Port(this, "Value", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let velocity = op.addInPort(new CABLES.Port(this, "Velocity", CABLES.OP_PORT_TYPE_VALUE));
+let eventIn = op.addInPort(new CABLES.Port(this, "Event Input", CABLES.Port.TYPE_OBJECT));
+let value = op.addInPort(new CABLES.Port(this, "Value", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let velocity = op.addInPort(new CABLES.Port(this, "Velocity", CABLES.Port.TYPE_VALUE));
 let note = op.addInPort(new CABLES.Port(op, "note"));
-let learn = op.addInPort(new CABLES.Port(op, "learn", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let isControllCMd = op.addInPort(new CABLES.Port(this, "Controll Value", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let learn = op.addInPort(new CABLES.Port(op, "learn", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let isControllCMd = op.addInPort(new CABLES.Port(this, "Controll Value", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-let eventOut = op.addOutPort(new CABLES.Port(this, "Event Output", CABLES.OP_PORT_TYPE_OBJECT));
+let eventOut = op.addOutPort(new CABLES.Port(this, "Event Output", CABLES.Port.TYPE_OBJECT));
 
 velocity.set(127);
 note.set(1);

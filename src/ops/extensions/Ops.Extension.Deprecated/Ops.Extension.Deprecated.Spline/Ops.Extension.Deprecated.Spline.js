@@ -1,14 +1,14 @@
 let render = op.inTrigger("render");
-let thickness = op.addInPort(new CABLES.Port(op, "thickness", CABLES.OP_PORT_TYPE_VALUE));
-let subDivs = op.addInPort(new CABLES.Port(op, "subDivs", CABLES.OP_PORT_TYPE_VALUE));
-let bezier = op.addInPort(new CABLES.Port(op, "Bezier", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let centerpoint = op.addInPort(new CABLES.Port(op, "centerpoint", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let doClose = op.addInPort(new CABLES.Port(op, "Closed", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let renderLines = op.addInPort(new CABLES.Port(op, "Draw", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let thickness = op.addInPort(new CABLES.Port(op, "thickness", CABLES.Port.TYPE_VALUE));
+let subDivs = op.addInPort(new CABLES.Port(op, "subDivs", CABLES.Port.TYPE_VALUE));
+let bezier = op.addInPort(new CABLES.Port(op, "Bezier", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let centerpoint = op.addInPort(new CABLES.Port(op, "centerpoint", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let doClose = op.addInPort(new CABLES.Port(op, "Closed", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let renderLines = op.addInPort(new CABLES.Port(op, "Draw", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 let trigger = op.outTrigger("trigger");
-let triggerPoints = op.addOutPort(new CABLES.Port(op, "triggerPoints", CABLES.OP_PORT_TYPE_FUNCTION));
-let outPoints = op.addOutPort(new CABLES.Port(op, "Points", CABLES.OP_PORT_TYPE_ARRAY));
+let triggerPoints = op.addOutPort(new CABLES.Port(op, "triggerPoints", CABLES.Port.TYPE_FUNCTION));
+let outPoints = op.addOutPort(new CABLES.Port(op, "Points", CABLES.Port.TYPE_ARRAY));
 
 renderLines.set(true);
 centerpoint.set(false);

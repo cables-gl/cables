@@ -2,10 +2,10 @@ let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let texture0 = op.addInPort(new CABLES.Port(op, "texture left", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
+let texture0 = op.addInPort(new CABLES.Port(op, "texture left", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 let texture0Uniform = null;
 
-let texture1 = op.addInPort(new CABLES.Port(op, "texture right", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
+let texture1 = op.addInPort(new CABLES.Port(op, "texture right", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 let texture1Uniform = null;
 
 let srcFrag = ""

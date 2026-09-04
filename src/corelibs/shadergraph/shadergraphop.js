@@ -1,4 +1,4 @@
-import { CONSTANTS, Op, Port } from "cables";
+import { Op, Port } from "cables";
 import { ShaderGraphProgram } from "./shadergraphprogram.js";
 
 export class ShaderGraphOp
@@ -32,7 +32,7 @@ export class ShaderGraphOp
     {
         for (let i = 0; i < this.op.portsIn.length; i++)
         {
-            if (this.op.portsIn[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+            if (this.op.portsIn[i].type != Port.TYPE_OBJECT) continue;
 
             if (this.op.portsIn[i].uiAttribs.objType && this.op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0)
                 this.op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
@@ -142,7 +142,7 @@ export class ShaderGraphOp
 
         for (let i = 0; i < this.op.portsOut.length; i++)
         {
-            if (this.op.portsOut[i].type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+            if (this.op.portsOut[i].type != Port.TYPE_OBJECT) continue;
             this.op.portsOut[i].setRef({});
         }
     }

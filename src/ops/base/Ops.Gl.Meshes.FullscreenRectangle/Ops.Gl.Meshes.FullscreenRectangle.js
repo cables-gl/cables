@@ -11,7 +11,7 @@ let mesh = null;
 let geom = new CGL.Geometry("fullscreen rectangle");
 let x = 0, y = 0, z = 0, w = 0, h = 0;
 
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.Port.TYPE_FUNCTION);
 op.toWorkPortsNeedToBeLinked(render);
 
 flipX.onChange = rebuildFlip;

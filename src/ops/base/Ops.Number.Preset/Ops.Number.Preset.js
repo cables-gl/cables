@@ -17,7 +17,7 @@ const
     presetDelete = op.inTriggerButton("Delete"),
     presetRename = op.inTriggerButton("Rename"),
 
-    addPort = op.addOutPort(new CABLES.Port(op, "Create Variable", CABLES.OP_PORT_TYPE_DYNAMIC)),
+    addPort = op.addOutPort(new CABLES.Port(op, "Create Variable", CABLES.Port.TYPE_DYNAMIC)),
     outNum = op.outNumber("Num Presets", 0),
     outNumCurrentPreset = op.outNumber("current Preset", 0),
     outDbgData = op.outArray("dbg_data"),
@@ -339,7 +339,7 @@ dataPort.onChange = function ()
 
         if (!op.getPort(varname))
         {
-            if (portObject.type == CABLES.OP_PORT_TYPE_VALUE)
+            if (portObject.type == CABLES.Port.TYPE_VALUE)
             {
                 const val = op.patch.getVarValue(varname);
                 const port = op.inFloat(varname, val);

@@ -1,4 +1,4 @@
-let funcName = op.addInPort(new CABLES.Port(op, "Function Name", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
+let funcName = op.addInPort(new CABLES.Port(op, "Function Name", CABLES.Port.TYPE_VALUE, { "type": "string" }));
 let triggerButton = op.inTriggerButton("trigger");
 let outTrigger = op.outTrigger("Next");
 

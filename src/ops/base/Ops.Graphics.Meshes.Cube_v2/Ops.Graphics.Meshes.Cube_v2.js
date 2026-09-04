@@ -21,7 +21,7 @@ op.setUiAxisPorts(width, height, len);
 
 const cgl = op.patch.cgl;
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.Port.TYPE_FUNCTION);
 
 op.setPortGroup("Mapping", [mapping, mappingBias, inFlipX]);
 op.setPortGroup("Geometry", [width, height, len, center]);

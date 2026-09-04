@@ -1,5 +1,5 @@
-let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.OP_PORT_TYPE_FUNCTION));
-let fftArr = op.addInPort(new CABLES.Port(op, "FFT Array", CABLES.OP_PORT_TYPE_ARRAY));
+let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.Port.TYPE_FUNCTION));
+let fftArr = op.addInPort(new CABLES.Port(op, "FFT Array", CABLES.Port.TYPE_ARRAY));
 
 let amount = op.inValueSlider("Blur Amount");
 
@@ -223,9 +223,9 @@ function blurTexture()
 let shaderMirror = new CGL.Shader(cgl, "analyzetexture");
 
 let doMirror = op.inBool("Mirror");
-let mirrorWidth = op.addInPort(new CABLES.Port(op, "mirror width", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let mirrorOffset = op.addInPort(new CABLES.Port(op, "mirror offset", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let mirrorFlip = op.addInPort(new CABLES.Port(op, "mirror flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let mirrorWidth = op.addInPort(new CABLES.Port(op, "mirror width", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let mirrorOffset = op.addInPort(new CABLES.Port(op, "mirror offset", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let mirrorFlip = op.addInPort(new CABLES.Port(op, "mirror flip", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 mirrorFlip.set(true);
 mirrorWidth.set(1);

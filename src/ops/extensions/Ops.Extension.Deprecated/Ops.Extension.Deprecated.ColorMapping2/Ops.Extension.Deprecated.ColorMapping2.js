@@ -1,7 +1,7 @@
 op.name = "ColorLookup";
 
 let render = op.inTrigger("render");
-let image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTURE));
+let image = op.addInPort(new CABLES.Port(op, "image", CABLES.Port.TYPE_TEXTURE));
 let trigger = op.outTrigger("trigger");
 
 let axis = op.inValueSelect("Axis", ["hotizontal", "vertical"], "horizontal");

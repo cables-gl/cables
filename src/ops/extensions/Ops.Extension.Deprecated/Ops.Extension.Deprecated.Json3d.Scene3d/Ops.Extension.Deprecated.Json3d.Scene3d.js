@@ -5,8 +5,8 @@ let scene = new CABLES.Variable();
 
 cgl.frameStore.currentScene = null;
 
-this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-this.filename = this.addInPort(new CABLES.Port(this, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "mesh" }));
+this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
+this.filename = this.addInPort(new CABLES.Port(this, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "mesh" }));
 const trigger = op.outTrigger("trigger");
 
 let defaultEasing = CABLES.EASING_LINEAR;

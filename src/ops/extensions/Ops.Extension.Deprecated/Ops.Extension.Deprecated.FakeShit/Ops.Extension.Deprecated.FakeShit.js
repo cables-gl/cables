@@ -1,6 +1,6 @@
 op.name = "OverwriteTranslation";
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 let trigger = op.outTrigger("trigger");
 
 let scale = op.outValue("Scale");

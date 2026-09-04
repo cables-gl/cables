@@ -36,7 +36,7 @@ start.onTriggered = function ()
     {
         for (let ip = 0; ip < ops[i].portsIn.length; ip++)
         {
-            if (!ops[i].portsIn[ip].isLinked() && ops[i].portsIn[ip].type == CABLES.OP_PORT_TYPE_VALUE)
+            if (!ops[i].portsIn[ip].isLinked() && ops[i].portsIn[ip].type == CABLES.Port.TYPE_VALUE)
             {
                 ops[i].portsIn[ip].chOldOnChange = ops[i].portsIn[ip].onChange;
                 ops[i].portsIn[ip].chOldOnValueChanged = ops[i].portsIn[ip].onValueChanged;

@@ -2,12 +2,12 @@
 op.name = "My New Op";
 
 // Input ports
-let execute = op.addInPort(new CABLES.Port(this, "Execute", CABLES.OP_PORT_TYPE_FUNCTION));
-let number1 = op.addInPort(new CABLES.Port(op, "Number 1", CABLES.OP_PORT_TYPE_));
-let number2 = op.addInPort(new CABLES.Port(op, "Number 2", CABLES.OP_PORT_TYPE_));
+let execute = op.addInPort(new CABLES.Port(this, "Execute", CABLES.Port.TYPE_FUNCTION));
+let number1 = op.addInPort(new CABLES.Port(op, "Number 1", CABLES.Port.TYPE_));
+let number2 = op.addInPort(new CABLES.Port(op, "Number 2", CABLES.Port.TYPE_));
 // Output ports
-let next = op.addOutPort(new CABLES.Port(this, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
-let result = op.addOutPort(new CABLES.Port(op, "Result", CABLES.OP_PORT_TYPE_));
+let next = op.addOutPort(new CABLES.Port(this, "Next", CABLES.Port.TYPE_FUNCTION));
+let result = op.addOutPort(new CABLES.Port(op, "Result", CABLES.Port.TYPE_));
 
 // Define callback functions when the value of the input ports changed
 number1.onChange = update;

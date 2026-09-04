@@ -1,10 +1,10 @@
 let cgl = this.patch.cgl;
 
-const render = op.addInPort(new CABLES.Port(op, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-const fade = op.addInPort(new CABLES.Port(op, "fade", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-const fadeWidth = op.addInPort(new CABLES.Port(op, "fadeWidth", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-const image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTURE));
-const trigger = op.addOutPort(new CABLES.Port(op, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+const render = op.addInPort(new CABLES.Port(op, "render", CABLES.Port.TYPE_FUNCTION));
+const fade = op.addInPort(new CABLES.Port(op, "fade", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+const fadeWidth = op.addInPort(new CABLES.Port(op, "fadeWidth", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+const image = op.addInPort(new CABLES.Port(op, "image", CABLES.Port.TYPE_TEXTURE));
+const trigger = op.addOutPort(new CABLES.Port(op, "trigger", CABLES.Port.TYPE_FUNCTION));
 
 let shader = new CGL.Shader(cgl, "wipetransition");
 

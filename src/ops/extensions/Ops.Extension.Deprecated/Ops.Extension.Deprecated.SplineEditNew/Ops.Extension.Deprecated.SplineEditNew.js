@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
     inEdit = op.inBool("Edit"),
-    inStrs = op.inMultiPort2("Numbers", CABLES.OP_PORT_TYPE_NUMBER),
+    inStrs = op.inMultiPort2("Numbers", CABLES.Port.TYPE_NUMBER),
     outArr = op.outArray("Result", null, 3),
     outNum = op.outNumber("Num Values");
 

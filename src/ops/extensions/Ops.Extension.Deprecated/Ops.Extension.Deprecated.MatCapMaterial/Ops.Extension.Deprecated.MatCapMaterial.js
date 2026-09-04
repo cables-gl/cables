@@ -1,32 +1,32 @@
 let self = this;
 let cgl = self.patch.cgl;
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
-this.shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.OP_PORT_TYPE_OBJECT));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
+this.shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.Port.TYPE_OBJECT));
 this.shaderOut.ignoreValueSerialize = true;
 
-this.texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+this.texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 this.textureUniform = null;
 
-this.textureDiffuse = this.addInPort(new CABLES.Port(this, "diffuse", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+this.textureDiffuse = this.addInPort(new CABLES.Port(this, "diffuse", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 this.textureDiffuseUniform = null;
 
-this.textureNormal = this.addInPort(new CABLES.Port(this, "normal", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+this.textureNormal = this.addInPort(new CABLES.Port(this, "normal", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 this.textureNormalUniform = null;
 
-this.normalScale = this.addInPort(new CABLES.Port(this, "normalScale", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+this.normalScale = this.addInPort(new CABLES.Port(this, "normalScale", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 this.normalScale.set(0.4);
 this.normalScaleUniform = null;
 
-this.textureSpec = this.addInPort(new CABLES.Port(this, "specular", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+this.textureSpec = this.addInPort(new CABLES.Port(this, "specular", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 this.textureSpecUniform = null;
 
-this.textureSpecMatCap = this.addInPort(new CABLES.Port(this, "specular matcap", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+this.textureSpecMatCap = this.addInPort(new CABLES.Port(this, "specular matcap", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 this.textureSpecMatCapUniform = null;
 
-this.diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.OP_PORT_TYPE_VALUE));
-this.diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.OP_PORT_TYPE_VALUE));
+this.diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.Port.TYPE_VALUE));
+this.diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.Port.TYPE_VALUE));
 this.diffuseRepeatX.set(1.0);
 this.diffuseRepeatY.set(1.0);
 
@@ -42,14 +42,14 @@ this.diffuseRepeatY.onChange = function ()
     self.diffuseRepeatYUniform.setValue(self.diffuseRepeatY.get());
 };
 
-this.calcTangents = this.addInPort(new CABLES.Port(this, "calc normal tangents", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+this.calcTangents = this.addInPort(new CABLES.Port(this, "calc normal tangents", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 this.calcTangents.onChange = function ()
 {
     if (self.calcTangents.get()) shader.define("CALC_TANGENT");
     else shader.removeDefine("CALC_TANGENT");
 };
 
-this.projectCoords = this.addInPort(new CABLES.Port(this, "projectCoords", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["no", "xy", "yz", "xz"] }));
+this.projectCoords = this.addInPort(new CABLES.Port(this, "projectCoords", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["no", "xy", "yz", "xz"] }));
 this.projectCoords.set("no");
 this.projectCoords.onChange = function ()
 {
@@ -62,8 +62,8 @@ this.projectCoords.onChange = function ()
     if (self.projectCoords.get() == "xz") shader.define("DO_PROJECT_COORDS_XZ");
 };
 
-this.normalRepeatX = this.addInPort(new CABLES.Port(this, "normalRepeatX", CABLES.OP_PORT_TYPE_VALUE));
-this.normalRepeatY = this.addInPort(new CABLES.Port(this, "normalRepeatY", CABLES.OP_PORT_TYPE_VALUE));
+this.normalRepeatX = this.addInPort(new CABLES.Port(this, "normalRepeatX", CABLES.Port.TYPE_VALUE));
+this.normalRepeatY = this.addInPort(new CABLES.Port(this, "normalRepeatY", CABLES.Port.TYPE_VALUE));
 this.normalRepeatX.set(1.0);
 this.normalRepeatY.set(1.0);
 

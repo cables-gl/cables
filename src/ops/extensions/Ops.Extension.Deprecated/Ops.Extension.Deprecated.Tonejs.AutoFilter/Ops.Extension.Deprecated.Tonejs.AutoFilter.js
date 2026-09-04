@@ -28,7 +28,7 @@ let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 let depthPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Depth", node.depth, { "display": "range", "min": DEPTH_MIN, "max": DEPTH_MAX }, DEPTH_DEFAULT);
 let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 // var filterPort = op.inObject("Filter");
-let typePort = this.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0]));
+let typePort = this.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }, OSCILLATOR_TYPES[0]));
 typePort.set(OSCILLATOR_TYPES[0]);
 // var minPort = op.inFloat("Min", MIN_DEFAULT); // not noticable, tone.js bug?
 let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);

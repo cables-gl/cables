@@ -1,6 +1,6 @@
 op.name = "ArrayIterator 3x";
-let exe = op.addInPort(new CABLES.Port(op, "Execute", CABLES.OP_PORT_TYPE_FUNCTION));
-let arr = op.addInPort(new CABLES.Port(op, "Array", CABLES.OP_PORT_TYPE_ARRAY));
+let exe = op.addInPort(new CABLES.Port(op, "Execute", CABLES.Port.TYPE_FUNCTION));
+let arr = op.addInPort(new CABLES.Port(op, "Array", CABLES.Port.TYPE_ARRAY));
 let mod = op.inFloat("Modulo", 1);
 arr.ignoreValueSerialize = true;
 

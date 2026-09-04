@@ -1,6 +1,6 @@
 const idx = op.inValueInt("Index"),
     result = op.outString("Result"),
-    inStrs = op.inMultiPort2("File", CABLES.OP_PORT_TYPE_STRING, { "display": "file" }, 5),
+    inStrs = op.inMultiPort2("File", CABLES.Port.TYPE_STRING, { "display": "file" }, 5),
     outNum = op.outNumber("Num Values");
 
 setUi();

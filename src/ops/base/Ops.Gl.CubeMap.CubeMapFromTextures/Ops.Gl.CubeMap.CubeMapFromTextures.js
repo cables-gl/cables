@@ -13,7 +13,7 @@ let titles = [
 
 for (let i = 0; i < numImages; i++)
 {
-    let file = op.addInPort(new CABLES.Port(op, titles[i], CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "image" }));
+    let file = op.addInPort(new CABLES.Port(op, titles[i], CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "image" }));
     file.onChange = load;
     inFilenames.push(file);
 }

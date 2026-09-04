@@ -9,7 +9,7 @@ const
     fill = op.inBool("Fill"),
     renderMesh = op.inBool("Render Mesh", true),
     trigger = op.outTrigger("trigger"),
-    geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+    geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize = true;
 let cgl = op.patch.cgl;

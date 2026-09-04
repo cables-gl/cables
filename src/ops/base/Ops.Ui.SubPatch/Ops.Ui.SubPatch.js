@@ -1,8 +1,8 @@
-op.dyn = op.addInPort(new CABLES.Port(op, "create port", CABLES.OP_PORT_TYPE_DYNAMIC));
-op.dynOut = op.addOutPort(new CABLES.Port(op, "create port out", CABLES.OP_PORT_TYPE_DYNAMIC));
+op.dyn = op.addInPort(new CABLES.Port(op, "create port", CABLES.Port.TYPE_DYNAMIC));
+op.dynOut = op.addOutPort(new CABLES.Port(op, "create port out", CABLES.Port.TYPE_DYNAMIC));
 
-const dataStr = op.addInPort(new CABLES.Port(op, "dataStr", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
-op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
+const dataStr = op.addInPort(new CABLES.Port(op, "dataStr", CABLES.Port.TYPE_VALUE, { "display": "readonly" }));
+op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.Port.TYPE_VALUE, { "display": "readonly" }));
 
 
 dataStr.setUiAttribs({ "hideParam": true });
@@ -110,7 +110,7 @@ function addPortListener(newPort, newPortInPatch)
 
     if (newPort.direction == CABLES.PORT_DIR_IN)
     {
-        if (newPort.type == CABLES.OP_PORT_TYPE_FUNCTION)
+        if (newPort.type == CABLES.Port.TYPE_FUNCTION)
         {
             newPort.onTriggered = function ()
             {

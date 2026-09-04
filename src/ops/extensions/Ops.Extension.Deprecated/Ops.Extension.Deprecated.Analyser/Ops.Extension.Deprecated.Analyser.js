@@ -10,15 +10,15 @@ let getFreq = true;
 let array = null;
 
 // input ports
-let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.OP_PORT_TYPE_FUNCTION));
+let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.Port.TYPE_FUNCTION));
 let audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
 let anData = op.inValueSelect("Data", ["Frequency", "Time Domain"], "Frequency");
 
 // output ports
 let next = op.outTrigger("Next");
 let audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", analyser);
-let avgVolume = op.addOutPort(new CABLES.Port(op, "average volume", CABLES.OP_PORT_TYPE_VALUE));
-let fftOut = op.addOutPort(new CABLES.Port(op, "fft", CABLES.OP_PORT_TYPE_ARRAY));
+let avgVolume = op.addOutPort(new CABLES.Port(op, "average volume", CABLES.Port.TYPE_VALUE));
+let fftOut = op.addOutPort(new CABLES.Port(op, "fft", CABLES.Port.TYPE_ARRAY));
 
 // change listeners
 anData.onChange = function ()

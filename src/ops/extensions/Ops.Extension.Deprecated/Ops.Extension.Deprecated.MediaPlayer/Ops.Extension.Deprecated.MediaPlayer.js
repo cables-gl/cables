@@ -1,15 +1,15 @@
 /* ports in */
-let volume = op.addInPort(new CABLES.Port(op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let file = op.addInPort(new CABLES.Port(op, "File", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "filter": "audio" }));
-let play = op.addInPort(new CABLES.Port(op, "Play", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let pause = op.addInPort(new CABLES.Port(op, "Pause", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let rewind = op.addInPort(new CABLES.Port(op, "Rewind", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let seekPosition = op.addInPort(new CABLES.Port(op, "Seek Position (Seconds)", CABLES.OP_PORT_TYPE_VALUE));
-let jumpToSeekPosition = op.addInPort(new CABLES.Port(op, "Jump To Seek Position", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let volume = op.addInPort(new CABLES.Port(op, "Volume", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let file = op.addInPort(new CABLES.Port(op, "File", CABLES.Port.TYPE_VALUE, { "display": "file", "filter": "audio" }));
+let play = op.addInPort(new CABLES.Port(op, "Play", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let pause = op.addInPort(new CABLES.Port(op, "Pause", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let rewind = op.addInPort(new CABLES.Port(op, "Rewind", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let seekPosition = op.addInPort(new CABLES.Port(op, "Seek Position (Seconds)", CABLES.Port.TYPE_VALUE));
+let jumpToSeekPosition = op.addInPort(new CABLES.Port(op, "Jump To Seek Position", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
 /* ports out */
-let audioOut = op.addOutPort(new CABLES.Port(op, "Audio Out", CABLES.OP_PORT_TYPE_OBJECT));
-let duration = op.addOutPort(new CABLES.Port(op, "Duration", CABLES.OP_PORT_TYPE_VALUE));
+let audioOut = op.addOutPort(new CABLES.Port(op, "Audio Out", CABLES.Port.TYPE_OBJECT));
+let duration = op.addOutPort(new CABLES.Port(op, "Duration", CABLES.Port.TYPE_VALUE));
 
 /* port default values */
 volume.set(1.0);

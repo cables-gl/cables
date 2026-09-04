@@ -9,7 +9,7 @@ let slidey = op.inValueSlider("Slide Y", 0);
 let centerX = op.inValueSlider("Center X", 0.5);
 let centerY = op.inValueSlider("Center Y", 0.5);
 
-let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
+let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

@@ -1,6 +1,6 @@
 const
     inSep = op.inSwitch("Seperator", ["None", "LineBreak", "Space", ",", "/"], "None"),
-    inStrs = op.inMultiPort("Strings", CABLES.OP_PORT_TYPE_STRING),
+    inStrs = op.inMultiPort("Strings", CABLES.Port.TYPE_STRING),
     outStr = op.outString("String"),
     outNum = op.outNumber("Num Strings");
 

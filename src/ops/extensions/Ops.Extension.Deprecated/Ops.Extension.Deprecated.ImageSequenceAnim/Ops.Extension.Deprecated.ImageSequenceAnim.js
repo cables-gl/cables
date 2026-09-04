@@ -1,17 +1,17 @@
-let exe = op.addInPort(new CABLES.Port(op, "Exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let next = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
-let fps = op.addInPort(new CABLES.Port(op, "FPS", CABLES.OP_PORT_TYPE_VALUE));
-let inOffsetY = op.addInPort(new CABLES.Port(op, "Row Offset Y", CABLES.OP_PORT_TYPE_VALUE));
-let numFrames = op.addInPort(new CABLES.Port(op, "Num Frames", CABLES.OP_PORT_TYPE_VALUE));
-let numX = op.addInPort(new CABLES.Port(op, "Num X", CABLES.OP_PORT_TYPE_VALUE));
-let numY = op.addInPort(new CABLES.Port(op, "Num Y", CABLES.OP_PORT_TYPE_VALUE));
+let exe = op.addInPort(new CABLES.Port(op, "Exe", CABLES.Port.TYPE_FUNCTION));
+let next = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
+let fps = op.addInPort(new CABLES.Port(op, "FPS", CABLES.Port.TYPE_VALUE));
+let inOffsetY = op.addInPort(new CABLES.Port(op, "Row Offset Y", CABLES.Port.TYPE_VALUE));
+let numFrames = op.addInPort(new CABLES.Port(op, "Num Frames", CABLES.Port.TYPE_VALUE));
+let numX = op.addInPort(new CABLES.Port(op, "Num X", CABLES.Port.TYPE_VALUE));
+let numY = op.addInPort(new CABLES.Port(op, "Num Y", CABLES.Port.TYPE_VALUE));
 
 let play = op.inBool("Play", true);
 
-let texRepeatX = op.addOutPort(new CABLES.Port(op, "Repeat X", CABLES.OP_PORT_TYPE_VALUE));
-let texRepeatY = op.addOutPort(new CABLES.Port(op, "Repeat Y", CABLES.OP_PORT_TYPE_VALUE));
-let texU = op.addOutPort(new CABLES.Port(op, "Offset X", CABLES.OP_PORT_TYPE_VALUE));
-let texV = op.addOutPort(new CABLES.Port(op, "Offset Y", CABLES.OP_PORT_TYPE_VALUE));
+let texRepeatX = op.addOutPort(new CABLES.Port(op, "Repeat X", CABLES.Port.TYPE_VALUE));
+let texRepeatY = op.addOutPort(new CABLES.Port(op, "Repeat Y", CABLES.Port.TYPE_VALUE));
+let texU = op.addOutPort(new CABLES.Port(op, "Offset X", CABLES.Port.TYPE_VALUE));
+let texV = op.addOutPort(new CABLES.Port(op, "Offset Y", CABLES.Port.TYPE_VALUE));
 
 numX.onChange = setRepeat;
 numY.onChange = setRepeat;

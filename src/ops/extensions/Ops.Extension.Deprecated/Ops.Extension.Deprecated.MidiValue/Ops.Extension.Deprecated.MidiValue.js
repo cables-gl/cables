@@ -1,10 +1,10 @@
-let eventIn = op.addInPort(new CABLES.Port(this, "Event Input", CABLES.OP_PORT_TYPE_OBJECT));
+let eventIn = op.addInPort(new CABLES.Port(this, "Event Input", CABLES.Port.TYPE_OBJECT));
 
 let note = op.addInPort(new CABLES.Port(this, "note"));
 let channel = op.inValueInt("Channel", 0);
-let learn = op.addInPort(new CABLES.Port(this, "learn", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let learn = op.addInPort(new CABLES.Port(this, "learn", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
-let eventOut = op.addOutPort(new CABLES.Port(this, "Event Output", CABLES.OP_PORT_TYPE_OBJECT));
+let eventOut = op.addOutPort(new CABLES.Port(this, "Event Output", CABLES.Port.TYPE_OBJECT));
 let value = op.addOutPort(new CABLES.Port(this, "value"));
 
 note.set(60);

@@ -1,7 +1,7 @@
 const
     update = op.inTrigger("Update"),
 meth=op.inDropDown("Method",["Union","Difference","Intersection","Minkowski","Hull"],"Union"),
-    nexts = op.outMultiPort2("Trigger", CABLES.OP_PORT_TYPE_TRIGGER, { "display": "button" },4);
+    nexts = op.outMultiPort2("Trigger", CABLES.Port.TYPE_TRIGGER, { "display": "button" },4);
 
 meth.onChange = () => { op.setUiAttrib({ "extendTitle": meth.get()  }); };
 

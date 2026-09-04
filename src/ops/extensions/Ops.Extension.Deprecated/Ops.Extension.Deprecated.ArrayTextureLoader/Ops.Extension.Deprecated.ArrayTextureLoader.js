@@ -1,5 +1,5 @@
-let inUrls = op.addInPort(new CABLES.Port(op, "URLs", CABLES.OP_PORT_TYPE_ARRAY));
-let outTextures = op.addOutPort(new CABLES.Port(op, "Textures", CABLES.OP_PORT_TYPE_ARRAY));
+let inUrls = op.addInPort(new CABLES.Port(op, "URLs", CABLES.Port.TYPE_ARRAY));
+let outTextures = op.addOutPort(new CABLES.Port(op, "Textures", CABLES.Port.TYPE_ARRAY));
 
 let texArr = [];
 

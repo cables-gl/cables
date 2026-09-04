@@ -1,9 +1,9 @@
 const exe = op.inTrigger("exe");
 let trigger = op.outTrigger("trigger");
 
-let x = op.addInPort(new CABLES.Port(op, "x", CABLES.OP_PORT_TYPE_VALUE));
-let y = op.addInPort(new CABLES.Port(op, "y", CABLES.OP_PORT_TYPE_VALUE));
-let z = op.addInPort(new CABLES.Port(op, "z", CABLES.OP_PORT_TYPE_VALUE));
+let x = op.addInPort(new CABLES.Port(op, "x", CABLES.Port.TYPE_VALUE));
+let y = op.addInPort(new CABLES.Port(op, "y", CABLES.Port.TYPE_VALUE));
+let z = op.addInPort(new CABLES.Port(op, "z", CABLES.Port.TYPE_VALUE));
 
 let forceObject = {};
 

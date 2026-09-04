@@ -10,7 +10,7 @@ const triggers = [];
 
 for (let i = 0; i < 8; i++)
 {
-    const newIn = op.addOutPort(new CABLES.Port(op, "trigger " + i, CABLES.OP_PORT_TYPE_FUNCTION));
+    const newIn = op.addOutPort(new CABLES.Port(op, "trigger " + i, CABLES.Port.TYPE_FUNCTION));
     triggers.push(newIn);
     newIn.onLinkChanged = updateLinkedArray;
 }

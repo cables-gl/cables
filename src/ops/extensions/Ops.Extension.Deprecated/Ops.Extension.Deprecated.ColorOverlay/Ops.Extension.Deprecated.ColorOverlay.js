@@ -4,13 +4,13 @@ let cgl = this.patch.cgl;
 
 this.name = "ColorOverlay";
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
-this.r = this.addInPort(new CABLES.Port(this, "r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-this.g = this.addInPort(new CABLES.Port(this, "g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.b = this.addInPort(new CABLES.Port(this, "b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+this.r = this.addInPort(new CABLES.Port(this, "r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+this.g = this.addInPort(new CABLES.Port(this, "g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.b = this.addInPort(new CABLES.Port(this, "b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;

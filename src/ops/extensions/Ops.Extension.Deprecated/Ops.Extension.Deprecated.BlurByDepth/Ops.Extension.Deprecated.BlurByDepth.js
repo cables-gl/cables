@@ -1,18 +1,18 @@
 let self = this;
 let cgl = this.patch.cgl;
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
-let depthTex = this.addInPort(new CABLES.Port(this, "depth texture", CABLES.OP_PORT_TYPE_TEXTURE));
+let depthTex = this.addInPort(new CABLES.Port(this, "depth texture", CABLES.Port.TYPE_TEXTURE));
 
-this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
-this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.OP_PORT_TYPE_VALUE));
+this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.Port.TYPE_VALUE));
+this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.Port.TYPE_VALUE));
 
-let depthStart = this.addInPort(new CABLES.Port(this, "depth start", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let depthEnd = this.addInPort(new CABLES.Port(this, "depth end", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let depthStart = this.addInPort(new CABLES.Port(this, "depth start", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let depthEnd = this.addInPort(new CABLES.Port(this, "depth end", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
+this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.Port.TYPE_VALUE));
 this.iterations.val = 10;
 
 let shader = new CGL.Shader(cgl, op.name, op);
@@ -110,7 +110,7 @@ let uniHeight = new CGL.Uniform(shader, "f", "height", 0);
 var uniDepthStart = new CGL.Uniform(shader, "f", "depthStart", 0);
 var uniDepthEnd = new CGL.Uniform(shader, "f", "depthEnd", 50);
 
-let direction = this.addInPort(new CABLES.Port(this, "direction", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["both", "vertical", "horizontal"] }));
+let direction = this.addInPort(new CABLES.Port(this, "direction", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["both", "vertical", "horizontal"] }));
 let dir = 0;
 direction.set("both");
 direction.onValueChange(function ()

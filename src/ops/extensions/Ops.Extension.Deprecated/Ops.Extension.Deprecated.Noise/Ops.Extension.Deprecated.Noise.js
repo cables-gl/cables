@@ -1,6 +1,6 @@
 op.name = "Noise";
 let render = op.inTrigger("render");
-let amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 let trigger = op.outTrigger("trigger");
 

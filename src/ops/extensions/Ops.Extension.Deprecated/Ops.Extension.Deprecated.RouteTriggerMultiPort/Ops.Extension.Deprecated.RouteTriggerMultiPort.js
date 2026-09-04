@@ -3,7 +3,7 @@ const
     switchPort = op.inValueInt("Switch Value"),
     numTrigs = op.outNumber("Total Connections"),
     outArrNames = op.outArray("Connected Op Names"),
-    outTrigs = op.outMultiPort("Trigger", CABLES.OP_PORT_TYPE_FUNCTION);
+    outTrigs = op.outMultiPort("Trigger", CABLES.Port.TYPE_FUNCTION);
 
 exePort.onTriggered = update;
 

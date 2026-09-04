@@ -22,7 +22,7 @@ let buffer = null;
 let bufferLoaded = false;
 
 // input ports
-let playPort = op.addInPort(new CABLES.Port(this, "Play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let playPort = op.addInPort(new CABLES.Port(this, "Play", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 playPort.set(PLAY_DEFAULT);
 let samplePort = op.inObject("Sample (AudioBuffer)");
 let detunePort = op.inFloat("Detune", DETUNE_DEFAULT);
@@ -30,7 +30,7 @@ let driftPort = op.inFloat("Drift", DRIFT_DEFAULT);
 let playbackRatePort = op.inFloat("Playback Rate", PLAYBACK_RATE_DEFAULT);
 let overlapPort = op.inFloat("Overlap", OVERLAP_DEFAULT);
 let grainSizePort = op.inFloat("Grain Size", GRAIN_SIZE_DEFAULT);
-let loopPort = op.addInPort(new CABLES.Port(this, "Loop", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let loopPort = op.addInPort(new CABLES.Port(this, "Loop", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 loopPort.set(PLAY_DEFAULT);
 let loopStartPort = op.inFloat("Loop Start", LOOP_START_DEFAULT);
 let loopEndPort = op.inFloat("Loop End", LOOP_END_DEFAULT);

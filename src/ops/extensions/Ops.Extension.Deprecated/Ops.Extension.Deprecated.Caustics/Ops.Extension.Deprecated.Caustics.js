@@ -3,7 +3,7 @@ op.name = "Ops.Gl.Shader.Caustics";
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let lightmap = op.addInPort(new CABLES.Port(op, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+let lightmap = op.addInPort(new CABLES.Port(op, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 let lightmapUniform = null;
 
 let cgl = op.patch.cgl;
@@ -12,11 +12,11 @@ let shader = null;
 let uniCausticsTime = null;
 render.onTriggered = doRender;
 
-let pOpacity = op.addInPort(new CABLES.Port(op, "opacity", CABLES.OP_PORT_TYPE_VALUE));
+let pOpacity = op.addInPort(new CABLES.Port(op, "opacity", CABLES.Port.TYPE_VALUE));
 
-let pAmplitude = op.addInPort(new CABLES.Port(op, "amplitude", CABLES.OP_PORT_TYPE_VALUE));
-let pFrequency = op.addInPort(new CABLES.Port(op, "frequency", CABLES.OP_PORT_TYPE_VALUE));
-let pRepeat = op.addInPort(new CABLES.Port(op, "repeat", CABLES.OP_PORT_TYPE_VALUE));
+let pAmplitude = op.addInPort(new CABLES.Port(op, "amplitude", CABLES.Port.TYPE_VALUE));
+let pFrequency = op.addInPort(new CABLES.Port(op, "frequency", CABLES.Port.TYPE_VALUE));
+let pRepeat = op.addInPort(new CABLES.Port(op, "repeat", CABLES.Port.TYPE_VALUE));
 pRepeat.set(1.0);
 pOpacity.set(1.0);
 

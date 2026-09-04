@@ -1,7 +1,7 @@
 op.name = "jsonFile";
 
-let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
-let result = op.addOutPort(new CABLES.Port(op, "result", CABLES.OP_PORT_TYPE_OBJECT));
+let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
+let result = op.addOutPort(new CABLES.Port(op, "result", CABLES.Port.TYPE_OBJECT));
 
 result.ignoreValueSerialize = true;
 let patch = op.patch;

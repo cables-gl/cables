@@ -2,15 +2,15 @@
 // var self=this;
 let cgl = this.patch.cgl;
 this.name = "MercatorCoordTransform";
-let exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let arr = this.addInPort(new CABLES.Port(this, "array", CABLES.OP_PORT_TYPE_ARRAY));
+let exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
+let arr = this.addInPort(new CABLES.Port(this, "array", CABLES.Port.TYPE_ARRAY));
 
-let centerLon = this.addInPort(new CABLES.Port(this, "center lon", CABLES.OP_PORT_TYPE_VALUE));
-let centerLat = this.addInPort(new CABLES.Port(this, "center lat", CABLES.OP_PORT_TYPE_VALUE));
+let centerLon = this.addInPort(new CABLES.Port(this, "center lon", CABLES.Port.TYPE_VALUE));
+let centerLat = this.addInPort(new CABLES.Port(this, "center lat", CABLES.Port.TYPE_VALUE));
 
-let mul = this.addInPort(new CABLES.Port(this, "mul", CABLES.OP_PORT_TYPE_VALUE));
+let mul = this.addInPort(new CABLES.Port(this, "mul", CABLES.Port.TYPE_VALUE));
 
-let indexOut = this.addOutPort(new CABLES.Port(this, "index", CABLES.OP_PORT_TYPE_VALUE));
+let indexOut = this.addOutPort(new CABLES.Port(this, "index", CABLES.Port.TYPE_VALUE));
 const trigger = op.outTrigger("trigger");
 
 let vecMin = vec3.create();

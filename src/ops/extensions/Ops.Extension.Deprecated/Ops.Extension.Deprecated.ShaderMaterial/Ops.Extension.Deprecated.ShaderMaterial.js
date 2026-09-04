@@ -1,6 +1,6 @@
 let render = op.inTrigger("render");
-let fragmentShader = op.addInPort(new CABLES.Port(op, "fragment", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
-let vertexShader = op.addInPort(new CABLES.Port(op, "vertex", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
+let fragmentShader = op.addInPort(new CABLES.Port(op, "fragment", CABLES.Port.TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
+let vertexShader = op.addInPort(new CABLES.Port(op, "vertex", CABLES.Port.TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
 
 let trigger = op.outTrigger("trigger");
 let outShader = op.outObject("Shader");

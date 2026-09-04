@@ -16,14 +16,14 @@ exec.onTriggered = () =>
         {
             const p = op.portsOut[j];
 
-            if (op._objName.indexOf("PbrEnvironmentLight") > -1 && p.type == CABLES.OP_PORT_TYPE_OBJECT)
+            if (op._objName.indexOf("PbrEnvironmentLight") > -1 && p.type == CABLES.Port.TYPE_OBJECT)
             {
                 console.log("JA", p.name, p.get(), (p.get().tex || p.get().cubemap));
             }
 
             if (
                 p &&
-                p.type == CABLES.OP_PORT_TYPE_OBJECT &&
+                p.type == CABLES.Port.TYPE_OBJECT &&
                 p.get() &&
                 (p.get().tex || p.get().cubemap) &&
 

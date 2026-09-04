@@ -1,20 +1,20 @@
 // if(!Ops.Ui.Patch.maxPatchId)Ops.Ui.Patch.maxPatchId=0;
 
 op.name = "Patch";
-op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.OP_PORT_TYPE_VALUE, { "display": "readonly" }));
+op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.Port.TYPE_VALUE, { "display": "readonly" }));
 
 let getNewDynamicPort = function (name)
 {
     for (let i in op.portsIn)
     {
-        if (op.portsIn[i].type == CABLES.OP_PORT_TYPE_DYNAMIC)
+        if (op.portsIn[i].type == CABLES.Port.TYPE_DYNAMIC)
         {
             op.portsIn[i].name = name;
             return op.portsIn[i];
         }
     }
 
-    let p = op.addInPort(new CABLES.Port(op, name, CABLES.OP_PORT_TYPE_DYNAMIC));
+    let p = op.addInPort(new CABLES.Port(op, name, CABLES.Port.TYPE_DYNAMIC));
     p.shouldLink = op.shouldLink;
     return p;
 };
@@ -136,7 +136,7 @@ function createPatchInputPort(dynPort, name)
         pOut = patchInputOP.addOutPort(new CABLES.Port(op, "out_" + name, dynPort.type));
     }
 
-    if (dynPort.type == CABLES.OP_PORT_TYPE_FUNCTION)
+    if (dynPort.type == CABLES.Port.TYPE_FUNCTION)
     {
         dynPort.onTriggered = function ()
         {
@@ -158,7 +158,7 @@ function createPatchInputPort(dynPort, name)
 
 op.shouldLink = function (p1, p2)
 {
-    if (p1.type != CABLES.OP_PORT_TYPE_DYNAMIC && p2.type != CABLES.OP_PORT_TYPE_DYNAMIC)
+    if (p1.type != CABLES.Port.TYPE_DYNAMIC && p2.type != CABLES.Port.TYPE_DYNAMIC)
     {
         console.log("shouldlink?");
         console.log(p1.name);
@@ -169,7 +169,7 @@ op.shouldLink = function (p1, p2)
     let dynPort = p2;
     let otherPort = p1;
 
-    if (p1.type == CABLES.OP_PORT_TYPE_DYNAMIC)
+    if (p1.type == CABLES.Port.TYPE_DYNAMIC)
     {
         dynPort = p1;
         otherPort = p2;

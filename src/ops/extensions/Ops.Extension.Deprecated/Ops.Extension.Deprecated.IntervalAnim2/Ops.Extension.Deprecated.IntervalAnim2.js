@@ -1,9 +1,9 @@
 op.name = "IntervalAnim";
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 let trigger = op.outTrigger("trigger");
-let interval = op.addInPort(new CABLES.Port(op, "Interval", CABLES.OP_PORT_TYPE_VALUE));
-let delay = op.addInPort(new CABLES.Port(op, "Delay", CABLES.OP_PORT_TYPE_VALUE));
+let interval = op.addInPort(new CABLES.Port(op, "Interval", CABLES.Port.TYPE_VALUE));
+let delay = op.addInPort(new CABLES.Port(op, "Delay", CABLES.Port.TYPE_VALUE));
 let percent = op.addOutPort(new CABLES.Port(op, "percent"));
 
 let anim = new CABLES.Anim();

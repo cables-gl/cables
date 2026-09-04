@@ -1,18 +1,18 @@
 const exe = op.inTrigger("exe");
-const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
+const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
 
-const play = op.addInPort(new CABLES.Port(op, "play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const play = op.addInPort(new CABLES.Port(op, "play", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
-const wrap = op.addInPort(new CABLES.Port(op, "wrap", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["repeat", "mirrored repeat", "clamp to edge"] }));
-const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
+const wrap = op.addInPort(new CABLES.Port(op, "wrap", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["repeat", "mirrored repeat", "clamp to edge"] }));
+const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 const width = op.addInPort(new CABLES.Port(op, "texture width"));
 const height = op.addInPort(new CABLES.Port(op, "texture height"));
 
-const bmScale = op.addInPort(new CABLES.Port(op, "scale", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["fit", "nofit"] }));
+const bmScale = op.addInPort(new CABLES.Port(op, "scale", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["fit", "nofit"] }));
 
-const rewind = op.addInPort(new CABLES.Port(op, "rewind", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+const rewind = op.addInPort(new CABLES.Port(op, "rewind", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 const speed = op.addInPort(new CABLES.Port(op, "speed"));
 const frame = op.addInPort(new CABLES.Port(op, "frame"));
 

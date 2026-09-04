@@ -1,9 +1,9 @@
 op.name = "ImageCompose";
 
 let render = op.inTrigger("render");
-let useVPSize = op.addInPort(new CABLES.Port(op, "use viewport size", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let width = op.addInPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE));
-let height = op.addInPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
+let useVPSize = op.addInPort(new CABLES.Port(op, "use viewport size", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let width = op.addInPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
+let height = op.addInPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
 let tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
 
 let fpTexture = op.inBool("HDR");

@@ -2,8 +2,8 @@ let self = this;
 // Op.apply(this, arguments);
 
 this.name = "Websocket";
-this.url = this.addInPort(new CABLES.Port(this, "url", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-this.result = this.addOutPort(new CABLES.Port(this, "result", CABLES.OP_PORT_TYPE_OBJECT));
+this.url = this.addInPort(new CABLES.Port(this, "url", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+this.result = this.addOutPort(new CABLES.Port(this, "result", CABLES.Port.TYPE_OBJECT));
 this.connected = this.addOutPort(new CABLES.Port(this, "connected"));
 
 let outSocket = op.outObject("Socket");

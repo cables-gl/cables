@@ -1,6 +1,6 @@
-let render = op.addInPort(new CABLES.Port(op, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+let render = op.addInPort(new CABLES.Port(op, "render", CABLES.Port.TYPE_FUNCTION));
 
-let expansion = op.addInPort(new CABLES.Port(op, "expansion", CABLES.OP_PORT_TYPE_VALUE));
+let expansion = op.addInPort(new CABLES.Port(op, "expansion", CABLES.Port.TYPE_VALUE));
 
 const next = op.outTrigger("next");
 

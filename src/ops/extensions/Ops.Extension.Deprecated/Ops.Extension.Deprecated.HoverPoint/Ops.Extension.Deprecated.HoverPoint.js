@@ -1,4 +1,4 @@
-let exec = op.addInPort(new CABLES.Port(op, "Execute", CABLES.OP_PORT_TYPE_FUNCTION));
+let exec = op.addInPort(new CABLES.Port(op, "Execute", CABLES.Port.TYPE_FUNCTION));
 let trigger = op.outTrigger("Trigger");
 
 let inId = op.inValueString("id");

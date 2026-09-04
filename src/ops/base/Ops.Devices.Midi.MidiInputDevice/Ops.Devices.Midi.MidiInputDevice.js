@@ -3,12 +3,12 @@
 
 // https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-let normalize = op.addInPort(new CABLES.Port(op, "normalize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let deviceSelect = op.addInPort(new CABLES.Port(op, "device", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["none"] }));
+let normalize = op.addInPort(new CABLES.Port(op, "normalize", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let deviceSelect = op.addInPort(new CABLES.Port(op, "device", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["none"] }));
 
-let resetLights = op.addInPort(new CABLES.Port(op, "Reset Lights", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let resetLights = op.addInPort(new CABLES.Port(op, "Reset Lights", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-let outEvent = op.addOutPort(new CABLES.Port(op, "Event", CABLES.OP_PORT_TYPE_OBJECT));
+let outEvent = op.addOutPort(new CABLES.Port(op, "Event", CABLES.Port.TYPE_OBJECT));
 
 resetLights.set(false);
 normalize.set(true);

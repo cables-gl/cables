@@ -1,6 +1,6 @@
 let numValues = op.inValueInt("numValues");
 
-let values = op.addOutPort(new CABLES.Port(op, "values", CABLES.OP_PORT_TYPE_ARRAY));
+let values = op.addOutPort(new CABLES.Port(op, "values", CABLES.Port.TYPE_ARRAY));
 values.ignoreValueSerialize = true;
 
 numValues.set(100);

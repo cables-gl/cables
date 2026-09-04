@@ -1,5 +1,5 @@
 const
-    inStrs = op.inMultiPort("Strings", CABLES.OP_PORT_TYPE_STRING),
+    inStrs = op.inMultiPort("Strings", CABLES.Port.TYPE_STRING),
     outArr = op.outArray("Result"),
     outNum = op.outNumber("Num Values");
 

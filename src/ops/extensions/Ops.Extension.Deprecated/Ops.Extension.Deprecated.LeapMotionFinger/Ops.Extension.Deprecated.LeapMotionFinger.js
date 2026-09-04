@@ -4,7 +4,7 @@ this.name = "leap finger";
 
 this.patch.loadLib("leap-motion");
 
-let leapFrame = this.addInPort(new CABLES.Port(this, "leap frame", CABLES.OP_PORT_TYPE_OBJECT));
+let leapFrame = this.addInPort(new CABLES.Port(this, "leap frame", CABLES.Port.TYPE_OBJECT));
 leapFrame.ignoreValueSerialize = true;
 
 let handIndex = this.addInPort(new CABLES.Port(this, "hand index"));

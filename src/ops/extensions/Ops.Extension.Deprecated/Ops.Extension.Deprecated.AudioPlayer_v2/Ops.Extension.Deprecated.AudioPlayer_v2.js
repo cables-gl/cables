@@ -7,9 +7,9 @@ const autoPlay = op.inBool("Autoplay", false);
 const volume = op.inFloatSlider("Volume", 1.0);
 const synchronizedPlayer = op.inBool("Synchronized Player", false);
 
-const audioOut = op.addOutPort(new CABLES.Port(op, "Audio out", CABLES.OP_PORT_TYPE_OBJECT));
-const outPlaying = op.addOutPort(new CABLES.Port(op, "Playing", CABLES.OP_PORT_TYPE_VALUE));
-const outEnded = op.addOutPort(new CABLES.Port(op, "Ended", CABLES.OP_PORT_TYPE_FUNCTION));
+const audioOut = op.addOutPort(new CABLES.Port(op, "Audio out", CABLES.Port.TYPE_OBJECT));
+const outPlaying = op.addOutPort(new CABLES.Port(op, "Playing", CABLES.Port.TYPE_VALUE));
+const outEnded = op.addOutPort(new CABLES.Port(op, "Ended", CABLES.Port.TYPE_FUNCTION));
 
 const doLoop = op.inBool("Loop", false);
 

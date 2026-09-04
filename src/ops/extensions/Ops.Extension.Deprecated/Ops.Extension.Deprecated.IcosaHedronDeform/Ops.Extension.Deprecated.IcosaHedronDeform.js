@@ -3,12 +3,12 @@ op.name = "IcosaHedronDeform";
 // from: http://blog.andreaskahler.com/search/label/3D
 
 let render = op.inTrigger("render");
-let smooth = op.addInPort(new CABLES.Port(op, "smooth", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let smooth = op.addInPort(new CABLES.Port(op, "smooth", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 let seed = op.addInPort(new CABLES.Port(op, "random seed"));
 
 let trigger = op.outTrigger("trigger");
-let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize = true;
 

@@ -8,9 +8,9 @@ let OCTAVE_MAX = 10;
 let NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 // inputs
-let notePort = op.addInPort(new CABLES.Port(op, "Note", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": NOTES }));
+let notePort = op.addInPort(new CABLES.Port(op, "Note", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": NOTES }));
 notePort.set(NOTE_DEFAULT);
-let octavePort = op.addInPort(new CABLES.Port(op, "Octave", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": OCTAVE_MIN, "max": OCTAVE_MAX }));
+let octavePort = op.addInPort(new CABLES.Port(op, "Octave", CABLES.Port.TYPE_VALUE, { "display": "range", "min": OCTAVE_MIN, "max": OCTAVE_MAX }));
 octavePort.set(OCTAVE_DEFAULT);
 
 // output

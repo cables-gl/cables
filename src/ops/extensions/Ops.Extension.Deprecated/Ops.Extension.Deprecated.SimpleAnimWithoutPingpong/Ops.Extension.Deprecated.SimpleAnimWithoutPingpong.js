@@ -1,6 +1,6 @@
 op.name = "SimpleAnimWithoutPingpong";
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 
 let reset = op.inTriggerButton("reset");
 let rewind = op.inTriggerButton("rewind");
@@ -9,11 +9,11 @@ let inStart = op.addInPort(new CABLES.Port(op, "start"));
 let inEnd = op.addInPort(new CABLES.Port(op, "end"));
 let duration = op.addInPort(new CABLES.Port(op, "duration"));
 
-let loop = op.addInPort(new CABLES.Port(op, "loop", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let loop = op.addInPort(new CABLES.Port(op, "loop", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 let pingpong = op.inBool("Ping Pong", true);
 
 let result = op.addOutPort(new CABLES.Port(op, "result"));
-let finished = op.addOutPort(new CABLES.Port(op, "finished", CABLES.OP_PORT_TYPE_VALUE));
+let finished = op.addOutPort(new CABLES.Port(op, "finished", CABLES.Port.TYPE_VALUE));
 
 let resetted = false;
 let waitForReset = op.inBool("Wait for Reset", false);

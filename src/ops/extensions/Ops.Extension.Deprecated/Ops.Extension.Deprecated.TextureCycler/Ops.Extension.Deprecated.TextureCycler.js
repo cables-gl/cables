@@ -1,8 +1,8 @@
 let self = this;
 let cgl = self.patch.cgl;
 
-this.textureOut = this.addOutPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
-this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+this.textureOut = this.addOutPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
+this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
 
 let textures = [];
 let texturePorts = [];
@@ -51,7 +51,7 @@ function checkPorts()
 function addPort(n)
 {
     if (!n)n = "texture" + texturePorts.length;
-    let newPort = self.addInPort(new CABLES.Port(self, n, CABLES.OP_PORT_TYPE_TEXTURE));
+    let newPort = self.addInPort(new CABLES.Port(self, n, CABLES.Port.TYPE_TEXTURE));
 
     newPort.onLinkChanged = checkPorts;
     newPort.onChange = checkPorts;

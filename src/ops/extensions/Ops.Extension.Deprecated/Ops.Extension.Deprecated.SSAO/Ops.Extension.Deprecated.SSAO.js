@@ -5,14 +5,14 @@ let cgl = this.patch.cgl;
 
 this.name = "SSAO";
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.OP_PORT_TYPE_VALUE));
-this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
-this.amount = this.addInPort(new CABLES.Port(this, "amount", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.dist = this.addInPort(new CABLES.Port(this, "dist", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.Port.TYPE_VALUE));
+this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.Port.TYPE_VALUE));
+this.amount = this.addInPort(new CABLES.Port(this, "amount", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.dist = this.addInPort(new CABLES.Port(this, "dist", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-this.image = this.addInPort(new CABLES.Port(this, "image", CABLES.OP_PORT_TYPE_TEXTURE));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.image = this.addInPort(new CABLES.Port(this, "image", CABLES.Port.TYPE_TEXTURE));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
 let shader = new CGL.Shader(cgl, op.name, op);
 // this.onLoaded=shader.compile;

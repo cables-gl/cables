@@ -1,7 +1,7 @@
 const cgl = op.patch.cgl;
 
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.OP_PORT_TYPE_OBJECT));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
+let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.Port.TYPE_OBJECT));
 geom.ignoreValueSerialize = true;
 
 // var num=op.addInPort(new CABLES.Port(op,"num"));
@@ -9,7 +9,7 @@ let num = op.inValueInt("num");
 let size = op.addInPort(new CABLES.Port(op, "size"));
 let seed = op.addInPort(new CABLES.Port(op, "random seed"));
 
-// var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
+// var trigger=op.addOutPort(new CABLES.Port(op,"trigger",CABLES.Port.TYPE_FUNCTION)) ;
 let idx = op.addOutPort(new CABLES.Port(op, "index"));
 let rnd = op.addOutPort(new CABLES.Port(op, "rnd"));
 let positions = op.inArray("Positions");
@@ -17,9 +17,9 @@ let randoms = [];
 let randomsRot = [];
 let randomsFloats = [];
 
-let scaleX = op.addInPort(new CABLES.Port(op, "scaleX", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let scaleY = op.addInPort(new CABLES.Port(op, "scaleY", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let scaleZ = op.addInPort(new CABLES.Port(op, "scaleZ", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let scaleX = op.addInPort(new CABLES.Port(op, "scaleX", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let scaleY = op.addInPort(new CABLES.Port(op, "scaleY", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let scaleZ = op.addInPort(new CABLES.Port(op, "scaleZ", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 scaleX.set(1);
 scaleY.set(1);
 scaleZ.set(1);

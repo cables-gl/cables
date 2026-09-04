@@ -3,10 +3,10 @@ let self = this;
 let cgl = this.patch.cgl;
 
 this.name = "Blur";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
-this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.OP_PORT_TYPE_VALUE));
+this.iterations = this.addInPort(new CABLES.Port(this, "iterations", CABLES.Port.TYPE_VALUE));
 this.iterations.set(10);
 
 let shader = new CGL.Shader(cgl, op.name, op);
@@ -53,7 +53,7 @@ let uniDirY = new CGL.Uniform(shader, "f", "dirY", 0);
 let uniWidth = new CGL.Uniform(shader, "f", "width", 0);
 let uniHeight = new CGL.Uniform(shader, "f", "height", 0);
 
-let direction = this.addInPort(new CABLES.Port(this, "direction", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["both", "vertical", "horizontal"] }));
+let direction = this.addInPort(new CABLES.Port(this, "direction", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["both", "vertical", "horizontal"] }));
 let dir = 0;
 direction.set("both");
 direction.onValueChange(function ()

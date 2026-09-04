@@ -1,6 +1,6 @@
 /** @namespace WEBAUDIO */
 
-import { CONSTANTS, Patch, Op, Port } from "cables";
+import { Patch, Op, Port } from "cables";
 
 /**
  * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
@@ -211,7 +211,7 @@ export class WebAudio
         // var port = op.inObject(portName);
         const port = op.inDynamic(
             portName,
-            [CONSTANTS.OP.OP_PORT_TYPE_VALUE, CONSTANTS.OP.OP_PORT_TYPE_OBJECT],
+            [Port.TYPE_VALUE, Port.TYPE_OBJECT],
             options,
             defaultValue,
         );

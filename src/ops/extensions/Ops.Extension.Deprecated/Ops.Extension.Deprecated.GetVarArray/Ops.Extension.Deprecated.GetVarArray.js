@@ -1,8 +1,8 @@
 op.name = "get var array";
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 
-let varname = op.addInPort(new CABLES.Port(op, "name", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-let val = op.addOutPort(new CABLES.Port(op, "val", CABLES.OP_PORT_TYPE_ARRAY));
+let varname = op.addInPort(new CABLES.Port(op, "name", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+let val = op.addOutPort(new CABLES.Port(op, "val", CABLES.Port.TYPE_ARRAY));
 let defaultArr = op.inArray("Default Array");
 let changed = op.outTrigger("Changed");
 

@@ -1,5 +1,5 @@
 const
-    inGeoms = op.inMultiPort2("Strings", CABLES.OP_PORT_TYPE_OBJECT, null, 3),
+    inGeoms = op.inMultiPort2("Strings", CABLES.Port.TYPE_OBJECT, null, 3),
 
     outGeom = op.outObject("Geometry Result", null, "geometry");
 

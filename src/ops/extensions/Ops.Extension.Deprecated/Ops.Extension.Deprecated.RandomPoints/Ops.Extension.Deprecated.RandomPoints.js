@@ -1,10 +1,10 @@
 const exe = op.inTrigger("exe");
 let num = op.addInPort(new CABLES.Port(op, "num"));
-let size = op.addInPort(new CABLES.Port(op, "size"), CABLES.OP_PORT_TYPE_VALUE);
+let size = op.addInPort(new CABLES.Port(op, "size"), CABLES.Port.TYPE_VALUE);
 let seed = op.addInPort(new CABLES.Port(op, "random seed"));
-let scaleX = op.addInPort(new CABLES.Port(op, "scaleX", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let scaleY = op.addInPort(new CABLES.Port(op, "scaleY", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let scaleZ = op.addInPort(new CABLES.Port(op, "scaleZ", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let scaleX = op.addInPort(new CABLES.Port(op, "scaleX", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let scaleY = op.addInPort(new CABLES.Port(op, "scaleY", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let scaleZ = op.addInPort(new CABLES.Port(op, "scaleZ", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 // var round=op.inBool('round',false);
 
 let cgl = op.patch.cgl;

@@ -195,7 +195,7 @@ function serializeSidebar()
 
             for (let j = 0; j < op.patch.ops[i].portsOut.length; j++)
             {
-                if (theOp.portsOut[j].type == CABLES.OP_PORT_TYPE_VALUE)
+                if (theOp.portsOut[j].type == CABLES.Port.TYPE_VALUE)
                 {
                     p.ports[theOp.portsOut[j].name] = theOp.portsOut[j].get();
                     foundPort = true;

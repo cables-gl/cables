@@ -4,10 +4,10 @@ let render = op.inTrigger("render");
 let smallRender = op.inBool("Small Renderer");
 
 let trigger = op.outTrigger("trigger");
-let triggerGamePad = op.addOutPort(new CABLES.Port(op, "Controller Matrix", CABLES.OP_PORT_TYPE_FUNCTION));
-let numGamepads = op.addOutPort(new CABLES.Port(op, "Num Controller", CABLES.OP_PORT_TYPE_VALUE));
-// var tex0=op.addOutPort(new CABLES.Port(op,"texture left",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
-// var tex1=op.addOutPort(new CABLES.Port(op,"texture right",CABLES.OP_PORT_TYPE_TEXTURE,{preview:true}));
+let triggerGamePad = op.addOutPort(new CABLES.Port(op, "Controller Matrix", CABLES.Port.TYPE_FUNCTION));
+let numGamepads = op.addOutPort(new CABLES.Port(op, "Num Controller", CABLES.Port.TYPE_VALUE));
+// var tex0=op.addOutPort(new CABLES.Port(op,"texture left",CABLES.Port.TYPE_TEXTURE,{preview:true}));
+// var tex1=op.addOutPort(new CABLES.Port(op,"texture right",CABLES.Port.TYPE_TEXTURE,{preview:true}));
 let tex0 = op.outTexture("texture left");
 let tex1 = op.outTexture("texture right");
 
@@ -40,7 +40,7 @@ let hasPose = op.outValue("hasPose");
 let hasOrientation = op.outValue("hasorientation");
 let isPresenting = op.outValue("is presenting");
 
-let triggerAfter = op.addOutPort(new CABLES.Port(op, "trigger After", CABLES.OP_PORT_TYPE_FUNCTION));
+let triggerAfter = op.addOutPort(new CABLES.Port(op, "trigger After", CABLES.Port.TYPE_FUNCTION));
 let outDeviceString = op.outValue("Device");
 
 let pose = null;

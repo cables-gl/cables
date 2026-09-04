@@ -1,4 +1,4 @@
-let geometry = op.addInPort(new CABLES.Port(op, "Geometry", CABLES.OP_PORT_TYPE_OBJECT));
+let geometry = op.addInPort(new CABLES.Port(op, "Geometry", CABLES.Port.TYPE_OBJECT));
 
 let x = op.inBool("x");
 let y = op.inBool("y");

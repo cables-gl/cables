@@ -5,7 +5,7 @@ const
     inView = op.inTriggerButton("View Code"),
     outModule = op.outObject("Module", null, "shadermodule"),
     outCode = op.outString("Final Code"),
-    inGraphNodes = op.inMultiPort2("Graph", CABLES.OP_PORT_TYPE_OBJECT),
+    inGraphNodes = op.inMultiPort2("Graph", CABLES.Port.TYPE_OBJECT),
     debug = op.inBool("Debug comments", false),
     types = op.inBool("Set Type Title", false),
     ids = op.inBool("Show id", false);

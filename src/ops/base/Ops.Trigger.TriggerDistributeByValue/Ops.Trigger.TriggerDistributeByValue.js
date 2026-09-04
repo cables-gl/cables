@@ -2,7 +2,7 @@ const exe = op.inTrigger("exe");
 let number = op.addInPort(new CABLES.Port(op, "number"));
 let max = op.addInPort(new CABLES.Port(op, "max"));
 let numOut = op.addInPort(new CABLES.Port(op, "num outputs"));
-let num = op.addOutPort(new CABLES.Port(op, "num", CABLES.OP_PORT_TYPE_VALUE));
+let num = op.addOutPort(new CABLES.Port(op, "num", CABLES.Port.TYPE_VALUE));
 
 number.set(0);
 max.set(1);
@@ -29,5 +29,5 @@ exe.onTriggered = trigger;
 
 for (let i = 0; i < numTriggers; i++)
 {
-    triggers.push(op.addOutPort(new CABLES.Port(op, "trigger " + i, CABLES.OP_PORT_TYPE_FUNCTION)));
+    triggers.push(op.addOutPort(new CABLES.Port(op, "trigger " + i, CABLES.Port.TYPE_FUNCTION)));
 }

@@ -3,7 +3,7 @@ const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 const audioIn = op.inObject("audio in");
 // const impulseResponse = op.inUrl("impulse response");
-const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string" }));
 const inConvolverGain = op.inFloatSlider("IR Gain", 1);
 const normalize = op.inBool("normalize", true);
 const inOutputGain = op.inFloatSlider("Output Gain", 1);

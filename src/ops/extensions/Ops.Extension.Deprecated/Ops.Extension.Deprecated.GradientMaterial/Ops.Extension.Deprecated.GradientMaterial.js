@@ -3,25 +3,25 @@ let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let screenSpace = op.addInPort(new CABLES.Port(op, "screen space", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let direction = op.addInPort(new CABLES.Port(op, "direction", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let screenSpace = op.addInPort(new CABLES.Port(op, "screen space", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let direction = op.addInPort(new CABLES.Port(op, "direction", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 screenSpace.set(false);
 direction.set(true);
 
-let r = op.addInPort(new CABLES.Port(op, "r1", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g = op.addInPort(new CABLES.Port(op, "g1", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b = op.addInPort(new CABLES.Port(op, "b1", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a = op.addInPort(new CABLES.Port(op, "a1", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r = op.addInPort(new CABLES.Port(op, "r1", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g = op.addInPort(new CABLES.Port(op, "g1", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b = op.addInPort(new CABLES.Port(op, "b1", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a = op.addInPort(new CABLES.Port(op, "a1", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-let r2 = op.addInPort(new CABLES.Port(op, "r2", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g2 = op.addInPort(new CABLES.Port(op, "g2", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b2 = op.addInPort(new CABLES.Port(op, "b2", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a2 = op.addInPort(new CABLES.Port(op, "a2", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r2 = op.addInPort(new CABLES.Port(op, "r2", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g2 = op.addInPort(new CABLES.Port(op, "g2", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b2 = op.addInPort(new CABLES.Port(op, "b2", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a2 = op.addInPort(new CABLES.Port(op, "a2", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-let r3 = op.addInPort(new CABLES.Port(op, "r3", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g3 = op.addInPort(new CABLES.Port(op, "g3", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b3 = op.addInPort(new CABLES.Port(op, "b3", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a3 = op.addInPort(new CABLES.Port(op, "a3", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r3 = op.addInPort(new CABLES.Port(op, "r3", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g3 = op.addInPort(new CABLES.Port(op, "g3", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b3 = op.addInPort(new CABLES.Port(op, "b3", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a3 = op.addInPort(new CABLES.Port(op, "a3", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 r.set(0.2);
 g.set(0.2);

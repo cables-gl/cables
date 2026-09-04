@@ -22,15 +22,15 @@ let node = new Tone.Noise(TYPE_DEFAULT);
 
 // inputs
 let playbackRatePort = op.inFloat("Playback Rate", PLAYBACK_RATE_DEFAULT);
-let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set(TYPE_DEFAULT);
-let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
-let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 mutePort.set(MUTE_DEFAULT);
 
 function checkAutostart()

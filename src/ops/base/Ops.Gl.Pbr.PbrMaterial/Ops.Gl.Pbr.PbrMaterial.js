@@ -77,7 +77,7 @@ const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 // UI stuff
 op.toWorkPortsNeedToBeLinked(inTrigger);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.Port.TYPE_FUNCTION);
 
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Shader Parameters", [inRoughness, inMetalness, inAlphaMode]);

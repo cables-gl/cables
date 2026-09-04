@@ -120,7 +120,7 @@ function createInputPorts()
         audioInPort.data.index = i;
         audioInPorts.push(audioInPort);
         // volume port
-        let volumePort = op.addInPort(new CABLES.Port(op, "Channel " + (i + 1) + " Volume", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": VOLUME_MIN, "max": VOLUME_MAX }));
+        let volumePort = op.addInPort(new CABLES.Port(op, "Channel " + (i + 1) + " Volume", CABLES.Port.TYPE_VALUE, { "display": "range", "min": VOLUME_MIN, "max": VOLUME_MAX }));
         volumePort.onChange = volumeOnChange.bind(volumePort);
         volumePort.data.index = i;
         volumePorts.push(volumePort);

@@ -1,4 +1,4 @@
-const dyn = op.addOutPort(new CABLES.Port(op, "create port", CABLES.OP_PORT_TYPE_DYNAMIC));
+const dyn = op.addOutPort(new CABLES.Port(op, "create port", CABLES.Port.TYPE_DYNAMIC));
 
 function getPatchOp()
 {

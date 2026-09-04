@@ -3,11 +3,11 @@ let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let clear = op.addInPort(new CABLES.Port(op, "clear depth", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let enable = op.addInPort(new CABLES.Port(op, "enable depth testing", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let write = op.addInPort(new CABLES.Port(op, "write to depth buffer", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let clear = op.addInPort(new CABLES.Port(op, "clear depth", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let enable = op.addInPort(new CABLES.Port(op, "enable depth testing", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let write = op.addInPort(new CABLES.Port(op, "write to depth buffer", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-let depthFunc = op.addInPort(new CABLES.Port(op, "ratio", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"] }));
+let depthFunc = op.addInPort(new CABLES.Port(op, "ratio", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"] }));
 let theDepthFunc = cgl.gl.LEQUAL;
 
 depthFunc.onChange = updateFunc;

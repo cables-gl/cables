@@ -1,7 +1,7 @@
 op.name = "JsonFile2";
 
-let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
-let outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.OP_PORT_TYPE_OBJECT));
+let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
+let outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.Port.TYPE_OBJECT));
 let isLoading = op.outValue("Is Loading", false);
 
 let jsonp = op.inBool("JsonP", false);

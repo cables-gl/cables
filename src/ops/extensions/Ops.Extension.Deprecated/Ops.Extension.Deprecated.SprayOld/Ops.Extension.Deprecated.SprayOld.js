@@ -3,7 +3,7 @@ let self = this;
 let cgl = this.patch.cgl;
 
 this.name = "spray";
-this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
 
 this.timer = this.addInPort(new CABLES.Port(this, "time"));
 this.num = this.addInPort(new CABLES.Port(this, "num"));
@@ -18,7 +18,7 @@ movementZ.set(1);
 
 this.lifetime = this.addInPort(new CABLES.Port(this, "lifetime"));
 
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 this.idx = this.addOutPort(new CABLES.Port(this, "index"));
 this.lifeTimePercent = this.addOutPort(new CABLES.Port(this, "lifeTimePercent"));
 let particles = [];

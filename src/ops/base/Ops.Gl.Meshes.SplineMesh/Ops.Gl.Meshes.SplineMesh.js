@@ -1,5 +1,5 @@
 const render = op.inTrigger("Render");
-const trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
+const trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 const thick = op.inValue("Thickness");
 const inStart = op.inValueSlider("Start");
 const inLength = op.inValueSlider("Length", 1);
@@ -8,7 +8,7 @@ const inStrip = op.inBool("Line Strip", true);
 const inPoints = op.inArray("points");
 const inNumPoints = op.inValue("Num Points", 0);
 
-const geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+const geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 
 geomOut.ignoreValueSerialize = true;
 

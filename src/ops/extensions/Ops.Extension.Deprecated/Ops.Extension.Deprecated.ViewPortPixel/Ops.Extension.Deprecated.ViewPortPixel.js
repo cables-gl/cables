@@ -3,7 +3,7 @@ op.name = "ViewPortPixel";
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let ratio = op.addInPort(new CABLES.Port(op, "ratio", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": [0.5, 1, 1.25, 1.3333333333, 1.777777777778, 2.33333333333333, 3, 4] }));
+let ratio = op.addInPort(new CABLES.Port(op, "ratio", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": [0.5, 1, 1.25, 1.3333333333, 1.777777777778, 2.33333333333333, 3, 4] }));
 ratio.set(1.777777777778);
 
 let posX = op.inValueSelect("Pos X", ["Left", "Right", "Center"]);

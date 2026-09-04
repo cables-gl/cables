@@ -1,6 +1,6 @@
 const USE_LEFT_PAD_DEFAULT = false;
 
-// var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+// var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.Port.TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 const filename = op.inValueString("url");
 const leftPadFilename = op.inBool("Left Pad", USE_LEFT_PAD_DEFAULT);
 const numberLengthPort = op.inValue("Num Digits", 3);
@@ -11,15 +11,15 @@ const indexEnd = op.inValueInt("Index End");
 
 const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
 const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
-const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 const arrOut = op.outArray("TextureArray");
 
 // var textureOut=op.outTexture("texture");
-const width = op.addOutPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE));
-const height = op.addOutPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
-const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.OP_PORT_TYPE_VALUE));
+const width = op.addOutPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
+const height = op.addOutPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
+const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.Port.TYPE_VALUE));
 const ratio = op.outValue("Aspect Ratio");
 
 indexEnd.set(10);

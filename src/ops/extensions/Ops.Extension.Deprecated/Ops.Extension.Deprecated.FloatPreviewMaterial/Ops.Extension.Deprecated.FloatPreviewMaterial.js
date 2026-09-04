@@ -1,9 +1,9 @@
 this.name = "fp material";
 let cgl = this.patch.cgl;
 
-let render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+let render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
 const trigger = op.outTrigger("trigger");
-let texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+let texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
 
 let srcVert = ""
     .endl() + "IN float attrVertIndex;"

@@ -4,38 +4,38 @@ let cgl = this.patch.cgl;
 cgl.frameStore.SplinePoints = [];
 
 this.name = "LaserSpline";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
 
-this.thickness = this.addInPort(new CABLES.Port(this, "thickness", CABLES.OP_PORT_TYPE_VALUE));
+this.thickness = this.addInPort(new CABLES.Port(this, "thickness", CABLES.Port.TYPE_VALUE));
 this.thickness.val = 1.0;
 
-this.centerpoint = this.addInPort(new CABLES.Port(this, "centerpoint", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+this.centerpoint = this.addInPort(new CABLES.Port(this, "centerpoint", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 this.centerpoint.val = false;
 
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
-this.triggerPoints = this.addOutPort(new CABLES.Port(this, "triggerPoints", CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
+this.triggerPoints = this.addOutPort(new CABLES.Port(this, "triggerPoints", CABLES.Port.TYPE_FUNCTION));
 
-let outObj = this.addOutPort(new CABLES.Port(this, "json", CABLES.OP_PORT_TYPE_ARRAY));
+let outObj = this.addOutPort(new CABLES.Port(this, "json", CABLES.Port.TYPE_ARRAY));
 
-let outNumPoints = this.addOutPort(new CABLES.Port(this, "numPoints", CABLES.OP_PORT_TYPE_VALUE));
+let outNumPoints = this.addOutPort(new CABLES.Port(this, "numPoints", CABLES.Port.TYPE_VALUE));
 
-let fov = this.addInPort(new CABLES.Port(this, "fov", CABLES.OP_PORT_TYPE_VALUE));
-let w = this.addInPort(new CABLES.Port(this, "w", CABLES.OP_PORT_TYPE_VALUE));
-let h = this.addInPort(new CABLES.Port(this, "h", CABLES.OP_PORT_TYPE_VALUE));
+let fov = this.addInPort(new CABLES.Port(this, "fov", CABLES.Port.TYPE_VALUE));
+let w = this.addInPort(new CABLES.Port(this, "w", CABLES.Port.TYPE_VALUE));
+let h = this.addInPort(new CABLES.Port(this, "h", CABLES.Port.TYPE_VALUE));
 
-let coordmul = this.addInPort(new CABLES.Port(this, "mul", CABLES.OP_PORT_TYPE_VALUE));
-let coordClamp = this.addInPort(new CABLES.Port(this, "clamp", CABLES.OP_PORT_TYPE_VALUE));
+let coordmul = this.addInPort(new CABLES.Port(this, "mul", CABLES.Port.TYPE_VALUE));
+let coordClamp = this.addInPort(new CABLES.Port(this, "clamp", CABLES.Port.TYPE_VALUE));
 
-let colorMul = this.addInPort(new CABLES.Port(this, "color intensity", CABLES.OP_PORT_TYPE_VALUE));
+let colorMul = this.addInPort(new CABLES.Port(this, "color intensity", CABLES.Port.TYPE_VALUE));
 colorMul.set(1.0);
 let buffer = cgl.gl.createBuffer();
 
-let hue = this.addInPort(new CABLES.Port(this, "hue", CABLES.OP_PORT_TYPE_VALUE));
+let hue = this.addInPort(new CABLES.Port(this, "hue", CABLES.Port.TYPE_VALUE));
 colorMul.set(1.0);
 
-let showR = this.addInPort(new CABLES.Port(this, "show r", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let showG = this.addInPort(new CABLES.Port(this, "show g", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let showB = this.addInPort(new CABLES.Port(this, "show b", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let showR = this.addInPort(new CABLES.Port(this, "show r", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let showG = this.addInPort(new CABLES.Port(this, "show g", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let showB = this.addInPort(new CABLES.Port(this, "show b", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 function easeSmoothStep(perc)
 {

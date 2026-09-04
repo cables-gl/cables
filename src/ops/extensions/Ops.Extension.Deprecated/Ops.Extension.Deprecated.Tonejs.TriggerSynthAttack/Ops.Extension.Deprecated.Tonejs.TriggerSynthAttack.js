@@ -1,6 +1,6 @@
 // input
 let nodePort = op.inObject("Synth");
-let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let notePort = op.inValueString("Note", "C4"); // frequency also works
 let velocityPort = op.inValueSlider("Velocity", 1.0);
 let timePort = op.inValueString("Time", "+0");

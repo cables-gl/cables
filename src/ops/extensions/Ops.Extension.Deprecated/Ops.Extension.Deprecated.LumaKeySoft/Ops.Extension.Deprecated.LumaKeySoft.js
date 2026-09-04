@@ -4,7 +4,7 @@ let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let threshold = op.addInPort(new CABLES.Port(op, "amthresholdount", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let threshold = op.addInPort(new CABLES.Port(op, "amthresholdount", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 let mul = op.inFloat("Amount", 2.0);
 threshold.set(0.5);
 

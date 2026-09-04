@@ -1,9 +1,9 @@
-let render = op.addInPort(new CABLES.Port(op, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-let shaderId = op.addInPort(new CABLES.Port(op, "ShaderToy ID", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
+let render = op.addInPort(new CABLES.Port(op, "render", CABLES.Port.TYPE_FUNCTION));
+let shaderId = op.addInPort(new CABLES.Port(op, "ShaderToy ID", CABLES.Port.TYPE_VALUE, { "type": "string" }));
 
 let trigger = op.outTrigger("trigger");
-let result = op.addOutPort(new CABLES.Port(op, "Result", CABLES.OP_PORT_TYPE_OBJECT));
-let shaderOut = op.addOutPort(new CABLES.Port(op, "shader", CABLES.OP_PORT_TYPE_OBJECT));
+let result = op.addOutPort(new CABLES.Port(op, "Result", CABLES.Port.TYPE_OBJECT));
+let shaderOut = op.addOutPort(new CABLES.Port(op, "shader", CABLES.Port.TYPE_OBJECT));
 
 let cgl = op.patch.cgl;
 let appKey = "Nt8KwM";

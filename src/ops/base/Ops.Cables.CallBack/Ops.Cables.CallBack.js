@@ -1,8 +1,8 @@
 const exe = op.inTrigger("exe");
-const callbackname = op.addInPort(new CABLES.Port(op, "callback name", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-const val0 = op.addInPort(new CABLES.Port(op, "value 1", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-const val1 = op.addInPort(new CABLES.Port(op, "value 2", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-const val2 = op.addInPort(new CABLES.Port(op, "value 3", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
+const callbackname = op.addInPort(new CABLES.Port(op, "callback name", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+const val0 = op.addInPort(new CABLES.Port(op, "value 1", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+const val1 = op.addInPort(new CABLES.Port(op, "value 2", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+const val2 = op.addInPort(new CABLES.Port(op, "value 3", CABLES.Port.TYPE_VALUE, { "type": "string" }));
 
 let values = [0, 0, 0];
 

@@ -15,7 +15,7 @@ let unTex = new CGL.Uniform(shader, "t", "tex", 0);
 let time = op.inFloat("Time");
 let uniTime = new CGL.Uniform(shader, "f", "time", time);
 
-let mask = op.addInPort(new CABLES.Port(op, "mask", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
+let mask = op.addInPort(new CABLES.Port(op, "mask", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 
 let prim = op.inValueSelect("Primitive", ["Rectangle", "Circle"], "Rectangle");
 

@@ -6,7 +6,7 @@ let inPoints = op.inArray("points");
 
 let dimensions = op.inValueSelect("Dimensions", ["1", "3"], 3);
 
-let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
+let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 
 let cgl = op.patch.cgl;
 let splines = [];

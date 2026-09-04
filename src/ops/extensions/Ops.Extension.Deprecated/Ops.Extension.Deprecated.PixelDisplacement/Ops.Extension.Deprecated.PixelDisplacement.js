@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 
-let amount = op.addInPort(new CABLES.Port(op, "amountX", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let amountY = op.addInPort(new CABLES.Port(op, "amountY", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let amount = op.addInPort(new CABLES.Port(op, "amountX", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let amountY = op.addInPort(new CABLES.Port(op, "amountY", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 let displaceTex = op.inTexture("displaceTex");
 let trigger = op.outTrigger("trigger");

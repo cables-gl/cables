@@ -1,4 +1,4 @@
-const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string" }));
 const reloadBtn = op.inTriggerButton("reload");
 const jsonp = op.inBool("JsonP", false);
 const outData = op.outValue("Result");

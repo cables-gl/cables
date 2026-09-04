@@ -17,10 +17,10 @@ function onTrigger()
 let num = 8;
 for (let i = 0; i < num; i++)
 {
-    let newExe = op.addInPort(new CABLES.Port(op, "Trigger " + i, CABLES.OP_PORT_TYPE_FUNCTION));
+    let newExe = op.addInPort(new CABLES.Port(op, "Trigger " + i, CABLES.Port.TYPE_FUNCTION));
     newExe.slot = i;
     newExe.onTriggered = onTrigger.bind(newExe);
-    let newVal = op.addInPort(new CABLES.Port(op, "Value " + i, CABLES.OP_PORT_TYPE_VALUE));
+    let newVal = op.addInPort(new CABLES.Port(op, "Value " + i, CABLES.Port.TYPE_VALUE));
     inVals.push(newVal);
 }
 

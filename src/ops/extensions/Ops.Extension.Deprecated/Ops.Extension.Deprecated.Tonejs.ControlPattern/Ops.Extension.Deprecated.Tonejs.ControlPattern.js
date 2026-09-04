@@ -20,7 +20,7 @@ let node = new Tone.CtrlPattern(VALUES_DEFAULT, TYPE_DEFAULT);
 // inputs
 let triggerPort = op.inTrigger("Trigger");
 let valuesPort = op.inArray("Values");
-let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 
 // output
 let triggerNextPort = op.outTrigger("Trigger Next");

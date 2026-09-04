@@ -3,13 +3,13 @@ let self = this;
 let cgl = self.patch.cgl;
 
 this.name = "TextureShiftGlitch";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
-this.pos = this.addInPort(new CABLES.Port(this, "pos", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.height = this.addInPort(new CABLES.Port(this, "height", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.width = this.addInPort(new CABLES.Port(this, "width", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.extrude = this.addInPort(new CABLES.Port(this, "extrude", CABLES.OP_PORT_TYPE_VALUE));
+this.pos = this.addInPort(new CABLES.Port(this, "pos", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.height = this.addInPort(new CABLES.Port(this, "height", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.width = this.addInPort(new CABLES.Port(this, "width", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+this.extrude = this.addInPort(new CABLES.Port(this, "extrude", CABLES.Port.TYPE_VALUE));
 
 this.pos.onChange = function () { if (unipos)unipos.setValue(self.pos.val); };
 this.height.onChange = function () { if (uniheight)uniheight.setValue(self.height.val); };

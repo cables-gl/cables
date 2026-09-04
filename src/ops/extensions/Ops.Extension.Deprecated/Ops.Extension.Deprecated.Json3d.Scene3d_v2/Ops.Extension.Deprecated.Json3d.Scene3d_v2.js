@@ -1,5 +1,5 @@
-op.exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "3d json" }));
+op.exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
+let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "3d json" }));
 let trigger = op.outTrigger("trigger");
 let doCreate = op.inTriggerButton("Create Nodes");
 let createNonMesh = op.inBool("Create Non Mesh Nodes");

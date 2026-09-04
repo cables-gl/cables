@@ -1,36 +1,36 @@
-// var text=op.addInPort(new CABLES.Port(op,"Text",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
-let text = op.addInPort(new CABLES.Port(op, "Text", CABLES.OP_PORT_TYPE_VALUE, { "type": "string", "display": "editor" }));
+// var text=op.addInPort(new CABLES.Port(op,"Text",CABLES.Port.TYPE_VALUE,{type:'string'}));
+let text = op.addInPort(new CABLES.Port(op, "Text", CABLES.Port.TYPE_VALUE, { "type": "string", "display": "editor" }));
 
-let id = op.addInPort(new CABLES.Port(op, "Id", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-// var classes=op.addInPort(new CABLES.Port(op,"Class",CABLES.OP_PORT_TYPE_VALUE,{type:'string'}));
+let id = op.addInPort(new CABLES.Port(op, "Id", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+// var classes=op.addInPort(new CABLES.Port(op,"Class",CABLES.Port.TYPE_VALUE,{type:'string'}));
 let classes = op.inValueString("Class");
 
-let visible = op.addInPort(new CABLES.Port(op, "Visible", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let visible = op.addInPort(new CABLES.Port(op, "Visible", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 visible.set(true);
 
 let doCenterX = op.inBool("Center X", false);
 let doCenterY = op.inBool("Center Y", false);
 
-let posLeft = op.addInPort(new CABLES.Port(op, "Left", CABLES.OP_PORT_TYPE_VALUE));
-let posTop = op.addInPort(new CABLES.Port(op, "Top", CABLES.OP_PORT_TYPE_VALUE));
+let posLeft = op.addInPort(new CABLES.Port(op, "Left", CABLES.Port.TYPE_VALUE));
+let posTop = op.addInPort(new CABLES.Port(op, "Top", CABLES.Port.TYPE_VALUE));
 
-let borderRadius = op.addInPort(new CABLES.Port(op, "Border radius", CABLES.OP_PORT_TYPE_VALUE));
-let fontSize = op.addInPort(new CABLES.Port(op, "Font size", CABLES.OP_PORT_TYPE_VALUE));
-let fontFamily = op.addInPort(new CABLES.Port(op, "Font Family", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
+let borderRadius = op.addInPort(new CABLES.Port(op, "Border radius", CABLES.Port.TYPE_VALUE));
+let fontSize = op.addInPort(new CABLES.Port(op, "Font size", CABLES.Port.TYPE_VALUE));
+let fontFamily = op.addInPort(new CABLES.Port(op, "Font Family", CABLES.Port.TYPE_VALUE, { "type": "string" }));
 
-let cursor = op.addInPort(new CABLES.Port(op, "cursor", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help"] }));
+let cursor = op.addInPort(new CABLES.Port(op, "cursor", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help"] }));
 
 let opacity = op.inValueSlider("Opacity", 1.0);
 
-let r = op.addInPort(new CABLES.Port(op, "Text Red", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g = op.addInPort(new CABLES.Port(op, "Text Green", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b = op.addInPort(new CABLES.Port(op, "Text Blue", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a = op.addInPort(new CABLES.Port(op, "Text Opacity", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r = op.addInPort(new CABLES.Port(op, "Text Red", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g = op.addInPort(new CABLES.Port(op, "Text Green", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b = op.addInPort(new CABLES.Port(op, "Text Blue", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a = op.addInPort(new CABLES.Port(op, "Text Opacity", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-let bgR = op.addInPort(new CABLES.Port(op, "Background Red", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let bgG = op.addInPort(new CABLES.Port(op, "Background Green", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let bgB = op.addInPort(new CABLES.Port(op, "Background Blue", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let bgA = op.addInPort(new CABLES.Port(op, "Background Opacity", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let bgR = op.addInPort(new CABLES.Port(op, "Background Red", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let bgG = op.addInPort(new CABLES.Port(op, "Background Green", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let bgB = op.addInPort(new CABLES.Port(op, "Background Blue", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let bgA = op.addInPort(new CABLES.Port(op, "Background Opacity", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 let outElement = op.outObject("Element");
 
@@ -44,17 +44,17 @@ bgG.set(0.5);
 bgB.set(0.5);
 bgA.set(1);
 
-let ignoreMouse = op.addInPort(new CABLES.Port(op, "Ignore Mouse", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let ignoreMouse = op.addInPort(new CABLES.Port(op, "Ignore Mouse", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 ignoreMouse.set(false);
 
-let autoSize = op.addInPort(new CABLES.Port(op, "Auto width/height", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let width = op.addInPort(new CABLES.Port(op, "Width", CABLES.OP_PORT_TYPE_VALUE));
-let height = op.addInPort(new CABLES.Port(op, "Height", CABLES.OP_PORT_TYPE_VALUE));
+let autoSize = op.addInPort(new CABLES.Port(op, "Auto width/height", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let width = op.addInPort(new CABLES.Port(op, "Width", CABLES.Port.TYPE_VALUE));
+let height = op.addInPort(new CABLES.Port(op, "Height", CABLES.Port.TYPE_VALUE));
 
-let clickTrigger = op.addOutPort(new CABLES.Port(op, "OnClick", CABLES.OP_PORT_TYPE_FUNCTION));
-let mouseOver = op.addOutPort(new CABLES.Port(op, "MouseOver", CABLES.OP_PORT_TYPE_VALUE, { "type": "bool" }));
-let clientWidth = op.addOutPort(new CABLES.Port(op, "Client Width", CABLES.OP_PORT_TYPE_VALUE));
-let clientHeight = op.addOutPort(new CABLES.Port(op, "Client Height", CABLES.OP_PORT_TYPE_VALUE));
+let clickTrigger = op.addOutPort(new CABLES.Port(op, "OnClick", CABLES.Port.TYPE_FUNCTION));
+let mouseOver = op.addOutPort(new CABLES.Port(op, "MouseOver", CABLES.Port.TYPE_VALUE, { "type": "bool" }));
+let clientWidth = op.addOutPort(new CABLES.Port(op, "Client Width", CABLES.Port.TYPE_VALUE));
+let clientHeight = op.addOutPort(new CABLES.Port(op, "Client Height", CABLES.Port.TYPE_VALUE));
 
 text.set("This is a HTML element");
 width.set(100);

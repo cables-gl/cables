@@ -1,22 +1,22 @@
-let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.OP_PORT_TYPE_OBJECT));
+let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.Port.TYPE_OBJECT));
 
 let note = op.addInPort(new CABLES.Port(op, "Note Start"));
-let learn = op.addInPort(new CABLES.Port(op, "Learn Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let learn = op.addInPort(new CABLES.Port(op, "Learn Start", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
 let noteEnd = op.addInPort(new CABLES.Port(op, "Note End"));
-let learnEnd = op.addInPort(new CABLES.Port(op, "Learn End", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let learnEnd = op.addInPort(new CABLES.Port(op, "Learn End", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
-let lights = op.addInPort(new CABLES.Port(op, "Light", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let lights = op.addInPort(new CABLES.Port(op, "Light", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 let toggle = op.inBool("Toggle");
 
 let inValue = op.inFloat("Button Value", 1);
 
-let eventOut = op.addOutPort(new CABLES.Port(op, "Event Output", CABLES.OP_PORT_TYPE_OBJECT));
+let eventOut = op.addOutPort(new CABLES.Port(op, "Event Output", CABLES.Port.TYPE_OBJECT));
 
 let lastIndex = op.addOutPort(new CABLES.Port(op, "Last Index"));
 let numButtons = op.addOutPort(new CABLES.Port(op, "Num Buttons"));
 
-let values = op.addOutPort(new CABLES.Port(op, "Buttons", CABLES.OP_PORT_TYPE_ARRAY));
+let values = op.addOutPort(new CABLES.Port(op, "Buttons", CABLES.Port.TYPE_ARRAY));
 
 let inClear = op.inTriggerButton("Clear");
 

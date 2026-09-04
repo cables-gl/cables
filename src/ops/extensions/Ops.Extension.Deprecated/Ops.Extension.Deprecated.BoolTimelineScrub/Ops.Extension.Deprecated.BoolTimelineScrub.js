@@ -1,10 +1,10 @@
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let state = op.addInPort(new CABLES.Port(op, "state", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let v = op.addInPort(new CABLES.Port(op, "anim value", CABLES.OP_PORT_TYPE_VALUE));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
+let state = op.addInPort(new CABLES.Port(op, "state", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let v = op.addInPort(new CABLES.Port(op, "anim value", CABLES.Port.TYPE_VALUE));
 
 let result = op.addOutPort(new CABLES.Port(op, "result"));
-let outTime = op.addOutPort(new CABLES.Port(op, "time", CABLES.OP_PORT_TYPE_VALUE));
-let outPerc = op.addOutPort(new CABLES.Port(op, "Percentage", CABLES.OP_PORT_TYPE_VALUE));
+let outTime = op.addOutPort(new CABLES.Port(op, "time", CABLES.Port.TYPE_VALUE));
+let outPerc = op.addOutPort(new CABLES.Port(op, "Percentage", CABLES.Port.TYPE_VALUE));
 
 let animTime = new CABLES.Anim();
 

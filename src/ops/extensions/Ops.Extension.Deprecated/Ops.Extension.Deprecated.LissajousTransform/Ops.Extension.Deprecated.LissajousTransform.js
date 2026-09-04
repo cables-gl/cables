@@ -1,15 +1,15 @@
 op.name = "lissajous transform";
 
 let render = op.inTrigger("render");
-let x = op.addInPort(new CABLES.Port(op, "x", CABLES.OP_PORT_TYPE_VALUE));
-let y = op.addInPort(new CABLES.Port(op, "y", CABLES.OP_PORT_TYPE_VALUE));
-let z = op.addInPort(new CABLES.Port(op, "z", CABLES.OP_PORT_TYPE_VALUE));
-let pointSkip = op.addInPort(new CABLES.Port(op, "skip", CABLES.OP_PORT_TYPE_VALUE));
-let numPoints = op.addInPort(new CABLES.Port(op, "num points", CABLES.OP_PORT_TYPE_VALUE));
+let x = op.addInPort(new CABLES.Port(op, "x", CABLES.Port.TYPE_VALUE));
+let y = op.addInPort(new CABLES.Port(op, "y", CABLES.Port.TYPE_VALUE));
+let z = op.addInPort(new CABLES.Port(op, "z", CABLES.Port.TYPE_VALUE));
+let pointSkip = op.addInPort(new CABLES.Port(op, "skip", CABLES.Port.TYPE_VALUE));
+let numPoints = op.addInPort(new CABLES.Port(op, "num points", CABLES.Port.TYPE_VALUE));
 
-let mulX = op.addInPort(new CABLES.Port(op, "mul x", CABLES.OP_PORT_TYPE_VALUE));
-let mulY = op.addInPort(new CABLES.Port(op, "mul y", CABLES.OP_PORT_TYPE_VALUE));
-let mulZ = op.addInPort(new CABLES.Port(op, "mul z", CABLES.OP_PORT_TYPE_VALUE));
+let mulX = op.addInPort(new CABLES.Port(op, "mul x", CABLES.Port.TYPE_VALUE));
+let mulY = op.addInPort(new CABLES.Port(op, "mul y", CABLES.Port.TYPE_VALUE));
+let mulZ = op.addInPort(new CABLES.Port(op, "mul z", CABLES.Port.TYPE_VALUE));
 
 x.set(2);
 y.set(4);

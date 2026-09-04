@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
-const svgFile = op.addInPort(new CABLES.Port(op, "object", CABLES.OP_PORT_TYPE_OBJECT));
+const svgFile = op.addInPort(new CABLES.Port(op, "object", CABLES.Port.TYPE_OBJECT));
 
-const thickness = op.addInPort(new CABLES.Port(op, "thickness", CABLES.OP_PORT_TYPE_VALUE));
+const thickness = op.addInPort(new CABLES.Port(op, "thickness", CABLES.Port.TYPE_VALUE));
 
 const outEach = op.outTrigger("Each");
 const outPoints = op.outArray("Points");

@@ -3,9 +3,9 @@ let cgl = this.patch.cgl;
 this.name = "DepthTexture";
 
 const render = op.inTrigger("render");
-let image = this.addInPort(new CABLES.Port(this, "image", CABLES.OP_PORT_TYPE_TEXTURE));
-let farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.OP_PORT_TYPE_VALUE));
-let nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
+let image = this.addInPort(new CABLES.Port(this, "image", CABLES.Port.TYPE_TEXTURE));
+let farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.Port.TYPE_VALUE));
+let nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.Port.TYPE_VALUE));
 
 farPlane.set(100.0);
 nearPlane.set(0.1);

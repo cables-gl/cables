@@ -1,14 +1,14 @@
-let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.OP_PORT_TYPE_OBJECT));
+let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.Port.TYPE_OBJECT));
 let note = op.addInPort(new CABLES.Port(op, "note"));
 let channel = op.inValueInt("Channel", 0);
-let learn = op.addInPort(new CABLES.Port(op, "learn", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let learn = op.addInPort(new CABLES.Port(op, "learn", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
-let eventOut = op.addOutPort(new CABLES.Port(op, "Event Output", CABLES.OP_PORT_TYPE_OBJECT));
+let eventOut = op.addOutPort(new CABLES.Port(op, "Event Output", CABLES.Port.TYPE_OBJECT));
 let outPressed = op.addOutPort(new CABLES.Port(op, "pressed"));
 
 let trigger = op.outTrigger("trigger");
 
-let lights = op.addInPort(new CABLES.Port(op, "Light", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let lights = op.addInPort(new CABLES.Port(op, "Light", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 note.set(1);
 let learning = false;

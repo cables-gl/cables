@@ -32,12 +32,12 @@
 // var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 // var qPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Q", node.Q, {"display": "range", "min": Q_MIN, "max": Q_MAX}, Q_DEFAULT);
 // var frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, {"display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX}, FREQUENCY_DEFAULT);
-// var octavesPort = op.addInPort( new CABLES.Port( op, "Octaves", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': OCTAVES_MIN, 'max': OCTAVES_MAX } ));
+// var octavesPort = op.addInPort( new CABLES.Port( op, "Octaves", CABLES.Port.TYPE_VALUE, { 'display': 'range', 'min': OCTAVES_MIN, 'max': OCTAVES_MAX } ));
 // octavesPort.set(OCTAVES_DEFAULT);
 // var baseFrequencyPort = op.inFloat("Base Frequency");
 // baseFrequencyPort.set(BASE_FREQUENCY_DEFAULT);
 // /*
-// var stagesPort = op.addInPort( new CABLES.Port( op, "Stages", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': STAGES_MIN, 'max': STAGES_MAX } ));
+// var stagesPort = op.addInPort( new CABLES.Port( op, "Stages", CABLES.Port.TYPE_VALUE, { 'display': 'range', 'min': STAGES_MIN, 'max': STAGES_MAX } ));
 // stagesPort.set(STAGES_DEFAULT);
 // */
 // var wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, {"display": "range", "min": WET_MIN, "max": WET_MAX}, WET_DEFAULT);

@@ -59,20 +59,20 @@ let node = new Tone.Oscillator(FREQUENCY_DEFAULT, TYPE_DEFAULT);
 // input ports
 let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 let detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
-let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set("sine");
-let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }, PHASE_DEFAULT));
+let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.Port.TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }, PHASE_DEFAULT));
 phasePort.set(PHASE_DEFAULT);
 let syncFrequencyPort = op.inBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
-let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, { "display": "range", "min": VOLUME_MIN, "max": VOLUME_MAX }, VOLUME_DEFAULT);
 // volumePort.set(VOLUME_DEFAULT);
 
-let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 mutePort.set(false);
 
 function setSyncAndAutostart()

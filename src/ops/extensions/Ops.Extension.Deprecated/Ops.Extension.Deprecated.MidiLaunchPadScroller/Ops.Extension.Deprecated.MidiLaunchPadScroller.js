@@ -1,7 +1,7 @@
-let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.OP_PORT_TYPE_OBJECT));
+let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.Port.TYPE_OBJECT));
 
-let exec = this.addInPort(new CABLES.Port(this, "exec", CABLES.OP_PORT_TYPE_FUNCTION));
-let offsetX = this.addInPort(new CABLES.Port(this, "Offset X", CABLES.OP_PORT_TYPE_VALUE));
+let exec = this.addInPort(new CABLES.Port(this, "exec", CABLES.Port.TYPE_FUNCTION));
+let offsetX = this.addInPort(new CABLES.Port(this, "Offset X", CABLES.Port.TYPE_VALUE));
 
 let img = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

@@ -1,7 +1,7 @@
 op.name = "SetVar";
 
-let varname = op.addInPort(new CABLES.Port(op, "name", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
-let v = op.addInPort(new CABLES.Port(op, "val", CABLES.OP_PORT_TYPE_VALUE, {}));
+let varname = op.addInPort(new CABLES.Port(op, "name", CABLES.Port.TYPE_VALUE, { "type": "string" }));
+let v = op.addInPort(new CABLES.Port(op, "val", CABLES.Port.TYPE_VALUE, {}));
 
 function exec()
 {

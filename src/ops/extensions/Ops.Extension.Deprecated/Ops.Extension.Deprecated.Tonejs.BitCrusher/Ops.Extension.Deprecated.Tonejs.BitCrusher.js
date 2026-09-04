@@ -13,7 +13,7 @@ let node = new Tone.BitCrusher(BITS_DEFAULT);
 
 // input ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let bitsPort = op.addInPort(new CABLES.Port(this, "Bits", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": BITS_MIN, "max": BITS_MAX }, BITS_DEFAULT));
+let bitsPort = op.addInPort(new CABLES.Port(this, "Bits", CABLES.Port.TYPE_VALUE, { "display": "range", "min": BITS_MIN, "max": BITS_MAX }, BITS_DEFAULT));
 bitsPort.set(BITS_DEFAULT);
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, WET_DEFAULT);
 

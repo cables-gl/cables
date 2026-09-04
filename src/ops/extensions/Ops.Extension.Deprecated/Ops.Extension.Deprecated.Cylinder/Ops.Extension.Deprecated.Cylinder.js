@@ -1,13 +1,13 @@
 let render = op.inTrigger("render");
-let slices = op.addInPort(new CABLES.Port(op, "slices", CABLES.OP_PORT_TYPE_VALUE));
-let stacks = op.addInPort(new CABLES.Port(op, "stacks", CABLES.OP_PORT_TYPE_VALUE));
-let radius = op.addInPort(new CABLES.Port(op, "radius", CABLES.OP_PORT_TYPE_VALUE));
-let height = op.addInPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
+let slices = op.addInPort(new CABLES.Port(op, "slices", CABLES.Port.TYPE_VALUE));
+let stacks = op.addInPort(new CABLES.Port(op, "stacks", CABLES.Port.TYPE_VALUE));
+let radius = op.addInPort(new CABLES.Port(op, "radius", CABLES.Port.TYPE_VALUE));
+let height = op.addInPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
 
 let startSlice = op.inValueInt("Start Slice", 0);
 
 let trigger = op.outTrigger("trigger");
-let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 
 height.set(2);
 slices.set(32);

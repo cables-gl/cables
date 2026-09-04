@@ -2,16 +2,16 @@
 this.name = "HeightMap";
 
 const render = op.inTrigger("render");
-let filename = this.addInPort(new CABLES.Port(this, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "image" }));
+let filename = this.addInPort(new CABLES.Port(this, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "image" }));
 
-let extrude = this.addInPort(new CABLES.Port(this, "extrude", CABLES.OP_PORT_TYPE_VALUE));
+let extrude = this.addInPort(new CABLES.Port(this, "extrude", CABLES.Port.TYPE_VALUE));
 extrude.set(1);
 
-let mWidth = this.addInPort(new CABLES.Port(this, "width", CABLES.OP_PORT_TYPE_VALUE));
-let mHeight = this.addInPort(new CABLES.Port(this, "height", CABLES.OP_PORT_TYPE_VALUE));
+let mWidth = this.addInPort(new CABLES.Port(this, "width", CABLES.Port.TYPE_VALUE));
+let mHeight = this.addInPort(new CABLES.Port(this, "height", CABLES.Port.TYPE_VALUE));
 
-let nRows = this.addInPort(new CABLES.Port(this, "rows", CABLES.OP_PORT_TYPE_VALUE));
-let nColumns = this.addInPort(new CABLES.Port(this, "columns", CABLES.OP_PORT_TYPE_VALUE));
+let nRows = this.addInPort(new CABLES.Port(this, "rows", CABLES.Port.TYPE_VALUE));
+let nColumns = this.addInPort(new CABLES.Port(this, "columns", CABLES.Port.TYPE_VALUE));
 
 const trigger = op.outTrigger("trigger");
 

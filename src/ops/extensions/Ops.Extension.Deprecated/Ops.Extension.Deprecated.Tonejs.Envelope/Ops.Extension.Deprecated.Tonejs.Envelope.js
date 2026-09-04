@@ -16,14 +16,14 @@ op.webAudio.setNodeSettings = function (settings)
 
 // input port
 
-let attackPort = op.addInPort(new CABLES.Port(this, "Attack", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
-let decayPort = op.addInPort(new CABLES.Port(this, "Decay", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
-let sustainPort = op.addInPort(new CABLES.Port(this, "Sustain", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
-let releasePort = op.addInPort(new CABLES.Port(this, "Release", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
-let triggerAttackPort = op.addInPort(new CABLES.Port(this, "Trigger Attack", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let velocityPort = op.addInPort(new CABLES.Port(this, "Velocity", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
+let attackPort = op.addInPort(new CABLES.Port(this, "Attack", CABLES.Port.TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
+let decayPort = op.addInPort(new CABLES.Port(this, "Decay", CABLES.Port.TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
+let sustainPort = op.addInPort(new CABLES.Port(this, "Sustain", CABLES.Port.TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
+let releasePort = op.addInPort(new CABLES.Port(this, "Release", CABLES.Port.TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
+let triggerAttackPort = op.addInPort(new CABLES.Port(this, "Trigger Attack", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let velocityPort = op.addInPort(new CABLES.Port(this, "Velocity", CABLES.Port.TYPE_VALUE, { "display": "range", "min": 0, "max": 1 }));
 let attackTimePort = op.inValueString("Attack Time");
-let triggerReleasePort = op.addInPort(new CABLES.Port(this, "Trigger Release", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let triggerReleasePort = op.addInPort(new CABLES.Port(this, "Trigger Release", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let releaseTimePort = op.inValueString("Release Time");
 
 // output port

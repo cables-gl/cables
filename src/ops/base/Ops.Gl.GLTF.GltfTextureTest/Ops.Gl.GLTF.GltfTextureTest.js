@@ -4,7 +4,7 @@ const whichTex = op.inSwitch("Show tex", ["Albedo", "Normal", "AO", "MR", "Light
 const trigger = op.outTrigger("trigger");
 const shaderOut = op.outObject("shader", null, "shader");
 
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_FUNCTION);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.Port.TYPE_FUNCTION);
 
 const cgl = op.patch.cgl;
 

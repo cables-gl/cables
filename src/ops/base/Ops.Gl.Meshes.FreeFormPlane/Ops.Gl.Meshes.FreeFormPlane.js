@@ -40,7 +40,7 @@ let verts = new Float32Array(arrverts);
 let indices = [2, 1, 0, 1, 2, 3];
 let tc = new Float32Array([0, 0, 0, 0, 0, 0, 0, 0]);
 
-let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 geomOut.ignoreValueSerialize = true;
 
 tcx1.onChange =

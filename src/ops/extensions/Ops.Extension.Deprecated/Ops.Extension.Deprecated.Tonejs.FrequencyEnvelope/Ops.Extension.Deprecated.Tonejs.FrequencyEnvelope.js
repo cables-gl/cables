@@ -45,9 +45,9 @@ let attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 let decayPort = op.inFloat("Decay", DECAY_DEFAULT);
 let sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
 let releasePort = op.inValueString("Release", RELEASE_DEFAULT);
-let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
+let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);
-let releaseCurvePort = this.addInPort(new CABLES.Port(this, "Release Curve", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
+let releaseCurvePort = this.addInPort(new CABLES.Port(this, "Release Curve", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 releaseCurvePort.set(ATTACK_CURVE_DEFAULT);
 let exponentPort = op.inFloat("Exponent", EXPONENT_DEFAULT);
 

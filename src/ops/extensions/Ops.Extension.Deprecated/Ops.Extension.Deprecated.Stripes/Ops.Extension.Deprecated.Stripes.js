@@ -1,16 +1,16 @@
 let render = op.inTrigger("render");
-let num = op.addInPort(new CABLES.Port(op, "num", CABLES.OP_PORT_TYPE_VALUE));
-let width = op.addInPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let axis = op.addInPort(new CABLES.Port(op, "axis", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["X", "Y", "Diagonal", "Diagonal Flip"] }));
+let num = op.addInPort(new CABLES.Port(op, "num", CABLES.Port.TYPE_VALUE));
+let width = op.addInPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let axis = op.addInPort(new CABLES.Port(op, "axis", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["X", "Y", "Diagonal", "Diagonal Flip"] }));
 
-let offset = op.addInPort(new CABLES.Port(op, "offset", CABLES.OP_PORT_TYPE_VALUE));
+let offset = op.addInPort(new CABLES.Port(op, "offset", CABLES.Port.TYPE_VALUE));
 
 let smoothed = op.inBool("Gradients");
 
-let r = op.addInPort(new CABLES.Port(op, "r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g = op.addInPort(new CABLES.Port(op, "g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b = op.addInPort(new CABLES.Port(op, "b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a = op.addInPort(new CABLES.Port(op, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r = op.addInPort(new CABLES.Port(op, "r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g = op.addInPort(new CABLES.Port(op, "g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b = op.addInPort(new CABLES.Port(op, "b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a = op.addInPort(new CABLES.Port(op, "a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
 let trigger = op.outTrigger("trigger");
 

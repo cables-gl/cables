@@ -7,7 +7,7 @@ let inMax = op.inValueSlider("In Max", 1);
 let outMin = op.inValueSlider("Out Min", 0);
 let outMax = op.inValueSlider("Out Max", 1);
 
-let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FUNCTION));
+let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

@@ -1,9 +1,9 @@
 op.name = "PolyColor";
 
-let pDefaultR = op.addInPort(new CABLES.Port(op, "default r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let pDefaultG = op.addInPort(new CABLES.Port(op, "default g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let pDefaultB = op.addInPort(new CABLES.Port(op, "default b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let pDefaultA = op.addInPort(new CABLES.Port(op, "default a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let pDefaultR = op.addInPort(new CABLES.Port(op, "default r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let pDefaultG = op.addInPort(new CABLES.Port(op, "default g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let pDefaultB = op.addInPort(new CABLES.Port(op, "default b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let pDefaultA = op.addInPort(new CABLES.Port(op, "default a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 let pName = op.inValueString("name", "paramname");
 let pTitle = op.inValueString("title", "something readable");
 let pDescription = op.inValueString("description", "");

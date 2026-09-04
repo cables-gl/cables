@@ -3,11 +3,11 @@ this.name = "Oscillator";
 CABLES.WEBAUDIO.createAudioContext(op);
 
 // inputs
-let type = this.addInPort(new CABLES.Port(this, "type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["sine", "square", "sawtooth", "triangle"] }));
-let frequency = this.addInPort(new CABLES.Port(this, "frequency", CABLES.OP_PORT_TYPE_VALUE));
+let type = this.addInPort(new CABLES.Port(this, "type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["sine", "square", "sawtooth", "triangle"] }));
+let frequency = this.addInPort(new CABLES.Port(this, "frequency", CABLES.Port.TYPE_VALUE));
 
 // outputs
-let audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
+let audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.Port.TYPE_OBJECT));
 
 // initialisation
 let oscillator = audioContext.createOscillator();

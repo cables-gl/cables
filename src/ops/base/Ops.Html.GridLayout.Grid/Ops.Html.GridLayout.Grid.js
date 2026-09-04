@@ -5,8 +5,8 @@ const
     inGapUnit = op.inSwitch("Gap Unit", ["Off", "px", "%"], "px"),
     inHelper = op.inBool("Show Helper"),
     inActive = op.inBool("Active", true),
-    inSizes = op.inMultiPort("Cell Size", CABLES.OP_PORT_TYPE_STRING),
-    inObjs = op.inMultiPort("Childs", CABLES.OP_PORT_TYPE_OBJECT),
+    inSizes = op.inMultiPort("Cell Size", CABLES.Port.TYPE_STRING),
+    inObjs = op.inMultiPort("Childs", CABLES.Port.TYPE_OBJECT),
     outElement = op.outObject("Element");
 
 const div = op.patch.getDocument().createElement("div");

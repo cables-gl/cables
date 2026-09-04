@@ -3,24 +3,24 @@ let self = this;
 let cgl = this.patch.cgl;
 
 this.name = "DepthOfField";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
-this.depthTex = this.addInPort(new CABLES.Port(this, "depth map", CABLES.OP_PORT_TYPE_TEXTURE));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
+this.depthTex = this.addInPort(new CABLES.Port(this, "depth map", CABLES.Port.TYPE_TEXTURE));
 
-let tex1 = this.addInPort(new CABLES.Port(this, "tex", CABLES.OP_PORT_TYPE_TEXTURE));
-let tex2 = this.addInPort(new CABLES.Port(this, "tex 1", CABLES.OP_PORT_TYPE_TEXTURE));
-let tex3 = this.addInPort(new CABLES.Port(this, "tex 2", CABLES.OP_PORT_TYPE_TEXTURE));
-let tex4 = this.addInPort(new CABLES.Port(this, "tex 3", CABLES.OP_PORT_TYPE_TEXTURE));
+let tex1 = this.addInPort(new CABLES.Port(this, "tex", CABLES.Port.TYPE_TEXTURE));
+let tex2 = this.addInPort(new CABLES.Port(this, "tex 1", CABLES.Port.TYPE_TEXTURE));
+let tex3 = this.addInPort(new CABLES.Port(this, "tex 2", CABLES.Port.TYPE_TEXTURE));
+let tex4 = this.addInPort(new CABLES.Port(this, "tex 3", CABLES.Port.TYPE_TEXTURE));
 
-this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.OP_PORT_TYPE_VALUE));
-this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
+this.farPlane = this.addInPort(new CABLES.Port(this, "farplane", CABLES.Port.TYPE_VALUE));
+this.nearPlane = this.addInPort(new CABLES.Port(this, "nearplane", CABLES.Port.TYPE_VALUE));
 
-// var distNear=this.addInPort(new CABLES.Port(this,"distance near",CABLES.OP_PORT_TYPE_VALUE,{'display':'range'}));
-let distFar = this.addInPort(new CABLES.Port(this, "distance far", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+// var distNear=this.addInPort(new CABLES.Port(this,"distance near",CABLES.Port.TYPE_VALUE,{'display':'range'}));
+let distFar = this.addInPort(new CABLES.Port(this, "distance far", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-let stepWidth = this.addInPort(new CABLES.Port(this, "step width", CABLES.OP_PORT_TYPE_VALUE, {}));
+let stepWidth = this.addInPort(new CABLES.Port(this, "step width", CABLES.Port.TYPE_VALUE, {}));
 
-let showDistances = this.addInPort(new CABLES.Port(this, "showDistances", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let showDistances = this.addInPort(new CABLES.Port(this, "showDistances", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 showDistances.set(false);
 
 let shader = new CGL.Shader(cgl, op.name, op);

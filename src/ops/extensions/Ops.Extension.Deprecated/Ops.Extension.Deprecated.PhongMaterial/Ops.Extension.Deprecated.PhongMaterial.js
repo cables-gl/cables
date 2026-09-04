@@ -4,10 +4,10 @@ let cgl = this.patch.cgl;
 // adapted from:
 // http://www.tomdalling.com/blog/modern-opengl/07-more-lighting-ambient-specular-attenuation-gamma/
 
-let render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-let gammeCorrect = this.addInPort(new CABLES.Port(this, "gamma correction", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+let gammeCorrect = this.addInPort(new CABLES.Port(this, "gamma correction", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 const trigger = op.outTrigger("trigger");
-let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.OP_PORT_TYPE_OBJECT));
+let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.Port.TYPE_OBJECT));
 shaderOut.ignoreValueSerialize = true;
 let MAX_LIGHTS = 16;
 
@@ -44,14 +44,14 @@ for (var i = 0; i < MAX_LIGHTS; i++)
     // lights[count].depthMVP=new CGL.Uniform(shader,'m4','lights['+count+'].depthMVP',mat4.create());
 }
 
-let shiny = this.addInPort(new CABLES.Port(this, "Shiny", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let shiny = this.addInPort(new CABLES.Port(this, "Shiny", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 shiny.onChange = function ()
 {
     if (shiny.get()) shader.define("DO_RENDER_SPECULAR");
     else shader.removeDefine("DO_RENDER_SPECULAR");
 };
 
-let shininess = this.addInPort(new CABLES.Port(this, "Shininess", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let shininess = this.addInPort(new CABLES.Port(this, "Shininess", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 shininess.onChange = function ()
 {
     let shi = 200 - (shininess.get() * 199);
@@ -62,7 +62,7 @@ shininess.onChange = function ()
 
 shininess.set(0.001);
 
-let normIntensity = this.addInPort(new CABLES.Port(this, "Normal Texture Intensity", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let normIntensity = this.addInPort(new CABLES.Port(this, "Normal Texture Intensity", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 normIntensity.onChange = function ()
 {
     if (!normIntensity.uniform) normIntensity.uniform = new CGL.Uniform(shader, "f", "normalTexIntensity", normIntensity.get());
@@ -74,28 +74,28 @@ normIntensity.set(1);
 {
     // diffuse color
 
-    let r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+    let r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
     r.onChange = function ()
     {
         if (!r.uniform) r.uniform = new CGL.Uniform(shader, "f", "r", r.get());
         else r.uniform.setValue(r.get());
     };
 
-    let g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     g.onChange = function ()
     {
         if (!g.uniform) g.uniform = new CGL.Uniform(shader, "f", "g", g.get());
         else g.uniform.setValue(g.get());
     };
 
-    let b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     b.onChange = function ()
     {
         if (!b.uniform) b.uniform = new CGL.Uniform(shader, "f", "b", b.get());
         else b.uniform.setValue(b.get());
     };
 
-    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
     a.onChange = function ()
     {
         if (!a.uniform) a.uniform = new CGL.Uniform(shader, "f", "a", a.get());
@@ -109,7 +109,7 @@ normIntensity.set(1);
 }
 
 {
-    let colorizeTex = this.addInPort(new CABLES.Port(this, "colorize texture", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+    let colorizeTex = this.addInPort(new CABLES.Port(this, "colorize texture", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
     colorizeTex.onChange = function ()
     {
         if (colorizeTex.get()) shader.define("COLORIZE_TEXTURE");
@@ -120,7 +120,7 @@ normIntensity.set(1);
 {
     // diffuse texture
 
-    var diffuseTexture = this.addInPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var diffuseTexture = this.addInPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let diffuseTextureUniform = null;
     shader.bindTextures = bindTextures;
 
@@ -141,7 +141,7 @@ normIntensity.set(1);
         }
     };
 
-    var aoTexture = this.addInPort(new CABLES.Port(this, "AO Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var aoTexture = this.addInPort(new CABLES.Port(this, "AO Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let aoTextureUniform = null;
     aoTexture.ignoreValueSerialize = true;
     shader.bindTextures = bindTextures;
@@ -163,7 +163,7 @@ normIntensity.set(1);
         }
     };
 
-    var specTexture = this.addInPort(new CABLES.Port(this, "Specular Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var specTexture = this.addInPort(new CABLES.Port(this, "Specular Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let specTextureUniform = null;
 
     specTexture.onChange = function ()
@@ -183,7 +183,7 @@ normIntensity.set(1);
         }
     };
 
-    var normalTexture = this.addInPort(new CABLES.Port(this, "Normal Texture", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
+    var normalTexture = this.addInPort(new CABLES.Port(this, "Normal Texture", CABLES.Port.TYPE_TEXTURE, { "preview": true, "display": "createOpHelper" }));
     let normalTextureUniform = null;
 
     normalTexture.onChange = function ()
@@ -203,8 +203,8 @@ normIntensity.set(1);
         }
     };
 
-    let diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.OP_PORT_TYPE_VALUE));
-    let diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.OP_PORT_TYPE_VALUE));
+    let diffuseRepeatX = this.addInPort(new CABLES.Port(this, "diffuseRepeatX", CABLES.Port.TYPE_VALUE));
+    let diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CABLES.Port.TYPE_VALUE));
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
 
@@ -223,7 +223,7 @@ normIntensity.set(1);
 }
 
 {
-    let texturedPoints = this.addInPort(new CABLES.Port(this, "textured points", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+    let texturedPoints = this.addInPort(new CABLES.Port(this, "textured points", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
     texturedPoints.onChange = function ()
     {
         if (texturedPoints.get()) shader.define("TEXTURED_POINTS");

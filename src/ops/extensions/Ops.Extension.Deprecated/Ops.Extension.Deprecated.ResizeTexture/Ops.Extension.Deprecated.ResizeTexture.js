@@ -5,11 +5,11 @@ let cgl = this.patch.cgl;
 this.name = "texture resize";
 // const render=op.inTrigger("render");
 
-let width = this.addInPort(new CABLES.Port(this, "width", CABLES.OP_PORT_TYPE_VALUE));
-let height = this.addInPort(new CABLES.Port(this, "height", CABLES.OP_PORT_TYPE_VALUE));
+let width = this.addInPort(new CABLES.Port(this, "width", CABLES.Port.TYPE_VALUE));
+let height = this.addInPort(new CABLES.Port(this, "height", CABLES.Port.TYPE_VALUE));
 
 // const trigger=op.outTrigger("trigger");
-let texOut = this.addOutPort(new CABLES.Port(this, "texture_out", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
+let texOut = this.addOutPort(new CABLES.Port(this, "texture_out", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 
 let tex = new CGL.Texture(cgl);
 tex.filter = CGL.Texture.FILTER_MIPMAP;

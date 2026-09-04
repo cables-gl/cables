@@ -2,10 +2,10 @@ let cgl = op.patch.cgl;
 
 op.name = "Performance";
 
-let exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-let trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
-let textureOut = this.addOutPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE));
-let outFPS = this.addOutPort(new CABLES.Port(this, "fps", CABLES.OP_PORT_TYPE_VALUE));
+let exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
+let trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
+let textureOut = this.addOutPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE));
+let outFPS = this.addOutPort(new CABLES.Port(this, "fps", CABLES.Port.TYPE_VALUE));
 
 let drawGraph = op.inBool("Draw Graph", true);
 let enabled = op.inBool("enabled", true);

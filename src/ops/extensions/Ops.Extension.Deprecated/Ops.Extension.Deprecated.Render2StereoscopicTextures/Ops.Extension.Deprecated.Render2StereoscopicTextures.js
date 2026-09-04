@@ -1,11 +1,11 @@
 let render = op.inTrigger("render");
-let pose = op.addInPort(new CABLES.Port(op, "pose matrix", CABLES.OP_PORT_TYPE_OBJECT));
-let eyeLeft = op.addInPort(new CABLES.Port(op, "Eye Left", CABLES.OP_PORT_TYPE_OBJECT));
-let eyeRight = op.addInPort(new CABLES.Port(op, "Eye Right", CABLES.OP_PORT_TYPE_OBJECT));
+let pose = op.addInPort(new CABLES.Port(op, "pose matrix", CABLES.Port.TYPE_OBJECT));
+let eyeLeft = op.addInPort(new CABLES.Port(op, "Eye Left", CABLES.Port.TYPE_OBJECT));
+let eyeRight = op.addInPort(new CABLES.Port(op, "Eye Right", CABLES.Port.TYPE_OBJECT));
 
 let trigger = op.outTrigger("trigger");
-let tex0 = op.addOutPort(new CABLES.Port(op, "texture left", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
-let tex1 = op.addOutPort(new CABLES.Port(op, "texture right", CABLES.OP_PORT_TYPE_TEXTURE, { "preview": true }));
+let tex0 = op.addOutPort(new CABLES.Port(op, "texture left", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
+let tex1 = op.addOutPort(new CABLES.Port(op, "texture right", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 
 let cgl = op.patch.cgl;
 

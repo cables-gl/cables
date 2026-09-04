@@ -525,7 +525,7 @@ function setupPorts(subPatchId, ignoreLinks = false)
                 const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
                 switch (subPatchPort.type)
                 {
-                case CABLES.OP_PORT_TYPE_FUNCTION:
+                case CABLES.Port.TYPE_FUNCTION:
                     newPort.onTriggered = () =>
                     {
                         subPatchPort.onTriggered();
@@ -599,7 +599,7 @@ function setupPorts(subPatchId, ignoreLinks = false)
 
                     switch (subPatchPort.type)
                     {
-                    case CABLES.OP_PORT_TYPE_FUNCTION:
+                    case CABLES.Port.TYPE_FUNCTION:
                         subPatchPort.onTriggered = () =>
                         {
                             newPort.trigger();

@@ -1,9 +1,9 @@
 op.name = "Color";
 let render = op.inTrigger("render");
-let r = op.addInPort(new CABLES.Port(op, "r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-let g = op.addInPort(new CABLES.Port(op, "g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let b = op.addInPort(new CABLES.Port(op, "b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let a = op.addInPort(new CABLES.Port(op, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let r = op.addInPort(new CABLES.Port(op, "r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+let g = op.addInPort(new CABLES.Port(op, "g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let b = op.addInPort(new CABLES.Port(op, "b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let a = op.addInPort(new CABLES.Port(op, "a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 let trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
@@ -59,10 +59,10 @@ render.onTriggered = function ()
 // var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 // var amount=op.inValueSlider("Amount",1);
 
-// var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-// var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-// var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+// var r=op.addInPort(new CABLES.Port(op,"r",CABLES.Port.TYPE_VALUE,{ display:'range', colorPick:'true'}));
+// var g=op.addInPort(new CABLES.Port(op,"g",CABLES.Port.TYPE_VALUE,{ display:'range' }));
+// var b=op.addInPort(new CABLES.Port(op,"b",CABLES.Port.TYPE_VALUE,{ display:'range' }));
+// var a=op.addInPort(new CABLES.Port(op,"a",CABLES.Port.TYPE_VALUE,{ display:'range' }));
 // var trigger=op.outTrigger('trigger');
 
 // var cgl=op.patch.cgl;

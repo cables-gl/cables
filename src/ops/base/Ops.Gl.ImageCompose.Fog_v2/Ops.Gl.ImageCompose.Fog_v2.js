@@ -30,10 +30,10 @@ density.uniform = new CGL.Uniform(shader, "f", "density", density);
 
 {
     // fog color
-    let r = op.addInPort(new CABLES.Port(op, "fog r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-    let g = op.addInPort(new CABLES.Port(op, "fog g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-    let b = op.addInPort(new CABLES.Port(op, "fog b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-    let a = op.addInPort(new CABLES.Port(op, "fog a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    let r = op.addInPort(new CABLES.Port(op, "fog r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+    let g = op.addInPort(new CABLES.Port(op, "fog g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+    let b = op.addInPort(new CABLES.Port(op, "fog b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+    let a = op.addInPort(new CABLES.Port(op, "fog a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
     const uniR = new CGL.Uniform(shader, "f", "r", r);
     const uniG = new CGL.Uniform(shader, "f", "g", g);

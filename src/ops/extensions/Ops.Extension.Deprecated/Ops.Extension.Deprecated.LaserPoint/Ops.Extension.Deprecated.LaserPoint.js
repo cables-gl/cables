@@ -3,26 +3,26 @@ let self = this;
 let cgl = self.patch.cgl;
 
 this.name = "laserpoint";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
 
-let x = this.addInPort(new CABLES.Port(this, "x", CABLES.OP_PORT_TYPE_VALUE, { }));
-let y = this.addInPort(new CABLES.Port(this, "y", CABLES.OP_PORT_TYPE_VALUE, { }));
-let z = this.addInPort(new CABLES.Port(this, "z", CABLES.OP_PORT_TYPE_VALUE, { }));
+let x = this.addInPort(new CABLES.Port(this, "x", CABLES.Port.TYPE_VALUE, { }));
+let y = this.addInPort(new CABLES.Port(this, "y", CABLES.Port.TYPE_VALUE, { }));
+let z = this.addInPort(new CABLES.Port(this, "z", CABLES.Port.TYPE_VALUE, { }));
 
-let doSetColor = this.addInPort(new CABLES.Port(this, "set color", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let doSetColor = this.addInPort(new CABLES.Port(this, "set color", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 doSetColor.set(true);
 
-let numPoints = this.addInPort(new CABLES.Port(this, "num points", CABLES.OP_PORT_TYPE_VALUE));
+let numPoints = this.addInPort(new CABLES.Port(this, "num points", CABLES.Port.TYPE_VALUE));
 
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 numPoints.set(1);
 {
     // diffuse color
 
-    var r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "colorPick": "true" }));
-    var g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-    var b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+    var r = this.addInPort(new CABLES.Port(this, "diffuse r", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
+    var g = this.addInPort(new CABLES.Port(this, "diffuse g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+    var b = this.addInPort(new CABLES.Port(this, "diffuse b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+    let a = this.addInPort(new CABLES.Port(this, "diffuse a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
     r.set(Math.random());
     g.set(Math.random());

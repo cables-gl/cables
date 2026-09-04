@@ -10,17 +10,17 @@ const patch = this.patch;
 // myAudio.play();
 
 this.file = op.inFile("file", "audio");
-const play = op.addInPort(new CABLES.Port(this, "play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-const autoPlay = op.addInPort(new CABLES.Port(this, "Autoplay", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const play = op.addInPort(new CABLES.Port(this, "play", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+const autoPlay = op.addInPort(new CABLES.Port(this, "Autoplay", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-const volume = this.addInPort(new CABLES.Port(this, "volume", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-const synchronizedPlayer = this.addInPort(new CABLES.Port(this, "Synchronized Player", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const volume = this.addInPort(new CABLES.Port(this, "volume", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+const synchronizedPlayer = this.addInPort(new CABLES.Port(this, "Synchronized Player", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
-this.audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
-const outPlaying = this.addOutPort(new CABLES.Port(this, "playing", CABLES.OP_PORT_TYPE_VALUE));
-const outEnded = this.addOutPort(new CABLES.Port(this, "ended", CABLES.OP_PORT_TYPE_FUNCTION));
+this.audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.Port.TYPE_OBJECT));
+const outPlaying = this.addOutPort(new CABLES.Port(this, "playing", CABLES.Port.TYPE_VALUE));
+const outEnded = this.addOutPort(new CABLES.Port(this, "ended", CABLES.Port.TYPE_FUNCTION));
 
-const doLoop = op.addInPort(new CABLES.Port(this, "Loop", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const doLoop = op.addInPort(new CABLES.Port(this, "Loop", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
 autoPlay.set(true);
 volume.set(1.0);

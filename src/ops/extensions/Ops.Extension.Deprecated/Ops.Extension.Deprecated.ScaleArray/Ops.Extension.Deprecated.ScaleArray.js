@@ -41,15 +41,15 @@ let SCALE_TYPES = {
 };
 
 // input
-let baseTonePort = op.addInPort(new CABLES.Port(op, "Base Tone", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": BASE_TONES }));
+let baseTonePort = op.addInPort(new CABLES.Port(op, "Base Tone", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": BASE_TONES }));
 baseTonePort.set(BASE_TONE_DEFAULT);
-let scaleTypePort = op.addInPort(new CABLES.Port(op, "Scale Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": Object.keys(SCALE_TYPES) }));
+let scaleTypePort = op.addInPort(new CABLES.Port(op, "Scale Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": Object.keys(SCALE_TYPES) }));
 scaleTypePort.set(SCALE_TYPE_DEFAULT);
-let appendOctavePort = op.addInPort(new CABLES.Port(op, "Append Octave", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let appendOctavePort = op.addInPort(new CABLES.Port(op, "Append Octave", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 appendOctavePort.set(APPEND_OCTAVE_DEFAULT);
-let octavePort = op.addInPort(new CABLES.Port(op, "Octave", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": OCTAVE_MIN, "max": OCTAVE_MAX }));
+let octavePort = op.addInPort(new CABLES.Port(op, "Octave", CABLES.Port.TYPE_VALUE, { "display": "range", "min": OCTAVE_MIN, "max": OCTAVE_MAX }));
 octavePort.set(OCTAVE_DEFAULT);
-let includeHighBaseTonePort = op.addInPort(new CABLES.Port(op, "Include High Base Tone", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let includeHighBaseTonePort = op.addInPort(new CABLES.Port(op, "Include High Base Tone", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 includeHighBaseTonePort.set(INCLUDE_HIGH_BASE_TONE_DEFAULT);
 
 // output

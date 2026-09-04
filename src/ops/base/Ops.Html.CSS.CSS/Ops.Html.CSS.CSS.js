@@ -1,4 +1,4 @@
-let code = op.addInPort(new CABLES.Port(op, "css code", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "css" }));
+let code = op.addInPort(new CABLES.Port(op, "css code", CABLES.Port.TYPE_VALUE, { "display": "editor", "editorSyntax": "css" }));
 
 let styleEle = null;
 let eleId = "css_" + CABLES.uuid();

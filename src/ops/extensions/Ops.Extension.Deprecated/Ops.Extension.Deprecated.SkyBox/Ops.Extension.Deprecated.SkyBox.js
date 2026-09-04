@@ -3,11 +3,11 @@ let self = this;
 let cgl = this.patch.cgl;
 
 this.name = "SkyBox";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.mapping = this.addInPort(new CABLES.Port(this, "mapping", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["-+--", "--+-"] }));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.mapping = this.addInPort(new CABLES.Port(this, "mapping", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["-+--", "--+-"] }));
 this.mapping.val = "-+--";
 
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
 let mesh = null;
 

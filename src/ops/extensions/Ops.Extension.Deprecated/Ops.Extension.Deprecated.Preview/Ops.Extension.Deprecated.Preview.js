@@ -1,7 +1,7 @@
 this.name = "Laser Preview";
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-let laserArray = this.addInPort(new CABLES.Port(this, "array", CABLES.OP_PORT_TYPE_ARRAY));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+let laserArray = this.addInPort(new CABLES.Port(this, "array", CABLES.Port.TYPE_ARRAY));
 
 const trigger = op.outTrigger("trigger");
 

@@ -2,11 +2,11 @@ op.name = "ArcBall";
 
 let render = op.inTrigger("render");
 
-let mulRotate = op.addInPort(new CABLES.Port(op, "Mul Rotate", CABLES.OP_PORT_TYPE_VALUE));
-let mulScale = op.addInPort(new CABLES.Port(op, "Mul Scale", CABLES.OP_PORT_TYPE_VALUE));
+let mulRotate = op.addInPort(new CABLES.Port(op, "Mul Rotate", CABLES.Port.TYPE_VALUE));
+let mulScale = op.addInPort(new CABLES.Port(op, "Mul Scale", CABLES.Port.TYPE_VALUE));
 
-let minScale = op.addInPort(new CABLES.Port(op, "Min Scale", CABLES.OP_PORT_TYPE_VALUE));
-let maxScale = op.addInPort(new CABLES.Port(op, "Max Scale", CABLES.OP_PORT_TYPE_VALUE));
+let minScale = op.addInPort(new CABLES.Port(op, "Min Scale", CABLES.Port.TYPE_VALUE));
+let maxScale = op.addInPort(new CABLES.Port(op, "Max Scale", CABLES.Port.TYPE_VALUE));
 
 let useWheel = op.inBool("Use Mouse Wheel", true);
 

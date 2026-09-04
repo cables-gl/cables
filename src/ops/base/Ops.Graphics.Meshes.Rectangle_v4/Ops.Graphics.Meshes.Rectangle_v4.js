@@ -24,7 +24,7 @@ op.setPortGroup("Pivot", [pivotX, pivotY, axis]);
 op.setPortGroup("Size", [width, height]);
 op.setPortGroup("Structure", [nColumns, nRows]);
 op.toWorkPortsNeedToBeLinked(render);
-op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.OP_PORT_TYPE_TRIGGER);
+op.toWorkShouldNotBeChild("Ops.Gl.TextureEffects.ImageCompose", CABLES.Port.TYPE_TRIGGER);
 
 const AXIS_XY = 0;
 const AXIS_XZ = 1;

@@ -1,5 +1,5 @@
 const
-    inObjs = op.inMultiPort2("Objects", CABLES.OP_PORT_TYPE_OBJECT),
+    inObjs = op.inMultiPort2("Objects", CABLES.Port.TYPE_OBJECT),
     outArray = op.outArray("Array"),
     outNum = op.outNumber("Num Values");
 

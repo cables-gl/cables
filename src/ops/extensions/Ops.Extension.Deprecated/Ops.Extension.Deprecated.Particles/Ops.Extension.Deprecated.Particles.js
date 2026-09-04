@@ -3,7 +3,7 @@ let cgl = this.patch.cgl;
 
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
-let num = this.addInPort(new CABLES.Port(this, "count", CABLES.OP_PORT_TYPE_VALUE));
+let num = this.addInPort(new CABLES.Port(this, "count", CABLES.Port.TYPE_VALUE));
 num.set(100000);
 
 let mesh = null;

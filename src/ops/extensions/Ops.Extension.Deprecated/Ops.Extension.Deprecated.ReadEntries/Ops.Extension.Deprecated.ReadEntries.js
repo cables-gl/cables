@@ -3,7 +3,7 @@
 let dummyKey = "12345";
 let dummyChannelId = "12345";
 
-let read = op.addInPort(new CABLES.Port(this, "Read", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let read = op.addInPort(new CABLES.Port(this, "Read", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let channelId = op.inString("Channel ID", dummyChannelId);
 let readApiKey = op.inString("Read API Key", dummyKey);
 

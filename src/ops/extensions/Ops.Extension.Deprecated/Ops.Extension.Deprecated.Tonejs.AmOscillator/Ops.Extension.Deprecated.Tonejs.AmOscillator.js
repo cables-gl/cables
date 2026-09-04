@@ -30,20 +30,20 @@ let node = new Tone.AMOscillator();
 let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, null, FREQUENCY_DEFAULT);
 let detunePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Detune", node.detune, null, DETUNE_DEFAULT);
 let harmonicityPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Harmonicity", node.harmonicity, null, HARMONICITY_DEFAULT);
-let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 typePort.set(TYPE_DEFAULT);
-let modulationTypePort = op.addInPort(new CABLES.Port(op, "Modulation Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
+let modulationTypePort = op.addInPort(new CABLES.Port(op, "Modulation Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }));
 modulationTypePort.set(MODULATION_TYPE_DEFAULT);
-let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }));
+let phasePort = op.addInPort(new CABLES.Port(op, "Phase", CABLES.Port.TYPE_VALUE, { "display": "range", "min": PHASE_MIN, "max": PHASE_MAX }));
 phasePort.set(PHASE_DEFAULT);
 let syncFrequencyPort = op.inBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
-let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let startPort = op.addInPort(new CABLES.Port(op, "Start", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
-let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let stopPort = op.addInPort(new CABLES.Port(op, "Stop", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 let autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 let volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
-let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 mutePort.set(MUTE_DEFAULT);
 
 function setSyncAndAutostart()

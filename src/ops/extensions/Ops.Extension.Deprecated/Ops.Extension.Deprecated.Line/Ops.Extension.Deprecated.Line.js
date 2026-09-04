@@ -2,7 +2,7 @@ op.name = "Lines";
 
 let render = op.inTrigger("render");
 let pointSize = op.addInPort(new CABLES.Port(op, "pointSize"));
-let mode = op.addInPort(new CABLES.Port(op, "Draw Mode", CABLES.OP_PORT_TYPE_VALUE, {
+let mode = op.addInPort(new CABLES.Port(op, "Draw Mode", CABLES.Port.TYPE_VALUE, {
     "display": "dropdown", "values": ["Line Strip", "Line Loop", "Lines"] }));
 
 let trigger = op.outTrigger("trigger");

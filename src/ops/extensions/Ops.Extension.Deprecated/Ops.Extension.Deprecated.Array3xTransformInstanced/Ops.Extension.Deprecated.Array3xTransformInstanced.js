@@ -1,7 +1,7 @@
-let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 
 let transformations = op.inArray("array 3x");
-let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.OP_PORT_TYPE_OBJECT));
+let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.Port.TYPE_OBJECT));
 geom.ignoreValueSerialize = true;
 
 let matrices = [];

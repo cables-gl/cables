@@ -1,14 +1,14 @@
 op.name = "TransformToGeometryVertices";
 let render = op.inTrigger("render");
-let geometry = op.addInPort(new CABLES.Port(op, "geometry", CABLES.OP_PORT_TYPE_OBJECT));
+let geometry = op.addInPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 
 let modulo = op.inFloat("modulo", 1);
 
 let trigger = op.outTrigger("trigger");
-let x = op.addOutPort(new CABLES.Port(op, "x", CABLES.OP_PORT_TYPE_VALUE));
-let y = op.addOutPort(new CABLES.Port(op, "y", CABLES.OP_PORT_TYPE_VALUE));
-let z = op.addOutPort(new CABLES.Port(op, "z", CABLES.OP_PORT_TYPE_VALUE));
-let index = op.addOutPort(new CABLES.Port(op, "index", CABLES.OP_PORT_TYPE_VALUE));
+let x = op.addOutPort(new CABLES.Port(op, "x", CABLES.Port.TYPE_VALUE));
+let y = op.addOutPort(new CABLES.Port(op, "y", CABLES.Port.TYPE_VALUE));
+let z = op.addOutPort(new CABLES.Port(op, "z", CABLES.Port.TYPE_VALUE));
+let index = op.addOutPort(new CABLES.Port(op, "index", CABLES.Port.TYPE_VALUE));
 
 geometry.ignoreValueSerialize = true;
 

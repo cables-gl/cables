@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let ratio = op.addInPort(new CABLES.Port(op, "ratio", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown",
+let ratio = op.addInPort(new CABLES.Port(op, "ratio", CABLES.Port.TYPE_VALUE, { "display": "dropdown",
     "values":
 [
     1, 1.25, 1.3333333333, 1.777777777778, 2, 2.33333333333333, 3, 4, 4.2] }));

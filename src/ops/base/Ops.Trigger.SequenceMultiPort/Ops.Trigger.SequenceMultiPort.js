@@ -1,6 +1,6 @@
 const
-    inTrigs = op.inMultiPort("Input", CABLES.OP_PORT_TYPE_FUNCTION),
-    outTrigs = op.outMultiPort("Output", CABLES.OP_PORT_TYPE_FUNCTION);
+    inTrigs = op.inMultiPort("Input", CABLES.Port.TYPE_FUNCTION),
+    outTrigs = op.outMultiPort("Output", CABLES.Port.TYPE_FUNCTION);
 
 // op.setUiAttrib({ "resizable": true, "resizableY": false, "stretchPorts": true });
 

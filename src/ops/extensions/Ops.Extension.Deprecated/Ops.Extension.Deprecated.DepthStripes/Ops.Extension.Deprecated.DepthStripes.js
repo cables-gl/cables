@@ -1,10 +1,10 @@
 op.name = "DepthStripes";
 
 let render = op.inTrigger("render");
-let depthTexture = op.addInPort(new CABLES.Port(op, "Depth Texture", CABLES.OP_PORT_TYPE_TEXTURE));
-let colorTexture = op.addInPort(new CABLES.Port(op, "Color Texture", CABLES.OP_PORT_TYPE_TEXTURE));
-let farPlane = op.addInPort(new CABLES.Port(op, "farplane", CABLES.OP_PORT_TYPE_VALUE));
-let nearPlane = op.addInPort(new CABLES.Port(op, "nearplane", CABLES.OP_PORT_TYPE_VALUE));
+let depthTexture = op.addInPort(new CABLES.Port(op, "Depth Texture", CABLES.Port.TYPE_TEXTURE));
+let colorTexture = op.addInPort(new CABLES.Port(op, "Color Texture", CABLES.Port.TYPE_TEXTURE));
+let farPlane = op.addInPort(new CABLES.Port(op, "farplane", CABLES.Port.TYPE_VALUE));
+let nearPlane = op.addInPort(new CABLES.Port(op, "nearplane", CABLES.Port.TYPE_VALUE));
 
 farPlane.set(100.0);
 nearPlane.set(0.1);

@@ -1,10 +1,10 @@
-let text = op.addOutPort(new CABLES.Port(op, "text", CABLES.OP_PORT_TYPE_VALUE));
-let visible = op.addInPort(new CABLES.Port(op, "visible", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-let inFocus = op.addInPort(new CABLES.Port(op, "focus", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let inBlur = op.addInPort(new CABLES.Port(op, "blur", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-let cursorPos = op.addOutPort(new CABLES.Port(op, "cursorPos", CABLES.OP_PORT_TYPE_VALUE));
-let focussed = op.addOutPort(new CABLES.Port(op, "focussed", CABLES.OP_PORT_TYPE_VALUE));
-let escapeButton = op.addOutPort(new CABLES.Port(op, "escape pressed", CABLES.OP_PORT_TYPE_FUNCTION));
+let text = op.addOutPort(new CABLES.Port(op, "text", CABLES.Port.TYPE_VALUE));
+let visible = op.addInPort(new CABLES.Port(op, "visible", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
+let inFocus = op.addInPort(new CABLES.Port(op, "focus", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let inBlur = op.addInPort(new CABLES.Port(op, "blur", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
+let cursorPos = op.addOutPort(new CABLES.Port(op, "cursorPos", CABLES.Port.TYPE_VALUE));
+let focussed = op.addOutPort(new CABLES.Port(op, "focussed", CABLES.Port.TYPE_VALUE));
+let escapeButton = op.addOutPort(new CABLES.Port(op, "escape pressed", CABLES.Port.TYPE_FUNCTION));
 let outEle = op.outObject("Element");
 
 visible.set(true);

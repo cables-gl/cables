@@ -3,7 +3,7 @@ const
     inFillWgsl = op.inBool("Fill WGSL 32bit", true),
     inName = op.inString("Name", "StructName"),
     inNames = op.inString("MemberNames", "a,b,c,d"),
-    inArrays = op.inMultiPort2("Arrays", CABLES.OP_PORT_TYPE_ARRAY),
+    inArrays = op.inMultiPort2("Arrays", CABLES.Port.TYPE_ARRAY),
     outArr = op.outArray("Result"),
     outChunkSize = op.outNumber("Chunk Size"),
     outStructString = op.outString("Struct Code");

@@ -10,7 +10,7 @@ let WET_MAX = 1.0;
 
 // input ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let filePort = op.addInPort(new CABLES.Port(this, "File", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "audio" }));
+let filePort = op.addInPort(new CABLES.Port(this, "File", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "audio" }));
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, WET_DEFAULT);
 
 // output ports

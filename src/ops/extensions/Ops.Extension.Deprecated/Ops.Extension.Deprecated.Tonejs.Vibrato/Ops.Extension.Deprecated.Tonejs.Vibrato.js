@@ -28,7 +28,7 @@ let node = new Tone.Vibrato(FREQUENCY_DEFAULT, DEPTH_DEFAULT);
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 let frequencyPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Frequency", node.frequency, { "display": "range", "min": FREQUENCY_MIN, "max": FREQUENCY_MAX }, node.get("frequency").frequency);
 let depthPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Depth", node.depth, { "display": "range", "min": DEPTH_MIN, "max": DEPTH_MAX }, node.get("depth").depth);
-let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": TYPES }, TYPE_DEFAULT));
+let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": TYPES }, TYPE_DEFAULT));
 // typePort.set(TYPE_DEFAULT);
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, node.get("wet").wet);
 

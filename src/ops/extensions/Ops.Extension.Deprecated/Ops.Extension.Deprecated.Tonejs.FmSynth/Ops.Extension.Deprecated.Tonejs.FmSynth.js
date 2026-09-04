@@ -49,11 +49,11 @@ let node = new Tone.FMSynth();
 
 // inputs
 // var oscillatorPort = op.inObject("Oscillator");
-let oscillatorPort = op.addInPort(new CABLES.Port(op, "Oscillator Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }));
+let oscillatorPort = op.addInPort(new CABLES.Port(op, "Oscillator Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }));
 oscillatorPort.set(OSCILLATOR_TYPE_DEFAULT);
 let envelopePort = op.inObject("Envelope");
 // var modulationOscillatorPort = op.inObject("Modulation Oscillator");
-let modulationOscillatorPort = op.addInPort(new CABLES.Port(op, "Modulation Oscillator Type", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }));
+let modulationOscillatorPort = op.addInPort(new CABLES.Port(op, "Modulation Oscillator Type", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": OSCILLATOR_TYPES }));
 modulationOscillatorPort.set(MODULATION_OSCILLATOR_TYPE_DEFAULT);
 let modulationIndexPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Modulation Index", node.modulationIndex, null, MODULATION_INDEX_DEFAULT);
 let modulationEnvelopePort = op.inObject("Modulation Envelope");

@@ -1,6 +1,6 @@
 let render = op.inTrigger("render");
-let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.OP_PORT_TYPE_OBJECT));
-let transformations = op.addInPort(new CABLES.Port(op, "transformations", CABLES.OP_PORT_TYPE_VALUE));
+let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.Port.TYPE_OBJECT));
+let transformations = op.addInPort(new CABLES.Port(op, "transformations", CABLES.Port.TYPE_VALUE));
 
 let cgl = op.patch.cgl;
 geom.ignoreValueSerialize = true;

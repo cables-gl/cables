@@ -1,5 +1,5 @@
 let exe = op.inTriggerButton("exe");
-let minusPlusOne = op.addInPort(new CABLES.Port(op, "0 to x / -x to x ", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let minusPlusOne = op.addInPort(new CABLES.Port(op, "0 to x / -x to x ", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 let max = op.inFloat("max", 1);
 let seed = op.inFloat("random seed", 0);
 let result = op.outValue("result");

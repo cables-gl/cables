@@ -1,5 +1,5 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS, Op, Port } from "cables";
+import { Op, Port } from "cables";
 import { Lang } from "./lang.js";
 import { StandaloneElectron } from "../standalone_electron/standalone_electron.js";
 
@@ -244,7 +244,7 @@ export class ShaderGraphProgram extends Events
                 const param = node.params[i];
                 const port = param.port;
 
-                if (port.type != CONSTANTS.OP.OP_PORT_TYPE_OBJECT) continue;
+                if (port.type != Port.TYPE_OBJECT) continue;
 
                 // parameters...
                 if (port.isLinked())
@@ -313,7 +313,7 @@ export class ShaderGraphProgram extends Events
     {
         let count = 0;
         for (let i = 0; i < op.portsIn.length; i++)
-            if (op.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) count++;
+            if (op.portsIn[i].type == Port.TYPE_OBJECT) count++;
         return count;
     }
 

@@ -2,7 +2,7 @@ let self = this;
 // Op.apply(this, arguments);
 
 this.name = "random";
-this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+this.exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.Port.TYPE_FUNCTION));
 this.result = this.addOutPort(new CABLES.Port(this, "result"));
 
 let min = this.addInPort(new CABLES.Port(this, "min"));

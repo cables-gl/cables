@@ -1,6 +1,6 @@
 // input
 let nodePort = op.inObject("Synth");
-let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let timePort = op.inValueString("Time", "+0");
 
 // change listeners

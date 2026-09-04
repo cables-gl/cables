@@ -7,7 +7,7 @@ const isPicked = op.outBool("is picked");
 
 const pickedTrigger = op.outTrigger("On Picked");
 
-const doBillboard = op.inBool("billboard", false); // op.addInPort(new CABLES.Port(op, "billboard", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const doBillboard = op.inBool("billboard", false); // op.addInPort(new CABLES.Port(op, "billboard", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 doBillboard.set(false);
 
 doBillboard.onChange = function ()

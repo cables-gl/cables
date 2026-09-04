@@ -1,12 +1,12 @@
 op.name = "ColorLookup";
 
 let render = op.inTrigger("render");
-let amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let posy = op.addInPort(new CABLES.Port(op, "pos", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-let image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTURE));
+let amount = op.addInPort(new CABLES.Port(op, "amount", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let posy = op.addInPort(new CABLES.Port(op, "pos", CABLES.Port.TYPE_VALUE, { "display": "range" }));
+let image = op.addInPort(new CABLES.Port(op, "image", CABLES.Port.TYPE_TEXTURE));
 let trigger = op.outTrigger("trigger");
 
-// var vert=op.addOutPort(new CABLES.Port(op,"vertical",CABLES.OP_PORT_TYPE_FUNCTION));
+// var vert=op.addOutPort(new CABLES.Port(op,"vertical",CABLES.Port.TYPE_FUNCTION));
 let vert = op.inBool("vertical", true);
 
 let cgl = op.patch.cgl;

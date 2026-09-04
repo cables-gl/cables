@@ -1,6 +1,6 @@
 const
     inIndex = op.inInt("Index", 0),
-    inStrs = op.inMultiPort2("Strings", CABLES.OP_PORT_TYPE_STRING),
+    inStrs = op.inMultiPort2("Strings", CABLES.Port.TYPE_STRING),
     outResult = op.outString("String"),
     outNum = op.outNumber("Num Values");
 

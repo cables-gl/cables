@@ -2,7 +2,7 @@ const
     inMeth = op.inSwitch("Filter", ["None", "EndsWith", "StartsWith", "Includes"], "None"),
     inFilterStr = op.inString("Filter Value", ""),
     inCache = op.inArray("arrcache"),
-    inStrs = op.inMultiPort2("File", CABLES.OP_PORT_TYPE_STRING, { "display": "file", "hidePort": true, "hideParam": true }, 1),
+    inStrs = op.inMultiPort2("File", CABLES.Port.TYPE_STRING, { "display": "file", "hidePort": true, "hideParam": true }, 1),
     result = op.outArray("Filenames");
 
 let to = null;

@@ -1,6 +1,6 @@
 let dummyKey = "12345";
 
-let write = op.addInPort(new CABLES.Port(this, "Write", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+let write = op.addInPort(new CABLES.Port(this, "Write", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 let field = op.inString("Field", "field1");
 let value = op.inString("Value", "");
 let writeApiKey = op.inString("Write API Key", dummyKey);

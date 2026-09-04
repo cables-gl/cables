@@ -2,8 +2,8 @@ let self = this;
 let cgl = self.patch.cgl;
 
 this.name = "texture sinus wobble";
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
+this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
 this.doRender = function ()
 {
@@ -58,7 +58,7 @@ let srcFrag = ""
 var shader = new CGL.Shader(cgl, op.name, op);
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
 
-this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+this.a = this.addInPort(new CABLES.Port(this, "a", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 this.a.onChange = function ()
 {
     if (!self.a.uniform) self.a.uniform = new CGL.Uniform(shader, "f", "a", self.a.val);
@@ -67,7 +67,7 @@ this.a.onChange = function ()
 
 this.a.val = 1.0;
 
-this.time = this.addInPort(new CABLES.Port(this, "time", CABLES.OP_PORT_TYPE_VALUE, { }));
+this.time = this.addInPort(new CABLES.Port(this, "time", CABLES.Port.TYPE_VALUE, { }));
 this.time.onChange = function ()
 {
     if (!self.time.uniform) self.time.uniform = new CGL.Uniform(shader, "f", "time", self.a.val);
@@ -77,7 +77,7 @@ this.time.onChange = function ()
 this.time.val = 1.0;
 
 this.render.onTriggered = this.doRender;
-this.texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE));
+this.texture = this.addInPort(new CABLES.Port(this, "texture", CABLES.Port.TYPE_TEXTURE));
 this.textureUniform = null;
 
 this.texture.onChange = function ()

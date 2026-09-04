@@ -15,9 +15,9 @@ let WET_MAX = 1.0;
 
 // input ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let orderPort = op.addInPort(new CABLES.Port(op, "Order", CABLES.OP_PORT_TYPE_VALUE, { "display": "range", "min": ORDER_MIN, "max": ORDER_MAX }));
+let orderPort = op.addInPort(new CABLES.Port(op, "Order", CABLES.Port.TYPE_VALUE, { "display": "range", "min": ORDER_MIN, "max": ORDER_MAX }));
 orderPort.set(ORDER_DEFAULT);
-let oversamplePort = this.addInPort(new CABLES.Port(this, "align", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": OVERSAMPLE_VALUES }));
+let oversamplePort = this.addInPort(new CABLES.Port(this, "align", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": OVERSAMPLE_VALUES }));
 oversamplePort.set(OVERSAMPLE_DEFAULT);
 let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "display": "range", "min": WET_MIN, "max": WET_MAX }, WET_DEFAULT);
 

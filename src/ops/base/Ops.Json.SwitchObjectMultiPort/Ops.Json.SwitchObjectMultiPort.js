@@ -1,6 +1,6 @@
 const
     inIndex = op.inInt("Index", 0),
-    inObjs = op.inMultiPort("Objects", CABLES.OP_PORT_TYPE_OBJECT),
+    inObjs = op.inMultiPort("Objects", CABLES.Port.TYPE_OBJECT),
     outResult = op.outObject("Object"),
     outNum = op.outNumber("Num Values");
 

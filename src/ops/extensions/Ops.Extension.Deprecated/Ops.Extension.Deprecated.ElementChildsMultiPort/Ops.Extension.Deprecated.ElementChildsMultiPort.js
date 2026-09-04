@@ -1,6 +1,6 @@
 const
     parentPort = op.inObject("Parent", null, "element"),
-    inObjs = op.inMultiPort("Childs", CABLES.OP_PORT_TYPE_OBJECT),
+    inObjs = op.inMultiPort("Childs", CABLES.Port.TYPE_OBJECT),
     outParent = op.outObject("Parent Out", null, "element"),
     outNum = op.outNumber("Num Values");
 

@@ -1,19 +1,19 @@
 op.name = "TextureText";
-let text = op.addInPort(new CABLES.Port(op, "text", CABLES.OP_PORT_TYPE_VALUE, { "type": "string", "display": "editor" }));
+let text = op.addInPort(new CABLES.Port(op, "text", CABLES.Port.TYPE_VALUE, { "type": "string", "display": "editor" }));
 let inFontSize = op.addInPort(new CABLES.Port(op, "fontSize"));
-let maximize = op.addInPort(new CABLES.Port(op, "Maximize Size", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let maximize = op.addInPort(new CABLES.Port(op, "Maximize Size", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 let texWidth = op.addInPort(new CABLES.Port(op, "texture width"));
 let texHeight = op.addInPort(new CABLES.Port(op, "texture height"));
-let align = op.addInPort(new CABLES.Port(op, "align", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["left", "center", "right"] }));
-let valign = op.addInPort(new CABLES.Port(op, "vertical align", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["top", "center", "bottom"] }));
-let font = op.addInPort(new CABLES.Port(op, "font", CABLES.OP_PORT_TYPE_VALUE, { "type": "string" }));
+let align = op.addInPort(new CABLES.Port(op, "align", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["left", "center", "right"] }));
+let valign = op.addInPort(new CABLES.Port(op, "vertical align", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["top", "center", "bottom"] }));
+let font = op.addInPort(new CABLES.Port(op, "font", CABLES.Port.TYPE_VALUE, { "type": "string" }));
 let lineDistance = op.addInPort(new CABLES.Port(op, "line distance"));
 let border = op.addInPort(new CABLES.Port(op, "border"));
 let doRefresh = op.inTrigger("Refresh");
 
-// var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
+// var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.Port.TYPE_TEXTURE));
 let textureOut = op.outTexture("texture");
-let outRatio = op.addOutPort(new CABLES.Port(op, "Ratio", CABLES.OP_PORT_TYPE_VALUE));
+let outRatio = op.addOutPort(new CABLES.Port(op, "Ratio", CABLES.Port.TYPE_VALUE));
 let cgl = op.patch.cgl;
 
 doRefresh.onTriggered = refresh;
