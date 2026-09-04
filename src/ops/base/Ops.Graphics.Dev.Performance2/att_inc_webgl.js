@@ -17,7 +17,6 @@ function glBeginFrame()
             cgl.gl.beginQuery(glExt.TIME_ELAPSED_EXT, query);
         }
     }
-
 }
 
 function glEndFrame()
@@ -29,7 +28,6 @@ function glUpdate()
 {
     if (cgl && query)
     {
-
         const available = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT_AVAILABLE);
         const disjoint = cgl.gl.getParameter(glExt.GPU_DISJOINT_EXT);
 
@@ -38,7 +36,7 @@ function glUpdate()
             const gpuTimeNs = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT);
             gpuTimeMs = gpuTimeNs / 1000000;
 
-            query = null;
+            setTimeout(() => { query = null; }, 50); // timer queries seem to work better when not called directly after another...
         }
         else
         {

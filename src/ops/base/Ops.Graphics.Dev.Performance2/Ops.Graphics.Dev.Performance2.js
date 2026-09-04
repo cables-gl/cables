@@ -93,7 +93,7 @@ function drawGraph(name, posy, q, col, fps)
         if (q[k])
         {
             const itemHeight = Math.min(maxMs, ((q[k].ms || q[k].num * 3 || 0) * hmul));
-            if (itemHeight == maxMs) ctx.fillStyle = "#ff0000";
+            if (q[k].ms > 30) ctx.fillStyle = "#ff0000";
             else ctx.fillStyle = col;
             ctx.fillRect(numBars - k, posy + height - itemHeight, 1, itemHeight); // Math.min(1, q[k].ms * hmul));
 

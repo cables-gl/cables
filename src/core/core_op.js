@@ -591,14 +591,12 @@ export class Op extends Events
     /**
      * create a trigger input port
      * @param {String} name
-     * @param {String} v
      * @return {Port} created port
      *
      */
-    inTrigger(name, v)
+    inTrigger(name)
     {
         const p = this.addInPort(this.newPort(this, name, Port.TYPE_FUNCTION));
-        if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -638,7 +636,7 @@ export class Op extends Events
     /**
      * @deprecated
      * @param {string} name
-     * @param {number} v
+     * @param {number} [v]
      */
     inValueFloat(name, v)
     {
@@ -1291,14 +1289,12 @@ export class Op extends Events
     /**
      * create output trigger port
      * @param {String} name
-     * @param {String} v
      * @return {Port} created port
      */
-    outTrigger(name, v)
+    outTrigger(name)
     {
-        // old
         const p = this.addOutPort(this.newPort(this, name, Port.TYPE_FUNCTION));
-        if (v !== undefined) p.set(v);
+        // if (v !== undefined) p.set(v);
         return p;
     }
 
@@ -1318,7 +1314,7 @@ export class Op extends Events
     /**
      * create output boolean port,value will be converted to 0 or 1
      * @param {String} name
-     * @param {string | number | boolean | any[]} v
+     * @param {string | number | boolean | any[]} [v]
      * @return {Port} created port
      */
     outBoolNum(name, v)
