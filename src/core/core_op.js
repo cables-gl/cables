@@ -1332,6 +1332,7 @@ export class Op extends Events
 
         if (v !== undefined) p.set(v);
         else p.set(0);
+        if (v !== undefined) p.set(v);
         return p;
     }
 

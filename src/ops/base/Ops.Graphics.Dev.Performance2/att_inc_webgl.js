@@ -2,6 +2,7 @@ let glExt = null;
 let cgl = null;
 let query = null;
 let glqueryagain = 0;
+let finishedQuery = true;
 
 if (op.patch.cgl) op.patch.cgl.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
 
@@ -15,13 +16,19 @@ function glBeginFrame()
         {
             query = cgl.gl.createQuery();
             cgl.gl.beginQuery(glExt.TIME_ELAPSED_EXT, query);
+
+            finishedQuery = false;
         }
     }
 }
 
 function glEndFrame()
 {
-    if (type == "webgl" && glExt && query != null) cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
+    if (type == "webgl" && glExt && query != null && !finishedQuery)
+    {
+        cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
+        finishedQuery = true;
+    }
 }
 
 function glUpdate()
