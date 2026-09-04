@@ -728,10 +728,10 @@ export class Patch extends Events
             if (this.animFrameOps[i].onAnimFrame)
             {
 
-                let startTime = performance.now();
+                // let startTime = performance.now();
                 this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
 
-                console.log("animupd ", this.animFrameOps[i].objName, performance.now() - startTime);
+                // console.log("animupd ", this.animFrameOps[i].objName, performance.now() - startTime);
             }
     }
 
