@@ -210,10 +210,10 @@ class Mesh extends CgMesh
         const gl = this.#cgl.gl;
 
         gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
-        this.#cgl.profileData.profileMeshAttributes += (end - start) || 0;
+        // this.#cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
-        this.#cgl.profileData.profileSingleMeshAttribute[this._name] = this.#cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
-        this.#cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
+        // this.#cgl.profileData.profileSingleMeshAttribute[this._name] = this.#cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
+        // this.#cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
 
         if (attr.numItems < array.length / attr.itemSize)
         {
@@ -1008,18 +1008,18 @@ class Mesh extends CgMesh
         }
 
         /* minimalcore:start */
-        this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1));
-        this.#cgl.profileData.count("meshDrawCalls");
-        if (this.#cgl.profileData.profileDrawCalls)
-        {
-            this.#cgl.profileData.profileDrawCalls.push({
-                "name": this._name,
-                "shader": shader.name,
-                "verts": (this._bufVertexAttrib.numItems) * (this.#numInstances || 1),
-                "instances": this.#numInstances,
-                "opId": this.opId
-            });
-        }
+        // this.#cgl.profileData.count("glprimitives", (this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1));
+        // this.#cgl.profileData.count("meshDrawCalls");
+        // if (this.#cgl.profileData.profileDrawCalls)
+        // {
+        //     this.#cgl.profileData.profileDrawCalls.push({
+        //         "name": this._name,
+        //         "shader": shader.name,
+        //         "verts": (this._bufVertexAttrib.numItems) * (this.#numInstances || 1),
+        //         "instances": this.#numInstances,
+        //         "opId": this.opId
+        //     });
+        // }
 
         /* minimalcore:end */
         this.#cgl.printError("mesh render " + this._name);
