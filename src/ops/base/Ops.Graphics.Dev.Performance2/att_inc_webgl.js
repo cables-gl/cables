@@ -2,6 +2,7 @@ let glExt = null;
 let cgl = null;
 let query = null;
 let glqueryagain = 0;
+let finishedQuery = true;
 
 if (op.patch.cgl) op.patch.cgl.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
 
@@ -15,21 +16,25 @@ function glBeginFrame()
         {
             query = cgl.gl.createQuery();
             cgl.gl.beginQuery(glExt.TIME_ELAPSED_EXT, query);
+
+            finishedQuery = false;
         }
     }
-
 }
 
 function glEndFrame()
 {
-    if (type == "webgl" && glExt && query != null) cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
+    if (type == "webgl" && glExt && query != null && !finishedQuery)
+    {
+        cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
+        finishedQuery = true;
+    }
 }
 
 function glUpdate()
 {
     if (cgl && query)
     {
-
         const available = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT_AVAILABLE);
         const disjoint = cgl.gl.getParameter(glExt.GPU_DISJOINT_EXT);
 
@@ -38,7 +43,7 @@ function glUpdate()
             const gpuTimeNs = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT);
             gpuTimeMs = gpuTimeNs / 1000000;
 
-            query = null;
+            setTimeout(() => { query = null; }, 50); // timer queries seem to work better when not called directly after another...
         }
         else
         {
