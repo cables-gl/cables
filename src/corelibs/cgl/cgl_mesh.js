@@ -953,6 +953,7 @@ class Mesh extends CgMesh
             {
                 this.#cgl.gl.drawElementsInstanced(prim, this.#bufVerticesIndizes.numItems, this.#indexType, 0, this.#numInstances);
             }
+            this.#cgl.patch.emitEvent("renderDrawcall");
         }
 
         // if (doQuery)

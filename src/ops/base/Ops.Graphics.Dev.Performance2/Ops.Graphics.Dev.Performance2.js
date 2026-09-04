@@ -20,8 +20,11 @@ let type = null;
 let gpuBeginFrame = null;
 let gpuEndFrame = null;
 let gpuUpdate = null;
+let numDrawcallsCounter = 0;
+let numDrawcalls = 0;
 
 op.patch.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
+op.patch.on("renderDrawcall", (e) => { numDrawcallsCounter++; });
 
 createCanvas();
 
@@ -58,8 +61,8 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         gpuBeginFrame = glBeginFrame;
         gpuEndFrame = glEndFrame;
         gpuUpdate = glUpdate;
-
     }
+
     fpsCounter++;
     if (performance.now() - fpsTime >= 1000)
     {
@@ -67,6 +70,8 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         fpsTime = performance.now();
         fpsCounter = 0;
     }
+    numDrawcalls = numDrawcallsCounter;
+    numDrawcallsCounter = 0;
     updateCanvas();
 });
 
@@ -131,7 +136,7 @@ function updateCanvas()
 
     drawGraph("CPU", 0, queueCPU, "#999900");
     drawGraph("GPU", height, queueGPU, "#007777");
-    drawGraph(fps + " FPS", height * 2, queueEvents, "#aa7700");
+    drawGraph(fps + " FPS " + numDrawcalls + " draws", height * 2, queueEvents, "#aa7700");
 }
 
 function createCanvas()
