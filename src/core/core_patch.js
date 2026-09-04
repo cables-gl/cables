@@ -221,7 +221,7 @@ export class Patch extends Events
         }
         this.timer.play();
 
-        console.log("made with https://cables.gl"); // eslint-disable-line
+        console.log("made with https://cables.gl  hurz"); // eslint-disable-line
         this.cg = undefined;
     }
 
@@ -1750,4 +1750,3 @@ export class Patch extends Events
  * @property {Port} port1
  * @property {Port} port2
  */
-console.log("jaaaaaaaaaaaaaaa");
