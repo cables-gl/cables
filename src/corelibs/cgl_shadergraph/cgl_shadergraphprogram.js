@@ -1,5 +1,5 @@
 import { Events } from "cables-shared-client";
-import { CONSTANTS } from "cables";
+import { CONSTANTS, Port } from "cables";
 import { ShaderGraph } from "./cgl_shadergraph.js";
 
 export class ShaderGraphProgram extends Events
@@ -205,7 +205,7 @@ export class ShaderGraphProgram extends Events
             paramStr = p.op.shaderVar;
         }
         else
-        if (p.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+        if (p.direction == Port.DIR_OUT)
         {
             paramStr += this.callFunc(p.op, p.uiAttribs.objType);
         }

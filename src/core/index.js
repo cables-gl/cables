@@ -22,7 +22,6 @@ import { showUiErrors } from "./uierrors.js";
 CABLES = CABLES || {};
 CABLES = {
     ...CABLES,
-    ...CONSTANTS.PORT,
 
     /* minimalcore:start */
     ...CONSTANTS.PACO,

@@ -413,7 +413,7 @@ export class Port extends Events
         if (CABLES.UI && CABLES.UI.showDevInfos)
         {
             CABLES.UI.countSetWarns = CABLES.UI.countSetWarns || 0;
-            if (CABLES.UI.countSetWarns < 20 && this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
+            if (CABLES.UI.countSetWarns < 20 && this.direction == Port.DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
             {
                 this.#log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
@@ -460,7 +460,7 @@ export class Port extends Events
                     if (this.#op && this.#op.patch && this.#op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE)CABLES.Patch.getGui().texturePreview().updateTexturePort(this);
                 }
 
-                if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
+                if (this.direction == Port.DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
             }
         }
     }
@@ -602,7 +602,7 @@ export class Port extends Events
             if (this.uiAttribs.hasOwnProperty("order")) obj.order = this.uiAttribs.order;
         }
         if (this.uiAttribs.title) obj.title = this.uiAttribs.title;
-        if ((this.preserveLinks || this.direction == CONSTANTS.PORT.PORT_DIR_OUT) && this.links.length > 0)
+        if ((this.preserveLinks || this.direction == Port.DIR_OUT) && this.links.length > 0)
         {
             obj.links = [];
             for (const i in this.links)

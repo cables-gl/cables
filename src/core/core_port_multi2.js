@@ -194,7 +194,7 @@ export class MultiPort2 extends Port
 
             po.direction = dir;
 
-            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) this.op.addOutPort(po);
+            if (this.direction == Port.DIR_OUT) this.op.addOutPort(po);
             else this.op.addInPort(po, this.ports[this.ports.length - 1]);
             this.ports.push(po);
 

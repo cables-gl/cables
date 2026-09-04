@@ -35,6 +35,8 @@ export class ProfileData
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
         this.profileSingleMeshAttribute = {};
+
+        /** @type {import("../../core/core_patch.js").HeavyEvent[]} */
         this.heavyEvents = [];
 
         this.doProfileGlQuery = false;
@@ -117,13 +119,13 @@ export class ProfileData
     }
 
     /**
-     * @param {string} event
+     * @param {string} eventname
      * @param {string} name
      * @param {string} [info]
      */
-    addHeavyEvent(event, name, info)
+    addHeavyEvent(eventname, name, info)
     {
-        const e = { "event": event, "name": name, "info": info, "date": performance.now() };
+        const e = { "event": eventname, "name": name, "info": info, "date": performance.now() };
         this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }

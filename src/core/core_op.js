@@ -80,6 +80,18 @@ export class Op extends Events
     static UI_ERRORLEVEL_ERROR = 2;
     static UI_ERRORLEVEL_NOTWORKING = 3;
 
+    static DIR_IN = 0;
+    static DIR_OUT = 1;
+    static TYPE_VALUE = 0;
+    static TYPE_NUMBER = 0;
+    static TYPE_FUNCTION = 1;
+    static TYPE_TRIGGER = 1;
+    static TYPE_OBJECT = 2;
+    static TYPE_TEXTURE = 2;
+    static TYPE_ARRAY = 3;
+    static TYPE_DYNAMIC = 4;
+    static TYPE_STRING = 5;
+
     #objName = "";
     #log = new Logger("core_op");
 
@@ -528,7 +540,7 @@ export class Op extends Events
      */
     addOutPort(p)
     {
-        p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
+        p.direction = Port.DIR_OUT;
         if (p.op != this) this.#log.error("port op is not this...");
         // p._op = this; // remove if above does never happen....
 
@@ -759,7 +771,7 @@ export class Op extends Events
             this,
             name,
             type,
-            CONSTANTS.PORT.PORT_DIR_OUT,
+            Port.DIR_OUT,
             {
                 "display": "multiport",
                 "hidePort": true
@@ -784,7 +796,7 @@ export class Op extends Events
             this,
             name,
             type,
-            CONSTANTS.PORT.PORT_DIR_OUT,
+            Port.DIR_OUT,
             {
                 "display": "multiport",
                 "hidePort": true
@@ -1232,7 +1244,7 @@ export class Op extends Events
     getPortVisibleIndex(p)
     {
         let ports = this.portsIn;
-        if (p.direction == CONSTANTS.PORT_DIR_OUT)ports = this.portsOut;
+        if (p.direction == Port.DIR_OUT)ports = this.portsOut;
 
         let index = 0;
         for (let i = 0; i < ports.length; i++)

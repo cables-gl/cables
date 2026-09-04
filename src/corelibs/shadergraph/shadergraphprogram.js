@@ -169,7 +169,7 @@ export class ShaderGraphProgram extends Events
                 paramStr += "/* conv " + "param [" + param.type + ": " + param.port.name + "]" + otherNode.results[0].type + " " + otherPort.name + " */";
         }
 
-        if (otherPort.direction == CONSTANTS.PORT.PORT_DIR_OUT)
+        if (otherPort.direction == Port.DIR_OUT)
             this.execNode(otherPort.op);
 
         return paramStr;
@@ -339,6 +339,7 @@ export class ShaderGraphProgram extends Events
      */
     compile(options)
     {
+
         const port = this.#port;
 
         this.updateableOps = {};
@@ -374,6 +375,7 @@ export class ShaderGraphProgram extends Events
                 }
             }
         }
+        port.emitEvent("heavyEvent", { "name": "program" });
         this.srcMain = this._callFuncStack.join("\n");
         this.srcHeader = this._headFuncSrc;
 

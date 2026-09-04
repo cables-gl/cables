@@ -4,80 +4,42 @@ const
 
 let ctx = null;
 let canvas = null;
-let numBars = 100;
+let numBars = 120;
 let height = 50;
 let containerEle = document.body;
 let queueCPU = [];
 let queueGPU = [];
 let queueEvents = [];
-createCanvas();
-let type = null;
-
-let glExt = null;
-let cgl = null;
-let query = null;
-let glqueryagain = 0;
 let heavyEvents = [];
+let gpuTimeMs = 0;
+let fps = 0;
+let fpsCounter = 0;
+let fpsTime = performance.now();
 
-if (op.patch.cgl)
-{
-    op.patch.cgl.on("heavyEvent", (e) =>
-    {
-        heavyEvents.push(e.event);
-    });
-}
+let type = null;
+let gpuBeginFrame = null;
+let gpuEndFrame = null;
+let gpuUpdate = null;
+
+op.patch.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
+
+createCanvas();
 
 trig.onTriggered = () =>
 {
     const startTime = performance.now();
 
-    if (type == "webgl" && !query)
-    {
-        cgl = op.patch.cgl;
-        if (!glExt) glExt = cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2");
-        if (glExt)
-        {
-            query = cgl.gl.createQuery();
-            cgl.gl.beginQuery(glExt.TIME_ELAPSED_EXT, query);
-        }
-    }
-
+    if (gpuBeginFrame) gpuBeginFrame();
     next.trigger();
+
     queueCPU.push({ "ms": performance.now() - startTime });
     queueCPU.shift();
-
-    if (type == "webgl" && glExt && query != null) cgl.gl.endQuery(glExt.TIME_ELAPSED_EXT);
+    if (gpuEndFrame) gpuEndFrame();
 };
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
 {
-    if (cgl && query)
-    {
-
-        const available = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT_AVAILABLE);
-        const disjoint = cgl.gl.getParameter(glExt.GPU_DISJOINT_EXT);
-
-        if (available && !disjoint)
-        {
-            const gpuTimeNs = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT);
-            const gpuTimeMs = gpuTimeNs / 1000000;
-
-            queueGPU.push({ "ms": gpuTimeMs });
-            queueGPU.shift();
-
-            query = null;
-        }
-        else
-        {
-            glqueryagain++;
-            if (glqueryagain > 100)
-            {
-                query = null;
-                glqueryagain = 0;
-            }
-        }
-
-    }
+    if (gpuUpdate) gpuUpdate();
     type = e.type;
     const cr = e.canvas.getBoundingClientRect();
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
@@ -85,8 +47,26 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
 
     queueEvents.push({ "num": heavyEvents.length, "name": heavyEvents.join(",") });
     queueEvents.shift();
-    heavyEvents = [];
 
+    queueGPU.push({ "ms": gpuTimeMs });
+    queueGPU.shift();
+
+    heavyEvents.length = 0;
+
+    if (!gpuBeginFrame && type == "webgl")
+    {
+        gpuBeginFrame = glBeginFrame;
+        gpuEndFrame = glEndFrame;
+        gpuUpdate = glUpdate;
+
+    }
+    fpsCounter++;
+    if (performance.now() - fpsTime >= 1000)
+    {
+        fps = fpsCounter;
+        fpsTime = performance.now();
+        fpsCounter = 0;
+    }
     updateCanvas();
 });
 
@@ -96,7 +76,7 @@ op.on("delete", () =>
     op.patch.off(frameListener);
 });
 
-function drawGraph(name, posy, q, col)
+function drawGraph(name, posy, q, col, fps)
 {
     let k = 0;
     let maxMs = 25;
@@ -127,12 +107,12 @@ function drawGraph(name, posy, q, col)
     if (avg)
     {
         avg = (avg / numBars).toPrecision(2);
-
         title += avg + "ms";
     }
 
-    ctx.globalAlpha = 0.6;
+    ctx.globalAlpha = 0.7;
     ctx.fillText(title, 5, posy + 16);
+
     if (info) ctx.fillText(info, 5, posy + 32);
 }
 
@@ -141,7 +121,7 @@ function updateCanvas()
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.font = "11px monospace";
-    ctx.globalAlpha = 0.5;
+    ctx.globalAlpha = 0.8;
     ctx.fillStyle = "#222222";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -151,7 +131,7 @@ function updateCanvas()
 
     drawGraph("CPU", 0, queueCPU, "#999900");
     drawGraph("GPU", height, queueGPU, "#007777");
-    drawGraph("EVENTS", height * 2, queueEvents, "#aa7700");
+    drawGraph(fps + " FPS", height * 2, queueEvents, "#aa7700");
 }
 
 function createCanvas()
@@ -168,7 +148,7 @@ function createCanvas()
     // canvas.style.opacity = "0.5";
     canvas.style.cursor = "pointer";
     canvas.style.bottom = "0px";
-    canvas.style["z-index"] = "99998";
+    canvas.style["z-index"] = "10";
     containerEle.appendChild(canvas);
     ctx = canvas.getContext("2d");
     updateCanvas();

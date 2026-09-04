@@ -47,6 +47,13 @@ import { RenderLoop } from "./renderloop.js";
 */
 
 /**
+ * @typedef HeavyEvent
+ * @property {String} event
+ * @property {String} info
+ * @property {number} date
+ */
+
+/**
  * @typedef CoreOp
  * @type Op<any>
  */
