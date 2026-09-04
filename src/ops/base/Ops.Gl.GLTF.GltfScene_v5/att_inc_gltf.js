@@ -250,9 +250,9 @@ function loadAnims(gltf)
 
                 if (sampler.interpolation === "LINEAR") {}
                 else if (sampler.interpolation === "STEP")
-                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.Anim.EASING_ABSOLUTE;
                 else if (sampler.interpolation === "CUBICSPLINE")
-                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
+                    for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.Anim.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
                 // console.log(bufferOut)
@@ -268,7 +268,7 @@ function loadAnims(gltf)
 
                     for (let k = 0; k < numComps; k++)
                     {
-                        if (anims[k].defaultEasing === CABLES.EASING_CUBICSPLINE)
+                        if (anims[k].defaultEasing === CABLES.Anim.EASING_CUBICSPLINE)
                         {
                             const idx = ((j * numComps) * 3 + k);
 

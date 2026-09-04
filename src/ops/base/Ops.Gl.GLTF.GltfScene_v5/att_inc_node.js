@@ -237,15 +237,15 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-                if (this._animRot[0].defaultEasing == CABLES.EASING_LINEAR) CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
-                else if (this._animRot[0].defaultEasing == CABLES.EASING_ABSOLUTE)
+                if (this._animRot[0].defaultEasing == CABLES.Anim.EASING_LINEAR) CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                else if (this._animRot[0].defaultEasing == CABLES.Anim.EASING_ABSOLUTE)
                 {
                     this._tempQuat[0] = this._animRot[0].getValue(_time);
                     this._tempQuat[1] = this._animRot[1].getValue(_time);
                     this._tempQuat[2] = this._animRot[2].getValue(_time);
                     this._tempQuat[3] = this._animRot[3].getValue(_time);
                 }
-                else if (this._animRot[0].defaultEasing == CABLES.EASING_CUBICSPLINE)
+                else if (this._animRot[0].defaultEasing == CABLES.Anim.EASING_CUBICSPLINE)
                 {
                     CABLES.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
                 }
