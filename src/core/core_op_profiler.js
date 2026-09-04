@@ -18,7 +18,7 @@ import { now } from "./timer.js";
  * @property _timePsMs {number}
  */
 
-export class Profiler
+export class OpProfiler
 {
 
     /* minimalcore:start */

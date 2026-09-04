@@ -2,7 +2,7 @@ import { Events, Logger } from "cables-shared-client";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
-import { Profiler } from "./core_profiler.js";
+import { OpProfiler } from "./core_op_profiler.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";

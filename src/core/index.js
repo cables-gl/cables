@@ -5,7 +5,7 @@ import { Link } from "./core_link.js";
 import { Port } from "./core_port.js";
 import { Op } from "./core_op.js";
 import { EMBED } from "./embedding.js";
-import { Profiler } from "./core_profiler.js";
+import { OpProfiler } from "./core_op_profiler.js";
 import { Patch } from "./core_patch.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Variable } from "./sessionvar.js";
@@ -98,7 +98,7 @@ export default CABLES;
 // this is because corelibs are build/loaded via webpack and expect these exports to be avaialable on the global CABLES object
 export { Anim, AnimKey,
     CONSTANTS, Link, Op, Patch, Port,
-    Profiler, PatchVariable, EMBED, LoadingStatus,
+    OpProfiler, PatchVariable, EMBED, LoadingStatus,
     Timer, utils, now, RenderLoop, MemProfilerItem, Stack
 };
 
