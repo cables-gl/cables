@@ -221,7 +221,7 @@ export class Patch extends Events
         }
         this.timer.play();
 
-        console.log("made with https://cables.gl  hurz"); // eslint-disable-line
+        console.log("made with https://cables.gl"); // eslint-disable-line
         this.cg = undefined;
     }
 
