@@ -10,7 +10,6 @@ import { Patch } from "./core_patch.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Variable } from "./sessionvar.js";
 import { Timer, now, internalNow } from "./timer.js";
-import { CONSTANTS } from "./constants.js";
 import { AnimKey } from "./anim_key.js";
 import { RenderLoop } from "./renderloop.js";
 
@@ -20,11 +19,6 @@ import { MemProfiler, MemProfilerItem } from "./memprofiler.js";
 import { showUiErrors } from "./uierrors.js";
 
 CABLES = CABLES || {};
-CABLES = {
-    ...CABLES,
-
-    ...CONSTANTS.OP
-};
 
 CABLES.EMBED = EMBED;
 CABLES.Link = Link;
@@ -78,7 +72,6 @@ CABLES.Stack = Stack;
 /** @type {Array<Op>} */
 CABLES.OPS = [];
 CABLES.utils = utils;
-CABLES.CONSTANTS = CONSTANTS;
 
 CABLES.SHARED = {};
 CABLES.SHARED.Events = Events;
@@ -96,7 +89,7 @@ export default CABLES;
 // add additional exports to CABLES as well (see above i.e. CABLES.Port) to make them avaialable in corelibs...
 // this is because corelibs are build/loaded via webpack and expect these exports to be avaialable on the global CABLES object
 export { Anim, AnimKey,
-    CONSTANTS, Link, Op, Patch, Port,
+    Link, Op, Patch, Port,
     Profiler, PatchVariable, EMBED, LoadingStatus,
     Timer, utils, now, RenderLoop, MemProfilerItem, Stack
 };

@@ -108,7 +108,7 @@ function addPortListener(newPort, newPortInPatch)
         });
     }
 
-    if (newPort.direction == CABLES.PORT_DIR_IN)
+    if (newPort.direction == CABLES.Port.DIR_IN)
     {
         if (newPort.type == CABLES.Port.TYPE_FUNCTION)
         {
@@ -336,7 +336,7 @@ op.addSubLink = function (p, p2)
     const num = data.ports.length;
     const sublPortname = "in" + (num - 1) + " " + p2.op.name + " " + p2.name;
 
-    if (p.direction == CABLES.PORT_DIR_IN)
+    if (p.direction == CABLES.Port.DIR_IN)
     {
         gui.scene().link(
             p.op,

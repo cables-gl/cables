@@ -1,5 +1,4 @@
 import { Logger } from "cables-shared-client";
-import { CONSTANTS } from "./constants.js";
 import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
