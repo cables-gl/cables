@@ -47,7 +47,7 @@ export class ProfileData
 
     clear()
     {
-        for (const i in this.counts) this.counts[i] = 0;
+        // for (const i in this.counts) this.counts[i] = 0;
 
     //     this.profileSingleMeshAttribute = {};
     //     this.profileMeshAttributes = 0;
@@ -96,8 +96,8 @@ export class ProfileData
      */
     addTimeSpend(eventName, timeMs)
     {
-        this.timeSpent[eventName] = this.timeSpent[eventName] || 0;
-        this.timeSpent[eventName] += timeMs;
+        // this.timeSpent[eventName] = this.timeSpent[eventName] || 0;
+        // this.timeSpent[eventName] += timeMs;
     }
 
     /**
@@ -106,8 +106,8 @@ export class ProfileData
      */
     count(event, count = 1)
     {
-        this.counts[event] = this.counts[event] || 0;
-        this.counts[event] += count;
+        // this.counts[event] = this.counts[event] || 0;
+        // this.counts[event] += count;
     }
 
     /**
@@ -126,7 +126,7 @@ export class ProfileData
     addHeavyEvent(eventname, name, info)
     {
         const e = { "event": eventname, "name": name, "info": info, "date": performance.now() };
-        this.heavyEvents.push(e);
+        // this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }
 
