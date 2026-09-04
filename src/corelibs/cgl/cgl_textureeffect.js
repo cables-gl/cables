@@ -198,7 +198,7 @@ export class TextureEffect
 
         this.#cgl.gl.bindFramebuffer(this.#cgl.gl.FRAMEBUFFER, this.#cgl.popGlFrameBuffer());
 
-        this.#cgl.profileData.count("textureEffect");
+        // this.#cgl.profileData.count("textureEffect");
 
         if (this._textureTarget.filter == Texture.FILTER_MIPMAP)
         {
@@ -471,7 +471,7 @@ TextureEffect.AddBlendSelect = function (op, name, defaultMode)
         "Math Add",
         "Math Subtract",
         "Math Multiply",
-        "Math Divide",
+        "Math Divide"
 
     ], defaultMode || "normal");
     return p;

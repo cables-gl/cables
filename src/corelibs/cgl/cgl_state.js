@@ -1097,7 +1097,7 @@ export class CglContext extends CgContext
     glGetAttribLocation(prog, name)
     {
         const l = this.gl.getAttribLocation(prog, name);
-        if (l == -1) this.profileData.count("invalidAttribLoc");
+        // if (l == -1) this.profileData.count("invalidAttribLoc");
         return l;
     }
 

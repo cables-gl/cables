@@ -20,33 +20,33 @@ class CubemapFramebuffer
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
                 "lookAt": vec3.fromValues(1.0, 0.0, 0.0),
-                "up": vec3.fromValues(0.0, -1.0, 0.0),
+                "up": vec3.fromValues(0.0, -1.0, 0.0)
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
                 "lookAt": vec3.fromValues(-1.0, 0.0, 0.0),
-                "up": vec3.fromValues(0.0, -1.0, 0.0),
+                "up": vec3.fromValues(0.0, -1.0, 0.0)
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
                 "lookAt": vec3.fromValues(0.0, 1.0, 0.0),
-                "up": vec3.fromValues(0.0, 0.0, 1.0),
+                "up": vec3.fromValues(0.0, 0.0, 1.0)
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
                 "lookAt": vec3.fromValues(0.0, -1.0, 0.0),
-                "up": vec3.fromValues(0.0, 0.0, -1.0),
+                "up": vec3.fromValues(0.0, 0.0, -1.0)
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
                 "lookAt": vec3.fromValues(0.0, 0.0, 1.0),
-                "up": vec3.fromValues(0.0, -1.0, 0.0),
+                "up": vec3.fromValues(0.0, -1.0, 0.0)
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
                 "lookAt": vec3.fromValues(0.0, 0.0, -1.0),
-                "up": vec3.fromValues(0.0, -1.0, 0.0),
-            },
+                "up": vec3.fromValues(0.0, -1.0, 0.0)
+            }
         ];
 
         this._lookAtTemp = vec3.fromValues(0, 0, 0);
@@ -307,7 +307,7 @@ class CubemapFramebuffer
 
     renderEnd()
     {
-        this._cgl.profileData.count("frameBufferBlit");
+        // this._cgl.profileData.count("frameBufferBlit");
 
         if (this._cgl.glVersion !== 1)
         {
