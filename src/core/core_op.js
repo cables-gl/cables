@@ -56,7 +56,8 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [comment_text]
  * @property {boolean} [createdLocally]
  * @property {boolean} [stretchPorts]
- */
+ * @property {boolean} [vizLayerMaxZoom ]
+*/
 
 /**
  * @typedef OpTempData
@@ -1618,7 +1619,7 @@ export class Op extends Events
         for (let i = 0; i < this.portsIn.length; i++)
             this.portsIn[i].setAnimated(false);
 
-        if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
+        // if (this.onAnimFrame) this.patch.removeOnAnimFrame(this);
 
     /* minimalcore:end */
     }
