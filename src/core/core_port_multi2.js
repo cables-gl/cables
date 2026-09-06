@@ -187,7 +187,7 @@ export class MultiPort2 extends Port
 
             /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
-            attrs.type = type;
+            attrs.type = Port.getTypeString(type);
             const po = this.op.newPort(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;

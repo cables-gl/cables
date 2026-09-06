@@ -50,6 +50,12 @@ import { Op } from "./core_op.js";
 */
 
 /**
+ * @typedef {"bool"|"boolnum"|"button"|"buttons"|"createOpHelper"|"curve"|"dropdown"|
+ *   "editor"|"file"|"gradient"|"multiport"|"range"|"readonly"|"reroute"|"sg"|"sg_vec"|
+ *   "spreadsheet"|"switch"|"text"|"texture"} PortUiAttribsDisplay
+ */
+
+/**
  * data is coming into and out of ops through input and output ports
  * @namespace external:CABLES#Port
  * @module Port
