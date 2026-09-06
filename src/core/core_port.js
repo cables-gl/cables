@@ -91,6 +91,7 @@ export class Port extends Events
 
     /** @type {Op} */
     #op = null;
+
     tempData = {};
 
     /**

@@ -17,7 +17,7 @@ let fps = 0;
 let fpsCounter = 0;
 let fpsTime = performance.now();
 let countIndex = 0;
-let selectedCounterIndex = "meshDrawCalls";
+let selectedCounterIndex = "";
 
 let type = null;
 let gpuBeginFrame = null;
@@ -157,7 +157,7 @@ function updateCanvas()
     // console.log(countersPerFrame[selectedCounterIndex])
 
     if (countersPerFrame[selectedCounterIndex] && countersPerFrame[selectedCounterIndex].length)
-        drawGraph(selectedCounterIndex + "", height * 2, countersPerFrame[selectedCounterIndex], "#aa7700");
+        drawGraph(selectedCounterIndex + "", height * 2, countersPerFrame[selectedCounterIndex], "#555555");
 }
 
 function createCanvas()
