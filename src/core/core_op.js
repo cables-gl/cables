@@ -598,7 +598,11 @@ export class Op extends Events
     inTrigger(name, v)
     {
         const p = this.addInPort(this.newPort(this, name, Port.TYPE_FUNCTION));
-        if (v !== undefined) p.set(v);
+        if (v !== undefined)
+        {
+            console.log("why trigger setvalue?");
+            p.set(v);
+        }
         return p;
     }
 

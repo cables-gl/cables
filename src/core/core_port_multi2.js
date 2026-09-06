@@ -147,8 +147,8 @@ export class MultiPort2 extends Port
             for (let i = 0; i < this.ports.length; i++)
             {
                 const po = this.ports[i];
-                if (po.multiPortChangeListener) po.multiPortChangeListener = po.off(po.multiPortChangeListener);
-                if (po.multiLinkChangeListener) po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
+                if (po.tempData.multiPortChangeListener) po.tempData.multiPortChangeListener = po.off(po.tempData.multiPortChangeListener);
+                if (po.tempData.multiLinkChangeListener) po.tempData.multiLinkChangeListener = po.off(po.tempData.multiLinkChangeListener);
             }
         };
 
@@ -159,21 +159,21 @@ export class MultiPort2 extends Port
                 const po = this.ports[i];
                 const idx = i;
 
-                if (po.multiPortChangeListener)po.multiPortChangeListener = po.off(po.multiPortChangeListener);
-                po.multiPortChangeListener = po.on("change", updateArray.bind(this));
+                if (po.tempData.multiPortChangeListener)po.tempData.multiPortChangeListener = po.off(po.tempData.multiPortChangeListener);
+                po.tempData.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
-                if (po.multiPortTriggerListener)po.multiPortTriggerListener = po.off(po.multiPortTriggerListener);
-                po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
+                if (po.tempData.multiPortTriggerListener)po.tempData.multiPortTriggerListener = po.off(po.tempData.multiPortTriggerListener);
+                po.tempData.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
 
-                if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
-                po.multiLinkChangeListener = po.on("onLinkChanged", () =>
+                if (po.tempData.multiLinkChangeListener)po.tempData.multiLinkChangeListener = po.off(po.tempData.multiLinkChangeListener);
+                po.tempData.multiLinkChangeListener = po.on("onLinkChanged", () =>
                 {
                     this.countPorts();
                     this.emitEvent("onLinkChanged");
                 });
 
-                if (po.multiLinkRemoveListener)po.multiLinkRemoveListener = po.off(po.multiLinkRemoveListener);
-                po.multiLinkRemoveListener = po.on("onLinkRemoved", () =>
+                if (po.tempData.multiLinkRemoveListener)po.tempData.multiLinkRemoveListener = po.off(po.tempData.multiLinkRemoveListener);
+                po.tempData.multiLinkRemoveListener = po.on("onLinkRemoved", () =>
                 {
                     updateUi();
                     this.countPorts();
@@ -187,8 +187,7 @@ export class MultiPort2 extends Port
 
             /** @type {import("./core_port.js").PortUiAttribs} */
             const attrs = {};
-            // if (type == CABLES.OP_PORT_TYPE_STRING) attrs.type = "string";
-            attrs.type = type;
+            attrs.type = Port.getTypeString(type);
             const po = this.op.newPort(this.op, name + "_" + this.ports.length, type, attrs);
 
             po.direction = dir;

@@ -9,7 +9,6 @@ import { now } from "./timer.js";
  * @property timeUsedFrame {number}
  * @property opid {string}
  * @property subPatch {string}
-
  * @property timePsMsAvg {number}
  * @property timePsMs {number}
  * @property timePsCount {number}
@@ -18,7 +17,7 @@ import { now } from "./timer.js";
  * @property _timePsMs {number}
  */
 
-export class Profiler
+export class OpProfiler
 {
 
     /* minimalcore:start */

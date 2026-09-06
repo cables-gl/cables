@@ -487,8 +487,8 @@ class CglShader extends CgShader
         const measure = this._cgl.profileData.start("shadercompile " + this.name);
 
         performance.mark("start");
-        this._cgl.profileData.count("shaderCompile");
-        this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
+        // this._cgl.profileData.count("shaderCompile");
+        // this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
         let extensionString = "";
         if (this._extensions)
@@ -826,7 +826,7 @@ class CglShader extends CgShader
 
         if (this._cgl.currentProgram != this._program)
         {
-            this._cgl.profileData.count("shaderBinds");
+            // this._cgl.profileData.count("shaderBinds");
             this._cgl.gl.useProgram(this._program);
             this._cgl.currentProgram = this._program;
         }
@@ -838,7 +838,7 @@ class CglShader extends CgShader
         {
             this._pMatrixState = this._cgl.getProjectionMatrixStateCount();
             this._cgl.gl.uniformMatrix4fv(this._projMatrixUniform, false, this._cgl.pMatrix);
-            this._cgl.profileData.count("mvpMatrixCount");
+            // this._cgl.profileData.count("mvpMatrixCount");
 
         }
 
@@ -853,30 +853,30 @@ class CglShader extends CgShader
             if (this._vMatrixState != this._cgl.getViewMatrixStateCount())
             {
                 this._cgl.gl.uniformMatrix4fv(this._vMatrixUniform, false, this._cgl.vMatrix);
-                this._cgl.profileData.count("mvpMatrixCount");
+                // this._cgl.profileData.count("mvpMatrixCount");
                 this._vMatrixState = this._cgl.getViewMatrixStateCount();
 
                 if (this._inverseViewMatrixUniform)
                 {
                     mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
                     this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
-                    this._cgl.profileData.count("mvpMatrixCount");
+                    // this._cgl.profileData.count("mvpMatrixCount");
                 }
                 if (this._inverseProjMatrixUniform)
                 {
                     mat4.invert(this._tempInverseProjMatrix, this._cgl.pMatrix);
                     this._cgl.gl.uniformMatrix4fv(this._inverseProjMatrixUniform, false, this._tempInverseProjMatrix);
-                    this._cgl.profileData.count("mvpMatrixCount");
+                    // this._cgl.profileData.count("mvpMatrixCount");
                 }
             }
             this._cgl.gl.uniformMatrix4fv(this._mMatrixUniform, false, this._cgl.mMatrix);
-            this._cgl.profileData.count("mvpMatrixCount");
+            // this._cgl.profileData.count("mvpMatrixCount");
 
             if (this._camPosUniform)
             {
                 mat4.invert(this._tempCamPosMatrix, this._cgl.vMatrix);
                 this._cgl.gl.uniform3f(this._camPosUniform, this._tempCamPosMatrix[12], this._tempCamPosMatrix[13], this._tempCamPosMatrix[14]);
-                this._cgl.profileData.count("mvpMatrixCount");
+                // this._cgl.profileData.count("mvpMatrixCount");
             }
         }
         else
@@ -886,7 +886,7 @@ class CglShader extends CgShader
 
             mat4.mul(tempmv, this._cgl.vMatrix, this._cgl.mMatrix);
             this._cgl.gl.uniformMatrix4fv(this._mvMatrixUniform, false, tempmv);
-            this._cgl.profileData.count("mvpMatrixCount");
+            // this._cgl.profileData.count("mvpMatrixCount");
         }
 
         if (this._normalMatrixUniform)
@@ -896,7 +896,7 @@ class CglShader extends CgShader
             mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
             this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
-            this._cgl.profileData.count("mvpMatrixCount");
+            // this._cgl.profileData.count("mvpMatrixCount");
         }
 
         for (let i = 0; i < this._libs.length; i++)

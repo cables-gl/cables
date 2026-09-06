@@ -39,7 +39,7 @@ export class Framebuffer2
         if (!this.Framebuffer2DrawTargetsDefault) this.Framebuffer2DrawTargetsDefault = [cgl.gl.COLOR_ATTACHMENT0];
 
         this._options = options || {
-            "isFloatingPointTexture": false,
+            "isFloatingPointTexture": false
         };
 
         this.name = this._options.name || "unknown";
@@ -85,7 +85,7 @@ export class Framebuffer2
                 "anisotropic": this._options.anisotropic || 0,
                 "pixelFormat": this._options.pixelFormat,
                 "filter": this._options.filter,
-                "wrap": this._options.wrap,
+                "wrap": this._options.wrap
             });
         }
 
@@ -103,7 +103,7 @@ export class Framebuffer2
                     "filter": fil,
                     "shadowMap": this._options.shadowMap || false,
                     "width": w || defaultTexSize,
-                    "height": h || defaultTexSize,
+                    "height": h || defaultTexSize
                 });
         }
 
@@ -410,7 +410,7 @@ export class Framebuffer2
         if (this._disposed) return this._log.warn("disposed framebuffer renderEnd...");
         this._cgl.popPMatrix();
 
-        this._cgl.profileData.count("framebufferBlit");
+        // this._cgl.profileData.count("framebufferBlit");
 
         if (this._numRenderBuffers <= 1)
         {

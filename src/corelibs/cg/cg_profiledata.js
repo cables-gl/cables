@@ -47,7 +47,7 @@ export class ProfileData
 
     clear()
     {
-        for (const i in this.counts) this.counts[i] = 0;
+        // for (const i in this.counts) this.counts[i] = 0;
 
     //     this.profileSingleMeshAttribute = {};
     //     this.profileMeshAttributes = 0;
@@ -76,18 +76,18 @@ export class ProfileData
 
     clearGlQuery()
     {
-        for (let i in this.glQueryData)
-        {
-            if (!this.glQueryData[i].lastClear || performance.now() - this.glQueryData[i].lastClear > 1000)
-            {
-                this.glQueryData[i].time = this.glQueryData[i]._times / this.glQueryData[i]._numcount;
-                this.glQueryData[i].num = this.glQueryData[i]._numcount;
+        // for (let i in this.glQueryData)
+        // {
+        //     if (!this.glQueryData[i].lastClear || performance.now() - this.glQueryData[i].lastClear > 1000)
+        //     {
+        //         this.glQueryData[i].time = this.glQueryData[i]._times / this.glQueryData[i]._numcount;
+        //         this.glQueryData[i].num = this.glQueryData[i]._numcount;
 
-                this.glQueryData[i]._times = 0;
-                this.glQueryData[i]._numcount = 0;
-                this.glQueryData[i].lastClear = performance.now();
-            }
-        }
+        //         this.glQueryData[i]._times = 0;
+        //         this.glQueryData[i]._numcount = 0;
+        //         this.glQueryData[i].lastClear = performance.now();
+        //     }
+        // }
     }
 
     /**
@@ -96,8 +96,8 @@ export class ProfileData
      */
     addTimeSpend(eventName, timeMs)
     {
-        this.timeSpent[eventName] = this.timeSpent[eventName] || 0;
-        this.timeSpent[eventName] += timeMs;
+        // this.timeSpent[eventName] = this.timeSpent[eventName] || 0;
+        // this.timeSpent[eventName] += timeMs;
     }
 
     /**
@@ -106,8 +106,9 @@ export class ProfileData
      */
     count(event, count = 1)
     {
-        this.counts[event] = this.counts[event] || 0;
-        this.counts[event] += count;
+        // console.log("event", event);
+        // this.counts[event] = this.counts[event] || 0;
+        // this.counts[event] += count;
     }
 
     /**
@@ -126,7 +127,7 @@ export class ProfileData
     addHeavyEvent(eventname, name, info)
     {
         const e = { "event": eventname, "name": name, "info": info, "date": performance.now() };
-        this.heavyEvents.push(e);
+        // this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }
 
@@ -152,3 +153,4 @@ export class ProfileData
         };
     }
 }
+console.log("coreeeeeeeeeeee");

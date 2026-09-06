@@ -2,7 +2,7 @@ import { Events, Logger } from "cables-shared-client";
 import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
-import { Profiler } from "./core_profiler.js";
+import { OpProfiler } from "./core_op_profiler.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
@@ -718,6 +718,7 @@ export class Patch extends Events
     updateAnims(time, delta, timestamp)
     {
         if (!this.renderloop) return;
+
         this.timer.update(timestamp);
         this.freeTimer.update(timestamp);
 
@@ -725,7 +726,13 @@ export class Patch extends Events
 
         for (let i = 0; i < this.animFrameOps.length; ++i)
             if (this.animFrameOps[i].onAnimFrame)
+            {
+
+                // let startTime = performance.now();
                 this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
+
+                // console.log("animupd ", this.animFrameOps[i].objName, performance.now() - startTime);
+            }
     }
 
     /**
