@@ -59,7 +59,7 @@ import { RenderLoop } from "./renderloop.js";
  */
 
 /**
- * @template T Patch
+ * @template {Op<any>} T Patch
  *
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -545,7 +545,7 @@ export class Patch extends Events
             this.#log.error("addop: op could not be created: ", opIdentifier);
         }
 
-        return op;
+        return /** @type {T} */ (op);
     }
 
     /**
