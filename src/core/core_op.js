@@ -59,6 +59,11 @@ import { showUiErrors } from "./uierrors.js";
  */
 
 /**
+ * @typedef OpTempData
+ * @property {Object} [origData]
+ */
+
+/**
  * @typedef CorePatch
  * @type Patch
  */
@@ -92,7 +97,9 @@ export class Op extends Events
     /** @type {Patch} */
     patch = null;
 
-    data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+    /** @type {OpTempData} */
+    tempData = {};
+
     storage = {}; // op-specific data to be included in export
 
     /** @type {Array<Port>} */
@@ -133,6 +140,13 @@ export class Op extends Events
 
     /** @type {Port} */
     patchId = null; // will be defined by subpatchops
+
+    /* minimalcore:start */
+    // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+    data = {};
+    onLoadedValueSet = null;
+
+    /* minimalcore:end */
 
     /**
      * @param {Patch} _patch
@@ -182,18 +196,17 @@ export class Op extends Events
     }
 
     /* minimalcore:start */
-    isInBlueprint2() // will be overwritten in ui
-    {
-        return false;
-    }
+    // functions to be overwritten in core_extend_op
+
+    /** @returns {Port} */
+    getFirstPortIn() { return null; }
+
+    /** @returns {Port} */
+    getFirstPortOut() { return null; }
+    isInBlueprint2() { return false; }
+    getSubPatch() { return 0; }
 
     /* minimalcore:end */
-
-    /* minimalcore:start */
-    getSubPatch()// will be overwritten in ui
-    {
-        return 0;
-    }
 
     /* minimalcore:end */
 

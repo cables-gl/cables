@@ -116,8 +116,6 @@ export class Patch extends Events
     storeObjNames = false; // remove after may release
     _volumeListeners = [];
     namedTriggers = {};
-
-    _origData = null;
     tempData = {};
     frameStore = {};
 
@@ -228,11 +226,15 @@ export class Patch extends Events
     }
 
     /* minimalcore:start */
-    static getGui()
-    {
-        // @ts-ignore
-        return window.gui;
-    }
+    // overwritten in gui extend_patch
+    /** @param {string | number} patchId */
+    clearSubPatchCache(patchId) {}
+
+    /** @param {string | number} patchId */
+    _subPatchCacheAdd(patchId) {}
+
+    /** @deprecated */
+    renderOneFrame() { }
 
     /* minimalcore:end */
 
@@ -242,9 +244,10 @@ export class Patch extends Events
         return false;
     }
 
-    /** @deprecated */
-    renderOneFrame()
+    static getGui()
     {
+        // @ts-ignore
+        return window.gui;
     }
 
     /**
@@ -560,43 +563,43 @@ export class Patch extends Events
         this.animFrameOps.push(op);
     }
 
-    /**
-     * @param {Op} op
-     */
-    removeOnAnimFrame(op)
-    {
-        for (let i = 0; i < this.animFrameOps.length; i++)
-        {
-            if (this.animFrameOps[i] == op)
-            {
-                this.animFrameOps.splice(i, 1);
-                return;
-            }
-        }
-    }
+    // /**
+    //  * @param {Op} op
+    //  */
+    // removeOnAnimFrame(op)
+    // {
+    //     for (let i = 0; i < this.animFrameOps.length; i++)
+    //     {
+    //         if (this.animFrameOps[i] == op)
+    //         {
+    //             this.animFrameOps.splice(i, 1);
+    //             return;
+    //         }
+    //     }
+    // }
 
-    /**
-     * @param {function} cb
-     */
-    addOnAnimFrameCallback(cb)
-    {
-        this.animFrameCallbacks.push(cb);
-    }
+    // /**
+    //  * @param {function} cb
+    //  */
+    // addOnAnimFrameCallback(cb)
+    // {
+    //     this.animFrameCallbacks.push(cb);
+    // }
 
-    /**
-     * @param {function} cb
-     */
-    removeOnAnimCallback(cb)
-    {
-        for (let i = 0; i < this.animFrameCallbacks.length; i++)
-        {
-            if (this.animFrameCallbacks[i] == cb)
-            {
-                this.animFrameCallbacks.splice(i, 1);
-                return;
-            }
-        }
-    }
+    // /**
+    //  * @param {function} cb
+    //  */
+    // removeOnAnimCallback(cb)
+    // {
+    //     for (let i = 0; i < this.animFrameCallbacks.length; i++)
+    //     {
+    //         if (this.animFrameCallbacks[i] == cb)
+    //         {
+    //             this.animFrameCallbacks.splice(i, 1);
+    //             return;
+    //         }
+    //     }
+    // }
 
     updateAnimMaxTimeSoon()
     {
@@ -896,6 +899,8 @@ export class Patch extends Events
      * @typedef DeserializeOptions
      * @property {boolean} [genIds]
      * @property {boolean} [createRef]
+     * @property {Function} onLoadedValueSet
+     * @property {Function} opsCreated
      */
 
     /**
@@ -952,7 +957,7 @@ export class Patch extends Events
                 addedOps.push(op);
                 if (options.genIds) op.id = shortId();
                 op.portsInData = opData.portsIn;
-                op._origData = structuredClone(opData);
+                op.tempData.origData = structuredClone(opData);
                 op.storage = opData.storage;
                 // if (opData.hasOwnProperty("disabled"))op.setEnabled(!opData.disabled);
 
@@ -1084,9 +1089,9 @@ export class Patch extends Events
             // deprecated use event
             if (this.ops[i].onLoadedValueSet)
             {
-                this.ops[i].onLoadedValueSet(this.ops[i]._origData);
+                this.ops[i].onLoadedValueSet(this.ops[i].tempData.origData);
                 this.ops[i].onLoadedValueSet = null;
-                this.ops[i]._origData = null;
+                this.ops[i].tempData.origData = null;
             }
 
             // this is only emited when the patch is loaded from serializid data, e.g. loading from api
