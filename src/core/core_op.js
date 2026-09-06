@@ -379,11 +379,10 @@ export class Op extends Events
     /**
      * @deprecated
      * @param {string} name
-     * @param {string} v
      */
-    outFunction(name, v)
+    outFunction(name)
     {
-        return this.outTrigger(name, v);
+        return this.outTrigger(name);
     }
 
     /**

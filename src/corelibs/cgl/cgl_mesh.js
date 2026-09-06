@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { MemProfilerItem, utils } from "cables";
+import { MemProfilerItem, PerfProfiler, utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS, Geometry, CgMesh } from "../cg/index.js";
 
@@ -102,7 +102,10 @@ class Mesh extends CgMesh
         this.#cgl = _cgl;
 
         let options = _options || {};
+
+        // @ts-ignore
         if (utils.isNumeric(options))options = { "glPrimitive": _options }; // old constructor fallback...
+
         this._bufVertexAttrib = null;
         this.#bufVerticesIndizes = this.#cgl.gl.createBuffer();
 
@@ -274,15 +277,11 @@ class Mesh extends CgMesh
             {
                 floatArray = new Float32Array(array);
 
-                if (this.#cgl.debugOneFrame)
-                {
-                console.log("_bufferArray create new float32array", array.length, attr.name); // eslint-disable-line
-                }
-
                 if (array.length > 10000)
                 {
-                    this.#cgl.profileData.profileNonTypedAttrib++;
-                    this.#cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
+                    this.#cgl.perfProfiler.count("nontypeattrib");
+                    // this.#cgl.profileData.profileNonTypedAttrib++;
+                    // this.#cgl.profileData.profileNonTypedAttribNam s = "(" + this._name + ":" + attr.name + ")";
                 }
             }
         }

@@ -177,7 +177,8 @@ export class CglContext extends CgContext
             this.aborted = true;
             const msg = "Could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.";
             this._log.warn("NO_WEBGL", msg);
-            CABLES.showUiErrors({ "id": 1, "name": "CGL" }, "nogl", msg, 3);
+
+            CABLES.showUiErrors({ "id": "1", "name": "CGL" }, "nogl", msg, 3);
             // throw (new Error(msg));
 
             return;
@@ -713,9 +714,9 @@ export class CglContext extends CgContext
     fullScreen()
     {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
-        else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
+        // @ts-ignore
         else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
-        else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
+        else console.log("no 'requestFullscreen' available...");
     }
 
     /**
@@ -1189,6 +1190,7 @@ export class CglContext extends CgContext
      */
     createMesh(geom, options)
     {
+        // @ts-ignore
         if (utils.isNumeric(options))options = { "glPrimitive": options }; // old constructor fallback...
         return new Mesh(this, geom, options);
     }

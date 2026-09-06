@@ -7,7 +7,7 @@ let lastHtml = "";
  * @param {string} id
  * @param {string} txt
  * @param {number} level
- * @param {{}} options
+ * @param {{}} [options]
  */
 export function showUiErrors(op, id, txt, level, options)
 {
