@@ -393,7 +393,7 @@ export class Port extends Events
 
     /**
      * @description set value of port / will send value to all linked ports (only for output ports)
-     * @param {string | number | boolean | any[]} v
+     * @param {string | number  } v
      */
     set(v)
     {
@@ -410,7 +410,7 @@ export class Port extends Events
     }
 
     /**
-     * @param {string|boolean|number} v
+     * @param {string|number} v
      */
     setValue(v)
     {

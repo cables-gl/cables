@@ -102,7 +102,9 @@ export class Patch extends Events
     ops = [];
     settings = {};
     animMaxTime = 0;
-    missingClipAnims = {};
+
+    missingClipAnims = {};// TODO move to tempData?
+    clipAnims = {};// TODO move to tempData?
 
     profiler = null;
     aborted = false;
