@@ -73,7 +73,6 @@ function start()
                         (_device) =>
                         {
                             device = _device;
-                            mgpu.hasTimestampQuery = device.features.has("timestamp-query");
                             device.lost.then((info) =>
                             {
                                 op.logError("WebGPU device lost: " + info.message + " (reason: " + info.reason + ")");

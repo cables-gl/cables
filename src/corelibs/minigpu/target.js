@@ -103,7 +103,9 @@ export class RenderTarget
                 renderPassDescriptor.colorAttachments[0].view = this.mgpu.context.getCurrentTexture().createView();
         }
 
-        this._measuringGpuTime = this.mgpu.hasTimestampQuery && !this._gpuTimerPending;
+        const hasTimestampQuery = this.mgpu.device.features.has("timestamp-query");
+        this._measuringGpuTime = false;// hasTimestampQuery && !this._gpuTimerPending;
+
         if (this._measuringGpuTime)
         {
             if (!this._gpuTimer)
@@ -146,7 +148,6 @@ export class RenderTarget
 
             const t = this._gpuTimer;
             const mgpu = this.mgpu;
-            const self = this;
 
             mgpu.commandEncoder.resolveQuerySet(t.querySet, 0, 2, t.resolveBuffer, 0);
             mgpu.commandEncoder.copyBufferToBuffer(t.resolveBuffer, 0, t.resultBuffer, 0, 16);
@@ -156,11 +157,12 @@ export class RenderTarget
                 const times = new BigInt64Array(t.resultBuffer.getMappedRange());
                 const ns = times[1] - times[0];
                 t.resultBuffer.unmap();
-                if (ns > 0n) self.gpuTimeMs = Number(ns) / 1000000;
-                self._gpuTimerPending = false;
+                if (ns > 0n) this.gpuTimeMs = Number(ns) / 1000000;
+                console.log("this.gpuTimeMs", this.gpuTimeMs);
+                this._gpuTimerPending = false;
             }).catch(() =>
             {
-                self._gpuTimerPending = false;
+                this._gpuTimerPending = false;
             });
         }
     }
