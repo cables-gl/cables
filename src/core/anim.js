@@ -8,28 +8,37 @@ import { Patch } from "./core_patch.js";
 let counts = {};
 
 /**
- * @typedef keyUiAttribs
- * @property  {string} text
+ * @typedef KeyUiAttribs
+ * @property {string} [text]
+ * @property {number} [bezFree]
  */
+
+/**
+ * @typedef AnimUiAttribs
+ * @property {number} [height]
+ * @property {number} [muted]
+ * @property {boolean} [readOnly]
+ */
+
 /**
  * @typedef SerializedAnim
- * @property  {number} loop
- * @property  {boolean} tlActive
- * @property  {SerializedKey[]} keys
+ * @property {number} loop
+ * @property {boolean} tlActive
+ * @property {SerializedKey[]} keys
  */
 /**
  * @typedef SerializedKey
- * @property  {number} [v]
- * @property  {number} [t]
- * @property  {number} [e]
- * @property  {string} [clipId]
- * @property  {keyUiAttribs} [uiAttribs]
- * @property  {Function} [cb]
- * @property  {import("./anim.js").Anim} [anim] do not use
- * @property  {number} [value] do not use
- * @property  {number} [time] do not use
- * @property  {number[]} [cp1]
- * @property  {number[]} [cp2]
+ * @property {number} [v]
+ * @property {number} [t]
+ * @property {number} [e]
+ * @property {string} [clipId]
+ * @property {KeyUiAttribs} [uiAttribs]
+ * @property {Function} [cb]
+ * @property {import("./anim.js").Anim} [anim] do not use
+ * @property {number} [value] do not use
+ * @property {number} [time] do not use
+ * @property {number[]} [cp1]
+ * @property {number[]} [cp2]
  */
 
 /**
@@ -107,6 +116,8 @@ export class Anim extends Events
     static EASINGNAMES = ["linear", "absolute", "smoothstep", "smootherstep", "Cubic In", "Cubic Out", "Cubic In Out", "Expo In", "Expo Out", "Expo In Out", "Sin In", "Sin Out", "Sin In Out", "Quart In", "Quart Out", "Quart In Out", "Quint In", "Quint Out", "Quint In Out", "Back In", "Back Out", "Back In Out", "Elastic In", "Elastic Out", "Bounce In", "Bounce Out", "Clip"];
 
     #tlActive = true;
+
+    /** @type {AnimUiAttribs} */
     uiAttribs = {};
     loop = 0;
     onLooped = null;

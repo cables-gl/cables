@@ -15,7 +15,11 @@ export class AnimKey
     bezAn = null;
     cb = null;
     cbTriggered = false;
+
+    /** @type {Object} */
     temp = {};
+
+    /** @type {import("./anim.js").KeyUiAttribs} */
     uiAttribs = {};
 
     /** @type {Anim} */
@@ -23,7 +27,7 @@ export class AnimKey
     clipId = null;
 
     /**
-     * @param {SerializedKey} obj
+     * @param {import("./anim.js").SerializedKey} obj
      * @param {Anim} [an]
      */
     constructor(obj, an)
