@@ -631,7 +631,7 @@ export class Texture extends CgTexture
     {
         if (!url) return finishedCallback({ "error": true });
         let loadingId = null;
-        if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("cgl.texture", url, op);
+        if (!cgl.patch?.loading.existByName(url)) loadingId = cgl.patch?.loading.start("cgl.texture", url, op);
 
         const texture = new Texture(cgl);
         if (url.startsWith("blob:")) texture.name = +"blob";
@@ -658,7 +658,7 @@ export class Texture extends CgTexture
             {
                 console.warn("[cgl.texture.load] error loading texture", url, e);
                 texture.loading = false;
-                if (loadingId) cgl.patch.loading.finished(loadingId);
+                if (loadingId) cgl.patch?.loading.finished(loadingId);
                 const error = { "error": true };
                 if (finishedCallback) finishedCallback(error, texture);
                 measure.finish();
@@ -669,7 +669,7 @@ export class Texture extends CgTexture
                 cgl.addNextFrameOnceCallback(() =>
                 {
                     texture.initTexture(texture.image);
-                    if (loadingId) cgl.patch.loading.finished(loadingId);
+                    if (loadingId) cgl.patch?.loading.finished(loadingId);
                     texture.loading = false;
 
                     measure.finish();
@@ -698,7 +698,7 @@ export class Texture extends CgTexture
                     {
 
                         texture.initTexture(bitmap, null, true);
-                        if (loadingId) cgl.patch.loading.finished(loadingId);
+                        if (loadingId) cgl.patch?.loading.finished(loadingId);
                         texture.loading = false;
 
                         if (finishedCallback) finishedCallback(null, texture);
@@ -712,7 +712,7 @@ export class Texture extends CgTexture
                     {
                         console.log("tex create err", e);
                         texture.loading = false;
-                        if (loadingId) cgl.patch.loading.finished(loadingId);
+                        if (loadingId) cgl.patch?.loading.finished(loadingId);
                         if (finishedCallback) finishedCallback(e, texture);
                     });
 
@@ -720,14 +720,14 @@ export class Texture extends CgTexture
                 {
                     console.log("tex blob err", e);
                     texture.loading = false;
-                    if (loadingId) cgl.patch.loading.finished(loadingId);
+                    if (loadingId) cgl.patch?.loading.finished(loadingId);
                     if (finishedCallback) finishedCallback(e, texture);
                 });
             }).catch((e) =>
             {
                 console.log("tex fetch err", e);
                 texture.loading = false;
-                if (loadingId) cgl.patch.loading.finished(loadingId);
+                if (loadingId) cgl.patch?.loading.finished(loadingId);
                 if (finishedCallback) finishedCallback(e, texture);
             });
 

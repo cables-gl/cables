@@ -17,6 +17,7 @@ export class CgContext extends Events
 
     #patch = null;
     gApi = 0;
+    patchConfig = null;
 
     _textureslots = [];
     _pMatrixStack = new MatrixStack();
@@ -27,12 +28,18 @@ export class CgContext extends Events
     /**
      * Description
      * @param {Patch} _patch
+     * @param {import("../../core/core_patch.js").PatchConfig} [patchConfig]
      */
-    constructor(_patch)
+    constructor(_patch, patchConfig)
     {
         super();
 
-        this._log = new Logger("cg_context", { "onError": _patch.config.onError });
+        if (_patch && !patchConfig) patchConfig = _patch.config;
+        if (patchConfig) this.patchConfig = patchConfig;
+
+        this._log = new Logger("cg_context", { "onError": this.patchConfig.onError });
+
+        this.patch = _patch;
 
         /** @type {object} */
         this.tempData = this.frameStore = this.frameStore || {};
@@ -45,7 +52,6 @@ export class CgContext extends Events
         this.maxTexSize = 2048;
         this._viewPort = [0, 0, 1, 1];
         this._viewPortStack = [];
-        this.patch = _patch;
         this.autoReSize = true;
 
         this.DEPTH_COMPARE_FUNC_NEVER = 0;
@@ -179,7 +185,7 @@ export class CgContext extends Events
 
     updateSize()
     {
-        this.cgCanvas.updateSize();
+        if (this.cgCanvas) this.cgCanvas.updateSize();
     }
 
     /**

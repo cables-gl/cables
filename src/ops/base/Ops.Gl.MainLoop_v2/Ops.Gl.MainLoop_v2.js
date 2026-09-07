@@ -13,7 +13,7 @@ const
 op.onAnimFrame = render;
 hdpi.onChange = updateHdpi;
 
-const cgl = op.patch.cg = op.patch.cgl;
+const cgl = op.patch.cg = op.patch.cgl || new CABLES.CGL.Context(op.patch);
 if (!cgl.gl) op.setUiError("nogl", "No WebGl support in Browser", 3);
 
 let rframes = 0;

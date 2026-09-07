@@ -52,6 +52,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string|number} [subPatch]
  * @property {object} [subPatchOp]
  * @property {string} [tempSubOldOpId]
+ * @property {string} [subPatch]
  * @property {string} [comment_title]
  * @property {boolean} [highlighted]
  * @property {boolean} [highlightedMore]
