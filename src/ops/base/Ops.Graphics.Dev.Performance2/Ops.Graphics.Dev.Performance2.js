@@ -12,7 +12,6 @@ let queueGPU = [];
 let queueEvents = [];
 let heavyEvents = [];
 let countersPerFrame = {};
-let gpuTimeMs = 0;
 let fps = 0;
 let fpsCounter = 0;
 let fpsTime = performance.now();
@@ -51,14 +50,20 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     queueEvents.push({ "num": heavyEvents.length, "name": heavyEvents.join(",") });
     queueEvents.shift();
 
-    queueGPU.push({ "ms": gpuTimeMs });
-    queueGPU.shift();
-
     for (const i in op.patch.cgl.perfProfiler.counts)
     {
         countersPerFrame[i] = countersPerFrame[i] || [];
         countersPerFrame[i].push({ "num": op.patch.cgl.perfProfiler.counts[i] });
         if (countersPerFrame[i].length > numBars) countersPerFrame[i].shift();
+    }
+
+    for (const i in op.patch.cgl.perfProfiler.durations)
+    {
+        if (op.patch.cgl.perfProfiler.durations[i])
+            if (i == "gpu")
+                queueGPU.push({ "ms": op.patch.cgl.perfProfiler.durations[i] });
+
+        if (queueGPU.length > numBars) queueGPU.shift();
     }
 
     op.patch.cgl.perfProfiler.reset();
