@@ -26,6 +26,11 @@ export class RenderTarget
         this.#passEncoder = null;
         this._everStarted = false;
 
+        this.gpuTimeMs = 0;
+        this._gpuTimer = null;
+        this._gpuTimerPending = false;
+        this._measuringGpuTime = false;
+
         const size = [options.width || mgpu.canvas.width, options.height || mgpu.canvas.height];
 
         this.depthTexture = mgpu.device.createTexture(
@@ -98,6 +103,24 @@ export class RenderTarget
                 renderPassDescriptor.colorAttachments[0].view = this.mgpu.context.getCurrentTexture().createView();
         }
 
+        this._measuringGpuTime = this.mgpu.hasTimestampQuery && !this._gpuTimerPending;
+        if (this._measuringGpuTime)
+        {
+            if (!this._gpuTimer)
+            {
+                this._gpuTimer = {
+                    "querySet": this.mgpu.device.createQuerySet({ "type": "timestamp", "count": 2 }),
+                    "resolveBuffer": this.mgpu.device.createBuffer({ "size": 16, "usage": GPUBufferUsage.QUERY_RESOLVE | GPUBufferUsage.COPY_SRC }),
+                    "resultBuffer": this.mgpu.device.createBuffer({ "size": 16, "usage": GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST })
+                };
+            }
+            renderPassDescriptor.timestampWrites = {
+                "querySet": this._gpuTimer.querySet,
+                "beginningOfPassWriteIndex": 0,
+                "endOfPassWriteIndex": 1
+            };
+        }
+
         this.#passEncoder = this.mgpu.commandEncoder.beginRenderPass(renderPassDescriptor);
 
         this.mgpu.target.push(this);
@@ -115,6 +138,31 @@ export class RenderTarget
 
         this.#passEncoder = null;
         this.mgpu.target.pop();
+
+        if (this._measuringGpuTime)
+        {
+            this._measuringGpuTime = false;
+            this._gpuTimerPending = true;
+
+            const t = this._gpuTimer;
+            const mgpu = this.mgpu;
+            const self = this;
+
+            mgpu.commandEncoder.resolveQuerySet(t.querySet, 0, 2, t.resolveBuffer, 0);
+            mgpu.commandEncoder.copyBufferToBuffer(t.resolveBuffer, 0, t.resultBuffer, 0, 16);
+
+            t.resultBuffer.mapAsync(GPUMapMode.READ).then(() =>
+            {
+                const times = new BigInt64Array(t.resultBuffer.getMappedRange());
+                const ns = times[1] - times[0];
+                t.resultBuffer.unmap();
+                if (ns > 0n) self.gpuTimeMs = Number(ns) / 1000000;
+                self._gpuTimerPending = false;
+            }).catch(() =>
+            {
+                self._gpuTimerPending = false;
+            });
+        }
     }
 
     newFrame()
