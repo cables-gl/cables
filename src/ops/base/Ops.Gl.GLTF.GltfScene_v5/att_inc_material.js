@@ -15,7 +15,8 @@ function getTextureSamplerForIndex(gltf, idx)
     let t = gltf.json.textures[idx];
     if (t.extensions && t.extensions.KHR_texture_basisu) t = t.extensions.KHR_texture_basisu;
 
-    return gltf.json.samplers[t.sampler];
+    if (gltf.json.samplers) return gltf.json.samplers[t.sampler];
+    else return null;
 }
 
 let GltfMaterial = class

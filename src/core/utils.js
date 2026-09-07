@@ -122,7 +122,6 @@ export function cleanJson(obj)
  * @param {string} prefix
  * @return {string}
  */
-/* minimalcore:start */
 export const prefixedHash = function (str, prefix = "id")
 {
     let hash = 0;
@@ -137,8 +136,6 @@ export const prefixedHash = function (str, prefix = "id")
     }
     return prefix + "" + hash;
 };
-
-/* minimalcore:end */
 
 /**
  * generate a simple ID
