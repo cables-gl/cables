@@ -17,6 +17,7 @@ export class CgContext extends Events
 
     #patch = null;
     gApi = 0;
+    patchConfig = null;
 
     _textureslots = [];
     _pMatrixStack = new MatrixStack();
@@ -27,12 +28,16 @@ export class CgContext extends Events
     /**
      * Description
      * @param {Patch} _patch
+     * @param {import("../../core/core_patch.js").PatchConfig} [patchConfig]
      */
-    constructor(_patch)
+    constructor(_patch, patchConfig)
     {
         super();
 
-        this._log = new Logger("cg_context", { "onError": _patch.config.onError });
+        if (_patch && !patchConfig) patchConfig = _patch.config;
+        if (patchConfig) this.patchConfig = patchConfig;
+
+        this._log = new Logger("cg_context", { "onError": this.patchConfig.onError });
 
         /** @type {object} */
         this.tempData = this.frameStore = this.frameStore || {};

@@ -123,7 +123,7 @@ class CglShader extends CgShader
         this._fromUserInteraction = false;
 
         this._attrVertexPos = -1;
-        this.precision = _cgl.patch.config.glslPrecision || "highp";
+        this.precision = _cgl.patchConfig.glslPrecision || "highp";
 
         this._pMatrixState = -1;
         this._vMatrixState = -1;
@@ -1181,7 +1181,7 @@ class CglShader extends CgShader
         this._isValid = true;
         this._hasErrors = false;
 
-        if (this._cgl.patch.config.glValidateShader !== false)
+        if (this._cgl.patch?.config.glValidateShader !== false)
         {
             this.needsCheckLinkStatus = true;
             // this.checkLinkStatus(program);

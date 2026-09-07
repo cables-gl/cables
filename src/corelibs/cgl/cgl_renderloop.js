@@ -1,4 +1,4 @@
-import { RenderLoop, Patch } from "cables";
+import { RenderLoop, Patch, Timer } from "cables";
 import { Events } from "cables-shared-client";
 import { CglContext } from "./cgl_state.js";
 
@@ -10,6 +10,7 @@ export class CglRenderLoop extends RenderLoop
 
     /** @type {CglContext} */
     #cgl;
+    #timer;
 
     #renderOneFrame;
     #animReq;
@@ -31,8 +32,19 @@ export class CglRenderLoop extends RenderLoop
     {
         super();
         this.#cgl = cgl;
-        this.#patch = patch;
-        this.#patch.renderloop = this;
+
+        if (patch)
+        {
+
+            this.#patch = patch;
+            this.#patch.renderloop = this;
+
+            this.timer = this.#patch.timer;
+        }
+        else
+        {
+            this.timer = new Timer();
+        }
         this.exec(0);
     }
 
@@ -45,16 +57,16 @@ export class CglRenderLoop extends RenderLoop
         // this.emitEvent("reqAnimFrame");
         // cancelAnimationFrame(this.#animReq);
 
-        this.#patch.config.fpsLimit = this.#patch.config.fpsLimit || 0;
-        if (this.#patch.config.fpsLimit)
+        this.#cgl.patchConfig.fpsLimit = this.#cgl.patchConfig.fpsLimit || 0;
+        if (this.#cgl.patchConfig.fpsLimit)
         {
-            this._frameInterval = 1000 / this.#patch.config.fpsLimit;
+            this._frameInterval = 1000 / this.#cgl.patchConfig.fpsLimit;
         }
 
         const now = CABLES.now();
         const frameDelta = now - this._frameNext;
 
-        if (this.#patch.isEditorMode())
+        if (this.#patch && this.#patch.isEditorMode())
         {
             if (!this.#renderOneFrame)
             {
@@ -70,7 +82,7 @@ export class CglRenderLoop extends RenderLoop
         }
 
         // console.log("text", frameDelta, this.#renderOneFrame, this.#patch.config.fpsLimit === 0, frameDelta > this._frameInterval, this._frameWasdelayed);
-        if (this.#renderOneFrame || this.#patch.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
+        if (this.#renderOneFrame || this.#cgl.patchConfig.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
         {
             this.renderFrame(timestamp);
             if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
@@ -89,7 +101,7 @@ export class CglRenderLoop extends RenderLoop
             this._renderOneFrame = false;
         }
 
-        if (this.#patch.config.doRequestAnimation)
+        if (this.#patch && this.#patch.config.doRequestAnimation)
         {
             this.#animReq = this.#patch.getDocument().defaultView.requestAnimationFrame(this.exec.bind(this));
         }
@@ -100,25 +112,26 @@ export class CglRenderLoop extends RenderLoop
      */
     renderFrame(timestamp)
     {
-        // if (this.paused) return;
-        const time = this.#patch.timer.getTime();
+
+        const time = this.timer.getTime();
+
         const startTime = performance.now();
-        this.#cgl.frameStartTime = this.#patch.timer.getTime();
+        this.#cgl.frameStartTime = this.timer.getTime();
 
         const delta = timestamp - this.reqAnimTimeStamp || timestamp;
 
-        this.#patch.updateAnims(null, delta, timestamp);
+        this.#patch?.updateAnims(null, delta, timestamp);
 
         this.#cgl.profileData.profileFrameDelta = delta;
         this.reqAnimTimeStamp = timestamp;
         this.#cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
-        this.#patch.emitEvent(Patch.EVENT_RENDER_FRAME, time);
+        if (this.#patch) this.#patch.emitEvent(Patch.EVENT_RENDER_FRAME, time);
 
         this.frameNum++;
         if (this.frameNum == 1)
         {
-            if (this.#patch.config.onFirstFrameRendered) this.#patch.config.onFirstFrameRendered();
+            if (this.#patch?.config.onFirstFrameRendered) this.#patch.config.onFirstFrameRendered();
         }
 
     }

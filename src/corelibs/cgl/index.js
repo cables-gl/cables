@@ -57,7 +57,7 @@ const CGL = {
     ...CONSTANTS.BLEND_MODES,
     ...CONSTANTS.SHADER,
     ...CONSTANTS.MATH,
-    ...CONSTANTS.BLEND_MODES,
+    ...CONSTANTS.BLEND_MODES
 };
 
 window.CABLES = window.CABLES || {};

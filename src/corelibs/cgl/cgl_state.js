@@ -27,21 +27,26 @@ export class CglContext extends CgContext
 
     /**
      * @param {Patch} _patch
+     * @param {import("../../core/core_patch.js").PatchConfig} [patchConfig]
      */
-    constructor(_patch)
+    constructor(_patch = null, patchConfig)
     {
-        super(_patch);
+        super(_patch, patchConfig);
         this.gApi = CgContext.API_WEBGL;
-        this.aborted = false;
-        _patch.cgl = this;
+        if (_patch)
+        {
+            _patch.cgl = this;
+            if (!patchConfig)patchConfig = _patch.config;
+        }
         this.perfProfiler = new PerfProfiler();
+        this.aborted = false;
 
         /** @deprecated */
         this.pushMvMatrix = this.pushModelMatrix; // deprecated and wrong... still used??
         /** @deprecated */
         this.popMvMatrix = this.popmMatrix = this.popModelMatrix;// deprecated and wrong... still used??
 
-        this._log = new Logger("cgl_context", { "onError": _patch.config.onError });
+        this._log = new Logger("cgl_context", { "onError": patchConfig.onError });
 
         this.lastMesh = null;
         this.glVersion = 0;
@@ -97,17 +102,17 @@ export class CglContext extends CgContext
         this.randomTexture = null;
         this.getRandomFloatTexture = null;
 
-        this.setCanvas(_patch.config.glCanvasId || _patch.config.glCanvas || "glcanvas");
-        if (_patch.config.glCanvasResizeToWindow === true) this.setAutoResize("window");
-        if (_patch.config.glCanvasResizeToParent === true) this.setAutoResize("parent");
+        this.setCanvas(patchConfig.glCanvasId || patchConfig.glCanvas || "glcanvas");
+        if (patchConfig.glCanvasResizeToWindow === true) this.setAutoResize("window");
+        if (patchConfig.glCanvasResizeToParent === true) this.setAutoResize("parent");
 
-        if (this.aborted) _patch.aborted = true;
+        if (_patch && this.aborted) _patch.aborted = true;
 
-        _patch.on(Patch.EVENT_DISPOSE, () =>
+        _patch?.on(Patch.EVENT_DISPOSE, () =>
         {
             this.dispose();
         });
-        _patch.on("patchClearStart", () =>
+        _patch?.on("patchClearStart", () =>
         {
             this.TextureEffectMesh = null;
         });
@@ -153,15 +158,15 @@ export class CglContext extends CgContext
     {
         if (!canv) this._log.stack("_setCanvas undef");
 
-        if (!this.patch.config.canvas) this.patch.config.canvas = {};
-        if (!this.patch.config.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patch.config.canvas.preserveDrawingBuffer = true;
-        if (!this.patch.config.canvas.hasOwnProperty("premultipliedAlpha")) this.patch.config.canvas.premultipliedAlpha = false;
-        if (!this.patch.config.canvas.hasOwnProperty("alpha")) this.patch.config.canvas.alpha = false;
+        if (!this.patchConfig.canvas) this.patchConfig.canvas = {};
+        if (!this.patchConfig.canvas.hasOwnProperty("preserveDrawingBuffer")) this.patchConfig.canvas.preserveDrawingBuffer = true;
+        if (!this.patchConfig.canvas.hasOwnProperty("premultipliedAlpha")) this.patchConfig.canvas.premultipliedAlpha = false;
+        if (!this.patchConfig.canvas.hasOwnProperty("alpha")) this.patchConfig.canvas.alpha = false;
 
-        this.patch.config.canvas.stencil = true;
+        this.patchConfig.canvas.stencil = true;
 
-        if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
-        if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
+        if (this.patchConfig.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patchConfig.clearCanvasColor;
+        if (this.patchConfig.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patchConfig.clearCanvasDepth;
 
         // safari stuff.......... ipad is not detectable,just do it for any safari
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))// && ((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i))))
@@ -170,7 +175,7 @@ export class CglContext extends CgContext
             this.glUseHalfFloatTex = true; // 2026 did they fix it ? did hell freeze over ?? maybe remove all the workarouonds ??????
         }
 
-        if (!this.patch.config.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patch.config.canvas);
+        if (!this.patchConfig.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patchConfig.canvas);
 
         if (!this.gl || this.gl.isContextLost())
         {
@@ -190,7 +195,7 @@ export class CglContext extends CgContext
         }
         else
         {
-            this.gl = canv.getContext("webgl", this.patch.config.canvas) || canv.getContext("experimental-webgl", this.patch.config.canvas);
+            this.gl = canv.getContext("webgl", this.patchConfig.canvas) || canv.getContext("experimental-webgl", this.patchConfig.canvas);
             this.glVersion = 1;
 
             // safari
@@ -203,7 +208,7 @@ export class CglContext extends CgContext
             // @ts-ignore
             if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
             {
-                if (!this.patch.config.canvas.hasOwnProperty("powerPreference")) this.patch.config.canvas.powerPreference = "high-performance";
+                if (!this.patchConfig.canvas.hasOwnProperty("powerPreference")) this.patchConfig.canvas.powerPreference = "high-performance";
             }
 
             this.enableExtension("OES_standard_derivatives");
@@ -381,7 +386,7 @@ export class CglContext extends CgContext
 
     endFrame()
     {
-        if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
+        if (this.patch?.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
         this.setPreviousShader();
 
@@ -750,7 +755,7 @@ export class CglContext extends CgContext
             if (this.canvas.id.includes("glGuiCanvas"))
                 if (!this._loggedGlError)
                 {
-                    this.patch.printTriggerStack();
+                    this.patch?.printTriggerStack();
                     this._log.stack("glerror");
                     this._loggedGlError = true;
                 }

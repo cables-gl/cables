@@ -40,7 +40,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [height]
  * @property {number} [width]
  * @property {Translation} [translate]
- * @property {string|number} [subPatch]
+ * @property {string} [subPatch]
  * @property {string} [comment_title]
  * @property {boolean} [highlighted]
  * @property {boolean} [highlightedMore]
