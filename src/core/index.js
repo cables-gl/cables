@@ -25,6 +25,7 @@ CABLES = {
     ...CABLES,
 
     ...CONSTANTS.OP, // @deprecated
+    ...CONSTANTS.PACO, // @deprecated
     ...CONSTANTS.ANIM // @deprecated
 };
 

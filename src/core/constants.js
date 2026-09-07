@@ -64,27 +64,7 @@ export const CONSTANTS = {
      {
          "PORT_DIR_IN": 0,
          "PORT_DIR_OUT": 1
-     },
-
-    "PACO": {
-        "PACO_CLEAR": 0,
-        "PACO_VALUECHANGE": 1,
-        "PACO_OP_DELETE": 2,
-        "PACO_UNLINK": 3,
-        "PACO_LINK": 4,
-        "PACO_LOAD": 5,
-        "PACO_OP_CREATE": 6,
-        "PACO_OP_ENABLE": 7,
-        "PACO_OP_DISABLE": 8,
-        "PACO_UIATTRIBS": 9,
-        "PACO_VARIABLES": 10,
-        "PACO_TRIGGERS": 11,
-        "PACO_PORT_SETVARIABLE": 12,
-        "PACO_PORT_SETANIMATED": 13,
-        "PACO_PORT_ANIM_UPDATED": 14,
-        "PACO_DESERIALIZE": 15,
-        "PACO_OP_RELOAD": 16
-    }
+     }
 
     /* minimalcore:end */
 };
