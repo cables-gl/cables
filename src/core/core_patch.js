@@ -567,17 +567,17 @@ export class Patch extends Events
     // /**
     //  * @param {Op} op
     //  */
-    // removeOnAnimFrame(op)
-    // {
-    //     for (let i = 0; i < this.animFrameOps.length; i++)
-    //     {
-    //         if (this.animFrameOps[i] == op)
-    //         {
-    //             this.animFrameOps.splice(i, 1);
-    //             return;
-    //         }
-    //     }
-    // }
+    removeOnAnimFrame(op)
+    {
+        for (let i = 0; i < this.animFrameOps.length; i++)
+        {
+            if (this.animFrameOps[i] == op)
+            {
+                this.animFrameOps.splice(i, 1);
+                return;
+            }
+        }
+    }
 
     // /**
     //  * @param {function} cb

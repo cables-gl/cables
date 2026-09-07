@@ -56,8 +56,9 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [comment_text]
  * @property {boolean} [createdLocally]
  * @property {boolean} [stretchPorts]
- * @property {boolean} [vizLayerMaxZoom ]
-*/
+ * @property {boolean} [vizLayerMaxZoom]
+ * @property {boolean} [widthOnlyGrow]
+ */
 
 /**
  * @typedef OpTempData
