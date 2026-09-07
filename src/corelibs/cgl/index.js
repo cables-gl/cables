@@ -1,4 +1,5 @@
 import { Anim, Patch } from "cables";
+import { quat } from "gl-matrix";
 import { Framebuffer2 } from "./cgl_framebuffer2.js";
 import { Marker, WireCube, WirePoint } from "./cgl_marker.js";
 import { Mesh, MESH } from "./cgl_mesh.js";
@@ -123,4 +124,4 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     return q;
 };
 
-export { initCGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2 };
+export { initCGL, Texture, Shader, Geometry, Mesh, Uniform, Framebuffer2, CglContext };

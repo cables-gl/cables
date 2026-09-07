@@ -23,6 +23,7 @@ export class CglRenderLoop extends RenderLoop
     reqAnimTimeStamp = 0;
     _frameWasdelayed = true;
     aborted = false;
+    paused = false;
 
     /**
      * @param {CglContext} cgl
@@ -46,6 +47,7 @@ export class CglRenderLoop extends RenderLoop
             this.timer = new Timer();
         }
         this.exec(0);
+
     }
 
     /**
