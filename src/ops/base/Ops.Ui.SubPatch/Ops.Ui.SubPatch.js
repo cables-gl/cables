@@ -4,7 +4,6 @@ op.dynOut = op.addOutPort(new CABLES.Port(op, "create port out", CABLES.Port.TYP
 const dataStr = op.addInPort(new CABLES.Port(op, "dataStr", CABLES.Port.TYPE_VALUE, { "display": "readonly" }));
 op.patchId = op.addInPort(new CABLES.Port(op, "patchId", CABLES.Port.TYPE_VALUE, { "display": "readonly" }));
 
-
 dataStr.setUiAttribs({ "hideParam": true });
 op.patchId.setUiAttribs({ "hidePort": true });
 
@@ -308,7 +307,7 @@ function getSubPatchOutputOp()
 {
     let patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");
 
-    if (!patchOutputOP)
+    if (!patchOutputOP && CABLES.UI)
     {
         op.patch.addOp("Ops.Ui.PatchOutput", { "subPatch": op.patchId.get(), "translate": { "x": 0, "y": 0 } });
         patchOutputOP = op.patch.getSubPatchOp(op.patchId.get(), "Ops.Ui.PatchOutput");

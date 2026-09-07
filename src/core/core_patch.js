@@ -447,10 +447,11 @@ export class Patch extends Events
 
                 if (!opObj)
                 {
-                    this.emitEvent("criticalError", { "title": "Unknown op: " + objName, "text": "Unknown op: " + objName });
+                    let msg = "could not get op by objname: " + objName;
+                    this.emitEvent("criticalError", { "title": msg, "text": msg });
 
-                    this.#log.error("unknown op: " + objName);
-                    throw new Error("unknown op: " + objName);
+                    this.#log.error(msg);
+                    throw new Error(msg);
                 }
                 else
                 {
