@@ -114,7 +114,8 @@ export class Op extends Events
     /** @type {OpTempData} */
     tempData = {};
 
-    storage = {}; // op-specific data to be included in export
+    /** @type {Object.<string, any>} op-specific data to be included in export */
+    storage = {};
 
     /** @type {Array<Port>} */
     portsIn = [];
