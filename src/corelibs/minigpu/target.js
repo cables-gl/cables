@@ -151,16 +151,19 @@ export class RenderTarget
             mgpu.commandEncoder.resolveQuerySet(t.querySet, 0, 2, t.resolveBuffer, 0);
             mgpu.commandEncoder.copyBufferToBuffer(t.resolveBuffer, 0, t.resultBuffer, 0, 16);
 
-            t.resultBuffer.mapAsync(GPUMapMode.READ).then(() =>
+            queueMicrotask(() =>
             {
-                const times = new BigInt64Array(t.resultBuffer.getMappedRange());
-                const ns = times[1] - times[0];
-                t.resultBuffer.unmap();
-                if (ns > 0n) self.gpuTimeMs = Number(ns) / 1000000;
-                self._gpuTimerPending = false;
-            }).catch(() =>
-            {
-                self._gpuTimerPending = false;
+                t.resultBuffer.mapAsync(GPUMapMode.READ).then(() =>
+                {
+                    const times = new BigInt64Array(t.resultBuffer.getMappedRange());
+                    const ns = times[1] - times[0];
+                    t.resultBuffer.unmap();
+                    if (ns > 0n) self.gpuTimeMs = Number(ns) / 1000000;
+                    self._gpuTimerPending = false;
+                }).catch(() =>
+                {
+                    self._gpuTimerPending = false;
+                });
             });
         }
     }
