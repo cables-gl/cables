@@ -1387,7 +1387,7 @@ class CglShader extends CgShader
      * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
      * @param {Uniform} uniform texture uniform
      * @param {Texture} t texture
-     * @param {number} type texture type, can be ignored when TEXTURE_2D
+     * @param {number} [type] texture type, can be ignored when TEXTURE_2D
      */
     pushTexture(uniform, t, type)
     {

@@ -10,7 +10,6 @@ export class CglRenderLoop extends RenderLoop
 
     /** @type {CglContext} */
     #cgl;
-    #timer;
 
     #renderOneFrame;
     #animReq;
