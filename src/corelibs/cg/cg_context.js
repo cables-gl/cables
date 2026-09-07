@@ -39,6 +39,8 @@ export class CgContext extends Events
 
         this._log = new Logger("cg_context", { "onError": this.patchConfig.onError });
 
+        this.patch = _patch;
+
         /** @type {object} */
         this.tempData = this.frameStore = this.frameStore || {};
         this.fpsCounter = new FpsCounter();
@@ -50,7 +52,6 @@ export class CgContext extends Events
         this.maxTexSize = 2048;
         this._viewPort = [0, 0, 1, 1];
         this._viewPortStack = [];
-        this.patch = _patch;
         this.autoReSize = true;
 
         this.DEPTH_COMPARE_FUNC_NEVER = 0;
@@ -184,7 +185,7 @@ export class CgContext extends Events
 
     updateSize()
     {
-        this.cgCanvas.updateSize();
+        if (this.cgCanvas) this.cgCanvas.updateSize();
     }
 
     /**
