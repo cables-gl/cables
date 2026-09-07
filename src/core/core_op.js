@@ -14,6 +14,14 @@ import { showUiErrors } from "./uierrors.js";
  */
 
 /**
+ * @typedef TranslationTemp
+ * @property {number} [x]
+ * @property {number} [y]
+ * @property {number} [w]
+ * @property {number} [h]
+ */
+
+/**
  * @typedef OpAttribs
  * @property {string[]} [tags] tags
  */
@@ -40,7 +48,10 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [height]
  * @property {number} [width]
  * @property {Translation} [translate]
+ * @property {TranslationTemp} [translateTemp]
  * @property {string|number} [subPatch]
+ * @property {object} [subPatchOp]
+ * @property {string} [tempSubOldOpId]
  * @property {string} [comment_title]
  * @property {boolean} [highlighted]
  * @property {boolean} [highlightedMore]
