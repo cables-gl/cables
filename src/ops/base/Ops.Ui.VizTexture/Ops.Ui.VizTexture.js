@@ -27,6 +27,11 @@ let colorString = "";
 let firstTime = true;
 const sizeImg = [100, 100];
 
+inTex.onLinkChanged = () =>
+{
+    canvas = null;
+    ctx = null;
+};
 inRGB.onChange =
     inRgbe.onChange =
     inAlpha.onChange =
@@ -85,25 +90,15 @@ op.renderVizLayer = (_ctx, _layer) =>
 
     if (canvas && canvas.width > 0)
     {
-        // _ctx.drawImage(canvas,
-        //     layer.x, layer.y,
-
-        //     layer.width, layer.width * (layer.width / layer.height));
-
         drawImageContained(_ctx, canvas, layer.width, layer.height, layer.x, layer.y);
     }
     else
     {
-        _ctx.fillStyle = "#f22";
+        _ctx.fillStyle = "#444";
         _ctx.fillRect(
             layer.x, layer.y,
             layer.width, layer.height);
-
-        // const fontSize = layer.height * 0.7;
-        // ctx.font = "normal " + fontSize + "px sourceCodePro";
-        // ctx.fillText("trsneisrtnei", layer.x, layer.y + fontSize);
     }
-    // console.log("canvas", canvas);
 
 };
 
@@ -132,365 +127,345 @@ function drawImageContained(ctx, img, maxWidth, maxHeight, offsetX = 0, offsetY 
 
 }
 
-op.onAnimFramePre = () =>
-{
-    if (!inTex.isLinked()) return;
-    if (!layer) return;
-
-    // console.log("preeeeeeeeeee", canvas, this);
-    const port = inTex;
-    const texSlot = 5;
-    const texSlotCubemap = texSlot + 1;
-
-    const perf = gui.uiProfiler.start("previewlayer texture");
-    const cgl = port.op.patch.cgl;
-
-    if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
-    port.op.patch.cgl.profileData.count("vizTexPreviews");
-
-    const portTex = port.get() || CGL.Texture.getEmptyTexture(cgl);
-
-    if (!this._mesh)
+if (CABLES.UI)
+    op.onAnimFramePre = () =>
     {
-        const geom = new CGL.Geometry("vizTexture rect");
-        geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
-        geom.texCoords = [
-            1.0, 1.0,
-            0.0, 1.0,
-            1.0, 0.0,
-            0.0, 0.0];
-        geom.verticesIndices = [0, 1, 2, 3, 1, 2];
-        this._mesh = new CGL.Mesh(cgl, geom);
-    }
-    if (!this._shader)
-    {
-        this._shader = new CGL.Shader(cgl, "glpreviewtex");
-        this._shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-        this._shader.setSource(attachments.viztex_vert, attachments.viztex_frag);
-        this._shaderTexUniform = new CGL.Uniform(this._shader, "t", "tex", texSlot);
-        this._shaderTexCubemapUniform = new CGL.Uniform(this._shader, "tc", "cubeMap", texSlotCubemap);
-        shader = this._shader;
-        updateDefines();
+        if (!inTex.isLinked()) return;
+        if (!layer) return;
 
-        this._shaderTexUniformW = new CGL.Uniform(this._shader, "f", "width", portTex.width);
-        this._shaderTexUniformH = new CGL.Uniform(this._shader, "f", "height", portTex.height);
-        this._shaderTypeUniform = new CGL.Uniform(this._shader, "f", "type", 0);
-        this._shaderTimeUniform = new CGL.Uniform(this._shader, "f", "time", 0);
-        this._shaderLodUniform = new CGL.Uniform(this._shader, "f", "lod", inLod);
-    }
+        // console.log("preeeeeeeeeee", canvas, this);
+        const port = inTex;
+        const texSlot = 5;
+        const texSlotCubemap = texSlot + 1;
 
-    cgl.pushPMatrix();
-    const sizeTex = [portTex.width, portTex.height];
-    const small = port.op.patch.cgl.canvasWidth > sizeTex[0] && port.op.patch.cgl.canvasHeight > sizeTex[1];
+        const perf = gui.uiProfiler.start("previewlayer texture");
+        const cgl = port.op.patch.cgl;
 
-    if (small)
-        mat4.ortho(cgl.pMatrix, 0, port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight, 0, 0.001, 11);
-    else
-        mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
+        if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
+        port.op.patch.cgl.profileData.count("vizTexPreviews");
 
-    const oldTex = cgl.getTexture(texSlot);
-    const oldTexCubemap = cgl.getTexture(texSlotCubemap);
+        const portTex = port.get() || CGL.Texture.getEmptyTexture(cgl);
 
-    let iTexType = inType.get();
-    let texType = 0;
-    if (portTex)
-    {
-        if (iTexType == "Automatic")
+        if (!this._mesh)
         {
-            if (portTex.cubemap) texType = 1;
-            if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
+            const geom = new CGL.Geometry("vizTexture rect");
+            geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
+            geom.texCoords = [
+                1.0, 1.0,
+                0.0, 1.0,
+                1.0, 0.0,
+                0.0, 0.0];
+            geom.verticesIndices = [0, 1, 2, 3, 1, 2];
+            this._mesh = new CGL.Mesh(cgl, geom);
         }
-        else if (iTexType == "Depth")
+        if (!this._shader)
         {
-            texType = 2;
-        }
-        else if (iTexType == "Cubemap")
-        {
-            texType = 1;
+            this._shader = new CGL.Shader(cgl, "glpreviewtex");
+            this._shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+            this._shader.setSource(attachments.viztex_vert, attachments.viztex_frag);
+            this._shaderTexUniform = new CGL.Uniform(this._shader, "t", "tex", texSlot);
+            this._shaderTexCubemapUniform = new CGL.Uniform(this._shader, "tc", "cubeMap", texSlotCubemap);
+            shader = this._shader;
+            updateDefines();
+
+            this._shaderTexUniformW = new CGL.Uniform(this._shader, "f", "width", portTex.width);
+            this._shaderTexUniformH = new CGL.Uniform(this._shader, "f", "height", portTex.height);
+            this._shaderTypeUniform = new CGL.Uniform(this._shader, "f", "type", 0);
+            this._shaderTimeUniform = new CGL.Uniform(this._shader, "f", "time", 0);
+            this._shaderLodUniform = new CGL.Uniform(this._shader, "f", "lod", inLod);
         }
 
-        if (texType == 0 || texType == 2)
-        {
-            cgl.setTexture(texSlot, portTex.tex);
-            cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-        }
-        else if (texType == 1)
-        {
-            cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-        }
+        cgl.pushPMatrix();
+        const sizeTex = [portTex.width, portTex.height];
+        const small = port.op.patch.cgl.canvasWidth > sizeTex[0] && port.op.patch.cgl.canvasHeight > sizeTex[1];
 
-        timer.update();
-        this._shaderTimeUniform.setValue(timer.get());
-
-        this._shaderTypeUniform.setValue(texType);
-        let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
-
-        // cgl.gl.clearColor(0, 0, 0, 0);
-        // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-        cgl.pushModelMatrix();
         if (small)
-        {
-            s = sizeTex;
-            mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-            mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
-        }
-        this._mesh.render(this._shader);
-        cgl.popModelMatrix();
-
-        if (texType == 0) cgl.setTexture(texSlot, oldTex);
-        if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
-
-        cgl.popPMatrix();
-        cgl.resetViewPort();
-        // console.log("ind", ).width);
-        const stretch = false;
-        // if (!stretch)
-        // {
-        if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
+            mat4.ortho(cgl.pMatrix, 0, port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight, 0, 0.001, 11);
         else
-        {
-            sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
+            mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
 
-            if (sizeImg[1] > layer.height)
+        const oldTex = cgl.getTexture(texSlot);
+        const oldTexCubemap = cgl.getTexture(texSlotCubemap);
+
+        let iTexType = inType.get();
+        let texType = 0;
+        if (portTex)
+        {
+            if (iTexType == "Automatic")
             {
-                const r = layer.height / sizeImg[1];
-                sizeImg[0] *= r;
-                sizeImg[1] *= r;
+                if (portTex.cubemap) texType = 1;
+                if (portTex.textureType == CGL.Texture.TYPE_DEPTH) texType = 2;
             }
-        }
-
-        const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
-
-        // ctx.imageSmoothingEnabled = !small || !scaledDown;
-        if (!ctx)
-        {
-            canvas = document.createElement("canvas");
-            ctx = canvas.getContext("2d");
-        }
-        // console.log("sizeimg", sizeTex);
-        canvas.width = sizeTex[0];
-        canvas.height = sizeTex[1];
-        ctx.imageSmoothingEnabled = true;
-
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(layer.x, layer.y - 10, 10, 10);
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(layer.x, layer.y - 10, 5, 5);
-        ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
-
-        let layerHeight = layer.height;
-        let numX = (10 * layer.width / layerHeight * layer.scale) * 2;
-        let numY = (numX * layer.height / layer.width);
-        let stepY = (layerHeight / numY);
-        let stepX = (layer.width / numX);
-
-        for (let x = 0; x < numX + 1; x++)
-            for (let y = 0; y < numY + 1; y++)
+            else if (iTexType == "Depth")
             {
-                if ((x + y) % 2 == 0) ctx.fillStyle = "#333333";
-                else ctx.fillStyle = "#393939";
-                ctx.fillRect(layer.x - layer.x % stepX * 2 + stepX * x, layer.y - layer.y % stepX * 2 + stepY * y, stepX, stepY);
+                texType = 2;
+            }
+            else if (iTexType == "Cubemap")
+            {
+                texType = 1;
             }
 
-        ctx.fillStyle = "#222";
-        const borderLeft = (layer.width - sizeImg[0]) / 2;
-        const borderTop = (layerHeight - sizeImg[1]) / 2;
-
-        let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
-        let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
-        let imgSizeW = sizeImg[0];
-        let imgSizeH = sizeImg[1];
-
-        if (layerHeight - sizeImg[1] < 0)
-        {
-            imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
-            imgPosY = layer.y;
-            imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
-            imgSizeH = layerHeight;
-        }
-
-        ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
-        ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
-        ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
-        ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
-
-        if (cgl.canvas && cgl.canvasWidth > 0 && cgl.canvasHeight > 0 && cgl.canvas.width > 0 && cgl.canvas.height > 0)
-        {
-            try
+            if (texType == 0 || texType == 2)
             {
-                const bigPixels = imgSizeW / s[0] > 3 || imgSizeH / s[1] > 3;
-                const veryBigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
+                cgl.setTexture(texSlot, portTex.tex);
+                cgl.setTexture(texSlotCubemap, this._emptyCubemap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            }
+            else if (texType == 1)
+            {
+                cgl.setTexture(texSlotCubemap, portTex.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            }
 
-                if (sizeTex[1] == 1)
+            timer.update();
+            this._shaderTimeUniform.setValue(timer.get());
+
+            this._shaderTypeUniform.setValue(texType);
+            let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
+
+            cgl.gl.clearColor(0, 0, 0, 0);
+            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+
+            cgl.pushModelMatrix();
+            if (small)
+            {
+                s = sizeTex;
+                mat4.translate(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+                mat4.scale(cgl.mMatrix, cgl.mMatrix, [sizeTex[0] / 2, sizeTex[1] / 2, 0]);
+            }
+            this._mesh.render(this._shader);
+            cgl.popModelMatrix();
+
+            if (texType == 0) cgl.setTexture(texSlot, oldTex);
+            if (texType == 1) cgl.setTexture(texSlotCubemap, oldTexCubemap);
+
+            cgl.popPMatrix();
+            cgl.resetViewPort();
+            // console.log("ind", ).width);
+            const stretch = false;
+            // if (!stretch)
+            // {
+            if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
+            else
+            {
+                sizeImg[1] = layer.width * (sizeTex[1] / sizeTex[0]);
+
+                if (sizeImg[1] > layer.height)
                 {
-                    ctx.imageSmoothingEnabled = false; // workaround filtering problems
-                    ctx.drawImage(cgl.canvas,
-                        0,
-                        0,
-                        s[0],
-                        s[1]);
-                    // layer.x,
-                    // layer.y,
-                    // layer.width,
-                    // layerHeight); // workaround filtering problems
-                    ctx.imageSmoothingEnabled = true;
+                    const r = layer.height / sizeImg[1];
+                    sizeImg[0] *= r;
+                    sizeImg[1] *= r;
                 }
-                else
-                if (sizeTex[0] == 1 || inLod > 0)
+            }
+
+            const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
+
+            if (!ctx)
+            {
+                canvas = document.createElement("canvas");
+                ctx = canvas.getContext("2d");
+            }
+
+            canvas.width = sizeTex[0];
+            canvas.height = sizeTex[1];
+
+            ctx.imageSmoothingEnabled = !small || !scaledDown;
+            // ctx.imageSmoothingEnabled = true;
+
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(layer.x, layer.y - 10, 10, 10);
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(layer.x, layer.y - 10, 5, 5);
+            ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
+
+            let layerHeight = layer.height;
+            let numX = (10 * layer.width / layerHeight * layer.scale) * 2;
+            let numY = (numX * layer.height / layer.width);
+            let stepY = (layerHeight / numY);
+            let stepX = (layer.width / numX);
+
+            for (let x = 0; x < numX + 1; x++)
+                for (let y = 0; y < numY + 1; y++)
                 {
-                    ctx.imageSmoothingEnabled = false; // workaround filtering problems
-                    ctx.drawImage(cgl.canvas,
-                        0,
-                        0,
-                        s[0],
-                        s[1]);
-                    // layer.x,
-                    // layer.y,
-                    // layer.width,
-                    // layerHeight);
-                    ctx.imageSmoothingEnabled = true;
+                    if ((x + y) % 2 == 0) ctx.fillStyle = "#333333";
+                    else ctx.fillStyle = "#393939";
+                    ctx.fillRect(layer.x - layer.x % stepX * 2 + stepX * x, layer.y - layer.y % stepX * 2 + stepY * y, stepX, stepY);
                 }
-                else
-                if (sizeImg[0] != 0 && sizeImg[1] != 0 && layer.width != 0 && layerHeight != 0 && imgSizeW != 0 && imgSizeH != 0)
+
+            ctx.fillStyle = "#222";
+            const borderLeft = (layer.width - sizeImg[0]) / 2;
+            const borderTop = (layerHeight - sizeImg[1]) / 2;
+
+            let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
+            let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
+            let imgSizeW = sizeImg[0];
+            let imgSizeH = sizeImg[1];
+
+            if (layerHeight - sizeImg[1] < 0)
+            {
+                imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
+                imgPosY = layer.y;
+                imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
+                imgSizeH = layerHeight;
+            }
+
+            ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
+            ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
+            ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
+            ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
+
+            if (cgl.canvas && cgl.canvasWidth > 0 && cgl.canvasHeight > 0 && cgl.canvas.width > 0 && cgl.canvas.height > 0)
+            {
+                try
                 {
-                    ctx.imageSmoothingEnabled = !bigPixels;
+                    const bigPixels = imgSizeW / s[0] > 3 || imgSizeH / s[1] > 3;
+                    const veryBigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
 
-                    ctx.drawImage(cgl.canvas,
-                        0,
-                        0,
-                        canvas.width,
-                        canvas.height
-                    );
-                }
-
-                ctx.drawImage(cgl.canvas,
-                    0,
-                    0,
-                    s[0],
-                    s[1],
-                    0,
-                    0,
-                    canvas.width,
-                    canvas.height);
-                if (veryBigPixels)
-                {
-                    const stepx = imgSizeW / s[0];
-                    const stepy = imgSizeH / s[1];
-
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.lineWidth = 1;
-                    ctx.globalAlpha = 0.5;
-                    ctx.beginPath();
-
-                    for (let x = 0; x <= s[0]; x++)
+                    if (sizeTex[1] == 1)
                     {
-                        ctx.moveTo(imgPosX + x * stepx, imgPosY);
-                        ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                        ctx.imageSmoothingEnabled = false; // workaround filtering problems
+                        ctx.drawImage(cgl.canvas,
+                            0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
+                        // layer.x,
+                        // layer.y,
+                        // layer.width,
+                        // layerHeight); // workaround filtering problems
+                        ctx.imageSmoothingEnabled = true;
                     }
-
-                    for (let y = 0; y <= s[1]; y++)
+                    else
+                    if (sizeTex[0] == 1 || inLod > 0)
                     {
-                        ctx.moveTo(imgPosX, imgPosY + y * stepy);
-                        ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                        ctx.imageSmoothingEnabled = false; // workaround filtering problems
+                        ctx.drawImage(cgl.canvas,
+                            0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
+                        // layer.x,
+                        // layer.y,
+                        // layer.width,
+                        // layerHeight);
+                        ctx.imageSmoothingEnabled = true;
                     }
+                    else
+                    {
+                        ctx.imageSmoothingEnabled = !bigPixels;
+                        ctx.drawImage(cgl.canvas,
+                            0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
+                    }
+                    if (veryBigPixels)
+                    {
+                        const stepx = imgSizeW / s[0];
+                        const stepy = imgSizeH / s[1];
 
-                    ctx.strokeStyle = "#555";
-                    ctx.stroke();
-                    ctx.globalAlpha = 1;
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.lineWidth = 1;
+                        ctx.globalAlpha = 0.5;
+                        ctx.beginPath();
+
+                        for (let x = 0; x <= s[0]; x++)
+                        {
+                            ctx.moveTo(imgPosX + x * stepx, imgPosY);
+                            ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                        }
+
+                        for (let y = 0; y <= s[1]; y++)
+                        {
+                            ctx.moveTo(imgPosX, imgPosY + y * stepy);
+                            ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                        }
+
+                        ctx.strokeStyle = "#555";
+                        ctx.stroke();
+                        ctx.globalAlpha = 1;
+                    }
+                }
+                catch (e)
+                {
+                    console.error("canvas drawimage exception...", e);
+                }
+                // }
+            }
+
+            let info = "";
+            if (inShowInfo.get() && port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
+            outInfo.set(info);
+
+            if (inPickColor.get())
+            {
+                info += colorString + "\n";
+
+                const x = imgPosX + imgSizeW * inX.get();
+                const y = imgPosY + imgSizeH * inY.get();
+
+                for (let ii = 0; ii < 2; ii++)
+                {
+                    if (ii == 0) ctx.fillStyle = "#000";
+                    else ctx.fillStyle = "#fff";
+
+                    ctx.fillRect(
+                        x - 1 + ii,
+                        y - 10 + ii,
+                        1,
+                        20);
+
+                    ctx.fillRect(
+                        x - 10 + ii,
+                        y - 1 + ii,
+                        20,
+                        1);
                 }
             }
-            catch (e)
+
+            if (inShowInfo.get() || inPickColor.get())
             {
-                console.error("canvas drawimage exception...", e);
+                op.setUiAttrib({ "comment": info });
             }
-            // }
-        }
 
-        let info = "";
-        if (inShowInfo.get() && port.get() && port.get().getInfoOneLine) info += port.get().getInfoOneLine() + "\n";
-        outInfo.set(info);
-
-        if (inPickColor.get())
-        {
-            info += colorString + "\n";
-
-            const x = imgPosX + imgSizeW * inX.get();
-            const y = imgPosY + imgSizeH * inY.get();
-
-            for (let ii = 0; ii < 2; ii++)
+            if (inPickColor.get())
             {
-                if (ii == 0) ctx.fillStyle = "#000";
-                else ctx.fillStyle = "#fff";
+                const gl = cgl.gl;
 
-                ctx.fillRect(
-                    x - 1 + ii,
-                    y - 10 + ii,
-                    1,
-                    20);
-
-                ctx.fillRect(
-                    x - 10 + ii,
-                    y - 1 + ii,
-                    20,
-                    1);
-            }
-        }
-
-        if (inShowInfo.get() || inPickColor.get())
-        {
-            op.setUiAttrib({ "comment": info });
-        }
-
-        if (inPickColor.get())
-        {
-            const gl = cgl.gl;
-
-            const realTexture = inTex.get();
-            if (!realTexture)
-            {
-                colorString = "";
-                return;
-            }
-            if (!fb) fb = gl.createFramebuffer();
-            if (!pixelReader) pixelReader = new CGL.PixelReader();
-
-            gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
-            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-
-            pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
-            {
-                if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
+                const realTexture = inTex.get();
+                if (!realTexture)
                 {
-                    colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
-                    if (!isNaN(pixel[1])) colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
-                    if (!isNaN(pixel[2])) colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
-                    if (!isNaN(pixel[3])) colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
-                    colorString += "\n";
+                    colorString = "";
+                    return;
+                }
+                if (!fb) fb = gl.createFramebuffer();
+                if (!pixelReader) pixelReader = new CGL.PixelReader();
 
-                    if (realTexture.pixelFormat.indexOf("ubyte") > 0)
+                gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+                gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, realTexture.tex, 0);
+                gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+                pixelReader.read(cgl, fb, realTexture.pixelFormat, inX.get() * realTexture.width, realTexture.height - inY.get() * realTexture.height, 1, 1, (pixel) =>
+                {
+                    if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
                     {
-                        colorString += "Pixel UByte: ";
-                        colorString += Math.round(pixel[0]);
-                        if (!isNaN(pixel[1])) colorString += ", " + Math.round(pixel[1]);
-                        if (!isNaN(pixel[2])) colorString += ", " + Math.round(pixel[2]);
-                        if (!isNaN(pixel[3])) colorString += ", " + Math.round(pixel[3]);
+                        colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
+                        if (!isNaN(pixel[1])) colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
+                        if (!isNaN(pixel[2])) colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
+                        if (!isNaN(pixel[3])) colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
+                        colorString += "\n";
 
+                        if (realTexture.pixelFormat.indexOf("ubyte") > 0)
+                        {
+                            colorString += "Pixel UByte: ";
+                            colorString += Math.round(pixel[0]);
+                            if (!isNaN(pixel[1])) colorString += ", " + Math.round(pixel[1]);
+                            if (!isNaN(pixel[2])) colorString += ", " + Math.round(pixel[2]);
+                            if (!isNaN(pixel[3])) colorString += ", " + Math.round(pixel[3]);
+
+                            colorString += "\n";
+                        }
+                    }
+                    else
+                    {
+                        colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
                         colorString += "\n";
                     }
-                }
-                else
-                {
-                    colorString = "Pixel Float: " + Math.round(pixel[0] * 100) / 100 + ", " + Math.round(pixel[1] * 100) / 100 + ", " + Math.round(pixel[2] * 100) / 100 + ", " + Math.round(pixel[3] * 100) / 100;
-                    colorString += "\n";
-                }
-            });
+                });
+            }
         }
-    }
 
-    // cgl.gl.clearColor(0, 0, 0, 0);
-    // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        cgl.gl.clearColor(0, 0, 0, 0);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    perf.finish();
-};
+        perf.finish();
+    };
