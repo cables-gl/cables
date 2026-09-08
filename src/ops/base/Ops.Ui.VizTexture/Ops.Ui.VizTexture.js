@@ -83,11 +83,15 @@ op.renderVizLayer = (_ctx, _layer) =>
     if (!_layer) return;
     layer = _layer;
 
-    if (canvas && canvas.width > 0) _ctx.drawImage(canvas,
-        layer.x, layer.y,
+    if (canvas && canvas.width > 0)
+    {
+        // _ctx.drawImage(canvas,
+        //     layer.x, layer.y,
 
-        layer.width, layer.width * (layer.width / layer.height));
+        //     layer.width, layer.width * (layer.width / layer.height));
 
+        drawImageContained(_ctx, canvas, layer.width, layer.height, layer.x, layer.y);
+    }
     else
     {
         _ctx.fillStyle = "#f22";
@@ -102,6 +106,31 @@ op.renderVizLayer = (_ctx, _layer) =>
     // console.log("canvas", canvas);
 
 };
+
+function drawImageContained(ctx, img, maxWidth, maxHeight, offsetX = 0, offsetY = 0)
+{
+    const imgRatio = img.width / img.height;
+    const maxRatio = maxWidth / maxHeight;
+
+    let drawWidth, drawHeight;
+
+    if (imgRatio > maxRatio)
+    {
+        drawWidth = maxWidth;
+        drawHeight = maxWidth / imgRatio;
+    }
+    else
+    {
+        drawHeight = maxHeight;
+        drawWidth = maxHeight * imgRatio;
+    }
+
+    const x = offsetX + (maxWidth - drawWidth) / 2;
+    const y = offsetY + (maxHeight - drawHeight) / 2;
+
+    ctx.drawImage(img, x, y, drawWidth, drawHeight);
+
+}
 
 op.onAnimFramePre = () =>
 {

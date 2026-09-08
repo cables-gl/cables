@@ -233,8 +233,11 @@ export class Patch extends Events
     /** @param {string | number} patchId */
     clearSubPatchCache(patchId) {}
 
-    /** @param {string | number} patchId */
-    _subPatchCacheAdd(patchId) {}
+    /**
+     * @param {string | number} patchId
+     * @param {Op<any>} op
+     */
+    _subPatchCacheAdd(patchId, op) {}
 
     /** @deprecated */
     renderOneFrame() { }
