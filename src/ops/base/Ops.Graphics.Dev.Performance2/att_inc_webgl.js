@@ -4,8 +4,6 @@ let query = null;
 let glqueryagain = 0;
 let finishedQuery = true;
 
-if (op.patch.cgl) op.patch.cgl.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
-
 function glBeginFrame()
 {
     if (!query)

@@ -423,6 +423,7 @@ export class CglContext extends CgContext
         this.emitEvent("endframe");
 
         this.fpsCounter.endFrame();
+        this.perfProfiler.count("fps", this.fpsCounter.stats.fps);
     }
 
     logStackError(str)

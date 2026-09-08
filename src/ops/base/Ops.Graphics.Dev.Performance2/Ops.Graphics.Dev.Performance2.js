@@ -1,7 +1,8 @@
 const
     trig = op.inTrigger("trigger"),
-    select = op.inDropDown("Which", ["cpu"], "cpu"),
-    select2 = op.inDropDown("Which2", ["gpu_gl"], "gpu_gl"),
+    select = op.inDropDown("data", [], "cpu"),
+    select2 = op.inDropDown("data2", [], "gpu_gl"),
+    select3 = op.inDropDown("data3", [], "fps"),
     next = op.outTrigger("next");
 
 let ctx = null;
@@ -9,14 +10,7 @@ let canvas = null;
 let numBars = 120;
 let height = 50;
 let containerEle = document.body;
-let queueCPU = [];
-let queueGPU = [];
-let queueEvents = [];
-let heavyEvents = [];
 let countersPerFrame = {};
-let fps = 0;
-let fpsCounter = 0;
-let fpsTime = performance.now();
 let countIndex = 0;
 let selectedCounterIndex = "";
 
@@ -24,8 +18,6 @@ let type = null;
 let gpuBeginFrame = null;
 let gpuEndFrame = null;
 let gpuUpdate = null;
-
-op.patch.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
 
 const pp = op.patch.perfProfiler;
 
@@ -39,8 +31,6 @@ trig.onTriggered = () =>
     next.trigger();
 
     pp.setDuration("cpu", performance.now() - startTime);
-    // queueCPU.push({ "ms": performance.now() - startTime });
-    // queueCPU.shift();
     if (gpuEndFrame) gpuEndFrame();
 };
 
@@ -52,31 +42,7 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
-    queueEvents.push({ "num": heavyEvents.length, "name": heavyEvents.join(",") });
-    queueEvents.shift();
-
-    for (const i in pp.counts)
-    {
-        countersPerFrame[i] = countersPerFrame[i] || [];
-        countersPerFrame[i].push({ "num": pp.counts[i] });
-        if (countersPerFrame[i].length > numBars) countersPerFrame[i].shift();
-    }
-
     pp.endFrame();
-
-    // for (const i in pp.durations)
-    // {
-
-    //     if (pp.durations[i])
-    //         if (i == "gpu")
-    //             queueGPU.push({ "ms": pp.durations[i] });
-
-    //     if (queueGPU.length > numBars) queueGPU.shift();
-    // }
-
-    // pp.reset();
-
-    heavyEvents.length = 0;
 
     if (!gpuBeginFrame && type == "webgl")
     {
@@ -85,16 +51,10 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         gpuUpdate = glUpdate;
     }
 
-    fpsCounter++;
-    if (performance.now() - fpsTime >= 1000)
-    {
-        fps = fpsCounter;
-        fpsTime = performance.now();
-        fpsCounter = 0;
-    }
-    const keys = Object.keys(pp.durationsFrames);
+    const keys = Object.keys(pp.durationsFrames).concat(Object.keys(pp.countsFrames));
     select.setUiAttribs({ "values": keys });
     select2.setUiAttribs({ "values": keys });
+    select3.setUiAttribs({ "values": keys });
 
     updateCanvas();
 });
@@ -105,7 +65,7 @@ op.on("delete", () =>
     op.patch.off(frameListener);
 });
 
-function drawGraph(name, posy, q, col, fps)
+function drawGraph(name, posy, q, col)
 {
     let info = "";
     let k = 0;
@@ -115,11 +75,8 @@ function drawGraph(name, posy, q, col, fps)
     {
         info = q[numBars - 1].num;
         for (k = numBars; k >= 0; k--)
-        {
             if (q[k])
                 maxMs = Math.max(maxMs, q[k].num * 1.25);
-        }
-        // maxMs = info * 2;
     }
     let hmul = height / maxMs;
     if (q.length == 0)
@@ -169,19 +126,21 @@ function updateCanvas()
     for (let y = height; y < canvas.height; y += height)
         ctx.fillRect(0, y, canvas.width, 1);
 
-    // console.log("pp", pp.durationsFrames.cpu);
     if (pp.durationsFrames && pp.durationsFrames[select.get()])
         drawGraph(select.get(), 0, pp.durationsFrames[select.get()], "#999900");
+    else if (pp.countsFrames && pp.countsFrames[select.get()])
+        drawGraph(select.get(), 0, pp.countsFrames[select.get()], "#999900");
 
     if (pp.durationsFrames && pp.durationsFrames[select2.get()])
         drawGraph(select2.get(), height, pp.durationsFrames[select2.get()], "#007777");
+    else if (pp.countsFrames && pp.countsFrames[select2.get()])
+        drawGraph(select2.get(), height, pp.countsFrames[select2.get()], "#007777");
 
-    // drawGraph("GPU " + fps + " FPS", height, queueGPU, "#007777");
+    if (pp.durationsFrames && pp.durationsFrames[select3.get()])
+        drawGraph(select3.get(), height * 2, pp.durationsFrames[select3.get()], "#770077");
+    else if (pp.countsFrames && pp.countsFrames[select3.get()])
+        drawGraph(select3.get(), height * 2, pp.countsFrames[select3.get()], "#555555");
 
-    // console.log(countersPerFrame[selectedCounterIndex])
-
-    if (countersPerFrame[selectedCounterIndex] && countersPerFrame[selectedCounterIndex].length)
-        drawGraph(selectedCounterIndex + "", height * 2, countersPerFrame[selectedCounterIndex], "#555555");
 }
 
 function createCanvas()
@@ -195,7 +154,6 @@ function createCanvas()
     canvas.style.display = "block";
     canvas.style.position = "absolute";
     canvas.style.left = "0px";
-    // canvas.style.opacity = "0.5";
     canvas.style.cursor = "pointer";
     canvas.style.bottom = "0px";
     canvas.style["z-index"] = "10";
@@ -209,6 +167,5 @@ function createCanvas()
         selectedCounterIndex = keys[countIndex];
         countIndex++;
         countIndex %= keys.length;
-        // console.log("text", countIndex, selectedCounterIndex);
     });
 }

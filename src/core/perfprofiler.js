@@ -21,7 +21,6 @@ export class PerfProfiler
         {
             while (this.durationsFrames[i].length < this.numframes) this.durationsFrames[i].push({ "ms": 0 });
             this.durationsFrames[i] = this.durationsFrames[i] || [];
-            // this.durationsFrames[i].push({ "ms": this.durations[i] });
             if (this.durations.hasOwnProperty(i))
                 this.durationsFrames[i].push({ "ms": this.durations[i] });
             else
@@ -29,6 +28,19 @@ export class PerfProfiler
                 this.durationsFrames[i].push(this.durationsFrames[this.durationsFrames[i].length - 1]);
 
             while (this.durationsFrames[i].length > this.numframes) this.durationsFrames[i].shift();
+        }
+
+        for (const i in this.countsFrames)
+        {
+            while (this.countsFrames[i].length < this.numframes) this.countsFrames[i].push({ "num": 0 });
+            this.countsFrames[i] = this.countsFrames[i] || [];
+            if (this.counts.hasOwnProperty(i))
+                this.countsFrames[i].push({ "num": this.counts[i] });
+            else
+            if (this.countsFrames[i] && this.countsFrames[this.countsFrames[i].length - 1])
+                this.countsFrames[i].push(this.countsFrames[this.countsFrames[i].length - 1]);
+
+            while (this.countsFrames[i].length > this.numframes) this.countsFrames[i].shift();
         }
 
         this.reset();
