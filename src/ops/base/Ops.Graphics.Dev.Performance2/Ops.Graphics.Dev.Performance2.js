@@ -1,5 +1,7 @@
 const
     trig = op.inTrigger("trigger"),
+    select = op.inDropDown("Which", ["cpu"], "cpu"),
+    select2 = op.inDropDown("Which2", ["gpu_gl"], "gpu_gl"),
     next = op.outTrigger("next");
 
 let ctx = null;
@@ -60,17 +62,19 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         if (countersPerFrame[i].length > numBars) countersPerFrame[i].shift();
     }
 
-    for (const i in pp.durations)
-    {
+    pp.endFrame();
 
-        if (pp.durations[i])
-            if (i == "gpu")
-                queueGPU.push({ "ms": pp.durations[i] });
+    // for (const i in pp.durations)
+    // {
 
-        if (queueGPU.length > numBars) queueGPU.shift();
-    }
+    //     if (pp.durations[i])
+    //         if (i == "gpu")
+    //             queueGPU.push({ "ms": pp.durations[i] });
 
-    pp.reset();
+    //     if (queueGPU.length > numBars) queueGPU.shift();
+    // }
+
+    // pp.reset();
 
     heavyEvents.length = 0;
 
@@ -88,6 +92,10 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
         fpsTime = performance.now();
         fpsCounter = 0;
     }
+    const keys = Object.keys(pp.durationsFrames);
+    select.setUiAttribs({ "values": keys });
+    select2.setUiAttribs({ "values": keys });
+
     updateCanvas();
 });
 
@@ -102,6 +110,7 @@ function drawGraph(name, posy, q, col, fps)
     let info = "";
     let k = 0;
     let maxMs = 25;
+    if (!q) return;
     if (q[numBars - 1] && q[numBars - 1].num)
     {
         info = q[numBars - 1].num;
@@ -160,8 +169,14 @@ function updateCanvas()
     for (let y = height; y < canvas.height; y += height)
         ctx.fillRect(0, y, canvas.width, 1);
 
-    drawGraph("CPU", 0, queueCPU, "#999900");
-    drawGraph("GPU " + fps + " FPS", height, queueGPU, "#007777");
+    // console.log("pp", pp.durationsFrames.cpu);
+    if (pp.durationsFrames && pp.durationsFrames[select.get()])
+        drawGraph(select.get(), 0, pp.durationsFrames[select.get()], "#999900");
+
+    if (pp.durationsFrames && pp.durationsFrames[select2.get()])
+        drawGraph(select2.get(), height, pp.durationsFrames[select2.get()], "#007777");
+
+    // drawGraph("GPU " + fps + " FPS", height, queueGPU, "#007777");
 
     // console.log(countersPerFrame[selectedCounterIndex])
 
@@ -194,6 +209,6 @@ function createCanvas()
         selectedCounterIndex = keys[countIndex];
         countIndex++;
         countIndex %= keys.length;
-        console.log("text", countIndex, selectedCounterIndex);
+        // console.log("text", countIndex, selectedCounterIndex);
     });
 }

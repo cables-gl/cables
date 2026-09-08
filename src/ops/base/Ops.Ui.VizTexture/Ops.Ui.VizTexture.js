@@ -29,9 +29,11 @@ const sizeImg = [100, 100];
 
 inTex.onLinkChanged = () =>
 {
+    op.setUiAttrib({ "comment": "" });
     canvas = null;
     ctx = null;
 };
+
 inRGB.onChange =
     inRgbe.onChange =
     inAlpha.onChange =
@@ -319,27 +321,19 @@ if (CABLES.UI)
                     const bigPixels = imgSizeW / s[0] > 3 || imgSizeH / s[1] > 3;
                     const veryBigPixels = imgSizeW / s[0] > 10 || imgSizeH / s[1] > 10;
 
+                    // this is now probably all not optimal anymore, now we have the cache canvas, which is the exact size of the image, so it should probably scaled when drawing in the vizlayer cb...
                     if (sizeTex[1] == 1)
                     {
                         ctx.imageSmoothingEnabled = false; // workaround filtering problems
                         ctx.drawImage(cgl.canvas,
                             0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
-                        // layer.x,
-                        // layer.y,
-                        // layer.width,
-                        // layerHeight); // workaround filtering problems
                         ctx.imageSmoothingEnabled = true;
                     }
                     else
                     if (sizeTex[0] == 1 || inLod > 0)
                     {
                         ctx.imageSmoothingEnabled = false; // workaround filtering problems
-                        ctx.drawImage(cgl.canvas,
-                            0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
-                        // layer.x,
-                        // layer.y,
-                        // layer.width,
-                        // layerHeight);
+                        ctx.drawImage(cgl.canvas, 0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
                         ctx.imageSmoothingEnabled = true;
                     }
                     else
@@ -390,8 +384,8 @@ if (CABLES.UI)
             {
                 info += colorString + "\n";
 
-                const x = imgPosX + imgSizeW * inX.get();
-                const y = imgPosY + imgSizeH * inY.get();
+                const x = canvas.width * inX.get();
+                const y = canvas.height * inY.get();
 
                 for (let ii = 0; ii < 2; ii++)
                 {

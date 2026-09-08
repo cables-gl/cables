@@ -1,20 +1,46 @@
 export class PerfProfiler
 {
+    numframes = 120;
 
     /** @type {Object<String,number>} */
     counts = {};
+    countsFrames = {};
 
     /** @type {Object<String,number>} */
     durations = {};
+    durationsFrames = {};
 
     constructor()
     {
     }
 
+    endFrame()
+    {
+
+        for (const i in this.durationsFrames)
+        {
+            while (this.durationsFrames[i].length < this.numframes) this.durationsFrames[i].push({ "ms": 0 });
+            this.durationsFrames[i] = this.durationsFrames[i] || [];
+            // this.durationsFrames[i].push({ "ms": this.durations[i] });
+            if (this.durations.hasOwnProperty(i))
+                this.durationsFrames[i].push({ "ms": this.durations[i] });
+            else
+            if (this.durationsFrames[i] && this.durationsFrames[this.durationsFrames[i].length - 1])
+                this.durationsFrames[i].push(this.durationsFrames[this.durationsFrames[i].length - 1]);
+
+            while (this.durationsFrames[i].length > this.numframes) this.durationsFrames[i].shift();
+        }
+
+        this.reset();
+    }
+
     reset()
     {
-        for (const i in this.counts) this.counts[i] = 0;
-        for (const i in this.durations) this.durations[i] = 0;
+
+        this.counts = {};
+        this.durations = {};
+        // for (const i in this.counts) this.counts[i] = 0;
+        // for (const i in this.durations) this.durations[i] = 0;
     }
 
     /**
@@ -24,6 +50,7 @@ export class PerfProfiler
     count(name, v)
     {
         this.counts[name] = this.counts[name] || 0;
+        this.countsFrames[name] = this.countsFrames[name] || 0;
         if (v)
             this.counts[name] += v;
         else
@@ -37,6 +64,7 @@ export class PerfProfiler
     setDuration(name, t)
     {
         this.durations[name] = this.durations[name] || 0;
+        this.durationsFrames[name] = this.durationsFrames[name] || 0;
         if (t)
             this.durations[name] += t;
     }
