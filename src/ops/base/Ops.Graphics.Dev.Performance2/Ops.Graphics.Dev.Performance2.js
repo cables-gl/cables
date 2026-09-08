@@ -25,6 +25,8 @@ let gpuUpdate = null;
 
 op.patch.on("heavyEvent", (e) => { heavyEvents.push(e.event); });
 
+const pp = op.patch.perfProfiler;
+
 createCanvas();
 
 trig.onTriggered = () =>
@@ -34,8 +36,9 @@ trig.onTriggered = () =>
     if (gpuBeginFrame) gpuBeginFrame();
     next.trigger();
 
-    queueCPU.push({ "ms": performance.now() - startTime });
-    queueCPU.shift();
+    pp.setDuration("cpu", performance.now() - startTime);
+    // queueCPU.push({ "ms": performance.now() - startTime });
+    // queueCPU.shift();
     if (gpuEndFrame) gpuEndFrame();
 };
 
@@ -50,23 +53,24 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     queueEvents.push({ "num": heavyEvents.length, "name": heavyEvents.join(",") });
     queueEvents.shift();
 
-    for (const i in op.patch.cgl.perfProfiler.counts)
+    for (const i in pp.counts)
     {
         countersPerFrame[i] = countersPerFrame[i] || [];
-        countersPerFrame[i].push({ "num": op.patch.cgl.perfProfiler.counts[i] });
+        countersPerFrame[i].push({ "num": pp.counts[i] });
         if (countersPerFrame[i].length > numBars) countersPerFrame[i].shift();
     }
 
-    for (const i in op.patch.cgl.perfProfiler.durations)
+    for (const i in pp.durations)
     {
-        if (op.patch.cgl.perfProfiler.durations[i])
+
+        if (pp.durations[i])
             if (i == "gpu")
-                queueGPU.push({ "ms": op.patch.cgl.perfProfiler.durations[i] });
+                queueGPU.push({ "ms": pp.durations[i] });
 
         if (queueGPU.length > numBars) queueGPU.shift();
     }
 
-    op.patch.cgl.perfProfiler.reset();
+    pp.reset();
 
     heavyEvents.length = 0;
 

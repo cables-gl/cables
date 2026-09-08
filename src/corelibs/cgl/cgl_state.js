@@ -38,7 +38,9 @@ export class CglContext extends CgContext
             _patch.cgl = this;
             if (!patchConfig)patchConfig = _patch.config;
         }
-        this.perfProfiler = new PerfProfiler();
+        if (_patch) this.perfProfiler = _patch.perfProfiler;
+        else this.perfProfiler = new PerfProfiler();
+
         this.aborted = false;
 
         /** @deprecated */

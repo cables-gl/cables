@@ -45,7 +45,7 @@ export class CglRenderLoop extends RenderLoop
         {
             this.timer = new Timer();
         }
-        this.exec(0);
+        this.resume();
 
     }
 

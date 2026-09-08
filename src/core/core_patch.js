@@ -8,6 +8,7 @@ import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
 import { Timer } from "./timer.js";
 import { RenderLoop } from "./renderloop.js";
+import { PerfProfiler } from "./perfprofiler.js";
 
 /** @global CABLES.OPS  */
 
@@ -118,6 +119,8 @@ export class Patch extends Events
     namedTriggers = {};
     tempData = {};
     frameStore = {};
+
+    perfProfiler = new PerfProfiler();
 
     /** @param {PatchConfig} cfg */
     constructor(cfg)

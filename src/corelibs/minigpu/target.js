@@ -161,7 +161,7 @@ export class RenderTarget
                     const ns = times[1] - times[0];
                     t.resultBuffer.unmap();
                     const gpuTimeMs = Number(ns) / 1000000;
-                    CABLES.patch.cgl.perfProfiler.setDuration("gpu", gpuTimeMs);
+                    CABLES.patch.perfProfiler.setDuration("gpu", gpuTimeMs);
                     this._gpuTimerPending = false;
                 }).catch((e) =>
                 {

@@ -43,7 +43,7 @@ function glUpdate()
             const gpuTimeNs = cgl.gl.getQueryParameter(query, cgl.gl.QUERY_RESULT);
             const gpuTimeMs = gpuTimeNs / 1000000;
 
-            op.patch.cgl.perfProfiler.setDuration("gpu", gpuTimeMs);
+            op.patch.perfProfiler.setDuration("gpu_gl", gpuTimeMs);
             setTimeout(() => { query = null; }, 50); // timer queries seem to work better when not called directly after another...
         }
         else
