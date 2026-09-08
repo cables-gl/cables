@@ -7,7 +7,7 @@ const
 
     inRGB = op.inSwitch("Channels", ["RGB", "R", "G", "B"], "RGB"),
     inType = op.inSwitch("Type", ["Automatic", "Default", "Depth", "Cubemap"], "Automatic"),
-    
+
     inPickColor = op.inBool("Show Color", false),
     inX = op.inFloatSlider("X", 0.5),
     inY = op.inFloatSlider("Y", 0.5),
@@ -25,11 +25,11 @@ let fb = null;
 let pixelReader = null;
 let colorString = "";
 let firstTime = true;
+const sizeImg = [100, 100];
 
 inRGB.onChange =
-
-inRgbe.onChange =
-inAlpha.onChange =
+    inRgbe.onChange =
+    inAlpha.onChange =
     inVizRange.onChange = updateDefines;
 
 inPickColor.onChange = updateUi;
@@ -74,11 +74,41 @@ function updateDefines()
     shader.toggleDefine("MONO_B", inRGB.get() == "B");
 }
 
-op.renderVizLayerGl = (ctx, layer) =>
+let canvas = null;
+let ctx = null;
+
+let layer = null;
+op.renderVizLayer = (_ctx, _layer) =>
+{
+    if (!_layer) return;
+    layer = _layer;
+
+    if (canvas && canvas.width > 0) _ctx.drawImage(canvas,
+        layer.x, layer.y,
+
+        layer.width, layer.width * (layer.width / layer.height));
+
+    else
+    {
+        _ctx.fillStyle = "#f22";
+        _ctx.fillRect(
+            layer.x, layer.y,
+            layer.width, layer.height);
+
+        // const fontSize = layer.height * 0.7;
+        // ctx.font = "normal " + fontSize + "px sourceCodePro";
+        // ctx.fillText("trsneisrtnei", layer.x, layer.y + fontSize);
+    }
+    // console.log("canvas", canvas);
+
+};
+
+op.onAnimFramePre = () =>
 {
     if (!inTex.isLinked()) return;
-    if (!layer.useGl) return;
+    if (!layer) return;
 
+    // console.log("preeeeeeeeeee", canvas, this);
     const port = inTex;
     const texSlot = 5;
     const texSlotCubemap = texSlot + 1;
@@ -125,14 +155,13 @@ op.renderVizLayerGl = (ctx, layer) =>
     const small = port.op.patch.cgl.canvasWidth > sizeTex[0] && port.op.patch.cgl.canvasHeight > sizeTex[1];
 
     if (small)
-    {
         mat4.ortho(cgl.pMatrix, 0, port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight, 0, 0.001, 11);
-    }
-    else mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
+    else
+        mat4.ortho(cgl.pMatrix, -1, 1, 1, -1, 0.001, 11);
 
     const oldTex = cgl.getTexture(texSlot);
     const oldTexCubemap = cgl.getTexture(texSlotCubemap);
-    
+
     let iTexType = inType.get();
     let texType = 0;
     if (portTex)
@@ -150,7 +179,7 @@ op.renderVizLayerGl = (ctx, layer) =>
         {
             texType = 1;
         }
-        
+
         if (texType == 0 || texType == 2)
         {
             cgl.setTexture(texSlot, portTex.tex);
@@ -167,8 +196,8 @@ op.renderVizLayerGl = (ctx, layer) =>
         this._shaderTypeUniform.setValue(texType);
         let s = [port.op.patch.cgl.canvasWidth, port.op.patch.cgl.canvasHeight];
 
-        cgl.gl.clearColor(0, 0, 0, 0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        // cgl.gl.clearColor(0, 0, 0, 0);
+        // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.pushModelMatrix();
         if (small)
@@ -185,9 +214,7 @@ op.renderVizLayerGl = (ctx, layer) =>
 
         cgl.popPMatrix();
         cgl.resetViewPort();
-
-        const sizeImg = [layer.width, layer.height];
-
+        // console.log("ind", ).width);
         const stretch = false;
         // if (!stretch)
         // {
@@ -207,6 +234,14 @@ op.renderVizLayerGl = (ctx, layer) =>
         const scaledDown = sizeImg[0] > sizeTex[0] && sizeImg[1] > sizeTex[1];
 
         // ctx.imageSmoothingEnabled = !small || !scaledDown;
+        if (!ctx)
+        {
+            canvas = document.createElement("canvas");
+            ctx = canvas.getContext("2d");
+        }
+        // console.log("sizeimg", sizeTex);
+        canvas.width = sizeTex[0];
+        canvas.height = sizeTex[1];
         ctx.imageSmoothingEnabled = true;
 
         ctx.fillStyle = "#ffffff";
@@ -260,31 +295,31 @@ op.renderVizLayerGl = (ctx, layer) =>
 
                 if (sizeTex[1] == 1)
                 {
-                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.imageSmoothingEnabled = false; // workaround filtering problems
                     ctx.drawImage(cgl.canvas,
                         0,
                         0,
                         s[0],
-                        s[1],
-                        layer.x,
-                        layer.y,
-                        layer.width,
-                        layerHeight);// workaround filtering problems
+                        s[1]);
+                    // layer.x,
+                    // layer.y,
+                    // layer.width,
+                    // layerHeight); // workaround filtering problems
                     ctx.imageSmoothingEnabled = true;
                 }
                 else
                 if (sizeTex[0] == 1 || inLod > 0)
                 {
-                    ctx.imageSmoothingEnabled = false;// workaround filtering problems
+                    ctx.imageSmoothingEnabled = false; // workaround filtering problems
                     ctx.drawImage(cgl.canvas,
                         0,
                         0,
                         s[0],
-                        s[1],
-                        layer.x,
-                        layer.y,
-                        layer.width,
-                        layerHeight);
+                        s[1]);
+                    // layer.x,
+                    // layer.y,
+                    // layer.width,
+                    // layerHeight);
                     ctx.imageSmoothingEnabled = true;
                 }
                 else
@@ -295,14 +330,20 @@ op.renderVizLayerGl = (ctx, layer) =>
                     ctx.drawImage(cgl.canvas,
                         0,
                         0,
-                        s[0],
-                        s[1],
-                        imgPosX,
-                        imgPosY,
-                        imgSizeW,
-                        imgSizeH);
+                        canvas.width,
+                        canvas.height
+                    );
                 }
 
+                ctx.drawImage(cgl.canvas,
+                    0,
+                    0,
+                    s[0],
+                    s[1],
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height);
                 if (veryBigPixels)
                 {
                     const stepx = imgSizeW / s[0];
@@ -350,7 +391,7 @@ op.renderVizLayerGl = (ctx, layer) =>
 
             for (let ii = 0; ii < 2; ii++)
             {
-                if (ii == 0)ctx.fillStyle = "#000";
+                if (ii == 0) ctx.fillStyle = "#000";
                 else ctx.fillStyle = "#fff";
 
                 ctx.fillRect(
@@ -394,18 +435,18 @@ op.renderVizLayerGl = (ctx, layer) =>
                 if (!CGL.Texture.isPixelFormatFloat(realTexture.pixelFormat))
                 {
                     colorString = "Pixel Float: " + Math.floor(pixel[0] / 255 * 100) / 100;
-                    if (!isNaN(pixel[1]))colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
-                    if (!isNaN(pixel[2]))colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
-                    if (!isNaN(pixel[3]))colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
+                    if (!isNaN(pixel[1])) colorString += ", " + Math.floor(pixel[1] / 255 * 100) / 100;
+                    if (!isNaN(pixel[2])) colorString += ", " + Math.floor(pixel[2] / 255 * 100) / 100;
+                    if (!isNaN(pixel[3])) colorString += ", " + Math.floor(pixel[3] / 255 * 100) / 100;
                     colorString += "\n";
 
                     if (realTexture.pixelFormat.indexOf("ubyte") > 0)
                     {
                         colorString += "Pixel UByte: ";
                         colorString += Math.round(pixel[0]);
-                        if (!isNaN(pixel[1]))colorString += ", " + Math.round(pixel[1]);
-                        if (!isNaN(pixel[2]))colorString += ", " + Math.round(pixel[2]);
-                        if (!isNaN(pixel[3]))colorString += ", " + Math.round(pixel[3]);
+                        if (!isNaN(pixel[1])) colorString += ", " + Math.round(pixel[1]);
+                        if (!isNaN(pixel[2])) colorString += ", " + Math.round(pixel[2]);
+                        if (!isNaN(pixel[3])) colorString += ", " + Math.round(pixel[3]);
 
                         colorString += "\n";
                     }
@@ -419,8 +460,8 @@ op.renderVizLayerGl = (ctx, layer) =>
         }
     }
 
-    cgl.gl.clearColor(0, 0, 0, 0);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    // cgl.gl.clearColor(0, 0, 0, 0);
+    // cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     perf.finish();
 };

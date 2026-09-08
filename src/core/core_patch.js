@@ -530,6 +530,7 @@ export class Patch extends Events
             if (op.onCreate) op.onCreate();
 
             if (op.hasOwnProperty("onAnimFrame") && op.onAnimFrame) this.addOnAnimFrame(op);
+            if (op.hasOwnProperty("onAnimFramePre") && op.onAnimFramePre) this.addOnAnimFrame(op);
             if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
             if (this._opIdCache[op.id])
@@ -734,14 +735,12 @@ export class Patch extends Events
         time = time || this.timer.getTime();
 
         for (let i = 0; i < this.animFrameOps.length; ++i)
+            if (this.animFrameOps[i].onAnimFramePre)
+                this.animFrameOps[i].onAnimFramePre(time, this.renderloop.frameNum, delta);
+
+        for (let i = 0; i < this.animFrameOps.length; ++i)
             if (this.animFrameOps[i].onAnimFrame)
-            {
-
-                // let startTime = performance.now();
                 this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
-
-                // console.log("animupd ", this.animFrameOps[i].objName, performance.now() - startTime);
-            }
     }
 
     /**

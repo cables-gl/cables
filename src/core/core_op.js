@@ -130,6 +130,7 @@ export class Op extends Events
     enabled = true;
 
     onAnimFrame = null;
+    onAnimFramePre = null;
 
     preservedPortTitles = {};
     preservedPortValues = {};
