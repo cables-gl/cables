@@ -10,6 +10,8 @@ import { Port } from "./core_port.js";
  */
 export class Link extends Events
 {
+    static EVENT_UNLINK = "onUnLink";
+
     #log = new Logger("link");
 
     /**
@@ -97,7 +99,7 @@ export class Link extends Events
         if (this.portOut) this.portOut.removeLink(this);
         if (this._patch)
         {
-            this._patch.emitEvent("onUnLink", this.portIn, this.portOut, this);
+            this._patch.emitEvent(Link.EVENT_UNLINK, this.portIn, this.portOut, this);
         }
 
         if (this.portIn && (this.portIn.type == Port.TYPE_OBJECT || this.portIn.type == Port.TYPE_ARRAY))
