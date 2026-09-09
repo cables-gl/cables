@@ -22,7 +22,7 @@ CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", TEX_SLOT),
-    makstextureUniform = new CGL.Uniform(shader, "t", "mask", 1),
+    masktextureUniform = new CGL.Uniform(shader, "t", "mask", 1),
     uniformR = new CGL.Uniform(shader, "f", "r", r),
     uniformG = new CGL.Uniform(shader, "f", "g", g),
     uniformB = new CGL.Uniform(shader, "f", "b", b),

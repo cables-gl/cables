@@ -26,19 +26,17 @@ void main()
     vec4 colTex=textureLod(tex,texCoord,lod);
     // vec4 colTex=texture(tex,texCoord);
 
+    #ifdef MONO_R
+     colTex.rgb=vec3(colTex.r);
+    #endif
 
+    #ifdef MONO_G
+     colTex.rgb=vec3(colTex.g);
+    #endif
 
-#ifdef MONO_R
- colTex.rgb=vec3(colTex.r);
-#endif
-
-#ifdef MONO_G
- colTex.rgb=vec3(colTex.g);
-#endif
-
-#ifdef MONO_B
- colTex.rgb=vec3(colTex.b);
-#endif
+    #ifdef MONO_B
+     colTex.rgb=vec3(colTex.b);
+    #endif
 
     if(type==1.0)
     {
@@ -156,9 +154,9 @@ void main()
         colTex.a=1.0-colTex.a;
     #endif
 
-#ifdef RGBE
-    colTex= vec4(decodeRGBE8(colTex),1.0);
-#endif
+    #ifdef RGBE
+        colTex= vec4(decodeRGBE8(colTex),1.0);
+    #endif
 
 
     outColor = mix(col,colTex,colTex.a);

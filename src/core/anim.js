@@ -11,6 +11,7 @@ let counts = {};
  * @typedef KeyUiAttribs
  * @property {string} [text]
  * @property {number} [bezFree]
+ * @property {string} [color]
  */
 
 /**

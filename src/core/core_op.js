@@ -20,6 +20,14 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [w]
  * @property {number} [h]
  */
+/**
+ * @typedef UiAttrArea
+ * @property {String} [id]
+ * @property {number} [x]
+ * @property {number} [y]
+ * @property {number} [w]
+ * @property {number} [h]
+ */
 
 /**
  * @typedef OpAttribs
@@ -43,13 +51,13 @@ import { showUiErrors } from "./uierrors.js";
  * @property {boolean} [hidden]
  * @property {object} [uierrors]
  * @property {string} [color]
- * @property {object} [area]
+ * @property {UiAttrArea} [area]
  * @property {string} [comment]
  * @property {number} [height]
  * @property {number} [width]
  * @property {Translation} [translate]
  * @property {TranslationTemp} [translateTemp]
- * @property {string|number} [subPatch]
+ * @property {string} [subPatch]
  * @property {object} [subPatchOp]
  * @property {string} [tempSubOldOpId]
  * @property {string} [subPatch]
@@ -220,7 +228,7 @@ export class Op extends Events
     /** @returns {Port} */
     getFirstPortOut() { return null; }
     isInBlueprint2() { return false; }
-    getSubPatch() { return 0; }
+    getSubPatch() { return "0"; }
 
     /* minimalcore:end */
 

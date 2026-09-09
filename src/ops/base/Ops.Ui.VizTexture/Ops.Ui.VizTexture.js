@@ -346,32 +346,32 @@ if (CABLES.UI)
                         ctx.drawImage(cgl.canvas,
                             0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
                     }
-                    if (veryBigPixels)
-                    {
-                        const stepx = imgSizeW / s[0];
-                        const stepy = imgSizeH / s[1];
+                    // if (veryBigPixels)
+                    // {
+                    //     const stepx = imgSizeW / s[0];
+                    //     const stepy = imgSizeH / s[1];
 
-                        ctx.imageSmoothingEnabled = true;
-                        ctx.lineWidth = 1;
-                        ctx.globalAlpha = 0.5;
-                        ctx.beginPath();
+                    //     ctx.imageSmoothingEnabled = true;
+                    //     ctx.lineWidth = 1;
+                    //     ctx.globalAlpha = 0.5;
+                    //     ctx.beginPath();
 
-                        for (let x = 0; x <= s[0]; x++)
-                        {
-                            ctx.moveTo(imgPosX + x * stepx, imgPosY);
-                            ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
-                        }
+                    //     for (let x = 0; x <= s[0]; x++)
+                    //     {
+                    //         ctx.moveTo(imgPosX + x * stepx, imgPosY);
+                    //         ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
+                    //     }
 
-                        for (let y = 0; y <= s[1]; y++)
-                        {
-                            ctx.moveTo(imgPosX, imgPosY + y * stepy);
-                            ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
-                        }
+                    //     for (let y = 0; y <= s[1]; y++)
+                    //     {
+                    //         ctx.moveTo(imgPosX, imgPosY + y * stepy);
+                    //         ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
+                    //     }
 
-                        ctx.strokeStyle = "#555";
-                        ctx.stroke();
-                        ctx.globalAlpha = 1;
-                    }
+                    //     ctx.strokeStyle = "#555";
+                    //     ctx.stroke();
+                    //     ctx.globalAlpha = 1;
+                    // }
                 }
                 catch (e)
                 {
