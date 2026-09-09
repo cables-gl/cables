@@ -51,12 +51,7 @@
             }
         ]
     },
-    "libs": [
-        "platform.js"
-    ],
     "summary": "set file dependant on browser",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -98,5 +93,11 @@
         ]
     },
     "exampleProjectId": "CfJkIk",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "ec3e0121-b2c2-4c31-bbda-a6982080f73f",
+            "type": "op"
+        }
+    ]
 }

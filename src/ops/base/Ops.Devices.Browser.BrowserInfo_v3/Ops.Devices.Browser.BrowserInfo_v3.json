@@ -17,7 +17,6 @@
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 0,
@@ -119,12 +118,7 @@
             }
         ]
     },
-    "libs": [
-        "platform.js"
-    ],
     "summary": "Reports the browser being used",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -203,5 +197,11 @@
     },
     "exampleProjectId": "YOJiIk",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./platform.js",
+            "type": "commonjs"
+        }
+    ]
 }
