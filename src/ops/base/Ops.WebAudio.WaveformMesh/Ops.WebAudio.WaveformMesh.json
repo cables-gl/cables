@@ -3,9 +3,6 @@
     "authorName": "simod",
     "id": "9f61a958-90b1-46df-a893-de48a5844583",
     "created": 1607338112054,
-    "libs": [
-        "webaudio-peaks.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -131,12 +128,16 @@
             "date": 1607353452535
         }
     ],
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "VqDkCp",
     "license": "MIT",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./webaudio-peaks.js",
+            "type": "commonjs"
+        }
+    ]
 }

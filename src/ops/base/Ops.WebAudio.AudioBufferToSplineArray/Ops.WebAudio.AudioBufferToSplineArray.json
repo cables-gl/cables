@@ -3,9 +3,6 @@
     "authorName": "simod",
     "id": "0a573407-f1af-4580-ba37-1604108151bd",
     "created": 1607357476215,
-    "libs": [
-        "webaudio-peaks.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -102,11 +99,15 @@
             "date": 1607362150461
         }
     ],
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "OcOVBp",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "9f61a958-90b1-46df-a893-de48a5844583",
+            "type": "op"
+        }
+    ]
 }
