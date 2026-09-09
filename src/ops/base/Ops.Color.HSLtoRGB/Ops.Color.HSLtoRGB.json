@@ -17,9 +17,6 @@
             "date": 1727786333725
         }
     ],
-    "libs": [
-        "chroma.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -57,9 +54,13 @@
         ]
     },
     "summary": "Convert HSL to RGB",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "3fOpvs",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "dfaa03d8-dc03-4f36-bd0b-248a4eb2b722",
+            "type": "op"
+        }
+    ]
 }

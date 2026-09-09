@@ -11,9 +11,6 @@
             "date": 1727786023093
         }
     ],
-    "libs": [
-        "chroma.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -51,9 +48,13 @@
         ]
     },
     "summary": "Convert RGB color to HSL values",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "exampleProjectId": "Du0rvs",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./chroma.js",
+            "type": "commonjs"
+        }
+    ]
 }
