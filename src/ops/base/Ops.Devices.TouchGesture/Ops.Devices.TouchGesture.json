@@ -2,9 +2,6 @@
     "authorName": "tim",
     "id": "08c5d91e-32d2-4852-ac18-d4cae543dd37",
     "created": 1520949138517,
-    "libs": [
-        "hammer.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -63,11 +60,15 @@
         ]
     },
     "summary": "detect touch gestures like swipe and pan",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./hammer.js",
+            "type": "commonjs"
+        }
+    ]
 }
