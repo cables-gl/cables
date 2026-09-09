@@ -231,15 +231,9 @@ export class Op extends Events
     /** @returns {Port} */
     getFirstPortOut() { return null; }
     isInBlueprint2() { return false; }
-<<<<<<< HEAD
-    getSubPatch() { return "0"; }
-=======
 
-    /** @returns {string|number} */
+    /** @returns {string} */
     getSubPatch() { return 0; }
->>>>>>> a66dd3593605d8187d781da12413220d58a1dd4a
-
-    /* minimalcore:end */
 
     /* minimalcore:end */
 
