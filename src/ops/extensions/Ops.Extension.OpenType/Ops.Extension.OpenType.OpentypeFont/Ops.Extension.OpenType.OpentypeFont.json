@@ -20,9 +20,6 @@
             "date": 1741771322842
         }
     ],
-    "libs": [
-        "opentype.js"
-    ],
     "layout": {
         "portsIn": [
             {
@@ -41,13 +38,14 @@
     "authorName": "pandur",
     "created": 1642189494325,
     "summary": "Load OTF & TTF fonts via OpenType library",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "./opentype.js",
+            "type": "commonjs"
+        }
+    ]
 }

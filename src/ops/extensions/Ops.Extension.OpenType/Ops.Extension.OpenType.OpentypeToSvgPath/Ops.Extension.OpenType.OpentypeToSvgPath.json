@@ -45,20 +45,18 @@
         ]
     },
     "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
-    "issues": "",
-    "caniusequery": "",
     "relatedops": [
         "Ops.Libs.OpenType.OpentypeFont",
         "Ops.Gl.Geometry.SvgPathToGeometry"
     ],
-    "youtubeids": [],
     "exampleProjectId": "Cp5VS3",
-    "docs": {
-        "ports": []
-    },
-    "libs": [
-        "opentype.js"
-    ],
+    "docs": {},
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "dependencies": [
+        {
+            "src": "f85574bb-3869-4a14-8dcc-70414bd8cfcd",
+            "type": "op"
+        }
+    ]
 }
