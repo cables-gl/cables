@@ -83,6 +83,7 @@ export class Port extends Events
 
     static EVENT_LINK_CHANGED = "onLinkChanged";
     static EVENT_LINK_REMOVED = "onLinkRemoved";
+    static EVENT_PORT_UNLINK = "onPortUnlink";
 
     #log = new Logger("core_port");
     #oldAnimVal = -5711;
@@ -679,7 +680,7 @@ export class Port extends Events
 
             /* minimalcore:end */
             this.links[0].remove();
-            this.op.patch.emitEvent("onPortUnlink", this);
+            this.op.patch.emitEvent(Port.EVENT_PORT_UNLINK, this);
         }
     }
 
@@ -710,7 +711,7 @@ export class Port extends Events
             this.emitEvent(Port.EVENT_LINK_CHANGED);
             this.emitEvent(Port.EVENT_LINK_REMOVED);
             this.#op.emitEvent(Port.EVENT_LINK_CHANGED);
-            this.op.patch.emitEvent("onPortUnlink", this);
+            this.op.patch.emitEvent(Port.EVENT_PORT_UNLINK, this);
         }
         catch (e)
         {
@@ -789,7 +790,7 @@ export class Port extends Events
                 if (this.onLinkChanged) this.onLinkChanged();
                 this.emitEvent(Port.EVENT_LINK_CHANGED);
                 this.emitEvent(Port.EVENT_LINK_REMOVED);
-                this.op.patch.emitEvent("onPortUnlink", this);
+                this.op.patch.emitEvent(Port.EVENT_PORT_UNLINK, this);
                 return;
             }
         }

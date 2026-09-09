@@ -14,7 +14,7 @@ op.patch.on("onOpAdd", () =>{outOpAdd.trigger();});
 op.patch.on("onOpDelete", () =>{outOpDelete.trigger();} );
 op.patch.on("onLink", () =>{outLink.trigger();});
 op.patch.on("onUnLink", () =>{outLink.trigger();});
-op.patch.on("onPortUnlink",()=>{outLink.trigger();});
+op.patch.on(CABLES.Port.EVENT_PORT_UNLINK,()=>{outLink.trigger();});
 op.patch.on("opReloaded", (opName) =>{outOpReload.trigger()});
 
 
