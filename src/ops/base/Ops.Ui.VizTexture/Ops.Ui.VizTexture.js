@@ -129,19 +129,23 @@ function drawImageContained(ctx, img, maxWidth, maxHeight, offsetX = 0, offsetY 
 
 }
 
+let lastTime = 0;
 if (CABLES.UI)
     op.onAnimFramePre = () =>
     {
+        const cgl = op.patch.cgl;
+
+        if (performance.now() - lastTime < 30) return;
+        lastTime = performance.now();
+
         if (!inTex.isLinked()) return;
         if (!layer) return;
 
-        // console.log("preeeeeeeeeee", canvas, this);
         const port = inTex;
         const texSlot = 5;
         const texSlotCubemap = texSlot + 1;
 
         const perf = gui.uiProfiler.start("previewlayer texture");
-        const cgl = port.op.patch.cgl;
 
         if (!this._emptyCubemap) this._emptyCubemap = CGL.Texture.getEmptyCubemapTexture(cgl);
         port.op.patch.cgl.profileData.count("vizTexPreviews");

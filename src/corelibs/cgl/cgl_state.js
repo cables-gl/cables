@@ -600,6 +600,11 @@ export class CglContext extends CgContext
 
     renderStart(cgl, identTranslate, identTranslateView)
     {
+        if (this.doGlQueryTiming)
+        {
+            this.glQueryTimerUpdate();
+            this.glQueryTimerglBeginFrame();
+        }
         this.fpsCounter.startFrame();
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
@@ -654,6 +659,11 @@ export class CglContext extends CgContext
         this.popBlendMode();
 
         if (endFrame)cgl.endFrame();
+
+        if (this.doGlQueryTiming)
+        {
+            this.glQueryTimerglEndFrame();
+        }
 
         this.emitEvent("endFrame");
     }
@@ -1245,6 +1255,66 @@ export class CglContext extends CgContext
         this.errorShader = new Shader(this, "errormaterial");
         this.errorShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
         return this.errorShader;
+    }
+
+    /// /
+    doGlQueryTiming = false;
+    glQueryExt = null;
+    glQueryQuery = null;
+    glQueryAgain = 0;
+    glQueryFinished = true;
+
+    glQueryTimerglBeginFrame()
+    {
+        if (!this.glQueryQuery)
+        {
+            if (!this.glQueryExt) this.glQueryExt = this.gl.getExtension("EXT_disjoint_timer_query_webgl2");
+            if (this.glQueryExt)
+            {
+                this.glQueryQuery = this.gl.createQuery();
+                this.gl.beginQuery(this.glQueryExt.TIME_ELAPSED_EXT, this.glQueryQuery);
+
+                this.glQueryFinished = false;
+            }
+        }
+    }
+
+    glQueryTimerglEndFrame()
+    {
+        if (this.glQueryExt && this.glQueryQuery != null && !this.glQueryFinished)
+        {
+            this.gl.endQuery(this.glQueryExt.TIME_ELAPSED_EXT);
+            this.glQueryFinished = true;
+        }
+    }
+
+    glQueryTimerUpdate()
+    {
+        if (this.glQueryQuery)
+        {
+            const available = this.gl.getQueryParameter(this.glQueryQuery, this.gl.QUERY_RESULT_AVAILABLE);
+            const disjoint = this.gl.getParameter(this.glQueryExt.GPU_DISJOINT_EXT);
+
+            if (available && !disjoint)
+            {
+                const gpuTimeNs = this.gl.getQueryParameter(this.glQueryQuery, this.gl.QUERY_RESULT);
+                const gpuTimeMs = gpuTimeNs / 1000000;
+
+                this.perfProfiler.setDuration("gpu_cgl", gpuTimeMs);
+                setTimeout(() => { this.glQueryQuery = null; }, 50); // timer queries seem to work better when not called directly after another...
+            }
+            else
+            {
+                this.glQueryAgain++;
+                if (this.glQueryAgain > 100)
+                {
+                    this.glQueryQuery = null;
+                    this.glQueryAgain = 0;
+                }
+            }
+
+        }
+
     }
 
 }

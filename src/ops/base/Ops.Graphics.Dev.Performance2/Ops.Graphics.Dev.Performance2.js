@@ -1,9 +1,8 @@
 const
-    trig = op.inTrigger("trigger"),
     select = op.inDropDown("data", [], "cpu"),
     select2 = op.inDropDown("data2", [], "gpu_gl"),
     select3 = op.inDropDown("data3", [], "fps"),
-    next = op.outTrigger("next");
+    active = op.inBool("active", true);
 
 let ctx = null;
 let canvas = null;
@@ -14,42 +13,25 @@ let countersPerFrame = {};
 let countIndex = 0;
 let selectedCounterIndex = "";
 
-let type = null;
-let gpuBeginFrame = null;
-let gpuEndFrame = null;
-let gpuUpdate = null;
-
 const pp = op.patch.perfProfiler;
 
 createCanvas();
 
-trig.onTriggered = () =>
-{
-    const startTime = performance.now();
-
-    if (gpuBeginFrame) gpuBeginFrame();
-    next.trigger();
-
-    pp.setDuration("cpu", performance.now() - startTime);
-    if (gpuEndFrame) gpuEndFrame();
-};
-
 const frameListener = op.patch.on("renderedFrame", (e) =>
 {
-    if (gpuUpdate) gpuUpdate();
-    type = e.type;
+    if (active.get() && !canvas) createCanvas();
+    if (!active.get())
+    {
+        if (canvas) removeCanvas();
+        return;
+    }
+
     const cr = e.canvas.getBoundingClientRect();
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
+    if (op.patch.cgl) op.patch.cgl.doGlQueryTiming = true;
     pp.endFrame();
-
-    if (!gpuBeginFrame && type == "webgl")
-    {
-        gpuBeginFrame = glBeginFrame;
-        gpuEndFrame = glEndFrame;
-        gpuUpdate = glUpdate;
-    }
 
     const keys = Object.keys(pp.durationsFrames).concat(Object.keys(pp.countsFrames));
     select.setUiAttribs({ "values": keys });
@@ -57,12 +39,6 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     select3.setUiAttribs({ "values": keys });
 
     updateCanvas();
-});
-
-op.on("delete", () =>
-{
-    canvas.remove();
-    op.patch.off(frameListener);
 });
 
 function drawGraph(name, posy, q, col)
@@ -76,7 +52,7 @@ function drawGraph(name, posy, q, col)
         info = q[numBars - 1].num;
         for (k = numBars; k >= 0; k--)
             if (q[k])
-                maxMs = Math.max(maxMs, q[k].num * 1.25);
+                maxMs = Math.max(maxMs, q[k].num * 1);
     }
     let hmul = height / maxMs;
     if (q.length == 0)
@@ -140,8 +116,19 @@ function updateCanvas()
         drawGraph(select3.get(), height * 2, pp.durationsFrames[select3.get()], "#770077");
     else if (pp.countsFrames && pp.countsFrames[select3.get()])
         drawGraph(select3.get(), height * 2, pp.countsFrames[select3.get()], "#555555");
-
 }
+
+function removeCanvas()
+{
+    if (canvas) canvas.remove();
+    canvas = null;
+}
+
+op.on("delete", () =>
+{
+    removeCanvas();
+    op.patch.off(frameListener);
+});
 
 function createCanvas()
 {
@@ -158,6 +145,9 @@ function createCanvas()
     canvas.style.bottom = "0px";
     canvas.style["z-index"] = "10";
     containerEle.appendChild(canvas);
+    canvas.dataset.op = op.id;
+    canvas.classList.add("cablesEle");
+
     ctx = canvas.getContext("2d");
 
     updateCanvas();

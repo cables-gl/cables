@@ -729,6 +729,7 @@ export class Patch extends Events
     {
         if (!this.renderloop) return;
 
+        const startTime = performance.now();
         this.timer.update(timestamp);
         this.freeTimer.update(timestamp);
 
@@ -741,6 +742,8 @@ export class Patch extends Events
         for (let i = 0; i < this.animFrameOps.length; ++i)
             if (this.animFrameOps[i].onAnimFrame)
                 this.animFrameOps[i].onAnimFrame(time, this.renderloop.frameNum, delta);
+
+        this.perfProfiler.setDuration("cpu", performance.now() - startTime);
     }
 
     /**
