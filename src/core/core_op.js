@@ -100,6 +100,9 @@ export class Op extends Events
     static EVENT_UIATTR_CHANGE = "onUiAttribsChange";
     static EVENT_PORT_ADD = "onPortAdd";
     static EVENT_PORT_REMOVE = "onPortRemove";
+    static EVENT_PORT_REMOVED = "onPortRemoved";
+    static EVENT_PORT_ORDER_CHANGE = "portOrderChanged";
+    static EVENT_STORAGE_CHANGE = "onStorageChange";
 
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
@@ -228,7 +231,13 @@ export class Op extends Events
     /** @returns {Port} */
     getFirstPortOut() { return null; }
     isInBlueprint2() { return false; }
+<<<<<<< HEAD
     getSubPatch() { return "0"; }
+=======
+
+    /** @returns {string|number} */
+    getSubPatch() { return 0; }
+>>>>>>> a66dd3593605d8187d781da12413220d58a1dd4a
 
     /* minimalcore:end */
 
@@ -336,7 +345,7 @@ export class Op extends Events
             this.storage[p] = newAttribs[p];
         }
 
-        if (changed) this.emitEvent("onStorageChange", newAttribs);
+        if (changed) this.emitEvent(Op.EVENT_STORAGE_CHANGE, newAttribs);
     }
 
     /* minimalcore:end */
@@ -1860,7 +1869,7 @@ export class Op extends Events
             {
                 this.portsIn.splice(ipi, 1);
                 this.emitEvent(Op.EVENT_UIATTR_CHANGE, {});
-                this.emitEvent("onPortRemoved", {});
+                this.emitEvent(Op.EVENT_PORT_REMOVED, {});
                 return;
             }
         }
@@ -1870,7 +1879,7 @@ export class Op extends Events
             {
                 this.portsOut.splice(ipi, 1);
                 this.emitEvent(Op.EVENT_UIATTR_CHANGE, {});
-                this.emitEvent("onPortRemoved", {});
+                this.emitEvent(Op.EVENT_PORT_REMOVED, {});
                 return;
             }
         }
