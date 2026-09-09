@@ -15,6 +15,7 @@ export class CgContext extends Events
 
     static EVENT_RESIZE = "resize";
 
+    name = "";
     #patch = null;
     gApi = 0;
     patchConfig = null;
@@ -344,8 +345,8 @@ export class CgContext extends Events
     }
 
     /**
-     * @param {vec3} identTranslate
-     * @param {vec3} identTranslateView
+     * @param {vec3} [identTranslate]
+     * @param {vec3} [identTranslateView]
      */
     _startMatrixStacks(identTranslate, identTranslateView)
     {

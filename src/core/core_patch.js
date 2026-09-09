@@ -175,6 +175,7 @@ export class Patch extends Events
         this.vars = {};
         if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
+        /** @type {import("../corelibs/cgl/cgl_state.js").CglContext} */
         this.cgl = null;// new CGL.Context(this);
         this.cgp = null;
 

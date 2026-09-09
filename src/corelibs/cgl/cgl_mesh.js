@@ -279,7 +279,7 @@ class Mesh extends CgMesh
 
                 if (array.length > 10000)
                 {
-                    this.#cgl.perfProfiler.count("nontypeattrib");
+                    this.#cgl.perfProfiler.count(this.#cgl.name + "nontypeattrib");
                     // this.#cgl.profileData.profileNonTypedAttrib++;
                     // this.#cgl.profileData.profileNonTypedAttribNam s = "(" + this._name + ":" + attr.name + ")";
                 }
@@ -533,7 +533,7 @@ class Mesh extends CgMesh
 
         MESH.lastMesh = null;
 
-        this.#cgl.perfProfiler.count("meshSetGeom");
+        this.#cgl.perfProfiler.count(this.#cgl.name + "meshSetGeom");
         const measure = this.#cgl.profileData.start("meshSetGeom");
 
         this._disposeAttributes();
@@ -1006,8 +1006,8 @@ class Mesh extends CgMesh
         }
 
         /* minimalcore:start */
-        this.#cgl.perfProfiler.count("glprimitives", Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
-        this.#cgl.perfProfiler.count("meshDrawCalls");
+        this.#cgl.perfProfiler.count(this.#cgl.name + "glprimitives", Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
+        this.#cgl.perfProfiler.count(this.#cgl.name + "meshDrawCalls");
         // if (this.#cgl.profileData.profileDrawCalls)
         // {
         //     this.#cgl.profileData.profileDrawCalls.push({
