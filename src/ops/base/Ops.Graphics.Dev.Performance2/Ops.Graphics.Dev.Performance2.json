@@ -19,6 +19,16 @@
             },
             {
                 "type": 0,
+                "name": "Measure Memory",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Measure GPU",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "active",
                 "subType": "boolean"
             }

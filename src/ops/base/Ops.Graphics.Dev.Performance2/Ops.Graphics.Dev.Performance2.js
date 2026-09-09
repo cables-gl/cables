@@ -2,6 +2,8 @@ const
     select = op.inDropDown("data", [], "cpu"),
     select2 = op.inDropDown("data2", [], "gpu_gl"),
     select3 = op.inDropDown("data3", [], "fps"),
+    activeMem = op.inBool("Measure Memory", false),
+    activeGPU = op.inBool("Measure GPU", true),
     active = op.inBool("active", true);
 
 let ctx = null;
@@ -19,6 +21,8 @@ createCanvas();
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
 {
+    if (op.patch.cgl) op.patch.cgl.doGlQueryTiming = active.get() && activeGPU.get();
+
     if (active.get() && !canvas) createCanvas();
     if (!active.get())
     {
@@ -30,13 +34,14 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     canvas.style.top = (cr.top + cr.height - canvas.height) + "px";
     canvas.style.left = cr.left + "px";
 
-    if (op.patch.cgl) op.patch.cgl.doGlQueryTiming = true;
     pp.endFrame();
 
     const keys = Object.keys(pp.durationsFrames).concat(Object.keys(pp.countsFrames));
     select.setUiAttribs({ "values": keys });
     select2.setUiAttribs({ "values": keys });
     select3.setUiAttribs({ "values": keys });
+
+    if (activeMem.get()) op.patch.perfProfiler.count("Memory used", (Math.round((performance.memory.usedJSHeapSize / 1024 / 1024) * 100) / 100));
 
     updateCanvas();
 });
