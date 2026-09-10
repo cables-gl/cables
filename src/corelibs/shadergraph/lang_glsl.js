@@ -41,6 +41,13 @@ export class LangGlsl extends Lang
         return this.getVarDef(node, node.resultVarName);
     }
 
+    /**
+     * @param {(arg0: any, arg1: string) => void} log
+     * @param {string} typeTo
+     * @param {string} typeFrom
+     * @param {string} paramStr
+     * @param {import("./shadergraphprogram.js").ShaderNode} node
+     */
     convertTypes(log, typeTo, typeFrom, paramStr, node)
     {
         if (typeFrom == typeTo) return paramStr;

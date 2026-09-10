@@ -41,7 +41,7 @@ export class Lang
         if (type == "vec3")
         {
 
-            const defaultValue = value || "0., 0.";
+            const defaultValue = value || "0., 0., 0.";
             return this.strTypeVec3 + "(" + defaultValue + ")";
 
         }

@@ -39,7 +39,7 @@ function updateUi()
     op.setUiAttrib({ "extendTitle": inType.get() + " " + inName.get() });
 
     inY.setUiAttribs({ "greyout": !inType.get().startsWith("vec") });
-    inZ.setUiAttribs({ "greyout": inType.get() != "vec4" });
+    inZ.setUiAttribs({ "greyout": !(inType.get() == "vec4" || inType.get() == "vec3") });
     inW.setUiAttribs({ "greyout": inType.get() != "vec4" });
 
     inX.setUiAttribs({ "colorPick": inType.get() == "vec4" });
@@ -64,9 +64,6 @@ function update(shader, bindings)
     // const mgpu = op.patch.frameStore.mgpu;
     if (!uni && shader)
     {
-
-        // binding=new CGL.Uniform()
-
         let uniType = "f";
         if (inType.get() == "vec4") uniType = "4f";
         if (inType.get() == "vec3") uniType = "3f";
