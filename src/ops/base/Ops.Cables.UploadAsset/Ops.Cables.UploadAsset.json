@@ -14,6 +14,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1715960888304
+        },
+        {
+            "message": "Added option to upload assets to other patches",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1789051397917
         }
     ],
     "layout": {
@@ -25,6 +31,10 @@
             {
                 "type": 5,
                 "name": "Base64 String"
+            },
+            {
+                "type": 5,
+                "name": "Patch ID"
             },
             {
                 "type": 1,
@@ -50,7 +60,20 @@
     "summary": "Upload a file into the cables patch assets using a base64 string",
     "license": "MIT",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Filename",
+                "text": "Filename of the new asset, only basename will be used"
+            },
+            {
+                "name": "Base64 String",
+                "text": "Content"
+            },
+            {
+                "name": "Patch ID",
+                "text": "Id of other patch to upload to, empty field will upload to current patch"
+            }
+        ]
     },
     "exampleProjectId": "6vDCsh",
     "isReleased": true
