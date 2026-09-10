@@ -1,10 +1,10 @@
-mat4 transform3d(mat4 m, vec3 translation, vec3 rotation, vec3 scale) {
-rotation*= 0.017453292519943295;
+mat4 transform3d(mat4 m, vec3 translation, vec3 rotation, vec3 scale)
+{
+    rotation=radians(rotation);
     float cx = cos(rotation.x), sx = sin(rotation.x);
     float cy = cos(rotation.y), sy = sin(rotation.y);
     float cz = cos(rotation.z), sz = sin(rotation.z);
     mat4 trs;
-
 
     trs[0][0] = (cy * cz) * scale.x;
     trs[0][1] = (cy * sz) * scale.x;

@@ -291,6 +291,10 @@ export class ShaderGraphProgram extends Events
                     else callstr += ", ";
                 }
 
+                if (node.type == "swizzle")
+                {
+                    callstr += node.srcSwizzle;
+                }
                 count++;
             }
         }
