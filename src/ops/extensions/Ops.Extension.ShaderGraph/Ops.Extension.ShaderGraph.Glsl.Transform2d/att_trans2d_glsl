@@ -1,0 +1,14 @@
+vec2 transform2d(vec2 point, vec2 translation,  vec2 scale,float rotation)
+{
+    point *= scale;
+
+    float s = sin(rotation);
+    float c = cos(rotation);
+    mat2 rotationMatrix = mat2(c, -s, s, c);
+
+    point += translation;
+
+    point = rotationMatrix * point;
+
+    return point;
+}

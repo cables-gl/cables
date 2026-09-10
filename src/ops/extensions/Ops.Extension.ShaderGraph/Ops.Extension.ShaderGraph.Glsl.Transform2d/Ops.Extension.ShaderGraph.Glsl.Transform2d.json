@@ -1,0 +1,110 @@
+{
+    "id": "ca577141-4790-43cf-a4df-0cc8be8d9f1d",
+    "created": 1789042258677,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786433102805
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Main renamed to Ops.Extension.MiniGpu.Sg.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786441277694
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Random renamed to Ops.Extension.ShaderGraph.Wgsl.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539331292
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786733681137
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786734927681
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786736040894
+        },
+        {
+            "message": "Extension.ShaderGraph.Wgsl.Shape2dPlus renamed to Ops.Extension.ShaderGraph.Wgsl.Shape2dCross",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786736594412
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Wgsl.Shape2dCross",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789040543349,
+            "cloneOf": "0c188b97-fc47-4182-b764-c50034807d69"
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Glsl.Shape2dCross",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789042258677,
+            "cloneOf": "396bbaf1-f86a-4d94-817a-964d7e0b5308"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "pos",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "translation",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "scale",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "rotate",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec2"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
