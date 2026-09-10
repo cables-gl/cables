@@ -99,8 +99,9 @@ export class ShaderGraphProgram extends Events
             this._opIdsHeadUniSrc[op.id] = node.srcUni;
         }
 
-        if (node.src && this._opIdsHeadFuncSrc[op.name] != node.src)
+        if (node.hasOwnProperty("src") && this._opIdsHeadFuncSrc[op.name] != String(node.src))
         {
+            node.src = String(node.src);
             this._headFuncSrc += node.src || "";
             this._opIdsHeadFuncSrc[op.name] = node.src;
         }

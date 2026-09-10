@@ -51,33 +51,30 @@ export class PerfProfiler
 
         this.counts = {};
         this.durations = {};
-        // for (const i in this.counts) this.counts[i] = 0;
-        // for (const i in this.durations) this.durations[i] = 0;
     }
 
     /**
-     * @param {string} name
      * @param {number} v
+     * @param {string} _name
      */
-    count(name, v)
+    count(_name, v)
     {
+        const name = "count " + _name;
         this.counts[name] = this.counts[name] || 0;
         this.countsFrames[name] = this.countsFrames[name] || 0;
-        if (v)
-            this.counts[name] += v;
-        else
-            this.counts[name]++;
+        if (v) this.counts[name] += v;
+        else this.counts[name]++;
     }
 
     /**
-     * @param {string} name
+     * @param {string} _name
      * @param {number} t
      */
-    setDuration(name, t)
+    setDuration(_name, t)
     {
+        const name = "duration " + _name;
         this.durations[name] = this.durations[name] || 0;
         this.durationsFrames[name] = this.durationsFrames[name] || 0;
-        if (t)
-            this.durations[name] += t;
+        if (t) this.durations[name] += t;
     }
 }

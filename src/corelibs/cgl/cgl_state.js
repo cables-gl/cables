@@ -32,6 +32,7 @@ export class CglContext extends CgContext
     constructor(_patch = null, patchConfig)
     {
         super(_patch, patchConfig);
+        this.name = "cgl";
         this.gApi = CgContext.API_WEBGL;
         if (_patch)
         {
@@ -423,7 +424,7 @@ export class CglContext extends CgContext
         this.emitEvent("endframe");
 
         this.fpsCounter.endFrame();
-        this.perfProfiler.count(this.name + "fps", this.fpsCounter.stats.fps);
+        this.perfProfiler.count(this.name + " fps", this.fpsCounter.stats.fps);
     }
 
     logStackError(str)
@@ -1305,7 +1306,7 @@ export class CglContext extends CgContext
                 const gpuTimeNs = this.gl.getQueryParameter(this.glQueryQuery, this.gl.QUERY_RESULT);
                 const gpuTimeMs = gpuTimeNs / 1000000;
 
-                this.perfProfiler.setDuration(this.name + "gpu_cgl ", gpuTimeMs);
+                this.perfProfiler.setDuration(this.name + " gpu", gpuTimeMs);
                 setTimeout(() => { this.glQueryQuery = null; }, 50); // timer queries seem to work better when not called directly after another...
             }
             else

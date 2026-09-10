@@ -184,10 +184,10 @@ function frame(timestamp)
         canvas.dataset.perfms = Math.round((performance.now() - timeStart) * 100) / 100;
         canvas.dataset.perffps = frames;
         fpsTime = performance.now();
+        op.patch.perfProfiler.count("minigpu fps", frames);
         frames = 0;
     }
 
-    op.patch.perfProfiler.setDuration("gpu", performance.now() - timeStart);
     op.patch.emitEvent("renderedFrame", { "canvas": canvas, "name": "minigpu" });
 
     /* minimalcore:end */
