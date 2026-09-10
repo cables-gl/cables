@@ -1,0 +1,6 @@
+float shapeRect(vec2 p,vec2 size)
+{
+  vec2 d=abs(p)-size;
+  float a=length(max(d,vec2(0.0))) + min(max(d.x,d.y),0.0);
+  return step(a,0.);
+}
