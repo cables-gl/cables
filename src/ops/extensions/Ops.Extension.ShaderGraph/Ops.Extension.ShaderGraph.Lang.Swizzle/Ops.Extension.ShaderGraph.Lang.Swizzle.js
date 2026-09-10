@@ -19,30 +19,27 @@ in1.onChange =
         if (inp.isLinked())
         {
             const inType = inp.links[0].getOtherPort(inp).op.shaderNode.results[0].type;
-            console.log("innnn", inType);
 
             op.shaderNode.results[0].type = resultType.get();
-            let num = 4;
-
             op.shaderNode.srcSwizzle = ".";
-
             op.shaderNode.srcSwizzle += in1.get();
 
-            if (resultType.get() == "vec4" || resultType.get() == "vec3" || resultType.get() == "vec2")
-                op.shaderNode.srcSwizzle += in2.get();
+            const show2 = resultType.get() == "vec4" || resultType.get() == "vec3" || resultType.get() == "vec2";
+            const show3 = resultType.get() == "vec4" || resultType.get() == "vec3";
+            const show4 = resultType.get() == "vec4";
 
-            if (resultType.get() == "vec4" || resultType.get() == "vec3")
-                op.shaderNode.srcSwizzle += in3.get();
+            if (show2) op.shaderNode.srcSwizzle += in2.get();
+            if (show3) op.shaderNode.srcSwizzle += in3.get();
+            if (show4) op.shaderNode.srcSwizzle += in4.get();
 
-            if (resultType.get() == "vec4")
-                op.shaderNode.srcSwizzle += in4.get();
+            in2.setUiAttribs({ "greyout": !show2 });
+            in3.setUiAttribs({ "greyout": !show3 });
+            in4.setUiAttribs({ "greyout": !show4 });
 
             op.shaderNode.srcSwizzle = op.shaderNode.srcSwizzle.toLowerCase();
 
             op.updateGraph();
-
         }
-
     };
 
 new CABLES.ShaderGraphOp(this,
