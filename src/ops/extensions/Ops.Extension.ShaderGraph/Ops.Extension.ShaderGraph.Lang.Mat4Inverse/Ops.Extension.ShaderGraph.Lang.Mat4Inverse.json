@@ -1,0 +1,64 @@
+{
+    "id": "0e743209-7056-47fe-a386-415bb7dc8bd1",
+    "created": 1789045429120,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786434225533
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Sin renamed to Ops.Extension.ShaderGraph.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539098140
+        },
+        {
+            "message": "Extension.ShaderGraph.Sin renamed to Ops.Extension.ShaderGraph.Lang.Sin",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539274029
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Lang.Sin",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789045429120,
+            "cloneOf": "6770482b-8c66-42cc-a100-2c226cd904c1"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "number",
+                "objType": "sg_mat4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_mat4"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}
