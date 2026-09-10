@@ -1,1 +1,22 @@
-{"ports":[{"id":"36nbm6qlt","title":"trigger","dir":1,"type":1}]}
+{
+    "ports": [
+        {
+            "id": "tq8u4oq9c",
+            "title": "prefix",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 5,
+            "value": "",
+            "order": 0
+        },
+        {
+            "id": "36nbm6qlt",
+            "title": "trigger",
+            "dir": 1,
+            "type": 1,
+            "order": 1001
+        }
+    ]
+}

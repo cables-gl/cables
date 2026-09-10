@@ -11,9 +11,12 @@ const timer = new CABLES.Timer();
 let lastTime = null;
 let time = 0;
 let syncTimeline = false;
+let speed = inSpeed.get();
 
 playPause.onChange = setState;
 setState();
+
+inSpeed.onChange = () => { speed = inSpeed.get(); };
 
 function setState()
 {
@@ -52,13 +55,12 @@ op.onAnimFrame = function (tt, frameNum, deltaMs)
     {
         if (CABLES.overwriteTime !== undefined)
         {
-            outTime.set(CABLES.overwriteTime * inSpeed.get());
+            outTime.set(CABLES.overwriteTime * speed);
         }
         else
-
         if (syncTimeline)
         {
-            outTime.set(tt * inSpeed.get());
+            outTime.set(tt * speed);
         }
         else
         {
@@ -75,7 +77,7 @@ op.onAnimFrame = function (tt, frameNum, deltaMs)
             const t = Math.abs(timerVal - lastTime);
             lastTime = timerVal;
 
-            time += t * inSpeed.get();
+            time += t * speed;
             if (time != time) time = 0;
             outTime.set(time);
         }

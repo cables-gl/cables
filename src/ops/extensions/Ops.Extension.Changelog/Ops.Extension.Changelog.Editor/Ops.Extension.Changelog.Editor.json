@@ -389,6 +389,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1788358479658
+        },
+        {
+            "message": "better performance on viztexture ops, textures previews cached internally, can be updated less often than canvas now",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1788962161992
         }
     ],
     "isReleased": true,

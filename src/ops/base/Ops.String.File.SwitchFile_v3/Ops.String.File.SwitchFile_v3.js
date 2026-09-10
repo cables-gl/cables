@@ -29,18 +29,18 @@ function update()
 }
 
 idx.onChange =
-inStrs.onChange = () =>
-{
-    // const stringPorts = inStrs.get();
-    // let arr = [];
+    inStrs.onChange = () =>
+    {
+        const stringPorts = inStrs.get();
+        // let arr = [];
 
-    // setUi();
+        // setUi();
 
-    // for (let i = 0; i < stringPorts.length; i++)
-    // {
-    //     arr[i] = stringPorts[i].get() || "";
-    // }
-    // outArr.set(arr);
-    // outNum.set(stringPorts.length);
-    update();
-};
+        // for (let i = 0; i < stringPorts.length; i++)
+        // {
+        //     arr[i] = stringPorts[i].get() || "";
+        // }
+        // outArr.set(arr);
+        outNum.set(stringPorts.length);
+        update();
+    };

@@ -21,7 +21,16 @@
         "subpatchop"
     ],
     "layout": {
-        "portsIn": [],
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "tq8u4oq9c",
+                "uititle": "prefix",
+                "values": [
+                    ""
+                ]
+            }
+        ],
         "portsOut": [
             {
                 "type": 1,
