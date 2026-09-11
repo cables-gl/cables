@@ -11,9 +11,9 @@ An attachment file can be created by clicking on an Op and then clicking the cre
 ![create_attachment](img/attachment_files.png)
 
 You then need to give your attachment a name that will later be used to access its content in your Op.
-An attachment named `my_attachment` will be accessible in the Op via `attachments["my_attachment"]`
+An attachment named `my_attachment` will be accessible in the Op via `attachments.my_attachment`
 
-**Hint:** All dots (`.`) in the name entered will be converted to underscores (`_`), so `myattachment.js` will be `attachments["myattachment_js"]`!
+**Hint:** All dots (`.`) in the name entered will be converted to underscores (`_`), so `myattachment.js` will be `attachments.myattachment_js`!
 
 ## Editing Attachment
 
@@ -30,7 +30,7 @@ The attachment can now be accessed inside of your op, select the op and press 'e
 This snippet will output the contents of your attachment (e.g. "hello attachment"):
 
 ```javascript
-console.log(attachments["my_attachment"]);
+console.log(attachments.my_attachment);
 ```
 
 ### Using "Include JS"
@@ -107,8 +107,8 @@ Received message from worker: ECHO
 ### Static Attachment / WASM
 
 Files of type "Static Attachment" will be base64 encoded and added to the op in the variable `staticAttachments`. You can get back
-the binary representation by calling `const binary = atob(staticAttachments['my_attachment']);`. For performance reasons it's often a good idea to remove
-the base64 representation after usage/conversion by calling `delete staticAttachments['my_attachment']`;
+the binary representation by calling `const binary = atob(staticAttachments.my_attachment);`. For performance reasons it's often a good idea to remove
+the base64 representation after usage/conversion by calling `delete staticAttachments.my_attachment`;
 
 You can use a "Static Attachment" to work with [WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) modules in your cables Ops.
 
