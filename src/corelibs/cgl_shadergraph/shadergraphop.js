@@ -4,7 +4,7 @@ export class ShaderGraphOp
 {
     constructor(op, src)
     {
-        op.sgOp = this;
+        op.attribs.sgOp = this;
         this._op = op;
         this._inPorts = [];
         this._outPorts = [];

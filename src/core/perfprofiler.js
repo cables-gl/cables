@@ -54,8 +54,8 @@ export class PerfProfiler
     }
 
     /**
-     * @param {number} v
      * @param {string} _name
+     * @param {number} [v]
      */
     count(_name, v)
     {

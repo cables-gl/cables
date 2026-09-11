@@ -20,13 +20,17 @@ MESH.lastMesh = null;
  * @property {number} itemSize
  * @property {number} numItems
  * @property {string} name
+ * @property {GLenum} type
+ * @property {boolean} instanced
+ * @property {Function} cb
+ * @property {number} startItem
  */
 
 /**
  * @typedef {Object} CglMeshAttributeOptions
  * @property {boolean} [instanced]
  * @property {Function} [cb]
- * @property {Function} [type]
+ * @property {GLenum} [type]
  */
 
 /**
@@ -369,6 +373,8 @@ class Mesh extends CgMesh
 
         let type = this.#cgl.gl.FLOAT;
         if (options && options.type) type = options.type;
+
+        /** @type {AttributeObject} */
         const attr = {
             "buffer": buffer,
             "name": name,
@@ -442,11 +448,11 @@ class Mesh extends CgMesh
                 for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
             }
 
-            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (_attr, _geom, shader) =>
+            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, { "cb": (_attr, _geom, shader) =>
             {
                 if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
                 shader.uniformNumVertices.setValue(this._numVerts);
-            });
+            } });
         }
     }
 
@@ -912,8 +918,9 @@ class Mesh extends CgMesh
 
         /* minimalcore:end */
 
-        if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
-        else if (!this.#bufVerticesIndizes || this.#bufVerticesIndizes.numItems === 0)
+        // if (this.hasFeedbacks && this.hasFeedbacks()) this.drawFeedbacks(shader, prim);
+        // else
+        if (!this.#bufVerticesIndizes || this.#bufVerticesIndizes.numItems === 0)
         {
 
             /*
@@ -1008,16 +1015,6 @@ class Mesh extends CgMesh
         /* minimalcore:start */
         this.#cgl.perfProfiler.count(this.#cgl.name + "glprimitives", Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
         this.#cgl.perfProfiler.count(this.#cgl.name + "meshDrawCalls");
-        // if (this.#cgl.profileData.profileDrawCalls)
-        // {
-        //     this.#cgl.profileData.profileDrawCalls.push({
-        //         "name": this._name,
-        //         "shader": shader.name,
-        //         "verts": (this._bufVertexAttrib.numItems) * (this.#numInstances || 1),
-        //         "instances": this.#numInstances,
-        //         "opId": this.opId
-        //     });
-        // }
 
         /* minimalcore:end */
         this.#cgl.printError("mesh render " + this._name);
