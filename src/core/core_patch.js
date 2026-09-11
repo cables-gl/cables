@@ -243,6 +243,31 @@ export class Patch extends Events
 
     /* minimalcore:end */
 
+    // re-declared here because TypeScript's declaration emit drops the "extends Events"
+    // heritage clause for this generic class, which would otherwise hide these members
+    /**
+     * @param {string} eventName
+     * @param {(...args: any[]) => any} cb
+     * @param {string} [idPrefix]
+     */
+    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+
+    /**
+     * @param {*} listenerParam
+     */
+    off(listenerParam) { return super.off(listenerParam); }
+
+    /**
+     * @param {string} which
+     * @param {*} [param1]
+     * @param {*} [param2]
+     * @param {*} [param3]
+     * @param {*} [param4]
+     * @param {*} [param5]
+     * @param {*} [param6]
+     */
+    emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
+
     isPlaying()
     {
         if (this.renderloop) return !this.renderloop.paused;
