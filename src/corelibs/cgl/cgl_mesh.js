@@ -24,6 +24,8 @@ MESH.lastMesh = null;
  * @property {boolean} instanced
  * @property {Function} cb
  * @property {number} startItem
+ * @property {number} arrayLength
+
  */
 
 /**
@@ -571,6 +573,9 @@ class Mesh extends CgMesh
         measure.finish();
     }
 
+    /**
+     * @param {Shader} shader
+     */
     _preBind(shader)
     {
         for (let i = 0; i < this.#attributes.length; i++)
@@ -600,6 +605,9 @@ class Mesh extends CgMesh
         }
     }
 
+    /**
+     * @param {Shader} shader
+     */
     _bind(shader)
     {
         if (!shader) return;
@@ -876,7 +884,7 @@ class Mesh extends CgMesh
         if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
         let elementDiv = 1;
-        let queryStarted = false;
+        // let queryStarted = false;
 
         /* minimalcore:start */
         // const doQuery = this.#cgl.profileData.doProfileGlQuery;
@@ -1003,7 +1011,6 @@ class Mesh extends CgMesh
                 this.#log.error("mesh", this);
                 this.#log.error("shader", shader);
 
-                const attribNames = [];
                 for (let i = 0; i < this.#cgl.gl.getProgramParameter(shader.getProgram(), this.#cgl.gl.ACTIVE_ATTRIBUTES); i++)
                 {
                     const name = this.#cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
