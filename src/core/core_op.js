@@ -57,10 +57,9 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [width]
  * @property {Translation} [translate]
  * @property {TranslationTemp} [translateTemp]
- * @property {string} [subPatch]
+ * @property {string|number} [subPatch]
  * @property {object} [subPatchOp]
  * @property {string} [tempSubOldOpId]
- * @property {string} [subPatch]
  * @property {string} [comment_title]
  * @property {boolean} [highlighted]
  * @property {boolean} [highlightedMore]
@@ -232,7 +231,7 @@ export class Op extends Events
     getFirstPortOut() { return null; }
     isInBlueprint2() { return false; }
 
-    /** @returns {string} */
+    /** @returns {string|number} */
     getSubPatch() { return 0; }
 
     /* minimalcore:end */
