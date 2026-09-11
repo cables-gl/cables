@@ -94,6 +94,7 @@ export class Patch extends Events
     static EVENT_DISPOSE = "dispose";
     static EVENT_ANIM_MAXTIME_CHANGE = "animmaxtimechange";
     static EVENT_INIT_CGL = "INIT_CGL";
+    static DEFAULT_SUBPATCHID = "0";
 
     #log;
     #renderOneFrame = false;

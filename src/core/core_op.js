@@ -233,7 +233,7 @@ export class Op extends Events
     isInBlueprint2() { return false; }
 
     /** @returns {string} */
-    getSubPatch() { return 0; }
+    getSubPatch() { return Patch.DEFAULT_SUBPATCHID; }
 
     /* minimalcore:end */
 
