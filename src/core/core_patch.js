@@ -60,7 +60,7 @@ import { PerfProfiler } from "./perfprofiler.js";
  */
 
 /**
- * @template {Op<any>} T Patch
+ * @template {Op<any>} [T=Op<any>] Patch
  *
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -100,7 +100,7 @@ export class Patch extends Events
     #renderOneFrame = false;
     #initialDeserialize = true;
 
-    /** @type {Array<Op<any>>} */
+    /** @type {Array<T>} */
     ops = [];
     settings = {};
     animMaxTime = 0;
@@ -542,7 +542,7 @@ export class Patch extends Events
                 // return;
             }
 
-            this.ops.push(op);
+            this.ops.push(/** @type {T} */ (op));
             this._opIdCache[op.id] = op;
 
             if (this._subPatchCacheAdd) this._subPatchCacheAdd(uiAttribs.subPatch, op);
@@ -832,7 +832,7 @@ export class Patch extends Events
 
     /**
      * @param {String} opid
-     * @returns {Op}
+     * @returns {T}
      */
     getOpById(opid)
     {
