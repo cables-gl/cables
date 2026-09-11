@@ -14,7 +14,7 @@ Add them to the Op via "Manage Op" and then "Add Dependencies". From there you h
 ### Upload File
 
 This option let's you upload any javascript file to your Op and use it as a library. Any code that is in the file
-will be loaded by cables and be included in any export. Libraries are loaded *before* the Op is executed.
+will be loaded by cables and be included in any export. Libraries are loaded _before_ the Op is executed.
 
 Pick a type for your library. If unsure, read on [below](#librarytypes). You can now use all the new functionality in your Op.
 
@@ -27,14 +27,14 @@ Pick a type for your library. If unsure, read on [below](#librarytypes).
 
 This is a great way to quickly test libraries in cables, there are a few caveats though:
 
-* If the library is no longer available at the given URL, your Op will no longer work.
-* Sometimes you will run into [CORS-Issues](../../4_export_embed/cors) that might not be fixable by you, if you do not control the "other side".
-* The loading of your patch will now need access to the internet, even in exports.
+- If the library is no longer available at the given URL, your Op will no longer work.
+- Sometimes you will run into [CORS-Issues](../../4_export_embed/cors) that might not be fixable by you, if you do not control the "other side".
+- The loading of your patch will now need access to the internet, even in exports.
 
 ### From Npm (Standalone only)
 
 In the [standalone version](https://cables.gl/standalone) of cables you can add [npm packages](https://www.npmjs.com/) via this tab.
-Simply enter the name of the package (as you  would do when running `npm install`) and cables will try to install and load the npm.
+Simply enter the name of the package (as you would do when running `npm install`) and cables will try to install and load the npm.
 
 Be aware that the [NPM ecosystem](https://www.npmjs.com/) is shared between browsers and "backend systems" ([nodejs](https://nodejs.org/))
 and some packages cannot be used by cables, at all. Other packages might be architecture dependent and will not work on all operating systems.
@@ -65,6 +65,7 @@ Once you added a library to an op you can start using it right away. The list of
 to delete or download any custom library added.
 
 <a id="librarytypes"></a>
+
 ## File types
 
 By picking the type of the file ("Common JS", "JS Module" or "Static Attachment") you tell cables how your file needs to be
@@ -82,62 +83,12 @@ in base64. This is useful for binary parts of a library or WASM code (see below)
 
 #### How to best-guess the library type?
 
-* Check the documentation of the library, especially the examples on how to import the lib
-* * if it says something like `<script src="mylib.js">` it is most likely "Common JS"
-* * if it says something like `import MyLib from "mylib.js"` you have a "JS Module"
-* Check the sourcecode
-* * search for `module.exports` or `require`, if this is present you will most likely have a "Common JS" library
-* * if you find something like `class` or `export const` or `export default`, you have a "JS Module"
-* Simply try both, you will see errors in the console that might indicate the type of your library
-* * `export declarations may only appear at top level of a module` means you loaded a "JS Module" but have your type as "Common Js"
-* * loading a "Common JS" as a "JS Module" might work, but will not have the right contents in your `YourLib` variable and fail when using it
-
-### Static Attachment / WASM
-
-Files of type "Static Attachment" will be base64 encoded and added to the op in the variable `staticAttachments`. You can get back
-the binary representation by calling `const binary = atob(staticAttachments['my_attachment']);`. For performance reasons it's often a good idea to remove
-the base64 representation after usage/conversion by calling `delete staticAttachments['my_attachment']`;
-
-You can use a "Static Attachment" to work with [WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) modules in your cables Ops.
-
-We will create an op, following the example from [MSDN](https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Using_the_JavaScript_API)
-by uploading their `simple.wasm` and making the base64 encoded content available in the op as `staticAttachments['simple.wasm']`:
-
-Download [simple.wasm](https://raw.githubusercontent.com/mdn/webassembly-examples/master/js-api-examples/simple.wasm), upload it
-as a dependency (as described above) and pick "Static Attachment" as a type.
-
-Now, in the Op code, add this:
-```javascript
-// create data url from base64 wasm code, make sure the mime-type is "application/wasm"
-const simpleWasm = "data:application/wasm;base64," + staticAttachments['simple_wasm'];
-
-// define callable functions
-const importObject = {
-    "my_namespace": { "imported_func": (arg) => { return console.log(arg); } },
-};
-
-// fetch code from dataurl and instantiate wasm
-fetch(simpleWasm).then((g) =>
-{
-    WebAssembly.instantiateStreaming(g, importObject).then(
-        (obj) =>
-        {
-            // call wasm-function
-            obj.instance.exports.exported_func();
-
-            // free up memory after usage of attachment
-            delete staticAttachments['simple_wasm'];
-        }
-    );
-});
-```
-As stated in the example:
-
-"The net result of this is that we call our exported WebAssembly function exported_func, which in turn calls our imported JavaScript function imported_func, which logs the value provided inside the WebAssembly instance (42) to the console."
-
-#### WASM in libraries / best practices
-- Every library does the loading of WASM differently,
-- some libraries implement something like "locateFile" or "wasm" in their init process, this usually takes a dataurl and does the fetch part above for you
-- See [Ops.Gl.GLTF.GltfDracoCompression](https://cables.gl/op/Ops.Gl.GLTF.GltfDracoCompression_v2) for usage of WASM without using fetch (create Uint8Array from base64, and use additional wrapper)
-- See [Ops.Gl.GLTF.KtxCompression](https://cables.gl/op/Ops.Gl.GLTF.KtxCompression_v2) for usage for another way to feed WASM to a library (convert base64 back to binary)
-- Check your library documentation and sourcecode on how it expects wasm to be loaded/defined
+- Check the documentation of the library, especially the examples on how to import the lib
+- - if it says something like `<script src="mylib.js">` it is most likely "Common JS"
+- - if it says something like `import MyLib from "mylib.js"` you have a "JS Module"
+- Check the sourcecode
+- - search for `module.exports` or `require`, if this is present you will most likely have a "Common JS" library
+- - if you find something like `class` or `export const` or `export default`, you have a "JS Module"
+- Simply try both, you will see errors in the console that might indicate the type of your library
+- - `export declarations may only appear at top level of a module` means you loaded a "JS Module" but have your type as "Common Js"
+- - loading a "Common JS" as a "JS Module" might work, but will not have the right contents in your `YourLib` variable and fail when using it
