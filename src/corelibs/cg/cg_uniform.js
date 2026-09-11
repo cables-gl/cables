@@ -279,34 +279,64 @@ export class CgUniform
         return this._port;
     }
 
-    // setValueAny(_v) {}// overwritten in implementation
-    // updateValueAny(_v) {}// overwritten in implementation
-    // setValueF(_v) {}// overwritten in implementation
-    // updateValueF(_v) {}// overwritten in implementation
-    // setValueArrayF(_v) {}// overwritten in implementation
-    // updateValueArrayF(_v) {}// overwritten in implementation
-    // setValueArray2F(_v) {}// overwritten in implementation
-    // updateValueArray2F(_v) {}// overwritten in implementation
-    // setValueArray3F(_v) {}// overwritten in implementation
-    // updateValueArray3F(_v) {}// overwritten in implementation
-    // setValueArray4F(_v) {}// overwritten in implementation
-    // updateValueArray4F(_v) {}// overwritten in implementation
-    // setValueI(_v) {}// overwritten in implementation
-    // updateValueI(_v) {}// overwritten in implementation
-    // setValue2I(_v) {}// overwritten in implementation
-    // updateValue2I(_v) {}// overwritten in implementation
-    // setValue3I(_v) {}// overwritten in implementation
-    // updateValue3I(_v) {}// overwritten in implementation
-    // setValue4I(_v) {}// overwritten in implementation
-    // updateValue4I(_v) {}// overwritten in implementation
-    // setValueBool(_v) {}// overwritten in implementation
-    // updateValueBool(_v) {}// overwritten in implementation
-    // setValue4F(_v) {}// overwritten in implementation
-    // updateValue4F(_v) {}// overwritten in implementation
-    // setValue3F(_v) {}// overwritten in implementation
-    // updateValue3F(_v) {}// overwritten in implementation
-    // setValue2F(_v) {}// overwritten in implementation
-    // updateValue2F(_v) {}// overwritten in implementation
-    // setValueT(_v) {}// overwritten in implementation
-    // updateValueT(_v) {}// overwritten in implementation
+    /** @param {any} _v */
+    setValueAny(_v) {}// overwritten in implementation
+    /** @param {any} _v */
+    updateValueAny(_v) {}// overwritten in implementation
+    /** @param {number} _v */
+    setValueF(_v) {}// overwritten in implementation
+    /** @param {number} _v */
+    updateValueF(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValueArrayF(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValueArrayF(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValueArray2F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValueArray2F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValueArray3F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValueArray3F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValueArray4F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValueArray4F(_v) {}// overwritten in implementation
+    /** @param {number} _v */
+    setValueI(_v) {}// overwritten in implementation
+    /** @param {number} _v */
+    updateValueI(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValue2I(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValue2I(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValue3I(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValue3I(_v) {}// overwritten in implementation
+    /** @param {import("gl-matrix").vec4} _v */
+    setValue4I(_v) {}// overwritten in implementation
+    /** @param {import("gl-matrix").vec4} _v */
+    updateValue4I(_v) {}// overwritten in implementation
+    /** @param {boolean} _v */
+    setValueBool(_v) {}// overwritten in implementation
+    /** @param {boolean} _v */
+    updateValueBool(_v) {}// overwritten in implementation
+    /** @param {import("gl-matrix").vec4} _v */
+    setValue4F(_v) {}// overwritten in implementation
+    /** @param {import("gl-matrix").vec4} _v */
+    updateValue4F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValue3F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValue3F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    setValue2F(_v) {}// overwritten in implementation
+    /** @param {number[]} _v */
+    updateValue2F(_v) {}// overwritten in implementation
+    /** @param {any} _v */
+    setValueT(_v) {}// overwritten in implementation
+    /** @param {any} _v */
+    updateValueT(_v) {}// overwritten in implementation
 }
