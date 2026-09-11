@@ -527,7 +527,7 @@ export class Patch extends Events
         {
             op.attribs = opAttribs;
             uiAttribs = uiAttribs || {};
-            uiAttribs.subPatch = uiAttribs.subPatch || 0;
+            uiAttribs.subPatch = uiAttribs.subPatch || Patch.DEFAULT_SUBPATCHID;
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
 
