@@ -43,7 +43,6 @@ export class CgShader extends Events
     logError = true;
     num = -1;
     lastCompile = 0;
-    _addUniform = null;
     _uniforms = null;
 
     constructor()
@@ -320,6 +319,11 @@ export class CgShader extends Events
      * @returns {import("../cgl/cgl_state.js").CglContext}
      */
     getCgl()
+    {
+        throw new Error("Method not implemented.");
+    }
+
+    _addUniform()
     {
         throw new Error("Method not implemented.");
     }

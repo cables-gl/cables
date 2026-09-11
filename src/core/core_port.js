@@ -99,6 +99,7 @@ export class Port extends Events
     /** @type {Op} */
     #op = null;
 
+    /** @type {Object} */
     tempData = {};
 
     /** @type {Port[]} */
