@@ -266,6 +266,9 @@ export class Uniform extends CgUniform
         this._value = v;
     }
 
+    /**
+     * @param {import("gl-matrix").vec4} v
+     */
     setValue4I(v)
     {
         this.needsUpdate = true;

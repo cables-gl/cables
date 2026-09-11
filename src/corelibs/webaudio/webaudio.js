@@ -122,7 +122,7 @@ export class WebAudio
                         {
                             op.log(
                                 "Disconnecting audio node with in/out port index, as well as without in/out-port-index did not work ",
-                                e,
+                                e
                             );
                             if (e.printStackTrace)
                             {
@@ -213,7 +213,7 @@ export class WebAudio
             portName,
             [Port.TYPE_VALUE, Port.TYPE_OBJECT],
             options,
-            defaultValue,
+            defaultValue
         );
         port.webAudio = {};
         port.webAudio.previousAudioInNode = null;
@@ -298,7 +298,7 @@ export class WebAudio
                             {
                                 op.log(
                                     "AudioParam has minValue / maxValue defined, and value is in range, but setting the value failed! ",
-                                    e,
+                                    e
                                 );
                                 if (e.printStackTrace)
                                 {

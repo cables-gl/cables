@@ -20,6 +20,7 @@ import { utils, Port } from "cables";
 
 export class CgShader extends Events
 {
+
     id = utils.simpleId();
     _isValid = true;
 
@@ -42,6 +43,8 @@ export class CgShader extends Events
     logError = true;
     num = -1;
     lastCompile = 0;
+    _addUniform = null;
+    _uniforms = null;
 
     constructor()
     {
@@ -311,6 +314,14 @@ export class CgShader extends Events
     isValid()
     {
         return this._isValid;
+    }
+
+    /**
+     * @returns {import("../cgl/cgl_state.js").CglContext}
+     */
+    getCgl()
+    {
+        throw new Error("Method not implemented.");
     }
 
 }
