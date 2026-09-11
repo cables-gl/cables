@@ -35,6 +35,18 @@ import { showUiErrors } from "./uierrors.js";
  */
 
 /**
+ * @typedef UiError
+ * @property {string} txt
+ * @property {number} level
+ * @property {string} id
+ * @property {UiErrorOptions} options
+ */
+/**
+ * @typedef UiErrorOptions
+ * @property {string} button
+ * @property {Function} buttonCb
+ */
+/**
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
  * @property {string} [hidePort] hidePort
@@ -49,7 +61,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {boolean} [loading]
  * @property {boolean} [resizable]
  * @property {boolean} [hidden]
- * @property {object} [uierrors]
+ * @property {UiError[]} [uierrors]
  * @property {string} [color]
  * @property {UiAttrArea} [area]
  * @property {string} [comment]
@@ -106,7 +118,7 @@ export class Op extends Events
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
     static UI_ERRORLEVEL_ERROR = 2;
-    static UI_ERRORLEVEL_NOTWORKING = 3;
+    static UI_ERRORLEVEL_NOTWORKING = 1;
 
     #objName = "";
     #log = new Logger("core_op");

@@ -3,7 +3,7 @@ const data = {};
 let lastHtml = "";
 
 /**
- * @param {Op} op
+ * @param {Op<any>} op
  * @param {string} id
  * @param {string} txt
  * @param {number} level
