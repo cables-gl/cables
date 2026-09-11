@@ -1,5 +1,5 @@
 import { Logger } from "cables-shared-client";
-import { MemProfilerItem, PerfProfiler, utils } from "cables";
+import { MemProfilerItem, utils } from "cables";
 import { Uniform } from "./cgl_shader_uniform.js";
 import { CONSTANTS, Geometry, CgMesh } from "../cg/index.js";
 
@@ -9,23 +9,36 @@ import { Shader } from "./cgl_shader.js";
 // import { uuid } from "../../core/utils.js";
 
 let queryExt = null;
-let globalQueryStartedTime = 0;
-let globalQueryStarted = null;
+// let globalQueryStartedTime = 0;
+// let globalQueryStarted = null;
 const MESH = {};
 MESH.lastMesh = null;
 
 /**
- * @typedef AttributeObject
- * @property {WebGLBuffer} buffer
- * @property {number} itemSize
- * @property {number} numItems
- * @property {string} name
- * @property {GLenum} type
- * @property {boolean} instanced
- * @property {Function} cb
- * @property {number} startItem
- * @property {number} arrayLength
+ * @typedef {WebGLBuffer & {numItems:number,}} CglWebGLBuffer
+ */
 
+/**
+ * @typedef AttributeObject
+ * @property {CglWebGLBuffer} [buffer]
+ * @property {number} [itemSize]
+ * @property {number} [numItems]
+ * @property {string} [name]
+ * @property {GLenum} [type]
+ * @property {boolean} [instanced]
+ * @property {Function} [cb]
+ * @property {number} [startItem]
+ * @property {number} [arrayLength]
+ * @property {AttribPointer[]} [pointer]
+ */
+
+/**
+ * @typedef {Object} AttribPointer
+ * @property {number} [loc]
+ * @property {string} name
+ * @property {number} stride
+ * @property {number} offset
+ * @property {boolean} instanced
  */
 
 /**
@@ -65,7 +78,7 @@ class Mesh extends CgMesh
     /** @type {Geometry} */
     #geom = null;
 
-    /** @type {WebGLBuffer} */
+    /** @type {CglWebGLBuffer} */
     #bufVerticesIndizes = null;
 
     /** @type {number} */
@@ -82,10 +95,10 @@ class Mesh extends CgMesh
     _preWireframeGeom = null;
     addVertexNumbers = false;
 
-    feedBackAttributes = [];
-    _feedBacks = [];
-    _feedBacksChanged = false;
-    _transformFeedBackLoc = -1;
+    // feedBackAttributes = [];
+    // _feedBacks = [];
+    // _feedBacksChanged = false;
+    // _transformFeedBackLoc = -1;
 
     #lastAttrUpdate = 0;
 
@@ -254,7 +267,7 @@ class Mesh extends CgMesh
         if (attr.buffer)
             gl.deleteBuffer(attr.buffer);
 
-        attr.buffer = gl.createBuffer();
+        attr.buffer = /** @type {CglWebGLBuffer} */(gl.createBuffer());
         gl.bindBuffer(gl.ARRAY_BUFFER, attr.buffer);
         this._bufferArray(array, attr);
         attr.numItems = array.length / attr.itemSize;// numItems;
@@ -333,10 +346,7 @@ class Mesh extends CgMesh
 
         // this.#cgl.profileData.profileMeshAttributes += numItems || 0;
 
-        if (typeof options == "function")
-        {
-            cb = options;
-        }
+        if (typeof options == "function") cb = options;
 
         if (typeof options == "object")
         {
@@ -368,7 +378,7 @@ class Mesh extends CgMesh
 
         // create new buffer...
 
-        const buffer = this.#cgl.gl.createBuffer();
+        const buffer = /** @type {CglWebGLBuffer} */ (this.#cgl.gl.createBuffer());
 
         this.#cgl.gl.bindBuffer(this.#cgl.gl.ARRAY_BUFFER, buffer);
         // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
@@ -450,11 +460,12 @@ class Mesh extends CgMesh
                 for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
             }
 
-            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, { "cb": (_attr, _geom, shader) =>
-            {
-                if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
-                shader.uniformNumVertices.setValue(this._numVerts);
-            } });
+            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, { "cb":
+                (_attr, _geom, shader) =>
+                {
+                    if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
+                    shader.uniformNumVertices.setValue(this._numVerts);
+                } });
         }
     }
 
@@ -634,7 +645,7 @@ class Mesh extends CgMesh
                     attribute._attrLocationLastShaderTime = shader.lastCompile;
                     attrLocs[i] = this.#cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
                     // this._log.log('attribloc',attribute.name,attrLocs[i]);
-                    this.#cgl.profileData.profileAttrLoc++;
+                    // this.#cgl.profileData.profileAttrLoc++;
                 }
             }
 
@@ -688,7 +699,6 @@ class Mesh extends CgMesh
 
                             if (pointer.loc == -1)
                             {
-
                                 pointer.loc = this.#cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
                             }
 
@@ -702,7 +712,7 @@ class Mesh extends CgMesh
                             }
                         }
                     }
-                    if (this.bindFeedback) this.bindFeedback(attribute);
+                    // if (this.bindFeedback) this.bindFeedback(attribute);
                 }
             }
         }
