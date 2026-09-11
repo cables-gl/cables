@@ -101,6 +101,9 @@ export class Port extends Events
 
     tempData = {};
 
+    /** @type {Port[]} */
+    ports = null; // for multiport
+
     /**
      * @typedef PortAttribs
      * @property {string[]} [sgvalues]

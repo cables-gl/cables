@@ -7,6 +7,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "name": "siz" },
             { "type": "float", "name": "border" }
         ],
-        "result": { "type": "float", "name": "result" },
+        "results": [{ "type": "float", "name": "result" }],
         "src": attachments.shape_circle_wgsl
     });

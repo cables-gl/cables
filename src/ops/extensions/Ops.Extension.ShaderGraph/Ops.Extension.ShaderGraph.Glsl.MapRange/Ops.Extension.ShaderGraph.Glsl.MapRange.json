@@ -1,0 +1,93 @@
+{
+    "id": "248db410-73d6-40cc-9ae3-a4adc5168849",
+    "created": 1789055958754,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786367312431
+        },
+        {
+            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786367915194
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786433102805
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Main renamed to Ops.Extension.MiniGpu.Sg.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786441277694
+        },
+        {
+            "message": "Extension.MiniGpu.Sg.Random renamed to Ops.Extension.ShaderGraph.Wgsl.Random",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1786539331292
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786981279231
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Wgsl.MapRange",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789055958754,
+            "cloneOf": "d1f8471a-63a8-499b-aa18-8c9b7aeefdfb"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "value",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "min in",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "max in",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "min out",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "max out",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result"
+            },
+            {
+                "type": 2,
+                "objType": "sg_undefined"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

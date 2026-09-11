@@ -4,6 +4,16 @@ import { ShaderGraphProgram } from "./shadergraphprogram.js";
 export class ShaderGraphOp
 {
 
+    /** @type {Port[]} */
+    _inPorts = [];
+
+    /** @type {Port[]} */
+    _outPorts = [];
+
+    _defines = [];
+    enabled = true;
+    info = null;
+
     /**
      * @param {Op} op
      * @param {import("./shadergraphprogram.js").ShaderNode} shaderNode
@@ -12,11 +22,6 @@ export class ShaderGraphOp
     {
         op.sgOp = this;
         this.op = op;
-        this._inPorts = [];
-        this._outPorts = [];
-        this._defines = [];
-        this.enabled = true;
-        this.info = null;
 
         shaderNode.id = ShaderGraphProgram.getNewId();
 
@@ -66,7 +71,7 @@ export class ShaderGraphOp
 
         if (shaderNode.result && !shaderNode.results)
         {
-            console.warn("PARAM HAS no resultS", this.op.name);
+            console.error("PARAM HAS no resultS", this.op.name);
             shaderNode.results = [shaderNode.result];
             delete shaderNode.result;
         }

@@ -24,10 +24,11 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @property {boolean} maxGen
  * @property {number} value
  * @property {number[]} values
- * @property {string} src - this source code will only appended once (per op name) into the shader header
- * @property {string} srcUni - this source code will appended once per op instance id
  * @property {ShaderNodeParam[]} params
  * @property {ShaderNodeParam[]} results
+ * @property {string} src - this source code will only appended once (per op name) into the shader header
+ * @property {string} srcUni - this source code will appended once per op instance id
+ * @property {string} srcSwizzle
  */
 
 /**
@@ -394,7 +395,6 @@ export class ShaderGraphProgram extends Events
     }
 
     /**
-     * @param {ShaderNode} node
      * @param {Port} port
      */
     static getParamFromPort(port)
@@ -410,8 +410,9 @@ export class ShaderGraphProgram extends Events
             for (let i = 0; i < node.results.length; i++)
                 if (node.results[i].port == port) return node.results[i];
 
-        if (node.result) return node.result;
         console.warn("could not find param for port ", port);
+
+        if (node.result) return node.result;
         return node;
     }
 
