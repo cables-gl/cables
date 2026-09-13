@@ -171,6 +171,19 @@ export class Port extends Events
         this.indexPort = null;
     }
 
+    // re-declared here because typescript declaration emit drops the "extends events"
+    /**
+     * @param {string} eventName
+     * @param {(...args: any[]) => any} cb
+     * @param {string} [idPrefix]
+     */
+    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+
+    /**
+     * @param {*} listenerParam
+     */
+    off(listenerParam) { return super.off(listenerParam); }
+
     get parent()
     {
         this.#log.stack("use port.op, not .parent");
