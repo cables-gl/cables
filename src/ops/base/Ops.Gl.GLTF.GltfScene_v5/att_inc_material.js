@@ -33,6 +33,7 @@ let GltfMaterial = class
     _matTexEmissive = null;
     texTransform = [1, 1, 0, 0];
     doubleSided = false;
+    whichFace = 0
 
     constructor(gltf, obj)
     {
@@ -117,6 +118,10 @@ let GltfMaterial = class
             gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.occlusionTexture);
             this._matTexOcclusion = gltf.textures[idx];
         }
+
+        this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
+        if (this.doubleSided) this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
+
     }
 
     get name()
@@ -169,11 +174,8 @@ let GltfMaterial = class
         if (inUseMatTexProps.get())
         {
 
-            let whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
-            if (this.doubleSided) whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
-
             cgl.pushCullFace(!this.doubleSided);
-            cgl.pushCullFaceFacing(whichFace);
+            if (this.whichFace) cgl.pushCullFaceFacing(this.whichFace);
 
             if (uniTexTrans && this.texTransform)
                 uniTexTrans.setValue(this.texTransform);
@@ -238,7 +240,7 @@ let GltfMaterial = class
         if (uniTexMr) currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
 
         cgl.popCullFace();
-        cgl.popCullFaceFacing();
+        if (this.whichFace) cgl.popCullFaceFacing();
 
     }
 };

@@ -7,9 +7,10 @@
             "date": 1593237008001
         },
         {
-            "message": " added core lib: vargetset",
+            "message": "Removed a workaround by setting the texture to empty texture in between changes",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1596042454916
+            "date": 1789392311076
         }
     ],
     "authorName": "pandur",

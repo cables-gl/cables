@@ -369,6 +369,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1786379053735
+        },
+        {
+            "message": "Fix webGL warning on console for Face culling",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1789400415051
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
