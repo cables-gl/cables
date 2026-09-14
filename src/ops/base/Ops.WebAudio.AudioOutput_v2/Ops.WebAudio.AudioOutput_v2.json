@@ -85,6 +85,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1746634426447
+        },
+        {
+            "message": "WebAudio.Output_v2 renamed to Ops.WebAudio.AudioOutput_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789385800355
         }
     ],
     "exampleProjectId": "teZhCp",

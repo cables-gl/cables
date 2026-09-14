@@ -785,7 +785,7 @@ function printInfo()
     html += "</table>";
     html += "</div>";
 
-    tab = new CABLES.UI.Tab("GLTF " + CABLES.basename(inFile.get()), { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
+    tab = new CABLES.UI.Tab("GLTF " + CABLES.basename(inFile.get()), { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": false });
     gui.mainTabs.addTab(tab, true);
 
     tab.addEventListener("close", closeTab);

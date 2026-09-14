@@ -71,7 +71,7 @@ inInit.onTriggered = function ()
                 op.setUiError("noDeviceSelected", null);
             }
             const constraints = {
-                "audio": { "deviceId": device },
+                "audio": { "deviceId": device }
             };
 
             navigator.mediaDevices.getUserMedia(constraints)
@@ -102,8 +102,7 @@ inInit.onTriggered = function ()
 
         if (navigator.getUserMedia)
         {
-            navigator.getUserMedia(
-                { "audio": true },
+            navigator.getUserMedia({ "audio": true },
                 streamAudio,
                 function (e)
                 {
@@ -123,8 +122,7 @@ inInit.onTriggered = function ()
 /* INIT FUNCTION */
 loadingId = op.patch.loading.start("MIC inputs", "", op);
 navigator.mediaDevices.getUserMedia({ "audio": true })
-    .then((res) =>
-    { return navigator.mediaDevices.enumerateDevices(); })
+    .then((res) => { return navigator.mediaDevices.enumerateDevices(); })
     .then((devices) =>
     {
         const audioInputDevices = devices

@@ -89,6 +89,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1725286288219
+        },
+        {
+            "message": "WebAudio.MicrophoneIn_v2 renamed to Ops.WebAudio.AudioInput_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789385763348
         }
     ],
     "youtubeids": [],

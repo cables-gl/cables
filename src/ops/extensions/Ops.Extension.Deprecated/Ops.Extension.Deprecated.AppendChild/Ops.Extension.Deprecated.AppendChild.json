@@ -45,5 +45,13 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "op Html.AppendChild was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1789390156793
+        }
+    ]
 }
