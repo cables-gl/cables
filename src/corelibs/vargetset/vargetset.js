@@ -172,7 +172,9 @@ export class VarSetOpWrapper
             if (this._typeId == Port.TYPE_OBJECT)
             {
                 if (this._isTexture)
-                    this._var.setValue(CGL.Texture.getEmptyTexture(this._op.patch.cgl));
+                {
+                    // this._var.setValue(CGL.Texture.getEmptyTexture(this._op.patch.cgl));
+                }
                 else
                     this._var.setValue(null);
 
