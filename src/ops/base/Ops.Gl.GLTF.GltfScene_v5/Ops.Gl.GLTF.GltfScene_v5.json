@@ -375,6 +375,17 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1789400415051
+            },{
+            "message": "Material alphamode \"BLEND\" will disable depth writing when rendering",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789393773163
+        },
+        {
+            "message": "Changing order of nodes improved and works without reloading the gltf",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789396530456
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

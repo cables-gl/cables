@@ -42,7 +42,7 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoading = op.outBoolNum("Loading"),
+    outLoading = op.outBool("Loading"),
     outLoaded = op.outBoolNum("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
@@ -325,6 +325,7 @@ function finishLoading()
 
     if (gltf)
     {
+
         for (let i = 0; i < gltf.nodes.length; i++)
         {
             if (!gltf.nodes[i].isChild)
@@ -616,12 +617,13 @@ function saveData()
 
 function sortNodes()
 {
-    // if (gltf) gltf.nodes.sort((a, b) =>
-    // {
-    //     if (!a.isChild && !b.isChild)
-    //         return a.order - b.order;
-    //     // return gltf.nodes[a].order - gltf.nodes[b].order;
-    // });
+    if (gltf && gltf.nodes)
+    {
+        for (let i = 0; i < gltf.nodes.length; i++)
+        {
+            gltf.nodes[i].sort();
+        }
+    }
 }
 
 function updateAnimation()
@@ -831,8 +833,10 @@ op.setOrder = function (name)
             {
                 n.order = parseFloat(str);
                 data.nodeOrders[name] = n.order;
+
+                sortNodes();
                 saveData();
-                reloadSoon();
+            // reloadSoon();
             }
         });
 };
