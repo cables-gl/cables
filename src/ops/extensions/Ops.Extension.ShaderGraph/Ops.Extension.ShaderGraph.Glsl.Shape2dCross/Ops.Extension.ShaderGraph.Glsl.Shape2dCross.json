@@ -94,5 +94,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "dependencies": []
 }

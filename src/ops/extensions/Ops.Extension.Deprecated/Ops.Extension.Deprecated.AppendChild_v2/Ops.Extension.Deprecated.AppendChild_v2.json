@@ -57,6 +57,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1762955836208
+        },
+        {
+            "message": "op Html.AppendChild_v2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1789390156495
         }
     ],
     "license": "MIT",

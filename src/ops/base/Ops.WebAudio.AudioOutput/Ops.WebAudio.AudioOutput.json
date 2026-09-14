@@ -43,6 +43,12 @@
             "message": "un-suspending the audiocontext via integrated play-button does not \"pop\" volume anymore",
             "author": "stephan",
             "date": 1643887951231
+        },
+        {
+            "message": "WebAudio.Output renamed to Ops.WebAudio.AudioOutput",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789385800795
         }
     ],
     "exampleProjectId": "teZhCp",
