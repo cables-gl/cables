@@ -47,14 +47,14 @@ let GltfMaterial = class
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_unlit")) this._matUnlit = 1;
 
-        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_emissive_strength"))
-            console.log("todo: emissive strength", this.json.extensions.KHR_materials_emissive_strength.emissiveStrength);
+        // if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_emissive_strength"))
+        // console.log("todo: emissive strength", this.json.extensions.KHR_materials_emissive_strength.emissiveStrength);
 
-        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_ior"))
-            console.log("todo: ior", this.json.extensions.KHR_materials_ior.ior);
+        // if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_ior"))
+        // console.log("todo: ior", this.json.extensions.KHR_materials_ior.ior);
 
-        if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_clearcoat"))
-            console.log("todo: clearcoat", this.json.extensions.KHR_materials_clearcoat.clearcoatFactor);
+        // if (this.json.extensions && this.json.extensions.hasOwnProperty("KHR_materials_clearcoat"))
+        // console.log("todo: clearcoat", this.json.extensions.KHR_materials_clearcoat.clearcoatFactor);
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("CABLES_materials_lightmap"))
         {
@@ -169,6 +169,12 @@ let GltfMaterial = class
         if (inUseMatTexProps.get())
         {
 
+            let depthTest = true;
+            let depthWrite = true;
+            if (this.json.alphaMode == "BLEND") depthWrite = false;
+            op.patch.cg.pushDepthTest(depthTest);
+            op.patch.cg.pushDepthWrite(depthWrite);
+
             let whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
             if (this.doubleSided) whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
 
@@ -220,6 +226,9 @@ let GltfMaterial = class
 
         const uniPbrMetalness = currentShader.uniformPbrMetalness;
         const uniPbrRoughness = currentShader.uniformPbrRoughness;
+
+        op.patch.cg.popDepthTest();
+        op.patch.cg.popDepthWrite();
 
         if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
         if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);

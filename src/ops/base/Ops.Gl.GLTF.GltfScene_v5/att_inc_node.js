@@ -207,7 +207,7 @@ const gltfNode = class
 
     transform(cgl, _time)
     {
-        if (!_time && _time != 0)_time = time;
+        if (!_time && _time != 0) _time = time;
 
         this._lastTimeTrans = _time;
 
@@ -293,6 +293,17 @@ const gltfNode = class
         mat4.copy(this.absMat, cgl.mMatrix);
     }
 
+    sort()
+    {
+        this.needsSort = true;
+
+        for (let i = 0; i < this.children.length; i++)
+        {
+            // console.log(this.name+" "+i+": - "+this.children[i].name);
+            if (gltf.nodes[this.children[i]]) gltf.nodes[this.children[i]].sort();
+        }
+    }
+
     render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
     {
         if (!dontTransform) cgl.pushModelMatrix();
@@ -313,8 +324,7 @@ const gltfNode = class
         if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
 
         if (this.hidden && !drawHidden)
-        {
-        }
+        {}
         else
         {
             if (this.skinRenderer)
@@ -337,6 +347,6 @@ const gltfNode = class
                 if (gltf.nodes[this.children[i]])
                     gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
             }
-        if (!dontTransform)cgl.popModelMatrix();
+        if (!dontTransform) cgl.popModelMatrix();
     }
 };
