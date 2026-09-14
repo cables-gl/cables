@@ -1,5 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
-import { ajax, prefixedHash, cleanJson, shortId, map } from "./utils.js";
+import { ajax, hashString, cleanJson, shortId, map } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
 import { OpProfiler } from "./core_op_profiler.js";
@@ -1628,7 +1628,7 @@ export class Patch extends Events
             let newId = shortId();
 
             /* minimalcore:start */
-            if (options.prefixHash) newId = prefixedHash(options.prefixHash + oldId);
+            if (options.prefixHash) newId = hashString(options.prefixHash + oldId);
 
             else if (options.prefixId) newId = options.prefixId + oldId;
             else if (options.refAsId) // when saving json
@@ -1710,7 +1710,7 @@ export class Patch extends Events
                         let newId = shortId();
 
                         /* minimalcore:start */
-                        if (options.prefixHash) newId = prefixedHash(options.prefixHash + json.ops[i].portsIn[k].value);
+                        if (options.prefixHash) newId = hashString(options.prefixHash + json.ops[i].portsIn[k].value);
 
                         /* minimalcore:end */
 

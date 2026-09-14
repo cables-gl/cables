@@ -311,7 +311,7 @@ export class MultiPort extends Port
             this.op.refreshParams();
         };
 
-        this.on("onUiAttrChange", (attribs) =>
+        this.on(Port.EVENT_UIATTRCHANGE, (attribs) =>
         {
             if (attribs.hasOwnProperty("multiPortManual"))
             {
@@ -323,7 +323,7 @@ export class MultiPort extends Port
             }
         });
 
-        this.on("onUiAttrChange", this.checkNum.bind(this));
+        this.on(Port.EVENT_UIATTRCHANGE, this.checkNum.bind(this));
         this.checkNum();
         this.countPorts();
         this.removeInvalidPorts();

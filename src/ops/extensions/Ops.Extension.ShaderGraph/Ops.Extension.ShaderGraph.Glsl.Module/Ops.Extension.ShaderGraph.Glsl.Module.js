@@ -62,8 +62,6 @@ function compile()
 
 op.updateShaderModule = (_shader) =>
 {
-    // console.log(sgp.bindings)
-    // console.log("update");
     shader = _shader;
     const updts = sgp.updateableOps;
 

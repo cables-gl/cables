@@ -15,7 +15,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 
 /**
  * @typedef ShaderNode
- * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"} [type]
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"|"swizzle"} [type]
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -113,7 +113,7 @@ export class ShaderGraphProgram extends Events
      * @param {Port} otherPort
      * @param {ShaderNode} node
      * @param {boolean} doConvert
-     * @param {} param
+     * @param {ShaderNodeParam} param
      */
     _getPortParamStr(otherPort, node, doConvert, param)
     {

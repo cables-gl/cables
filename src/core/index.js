@@ -55,7 +55,7 @@ CABLES.map = utils.map;
 CABLES.generateUUID = utils.generateUUID;
 
 /* minimalcore:start */
-CABLES.prefixedHash = utils.prefixedHash;
+CABLES.prefixedHash = utils.hashString;
 
 /* minimalcore:end */
 CABLES.smoothStep = utils.smoothStep;

@@ -122,7 +122,7 @@ export function cleanJson(obj)
  * @param {string} prefix
  * @return {string}
  */
-export const prefixedHash = function (str, prefix = "id")
+export const hashString = function (str, prefix = "id")
 {
     let hash = 0;
     if (str.length > 0)
