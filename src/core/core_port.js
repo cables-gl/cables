@@ -1,5 +1,5 @@
 import { Events, Logger } from "cables-shared-client";
-import { cleanJson } from "./utils.js";
+import { cleanJson, simpleId } from "./utils.js";
 import { Link } from "./core_link.js";
 import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
@@ -126,7 +126,7 @@ export class Port extends Events
          * @description direction of port (input(0) or output(1))
          */
         this.direction = Port.DIR_IN;
-        this.id = String(CABLES.simpleId());
+        this.id = String(simpleId);
 
         /** @type {Op} */
         this.#op = ___op;

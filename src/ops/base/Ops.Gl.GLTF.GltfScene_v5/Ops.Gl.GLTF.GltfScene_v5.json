@@ -371,11 +371,6 @@
             "date": 1786379053735
         },
         {
-            "message": "Fix webGL warning on console for Face culling",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1789400415051
-            },{
             "message": "Material alphamode \"BLEND\" will disable depth writing when rendering",
             "type": "improvement",
             "author": "pandur",
@@ -386,6 +381,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1789396530456
+        },
+        {
+            "message": "Fix webGL warning on console for Face culling",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1789400415051
+        },
+        {
+            "message": "Metalness property uses default value of 1 when property is contained in gltf",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1789401168968
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

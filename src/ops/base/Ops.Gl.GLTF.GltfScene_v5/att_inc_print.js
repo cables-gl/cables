@@ -244,6 +244,7 @@ function printMaterial(mat, idx)
 
 function printInfo()
 {
+    const guiId = CABLES.simpleId();
     if (!gltf)
         if (tab) return tab.html("//");
         else return;
@@ -260,7 +261,7 @@ function printInfo()
 
     let numNodes = 0;
     if (gltf.json.nodes) numNodes = gltf.json.nodes.length;
-    html += "<div id=\"groupNodes\">Nodes (" + numNodes + ")</div>";
+    html += "<div id=\"groupNodes" + guiId + "\">Nodes (" + numNodes + ")</div>";
 
     html += "<table id=\"sectionNodes\" class=\"table treetable\">";
 
@@ -287,9 +288,9 @@ function printInfo()
 
     // / ///////////////////////
 
-    html += "<div id=\"groupMeshes\">Mesh Geometries (" + gltf.json.meshes.length + ")</div>";
+    html += "<div id=\"groupMeshes" + guiId + "\">Mesh Geometries (" + gltf.json.meshes.length + ")</div>";
 
-    html += "<table id=\"meshestable\"  class=\"table treetable\">";
+    html += "<table id=\"meshestable" + guiId + "\"  class=\"table treetable\">";
     html += "<tr>";
     html += " <th>Name</th>";
     html += " <th>Node</th>";
@@ -441,7 +442,7 @@ function printInfo()
 
     let numMaterials = 0;
     if (gltf.json.materials) numMaterials = gltf.json.materials.length;
-    html += "<div id=\"groupMaterials\">Materials (" + numMaterials + ")</div>";
+    html += "<div id=\"groupMaterials" + guiId + "\">Materials (" + numMaterials + ")</div>";
 
     if (!gltf.json.materials || gltf.json.materials.length == 0) {}
     else
@@ -466,11 +467,11 @@ function printInfo()
 
     let numImages = 0;
     if (gltf.json.images) numImages = gltf.json.images.length;
-    html += "<div id=\"groupImages\">Images (" + numImages + ")</div>";
+    html += "<div id=\"groupImages" + guiId + "\">Images (" + numImages + ")</div>";
 
     if (gltf.json.images)
     {
-        html += "<div id=\"sectionImages\">";
+        html += "<div id=\"sectionImages" + guiId + "\">";
 
         html += "<table id=\"\" class=\"table treetable\">";
 
@@ -539,11 +540,11 @@ function printInfo()
         }
     }
 
-    html += "<div id=\"groupAnims\">Animations (" + numAnims + "/" + numSamplers + ")</div>";
+    html += "<div id=\"groupAnims" + guiId + "\">Animations (" + numAnims + "/" + numSamplers + ")</div>";
 
     if (gltf.json.animations)
     {
-        html += "<table id=\"sectionAnim\" class=\"table treetable\">";
+        html += "<table id=\"sectionAnim" + guiId + "\" class=\"table treetable\">";
         html += "<tr>";
         html += "  <th>Name</th>";
         html += "  <th>Target node</th>";
@@ -617,11 +618,11 @@ function printInfo()
 
     let numCameras = 0;
     if (gltf.json.cameras) numCameras = gltf.json.cameras.length;
-    html += "<div id=\"groupCameras\">Cameras (" + numCameras + ")</div>";
+    html += "<div id=\"groupCameras" + guiId + "\">Cameras (" + numCameras + ")</div>";
 
     if (gltf.json.cameras)
     {
-        html += "<table id=\"sectionCameras\" class=\"table treetable\">";
+        html += "<table id=\"sectionCameras" + guiId + "\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>Node</th>";
@@ -656,11 +657,11 @@ function printInfo()
     if (gltf.json.extensions && gltf.json.extensions.KHR_lights_punctual && gltf.json.extensions.KHR_lights_punctual.lights) punctualLights = gltf.json.extensions.KHR_lights_punctual.lights;
     if (punctualLights) numLights = punctualLights.length;
 
-    html += "<div id=\"groupLights\">Lights (" + numLights + ")</div>";
+    html += "<div id=\"groupLights" + guiId + "\">Lights (" + numLights + ")</div>";
 
     if (punctualLights)
     {
-        html += "<table id=\"sectionLights\" class=\"table treetable\">";
+        html += "<table id=\"sectionLights" + guiId + "\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>Node</th>";
@@ -696,12 +697,12 @@ function printInfo()
 
     let numSkins = 0;
     if (gltf.json.skins) numSkins = gltf.json.skins.length;
-    html += "<div id=\"groupSkins\">Skins (" + numSkins + ")</div>";
+    html += "<div id=\"groupSkins" + guiId + "\">Skins (" + numSkins + ")</div>";
 
     if (gltf.json.skins)
     {
         // html += "<h3>Skins (" + gltf.json.skins.length + ")</h3>";
-        html += "<table id=\"sectionSkins\" class=\"table treetable\">";
+        html += "<table id=\"sectionSkins" + guiId + "\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>name</th>";
@@ -726,9 +727,9 @@ function printInfo()
 
     if (gltf.timing)
     {
-        html += "<div id=\"groupTiming\">Debug Loading Timing </div>";
+        html += "<div id=\"groupTiming" + guiId + "\">Debug Loading Timing </div>";
 
-        html += "<table id=\"sectionTiming\" class=\"table treetable\">";
+        html += "<table id=\"sectionTiming" + guiId + "\" class=\"table treetable\">";
 
         html += "<tr>";
         html += "  <th>task</th>";
@@ -753,9 +754,9 @@ function printInfo()
     if (gltf.json.buffers && gltf.json.buffers[0])
         sizeBin = gltf.json.buffers[0].byteLength;
 
-    html += "<div id=\"groupBinary\">File Size Allocation (" + Math.round(sizeBin / 1024) + "k )</div>";
+    html += "<div id=\"groupBinary" + guiId + "\">File Size Allocation (" + Math.round(sizeBin / 1024) + "k )</div>";
 
-    html += "<table id=\"sectionBinary\" class=\"table treetable\">";
+    html += "<table id=\"sectionBinary" + guiId + "\" class=\"table treetable\">";
     html += "<tr>";
     html += "  <th>name</th>";
     html += "  <th>size</th>";
@@ -804,16 +805,16 @@ function printInfo()
         }, 500);
     });
 
-    CABLES.UI.Collapsable.setup(ele.byId("groupNodes"), ele.byId("sectionNodes"), false);
-    CABLES.UI.Collapsable.setup(ele.byId("groupMaterials"), ele.byId("materialtable"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupAnims"), ele.byId("sectionAnim"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupMeshes"), ele.byId("meshestable"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupCameras"), ele.byId("sectionCameras"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupImages"), ele.byId("sectionImages"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupSkins"), ele.byId("sectionSkins"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupBinary"), ele.byId("sectionBinary"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupTiming"), ele.byId("sectionTiming"), true);
-    CABLES.UI.Collapsable.setup(ele.byId("groupLights"), ele.byId("sectionLights"), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupNodes" + guiId), ele.byId("sectionNodes" + guiId), false);
+    CABLES.UI.Collapsable.setup(ele.byId("groupMaterials" + guiId), ele.byId("materialtable" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupAnims" + guiId), ele.byId("sectionAnim" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupMeshes" + guiId), ele.byId("meshestable" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupCameras" + guiId), ele.byId("sectionCameras" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupImages" + guiId), ele.byId("sectionImages" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupSkins" + guiId), ele.byId("sectionSkins" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupBinary" + guiId), ele.byId("sectionBinary" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupTiming" + guiId), ele.byId("sectionTiming" + guiId), true);
+    CABLES.UI.Collapsable.setup(ele.byId("groupLights" + guiId), ele.byId("sectionLights" + guiId), true);
 
     gui.maintabPanel.show(true);
 }
