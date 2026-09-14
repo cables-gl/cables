@@ -72,7 +72,8 @@ let GltfMaterial = class
         if (this.json.pbrMetallicRoughness)
         {
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;
-            if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor;
+            this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor || 1;
+
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorTexture"))
             {
