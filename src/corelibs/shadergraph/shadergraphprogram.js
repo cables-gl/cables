@@ -6,6 +6,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 /**
  * @typedef ShaderNodeParam
  * @property {string} type
+ * @property {number} value
  * @property {string} type
  * @property {string} name
  * @property {boolean} gen

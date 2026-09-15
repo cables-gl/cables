@@ -1,5 +1,6 @@
 import { Op, Port } from "cables";
 import { ShaderGraphProgram } from "./shadergraphprogram.js";
+import { Lang } from "./lang.js";
 
 export class ShaderGraphOp
 {
@@ -39,8 +40,7 @@ export class ShaderGraphOp
         {
             if (this.op.portsIn[i].type != Port.TYPE_OBJECT) continue;
 
-            if (this.op.portsIn[i].uiAttribs.objType && this.op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0)
-                this.op.portsIn[i].setUiAttribs({ "display": "sg_vec" });
+            if (this.op.portsIn[i].uiAttribs.objType && this.op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0) this.op.portsIn[i].setUiAttribs({ "display": "sg" });
 
             this.op.portsIn[i].on("change", this.updateGraph.bind(this));
         }
@@ -102,6 +102,8 @@ export class ShaderGraphOp
                 // if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
 
                 // if (shaderNode.params[i].port)
+                if (!param.port.attribs.sg)param.port.attribs.sg = Lang.floatStr(param.value || 0);
+
                 param.port.setUiAttribs({ "objType": "sg_" + param.type, "display": "sg" });
             }
         }
@@ -126,13 +128,12 @@ export class ShaderGraphOp
                 if (param.gen || param.type == "gen")
                 {
                     param.gen = true;
-
-                    const t = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
-                    param.type = t;
+                    param.type = ShaderGraphProgram.getMaxGenTypeFromInputParams(shaderNode.params);
                 }
+
                 if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
 
-                param.port.setUiAttribs({ "objType": "sg_" + param.type });
+                param.port.setUiAttribs({ "objType": "sg_" + param.type, "display": "sg" });
 
             }
 

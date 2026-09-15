@@ -65,9 +65,9 @@ export class Lang
     }
 
     /**
-     * @param {number} f
+     * @param {number|string} f
      */
-    floatStr(f)
+    static floatStr(f)
     {
         let str = String(f);
         if (!str.includes(".")) str += ".";
@@ -95,7 +95,7 @@ export class Lang
         let str = "vec" + arr.length + "(";
         for (let i = 0; i < arr.length; i++)
         {
-            str += this.floatStr(arr[i] || 0);
+            str += Lang.floatStr(arr[i] || 0);
             if (i != arr.length - 1)str += ",";
         }
         str += ")";
