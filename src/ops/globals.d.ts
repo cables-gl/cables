@@ -5,6 +5,12 @@ declare global {
   const op: Op<any>;
   const vec3:vec3;
   const mat4:mat4;
+
+  interface Math {
+    randomSeed: number;
+    seededRandom(max?: number, min?: number): number;
+    setRandomSeed(seed: number): void;
+  }
 }
 
 export {};
