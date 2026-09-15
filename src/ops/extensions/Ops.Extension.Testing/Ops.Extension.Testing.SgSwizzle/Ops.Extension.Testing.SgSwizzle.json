@@ -1,0 +1,33 @@
+{
+    "id": "cb6257f1-f2a5-4092-b7ef-a08f5c0bfef7",
+    "created": 1789457224873,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789457224886
+        },
+        {
+            "message": "Patch.Ps4FBXt.SubPatch0 renamed to Ops.Extension.Testing.SgSwizzle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789457240207
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "wl191ja04",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}

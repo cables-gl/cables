@@ -1,0 +1,344 @@
+{
+  "ops": [
+    {
+      "opId": "cc8c3ede-7103-410b-849f-a645793cab39",
+      "id": "2aac1fm40",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1427.7516552920458,
+          "y": 1309.1418065456317
+        },
+        "tempSubOldOpId": null,
+        "subPatch": "6xii10skc",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "render",
+          "title": "Trigger"
+        },
+        {
+          "name": "Render Mesh",
+          "value": 1,
+          "title": "Render"
+        },
+        {
+          "name": "width",
+          "value": 2
+        },
+        {
+          "name": "height",
+          "value": 2
+        },
+        {
+          "name": "pivot x index",
+          "value": 1
+        },
+        {
+          "name": "pivot x",
+          "value": "center"
+        },
+        {
+          "name": "pivot y index",
+          "value": 1
+        },
+        {
+          "name": "pivot y",
+          "value": "center"
+        },
+        {
+          "name": "axis index",
+          "value": 0
+        },
+        {
+          "name": "axis",
+          "value": "xy"
+        },
+        {
+          "name": "Flip TexCoord X",
+          "value": 0
+        },
+        {
+          "name": "Flip TexCoord Y",
+          "value": 1
+        },
+        {
+          "name": "num columns",
+          "value": 1
+        },
+        {
+          "name": "num rows",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "opId": "3dc9970a-81c0-4031-8530-8d4080b665c7",
+      "id": "hrhkyxa1w",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1148.8474265711227,
+          "y": 732.3355625662623
+        },
+        "extendTitle": "",
+        "tempSubOldOpId": null,
+        "subPatch": "6xii10skc",
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "value",
+              "portOut": "result",
+              "objIn": "9kgr16d1u",
+              "objOut": "hrhkyxa1w"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94",
+      "id": "lfofhtu23",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1124.8474265711227,
+          "y": 1023.5871153374944
+        },
+        "subPatch": "6xii10skc",
+        "extendTitle": "FRAGMENT",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "Graph",
+          "multiPortNum": 2,
+          "multiPortManual": true
+        },
+        {
+          "name": "Stage index",
+          "value": 1
+        },
+        {
+          "name": "Stage",
+          "value": "FRAGMENT"
+        },
+        {
+          "name": "Code",
+          "value": "\nIN vec2 texCoord;\n{{HEADER}}\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n    {{MAIN}}\n    outColor = color;\n}"
+        },
+        {
+          "name": "Code Prepend",
+          "value": ""
+        },
+        {
+          "name": "Graph_1",
+          "value": 0,
+          "title": "add port"
+        },
+        {
+          "name": "Debug comments",
+          "value": 0
+        },
+        {
+          "name": "Set Type Title",
+          "value": 0
+        },
+        {
+          "name": "Show id",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Module",
+          "links": [
+            {
+              "portIn": "Fragment",
+              "portOut": "Module",
+              "objIn": "1tflovfr7",
+              "objOut": "lfofhtu23"
+            }
+          ]
+        },
+        {
+          "name": "Final Code",
+          "value": "\nIN vec2 texCoord;\nvec2 rand(vec2 value,float min1,float max1,float min2,float max2)\n{\n  vec2 v=min2 + (value - min1) * (max2 - min2) / (max1 - min1);\n\n  v=clamp(v,min2,max2);\n  return v;\n}\n\n\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_218=texCoord.xy;\n\n    vec2 rMapRange_221=rand(rUv_218, 0., 1., 0.3, 0.6);\n\n    vec4 color=vec4(rMapRange_221, 0., 1.);\n\n    outColor = color;\n}"
+        }
+      ]
+    },
+    {
+      "opId": "f66c03d1-0a14-458d-bb6f-78b95b49a46a",
+      "id": "1tflovfr7",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1427.7516552920458,
+          "y": 1209.6253415553444
+        },
+        "subPatch": "6xii10skc",
+        "tempSubOldOpId": null,
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "Next",
+          "links": [
+            {
+              "portIn": "render",
+              "portOut": "Next",
+              "objIn": "2aac1fm40",
+              "objOut": "1tflovfr7"
+            }
+          ]
+        },
+        {
+          "name": "Code Vertex",
+          "value": "#version 300 es\n// \n// vertex shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define UNI uniform\n#define IN in\n#define OUT out\n\n// active mods: --------------- \n\n// cgl generated\n\n// -- \n\nIN vec3 vPosition; //!@\nIN vec2 attrTexCoord;\nIN vec3 attrVertNormal;\nIN vec3 attrTangent,attrBiTangent;\n\nIN float attrVertIndex;\n\nOUT vec2 texCoord;\nOUT vec3 norm;\nUNI mat4 projMatrix;\nUNI mat4 viewMatrix;\nUNI mat4 modelMatrix;\n\nvoid main()\n{\n    texCoord=attrTexCoord;\n    norm=attrVertNormal;\n    vec4 pos=vec4(vPosition,  1.0);\n    vec3 tangent=attrTangent;\n    vec3 bitangent=attrBiTangent;\n    mat4 mMatrix=modelMatrix;\n    gl_PointSize=10.0;\n\n    \n\n    mat4 modelViewMatrix=viewMatrix*mMatrix;\n    \n\n    gl_Position = projMatrix * modelViewMatrix * pos;\n}\n"
+        },
+        {
+          "name": "Code Fragment",
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nvec2 rand(vec2 value,float min1,float max1,float min2,float max2)\n{\n  vec2 v=min2 + (value - min1) * (max2 - min2) / (max1 - min1);\n\n  v=clamp(v,min2,max2);\n  return v;\n}\n\n\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_218=texCoord.xy;\n\n    vec2 rMapRange_221=rand(rUv_218, 0., 1., 0.3, 0.6);\n\n    vec4 color=vec4(rMapRange_221, 0., 1.);\n\n    outColor = color;\n}"
+        }
+      ]
+    },
+    {
+      "opId": "c3be01a8-adca-4c03-b5a1-576a519e1f90",
+      "id": "xva86tkf8",
+      "attribs": {},
+      "uiAttribs": {
+        "translate": {
+          "x": 1148.8474265711227,
+          "y": 919.9586983454127
+        },
+        "subPatch": "6xii10skc",
+        "extendTitle": "color ",
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "Graph_0",
+              "portOut": "result",
+              "objIn": "lfofhtu23",
+              "objOut": "xva86tkf8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "rdgjcgcyw",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "6xii10skc",
+        "translate": {
+          "x": 1124.8474265711227,
+          "y": 0
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_wl191ja04",
+          "title": "Render",
+          "links": [
+            {
+              "portIn": "Render",
+              "portOut": "innerOut_wl191ja04",
+              "objIn": "1tflovfr7",
+              "objOut": "rdgjcgcyw"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "s7tb01uxx",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "6xii10skc",
+        "translate": {
+          "x": 1124.8474265711227,
+          "y": 1420.1418065456317
+        },
+        "blueprintSubpatch2": true,
+        "tempSubOldOpId": null
+      },
+      "storage": {}
+    },
+    {
+      "opId": "248db410-73d6-40cc-9ae3-a4adc5168849",
+      "id": "9kgr16d1u",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "6xii10skc",
+        "translate": {
+          "x": 1148.8474265711227,
+          "y": 839.3293312948642
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "min in",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "max in",
+          "attribs": {
+            "sg": "1."
+          }
+        },
+        {
+          "name": "min out",
+          "attribs": {
+            "sg": "0.3"
+          }
+        },
+        {
+          "name": "max out",
+          "attribs": {
+            "sg": "0.6"
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "xva86tkf8",
+              "objOut": "9kgr16d1u"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "9kgr16d1u"
+      }
+    }
+  ]
+}

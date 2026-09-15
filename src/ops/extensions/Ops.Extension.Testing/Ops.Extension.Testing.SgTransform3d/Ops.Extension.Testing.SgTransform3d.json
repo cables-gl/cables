@@ -1,0 +1,33 @@
+{
+    "id": "6600647d-2897-4311-bb46-6d519b8f9394",
+    "created": 1789457380802,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789457380816
+        },
+        {
+            "message": "Patch.Ps4FBXt.SubPatch0 renamed to Ops.Extension.Testing.SgTransform3d",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789457395775
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "faomvg0k0",
+                "uititle": "Render"
+            }
+        ],
+        "portsOut": []
+    }
+}
