@@ -20,10 +20,10 @@
             "date": 1734628107689
         },
         {
-            "message": "created new version of Ops.Math.TriggerRandomNumber_v3",
-            "type": "new op",
+            "message": "Numbers are now random every time, and do not use the last seed of another op anymore",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1789480063236
+            "date": 1789480598000
         }
     ],
     "authorName": "pandur",
