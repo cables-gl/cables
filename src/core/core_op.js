@@ -87,7 +87,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [comment_text]
  * @property {boolean} [createdLocally]
  * @property {boolean} [stretchPorts]
- * @property {boolean} [vizLayerMaxZoom]
+ * @property {number} [vizLayerMaxZoom]
  * @property {boolean} [widthOnlyGrow]
  */
 
