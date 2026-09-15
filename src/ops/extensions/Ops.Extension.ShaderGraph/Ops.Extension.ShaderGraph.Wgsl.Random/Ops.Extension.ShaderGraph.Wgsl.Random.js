@@ -5,6 +5,6 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "float", "port": op.inObject("seed") }
         ],
-        "result": { "type": "float", "port": op.outObject("result") },
+        "results": [{ "type": "float", "port": op.outObject("result") }],
         "src": attachments.random_wgsl
     });
