@@ -59,20 +59,19 @@ let GltfMaterial = class
 
         if (this.json.extensions && this.json.extensions.hasOwnProperty("CABLES_materials_lightmap"))
         {
-
             if (this.json.extensions.CABLES_materials_lightmap.lightMapTexture)
             {
                 const idx = getTextureSourceForIndex(gltf, this.json.extensions.CABLES_materials_lightmap.lightMapTexture.index);
                 gltf.textures[idx] = gltf.textures[idx] || new GltfTexture(gltf, idx, this.json.extensions.CABLES_materials_lightmap.lightMapTexture);
                 this._matTexLightmap = gltf.textures[idx];
             }
-
         }
 
         if (this.json.pbrMetallicRoughness)
         {
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorFactor")) this._matDiffuseColor = this.json.pbrMetallicRoughness.baseColorFactor;
-            this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor || 1;
+            if (this.json.pbrMetallicRoughness.hasOwnProperty("metallicFactor")) this._matPbrMetalness = this.json.pbrMetallicRoughness.metallicFactor;
+            else this._matPbrMetalness = 1;
 
             if (this.json.pbrMetallicRoughness.hasOwnProperty("roughnessFactor")) this._matPbrRoughness = this.json.pbrMetallicRoughness.roughnessFactor;
             if (this.json.pbrMetallicRoughness.hasOwnProperty("baseColorTexture"))
