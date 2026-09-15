@@ -90,7 +90,7 @@ export class ShaderGraphProgram extends Events
     {
 
         /** @type {ShaderNode} */
-        const node = op.shaderNode;
+        const node = op.tempData.shaderNode;
 
         // this._headFuncSrc += "// addfunc " + node.name + "::" + node.srcUni + "\n";
 
@@ -120,7 +120,7 @@ export class ShaderGraphProgram extends Events
         let paramStr = "";
 
         /** @type {ShaderNode} */
-        const otherNode = otherPort.op.shaderNode;
+        const otherNode = otherPort.op.tempData.shaderNode;
 
         // console.log("parammm", param.port.name);
         // this.log(node, "param [", param.port.name, "]", otherPort.name, node.results[0].type, "=>", param.type, otherNode.name);
@@ -131,7 +131,7 @@ export class ShaderGraphProgram extends Events
 
         if (otherNode.type == "bindstruct")
         {
-            paramStr += otherPort.op.shaderNode.name + "." + otherPort.name;
+            paramStr += otherPort.op.tempData.shaderNode.name + "." + otherPort.name;
         }
         else if (otherNode.type == "component")
         {
@@ -149,7 +149,7 @@ export class ShaderGraphProgram extends Events
                     this.log.bind(this),
                     param.type,
                     "float",
-                    sourcePort.op.shaderNode.resultVarName + "." + otherPort.name,
+                    sourcePort.op.tempData.shaderNode.resultVarName + "." + otherPort.name,
                     otherNode);
 
             }
@@ -189,7 +189,7 @@ export class ShaderGraphProgram extends Events
         /* minimalcore:end */
 
         /** @type {ShaderNode} */
-        const node = op.shaderNode;
+        const node = op.tempData.shaderNode;
 
         this.addOpShaderFuncCode(op);
         this.log(node, "execnode start " + op.name);
@@ -278,9 +278,9 @@ export class ShaderGraphProgram extends Events
 
                     let defaul = null;
                     if (port.attribs.sg) defaul = port.attribs.sg;
-                    defaul = defaul || port.op.shaderNode.params[i].default;
+                    defaul = defaul || port.op.tempData.shaderNode.params[i].default;
 
-                    paramStr = this.lang.getDefaultParameter(port.op.shaderNode.params[i].type, defaul);
+                    paramStr = this.lang.getDefaultParameter(port.op.tempData.shaderNode.params[i].type, defaul);
                 }
 
                 if (paramStr) callstr += paramStr;
@@ -401,7 +401,7 @@ export class ShaderGraphProgram extends Events
     {
 
         /** @type {ShaderNode} */
-        const node = port.op.shaderNode;
+        const node = port.op.tempData.shaderNode;
         if (node.params)
             for (let i = 0; i < node.params.length; i++)
                 if (node.params[i].port == port) return node.params[i];
@@ -448,7 +448,7 @@ export class ShaderGraphProgram extends Events
         const t = types[typeIdx];
 
         if (portsSetType)
-            portsSetType.op.shaderNode.results[0].type = t;
+            portsSetType.op.tempData.shaderNode.results[0].type = t;
 
         return t;
     }

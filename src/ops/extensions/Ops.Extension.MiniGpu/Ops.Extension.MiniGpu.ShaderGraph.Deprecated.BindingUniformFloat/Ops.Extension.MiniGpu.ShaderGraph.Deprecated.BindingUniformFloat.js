@@ -70,8 +70,8 @@ exec.onTriggered = () =>
             "layout": layout
         };
 
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get();
-        op.shaderNode.results[0].type = inType.get();
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get();
+        op.tempData.shaderNode.results[0].type = inType.get();
         op.updateGraph();
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();

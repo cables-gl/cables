@@ -15,7 +15,7 @@ op.init =
     // value.onChange =
     () =>
     {
-        // op.shaderNode.name = value.get();
-        // op.shaderNode.results[0].port.setRef({});
+        // op.tempData.shaderNode.name = value.get();
+        // op.tempData.shaderNode.results[0].port.setRef({});
         op.updateGraph();
     };

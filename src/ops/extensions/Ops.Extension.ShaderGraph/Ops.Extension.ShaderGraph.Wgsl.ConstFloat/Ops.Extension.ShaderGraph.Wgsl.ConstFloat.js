@@ -17,9 +17,9 @@ op.init =
     value.onChange =
     () =>
     {
-        op.shaderNode.value = value.get();
-        op.shaderNode.src = "override " + name.get() + ":f32=" + value.get() + ";";
-        op.shaderNode.resultVarName = name.get();
+        op.tempData.shaderNode.value = value.get();
+        op.tempData.shaderNode.src = "override " + name.get() + ":f32=" + value.get() + ";";
+        op.tempData.shaderNode.resultVarName = name.get();
 
         op.updateGraph();
     };

@@ -126,7 +126,7 @@ export class Port extends Events
          * @description direction of port (input(0) or output(1))
          */
         this.direction = Port.DIR_IN;
-        this.id = String(simpleId);
+        this.id = String(simpleId());
 
         /** @type {Op} */
         this.#op = ___op;

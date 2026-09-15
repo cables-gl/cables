@@ -45,9 +45,9 @@ function update(shader, bindings)
 
     if (!uni)
     {
-        op.shaderNode.srcUni = "uniform " + "vec4[99]" + " " + name + ";";
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = "array";
+        op.tempData.shaderNode.srcUni = "uniform " + "vec4[99]" + " " + name + ";";
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.results[0].type = "array";
     }
 
     if (!uni && shader)

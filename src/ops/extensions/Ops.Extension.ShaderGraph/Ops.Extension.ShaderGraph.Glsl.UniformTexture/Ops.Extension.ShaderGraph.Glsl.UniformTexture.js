@@ -24,7 +24,7 @@ inName.onChange =
         updateUi();
 
         uni = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -45,9 +45,9 @@ function update(shader, bindings)
     if (!uni)
     {
 
-        op.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = "texture";
+        op.tempData.shaderNode.srcUni = "uniform " + "sampler2D" + " " + name + ";";
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.results[0].type = "texture";
     }
 
     if (!uni && shader)

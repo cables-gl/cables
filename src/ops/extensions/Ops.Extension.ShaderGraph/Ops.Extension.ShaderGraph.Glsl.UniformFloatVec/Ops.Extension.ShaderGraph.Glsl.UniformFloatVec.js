@@ -28,7 +28,7 @@ inName.onChange =
         updateUi();
 
         uni = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -56,10 +56,10 @@ function update(shader, bindings)
     if (!uni)
     {
 
-        op.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
+        op.tempData.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
 
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = inType.get();
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.results[0].type = inType.get();
     }
     // const mgpu = op.patch.frameStore.mgpu;
     if (!uni && shader)

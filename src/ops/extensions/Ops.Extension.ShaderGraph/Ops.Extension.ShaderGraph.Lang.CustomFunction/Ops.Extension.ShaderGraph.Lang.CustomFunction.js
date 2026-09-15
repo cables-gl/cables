@@ -14,12 +14,12 @@ op.init =
     () =>
     {
         const def = parseDef(code.get());
-        op.shaderNode.name = def.name;
-        op.shaderNode.src = code.get();
-        op.shaderNode.params = def.params;
-        op.shaderNode.resultVarName = def.name + op.shaderNode.id;
+        op.tempData.shaderNode.name = def.name;
+        op.tempData.shaderNode.src = code.get();
+        op.tempData.shaderNode.params = def.params;
+        op.tempData.shaderNode.resultVarName = def.name + op.tempData.shaderNode.id;
 
-        op.shaderNode.results[0].type = def.returns;
+        op.tempData.shaderNode.results[0].type = def.returns;
 
         op.updateGraph();
     };

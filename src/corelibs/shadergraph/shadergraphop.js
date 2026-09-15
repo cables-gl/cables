@@ -25,7 +25,7 @@ export class ShaderGraphOp
 
         shaderNode.id = ShaderGraphProgram.getNewId();
 
-        op.shaderNode = shaderNode;
+        op.tempData.shaderNode = shaderNode;
         op.updateGraph = this.updateGraph.bind(this);
 
         this.op.on("onLinkChanged", this.updateGraph.bind(this));
@@ -52,7 +52,7 @@ export class ShaderGraphOp
     getResult(name)
     {
         let parmnames = "";
-        const shaderNode = this.op.shaderNode;
+        const shaderNode = this.op.tempData.shaderNode;
         for (let i = 0; i < shaderNode.results.length; i++)
         {
             parmnames += shaderNode.results[i].name;
@@ -67,7 +67,7 @@ export class ShaderGraphOp
     {
 
         /** @type {import("./shadergraphprogram.js").ShaderNode} */
-        const shaderNode = this.op.shaderNode;
+        const shaderNode = this.op.tempData.shaderNode;
 
         if (shaderNode.result && !shaderNode.results)
         {

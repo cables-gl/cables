@@ -27,7 +27,7 @@ inName.onChange =
     {
         updateUi();
         binding = null;
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
     };
 
 function updateUi()
@@ -74,8 +74,8 @@ function update(mgpu)
             "layout": layout
         };
 
-        op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || defaultName;
-        op.shaderNode.results[0].type = inType.get();
+        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.results[0].type = inType.get();
         op.updateGraph();
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();

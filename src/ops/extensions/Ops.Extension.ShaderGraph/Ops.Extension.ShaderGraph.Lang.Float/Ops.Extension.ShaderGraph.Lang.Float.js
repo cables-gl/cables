@@ -14,6 +14,6 @@ new CABLES.ShaderGraphOp(this,
 op.init =
     value.onChange = () =>
     {
-        op.shaderNode.value = value.get();
+        op.tempData.shaderNode.value = value.get();
         op.updateGraph();
     };

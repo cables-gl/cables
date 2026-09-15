@@ -16,6 +16,6 @@ new CABLES.ShaderGraphOp(this,
 tex.onChange = () =>
 {
     op.updateGraph();
-    // if (tex.links[0]) sampler.attribs.sg = tex.links[0].getOtherPort(tex).op.shaderNode.resultVarName + "_sampler";
+    // if (tex.links[0]) sampler.attribs.sg = tex.links[0].getOtherPort(tex).op.tempData.shaderNode.resultVarName + "_sampler";
     // else console.log("tex not linked");
 };

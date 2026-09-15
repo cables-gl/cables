@@ -150,11 +150,11 @@ function update(mgpu, bindings)
         }
         // else bindingInOut = null;
 
-        op.shaderNode.results[0].name = op.shaderNode.name = op.shaderNode.resultVarName = inName.get() || p[0];
-        op.shaderNode.results[0].type = p[1];
+        op.tempData.shaderNode.results[0].name = op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || p[0];
+        op.tempData.shaderNode.results[0].type = p[1];
 
         op.updateGraph();
-        // op.shaderNode.result.port.setRef({});
+        // op.tempData.shaderNode.result.port.setRef({});
     }
     if (bindings) bindings.push(binding);
     if (bindings && bindingInOut) bindings.push(bindingInOut);
