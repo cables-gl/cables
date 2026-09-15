@@ -412,7 +412,7 @@ export class ShaderGraphProgram extends Events
 
         console.warn("could not find param for port ", port);
 
-        if (node.result) return node.result;
+        // if (node.result) return node.result;
         return node;
     }
 

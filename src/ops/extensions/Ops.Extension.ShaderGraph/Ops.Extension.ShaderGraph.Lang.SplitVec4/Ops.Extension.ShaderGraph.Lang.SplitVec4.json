@@ -22,19 +22,23 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "x"
+                "name": "x",
+                "objType": "sg_float"
             },
             {
                 "type": 2,
-                "name": "y"
+                "name": "y",
+                "objType": "sg_float"
             },
             {
                 "type": 2,
-                "name": "z"
+                "name": "z",
+                "objType": "sg_float"
             },
             {
                 "type": 2,
-                "name": "w"
+                "name": "w",
+                "objType": "sg_float"
             }
         ]
     },

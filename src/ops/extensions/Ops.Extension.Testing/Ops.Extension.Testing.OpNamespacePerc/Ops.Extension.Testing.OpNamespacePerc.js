@@ -27,8 +27,8 @@ function update()
     }
 
     outPerc.set(countFound / count);
-    console.log("found..." + countFound + "/" + count);
-    console.log(missing);
+    // console.log("found..." + countFound + "/" + count);
+    // console.log(missing);
     outMissing.setRef(missing);
     op.setUiAttribs({ "extendTitle": String(Math.round(countFound / count * 100)) + "%" });
 

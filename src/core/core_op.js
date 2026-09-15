@@ -94,6 +94,7 @@ import { showUiErrors } from "./uierrors.js";
 /**
  * @typedef OpTempData
  * @property {Object} [origData]
+ * @property {import("../corelibs/shadergraph/shadergraphprogram.js").ShaderNode} [shaderNode]
  */
 
 /**
@@ -234,7 +235,7 @@ export class Op extends Events
          */
     }
 
-    // re-declared here because typescript declaration emit drops the "extends events" 
+    // re-declared here because typescript declaration emit drops the "extends events"
     /**
      * @param {string} eventName
      * @param {(...args: any[]) => any} cb

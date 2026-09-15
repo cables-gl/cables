@@ -48,6 +48,5 @@ new CABLES.ShaderGraphOp(this,
         "name": "",
         "srcSwizzle": "",
         "params": [{ "type": "gen", "port": inp }],
-        "result": { "type": "float" },
         "results": [{ "type": "vec4", "port": outp }]
     });

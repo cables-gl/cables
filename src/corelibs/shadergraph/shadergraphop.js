@@ -69,12 +69,7 @@ export class ShaderGraphOp
         /** @type {import("./shadergraphprogram.js").ShaderNode} */
         const shaderNode = this.op.tempData.shaderNode;
 
-        if (shaderNode.result && !shaderNode.results)
-        {
-            console.error("PARAM HAS no resultS", this.op.name);
-            shaderNode.results = [shaderNode.result];
-            delete shaderNode.result;
-        }
+        if (shaderNode.hasOwnProperty("result")) console.error("PARAM HAS no resultS", this.op.name);
 
         if (shaderNode.params)
         {
@@ -143,7 +138,6 @@ export class ShaderGraphOp
 
             shaderNode.results[i].port.setUiAttribs({ "objType": "sg_" + shaderNode.results[i].type });
         }
-        // shaderNode.result.port.setUiAttribs({ "objType": "sg_" + shaderNode.result.type });
 
         for (let i = 0; i < this.op.portsOut.length; i++)
         {
