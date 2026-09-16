@@ -164,7 +164,9 @@ export class Op extends Events
     linkTimeRules = {
         "needsLinkedToWork": [],
         "needsStringToWork": [],
-        "needsParentOp": null
+        "needsParentOp": null,
+        "forbiddenParentType": null,
+        "forbiddenParent": null
     };
 
     inValueSlider = this.inFloatSlider;

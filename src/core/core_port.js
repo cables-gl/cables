@@ -47,6 +47,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [tlDrawKeys]
  * @property  {number} [tlEase] default easing when animating parameter
  * @property  {boolean} [hover]
+ * @property  {boolean} [ignoreBigPort]
 */
 
 /**
@@ -411,7 +412,7 @@ export class Port extends Events
 
     /**
      * @description set value of port / will send value to all linked ports (only for output ports)
-     * @param {string | number  } v
+     * @param {any|any[] } v
      */
     set(v)
     {
@@ -428,7 +429,7 @@ export class Port extends Events
     }
 
     /**
-     * @param {string|number} v
+     * @param {string|number|any} v
      */
     setValue(v)
     {
