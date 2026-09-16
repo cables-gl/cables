@@ -11,6 +11,7 @@ export class ShaderGraphOp
     /** @type {Port[]} */
     _outPorts = [];
 
+    listeners = {};
     _defines = [];
     enabled = true;
     info = null;
@@ -31,18 +32,37 @@ export class ShaderGraphOp
 
         this.op.on("onLinkChanged", this.updateGraph.bind(this));
         this.updateGraph();
-        this.addPortWatcher();
+
+        this.addPortWatcherAll();
     }
 
-    addPortWatcher()
+    /**
+     * @param {Port} port
+     */
+    addPortWatcherPort(port)
     {
+        if (port.type != Port.TYPE_OBJECT) return;
+
+        if (port.uiAttribs.objType && port.uiAttribs.objType.indexOf("sg_") == 0) port.setUiAttribs({ "display": "sg" });
+
+        this.listeners[port.name] = port.on("change", () =>
+        {
+            this.updateGraph.bind(this);
+
+            this.op.tempData.shaderNode.results[0].port.setRef({});
+        });
+
+        // this.listeners[port.name] = port.on("change", () =>
+        // {
+        // });
+    }
+
+    addPortWatcherAll()
+    {
+
         for (let i = 0; i < this.op.portsIn.length; i++)
         {
-            if (this.op.portsIn[i].type != Port.TYPE_OBJECT) continue;
-
-            if (this.op.portsIn[i].uiAttribs.objType && this.op.portsIn[i].uiAttribs.objType.indexOf("sg_") == 0) this.op.portsIn[i].setUiAttribs({ "display": "sg" });
-
-            this.op.portsIn[i].on("change", this.updateGraph.bind(this));
+            this.addPortWatcherPort(this.op.portsIn[i]);
         }
     }
 
@@ -99,11 +119,10 @@ export class ShaderGraphOp
 
                     // 2.get max of other inputs
                 }
-                // if (param.type == "gen")console.warn("PARAM TYPE STILL GEN!!!!!!");
 
-                // if (shaderNode.params[i].port)
                 if (!param.port.attribs.sg)param.port.attribs.sg = Lang.floatStr(param.value || 0);
 
+                if (!this.listeners[param.port.name]) this.addPortWatcherPort(param.port);
                 param.port.setUiAttribs({ "objType": "sg_" + param.type, "display": "sg" });
             }
         }

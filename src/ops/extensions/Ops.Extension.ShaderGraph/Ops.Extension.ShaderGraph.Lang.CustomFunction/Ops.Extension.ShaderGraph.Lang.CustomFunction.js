@@ -42,6 +42,5 @@ function parseDef(str)
         }
     }
 
-    // console.log("def", def);
     return def;
 }

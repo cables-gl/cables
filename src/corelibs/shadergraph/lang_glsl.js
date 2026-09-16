@@ -26,7 +26,7 @@ export class LangGlsl extends Lang
 
             if (node.results[0].type == "float")
             {
-                str += this.floatStr(node.value);
+                str += Lang.floatStr(node.value);
 
             }
         }

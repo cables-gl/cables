@@ -25,7 +25,7 @@ export class LangWgsl extends Lang
         {
             if (node.results[0].type == "float")
             {
-                str += this.floatStr(node.value);
+                str += Lang.floatStr(node.value);
             }
         }
         return str;
