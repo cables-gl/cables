@@ -81,16 +81,15 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
 
     #ifdef MOD_AREA_BOX
         float MOD_r=-1.0;
-        // MOD_r*=MOD_inSizeAmountFalloffSizeX.x;
         float MOD_de=MOD_sdRoundBox(MOD_pos.xyz-vertexPos.xyz,MOD_scale-MOD_r,MOD_r);
     #endif
 
     #ifdef MOD_AREA_TRIPRISM
-        float MOD_de=MOD_sdTriPrism(MOD_pos.xyz-vertexPos.xyz,vec2(MOD_size.x,MOD_size.z));
+        float MOD_de=MOD_sdTriPrism(MOD_pos.xyz-vertexPos.xyz,vec2(MOD_scale.x,MOD_scale.z));
     #endif
 
     #ifdef MOD_AREA_HEXPRISM
-        float MOD_de=MOD_sdHexPrism(MOD_pos.xyz-vertexPos.xyz,vec2(MOD_size.x,MOD_size.z));
+        float MOD_de=MOD_sdHexPrism(MOD_pos.xyz-vertexPos.xyz,vec2(MOD_scale.x,MOD_scale.z));
     #endif
 
     #ifdef MOD_AREA_AXIS_X
@@ -150,23 +149,7 @@ vec4 MOD_deform(vec4 oldPos,mat4 mMatrix,bool calcNormal,vec3 norm)
                 MOD_changeScale*(MOD_deFO)
                 );
 
-        // if(calcNormal)
-        // {
-        //     mat3 nm = mat3(transpose(inverse(m)));
-        //     pos=vec4(normalize(nm*norm),0.0);
-        // }
-        // else
-        // {
-//      #ifndef MOD_WORLDSPACE
-//            // pos=m*vec4(pos.xyz,1.);
-//             pos.rgb-=MOD_pos;
-
-//             pos.rgb*=(MOD_changeScale-vec3(1.))*MOD_de;
-//             pos.rgb+=MOD_pos;
-// #endif
-        // }
-
-            pos=m*vec4(pos.rgb,1);
+        pos=m*vec4(pos.rgb,1);
 
         pos*=rotationMatrix(vec3(1.0,0.0,0.0), MOD_de*MOD_rot.x/57.29577951308232);
         pos*=rotationMatrix(vec3(0.0,1.0,0.0), MOD_de*MOD_rot.y/57.29577951308232);

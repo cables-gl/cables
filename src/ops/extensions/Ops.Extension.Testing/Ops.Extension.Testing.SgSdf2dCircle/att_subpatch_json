@@ -9,7 +9,7 @@
           "x": 991.9580320823972,
           "y": 498.5802619919958
         },
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
@@ -38,12 +38,26 @@
           "x": 991.9580320823972,
           "y": 710.7706920917158
         },
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "extendTitle": "",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number 1",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "number 2",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -69,7 +83,7 @@
       "id": "duy7kcrt0",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 622.1032098199796,
           "y": 0
@@ -98,7 +112,7 @@
       "id": "pvo6vvop8",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 622.1032098199796,
           "y": 1304.1084524283042
@@ -117,7 +131,7 @@
           "x": 948.6505798110611,
           "y": 1485.4720498131308
         },
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "tempSubOldOpId": null,
         "blueprintSubpatch2": true
       },
@@ -191,7 +205,7 @@
           "x": 967.9580320823972,
           "y": 1107.5377941186953
         },
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "blueprintSubpatch2": true,
         "extendTitle": "FRAGMENT"
       },
@@ -250,7 +264,11 @@
         },
         {
           "name": "Final Code",
-          "value": "\nIN vec2 texCoord;\nfloat shapeCircle(vec2 p,float r,float border)\n{\n  float a=0.;\n  a=(length(p) - r);\n\n  float aa = fwidth(a);\n  float alpha = 1.0 - smoothstep(-aa, aa, a);\n\n\n  if(border>0.0)\n  {\n    float b=length(p) - (r-border);\n    float bb = fwidth(a);\n    alpha  *= smoothstep(-bb, bb, b);\n  }\n\n  return alpha;\n}\nuniform vec2 uF3300;\nfloat shapeRect(vec2 p,vec2 size)\n{\n  vec2 d=abs(p)-size;\n  float a=length(max(d,vec2(0.0))) + min(max(d.x,d.y),0.0);\n  return step(a,0.);\n}\nuniform vec2 uF3315;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_110=texCoord.xy;\n\n    \n    vec2 rSum_111=rUv_110+uF3300;\n\n    float rShape2dCircle_113=shapeCircle(rSum_111, 0.5, 0.1);\n\n    \n    float rShape2dRect_115=shapeRect(rSum_111, uF3315);\n\n    float rSum_116=rShape2dCircle_113+rShape2dRect_115;\n\n    vec4 color=vec4(rSum_116,rSum_116,rSum_116, 1.0);\n\n    outColor = color;\n}"
+          "value": "\nIN vec2 texCoord;\nfloat shapeRect(vec2 p,vec2 size)\n{\n  vec2 d=abs(p)-size;\n  float a=length(max(d,vec2(0.0))) + min(max(d.x,d.y),0.0);\n  return step(a,0.);\n}\n\nfloat shapeCircle(vec2 p,float r,float border)\n{\n  float a=0.;\n  a=(length(p) - r);\n\n  float aa = fwidth(a);\n  float alpha = 1.0 - smoothstep(-aa, aa, a);\n\n\n  if(border>0.0)\n  {\n    float b=length(p) - (r-border);\n    float bb = fwidth(a);\n    alpha  *= smoothstep(-bb, bb, b);\n  }\n\n  return alpha;\n}\n\nuniform vec2 uF4583;\nuniform vec2 uF4598;\n\n{{MODULES_HEAD}}\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_187=texCoord.xy;\n\n    \n    vec2 rSum_188=vec4(rUv_187, 0., 1.)+vec4(uF4583, 0., 1.);\n\n    float rShape2dCircle_190=shapeCircle(rSum_188, 0.5, 0.1);\n\n    \n    float rShape2dRect_192=shapeRect(rSum_188, uF4598);\n\n    float rSum_193=rShape2dCircle_190+rShape2dRect_192;\n\n    vec4 color=vec4(rSum_193,rSum_193,rSum_193, 1.0);\n\n    outColor = color;\n}"
+        },
+        {
+          "name": "Count Compiles",
+          "value": 1
         }
       ]
     },
@@ -259,7 +277,7 @@
       "id": "7j5o5pcsf",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 948.6505798110611,
           "y": 1402.7970034241828
@@ -285,7 +303,7 @@
         },
         {
           "name": "Code Fragment",
-          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nfloat shapeCircle(vec2 p,float r,float border)\n{\n  float a=0.;\n  a=(length(p) - r);\n\n  float aa = fwidth(a);\n  float alpha = 1.0 - smoothstep(-aa, aa, a);\n\n\n  if(border>0.0)\n  {\n    float b=length(p) - (r-border);\n    float bb = fwidth(a);\n    alpha  *= smoothstep(-bb, bb, b);\n  }\n\n  return alpha;\n}\nuniform vec2 uF3300;\nfloat shapeRect(vec2 p,vec2 size)\n{\n  vec2 d=abs(p)-size;\n  float a=length(max(d,vec2(0.0))) + min(max(d.x,d.y),0.0);\n  return step(a,0.);\n}\nuniform vec2 uF3315;\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_110=texCoord.xy;\n\n    \n    vec2 rSum_111=rUv_110+uF3300;\n\n    float rShape2dCircle_113=shapeCircle(rSum_111, 0.5, 0.1);\n\n    \n    float rShape2dRect_115=shapeRect(rSum_111, uF3315);\n\n    float rSum_116=rShape2dCircle_113+rShape2dRect_115;\n\n    vec4 color=vec4(rSum_116,rSum_116,rSum_116, 1.0);\n\n    outColor = color;\n}"
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nfloat shapeRect(vec2 p,vec2 size)\n{\n  vec2 d=abs(p)-size;\n  float a=length(max(d,vec2(0.0))) + min(max(d.x,d.y),0.0);\n  return step(a,0.);\n}\n\nfloat shapeCircle(vec2 p,float r,float border)\n{\n  float a=0.;\n  a=(length(p) - r);\n\n  float aa = fwidth(a);\n  float alpha = 1.0 - smoothstep(-aa, aa, a);\n\n\n  if(border>0.0)\n  {\n    float b=length(p) - (r-border);\n    float bb = fwidth(a);\n    alpha  *= smoothstep(-bb, bb, b);\n  }\n\n  return alpha;\n}\n\nuniform vec2 uF4583;\nuniform vec2 uF4598;\n\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_187=texCoord.xy;\n\n    \n    vec2 rSum_188=vec4(rUv_187, 0., 1.)+vec4(uF4583, 0., 1.);\n\n    float rShape2dCircle_190=shapeCircle(rSum_188, 0.5, 0.1);\n\n    \n    float rShape2dRect_192=shapeRect(rSum_188, uF4598);\n\n    float rSum_193=rShape2dCircle_190+rShape2dRect_192;\n\n    vec4 color=vec4(rSum_193,rSum_193,rSum_193, 1.0);\n\n    outColor = color;\n}"
         }
       ]
     },
@@ -294,7 +312,7 @@
       "id": "dm6n2gbuf",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 991.9580320823972,
           "y": 1021.9213849531766
@@ -303,6 +321,14 @@
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "color",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -327,11 +353,17 @@
           "y": 843.6164790592823
         },
         "extendTitle": "",
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
+        {
+          "name": "uv",
+          "attribs": {
+            "sg": "0."
+          }
+        },
         {
           "name": "siz",
           "attribs": {
@@ -364,8 +396,8 @@
       "id": "xp9pfwo0s",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "uF3300 ",
-        "subPatch": "bgt3pjdjy",
+        "extendTitle": "uF4583 ",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 1003.9580320823972,
           "y": 576.5528111585302
@@ -422,7 +454,7 @@
       "id": "wsz8ykra3",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 1203.430952974033,
           "y": 827.4133189481903
@@ -431,6 +463,20 @@
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "uv",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "siz",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -450,7 +496,7 @@
       "id": "0oy17a97p",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "bgt3pjdjy",
+        "subPatch": "ab2oc4htm",
         "translate": {
           "x": 991.9580320823972,
           "y": 967.5781871582581
@@ -459,6 +505,20 @@
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number 1",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "number 2",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -478,11 +538,11 @@
       "id": "j3attm0s3",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "uF3315 ",
-        "subPatch": "bgt3pjdjy",
+        "extendTitle": "uF4598 ",
+        "subPatch": "ab2oc4htm",
         "translate": {
-          "x": 1232.9108200892001,
-          "y": 666.0622049351632
+          "x": 1215.430952974033,
+          "y": 688.7862486325287
         },
         "blueprintSubpatch2": true
       },
