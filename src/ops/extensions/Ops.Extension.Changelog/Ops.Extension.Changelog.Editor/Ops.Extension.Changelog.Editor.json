@@ -395,6 +395,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1788962161992
+        },
+        {
+            "message": "Scroll vizOp content, e.g. vizstring  by using mousewheel while pressing cmd key",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1789479829835
         }
     ],
     "isReleased": true,
