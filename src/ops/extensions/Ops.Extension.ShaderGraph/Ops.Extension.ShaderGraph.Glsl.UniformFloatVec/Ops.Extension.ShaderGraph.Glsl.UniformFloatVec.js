@@ -1,5 +1,5 @@
 const
-    inType = op.inSwitch("Type", ["float", "vec2", "vec4"], "vec4"),
+    inType = op.inSwitch("Type", ["float", "vec2", "vec3", "vec4"], "vec4"),
     inX = op.inFloat("X"),
     inY = op.inFloat("Y"),
     inZ = op.inFloat("Z"),

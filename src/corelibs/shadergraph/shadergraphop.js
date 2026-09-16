@@ -45,12 +45,16 @@ export class ShaderGraphOp
 
         if (port.uiAttribs.objType && port.uiAttribs.objType.indexOf("sg_") == 0) port.setUiAttribs({ "display": "sg" });
 
-        this.listeners[port.name] = port.on("change", this.updateGraph.bind(this));
         this.listeners[port.name] = port.on("change", () =>
         {
-            this.op.tempData.shaderNode.results[0].port.setRef({});
+            this.updateGraph.bind(this);
 
+            this.op.tempData.shaderNode.results[0].port.setRef({});
         });
+
+        // this.listeners[port.name] = port.on("change", () =>
+        // {
+        // });
     }
 
     addPortWatcherAll()

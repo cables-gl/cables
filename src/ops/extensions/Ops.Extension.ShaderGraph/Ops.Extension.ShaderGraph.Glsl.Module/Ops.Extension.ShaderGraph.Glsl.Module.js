@@ -8,7 +8,8 @@ const
     types = op.inBool("Set Type Title", false),
     ids = op.inBool("Show id", false),
     outModule = op.outObject("Module", null, "shadermodule"),
-    outCode = op.outString("Final Code", null, "glsl");
+    outCode = op.outString("Final Code", null, "glsl"),
+    outCountCompiles = op.outNumber("Count Compiles");
 
 /* minimalcore:start */
 inStage.setUiAttribs({ "hidePort": true });
@@ -17,6 +18,7 @@ inView.setUiAttribs({ "hidePort": true });
 /* minimalcore:end */
 
 const sgp = new CABLES.ShaderGraphProgram(inGraphNodes, new CABLES.LangGlsl());
+let compiles = 0;
 let shader = null;
 let needsUpdate = true;
 inStage.onChange = debug.onChange =
@@ -40,6 +42,7 @@ inStage.onChange = debug.onChange =
 
 function compile()
 {
+    outCountCompiles.set(compiles++);
     sgp.compile({ "showType": types.get(), "debug": debug.get(), "showId": ids.get(), "name": inStage.get() });
     let str = inCode.get();
 
