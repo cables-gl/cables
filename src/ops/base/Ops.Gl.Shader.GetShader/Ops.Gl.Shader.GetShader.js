@@ -6,13 +6,16 @@ const
 const cgl = op.patch.cgl;
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 
-mod.addModule({
-    "priority": 2,
-    "title": "getshader",
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": "",
-    "srcBodyVert": ""
-});
+let oldShader = null;
+
+mod.addModule(
+    {
+        "priority": 2,
+        "title": "getshader",
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": "",
+        "srcBodyVert": ""
+    });
 
 inTrigger.onTriggered = () =>
 {
@@ -20,7 +23,11 @@ inTrigger.onTriggered = () =>
 
     mod.bind();
     const sh = op.patch.cgl.getShader();
-    outShader.setRef(sh);
+    if (sh !== oldShader)
+    {
+        outShader.setRef(sh);
+        oldShader = sh;
+    }
     mod.unbind();
     next.trigger();
 };
