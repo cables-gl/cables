@@ -76,7 +76,7 @@ function update(mgpu)
 
         op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
         op.tempData.shaderNode.results[0].type = inType.get();
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
 
         mgpu.rebuildShaderModule = "new uniform binding: " + inName.get();
     }

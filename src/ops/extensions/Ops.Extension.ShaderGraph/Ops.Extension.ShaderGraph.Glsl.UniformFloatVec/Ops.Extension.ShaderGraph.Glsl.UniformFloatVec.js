@@ -70,7 +70,7 @@ function update(shader, bindings)
         if (uniType == "f") uni = new CGL.Uniform(shader, uniType, name, inX); // why needed, bug in cgl_uniform
         else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     }
 
     op.tempData.shaderNode.results[0].type = inType.get();

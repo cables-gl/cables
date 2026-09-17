@@ -19,5 +19,5 @@ op.init =
         op.tempData.shaderNode.src = "override " + name.get() + ":bool=" + (value.get() ? "true" : "false") + ";";
         op.tempData.shaderNode.resultVarName = name.get();
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

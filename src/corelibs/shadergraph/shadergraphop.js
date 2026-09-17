@@ -21,15 +21,15 @@ export class ShaderGraphOp
      */
     constructor(op, shaderNode)
     {
-        op.sgOp = this;
+        shaderNode.op = this;
         this.op = op;
 
         shaderNode.id = ShaderGraphProgram.getNewId();
 
         op.tempData.shaderNode = shaderNode;
-        op.updateGraph = this.updateGraph.bind(this);
+        shaderNode.updateGraph = this.updateGraph.bind(this);
 
-        this.op.on("onLinkChanged", this.updateGraph.bind(this));
+        this.op.on(Op.EVENT_LINK_CHANGED, this.updateGraph.bind(this));
         this.updateGraph();
 
         this.addPortWatcherAll();

@@ -230,10 +230,10 @@ export class MultiPort extends Port
                 po.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(); });
 
                 if (po.multiLinkChangeListener)po.multiLinkChangeListener = po.off(po.multiLinkChangeListener);
-                po.multiLinkChangeListener = po.on("onLinkChanged", () =>
+                po.multiLinkChangeListener = po.on(Port.EVENT_LINK_CHANGED, () =>
                 {
                     this.countPorts();
-                    this.emitEvent("onLinkChanged");
+                    this.emitEvent(Port.EVENT_LINK_CHANGED);
                 });
 
                 if (po.multiLinkRemoveListener)po.multiLinkRemoveListener = po.off(po.multiLinkRemoveListener);
@@ -243,7 +243,7 @@ export class MultiPort extends Port
                     // this.checkNum();
                     // this.countPorts();
                     updateUi();
-                    this.emitEvent("onLinkChanged");
+                    this.emitEvent(Port.EVENT_LINK_CHANGED);
                     // this.countPorts.bind(this);
                 });
             }
@@ -271,7 +271,7 @@ export class MultiPort extends Port
 
             updateUi();
             updateArray();
-            this.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
             // console.log("this.op.preservedPortTitles", this.op.preservedPortTitles, this.op.preservedPortTitles[po.name], po.name);
             if (this.op.preservedPortTitles && this.op.preservedPortTitles[po.name]) po.setUiAttribs({ "title": this.op.preservedPortTitles[po.name] });
 

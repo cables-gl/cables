@@ -30,6 +30,8 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @property {string} src - this source code will only appended once (per op name) into the shader header
  * @property {string} srcUni - this source code will appended once per op instance id
  * @property {string} srcSwizzle
+ * @property {import("./shadergraphop.js").ShaderGraphOp} [op]
+ * @property {function} [updateGraph]
  */
 
 /**
@@ -434,7 +436,7 @@ export class ShaderGraphProgram extends Events
             {
                 const otherport = params[j].port.links[i].getOtherPort(params[j].port);
                 const otherop = otherport.op;
-                const r = otherop.sgOp.getResult(otherport.name);
+                const r = otherop.tempData.shaderNode.op.getResult(otherport.name);
 
                 if (r)
                 {

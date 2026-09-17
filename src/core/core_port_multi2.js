@@ -166,10 +166,10 @@ export class MultiPort2 extends Port
                 po.tempData.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
 
                 if (po.tempData.multiLinkChangeListener)po.tempData.multiLinkChangeListener = po.off(po.tempData.multiLinkChangeListener);
-                po.tempData.multiLinkChangeListener = po.on("onLinkChanged", () =>
+                po.tempData.multiLinkChangeListener = po.on(Port.EVENT_LINK_CHANGED, () =>
                 {
                     this.countPorts();
-                    this.emitEvent("onLinkChanged");
+                    this.emitEvent(Port.EVENT_LINK_CHANGED);
                 });
 
                 if (po.tempData.multiLinkRemoveListener)po.tempData.multiLinkRemoveListener = po.off(po.tempData.multiLinkRemoveListener);
@@ -177,7 +177,7 @@ export class MultiPort2 extends Port
                 {
                     updateUi();
                     this.countPorts();
-                    this.emitEvent("onLinkChanged");
+                    this.emitEvent(Port.EVENT_LINK_CHANGED);
                 });
             }
         };
@@ -203,7 +203,7 @@ export class MultiPort2 extends Port
 
             updateUi();
             updateArray();
-            this.emitEvent("onLinkChanged");
+            this.emitEvent(Port.EVENT_LINK_CHANGED);
 
             if (this.op.preservedPortTitles && this.op.preservedPortTitles[po.name]) po.setUiAttribs({ "title": this.op.preservedPortTitles[po.name] });
 

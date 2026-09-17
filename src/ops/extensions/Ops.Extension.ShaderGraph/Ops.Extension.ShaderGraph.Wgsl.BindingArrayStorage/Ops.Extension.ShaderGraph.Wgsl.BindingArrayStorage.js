@@ -153,7 +153,7 @@ function update(mgpu, bindings)
         op.tempData.shaderNode.results[0].name = op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || p[0];
         op.tempData.shaderNode.results[0].type = p[1];
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
         // op.tempData.shaderNode.result.port.setRef({});
     }
     if (bindings) bindings.push(binding);

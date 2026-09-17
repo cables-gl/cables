@@ -1,4 +1,4 @@
-import { Port } from "cables";
+import { Op, Port } from "cables";
 
 export class ShaderGraphOp
 {
@@ -17,7 +17,7 @@ export class ShaderGraphOp
         if (src)
             this.parseCode(src);
 
-        this._op.on("onLinkChanged", this.updateGraph.bind(this));
+        this._op.on(Op.EVENT_LINK_CHANGED, this.updateGraph.bind(this));
         this.addPortWatcher();
     }
 
