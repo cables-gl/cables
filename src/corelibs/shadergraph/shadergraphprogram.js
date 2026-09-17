@@ -207,7 +207,7 @@ export class ShaderGraphProgram extends Events
 
         if (node.type == "operator" || node.maxGen)
         {
-            node.results[0].type = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]);
+            // node.results[0].type = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]);
         }
 
         let title = "";
