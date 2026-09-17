@@ -7,7 +7,7 @@ const
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
     outChannels = op.outString("Channels"),
-    outLoading = op.outBool("Loading");
+    outLoading = op.outBoolNum("Loading");
 
 let
     loadingId = null,
