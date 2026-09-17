@@ -30,7 +30,7 @@ export class ShaderGraphOp
         op.tempData.shaderNode = shaderNode;
         op.updateGraph = this.updateGraph.bind(this);
 
-        this.op.on("onLinkChanged", this.updateGraph.bind(this));
+        this.op.on(Op.EVENT_LINK_CHANGED, this.updateGraph.bind(this));
         this.updateGraph();
 
         this.addPortWatcherAll();

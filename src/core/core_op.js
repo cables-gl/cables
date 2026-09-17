@@ -127,6 +127,7 @@ export class Op extends Events
     static EVENT_PORT_REMOVED = "onPortRemoved";
     static EVENT_PORT_ORDER_CHANGE = "portOrderChanged";
     static EVENT_STORAGE_CHANGE = "onStorageChange";
+    static EVENT_LINK_CHANGED = "onLinkChanged";
 
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;

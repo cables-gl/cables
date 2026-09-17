@@ -19,7 +19,7 @@ function update()
     }
 }
 
-outTrigs.on("onLinkChanged", () =>
+outTrigs.on(CABLES.Port.EVENT_LINK_CHANGED, () =>
 {
     const arr = [];
     const trigs = outTrigs.get();
