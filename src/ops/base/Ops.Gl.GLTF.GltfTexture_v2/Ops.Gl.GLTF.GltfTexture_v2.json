@@ -6,6 +6,18 @@
             "type": "new op",
             "author": "pandur",
             "date": 1777535166540
+        },
+        {
+            "message": "Gl.GLTF.GltfLoadedTexture renamed to Ops.Gl.GLTF.GltfTexture_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789653870604
+        },
+        {
+            "message": "replace old gltf texture loader, is the gltf v5 way to use loaded textures ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789654090856
         }
     ],
     "authorName": "pandur",
