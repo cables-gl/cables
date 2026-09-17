@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("Render"),
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    inArea = op.inDropDown("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inSize = op.inValue("Size", 1),
     roundNess = op.inFloatSlider("Roundness", 0),
-    inAmount = op.inValueSlider("Amount", 0.5),
+    inAmount = op.inFloatSlider("Amount", 0.5),
     inFalloff = op.inFloat("Falloff", 0),
     inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
     inInvert = op.inBool("Invert"),
@@ -11,9 +11,9 @@ const
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
     doScale = op.inBool("Change Size", false),
     sizeX = op.inFloat("Size X", 1),
     sizeY = op.inFloat("Size Y", 1),
@@ -61,20 +61,22 @@ render.onTriggered = doRender;
 
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
-mod.addModule({
-    "priority": 2,
-    "title": vertModTitle,
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": srcHeadVert,
-    "srcBodyVert": srcBodyVert
-});
+mod.addModule(
+    {
+        "priority": 2,
+        "title": vertModTitle,
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": srcHeadVert,
+        "srcBodyVert": srcBodyVert
+    });
 
-mod.addModule({
-    "title": op.name,
-    "name": "MODULE_COLOR",
-    "srcHeadFrag": attachments.colorarea_head_frag,
-    "srcBodyFrag": attachments.colorarea_frag
-});
+mod.addModule(
+    {
+        "title": op.name,
+        "name": "MODULE_COLOR",
+        "srcHeadFrag": attachments.colorarea_head_frag,
+        "srcBodyFrag": attachments.colorarea_frag
+    });
 
 mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, inFalloff);
 mod.addUniform("3f", "MOD_color", r, g, b);

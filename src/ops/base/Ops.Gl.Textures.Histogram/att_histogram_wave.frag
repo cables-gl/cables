@@ -4,10 +4,10 @@ IN vec2 texCoord;
 void main()
 {
     vec4 col=vec4(0.0,0.0,0.0,1.0);
-    float strengthR=texture(tex,vec2(texCoord.x,1.0)).r;
-    float strengthG=texture(tex,vec2(texCoord.x,1.)).r;
-    float strengthB=texture(tex,vec2(texCoord.x,0.5)).r;
-    float strengthL=texture(tex,vec2(texCoord.x,0.25)).r;
+    float strengthR=texture(tex,vec2(texCoord.x,0.875)).r;
+    float strengthG=texture(tex,vec2(texCoord.x,0.625)).r;
+    float strengthB=texture(tex,vec2(texCoord.x,0.375)).r;
+    float strengthL=texture(tex,vec2(texCoord.x,0.125)).r;
 
     strengthR*=strengthR;
     strengthG*=strengthG;
@@ -21,6 +21,5 @@ void main()
 
     if(strengthL > texCoord.y*2.0-1.0 && texCoord.y>0.5) col.rgb=vec3(1.0);
 
-    col=texture(tex,vec2(texCoord.x,texCoord.y)).rgba;
     outColor= col;
 }
