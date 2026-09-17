@@ -1,4 +1,4 @@
-
+// ported from threejs
 /**
  * OpenEXR loader currently supports uncompressed, ZIP(S), RLE, PIZ and DWA/B compression.
  * Supports reading as UnsignedByte, HalfFloat and Float type data texture.
@@ -66,7 +66,6 @@
 // ///////////////////////////////////////////////////////////////////////////
 // // End of OpenEXR license -------------------------------------------------
 
-
 const _FloatTypeFull = 0;
 const _FloatTypeHalf = 1;
 
@@ -123,8 +122,8 @@ class EXRLoader
             // Source: http://gamedev.stackexchange.com/questions/17326/conversion-of-a-number-from-single-precision-floating-point-representation-to-a/17410#17410
 
             /* This method is faster than the OpenEXR implementation (very often
-		* used, eg. in Ogre), with the additional benefit of rounding, inspired
-		* by James Tursa?s half-precision code. */
+             * used, eg. in Ogre), with the additional benefit of rounding, inspired
+             * by James Tursa?s half-precision code. */
 
             _floatView[0] = val;
             const x = _int32View[0];
@@ -134,15 +133,16 @@ class EXRLoader
             const e = (x >> 23) & 0xff; /* Using int is faster here */
 
             /* If zero, or denormal, or exponent underflows too much for a denormal
-			* half, return signed zero. */
+             * half, return signed zero. */
             if (e < 103) return bits;
 
             /* If NaN, return NaN. If Inf or exponent overflow, return Inf. */
             if (e > 142)
             {
                 bits |= 0x7c00;
+
                 /* If exponent was 0xff and one mantissa bit was set, it means NaN,
-						* not Inf, so make sure we set one mantissa bit too. */
+                 * not Inf, so make sure we set one mantissa bit too. */
                 bits |= ((e == 255) ? 0 : 1) && (x & 0x007fffff);
                 return bits;
             }
@@ -151,15 +151,17 @@ class EXRLoader
             if (e < 113)
             {
                 m |= 0x0800;
+
                 /* Extra rounding may overflow and set mantissa to 0 and exponent
-				* to 1, which is OK. */
+                 * to 1, which is OK. */
                 bits |= (m >> (114 - e)) + ((m >> (113 - e)) & 1);
                 return bits;
             }
 
             bits |= ((e - 112) << 10) | (m >> 1);
+
             /* Extra rounding. An overflow will set mantissa to 0 and increment
-			* the exponent, which is OK. */
+             * the exponent, which is OK. */
             bits += m & 1;
             return bits;
         }
@@ -532,7 +534,8 @@ class EXRLoader
                     if (nx & p)
                     {
                         let p10 = px + oy1;
-                        if (w14) wdec14(buffer[px + j], buffer[p10 + j]); else wdec16(buffer[px + j], buffer[p10 + j]);
+                        if (w14) wdec14(buffer[px + j], buffer[p10 + j]);
+                        else wdec16(buffer[px + j], buffer[p10 + j]);
                         i00 = wdec14Return.a;
                         buffer[p10 + j] = wdec14Return.b;
                         buffer[px + j] = i00;
@@ -547,7 +550,8 @@ class EXRLoader
                     for (; px <= ex; px += ox2)
                     {
                         let p01 = px + ox1;
-                        if (w14) wdec14(buffer[px + j], buffer[p01 + j]); else wdec16(buffer[px + j], buffer[p01 + j]);
+                        if (w14) wdec14(buffer[px + j], buffer[p01 + j]);
+                        else wdec16(buffer[px + j], buffer[p01 + j]);
                         i00 = wdec14Return.a;
                         buffer[p01 + j] = wdec14Return.b;
                         buffer[px + j] = i00;
@@ -816,7 +820,6 @@ class EXRLoader
                     }
                 } // blockx
 
-
                 let offset = 0;
 
                 for (let comp = 0; comp < numComp; ++comp)
@@ -842,7 +845,6 @@ class EXRLoader
                         }
                     } // handle partial X blocks
 
-
                     if (numFullBlocksX != numBlocksX)
                     {
                         for (let y = 8 * blocky; y < 8 * blocky + maxY; ++y)
@@ -858,7 +860,6 @@ class EXRLoader
                     }
                 } // comp
             } // blocky
-
 
             let halfRow = new Uint16Array(width);
             dataView = new DataView(outBuffer.buffer); // convert channels back to float, if needed
@@ -1145,7 +1146,6 @@ class EXRLoader
                 outBufferEnd += pizChannelData[i].nx * pizChannelData[i].ny * pizChannelData[i].size;
             } // Read range compression data
 
-
             let minNonZero = parseUint16(inDataView, inOffset);
             let maxNonZero = parseUint16(inDataView, inOffset);
 
@@ -1162,7 +1162,6 @@ class EXRLoader
                 }
             } // Reverse LUT
 
-
             let lut = new Uint16Array(USHORT_RANGE);
             let maxValue = reverseLutFromBitmap(bitmap, lut);
             let length = parseUint32(inDataView, inOffset); // Huffman decoding
@@ -1178,7 +1177,6 @@ class EXRLoader
                     wav2Decode(outBuffer, cd.start + j, cd.nx, cd.size, cd.ny, cd.nx * cd.size, maxValue);
                 }
             } // Expand the pixel data to their original range
-
 
             applyLut(lut, outBuffer, outBufferEnd); // Rearrange the pixel data into the format expected by the caller.
 
@@ -1299,15 +1297,15 @@ class EXRLoader
                 let csc = (value >> 4) - 1;
                 let index = new Int8Array([csc])[0];
                 let type = parseUint8(inDataView, inOffset);
-                channelRules.push({
-                    "name": name,
-                    "index": index,
-                    "type": type,
-                    "compression": compression
-                });
+                channelRules.push(
+                    {
+                        "name": name,
+                        "index": index,
+                        "type": type,
+                        "compression": compression
+                    });
                 ruleSize -= name.length + 3;
             } // Classify channels
-
 
             let channels = EXRHeader.channels;
             let channelData = new Array(info.channels);
@@ -1351,7 +1349,6 @@ class EXRLoader
                 }
             } // Read DCT - AC component data
 
-
             if (dwaHeader.acCompressedSize > 0)
             {
                 switch (dwaHeader.acCompression)
@@ -1371,7 +1368,6 @@ class EXRLoader
                 }
             } // Read DCT - DC component data
 
-
             if (dwaHeader.dcCompressedSize > 0)
             {
                 let zlibInfo = {
@@ -1383,7 +1379,6 @@ class EXRLoader
                 inOffset.value += dwaHeader.dcCompressedSize;
             } // Read RLE compressed data
 
-
             if (dwaHeader.rleRawSize > 0)
             {
                 let compressed = info.array.slice(inOffset.value, inOffset.value + dwaHeader.rleCompressedSize);
@@ -1392,7 +1387,6 @@ class EXRLoader
                 let rleBuffer = decodeRunLength(data.buffer);
                 inOffset.value += dwaHeader.rleCompressedSize;
             } // Prepare outbuffer data offset
-
 
             let outBufferEnd = 0;
             let rowOffsets = new Array(channelData.length);
@@ -1410,7 +1404,6 @@ class EXRLoader
                     outBufferEnd += channelData[chan].width * info.type * INT16_SIZE;
                 }
             } // Lossy DCT decode RGB channels
-
 
             lossyDctDecode(cscSet, rowOffsets, channelData, acBuffer, dcBuffer, outBuffer); // Decode other channels
 
@@ -1547,7 +1540,6 @@ class EXRLoader
             return toHalfFloat(parseFloat32(dataView, offset));
         } // https://stackoverflow.com/questions/5678432/decompressing-half-precision-floats-in-javascript
 
-
         function decodeFloat16(binary)
         {
             let exponent = (binary & 0x7C00) >> 10,
@@ -1581,13 +1573,14 @@ class EXRLoader
 
                 let xSampling = parseInt32(dataView, offset);
                 let ySampling = parseInt32(dataView, offset);
-                channels.push({
-                    "name": name,
-                    "pixelType": pixelType,
-                    "pLinear": pLinear,
-                    "xSampling": xSampling,
-                    "ySampling": ySampling
-                });
+                channels.push(
+                    {
+                        "name": name,
+                        "pixelType": pixelType,
+                        "pLinear": pLinear,
+                        "xSampling": xSampling,
+                        "ySampling": ySampling
+                    });
             }
 
             offset.value += 1;
@@ -1770,7 +1763,7 @@ class EXRLoader
                 }
             }
 
-            if (spec != 0)
+            if ((spec & ~4) !== 0)
             {
                 console.error("EXRHeader:", EXRHeader);
                 throw new Error("EXRLoader: provided file is currently unsupported.");
@@ -1889,7 +1882,6 @@ class EXRLoader
             // we should be passed the scanline offset table, ready to start reading pixel data.
             // RGB images will be converted to RGBA format, preventing software emulation in select devices.
 
-
             EXRDecoder.outputChannels = EXRDecoder.channels == 3 ? 4 : EXRDecoder.channels;
             const size = EXRDecoder.width * EXRDecoder.height * EXRDecoder.outputChannels;
 
@@ -1927,7 +1919,6 @@ class EXRLoader
 
             return EXRDecoder;
         } // start parsing file [START]
-
 
         const bufferDataView = new DataView(buffer);
         const uInt8Array = new Uint8Array(buffer);
