@@ -35,6 +35,16 @@ import { showUiErrors } from "./uierrors.js";
  */
 
 /**
+ * @typedef HistoryObject
+ * @property {HistoryUserObject} [lastInteractionBy]
+ * @property {number} [lastInteractionAt]
+ */
+/**
+ * @typedef HistoryUserObject
+ * @property {string} [name]
+ */
+
+/**
  * @typedef UiError
  * @property {string} txt
  * @property {number} level
@@ -85,6 +95,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [heatmapIntensity]
  * @property {string} [commentOverwrite]
  * @property {string} [comment_text]
+ * @property {HistoryObject} [history]
  * @property {boolean} [createdLocally]
  * @property {boolean} [stretchPorts]
  * @property {number} [vizLayerMaxZoom]

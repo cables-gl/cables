@@ -49,6 +49,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [hover]
  * @property  {boolean} [ignoreBigPort]
  * @property  {boolean} [multiPort2]
+ * @property  {boolean} [stringTrim]
 */
 
 /**
@@ -109,7 +110,7 @@ export class Port extends Events
 
     /**
      * @typedef PortAttribs
-     * @property {string[]} [sg]
+     * @property {string} [sg]
      */
 
     /**
