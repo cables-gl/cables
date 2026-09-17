@@ -18,5 +18,5 @@ op.init =
         op.tempData.shaderNode.name = value.get();
         op.tempData.shaderNode.resultVarName = value.get();
         op.tempData.shaderNode.results[0].type = valueType.get();
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

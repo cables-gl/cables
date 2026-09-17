@@ -16,5 +16,5 @@ op.init =
     () =>
     {
         op.tempData.shaderNode.name = value.get();
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

@@ -21,5 +21,5 @@ op.init =
         op.tempData.shaderNode.src = "override " + name.get() + ":f32=" + value.get() + ";";
         op.tempData.shaderNode.resultVarName = name.get();
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

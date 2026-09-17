@@ -59,7 +59,7 @@ function update(shader, bindings)
             shader.pushTexture(uni, inTexture.get().tex);
         }
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     }
     if (uni && inTexture.get()) shader.pushTexture(uni, inTexture.get().tex);
     else console.log("not possible to push texture");
