@@ -59,7 +59,6 @@ function update(shader, bindings)
         op.tempData.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
 
         op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
-        op.tempData.shaderNode.results[0].type = inType.get();
     }
     // const mgpu = op.patch.frameStore.mgpu;
     if (!uni && shader)
@@ -74,6 +73,7 @@ function update(shader, bindings)
         op.updateGraph();
     }
 
+    op.tempData.shaderNode.results[0].type = inType.get();
 }
 
 new CABLES.ShaderGraphOp(this,

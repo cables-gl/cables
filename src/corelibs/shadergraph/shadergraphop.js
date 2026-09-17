@@ -12,7 +12,6 @@ export class ShaderGraphOp
     _outPorts = [];
 
     listeners = {};
-    _defines = [];
     enabled = true;
     info = null;
 
