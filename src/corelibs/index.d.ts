@@ -9,15 +9,17 @@ declare global {
     const CG: any
     const WEBAUDIO: any
     const Ammo: any
-
-    var glMatrix: any
-    var mat2: any
-    var mat2d: any
-    var mat3: any
-    var mat4: any
-    var quat: any
-    var quat2: any
-    var vec2: any
-    var vec3: any
-    var vec4: any
+    const glMatrix: any
+    const mat2d: any
+    const quat2: any
+    const glMatrix: any
+    const mat2: any
+    const mat2d: any
+    const mat3: any
+    const mat4: any
+    const quat: any
+    const quat2: any
+    const vec2: any
+    const vec3: any
+    const vec4: any
 }

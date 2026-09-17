@@ -44,6 +44,9 @@ export class MemProfiler
         this.items[item.id] = item;
     }
 
+    /**
+     * @param {MemProfilerItem} item
+     */
     remove(item)
     {
         delete this.items[item.id];

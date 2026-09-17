@@ -48,6 +48,8 @@ import { Op } from "./core_op.js";
  * @property  {number} [tlEase] default easing when animating parameter
  * @property  {boolean} [hover]
  * @property  {boolean} [ignoreBigPort]
+ * @property  {boolean} [multiPort2]
+ * @property  {boolean} [stringTrim]
 */
 
 /**
@@ -108,7 +110,7 @@ export class Port extends Events
 
     /**
      * @typedef PortAttribs
-     * @property {string[]} [sgvalues]
+     * @property {string} [sg]
      */
 
     /**

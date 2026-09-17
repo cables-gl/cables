@@ -106,7 +106,7 @@ export function cleanJson(obj)
 {
     for (const i in obj)
     {
-        if (obj[i] && typeof objValue === "object" && obj[i].constructor === Object) obj[i] = cleanJson(obj[i]);
+        if (obj[i] && typeof obj[i] === "object" && obj[i].constructor === Object) obj[i] = cleanJson(obj[i]);
 
         if (obj[i] === null || obj[i] === undefined) delete obj[i];
         else if (Array.isArray(obj[i]) && obj[i].length == 0) delete obj[i];
@@ -335,6 +335,21 @@ export const filename = function (url)
     return name || "";
 };
 
+/**
+ * @typedef CblRequestOptions
+ * @property {String} url
+ * @property {Function} [cb]
+ * @property {String} [method]
+ * @property {String} [data]
+ * @property {String} [contenttype]
+ * @property {Boolean} [sync]
+ * @property {string} [credentials]
+ * @property {Boolean} [jsonP]
+ * @property {Boolean} [post]
+ * @property {Boolean} [asynch]
+ * @property {Object} [headers]
+*/
+
 /* minimalcore:start */
 /**
  * make an ajax request
@@ -346,8 +361,8 @@ export const filename = function (url)
  * @param {null} post
  * @param {null} contenttype
  * @param {boolean} jsonP
- * @param {object} headers
- * @param {object} options
+ * @param {object} [headers]
+ * @param {object} [options]
  */
 export function ajax(url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
 {
@@ -365,6 +380,9 @@ export function ajax(url, cb, method, post, contenttype, jsonP, headers = {}, op
     request(requestOptions);
 }
 
+/**
+ * @param {CblRequestOptions} options
+ */
 export function request(options)
 {
     if (!options.hasOwnProperty("asynch")) options.asynch = true;

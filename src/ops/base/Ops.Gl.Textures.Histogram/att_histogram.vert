@@ -1,5 +1,5 @@
 IN vec3 vPosition;
-IN vec2 attrTexCoord;
+IN vec2 instTexCoord;
 UNI sampler2D tex;
 
 float lumi(vec3 color)
@@ -9,35 +9,30 @@ float lumi(vec3 color)
 
 void main()
 {
-    gl_PointSize=2.0;
-
-    vec2 tc=attrTexCoord;
-
     highp float strength=0.0;
-    highp float pos=0.5;
+    highp float pos=-0.25;
     #ifdef HISTOGRAM_R
-        strength=texture(tex,tc).r;
-        pos=1.0;
-    #endif
-
-    #ifdef HISTOGRAM_G
-        strength=texture(tex,tc).g;
+        strength=texture(tex,instTexCoord).r;
         pos=0.75;
     #endif
 
-    #ifdef HISTOGRAM_B
-        strength=texture(tex,tc).b;
-        pos=0.5;
-    #endif
-
-    #ifdef HISTOGRAM_LUMI
-        strength=lumi(texture(tex,tc).rgb);
+    #ifdef HISTOGRAM_G
+        strength=texture(tex,instTexCoord).g;
         pos=0.25;
     #endif
 
-    highp vec4 model=vec4(strength*2.0-1.0, pos , 0.0, 1.0);
+    #ifdef HISTOGRAM_B
+        strength=texture(tex,instTexCoord).b;
+        pos=-0.25;
+    #endif
 
-    model=vec4(0.5, 0.5, 0., 1.);
+    #ifdef HISTOGRAM_LUMI
+        strength=lumi(texture(tex,instTexCoord).rgb);
+        pos=-0.75;
+    #endif
 
-    gl_Position=model;
+    highp vec2 center=vec2(strength*2.0-1.0, pos);
+    highp vec2 localOffset=vPosition.xy*vec2(1.0/256.0, 0.25);
+
+    gl_Position=vec4(center+localOffset, 0.0, 1.0);
 }

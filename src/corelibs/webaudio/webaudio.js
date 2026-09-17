@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @namespace WEBAUDIO */
 
 import { Patch, Op, Port } from "cables";

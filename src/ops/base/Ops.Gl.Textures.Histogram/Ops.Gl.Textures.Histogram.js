@@ -67,31 +67,36 @@ function initEffect()
 
 function setUpPointVerts()
 {
+    // gl.POINTS is not reliably rasterized on all gpu/driver combinations, so instead
+    // of one GL_POINTS vertex per source pixel, instance a tiny quad per source pixel
+    // (one quad = one bin/value scatter marker) using GL_TRIANGLES.
     const geom = new CGL.Geometry(op.name);
+    geom.vertices = [
+        -1, -1, 0,
+        1, -1, 0,
+        1, 1, 0,
+        -1, 1, 0
+    ];
+    geom.verticesIndices = [0, 1, 2, 0, 2, 3];
+
+    meshPoints = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.TRIANGLES });
+    meshPoints.setGeom(geom);
+
     let res = 256;
-    let verts = [];
-    let texCoords = [];
+    let instTexCoords = new Float32Array(res * res * 2);
     let i = 0;
-    verts.length = res * res * 3;
-    texCoords.length = res * res * 2;
     for (let x = 0; x < res; x++)
     {
         for (let y = 0; y < res; y++)
         {
-            verts[i * 3 + 2] = verts[i * 3 + 1] = verts[i * 3 + 0] = 0;
-            texCoords[i * 2] = x / res;
-            texCoords[i * 2 + 1] = y / res;
+            instTexCoords[i * 2] = x / res;
+            instTexCoords[i * 2 + 1] = y / res;
             i++;
         }
     }
 
-    console.log("verts ", verts, texCoords);
-
-    geom.setPointVertices(verts);
-    geom.texCoords = texCoords;
-
-    meshPoints = new CGL.Mesh(cgl, geom, { "glPrimitive": cgl.gl.POINTS });
-    meshPoints.setGeom(geom);
+    meshPoints.addAttribute("instTexCoord", instTexCoords, 2, { "instanced": true });
+    meshPoints.setNumInstances(res * res);
 }
 
 exe.onTriggered = function ()
@@ -104,9 +109,7 @@ exe.onTriggered = function ()
     if (meshPoints && inTex.get())
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
-        // cgl.pushBlendMode(CGL.BLEND_ADD, false);
-        // cgl.pushBlend(true);
-        cgl.pushBlend(false);
+        cgl.pushBlend(true);
 
         let vp = cgl.getViewPort();
         prevViewPort[0] = vp[0];
@@ -121,27 +124,17 @@ exe.onTriggered = function ()
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
 
         cgl.setViewPort(0, 0, 256, 4);
-        // cgl.setViewPort(0, 0, size, size);
 
-        mat4.ortho(
-            cgl.pMatrix,
-            -1, 1,
-            -1, 1,
-            -10.0, 10
-        );
+        cgl.pushDepthTest(false);
 
-        // mat4.perspective(cgl.pMatrix, 1, 1, -5, 5);
-
-        cgl.pushShader(shaderPointsR);
         cgl.setTexture(0, inTex.get().tex);
 
-        meshPoints.render();
+        meshPoints.render(shaderPointsR);
+        meshPoints.render(shaderPointsG);
+        meshPoints.render(shaderPointsB);
+        meshPoints.render(shaderPointsLumi);
 
-        cgl.popShader();
-
-        // meshPoints.render(shaderPointsG);
-        // meshPoints.render(shaderPointsB);
-        // meshPoints.render(shaderPointsLumi);
+        cgl.popDepthTest();
 
         fb.renderEnd(cgl);
 
