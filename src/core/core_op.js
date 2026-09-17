@@ -255,12 +255,12 @@ export class Op extends Events
      * @param {(...args: any[]) => any} cb
      * @param {string} [idPrefix]
      */
-    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+    // on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
 
     /**
      * @param {*} listenerParam
      */
-    off(listenerParam) { return super.off(listenerParam); }
+    // off(listenerParam) { return super.off(listenerParam); }
 
     /**
      * @param {string} which
@@ -271,7 +271,7 @@ export class Op extends Events
      * @param {*} [param5]
      * @param {*} [param6]
      */
-    emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
+    // emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
 
     /* minimalcore:start */
     // functions to be overwritten in core_extend_op
@@ -1503,11 +1503,16 @@ export class Op extends Events
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     }
 
-    // @TODO should be move to extend...
+    /**
+     * @returns {import("cables-shared-client").SerializedOp}
+     */
     getSerialized()
     {
 
+        // @TODO should be move to extend...
+
         /* minimalcore:start */
+        /** @type {import("cables-shared-client").SerializedOp} */
         const opObj = {};
 
         if (this.opId) opObj.opId = this.opId;

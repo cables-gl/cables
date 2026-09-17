@@ -53,9 +53,6 @@ export class ShaderGraphOp
             this.op.tempData.shaderNode.results[0].port.setRef({});
         });
 
-        // this.listeners[port.name] = port.on("change", () =>
-        // {
-        // });
     }
 
     addPortWatcherAll()

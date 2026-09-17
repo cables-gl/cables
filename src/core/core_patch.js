@@ -1174,7 +1174,7 @@ export class Patch extends Events
                                         // lost link
                                         const outOp = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
                                         let dstOp = null;
-                                        let theSubPatch = 0;
+                                        let theSubPatch = Patch.DEFAULT_SUBPATCHID;
 
                                         for (let i = 0; i < this.ops.length; i++)
                                         {

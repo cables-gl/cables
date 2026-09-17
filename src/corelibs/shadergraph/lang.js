@@ -1,5 +1,3 @@
-import { Port } from "cables";
-
 export class Lang
 {
     name = "unknown";
@@ -9,22 +7,19 @@ export class Lang
     strTypeVec2 = "vec2";
     strTypeFloat = "float";
 
-    convertTypes(log, typeTo, typeFrom, paramStr, node)
+    convertTypes(_log, _typeTo, _typeFrom, _paramStr, _node)
     {
         throw new Error("Method not implemented.");
-        return "";
     }
 
-    getResultDef(node)
+    getResultDef(_node)
     {
         throw new Error("Method not implemented.");
-        return "";
     }
 
-    getVarDef(node)
+    getVarDef(_node)
     {
         throw new Error("Method not implemented.");
-        return "";
     }
 
     /**
@@ -38,20 +33,19 @@ export class Lang
             const defaultValue = value || "0., 0., 0., 0.";
             return this.strTypeVec4 + "(" + defaultValue + ")";
         }
+
         if (type == "vec3")
         {
-
             const defaultValue = value || "0., 0., 0.";
             return this.strTypeVec3 + "(" + defaultValue + ")";
-
         }
+
         if (type == "vec2")
         {
-
             const defaultValue = value || "0., 0.";
             return this.strTypeVec2 + "(" + defaultValue + ")";
-
         }
+
         if (type == "f32") return value || "0.";
         if (type == "float") return value || "0.";
         if (type == "gen") return value || "0.";
@@ -99,7 +93,6 @@ export class Lang
             if (i != arr.length - 1)str += ",";
         }
         str += ")";
-        // console.log("vecstrrrrrrrrr", str, arr);
         return str;
     }
 }
