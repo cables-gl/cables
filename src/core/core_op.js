@@ -173,6 +173,16 @@ export class Op extends Events
     preservedPortLinks = {};
 
     /* minimalcore:start */
+
+    /**
+     * @typedef LinkTimeRules
+     * @property {Port[]} needsLinkedToWork
+     * @property {Port[]} needsStringToWork
+     * @property {string} needsParentOp
+     * @property {string} forbiddenParent
+     * @property {number} forbiddenParentType
+     */
+    /** @type {LinkTimeRules} */
     linkTimeRules = {
         "needsLinkedToWork": [],
         "needsStringToWork": [],
