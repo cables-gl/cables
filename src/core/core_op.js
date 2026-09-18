@@ -1507,6 +1507,36 @@ export class Op extends Events
         return null;
     }
 
+    outScopeArea()
+    {
+        const outScope = this.outObject("areaScopeBegin", null, "areaScope");
+        // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
+
+        this.setUiAttribs({ "scopeArea": true });
+        outScope.onLinkChanged = () =>
+        {
+
+            this.tempData.scopeAreaEndOp = null;
+            if (outScope.isLinked())
+            {
+
+                const otherPort = outScope.links[0].getOtherPort(outScope);
+                otherPort.op.getPortByName("areaScopeEnd");
+
+                this.tempData.scopeAreaEndOp = otherPort.op;
+                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
+
+            }
+        };
+        return outScope;
+
+    }
+
+    inScopeArea()
+    {
+        return this.inObject("areaScopeEnd", null, "areaScope");
+    }
+
     removeLinks()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
@@ -2071,36 +2101,6 @@ export class Op extends Events
     newPort(op, name, type, uiAttribs)
     {
         return new CABLES.Port(op, name, type, uiAttribs);
-    }
-
-    setScopeAreaBegin()
-    {
-        const outScope = this.outObject("areaScopeBegin", null, "areaScope");
-        // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
-
-        this.setUiAttribs({ "scopeArea": true });
-        outScope.onLinkChanged = () =>
-        {
-
-            this.tempData.scopeAreaEndOp = null;
-            if (outScope.isLinked())
-            {
-
-                const otherPort = outScope.links[0].getOtherPort(outScope);
-                otherPort.op.getPortByName("areaScopeEnd");
-
-                this.tempData.scopeAreaEndOp = otherPort.op;
-                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
-
-            }
-        };
-
-    }
-
-    setScopeAreaEnd()
-    {
-        this.inObject("areaScopeEnd", null, "areaScope");
-
     }
 
 }

@@ -1,4 +1,4 @@
-op.setScopeAreaBegin({ "op": "" });
+op.setScopeAreaBegin();
 new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
