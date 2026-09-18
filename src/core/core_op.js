@@ -88,7 +88,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [mathTitle]
  * @property {string} [extendTitlePort]
  * @property {string} [display]
- * @property {string} [hasArea]
+ * @property {boolean} [hasArea]
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
  * @property {number} [tlOrder]
@@ -2071,6 +2071,36 @@ export class Op extends Events
     newPort(op, name, type, uiAttribs)
     {
         return new CABLES.Port(op, name, type, uiAttribs);
+    }
+
+    setScopeAreaBegin()
+    {
+        const outScope = this.outObject("areaScopeBegin", null, "areaScope");
+        // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
+
+        this.setUiAttribs({ "scopeArea": true });
+        outScope.onLinkChanged = () =>
+        {
+
+            this.tempData.scopeAreaEndOp = null;
+            if (outScope.isLinked())
+            {
+
+                const otherPort = outScope.links[0].getOtherPort(outScope);
+                otherPort.op.getPortByName("areaScopeEnd");
+
+                this.tempData.scopeAreaEndOp = otherPort.op;
+                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
+
+            }
+        };
+
+    }
+
+    setScopeAreaEnd()
+    {
+        this.inObject("areaScopeEnd", null, "areaScope");
+
     }
 
 }

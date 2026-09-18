@@ -1,6 +1,6 @@
 const
     inStage = op.inSwitch("Stage", ["VERTEX", "FRAGMENT"], "FRAGMENT"),
-    inCode = op.inStringEditor("Code", "", "glsl"),
+    inCode = op.inStringEditor("Code", attachments.default_frag, "glsl"),
     inCodePre = op.inString("Code Prepend", "", "glsl"),
     inView = op.inTriggerButton("View Code"),
     inGraphNodes = op.inMultiPort2("Graph", CABLES.Port.TYPE_OBJECT),

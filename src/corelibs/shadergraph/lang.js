@@ -17,6 +17,9 @@ export class Lang
         throw new Error("Method not implemented.");
     }
 
+    /**
+     * @returns {string}
+     */
     getVarDef(_node)
     {
         throw new Error("Method not implemented.");

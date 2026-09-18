@@ -15,7 +15,7 @@ import { Lang } from "./lang.js";
 
 /**
  * @typedef ShaderNode
- * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"|"swizzle"} [type]
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"|"swizzle"|"setvar"|"inline"} [type]
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -29,6 +29,8 @@ import { Lang } from "./lang.js";
  * @property {string} src - this source code will only appended once (per op name) into the shader header
  * @property {string} srcUni - this source code will appended once per op instance id
  * @property {string} srcSwizzle
+ * @property {string} [srcInline]
+ * @property {string} [srcInlineEnd]
  * @property {import("./shadergraphop.js").ShaderGraphOp} [op]
  * @property {function} [updateGraph]
  * @property {function} [setResultType]
@@ -71,7 +73,7 @@ export class ShaderGraphProgram extends Events
     _headUniSrc = "";
 
     /** @type {string[]} */
-    _callFuncStack = [];
+    _codeLines = [];
     finalSrc = "";
     updateableOps = {};
 
@@ -115,7 +117,6 @@ export class ShaderGraphProgram extends Events
     /**
      * @param {Port} otherPort
      * @param {ShaderNode} node
-     * @param {boolean} doConvert
      * @param {ShaderNodeParam} param
      */
     _getPortParamStr(otherPort, node, param)
@@ -189,6 +190,8 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const node = op.tempData.shaderNode;
 
+        if (node.srcInline) this._codeLines.push(node.srcInline);
+
         this.addOpShaderFuncCode(op);
         this.log(node, "execnode start " + op.name);
         let callstr = "    ";
@@ -198,6 +201,7 @@ export class ShaderGraphProgram extends Events
         if (node.type == "component") return;
         if (node.type == "bindstruct") return;
         if (node.type == "var")node.resultVarName = node.name;
+        if (node.type == "setvar")node.resultVarName = node.name;
         if (!node.resultVarName) node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
 
         if (node.maxGen) node.setResultType(ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]));
@@ -250,7 +254,7 @@ export class ShaderGraphProgram extends Events
 
                     if (node.type == "constructor")
                     {
-                        doConvertTypes = false;
+                        // doConvertTypes = false;
                         if (i == 0) paramStr += node.name + "(";
                         if (port.links.length > 1) this.log(node, "WARNING: param should only have one connection" + port.name);
                     }
@@ -305,8 +309,12 @@ export class ShaderGraphProgram extends Events
         /* minimalcore:end */
 
         if (callstr.trim() != "") callstr += "\n";
-        this._callFuncStack.push(callstr);
+        this._codeLines.push(callstr);
 
+        if (node.srcInlineEnd) this._codeLines.push(node.srcInlineEnd);
+
+        // if (node.type == "existingvar") return "";
+        // else
         return node.resultVarName;
     }
 
@@ -332,7 +340,7 @@ export class ShaderGraphProgram extends Events
     {
         if (!this.options.debug) return;
         const str = "    // " + node.name + ":" + args.map(String).join(" ");
-        this._callFuncStack.push(str);
+        this._codeLines.push(str);
     }
 
     /**
@@ -345,7 +353,7 @@ export class ShaderGraphProgram extends Events
 
         this.updateableOps = {};
         this.options = options || {};
-        this._callFuncStack = [];
+        this._codeLines = [];
         this._functionIdInHead = {};
         this._opIdsFuncCallSrc = {};
         this._opIdsHeadFuncSrc = {};
@@ -375,7 +383,7 @@ export class ShaderGraphProgram extends Events
             }
         }
         port.emitEvent("heavyEvent", { "name": "program" });
-        this.srcMain = this._callFuncStack.join("\n");
+        this.srcMain = this._codeLines.join("\n");
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
