@@ -393,6 +393,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1789401168968
+        },
+        {
+            "message": "Use gltf texture v2 for using loaded textures in v5",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789654044820
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
