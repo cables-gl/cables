@@ -26,6 +26,6 @@ update.onTriggered = () =>
 
     next.trigger();
 
-    outScope.setRef({ "data": arr });
+    outScope.setRef({ "arr": arr });
 
 };

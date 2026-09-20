@@ -89,6 +89,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [extendTitlePort]
  * @property {string} [display]
  * @property {boolean} [hasArea]
+ * @property {boolean} [scopeArea]
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
  * @property {number} [tlOrder]
