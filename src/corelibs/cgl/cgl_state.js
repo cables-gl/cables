@@ -709,7 +709,7 @@ export class CglContext extends CgContext
     /**
      * @param {number} slot
      * @param {WebGLTexture} t
-     * @param {undefined} [type]
+     * @param {GLenum} [type]
      */
     setTexture(slot, t, type)
     {

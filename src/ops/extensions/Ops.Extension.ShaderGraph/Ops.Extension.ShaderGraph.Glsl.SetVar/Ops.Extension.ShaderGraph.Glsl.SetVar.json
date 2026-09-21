@@ -1,0 +1,43 @@
+{
+    "id": "72e2d7ff-2e87-4595-b6c7-011663ff2de2",
+    "created": 1789726159357,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787824608307
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Glsl.FragOutColor",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789726159357,
+            "cloneOf": "c3be01a8-adca-4c03-b5a1-576a519e1f90"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "color",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

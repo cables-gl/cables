@@ -1,0 +1,65 @@
+{
+    "id": "9fba23bc-3cd2-4430-a412-ba82e5518069",
+    "created": 1789731677613,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1786623538140
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Lang.ExistingVar",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789731677614,
+            "cloneOf": "2aea601c-c3d3-4a9a-97cc-932a665b13af"
+        },
+        {
+            "message": "Extension.ShaderGraph.GlslForLoop renamed to Ops.Extension.ShaderGraph.Glsl.ForLoop",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789735066262
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "from",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "until",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "increment",
+                "objType": "sg_float"
+            },
+            {
+                "type": 5,
+                "name": "var name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "areaScopeBegin",
+                "objType": "areaScope"
+            },
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

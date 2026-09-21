@@ -38,7 +38,7 @@ in1.onChange =
 
             op.tempData.shaderNode.srcSwizzle = op.tempData.shaderNode.srcSwizzle.toLowerCase();
 
-            op.updateGraph();
+            op.tempData.shaderNode.updateGraph();
         }
     };
 

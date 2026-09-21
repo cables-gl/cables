@@ -36,12 +36,17 @@
             {
                 "type": 2,
                 "name": "Graph_0",
-                "longPort": 2,
+                "longPort": 3,
                 "group": "Graph"
             },
             {
                 "type": 2,
                 "name": "Graph_1",
+                "group": "Graph"
+            },
+            {
+                "type": 2,
+                "name": "Graph_2",
                 "uititle": "add port",
                 "group": "Graph"
             },

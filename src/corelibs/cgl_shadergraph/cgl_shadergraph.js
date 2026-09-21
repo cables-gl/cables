@@ -1,4 +1,5 @@
 import { Events } from "cables-shared-client";
+import { Port } from "cables";
 import { ShaderGraphOp } from "./shadergraphop.js";
 import { ShaderGraphProgram } from "./cgl_shadergraphprogram.js";
 import { SgLangWebGpu } from "./sg_lang_webgpu.js";
@@ -42,7 +43,7 @@ const ShaderGraph = class extends Events
             this.progFrag.compile();
         });
         portVert.on("change", this.updateVertex.bind(this));
-        portVert.on("onLinkChanged", this.updateVertex.bind(this));
+        portVert.on(Port.EVENT_LINK_CHANGED, this.updateVertex.bind(this));
     }
 
     getUniforms()

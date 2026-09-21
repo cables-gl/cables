@@ -12,6 +12,8 @@ export class LangGlsl extends Lang
     getVarDef(node, name)
     {
         if (node.type == "existingvar") return "";
+        if (node.type == "setvar") return name + "=";
+        if (node.type == "inline") return "";
 
         if (name && !node.results[0].type) return name + "=";
 

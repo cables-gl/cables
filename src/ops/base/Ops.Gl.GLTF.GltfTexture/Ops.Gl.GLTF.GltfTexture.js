@@ -30,17 +30,15 @@ function reloadSoon()
 
 inExec.onTriggered = function ()
 {
-    if (cgl.tempData.currentScene != oldScene)tex = null;
-    if (tex) return;
 
-    if (!cgl.tempData.currentScene || !cgl.tempData.currentScene.json || !cgl.tempData.currentScene.chunks) return;
+    if (cgl.tempData.currentScene != oldScene) tex = null;
+    if (tex) return console.log("has tex...");
 
-    if (cgl.tempData.currentScene.chunks.length < 2)
-    {
-        return;
-    }
+    if (!cgl.tempData.currentScene || !cgl.tempData.currentScene.json || !cgl.tempData.currentScene.chunks) return console.log("no chunks1");
 
-    if (!cgl.tempData.currentScene.json.images) return;
+    if (cgl.tempData.currentScene.chunks.length < 2) return console.log("no chunks...");
+
+    if (!cgl.tempData.currentScene.json.images) return console.log("has no json image");
 
     let img = null;
     oldScene = cgl.tempData.currentScene;
@@ -61,12 +59,14 @@ inExec.onTriggered = function ()
         outTex.set(tex);
         width.set(tex.width);
         height.set(tex.height);
+        console.log("no img");
         return;
     }
 
     const buffView = cgl.tempData.currentScene.json.bufferViews[img.bufferView];
     const chunk = cgl.tempData.currentScene.chunks[1];
-    if (!buffView || !chunk) return;
+    if (!buffView) return console.log("no buffview");
+    if (!chunk) return console.log("no chunk");
 
     let dv = chunk.dataView;
 
@@ -86,10 +86,14 @@ inExec.onTriggered = function ()
 
     const loadingId = cgl.patch.loading.start("gltfTextureOp", CABLES.uuid(), op);
 
-    tex = CGL.Texture.load(cgl, sourceURI, function (err)
+    CGL.Texture.load(cgl, sourceURI, function (err, tex)
     {
         cgl.patch.loading.finished(loadingId);
-        if (!tex) return;
+        if (!tex)
+        {
+            console.log("no texxxxxxx");
+            return;
+        }
         if (err)
         {
             console.error("img load error", err);
@@ -102,15 +106,18 @@ inExec.onTriggered = function ()
             outTex.setRef(tex);
             outFound.set(true);
         }
-    }, {
+
+        outTex.setRef(tex);
+    },
+    {
         "anisotropic": cgl_aniso,
         "wrap": cgl_wrap,
         "flip": flip.get(),
         "unpackAlpha": unpackAlpha.get(),
         "filter": cgl_filter
     });
+    console.log("111");
 
-    outTex.setRef(tex);
 };
 
 function onFilterChange()

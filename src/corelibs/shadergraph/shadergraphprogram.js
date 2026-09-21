@@ -1,7 +1,6 @@
 import { Events } from "cables-shared-client";
 import { Op, Port } from "cables";
 import { Lang } from "./lang.js";
-import { StandaloneElectron } from "../standalone_electron/standalone_electron.js";
 
 /**
  * @typedef ShaderNodeParam
@@ -16,7 +15,7 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
 
 /**
  * @typedef ShaderNode
- * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"|"swizzle"} [type]
+ * @property {"function"|"constructor"|"value"|"existingvar"|"operator"|"var"|"component"|"string"|"override"|"bindstruct"|"swizzle"|"setvar"|"inline"} [type]
  * @property {string} [name]
  * @property {function} [update]
  * @property {string} [title]
@@ -30,6 +29,11 @@ import { StandaloneElectron } from "../standalone_electron/standalone_electron.j
  * @property {string} src - this source code will only appended once (per op name) into the shader header
  * @property {string} srcUni - this source code will appended once per op instance id
  * @property {string} srcSwizzle
+ * @property {string} [srcInline]
+ * @property {string} [srcInlineEnd]
+ * @property {import("./shadergraphop.js").ShaderGraphOp} [op]
+ * @property {function} [updateGraph]
+ * @property {function} [setResultType]
  */
 
 /**
@@ -69,7 +73,7 @@ export class ShaderGraphProgram extends Events
     _headUniSrc = "";
 
     /** @type {string[]} */
-    _callFuncStack = [];
+    _codeLines = [];
     finalSrc = "";
     updateableOps = {};
 
@@ -113,22 +117,16 @@ export class ShaderGraphProgram extends Events
     /**
      * @param {Port} otherPort
      * @param {ShaderNode} node
-     * @param {boolean} doConvert
      * @param {ShaderNodeParam} param
      */
-    _getPortParamStr(otherPort, node, doConvert, param)
+    _getPortParamStr(otherPort, node, param)
     {
         let paramStr = "";
 
         /** @type {ShaderNode} */
         const otherNode = otherPort.op.tempData.shaderNode;
 
-        // console.log("parammm", param.port.name);
-        // this.log(node, "param [", param.port.name, "]", otherPort.name, node.results[0].type, "=>", param.type, otherNode.name);
-
         this.execNode(otherPort.op);
-
-        const tt = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params);
 
         if (otherNode.type == "bindstruct")
         {
@@ -192,6 +190,8 @@ export class ShaderGraphProgram extends Events
         /** @type {ShaderNode} */
         const node = op.tempData.shaderNode;
 
+        if (node.srcInline) this._codeLines.push(node.srcInline);
+
         this.addOpShaderFuncCode(op);
         this.log(node, "execnode start " + op.name);
         let callstr = "    ";
@@ -201,12 +201,10 @@ export class ShaderGraphProgram extends Events
         if (node.type == "component") return;
         if (node.type == "bindstruct") return;
         if (node.type == "var")node.resultVarName = node.name;
+        if (node.type == "setvar")node.resultVarName = node.name;
         if (!node.resultVarName) node.resultVarName = ("r" + op.getTitle() + "_" + node.id);
 
-        if (node.type == "operator" || node.maxGen)
-        {
-            node.results[0].type = ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]);
-        }
+        if (node.maxGen) node.setResultType(ShaderGraphProgram.getMaxGenTypeFromInputParams(node.params, op.portsOut[0]));
 
         let title = "";
         if (node.title == "name") title += node.name + " ";
@@ -252,11 +250,11 @@ export class ShaderGraphProgram extends Events
                 // parameters...
                 if (port.isLinked())
                 {
-                    let doConvertTypes = true;
+                    // let doConvertTypes = true;
 
                     if (node.type == "constructor")
                     {
-                        doConvertTypes = false;
+                        // doConvertTypes = false;
                         if (i == 0) paramStr += node.name + "(";
                         if (port.links.length > 1) this.log(node, "WARNING: param should only have one connection" + port.name);
                     }
@@ -265,7 +263,7 @@ export class ShaderGraphProgram extends Events
                     {
                         const otherPort = port.links[j].getOtherPort(port);
 
-                        paramStr += this._getPortParamStr(otherPort, node, doConvertTypes, param);
+                        paramStr += this._getPortParamStr(otherPort, node, param);
 
                         this.addOpShaderFuncCode(otherPort.op);
                     }
@@ -311,8 +309,12 @@ export class ShaderGraphProgram extends Events
         /* minimalcore:end */
 
         if (callstr.trim() != "") callstr += "\n";
-        this._callFuncStack.push(callstr);
+        this._codeLines.push(callstr);
 
+        if (node.srcInlineEnd) this._codeLines.push(node.srcInlineEnd);
+
+        // if (node.type == "existingvar") return "";
+        // else
         return node.resultVarName;
     }
 
@@ -338,7 +340,7 @@ export class ShaderGraphProgram extends Events
     {
         if (!this.options.debug) return;
         const str = "    // " + node.name + ":" + args.map(String).join(" ");
-        this._callFuncStack.push(str);
+        this._codeLines.push(str);
     }
 
     /**
@@ -351,15 +353,13 @@ export class ShaderGraphProgram extends Events
 
         this.updateableOps = {};
         this.options = options || {};
-        this._callFuncStack = [];
+        this._codeLines = [];
         this._functionIdInHead = {};
         this._opIdsFuncCallSrc = {};
         this._opIdsHeadFuncSrc = {};
         this._opIdsHeadUniSrc = {};
         this._headFuncSrc = "";
         this._headUniSrc = "";
-
-        let callSrc = "";
 
         if (!port.ports)
         {
@@ -383,7 +383,7 @@ export class ShaderGraphProgram extends Events
             }
         }
         port.emitEvent("heavyEvent", { "name": "program" });
-        this.srcMain = this._callFuncStack.join("\n");
+        this.srcMain = this._codeLines.join("\n");
         this.srcHeader = this._headFuncSrc;
 
         this.emitEvent("compiled");
@@ -434,11 +434,10 @@ export class ShaderGraphProgram extends Events
             {
                 const otherport = params[j].port.links[i].getOtherPort(params[j].port);
                 const otherop = otherport.op;
-                const r = otherop.sgOp.getResult(otherport.name);
+                const r = otherop.tempData.shaderNode.op.getResult(otherport.name);
 
                 if (r)
                 {
-                    const type = r.type;
                     const t = types.indexOf(r.type);
                     typeIdx = Math.max(typeIdx, t);
                 }
@@ -448,8 +447,7 @@ export class ShaderGraphProgram extends Events
 
         const t = types[typeIdx];
 
-        if (portsSetType)
-            portsSetType.op.tempData.shaderNode.results[0].type = t;
+        if (portsSetType) portsSetType.op.tempData.shaderNode.setResultType(t);
 
         return t;
     }

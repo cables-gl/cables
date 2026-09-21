@@ -401,6 +401,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1789479829835
+        },
+        {
+            "message": "Fix bug when code editor showed up blank, when the file was already opened",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1789566314845
         }
     ],
     "isReleased": true,

@@ -58,7 +58,7 @@ function update(shader, bindings)
         if (inType.get() == "vec4") t = "4f[]";
         uni = new CGL.Uniform(shader, t, name);
         uni.setValue(inMat.get());
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     }
 
 }

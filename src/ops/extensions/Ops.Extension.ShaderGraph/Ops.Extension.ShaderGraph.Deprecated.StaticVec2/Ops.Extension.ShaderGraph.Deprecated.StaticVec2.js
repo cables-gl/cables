@@ -18,5 +18,5 @@ op.init =
     valuex.onChange = () =>
     {
         op.tempData.shaderNode.values = [valuex.get(), valuey.get()];
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

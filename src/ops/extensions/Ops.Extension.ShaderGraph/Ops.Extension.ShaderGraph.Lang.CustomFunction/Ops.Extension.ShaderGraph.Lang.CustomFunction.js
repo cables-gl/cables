@@ -21,7 +21,7 @@ op.init =
 
         op.tempData.shaderNode.results[0].type = def.returns;
 
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };
 
 function parseDef(str)

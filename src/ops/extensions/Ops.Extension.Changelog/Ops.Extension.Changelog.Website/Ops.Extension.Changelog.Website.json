@@ -179,6 +179,18 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1788275571313
+        },
+        {
+            "message": "Added bluesky to social accounts to add in user settings",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1789566260404
+        },
+        {
+            "message": "Time and date are now always show in the users timezone",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1789654211811
         }
     ],
     "isReleased": true,

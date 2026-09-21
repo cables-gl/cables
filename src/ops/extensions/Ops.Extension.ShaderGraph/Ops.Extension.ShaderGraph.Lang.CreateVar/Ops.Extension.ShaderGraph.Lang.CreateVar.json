@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1786367312431
+        },
+        {
+            "message": "Extension.ShaderGraph.Lang.SetVar renamed to Ops.Extension.ShaderGraph.Lang.CreateVar",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789726073775
         }
     ],
     "layout": {

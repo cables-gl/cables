@@ -51,7 +51,7 @@ function update(shader, bindings)
     {
         uni = new CGL.Uniform(shader, "m4", name);
         uni.setValue(inMat.get());
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     }
 }
 

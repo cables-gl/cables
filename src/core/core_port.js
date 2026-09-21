@@ -175,17 +175,17 @@ export class Port extends Events
     }
 
     // re-declared here because typescript declaration emit drops the "extends events"
-    /**
-     * @param {string} eventName
-     * @param {(...args: any[]) => any} cb
-     * @param {string} [idPrefix]
-     */
-    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+    // /**
+    //  * @param {string} eventName
+    //  * @param {(...args: any[]) => any} cb
+    //  * @param {string} [idPrefix]
+    //  */
+    // on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
 
     /**
      * @param {*} listenerParam
      */
-    off(listenerParam) { return super.off(listenerParam); }
+    // off(listenerParam) { return super.off(listenerParam); }
 
     get parent()
     {
@@ -607,6 +607,7 @@ export class Port extends Events
             if (this.type != Port.TYPE_OBJECT && !this.isAnimated) return "";
         }
 
+        /** @type {import("cables-shared-client").SerializedPort} */
         let obj = { "name": this.getName() };
 
         if (this.attribs && Object.keys(this.attribs).length > 0) obj.attribs = this.attribs;

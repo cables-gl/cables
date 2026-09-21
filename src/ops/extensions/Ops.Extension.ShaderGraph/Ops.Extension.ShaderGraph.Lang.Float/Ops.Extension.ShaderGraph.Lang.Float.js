@@ -15,5 +15,5 @@ op.init =
     value.onChange = () =>
     {
         op.tempData.shaderNode.value = value.get();
-        op.updateGraph();
+        op.tempData.shaderNode.updateGraph();
     };

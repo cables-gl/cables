@@ -88,7 +88,8 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [mathTitle]
  * @property {string} [extendTitlePort]
  * @property {string} [display]
- * @property {string} [hasArea]
+ * @property {boolean} [hasArea]
+ * @property {boolean} [scopeArea]
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
  * @property {number} [tlOrder]
@@ -127,6 +128,7 @@ export class Op extends Events
     static EVENT_PORT_REMOVED = "onPortRemoved";
     static EVENT_PORT_ORDER_CHANGE = "portOrderChanged";
     static EVENT_STORAGE_CHANGE = "onStorageChange";
+    static EVENT_LINK_CHANGED = "onLinkChanged";
 
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
@@ -172,6 +174,16 @@ export class Op extends Events
     preservedPortLinks = {};
 
     /* minimalcore:start */
+
+    /**
+     * @typedef LinkTimeRules
+     * @property {Port[]} needsLinkedToWork
+     * @property {Port[]} needsStringToWork
+     * @property {string} needsParentOp
+     * @property {string} forbiddenParent
+     * @property {number} forbiddenParentType
+     */
+    /** @type {LinkTimeRules} */
     linkTimeRules = {
         "needsLinkedToWork": [],
         "needsStringToWork": [],
@@ -254,12 +266,12 @@ export class Op extends Events
      * @param {(...args: any[]) => any} cb
      * @param {string} [idPrefix]
      */
-    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+    // on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
 
     /**
      * @param {*} listenerParam
      */
-    off(listenerParam) { return super.off(listenerParam); }
+    // off(listenerParam) { return super.off(listenerParam); }
 
     /**
      * @param {string} which
@@ -270,7 +282,7 @@ export class Op extends Events
      * @param {*} [param5]
      * @param {*} [param6]
      */
-    emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
+    // emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
 
     /* minimalcore:start */
     // functions to be overwritten in core_extend_op
@@ -1496,17 +1508,52 @@ export class Op extends Events
         return null;
     }
 
+    outScopeArea()
+    {
+        const outScope = this.outObject("areaScopeBegin", null, "areaScope");
+        // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
+
+        this.setUiAttribs({ "scopeArea": true });
+        outScope.onLinkChanged = () =>
+        {
+
+            this.tempData.scopeAreaEndOp = null;
+            if (outScope.isLinked())
+            {
+
+                const otherPort = outScope.links[0].getOtherPort(outScope);
+                otherPort.op.getPortByName("areaScopeEnd");
+
+                this.tempData.scopeAreaEndOp = otherPort.op;
+                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
+
+            }
+        };
+        return outScope;
+
+    }
+
+    inScopeArea()
+    {
+        return this.inObject("areaScopeEnd", null, "areaScope");
+    }
+
     removeLinks()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     }
 
-    // @TODO should be move to extend...
+    /**
+     * @returns {import("cables-shared-client").SerializedOp}
+     */
     getSerialized()
     {
 
+        // @TODO should be move to extend...
+
         /* minimalcore:start */
+        /** @type {import("cables-shared-client").SerializedOp} */
         const opObj = {};
 
         if (this.opId) opObj.opId = this.opId;

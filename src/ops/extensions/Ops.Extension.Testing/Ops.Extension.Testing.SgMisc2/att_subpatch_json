@@ -10,8 +10,7 @@
           "y": 1346.9610351296271
         },
         "extendTitle": "",
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -38,8 +37,7 @@
           "x": 1071.2961403854197,
           "y": 2010.2849675682007
         },
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "extendTitle": "FRAGMENT",
         "blueprintSubpatch2": true
       },
@@ -106,6 +104,10 @@
               "objOut": "bg0ci2kb2"
             }
           ]
+        },
+        {
+          "name": "Count Compiles",
+          "value": 22
         }
       ]
     },
@@ -118,12 +120,19 @@
           "x": 1095.2961403854197,
           "y": 1944.7135628267122
         },
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "extendTitle": "color ",
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "color",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -151,9 +160,8 @@
           "x": 1535.9037466967152,
           "y": 1643.9929347935615
         },
-        "comment": "",
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "comment": " ",
+        "subPatch": "rpp2g7qn1",
         "extendTitle": "Final Code",
         "blueprintSubpatch2": true
       },
@@ -206,8 +214,7 @@
           "x": 967.8369459692792,
           "y": 2245.6496313813673
         },
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -280,8 +287,7 @@
           "x": 967.8369459692792,
           "y": 2138.486195200274
         },
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "blueprintSubpatch2": true
       },
       "storage": {},
@@ -303,7 +309,7 @@
         },
         {
           "name": "Code Fragment",
-          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nuniform vec2 unif4753;\n\nvoid main()\n{\n    vec4 col=vec4(0.5,0.5,0.5,1.0);\n        vec2 rUv_102=texCoord.xy;\n\n    \n    vec2 rSum_113=rUv_102+unif4753;\n\n    vec2 rPow_119=pow(rSum_113, vec2(2));\n\n    vec2 rSqrt_118=sqrt(rPow_119);\n\n    vec2 rOneMinus_128=1.0-rSqrt_118;\n\n    vec2 rMultiply_130=rOneMinus_128*vec2(2.1);\n\n    vec2 rClamp_132=clamp(rMultiply_130, 0., 1);\n\n    vec2 rFract_131=fract(rClamp_132);\n\n    vec4 color=vec4(rFract_131, 0., 1.);\n\n    outColor = color;\n}"
+          "value": "#version 300 es\n// \n// fragment shader customshader\n// \nprecision highp float;\nprecision highp sampler2D;\n\n#define WEBGL2\n#define texture2D texture\n#define IN in\n#define OUT out\n#define UNI uniform\nout vec4 outColor;\n#define gl_FragColor outColor\n\n\n// active mods: --------------- \n// no mods used...\n// no mods used...\n\n// cgl generated\n\n// -- \n\nIN vec2 texCoord;\nuniform vec2 uF3064;\n\n\nvoid main()\n{\n    vec2 rUv_91=texCoord.xy;\n\n    \n    vec2 rSum_93=rUv_91+uF3064;\n\n    vec2 rPow_95=pow(rSum_93, vec2(2));\n\n    vec2 rSqrt_94=sqrt(rPow_95);\n\n    vec2 rOneMinus_97=1.0-rSqrt_94;\n\n    vec2 rMultiply_98=rOneMinus_97*vec2(2.1);\n\n    vec2 rClamp_100=clamp(rMultiply_98, 0., 1.69);\n\n    vec2 rFract_99=fract(rClamp_100);\n\n    float rSwizzle_223=rFract_99.x;\n\n    float rMultiply_224=rSwizzle_223*1.6;\n\n    vec4 color=vec4(rMultiply_224,rMultiply_224,rMultiply_224, 1.0);\n\noutColor = color;\n}"
         }
       ]
     },
@@ -317,11 +323,24 @@
           "y": 1496.8467348299157
         },
         "extendTitle": "",
-        "tempSubOldOpId": null,
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number 1",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "number 2",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -346,11 +365,18 @@
           "y": 1621.7006854456736
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -375,12 +401,17 @@
           "y": 1563.2206404636822
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
+        {
+          "name": "number",
+          "attribs": {
+            "sg": "0."
+          }
+        },
         {
           "name": "number 2",
           "attribs": {
@@ -407,14 +438,13 @@
       "id": "6xhctkz9f",
       "attribs": {},
       "uiAttribs": {
-        "extendTitle": "unif4028 ",
+        "extendTitle": "uF3064 ",
         "translate": {
           "x": 1107.2961403854197,
           "y": 1390.7883894903507
         },
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
@@ -471,11 +501,18 @@
           "y": 1690.5101360237022
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
@@ -500,12 +537,17 @@
           "y": 1730.755989000395
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
+        {
+          "name": "number 1",
+          "attribs": {
+            "sg": "1."
+          }
+        },
         {
           "name": "number 2",
           "attribs": {
@@ -534,22 +576,29 @@
       "uiAttribs": {
         "translate": {
           "x": 1095.2961403854197,
-          "y": 1861.0208010771405
+          "y": 1821.2227911065468
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
+      "portsIn": [
+        {
+          "name": "number",
+          "attribs": {
+            "sg": "0."
+          }
+        }
+      ],
       "portsOut": [
         {
           "name": "result",
           "links": [
             {
-              "portIn": "color",
+              "portIn": "Input Vec",
               "portOut": "result",
-              "objIn": "qedmt5kas",
+              "objIn": "21fgua3ri",
               "objOut": "t1mil5mrp"
             }
           ]
@@ -563,15 +612,20 @@
       "uiAttribs": {
         "translate": {
           "x": 1095.2961403854197,
-          "y": 1797.3185163702394
+          "y": 1780
         },
         "extendTitle": "",
-        "subPatch": "s63tku373",
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "subPatch": "rpp2g7qn1",
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsIn": [
+        {
+          "name": "x",
+          "attribs": {
+            "sg": "0."
+          }
+        },
         {
           "name": "minVal",
           "attribs": {
@@ -581,7 +635,7 @@
         {
           "name": "maxVal",
           "attribs": {
-            "sg": "1.99"
+            "sg": "1.69"
           }
         }
       ],
@@ -604,13 +658,12 @@
       "id": "1yq94mx81",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "translate": {
           "x": 967.8369459692792,
           "y": 0
         },
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "blueprintSubpatch2": true
       },
       "storage": {},
       "portsOut": [
@@ -633,15 +686,134 @@
       "id": "4r2ua1pz1",
       "attribs": {},
       "uiAttribs": {
-        "subPatch": "s63tku373",
+        "subPatch": "rpp2g7qn1",
         "translate": {
           "x": 967.8369459692792,
           "y": 2453.8384115093577
         },
-        "blueprintSubpatch2": true,
-        "tempSubOldOpId": null
+        "blueprintSubpatch2": true
       },
       "storage": {}
+    },
+    {
+      "opId": "a8a2893e-94d8-47c6-b0b6-ce0c0039281a",
+      "id": "21fgua3ri",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "rpp2g7qn1",
+        "translate": {
+          "x": 1095.2961403854197,
+          "y": 1862.7782030666103
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "Input Vec",
+          "attribs": {
+            "sg": "0."
+          }
+        },
+        {
+          "name": "Result Type index",
+          "value": 0
+        },
+        {
+          "name": "Result Type",
+          "value": "float"
+        },
+        {
+          "name": "X index",
+          "value": 0
+        },
+        {
+          "name": "X",
+          "value": "X"
+        },
+        {
+          "name": "Y index",
+          "value": 0
+        },
+        {
+          "name": "Y",
+          "value": "X"
+        },
+        {
+          "name": "Z index",
+          "value": 0
+        },
+        {
+          "name": "Z",
+          "value": "X"
+        },
+        {
+          "name": "W index",
+          "value": 0
+        },
+        {
+          "name": "W",
+          "value": "X"
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "Result Vec",
+          "links": [
+            {
+              "portIn": "number 1",
+              "portOut": "Result Vec",
+              "objIn": "unttkesbz",
+              "objOut": "21fgua3ri"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "21fgua3ri"
+      }
+    },
+    {
+      "opId": "a3f98988-054c-4db0-8390-fab31b6cfd0e",
+      "id": "unttkesbz",
+      "attribs": {},
+      "uiAttribs": {
+        "subPatch": "rpp2g7qn1",
+        "translate": {
+          "x": 1095.2961403854197,
+          "y": 1902.8450316505232
+        },
+        "extendTitle": ""
+      },
+      "portsIn": [
+        {
+          "name": "number 1",
+          "attribs": {
+            "sg": "1."
+          }
+        },
+        {
+          "name": "number 2",
+          "attribs": {
+            "sg": "1.6"
+          }
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "links": [
+            {
+              "portIn": "color",
+              "portOut": "result",
+              "objIn": "qedmt5kas",
+              "objOut": "unttkesbz"
+            }
+          ]
+        }
+      ],
+      "storage": {
+        "ref": "unttkesbz"
+      }
     }
   ]
 }
