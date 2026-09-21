@@ -1,4 +1,4 @@
-op.setScopeAreaEnd();
+op.inScopeArea();
 
 new CABLES.ShaderGraphOp(this,
     {

@@ -27,6 +27,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": 5,
+                "name": "var name"
+            },
+            {
                 "type": 2,
                 "name": "from",
                 "objType": "sg_float"
@@ -40,10 +44,6 @@
                 "type": 2,
                 "name": "increment",
                 "objType": "sg_float"
-            },
-            {
-                "type": 5,
-                "name": "var name"
             }
         ],
         "portsOut": [

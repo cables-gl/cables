@@ -1,4 +1,7 @@
-op.setScopeAreaBegin();
+const
+    scope = op.outScopeArea(),
+    value = op.inString("var name", "texture");
+
 new CABLES.ShaderGraphOp(this,
     {
         "type": "existingvar",
@@ -11,9 +14,6 @@ new CABLES.ShaderGraphOp(this,
         ],
         "results": [{ "type": "vec4", "name": "result" }]
     });
-
-const
-    value = op.inString("var name", "texture");
 
 op.init =
     value.onChange =
