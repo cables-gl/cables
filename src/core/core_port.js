@@ -33,7 +33,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [editShortcut] internal: do not set manually
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
- * @property  {boolean} [colorPick] internal: do not set manually
+ * @property  {boolean} [colorPick]
  * @property  {Array<String>} [values] internal: do not set manually
  * @property  {boolean} [boundToVar] internal: do not set manually
  * @property  {boolean} [addPort] internal: do not set manually
@@ -1153,6 +1153,9 @@ export class Port extends Events
         /* minimalcore:end */
     }
 
+    /**
+     * @param {number} t
+     */
     static getTypeString(t)
     {
         // todo:needed only in ui ?remove from core?
