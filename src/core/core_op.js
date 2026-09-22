@@ -1515,6 +1515,7 @@ export class Op extends Events
     {
         // FOR SCOPE START OP
 
+        this.setUiAttrib({ "scopeArea": true });
         const outScope = this.outObject("areaScopeBegin", null, "areaScope");
         // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
 
