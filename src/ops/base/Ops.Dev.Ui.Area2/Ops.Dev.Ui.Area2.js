@@ -35,6 +35,7 @@ inDelete.onTriggered = () =>
 {
     op.patch.deleteOp(op.id);
 };
+
 inCollapse.onTriggered = () =>
 {
     const ops = op.patch.getOpsByArea(this.attribs.area);
@@ -42,8 +43,7 @@ inCollapse.onTriggered = () =>
 
     for (let i = 0; i < ops.length; i++)
     {
-        if (ops[i] != op)
-            ops[i].setUiAttribs({ "hidden": col });
+        if (ops[i] != op) ops[i].setUiAttribs({ "hidden": col });
     }
 
     op.setUiAttribs({ "areaCollapsed": col });

@@ -27,6 +27,8 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [y]
  * @property {number} [w]
  * @property {number} [h]
+ * @property {number} [origW]
+ * @property {number} [origH]
  */
 
 /**
