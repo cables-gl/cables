@@ -108,6 +108,7 @@ import { showUiErrors } from "./uierrors.js";
  * @typedef OpTempData
  * @property {Object} [origData]
  * @property {Object} [scopeAreaEndOp]
+ * @property {Object} [scopeAreaStartOp]
  * @property {import("../corelibs/shadergraph/shadergraphprogram.js").ShaderNode} [shaderNode]
  */
 
@@ -1529,8 +1530,12 @@ export class Op extends Events
 
                 this.tempData.scopeAreaEndOp = otherPort.op;
                 otherPort.op.tempData.scopeAreaStartOp = this;
-                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
 
+                this.setUiError("noscopelink", null);
+            }
+            else
+            {
+                this.setUiError("noscopelink", "scope out shoult be linked");
             }
         };
         return outScope;
