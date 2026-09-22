@@ -92,6 +92,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {boolean} [scopeArea]
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
+ * @property {boolean} [moveableOnlyY]
  * @property {number} [tlOrder]
  * @property {number} [heatmapIntensity]
  * @property {string} [commentOverwrite]
@@ -106,6 +107,7 @@ import { showUiErrors } from "./uierrors.js";
 /**
  * @typedef OpTempData
  * @property {Object} [origData]
+ * @property {Object} [scopeAreaEndOp]
  * @property {import("../corelibs/shadergraph/shadergraphprogram.js").ShaderNode} [shaderNode]
  */
 
@@ -1510,10 +1512,11 @@ export class Op extends Events
 
     outScopeArea()
     {
+        // FOR SCOPE START OP
+
         const outScope = this.outObject("areaScopeBegin", null, "areaScope");
         // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
 
-        this.setUiAttribs({ "scopeArea": true });
         outScope.onLinkChanged = () =>
         {
 
@@ -1525,6 +1528,7 @@ export class Op extends Events
                 otherPort.op.getPortByName("areaScopeEnd");
 
                 this.tempData.scopeAreaEndOp = otherPort.op;
+                otherPort.op.tempData.scopeAreaStartOp = this;
                 // this.setUiAttribs({ "scopeAreaEnd": otherPort });
 
             }
@@ -1535,6 +1539,9 @@ export class Op extends Events
 
     inScopeArea()
     {
+        // FOR SCOPE END OP
+        this.setUiAttribs({ "moveableOnlyY": true });
+
         return this.inObject("areaScopeEnd", null, "areaScope");
     }
 

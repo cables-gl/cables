@@ -282,15 +282,17 @@ export class ShaderGraphProgram extends Events
                     paramStr = this.lang.getDefaultParameter(port.op.tempData.shaderNode.params[i].type, defaul);
                 }
 
-                if (paramStr) callstr += paramStr;
-                else if (node.type == "function" && count < numObjectPorts - 1) callstr += " " + node.name + " ";
-
-                if (count < numObjectPorts - 1)
+                if (node.type != "inline" && node.type != "existingvar")
                 {
-                    if (node.type == "operator") callstr += node.name; // math symbol +-/ , NOT var name
-                    else callstr += ", ";
-                }
+                    if (paramStr) callstr += paramStr;
+                    else if (node.type == "function" && count < numObjectPorts - 1) callstr += " " + node.name + " ";
 
+                    if (count < numObjectPorts - 1)
+                    {
+                        if (node.type == "operator") callstr += node.name; // math symbol +-/ , NOT var name
+                        else callstr += ", ";
+                    }
+                }
                 if (node.type == "swizzle")
                 {
                     callstr += node.srcSwizzle;
