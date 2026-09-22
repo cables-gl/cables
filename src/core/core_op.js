@@ -32,6 +32,7 @@ import { showUiErrors } from "./uierrors.js";
 /**
  * @typedef OpAttribs
  * @property {string[]} [tags] tags
+ * @property {string} [area] area
  */
 
 /**

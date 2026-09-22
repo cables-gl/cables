@@ -73,7 +73,13 @@ export class ShaderGraphProgram extends Events
     _headUniSrc = "";
 
     /** @type {string[]} */
-    _codeLines = [];
+    _codeLinesMain = [];
+
+    /** @type {string[]} */
+    _codeLinesHead = [];
+
+    _codeLines = this._codeLinesMain;
+
     finalSrc = "";
     updateableOps = {};
 
@@ -320,6 +326,9 @@ export class ShaderGraphProgram extends Events
         return node.resultVarName;
     }
 
+    /**
+     * @param {Op<any>} op
+     */
     countObjectInputPorts(op)
     {
         let count = 0;
@@ -415,7 +424,6 @@ export class ShaderGraphProgram extends Events
 
         console.warn("could not find param for port ", port);
 
-        // if (node.result) return node.result;
         return node;
     }
 
@@ -466,4 +474,13 @@ export class ShaderGraphProgram extends Events
     }
 
     /* minimalcore:end */
+
+    // /**
+    //  * @param {boolean} main
+    //  */
+    // setCodeScopeMain(main)
+    // {
+    //     if (main) this._codeLines = this._codeLinesMain;
+    //     else this._codeLines = this._codeLinesHead;
+    // }
 }

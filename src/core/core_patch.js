@@ -1754,6 +1754,22 @@ export class Patch extends Events
 
         return json;
     }
+
+    /**
+     * @param {string} areaId
+     */
+    getOpsByArea(areaId)
+    {
+        const childs = [];
+        for (let i = 0; i < this.ops.length; i++)
+        {
+            if (this.ops[i].attribs.area == areaId)
+            {
+                childs.push(this.ops[i]);
+            }
+        }
+        return childs;
+    }
 }
 
 /**
