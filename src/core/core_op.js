@@ -75,6 +75,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {UiError[]} [uierrors]
  * @property {string} [color]
  * @property {UiAttrArea} [area]
+ * @property {boolean} [areaCollapsed]
  * @property {string} [comment]
  * @property {number} [height]
  * @property {number} [width]
