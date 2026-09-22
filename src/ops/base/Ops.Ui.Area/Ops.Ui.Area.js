@@ -3,6 +3,7 @@ const
     inDelete = op.inTriggerButton("Delete");
 
 inTitle.setUiAttribs({ "hidePort": true });
+inDelete.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "hasArea": true });
 

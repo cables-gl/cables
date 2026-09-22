@@ -10,7 +10,7 @@ const
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Rotation", [rotX, rotY, rotZ]);
-op.setPortGroup("Position", [posX, posY, posZ]);
+op.setPortGroup("Translation", [posX, posY, posZ]);
 op.setPortGroup("Scale", [scale]);
 op.setUiAxisPorts(posX, posY, posZ);
 

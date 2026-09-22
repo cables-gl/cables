@@ -739,6 +739,7 @@ export class Patch extends Events
         perf?.finish();
 
         if (!found) this.#log.warn("core patch deleteop: not found...", opid);
+        return found;
     }
 
     getFrameNum()

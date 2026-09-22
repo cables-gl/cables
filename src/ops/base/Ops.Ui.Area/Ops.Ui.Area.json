@@ -12,17 +12,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1728639202911
+        },
+        {
+            "message": "Set correct position after undo, hide ports ",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790065124247
         }
     ],
     "authorName": "pandur",
     "created": 1629721822424,
     "layout": {
-        "portsIn": [
-            {
-                "type": 1,
-                "name": "Delete"
-            }
-        ],
+        "portsIn": [],
         "portsOut": []
     },
     "summary": "Organize and group your patch operators",
