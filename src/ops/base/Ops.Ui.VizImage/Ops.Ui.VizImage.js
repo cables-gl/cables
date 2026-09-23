@@ -1,14 +1,14 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif", ".svg"]),
     outWidth = op.outNumber("Width"),
-    outHeight = op.outNumber("Height"),
-    loading = op.outBoolNum("Loading");
+    outHeight = op.outNumber("Height");
 
-op.setUiAttrib({ "height": 150, "resizable": true });
+op.setUiAttrib({ "height": 150, "resizable": true, "vizLayerFullOpSize": true });
 
+outWidth.setUiAttribs({ "hidePort": true });
+filename.setUiAttribs({ "hidePort": true });
+outHeight.setUiAttribs({ "hidePort": true });
 let element = op.patch.getDocument().createElement("img");
-
-// op.patch.cgl.canvas.parentElement.appendChild(element);
 
 op.onDelete = removeEle;
 
@@ -28,12 +28,13 @@ element.onload = () =>
         outWidth.set(0);
         outHeight.set(0);
     }
-    loading.set(false);
+
+    op.setUiAttrib({ "forceAspect": element.width / element.height });
 };
 
 function removeEle()
 {
-    if (element)element.remove();
+    if (element) element.remove();
     element = null;
 }
 
@@ -41,11 +42,9 @@ function filenameChanged(cacheBuster)
 {
     let url = filename.get();
 
-    loading.set(true);
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     element.setAttribute("crossOrigin", "anonymous");
-    // outImage.setRef(element);
 }
 
 op.onFileChanged = function (fn)
@@ -55,6 +54,7 @@ op.onFileChanged = function (fn)
 
 op.renderVizLayer = (ctx, layer, viz) =>
 {
+    ctx.clearRect(layer.x, layer.y, layer.width, layer.height);
     ctx.fillStyle = "#fff";
     ctx.font = "12px monospace";
     if (!filename.get())
