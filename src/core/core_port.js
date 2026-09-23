@@ -8,7 +8,7 @@ import { Op } from "./core_op.js";
 /**
  * @typedef PortUiAttribs
  * @property  {String} [title] overwrite title of port (by default this is portname)
- * @property  {String} [display] how the port is displayed and interacted in the paramerer panel
+ * @property  {PortUiAttribsDisplay} [display] how the port is displayed and interacted in the paramerer panel
  * @property  {Boolean} [greyout] port paramater will appear greyed out, can not be
  * @property  {Boolean} [hidePort] port will be hidden from op
  * @property  {Boolean} [hideParam] port params will be hidden from parameter panel
@@ -23,7 +23,6 @@ import { Op } from "./core_op.js";
  * @property  {Number} [stride] internal: do not set manually
  * @property  {Boolean} [expose] internal: do not set manually
  * @property  {String} [increment] internal: do not set manually
- * @property  {PortUiAttribsDisplay} display internal: do not set manually
  * @property  {import("../../../cables_ui/src/ui/api/opsserver.js").LinterDiag[]} [editorDiagnostics] diagnostics
  * @property  {String} [axis] internal: do not set manually
  * @property  {String} [type] internal: do not set manually
@@ -55,7 +54,7 @@ import { Op } from "./core_op.js";
 /**
  * @typedef {"bool"|"boolnum"|"button"|"buttons"|"createOpHelper"|"curve"|"dropdown"|
  *   "editor"|"file"|"gradient"|"multiport"|"range"|"readonly"|"reroute"|"sg"|"sg_vec"|
- *   "spreadsheet"|"switch"|"text"|"texture"|"sg"} PortUiAttribsDisplay
+ *   "spreadsheet"|"switch"|"text"|"texture"} PortUiAttribsDisplay
  */
 
 /**
