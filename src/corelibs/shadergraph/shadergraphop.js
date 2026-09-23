@@ -12,7 +12,6 @@ export class ShaderGraphOp
     _outPorts = [];
 
     listeners = {};
-    _defines = [];
     enabled = true;
     info = null;
 
@@ -28,7 +27,9 @@ export class ShaderGraphOp
         shaderNode.id = ShaderGraphProgram.getNewId();
 
         op.tempData.shaderNode = shaderNode;
+
         shaderNode.updateGraph = this.updateGraph.bind(this);
+        shaderNode.setResultType = this.setResultType.bind(this);
 
         this.op.on(Op.EVENT_LINK_CHANGED, this.updateGraph.bind(this));
         this.updateGraph();
@@ -52,9 +53,6 @@ export class ShaderGraphOp
             this.op.tempData.shaderNode.results[0].port.setRef({});
         });
 
-        // this.listeners[port.name] = port.on("change", () =>
-        // {
-        // });
     }
 
     addPortWatcherAll()
@@ -64,6 +62,18 @@ export class ShaderGraphOp
         {
             this.addPortWatcherPort(this.op.portsIn[i]);
         }
+    }
+
+    /**
+     * @param {string} type
+     */
+    setResultType(type, idx = 0)
+    {
+        const shaderNode = this.op.tempData.shaderNode;
+        if (shaderNode.results[idx].port) shaderNode.results[idx].port.setUiAttribs({ "objType": "sg_" + type });
+        shaderNode.results[idx].type = type;
+
+        this.updateGraph();
     }
 
     /**

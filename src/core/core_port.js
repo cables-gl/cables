@@ -33,7 +33,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [editShortcut] internal: do not set manually
  * @property  {String} [filter] internal: do not set manually
  * @property  {boolean} [preview] internal: do not set manually
- * @property  {boolean} [colorPick] internal: do not set manually
+ * @property  {boolean} [colorPick]
  * @property  {Array<String>} [values] internal: do not set manually
  * @property  {boolean} [boundToVar] internal: do not set manually
  * @property  {boolean} [addPort] internal: do not set manually
@@ -175,17 +175,17 @@ export class Port extends Events
     }
 
     // re-declared here because typescript declaration emit drops the "extends events"
-    /**
-     * @param {string} eventName
-     * @param {(...args: any[]) => any} cb
-     * @param {string} [idPrefix]
-     */
-    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+    // /**
+    //  * @param {string} eventName
+    //  * @param {(...args: any[]) => any} cb
+    //  * @param {string} [idPrefix]
+    //  */
+    // on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
 
     /**
      * @param {*} listenerParam
      */
-    off(listenerParam) { return super.off(listenerParam); }
+    // off(listenerParam) { return super.off(listenerParam); }
 
     get parent()
     {
@@ -607,6 +607,7 @@ export class Port extends Events
             if (this.type != Port.TYPE_OBJECT && !this.isAnimated) return "";
         }
 
+        /** @type {import("cables-shared-client").SerializedPort} */
         let obj = { "name": this.getName() };
 
         if (this.attribs && Object.keys(this.attribs).length > 0) obj.attribs = this.attribs;
@@ -1152,6 +1153,9 @@ export class Port extends Events
         /* minimalcore:end */
     }
 
+    /**
+     * @param {number} t
+     */
     static getTypeString(t)
     {
         // todo:needed only in ui ?remove from core?

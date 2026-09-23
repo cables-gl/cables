@@ -7,7 +7,8 @@ const
     inOffset = op.inValue("Offset"),
     inMaxDistance = op.inValue("Max Distance", 0),
     inRandomSpeed = op.inBool("RandomSpeed"),
-    next = op.outTrigger("Next");
+    next = op.outTrigger("Next"),
+    outPoints = op.outArray("Result");
 
 const cgl = op.patch.cgl;
 let shaderModule = null;
@@ -18,12 +19,13 @@ let geom = null;
 let updateUniformPoints = false;
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
-mod.addModule({
-    "title": op.objName,
-    "name": "MODULE_VERTEX_POSITION",
-    "srcHeadVert": attachments.pathfollow_head_vert,
-    "srcBodyVert": attachments.pathfollow_vert
-});
+mod.addModule(
+    {
+        "title": op.objName,
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": attachments.pathfollow_head_vert,
+        "srcBodyVert": attachments.pathfollow_vert
+    });
 
 mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
 mod.addUniform("f", "MOD_offset", inOffset);
@@ -96,7 +98,7 @@ function rebuild()
     const rndArray = new Float32Array(num);
 
     let spread = inSpread.get();
-    if (spread < 0)spread = 0;
+    if (spread < 0) spread = 0;
 
     for (i = 0; i < num / 3; i++)
     {
@@ -146,7 +148,7 @@ exec.onTriggered = function ()
     }
 
     if (!inPoints.get() || inPoints.get().length === 0) return;
-    if (needsRebuild)rebuild();
+    if (needsRebuild) rebuild();
 
     mod.bind();
 

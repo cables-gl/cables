@@ -459,9 +459,6 @@ export class Anim extends Events
         this.sortKeys();
     }
 
-    /**
-     * @returns {SerializedAnim}
-     */
     getSerialized()
     {
 

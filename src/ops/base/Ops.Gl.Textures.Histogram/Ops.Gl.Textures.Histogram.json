@@ -36,5 +36,13 @@
         "cgl"
     ],
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "changelog": [
+        {
+            "message": "Works again, bug related to point sprites rendering",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1789574355010
+        }
+    ]
 }

@@ -693,7 +693,7 @@ op.exposePunctualLight = function (name, idx, nodeName)
 
 op.exposeTexture = function (name)
 {
-    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture_v2");
     newop.getPort("Name").set(name);
     setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Render");

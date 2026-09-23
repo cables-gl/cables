@@ -1,5 +1,5 @@
 {
-    "id": "38f79614-b0de-4960-8da5-2827e7f43415",
+    "id": "6025980b-3396-44ad-91c8-38f8a1f63788",
     "changelog": [
         {
             "message": "created op",
@@ -18,23 +18,25 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1790065124247
+        },
+        {
+            "message": "cloned op from Ops.Ui.Area",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790077567253,
+            "cloneOf": "38f79614-b0de-4960-8da5-2827e7f43415"
         }
     ],
     "authorName": "pandur",
-    "created": 1629721822424,
+    "created": 1790077567253,
     "layout": {
         "portsIn": [],
         "portsOut": []
     },
     "summary": "Organize and group your patch operators",
     "issues": "",
-    "youtubeids": [
-        "-1vMiU6BcDg"
-    ],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "ozgnnR",
-    "license": "MIT",
-    "isReleased": true
+    "license": "MIT"
 }

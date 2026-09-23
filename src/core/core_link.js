@@ -156,6 +156,7 @@ export class Link extends Events
     {
 
         /* minimalcore:start */
+        /** @type {import("cables-shared-client").SerializedLink} */
         const obj = {};
 
         obj.portIn = this.portIn.getName();

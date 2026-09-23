@@ -1,0 +1,36 @@
+{
+    "id": "327d79c6-e41f-4744-879d-01ad4872e9b9",
+    "created": 1740567058410,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1740567058410
+        },
+        {
+            "message": "Just show the image without any border",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790155995151
+        },
+        {
+            "message": "Ui.VizImageUrl renamed to Ops.Ui.VizImage",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790156411753
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": []
+    },
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "summary": "preview an image URL or a data/base64 URL",
+    "exampleProjectId": "gsP8hO",
+    "isReleased": true
+}

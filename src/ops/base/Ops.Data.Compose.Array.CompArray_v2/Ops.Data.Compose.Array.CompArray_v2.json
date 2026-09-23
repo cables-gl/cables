@@ -1,0 +1,64 @@
+{
+    "id": "1cf4535c-7348-402f-8cd8-4a5b0db29908",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1680617318226,
+            "type": "new"
+        },
+        {
+            "message": "Added clear toggle, array will not be cleared when triggered, can now be used as a buffer",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1733484028222
+        },
+        {
+            "message": "created new version of Ops.Data.Compose.Array.CompArray",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789739568543
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "areaScopeBegin",
+                "objType": "areaScope"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "created": 1789739568542,
+    "summary": "Compose an Array",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "RLvmjz",
+    "license": "MIT"
+}

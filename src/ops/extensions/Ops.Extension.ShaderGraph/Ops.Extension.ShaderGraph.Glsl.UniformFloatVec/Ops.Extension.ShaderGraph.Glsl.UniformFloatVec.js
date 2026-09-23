@@ -44,8 +44,6 @@ function updateUi()
 
     inX.setUiAttribs({ "colorPick": inType.get() == "vec4" });
 
-    outValue.setUiAttribs({ "objType": "sg_" + inType.get() });
-
     /* minimalcore:end */
 }
 
@@ -59,7 +57,8 @@ function update(shader, bindings)
         op.tempData.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
 
         op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
-        op.tempData.shaderNode.results[0].type = inType.get();
+
+        op.tempData.shaderNode.setResultType(inType.get());
     }
     // const mgpu = op.patch.frameStore.mgpu;
     if (!uni && shader)
@@ -71,7 +70,7 @@ function update(shader, bindings)
         if (uniType == "f") uni = new CGL.Uniform(shader, uniType, name, inX); // why needed, bug in cgl_uniform
         else uni = new CGL.Uniform(shader, uniType, name, inX, inY, inZ, inW);
 
-        op.tempData.shaderNode.updateGraph();
+        op.tempData.shaderNode.setResultType(inType.get());
     }
 
 }

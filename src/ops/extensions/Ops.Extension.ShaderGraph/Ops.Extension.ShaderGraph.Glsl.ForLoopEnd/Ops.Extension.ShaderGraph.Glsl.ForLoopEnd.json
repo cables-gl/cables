@@ -1,0 +1,63 @@
+{
+    "id": "a1037dd4-e207-4b1b-8a31-a51f3442fad9",
+    "created": 1789636188527,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818649522
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787818947736
+        },
+        {
+            "message": "Extension.ShaderGraph.Glsl.ShaderGraphShader renamed to Ops.Extension.ShaderGraph.Glsl.Module",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1787823470208
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Glsl.Module",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789636188527,
+            "cloneOf": "59e357a3-da9d-4a4e-8c70-67ef2cea1c94"
+        },
+        {
+            "message": "Extension.ShaderGraph.Glsl.ForLoop renamed to Ops.Extension.ShaderGraph.Glsl.ForLoopEnd",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1789735057533
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "areaScopeEnd",
+                "objType": "areaScope"
+            },
+            {
+                "type": 2,
+                "name": "loop",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_float"
+            }
+        ]
+    },
+    "coreLibs": [
+        "shadergraph"
+    ]
+}

@@ -27,11 +27,14 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [y]
  * @property {number} [w]
  * @property {number} [h]
+ * @property {number} [origW]
+ * @property {number} [origH]
  */
 
 /**
  * @typedef OpAttribs
  * @property {string[]} [tags] tags
+ * @property {string} [area] area
  */
 
 /**
@@ -74,6 +77,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {UiError[]} [uierrors]
  * @property {string} [color]
  * @property {UiAttrArea} [area]
+ * @property {boolean} [areaCollapsed]
  * @property {string} [comment]
  * @property {number} [height]
  * @property {number} [width]
@@ -88,9 +92,11 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [mathTitle]
  * @property {string} [extendTitlePort]
  * @property {string} [display]
- * @property {string} [hasArea]
+ * @property {boolean} [hasArea]
+ * @property {boolean} [scopeArea]
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
+ * @property {boolean} [moveableOnlyY]
  * @property {number} [tlOrder]
  * @property {number} [heatmapIntensity]
  * @property {string} [commentOverwrite]
@@ -105,6 +111,8 @@ import { showUiErrors } from "./uierrors.js";
 /**
  * @typedef OpTempData
  * @property {Object} [origData]
+ * @property {Object} [scopeAreaEndOp]
+ * @property {Object} [scopeAreaStartOp]
  * @property {import("../corelibs/shadergraph/shadergraphprogram.js").ShaderNode} [shaderNode]
  */
 
@@ -173,6 +181,16 @@ export class Op extends Events
     preservedPortLinks = {};
 
     /* minimalcore:start */
+
+    /**
+     * @typedef LinkTimeRules
+     * @property {Port[]} needsLinkedToWork
+     * @property {Port[]} needsStringToWork
+     * @property {string} needsParentOp
+     * @property {string} forbiddenParent
+     * @property {number} forbiddenParentType
+     */
+    /** @type {LinkTimeRules} */
     linkTimeRules = {
         "needsLinkedToWork": [],
         "needsStringToWork": [],
@@ -255,12 +273,12 @@ export class Op extends Events
      * @param {(...args: any[]) => any} cb
      * @param {string} [idPrefix]
      */
-    on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
+    // on(eventName, cb, idPrefix) { return super.on(eventName, cb, idPrefix); }
 
     /**
      * @param {*} listenerParam
      */
-    off(listenerParam) { return super.off(listenerParam); }
+    // off(listenerParam) { return super.off(listenerParam); }
 
     /**
      * @param {string} which
@@ -271,7 +289,7 @@ export class Op extends Events
      * @param {*} [param5]
      * @param {*} [param6]
      */
-    emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
+    // emitEvent(which, param1, param2, param3, param4, param5, param6) { return super.emitEvent(which, param1, param2, param3, param4, param5, param6); }
 
     /* minimalcore:start */
     // functions to be overwritten in core_extend_op
@@ -1497,17 +1515,62 @@ export class Op extends Events
         return null;
     }
 
+    outScopeArea()
+    {
+        // FOR SCOPE START OP
+
+        this.setUiAttrib({ "scopeArea": true });
+        const outScope = this.outObject("areaScopeBegin", null, "areaScope");
+        // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
+
+        outScope.onLinkChanged = () =>
+        {
+
+            this.tempData.scopeAreaEndOp = null;
+            if (outScope.isLinked())
+            {
+
+                const otherPort = outScope.links[0].getOtherPort(outScope);
+                otherPort.op.getPortByName("areaScopeEnd");
+
+                this.tempData.scopeAreaEndOp = otherPort.op;
+                otherPort.op.tempData.scopeAreaStartOp = this;
+
+                this.setUiError("noscopelink", null);
+            }
+            else
+            {
+                this.setUiError("noscopelink", "scope out shoult be linked");
+            }
+        };
+        return outScope;
+
+    }
+
+    inScopeArea()
+    {
+        // FOR SCOPE END OP
+        this.setUiAttribs({ "moveableOnlyY": true });
+
+        return this.inObject("areaScopeEnd", null, "areaScope");
+    }
+
     removeLinks()
     {
         for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
         for (let i = 0; i < this.portsOut.length; i++) this.portsOut[i].removeLinks();
     }
 
-    // @TODO should be move to extend...
+    /**
+     * @returns {import("cables-shared-client").SerializedOp}
+     */
     getSerialized()
     {
 
+        // @TODO should be move to extend...
+
         /* minimalcore:start */
+        /** @type {import("cables-shared-client").SerializedOp} */
         const opObj = {};
 
         if (this.opId) opObj.opId = this.opId;

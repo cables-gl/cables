@@ -5,13 +5,13 @@ const
 
 inStrs.onChange = () =>
 {
-    const stringPorts = inStrs.get();
+    const numberPorts = inStrs.get();
     let arr = [];
 
-    for (let i = 0; i < stringPorts.length; i++)
+    for (let i = 0; i < numberPorts.length; i++)
     {
-        arr[i] = stringPorts[i].get() || 0;
+        arr[i] = parseFloat(numberPorts[i].get()) || 0;
     }
     outArr.set(arr);
-    outNum.set(stringPorts.length);
+    outNum.set(numberPorts.length);
 };

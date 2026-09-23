@@ -1,8 +1,7 @@
 import { Events, Logger } from "cables-shared-client";
-import { ajax, hashString, cleanJson, shortId, map } from "./utils.js";
+import { ajax, hashString, cleanJson, shortId } from "./utils.js";
 import { LoadingStatus } from "./loadingstatus.js";
 import { Link } from "./core_link.js";
-import { OpProfiler } from "./core_op_profiler.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 import { Port } from "./core_port.js";
@@ -740,6 +739,7 @@ export class Patch extends Events
         perf?.finish();
 
         if (!found) this.#log.warn("core patch deleteop: not found...", opid);
+        return found;
     }
 
     getFrameNum()
@@ -1175,7 +1175,7 @@ export class Patch extends Events
                                         // lost link
                                         const outOp = this.getOpById(obj.ops[iop].portsOut[ipi2].links[ili].objOut);
                                         let dstOp = null;
-                                        let theSubPatch = 0;
+                                        let theSubPatch = Patch.DEFAULT_SUBPATCHID;
 
                                         for (let i = 0; i < this.ops.length; i++)
                                         {
@@ -1753,6 +1753,22 @@ export class Patch extends Events
         }
 
         return json;
+    }
+
+    /**
+     * @param {string} areaId
+     */
+    getOpsByArea(areaId)
+    {
+        const childs = [];
+        for (let i = 0; i < this.ops.length; i++)
+        {
+            if (this.ops[i].attribs.area == areaId)
+            {
+                childs.push(this.ops[i]);
+            }
+        }
+        return childs;
     }
 }
 

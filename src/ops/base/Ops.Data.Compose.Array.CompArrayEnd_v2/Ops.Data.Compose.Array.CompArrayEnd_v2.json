@@ -1,0 +1,33 @@
+{
+    "id": "1b13e06c-b2f6-40d4-a4ae-c023955e5c50",
+    "created": 1789739637473,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1789739637484
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "areaScopeEnd",
+                "objType": "areaScope"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Finished"
+            },
+            {
+                "type": 3,
+                "name": "Comp Result"
+            }
+        ]
+    }
+}
