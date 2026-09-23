@@ -22,6 +22,8 @@ const gltfNode = class
     _tempAnimScale = null;
     addMulMat = null;
     skinRenderer = null;
+    numInstances = 0;
+    instanceMatrices = null;
 
     constructor(node, gltf)
     {
@@ -102,13 +104,43 @@ const gltfNode = class
             this.mesh = this._gltf.meshes[this._node.mesh];
             if (this.extensions && this.extensions.EXT_mesh_gpu_instancing)
             {
-                console.log("mesh instance!", this.extensions.EXT_mesh_gpu_instancing);
+                const inst = this.extensions.EXT_mesh_gpu_instancing;
+                const attr = inst.attributes;
+                const acc = this._gltf.json.accessors;
 
-                console.log("text", gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION]);
-                const views = gltf.chunks[0].data.bufferViews;
-                const acc = gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION];
-                const view = gltf.accBuffers[acc];
-                console.log("vie", view, gltf.json.accessors);
+                const translations = attr.hasOwnProperty("TRANSLATION") ? this._gltf.accBuffers[attr.TRANSLATION] : null;
+                const rotations = attr.hasOwnProperty("ROTATION") ? this._gltf.accBuffers[attr.ROTATION] : null;
+                const scales = attr.hasOwnProperty("SCALE") ? this._gltf.accBuffers[attr.SCALE] : null;
+
+                const attrNames = Object.keys(attr);
+                const num = attrNames.length ? acc[attr[attrNames[0]]].count : 0;
+
+                this.numInstances = num;
+                this.instanceMatrices = new Float32Array(num * 16);
+
+                const t = vec3.create();
+                const q = quat.create();
+                const sc = vec3.create();
+                const m = mat4.create();
+
+                for (let i = 0; i < num; i++)
+                {
+                    if (translations) vec3.set(t, translations[i * 3 + 0], translations[i * 3 + 1], translations[i * 3 + 2]);
+                    else vec3.set(t, 0, 0, 0);
+
+                    if (rotations)
+                    {
+                        quat.set(q, rotations[i * 4 + 0], rotations[i * 4 + 1], rotations[i * 4 + 2], rotations[i * 4 + 3]);
+                        quat.normalize(q, q);
+                    }
+                    else quat.identity(q);
+
+                    if (scales) vec3.set(sc, scales[i * 3 + 0], scales[i * 3 + 1], scales[i * 3 + 2]);
+                    else vec3.set(sc, 1, 1, 1);
+
+                    mat4.fromRotationTranslationScale(m, q, t, sc);
+                    this.instanceMatrices.set(m, i * 16);
+                }
 
             }
         }
