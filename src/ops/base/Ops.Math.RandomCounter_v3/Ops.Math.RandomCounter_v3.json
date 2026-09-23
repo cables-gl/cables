@@ -5,23 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1616194125469
-        },
-        {
-            "message": "Ops.User.pandur.RandomCounter renamed to Ops.Math.RandomCounter",
-            "author": "pandur",
-            "date": 1616194413750
-        },
-        {
-            "message": "created new version of Ops.Math.RandomCounter",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1789480060439
-        },
-        {
-            "message": "created new version of Ops.Math.RandomCounter_v2",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1789480494218
         }
     ],
     "authorName": "pandur",
@@ -52,11 +35,10 @@
         ]
     },
     "summary": "add up random numbers by triggering",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
     "exampleProjectId": "I8AxeE",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

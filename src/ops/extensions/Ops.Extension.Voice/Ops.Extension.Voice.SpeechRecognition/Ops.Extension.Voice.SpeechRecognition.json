@@ -56,7 +56,8 @@
             "message": "Only start when active is true",
             "type": "improvement",
             "author": "pandur",
-            "date": 1788341027103
+            "date": 1788341027103,
+            "url": "https://github.com/cables-gl/cables/issues/8275"
         },
         {
             "message": "Show recognition errors in UI",

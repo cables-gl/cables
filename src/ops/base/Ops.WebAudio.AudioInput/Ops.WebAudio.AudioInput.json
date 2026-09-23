@@ -46,12 +46,5 @@
         "webaudio"
     ],
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "WebAudio.MicrophoneIn renamed to Ops.WebAudio.AudioInput",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1789385763812
-        }
-    ]
+    "changelog": []
 }

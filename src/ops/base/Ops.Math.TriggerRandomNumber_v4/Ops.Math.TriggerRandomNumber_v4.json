@@ -20,10 +20,11 @@
             "date": 1734628107689
         },
         {
-            "message": "Numbers are now random every time, and do not use the last seed of another op anymore",
+            "message": "New Version v4: Numbers are now random every time, and do not use the last seed of another op anymore",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1789480598000
+            "date": 1789480598000,
+            "url": "https://github.com/cables-gl/cables/issues/8574"
         }
     ],
     "authorName": "pandur",
@@ -74,5 +75,6 @@
         "ports": []
     },
     "exampleProjectId": "s3FP7f",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

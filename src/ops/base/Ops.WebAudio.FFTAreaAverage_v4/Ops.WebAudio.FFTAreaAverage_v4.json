@@ -115,7 +115,8 @@
         {
             "message": "cloned op from Ops.WebAudio.FFTAreaAverage",
             "author": "cables",
-            "date": 1607443373884
+            "date": 1607443373884,
+            "type": "new op"
         },
         {
             "message": "outputed texture is not flipped anymore",
@@ -130,7 +131,7 @@
             "date": 1731335740518
         },
         {
-            "message": "Outbut texture is no longet flipped",
+            "message": "new version v4: Output texture is no longer flipped (again)",
             "type": "bugfix",
             "author": "pandur",
             "date": 1789655126266
@@ -140,5 +141,6 @@
     "exampleProjectId": "F6Fhyp",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true
 }

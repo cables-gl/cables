@@ -29,5 +29,10 @@
                 "name": "Comp Result"
             }
         ]
-    }
+    },
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    },
+    "summary": "Finish a comp array and output array"
 }

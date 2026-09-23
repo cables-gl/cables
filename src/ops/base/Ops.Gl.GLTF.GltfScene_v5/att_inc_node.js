@@ -104,6 +104,12 @@ const gltfNode = class
             {
                 console.log("mesh instance!", this.extensions.EXT_mesh_gpu_instancing);
 
+                console.log("text", gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION]);
+                const views = gltf.chunks[0].data.bufferViews;
+                const acc = gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION];
+                const view = gltf.accBuffers[acc];
+                console.log("vie", view, gltf.json.accessors);
+
             }
         }
 
@@ -323,8 +329,7 @@ const gltfNode = class
 
         if (!dontTransform || this.skinRenderer) this.transform(cgl, _time);
 
-        if (this.hidden && !drawHidden)
-        {}
+        if (this.hidden && !drawHidden) {}
         else
         {
             if (this.skinRenderer)

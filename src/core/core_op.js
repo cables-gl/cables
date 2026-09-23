@@ -54,11 +54,13 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} id
  * @property {UiErrorOptions} options
  */
+
 /**
  * @typedef UiErrorOptions
  * @property {string} button
  * @property {Function} buttonCb
  */
+
 /**
  * @typedef OpUiAttribs
  * @property {string} [title] overwrite op title
@@ -106,6 +108,8 @@ import { showUiErrors } from "./uierrors.js";
  * @property {boolean} [stretchPorts]
  * @property {number} [vizLayerMaxZoom]
  * @property {boolean} [widthOnlyGrow]
+ * @property {number} [forceAspect]
+ * @property {boolean} [vizLayerFullOpSize]
  */
 
 /**

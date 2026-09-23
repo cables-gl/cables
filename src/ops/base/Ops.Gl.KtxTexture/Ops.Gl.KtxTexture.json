@@ -78,5 +78,10 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true,
+    "summary": "Load a KTX Texture File",
+    "docs": {
+        "ports": []
+    }
 }

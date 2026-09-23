@@ -113,14 +113,7 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "DmWmT6",
-    "changelog": [
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.FBMNoise renamed to Ops.Gl.ImageCompose.Noise.FBMNoise",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855168628
-        }
-    ],
+    "changelog": [],
     "coreLibs": [
         "cgl"
     ],
