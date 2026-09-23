@@ -172,5 +172,25 @@
             "src": "./jszip.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "Whammy",
+            "author": "Kevin Kwok",
+            "url": "https://github.com/antimatter15/whammy",
+            "licence": "MIT",
+            "version": "20151210",
+            "username": "stephan",
+            "date": 1790180878495
+        },
+        {
+            "title": "js zip archive library",
+            "author": "jszip",
+            "url": "https://stuk.github.io/jszip/",
+            "licence": "MIT",
+            "version": "v3.5.0",
+            "username": "stephan",
+            "date": 1790181122478
+        }
     ]
 }

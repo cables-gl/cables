@@ -94,5 +94,25 @@
             "type": "module",
             "export": "EXR"
         }
+    ],
+    "credits": [
+        {
+            "title": "fflate",
+            "author": "Arjun Barrett",
+            "url": "https://github.com/101arrowz/fflate",
+            "licence": "MIT",
+            "version": "v0.7.3",
+            "username": "stephan",
+            "date": 1790181605656
+        },
+        {
+            "title": "exrloader",
+            "author": "three.js",
+            "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/EXRLoader.js",
+            "licence": "MIT",
+            "version": "Jan 2022",
+            "username": "stephan",
+            "date": 1790181776599
+        }
     ]
 }

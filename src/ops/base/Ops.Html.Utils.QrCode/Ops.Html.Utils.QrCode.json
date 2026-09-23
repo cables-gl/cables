@@ -52,5 +52,16 @@
             "src": "./qrcode.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "qrcode.js",
+            "author": "davidshimjs",
+            "url": "https://davidshimjs.github.io/qrcodejs/",
+            "licence": "MIT",
+            "version": "",
+            "username": "stephan",
+            "date": 1790182360956
+        }
     ]
 }

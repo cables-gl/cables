@@ -162,5 +162,16 @@
             "src": "./colorrick.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "colorRick",
+            "author": "pandrr",
+            "url": "https://github.com/pandrr/colorRick",
+            "licence": "MIT",
+            "version": "Oct 28, 2025",
+            "username": "stephan",
+            "date": 1790182456537
+        }
     ]
 }

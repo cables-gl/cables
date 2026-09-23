@@ -45,5 +45,16 @@
             "src": "./marked.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "marked",
+            "author": "MarkedJS",
+            "url": "https://github.com/markedjs/marked",
+            "licence": "MIT",
+            "version": "4.2.3",
+            "username": "stephan",
+            "date": 1790182214957
+        }
     ]
 }
