@@ -42,7 +42,8 @@
             "message": "Works again, bug related to point sprites rendering",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1789574355010
+            "date": 1789574355010,
+            "url": "https://github.com/cables-gl/cables/issues/8052"
         }
     ]
 }

@@ -60,23 +60,8 @@
         {
             "message": "cloned op from Ops.Gl.TextureEffects.Noise.TriangleNoise",
             "author": "pandur",
-            "date": 1651044907346
-        },
-        {
-            "message": "Ops.User.pandur.TriangleNoiseV2 renamed to Ops.Dev.TriangleNoiseV2",
-            "author": "pandur",
-            "date": 1651044925669
-        },
-        {
-            "message": "Ops.Dev.TriangleNoiseV2 renamed to Ops.Gl.TextureEffects.Noise.TriangleNoise_v2",
-            "author": "pandur",
-            "date": 1653286904421
-        },
-        {
-            "message": "Ops.Gl.TextureEffects.Noise.TriangleNoise_v2 renamed to Ops.Gl.ImageCompose.Noise.TriangleNoise_v2",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1701855384693
+            "date": 1651044907346,
+            "type": "new op"
         }
     ],
     "coreLibs": [

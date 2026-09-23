@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1672827991381
+            "date": 1672827991381,
+            "type": "new op"
         },
         {
             "message": "Ops.User.pandur.SideBarImage renamed to Ops.Sidebar.SideBarImage",
@@ -28,7 +29,8 @@
             "message": "fixed bug with image not added to sidebar in some cases",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1785946640881
+            "date": 1785946640881,
+            "url": "https://github.com/cables-gl/cables/issues/8423"
         }
     ],
     "authorName": "pandur",
