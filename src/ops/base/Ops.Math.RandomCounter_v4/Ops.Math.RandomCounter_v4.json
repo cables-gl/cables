@@ -8,10 +8,11 @@
             "type": "new op"
         },
         {
-            "message": "Numbers are now random every time, and do not use the last seed of another op anymore",
+            "message": "New Version v4: Numbers are now random every time, and do not use the last seed of another op anymore",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1789480603608
+            "date": 1789480603608,
+            "url": "https://github.com/cables-gl/cables/issues/8574"
         }
     ],
     "authorName": "pandur",
@@ -41,12 +42,11 @@
             }
         ]
     },
-    "summary": "add up random numbers by triggering",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Add up random numbers by triggering",
     "docs": {
         "ports": []
     },
     "exampleProjectId": "I8AxeE",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

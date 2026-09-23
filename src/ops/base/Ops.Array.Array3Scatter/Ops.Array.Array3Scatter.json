@@ -28,5 +28,11 @@
                 "name": "result"
             }
         ]
-    }
+    },
+    "isReleased": true,
+    "summary": "create copy of points at positions provided by another array",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "7iiNQv"
 }

@@ -26,12 +26,13 @@ const GltfInstancer = class
         {
             this._mod = new CGL.ShaderModifier(cgl, "gltftarget");
 
-            this._mod.addModule({
-                "priority": -2,
-                "name": "MODULE_VERTEX_POSITION",
-                "srcHeadVert": attachments.targets_head_vert || "",
-                "srcBodyVert": attachments.targets_vert || ""
-            });
+            this._mod.addModule(
+                {
+                    "priority": -2,
+                    "name": "MODULE_VERTEX_POSITION",
+                    "srcHeadVert": attachments.targets_head_vert || "",
+                    "srcBodyVert": attachments.targets_vert || ""
+                });
 
             this._mod.addUniformVert("4f", "MOD_targetTexInfo", [0, 0, 0, 0]);
             this._mod.addUniformVert("t", "MOD_targetTex", 1);
@@ -58,7 +59,10 @@ const GltfInstancer = class
 
         // draw mesh...
         cgl.pushModelMatrix();
-        if (this.identity)mat4.identity(cgl.mMatrix);
+        if (this.identity) mat4.identity(cgl.mMatrix);
+
+        console.log("yaya inst");
+
     }
 
 };

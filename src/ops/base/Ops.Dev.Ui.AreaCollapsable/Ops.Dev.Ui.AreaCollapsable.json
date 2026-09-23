@@ -20,11 +20,10 @@
             "date": 1790065124247
         },
         {
-            "message": "cloned op from Ops.Ui.Area",
-            "type": "new op",
+            "message": "New version: Areas can be collapsed",
+            "type": "feature",
             "author": "pandur",
-            "date": 1790077567253,
-            "cloneOf": "38f79614-b0de-4960-8da5-2827e7f43415"
+            "date": 1790151035463
         }
     ],
     "authorName": "pandur",

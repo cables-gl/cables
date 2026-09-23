@@ -1,7 +1,7 @@
 const
-    select = op.inDropDown("data", [], "cpu"),
-    select2 = op.inDropDown("data2", [], "gpu_gl"),
-    select3 = op.inDropDown("data3", [], "fps"),
+    select = op.inDropDown("data", [], "duration cpu"),
+    select2 = op.inDropDown("data2", [], "duration cgl gpu"),
+    select3 = op.inDropDown("data3", [], "count cgl fps"),
     activeMem = op.inBool("Measure Memory", false),
     activeGPU = op.inBool("Measure GPU", true),
     active = op.inBool("active", true);
@@ -82,10 +82,10 @@ function drawGraph(name, posy, q, col)
 
     ctx.fillStyle = "#FFFFFF";
     let title = name + " ";
-    if (avg)
+    if (!info && avg)
     {
         avg = (avg / numBars).toPrecision(2);
-        title += avg + "ms";
+        info = avg + "ms";
     }
 
     ctx.globalAlpha = 0.7;

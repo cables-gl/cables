@@ -12,6 +12,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1741096172275
+        },
+        {
+            "message": "Better compatibility with .EXR files from blender",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789989584490,
+            "url": "https://github.com/cables-gl/cables/issues/8593"
         }
     ],
     "authorName": "pandur",

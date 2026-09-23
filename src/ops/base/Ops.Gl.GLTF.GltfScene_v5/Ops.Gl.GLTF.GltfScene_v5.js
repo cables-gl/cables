@@ -42,7 +42,7 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoading = op.outBool("Loading"),
+    outLoading = op.outBoolNum("Loading"),
     outLoaded = op.outBoolNum("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
