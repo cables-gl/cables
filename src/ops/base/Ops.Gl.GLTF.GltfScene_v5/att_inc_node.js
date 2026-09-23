@@ -104,11 +104,20 @@ const gltfNode = class
             {
                 console.log("mesh instance!", this.extensions.EXT_mesh_gpu_instancing);
 
-                console.log("text", gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION]);
-                const views = gltf.chunks[0].data.bufferViews;
-                const acc = gltf.json.accessors[this.extensions.EXT_mesh_gpu_instancing.attributes.TRANSLATION];
-                const view = gltf.accBuffers[acc];
-                console.log("vie", view, gltf.json.accessors);
+                const inst = this.extensions.EXT_mesh_gpu_instancing;
+                const attr = inst.attributes;
+                const acc = this._gltf.json.accessors;
+
+                const translations = attr.hasOwnProperty("TRANSLATION") ? this._gltf.accBuffers[attr.TRANSLATION] : null; // VEC3, count*3 floats
+                const rotations = attr.hasOwnProperty("ROTATION") ? this._gltf.accBuffers[attr.ROTATION] : null; // VEC4 quaternion xyzw
+                const scales = attr.hasOwnProperty("SCALE") ? this._gltf.accBuffers[attr.SCALE] : null;
+
+                console.log("translation", translations.length, rotations.length, scales.length);
+                // const mq = mat4.create();
+                // const q = [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]];
+                // quat.normalize(q, q);
+                // mat4.fromQuat(mq, q);
+                // mat4.mul(m, m, mq);
 
             }
         }
