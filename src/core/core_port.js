@@ -86,6 +86,12 @@ export class Port extends Events
     static EVENT_LINK_CHANGED = "onLinkChanged";
     static EVENT_LINK_REMOVED = "onLinkRemoved";
     static EVENT_PORT_UNLINK = "onPortUnlink";
+    static EVENT_TRIGGER = "trigger";
+    static EVENT_SUBPATCH_EXPOSE = "subpatchExpose";
+    static EVENT_EXCEPTION = "exception";
+    static EVENT_ANIM_UPDATED = "portAnimUpdated";
+    static EVENT_ANIM_TOGGLE = "portAnimToggle";
+    static EVENT_SET_VARIABLE = "portSetVariable";
 
     #log = new Logger("core_port");
     #oldAnimVal = -5711;
@@ -348,7 +354,7 @@ export class Port extends Events
             if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
         }
 
-        if (newAttribs.hasOwnProperty("expose")) this.#op.patch.emitEvent("subpatchExpose", this.#op.uiAttribs.subPatch);
+        if (newAttribs.hasOwnProperty("expose")) this.#op.patch.emitEvent(Port.EVENT_SUBPATCH_EXPOSE, this.#op.uiAttribs.subPatch);
 
         if (changed) this.emitEvent(Port.EVENT_UIATTRCHANGE, newAttribs, this);
 
@@ -480,7 +486,7 @@ export class Port extends Events
                         this.#log.error("exception in ", this.#op);
                         this.#log.error(ex);
 
-                        this.#op.patch.emitEvent("exception", ex, this.#op);
+                        this.#op.patch.emitEvent(Port.EVENT_EXCEPTION, ex, this.#op);
                     }
 
                     if (this.#op && this.#op.patch && this.#op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE)CABLES.Patch.getGui().texturePreview().updateTexturePort(this);
@@ -560,7 +566,7 @@ export class Port extends Events
             this.anim.port = this;
 
             this.anim.deserialize(objPort.anim, true, this.op.patch.clipAnims);
-            this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
+            this.#op.patch.emitEvent(Port.EVENT_ANIM_UPDATED, this.#op, this, this.anim);
 
             this.bindAnimListeners();
             this.anim.sortKeys();
@@ -964,7 +970,7 @@ export class Port extends Events
         }
 
         this.setUiAttribs(attr);
-        this.#op.patch.emitEvent("portSetVariable", this.#op, this, varName);
+        this.#op.patch.emitEvent(Port.EVENT_SET_VARIABLE, this.#op, this, varName);
     }
 
     /**
@@ -997,7 +1003,7 @@ export class Port extends Events
     {
         this.anim.on(Anim.EVENT_CHANGE, () =>
         {
-            this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
+            this.#op.patch.emitEvent(Port.EVENT_ANIM_UPDATED, this.#op, this, this.anim);
             this.#op.patch.updateAnimMaxTimeSoon();
         });
         this.anim.on(Anim.EVENT_KEY_DELETE, () =>
@@ -1039,7 +1045,7 @@ export class Port extends Events
 
         this._handleNoTriggerOpAnimUpdates(a);
 
-        this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
+        this.#op.patch.emitEvent(Port.EVENT_ANIM_TOGGLE, this.#op, this, this.anim);
 
         this.setUiAttribs({ "isAnimated": this.#animated });
         if (changed) this._onAnimToggle();
@@ -1051,8 +1057,8 @@ export class Port extends Events
         /* minimalcore:start */
         this.setAnimated(!this.#animated);
         this.setUiAttribs({ "isAnimated": this.#animated });
-        this.#op.patch.emitEvent("portAnimUpdated", this.#op, this, this.anim);
-        this.#op.patch.emitEvent("portAnimToggle", this.#op, this, this.anim);
+        this.#op.patch.emitEvent(Port.EVENT_ANIM_UPDATED, this.#op, this, this.anim);
+        this.#op.patch.emitEvent(Port.EVENT_ANIM_TOGGLE, this.#op, this, this.anim);
 
         /* minimalcore:end */
     }
@@ -1115,7 +1121,7 @@ export class Port extends Events
         this.#op.updateAnims();
         if (this.#op.enabled && this.onTriggered) this.onTriggered();
 
-        if (this.#op.enabled) this.emitEvent("trigger", name);
+        if (this.#op.enabled) this.emitEvent(Port.EVENT_TRIGGER, name);
     }
 
     /**
