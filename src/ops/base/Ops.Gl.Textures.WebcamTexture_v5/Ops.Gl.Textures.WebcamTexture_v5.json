@@ -165,8 +165,6 @@
         ]
     },
     "summary": "Use your webcam camera as a texture",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -235,7 +233,7 @@
         "cgl_copytexture",
         "cgl"
     ],
-    "caniusequery": "",
     "exampleProjectId": "iwaEwm",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

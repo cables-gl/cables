@@ -14,10 +14,16 @@
             "date": 1733484028222
         },
         {
-            "message": "created new version of Ops.Data.Compose.Array.CompArray",
-            "type": "new op",
+            "message": "new version: new visual pattern \"scoped area\" for scoped actions and next trigger, after comp is finished",
+            "type": "feature",
             "author": "pandur",
             "date": 1789739568543
+        },
+        {
+            "message": "Data.Compose.Array.CompArray_v2 renamed to Ops.Data.Compose.Array.CompArrayScope",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790173913281
         }
     ],
     "layout": {

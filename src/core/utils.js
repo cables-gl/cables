@@ -357,14 +357,14 @@ export const filename = function (url)
  * @function ajax
  * @param {string} url
  * @param {function} cb
- * @param {string} method
- * @param {null} post
- * @param {null} contenttype
- * @param {boolean} jsonP
+ * @param {string} [method="GET"]
+ * @param {string} [post]
+ * @param {string} [contenttype="application/x-www-form-urlencoded"]
+ * @param {boolean} [jsonP=false]
  * @param {object} [headers]
  * @param {object} [options]
  */
-export function ajax(url, cb, method, post, contenttype, jsonP, headers = {}, options = {})
+export function ajax(url, cb, method = "GET", post = null, contenttype = "application/x-www-form-urlencoded", jsonP = false, headers = {}, options = {})
 {
     const requestOptions = {
         "url": url,

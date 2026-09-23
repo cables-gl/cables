@@ -407,6 +407,25 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1789566314845
+        },
+        {
+            "message": "Cleanup of all source code: typescript definitions and jsdoc rework",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789987958935
+        },
+        {
+            "message": "CMD Z/CTRL Z does not change zoom anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1789989474402,
+            "url": "https://github.com/cables-gl/cables/issues/8568"
+        },
+        {
+            "message": "Resize corners on patchfield will show resize cursor on hovering",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790155964647
         }
     ],
     "isReleased": true,

@@ -81,6 +81,30 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1785918522712
+        },
+        {
+            "message": "Fix a bug where ops would not appear in patch when deleted on disk",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790079975653
+        },
+        {
+            "message": "Fixed bug when adding assets via drag and drop introduced by new electron version",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790084178439
+        },
+        {
+            "message": "Made local op-dir not removable, fix bug when removing other op-dirs",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790094623601
+        },
+        {
+            "message": "Fixed bug with opening the local directory of any op from \"manage op\"",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790094668811
         }
     ],
     "isReleased": true,
