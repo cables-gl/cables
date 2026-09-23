@@ -9,19 +9,19 @@
             {
                 "type": 0,
                 "name": "posX",
-                "group": "Position",
+                "group": "Translation",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "posY",
-                "group": "Position",
+                "group": "Translation",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "posZ",
-                "group": "Position",
+                "group": "Translation",
                 "subType": "number"
             },
             {

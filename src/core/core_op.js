@@ -27,11 +27,14 @@ import { showUiErrors } from "./uierrors.js";
  * @property {number} [y]
  * @property {number} [w]
  * @property {number} [h]
+ * @property {number} [origW]
+ * @property {number} [origH]
  */
 
 /**
  * @typedef OpAttribs
  * @property {string[]} [tags] tags
+ * @property {string} [area] area
  */
 
 /**
@@ -74,6 +77,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {UiError[]} [uierrors]
  * @property {string} [color]
  * @property {UiAttrArea} [area]
+ * @property {boolean} [areaCollapsed]
  * @property {string} [comment]
  * @property {number} [height]
  * @property {number} [width]
@@ -108,6 +112,7 @@ import { showUiErrors } from "./uierrors.js";
  * @typedef OpTempData
  * @property {Object} [origData]
  * @property {Object} [scopeAreaEndOp]
+ * @property {Object} [scopeAreaStartOp]
  * @property {import("../corelibs/shadergraph/shadergraphprogram.js").ShaderNode} [shaderNode]
  */
 
@@ -1514,6 +1519,7 @@ export class Op extends Events
     {
         // FOR SCOPE START OP
 
+        this.setUiAttrib({ "scopeArea": true });
         const outScope = this.outObject("areaScopeBegin", null, "areaScope");
         // outScope.setUiAttribs({ "hidePort": true, "hideParam": true });
 
@@ -1529,8 +1535,12 @@ export class Op extends Events
 
                 this.tempData.scopeAreaEndOp = otherPort.op;
                 otherPort.op.tempData.scopeAreaStartOp = this;
-                // this.setUiAttribs({ "scopeAreaEnd": otherPort });
 
+                this.setUiError("noscopelink", null);
+            }
+            else
+            {
+                this.setUiError("noscopelink", "scope out shoult be linked");
             }
         };
         return outScope;

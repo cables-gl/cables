@@ -1,6 +1,6 @@
 const
     scope = op.outScopeArea(),
-    value = op.inString("var name", "texture");
+    value = op.inString("var name", "i");
 
 new CABLES.ShaderGraphOp(this,
     {
