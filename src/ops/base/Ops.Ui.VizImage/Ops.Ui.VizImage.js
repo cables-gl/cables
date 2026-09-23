@@ -65,8 +65,7 @@ op.renderVizLayer = (ctx, layer, viz) =>
 
     try
     {
-        const asp = element.width / element.height;
-        ctx.drawImage(element, layer.x, layer.y, layer.width, layer.width * asp);
+        ctx.drawImage(element, layer.x, layer.y, layer.width, layer.height);
     }
     catch (e)
     {
