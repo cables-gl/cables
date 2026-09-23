@@ -111,6 +111,14 @@ const gltfNode = class
                 const translations = attr.hasOwnProperty("TRANSLATION") ? this._gltf.accBuffers[attr.TRANSLATION] : null; // VEC3, count*3 floats
                 const rotations = attr.hasOwnProperty("ROTATION") ? this._gltf.accBuffers[attr.ROTATION] : null; // VEC4 quaternion xyzw
                 const scales = attr.hasOwnProperty("SCALE") ? this._gltf.accBuffers[attr.SCALE] : null;
+
+                console.log("translation", translations.length, rotations.length, scales.length);
+                // const mq = mat4.create();
+                // const q = [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]];
+                // quat.normalize(q, q);
+                // mat4.fromQuat(mq, q);
+                // mat4.mul(m, m, mq);
+
             }
         }
 

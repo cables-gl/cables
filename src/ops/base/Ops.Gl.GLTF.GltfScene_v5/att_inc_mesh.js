@@ -23,6 +23,8 @@ let gltfMesh = class
         this.weights = prim.weights;
         this.hasMorphTargets = !!prim.targets;
 
+        this.instanceMats = null;
+
         if (prim.hasOwnProperty("mode")) this.primitive = prim.mode;
 
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
