@@ -18,6 +18,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1789739568543
+        },
+        {
+            "message": "Data.Compose.Array.CompArray_v2 renamed to Ops.Data.Compose.Array.CompArrayScope",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790173913281
         }
     ],
     "layout": {
@@ -60,6 +66,10 @@
         "ports": []
     },
     "exampleProjectId": "RLvmjz",
+<<<<<<< HEAD:src/ops/base/Ops.Data.Compose.Array.CompArray_v2/Ops.Data.Compose.Array.CompArray_v2.json
     "license": "MIT",
     "isReleased": true
+=======
+    "license": "MIT"
+>>>>>>> 6885d063c97c0dd530acb35210819eff8a85a9bd:src/ops/base/Ops.Data.Compose.Array.CompArrayScope/Ops.Data.Compose.Array.CompArrayScope.json
 }
