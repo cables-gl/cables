@@ -11,6 +11,7 @@ import { Lang } from "./lang.js";
  * @property {boolean} gen
  * @property {Port} port
  * @property {boolean} resultType - change to result type when that changes
+ * @property {Object} [data] 
  */
 
 /**
