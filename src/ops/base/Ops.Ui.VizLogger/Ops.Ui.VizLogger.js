@@ -19,7 +19,7 @@ inString.onChange = () =>
     if (CABLES.UI)
 
         if (typeof inString.get() == "string")
-            arr.push("\"" + inString.get() + "\"");
+            arr.push("" + inString.get() + "");
         else
             arr.push("" + inString.get());
 };

@@ -114,7 +114,6 @@ export class Patch extends Events
     _animReq = null;
     _opIdCache = {};
     _triggerStack = [];
-    storeObjNames = false; // remove after may release
     _volumeListeners = [];
     namedTriggers = {};
     tempData = {};
