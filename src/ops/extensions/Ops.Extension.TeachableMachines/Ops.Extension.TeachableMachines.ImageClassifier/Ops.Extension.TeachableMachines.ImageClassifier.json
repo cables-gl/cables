@@ -59,6 +59,17 @@
     "libs": [
         "teachablemachine_tf_speech_image_pose.js"
     ],
+    "credits": [
+        {
+            "title": "teachablemachine",
+            "author": "Google",
+            "url": "https://github.com/googlecreativelab/teachablemachine-libraries",
+            "licence": "Apache-2.0",
+            "version": "0.8.4",
+            "username": "stephan",
+            "date": 1790248164061
+        }
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

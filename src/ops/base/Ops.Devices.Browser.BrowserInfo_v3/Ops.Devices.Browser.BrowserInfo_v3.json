@@ -203,5 +203,16 @@
             "src": "./platform.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "Platform.js",
+            "author": "Benjamin Tan",
+            "url": "https://github.com/bestiejs/platform.js/",
+            "licence": "MIT",
+            "version": "1.3.6",
+            "username": "stephan",
+            "date": 1790247362091
+        }
     ]
 }

@@ -139,5 +139,16 @@
             "src": "./webaudio-peaks.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "Webaudio Peaks",
+            "author": "Naomi",
+            "url": "https://github.com/naomiaro/webaudio-peaks",
+            "licence": "MIT",
+            "version": "Dec 2020",
+            "username": "stephan",
+            "date": 1790247686239
+        }
     ]
 }

@@ -86,5 +86,16 @@
             "src": "./perlin.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "Perlin Noise Library",
+            "author": "Stefan Gustavson / josephg",
+            "url": "https://github.com/josephg/noisejs",
+            "licence": "Public Domain",
+            "version": "2012-03-09",
+            "username": "stephan",
+            "date": 1790244256014
+        }
     ]
 }

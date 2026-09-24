@@ -15,10 +15,9 @@ filename.onChange = async function ()
     }
     catch(e)
     {
-        console.log(e);
         let str=e.toString();
-        str=str.replaceAll("<","&lt;");
-        str=str.replaceAll(">","&gt;");
+        str=str.replaceAll("<","<");
+        str=str.replaceAll(">",">");
         op.setUiError("exc", "opentype error "+str);
     }
 };

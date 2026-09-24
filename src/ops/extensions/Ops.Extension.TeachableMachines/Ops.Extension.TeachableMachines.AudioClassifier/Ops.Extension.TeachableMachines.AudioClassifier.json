@@ -86,5 +86,16 @@
             "src": "fd99dba1-81f5-4107-830e-279a83260a50",
             "type": "op"
         }
+    ],
+    "credits": [
+        {
+            "title": "teachablemachine",
+            "author": "Google",
+            "url": "https://github.com/googlecreativelab/teachablemachine-libraries",
+            "licence": "Apache-2.0",
+            "version": "0.8.4",
+            "username": "stephan",
+            "date": 1790248164061
+        }
     ]
 }

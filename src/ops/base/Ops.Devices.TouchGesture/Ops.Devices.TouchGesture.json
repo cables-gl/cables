@@ -70,5 +70,16 @@
             "src": "./hammer.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "hammer.js",
+            "author": "Jorik Tangelder (Eight Media)",
+            "url": "https://hammerjs.github.io/",
+            "licence": "MIT",
+            "version": "2.0.8",
+            "username": "stephan",
+            "date": 1790247500751
+        }
     ]
 }
