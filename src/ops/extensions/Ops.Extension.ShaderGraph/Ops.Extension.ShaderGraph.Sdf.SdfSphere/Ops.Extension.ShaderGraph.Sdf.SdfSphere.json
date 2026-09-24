@@ -1,0 +1,45 @@
+{
+    "id": "452aeb98-0351-4d52-841c-d3effdb3c40d",
+    "created": 1790250717745,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790250717767
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "radius",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "transform",
+                "objType": "sg_mat4"
+            },
+            {
+                "type": 2,
+                "name": "color",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 2,
+                "name": "active",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "sdf",
+                "objType": "sg_SdfShape"
+            }
+        ]
+    }
+}

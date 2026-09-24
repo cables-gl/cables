@@ -1,0 +1,27 @@
+{
+    "id": "016a1c8a-4f76-4960-a015-2bd8796263ad",
+    "created": 1790253426735,
+    "license": "MIT",
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "uv",
+                "objType": "sg_vec2"
+            },
+            {
+                "type": 2,
+                "name": "sdf",
+                "objType": "sg_SdfShape"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec4"
+            }
+        ]
+    }
+}
