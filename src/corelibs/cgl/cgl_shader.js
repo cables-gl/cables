@@ -1180,6 +1180,8 @@ class CglShader extends CgShader
         this._cgl.printError("gl.linkprogram");
         this._isValid = true;
         this._hasErrors = false;
+        this.diagnosticsFrag = [];
+        this.diagnosticsVert = [];
 
         if (this._cgl.patch?.config.glValidateShader !== false)
         {

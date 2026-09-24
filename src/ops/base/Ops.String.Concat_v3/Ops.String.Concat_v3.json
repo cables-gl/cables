@@ -60,7 +60,7 @@
             }
         ]
     },
-    "summary": "concatinate/join multiple string inputs",
+    "summary": "concatenate/join multiple string inputs",
     "license": "MIT",
     "docs": {
         "ports": []

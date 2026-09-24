@@ -55,7 +55,7 @@
             }
         ]
     },
-    "summary": "Store and retreive a string in browser storage",
+    "summary": "Store and retrieve a string in browser storage",
     "docs": {
         "ports": [
             {

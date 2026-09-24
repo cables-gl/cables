@@ -86,5 +86,16 @@
             "src": "./tracking.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "tracking.js",
+            "author": "Eduardo A. Lundgren Melo",
+            "url": "https://github.com/eduardolundgren/tracking.js/",
+            "licence": "BSD",
+            "version": "20. jan 2021",
+            "username": "stephan",
+            "date": 1790182592575
+        }
     ]
 }

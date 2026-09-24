@@ -27,7 +27,7 @@
             }
         ]
     },
-    "summary": "Renders a icosahedron (polyhedron with 20 faces)",
+    "summary": "Renders an icosahedron (polyhedron with 20 faces)",
     "docs": {
         "ports": [
             {

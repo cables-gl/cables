@@ -77,7 +77,7 @@
             }
         ]
     },
-    "summary": "play a image sprite animation",
+    "summary": "play an image sprite animation",
     "docs": {
         "ports": [
             {

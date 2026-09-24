@@ -123,7 +123,7 @@
     "docs": {
         "ports": []
     },
-    "summary": "Arrange HTML elments in grids, create grids by combining rows and columns",
+    "summary": "Arrange HTML elements in grids, create grids by combining rows and columns",
     "coreLibs": [
         "cgl"
     ],

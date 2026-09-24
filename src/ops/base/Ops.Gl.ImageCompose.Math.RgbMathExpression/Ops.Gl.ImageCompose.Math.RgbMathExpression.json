@@ -1,5 +1,5 @@
 {
-    "summary": "Execute a glsl code math expression in a image compose ",
+    "summary": "Execute a glsl code math expression in an image compose ",
     "layout": {
         "portsIn": [
             {

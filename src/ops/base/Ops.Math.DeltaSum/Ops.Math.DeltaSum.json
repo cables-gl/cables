@@ -56,7 +56,7 @@
             }
         ]
     },
-    "summary": "add delta values to an clamped absolute value",
+    "summary": "add delta values to a clamped absolute value",
     "docs": {
         "ports": []
     },

@@ -105,5 +105,16 @@
             "src": "./lottie_canvas.min.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "lottie for web",
+            "author": "Bodymovin",
+            "url": "https://github.com/airbnb/lottie-web",
+            "licence": "MIT",
+            "version": "5.10.2",
+            "username": "stephan",
+            "date": 1790182525764
+        }
     ]
 }

@@ -34,5 +34,16 @@
             "src": "./glsltokenizer.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "glsltokenizer.js",
+            "author": "Chris Dickinson",
+            "url": "https://www.npmjs.com/package/glsl-tokenizer",
+            "licence": "MIT",
+            "version": "2.1.5",
+            "username": "stephan",
+            "date": 1790181210378
+        }
     ]
 }

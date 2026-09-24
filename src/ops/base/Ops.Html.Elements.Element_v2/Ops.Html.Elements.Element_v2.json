@@ -172,7 +172,7 @@
             }
         ]
     },
-    "summary": "A more convinient version of div element op, that can be used for creating html without writing much css code",
+    "summary": "A more convenient version of div element op, that can be used for creating html without writing much css code",
     "docs": {
         "ports": []
     },
