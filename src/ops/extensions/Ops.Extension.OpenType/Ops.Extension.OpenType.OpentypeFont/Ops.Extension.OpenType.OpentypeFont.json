@@ -47,5 +47,16 @@
             "src": "./opentype.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "opentype",
+            "author": "Frederik De Bleser",
+            "url": "https://github.com/opentypejs/opentype.js",
+            "licence": "MIT",
+            "version": "1.3.4",
+            "username": "stephan",
+            "date": 1790247797748
+        }
     ]
 }

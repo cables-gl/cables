@@ -62,5 +62,16 @@
             "src": "dfaa03d8-dc03-4f36-bd0b-248a4eb2b722",
             "type": "op"
         }
+    ],
+    "credits": [
+        {
+            "title": "chroma.js",
+            "author": "Gregor Aisch",
+            "url": "https://github.com/gka/chroma.js",
+            "licence": "Apache-2.0",
+            "version": "2.4.2",
+            "username": "stephan",
+            "date": 1790246950306
+        }
     ]
 }

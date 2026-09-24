@@ -147,7 +147,7 @@
     ],
     "credits": [
         {
-            "title": "mediapipe face mesh",
+            "title": "mediapipe",
             "author": "Google",
             "url": "https://developers.google.com/edge/mediapipe/solutions/guide",
             "licence": "Apache",
