@@ -101,5 +101,16 @@
             "src": "./mp_hands.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "mediapipe hands",
+            "author": "Google",
+            "url": "https://developers.google.com/edge/mediapipe/solutions/guide",
+            "licence": "Apache-2.0",
+            "version": "",
+            "username": "stephan",
+            "date": 1790182776103
+        }
     ]
 }

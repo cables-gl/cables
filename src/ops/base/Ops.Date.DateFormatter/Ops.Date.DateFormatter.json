@@ -46,5 +46,16 @@
             "src": "./moment.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "moment.js",
+            "author": "OpenJS Foundation",
+            "url": "https://momentjs.com/",
+            "licence": "Public Domain",
+            "version": "",
+            "username": "stephan",
+            "date": 1790182925369
+        }
     ]
 }

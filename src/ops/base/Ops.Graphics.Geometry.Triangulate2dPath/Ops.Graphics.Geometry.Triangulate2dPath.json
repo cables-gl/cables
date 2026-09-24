@@ -73,5 +73,16 @@
             "src": "./tess2.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "tess2",
+            "author": "memononen",
+            "url": "https://github.com/memononen/tess2.js",
+            "licence": "SGI-B-2.0",
+            "version": "5 Apr 2016",
+            "username": "stephan",
+            "date": 1790181952483
+        }
     ]
 }

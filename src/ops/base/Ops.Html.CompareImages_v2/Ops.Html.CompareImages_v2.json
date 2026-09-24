@@ -72,5 +72,16 @@
             "src": "./resemble.js",
             "type": "commonjs"
         }
+    ],
+    "credits": [
+        {
+            "title": "Resemble.js",
+            "author": "Huddle",
+            "url": "https://github.com/Huddle/Resemble.js/",
+            "licence": "MIT",
+            "version": "v4.1.0",
+            "username": "stephan",
+            "date": 1790182120725
+        }
     ]
 }
