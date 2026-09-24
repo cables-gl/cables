@@ -4,7 +4,8 @@ const
     select3 = op.inDropDown("data3", [], "count cgl fps"),
     activeMem = op.inBool("Measure Memory", false),
     activeGPU = op.inBool("Measure GPU", true),
-    active = op.inBool("active", true);
+    active = op.inBool("active", true),
+    outData = op.outObject("Data");
 
 let ctx = null;
 let canvas = null;
@@ -41,6 +42,7 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     select2.setUiAttribs({ "values": keys });
     select3.setUiAttribs({ "values": keys });
 
+    outData.setRef(pp);
     if (activeMem.get()) op.patch.perfProfiler.count("Memory used", (Math.round((performance.memory.usedJSHeapSize / 1024 / 1024) * 100) / 100));
 
     updateCanvas();
@@ -156,11 +158,4 @@ function createCanvas()
     ctx = canvas.getContext("2d");
 
     updateCanvas();
-    canvas.addEventListener("pointerdown", () =>
-    {
-        const keys = Object.keys(countersPerFrame);
-        selectedCounterIndex = keys[countIndex];
-        countIndex++;
-        countIndex %= keys.length;
-    });
 }
