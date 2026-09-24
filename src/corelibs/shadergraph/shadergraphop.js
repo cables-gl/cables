@@ -50,9 +50,19 @@ export class ShaderGraphOp
         {
             this.updateGraph.bind(this);
 
-            this.op.tempData.shaderNode.results[0].port.setRef({});
+            const result = this.op.tempData.shaderNode.results[0];
+            result.port.setRef(this.getResultValue(result));
         });
 
+    }
+
+    /**
+     * @param {import("./shadergraphprogram.js").ShaderNodeParam} result
+     */
+    getResultValue(result)
+    {
+        if (!result || !result.data) return {};
+        return structuredClone(result.data);
     }
 
     addPortWatcherAll()
@@ -172,7 +182,8 @@ export class ShaderGraphOp
         for (let i = 0; i < this.op.portsOut.length; i++)
         {
             if (this.op.portsOut[i].type != Port.TYPE_OBJECT) continue;
-            this.op.portsOut[i].setRef({});
+            const result = shaderNode.results.find((r) => { return r.port == this.op.portsOut[i]; });
+            this.op.portsOut[i].setRef(this.getResultValue(result));
         }
     }
 
