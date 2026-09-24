@@ -10,17 +10,18 @@
     "authorName": "pandur",
     "created": 1583504975920,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "HTML String"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             }
         ]

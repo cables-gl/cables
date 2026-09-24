@@ -24,6 +24,7 @@ const
     inHideNodes = op.inArray("Hide Nodes"),
     inUseMatProps = op.inBool("Use Material Properties", true),
     inUseMatTexProps = op.inBool("Use Material Textures", true),
+    inGpuInstancing = op.inBool("Use GPU Instancing", true),
 
     freeMem = op.inSwitch("Free Memory", ["None", "All"], "None"),
     inActive = op.inBool("Active", true),
@@ -71,6 +72,7 @@ const scale = vec3.create();
 inFile.onChange =
     inVertFormat.onChange =
     inCalcNormals.onChange =
+    inGpuInstancing.onChange =
     inNormFormat.onChange = reloadSoon;
 
 inShow.onTriggered = printInfo;

@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 /** @namespace WEBAUDIO */
 
-import { Patch, Op, Port } from "cables";
-
 /**
  * Part of the Web Audio API, the AudioBuffer interface represents a short audio asset residing in memory.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer}

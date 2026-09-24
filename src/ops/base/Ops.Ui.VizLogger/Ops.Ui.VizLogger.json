@@ -12,18 +12,24 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1720786632421
+        },
+        {
+            "message": "Colors and time display",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790237457082
         }
     ],
     "layout": {
         "portsIn": [
             {
+                "type": 5,
+                "name": "String"
+            },
+            {
                 "type": 0,
                 "name": "Number",
                 "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "String"
             },
             {
                 "type": 2,

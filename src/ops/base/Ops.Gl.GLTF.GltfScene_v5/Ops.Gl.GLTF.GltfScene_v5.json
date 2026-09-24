@@ -120,6 +120,11 @@
             },
             {
                 "type": 0,
+                "name": "Use GPU Instancing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Free Memory index",
                 "values": [
                     "None",
@@ -399,6 +404,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1789654044820
+        },
+        {
+            "message": "Support for GPU instancing extension, activate it in blender exporter",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790242681217
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

@@ -22,6 +22,7 @@ const gltfNode = class
     _tempAnimScale = null;
     addMulMat = null;
     skinRenderer = null;
+    instancer = null;
 
     constructor(node, gltf)
     {
@@ -113,8 +114,7 @@ const gltfNode = class
                 const attrNames = Object.keys(attr);
                 const num = attrNames.length ? acc[attr[attrNames[0]]].count : 0;
 
-                // this.numInstances = num;
-                this.mesh.instanceMatrices = new Float32Array(num * 16);
+                const instanceMatrices = new Float32Array(num * 16);
 
                 const t = vec3.create();
                 const q = quat.create();
@@ -137,8 +137,10 @@ const gltfNode = class
                     else vec3.set(sc, 1, 1, 1);
 
                     mat4.fromRotationTranslationScale(m, q, t, sc);
-                    this.mesh.instanceMatrices.set(m, i * 16);
+                    instanceMatrices.set(m, i * 16);
                 }
+
+                if (num > 0 && inGpuInstancing.get()) this.instancer = new GltfInstancer(this, instanceMatrices);
 
             }
         }
@@ -170,13 +172,25 @@ const gltfNode = class
 
         if (this.mesh)
         {
-            const bb = this.mesh.bounds.copy();
-            bb.mulMat4(localMat);
-            bounds.applyBoundingBox(bb);
+            const numInst = this.instancer ? this.instancer.num : 1;
+            const instMat = mat4.create();
 
-            if (bounds.changed)
+            for (let i = 0; i < numInst; i++)
             {
-                boundingPoints.push(bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+                const bb = this.mesh.bounds.copy();
+                if (this.instancer)
+                {
+                    mat4.mul(instMat, localMat, this.instancer.matrices.subarray(i * 16, i * 16 + 16));
+                    bb.mulMat4(instMat);
+                }
+                else bb.mulMat4(localMat);
+
+                bounds.applyBoundingBox(bb);
+
+                if (bounds.changed)
+                {
+                    boundingPoints.push(bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0, bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+                }
             }
         }
 
@@ -366,12 +380,12 @@ const gltfNode = class
             {
                 this.skinRenderer.time = _time;
                 if (!dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time, this.weights);
+                    this.mesh.render(cgl, ignoreMaterial, this.skinRenderer, _time, this.weights, this.instancer);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                    this.mesh.render(cgl, ignoreMaterial, null, _time, this.weights);
+                    this.mesh.render(cgl, ignoreMaterial, null, _time, this.weights, this.instancer);
             }
         }
 
