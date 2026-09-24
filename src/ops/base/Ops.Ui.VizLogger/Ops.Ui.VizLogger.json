@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1720786632421
+        },
+        {
+            "message": "Colors and time display",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790237457082
         }
     ],
     "layout": {
