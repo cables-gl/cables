@@ -390,7 +390,7 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
-    render(cgl, ignoreMaterial, skinRenderer)
+    render(cgl, ignoreMaterial, skinRenderer, _time, instancer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -445,11 +445,14 @@ let gltfMesh = class
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderStart(cgl, 0);
+            if (instancer) instancer.renderStart(cgl, this.mesh);
+            else GltfInstancer.reset(this.mesh);
 
             if (inUseMatProps.get() && !gltf.shaders[this.material]) gltf.materials[this.material]?.bind(cgl, cgl.getShader());
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
             if (inUseMatProps.get() && !gltf.shaders[this.material]) gltf.materials[this.material]?.unbind(cgl, cgl.getShader());
 
+            if (instancer) instancer.renderFinish(cgl);
             if (this.morphTargetsRenderMod) this.morphTargetsRenderMod.renderFinish(cgl);
 
             if (useMat) cgl.popShader();
