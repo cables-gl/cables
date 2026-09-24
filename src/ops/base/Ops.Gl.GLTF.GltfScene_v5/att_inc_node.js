@@ -22,8 +22,6 @@ const gltfNode = class
     _tempAnimScale = null;
     addMulMat = null;
     skinRenderer = null;
-    numInstances = 0;
-    instanceMatrices = null;
 
     constructor(node, gltf)
     {
@@ -115,8 +113,8 @@ const gltfNode = class
                 const attrNames = Object.keys(attr);
                 const num = attrNames.length ? acc[attr[attrNames[0]]].count : 0;
 
-                this.numInstances = num;
-                this.instanceMatrices = new Float32Array(num * 16);
+                // this.numInstances = num;
+                this.mesh.instanceMatrices = new Float32Array(num * 16);
 
                 const t = vec3.create();
                 const q = quat.create();
@@ -139,7 +137,7 @@ const gltfNode = class
                     else vec3.set(sc, 1, 1, 1);
 
                     mat4.fromRotationTranslationScale(m, q, t, sc);
-                    this.instanceMatrices.set(m, i * 16);
+                    this.mesh.instanceMatrices.set(m, i * 16);
                 }
 
             }
