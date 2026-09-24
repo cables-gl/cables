@@ -12,10 +12,13 @@ vec3 sdfNormal_{{ID}}({{TYPE}} s, vec3 p)
         sdfMap_{{ID}}(s, p + e.yyx).d - sdfMap_{{ID}}(s, p - e.yyx).d));
 }
 
-vec4 sdfRaymarch_{{ID}}(vec2 uv, {{TYPE}} s)
+vec4 sdfRaymarch_{{ID}}(vec2 uv, {{TYPE}} s, mat4 view, mat4 projection)
 {
-    vec3 ro = vec3(0., 0., 4.);
-    vec3 rd = normalize(vec3(uv * 2. - 1., -1.5));
+    mat4 camera = inverse({{VIEW}});
+    vec4 target = inverse(projection) * vec4(uv * 2. - 1., -1., 1.);
+
+    vec3 ro = (camera * vec4(0., 0., 0., 1.)).xyz;
+    vec3 rd = normalize((camera * vec4(target.xyz / target.w, 0.)).xyz);
     float t = 0.;
     SdfHit h = SdfHit(SDF_LARGE_NUMBER, vec4(0.));
 

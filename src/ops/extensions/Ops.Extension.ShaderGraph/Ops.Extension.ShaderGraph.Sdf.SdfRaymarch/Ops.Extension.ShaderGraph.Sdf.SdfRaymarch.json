@@ -14,6 +14,16 @@
                 "type": 2,
                 "name": "sdf",
                 "objType": "sg_SdfShape"
+            },
+            {
+                "type": 2,
+                "name": "view",
+                "objType": "sg_mat4"
+            },
+            {
+                "type": 2,
+                "name": "projection",
+                "objType": "sg_mat4"
             }
         ],
         "portsOut": [
