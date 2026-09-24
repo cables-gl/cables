@@ -23,13 +23,13 @@
     "layout": {
         "portsIn": [
             {
+                "type": 5,
+                "name": "String"
+            },
+            {
                 "type": 0,
                 "name": "Number",
                 "subType": "number"
-            },
-            {
-                "type": 5,
-                "name": "String"
             },
             {
                 "type": 2,
