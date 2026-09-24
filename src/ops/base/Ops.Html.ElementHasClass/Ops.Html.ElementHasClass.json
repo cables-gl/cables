@@ -35,7 +35,7 @@
             }
         ]
     },
-    "summary": "Does the element currenty have a specific class set",
+    "summary": "Does the element currently have a specific class set",
     "docs": {
         "ports": []
     },

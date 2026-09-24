@@ -84,7 +84,7 @@
             }
         ]
     },
-    "summary": "Generate an array of XYZ coordinates of an rectangle",
+    "summary": "Generate an array of XYZ coordinates of a rectangle",
     "license": "MIT",
     "docs": {
         "ports": []

@@ -57,7 +57,7 @@
             }
         ]
     },
-    "summary": "Store and retreive a number in browser storage",
+    "summary": "Store and retrieve a number in browser storage",
     "docs": {
         "ports": [
             {

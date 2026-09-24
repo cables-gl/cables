@@ -36,7 +36,7 @@
     "coreLibs": [
         "standalone_electron"
     ],
-    "summary": "Outputs your local IP Adress",
+    "summary": "Outputs your local IP Address",
     "docs": {
         "ports": []
     },
