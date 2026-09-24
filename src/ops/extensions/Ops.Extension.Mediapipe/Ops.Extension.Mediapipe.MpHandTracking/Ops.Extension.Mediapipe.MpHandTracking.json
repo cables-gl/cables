@@ -104,7 +104,7 @@
     ],
     "credits": [
         {
-            "title": "mediapipe hands",
+            "title": "mediapipe",
             "author": "Google",
             "url": "https://developers.google.com/edge/mediapipe/solutions/guide",
             "licence": "Apache-2.0",

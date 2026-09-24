@@ -109,5 +109,16 @@
             "src": "9f61a958-90b1-46df-a893-de48a5844583",
             "type": "op"
         }
+    ],
+    "credits": [
+        {
+            "title": "Webaudio Peaks",
+            "author": "Naomi",
+            "url": "https://github.com/naomiaro/webaudio-peaks",
+            "licence": "MIT",
+            "version": "Dec 2020",
+            "username": "stephan",
+            "date": 1790247686239
+        }
     ]
 }

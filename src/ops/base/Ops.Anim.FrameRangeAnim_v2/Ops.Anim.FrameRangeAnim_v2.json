@@ -68,6 +68,18 @@
             "message": "cloned op from Ops.Anim.FrameRangeAnim",
             "author": "pandur",
             "date": 1615829783109
+        },
+        {
+            "message": "Anim.FrameRangeAnim_v2 renamed to Ops.Anim.FrameRangeAnims_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1790234292284
+        },
+        {
+            "message": "Anim.FrameRangeAnims_v2 renamed to Ops.Anim.FrameRangeAnim_v2",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1790234464221
         }
     ],
     "issues": "",

@@ -15,7 +15,7 @@ let FPS = 30;
 
 let timeOffset = 0;
 inStr.onChange =
-inLoop.onChange = parse;
+    inLoop.onChange = parse;
 
 inRewind.onTriggered = function ()
 {
