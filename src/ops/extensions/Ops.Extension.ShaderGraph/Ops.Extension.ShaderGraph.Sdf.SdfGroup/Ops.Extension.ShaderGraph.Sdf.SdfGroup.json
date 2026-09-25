@@ -1,0 +1,63 @@
+{
+    "id": "74392567-ff06-4a2a-a441-a078a054a5ab",
+    "created": 1790253426368,
+    "license": "MIT",
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Mode index",
+                "values": [
+                    "Union",
+                    "Subtract",
+                    "Intersect"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Shapes_0",
+                "longPort": 4,
+                "group": "Shapes",
+                "objType": "sg_SdfShape"
+            },
+            {
+                "type": 2,
+                "name": "Shapes_1",
+                "group": "Shapes",
+                "objType": "sg_SdfShape"
+            },
+            {
+                "type": 2,
+                "name": "Shapes_2",
+                "group": "Shapes",
+                "objType": "sg_SdfShape"
+            },
+            {
+                "type": 2,
+                "name": "Shapes_3",
+                "uititle": "add port",
+                "group": "Shapes",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "blend",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "transform",
+                "objType": "sg_mat4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "sdf",
+                "objType": "sg_SdfShape"
+            }
+        ]
+    }
+}

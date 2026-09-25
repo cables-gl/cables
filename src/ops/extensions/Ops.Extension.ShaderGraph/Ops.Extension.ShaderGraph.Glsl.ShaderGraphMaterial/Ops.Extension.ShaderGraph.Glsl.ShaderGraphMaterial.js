@@ -34,6 +34,9 @@ inExec.onTriggered = () =>
 
     if (reInit)
     {
+        // reset first: updateModules() below can recompile a module, which requests another reInit that must not get lost
+        reInit = false;
+
         let srcFrag = (inModuleFragment.get()?.src) || CGL.Shader.getDefaultFragmentShader();
         let srcVert = (inModuleVertex.get()?.src) || CGL.Shader.getDefaultVertexShader();
 
@@ -47,8 +50,6 @@ inExec.onTriggered = () =>
 
         outCodeFrag.set(shader.finalShaderFrag);
         outCodeVertex.set(shader.finalShaderVert);
-
-        reInit = false;
     }
 
     if (shader.hasErrors())

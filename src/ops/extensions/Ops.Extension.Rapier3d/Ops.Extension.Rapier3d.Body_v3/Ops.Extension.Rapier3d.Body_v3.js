@@ -149,6 +149,11 @@ exec.onTriggered = () =>
         setupReason = "no bodies";
         needsSetup = true;
     }
+    if (setPosition && getPositions().length / 3 != rigidBodies.length)
+    {
+        setupReason = "number of positions changed";
+        needsSetup = true;
+    }
     if (needsSetup) setup(world);
 
     const posArray = [];
@@ -164,7 +169,7 @@ exec.onTriggered = () =>
     if (setPosition)
     {
         const posArr = getPositions(); // inPositions.get();
-        const rotArr = getRotations(); // inPositions.get();
+        const rotArr = getRotations(posArr.length / 3);
 
         setPosition = false;
         const scale = getScaling();
@@ -204,10 +209,10 @@ exec.onTriggered = () =>
     next.trigger();
 };
 
-function getRotations()
+function getRotations(numBodies)
 {
     const roti = quat.create();
-    let rot = inRots.get() || [0, 0, 0, 0];
+    const rot = new Array(numBodies * 4);
 
     if (inTrans.get()) mat4.getRotation(roti, op.patch.cgl.mMatrix);
 
@@ -298,7 +303,7 @@ function setup(world)
     setupReason = "";
 
     const pos = getPositions();
-    const rot = getRotations();
+    const rot = getRotations(pos.length / 3);
     const scal = inScales.get();
 
     glScale = getScaling();
