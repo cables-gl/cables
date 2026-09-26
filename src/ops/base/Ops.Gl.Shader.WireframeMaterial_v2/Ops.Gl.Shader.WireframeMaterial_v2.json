@@ -131,6 +131,13 @@
             "author": "pandur",
             "date": 1790406001232,
             "url": "https://github.com/cables-gl/cables/issues/8543"
+        },
+        {
+            "message": "Fix wireframe material not working with meshinstancer",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790406853241,
+            "url": "https://github.com/cables-gl/cables/issues/8472"
         }
     ],
     "issues": "",
