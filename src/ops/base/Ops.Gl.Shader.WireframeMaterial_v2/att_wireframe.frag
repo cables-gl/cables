@@ -22,20 +22,18 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
 
+    float edge = clamp((1.0 - edgeFactor()) * aa, 0.0, 1.0);
+
     #ifdef WIREFRAME_FILL
-
-        float v=(1.0-edgeFactor())*(aa*width);
-        col = mix(colorFill,colorWire,v);
-
+        col = mix(colorFill, colorWire, edge);
     #endif
 
     #ifndef WIREFRAME_FILL
-
-        float f=(1.0-edgeFactor())*(aa*width);
         col = colorWire;
-        col.a=f;
-        if(f==0.0)discard;
+        col.a *= edge;
     #endif
+
+    if (col.a <= 0.0) discard;
 
     {{MODULE_COLOR}}
 

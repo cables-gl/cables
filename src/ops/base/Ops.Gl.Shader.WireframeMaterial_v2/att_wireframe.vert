@@ -10,6 +10,7 @@ OUT vec2 texCoord;
 
 IN vec3 attrBarycentric;
 IN vec3 attrVertNormal;
+IN float attrVertIndex;
 OUT vec3 norm;
 
 void main()
@@ -22,5 +23,9 @@ void main()
 
     {{MODULE_VERTEX_POSITION}}
 
-    gl_Position = projMatrix * viewMatrix * mMatrix * pos;
+    mat4 modelViewMatrix=viewMatrix*mMatrix;
+
+    {{MODULE_VERTEX_MODELVIEW}}
+
+    gl_Position = projMatrix * modelViewMatrix * pos;
 }

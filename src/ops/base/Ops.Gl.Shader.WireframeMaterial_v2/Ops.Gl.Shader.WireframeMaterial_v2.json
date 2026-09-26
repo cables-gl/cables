@@ -15,6 +15,11 @@
             },
             {
                 "type": 0,
+                "name": "Write to depth buffer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "width",
                 "subType": "number"
             },
@@ -110,18 +115,22 @@
         {
             "message": "code cleanup - ports ",
             "author": "andro",
-            "date": 1559050588755
+            "date": 1559050588755,
+            "type": "improvement"
         },
         {
-            "message": "cloned op from Ops.Gl.Shader.WireframeMaterial",
+            "message": "Fix crash when using with VertexNumberLimit",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1684839527813
+            "date": 1790405868699,
+            "url": "https://github.com/cables-gl/cables/issues/8467"
         },
         {
-            "message": "Ops.Patch.PP7cg8x.WireframeMaterial2 renamed to Ops.Gl.Shader.WireframeMaterial_v2",
-            "type": "rename",
+            "message": "Changing alpha/opacity is no longer ignored when fill mode is off",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1684910434601
+            "date": 1790406001232,
+            "url": "https://github.com/cables-gl/cables/issues/8543"
         }
     ],
     "issues": "",
@@ -130,5 +139,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

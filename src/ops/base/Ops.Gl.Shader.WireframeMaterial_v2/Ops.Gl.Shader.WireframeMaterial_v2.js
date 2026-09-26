@@ -2,6 +2,7 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     enableDepth = op.inBool("enable depth testing", true),
+    writeDepth = op.inBool("Write to depth buffer", true),
     w = op.inFloat("width", 1),
     aa = op.inValueSlider("AntiAlias", 0.95),
     r = op.inValueSlider("diffuse r", 1),
@@ -37,11 +38,13 @@ function setDefines()
 let doRender = function ()
 {
     cgl.pushDepthTest(enableDepth.get());
+    cgl.pushDepthWrite(writeDepth.get());
 
     cgl.pushShader(shader);
     trigger.trigger();
     cgl.popShader();
 
+    cgl.popDepthWrite();
     cgl.popDepthTest();
 };
 
@@ -51,7 +54,7 @@ const uniaa = new CGL.Uniform(shader, "f", "aa", aa);
 const uni1 = new CGL.Uniform(shader, "4f", "colorFill", fr, fg, fb, fa);
 const uni2 = new CGL.Uniform(shader, "4f", "colorWire", r, g, b, a);
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_VERTEX_MODELVIEW", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag || "");
 shader.wireframe = true;
 setDefines();
