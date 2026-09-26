@@ -555,7 +555,7 @@ class Mesh extends CgMesh
         this.#cgl.perfProfiler.count(this.#cgl.name + "meshSetGeom");
         const measure = this.#cgl.profileData.start("meshSetGeom");
 
-        this._disposeAttributes();
+        this._disposeAttributes(true);
 
         this.updateVertices(this.#geom);
         this.setVertexIndices(this.#geom.verticesIndices);
@@ -1054,15 +1054,25 @@ class Mesh extends CgMesh
         }
     }
 
-    _disposeAttributes()
+    /**
+     * @param {boolean} [keepInstanced] keep instanced attributes
+     */
+    _disposeAttributes(keepInstanced = false)
     {
         if (!this.#attributes) return;
 
         // window.requestIdleCallback(() =>
         // {
 
+        const kept = [];
         for (let i = 0; i < this.#attributes.length; i++)
         {
+            if (keepInstanced && this.#attributes[i].instanced)
+            {
+                kept.push(this.#attributes[i]);
+                continue;
+            }
+
             if (this.#attributes[i].buffer)
             {
                 this.#cgl.gl.deleteBuffer(this.#attributes[i].buffer);
@@ -1070,6 +1080,8 @@ class Mesh extends CgMesh
             }
         }
         this.#attributes.length = 0;
+        this.#attributes.push(...kept);
+        this.#attribLocs = {};
 
         // });
     }

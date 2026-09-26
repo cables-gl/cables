@@ -54,7 +54,7 @@ const uniaa = new CGL.Uniform(shader, "f", "aa", aa);
 const uni1 = new CGL.Uniform(shader, "4f", "colorFill", fr, fg, fb, fa);
 const uni2 = new CGL.Uniform(shader, "4f", "colorWire", r, g, b, a);
 
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_VERTEX_MODELVIEW", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.wireframe_vert || "", attachments.wireframe_frag || "");
 shader.wireframe = true;
 setDefines();
