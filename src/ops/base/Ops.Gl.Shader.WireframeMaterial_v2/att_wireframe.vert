@@ -10,6 +10,7 @@ OUT vec2 texCoord;
 
 IN vec3 attrBarycentric;
 IN vec3 attrVertNormal;
+IN float attrVertIndex;
 OUT vec3 norm;
 
 void main()

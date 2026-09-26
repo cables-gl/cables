@@ -15,6 +15,11 @@
             },
             {
                 "type": 0,
+                "name": "Write to depth buffer",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "width",
                 "subType": "number"
             },

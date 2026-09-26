@@ -451,22 +451,22 @@ class Mesh extends CgMesh
      */
     _setVertexNumbers(arr = null)
     {
-        if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts || arr)
-        {
-            if (arr) this._verticesNumbers = arr;
-            else
-            {
-                this._verticesNumbers = new Float32Array(this._numVerts);
-                for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
-            }
+        const hasAttr = this.getAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER);
+        if (hasAttr && !arr && this._verticesNumbers && this._verticesNumbers.length == this._numVerts) return;
 
-            this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, { "cb":
-                (_attr, _geom, shader) =>
-                {
-                    if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
-                    shader.uniformNumVertices.setValue(this._numVerts);
-                } });
+        if (arr) this._verticesNumbers = arr;
+        else if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts)
+        {
+            this._verticesNumbers = new Float32Array(this._numVerts);
+            for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
         }
+
+        this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, { "cb":
+            (_attr, _geom, shader) =>
+            {
+                if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
+                shader.uniformNumVertices.setValue(this._numVerts);
+            } });
     }
 
     /**

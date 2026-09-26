@@ -2,6 +2,7 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     enableDepth = op.inBool("enable depth testing", true),
+    writeDepth = op.inBool("Write to depth buffer", true),
     w = op.inFloat("width", 1),
     aa = op.inValueSlider("AntiAlias", 0.95),
     r = op.inValueSlider("diffuse r", 1),
@@ -37,11 +38,13 @@ function setDefines()
 let doRender = function ()
 {
     cgl.pushDepthTest(enableDepth.get());
+    cgl.pushDepthWrite(writeDepth.get());
 
     cgl.pushShader(shader);
     trigger.trigger();
     cgl.popShader();
 
+    cgl.popDepthWrite();
     cgl.popDepthTest();
 };
 
