@@ -668,7 +668,7 @@ export class Patch extends Events
 
     // @todo move to ui ?
     /**
-     * @param {string} opid
+     * @param {import("./core_op.js").OpInstanceId} opid
      * @param {boolean} [tryRelink]
      * @param {boolean} [reloadingOp]
      */
@@ -855,7 +855,7 @@ export class Patch extends Events
     /* minimalcore:end */
 
     /**
-     * @param {String} opid
+     * @param {import("./core_op.js").OpInstanceId} opid
      * @returns {T}
      */
     getOpById(opid)
@@ -875,7 +875,7 @@ export class Patch extends Events
     }
 
     /**
-     * @param {String} opid
+     * @param {import("./core_op.js").OpId} opid
      */
     getOpsByOpId(opid)
     {
@@ -885,6 +885,10 @@ export class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {string} patchId
+     * @param {string} objName
+     */
     getSubPatchOpsByName(patchId, objName)
     {
         const arr = [];
@@ -895,6 +899,10 @@ export class Patch extends Events
         return arr;
     }
 
+    /**
+     * @param {string} patchId
+     * @param {string} objName
+     */
     getSubPatchOp(patchId, objName)
     {
         return this.getFirstSubPatchOpByName(patchId, objName);
@@ -914,6 +922,12 @@ export class Patch extends Events
         return null;
     }
 
+    /**
+     * @param {import("./core_op.js").OpInstanceId} opinid
+     * @param {import("./core_op.js").OpInstanceId} opoutid
+     * @param {string} inName
+     * @param {string} outName
+     */
     _addLink(opinid, opoutid, inName, outName)
     {
         return this.link(this.getOpById(opinid), inName, this.getOpById(opoutid), outName, false, true);
@@ -931,8 +945,8 @@ export class Patch extends Events
      * @typedef DeserializeOptions
      * @property {boolean} [genIds]
      * @property {boolean} [createRef]
-     * @property {Function} onLoadedValueSet
-     * @property {Function} opsCreated
+     * @property {Function} [onLoadedValueSet]
+     * @property {Function} [opsCreated]
      */
 
     /**

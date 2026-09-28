@@ -8,6 +8,16 @@ import { MultiPort2 } from "./core_port_multi2.js";
 import { showUiErrors } from "./uierrors.js";
 
 /**
+ * @typedef OpInstanceId
+ * @type string
+ */
+
+/**
+ * @typedef OpId
+ * @type string
+ */
+
+/**
  * @typedef Translation
  * @property {number} [x]
  * @property {number} [y]
@@ -151,7 +161,11 @@ export class Op extends Events
 
     #shortOpName = "";
 
-    opId = ""; // unique op id
+    /** @type {OpId} */
+    opId = "";
+
+    /** @type {OpInstanceId} */
+    id = "";
 
     /** @type {Array<Port>} */
     portsOut = [];

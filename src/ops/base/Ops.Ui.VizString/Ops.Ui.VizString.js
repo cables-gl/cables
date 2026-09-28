@@ -20,6 +20,8 @@ let lines = [];
 
 inStr.onLinkChanged = () =>
 {
+    op.setUiAttribs({ "comment":  "" });
+
     if (!inStr.isLinked())
     {
         lines = [];

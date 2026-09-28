@@ -24,7 +24,7 @@
             {
                 "type": 0,
                 "name": "FPS Limit",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,

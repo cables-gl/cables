@@ -3,7 +3,7 @@ const node = {
     "name": "sdfRaymarch",
     "params": [],
     "results": [{ "type": "vec4", "name": "result" }],
-    "src": attachments.struct_glsl
+    "srcHead": attachments.struct_glsl
 };
 
 new CABLES.ShaderGraphOp(op, node);

@@ -13,7 +13,6 @@ export const internalNow = function ()
  * current time in milliseconds
  * @memberof CABLES
  * @function now
- * @static
  *
  */
 export const now = function ()
@@ -37,12 +36,14 @@ class Timer extends Events
     #timeStart = 0;
     #ts;
 
+
     constructor()
     {
         super();
 
         this.#timeStart = 0;
         this.overwriteTime = -1;
+        this.#lastTime
     }
 
     #internalNow()

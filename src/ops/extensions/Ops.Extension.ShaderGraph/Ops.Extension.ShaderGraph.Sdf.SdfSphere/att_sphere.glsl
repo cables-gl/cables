@@ -1,7 +1,9 @@
-#define sdfSphere(r, m, color, enabled) SdfShape(vec4((r), 0., 0., 0.), vec4(0.), sdfInverse(m), (color), (enabled))
-#define sdfSphereMap(s, p) sdfHit((s), sdSphere((p), (s).a.x))
-
-float sdSphere(vec3 p, float r)
+SdfShape sdfSphere(float r, mat4 m, vec4 color, float enabled)
 {
-    return length(p) - r;
+    return SdfShape(vec4(r, 0., 0., 0.), vec4(0.), sdfInverse(m), color, enabled);
+}
+
+SdfHit sdfSphereMap(SdfShape s, vec3 p)
+{
+    return sdfHit(s, length(p) - s.a.x);
 }

@@ -28,7 +28,7 @@ inName.onChange =
         updateUi();
 
         uni = null;
-        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        updateShaderNode();
     };
 
 function updateUi()
@@ -47,19 +47,17 @@ function updateUi()
     /* minimalcore:end */
 }
 
+function updateShaderNode()
+{
+    const name = inName.get() || defaultName;
+    op.tempData.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
+    op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = name;
+    op.tempData.shaderNode.setResultType(inType.get());
+}
+
 function update(shader, bindings)
 {
-
     const name = inName.get() || defaultName;
-    if (!uni)
-    {
-
-        op.tempData.shaderNode.srcUni = "uniform " + inType.get() + " " + name + ";";
-
-        op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
-
-        op.tempData.shaderNode.setResultType(inType.get());
-    }
     // const mgpu = op.patch.frameStore.mgpu;
     if (!uni && shader)
     {
@@ -85,4 +83,4 @@ new CABLES.ShaderGraphOp(this,
         "results": [{ "type": "vec4", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });
-update();
+updateShaderNode();
