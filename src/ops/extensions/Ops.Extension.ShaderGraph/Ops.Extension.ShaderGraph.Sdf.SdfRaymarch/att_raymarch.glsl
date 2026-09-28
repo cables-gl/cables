@@ -22,7 +22,7 @@ vec4 sdfRaymarch_{{ID}}(vec2 uv, {{TYPE}} s, mat4 view, mat4 projection)
     float t = 0.;
     SdfHit h = SdfHit(SDF_LARGE_NUMBER, vec4(0.));
 
-    for (int i = 0; i < 128; i++)
+    for (int i = 0; i < SDF_MAX_STEPS; i++)
     {
         h = sdfMap_{{ID}}(s, ro + rd * t);
         if (h.d < 0.001 || t > SDF_MAX_DIST) break;

@@ -1,5 +1,6 @@
 #define SDF_MAX_DIST 50.
 #define SDF_LARGE_NUMBER 1e10
+#define SDF_MAX_STEPS 128
 
 struct SdfShape
 {
