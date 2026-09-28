@@ -1,0 +1,47 @@
+{
+    "id": "2c5e73b2-f67b-485e-bb5e-9d3aaa29dfad",
+    "created": 1790597545909,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790597545910
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "isReleased": true,
+    "summary": "Overwrite a texture coming from GLTF file",
+    "docs": {
+        "ports": []
+    }
+}
