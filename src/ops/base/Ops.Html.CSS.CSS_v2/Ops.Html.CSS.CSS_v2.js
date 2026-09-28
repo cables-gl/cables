@@ -16,7 +16,7 @@ update();
 
 inActive.onChange = () =>
 {
-    if (!inActive.get())styleEle.remove();
+    if (!inActive.get()) styleEle.remove();
     else addElement();
 };
 
@@ -48,7 +48,7 @@ function update()
         styleEle = op.patch.getDocument().createElement("style");
         styleEle.type = "text/css";
         styleEle.id = eleId;
-        styleEle.textContent = attachments.css_spinner;
+        styleEle.textContent = "";
         styleEle.classList.add("cablesEle");
         addElement();
     }
@@ -63,5 +63,5 @@ function addElement()
 op.onDelete = function ()
 {
     styleEle = op.patch.getDocument().getElementById(eleId);
-    if (styleEle)styleEle.remove();
+    if (styleEle) styleEle.remove();
 };

@@ -2,9 +2,9 @@ const
     exec = op.inTrigger("Exec"),
     inPoints = op.inArray("Points"),
     inParticles = op.inValue("Num Particles", 500),
-    inLength = op.inValue("Length", 20),
-    inSpread = op.inValue("Spread", 0.2),
-    inOffset = op.inValue("Offset"),
+    inLength = op.inFloat("Length", 20),
+    inSpread = op.inFloat("Spread", 0.2),
+    inOffset = op.inFloat("Offset"),
     inMaxDistance = op.inValue("Max Distance", 0),
     inRandomSpeed = op.inBool("RandomSpeed"),
     next = op.outTrigger("Next"),
@@ -115,7 +115,7 @@ function rebuild()
 
     // offset random
 
-    var rndOffset = new Float32Array(num / 3);
+    let rndOffset = new Float32Array(num / 3);
     for (i = 0; i < num / 3; i++)
         rndOffset[i] = (Math.random()) * inLength.get();
 
@@ -123,11 +123,11 @@ function rebuild()
 
     // speed random
 
-    var rndOffset = new Float32Array(num / 3);
+    const rndOffset2 = new Float32Array(num / 3);
     for (i = 0; i < num / 3; i++)
-        rndOffset[i] = (Math.random()) * inLength.get();
+        rndOffset2[i] = (Math.random()) * inLength.get();
 
-    mesh.setAttribute("rndOffset", rndOffset, 1);
+    mesh.setAttribute("rndOffset2", rndOffset2, 1);
     updateDefines();
 }
 

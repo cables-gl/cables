@@ -15,8 +15,8 @@ const modeFunctions = {
 
 const
     inMode = op.inSwitch("Mode", Object.keys(modeFunctions), "Union"),
-    inShapes = op.inMultiPort2("Shapes", CABLES.Port.TYPE_OBJECT),
     inBlend = op.inObject("blend", null, "sg"),
+    inShapes = op.inMultiPort2("Shapes", CABLES.Port.TYPE_OBJECT),
     inTransform = op.inObject("transform", null, "sg");
 
 const id = node.id;
@@ -71,15 +71,15 @@ function update()
     args.push("float blend", "mat4 m");
     node.params = params;
 
-    node.srcUni = decl
-        + "float " + blend + ";\n"
-        + "SdfShape sdfGroup_" + id + "(" + args.join(", ") + ")\n{\n"
-        + store
-        + "    " + blend + " = blend;\n"
-        + "    return SdfShape(vec4(0.), vec4(0.), sdfInverse(m), vec4(0.), 1.);\n}\n"
-        + "SdfHit sdfGroupMap_" + id + "(SdfShape s, vec3 p)\n{\n"
-        + map
-        + "    return res;\n}\n";
+    node.srcUni = decl +
+        "float " + blend + ";\n" +
+        "SdfShape sdfGroup_" + id + "(" + args.join(", ") + ")\n{\n" +
+        store +
+        "    " + blend + " = blend;\n" +
+        "    return SdfShape(vec4(0.), vec4(0.), sdfInverse(m), vec4(0.), 1.);\n}\n" +
+        "SdfHit sdfGroupMap_" + id + "(SdfShape s, vec3 p)\n{\n" +
+        map +
+        "    return res;\n}\n";
 
     node.updateGraph();
 }

@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1583504911167
+            "date": 1583504911167,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

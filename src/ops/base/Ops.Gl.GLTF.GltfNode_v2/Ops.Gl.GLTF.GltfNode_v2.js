@@ -22,7 +22,7 @@ inNodeName.onChange = function ()
     outGeom.set(null);
     node = null;
     outFound.set(false);
-    if (!inNodeName.isLinked())op.setUiAttrib({ "extendTitle": inNodeName.get() });
+    if (!inNodeName.isLinked()) op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
 
 inSceneTime.onChange = updateTimeInputs;
@@ -80,7 +80,7 @@ inExec.onTriggered = function ()
             }
         }
 
-        if (!found)op.setUiError("nf", "Node not found", 1);
+        if (!found) op.setUiError("nf", "Node not found", 1);
         else op.setUiError("nf", null);
 
         outFound.set(found);

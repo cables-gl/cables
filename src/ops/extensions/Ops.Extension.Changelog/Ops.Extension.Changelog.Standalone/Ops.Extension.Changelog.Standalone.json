@@ -105,6 +105,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1790094668811
+        },
+        {
+            "message": "Fixed loading/adding of extension ops in opselect",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790250799795
         }
     ],
     "isReleased": true,

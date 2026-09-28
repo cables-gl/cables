@@ -426,6 +426,37 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1790155964647
+        },
+        {
+            "message": "Added button and modal dialog to add credits in manage op",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1790249140469
+        },
+        {
+            "message": "Math expression parsing in number input ports works again",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790330096143,
+            "url": "https://github.com/cables-gl/cables/issues/8158"
+        },
+        {
+            "message": "Added edit button and dialog for op summary to manage op tab",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1790330726266
+        },
+        {
+            "message": "Removed link to old ops in rename op dialog",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1790609717019
+        },
+        {
+            "message": "Always show shortnames of ops and only newest version in opselect",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1790613588441
         }
     ],
     "isReleased": true,
