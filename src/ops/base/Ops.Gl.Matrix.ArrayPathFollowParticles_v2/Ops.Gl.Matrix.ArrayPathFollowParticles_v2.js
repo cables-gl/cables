@@ -10,6 +10,8 @@ const
     next = op.outTrigger("Next"),
     outPoints = op.outArray("Result");
 
+const RESERVED_UNIFORM_VECTORS = 64;
+
 const cgl = op.patch.cgl;
 let shaderModule = null;
 let shader = null;
@@ -17,6 +19,7 @@ let mesh = null;
 let needsRebuild = true;
 let geom = null;
 let updateUniformPoints = false;
+let pathPoints = [0, 0, 0];
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule(
@@ -29,17 +32,48 @@ mod.addModule(
 
 mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
 mod.addUniform("f", "MOD_offset", inOffset);
-mod.addUniform("3f[]", "MOD_pathPoints", inPoints);
+mod.addUniform("3f[]", "MOD_pathPoints", pathPoints);
 
 inParticles.onChange =
     inLength.onChange =
     inSpread.onChange = resetLater;
 
 inMaxDistance.onChange = updateDefines;
+inPoints.onChange = updatePathPoints;
 
 function resetLater()
 {
     needsRebuild = true;
+}
+
+function getMaxPathPoints()
+{
+    return Math.max(1, cgl.maxUniformsVert - RESERVED_UNIFORM_VECTORS);
+}
+
+function updatePathPoints()
+{
+    const points = inPoints.get() || [];
+    const num = Math.floor(points.length / 3);
+    const maxNum = getMaxPathPoints();
+
+    if (num <= maxNum)
+    {
+        op.setUiError("toomanypoints", null);
+        pathPoints = points;
+        return;
+    }
+
+    op.setUiError("toomanypoints", "Too many path points: " + num + ". This GPU supports at most " + maxNum + ", the path is reduced to " + maxNum + " evenly spaced points.", 1);
+
+    pathPoints = new Float32Array(maxNum * 3);
+    for (let i = 0; i < maxNum; i++)
+    {
+        const src = Math.round(i * (num - 1) / (maxNum - 1));
+        pathPoints[i * 3 + 0] = points[src * 3 + 0];
+        pathPoints[i * 3 + 1] = points[src * 3 + 1];
+        pathPoints[i * 3 + 2] = points[src * 3 + 2];
+    }
 }
 
 function getRandomVec(size)
@@ -139,6 +173,8 @@ function updateDefines()
     mod.toggleDefine("RANDOMSPEED", inRandomSpeed);
 }
 
+updatePathPoints();
+
 exec.onTriggered = function ()
 {
     if (op.patch.isEditorMode())
@@ -147,14 +183,13 @@ exec.onTriggered = function ()
         else op.setUiError("nopointmat", null);
     }
 
-    if (!inPoints.get() || inPoints.get().length === 0) return;
+    if (!pathPoints || pathPoints.length === 0) return;
     if (needsRebuild) rebuild();
 
     mod.bind();
 
-    if (inPoints.get())
-        mod.define("PATHFOLLOW_POINTS", Math.floor(inPoints.get().length / 3));
-    else mod.define("PATHFOLLOW_POINTS", 0);
+    mod.define("PATHFOLLOW_POINTS", Math.floor(pathPoints.length / 3));
+    mod.setUniformValue("MOD_pathPoints", pathPoints);
 
     if (mesh) mesh.render(cgl.getShader());
 
