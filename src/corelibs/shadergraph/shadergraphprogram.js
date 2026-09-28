@@ -11,7 +11,7 @@ import { Lang } from "./lang.js";
  * @property {boolean} gen
  * @property {Port} port
  * @property {boolean} resultType - change to result type when that changes
- * @property {Object} [data] 
+ * @property {Object} [data]
  */
 
 /**
@@ -29,6 +29,7 @@ import { Lang } from "./lang.js";
  * @property {ShaderNodeParam[]} results
  * @property {string} src - this source code will only appended once (per op name) into the shader header
  * @property {string} srcUni - this source code will appended once per op instance id
+ * @property {string} [srcHead] - like src, but always placed at the top of the header
  * @property {string} srcSwizzle
  * @property {string} [srcInline]
  * @property {string} [srcInlineEnd]
@@ -70,6 +71,10 @@ export class ShaderGraphProgram extends Events
     /** @type {Object<String,any>} */
     _functionIdInHead = {};
 
+    /** @type {Object<String,any>} */
+    _opIdsHeadSrc = {};
+
+    _headSrc = "";
     _headFuncSrc = "";
     _headUniSrc = "";
 
@@ -117,6 +122,12 @@ export class ShaderGraphProgram extends Events
             node.src = String(node.src);
             this._headFuncSrc = (node.src || "") + "\n" + this._headFuncSrc;
             this._opIdsHeadFuncSrc[op.name] = String(node.src);
+        }
+
+        if (node.srcHead && this._opIdsHeadSrc[op.name] != node.srcHead)
+        {
+            this._headSrc += node.srcHead + "\n";
+            this._opIdsHeadSrc[op.name] = node.srcHead;
         }
 
     }
@@ -370,6 +381,8 @@ export class ShaderGraphProgram extends Events
         this._opIdsFuncCallSrc = {};
         this._opIdsHeadFuncSrc = {};
         this._opIdsHeadUniSrc = {};
+        this._opIdsHeadSrc = {};
+        this._headSrc = "";
         this._headFuncSrc = "";
         this._headUniSrc = "";
 
@@ -396,7 +409,7 @@ export class ShaderGraphProgram extends Events
         }
         port.emitEvent("heavyEvent", { "name": "program" });
         this.srcMain = this._codeLines.join("\n");
-        this.srcHeader = this._headFuncSrc;
+        this.srcHeader = this._headSrc + this._headFuncSrc;
 
         this.emitEvent("compiled");
         console.log("compiled " + (this.options.name || "") + " " + this.options.reason);
