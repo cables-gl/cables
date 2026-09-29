@@ -49,5 +49,6 @@
         ]
     },
     "exampleProjectId": "dbUc-L",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

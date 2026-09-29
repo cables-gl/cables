@@ -61,5 +61,6 @@
     ],
     "youtubeids": [],
     "exampleProjectId": "uIYNcn",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -105,5 +105,6 @@
         ]
     },
     "exampleProjectId": "raewrn",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -31,5 +31,6 @@
         ]
     },
     "exampleProjectId": "lkDCeT",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

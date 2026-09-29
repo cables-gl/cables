@@ -69,5 +69,6 @@
         "cgl"
     ],
     "exampleProjectId": "CQ0wmo",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

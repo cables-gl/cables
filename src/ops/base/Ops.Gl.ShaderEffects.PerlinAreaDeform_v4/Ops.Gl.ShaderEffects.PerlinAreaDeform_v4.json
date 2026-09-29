@@ -114,5 +114,6 @@
         "ports": []
     },
     "exampleProjectId": "8RexP8",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

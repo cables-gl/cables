@@ -31,5 +31,6 @@
     "id": "65ae3c2e-90d7-48fe-93df-30245f0bcf34",
     "created": 1508774161484,
     "exampleProjectId": "YTuOQm",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

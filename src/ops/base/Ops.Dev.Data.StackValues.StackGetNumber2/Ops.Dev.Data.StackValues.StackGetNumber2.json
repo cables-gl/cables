@@ -56,5 +56,6 @@
     "summary": "read a value from the stack to use it later in the trigger branch",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

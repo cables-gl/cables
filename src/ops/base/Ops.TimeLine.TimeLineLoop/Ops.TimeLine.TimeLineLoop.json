@@ -40,5 +40,6 @@
         ]
     },
     "exampleProjectId": "GbEqL-",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -49,5 +49,6 @@
         "ports": []
     },
     "exampleProjectId": "PlLFcI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

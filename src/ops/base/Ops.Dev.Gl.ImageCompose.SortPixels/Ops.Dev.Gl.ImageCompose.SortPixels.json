@@ -59,5 +59,6 @@
     "changelog": [],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

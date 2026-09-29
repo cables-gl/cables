@@ -44,5 +44,6 @@
     },
     "exampleProjectId": "_5PAIR",
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

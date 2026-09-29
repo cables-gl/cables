@@ -147,5 +147,6 @@
     "coreLibs": [
         "webaudio"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -40,5 +40,6 @@
         "vargetset"
     ],
     "exampleProjectId": "8WWthI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

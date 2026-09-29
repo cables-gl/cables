@@ -41,5 +41,6 @@
     "authorName": "pandur",
     "id": "c80437f0-f0e1-465c-9cea-8a044aa2feaa",
     "created": 1521646716030,
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

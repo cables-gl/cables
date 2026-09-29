@@ -32,5 +32,6 @@
     "id": "15ba7aa9-b1c3-4b20-b6bf-b52a3ba8c8c5",
     "created": 1540919753368,
     "exampleProjectId": "nPvVW2",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

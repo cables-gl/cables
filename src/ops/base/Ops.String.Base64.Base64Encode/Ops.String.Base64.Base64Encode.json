@@ -20,5 +20,6 @@
         ]
     },
     "summary": "encode a string to base64",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

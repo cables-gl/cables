@@ -33,5 +33,6 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "AFiCfe",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

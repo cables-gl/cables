@@ -170,5 +170,6 @@
         ]
     },
     "exampleProjectId": "upF4rn",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

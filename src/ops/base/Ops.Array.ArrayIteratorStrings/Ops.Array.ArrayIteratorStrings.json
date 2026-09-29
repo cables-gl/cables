@@ -74,5 +74,6 @@
     ],
     "youtubeids": [],
     "exampleProjectId": "53WCcI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

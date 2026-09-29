@@ -33,5 +33,6 @@
         "ports": []
     },
     "exampleProjectId": "piMxeG",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

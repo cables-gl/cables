@@ -106,5 +106,6 @@
     "youtubeids": [],
     "exampleProjectId": "em3BZ4",
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

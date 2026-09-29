@@ -55,5 +55,6 @@
     "caniusequery": "",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

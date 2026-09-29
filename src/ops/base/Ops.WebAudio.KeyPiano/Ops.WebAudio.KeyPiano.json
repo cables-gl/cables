@@ -137,5 +137,6 @@
         ]
     },
     "created": 1666259306772,
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

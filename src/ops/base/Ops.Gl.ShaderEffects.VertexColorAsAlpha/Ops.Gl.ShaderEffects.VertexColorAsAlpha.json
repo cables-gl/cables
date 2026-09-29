@@ -53,5 +53,6 @@
         "ports": []
     },
     "exampleProjectId": "ChcFXk",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

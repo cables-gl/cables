@@ -93,5 +93,6 @@
         ]
     },
     "exampleProjectId": "WDoBX8",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

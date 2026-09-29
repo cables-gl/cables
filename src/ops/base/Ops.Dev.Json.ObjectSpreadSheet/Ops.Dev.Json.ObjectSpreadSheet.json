@@ -31,5 +31,6 @@
     "summary": "convenient object data editor",
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }

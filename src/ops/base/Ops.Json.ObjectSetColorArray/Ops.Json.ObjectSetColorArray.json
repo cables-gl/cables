@@ -100,5 +100,6 @@
         "ports": []
     },
     "exampleProjectId": "joA-JK",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

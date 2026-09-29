@@ -2,5 +2,6 @@
     "name": "Ops.Extension.SuperShapes.",
     "summary": "",
     "description": "",
-    "visibility": "public"
+    "visibility": "public",
+    "license": "MIT"
 }

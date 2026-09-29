@@ -42,5 +42,6 @@
     "youtubeids": [],
     "exampleProjectId": "bc0xTn",
     "isReleased": true,
-    "changelog": []
+    "changelog": [],
+    "license": "MIT"
 }

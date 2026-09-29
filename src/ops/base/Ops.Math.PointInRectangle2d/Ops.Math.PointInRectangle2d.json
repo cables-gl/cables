@@ -56,5 +56,6 @@
     },
     "summary": "test if a point is in or outside of a rectangle",
     "exampleProjectId": "dG4B98",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -49,5 +49,6 @@
     },
     "exampleProjectId": "bsbM2y",
     "summary": "Spring simulation based on input target value.",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

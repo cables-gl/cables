@@ -49,5 +49,6 @@
     "created": 1663929676175,
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

@@ -70,5 +70,6 @@
     "youtubeids": [
         "lNbfCp0T55c"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -13,5 +13,6 @@
         ]
     },
     "summary": "jump to a key in the timeline",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

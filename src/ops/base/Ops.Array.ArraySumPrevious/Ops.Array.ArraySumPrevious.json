@@ -40,5 +40,6 @@
         "ports": []
     },
     "exampleProjectId": "udsvLu",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

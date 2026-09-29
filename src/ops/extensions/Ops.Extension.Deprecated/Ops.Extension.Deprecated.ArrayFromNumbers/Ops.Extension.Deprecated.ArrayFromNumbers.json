@@ -217,5 +217,6 @@
         ]
     },
     "exampleProjectId": "ZNPh2B",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

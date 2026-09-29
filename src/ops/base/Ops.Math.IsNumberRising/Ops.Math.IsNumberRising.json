@@ -37,5 +37,6 @@
         "ports": []
     },
     "exampleProjectId": "UN11cI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

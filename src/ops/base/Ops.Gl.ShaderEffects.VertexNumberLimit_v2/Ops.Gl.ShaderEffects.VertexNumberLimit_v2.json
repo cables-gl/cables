@@ -48,5 +48,6 @@
         "cgl"
     ],
     "exampleProjectId": "gLrrJV",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

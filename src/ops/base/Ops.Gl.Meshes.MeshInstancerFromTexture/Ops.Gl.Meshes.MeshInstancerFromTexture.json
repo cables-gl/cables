@@ -132,5 +132,6 @@
     ],
     "caniusequery": "",
     "exampleProjectId": "H3cEpX",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

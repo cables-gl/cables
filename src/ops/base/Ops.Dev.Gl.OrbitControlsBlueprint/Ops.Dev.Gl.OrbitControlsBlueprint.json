@@ -32,5 +32,6 @@
         "portsOut": []
     },
     "authorName": "pandur",
-    "created": 1692972799843
+    "created": 1692972799843,
+    "license": "MIT"
 }

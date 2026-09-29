@@ -25,5 +25,6 @@
     },
     "summary": "Converts a note to a frequency e.g. A4 to 440 ",
     "changelog": [],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

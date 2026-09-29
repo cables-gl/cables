@@ -45,5 +45,6 @@
         ]
     },
     "exampleProjectId": "lkS998",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

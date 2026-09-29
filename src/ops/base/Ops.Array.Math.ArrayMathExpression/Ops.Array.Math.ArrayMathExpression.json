@@ -115,5 +115,6 @@
         ]
     },
     "exampleProjectId": "_o2Mue",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

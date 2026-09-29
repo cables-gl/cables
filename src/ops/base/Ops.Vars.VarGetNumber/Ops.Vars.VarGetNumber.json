@@ -43,5 +43,6 @@
         "sUR6b0zvuSY"
     ],
     "exampleProjectId": "1tfFT6",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

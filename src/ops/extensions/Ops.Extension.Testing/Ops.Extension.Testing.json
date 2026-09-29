@@ -2,5 +2,6 @@
     "name": "Ops.Extension.Testing.",
     "summary": "aaaabbbbbbbbbbbbb",
     "description": "",
-    "visibility": "unlisted"
+    "visibility": "unlisted",
+    "license": "MIT"
 }

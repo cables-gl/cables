@@ -108,5 +108,6 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -80,5 +80,6 @@
         "ports": []
     },
     "exampleProjectId": "aDgYX5",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

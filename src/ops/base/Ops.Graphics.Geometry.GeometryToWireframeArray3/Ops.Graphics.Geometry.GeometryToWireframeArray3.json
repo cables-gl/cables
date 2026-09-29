@@ -41,5 +41,6 @@
         "ports": []
     },
     "exampleProjectId": "r--xve",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -44,5 +44,6 @@
         ]
     },
     "exampleProjectId": "_UiSmX",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

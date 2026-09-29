@@ -133,5 +133,6 @@
         }
     ],
     "exampleProjectId": "El3nlJ",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

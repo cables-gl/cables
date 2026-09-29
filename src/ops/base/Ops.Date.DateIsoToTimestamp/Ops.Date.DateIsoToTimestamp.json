@@ -33,5 +33,6 @@
         ]
     },
     "exampleProjectId": "nsSRrU",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

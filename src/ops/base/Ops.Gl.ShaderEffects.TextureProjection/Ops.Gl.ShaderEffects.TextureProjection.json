@@ -155,5 +155,6 @@
     },
     "caniusequery": "",
     "exampleProjectId": "fJHt0e",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

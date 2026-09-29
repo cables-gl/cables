@@ -50,5 +50,6 @@
     "youtubeid": "jiOLZaMUH78",
     "issues": "",
     "exampleProjectId": "VFAfgg",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

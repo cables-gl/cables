@@ -58,5 +58,6 @@
             "date": 1715181891262
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

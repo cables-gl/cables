@@ -108,5 +108,6 @@
         "ports": []
     },
     "exampleProjectId": "aSWlLu",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

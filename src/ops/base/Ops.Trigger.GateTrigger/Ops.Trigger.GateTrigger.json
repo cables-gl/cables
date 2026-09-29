@@ -44,5 +44,6 @@
     },
     "exampleProjectId": "xotJAH",
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }
