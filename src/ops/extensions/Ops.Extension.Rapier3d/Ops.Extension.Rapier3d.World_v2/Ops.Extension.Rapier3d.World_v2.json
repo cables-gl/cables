@@ -15,6 +15,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1768319801510
+        },
+        {
+            "message": "Updated rapier to NPM 0.21, which is rapier probably 0.36",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790668694871
         }
     ],
     "layout": {

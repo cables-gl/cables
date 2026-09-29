@@ -36,7 +36,7 @@ exec.onTriggered = function ()
             // if (gltf.textures[index]
             // {
             let tex = origTex || CGL.Texture.getEmptyTexture(cgl);
-            if (inTex.get()) tex = inTex.get().tex;
+            if (inTex.get()) tex = inTex.get();
 
             if (!origTex)
             {
@@ -46,7 +46,7 @@ exec.onTriggered = function ()
             }
 
             gltf.textures[index].tex = tex;
-
+            tex.disposable = false;
             outFound.set(true);
             // outTex.setRef(gltf.textures[index].tex);
             return;
