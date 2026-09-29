@@ -79,6 +79,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1775128996323
+        },
+        {
+            "message": "Do not try to render more than possible (max number of uniforms of point array), show error message when over limit",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790629951292
         }
     ],
     "coreLibs": [

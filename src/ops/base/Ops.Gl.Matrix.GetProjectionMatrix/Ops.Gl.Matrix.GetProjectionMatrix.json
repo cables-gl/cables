@@ -20,10 +20,8 @@
     "authorName": "pandur",
     "id": "3f048006-89e9-4e3f-a7d3-42aaa77ed630",
     "created": 1517222067170,
-    "summary": "get current projectionmatrix",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Get current projectionmatrix",
+    "docs": {},
     "exampleProjectId": "573_4S",
     "changelog": [
         {

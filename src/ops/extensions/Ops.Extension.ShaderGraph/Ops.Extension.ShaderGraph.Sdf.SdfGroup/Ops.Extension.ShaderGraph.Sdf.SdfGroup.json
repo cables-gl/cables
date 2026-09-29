@@ -17,8 +17,13 @@
             },
             {
                 "type": 2,
+                "name": "blend",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
                 "name": "Shapes_0",
-                "longPort": 4,
+                "longPort": 3,
                 "group": "Shapes",
                 "objType": "sg_SdfShape"
             },
@@ -31,19 +36,8 @@
             {
                 "type": 2,
                 "name": "Shapes_2",
-                "group": "Shapes",
-                "objType": "sg_SdfShape"
-            },
-            {
-                "type": 2,
-                "name": "Shapes_3",
                 "uititle": "add port",
                 "group": "Shapes",
-                "objType": "sg_float"
-            },
-            {
-                "type": 2,
-                "name": "blend",
                 "objType": "sg_float"
             },
             {
