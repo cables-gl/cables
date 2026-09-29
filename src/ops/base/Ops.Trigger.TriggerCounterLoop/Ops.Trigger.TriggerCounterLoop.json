@@ -74,5 +74,6 @@
         }
     ],
     "exampleProjectId": "V8TekF",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

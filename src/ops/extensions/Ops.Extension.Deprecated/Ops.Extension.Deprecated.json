@@ -2,5 +2,6 @@
     "name": "Ops.Extension.Deprecated.",
     "summary": "",
     "description": "",
-    "visibility": "unlisted"
+    "visibility": "unlisted",
+    "license": "MIT"
 }

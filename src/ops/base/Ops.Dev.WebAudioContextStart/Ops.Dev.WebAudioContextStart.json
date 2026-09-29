@@ -31,5 +31,6 @@
     },
     "coreLibs": [
         "webaudio"
-    ]
+    ],
+    "license": "MIT"
 }

@@ -70,5 +70,6 @@
         ]
     },
     "exampleProjectId": "vgRDeT",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

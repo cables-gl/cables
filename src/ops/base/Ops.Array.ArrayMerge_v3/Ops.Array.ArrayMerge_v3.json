@@ -68,5 +68,6 @@
         "ports": []
     },
     "exampleProjectId": "P7siGA",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

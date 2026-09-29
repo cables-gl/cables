@@ -35,5 +35,6 @@
     "issues": "",
     "exampleProjectId": "U4M4J5",
     "isReleased": true,
-    "changelog": []
+    "changelog": [],
+    "license": "MIT"
 }

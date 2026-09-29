@@ -130,5 +130,6 @@
         ]
     },
     "exampleProjectId": "xOStrn",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

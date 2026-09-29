@@ -111,5 +111,6 @@
         ]
     },
     "exampleProjectId": "662MM-",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

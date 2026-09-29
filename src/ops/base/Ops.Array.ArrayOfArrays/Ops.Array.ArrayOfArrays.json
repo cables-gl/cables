@@ -79,5 +79,6 @@
         ]
     },
     "exampleProjectId": "iId8ve",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

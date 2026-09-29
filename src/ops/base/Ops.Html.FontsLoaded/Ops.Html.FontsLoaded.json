@@ -23,5 +23,6 @@
         "ports": []
     },
     "exampleProjectId": "xP04r1",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

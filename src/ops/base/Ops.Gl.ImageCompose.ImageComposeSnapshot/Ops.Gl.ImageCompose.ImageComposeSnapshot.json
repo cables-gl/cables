@@ -56,5 +56,6 @@
         "ports": []
     },
     "exampleProjectId": "Dc1a-W",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

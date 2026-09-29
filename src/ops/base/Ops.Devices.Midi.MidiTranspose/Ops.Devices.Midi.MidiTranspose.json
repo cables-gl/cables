@@ -77,5 +77,6 @@
         ]
     },
     "exampleProjectId": "dfF3DI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -76,5 +76,6 @@
         "TdHgjqOLpnM"
     ],
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

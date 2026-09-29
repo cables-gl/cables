@@ -35,5 +35,6 @@
     "id": "5ac2cf80-18f7-4390-b0ce-ebdad22d2a80",
     "created": 1505413550795,
     "changelog": [],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

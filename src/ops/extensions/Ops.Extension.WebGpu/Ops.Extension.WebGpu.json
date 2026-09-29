@@ -1,4 +1,5 @@
 {
     "name": "Ops.Extension.WebGpu.",
-    "visibility": "public"
+    "visibility": "public",
+    "license": "MIT"
 }

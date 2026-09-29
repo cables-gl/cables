@@ -37,5 +37,6 @@
         "ports": []
     },
     "exampleProjectId": "SV3NPO",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

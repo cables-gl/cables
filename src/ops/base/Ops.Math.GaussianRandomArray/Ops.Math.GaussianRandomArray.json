@@ -35,5 +35,6 @@
         "ports": []
     },
     "exampleProjectId": "i14QNS",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

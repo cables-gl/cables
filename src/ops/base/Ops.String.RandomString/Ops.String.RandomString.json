@@ -27,5 +27,6 @@
         ]
     },
     "summary": "generate a random string of given characters",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

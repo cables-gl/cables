@@ -121,5 +121,6 @@
             "src": "./teachablemachine_tf_speech_image_pose.js",
             "type": "commonjs"
         }
-    ]
+    ],
+    "license": "MIT"
 }

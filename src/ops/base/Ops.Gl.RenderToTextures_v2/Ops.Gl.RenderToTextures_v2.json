@@ -205,5 +205,6 @@
     "youtubeids": [
         "WQM37Jr_NHI"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

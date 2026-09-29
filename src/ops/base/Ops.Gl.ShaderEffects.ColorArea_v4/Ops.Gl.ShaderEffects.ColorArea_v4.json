@@ -168,5 +168,6 @@
     },
     "exampleProjectId": "0Ti2gT",
     "caniusequery": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -15,5 +15,6 @@
     "id": "aa19a477-da3e-4b84-9919-22a73fd78647",
     "authorName": "pandur",
     "changelog": [],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

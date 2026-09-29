@@ -1,5 +1,6 @@
 {
     "name": "Ops.Extension.Mediapipe.",
     "summary": "camera hand facetracking body tracking with google mediapipe",
-    "description": ""
+    "description": "",
+    "license": "MIT"
 }

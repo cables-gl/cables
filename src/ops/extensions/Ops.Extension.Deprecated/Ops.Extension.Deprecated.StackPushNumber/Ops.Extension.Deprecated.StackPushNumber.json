@@ -49,5 +49,6 @@
         "ports": []
     },
     "exampleProjectId": "NT30kP",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

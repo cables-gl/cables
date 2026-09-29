@@ -72,5 +72,6 @@
         ]
     },
     "exampleProjectId": "WaPiSP",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -41,5 +41,6 @@
             "type": "new"
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

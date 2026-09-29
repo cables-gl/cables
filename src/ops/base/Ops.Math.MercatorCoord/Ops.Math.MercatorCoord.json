@@ -35,5 +35,6 @@
     },
     "summary": "project mercator coordinates",
     "exampleProjectId": "oi9AI4",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

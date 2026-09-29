@@ -91,5 +91,6 @@
     "coreLibs": [
         "cgl_texturemath",
         "cgl"
-    ]
+    ],
+    "license": "MIT"
 }

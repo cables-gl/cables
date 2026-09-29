@@ -44,5 +44,6 @@
         "cgl_light"
     ],
     "exampleProjectId": "3LkNp6",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

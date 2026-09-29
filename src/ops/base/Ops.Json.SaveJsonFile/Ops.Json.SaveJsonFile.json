@@ -23,5 +23,6 @@
         ]
     },
     "exampleProjectId": "J0c008",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

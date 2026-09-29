@@ -151,5 +151,6 @@
         "cgl"
     ],
     "exampleProjectId": "oOsjJ5",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

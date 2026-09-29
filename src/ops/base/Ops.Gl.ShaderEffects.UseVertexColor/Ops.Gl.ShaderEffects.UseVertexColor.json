@@ -49,5 +49,6 @@
         "ports": []
     },
     "exampleProjectId": "ep1Umu",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

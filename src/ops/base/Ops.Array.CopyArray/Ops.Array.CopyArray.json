@@ -63,5 +63,6 @@
         ]
     },
     "exampleProjectId": "JqSoH-",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

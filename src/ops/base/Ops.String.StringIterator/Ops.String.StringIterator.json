@@ -35,5 +35,6 @@
         ]
     },
     "summary": "iterate over every character of a string",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

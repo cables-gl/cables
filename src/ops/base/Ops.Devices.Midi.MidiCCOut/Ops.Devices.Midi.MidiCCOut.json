@@ -85,5 +85,6 @@
         ]
     },
     "exampleProjectId": "VbaQXU",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

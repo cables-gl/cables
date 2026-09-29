@@ -187,5 +187,6 @@
         ]
     },
     "exampleProjectId": "KI3veT",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

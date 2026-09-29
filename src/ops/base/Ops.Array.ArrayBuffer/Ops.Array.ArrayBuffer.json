@@ -75,5 +75,6 @@
         }
     ],
     "exampleProjectId": "_ZPEnB",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

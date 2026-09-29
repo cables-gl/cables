@@ -35,5 +35,6 @@
     "coreLibs": [
         "cgl",
         "branchprofiler"
-    ]
+    ],
+    "license": "MIT"
 }

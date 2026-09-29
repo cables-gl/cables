@@ -97,5 +97,6 @@
         ]
     },
     "exampleProjectId": "KM0Dgu",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

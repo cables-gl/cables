@@ -70,5 +70,6 @@
         ]
     },
     "exampleProjectId": "Rjoave",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

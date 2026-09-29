@@ -23,5 +23,6 @@
     },
     "summary": "Change current note of connected instrument",
     "changelog": [],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

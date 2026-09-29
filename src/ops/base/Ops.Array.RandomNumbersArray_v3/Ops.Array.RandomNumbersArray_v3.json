@@ -106,5 +106,6 @@
         ]
     },
     "exampleProjectId": "hW4mlJ",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

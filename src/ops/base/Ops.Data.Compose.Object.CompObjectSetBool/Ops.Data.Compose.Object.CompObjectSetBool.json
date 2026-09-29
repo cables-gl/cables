@@ -78,5 +78,6 @@
         "ports": []
     },
     "exampleProjectId": "ggd-JK",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

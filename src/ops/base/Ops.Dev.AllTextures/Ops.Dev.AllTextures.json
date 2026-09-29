@@ -28,5 +28,6 @@
         ]
     },
     "authorName": "pandur",
-    "created": 1686128237989
+    "created": 1686128237989,
+    "license": "MIT"
 }

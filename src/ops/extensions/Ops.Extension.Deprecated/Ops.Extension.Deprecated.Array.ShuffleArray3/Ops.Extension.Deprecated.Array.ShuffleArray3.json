@@ -60,5 +60,6 @@
         ]
     },
     "exampleProjectId": "BVnweT",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

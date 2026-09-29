@@ -85,5 +85,6 @@
         ]
     },
     "exampleProjectId": "WRrXSn",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

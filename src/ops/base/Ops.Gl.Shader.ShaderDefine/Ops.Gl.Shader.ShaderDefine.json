@@ -47,5 +47,6 @@
             "deletedDate": 1605512024212
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

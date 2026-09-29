@@ -3,5 +3,6 @@
     "summary": "Cellular automata system as feedback loop texture",
     "licence": {
         "name": "MIT"
-    }
+    },
+    "license": "MIT"
 }

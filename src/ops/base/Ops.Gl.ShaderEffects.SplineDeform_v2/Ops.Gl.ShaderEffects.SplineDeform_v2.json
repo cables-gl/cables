@@ -66,5 +66,6 @@
         "cgl"
     ],
     "exampleProjectId": "F-UNZ4",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

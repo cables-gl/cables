@@ -85,5 +85,6 @@
         "cgl_deprecated_meshfeedback",
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

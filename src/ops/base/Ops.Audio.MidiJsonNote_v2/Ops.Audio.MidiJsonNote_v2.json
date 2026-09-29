@@ -74,5 +74,6 @@
     "caniusequery": "",
     "youtubeids": [],
     "exampleProjectId": "",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

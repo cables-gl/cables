@@ -48,5 +48,6 @@
     },
     "youtubeids": [],
     "exampleProjectId": "Tc3pcI",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -32,5 +32,6 @@
         ]
     },
     "exampleProjectId": "72VpS-",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

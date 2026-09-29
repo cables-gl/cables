@@ -48,5 +48,6 @@
         ]
     },
     "exampleProjectId": "niHmJt",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

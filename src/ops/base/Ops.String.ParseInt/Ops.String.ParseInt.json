@@ -19,5 +19,6 @@
         ]
     },
     "summary": "parse a string to a integer number",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

@@ -99,5 +99,6 @@
         "ports": []
     },
     "exampleProjectId": "RLvmjz",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

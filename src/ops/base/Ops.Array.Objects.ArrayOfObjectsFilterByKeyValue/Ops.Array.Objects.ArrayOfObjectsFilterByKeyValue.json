@@ -64,5 +64,6 @@
         ]
     },
     "exampleProjectId": "HFRsU5",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

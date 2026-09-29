@@ -38,5 +38,6 @@
         "ports": []
     },
     "exampleProjectId": "LNJHeG",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

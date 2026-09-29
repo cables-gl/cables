@@ -68,5 +68,6 @@
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "Ejzvsx",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

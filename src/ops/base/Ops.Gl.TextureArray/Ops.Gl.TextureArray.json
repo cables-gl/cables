@@ -112,5 +112,6 @@
     "coreLibs": [
         "cgl_shadergraph"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

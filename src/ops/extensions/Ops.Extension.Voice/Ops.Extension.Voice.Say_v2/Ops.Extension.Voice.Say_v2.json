@@ -153,5 +153,6 @@
         ]
     },
     "exampleProjectId": "WubOWc",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

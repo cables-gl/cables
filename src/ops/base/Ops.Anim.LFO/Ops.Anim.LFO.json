@@ -63,5 +63,6 @@
         "cn_PcwI7vO0"
     ],
     "exampleProjectId": "Vzwnrc",
-    "isReleased": true
+    "isReleased": true,
+    "license": "MIT"
 }

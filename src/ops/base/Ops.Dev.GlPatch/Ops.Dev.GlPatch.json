@@ -37,9 +37,9 @@
     },
     "summary": "This render the editor ops in your canvas.",
     "issues": "",
-
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "license": "MIT"
 }
