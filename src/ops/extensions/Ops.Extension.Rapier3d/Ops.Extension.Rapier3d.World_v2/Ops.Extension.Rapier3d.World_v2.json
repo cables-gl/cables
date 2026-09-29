@@ -86,5 +86,16 @@
         }
     ],
     "summary": "Physics simulation world ",
-    "isReleased": true
+    "isReleased": true,
+    "credits": [
+        {
+            "title": "Rapier 3d",
+            "author": "dimforge",
+            "url": "https://rapier.rs",
+            "licence": "Apache-2.0",
+            "version": "NPM 0.21",
+            "username": "pandur",
+            "date": 1790667972055
+        }
+    ]
 }
