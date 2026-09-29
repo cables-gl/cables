@@ -115,24 +115,16 @@
     "youtubeid": "",
     "changelog": [
         {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "pandur",
-            "date": 1623936330348
-        },
-        {
             "message": "cloned op from Ops.Gl.ShaderEffects.VertexSinusWobble",
             "author": "pandur",
-            "date": 1634817129350
+            "date": 1634817129350,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.VertexWobble renamed to Ops.Gl.ShaderEffects.VertexSinusWobble_v2",
+            "message": "Fix: Invert checkbox was not updating the shader",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1634886260153
-        },
-        {
-            "message": "Ops.Gl.ShaderEffects.VertexSinusWobble_v2 renamed to Ops.Gl.ShaderEffects.VertexWobble_v2",
-            "author": "pandur",
-            "date": 1638260485137
+            "date": 1790665704727
         }
     ],
     "coreLibs": [
