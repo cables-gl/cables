@@ -2,7 +2,7 @@ let self = this;
 const cgl = op.patch.cgl;
 
 const render = op.inTrigger("render");
-let src = op.inValueSelect("Source", [
+let src = op.inDropDown("Source", [
     "X * Z + Time",
     "X * Y + Time",
     "length",
@@ -11,21 +11,21 @@ let src = op.inValueSelect("Source", [
     "Z + Time"], "X * Z + Time");
 
 const
-    amount = op.inValueSlider("amount", 0.1),
+    amount = op.inFloatSlider("amount", 0.1),
     inTime = op.inFloat("Time", 0),
-    mul = op.inValueFloat("Scale", 3),
+    mul = op.inFloat("Scale", 3),
     toAxisX = op.inBool("axisX", true),
     toAxisY = op.inBool("axisY", true),
     toAxisZ = op.inBool("axisZ", true),
     positive = op.inSwitch("Range", ["-1 to 1", "0 to 1"], "-1 to 1"),
 
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
-    inSize = op.inValue("Size", 1),
-    inFalloff = op.inValueSlider("Falloff", 0),
+    inArea = op.inDropDown("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    inSize = op.inFloat("Size", 1),
+    inFalloff = op.inFloatSlider("Falloff", 0),
 
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
     inWorldSpace = op.inBool("WorldSpace", true),
     inInvert = op.inBool("Invert"),
 
@@ -33,7 +33,8 @@ const
 
 op.setPortGroup("Area", [inArea, inSize, x, y, z, inFalloff, inWorldSpace, inInvert]);
 
-positive.onChange =
+inInvert.onChange=
+  positive.onChange =
 inArea.onChange =
     inWorldSpace.onChange =
     inSize.onChange =
