@@ -532,7 +532,7 @@ export class Patch extends Events
     /**
      * create a new op in patch
      * @param {string} opIdentifier uuid or name, e.g. Ops.Math.Sum
-     * @param {OpUiAttribs} uiAttribs Attributes
+     * @param {OpUiAttribs} [uiAttribs] Attributes
      * @param {string} [id]
      * @param {boolean} [fromDeserialize]
      * @param {string} [opName] e.g. Ops.Math.Sum

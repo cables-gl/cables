@@ -7,7 +7,7 @@ const
     render = op.inTrigger("render"),
     next = op.outTrigger("next"),
     inIterations = op.inValue("Iterations", 4),
-    geomOut = op.outObject("Geometry"),
+    geomOut = op.outObject("Geometry",null,"geometry"),
     flat = op.inBool("Flat", false),
     inDraw = op.inBool("Draw", true);
 
