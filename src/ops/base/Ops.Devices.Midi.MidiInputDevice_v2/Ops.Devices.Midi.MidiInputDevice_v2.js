@@ -9,7 +9,7 @@ const learn = op.inTriggerButton("Learn");
 const OPS = {
     "CC": { "NAMESPACE": "", "IN_PORT": "CC Index" },
     "NRPN": { "NAMESPACE": "", "IN_PORT": "NRPN Index" },
-    "Note": { "NAMESPACE": "", "IN_PORT": "Note" },
+    "Note": { "NAMESPACE": "", "IN_PORT": "Note" }
 };
 
 if (CABLES.UI)
@@ -30,7 +30,7 @@ const OUTPUT_KEYS = [
     // 'SysEx',
     // "Pitchbend",
     "Program Change",
-    "Clock",
+    "Clock"
 ];
 
 // unused midi signals
@@ -46,7 +46,7 @@ const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) =>
 op.setPortGroup("MIDI Event", [OUTPUTS.Event]);
 op.setPortGroup(
     "MIDI Event by Type",
-    Object.keys(OUTPUTS).map((key) => { return key !== "Event" && OUTPUTS[key]; }).filter(Boolean),
+    Object.keys(OUTPUTS).map((key) => { return key !== "Event" && OUTPUTS[key]; }).filter(Boolean)
 );
 
 /* http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI3.shtml */
@@ -74,7 +74,7 @@ const MESSAGE_TYPES = {
     [PROGRAM_CHANGE]: "Program Change",
     [CHANNEL_PRESSURE]: "Channel Pressure",
     [PITCH_BEND]: "Pitchbend",
-    [CLOCK]: "Clock",
+    [CLOCK]: "Clock"
 };
 
 function getMIDIChannel(statusByte)
@@ -246,9 +246,9 @@ function onMIDIMessage(_event)
     const newEvent = {
 
         /* OLD EVENT v */
-        deviceName,
+        "deviceName": deviceName,
         "inputId": 0, // what is this for?
-        messageType,
+        "messageType": messageType,
         // ...,
         "index": outputIndex,
         "value": outputValue,
@@ -258,12 +258,12 @@ function onMIDIMessage(_event)
         "type": data[0] & 0xf0,
         "note": data[1],
         "velocity": data[2],
-        data,
+        "data": data,
         ...messageType === "Note" && {
             "newNote": [LSB, getMIDINote(LSB)],
-            "velocity": outputValue,
+            "velocity": outputValue
         },
-        ...messageType === "NRPN" && { nrpnIndex, nrpnValue },
+        ...messageType === "NRPN" && { "nrpnIndex": nrpnIndex, "nrpnValue": nrpnValue }
     };
 
     if (learning)
@@ -273,8 +273,8 @@ function onMIDIMessage(_event)
             const newOp = op.patch.addOp(OPS[messageType].NAMESPACE, {
                 "translate": {
                     "x": op.uiAttribs.translate.x,
-                    "y": op.uiAttribs.translate.y + 100,
-                },
+                    "y": op.uiAttribs.translate.y + 100
+                }
             });
 
             op.patch.link(op, messageType, newOp, "MIDI Event In");
@@ -283,7 +283,7 @@ function onMIDIMessage(_event)
             if (messageType === "Note")
             {
                 const {
-                    "newNote": [, noteName],
+                    "newNote": [, noteName]
                 } = newEvent;
                 newOp.getPortByName("Note").set(noteName);
             }
@@ -341,8 +341,8 @@ function setDevice()
 
 function onMIDIFailure(e)
 {
-    op.setUiError("no midi", "No MIDI support in your browser.");
-    if (e) op.logWarn("No midi found", e);
+    op.setUiError("nomidi", "No MIDI support in your browser.");
+    // if (e) op.logWarn("No midi found", e);
 }
 
 function deviceList()
@@ -385,7 +385,7 @@ function request()
 
     if (!midi)
     {
-        op.log("request midi again?");
+        // op.log("request midi again?");
         setTimeout(request, 500);
     }
 }

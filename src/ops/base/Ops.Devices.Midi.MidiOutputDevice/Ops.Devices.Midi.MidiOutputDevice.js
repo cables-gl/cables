@@ -150,7 +150,7 @@ function request()
 
     if (!midi)
     {
-        op.log("request midi out again?");
+        // op.log("request midi out again?");
         setTimeout(request, 500);
     }
 }
