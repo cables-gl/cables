@@ -1,7 +1,7 @@
 const
-    inTime = op.inValue("Time"),
-    animVal = op.inValue("Value"),
-    timeUnit = op.inValueSelect("Unit", ["Seconds", "Frames"], "Seconds"),
+    inTime = op.inFloat("Time"),
+    animVal = op.inFloat("Value"),
+    timeUnit = op.inDropDown("Unit", ["Seconds", "Frames"], "Seconds"),
     outVal = op.outNumber("Result"),
     outArr = op.outArray("Anim Array", [], 2),
     outEnded = op.outBoolNum("Anim Finished");

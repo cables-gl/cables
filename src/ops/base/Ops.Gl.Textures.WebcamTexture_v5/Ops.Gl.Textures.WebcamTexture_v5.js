@@ -87,7 +87,6 @@ op.onDelete = () =>
 {
     clearTimeout(startCamTo);
     deleting = true;
-    console.log("deleteeeeeeeee");
     stopStream();
 };
 

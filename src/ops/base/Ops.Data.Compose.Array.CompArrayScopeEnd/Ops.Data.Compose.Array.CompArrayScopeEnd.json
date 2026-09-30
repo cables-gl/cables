@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1789739637484
+        },
+        {
+            "message": "Data.Compose.Array.CompArrayEnd_v2 renamed to Ops.Data.Compose.Array.CompArrayScopeEnd",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790754029997
         }
     ],
     "layout": {

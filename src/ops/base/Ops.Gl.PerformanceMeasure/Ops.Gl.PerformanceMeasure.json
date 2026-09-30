@@ -21,10 +21,6 @@
             {
                 "type": 1,
                 "name": "Execute"
-            },
-            {
-                "type": 5,
-                "name": "Name"
             }
         ],
         "portsOut": [

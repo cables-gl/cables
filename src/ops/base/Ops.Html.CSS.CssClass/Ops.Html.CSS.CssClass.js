@@ -7,7 +7,6 @@ op.toWorkPortsNeedsString(inClassName);
 const styleEle = op.patch.getDocument().createElement("style");
 styleEle.type = "text/css";
 styleEle.id = "style" + CABLES.uuid();
-styleEle.textContent = attachments.css_spinner;
 styleEle.classList.add("cablesEle");
 
 const head = op.patch.getDocument().getElementsByTagName("body")[0];
