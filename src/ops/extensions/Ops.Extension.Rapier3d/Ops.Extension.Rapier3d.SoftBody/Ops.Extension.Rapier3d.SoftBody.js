@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Trigger"),
-    inName = op.inString("Name", "default"),
+    inName = op.inString("Name", "soft body default"),
     inType = op.inDropDown("Type", ["Volumetric", "Tri Mesh"], "Tri Mesh"),
     inGeom = op.inObject("Geometry", null, "geometry"),
     inCellSize = op.inFloat("Cell Size", 0.2),
@@ -55,7 +55,6 @@ let renderNormals = null;
 
 let skinMeshIndex = -1;
 
-// pinned particles: { "particle", "pin" (index of the pin point), "offset" from the pin point }
 let grabbed = [];
 let grabbedNumPins = 0;
 let grabbedRadius = 0;
@@ -160,7 +159,6 @@ function weld(vertices, indices)
     return { "vertices": new Float32Array(welded), "indices": new Uint32Array(faces) };
 }
 
-// geometry vertices in world space, using the current model matrix like the body op does
 function worldVertices(geom)
 {
     const v = vec3.create();
@@ -183,7 +181,6 @@ function releasePins()
     grabbedNumPins = 0;
 }
 
-// pins the particles that are near a pin point now, they keep their offset to it
 function grabParticles(pins, radius)
 {
     releasePins();

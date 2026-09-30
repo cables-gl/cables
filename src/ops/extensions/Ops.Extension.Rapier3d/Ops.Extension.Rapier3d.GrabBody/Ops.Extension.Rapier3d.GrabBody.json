@@ -1,0 +1,123 @@
+{
+    "id": "212f8905-88cd-49d8-9ef9-256a5aeffbc7",
+    "created": 1790779023191,
+    "license": "MIT",
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Input index",
+                "values": [
+                    "Screen",
+                    "3D"
+                ],
+                "group": "Input",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Screen X",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Screen Y",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position X",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Y",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Position Z",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reach",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Grab",
+                "group": "Input",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Filter Name"
+            },
+            {
+                "type": 0,
+                "name": "Soft Body Grab Radius",
+                "group": "Soft Bodies",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Spring Stiffness",
+                "group": "Rigid Bodies",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Spring Damping",
+                "group": "Rigid Bodies",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Grabbing",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Grabbed Name"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ]
+    }
+}
