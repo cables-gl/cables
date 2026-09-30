@@ -1,0 +1,152 @@
+{
+    "id": "0629cad1-8f1c-4ddd-8012-f2fcbecacc1d",
+    "created": 1790748084248,
+    "license": "MIT",
+    "authorName": "pandur",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 0,
+                "name": "Type index",
+                "group": "Shape",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "group": "Shape",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Cell Size",
+                "group": "Shape",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Skin Collision",
+                "group": "Shape",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Stiffness",
+                "group": "Material",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Damping Ratio",
+                "group": "Material",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cell Model index",
+                "group": "Material",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Solver index",
+                "group": "Material",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Volume Preservation",
+                "group": "Material",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Self Contacts",
+                "group": "Material",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "group": "Physics",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction",
+                "group": "Physics",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Restitution",
+                "group": "Physics",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear Damping",
+                "group": "Physics",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Scale",
+                "group": "Physics",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Pin Positions",
+                "group": "Pinning"
+            },
+            {
+                "type": 0,
+                "name": "Pin Radius",
+                "group": "Pinning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Particle Positions"
+            },
+            {
+                "type": 0,
+                "name": "Num Particles",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Soft Body"
+            }
+        ]
+    }
+}
