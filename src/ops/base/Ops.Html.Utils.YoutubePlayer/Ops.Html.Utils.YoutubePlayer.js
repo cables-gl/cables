@@ -12,7 +12,7 @@ const
 
     outEle = op.outObject("Element"),
     outDirectLink = op.outString("Direct Link");
-    // outImageMax=op.outString("Thumbnail Max");
+// outImageMax=op.outString("Thumbnail Max");
 
 const defaultStyle = "position:absolute;\n\
 z-index:9;\n\
@@ -39,10 +39,12 @@ op.onDelete = removeEle;
 
 active.onChange = update;
 
+let createTimeout = null;
+
 op.init = function ()
 {
     initialized = true;
-    setTimeout(() => { update(); }, 100);
+    createTimeout = setTimeout(() => { update(); }, 100);
 };
 
 inStyle.set(defaultStyle);
@@ -83,6 +85,7 @@ function addElement()
 
 function removeEle()
 {
+    clearTimeout(createTimeout);
     if (element && element.parentNode) element.parentNode.removeChild(element);
     element = null;
     outEle.set(null);

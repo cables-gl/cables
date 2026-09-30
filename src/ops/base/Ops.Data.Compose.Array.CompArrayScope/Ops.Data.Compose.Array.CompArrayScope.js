@@ -14,6 +14,12 @@ inReset.onTriggered = () =>
 
 let arr = [];
 
+op.on("delete", () =>
+{
+    console.log("delede", op.tempData);
+    if (op.tempData.scopeAreaEndOp) op.patch.deleteOp(op.tempData.scopeAreaEndOp.id);
+});
+
 update.onTriggered = () =>
 {
     if (!active.get()) return next.trigger();

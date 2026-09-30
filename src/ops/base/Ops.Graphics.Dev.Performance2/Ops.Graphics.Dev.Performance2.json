@@ -37,6 +37,10 @@
             {
                 "type": 2,
                 "name": "Data"
+            },
+            {
+                "type": 5,
+                "name": "Log Heavy events"
             }
         ]
     },

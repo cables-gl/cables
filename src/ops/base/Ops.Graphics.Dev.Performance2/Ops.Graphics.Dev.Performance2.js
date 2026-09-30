@@ -5,7 +5,8 @@ const
     activeMem = op.inBool("Measure Memory", false),
     activeGPU = op.inBool("Measure GPU", true),
     active = op.inBool("active", true),
-    outData = op.outObject("Data");
+    outData = op.outObject("Data"),
+  outLog=op.outString("Log Heavy events");
 
 let ctx = null;
 let canvas = null;
@@ -15,10 +16,17 @@ let containerEle = document.body;
 let countersPerFrame = {};
 let countIndex = 0;
 let selectedCounterIndex = "";
+outLog.changeAlways = true;
+
 
 const pp = op.patch.perfProfiler;
 
 createCanvas();
+op.patch.cgl.on("heavyEvent", (e) =>
+{
+outLog.set(e.event+" - "+e.name);
+console.log("eee",e);
+})
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
 {

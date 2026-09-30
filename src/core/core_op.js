@@ -1547,7 +1547,6 @@ export class Op extends Events
             this.tempData.scopeAreaEndOp = null;
             if (outScope.isLinked())
             {
-
                 const otherPort = outScope.links[0].getOtherPort(outScope);
                 otherPort.op.getPortByName("areaScopeEnd");
 
@@ -1558,7 +1557,7 @@ export class Op extends Events
             }
             else
             {
-                this.setUiError("noscopelink", "scope out shoult be linked");
+                this.setUiError("noscopelink", "scope out should be linked");
             }
         };
         return outScope;
