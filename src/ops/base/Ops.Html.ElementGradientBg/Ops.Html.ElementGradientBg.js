@@ -31,8 +31,8 @@ function update()
 {
     ele = inEle.get();
     const gr = inGradient.get();
-    if (!gr) return console.log("no gr");
-    if (!ele) return console.log("no ele");
+    if (!gr) return;// console.log("no gr");
+    if (!ele) return;// console.log("no ele");
     const keys = gr.keys;
     if (!keys) return console.log("no keys");
 

@@ -522,11 +522,7 @@ export class CglContext extends CgContext
 
     /**
      * push a framebuffer to the framebuffer stack
-     * @function pushGlFrameBuffer
-     * @memberof Context
-     * @instance
      * @param {Object} fb framebuffer
-     * @function
      */
     pushGlFrameBuffer(fb)
     {
@@ -535,9 +531,6 @@ export class CglContext extends CgContext
 
     /**
      * pop framebuffer stack
-     * @function popGlFrameBuffer
-     * @memberof Context
-     * @instance
      * @returns {Object} current framebuffer or null
      */
     popGlFrameBuffer()
@@ -549,9 +542,6 @@ export class CglContext extends CgContext
 
     /**
      * get current framebuffer
-     * @function getCurrentFrameBuffer
-     * @memberof Context
-     * @instance
      * @returns {Object} current framebuffer or null
      */
     getCurrentGlFrameBuffer()
@@ -562,9 +552,6 @@ export class CglContext extends CgContext
 
     /**
      * push a framebuffer to the framebuffer stack
-     * @function pushGlFrameBuffer
-     * @memberof Context
-     * @instance
      * @param {Framebuffer2} fb framebuffer
      */
     pushFrameBuffer(fb)
@@ -574,9 +561,6 @@ export class CglContext extends CgContext
 
     /**
      * pop framebuffer stack
-     * @function popFrameBuffer
-     * @memberof Context
-     * @instance
      * @returns {Framebuffer2} current framebuffer or null
      */
     popFrameBuffer()
@@ -588,9 +572,6 @@ export class CglContext extends CgContext
 
     /**
      * get current framebuffer
-     * @function getCurrentFrameBuffer
-     * @memberof Context
-     * @instance
      * @returns {Framebuffer2} current framebuffer or null
      */
     getCurrentFrameBuffer()
@@ -794,12 +775,8 @@ export class CglContext extends CgContext
 
     /**
      * push depth testing enabled state
-     * @function pushDepthTest
      * @param {Boolean} enabled
-     * @memberof Context
-     * @instance
      */
-
     pushDepthTest(enabled)
     {
         this._stackDepthTest.push(enabled);
@@ -821,9 +798,6 @@ export class CglContext extends CgContext
 
     /**
      * pop depth testing state
-     * @function popCullFace
-     * @memberof Context
-     * @instance
      */
     popDepthTest()
     {

@@ -9,9 +9,8 @@ let lastUpdateTitle=0
 function updateTitle()
 {
     op.setUiAttrib({ "extendTitle": (Math.round(outUsed.get()*100)/100)+"ms" });
-
-lastUpdateTitle=performance.now()
-  }
+    lastUpdateTitle=performance.now()
+}
 
 function update()
 {
@@ -19,5 +18,5 @@ function update()
     outNext.trigger();
     const used = performance.now() - startTime;
     outUsed.set(used);
-if(performance.now()-lastUpdateTitle>300)updateTitle()
+    if(performance.now()-lastUpdateTitle>300)updateTitle()
 }
