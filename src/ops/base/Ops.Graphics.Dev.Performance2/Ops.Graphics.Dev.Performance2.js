@@ -24,8 +24,7 @@ const pp = op.patch.perfProfiler;
 createCanvas();
 op.patch.cgl.on("heavyEvent", (e) =>
 {
-outLog.set(e.event+" - "+e.name);
-console.log("eee",e);
+  outLog.set(e.event+" - "+e.name);
 })
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
