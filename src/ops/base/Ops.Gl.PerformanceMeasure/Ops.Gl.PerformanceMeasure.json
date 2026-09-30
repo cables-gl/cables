@@ -4,7 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1550742030262
+            "date": 1550742030262,
+            "type": "new op"
+        },
+        {
+            "message": "Show time in extended op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790753162795
         }
     ],
     "authorName": "pandur",
