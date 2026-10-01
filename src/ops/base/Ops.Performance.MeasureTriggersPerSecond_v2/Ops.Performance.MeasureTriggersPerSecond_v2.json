@@ -8,6 +8,10 @@
         ],
         "portsOut": [
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 0,
                 "name": "cps",
                 "subType": "number"
@@ -28,8 +32,8 @@
         ]
     },
     "authorName": "pandur",
-    "id": "ece2f153-eb31-4268-b0e5-8143ad2fdd81",
-    "created": 1542699364197,
+    "id": "c8caf622-e4f7-43f5-aca9-ed7459a631b8",
+    "created": 1790858212577,
     "changelog": [
         {
             "message": "Ops.Debug.CallsPerSecond renamed to Ops.Trigger.TriggersPerSecond",
@@ -40,11 +44,22 @@
             "message": "add current count in extended title",
             "author": "stephan",
             "date": 1643887850801
+        },
+        {
+            "message": "created as a new version of Ops.Trigger.TriggersPerSecond",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790858212577
+        },
+        {
+            "message": "Trigger.TriggersPerSecond_v2 renamed to Ops.Performance.MeasureTriggersPerSecond_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790858275869
         }
     ],
     "issues": "",
     "youtubeids": [],
     "exampleProjectId": "JCkpVJ",
-    "isReleased": true,
     "license": "MIT"
 }
