@@ -104,7 +104,9 @@ export class CglRenderLoop extends RenderLoop
 
         if (this.#patch && this.#patch.config.doRequestAnimation)
         {
-            this.#animReq = this.#patch.getDocument().defaultView.requestAnimationFrame(this.exec.bind(this));
+            const win = this.#patch.getDocument().defaultView;
+            if (this.#animReq) win.cancelAnimationFrame(this.#animReq);
+            this.#animReq = win.requestAnimationFrame(this.exec.bind(this));
         }
     }
 
