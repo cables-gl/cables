@@ -47,8 +47,7 @@
             }
         ]
     },
-    "summary": "Generate a 3d point field with controllable amount of xyz points (was PointsField3d)",
-    "issues": "",
+    "summary": "Generate a 3d point field with controllable amount of xyz points / cube,box",
     "docs": {
         "ports": [
             {
@@ -86,17 +85,6 @@
             "message": "fixed - now correctly creates a ointField when the op is created",
             "author": "andro",
             "date": 1559136995246
-        },
-        {
-            "message": "Ops.Points.PointsField3d renamed to Ops.Points.PointsCube",
-            "author": "pandur",
-            "date": 1567672099542
-        },
-        {
-            "message": "Ops.Points.PointsCube renamed to Ops.Array.PointArray.PointsCube",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701854339373
         }
     ],
     "youtubeids": [

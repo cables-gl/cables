@@ -69,7 +69,7 @@ export class CglContext extends CgContext
         this.gl = null;
 
         this.#cursor = "auto";
-        this._currentCursor = "";
+        this._currentCursor = "auto";
 
         this._viewPortStack = [];
         this._glFrameBufferStack = [];
@@ -420,6 +420,7 @@ export class CglContext extends CgContext
         {
             this._currentCursor = this.canvas.style.cursor = this.#cursor;
         }
+        // console.log("text", this.#cursor);
 
         this.emitEvent("endframe");
 
@@ -592,6 +593,7 @@ export class CglContext extends CgContext
             this.glQueryTimerUpdate();
             this.glQueryTimerglBeginFrame();
         }
+        this.#cursor = "auto";
         this.fpsCounter.startFrame();
         this.pushDepthTest(true);
         this.pushDepthWrite(true);

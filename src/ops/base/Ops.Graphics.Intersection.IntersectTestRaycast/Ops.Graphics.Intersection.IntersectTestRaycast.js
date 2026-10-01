@@ -1,14 +1,14 @@
 const
     trigger = op.inTrigger("Trigger"),
     inCoords = op.inSwitch("Coordinate Format", ["-1 to 1", "XYZ-XYZ"], "-1 to 1"),
-    inX = op.inValueFloat("X"),
-    inY = op.inValueFloat("Y"),
+    inX = op.inFloat("X"),
+    inY = op.inFloat("Y"),
 
-    inZ = op.inValueFloat("Z"),
+    inZ = op.inFloat("Z"),
 
-    inToX = op.inValueFloat("To X"),
-    inToY = op.inValueFloat("To Y"),
-    inToZ = op.inValueFloat("To Z"),
+    inToX = op.inFloat("To X"),
+    inToY = op.inFloat("To Y"),
+    inToZ = op.inFloat("To Z"),
 
     active = op.inBool("Active", true),
     inCursor = op.inBool("Change Cursor", true),
@@ -109,6 +109,8 @@ function doRender()
                         outName.set(body.name);
                         outHasHit.set(true);
 
+                        if (inCursor.get()) op.patch.cgl.setCursor("pointer");
+
                         foundDist = dist;
 
                         vec3.mul(oc, dir, [dist, dist, dist]);
@@ -143,6 +145,7 @@ function doRender()
                 found = true;
                 outName.set(body.name);
                 outHasHit.set(true);
+                if (inCursor.get()) op.patch.cgl.setCursor("pointer");
 
                 vec3.mul(oc, dir, [tmin, tmin, tmin]);
                 vec3.add(oc, oc, origin);
