@@ -8,7 +8,7 @@
             {
                 "type": 0,
                 "name": "Iterations",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": 0,

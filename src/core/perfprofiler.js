@@ -54,10 +54,22 @@ export class PerfProfiler
     }
 
     /**
+     * @param {string } name
+     */
+    getCount(name)
+    {
+        if (this.counts.hasOwnProperty("count " + name))
+        {
+            return this.counts["count " + name];
+        }
+        return -1;
+    }
+
+    /**
      * @param {string} _name
      * @param {number} [v]
      */
-    count(_name, v)
+    count(_name, v = 1)
     {
         const name = "count " + _name;
         this.counts[name] = this.counts[name] || 0;

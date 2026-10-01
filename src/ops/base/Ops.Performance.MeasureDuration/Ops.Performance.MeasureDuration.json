@@ -12,6 +12,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1790753162795
+        },
+        {
+            "message": "Gl.PerformanceMeasure renamed to Ops.Performance.MeasureDuration",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790855898726
         }
     ],
     "authorName": "pandur",

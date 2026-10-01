@@ -1,0 +1,33 @@
+{
+    "id": "b040f51f-b9f1-4fea-b45b-65e444e9bae0",
+    "created": 1790856095132,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790856095143
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total drawcalls",
+                "subType": "number"
+            }
+        ]
+    }
+}
