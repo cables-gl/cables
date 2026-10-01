@@ -58,6 +58,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1788434737480
+        },
+        {
+            "message": "Graphics.Dev.Performance2 renamed to Ops.Performance.Performance2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1790857635930
         }
     ],
     "coreLibs": [
