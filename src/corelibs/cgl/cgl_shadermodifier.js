@@ -559,6 +559,9 @@ export class ShaderModifier
 
     dispose()
     {
-
+        for (const i in this._origShaders) this._origShaders[i].shader.dispose();
+        this._origShaders = {};
+        this._boundShader = null;
+        this._textures.length = 0;
     }
 }

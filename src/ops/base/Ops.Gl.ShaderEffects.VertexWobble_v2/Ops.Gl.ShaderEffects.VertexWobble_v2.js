@@ -88,6 +88,11 @@ function setDefines()
     mod.toggleDefine("MOD_SRC_LENGTH", src.get() == "length");
 }
 
+op.onDelete = () =>
+{
+    mod.dispose();
+};
+
 render.onTriggered = function ()
 {
     mod.bind();

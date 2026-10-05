@@ -172,6 +172,11 @@ function drawHelpers()
     }
 }
 
+op.onDelete = () =>
+{
+    mod.dispose();
+};
+
 function doRender()
 {
     mod.bind();

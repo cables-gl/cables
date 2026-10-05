@@ -767,6 +767,7 @@ class CglShader extends CgShader
             // this.vshader=createShader(vs, gl.VERTEX_SHADER, this.vshader );
             // this.fshader=createShader(fs, gl.FRAGMENT_SHADER, this.fshader );
             // linkProgram(program);
+            this._deleteProgram();
             this._program = this._createProgram(vs, fs);
 
             this._projMatrixUniform = null;
@@ -927,9 +928,21 @@ class CglShader extends CgShader
 
     dispose()
     {
+        this._deleteProgram();
+    }
 
-        if (this._program && this._cgl && this._cgl.gl) this._cgl.gl.deleteProgram(this._program);
+    _deleteProgram()
+    {
+        const gl = this._cgl?.gl;
+        if (gl)
+        {
+            if (this._program) gl.deleteProgram(this._program);
+            if (this.vshader) gl.deleteShader(this.vshader);
+            if (this.fshader) gl.deleteShader(this.fshader);
+        }
         this._program = null;
+        this.vshader = null;
+        this.fshader = null;
     }
 
     setDrawBuffers(arr)
@@ -1145,6 +1158,7 @@ class CglShader extends CgShader
         }
         else
         {
+            this._cgl.gl.deleteProgram(program);
             this._isValid = false;
             this._cgl.printError("shader _createProgram");
             this._log.error("could not link shaderprogram");
