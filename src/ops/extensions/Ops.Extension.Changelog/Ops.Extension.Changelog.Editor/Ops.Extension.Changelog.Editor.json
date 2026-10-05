@@ -457,6 +457,64 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1790613588441
+        },
+        {
+            "message": "Text editor remembers the line your cursor was in when reloading the editor",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790766747626
+        },
+        {
+            "message": "Improved [c] centering/zooming takes sidepanels into account",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790839966444
+        },
+        {
+            "message": "Restore the view position/zoom and subpatch op when loading the patch after saving",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790858099714
+        },
+        {
+            "message": "Fix cursors of elements/conflicting with cgl cursor handling",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790862658733,
+            "url": "https://github.com/cables-gl/cables/issues/8485"
+        },
+        {
+            "message": "Timeline icon state of play/pause is now correctly updated when using other ways to toggle it",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790865492045
+        },
+        {
+            "message": "Fix and improve dragging of ports to and from the parameter panel title lines into/from the patchfield",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790868503937,
+            "url": "https://github.com/cables-gl/cables/issues/8429"
+        },
+        {
+            "message": "Show a minimalistic upload progressbar when uploading files to the editor, will be cumulated when uploading multiple files at once",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790885637358,
+            "url": "https://github.com/cables-gl/cables/issues/8185"
+        },
+        {
+            "message": "CMD/CTRL + D will duplicate ops, it will also duplicate all cables connected to ops outside of this connection",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1790887564930,
+            "url": "https://github.com/cables-gl/cables/issues/8104"
+        },
+        {
+            "message": "Added commands to set timeline time/frame",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791206133566
         }
     ],
     "isReleased": true,

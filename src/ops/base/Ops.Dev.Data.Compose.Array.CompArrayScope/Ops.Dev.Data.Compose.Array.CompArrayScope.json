@@ -24,6 +24,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1790173913281
+        },
+        {
+            "message": "Data.Compose.Array.CompArrayScope renamed to Ops.Dev.Data.Compose.Array.CompArrayScope",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1791205686617
         }
     ],
     "layout": {

@@ -13,26 +13,27 @@ inNumColumns.setUiAttribs({ "hidePort": true });
 outp.setUiAttribs({ "hidePort": true });
 
 inNumColumns.onChange =
-inDefault.onChange =
-outp.onChange =
-spread.onChange = update;
+    inDefault.onChange =
+    outp.onChange =
+    spread.onChange = update;
 
 inNumColumns.onChange = updateUi;
 updateUi();
 
 function updateUi()
 {
-    spread.setUiAttribs({
-        "display": "spreadsheet",
-        "spread_numColumns": inNumColumns.get()
-    });
+    spread.setUiAttribs(
+        {
+            "display": "spreadsheet",
+            "spread_numColumns": inNumColumns.get()
+        });
 }
 
 function updateDefault()
 {
     defaultValue = 0;
-    if (inDefault.get() == "null")defaultValue = null;
-    else if (inDefault.get() == "Empty String")defaultValue = "";
+    if (inDefault.get() == "null") defaultValue = null;
+    else if (inDefault.get() == "Empty String") defaultValue = "";
 }
 
 function update()

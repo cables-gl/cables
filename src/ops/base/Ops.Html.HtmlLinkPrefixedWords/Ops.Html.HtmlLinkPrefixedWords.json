@@ -1,0 +1,41 @@
+{
+    "id": "74c6636d-7c9a-4a9a-b5f6-bba8bab4f6cc",
+    "created": 1791204737469,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791204737470
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 5,
+                "name": "Prefix"
+            },
+            {
+                "type": 5,
+                "name": "BaseURL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "isReleased": true,
+    "summary": "Create links from words with a prefix to a url as suffix",
+    "docs": {
+        "ports": []
+    }
+}

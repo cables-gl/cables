@@ -191,6 +191,18 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1789654211811
+        },
+        {
+            "message": "Now listing credits of core-ops on support page",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791200447808
+        },
+        {
+            "message": "Added social media share buttons to patch page (mastodon/bluesky)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1791206176250
         }
     ],
     "isReleased": true,

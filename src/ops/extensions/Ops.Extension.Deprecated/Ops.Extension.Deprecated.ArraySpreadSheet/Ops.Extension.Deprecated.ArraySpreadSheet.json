@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1612768563869
+        },
+        {
+            "message": "op Dev.Array.ArraySpreadSheet was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791204417137
         }
     ],
     "authorName": "pandur",

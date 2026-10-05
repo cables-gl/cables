@@ -36,30 +36,13 @@
     "created": 1790858212577,
     "changelog": [
         {
-            "message": "Ops.Debug.CallsPerSecond renamed to Ops.Trigger.TriggersPerSecond",
-            "author": "pandur",
-            "date": 1560411540542
-        },
-        {
-            "message": "add current count in extended title",
-            "author": "stephan",
-            "date": 1643887850801
-        },
-        {
             "message": "created as a new version of Ops.Trigger.TriggersPerSecond",
             "type": "new op",
             "author": "pandur",
             "date": 1790858212577
-        },
-        {
-            "message": "Trigger.TriggersPerSecond_v2 renamed to Ops.Performance.MeasureTriggersPerSecond_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1790858275869
         }
     ],
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "JCkpVJ",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }
