@@ -34,8 +34,7 @@ class Timer extends Events
     #paused = true;
     #delay = 0;
     #timeStart = 0;
-    #ts;
-
+    #ts = 0;
 
     constructor()
     {
@@ -43,7 +42,20 @@ class Timer extends Events
 
         this.#timeStart = 0;
         this.overwriteTime = -1;
-        this.#lastTime
+        this.#lastTime;
+    }
+
+    reset()
+    {
+        this.#lastTime = 0;
+        this.#timeOffset = 0;
+        this.#currentTime = 0;
+        this.#paused = true;
+        this.#delay = 0;
+        this.#timeStart = 0;
+        this.overwriteTime = -1;
+        this.emitEvent(Timer.EVENT_TIME_CHANGED);
+        this.emitEvent(Timer.EVENT_PLAY_PAUSE);
     }
 
     #internalNow()

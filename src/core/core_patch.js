@@ -382,7 +382,7 @@ export class Patch extends Events
     {
         this.emitEvent("patchClearStart");
         this.animFrameOps.length = 0;
-        this.timer = new Timer();
+        this.timer.reset();
         while (this.ops.length > 0) this.deleteOp(this.ops[0].id);
 
         this._opIdCache = {};
