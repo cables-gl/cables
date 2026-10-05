@@ -2,13 +2,16 @@ export class PerfProfiler
 {
     numframes = 120;
 
-    /** @type {Object<String,number>} */
-    counts = {};
+    /** @type {Map<String,number>} */
+    counts = new Map();
     countsFrames = {};
 
     /** @type {Object<String,number>} */
     durations = {};
     durationsFrames = {};
+
+    /** @type {Object<String,String>} */
+    #countNames = {};
 
     constructor()
     {
@@ -34,8 +37,8 @@ export class PerfProfiler
         {
             while (this.countsFrames[i].length < this.numframes) this.countsFrames[i].push({ "num": 0 });
             this.countsFrames[i] = this.countsFrames[i] || [];
-            if (this.counts.hasOwnProperty(i))
-                this.countsFrames[i].push({ "num": this.counts[i] });
+            if (this.counts.has(i))
+                this.countsFrames[i].push({ "num": this.counts.get(i) });
             else
             if (this.countsFrames[i] && this.countsFrames[this.countsFrames[i].length - 1])
                 this.countsFrames[i].push(this.countsFrames[this.countsFrames[i].length - 1]);
@@ -49,7 +52,7 @@ export class PerfProfiler
     reset()
     {
 
-        this.counts = {};
+        this.counts.clear();
         this.durations = {};
     }
 
@@ -58,9 +61,9 @@ export class PerfProfiler
      */
     getCount(name)
     {
-        if (this.counts.hasOwnProperty("count " + name))
+        if (this.counts.has("count " + name))
         {
-            return this.counts["count " + name];
+            return this.counts.get("count " + name);
         }
         return -1;
     }
@@ -71,11 +74,13 @@ export class PerfProfiler
      */
     count(_name, v = 1)
     {
-        const name = "count " + _name;
-        this.counts[name] = this.counts[name] || 0;
-        this.countsFrames[name] = this.countsFrames[name] || 0;
-        if (v) this.counts[name] += v;
-        else this.counts[name]++;
+        let name = this.#countNames[_name];
+        if (!name)
+        {
+            name = this.#countNames[_name] = "count " + _name;
+            this.countsFrames[name] = this.countsFrames[name] || 0;
+        }
+        this.counts.set(name, (this.counts.get(name) || 0) + (v || 1));
     }
 
     /**

@@ -78,7 +78,7 @@ export class Uniform extends CgUniform
 
     isValidLoc()
     {
-        const v = this._loc != -1 && this._loc != null;
+        const v = this._loc !== -1 && this._loc != null;
         // if (!v)console.log("invalid", this);
         return v;
 

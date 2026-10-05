@@ -101,6 +101,8 @@ class Mesh extends CgMesh
     // _transformFeedBackLoc = -1;
 
     #lastAttrUpdate = 0;
+    #countNamePrimitives = "";
+    #countNameDrawCalls = "";
 
     memFreed = false;
     queryExt = null;
@@ -119,6 +121,8 @@ class Mesh extends CgMesh
     {
         super();
         this.#cgl = _cgl;
+        this.#countNamePrimitives = this.#cgl.name + "glprimitives";
+        this.#countNameDrawCalls = this.#cgl.name + "meshDrawCalls";
 
         let options = _options || {};
 
@@ -624,9 +628,8 @@ class Mesh extends CgMesh
         if (!shader) return;
         if (!shader.isValid()) return;
 
-        let attrLocs = [];
-        if (this.#attribLocs[shader.id]) attrLocs = this.#attribLocs[shader.id];
-        else this.#attribLocs[shader.id] = attrLocs;
+        let attrLocs = this.#attribLocs[shader.id];
+        if (!attrLocs) attrLocs = this.#attribLocs[shader.id] = [];
 
         this.#lastShader = shader;
         if (shader.lastCompile > this.#lastAttrUpdate || attrLocs.length != this.#attributes.length)
@@ -726,9 +729,8 @@ class Mesh extends CgMesh
         this.#lastShader = null;
         if (!shader) return;
 
-        let attrLocs = [];
-        if (this.#attribLocs[shader.id]) attrLocs = this.#attribLocs[shader.id];
-        else this.#attribLocs[shader.id] = attrLocs;
+        let attrLocs = this.#attribLocs[shader.id];
+        if (!attrLocs) attrLocs = this.#attribLocs[shader.id] = [];
 
         MESH.lastMesh = null;
 
@@ -1030,11 +1032,11 @@ class Mesh extends CgMesh
         }
 
         /* minimalcore:start */
-        this.#cgl.perfProfiler.count(this.#cgl.name + "glprimitives", Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
-        this.#cgl.perfProfiler.count(this.#cgl.name + "meshDrawCalls");
+        this.#cgl.perfProfiler.count(this.#countNamePrimitives, Math.floor((this._bufVertexAttrib.numItems / elementDiv) * (this.#numInstances || 1)));
+        this.#cgl.perfProfiler.count(this.#countNameDrawCalls);
 
         /* minimalcore:end */
-        this.#cgl.printError("mesh render " + this._name);
+        if (this.#cgl.checkGlErrors) this.#cgl.printError("mesh render " + this._name);
 
         this.unBind();
     }
