@@ -1,7 +1,7 @@
 const
     inEle = op.inObject("Element", null, "element"),
     inSetFam = op.inBool("Set Family", true),
-    inFamily = op.inString("Font Family", "sans serif"),
+    inFamily = op.inString("Font Family", "arial"),
     inSize = op.inFloat("Text Size", 12),
     inWeight = op.inString("Font Weight", "normal"),
     inAlign = op.inSwitch("Text Align", ["Left", "Center", "Right", "Justify"], "Left"),
@@ -25,7 +25,7 @@ inLetterSpace.onChange =
     inDecoration.onChange =
     inLineHeight.onChange =
     inSetFam.onChange =
-        update;
+    update;
 
 op.onDelete = remove;
 
@@ -54,13 +54,13 @@ function update()
         ele.style["text-align"] = inAlign.get().toLowerCase();
         ele.style["text-decoration"] = inDecoration.get().toLowerCase();
 
-        if (inSize.get())ele.style["font-size"] = inSize.get() + "px";
+        if (inSize.get()) ele.style["font-size"] = inSize.get() + "px";
         else ele.style["font-size"] = "";
 
         if (inLineHeight.get()) ele.style["line-height"] = inLineHeight.get() + "px";
         else ele.style["line-height"] = "";
 
-        if (inUserSelectNone.get())ele.style["user-select"] = "none";
+        if (inUserSelectNone.get()) ele.style["user-select"] = "none";
     }
     else
     {

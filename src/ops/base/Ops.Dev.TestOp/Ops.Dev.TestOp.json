@@ -157,5 +157,6 @@
         "ports": []
     },
     "summary": "just testing",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }
