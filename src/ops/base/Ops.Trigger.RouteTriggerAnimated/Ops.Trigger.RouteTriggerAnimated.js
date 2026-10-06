@@ -6,6 +6,8 @@ initializeSubpatch();
 
 function initializeSubpatch()
 {
+    if (!attachments || !attachments.subpatch_json) return;
+
     const p = JSON.parse(attachments.subpatch_json);
 
     CABLES.Patch.replaceOpIds(p,
@@ -21,9 +23,12 @@ function initializeSubpatch()
         p.ops[i].uiAttribs.blueprintSubpatch2 = true;
     }
 
-    op.patch.deSerialize(p, { "opsCreated": op.initInnerPorts });
-    if (CABLES.UI)gui.savedState.setSaved("blueprintloaded", patchId);
-    op.patch.emitEvent("subpatchExpose", patchId);
-    op.setStorage({ "blueprintVer": 2 });
-    op.patch.emitEvent("subpatchExpose", patchId);
+    op.loadDependencies(p, () =>
+    {
+        op.patch.deSerialize(p, { "opsCreated": op.initInnerPorts });
+        if (CABLES.UI)gui.savedState.setSaved("blueprintloaded", patchId);
+        op.patch.emitEvent("subpatchExpose", patchId);
+        op.setStorage({ "blueprintVer": 2 });
+        op.patch.emitEvent("subpatchExpose", patchId);
+    });
 }
