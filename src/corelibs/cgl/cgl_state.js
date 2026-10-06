@@ -180,7 +180,7 @@ export class CglContext extends CgContext
 
         if (!this.patchConfig.canvas.forceWebGl1) this.gl = canv.getContext("webgl2", this.patchConfig.canvas);
 
-        if (!this.gl || this.gl.isContextLost())
+        if (!this.gl || this.gl.isContextLost() || !this.gl.createTexture || !this.gl.createBuffer)
         {
             this.aborted = true;
             const msg = "Could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.";

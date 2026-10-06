@@ -56,8 +56,8 @@ export class Texture extends CgTexture
     constructor(__cgl, options = {})
     {
         super(options);
-        if (!__cgl) throw new Error("cgl texture: no cgl");
-        if (!__cgl.gl) throw new Error("cgl texture: no gl");
+        if (!__cgl) return;// throw new Error("cgl texture: no cgl");
+        if (!__cgl.gl) return;// throw new Error("cgl texture: no gl");
 
         this._cgl = __cgl;
         this._log = new Logger("tex");
