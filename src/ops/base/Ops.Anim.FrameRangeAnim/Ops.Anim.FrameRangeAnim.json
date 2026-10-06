@@ -59,19 +59,6 @@
         "ports": []
     },
     "isReleased": true,
-    "changelog": [
-        {
-            "message": "Anim.FrameRangeAnim renamed to Ops.Anim.FrameRangeAnims",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1790234292823
-        },
-        {
-            "message": "Anim.FrameRangeAnims renamed to Ops.Anim.FrameRangeAnim",
-            "type": "rename",
-            "author": "stephan",
-            "date": 1790234464811
-        }
-    ],
+    "changelog": [],
     "license": "MIT"
 }

@@ -203,6 +203,12 @@
             "type": "feature",
             "author": "stephan",
             "date": 1791206176250
+        },
+        {
+            "message": "Added option for team-owner to remove patches from team",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1791206251534
         }
     ],
     "isReleased": true,
