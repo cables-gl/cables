@@ -63,5 +63,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "phTYCu"
 }

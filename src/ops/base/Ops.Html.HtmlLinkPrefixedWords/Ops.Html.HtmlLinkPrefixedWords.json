@@ -37,5 +37,6 @@
     "summary": "Create links from words with a prefix to a url as suffix",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Ge5Lfx"
 }
