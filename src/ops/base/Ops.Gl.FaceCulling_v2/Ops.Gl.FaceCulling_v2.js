@@ -9,7 +9,7 @@ const
     cgl = op.patch.cgl;
 
 op.setPortGroup("Face Fulling", [enable, facing]);
-let whichFace = cgl.gl.BACK;
+let whichFace = cgl?.gl?.BACK;
 let updateFacing = true;
 
 render.onTriggered = function ()

@@ -1249,7 +1249,7 @@ export class CglContext extends CgContext
 
     glQueryTimerglBeginFrame()
     {
-        if (!this.glQueryQuery)
+        if (!this.glQueryQuery && this.gl)
         {
             if (!this.glQueryExt) this.glQueryExt = this.gl.getExtension("EXT_disjoint_timer_query_webgl2");
             if (this.glQueryExt)
