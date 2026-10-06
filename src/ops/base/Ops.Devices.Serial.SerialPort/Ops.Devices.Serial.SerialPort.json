@@ -1,0 +1,70 @@
+{
+    "id": "84314c30-d005-40fd-8421-e43b10b6ac13",
+    "created": 1791228837126,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791228837127
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Connect"
+            },
+            {
+                "type": 0,
+                "name": "Baud Rate",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "String To Send"
+            },
+            {
+                "type": 1,
+                "name": "Send"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Last String"
+            },
+            {
+                "type": 0,
+                "name": "Connected",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Received Lines",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    },
+    "isReleased": true,
+    "summary": "Line based serial port communication ",
+    "docs": {
+        "ports": []
+    }
+}

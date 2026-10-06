@@ -137,6 +137,11 @@ function removeCanvas()
     canvas = null;
 }
 
+op.on("init", () =>
+{
+    setTimeout(() => { op.refreshParams(); }, 100);
+});
+
 op.on("delete", () =>
 {
     removeCanvas();
