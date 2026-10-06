@@ -66,5 +66,6 @@
     "summary": "Line based serial port communication ",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "BRrJfx"
 }

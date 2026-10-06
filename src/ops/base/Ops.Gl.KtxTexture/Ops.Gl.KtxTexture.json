@@ -83,5 +83,6 @@
     "summary": "Load a KTX Texture File",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Q3OMfx"
 }

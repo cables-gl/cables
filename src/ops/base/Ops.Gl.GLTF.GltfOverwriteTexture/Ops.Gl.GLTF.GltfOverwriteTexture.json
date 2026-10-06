@@ -43,5 +43,6 @@
     "summary": "Overwrite a texture coming from GLTF file",
     "docs": {
         "ports": []
-    }
+    },
+    "exampleProjectId": "Z16Kfx"
 }
