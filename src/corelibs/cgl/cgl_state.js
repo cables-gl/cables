@@ -588,6 +588,7 @@ export class CglContext extends CgContext
      */
     renderStart(cgl, identTranslate, identTranslateView)
     {
+        if (!cgl || !cgl.gl) return;
         if (this.doGlQueryTiming)
         {
             this.glQueryTimerUpdate();

@@ -235,6 +235,7 @@ export class Texture extends CgTexture
      */
     setSize(w, h)
     {
+        if (!this._cgl || !this._cgl.gl) return;
         if (this.compression) return;
         if (this._cgl.aborted) return;
         if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
@@ -285,10 +286,7 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @function initFromData
-     * @memberof Texture
-     * @instance
-     * @description create texturem from rgb data
+     *  create texturem from rgb data
      * @param {Array<Number>} data rgb color array [r,g,b,a,r,g,b,a,...]
      * @param {Number} w width
      * @param {Number} h height
@@ -297,6 +295,7 @@ export class Texture extends CgTexture
      */
     initFromData(data, w, h, filter, wrap)
     {
+        if (!this._cgl || !this._cgl.gl) return;
         const measure = this._cgl.profileData.start("texture.initfromdata ");
         this.filter = filter;
         this.wrap = wrap;
@@ -345,6 +344,7 @@ export class Texture extends CgTexture
      */
     initFromMipMapData(mips)
     {
+        if (!this._cgl || !this._cgl.gl) return;
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
         for (let i = 0; i < mips.length; i++)
