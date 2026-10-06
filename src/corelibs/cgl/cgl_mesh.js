@@ -337,6 +337,7 @@ class Mesh extends CgMesh
      */
     setAttribute(name, array, itemSize, options = {})
     {
+        if (!this.#cgl || !this.#cgl.gl) return;
         if (!array)
         {
             this.#log.error("mesh addAttribute - no array given! " + name);
