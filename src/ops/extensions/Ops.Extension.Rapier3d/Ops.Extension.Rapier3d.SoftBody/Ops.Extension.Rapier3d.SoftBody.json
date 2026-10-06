@@ -148,5 +148,19 @@
                 "name": "Soft Body"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "new op",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791275387306
+        }
+    ],
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "UTlwIw",
+    "summary": "Deformable body simulation"
 }
