@@ -181,6 +181,7 @@ export class Texture extends CgTexture
      */
     clone()
     {
+        if (!this._cgl || !this._cgl.gl) return;
         const newTex = new Texture(this._cgl, {
             "name": this.name,
             "filter": this.filter,
@@ -377,6 +378,7 @@ export class Texture extends CgTexture
      */
     initTexture(img, filter = null, noflipping)
     {
+        if (!this._cgl || !this._cgl.gl) return;
         const measure = this._cgl.profileData.start("texture.initTex ");
         this._cgl.printError("before initTexture");
         this._cgl.checkFrameStarted("texture inittexture");
@@ -439,6 +441,7 @@ export class Texture extends CgTexture
 
     delete()
     {
+        if (!this._cgl || !this._cgl.gl) return;
         if (!this.disposable) return;
 
         if (this.loading)
@@ -630,6 +633,7 @@ export class Texture extends CgTexture
      */
     static load(cgl, url, finishedCallback, settings, op)
     {
+        if (!cgl || !cgl.gl) return;
         if (!url) return finishedCallback({ "error": true });
         let loadingId = null;
         if (!cgl.patch?.loading.existByName(url)) loadingId = cgl.patch?.loading.start("cgl.texture", url, op);
@@ -890,6 +894,7 @@ export class Texture extends CgTexture
      */
     static getEmptyCubemapTexture(cgl)
     {
+        if (!cgl || !cgl.gl) return;
         const faces = [
             cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
             cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
