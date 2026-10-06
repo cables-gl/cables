@@ -49,7 +49,7 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     select3.setUiAttribs({ "values": keys });
 
     outData.setRef(pp);
-    if (activeMem.get()) op.patch.perfProfiler.count("Memory used", (Math.round((performance.memory.usedJSHeapSize / 1024 / 1024) * 100) / 100));
+    if (performance.memory && activeMem.get()) op.patch.perfProfiler.count("Memory used", (Math.round((performance.memory.usedJSHeapSize / 1024 / 1024) * 100) / 100));
 
     updateCanvas();
 });

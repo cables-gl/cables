@@ -1,7 +1,7 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA", "SRGBA"], "RGBA"),
     flip = op.inBool("Flip", false),
@@ -58,7 +58,7 @@ active.onChange = function ()
         textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
         width.set(CGL.Texture.getEmptyTexture(cgl).width);
         height.set(CGL.Texture.getEmptyTexture(cgl).height);
-        if (tex)tex.delete();
+        if (tex) tex.delete();
 
         op.setUiAttrib({ "extendTitle": "x" });
         tex = null;
@@ -90,7 +90,7 @@ function realReload(nocache)
 {
     op.checkMainloopExists();
     if (!active.get()) return;
-    if (loadingId)loadingId = op.patch.loading.finished(loadingId);
+    if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
     loadingId = op.patch.loading.start(op.objName, filename.get(), op);
 
@@ -124,7 +124,7 @@ function realReload(nocache)
                     return;
                 }
 
-                if (tex)tex.delete();
+                if (tex) tex.delete();
 
                 if (err)
                 {
@@ -150,7 +150,8 @@ function realReload(nocache)
 
                 op.checkMainloopExists();
 
-            }, {
+            },
+            {
                 "anisotropic": cgl_aniso,
                 "wrap": cgl_wrap,
                 "flip": flip.get(),
