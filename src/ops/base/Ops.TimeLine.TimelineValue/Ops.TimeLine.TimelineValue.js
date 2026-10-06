@@ -50,16 +50,17 @@ function update()
 function animChange()
 {
     const arr = [];
-    if (animVal.anim.keys && animVal.anim.keys.length > 0)
-    {
-        arr.length = animVal.anim.keys.length * 2;
-
-        for (let i = 0; i < animVal.anim.keys.length; i++)
+    if (animVal && animVal.anim)
+        if (animVal.anim.keys && animVal.anim.keys.length > 0)
         {
-            arr[i * 2 + 0] = animVal.anim.keys[i].time;
-            arr[i * 2 + 1] = animVal.anim.keys[i].value;
+            arr.length = animVal.anim.keys.length * 2;
+
+            for (let i = 0; i < animVal.anim.keys.length; i++)
+            {
+                arr[i * 2 + 0] = animVal.anim.keys[i].time;
+                arr[i * 2 + 1] = animVal.anim.keys[i].value;
+            }
         }
-    }
 
     outArr.setRef(arr);
 }

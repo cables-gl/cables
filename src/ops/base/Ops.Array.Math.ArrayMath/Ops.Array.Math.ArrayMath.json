@@ -57,5 +57,8 @@
     "exampleProjectId": "7E1hqH",
     "isReleased": true,
     "changelog": [],
-    "license": "MIT"
+    "license": "MIT",
+    "coreLibs": [
+        "cgl_texturemath"
+    ]
 }

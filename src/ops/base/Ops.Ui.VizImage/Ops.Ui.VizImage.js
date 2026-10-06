@@ -42,6 +42,7 @@ function filenameChanged(cacheBuster)
 {
     let url = filename.get();
 
+    if (!url) return;
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     element.setAttribute("crossOrigin", "anonymous");
