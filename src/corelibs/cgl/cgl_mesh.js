@@ -120,6 +120,7 @@ class Mesh extends CgMesh
     constructor(_cgl, __geom, _options = {})
     {
         super();
+        if (!_cgl || !_cgl.gl) throw new Error("mesh: no gl");
         this.#cgl = _cgl;
         this.#countNamePrimitives = this.#cgl.name + "glprimitives";
         this.#countNameDrawCalls = this.#cgl.name + "meshDrawCalls";
