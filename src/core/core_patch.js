@@ -147,7 +147,7 @@ export class Patch extends Events
         /* minimalcore:end */
         };
 
-        this.#log = new Logger("core_patch", { "onError": cfg.onError });
+        this.#log = new Logger("core_patch", { "onError": this.config.onError });
         this.timer = new Timer();
         this.freeTimer = new Timer();
         this.gui = null;

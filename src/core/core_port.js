@@ -129,6 +129,8 @@ export class Port extends Events
         super();
         this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
 
+        this.#log = new Logger("core_port", { "onError": ___op.patch.config.onError });
+
         /**
          * @type {Number}
          * @description direction of port (input(0) or output(1))
@@ -887,6 +889,7 @@ export class Port extends Events
             /* minimalcore:end */
             this.#log.error("exception in port: ", portTriggered.name, portTriggered.op.name, portTriggered.op.id);
             this.#log.error(ex);
+
         }
     }
 

@@ -354,6 +354,9 @@ export class Op extends Events
     {
         this.#objName = on;
         this.#log = new Logger("op " + on);
+        console.log("setobjname");
+
+        this.#log = new Logger("op " + on, { "onError": this.patch.config.onError });
     }
 
     get objName()
