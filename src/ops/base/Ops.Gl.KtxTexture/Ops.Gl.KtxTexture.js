@@ -16,6 +16,7 @@ const cgl = op.patch.cgl;
 // op.toWorkPortsNeedToBeLinked(textureOut);
 op.setPortGroup("Size", [width, height]);
 let ktx = CABLES.ktx;
+if (!ktx) op.setUiError("gltfktx", "GLTF ktx compression lib not found / add KtxCompression op to your patch!", 1);
 
 inActive.onChange = () =>
 {
@@ -60,7 +61,16 @@ function reloadSoon(nocache)
 
 function realReload(nocache)
 {
-    if (!CABLES.ktx) return;
+    if (!CABLES.ktx)
+    {
+        op.setUiError("gltfktx", "GLTF ktx compression lib not found / add KtxCompression op to your patch!", 1);
+        return;
+    }
+    else
+    {
+        op.setUiError("gltfktx", null);
+    }
+
     op.checkMainloopExists();
     if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
@@ -116,7 +126,16 @@ op.onFileChanged = function (fn)
 /// //////////////////
 function loadKtx(url, cb, opts)
 {
-    if (!CABLES.ktx) return op.logError("no ktx");
+    if (!CABLES.ktx)
+    {
+        op.setUiError("gltfktx", "GLTF ktx compression lib not found / add KtxCompression op to your patch!", 1);
+        return op.logError("no ktx");
+    }
+    else
+    {
+        op.setUiError("gltfktx", null);
+    }
+
     op.checkMainloopExists();
     if (loadingId) loadingId = op.patch.loading.finished(loadingId);
 
