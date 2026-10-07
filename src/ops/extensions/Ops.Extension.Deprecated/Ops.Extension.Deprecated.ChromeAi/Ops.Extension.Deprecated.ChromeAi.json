@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1720035182051
+        },
+        {
+            "message": "op Dev.ChromeAi was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791389214110
         }
     ],
     "layout": {
@@ -42,5 +48,6 @@
     "exampleProjectId": "fAaHuh",
     "docs": {
         "ports": []
-    }
+    },
+    "isReleased": false
 }

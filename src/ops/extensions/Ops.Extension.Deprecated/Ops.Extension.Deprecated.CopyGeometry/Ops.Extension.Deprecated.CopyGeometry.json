@@ -31,6 +31,12 @@
             "author": "pandur",
             "date": 1660469559287,
             "type": "new"
+        },
+        {
+            "message": "op Dev.Gl.Geometry.CopyGeometry was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791389725575
         }
     ],
     "isReleased": true,

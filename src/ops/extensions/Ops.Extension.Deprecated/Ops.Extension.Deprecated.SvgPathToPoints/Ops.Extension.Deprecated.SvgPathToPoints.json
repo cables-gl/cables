@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.SvgPathToPoints renamed to Ops.Dev.SvgPathToPoints",
             "author": "pandur",
             "date": 1647366791113
+        },
+        {
+            "message": "op Dev.SvgPathToPoints was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791389492088
         }
     ],
     "layout": {
