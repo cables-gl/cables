@@ -1,0 +1,67 @@
+{
+    "id": "ffd15cc6-b5d2-418c-b074-d2535d051494",
+    "created": 1791302122290,
+    "license": "MIT",
+    "authorName": "AdamPartGL",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790250717767
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Sdf.SdfSphere",
+            "type": "new op",
+            "author": "AdamPartGL",
+            "date": 1791302122290,
+            "cloneOf": "452aeb98-0351-4d52-841c-d3effdb3c40d"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "scale",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "scale_factor",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "wrap",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "iterations",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "transform",
+                "objType": "sg_mat4"
+            },
+            {
+                "type": 2,
+                "name": "color",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 2,
+                "name": "active",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "sdf",
+                "objType": "sg_SdfShape"
+            }
+        ]
+    }
+}
