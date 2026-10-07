@@ -19,6 +19,7 @@ const outLoading = op.outBoolNum("Loading", false);
 
 // vars
 let source = null;
+let sourceStarted = false;
 let isPlaying = false;
 let hasEnded = false;
 let pausedAt = null;
@@ -201,6 +202,7 @@ function createAudioBufferSource(dontStart = false)
     }
 
     source = audioCtx.createBufferSource();
+    sourceStarted = false;
 
     const buffer = audioBufferPort.get();
 
@@ -271,6 +273,7 @@ function start(time)
         {
             let offset = Math.max(0, offsetPort.get());
             source.start(time, offset); // 0 = now
+            sourceStarted = true;
 
             isPlaying = true;
             hasEnded = false;
@@ -302,7 +305,8 @@ function stop(time)
     {
         if (source)
         {
-            source.stop();
+            if (sourceStarted) source.stop();
+            sourceStarted = false;
             if (!resetTriggered) recreateBuffer();
         }
 
@@ -311,7 +315,7 @@ function stop(time)
     }
     catch (e)
     {
-        op.setUiError(e);
+        op.logError(e);
         outPlaying.set(false);
     }
 }

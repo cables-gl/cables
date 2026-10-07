@@ -18,6 +18,7 @@ const outEnded = op.outBool("Finished", false);
 
 // vars
 let source = null;
+let sourceStarted = false;
 
 // change listeners
 audioBufferPort.onChange = function ()
@@ -110,6 +111,7 @@ function createAudioBufferSource()
 {
     if (source)stop(0);
     source = audioCtx.createBufferSource();
+    sourceStarted = false;
     const buffer = audioBufferPort.get();
     if (buffer)
     {
@@ -127,6 +129,7 @@ function start(time)
     try
     {
         source.start(time, offsetPort.get()); // 0 = now
+        sourceStarted = true;
     }
     catch (e)
     {
@@ -138,7 +141,8 @@ function stop(time)
 {
     try
     {
-        source.stop(time); // 0 = now
+        if (sourceStarted) source.stop(time); // 0 = now
+        sourceStarted = false;
     }
     catch (e)
     {
