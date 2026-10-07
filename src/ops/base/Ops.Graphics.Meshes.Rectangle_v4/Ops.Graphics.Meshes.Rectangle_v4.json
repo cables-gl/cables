@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1587023107369
+            "date": 1587023107369,
+            "type": "new op"
         },
         {
             "message": "tangents/bitangents fixed",
@@ -29,12 +30,6 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1671034996588
-        },
-        {
-            "message": "Gl.Meshes.Rectangle_v4 renamed to Ops.Graphics.Meshes.Rectangle_v4",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750154518652
         }
     ],
     "authorName": "pandur",
