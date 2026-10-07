@@ -119,9 +119,11 @@ let GltfMaterial = class
             this._matTexOcclusion = gltf.textures[idx];
         }
 
-        this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
-        if (this.doubleSided) this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
-
+        if (inSetGlStates.get())
+        {
+            this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
+            if (this.doubleSided) this.whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
+        }
     }
 
     get name()
@@ -176,15 +178,20 @@ let GltfMaterial = class
 
             let depthTest = true;
             let depthWrite = true;
-            if (this.json.alphaMode == "BLEND") depthWrite = false;
+
+            if (inSetGlStates.get() && this.json.alphaMode == "BLEND") depthWrite = false;
             op.patch.cg.pushDepthTest(depthTest);
             op.patch.cg.pushDepthWrite(depthWrite);
 
             let whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
             if (this.doubleSided) whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
 
-            cgl.pushCullFace(!this.doubleSided);
-            if (this.whichFace) cgl.pushCullFaceFacing(this.whichFace);
+            if (inSetGlStates.get())
+            {
+                cgl.pushCullFace(!this.doubleSided);
+
+                if (this.whichFace) cgl.pushCullFaceFacing(this.whichFace);
+            }
 
             if (uniTexTrans && this.texTransform)
                 uniTexTrans.setValue(this.texTransform);
@@ -232,8 +239,11 @@ let GltfMaterial = class
         const uniPbrMetalness = currentShader.uniformPbrMetalness;
         const uniPbrRoughness = currentShader.uniformPbrRoughness;
 
-        op.patch.cg.popDepthTest();
-        op.patch.cg.popDepthWrite();
+        if (inSetGlStates.get())
+        {
+            op.patch.cg.popDepthTest();
+            op.patch.cg.popDepthWrite();
+        }
 
         if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
         if (uniPbrMetalness && this._matPbrMetalnessOrig != undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
@@ -251,8 +261,11 @@ let GltfMaterial = class
         const uniTexMr = currentShader.materialPropUniforms.metalRoughnessTexture;
         if (uniTexMr) currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
 
-        cgl.popCullFace();
-        if (this.whichFace) cgl.popCullFaceFacing();
+        if (inSetGlStates.get())
+        {
+            cgl.popCullFace();
+            if (this.whichFace) cgl.popCullFaceFacing();
+        }
 
     }
 };

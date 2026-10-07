@@ -101,26 +101,36 @@
                 "subType": "integer"
             },
             {
-                "type": 2,
-                "name": "Materials"
-            },
-            {
                 "type": 3,
                 "name": "Hide Nodes"
             },
             {
+                "type": 2,
+                "name": "Materials",
+                "group": "Materials"
+            },
+            {
                 "type": 0,
                 "name": "Use Material Properties",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Use Material Textures",
+                "group": "Materials",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set gl states",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Use GPU Instancing",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
