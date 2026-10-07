@@ -119,5 +119,10 @@
                 "subType": "number"
             }
         ]
+    },
+    "isReleased": true,
+    "summary": "Grab a body and hold it",
+    "docs": {
+        "ports": []
     }
 }
