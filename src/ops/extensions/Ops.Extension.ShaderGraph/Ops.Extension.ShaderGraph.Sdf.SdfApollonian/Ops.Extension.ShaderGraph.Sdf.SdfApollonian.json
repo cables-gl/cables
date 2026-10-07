@@ -32,6 +32,11 @@
             },
             {
                 "type": 2,
+                "name": "iterations",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
                 "name": "transform",
                 "objType": "sg_mat4"
             },
