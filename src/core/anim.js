@@ -52,7 +52,6 @@ let counts = {};
 /**
  * Keyframed interpolated animation.
  *
- * @class
  * @param cfg
  * @example
  * var anim=new CABLES.Anim();

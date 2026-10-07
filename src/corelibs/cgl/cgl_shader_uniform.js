@@ -21,7 +21,6 @@ import { Shader } from "./cgl_shader.js";
  * </pre>
  *
  * @namespace external:CGL
- * @class
  * @param {CgShader} shader
  * @param {String} [type=f]
  * @param {String} name
@@ -30,11 +29,9 @@ import { Shader } from "./cgl_shader.js";
  * // bind float uniform called myfloat and initialize with value 1.0
  * const unir=new CGL.Uniform(shader,'f','myfloat',1.0);
  * unir.setValue(1.0);
- *
  * // bind float uniform called myfloat and automatically set it to input port value
  * const myPort=op.inFloat("input");
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
- *
  */
 
 // export const Uniform(__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)

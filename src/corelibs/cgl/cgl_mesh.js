@@ -170,10 +170,8 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function updateVertices
-     * @memberof Mesh
-     * @instance
-     * @description update vertices only from a geometry
+     * Update vertices only from a geometry.
+     *
      * @param {Geometry} geom
      */
     updateVertices(geom)
@@ -536,10 +534,8 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function setGeom
-     * @memberof Mesh
-     * @instance
-     * @description set geometry for mesh
+     * Set geometry for mesh.
+     *
      * @param {Geometry} geom
      * @param {boolean} removeRef
      */

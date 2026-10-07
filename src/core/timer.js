@@ -80,7 +80,8 @@ class Timer extends Events
     }
 
     /**
-     * @description returns true if timer is playing
+     * Returns true if timer is playing.
+     *
      * @return {Boolean} value
      */
     isPlaying()
@@ -89,7 +90,8 @@ class Timer extends Events
     }
 
     /**
-     * @description update timer
+     * Update timer.
+     *
      * @param {any} ts
      * @return {Number} time
      */

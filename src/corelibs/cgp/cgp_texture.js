@@ -128,10 +128,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @function initFromData
-     * @memberof Texture
-     * @instance
-     * @description create texturem from rgb data
+     * Creates the texture from rgba data.
+     *
      * @param {ArrayBuffer} data rgb color array [r,g,b,a,r,g,b,a,...]
      * @param {Number} w width
      * @param {Number} h height
@@ -175,10 +173,9 @@ export class Texture extends CgTexture
 }
 
 /**
- * @function load
+ * Load an image from an url.
+ *
  * @static
- * @memberof Texture
- * @description load an image from an url
  * @param {CgpContext} cgp
  * @param {String} url
  * @param {Function} onFinished

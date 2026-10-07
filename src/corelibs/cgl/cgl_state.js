@@ -296,12 +296,7 @@ export class CglContext extends CgContext
         };
     }
 
-    /**
-     * @function popViewPort
-     * @memberof Context
-     * @instance
-     * @description pop viewPort stack
-     */
+    /** Pop viewPort stack. */
     popViewPort()
     {
         this._viewPortStack.pop();
@@ -315,16 +310,14 @@ export class CglContext extends CgContext
             this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
     }
 
-    /**
-     * @function pushViewPort
-     * @memberof Context
-     * @instance
-     * @description push a new viewport onto stack
-     * @param {Number} x
-     * @param {Number} y
-     * @param {Number} w
-     * @param {Number} h
-     */
+/**
+ * Push a new viewport onto stack.
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
+ */
 
     pushViewPort(x, y, w, h)
     {
