@@ -36,6 +36,7 @@ updateAudioStateButton();
 
 op.onDelete = () =>
 {
+    audioCtx.removeEventListener("statechange", updateStateError);
     if (gainNode) gainNode.disconnect();
     gainNode = null;
     if (CABLES.interActionNeededButton) CABLES.interActionNeededButton.remove("audiosuspended");

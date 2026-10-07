@@ -91,6 +91,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1789385800355
+        },
+        {
+            "message": "Added removal of listener when deleting op",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1791373304687
         }
     ],
     "exampleProjectId": "teZhCp",
