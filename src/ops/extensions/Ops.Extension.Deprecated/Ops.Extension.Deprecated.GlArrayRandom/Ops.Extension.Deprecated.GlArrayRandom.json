@@ -30,6 +30,12 @@
             "message": "Ops.User.pandur.GlArrayRandom renamed to Ops.Dev.GlArrayRandom",
             "author": "pandur",
             "date": 1626196661252
+        },
+        {
+            "message": "op Dev.GlArrayRandom was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791388839671
         }
     ],
     "authorName": "pandur",
