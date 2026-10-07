@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1783079337389
-        },
-        {
-            "message": "Gl.MaterialProperties renamed to Ops.Gl.Dev.MaterialProperties",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1791205627502
         }
     ],
     "layout": {
