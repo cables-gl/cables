@@ -25,7 +25,7 @@ const inTitle = op.inString("Title", "");
 const side = op.inBool("Side");
 const addCss = op.inBool("Default CSS", true);
 
-let doc = op.patch.cgl.canvas.ownerDocument;
+let doc = getContainer().ownerDocument;
 
 // outputs
 const childrenPort = op.outObject("childs");
@@ -212,12 +212,20 @@ function updateDynamicStyles()
     doc.body.appendChild(newDynamicStyle);
 }
 
+function getContainer()
+{
+    if (op.patch.containerElement) return op.patch.containerElement;
+    const cg = op.patch.cg || op.patch.cgl;
+    if (cg && cg.canvas) return cg.canvas.parentElement;
+    return document.body;
+}
+
 function initSidebarElement()
 {
     const element = doc.createElement("div");
     element.classList.add(SIDEBAR_CLASS);
     element.classList.add(SIDEBAR_ID);
-    const canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
+    const canvasWrapper = getContainer();
 
     // header...
     const headerGroup = doc.createElement("div");
