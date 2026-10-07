@@ -410,6 +410,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1790242681217
+        },
+        {
+            "message": "Correcly load colors in UINT8 format",
+            "type": "bugfix",
+            "author": "amajesticseaflapflap",
+            "date": 1791365696181,
+            "url": "https://github.com/cables-gl/cables/pull/8716"
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
