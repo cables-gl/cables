@@ -62,6 +62,12 @@
             "message": "Ops.User.pandur.RgbCurlNoise renamed to Ops.Dev.VertexTexture.RgbCurlNoise",
             "author": "pandur",
             "date": 1645187747964
+        },
+        {
+            "message": "op Dev.VertexTexture.RgbCurlNoise was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791389654067
         }
     ],
     "issues": "",

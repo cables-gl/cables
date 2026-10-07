@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1731672301921
+        },
+        {
+            "message": "op Dev.RGBMaxValues was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1791389288806
         }
     ],
     "coreLibs": [

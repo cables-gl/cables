@@ -26,7 +26,7 @@ function initializeSubpatch()
     op.loadDependencies(p, () =>
     {
         op.patch.deSerialize(p, { "opsCreated": op.initInnerPorts });
-        if (CABLES.UI)gui.savedState.setSaved("blueprintloaded", patchId);
+        if (CABLES.UI) gui.savedState.setSaved("blueprintloaded", patchId);
         op.patch.emitEvent("subpatchExpose", patchId);
         op.setStorage({ "blueprintVer": 2 });
         op.patch.emitEvent("subpatchExpose", patchId);

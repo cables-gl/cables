@@ -1,5 +1,5 @@
 const port_c7eli7o9i = op.inTrigger("c7eli7o9i");
-port_c7eli7o9i.setUiAttribs({ "title": "render", });
+port_c7eli7o9i.setUiAttribs({ "title": "render" });
 
 const port_s0ibc22vb = op.inObject("s0ibc22vb");
 port_s0ibc22vb.setUiAttribs({ "title": "Position Texture", "display": "texture", "objType": "texture", "objType": "texture" });
@@ -8,7 +8,7 @@ const port_iuqdv5507 = op.outObject("iuqdv5507");
 port_iuqdv5507.setUiAttribs({ "title": "texture", "display": "texture", "objType": "texture", "objType": "texture" });
 
 const port_ecq8sxutk = op.outTrigger("ecq8sxutk");
-port_ecq8sxutk.setUiAttribs({ "title": "render", });
+port_ecq8sxutk.setUiAttribs({ "title": "render" });
 
 op.initInnerPorts = function (addedOps)
 {
