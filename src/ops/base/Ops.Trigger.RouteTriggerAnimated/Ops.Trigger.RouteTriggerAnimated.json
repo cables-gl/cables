@@ -8,6 +8,12 @@
             "type": "new",
             "author": "pandur",
             "date": 1708612895106
+        },
+        {
+            "message": "Updated to current version of subpatchop code",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791303692041
         }
     ],
     "coreLibs": [

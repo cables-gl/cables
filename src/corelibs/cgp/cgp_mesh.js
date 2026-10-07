@@ -56,10 +56,8 @@ export class CgpMesh extends CgMesh
     }
 
     /**
-     * @function setGeom
-     * @memberof Mesh
-     * @instance
-     * @description set geometry for mesh
+     * Set geometry for mesh.
+     *
      * @param {Geometry} geom geometry
      */
     setGeom(geom)
@@ -96,10 +94,8 @@ export class CgpMesh extends CgMesh
     }
 
     /**
-     * @function setAttribute
-     * @description update attribute
-     * @memberof Mesh
-     * @instance
+     * Update attribute.
+     *
      * @param {String} name attribute name
      * @param {Array} array data
      * @param {Number} itemSize

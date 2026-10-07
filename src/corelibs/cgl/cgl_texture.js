@@ -27,9 +27,9 @@ const log = new Logger("cgl_texture");
  */
 
 /**
- * A Texture
+ * A Texture.
+ *
  * @namespace external:CGL
- * @class
  * @param {CglContext} __cgl cgl
  * @param {Object} options
  * @hideconstructor
@@ -37,9 +37,7 @@ const log = new Logger("cgl_texture");
  * // generate a 256x256 pixel texture of random colors
  * const size=256;
  * const data = new Uint8Array(size*size*4);
- *
  * for(var x=0;x<size*size*4;x++) data[ x*4+3]=255;
- *
  * const tex=new CGL.Texture(cgl);
  * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
@@ -466,10 +464,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @function isPowerOfTwo
-     * @memberof Texture
-     * @instance
-     * @description return true if texture width and height are both power of two
+     * Return true if texture width and height are both power of two.
+     *
      * @return {Boolean}
      */
     isPowerOfTwo()
@@ -741,10 +737,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @static
-     * @function getTempTexture
-     * @memberof Texture
-     * @description returns the default temporary texture (grey diagonal stipes)
+     * Returns the default temporary texture (grey diagonal stripes).
+     *
      * @return {Texture}
      * @param {CglContext} cgl
      */
@@ -757,10 +751,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @static
-     * @function getErrorTexture
-     * @memberof Texture
-     * @description returns the default temporary texture (grey diagonal stipes)
+     * Returns the error texture (red diagonal stripes).
+     *
      * @param {CglContext} cgl
      * @return {Texture}
      */
@@ -773,12 +765,10 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @function getEmptyTexture
-     * @memberof Texture
-     * @instance
+     * Returns a reference to a small empty (transparent) texture.
+     *
      * @param cgl
      * @param fp
-     * @description returns a reference to a small empty (transparent) texture
      * @return {Texture}
      */
     static getEmptyTexture(cgl, fp)
@@ -798,11 +788,9 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @function getEmptyTextureFloat
-     * @memberof Texture
-     * @instance
+     * Returns a reference to a small empty (transparent) 32bit texture.
+     *
      * @param cgl
-     * @description returns a reference to a small empty (transparent) 32bit texture
      * @return {Texture}
      */
     static getEmptyTextureFloat(cgl)
@@ -820,7 +808,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @description returns a reference to a random texture
+     * Returns a reference to a random texture.
+     *
      * @return {Texture}
      * @param {CglContext} cgl
      */
@@ -839,7 +828,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @description returns a reference to a texture containing random numbers between -1 and 1
+     * Returns a reference to a texture containing random numbers between -1 and 1.
+     *
      * @return {Texture}
      * @param {CglContext} cgl
      */
@@ -858,8 +848,9 @@ export class Texture extends CgTexture
     }
 
     /**
+     * Returns a reference to a black texture.
+     *
      * @param {CglContext} cgl
-     * @description returns a reference to a black texture
      * @return {Texture}
      */
     static getBlackTexture(cgl)
@@ -888,7 +879,8 @@ export class Texture extends CgTexture
     }
 
     /**
-     * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
+     * Returns an empty cubemap texture with rgba = [0, 0, 0, 0].
+     *
      * @return {Texture}
      * @param {CglContext} cgl
      */
@@ -1015,11 +1007,11 @@ export class Texture extends CgTexture
     }
 
     /**
- * @static
- * @description returns true if x is power of two
- * @param {Number} x
- * @return {Boolean}
- */
+     * Returns true if x is power of two.
+     *
+     * @param {Number} x
+     * @return {Boolean}
+     */
     static isPowerOfTwo(x)
     {
         return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;

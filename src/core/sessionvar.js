@@ -1,11 +1,7 @@
 // todo: old... remove this from ops...
 
 /* minimalcore:start */
-/**
- * todo: old... remove this from ops...
- *
- * @class
- */
+/** Old session variable, still used by some ops. todo: remove from ops. */
 const Variable = function ()
 {
     let value = null;

@@ -1457,9 +1457,7 @@ export class Patch extends Events
 
     /* minimalcore:end */
 
-    /**
-     * @description invoke pre rendering of ops
-     */
+    /** Invoke pre rendering of ops. */
     /* minimalcore:start */
     preRenderOps()
     {
@@ -1477,9 +1475,7 @@ export class Patch extends Events
 
     /* minimalcore:end */
 
-    /**
-     * @description stop, dispose and cleanup patch
-     */
+    /** Stop, dispose and cleanup patch. */
     dispose()
     {
         this.pause();

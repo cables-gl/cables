@@ -1,6 +1,6 @@
-SdfShape sdfApollonian(float scale, vec3 wrap, mat4 m, vec4 color, float enabled)
+SdfShape sdfApollonian(float scale, vec3 wrap, float iter, mat4 m, vec4 color, float enabled)
 {
-    return SdfShape(vec4(scale, wrap), vec4(0.), sdfInverse(m), color, enabled);
+    return SdfShape(vec4(scale, wrap), vec4(iter,0.,0.,0.), sdfInverse(m), color, enabled);
 }
 
 SdfHit sdfApollonianMap(SdfShape s, vec3 p0)
@@ -13,7 +13,10 @@ SdfHit sdfApollonianMap(SdfShape s, vec3 p0)
     float z = wrap.z;
 
     vec4 p = vec4(p0, 1.);
-    for(int i = 0; i < 8; i++){
+
+    int iter = int(s.b.x);
+
+    for(int i = 0; i < iter; i++){
 
       p.x = mod(p.x-x/2.,x)-x/2.;
       p.y = mod(p.y-y/2.,y)-y/2.;

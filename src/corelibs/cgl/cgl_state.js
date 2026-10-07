@@ -39,7 +39,7 @@ export class CglContext extends CgContext
             _patch.cgl = this;
             if (!patchConfig)patchConfig = _patch.config;
         }
-        if (_patch) this.perfProfiler = _patch.perfProfiler;
+        if (_patch && _patch.perfProfiler) this.perfProfiler = _patch.perfProfiler;
         else this.perfProfiler = new PerfProfiler();
 
         this.aborted = false;
@@ -296,12 +296,7 @@ export class CglContext extends CgContext
         };
     }
 
-    /**
-     * @function popViewPort
-     * @memberof Context
-     * @instance
-     * @description pop viewPort stack
-     */
+    /** Pop viewPort stack. */
     popViewPort()
     {
         this._viewPortStack.pop();
@@ -315,16 +310,14 @@ export class CglContext extends CgContext
             this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
     }
 
-    /**
-     * @function pushViewPort
-     * @memberof Context
-     * @instance
-     * @description push a new viewport onto stack
-     * @param {Number} x
-     * @param {Number} y
-     * @param {Number} w
-     * @param {Number} h
-     */
+/**
+ * Push a new viewport onto stack.
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
+ */
 
     pushViewPort(x, y, w, h)
     {
@@ -1226,7 +1219,7 @@ export class CglContext extends CgContext
         const o = this.gl.getExtension(name);
         this._enabledExtensions[name] = o;
 
-        if (!o) this._log.warn("[cgl_state] extension not available " + name);
+        if (!o) this._log.log("[cgl_state] extension not available " + name);
 
         return o;
     }
@@ -1240,7 +1233,6 @@ export class CglContext extends CgContext
         return this.errorShader;
     }
 
-    /// /
     doGlQueryTiming = false;
     glQueryExt = null;
     glQueryQuery = null;

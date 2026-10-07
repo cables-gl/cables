@@ -58,10 +58,10 @@ import { Op } from "./core_op.js";
  */
 
 /**
- * data is coming into and out of ops through input and output ports
+ * Data is coming into and out of ops through input and output ports.
+ *
  * @namespace external:CABLES#Port
  * @module Port
- * @class
  * @example
  * const myPort=op.inString("String Port");
  */
@@ -132,8 +132,9 @@ export class Port extends Events
         this.#log = new Logger("core_port", { "onError": ___op.patch.config.onError });
 
         /**
+         * Direction of port (input(0) or output(1)).
+         *
          * @type {Number}
-         * @description direction of port (input(0) or output(1))
          */
         this.direction = Port.DIR_IN;
         this.id = String(simpleId());
@@ -303,9 +304,7 @@ export class Port extends Events
         this.onAnimToggle();
     }
 
-    /**
-     * @description remove port
-     */
+    /** Remove port. */
     remove()
     {
         this.removeLinks();
@@ -391,9 +390,7 @@ export class Port extends Events
     /* minimalcore:end */
     }
 
-    /**
-     * @description get value of port
-     */
+    /** Get value of port. */
     get()
     {
 
@@ -420,7 +417,8 @@ export class Port extends Events
     }
 
     /**
-     * @description set value of port / will send value to all linked ports (only for output ports)
+     * Sets the value of the port and sends it to all linked ports (only for output ports).
+     *
      * @param {any|any[] } v
      */
     set(v)
@@ -531,7 +529,8 @@ export class Port extends Events
     }
 
     /**
-     * @description get port type as string, e.g. "Function","Value"...
+     * Returns the port type as a string, e.g. "Function", "Value"...
+     *
      * @return {String} type
      */
     getTypeString()
@@ -688,9 +687,7 @@ export class Port extends Events
         return !!(port1 && port2);
     }
 
-    /**
-     * @description remove all links from port
-     */
+    /** Removes all links from the port. */
     removeLinks()
     {
         let count = 0;
@@ -713,7 +710,8 @@ export class Port extends Events
     }
 
     /**
-     * @description remove all link from port
+     * Removes the given link from the port.
+     *
      * @param {Link} link
      */
     removeLink(link)
@@ -747,17 +745,13 @@ export class Port extends Events
         }
     }
 
-    /**
-     * @description return port name
-     */
+    /** Return port name. */
     getName()
     {
         return this.name;
     }
 
-    /**
-     * @description return port name or title
-     */
+    /** Return port name or title. */
     getTitle()
     {
         if (this.uiAttribs.title) return this.uiAttribs.title;
@@ -790,8 +784,9 @@ export class Port extends Events
     }
 
     /**
+     * Returns the link that connects this port to otherPort.
+     *
      * @param {Port} p2 otherPort
-     * @description return link, which is linked to otherPort
      */
     getLinkTo(p2)
     {
@@ -799,8 +794,9 @@ export class Port extends Events
     }
 
     /**
+     * Removes the link that connects this port to otherPort.
+     *
      * @param {Port} p2 otherPort
-     * @description removes link, which is linked to otherPort
      */
     removeLinkTo(p2)
     {
@@ -825,8 +821,9 @@ export class Port extends Events
     }
 
     /**
+     * Returns true if the port is linked to otherPort.
+     *
      * @param {Port} p2 otherPort
-     * @description returns true if port is linked to otherPort
      */
     isLinkedTo(p2)
     {
@@ -840,9 +837,7 @@ export class Port extends Events
         this.activityCounter++;
     }
 
-    /**
-     * @description trigger the linked port (usually invoked on an output function port)
-     */
+    /** Triggers the linked ports (usually invoked on an output trigger port). */
     trigger()
     {
         const linksLength = this.links.length;
@@ -1115,8 +1110,9 @@ export class Port extends Events
     }
 
     /**
-     * @description set callback, which will be executed when port was triggered (usually output port)
-     * @param {string} [name] used for tribberButtons (multiple buttons...)
+     * Set callback, which will be executed when port was triggered (usually output port).
+     *
+     * @param {string} [name] used for triggerButtons (multiple buttons...)
      */
     _onTriggered(name)
     {

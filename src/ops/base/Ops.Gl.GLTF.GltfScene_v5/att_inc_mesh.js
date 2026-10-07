@@ -166,6 +166,14 @@ let gltfMesh = class
 
             vertexColors = fb;
         }
+
+        else if (arr instanceof Uint8Array)
+        {
+            const fb = new Float32Array(arr.length);
+            for (let i = 0; i < arr.length; i++) fb[i] = arr[i] / 255;
+
+            vertexColors = fb;
+        }
         else vertexColors = arr;
 
         for (let i = 0; i < vertexColors.length; i++)

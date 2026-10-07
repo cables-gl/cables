@@ -8,7 +8,6 @@ import { Shader } from "./cgl_shader.js";
 // import { uuid } from "../../core/utils.js";
 // import { uuid } from "../../core/utils.js";
 
-let queryExt = null;
 // let globalQueryStartedTime = 0;
 // let globalQueryStarted = null;
 const MESH = {};
@@ -145,7 +144,6 @@ class Mesh extends CgMesh
         this.setGeom(__geom);
 
         this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
-        if (!queryExt && queryExt !== false) queryExt = this.#cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
     }
 
     get geom()
@@ -172,10 +170,8 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function updateVertices
-     * @memberof Mesh
-     * @instance
-     * @description update vertices only from a geometry
+     * Update vertices only from a geometry.
+     *
      * @param {Geometry} geom
      */
     updateVertices(geom)
@@ -538,10 +534,8 @@ class Mesh extends CgMesh
     }
 
     /**
-     * @function setGeom
-     * @memberof Mesh
-     * @instance
-     * @description set geometry for mesh
+     * Set geometry for mesh.
+     *
      * @param {Geometry} geom
      * @param {boolean} removeRef
      */

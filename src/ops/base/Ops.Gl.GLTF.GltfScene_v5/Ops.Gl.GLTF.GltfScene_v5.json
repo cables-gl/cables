@@ -101,26 +101,36 @@
                 "subType": "integer"
             },
             {
-                "type": 2,
-                "name": "Materials"
-            },
-            {
                 "type": 3,
                 "name": "Hide Nodes"
             },
             {
+                "type": 2,
+                "name": "Materials",
+                "group": "Materials"
+            },
+            {
                 "type": 0,
                 "name": "Use Material Properties",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Use Material Textures",
+                "group": "Materials",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set gl states",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Use GPU Instancing",
+                "group": "Materials",
                 "subType": "boolean"
             },
             {
@@ -410,6 +420,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1790242681217
+        },
+        {
+            "message": "Correcly load colors in UINT8 format",
+            "type": "bugfix",
+            "author": "amajesticseaflapflap",
+            "date": 1791365696181,
+            "url": "https://github.com/cables-gl/cables/pull/8716"
         }
     ],
     "summary": "Load GLTF/GLB 3d files",

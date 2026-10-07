@@ -6,7 +6,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1706620823233
+            "date": 1706620823233,
+            "type": "new op"
+        },
+        {
+            "message": "Updated to current version of subpatchop code",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791303657886
         }
     ],
     "coreLibs": [

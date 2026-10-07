@@ -37,7 +37,7 @@ create();
 
 render.onTriggered = function ()
 {
-    if (draw.get()) mesh.render(cgl.getShader());
+    if (draw.get()&&mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 

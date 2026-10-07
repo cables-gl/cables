@@ -3,10 +3,10 @@ import { Patch } from "./core_patch.js";
 import { Port } from "./core_port.js";
 
 /**
+ * A link is a connection between two ports: one input and one output port.
+ *
  * @namespace external:CABLES#Link
- * @description a link is a connection between two ops/ports -> one input and one output port
  * @hideconstructor
- * @class
  */
 export class Link extends Events
 {
@@ -75,11 +75,9 @@ export class Link extends Events
     }
 
     /**
-     * @function getOtherPort
-     * @memberof Link
-     * @instance
+     * Returns the port of the link that is not the given port.
+     *
      * @param {Port} p port
-     * @description returns the port of the link, which is not port
      */
     getOtherPort(p)
     {
@@ -87,12 +85,7 @@ export class Link extends Events
         return this.portIn;
     }
 
-    /**
-     * @function remove
-     * @memberof Link
-     * @instance
-     * @description unlink/remove this link from all ports
-     */
+    /** Unlinks/removes this link from both ports. */
     remove()
     {
         if (this.portIn) this.portIn.removeLink(this);
@@ -117,10 +110,8 @@ export class Link extends Events
     }
 
     /**
-     * @function link
-     * @memberof Link
-     * @instance
-     * @description link those two ports
+     * Links the two ports.
+     *
      * @param {Port} p1 port1
      * @param {Port} p2 port2
      */

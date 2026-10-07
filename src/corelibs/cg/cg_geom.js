@@ -140,9 +140,7 @@ export class Geometry
         this.setAttribute("vertexColors", v, 4);
     }
 
-    /**
-     * @description clear all buffers/set them to length 0
-     */
+    /** Clear all buffers/set them to length 0. */
     clear()
     {
         this._vertices = new Float32Array([]);
@@ -199,10 +197,8 @@ export class Geometry
     }
 
     /**
-     * @function setAttribute
-     * @description create an attribute
-     * @memberof Geometry
-     * @instance
+     * Create an attribute.
+     *
      * @param {String} name
      * @param {Array} arr
      * @param {Number} itemSize
@@ -246,10 +242,8 @@ export class Geometry
     }
 
     /**
-     * @function setVertices
-     * @memberof Geometry
-     * @instance
-     * @description set vertices
+     * Set vertices.
+     *
      * @param {Array|Float32Array} arr [x,y,z,x,y,z,...]
      */
     setVertices(arr)
@@ -671,8 +665,8 @@ export class Geometry
     }
 
     /**
-     * @function unIndex
-     * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
+     * Removes all vertex indices, the vertices array will contain 3*XYZ for every triangle.
+     *
      * @param {boolean} reIndex
      * @param {boolean} dontCalcNormals
      */

@@ -8,12 +8,20 @@ import { MultiPort2 } from "./core_port_multi2.js";
 import { showUiErrors } from "./uierrors.js";
 
 /**
+ * a op id of a single of many that are living in a patch
  * @typedef OpInstanceId
  * @type string
  */
 
 /**
+ * a unique op id of One op, like OpName
  * @typedef OpId
+ * @type string
+ */
+
+/**
+ * a full opname, e.g. Ops.Gl.Mainloop
+ * @typedef OpName
  * @type string
  */
 

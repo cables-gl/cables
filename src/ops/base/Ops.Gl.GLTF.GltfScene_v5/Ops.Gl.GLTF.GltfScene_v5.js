@@ -20,10 +20,11 @@ const
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
     inCalcNormals = op.inSwitch("Calc Normals", ["Auto", "Force Smooth", "Mikkt", "Never"], "Mikkt"),
 
-    inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
+    inMaterials = op.inObject("Materials"),
     inUseMatProps = op.inBool("Use Material Properties", true),
     inUseMatTexProps = op.inBool("Use Material Textures", true),
+    inSetGlStates = op.inBool("Set gl states", false), // next version after 5 TRUE BY DEFAULT!!
     inGpuInstancing = op.inBool("Use GPU Instancing", true),
 
     freeMem = op.inSwitch("Free Memory", ["None", "All"], "None"),
@@ -82,6 +83,7 @@ inAnimation.onChange = updateAnimation;
 inCenter.onChange = updateCenter;
 op.toWorkPortsNeedToBeLinked(inExec);
 
+op.setPortGroup("Materials", [inUseMatProps, inUseMatTexProps, inSetGlStates, inGpuInstancing, inMaterials]);
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 

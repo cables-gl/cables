@@ -13,8 +13,8 @@ import defaultShaderSrcVert from "./cgp_shader_default.wgsl";
 // https://gpuweb.github.io/gpuweb/explainer/
 
 /**
- * cables webgpu context/state manager
- * @class
+ * Cables webgpu context/state manager.
+ *
  * @namespace external:CGP
  * @hideconstructor
  */
