@@ -1226,7 +1226,7 @@ export class CglContext extends CgContext
         const o = this.gl.getExtension(name);
         this._enabledExtensions[name] = o;
 
-        if (!o) this._log.warn("[cgl_state] extension not available " + name);
+        if (!o) this._log.log("[cgl_state] extension not available " + name);
 
         return o;
     }
@@ -1240,7 +1240,6 @@ export class CglContext extends CgContext
         return this.errorShader;
     }
 
-    /// /
     doGlQueryTiming = false;
     glQueryExt = null;
     glQueryQuery = null;

@@ -8,7 +8,6 @@ import { Shader } from "./cgl_shader.js";
 // import { uuid } from "../../core/utils.js";
 // import { uuid } from "../../core/utils.js";
 
-let queryExt = null;
 // let globalQueryStartedTime = 0;
 // let globalQueryStarted = null;
 const MESH = {};
@@ -145,7 +144,6 @@ class Mesh extends CgMesh
         this.setGeom(__geom);
 
         this.#cgl.profileData.addHeavyEvent("mesh constructed", this._name);
-        if (!queryExt && queryExt !== false) queryExt = this.#cgl.enableExtension("EXT_disjoint_timer_query_webgl2") || false;
     }
 
     get geom()
