@@ -6,6 +6,7 @@ export class SubPatchOp
     {
         options = options || {};
         this._op = op;
+        this._deleted = false;
 
         op.patchId = op.addInPort(new Port(op, "patchId", Port.TYPE_STRING, { "display": "readonly", "hidePort": true, "hideParam": true }));
 
@@ -37,6 +38,8 @@ export class SubPatchOp
             {
                 gui.serverOps.loadProjectDependencies(p, () =>
                 {
+                    // op might have been deleted while dependencies were loading
+                    if (this._deleted) return;
                     if (next)next();
                 });
             }
@@ -46,6 +49,7 @@ export class SubPatchOp
 
         op.on("delete", () =>
         {
+            this._deleted = true;
             if (op.patch.clearSubPatchCache)op.patch.clearSubPatchCache(this.patchId);
             const ops = op.patch.ops;
             for (let i = ops.length - 1; i >= 0; i--)
