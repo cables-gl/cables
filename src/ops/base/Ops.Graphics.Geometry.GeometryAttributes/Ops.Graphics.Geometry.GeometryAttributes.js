@@ -11,7 +11,7 @@ const
 geometry.onChange = function ()
 {
     let geom = geometry.get();
-    if (!geom)
+    if (!geom || !geom.isGeometry || !geom.vertices)
     {
         outVertices.setRef([]);
         outFaces.setRef([]);
