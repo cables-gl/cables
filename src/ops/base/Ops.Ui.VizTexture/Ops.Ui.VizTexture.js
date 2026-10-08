@@ -89,6 +89,7 @@ op.renderVizLayer = (_ctx, _layer) =>
 {
     if (!_layer) return;
     layer = _layer;
+    _ctx.imageSmoothingEnabled = false;
 
     if (canvas && canvas.width > 0)
     {
@@ -245,10 +246,8 @@ if (CABLES.UI)
 
             cgl.popPMatrix();
             cgl.resetViewPort();
-            // console.log("ind", ).width);
+
             const stretch = false;
-            // if (!stretch)
-            // {
             if (portTex.width > portTex.height) sizeImg[1] = layer.width * sizeTex[1] / sizeTex[0];
             else
             {
@@ -274,7 +273,6 @@ if (CABLES.UI)
             canvas.height = sizeTex[1];
 
             ctx.imageSmoothingEnabled = !small || !scaledDown;
-            // ctx.imageSmoothingEnabled = true;
 
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(layer.x, layer.y - 10, 10, 10);
@@ -342,42 +340,14 @@ if (CABLES.UI)
                     }
                     else
                     {
-                        ctx.imageSmoothingEnabled = !bigPixels;
-                        ctx.drawImage(cgl.canvas,
-                            0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
+                        ctx.imageSmoothingEnabled = !(bigPixels || veryBigPixels);
+                        ctx.drawImage(cgl.canvas, 0, 0, s[0], s[1], 0, 0, canvas.width, canvas.height);
                     }
-                    // if (veryBigPixels)
-                    // {
-                    //     const stepx = imgSizeW / s[0];
-                    //     const stepy = imgSizeH / s[1];
-
-                    //     ctx.imageSmoothingEnabled = true;
-                    //     ctx.lineWidth = 1;
-                    //     ctx.globalAlpha = 0.5;
-                    //     ctx.beginPath();
-
-                    //     for (let x = 0; x <= s[0]; x++)
-                    //     {
-                    //         ctx.moveTo(imgPosX + x * stepx, imgPosY);
-                    //         ctx.lineTo(imgPosX + x * stepx, imgPosY + imgSizeH);
-                    //     }
-
-                    //     for (let y = 0; y <= s[1]; y++)
-                    //     {
-                    //         ctx.moveTo(imgPosX, imgPosY + y * stepy);
-                    //         ctx.lineTo(imgPosX + imgSizeW, imgPosY + y * stepy);
-                    //     }
-
-                    //     ctx.strokeStyle = "#555";
-                    //     ctx.stroke();
-                    //     ctx.globalAlpha = 1;
-                    // }
                 }
                 catch (e)
                 {
                     console.error("canvas drawimage exception...", e);
                 }
-                // }
             }
 
             let info = "";
