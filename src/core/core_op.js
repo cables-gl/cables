@@ -606,15 +606,15 @@ export class Op extends Events
         if (!this.uiAttribs) this.uiAttribs = {};
 
         let changed = false;
-        let emitMove = false;
-        if (
-            CABLES.UI &&
+        const translateChanged =
             newAttribs.hasOwnProperty("translate") &&
             (
                 !this.uiAttribs.translate ||
+                !newAttribs.translate ||
                 this.uiAttribs.translate.x != newAttribs.translate.x ||
                 this.uiAttribs.translate.y != newAttribs.translate.y
-            )) emitMove = true;
+            );
+        const emitMove = CABLES.UI && translateChanged;
 
         if (newAttribs.hasOwnProperty("title") && newAttribs.title != this.uiAttribs.title)
         {
@@ -630,7 +630,11 @@ export class Op extends Events
 
         for (const p in newAttribs)
         {
-            if (this.uiAttribs[p] != newAttribs[p]) changed = true;
+            if (p == "translate")
+            {
+                if (translateChanged) changed = true;
+            }
+            else if (this.uiAttribs[p] != newAttribs[p]) changed = true;
             this.uiAttribs[p] = newAttribs[p];
         }
 

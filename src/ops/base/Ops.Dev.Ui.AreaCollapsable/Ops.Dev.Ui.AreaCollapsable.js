@@ -38,13 +38,5 @@ inDelete.onTriggered = () =>
 
 inCollapse.onTriggered = () =>
 {
-    const ops = op.patch.getOpsByArea(this.attribs.area);
-    const col = !op.uiAttribs.areaCollapsed;
-
-    for (let i = 0; i < ops.length; i++)
-    {
-        if (ops[i] != op) ops[i].setUiAttribs({ "hidden": col });
-    }
-
-    op.setUiAttribs({ "areaCollapsed": col });
+    if (CABLES.UI) gui.patchView.setAreaCollapsed(op, !op.uiAttribs.areaCollapsed);
 };
