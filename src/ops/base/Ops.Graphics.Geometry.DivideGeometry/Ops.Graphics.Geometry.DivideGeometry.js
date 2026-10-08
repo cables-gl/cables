@@ -16,43 +16,44 @@ function update()
         let newNormals = [];
         let newTexCoords = [];
 
-        for (let i = 0; i < geom.verticesIndices.length; i += 3)
+        let indices = geom.verticesIndices;
+        if (!indices || !indices.length)
         {
-            newFaces.push(newVerts.length / 3);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 0] * 3 + 0]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 0] * 3 + 1]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 0] * 3 + 2]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 0] * 3 + 0]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 0] * 3 + 1]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 0] * 3 + 2]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 0] * 2 + 0]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 0] * 2 + 1]);
+            indices = [];
+            for (let i = 0; i < geom.vertices.length / 3; i++) indices.push(i);
+        }
+
+        const hasNormals = geom.vertexNormals && geom.vertexNormals.length > 0;
+        const hasTexCoords = geom.texCoords && geom.texCoords.length > 0;
+
+        for (let i = 0; i < indices.length; i++)
+        {
+            const idx = indices[i];
 
             newFaces.push(newVerts.length / 3);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 1] * 3 + 0]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 1] * 3 + 1]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 1] * 3 + 2]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 1] * 3 + 0]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 1] * 3 + 1]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 1] * 3 + 2]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 1] * 2 + 0]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 1] * 2 + 1]);
+            newVerts.push(geom.vertices[idx * 3 + 0]);
+            newVerts.push(geom.vertices[idx * 3 + 1]);
+            newVerts.push(geom.vertices[idx * 3 + 2]);
 
-            newFaces.push(newVerts.length / 3);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 2] * 3 + 0]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 2] * 3 + 1]);
-            newVerts.push(geom.vertices[geom.verticesIndices[i + 2] * 3 + 2]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 2] * 3 + 0]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 2] * 3 + 1]);
-            newNormals.push(geom.vertexNormals[geom.verticesIndices[i + 2] * 3 + 2]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 2] * 2 + 0]);
-            newTexCoords.push(geom.texCoords[geom.verticesIndices[i + 2] * 2 + 1]);
+            if (hasNormals)
+            {
+                newNormals.push(geom.vertexNormals[idx * 3 + 0]);
+                newNormals.push(geom.vertexNormals[idx * 3 + 1]);
+                newNormals.push(geom.vertexNormals[idx * 3 + 2]);
+            }
+
+            if (hasTexCoords)
+            {
+                newTexCoords.push(geom.texCoords[idx * 2 + 0]);
+                newTexCoords.push(geom.texCoords[idx * 2 + 1]);
+            }
         }
 
         newGeom.vertices = newVerts;
-        newGeom.vertexNormals = newNormals;
         newGeom.verticesIndices = newFaces;
-        newGeom.setTexCoords(newTexCoords);
+        if (hasNormals) newGeom.vertexNormals = newNormals;
+        else newGeom.calculateNormals();
+        if (hasTexCoords) newGeom.setTexCoords(newTexCoords);
 
         outGeom.set(newGeom);
     }
