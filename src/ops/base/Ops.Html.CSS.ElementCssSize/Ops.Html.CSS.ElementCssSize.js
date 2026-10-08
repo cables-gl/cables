@@ -26,7 +26,7 @@ inMethod.onChange = () =>
 
 function remove()
 {
-    if (ele)
+    if (ele && ele.style)
     {
         ele.style.removeProperty("width");
         ele.style.removeProperty("height");

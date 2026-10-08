@@ -31,7 +31,7 @@ op.onDelete = remove;
 
 function remove()
 {
-    if (!ele) return;
+    if (!ele || !ele.style) return;
     ele.style.removeProperty("font-family");
     ele.style.removeProperty("user-select");
     ele.style.removeProperty("letter-spacing");

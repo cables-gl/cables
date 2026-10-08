@@ -33,7 +33,7 @@ op.onDelete = remove;
 
 function remove()
 {
-    if (ele)
+    if (ele && ele.style)
     {
         ele.style.removeProperty("border");
         ele.style.removeProperty("borderTop");

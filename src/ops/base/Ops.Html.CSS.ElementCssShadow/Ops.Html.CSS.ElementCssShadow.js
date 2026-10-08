@@ -26,7 +26,7 @@ inType.onChange =
 
 function update()
 {
-    if (ele)
+    if (ele && ele.style)
     {
         ele.style.removeProperty("filter");
         ele.style.removeProperty("text-shadow");

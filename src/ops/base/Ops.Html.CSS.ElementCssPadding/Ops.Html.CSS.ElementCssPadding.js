@@ -20,7 +20,7 @@ op.onDelete = remove;
 
 function remove()
 {
-    if (!ele) return;
+    if (!ele || !ele.style) return;
     ele.style.removeProperty("padding-top");
     ele.style.removeProperty("padding-bottom");
     ele.style.removeProperty("padding-left");

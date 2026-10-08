@@ -44,7 +44,7 @@ op.onFileChanged = function (fn)
 
 function remove(mode)
 {
-    if (ele)
+    if (ele && ele.style)
     {
         ele.style.removeProperty(mode + "-image");
         ele.style.removeProperty(mode + "-size");

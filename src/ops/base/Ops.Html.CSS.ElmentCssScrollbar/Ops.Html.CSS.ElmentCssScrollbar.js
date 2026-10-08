@@ -30,7 +30,7 @@ op.onDelete = remove;
 
 function remove()
 {
-    if (!ele) return;
+    if (!ele || !ele.style) return;
     ele.style.removeProperty("scrollbar-width");
     ele.style.removeProperty("scrollbar-color");
 }

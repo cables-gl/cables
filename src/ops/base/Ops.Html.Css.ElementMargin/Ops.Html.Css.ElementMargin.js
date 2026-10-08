@@ -21,7 +21,7 @@ op.onDelete = remove;
 
 function remove()
 {
-    if (!ele) return;
+    if (!ele || !ele.style) return;
     ele.style.removeProperty("margin-top");
     ele.style.removeProperty("margin-bottom");
     ele.style.removeProperty("margin-left");

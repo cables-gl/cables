@@ -46,7 +46,7 @@ if (op.patch.cgl)op.patch.cgl.on("resize", () =>
 
 function remove()
 {
-    if (eleAlign)
+    if (eleAlign && eleAlign.style)
     {
         eleAlign.style.removeProperty("top");
         eleAlign.style.removeProperty("left");
