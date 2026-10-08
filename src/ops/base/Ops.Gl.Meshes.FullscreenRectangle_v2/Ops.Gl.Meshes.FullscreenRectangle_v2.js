@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     inScale = op.inSwitch("Scale", ["Fit", "Cover","Stretch"], "Fit"),
-    inCropOffset = op.inFloatSlider("Crop Offset", 0, -1, 1),
+    inOffset = op.inFloatSlider("Offset", 0, -1, 1),
     flipY = op.inBool("Flip Y"),
     flipX = op.inBool("Flip X"),
     inTexture = op.inTexture("Texture"),
@@ -48,7 +48,7 @@ function updateUi()
     flipY.setUiAttribs({ "greyout": !inTexture.isLinked() });
     flipX.setUiAttribs({ "greyout": !inTexture.isLinked() });
     inScale.setUiAttribs({ "greyout": !inTexture.isLinked() });
-    inCropOffset.setUiAttribs({ "greyout": !inTexture.isLinked() || !coverImageAspect });
+    inOffset.setUiAttribs({ "greyout": !inTexture.isLinked() || (!coverImageAspect && !fitImageAspect) });
 }
 
 function updateShader()
@@ -85,7 +85,7 @@ function updateTexScale()
 
     const texRatio = tex.width / tex.height;
     const viewRatio = w / h;
-    const cropOffset = inCropOffset.get();
+    const cropOffset = inOffset.get();
 
     if (texRatio > viewRatio)
     {
@@ -133,7 +133,8 @@ function doRender()
             _w = w;
         }
 
-        cgl.pushViewPort((w - _w) / 2, (h - _h) / 2, _w, _h);
+        const offset = inOffset.get();
+        cgl.pushViewPort((w - _w) / 2 * (1 + offset), (h - _h) / 2 * (1 - offset), _w, _h);
     }
 
     if (useShader)
