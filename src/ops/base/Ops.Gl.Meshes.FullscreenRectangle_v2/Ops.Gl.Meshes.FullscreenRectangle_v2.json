@@ -64,18 +64,21 @@
         {
             "message": "option to keep correct aspect ratio and make it fit into canvas area (letterbox)",
             "author": "pandur",
-            "date": 1643616964751
+            "date": 1643616964751,
+            "type": "feature"
         },
         {
-            "message": "cloned op from Ops.Gl.Meshes.FullscreenRectangle",
+            "message": "New mode: \"cover\" image will be cropped to fill the whole recangle",
+            "type": "feature",
             "author": "pandur",
-            "date": 1687515551692
+            "date": 1791456028615,
+            "url": "https://github.com/cables-gl/cables/issues/7621"
         },
         {
-            "message": "Ops.Patch.P4SCBDz.FullscreenRectangle_v2 renamed to Ops.Gl.Meshes.FullscreenRectangle_v2",
-            "type": "rename",
+            "message": "Slider to controll the offset or crop in \"cover\" mode or letterbox ratio in \"fit\" mode",
+            "type": "feature",
             "author": "pandur",
-            "date": 1687527468365
+            "date": 1791456062411
         }
     ],
     "exampleProjectId": "uKkIeG",
