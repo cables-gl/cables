@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    inScale = op.inSwitch("Scale", ["Stretch", "Fit"], "Fit"),
+    inScale = op.inSwitch("Scale", ["Fit", "Cover","Stretch"], "Fit"),
     flipY = op.inBool("Flip Y"),
     flipX = op.inBool("Flip X"),
     inTexture = op.inTexture("Texture"),
@@ -25,11 +25,12 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 
 shader.setSource(attachments.shader_vert, attachments.shader_frag);
 shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
-shader.aspectUni = new CGL.Uniform(shader, "f", "aspectTex", 0);
+shader.texScaleUni = new CGL.Uniform(shader, "2f", "texScale", [1, 1]);
 
 let useShader = false;
 let updateShaderLater = true;
 let fitImageAspect = false;
+let coverImageAspect = false;
 
 updateUi();
 updateScale();
@@ -65,6 +66,23 @@ op.preRender = function ()
 function updateScale()
 {
     fitImageAspect = inScale.get() == "Fit";
+    coverImageAspect = inScale.get() == "Cover";
+}
+
+function updateTexScale()
+{
+    const tex = inTexture.get();
+    if (!coverImageAspect || !tex || !w || !h)
+    {
+        shader.texScaleUni.setValue([1, 1]);
+        return;
+    }
+
+    const texRatio = tex.width / tex.height;
+    const viewRatio = w / h;
+
+    if (texRatio > viewRatio) shader.texScaleUni.setValue([viewRatio / texRatio, 1]);
+    else shader.texScaleUni.setValue([1, texRatio / viewRatio]);
 }
 
 function doRender()
@@ -72,6 +90,7 @@ function doRender()
     if (cgl.viewPort[2] != w || cgl.viewPort[3] != h || !mesh) rebuild();
 
     if (updateShaderLater) updateShader();
+    updateTexScale();
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);

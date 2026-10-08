@@ -10,8 +10,9 @@
                 "type": 0,
                 "name": "Scale index",
                 "values": [
-                    "Stretch",
-                    "Fit"
+                    "Fit",
+                    "Cover",
+                    "Stretch"
                 ],
                 "subType": "integer"
             },
