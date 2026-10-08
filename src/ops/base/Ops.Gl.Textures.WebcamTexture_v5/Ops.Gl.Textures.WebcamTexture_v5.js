@@ -87,6 +87,7 @@ op.onDelete = () =>
 {
     clearTimeout(startCamTo);
     deleting = true;
+    if (navigator.mediaDevices) navigator.mediaDevices.removeEventListener("devicechange", onDeviceChange);
     stopStream();
 };
 
@@ -218,6 +219,7 @@ function camInitComplete(stream)
         outWidth.set(w);
         outRatio.set(settings.aspectRatio || w / h);
         outError.set("");
+        op.setUiError("webcam", null);
 
         videoElement.setAttribute("width", settings.width);
         videoElement.setAttribute("height", settings.height);
@@ -253,22 +255,15 @@ function getCamConstraints()
         }
         else
         {
-            deviceInfo = camInputDevices.filter((d) => { return d.label === deviceLabel; });
-            if (deviceInfo)
-            {
-                deviceInfo = deviceInfo[0];
-            }
-            else
-            { // otherwise get by number
-                deviceInfo = Object.values(camInputDevices)[deviceLabel];
-            }
+            deviceInfo = camInputDevices.find((d) => { return d.label === deviceLabel; });
+            if (!deviceInfo) deviceInfo = Object.values(camInputDevices)[deviceLabel];
 
             if (!deviceInfo)
             {
                 deviceInfo = Object.values(camInputDevices)[0];
             }
         }
-        constr.video = { "deviceId": { "exact": deviceInfo.deviceId } };
+        if (deviceInfo) constr.video = { "deviceId": { "exact": deviceInfo.deviceId } };
     }
 
     // constr.video.facingMode = { "exact": inFacing.get() };
@@ -310,9 +305,17 @@ function restartWebcam()
                 .then(camInitComplete)
                 .catch((error) =>
                 {
+                    if (error.name == "NotFoundError" && constr.video.deviceId)
+                    {
+                        delete constr.video.deviceId;
+                        return navigator.mediaDevices.getUserMedia(constr).then(camInitComplete);
+                    }
+                    throw error;
+                })
+                .catch((error) =>
+                {
                     restarting = false;
-                    op.logWarn(error.name + ": " + error.message, error);
-                    outError.set(error.name + ": " + error.message);
+                    showError(error);
                 });
         }
         else if (navigator.getUserMedia)
@@ -362,13 +365,30 @@ function initDevices()
         }).catch((e) =>
         {
             initingDevices = false;
-            // op.error("error", e);
-            outError.set(e.name + ": " + e.message);
+            showError(e);
             cgl.patch.loading.finished(loadingId);
             camsLoaded = false;
             op.refreshParams();
         });
 }
+
+function showError(error)
+{
+    outError.set(error.name + ": " + error.message);
+    if (error.name == "NotFoundError") op.setUiError("webcam", "No webcam found", 1);
+    else op.setUiError("webcam", error.name + ": " + error.message, 1);
+}
+
+function onDeviceChange()
+{
+    if (!inActive.get() || deleting) return;
+    op.setUiError("webcam", null);
+    stopStream();
+    started = false;
+    delayedInitDevices();
+}
+
+if (navigator.mediaDevices) navigator.mediaDevices.addEventListener("devicechange", onDeviceChange);
 
 inTrigger.onTriggered = () =>
 {
