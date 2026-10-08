@@ -515,6 +515,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1791442590099
+        },
+        {
+            "message": "Fix bugs with pressing multiple buttons at the same time and not catching button up events when window focus changes",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791450460924,
+            "url": "https://github.com/cables-gl/cables/issues/7352"
         }
     ],
     "isReleased": true,

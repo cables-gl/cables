@@ -1,12 +1,12 @@
 const
-    inLang = op.inString("Language", "us-US"),
+    inLang = op.inString("Language", "en-US"),
     active = op.inBool("Active", true),
     inTrigger = op.inTriggerButton("Start"),
     result = op.outString("Result"),
     confidence = op.outNumber("Confidence"),
-    outSupported = op.outBool("Supported", !!window.SpeechRecognition),
+    outSupported = op.outBoolNum("Supported", !!window.SpeechRecognition),
     outResult = op.outTrigger("New Result", ""),
-    outActive = op.outBool("Started", false);
+    outActive = op.outBoolNum("Started", false);
 
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition;
 let recognition = null;
@@ -26,6 +26,8 @@ op.init = function ()
 
 inTrigger.onTriggered = () =>
 {
+
+    if (!recognition) return;
     if (active.get() && !outActive.get()) recognition.start();
 };
 

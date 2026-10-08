@@ -1,5 +1,5 @@
 {
-    "summary": "Draws a rectangle using the full WebGL canvas size",
+    "summary": "Draws a rectangle using the full WebGL canvas size / fullscreen",
     "layout": {
         "portsIn": [
             {

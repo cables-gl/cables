@@ -3,13 +3,13 @@ const
     inTexture = op.inTexture("Texture"),
     inTextureMask = op.inTexture("Alpha Mask"),
     useVPSize = op.inBool("use original size", true),
-    width = op.inValueInt("width", 640),
-    height = op.inValueInt("height", 360),
+    width = op.inInt("width", 640),
+    height = op.inInt("height", 360),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
 
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     alphaMaskMethod = op.inSwitch("Alpha Mask Source", ["A", "1"], "A"),
     greyscale = op.inSwitch("Convert Greyscale", ["Off", "R", "G", "B", "A", "Luminance"], "Off"),
     invertR = op.inBool("Invert R", false),
@@ -38,7 +38,8 @@ let tex = null;
 let needsResUpdate = true;
 let oldTex = null;
 
-let w = 2, h = 2;
+let w = 2,
+    h = 2;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
@@ -54,8 +55,8 @@ let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
 flipX.onChange =
-flipY.onChange =
-alphaMaskMethod.onChange =
+    flipY.onChange =
+    alphaMaskMethod.onChange =
     aniso.onChange =
     greyscale.onChange =
     invertR.onChange =
@@ -79,7 +80,7 @@ updateUi();
 
 function initEffect()
 {
-    if (effect)effect.delete();
+    if (effect) effect.delete();
     if (tex)
     {
         tex.delete();
@@ -105,13 +106,12 @@ function initEffect()
                 "filter": selectedFilter,
                 "wrap": selectedWrap,
                 "width": Math.floor(width.get()),
-                "height": Math.floor(height.get()),
+                "height": Math.floor(height.get())
             });
     }
 
     effect.setSourceTexture(tex);
     updateUi();
-    // texOut.set(CGL.Texture.getEmptyTexture(cgl));
     reInitEffect = false;
 }
 
@@ -126,7 +126,7 @@ function updateSoon()
 function updateResolution()
 {
     if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) return;
-    if (!effect)initEffect();
+    if (!effect) initEffect();
 
     if (useVPSize.get())
     {
@@ -198,7 +198,7 @@ function doRender()
 
     if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl))
     {
-        lastTex = null;// CGL.Texture.getEmptyTexture(cgl);
+        lastTex = null; // CGL.Texture.getEmptyTexture(cgl);
         trigger.trigger();
         return;
     }
@@ -226,7 +226,7 @@ function doRender()
     cgl.pushShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, inTexture.get().tex);
-    if (inTextureMask.get())cgl.setTexture(1, inTextureMask.get().tex);
+    if (inTextureMask.get()) cgl.setTexture(1, inTextureMask.get().tex);
 
     cgl.pushBlend(false);
 
@@ -283,9 +283,9 @@ function updateParams()
     }
     if (tex && (
         tex.width != Math.floor(width.get()) ||
-        tex.height != Math.floor(height.get()) ||
-        tex.wrap != selectedWrap ||
-        tex.pixelFormat != inPixelFormat.get()
+            tex.height != Math.floor(height.get()) ||
+            tex.wrap != selectedWrap ||
+            tex.pixelFormat != inPixelFormat.get()
     ))
     {
         reInitEffect = true;
