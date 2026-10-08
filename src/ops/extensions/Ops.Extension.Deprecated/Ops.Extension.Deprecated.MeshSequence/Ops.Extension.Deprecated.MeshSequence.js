@@ -49,6 +49,7 @@ let module = null;
 let shader = null;
 let lastFrame = 0;
 let needsReload = false;
+
 function removeModule()
 {
     if (shader && module)
@@ -60,8 +61,8 @@ function removeModule()
 
 function doRender()
 {
-    if (needsReload)reload();
-    if (needsUpdateFrame)updateFrame();
+    if (needsReload) reload();
+    if (needsUpdateFrame) updateFrame();
     const fade = frame.get() % 1;
     if (cgl.getShader() && cgl.getShader() != shader)
     {
@@ -103,7 +104,7 @@ function updateFrame()
     if (mesh && geoms.length > 0)
     {
         let n = Math.floor(frame.get());
-        if (n < 0)n = 0;
+        if (n < 0) n = 0;
         n %= (geoms.length - 1);
 
         if (n + 1 > geoms.length - 1) n = 0;
@@ -199,7 +200,7 @@ function reload()
             outNumFrames.set(geoms.length);
             needsUpdateFrame = true;
 
-            op.uiAttr("info", "num frames: " + data.meshes.length);
+            // op.uiAttr("info", "num frames: " + data.meshes.length);
 
             op.patch.loading.finished(loadingId);
             loadingId = -1;

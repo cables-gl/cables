@@ -21,6 +21,24 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1776684669136
+        },
+        {
+            "message": " Timeline icon state of play/pause is now correctly updated when using other ways to toggle it ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790862658733
+        },
+        {
+            "message": "Added commands to set timeline time/frame",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1791206133566
+        },
+        {
+            "message": "Fix rounding error and positioning of timehead cursor",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791443857047
         }
     ],
     "isReleased": true,

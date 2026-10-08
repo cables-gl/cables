@@ -209,6 +209,12 @@
             "type": "feature",
             "author": "stephan",
             "date": 1791206251534
+        },
+        {
+            "message": "Added \"join team\" button to error page for private patches, if they belong to a public team",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791447323117
         }
     ],
     "isReleased": true,
