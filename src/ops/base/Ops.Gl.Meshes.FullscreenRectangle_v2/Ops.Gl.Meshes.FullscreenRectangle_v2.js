@@ -1,6 +1,7 @@
 const
     render = op.inTrigger("render"),
     inScale = op.inSwitch("Scale", ["Fit", "Cover","Stretch"], "Fit"),
+    inCropOffset = op.inFloatSlider("Crop Offset", 0, -1, 1),
     flipY = op.inBool("Flip Y"),
     flipX = op.inBool("Flip X"),
     inTexture = op.inTexture("Texture"),
@@ -26,6 +27,7 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 shader.setSource(attachments.shader_vert, attachments.shader_frag);
 shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
 shader.texScaleUni = new CGL.Uniform(shader, "2f", "texScale", [1, 1]);
+shader.texOffsetUni = new CGL.Uniform(shader, "2f", "texOffset", [0, 0]);
 
 let useShader = false;
 let updateShaderLater = true;
@@ -46,6 +48,7 @@ function updateUi()
     flipY.setUiAttribs({ "greyout": !inTexture.isLinked() });
     flipX.setUiAttribs({ "greyout": !inTexture.isLinked() });
     inScale.setUiAttribs({ "greyout": !inTexture.isLinked() });
+    inCropOffset.setUiAttribs({ "greyout": !inTexture.isLinked() || !coverImageAspect });
 }
 
 function updateShader()
@@ -67,6 +70,7 @@ function updateScale()
 {
     fitImageAspect = inScale.get() == "Fit";
     coverImageAspect = inScale.get() == "Cover";
+    updateUi();
 }
 
 function updateTexScale()
@@ -75,14 +79,28 @@ function updateTexScale()
     if (!coverImageAspect || !tex || !w || !h)
     {
         shader.texScaleUni.setValue([1, 1]);
+        shader.texOffsetUni.setValue([0, 0]);
         return;
     }
 
     const texRatio = tex.width / tex.height;
     const viewRatio = w / h;
+    const cropOffset = inCropOffset.get();
 
-    if (texRatio > viewRatio) shader.texScaleUni.setValue([viewRatio / texRatio, 1]);
-    else shader.texScaleUni.setValue([1, texRatio / viewRatio]);
+    if (texRatio > viewRatio)
+    {
+        const scaleX = viewRatio / texRatio;
+        shader.texScaleUni.setValue([scaleX, 1]);
+        const dirX = flipX.get() ? -1 : 1;
+        shader.texOffsetUni.setValue([dirX * cropOffset * (1 - scaleX) / 2, 0]);
+    }
+    else
+    {
+        const scaleY = texRatio / viewRatio;
+        shader.texScaleUni.setValue([1, scaleY]);
+        const dirY = flipY.get() ? 1 : -1;
+        shader.texOffsetUni.setValue([0, dirY * cropOffset * (1 - scaleY) / 2]);
+    }
 }
 
 function doRender()
