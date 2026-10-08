@@ -100,8 +100,8 @@ inDoProfile.onChange = () =>
 
 function setUnSupported(msg)
 {
-    if (!CABLES.UI)
-        op.logError("Your browser does not support WebGPU: " + (msg || ""));
+    // if (!CABLES.UI)
+    //     op.logError("Your browser does not support WebGPU: " + (msg || ""));
 
     container.innerHTML = "<br/><br/><br/>Sorry, your browser does not support WebGPU! " + (msg || "");
     container.style.color = "red";
@@ -251,7 +251,7 @@ function createTargets(cgp)
             "size": [sizeWidth, sizeHeight],
             "format": presentationFormat,
             "sampleCount": sampleCount,
-            "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+            "usage": GPUTextureUsage.RENDER_ATTACHMENT
         });
 
         depthTexture = device.createTexture({
@@ -259,7 +259,7 @@ function createTargets(cgp)
             "size": [sizeWidth, sizeHeight],
             "format": "depth24plus",
             "sampleCount": sampleCount,
-            "usage": GPUTextureUsage.RENDER_ATTACHMENT,
+            "usage": GPUTextureUsage.RENDER_ATTACHMENT
         });
 
         // depthTexturePrev = device.createTexture({
@@ -332,15 +332,15 @@ function render(b)
 
                 "storeOp": "store",
                 "clearValue": { "r": 0.1, "g": 0.1, "b": 0.1, "a": 1.0 }
-            },
+            }
         ],
         "depthStencilAttachment":
         {
             "view": cgp.canvasInfo.depthTextureView,
             "depthClearValue": 1,
             "depthLoadOp": "clear",
-            "depthStoreOp": "store",
-        },
+            "depthStoreOp": "store"
+        }
     };
 
     if (sampleCount > 1)
