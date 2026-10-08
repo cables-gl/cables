@@ -484,12 +484,6 @@
             "url": "https://github.com/cables-gl/cables/issues/8485"
         },
         {
-            "message": "Timeline icon state of play/pause is now correctly updated when using other ways to toggle it",
-            "type": "improvement",
-            "author": "pandur",
-            "date": 1790865492045
-        },
-        {
             "message": "Fix and improve dragging of ports to and from the parameter panel title lines into/from the patchfield",
             "type": "bugfix",
             "author": "pandur",
@@ -515,6 +509,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1791206133566
+        },
+        {
+            "message": "Add option to disable sending error reports in the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791442590099
         }
     ],
     "isReleased": true,
