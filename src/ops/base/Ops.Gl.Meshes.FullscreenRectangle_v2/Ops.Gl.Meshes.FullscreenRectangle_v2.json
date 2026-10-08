@@ -18,6 +18,11 @@
             },
             {
                 "type": 0,
+                "name": "Crop Offset",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Flip Y",
                 "subType": "boolean"
             },
