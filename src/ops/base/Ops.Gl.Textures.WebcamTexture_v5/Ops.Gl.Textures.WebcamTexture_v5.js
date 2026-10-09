@@ -60,6 +60,7 @@ let retries = 0;
 let hasError = false;
 let active = false;
 let deleting = false;
+let permissionStatus = null;
 
 textureOut.setRef(emptyTexture);
 
@@ -84,6 +85,17 @@ updateStyle();
 
 op.on("loadedValueSet", startWebcam);
 if (navigator.mediaDevices) navigator.mediaDevices.addEventListener("devicechange", onDeviceChange);
+if (navigator.permissions)
+{
+    navigator.permissions.query({ "name": "camera" })
+        .then((status) =>
+        {
+            if (deleting) return;
+            permissionStatus = status;
+            permissionStatus.addEventListener("change", onPermissionChange);
+        })
+        .catch(() => {});
+}
 
 startWebcam();
 
@@ -91,6 +103,8 @@ op.onDelete = () =>
 {
     deleting = true;
     if (navigator.mediaDevices) navigator.mediaDevices.removeEventListener("devicechange", onDeviceChange);
+    if (permissionStatus) permissionStatus.removeEventListener("change", onPermissionChange);
+    permissionStatus = null;
     stopStream();
     videoElement.remove();
     outElement.setRef(null);
@@ -333,6 +347,12 @@ function onDeviceChange()
     if (deleting || !inActive.get()) return;
     updateDeviceList();
     if (hasError || streamEnded()) startWebcam();
+}
+
+function onPermissionChange()
+{
+    if (deleting || !inActive.get()) return;
+    if (permissionStatus.state == "granted" && hasError) startWebcam();
 }
 
 inTrigger.onTriggered = () =>
