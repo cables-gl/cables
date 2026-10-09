@@ -7,6 +7,12 @@ const
 
 exePort.onTriggered = update;
 
+if(CABLES.UI)
+{
+  switchPort.on("change",updateUi);
+  updateUi()
+}
+
 function update()
 {
     const trigs = outTrigs.get();
@@ -33,3 +39,13 @@ outTrigs.on(CABLES.Port.EVENT_LINK_CHANGED, () =>
     }
     outArrNames.setRef(arr);
 });
+
+
+
+
+function updateUi()
+{
+if(!CABLES.UI)return;
+  for (let i = 0; i < outTrigs.get().length; i++) outTrigs.get()[i].setUiAttribs({arrow:i==switchPort.get()})
+}
+

@@ -49,6 +49,7 @@ import { Op } from "./core_op.js";
  * @property  {boolean} [ignoreBigPort]
  * @property  {boolean} [multiPort2]
  * @property  {boolean} [stringTrim]
+ * @property  {boolean} [arrow] arrow on port for switch/route
 */
 
 /**

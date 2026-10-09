@@ -3,6 +3,7 @@ const valuePorts = [];
 const result = op.outNumber("Result");
 
 idx.onChange = update;
+updateUi();
 
 for (let i = 0; i < 16; i++)
 {
@@ -19,3 +20,13 @@ function update()
         result.set(valuePorts[i].get());
     }
 }
+
+/* minimalcore:start */
+function updateUi()
+{
+  if(!CABLES.UI)return;
+  for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({arrow:i==idx.get()})
+}
+idx.on("change",updateUi);
+updateUi();
+/* minimalcore:end */

@@ -2,7 +2,7 @@ let idx = op.inValueInt("Index");
 let valuePorts = [];
 let result = op.outArray("Result");
 
-idx.onChange = update;
+idx.onChange =
 idx.onLinkChanged = update;
 op.on("init", update);
 
@@ -23,3 +23,15 @@ function update()
     else
         result.setRef([]);
 }
+
+
+/* minimalcore:start */
+function updateUi()
+{
+  if(!CABLES.UI)return;
+  for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({arrow:i==idx.get()})
+}
+idx.on("change",updateUi);
+updateUi();
+/* minimalcore:end */
+

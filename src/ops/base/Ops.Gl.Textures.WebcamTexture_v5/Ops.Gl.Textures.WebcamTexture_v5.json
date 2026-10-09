@@ -39,6 +39,12 @@
             "author": "pandur",
             "date": 1782807607785,
             "url": "https://github.com/cables-gl/cables/issues/8387"
+        },
+        {
+            "message": "Restart camera on permission change, works better on first ever load of the website, better stopping of webcam when deleting op etc.",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791535787060
         }
     ],
     "layout": {

@@ -26,6 +26,12 @@ function update()
 
     for (let i = 0; i < numberStrings.length; i++)
     {
-        if (strings[i].get() == s) outNum.set(numbers[i].get());
+        if (strings[i].get() == s){
+          outNum.set(numbers[i].get());
+numbers[i].setUiAttribs({arrow:true})
+}
+else
+numbers[i].setUiAttribs({arrow:false})
+
     }
 }

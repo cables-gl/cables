@@ -89,3 +89,15 @@ function onlyOnePortChange()
         update();
     }
 }
+
+
+
+/* minimalcore:start */
+function updateUi()
+{
+  if(!CABLES.UI)return;
+  for (let i = 0; i < valuePorts.get().length; i++) valuePorts.get()[i].setUiAttribs({arrow:i==idx.get()})
+}
+idx.on("change",updateUi);
+updateUi();
+/* minimalcore:end */

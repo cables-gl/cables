@@ -32,15 +32,18 @@ idx.onChange =
     inStrs.onChange = () =>
     {
         const stringPorts = inStrs.get();
-        // let arr = [];
 
-        // setUi();
-
-        // for (let i = 0; i < stringPorts.length; i++)
-        // {
-        //     arr[i] = stringPorts[i].get() || "";
-        // }
-        // outArr.set(arr);
         outNum.set(stringPorts.length);
         update();
     };
+
+/* minimalcore:start */
+function updateUi()
+{
+  if(!CABLES.UI)return;
+  for (let i = 0; i < inStrs.get().length; i++) inStrs.get()[i].setUiAttribs({arrow:i==idx.get()})
+}
+idx.on("change",updateUi);
+updateUi();
+/* minimalcore:end */
+
