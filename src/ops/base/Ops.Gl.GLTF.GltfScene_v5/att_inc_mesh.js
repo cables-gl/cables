@@ -43,9 +43,7 @@ let gltfMesh = class
                 dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
                 accPos++;
             }
-            // const attribType = attrib.attribute_type(); // 4 = GENERIC
 
-            // if (attribType === decoderModule.GENERIC) {
             const dracoDecoder = window.DracoDecoder;
 
             dracoDecoder.decodeGeometry(dataBuff.buffer, (geometry) =>

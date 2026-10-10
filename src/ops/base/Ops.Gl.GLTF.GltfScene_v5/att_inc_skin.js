@@ -23,14 +23,15 @@ const GltfSkin = class
         {
             this._mod = new CGL.ShaderModifier(cgl, op.name + this._node.name);
 
-            this._mod.addModule({
+            this._mod.addModule(
+            {
                 "priority": -2,
                 "name": "MODULE_VERTEX_POSITION",
                 "srcHeadVert": attachments.skin_head_vert || "",
                 "srcBodyVert": attachments.skin_vert || ""
             });
 
-            this._mod.addUniformVert("m4[]", "MOD_boneMats", []);// bohnenmatze
+            this._mod.addUniformVert("m4[]", "MOD_boneMats", []); // bohnenmatze
             const tr = vec3.create();
         }
 
@@ -65,6 +66,6 @@ const GltfSkin = class
 
         // draw mesh...
         cgl.pushModelMatrix();
-        if (this.identity)mat4.identity(cgl.mMatrix);
+        if (this.identity) mat4.identity(cgl.mMatrix);
     }
 };

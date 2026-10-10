@@ -293,6 +293,7 @@ function printInfo()
     html += "<table id=\"meshestable" + guiId + "\"  class=\"table treetable\">";
     html += "<tr>";
     html += " <th>Name</th>";
+    html += " <th>Mode</th>";
     html += " <th>Node</th>";
     html += " <th>Material</th>";
     html += " <th>Vertices</th>";
@@ -311,6 +312,28 @@ function printInfo()
         html += "<tr>";
         html += "<td>" + gltf.json.meshes[i].name || "?";
 
+        html += "<td>"
+        if (gltf.json.meshes[i].primitives)
+        {
+            let mode = gltf.json.meshes[i].primitives[0].mode;
+            if (mode === undefined) mode = 4
+
+            if (mode == 0)
+            {
+                html += "points";
+
+                if (gltf.json.meshes[i].primitives[0].extensions &&
+                    gltf.json.meshes[i].primitives[0].extensions.KHR_gaussian_splatting) html += " gauss splat";
+            }
+            else if (mode == 1) html += "lines";
+            else if (mode == 2) html += "line_loop";
+            else if (mode == 3) html += "line_strip";
+            else if (mode == 4) html += "triangles";
+            else if (mode == 5) html += "triangle_strip";
+            else if (mode == 6) html += "triangle_fan";
+            else html += "???";
+        }
+        else html += "unknown";
         html += "</td>";
 
         html += "<td>";
