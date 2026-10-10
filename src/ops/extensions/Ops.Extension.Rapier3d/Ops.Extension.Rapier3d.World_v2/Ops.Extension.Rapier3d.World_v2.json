@@ -21,6 +21,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1790668694871
+        },
+        {
+            "message": "Added simple debug renderer toggle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791663269062
         }
     ],
     "layout": {
@@ -32,7 +38,20 @@
             {
                 "type": 0,
                 "name": "Debug",
+                "group": "Debug",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Render Debug",
+                "group": "Debug",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Debug Opacity",
+                "group": "Debug",
+                "subType": "number"
             },
             {
                 "type": 0,

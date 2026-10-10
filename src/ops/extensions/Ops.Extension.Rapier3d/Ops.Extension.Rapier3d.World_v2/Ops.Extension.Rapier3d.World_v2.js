@@ -3,6 +3,8 @@ const gravity = { "x": 0.0, "y": -9.81, "z": 0.0 };
 const
     exec = op.inTrigger("Execute"),
     inDebug = op.inBool("Debug", true),
+    inRenderDebug = op.inBool("Render Debug", false),
+    inDebugOpacity = op.inFloatSlider("Debug Opacity", 1),
 
     inGravX = op.inFloat("Gravity X", gravity.x),
     inGravY = op.inFloat("Gravity Y", gravity.y),
@@ -22,6 +24,45 @@ let eventQueue;
 let collisions = {};
 let params = null;
 let needsReset = true;
+
+op.setPortGroup("Debug", [inDebug, inRenderDebug, inDebugOpacity]);
+
+const cgl = op.patch.cgl;
+let debugShader = null;
+let debugMesh = null;
+let debugOpacityUniform = null;
+
+function renderDebugLines(dbg)
+{
+    if (!debugShader)
+    {
+        debugShader = new CGL.Shader(cgl, op.name + " debug lines");
+        debugShader.setSource(attachments.debuglines_vert, attachments.debuglines_frag);
+        debugOpacityUniform = new CGL.Uniform(debugShader, "f", "opacity", inDebugOpacity);
+        debugMesh = new CGL.Mesh(cgl, new CGL.Geometry(op.name + " debug lines"), { "glPrimitive": cgl.gl.LINES });
+    }
+
+    if (dbg.vertices.length == 0) return;
+
+    debugMesh.updateVertices(dbg);
+    debugMesh.setAttribute("attrVertColor", dbg.colors, 4);
+
+    cgl.pushModelMatrix();
+    mat4.identity(cgl.mMatrix);
+    cgl.pushDepthTest(false);
+    cgl.pushBlend(true);
+    cgl.pushShader(debugShader);
+    debugMesh.render(debugShader);
+    cgl.popShader();
+    cgl.popBlend();
+    cgl.popDepthTest();
+    cgl.popModelMatrix();
+}
+
+op.onDelete = () =>
+{
+    if (debugMesh) debugMesh.dispose();
+};
 
 inGravX.onChange =
     inGravY.onChange =
@@ -94,9 +135,11 @@ exec.onTriggered = () =>
     // const ray = new RAPIER.Ray(new RAPIER.Vector3(-0.5, 0, 0), new RAPIER.Vector3(1, 0, 0));
     // const result = world.castRay(ray);
 
-    if (inDebug.get() && outDebugPoints.isLinked())
+    let dbg = null;
+    if (inRenderDebug.get() || (inDebug.get() && outDebugPoints.isLinked())) dbg = world.debugRender();
+
+    if (dbg && inDebug.get() && outDebugPoints.isLinked())
     {
-        const dbg = world.debugRender();
         outDebugPoints.set(dbg.vertices);
         outDebugColors.set(dbg.colors);
     }
@@ -123,6 +166,8 @@ exec.onTriggered = () =>
     };
 
     next.trigger();
+
+    if (dbg && inRenderDebug.get()) renderDebugLines(dbg);
 
     op.patch.frameStore.rapier = oldRapier;
 };

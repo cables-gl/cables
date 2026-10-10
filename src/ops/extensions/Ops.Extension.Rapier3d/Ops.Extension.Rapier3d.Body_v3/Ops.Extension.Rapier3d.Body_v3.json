@@ -58,6 +58,12 @@
             "author": "pandur",
             "date": 1790330347659,
             "url": "https://github.com/cables-gl/cables/issues/8622"
+        },
+        {
+            "message": "Cubes, Spheres, Cylinder and Capsules can be rendered directly from the op, still should use meshinstancer/mesh op setup for more control and performance (if many)",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1791663351960
         }
     ],
     "layout": {
@@ -81,119 +87,148 @@
                 "subType": "integer"
             },
             {
-                "type": 2,
-                "name": "Geometry",
-                "objType": "geometry"
-            },
-            {
                 "type": 0,
-                "name": "Mass",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Friction",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Density",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Restitution",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Linear Damping",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Angular Damping",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Sensor",
+                "name": "Render",
                 "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Transform",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
-                "name": "Radius",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Size Z",
-                "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Translate X",
+                "group": "Translate",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Translate Y",
+                "group": "Translate",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "Translate Z",
+                "group": "Translate",
                 "subType": "number"
             },
             {
-                "type": 3,
-                "name": "Positions"
+                "type": 0,
+                "name": "Transform",
+                "group": "Translate",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Radius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size X",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Y",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Size Z",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Geometry",
+                "group": "Size",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Mass",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Density",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Restitution",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear Damping",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Angular Damping",
+                "group": "Properties",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sensor",
+                "group": "Properties",
+                "subType": "boolean"
             },
             {
                 "type": 3,
-                "name": "Scalings"
+                "name": "Positions",
+                "group": "Instances"
             },
             {
                 "type": 3,
-                "name": "Rotations"
+                "name": "Scalings",
+                "group": "Instances"
+            },
+            {
+                "type": 3,
+                "name": "Rotations",
+                "group": "Instances"
             },
             {
                 "type": 0,
                 "name": "Events",
+                "group": "Collision Events",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Events Fixed-Fixed",
+                "group": "Collision Events",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Active",
+                "group": "Simulation",
                 "subType": "boolean"
             },
             {
                 "type": 1,
-                "name": "Update Translation"
+                "name": "Update Translation",
+                "group": "Simulation"
             },
             {
                 "type": 1,
-                "name": "Force Wakeup"
+                "name": "Force Wakeup",
+                "group": "Simulation"
             }
         ],
         "portsOut": [
