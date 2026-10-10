@@ -106,7 +106,7 @@ inPositions.onLinkChanged =
     {
         setupReason = "paramschanged";
         let title = "";
-        title += inType.get() + " ";
+        title += inType.get() + " " + inCollShape.get() + " ";
         if (inSensor.get()) title += "sensor ";
         title += inName.get();
         op.setUiAttrib({ "extendTitle": title });
