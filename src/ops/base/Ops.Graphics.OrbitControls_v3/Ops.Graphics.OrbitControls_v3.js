@@ -27,7 +27,7 @@ const
     outRadius = op.outNumber("radius"),
     outXDeg = op.outNumber("Rot X"),
     outYDeg = op.outNumber("Rot Y");
-    // outCoords = op.outArray("Eye/Target Pos");
+// outCoords = op.outArray("Eye/Target Pos");
 
 op.setPortGroup("Initial Values", [initialAxis, initialX, initialRadius]);
 op.setPortGroup("Interaction", [smoothness, speedX, speedY]);
@@ -51,8 +51,10 @@ const
 let eye = vec3.create(),
     mouseDown = false,
     radius = 5,
-    lastMouseX = 0, lastMouseY = 0,
-    percX = 0, percY = 0,
+    lastMouseX = 0,
+    lastMouseY = 0,
+    percX = 0,
+    percY = 0,
     px = 0,
     py = 0,
     divisor = 1,
@@ -194,7 +196,8 @@ function circlePosi(vec, perc)
 
     outRadius.set(radius);
 
-    let i = 0, degInRad = 0;
+    let i = 0,
+        degInRad = 0;
 
     degInRad = 360 * perc / 2 * CGL.DEG2RAD;
     vec3.set(vec,
@@ -206,12 +209,13 @@ function circlePosi(vec, perc)
 
 function circlePos(perc)
 {
-    if (radius < minDist.get())radius = minDist.get();
-    if (radius > maxDist.get())radius = maxDist.get();
+    if (radius < minDist.get()) radius = minDist.get();
+    if (radius > maxDist.get()) radius = maxDist.get();
 
     outRadius.set(radius);
 
-    let i = 0, degInRad = 0;
+    let i = 0,
+        degInRad = 0;
     const vec = vec3.create();
     degInRad = 360 * perc / 2 * CGL.DEG2RAD;
     vec3.set(vec,
@@ -223,6 +227,7 @@ function circlePos(perc)
 
 function onmousemove(event)
 {
+    if (event.buttons === 0) mouseDown = false;
     if (!mouseDown) return;
 
     const x = event.clientX;
@@ -254,8 +259,8 @@ function onmousemove(event)
 
             if (restricted.get())
             {
-                if (percY > 0.5)percY = 0.5;
-                if (percY < -0.5)percY = -0.5;
+                if (percY > 0.5) percY = 0.5;
+                if (percY < -0.5) percY = -0.5;
             }
         }
     }
@@ -290,9 +295,7 @@ function lockChange()
         document.addEventListener("mousemove", onmousemove, false);
 }
 
-function onMouseEnter(e)
-{
-}
+function onMouseEnter(e) {}
 
 initialX.onChange = function ()
 {
@@ -332,7 +335,7 @@ const ontouchmove = function (event)
 
 active.onChange = function ()
 {
-    if (active.get())bind();
+    if (active.get()) bind();
     else unbind();
 };
 
@@ -359,12 +362,13 @@ function bind()
 
 function unbind()
 {
+    mouseDown = false;
     if (!element) return;
 
     element.removeEventListener("pointermove", onmousemove);
     element.removeEventListener("pointerdown", onMouseDown);
     element.removeEventListener("pointerup", onMouseUp);
     element.removeEventListener("pointerleave", onMouseUp);
-    element.removeEventListener("pointerenter", onMouseUp);
+    element.removeEventListener("pointerenter", onMouseEnter);
     element.removeEventListener("wheel", onMouseWheel);
 }
