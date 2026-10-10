@@ -181,6 +181,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1750154114921
+        },
+        {
+            "message": "Fix bug not registering mouse button states when toggling active while mousebutton is down",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791663215639
         }
     ],
     "license": "MIT",
