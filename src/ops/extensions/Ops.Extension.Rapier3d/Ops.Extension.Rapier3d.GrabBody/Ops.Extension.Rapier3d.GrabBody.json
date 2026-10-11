@@ -66,6 +66,10 @@
                 "name": "Filter Name"
             },
             {
+                "type": 5,
+                "name": "Grab Groups"
+            },
+            {
                 "type": 0,
                 "name": "Soft Body Grab Radius",
                 "group": "Soft Bodies",

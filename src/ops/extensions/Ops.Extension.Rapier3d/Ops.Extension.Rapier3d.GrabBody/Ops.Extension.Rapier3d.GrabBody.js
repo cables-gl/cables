@@ -10,6 +10,7 @@ const
     inGrab = op.inBool("Grab", false),
 
     inFilter = op.inString("Filter Name", ""),
+    inGroups = op.inString("Grab Groups", ""),
 
     inSoftRadius = op.inFloat("Soft Body Grab Radius", 0.3),
     inStiffness = op.inFloat("Spring Stiffness", 200),
@@ -30,6 +31,8 @@ op.setPortGroup("Rigid Bodies", [inStiffness, inDamping]);
 
 const RAY_MAX_DISTANCE = 10000;
 const PARALLEL_EPSILON = 0.000001;
+let queryGroups;
+let groupsChanged = true;
 
 const cgl = op.patch.cgl;
 
@@ -58,6 +61,7 @@ let grabbedSoftBody = null;
 let grabbedParticles = [];
 
 inInput.onChange = updateUi;
+inGroups.onChange = () => { groupsChanged = true; };
 updateUi();
 
 inFilter.onChange = () =>
@@ -85,6 +89,7 @@ exec.onTriggered = () =>
         forgetGrab();
         lastWorld = world;
     }
+    if (groupsChanged && op.patch.frameStore.rapier.tools) updateQueryGroups(op.patch.frameStore.rapier.tools);
 
     const screenInput = inInput.get() == "Screen";
     if (screenInput) calcMouseRay();
@@ -155,6 +160,12 @@ function isGrabbable(collider)
     return !filter || bodyName(collider).includes(filter);
 }
 
+function updateQueryGroups(tools)
+{
+    queryGroups = tools.getQueryGroups(inGroups.get());
+    groupsChanged = false;
+}
+
 function calcMouseRay()
 {
     mat4.mul(invViewProj, cgl.pMatrix, cgl.vMatrix);
@@ -174,7 +185,7 @@ function pickByRay(world)
     const ray = new RAPIER.Ray(
         { "x": rayNear[0], "y": rayNear[1], "z": rayNear[2] },
         { "x": rayDir[0], "y": rayDir[1], "z": rayDir[2] });
-    const hit = world.castRay(ray, RAY_MAX_DISTANCE, true);
+    const hit = world.castRay(ray, RAY_MAX_DISTANCE, true, undefined, queryGroups);
     if (!hit) return null;
 
     vec3.scaleAndAdd(grabPoint, rayNear, rayDir, hit.timeOfImpact);
@@ -188,7 +199,7 @@ function pickByRay(world)
 
 function pickByPosition(world)
 {
-    const projection = world.projectPoint({ "x": inputPos[0], "y": inputPos[1], "z": inputPos[2] }, true, undefined, undefined, undefined, undefined, isGrabbable);
+    const projection = world.projectPoint({ "x": inputPos[0], "y": inputPos[1], "z": inputPos[2] }, true, undefined, queryGroups, undefined, undefined, isGrabbable);
     if (!projection) return null;
 
     if (projection.isInside) vec3.copy(grabPoint, inputPos);

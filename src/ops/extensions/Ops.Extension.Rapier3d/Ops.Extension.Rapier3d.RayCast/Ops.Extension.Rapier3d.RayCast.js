@@ -5,6 +5,7 @@ const
     inY = op.inFloat("Screen Y"),
     inRay = op.inArray("Ray Points"),
     inExclSensors = op.inBool("Exclude Sensors", false),
+    inGroups = op.inString("Hit Groups", ""),
     active = op.inBool("Active", true),
     next = op.outTrigger("next"),
 
@@ -20,8 +21,12 @@ let didsetCursor = false;
 let mat = mat4.create();
 let isScreenCoords = true;
 
+let queryGroups;
+let groupsChanged = true;
+
 inType.onChange = updateUi;
 inExec.onTriggered = update;
+inGroups.onChange = () => { groupsChanged = true; };
 
 function updateUi()
 {
@@ -30,11 +35,18 @@ function updateUi()
     inRay.setUiAttribs({ "greyout": inType.get() != "World" });
 }
 
+function updateQueryGroups(tools)
+{
+    queryGroups = tools.getQueryGroups(inGroups.get());
+    groupsChanged = false;
+}
+
 function update()
 {
     world = op.patch.frameStore.rapier.world;
 
     if (!world) return;
+    if (groupsChanged && op.patch.frameStore.rapier.tools) updateQueryGroups(op.patch.frameStore.rapier.tools);
 
     if (active.get())
     {
@@ -90,7 +102,7 @@ function update()
             if (inExclSensors.get())
                 filterFlags = RAPIER.QueryFilterFlags.EXCLUDE_SENSORS;
 
-            const result = world.castRay(ray, 999, true, filterFlags);
+            const result = world.castRay(ray, 999, true, filterFlags, queryGroups);
 
             if (result && result.collider)
             {

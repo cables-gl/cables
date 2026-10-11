@@ -1,0 +1,153 @@
+{
+    "id": "027a0b26-9b4a-486d-951d-c7b0c86b4a51",
+    "created": 1791665410432,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1720885489958
+        },
+        {
+            "message": "Updated to new version of rapier, v0.19.3",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1768319801510
+        },
+        {
+            "message": "Updated rapier to NPM 0.21, which is rapier probably 0.36",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1790668694871
+        },
+        {
+            "message": "Added simple debug renderer toggle",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791663269062
+        },
+        {
+            "message": "created as a new version of Ops.Extension.Rapier3d.World_v2",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791665410433
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Debug",
+                "group": "Debug",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Render Debug",
+                "group": "Debug",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Debug Opacity",
+                "group": "Debug",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity X",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Y",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gravity Z",
+                "group": "Gravity",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Steps Per Second",
+                "group": "Simulation",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Max Steps Per Frame",
+                "group": "Simulation",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "group": "Simulation",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset",
+                "group": "Simulation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Steps This Frame",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Debug Splines"
+            },
+            {
+                "type": 3,
+                "name": "Debug Colors"
+            },
+            {
+                "type": 5,
+                "name": "Version"
+            }
+        ]
+    },
+    "exampleProjectId": "V66gqi",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "dependencies": [
+        {
+            "src": "./rapier.js",
+            "type": "commonjs"
+        }
+    ],
+    "summary": "Physics simulation world ",
+    "credits": [
+        {
+            "title": "Rapier 3d",
+            "author": "dimforge",
+            "url": "https://rapier.rs",
+            "licence": "Apache-2.0",
+            "version": "NPM 0.21",
+            "username": "pandur",
+            "date": 1790667972055
+        }
+    ]
+}
