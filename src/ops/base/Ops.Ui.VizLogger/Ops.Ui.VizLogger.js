@@ -46,7 +46,8 @@ function tokenize(str, color)
 
 function addLine(str, color = "#ddd", highlight = true)
 {
-    arr.push({
+    arr.push(
+    {
         "time": new Date().toTimeString().substring(0, 8),
         "parts": highlight ? tokenize(str, color) : [{ "text": str, "color": color }]
     });
@@ -95,9 +96,10 @@ op.renderVizLayer = (ctx, layer) =>
     lines = Math.floor(layer.height / layer.scale / 10 - 1);
     let padding = 4;
 
-    for (let i = Math.min(lines, arr.length - 1); i >= 0; i--)
+    const first = Math.max(0, arr.length - lines);
+    for (let i = first; i < arr.length; i++)
     {
-        const y = layer.y / layer.scale + 10 * i + padding * 2;
+        const y = layer.y / layer.scale + 10 * (i - first) + padding * 2;
         let x = layer.x / layer.scale + padding;
 
         ctx.fillStyle = COL_TIME;
