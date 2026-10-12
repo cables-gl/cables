@@ -1,0 +1,251 @@
+{
+    "id": "c0e8c7f3-9af3-449f-b55f-5bdfc77dde49",
+    "created": 1791717343706,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791717343717
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Randomize Type index",
+                "group": "Generate",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Randomize",
+                "group": "Generate"
+            },
+            {
+                "type": 1,
+                "name": "Mutate",
+                "group": "Generate"
+            },
+            {
+                "type": 1,
+                "name": "Play",
+                "group": "Generate"
+            },
+            {
+                "type": 0,
+                "name": "Wave index",
+                "values": [
+                    "Square",
+                    "Sawtooth",
+                    "Sine",
+                    "Noise"
+                ],
+                "group": "Frequency",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Attack Time",
+                "group": "Envelope",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sustain Time",
+                "group": "Envelope",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sustain Punch",
+                "group": "Envelope",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Decay Time",
+                "group": "Envelope",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start Frequency",
+                "group": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Frequency",
+                "group": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Slide",
+                "group": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delta Slide",
+                "group": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vibrato Depth",
+                "group": "Vibrato",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Vibrato Speed",
+                "group": "Vibrato",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Change Amount",
+                "group": "Arpeggio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Change Speed",
+                "group": "Arpeggio",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Square Duty",
+                "group": "Duty Cycle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Duty Sweep",
+                "group": "Duty Cycle",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Repeat Speed",
+                "group": "Retrigger",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Phaser Offset",
+                "group": "Phaser",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Phaser Sweep",
+                "group": "Phaser",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Low Pass Cutoff",
+                "group": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Low Pass Cutoff Sweep",
+                "group": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Low Pass Resonance",
+                "group": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "High Pass Cutoff",
+                "group": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "High Pass Cutoff Sweep",
+                "group": "Filter",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Volume",
+                "group": "Output",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sample Rate index",
+                "group": "Output",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Sample Size index",
+                "values": [
+                    "8",
+                    "16"
+                ],
+                "group": "Output",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Data URL"
+            },
+            {
+                "type": 2,
+                "name": "Sound"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Clipping",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "dependencies": [
+        {
+            "src": "./riffwave.js",
+            "type": "commonjs"
+        },
+        {
+            "src": "./sfxr.js",
+            "type": "commonjs"
+        }
+    ],
+    "credits": [
+        {
+            "date": 1791816172769,
+            "title": "SFXR",
+            "author": "",
+            "url": "https://github.com/chr15m/jsfxr#use",
+            "licence": "Unlicense",
+            "version": "May 5 2026",
+            "username": "pandur"
+        }
+    ],
+    "isReleased": true,
+    "summary": "Oldschool sound effect generator",
+    "docs": {
+        "ports": []
+    }
+}
