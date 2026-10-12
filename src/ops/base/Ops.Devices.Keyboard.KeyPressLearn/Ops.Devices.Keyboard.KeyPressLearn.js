@@ -16,6 +16,23 @@ let dia = null;
 modKey.onChange = learnedKeyCode.onChange = updateKeyName;
 
 addCanvasListener();
+cgl.canvas.addEventListener("blur", releaseKey);
+window.addEventListener("blur", releaseKey);
+document.addEventListener("pointerlockchange", onPointerLockChange);
+
+// a key released while the canvas or window has no focus sends its keyup somewhere else, so a held key is released when focus is lost
+function releaseKey()
+{
+    if (!outPressed.get()) return;
+    outPressed.set(false);
+    onRelease.trigger();
+}
+
+// when pointer lock ends (escape) the browser does not send the keyup of keys that are held at that moment
+function onPointerLockChange()
+{
+    if (!document.pointerLockElement) releaseKey();
+}
 
 function onKeyDown(e)
 {
@@ -24,14 +41,14 @@ function onKeyDown(e)
         learnedKeyCode.set(e.keyCode);
         if (CABLES.UI)
         {
-            if (dia)dia.close();
+            if (dia) dia.close();
             op.refreshParams();
         }
         learning = false;
         removeListeners();
         addListener();
 
-        if (CABLES.UI)gui.emitEvent("portValueEdited", op, learnedKeyCode, learnedKeyCode.get());
+        if (CABLES.UI) gui.emitEvent("portValueEdited", op, learnedKeyCode, learnedKeyCode.get());
     }
     else
     {
@@ -43,14 +60,14 @@ function onKeyDown(e)
                 {
                     onPress.trigger();
                     outPressed.set(true);
-                    if (preventDefault.get())e.preventDefault();
+                    if (preventDefault.get()) e.preventDefault();
                 }
             }
             else
             {
                 onPress.trigger();
                 outPressed.set(true);
-                if (preventDefault.get())e.preventDefault();
+                if (preventDefault.get()) e.preventDefault();
             }
         }
     }
@@ -77,6 +94,9 @@ op.onDelete = function ()
     cgl.canvas.removeEventListener("keydown", onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);
     document.removeEventListener("keydown", onKeyDown, false);
+    cgl.canvas.removeEventListener("blur", releaseKey);
+    window.removeEventListener("blur", releaseKey);
+    document.removeEventListener("pointerlockchange", onPointerLockChange);
 };
 
 learn.onTriggered = function ()
@@ -86,9 +106,11 @@ learn.onTriggered = function ()
     learning = true;
     addDocumentListener();
 
-    dia = new CABLES.UI.ModalDialog({
+    dia = new CABLES.UI.ModalDialog(
+    {
         "title": "Learn Key...",
-        "text": "Just press any key" });
+        "text": "Just press any key"
+    });
 
     dia.on("close", () =>
     {

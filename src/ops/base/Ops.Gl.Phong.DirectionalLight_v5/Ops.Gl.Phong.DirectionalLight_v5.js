@@ -38,6 +38,7 @@ const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
+// Ops.Gl.ShaderEffects.Shadow_v4 has its own bias in world units and ignores this one, remove it in future versions
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 0);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
@@ -77,7 +78,8 @@ const outTexture = op.outTexture("Shadow Map");
 
 let texelSize = 1 / Number(inMapSize.get());
 
-const newLight = new CGL.Light(cgl, {
+const newLight = new CGL.Light(cgl,
+{
     "type": "directional",
     "position": [0, 1, 2].map(function (i) { return positionIn[i].get(); }),
     "color": [0, 1, 2].map(function (i) { return colorIn[i].get(); }),
@@ -137,6 +139,7 @@ function updateShadowMapFramebuffer()
         newLight.createBlurEffect({});
         newLight.createBlurShader();
         newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
+        newLight.nearFar = [inNear.get(), inFar.get()];
     }
 
     if (inAdvanced.get()) updateBuffers();
@@ -150,11 +153,10 @@ inMSAA.onChange = inAnisotropic.onChange = inFilterType.onChange = inMapSize.onC
     updating = true;
 };
 
-inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inBias.onChange = inIntensity.onChange = inCastLight.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
+inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange = inBias.onChange = inIntensity.onChange = inCastLight.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
 
 let updateLight = false;
+
 function updateLightParameters(param)
 {
     updateLight = true;
@@ -188,7 +190,8 @@ function drawHelpers()
 {
     if (cgl.shouldDrawHelpers(op))
     {
-        gui.setTransformGizmo({
+        gui.setTransformGizmo(
+        {
             "posX": inPosX,
             "posY": inPosY,
             "posZ": inPosZ,
@@ -239,6 +242,7 @@ inTrigger.onTriggered = function ()
         newLight.castLight = inCastLight.get();
         newLight.position = [inPosX.get(), inPosY.get(), inPosZ.get()];
         newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
+        newLight.nearFar = [inNear.get(), inFar.get()];
         newLight.castShadow = inCastShadow.get();
 
         newLight.normalOffset = inNormalOffset.get();

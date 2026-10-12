@@ -92,7 +92,14 @@
         {
             "message": "added key-name to extended title and outport",
             "author": "stephan",
-            "date": 1647444317354
+            "date": 1647444317354,
+            "type": "improvement"
+        },
+        {
+            "message": "Force release of key when exiting a pointerlock, this prevents hanging keys which are not pressed anymore",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791731498087
         }
     ],
     "issues": "",
