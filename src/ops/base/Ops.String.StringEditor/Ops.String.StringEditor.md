@@ -3,9 +3,3 @@ the following syntax modes are available:
 - Text
 - GLSL
 - CSS
-- HTML
-- XML
-- JSON
-- JavaScript
-- Inline CSS
-- SQL
