@@ -18,6 +18,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1770031626926
+        },
+        {
+            "message": "Fix bug where pixelformat did not always change to selected value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791790295481
         }
     ],
     "authorName": "pandur",

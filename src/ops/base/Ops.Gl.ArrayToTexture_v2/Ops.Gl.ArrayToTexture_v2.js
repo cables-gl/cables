@@ -3,13 +3,13 @@ const
     inArr = op.inArray("array", null),
     inStride = op.inSwitch("Source Structure", ["MONO", "RGB", "RGBA"], "RGBA"),
     inSizeType = op.inSwitch("Size", ["Manual", "Square", "Row", "Column"], "Manual"),
-    inWidth = op.inValueInt("width", 32),
-    inHeight = op.inValueInt("height", 32),
+    inWidth = op.inInt("width", 32),
+    inHeight = op.inInt("height", 32),
     fillUp = op.inBool("Fill Up", false),
     flip = op.inBool("Flip", false),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "nearest"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     outNext = op.outTrigger("Next"),
     outTex = op.outTexture("Texture out"),
     outWidth = op.outNumber("Tex Width"),
@@ -62,8 +62,8 @@ function update()
     let w = inWidth.get();
     let h = inHeight.get();
     let stride = 3;
-    if (inStride.get() == "RGBA")stride = 4;
-    if (inStride.get() == "MONO")stride = 1;
+    if (inStride.get() == "RGBA") stride = 4;
+    if (inStride.get() == "MONO") stride = 1;
 
     inArr.setUiAttribs({ "stride": stride });
 
@@ -102,14 +102,14 @@ function update()
     }
 
     let num = data.length / stride;
-    if (fillUp.get())num = w * h;
+    if (fillUp.get()) num = w * h;
 
     for (let i = 0; i < num; i++)
     {
         for (let j = 0; j < stride; j++)
         {
             let v = data[(i * stride + j) % data.length];
-            if (!isFp)v *= 255;
+            if (!isFp) v *= 255;
 
             pixels[i * 4 + j] = v;
         }
@@ -126,9 +126,10 @@ function update()
             if (isFp) pixels[i * 4 + 3] = 1.0;
             else pixels[i * 4 + 3] = 255;
     }
+    if (tex && tex.pixelFormat != inPixel.get()) tex = null;
     if (tex && (w != tex.width || h != tex.height))
     {
-        if (tex)tex.delete();
+        if (tex) tex.delete();
         tex = null;
     }
     if (!tex) tex = new CGL.Texture(cgl, { "pixelFormat": inPixel.get(), "name": "array2texture" });

@@ -215,6 +215,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1791447323117
+        },
+        {
+            "message": "Updated logs for teams, patches, patchlists and unified log-entry format",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791465513151
         }
     ],
     "isReleased": true,

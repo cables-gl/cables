@@ -522,6 +522,19 @@
             "author": "pandur",
             "date": 1791450460924,
             "url": "https://github.com/cables-gl/cables/issues/7352"
+        },
+        {
+            "message": "Indicate current routed/switched port by drawing an arrow triangle at the top/bottom of the port",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1791539613921,
+            "url": "https://github.com/cables-gl/cables/issues/7347"
+        },
+        {
+            "message": "Improve activity/dataflow performance / less framedrop when creating new cables ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791615166556
         }
     ],
     "isReleased": true,

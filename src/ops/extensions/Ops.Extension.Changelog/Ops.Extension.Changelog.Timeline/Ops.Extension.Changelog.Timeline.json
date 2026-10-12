@@ -39,6 +39,18 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1791443857047
+        },
+        {
+            "message": "Performance of timeline optimized",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791552504059
+        },
+        {
+            "message": "After loading the patch timeline will scroll and zoom to last saved state",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1791552801690
         }
     ],
     "isReleased": true,

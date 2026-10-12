@@ -210,5 +210,10 @@
                 "name": "Bodies"
             }
         ]
+    },
+    "isReleased": true,
+    "exampleProjectId": "NLFWxn",
+    "docs": {
+        "ports": []
     }
 }
