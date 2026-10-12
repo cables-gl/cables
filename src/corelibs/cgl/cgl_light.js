@@ -31,6 +31,7 @@ export class Light
         this.normalOffset = config.normalOffset || 0;
         this.shadowBias = config.shadowBias || 0;
         this.shadowStrength = config.shadowStrength || 0;
+        this.shadowTarget = config.shadowTarget || null;
         this.lightMatrix = null;
 
         this.shadowMap = null;
@@ -59,7 +60,12 @@ export class Light
                 "lookAt": vec3.create(),
                 "camPos": vec3.create(),
                 "up": vec3.fromValues(0, 1, 0),
+                "target": vec3.create(),
+                "offset": vec3.create(),
             },
+            "lrBottomTop": 0,
+            "mapSize": 0,
+            "offsetMatrix": mat4.create(),
         };
         this._effectBlur = null;
         this._shaderBlur = {
@@ -97,6 +103,8 @@ export class Light
 
     updateProjectionMatrix(lrBottomTop, near, far, angle)
     {
+        this.nearFar = [near, far];
+        this._shaderShadowMap.lrBottomTop = lrBottomTop;
         if (this.type === "spot")
         {
             mat4.perspective(this._shaderShadowMap.matrices.projMatrix, -2 * CGL.DEG2RAD * angle, 1, near, far); // * angle in degrees
@@ -108,7 +116,6 @@ export class Light
         else if (this.type === "point")
         {
             mat4.perspective(this._shaderShadowMap.matrices.projMatrix, CGL.DEG2RAD * 90, 1, near, far);
-            this.nearFar = [near, far];
         }
     }
 
@@ -155,6 +162,7 @@ export class Light
 
         const fbWidth = width || 512;
         const fbHeight = height || 512;
+        this._shaderShadowMap.mapSize = fbWidth;
 
         if (this.type === "point")
         {
@@ -377,6 +385,31 @@ export class Light
     }
 
     /**
+     * keeps the direction and distance of the shadow camera, but centers it on shadowTarget instead of the origin
+     * the target is snapped to whole texels of the shadow map, so shadow edges do not flicker when the target moves
+     */
+    _moveShadowCameraToTarget()
+    {
+        const vectors = this._shaderShadowMap.vectors;
+        const texelSize = 2 * this._shaderShadowMap.lrBottomTop / this._shaderShadowMap.mapSize;
+        const distance = vec3.length(vectors.camPos);
+
+        vec3.transformMat4(vectors.target, this.shadowTarget, this._cgl.vMatrix);
+
+        vectors.offset[0] = -vectors.target[0];
+        vectors.offset[1] = -vectors.target[1];
+        if (texelSize > 0)
+        {
+            vectors.offset[0] = -Math.round(vectors.target[0] / texelSize) * texelSize;
+            vectors.offset[1] = -Math.round(vectors.target[1] / texelSize) * texelSize;
+        }
+        vectors.offset[2] = -distance - vectors.target[2];
+
+        mat4.fromTranslation(this._shaderShadowMap.offsetMatrix, vectors.offset);
+        mat4.mul(this._cgl.vMatrix, this._shaderShadowMap.offsetMatrix, this._cgl.vMatrix);
+    }
+
+    /**
      * @param {Function} renderFunction
      */
     renderShadowPass(renderFunction)
@@ -426,6 +459,8 @@ export class Light
         if (this.type === "spot") vec3.set(this._shaderShadowMap.vectors.lookAt, this.conePointAt[0], this.conePointAt[1], this.conePointAt[2]);
 
         mat4.lookAt(this._cgl.vMatrix, this._shaderShadowMap.vectors.camPos, this._shaderShadowMap.vectors.lookAt, this._shaderShadowMap.vectors.up);
+
+        if (this.type === "directional" && this.shadowTarget) this._moveShadowCameraToTarget();
 
         mat4.copy(this._cgl.pMatrix, this._shaderShadowMap.matrices.projMatrix);
 
