@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1791717343717
-        },
-        {
-            "message": "Patch.PCwhdGx.MyAwesomeOpName renamed to Ops.Audio.Sfxr",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1791717448067
         }
     ],
     "layout": {
@@ -248,5 +242,10 @@
             "version": "May 5 2026",
             "username": "pandur"
         }
-    ]
+    ],
+    "isReleased": true,
+    "summary": "Oldschool sound effect generator",
+    "docs": {
+        "ports": []
+    }
 }
