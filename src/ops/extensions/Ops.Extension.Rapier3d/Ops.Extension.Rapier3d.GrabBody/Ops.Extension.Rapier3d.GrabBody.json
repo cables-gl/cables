@@ -124,7 +124,7 @@
             }
         ]
     },
-    "isReleased": true,
+    "isReleased": false,
     "summary": "Grab a body and hold it",
     "docs": {
         "ports": []

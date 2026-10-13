@@ -535,6 +535,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1791615166556
+        },
+        {
+            "message": "Diff view command, show difference between op versions",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1791791968111
+        },
+        {
+            "message": "Text editor diagnostics now include the codemirror editor syntax diagnostics",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791875339187
         }
     ],
     "isReleased": true,
