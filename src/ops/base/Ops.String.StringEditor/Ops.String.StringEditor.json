@@ -4,7 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1557742503222
+            "date": 1557742503222,
+            "type": "new op"
+        },
+        {
+            "message": "Fix bug with JSON syntax highlighting not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791874604472
+        },
+        {
+            "message": "Change syntax highlighting without reopening the editor",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791875155873
         }
     ],
     "authorName": "pandur",
