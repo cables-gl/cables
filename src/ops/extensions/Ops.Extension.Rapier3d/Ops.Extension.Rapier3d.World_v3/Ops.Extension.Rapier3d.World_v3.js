@@ -35,6 +35,7 @@ let accumulator = 0;
 
 let debugShader = null;
 let debugMesh = null;
+let waitTimeout = null;
 
 inGravX.onChange =
     inGravY.onChange =
@@ -44,6 +45,7 @@ inReset.onTriggered = () => { needsReset = true; };
 
 op.onDelete = () =>
 {
+    clearTimeout(waitTimeout);
     if (debugMesh) debugMesh.dispose();
 };
 
@@ -51,7 +53,7 @@ wait();
 
 function wait()
 {
-    if (!window.RAPIER) setTimeout(wait, 100);
+    if (!window.RAPIER) waitTimeout = setTimeout(wait, 100);
     else init();
 }
 

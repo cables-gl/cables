@@ -31,6 +31,7 @@ const cgl = op.patch.cgl;
 let debugShader = null;
 let debugMesh = null;
 let debugOpacityUniform = null;
+let waitTimeout = null;
 
 function renderDebugLines(dbg)
 {
@@ -61,6 +62,7 @@ function renderDebugLines(dbg)
 
 op.onDelete = () =>
 {
+    clearTimeout(waitTimeout);
     if (debugMesh) debugMesh.dispose();
 };
 
@@ -79,7 +81,7 @@ function wait()
 {
     if (!window.RAPIER)
     {
-        setTimeout(wait, 100);
+        waitTimeout = setTimeout(wait, 100);
     }
     else init();
 }
