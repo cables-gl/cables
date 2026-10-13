@@ -5,11 +5,14 @@ const
 
 syntax.onChange = updateSyntax;
 
+let test = 1;
+
 function updateSyntax()
 {
     let s = syntax.get();
     if (s == "javascript") s = "js";
     v.setUiAttribs({ "editorSyntax": s });
+
 }
 
 v.onChange = function ()
