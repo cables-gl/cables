@@ -4,12 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1570640891390
+            "date": 1570640891390,
+            "type": "new op"
         },
         {
-            "message": "Ops.Array.FlatArray renamed to Ops.Array.FlattenArray",
+            "message": "Better handling of non array type values",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1570643772481
+            "date": 1791898563102
         }
     ],
     "authorName": "pandur",

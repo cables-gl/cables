@@ -24,6 +24,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1791790295481
+        },
+        {
+            "message": "Fix texture problem with 16bit textures (now works correctly in all ops)",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791898519359
         }
     ],
     "authorName": "pandur",
