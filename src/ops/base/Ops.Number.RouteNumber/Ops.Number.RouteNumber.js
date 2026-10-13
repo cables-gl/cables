@@ -94,7 +94,7 @@ function onlyOnePortChange()
 function updateUi()
 {
     if (!CABLES.UI) return;
-    for (let i = 0; i < valuePorts.get().length; i++) valuePorts.get()[i].setUiAttribs({ "arrow": i == indexPort.get() });
+    for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({ "arrow": i == indexPort.get() });
 }
 
 indexPort.on("change", updateUi);
