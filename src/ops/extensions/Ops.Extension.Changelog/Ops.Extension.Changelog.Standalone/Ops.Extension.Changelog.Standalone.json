@@ -111,6 +111,54 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1790250799795
+        },
+        {
+            "message": "Op directories are not stored in userpreferences (BREAKS existing patches using custom op-dirs, readd the directories once to use the ops in all patches!)",
+            "type": "critical change",
+            "author": "stephan",
+            "date": 1791896623043
+        },
+        {
+            "message": "Removed the shared op-directory in the user-home, move ops somewhere else or add that folder again, once",
+            "type": "critical change",
+            "author": "stephan",
+            "date": 1791896671716
+        },
+        {
+            "message": "Increased startup speed by building up caches faster, might take a bit longer on very first time",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791896712616
+        },
+        {
+            "message": "Fixed multiple bugs with ops not showing up in opselect, needing a restart",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1791896755436
+        },
+        {
+            "message": "Fixed renaming and cloning of operators, sort them in the right directories",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1791896850550
+        },
+        {
+            "message": "Made assets that reside next to the patchfile not show up twive in export",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1791896886608
+        },
+        {
+            "message": "Added webserial capabilities, see Ops.Devices.Serial.SerialPort and its attachments for implementation details",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791896971823
+        },
+        {
+            "message": "Formating sourcecode is not possible in the editor in standalone",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791896999298
         }
     ],
     "isReleased": true,
