@@ -391,7 +391,8 @@ export class Light
     _moveShadowCameraToTarget()
     {
         const vectors = this._shaderShadowMap.vectors;
-        const texelSize = 2 * this._shaderShadowMap.lrBottomTop / this._shaderShadowMap.mapSize;
+        let texelSize = 0;
+        if (this._shaderShadowMap.mapSize > 0) texelSize = 2 * this._shaderShadowMap.lrBottomTop / this._shaderShadowMap.mapSize;
         const distance = vec3.length(vectors.camPos);
 
         vec3.transformMat4(vectors.target, this.shadowTarget, this._cgl.vMatrix);
