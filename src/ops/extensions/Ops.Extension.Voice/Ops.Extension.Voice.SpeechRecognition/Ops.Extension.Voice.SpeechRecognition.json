@@ -64,6 +64,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1788341038862
+        },
+        {
+            "message": "Fix starting and stopping",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791910903381
+        },
+        {
+            "message": "Improve support status output and show UI error",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1791911090258
         }
     ],
     "isReleased": true,
