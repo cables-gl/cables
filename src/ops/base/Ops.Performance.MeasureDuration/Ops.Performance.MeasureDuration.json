@@ -35,10 +35,8 @@
             }
         ]
     },
-    "summary": "Measure the time used to execute all child ops",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Measure the time used to execute all child ops / profiling",
+    "docs": {},
     "isReleased": true,
     "license": "MIT",
     "exampleProjectId": "phTYCu"

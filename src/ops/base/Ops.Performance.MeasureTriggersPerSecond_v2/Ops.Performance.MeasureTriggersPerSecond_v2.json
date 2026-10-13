@@ -18,7 +18,7 @@
             }
         ]
     },
-    "summary": "Counts how often the port is triggered per second",
+    "summary": "Counts how often the port is triggered per second / profiling",
     "docs": {
         "ports": [
             {
