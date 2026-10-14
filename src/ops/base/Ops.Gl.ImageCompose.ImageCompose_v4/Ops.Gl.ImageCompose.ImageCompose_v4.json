@@ -160,6 +160,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1728137834440
+        },
+        {
+            "message": "Fix webGL \"Feedback Loop\" warning that happened in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791957195256
         }
     ],
     "issues": "",

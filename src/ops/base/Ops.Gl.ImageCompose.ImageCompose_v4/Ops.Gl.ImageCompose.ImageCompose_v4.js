@@ -43,12 +43,12 @@ let copyShaderUVTexUni = null;
 let copyShaderRGBAUni = null;
 
 inWrap.onChange =
-inFilter.onChange =
-aniso.onChange =
-inPixelFormat.onChange = reInitLater;
+    inFilter.onChange =
+    aniso.onChange =
+    inPixelFormat.onChange = reInitLater;
 
 inTex.onLinkChanged =
-inClear.onChange =
+    inClear.onChange =
     inSize.onChange =
     inUVTex.onChange = updateUi;
 
@@ -59,23 +59,23 @@ updateUi();
 
 function initEffect()
 {
-    if (effect)effect.delete();
-    if (tex)tex.delete();
+    if (effect) effect.delete();
+    if (tex) tex.delete();
     tex = null;
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": CGL.Texture.isPixelFormatFloat(inPixelFormat.get()), "name": op.name });
 
     const cgl_aniso = Math.min(cgl.maxAnisotropic, parseFloat(aniso.get()));
 
     tex = new CGL.Texture(cgl,
-        {
-            "anisotropic": cgl_aniso,
-            "name": "image_compose_v2_" + op.id,
-            "pixelFormat": inPixelFormat.get(),
-            "filter": getFilter(),
-            "wrap": getWrap(),
-            "width": getWidth(),
-            "height": getHeight()
-        });
+    {
+        "anisotropic": cgl_aniso,
+        "name": "image_compose_v2_" + op.id,
+        "pixelFormat": inPixelFormat.get(),
+        "filter": getFilter(),
+        "wrap": getWrap(),
+        "width": getWidth(),
+        "height": getHeight()
+    });
 
     effect.setSourceTexture(tex);
 
@@ -132,14 +132,14 @@ function reInitLater()
 function updateResolution()
 {
     if ((
-        getWidth() != tex.width ||
-        getHeight() != tex.height ||
-        // tex.anisotropic != parseFloat(aniso.get()) ||
-        // tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
-        tex.pixelFormat != inPixelFormat.get() ||
-        tex.filter != getFilter() ||
-        tex.wrap != getWrap()
-    ) && (getWidth() !== 0 && getHeight() !== 0))
+            getWidth() != tex.width ||
+            getHeight() != tex.height ||
+            // tex.anisotropic != parseFloat(aniso.get()) ||
+            // tex.isFloatingPoint() != CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) ||
+            tex.pixelFormat != inPixelFormat.get() ||
+            tex.filter != getFilter() ||
+            tex.wrap != getWrap()
+        ) && (getWidth() !== 0 && getHeight() !== 0))
     {
         initEffect();
         effect.setSourceTexture(tex);
@@ -169,13 +169,13 @@ function updateResolutionInfo()
     let changed = false;
     changed = inSize.uiAttribs.info != info;
     inSize.setUiAttribs({ "info": info });
-    if (changed)op.refreshParams();
+    if (changed) op.refreshParams();
 }
 
 function updateDefines()
 {
-    if (copyShader)copyShader.toggleDefine("USE_TEX", inTex.isLinked() || !inClear.get());
-    if (copyShader)copyShader.toggleDefine("USE_UVTEX", inUVTex.isLinked());
+    if (copyShader) copyShader.toggleDefine("USE_TEX", inTex.isLinked() || !inClear.get());
+    if (copyShader) copyShader.toggleDefine("USE_UVTEX", inUVTex.isLinked());
 }
 
 function updateUi()
@@ -229,11 +229,14 @@ function copyTexture()
         updateDefines();
     }
 
+    const keepPrevious = !inTex.get() && !inClear.get() && texOut.get();
+    if (keepPrevious && texOut.get().tex == effect.getCurrentTargetTexture().tex) effect.switched = true;
+
     cgl.pushShader(copyShader);
     cgl.currentTextureEffect.bind();
 
     if (inTex.get()) cgl.setTexture(0, inTex.get().tex);
-    else if (!inClear.get() && texOut.get()) cgl.setTexture(0, texOut.get().tex);
+    else if (keepPrevious) cgl.setTexture(0, texOut.get().tex);
     if (inUVTex.get()) cgl.setTexture(1, inUVTex.get().tex);
 
     cgl.currentTextureEffect.finish();
