@@ -1,0 +1,220 @@
+{
+    "authorName": "pandur",
+    "id": "8a70bbac-21d6-4ab4-80d6-8fcab05d9072",
+    "created": 1791988250054,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Scale Text",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "uititle": "Line Scale",
+                "group": "Display",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Font",
+                "group": "Display"
+            },
+            {
+                "type": 0,
+                "name": "align index",
+                "group": "Alignment",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "vertical align index",
+                "group": "Alignment",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Line Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Letter Spacing",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Texture Color",
+                "group": "Masking",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Texture Mask",
+                "group": "Masking",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "group": "Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Total Lines",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Font Available",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "Draws text in 3d space using one of the font ops",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Text",
+                "text": "String to display"
+            },
+            {
+                "name": "Scale",
+                "text": "Scale of text"
+            },
+            {
+                "name": "Font",
+                "text": "Font to use"
+            },
+            {
+                "name": "Line Height",
+                "text": "Height of each line"
+            },
+            {
+                "name": "Letter Spacing",
+                "text": "Space between each letter"
+            },
+            {
+                "name": "Texture Mask",
+                "text": "Texture to mask out text"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Font Available",
+                "text": "Reports if font is available with a zero or one"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Removed confusing texture output ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1714382385952
+        },
+        {
+            "message": "Text scale parameter: scale the whole text",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1721395559864
+        },
+        {
+            "message": "New version v3: fix output width",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791988250054,
+            "url": "https://github.com/cables-gl/cables/issues/7536"
+        }
+    ],
+    "exampleProjectId": "LzDnH-",
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ],
+    "isReleased": true
+}
