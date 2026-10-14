@@ -456,10 +456,12 @@ export class Texture extends CgTexture
 
         this._cgl.profileData.count("textureDelete");
         this.image = null;
+        const tex = this.tex;
         CABLES.idleCallback(() =>
         {
-            this._cgl.gl.deleteTexture(this.tex);
-            this.tex = null;
+            if (this.tex == tex && !this.deleted) return;
+            this._cgl.gl.deleteTexture(tex);
+            if (this.tex == tex) this.tex = null;
         });
     }
 

@@ -240,6 +240,11 @@ export class CubemapTexture
 
     delete()
     {
-        this._cgl.gl.deleteTexture(this.tex);
+        const tex = this.tex;
+        this.tex = this.cubemap = null;
+        CABLES.idleCallback(() =>
+        {
+            this._cgl.gl.deleteTexture(tex);
+        });
     }
 }

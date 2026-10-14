@@ -143,7 +143,7 @@
             "date": 1791896850550
         },
         {
-            "message": "Made assets that reside next to the patchfile not show up twive in export",
+            "message": "Made assets that reside next to the patchfile not show up twice in export",
             "type": "bugfix",
             "author": "stephan",
             "date": 1791896886608

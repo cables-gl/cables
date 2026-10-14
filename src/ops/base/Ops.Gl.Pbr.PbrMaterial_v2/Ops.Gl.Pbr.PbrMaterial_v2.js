@@ -148,9 +148,9 @@ if (cgl.glVersion == 1)
 buildShader();
 // uniforms
 
-const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", -1);
-const inAOUniform = new CGL.Uniform(PBRShader, "t", "_AOMap", -2);
-const inRMUniform = new CGL.Uniform(PBRShader, "t", "_RMMap", -2);
+const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap");
+const inAOUniform = new CGL.Uniform(PBRShader, "t", "_AOMap");
+const inRMUniform = new CGL.Uniform(PBRShader, "t", "_RMMap");
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap");
 const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap");
 const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap");

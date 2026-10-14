@@ -104,10 +104,10 @@ const lightFragmentBodies = {
     "spot": attachments.light_body_spot_frag,
 };
 const createLightFragmentHead = (n) => { return lightFragmentHead.replace("{{LIGHT_INDEX}}", n); };
-const createLightFragmentBody = (n, type) =>
-{ return (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n); };
+const createLightFragmentBody = (n, type) => { return (lightFragmentBodies[type] || "").replace(LIGHT_INDEX_REGEX, n); };
 let currentLightCount = -1;
-const defaultLightStack = [{
+const defaultLightStack = [
+{
     "type": "point",
     "position": [5, 5, 5],
     "color": [1, 1, 1],
@@ -147,8 +147,8 @@ if (cgl.glVersion == 1)
 buildShader();
 // uniforms
 
-const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap", -1);
-const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap", -2);
+const inAlbedoUniform = new CGL.Uniform(PBRShader, "t", "_AlbedoMap");
+const inAORMUniform = new CGL.Uniform(PBRShader, "t", "_AORMMap");
 const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap");
 const inEmissionUniform = new CGL.Uniform(PBRShader, "t", "_EmissionMap");
 const inCCNormalUniform = new CGL.Uniform(PBRShader, "t", "_CCNormalMap");
@@ -424,14 +424,14 @@ function updateLights()
 
 function doRender()
 {
-    if (!PBRShader)buildShader();
+    if (!PBRShader) buildShader();
     cgl.pushShader(PBRShader);
     let useDefaultLight = false;
 
     PBRShader.popTextures();
 
     let numLights = 0;
-    if (cgl.tempData.lightStack)numLights = cgl.tempData.lightStack.length;
+    if (cgl.tempData.lightStack) numLights = cgl.tempData.lightStack.length;
 
     if ((!cgl.tempData.pbrEnvStack || cgl.tempData.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
     {

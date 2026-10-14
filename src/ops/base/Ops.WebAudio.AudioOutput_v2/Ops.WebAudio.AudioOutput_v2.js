@@ -193,10 +193,6 @@ function updateAudioStateButton()
     {
         if (CABLES.interActionNeededButton) CABLES.interActionNeededButton.remove("audiosuspended");
 
-        if (isSuspended)
-        {
-            op.log("was suspended - set vol");
-            setVolume();
-        }
+        if (isSuspended) setVolume();
     }
 }
