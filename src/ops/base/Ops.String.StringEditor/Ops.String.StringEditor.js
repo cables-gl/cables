@@ -5,8 +5,6 @@ const
 
 syntax.onChange = updateSyntax;
 
-let test = 1;
-
 function updateSyntax()
 {
     let s = syntax.get();
