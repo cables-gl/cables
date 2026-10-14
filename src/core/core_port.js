@@ -394,12 +394,13 @@ export class Port extends Events
     /** Get value of port. */
     get()
     {
+        if (!this.#animated) return this.value;
 
-        if (CABLES.UI && this.#animated && this.lastAnimTime == this.#op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
+        if (CABLES.UI && this.lastAnimTime == this.#op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
         {
             return this.value;
         }
-        if (!this.animMuted && this.#animated && this.lastAnimFrame != this.#op.patch.getFrameNum())
+        if (!this.animMuted && this.lastAnimFrame != this.#op.patch.getFrameNum())
         {
             this.lastAnimTime = this.#op.patch.timer.getTime();
             this.lastAnimFrame = this.#op.patch.getFrameNum();
@@ -443,10 +444,10 @@ export class Port extends Events
     {
         if (v === undefined) v = null;
 
-        if (CABLES.UI && CABLES.UI.showDevInfos)
+        if (this.type == Port.TYPE_OBJECT && this.direction == Port.DIR_OUT && CABLES.UI && CABLES.UI.showDevInfos)
         {
             CABLES.UI.countSetWarns = CABLES.UI.countSetWarns || 0;
-            if (CABLES.UI.countSetWarns < 20 && this.direction == Port.DIR_OUT && this.type == Port.TYPE_OBJECT && v && !this.forceRefChange)
+            if (CABLES.UI.countSetWarns < 20 && v && !this.forceRefChange)
             {
                 this.#log.warn("object port [" + this.name + "] uses .set [" + this.op.objName + "]");
 
@@ -458,13 +459,13 @@ export class Port extends Events
         {
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
-                if (CABLES.UI && this.#animated)
+                if (this.#animated && CABLES.UI)
                 {
                     CABLES.UI.PREVISKEYVAL = null;
                     if (!CABLES.UI.keyframeAutoCreate) CABLES.UI.PREVISKEYVAL = v;
                 }
 
-                if (CABLES.UI && this.#animated && CABLES.UI.keyframeAutoCreate)
+                if (this.#animated && CABLES.UI && CABLES.UI.keyframeAutoCreate)
                 {
                     let t = this.#op.patch.timer.getTime();
                     if (CABLES.UI && CABLES.Patch.getGui().glTimeline) CABLES.Patch.getGui().glTimeline.createKey(this.anim, t, v);
@@ -490,7 +491,7 @@ export class Port extends Events
                         this.#op.patch.emitEvent(Port.EVENT_EXCEPTION, ex, this.#op);
                     }
 
-                    if (this.#op && this.#op.patch && this.#op.patch.isEditorMode() && this.type == Port.TYPE_TEXTURE)CABLES.Patch.getGui().texturePreview().updateTexturePort(this);
+                    if (this.type == Port.TYPE_TEXTURE && this.#op && this.#op.patch && this.#op.patch.isEditorMode())CABLES.Patch.getGui().texturePreview().updateTexturePort(this);
                 }
 
                 if (this.direction == Port.DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -1118,7 +1119,7 @@ export class Port extends Events
     _onTriggered(name)
     {
         this._activity();
-        this.#op.updateAnims();
+        if (this.#op.hasAnimPort) this.#op.updateAnims();
         if (this.#op.enabled && this.onTriggered) this.onTriggered();
 
         if (this.#op.enabled) this.emitEvent(Port.EVENT_TRIGGER, name);
