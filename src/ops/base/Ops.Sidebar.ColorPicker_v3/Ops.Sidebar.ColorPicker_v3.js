@@ -25,6 +25,11 @@ const outOpa = op.outNumber("Opacity", 1.0);
 const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 const outEle = op.outObject("Element", null, "element");
 
+inputGreenPort.ignoreValueSerialize =
+    inputRedPort.ignoreValueSerialize =
+    inputBluePort.ignoreValueSerialize =
+    inputOpaPort.ignoreValueSerialize = true;
+
 // vars
 const el = document.createElement("div");
 el.dataset.op = op.id;
@@ -148,26 +153,11 @@ function getInputColorHex()
 
 function setDefaultColor()
 {
-    // let hexCol = inputValuePort.get().trim();
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
     outHex.set(hex);
     op.refreshParams();
 }
-
-/*
-function onInputValuePortChange() {
-    let hexCol = inputValuePort.get().trim();
-    if(hexCol.length === 6 && hexCol.charAt(0) !== '#') {
-        hexCol = '#' + hexCol;
-    }
-    if(hexCol.length === 7) {
-        colorInput.value = hexCol;
-        input.value = hexCol;
-        setColorOutPorts(hexCol);
-    }
-}
-*/
 
 function hexToRgbNorm(hexColor)
 {
