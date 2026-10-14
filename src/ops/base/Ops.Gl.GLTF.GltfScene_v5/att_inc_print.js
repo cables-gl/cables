@@ -310,13 +310,13 @@ function printInfo()
         if (nodeFilter && !gltf.json.meshes[i].name.toLowerCase().includes(nodeFilter)) continue;
 
         html += "<tr>";
-        html += "<td>" + gltf.json.meshes[i].name || "?";
+        html += "<td>" + (gltf.json.meshes[i].name || "?") + "</td>";
 
-        html += "<td>"
+        html += "<td>";
         if (gltf.json.meshes[i].primitives)
         {
             let mode = gltf.json.meshes[i].primitives[0].mode;
-            if (mode === undefined) mode = 4
+            if (mode === undefined) mode = 4;
 
             if (mode == 0)
             {
