@@ -3,17 +3,17 @@
 const
     inFacing = op.inSwitch("Facing", ["environment", "user"], "user"),
     flip = op.inBool("flip", true),
-    fps = op.inValueInt("fps", 30),
+    fps = op.inInt("fps", 30),
     inActive = op.inBool("Genrate Texture", true),
 
-    width = op.inValueInt("Width", 640),
-    height = op.inValueInt("Height", 480),
+    width = op.inInt("Width", 640),
+    height = op.inInt("Height", 480),
 
     inAsDOM = op.inBool("Show HTML Element", false),
     textureOut = op.outTexture("texture"),
     inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
-    outRatio = op.outValue("Ratio"),
-    available = op.outValue("Available"),
+    outRatio = op.outNumber("Ratio"),
+    available = op.outNumber("Available"),
     outWidth = op.outNumber("Size Width"),
     outHeight = op.outNumber("Size Height"),
     outError = op.outString("Error"),

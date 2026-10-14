@@ -1,5 +1,5 @@
-var inVal=op.inValue("Value");
-var result=op.outValueBool("Result");
+var inVal=op.inFloat("Value");
+var result=op.outBool("Result");
 
 inVal.onChange=function()
 {

@@ -1,6 +1,6 @@
 const
     inArrays = op.inArray("Array of Arrays"),
-    index = op.inValueInt("Index"),
+    index = op.inInt("Index"),
     result = op.outArray("Result Array");
 
 inArrays.onChange =

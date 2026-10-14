@@ -1,5 +1,5 @@
 const inArray_0 = op.inArray("array 0"),
-    NumberIn = op.inValueFloat("Number for math", 0.0),
+    NumberIn = op.inFloat("Number for math", 0.0),
     mathSelect = op.inSwitch("Math function", ["+", "-", "*", "/", "%", "min", "max"], "+"),
     outArray = op.outArray("Array result"),
     outArrayLength = op.outNumber("Array length");

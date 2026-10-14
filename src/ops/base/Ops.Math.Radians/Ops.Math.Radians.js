@@ -1,5 +1,5 @@
 const
-    value = op.inValue("Degrees"),
+    value = op.inFloat("Degrees"),
     result = op.outNumber("Result"),
     calculate = Math.cos;
 

@@ -1,6 +1,6 @@
 const
     inRender = op.inTrigger("Render"),
-    inUniName = op.inValueSelect("Uniform"),
+    inUniName = op.inDropDown("Uniform"),
     inTex = op.inTexture("Texture"),
     next = op.outTrigger("Next"),
     outFound = op.outBoolNum("Found");
@@ -74,7 +74,7 @@ function setupUniform()
 
         if (!uniform)
         {
-            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+            op.setUiError("nouni", "uniform unknown", 1);// op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
             outFound.set(false);
         }
         else

@@ -1,16 +1,16 @@
 const
     exec = op.inTrigger("render"),
-    inSize = op.inValue("Area size", 1),
+    inSize = op.inFloat("Area size", 1),
     inSrc = op.inSwitch("Source", ["Vertex position", "Object position"], "Vertex position"),
-    inStrength = op.inValue("Strength", 1),
+    inStrength = op.inFloat("Strength", 1),
     inSmooth = op.inBool("Smoothstep", false),
     inToZero = op.inBool("Min Size Original", false),
     inClampBool = op.inBool("Clamp size", false),
     inClampMin = op.inFloat("Clamp min", 0),
     inClampMax = op.inFloat("Clamp max", 1.0),
-    x = op.inValue("Pos X"),
-    y = op.inValue("Pos Y"),
-    z = op.inValue("Pos Z"),
+    x = op.inFloat("Pos X"),
+    y = op.inFloat("Pos Y"),
+    z = op.inFloat("Pos Z"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

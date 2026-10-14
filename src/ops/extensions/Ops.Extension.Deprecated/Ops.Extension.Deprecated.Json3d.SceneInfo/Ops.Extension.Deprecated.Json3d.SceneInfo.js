@@ -1,14 +1,14 @@
 const render = op.inTrigger("Render");
 const next = op.outTrigger("Next");
 
-const numNodes = op.outValue("Num Nodes");
-const numMaterials = op.outValue("Num Materials");
-const numMeshes = op.outValue("Num Meshes");
-const numBones = op.outValue("Num Bones");
+const numNodes = op.outNumber("Num Nodes");
+const numMaterials = op.outNumber("Num Materials");
+const numMeshes = op.outNumber("Num Meshes");
+const numBones = op.outNumber("Num Bones");
 
-const numAnims = op.outValue("Num Animations");
-const numAnimsChannels = op.outValue("Num Anim Channels");
-const outDuration = op.outValue("Anim Duration");
+const numAnims = op.outNumber("Num Animations");
+const numAnimsChannels = op.outNumber("Num Anim Channels");
+const outDuration = op.outNumber("Anim Duration");
 
 const inDump = op.inTriggerButton("Dump Console");
 

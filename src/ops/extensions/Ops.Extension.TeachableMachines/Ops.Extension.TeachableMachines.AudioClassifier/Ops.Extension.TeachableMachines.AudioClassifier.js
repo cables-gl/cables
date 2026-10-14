@@ -32,7 +32,7 @@ async function init()
     const baseUrl = inUrl.get();
     if (baseUrl)
     {
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
         const recognizer = await createModel();
         const classLabels = recognizer.wordLabels(); // get class labels
 
@@ -60,6 +60,6 @@ async function init()
     }
     else
     {
-        op.uiAttr({ "error": "no baseurl set for the model, get one from teachablemachine" });
+        op.setUiAttribs({ "error": "no baseurl set for the model, get one from teachablemachine" });
     }
 }

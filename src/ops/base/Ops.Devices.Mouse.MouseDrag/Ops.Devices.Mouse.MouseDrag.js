@@ -1,5 +1,5 @@
 const
-    speed = op.inValue("Speed", 0.01),
+    speed = op.inFloat("Speed", 0.01),
     inputType = op.inSwitch("Input Type", ["All", "Mouse", "Touch"], "All"),
     area = op.inSwitch("Area", ["Canvas Area", "Canvas", "Document"], "Canvas Area"),
     active = op.inBool("Active", true),

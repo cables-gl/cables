@@ -31,7 +31,7 @@ inCanvas.onChange = () =>
 
 function update()
 {
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
 
     if (!inCanvas.get()) return;
 

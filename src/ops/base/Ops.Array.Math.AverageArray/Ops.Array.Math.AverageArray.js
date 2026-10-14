@@ -1,6 +1,6 @@
 const inArray = op.inArray("Array"),
-    inIterations = op.inValueInt("Iterations", 1),
-    inMode = op.inValueSelect("Mode", ["repeat", "clamp"], "repeat"),
+    inIterations = op.inInt("Iterations", 1),
+    inMode = op.inDropDown("Mode", ["repeat", "clamp"], "repeat"),
     outArray = op.outArray("Smoothed array"),
     outArrayLength = op.outNumber("Array length");
 

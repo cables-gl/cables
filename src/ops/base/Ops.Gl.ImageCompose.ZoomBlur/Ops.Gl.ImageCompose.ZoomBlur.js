@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
-let strength = op.inValueSlider("strength", 0.5);
-let x = op.inValue("X", 0.5);
-let y = op.inValue("Y", 0.5);
+let strength = op.inFloatSlider("strength", 0.5);
+let x = op.inFloat("X", 0.5);
+let y = op.inFloat("Y", 0.5);
 
 let mask = op.inTexture("mask");
 

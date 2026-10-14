@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    scale = op.inValue("scale", 10),
-    angle = op.inValue("angle", 0),
-    add = op.inValue("Add", 0),
+    scale = op.inFloat("scale", 10),
+    angle = op.inFloat("angle", 0),
+    add = op.inFloat("Add", 0),
     trigger = op.outTrigger("Next");
 
 const

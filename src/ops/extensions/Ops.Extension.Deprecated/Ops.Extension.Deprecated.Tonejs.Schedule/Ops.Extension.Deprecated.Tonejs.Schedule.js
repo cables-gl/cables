@@ -8,7 +8,7 @@ let timePort = op.inValueString("Time", "0:0:0");
 
 // output ports
 let triggerPort = op.outTrigger("Trigger");
-let timeOutPort = op.outValue("Event Time");
+let timeOutPort = op.outNumber("Event Time");
 
 // vars
 let lastListenerId;
@@ -24,14 +24,14 @@ function handleChange()
     // check if time is valid
     if (!CABLES.WEBAUDIO.isValidToneTime(time))
     {
-        op.uiAttr({ "error": "Time not valid, Example: \"0:1:0" });
+        op.setUiAttribs({ "error": "Time not valid, Example: \"0:1:0" });
         op.refreshParams();
 
         return;
     }
     else
     {
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
         op.refreshParams();
     }
 

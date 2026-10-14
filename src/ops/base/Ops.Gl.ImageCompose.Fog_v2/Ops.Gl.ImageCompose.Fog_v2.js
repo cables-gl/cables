@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     depthTex = op.inTexture("depth texture"),
     fogColorTex = op.inTexture("Color gradient"),
     nearPlaneIn = op.inFloat("Frustum near", 0.01),

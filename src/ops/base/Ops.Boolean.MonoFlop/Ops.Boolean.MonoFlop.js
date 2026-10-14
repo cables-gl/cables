@@ -1,8 +1,8 @@
 const
     trigger = op.inTriggerButton("Trigger"),
-    duration = op.inValue("Duration", 1),
-    valueTrue = op.inValue("Value True", 1),
-    valueFalse = op.inValue("Value False", 0),
+    duration = op.inFloat("Duration", 1),
+    valueTrue = op.inFloat("Value True", 1),
+    valueFalse = op.inFloat("Value False", 0),
     resetButton = op.inTriggerButton("Reset"),
     outAct = op.outTrigger("Activated"),
     outEnded = op.outTrigger("Ended"),

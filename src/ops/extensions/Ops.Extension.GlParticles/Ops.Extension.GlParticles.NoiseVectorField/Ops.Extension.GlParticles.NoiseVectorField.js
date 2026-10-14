@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Sphere"),
+    inArea = op.inDropDown("Area", ["Everywhere", "Sphere", "Box"], "Sphere"),
     inInvertArea = op.inBool("Invert Area", false),
 
     noiseStr = op.inFloatSlider("Strength", 1),

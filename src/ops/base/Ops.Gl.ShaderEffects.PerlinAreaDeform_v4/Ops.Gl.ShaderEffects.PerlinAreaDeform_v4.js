@@ -1,22 +1,22 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inScale = op.inValueFloat("Scale", 1),
-    inSize = op.inValueFloat("Size", 1),
-    inStrength = op.inValueFloat("Strength", 1),
+    inScale = op.inFloat("Scale", 1),
+    inSize = op.inFloat("Size", 1),
+    inStrength = op.inFloat("Strength", 1),
     inCalcNormals = op.inBool("Calc Normals", false),
     inFlipNormals = op.inBool("Flip Normals", false),
 
-    inFalloff = op.inValueSlider("Falloff", 0.5),
-    output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", "Mul XYZ",, "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
+    inFalloff = op.inFloatSlider("Falloff", 0.5),
+    output = op.inDropDown("Output", ["Mul Normal", "Mul Z", "Mul XYZ",, "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
     inPos = op.inSwitch("Source", ["Pos", "Orig Pos", "Model"], "Pos"),
     // inInstancer = op.inBool("For Instancing", false),
-    x = op.inValueFloat("x"),
-    y = op.inValueFloat("y"),
-    z = op.inValueFloat("z"),
-    scrollx = op.inValueFloat("Scroll X"),
-    scrolly = op.inValueFloat("Scroll Y"),
-    scrollz = op.inValueFloat("Scroll Z");
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
+    scrollx = op.inFloat("Scroll X"),
+    scrolly = op.inFloat("Scroll Y"),
+    scrollz = op.inFloat("Scroll Z");
 
 const cgl = op.patch.cgl;
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });

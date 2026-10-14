@@ -2,7 +2,7 @@ const
     inExec = op.inTrigger("Render"),
     imgName = op.inString("Name", ""),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
     flip = op.inBool("Flip", false),
     unpackAlpha = op.inBool("Pre Multiplied Alpha", false),

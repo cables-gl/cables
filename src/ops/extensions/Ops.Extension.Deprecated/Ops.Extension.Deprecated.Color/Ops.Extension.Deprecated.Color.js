@@ -57,7 +57,7 @@ render.onTriggered = function ()
 // var render=op.inTrigger('render');
 
 // var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-// var amount=op.inValueSlider("Amount",1);
+// var amount=op.inFloatSlider("Amount",1);
 
 // var r=op.addInPort(new CABLES.Port(op,"r",CABLES.Port.TYPE_VALUE,{ display:'range', colorPick:'true'}));
 // var g=op.addInPort(new CABLES.Port(op,"g",CABLES.Port.TYPE_VALUE,{ display:'range' }));

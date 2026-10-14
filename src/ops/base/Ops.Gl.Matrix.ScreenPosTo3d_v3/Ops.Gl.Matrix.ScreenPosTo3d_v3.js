@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Exec"),
-    inX = op.inValue("X"),
-    inY = op.inValue("Y"),
+    inX = op.inFloat("X"),
+    inY = op.inFloat("Y"),
     inputType = op.inSwitch("Input Type", ["Pixel", "-1 to 1"], "Pixel"),
     outTrigger = op.outTrigger("Trigger out"),
     outX = op.outNumber("Result X"),

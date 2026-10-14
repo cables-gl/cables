@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Render"),
-    inBlend = op.inValueSelect("Blendmode", ["None", "Normal", "Add", "Subtract", "Multiply"], "Normal"),
+    inBlend = op.inDropDown("Blendmode", ["None", "Normal", "Add", "Subtract", "Multiply"], "Normal"),
     inPremul = op.inBool("Premultiplied"),
     next = op.outTrigger("Next");
 

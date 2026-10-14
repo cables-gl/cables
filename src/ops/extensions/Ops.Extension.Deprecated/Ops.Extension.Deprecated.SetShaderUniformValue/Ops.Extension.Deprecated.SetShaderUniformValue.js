@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let uniformSelect = op.inValueSelect("Uniform");
+let uniformSelect = op.inDropDown("Uniform");
 let unival = op.inFloat("Value", 0);
 let cgl = op.patch.cgl;
 let uniformInputs = [];

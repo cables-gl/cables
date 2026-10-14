@@ -1,10 +1,10 @@
 const
     cgl = op.patch.cgl,
     pUpdate = op.inTriggerButton("update"),
-    inNum = op.inValueInt("Num Points", 2000),
-    inSeed = op.inValueFloat("Seed", 1),
+    inNum = op.inInt("Num Points", 2000),
+    inSeed = op.inFloat("Seed", 1),
     zPos = op.inSwitch("Z Position", ["None", "Red", "Green", "Blue", "Alpha"], "Red"),
-    zMultiply = op.inValueFloat("Z Multiply", 1.0),
+    zMultiply = op.inFloat("Z Multiply", 1.0),
     tex = op.inObject("texture"),
     outTrigger = op.outTrigger("trigger"),
     outPoints = op.outArray("Points"),

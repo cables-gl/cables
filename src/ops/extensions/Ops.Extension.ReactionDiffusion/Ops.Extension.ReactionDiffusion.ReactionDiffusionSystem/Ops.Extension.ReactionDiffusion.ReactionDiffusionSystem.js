@@ -9,8 +9,8 @@ const outTex = op.outTexture("Texture");
 
 // Texture
 const inVPSize = op.inBool("Use Viewport Size", true);
-const inWidth = op.inValueInt("Width", 512);
-const inHeight = op.inValueInt("Height", 512);
+const inWidth = op.inInt("Width", 512);
+const inHeight = op.inInt("Height", 512);
 
 inVPSize.onChange = updateSizePorts;
 inWidth.onChange = inHeight.onChange = initFbLater;
@@ -20,10 +20,10 @@ op.setPortGroup("Texture Size", [inVPSize, inWidth, inHeight]);
 // op.toWorkPortsNeedToBeLinked(outTex);
 
 // Speed
-const rdsSpeeed = op.inValueSlider("speed", 4);
+const rdsSpeeed = op.inFloatSlider("speed", 4);
 
 // Pressets
-const rdyMode = op.inValueSelect("RD Mode", ["Default", "Mitosis", "Coral", "Worms", "Custom"], "Default");
+const rdyMode = op.inDropDown("RD Mode", ["Default", "Mitosis", "Coral", "Worms", "Custom"], "Default");
 
 op.setPortGroup("Reaction Diffusion", [rdsSpeeed, rdyMode]);
 
@@ -61,11 +61,11 @@ const rdyPresets = {
 };
 
 // Values
-const rdsFeed = op.inValueSlider("feed");
-const rdyKill = op.inValueSlider("kill");
-const rdyDelta = op.inValueSlider("delta");
-const rdydA = op.inValueSlider("Ratio A");
-const rdydB = op.inValueSlider("Ratio B");
+const rdsFeed = op.inFloatSlider("feed");
+const rdyKill = op.inFloatSlider("kill");
+const rdyDelta = op.inFloatSlider("delta");
+const rdydA = op.inFloatSlider("Ratio A");
+const rdydB = op.inFloatSlider("Ratio B");
 
 rdyMode.onChange = setRDYPressetValues;
 

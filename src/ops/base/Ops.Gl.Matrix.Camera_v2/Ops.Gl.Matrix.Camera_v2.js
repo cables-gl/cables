@@ -3,31 +3,31 @@ const trigger = op.outTrigger("trigger");
 const inIdentity = op.inBool("Identity", true);
 /* Inputs */
 // projection | prespective & ortogonal
-const projectionMode = op.inValueSelect("projection mode", ["prespective", "ortogonal"], "prespective");
-const zNear = op.inValue("frustum near", 0.01);
-const zFar = op.inValue("frustum far", 5000.0);
+const projectionMode = op.inDropDown("projection mode", ["prespective", "ortogonal"], "prespective");
+const zNear = op.inFloat("frustum near", 0.01);
+const zFar = op.inFloat("frustum far", 5000.0);
 
-const fov = op.inValue("fov", 45);
+const fov = op.inFloat("fov", 45);
 const autoAspect = op.inBool("Auto Aspect Ratio", true);
-const aspect = op.inValue("Aspect Ratio", 1);
+const aspect = op.inFloat("Aspect Ratio", 1);
 
 // look at camera
-const eyeX = op.inValue("eye X", 0);
-const eyeY = op.inValue("eye Y", 0);
-const eyeZ = op.inValue("eye Z", 5);
+const eyeX = op.inFloat("eye X", 0);
+const eyeY = op.inFloat("eye Y", 0);
+const eyeZ = op.inFloat("eye Z", 5);
 
-const centerX = op.inValue("center X", 0);
-const centerY = op.inValue("center Y", 0);
-const centerZ = op.inValue("center Z", 0);
+const centerX = op.inFloat("center X", 0);
+const centerY = op.inFloat("center Y", 0);
+const centerZ = op.inFloat("center Z", 0);
 
 // camera transform and movements
-const posX = op.inValue("truck", 0);
-const posY = op.inValue("boom", 0);
-const posZ = op.inValue("dolly", 0);
+const posX = op.inFloat("truck", 0);
+const posY = op.inFloat("boom", 0);
+const posZ = op.inFloat("dolly", 0);
 
-const rotX = op.inValue("tilt", 0);
-const rotY = op.inValue("pan", 0);
-const rotZ = op.inValue("roll", 0);
+const rotX = op.inFloat("tilt", 0);
+const rotY = op.inFloat("pan", 0);
+const rotZ = op.inFloat("roll", 0);
 
 /* Outputs */
 const outAsp = op.outNumber("Aspect");

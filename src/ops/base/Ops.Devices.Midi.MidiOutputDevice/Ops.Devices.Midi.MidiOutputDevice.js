@@ -1,7 +1,7 @@
 const CC_STATUS_BYTE = 0xb;
 const NOTE_OFF = 0x8;
 
-const inDeviceSelect = op.inValueSelect("Device", ["none"]);
+const inDeviceSelect = op.inDropDown("Device", ["none"]);
 const inNote = op.inObject("Note");
 const inCC = op.inObject("CC");
 const inNRPN = op.inObject("NRPN");
@@ -123,7 +123,7 @@ function setDevice()
 
 function onMIDIFailure()
 {
-    op.uiAttr({ "warning": "No MIDI support in your browser." });
+    op.setUiAttribs({ "warning": "No MIDI support in your browser." });
 }
 
 function onMIDISuccess(midiAccess)

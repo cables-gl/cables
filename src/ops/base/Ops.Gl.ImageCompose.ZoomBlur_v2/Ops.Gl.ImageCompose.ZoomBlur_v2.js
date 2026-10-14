@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
-    strength = op.inValueSlider("Strength", 0.5),
+    strength = op.inFloatSlider("Strength", 0.5),
     inNumSamples = op.inInt("Samples", 40),
-    x = op.inValue("X", 0),
-    y = op.inValue("Y", 0),
+    x = op.inFloat("X", 0),
+    y = op.inFloat("Y", 0),
     inMaskTex = op.inTexture("Strength Map"),
     inMaskSource = op.inSwitch("Source Strength Map", ["R", "G", "B", "A", "Lum"], "R"),
     inMaskInv = op.inBool("Invert Strength Map", false),

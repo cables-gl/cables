@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
-    amount = op.inValueSlider("contrast", 0.5),
-    amountBright = op.inValueSlider("brightness", 0.5),
+    amount = op.inFloatSlider("contrast", 0.5),
+    amountBright = op.inFloatSlider("brightness", 0.5),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

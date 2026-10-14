@@ -1,14 +1,14 @@
 // inputs
 const parentPort = op.inObject("Link");
 const labelPort = op.inValueString("Text", "Number");
-const inputValuePort = op.inValue("Input", 0);
+const inputValuePort = op.inFloat("Input", 0);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
-const defaultValuePort = op.inValue("Default", 0);
+const defaultValuePort = op.inFloat("Default", 0);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("Children");
-const valuePort = op.outValue("Result", defaultValuePort.get());
+const valuePort = op.outNumber("Result", defaultValuePort.get());
 
 // vars
 let el = document.createElement("div");

@@ -5,8 +5,8 @@ const
     maskInvert = op.inBool("Mask Invert", false),
     mask = op.inTexture("Mask"),
 
-    amount = op.inValueSlider("Amount", 1),
-    modulo = op.inValueSlider("modulo", 1),
+    amount = op.inFloatSlider("Amount", 1),
+    modulo = op.inFloatSlider("modulo", 1),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

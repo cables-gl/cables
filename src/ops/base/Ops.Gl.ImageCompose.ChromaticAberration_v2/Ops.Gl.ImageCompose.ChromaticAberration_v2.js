@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    pixel = op.inValue("Pixel", 5),
-    lensDistort = op.inValueSlider("Lens Distort", 0),
+    amount = op.inFloatSlider("Amount", 1),
+    pixel = op.inFloat("Pixel", 5),
+    lensDistort = op.inFloatSlider("Lens Distort", 0),
     doSmooth = op.inBool("Smooth", false),
     textureMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");

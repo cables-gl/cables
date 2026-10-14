@@ -1,7 +1,7 @@
 let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.Port.TYPE_FUNCTION));
 let fftArr = op.addInPort(new CABLES.Port(op, "FFT Array", CABLES.Port.TYPE_ARRAY));
 
-let amount = op.inValueSlider("Blur Amount");
+let amount = op.inFloatSlider("Blur Amount");
 
 let texOut = op.outTexture("texture_out");
 

@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
 
     inMask = op.inTexture("Mask"),
     inMaskInvert = op.inBool("Mask Invert"),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
     trigger = op.outTrigger("trigger");
 
 r.setUiAttribs({ "colorPick": true });

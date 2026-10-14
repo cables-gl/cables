@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("Render"),
-    x1 = op.inValue("X 1"),
-    y1 = op.inValue("Y 1"),
-    z1 = op.inValue("Z 1"),
-    x2 = op.inValue("X 2", 1),
-    y2 = op.inValue("Y 2", 1),
-    z2 = op.inValue("Z 2", 1),
+    x1 = op.inFloat("X 1"),
+    y1 = op.inFloat("Y 1"),
+    z1 = op.inFloat("Z 1"),
+    x2 = op.inFloat("X 2", 1),
+    y2 = op.inFloat("Y 2", 1),
+    z2 = op.inFloat("Z 2", 1),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Array");
 

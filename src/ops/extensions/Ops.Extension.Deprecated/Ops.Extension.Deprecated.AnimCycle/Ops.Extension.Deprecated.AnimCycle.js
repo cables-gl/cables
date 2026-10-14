@@ -1,11 +1,11 @@
 let inTime = op.inFloat("Time");
 
-let inStart = op.inValueInt("Frame Start");
-let inEnd = op.inValueInt("Frame End");
+let inStart = op.inInt("Frame Start");
+let inEnd = op.inInt("Frame End");
 // var inLoop=op.inBool
 
-let outTime = op.outValue("Result Time");
-let outFrame = op.outValue("Result Frame");
+let outTime = op.outNumber("Result Time");
+let outFrame = op.outNumber("Result Frame");
 
 inTime.onChange = function ()
 {

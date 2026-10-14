@@ -4,7 +4,7 @@ const exec = op.inTrigger("Update");
 const inVal = op.inFloat("Value");
 const next = op.outTrigger("Next");
 const inDivisor = op.inFloat("Divisor", divisor);
-const result = op.outValue("Result", 0);
+const result = op.outNumber("Result", 0);
 
 let val = 0;
 let goal = 0;

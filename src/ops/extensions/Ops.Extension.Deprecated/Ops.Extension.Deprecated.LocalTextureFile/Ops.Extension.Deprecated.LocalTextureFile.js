@@ -4,7 +4,7 @@ let parentPort = op.inObject("link"),
     inId = op.inValueString("Id", ""),
 
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 
 // outputs
 let siblingsPort = op.outObject("childs");

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Canvas"),
-    width = op.inValueInt("texture width", 512),
-    height = op.inValueInt("texture height", 512),
+    width = op.inInt("texture width", 512),
+    height = op.inInt("texture height", 512),
     aspect = op.inBool("Auto Aspect", true),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inSwitch("Wrap", ["Clamp", "Repeat", "Mirror"], "Repeat"),

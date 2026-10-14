@@ -1,5 +1,5 @@
 var v=op.inValueString("value","");
-const result=op.outValue("result");
+const result=op.outNumber("result");
 
 v.onChange=function()
 {

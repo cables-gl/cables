@@ -1,15 +1,15 @@
 let render = op.inTrigger("Render");
 
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-let amount = op.inValueSlider("Amount", 1);
+let amount = op.inFloatSlider("Amount", 1);
 const inBox = op.inBool("Square Look", false);
-const threshhold = op.inValueSlider("Threshold", 0.25);
-let radius_low = op.inValueSlider("Radius Low", 0);
-let radius_high = op.inValueSlider("Radius High", 1);
-let scale = op.inValue("Scale", 10);
-let X = op.inValue("X", 0);
-let Y = op.inValue("Y", 0);
-let Z = op.inValue("Z", 0);
+const threshhold = op.inFloatSlider("Threshold", 0.25);
+let radius_low = op.inFloatSlider("Radius Low", 0);
+let radius_high = op.inFloatSlider("Radius High", 1);
+let scale = op.inFloat("Scale", 10);
+let X = op.inFloat("X", 0);
+let Y = op.inFloat("Y", 0);
+let Z = op.inFloat("Z", 0);
 let trigger = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;

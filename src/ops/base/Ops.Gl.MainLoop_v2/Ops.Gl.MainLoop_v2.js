@@ -20,7 +20,7 @@ let rframes = 0;
 let rframeStart = 0;
 let timeOutTest = null;
 let addedListener = false;
-if (!op.patch.cgl) op.uiAttr({ "error": "No webgl cgl context" });
+if (!op.patch.cgl) op.setUiAttribs({ "error": "No webgl cgl context" });
 
 const identTranslate = vec3.create();
 vec3.set(identTranslate, 0, 0, 0);

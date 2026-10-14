@@ -1,7 +1,7 @@
 const
     inStr = op.inString("String", "cables"),
-    inStart = op.inValueInt("Start", 0),
-    inEnd = op.inValueInt("End", 4),
+    inStart = op.inInt("Start", 0),
+    inEnd = op.inInt("End", 4),
     inToEnd = op.inBool("End of string", false),
     result = op.outString("Result");
 

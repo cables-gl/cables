@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 let inLut = op.inTexture("LUT Image");
-let inAmount = op.inValueSlider("Amount", 1.0);
+let inAmount = op.inFloatSlider("Amount", 1.0);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

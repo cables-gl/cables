@@ -1,9 +1,9 @@
 let DEFAULT_LENGTH = 10;
 
 const
-    inVal = op.inValue("Value"),
+    inVal = op.inFloat("Value"),
     inWrite = op.inTriggerButton("Write"),
-    inNum = op.inValueInt("Length", DEFAULT_LENGTH),
+    inNum = op.inInt("Length", DEFAULT_LENGTH),
     inReset = op.inTriggerButton("Reset Index"),
     outArr = op.outArray("Result"),
     outIndex = op.outNumber("Index");

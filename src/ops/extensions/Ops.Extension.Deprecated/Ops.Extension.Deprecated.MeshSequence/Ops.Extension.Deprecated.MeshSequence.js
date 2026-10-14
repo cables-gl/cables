@@ -12,8 +12,8 @@ calcVertexNormals.set(true);
 
 const doDraw = op.inBool("Render", true);
 
-const outNumFrames = op.outValue("Num Frames");
-const outName = op.outValue("Frame Name");
+const outNumFrames = op.outNumber("Num Frames");
+const outName = op.outNumber("Frame Name");
 
 const outGeomA = op.outObject("Geometry A");
 const outGeomB = op.outObject("Geometry B");
@@ -200,7 +200,7 @@ function reload()
             outNumFrames.set(geoms.length);
             needsUpdateFrame = true;
 
-            // op.uiAttr("info", "num frames: " + data.meshes.length);
+            // op.setUiAttribs("info", "num frames: " + data.meshes.length);
 
             op.patch.loading.finished(loadingId);
             loadingId = -1;

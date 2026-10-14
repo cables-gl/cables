@@ -1,9 +1,9 @@
 const
     exe = op.inTrigger("Exe"),
     maxDepth = op.inFloat("max Depth", 3),
-    deeper = op.inValueSlider("Possibility", 0.5),
+    deeper = op.inFloatSlider("Possibility", 0.5),
     seed = op.inFloat("Seed", 1),
-    inScale = op.inValueSlider("Scale", 1),
+    inScale = op.inFloatSlider("Scale", 1),
     gapSize = op.inFloat("Gap Size", 0.05),
     width = op.inFloat("Width", 4),
     height = op.inFloat("Height", 3),

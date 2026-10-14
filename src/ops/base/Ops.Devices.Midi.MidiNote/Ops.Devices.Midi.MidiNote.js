@@ -16,8 +16,8 @@ const noteValues = Array.from(Array(128).keys(), (key) => { return getMIDINote(k
 const velocityArray = Array.from(Array(128).keys(), (key) => { return 0; });
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
-const noteDropdown = op.inValueSelect("Note", noteValues, "none");
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
+const noteDropdown = op.inDropDown("Note", noteValues, "none");
 const normalizeDropdown = op.inSwitch(
     "Normalize Velocity",
     ["none", "0 to 1", "-1 to 1"],
@@ -89,7 +89,7 @@ inEvent.onChange = () =>
             gui.emitEvent("portValueEdited", op, noteDropdown, noteDropdown.get());
             gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
 
-            op.uiAttr({ "info": `bound to Note: ${noteDropdown.get()}` });
+            op.setUiAttribs({ "info": `bound to Note: ${noteDropdown.get()}` });
             op.refreshParams();
         }
     }

@@ -1,10 +1,10 @@
 // adapted from the FreeGLUT project
 const
     render = op.inTrigger("render"),
-    slices = op.inValue("slices", 32),
-    stacks = op.inValue("stacks", 5),
-    radius = op.inValue("radius", 1),
-    height = op.inValue("height", 2),
+    slices = op.inFloat("slices", 32),
+    stacks = op.inFloat("stacks", 5),
+    radius = op.inFloat("radius", 1),
+    height = op.inFloat("height", 2),
     inDraw = op.inBool("Active", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");

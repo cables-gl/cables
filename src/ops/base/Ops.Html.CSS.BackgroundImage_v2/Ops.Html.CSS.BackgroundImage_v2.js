@@ -2,9 +2,9 @@ const
     inEle = op.inObject("Element"),
     filename = op.inUrl("image file"),
     inMode = op.inSwitch("Mode", ["background", "mask"], "background"),
-    inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "40%", "30%", "25%", "20%", "10%"], "cover"),
-    inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
-    inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
+    inSize = op.inDropDown("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "40%", "30%", "25%", "20%", "10%"], "cover"),
+    inRepeat = op.inDropDown("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
+    inPosition = op.inDropDown("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
     active = op.inBool("active", true),
     inNotUnset = op.inBool("Never Unset", false),
     outEle = op.outObject("HTML Element");

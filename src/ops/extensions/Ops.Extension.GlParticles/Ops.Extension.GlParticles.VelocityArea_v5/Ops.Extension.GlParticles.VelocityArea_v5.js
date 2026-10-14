@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Collision", "Rotate", "Vortex"], "Point"),
+    inArea = op.inDropDown("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
+    inMethod = op.inDropDown("Method", ["Point", "Direction", "Collision", "Rotate", "Vortex"], "Point"),
     inInvArea = op.inBool("Invert Area", false),
     inStrength = op.inFloat("Strength", 1),
     inSize = op.inFloat("Size", 1),

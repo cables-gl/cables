@@ -20,7 +20,7 @@ inArr.onChange = function ()
     {
         if (!showingError)
         {
-            op.uiAttr({ "error": "Arrays length not divisible by 3 !" });
+            op.setUiAttribs({ "error": "Arrays length not divisible by 3 !" });
             showingError = true;
         }
         outArr.set(null);
@@ -31,7 +31,7 @@ inArr.onChange = function ()
     if (showingError)
     {
         showingError = false;
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
     }
 
     if ((theArray.length / 3) * 4 != arr.length)

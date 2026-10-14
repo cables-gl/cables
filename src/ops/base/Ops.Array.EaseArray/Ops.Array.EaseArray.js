@@ -1,7 +1,7 @@
 const
     inArr = op.inArray("Array"),
-    inMin = op.inValue("Min", 0),
-    inMax = op.inValue("Max", 1),
+    inMin = op.inFloat("Min", 0),
+    inMax = op.inFloat("Max", 1),
     outArr = op.outArray("Result Array"),
     anim = new CABLES.Anim();
 

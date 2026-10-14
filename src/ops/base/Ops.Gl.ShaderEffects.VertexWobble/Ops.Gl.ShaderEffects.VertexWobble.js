@@ -3,15 +3,15 @@ const cgl = op.patch.cgl;
 
 const render = op.inTrigger("render");
 const next = this.outTrigger("trigger");
-const frequency = op.inValueFloat("frequency", 1);
-const amount = op.inValueSlider("amount", 1.0);
-const phase = op.inValueFloat("phase", 1);
-const mul = op.inValueFloat("mul", 3);
-const add = op.inValueFloat("add", 0);
+const frequency = op.inFloat("frequency", 1);
+const amount = op.inFloatSlider("amount", 1.0);
+const phase = op.inFloat("phase", 1);
+const mul = op.inFloat("mul", 3);
+const add = op.inFloat("add", 0);
 const toAxisX = op.inBool("axisX", true);
 const toAxisY = op.inBool("axisY", true);
 const toAxisZ = op.inBool("axisZ", true);
-let src = op.inValueSelect("Source", [
+let src = op.inDropDown("Source", [
     "X * Z + Time",
     "X * Y + Time",
     "X + Time",

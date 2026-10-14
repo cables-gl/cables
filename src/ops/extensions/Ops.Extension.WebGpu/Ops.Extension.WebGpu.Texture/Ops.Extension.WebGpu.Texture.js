@@ -1,7 +1,7 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     inFilter = op.inSwitch("Filter", ["nearest", "linear"], "nearest"),
-    inWrap = op.inValueSelect("Wrap", ["repeat", "mirror-repeat", "clamp-to-edge"], "repeat"),
+    inWrap = op.inDropDown("Wrap", ["repeat", "mirror-repeat", "clamp-to-edge"], "repeat"),
     result = op.outTexture("Texture"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),

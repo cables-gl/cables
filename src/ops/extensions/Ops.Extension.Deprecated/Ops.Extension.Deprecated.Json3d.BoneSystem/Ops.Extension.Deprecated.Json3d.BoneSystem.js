@@ -2,15 +2,15 @@
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
 let render = op.inTrigger("Render");
-let inMeshIndex = op.inValueInt("Mesh Index");
+let inMeshIndex = op.inInt("Mesh Index");
 
 let inTime = op.inFloat("Time");
 
-let inFade = op.inValueSlider("Fade Times");
+let inFade = op.inFloatSlider("Fade Times");
 let inTime2 = op.inFloat("Time2");
 
 let next = op.outTrigger("Next");
-let outNumBounes = op.outValue("Num Bones");
+let outNumBounes = op.outNumber("Num Bones");
 let outSpline = op.outArray("Spline");
 let outJoint = op.outTrigger("Joint Trigger");
 

@@ -1,4 +1,4 @@
-const valuePort = op.inValue("Value");
+const valuePort = op.inFloat("Value");
 const resetPort = op.inTriggerButton("Reset");
 const maxPort = op.outNumber("Maximum");
 

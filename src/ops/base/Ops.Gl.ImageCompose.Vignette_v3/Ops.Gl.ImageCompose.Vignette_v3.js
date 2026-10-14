@@ -2,15 +2,15 @@ const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     trigger = op.outTrigger("Trigger"),
-    strength = op.inValueSlider("Strength", 1),
-    lensRadius1 = op.inValueSlider("Radius", 0.3),
-    sharp = op.inValueSlider("Sharp", 0.25),
-    aspect = op.inValue("Aspect", 1),
-    r = op.inValueSlider("r", 0),
-    g = op.inValueSlider("g", 0),
-    b = op.inValueSlider("b", 0),
+    strength = op.inFloatSlider("Strength", 1),
+    lensRadius1 = op.inFloatSlider("Radius", 0.3),
+    sharp = op.inFloatSlider("Sharp", 0.25),
+    aspect = op.inFloat("Aspect", 1),
+    r = op.inFloatSlider("r", 0),
+    g = op.inFloatSlider("g", 0),
+    b = op.inFloatSlider("b", 0),
     alpha = op.inBool("Alpha", false);
 
 r.setUiAttribs({ "colorPick": true });

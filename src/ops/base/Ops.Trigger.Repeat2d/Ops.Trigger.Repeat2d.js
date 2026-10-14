@@ -1,8 +1,8 @@
 const
     exe = op.inTrigger("exe"),
-    numx = op.inValueInt("num x", 5),
-    numy = op.inValueInt("num y", 5),
-    mul = op.inValueFloat("mul", 1),
+    numx = op.inInt("num x", 5),
+    numy = op.inInt("num y", 5),
+    mul = op.inFloat("mul", 1),
     center = op.inBool("center"),
     trigger = op.outTrigger("trigger"),
     outX = op.outNumber("x"),

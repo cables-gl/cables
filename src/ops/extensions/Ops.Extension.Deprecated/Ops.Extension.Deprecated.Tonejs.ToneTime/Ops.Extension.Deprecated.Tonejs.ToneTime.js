@@ -25,7 +25,7 @@ let nowRelativePort = op.addInPort(
 );
 
 // output port
-let toneTimePort = op.outValue("Tone Time");
+let toneTimePort = op.outNumber("Tone Time");
 
 // vars
 let currentTimeSuffix = DEFAULT_TIME_SUFFIX;

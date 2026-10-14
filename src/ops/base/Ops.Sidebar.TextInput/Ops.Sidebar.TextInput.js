@@ -5,7 +5,7 @@ const defaultValuePort = op.inValueString("Default", "");
 
 // outputs
 const siblingsPort = op.outObject("Children");
-const valuePort = op.outValue("Result", defaultValuePort.get());
+const valuePort = op.outNumber("Result", defaultValuePort.get());
 
 // vars
 let el = document.createElement("div");

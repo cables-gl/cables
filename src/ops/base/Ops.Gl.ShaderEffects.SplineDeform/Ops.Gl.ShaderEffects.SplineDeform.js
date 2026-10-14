@@ -1,8 +1,8 @@
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-const inSize = op.inValue("Size", 1);
-const inOffset = op.inValue("offset");
+const inSize = op.inFloat("Size", 1);
+const inOffset = op.inFloat("offset");
 const inPoints = op.inArray("Points");
 
 const cgl = op.patch.cgl;

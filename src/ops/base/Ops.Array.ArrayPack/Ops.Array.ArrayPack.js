@@ -37,7 +37,7 @@ function update()
     if (inArrays.length === 0)
     {
         if (!showingError)op.setUiError("invalid", "No Valid Arrays");
-        // op.uiAttr({ "error": "No Valid Arrays" });
+        // op.setUiAttribs({ "error": "No Valid Arrays" });
         outArr.set(null);
         showingError = true;
         return;

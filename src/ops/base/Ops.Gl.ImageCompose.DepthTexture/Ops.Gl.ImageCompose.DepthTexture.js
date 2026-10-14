@@ -2,9 +2,9 @@ const
     render = op.inTrigger("render"),
     inDepthTex = op.inTexture("image"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    farPlane = op.inValue("farplane", 50.0),
-    nearPlane = op.inValue("nearplane", 0.1),
+    amount = op.inFloatSlider("Amount", 1),
+    farPlane = op.inFloat("farplane", 50.0),
+    nearPlane = op.inFloat("nearplane", 0.1),
     inInv = op.inBool("Invert", false),
     trigger = op.outTrigger("trigger");
 

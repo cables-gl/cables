@@ -1,5 +1,5 @@
-const currentVal = op.outValue("Value"),
-    oldVal = op.outValue("Last Value"),
+const currentVal = op.outNumber("Value"),
+    oldVal = op.outNumber("Last Value"),
     triggered = op.outTrigger("Triggered");
 
 let triggers = [];

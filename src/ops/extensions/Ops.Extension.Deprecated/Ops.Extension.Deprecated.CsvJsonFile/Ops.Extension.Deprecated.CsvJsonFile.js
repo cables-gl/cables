@@ -1,6 +1,6 @@
 const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
 const result = op.outArray("Result");
-const isLoading = op.outValue("Is Loading", false);
+const isLoading = op.outNumber("Is Loading", false);
 const jsonp = op.inBool("JsonP", false);
 
 result.ignoreValueSerialize = true;
@@ -63,13 +63,13 @@ function reload()
 
                 if (result.get())result.set(null);
                 result.set(data);
-                op.uiAttr({ "error": "" });
+                op.setUiAttribs({ "error": "" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
             catch (e)
             {
-                op.uiAttr({ "error": "error loading json" });
+                op.setUiAttribs({ "error": "error loading json" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }

@@ -1,17 +1,17 @@
 const render = op.inTrigger("render");
 const useVPSize = op.inBool("use viewport size");
-const width = op.inValueInt("width");
-const height = op.inValueInt("height");
+const width = op.inInt("width");
+const height = op.inInt("height");
 
 const tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear");
-const twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]);
+const twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"]);
 const fpTexture = op.inBool("HDR");
 
 const trigger = op.outTrigger("trigger");
 const texOut = op.outTexture("texture_out");
 
-const bgAlpha = op.inValueSlider("Background Alpha", 0);
-const outRatio = op.outValue("Aspect Ratio");
+const bgAlpha = op.inFloatSlider("Background Alpha", 0);
+const outRatio = op.outNumber("Aspect Ratio");
 
 op.setPortGroup("Texture Size", [useVPSize, width, height]);
 op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture]);
@@ -113,7 +113,7 @@ function updateResolution()
     //     if (!texOut.get().isPowerOfTwo())
     //     {
     //         if (!op.uiAttribs.hint)
-    //             op.uiAttr(
+    //             op.setUiAttribs(
     //                 {
     //                     "hint": "texture dimensions not power of two! - texture filtering will not work.",
     //                     "warning": null
@@ -122,7 +122,7 @@ function updateResolution()
     //     else
     //     if (op.uiAttribs.hint)
     //     {
-    //         op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
+    //         op.setUiAttribs({ "hint": null, "warning": null }); // todo only when needed...
     //     }
 }
 

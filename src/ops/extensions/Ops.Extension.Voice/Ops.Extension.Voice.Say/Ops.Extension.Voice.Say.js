@@ -32,9 +32,9 @@ let cancelPort = op.inTriggerButton("Cancel");
 
 // outputs
 let nextPort = op.outTrigger("Next");
-let speakingPort = op.outValue("Speaking", false);
-let pendingPort = op.outValue("Pending", false);
-let pausedPort = op.outValue("Paused", false);
+let speakingPort = op.outNumber("Speaking", false);
+let pendingPort = op.outNumber("Pending", false);
+let pausedPort = op.outNumber("Paused", false);
 
 // change listeners
 updateStatePort.onTriggered = updateState;

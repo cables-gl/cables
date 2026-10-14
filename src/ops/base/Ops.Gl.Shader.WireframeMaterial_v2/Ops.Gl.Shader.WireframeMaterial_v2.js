@@ -4,16 +4,16 @@ const
     enableDepth = op.inBool("enable depth testing", true),
     writeDepth = op.inBool("Write to depth buffer", true),
     w = op.inFloat("width", 1),
-    aa = op.inValueSlider("AntiAlias", 0.95),
-    r = op.inValueSlider("diffuse r", 1),
-    g = op.inValueSlider("diffuse g", 1),
-    b = op.inValueSlider("diffuse b", 1),
-    a = op.inValueSlider("diffuse A", 1),
+    aa = op.inFloatSlider("AntiAlias", 0.95),
+    r = op.inFloatSlider("diffuse r", 1),
+    g = op.inFloatSlider("diffuse g", 1),
+    b = op.inFloatSlider("diffuse b", 1),
+    a = op.inFloatSlider("diffuse A", 1),
     fill = op.inBool("fill", true),
-    fr = op.inValueSlider("Fill R", 0.5),
-    fg = op.inValueSlider("Fill G", 0.5),
-    fb = op.inValueSlider("Fill B", 0.5),
-    fa = op.inValueSlider("Fill A", 1);
+    fr = op.inFloatSlider("Fill R", 0.5),
+    fg = op.inFloatSlider("Fill G", 0.5),
+    fb = op.inFloatSlider("Fill B", 0.5),
+    fa = op.inFloatSlider("Fill A", 1);
 
 op.setPortGroup("Color Wire", [r, g, b, a]);
 op.setPortGroup("Color Fill", [fr, fg, fb, fa, fill]);

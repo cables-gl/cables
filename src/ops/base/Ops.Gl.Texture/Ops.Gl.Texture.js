@@ -1,15 +1,15 @@
 const filename = op.inFile("file", "image");
 const tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]);
-const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+const wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 const flip = op.inBool("flip", false);
 const unpackAlpha = op.inBool("unpackPreMultipliedAlpha", false);
 const aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0);
 
 const textureOut = op.outTexture("texture");
-const width = op.outValue("width");
-const height = op.outValue("height");
-const loading = op.outValue("loading");
-const ratio = op.outValue("Aspect Ratio");
+const width = op.outNumber("width");
+const height = op.outNumber("height");
+const loading = op.outNumber("loading");
+const ratio = op.outNumber("Aspect Ratio");
 
 op.setPortGroup("Size", [width, height]);
 
@@ -75,7 +75,7 @@ function realReload(nocache)
                 return;
             }
             else op.setUiError("errorload", null);
-            // op.uiAttr({'error':null});
+            // op.setUiAttribs({'error':null});
             textureOut.set(tex);
             width.set(tex.width);
             height.set(tex.height);
@@ -83,14 +83,14 @@ function realReload(nocache)
 
             if (!tex.isPowerOfTwo())
                 op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering will not work.", 0);
-                // op.uiAttr(
+                // op.setUiAttribs(
                 //     {
                 //         hint:'texture dimensions not power of two! - texture filtering will not work.',
                 //         warning:null
                 //     });
             else
                 op.setUiError("hintnpot", null);
-            // op.uiAttr(
+            // op.setUiAttribs(
             //     {
             //         hint:null,
             //         warning:null

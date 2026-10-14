@@ -5,8 +5,8 @@ const
     inBlackWhite = op.inBool("Black White"),
     inRemoveAlpha = op.inBool("Remove Alpha", true),
     inRemap = op.inBool("Remap", true),
-    thresholdLow = op.inValueSlider("Threshold low ", 0.5),
-    thresholdHigh = op.inValueSlider("Threshold high", 1.0);
+    thresholdLow = op.inFloatSlider("Threshold low ", 0.5),
+    thresholdHigh = op.inFloatSlider("Threshold high", 1.0);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "lumakey");

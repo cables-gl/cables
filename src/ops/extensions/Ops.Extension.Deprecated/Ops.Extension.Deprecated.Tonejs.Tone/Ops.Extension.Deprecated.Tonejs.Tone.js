@@ -14,7 +14,7 @@ let octavePort = op.addInPort(new CABLES.Port(op, "Octave", CABLES.Port.TYPE_VAL
 octavePort.set(OCTAVE_DEFAULT);
 
 // output
-let noteOutPort = op.outValue("Note String");
+let noteOutPort = op.outNumber("Note String");
 
 // change listeners
 notePort.onChange = setOutPort;

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    sizeW = op.inValueFloat("width", 1),
-    sizeH = op.inValueFloat("height", 1),
+    sizeW = op.inFloat("width", 1),
+    sizeH = op.inFloat("height", 1),
     inDraw = op.inBool("Draw", true),
     geom = new CGL.Geometry("triangle"),
     geomOut = op.outObject("geometry");

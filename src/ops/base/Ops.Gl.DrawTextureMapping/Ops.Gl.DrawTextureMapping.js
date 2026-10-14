@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
-    numPoints = op.inValue("Num Points"),
+    numPoints = op.inFloat("Num Points"),
     next = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;

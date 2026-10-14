@@ -1,10 +1,10 @@
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
-let inStrength = op.inValue("Strength", 1);
+let inStrength = op.inFloat("Strength", 1);
 
-let scrollx = op.inValue("Scroll X");
-let scrolly = op.inValue("Scroll Y");
-let scrollz = op.inValue("Scroll Z");
+let scrollx = op.inFloat("Scroll X");
+let scrolly = op.inFloat("Scroll Y");
+let scrollz = op.inFloat("Scroll Z");
 
 let cgl = op.patch.cgl;
 

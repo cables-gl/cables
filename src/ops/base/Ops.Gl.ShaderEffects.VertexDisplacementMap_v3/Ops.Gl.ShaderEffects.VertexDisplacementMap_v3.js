@@ -2,17 +2,17 @@
 const
     render = op.inTrigger("render"),
     texture = op.inTexture("texture"),
-    meth = op.inValueSelect("mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
-    extrude = op.inValue("extrude", 0.5),
+    meth = op.inDropDown("mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
+    extrude = op.inFloat("extrude", 0.5),
     flip = op.inBool("flip", false),
     calcNormals = op.inBool("Calc Normals", false),
     removeZero = op.inBool("Ignore Zero Values"),
     invert = op.inBool("invert"),
-    offsetX = op.inValueFloat("offset X"),
-    offsetY = op.inValueFloat("offset Y"),
+    offsetX = op.inFloat("offset X"),
+    offsetY = op.inFloat("offset Y"),
     colorize = op.inBool("colorize", false),
-    colorizeMin = op.inValueSlider("Colorize Min", 0),
-    colorizeMax = op.inValueSlider("Colorize Max", 1),
+    colorizeMin = op.inFloatSlider("Colorize Min", 0),
+    colorizeMax = op.inFloatSlider("Colorize Max", 1),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

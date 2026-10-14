@@ -4,7 +4,7 @@ let duration = op.inFloat("Duration", 1);
 let valueTrue = op.inFloat("Value True", 1);
 let valueFalse = op.inFloat("Value False", 0);
 
-let result = op.outValue("Result", false);
+let result = op.outNumber("Result", false);
 
 let nextTime = -1;
 

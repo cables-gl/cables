@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("Render"),
-    numX = op.inValueInt("Num X", 5),
-    numY = op.inValueInt("Num Y", 5),
-    spaceX = op.inValue("Space X", 1),
-    spaceY = op.inValue("Space Y", 1),
+    numX = op.inInt("Num X", 5),
+    numY = op.inInt("Num Y", 5),
+    spaceX = op.inFloat("Space X", 1),
+    spaceY = op.inFloat("Space Y", 1),
     next = op.outTrigger("Next"),
     outIndex = op.outNumber("Index"),
     outX = op.outNumber("x index"),

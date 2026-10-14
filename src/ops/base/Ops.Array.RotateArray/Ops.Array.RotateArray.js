@@ -1,5 +1,5 @@
 const inArray = op.inArray("Array in");
-const count = op.inValueInt("Rotate amount", 0);
+const count = op.inInt("Rotate amount", 0);
 const outArray = op.outArray("ArrayOut");
 
 let newArr = [];

@@ -1,10 +1,10 @@
 const
     render = op.inTrigger("render"),
-    radius = op.inValueSlider("radius", 0.25),
-    r = op.inValueSlider("r"),
-    g = op.inValueSlider("g"),
-    b = op.inValueSlider("b"),
-    a = op.inValueSlider("a", 1),
+    radius = op.inFloatSlider("radius", 0.25),
+    r = op.inFloatSlider("r"),
+    g = op.inFloatSlider("g"),
+    b = op.inFloatSlider("b"),
+    a = op.inFloatSlider("a", 1),
     next = op.outTrigger("next");
 
 let cgl = op.patch.cgl;

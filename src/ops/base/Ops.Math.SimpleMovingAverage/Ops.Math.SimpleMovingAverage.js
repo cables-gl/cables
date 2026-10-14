@@ -1,6 +1,6 @@
 const
-    val = op.inValue("Value"),
-    num = op.inValueInt("Number of Values", 10),
+    val = op.inFloat("Value"),
+    num = op.inInt("Number of Values", 10),
     result = op.outNumber("Result");
 
 val.changeAlways = true;

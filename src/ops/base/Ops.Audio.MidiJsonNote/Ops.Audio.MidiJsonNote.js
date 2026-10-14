@@ -1,12 +1,12 @@
 const inData = op.inObject("Data");
 const inNote = op.inValueString("Note");
 const inChannel = op.inValueString("Channel", -1);
-const inStartBeat = op.inValueInt("Beat Start", 0);
-const inEndBeat = op.inValueInt("Beat End", 0);
+const inStartBeat = op.inInt("Beat Start", 0);
+const inEndBeat = op.inInt("Beat End", 0);
 
-const outCount = op.outValue("Count");
-const outProgress = op.outValue("Progress");
-const outTimeSince = op.outValue("Time since last");
+const outCount = op.outNumber("Count");
+const outProgress = op.outNumber("Progress");
+const outTimeSince = op.outNumber("Time since last");
 const outTrigger = op.outTrigger("Trigger");
 const outReset = op.outTrigger("Reseted");
 

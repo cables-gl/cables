@@ -3,7 +3,7 @@ const
     inWidth = op.inInt("Width", 1024),
     inHeight = op.inInt("Height", 256),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    twrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     next = op.outTrigger("Next"),

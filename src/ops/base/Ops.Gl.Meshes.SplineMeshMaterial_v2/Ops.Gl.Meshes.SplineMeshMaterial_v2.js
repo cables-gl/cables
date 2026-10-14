@@ -7,10 +7,10 @@ const
     inTexMap = op.inSwitch("Mapping", ["Full", "Face"], "Full"),
     inTexColorize = op.inBool("Colorize Texture", false),
     inTexOffset = op.inFloat("Offset", 0),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1),
     trigger = op.outTrigger("Trigger"),
     shaderOut = op.outObject("Shader");
 

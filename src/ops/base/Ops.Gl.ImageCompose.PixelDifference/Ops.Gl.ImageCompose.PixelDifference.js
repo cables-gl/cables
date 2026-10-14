@@ -10,8 +10,8 @@ const options = [
 
 const
     render = op.inTrigger("render"),
-    strength = op.inValue("Strength", 4),
-    step = op.inValue("Step", 1),
+    strength = op.inFloat("Strength", 4),
+    step = op.inFloat("Step", 1),
     rMeth = op.inDropDown("Red", options, "Horizontal Difference Red"),
     rFlip = op.inBool("Red Flip", false),
     gMeth = op.inDropDown("Green", options, "Vertical Difference Green"),

@@ -1,5 +1,5 @@
 const
-    value = op.inValue("Radians"),
+    value = op.inFloat("Radians"),
     result = op.outNumber("Result");
 
 // convert radians into degrees

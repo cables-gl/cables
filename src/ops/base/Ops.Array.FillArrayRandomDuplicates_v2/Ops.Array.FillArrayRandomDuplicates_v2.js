@@ -1,7 +1,7 @@
 const
     inArr = op.inArray("Array"),
-    inNum = op.inValueInt("Num Elements", 10),
-    inSeed = op.inValueFloat("Random seed", 1),
+    inNum = op.inInt("Num Elements", 10),
+    inSeed = op.inFloat("Random seed", 1),
     outArr = op.outArray("Result");
 
 op.toWorkPortsNeedToBeLinked(inArr);

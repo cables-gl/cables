@@ -1,5 +1,5 @@
 const
-    mulAxis = op.inValue("Mul Orientation", 1),
+    mulAxis = op.inFloat("Mul Orientation", 1),
     req = op.inTriggerButton("Request Permissions"),
     axis1 = op.outNumber("Orientation Alpha"),
     axis2 = op.outNumber("Orientation Beta"),

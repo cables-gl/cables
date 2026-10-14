@@ -7,7 +7,7 @@ const
     ],
     trigger = op.inTrigger("trigger"),
     inElement = op.inObject("DOMElement"),
-    inOrigin = op.inValueSelect("origin", origins, "center-middle"),
+    inOrigin = op.inDropDown("origin", origins, "center-middle"),
     next = op.outTrigger("next"),
     sCSSMatrix = mat4.create(),
     sScalingVector = vec3.create();

@@ -1,10 +1,10 @@
 const
     exec = op.inTrigger("Render"),
     inGeom = op.inObject("Geometry", null, "geometry"),
-    inWidth = op.inValueInt("Tex Size", 256),
+    inWidth = op.inInt("Tex Size", 256),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    tfilter = op.inDropDown("filter", ["nearest", "linear"], "nearest"),
+    twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inRandomize = op.inBool("Randomize", false),
     next = op.outTrigger("Next"),
     outNumVerts = op.outNumber("Total Vertices"),

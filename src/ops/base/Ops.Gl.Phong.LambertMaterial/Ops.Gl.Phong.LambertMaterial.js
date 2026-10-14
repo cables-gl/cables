@@ -1,8 +1,8 @@
 const execute = op.inTrigger("execute");
-const r = op.inValueSlider("diffuse r", Math.random());
-const g = op.inValueSlider("diffuse g", Math.random());
-const b = op.inValueSlider("diffuse b", Math.random());
-const a = op.inValueSlider("diffuse a", 1.0);
+const r = op.inFloatSlider("diffuse r", Math.random());
+const g = op.inFloatSlider("diffuse g", Math.random());
+const b = op.inFloatSlider("diffuse b", Math.random());
+const a = op.inFloatSlider("diffuse a", 1.0);
 
 const inToggleDoubleSided = op.inBool("Double Sided", false);
 

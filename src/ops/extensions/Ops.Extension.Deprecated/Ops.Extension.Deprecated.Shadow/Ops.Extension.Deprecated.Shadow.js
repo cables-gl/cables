@@ -4,7 +4,7 @@ let id = "mod" + Math.floor(Math.random() * 10000);
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-let inAmount = op.inValueSlider("Strength", 1.0);
+let inAmount = op.inFloatSlider("Strength", 1.0);
 
 let castShadows = op.inBool("Cast Shadow", true);
 

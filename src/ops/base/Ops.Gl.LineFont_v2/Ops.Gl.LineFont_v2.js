@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     string = op.inString("Text", "cables"),
-    letterSpacing = op.inValue("Letter Spacing", 1),
+    letterSpacing = op.inFloat("Letter Spacing", 1),
     align = op.inSwitch("align", ["left", "center", "right"], "left"),
     inDraw = op.inBool("Render", true),
     outArr = op.outArray("Lines", null, 3);

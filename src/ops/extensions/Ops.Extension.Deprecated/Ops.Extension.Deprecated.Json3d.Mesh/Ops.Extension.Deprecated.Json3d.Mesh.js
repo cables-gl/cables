@@ -1,5 +1,5 @@
 const render = op.inTrigger("render");
-op.index = op.inValueInt("mesh index", 0);
+op.index = op.inInt("mesh index", 0);
 const draw = op.inBool("draw", true);
 const centerPivot = op.inBool("center pivot", false);
 
@@ -39,8 +39,8 @@ function reload()
 
     if (cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue() && indx >= 0)
     {
-        op.uiAttr({ "warning": "" });
-        op.uiAttr({ "info": "" });
+        op.setUiAttribs({ "warning": "" });
+        op.setUiAttribs({ "info": "" });
 
         let jsonMesh = null;
 
@@ -51,7 +51,7 @@ function reload()
         {
             if (indx < 0 || indx >= cgl.frameStore.currentScene.getValue().meshes.length)
             {
-                op.uiAttr({ "warning": "mesh not found - index out of range " });
+                op.setUiAttribs({ "warning": "mesh not found - index out of range " });
                 return;
             }
 
@@ -61,7 +61,7 @@ function reload()
         if (!jsonMesh)
         {
             mesh = null;
-            op.uiAttr({ "warning": "mesh not found" });
+            op.setUiAttribs({ "warning": "mesh not found" });
             return;
         }
         op.uiAttribs.warning = "";
@@ -92,7 +92,7 @@ function reload()
         // nfo += geom.biTangents.length+' biTangents <br/>';
         // if(geom.vertexNormals) nfo += geom.vertexNormals.length+' normals <br/>';
 
-        // op.uiAttr({"info":nfo});
+        // op.setUiAttribs({"info":nfo});
 
         // var
         // indices = geom.verticesIndices || [],
@@ -113,7 +113,7 @@ function reload()
         nfo += geom.vertexNormals.length / 3 + " normals <br/>";
         nfo += geom.tangents.length / 3 + " tangents <br/>";
         nfo += geom.biTangents.length / 3 + " biTangents <br/>";
-        op.uiAttr({ "info": nfo });
+        op.setUiAttribs({ "info": nfo });
 
         geometryOut.set(null);
         geometryOut.set(geom);

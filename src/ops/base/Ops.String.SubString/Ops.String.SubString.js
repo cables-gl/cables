@@ -1,7 +1,7 @@
 var inStr=op.inValueString("String","cables");
-var inStart=op.inValueInt("Start",0);
-var inEnd=op.inValueInt("End",4);
-var result=op.outValue("Result");
+var inStart=op.inInt("Start",0);
+var inEnd=op.inInt("End",4);
+var result=op.outNumber("Result");
 
 inStr.onChange=
 inStart.onChange=

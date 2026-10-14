@@ -1,13 +1,13 @@
 const
     inTrigger = op.inTrigger("Render"),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1),
-    r2 = op.inValueSlider("r 2", Math.random()),
-    g2 = op.inValueSlider("g 2", Math.random()),
-    b2 = op.inValueSlider("b 2", Math.random()),
-    a2 = op.inValueSlider("a 2", 1),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1),
+    r2 = op.inFloatSlider("r 2", Math.random()),
+    g2 = op.inFloatSlider("g 2", Math.random()),
+    b2 = op.inFloatSlider("b 2", Math.random()),
+    a2 = op.inFloatSlider("a 2", 1),
     next = op.outTrigger("Next");
 
 r.setUiAttribs({ "colorPick": true });

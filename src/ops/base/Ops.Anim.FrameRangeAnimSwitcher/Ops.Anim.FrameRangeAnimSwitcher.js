@@ -1,6 +1,6 @@
 const
-    idx = op.inValueInt("Index"),
-    inDur = op.inValue("Duration", 0.5),
+    idx = op.inInt("Index"),
+    inDur = op.inFloat("Duration", 0.5),
     resultTime1 = op.outNumber("Time 1"),
     resultFade = op.outNumber("Time Fade"),
     resultTime2 = op.outNumber("Time 2");
@@ -16,7 +16,7 @@ idx.onChange = setIndex;
 
 for (let i = 0; i < 10; i++)
 {
-    let p = op.inValue("Value " + i);
+    let p = op.inFloat("Value " + i);
     valuePorts.push(p);
     p.onChange = update;
 }

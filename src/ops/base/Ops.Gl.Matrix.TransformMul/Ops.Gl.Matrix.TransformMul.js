@@ -1,5 +1,5 @@
 const render=op.inTrigger("render");
-const mul=op.inValueFloat("mul");
+const mul=op.inFloat("mul");
 const trigger=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;

@@ -4,7 +4,7 @@ const trigger = op.outTrigger("trigger");
 const outWidth = op.outNumber("Width");
 const outHeight = op.outNumber("Height");
 
-let ratio = op.inValueSelect("ratio", [1, 1.25, 1.3333333333, 1.777777777778, 1.88, 2.33333333333333, 2.4151, 3, 4]);
+let ratio = op.inDropDown("ratio", [1, 1.25, 1.3333333333, 1.777777777778, 1.88, 2.33333333333333, 2.4151, 3, 4]);
 
 ratio.set(1.777777777778);
 

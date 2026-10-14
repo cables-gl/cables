@@ -8,13 +8,13 @@ const inReflectionCubemap = op.inObject("Reflection Cubemap");
 const inFlipY = op.inBool("Flip Y");
 const inFlipX = op.inBool("Flip X");
 const inRough = op.inTexture("Roughness");
-const inRoughMul = op.inValueSlider("Roughness Amount", 0);
+const inRoughMul = op.inFloatSlider("Roughness Amount", 0);
 const inReflection = op.inTexture("Reflection");
-const inReflMul = op.inValueSlider("Reflection Amount", 1);
+const inReflMul = op.inFloatSlider("Reflection Amount", 1);
 const inNormal = op.inTexture("Normal");
 const inDiffuse = op.inTexture("Diffuse");
 const inAo = op.inTexture("AO");
-const inRotation = op.inValueSlider("SampleRotation", 0);
+const inRotation = op.inFloatSlider("SampleRotation", 0);
 
 const trigger = op.outTrigger("trigger");
 const outShader = op.outObject("Shader");

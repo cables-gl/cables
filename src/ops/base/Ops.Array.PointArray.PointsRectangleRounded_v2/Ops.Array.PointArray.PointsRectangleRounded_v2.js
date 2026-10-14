@@ -1,9 +1,9 @@
 const render = op.inTrigger("render");
-const inSegments = op.inValueInt("Segments", 24);
+const inSegments = op.inInt("Segments", 24);
 const trigger = op.outTrigger("trigger");
 const sizeW = op.inFloat("width", 1);
 const sizeH = op.inFloat("height", 1);
-const borderRadius = op.inValueSlider("border radius", 0.5);
+const borderRadius = op.inFloatSlider("border radius", 0.5);
 const outPoints = op.outArray("Points");
 
 op.toWorkPortsNeedToBeLinked(render);

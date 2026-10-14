@@ -1,7 +1,7 @@
 let valueBefore = -1;
 
 // input
-let valuePort = op.inValue("Value", -1);
+let valuePort = op.inFloat("Value", -1);
 
 // output
 let outTrigger = op.outTrigger("Became Zero Trigger");

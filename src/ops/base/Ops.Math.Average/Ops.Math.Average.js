@@ -1,6 +1,6 @@
 const
-    number = op.inValue("number"),
-    infl = op.inValueSlider("Influence", 0.2),
+    number = op.inFloat("number"),
+    infl = op.inFloatSlider("Influence", 0.2),
     result = op.outNumber("result");
 
 number.onChange = function ()

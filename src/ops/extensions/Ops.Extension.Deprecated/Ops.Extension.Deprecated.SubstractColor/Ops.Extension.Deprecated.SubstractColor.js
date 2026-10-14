@@ -3,7 +3,7 @@ op.name = "SubstractColor";
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let amount = op.inValueSlider("amount", 0.1);
+let amount = op.inFloatSlider("amount", 0.1);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

@@ -1,5 +1,5 @@
 let inArr = op.inArray("Array");
-let what = op.inValueSelect("What", ["None", "X", "Y", "Z", "XYZ"]);
+let what = op.inDropDown("What", ["None", "X", "Y", "Z", "XYZ"]);
 what.set("X");
 let outArr = op.outArray("Result", 3);
 

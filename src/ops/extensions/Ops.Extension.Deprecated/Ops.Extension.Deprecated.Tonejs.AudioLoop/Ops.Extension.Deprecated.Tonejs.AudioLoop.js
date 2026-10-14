@@ -27,7 +27,7 @@ let iterationsPort = op.inFloat("Iterations", ITERATIONS_DEFAULT);
 let playbackRatePort = op.inFloat("Playback Rate", PLAYBACK_RATE_DEFAULT);
 let humanizePort = op.inBool("Humanize", false);
 let humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
-let probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
+let probabilityPort = op.inFloatSlider("Probability", PROBABILITY_DEFAULT);
 let startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 let startTriggerPort = op.inTriggerButton("Start");
 let autoStartPort = op.inBool("Auto Start", true);
@@ -217,10 +217,10 @@ updateStatePorts.onTriggered = function ()
 // output ports
 var triggerPort = op.outTrigger("Trigger");
 triggerPort.onLinkChanged = checkAutoStart;
-var timePort = op.outValue("Time");
+var timePort = op.outNumber("Time");
 timePort.onLinkChanged = checkAutoStart;
-var startedPort = op.outValue("Started");
-var progressPort = op.outValue("Progress");
+var startedPort = op.outNumber("Started");
+var progressPort = op.outNumber("Progress");
 
 // clean up
 op.onDelete = function ()

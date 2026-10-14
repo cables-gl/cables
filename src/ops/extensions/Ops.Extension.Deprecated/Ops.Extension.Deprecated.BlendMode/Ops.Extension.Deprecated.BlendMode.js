@@ -1,5 +1,5 @@
 let exec = op.inTrigger("Render");
-let inBlend = op.inValueSelect("Blendmode",
+let inBlend = op.inDropDown("Blendmode",
     [
         "None",
         "Normal",

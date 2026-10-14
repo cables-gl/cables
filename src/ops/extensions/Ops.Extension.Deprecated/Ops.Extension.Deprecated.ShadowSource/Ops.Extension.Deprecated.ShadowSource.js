@@ -1,15 +1,15 @@
 let render = op.inTrigger("Render");
-let strength = op.inValueSlider("Strength", 0.5);
+let strength = op.inFloatSlider("Strength", 0.5);
 
-let areaSize = op.inValueInt("Area Size", 20);
-let mapSize = op.inValueInt("Map Size", 512);
-let samples = op.inValueInt("Samples", 4);
+let areaSize = op.inInt("Area Size", 20);
+let mapSize = op.inInt("Map Size", 512);
+let samples = op.inInt("Samples", 4);
 
-let polyOff = op.inValueInt("Poly Offset", 0);
+let polyOff = op.inInt("Poly Offset", 0);
 
-let bias = op.inValueInt("Bias", 0.0);
-let znear = op.inValueInt("Z Near", 0.1);
-let zfar = op.inValueInt("Z Far", 300);
+let bias = op.inInt("Bias", 0.0);
+let znear = op.inInt("Z Near", 0.1);
+let zfar = op.inInt("Z Far", 300);
 let lookat = op.inArray("Look at");
 
 let showMapArea = op.inBool("Show Map Area", false);

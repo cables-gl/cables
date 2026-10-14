@@ -1,7 +1,7 @@
 const cgl = op.patch.cgl,
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    opacity = op.inValueFloat("opacity", 1);
+    opacity = op.inFloat("opacity", 1);
 
 const shader = new CGL.Shader(cgl, "vertex color material");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);

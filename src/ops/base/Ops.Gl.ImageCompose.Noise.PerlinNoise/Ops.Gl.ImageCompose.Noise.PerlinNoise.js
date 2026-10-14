@@ -4,15 +4,15 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     inMode = op.inSwitch("Color", ["Mono", "RGB", "R", "G", "B"], "Mono"),
-    scale = op.inValue("Scale", 22),
+    scale = op.inFloat("Scale", 22),
     inAspect = op.inBool("Aspect", false),
-    rangeMul = op.inValue("Multiply", 1),
+    rangeMul = op.inFloat("Multiply", 1),
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
-    x = op.inValue("X", 0),
-    y = op.inValue("Y", 0),
-    z = op.inValue("Z", 0),
+    x = op.inFloat("X", 0),
+    y = op.inFloat("Y", 0),
+    z = op.inFloat("Z", 0),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
-    segments = op.inValueInt("segments", 40),
+    segments = op.inInt("segments", 40),
     radius = op.inFloat("radius", 1),
-    percent = op.inValueSlider("percent", 1),
+    percent = op.inFloatSlider("percent", 1),
     numAbs = op.inBool("Absolute", true),
     flip = op.inBool("Flip", false),
     inRotate = op.inBool("Rotate"),

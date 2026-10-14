@@ -1,9 +1,9 @@
 const
-    num = op.inValueInt("Amount of points", 100),
-    size = op.inValue("Sphere size", 1),
-    seed = op.inValue("Random seed", 0),
-    distRand = op.inValueSlider("Random distance from sphere", 0),
-    distrib = op.inValueSelect("Distribution", ["Uniform", "Poles", "Half"], "Uniform"),
+    num = op.inInt("Amount of points", 100),
+    size = op.inFloat("Sphere size", 1),
+    seed = op.inFloat("Random seed", 0),
+    distRand = op.inFloatSlider("Random distance from sphere", 0),
+    distrib = op.inDropDown("Distribution", ["Uniform", "Poles", "Half"], "Uniform"),
     outArray = op.outArray("Array out", 3),
     totalPointsOut = op.outNumber("Total points"),
     arrayLengthOut = op.outNumber("Array length");

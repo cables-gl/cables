@@ -4,7 +4,7 @@ const
     next = op.outTrigger("Next"),
     outFpTex = op.outTexture("HDR Texture"),
     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "linear"),
-    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat");
+    twrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat");
 
 let tc = null;
 

@@ -5,7 +5,7 @@ const
 
 ratio.set(1.777777777778);
 
-const posX = op.inValueSelect("Pos X", ["Left", "Right", "Center"], "Center");
+const posX = op.inDropDown("Pos X", ["Left", "Right", "Center"], "Center");
 
 const cgl = op.patch.cgl;
 

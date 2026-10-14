@@ -1,7 +1,7 @@
 const exe = op.inTrigger("Exe");
 const inArr1 = op.inArray("Array 1");
 const inArr2 = op.inArray("Array 2");
-const inPerc = op.inValueSlider("perc");
+const inPerc = op.inFloatSlider("perc");
 const next = op.outTrigger("Next");
 const outArr = op.outArray("Result");
 

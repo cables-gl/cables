@@ -1,8 +1,8 @@
 const
-    value = op.inValue("Value"),
-    phase = op.inValue("Phase", 0.0),
-    mul = op.inValue("Frequency", 1.0),
-    amplitude = op.inValue("Amplitude", 1.0),
+    value = op.inFloat("Value"),
+    phase = op.inFloat("Phase", 0.0),
+    mul = op.inFloat("Frequency", 1.0),
+    amplitude = op.inFloat("Amplitude", 1.0),
     invert = op.inBool("asine", false),
     result = op.outNumber("Result");
 

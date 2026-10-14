@@ -4,7 +4,7 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     inRGB = op.inSwitch("Channels", ["R", "G", "B", "RGB"], "R"),
     inPhase = op.inFloat("Phase", 0),
     inScale = op.inFloat("Scale", 10),

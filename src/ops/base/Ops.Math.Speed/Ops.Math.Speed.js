@@ -1,6 +1,6 @@
 const
     inExe = op.inTrigger("Update"),
-    inVal = op.inValue("Value"),
+    inVal = op.inFloat("Value"),
     result = op.outNumber("Speed");
 
 inVal.alwaysChange = true;

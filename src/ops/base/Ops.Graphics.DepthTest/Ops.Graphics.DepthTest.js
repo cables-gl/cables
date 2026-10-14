@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     enable = op.inBool("Enable depth testing", true),
-    meth = op.inValueSelect("Depth Test Method", ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"], "less or equal"),
+    meth = op.inDropDown("Depth Test Method", ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"], "less or equal"),
     write = op.inBool("Write to depth buffer", true),
     trigger = op.outTrigger("Next");
 

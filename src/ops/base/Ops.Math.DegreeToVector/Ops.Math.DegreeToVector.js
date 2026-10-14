@@ -1,5 +1,5 @@
 const
-    deg = op.inValueFloat("degree", 0),
+    deg = op.inFloat("degree", 0),
     x = op.outNumber("x"),
     y = op.outNumber("y");
 

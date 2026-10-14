@@ -1,5 +1,5 @@
 let obj = op.inObject("Object");
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 obj.onChange = update;
 

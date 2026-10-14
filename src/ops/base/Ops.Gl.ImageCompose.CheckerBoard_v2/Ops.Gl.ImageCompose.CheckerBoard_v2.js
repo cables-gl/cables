@@ -1,11 +1,11 @@
 const render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     inSquare = op.inBool("Square", true),
-    numX = op.inValue("Num X", 10),
-    numY = op.inValue("Num Y", 10),
-    inRotate = op.inValueSlider("Rotate", 0.0),
+    numX = op.inFloat("Num X", 10),
+    numY = op.inFloat("Num Y", 10),
+    inRotate = op.inFloatSlider("Rotate", 0.0),
     inCentered = op.inBool("Centered", true),
     trigger = op.outTrigger("trigger");
 

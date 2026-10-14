@@ -1,5 +1,5 @@
 const
-    inTime = op.inValue("Time"),
+    inTime = op.inFloat("Time"),
     inStr = op.inString("Frames"),
     inLoop = op.inBool("Loop"),
     inRewind = op.inTriggerButton("Rewind"),

@@ -2,16 +2,16 @@ const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
     inMode = op.inSwitch("Mode", ["Rotate", "Translate"], "Translate"),
-    inSize = op.inValue("Size", 1),
-    inStrength = op.inValue("Strength", 1),
+    inSize = op.inFloat("Size", 1),
+    inStrength = op.inFloat("Strength", 1),
     inSmooth = op.inBool("Smooth", true),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
-    inNoiseScale = op.inValue("Noise Scale", 0.5),
-    tx = op.inValue("Noise X"),
-    ty = op.inValue("Noise Y"),
-    tz = op.inValue("Noise Z");
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
+    inNoiseScale = op.inFloat("Noise Scale", 0.5),
+    tx = op.inFloat("Noise X"),
+    ty = op.inFloat("Noise Y"),
+    tz = op.inFloat("Noise Z");
 
 const cgl = op.patch.cgl;
 op.setPortGroup("Noise", [inNoiseScale, tx, ty, tz]);

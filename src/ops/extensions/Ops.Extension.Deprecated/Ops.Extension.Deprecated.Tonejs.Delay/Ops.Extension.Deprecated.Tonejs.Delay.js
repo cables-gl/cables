@@ -40,12 +40,12 @@ function handleChange()
     catch (e)
     {
         // not valid
-        op.uiAttr({ "error": "maxDelayTime not valid, Examples: \"4n\", \"1m\", 2" });
+        op.setUiAttribs({ "error": "maxDelayTime not valid, Examples: \"4n\", \"1m\", 2" });
         op.refreshParams();
     	return;
     }
     // reset UI warning
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
     op.refreshParams();
 }
 

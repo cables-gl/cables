@@ -1,7 +1,7 @@
 const
     render=op.inTrigger('render'),
-    shearX=op.inValueFloat("shearX",0.5),
-    shearY=op.inValueFloat("shearY"),
+    shearX=op.inFloat("shearX",0.5),
+    shearY=op.inFloat("shearY"),
     trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;

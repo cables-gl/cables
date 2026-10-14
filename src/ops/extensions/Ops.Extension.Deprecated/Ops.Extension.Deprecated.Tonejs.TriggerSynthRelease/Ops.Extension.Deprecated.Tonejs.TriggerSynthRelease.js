@@ -23,6 +23,6 @@ triggerPort.onTriggered = function ()
         }
 
         synth.triggerRelease(time);
-        op.uiAttr({ "error": null }); // clear UI error
+        op.setUiAttribs({ "error": null }); // clear UI error
     }
 };

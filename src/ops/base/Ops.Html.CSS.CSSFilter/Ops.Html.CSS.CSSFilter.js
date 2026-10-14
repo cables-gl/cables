@@ -1,6 +1,6 @@
 const inEle = op.inObject("Element");
-const inMethod = op.inValueSelect("method", ["-", "blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "opacity", "saturate", "sepia"]);
-const inVal = op.inValue("Value");
+const inMethod = op.inDropDown("method", ["-", "blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "opacity", "saturate", "sepia"]);
+const inVal = op.inFloat("Value");
 
 let suffix = "";
 let prefix = "";

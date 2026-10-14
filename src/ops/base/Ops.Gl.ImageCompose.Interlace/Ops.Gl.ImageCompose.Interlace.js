@@ -1,12 +1,12 @@
 let render = op.inTrigger("render");
-let amount = op.inValueSlider("amount", 0.5);
-let lum = op.inValueSlider("Lumi Scale", 0.9);
+let amount = op.inFloatSlider("amount", 0.5);
+let lum = op.inFloatSlider("Lumi Scale", 0.9);
 let direction = op.inBool("X or Y", false);
-let lineSize = op.inValue("Line Size", 4);
-let displace = op.inValueSlider("Displacement", 0);
+let lineSize = op.inFloat("Line Size", 4);
+let displace = op.inFloatSlider("Displacement", 0);
 
-let add = op.inValue("Add", 0.02);
-let inScroll = op.inValue("scroll", 0);
+let add = op.inFloat("Add", 0.02);
+let inScroll = op.inFloat("scroll", 0);
 
 let trigger = op.outTrigger("trigger");
 

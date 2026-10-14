@@ -2,10 +2,10 @@ const exe = op.inTrigger("Exe");
 const inArr1 = op.inArray("Array 1");
 const inArr2 = op.inArray("Array 2");
 
-const inPos = op.inValueSlider("Pos");
-const inWidth = op.inValueSlider("Width");
+const inPos = op.inFloatSlider("Pos");
+const inWidth = op.inFloatSlider("Width");
 
-const easing = op.inValueSelect("Easing", [
+const easing = op.inDropDown("Easing", [
     "Linear",
     "Expo in", "Expo out", "Expo in out",
     "Cubic in", "Cubic out", "Cubic in out"],

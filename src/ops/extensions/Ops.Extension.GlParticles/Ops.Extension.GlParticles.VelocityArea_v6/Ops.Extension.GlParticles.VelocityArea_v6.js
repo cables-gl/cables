@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    inArea = op.inValueSelect("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
-    inMethod = op.inValueSelect("Method", ["Point", "Direction", "Gravity", "Collision", "Rotate", "Vortex"], "Point"),
+    inArea = op.inDropDown("Area", ["Everywhere", "Sphere", "Box"], "Everywhere"),
+    inMethod = op.inDropDown("Method", ["Point", "Direction", "Gravity", "Collision", "Rotate", "Vortex"], "Point"),
     inStrength = op.inFloat("Strength", 1),
 
     dir_x = op.inFloat("Velocity Dir X", 0),

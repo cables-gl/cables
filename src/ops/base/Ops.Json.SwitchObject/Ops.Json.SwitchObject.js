@@ -1,4 +1,4 @@
-const inIndex = op.inValueInt("Object Index", 0);
+const inIndex = op.inInt("Object Index", 0);
 const outObject = op.outObject("object out");
 
 const NUM_PORTS = 8;

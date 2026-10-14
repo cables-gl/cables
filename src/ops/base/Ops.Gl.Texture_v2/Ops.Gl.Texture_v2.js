@@ -1,7 +1,7 @@
 const
     filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg", ".avif"]),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     dataFrmt = op.inSwitch("Data Format", ["R", "RG", "RGB", "RGBA", "SRGBA"], "RGBA"),
     flip = op.inBool("Flip", false),

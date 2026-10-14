@@ -1,7 +1,7 @@
 const
     result = op.outBoolNum("result"),
-    number1 = op.inValueFloat("number1"),
-    number2 = op.inValueFloat("number2");
+    number1 = op.inFloat("number1"),
+    number2 = op.inFloat("number2");
 
 number1.onLinkChanged =
     number2.onLinkChanged =

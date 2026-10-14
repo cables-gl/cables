@@ -4,11 +4,11 @@ const
     play = op.inBool("play"),
     loop = op.inBool("loop", true),
 
-    volume = op.inValueSlider("Volume", 1),
+    volume = op.inFloatSlider("Volume", 1),
     muted = op.inBool("mute", true),
 
     tfilter = op.inSwitch("Filter", ["nearest", "linear"], "linear"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     flip = op.inBool("flip", true),
 
     speed = op.inFloat("speed", 1),

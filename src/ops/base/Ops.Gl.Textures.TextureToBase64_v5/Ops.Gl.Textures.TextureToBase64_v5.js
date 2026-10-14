@@ -49,7 +49,7 @@ function retrySoon()
 
 function update()
 {
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
     if (!inTex.get() || !inTex.get().tex) return;
 
     const width = inTex.get().width;
@@ -67,7 +67,7 @@ function update()
     if (!canRead)
     {
         outLoading.set(false);
-        op.uiAttr({ "error": "cannot read texture!" });
+        op.setUiAttribs({ "error": "cannot read texture!" });
         return;
     }
 

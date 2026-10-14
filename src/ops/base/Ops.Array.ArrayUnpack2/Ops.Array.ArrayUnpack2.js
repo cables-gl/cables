@@ -24,7 +24,7 @@ function update()
     {
         if (!showingError)
         {
-            op.uiAttr({ "error": "Arrays length not divisible by 2 !" });
+            op.setUiAttribs({ "error": "Arrays length not divisible by 2 !" });
             outArrayLength.set(0);
             showingError = true;
         }
@@ -40,7 +40,7 @@ function update()
     if (showingError)
     {
         showingError = false;
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
     }
 
     arr1.length = Math.floor(array1.length / 2);

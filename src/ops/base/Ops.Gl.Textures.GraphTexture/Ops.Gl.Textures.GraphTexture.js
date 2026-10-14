@@ -1,12 +1,12 @@
 const
     trigger = this.inTrigger("trigger"),
-    value = this.inValueFloat("value"),
-    index = this.inValueInt("index"),
+    value = this.inFloat("value"),
+    index = this.inInt("index"),
     inReset = this.inTriggerButton("reset"),
     inShowMinMax = op.inBool("Show Min/Max"),
-    inSeed = op.inValueFloat("Color Random Seed", 23),
-    inWidth = op.inValueInt("Texture Width", 512),
-    inHeight = op.inValueInt("Texture Height", 512),
+    inSeed = op.inFloat("Color Random Seed", 23),
+    inWidth = op.inInt("Texture Width", 512),
+    inHeight = op.inInt("Texture Height", 512),
     inLineWidth = op.inFloat("Line Width", 2),
 
     texOut = op.outTexture("Texture"),

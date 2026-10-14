@@ -30,13 +30,13 @@ let humanizeTimePort = op.inFloat("Humanize Time");
 humanizeTimePort.set(HUMANIZE_TIME_DEFAULT);
 let mutePort = op.addInPort(new CABLES.Port(op, "Mute", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 mutePort.set(MUTE_DEFAULT);
-let probabilityPort = op.inValueSlider("Probability");
+let probabilityPort = op.inFloatSlider("Probability");
 probabilityPort.set(PROBABILITY_DEFAULT);
 
 // output ports
 let eventTriggerPort = op.outTrigger("Event Trigger");
-let timePort = op.outValue("Time");
-let notePort = op.outValue("Note");
+let timePort = op.outNumber("Time");
+let notePort = op.outNumber("Note");
 
 // change listeners
 subdivisionPort.onChange = function ()

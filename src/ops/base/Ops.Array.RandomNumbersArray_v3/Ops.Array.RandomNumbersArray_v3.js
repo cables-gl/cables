@@ -1,8 +1,8 @@
 const
-    numValues = op.inValueInt("numValues", 10),
-    min = op.inValueFloat("Min", 0),
-    max = op.inValueFloat("Max", 1),
-    seed = op.inValueFloat("random seed", 1),
+    numValues = op.inInt("numValues", 10),
+    min = op.inFloat("Min", 0),
+    max = op.inFloat("Max", 1),
+    seed = op.inFloat("random seed", 1),
     values = op.outArray("values"),
     outArrayLength = op.outNumber("Array length"),
     inInteger = op.inBool("Integer", false);

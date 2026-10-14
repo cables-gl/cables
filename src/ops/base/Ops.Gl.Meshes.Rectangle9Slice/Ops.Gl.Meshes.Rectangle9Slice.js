@@ -1,16 +1,16 @@
 const
     render = op.inTrigger("Render"),
-    width = op.inValueFloat("Width", 1),
-    height = op.inValueFloat("Height", 1),
+    width = op.inFloat("Width", 1),
+    height = op.inFloat("Height", 1),
 
-    inUVScalar = op.inValueFloat("Border Width", 0.2),
+    inUVScalar = op.inFloat("Border Width", 0.2),
 
-    inScaleX = op.inValueFloat("Scale X", 1),
-    inScaleY = op.inValueFloat("Scale Y", 1),
+    inScaleX = op.inFloat("Scale X", 1),
+    inScaleY = op.inFloat("Scale Y", 1),
 
     inDraw = op.inBool("Draw", true),
-    pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]),
-    pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]),
+    pivotX = op.inDropDown("pivot x", ["center", "left", "right"]),
+    pivotY = op.inDropDown("pivot y", ["center", "top", "bottom"]),
 
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("Geometry");

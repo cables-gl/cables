@@ -1,7 +1,7 @@
 const
-    inLat = op.inValue("Latitude"),
-    inLon = op.inValue("Longitude"),
-    inMapWidth = op.inValue("MapWidth", 1),
+    inLat = op.inFloat("Latitude"),
+    inLon = op.inFloat("Longitude"),
+    inMapWidth = op.inFloat("MapWidth", 1),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y");
 

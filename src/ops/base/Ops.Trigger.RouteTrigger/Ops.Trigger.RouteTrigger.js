@@ -1,7 +1,7 @@
 const NUM_PORTS = 24;
 const
     exePort = op.inTriggerButton("Execute"),
-    switchPort = op.inValueInt("Switch Value"),
+    switchPort = op.inInt("Switch Value"),
     nextTriggerPort = op.outTrigger("Next Trigger"),
     valueOutPort = op.outNumber("Switched Value");
 

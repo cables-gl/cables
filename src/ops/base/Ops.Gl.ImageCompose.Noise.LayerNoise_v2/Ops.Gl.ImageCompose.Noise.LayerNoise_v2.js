@@ -5,14 +5,14 @@ const
     inTrigger = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inFloatSlider("Amount", 1),
-    inLayerMode = op.inValueSelect("mode", [
+    inLayerMode = op.inDropDown("mode", [
         "exponential",
         "logarithmic",
         "linear"
     ], "exponential"),
     inRGBA = op.inBool("RGBA"),
-    inScale = op.inValue("scale", 4),
-    inNumLayers = op.inValueInt("layers", 3),
+    inScale = op.inFloat("scale", 4),
+    inNumLayers = op.inInt("layers", 3),
     inFactor = op.inFloat("factor", 1),
     inExponent = op.inFloat("exponent", 2),
     inScrollX = op.inFloat("scrollX"),

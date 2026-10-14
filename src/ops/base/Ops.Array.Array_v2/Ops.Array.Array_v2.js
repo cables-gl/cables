@@ -1,7 +1,7 @@
 const
-    inLength = op.inValueInt("Array length", 10),
+    inLength = op.inInt("Array length", 10),
     modeSelect = op.inSwitch("Mode select", ["Number", "1,2,3,4", "0-1", "1-0"], "Number"),
-    inDefaultValue = op.inValueFloat("Default Value"),
+    inDefaultValue = op.inFloat("Default Value"),
     outArr = op.outArray("Array"),
     outArrayLength = op.outNumber("Array length out");
 

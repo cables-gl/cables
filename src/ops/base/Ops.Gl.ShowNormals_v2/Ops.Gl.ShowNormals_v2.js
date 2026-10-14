@@ -3,7 +3,7 @@ const
     inDoRender = op.inBool("Draw", true),
     geometry = op.inObject("geometry", null, "geometry"),
     dropdown = op.inSwitch("Vectors", ["Normals", "Tangents", "Bitangents"], "Normals"),
-    mul = op.inValueFloat("Length", 0.1),
+    mul = op.inFloat("Length", 0.1),
     inColorize = op.inBool("Colorize", true),
     inR = op.inFloat("R", 0),
     inG = op.inFloat("G", 0.8),

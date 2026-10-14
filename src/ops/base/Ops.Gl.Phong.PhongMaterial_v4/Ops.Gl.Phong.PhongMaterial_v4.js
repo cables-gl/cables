@@ -55,7 +55,7 @@ inToggleOrenNayar.onChange = function ()
 // * FRESNEL *
 const inToggleFresnel = op.inBool("Active", false);
 inToggleFresnel.setUiAttribs({ "hidePort": true });
-const inFresnel = op.inValueSlider("Fresnel Intensity", 0.7);
+const inFresnel = op.inFloatSlider("Fresnel Intensity", 0.7);
 const inFresnelWidth = op.inFloat("Fresnel Width", 1);
 const inFresnelExponent = op.inFloat("Fresnel Exponent", 6);
 const inFresnelR = op.inFloat("Fresnel R", 1);

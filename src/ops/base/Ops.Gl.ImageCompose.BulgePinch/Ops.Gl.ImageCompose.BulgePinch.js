@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
-    radius = op.inValueFloat("Radius", 0.5),
-    strength = op.inValueFloat("Strength", 1),
-    centerX = op.inValueFloat("Center X", 0.5),
-    centerY = op.inValueFloat("Center Y", 0.5),
+    radius = op.inFloat("Radius", 0.5),
+    strength = op.inFloat("Strength", 1),
+    centerX = op.inFloat("Center X", 0.5),
+    centerY = op.inFloat("Center Y", 0.5),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

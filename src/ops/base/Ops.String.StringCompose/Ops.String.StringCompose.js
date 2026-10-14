@@ -5,7 +5,7 @@ var c=op.inValueString('String C',2);
 var d=op.inValueString('String D',3);
 var e=op.inValueString('String E');
 var f=op.inValueString('String F');
-var result=op.outValue("Result");
+var result=op.outNumber("Result");
 
 format.onChange=
 a.onChange=

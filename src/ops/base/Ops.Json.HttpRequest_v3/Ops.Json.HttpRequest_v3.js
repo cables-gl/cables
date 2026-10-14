@@ -174,7 +174,7 @@ function reload(addCachebuster, force = false)
                         }
 
                         outString.set(_data);
-                        op.uiAttr({ "error": null });
+                        op.setUiAttribs({ "error": null });
                         outTrigger.trigger();
                         isLoading.set(false);
                         op.patch.loading.finished(loadingId);

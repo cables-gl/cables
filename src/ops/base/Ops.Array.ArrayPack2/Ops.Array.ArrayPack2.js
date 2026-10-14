@@ -50,7 +50,7 @@ function update()
         {
             if (!showingError)
             {
-                op.uiAttr({ "error": "Arrays do not have the same length !" });
+                op.setUiAttribs({ "error": "Arrays do not have the same length !" });
                 showingError = true;
             }
             return;
@@ -59,7 +59,7 @@ function update()
         if (showingError)
         {
             showingError = false;
-            op.uiAttr({ "error": null });
+            op.setUiAttribs({ "error": null });
         }
 
         arr.length = array1.length;

@@ -1,8 +1,8 @@
 const
-    inNum = op.inValueInt("Num", 100),
+    inNum = op.inInt("Num", 100),
     outArr = op.outArray("Array"),
-    inDev = op.inValue("Deviation", 1),
-    seed = op.inValueFloat("Random Seed");
+    inDev = op.inFloat("Deviation", 1),
+    seed = op.inFloat("Random Seed");
 
 let arr = [];
 let stdDev = 1;

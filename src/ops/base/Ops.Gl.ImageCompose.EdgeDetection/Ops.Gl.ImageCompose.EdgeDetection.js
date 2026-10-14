@@ -1,7 +1,7 @@
 let render = op.inTrigger("Render");
 let trigger = op.outTrigger("Trigger");
-let amount = op.inValueSlider("amount", 1);
-let mulColor = op.inValueSlider("Mul Color", 0);
+let amount = op.inFloatSlider("amount", 1);
+let mulColor = op.inFloatSlider("Mul Color", 0);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

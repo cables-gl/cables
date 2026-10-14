@@ -3,9 +3,9 @@ op.name = "RectangularNoise";
 let render = op.inTrigger("render");
 
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-let amount = op.inValueSlider("Amount", 1);
+let amount = op.inFloatSlider("Amount", 1);
 
-let threshold = op.inValueSlider("Threshold", 0.35);
+let threshold = op.inFloatSlider("Threshold", 0.35);
 
 let x = op.inFloat("X", 0);
 let y = op.inFloat("Y", 0);

@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    strength = op.inValue("Strength", 4),
+    strength = op.inFloat("Strength", 4),
     clear = op.inBool("Clear", true),
     cgl = op.patch.cgl,
     shader = new CGL.Shader(cgl, op.name, op);

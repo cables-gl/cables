@@ -1,5 +1,5 @@
 const inArray = op.inArray("Array In");
-const inValue = op.inValue("Value", 1.0);
+const inValue = op.inFloat("Value", 1.0);
 const outArray = op.outArray("Array Out");
 
 let newArr = [];

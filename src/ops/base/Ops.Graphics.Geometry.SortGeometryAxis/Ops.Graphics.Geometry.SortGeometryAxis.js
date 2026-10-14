@@ -6,7 +6,7 @@ const
     SORT_NONE = "None",
 
     geometry = op.inObject("Geometry"),
-    sorting = op.inValueSelect("Sort", [SORT_RANDOM, SORT_X, SORT_Y, SORT_Z, SORT_NONE], SORT_X),
+    sorting = op.inDropDown("Sort", [SORT_RANDOM, SORT_X, SORT_Y, SORT_Z, SORT_NONE], SORT_X),
     reverse = op.inBool("Reverse", false),
     outGeom = op.outObject("Result");
 

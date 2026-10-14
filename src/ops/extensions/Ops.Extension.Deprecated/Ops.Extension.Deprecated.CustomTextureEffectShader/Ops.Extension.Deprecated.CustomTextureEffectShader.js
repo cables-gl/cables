@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 const inShader = op.inObject("Shader");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 0.25);
+const amount = op.inFloatSlider("Amount", 0.25);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

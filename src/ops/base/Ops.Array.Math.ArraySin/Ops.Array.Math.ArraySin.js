@@ -1,12 +1,12 @@
 // this op allows the user to perform sin or cos
 // math functions on an array
 const inArray = op.inArray("array in");
-const mathSelect = op.inValueSelect("Math function", ["Sin", "Cos"], "Sin");
+const mathSelect = op.inDropDown("Math function", ["Sin", "Cos"], "Sin");
 const outArray = op.outArray("Array result");
 
-const phase = op.inValue("Phase", 0.0);
-const multiply = op.inValue("Frequency", 1.0);
-const amplitude = op.inValue("Amplitude", 1.0);
+const phase = op.inFloat("Phase", 0.0);
+const multiply = op.inFloat("Frequency", 1.0);
+const amplitude = op.inFloat("Amplitude", 1.0);
 
 const mathArray = [];
 let selectIndex = 0;

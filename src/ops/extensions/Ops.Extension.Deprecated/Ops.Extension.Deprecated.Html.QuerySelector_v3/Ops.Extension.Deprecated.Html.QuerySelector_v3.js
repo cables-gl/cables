@@ -2,7 +2,7 @@ const
     inUpdate = op.inTriggerButton("Update"),
     queryPort = op.inString("Query"),
     inMode = op.inSwitch("Mode", ["document", "string input", "element"], "document"),
-    inMimeType = op.inValueSelect("Type", ["text/html", "text/xml"], "text/html"),
+    inMimeType = op.inDropDown("Type", ["text/html", "text/xml"], "text/html"),
     inSource = op.inStringEditor("Document", "xml"),
     inElement = op.inObject("Input Element", null, "element"),
     elementPort = op.outObject("Element", null, "element");

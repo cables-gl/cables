@@ -1,19 +1,19 @@
 const
     exe = op.inTrigger("exe"),
-    num = op.inValueInt("num"),
-    seed = op.inValueFloat("random seed", 1.5),
+    num = op.inInt("num"),
+    seed = op.inFloat("random seed", 1.5),
     round = op.inBool("round", false),
-    size = op.inValueFloat("size", 10),
-    scaleX = op.inValueFloat("scaleX", 1),
-    scaleY = op.inValueFloat("scaleY", 1),
-    scaleZ = op.inValueFloat("scaleZ", 1),
+    size = op.inFloat("size", 10),
+    scaleX = op.inFloat("scaleX", 1),
+    scaleY = op.inFloat("scaleY", 1),
+    scaleZ = op.inFloat("scaleZ", 1),
     trigger = op.outTrigger("trigger"),
     idx = op.outNumber("index"),
     rnd = op.outNumber("rnd"),
-    rotX = op.inValueSlider("Rotate X", 1),
-    rotY = op.inValueSlider("Rotate Y", 1),
-    rotZ = op.inValueSlider("Rotate Z", 1),
-    scrollX = op.inValue("Scroll X", 0);
+    rotX = op.inFloatSlider("Rotate X", 1),
+    rotY = op.inFloatSlider("Rotate Y", 1),
+    rotZ = op.inFloatSlider("Rotate Z", 1),
+    scrollX = op.inFloat("Scroll X", 0);
 
 op.setPortGroup("Area", [size, scaleX, scaleY, scaleZ]);
 op.setPortGroup("Rotation", [rotX, rotY, rotZ]);

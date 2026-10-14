@@ -3,7 +3,7 @@ const
     next = op.outTrigger("Next"),
     val = op.outNumber("Value");
 
-op.varName = op.inValueSelect("Variable", [], "", true);
+op.varName = op.inDropDown("Variable", [], "", true);
 
 const w = new CABLES.VarGetOpWrapper(op, "number", op.varName, null);
 

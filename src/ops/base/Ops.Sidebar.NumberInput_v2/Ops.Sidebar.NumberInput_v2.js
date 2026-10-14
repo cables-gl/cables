@@ -1,9 +1,9 @@
 // inputs
 const parentPort = op.inObject("Link");
 const labelPort = op.inString("Text", "Number");
-const inputValuePort = op.inValue("Input", 0);
+const inputValuePort = op.inFloat("Input", 0);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
-const defaultValuePort = op.inValue("Default", 0);
+const defaultValuePort = op.inFloat("Default", 0);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs

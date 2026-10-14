@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("exe"),
     geom = op.inObject("Geometry", null, "geometry"),
-    inScale = op.inValue("Scale", 1),
+    inScale = op.inFloat("Scale", 1),
     inLimit = op.inBool("Limit Instances", false),
     inNum = op.inInt("Num Instances", 1000),
     inBillboarding = op.inSwitch("Billboarding", ["Off", "Spherical", "Cylindrical"], "Off"),
@@ -14,9 +14,9 @@ const
     inTex5 = op.inTexture("TexCoord Texture", null, "texture"),
     inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
     inAlphaThresh = op.inFloatSlider("Ignore Alpha Less Than", 0.5),
-    inMulR = op.inValue("Multiply Pos X", 1),
-    inMulG = op.inValue("Multiply Pos Y", 1),
-    inMulB = op.inValue("Multiply Pos Z", 1),
+    inMulR = op.inFloat("Multiply Pos X", 1),
+    inMulG = op.inFloat("Multiply Pos Y", 1),
+    inMulB = op.inFloat("Multiply Pos Z", 1),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outNumber("Num");
 

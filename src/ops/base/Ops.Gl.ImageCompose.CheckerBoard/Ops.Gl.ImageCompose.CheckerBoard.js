@@ -1,8 +1,8 @@
 const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
-const lineSize = op.inValue("Size", 10);
-const inRotate = op.inValueSlider("Rotate", 0.0);
+const amount = op.inFloatSlider("Amount", 1);
+const lineSize = op.inFloat("Size", 10);
+const inRotate = op.inFloatSlider("Rotate", 0.0);
 const inCentered = op.inBool("Centered", false);
 
 const trigger = op.outTrigger("trigger");

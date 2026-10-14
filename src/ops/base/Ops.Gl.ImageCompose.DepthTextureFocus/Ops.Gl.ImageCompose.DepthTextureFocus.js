@@ -1,10 +1,10 @@
 const render = op.inTrigger("render");
 const image = op.inTexture("image");
-const farPlane = op.inValue("farplane", 100);
-const nearPlane = op.inValue("nearplane", 0.1);
+const farPlane = op.inFloat("farplane", 100);
+const nearPlane = op.inFloat("nearplane", 0.1);
 const inInv = op.inBool("Invert", false);
-const inFocus = op.inValueSlider("Center", 0.5);
-const inWidth = op.inValueSlider("Width", 0.2);
+const inFocus = op.inFloatSlider("Center", 0.5);
+const inWidth = op.inFloatSlider("Width", 0.2);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

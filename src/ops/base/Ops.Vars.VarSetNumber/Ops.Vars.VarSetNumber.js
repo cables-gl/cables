@@ -1,5 +1,5 @@
 op.varName = op.inDropDown("Variable", [], "", true);
-let val = op.inValueFloat("Value", 0);
+let val = op.inFloat("Value", 0);
 
 op.varName.onChange = updateName;
 val.onChange = update;

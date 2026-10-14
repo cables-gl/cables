@@ -1,8 +1,8 @@
 const
     trigger = op.inTrigger("Trigger"),
-    inX = op.inValueFloat("X"),
-    inY = op.inValueFloat("Y"),
-    inZ = op.inValueFloat("Z"),
+    inX = op.inFloat("X"),
+    inY = op.inFloat("Y"),
+    inZ = op.inFloat("Z"),
 
     active = op.inBool("Active", true),
     next = op.outTrigger("Next"),

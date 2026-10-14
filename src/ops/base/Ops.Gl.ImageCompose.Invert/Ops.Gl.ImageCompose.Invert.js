@@ -4,7 +4,7 @@ const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
 const maskInvert = op.inBool("Mask Invert", false);
 const mask = op.inTexture("Mask");
 
-const amount = op.inValueSlider("Amount", 1);
+const amount = op.inFloatSlider("Amount", 1);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

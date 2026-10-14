@@ -2,14 +2,14 @@ const render = op.inTrigger("Render");
 const next = op.outTrigger("Next");
 const textureOut = op.outTexture("texture");
 const str = op.inValueString("Text", "cables");
-const scale = op.inValue("Scale", 1);
+const scale = op.inFloat("Scale", 1);
 const inFont = op.inValueString("Font", "Arial");
-const align = op.inValueSelect("align", ["left", "center", "right"], "center");
-const valign = op.inValueSelect("vertical align", ["Top", "Middle", "Bottom"], "Middle");
-const lineHeight = op.inValue("Line Height", 1);
-const letterSpace = op.inValue("Letter Spacing");
+const align = op.inDropDown("align", ["left", "center", "right"], "center");
+const valign = op.inDropDown("vertical align", ["Top", "Middle", "Bottom"], "Middle");
+const lineHeight = op.inFloat("Line Height", 1);
+const letterSpace = op.inFloat("Letter Spacing");
 
-const loaded = op.outValue("Font Available", 0);
+const loaded = op.outNumber("Font Available", 0);
 
 var cgl = op.patch.cgl;
 
@@ -112,16 +112,16 @@ const uniTex = new CGL.Uniform(shader, "t", "tex", 0);
 const uniScale = new CGL.Uniform(shader, "f", "scale", scale);
 
 
-const r = op.inValueSlider("r", 1);
-const g = op.inValueSlider("g", 1);
-const b = op.inValueSlider("b", 1);
+const r = op.inFloatSlider("r", 1);
+const g = op.inFloatSlider("g", 1);
+const b = op.inFloatSlider("b", 1);
 r.setUiAttribs({ "colorPick": true });
 
 const runiform = new CGL.Uniform(shader, "f", "r", r);
 const guniform = new CGL.Uniform(shader, "f", "g", g);
 const buniform = new CGL.Uniform(shader, "f", "b", b);
 
-const a = op.inValueSlider("a");
+const a = op.inFloatSlider("a");
 a.uniform = new CGL.Uniform(shader, "f", "a", a);
 a.set(1.0);
 

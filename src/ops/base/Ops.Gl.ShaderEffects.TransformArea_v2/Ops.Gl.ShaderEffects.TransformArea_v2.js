@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     amount = op.inFloatSlider("Amount", 1),
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    inArea = op.inDropDown("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inViz = op.inBool("Visualize Area", false),
 
     inRadius = op.inFloat("Radius", 1),

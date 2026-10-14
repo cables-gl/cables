@@ -1,4 +1,4 @@
-const inArea = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element"], "Canvas");
+const inArea = op.inDropDown("Area", ["Canvas", "Document", "Parent Element"], "Canvas");
 const preventDefault = op.inBool("Prevent Default", false);
 const inEnable = op.inBool("Enabled", true);
 const onPress = op.outTrigger("On Press");

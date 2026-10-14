@@ -1,9 +1,9 @@
 op.name = "Lerp";
 
 let v1 = op.inFloat("Value 1");
-let amount = op.inValueSlider("Amount", 0.5);
+let amount = op.inFloatSlider("Amount", 0.5);
 let v2 = op.inFloat("Value 2", 1);
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 amount.onChange = update;
 v1.onChange = update;

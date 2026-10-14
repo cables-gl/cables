@@ -1,17 +1,17 @@
 const render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    inWidth = op.inValue("Width", 0.25),
-    inHeight = op.inValue("Height", 0.25),
-    inPosX = op.inValue("X", 0.5),
-    inPosY = op.inValue("Y", 0.5),
-    inRot = op.inValue("Rotate", 0),
-    inRoundness = op.inValueSlider("roundness", 0);
+    amount = op.inFloatSlider("Amount", 1),
+    inWidth = op.inFloat("Width", 0.25),
+    inHeight = op.inFloat("Height", 0.25),
+    inPosX = op.inFloat("X", 0.5),
+    inPosY = op.inFloat("Y", 0.5),
+    inRot = op.inFloat("Rotate", 0),
+    inRoundness = op.inFloatSlider("roundness", 0);
 
-const r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1.0);
+const r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1.0);
 r.setUiAttribs({ "colorPick": true });
 
 let trigger = op.outTrigger("trigger");

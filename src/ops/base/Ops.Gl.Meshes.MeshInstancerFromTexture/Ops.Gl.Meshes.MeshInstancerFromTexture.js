@@ -7,7 +7,7 @@ const
     inTex3 = op.inTexture("Scale Texture", null, "texture"),
     inTex4 = op.inTexture("Color Texture", null, "texture"),
     inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
-    inScale = op.inValue("Scale", 1),
+    inScale = op.inFloat("Scale", 1),
 
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outNumber("Num");

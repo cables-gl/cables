@@ -44,10 +44,10 @@ function doRender()
 }
 
 // rgba colors
-const r=op.inValueSlider("r",Math.random());
-const g=op.inValueSlider("g",Math.random());
-const b=op.inValueSlider("b",Math.random());
-const a=op.inValueSlider("a",1);
+const r=op.inFloatSlider("r",Math.random());
+const g=op.inFloatSlider("g",Math.random());
+const b=op.inFloatSlider("b",Math.random());
+const a=op.inFloatSlider("a",1);
 r.setUiAttribs({"colorPick":true});
 
 const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
@@ -179,10 +179,10 @@ colorizeTexture.onChange=function()
 
 // texture coords
 
-const diffuseRepeatX=op.inValue("diffuseRepeatX",1);
-const diffuseRepeatY=op.inValue("diffuseRepeatY",1);
-const diffuseOffsetX=op.inValue("Tex Offset X",0);
-const diffuseOffsetY=op.inValue("Tex Offset Y",0);
+const diffuseRepeatX=op.inFloat("diffuseRepeatX",1);
+const diffuseRepeatY=op.inFloat("diffuseRepeatY",1);
+const diffuseOffsetX=op.inFloat("Tex Offset X",0);
+const diffuseOffsetY=op.inFloat("Tex Offset Y",0);
 
 const diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
 const diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);

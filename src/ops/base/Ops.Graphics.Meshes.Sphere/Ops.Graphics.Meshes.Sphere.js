@@ -1,6 +1,6 @@
 const render = op.inTrigger("render");
-const inStacks = op.inValueInt("stacks", 32);
-const inSlices = op.inValueInt("slices", 32);
+const inStacks = op.inInt("stacks", 32);
+const inSlices = op.inInt("slices", 32);
 const inRadius = op.inFloat("radius");
 const inRender = op.inBool("Render", true);
 const trigger = op.outTrigger("trigger");

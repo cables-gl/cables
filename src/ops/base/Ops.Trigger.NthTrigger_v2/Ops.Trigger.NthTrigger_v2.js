@@ -2,7 +2,7 @@ let DEFAULT_NTH = 5;
 
 // inputs
 let exePort = op.inTriggerButton("Execute");
-let nthPort = op.inValue("Nth", DEFAULT_NTH);
+let nthPort = op.inFloat("Nth", DEFAULT_NTH);
 
 // outputs
 let triggerPort = op.outTrigger("Next");

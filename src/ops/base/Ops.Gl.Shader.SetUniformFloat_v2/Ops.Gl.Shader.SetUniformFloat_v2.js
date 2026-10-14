@@ -2,11 +2,11 @@
 
 const
     inRender = op.inTrigger("Render"),
-    inSelect = op.inValueSelect("Uniform"),
-    inX = op.inValue("X", 1),
-    inY = op.inValue("Y", 1),
-    inZ = op.inValue("Z", 1),
-    inW = op.inValue("W", 1),
+    inSelect = op.inDropDown("Uniform"),
+    inX = op.inFloat("X", 1),
+    inY = op.inFloat("Y", 1),
+    inZ = op.inFloat("Z", 1),
+    inW = op.inFloat("W", 1),
     next = op.outTrigger("Next"),
     outType = op.outString("Type"),
     outFound = op.outBoolNum("Found");
@@ -68,7 +68,7 @@ function setupUniform()
 
         if (!uniform)
         {
-            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+            op.setUiError("nouni", "uniform unknown", 1);// op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
             outFound.set(false);
         }
         else

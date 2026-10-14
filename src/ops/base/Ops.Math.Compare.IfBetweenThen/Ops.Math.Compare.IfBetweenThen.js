@@ -1,8 +1,8 @@
 const
     exe = op.inTrigger("exe"),
-    number = op.inValue("number", 0),
-    min = op.inValue("min", 0),
-    max = op.inValue("max", 1),
+    number = op.inFloat("number", 0),
+    min = op.inFloat("min", 0),
+    max = op.inFloat("max", 1),
     triggerThen = op.outTrigger("then"),
     triggerElse = op.outTrigger("else"),
     outBetween = op.outBoolNum("bs between");

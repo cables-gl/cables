@@ -3,14 +3,14 @@ const USE_LEFT_PAD_DEFAULT = false;
 // var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.Port.TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 const filename = op.inValueString("url");
 const leftPadFilename = op.inBool("Left Pad", USE_LEFT_PAD_DEFAULT);
-const numberLengthPort = op.inValue("Num Digits", 3);
+const numberLengthPort = op.inFloat("Num Digits", 3);
 numberLengthPort.setUiAttribs({ "hidePort": !USE_LEFT_PAD_DEFAULT, "greyout": !USE_LEFT_PAD_DEFAULT });
 
-const indexStart = op.inValueInt("Index Start");
-const indexEnd = op.inValueInt("Index End");
+const indexStart = op.inInt("Index Start");
+const indexEnd = op.inInt("Index End");
 
-const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
-const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+const tfilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"]);
+const wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 
@@ -20,7 +20,7 @@ const arrOut = op.outArray("TextureArray");
 const width = op.addOutPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
 const height = op.addOutPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
 const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.Port.TYPE_VALUE));
-const ratio = op.outValue("Aspect Ratio");
+const ratio = op.outNumber("Aspect Ratio");
 
 indexEnd.set(10);
 flip.set(false);
@@ -100,22 +100,22 @@ function loadImage(i, nocache)
                 if (err)
                 {
                     setTempTexture();
-                    op.uiAttr({ "error": "could not load texture \"" + filename.get() + "\"" });
+                    op.setUiAttribs({ "error": "could not load texture \"" + filename.get() + "\"" });
                     return;
                 }
-                else op.uiAttr({ "error": null });
+                else op.setUiAttribs({ "error": null });
                 // textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
                 ratio.set(tex.width / tex.height);
 
                 arr[i - parseInt(indexStart.get())] = tex;
-                if (!tex.isPowerOfTwo()) op.uiAttr(
+                if (!tex.isPowerOfTwo()) op.setUiAttribs(
                     {
                         "hint": "texture dimensions not power of two! - texture filtering will not work.",
                         "warning": null
                     });
-                else op.uiAttr(
+                else op.setUiAttribs(
                     {
                         "hint": null,
                         "warning": null

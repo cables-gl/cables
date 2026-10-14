@@ -1,7 +1,7 @@
 const
-    x = op.inValue("X"),
-    y = op.inValue("Y"),
-    z = op.inValue("Z"),
+    x = op.inFloat("X"),
+    y = op.inFloat("Y"),
+    z = op.inFloat("Z"),
     l = op.outNumber("Length");
 
 x.onChange =

@@ -1,5 +1,5 @@
 const
-    inNum = op.inValueFloat("Number"),
+    inNum = op.inFloat("Number"),
     inMode = op.inSwitch("Mode", ["Ceil", "Floor"], "Ceil"),
     result = op.outNumber("Result");
 

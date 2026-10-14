@@ -1,7 +1,7 @@
 const
     dataIn = op.inStringEditor("Base64 / Data URI", ""),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     unpackAlpha = op.inBool("Pre Multiplied Alpha", false),
     textureOut = op.outTexture("Texture"),

@@ -5,7 +5,7 @@ const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 const image = op.inTexture("image");
 
 const imageAlpha = op.inTexture("imageAlpha");
-const alphaSrc = op.inValueSelect("alphaSrc", ["alpha channel", "luminance"]);
+const alphaSrc = op.inDropDown("alphaSrc", ["alpha channel", "luminance"]);
 const removeAlphaSrc = op.inBool("removeAlphaSrc");
 
 const invAlphaChannel = op.inBool("invert alpha channel");
@@ -71,10 +71,10 @@ alphaSrc.set("alpha channel");
     //
     // texture transform
     //
-    const scale = op.inValueFloat("scale");
-    const posX = op.inValueFloat("pos x");
-    const posY = op.inValueFloat("pos y");
-    const rotate = op.inValueFloat("rotate");
+    const scale = op.inFloat("scale");
+    const posX = op.inFloat("pos x");
+    const posY = op.inFloat("pos y");
+    const rotate = op.inFloat("rotate");
 
     scale.set(1.0);
 

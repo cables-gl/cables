@@ -1,7 +1,7 @@
 const
     inEle = op.inObject("Element"),
     inProperty = op.inValueString("Property"),
-    inValue = op.inValue("Value"),
+    inValue = op.inFloat("Value"),
     inValueSuffix = op.inValueString("Value Suffix", "px"),
     outEle = op.outObject("HTML Element");
 

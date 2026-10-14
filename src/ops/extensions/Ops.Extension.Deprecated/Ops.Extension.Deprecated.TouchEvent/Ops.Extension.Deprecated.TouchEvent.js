@@ -10,10 +10,10 @@ let validEvents = [
 let eventPort = op.inObject("Event");
 
 // outputs
-let finger1XPort = op.outValue("Finger 1 X");
-let finger1YPort = op.outValue("Finger 1 Y");
-let finger2XPort = op.outValue("Finger 2 X");
-let finger2YPort = op.outValue("Finger 2 Y");
+let finger1XPort = op.outNumber("Finger 1 X");
+let finger1YPort = op.outNumber("Finger 1 Y");
+let finger2XPort = op.outNumber("Finger 2 X");
+let finger2YPort = op.outNumber("Finger 2 Y");
 
 eventPort.onChange = update;
 

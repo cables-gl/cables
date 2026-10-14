@@ -17,16 +17,16 @@ let sizePort = op.inFloat("Size", DEFAULT_SIZE);
 
 // outputs
 let triggerItemPort = op.outTrigger("Item Trigger");
-let indexPort = op.outValue("Index");
-let positionPort = op.outValue("Position");
+let indexPort = op.outNumber("Index");
+let positionPort = op.outNumber("Position");
 // var beginningReachedPort = op.outTrigger('Beginning Reached');
 // var endReachedPort = op.outTrigger('End Reached');
-// var distBeginningPort = op.outValue('Item Dist Beginning');
-let distCenterPort = op.outValue("Norm Position");
-// var distEndPort = op.outValue('Item Dist End');
+// var distBeginningPort = op.outNumber('Item Dist Beginning');
+let distCenterPort = op.outNumber("Norm Position");
+// var distEndPort = op.outNumber('Item Dist End');
 let nextPort = op.outTrigger("Next");
-let frontIndexPort = op.outValue("Front Index");
-let frontPercentPort = op.outValue("Front Percentage");
+let frontIndexPort = op.outNumber("Front Index");
+let frontPercentPort = op.outNumber("Front Percentage");
 
 // variables
 let positions = [];

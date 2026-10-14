@@ -1,6 +1,6 @@
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
-const outNumKeys = op.outValue("Num Keys");
+const outNumKeys = op.outNumber("Num Keys");
 let channel = this.addInPort(new CABLES.Port(this, "channel"));
 
 let q = quat.create();

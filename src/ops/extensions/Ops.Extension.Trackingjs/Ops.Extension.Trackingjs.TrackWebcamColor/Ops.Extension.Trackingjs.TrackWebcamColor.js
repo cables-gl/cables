@@ -5,9 +5,9 @@ const
 
     inResize = op.inFloatSlider("Resize Video", 0.3),
 
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
 
     outArrPos = op.outArray("Positions"),
     outArrSizes = op.outArray("Sizes");

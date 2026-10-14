@@ -607,17 +607,17 @@ let shouldScale = true;
 const shapes = op.inDropDown("shapes", parametricBodies.map((bod) => { return bod.title; }));
 
 const render = op.inTrigger("render");
-const inSegmentsU = op.inValueInt("u Segments", 48);
-const inSegmentsV = op.inValueInt("v Segments", 48);
+const inSegmentsU = op.inInt("u Segments", 48);
+const inSegmentsV = op.inInt("v Segments", 48);
 const multByPiU = op.inBool("Multiple of PI - u", false);
-const inMinU = op.inValueFloat("uMin", -2);
-const inMaxU = op.inValueFloat("uMax", 2);
-const inDisplaceU = op.inValueFloat("Displace U", 0);
+const inMinU = op.inFloat("uMin", -2);
+const inMaxU = op.inFloat("uMax", 2);
+const inDisplaceU = op.inFloat("Displace U", 0);
 
 const multByPiV = op.inBool("Multiple of PI - v", false);
-const inMinV = op.inValueFloat("vMin", -1);
-const inMaxV = op.inValueFloat("vMax", 1);
-const inDisplaceV = op.inValueFloat("Displace V", 0);
+const inMinV = op.inFloat("vMin", -1);
+const inMaxV = op.inFloat("vMax", 1);
+const inDisplaceV = op.inFloat("Displace V", 0);
 
 op.setPortGroup("Segments", [inSegmentsU, inSegmentsV]);
 op.setPortGroup("V range", [multByPiV, inMaxV, inMinV, inDisplaceV]);

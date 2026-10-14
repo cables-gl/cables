@@ -18,7 +18,7 @@ const noseShape = op.outArray("Nose Shape");
 const lipsOuter = op.outArray("Lips Outer");
 const lipsInner = op.outArray("Lips Inner");
 const outPositions = op.outArray("Positions 2D");
-const outScore = op.outValue("Score");
+const outScore = op.outNumber("Score");
 
 let started = false;
 

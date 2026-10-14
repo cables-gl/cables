@@ -1,9 +1,9 @@
 const
-    inTime = op.inValue("Time"),
+    inTime = op.inFloat("Time"),
     inType = op.inSwitch("Unit", ["Seconds", "Frames"], "Seconds"),
-    fps = op.inValueFloat("FPS", 10),
-    numX = op.inValueFloat("Num X", 4),
-    numY = op.inValueFloat("Num Y", 4),
+    fps = op.inFloat("FPS", 10),
+    numX = op.inFloat("Num X", 4),
+    numY = op.inFloat("Num Y", 4),
     maxFrames = op.inInt("Max Frames", 0),
 
     texRepeatX = op.outNumber("Repeat X"),

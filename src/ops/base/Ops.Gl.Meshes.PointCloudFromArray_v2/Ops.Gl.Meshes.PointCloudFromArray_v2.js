@@ -1,11 +1,11 @@
 const
     exe = op.inTrigger("exe"),
     arr = op.inArray("Array", 3),
-    numPoints = op.inValueInt("Num Points"),
+    numPoints = op.inInt("Num Points"),
     outTrigger = op.outTrigger("Trigger out"),
     outGeom = op.outObject("Geometry"),
     pTexCoordRand = op.inBool("Scramble Texcoords", true),
-    seed = op.inValue("Seed", 1),
+    seed = op.inFloat("Seed", 1),
     inCoords = op.inArray("Coordinates", 2),
     inPointSizes = op.inArray("Point sizes", 1),
     vertCols = op.inArray("Vertex Colors", 4);

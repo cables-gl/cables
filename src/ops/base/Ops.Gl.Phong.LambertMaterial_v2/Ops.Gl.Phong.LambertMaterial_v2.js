@@ -1,10 +1,10 @@
 const LIGHT_TYPES = { "ambient": 0, "point": 1, "directional": 2, "spot": 3 };
 const
     execute = op.inTrigger("Execute"),
-    r = op.inValueSlider("Diffuse R", Math.random()),
-    g = op.inValueSlider("Diffuse G", Math.random()),
-    b = op.inValueSlider("Diffuse B", Math.random()),
-    a = op.inValueSlider("Diffuse A", 1.0);
+    r = op.inFloatSlider("Diffuse R", Math.random()),
+    g = op.inFloatSlider("Diffuse G", Math.random()),
+    b = op.inFloatSlider("Diffuse B", Math.random()),
+    a = op.inFloatSlider("Diffuse A", 1.0);
 
 r.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Diffuse Color", [r, g, b, a]);

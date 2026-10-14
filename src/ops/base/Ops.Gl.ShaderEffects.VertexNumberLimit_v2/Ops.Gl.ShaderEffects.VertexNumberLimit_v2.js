@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    limitMin = op.inValueInt("Min", 0),
-    limitMax = op.inValueInt("Max", 1000),
+    limitMin = op.inInt("Min", 0),
+    limitMax = op.inInt("Max", 1000),
     inv = op.inBool("Invert", false);
 
 const trigger = op.outTrigger("Next");

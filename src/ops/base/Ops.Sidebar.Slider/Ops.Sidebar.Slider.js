@@ -4,23 +4,23 @@ const STEP_DEFAULT = 0.00001;
 // inputs
 const parentPort = op.inObject("link");
 const labelPort = op.inValueString("Text", "Slider");
-const minPort = op.inValue("Min", 0);
-const maxPort = op.inValue("Max", 1);
-const stepPort = op.inValue("Step", STEP_DEFAULT);
+const minPort = op.inFloat("Min", 0);
+const maxPort = op.inFloat("Max", 1);
+const stepPort = op.inFloat("Step", STEP_DEFAULT);
 
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 
-const inputValuePort = op.inValue("Input", 0.5);
+const inputValuePort = op.inFloat("Input", 0.5);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const reset = op.inTriggerButton("Reset");
 
-const defaultValuePort = op.inValue("Default", 0.5);
+const defaultValuePort = op.inFloat("Default", 0.5);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("childs");
-const valuePort = op.outValue("Result", defaultValuePort.get());
+const valuePort = op.outNumber("Result", defaultValuePort.get());
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 op.setPortGroup("Range", [minPort, maxPort, stepPort]);

@@ -43,7 +43,7 @@ let baseFrequencyPort = op.inFloat("Base Frequency", BASE_FREQUENCY_DEFAULT);
 let octavesPort = op.inFloat("Octaves", OCTAVES_DEFAULT);
 let attackPort = op.inValueString("Attack", ATTACK_DEFAULT);
 let decayPort = op.inFloat("Decay", DECAY_DEFAULT);
-let sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
+let sustainPort = op.inFloatSlider("Sustain", SUSTAIN_DEFAULT);
 let releasePort = op.inValueString("Release", RELEASE_DEFAULT);
 let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);

@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("Render"),
-    time = op.inValue("time", 0),
-    speedX = op.inValue("SpeedX", 4),
-    speedY = op.inValue("SpeedY", 8),
+    time = op.inFloat("time", 0),
+    speedX = op.inFloat("SpeedX", 4),
+    speedY = op.inFloat("SpeedY", 8),
 
-    repeatX = op.inValue("RepeatX", 11),
-    repeatY = op.inValue("RepeatY", 11),
-    mul = op.inValue("Multiply", 0.01),
+    repeatX = op.inFloat("RepeatX", 11),
+    repeatY = op.inFloat("RepeatY", 11),
+    mul = op.inFloat("Multiply", 0.01),
     maskTex = op.inTexture("Mask"),
 
     trigger = op.outTrigger("Trigger");

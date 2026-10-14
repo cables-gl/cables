@@ -35,13 +35,13 @@ let gp1Matrix = mat4.create();
 let qMat = mat4.create();
 let frameData = new VRFrameData();
 
-let hasDisplay = op.outValue("hasDisplay");
-let hasPose = op.outValue("hasPose");
-let hasOrientation = op.outValue("hasorientation");
-let isPresenting = op.outValue("is presenting");
+let hasDisplay = op.outNumber("hasDisplay");
+let hasPose = op.outNumber("hasPose");
+let hasOrientation = op.outNumber("hasorientation");
+let isPresenting = op.outNumber("is presenting");
 
 let triggerAfter = op.addOutPort(new CABLES.Port(op, "trigger After", CABLES.Port.TYPE_FUNCTION));
-let outDeviceString = op.outValue("Device");
+let outDeviceString = op.outNumber("Device");
 
 let pose = null;
 
@@ -251,8 +251,8 @@ if (navigator.getVRDisplays)
         }
 
         info += " found input devices <br/>";
-        op.uiAttr({ "info": info });
-        op.uiAttr({ "warning": "" });
+        op.setUiAttribs({ "info": info });
+        op.setUiAttribs({ "warning": "" });
         if (window.gui) op.refreshParams();
 
         // document.getElementById("glcanvas").ondblclick = requestVrFullscreen;
@@ -263,7 +263,7 @@ if (navigator.getVRDisplays)
 }
 else
 {
-    op.uiAttr({ "warning": "browser has no webvr api" });
+    op.setUiAttribs({ "warning": "browser has no webvr api" });
 }
 
 webvrbutton();

@@ -1,6 +1,6 @@
 const inArrayPort = op.inArray("Input Array"),
-    beginPort = op.inValueInt("Begin Index", 0),
-    sizePort = op.inValueInt("Chunk Size", 1),
+    beginPort = op.inInt("Begin Index", 0),
+    sizePort = op.inInt("Chunk Size", 1),
     circularPort = op.inBool("Circular", false),
     outArrayPort = op.outArray("Output Array"),
     outArrayLength = op.outNumber("Array length");

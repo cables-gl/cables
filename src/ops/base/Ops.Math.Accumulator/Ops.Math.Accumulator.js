@@ -1,8 +1,8 @@
 const
     exe = op.inTrigger("Trigger in"),
-    inAddNumber = op.inValueFloat("Add to number", 0.0),
-    inMultiplier = op.inValueFloat("Multiplier to add number", 1.0),
-    inSetNumber = op.inValueFloat("Default Value", 1.0),
+    inAddNumber = op.inFloat("Add to number", 0.0),
+    inMultiplier = op.inFloat("Multiplier to add number", 1.0),
+    inSetNumber = op.inFloat("Default Value", 1.0),
     inSet = op.inTriggerButton("Set Default Value"),
     outNumber = op.outNumber("Current value");
 

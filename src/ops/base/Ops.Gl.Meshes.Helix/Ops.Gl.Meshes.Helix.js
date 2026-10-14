@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
     draw = op.inBool("Draw", true),
-    segments = op.inValue("Segments", 40),
-    freq = op.inValue("Frequency", 1),
-    radius = op.inValue("Radius", 1),
-    radiusEnd = op.inValue("Radius End", 1),
-    height = op.inValue("Height"),
+    segments = op.inFloat("Segments", 40),
+    freq = op.inFloat("Frequency", 1),
+    radius = op.inFloat("Radius", 1),
+    radiusEnd = op.inFloat("Radius End", 1),
+    height = op.inFloat("Height"),
     next = op.outTrigger("Next"),
     outPoints = op.outArray("Points");
 

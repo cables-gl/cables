@@ -1,9 +1,9 @@
 const
-    inNum = op.inValueInt("Num Quadruplets", 100),
-    inX = op.inValueFloat("X", 1),
-    inY = op.inValueFloat("Y", 1),
-    inZ = op.inValueFloat("Z", 1),
-    inW = op.inValueFloat("W", 1),
+    inNum = op.inInt("Num Quadruplets", 100),
+    inX = op.inFloat("X", 1),
+    inY = op.inFloat("Y", 1),
+    inZ = op.inFloat("Z", 1),
+    inW = op.inFloat("W", 1),
     outArr = op.outArray("Array", null, 4),
     outTotalPoints = op.outNumber("Total Quadruplets"),
     outArrayLength = op.outNumber("Array length");

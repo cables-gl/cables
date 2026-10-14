@@ -12,7 +12,7 @@ let triggerPort = op.addInPort(new CABLES.Port(this, "Trigger Arrack Release", C
 let notePort = op.inValueString("Note", NOTE_DEFAULT); // frequency also works
 let durationPort = op.inValueString("Duration", DURATION_DEFAULT);
 let timePort = op.inValueString("Time", TIME_DEFAULT);
-let velocityPort = op.inValueSlider("Velocity", VELOCITY_DEFAULT);
+let velocityPort = op.inFloatSlider("Velocity", VELOCITY_DEFAULT);
 
 // change listeners
 triggerPort.onTriggered = function ()

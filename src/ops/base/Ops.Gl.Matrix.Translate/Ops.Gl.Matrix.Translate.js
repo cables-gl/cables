@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z");
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z");
 
 const vec = vec3.create();
 op.setUiAxisPorts(x, y, z);

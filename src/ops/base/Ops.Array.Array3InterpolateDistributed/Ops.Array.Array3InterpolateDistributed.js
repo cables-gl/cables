@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Update"),
     inArr1 = op.inArray("Array 1", 3),
     inArr2 = op.inArray("Array 2", 3),
-    inProgress = op.inValueSlider("Progress"),
+    inProgress = op.inFloatSlider("Progress"),
     arrOut = op.outArray("Result"),
     outArrayLength = op.outNumber("Array length");
 

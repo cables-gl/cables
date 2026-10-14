@@ -1,6 +1,6 @@
 const
-    inX = op.inValue("X"),
-    inY = op.inValue("Y"),
+    inX = op.inFloat("X"),
+    inY = op.inFloat("Y"),
     outX = op.outNumber("Result X"),
     outY = op.outNumber("Result Y"),
     range = op.inBool("-1 to 1");

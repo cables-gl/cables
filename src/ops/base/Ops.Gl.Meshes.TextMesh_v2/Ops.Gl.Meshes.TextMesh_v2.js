@@ -2,12 +2,12 @@ const
     render = op.inTrigger("Render"),
     str = op.inString("Text", "cables"),
     scaleText = op.inFloat("Scale Text", 1),
-    scale = op.inValueFloat("Scale", 1),
+    scale = op.inFloat("Scale", 1),
     inFont = op.inString("Font", "Arial"),
-    align = op.inValueSelect("align", ["left", "center", "right"], "center"),
-    valign = op.inValueSelect("vertical align", ["Top", "Middle", "Bottom"], "Middle"),
-    lineHeight = op.inValueFloat("Line Height", 1),
-    letterSpace = op.inValueFloat("Letter Spacing"),
+    align = op.inDropDown("align", ["left", "center", "right"], "center"),
+    valign = op.inDropDown("vertical align", ["Top", "Middle", "Bottom"], "Middle"),
+    lineHeight = op.inFloat("Line Height", 1),
+    letterSpace = op.inFloat("Letter Spacing"),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "mipmap"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
@@ -161,10 +161,10 @@ const uniTexMulMask = new CGL.Uniform(shader, "t", "texMulMask", 2);
 const uniScale = new CGL.Uniform(shader, "f", "scale", scale);
 
 const
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
+    a = op.inFloatSlider("a", 1),
     runiform = new CGL.Uniform(shader, "f", "r", r),
     guniform = new CGL.Uniform(shader, "f", "g", g),
     buniform = new CGL.Uniform(shader, "f", "b", b),

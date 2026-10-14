@@ -3,32 +3,32 @@ const
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
     maximize = op.inBool("Maximize Size", true),
-    inFontSize = op.inValueFloat("fontSize", 30),
-    lineDistance = op.inValueFloat("line distance", 1),
-    limitLines = op.inValueInt("Limit Lines", 0),
-    texWidth = op.inValueInt("texture width", 512),
-    texHeight = op.inValueInt("texture height", 128),
+    inFontSize = op.inFloat("fontSize", 30),
+    lineDistance = op.inFloat("line distance", 1),
+    limitLines = op.inInt("Limit Lines", 0),
+    texWidth = op.inInt("texture width", 512),
+    texHeight = op.inInt("texture height", 128),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
 
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
-    border = op.inValueFloat("border", 0),
+    border = op.inFloat("border", 0),
     cachetexture = op.inBool("Reuse Texture", true),
 
     drawMesh = op.inBool("Draw Mesh", true),
-    meshScale = op.inValueFloat("Scale Mesh", 1.0),
+    meshScale = op.inFloat("Scale Mesh", 1.0),
     renderHard = op.inBool("Hard Edges", false),
 
     inOpacity = op.inFloatSlider("Opacity", 1),
 
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
 
     next = op.outTrigger("Next"),
 
-    outRatio = op.outValue("Ratio"),
+    outRatio = op.outNumber("Ratio"),
     textureOut = op.outTexture("texture"),
     outAspect = op.outNumber("Aspect", 1);
 

@@ -1,5 +1,5 @@
 var inStr=op.inValueString("String");
-var result=op.outValue("Result");
+var result=op.outNumber("Result");
 
 inStr.onChange=
 function()

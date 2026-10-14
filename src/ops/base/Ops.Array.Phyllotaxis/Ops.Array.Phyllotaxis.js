@@ -1,7 +1,7 @@
 const exec = op.inTrigger("Render");
-const inNum = op.inValueInt("Num", 400);
-const inC = op.inValue("Scale", 0.1);
-const inI = op.inValue("Param", 100);
+const inNum = op.inInt("Num", 400);
+const inC = op.inFloat("Scale", 0.1);
+const inI = op.inFloat("Param", 100);
 
 const outArr = op.outArray("Coordinates");
 

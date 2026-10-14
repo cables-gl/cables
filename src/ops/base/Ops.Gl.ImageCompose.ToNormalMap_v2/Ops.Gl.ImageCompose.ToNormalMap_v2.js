@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    strength = op.inValue("Strength", 4),
-    sizeMul = op.inValue("Step Multiplier", 1);
+    strength = op.inFloat("Strength", 4),
+    sizeMul = op.inFloat("Step Multiplier", 1);
 
 const
     cgl = op.patch.cgl,

@@ -1,5 +1,5 @@
-const val=op.inValue("Value",1);
-const num=op.inValueInt("Num",4);
+const val=op.inFloat("Value",1);
+const num=op.inInt("Num",4);
 const out=op.outString("String");
 
 val.onChange=update;

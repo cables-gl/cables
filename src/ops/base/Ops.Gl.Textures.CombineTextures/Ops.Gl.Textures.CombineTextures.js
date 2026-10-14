@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    twrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     inSize = op.inSwitch("Size", ["Biggest", "Smallest", "R", "G", "B", "A"], "Biggest"),

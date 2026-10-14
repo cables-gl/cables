@@ -1,7 +1,7 @@
 const NUM_PORTS = 16;
 
 const
-    inIndex = op.inValueInt("Trigger Index", 0),
+    inIndex = op.inInt("Trigger Index", 0),
     triggerPorts = [],
     outTrig = op.outTrigger("Trigger out");
 

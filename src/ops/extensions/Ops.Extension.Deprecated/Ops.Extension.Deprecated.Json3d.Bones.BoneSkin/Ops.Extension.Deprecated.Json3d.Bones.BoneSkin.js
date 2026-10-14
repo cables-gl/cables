@@ -1,7 +1,7 @@
 // https://www.khronos.org/opengl/wiki/Skeletal_Animation
 
 const render = op.inTrigger("Render");
-const inMeshIndex = op.inValueInt("MeshIndex");
+const inMeshIndex = op.inInt("MeshIndex");
 const inGeom = op.inObject("Geometry");
 const draw = op.inBool("draw", true);
 const next = op.outTrigger("Next");

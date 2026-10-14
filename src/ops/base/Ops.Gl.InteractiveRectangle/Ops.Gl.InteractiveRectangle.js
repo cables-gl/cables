@@ -2,36 +2,36 @@
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
 
-const width = op.inValue("width", 1);
-const height = op.inValue("height", 1);
+const width = op.inFloat("width", 1);
+const height = op.inFloat("height", 1);
 
 const inId = op.inValueString("id");
 const classPort = op.inValueString("Class");
 
-const pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]);
-const pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]);
+const pivotX = op.inDropDown("pivot x", ["center", "left", "right"]);
+const pivotY = op.inDropDown("pivot y", ["center", "top", "bottom"]);
 
-const axis = op.inValueSelect("axis", ["xy", "xz"]);
+const axis = op.inDropDown("axis", ["xy", "xz"]);
 
 const isInteractive = op.inBool("Is Interactive", true);
 const renderRect = op.inBool("Render Rectangle", true);
 const divVisible = op.inBool("Show Boundings", true);
-const cursorPort = op.inValueSelect("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer");
+const cursorPort = op.inDropDown("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer");
 const active = op.inBool("Render", true);
 
 
 const geomOut = op.outObject("geometry");
 geomOut.ignoreValueSerialize = true;
 
-const mouseOver = op.outValue("Pointer Hover", false);
-const mouseDown = op.outValue("Pointer Down", false);
-const outX = op.outValue("Pointer X");
-const outY = op.outValue("Pointer Y");
+const mouseOver = op.outNumber("Pointer Hover", false);
+const mouseDown = op.outNumber("Pointer Down", false);
+const outX = op.outNumber("Pointer X");
+const outY = op.outNumber("Pointer Y");
 
-const outTop = op.outValue("Top");
-const outLeft = op.outValue("Left");
-const outRight = op.outValue("Right");
-const outBottom = op.outValue("Bottom");
+const outTop = op.outNumber("Top");
+const outLeft = op.outNumber("Left");
+const outRight = op.outNumber("Right");
+const outBottom = op.outNumber("Bottom");
 
 const mouseClick = op.outTrigger("Left Click");
 

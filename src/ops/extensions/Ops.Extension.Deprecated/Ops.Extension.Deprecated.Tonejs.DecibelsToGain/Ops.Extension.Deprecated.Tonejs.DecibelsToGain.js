@@ -1,5 +1,5 @@
 let decibelsPort = op.inFloat("Decibels");
-let gainPort = op.outValue("Gain");
+let gainPort = op.outNumber("Gain");
 
 decibelsPort.onChange = update;
 

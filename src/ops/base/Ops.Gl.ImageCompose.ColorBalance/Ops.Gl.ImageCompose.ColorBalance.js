@@ -1,9 +1,9 @@
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
-const tone = op.inValueSelect("Tone", ["Highlights", "Midtones", "Shadows"], "Highlights");
-const r = op.inValue("r");
-const g = op.inValue("g");
-const b = op.inValue("b");
+const tone = op.inDropDown("Tone", ["Highlights", "Midtones", "Shadows"], "Highlights");
+const r = op.inFloat("r");
+const g = op.inFloat("g");
+const b = op.inFloat("b");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);

@@ -1,5 +1,5 @@
 const
-    speed = op.inValue("Speed", 1),
+    speed = op.inFloat("Speed", 1),
     preventScroll = op.inBool("prevent scroll", true),
     flip = op.inBool("Flip Direction"),
     inSimpleIncrement = op.inBool("Simple Delta", true),

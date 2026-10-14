@@ -4,7 +4,7 @@ const value1Port = op.inFloat("Value 1", DEFAULT_VALUE);
 const value2Port = op.inFloat("Value 2", DEFAULT_VALUE);
 
 // outputs
-const resultPort = op.outValue("Maximum", DEFAULT_VALUE);
+const resultPort = op.outNumber("Maximum", DEFAULT_VALUE);
 
 // listeners
 value1Port.onChange = update;

@@ -3,8 +3,8 @@ const
     inActive = op.inBool("Active", true),
     inGenTex = op.inBool("Generate Texture", true),
     inInputDevices = op.inDropDown("Webcam Input", ["Default"], "Default"),
-    inWidth = op.inValueInt("Requested Width", 1280),
-    inHeight = op.inValueInt("Requested Height", 720),
+    inWidth = op.inInt("Requested Width", 1280),
+    inHeight = op.inInt("Requested Height", 720),
 
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),

@@ -70,12 +70,12 @@ function loadImage(_i, _url, nocache, cb)
             if (err)
             {
                 const errMsg = "could not load texture \"" + url + "\"";
-                op.uiAttr({ "error": errMsg });
+                op.setUiAttribs({ "error": errMsg });
                 op.warn("[TextureArrayLoader] " + errMsg);
                 if (cb)cb();
                 return;
             }
-            else op.uiAttr({ "error": null });
+            else op.setUiAttribs({ "error": null });
 
             width.set(tex.width);
             height.set(tex.height);

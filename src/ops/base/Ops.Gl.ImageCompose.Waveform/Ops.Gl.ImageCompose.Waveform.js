@@ -1,21 +1,21 @@
 const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
-const waveSelect = op.inValueSelect("Waveform", ["Sine", "Sawtooth", "Triangle", "Square"], "Sine");
+const amount = op.inFloatSlider("Amount", 1);
+const waveSelect = op.inDropDown("Waveform", ["Sine", "Sawtooth", "Triangle", "Square"], "Sine");
 
-const amplitude = op.inValueSlider("Amplitude", 0.5);
-const frequency = op.inValue("Frequency", 2.0);
-const lineWidth = op.inValueSlider("Line Width", 0.1);
-const lineGlow = op.inValueSlider("Line Glow", 0.1);
+const amplitude = op.inFloatSlider("Amplitude", 0.5);
+const frequency = op.inFloat("Frequency", 2.0);
+const lineWidth = op.inFloatSlider("Line Width", 0.1);
+const lineGlow = op.inFloatSlider("Line Glow", 0.1);
 const invertCol = op.inBool("invert color", false);
 const solidFill = op.inBool("Solid fill", false);
-const offsetX = op.inValueSlider("Offset X", 0.0);
-const offsetY = op.inValueSlider("Offset Y", 0.5);
-const rotate = op.inValueSlider("Rotate", 0.0);
+const offsetX = op.inFloatSlider("Offset X", 0.0);
+const offsetY = op.inFloatSlider("Offset Y", 0.5);
+const rotate = op.inFloatSlider("Rotate", 0.0);
 
-const r = op.inValueSlider("r", 1.0);
-const g = op.inValueSlider("g", 1.0);
-const b = op.inValueSlider("b", 1.0);
+const r = op.inFloatSlider("r", 1.0);
+const g = op.inFloatSlider("g", 1.0);
+const b = op.inFloatSlider("b", 1.0);
 
 const trigger = op.outTrigger("trigger");
 

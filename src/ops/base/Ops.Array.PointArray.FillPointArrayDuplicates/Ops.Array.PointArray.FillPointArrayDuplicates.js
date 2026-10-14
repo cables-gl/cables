@@ -1,6 +1,6 @@
 const
     inArr = op.inArray("Array"),
-    inNumPoints = op.inValueInt("Num Elements", 1000),
+    inNumPoints = op.inInt("Num Elements", 1000),
     inCalc = op.inTriggerButton("Calculate"),
     outArr = op.outArray("Result");
 op.toWorkPortsNeedToBeLinked(inArr);

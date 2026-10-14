@@ -1,8 +1,8 @@
 const
     cgl = op.patch.cgl,
     inCanvas = op.inObject("canvas"),
-    inTextureFilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear"),
-    inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    inTextureFilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"], "linear"),
+    inTextureWrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     inTextureFlip = op.inBool("flip"),
     inUnpackAlpha = op.inBool("unpackPreMultipliedAlpha"),
 

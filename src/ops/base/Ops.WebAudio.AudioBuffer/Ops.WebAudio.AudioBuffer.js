@@ -1,11 +1,11 @@
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const inUrlPort = op.inFile("URL", "audio");
 const audioBufferPort = op.outObject("Audio Buffer");
-const finishedLoadingPort = op.outValue("Finished Loading", false);
-const sampleRatePort = op.outValue("Sample Rate", 0);
-const lengthPort = op.outValue("Length", 0);
-const durationPort = op.outValue("Duration", 0);
-const numberOfChannelsPort = op.outValue("Number of Channels", 0);
+const finishedLoadingPort = op.outNumber("Finished Loading", false);
+const sampleRatePort = op.outNumber("Sample Rate", 0);
+const lengthPort = op.outNumber("Length", 0);
+const durationPort = op.outNumber("Duration", 0);
+const numberOfChannelsPort = op.outNumber("Number of Channels", 0);
 
 // change listeners
 inUrlPort.onChange = function ()

@@ -2,18 +2,18 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
 
-    eyeX = op.inValueFloat("eyeX", 5),
-    eyeY = op.inValueFloat("eyeY", 5),
-    eyeZ = op.inValueFloat("eyeZ", 5),
+    eyeX = op.inFloat("eyeX", 5),
+    eyeY = op.inFloat("eyeY", 5),
+    eyeZ = op.inFloat("eyeZ", 5),
 
-    quatX = op.inValueFloat("quatX", 0),
-    quatY = op.inValueFloat("quatY", 0),
-    quatZ = op.inValueFloat("quatZ", 0),
-    quatW = op.inValueFloat("quatW", 0),
+    quatX = op.inFloat("quatX", 0),
+    quatY = op.inFloat("quatY", 0),
+    quatZ = op.inFloat("quatZ", 0),
+    quatW = op.inFloat("quatW", 0),
 
-    vecUpX = op.inValueFloat("upX", 0),
-    vecUpY = op.inValueFloat("upY", 1),
-    vecUpZ = op.inValueFloat("upZ", 0);
+    vecUpX = op.inFloat("upX", 0),
+    vecUpY = op.inFloat("upY", 1),
+    vecUpZ = op.inFloat("upZ", 0);
 
 const cgl = op.patch.cgl;
 const vUp = vec3.create();

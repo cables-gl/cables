@@ -1,10 +1,10 @@
 const
     exe = op.inTrigger("Render"),
-    num = op.inValueInt("Num", 1000),
+    num = op.inInt("Num", 1000),
     size = op.inFloat("Size", 1),
     seed = op.inFloat("Seed", 0),
-    distRand = op.inValueSlider("Distance Random", 0),
-    distrib = op.inValueSelect("Distribution", ["Uniform", "Poles", "Half"]),
+    distRand = op.inFloatSlider("Distance Random", 0),
+    distrib = op.inDropDown("Distribution", ["Uniform", "Poles", "Half"]),
     inDoRender = op.inBool("Draw", true),
     outTrigger = op.outTrigger("Trigger out");
 

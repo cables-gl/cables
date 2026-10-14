@@ -1,4 +1,4 @@
-let inFrame = op.inValueInt("Frame");
+let inFrame = op.inInt("Frame");
 
 inFrame.onChange = function ()
 {

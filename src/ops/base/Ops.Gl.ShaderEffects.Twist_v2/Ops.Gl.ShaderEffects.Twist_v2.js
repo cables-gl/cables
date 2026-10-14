@@ -1,10 +1,10 @@
 
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("Trigger");
-let amount = op.inValue("Degree", 180);
-let height = op.inValue("Height", 2);
+let amount = op.inFloat("Degree", 180);
+let height = op.inFloat("Height", 2);
 
-let axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "Y");
+let axis = op.inDropDown("Axis", ["X", "Y", "Z"], "Y");
 
 
 let uniAmount = null;

@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("Trigger"),
     radius = op.inFloat("radius", 0.5),
-    innerRadius = op.inValueSlider("innerRadius", 0),
-    segments = op.inValueInt("segments", 40),
-    percent = op.inValueSlider("percent", 1),
+    innerRadius = op.inFloatSlider("innerRadius", 0),
+    segments = op.inInt("segments", 40),
+    percent = op.inFloatSlider("percent", 1),
     steps = op.inFloat("steps", 0),
     invertSteps = op.inBool("invertSteps", false),
     mapping = op.inSwitch("mapping", ["flat", "round"], "flat"),

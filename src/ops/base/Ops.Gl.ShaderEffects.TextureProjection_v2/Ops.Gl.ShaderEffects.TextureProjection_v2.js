@@ -4,10 +4,10 @@ const
     inTex = op.inTexture("Texture"),
 
     inBlend = CGL.TextureEffect.AddBlendSelect(op, "blendMode"),
-    inAmount = op.inValueSlider("Amount", 0.3),
+    inAmount = op.inFloatSlider("Amount", 0.3),
 
     inTarget = op.inSwitch("Target", ["Color", "Pointsize", "Alpha"], "Color"),
-    inScale = op.inValue("Scale", 10),
+    inScale = op.inFloat("Scale", 10),
 
     inUseTexAlpha = op.inBool("Use Texture Alpha", false),
 
@@ -18,7 +18,7 @@ const
     inRotY = op.inFloat("Rot Y", 0),
     inRotZ = op.inFloat("Rot Z", 0),
 
-    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen", "TexCoords 1", "TexCoords 2", "TexCoords 3"], "XY"),
+    inMethod = op.inDropDown("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen", "TexCoords 1", "TexCoords 2", "TexCoords 3"], "XY"),
     inDiscard = op.inBool("Discard"),
     inWorldSpace = op.inBool("WorldSpace");
 

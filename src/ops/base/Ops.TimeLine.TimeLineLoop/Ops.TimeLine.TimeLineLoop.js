@@ -1,6 +1,6 @@
 const
     execute = op.inTrigger("Execute"),
-    duration = op.inValueFloat("duration", 2),
+    duration = op.inFloat("duration", 2),
     trigger = op.outTrigger("trigger");
 
 execute.onTriggered = function ()

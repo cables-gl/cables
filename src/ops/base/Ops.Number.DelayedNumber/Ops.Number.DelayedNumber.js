@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("Update"),
-    v = op.inValue("Value", 0),
-    delay = op.inValue("Delay", 0.5),
+    v = op.inFloat("Value", 0),
+    delay = op.inFloat("Delay", 0.5),
     result = op.outNumber("Result", 0),
     clear = op.inBool("Clear on Change", false);
 

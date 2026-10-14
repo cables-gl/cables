@@ -4,7 +4,7 @@ let render = op.inTrigger("Render");
 let next = op.outTrigger("Next");
 let outTex = op.outObject("cubemap");
 
-let inSize = op.inValueInt("Size", 512);
+let inSize = op.inInt("Size", 512);
 
 let gl = op.patch.cgl.gl;
 let cgl = op.patch.cgl;

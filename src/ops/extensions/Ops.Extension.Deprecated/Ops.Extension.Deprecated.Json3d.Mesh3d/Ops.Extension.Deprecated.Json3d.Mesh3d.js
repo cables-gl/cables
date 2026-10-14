@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("Render"),
     filename = op.inUrl("file", "3d json"),
-    meshIndex = op.inValueInt("Mesh Index", 0),
+    meshIndex = op.inInt("Mesh Index", 0),
     inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no"),
     inResize = op.inBool("Resize", true),
     inSize = op.inFloat("New Size", 1),
@@ -10,7 +10,7 @@ const
     next = op.outTrigger("trigger"),
     draw = op.inBool("Draw", true),
     geometryOut = op.outObject("Geometry"),
-    outScale = op.outValue("Scaling", 1.0),
+    outScale = op.outNumber("Scaling", 1.0),
     outName = op.outString("Mesh Name");
 
 op.setPortGroup("Geometry", [centerPivot, merge, inNormals, inSize, inResize]);
@@ -144,7 +144,7 @@ function updateInfo(geom)
 
     nfo += "</div>";
 
-    op.uiAttr({ "info": nfo });
+    op.setUiAttribs({ "info": nfo });
 }
 
 function setMesh()
@@ -160,7 +160,7 @@ function setMesh()
     const isNumeric = CABLES.isNumeric || CABLES.UTILS.isNumeric;
     if (!data || index != index || !isNumeric(index) || index < 0 || index >= data.meshes.length)
     {
-        op.uiAttr({ "warning": "mesh not found - index out of range / or no file selected " });
+        op.setUiAttribs({ "warning": "mesh not found - index out of range / or no file selected " });
         meshes[index] = null;
         hasError = true;
         outName.set("");
@@ -171,7 +171,7 @@ function setMesh()
     {
         if (hasError)
         {
-            op.uiAttr({ "warning": null });
+            op.setUiAttribs({ "warning": null });
             hasError = false;
         }
     }
@@ -202,7 +202,7 @@ function setMesh()
         if (!jsonGeom)
         {
             mesh = null;
-            op.uiAttr({ "warning": "mesh not found" });
+            op.setUiAttribs({ "warning": "mesh not found" });
             return;
         }
 
@@ -225,7 +225,7 @@ function setMesh()
     needSetMesh = false;
     meshes[index] = mesh;
 
-    op.uiAttr({ "warning": null });
+    op.setUiAttribs({ "warning": null });
 }
 
 function reload()
@@ -245,7 +245,7 @@ function reload()
             {
                 if (err)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
 
                     op.logError("ajax error:", err);
                     op.patch.loading.finished(loadingId);
@@ -253,7 +253,7 @@ function reload()
                 }
                 else
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": null });
+                    if (CABLES.UI)op.setUiAttribs({ "error": null });
                 }
 
                 try
@@ -262,7 +262,7 @@ function reload()
                 }
                 catch (ex)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
                     op.patch.loading.finished(loadingId);
                     geometryOut.set(null);
                     return;

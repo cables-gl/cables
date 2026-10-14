@@ -4,7 +4,7 @@ let triggerTick = op.outTrigger("Beat");
 
 let triggerStart = op.outTrigger("Start");
 
-let outSubTick = op.outValue("Sub Tick");
+let outSubTick = op.outNumber("Sub Tick");
 let triggerSub = op.outTrigger("Sub Beat");
 
 let clockStart = 0xFA;// 0b11111010;
@@ -14,8 +14,8 @@ let tickCount = 0;
 let lastBeat = 0;
 // var beatCountStart=0;
 
-let outBPM = op.outValue("BPM");
-let outBeatDuration = op.outValue("Tick Duration");
+let outBPM = op.outNumber("BPM");
+let outBeatDuration = op.outNumber("Tick Duration");
 
 eventIn.onChange = function ()
 {

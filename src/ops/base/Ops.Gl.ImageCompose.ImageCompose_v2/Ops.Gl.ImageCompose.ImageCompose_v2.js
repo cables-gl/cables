@@ -1,16 +1,16 @@
 const
     render = op.inTrigger("Render"),
     useVPSize = op.inBool("Use viewport size", true),
-    width = op.inValueInt("Width", 640),
-    height = op.inValueInt("Height", 480),
+    width = op.inInt("Width", 640),
+    height = op.inInt("Height", 480),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    twrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     fpTexture = op.inBool("HDR"),
     inTransp = op.inBool("Transparent", false),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
-    outRatio = op.outValue("Aspect Ratio");
+    outRatio = op.outNumber("Aspect Ratio");
 
 const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [useVPSize, width, height]);

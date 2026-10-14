@@ -6,10 +6,10 @@ let eventOut = op.outObject("Event Output");
 let outPressed = op.outTrigger("Key Pressed");
 let outReleased = op.outTrigger("Key Released");
 
-let outNote = op.outValue("Note");
-let outVelocity = op.outValue("Velocity");
-let outChannel = op.outValue("Channel");
-let outDevice = op.outValue("Device");
+let outNote = op.outNumber("Note");
+let outVelocity = op.outNumber("Velocity");
+let outChannel = op.outNumber("Channel");
+let outDevice = op.outNumber("Device");
 
 let CMD_NOTE_ON = 9;
 let CMD_NOTE_OFF = 8;

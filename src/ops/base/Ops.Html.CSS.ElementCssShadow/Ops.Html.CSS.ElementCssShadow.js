@@ -4,10 +4,10 @@ const
     inProp1 = op.inFloat("X", 5),
     inProp2 = op.inFloat("Y", 3),
     inProp3 = op.inFloat("Blur", 10),
-    r = op.inValueSlider("Color r", 0),
-    g = op.inValueSlider("Color g", 0),
-    b = op.inValueSlider("Color b", 0),
-    a = op.inValueSlider("Color a", 1),
+    r = op.inFloatSlider("Color r", 0),
+    g = op.inFloatSlider("Color g", 0),
+    b = op.inFloatSlider("Color b", 0),
+    a = op.inFloatSlider("Color a", 1),
     outEle = op.outObject("HTML Element");
 
 r.setUiAttribs({ "colorPick": true });

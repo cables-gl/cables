@@ -24,10 +24,10 @@ op.log(node.get("sustain"));
 
 // in ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let attackPort = op.inValueSlider("Attack", ATTACK_DEFAULT);
-let decayPort = op.inValueSlider("Decay", DECAY_DEFAULT);
-let sustainPort = op.inValueSlider("Sustain", SUSTAIN_DEFAULT);
-let releasePort = op.inValueSlider("Release", RELEASE_DEFAULT);
+let attackPort = op.inFloatSlider("Attack", ATTACK_DEFAULT);
+let decayPort = op.inFloatSlider("Decay", DECAY_DEFAULT);
+let sustainPort = op.inFloatSlider("Sustain", SUSTAIN_DEFAULT);
+let releasePort = op.inFloatSlider("Release", RELEASE_DEFAULT);
 let attackCurvePort = this.addInPort(new CABLES.Port(this, "Attack Curve", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));
 attackCurvePort.set(ATTACK_CURVE_DEFAULT);
 let releaseCurvePort = this.addInPort(new CABLES.Port(this, "Release Curve", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": CURVE_VALUES }));

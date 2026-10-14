@@ -6,8 +6,8 @@ var useSize=op.inBool("Use Canvas Size",true);
 
 var outNext=op.outTrigger("Finished");
 
-var width=op.inValueInt("Width",0);
-var height=op.inValueInt("Height",0);
+var width=op.inInt("Width",0);
+var height=op.inInt("Height",0);
 
 useSize.onChange=updateSizePorts;
 var cgl=op.patch.cgl;

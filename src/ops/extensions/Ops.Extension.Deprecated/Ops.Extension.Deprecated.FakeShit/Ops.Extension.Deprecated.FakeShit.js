@@ -3,7 +3,7 @@ op.name = "OverwriteTranslation";
 let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 let trigger = op.outTrigger("trigger");
 
-let scale = op.outValue("Scale");
+let scale = op.outNumber("Scale");
 
 let cgl = op.patch.cgl;
 

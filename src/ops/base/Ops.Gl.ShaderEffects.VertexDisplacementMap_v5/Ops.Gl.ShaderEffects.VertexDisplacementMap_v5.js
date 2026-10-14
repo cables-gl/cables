@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    extrude = op.inValue("Extrude", 0.5),
+    extrude = op.inFloat("Extrude", 0.5),
     meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "VertCol", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
     src = op.inSwitch("Coordinates", ["Tex Coords", "Mesh XY", "Mesh XZ"], "Tex Coords"),
@@ -9,16 +9,16 @@ const
     channel = op.inSwitch("Channel", ["Luminance", "R", "G", "B", "A", "RGB"], "Luminance"),
     flip = op.inSwitch("Flip", ["None", "X", "Y", "XY"], "None"),
     range = op.inSwitch("Range", ["0-1", "1-0", "Normalized"], "0-1"),
-    offsetX = op.inValueFloat("Offset X"),
-    offsetY = op.inValueFloat("Offset Y"),
-    scale = op.inValueFloat("Scale", 1),
+    offsetX = op.inFloat("Offset X"),
+    offsetY = op.inFloat("Offset Y"),
+    scale = op.inFloat("Scale", 1),
 
     calcNormals = op.inBool("Calc Normals", false),
     calcNormalsAxis = op.inSwitch("Normal Axis", ["X", "Y", "Z"], "Z"),
     removeZero = op.inBool("Discard Zero Values"),
     colorize = op.inBool("colorize", false),
-    colorizeMin = op.inValueSlider("Colorize Min", 0),
-    colorizeMax = op.inValueSlider("Colorize Max", 1),
+    colorizeMin = op.inFloatSlider("Colorize Min", 0),
+    colorizeMax = op.inFloatSlider("Colorize Max", 1),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

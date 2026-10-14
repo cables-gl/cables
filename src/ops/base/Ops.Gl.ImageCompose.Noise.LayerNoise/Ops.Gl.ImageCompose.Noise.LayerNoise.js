@@ -3,21 +3,21 @@ const cgl = op.patch.cgl;
 // inputs
 const inTrigger = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1);
+    amount = op.inFloatSlider("Amount", 1);
 
-const inLayerMode = op.inValueSelect("mode", [
+const inLayerMode = op.inDropDown("mode", [
     "exponential",
     "logarithmic",
     "linear"
 ], "exponential");
 const inRGBA = op.inBool("RGBA");
-const inScale = op.inValue("scale", 4);
-const inNumLayers = op.inValueInt("layers", 3);
-const inFactor = op.inValue("factor", 1);
-const inExponent = op.inValue("exponent", 1.3);
-const inScrollX = op.inValue("scrollX");
-const inScrollY = op.inValue("scrollY");
-const inScrollZ = op.inValue("scrollZ");
+const inScale = op.inFloat("scale", 4);
+const inNumLayers = op.inInt("layers", 3);
+const inFactor = op.inFloat("factor", 1);
+const inExponent = op.inFloat("exponent", 1.3);
+const inScrollX = op.inFloat("scrollX");
+const inScrollY = op.inFloat("scrollY");
+const inScrollZ = op.inFloat("scrollZ");
 
 // outputs
 const outTrigger = op.outTrigger("trigger");

@@ -1,7 +1,7 @@
 const
-    inH = op.inValueSlider("Hue"),
-    inS = op.inValueSlider("Saturation", 1),
-    inV = op.inValueSlider("Brightness", 0.5),
+    inH = op.inFloatSlider("Hue"),
+    inS = op.inFloatSlider("Saturation", 1),
+    inV = op.inFloatSlider("Brightness", 0.5),
     outR = op.outNumber("R"),
     outG = op.outNumber("G"),
     outB = op.outNumber("B");

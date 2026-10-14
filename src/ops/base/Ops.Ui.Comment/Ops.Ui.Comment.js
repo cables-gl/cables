@@ -17,7 +17,7 @@ function update()
 {
     if(CABLES.UI)
     {
-        op.uiAttr(
+        op.setUiAttribs(
             {
                 'comment_title':op.inTitle.get(),
                 'comment_text':op.text.get()

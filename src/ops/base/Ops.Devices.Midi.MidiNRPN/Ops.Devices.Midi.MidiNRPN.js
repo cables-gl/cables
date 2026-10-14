@@ -3,10 +3,10 @@ const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
 
-const nrpnIndexDropdown = op.inValueInt("NRPN Index", 0);
-const normalizeDropdown = op.inValueSelect("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
+const nrpnIndexDropdown = op.inInt("NRPN Index", 0);
+const normalizeDropdown = op.inDropDown("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
 const learn = op.inTriggerButton("learn");
 const clear = op.inTriggerButton("clear");
 
@@ -57,7 +57,7 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": `bound to NRPN: ${nrpnIndexDropdown.get()}` });
+            op.setUiAttribs({ "info": `bound to NRPN: ${nrpnIndexDropdown.get()}` });
             op.refreshParams();
         }
     }

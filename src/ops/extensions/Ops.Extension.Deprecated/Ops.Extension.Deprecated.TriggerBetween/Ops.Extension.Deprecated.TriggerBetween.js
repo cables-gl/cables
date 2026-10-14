@@ -1,11 +1,11 @@
 let exe = op.inTrigger("Exe");
 
-let inIndex = op.inValueInt("Index");
-let inNumber1 = op.inValueInt("Number 1");
-let inNumber2 = op.inValueInt("Number 2");
+let inIndex = op.inInt("Index");
+let inNumber1 = op.inInt("Number 1");
+let inNumber2 = op.inInt("Number 2");
 
 let next = op.outTrigger("next");
-let outFract = op.outValue("Fract");
+let outFract = op.outNumber("Fract");
 
 exe.onTriggered = function ()
 {

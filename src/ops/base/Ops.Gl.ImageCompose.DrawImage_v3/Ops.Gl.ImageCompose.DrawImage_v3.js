@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode"),
-    amount = op.inValueSlider("amount", 1),
+    amount = op.inFloatSlider("amount", 1),
 
     image = op.inTexture("Image"),
     inAlphaPremul = op.inBool("Premultiplied", false),
@@ -9,12 +9,12 @@ const
     removeAlphaSrc = op.inBool("removeAlphaSrc", false),
 
     imageAlpha = op.inTexture("Mask"),
-    alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance"),
+    alphaSrc = op.inDropDown("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance"),
     invAlphaChannel = op.inBool("Invert alpha channel"),
 
     inAspect = op.inBool("Aspect Ratio", false),
-    inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X"),
-    inAspectPos = op.inValueSlider("Position", 0.0),
+    inAspectAxis = op.inDropDown("Stretch Axis", ["X", "Y"], "X"),
+    inAspectPos = op.inFloatSlider("Position", 0.0),
     inAspectCrop = op.inBool("Crop", false),
 
     trigger = op.outTrigger("trigger");
@@ -100,13 +100,13 @@ const flipY = op.inBool("flip y");
 
 let doTransform = op.inBool("Transform");
 
-let scaleX = op.inValueSlider("Scale X", 1);
-let scaleY = op.inValueSlider("Scale Y", 1);
+let scaleX = op.inFloatSlider("Scale X", 1);
+let scaleY = op.inFloatSlider("Scale Y", 1);
 
-let posX = op.inValue("Position X", 0);
-let posY = op.inValue("Position Y", 0);
+let posX = op.inFloat("Position X", 0);
+let posY = op.inFloat("Position Y", 0);
 
-let rotate = op.inValue("Rotation", 0);
+let rotate = op.inFloat("Rotation", 0);
 
 const inClipRepeat = op.inBool("Clip Repeat", false);
 

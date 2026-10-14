@@ -1,21 +1,21 @@
-const valIn = op.inValue("Value", 0);
-const mul = op.inValue("Multiply", 1);
+const valIn = op.inFloat("Value", 0);
+const mul = op.inFloat("Multiply", 1);
 const minUnlimitedPort = op.inBool("Min Unlimited", false);
 minUnlimitedPort.setUiAttribs({ "hidePort": true });
-const min = op.inValue("min", -100);
+const min = op.inFloat("min", -100);
 const maxUnlimitedPort = op.inBool("Max Unlimited", false);
 maxUnlimitedPort.setUiAttribs({ "hidePort": true });
-const max = op.inValue("max", 100);
+const max = op.inFloat("max", 100);
 const smooth = op.inBool("smooth");
-const smoothSpeed = op.inValue("delay", 0.3);
+const smoothSpeed = op.inFloat("delay", 0.3);
 const preventScroll = op.inBool("prevent scroll");
 const flip = op.inBool("Flip Direction");
 const active = op.inBool("active", true);
 const reset = op.inTriggerButton("Reset");
 const area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas");
 
-const absVal = op.outValue("absolute value", 0);
-const delta = op.outValue("delta", 0);
+const absVal = op.outNumber("absolute value", 0);
+const delta = op.outNumber("delta", 0);
 
 const cgl = op.patch.cgl;
 let value = 0;

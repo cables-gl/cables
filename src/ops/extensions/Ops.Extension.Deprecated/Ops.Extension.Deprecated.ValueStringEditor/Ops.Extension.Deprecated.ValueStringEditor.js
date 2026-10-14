@@ -1,5 +1,5 @@
 let v = op.inValueEditor("value", "");
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 v.onChange = function ()
 {

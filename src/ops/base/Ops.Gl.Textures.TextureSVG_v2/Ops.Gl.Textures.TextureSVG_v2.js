@@ -1,9 +1,9 @@
 const
     filename = op.inUrl("File"),
-    texWidth = op.inValueInt("Texture width"),
-    texHeight = op.inValueInt("Texture height"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
-    tfilter = op.inValueSelect("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
+    texWidth = op.inInt("Texture width"),
+    texHeight = op.inInt("Texture height"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    tfilter = op.inDropDown("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
     textureOut = op.outTexture("Texture"),
     outLoaded = op.outBoolNum("Loaded");
 

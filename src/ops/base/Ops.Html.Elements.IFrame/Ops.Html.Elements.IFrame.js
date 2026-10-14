@@ -1,6 +1,6 @@
 const
-    width = op.inValue("width", 400),
-    height = op.inValue("height", 400),
+    width = op.inFloat("width", 400),
+    height = op.inFloat("height", 400),
     src = op.inValueString("URL", "https://undev.studio"),
     elId = op.inValueString("ID"),
     inBorder = op.inBool("Show Border", false),

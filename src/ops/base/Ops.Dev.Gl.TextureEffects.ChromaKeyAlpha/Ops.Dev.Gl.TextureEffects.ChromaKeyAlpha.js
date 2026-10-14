@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    w = op.inValueSlider("WeightMul", 0.6),
+    w = op.inFloatSlider("WeightMul", 0.6),
     inR = op.inFloat("R", Math.random()),
     inG = op.inFloat("G", Math.random()),
     inB = op.inFloat("B", Math.random()),

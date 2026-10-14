@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
-    size = op.inValue("Size", 1),
-    thick = op.inValue("Thickness", 0.25),
+    size = op.inFloat("Size", 1),
+    thick = op.inFloat("Thickness", 0.25),
     target = op.inBool("Crosshair"),
 
     showLeft = op.inBool("Left", true),

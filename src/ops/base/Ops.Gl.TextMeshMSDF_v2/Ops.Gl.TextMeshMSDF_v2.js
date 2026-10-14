@@ -15,20 +15,20 @@ const
     align = op.inSwitch("Align", ["Left", "Center", "Right"], "Center"),
     valign = op.inSwitch("Vertical Align", ["Zero", "Top", "Middle", "Bottom"], "Middle"),
 
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
+    a = op.inFloatSlider("a", 1),
     doSDF = op.inBool("SDF", true),
 
-    smoothing = op.inValueSlider("Smoothing", 0.3),
+    smoothing = op.inFloatSlider("Smoothing", 0.3),
 
     inBorder = op.inBool("Border", false),
     inBorderWidth = op.inFloatSlider("Border Width", 0.5),
     inBorderSmooth = op.inFloatSlider("Smoothness", 0.25),
-    br = op.inValueSlider("Border r", 1),
-    bg = op.inValueSlider("Border g", 1),
-    bb = op.inValueSlider("Border b", 1),
+    br = op.inFloatSlider("Border r", 1),
+    bg = op.inFloatSlider("Border g", 1),
+    bb = op.inFloatSlider("Border b", 1),
 
     inShadow = op.inBool("Shadow", false),
 

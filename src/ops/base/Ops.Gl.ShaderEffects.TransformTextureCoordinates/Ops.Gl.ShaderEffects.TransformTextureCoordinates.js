@@ -2,11 +2,11 @@ const
     render = op.inTrigger("render"),
     next = op.outTrigger("Trigger"),
 
-    transX = op.inValue("Translate X", 0),
-    transY = op.inValue("Translate Y", 0),
+    transX = op.inFloat("Translate X", 0),
+    transY = op.inFloat("Translate Y", 0),
 
-    scaleX = op.inValue("Repeat X", 1),
-    scaleY = op.inValue("Repeat Y", 1),
+    scaleX = op.inFloat("Repeat X", 1),
+    scaleY = op.inFloat("Repeat Y", 1),
 
     inFlipX = op.inBool("Flip X", false),
     inFlipY = op.inBool("Flip Y", false),

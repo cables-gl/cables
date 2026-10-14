@@ -1,11 +1,11 @@
 const
     exec=op.inTrigger("Exec"),
-    inX=op.inValue("X"),
-    inY=op.inValue("Y"),
+    inX=op.inFloat("X"),
+    inY=op.inFloat("Y"),
     outTrigger = op.outTrigger("Trigger out"),
-    outX=op.outValue("Result X"),
-    outY=op.outValue("Result Y"),
-    outZ=op.outValue("Result Z");
+    outX=op.outNumber("Result X"),
+    outY=op.outNumber("Result Y"),
+    outZ=op.outNumber("Result Z");
 
 const mat=mat4.create();
 const cgl=op.patch.cgl;

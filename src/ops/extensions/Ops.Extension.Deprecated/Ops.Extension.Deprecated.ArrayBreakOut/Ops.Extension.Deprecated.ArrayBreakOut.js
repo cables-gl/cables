@@ -58,7 +58,7 @@ function createValuePorts()
     let arr = [];
     for (let i = 0; i < NUM_PORTS; i++)
     {
-        arr[i] = op.outValue("Value " + i);
+        arr[i] = op.outNumber("Value " + i);
     }
     return arr;
 }

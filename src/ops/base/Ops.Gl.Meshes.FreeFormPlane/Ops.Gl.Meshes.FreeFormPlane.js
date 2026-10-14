@@ -1,33 +1,33 @@
 const
     render = op.inTrigger("render"),
 
-    x1 = op.inValue("x 1", -1),
-    y1 = op.inValue("y 1", 1),
-    z1 = op.inValue("z 1", 0),
+    x1 = op.inFloat("x 1", -1),
+    y1 = op.inFloat("y 1", 1),
+    z1 = op.inFloat("z 1", 0),
 
-    x2 = op.inValue("x 2", 1),
-    y2 = op.inValue("y 2", 1),
-    z2 = op.inValue("z 2", 0),
+    x2 = op.inFloat("x 2", 1),
+    y2 = op.inFloat("y 2", 1),
+    z2 = op.inFloat("z 2", 0),
 
-    x3 = op.inValue("x 3", -1),
-    y3 = op.inValue("y 3", -1),
-    z3 = op.inValue("z 3", 0),
+    x3 = op.inFloat("x 3", -1),
+    y3 = op.inFloat("y 3", -1),
+    z3 = op.inFloat("z 3", 0),
 
-    x4 = op.inValue("x 4", 1),
-    y4 = op.inValue("y 4", -1),
-    z4 = op.inValue("z 4", 0),
+    x4 = op.inFloat("x 4", 1),
+    y4 = op.inFloat("y 4", -1),
+    z4 = op.inFloat("z 4", 0),
 
-    tcx1 = op.inValue("tc x 1", 0),
-    tcy1 = op.inValue("tc y 1", 1),
+    tcx1 = op.inFloat("tc x 1", 0),
+    tcy1 = op.inFloat("tc y 1", 1),
 
-    tcx2 = op.inValue("tc x 2", 1),
-    tcy2 = op.inValue("tc y 2", 1),
+    tcx2 = op.inFloat("tc x 2", 1),
+    tcy2 = op.inFloat("tc y 2", 1),
 
-    tcx3 = op.inValue("tc x 3", 0),
-    tcy3 = op.inValue("tc y 3", 0),
+    tcx3 = op.inFloat("tc x 3", 0),
+    tcy3 = op.inFloat("tc y 3", 0),
 
-    tcx4 = op.inValue("tc x 4", 1),
-    tcy4 = op.inValue("tc y 4", 0),
+    tcx4 = op.inFloat("tc x 4", 1),
+    tcy4 = op.inFloat("tc y 4", 0),
     trigger = op.outTrigger("trigger");
 
 let geom = new CGL.Geometry(op.name);

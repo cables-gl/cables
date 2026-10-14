@@ -1,8 +1,8 @@
 const inTrigger = op.inTrigger("Trigger In");
-const inR = op.inValueSlider("R", 1);
-const inG = op.inValueSlider("G", 1);
-const inB = op.inValueSlider("B", 1);
-const inIntensity = op.inValueSlider("Intensity", 1);
+const inR = op.inFloatSlider("R", 1);
+const inG = op.inFloatSlider("G", 1);
+const inB = op.inFloatSlider("B", 1);
+const inIntensity = op.inFloatSlider("Intensity", 1);
 const colorIn = [inR, inG, inB];
 op.setPortGroup("Color", colorIn);
 

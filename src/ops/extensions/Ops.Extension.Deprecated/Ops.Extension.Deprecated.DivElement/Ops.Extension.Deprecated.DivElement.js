@@ -7,7 +7,7 @@ const inInteractive = op.inBool("Interactive", false);
 const inVisible = op.inBool("Visible", true);
 
 const outElement = op.outObject("DOM Element");
-const outHover = op.outValue("Hover");
+const outHover = op.outNumber("Hover");
 const outClicked = op.outTrigger("Clicked");
 
 let listenerElement = null;

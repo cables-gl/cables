@@ -1,14 +1,14 @@
 let render = op.inTrigger("render");
 
-let inWidth = op.inValueFloat("Width");
-let inHeight = op.inValueFloat("Height");
-let inPosX = op.inValueFloat("X");
-let inPosY = op.inValueFloat("Y");
+let inWidth = op.inFloat("Width");
+let inHeight = op.inFloat("Height");
+let inPosX = op.inFloat("X");
+let inPosY = op.inFloat("Y");
 
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
-const a = op.inValueSlider("a", 1.0);
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
+const a = op.inFloatSlider("a", 1.0);
 r.setUiAttribs({ "colorPick": true });
 
 let trigger = op.outTrigger("trigger");

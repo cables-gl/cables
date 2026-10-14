@@ -1,7 +1,7 @@
 // inputs
 let inPort1 = op.inArray("Array 1");
 let inPort2 = op.inArray("Array 2");
-let chunkSizePort = op.inValue("Chunk Size", 1);
+let chunkSizePort = op.inFloat("Chunk Size", 1);
 
 // outputs
 let outPort = op.outArray("Combined Array");

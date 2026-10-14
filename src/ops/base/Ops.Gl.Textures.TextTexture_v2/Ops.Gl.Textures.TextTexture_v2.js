@@ -3,15 +3,15 @@ const
     doRefresh = op.inTriggerButton("Refresh"),
     font = op.inString("font", "Arial"),
     maximize = op.inBool("Maximize Size"),
-    inFontSize = op.inValueFloat("fontSize", 30),
-    lineDistance = op.inValueFloat("line distance", 1),
-    texWidth = op.inValueInt("texture width", 512),
-    texHeight = op.inValueInt("texture height", 512),
+    inFontSize = op.inFloat("fontSize", 30),
+    lineDistance = op.inFloat("line distance", 1),
+    texWidth = op.inInt("texture width", 512),
+    texHeight = op.inInt("texture height", 512),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
-    border = op.inValueFloat("border", 0),
+    border = op.inFloat("border", 0),
     cachetexture = op.inBool("Reuse Texture", true),
-    outRatio = op.outValue("Ratio"),
+    outRatio = op.outNumber("Ratio"),
     textureOut = op.outTexture("texture");
 
 op.setPortGroup("Size", [font, maximize, inFontSize, lineDistance]);

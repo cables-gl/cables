@@ -1,10 +1,10 @@
 const render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    twistAmount = op.inValue("Twist amount", 200),
-    radius = op.inValue("Radius", 0.5),
-    centerX = op.inValue("Center X", 0.5),
-    centerY = op.inValue("Center Y", 0.5),
+    amount = op.inFloatSlider("Amount", 1),
+    twistAmount = op.inFloat("Twist amount", 200),
+    radius = op.inFloat("Radius", 0.5),
+    centerX = op.inFloat("Center X", 0.5),
+    centerY = op.inFloat("Center Y", 0.5),
     trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

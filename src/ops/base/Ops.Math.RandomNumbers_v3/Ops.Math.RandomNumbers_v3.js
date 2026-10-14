@@ -1,7 +1,7 @@
 const
-    inSeed = op.inValueFloat("Seed", 1),
-    min = op.inValueFloat("Min", 0),
-    max = op.inValueFloat("Max", 1),
+    inSeed = op.inFloat("Seed", 1),
+    min = op.inFloat("Min", 0),
+    max = op.inFloat("Max", 1),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z"),

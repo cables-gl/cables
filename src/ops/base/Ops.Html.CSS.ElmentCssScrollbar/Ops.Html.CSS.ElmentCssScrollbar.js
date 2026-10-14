@@ -3,14 +3,14 @@ const
     inThin = op.inBool("Thin", false),
 
     inSetCol = op.inBool("Set Color", true),
-    r = op.inValueSlider("Color R", 1),
-    g = op.inValueSlider("Color G", 1),
-    b = op.inValueSlider("Color B", 1),
-    a = op.inValueSlider("Color A", 1),
-    bgr = op.inValueSlider("Background R", 0),
-    bgg = op.inValueSlider("Background G", 0),
-    bgb = op.inValueSlider("Background B", 0),
-    bga = op.inValueSlider("Background A", 1),
+    r = op.inFloatSlider("Color R", 1),
+    g = op.inFloatSlider("Color G", 1),
+    b = op.inFloatSlider("Color B", 1),
+    a = op.inFloatSlider("Color A", 1),
+    bgr = op.inFloatSlider("Background R", 0),
+    bgg = op.inFloatSlider("Background G", 0),
+    bgb = op.inFloatSlider("Background B", 0),
+    bga = op.inFloatSlider("Background A", 1),
 
     outEle = op.outObject("HTML Element", null, "element");
 

@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    amountX = op.inValue("amountX"),
-    amountY = op.inValue("amountY"),
+    amountX = op.inFloat("amountX"),
+    amountY = op.inFloat("amountY"),
     textureMask = op.inTexture("Mask"),
     repeat = op.inBool("Repeat", true);
 

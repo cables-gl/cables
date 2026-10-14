@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     meth = op.inSwitch("Method", ["Set", "Add", "Sub", "Mul"], "Set"),
     clamp = op.inBool("Clamp", true),
     trigger = op.outTrigger("Next");

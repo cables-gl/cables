@@ -12,7 +12,7 @@ let node = new Tone.Meter(SMOOTHING_DEFAULT);
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
 let updateValuePort = op.inTrigger("Update Value");
 let updateDecibelsPort = op.inTrigger("Update Decibels");
-let smoothingPort = op.inValueSlider("Smoothing");
+let smoothingPort = op.inFloatSlider("Smoothing");
 smoothingPort.set(SMOOTHING_DEFAULT);
 
 // change listeners
@@ -37,6 +37,6 @@ smoothingPort.onChange = function ()
 
 // outputs
 let audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
-var valuePort = op.outValue("Value");
-var decibelsPort = op.outValue("Decibels");
+var valuePort = op.outNumber("Value");
+var decibelsPort = op.outNumber("Decibels");
 valuePort.set(0);

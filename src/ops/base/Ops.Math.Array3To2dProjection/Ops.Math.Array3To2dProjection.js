@@ -1,12 +1,12 @@
 const
     exe = op.inTrigger("Exec"),
     inArr = op.inArray("Array3x"),
-    fov = op.inValueFloat("fov", 45),
-    w = op.inValueFloat("w", 1),
-    h = op.inValueFloat("h", 1),
-    px = op.inValueFloat("Pos X", -0.5),
-    py = op.inValueFloat("Pos Y", -0.5),
-    coordmul = op.inValueFloat("mul"),
+    fov = op.inFloat("fov", 45),
+    w = op.inFloat("w", 1),
+    h = op.inFloat("h", 1),
+    px = op.inFloat("Pos X", -0.5),
+    py = op.inFloat("Pos Y", -0.5),
+    coordmul = op.inFloat("mul"),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Array2x", [], 3);
 

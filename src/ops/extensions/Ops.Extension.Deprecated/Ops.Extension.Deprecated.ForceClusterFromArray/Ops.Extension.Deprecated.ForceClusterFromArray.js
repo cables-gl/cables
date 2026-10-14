@@ -11,7 +11,7 @@ let show = op.inBool("Show");
 
 let next = op.outTrigger("next");
 
-let outNumPoints = op.outValue("Num Points");
+let outNumPoints = op.outNumber("Num Points");
 
 let forceObj = {};
 

@@ -1,20 +1,20 @@
 const
     render = op.inTrigger("Render"),
-    inDistance = op.inValue("Distance", 1),
-    inSize = op.inValue("Size", 1),
+    inDistance = op.inFloat("Distance", 1),
+    inSize = op.inFloat("Size", 1),
 
     inAbsolute = op.inBool("Absolute", false),
-    x = op.inValue("add x"),
-    y = op.inValue("add y"),
-    z = op.inValue("add z"),
+    x = op.inFloat("add x"),
+    y = op.inFloat("add y"),
+    z = op.inFloat("add z"),
 
-    mulx = op.inValue("mul x", 1),
-    muly = op.inValue("mul y", 1),
-    mulz = op.inValue("mul z", 1),
+    mulx = op.inFloat("mul x", 1),
+    muly = op.inFloat("mul y", 1),
+    mulz = op.inFloat("mul z", 1),
 
-    posx = op.inValue("x"),
-    posy = op.inValue("y"),
-    posz = op.inValue("z"),
+    posx = op.inFloat("x"),
+    posy = op.inFloat("y"),
+    posz = op.inFloat("z"),
 
     next = op.outTrigger("Next");
 

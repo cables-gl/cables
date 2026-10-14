@@ -14,7 +14,7 @@ let apiUrlPart2 = "/feeds.json";
 let finished = op.outTrigger("When Finished");
 let entries = op.outArray("Entries");
 let channelInfos = op.outObject("Channel Infos");
-let success = op.outValue("Success", false);
+let success = op.outNumber("Success", false);
 
 function httpGetAsync(theUrl, callback)
 {
@@ -42,7 +42,7 @@ function handleResponse(response)
     if (response == -1)
     {
         success.set(false);
-        op.uiAttr({ "error": "Error: You do not have access to the channel!" });
+        op.setUiAttribs({ "error": "Error: You do not have access to the channel!" });
     }
     else
     {
@@ -68,6 +68,6 @@ read.onTriggered = function ()
     }
     else
     {
-        op.uiAttr({ "error": "You need to enter a channel Id!" });
+        op.setUiAttribs({ "error": "You need to enter a channel Id!" });
     }
 };

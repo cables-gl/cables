@@ -6,7 +6,7 @@ let inSpace = op.inFloat("Spacing", 0.1);
 
 let next = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 let geometryOut = op.outObject("Geometry");
-let outWidth = op.outValue("Width");
+let outWidth = op.outNumber("Width");
 
 let data = null;
 let meshes = {};
@@ -81,7 +81,7 @@ function addMesh(jsonMesh)
 
     if (!jsonMesh)
     {
-        op.uiAttr({ "warning": "mesh not found" });
+        op.setUiAttribs({ "warning": "mesh not found" });
         return;
     }
     op.uiAttribs.warning = "";
@@ -135,7 +135,7 @@ function addMesh(jsonMesh)
 
     meshes[index] = mesh;
 
-    op.uiAttr({ "warning": null });
+    op.setUiAttribs({ "warning": null });
 }
 
 function reload()
@@ -150,7 +150,7 @@ function reload()
             {
                 if (err)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
 
                     console.error("ajax error:", err);
                     op.patch.loading.finished(loadingId);
@@ -158,7 +158,7 @@ function reload()
                 }
                 else
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": null });
+                    if (CABLES.UI)op.setUiAttribs({ "error": null });
                 }
 
                 try
@@ -167,7 +167,7 @@ function reload()
                 }
                 catch (ex)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
                     return;
                 }
 

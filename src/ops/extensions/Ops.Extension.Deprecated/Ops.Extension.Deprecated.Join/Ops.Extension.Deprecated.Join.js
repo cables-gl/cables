@@ -1,7 +1,7 @@
 let inArr = op.inArray("Array");
 let inSeperator = op.inValueString("Seperator", ",");
 let inNewLine = op.inBool("New Line");
-let outStr = op.outValue("Result");
+let outStr = op.outNumber("Result");
 
 inArr.onChange = exec;
 outStr.onChange = exec;

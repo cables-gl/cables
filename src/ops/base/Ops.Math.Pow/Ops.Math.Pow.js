@@ -1,6 +1,6 @@
 const
-    base = op.inValueFloat("Base"),
-    exponent = op.inValueFloat("Exponent"),
+    base = op.inFloat("Base"),
+    exponent = op.inFloat("Exponent"),
     result = op.outNumber("Result");
 
 exponent.set(2);

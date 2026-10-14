@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("Render"),
 
-    inMin = op.inValueSlider("In Min", 0),
-    inMid = op.inValueSlider("Midpoint", 0.5),
-    inMax = op.inValueSlider("In Max", 1),
+    inMin = op.inFloatSlider("In Min", 0),
+    inMid = op.inFloatSlider("Midpoint", 0.5),
+    inMax = op.inFloatSlider("In Max", 1),
 
-    outMin = op.inValueSlider("Out Min", 0),
-    outMax = op.inValueSlider("Out Max", 1),
+    outMin = op.inFloatSlider("Out Min", 0),
+    outMax = op.inFloatSlider("Out Max", 1),
 
     trigger = op.outTrigger("Next");
 

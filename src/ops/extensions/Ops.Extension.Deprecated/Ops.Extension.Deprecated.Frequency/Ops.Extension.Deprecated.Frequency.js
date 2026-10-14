@@ -1,7 +1,7 @@
 const exe = op.inTrigger("exe");
 const frequency = op.inFloat("frequency", 200);
 const trigger = op.outTrigger("trigger");
-const outCPS = op.outValue("CPS");
+const outCPS = op.outNumber("CPS");
 
 let startTime = 0;
 exe.onTriggered = exec;

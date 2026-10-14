@@ -1,7 +1,7 @@
 const
     inGeom = op.inObject("Geometry"),
     outGeom = op.outObject("Result"),
-    inSeed = op.inValue("Seed", 1);
+    inSeed = op.inFloat("Seed", 1);
 
 inGeom.ignoreValueSerialize = true;
 outGeom.ignoreValueSerialize = true;

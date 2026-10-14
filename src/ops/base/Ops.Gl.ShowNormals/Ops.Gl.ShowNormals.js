@@ -1,7 +1,7 @@
 const
     render=op.inTrigger('render'),
     geometry=op.inObject("geometry"),
-    mul=op.inValueFloat("Length",0.1),
+    mul=op.inFloat("Length",0.1),
     trigger=op.outTrigger('trigger'),
     dropdown = op.inSwitch("Vectors", ["Normals", "Tangents", "Bitangents"], "Normals");
 geometry.ignoreValueSerialize=true;

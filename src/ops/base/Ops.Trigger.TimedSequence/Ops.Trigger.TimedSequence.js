@@ -1,5 +1,5 @@
 const exe = op.inTrigger("exe");
-const current = op.inValueInt("current", 0);
+const current = op.inInt("current", 0);
 const overwriteTime = op.inBool("overwriteTime");
 const ignoreInSubPatch = op.inBool("ignoreInSubPatch", false);
 const triggerAlways = op.outTrigger("triggerAlways");

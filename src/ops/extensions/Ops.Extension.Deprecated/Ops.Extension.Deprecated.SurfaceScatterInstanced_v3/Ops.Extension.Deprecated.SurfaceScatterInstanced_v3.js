@@ -1,16 +1,16 @@
 const
     render = op.inTrigger("Render"),
     inDraw = op.inBool("draw", true),
-    inNum = op.inValueInt("Num", 100),
+    inNum = op.inInt("Num", 100),
     inGeomSurface = op.inObject("Geom Surface"),
     inGeom = op.inObject("Geometry"),
-    inDistribution = op.inValueSelect("Distribution", ["Vertex", "Triangle Center", "Triangle Side", "Random Triangle Point"], "Vertex"),
-    inVariety = op.inValueSelect("Selection", ["Random", "Sequential"], "Random"),
+    inDistribution = op.inDropDown("Distribution", ["Vertex", "Triangle Center", "Triangle Side", "Random Triangle Point"], "Vertex"),
+    inVariety = op.inDropDown("Selection", ["Random", "Sequential"], "Random"),
     seed = op.inFloat("Random Seed"),
-    inSizeMin = op.inValueSlider("Size min", 1.0),
-    inSizeMax = op.inValueSlider("Size max", 1.0),
+    inSizeMin = op.inFloatSlider("Size min", 1.0),
+    inSizeMax = op.inFloatSlider("Size max", 1.0),
     inDoLimit = op.inBool("Limit", false),
-    inLimit = op.inValueInt("Limit Num", 0),
+    inLimit = op.inInt("Limit Num", 0),
     inRotateRandom = op.inBool("Random Rotate", true),
     outArrPositions = op.outArray("Positions")
     // outArrRotations=op.outArray("Rotation")

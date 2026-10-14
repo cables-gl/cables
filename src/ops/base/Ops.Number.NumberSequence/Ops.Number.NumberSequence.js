@@ -1,5 +1,5 @@
 const NUM_PORTS = 4;
-const inPort = op.inValue("In Value");
+const inPort = op.inFloat("In Value");
 const outTrigger = op.outTrigger("Value Changed");
 
 const outPorts = [];

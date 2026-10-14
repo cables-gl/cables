@@ -1,7 +1,7 @@
 const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
 const jsonp = op.inBool("JsonP", false);
 const outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.Port.TYPE_OBJECT));
-const isLoading = op.outValue("Is Loading", false);
+const isLoading = op.outNumber("Is Loading", false);
 
 outData.ignoreValueSerialize = true;
 
@@ -63,14 +63,14 @@ function reload()
 
                 if (outData.get())outData.set(null);
                 outData.set(data);
-                op.uiAttr({ "error": "" });
+                op.setUiAttribs({ "error": "" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
             catch (e)
             {
                 console.error("ajaxrequest: exception while loading ", filename.get());
-                op.uiAttr({ "error": "error loading json" });
+                op.setUiAttribs({ "error": "error loading json" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }

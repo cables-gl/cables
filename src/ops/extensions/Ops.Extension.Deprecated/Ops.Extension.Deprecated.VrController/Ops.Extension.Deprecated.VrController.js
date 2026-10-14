@@ -2,10 +2,10 @@ const
     inexec = op.inTrigger("update"),
     inGamepad = op.inObject("Controller"),
     next = op.outTrigger("Next"),
-    outvalid = op.outValue("Valid"),
-    outPosX = op.outValue("Pos X"),
-    outPosY = op.outValue("Pos Y"),
-    outPosZ = op.outValue("Pos Z");
+    outvalid = op.outNumber("Valid"),
+    outPosX = op.outNumber("Pos X"),
+    outPosY = op.outNumber("Pos Y"),
+    outPosZ = op.outNumber("Pos Z");
 inexec.onTriggered = update;
 
 function update()

@@ -26,7 +26,7 @@ function retrySoon()
 
 function update()
 {
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
     if (!inTex.get() || !inTex.get().tex) return;
     outLoading.set(true);
 
@@ -45,7 +45,7 @@ function update()
     if (!canRead)
     {
         outLoading.set(true);
-        op.uiAttr({ "error": "cannot read texture!" });
+        op.setUiAttribs({ "error": "cannot read texture!" });
         return;
     }
 

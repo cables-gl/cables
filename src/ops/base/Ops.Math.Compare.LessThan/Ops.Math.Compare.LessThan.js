@@ -1,5 +1,5 @@
-const number1 = op.inValue("number1");
-const number2 = op.inValue("number2");
+const number1 = op.inFloat("number1");
+const number2 = op.inFloat("number2");
 const result = op.outBoolNum("result");
 
 op.setUiAttribs({ "mathTitle": true });

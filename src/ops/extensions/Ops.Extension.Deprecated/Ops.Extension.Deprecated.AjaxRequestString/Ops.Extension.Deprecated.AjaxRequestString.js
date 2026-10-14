@@ -1,8 +1,8 @@
 const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string" }));
 const reloadBtn = op.inTriggerButton("reload");
 const jsonp = op.inBool("JsonP", false);
-const outData = op.outValue("Result");
-const isLoading = op.outValue("Is Loading", false);
+const outData = op.outNumber("Result");
+const isLoading = op.outNumber("Is Loading", false);
 
 filename.onChange = delayedReload;
 reloadBtn.setUiAttribs({ "hidePort": true });
@@ -69,14 +69,14 @@ function reload()
             try
             {
                 outData.set(data);
-                op.uiAttr({ "error": "" });
+                op.setUiAttribs({ "error": "" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
             catch (e)
             {
                 console.log("exc... ", filename.get(), jsonp.get());
-                op.uiAttr({ "error": "error loading json" });
+                op.setUiAttribs({ "error": "error loading json" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }

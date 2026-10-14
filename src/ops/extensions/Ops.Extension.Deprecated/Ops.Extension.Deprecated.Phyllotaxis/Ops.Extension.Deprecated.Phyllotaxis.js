@@ -3,9 +3,9 @@ const inNum = op.inFloat("Num", 400);
 const inC = op.inFloat("Scale", 0.1);
 
 const next = op.outTrigger("Next");
-const outX = op.outValue("X");
-const outY = op.outValue("Y");
-const outI = op.outValue("Index");
+const outX = op.outNumber("X");
+const outY = op.outNumber("Y");
+const outI = op.outNumber("Index");
 
 exec.onTriggered = function ()
 {

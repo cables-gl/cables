@@ -1,6 +1,6 @@
-const result=op.outValue("result");
-const value=op.inValueFloat("value");
-const min=op.inValueFloat("Minimum");
+const result=op.outNumber("result");
+const value=op.inFloat("value");
+const min=op.inFloat("Minimum");
 
 function exec()
 {

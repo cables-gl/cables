@@ -1,6 +1,6 @@
 const
     inArray = op.inArray("Array In"),
-    inValue = op.inValue("Value", 1.0),
+    inValue = op.inFloat("Value", 1.0),
     inMode = op.inSwitch("Mode", ["Array-x", "x-Array"], "Array-x"),
     outArray = op.outArray("Array Out");
 

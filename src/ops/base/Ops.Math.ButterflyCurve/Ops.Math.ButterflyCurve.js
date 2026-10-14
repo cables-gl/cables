@@ -1,5 +1,5 @@
 const
-    inVal = op.inValue("Value"),
+    inVal = op.inFloat("Value"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y");
 

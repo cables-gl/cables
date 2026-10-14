@@ -1,5 +1,5 @@
 let value = op.inFloat("Value", 0);
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 let firstTime = true;
 let smoothInterval = 0;

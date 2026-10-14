@@ -1,17 +1,17 @@
 const
     exec = op.inTriggerButton("Update"),
     arrays = op.inArray("Arrays"),
-    connectPoints = op.inValueInt("num connect points"),
+    connectPoints = op.inInt("num connect points"),
 
-    inLimit = op.inValueSlider("Limit", 1.0),
+    inLimit = op.inFloatSlider("Limit", 1.0),
 
     inX = op.inFloat("Translate X"),
     inY = op.inFloat("Translate Y"),
     inZ = op.inFloat("Translate Z"),
 
-    inR = op.inValueSlider("r"),
-    inG = op.inValueSlider("g"),
-    inB = op.inValueSlider("b"),
+    inR = op.inFloatSlider("r"),
+    inG = op.inFloatSlider("g"),
+    inB = op.inFloatSlider("b"),
     inMergePoints = op.inArray("Merge Points"),
     inMergeColors = op.inArray("Merge Colors"),
     next = op.outTrigger("Next"),

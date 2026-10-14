@@ -1,17 +1,17 @@
 const
     render = op.inTrigger("Trigger in"),
     trigger = op.outTrigger("Trigger out"),
-    width = op.inValue("Width", 1),
-    height = op.inValue("Height", 1),
+    width = op.inFloat("Width", 1),
+    height = op.inFloat("Height", 1),
     inId = op.inString("ID"),
     classPort = op.inString("Class"),
-    pivotX = op.inValueSelect("Pivot x", ["center", "left", "right"]),
-    pivotY = op.inValueSelect("Pivot y", ["center", "top", "bottom"]),
-    axis = op.inValueSelect("Axis", ["xy", "xz"]),
+    pivotX = op.inDropDown("Pivot x", ["center", "left", "right"]),
+    pivotY = op.inDropDown("Pivot y", ["center", "top", "bottom"]),
+    axis = op.inDropDown("Axis", ["xy", "xz"]),
     isInteractive = op.inBool("Is Interactive", true),
     renderRect = op.inBool("Render Rectangle", true),
     divVisible = op.inBool("Show Boundings", true),
-    cursorPort = op.inValueSelect("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer"),
+    cursorPort = op.inDropDown("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer"),
     active = op.inBool("Render", true);
 
 const geomOut = op.outObject("geometry");

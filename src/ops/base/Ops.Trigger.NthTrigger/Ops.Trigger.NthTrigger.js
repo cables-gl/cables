@@ -1,5 +1,5 @@
 var exe=op.inTriggerButton("Exe");
-var nth=op.inValue("Nth");
+var nth=op.inFloat("Nth");
 var next=op.outTrigger("next");
 
 var count=0;

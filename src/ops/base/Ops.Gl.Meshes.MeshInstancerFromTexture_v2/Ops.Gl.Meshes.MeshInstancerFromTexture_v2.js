@@ -10,10 +10,10 @@ const
     inTex4 = op.inTexture("Color Texture", null, "texture"),
     inTex5 = op.inTexture("TexCoord Texture", null, "texture"),
     inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
-    inScale = op.inValue("Scale", 1),
-    inMulR = op.inValue("Multiply Pos X", 1),
-    inMulG = op.inValue("Multiply Pos Y", 1),
-    inMulB = op.inValue("Multiply Pos Z", 1),
+    inScale = op.inFloat("Scale", 1),
+    inMulR = op.inFloat("Multiply Pos X", 1),
+    inMulG = op.inFloat("Multiply Pos Y", 1),
+    inMulB = op.inFloat("Multiply Pos Z", 1),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outNumber("Num");
 

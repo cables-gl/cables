@@ -1,20 +1,20 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    modeSelect = op.inValueSelect("Mode", ["Clamp", "Remap", "Remap smooth"], "Clamp"),
+    amount = op.inFloatSlider("Amount", 1),
+    modeSelect = op.inDropDown("Mode", ["Clamp", "Remap", "Remap smooth"], "Clamp"),
 
     inActiveR = op.inBool("R", true),
-    inMinR = op.inValue("R Min", 0.0),
-    inMaxR = op.inValue("R Max", 1.0),
+    inMinR = op.inFloat("R Min", 0.0),
+    inMaxR = op.inFloat("R Max", 1.0),
 
     inActiveG = op.inBool("G", true),
-    inMinG = op.inValue("G Min", 0.0),
-    inMaxG = op.inValue("G Max", 1.0),
+    inMinG = op.inFloat("G Min", 0.0),
+    inMaxG = op.inFloat("G Max", 1.0),
 
     inActiveB = op.inBool("B", true),
-    inMinB = op.inValue("B Min", 0.0),
-    inMaxB = op.inValue("B Max", 1.0),
+    inMinB = op.inFloat("B Min", 0.0),
+    inMaxB = op.inFloat("B Max", 1.0),
 
     trigger = op.outTrigger("trigger");
 

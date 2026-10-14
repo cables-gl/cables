@@ -3,20 +3,20 @@ const
     normalize=op.inBool("normalize"),
     active=op.inBool("Active",true),
     smooth=op.inBool("smooth"),
-    smoothSpeed=op.inValueFloat("smoothSpeed",20),
-    area=op.inValueSelect("Area",['Canvas','Document','Parent Element'],"Canvas"),
-    multiply=op.inValueFloat("multiply",1),
+    smoothSpeed=op.inFloat("smoothSpeed",20),
+    area=op.inDropDown("Area",['Canvas','Document','Parent Element'],"Canvas"),
+    multiply=op.inFloat("multiply",1),
     flipY=op.inBool("flip y",true),
-    outMouseX=op.outValue("x"),
-    outMouseY=op.outValue("y"),
+    outMouseX=op.outNumber("x"),
+    outMouseY=op.outNumber("y"),
     rightClickPrevDef=op.inBool("right click prevent default",true),
-    mouseDown=op.outValueBool("button down"),
+    mouseDown=op.outBool("button down"),
     mouseClick=op.outTrigger("click"),
     mouseUp=op.outTrigger("Button Up"),
     mouseClickRight=op.outTrigger("click right"),
 
-    mouseOver=op.outValueBool("mouseOver"),
-    outButton=op.outValue("button");
+    mouseOver=op.outBool("mouseOver"),
+    outButton=op.outNumber("button");
 
 var smoothTimer=0;
 var cgl=op.patch.cgl;

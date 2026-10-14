@@ -84,11 +84,11 @@ portamentoPort.onChange = function ()
     if (isValidTime(portamento))
     {
         setNodeValue("portamento", portamento);
-        op.uiAttr({ "warning": null });
+        op.setUiAttribs({ "warning": null });
     }
     else
     {
-        op.uiAttr({ "warning": "Partamento time is not valid! Try \"16n\" or \"0.123" });
+        op.setUiAttribs({ "warning": "Partamento time is not valid! Try \"16n\" or \"0.123" });
     }
 };
 

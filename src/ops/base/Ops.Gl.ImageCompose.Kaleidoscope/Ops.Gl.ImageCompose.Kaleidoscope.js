@@ -1,13 +1,13 @@
 let render = op.inTrigger("Render");
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-let amount = op.inValueSlider("Amount", 1);
+let amount = op.inFloatSlider("Amount", 1);
 
-let sides = op.inValue("Sides", 10);
-let angle = op.inValueSlider("Angle", 0);
-let slidex = op.inValueSlider("Slide X", 0);
-let slidey = op.inValueSlider("Slide Y", 0);
-let centerX = op.inValueSlider("Center X", 0.5);
-let centerY = op.inValueSlider("Center Y", 0.5);
+let sides = op.inFloat("Sides", 10);
+let angle = op.inFloatSlider("Angle", 0);
+let slidex = op.inFloatSlider("Slide X", 0);
+let slidey = op.inFloatSlider("Slide Y", 0);
+let centerX = op.inFloatSlider("Center X", 0.5);
+let centerY = op.inFloatSlider("Center Y", 0.5);
 
 let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 

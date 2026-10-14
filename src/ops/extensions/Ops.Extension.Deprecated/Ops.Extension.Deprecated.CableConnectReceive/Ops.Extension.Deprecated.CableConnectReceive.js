@@ -1,6 +1,6 @@
 let connection = op.inObject("Connection");
 
-let outMsg = op.outValue("Message");
+let outMsg = op.outNumber("Message");
 
 connection.onChange = function ()
 {

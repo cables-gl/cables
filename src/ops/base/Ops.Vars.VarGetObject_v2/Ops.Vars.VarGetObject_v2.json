@@ -18,16 +18,10 @@
         "vargetset"
     ],
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Variable",
-                "subType": "string"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Value"
             }
         ]

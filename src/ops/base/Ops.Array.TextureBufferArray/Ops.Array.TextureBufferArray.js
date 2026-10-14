@@ -1,7 +1,7 @@
 const inExec = op.inTrigger("Write");
 
 const inTexture = op.inTexture("Texture");
-const inNum = op.inValueInt("Num", 8);
+const inNum = op.inInt("Num", 8);
 
 const outArr = op.outArray("Result");
 

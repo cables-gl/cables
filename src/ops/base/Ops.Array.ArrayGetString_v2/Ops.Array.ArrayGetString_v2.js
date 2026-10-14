@@ -1,6 +1,6 @@
 const
     array = op.inArray("Array"),
-    index = op.inValueInt("Index"),
+    index = op.inInt("Index"),
     result = op.outString("Result"),
     found = op.outBoolNum("Found");
 

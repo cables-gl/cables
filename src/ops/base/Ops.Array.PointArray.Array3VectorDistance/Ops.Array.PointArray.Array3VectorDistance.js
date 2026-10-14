@@ -28,7 +28,7 @@ function update()
     if (showingError)
     {
         showingError = false;
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
     }
 
     if (newArr.length != arr1.length)newArr.length = arr1.length;

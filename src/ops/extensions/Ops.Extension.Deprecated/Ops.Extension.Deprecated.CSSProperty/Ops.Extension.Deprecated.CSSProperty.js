@@ -3,7 +3,7 @@ let inProperty = op.inValueString("Property");
 let inValue = op.inFloat("Value");
 let inValueSuffix = op.inValueString("Value Suffix", "px");
 
-let outStyle = op.outValue("Style Result");
+let outStyle = op.outNumber("Style Result");
 
 inProperty.onChange = update;
 inValue.onChange = update;

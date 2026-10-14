@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inNum = op.inInt("Num", 10),
-    inSpacing = op.inValue("Spacing", 1),
+    inSpacing = op.inFloat("Spacing", 1),
     inCenter = op.inBool("Center", true),
     axis = op.inSwitch("Axis", ["XY", "XZ"], "XY"),
     next = op.outTrigger("Next");

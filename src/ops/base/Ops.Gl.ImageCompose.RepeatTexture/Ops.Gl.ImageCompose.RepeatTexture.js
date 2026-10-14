@@ -1,8 +1,8 @@
 const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
-const amountX = op.inValue("x", 3);
-const amountY = op.inValue("y", 3);
+const amount = op.inFloatSlider("Amount", 1);
+const amountX = op.inFloat("x", 3);
+const amountY = op.inFloat("y", 3);
 const trigger = op.outTrigger("trigger");
 const mulTex = op.inTexture("Multiply");
 

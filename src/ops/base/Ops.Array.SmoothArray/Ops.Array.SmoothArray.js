@@ -2,8 +2,8 @@
 const exec = op.inTrigger("Execute"),
     inArray = op.inArray("Array In"),
     inModeBool = op.inBool("Separate inc/dec", false),
-    incFactor = op.inValue("Inc factor", 4),
-    decFactor = op.inValue("Dec factor", 4),
+    incFactor = op.inFloat("Inc factor", 4),
+    decFactor = op.inFloat("Dec factor", 4),
     next = op.outTrigger("Next"),
     outArray = op.outArray("Array Out");
 

@@ -1,6 +1,6 @@
 
 var obj=op.inObject("Object");
-var result=op.outValue("Result");
+var result=op.outNumber("Result");
 
 var pretty=op.inBool("Pretty Print",true);
 

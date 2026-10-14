@@ -3,8 +3,8 @@ const
     type = op.inSwitch("Type", ["Predefined", "File"], "Predefined"),
     cursorPort = op.inDropDown("CSS Cursors", ["auto", "crosshair", "pointer", "hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "ew-resize", "text", "wait", "help", "none"], "pointer"),
     filename = op.inUrl("file"),
-    offX = op.inValueInt("Offset X"),
-    offY = op.inValueInt("Offset Y"),
+    offX = op.inInt("Offset X"),
+    offY = op.inInt("Offset Y"),
     inUserSelect = op.inSwitch("User Select", ["auto", "text", "none"], "auto"),
     outEle = op.outObject("HTML Element", null, "element");
 

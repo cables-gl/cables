@@ -1,6 +1,6 @@
 const
     mouseClickLeft = op.outTrigger("Click Left"),
-    // area = op.inValueSelect("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
+    // area = op.inDropDown("Area", ["Canvas Area", "Canvas", "Document", "Parent Element"], "Canvas Area"),
     inDur = op.inFloat("Max Duration Button Down", 0.3),
     inPixel = op.inInt("Max Movement Pixel", 5),
     inButton = op.inSwitch("Button", ["Left", "Middle", "Right"], "Left"),

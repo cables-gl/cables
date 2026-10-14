@@ -6,7 +6,7 @@ let useWheel = op.inBool("Use Mouse Wheel", true);
 let minRadius = op.inFloat("Min Radius", 0.1);
 
 let trigger = op.outTrigger("trigger");
-let outRadius = op.outValue("Radius");
+let outRadius = op.outNumber("Radius");
 
 let cgl = op.patch.cgl;
 let vScale = vec3.create();

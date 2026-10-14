@@ -1,6 +1,6 @@
-let idx = op.inValueInt("Index");
+let idx = op.inInt("Index");
 let valuePorts = [];
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 idx.onChange = update;
 

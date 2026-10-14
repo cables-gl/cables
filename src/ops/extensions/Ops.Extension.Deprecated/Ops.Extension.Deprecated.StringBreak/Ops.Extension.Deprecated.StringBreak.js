@@ -1,7 +1,7 @@
 let str = op.inValueString("String", "a very very long default string");
-let numChars = op.inValueInt("Max Line Chars", 10);
+let numChars = op.inInt("Max Line Chars", 10);
 
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 str.onChange = update;
 numChars.onChange = update;

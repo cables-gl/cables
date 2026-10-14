@@ -3,12 +3,12 @@ const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
     inMode = op.inSwitch("Mode", ["Color", "R-Opacity"], "Color"),
-    inStart = op.inValue("Start", 2),
-    inEnd = op.inValue("End", 12),
-    inAmount = op.inValueSlider("Amount", 0.5),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random());
+    inStart = op.inFloat("Start", 2),
+    inEnd = op.inFloat("End", 12),
+    inAmount = op.inFloatSlider("Amount", 0.5),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random());
 
 const cgl = op.patch.cgl;
 r.setUiAttribs({ "colorPick": true });

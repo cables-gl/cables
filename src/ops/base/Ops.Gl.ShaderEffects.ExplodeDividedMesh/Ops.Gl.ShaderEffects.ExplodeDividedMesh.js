@@ -4,24 +4,24 @@ var cgl=op.patch.cgl;
 op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
 
-var inDistance=op.inValue("Distance",1);
+var inDistance=op.inFloat("Distance",1);
 var inAbsolute=op.inBool("Absolute",false);
 
 {
-    var x=op.inValue("add x");
-    var y=op.inValue("add y");
-    var z=op.inValue("add z");
+    var x=op.inFloat("add x");
+    var y=op.inFloat("add y");
+    var z=op.inFloat("add z");
 
-    var mulx=op.inValue("mul x",1);
-    var muly=op.inValue("mul y",1);
-    var mulz=op.inValue("mul z",1);
+    var mulx=op.inFloat("mul x",1);
+    var muly=op.inFloat("mul y",1);
+    var mulz=op.inFloat("mul z",1);
 
-    var posx=op.inValue("x");
-    var posy=op.inValue("y");
-    var posz=op.inValue("z");
+    var posx=op.inFloat("x");
+    var posy=op.inFloat("y");
+    var posz=op.inFloat("z");
 }
 
-var inSize=op.inValue("Size",1);
+var inSize=op.inFloat("Size",1);
 
 var shader=null;
 

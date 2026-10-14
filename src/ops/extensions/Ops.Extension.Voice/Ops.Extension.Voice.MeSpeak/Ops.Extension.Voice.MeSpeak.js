@@ -65,9 +65,9 @@ const
     amplitude = op.inFloatSlider("Amplitude", 1),
     pitch = op.inFloatSlider("Pitch", 0.5),
     speed = op.inInt("Speed (WPM)", 175),
-    voice = op.inValueSelect("Voice", voices, "en/en (English)"),
+    voice = op.inDropDown("Voice", voices, "en/en (English)"),
     wordGap = op.inInt("Word Gap", 0),
-    variant = op.inValueSelect("Variants", variants, "none"),
+    variant = op.inDropDown("Variants", variants, "none"),
     lineBreak = op.inInt("Line-break length", 0),
     capitals = op.inInt("Capitals", 0),
     punct = op.inString("Punctuation", "False"),
@@ -78,7 +78,7 @@ const
     // volume = op.inFloatSlider("Volume", 1),
     speakLog = op.inBool("Log Console", 0),
     pan = op.inFloatSlider("Pan", 0.5), // remap values
-    // rawData = op.inValueSelect("Raw Data", ["null", "base64", "mime", "array", "default"], "null"),
+    // rawData = op.inDropDown("Raw Data", ["null", "base64", "mime", "array", "default"], "null"),
     // callback = op.inString("Callback Function"),
     // callbackID = op.inInt("Callback ID"),
 

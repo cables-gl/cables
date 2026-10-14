@@ -1,10 +1,10 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    x = op.inValueFloat("x"),
-    y = op.inValueFloat("y"),
-    z = op.inValueFloat("z"),
-    w = op.inValueFloat("w");
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
+    w = op.inFloat("w");
 
 let q = quat.create();
 let qMat = mat4.create();

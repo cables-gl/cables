@@ -5,23 +5,23 @@
 const render = op.inTrigger("render");
 const inLightmap = op.inObject("Lightmap");
 const inReflectionCubemap = op.inObject("Reflection Cubemap");
-const inRoughMul = op.inValueSlider("Roughness", 0);
-const inReflMul = op.inValueSlider("Reflection Amount", 0.3);
+const inRoughMul = op.inFloatSlider("Roughness", 0);
+const inReflMul = op.inFloatSlider("Reflection Amount", 0.3);
 const inRough = op.inTexture("Roughness Map");
 const inReflection = op.inTexture("Reflection");
 
 const inNormal = op.inTexture("Normal");
-const inNormalIntensity = op.inValueSlider("Normal Intensity", 1);
+const inNormalIntensity = op.inFloatSlider("Normal Intensity", 1);
 const inNormalFlip = op.inBool("Normal Flip", false);
 
 const inDiffuse = op.inTexture("Diffuse");
 const inAo = op.inTexture("AO");
-const inAoIntensity = op.inValueSlider("AO Intensity", 1);
+const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 
 const inOpacityTex = op.inTexture("Opacity Texture");
-const inOpacity = op.inValueSlider("Opacity", 1);
+const inOpacity = op.inFloatSlider("Opacity", 1);
 
-const inRotation = op.inValueSlider("SampleRotation", 0);
+const inRotation = op.inFloatSlider("SampleRotation", 0);
 
 const inRepeatX = op.inFloat("Repeat X", 1);
 const inRepeatY = op.inFloat("Repeat Y", 1);
@@ -82,12 +82,12 @@ function checkMipmap()
     if (inReflectionCubemap.get() && inReflectionCubemap.get().filter != CGL.Texture.FILTER_MIPMAP)
     {
         hasError = true;
-        op.uiAttr({ "error": "reflection map should be mipmap!" });
+        op.setUiAttribs({ "error": "reflection map should be mipmap!" });
     }
 
     if (!hasError && op.uiAttribs.error)
     {
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
         return true;
     }
 }

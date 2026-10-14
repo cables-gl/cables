@@ -15,9 +15,9 @@ let headerTitleText = null;
 
 // inputs
 const visiblePort = op.inBool("Visible", true);
-const opacityPort = op.inValueSlider("Opacity", 1);
+const opacityPort = op.inFloatSlider("Opacity", 1);
 const defaultMinimizedPort = op.inBool("Default Minimized");
-const minimizedOpacityPort = op.inValueSlider("Minimized Opacity", 0.5);
+const minimizedOpacityPort = op.inFloatSlider("Minimized Opacity", 0.5);
 const undoButtonPort = op.inBool("Show undo button", false);
 const inMinimize = op.inBool("Show Minimize", false);
 

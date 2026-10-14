@@ -1,10 +1,10 @@
 const
     inExe = op.inTrigger("Update"),
     inArr = op.inArray("array"),
-    inWidth = op.inValueInt("width", 32),
-    inHeight = op.inValueInt("height", 32),
+    inWidth = op.inInt("width", 32),
+    inHeight = op.inInt("height", 32),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "nearest"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     outNext = op.outTrigger("Next"),
     outTex = op.outTexture("Texture out");
 

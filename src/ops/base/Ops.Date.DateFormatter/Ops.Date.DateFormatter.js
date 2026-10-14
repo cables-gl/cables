@@ -1,4 +1,4 @@
-const inTimestamp = op.inValue("Timestamp");
+const inTimestamp = op.inFloat("Timestamp");
 const inDate = op.inObject("Date");
 const inFormat = op.inString("Format", "YYYY-MM-DD");
 const outString = op.outString("StringDate");

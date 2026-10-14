@@ -2,7 +2,7 @@
 const MIDIChannels = Array.from(Array(16).keys(), (i) => { return i + 1; });
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
 const normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
 
 op.setPortGroup("MIDI", [inEvent, midiChannelDropdown]);
@@ -11,7 +11,7 @@ op.setPortGroup("Program Change", [normalizeDropdown]);
 /* OUT */
 const eventOut = op.outObject("Event");
 const triggerOut = op.outTrigger("Trigger Out");
-const pcValueOut = op.outValue("Program Change Value Out");
+const pcValueOut = op.outNumber("Program Change Value Out");
 
 op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);
 op.setPortGroup("Program Change Out", [pcValueOut]);

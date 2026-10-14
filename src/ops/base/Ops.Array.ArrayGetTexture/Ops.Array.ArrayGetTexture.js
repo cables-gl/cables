@@ -1,6 +1,6 @@
 const
     array = op.inArray("array"),
-    index = op.inValueInt("index"),
+    index = op.inInt("index"),
     value = op.outTexture("value");
 
 let last = null;

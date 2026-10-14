@@ -7,10 +7,10 @@ const
     chanB = op.inBool("B Active", true),
     chanA = op.inBool("A Active", false),
     inTex2 = op.inTexture("Value"),
-    r = op.inValue("r", 1),
-    g = op.inValue("g", 1),
-    b = op.inValue("b", 1),
-    a = op.inValue("a", 1),
+    r = op.inFloat("r", 1),
+    g = op.inFloat("g", 1),
+    b = op.inFloat("b", 1),
+    a = op.inFloat("a", 1),
     trigger = op.outTrigger("trigger"),
     outTex = op.outTexture("Result");
 

@@ -1,18 +1,18 @@
 const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     inLoop = op.inBool("Loop", false),
     inRGB = op.inBool("RGB", false),
-    minValue = op.inValue("Minimum value", 0),
-    maxValue = op.inValue("Maximum value", 1),
-    scale = op.inValue("Scale", 2),
+    minValue = op.inFloat("Minimum value", 0),
+    maxValue = op.inFloat("Maximum value", 1),
+    scale = op.inFloat("Scale", 2),
     inAsp = op.inBool("Aspect", false),
     orientation = op.inBool("Orientation", false),
-    addX = op.inValue("X", 0),
-    addY = op.inValue("Y", 0),
-    addZ = op.inValue("Z", 0),
-    seed2 = op.inValue("Seed", 0),
+    addX = op.inFloat("X", 0),
+    addY = op.inFloat("Y", 0),
+    addZ = op.inFloat("Z", 0),
+    seed2 = op.inFloat("Seed", 0),
     trigger = op.outTrigger("Next");
 
 op.setPortGroup("Look", [inRGB, inLoop, minValue, maxValue]);

@@ -1,5 +1,5 @@
 const next = op.outTrigger("Triggered");
-op.varName = op.inValueSelect("Named Trigger", [], "", true);
+op.varName = op.inDropDown("Named Trigger", [], "", true);
 
 op.varName.setUiAttribs({ "_triggerSelect": true });
 

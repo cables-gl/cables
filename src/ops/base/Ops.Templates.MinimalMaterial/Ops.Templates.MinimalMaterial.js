@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    inRed = op.inValueSlider("Red");
+    inRed = op.inFloatSlider("Red");
 
 const cgl = op.patch.cgl;
 

@@ -34,10 +34,10 @@ function setNote()
         }
         catch (e)
         {
-            op.uiAttr({ "error": "Invalid note, should be either a tone, e.g. \"C4\" or a frequency, e.g. \"440\"" });
+            op.setUiAttribs({ "error": "Invalid note, should be either a tone, e.g. \"C4\" or a frequency, e.g. \"440\"" });
             return;
         }
         synth.setNote(note, time);
-        op.uiAttr({ "error": null }); // clear UI error
+        op.setUiAttribs({ "error": null }); // clear UI error
     }
 }

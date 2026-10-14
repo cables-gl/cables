@@ -64,14 +64,14 @@ function setDevice()
 
 function onMIDIFailure()
 {
-    op.uiAttr({ "warning": "No MIDI support in your browser." });
+    op.setUiAttribs({ "warning": "No MIDI support in your browser." });
 }
 
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
     let inputs = midi.inputs.values();
-    op.uiAttr({ "info": "no midi devices found" });
+    op.setUiAttribs({ "info": "no midi devices found" });
 
     let deviceNames = [];
 

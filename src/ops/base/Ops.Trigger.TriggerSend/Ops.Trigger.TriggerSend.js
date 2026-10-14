@@ -2,7 +2,7 @@ const
     trigger = op.inTriggerButton("Trigger"),
     next = op.outTrigger("Next");
 
-op.varName = op.inValueSelect("Named Trigger", [], "", true);
+op.varName = op.inDropDown("Named Trigger", [], "", true);
 
 op.varName.onChange = updateName;
 

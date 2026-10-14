@@ -36,12 +36,12 @@ let exec = function ()
     {
         if (!v.isAnimated())
         {
-            op.uiAttr({ "error": "anim value should be animated" });
+            op.setUiAttribs({ "error": "anim value should be animated" });
             return;
         }
         else
         {
-            op.uiAttr({ "error": null });
+            op.setUiAttribs({ "error": null });
         }
     }
 

@@ -1,9 +1,9 @@
 const inTrigger = op.inTrigger("Trigger In");
-const inR = op.inValueSlider("R", 0.1);
+const inR = op.inFloatSlider("R", 0.1);
 inR.setUiAttribs({ "colorPick": true });
-const inG = op.inValueSlider("G", 0.1);
-const inB = op.inValueSlider("B", 0.1);
-const inIntensity = op.inValueSlider("Intensity", 1);
+const inG = op.inFloatSlider("G", 0.1);
+const inB = op.inFloatSlider("B", 0.1);
+const inIntensity = op.inFloatSlider("Intensity", 1);
 const colorIn = [inR, inG, inB];
 op.setPortGroup("Color", colorIn);
 

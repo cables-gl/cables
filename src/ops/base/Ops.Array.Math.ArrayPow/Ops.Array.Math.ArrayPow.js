@@ -3,7 +3,7 @@
 // to work correctly with this op
 
 let inArray = op.inArray("Array in");
-let inValue = op.inValue("Pow factor", 1.0);
+let inValue = op.inFloat("Pow factor", 1.0);
 let outArray = op.outArray("Array out");
 
 let newArr = [];

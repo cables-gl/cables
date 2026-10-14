@@ -1,9 +1,9 @@
 const exe = op.inTriggerButton("exe"),
     array = op.inArray("array"),
-    index = op.inValueInt("index"),
-    value1 = op.inValueFloat("Value 1"),
-    value2 = op.inValueFloat("Value 2"),
-    value3 = op.inValueFloat("Value 3"),
+    index = op.inInt("index"),
+    value1 = op.inFloat("Value 1"),
+    value2 = op.inFloat("Value 2"),
+    value3 = op.inFloat("Value 3"),
     values = op.outArray("values");
 
 let newArr = [];

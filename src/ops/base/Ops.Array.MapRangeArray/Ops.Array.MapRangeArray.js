@@ -1,10 +1,10 @@
 const
     v = op.inArray("array"),
-    old_min = op.inValueFloat("old min"),
-    old_max = op.inValueFloat("old max"),
-    new_min = op.inValueFloat("new min"),
-    new_max = op.inValueFloat("new max"),
-    easing = op.inValueSelect("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
+    old_min = op.inFloat("old min"),
+    old_max = op.inFloat("old max"),
+    new_min = op.inFloat("new min"),
+    new_max = op.inFloat("new max"),
+    easing = op.inDropDown("Easing", ["Linear", "Smoothstep", "Smootherstep"], "Linear"),
     result = op.outArray("result");
 
 op.setPortGroup("Input Range", [old_min, old_max]);

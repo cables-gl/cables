@@ -7,10 +7,10 @@ let ACTIVE_VALUE = 1;
 let stateArray = [];
 
 // inputs
-let arrayLengthPort = op.inValue("Array Length", ARRAY_LENGTH_DEFAULT);
-let activeIndexPort = op.inValue("Active Index", 0);
-let inactiveValuePort = op.inValue("Inactive Value", 0);
-let activeValuePort = op.inValue("Active Value", 1);
+let arrayLengthPort = op.inFloat("Array Length", ARRAY_LENGTH_DEFAULT);
+let activeIndexPort = op.inFloat("Active Index", 0);
+let inactiveValuePort = op.inFloat("Inactive Value", 0);
+let activeValuePort = op.inFloat("Active Value", 1);
 
 // outputs
 let stateArrayPort = op.outArray("State Array");

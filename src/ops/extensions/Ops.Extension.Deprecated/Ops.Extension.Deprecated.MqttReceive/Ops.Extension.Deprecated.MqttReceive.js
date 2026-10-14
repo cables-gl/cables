@@ -1,10 +1,10 @@
 const mqttObj = op.inObject("MQTT Object");
 const receiveChannel = op.inValueString("Channel", "/test");
-const messageType = op.inValueSelect("Message Type", ["String", "Number", "Boolean"], "String");
+const messageType = op.inDropDown("Message Type", ["String", "Number", "Boolean"], "String");
 
 const mqttOutObj = op.outObject("MQTT Object");
-const message = op.outValue("Message");
-const topic = op.outValue("Topic");
+const message = op.outNumber("Message");
+const topic = op.outNumber("Topic");
 
 const TYPE_DELAY = 300; // wait until calling subscribe / unsubscribe
 

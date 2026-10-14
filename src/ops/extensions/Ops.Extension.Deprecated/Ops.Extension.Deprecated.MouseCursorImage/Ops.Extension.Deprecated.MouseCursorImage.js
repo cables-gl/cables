@@ -1,8 +1,8 @@
 const
     filename = op.inFile("file"),
     trigger = op.inTriggerButton("Set Cursor"),
-    offX = op.inValueInt("Offset X"),
-    offY = op.inValueInt("Offset Y");
+    offX = op.inInt("Offset X"),
+    offY = op.inInt("Offset Y");
 
 offX.onChange = offY.onChange =
 filename.onChange = update;

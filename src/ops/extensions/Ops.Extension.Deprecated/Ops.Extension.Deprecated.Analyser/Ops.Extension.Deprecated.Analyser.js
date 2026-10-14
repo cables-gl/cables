@@ -12,7 +12,7 @@ let array = null;
 // input ports
 let refresh = op.addInPort(new CABLES.Port(op, "refresh", CABLES.Port.TYPE_FUNCTION));
 let audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
-let anData = op.inValueSelect("Data", ["Frequency", "Time Domain"], "Frequency");
+let anData = op.inDropDown("Data", ["Frequency", "Time Domain"], "Frequency");
 
 // output ports
 let next = op.outTrigger("Next");

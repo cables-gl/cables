@@ -12,11 +12,11 @@ const lifetime = op.inFloat("lifetime", 10);
 const lifetimeMin = op.inFloat("Lifetime Minimum", 5);
 
 const trigger = op.outTrigger("trigger");
-const idx = op.outValue("index");
-const lifeTimePercent = op.outValue("lifeTimePercent");
-const outRandom1 = op.outValue("Random 1");
-const outRandom2 = op.outValue("Random 2");
-const outRandom3 = op.outValue("Random 3");
+const idx = op.outNumber("index");
+const lifeTimePercent = op.outNumber("lifeTimePercent");
+const outRandom1 = op.outNumber("Random 1");
+const outRandom2 = op.outNumber("Random 2");
+const outRandom3 = op.outNumber("Random 3");
 
 inReset.onTriggered = reset;
 const cgl = op.patch.cgl;

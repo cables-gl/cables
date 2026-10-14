@@ -1,9 +1,9 @@
 const
     exe = op.inTrigger("exe"),
     geom = op.inObject("geom", null, "geometry"),
-    inScale = op.inValue("Scale", 1),
+    inScale = op.inFloat("Scale", 1),
     doLimit = op.inBool("Limit Instances", false),
-    inLimit = op.inValueInt("Limit", 100),
+    inLimit = op.inInt("Limit", 100),
     inTranslates = op.inArray("positions", 3),
     inScales = op.inArray("Scale Array", 3),
     inRot = op.inArray("Rotations", 3),

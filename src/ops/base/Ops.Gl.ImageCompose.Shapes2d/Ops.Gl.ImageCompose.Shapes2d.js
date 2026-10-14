@@ -5,29 +5,29 @@ https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
 
 const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
+const amount = op.inFloatSlider("Amount", 1);
 
-const shapeSelect = op.inValueSelect("Shape", ["circle", "eqi triangle", "iso triangle", "box", "rhombus", "pentagon",
+const shapeSelect = op.inDropDown("Shape", ["circle", "eqi triangle", "iso triangle", "box", "rhombus", "pentagon",
     "hexagon", "octogon", "hexagram"], "circle");
 const mirrorX = op.inBool("Mirror X", false);
 const mirrorY = op.inBool("Mirror Y", false);
 
-const xPos = op.inValueFloat("Offset X", 0.0);
-const yPos = op.inValueFloat("Offset Y", 0.0);
+const xPos = op.inFloat("Offset X", 0.0);
+const yPos = op.inFloat("Offset Y", 0.0);
 
 const fillShape = op.inBool("fillShape", true);
-const lineThickness = op.inValue("Line thickness", 1.0);
+const lineThickness = op.inFloat("Line thickness", 1.0);
 const invertColor = op.inBool("Invert color", false);
 
-const width = op.inValue("width", 0.5);
-const height = op.inValue("height", 0.5);
+const width = op.inFloat("width", 0.5);
+const height = op.inFloat("height", 0.5);
 
-const inRotate = op.inValueSlider("Rotate", 0.0);
+const inRotate = op.inFloatSlider("Rotate", 0.0);
 
-const r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1.0);
+const r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1.0);
 r.setUiAttribs({ "colorPick": true });
 
 const trigger = op.outTrigger("trigger");

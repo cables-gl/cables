@@ -1,24 +1,24 @@
 const render = op.inTrigger("Render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
-const width = op.inValue("Width", 1);
+const amount = op.inFloatSlider("Amount", 1);
+const width = op.inFloat("Width", 1);
 const gType = op.inSwitch("Type", ["X", "Y", "XY", "Radial"], "X");
-const pos1 = op.inValueSlider("Pos", 0.5);
+const pos1 = op.inFloatSlider("Pos", 0.5);
 const smoothStep = op.inBool("Smoothstep", true);
 
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
-const r2 = op.inValueSlider("r2", Math.random());
-const g2 = op.inValueSlider("g2", Math.random());
-const b2 = op.inValueSlider("b2", Math.random());
+const r2 = op.inFloatSlider("r2", Math.random());
+const g2 = op.inFloatSlider("g2", Math.random());
+const b2 = op.inFloatSlider("b2", Math.random());
 r2.setUiAttribs({ "colorPick": true });
 
-const r3 = op.inValueSlider("r3", Math.random());
-const g3 = op.inValueSlider("g3", Math.random());
-const b3 = op.inValueSlider("b3", Math.random());
+const r3 = op.inFloatSlider("r3", Math.random());
+const g3 = op.inFloatSlider("g3", Math.random());
+const b3 = op.inFloatSlider("b3", Math.random());
 r3.setUiAttribs({ "colorPick": true });
 
 smoothStep.onChange = updateSmoothstep;

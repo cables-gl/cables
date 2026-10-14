@@ -1,5 +1,5 @@
 const
-    valueInPort = op.inValue("Value In", 0),
+    valueInPort = op.inFloat("Value In", 0),
     passThroughPort = op.inBool("Pass Through"),
     inIfNot = op.inSwitch("When False", ["keep last number", "custom"], "keep last number"),
     inCustomNot = op.inFloat("Custom Value", 0),

@@ -1,6 +1,6 @@
 var data=op.inObject("data");
 var key = op.inValueString("key");
-const result=op.outValue("result");
+const result=op.outNumber("result");
 
 
 result.ignoreValueSerialize=true;

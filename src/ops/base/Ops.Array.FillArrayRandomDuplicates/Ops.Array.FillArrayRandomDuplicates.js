@@ -1,9 +1,9 @@
 const
     inArr = op.inArray("Array"),
-    inNum = op.inValueInt("Num Elements", 1000),
+    inNum = op.inInt("Num Elements", 1000),
     inCalc = op.inTriggerButton("Calculate"),
     inShuffleAll = op.inBool("Shuffle all"),
-    inSeed = op.inValueFloat("Random seed"),
+    inSeed = op.inFloat("Random seed"),
     outArr = op.outArray("Result");
 op.toWorkPortsNeedToBeLinked(inArr);
 

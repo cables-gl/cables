@@ -1,5 +1,5 @@
 let render = op.inTrigger("render");
-let density = op.inValueFloat("density");
+let density = op.inFloat("density");
 let image = op.inTexture("depth texture");
 let trigger = op.outTrigger("trigger");
 let ignoreInf = op.inBool("ignore infinity");
@@ -29,19 +29,19 @@ density.set(5.0);
 
 // fog color
 
-const r = op.inValueSlider("fog r", Math.random());
-const g = op.inValueSlider("fog g", Math.random());
-const b = op.inValueSlider("fog b", Math.random());
+const r = op.inFloatSlider("fog r", Math.random());
+const g = op.inFloatSlider("fog g", Math.random());
+const b = op.inFloatSlider("fog b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
 const rUniform = new CGL.Uniform(shader, "f", "r", r);
 const gUniform = new CGL.Uniform(shader, "f", "g", g);
 const bUniform = new CGL.Uniform(shader, "f", "b", b);
 
-const a = op.inValueSlider("fog a", 1.0);
+const a = op.inFloatSlider("fog a", 1.0);
 const aUniform = new CGL.Uniform(shader, "f", "a", a);
 
-let start = op.inValueSlider("start");
+let start = op.inFloatSlider("start");
 start.onChange = function ()
 {
     if (!start.uniform) start.uniform = new CGL.Uniform(shader, "f", "start", start.get());

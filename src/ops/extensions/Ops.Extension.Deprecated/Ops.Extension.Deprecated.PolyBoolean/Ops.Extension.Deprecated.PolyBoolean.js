@@ -8,7 +8,7 @@ let pDescription = op.inValueString("description", "");
 let pTab = op.inValueString("tab", "tab");
 let pOrder = op.inValueString("order", "0");
 
-let result = op.outValue("value", pDefault.get());
+let result = op.outNumber("value", pDefault.get());
 
 pDefault.onChange = update;
 

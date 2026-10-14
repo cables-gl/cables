@@ -1,9 +1,9 @@
 const
-    inYear = op.inValueInt("Year"),
-    inMonth = op.inValueInt("Month"),
-    inDay = op.inValueInt("Day"),
-    inHour = op.inValueInt("Hour"),
-    inMinute = op.inValueInt("Minute"),
+    inYear = op.inInt("Year"),
+    inMonth = op.inInt("Month"),
+    inDay = op.inInt("Day"),
+    inHour = op.inInt("Hour"),
+    inMinute = op.inInt("Minute"),
     outTimestamp = op.outNumber("Timestamp");
 
 inYear.onChange =

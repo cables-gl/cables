@@ -1,10 +1,10 @@
 let exec = op.inTrigger("exec");
 let next = op.outTrigger("next");
 
-let outIndex = op.outValue("Index");
+let outIndex = op.outNumber("Index");
 
-let outAttraction = op.outValue("Attraction");
-let outRange = op.outValue("Range");
+let outAttraction = op.outNumber("Attraction");
+let outRange = op.outNumber("Range");
 
 let cgl = op.patch.cgl;
 let vec = vec3.create();

@@ -3,7 +3,7 @@ let cgl = op.patch.cgl;
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-let axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X");
+let axis = op.inDropDown("Axis", ["X", "Y", "Z"], "X");
 
 let min = op.inFloat("min", 1);
 let max = op.inFloat("max", 0);

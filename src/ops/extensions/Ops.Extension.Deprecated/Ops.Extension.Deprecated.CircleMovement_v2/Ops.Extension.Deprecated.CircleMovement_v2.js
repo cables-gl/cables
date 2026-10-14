@@ -3,15 +3,15 @@ const
     duration = op.inFloat("Duration ", 10),
     offset = op.inFloat("offset"),
     inTime = op.inFloat("Time", 0),
-    segments = op.inValueInt("segments", 40),
+    segments = op.inInt("segments", 40),
     radius = op.inFloat("radius", 1),
     mulX = op.inFloat("mulX", 1),
     mulY = op.inFloat("mulY", 1),
-    // percent=op.inValueSlider("percent"),
+    // percent=op.inFloatSlider("percent"),
     trigger = op.outTrigger("trigger"),
-    index = op.outValue("index"),
-    outX = op.outValue("X"),
-    outY = op.outValue("Y");
+    index = op.outNumber("index"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y");
 
 op.setPortGroup("Time", [duration, offset, inTime]);
 

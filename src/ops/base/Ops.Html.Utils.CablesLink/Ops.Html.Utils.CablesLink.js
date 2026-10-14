@@ -1,5 +1,5 @@
-let size = op.inValue("size", 40);
-let opacity = op.inValue("Opacity", 0.5);
+let size = op.inFloat("size", 40);
+let opacity = op.inFloat("Opacity", 0.5);
 
 let element = document.createElement("div");
 

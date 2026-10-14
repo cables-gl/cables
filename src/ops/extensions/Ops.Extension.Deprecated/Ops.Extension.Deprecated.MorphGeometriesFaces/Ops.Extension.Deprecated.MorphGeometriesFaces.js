@@ -4,10 +4,10 @@ let next = op.outTrigger("Next");
 let inGeomA = op.inObject("Geometry 1");
 let inGeomB = op.inObject("Geometry 2");
 
-let inFade = op.inValueSlider("Fade");
+let inFade = op.inFloatSlider("Fade");
 
-let inStart = op.inValueSlider("Start");
-let inEnd = op.inValueSlider("End");
+let inStart = op.inFloatSlider("Start");
+let inEnd = op.inFloatSlider("End");
 
 let cgl = op.patch.cgl;
 let shader = null;

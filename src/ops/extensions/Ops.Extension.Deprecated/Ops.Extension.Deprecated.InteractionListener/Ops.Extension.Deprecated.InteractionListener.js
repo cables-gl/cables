@@ -1,6 +1,6 @@
 const
     duration = op.inFloat("Duration", 0.5),
-    events = op.outValue("Events");
+    events = op.outNumber("Events");
 
 let timeout = 0;
 let listenerElement = null;

@@ -14,7 +14,7 @@ let inDots = op.inBool("dots");
 let inPoints = op.inArray("Points");
 let inColors = op.inArray("Colors");
 
-let pointRepeat = op.inValueInt("Point Repeat", 1);
+let pointRepeat = op.inInt("Point Repeat", 1);
 
 let inNeverDrop = op.inBool("neverDrop");
 
@@ -25,7 +25,7 @@ let inClampX = op.inFloat("Clamp X", 4000);
 let inClampY = op.inFloat("Clamp Y", 2250);
 
 let objOut = op.outObject("Packet");
-let outNumPoints = op.outValue("Numpoints");
+let outNumPoints = op.outNumber("Numpoints");
 
 exe.onTriggered = send;
 

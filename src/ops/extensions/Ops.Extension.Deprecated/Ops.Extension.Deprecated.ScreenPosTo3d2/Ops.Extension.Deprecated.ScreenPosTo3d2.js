@@ -1,8 +1,8 @@
 let inX = op.inFloat("X");
 let inY = op.inFloat("Y");
 
-let outX = op.outValue("Result X");
-let outY = op.outValue("Result Y");
+let outX = op.outNumber("Result X");
+let outY = op.outNumber("Result Y");
 
 // inX.onChange=calc;
 // inY.onChange=calc;

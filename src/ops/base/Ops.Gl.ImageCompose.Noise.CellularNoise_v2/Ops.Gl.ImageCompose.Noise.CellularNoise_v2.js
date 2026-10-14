@@ -4,11 +4,11 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
-    amount = op.inValueSlider("Amount", 1),
-    x = op.inValue("X", 0),
-    y = op.inValue("Y", 0),
-    z = op.inValue("Z", 0),
-    scale = op.inValue("Scale", 5),
+    amount = op.inFloatSlider("Amount", 1),
+    x = op.inFloat("X", 0),
+    y = op.inFloat("Y", 0),
+    z = op.inFloat("Z", 0),
+    scale = op.inFloat("Scale", 5),
 
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
     tile = op.inBool("Tileable", false),

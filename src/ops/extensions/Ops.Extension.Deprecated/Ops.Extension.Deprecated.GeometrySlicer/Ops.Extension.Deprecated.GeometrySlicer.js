@@ -1,5 +1,5 @@
 let inGeom = op.inObject("Geometry");
-let inSlices = op.inValueInt("Slices", 5);
+let inSlices = op.inInt("Slices", 5);
 let inDistance = op.inFloat("Distance", 0.1);
 let outGeom = op.outObject("Result");
 

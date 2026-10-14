@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    r = op.inValueSlider("r", 1.0),
-    g = op.inValueSlider("g", 1.0),
-    b = op.inValueSlider("b", 1.0),
+    r = op.inFloatSlider("r", 1.0),
+    g = op.inFloatSlider("g", 1.0),
+    b = op.inFloatSlider("b", 1.0),
     trigger = op.outTrigger("trigger");
 
 r.setUiAttribs({ "colorPick": true });
@@ -17,12 +17,12 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.fbmnoise_frag);
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
-    uniScale = new CGL.Uniform(shader, "f", "scale", op.inValue("scale", 2)),
-    uniAnim = new CGL.Uniform(shader, "f", "anim", op.inValue("anim", 0)),
-    uniScrollX = new CGL.Uniform(shader, "f", "scrollX", op.inValue("scrollX", 9)),
-    uniScrollY = new CGL.Uniform(shader, "f", "scrollY", op.inValue("scrollY", 0)),
-    uniRepeat = new CGL.Uniform(shader, "f", "repeat", op.inValue("repeat", 1)),
-    uniAspect = new CGL.Uniform(shader, "f", "aspect", op.inValue("aspect", 1)),
+    uniScale = new CGL.Uniform(shader, "f", "scale", op.inFloat("scale", 2)),
+    uniAnim = new CGL.Uniform(shader, "f", "anim", op.inFloat("anim", 0)),
+    uniScrollX = new CGL.Uniform(shader, "f", "scrollX", op.inFloat("scrollX", 9)),
+    uniScrollY = new CGL.Uniform(shader, "f", "scrollY", op.inFloat("scrollY", 0)),
+    uniRepeat = new CGL.Uniform(shader, "f", "repeat", op.inFloat("repeat", 1)),
+    uniAspect = new CGL.Uniform(shader, "f", "aspect", op.inFloat("aspect", 1)),
     uniLayer1 = new CGL.Uniform(shader, "b", "layer1", op.inBool("Layer 1", true)),
     uniLayer2 = new CGL.Uniform(shader, "b", "layer2", op.inBool("Layer 2", true)),
     uniLayer3 = new CGL.Uniform(shader, "b", "layer3", op.inBool("Layer 3", true)),

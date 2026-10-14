@@ -16,13 +16,13 @@ const noteValues = Array.from(Array(128).keys(), (key) => { return getMIDINote(k
 
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
-const noteDropdown = op.inValueSelect("Note 1", noteValues, 0);
-const noteDropdown2 = op.inValueSelect("Note 2", noteValues, 0);
-const noteDropdown3 = op.inValueSelect("Note 3", noteValues, 0);
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
+const noteDropdown = op.inDropDown("Note 1", noteValues, 0);
+const noteDropdown2 = op.inDropDown("Note 2", noteValues, 0);
+const noteDropdown3 = op.inDropDown("Note 3", noteValues, 0);
 const noteDropdowns = [noteDropdown, noteDropdown2, noteDropdown3];
 
-const normalizeDropdown = op.inValueSelect(
+const normalizeDropdown = op.inDropDown(
     "Normalize Velocity",
     ["none", "0 to 1", "-1 to 1"],
     "none"
@@ -130,7 +130,7 @@ inEvent.onChange = () =>
 
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": `bound to Note: ${noteDropdowns[learnCount].get()}` });
+            op.setUiAttribs({ "info": `bound to Note: ${noteDropdowns[learnCount].get()}` });
             op.refreshParams();
         }
 

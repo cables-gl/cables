@@ -2,12 +2,12 @@
 
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
-let fxaa_span = op.inValueSelect("span", [0, 2, 4, 8, 16, 32, 64]);
-let fxaa_reduceMin = op.inValueFloat("reduceMin");
-let fxaa_reduceMul = op.inValueFloat("reduceMul");
+let fxaa_span = op.inDropDown("span", [0, 2, 4, 8, 16, 32, 64]);
+let fxaa_reduceMin = op.inFloat("reduceMin");
+let fxaa_reduceMul = op.inFloat("reduceMul");
 let useVPSize = op.inBool("use viewport size", true);
-let texWidth = op.inValueInt("width");
-let texHeight = op.inValueInt("height");
+let texWidth = op.inInt("width");
+let texHeight = op.inInt("height");
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

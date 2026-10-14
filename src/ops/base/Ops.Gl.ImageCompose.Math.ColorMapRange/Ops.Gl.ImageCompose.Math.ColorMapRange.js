@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
-    min1 = op.inValueSlider("Old Min", 0),
-    max1 = op.inValueSlider("Old Max", 1),
-    min2 = op.inValueSlider("New Min", 0),
-    max2 = op.inValueSlider("New Max", 1),
+    min1 = op.inFloatSlider("Old Min", 0),
+    max1 = op.inFloatSlider("Old Max", 1),
+    min2 = op.inFloatSlider("New Min", 0),
+    max2 = op.inFloatSlider("New Max", 1),
 
     inClamp = op.inBool("Clamp", true),
 

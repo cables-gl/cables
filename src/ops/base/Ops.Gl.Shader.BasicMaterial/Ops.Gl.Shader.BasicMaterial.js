@@ -42,10 +42,10 @@ function doRender()
 
 {
     // rgba colors
-    const r = op.inValueSlider("r", Math.random()),
-        g = op.inValueSlider("g", Math.random()),
-        b = op.inValueSlider("b", Math.random()),
-        a = op.inValueSlider("a", 1.0);
+    const r = op.inFloatSlider("r", Math.random()),
+        g = op.inFloatSlider("g", Math.random()),
+        b = op.inFloatSlider("b", Math.random()),
+        a = op.inFloatSlider("a", 1.0);
     r.setUiAttribs({ "colorPick": true });
 
     a.uniform = new CGL.Uniform(shader, "f", "a", a);
@@ -153,10 +153,10 @@ function updateTexRepeat()
 {
     // texture coords
 
-    var diffuseRepeatX = op.inValueFloat("diffuseRepeatX", 1);
-    var diffuseRepeatY = op.inValueFloat("diffuseRepeatY", 1);
-    var diffuseOffsetX = op.inValueFloat("Tex Offset X");
-    var diffuseOffsetY = op.inValueFloat("Tex Offset Y");
+    var diffuseRepeatX = op.inFloat("diffuseRepeatX", 1);
+    var diffuseRepeatY = op.inFloat("diffuseRepeatY", 1);
+    var diffuseOffsetX = op.inFloat("Tex Offset X");
+    var diffuseOffsetY = op.inFloat("Tex Offset Y");
 
     op.setPortGroup("Transform Texture", [diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY]);
 

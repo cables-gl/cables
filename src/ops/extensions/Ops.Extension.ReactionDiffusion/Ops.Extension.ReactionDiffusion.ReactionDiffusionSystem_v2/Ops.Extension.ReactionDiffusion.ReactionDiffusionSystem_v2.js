@@ -150,23 +150,23 @@ const rdyPresets = {
 };
 
 // Sim Values
-const rdsFeed = op.inValueSlider("feed", rdyPresets.Default.feed, 0.01, 0.12);
-const rdsFeedVariation = op.inValueSlider("feed variation", rdyPresets.Default.feed_variation, 0, 0.01);
+const rdsFeed = op.inFloatSlider("feed", rdyPresets.Default.feed, 0.01, 0.12);
+const rdsFeedVariation = op.inFloatSlider("feed variation", rdyPresets.Default.feed_variation, 0, 0.01);
 
 op.setPortGroup("Feed", [rdsFeed, rdsFeedVariation]);
 
-const rdsKill = op.inValueSlider("kill", rdyPresets.Default.kill, 0.01, 0.12);
-const rdsKillVariation = op.inValueSlider("kill variation", rdyPresets.Default.kill_variation, 0, 0.01);
+const rdsKill = op.inFloatSlider("kill", rdyPresets.Default.kill, 0.01, 0.12);
+const rdsKillVariation = op.inFloatSlider("kill variation", rdyPresets.Default.kill_variation, 0, 0.01);
 
 op.setPortGroup("Kill", [rdsKill, rdsKillVariation]);
 
-const rdsDiffScale = op.inValueSlider("diffusion scale", rdyPresets.Default.diffusion_scale, 0.12, 2.5);
-const rdsDiffScaleVariation = op.inValueSlider("diffusion scale variation", rdyPresets.Default.diffusion_scale_variation, 0, 0.5);
+const rdsDiffScale = op.inFloatSlider("diffusion scale", rdyPresets.Default.diffusion_scale, 0.12, 2.5);
+const rdsDiffScaleVariation = op.inFloatSlider("diffusion scale variation", rdyPresets.Default.diffusion_scale_variation, 0, 0.5);
 
 op.setPortGroup("Diffusion Scale", [rdsDiffScale, rdsDiffScaleVariation]);
 
-const rdsAnisotropy = op.inValueSlider("anisotropy", rdyPresets.Default.anisotropy, 0.1, 0.9);
-const rdsNoiseScale = op.inValueSlider("Noise Scale", rdyPresets.Default.environment_noise_scale, 1.0, 1000.0);
+const rdsAnisotropy = op.inFloatSlider("anisotropy", rdyPresets.Default.anisotropy, 0.1, 0.9);
+const rdsNoiseScale = op.inFloatSlider("Noise Scale", rdyPresets.Default.environment_noise_scale, 1.0, 1000.0);
 const rdsSepFields = op.inBool("separate Fields", rdyPresets.Default.separate_fields);
 
 op.setPortGroup("Environment", [rdsAnisotropy, rdsNoiseScale, rdsSepFields]);

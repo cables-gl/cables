@@ -1,6 +1,6 @@
 const
     val = op.inString("Value"),
-    de = op.inValue("Delay", 1),
+    de = op.inFloat("Delay", 1),
     outVal = op.outString("Out Value");
 
 let timeout = -1;

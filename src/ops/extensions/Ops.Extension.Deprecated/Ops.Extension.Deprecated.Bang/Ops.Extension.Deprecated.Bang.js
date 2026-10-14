@@ -1,6 +1,6 @@
 let exe = op.inTrigger("exe");
 let beat = op.inTriggerButton("beat");
-let bang = op.outValue("bang");
+let bang = op.outNumber("bang");
 
 let startValue = op.inFloat("startValue");
 let endValue = op.inFloat("endValue");
@@ -9,7 +9,7 @@ let bpm = op.inFloat("bpm");
 
 let anim = new CABLES.Anim();
 
-let easing = op.inValueSelect("easing", ["linear", "smoothstep", "smootherstep"], "linear");
+let easing = op.inDropDown("easing", ["linear", "smoothstep", "smootherstep"], "linear");
 
 function init()
 {

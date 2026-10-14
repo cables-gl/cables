@@ -8,41 +8,41 @@ const inDiffuse = op.inTexture("Diffuse");
 
 const
     inReflectionCubemap = op.inObject("Reflection Cubemap"),
-    inReflMul = op.inValueSlider("Reflection Amount", 0.3),
+    inReflMul = op.inFloatSlider("Reflection Amount", 0.3),
     inReflection = op.inTexture("Reflection Mask"),
-    inRotation = op.inValueSlider("SampleRotation", 0);
+    inRotation = op.inFloatSlider("SampleRotation", 0);
 op.setPortGroup("Reflection", [inReflectionCubemap, inReflMul, inRotation, inReflection]);
 
 const
-    inRoughMul = op.inValueSlider("Roughness", 0),
+    inRoughMul = op.inFloatSlider("Roughness", 0),
     inRough = op.inTexture("Roughness Map");
 op.setPortGroup("Roughness", [inRoughMul, inRough]);
 
 const
     inNormalScreen = op.inBool("Screenspace Normals", false),
     inNormal = op.inTexture("Normal Map"),
-    inNormalIntensity = op.inValueSlider("Normal Intensity", 1),
+    inNormalIntensity = op.inFloatSlider("Normal Intensity", 1),
     inNormalFlip = op.inBool("Normal Flip", false);
 op.setPortGroup("Normals", [inNormalScreen, inNormal, inNormalIntensity, inNormalFlip]);
 
 const
     inAo = op.inTexture("AO"),
-    inAoIntensity = op.inValueSlider("AO Intensity", 1);
+    inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 op.setPortGroup("AO Map", [inAo, inAoIntensity]);
 
 const
     inOpacityMap = op.inTexture("Opacity Map"),
-    inOpacitySrc = op.inValueSelect("Opacity Source Channel", ["Red Channel", "Alpha Channel", "Luminance"], "Red Channel"),
-    inOpacity = op.inValueSlider("Opacity", 1);
+    inOpacitySrc = op.inDropDown("Opacity Source Channel", ["Red Channel", "Alpha Channel", "Luminance"], "Red Channel"),
+    inOpacity = op.inFloatSlider("Opacity", 1);
 
 const
     inFresnel = op.inBool("Fresnel"),
-    inFresnelAmount = op.inValueSlider("Amount", 1.0),
+    inFresnelAmount = op.inFloatSlider("Amount", 1.0),
     inFresnelWidth = op.inFloat("Width", 1.0),
     inFresnelExponent = op.inFloat("Exponent", 5.0),
-    fresnelR = op.inValueSlider("r", Math.random()),
-    fresnelG = op.inValueSlider("g", Math.random()),
-    fresnelB = op.inValueSlider("b", Math.random());
+    fresnelR = op.inFloatSlider("r", Math.random()),
+    fresnelG = op.inFloatSlider("g", Math.random()),
+    fresnelB = op.inFloatSlider("b", Math.random());
 fresnelR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Fresnel", [inFresnelAmount, inFresnel, inFresnelWidth, inFresnelExponent, fresnelR, fresnelG, fresnelB]);
 
@@ -144,12 +144,12 @@ function checkMipmap()
     if (inReflectionCubemap.get() && inReflectionCubemap.get().filter != CGL.Texture.FILTER_MIPMAP)
     {
         hasError = true;
-        op.uiAttr({ "error": "reflection map should be mipmap!" });
+        op.setUiAttribs({ "error": "reflection map should be mipmap!" });
     }
 
     if (!hasError && op.uiAttribs.error)
     {
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
         return true;
     }
 }

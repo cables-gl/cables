@@ -1,6 +1,6 @@
 const
     array = op.inArray("array"),
-    index = op.inValueInt("index"),
+    index = op.inInt("index"),
     result = op.outString("result");
 
 array.ignoreValueSerialize = true;

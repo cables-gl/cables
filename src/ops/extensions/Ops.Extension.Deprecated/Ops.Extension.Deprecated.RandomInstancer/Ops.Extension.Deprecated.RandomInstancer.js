@@ -1,21 +1,21 @@
 let exe = op.inTrigger("Render");
 let geom = op.inObject("Geometry");
 
-let num = op.inValueInt("Count", 1000);
+let num = op.inInt("Count", 1000);
 let size = op.inFloat("size", 10);
 let spread = op.inFloat("Spread", 0);
 
-let shape = op.inValueSelect("Shape", ["Cube", "Sphere", "Torus"]);
+let shape = op.inDropDown("Shape", ["Cube", "Sphere", "Torus"]);
 
 let seed = op.inFloat("random seed", 1);
 
-let scaleX = op.inValueSlider("Scale X", 1);
-let scaleY = op.inValueSlider("Scale Y", 1);
-let scaleZ = op.inValueSlider("Scale Z", 1);
+let scaleX = op.inFloatSlider("Scale X", 1);
+let scaleY = op.inFloatSlider("Scale Y", 1);
+let scaleZ = op.inFloatSlider("Scale Z", 1);
 
-let rotX = op.inValueSlider("Rotate X", 1);
-let rotY = op.inValueSlider("Rotate Y", 1);
-let rotZ = op.inValueSlider("Rotate Z", 1);
+let rotX = op.inFloatSlider("Rotate X", 1);
+let rotY = op.inFloatSlider("Rotate Y", 1);
+let rotZ = op.inFloatSlider("Rotate Z", 1);
 
 spread.onChange =
     shape.onChange =

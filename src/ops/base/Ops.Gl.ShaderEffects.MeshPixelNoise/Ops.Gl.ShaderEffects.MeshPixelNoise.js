@@ -1,14 +1,14 @@
 const
     render=op.inTrigger("render"),
     next=op.outTrigger("trigger"),
-    inScale=op.inValue("Scale",10),
-    inAmount=op.inValueSlider("Amount",0.3),
+    inScale=op.inFloat("Scale",10),
+    inAmount=op.inFloatSlider("Amount",0.3),
     inWorldSpace=op.inBool("WorldSpace");
 
 const
-    r = op.inValueSlider("r",0),
-    g = op.inValueSlider("g",0),
-    b = op.inValueSlider("b",0),
+    r = op.inFloatSlider("r",0),
+    g = op.inFloatSlider("g",0),
+    b = op.inFloatSlider("b",0),
     x = op.inFloat("x",0),
     y = op.inFloat("y",0),
     z = op.inFloat("z",0);

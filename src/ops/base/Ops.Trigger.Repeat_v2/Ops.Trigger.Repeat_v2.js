@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("Execute"),
-    num = op.inValueInt("Repeats", 5),
+    num = op.inInt("Repeats", 5),
     dir = op.inSwitch("Direction", ["Forward", "Backward"], "Forward"),
     next = op.outTrigger("Next"),
     idx = op.addOutPort(new CABLES.Port(op, "index"));

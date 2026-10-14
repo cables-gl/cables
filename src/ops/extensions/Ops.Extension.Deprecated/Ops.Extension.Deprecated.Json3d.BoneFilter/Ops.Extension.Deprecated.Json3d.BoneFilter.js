@@ -1,5 +1,5 @@
 const exec = op.inTrigger("Exec");
-const joint = op.inValueSelect("Joint");
+const joint = op.inDropDown("Joint");
 const next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
@@ -36,7 +36,7 @@ exec.onTriggered = function ()
             if (joint.get() == bones[i].name)boneIndex = i;
         }
 
-        // joint=op.inValueSelect("Joint",values,oldValue);
+        // joint=op.inDropDown("Joint",values,oldValue);
         joint.setUiAttribs({ "values": values });
     }
 

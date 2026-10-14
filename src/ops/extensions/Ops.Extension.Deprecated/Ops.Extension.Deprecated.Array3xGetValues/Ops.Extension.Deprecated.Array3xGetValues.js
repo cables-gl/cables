@@ -1,9 +1,9 @@
-let inIndex = op.inValueInt("Index");
+let inIndex = op.inInt("Index");
 let inArr = op.inArray("Array");
 
-let outX = op.outValue("X");
-let outY = op.outValue("Y");
-let outZ = op.outValue("Z");
+let outX = op.outNumber("X");
+let outY = op.outNumber("Y");
+let outZ = op.outNumber("Z");
 
 inIndex.onChange = inArr.onChange = function ()
 {

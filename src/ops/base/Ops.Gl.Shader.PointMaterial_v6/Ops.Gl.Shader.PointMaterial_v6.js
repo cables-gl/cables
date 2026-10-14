@@ -2,16 +2,16 @@ const cgl = op.patch.cgl;
 
 const
     render = op.inTrigger("render"),
-    pointSize = op.inValueFloat("PointSize", 3),
+    pointSize = op.inFloat("PointSize", 3),
     inPixelSize = op.inBool("Size in Pixels", false),
-    randomSize = op.inValue("Random Size", 0),
+    randomSize = op.inFloat("Random Size", 0),
     makeRound = op.inBool("Round", true),
     makeRoundAA = op.inBool("Round Antialias", false),
     doScale = op.inBool("Scale by Distance", false),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1),
     vertCols = op.inBool("Vertex Colors", false),
     texture = op.inTexture("texture"),
     textureMulColor = op.inBool("Colorize Texture"),
@@ -30,7 +30,7 @@ const
     inAtlasRepeatX = op.inFloat("Atlas Repeat X ", 1),
     inAtlasLookupTex = op.inTexture("Atlas Lookup"),
     inRotTex = op.inTexture("Rotate Texture"),
-    minPointSize = op.inValueFloat("Min Point Size", 0),
+    minPointSize = op.inFloat("Min Point Size", 0),
 
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader", null, "shader");

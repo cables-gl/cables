@@ -1,5 +1,5 @@
 const
-    multiply = op.inValueFloat("Multiply amount", 1.0),
+    multiply = op.inFloat("Multiply amount", 1.0),
     p = op.outNumber("Pi", Math.PI);
 
 multiply.onChange = function ()

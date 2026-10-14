@@ -1,7 +1,7 @@
 const
-    number = op.inValue("value", 2),
-    number1 = op.inValue("number1", 1),
-    number2 = op.inValue("number2", 3),
+    number = op.inFloat("value", 2),
+    number1 = op.inFloat("number1", 1),
+    number2 = op.inFloat("number2", 3),
     result = op.outBoolNum("result");
 
 number1.onChange = exec;

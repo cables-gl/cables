@@ -3,8 +3,8 @@ const
     useSize = op.inBool("Use Canvas Size", true),
     exe = op.inTriggerButton("Screenshot"),
     outNext = op.outTrigger("Finished"),
-    width = op.inValueInt("Width", 0),
-    height = op.inValueInt("Height", 0);
+    width = op.inInt("Width", 0),
+    height = op.inInt("Height", 0);
 
 useSize.onChange = updateSizePorts;
 const cgl = op.patch.cgl;

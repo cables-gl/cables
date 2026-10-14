@@ -1,10 +1,10 @@
-let outR = op.outValue("R");
-let outG = op.outValue("G");
-let outB = op.outValue("B");
+let outR = op.outNumber("R");
+let outG = op.outNumber("G");
+let outB = op.outNumber("B");
 
-let inH = op.inValueSlider("Hue");
-let inS = op.inValueSlider("Saturation", 1);
-let inV = op.inValueSlider("Value", 1);
+let inH = op.inFloatSlider("Hue");
+let inS = op.inFloatSlider("Saturation", 1);
+let inV = op.inFloatSlider("Value", 1);
 
 let r, g, b, i, f, p, q, t;
 

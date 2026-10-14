@@ -2,13 +2,13 @@ const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    amount = op.inValueSlider("Amount", 0.24),
+    amount = op.inFloatSlider("Amount", 0.24),
     animated = op.inBool("Animated", true),
     normalize = op.inBool("Normalize", false),
     inTexMul = op.inTexture("Multiply"),
     trigger = op.outTrigger("Next"),
-    inmean = op.inValueSlider("Mean", 0),
-    variance = op.inValueSlider("Variance", 0.5),
+    inmean = op.inFloatSlider("Mean", 0),
+    variance = op.inFloatSlider("Variance", 0.5),
     speed = op.inFloat("Speed", 5);
 
 const

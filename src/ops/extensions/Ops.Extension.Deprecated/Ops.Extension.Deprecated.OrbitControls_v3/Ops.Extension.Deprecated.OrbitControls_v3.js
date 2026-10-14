@@ -1,25 +1,25 @@
 const
     render = op.inTrigger("render"),
-    minDist = op.inValueFloat("min distance", 1),
-    maxDist = op.inValueFloat("max distance", 999999),
+    minDist = op.inFloat("min distance", 1),
+    maxDist = op.inFloat("max distance", 999999),
 
-    minRotY = op.inValue("min rot y", 0),
-    maxRotY = op.inValue("max rot y", 0),
+    minRotY = op.inFloat("min rot y", 0),
+    maxRotY = op.inFloat("max rot y", 0),
 
-    initialRadius = op.inValue("initial radius", 2),
-    initialAxis = op.inValueSlider("initial axis y", 0.5),
-    initialX = op.inValueSlider("initial axis x", 0.25),
+    initialRadius = op.inFloat("initial radius", 2),
+    initialAxis = op.inFloatSlider("initial axis y", 0.5),
+    initialX = op.inFloatSlider("initial axis x", 0.25),
 
-    smoothness = op.inValueSlider("Smoothness", 1.0),
-    speedX = op.inValue("Speed X", 1),
-    speedY = op.inValue("Speed Y", 1),
+    smoothness = op.inFloatSlider("Smoothness", 1.0),
+    speedX = op.inFloat("Speed X", 1),
+    speedY = op.inFloat("Speed Y", 1),
 
-    active = op.inValueBool("Active", true),
+    active = op.inBool("Active", true),
 
-    allowPanning = op.inValueBool("Allow Panning", true),
-    allowZooming = op.inValueBool("Allow Zooming", true),
-    allowRotation = op.inValueBool("Allow Rotation", true),
-    restricted = op.inValueBool("restricted", true),
+    allowPanning = op.inBool("Allow Panning", true),
+    allowZooming = op.inBool("Allow Zooming", true),
+    allowRotation = op.inBool("Allow Rotation", true),
+    restricted = op.inBool("restricted", true),
     inIdentity = op.inBool("Identity", true),
     inReset = op.inTriggerButton("Reset"),
 

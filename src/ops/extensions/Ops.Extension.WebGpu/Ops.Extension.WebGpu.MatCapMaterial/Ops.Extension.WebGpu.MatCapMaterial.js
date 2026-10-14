@@ -1,9 +1,9 @@
 const
     inTrigger = op.inTrigger("Render"),
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
+    a = op.inFloatSlider("a", 1),
 
     colorizeTexture = op.inBool("Colorize Texture", false),
     diffuseRepeatX = op.inFloat("diffuseRepeatX", 1),

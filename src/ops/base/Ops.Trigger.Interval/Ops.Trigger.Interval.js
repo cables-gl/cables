@@ -1,5 +1,5 @@
 const
-    interval = op.inValue("interval"),
+    interval = op.inFloat("interval"),
     trigger = op.outTrigger("trigger"),
     active = op.inBool("Active", true);
 

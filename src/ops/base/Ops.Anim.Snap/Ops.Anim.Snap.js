@@ -1,16 +1,16 @@
 const
-    inVal = op.inValue("Delta"),
+    inVal = op.inFloat("Delta"),
 
     snapVals = op.inArray("Snap at Values"),
-    snapDist = op.inValue("Snap Distance"),
-    snapDistRelease = op.inValue("Snap Distance Release"),
-    inSlow = op.inValue("Slowdown", 0.4),
-    inBlock = op.inValue("Block Input after snap"),
+    snapDist = op.inFloat("Snap Distance"),
+    snapDistRelease = op.inFloat("Snap Distance Release"),
+    inSlow = op.inFloat("Slowdown", 0.4),
+    inBlock = op.inFloat("Block Input after snap"),
     inReset = op.inTriggerButton("Reset"),
-    inMin = op.inValue("Min", 0),
-    inMax = op.inValue("Max", 0),
+    inMin = op.inFloat("Min", 0),
+    inMax = op.inFloat("Max", 0),
 
-    inMul = op.inValue("Value Mul", 1),
+    inMul = op.inFloat("Value Mul", 1),
     inEnabled = op.inBool("Enabled", true),
 
     outVal = op.outNumber("Result"),

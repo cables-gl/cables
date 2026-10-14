@@ -49,7 +49,7 @@ function loadCubemapTexture(target, texture, url)
     image.onerror = function ()
     {
         console.log("error while loading cube texture...", url);
-        op.uiAttr({ "error": "onerr could not load cubemap texture  " });
+        op.setUiAttribs({ "error": "onerr could not load cubemap texture  " });
         cgl.patch.loading.finished(loadingId);
     };
 

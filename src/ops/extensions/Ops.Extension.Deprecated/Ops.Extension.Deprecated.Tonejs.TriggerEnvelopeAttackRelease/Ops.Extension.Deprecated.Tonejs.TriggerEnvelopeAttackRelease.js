@@ -11,7 +11,7 @@ let durationPort = op.inValueString("Duration", DURATION_DEFAULT);
 durationPort.set(DURATION_DEFAULT);
 let timePort = op.inValueString("Time", TIME_DEFAULT);
 timePort.set(TIME_DEFAULT);
-let velocityPort = op.inValueSlider("Velocity", VELOCITY_DEFAULT);
+let velocityPort = op.inFloatSlider("Velocity", VELOCITY_DEFAULT);
 let triggerAttackReleasePort = op.addInPort(new CABLES.Port(this, "Trigger Attack Release", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
 // listeners

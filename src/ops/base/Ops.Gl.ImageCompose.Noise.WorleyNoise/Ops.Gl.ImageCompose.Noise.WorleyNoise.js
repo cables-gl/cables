@@ -1,16 +1,16 @@
 let render = op.inTrigger("render");
 
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-let amount = op.inValueSlider("Amount", 1);
+let amount = op.inFloatSlider("Amount", 1);
 
-let x = op.inValue("X", 0);
-let y = op.inValue("Y", 0);
-let z = op.inValue("Z", 0);
-let scale = op.inValue("Scale", 22);
+let x = op.inFloat("X", 0);
+let y = op.inFloat("Y", 0);
+let z = op.inFloat("Z", 0);
+let scale = op.inFloat("Scale", 22);
 let inv = op.inBool("Invert", true);
 
-let rangeA = op.inValueSlider("RangeA", 0.4);
-let rangeB = op.inValueSlider("RangeB", 0.5);
+let rangeA = op.inFloatSlider("RangeA", 0.4);
+let rangeB = op.inFloatSlider("RangeB", 0.5);
 
 let trigger = op.outTrigger("trigger");
 

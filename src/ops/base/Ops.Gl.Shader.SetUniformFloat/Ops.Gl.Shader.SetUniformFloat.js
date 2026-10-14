@@ -1,7 +1,7 @@
 const
     inRender = op.inTrigger("Render"),
-    inSelect = op.inValueSelect("Uniform"),
-    inValue = op.inValue("Value"),
+    inSelect = op.inDropDown("Uniform"),
+    inValue = op.inFloat("Value"),
     next = op.outTrigger("Next"),
     outType = op.outString("Type");
 
@@ -49,8 +49,8 @@ function setupUniform()
     {
         uniform = shader.getUniform(inSelect.get());
 
-        if (!uniform) op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
-        else op.uiAttr({ "error": null });
+        if (!uniform) op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
+        else op.setUiAttribs({ "error": null });
 
         doSetupUniform = false;
     }

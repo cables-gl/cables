@@ -8,7 +8,7 @@ let VELOCITY_DEFAULT = 1;
 let audioIn = op.inObject("Audio In");
 let timePort = op.inValueString("Time", TIME_DEFAULT);
 timePort.set(TIME_DEFAULT);
-let velocityPort = op.inValueSlider("Velocity", VELOCITY_DEFAULT);
+let velocityPort = op.inFloatSlider("Velocity", VELOCITY_DEFAULT);
 let triggerAttackPort = op.addInPort(new CABLES.Port(this, "Trigger Attack", CABLES.Port.TYPE_FUNCTION, { "display": "button" }));
 
 // listeners

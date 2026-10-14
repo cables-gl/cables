@@ -1,15 +1,15 @@
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-const axis = op.inValueSelect("Axis", ["X", "Y", "XY", "X Inverted", "Y Inverted", "XY Inverted"], "X");
-const inTreshhold = op.inValueSlider("treshhold", 0.3);
+const axis = op.inDropDown("Axis", ["X", "Y", "XY", "X Inverted", "Y Inverted", "XY Inverted"], "X");
+const inTreshhold = op.inFloatSlider("treshhold", 0.3);
 
 const inSinAnim = op.inBool("Sine Animation", false);
-const inTime = op.inValueFloat("Time");
-const inSinAxis = op.inValueSelect("Sine Source", ["Texcoord X", "Texcoord Y"], "Texcoord X");
+const inTime = op.inFloat("Time");
+const inSinAxis = op.inDropDown("Sine Source", ["Texcoord X", "Texcoord Y"], "Texcoord X");
 
-const inFreq = op.inValueFloat("Frequency", 10);
-const inAmpl = op.inValueFloat("Amplitude", 10);
+const inFreq = op.inFloat("Frequency", 10);
+const inAmpl = op.inFloat("Amplitude", 10);
 
 op.setPortGroup("Sine Animation", [inTime, inSinAnim, inFreq, inAmpl, inSinAxis]);
 

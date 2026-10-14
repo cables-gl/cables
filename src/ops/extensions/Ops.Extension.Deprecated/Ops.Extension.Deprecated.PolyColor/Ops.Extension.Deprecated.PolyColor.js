@@ -10,10 +10,10 @@ let pDescription = op.inValueString("description", "");
 let pTab = op.inValueString("tab", "color");
 let pOrder = op.inValueString("order", "0");
 
-let resultR = op.outValue("value r");
-let resultG = op.outValue("value g");
-let resultB = op.outValue("value b");
-let resultA = op.outValue("value a", 1);
+let resultR = op.outNumber("value r");
+let resultG = op.outNumber("value g");
+let resultB = op.outNumber("value b");
+let resultA = op.outNumber("value a", 1);
 
 pDefaultR.onChange = update;
 pDefaultG.onChange = update;

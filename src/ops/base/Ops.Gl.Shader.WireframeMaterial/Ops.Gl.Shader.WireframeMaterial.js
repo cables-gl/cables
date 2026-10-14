@@ -19,19 +19,19 @@ fill.onChange = function ()
     setDefines();
 };
 
-let w = op.inValueSlider("width", 0.25);
+let w = op.inFloatSlider("width", 0.25);
 w.onChange = function () { uniformWidth.setValue(w.get()); };
 
-let opacity = op.inValueSlider("opacity", 1);
+let opacity = op.inFloatSlider("opacity", 1);
 opacity.onChange = function () { uniformOpacity.setValue(opacity.get()); };
 
 if (cgl.glVersion == 1 && !cgl.gl.getExtension("OES_standard_derivatives"))
 {
-    op.uiAttr({ "error": "no oes standart derivatives!" });
+    op.setUiAttribs({ "error": "no oes standart derivatives!" });
 }
 else
 {
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
 }
 
 let doRender = function ()
@@ -62,9 +62,9 @@ shader.wireframe = true;
 setDefines();
 
 // diffuse color
-let r = op.inValueSlider("diffuse r", Math.random());
-let g = op.inValueSlider("diffuse g", Math.random());
-let b = op.inValueSlider("diffuse b", Math.random());
+let r = op.inFloatSlider("diffuse r", Math.random());
+let g = op.inFloatSlider("diffuse g", Math.random());
+let b = op.inFloatSlider("diffuse b", Math.random());
 
 r.setUiAttribs({ "colorPick": true });
 
@@ -75,14 +75,14 @@ b.uniform = new CGL.Uniform(shader, "f", "b", b);
 {
     // diffuse color
 
-    let fr = op.inValueSlider("Fill R", Math.random());
+    let fr = op.inFloatSlider("Fill R", Math.random());
     fr.setUiAttribs({ "colorPick": true });
     fr.uniform = new CGL.Uniform(shader, "f", "fr", fr);
 
-    let fg = op.inValueSlider("Fill G", Math.random());
+    let fg = op.inFloatSlider("Fill G", Math.random());
     fg.uniform = new CGL.Uniform(shader, "f", "fg", fg);
 
-    let fb = op.inValueSlider("Fill B", Math.random());
+    let fb = op.inFloatSlider("Fill B", Math.random());
     fb.uniform = new CGL.Uniform(shader, "f", "fb", fb);
 }
 

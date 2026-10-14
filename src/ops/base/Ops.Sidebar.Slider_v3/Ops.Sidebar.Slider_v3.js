@@ -4,21 +4,21 @@ const STEP_DEFAULT = 0.00001;
 // inputs
 const parentPort = op.inObject("link");
 const labelPort = op.inString("Text", "Slider");
-const minPort = op.inValue("Min", 0);
-const maxPort = op.inValue("Max", 1);
-const stepPort = op.inValue("Step", STEP_DEFAULT);
+const minPort = op.inFloat("Min", 0);
+const maxPort = op.inFloat("Max", 1);
+const stepPort = op.inFloat("Step", STEP_DEFAULT);
 const labelSuffix = op.inString("Suffix", "");
 
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 
-const inputValuePort = op.inValue("Input", 0.5);
+const inputValuePort = op.inFloat("Input", 0.5);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const reset = op.inTriggerButton("Reset");
 
 let parent = null;
 
-const defaultValuePort = op.inValue("Default", 0.5);
+const defaultValuePort = op.inFloat("Default", 0.5);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs

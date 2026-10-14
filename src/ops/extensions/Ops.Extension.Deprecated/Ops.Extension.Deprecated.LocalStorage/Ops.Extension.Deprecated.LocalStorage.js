@@ -1,6 +1,6 @@
 const inKey = op.inValueString("key");
 const inValue = op.inValueString("value");
-const outValue = op.outValue("stored value");
+const outValue = op.outNumber("stored value");
 
 function getKey() { return (op.patch.namespace || "") + inKey.get(); }
 

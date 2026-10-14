@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     maskInvert = op.inBool("Mask Invert", false),
     mask = op.inTexture("Mask"),
     invertR = op.inBool("Invert R", true),

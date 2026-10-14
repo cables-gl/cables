@@ -131,7 +131,7 @@ function updateShader()
             }
             else
             {
-                newInput = op.inValue(uniform.name, 0);
+                newInput = op.inFloat(uniform.name, 0);
                 newInput.uniform = new CGL.Uniform(shader, "f", uniform.name, newInput);
                 newInput.onChange = function (p)
                 {

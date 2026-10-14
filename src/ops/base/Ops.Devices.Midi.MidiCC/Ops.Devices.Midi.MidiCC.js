@@ -2,8 +2,8 @@
 const MIDIChannels = Array.from(Array(16).keys(), (i) => { return i + 1; });
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
-const ccIndexDropdown = op.inValueInt("CC Index", 0);
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
+const ccIndexDropdown = op.inInt("CC Index", 0);
 
 const inSpeed = op.inFloat("Speed", 1);
 const normalizeDropdown = op.inSwitch("Normalize", ["none", "0 to 1", "-1 to 1"], "none");
@@ -66,7 +66,7 @@ inEvent.onChange = () =>
             gui.emitEvent("portValueEdited", op, ccIndexDropdown, ccIndexDropdown.get());
             gui.emitEvent("portValueEdited", op, midiChannelDropdown, midiChannelDropdown.get());
 
-            op.uiAttr({ "info": `bound to CC: ${ccIndexDropdown.get()}` });
+            op.setUiAttribs({ "info": `bound to CC: ${ccIndexDropdown.get()}` });
             op.refreshParams();
         }
     }

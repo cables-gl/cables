@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    width = op.inValue("width", 1),
-    height = op.inValue("height", 1),
+    width = op.inFloat("width", 1),
+    height = op.inFloat("height", 1),
     pivotX = op.inSwitch("pivot x", ["left", "center", "right"]),
     pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]),
-    nColumns = op.inValueInt("num columns", 1),
-    nRows = op.inValueInt("num rows", 1),
+    nColumns = op.inInt("num columns", 1),
+    nRows = op.inInt("num rows", 1),
     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
     active = op.inBool("Active", true),
     geomOut = op.outObject("geometry", null, "geometry");

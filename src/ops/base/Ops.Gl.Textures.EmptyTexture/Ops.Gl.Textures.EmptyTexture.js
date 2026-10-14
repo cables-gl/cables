@@ -1,5 +1,5 @@
-const width = op.inValue("width", 8);
-const height = op.inValue("height", 8);
+const width = op.inFloat("width", 8);
+const height = op.inFloat("height", 8);
 const textureOut = op.outTexture("texture");
 
 const cgl = op.patch.cgl;

@@ -1,12 +1,12 @@
 let render = op.inTrigger("render");
 let next = op.outTrigger("trigger");
 
-let inArea = op.inValueSelect("Area", ["Sphere", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere");
+let inArea = op.inDropDown("Area", ["Sphere", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere");
 
 let inAmount = op.inFloat("Amount", 1);
 let inSize = op.inFloat("Size", 20);
-let inFalloff = op.inValueSlider("Falloff", 0.5);
-let inScale = op.inValueSlider("Scale", 1);
+let inFalloff = op.inFloatSlider("Falloff", 0.5);
+let inScale = op.inFloatSlider("Scale", 1);
 let inInvert = op.inBool("Invert");
 
 {

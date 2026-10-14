@@ -15,7 +15,7 @@ let wetPort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Wet", node.wet, { "dis
 
 // output ports
 let audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
-let fileLoadedPort = op.outValue("File loaded");
+let fileLoadedPort = op.outNumber("File loaded");
 
 // change listeners
 filePort.onChange = loadAudioFile;

@@ -3,15 +3,15 @@ const
     trigger = op.outTrigger("trigger"),
 
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "multiply"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
 
     depth = op.inTexture("depth texture"),
     zNear = op.inFloat("Frustum Near", 0.1),
     zFar = op.inFloat("Frustum Far", 20),
-    samples = op.inValueInt("Samples", 4),
+    samples = op.inInt("Samples", 4),
     aoRadius = op.inFloat("Ao Radius", 3),
-    aoClamp = op.inValueSlider("Ao Clamp", 0.25),
-    lumInfluence = op.inValueSlider("Luminance Influence", 0.7),
+    aoClamp = op.inFloatSlider("Ao Clamp", 0.25),
+    lumInfluence = op.inFloatSlider("Luminance Influence", 0.7),
     noise = op.inBool("Enable noise", false),
     noiseamount = op.inFloat("Noise amount", 0.0008);
 

@@ -1,11 +1,11 @@
 let render = op.inTrigger("Render");
 
-let inMin = op.inValueSlider("In Min", 0);
-let inMid = op.inValueSlider("Midpoint", 0.5);
-let inMax = op.inValueSlider("In Max", 1);
+let inMin = op.inFloatSlider("In Min", 0);
+let inMid = op.inFloatSlider("Midpoint", 0.5);
+let inMax = op.inFloatSlider("In Max", 1);
 
-let outMin = op.inValueSlider("Out Min", 0);
-let outMax = op.inValueSlider("Out Max", 1);
+let outMin = op.inFloatSlider("Out Min", 0);
+let outMax = op.inFloatSlider("Out Max", 1);
 
 let trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
 

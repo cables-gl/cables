@@ -4,7 +4,7 @@ let stacks = op.addInPort(new CABLES.Port(op, "stacks", CABLES.Port.TYPE_VALUE))
 let radius = op.addInPort(new CABLES.Port(op, "radius", CABLES.Port.TYPE_VALUE));
 let height = op.addInPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
 
-let startSlice = op.inValueInt("Start Slice", 0);
+let startSlice = op.inInt("Start Slice", 0);
 
 let trigger = op.outTrigger("trigger");
 let geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));

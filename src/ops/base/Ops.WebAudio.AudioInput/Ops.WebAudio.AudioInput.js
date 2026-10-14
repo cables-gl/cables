@@ -3,7 +3,7 @@ let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 const inInit = op.inTriggerButton("Start");
 const audioOut = op.outObject("audio out");
-const recording = op.outValueBool("Listening", false);
+const recording = op.outBool("Listening", false);
 
 function streamAudio(stream)
 {

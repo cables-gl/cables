@@ -1,14 +1,14 @@
 let render = op.inTrigger("render");
-let segments = op.inValueInt("segments", 40);
+let segments = op.inInt("segments", 40);
 let radius = op.inFloat("radius", 1);
 let mulX = op.inFloat("mulX", 1);
 let mulY = op.inFloat("mulY", 1);
-let percent = op.inValueSlider("percent");
+let percent = op.inFloatSlider("percent");
 let offset = op.inFloat("offset");
 let trigger = op.outTrigger("trigger");
-let index = op.outValue("index");
-let outX = op.outValue("X");
-let outY = op.outValue("Y");
+let index = op.outNumber("index");
+let outX = op.outNumber("X");
+let outY = op.outNumber("Y");
 let speed = op.inFloat("speed", 1);
 
 let startTime = CABLES.now() / 1000;

@@ -3,7 +3,7 @@ const
     next = op.outTrigger("Next"),
     inGeomA = op.inObject("Geometry 1"),
     inGeomB = op.inObject("Geometry 2"),
-    inFade = op.inValueSlider("Fade"),
+    inFade = op.inFloatSlider("Fade"),
     inNormals = op.inBool("Normals");
 
 let cgl = op.patch.cgl;

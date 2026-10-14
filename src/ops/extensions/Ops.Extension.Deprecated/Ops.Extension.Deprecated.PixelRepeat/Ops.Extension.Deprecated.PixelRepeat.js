@@ -17,7 +17,7 @@ let uniTime = new CGL.Uniform(shader, "f", "time", time);
 
 let mask = op.addInPort(new CABLES.Port(op, "mask", CABLES.Port.TYPE_TEXTURE, { "preview": true }));
 
-let prim = op.inValueSelect("Primitive", ["Rectangle", "Circle"], "Rectangle");
+let prim = op.inDropDown("Primitive", ["Rectangle", "Circle"], "Rectangle");
 
 render.onTriggered = function ()
 {

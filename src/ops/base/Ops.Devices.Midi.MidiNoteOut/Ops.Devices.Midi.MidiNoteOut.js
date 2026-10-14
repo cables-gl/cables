@@ -65,11 +65,11 @@ inNoteDropdown.onChange = inChannel.onChange = killLastNote;
 inNoteNumber.onChange = inVelocity.onChange = function ()
 {
     /* if (!inNoteDropdown.get()) {
-       // if (!op.uiAttribs.error) op.uiAttr({ error: "Please choose a MIDI Note!" });
+       // if (!op.uiAttribs.error) op.setUiAttribs({ error: "Please choose a MIDI Note!" });
         return;
     }
     */
-    // if (op.uiAttribs.error) op.uiAttr({ error: null });
+    // if (op.uiAttribs.error) op.setUiAttribs({ error: null });
 
     const val = inVelocity.get();
     const noteNumber = inNoteNumber.get();

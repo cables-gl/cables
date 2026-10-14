@@ -1,7 +1,7 @@
 const
-    inW = op.inValueInt("Width"),
-    inH = op.inValueInt("Height"),
-    inStrat = op.inValueSelect("Strategy", ["floor", "floor/2", "ceil"], "floor"),
+    inW = op.inInt("Width"),
+    inH = op.inInt("Height"),
+    inStrat = op.inDropDown("Strategy", ["floor", "floor/2", "ceil"], "floor"),
     outW = op.outNumber("Width Result"),
     outH = op.outNumber("Height Result");
 inStrat.onChange = updateStrategy;

@@ -1,7 +1,7 @@
 const
     fileName = op.inUrl("file", "audio"),
     inPlay = op.inBool("Play"),
-    volume = op.inValueSlider("Volume"),
+    volume = op.inFloatSlider("Volume"),
     inTimeOffset = op.inFloat("Offset"),
     doLoop = op.inBool("Loop"),
     doRewind = op.inBool("Rewind on play", false),

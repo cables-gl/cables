@@ -1,5 +1,5 @@
 const
-    number1 = op.inValueFloat("number"),
+    number1 = op.inFloat("number"),
     decPlaces = op.inInt("Decimal Places", 0),
     result = op.outNumber("result");
 

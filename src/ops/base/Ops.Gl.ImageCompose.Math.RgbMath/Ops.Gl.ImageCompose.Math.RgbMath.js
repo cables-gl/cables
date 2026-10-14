@@ -6,11 +6,11 @@ const
     chanB = op.inBool("B Active", true),
     chanA = op.inBool("A Active", false),
     inTexValues = op.inTexture("Texture"),
-    r = op.inValue("r", 1),
-    g = op.inValue("g", 1),
-    b = op.inValue("b", 1),
-    a = op.inValue("a", 1),
-    mulTex = op.inValue("Multiply Texture", 1),
+    r = op.inFloat("r", 1),
+    g = op.inFloat("g", 1),
+    b = op.inFloat("b", 1),
+    a = op.inFloat("a", 1),
+    mulTex = op.inFloat("Multiply Texture", 1),
 
     inTexMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");

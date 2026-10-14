@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     inCubemap = op.inObject("Cubemap"),
-    inAmount = op.inValueSlider("Amount", 0.3),
+    inAmount = op.inFloatSlider("Amount", 0.3),
     next = op.outTrigger("next");
 
 const moduleFrag = null;

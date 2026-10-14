@@ -1,4 +1,4 @@
-const idx = op.inValueInt("Index"),
+const idx = op.inInt("Index"),
     result = op.outString("Result"),
     inStrs = op.inMultiPort2("File", CABLES.Port.TYPE_STRING, { "display": "file" }, 5),
     outNum = op.outNumber("Num Values");

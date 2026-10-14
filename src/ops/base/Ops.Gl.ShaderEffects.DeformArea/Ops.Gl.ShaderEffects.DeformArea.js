@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inSize = op.inValue("Size", 1),
-    inStrength = op.inValue("Strength", 0.5),
+    inSize = op.inFloat("Size", 1),
+    inStrength = op.inFloat("Strength", 0.5),
     inSmooth = op.inBool("Smooth", true),
     inWorldSpace = op.inBool("WorldSpace", false),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z");
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z");
 
 const cgl = op.patch.cgl;
 

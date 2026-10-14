@@ -1,6 +1,6 @@
 const exe = op.inTriggerButton("exe"),
     array = op.inArray("array"),
-    index = op.inValueInt("index"),
+    index = op.inInt("index"),
     value = op.inArray("new Array"),
     values = op.outArray("values");
 

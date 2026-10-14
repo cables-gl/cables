@@ -1,10 +1,10 @@
 const
-    time = op.inValue("Time"),
+    time = op.inFloat("Time"),
     speed = op.inFloat("Frequency", 1),
-    type = op.inValueSelect("Type", ["sine", "triangle", "ramp up", "ramp down", "square"], "sine"),
-    phase = op.inValue("Phase", 0),
-    rangeMin = op.inValue("Range Min", -1),
-    rangeMax = op.inValue("Range Max", 1),
+    type = op.inDropDown("Type", ["sine", "triangle", "ramp up", "ramp down", "square"], "sine"),
+    phase = op.inFloat("Phase", 0),
+    rangeMin = op.inFloat("Range Min", -1),
+    rangeMax = op.inFloat("Range Max", 1),
     result = op.outNumber("Result");
 
 let v = 0;

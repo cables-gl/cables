@@ -2,8 +2,8 @@ const
     render = op.inTrigger("render"),
     string = op.inValueString("Text", "cables"),
 
-    letterSpacing = op.inValue("Letter Spacing", 1),
-    lineWidth = op.inValue("Line Width", 2),
+    letterSpacing = op.inFloat("Letter Spacing", 1),
+    lineWidth = op.inFloat("Line Width", 2),
     align = op.inSwitch("align", ["left", "center", "right"]);
 
 let stringWidth = 0;

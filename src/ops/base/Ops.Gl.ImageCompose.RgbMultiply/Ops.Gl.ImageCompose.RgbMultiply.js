@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
-const r = op.inValue("r", 1);
-const g = op.inValue("g", 1);
-const b = op.inValue("b", 1);
+const r = op.inFloat("r", 1);
+const g = op.inFloat("g", 1);
+const b = op.inFloat("b", 1);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

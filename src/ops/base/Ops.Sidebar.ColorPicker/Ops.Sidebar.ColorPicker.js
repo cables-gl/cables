@@ -5,9 +5,9 @@ const DEFAULT_COLOR_HEX = "#07F78C";
 const parentPort = op.inObject("Link");
 const labelPort = op.inValueString("Text", "Hex Color");
 const defaultColorArr = hexToRgbNorm(DEFAULT_COLOR_HEX);
-const inputRedPort = op.inValueSlider("Input Red", defaultColorArr[0]);
-const inputGreenPort = op.inValueSlider("Input Green", defaultColorArr[1]);
-const inputBluePort = op.inValueSlider("Input Blue", defaultColorArr[2]);
+const inputRedPort = op.inFloatSlider("Input Red", defaultColorArr[0]);
+const inputGreenPort = op.inFloatSlider("Input Green", defaultColorArr[1]);
+const inputBluePort = op.inFloatSlider("Input Blue", defaultColorArr[2]);
 // const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const defaultValuePort = op.inValueString("Default", DEFAULT_COLOR_HEX);
@@ -15,10 +15,10 @@ defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
 const siblingsPort = op.outObject("Children");
-// const valuePort = op.outValue('Result', defaultValuePort.get());
-const redPort = op.outValue("Red", 0.0);
-const greenPort = op.outValue("Green", 0.0);
-const bluePort = op.outValue("Blue", 0.0);
+// const valuePort = op.outNumber('Result', defaultValuePort.get());
+const redPort = op.outNumber("Red", 0.0);
+const greenPort = op.outNumber("Green", 0.0);
+const bluePort = op.outNumber("Blue", 0.0);
 
 const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 

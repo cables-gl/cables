@@ -4,7 +4,7 @@ const
     text = op.inString("text", "cables"),
 
     drawMesh = op.inBool("Draw Mesh", true),
-    meshScale = op.inValueFloat("Scale Mesh", 0.5),
+    meshScale = op.inFloat("Scale Mesh", 0.5),
 
     texSizeMeth = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
 
@@ -16,7 +16,7 @@ const
 
     font = op.inString("font", "Arial"),
     weight = op.inString("weight", "normal"),
-    inFontSize = op.inValueFloat("fontSize", 100),
+    inFontSize = op.inFloat("fontSize", 100),
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("Vertical align", ["Top", "Middle", "Bottom"], "Top"),
 
@@ -28,22 +28,22 @@ const
     inPaddingX = op.inInt("Padding X", 0),
 
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
-    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    wrap = op.inDropDown("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
     cachetexture = op.inBool("Reuse Texture", true),
     drawDebug = op.inBool("Show Debug", false),
 
     reloadOnFont = op.inBool("Redraw On Font Load", true),
 
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
     inOpacity = op.inFloatSlider("Opacity", 1),
 
-    bgR = op.inValueSlider("background R", 0),
-    bgG = op.inValueSlider("background G", 0),
-    bgB = op.inValueSlider("background B", 0),
-    bgA = op.inValueSlider("background A", 1),
+    bgR = op.inFloatSlider("background R", 0),
+    bgG = op.inFloatSlider("background G", 0),
+    bgB = op.inFloatSlider("background B", 0),
+    bgA = op.inFloatSlider("background A", 1),
 
     inRedraw = op.inTriggerButton("Force Redraw"),
 

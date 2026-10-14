@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("render"),
-    posX = op.inValueFloat("posX"),
-    posY = op.inValueFloat("posY"),
-    posZ = op.inValueFloat("posZ"),
-    scale = op.inValueFloat("scale"),
-    rotX = op.inValueFloat("rotX"),
-    rotY = op.inValueFloat("rotY"),
-    rotZ = op.inValueFloat("rotZ"),
+    posX = op.inFloat("posX"),
+    posY = op.inFloat("posY"),
+    posZ = op.inFloat("posZ"),
+    scale = op.inFloat("scale"),
+    rotX = op.inFloat("rotX"),
+    rotY = op.inFloat("rotY"),
+    rotZ = op.inFloat("rotZ"),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Position", [posX, posY, posZ]);

@@ -1,7 +1,7 @@
 var playPause=op.inBool("Play",true);
 var reset=op.inTriggerButton("Reset");
-var outTime=op.outValue("Time");
-var inSpeed=op.inValue("Speed",1);
+var outTime=op.outNumber("Time");
+var inSpeed=op.inFloat("Speed",1);
 
 var timer=new CABLES.Timer();
 

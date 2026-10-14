@@ -3,13 +3,13 @@ const cgl=op.patch.cgl;
 op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
 
-var inSize=op.inValue("Size",1);
-var inStrength=op.inValue("Strength",1);
+var inSize=op.inFloat("Size",1);
+var inStrength=op.inFloat("Strength",1);
 var inSmooth=op.inBool("Smooth",true);
 
-var x=op.inValue("x");
-var y=op.inValue("y");
-var z=op.inValue("z");
+var x=op.inFloat("x");
+var y=op.inFloat("y");
+var z=op.inFloat("z");
 
 var shader=null;
 

@@ -1,5 +1,5 @@
 let array = op.inArray("Array");
-let index = op.inValueInt("index");
+let index = op.inInt("index");
 
 let value = op.outValueString("String");
 

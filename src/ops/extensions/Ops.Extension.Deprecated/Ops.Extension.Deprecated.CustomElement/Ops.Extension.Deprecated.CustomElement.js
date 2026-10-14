@@ -116,7 +116,7 @@ console.log("op: ", op);
 let PARENT = op.patch.cgl.canvas;
 
 // inputs
-let elTypePort = op.inValueSelect("Element Type", ELEMENT_TYPES, ELEMENT_TYPE_DEFAULT_TEXT);
+let elTypePort = op.inDropDown("Element Type", ELEMENT_TYPES, ELEMENT_TYPE_DEFAULT_TEXT);
 let idPort = op.inValueString("Id");
 let classPort = op.inValueString("Class");
 let textPort = op.inValueString("Text");

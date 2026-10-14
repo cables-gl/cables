@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
 
     inTexAccum = op.inTexture("OIT Accum"),
     inTexReveal = op.inTexture("OIT Revealage"),

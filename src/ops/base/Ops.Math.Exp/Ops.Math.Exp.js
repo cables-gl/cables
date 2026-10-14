@@ -1,4 +1,4 @@
-const number = op.inValueFloat("number");
+const number = op.inFloat("number");
 const result = op.outNumber("result");
 
 number.onChange = function ()

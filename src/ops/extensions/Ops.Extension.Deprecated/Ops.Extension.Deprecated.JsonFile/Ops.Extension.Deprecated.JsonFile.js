@@ -24,12 +24,12 @@ let reload = function ()
                 let data = JSON.parse(_data);
                 if (result.get())result.set(null);
                 result.set(data);
-                op.uiAttr({ "error": "" });
+                op.setUiAttribs({ "error": "" });
                 patch.loading.finished(loadingId);
             }
             catch (e)
             {
-                op.uiAttr({ "error": "error loading json" });
+                op.setUiAttribs({ "error": "error loading json" });
                 patch.loading.finished(loadingId);
             }
         });

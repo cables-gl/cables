@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 const texture = op.inTexture("texture");
 
-const inMode = op.inValueSelect("Mode", ["G", "R", "COLOR"], "COLOR");
+const inMode = op.inDropDown("Mode", ["G", "R", "COLOR"], "COLOR");
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
@@ -59,12 +59,12 @@ texture.onChange = function ()
     }
 };
 
-let w = op.inValueSlider("weightMul", 0.6);
+let w = op.inFloatSlider("weightMul", 0.6);
 w.uniform = new CGL.Uniform(shader, "f", "weightMul", w);
 
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
 r.set(0.467);
@@ -76,14 +76,14 @@ g.uniform = new CGL.Uniform(shader, "f", "g", g);
 b.set(0.098);
 b.uniform = new CGL.Uniform(shader, "f", "b", b);
 
-let white = op.inValueSlider("white", 0);
+let white = op.inFloatSlider("white", 0);
 white.uniform = new CGL.Uniform(shader, "f", "white", white);
 
-const diffuseRepeatX = op.inValue("diffuseRepeatX", 1);
-const diffuseRepeatY = op.inValue("diffuseRepeatY", 1);
+const diffuseRepeatX = op.inFloat("diffuseRepeatX", 1);
+const diffuseRepeatY = op.inFloat("diffuseRepeatY", 1);
 
-const diffuseOffsetX = op.inValue("Tex Offset X", 0);
-const diffuseOffsetY = op.inValue("Tex Offset Y", 0);
+const diffuseOffsetX = op.inFloat("Tex Offset X", 0);
+const diffuseOffsetY = op.inFloat("Tex Offset Y", 0);
 
 const diffuseRepeatXUniform = new CGL.Uniform(shader, "f", "diffuseRepeatX", diffuseRepeatX);
 const diffuseRepeatYUniform = new CGL.Uniform(shader, "f", "diffuseRepeatY", diffuseRepeatY);

@@ -3,9 +3,9 @@ var inExe=op.inTrigger("Exec");
 var inString=op.inValueString("String","cables");
 
 var next=op.outTrigger("Next");
-var outIndex=op.outValue("Index");
-var outChar=op.outValue("Character");
-var outLength=op.outValue("Length");
+var outIndex=op.outNumber("Index");
+var outChar=op.outNumber("Character");
+var outLength=op.outNumber("Length");
 
 inExe.onTriggered=function()
 {

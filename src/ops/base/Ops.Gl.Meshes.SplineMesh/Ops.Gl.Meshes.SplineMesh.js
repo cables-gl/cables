@@ -1,12 +1,12 @@
 const render = op.inTrigger("Render");
 const trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.Port.TYPE_FUNCTION));
-const thick = op.inValue("Thickness");
-const inStart = op.inValueSlider("Start");
-const inLength = op.inValueSlider("Length", 1);
+const thick = op.inFloat("Thickness");
+const inStart = op.inFloatSlider("Start");
+const inLength = op.inFloatSlider("Length", 1);
 const calcNormals = op.inBool("Calculate Normals", false);
 const inStrip = op.inBool("Line Strip", true);
 const inPoints = op.inArray("points");
-const inNumPoints = op.inValue("Num Points", 0);
+const inNumPoints = op.inFloat("Num Points", 0);
 
 const geomOut = op.addOutPort(new CABLES.Port(op, "geometry", CABLES.Port.TYPE_OBJECT));
 

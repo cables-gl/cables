@@ -357,7 +357,7 @@ op.addSubLink = function (p, p2)
 
     const bounds = gui.patchView.getSubPatchBounds(op.patchId.get());
 
-    getSubPatchInputOp().uiAttr(
+    getSubPatchInputOp().setUiAttribs(
         {
             "translate":
             {
@@ -366,7 +366,7 @@ op.addSubLink = function (p, p2)
             }
         });
 
-    getSubPatchOutputOp().uiAttr(
+    getSubPatchOutputOp().setUiAttribs(
         {
             "translate":
             {

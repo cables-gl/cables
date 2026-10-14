@@ -1,8 +1,8 @@
 const
-    inNumX = op.inValueInt("Rows", 32),
-    inNumY = op.inValueInt("Columns", 32),
-    inWidth = op.inValueInt("Width", 2),
-    inHeight = op.inValueInt("Height", 2),
+    inNumX = op.inInt("Rows", 32),
+    inNumY = op.inInt("Columns", 32),
+    inWidth = op.inInt("Width", 2),
+    inHeight = op.inInt("Height", 2),
     inCenter = op.inBool("Center", true),
     outArr = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),

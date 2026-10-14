@@ -1,7 +1,7 @@
 var text=op.addInPort(new CABLES.Port(op,"text",CABLES.Port.TYPE_VALUE,{type:'string',display:'editor'}));
 var inRestart=op.inTriggerButton("Restart");
-var speed=op.inValue("Speed",500);
-var speedVariation=op.inValueSlider("Speed Variation");
+var speed=op.inFloat("Speed",500);
+var speedVariation=op.inFloatSlider("Speed Variation");
 
 var outText=op.outValueString("Result");
 var outChanged=op.outTrigger("Changed");

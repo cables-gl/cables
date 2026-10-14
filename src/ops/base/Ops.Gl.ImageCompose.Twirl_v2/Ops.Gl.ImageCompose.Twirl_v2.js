@@ -1,8 +1,8 @@
 let render = op.inTrigger("Render");
-let amount = op.inValue("Amount");
-let radius = op.inValue("Radius");
-let centerX = op.inValue("Center X", 0.5);
-let centerY = op.inValue("Center Y", 0.5);
+let amount = op.inFloat("Amount");
+let radius = op.inFloat("Radius");
+let centerX = op.inFloat("Center X", 0.5);
+let centerY = op.inFloat("Center Y", 0.5);
 let trigger = op.outTrigger("Next");
 
 let cgl = op.patch.cgl;

@@ -4,16 +4,16 @@ const
     loop = op.inBool("loop"),
     autoPlay = op.inBool("auto play", false),
 
-    volume = op.inValueSlider("Volume", 1),
+    volume = op.inFloatSlider("Volume", 1),
     muted = op.inBool("mute", true),
-    speed = op.inValueFloat("speed", 1),
+    speed = op.inFloat("speed", 1),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "linear"),
-    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    tfilter = op.inDropDown("filter", ["nearest", "linear"], "linear"),
+    wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
 
     flip = op.inBool("flip", true),
-    fps = op.inValueFloat("fps", 25),
-    time = op.inValueFloat("set time"),
+    fps = op.inFloat("fps", 25),
+    time = op.inFloat("set time"),
     rewind = op.inTriggerButton("rewind"),
 
     inPreload = op.inBool("Preload", true),

@@ -2,8 +2,8 @@
 // but will not send another until the incoming inValue
 // drops below the threshold and go's above it again
 
-const inValue = op.inValue("Input"),
-    inThreshold = op.inValue("Threshold"),
+const inValue = op.inFloat("Input"),
+    inThreshold = op.inFloat("Threshold"),
     output = op.outTrigger("Output");
 
 let hasThresholdBeenExceeded = false;

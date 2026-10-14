@@ -2,8 +2,8 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     axis = op.inSwitch("axis", ["X", "Y"], "X"),
-    width = op.inValueFloat("width", 0.5),
-    offset = op.inValueFloat("offset"),
+    width = op.inFloat("width", 0.5),
+    offset = op.inFloat("offset"),
     flip = op.inBool("flip");
 
 const cgl = op.patch.cgl;

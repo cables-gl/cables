@@ -1,14 +1,14 @@
 const
-    mulAxis = op.inValue("Mul Orientation", 1),
-    axis1 = op.outValue("Orientation Alpha"),
-    axis2 = op.outValue("Orientation Beta"),
-    axis3 = op.outValue("Orientation Gamme"),
-    accX = op.outValue("Acceleration X"),
-    accY = op.outValue("Acceleration Y"),
-    accZ = op.outValue("Acceleration Z"),
-    accNoGravX = op.outValue("Acceleration X no gravity"),
-    accNoGravY = op.outValue("Acceleration Y no gravity"),
-    accNoGravZ = op.outValue("Acceleration Z no gravity"),
+    mulAxis = op.inFloat("Mul Orientation", 1),
+    axis1 = op.outNumber("Orientation Alpha"),
+    axis2 = op.outNumber("Orientation Beta"),
+    axis3 = op.outNumber("Orientation Gamme"),
+    accX = op.outNumber("Acceleration X"),
+    accY = op.outNumber("Acceleration Y"),
+    accZ = op.outNumber("Acceleration Z"),
+    accNoGravX = op.outNumber("Acceleration X no gravity"),
+    accNoGravY = op.outNumber("Acceleration Y no gravity"),
+    accNoGravZ = op.outNumber("Acceleration Z no gravity"),
     outObj = op.outObject("Object");
 
 let lastTime = 0;

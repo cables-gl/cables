@@ -3,8 +3,8 @@ let trigger = op.outTrigger("trigger");
 
 let cgl = op.patch.cgl;
 
-let inLayer = op.inValueInt("Layer");
-let inNumLayers = op.inValueInt("Num Layers");
+let inLayer = op.inInt("Layer");
+let inNumLayers = op.inInt("Num Layers");
 let inStrength = op.inFloat("Strength", 1);
 let inTime = op.inFloat("Time");
 

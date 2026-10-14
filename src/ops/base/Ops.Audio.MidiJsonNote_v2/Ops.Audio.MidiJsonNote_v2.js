@@ -4,8 +4,8 @@ const
     inNote = op.inString("Note"),
     // inNoteMidi = op.inInt("Midi"),
     inChannel = op.inValueString("Channel", -1),
-    inStartBeat = op.inValueInt("Beat Start", 0),
-    inEndBeat = op.inValueInt("Beat End", 0),
+    inStartBeat = op.inInt("Beat Start", 0),
+    inEndBeat = op.inInt("Beat End", 0),
 
     outCount = op.outNumber("Count"),
     outProgress = op.outNumber("Progress"),

@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Execute"),
     next = op.outTrigger("Next"),
 
-    prim = op.inValueSelect("Primitive", ["LINES", "LINE_STRIP", "LINE_LOOP", "POINTS", "TRIANGLES", "TRIANGLE_FAN", "TRIANGLE_STRIP"], "LINES");
+    prim = op.inDropDown("Primitive", ["LINES", "LINE_STRIP", "LINE_LOOP", "POINTS", "TRIANGLES", "TRIANGLE_FAN", "TRIANGLE_STRIP"], "LINES");
 const cgl = op.patch.cgl;
 
 let glPrim = cgl.gl.LINES;

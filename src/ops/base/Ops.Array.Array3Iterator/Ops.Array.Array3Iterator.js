@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("Execute"),
     arr = op.inArray("Array"),
-    pStep = op.inValue("Step"),
+    pStep = op.inFloat("Step"),
     trigger = op.outTrigger("Trigger"),
     idx = op.outNumber("Index"),
     valX = op.outNumber("Value 1"),

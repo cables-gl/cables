@@ -4,7 +4,7 @@ let stacks = op.inFloat("stacks");
 let radius = op.inFloat("radius");
 let height = op.inFloat("height");
 
-let startSlice = op.inValueInt("Start Slice", 0);
+let startSlice = op.inInt("Start Slice", 0);
 
 let trigger = op.outTrigger("trigger");
 let geomOut = op.outObject("geometry");

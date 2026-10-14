@@ -4,20 +4,20 @@ let cgl = op.patch.cgl;
 op.render = op.addInPort(new CABLES.Port(this, "render", CABLES.Port.TYPE_FUNCTION));
 op.trigger = op.addOutPort(new CABLES.Port(this, "trigger", CABLES.Port.TYPE_FUNCTION));
 
-let inScale = op.inValue("Scale", 1);
-let inSize = op.inValue("Size", 1);
-let inStrength = op.inValue("Strength", 1);
+let inScale = op.inFloat("Scale", 1);
+let inSize = op.inFloat("Size", 1);
+let inStrength = op.inFloat("Strength", 1);
 let inSmooth = op.inBool("Smooth", true);
 
-let output = op.inValueSelect("Output", ["Add XYZ", "Add Z"], "Add XYZ");
+let output = op.inDropDown("Output", ["Add XYZ", "Add Z"], "Add XYZ");
 
-let x = op.inValue("x");
-let y = op.inValue("y");
-let z = op.inValue("z");
+let x = op.inFloat("x");
+let y = op.inFloat("y");
+let z = op.inFloat("z");
 
-let scrollx = op.inValue("Scroll X");
-let scrolly = op.inValue("Scroll Y");
-let scrollz = op.inValue("Scroll Z");
+let scrollx = op.inFloat("Scroll X");
+let scrolly = op.inFloat("Scroll Y");
+let scrollz = op.inFloat("Scroll Z");
 
 
 let shader = null;

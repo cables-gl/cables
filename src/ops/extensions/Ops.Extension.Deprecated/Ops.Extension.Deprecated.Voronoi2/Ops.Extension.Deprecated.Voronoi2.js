@@ -8,7 +8,7 @@ let pIgnoreBorderCells = op.inBool("Ignore Border Cells", false);
 let pWidth = op.inFloat("Width", 2);
 let pHeight = op.inFloat("Height", 2);
 
-let fill = op.inValueSlider("Fill", 0);
+let fill = op.inFloatSlider("Fill", 0);
 let pExtrCenter = op.inFloat("Extrude Cell Center", 0.1);
 let maxSize = op.inFloat("Scale Out Size Start", 0);
 let maxSizeEnd = op.inFloat("Scale Out Size End", 0);

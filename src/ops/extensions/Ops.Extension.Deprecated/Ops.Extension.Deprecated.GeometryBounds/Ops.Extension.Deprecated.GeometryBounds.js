@@ -4,21 +4,21 @@ const inDraw = op.inBool("Draw", true);
 
 const next = op.outTrigger("Next");
 
-const outMinX = op.outValue("Min X");
-const outMaxX = op.outValue("Max X");
-const outMinY = op.outValue("Min Y");
-const outMaxY = op.outValue("Max Y");
+const outMinX = op.outNumber("Min X");
+const outMaxX = op.outNumber("Max X");
+const outMinY = op.outNumber("Min Y");
+const outMaxY = op.outNumber("Max Y");
 
-const outMinZ = op.outValue("Min Z");
-const outMaxZ = op.outValue("Max Z");
+const outMinZ = op.outNumber("Min Z");
+const outMaxZ = op.outNumber("Max Z");
 
-const outCenterX = op.outValue("Center X");
-const outCenterY = op.outValue("Center Y");
-const outCenterZ = op.outValue("Center Z");
+const outCenterX = op.outNumber("Center X");
+const outCenterY = op.outNumber("Center Y");
+const outCenterZ = op.outNumber("Center Z");
 
-const outWidth = op.outValue("Width");
-const outHeight = op.outValue("Height");
-const outLength = op.outValue("Length");
+const outWidth = op.outNumber("Width");
+const outHeight = op.outNumber("Height");
+const outLength = op.outNumber("Length");
 
 let wireMesh = null;
 let bounds = null;

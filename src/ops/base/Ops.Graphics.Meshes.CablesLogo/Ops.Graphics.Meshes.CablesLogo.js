@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    scale = op.inValue("Scale", 1),
+    scale = op.inFloat("Scale", 1),
     inDraw = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("Geometry");

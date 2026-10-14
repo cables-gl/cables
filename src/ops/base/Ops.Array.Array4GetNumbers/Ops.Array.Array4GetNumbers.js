@@ -1,6 +1,6 @@
 const
     pArr = op.inArray("Array"),
-    pIndex = op.inValueInt("Index"),
+    pIndex = op.inInt("Index"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z"),

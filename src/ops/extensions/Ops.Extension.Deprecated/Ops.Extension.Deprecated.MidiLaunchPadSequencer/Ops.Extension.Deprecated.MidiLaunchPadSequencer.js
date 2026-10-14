@@ -2,7 +2,7 @@ let eventIn = op.addInPort(new CABLES.Port(op, "Event Input", CABLES.Port.TYPE_O
 
 let exec = this.addInPort(new CABLES.Port(this, "exec", CABLES.Port.TYPE_FUNCTION));
 
-let beatPos = op.inValueInt("Beat Position");
+let beatPos = op.inInt("Beat Position");
 let seqArr = op.inArray("Seq");
 
 let seqOut = op.outArray("Seq Out");

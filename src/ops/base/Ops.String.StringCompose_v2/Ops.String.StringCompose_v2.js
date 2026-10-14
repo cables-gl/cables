@@ -6,7 +6,7 @@ const
     d=op.inString('String D',3),
     e=op.inString('String E'),
     f=op.inString('String F'),
-    result=op.outValue("Result");
+    result=op.outNumber("Result");
 
 format.onChange=
     a.onChange=

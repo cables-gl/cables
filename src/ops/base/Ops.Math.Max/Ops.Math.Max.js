@@ -1,6 +1,6 @@
 const
-    value = op.inValueFloat("value", 1),
-    max = op.inValueFloat("Maximum", 1),
+    value = op.inFloat("value", 1),
+    max = op.inFloat("Maximum", 1),
     result = op.outNumber("result");
 
 max.onChange =

@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    inMultiply = op.inValue("Multiply texture", 1.0),
-    inGamma = op.inValue("Gamma correction", 2.2),
+    amount = op.inFloatSlider("Amount", 1),
+    inMultiply = op.inFloat("Multiply texture", 1.0),
+    inGamma = op.inFloat("Gamma correction", 2.2),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

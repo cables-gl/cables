@@ -1,8 +1,8 @@
 const
     inDuration = op.inFloat("Duration", 3),
     active = op.inBool("Active", true),
-    outFPS = op.outValue("FPS"),
-    outFPSAvg = op.outValue("Average FPS");
+    outFPS = op.outNumber("FPS"),
+    outFPSAvg = op.outNumber("Average FPS");
 
 let startTime = Date.now();
 let countFpsNums = 0;

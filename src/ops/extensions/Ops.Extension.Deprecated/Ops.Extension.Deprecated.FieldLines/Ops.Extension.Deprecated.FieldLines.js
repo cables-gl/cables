@@ -5,8 +5,8 @@ let each = op.outTrigger("Each");
 
 let maxPoints = op.inFloat("Max LinePoints", 500);
 let outPoints = op.outArray("Points");
-let outNumPoints = op.outValue("Num Points");
-let outCanceled = op.outValue("Canceled lines");
+let outNumPoints = op.outNumber("Num Points");
+let outCanceled = op.outNumber("Canceled lines");
 
 let dots = new Float32Array(9000);
 

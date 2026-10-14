@@ -2,15 +2,15 @@ const
     render = op.inTrigger("Render"),
     trigger = op.outTrigger("Trigger"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    time = op.inValue("Time", 0),
-    movement = op.inValueSlider("Movement", 0),
-    num = op.inValue("Num", 50),
-    seed = op.inValue("seed", 0),
-    fill = op.inValueSelect("Fill", ["None", "Random", "Gradient", "Gray"], "Random"),
+    amount = op.inFloatSlider("Amount", 1),
+    time = op.inFloat("Time", 0),
+    movement = op.inFloatSlider("Movement", 0),
+    num = op.inFloat("Num", 50),
+    seed = op.inFloat("seed", 0),
+    fill = op.inDropDown("Fill", ["None", "Random", "Gradient", "Gray"], "Random"),
     drawIsoLines = op.inBool("Draw Isolines", false),
     drawDistance = op.inBool("Draw Distance", false),
-    centerSize = op.inValueSlider("Draw Center", 0);
+    centerSize = op.inFloatSlider("Draw Center", 0);
 
 const cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

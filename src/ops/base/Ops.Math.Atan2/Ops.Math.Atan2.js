@@ -1,8 +1,8 @@
 const
-    x = op.inValue("X"),
-    y = op.inValue("Y"),
-    phase = op.inValue("Phase", 0.0),
-    mul = op.inValue("Frequency", 1.0),
+    x = op.inFloat("X"),
+    y = op.inFloat("Y"),
+    phase = op.inFloat("Phase", 0.0),
+    mul = op.inFloat("Frequency", 1.0),
     result = op.outNumber("Result");
 
 x.onChange =

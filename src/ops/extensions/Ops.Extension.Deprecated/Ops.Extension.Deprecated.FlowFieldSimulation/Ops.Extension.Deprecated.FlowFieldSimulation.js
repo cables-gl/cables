@@ -5,16 +5,16 @@ let inReset = op.inTrigger("Reset");
 let inRespawn = op.inTrigger("Respawn all");
 let inDamping = op.inFloat("Damping");
 
-let outSpeed = op.outValue("Speed");
-let col = op.outValue("color");
+let outSpeed = op.outNumber("Speed");
+let col = op.outNumber("color");
 
 let triggerForce = op.outTrigger("force");
 
-let outOffset = op.outValue("offset");
-let outIndex = op.outValue("Index");
+let outOffset = op.outNumber("offset");
+let outIndex = op.outNumber("Index");
 let outPoints = op.outArray("Points");
 
-let outDieSlow = op.outValue("Die Slow");
+let outDieSlow = op.outNumber("Die Slow");
 
 let numParticles = 1000;
 

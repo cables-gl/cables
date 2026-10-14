@@ -7,7 +7,7 @@ const useSsl = op.inBool("Use SSL", true);
 const reconnect = op.inTriggerButton("Reconnect");
 
 const outObj = op.outObject("MQTT Object");
-const connectedPort = op.outValue("Connected", false);
+const connectedPort = op.outNumber("Connected", false);
 
 const TIMEOUT = 5;
 
@@ -84,12 +84,12 @@ function requestSend(message, topic)
     try
     {
         client.send(messageObj);
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
     }
     catch (e)
     {
         op.log("MQTTSend: Could not send message " + message + " to " + topic + ", maybe try to reconnect?!");
-        op.uiAttr({ "error": "Could not send message, try to reconnect!" });
+        op.setUiAttribs({ "error": "Could not send message, try to reconnect!" });
     }
 }
 

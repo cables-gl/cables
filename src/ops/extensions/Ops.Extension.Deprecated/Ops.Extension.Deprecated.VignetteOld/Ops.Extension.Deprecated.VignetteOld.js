@@ -3,7 +3,7 @@ op.name = "Vignette";
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let amount = op.inValueSlider("Amount", 1);
+let amount = op.inFloatSlider("Amount", 1);
 let lensRadius1 = op.inFloat("lensRadius1", 0.8);
 let lensRadius2 = op.inFloat("lensRadius2", 0.4);
 let ratio = op.inFloat("Ratio", 1);

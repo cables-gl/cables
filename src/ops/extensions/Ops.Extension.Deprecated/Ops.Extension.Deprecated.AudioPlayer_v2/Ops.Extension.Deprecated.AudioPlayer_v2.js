@@ -37,10 +37,10 @@ play.onChange = function ()
 {
     if (!audio)
     {
-        op.uiAttr({ "error": "No audio file selected" });
+        op.setUiAttribs({ "error": "No audio file selected" });
         return;
     }
-    else op.uiAttr({ "error": null });
+    else op.setUiAttribs({ "error": null });
 
     if (play.get())
     {

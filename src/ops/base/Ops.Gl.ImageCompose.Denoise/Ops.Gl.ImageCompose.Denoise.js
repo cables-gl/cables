@@ -1,5 +1,5 @@
 let render = op.inTrigger("render");
-let strength = op.inValueSlider("Exponent", 0.6);
+let strength = op.inFloatSlider("Exponent", 0.6);
 
 let trigger = op.outTrigger("trigger");
 

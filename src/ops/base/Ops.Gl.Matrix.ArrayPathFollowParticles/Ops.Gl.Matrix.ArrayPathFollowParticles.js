@@ -1,11 +1,11 @@
 
 const exec = op.inTrigger("Exec");
 const inPoints = op.inArray("Points");
-const inParticles = op.inValue("Num Particles", 500);
-const inLength = op.inValue("Length", 20);
-const inSpread = op.inValue("Spread", 0.2);
-const inOffset = op.inValue("Offset");
-const inMaxDistance = op.inValue("Max Distance", 0);
+const inParticles = op.inFloat("Num Particles", 500);
+const inLength = op.inFloat("Length", 20);
+const inSpread = op.inFloat("Spread", 0.2);
+const inOffset = op.inFloat("Offset");
+const inMaxDistance = op.inFloat("Max Distance", 0);
 const inRandomSpeed = op.inBool("RandomSpeed");
 const next = op.outTrigger("Next");
 

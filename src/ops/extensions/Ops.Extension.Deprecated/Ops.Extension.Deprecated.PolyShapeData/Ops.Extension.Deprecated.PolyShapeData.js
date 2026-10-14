@@ -4,7 +4,7 @@ let pDefaultR = op.addInPort(new CABLES.Port(op, "highlight r", CABLES.Port.TYPE
 let pDefaultG = op.addInPort(new CABLES.Port(op, "highlight g", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 let pDefaultB = op.addInPort(new CABLES.Port(op, "highlight b", CABLES.Port.TYPE_VALUE, { "display": "range" }));
 
-let p = op.inValueSelect("price", ["free", "low", "middle", "high"]);
+let p = op.inDropDown("price", ["free", "low", "middle", "high"]);
 
 let author = op.inValueString("author");
 let authorid = op.inValueString("authorid");

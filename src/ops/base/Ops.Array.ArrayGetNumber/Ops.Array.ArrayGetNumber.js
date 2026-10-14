@@ -1,6 +1,6 @@
 const
     array = op.inArray("array"),
-    index = op.inValueInt("index"),
+    index = op.inInt("index"),
     valueInvalid = op.inFloat("Value Invalid Index", 0),
     value = op.outNumber("value"),
     outValidIndex = op.outBoolNum("Valid Index", true);

@@ -5,9 +5,9 @@
 // comparison evaulates to true else its the value assigned to if false
 
 const inArray_0 = op.inArray("array 0"),
-    mathSelect = op.inValueSelect("Comparison mode", [">", "<", ">=", "<=", "==", "!=",
+    mathSelect = op.inDropDown("Comparison mode", [">", "<", ">=", "<=", "==", "!=",
         ">pass", "<pass", ">=pass", "<=pass", "==pass", "!=pass"], ">"),
-    numberIn = op.inValueFloat("Number for comparison", 0.5),
+    numberIn = op.inFloat("Number for comparison", 0.5),
     inValueIfTrue = op.inFloat("value if true", 1.0),
     inValueIfFalse = op.inFloat("value if false", 0.0),
     outArray = op.outArray("Array result"),

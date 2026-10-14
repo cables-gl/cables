@@ -1,18 +1,18 @@
-let isMobile = op.outValue("Is Mobile", false);
-let isIe = op.outValue("Is IE", false);
-let isIe10Plus = op.outValue("Is IE 10+", false);
-let isIe11 = op.outValue("Is IE 11", false);
-let isEdge = op.outValue("Is Edge", false);
-let isChrome = op.outValue("Is Chrome", false);
-let isFirefox = op.outValue("Is Firefox", false);
-let isSafari = op.outValue("Is Safari", false);
-let isWindows = op.outValue("Is Windows", false);
-let isLinux = op.outValue("Is Linux", false);
-let isMac = op.outValue("Is Mac", false);
-let isIos = op.outValue("Is iOS", false);
-let isAndroid = op.outValue("Is Android", false);
+let isMobile = op.outNumber("Is Mobile", false);
+let isIe = op.outNumber("Is IE", false);
+let isIe10Plus = op.outNumber("Is IE 10+", false);
+let isIe11 = op.outNumber("Is IE 11", false);
+let isEdge = op.outNumber("Is Edge", false);
+let isChrome = op.outNumber("Is Chrome", false);
+let isFirefox = op.outNumber("Is Firefox", false);
+let isSafari = op.outNumber("Is Safari", false);
+let isWindows = op.outNumber("Is Windows", false);
+let isLinux = op.outNumber("Is Linux", false);
+let isMac = op.outNumber("Is Mac", false);
+let isIos = op.outNumber("Is iOS", false);
+let isAndroid = op.outNumber("Is Android", false);
 
-let outNav = op.outValue("Language");
+let outNav = op.outNumber("Language");
 
 outNav.set(navigator.language || navigator.userLanguage);
 

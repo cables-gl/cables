@@ -2,7 +2,7 @@ const
     inTex = op.inTexture("Texture"),
     start = op.inTriggerButton("Download"),
     fileName = op.inValueString("Filename", "screenshot"),
-    outFinished = op.outValueBool("Finished");
+    outFinished = op.outBool("Finished");
 const gl = op.patch.cgl.gl;
 let fb = null;
 

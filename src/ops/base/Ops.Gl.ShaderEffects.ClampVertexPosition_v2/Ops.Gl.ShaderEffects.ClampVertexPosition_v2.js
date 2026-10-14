@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X"),
-    min = op.inValue("min", 0),
-    max = op.inValue("max", 1),
+    axis = op.inDropDown("Axis", ["X", "Y", "Z"], "X"),
+    min = op.inFloat("min", 0),
+    max = op.inFloat("max", 1),
     inUpdateNormals = op.inBool("Update Normals");
 
 const cgl = op.patch.cgl;

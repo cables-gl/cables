@@ -3,8 +3,8 @@ const
     exec = op.inTrigger("Trigger"),
     next = op.outTrigger("Next"),
     inSize = op.inSwitch("Size", ["Canvas", "Manual"], "Canvas"),
-    inWidth = op.inValueInt("texture width", 512),
-    inHeight = op.inValueInt("texture height", 512),
+    inWidth = op.inInt("texture width", 512),
+    inHeight = op.inInt("texture height", 512),
     tfilter = op.inSwitch("filter", ["nearest", "linear"], "linear"),
     inClear = op.inBool("Clear", true),
     result = op.outTexture("Texture");

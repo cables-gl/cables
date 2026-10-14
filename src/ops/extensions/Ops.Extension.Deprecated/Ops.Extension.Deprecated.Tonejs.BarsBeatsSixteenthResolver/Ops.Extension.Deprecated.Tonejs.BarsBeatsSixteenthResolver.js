@@ -2,10 +2,10 @@
 let bbsPort = op.inValueString("Bars:Beats:Sixteenth");
 
 // outputs
-let barsPort = op.outValue("Bars", 0);
-let beatsPort = op.outValue("Beats", 0);
-let sixteenthPort = op.outValue("Sixteenth", 0);
-let sixteenthPrecisePort = op.outValue("Sixteenth (Precise)", 0);
+let barsPort = op.outNumber("Bars", 0);
+let beatsPort = op.outNumber("Beats", 0);
+let sixteenthPort = op.outNumber("Sixteenth", 0);
+let sixteenthPrecisePort = op.outNumber("Sixteenth (Precise)", 0);
 
 bbsPort.onChange = function ()
 {

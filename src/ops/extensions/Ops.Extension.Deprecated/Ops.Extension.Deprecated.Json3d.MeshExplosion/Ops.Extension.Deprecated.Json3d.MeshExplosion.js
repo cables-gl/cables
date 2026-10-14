@@ -105,8 +105,8 @@ function reload()
 
     // if(cgl.frameStore.currentScene && cgl.frameStore.currentScene.getValue())
     // {
-    //     op.uiAttr({warning:''});
-    //     op.uiAttr({info:''});
+    //     op.setUiAttribs({warning:''});
+    //     op.setUiAttribs({info:''});
     //     var jsonMesh=null;
 
     //     for(var i=0;i<cgl.frameStore.currentScene.getValue().meshes.length;i++)

@@ -1,5 +1,5 @@
 var val=op.inValueString("Value");
-op.varName=op.inValueSelect("Variable");
+op.varName=op.inDropDown("Variable");
 
 op.varName.onChange=updateName;
 val.onChange=update;

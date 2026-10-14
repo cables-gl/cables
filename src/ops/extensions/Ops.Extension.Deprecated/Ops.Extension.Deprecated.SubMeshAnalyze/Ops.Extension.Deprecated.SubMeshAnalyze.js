@@ -1,9 +1,9 @@
 let inGeom = op.inObject("geometry");
 
-let inSort = op.inValueSelect("Sort", ["None", "Z"], "None");
+let inSort = op.inDropDown("Sort", ["None", "Z"], "None");
 
-let outMin = op.outValue("Min Value");
-let outMax = op.outValue("Max Value");
+let outMin = op.outNumber("Min Value");
+let outMax = op.outNumber("Max Value");
 
 let outGeom = op.outObject("Result");
 let outValues = op.outArray("Values");

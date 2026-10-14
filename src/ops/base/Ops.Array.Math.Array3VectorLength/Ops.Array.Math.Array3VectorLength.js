@@ -26,7 +26,7 @@ inArray.onChange = function ()
     {
         if (!showingError)
         {
-            op.uiAttr({ "error": "Arrays length not divisible by 3 !" });
+            op.setUiAttribs({ "error": "Arrays length not divisible by 3 !" });
             showingError = true;
         }
         return;
@@ -35,7 +35,7 @@ inArray.onChange = function ()
     if (showingError)
     {
         showingError = false;
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
     }
 
     let vec = vec3.create();

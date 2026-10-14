@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
-    bounds = op.inValue("bounds", 2),
+    bounds = op.inFloat("bounds", 2),
     fixAxis = op.inSwitch("Axis", ["X", "Y", "None"], "X"),
-    zNear = op.inValue("frustum near", -100),
-    zFar = op.inValue("frustum far", 100),
+    zNear = op.inFloat("frustum near", -100),
+    zFar = op.inFloat("frustum far", 100),
     trigger = op.outTrigger("trigger"),
     outRatio = op.outNumber("Ratio"),
     outWidth = op.outNumber("Width"),

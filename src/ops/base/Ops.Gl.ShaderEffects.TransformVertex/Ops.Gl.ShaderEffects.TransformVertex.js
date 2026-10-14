@@ -1,17 +1,17 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("Trigger"),
-    transX = op.inValue("Translate X", 0),
-    transY = op.inValue("Translate Y", 0),
-    transZ = op.inValue("Translate Z", 0),
+    transX = op.inFloat("Translate X", 0),
+    transY = op.inFloat("Translate Y", 0),
+    transZ = op.inFloat("Translate Z", 0),
 
-    scaleX = op.inValue("Scale X", 1),
-    scaleY = op.inValue("Scale Y", 1),
-    scaleZ = op.inValue("Scale Z", 1),
+    scaleX = op.inFloat("Scale X", 1),
+    scaleY = op.inFloat("Scale Y", 1),
+    scaleZ = op.inFloat("Scale Z", 1),
 
-    rotX = op.inValue("Rotation X", 0),
-    rotY = op.inValue("Rotation Y", 0),
-    rotZ = op.inValue("Rotation Z", 0),
+    rotX = op.inFloat("Rotation X", 0),
+    rotY = op.inFloat("Rotation Y", 0),
+    rotZ = op.inFloat("Rotation Z", 0),
     transNorm = op.inBool("Transform normals", false);
 
 const cgl = op.patch.cgl;

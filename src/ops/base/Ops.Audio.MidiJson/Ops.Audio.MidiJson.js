@@ -1,6 +1,6 @@
 const
     inObj = op.inObject("MidiJson"),
-    inTime = op.inValue("Time"),
+    inTime = op.inFloat("Time"),
     outBeat = op.outNumber("Beat"),
     outTrackNames = op.outArray("Track Names"),
     outNames = op.outArray("Names"),

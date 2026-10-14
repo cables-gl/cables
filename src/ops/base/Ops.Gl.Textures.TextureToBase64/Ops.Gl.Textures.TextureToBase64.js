@@ -19,7 +19,7 @@ start.onTriggered = update;
 
 function update()
 {
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
     if (!inTex.get() || !inTex.get().tex) return;
     outLoading.set(true);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -39,7 +39,7 @@ function update()
     if (!canRead)
     {
         outLoading.set(true);
-        op.uiAttr({ "error": "cannot read texture!" });
+        op.setUiAttribs({ "error": "cannot read texture!" });
         return;
     }
 

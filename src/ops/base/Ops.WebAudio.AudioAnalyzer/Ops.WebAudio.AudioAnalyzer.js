@@ -7,7 +7,7 @@ analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
 
 const audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
-const anData = op.inValueSelect("Data", ["Frequency", "Time Domain"], "Frequency");
+const anData = op.inDropDown("Data", ["Frequency", "Time Domain"], "Frequency");
 
 const next = op.outTrigger("Next");
 const audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", analyser);

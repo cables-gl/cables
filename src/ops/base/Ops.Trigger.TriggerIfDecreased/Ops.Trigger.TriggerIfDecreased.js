@@ -1,5 +1,5 @@
 const
-    value = op.inValue("Value"),
+    value = op.inFloat("Value"),
     trigger = op.outTrigger("Trigger");
 
 let lastValue = -Number.MAX_VALUE;

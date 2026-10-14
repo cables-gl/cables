@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    inStrength = op.inValue("Strength", 1),
+    inStrength = op.inFloat("Strength", 1),
     next = op.outTrigger("trigger"),
     cgl = op.patch.cgl;
 

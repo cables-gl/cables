@@ -1,13 +1,13 @@
 const render = op.inTrigger("render");
-let inAttrib = op.inValueSelect("Attribute", []);
+let inAttrib = op.inDropDown("Attribute", []);
 let inGeom = op.inObject("Geometry");
 let inSeed = op.inFloat("Seed", 1000);
-let inMin = op.inValueSlider("Min", 0.0);
-let inMax = op.inValueSlider("Max", 1.0);
+let inMin = op.inFloatSlider("Min", 0.0);
+let inMax = op.inFloatSlider("Max", 1.0);
 
-let inRandR = op.inValueSlider("Random R", 0.0);
-let inRandG = op.inValueSlider("Random G", 0.0);
-let inRandB = op.inValueSlider("Random B", 0.0);
+let inRandR = op.inFloatSlider("Random R", 0.0);
+let inRandG = op.inFloatSlider("Random G", 0.0);
+let inRandB = op.inFloatSlider("Random B", 0.0);
 
 const trigger = op.outTrigger("trigger");
 

@@ -2,13 +2,13 @@ const render = op.inTrigger("Render");
 const expansion = op.inFloat("Expansion");
 const next = op.outTrigger("Next");
 
-const inRotX = op.inValueSlider("Rotation X", 1);
-const inRotY = op.inValueSlider("Rotation Y", 1);
-const inRotZ = op.inValueSlider("Rotation Z", 1);
+const inRotX = op.inFloatSlider("Rotation X", 1);
+const inRotY = op.inFloatSlider("Rotation Y", 1);
+const inRotZ = op.inFloatSlider("Rotation Z", 1);
 
-const inDirectionX = op.inValueSlider("Direction X", 1);
-const inDirectionY = op.inValueSlider("Direction Y", 1);
-const inDirectionZ = op.inValueSlider("Direction Z", 1);
+const inDirectionX = op.inFloatSlider("Direction X", 1);
+const inDirectionY = op.inFloatSlider("Direction Y", 1);
+const inDirectionZ = op.inFloatSlider("Direction Z", 1);
 
 const cgl = op.patch.cgl;
 const currentIndex = -1;

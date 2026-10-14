@@ -1,19 +1,19 @@
 const
     render = op.inTrigger("render"),
-    minDist = op.inValueFloat("min distance"),
-    maxDist = op.inValueFloat("max distance"),
+    minDist = op.inFloat("min distance"),
+    maxDist = op.inFloat("max distance"),
 
-    minRotY = op.inValue("min rot y", 0),
-    maxRotY = op.inValue("max rot y", 0),
+    minRotY = op.inFloat("min rot y", 0),
+    maxRotY = op.inFloat("max rot y", 0),
 
-    initialRadius = op.inValue("initial radius", 0),
-    initialAxis = op.inValueSlider("initial axis y"),
-    initialX = op.inValueSlider("initial axis x"),
+    initialRadius = op.inFloat("initial radius", 0),
+    initialAxis = op.inFloatSlider("initial axis y"),
+    initialX = op.inFloatSlider("initial axis x"),
 
-    mul = op.inValueFloat("mul"),
-    smoothness = op.inValueSlider("Smoothness", 1.0),
-    speedX = op.inValue("Speed X", 1),
-    speedY = op.inValue("Speed Y", 1),
+    mul = op.inFloat("mul"),
+    smoothness = op.inFloatSlider("Smoothness", 1.0),
+    speedX = op.inFloat("Speed X", 1),
+    speedY = op.inFloat("Speed Y", 1),
 
     active = op.inBool("Active", true),
 

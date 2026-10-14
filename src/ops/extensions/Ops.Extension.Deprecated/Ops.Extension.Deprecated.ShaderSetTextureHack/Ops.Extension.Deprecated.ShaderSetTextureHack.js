@@ -3,7 +3,7 @@ op.name = "ShaderSetTextureHack";
 let exec = op.inTrigger("Exec");
 let next = op.outTrigger("Next");
 
-let iindex = op.inValueInt("index");
+let iindex = op.inInt("index");
 let texture = op.inTexture("texture");
 
 let cgl = op.patch.cgl;

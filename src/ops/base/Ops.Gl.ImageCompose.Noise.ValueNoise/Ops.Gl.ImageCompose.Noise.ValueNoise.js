@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    scale = op.inValue("Scale", 4),
-    x = op.inValue("X", 0),
-    y = op.inValue("Y", 0),
-    z = op.inValue("Z", 0);
+    amount = op.inFloatSlider("Amount", 1),
+    scale = op.inFloat("Scale", 4),
+    x = op.inFloat("X", 0),
+    y = op.inFloat("Y", 0),
+    z = op.inFloat("Z", 0);
 
 let trigger = op.outTrigger("trigger");
 

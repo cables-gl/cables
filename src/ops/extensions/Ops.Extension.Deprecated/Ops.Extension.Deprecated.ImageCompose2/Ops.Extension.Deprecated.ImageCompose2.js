@@ -2,8 +2,8 @@ const render = op.inTrigger("render");
 const useVPSize = op.addInPort(new CABLES.Port(op, "use viewport size", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 const width = op.addInPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
 const height = op.addInPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
-const tfilter = op.inValueSelect("filter", ["nearest", "linear"]);// ,'mipmap'
-const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+const tfilter = op.inDropDown("filter", ["nearest", "linear"]);// ,'mipmap'
+const wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 
 const fpTexture = op.inBool("HDR");
 const clear = op.inBool("Clear", true);

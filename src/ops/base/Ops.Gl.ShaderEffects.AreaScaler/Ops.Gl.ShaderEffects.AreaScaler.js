@@ -2,16 +2,16 @@
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-const inSize = op.inValue("Size", 1);
-const inStrength = op.inValue("Strength", 1);
+const inSize = op.inFloat("Size", 1);
+const inStrength = op.inFloat("Strength", 1);
 const inSmooth = op.inBool("Smooth", true);
 const inToZero = op.inBool("Keep Min Size", true);
 
 const cgl = op.patch.cgl;
 
-const x = op.inValue("x");
-const y = op.inValue("y");
-const z = op.inValue("z");
+const x = op.inFloat("x");
+const y = op.inFloat("y");
+const z = op.inFloat("z");
 
 let needsUpdateToZero = true;
 const mscaleUni = null;

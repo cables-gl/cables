@@ -1,12 +1,12 @@
 const
     render=op.inTrigger('render'),
     trigger=op.outTrigger('trigger'),
-    boundsLeft=op.inValue("left",-2),
-    boundsRight=op.inValue("right",2),
-    boundsBottom=op.inValue("bottom",-2),
-    boundsTop=op.inValue("top",2),
-    zNear=op.inValue("frustum near",0.01),
-    zFar=op.inValue("frustum far",100);
+    boundsLeft=op.inFloat("left",-2),
+    boundsRight=op.inFloat("right",2),
+    boundsBottom=op.inFloat("bottom",-2),
+    boundsTop=op.inFloat("top",2),
+    zNear=op.inFloat("frustum near",0.01),
+    zFar=op.inFloat("frustum far",100);
 
 const cgl=op.patch.cgl;
 

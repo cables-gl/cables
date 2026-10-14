@@ -9,14 +9,14 @@ let numPortsActive = 0;
 let exePort = op.inTriggerButton("Execute");
 let selectPort = op.inFloat("Select");
 // var numPortsActivePort = op.inFloat('Num Active', NUM_PORTS);
-let overlapPort = op.inValueSlider("Overlap", 0.5);
+let overlapPort = op.inFloatSlider("Overlap", 0.5);
 
 // outputs
 // var triggerBeforePort = op.outTrigger('Trigger Before');
 let triggerPorts = [];
 createOutPorts();
 // the percentage of the next trigger coming in, can be used for fading
-// var percentPort = op.outValue('Percent', 0); // needs to be further tested
+// var percentPort = op.outNumber('Percent', 0); // needs to be further tested
 // var triggerAfterPort = op.outTrigger('Trigger After');
 
 // listeners

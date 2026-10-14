@@ -2,7 +2,7 @@ const
     inExec = op.inTrigger("Update"),
     inArr = op.inArray("Array"),
     inFilter = op.inSwitch("Filter", ["nearest", "linear"], "nearest"),
-    inWrap = op.inValueSelect("Wrap", ["repeat", "mirror-repeat", "clamp-to-edge"], "repeat"),
+    inWrap = op.inDropDown("Wrap", ["repeat", "mirror-repeat", "clamp-to-edge"], "repeat"),
     inWidth = op.inInt("Width", 10),
     inHeight = op.inInt("Height", 10),
     next = op.outTrigger("Next"),

@@ -94,7 +94,7 @@ eventIn.onChange = function ()
 
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": "bound to note: " + note.get() });
+            op.setUiAttribs({ "info": "bound to note: " + note.get() });
             op.refreshParams();
         }
     }
@@ -106,7 +106,7 @@ eventIn.onChange = function ()
 
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": "bound to note: " + note.get() });
+            op.setUiAttribs({ "info": "bound to note: " + note.get() });
             op.refreshParams();
         }
     }

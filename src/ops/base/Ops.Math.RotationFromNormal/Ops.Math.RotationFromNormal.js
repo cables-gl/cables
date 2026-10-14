@@ -1,6 +1,6 @@
-const inNormalX = op.inValue("Normal X");
-const inNormalY = op.inValue("Normal Y");
-const inNormalZ = op.inValue("Normal Z");
+const inNormalX = op.inFloat("Normal X");
+const inNormalY = op.inFloat("Normal Y");
+const inNormalZ = op.inFloat("Normal Z");
 const inRecalculate = op.inTriggerButton("recalculate");
 
 const outRotation = op.outArray("RotationMatrix");

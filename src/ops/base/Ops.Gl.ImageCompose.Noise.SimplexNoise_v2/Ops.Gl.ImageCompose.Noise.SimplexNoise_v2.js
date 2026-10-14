@@ -2,15 +2,15 @@ const
     render = op.inTrigger("render"),
     inTexMask = op.inTexture("Mask"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
-    smoothness = op.inValue("smoothness", 1.0),
+    smoothness = op.inFloat("smoothness", 1.0),
     inHarmonics = op.inSwitch("Harmonics", ["1", "2", "3", "4", "5"], "1"),
-    scale = op.inValue("scale", 7),
+    scale = op.inFloat("scale", 7),
     trigger = op.outTrigger("trigger"),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    time = op.inValue("time", 0);
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    time = op.inFloat("time", 0);
 
 const
     inTexOffsetZ = op.inTexture("Offset"),

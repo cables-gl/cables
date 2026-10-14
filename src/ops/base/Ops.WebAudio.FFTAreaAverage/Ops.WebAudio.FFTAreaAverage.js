@@ -1,13 +1,13 @@
 const
     refresh = op.inTriggerButton("refresh"),
     fftArr = op.inArray("FFT Array"),
-    x = op.inValueSlider("x"),
-    y = op.inValueSlider("y"),
-    w = op.inValueSlider("width", 0.2),
-    h = op.inValueSlider("height", 0.2),
+    x = op.inFloatSlider("x"),
+    y = op.inFloatSlider("y"),
+    w = op.inFloatSlider("width", 0.2),
+    h = op.inFloatSlider("height", 0.2),
     drawTex = op.inBool("Create Texture", true),
     texOut = op.outTexture("texture_out"),
-    value = op.outValue("value");
+    value = op.outNumber("value");
 
 const cgl = op.patch.cgl;
 let data = [];

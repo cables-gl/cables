@@ -2,22 +2,22 @@
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 
-var isLocked=op.outValue("isLocked",false);
+var isLocked=op.outNumber("isLocked",false);
 
 var vPos=vec3.create();
 var speedx=0,speedy=0,speedz=0;
 var movementSpeedFactor = 0.5;
 
-var posX=op.inValueFloat("posX");
-var posY=op.inValueFloat("posY");
-var posZ=op.inValueFloat("posZ");
+var posX=op.inFloat("posX");
+var posY=op.inFloat("posY");
+var posZ=op.inFloat("posZ");
 
-var rotX=op.inValueFloat("rotX");
-var rotY=op.inValueFloat("rotY");
+var rotX=op.inFloat("rotX");
+var rotY=op.inFloat("rotY");
 
-var outPosX=op.outValue("posX");
-var outPosY=op.outValue("posY");
-var outPosZ=op.outValue("posZ");
+var outPosX=op.outNumber("posX");
+var outPosY=op.outNumber("posY");
+var outPosZ=op.outNumber("posZ");
 outPosX.set(-posX.get());
 outPosY.set(-posY.get());
 outPosZ.set(-posZ.get());

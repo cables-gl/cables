@@ -3,25 +3,25 @@ const cgl = op.patch.cgl;
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
 
-const inArea = op.inValueSelect("Area", ["Sphere", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere");
+const inArea = op.inDropDown("Area", ["Sphere", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere");
 
-const inSize = op.inValue("Size", 1);
-const inAmount = op.inValueSlider("Amount", 0.5);
+const inSize = op.inFloat("Size", 1);
+const inAmount = op.inFloatSlider("Amount", 0.5);
 
-const inFalloff = op.inValueSlider("Falloff", 0);
+const inFalloff = op.inFloatSlider("Falloff", 0);
 const inInvert = op.inBool("Invert");
 const inBlend = op.inSwitch("Blend ", ["Normal", "Multiply"], "Normal");
 
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
-const x = op.inValue("x");
-const y = op.inValue("y");
-const z = op.inValue("z");
+const x = op.inFloat("x");
+const y = op.inFloat("y");
+const z = op.inFloat("z");
 
-const sizeX = op.inValueSlider("Size X", 1);
+const sizeX = op.inFloatSlider("Size X", 1);
 
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Color", [inBlend, r, g, b]);

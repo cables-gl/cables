@@ -8,7 +8,7 @@ const
     loop = op.inBool("Loop", false),
     inMuted = op.inBool("Muted", false),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
-    volume = op.inValueSlider("Volume", 1),
+    volume = op.inFloatSlider("Volume", 1),
 
     rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),

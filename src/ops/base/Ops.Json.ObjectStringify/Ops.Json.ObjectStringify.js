@@ -1,6 +1,6 @@
 var inObj=op.inObject("Object");
 var inBeautify=op.inBool("beautify");
-var outString=op.outValue("Result");
+var outString=op.outNumber("Result");
 
 inBeautify.onChange=update;
 inObj.onChange=update;

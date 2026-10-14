@@ -3,8 +3,8 @@ const exe = op.inTriggerButton("trigger in"),
     trigger = op.outTrigger("trigger out"),
     num = op.outNumber("current count"),
 
-    inMinLoopValue = op.inValueInt("Loop min", 0.0),
-    inMaxLoopValue = op.inValueInt("Loop max", 4.0);
+    inMinLoopValue = op.inInt("Loop min", 0.0),
+    inMaxLoopValue = op.inInt("Loop max", 4.0);
 
 let n = Math.floor(inMinLoopValue.get());
 

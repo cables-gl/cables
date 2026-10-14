@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
-    width = op.inValueFloat("width", 10),
-    height = op.inValueFloat("height", 1),
+    width = op.inFloat("width", 10),
+    height = op.inFloat("height", 1),
     doLog = op.inBool("Logarithmic", false),
-    pivotX = op.inValueSelect("pivot x", ["center", "left", "right"], "center"),
-    pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"], "center"),
-    nColumns = op.inValueInt("num columns", 10),
-    nRows = op.inValueInt("num rows", 10),
-    axis = op.inValueSelect("axis", ["xy", "xz"], "xy"),
+    pivotX = op.inDropDown("pivot x", ["center", "left", "right"], "center"),
+    pivotY = op.inDropDown("pivot y", ["center", "top", "bottom"], "center"),
+    nColumns = op.inInt("num columns", 10),
+    nRows = op.inInt("num rows", 10),
+    axis = op.inDropDown("axis", ["xy", "xz"], "xy"),
     trigger = op.outTrigger("trigger"),
     outPointArrays = op.outArray("Point Arrays");
 

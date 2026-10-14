@@ -1,6 +1,6 @@
 let inString = op.inValueString("String");
 
-let result = op.outValue("Result");
+let result = op.outNumber("Result");
 
 inString.onChange = function ()
 {

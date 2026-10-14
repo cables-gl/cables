@@ -1,6 +1,6 @@
 let arr = op.inArray("Array");
-let num = op.inValueInt("Every xth Item", 2);
-let maxOldIndex = op.inValueInt("Max Index", 0);
+let num = op.inInt("Every xth Item", 2);
+let maxOldIndex = op.inInt("Max Index", 0);
 let outArr = op.outArray("Result Array");
 
 num.onChange = update;

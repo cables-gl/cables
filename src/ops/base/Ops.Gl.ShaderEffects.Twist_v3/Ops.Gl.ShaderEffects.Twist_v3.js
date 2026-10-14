@@ -3,7 +3,7 @@ const
     trigger = op.outTrigger("Trigger"),
     amount = op.inFloat("Degree", 180),
     height = op.inFloat("Height", 2),
-    axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "Y");
+    axis = op.inDropDown("Axis", ["X", "Y", "Z"], "Y");
 
 const cgl = op.patch.cgl;
 

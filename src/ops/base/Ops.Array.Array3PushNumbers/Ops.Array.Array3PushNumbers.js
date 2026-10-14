@@ -1,9 +1,9 @@
 // inputs
 var exePort = op.inTriggerButton('Execute');
 var inArrayPort = op.inArray('Array');
-var value1Port = op.inValue('Value 1');
-var value2Port = op.inValue('Value 2');
-var value3Port = op.inValue('Value 3');
+var value1Port = op.inFloat('Value 1');
+var value2Port = op.inFloat('Value 2');
+var value3Port = op.inFloat('Value 3');
 
 // outputs
 var nextPort = op.outTrigger('Next');

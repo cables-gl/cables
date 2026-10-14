@@ -5,7 +5,7 @@ let geom = op.addInPort(new CABLES.Port(op, "geom", CABLES.Port.TYPE_OBJECT));
 geom.ignoreValueSerialize = true;
 
 // var num=op.addInPort(new CABLES.Port(op,"num"));
-let num = op.inValueInt("num");
+let num = op.inInt("num");
 let size = op.addInPort(new CABLES.Port(op, "size"));
 let seed = op.addInPort(new CABLES.Port(op, "random seed"));
 

@@ -6,7 +6,7 @@ let createNonMesh = op.inBool("Create Non Mesh Nodes");
 let createMaterials = op.inBool("Create Materials", false);
 let detectClones = op.inBool("Detect Clones", true);
 let inReplaceMaterials = op.inObject("Mesh Materials");
-let outLoading = op.outValueBool("Loading", false);
+let outLoading = op.outBool("Loading", false);
 
 let cgl = op.patch.cgl;
 
@@ -560,7 +560,7 @@ function reload()
             {
                 if (err)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
 
                     op.logError("ajax error:", err);
                     op.patch.loading.finished(loadingId);
@@ -568,7 +568,7 @@ function reload()
                 }
                 else
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": null });
+                    if (CABLES.UI)op.setUiAttribs({ "error": null });
                 }
 
                 try
@@ -579,7 +579,7 @@ function reload()
                 {
                     outLoading.set(false);
                     op.patch.loading.finished(loadingId);
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
                     return;
                 }
 

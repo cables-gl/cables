@@ -1,8 +1,8 @@
 const
     exe = op.inTriggerButton("exe"),
-    x = op.inValueFloat("value x"),
-    y = op.inValueFloat("value y"),
-    z = op.inValueFloat("value z"),
+    x = op.inFloat("value x"),
+    y = op.inFloat("value y"),
+    z = op.inFloat("value z"),
     resultX = op.outNumber("result x"),
     resultY = op.outNumber("result y"),
     resultZ = op.outNumber("result z");

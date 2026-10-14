@@ -1,7 +1,7 @@
 const
-    learnedKeyCode = op.inValueInt("key code"),
+    learnedKeyCode = op.inInt("key code"),
     canvasOnly = op.inBool("canvas only", true),
-    modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none"),
+    modKey = op.inDropDown("Mod Key", ["none", "alt"], "none"),
     inEnable = op.inBool("Enabled", true),
     preventDefault = op.inBool("Prevent Default"),
     learn = op.inTriggerButton("learn"),

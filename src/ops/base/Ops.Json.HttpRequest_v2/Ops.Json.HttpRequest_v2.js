@@ -113,7 +113,7 @@ function reload(addCachebuster, force = false)
                         outData.set(data);
                     }
                     outString.set(_data);
-                    op.uiAttr({ "error": null });
+                    op.setUiAttribs({ "error": null });
                     op.patch.loading.finished(loadingId);
                     outTrigger.trigger();
                     isLoading.set(false);

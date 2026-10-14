@@ -1,7 +1,7 @@
 const inUrl = op.inValueString("URL", "http://192.168.4.92:5712");
 const channel = op.inValueString("Channel", CABLES.generateUUID());
 const connection = op.outObject("Connection");
-const connected = op.outValue("Connected", false);
+const connected = op.outNumber("Connected", false);
 
 let socket = null;
 

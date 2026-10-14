@@ -1,16 +1,16 @@
 const
     render = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
-    inStrength = op.inValue("Strength", 1),
-    scrollx = op.inValue("Scroll X"),
-    scrolly = op.inValue("Scroll Y"),
-    scrollz = op.inValue("Scroll Z"),
-    scale = op.inValue("Scale", 1),
+    inStrength = op.inFloat("Strength", 1),
+    scrollx = op.inFloat("Scroll X"),
+    scrolly = op.inFloat("Scroll Y"),
+    scrollz = op.inFloat("Scroll Z"),
+    scale = op.inFloat("Scale", 1),
     meth = op.inSwitch("Method", ["Translate", "Scale"], "Translate"),
-    mulx = op.inValue("Mul X", 1),
-    muly = op.inValue("Mul Y", 1),
-    mulz = op.inValue("Mul Z", 1),
-    minScale = op.inValue("Min Scale", 0),
+    mulx = op.inFloat("Mul X", 1),
+    muly = op.inFloat("Mul Y", 1),
+    mulz = op.inFloat("Mul Z", 1),
+    minScale = op.inFloat("Min Scale", 0),
     inWorldSpace = op.inBool("WorldSpace");
 
 const cgl = op.patch.cgl;

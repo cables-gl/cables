@@ -4,10 +4,10 @@ var cgl=op.patch.cgl;
 op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
 
-var axis=op.inValueSelect("Axis",["X","Y","Z"],"X");
+var axis=op.inDropDown("Axis",["X","Y","Z"],"X");
 
-var min=op.inValue("min",0);
-var max=op.inValue("max",1);
+var min=op.inFloat("min",0);
+var max=op.inFloat("max",1);
 
 var inUpdateNormals=op.inBool("Update Normals");
 

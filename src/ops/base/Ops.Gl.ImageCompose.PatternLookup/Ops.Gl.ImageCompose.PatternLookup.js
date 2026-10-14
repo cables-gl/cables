@@ -1,11 +1,11 @@
 const render = op.inTrigger("render");
 const multiplierTex = op.inTexture("Multiplier");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
-const amount = op.inValueSlider("Amount", 1);
+const amount = op.inFloatSlider("Amount", 1);
 const trigger = op.outTrigger("trigger");
 
-const patternWidth = op.inValueSlider("Width", 0.1);
-const patternHeight = op.inValueSlider("Height", 0.1);
+const patternWidth = op.inFloatSlider("Width", 0.1);
+const patternHeight = op.inFloatSlider("Height", 0.1);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name, op);

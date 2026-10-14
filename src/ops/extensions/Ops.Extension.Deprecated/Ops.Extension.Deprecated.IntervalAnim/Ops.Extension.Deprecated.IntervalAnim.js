@@ -1,7 +1,7 @@
 const exe = op.inTrigger("exe");
 const interval = op.inFloat("Interval");
 const delay = op.inFloat("Delay");
-const percent = op.outValue("percent");
+const percent = op.outNumber("percent");
 const trigger = op.outTrigger("Trigger");
 
 const anim = new CABLES.Anim();

@@ -1,5 +1,5 @@
-const val = op.outValue("Value");
-op.varName = op.inValueSelect("Variable", [], "", true);
+const val = op.outNumber("Value");
+op.varName = op.inDropDown("Variable", [], "", true);
 
 let variable = null;
 let changeListenerId = null;

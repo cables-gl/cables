@@ -1,10 +1,10 @@
 const render=op.inTrigger('render');
-const rotX=op.inValue('RotX');
-const rotY=op.inValue('RotY');
-const rotZ=op.inValue('RotZ');
-const scale=op.inValue('Scale', 1);
-const offset=op.inValue('Offset');
-const amount=op.inValue('Amount');
+const rotX=op.inFloat('RotX');
+const rotY=op.inFloat('RotY');
+const rotZ=op.inFloat('RotZ');
+const scale=op.inFloat('Scale', 1);
+const offset=op.inFloat('Offset');
+const amount=op.inFloat('Amount');
 const limited=op.inBool('Limited', true);
 const next=op.outTrigger("trigger")
 

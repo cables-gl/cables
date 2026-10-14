@@ -7,8 +7,8 @@ let height = op.inFloat("height", 1);
 let pivotX = op.inSwitch("pivot x", ["left", "center", "right"]);
 let pivotY = op.inSwitch("pivot y", ["top", "center", "bottom"]);
 
-let nColumns = op.inValueInt("num columns", 1);
-let nRows = op.inValueInt("num rows", 1);
+let nColumns = op.inInt("num columns", 1);
+let nRows = op.inInt("num rows", 1);
 let axis = op.inSwitch("axis", ["xy", "xz"], "xy");
 
 let active = op.inBool("Active", true);

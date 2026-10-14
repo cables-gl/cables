@@ -1,5 +1,5 @@
 const
-    numValues = op.inValueInt("numValues", 100),
+    numValues = op.inInt("numValues", 100),
     min = op.inFloat("Min", -1),
     max = op.inFloat("Max", 1),
     seed = op.inFloat("random seed"),

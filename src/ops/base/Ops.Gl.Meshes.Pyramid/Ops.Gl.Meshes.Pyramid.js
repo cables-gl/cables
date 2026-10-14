@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("Render"),
-    sizeW = op.inValue("Width", 1),
-    sizeL = op.inValue("Length", 1),
-    sizeH = op.inValue("Height", 2),
+    sizeW = op.inFloat("Width", 1),
+    sizeL = op.inFloat("Length", 1),
+    sizeH = op.inFloat("Height", 2),
     inSmooth = op.inBool("Smooth", false),
     inDraw = op.inBool("Draw", true),
     trigger = op.outTrigger("trigger"),

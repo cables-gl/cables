@@ -1,6 +1,6 @@
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
-const amount = op.inValueFloat("amount");
+const amount = op.inFloat("amount");
 const direction = op.inSwitch("direction", ["both", "vertical", "horizontal"], "both");
 const fast = op.inBool("Fast", true);
 const cgl = op.patch.cgl;

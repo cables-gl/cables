@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "X"),
+    axis = op.inDropDown("Axis", ["X", "Y", "Z"], "X"),
     inModu = op.inFloat("Modulo", 1),
     trigger = op.outTrigger("Trigger");
 

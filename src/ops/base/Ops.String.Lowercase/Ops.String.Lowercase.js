@@ -1,6 +1,6 @@
 
 var inStr=op.inValueString("String");
-var outStr=op.outValue("Result");
+var outStr=op.outNumber("Result");
 
 inStr.onChange=function()
 {

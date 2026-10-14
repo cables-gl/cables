@@ -1,6 +1,6 @@
 const
     exePort = op.inTriggerButton("Execute"),
-    switchPort = op.inValueInt("Switch Value"),
+    switchPort = op.inInt("Switch Value"),
     numTrigs = op.outNumber("Total Connections"),
     outArrNames = op.outArray("Connected Op Names"),
     outTrigs = op.outMultiPort("Trigger", CABLES.Port.TYPE_FUNCTION);

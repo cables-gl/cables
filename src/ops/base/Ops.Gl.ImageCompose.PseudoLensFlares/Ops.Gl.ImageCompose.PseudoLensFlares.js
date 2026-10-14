@@ -1,11 +1,11 @@
 // http://john-chapman-graphics.blogspot.com/2013/02/pseudo-lens-flare.html
 
 const render = op.inTrigger("render"),
-    inAmountGhosts = op.inValueSlider("Ghosts", 1.0),
-    inNumGhosts = op.inValueInt("Num Ghosts", 3),
-    inDispersal = op.inValueSlider("Dispersal", 0.5),
-    inAmountHalo = op.inValueSlider("Halo", 1.0),
-    inHaloWidth = op.inValueSlider("Halo Width", 0.5),
+    inAmountGhosts = op.inFloatSlider("Ghosts", 1.0),
+    inNumGhosts = op.inInt("Num Ghosts", 3),
+    inDispersal = op.inFloatSlider("Dispersal", 0.5),
+    inAmountHalo = op.inFloatSlider("Halo", 1.0),
+    inHaloWidth = op.inFloatSlider("Halo Width", 0.5),
     textureLookup = op.inTexture("Color Lookup"),
     trigger = op.outTrigger("trigger");
 

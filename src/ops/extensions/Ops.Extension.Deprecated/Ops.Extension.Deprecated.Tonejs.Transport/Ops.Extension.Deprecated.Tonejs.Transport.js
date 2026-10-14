@@ -34,11 +34,11 @@ let stopPort = op.addInPort(new CABLES.Port(this, "Stop", CABLES.Port.TYPE_FUNCT
 let stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 
 // out ports
-let statePort = op.outValue("State");
-let positionPort = op.outValue("Position (BarsBeatsSixteenth)");
-let secondsPort = op.outValue("Seconds");
-let progressPort = op.outValue("Progress");
-let ticksPort = op.outValue("Ticks");
+let statePort = op.outNumber("State");
+let positionPort = op.outNumber("Position (BarsBeatsSixteenth)");
+let secondsPort = op.outNumber("Seconds");
+let progressPort = op.outNumber("Progress");
+let ticksPort = op.outNumber("Ticks");
 
 // set in port defaults
 bpmPort.set(BPM_DEFAULT);

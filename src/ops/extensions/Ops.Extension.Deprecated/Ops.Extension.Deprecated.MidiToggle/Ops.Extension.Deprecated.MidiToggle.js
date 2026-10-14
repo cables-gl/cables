@@ -1,6 +1,6 @@
 let eventIn = op.inObject("Event Input");
 let note = op.addInPort(new CABLES.Port(op, "note"));
-let channel = op.inValueInt("Channel", 0);
+let channel = op.inInt("Channel", 0);
 let learn = op.inTriggerButton("learn");
 let eventOut = op.outObject("Event Output");
 
@@ -25,7 +25,7 @@ eventIn.onChange = function ()
 
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": "Bound to note: " + note.get() });
+            op.setUiAttribs({ "info": "Bound to note: " + note.get() });
             op.refreshParams();
         }
     }

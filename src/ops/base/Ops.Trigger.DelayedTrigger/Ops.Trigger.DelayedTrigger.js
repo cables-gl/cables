@@ -1,6 +1,6 @@
 const
     exe = op.inTriggerButton("exe"),
-    delay = op.inValueFloat("delay", 1),
+    delay = op.inFloat("delay", 1),
     cancel = op.inTriggerButton("Cancel"),
     next = op.outTrigger("next"),
     outDelaying = op.outBoolNum("Delaying");

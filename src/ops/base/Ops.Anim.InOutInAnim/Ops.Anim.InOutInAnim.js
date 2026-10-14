@@ -3,15 +3,15 @@ const anim = new CABLES.Anim();
 const
     update = op.inTrigger("Update"),
 
-    duration2 = op.inValue("Duration In", 0.25),
+    duration2 = op.inFloat("Duration In", 0.25),
     easing2 = anim.createPort(op, "Easing In"),
-    value2 = op.inValue("Value In", 1),
+    value2 = op.inFloat("Value In", 1),
 
-    holdDuration = op.inValue("Hold duration", 0.0),
+    holdDuration = op.inFloat("Hold duration", 0.0),
 
-    duration1 = op.inValue("Duration Out", 0.25),
+    duration1 = op.inFloat("Duration Out", 0.25),
     easing1 = anim.createPort(op, "Easing Out"),
-    value1 = op.inValue("Value Out", 0),
+    value1 = op.inFloat("Value Out", 0),
 
     trigger = op.inTriggerButton("Start"),
 

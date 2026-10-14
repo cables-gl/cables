@@ -1,9 +1,9 @@
 const
     inStrip = op.inBool("Line Strip", false),
-    inSegments = op.inValueInt("Segments", 24),
-    sizeW = op.inValueFloat("width", 1),
-    sizeH = op.inValueFloat("height", 1),
-    borderRadius = op.inValueSlider("border radius", 0.5),
+    inSegments = op.inInt("Segments", 24),
+    sizeW = op.inFloat("width", 1),
+    sizeH = op.inFloat("height", 1),
+    borderRadius = op.inFloatSlider("border radius", 0.5),
     outArrPoints = op.outArray("Points", 3);
 
 op.setPortGroup("Size", [sizeW, sizeH, borderRadius, inSegments]);

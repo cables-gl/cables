@@ -3,7 +3,7 @@ let shader = null;
 let uniTime;
 
 const render = op.inTrigger("render");
-let limitMax = op.inValueInt("Max", 1000);
+let limitMax = op.inInt("Max", 1000);
 
 const trigger = op.outTrigger("trigger");
 

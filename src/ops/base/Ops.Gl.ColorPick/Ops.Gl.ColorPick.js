@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
-    x = op.inValueFloat("x"),
-    y = op.inValueFloat("y"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
     r = op.outNumber("r"),
     g = op.outNumber("g"),
     b = op.outNumber("b"),

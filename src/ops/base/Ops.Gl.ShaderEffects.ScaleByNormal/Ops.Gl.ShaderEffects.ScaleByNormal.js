@@ -1,5 +1,5 @@
 const render=op.inTrigger("render");
-const inStrength=op.inValue("Strength",1);
+const inStrength=op.inFloat("Strength",1);
 const next=op.outTrigger("trigger");
 
 const cgl=op.patch.cgl;

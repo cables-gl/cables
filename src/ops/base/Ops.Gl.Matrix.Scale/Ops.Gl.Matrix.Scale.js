@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
-    scale = op.inValueFloat("scale", 1.0),
-    scaleX = op.inValueFloat("x", 1),
-    scaleY = op.inValueFloat("y", 1),
-    scaleZ = op.inValueFloat("z", 1),
+    scale = op.inFloat("scale", 1.0),
+    scaleX = op.inFloat("x", 1),
+    scaleY = op.inFloat("y", 1),
+    scaleZ = op.inFloat("z", 1),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Axis", [scaleX, scaleY, scaleZ]);

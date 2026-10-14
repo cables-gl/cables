@@ -2,7 +2,7 @@ op.name = "JsonFile2";
 
 let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.Port.TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
 let outData = op.addOutPort(new CABLES.Port(op, "data", CABLES.Port.TYPE_OBJECT));
-let isLoading = op.outValue("Is Loading", false);
+let isLoading = op.outNumber("Is Loading", false);
 
 let jsonp = op.inBool("JsonP", false);
 
@@ -44,13 +44,13 @@ function reload()
 
                 if (outData.get())outData.set(null);
                 outData.set(data);
-                op.uiAttr({ "error": "" });
+                op.setUiAttribs({ "error": "" });
                 patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
             catch (e)
             {
-                op.uiAttr({ "error": "error loading json" });
+                op.setUiAttribs({ "error": "error loading json" });
                 patch.loading.finished(loadingId);
                 isLoading.set(false);
             }

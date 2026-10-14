@@ -1,11 +1,11 @@
 const
-    x = op.inValue("x"),
-    y = op.inValue("y"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
 
-    rtop = op.inValue("rect top"),
-    rleft = op.inValue("rect left"),
-    rright = op.inValue("rect right"),
-    rbottom = op.inValue("rect bottom"),
+    rtop = op.inFloat("rect top"),
+    rleft = op.inFloat("rect left"),
+    rright = op.inFloat("rect right"),
+    rbottom = op.inFloat("rect bottom"),
 
     result = op.outBoolNum("Result"),
     outX = op.outNumber("Pos x"),

@@ -1,11 +1,11 @@
 const render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    numX = op.inValue("Num X", 10),
-    numY = op.inValue("Num Y", 10),
-    addX = op.inValue("X", 0),
-    addY = op.inValue("Y", 0),
-    addZ = op.inValue("Z", 0),
+    amount = op.inFloatSlider("Amount", 1),
+    numX = op.inFloat("Num X", 10),
+    numY = op.inFloat("Num Y", 10),
+    addX = op.inFloat("X", 0),
+    addY = op.inFloat("Y", 0),
+    addZ = op.inFloat("Z", 0),
     inRGB = op.inBool("RGB", false);
 
 const trigger = op.outTrigger("Next");

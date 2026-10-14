@@ -4,18 +4,18 @@ var cgl=op.patch.cgl;
 op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.Port.TYPE_FUNCTION));
 op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.Port.TYPE_FUNCTION));
 
-var inScale=op.inValue("Scale",1);
-var inSize=op.inValue("Size",1);
-var inStrength=op.inValue("Strength",1);
+var inScale=op.inFloat("Scale",1);
+var inSize=op.inFloat("Size",1);
+var inStrength=op.inFloat("Strength",1);
 var inSmooth=op.inBool("Smooth",true);
 
-var x=op.inValue("x");
-var y=op.inValue("y");
-var z=op.inValue("z");
+var x=op.inFloat("x");
+var y=op.inFloat("y");
+var z=op.inFloat("z");
 
-var scrollx=op.inValue("Scroll X");
-var scrolly=op.inValue("Scroll Y");
-var scrollz=op.inValue("Scroll Z");
+var scrollx=op.inFloat("Scroll X");
+var scrolly=op.inFloat("Scroll Y");
+var scrollz=op.inFloat("Scroll Z");
 
 var doX=op.inBool("Deform X",true);
 var doY=op.inBool("Deform Y",true);

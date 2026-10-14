@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inPoints = op.inArray("Points"),
-    numPoints = op.inValueInt("Num Points"),
+    numPoints = op.inInt("Num Points"),
     strip = op.inBool("Line Strip", true),
     outGeom = op.outObject("Geometry"),
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!

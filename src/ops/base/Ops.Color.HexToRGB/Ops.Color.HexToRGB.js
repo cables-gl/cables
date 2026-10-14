@@ -2,9 +2,9 @@ var hex=op.inValueString("Hex");
 
 var asBytes=op.inBool("Bytes");
 
-var outR=op.outValue("R");
-var outG=op.outValue("G");
-var outB=op.outValue("B");
+var outR=op.outNumber("R");
+var outG=op.outNumber("G");
+var outB=op.outNumber("B");
 
 
 function hexToR(h) {

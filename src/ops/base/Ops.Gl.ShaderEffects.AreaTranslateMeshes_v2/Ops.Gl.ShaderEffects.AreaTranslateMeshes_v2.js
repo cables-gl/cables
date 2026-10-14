@@ -1,15 +1,15 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inSize = op.inValue("Size", 1),
-    inStrength = op.inValue("Strength", 0.5),
+    inSize = op.inFloat("Size", 1),
+    inStrength = op.inFloat("Strength", 0.5),
     inSmooth = op.inBool("Smooth", true),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
-    mulx = op.inValue("Multiply x", 1),
-    muly = op.inValue("Multiply y", 1),
-    mulz = op.inValue("Multiply z", 1);
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
+    mulx = op.inFloat("Multiply x", 1),
+    muly = op.inFloat("Multiply y", 1),
+    mulz = op.inFloat("Multiply z", 1);
 
 const cgl = op.patch.cgl;
 

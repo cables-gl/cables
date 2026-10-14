@@ -2,7 +2,7 @@ op.name = "ToneMap";
 
 let render = op.inTrigger("Render");
 let trigger = op.outTrigger("Trigger");
-let method = op.inValueSelect("Method", ["Linear", "Reinhard", "Hejl Dawson", "Uncharted"], "Linear");
+let method = op.inDropDown("Method", ["Linear", "Reinhard", "Hejl Dawson", "Uncharted"], "Linear");
 let exposure = op.inFloat("Exposure", 3);
 let cgl = op.patch.cgl;
 

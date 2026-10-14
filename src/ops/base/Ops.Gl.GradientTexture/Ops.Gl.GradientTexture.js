@@ -1,15 +1,15 @@
 // STOP UPDATING THIS OP ... use Ops.Color.GradientColorArray
 
 const inGrad = op.inGradient("Gradient"),
-    inDir = op.inValueSelect("Direction", ["X", "XX", "Y", "YY", "XY", "YX", "Radial"], "X"),
+    inDir = op.inDropDown("Direction", ["X", "XX", "Y", "YY", "XY", "YX", "Radial"], "X"),
     inSmoothstep = op.inBool("Smoothstep", false),
     inStep = op.inBool("Step", false),
     inFlip = op.inBool("Flip", false),
     inSRGB = op.inBool("sRGB", false),
     inOklab = op.inBool("Oklab", false),
-    inSize = op.inValueInt("Size", 256),
+    inSize = op.inInt("Size", 256),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inNoise = op.inFloatSlider("Dither", 0),
     inGradArray = op.inArray("Gradient Array"),
     inRandom = op.inTriggerButton("Randomize Colors"),

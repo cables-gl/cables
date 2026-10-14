@@ -1,20 +1,20 @@
 const
     render = op.inTrigger("render"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    inSize = op.inValueSlider("size"),
-    inInner = op.inValueSlider("Inner"),
-    inStretch = op.inValueSlider("Stretch"),
-    inX = op.inValue("Pos X", 0),
-    inY = op.inValue("Pos Y", 0),
-    fallOff = op.inValueSelect("fallOff", ["Linear", "SmoothStep"], "Linear"),
-    inFadeOut = op.inValueSlider("fade Out"),
+    inSize = op.inFloatSlider("size"),
+    inInner = op.inFloatSlider("Inner"),
+    inStretch = op.inFloatSlider("Stretch"),
+    inX = op.inFloat("Pos X", 0),
+    inY = op.inFloat("Pos Y", 0),
+    fallOff = op.inDropDown("fallOff", ["Linear", "SmoothStep"], "Linear"),
+    inFadeOut = op.inFloatSlider("fade Out"),
     warnOverflow = op.inBool("warn overflow", false);
 
-const r = op.inValueSlider("r", 1);
-const g = op.inValueSlider("g", 1);
-const b = op.inValueSlider("b", 1);
-const a = op.inValueSlider("a", 1);
+const r = op.inFloatSlider("r", 1);
+const g = op.inFloatSlider("g", 1);
+const b = op.inFloatSlider("b", 1);
+const a = op.inFloatSlider("a", 1);
 
 r.setUiAttribs({ "colorPick": true });
 

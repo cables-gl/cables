@@ -1,8 +1,8 @@
 const
-    p1x = op.inValue("Point 1 X"),
-    p1y = op.inValue("Point 1 Y"),
-    p2x = op.inValue("Point 2 X"),
-    p2y = op.inValue("Point 2 Y"),
+    p1x = op.inFloat("Point 1 X"),
+    p1y = op.inFloat("Point 1 Y"),
+    p2x = op.inFloat("Point 2 X"),
+    p2y = op.inFloat("Point 2 Y"),
     outAngle = op.outNumber("Angle", 0);
 
 p1x.onChange =

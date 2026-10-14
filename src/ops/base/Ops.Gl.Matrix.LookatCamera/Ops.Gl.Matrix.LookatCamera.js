@@ -1,17 +1,17 @@
 const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
 
-const eyeX = op.inValueFloat("eyeX");
-const eyeY = op.inValueFloat("eyeY");
-const eyeZ = op.inValueFloat("eyeZ");
+const eyeX = op.inFloat("eyeX");
+const eyeY = op.inFloat("eyeY");
+const eyeZ = op.inFloat("eyeZ");
 
-const centerX = op.inValueFloat("centerX");
-const centerY = op.inValueFloat("centerY");
-const centerZ = op.inValueFloat("centerZ");
+const centerX = op.inFloat("centerX");
+const centerY = op.inFloat("centerY");
+const centerZ = op.inFloat("centerZ");
 
-const vecUpX = op.inValueFloat("upX");
-const vecUpY = op.inValueFloat("upY");
-const vecUpZ = op.inValueFloat("upZ");
+const vecUpX = op.inFloat("upX");
+const vecUpY = op.inFloat("upY");
+const vecUpZ = op.inFloat("upZ");
 
 const outArr = op.outArray("Array");
 

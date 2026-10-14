@@ -18,13 +18,13 @@ const
     trigger = op.outTrigger("trigger"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
-    inAspect = op.inValueSelect("Aspect Ratio", aspectTitles, aspects[0].title),
+    inAspect = op.inDropDown("Aspect Ratio", aspectTitles, aspects[0].title),
     inCustom = op.inFloat("Custom", 1.777777);
 
 const
     useVPSize = op.inBool("use viewport size", true),
-    width = op.inValueInt("texture width", 512),
-    height = op.inValueInt("texture height", 512);
+    width = op.inInt("texture width", 512),
+    height = op.inInt("texture height", 512);
 
 op.setPortGroup("Size", [useVPSize, width, height]);
 useVPSize.onChange = updateVpSize;

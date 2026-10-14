@@ -2,8 +2,8 @@ const
     parentPort = op.inObject("Link"),
     labelPort = op.inString("Text", "XY Pad"),
     inRange = op.inSwitch("Range", ["0-1", "-1-1"], "0-1"),
-    inputX = op.inValueSlider("Input X", 0),
-    inputY = op.inValueSlider("Input Y", 0),
+    inputX = op.inFloatSlider("Input X", 0),
+    inputY = op.inFloatSlider("Input Y", 0),
 
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),

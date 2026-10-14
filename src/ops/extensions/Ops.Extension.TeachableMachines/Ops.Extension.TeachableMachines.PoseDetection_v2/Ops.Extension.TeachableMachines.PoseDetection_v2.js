@@ -69,7 +69,7 @@ async function init()
     const baseUrl = inUrl.get();
     if (baseUrl)
     {
-        op.uiAttr({ "error": null });
+        op.setUiAttribs({ "error": null });
         const modelURL = inUrl.get() + "model.json";
         const metadataURL = inUrl.get() + "metadata.json";
 
@@ -82,7 +82,7 @@ async function init()
     }
     else
     {
-        op.uiAttr({ "error": "No baseurl set for the model, get one from teachablemachine" });
+        op.setUiAttribs({ "error": "No baseurl set for the model, get one from teachablemachine" });
     }
 }
 

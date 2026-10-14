@@ -5,8 +5,8 @@ let lastIdx = null;
 
 // input
 const indexPort = op.inInt("Index", 0);
-const valuePort = op.inValue("Value", 1);
-const defaultValuePort = op.inValue("Default Value", DEFAULT_VALUE_DEFAULT);
+const valuePort = op.inFloat("Value", 1);
+const defaultValuePort = op.inFloat("Default Value", DEFAULT_VALUE_DEFAULT);
 const onlyOnePort = op.inBool("Set inactive to default", false);
 
 // output

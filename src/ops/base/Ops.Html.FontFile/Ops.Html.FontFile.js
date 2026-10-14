@@ -1,7 +1,7 @@
 const
     filename=op.inFile("file"),
     fontname=op.inValueString("family"),
-    outLoaded=op.outValue("Loaded"),
+    outLoaded=op.outNumber("Loaded"),
     loadedTrigger=op.outTrigger("Loaded Trigger");
 
 filename.onChange=function()

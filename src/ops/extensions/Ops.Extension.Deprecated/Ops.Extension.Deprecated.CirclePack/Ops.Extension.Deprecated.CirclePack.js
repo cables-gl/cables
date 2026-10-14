@@ -5,10 +5,10 @@ let render = op.inTrigger("Render");
 let max = op.inFloat("Max Circles", 200);
 
 let next = op.outTrigger("Next");
-let outIndex = op.outValue("index");
-let outX = op.outValue("x");
-let outY = op.outValue("y");
-let outRadius = op.outValue("radius");
+let outIndex = op.outNumber("index");
+let outX = op.outNumber("x");
+let outY = op.outNumber("y");
+let outRadius = op.outNumber("radius");
 
 let circles = [];
 

@@ -3,13 +3,13 @@ const
     inTex = op.inTexture("GlArray"),
 
     inDoModX = op.inBool("X", true),
-    inModX = op.inValue("Modulo X", 1),
+    inModX = op.inFloat("Modulo X", 1),
 
     inDoModY = op.inBool("Y", true),
-    inModY = op.inValue("Modulo Y", 1),
+    inModY = op.inFloat("Modulo Y", 1),
 
     inDoModZ = op.inBool("Z", true),
-    inModZ = op.inValue("Modulo Z", 1),
+    inModZ = op.inFloat("Modulo Z", 1),
 
     trigger = op.outTrigger("trigger"),
     outTex = op.outTexture("Result");

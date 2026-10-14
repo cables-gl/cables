@@ -1,5 +1,5 @@
 const eventIn = op.inObject("MIDI Event In");
-const timingIn = op.inValueSelect("Timing", ["straight", "dotted", "triplet"], "straight");
+const timingIn = op.inDropDown("Timing", ["straight", "dotted", "triplet"], "straight");
 const eventOut = op.outObject("MIDI Event Out");
 const beatOut = op.outTrigger("Tick Out");
 const clockStartOut = op.outTrigger("Clock Start");

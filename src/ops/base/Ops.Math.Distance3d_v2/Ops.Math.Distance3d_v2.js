@@ -1,11 +1,11 @@
 const
     calc = op.inTriggerButton("Calc"),
-    x1 = op.inValueFloat("x1"),
-    y1 = op.inValueFloat("y1"),
-    z1 = op.inValueFloat("z1"),
-    x2 = op.inValueFloat("x2"),
-    y2 = op.inValueFloat("y2"),
-    z2 = op.inValueFloat("z2"),
+    x1 = op.inFloat("x1"),
+    y1 = op.inFloat("y1"),
+    z1 = op.inFloat("z1"),
+    x2 = op.inFloat("x2"),
+    y2 = op.inFloat("y2"),
+    z2 = op.inFloat("z2"),
     next = op.outTrigger("Next"),
     dist = op.addOutPort(new CABLES.Port(op, "distance"));
 

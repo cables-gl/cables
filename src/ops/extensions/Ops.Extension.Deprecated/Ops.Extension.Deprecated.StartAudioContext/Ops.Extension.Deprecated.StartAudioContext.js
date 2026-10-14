@@ -5,7 +5,7 @@ let CANVAS_ELEMENT = op.patch.cgl.canvas;
 let selectorsPort = op.inValueString("Custom Selectors", "");
 
 // outputs
-let readyPort = op.outValue("Is Ready", false);
+let readyPort = op.outNumber("Is Ready", false);
 
 op.onLoaded = init; // wait for ports to be set
 

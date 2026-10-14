@@ -85,8 +85,8 @@ let maxY = op.inFloat("maxY", 600);
 
 let active = op.inBool("Active", true);
 
-let isMoving = op.outValue("isMoving");
-let isPressed = op.outValue("isPressed");
+let isMoving = op.outNumber("isMoving");
+let isPressed = op.outNumber("isPressed");
 
 let cgl = op.patch.cgl;
 

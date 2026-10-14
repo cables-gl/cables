@@ -1,18 +1,18 @@
 const
     render = op.inTrigger("render"),
-    inArea = op.inValueSelect("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
+    inArea = op.inDropDown("Area", ["Sphere", "Box", "Tri Prism", "Hex Prism", "Axis X", "Axis Y", "Axis Z", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
 
     inViz = op.inBool("Visualize Area", false),
 
     inWorldSpace = op.inBool("WorldSpace", false),
-    x = op.inValue("x"),
-    y = op.inValue("y"),
-    z = op.inValue("z"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
 
     //    inFalloff = op.inFloat("Falloff", 0),
     // inFalloffCurve = op.inSwitch("Falloff Curve", ["Linear", "Smoothstep", "pow2", "pow3"], "Linear"),
 
-    inRadius = op.inValue("Radius", 1),
+    inRadius = op.inFloat("Radius", 1),
     sizeX = op.inFloat("Area Size X", 1),
     sizeY = op.inFloat("Area Size Y", 1),
     sizeZ = op.inFloat("Area Size Z", 1),

@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Render"),
-    inNum = op.inValue("Num Times", 3),
-    inSeed = op.inValue("Seed", 1),
+    inNum = op.inFloat("Num Times", 3),
+    inSeed = op.inFloat("Seed", 1),
     inOnlyOnce = op.inBool("Only Once"),
     outIndex = op.outNumber("Index");
 

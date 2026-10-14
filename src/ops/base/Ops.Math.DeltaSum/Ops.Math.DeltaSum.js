@@ -1,12 +1,12 @@
 const
     inVal = op.inFloat("Delta Value"),
-    defVal = op.inValue("Default Value", 0),
-    inMul = op.inValue("Multiply", 1),
+    defVal = op.inFloat("Default Value", 0),
+    inMul = op.inFloat("Multiply", 1),
     inReset = op.inTriggerButton("Reset"),
     inLimit = op.inBool("Limit", false),
-    inMin = op.inValue("Min", 0),
-    inMax = op.inValue("Max", 100),
-    inRubber = op.inValue("Rubberband", 0),
+    inMin = op.inFloat("Min", 0),
+    inMax = op.inFloat("Max", 100),
+    inRubber = op.inFloat("Rubberband", 0),
     outVal = op.outNumber("Absolute Value");
 
 inVal.changeAlways = true;

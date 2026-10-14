@@ -1,5 +1,5 @@
 const
-    inIndex = op.inValue("Index Position"),
+    inIndex = op.inFloat("Index Position"),
     inArr = op.inArray("Array"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),

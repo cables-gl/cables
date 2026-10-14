@@ -9,8 +9,8 @@ let node = new Tone.Follower(ATTACK_DEFAULT, RELEASE_DEFAULT);
 
 // input ports
 let audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", node);
-let attackPort = op.inValueSlider("Attack", ATTACK_DEFAULT);
-let releasePort = op.inValueSlider("Release", RELEASE_DEFAULT);
+let attackPort = op.inFloatSlider("Attack", ATTACK_DEFAULT);
+let releasePort = op.inFloatSlider("Release", RELEASE_DEFAULT);
 
 // change listeners
 attackPort.onChange = function ()

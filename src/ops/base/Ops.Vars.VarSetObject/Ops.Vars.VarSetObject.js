@@ -58,7 +58,7 @@ function update()
 
 
 // var val=op.inObject("Object");
-// op.varName=op.inValueSelect("Variable",[],"",true);
+// op.varName=op.inDropDown("Variable",[],"",true);
 
 // op.varName.onChange=updateName;
 // val.onChange=update;
@@ -105,7 +105,7 @@ function update()
 // }
 
 // var val=op.inObject("Object");
-// op.varName=op.inValueSelect("Variable",[],"",true);
+// op.varName=op.inDropDown("Variable",[],"",true);
 
 // op.varName.onChange=updateName;
 // val.onChange=update;

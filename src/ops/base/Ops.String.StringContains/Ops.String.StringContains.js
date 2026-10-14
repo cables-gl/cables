@@ -1,8 +1,8 @@
 var inStr=op.inValueString("String");
 var inValue=op.inValueString("SearchValue");
 
-var outFound=op.outValue("Found",false);
-var outIndex=op.outValue("Index",-1);
+var outFound=op.outNumber("Found",false);
+var outIndex=op.outNumber("Index",-1);
 
 inValue.onChange=exec;
 inStr.onChange=exec;

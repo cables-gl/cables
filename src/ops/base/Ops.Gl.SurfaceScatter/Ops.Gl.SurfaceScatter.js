@@ -1,13 +1,13 @@
 const
     render=op.inTrigger("render"),
     geometry=op.inObject("geometry"),
-    seed=op.inValueFloat("random seed"),
-    num=op.inValueInt("num",20),
+    seed=op.inFloat("random seed"),
+    num=op.inInt("num",20),
     rotX=op.inBool("Rotate X",true),
     rotY=op.inBool("Rotate Y",true),
     rotZ=op.inBool("Rotate Z",true),
     trigger=op.outTrigger('trigger'),
-    index=op.outValue("index"),
+    index=op.outNumber("index"),
     outPoints=op.outArray("Points");
 
 geometry.ignoreValueSerialize=true;
@@ -30,12 +30,12 @@ function initRandom()
 
     if(!geometry.get())
     {
-        op.uiAttr({'error':'no geometry'});
+        op.setUiAttribs({'error':'no geometry'});
         return;
     }
     else
     {
-        op.uiAttr({'error':null});
+        op.setUiAttribs({'error':null});
     }
 
     Math.randomSeed=seed.get();

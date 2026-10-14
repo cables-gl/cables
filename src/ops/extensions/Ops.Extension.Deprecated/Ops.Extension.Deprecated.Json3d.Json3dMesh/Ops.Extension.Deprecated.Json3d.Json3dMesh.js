@@ -4,7 +4,7 @@ cgl.frameStore.currentScene = null;
 
 let exe = op.inTrigger("Render");
 let filename = op.inFile("file", "3d json");
-let meshIndex = op.inValueInt("Mesh Index", 0);
+let meshIndex = op.inInt("Mesh Index", 0);
 let draw = op.inBool("Draw", true);
 let centerPivot = op.inBool("Center Mesh", true);
 let inSize = op.inFloat("Size", 1);
@@ -12,7 +12,7 @@ let next = op.outTrigger("trigger");
 let geometryOut = op.outObject("Geometry");
 let merge = op.inBool("Merge", false);
 let inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no");
-let outScale = op.outValue("Scaling", 1.0);
+let outScale = op.outNumber("Scaling", 1.0);
 
 let geom = null;
 let data = null;
@@ -114,7 +114,7 @@ function updateInfo(geom)
 
     nfo += "</div>";
 
-    op.uiAttr({ "info": nfo });
+    op.setUiAttribs({ "info": nfo });
 }
 
 function setMesh()
@@ -129,7 +129,7 @@ function setMesh()
     const isNumeric = CABLES.isNumeric || CABLES.UTILS.isNumeric;
     if (!data || index != index || !isNumeric(index) || index < 0 || index >= data.meshes.length)
     {
-        op.uiAttr({ "warning": "mesh not found - index out of range " });
+        op.setUiAttribs({ "warning": "mesh not found - index out of range " });
         return;
     }
 
@@ -163,7 +163,7 @@ function setMesh()
         if (!jsonGeom)
         {
             mesh = null;
-            op.uiAttr({ "warning": "mesh not found" });
+            op.setUiAttribs({ "warning": "mesh not found" });
             return;
         }
 
@@ -186,7 +186,7 @@ function setMesh()
     needSetMesh = false;
     meshes[index] = mesh;
 
-    op.uiAttr({ "warning": null });
+    op.setUiAttribs({ "warning": null });
 }
 
 function reload()
@@ -202,7 +202,7 @@ function reload()
             {
                 if (err)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
 
                     console.error("ajax error:", err);
                     op.patch.loading.finished(loadingId);
@@ -210,7 +210,7 @@ function reload()
                 }
                 else
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": null });
+                    if (CABLES.UI)op.setUiAttribs({ "error": null });
                 }
 
                 try
@@ -219,7 +219,7 @@ function reload()
                 }
                 catch (ex)
                 {
-                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)op.setUiAttribs({ "error": "could not load file..." });
                     op.patch.loading.finished(loadingId);
                     return;
                 }

@@ -4,7 +4,7 @@
 const render = op.inTrigger("render");
 const inCubemap = op.inObject("Cubemap");
 const inUseReflection = op.inBool("Use Reflection", false);
-const inMiplevel = op.inValueSlider("Blur", 0.0);
+const inMiplevel = op.inFloatSlider("Blur", 0.0);
 op.setPortGroup("Appearance", [inMiplevel, inUseReflection]);
 const inRotation = op.inFloat("Rotation", 0);
 const inFlipX = op.inBool("Flip X", false);

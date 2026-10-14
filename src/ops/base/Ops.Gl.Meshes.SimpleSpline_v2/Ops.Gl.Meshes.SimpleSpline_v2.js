@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("Render"),
     inPoints = op.inArray("Points"),
-    numPoints = op.inValueInt("Num Points"),
+    numPoints = op.inInt("Num Points"),
     strip = op.inBool("Line Strip", true),
     texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random", "Fill"], "0"),
     inTexCoords = op.inArray("TexCoords Array"),

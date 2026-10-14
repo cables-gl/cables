@@ -1,10 +1,10 @@
 const
     exe = op.inTrigger("exe"),
     geom = op.inObject("geom"),
-    inScale = op.inValue("Scale", 1),
+    inScale = op.inFloat("Scale", 1),
 
     doLimit = op.inBool("Limit Instances", false),
-    inLimit = op.inValueInt("Limit", 100),
+    inLimit = op.inInt("Limit", 100),
 
     inTranslates = op.inArray("positions"),
     inScales = op.inArray("Scale Array"),
@@ -12,7 +12,7 @@ const
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors"),
     outTrigger = op.outTrigger("Trigger Out"),
-    outNum = op.outValue("Num");
+    outNum = op.outNumber("Num");
 
 const srcHeadVert = attachments.instancer_head_vert;
 const srcBodyVert = attachments.instancer_body_vert;

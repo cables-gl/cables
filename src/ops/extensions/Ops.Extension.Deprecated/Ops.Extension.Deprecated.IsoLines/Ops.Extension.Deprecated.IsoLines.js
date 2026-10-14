@@ -14,7 +14,7 @@ let inFieldsY = op.inFloat("Fields Y");
 let maxPoints = op.inFloat("Max LinePoints", 500);
 
 let outPoints = op.outArray("Points");
-let outNumPoints = op.outValue("Num Points");
+let outNumPoints = op.outNumber("Num Points");
 
 let dots = new Float32Array(6000);
 

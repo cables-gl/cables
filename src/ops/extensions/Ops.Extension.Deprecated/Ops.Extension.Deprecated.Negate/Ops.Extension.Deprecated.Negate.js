@@ -1,6 +1,6 @@
 const
     inVal = op.inFloat("Number"),
-    result = op.outValue("Result");
+    result = op.outNumber("Result");
 
 inVal.onChange = update;
 

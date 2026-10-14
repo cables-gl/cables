@@ -1,5 +1,5 @@
 const exec = op.inTriggerButton("exec"),
-    val = op.inValue("Value"),
+    val = op.inFloat("Value"),
     outTrigger = op.outTrigger("Trigger out"),
     arrOut = op.outArray("Result"),
     outArrayLength = op.outNumber("Array length");

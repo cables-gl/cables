@@ -1,7 +1,7 @@
-let val = op.inValue("Value", 1);
+let val = op.inFloat("Value", 1);
 let char = op.inValueString("Char", "0");
-let num = op.inValueInt("Num", 4);
-let out = op.outValue("String");
+let num = op.inInt("Num", 4);
+let out = op.outNumber("String");
 
 val.onChange = update;
 char.onChange = update;

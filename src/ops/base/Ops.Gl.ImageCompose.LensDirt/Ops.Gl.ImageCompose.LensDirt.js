@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     offsetX = op.inFloat("Offset X", 0),
     offsetY = op.inFloat("Offset Y", 0),
     zoom = op.inFloat("Zoom", 5),

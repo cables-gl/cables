@@ -2,13 +2,13 @@ op.name = "LaserPacketSend";
 
 let exec = op.inTrigger("Exec");
 let next = op.outTrigger("Next");
-// var laserId=op.inValueInt("Laser Id",0);
+// var laserId=op.inInt("Laser Id",0);
 // var inSpeed=op.inFloat("speed",15000);
 
 let outPacket = op.outObject("out packet");
 let inPacket = op.inObject("Packet");
-let outPackets = op.outValue("num packets");
-let outNumPoints = op.outValue("Num Points");
+let outPackets = op.outNumber("num packets");
+let outNumPoints = op.outNumber("Num Points");
 
 let packets = [];
 packets.length = 100;

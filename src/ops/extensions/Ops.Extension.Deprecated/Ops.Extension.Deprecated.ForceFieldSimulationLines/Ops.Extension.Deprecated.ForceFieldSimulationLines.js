@@ -1,28 +1,28 @@
 let exec = op.inTrigger("exec");
 let next = op.outTrigger("next");
 
-let numParticles = op.inValueInt("Num Particles", 100);
+let numParticles = op.inInt("Num Particles", 100);
 
 let inReset = op.inTriggerButton("Reset");
 let inRespawn = op.inTriggerButton("Respawn all");
 let inSpeed = op.inFloat("Speed", 1);
 let inDamping = op.inFloat("Damping");
 
-let col = op.outValue("color");
+let col = op.outNumber("color");
 
 let triggerForce = op.outTrigger("force");
 let inSize = op.inFloat("Size Area");
 
-let outOffset = op.outValue("offset");
-let outIndex = op.outValue("Index");
+let outOffset = op.outNumber("offset");
+let outIndex = op.outNumber("Index");
 let outPoints = op.outArray("Points");
 
-let outDieSlow = op.outValue("Die Slow");
+let outDieSlow = op.outNumber("Die Slow");
 
-let numLinePoints = op.inValueInt("Num Line Points", 100);
+let numLinePoints = op.inInt("Num Line Points", 100);
 
-let minLifetime = op.inValueInt("Min LifeTime", 5);
-let maxLifetime = op.inValueInt("Max LifeTime", 5);
+let minLifetime = op.inInt("Min LifeTime", 5);
+let maxLifetime = op.inInt("Max LifeTime", 5);
 
 let posX = op.inFloat("Pos X");
 let posY = op.inFloat("Pos Y");

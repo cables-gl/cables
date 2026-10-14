@@ -1,9 +1,9 @@
 const
     render = op.inTrigger("render"),
     radius = op.inFloat("radius", 0.5),
-    innerRadius = op.inValueSlider("innerRadius", 0),
-    segments = op.inValueInt("segments", 40),
-    percent = op.inValueSlider("percent", 1),
+    innerRadius = op.inFloatSlider("innerRadius", 0),
+    segments = op.inInt("segments", 40),
+    percent = op.inFloatSlider("percent", 1),
     inDraw = op.inBool("Draw", true),
     outNext = op.outTrigger("Next"),
     outGeom = op.outObject("Geometry");

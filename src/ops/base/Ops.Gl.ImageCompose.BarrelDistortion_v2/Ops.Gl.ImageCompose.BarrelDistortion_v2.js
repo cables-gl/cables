@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1.0),
-    intensity = op.inValue("Intensity", 10.0),
+    amount = op.inFloatSlider("Amount", 1.0),
+    intensity = op.inFloat("Intensity", 10.0),
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;

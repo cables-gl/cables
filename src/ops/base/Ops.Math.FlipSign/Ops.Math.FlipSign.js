@@ -1,5 +1,5 @@
 const
-    inval = op.inValueFloat("Value", 1),
+    inval = op.inFloat("Value", 1),
     result = op.outNumber("Result");
 
 inval.onChange = update;

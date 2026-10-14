@@ -1,9 +1,9 @@
 const
     exe = op.inTrigger("exe"),
     mode = op.inSwitch("Mode", ["Sine", "Cosine"], "Sine"),
-    phase = op.inValueFloat("phase", 0),
-    mul = op.inValueFloat("frequency", 1),
-    amplitude = op.inValueFloat("amplitude", 1),
+    phase = op.inFloat("phase", 0),
+    mul = op.inFloat("frequency", 1),
+    amplitude = op.inFloat("amplitude", 1),
     trigOut = op.outTrigger("Trigger out"),
     result = op.outNumber("result");
 

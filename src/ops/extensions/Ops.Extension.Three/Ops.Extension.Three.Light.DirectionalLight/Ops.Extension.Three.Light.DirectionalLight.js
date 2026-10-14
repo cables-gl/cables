@@ -5,9 +5,9 @@ const
     inPosX = op.inFloat("Position X"),
     inPosY = op.inFloat("Position Y"),
     inPosZ = op.inFloat("Position Z"),
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
     inCastShadow = op.inBool("Cast Shadow", false),
     next = op.outTrigger("Next");
 

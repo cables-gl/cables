@@ -1,6 +1,6 @@
 const
-    midiValuePort = op.inValue("MIDI Value"),
-    tuningPort = op.inValue("Tuning", 440),
+    midiValuePort = op.inFloat("MIDI Value"),
+    tuningPort = op.inFloat("Tuning", 440),
     frequencyPort = op.outNumber("Frequency");
 
 midiValuePort.onChange =

@@ -10,8 +10,8 @@ let pDescription = op.inValueString("description", "");
 let pTab = op.inValueString("tab", "form");
 let pOrder = op.inValueString("order", "0");
 
-let pDisplay = op.inValueSelect("display", ["slider", "slider int", "input"], "slider");
-let result = op.outValue("value");
+let pDisplay = op.inDropDown("display", ["slider", "slider int", "input"], "slider");
+let result = op.outNumber("value");
 
 pDefault.onChange = update;
 

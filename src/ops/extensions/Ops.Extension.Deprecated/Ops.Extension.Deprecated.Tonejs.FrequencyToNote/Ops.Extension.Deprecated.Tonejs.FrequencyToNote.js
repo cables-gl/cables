@@ -35,4 +35,4 @@ frequencyPort.onChange = function ()
 };
 
 // outputs
-var notePort = op.outValue("Note");
+var notePort = op.outNumber("Note");

@@ -19,7 +19,7 @@ inStrRule3.setUiAttribs({ "hidePort": true });
 inStrConstant4.setUiAttribs({ "hidePort": true });
 inStrRule4.setUiAttribs({ "hidePort": true });
 
-const inIterations = op.inValueInt("Iterations", 1);
+const inIterations = op.inInt("Iterations", 1);
 const inStepLength = op.inFloat("Step length", 1.0);
 const inStepScale = op.inFloat("Step scale multiplier", 1.0);
 const inDefaultAngle = op.inFloat("Default angle", 45.0);
@@ -29,7 +29,7 @@ const outTrigger = op.outTrigger("Out trigger geometry");
 const lineTrigger = op.outTrigger("Line/point trigger");
 // const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
-const outMax = op.outValue("Max Size");
+const outMax = op.outNumber("Max Size");
 const stringOut = op.outValueString("Final generated string");
 
 const seed = op.inFloat("random seed");

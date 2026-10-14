@@ -5,13 +5,13 @@ const exe = op.inTrigger("exe");
 const inTransformations = op.inArray("positions");
 const geom = op.inObject("geom");
 
-const inNum = op.inValueInt("Num", 2000);
+const inNum = op.inInt("Num", 2000);
 
 const inOffset = op.inFloat("Offset");
 
 const rotPos = op.inBool("Rotate by Position", true);
 
-const inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
+const inMeth = op.inDropDown("Method", ["Array", "Fill"], "Array");
 const inSpacing = op.inFloat("Spacing", 0.2);
 const inScale = op.inFloat("Scale", 1);
 // var inRot=op.inFloat("Rotation",0);

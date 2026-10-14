@@ -10,9 +10,9 @@ const
     inResizeNewSize = op.inFloat("New Size", 1),
 
     inSize = op.inSwitch("Size", ["Auto", "Manual"], "Auto"),
-    inWidth = op.inValueInt("Tex Width", 256),
-    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    inWidth = op.inInt("Tex Width", 256),
+    tfilter = op.inDropDown("filter", ["nearest", "linear"], "nearest"),
+    twrap = op.inDropDown("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA32F),
     inTexColor = op.inTexture("Color Texture", null, "Texture"),
     next = op.outTrigger("Next"),

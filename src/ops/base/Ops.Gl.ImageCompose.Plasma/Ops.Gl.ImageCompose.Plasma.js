@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    x = op.inValue("Width", 20),
-    y = op.inValue("Height", 20),
-    mul = op.inValue("Mul", 1),
-    offsetX = op.inValue("offset X", 0),
-    offsetY = op.inValue("offset Y", 0),
-    time = op.inValue("Time", 1),
+    amount = op.inFloatSlider("Amount", 1),
+    x = op.inFloat("Width", 20),
+    y = op.inFloat("Height", 20),
+    mul = op.inFloat("Mul", 1),
+    offsetX = op.inFloat("offset X", 0),
+    offsetY = op.inFloat("offset Y", 0),
+    time = op.inFloat("Time", 1),
     greyscale = op.inBool("Greyscale", true),
     trigger = op.outTrigger("trigger");
 

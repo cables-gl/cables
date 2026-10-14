@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     inMeth = op.inSwitch("Method", ["Normal", "Discard", "Coverage", "Cov. Sharp", "Dither", "None"], "Discard"),
     next = op.outTrigger("trigger"),
-    inThresh = op.inValueSlider("Threshold", 0.3);
+    inThresh = op.inFloatSlider("Threshold", 0.3);
 
 const cgl = op.patch.cgl;
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });

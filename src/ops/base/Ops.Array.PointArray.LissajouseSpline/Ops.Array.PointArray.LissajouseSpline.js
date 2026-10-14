@@ -1,9 +1,9 @@
 const
-    inForm = op.inValueSelect("Formula", [1, 2, 3], 1),
-    inA = op.inValueInt("A", 5),
-    inB = op.inValueInt("B", 4),
-    inC = op.inValueInt("C", 1),
-    inD = op.inValueInt("D", 2),
+    inForm = op.inDropDown("Formula", [1, 2, 3], 1),
+    inA = op.inInt("A", 5),
+    inB = op.inInt("B", 4),
+    inC = op.inInt("C", 1),
+    inD = op.inInt("D", 2),
     result = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");

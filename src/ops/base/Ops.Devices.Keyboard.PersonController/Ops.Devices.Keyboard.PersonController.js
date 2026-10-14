@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("Exe"),
-    speed = op.inValue("Speed", 1),
+    speed = op.inFloat("Speed", 1),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outDir = op.outNumber("Dir"),

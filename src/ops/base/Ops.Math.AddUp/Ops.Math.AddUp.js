@@ -1,5 +1,5 @@
 const
-    number = op.inValue("Number"),
+    number = op.inFloat("Number"),
     doAdd = op.inTriggerButton("Add"),
     doReset = op.inTriggerButton("Reset"),
     result = op.outNumber("Result");

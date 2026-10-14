@@ -1,9 +1,9 @@
 const render = op.inTrigger("render"),
     multiplierTex = op.inTexture("Multiplier"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    amountX = op.inValue("width", 320.0),
-    amountY = op.inValue("height", 180.0),
+    amount = op.inFloatSlider("Amount", 1),
+    amountX = op.inFloat("width", 320.0),
+    amountY = op.inFloat("height", 180.0),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

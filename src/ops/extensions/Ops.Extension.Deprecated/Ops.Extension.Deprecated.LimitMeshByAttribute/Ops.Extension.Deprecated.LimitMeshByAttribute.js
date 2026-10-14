@@ -1,5 +1,5 @@
 const render = op.inTrigger("render");
-let inAttrib = op.inValueSelect("Attribute", []);
+let inAttrib = op.inDropDown("Attribute", []);
 let inGeom = op.inObject("Geometry");
 let limitMax = op.inFloat("Max", 1000);
 const trigger = op.outTrigger("trigger");

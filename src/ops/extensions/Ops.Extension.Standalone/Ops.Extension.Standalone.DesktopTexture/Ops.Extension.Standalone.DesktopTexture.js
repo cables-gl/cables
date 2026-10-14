@@ -6,10 +6,10 @@ const
     inSource = op.inDropDown("Source", ["Select Source"], "Select Source"),
 
     flip = op.inBool("Flip Y", true),
-    fps = op.inValueInt("FPS", 12),
+    fps = op.inInt("FPS", 12),
 
-    width = op.inValueInt("Requested Width", 200),
-    height = op.inValueInt("Requested Height", 720),
+    width = op.inInt("Requested Width", 200),
+    height = op.inInt("Requested Height", 720),
 
     inAsDOM = op.inBool("Show HTML Element", false),
     inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),

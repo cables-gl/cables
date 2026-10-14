@@ -12,8 +12,8 @@ let inText = op.inValueString("Text");
 
 let ignore = op.inBool("Ignore Mouse");
 
-let outHovering = op.outValue("Hovering", false);
-let outHoverIndex = op.outValue("Hover Index", -1);
+let outHovering = op.outNumber("Hovering", false);
+let outHoverIndex = op.outNumber("Hover Index", -1);
 
 let triggerClicked = op.outTrigger("Clicked");
 

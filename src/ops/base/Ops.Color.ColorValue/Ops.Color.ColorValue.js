@@ -1,8 +1,8 @@
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
-const a = op.inValueSlider("a", 1);
+const a = op.inFloatSlider("a", 1);
 
 const outR = op.outNumber("outr");
 const outG = op.outNumber("outg");

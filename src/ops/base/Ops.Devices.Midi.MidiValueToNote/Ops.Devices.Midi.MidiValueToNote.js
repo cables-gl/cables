@@ -1,5 +1,5 @@
-let midiValuePort = op.inValue("Midi Value");
-let notePort = op.outValue("Note");
+let midiValuePort = op.inFloat("Midi Value");
+let notePort = op.outNumber("Note");
 
 let FLATS = "C Db D Eb E F Gb G Ab A Bb B".split(" ");
 let SHARPS = "C C# D D# E F F# G G# A A# B".split(" ");

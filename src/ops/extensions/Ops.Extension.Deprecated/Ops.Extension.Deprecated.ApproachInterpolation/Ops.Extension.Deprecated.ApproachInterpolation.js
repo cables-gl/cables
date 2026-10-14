@@ -7,7 +7,7 @@ let inVal = op.inFloat("Value");
 
 let next = op.outTrigger("Next");
 let inDivisor = op.inFloat("Divisor", divisor);
-let result = op.outValue("Result", 0);
+let result = op.outNumber("Result", 0);
 
 let val = 0;
 let goal = 0;

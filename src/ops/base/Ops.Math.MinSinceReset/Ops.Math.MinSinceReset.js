@@ -1,4 +1,4 @@
-let valuePort = op.inValue("Value");
+let valuePort = op.inFloat("Value");
 let resetPort = op.inTriggerButton("Reset");
 let minPort = op.outNumber("Minimum");
 

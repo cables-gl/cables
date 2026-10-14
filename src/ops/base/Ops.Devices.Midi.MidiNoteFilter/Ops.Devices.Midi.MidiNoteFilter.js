@@ -27,10 +27,10 @@ const learnedNotesIn = op.inArray("Note Values", []);
 learnedNotesIn.setUiAttribs({ "hidePort": true });
 
 const inEvent = op.inObject("MIDI Event");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
-const noteStartDropdown = op.inValueSelect("Note Start", noteValues, 0);
-const noteEndDropdown = op.inValueSelect("Note End", noteValues, 0);
-const normalizeDropdown = op.inValueSelect(
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
+const noteStartDropdown = op.inDropDown("Note Start", noteValues, 0);
+const noteEndDropdown = op.inDropDown("Note End", noteValues, 0);
+const normalizeDropdown = op.inDropDown(
     "Normalize Velocity",
     ["none", "0 to 1", "-1 to 1"],
     "none"
@@ -161,8 +161,8 @@ inEvent.onChange = () =>
             gui.emitEvent("portValueEdited", op, noteEndDropdown, noteEndDropdown.get());
             gui.emitEvent("portValueEdited", op, noteStartDropdown, noteStartDropdown.get());
 
-            op.uiAttr({ "info": "Start bound to Note: " + noteStartDropdown.get() });
-            op.uiAttr({ "info": "End bound to Note: " + noteEndDropdown.get() });
+            op.setUiAttribs({ "info": "Start bound to Note: " + noteStartDropdown.get() });
+            op.setUiAttribs({ "info": "End bound to Note: " + noteEndDropdown.get() });
             op.refreshParams();
         }
         eventOut.set(event);

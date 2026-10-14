@@ -13,7 +13,7 @@ function getMIDINote(dataByte1LSB)
 
 /* IN */
 const inEvent = op.inObject("MIDI Event In");
-const midiChannelDropdown = op.inValueSelect("MIDI Channel", MIDIChannels, 1);
+const midiChannelDropdown = op.inDropDown("MIDI Channel", MIDIChannels, 1);
 const inTranspose = op.inInt("Transpose Amount", 0);
 const learn = op.inTriggerButton("learn");
 
@@ -77,7 +77,7 @@ inEvent.onChange = () =>
         learning = false;
         if (CABLES.UI)
         {
-            op.uiAttr({ "info": `bound to MIDI Channel: ${midiChannelDropdown.get()}` });
+            op.setUiAttribs({ "info": `bound to MIDI Channel: ${midiChannelDropdown.get()}` });
             op.refreshParams();
         }
     }

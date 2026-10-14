@@ -1,7 +1,7 @@
 const
     val = op.inString("Value", 1),
     char = op.inString("Char", "0"),
-    num = op.inValueInt("Num", 4),
+    num = op.inInt("Num", 4),
     out = op.outString("String");
 
 val.onChange =

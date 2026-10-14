@@ -553,7 +553,7 @@ let reload = function ()
             {
                 if (err)
                 {
-                    if (CABLES.UI)self.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)self.setUiAttribs({ "error": "could not load file..." });
 
                     console.error("ajax error:", err);
                     self.patch.loading.finished(loadingId);
@@ -561,7 +561,7 @@ let reload = function ()
                 }
                 else
                 {
-                    if (CABLES.UI)self.uiAttr({ "error": null });
+                    if (CABLES.UI)self.setUiAttribs({ "error": null });
                 }
 
                 let data = null;
@@ -572,7 +572,7 @@ let reload = function ()
                 }
                 catch (ex)
                 {
-                    if (CABLES.UI)self.uiAttr({ "error": "could not load file..." });
+                    if (CABLES.UI)self.setUiAttribs({ "error": "could not load file..." });
                     return;
                 }
                 scene.setValue(data);

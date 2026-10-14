@@ -1,15 +1,15 @@
 const
     render = op.inTrigger("render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    mode = op.inValueSelect("Mode", ["Sine", "Sawtooth", "Triangle", "Square"], "Sine"),
-    freq = op.inValue("Frequency", 4),
-    pow = op.inValue("Pow factor", 6),
-    offset = op.inValue("Offset", 0),
+    amount = op.inFloatSlider("Amount", 1),
+    mode = op.inDropDown("Mode", ["Sine", "Sawtooth", "Triangle", "Square"], "Sine"),
+    freq = op.inFloat("Frequency", 4),
+    pow = op.inFloat("Pow factor", 6),
+    offset = op.inFloat("Offset", 0),
     rotate = op.inFloatSlider("Rotate", 0),
-    r = op.inValueSlider("r", 1.0),
-    g = op.inValueSlider("g", 1.0),
-    b = op.inValueSlider("b", 1.0),
+    r = op.inFloatSlider("r", 1.0),
+    g = op.inFloatSlider("g", 1.0),
+    b = op.inFloatSlider("b", 1.0),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Waveform", [mode, freq, pow, offset, rotate]);

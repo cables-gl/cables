@@ -1,9 +1,9 @@
 const
     exePort = op.inTriggerButton("Execute"),
     inArrayPort = op.inArray("Array"),
-    value1Port = op.inValue("Value 1"),
-    value2Port = op.inValue("Value 2"),
-    value3Port = op.inValue("Value 3"),
+    value1Port = op.inFloat("Value 1"),
+    value2Port = op.inFloat("Value 2"),
+    value3Port = op.inFloat("Value 3"),
     inReset = op.inTriggerButton("Reset"),
     nextPort = op.outTrigger("Next"),
     outArray = op.outArray("Result Array", null, 3);

@@ -10,7 +10,7 @@ let durationPort = op.inValueString("Duration", INFINITE);
 
 // output ports
 let triggerPort = op.outTrigger("Trigger");
-let timeOutPort = op.outValue("Event Time");
+let timeOutPort = op.outNumber("Event Time");
 
 // vars
 let lastListenerId;
@@ -41,12 +41,12 @@ function handleChange()
     catch (e)
     {
         // interval not valid
-        op.uiAttr({ "error": "Interval not valid, Examples: \"4n\", \"1m\", 2" });
+        op.setUiAttribs({ "error": "Interval not valid, Examples: \"4n\", \"1m\", 2" });
         op.refreshParams();
         return;
     }
     // reset UI warning
-    op.uiAttr({ "error": null });
+    op.setUiAttribs({ "error": null });
     op.refreshParams();
 
     // clear old schedule

@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    sides = op.inValue("Sides", 10),
-    angle = op.inValueSlider("Angle", 0),
-    slidex = op.inValueSlider("Slide X", 0),
-    slidey = op.inValueSlider("Slide Y", 0),
-    centerX = op.inValueSlider("Center X", 0.5),
-    centerY = op.inValueSlider("Center Y", 0.5),
+    amount = op.inFloatSlider("Amount", 1),
+    sides = op.inFloat("Sides", 10),
+    angle = op.inFloatSlider("Angle", 0),
+    slidex = op.inFloatSlider("Slide X", 0),
+    slidey = op.inFloatSlider("Slide Y", 0),
+    centerX = op.inFloatSlider("Center X", 0.5),
+    centerY = op.inFloatSlider("Center Y", 0.5),
     inAspect = op.inBool("Aspect Ratio", true),
     trigger = op.outTrigger("Next");
 

@@ -1,10 +1,10 @@
 
 var chars=op.inValueString("chars","cables");
-var len=op.inValueInt("Length",10);
+var len=op.inInt("Length",10);
 
 var generate=op.inTriggerButton("Generate");
 
-var result=op.outValue("Result");
+var result=op.outNumber("Result");
 
 generate.onTriggered=gen;
 gen();

@@ -1,16 +1,16 @@
 const
     render = op.inTrigger("render"),
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    time = op.inValue("Seed", 0.5),
-    inFrequency = op.inValue("frequency", 1),
-    inStrength = op.inValue("strength", 8.0),
-    inBlockSizeA = op.inValue("Block size small x", 24.0),
-    inBlockSizeB = op.inValue("Block size small y", 9.0),
-    inBlockSizeC = op.inValue("Block size large x", 8.0),
-    inBlockSizeD = op.inValue("Block size large y", 4.0),
-    inScrollX = op.inValue("Scroll X", 0.0),
-    inScrollY = op.inValue("Scroll Y", 0.0),
+    time = op.inFloat("Seed", 0.5),
+    inFrequency = op.inFloat("frequency", 1),
+    inStrength = op.inFloat("strength", 8.0),
+    inBlockSizeA = op.inFloat("Block size small x", 24.0),
+    inBlockSizeB = op.inFloat("Block size small y", 9.0),
+    inBlockSizeC = op.inFloat("Block size large x", 8.0),
+    inBlockSizeD = op.inFloat("Block size large y", 4.0),
+    inScrollX = op.inFloat("Scroll X", 0.0),
+    inScrollY = op.inFloat("Scroll Y", 0.0),
     trigger = op.outTrigger("trigger");
 
 const TEX_SLOT = 0;

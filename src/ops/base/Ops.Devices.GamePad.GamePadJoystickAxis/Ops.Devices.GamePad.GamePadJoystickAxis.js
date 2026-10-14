@@ -1,6 +1,6 @@
 const
     inAxis = op.inArray("Axis"),
-    inAxisNum = op.inValueInt("Index"),
+    inAxisNum = op.inInt("Index"),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     inDeadZone = op.outNumber("DeadZone", 0.1),

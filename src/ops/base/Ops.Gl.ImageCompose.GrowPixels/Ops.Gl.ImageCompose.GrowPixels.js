@@ -1,12 +1,12 @@
 const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    strength = op.inValueSlider("strength", 1),
+    amount = op.inFloatSlider("Amount", 1),
+    strength = op.inFloatSlider("strength", 1),
     iter = op.inInt("iterations", 1),
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
     trigger = op.outTrigger("Trigger");
 
 op.setPortGroup("Look", strength);

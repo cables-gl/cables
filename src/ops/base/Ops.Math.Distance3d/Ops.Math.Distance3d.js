@@ -1,10 +1,10 @@
-let x1 = op.inValueFloat("x1");
-let y1 = op.inValueFloat("y1");
-let z1 = op.inValueFloat("z1");
+let x1 = op.inFloat("x1");
+let y1 = op.inFloat("y1");
+let z1 = op.inFloat("z1");
 
-let x2 = op.inValueFloat("x2");
-let y2 = op.inValueFloat("y2");
-let z2 = op.inValueFloat("z2");
+let x2 = op.inFloat("x2");
+let y2 = op.inFloat("y2");
+let z2 = op.inFloat("z2");
 
 let dist = op.addOutPort(new CABLES.Port(op, "distance"));
 op.setPortGroup("Point 1", [x1, y1, z1]);

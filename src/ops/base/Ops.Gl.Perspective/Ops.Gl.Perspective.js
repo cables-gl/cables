@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
     inAxis = op.inSwitch("Axis", ["Vertical", "Horizontal"], "Vertical"),
-    fovY = op.inValueFloat("fov y", 45),
-    zNear = op.inValueFloat("frustum near", 0.1),
-    zFar = op.inValueFloat("frustum far", 20),
+    fovY = op.inFloat("fov y", 45),
+    zNear = op.inFloat("frustum near", 0.1),
+    zFar = op.inFloat("frustum far", 20),
     autoAspect = op.inBool("Auto Aspect Ratio", true),
-    aspect = op.inValue("Aspect Ratio"),
+    aspect = op.inFloat("Aspect Ratio"),
     trigger = op.outTrigger("trigger"),
     outAsp = op.outNumber("Aspect");
 

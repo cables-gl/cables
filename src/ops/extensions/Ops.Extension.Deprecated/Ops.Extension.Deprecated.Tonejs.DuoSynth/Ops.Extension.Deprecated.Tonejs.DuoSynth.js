@@ -26,12 +26,12 @@ portamentoPort.onChange = function ()
     if (CABLES.WEBAUDIO.isValidToneTime(portamento))
     {
         node.set("portamento", portamento);
-        op.uiAttr({ "warning": null }); // clear warning
+        op.setUiAttribs({ "warning": null }); // clear warning
         op.refreshParams();
     }
     else
     {
-        op.uiAttr({ "warning": "Portamento is not a valid time!" });
+        op.setUiAttribs({ "warning": "Portamento is not a valid time!" });
         op.refreshParams();
     }
 };

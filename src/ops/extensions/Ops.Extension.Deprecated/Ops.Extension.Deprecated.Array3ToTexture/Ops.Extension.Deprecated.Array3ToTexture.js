@@ -1,7 +1,7 @@
 const
     inArr = op.inArray("Array"),
 
-    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
+    wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "repeat"),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "mipmap"),
 
     outTex = op.outTexture("Texture");

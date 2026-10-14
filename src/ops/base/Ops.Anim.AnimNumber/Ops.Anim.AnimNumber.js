@@ -1,7 +1,7 @@
 const
     exe = op.inTrigger("exe"),
-    inValue = op.inValue("Value"),
-    duration = op.inValueFloat("duration"),
+    inValue = op.inFloat("Value"),
+    duration = op.inFloat("duration"),
     next = op.outTrigger("Next"),
     result = op.outNumber("result"),
     finished = op.outTrigger("Finished");

@@ -20,7 +20,7 @@ let fontFamily = op.addInPort(new CABLES.Port(op, "Font Family", CABLES.Port.TYP
 
 let cursor = op.addInPort(new CABLES.Port(op, "cursor", CABLES.Port.TYPE_VALUE, { "display": "dropdown", "values": ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help"] }));
 
-let opacity = op.inValueSlider("Opacity", 1.0);
+let opacity = op.inFloatSlider("Opacity", 1.0);
 
 let r = op.addInPort(new CABLES.Port(op, "Text Red", CABLES.Port.TYPE_VALUE, { "display": "range", "colorPick": "true" }));
 let g = op.addInPort(new CABLES.Port(op, "Text Green", CABLES.Port.TYPE_VALUE, { "display": "range" }));

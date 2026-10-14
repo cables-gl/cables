@@ -1,5 +1,5 @@
 var exec=op.inTrigger("exec");
-var num=this.inValueInt("num");
+var num=this.inInt("num");
 var defaultTransparent=op.inBool("Default Texture Transparent",true);
 var textureOut=this.outTexture("texture");
 

@@ -1,6 +1,6 @@
 const
-    num = op.inValue("Number"),
-    divisor = op.inValue("Divisor"),
+    num = op.inFloat("Number"),
+    divisor = op.inFloat("Divisor"),
     result = op.outBoolNum("Result");
 
 num.onChange = divisor.onChange = function ()

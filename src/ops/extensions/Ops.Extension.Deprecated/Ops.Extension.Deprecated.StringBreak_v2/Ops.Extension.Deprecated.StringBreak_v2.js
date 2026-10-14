@@ -1,7 +1,7 @@
 const
     str = op.inString("String", "a very very long default string"),
-    numChars = op.inValueInt("Max Line Chars", 10),
-    result = op.outValue("Result");
+    numChars = op.inInt("Max Line Chars", 10),
+    result = op.outNumber("Result");
 
 str.onChange = numChars.onChange = update;
 update();

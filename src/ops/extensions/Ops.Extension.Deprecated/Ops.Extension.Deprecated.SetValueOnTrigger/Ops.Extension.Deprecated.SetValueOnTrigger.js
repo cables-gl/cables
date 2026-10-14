@@ -3,7 +3,7 @@ let valuePort = op.inValueString("Value");
 let setValuePort = op.inTrigger("Set Value");
 
 // outputs
-let outValuePort = op.outValue("Out Value");
+let outValuePort = op.outNumber("Out Value");
 outValuePort.changeAlways = true;
 
 // change listeners

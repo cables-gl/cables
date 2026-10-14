@@ -1,5 +1,5 @@
 const
-    value = op.inValue("Value"),
+    value = op.inFloat("Value"),
     noZeroIn = op.inBool("Remove zero", false),
     result = op.outNumber("Result");
 

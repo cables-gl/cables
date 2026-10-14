@@ -30,7 +30,7 @@ this.diffuseRepeatY = this.addInPort(new CABLES.Port(this, "diffuseRepeatY", CAB
 this.diffuseRepeatX.set(1.0);
 this.diffuseRepeatY.set(1.0);
 
-let pOpacity = op.inValueSlider("Opacity", 1);
+let pOpacity = op.inFloatSlider("Opacity", 1);
 
 this.diffuseRepeatX.onChange = function ()
 {

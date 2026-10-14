@@ -1,7 +1,7 @@
 const
     filenames = op.inArray("urls"),
-    tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
-    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    tfilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"]),
+    wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.Port.TYPE_VALUE, { "display": "bool" })),
     unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.Port.TYPE_VALUE, { "display": "bool" })),
     inCaching = op.inBool("Caching", false),

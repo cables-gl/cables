@@ -1,5 +1,5 @@
-let inLength = op.inValueInt("Length", 100);
-let inDefaultValue = op.inValueInt("DefaultValue");
+let inLength = op.inInt("Length", 100);
+let inDefaultValue = op.inInt("DefaultValue");
 let inReset = op.inTriggerButton("Reset");
 let outArr = op.outArray("Array");
 

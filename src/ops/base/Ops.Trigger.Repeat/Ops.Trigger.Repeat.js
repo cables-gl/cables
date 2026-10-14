@@ -1,6 +1,6 @@
 const
     exe=op.inTrigger("exe"),
-    num=op.inValueInt("num",5),
+    num=op.inInt("num",5),
     trigger=op.outTrigger("trigger"),
     idx=op.addOutPort(new CABLES.Port(op,"index"));
 

@@ -4,26 +4,26 @@ const
     loop = op.inBool("loop"),
     autoPlay = op.inBool("auto play", false),
 
-    volume = op.inValueSlider("Volume", 1),
+    volume = op.inFloatSlider("Volume", 1),
     muted = op.inBool("mute", true),
-    speed = op.inValueFloat("speed", 1),
+    speed = op.inFloat("speed", 1),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "linear"),
-    wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
+    tfilter = op.inDropDown("filter", ["nearest", "linear"], "linear"),
+    wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
 
     flip = op.inBool("flip", true),
-    fps = op.inValueFloat("fps", 25),
-    time = op.inValueFloat("set time"),
+    fps = op.inFloat("fps", 25),
+    time = op.inFloat("set time"),
     rewind = op.inTriggerButton("rewind"),
 
     inPreload = op.inBool("Preload", true),
 
     textureOut = op.outTexture("texture"),
-    outDuration = op.outValue("duration"),
-    outProgress = op.outValue("progress"),
-    outTime = op.outValue("CurrentTime"),
-    loading = op.outValue("Loading"),
-    canPlayThrough = op.outValueBool("Can Play Through", false),
+    outDuration = op.outNumber("duration"),
+    outProgress = op.outNumber("progress"),
+    outTime = op.outNumber("CurrentTime"),
+    loading = op.outNumber("Loading"),
+    canPlayThrough = op.outBool("Can Play Through", false),
 
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),

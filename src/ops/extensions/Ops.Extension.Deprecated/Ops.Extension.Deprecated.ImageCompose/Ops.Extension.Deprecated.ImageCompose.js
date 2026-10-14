@@ -4,7 +4,7 @@ let render = op.inTrigger("render");
 let useVPSize = op.addInPort(new CABLES.Port(op, "use viewport size", CABLES.Port.TYPE_VALUE, { "display": "bool" }));
 let width = op.addInPort(new CABLES.Port(op, "width", CABLES.Port.TYPE_VALUE));
 let height = op.addInPort(new CABLES.Port(op, "height", CABLES.Port.TYPE_VALUE));
-let tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
+let tfilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"]);
 
 let fpTexture = op.inBool("HDR");
 let clear = op.inBool("Clear", true);
@@ -85,8 +85,8 @@ function updateResolution()
     }
 
     if (texOut.get())
-        if (!texOut.get().isPowerOfTwo()) op.uiAttr({ "warning": "texture dimensions not power of two! - texture filtering will not work." });
-        else op.uiAttr({ "warning": "" }); // todo only when needed...
+        if (!texOut.get().isPowerOfTwo()) op.setUiAttribs({ "warning": "texture dimensions not power of two! - texture filtering will not work." });
+        else op.setUiAttribs({ "warning": "" }); // todo only when needed...
 }
 
 useVPSize.onChange = function ()

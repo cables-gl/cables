@@ -25,10 +25,10 @@ shaderOut.setRef(shader);
 render.onTriggered = doRender;
 
 // rgba colors
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
-const a = op.inValueSlider("a", 1);
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
+const a = op.inFloatSlider("a", 1);
 r.setUiAttribs({ "colorPick": true });
 
 // const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
@@ -56,10 +56,10 @@ shader.uniformColorDiffuse = colUni; // todo remove in next versio
 
 // texture coords
 const
-    diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
-    diffuseRepeatY = op.inValue("diffuseRepeatY", 1),
-    diffuseOffsetX = op.inValue("Tex Offset X", 0),
-    diffuseOffsetY = op.inValue("Tex Offset Y", 0),
+    diffuseRepeatX = op.inFloat("diffuseRepeatX", 1),
+    diffuseRepeatY = op.inFloat("diffuseRepeatY", 1),
+    diffuseOffsetX = op.inFloat("Tex Offset X", 0),
+    diffuseOffsetY = op.inFloat("Tex Offset Y", 0),
     cropRepeat = op.inBool("Crop TexCoords", false);
 
 const texTransUni = shader.addUniformFrag("4f", "texTransform", diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY);

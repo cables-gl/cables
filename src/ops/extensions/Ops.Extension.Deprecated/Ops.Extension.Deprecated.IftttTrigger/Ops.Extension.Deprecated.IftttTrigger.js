@@ -21,7 +21,7 @@ trigger.onTriggered = function ()
         {
             if (CABLES.UI)
             {
-                op.uiAttr({ "warning": "You have to enter your own API key first! Check out the docs below!" });
+                op.setUiAttribs({ "warning": "You have to enter your own API key first! Check out the docs below!" });
                 op.refreshParams();
             }
         }
@@ -29,7 +29,7 @@ trigger.onTriggered = function ()
         {
             if (CABLES.UI)
             {
-                op.uiAttr({ "warning": null }); // clear UI warning
+                op.setUiAttribs({ "warning": null }); // clear UI warning
                 op.refreshParams();
             }
             CABLES.ajax(

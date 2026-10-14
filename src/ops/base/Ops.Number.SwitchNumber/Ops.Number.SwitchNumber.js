@@ -1,4 +1,4 @@
-const idx = op.inValueInt("Index");
+const idx = op.inInt("Index");
 const valuePorts = [];
 const result = op.outNumber("Result");
 

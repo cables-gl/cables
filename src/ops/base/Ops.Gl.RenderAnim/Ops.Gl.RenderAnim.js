@@ -1,17 +1,17 @@
 const
     inFilename=op.inValueString("Filename","cables"),
-    inFormat=op.inValueSelect("Fileformat",["webm","png"],"png"),
+    inFormat=op.inDropDown("Fileformat",["webm","png"],"png"),
     inExec=op.inTriggerButton("Render"),
 
-    inStart=op.inValue("Start Time",0),
-    inEnd=op.inValue("End Time",1),
-    inFps=op.inValue("FPS",30),
+    inStart=op.inFloat("Start Time",0),
+    inEnd=op.inFloat("End Time",1),
+    inFps=op.inFloat("FPS",30),
 
     inVpSize=op.inBool("Use Viewport Size",true),
     inWidth=op.inInt("Width",1280),
     inHeight=op.inInt("Height",720),
 
-    outProgress=op.outValue("Progress"),
+    outProgress=op.outNumber("Progress"),
     outFinished=op.outTrigger("Finished");
 
 op.setPortGroup("Size",[inVpSize,inWidth,inHeight]);

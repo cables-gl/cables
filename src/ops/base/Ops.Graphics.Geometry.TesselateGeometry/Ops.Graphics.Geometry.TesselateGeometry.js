@@ -1,6 +1,6 @@
 const
     inGeom = op.inObject("Geometry"),
-    inTimes = op.inValueInt("Iterations", 1),
+    inTimes = op.inInt("Iterations", 1),
     outGeom = op.outObject("Result", null, "geometry"),
     outVertices = op.outNumber("Num Vertices");
 

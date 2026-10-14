@@ -30,13 +30,13 @@ shaderOut.set(shader);
 
 shader.setSource(attachments.shader_vert, attachments.shader_frag);
 
-const a = op.inValueSlider("a", 1.0);
+const a = op.inFloatSlider("a", 1.0);
 a.uniform = new CGL.Uniform(shader, "f", "a", a);
 
-const posX = op.inValueSlider("pos X", 1.0);
+const posX = op.inFloatSlider("pos X", 1.0);
 posX.uniform = new CGL.Uniform(shader, "f", "posX", posX);
 
-const posY = op.inValueSlider("pos Y", 1.0);
+const posY = op.inFloatSlider("pos Y", 1.0);
 posY.uniform = new CGL.Uniform(shader, "f", "posY", posY);
 
 render.onTriggered = doRender;

@@ -23,7 +23,7 @@ inPort.onChange = function ()
 };
 
 // output ports
-var barsPort = op.outValue("Bars");
-var beatsPort = op.outValue("Beats");
-var sixteenthPort = op.outValue("Sixteenth");
-var sixteenthFloatPort = op.outValue("Sixteenth Precise");
+var barsPort = op.outNumber("Bars");
+var beatsPort = op.outNumber("Beats");
+var sixteenthPort = op.outNumber("Sixteenth");
+var sixteenthFloatPort = op.outNumber("Sixteenth Precise");

@@ -1,8 +1,8 @@
 const
-    time = op.inValue("Time"),
-    type = op.inValueSelect("Type", ["sine", "triangle", "ramp up", "ramp down", "block"], "sine"),
-    phase = op.inValue("Phase", 0),
-    amplitude = op.inValue("Amplitude", 1),
+    time = op.inFloat("Time"),
+    type = op.inDropDown("Type", ["sine", "triangle", "ramp up", "ramp down", "block"], "sine"),
+    phase = op.inFloat("Phase", 0),
+    amplitude = op.inFloat("Amplitude", 1),
     result = op.outNumber("Result");
 
 let v = 0;

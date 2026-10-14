@@ -1,5 +1,5 @@
 const exec = op.inTrigger("exe");
-const newTime = op.inValueFloat("new time");
+const newTime = op.inFloat("new time");
 const next = op.outTrigger("trigger");
 
 let realTime = 0;

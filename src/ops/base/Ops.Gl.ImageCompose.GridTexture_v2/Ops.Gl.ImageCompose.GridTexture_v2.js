@@ -3,20 +3,20 @@ const
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     maskAlpha = CGL.TextureEffect.AddBlendAlphaMask(op),
 
-    amount = op.inValueSlider("Amount", 1),
+    amount = op.inFloatSlider("Amount", 1),
 
-    lineThicknessX = op.inValueSlider("Line thickness X", 0.4),
-    lineThicknessY = op.inValueSlider("Line thickness Y", 0.4),
-    cellsX = op.inValueFloat("Cells X", 10),
-    cellsY = op.inValueFloat("Cells Y", 10),
-    inRotate = op.inValueSlider("Rotate", 0.0),
-    offsetX = op.inValue("Offset X", 0.0),
-    offsetY = op.inValue("Offset Y", 0.0),
+    lineThicknessX = op.inFloatSlider("Line thickness X", 0.4),
+    lineThicknessY = op.inFloatSlider("Line thickness Y", 0.4),
+    cellsX = op.inFloat("Cells X", 10),
+    cellsY = op.inFloat("Cells Y", 10),
+    inRotate = op.inFloatSlider("Rotate", 0.0),
+    offsetX = op.inFloat("Offset X", 0.0),
+    offsetY = op.inFloat("Offset Y", 0.0),
 
     invertColor = op.inBool("Invert color", false),
-    r = op.inValueSlider("Line red", Math.random()),
-    g = op.inValueSlider("Line green", Math.random()),
-    b = op.inValueSlider("Line Blue", Math.random());
+    r = op.inFloatSlider("Line red", Math.random()),
+    g = op.inFloatSlider("Line green", Math.random()),
+    b = op.inFloatSlider("Line Blue", Math.random());
 
 r.setUiAttribs({ "colorPick": true });
 

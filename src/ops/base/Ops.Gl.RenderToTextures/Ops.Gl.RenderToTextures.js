@@ -1,11 +1,11 @@
 const render = op.inTrigger("Render");
 const trigger = op.outTrigger("Next");
-const msaa = op.inValueSelect("MSAA", ["none", "2x", "4x", "8x"], "none");
+const msaa = op.inDropDown("MSAA", ["none", "2x", "4x", "8x"], "none");
 const useVPSize = op.inBool("use viewport size");
 
-const width = op.inValueInt("texture width");
-const height = op.inValueInt("texture height");
-const tfilter = op.inValueSelect("Filter", ["nearest", "linear", "mipmap"], "none");
+const width = op.inInt("texture width");
+const height = op.inInt("texture height");
+const tfilter = op.inDropDown("Filter", ["nearest", "linear", "mipmap"], "none");
 
 const tex0 = op.outTexture("texture 0");
 const tex1 = op.outTexture("texture 1");

@@ -8,8 +8,8 @@ let writeApiKey = op.inString("Write API Key", dummyKey);
 let apiUrl = "https://api.thingspeak.com/update?";
 
 let finished = op.outTrigger("When Finished");
-let success = op.outValue("Success", false);
-let rows = op.outValue("Rows", 0);
+let success = op.outNumber("Success", false);
+let rows = op.outNumber("Rows", 0);
 
 function httpGetAsync(theUrl, callback)
 {
@@ -36,7 +36,7 @@ function handleResponse(response)
 {
     if (isNaN(response))
     {
-        op.uiAttr({ "error": "Error: Write failed. Response: " + response });
+        op.setUiAttribs({ "error": "Error: Write failed. Response: " + response });
         success.set(false);
         rows.set(0);
     }
@@ -46,7 +46,7 @@ function handleResponse(response)
         {
             success.set(false);
             rows.set(0);
-            op.uiAttr({ "error": "Error: Write failed. Maybe you write too often!? Response: " + response });
+            op.setUiAttribs({ "error": "Error: Write failed. Maybe you write too often!? Response: " + response });
         }
         else
         {
@@ -68,6 +68,6 @@ write.onTriggered = function ()
     }
     else
     {
-        op.uiAttr({ "error": "API Key or API URL invalid!" });
+        op.setUiAttribs({ "error": "API Key or API URL invalid!" });
     }
 };

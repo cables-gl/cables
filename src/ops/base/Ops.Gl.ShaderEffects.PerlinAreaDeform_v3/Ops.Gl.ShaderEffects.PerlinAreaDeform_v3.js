@@ -1,18 +1,18 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inScale = op.inValueFloat("Scale", 1),
-    inSize = op.inValueFloat("Size", 1),
-    inStrength = op.inValueFloat("Strength", 1),
+    inScale = op.inFloat("Scale", 1),
+    inSize = op.inFloat("Size", 1),
+    inStrength = op.inFloat("Strength", 1),
     inCalcNormals = op.inBool("Calc Normals", true),
-    inFalloff = op.inValueSlider("Falloff", 0.5),
-    output = op.inValueSelect("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
-    x = op.inValueFloat("x"),
-    y = op.inValueFloat("y"),
-    z = op.inValueFloat("z"),
-    scrollx = op.inValueFloat("Scroll X"),
-    scrolly = op.inValueFloat("Scroll Y"),
-    scrollz = op.inValueFloat("Scroll Z");
+    inFalloff = op.inFloatSlider("Falloff", 0.5),
+    output = op.inDropDown("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z"),
+    scrollx = op.inFloat("Scroll X"),
+    scrolly = op.inFloat("Scroll Y"),
+    scrollz = op.inFloat("Scroll Z");
 
 const cgl = op.patch.cgl;
 inCalcNormals.onChange = updateCalcNormals;

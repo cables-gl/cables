@@ -1,15 +1,15 @@
 const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("GlArray"),
-    scale = op.inValue("Scale", 1),
-    time = op.inValue("Time", 0),
+    scale = op.inFloat("Scale", 1),
+    time = op.inFloat("Time", 0),
 
     inNormSpeed = op.inBool("Normalize Speed", false),
 
-    x = op.inValue("X", 0),
-    y = op.inValue("Y", 0),
-    z = op.inValue("Z", 0),
-    a = op.inValue("a", 1),
+    x = op.inFloat("X", 0),
+    y = op.inFloat("Y", 0),
+    z = op.inFloat("Z", 0),
+    a = op.inFloat("a", 1),
 
     inOffset = op.inFloatSlider("offset", 0),
     trigger = op.outTrigger("trigger"),

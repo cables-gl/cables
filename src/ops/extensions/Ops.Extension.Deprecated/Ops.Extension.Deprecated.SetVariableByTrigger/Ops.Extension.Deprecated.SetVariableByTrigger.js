@@ -1,5 +1,5 @@
 const val = op.inFloat("Value");
-op.varName = op.inValueSelect("Variable");
+op.varName = op.inDropDown("Variable");
 const inExec = op.inTriggerButton("Set Variable");
 
 op.varName.onChange = updateName;

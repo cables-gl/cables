@@ -5,13 +5,13 @@ let exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.Port.TYPE_FUNCTION));
 let inTransformations = op.inArray("positions");
 let geom = op.inObject("geom");
 
-let inNum = op.inValueInt("Num", 2000);
+let inNum = op.inInt("Num", 2000);
 
 let inOffset = op.inFloat("Offset");
 
 let rotPos = op.inBool("Rotate by Position", true);
 
-let inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
+let inMeth = op.inDropDown("Method", ["Array", "Fill"], "Array");
 let inSpacing = op.inFloat("Spacing", 0.2);
 let inScale = op.inFloat("Scale", 1);
 // var inRot=op.inFloat("Rotation",0);

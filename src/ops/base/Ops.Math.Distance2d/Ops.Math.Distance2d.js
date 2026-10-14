@@ -1,8 +1,8 @@
 const
-    x1 = op.inValue("x1"),
-    y1 = op.inValue("y1"),
-    x2 = op.inValue("x2"),
-    y2 = op.inValue("y2"),
+    x1 = op.inFloat("x1"),
+    y1 = op.inFloat("y1"),
+    x2 = op.inFloat("x2"),
+    y2 = op.inFloat("y2"),
     dist = op.outNumber("distance");
 
 x1.onChange =

@@ -14,11 +14,12 @@
             {
                 "type": 0,
                 "name": "direction index",
+                "values": [
+                    "both",
+                    "vertical",
+                    "horizontal"
+                ],
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "direction"
             },
             {
                 "type": 0,

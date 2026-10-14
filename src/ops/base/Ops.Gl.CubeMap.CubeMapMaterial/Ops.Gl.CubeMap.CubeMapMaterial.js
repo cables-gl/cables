@@ -2,7 +2,7 @@
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 
 var render=op.inTrigger('render');
-var inMiplevel=op.inValueSlider("Mip Level",0.0);
+var inMiplevel=op.inFloatSlider("Mip Level",0.0);
 var inCubemap=op.inObject("Cubemap");
 
 var mapReflect=op.inBool("Reflection",true);

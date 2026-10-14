@@ -1,5 +1,5 @@
 const
-    inTimestamp = op.inValue("timestamp"),
+    inTimestamp = op.inFloat("timestamp"),
     inDiff = op.inInt("difference"),
     diffType = op.inDropDown("type", ["years", "months", "days", "hours", "minutes", "seconds"]),
     inTrigger = op.inTrigger("update"),

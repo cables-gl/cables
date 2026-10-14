@@ -3,25 +3,25 @@
 const exe = op.inTrigger("exe"),
     trigger = op.outTrigger("trigger"),
     attachment = op.outTrigger("attachment"),
-    radius = op.inValue("Radius", 100),
-    fallOff = op.inValueSlider("Fall Off", 0.1),
-    intensity = op.inValue("Intensity", 1),
-    x = op.inValueFloat("x"),
-    y = op.inValueFloat("y"),
-    z = op.inValueFloat("z");
+    radius = op.inFloat("Radius", 100),
+    fallOff = op.inFloatSlider("Fall Off", 0.1),
+    intensity = op.inFloat("Intensity", 1),
+    x = op.inFloat("x"),
+    y = op.inFloat("y"),
+    z = op.inFloat("z");
 
-const r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
-const ambientR = op.inValue("Ambient R", 0.1),
-    ambientG = op.inValue("Ambient G", 0.1),
-    ambientB = op.inValue("Ambient B", 0.1);
+const ambientR = op.inFloat("Ambient R", 0.1),
+    ambientG = op.inFloat("Ambient G", 0.1),
+    ambientB = op.inFloat("Ambient B", 0.1);
 
-const specularR = op.inValueSlider("Specular r", Math.random()),
-    specularG = op.inValueSlider("Specular g", Math.random()),
-    specularB = op.inValueSlider("Specular b", Math.random());
+const specularR = op.inFloatSlider("Specular r", Math.random()),
+    specularG = op.inFloatSlider("Specular g", Math.random()),
+    specularB = op.inFloatSlider("Specular b", Math.random());
 specularR.setUiAttribs({ "colorPick": true });
 
 let cgl = op.patch.cgl;

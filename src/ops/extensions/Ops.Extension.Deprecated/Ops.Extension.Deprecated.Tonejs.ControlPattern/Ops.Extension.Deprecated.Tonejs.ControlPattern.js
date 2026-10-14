@@ -24,8 +24,8 @@ let typePort = op.addInPort(new CABLES.Port(op, "Type", CABLES.Port.TYPE_VALUE, 
 
 // output
 let triggerNextPort = op.outTrigger("Trigger Next");
-let valuePort = op.outValue("Value");
-let indexPort = op.outValue("Index");
+let valuePort = op.outNumber("Value");
+let indexPort = op.outNumber("Index");
 
 // change listeners
 valuesPort.onChange = function ()

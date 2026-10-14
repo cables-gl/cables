@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
     next = op.outTrigger("trigger"),
-    inScale = op.inValue("Scale", 10),
+    inScale = op.inFloat("Scale", 10),
 
     inBlend = op.inSwitch("Blendmode", ["Normal", "Mul", "Add"], "Normal"),
 
     inTarget = op.inSwitch("Target", ["Color", "Pointsize"], "Color"),
 
-    inAmount = op.inValueSlider("Amount", 0.3),
+    inAmount = op.inFloatSlider("Amount", 0.3),
 
     inUseTexAlpha = op.inBool("Use Texture Alpha", false),
 
@@ -19,7 +19,7 @@ const
     inRotZ = op.inFloat("Rot Z", 0),
 
     inTex = op.inTexture("Texture"),
-    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen"], "XY"),
+    inMethod = op.inDropDown("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen"], "XY"),
     inDiscard = op.inBool("Discard"),
     inWorldSpace = op.inBool("WorldSpace");
 

@@ -1,5 +1,5 @@
 let render = op.inTrigger("render");
-let amount = op.inValue("amount");
+let amount = op.inFloat("amount");
 
 let trigger = op.outTrigger("trigger");
 

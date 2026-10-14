@@ -4,8 +4,8 @@ let render = op.inTrigger("render");
 let image = op.addInPort(new CABLES.Port(op, "image", CABLES.Port.TYPE_TEXTURE));
 let trigger = op.outTrigger("trigger");
 
-let axis = op.inValueSelect("Axis", ["hotizontal", "vertical"], "horizontal");
-let pos = op.inValueSlider("Position");
+let axis = op.inDropDown("Axis", ["hotizontal", "vertical"], "horizontal");
+let pos = op.inFloatSlider("Position");
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name, op);

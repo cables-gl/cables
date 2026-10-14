@@ -1,5 +1,5 @@
 const
-    val = op.inValue("Value"),
+    val = op.inFloat("Value"),
     changeAlwaysPort = op.inBool("Change Always", false),
     inReset = op.inTrigger("Reset"),
     result = op.outNumber("Delta");

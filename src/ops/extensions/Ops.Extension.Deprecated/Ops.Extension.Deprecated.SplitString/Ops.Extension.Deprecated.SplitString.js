@@ -2,7 +2,7 @@ op.name = "SplitString";
 
 let inString = op.inFloat("Input String");
 let separator = op.inValueString("Separator", ",");
-// var messageType = op.inValueSelect("Message Type", ["String", "Number", "Boolean"], "String");
+// var messageType = op.inDropDown("Message Type", ["String", "Number", "Boolean"], "String");
 
 let N_OUT_PORTS = 8;
 
@@ -10,7 +10,7 @@ let outPorts = [];
 
 for (let i = 0; i < N_OUT_PORTS; i++)
 {
-    outPorts[i] = op.outValue("Part " + (i + 1));
+    outPorts[i] = op.outNumber("Part " + (i + 1));
 }
 
 inString.onChange = function ()

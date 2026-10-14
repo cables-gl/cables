@@ -1,4 +1,4 @@
-op.varName = op.inValueSelect("Variable", [], "", true);
+op.varName = op.inDropDown("Variable", [], "", true);
 const val = op.outArray("Array");
 
 let variable = null;
@@ -52,13 +52,13 @@ function init()
     if (variable)
     {
         changeListenerId = variable.on("change", onChange);
-        op.uiAttr({ "error": null, });
+        op.setUiAttribs({ "error": null, });
         op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
     }
     else
     {
-        op.uiAttr({ "error": "unknown variable! - there is no setVariable with this name" });
+        op.setUiAttribs({ "error": "unknown variable! - there is no setVariable with this name" });
         op.setTitle("#invalid");
     }
 }

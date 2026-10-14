@@ -1,13 +1,13 @@
 const execute = op.inTrigger("execute"),
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1.0);
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1.0);
 r.setUiAttribs({ "colorPick": true });
 
-const inFesnel = op.inValueSlider("Fesnel", 0),
-    inShininess = op.inValueSlider("Specular Shininess", 0.75),
-    inSpecAmount = op.inValueSlider("Specular Amount", 0.5),
+const inFesnel = op.inFloatSlider("Fesnel", 0),
+    inShininess = op.inFloatSlider("Specular Shininess", 0.75),
+    inSpecAmount = op.inFloatSlider("Specular Amount", 0.5),
     next = op.outTrigger("next");
 
 const cgl = op.patch.cgl;

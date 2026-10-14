@@ -1,14 +1,14 @@
 const exe = op.inTrigger("exe");
 const arrayIn = op.inArray("array");
-const time = op.inValueFloat("time");
+const time = op.inFloat("time");
 
-const duration = op.inValueFloat("duration");
+const duration = op.inFloat("duration");
 duration.set(0.1);
 
-const offset = op.inValueFloat("offset");
+const offset = op.inFloat("offset");
 offset.set(0.0);
 
-const lookAhead = op.inValueFloat("look ahead");
+const lookAhead = op.inFloat("look ahead");
 lookAhead.set(3.0);
 
 const trigger = op.outTrigger("trigger");

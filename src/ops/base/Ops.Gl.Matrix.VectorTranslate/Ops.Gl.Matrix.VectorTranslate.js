@@ -1,8 +1,8 @@
 const exec = op.inTrigger("Exec");
-const speed = op.inValue("Speed");
-const vecX = op.inValue("Vector X");
-const vecY = op.inValue("Vector Y");
-const vecZ = op.inValue("Vector Z");
+const speed = op.inFloat("Speed");
+const vecX = op.inFloat("Vector X");
+const vecY = op.inFloat("Vector Y");
+const vecZ = op.inFloat("Vector Z");
 const resetVecX = op.inFloat("Reset Position X");
 const resetVecY = op.inFloat("Reset Position Y");
 const resetVecZ = op.inFloat("Reset Position Z");
@@ -10,7 +10,7 @@ const next = op.outTrigger("Next");
 
 const reset = op.inTriggerButton("reset");
 
-const max = op.inValue("max");
+const max = op.inFloat("max");
 
 const cgl = op.patch.cgl;
 

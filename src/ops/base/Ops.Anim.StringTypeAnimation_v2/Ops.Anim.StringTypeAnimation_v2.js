@@ -1,7 +1,7 @@
 let text = op.inStringEditor("text", "hello world");
 let inRestart = op.inTriggerButton("Restart");
-let speed = op.inValue("Speed", 500);
-let speedVariation = op.inValueSlider("Speed Variation");
+let speed = op.inFloat("Speed", 500);
+let speedVariation = op.inFloatSlider("Speed Variation");
 const showCursor = op.inBool("Show Cursor", true);
 
 let outText = op.outString("Result");

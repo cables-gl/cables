@@ -4,8 +4,8 @@ let inBpm = op.inFloat("BPM", 120);
 let inOffset = op.inFloat("Offset", 0);
 
 let next = op.outTrigger("trigger out");
-let outBeat = op.outValue("beat num");
-let outPerc = op.outValue("percent");
+let outBeat = op.outNumber("beat num");
+let outPerc = op.outNumber("percent");
 
 let beatDuration = 0;
 

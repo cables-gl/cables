@@ -1,6 +1,6 @@
 const inArray = op.inArray("Array"),
-    inNum = op.inValueInt("Elements", 10),
-    inSeed = op.inValue("Seed", 1),
+    inNum = op.inInt("Elements", 10),
+    inSeed = op.inFloat("Seed", 1),
     result = op.outArray("Result"),
     outArrayLength = op.outNumber("Array length");
 

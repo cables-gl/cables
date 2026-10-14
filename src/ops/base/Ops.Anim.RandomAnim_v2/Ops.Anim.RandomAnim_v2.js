@@ -1,9 +1,9 @@
 const
     exe = op.inTrigger("exe"),
-    min = op.inValue("min", 0),
-    max = op.inValue("max", 1),
-    duration = op.inValue("duration", 0.5),
-    pause = op.inValue("pause between", 0),
+    min = op.inFloat("min", 0),
+    max = op.inFloat("max", 1),
+    duration = op.inFloat("duration", 0.5),
+    pause = op.inFloat("pause between", 0),
     next = op.outTrigger("Next"),
     result = op.outNumber("result"),
     looped = op.outTrigger("Looped");

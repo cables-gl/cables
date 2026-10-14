@@ -1,15 +1,15 @@
 const
     exe=op.inTrigger("exe"),
     geom=op.inObject("geom"),
-    inScale=op.inValue("Scale",1),
+    inScale=op.inFloat("Scale",1),
 
     doLimit=op.inBool("Limit Instances",false),
-    inLimit=op.inValueInt("Limit",100),
+    inLimit=op.inInt("Limit",100),
 
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
     inRot=op.inArray("Rotations"),
-    outNum=op.outValue("Num");
+    outNum=op.outNumber("Num");
 
 const cgl=op.patch.cgl;
 geom.ignoreValueSerialize=true;

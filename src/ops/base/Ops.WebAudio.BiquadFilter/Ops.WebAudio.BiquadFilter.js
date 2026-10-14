@@ -12,7 +12,7 @@ var biquadFilter = audioContext.createBiquadFilter();
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", biquadFilter);
 var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", biquadFilter);
 
-var type = op.inValueSelect ("type",['allpass','lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch'],'allpass');
+var type = op.inDropDown ("type",['allpass','lowpass','highpass','bandpass','lowshelf','highshelf','peaking','notch'],'allpass');
 
 var frequency = op.inFloat("frequency",1000);
 

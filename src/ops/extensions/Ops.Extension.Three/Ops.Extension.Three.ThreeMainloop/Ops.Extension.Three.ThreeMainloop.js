@@ -18,7 +18,7 @@ let rframes = 0;
 let rframeStart = 0;
 let timeOutTest = null;
 let addedListener = false;
-if (!op.patch.cgl) op.uiAttr({ "error": "No webgl cgl context" });
+if (!op.patch.cgl) op.setUiAttribs({ "error": "No webgl cgl context" });
 
 let firstTime = true;
 let fsElement = null;

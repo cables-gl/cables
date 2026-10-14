@@ -1,8 +1,8 @@
 const
     exec = op.inTriggerButton("Update"),
     filename = op.inUrl("file"),
-    offX = op.inValueInt("Offset X"),
-    offY = op.inValueInt("Offset Y"),
+    offX = op.inInt("Offset X"),
+    offY = op.inInt("Offset Y"),
     next = op.outTrigger("Next");
 
 offX.onChange =

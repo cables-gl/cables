@@ -10,9 +10,9 @@ next version:
 
 const
     render = op.inTrigger("render"),
-    width = op.inValue("width", 1),
-    height = op.inValue("height", 1),
-    lengt = op.inValue("length", 1),
+    width = op.inFloat("width", 1),
+    height = op.inFloat("height", 1),
+    lengt = op.inFloat("length", 1),
     center = op.inBool("center", true),
     active = op.inBool("Active", true),
     mapping = op.inSwitch("Mapping", ["Default", "Cube", "Cube Biased"], "Default"),

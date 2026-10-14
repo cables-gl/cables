@@ -1,7 +1,7 @@
 const
     inArray = op.inArray("Array In"),
-    inMinimum = op.inValue("Min", 0.0),
-    inMaximum = op.inValue("Max", 1.0),
+    inMinimum = op.inFloat("Min", 0.0),
+    inMaximum = op.inFloat("Max", 1.0),
     outArray = op.outArray("Array out");
 
 let newArr = [];

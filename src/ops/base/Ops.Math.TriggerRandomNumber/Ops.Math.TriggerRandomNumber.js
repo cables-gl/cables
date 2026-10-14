@@ -1,9 +1,9 @@
 const
     exe=op.inTriggerButton('Generate'),
-    min=op.inValue("min",0),
-    max=op.inValue("max",1),
+    min=op.inFloat("min",0),
+    max=op.inFloat("max",1),
     outTrig = op.outTrigger("next"),
-    result=op.outValue("result"),
+    result=op.outNumber("result"),
     inInteger=op.inBool("Integer",false);
 
 exe.onTriggered=genRandom;

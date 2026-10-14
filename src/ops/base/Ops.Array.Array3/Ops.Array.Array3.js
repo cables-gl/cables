@@ -1,8 +1,8 @@
 const
-    inNum = op.inValueInt("Num Triplets", 100),
-    inX = op.inValueFloat("X", 0),
-    inY = op.inValueFloat("Y", 0),
-    inZ = op.inValueFloat("Z", 0),
+    inNum = op.inInt("Num Triplets", 100),
+    inX = op.inFloat("X", 0),
+    inY = op.inFloat("Y", 0),
+    inZ = op.inFloat("Z", 0),
     outArr = op.outArray("Array", null, 3),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");

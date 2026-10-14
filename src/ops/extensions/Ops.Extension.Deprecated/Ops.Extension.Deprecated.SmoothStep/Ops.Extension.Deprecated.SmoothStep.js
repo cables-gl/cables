@@ -1,5 +1,5 @@
 const
-    result = op.outValue("result"),
+    result = op.outNumber("result"),
     number = op.inFloat("number", 0),
     min = op.inFloat("min", 0),
     max = op.inFloat("max", 1);

@@ -2,13 +2,13 @@ const
     render = op.inTrigger("render"),
     multiplierTex = op.inTexture("Multiplier"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    scaleX = op.inValue("Scale X", 1.5),
-    scaleY = op.inValue("Scale Y", 1.5),
-    offsetX = op.inValueSlider("offset X", 0),
-    offsetY = op.inValueSlider("offset Y", 0),
-    centerX = op.inValueSlider("center X", 0.5),
-    centerY = op.inValueSlider("center Y", 0.5),
+    amount = op.inFloatSlider("Amount", 1),
+    scaleX = op.inFloat("Scale X", 1.5),
+    scaleY = op.inFloat("Scale Y", 1.5),
+    offsetX = op.inFloatSlider("offset X", 0),
+    offsetY = op.inFloatSlider("offset Y", 0),
+    centerX = op.inFloatSlider("center X", 0.5),
+    centerY = op.inFloatSlider("center Y", 0.5),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

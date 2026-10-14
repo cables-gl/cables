@@ -1,8 +1,8 @@
 const
     render=op.inTrigger('render'),
-    x=op.inValueFloat("x"),
-    y=op.inValueFloat("y"),
-    z=op.inValueFloat("z"),
+    x=op.inFloat("x"),
+    y=op.inFloat("y"),
+    z=op.inFloat("z"),
     trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;

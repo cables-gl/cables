@@ -1,4 +1,4 @@
-let idx = op.inValueInt("Index");
+let idx = op.inInt("Index");
 let valuePorts = [];
 let result = op.outArray("Result");
 

@@ -1,15 +1,15 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
-let amount = op.inValueSlider("Amount", 1);
-// var lensRadius1=op.inValue("lensRadius1",0.8);
-let lensRadius1 = op.inValueSlider("Radius", 0.5);
-let sharp = op.inValueSlider("sharp", 0.25);
-let aspect = op.inValue("Aspect", 1);
+let amount = op.inFloatSlider("Amount", 1);
+// var lensRadius1=op.inFloat("lensRadius1",0.8);
+let lensRadius1 = op.inFloatSlider("Radius", 0.5);
+let sharp = op.inFloatSlider("sharp", 0.25);
+let aspect = op.inFloat("Aspect", 1);
 
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
+const r = op.inFloatSlider("r", Math.random());
+const g = op.inFloatSlider("g", Math.random());
+const b = op.inFloatSlider("b", Math.random());
 r.setUiAttribs({ "colorPick": true });
 
 let cgl = op.patch.cgl;

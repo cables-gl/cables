@@ -6,11 +6,11 @@ const
     doRender = op.inBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
-    outRadius = op.outValue("Out Radius"),
-    outX = op.outValue("X"),
-    outY = op.outValue("Y"),
-    outZ = op.outValue("Z"),
-    outHit = op.outValueBool("Ray Hit", false),
+    outRadius = op.outNumber("Out Radius"),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z"),
+    outHit = op.outBool("Ray Hit", false),
     outCollision = op.outTrigger("Collision");
 
 const cgl = op.patch.cgl;

@@ -1,6 +1,6 @@
 const
-    ts1 = op.inValue("Timestamp 1"),
-    ts2 = op.inValue("Timestamp 2"),
+    ts1 = op.inFloat("Timestamp 1"),
+    ts2 = op.inFloat("Timestamp 2"),
     stopAtZero = op.inBool("Stop at 0"),
     outYear = op.outNumber("Year"),
     outMonth = op.outNumber("Month"),

@@ -1,6 +1,6 @@
 const render = op.inTrigger("render");
-const amount = op.inValueSlider("amount X");
-const amountY = op.inValueSlider("amount Y");
+const amount = op.inFloatSlider("amount X");
+const amountY = op.inFloatSlider("amount Y");
 
 const displaceTex = op.inTexture("displaceTex");
 const trigger = op.outTrigger("trigger");

@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
-    inner = op.inValueSlider("Radius Inner", 0),
-    outer = op.inValueSlider("Radius Outer", 1),
+    inner = op.inFloatSlider("Radius Inner", 0),
+    outer = op.inFloatSlider("Radius Outer", 1),
     crop = op.inBool("Crop", false),
     trigger = op.outTrigger("trigger"),
     cgl = op.patch.cgl;

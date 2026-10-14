@@ -10,8 +10,8 @@ let trigger = this.addOutPort(new CABLES.Port(this, "next", CABLES.Port.TYPE_FUN
 let shaderOut = this.addOutPort(new CABLES.Port(this, "shader", CABLES.Port.TYPE_OBJECT));
 
 // var specularStrength=op.inFloat("Specular Strength",1);
-let shininess = op.inValueSlider("Shininess", 0.5);
-let fresnel = op.inValueSlider("Fresnel", 0);
+let shininess = op.inFloatSlider("Shininess", 0.5);
+let fresnel = op.inFloatSlider("Fresnel", 0);
 
 // diffuse color
 

@@ -1,8 +1,8 @@
 const render = op.inTrigger("render"),
     multiplierTex = op.inTexture("Multiplier"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
-    amount = op.inValueSlider("Amount", 1),
-    inRotate = op.inValueSlider("Rotate", 0.125),
+    amount = op.inFloatSlider("Amount", 1),
+    inRotate = op.inFloatSlider("Rotate", 0.125),
     crop = op.inBool("Crop", true),
     trigger = op.outTrigger("trigger");
 

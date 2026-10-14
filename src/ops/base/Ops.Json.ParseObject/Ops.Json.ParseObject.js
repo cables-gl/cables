@@ -1,6 +1,6 @@
 const str = op.inValueEditor("JSON String", "{}", "json"),
     outObj = op.outObject("Result"),
-    isValid = op.outValue("Valid");
+    isValid = op.outNumber("Valid");
 
 str.onChange = parse;
 parse();

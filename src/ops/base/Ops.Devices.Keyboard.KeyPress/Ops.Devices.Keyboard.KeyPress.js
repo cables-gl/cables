@@ -2,7 +2,7 @@ var cgl=op.patch.cgl;
 
 var onPress=op.addOutPort(new CABLES.Port(op,"on press",CABLES.Port.TYPE_FUNCTION));
 var keyCode=op.addOutPort(new CABLES.Port(op,"key code",CABLES.Port.TYPE_VALUE));
-var char=op.outValue("Char");
+var char=op.outNumber("Char");
 
 function onKeyPress(e)
 {

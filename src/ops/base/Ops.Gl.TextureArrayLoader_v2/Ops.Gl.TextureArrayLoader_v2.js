@@ -8,8 +8,8 @@ numberLengthPort.setUiAttribs({ "hidePort": !USE_LEFT_PAD_DEFAULT, "greyout": !U
 const indexStart = op.inInt("Index Start");
 const indexEnd = op.inInt("Index End");
 
-const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
-const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+const tfilter = op.inDropDown("filter", ["nearest", "linear", "mipmap"]);
+const wrap = op.inDropDown("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 const flip = op.inBool("Flip", false);
 const unpackAlpha = op.inBool("unpackPreMultipliedAlpha", false);
 

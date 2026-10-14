@@ -1,9 +1,9 @@
 // inputs
 const parentPort = op.inObject("link");
 const labelPort = op.inValueString("Label", "Incrementor");
-const inMin = op.inValue("min", 0);
-const inMax = op.inValue("max", 10);
-const inStepsize = op.inValue("stepsize", 1);
+const inMin = op.inFloat("min", 0);
+const inMax = op.inFloat("max", 10);
+const inStepsize = op.inFloat("stepsize", 1);
 const inValues = op.inArray("Values");
 
 // outputs

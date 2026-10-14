@@ -1,7 +1,7 @@
 let inStartVr = op.inTriggerButton("Start VR");
 let inStopVr = op.inTriggerButton("Stop VR");
 
-let inResMul = op.inValueSlider("Scale Resolution", 1);
+let inResMul = op.inFloatSlider("Scale Resolution", 1);
 
 let inResizeCancas = op.inBool("Resize Canvas", false);
 
@@ -9,18 +9,18 @@ let nextVr = op.outTrigger("VR Mainloop");
 let nextNonVr = op.outTrigger("NoVR Mainloop");
 
 // width and height, needed for raycasting to raycaster ?
-const width = op.outValue("width");
-const height = op.outValue("height");
+const width = op.outNumber("width");
+const height = op.outNumber("height");
 
 // headset or mobile data
-let outSupported = op.outValue("Supported");
-let outControllerSupport = op.outValue("Controller support");
-let outTotalControllers = op.outValue("Controllers amount");
-let outDisplayName = op.outValue("VR Display");
+let outSupported = op.outNumber("Supported");
+let outControllerSupport = op.outNumber("Controller support");
+let outTotalControllers = op.outNumber("Controllers amount");
+let outDisplayName = op.outNumber("VR Display");
 
 // eyes
-let outFps = op.outValue("FPS");
-let outEye = op.outValue("Eye");
+let outFps = op.outNumber("FPS");
+let outEye = op.outNumber("Eye");
 
 // controllers
 let outGamePadLeft = op.outObject("Gamepad object Left");
@@ -32,7 +32,7 @@ let useGamepads = op.inBool("use gamepads", false);
 
 let outPMatrix = op.outArray("Left PMatrix");
 
-const outStarted = op.outValueBool("Started VR", false);
+const outStarted = op.outBool("Started VR", false);
 let buttonEle = null;
 
 const cgl = op.patch.cgl;

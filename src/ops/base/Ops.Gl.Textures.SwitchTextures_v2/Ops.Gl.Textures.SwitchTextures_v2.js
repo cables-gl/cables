@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("exec"),
-    num = this.inValueInt("num"),
+    num = this.inInt("num"),
     defaultTransparent = op.inBool("Default Texture Transparent", true),
     next = op.outTrigger("Next"),
     textureOut = this.outTexture("texture");

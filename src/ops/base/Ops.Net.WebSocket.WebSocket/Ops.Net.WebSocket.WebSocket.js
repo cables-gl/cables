@@ -3,7 +3,7 @@
 const inUrl = op.inValueString("URL");
 
 const outResult = op.outObject("Result");
-const outConnected = op.outValue("Connected");
+const outConnected = op.outNumber("Connected");
 const outConnection = this.outObject("Connection");
 
 const outReceived = op.outTrigger("Received Data");

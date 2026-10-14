@@ -18,10 +18,10 @@ const inReset = op.inTriggerButton("Reset");
 const inSpawn = op.inTriggerButton("Spawn");
 
 const next = op.outTrigger("Next");
-const outRadius = op.outValue("Out Radius");
-const outX = op.outValue("X");
-const outY = op.outValue("Y");
-const outZ = op.outValue("Z");
+const outRadius = op.outNumber("Out Radius");
+const outX = op.outNumber("X");
+const outY = op.outNumber("Y");
+const outZ = op.outNumber("Z");
 const outIndex = op.outNumber("Index");
 
 const outCollision = op.outTrigger("Collision");

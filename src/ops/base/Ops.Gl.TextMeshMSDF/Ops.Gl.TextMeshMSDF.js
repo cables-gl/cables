@@ -15,10 +15,10 @@ const
     align = op.inSwitch("Align", ["Left", "Center", "Right"], "Center"),
     valign = op.inSwitch("Vertical Align", ["Top", "Middle", "Bottom"], "Middle"),
 
-    r = op.inValueSlider("r", 1),
-    g = op.inValueSlider("g", 1),
-    b = op.inValueSlider("b", 1),
-    a = op.inValueSlider("a", 1),
+    r = op.inFloatSlider("r", 1),
+    g = op.inFloatSlider("g", 1),
+    b = op.inFloatSlider("b", 1),
+    a = op.inFloatSlider("a", 1),
 
     inShadow = op.inBool("Shadow", false),
 

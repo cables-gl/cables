@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    hue = op.inValueSlider("hue", 1),
+    hue = op.inFloatSlider("hue", 1),
     texMask = op.inTexture("Mask"),
     texOffset = op.inTexture("Offset"),
     trigger = op.outTrigger("trigger");

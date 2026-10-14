@@ -1,9 +1,9 @@
-let outUrl = op.outValue("URL");
-let outHost = op.outValue("Host");
-let outHash = op.outValue("Hash");
-let outPathname = op.outValue("Pathname");
-let outProtocol = op.outValue("Protocol");
-let outPort = op.outValue("Port");
+let outUrl = op.outNumber("URL");
+let outHost = op.outNumber("Host");
+let outHash = op.outNumber("Hash");
+let outPathname = op.outNumber("Pathname");
+let outProtocol = op.outNumber("Protocol");
+let outPort = op.outNumber("Port");
 
 let l = document.location;
 
