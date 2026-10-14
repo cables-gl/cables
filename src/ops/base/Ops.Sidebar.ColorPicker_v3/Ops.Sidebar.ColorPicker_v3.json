@@ -152,6 +152,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1773568725786
+        },
+        {
+            "message": "Fix default value was ignored on patch load",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791987600531,
+            "url": "https://github.com/cables-gl/cables/issues/8045"
         }
     ],
     "exampleProjectId": "8-XQ5d",
