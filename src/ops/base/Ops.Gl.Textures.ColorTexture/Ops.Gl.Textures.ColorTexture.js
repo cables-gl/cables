@@ -1,8 +1,8 @@
 const
-    r = op.inValueSlider("r", Math.random()),
-    g = op.inValueSlider("g", Math.random()),
-    b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1.0),
+    r = op.inFloatSlider("r", Math.random()),
+    g = op.inFloatSlider("g", Math.random()),
+    b = op.inFloatSlider("b", Math.random()),
+    a = op.inFloatSlider("a", 1.0),
     texOut = op.outTexture("texture_out");
 
 r.setUiAttribs({ "colorPick": true });
@@ -23,7 +23,7 @@ function render()
 
     if (!fb || wasFp != fp)
     {
-        if (fb)fb.dispose();
+        if (fb) fb.dispose();
         if (cgl.glVersion == 1) fb = new CGL.Framebuffer(cgl, 8, 8, { "name": "colorTexture" });
         else fb = new CGL.Framebuffer2(cgl, 8, 8, { "name": "colorTexture", "depth": false, "isFloatingPointTexture": fp });
         fb.setFilter(CGL.Texture.FILTER_LINEAR);
@@ -39,5 +39,5 @@ function render()
 
 op.onDelete = () =>
 {
-    if (fb)fb.dispose();
+    if (fb) fb.dispose();
 };

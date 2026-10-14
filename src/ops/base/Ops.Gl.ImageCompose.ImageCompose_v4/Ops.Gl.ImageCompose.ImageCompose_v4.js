@@ -4,19 +4,19 @@ const
     inTex = op.inTexture("Base Texture"),
     inUVTex = op.inTexture("UV Texture"),
     inSize = op.inSwitch("Size", ["Auto", "Canvas", "Manual"], "Auto"),
-    width = op.inValueInt("Width", 640),
-    height = op.inValueInt("Height", 480),
+    width = op.inInt("Width", 640),
+    height = op.inInt("Height", 480),
     inFilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    inWrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
+    inWrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
 
     inPixelFormat = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
     inClear = op.inBool("Clear", true),
-    r = op.inValueSlider("R", 0),
-    g = op.inValueSlider("G", 0),
-    b = op.inValueSlider("B", 0),
-    a = op.inValueSlider("A", 0),
+    r = op.inFloatSlider("R", 0),
+    g = op.inFloatSlider("G", 0),
+    b = op.inFloatSlider("B", 0),
+    a = op.inFloatSlider("A", 0),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out", CGL.Texture.getEmptyTexture(cgl)),
@@ -190,9 +190,6 @@ function updateUi()
     inClear.setUiAttribs({ "greyout": inTex.isLinked() });
     width.setUiAttribs({ "greyout": inSize.get() != "Manual" });
     height.setUiAttribs({ "greyout": inSize.get() != "Manual" });
-
-    // width.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
-    // height.setUiAttribs({ "hideParam": inSize.get() != "Manual" });
 
     if (tex)
         if (CGL.Texture.isPixelFormatFloat(inPixelFormat.get()) && getFilter() == CGL.Texture.FILTER_MIPMAP) op.setUiError("fpmipmap", "Don't use mipmap and 32bit at the same time, many systems do not support this.", 1);
