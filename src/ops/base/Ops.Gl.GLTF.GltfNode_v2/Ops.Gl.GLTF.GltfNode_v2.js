@@ -15,12 +15,16 @@ const
 const cgl = op.patch.cgl;
 
 let node = null;
+let searched = false;
+let currentScene = null;
 let currentSceneLoaded = null;
+const nodesByName = new Map();
 
 inNodeName.onChange = function ()
 {
     outGeom.set(null);
     node = null;
+    searched = false;
     outFound.set(false);
     if (!inNodeName.isLinked()) op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
@@ -34,56 +38,41 @@ function updateTimeInputs()
     inTime.setUiAttribs({ "greyout": inSceneTime.get() });
 }
 
+function updateNodesByName(scene)
+{
+    currentScene = scene;
+    currentSceneLoaded = scene.loaded;
+    nodesByName.clear();
+    for (let i = 0; i < scene.nodes.length; i++) nodesByName.set(scene.nodes[i].name, scene.nodes[i]);
+}
+
 inExec.onTriggered = function ()
 {
-    if (!cgl.tempData.currentScene) return outFound.set(false);
-    if (currentSceneLoaded != cgl.tempData.currentScene.loaded) node = null;
+    const scene = cgl.tempData.currentScene;
+    if (!scene || !scene.nodes) return outFound.set(false);
 
-    if (!node)
+    if (currentScene != scene || currentSceneLoaded != scene.loaded)
     {
-        const name = inNodeName.get();
+        updateNodesByName(scene);
+        node = null;
+        searched = false;
+    }
 
-        if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes)
-            return outFound.set(false);
+    if (!node && !searched)
+    {
+        searched = true;
+        node = nodesByName.get(inNodeName.get()) || null;
 
-        currentSceneLoaded = cgl.tempData.currentScene.loaded;
-        let found = false;
-
-        for (let i = 0; i < cgl.tempData.currentScene.nodes.length; i++)
+        if (node && node.mesh && node.mesh.meshes)
         {
-            if (cgl.tempData.currentScene.nodes[i].name == name)
-            {
-                node = cgl.tempData.currentScene.nodes[i];
-
-                if (node)
-                {
-                    found = true;
-                    if (node.mesh && node.mesh.meshes)
-                    {
-                        if (node.mesh.meshes[0].geom)
-                        {
-                            outGeom.setRef(node.mesh.meshes[0].geom);
-                        }
-                        else
-                        {
-
-                            outGeom.set(null);
-                        }
-
-                    }
-                }
-                else
-                {
-
-                    found = false;
-                }
-            }
+            if (node.mesh.meshes[0].geom) outGeom.setRef(node.mesh.meshes[0].geom);
+            else outGeom.set(null);
         }
 
-        if (!found) op.setUiError("nf", "Node not found", 1);
+        if (!node) op.setUiError("nf", "Node not found", 1);
         else op.setUiError("nf", null);
 
-        outFound.set(found);
+        outFound.set(node != null);
     }
 
     cgl.pushModelMatrix();
