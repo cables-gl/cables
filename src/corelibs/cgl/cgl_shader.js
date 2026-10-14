@@ -1324,7 +1324,7 @@ class CglShader extends CgShader
 
     _bindTextures()
     {
-        if (this._textureStackTex.length > this._cgl.maxTextureUnits)
+        if (this._textureStackTex.length > this._cgl.maxTextureUnits - 1)
         {
             this._log.warn("[shader._bindTextures] too many textures bound", this._textureStackTex.length + "/" + this._cgl.maxTextureUnits);
         }

@@ -494,15 +494,16 @@ export class Uniform extends CgUniform
 
     updateValueT()
     {
-        // if (!this._isValidLoc())
-        // {
-        //     this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        // this._cgl.perfProfiler.count("uniformGet");
-        //     this._cgl.profileData.profileShaderGetUniformName = this._name;
-        // }
         this.#updateLoc();
 
         this._cgl.perfProfiler.count("uniformUpdate");
+
+        if (this._value < 0) return;
+        if (this._value < 0 || this._value > this._cgl.maxTextureUnits - 1)
+        {
+            this._log.warn(" texture index invalid", this._value + "/" + this._cgl.maxTextureUnits);
+        }
+
         this._shader.getCgl().gl.uniform1i(this._loc, this._value);
         this.needsUpdate = false;
     }

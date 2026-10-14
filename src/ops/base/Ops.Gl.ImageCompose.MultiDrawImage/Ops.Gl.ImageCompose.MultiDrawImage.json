@@ -32,12 +32,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 1 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 1",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 1 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 1",
                 "subType": "integer"
             },
@@ -68,12 +79,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 2 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 2",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 2 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 2",
                 "subType": "integer"
             },
@@ -104,12 +126,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 3 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 3",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 3 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 3",
                 "subType": "integer"
             },
@@ -140,12 +173,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 4 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 4",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 4 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 4",
                 "subType": "integer"
             },
@@ -176,12 +220,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 5 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 5",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 5 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 5",
                 "subType": "integer"
             },
@@ -212,12 +267,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 6 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 6",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 6 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 6",
                 "subType": "integer"
             },
@@ -248,12 +314,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 7 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 7",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 7 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 7",
                 "subType": "integer"
             },
@@ -284,12 +361,23 @@
             {
                 "type": 0,
                 "name": "Mask Source 8 index",
+                "values": [
+                    "R",
+                    "R inv",
+                    "A",
+                    "A inv"
+                ],
                 "group": "Image 8",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Opacity 8 index",
+                "values": [
+                    "Normal",
+                    "Prev A",
+                    "Prev R"
+                ],
                 "group": "Image 8",
                 "subType": "integer"
             },
