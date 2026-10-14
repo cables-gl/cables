@@ -547,6 +547,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1791875339187
+        },
+        {
+            "message": "Fix mute button, was being ignored when loading the patch in some cases",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1791957540794
         }
     ],
     "isReleased": true,
