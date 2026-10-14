@@ -34,6 +34,9 @@ let GltfMaterial = class
     texTransform = [1, 1, 0, 0];
     doubleSided = false;
     whichFace = 0;
+    _pushedDepth = false;
+    _pushedCullFace = false;
+    _pushedCullFaceFacing = false;
 
     constructor(gltf, obj)
     {
@@ -182,6 +185,7 @@ let GltfMaterial = class
             if (inSetGlStates.get() && this.json.alphaMode == "BLEND") depthWrite = false;
             op.patch.cg.pushDepthTest(depthTest);
             op.patch.cg.pushDepthWrite(depthWrite);
+            this._pushedDepth = true;
 
             let whichFace = cgl.CULL_MODES[CABLES.CG.CULL_BACK];
             if (this.doubleSided) whichFace = cgl.CULL_MODES[CABLES.CG.CULL_NONE];
@@ -189,8 +193,13 @@ let GltfMaterial = class
             if (inSetGlStates.get())
             {
                 cgl.pushCullFace(!this.doubleSided);
+                this._pushedCullFace = true;
 
-                if (this.whichFace) cgl.pushCullFaceFacing(this.whichFace);
+                if (this.whichFace)
+                {
+                    cgl.pushCullFaceFacing(this.whichFace);
+                    this._pushedCullFaceFacing = true;
+                }
             }
 
             if (uniTexTrans && this.texTransform)
@@ -239,10 +248,11 @@ let GltfMaterial = class
         const uniPbrMetalness = currentShader.uniformPbrMetalness;
         const uniPbrRoughness = currentShader.uniformPbrRoughness;
 
-        if (inSetGlStates.get())
+        if (this._pushedDepth)
         {
             op.patch.cg.popDepthTest();
             op.patch.cg.popDepthWrite();
+            this._pushedDepth = false;
         }
 
         if (uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
@@ -256,15 +266,20 @@ let GltfMaterial = class
         if (uniTexOcclusion) currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
 
         const uniTexDiff = currentShader.materialPropUniforms.diffuseTexture;
-        if (uniTexDiff) currentShader.setUniformTexture(currentShader.materialPropUniforms.occlusionTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
+        if (uniTexDiff) currentShader.setUniformTexture(currentShader.materialPropUniforms.diffuseTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
 
         const uniTexMr = currentShader.materialPropUniforms.metalRoughnessTexture;
         if (uniTexMr) currentShader.setUniformTexture(currentShader.materialPropUniforms.metalRoughnessTexture, whiteTex.tex, cgl.gl.TEXTURE_2D);
 
-        if (inSetGlStates.get())
+        if (this._pushedCullFace)
         {
             cgl.popCullFace();
-            if (this.whichFace) cgl.popCullFaceFacing();
+            this._pushedCullFace = false;
+        }
+        if (this._pushedCullFaceFacing)
+        {
+            cgl.popCullFaceFacing();
+            this._pushedCullFaceFacing = false;
         }
 
     }
