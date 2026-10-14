@@ -6,7 +6,6 @@ const snippets = {
     "spot": attachments.snippet_body_spot_frag,
     "ambient": attachments.snippet_body_ambient_frag,
     "directional": attachments.snippet_body_directional_frag,
-    "area": attachments.snippet_body_area_frag,
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
@@ -245,7 +244,6 @@ shaderOut.ignoreValueSerialize = true;
 const shader = new CGL.Shader(cgl, "phongmaterial_" + op.id, this);
 shader.op = this;
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR", "MODULE_VERTEX_MODELVIEW"]);
-shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 // let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
 
