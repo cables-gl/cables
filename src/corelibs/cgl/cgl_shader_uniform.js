@@ -498,8 +498,7 @@ export class Uniform extends CgUniform
 
         this._cgl.perfProfiler.count("uniformUpdate");
 
-        if (this._value < 0) return;
-        if (this._value < 0 || this._value > this._cgl.maxTextureUnits - 1)
+        if (this._value > this._cgl.maxTextureUnits - 1)
         {
             this._log.warn(" texture index invalid", this._value + "/" + this._cgl.maxTextureUnits);
         }
