@@ -71,7 +71,7 @@ skyboxShader.setSource(attachments.skybox_vert, attachments.skybox_frag);
 // skyboxShader.offScreenPass = true;
 
 inTexture.onChange =
-inRGBE.onChange = updateDefines;
+    inRGBE.onChange = updateDefines;
 
 updateDefines();
 
@@ -114,7 +114,6 @@ inTrigger.onTriggered = () =>
     cgl.popShader();
 
     cgl.popModelMatrix();
-    cgl.popDepthFunc();
 
     outTrigger.trigger();
 };
