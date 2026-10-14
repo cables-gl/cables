@@ -115,6 +115,8 @@ export class Patch extends Events
     _opIdCache = {};
     _triggerStack = [];
     _volumeListeners = [];
+    #patchVolume = 1.0;
+    #muted = false;
     namedTriggers = {};
     tempData = {};
     frameStore = {};
@@ -165,6 +167,7 @@ export class Patch extends Events
         if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
         if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
         if (!this.config.masterVolume) this.config.masterVolume = 1.0;
+        this.#patchVolume = this.config.masterVolume;
 
         /* minimalcore:end */
 
@@ -313,6 +316,28 @@ export class Patch extends Events
      */
     setVolume(v)
     {
+        this.#patchVolume = v;
+        this.#updateVolume();
+    }
+
+    /**
+     * mute all audio
+     * @param {Boolean} b muted
+     */
+    setMuted(b)
+    {
+        this.#muted = b;
+        this.#updateVolume();
+    }
+
+    isMuted()
+    {
+        return this.#muted;
+    }
+
+    #updateVolume()
+    {
+        const v = this.#muted ? 0 : this.#patchVolume;
         this.config.masterVolume = v;
         for (let i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
     }
