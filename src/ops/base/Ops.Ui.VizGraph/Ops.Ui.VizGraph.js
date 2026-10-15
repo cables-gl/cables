@@ -31,6 +31,22 @@ inNum1.onLinkChanged =
         min = Number.MAX_VALUE;
         buff = [];
     };
+op.onAnimFrame = update;
+
+function update(tt)
+{
+    for (let p = 0; p < op.portsIn.length; p++)
+    {
+        const newVal = op.portsIn[p].get();
+
+        max = Math.max(op.portsIn[p].get(), max);
+        min = Math.min(op.portsIn[p].get(), min);
+
+        if (!buff[p]) buff[p] = [];
+        buff[p].push(newVal);
+        if (buff[p].length > 60) buff[p].shift();
+    }
+}
 
 op.renderVizLayer = (ctx, layer) =>
 {
@@ -45,15 +61,9 @@ op.renderVizLayer = (ctx, layer) =>
 
     for (let p = 0; p < op.portsIn.length; p++)
     {
+
+        if (!buff[p]) continue
         if (!op.portsIn[p].isLinked()) continue;
-        const newVal = op.portsIn[p].get();
-
-        max = Math.max(op.portsIn[p].get(), max);
-        min = Math.min(op.portsIn[p].get(), min);
-
-        if (!buff[p]) buff[p] = [];
-        buff[p].push(newVal);
-        if (buff[p].length > 60) buff[p].shift();
 
         const texSlot = 6;
         const mulX = layer.width / 60;
@@ -76,7 +86,7 @@ op.renderVizLayer = (ctx, layer) =>
 
             y = CABLES.map(y, min, max, layer.height, 3);
             y += layer.y;
-            if (i === 0)ctx.moveTo(layer.x, y);
+            if (i === 0) ctx.moveTo(layer.x, y);
             else ctx.lineTo(layer.x + i * mulX, y);
 
         }
