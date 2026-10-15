@@ -553,6 +553,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1791957540794
+        },
+        {
+            "message": "Removed the \"continue loading\" modal if an op was not found, log to console",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1791973288477
         }
     ],
     "isReleased": true,

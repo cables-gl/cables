@@ -159,6 +159,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1791896999298
+        },
+        {
+            "message": "Added Ops.Mcp.McpServer to the build",
+            "type": "new op",
+            "author": "stephan",
+            "date": 1791974834100
         }
     ],
     "isReleased": true,
