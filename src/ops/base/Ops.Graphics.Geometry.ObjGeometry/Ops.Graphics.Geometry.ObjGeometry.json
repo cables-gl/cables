@@ -4,27 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1665654164307
-        },
-        {
-            "message": "Ops.User.pandur.ParseJson renamed to Ops.User.pandur.ParseObj",
-            "author": "pandur",
-            "date": 1665654314488
-        },
-        {
-            "message": "Ops.User.pandur.ParseObj renamed to Ops.Dev.ParseObj",
-            "author": "pandur",
-            "date": 1665667450068
-        },
-        {
-            "message": "Ops.Dev.ParseObj renamed to Ops.Dev.ObjGeometry",
-            "author": "pandur",
-            "date": 1665667473768
-        },
-        {
-            "message": "Ops.Dev.ObjGeometry renamed to Ops.Graphics.Geometry.ObjGeometry",
-            "author": "pandur",
-            "date": 1670921247823
+            "date": 1665654164307,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
