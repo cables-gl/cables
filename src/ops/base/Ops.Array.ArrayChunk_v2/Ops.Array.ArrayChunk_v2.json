@@ -70,11 +70,12 @@
             "date": 1680075853075
         },
         {
-            "message": "created as a new version of Ops.Array.ArrayChunk",
-            "type": "new op",
+            "message": "new version: v2 fix circular",
+            "type": "bugfix",
             "author": "pandur",
             "date": 1791451672666
         }
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }

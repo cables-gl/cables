@@ -1,6 +1,6 @@
 {
-    "id": "4039f509-b921-45e2-8606-0cba1d8a0897",
-    "created": 1790932535616,
+    "id": "3b19d74b-9e7f-41e4-a8fd-4a293ccf9518",
+    "created": 1791993683512,
     "license": "MIT",
     "authorName": "AdamPartGL",
     "changelog": [
@@ -22,6 +22,19 @@
             "type": "rename",
             "author": "AdamPartGL",
             "date": 1791582263950
+        },
+        {
+            "message": "Extension.ShaderGraph.Sdf.Fractals.SdfApollonian renamed to Ops.Extension.ShaderGraph.Sdf.Fractals.SdfApollonian1",
+            "type": "rename",
+            "author": "AdamPartGL",
+            "date": 1791993661715
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Sdf.Fractals.SdfApollonian1",
+            "type": "new op",
+            "author": "AdamPartGL",
+            "date": 1791993683512,
+            "cloneOf": "4039f509-b921-45e2-8606-0cba1d8a0897"
         }
     ],
     "layout": {
