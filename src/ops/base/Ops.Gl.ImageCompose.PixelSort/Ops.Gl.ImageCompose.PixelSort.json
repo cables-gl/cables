@@ -56,7 +56,14 @@
     "docs": {
         "ports": []
     },
-    "changelog": [],
+    "changelog": [
+        {
+            "message": "Dev.Gl.ImageCompose.SortPixels renamed to Ops.Gl.ImageCompose.PixelSort",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792046544252
+        }
+    ],
     "coreLibs": [
         "cgl"
     ],

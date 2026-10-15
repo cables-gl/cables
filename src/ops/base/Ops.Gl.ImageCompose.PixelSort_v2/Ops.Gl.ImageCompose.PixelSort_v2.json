@@ -1,0 +1,128 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "values": [
+                    "Segments",
+                    "Iterative"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Structure index",
+                "values": [
+                    "Rows",
+                    "Columns"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Sort index",
+                "values": [
+                    "Luminance",
+                    "R",
+                    "G",
+                    "B"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Max Length",
+                "group": "Segments",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Threshold Low",
+                "group": "Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Threshold High",
+                "group": "Segments",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Stagger Lines",
+                "group": "Segments",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Iterations",
+                "group": "Iterative",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Keep Sorting",
+                "group": "Iterative",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Input Amount",
+                "group": "Iterative",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset",
+                "group": "Iterative"
+            },
+            {
+                "type": 2,
+                "name": "Mask",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Group",
+                "objType": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "author": "pandur",
+    "authorName": "pandur",
+    "id": "6ff96579-2f24-4726-920c-a805d3950a76",
+    "created": 1791381445923,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Dev.Gl.ImageCompose.SortPixels",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791381445923
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT",
+    "isReleased": true,
+    "summary": "Sort pixels in rows or columns by luminance,brightness / glitch"
+}
