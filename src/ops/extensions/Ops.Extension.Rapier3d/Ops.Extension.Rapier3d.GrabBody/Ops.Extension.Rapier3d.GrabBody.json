@@ -124,9 +124,17 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Grab a body and hold it",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1791975426398
+        }
+    ]
 }

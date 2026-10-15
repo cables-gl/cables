@@ -27,12 +27,6 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1791663269062
-        },
-        {
-            "message": "created as a new version of Ops.Extension.Rapier3d.World_v2",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1791665410433
         }
     ],
     "layout": {
@@ -149,5 +143,6 @@
             "username": "pandur",
             "date": 1790667972055
         }
-    ]
+    ],
+    "isReleased": true
 }

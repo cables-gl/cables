@@ -290,12 +290,6 @@
     },
     "changelog": [
         {
-            "message": "created as a new version of Ops.Gl.Phong.PhongMaterial_v6",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1791907926682
-        },
-        {
             "message": "Fix ambient light problems / material becoming grey",
             "type": "bugfix",
             "author": "pandur",
@@ -303,8 +297,6 @@
         }
     ],
     "summary": "A shaded material for lighting objects",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -328,20 +320,12 @@
                 "text": "Opacity"
             },
             {
-                "name": "Enable",
-                "text": "check to enable the alternative oren-nayar diffuse mode"
-            },
-            {
                 "name": "Albedo",
                 "text": "Albedo of the diffuse color"
             },
             {
                 "name": "Roughness",
                 "text": "Roughness of the diffuse color"
-            },
-            {
-                "name": "Active",
-                "text": "check to activate fresnel"
             },
             {
                 "name": "Fresnel Intensity",
@@ -396,22 +380,6 @@
                 "text": "Amount of the specular reflection"
             },
             {
-                "name": "Specular Model",
-                "text": "choose between 4 different specular modes: "
-            },
-            {
-                "name": "Energy Conservation",
-                "text": "check to apply physical energy conservation"
-            },
-            {
-                "name": "Double Sided Material",
-                "text": "check to render material double sided"
-            },
-            {
-                "name": "Falloff Mode",
-                "text": "Choose between 4 different falloff modes: a (original mode), b (smoothed original), c (unreal 4 falloff), d (inverse square falloff - oldschool)"
-            },
-            {
                 "name": "Diffuse Texture",
                 "text": "Diffuse texture input"
             },
@@ -446,10 +414,6 @@
             {
                 "name": "Env Map Mask",
                 "text": "environment map mask texture input"
-            },
-            {
-                "name": "Colorize Texture",
-                "text": "check to colorize texture "
             },
             {
                 "name": "Diffuse Repeat X",
@@ -500,14 +464,6 @@
                 "text": "which channel of the alpha texture to use for multiplying"
             },
             {
-                "name": "Alpha Mask Source",
-                "text": "choose which component of texture should be used for alpha masking: r, g, b, a or luminance"
-            },
-            {
-                "name": "Discard Transparent Pixels",
-                "text": "check to discard transparent pixels"
-            },
-            {
                 "name": "Trigger Out",
                 "text": "Trigger out"
             },
@@ -521,5 +477,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true
 }
