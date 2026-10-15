@@ -1,0 +1,127 @@
+{
+    "id": "b0619d22-99fc-47be-b077-5643ab0ce880",
+    "created": 1792050731702,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "added range min/max inputs ",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711374926839
+        },
+        {
+            "message": "Adjusted amplitudes",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1724338994688
+        },
+        {
+            "message": "created as a new version of Ops.Anim.LFO_v3",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792050731703
+        },
+        {
+            "message": "Rework op, added built-in timer, timeline, various improvements and fixes",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1792050977385
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Waveform index",
+                "group": "Waveform",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pulse Width",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Phase",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Timer index",
+                "values": [
+                    "Auto",
+                    "Time Input",
+                    "Timeline"
+                ],
+                "group": "Timer",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "group": "Timer",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Play",
+                "group": "Timer",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset",
+                "group": "Timer"
+            },
+            {
+                "type": 0,
+                "name": "Range Min",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Range Max",
+                "group": "Range",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Cycle Position",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Cycle"
+            }
+        ]
+    },
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Low frequency oscillator (sine, triangle, ramp, square, random) with built-in timer, frequency in Hz, output range -1 to 1 by default",
+    "exampleProjectId": "9EOrS8",
+    "isReleased": true
+}
