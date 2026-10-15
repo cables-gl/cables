@@ -94,11 +94,6 @@ class Mesh extends CgMesh
     _preWireframeGeom = null;
     addVertexNumbers = false;
 
-    // feedBackAttributes = [];
-    // _feedBacks = [];
-    // _feedBacksChanged = false;
-    // _transformFeedBackLoc = -1;
-
     #lastAttrUpdate = 0;
     #countNamePrimitives = "";
     #countNameDrawCalls = "";
@@ -485,11 +480,7 @@ class Mesh extends CgMesh
         if (vertIndices && vertIndices.length > 0)
         {
             if (vertIndices instanceof Float32Array)
-            {
-
                 this.#log.warn("vertIndices float32Array: " + this._name, this.#geom.name, vertIndices.length, this.#geom.vertices.length);
-                // console.trace("hurzz");
-            }
 
             for (let i = 0; i < vertIndices.length; i++)
             {
@@ -555,11 +546,7 @@ class Mesh extends CgMesh
         this.updateVertices(this.#geom);
         this.setVertexIndices(this.#geom.verticesIndices);
 
-        if (this.addVertexNumbers)
-        {
-            this._setVertexNumbers();
-            // console.log("add vertexnumbers", this);
-        }
+        if (this.addVertexNumbers) this._setVertexNumbers();
 
         const geomAttribs = this.#geom.getAttributes();
 

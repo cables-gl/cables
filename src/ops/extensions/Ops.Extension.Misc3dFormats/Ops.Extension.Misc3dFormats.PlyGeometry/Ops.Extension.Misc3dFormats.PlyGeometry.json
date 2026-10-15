@@ -1,0 +1,49 @@
+{
+    "id": "871d94fd-efeb-42ce-9132-c88263174b0a",
+    "created": 1792056400332,
+    "license": "MIT",
+    "authorName": "claude",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "claude",
+            "date": 1792056400345
+        },
+        {
+            "message": "Local.PlyGeometry renamed to Ops.Extension.Misc3dFormats.PlyGeometry",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792064205157
+        }
+    ],
+    "isReleased": false,
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Num Points",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ]
+    }
+}
