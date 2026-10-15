@@ -1,0 +1,104 @@
+{
+    "summary": "Returns current date and time and timestamp",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Update Rate",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Year",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Month",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Day",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Hours",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Minutes",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seconds",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Timestamp",
+                "subType": "number"
+            }
+        ]
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Update Rate",
+                "text": "How often the op should update the output (in milliseconds)"
+            },
+            {
+                "name": "Year",
+                "text": "The current year"
+            },
+            {
+                "name": "Month",
+                "text": "The current month"
+            },
+            {
+                "name": "Day",
+                "text": "The current day"
+            },
+            {
+                "name": "Hours",
+                "text": "The current hour"
+            },
+            {
+                "name": "Minutes",
+                "text": "The current minute"
+            },
+            {
+                "name": "Seconds",
+                "text": "The current second"
+            },
+            {
+                "name": "Timestamp",
+                "text": "The current timestamp"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "03f2ebfd-9bd2-4c4c-a30b-7f01fd0fd892",
+    "created": 1792043384853,
+    "exampleProjectId": "GuzKSD",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Date.DateAndTime",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792043384854
+        },
+        {
+            "message": "Months output is now 1 based, as other ops",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792043421274
+        }
+    ]
+}
