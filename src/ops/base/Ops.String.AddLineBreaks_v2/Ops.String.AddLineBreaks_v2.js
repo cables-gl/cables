@@ -9,13 +9,13 @@ inMaxLineChars.onChange =
 function update()
 {
     const str = inStr.get();
-    if (!str)
+    if (str === null || str === undefined || str === "")
     {
         outStr.set("");
         return;
     }
 
-    outStr.set(explode(str, Math.max(1, inMaxLineChars.get())));
+    outStr.set(explode(String(str), Math.max(1, inMaxLineChars.get())));
 }
 
 function explode(text, max)
