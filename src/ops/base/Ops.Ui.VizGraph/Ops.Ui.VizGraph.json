@@ -4,17 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1621835175710
+            "date": 1621835175710,
+            "type": "new op"
         },
         {
-            "message": "Ops.Dev.VizNumber renamed to Ops.Dev.VizGraph",
+            "message": "Graph is sampled based on canvas framerate, not UI target framerate, so the curve now has the same shape , even when UI is slowed down on purpose",
+            "type": "improvement",
             "author": "pandur",
-            "date": 1637848482452
-        },
-        {
-            "message": "Ops.Dev.VizGraph renamed to Ops.Ui.VizGraph",
-            "author": "pandur",
-            "date": 1637850777604
+            "date": 1792049869366
         }
     ],
     "authorName": "pandur",
