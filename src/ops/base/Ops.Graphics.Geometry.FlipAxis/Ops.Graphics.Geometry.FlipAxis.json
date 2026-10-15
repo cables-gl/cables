@@ -6,6 +6,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1769502105851
+        },
+        {
+            "message": "Option to mirror each axis",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1792057171140
         }
     ],
     "authorName": "pandur",
@@ -26,6 +32,21 @@
                     "ZX"
                 ],
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Y",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip Z",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

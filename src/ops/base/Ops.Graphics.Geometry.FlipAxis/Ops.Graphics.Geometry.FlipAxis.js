@@ -1,9 +1,15 @@
 const
     geometry = op.inObject("Geometry"),
     ax = op.inSwitch("Axis 1", ["NONE", "XY", "YZ", "ZX"], "NONE"),
+    inFlipX = op.inBool("Flip X", false),
+    inFlipY = op.inBool("Flip Y", false),
+    inFlipZ = op.inBool("Flip Z", false),
     outGeom = op.outObject("Result");
 
 ax.onChange =
+    inFlipX.onChange =
+    inFlipY.onChange =
+    inFlipZ.onChange =
     geometry.onChange = update;
 
 let geom = null;
@@ -18,7 +24,6 @@ function update()
         return;
     }
 
-    const bounds = oldGeom.getBounds();
     geom = oldGeom.copy();
 
     let index0 = 0;
@@ -60,5 +65,29 @@ function update()
         geom.biTangents[i + 2] = oldGeom.biTangents[i + index2];
     }
 
+    const flips = [inFlipX.get(), inFlipY.get(), inFlipZ.get()];
+    const swappedBounds = geom.getBounds();
+    const mins = [swappedBounds.minX, swappedBounds.minY, swappedBounds.minZ];
+    const maxs = [swappedBounds.maxX, swappedBounds.maxY, swappedBounds.maxZ];
+    let numFlips = 0;
+
+    for (let axis = 0; axis < 3; axis++)
+    {
+        if (!flips[axis]) continue;
+        numFlips++;
+        mirrorValues(geom.vertices, axis, mins[axis] + maxs[axis]);
+        mirrorValues(geom.vertexNormals, axis, 0);
+        mirrorValues(geom.tangents, axis, 0);
+        mirrorValues(geom.biTangents, axis, 0);
+    }
+
+    if (numFlips % 2 == 1 && geom.verticesIndices && geom.verticesIndices.length) geom.flipVertDir();
+
     outGeom.setRef(geom);
+}
+
+function mirrorValues(arr, axis, sum)
+{
+    if (!arr) return;
+    for (let i = axis; i < arr.length; i += 3) arr[i] = sum - arr[i];
 }
