@@ -9,11 +9,10 @@ const
     outTangents = op.outNumber("Tangents"),
     outBiTangents = op.outNumber("BiTangents"),
     outVertexColors = op.outNumber("VertexColors"),
-    outAttribs = op.outNumber("Other Attributes");
+    outAttribs = op.outNumber("Other Attributes"),
+    outAttribNames = op.outArray("Attribute Names", null, 1);
 
-geometry.onLinkChanged = () =>
-{
-};
+geometry.onLinkChanged = () => {};
 
 geometry.onChange = function ()
 {
@@ -31,6 +30,7 @@ geometry.onChange = function ()
         outVertexColors.set(info.numVertexColors);
         outAttribs.set(info.numAttribs);
         outIndexed.set(info.isIndexed);
+        outAttribNames.setRef(getAttributeNames(geom));
     }
     else
     {
@@ -43,5 +43,14 @@ geometry.onChange = function ()
         outBiTangents.set(null);
         outVertexColors.set(null);
         outAttribs.set(null);
+        outAttribNames.set(null);
     }
 };
+
+function getAttributeNames(geom)
+{
+    const names = ["vertices"];
+    const attributes = geom.getAttributes();
+    for (const name in attributes) names.push(name);
+    return names;
+}
