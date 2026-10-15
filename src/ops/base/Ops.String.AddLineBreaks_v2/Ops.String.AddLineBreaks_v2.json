@@ -4,18 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1585122285914
+            "date": 1585122285914,
+            "type": "new op"
         },
         {
-            "message": "cloned op from Ops.String.AddLineBreaks",
+            "message": "Fix problem with other falseish values",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1676113556748
-        },
-        {
-            "message": "Ops.User.pandur.AddLineBreaks2 renamed to Ops.String.AddLineBreaks_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1676113605687
+            "date": 1792043519225
         }
     ],
     "authorName": "pandur",
