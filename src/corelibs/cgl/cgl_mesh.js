@@ -502,11 +502,6 @@ class Mesh extends CgMesh
 
             this.#cgl.gl.bindBuffer(this.#cgl.gl.ELEMENT_ARRAY_BUFFER, this.#bufVerticesIndizes);
 
-            /*
-             * todo cache this ?
-             * if(!this.vertIndicesTyped || this.vertIndicesTyped.length!=this._geom.verticesIndices.length)
-             */
-
             if (vertIndices.length > 65535)
             {
                 this.vertIndicesTyped = new Uint32Array(vertIndices);
