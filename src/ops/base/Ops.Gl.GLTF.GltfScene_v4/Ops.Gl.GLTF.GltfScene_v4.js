@@ -39,7 +39,7 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoading = op.outBool("Loading");
+    outLoading = op.outBoolNum("Loading");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -138,7 +138,7 @@ function setCam()
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
-        if (gltf.nodes[i].name == inCamera.get())cam = new gltfCamera(gltf, gltf.nodes[i]);
+        if (gltf.nodes[i].name == inCamera.get()) cam = new gltfCamera(gltf, gltf.nodes[i]);
     }
 }
 
@@ -234,7 +234,7 @@ inExec.onTriggered = function ()
 
     cgl.popModelMatrix();
 
-    if (cam)cam.end();
+    if (cam) cam.end();
 };
 
 function finishLoading()
@@ -279,7 +279,7 @@ function finishLoading()
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
     }
 
-    if (gltf.bounds)outBounds.setRef(gltf.bounds);
+    if (gltf.bounds) outBounds.setRef(gltf.bounds);
 
     gltf.timing.push(["calced bounds", Math.round((performance.now() - gltf.startTime))]);
 
@@ -287,7 +287,7 @@ function finishLoading()
 
     gltf.timing.push(["hideNodesFromData", Math.round((performance.now() - gltf.startTime))]);
 
-    if (tab)printInfo();
+    if (tab) printInfo();
 
     gltf.timing.push(["printinfo", Math.round((performance.now() - gltf.startTime))]);
 
@@ -383,7 +383,7 @@ function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
     if (!inFile.get()) return;
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
+    if (!loadingId) loadingId = cgl.patch.loading.start("gltfScene", inFile.get(), op);
 
     unknownCount = 0;
     let fileToLoad = inFile.get();
@@ -393,7 +393,7 @@ function loadBin(addCacheBuster)
     if (!url) return;
     if (inFile.get() && !inFile.get().startsWith("data:"))
     {
-        if (addCacheBuster === true)url += "?rnd=" + CABLES.generateUUID();
+        if (addCacheBuster === true) url += "?rnd=" + CABLES.generateUUID();
     }
     needsMatUpdate = true;
     outLoading.set(true);
@@ -415,11 +415,10 @@ function loadBin(addCacheBuster)
             finishLoading();
         }).catch((e) =>
         {
-            if (loadingId)cgl.patch.loading.finished(loadingId);
+            if (loadingId) cgl.patch.loading.finished(loadingId);
             loadingId = null;
             finishLoading();
-
-            op.logError("gltf fetch error", e);
+            op.logWarn("gltf fetch error", e);
         });
     closeTab();
 
@@ -524,7 +523,7 @@ function updateMaterials()
         }
     }
     needsMatUpdate = false;
-    if (tab)printInfo();
+    if (tab) printInfo();
 }
 
 function hideNodesFromArray()
@@ -540,13 +539,13 @@ function hideNodesFromArray()
     for (let i = 0; i < hideArr.length; i++)
     {
         const n = gltf.getNode(hideArr[i]);
-        if (n)n.hidden = true;
+        if (n) n.hidden = true;
     }
 }
 
 function hideNodesFromData()
 {
-    if (!data)loadData();
+    if (!data) loadData();
     if (!gltf) return;
 
     gltf.unHideAll();
@@ -571,10 +570,10 @@ function loadData()
 {
     data = dataPort.get();
 
-    if (!data || data === "")data = {};
+    if (!data || data === "") data = {};
     else data = JSON.parse(data);
 
-    if (gltf)hideNodesFromData();
+    if (gltf) hideNodesFromData();
 
     return data;
 }
@@ -695,8 +694,8 @@ op.exposeNode = function (name, type, options)
     else
     {
         let newopname = "Ops.Gl.GLTF.GltfNode_v2";
-        if (options && options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
-        if (type == "transform")newopname = "Ops.Gl.GLTF.GltfNodeTransform_v2";
+        if (options && options.skin) newopname = "Ops.Gl.GLTF.GltfSkin";
+        if (type == "transform") newopname = "Ops.Gl.GLTF.GltfNodeTransform_v2";
 
         gui.serverOps.loadOpLibs(newopname, () =>
         {
@@ -731,7 +730,7 @@ op.toggleNodeVisibility = function (name)
     data.hiddenNodes = data.hiddenNodes || {};
 
     if (n)
-        if (n.hidden)data.hiddenNodes[name] = true;
+        if (n.hidden) data.hiddenNodes[name] = true;
         else delete data.hiddenNodes[name];
 
     saveData();
