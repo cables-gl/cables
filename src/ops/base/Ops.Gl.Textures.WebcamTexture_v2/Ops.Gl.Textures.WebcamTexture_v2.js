@@ -151,17 +151,16 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                op.logError(error.name + ": " + error.message);
+                op.logWarn(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
     else
     if (navigator.getUserMedia)
     {
-        navigator.getUserMedia(constraints, camInitComplete,
-            function ()
-            {
-                available.set(false);
-            });
+        navigator.getUserMedia(constraints, camInitComplete, function ()
+        {
+            available.set(false);
+        });
     }
 }
