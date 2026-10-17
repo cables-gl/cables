@@ -13,6 +13,7 @@ import { Op } from "./core_op.js";
  * @property  {Boolean} [hidePort] port will be hidden from op
  * @property  {Boolean} [hideParam] port params will be hidden from parameter panel
  * @property  {Boolean} [showIndex] only for dropdowns - show value index (e.g. `0 - normal` )
+ * @property  {String[]} [valueLabels] only for dropdowns - text shown instead of the value with the same index
  * @property  {String} [editorSyntax] set syntax highlighting theme for editor port
  * @property  {Boolean} [ignoreObjTypeErrors] do not auto check object types
  * @property  {string} [group] do not set manually - group ports, usually set by op.setPortGroup...
