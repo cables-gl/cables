@@ -20,6 +20,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1790156411753
+        },
+        {
+            "message": "Ui.VizImage renamed to Ops.Ui.VizImageUrl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792423445886
         }
     ],
     "layout": {

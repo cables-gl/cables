@@ -48,5 +48,10 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": false,
+    "exampleProjectId": "UC6pvy",
+    "docs": {
+        "ports": []
+    }
 }
