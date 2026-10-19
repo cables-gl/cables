@@ -1,0 +1,29 @@
+{
+    "id": "dfc090b7-d5c7-4b28-9b00-f0d90d719fb4",
+    "created": 1792423497722,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792423497722,
+            "cloneOf": "327d79c6-e41f-4744-879d-01ad4872e9b9"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            }
+        ]
+    },
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "summary": "preview an image/canvas/webcam drawable dom element",
+    "isReleased": false
+}
