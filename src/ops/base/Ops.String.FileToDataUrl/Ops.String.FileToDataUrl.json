@@ -51,5 +51,9 @@
             }
         ]
     },
-    "summary": "Load any file (image, audio, text, binary) as a data url, detects the file type automatically"
+    "summary": "Load any file (image, audio, text, binary) as a data url",
+    "isReleased": false,
+    "docs": {
+        "ports": []
+    }
 }
