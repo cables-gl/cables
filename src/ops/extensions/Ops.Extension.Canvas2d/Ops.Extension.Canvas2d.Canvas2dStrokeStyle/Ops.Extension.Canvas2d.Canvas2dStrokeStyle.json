@@ -118,5 +118,6 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Sets stroke color, line width, caps, joins and dashes for the canvas2d ops below it"
 }

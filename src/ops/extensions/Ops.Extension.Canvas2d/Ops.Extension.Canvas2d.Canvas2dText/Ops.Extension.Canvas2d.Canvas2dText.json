@@ -82,5 +82,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Draws text on a canvas2d"
 }

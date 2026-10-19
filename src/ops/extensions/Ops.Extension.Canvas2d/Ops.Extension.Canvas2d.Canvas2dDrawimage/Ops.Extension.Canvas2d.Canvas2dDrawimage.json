@@ -50,5 +50,6 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "Draws an image, video or canvas element onto a canvas2d"
 }

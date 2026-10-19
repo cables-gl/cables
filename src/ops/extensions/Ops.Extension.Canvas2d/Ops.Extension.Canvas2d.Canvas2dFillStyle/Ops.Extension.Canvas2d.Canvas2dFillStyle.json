@@ -51,5 +51,6 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Sets the fill color for the canvas2d ops below it"
 }

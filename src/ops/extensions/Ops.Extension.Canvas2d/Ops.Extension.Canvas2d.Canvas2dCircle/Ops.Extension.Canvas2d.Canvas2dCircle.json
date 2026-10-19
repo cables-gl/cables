@@ -96,7 +96,6 @@
     "isReleased": false,
     "license": "MIT",
     "exampleProjectId": "Rxzbuy",
-    "docs": {
-        "ports": []
-    }
+    "docs": {},
+    "summary": "Draws a circle or arc on a canvas2d, filled, stroked or as clip path"
 }

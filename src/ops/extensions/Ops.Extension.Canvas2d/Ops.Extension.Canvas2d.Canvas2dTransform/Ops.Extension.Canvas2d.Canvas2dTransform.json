@@ -58,5 +58,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "summary": "Translates, rotates and scales the canvas2d ops below it"
 }

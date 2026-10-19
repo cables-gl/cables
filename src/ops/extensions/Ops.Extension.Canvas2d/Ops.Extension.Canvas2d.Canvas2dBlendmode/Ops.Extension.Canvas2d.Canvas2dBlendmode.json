@@ -28,5 +28,6 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "Sets the blend mode (composite operation) for the canvas2d ops below it"
 }

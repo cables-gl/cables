@@ -2,7 +2,7 @@ const canv = document.createElement("canvas");
 const
     exec = op.inTrigger("Exec"),
     inCanvas = op.inObject("Canvas Copy", null, "element"),
-    inSize = op.inSwitch("Size", ["Manual", "Maximize"], "Manual"),
+    inSize = op.inSwitch("Size", ["Manual", "Maximize", "Contain"], "Manual"),
     width = op.inInt("Width", 256),
     height = op.inInt("Height", 256),
     inClear = op.inBool("Clear", true),
@@ -53,19 +53,20 @@ function removeFromDom()
 
 function updateUi()
 {
-    const manual = inSize.get() == "Manual";
-    width.setUiAttribs({ "greyout": !manual });
-    height.setUiAttribs({ "greyout": !manual });
+    const fixedSize = inSize.get() != "Maximize";
+    width.setUiAttribs({ "greyout": !fixedSize });
+    height.setUiAttribs({ "greyout": !fixedSize });
     inR.setUiAttribs({ "greyout": !inClear.get() });
     inG.setUiAttribs({ "greyout": !inClear.get() });
     inB.setUiAttribs({ "greyout": !inClear.get() });
     inA.setUiAttribs({ "greyout": !inClear.get() });
-    if (manual) updateManualSize();
+    if (inSize.get() != "Contain") setCanvasStyle("", "", "", "");
+    if (fixedSize) updateManualSize();
 }
 
 function updateManualSize()
 {
-    if (inSize.get() != "Manual") return;
+    if (inSize.get() == "Maximize") return;
     setCanvasSize(width.get(), height.get());
 }
 
@@ -73,6 +74,24 @@ function updateMaximizedSize()
 {
     const rect = container.getBoundingClientRect();
     setCanvasSize(Math.round(rect.width), Math.round(rect.height));
+}
+
+function updateContainStyle()
+{
+    const rect = container.getBoundingClientRect();
+    if (!canv.width || !canv.height) return;
+    const scale = Math.min(rect.width / canv.width, rect.height / canv.height);
+    const styleWidth = canv.width * scale;
+    const styleHeight = canv.height * scale;
+    setCanvasStyle(styleWidth + "px", styleHeight + "px", (rect.width - styleWidth) / 2 + "px", (rect.height - styleHeight) / 2 + "px");
+}
+
+function setCanvasStyle(w, h, left, top)
+{
+    if (canv.style.width != w) canv.style.width = w;
+    if (canv.style.height != h) canv.style.height = h;
+    if (canv.style.left != left) canv.style.left = left;
+    if (canv.style.top != top) canv.style.top = top;
 }
 
 function setCanvasSize(w, h)
@@ -86,6 +105,7 @@ function setCanvasSize(w, h)
 exec.onTriggered = () =>
 {
     if (inSize.get() == "Maximize") updateMaximizedSize();
+    else if (inSize.get() == "Contain" && inAddDom.get()) updateContainStyle();
 
     op.patch.tempData.canvasCompose = { "canvas": canv, "ctx": ctx };
     if (inClear.get())

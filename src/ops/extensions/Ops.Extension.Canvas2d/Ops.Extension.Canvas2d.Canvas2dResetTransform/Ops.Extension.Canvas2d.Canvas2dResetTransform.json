@@ -35,5 +35,6 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "summary": "Resets translation, rotation and scale for the canvas2d ops below it"
 }

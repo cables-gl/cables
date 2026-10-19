@@ -38,7 +38,8 @@
                 "name": "Size index",
                 "values": [
                     "Manual",
-                    "Maximize"
+                    "Maximize",
+                    "Contain"
                 ],
                 "subType": "integer"
             },
@@ -109,5 +110,6 @@
             }
         ]
     },
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Creates a 2d canvas, runs the canvas2d ops below it and outputs the canvas element, manual size, maximized or contained in its parent"
 }
