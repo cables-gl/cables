@@ -18,14 +18,14 @@ const
 text.setUiAttribs({ "ignoreBigPort": true });
 
 inLines.onChange =
-inCustSep.onChange =
-inNan.onChange =
+    inCustSep.onChange =
+    inNan.onChange =
     text.onChange =
     trim.onChange = parse;
 
 separator.onChange =
-inTypes.onChange =
-inReplNan.onChange = updateUi;
+    inTypes.onChange =
+    inReplNan.onChange = updateUi;
 
 function updateUi()
 {
@@ -49,21 +49,21 @@ function parse()
 
     let textInput = text.get();
 
-    if (trim.get() && textInput)
+    if (trim.get() && textInput && textInput.replace)
     {
         textInput = textInput.replace(/^\s+|\s+$/g, "");
         textInput = textInput.trim();
     }
     let type = 0;
-    if (inTypes.get() === "Numbers")type = 1;
-    if (inTypes.get() === "Strings")type = 2;
+    if (inTypes.get() === "Numbers") type = 1;
+    if (inTypes.get() === "Strings") type = 2;
 
     let r;
     let sep = separator.get();
 
     if (separator.get() === "Line Break") sep = "\n";
     if (separator.get() === "Tab") sep = "\t";
-    if (separator.get() == "Custom")sep = inCustSep.get();
+    if (separator.get() == "Custom") sep = inCustSep.get();
 
     r = textInput.split(sep);
 
@@ -91,7 +91,7 @@ function parse()
     {
         for (let i = 0; i < r.length; i++)
         {
-            if (!CABLES.isNumeric(r[i]))r[i] = String(r[i]);
+            if (!CABLES.isNumeric(r[i])) r[i] = String(r[i]);
             else r[i] = Number(r[i]);
         }
     }
