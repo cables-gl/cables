@@ -165,6 +165,43 @@
             "type": "new op",
             "author": "stephan",
             "date": 1791974834100
+        },
+        {
+            "message": "Added Opdirectories can now be moved to top of the list to give them highest priority",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1792061257951
+        },
+        {
+            "message": "Show used op directories and which ops in \"analyze patch\"",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1792071845079
+        },
+        {
+            "message": "Prevented duplicate opening/showing of \"unsaved changes\" warning dialog",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1792081040324
+        },
+        {
+            "message": "Made \"maximize renderer on start\" more stable",
+            "type": "bugfix",
+            "author": "stephan",
+            "date": 1792082648552,
+            "url": "https://github.com/cables-gl/cables/issues/8117"
+        },
+        {
+            "message": "Show all ops in directory in manage op directories",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1792148108503
+        },
+        {
+            "message": "Keep all ops in a history file to be able to show the opname on a missing op",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1792148136539
         }
     ],
     "isReleased": true,

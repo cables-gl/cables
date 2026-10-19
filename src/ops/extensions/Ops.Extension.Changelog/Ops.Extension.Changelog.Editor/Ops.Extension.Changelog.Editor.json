@@ -559,6 +559,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1791973288477
+        },
+        {
+            "message": "Patchfield and timeline performance improvements when containing many operators",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792309452203
         }
     ],
     "isReleased": true,

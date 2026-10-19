@@ -1,0 +1,86 @@
+{
+    "id": "cc7c7e34-3821-4425-871e-55423284fff4",
+    "created": 1787036695630,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708357534149
+        },
+        {
+            "message": "Dev.Graphics.Canvas2d.Canvas2dCircle renamed to Ops.Team.Canvas2d.Canvas2dCircle",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750159022657
+        },
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1787036695630
+        },
+        {
+            "message": "Team.Canvas2d.Canvas2dText renamed to Ops.Extension.Canvas2d.Canvas2dText",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792409006728
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "font"
+            },
+            {
+                "type": 5,
+                "name": "weight"
+            },
+            {
+                "type": 0,
+                "name": "align index",
+                "values": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "fontSize",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

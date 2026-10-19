@@ -1,0 +1,69 @@
+{
+    "id": "820bc427-7330-4b90-8fa8-5cc06ebeb9da",
+    "created": 1708357159224,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708357159285
+        },
+        {
+            "message": "Dev.Graphics.Canvas2d.Canvas2dCompose renamed to Ops.Team.Canvas2d.Canvas2dCompose",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1750158929831
+        },
+        {
+            "message": "Team.Canvas2d.Canvas2dCompose renamed to Ops.Extension.Canvas2d.Canvas2dCompose",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792409051676
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            },
+            {
+                "type": 2,
+                "name": "Canvas Copy",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    },
+    "license": "MIT"
+}

@@ -1,0 +1,81 @@
+{
+    "authorName": "_LJ_",
+    "id": "97713266-8f4c-4ea8-b92e-a584ca31312f",
+    "created": 1792407393731,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "canvas"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Force Update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "height",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "convert a canvas to texture",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "QjlEo-",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "Added workaround for detecting correct size of video elements",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1713787642100
+        },
+        {
+            "message": "Add trigger input to force an update of the texture, needed for video elements",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1713787664221
+        },
+        {
+            "message": "New version v2: normal cables trigger flow and change way when to update the texture",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792407393731
+        }
+    ],
+    "coreLibs": [
+        "cgl"
+    ]
+}

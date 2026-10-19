@@ -1,16 +1,14 @@
 const
     inGeom = op.inObject("Geometry"),
-    outArr = op.outArray("Array");
+    outArr = op.outArray("Array", null, 3);
 
 inGeom.onChange = function ()
 {
     const g = inGeom.get();
 
-
     if (!g)
     {
         outArr.set(null);
-
         return;
     }
 
