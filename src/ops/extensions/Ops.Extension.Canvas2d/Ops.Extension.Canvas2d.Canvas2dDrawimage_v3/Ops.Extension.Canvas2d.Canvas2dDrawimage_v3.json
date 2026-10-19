@@ -1,0 +1,110 @@
+{
+    "id": "acf8280a-9946-4f29-813f-4eb2dd3f0dc9",
+    "created": 1792412598744,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708944031157
+        },
+        {
+            "message": "source/destination coordinates and size",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1752155950868
+        },
+        {
+            "message": "Team.Canvas2d.Canvas2dDrawimage_v2 renamed to Ops.Extension.Canvas2d.Canvas2dDrawimage_v2",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792409044920
+        },
+        {
+            "message": "created as a new version of Ops.Extension.Canvas2d.Canvas2dDrawimage_v2",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792412598744
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Full Source",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Source X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source W",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source H",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Full Destination",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Dest X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest W",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest H",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "F2emyQ",
+    "docs": {
+        "ports": []
+    }
+}
