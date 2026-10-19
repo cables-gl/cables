@@ -89,7 +89,7 @@ function onFilterChange()
     default:
         cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
     }
-    reload();
+    needsUpdate = true;
 }
 
 outTexture.set(CGL.Texture.getEmptyTexture(cgl));
