@@ -27,15 +27,16 @@ inExec.onTriggered = () =>
     {
         const ctx = op.patch.tempData.canvasCompose.ctx;
         ctx.save();
+        const radius = Math.max(0, inRadius.get());
         let x = inX.get();
         let y = inY.get();
-        if (inAlignX.get() == "Left") x += inRadius.get();
-        else if (inAlignX.get() == "Right") x -= inRadius.get();
-        if (inAlignY.get() == "Top") y += inRadius.get();
-        else if (inAlignY.get() == "Bottom") y -= inRadius.get();
+        if (inAlignX.get() == "Left") x += radius;
+        else if (inAlignX.get() == "Right") x -= radius;
+        if (inAlignY.get() == "Top") y += radius;
+        else if (inAlignY.get() == "Bottom") y -= radius;
 
         ctx.beginPath();
-        ctx.arc(x, y, inRadius.get(), inStartAngle.get() * CGL.DEG2RAD, inEndAngle.get() * CGL.DEG2RAD, inAngleFlip.get());
+        ctx.arc(x, y, radius, inStartAngle.get() * CGL.DEG2RAD, inEndAngle.get() * CGL.DEG2RAD, inAngleFlip.get());
 
         if (inMeth.get() == "Fill") ctx.fill();
         else if (inMeth.get() == "Stroke") ctx.stroke();
