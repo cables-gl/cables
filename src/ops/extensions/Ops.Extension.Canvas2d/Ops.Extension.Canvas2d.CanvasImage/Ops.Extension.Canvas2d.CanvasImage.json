@@ -1,0 +1,62 @@
+{
+    "id": "f477fe8a-51ba-4160-b62b-b9cb4603491f",
+    "created": 1792409358008,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Html.Elements.ImageElement_v3",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792409358008,
+            "cloneOf": "c760cd5e-0b4f-4c78-bd6c-c1dd87f4759e"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Image Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Error",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Loaded"
+            }
+        ]
+    },
+    "summary": "image(img) element op",
+    "license": "MIT",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "isReleased": false
+}
