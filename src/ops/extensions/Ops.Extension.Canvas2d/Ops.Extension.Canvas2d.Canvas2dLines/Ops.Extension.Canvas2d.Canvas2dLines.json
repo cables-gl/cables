@@ -22,12 +22,22 @@
             },
             {
                 "type": 0,
-                "name": "Mode",
-                "subType": "string"
+                "name": "Closed",
+                "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Closed",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Fill",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Stroke",
                 "subType": "boolean"
             }
         ],
