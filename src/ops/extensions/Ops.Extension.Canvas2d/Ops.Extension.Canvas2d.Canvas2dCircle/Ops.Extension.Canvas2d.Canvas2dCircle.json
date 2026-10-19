@@ -54,6 +54,26 @@
             },
             {
                 "type": 0,
+                "name": "Align X index",
+                "values": [
+                    "Left",
+                    "Center",
+                    "Right"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Align Y index",
+                "values": [
+                    "Top",
+                    "Middle",
+                    "Bottom"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Method index",
                 "values": [
                     "Fill",
