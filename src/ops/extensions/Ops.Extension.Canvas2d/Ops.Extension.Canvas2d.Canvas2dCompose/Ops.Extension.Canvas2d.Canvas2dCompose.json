@@ -35,6 +35,15 @@
             },
             {
                 "type": 0,
+                "name": "Size index",
+                "values": [
+                    "Manual",
+                    "Maximize"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Width",
                 "subType": "integer"
             },
@@ -47,6 +56,31 @@
                 "type": 0,
                 "name": "Clear",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Add to DOM",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -58,6 +92,16 @@
                 "type": 2,
                 "name": "Element",
                 "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Canvas Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Canvas Height",
+                "subType": "number"
             },
             {
                 "type": 1,
