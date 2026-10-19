@@ -28,7 +28,7 @@ inExec.onTriggered = () =>
         else
         {
             ctx.beginPath();
-            ctx.roundRect(x, y, inWidth.get(), inHeight.get(), inRound.get());
+            ctx.roundRect(x, y, inWidth.get(), inHeight.get(), Math.max(0, inRound.get()));
             ctx.closePath();
 
             if (inMeth.get() == "Fill") ctx.fill();
