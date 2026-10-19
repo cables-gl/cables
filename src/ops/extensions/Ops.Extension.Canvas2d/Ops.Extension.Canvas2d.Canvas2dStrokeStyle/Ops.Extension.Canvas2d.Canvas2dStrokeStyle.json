@@ -31,26 +31,84 @@
             {
                 "type": 0,
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "LineWidth",
+                "group": "Line",
                 "subType": "number"
             },
             {
-                "type": 5,
-                "name": "LineDash"
+                "type": 0,
+                "name": "Cap index",
+                "values": [
+                    "butt",
+                    "round",
+                    "square"
+                ],
+                "group": "Line",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Join index",
+                "values": [
+                    "miter",
+                    "round",
+                    "bevel"
+                ],
+                "group": "Line",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Miter Limit",
+                "group": "Line",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dashed",
+                "group": "Dash",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Dash Length",
+                "group": "Dash",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gap Length",
+                "group": "Dash",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dash Offset",
+                "group": "Dash",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -59,5 +117,6 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "license": "MIT"
 }
