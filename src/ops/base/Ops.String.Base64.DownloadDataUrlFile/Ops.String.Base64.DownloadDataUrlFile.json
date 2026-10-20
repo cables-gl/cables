@@ -8,6 +8,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1712065810639
+        },
+        {
+            "message": "String.Base64.DownloadBase64File renamed to Ops.String.Base64.DownloadDataUrlFile",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792491638825
         }
     ],
     "layout": {
