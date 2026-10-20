@@ -19,16 +19,25 @@
             {
                 "type": 0,
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "group": "Color",
                 "subType": "number"
             }
         ],

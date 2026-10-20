@@ -36,5 +36,6 @@
             }
         ]
     },
-    "summary": "Resets translation, rotation and scale for the canvas2d ops below it"
+    "summary": "Resets translation, rotation and scale for the canvas2d ops below it",
+    "license": "MIT"
 }

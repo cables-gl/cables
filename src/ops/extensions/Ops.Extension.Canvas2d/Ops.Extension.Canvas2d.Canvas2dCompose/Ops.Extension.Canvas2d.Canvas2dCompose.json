@@ -29,17 +29,44 @@
                     "Maximize",
                     "Contain"
                 ],
+                "group": "Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Width",
+                "group": "Size",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Height",
+                "group": "Size",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Fixed Aspect Ratio",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio index",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "HDPI",
+                "group": "Pixel Density",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Max Pixel Density (DPR)",
+                "group": "Pixel Density",
+                "subType": "number"
             },
             {
                 "type": 0,
@@ -90,6 +117,11 @@
             {
                 "type": 0,
                 "name": "Canvas Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pixel Density",
                 "subType": "number"
             },
             {
