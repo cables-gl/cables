@@ -52,8 +52,8 @@ element.onload = () =>
 
 function filenameChanged(cacheBuster)
 {
-    let url = filename.get();
-    if (!url) return outError.set(true);
+    if (!filename.get()) return outError.set(true);
+    let url = op.patch.getFilePath(filename.get());
     outError.set(false);
 
     loading.set(true);
@@ -73,7 +73,7 @@ op.onFileChanged = function (fn)
 
 function removeEle()
 {
-    if (element)element.remove();
+    if (element) element.remove();
     element = null;
     outImage.set(element);
 }
