@@ -21,7 +21,7 @@ op.renderVizLayer = (ctx, layer) =>
 
     let circle = new Path2D();
     let radius = Math.min(layer.height, layer.width) / 2.4 * 0.8;
-    if (radius < 0)radius = 0;
+    if (radius < 0) radius = 0;
     circle.arc(layer.x + layer.width / 2, layer.y + layer.height / 2, radius, 0, 2 * Math.PI, false);
 
     ctx.strokeStyle = "#555";
@@ -29,11 +29,11 @@ op.renderVizLayer = (ctx, layer) =>
 
     if (isTrue)
     {
-        if (op.uiAttribs.color)ctx.fillStyle = op.uiAttribs.color;
+        if (op.uiAttribs.color) ctx.fillStyle = op.uiAttribs.color;
         else ctx.fillStyle = "#ccc";
 
         let circle = new Path2D();
-        circle.arc(layer.x + layer.width / 2, layer.y + layer.height / 2, radius - (ctx.lineWidth / 2), 0, 2 * Math.PI, false);
+        circle.arc(layer.x + layer.width / 2, layer.y + layer.height / 2, Math.max(0, radius - (ctx.lineWidth / 2)), 0, 2 * Math.PI, false);
         ctx.fill(circle);
     }
 };
