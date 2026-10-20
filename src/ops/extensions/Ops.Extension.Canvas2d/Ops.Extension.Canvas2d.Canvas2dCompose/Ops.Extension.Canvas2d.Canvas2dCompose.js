@@ -1,6 +1,6 @@
 const canv = document.createElement("canvas");
 const
-    exec = op.inTrigger("Exec"),
+    exec = op.inTriggerButton("Exec"),
     inCanvas = op.inObject("Canvas Copy", null, "element"),
     inSize = op.inSwitch("Size", ["Manual", "Maximize", "Contain"], "Manual"),
     width = op.inInt("Width", 256),
