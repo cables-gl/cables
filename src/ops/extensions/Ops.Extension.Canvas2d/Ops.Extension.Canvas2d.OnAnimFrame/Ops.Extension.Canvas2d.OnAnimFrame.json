@@ -1,0 +1,49 @@
+{
+    "id": "810637ca-fdd5-4735-8039-a976f72deac7",
+    "created": 1792492473894,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792492473905
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Delta",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Frame",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Triggers every frame of the patch's render loop, like requestAnimationFrame",
+    "isReleased": false,
+    "docs": {
+        "ports": []
+    }
+}
