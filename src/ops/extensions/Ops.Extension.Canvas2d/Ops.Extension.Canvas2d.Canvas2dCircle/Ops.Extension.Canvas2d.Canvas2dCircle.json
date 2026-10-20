@@ -8,12 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708357534149
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dCircle renamed to Ops.Extension.Canvas2d.Canvas2dCircle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409058339
         }
     ],
     "layout": {
@@ -95,7 +89,9 @@
     ],
     "isReleased": false,
     "license": "MIT",
-    "exampleProjectId": "Rxzbuy",
-    "docs": {},
+    "exampleProjectId": "dZACAy",
+    "docs": {
+        "ports": []
+    },
     "summary": "Draws a circle or arc on a canvas2d, filled, stroked or as clip path"
 }

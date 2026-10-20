@@ -8,18 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708358895781
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dStrokeStyle renamed to Ops.Team.Canvas2d.Canvas2dStrokeStyle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750159123206
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dStrokeStyle renamed to Ops.Extension.Canvas2d.Canvas2dStrokeStyle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409012709
         }
     ],
     "layout": {
@@ -119,5 +107,10 @@
         ]
     },
     "license": "MIT",
-    "summary": "Sets stroke color, line width, caps, joins and dashes for the canvas2d ops below it"
+    "summary": "Sets stroke color, line width, caps, joins and dashes for the canvas2d ops below it",
+    "isReleased": false,
+    "exampleProjectId": "uWCEAy",
+    "docs": {
+        "ports": []
+    }
 }

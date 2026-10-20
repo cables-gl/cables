@@ -8,18 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708944583951
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dTransform renamed to Ops.Team.Canvas2d.Canvas2dTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750159006864
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dTransform renamed to Ops.Extension.Canvas2d.Canvas2dTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792408999845
         }
     ],
     "layout": {
@@ -59,5 +47,11 @@
     "coreLibs": [
         "cgl"
     ],
-    "summary": "Translates, rotates and scales the canvas2d ops below it"
+    "summary": "Translates, rotates and scales the canvas2d ops below it",
+    "isReleased": false,
+    "license": "MIT",
+    "exampleProjectId": "c9ITAy",
+    "docs": {
+        "ports": []
+    }
 }

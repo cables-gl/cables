@@ -29,5 +29,11 @@
             }
         ]
     },
-    "summary": "Sets the blend mode (composite operation) for the canvas2d ops below it"
+    "summary": "Sets the blend mode (composite operation) for the canvas2d ops below it",
+    "isReleased": false,
+    "license": "MIT",
+    "exampleProjectId": "nc4BAy",
+    "docs": {
+        "ports": []
+    }
 }

@@ -55,5 +55,10 @@
             }
         ]
     },
-    "summary": "Converts a canvas element into a png, jpeg or webp image data url"
+    "summary": "Converts a canvas element into a png, jpeg or webp image data url",
+    "isReleased": false,
+    "exampleProjectId": "5wBgAy",
+    "docs": {
+        "ports": []
+    }
 }

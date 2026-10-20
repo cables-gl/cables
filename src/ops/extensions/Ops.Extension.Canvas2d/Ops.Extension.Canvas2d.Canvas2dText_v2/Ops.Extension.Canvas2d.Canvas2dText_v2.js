@@ -20,6 +20,8 @@ const
     outHeight = op.outNumber("Text Height"),
     outFontSize = op.outNumber("Drawn Font Size");
 
+inText.setUiAttribs({ "display": "text" });
+
 inWidthMode.onChange = updateUi;
 updateUi();
 

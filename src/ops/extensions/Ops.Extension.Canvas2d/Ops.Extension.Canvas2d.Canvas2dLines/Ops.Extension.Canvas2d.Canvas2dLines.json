@@ -49,5 +49,10 @@
         ]
     },
     "license": "MIT",
-    "summary": "Draws one or more lines from point arrays on a canvas2d, optionally smooth, closed or filled"
+    "summary": "Draws one or more lines from point arrays on a canvas2d, optionally smooth, closed or filled",
+    "isReleased": false,
+    "exampleProjectId": "5qMQAy",
+    "docs": {
+        "ports": []
+    }
 }

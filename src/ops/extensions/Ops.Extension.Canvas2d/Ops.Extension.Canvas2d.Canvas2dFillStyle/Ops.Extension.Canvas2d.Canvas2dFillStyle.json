@@ -8,18 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708358266766
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dFillStyle renamed to Ops.Team.Canvas2d.Canvas2dFillStyle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750158995692
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dFillStyle renamed to Ops.Extension.Canvas2d.Canvas2dFillStyle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409029182
         }
     ],
     "layout": {
@@ -52,5 +40,10 @@
         ]
     },
     "license": "MIT",
-    "summary": "Sets the fill color for the canvas2d ops below it"
+    "summary": "Sets the fill color for the canvas2d ops below it",
+    "isReleased": false,
+    "exampleProjectId": "nc4BAy",
+    "docs": {
+        "ports": []
+    }
 }

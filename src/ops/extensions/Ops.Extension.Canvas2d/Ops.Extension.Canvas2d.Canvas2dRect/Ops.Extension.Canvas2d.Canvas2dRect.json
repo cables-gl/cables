@@ -8,18 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708357534149
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dRect renamed to Ops.Team.Canvas2d.Canvas2dRect",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750159033720
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dRect renamed to Ops.Extension.Canvas2d.Canvas2dRect",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409040170
         }
     ],
     "layout": {
@@ -67,5 +55,10 @@
         ]
     },
     "license": "MIT",
-    "summary": "Draws a rectangle on a canvas2d, filled, stroked or as clip path, optionally with rounded corners"
+    "summary": "Draws a rectangle on a canvas2d, filled, stroked or as clip path, optionally with rounded corners",
+    "isReleased": false,
+    "exampleProjectId": "Rxzbuy",
+    "docs": {
+        "ports": []
+    }
 }

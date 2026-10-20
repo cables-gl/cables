@@ -8,37 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708357534149
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dCircle renamed to Ops.Team.Canvas2d.Canvas2dCircle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750159022657
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1787036695630
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dText renamed to Ops.Extension.Canvas2d.Canvas2dText",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409006728
-        },
-        {
-            "message": "Extension.Canvas2d.Canvas2dText renamed to Ops.Extension.Canvas2d.Canvas2dDrawText",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792411861963
-        },
-        {
-            "message": "cloned op from Ops.Extension.Canvas2d.Canvas2dDrawText",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792411924082,
-            "cloneOf": "cc7c7e34-3821-4425-871e-55423284fff4"
         }
     ],
     "layout": {
@@ -152,5 +121,10 @@
         "cgl"
     ],
     "license": "MIT",
-    "summary": "Draws text on a canvas2d, optionally wrapped or fitted to a width, outputs the text size"
+    "summary": "Draws text on a canvas",
+    "isReleased": false,
+    "exampleProjectId": "6lTIAy",
+    "docs": {
+        "ports": []
+    }
 }

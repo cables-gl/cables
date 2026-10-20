@@ -58,5 +58,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": false
+    "isReleased": false,
+    "exampleProjectId": "F2emyQ"
 }
