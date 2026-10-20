@@ -12,4 +12,6 @@ exec.onTriggered = () =>
 
     a.download = inFilename.get();
     a.click();
+
+    next.trigger();
 };
