@@ -48,7 +48,7 @@ inExec.onTriggered = () =>
                     dw = inDw.get(),
                     dh = inDh.get();
 
-                if (inFullDest.get()) dw = op.patch.tempData.canvasCompose.canvas.width;
+                if (inFullDest.get()) dw = (op.patch.tempData.canvasCompose.width || op.patch.tempData.canvasCompose.canvas.width);
                 const drawable = inCanv.get();
 
                 if (drawable)
@@ -57,8 +57,8 @@ inExec.onTriggered = () =>
                     {
                         dx = 0;
                         dy = 0;
-                        dw = op.patch.tempData.canvasCompose.canvas.width;
-                        dh = op.patch.tempData.canvasCompose.canvas.height;
+                        dw = (op.patch.tempData.canvasCompose.width || op.patch.tempData.canvasCompose.canvas.width);
+                        dh = (op.patch.tempData.canvasCompose.height || op.patch.tempData.canvasCompose.canvas.height);
                     }
                     if (inFullSrc.get())
                     {

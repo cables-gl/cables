@@ -12,8 +12,7 @@ inExec.onTriggered = () =>
     if (op.patch.tempData.canvasCompose)
     {
         const ctx = op.patch.tempData.canvasCompose.ctx;
-
-        ctx.imageSmoothingEnabled = false;
+        ctx.save();
 
         let x = 0;
         let y = 0;
@@ -29,7 +28,6 @@ inExec.onTriggered = () =>
         {
             ctx.beginPath();
             ctx.roundRect(x, y, inWidth.get(), inHeight.get(), Math.max(0, inRound.get()));
-            ctx.closePath();
 
             if (inMeth.get() == "Fill") ctx.fill();
             else if (inMeth.get() == "Stroke") ctx.stroke();
@@ -37,5 +35,6 @@ inExec.onTriggered = () =>
         }
 
         next.trigger();
+        ctx.restore();
     }
 };

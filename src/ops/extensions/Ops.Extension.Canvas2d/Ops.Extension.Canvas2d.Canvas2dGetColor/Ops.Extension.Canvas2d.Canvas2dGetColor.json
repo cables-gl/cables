@@ -66,5 +66,6 @@
             }
         ]
     },
-    "summary": "Reads the RGBA color of one pixel of a canvas2d"
+    "summary": "Reads the RGBA color of one pixel of a canvas2d",
+    "license": "MIT"
 }
