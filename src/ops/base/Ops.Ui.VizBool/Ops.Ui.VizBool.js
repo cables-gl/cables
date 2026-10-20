@@ -2,12 +2,27 @@ const
     inNum = op.inBool("Boolean", 0),
     outBool = op.outBoolNum("Bool");
 
+// below this op height (patch units) the viz layer has no room left, the value is shown in the title instead
+const SMALL_HEIGHT = 60;
+
 op.setUiAttrib({ "height": 100, "width": 100, "resizable": true });
 
 inNum.onChange = () =>
 {
     outBool.set(inNum.get());
+    updateTitle();
 };
+
+op.on("onUiAttribsChange", (attribs) =>
+{
+    if (attribs.hasOwnProperty("height")) updateTitle();
+});
+
+function updateTitle()
+{
+    const title = op.uiAttribs.height < SMALL_HEIGHT ? String(!!inNum.get()) : null;
+    if (op.uiAttribs.extendTitle != title) op.setUiAttrib({ "extendTitle": title });
+}
 
 op.renderVizLayer = (ctx, layer) =>
 {

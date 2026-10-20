@@ -20,6 +20,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1739782024789
+        },
+        {
+            "message": "When resized to minimum height will show the number of triggers in op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792492721384
         }
     ],
     "layout": {

@@ -7,16 +7,18 @@ const
     outCount = op.outNumber("Count"),
     next = op.outTrigger("Next");
 
+// below this op height (patch units) the viz layer has no room left, the count is shown in the title instead
+const SMALL_HEIGHT = 60;
+
 op.setUiAttrib({ "height": 100, "width": 130, "resizable": true });
 
 let lastTime = 0;
 let count = 0;
-let lh = 0;
 
 inReset.onTriggered = () =>
 {
     count = 0;
-    if (!inText.get()) op.setUiAttrib({ "extendTitle": "_____" + String(count) });
+    updateTitle();
     outCount.set(count);
 };
 
@@ -24,19 +26,30 @@ inTrigger.onTriggered = () =>
 {
     lastTime = performance.now();
     count++;
-    if (!inText.get()) op.setUiAttrib({ "extendTitle": String(count) });
+    updateTitle();
     outCount.set(count);
 
     next.trigger();
 };
 
-inText.onChange = () =>
+inText.onChange = updateTitle;
+
+op.on("onUiAttribsChange", (attribs) =>
 {
-    op.setUiAttrib({ "extendTitle": null });
-};
+    if (attribs.hasOwnProperty("height")) updateTitle();
+});
+
+function updateTitle()
+{
+    const showInTitle = !inText.get() || op.uiAttribs.height < SMALL_HEIGHT;
+    const title = showInTitle ? count + "x" : null;
+    if (op.uiAttribs.extendTitle != title) op.setUiAttrib({ "extendTitle": title });
+}
 
 op.renderVizLayer = (ctx, layer) =>
 {
+    if (layer.width <= ctx.lineWidth || layer.height <= ctx.lineWidth) return;
+
     ctx.fillStyle = "#222";
     ctx.fillRect(
         layer.x, layer.y,

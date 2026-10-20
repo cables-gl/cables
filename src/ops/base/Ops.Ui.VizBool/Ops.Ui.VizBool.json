@@ -12,6 +12,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1771335161733
+        },
+        {
+            "message": "When resized to minimum height will show true or false in the op title",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792492738512
         }
     ],
     "layout": {
