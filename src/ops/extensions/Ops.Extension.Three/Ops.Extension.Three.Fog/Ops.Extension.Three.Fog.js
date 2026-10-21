@@ -21,6 +21,5 @@ exec.onTriggered = () =>
 
 threeOp.on("inactive", () =>
 {
-    console.log("inactive......");
     threeOp.renderer.scene.fog = null;
 });

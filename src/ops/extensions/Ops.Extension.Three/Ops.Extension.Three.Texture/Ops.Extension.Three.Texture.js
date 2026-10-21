@@ -20,7 +20,6 @@ inUrl.onChange = () =>
         loadingId = op.patch.loading.finished(loadingId);
     }).catch((a, b) =>
     {
-        console.log("NEEEEEEEE", a, b);
         loadingId = op.patch.loading.finished(loadingId);
         op.setUiError("urlerror", "could not load texture: ", 2);
     });

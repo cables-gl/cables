@@ -20,7 +20,6 @@ inUrl.onChange = () =>
     {
         if (gltf)container.remove(gltf.scene);
         gltf = _gltf;
-        console.log("finish!", gltf);
         container.add(gltf.scene);
         threeOp.setSceneObject(container);
         rescale();
