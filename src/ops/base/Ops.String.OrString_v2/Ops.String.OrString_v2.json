@@ -19,15 +19,15 @@
         "portsIn": [
             {
                 "type": 5,
-                "name": "String_0",
+                "name": "String 0",
                 "longPort": 2,
-                "group": "String"
+                "group": "String "
             },
             {
                 "type": 5,
-                "name": "String_1",
+                "name": "String 1",
                 "uititle": "add port",
-                "group": "String"
+                "group": "String "
             }
         ],
         "portsOut": [

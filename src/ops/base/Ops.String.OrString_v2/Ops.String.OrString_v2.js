@@ -1,5 +1,5 @@
 const
-    inStrs = op.inMultiPort2("String", CABLES.Port.TYPE_STRING),
+    inStrs = op.inMultiPort2("String ", CABLES.Port.TYPE_STRING),
     outStr = op.outString("Result");
 
 inStrs.onChange = () =>
