@@ -50,10 +50,11 @@ function update()
         try
         {
             ele.style[inProperty.get()] = "var(--" + str + ")";
+            op.setUiError("css", null);
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("css", "could not set the css property: " + e.message, 1);
         }
     }
 
