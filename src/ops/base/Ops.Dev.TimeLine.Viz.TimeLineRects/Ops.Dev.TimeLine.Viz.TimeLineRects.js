@@ -10,7 +10,6 @@ let rect = null;
 let rects = [];
 animPort.on("tlVizHide", () =>
 {
-    console.log("heiiiiiiiiiiiide");
     for (let i = 0; i < rects.length; i++)
     {
         rects[i].setVisible(false);
@@ -19,7 +18,6 @@ animPort.on("tlVizHide", () =>
 
 animPort.on("tlVizDispose", () =>
 {
-    console.log("dispose");
     disposeRects();
 });
 
