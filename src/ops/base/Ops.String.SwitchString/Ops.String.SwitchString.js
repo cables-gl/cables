@@ -19,15 +19,15 @@ function update()
     {
         result.set(valuePorts[idx.get()].get());
     }
+
 }
 
 /* minimalcore:start */
 function updateUi()
 {
-  if(!CABLES.UI)return;
-  for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({arrow:i==idx.get()})
+    if (!CABLES.UI) return;
+    for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({ arrow: i == idx.get() })
 }
-idx.on("change",updateUi);
+idx.on("change", updateUi);
 updateUi();
 /* minimalcore:end */
-

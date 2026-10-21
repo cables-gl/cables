@@ -62,3 +62,12 @@ function onlyOnePortChange()
         update();
     }
 }
+
+function updateUi()
+{
+    if (!CABLES.UI) return;
+    for (let i = 0; i < valuePorts.length; i++) valuePorts[i].setUiAttribs({ "arrow": i == indexPort.get() });
+}
+
+indexPort.on("change", updateUi);
+updateUi();
