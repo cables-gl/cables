@@ -9,6 +9,7 @@ parse();
 function parse()
 {
     str.setUiAttribs({ "editorDiagnostics": [] });
+    op.setUiError("isarray", null);
 
     if (!str.get())
     {
@@ -22,6 +23,8 @@ function parse()
         outObj.setRef(obj);
         isValid.set(true);
         op.setUiError("invalidjson", null);
+
+        if (Array.isArray(obj)) op.setUiError("isarray", "Result is an array, not an object. Use StringToArray operator to parse arrays!", 1);
     }
     catch (ex)
     {
@@ -43,9 +46,9 @@ function parse()
         }
 
         str.setUiAttribs(
-            {
-                "editorDiagnostics": [{ "message": ex.message, "line": -1, "column": -1, "severity": 2, "fatal": true }]
-            });
+        {
+            "editorDiagnostics": [{ "message": ex.message, "line": -1, "column": -1, "severity": 2, "fatal": true }]
+        });
 
         op.setUiError("invalidjson", "INVALID JSON<br/>can not parse string to object:<br/><b> " + ex.message + "</b><br/>" + outStr);
     }
