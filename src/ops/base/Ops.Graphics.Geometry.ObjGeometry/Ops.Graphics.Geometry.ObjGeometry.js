@@ -31,7 +31,7 @@ function parseTri(parts, o)
         if (faceParts.length == 3)
         {
             o.indexVerts.push(parseInt(faceParts[0]) - 1);
-            if (faceParts[1])o.indexTexcoords.push(parseInt(faceParts[1]) - 1);
+            if (faceParts[1]) o.indexTexcoords.push(parseInt(faceParts[1]) - 1);
             o.indexNorms.push(parseInt(faceParts[2]) - 1);
         }
         else if (faceParts.length == 1)
@@ -135,8 +135,6 @@ function parse(str)
         objects.push(o);
     }
 
-    op.log("objects", objects);
-
     let finalgeom = new CGL.Geometry("objfile");
     for (let io = 0; io < objects.length; io++)
     {
@@ -144,7 +142,6 @@ function parse(str)
         geom.clear();
 
         let o = objects[io];
-        op.log(o);
 
         if (o.indexVerts.length > 0)
         {
@@ -159,14 +156,12 @@ function parse(str)
                 {
                     if (!(o.indexVerts[i] == o.indexNorms[i] && o.indexNorms[i] == o.indexTexcoords[i]))
                     {
-                        op.log("false");
                         isIndexed = false;
                         break;
                     }
                 }
             }
 
-            op.log("isIndexed", isIndexed);
             if (isIndexed)
             {
                 geom.verticesIndices = o.indexVerts;
@@ -186,8 +181,8 @@ function parse(str)
                     {
                         gVerts.push(o.verts[o.indexVerts[i] * 3 + j]);
 
-                        if (o.indexNorms.length > 0)gNorms.push(o.vertNorms[o.indexNorms[i] * 3 + j]);
-                        if (o.indexTexcoords.length > 0 && j < 2)gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
+                        if (o.indexNorms.length > 0) gNorms.push(o.vertNorms[o.indexNorms[i] * 3 + j]);
+                        if (o.indexTexcoords.length > 0 && j < 2) gTexCoords.push(o.texCoords[o.indexTexcoords[i] * 3 + j]);
                     }
                 }
 
