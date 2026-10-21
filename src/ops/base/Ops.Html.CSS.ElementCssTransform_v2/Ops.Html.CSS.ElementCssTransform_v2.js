@@ -105,10 +105,11 @@ function update()
                 ele.style["transform-origin"] = inOriginY.get() + " " + inOriginX.get();
             else
                 ele.style["transform-origin"] = "initial";
+            op.setUiError("css", null);
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("css", "could not set the transform: " + e.message, 1);
         }
 
         outEle.setRef(ele);
