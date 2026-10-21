@@ -8,6 +8,11 @@ const
 
 exe.onTriggered = function ()
 {
+    if (!navigator.getGamepads)
+    {
+        op.setUiError("unsupported", "the gamepad api is not available, it needs a secure context (https or localhost)", 1);
+        return;
+    }
     let gamePads = navigator.getGamepads();
     let count = 0;
 
