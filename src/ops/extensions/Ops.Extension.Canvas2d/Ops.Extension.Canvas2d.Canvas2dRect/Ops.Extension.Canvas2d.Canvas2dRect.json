@@ -56,7 +56,7 @@
     },
     "license": "MIT",
     "summary": "Draws a rectangle on a canvas2d, filled, stroked or as clip path, optionally with rounded corners",
-    "isReleased": false,
+    "isReleased": true,
     "exampleProjectId": "Rxzbuy",
     "docs": {
         "ports": []
