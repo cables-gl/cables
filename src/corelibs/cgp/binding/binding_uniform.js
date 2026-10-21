@@ -24,7 +24,6 @@ export class BindingUniform extends Binding
     {
         super(cgp, name, options);
 
-        console.log("new binding uniform", this.id);
     }
 
     /**
@@ -34,7 +33,6 @@ export class BindingUniform extends Binding
     copy(shader)
     {
         const b = new BindingUniform(this.cgp, this.name, this.options);
-        console.log("copybinuni", this.id, b.id);
         b.stage = this.stage;
 
         for (let i = 0; i < this.#uniforms.length; i++)
@@ -61,7 +59,6 @@ export class BindingUniform extends Binding
     {
         this.#uniforms.push(u);
         this.needsRebuildBindgroup = true;
-        console.log(this.#uniforms, this);
         return u;
     }
 
@@ -158,8 +155,6 @@ export class BindingUniform extends Binding
         {
             this.#uniforms[i].copyToBuffer(this.cgpBuffer[inst].floatArr, off);
 
-            if (this.#uniforms[i].gpuBufferChanged)
-                console.log("un changed", this.cgpBuffer[inst].floatArr);
 
             info.uniforms.push(this.#uniforms[i].getInfo());
 

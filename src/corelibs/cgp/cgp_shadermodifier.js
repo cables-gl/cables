@@ -89,7 +89,6 @@ class ShaderModifier
                 "shader": shader.copy()
             };
 
-            console.log("mod shaderrrrrrrrrrr", shader.getName(), this._boundShader.shader.getName());
 
             this._addModulesToShader(this._boundShader.shader);
             this._updateDefinesShader(this._boundShader.shader);
@@ -215,10 +214,8 @@ class ShaderModifier
 
             if (!shader.hasUniform(name))
             {
-                console.log("shadermod uni ", name, shader.id, uni.stage);
                 const u = new CgpUniform(shader, uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
 
-                console.log(uni);
                 shader.addUniform(u, uni.stage);
             }
         }

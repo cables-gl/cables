@@ -57,7 +57,6 @@ const ShaderGraph = class extends Events
 
     updateVertex()
     {
-        console.log("update vertex", this.#portVert.isLinked());
 
         if (this.#portVert.isLinked()) this.progVert.compile();
         else

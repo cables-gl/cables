@@ -103,12 +103,10 @@ export function extendMeshWithFeedback(Mesh)
             for (i = 0; i < this._feedBacks.length; i++) names.push(this._feedBacks[i].nameOut);
             shader.setFeedbackNames(names);
 
-            console.log("feedbacknames", names);
 
             shader.compile();
             this._feedBacksChanged = false;
             this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, null);
-            console.log("changed finished");
             return;
         }
 

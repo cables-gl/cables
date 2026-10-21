@@ -181,7 +181,6 @@ export class BindGroup
         }
         catch (e)
         {
-            console.log(bg);
             console.error(e);
         }
 

@@ -12,7 +12,6 @@ export class ShaderGraphOp
         this.enabled = true;
         this.info = null;
 
-        console.log("texs pt", this.parseCode);
 
         if (src)
             this.parseCode(src);

@@ -344,7 +344,6 @@ export class CgpShader extends CgShader
                 }
                 if (hasErrors)
                 {
-                    console.log("has errrrrrrrrrr");
                     CABLES.UI.showShaderErrorCgp(this, compInfo, this.getProcessedSource());
                 }
 
@@ -482,8 +481,6 @@ export class CgpShader extends CgShader
         }
 
         this.needsPipelineUpdate = "add uniform";
-        console.log("adduni2", this._name, u.name, this.id, binding, CgpShader.getStageString(stage));
-        console.log("code", binding.getShaderHeaderCode(this, 0));
 
         // if (!this.defaultBindGroup.hasBinding(binding)) this.defaultBindGroup.addBinding(binding);
         return u;
@@ -506,7 +503,6 @@ export class CgpShader extends CgShader
     {
         this.bind();
         const shader = new CgpShader(this._cgp, this._name + " copy", this.options);
-        console.log("copyyyyyy", this.id, shader.id);
         shader.setSource(this._src);
 
         shader._modules = JSON.parse(JSON.stringify(this._modules));

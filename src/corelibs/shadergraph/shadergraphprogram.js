@@ -412,7 +412,6 @@ export class ShaderGraphProgram extends Events
         this.srcHeader = this._headSrc + this._headFuncSrc;
 
         this.emitEvent("compiled");
-        console.log("compiled " + (this.options.name || "") + " " + this.options.reason);
     }
 
     static getNewId()

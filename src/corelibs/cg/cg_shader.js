@@ -103,7 +103,6 @@ export class CgShader extends Events
         for (let i = 0; i < this._uniforms.length; i++)
         {
 
-            console.log("hasuniiiiiiiiiiiiiii", this._uniforms[i].getName(), name);
             if (this._uniforms[i].getName() == name) return true;
         }
         return false;

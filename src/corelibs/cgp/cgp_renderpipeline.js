@@ -92,7 +92,6 @@ export class RenderPipeline extends Pipeline
 
         if (shader.bindingsNeedPipeUpdate())
         {
-            console.log("binding needs uptate");
             needsRebuildReason = "bindings needs update";
             this.needsRebuildBindgroup = true;
         }
@@ -163,7 +162,6 @@ export class RenderPipeline extends Pipeline
             this.cgp.popErrorScope(
                 () =>
                 {
-                    console.log("this.#pipeCfg", this.#pipeCfg);
                 });
         }
 

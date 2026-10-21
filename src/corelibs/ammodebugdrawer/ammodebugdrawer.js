@@ -181,7 +181,6 @@ export class AmmoDebugDrawer
     // virtual void   drawTriangle(const btVector3& a, const btVector3& b, const btVector3& c, const btVector3& color, btScalar alpha);
     drawTriangle(a, b, c, color)
     {
-        console.log("draw triangle!");
         this.drawLine(a, b, color);
         this.drawLine(b, c, color);
         this.drawLine(a, c, color);

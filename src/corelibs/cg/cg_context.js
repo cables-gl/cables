@@ -475,7 +475,6 @@ export class CgContext extends Events
                 anchor.download = filename;
                 anchor.href = URL.createObjectURL(blob);
 
-                console.log("scrrenshot");
                 setTimeout(function ()
                 {
                     anchor.click();

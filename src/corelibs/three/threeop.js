@@ -28,7 +28,6 @@ export class ThreeOp extends Events
         op.threeOp = this;
         op.onDelete = () =>
         {
-            console.log("ondeleteeeeeeeeee");
             this.remove();
         };
 
@@ -105,7 +104,6 @@ export class ThreeOp extends Events
             this.#currentParent.remove(this.#object);
             this.#currentParent = null;
 
-            console.log("remove from scene...");
         }
         this.emitEvent("inactive");
         this.isInScene = false;

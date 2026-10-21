@@ -107,7 +107,6 @@ export class ComputePipeline extends Pipeline
             this.cgp.popErrorScope(
                 () =>
                 {
-                    console.log("this.#pipeCfg", this.#pipeCfg);
                 });
         }
 

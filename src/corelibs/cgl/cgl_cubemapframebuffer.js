@@ -237,7 +237,6 @@ class CubemapFramebuffer
             break;
         default:
             console.error("incomplete framebuffer", status);
-            console.log(this);
             throw new Error("Incomplete framebuffer: " + status);
         }
     }

@@ -31,7 +31,6 @@ export class BindingTexture extends Binding
             });
         }
 
-        console.log(this.uniform);
     }
 
     copy()
