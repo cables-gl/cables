@@ -16,7 +16,6 @@ let arr = [];
 
 op.on("delete", () =>
 {
-    console.log("delede", op.tempData);
     if (op.tempData.scopeAreaEndOp) op.patch.deleteOp(op.tempData.scopeAreaEndOp.id);
 });
 
