@@ -28,22 +28,25 @@ function cutHex(h = "")
 
 exec.onTriggered = () =>
 {
-    if (!window.EyeDropper) return;
-    let eyeDropper = new EyeDropper();
-
-    try
+    if (!window.EyeDropper)
     {
-        let picker = eyeDropper.open();
-        picker.then((a) =>
+        op.setUiError("unsupported", "The EyeDropper API is not supported in this browser", 1);
+        return;
+    }
+    op.setUiError("unsupported", null);
+
+    new EyeDropper().open()
+        .then((a) =>
         {
+            op.setUiError("pick", null);
             result.set(a.sRGBHex);
             outR.set(hexToR(a.sRGBHex) / 255);
-            outB.set(hexToG(a.sRGBHex) / 255);
-            outG.set(hexToB(a.sRGBHex) / 255);
+            outG.set(hexToG(a.sRGBHex) / 255);
+            outB.set(hexToB(a.sRGBHex) / 255);
+        })
+        .catch((e) =>
+        {
+            if (e.name == "AbortError") return;
+            op.setUiError("pick", "could not pick a color: " + e.message, 1);
         });
-    }
-    catch (e)
-    {
-        op.logError(e);
-    }
 };
