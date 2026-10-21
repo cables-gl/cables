@@ -104,10 +104,11 @@ function checkFont()
     try
     {
         fontLoaded = document.fonts.check("20px \"" + inFont.get() + "\"");
+        op.setUiError("font", null);
     }
     catch (ex)
     {
-        op.logError(ex);
+        op.setUiError("font", "invalid font name: " + ex.message, 1);
     }
 
     if (!oldFontLoaded && fontLoaded)
@@ -449,10 +450,10 @@ function generateTexture()
 
     if (!font.texture)
         font.texture = CGL.Texture.createFromImage(cgl, font.canvas,
-            {
-                "filter": filter,
-                "anisotropic": parseFloat(aniso.get())
-            });
+        {
+            "filter": filter,
+            "anisotropic": parseFloat(aniso.get())
+        });
 
     font.texture.setSize(textureSize, textureSize);
 
