@@ -4,11 +4,12 @@ const MIDIChannels = Array.from(Array(16).keys()).map((i) => { return i + 1; });
 const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const CC_MSG = 0xb;
+
 function getMIDINote(dataByte1LSB)
 {
-    return dataByte1LSB <= 126
-        ? `${NOTE_VALUES[dataByte1LSB % 12]}${Math.floor(dataByte1LSB / 12) - 2} - ${dataByte1LSB}`
-        : "NO NOTE";
+    return dataByte1LSB <= 126 ?
+        `${NOTE_VALUES[dataByte1LSB % 12]}${Math.floor(dataByte1LSB / 12) - 2} - ${dataByte1LSB}` :
+        "NO NOTE";
 }
 
 /* IN */
@@ -34,7 +35,6 @@ const killAllNotes = () =>
             eventOut.set(null);
             eventOut.set({ "data": [(NOTE_OFF << 4 | channel), i, 0] });
         }
-        op.log("killAllNotes transpose");
     }
 };
 
@@ -93,12 +93,15 @@ inEvent.onChange = () =>
         if (event.data[0] === (NOTE_ON << 4 | (event.channel)))
         {
             eventOut.set(null);
-            eventOut.set({ ...newEvent,
+            eventOut.set(
+            {
+                ...newEvent,
                 "data": [(NOTE_OFF << 4 | (event.channel)), note, 0],
                 "note": note,
                 "index": note,
                 "velocity": 0,
-                "newNote": [note, getMIDINote(note)], });
+                "newNote": [note, getMIDINote(note)],
+            });
         }
 
         newEvent.note = newNoteIndex;
