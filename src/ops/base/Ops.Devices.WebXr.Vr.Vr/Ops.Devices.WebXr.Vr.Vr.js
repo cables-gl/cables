@@ -46,17 +46,38 @@ shader.setSource(attachments.present_vert, attachments.present_frag);
 
 inStart.onTriggered = startVr;
 inStop.onTriggered = stopVr;
-inButtonStyle.onChange = () => { if (buttonEle)buttonEle.style = inButtonStyle.get(); };
+inButtonStyle.onChange = () => { if (buttonEle) buttonEle.style = inButtonStyle.get(); };
+
+const NO_XR_TEXT = "WebXR is not available in this browser, it needs a WebXR capable browser and a secure https connection";
 
 if (xr) xr.isSessionSupported("immersive-" + inImmersion.get().toLowerCase()).then(
-    (r) =>
+    (supported) =>
     {
-        outVr.set(true);
+        outVr.set(supported);
 
-        if (r) initButton();
-        else removeButton();
+        if (supported)
+        {
+            op.setUiError("xr", null);
+            initButton();
+        }
+        else
+        {
+            op.setUiError("xr", "immersive " + inImmersion.get() + " is not supported on this device", 1);
+            removeButton();
+        }
+    },
+    (e) =>
+    {
+        outVr.set(false);
+        op.setUiError("xr", "could not check WebXR support: " + (e.message || e), 1);
+        removeButton();
     });
-else removeButton();
+else
+{
+    outVr.set(false);
+    op.setUiError("xr", NO_XR_TEXT, 1);
+    removeButton();
+}
 
 op.onDelete = () =>
 {
@@ -65,13 +86,13 @@ op.onDelete = () =>
 
 inShowButton.onChange = () =>
 {
-    if (!inShowButton.get())removeButton();
+    if (!inShowButton.get()) removeButton();
     else initButton();
 };
 
 function stopVr()
 {
-    if (xrSession)xrSession.end();
+    if (xrSession) xrSession.end();
     xrSession = null;
     outSession.set(false);
 
@@ -89,6 +110,12 @@ function startVr()
         return;
     }
 
+    if (!xr)
+    {
+        op.setUiError("xr", NO_XR_TEXT, 1);
+        return;
+    }
+
     xr.requestSession(
         "immersive-" + inImmersion.get().toLowerCase(),
         {
@@ -96,41 +123,41 @@ function startVr()
         }
     ).then(
         async (session) =>
-        {
-            xrSession = session;
-            outSession.set(true);
-
-            xrSession.requestReferenceSpace("local").then(
-                (refSpace) =>
-                {
-                    refSpaceLocal = refSpace;
-                });
-
-            xrSession.requestReferenceSpace("local-floor").then(
-                (refSpace) =>
-                {
-                    refSpaceLocalFloor = refSpace;
-                    outHasLocalFloor.set(true);
-                });
-
-            if (xrSession)
             {
-                await cgl.gl.makeXRCompatible();
+                op.setUiError("xr", null);
+                xrSession = session;
+                outSession.set(true);
 
-                let canvas = cgl.canvas;
-                webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+                xrSession.requestReferenceSpace("local").then(
+                    (refSpace) =>
+                    {
+                        refSpaceLocal = refSpace;
+                    });
 
-                xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
-                xrSession.requestAnimationFrame(onXRFrame);
+                xrSession.requestReferenceSpace("local-floor").then(
+                    (refSpace) =>
+                    {
+                        refSpaceLocalFloor = refSpace;
+                        outHasLocalFloor.set(true);
+                    });
 
-                console.log("enabledFeatures", xrSession.enabledFeatures);
-            }
-        },
-        (err) =>
-        {
-            // error....
-            op.error(err);
-        });
+                if (xrSession)
+                {
+                    await cgl.gl.makeXRCompatible();
+
+                    let canvas = cgl.canvas;
+                    webGLRenContext = canvas.getContext("webgl2", { "xrCompatible": true });
+
+                    xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
+                    xrSession.requestAnimationFrame(onXRFrame);
+
+                    console.log("enabledFeatures", xrSession.enabledFeatures);
+                }
+            },
+            (err) =>
+            {
+                op.setUiError("xr", "could not start WebXR session: " + (err.message || err), 1);
+            });
 }
 
 function onXRFrame(hrTime, xrFrame)
@@ -185,10 +212,10 @@ function onXRFrame(hrTime, xrFrame)
             msEyes[i] = performance.now() - start;
             renderPost();
 
-            if (cgl.lastMesh)cgl.lastMesh.unBind();
+            if (cgl.lastMesh) cgl.lastMesh.unBind();
         }
 
-        if (cgl.lastMesh)cgl.lastMesh.unBind();
+        if (cgl.lastMesh) cgl.lastMesh.unBind();
 
         if (inRender2Tex.get()) r2texEnd();
 
@@ -207,11 +234,11 @@ function onXRFrame(hrTime, xrFrame)
             mat4.ortho(cgl.pMatrix, 0, glLayer.framebufferWidth, glLayer.framebufferHeight, 0, -10, 10);
             cgl.gl.viewport(0, 0, glLayer.framebufferWidth, glLayer.framebufferHeight);
 
-            if (!mesh)rebuildRectangle();
+            if (!mesh) rebuildRectangle();
 
             cgl.setTexture(0, outTex.get().tex);
 
-            if (inShader.isLinked())mesh.render(inShader.get());
+            if (inShader.isLinked()) mesh.render(inShader.get());
             else mesh.render(shader);
 
             cgl.popPMatrix();
@@ -289,7 +316,7 @@ function initButton()
 
     buttonEle = document.createElement("div");
     let container = op.patch.cgl.canvas.parentElement;
-    if (container)container.appendChild(buttonEle);
+    if (container) container.appendChild(buttonEle);
     buttonEle.addEventListener("click", startVr);
     buttonEle.addEventListener("touchstart", startVr);
     buttonEle.style = inButtonStyle.get();
@@ -297,7 +324,7 @@ function initButton()
 
 function removeButton()
 {
-    if (buttonEle)buttonEle.remove();
+    if (buttonEle) buttonEle.remove();
 }
 
 msaa.onChange = () =>
@@ -330,7 +357,8 @@ function r2texStart()
         if (msaa.get() == "4x") msSamples = 4;
         if (msaa.get() == "8x") msSamples = 8;
 
-        fb = new CGL.Framebuffer2(cgl, w, h, {
+        fb = new CGL.Framebuffer2(cgl, w, h,
+        {
             "name": "render2texture " + op.id,
             "isFloatingPointTexture": false,
             "multisampling": ms,
@@ -359,7 +387,8 @@ function r2texEnd()
 
 function rebuildRectangle()
 {
-    let xx = 0, xy = 0;
+    let xx = 0,
+        xy = 0;
 
     const w = glLayer.framebufferWidth;
     const h = glLayer.framebufferHeight;
