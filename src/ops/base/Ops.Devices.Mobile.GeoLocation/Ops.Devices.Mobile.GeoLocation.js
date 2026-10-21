@@ -8,14 +8,17 @@ const
 
 if (supported)
     navigator.geolocation.watchPosition(updatePos, error);
+else
+    op.setUiError("geo", "geolocation is not supported in this browser", 1);
 
 function error(err)
 {
-    console.error(err);
+    op.setUiError("geo", "could not get the location: " + err.message, 1);
 }
 
 function updatePos(position)
 {
+    op.setUiError("geo", null);
     if (position.coords)
     {
         outLat.set(position.coords.latitude);

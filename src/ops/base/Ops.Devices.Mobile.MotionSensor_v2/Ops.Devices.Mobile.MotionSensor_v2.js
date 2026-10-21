@@ -82,7 +82,7 @@ req.onTriggered = function ()
             .catch((e) =>
             {
                 outPermissions.set("error: " + e.message);
-                console.error(e);
+                op.setUiError("permission", "no permission for motion sensors: " + e.message, 1);
             });
 
         window.DeviceOrientationEvent.requestPermission()
@@ -99,7 +99,7 @@ req.onTriggered = function ()
             .catch((e) =>
             {
                 outPermissions.set("error: " + e.message);
-                console.error(e);
+                op.setUiError("permission", "no permission for motion sensors: " + e.message, 1);
             });
     }
     else
