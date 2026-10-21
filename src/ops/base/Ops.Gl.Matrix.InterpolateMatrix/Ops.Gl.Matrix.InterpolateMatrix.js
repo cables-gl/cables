@@ -23,10 +23,11 @@ exe.onTriggered = function ()
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
         outArr.set(null);
-        op.logError("arrays wrong");
+        op.setUiError("arrays", "both matrices have to be set and have the same length", 1);
     }
     else
     {
+        op.setUiError("arrays", null);
         getYPR(a, arr1);
         getYPR(b, arr2);
 
