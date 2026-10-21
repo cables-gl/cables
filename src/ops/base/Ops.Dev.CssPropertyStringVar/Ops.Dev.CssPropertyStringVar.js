@@ -49,10 +49,11 @@ function update()
         {
             if (ele.style[inProperty.get()] != str)
                 ele.style[inProperty.get()] = "var(--" + varName + ")";
+            op.setUiError("css", null);
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("css", "could not set the css property: " + e.message, 1);
         }
     }
     else
