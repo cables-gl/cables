@@ -120,10 +120,11 @@ function update()
             }
             else
                 ele.style.transform = "";
+            op.setUiError("css", null);
         }
         catch (e)
         {
-            op.logError(e);
+            op.setUiError("css", "could not set the position: " + e.message, 1);
         }
 
         outEle.setRef(ele);
