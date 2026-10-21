@@ -23,12 +23,12 @@ let pathPoints = [0, 0, 0];
 
 const mod = new CGL.ShaderModifier(cgl, op.name, { "opId": op.id });
 mod.addModule(
-    {
-        "title": op.objName,
-        "name": "MODULE_VERTEX_POSITION",
-        "srcHeadVert": attachments.pathfollow_head_vert,
-        "srcBodyVert": attachments.pathfollow_vert
-    });
+{
+    "title": op.objName,
+    "name": "MODULE_VERTEX_POSITION",
+    "srcHeadVert": attachments.pathfollow_head_vert,
+    "srcBodyVert": attachments.pathfollow_vert
+});
 
 mod.addUniform("f", "MOD_maxDistance", inMaxDistance);
 mod.addUniform("f", "MOD_offset", inOffset);
@@ -87,7 +87,6 @@ function getRandomVec(size)
 
 function rebuild()
 {
-    op.log("rebuild");
 
     mesh = null;
     needsRebuild = false;
