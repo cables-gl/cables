@@ -123,12 +123,13 @@ function setDevice()
 
 function onMIDIFailure()
 {
-    op.setUiAttribs({ "warning": "No MIDI support in your browser." });
+    op.setUiError("nomidi", "No MIDI support in this browser, or MIDI access was denied", 1);
 }
 
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
+    op.setUiError("nomidi", null);
     const inputs = midi.inputs.values();
     const outputs = midi.outputs.values();
 
