@@ -100,7 +100,7 @@ inFPSMax.onChange =
 
 op.patch.cgl.on("resize", () =>
 {
-    if (mediaRecorder && mediaRecorder.state === "active")mediaRecorder.stop();
+    if (mediaRecorder && mediaRecorder.state === "active") mediaRecorder.stop();
     mediaRecorder = null;
 });
 
@@ -186,7 +186,7 @@ function setupMediaRecorder()
             }
             inAudio.get().connect(streamAudio);
 
-            if (inMedia.get() === "Audio+Video")stream = new MediaStream([...streamVid.getTracks(), ...streamAudio.stream.getTracks()]);
+            if (inMedia.get() === "Audio+Video") stream = new MediaStream([...streamVid.getTracks(), ...streamAudio.stream.getTracks()]);
             else stream = streamAudio.stream ? streamAudio.stream : streamAudio;
         }
 
@@ -194,8 +194,6 @@ function setupMediaRecorder()
     }
     catch (err)
     {
-        op.error(err);
-        op.error("error mr constructor: ", err);
         outError.set(err.message);
         op.setUiError("contr", "MediaRecorder error: " + err.message);
     }
@@ -213,7 +211,7 @@ function setupMediaRecorder()
 // The nested try blocks will be simplified when Chrome 47 moves to Stable
 function startRecording()
 {
-    if (!mediaRecorder)setupMediaRecorder();
+    if (!mediaRecorder) setupMediaRecorder();
     if (!mediaRecorder)
     {
         op.setUiError("noobj", "could not create mediarecorder, try setting all parameters");
@@ -235,7 +233,6 @@ function startRecording()
         mediaRecorder.pause();
         interValRecording();
     }
-    op.log("MediaRecorder started", mediaRecorder);
 }
 
 function interValRecording()
@@ -291,8 +288,8 @@ function download()
     a.href = url;
     const codec = mediaRecorder.mimeType;
     let ext = "webm";
-    if (codec.indexOf("video/x-matroska") >= 0)ext = "mkv";
-    if (codec.indexOf("video/mp4") >= 0)ext = "mp4";
+    if (codec.indexOf("video/x-matroska") >= 0) ext = "mkv";
+    if (codec.indexOf("video/mp4") >= 0) ext = "mp4";
 
     if (inDownl.get())
     {
