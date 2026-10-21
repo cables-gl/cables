@@ -36,9 +36,9 @@ inTrigger.onTriggered = () =>
     if (inCustomEase.get())
     {
         const easeAn = inCustomEase.get();
-        if (inCursomEaseFlip.get())perc = 1 - perc;
+        if (inCursomEaseFlip.get()) perc = 1 - perc;
         perc = easeAn.getValue(perc * easeAn.getLength());
-        if (inCursomEaseFlip.get())perc = 1 - perc;
+        if (inCursomEaseFlip.get()) perc = 1 - perc;
     }
 
     if (arr1 && arr2) ipMat(perc);
@@ -120,10 +120,11 @@ function ipMat(perc)
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
         outArr.set(null);
-        op.logError("arrays wrong", arr1.length, arr2.length);
+        op.setUiError("arrays", "both matrices have to be set and have the same length", 1);
     }
     else
     {
+        op.setUiError("arrays", null);
         getYPR(a, arr1);
         getYPR(b, arr2);
 
