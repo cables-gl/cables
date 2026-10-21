@@ -244,14 +244,14 @@ inSearch.onChange =
                     }
                 }
             }
-            catch (e)
-            {
-                str = "object can not be displayed as string\n" + e.message;
-            }
+        catch (e)
+        {
+            str = "object can not be displayed as string\n" + e.message;
+        }
 
         if (obj && obj.constructor && (obj.constructor.name == "String" || CABLES.isNumeric(obj) || Array.isArray(obj)))
         {
-            op.setUiError("notobj", "The connected is not of type object! ", 1);
+            op.setUiError("notobj", "The connected is not of type object! ", 0);
             str += "\nnot an object!\n";
         }
         else op.setUiError("notobj", null);
@@ -307,14 +307,14 @@ op.renderVizLayer = (ctx, layer, viz) =>
     ctx.scale(layer.scale, layer.scale);
 
     viz.renderText(ctx, layer, lines,
-        {
-            "zoomText": inZoomText.get(),
-            "showLineNum": inLineNums.get(),
-            "highlightLines": { "lines": hlLines },
-            "syntax": "js",
-            "fontSize": inFontSize.get(),
-            "scroll": inPos.get()
-        });
+    {
+        "zoomText": inZoomText.get(),
+        "showLineNum": inLineNums.get(),
+        "highlightLines": { "lines": hlLines },
+        "syntax": "js",
+        "fontSize": inFontSize.get(),
+        "scroll": inPos.get()
+    });
 
     ctx.restore();
 };
