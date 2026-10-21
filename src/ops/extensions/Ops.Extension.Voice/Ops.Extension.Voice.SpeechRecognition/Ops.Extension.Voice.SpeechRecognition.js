@@ -103,7 +103,6 @@ function setup()
         }
 
         op.setUiError("recerr", "recognition error: " + event.error + (event.message ? " " + event.message : ""), 1);
-        op.logError("recognition error", event.error, event.message);
     };
 
     recognition.onresult = (event) =>
@@ -145,6 +144,6 @@ function start()
     }
     catch (e)
     {
-        op.logError(e);
+        op.setUiError("recerr", "could not start speech recognition: " + (e.message || e), 1);
     }
 }
