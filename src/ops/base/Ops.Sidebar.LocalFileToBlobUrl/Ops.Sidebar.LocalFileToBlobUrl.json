@@ -1,0 +1,108 @@
+{
+    "id": "18030da9-210f-4852-b9e4-72d28b69f940",
+    "created": 1792582640019,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792582640037
+        },
+        {
+            "message": "Local.LocalFileToBlob renamed to Ops.Local.LocalFileToBlobUrl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792582716943
+        },
+        {
+            "message": "Local.LocalFileToBlobUrl renamed to Ops.Sidebar.LocalFileToBlobUrl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792582748309
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 5,
+                "name": "Button Text"
+            },
+            {
+                "type": 5,
+                "name": "Accept Files"
+            },
+            {
+                "type": 0,
+                "name": "Allow Multiple Files",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Id"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Show Dialog"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            },
+            {
+                "type": 5,
+                "name": "Blob URL"
+            },
+            {
+                "type": 5,
+                "name": "Filename"
+            },
+            {
+                "type": 2,
+                "name": "File Object"
+            },
+            {
+                "type": 0,
+                "name": "Num Files",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Blob URLs"
+            },
+            {
+                "type": 3,
+                "name": "Filenames"
+            },
+            {
+                "type": 1,
+                "name": "File Changed"
+            }
+        ]
+    }
+}

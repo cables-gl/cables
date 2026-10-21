@@ -1,0 +1,65 @@
+{
+    "id": "3f059ee2-89ad-4b79-adc4-f6290c6a7ceb",
+    "created": 1792582692464,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792582692476
+        },
+        {
+            "message": "Local.FileToBlobUrl renamed to Ops.String.FileToBlobUrl",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792582874803
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "File"
+            },
+            {
+                "type": 1,
+                "name": "Reload"
+            },
+            {
+                "type": 0,
+                "name": "Add Cachebuster",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Blob Url"
+            },
+            {
+                "type": 5,
+                "name": "Mime Type"
+            },
+            {
+                "type": 0,
+                "name": "Size Bytes",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Loaded"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            }
+        ]
+    }
+}
