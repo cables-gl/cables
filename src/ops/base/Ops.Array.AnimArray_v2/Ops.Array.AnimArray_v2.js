@@ -80,10 +80,11 @@ function ipArr(perc)
     if (!arr1 || !arr2 || arr1.length != arr2.length)
     {
         outArr.set(null);
-        op.logError("arrays wrong", arr1.length, arr2.length);
+        op.setUiError("arrays", "both arrays have to be set and have the same length", 1);
     }
     else
     {
+        op.setUiError("arrays", null);
         for (let i = 0; i < arr1.length; i++)
             result[i] = ip(arr1[i], arr2[i], perc);
 

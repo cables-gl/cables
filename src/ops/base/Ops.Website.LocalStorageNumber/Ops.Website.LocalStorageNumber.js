@@ -7,16 +7,10 @@ const
     outStorage = op.outString("Storage type"),
     outSupported = op.outBoolNum("Storage Support", true);
 
-let storage = window.localStorage;
-if (inType.get() === "Session") storage = window.sessionStorage;
+let storage = null;
+let storageSupport = false;
 outStorage.set(inType.get());
-
-let storageSupport = !!storage;
-if (!storageSupport)
-{
-    op.logError("Your browser does not support or blocks access to storage, output will be inValue!");
-    outSupported.set(false);
-}
+updateStorage();
 
 updateOutput();
 op.onLoaded = updateOutput;
@@ -26,10 +20,10 @@ inStore.onTriggered = storeValue;
 
 function parse(val)
 {
-    if (val === "true" || val === true)val = 1;
-    if (val === "false" || val === false)val = 0;
+    if (val === "true" || val === true) val = 1;
+    if (val === "false" || val === false) val = 0;
     val = parseFloat(val);
-    if (val != val)val = 0;
+    if (val != val) val = 0;
     return val;
 }
 
@@ -60,10 +54,29 @@ function updateOutput()
 
 function changeStorage()
 {
-    storage = window.localStorage;
-    if (inType.get() === "Session") storage = window.sessionStorage;
-    storageSupport = !!storage;
+    updateStorage();
     updateOutput();
+}
+
+function getStorage()
+{
+    try
+    {
+        if (inType.get() === "Session") return window.sessionStorage;
+        return window.localStorage;
+    }
+    catch (e)
+    {
+        return null;
+    }
+}
+
+function updateStorage()
+{
+    storage = getStorage();
+    storageSupport = !!storage;
+    outSupported.set(storageSupport);
+    op.setUiError("nostorage", storageSupport ? null : "the browser does not support or blocks access to storage, the input value is used instead", 1);
 }
 
 function storeValue()
@@ -72,11 +85,15 @@ function storeValue()
     let val = parse(inValue.get());
     if (storageSupport)
     {
-        storage.setItem(getKey(), val);
-    }
-    else
-    {
-        op.warn("Not storing data, missing browsersupport!");
+        try
+        {
+            storage.setItem(getKey(), val);
+            op.setUiError("store", null);
+        }
+        catch (e)
+        {
+            op.setUiError("store", "could not store the value: " + e.message, 1);
+        }
     }
     outValue.set(val);
     op.patch.emitEvent("localstorageStored", inKey.get(), val);

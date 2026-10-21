@@ -6,15 +6,9 @@ const
     outStorage = op.outString("Storage type"),
     outSupported = op.outBool("Storage Support", true);
 
-let storage = window.localStorage;
-if (inType.get() === "Session") storage = window.sessionStorage;
-
-let storageSupport = !!storage;
-if (!storageSupport)
-{
-    op.logError("Your browser does not support or blocks access to storage!");
-    outSupported.set(false);
-}
+let storage = null;
+let storageSupport = false;
+updateStorage();
 
 updateOutput();
 inType.onChange = changeStorage;
@@ -22,11 +16,29 @@ inTrigger.onTriggered = updateOutput;
 
 function changeStorage()
 {
-    storage = window.localStorage;
-    if (inType.get() === "Session") storage = window.sessionStorage;
-    outStorage.set(inType.get());
-    storageSupport = !!storage;
+    updateStorage();
     updateOutput();
+}
+
+function getStorage()
+{
+    try
+    {
+        if (inType.get() === "Session") return window.sessionStorage;
+        return window.localStorage;
+    }
+    catch (e)
+    {
+        return null;
+    }
+}
+
+function updateStorage()
+{
+    storage = getStorage();
+    storageSupport = !!storage;
+    outSupported.set(storageSupport);
+    op.setUiError("nostorage", storageSupport ? null : "the browser does not support or blocks access to storage", 1);
 }
 
 function updateOutput()
