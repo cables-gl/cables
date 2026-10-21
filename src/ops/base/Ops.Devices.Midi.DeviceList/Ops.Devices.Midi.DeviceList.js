@@ -7,6 +7,7 @@ let midi = null;
 function onMIDIFailure()
 {
     outSupport.set(false);
+    op.setUiError("nomidi", "No MIDI support in this browser, or MIDI access was denied", 1);
 }
 
 function onMIDISuccess(midiAccess)
@@ -15,6 +16,7 @@ function onMIDISuccess(midiAccess)
     let arr = [];
     midi = midiAccess;
     outSupport.set(true);
+    op.setUiError("nomidi", null);
     let inputs = midi.inputs.values();
 
     let numDevices = 0;
