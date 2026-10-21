@@ -255,7 +255,7 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing = 0,
 export const cacheBust = function (url = "")
 {
     if (!url) return "";
-    if (url.startsWith("data:")) return;
+    if (url.startsWith("data:") || url.startsWith("blob:")) return url;
     if (url.includes("?")) url += "&";
     else url += "?";
     return url + "cache=" + CABLES.uuid();

@@ -397,6 +397,7 @@ export class Patch extends Events
         filename = String(filename);
         if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
         if (filename.indexOf("data:") === 0) return filename;
+        if (filename.indexOf("blob:") === 0) return filename;
         if (filename.indexOf("file:") === 0) return filename;
         filename = filename.replace("//", "/");
         if (filename.startsWith(this.config.prefixAssetPath)) filename = filename.replace(this.config.prefixAssetPath, "");
