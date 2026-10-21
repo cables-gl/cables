@@ -42,7 +42,7 @@
         ]
     },
     "summary": "Triggers every frame of the patch's render loop, like requestAnimationFrame",
-    "isReleased": false,
+    "isReleased": true,
     "docs": {
         "ports": []
     },

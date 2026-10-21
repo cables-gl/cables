@@ -50,7 +50,7 @@
     },
     "license": "MIT",
     "summary": "Sets the fill color for the canvas2d ops below it",
-    "isReleased": false,
+    "isReleased": true,
     "exampleProjectId": "nc4BAy",
     "docs": {
         "ports": []

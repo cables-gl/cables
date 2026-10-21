@@ -122,7 +122,7 @@
     ],
     "license": "MIT",
     "summary": "Draws text on a canvas",
-    "isReleased": false,
+    "isReleased": true,
     "exampleProjectId": "6lTIAy",
     "docs": {
         "ports": []

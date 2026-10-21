@@ -132,7 +132,7 @@
     },
     "license": "MIT",
     "summary": "Creates a 2d canvas, runs the canvas2d ops below it and outputs the canvas element, manual size, maximized or contained in its parent",
-    "isReleased": false,
+    "isReleased": true,
     "exampleProjectId": "nc4BAy",
     "docs": {
         "ports": []

@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1792491286628
-        },
-        {
-            "message": "Local.CanvasToDataUrl renamed to Ops.Extension.Canvas2d.CanvasToDataUrl",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792491321404
         }
     ],
     "layout": {
@@ -56,7 +50,7 @@
         ]
     },
     "summary": "Converts a canvas element into a png, jpeg or webp image data url",
-    "isReleased": false,
+    "isReleased": true,
     "exampleProjectId": "5wBgAy",
     "docs": {
         "ports": []

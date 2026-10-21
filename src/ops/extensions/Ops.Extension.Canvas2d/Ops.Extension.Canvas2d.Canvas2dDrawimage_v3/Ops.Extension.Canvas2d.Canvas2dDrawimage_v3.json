@@ -14,18 +14,6 @@
             "type": "feature",
             "author": "pandur",
             "date": 1752155950868
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dDrawimage_v2 renamed to Ops.Extension.Canvas2d.Canvas2dDrawimage_v2",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409044920
-        },
-        {
-            "message": "created as a new version of Ops.Extension.Canvas2d.Canvas2dDrawimage_v2",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792412598744
         }
     ],
     "layout": {
@@ -104,6 +92,9 @@
     },
     "license": "MIT",
     "exampleProjectId": "F2emyQ",
-    "docs": {},
-    "summary": "Draws an image, video or canvas element onto a canvas2d, optionally cropped and scaled to a destination rectangle"
+    "docs": {
+        "ports": []
+    },
+    "summary": "Draws an image, video or canvas element onto a canvas2d, optionally cropped and scaled to a destination rectangle",
+    "isReleased": true
 }

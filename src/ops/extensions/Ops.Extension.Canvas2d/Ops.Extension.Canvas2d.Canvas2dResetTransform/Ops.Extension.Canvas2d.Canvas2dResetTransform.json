@@ -8,18 +8,6 @@
             "type": "new",
             "author": "pandur",
             "date": 1708944583951
-        },
-        {
-            "message": "Dev.Graphics.Canvas2d.Canvas2dResetTransform renamed to Ops.Team.Canvas2d.Canvas2dResetTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1750159147897
-        },
-        {
-            "message": "Team.Canvas2d.Canvas2dResetTransform renamed to Ops.Extension.Canvas2d.Canvas2dResetTransform",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792409018438
         }
     ],
     "layout": {
@@ -37,5 +25,9 @@
         ]
     },
     "summary": "Resets translation, rotation and scale for the canvas2d ops below it",
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    }
 }
