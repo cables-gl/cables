@@ -89,9 +89,9 @@ function getMessageType(statusByte)
 
 function getMIDINote(dataByte1LSB)
 {
-    return dataByte1LSB <= 126
-        ? "" + NOTE_VALUES[dataByte1LSB % 12] + (Math.floor(dataByte1LSB / 12) - 2) + " - " + dataByte1LSB
-        : "NO NOTE";
+    return dataByte1LSB <= 126 ?
+        "" + NOTE_VALUES[dataByte1LSB % 12] + (Math.floor(dataByte1LSB / 12) - 2) + " - " + dataByte1LSB :
+        "NO NOTE";
 }
 
 const NRPN_CCS = [98, 99, 6, 38];
@@ -216,7 +216,7 @@ function onMIDIMessage(_event)
 
     if (statusByte > 248)
     {
-    // we don't use statusbytes above 248 for now
+        // we don't use statusbytes above 248 for now
         return;
     }
 
@@ -259,7 +259,8 @@ function onMIDIMessage(_event)
         "note": data[1],
         "velocity": data[2],
         "data": data,
-        ...messageType === "Note" && {
+        ...messageType === "Note" &&
+        {
             "newNote": [LSB, getMIDINote(LSB)],
             "velocity": outputValue
         },
@@ -270,8 +271,10 @@ function onMIDIMessage(_event)
     {
         if (["Note", "CC", "NRPN"].includes(messageType))
         {
-            const newOp = op.patch.addOp(OPS[messageType].NAMESPACE, {
-                "translate": {
+            const newOp = op.patch.addOp(OPS[messageType].NAMESPACE,
+            {
+                "translate":
+                {
                     "x": op.uiAttribs.translate.x,
                     "y": op.uiAttribs.translate.y + 100
                 }
@@ -282,7 +285,8 @@ function onMIDIMessage(_event)
 
             if (messageType === "Note")
             {
-                const {
+                const
+                {
                     "newNote": [, noteName]
                 } = newEvent;
                 newOp.getPortByName("Note").set(noteName);
@@ -300,7 +304,7 @@ function onMIDIMessage(_event)
             }
         }
         learning = false;
-        if (dia)dia.close();
+        if (dia) dia.close();
         dia = null;
     }
     // if (normalize.get()) event.velocity /= 127;
@@ -365,6 +369,7 @@ function onMIDISuccess(midiAccess)
 {
     if (midi) return;
     midi = midiAccess;
+    op.setUiError("nomidi", null);
 
     midiAccess.onstatechange = deviceList;
     deviceList();
@@ -374,7 +379,7 @@ function onMIDISuccess(midiAccess)
 
 deviceSelect.onChange = setDevice;
 
-op.setUiError("no midi", null);
+op.setUiError("nomidi", null);
 
 request();
 
@@ -397,9 +402,11 @@ learn.onTriggered = () =>
 
     if (!CABLES.UI) return;
 
-    dia = new CABLES.UI.ModalDialog({
+    dia = new CABLES.UI.ModalDialog(
+    {
         "title": "Learn Midi...",
-        "text": "Just rotate a knob or press a button on your midi device" });
+        "text": "Just rotate a knob or press a button on your midi device"
+    });
 
     dia.on("close", () =>
     {
