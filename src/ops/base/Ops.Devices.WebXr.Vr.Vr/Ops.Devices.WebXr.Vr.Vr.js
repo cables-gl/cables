@@ -151,7 +151,6 @@ function startVr()
                     xrSession.updateRenderState({ "baseLayer": new XRWebGLLayer(xrSession, webGLRenContext) });
                     xrSession.requestAnimationFrame(onXRFrame);
 
-                    console.log("enabledFeatures", xrSession.enabledFeatures);
                 }
             },
             (err) =>
