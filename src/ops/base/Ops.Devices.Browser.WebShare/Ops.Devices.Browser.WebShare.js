@@ -86,8 +86,12 @@ function doShare(shareData)
         })
         .catch((error) =>
         {
+            if (error.name == "AbortError")
+            {
+                outStatus.set("cancelled");
+                return;
+            }
             outStatus.set("error");
-            op.setUiError("noShare", "Error sharing", error);
-            op.log("Error sharing", error);
+            op.setUiError("noShare", "Error sharing: " + (error.message || error), 1);
         });
 }
