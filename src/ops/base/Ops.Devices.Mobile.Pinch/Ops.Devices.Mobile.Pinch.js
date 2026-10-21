@@ -31,7 +31,6 @@ window.addEventListener("gestureend", (e) => { return e.preventDefault(); });
 
 hammertime.on("pinch", function (ev)
 {
-    op.log(ev.additionalEvent);
     ev.preventDefault(); // this is ignored in some browsers
     if (!enabledPort.get()) { return; }
 
@@ -51,7 +50,6 @@ hammertime.on("pinch", function (ev)
 
         scalePort.set(scale);
         pinchInProgress = false;
-        op.log("Final Pinch detected, resetting");
         tmpScale = initialScale;
     }
     else
@@ -66,18 +64,17 @@ hammertime.on("pinch", function (ev)
     outDelta.set(d);
 
     // if(ev.additionalEvent) {
-	    /*
-	    if(ev.additionalEvent === 'pinchin') {
-	        scale -=  Math.abs(ev.velocity);
-	    } else if (ev.additionalEvent === 'pinchout') {
-	        scale += Math.abs(ev.velocity);
-	    }
-	    */
+    /*
+    if(ev.additionalEvent === 'pinchin') {
+        scale -=  Math.abs(ev.velocity);
+    } else if (ev.additionalEvent === 'pinchout') {
+        scale += Math.abs(ev.velocity);
+    }
+    */
     // }
     // scale += ev.velocity;
     /*
-	op.log('ev.scale: ', ev.scale);
-	tmpScale = ev.scale;
+		tmpScale = ev.scale;
 
 	var scaleToSet;
 	if(ev.isFinal) {
@@ -88,7 +85,6 @@ hammertime.on("pinch", function (ev)
 	    scaleToSet = scale * tmpScale;
 	}
 
-	op.log('scaleToSet', scaleToSet);
 
 	scale = checkAndCorrectBoundaries(scale);
 	scaleToSet = checkAndCorrectBoundaries(scaleToSet);
@@ -99,10 +95,8 @@ hammertime.on("pinch", function (ev)
 
 el.addEventListener("touchend", function (ev)
 {
-    op.log("touchend");
     if (pinchInProgress)
     {
-        op.log("touchend, setting manually");
         ev.preventDefault(); // this is ignored in some browsers
         ev.stopPropagation();
         pinchInProgress = false;
@@ -121,12 +115,12 @@ function checkAndCorrectBoundaries(s)
     {
         if (s < minScalePort.get())
         {
-    	    correctedS = minScalePort.get();
-    	}
+            correctedS = minScalePort.get();
+        }
         else if (s > maxScalePort.get())
         {
-    	    correctedS = maxScalePort.get();
-    	}
+            correctedS = maxScalePort.get();
+        }
     }
     return correctedS;
 }
