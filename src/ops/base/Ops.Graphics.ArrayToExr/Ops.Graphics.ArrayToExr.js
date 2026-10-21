@@ -19,9 +19,9 @@ function downloadBlob(data, fileName, mimeType)
 {
     let blob, url;
     blob = new Blob([data],
-        {
-            "type": mimeType
-        });
+    {
+        "type": mimeType
+    });
     url = window.URL.createObjectURL(blob);
     downloadURL(url, fileName);
     setTimeout(function ()
@@ -62,10 +62,10 @@ function buildInfoDT()
     };
 
     let cmp = NO_COMPRESSION;
-    if (inZip.get())cmp = ZIP_COMPRESSION;
+    if (inZip.get()) cmp = ZIP_COMPRESSION;
 
     const
-	    WIDTH = inWidth.get(),
+        WIDTH = inWidth.get(),
         HEIGHT = inHeight.get(),
         TYPE = FloatType,
         FORMAT = FloatType,
@@ -100,7 +100,6 @@ function decodeLinear(dec, r, g, b, a)
 
 function reorganizeDataBuffer(inBuffer, info)
 {
-    console.log("info.dataSize", info.dataSize);
 
     const w = info.width,
         h = info.height,
@@ -155,17 +154,15 @@ function compressData(inBuffer, info)
 
     switch (info.compression)
     {
-    case 0:
-        compress = compressNONE;
-        break;
+        case 0:
+            compress = compressNONE;
+            break;
 
-    case 2:
-    case 3:
-        compress = compressZIP;
-        break;
+        case 2:
+        case 3:
+            compress = compressZIP;
+            break;
     }
-
-    console.log("cpmress", compressZIP);
 
     if (info.compression !== 0)
     {
@@ -403,12 +400,12 @@ function decodeFloat16(binary)
 
     return (binary >> 15 ? -1 : 1) * (
         exponent ?
-            (
-                exponent === 0x1F ?
-                    fraction ? NaN : Infinity :
-                    Math.pow(2, exponent - 15) * (1 + fraction / 0x400)
-            ) :
-            6.103515625e-5 * (fraction / 0x400)
+        (
+            exponent === 0x1F ?
+            fraction ? NaN : Infinity :
+            Math.pow(2, exponent - 15) * (1 + fraction / 0x400)
+        ) :
+        6.103515625e-5 * (fraction / 0x400)
     );
 }
 
