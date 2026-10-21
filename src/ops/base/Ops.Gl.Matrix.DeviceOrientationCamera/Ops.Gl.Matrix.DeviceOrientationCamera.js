@@ -17,17 +17,21 @@ const viewDirQuat = quat.create();
 render.onTriggered = function ()
 {
     // check for new permission request on IOS or android
-    if (DeviceMotionEvent && DeviceMotionEvent.requestPermission)
+    if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission)
     {
         DeviceOrientationEvent.requestPermission()
             .then((response) =>
             {
                 if (response == "granted")
                 {
+                    op.setUiError("permission", null);
                     window.addEventListener("deviceorientation", onOrientationChange, true);
                 }
             })
-            .catch(op.error);
+            .catch((e) =>
+            {
+                op.setUiError("permission", "no permission for device orientation: " + e.message, 1);
+            });
     }
     else
     {
