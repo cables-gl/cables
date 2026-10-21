@@ -172,7 +172,7 @@ function refreshSources()
         {
             ipc = window.nodeRequire("electron").ipcRenderer;
         }
-        catch (e) { op.error("[DesktopTexture] Failed to nodeRequire electron", e); }
+        catch (e) {}
     }
 
     if (!ipc && op.patch.api)
@@ -181,8 +181,7 @@ function refreshSources()
         {
             if (err)
             {
-                op.error("[DesktopTexture] patch.api error:", err);
-                outError.set("Failed to get sources: " + (err.message || err));
+                setSourcesError("Failed to get sources: " + (err.message || err));
                 return;
             }
             handleSources(s);
@@ -192,8 +191,7 @@ function refreshSources()
 
     if (!ipc)
     {
-        op.error("[DesktopTexture] No IPC found (window.ipcRenderer or op.require)");
-        outError.set("Electron IPC not available");
+        setSourcesError("Screen capture is only available in cables standalone");
         return;
     }
 
@@ -204,13 +202,19 @@ function refreshSources()
         })
         .catch((e) =>
         {
-            op.error("[DesktopTexture] IPC Invoke error:", e);
-            outError.set("Failed to get sources: " + e.message);
+            setSourcesError("Failed to get sources, check the screen recording permission: " + e.message);
         });
+}
+
+function setSourcesError(msg)
+{
+    outError.set(msg);
+    op.setUiError("sources", msg, 2);
 }
 
 function handleSources(s)
 {
+    op.setUiError("sources", null);
     if (!s)
     {
         op.warn("[DesktopTexture] sources is null/undefined");
@@ -326,6 +330,7 @@ function startCapture()
             {
                 available.set(true);
                 outError.set("");
+                op.setUiError("getusermedia", null);
 
                 const videoTrack = stream.getVideoTracks()[0];
                 if (videoTrack)
@@ -350,8 +355,7 @@ function startCapture()
         })
         .catch((e) =>
         {
-            op.error("[DesktopTexture] GetUserMedia Error:", e);
             outError.set("GetUserMedia Error: " + e.message);
-            op.logError(e);
+            op.setUiError("getusermedia", "could not capture the screen: " + e.message, 2);
         });
 }
