@@ -16,7 +16,6 @@ inForce.onTriggered = () =>
 {
     if (oldShader)
     {
-        console.log("text");
         oldShader.needsPipelineUpdate = "force rebuild";
         oldShader.compile();
     }
@@ -42,7 +41,6 @@ exec.onTriggered = () =>
         {
             compileCount = shader.compileCount;
             outShaderSrc.set(shader.getProcessedSource());
-            console.log(shader);
         }
         outDefines.set(shader.getDefines());
         outShader.setRef(shader.getInfo());

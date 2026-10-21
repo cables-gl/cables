@@ -175,7 +175,6 @@ function rebuild()
     w = cgp.viewPort[2];
     h = cgp.viewPort[3];
 
-    console.log("w,h", w, h);
 
     geom.vertices = new Float32Array([
         xx + w, xy + h, 0.0,
@@ -184,7 +183,6 @@ function rebuild()
         xx, xy, 0.0
     ]);
 
-    console.log(geom);
 
     let tc = null;
 

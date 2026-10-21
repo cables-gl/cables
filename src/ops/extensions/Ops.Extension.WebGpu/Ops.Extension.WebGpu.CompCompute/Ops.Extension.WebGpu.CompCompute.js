@@ -65,7 +65,6 @@ function init(cgp)
 {
     if (shader)shader.dispose();
     if (pipe)pipe.dispose();
-    console.log("init");
     pipe = new CGP.ComputePipeline(cgp, op.objName);
 
     shader = new CGP.Shader(cgp, op.name, { "compute": true });

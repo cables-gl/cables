@@ -99,12 +99,10 @@ exec.onTriggered = () =>
         };
 
         result.setRef(tex);
-        console.log("iknit rt2");
     }
 
     if (!renderPass)
     {
-        console.log("no");
         return;
     }
 

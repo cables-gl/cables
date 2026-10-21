@@ -16,7 +16,6 @@ inPosBuff.onChange=()=>
     else if(storage && !storage.cgpbuffer)console.log("no storage buff");
     else
     {
-        console.log("yes.....");
         if(inPosBuff.get())
         {
 
@@ -57,7 +56,6 @@ exec.onTriggered = () =>
         {
             if (shader && storage) shader.defaultBindGroup.removeBinding(storage);
             init(cgp.getShader());
-            console.log("shader", shader);
         }
 
     storage?.cgpBuffer?.updateGpuBuffer(cgp);

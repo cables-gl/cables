@@ -49,7 +49,6 @@ exec.onTriggered = () =>
         {
             if (shader && binding) shader.defaultBindGroup.removeBinding(binding);
             init(cgp.getShader());
-            console.log("shader", shader);
         }
     outBuff.setRef(gpuBuff);
     next.trigger();

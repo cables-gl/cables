@@ -35,7 +35,6 @@ exec.onTriggered = () =>
         {
             if (shader && uni) shader.defaultBindGroup.removeBinding(uni);
             init(cgp.getShader());
-            console.log("shader", shader);
         }
     next.trigger();
 };

@@ -59,10 +59,8 @@ if (op.patch.config.glCanvasId)
 }
 if (op.patch.config.glCanvasId)
 {
-    console.log("webgpu canvas container via glCanvasId");
     canvasId = op.patch.config.glCanvasId;
     container = document.getElementById(canvasId).parentElement;
-    console.log(container);
 }
 
 container.appendChild(canvas);
@@ -185,8 +183,6 @@ if (navigator.gpu)
                 cgp.adapter = adapter;
                 cgp.setCanvas(canvas);
 
-                console.log(adapter);
-                console.log(device);
 
                 device.addEventListener("uncapturederror", (event) =>
                 {
@@ -221,7 +217,6 @@ function createTargets(cgp)
 {
     if (!op.patch.isPlaying || stopped || !inEnabled.get()) return;
 
-    console.log("crease targets");
     cgp.profileData.count("targets created", op.objName);
 
     const devicePixelRatio = 1;// window.devicePixelRatio || 1;

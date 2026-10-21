@@ -131,7 +131,6 @@ function rebuildMesh(cgp)
     w = cgp.viewPort[2];
     h = cgp.viewPort[3];
 
-    console.log("w,h", w, h);
 
     geom.vertices = new Float32Array([
         xx + w, xy + h, 0.0,
@@ -140,7 +139,6 @@ function rebuildMesh(cgp)
         xx, xy, 0.0
     ]);
 
-    console.log(geom);
 
     let tc = null;
     let flipY = false;
