@@ -1,0 +1,120 @@
+{
+    "id": "480de677-9fd2-44f7-bffe-6e91040bb86e",
+    "created": 1792662298220,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "new",
+            "author": "pandur",
+            "date": 1708944031157
+        },
+        {
+            "message": "source/destination coordinates and size",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1752155950868
+        },
+        {
+            "message": "created as a new version of Ops.Extension.Canvas2d.Canvas2dDrawimage_v3",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792662298220
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "Canvas",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Full Source",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Source X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source W",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Source H",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Full Destination",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Fit index",
+                "values": [
+                    "Stretch",
+                    "Contain",
+                    "Cover"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Dest X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest W",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dest H",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Destination",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "license": "MIT",
+    "exampleProjectId": "F2emyQ",
+    "docs": {
+        "ports": []
+    },
+    "summary": "Draws an image, video or canvas element onto a canvas2d, optionally cropped and scaled to a destination rectangle"
+}
