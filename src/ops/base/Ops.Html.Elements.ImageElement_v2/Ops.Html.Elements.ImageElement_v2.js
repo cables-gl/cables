@@ -38,11 +38,12 @@ element.onload = () =>
         outHeight.set(0);
     }
 };
+
 function filenameChanged(cacheBuster)
 {
     let url = filename.get();
 
-    if (cacheBuster)url = CABLES.cacheBust(url);
+    if (cacheBuster) url = CABLES.cacheBust(url);
 
     element.setAttribute("src", url);
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
@@ -60,7 +61,7 @@ op.onFileChanged = function (fn)
 
 function removeEle()
 {
-    if (element)element.remove();
+    if (element) element.remove();
     element = null;
     outImage.set(element);
 }
@@ -77,7 +78,7 @@ function removeClasses()
 {
     if (!element) return;
 
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
         if (classes[i]) element.classList.remove(classes[i]);
@@ -87,7 +88,7 @@ function removeClasses()
 
 function updateClass()
 {
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
     let found = false;

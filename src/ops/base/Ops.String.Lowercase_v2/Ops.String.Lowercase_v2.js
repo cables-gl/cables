@@ -4,6 +4,6 @@ const
 
 inStr.onChange = function ()
 {
-    if (inStr.get() == 0)outStr.set("");
-    else outStr.set((inStr.get() || "").toLowerCase());
+    if (inStr.get() == 0) outStr.set("");
+    else outStr.set(String(inStr.get() || "").toLowerCase());
 };

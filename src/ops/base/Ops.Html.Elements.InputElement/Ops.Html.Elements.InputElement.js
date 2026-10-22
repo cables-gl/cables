@@ -162,7 +162,7 @@ function removeClasses()
 {
     if (!div) return;
 
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
         if (classes[i]) div.classList.remove(classes[i]);
@@ -179,7 +179,7 @@ function updateClass()
     if (inAutoComplete.get()) div.setAttribute("autocomplete", "on");
     else div.setAttribute("autocomplete", "off");
 
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
     let found = false;
@@ -240,7 +240,7 @@ function removeListeners()
 
 function addListeners()
 {
-    if (listenerElement)removeListeners();
+    if (listenerElement) removeListeners();
 
     listenerElement = div;
 
@@ -253,7 +253,7 @@ function addListeners()
         {
             if (event.key === "Enter")
             {
-                if (inEnterPrev.get())event.preventDefault();
+                if (inEnterPrev.get()) event.preventDefault();
                 outKeyEnter.trigger();
             }
             if (event.key === "Escape") outKeyEsc.trigger();
