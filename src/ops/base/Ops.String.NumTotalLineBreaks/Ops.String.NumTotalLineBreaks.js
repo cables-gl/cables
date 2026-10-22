@@ -4,6 +4,6 @@ const
 
 inStr.onChange = function ()
 {
-    const strings = (inStr.get() || "").split("\n");
+    const strings = String(inStr.get() || "").split("\n");
     outNum.set(strings.length);
 };

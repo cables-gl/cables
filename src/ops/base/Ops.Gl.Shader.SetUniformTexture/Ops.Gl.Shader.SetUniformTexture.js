@@ -50,7 +50,7 @@ function setupUniform()
 {
     if (shader)
     {
-        uniform = shader.getUniform((inSelect.get() || "").split(" ")[0]);
+        uniform = shader.getUniform(String(inSelect.get() || "").split(" ")[0]);
         doSetupUniform = false;
 
         if (!uniform)

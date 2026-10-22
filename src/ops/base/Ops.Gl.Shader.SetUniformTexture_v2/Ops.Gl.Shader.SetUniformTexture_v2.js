@@ -54,7 +54,7 @@ inRender.onTriggered = function ()
 
     next.trigger();
 
-    if (uniform && old && oldIdx != -1) cgl.getShader()._textureStackTexCgl[oldIdx] = old;// shader.setUniformTexture(uniform, old);
+    if (uniform && old && oldIdx != -1) cgl.getShader()._textureStackTexCgl[oldIdx] = old; // shader.setUniformTexture(uniform, old);
     cgl.lastShader = null;
     cgl.lastMesh = null;
 };
@@ -69,7 +69,7 @@ function setupUniform()
 {
     if (shader)
     {
-        uniform = shader.getUniform((inUniName.get() || "").split(" ")[0]);
+        uniform = shader.getUniform(String(inUniName.get() || "").split(" ")[0]);
         doSetupUniform = false;
 
         if (!uniform)

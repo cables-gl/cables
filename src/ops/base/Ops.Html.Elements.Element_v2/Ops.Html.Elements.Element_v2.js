@@ -185,7 +185,7 @@ function removeClasses()
 {
     if (!div) return;
 
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
         try
@@ -200,7 +200,7 @@ function removeClasses()
 function updateClass()
 {
     if (!inAddDom.get()) return;
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
     let found = false;

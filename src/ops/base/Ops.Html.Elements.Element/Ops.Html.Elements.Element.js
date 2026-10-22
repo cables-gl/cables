@@ -58,12 +58,12 @@ op.onDelete = removeElement;
 outElement.onLinkChanged = updateStyle;
 
 inInteractive.onLinkChanged =
-outClicked.onLinkChanged = () =>
-{
-    op.setUiError("interactiveProblem", null);
-    if (outClicked.isLinked() && !inInteractive.get() && !inInteractive.isLinked())
-        op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
-};
+    outClicked.onLinkChanged = () =>
+    {
+        op.setUiError("interactiveProblem", null);
+        if (outClicked.isLinked() && !inInteractive.get() && !inInteractive.isLinked())
+            op.setUiError("interactiveProblem", "Interactive should be activated when linking clicked port");
+    };
 
 function createElement()
 {
@@ -129,7 +129,7 @@ function removeClasses()
 {
     if (!div) return;
 
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
         if (classes[i]) div.classList.remove(classes[i]);
@@ -139,7 +139,7 @@ function removeClasses()
 
 function updateClass()
 {
-    const classes = (inClass.get() || "").split(" ");
+    const classes = String(inClass.get() || "").split(" ");
     const oldClasses = (oldClassesStr || "").split(" ");
 
     let found = false;
@@ -204,7 +204,7 @@ function removeListeners()
 
 function addListeners()
 {
-    if (listenerElement)removeListeners();
+    if (listenerElement) removeListeners();
 
     listenerElement = div;
 
