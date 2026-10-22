@@ -48,7 +48,7 @@ inStr.onChange = () =>
     outStr.set(inStr.get());
     if (CABLES.UI)
     {
-        if (inStr.get()) lines = (inStr.get() || "").split("\n");
+        if (inStr.get()) lines = String(inStr.get()).split("\n");
         else lines = [];
     }
 };
@@ -77,16 +77,16 @@ op.renderVizLayer = (ctx, layer, viz) =>
     op.setUiAttribs({ "comment": diagStr + " " });
 
     viz.renderText(ctx, layer, lines,
-        {
-            "zoomText": inZoomText.get(),
-            "showLineNum": inLineNums.get(),
-            "fontSize": inFontSize.get(),
-            "scroll": inPos.get() || diagScroll,
-            "syntax": syntax.get(),
-            "diagnostics": diags,
-            "showWhitespace": inWhitespace.get(),
-            "wrap": inWrap.get()
-        });
+    {
+        "zoomText": inZoomText.get(),
+        "showLineNum": inLineNums.get(),
+        "fontSize": inFontSize.get(),
+        "scroll": inPos.get() || diagScroll,
+        "syntax": syntax.get(),
+        "diagnostics": diags,
+        "showWhitespace": inWhitespace.get(),
+        "wrap": inWrap.get()
+    });
 
     ctx.restore();
 };
