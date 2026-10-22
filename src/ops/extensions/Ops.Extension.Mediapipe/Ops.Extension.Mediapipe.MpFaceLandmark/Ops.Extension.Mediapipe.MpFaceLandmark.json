@@ -1,0 +1,50 @@
+{
+    "id": "472da8f4-6a55-42bb-bc0e-54c65a85d68c",
+    "created": 1790631071541,
+    "license": "MIT",
+    "authorName": "60hz",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "60hz",
+            "date": 1790631071541
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Landmarks"
+            },
+            {
+                "type": 0,
+                "name": "Landmark index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            }
+        ]
+    },
+    "isReleased": false,
+    "summary": "Face Landmark positions (chin,eye,brow etc)",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "pxP9Nd"
+}
