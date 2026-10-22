@@ -216,7 +216,11 @@ function updateActiveTrack(val)
     let valueToUse = parseFloat(input.value);
     if (typeof val !== "undefined") valueToUse = val;
     let availableWidth = activeTrack.parentElement.getBoundingClientRect().width || 220;
-    if (parent) availableWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width")) - 20;
+    if (parent && parent.parentElement)
+    {
+        const sidebarWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width"));
+        if (!isNaN(sidebarWidth)) availableWidth = sidebarWidth - 20;
+    }
 
     const trackWidth = CABLES.map(
         valueToUse,
@@ -289,12 +293,12 @@ function setInputFieldValue(v)
 
 function showElement(el)
 {
-    if (el)el.style.display = "block";
+    if (el) el.style.display = "block";
 }
 
 function hideElement(el)
 {
-    if (el)el.style.display = "none";
+    if (el) el.style.display = "none";
 }
 
 function onDelete()
