@@ -68,7 +68,13 @@ function setupUniform()
 
         if (!uniform)
         {
+<<<<<<< HEAD
             op.setUiError("nouni", "uniform unknown", 1);// op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
+||||||| 5bf3e628a1
+            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+=======
+            op.setUiError("nouni", "uniform unknown", 1); // op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+>>>>>>> master
             outFound.set(false);
         }
         else
