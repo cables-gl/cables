@@ -70,7 +70,7 @@ op.setPortGroup("Rendering", [drawMesh, meshScale]);
 
 render.onLinkChanged = () =>
 {
-    if (!render.isLinked())textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
+    if (!render.isLinked()) textureOut.setRef(CGL.Texture.getEmptyTexture(cgl));
     else textureOut.setRef(tex);
 };
 
@@ -146,7 +146,7 @@ aniso.onChange =
     tfilter.onChange =
     wrap.onChange = () =>
     {
-        if (tex)tex.delete();
+        if (tex) tex.delete();
         tex = null;
         needsRefresh = true;
     };
@@ -211,7 +211,7 @@ function doRender()
             CABLES.UI.SIMPLEWIREFRAMERECT.render(outAspect.get(), 1, 1);
 
         cgl.pushShader(shader);
-        mesh.render(op.patch.cg.getShader());
+        mesh.render(cgl.getShader());
 
         cgl.popShader();
         cgl.popBlendMode();
@@ -269,7 +269,7 @@ function autoLineBreaks(strings)
 
     strings = txt.split("\n");
 
-    if (strings[strings.length - 1] == "")strings.pop();
+    if (strings[strings.length - 1] == "") strings.pop();
 
     return strings;
 }
@@ -281,9 +281,9 @@ function refresh()
     ctx.fillStyle = rgbStringClear;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    const rgbString = "rgba(" + Math.floor(r.get() * 255) + ","
-        + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + ","
-        + inOpacity.get() + ")";
+    const rgbString = "rgba(" + Math.floor(r.get() * 255) + "," +
+        Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + "," +
+        inOpacity.get() + ")";
 
     ctx.fillStyle = rgbString;
     let fontSize = parseFloat(inFontSize.get());
@@ -333,7 +333,7 @@ function refresh()
 
     autoWidth += paddingX * 2;
 
-    if (inLineHeight.get() < 0)autoHeight += (inLineHeight.get() / 2) * -1;
+    if (inLineHeight.get() < 0) autoHeight += (inLineHeight.get() / 2) * -1;
 
     let calcHeight = autoHeight;
 
@@ -404,7 +404,7 @@ function refresh()
 
     if (!cachetexture.get() || !tex || !textureOut.get() || tex.width != fontImage.width || tex.height != fontImage.height || tex.anisotropic != parseFloat(aniso.get()))
     {
-        if (tex)tex.delete();
+        if (tex) tex.delete();
         tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f, "anisotropic": parseFloat(aniso.get()), "wrap": cgl_wrap });
     }
 
