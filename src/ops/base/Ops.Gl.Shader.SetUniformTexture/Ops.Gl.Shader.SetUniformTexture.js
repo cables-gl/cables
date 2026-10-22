@@ -55,19 +55,7 @@ function setupUniform()
 
         if (!uniform)
         {
-<<<<<<< HEAD
-            op.setUiError("nouni", "uniform unknown", 1); // op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
-||||||| parent of d97ef31be8 (merge fix)
-<<<<<<< HEAD
-            op.setUiError("nouni", "uniform unknown", 1);// op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
-||||||| 5bf3e628a1
-            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
-=======
-            op.setUiError("nouni", "uniform unknown", 1); // op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
->>>>>>> master
-=======
             op.setUiError("nouni", "uniform unknown", 1); // op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
->>>>>>> d97ef31be8 (merge fix)
             outFound.set(false);
         }
         else
