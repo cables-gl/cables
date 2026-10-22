@@ -22,7 +22,7 @@ let
     vScale = vec3.create(),
     mesh = null;
 updateScale();
-op.onDelete = function () { if (mesh)mesh.dispose(); };
+op.onDelete = function () { if (mesh) mesh.dispose(); };
 
 inDraw.onChange = () => { op.setUiAttrib({ "extendTitle": inDraw.get() ? "" : "x" }); };
 
@@ -37,7 +37,7 @@ inTrigger.onTriggered = function ()
         mat4.scale(cgl.mMatrix, cgl.mMatrix, vScale);
     }
 
-    if (inDraw.get()) mesh.render(cgl.getShader());
+    if (inDraw.get() && mesh) mesh.render(cgl.getShader());
 
     if (doScale)
     {
@@ -50,25 +50,25 @@ inTrigger.onTriggered = function ()
 inStacks.onChange =
     inSlices.onChange =
     inStacklimit.onChange =
-        () =>
-        {
-            needsRebuild = true;
-        };
+    () =>
+    {
+        needsRebuild = true;
+    };
 
 outGeometry.onLinkChanged =
     inRadius.onChange =
-        () =>
-        {
-            if (outGeometry.isLinked()) doScale = false;
-            else doScale = true;
+    () =>
+    {
+        if (outGeometry.isLinked()) doScale = false;
+        else doScale = true;
 
-            if (doScale) updateScale();
-            else needsRebuild = true;
-        };
+        if (doScale) updateScale();
+        else needsRebuild = true;
+    };
 
 function updateScale()
 {
-    if (doScale && lastRadius != 1.0)needsRebuild = true;
+    if (doScale && lastRadius != 1.0) needsRebuild = true;
     vec3.set(vScale, inRadius.get(), inRadius.get(), inRadius.get());
 }
 
@@ -80,7 +80,7 @@ function buildMesh()
         stackLimit = Math.min(Math.max(inStacklimit.get() * stacks, 1), stacks);
     let radius = inRadius.get();
 
-    if (doScale)radius = 1.0;
+    if (doScale) radius = 1.0;
     lastRadius = radius;
     let
         positions = [],
@@ -143,8 +143,8 @@ function buildMesh()
 
     outGeometry.setRef(geom);
 
-    if (op.patch.cg) // only generate mesh when there is a cg available, otherwise only outputs a geometry
-        if (!mesh) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
+    if (cgl) // only generate mesh when there is a cg available, otherwise only outputs a geometry
+        if (!mesh) mesh = cgl.createMesh(geom, { "opId": op.id });
         else mesh.setGeom(geom);
 
     needsRebuild = false;
