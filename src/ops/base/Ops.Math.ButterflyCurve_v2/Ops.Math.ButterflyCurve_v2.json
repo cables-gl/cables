@@ -1,0 +1,51 @@
+{
+    "authorName": "pandur",
+    "id": "8fd1eb69-3ed4-47be-aac5-d51f773a08dc",
+    "created": 1792744696310,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "generate coordinates of a butterfly curve",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Math.ButterflyCurve",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792744696311
+        },
+        {
+            "message": "fixed formula to match the butterfly curve: no squaring, sin(t/12)^5, x uses sin and y uses cos",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1792745146407
+        },
+        {
+            "message": "Wave Amount, Wave Frequency and Power inputs to vary the shape",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1792745146958
+        }
+    ]
+}
