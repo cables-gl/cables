@@ -47,7 +47,7 @@
             }
         ]
     },
-    "summary": "render a pyramid mesh",
+    "summary": "Draw a 3D pyramid mesh",
     "docs": {
         "ports": []
     },

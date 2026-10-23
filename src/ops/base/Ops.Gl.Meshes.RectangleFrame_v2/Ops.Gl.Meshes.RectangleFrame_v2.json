@@ -1,5 +1,5 @@
 {
-    "summary": "Draws a rectangle frame",
+    "summary": "Draw a rectangular frame",
     "layout": {
         "portsIn": [
             {

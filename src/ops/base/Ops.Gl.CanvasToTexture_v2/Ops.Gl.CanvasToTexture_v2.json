@@ -49,7 +49,7 @@
             }
         ]
     },
-    "summary": "convert a canvas to texture",
+    "summary": "Use a 2D canvas or video frame as a texture",
     "docs": {
         "ports": []
     },

@@ -1,5 +1,5 @@
 {
-    "summary": "Draw a simple grid of lines",
+    "summary": "Draw a grid of lines on an axis plane",
     "layout": {
         "portsIn": [
             {

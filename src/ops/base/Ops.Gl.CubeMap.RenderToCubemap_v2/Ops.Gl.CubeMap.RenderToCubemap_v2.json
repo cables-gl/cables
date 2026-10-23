@@ -53,7 +53,7 @@
             }
         ]
     },
-    "summary": "render a scene into a cubemap",
+    "summary": "Render a scene into a 6-sided cubemap texture",
     "issues": "",
     "youtubeids": [],
     "docs": {

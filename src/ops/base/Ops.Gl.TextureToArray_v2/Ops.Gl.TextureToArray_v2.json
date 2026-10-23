@@ -53,7 +53,7 @@
             }
         ]
     },
-    "summary": "extract colors from a texture",
+    "summary": "Read pixel colors from a texture as an array",
     "docs": {
         "ports": [
             {

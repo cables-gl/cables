@@ -81,7 +81,7 @@
         "cgl"
     ],
     "isReleased": true,
-    "summary": "Load a KTX Texture File",
+    "summary": "Load a compressed KTX texture file",
     "docs": {
         "ports": []
     },

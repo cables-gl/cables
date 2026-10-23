@@ -1,5 +1,5 @@
 {
-    "summary": "Render into an Image",
+    "summary": "Render the scene into a texture",
     "layout": {
         "portsIn": [
             {

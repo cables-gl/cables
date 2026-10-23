@@ -92,7 +92,7 @@
             }
         ]
     },
-    "summary": "create an array of textures",
+    "summary": "Combine multiple textures into an array",
     "docs": {
         "ports": []
     },

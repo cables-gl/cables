@@ -1,5 +1,5 @@
 {
-    "summary": "Draw text",
+    "summary": "Draw text as a 3D mesh",
     "layout": {
         "portsIn": [
             {

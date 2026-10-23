@@ -122,7 +122,7 @@
             }
         ]
     },
-    "summary": "Simple noisetexture",
+    "summary": "Generate a random noise texture",
     "issues": "",
     "docs": {
         "ports": []

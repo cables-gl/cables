@@ -49,7 +49,7 @@
             }
         ]
     },
-    "summary": "set gl blendmodes directly",
+    "summary": "Set OpenGL blend functions directly",
     "docs": {
         "ports": []
     },

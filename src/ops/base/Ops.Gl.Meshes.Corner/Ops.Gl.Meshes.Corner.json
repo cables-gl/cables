@@ -55,7 +55,7 @@
             }
         ]
     },
-    "summary": "render a rectangular corner",
+    "summary": "Draw an L-shaped corner element",
     "docs": {
         "ports": []
     },

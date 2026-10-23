@@ -43,7 +43,7 @@
             }
         ]
     },
-    "summary": "Outputs current viewport size",
+    "summary": "Get the current viewport size and position",
     "issues": "",
     "youtubeids": [],
     "docs": {

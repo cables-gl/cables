@@ -28,7 +28,7 @@
             }
         ]
     },
-    "summary": "generate polyhedron meshes ",
+    "summary": "Generate 3D polyhedron geometry",
     "docs": {
         "ports": []
     },

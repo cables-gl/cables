@@ -1,5 +1,5 @@
 {
-    "summary": "Draw a cone",
+    "summary": "Draw a 3D cone mesh",
     "layout": {
         "portsIn": [
             {

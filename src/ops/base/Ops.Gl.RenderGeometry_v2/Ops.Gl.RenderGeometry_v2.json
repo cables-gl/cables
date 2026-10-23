@@ -28,7 +28,7 @@
             }
         ]
     },
-    "summary": "Render a geometry as mesh",
+    "summary": "Render geometry data as a 3D mesh",
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0a9bdb39-8250-460e-8d99-50fe6825d956",
