@@ -43,10 +43,6 @@
         ]
     },
     "isReleased": true,
-<<<<<<< HEAD
     "license": "MIT",
     "exampleProjectId": "kcQ9Sy"
-=======
-    "license": "MIT"
->>>>>>> c460c33ac54342b8b22e9c04340c4cd4bfcec7b9
 }
