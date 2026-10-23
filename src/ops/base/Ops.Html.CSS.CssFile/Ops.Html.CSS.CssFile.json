@@ -38,7 +38,7 @@
         ],
         "portsOut": []
     },
-    "summary": "load a css asset file",
+    "summary": "Load a CSS file from an asset",
     "license": "MIT",
     "docs": {
         "ports": []

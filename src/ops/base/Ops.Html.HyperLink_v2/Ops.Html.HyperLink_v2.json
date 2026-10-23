@@ -34,7 +34,7 @@
             }
         ]
     },
-    "summary": "Open another website",
+    "summary": "Open a URL in a new browser tab or window",
     "docs": {
         "ports": []
     },

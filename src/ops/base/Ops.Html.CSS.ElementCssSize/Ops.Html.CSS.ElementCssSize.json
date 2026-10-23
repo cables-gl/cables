@@ -65,7 +65,7 @@
             }
         ]
     },
-    "summary": "Set the size of an element",
+    "summary": "Set the width and height of an HTML element",
     "docs": {
         "ports": []
     },

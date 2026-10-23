@@ -17,7 +17,7 @@
             }
         ]
     },
-    "summary": "close current window",
+    "summary": "Close the current browser window",
     "docs": {
         "ports": []
     },

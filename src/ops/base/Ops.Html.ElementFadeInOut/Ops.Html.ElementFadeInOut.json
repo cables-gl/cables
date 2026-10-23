@@ -37,7 +37,7 @@
             }
         ]
     },
-    "summary": "fade html elements in or out",
+    "summary": "Fade an HTML element in or out",
     "docs": {
         "ports": []
     },

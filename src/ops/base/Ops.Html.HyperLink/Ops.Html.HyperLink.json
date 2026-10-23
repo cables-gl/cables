@@ -1,5 +1,5 @@
 {
-    "summary": "open an url",
+    "summary": "Open a URL in the current browser tab",
     "layout": {
         "portsIn": [
             {

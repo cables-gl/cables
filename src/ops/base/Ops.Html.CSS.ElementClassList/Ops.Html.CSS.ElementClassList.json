@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "get css classes of an element",
+    "summary": "Get the CSS class names of an HTML element",
     "docs": {
         "ports": [
             {

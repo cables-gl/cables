@@ -20,7 +20,7 @@
         ],
         "portsOut": []
     },
-    "summary": "set CSS variable string value",
+    "summary": "Set a CSS variable to a string value",
     "youtubeid": "",
     "docs": {
         "ports": []

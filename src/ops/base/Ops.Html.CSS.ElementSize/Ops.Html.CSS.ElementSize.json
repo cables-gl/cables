@@ -74,7 +74,7 @@
         "ports": []
     },
     "license": "MIT",
-    "summary": "Set Size of a HTML element",
+    "summary": "Set the width and height of an HTML element",
     "isReleased": true,
     "exampleProjectId": "Os01yn"
 }

@@ -14,7 +14,7 @@
             }
         ]
     },
-    "summary": "Set CSS variable URL value",
+    "summary": "Set a CSS variable to a URL value",
     "docs": {
         "ports": []
     },

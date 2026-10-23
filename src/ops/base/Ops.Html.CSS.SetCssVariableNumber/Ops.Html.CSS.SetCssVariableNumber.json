@@ -20,7 +20,7 @@
         ],
         "portsOut": []
     },
-    "summary": "Set CSS variable number value",
+    "summary": "Set a CSS variable to a number value",
     "docs": {
         "ports": []
     },

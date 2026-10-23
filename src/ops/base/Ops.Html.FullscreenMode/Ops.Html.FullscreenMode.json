@@ -32,7 +32,7 @@
             }
         ]
     },
-    "summary": "Switch webgl to fullscreen",
+    "summary": "Show a WebGL canvas or HTML element in fullscreen",
     "authorName": "pandur",
     "id": "fe933b35-696d-4738-be03-c0c011ed67a0",
     "created": 1558014424320,

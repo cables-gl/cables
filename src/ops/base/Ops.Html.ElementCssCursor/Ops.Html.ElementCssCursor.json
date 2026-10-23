@@ -1,5 +1,5 @@
 {
-    "summary": "set the mouse cursor",
+    "summary": "Set the CSS mouse cursor style of an HTML element",
     "layout": {
         "portsIn": [
             {

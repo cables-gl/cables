@@ -51,7 +51,7 @@
             }
         ]
     },
-    "summary": "set file dependant on browser",
+    "summary": "Select a file based on the detected browser (Chrome, Firefox, Safari, ...)",
     "docs": {
         "ports": [
             {

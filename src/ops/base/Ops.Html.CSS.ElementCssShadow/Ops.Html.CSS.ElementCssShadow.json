@@ -76,7 +76,7 @@
             }
         ]
     },
-    "summary": "Add shadows to html elements",
+    "summary": "Add a CSS shadow or glow to an HTML element",
     "docs": {
         "ports": []
     },

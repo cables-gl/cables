@@ -63,7 +63,7 @@
             }
         ]
     },
-    "summary": "Set childs of a HTML Element",
+    "summary": "Set the child elements of a parent HTML element",
     "youtubeid": "",
     "issues": "",
     "docs": {

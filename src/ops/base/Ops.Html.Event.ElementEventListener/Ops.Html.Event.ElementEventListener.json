@@ -40,7 +40,7 @@
             }
         ]
     },
-    "summary": "Add a custom event listener",
+    "summary": "Listen for browser or custom events on an HTML element",
     "docs": {
         "ports": [
             {
