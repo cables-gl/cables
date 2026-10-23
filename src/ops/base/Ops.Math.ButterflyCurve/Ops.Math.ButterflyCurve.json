@@ -23,10 +23,11 @@
             }
         ]
     },
-    "summary": "generate coordinates of a butterfly curve",
+    "summary": "Point on a butterfly curve for a given value",
     "docs": {
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "rmDnRy"
 }

@@ -565,6 +565,12 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1792309452203
+        },
+        {
+            "message": "Ops that use assets can now also load assets from blob URLs",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1792581877768
         }
     ],
     "isReleased": true,

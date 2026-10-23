@@ -1,5 +1,5 @@
 {
-    "summary": "Returns current date and time and timestamp",
+    "summary": "Outputs current date and time and timestamp",
     "layout": {
         "portsIn": [
             {
@@ -100,5 +100,6 @@
             "author": "pandur",
             "date": 1792043421274
         }
-    ]
+    ],
+    "isReleased": false
 }
