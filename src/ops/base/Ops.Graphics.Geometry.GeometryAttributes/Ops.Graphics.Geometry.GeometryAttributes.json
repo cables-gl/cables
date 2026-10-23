@@ -41,15 +41,9 @@
             }
         ]
     },
-    "summary": "Get vertices of a geometry as array3x (vertex vertices)",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Get a geometry’s vertices, faces, normals, UVs, colors, and tangents",
+    "docs": {},
     "exampleProjectId": "4VpJz6",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
-    "changelog": [],
     "license": "MIT",
     "isReleased": true
 }

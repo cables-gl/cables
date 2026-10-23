@@ -33,7 +33,7 @@
             }
         ]
     },
-    "summary": "Calculates the angle from a specified point to the coordinate origin.",
+    "summary": "Angle of the point X/Y around the origin in radians (-PI to PI)",
     "docs": {
         "ports": [
             {

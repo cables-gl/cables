@@ -61,5 +61,6 @@
                 "name": "Error"
             }
         ]
-    }
+    },
+    "summary": "Load a file and output a blob URL, MIME type, and size in bytes."
 }

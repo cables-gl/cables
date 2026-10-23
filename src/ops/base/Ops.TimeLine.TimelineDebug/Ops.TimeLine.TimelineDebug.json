@@ -79,5 +79,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Output timeline cursor, visible range, loop bounds, and selected-key information."
 }

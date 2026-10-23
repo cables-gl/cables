@@ -38,7 +38,7 @@
             }
         ]
     },
-    "summary": "If value of array is between min and max then the value is 1 else 0",
+    "summary": "Set array values between Min and Max to 1, or keep their values when enabled",
     "docs": {
         "ports": [
             {

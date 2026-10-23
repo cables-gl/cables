@@ -46,15 +46,11 @@
             }
         ]
     },
-    "summary": "interpolate position on a spline/array3x",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Follow a 3D point array over time and output a look-ahead transform",
+    "docs": {},
     "authorName": "pandur",
     "id": "395bff14-d092-4e7e-a723-b6a69564add2",
     "created": 1520592871298,
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "lL9_EF",
     "coreLibs": [
         "cgl"

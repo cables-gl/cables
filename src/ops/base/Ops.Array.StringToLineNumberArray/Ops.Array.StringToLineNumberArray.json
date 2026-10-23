@@ -24,10 +24,8 @@
             }
         ]
     },
-    "summary": "Output an array containing a line number for every character",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Output the line number of each non-newline character in a string",
+    "docs": {},
     "isReleased": true,
     "license": "MIT",
     "exampleProjectId": "Xkf8Ry"

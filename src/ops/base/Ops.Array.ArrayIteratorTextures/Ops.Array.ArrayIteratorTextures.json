@@ -35,7 +35,7 @@
             }
         ]
     },
-    "summary": "Iterate over an array of objects",
+    "summary": "Trigger once for each texture in an array",
     "docs": {
         "ports": [
             {
@@ -60,7 +60,6 @@
             }
         ]
     },
-    "issues": "",
     "exampleProjectId": "vS5fjz",
     "changelog": [
         {

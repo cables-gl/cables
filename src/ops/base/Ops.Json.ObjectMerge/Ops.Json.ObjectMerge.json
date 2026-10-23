@@ -33,10 +33,8 @@
             }
         ]
     },
-    "summary": "merge key+values of two objects",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Merge the keys and values of two objects",
+    "docs": {},
     "exampleProjectId": "LNJHeG",
     "isReleased": true,
     "license": "MIT"

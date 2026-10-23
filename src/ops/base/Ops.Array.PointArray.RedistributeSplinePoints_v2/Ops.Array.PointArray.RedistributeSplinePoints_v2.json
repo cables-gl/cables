@@ -31,10 +31,8 @@
             }
         ]
     },
-    "summary": "Recalculate a spline / change number of points of a spline",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Resample a spline to a chosen number of evenly spaced points",
+    "docs": {},
     "changelog": [
         {
             "message": "New version v2: Automatically update when array changes",

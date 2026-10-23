@@ -33,7 +33,7 @@
             "date": 1557302487932
         }
     ],
-    "summary": "Round numbers up",
+    "summary": "Round array values to the nearest, down, or up at a chosen decimal place",
     "docs": {
         "ports": [
             {

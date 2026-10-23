@@ -28,7 +28,7 @@
             }
         ]
     },
-    "summary": "Average x,y,z values of an array3x",
+    "summary": "Calculate average X, Y, and Z across a 3D point array",
     "docs": {
         "ports": [
             {

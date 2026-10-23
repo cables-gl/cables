@@ -92,5 +92,6 @@
         "cgl_texturemath",
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Apply modulo to selected X, Y, and Z components of a GPU array"
 }

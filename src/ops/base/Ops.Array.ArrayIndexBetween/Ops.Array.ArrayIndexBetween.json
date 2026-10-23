@@ -34,14 +34,9 @@
             }
         ]
     },
-    "summary": "Output index where value is greater than number and smaller then next number ",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "summary": "Find the index of the interval containing a value in an array",
+    "docs": {},
     "exampleProjectId": "kH4xLu",
-    "caniusequery": "",
     "isReleased": true,
     "license": "MIT"
 }

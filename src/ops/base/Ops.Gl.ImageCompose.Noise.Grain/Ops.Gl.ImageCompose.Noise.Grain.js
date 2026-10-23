@@ -18,7 +18,6 @@ const
     timeUniform = new CGL.Uniform(shader, "f", "time", 1.0),
     varianceUni = new CGL.Uniform(shader, "f", "variance", variance),
     meanUni = new CGL.Uniform(shader, "f", "mean", inmean),
-    speedUni = new CGL.Uniform(shader, "f", "speed", speed),
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     mulUniform = new CGL.Uniform(shader, "t", "texMul", 1);
 
@@ -29,11 +28,11 @@ CGL.TextureEffect.setupBlending(op, shader, blendMode, amount, maskAlpha);
 op.toWorkPortsNeedToBeLinked(render);
 
 inTexMul.onChange =
-normalize.onChange = function ()
-{
-    shader.toggleDefine("HAS_MULMASK", inTexMul.get());
-    shader.toggleDefine("NORMALIZE", normalize.get());
-};
+    normalize.onChange = function ()
+    {
+        shader.toggleDefine("HAS_MULMASK", inTexMul.get());
+        shader.toggleDefine("NORMALIZE", normalize.get());
+    };
 
 render.onTriggered = function ()
 {
@@ -45,7 +44,7 @@ render.onTriggered = function ()
     cgl.pushShader(shader);
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    if (inTexMul.get())cgl.setTexture(1, inTexMul.get().tex);
+    if (inTexMul.get()) cgl.setTexture(1, inTexMul.get().tex);
 
     cgl.currentTextureEffect.bind();
 

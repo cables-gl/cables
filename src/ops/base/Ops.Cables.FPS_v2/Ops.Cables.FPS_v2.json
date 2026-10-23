@@ -9,10 +9,8 @@
     ],
     "authorName": "pandur",
     "created": 1600117397013,
-    "summary": "output current frames per second",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Show the current frame rate in frames per second and milliseconds",
+    "docs": {},
     "layout": {
         "portsOut": [
             {

@@ -22,7 +22,7 @@
     "authorName": "pandur",
     "id": "b0fbc366-09a8-4695-87b3-5946210bf722",
     "created": 1513100341975,
-    "summary": "Sort an array with the lowest values of the selected component.",
+    "summary": "Sort 3D points by a selected X, Y, or Z component",
     "docs": {
         "ports": [
             {
@@ -39,8 +39,6 @@
             }
         ]
     },
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
             "message": "Ops.Array.Array3xSort renamed to Ops.Array.SortArray3",

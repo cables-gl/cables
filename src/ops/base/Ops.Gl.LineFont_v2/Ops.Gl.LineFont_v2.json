@@ -40,11 +40,8 @@
             }
         ]
     },
-    "summary": "A Simple way to write text on the screen.",
-    "youtubeid": "",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Render text as line segments with adjustable spacing and alignment",
+    "docs": {},
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.LineFont",
