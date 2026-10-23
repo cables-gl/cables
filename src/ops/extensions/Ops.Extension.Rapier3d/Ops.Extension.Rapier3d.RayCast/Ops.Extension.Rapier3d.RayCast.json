@@ -92,9 +92,7 @@
         "cgl"
     ],
     "exampleProjectId": "PSX4W8",
-    "docs": {
-        "ports": []
-    },
-    "summary": "Detect intersections of a ray against physic objects",
+    "docs": {},
+    "summary": "Detect where a ray intersects physics objects",
     "isReleased": true
 }

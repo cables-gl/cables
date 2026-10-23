@@ -213,8 +213,6 @@
     },
     "isReleased": true,
     "exampleProjectId": "NLFWxn",
-    "docs": {
-        "ports": []
-    },
-    "summary": "Creates a physics body."
+    "docs": {},
+    "summary": "Create a physics body with adjustable shape, mass, and friction"
 }
