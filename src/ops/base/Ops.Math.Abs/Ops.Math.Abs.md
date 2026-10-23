@@ -1,2 +1,2 @@
-Converts negative numbers to positives, e.g. `-3` —&gt; `3`.
+Converts negative numbers to positives, e.g. `-3` becomes `3`.
 
