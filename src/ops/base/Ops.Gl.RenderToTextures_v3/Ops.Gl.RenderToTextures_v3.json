@@ -181,7 +181,7 @@
             }
         ]
     },
-    "summary": "render to multiple textures at the same time",
+    "summary": "Renders a scene to multiple textures.",
     "docs": {
         "ports": []
     },

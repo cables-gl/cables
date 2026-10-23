@@ -61,7 +61,7 @@
     },
     "authorName": "pandur",
     "created": 1650964935237,
-    "summary": "Simulate fisheye effect",
+    "summary": "Applies a fisheye distortion to an image.",
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -48,7 +48,7 @@
             }
         ]
     },
-    "summary": "sidebar boolean toggle/switch element",
+    "summary": "Adds a toggle switch to the sidebar",
     "docs": {
         "ports": []
     },

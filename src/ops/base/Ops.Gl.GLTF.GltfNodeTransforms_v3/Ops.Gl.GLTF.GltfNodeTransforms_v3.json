@@ -94,7 +94,7 @@
             }
         ]
     },
-    "summary": "output all transformations of nodes starting with [search]",
+    "summary": "Gets transforms for matching glTF nodes.",
     "issues": "",
     "youtubeids": [
         "I_eD5nml_5A"

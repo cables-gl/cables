@@ -1,5 +1,5 @@
 {
-    "summary": "enable, disable or switch RGBA color channels ",
+    "summary": "Selects output color channels.",
     "layout": {
         "portsIn": [
             {

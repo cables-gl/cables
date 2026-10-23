@@ -76,7 +76,7 @@
             }
         ]
     },
-    "summary": "Set the mouse cursor",
+    "summary": "Sets the cursor style for an HTML element.",
     "issues": "",
     "youtubeids": [],
     "docs": {

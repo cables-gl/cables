@@ -229,7 +229,7 @@
             "date": 1646674536478
         }
     ],
-    "summary": "Load GLTF/GLB 3d files",
+    "summary": "Loads and renders a glTF or GLB 3D scene",
     "issues": "",
     "youtubeids": [
         "QNLw21hSweg"

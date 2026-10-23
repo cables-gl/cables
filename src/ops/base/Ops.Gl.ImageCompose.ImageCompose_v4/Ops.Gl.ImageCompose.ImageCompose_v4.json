@@ -133,7 +133,7 @@
             }
         ]
     },
-    "summary": "Compose Images and effects as layers to generate new Images",
+    "summary": "Combines images and effects in layers.",
     "credits": [
         {
             "title": "Photoshop math GLSL shaders",

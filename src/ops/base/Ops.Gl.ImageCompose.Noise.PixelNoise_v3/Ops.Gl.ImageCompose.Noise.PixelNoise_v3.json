@@ -98,7 +98,7 @@
             }
         ]
     },
-    "summary": "Pixelated noise",
+    "summary": "Adds adjustable pixel noise to an image.",
     "docs": {
         "ports": [
             {

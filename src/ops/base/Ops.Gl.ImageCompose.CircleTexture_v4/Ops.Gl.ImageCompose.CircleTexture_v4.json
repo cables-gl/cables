@@ -156,7 +156,7 @@
     "authorName": "pandur",
     "id": "9738c421-1ee0-42bf-be0b-f4a481385fbf",
     "created": 1646838589132,
-    "summary": "Draw 2d circle into texture",
+    "summary": "Draws a circle into a texture.",
     "issues": "",
     "youtubeids": [],
     "docs": {

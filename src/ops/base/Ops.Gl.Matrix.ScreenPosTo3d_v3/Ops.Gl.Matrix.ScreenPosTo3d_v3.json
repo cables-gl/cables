@@ -41,7 +41,7 @@
             }
         ]
     },
-    "summary": "convert screen coordinates to a 3d position",
+    "summary": "Converts screen coordinates to a 3D position",
     "docs": {
         "ports": [
             {

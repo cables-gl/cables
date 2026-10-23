@@ -135,7 +135,7 @@
             }
         ]
     },
-    "summary": "create an image(img) html element",
+    "summary": "Creates an HTML image element from a file",
     "license": "MIT",
     "docs": {
         "ports": []

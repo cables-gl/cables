@@ -70,7 +70,7 @@
     "authorName": "pandur",
     "id": "cee66e27-c2fa-49d5-a80f-aa33f52164c4",
     "created": 1789654563058,
-    "summary": "get average value in an area of a fft audio analysis buffer",
+    "summary": "Gets the average value in an FFT area.",
     "docs": {
         "ports": [
             {

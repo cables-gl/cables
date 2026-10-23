@@ -127,7 +127,7 @@
         "cgl_shadermodifier",
         "cgl"
     ],
-    "summary": "add shadow capabilities to any material",
+    "summary": "Adds shadow support to a material.",
     "issues": "",
     "youtubeids": [],
     "docs": {

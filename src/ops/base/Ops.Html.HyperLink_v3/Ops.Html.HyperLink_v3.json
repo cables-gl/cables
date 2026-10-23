@@ -75,7 +75,7 @@
         ],
         "portsOut": []
     },
-    "summary": "Open another website",
+    "summary": "Opens a URL in the current window or another target.",
     "docs": {
         "ports": []
     },

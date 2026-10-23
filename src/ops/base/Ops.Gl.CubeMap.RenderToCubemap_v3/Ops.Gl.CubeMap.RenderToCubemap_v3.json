@@ -63,7 +63,7 @@
             }
         ]
     },
-    "summary": "render a scene into a cubemap",
+    "summary": "Renders a scene to a cubemap texture",
     "issues": "",
     "docs": {
         "ports": [

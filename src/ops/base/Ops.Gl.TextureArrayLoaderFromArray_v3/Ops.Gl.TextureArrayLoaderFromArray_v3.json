@@ -67,7 +67,7 @@
             }
         ]
     },
-    "summary": "load multiple texture from filenames given as an array",
+    "summary": "Loads multiple textures from an array of URLs.",
     "docs": {
         "ports": []
     },

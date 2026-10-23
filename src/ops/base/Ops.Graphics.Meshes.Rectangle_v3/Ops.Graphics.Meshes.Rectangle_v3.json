@@ -133,7 +133,7 @@
             }
         ]
     },
-    "summary": "draw a rectangle (plane, square)",
+    "summary": "Creates a rectangle, plane, or square mesh.",
     "issues": "",
     "youtubeids": [],
     "docs": {

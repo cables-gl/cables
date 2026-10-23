@@ -16,7 +16,7 @@
             }
         ]
     },
-    "summary": "String input/output ",
+    "summary": "Stores and outputs a string value",
     "docs": {
         "ports": []
     },

@@ -77,7 +77,7 @@
             }
         ]
     },
-    "summary": "Holds an audio file / sample in a buffer ",
+    "summary": "Loads an audio file into a buffer.",
     "issues": "",
     "youtubeids": [],
     "docs": {

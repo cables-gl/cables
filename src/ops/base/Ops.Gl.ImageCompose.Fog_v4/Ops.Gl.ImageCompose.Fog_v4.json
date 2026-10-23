@@ -113,7 +113,7 @@
             }
         ]
     },
-    "summary": "add post processing fog (nebula) to a scene",
+    "summary": "Adds a fog effect to a scene.",
     "docs": {
         "ports": [
             {

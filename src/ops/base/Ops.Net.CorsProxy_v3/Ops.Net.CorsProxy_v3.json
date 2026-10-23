@@ -40,7 +40,7 @@
             }
         ]
     },
-    "summary": "create a cables.gl CORS proxy URL",
+    "summary": "Creates a CORS proxy URL to load content from another site.",
     "docs": {
         "ports": []
     },

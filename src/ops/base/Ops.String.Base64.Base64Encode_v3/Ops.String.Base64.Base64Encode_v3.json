@@ -20,7 +20,7 @@
             }
         ]
     },
-    "summary": "encode a string to base64",
+    "summary": "Encodes a string as Base64",
     "changelog": [
         {
             "message": "cloned op from Ops.String.Base64Encode",
