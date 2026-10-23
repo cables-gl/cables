@@ -189,12 +189,11 @@
             }
         ]
     },
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "license": "MIT",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Modify particle velocities with point, directional, rotation, vortex, and collision effects."
 }
