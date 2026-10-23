@@ -215,5 +215,6 @@
     "exampleProjectId": "NLFWxn",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Creates a physics body."
 }

@@ -123,5 +123,6 @@
     "coreLibs": [
         "minigpu",
         "shadergraph"
-    ]
+    ],
+    "summary": "Creates a GPU render pipeline from shader modules."
 }
