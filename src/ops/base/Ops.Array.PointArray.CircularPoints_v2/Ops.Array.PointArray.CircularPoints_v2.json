@@ -128,10 +128,8 @@
         ]
     },
     "exampleProjectId": "V34dYh",
-    "docs": {
-        "ports": []
-    },
-    "summary": "Create arrays for circular shapes, helix, circle, etc.",
+    "docs": {},
+    "summary": "Generate 3D point arrays for circles, spirals, and helices",
     "license": "MIT",
     "isReleased": true
 }

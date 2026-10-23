@@ -79,14 +79,9 @@
             }
         ]
     },
-    "summary": "Generate coordinates for a rectangular field / grid of points",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "summary": "Generate a centered or offset grid of 3D points",
+    "docs": {},
     "exampleProjectId": "icchV5",
-    "caniusequery": "",
     "isReleased": true,
     "license": "MIT"
 }

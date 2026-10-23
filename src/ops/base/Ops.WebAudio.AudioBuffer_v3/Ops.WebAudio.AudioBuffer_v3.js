@@ -78,7 +78,7 @@ function loadAudioFile(url, loadFromData)
         const ext = url.substr(url.lastIndexOf(".") + 1);
         if (ext === "wav")
         {
-            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
+            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 0);
         }
         else
         {
@@ -93,7 +93,7 @@ function loadAudioFile(url, loadFromData)
 
         if (fileBlob.type === "audio/wav")
         {
-            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
+            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 0);
         }
         else
         {

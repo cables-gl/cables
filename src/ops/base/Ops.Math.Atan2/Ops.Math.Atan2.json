@@ -33,7 +33,7 @@
             }
         ]
     },
-    "summary": "Calculates the angle from a specified point to the coordinate origin.",
+    "summary": "Angle of the point X/Y around the origin in radians (-PI to PI)",
     "docs": {
         "ports": [
             {
@@ -43,6 +43,10 @@
         ]
     },
     "isReleased": true,
+<<<<<<< HEAD
     "license": "MIT",
     "exampleProjectId": "kcQ9Sy"
+=======
+    "license": "MIT"
+>>>>>>> c460c33ac54342b8b22e9c04340c4cd4bfcec7b9
 }

@@ -31,7 +31,7 @@
             }
         ]
     },
-    "summary": "Crop/cuts a smaller chunk out of an array.",
+    "summary": "Extract a section of an array by start index and length",
     "docs": {
         "ports": [
             {

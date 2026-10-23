@@ -45,8 +45,7 @@
             }
         ]
     },
-    "summary": "Map values in an array from one range into another.",
-    "issues": "",
+    "summary": "Remap array values from an input range to an output range with optional easing",
     "youtubeids": [
         "SKYXdzHYwdI"
     ],

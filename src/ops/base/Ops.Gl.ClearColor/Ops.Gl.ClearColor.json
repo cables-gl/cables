@@ -1,5 +1,5 @@
 {
-    "summary": "sets all cleared pixels to one colour. Use to change the background colour.",
+    "summary": "Clear the render area to a background colour",
     "layout": {
         "portsIn": [
             {
@@ -71,19 +71,6 @@
             }
         ]
     },
-    "issues": "",
-    "todos": [
-        {
-            "message": "ccc",
-            "author": "panbdur",
-            "id": "31b249b6-570c-4108-8dfa-c08c0edf836a",
-            "date": 1605544715886,
-            "deleted": true,
-            "deletedBy": "cables",
-            "deletedDate": 1605544717592
-        }
-    ],
-    "youtubeids": [],
     "exampleProjectId": "_UEjvr",
     "license": "MIT",
     "coreLibs": [

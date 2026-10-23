@@ -127,9 +127,7 @@
             }
         ]
     },
-    "summary": "Generates 4 different waveform textures. Sine, sawtooth,Triangle, Square.",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Draw a sine, sawtooth, triangle, or square waveform with adjustable amplitude and frequency",
     "docs": {
         "ports": [
             {

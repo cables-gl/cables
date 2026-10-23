@@ -33,9 +33,7 @@
             }
         ]
     },
-    "summary": "Sort an array of numbers and also get sorted indices ",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Sort numbers and output their original indices in the new order",
     "docs": {
         "ports": [
             {

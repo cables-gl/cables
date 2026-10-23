@@ -40,12 +40,8 @@
             }
         ]
     },
-    "summary": "output current input texture or a default texture",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "summary": "Pass through a texture or use a default texture when none is connected",
+    "docs": {},
     "license": "MIT",
     "coreLibs": [
         "cgl"

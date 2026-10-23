@@ -176,13 +176,12 @@
             }
         ]
     },
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "license": "MIT",
     "exampleProjectId": "tmQeE9",
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Apply a procedural noise vector field to particle velocities."
 }

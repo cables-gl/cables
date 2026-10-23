@@ -37,7 +37,7 @@
             }
         ]
     },
-    "summary": "For subdividing splines, smoothing lines using cubic bezier interpolation",
+    "summary": "Subdivide and smooth a 3D point path with cubic Bézier interpolation",
     "docs": {
         "ports": [
             {
@@ -58,8 +58,6 @@
             }
         ]
     },
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
             "message": "Ops.Array.Array3xSubdivide_v2 renamed to Ops.Array.SubdivideArray3_v2",

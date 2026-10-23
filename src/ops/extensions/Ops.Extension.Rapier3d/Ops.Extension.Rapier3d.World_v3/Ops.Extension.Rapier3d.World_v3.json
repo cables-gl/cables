@@ -120,9 +120,7 @@
         ]
     },
     "exampleProjectId": "V66gqi",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "coreLibs": [
         "cgl"
     ],
@@ -132,7 +130,7 @@
             "type": "commonjs"
         }
     ],
-    "summary": "Physics simulation world ",
+    "summary": "Create and run a 3D physics simulation world",
     "credits": [
         {
             "title": "Rapier 3d",

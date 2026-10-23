@@ -28,9 +28,7 @@
             }
         ]
     },
-    "summary": "Convert an array of splines to one \"line stripped\" array",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Convert multiple spline point arrays into line segment pairs",
     "docs": {
         "ports": [
             {

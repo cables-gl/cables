@@ -35,7 +35,7 @@
             }
         ]
     },
-    "summary": "Array of fixed size, index is automatically incremented and restarts after reaching the end",
+    "summary": "Store values in a fixed-size array that wraps to the start when full",
     "docs": {
         "ports": [
             {

@@ -38,12 +38,8 @@
             }
         ]
     },
-    "summary": "Get an array of values by key of objects in an array",
-    "issues": "",
-    "youtubeids": [],
-    "docs": {
-        "ports": []
-    },
+    "summary": "Extract values for a given key from an array of objects",
+    "docs": {},
     "exampleProjectId": "KQGGeT",
     "license": "MIT",
     "isReleased": true

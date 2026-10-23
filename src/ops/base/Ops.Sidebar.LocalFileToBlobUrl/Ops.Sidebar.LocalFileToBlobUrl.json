@@ -104,5 +104,6 @@
                 "name": "File Changed"
             }
         ]
-    }
+    },
+    "summary": "Add a sidebar file picker that outputs blob URLs and filenames."
 }

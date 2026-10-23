@@ -78,10 +78,8 @@
             }
         ]
     },
-    "summary": "Transform (translate, rotate, scale) positions in an array3x",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Translate, rotate, or scale 3D points in an array",
+    "docs": {},
     "changelog": [
         {
             "message": "tweaked parameter ui",

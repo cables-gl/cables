@@ -20,7 +20,7 @@
             }
         ]
     },
-    "summary": "Sort an array3, by the distance of each point to the previous point",
+    "summary": "Reorder 3D points by repeatedly choosing the nearest unused point",
     "docs": {
         "ports": [
             {
@@ -46,8 +46,6 @@
             "date": 1722850079168
         }
     ],
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "7C6DlJ",
     "isReleased": true,
     "license": "MIT"

@@ -26,7 +26,7 @@
             }
         ]
     },
-    "summary": "gradient editor,outputs an objects with gradient information",
+    "summary": "Edit a color gradient and output its gradient object and color array",
     "docs": {
         "ports": [
             {

@@ -53,10 +53,8 @@
             }
         ]
     },
-    "summary": "read MIDI information at time x",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Get active MIDI note names, progress, and velocity at a given time",
+    "docs": {},
     "exampleProjectId": "yJPMCV",
     "license": "MIT",
     "isReleased": true

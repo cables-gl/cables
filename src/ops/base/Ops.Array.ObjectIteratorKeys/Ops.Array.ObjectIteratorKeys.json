@@ -34,7 +34,7 @@
             }
         ]
     },
-    "summary": "Iterate over an array of objects",
+    "summary": "Trigger once for each object in an array",
     "docs": {
         "ports": [
             {
@@ -59,7 +59,6 @@
             }
         ]
     },
-    "issues": "",
     "changelog": [
         {
             "message": "op created",

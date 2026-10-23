@@ -54,9 +54,7 @@
             "date": 1671034630588
         }
     ],
-    "summary": "Remove points from an array, e.g. xth points, random, duplicates",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Reduce a 3D point array by removing every nth point, random points, or near-duplicates",
     "docs": {
         "ports": [
             {

@@ -71,9 +71,7 @@
             }
         ]
     },
-    "summary": "Generate coordinates for a hexagon grid, outputs array3x",
-    "issues": "",
-    "youtubeids": [],
+    "summary": "Generate 3D point coordinates for a hexagon grid",
     "docs": {
         "ports": [
             {

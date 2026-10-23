@@ -118,5 +118,6 @@
     },
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "summary": "Steer particles toward positions supplied by a target texture."
 }

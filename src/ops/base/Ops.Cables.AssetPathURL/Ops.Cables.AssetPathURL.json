@@ -23,12 +23,8 @@
             }
         ]
     },
-    "summary": "outputs the path to the assets",
-    "youtubeid": "",
-    "issues": "",
-    "docs": {
-        "ports": []
-    },
+    "summary": "Get the asset URL for a filename",
+    "docs": {},
     "exampleProjectId": "mwhthf",
     "isReleased": true,
     "license": "MIT"
