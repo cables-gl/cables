@@ -34,11 +34,10 @@
         ]
     },
     "summary": "Filter valid arrays",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "CfQ6Ry"
 }
