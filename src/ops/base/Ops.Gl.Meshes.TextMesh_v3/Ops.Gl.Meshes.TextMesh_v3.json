@@ -216,5 +216,5 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": false
 }

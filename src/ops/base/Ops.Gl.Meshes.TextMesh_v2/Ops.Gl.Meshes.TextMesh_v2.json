@@ -185,10 +185,6 @@
                 "text": "Trigger out"
             },
             {
-                "name": "texture",
-                "text": "Texture out"
-            },
-            {
                 "name": "Font Available",
                 "text": "Reports if font is available with a zero or one"
             }
@@ -208,10 +204,7 @@
             "date": 1721395559864
         }
     ],
-    "issues": "",
-    "youtubeids": [],
     "exampleProjectId": "LzDnH-",
-    "caniusequery": "",
     "license": "MIT",
     "coreLibs": [
         "cgl"

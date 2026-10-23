@@ -24,7 +24,9 @@
         ]
     },
     "summary": "Smooths a changing number: blends each new value into the previous result",
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "license": "MIT",
     "changelog": [
         {
@@ -38,6 +40,8 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1792757546412
-          }
-    ]
+        }
+    ],
+    "isReleased": false,
+    "exampleProjectId": "ZEGfSy"
 }
