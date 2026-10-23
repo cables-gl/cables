@@ -35,10 +35,10 @@ function init()
     updateSoon();
 
     inStyle.onChange =
-    src.onChange =
-    inautoplay.onChange =
-    updateAttribs.onChange =
-    elId.onChange = updateSoon;
+        src.onChange =
+        inautoplay.onChange =
+        updateAttribs.onChange =
+        elId.onChange = updateSoon;
     active.onChange = updateActive;
 }
 
@@ -53,12 +53,12 @@ op.onMasterVolumeChanged =
 function updateVideoSettings()
 {
     if (!element) return;
-    if (!play.get())element.pause();
+    if (!play.get()) element.pause();
     element.controls = !!controls.get();
     element.autoplay = !!inautoplay.get();
     element.loop = !!loop.get();
     element.muted = !!inMuted.get();
-    if (element)element.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
+    if (element) element.volume = CABLES.clamp(volume.get() * op.patch.config.masterVolume, 0, 1);
 }
 
 function updatePlay()
@@ -66,12 +66,12 @@ function updatePlay()
     if (!element) return;
     try
     {
-        if (play.get())element.play();
+        if (play.get()) element.play();
         else element.pause();
     }
     catch (e)
     {
-        console.log("eee", e);
+
     }
 }
 
@@ -127,7 +127,7 @@ function addElement()
 
     element.addEventListener("timeupdate", () =>
     {
-        if (element)outTime.set(element.currentTime);
+        if (element) outTime.set(element.currentTime);
     }, true);
 
     element.onerror = function ()
@@ -146,7 +146,7 @@ function addElement()
 
     updateVideoSettings();
 
-    if (play.get())updatePlay();
+    if (play.get()) updatePlay();
 
     outEle.set(element);
 }
@@ -168,13 +168,13 @@ function updateAttribs()
     }
     catch (e)
     {
-        console.log("ee", e);
+
     }
 }
 
 function removeEle()
 {
-    if (element && element.parentNode)element.parentNode.removeChild(element);
+    if (element && element.parentNode) element.parentNode.removeChild(element);
     element = null;
     outEle.set(element);
 }

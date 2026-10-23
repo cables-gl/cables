@@ -20,7 +20,7 @@ inExec.onTriggered = () =>
             {
                 ctx.imageSmoothingEnabled = !!inSmooth.get();
                 ctx.imageSmoothingQuality = "high";
-                // console.log("texti", destCanv.width, destCanv.height);
+
                 ctx.drawImage(glCanvas,
                     0, 0,
                     glCanvas.width, glCanvas.height,
@@ -31,7 +31,7 @@ inExec.onTriggered = () =>
                 ctx.imageSmoothingEnabled = true;
             }
         }
-        catch (e) { console.log(e); }
+    catch (e) {}
 
     outNext.trigger();
 };

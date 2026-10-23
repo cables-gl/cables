@@ -62,7 +62,7 @@ reloadTrigger.onTriggered = () =>
 {
     if (outIsLoading.get())
     {
-        console.log("already loading, waiting...");
+
         requestAfterFinish = true;
         return;
     }
@@ -168,7 +168,7 @@ function reload(addCachebuster, force = false)
     op.setUiError("jsonParse", null);
 
     let url = op.patch.getFilePath(inUrl.get());
-    if (addCachebuster)url += "?rnd=" + CABLES.generateUUID();
+    if (addCachebuster) url += "?rnd=" + CABLES.generateUUID();
 
     op.patch.loading.addAssetLoadingTask(() =>
     {
@@ -176,10 +176,11 @@ function reload(addCachebuster, force = false)
         const startTime = performance.now();
 
         const options = { "method": inMethod.get() };
-        if (inMethod.get() != "GET") options.body = inBody.get(); if (inSendCredentials.get()) options.credentials = "include";
+        if (inMethod.get() != "GET") options.body = inBody.get();
+        if (inSendCredentials.get()) options.credentials = "include";
 
         if (inHeaders.isLinked()) options.headers = inHeaders.get();
-        if (!options.headers)options.headers = {};
+        if (!options.headers) options.headers = {};
         if (!options.headers["Content-Type"] && sendContentType) options.headers["Content-Type"] = inContentType.get();
 
         const resContentType = inResContentType.get();
@@ -207,7 +208,7 @@ function reload(addCachebuster, force = false)
                 }).catch((e) =>
                 {
                     finishLoadingFail(loadingId, e);
-                    if (!outError.get())outError.set("Could not parse json");
+                    if (!outError.get()) outError.set("Could not parse json");
                 });
             }
             else if (resContentType == "String")
@@ -240,7 +241,7 @@ function reload(addCachebuster, force = false)
                         };
                         reader.readAsDataURL(b);
                     }
-                    else console.log("unknown content type " + resContentType);
+                    else finishLoadingSuccess(loadingId);
                 }).catch((e) =>
                 {
                     finishLoadingFail(loadingId, e);

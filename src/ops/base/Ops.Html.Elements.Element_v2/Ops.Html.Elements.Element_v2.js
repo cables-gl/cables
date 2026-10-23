@@ -192,7 +192,7 @@ function removeClasses()
         {
             if (classes[i]) div.classList.remove(classes[i]);
         }
-        catch (e) { console.log("e", e); }
+        catch (e) {}
     }
     oldClassesStr = "";
 }

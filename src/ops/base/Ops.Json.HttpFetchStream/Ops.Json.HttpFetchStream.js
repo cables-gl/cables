@@ -9,6 +9,7 @@ let reader;
 let decoder;
 let outputElement;
 let iv = 0;
+
 function start()
 {
     const response = inres.get();
@@ -24,7 +25,7 @@ function start()
         clearInterval(iv);
         iv = setInterval(read, 50);
     }
-    catch (e) { console.log("text", e); }
+    catch (e) {}
 }
 
 function read()
@@ -36,7 +37,7 @@ function read()
         {
             let chunk = decoder.decode(r.value, { "stream": true }).trim();
 
-             if (chunk.length == 0)done = true;
+            if (chunk.length == 0) done = true;
 
             if (!done)
             {
@@ -46,10 +47,10 @@ function read()
                 {
                     try
                     {
-                        if (part.indexOf("data: [DONE]") == 0)done = true; // wtf
-                        if (part.indexOf("[DONE]") == 0)part = part.substr(6); // wtf
-                        if (part.indexOf("data: ") == 0)part = part.substr(6); // wtf
-                        if(!done)
+                        if (part.indexOf("data: [DONE]") == 0) done = true; // wtf
+                        if (part.indexOf("[DONE]") == 0) part = part.substr(6); // wtf
+                        if (part.indexOf("data: ") == 0) part = part.substr(6); // wtf
+                        if (!done)
                         {
                             const json = JSON.parse(part);
                             outObje.setRef(json);
@@ -58,7 +59,7 @@ function read()
                     }
                     catch (err)
                     {
-                        console.log("Error parsing chunk:", err);
+
                     }
                 });
             }

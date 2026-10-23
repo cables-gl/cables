@@ -13,7 +13,7 @@ const
 
 // inHue.onChange =
 inRCS.onChange =
-inGradient.onChange =
+    inGradient.onChange =
     inAngle.onChange =
     inType.onChange =
     inEle.onChange = update;
@@ -23,18 +23,16 @@ op.onDelete = remove;
 let ele = null;
 update();
 
-function remove()
-{
-}
+function remove() {}
 
 function update()
 {
     ele = inEle.get();
     const gr = inGradient.get();
-    if (!gr) return;// console.log("no gr");
-    if (!ele) return;// console.log("no ele");
+    if (!gr) return;
+    if (!ele) return;
     const keys = gr.keys;
-    if (!keys) return console.log("no keys");
+    if (!keys) return;
 
     let str = "" + inType.get() + "-gradient(";
 

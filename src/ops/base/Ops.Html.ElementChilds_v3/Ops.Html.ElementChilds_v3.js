@@ -8,16 +8,16 @@ const oldEles = [];
 let fakeParent = null;
 let parent = null;
 inObjs.onChange =
-parentPort.onChange = () =>
-{
-    rebuild();
-    outNum.set(oldEles.length);
-};
+    parentPort.onChange = () =>
+    {
+        rebuild();
+        outNum.set(oldEles.length);
+    };
 
 function removeOldEles()
 {
     for (let i = 0; i < oldEles.length; i++)
-        if (oldEles[i])oldEles[i].remove();
+        if (oldEles[i]) oldEles[i].remove();
 
     oldEles.length = 0;
 }
@@ -25,15 +25,13 @@ function removeOldEles()
 function rebuild()
 {
     const ports = inObjs.get();
-    // console.log("oldeles", ports.length, oldEles.length);
-    // if (parentPort.get() != parent)console.log("parentttttttttttt");
-    // if (oldEles.length != ports.length)console.log(oldEles.length, ports.length);
+
     if (parent &&
-    parentPort.get() == parent &&
-    ports &&
-    oldEles &&
-    ports.length > 0 &&
-    oldEles.length == ports.length)
+        parentPort.get() == parent &&
+        ports &&
+        oldEles &&
+        ports.length > 0 &&
+        oldEles.length == ports.length)
     {
         let foundDiff = false;
         for (let i = 0; i < ports.length; i++)
@@ -41,7 +39,7 @@ function rebuild()
             if (ports[i].get() != oldEles[i] || (ports[i].get() && !parent.contains(ports[i].get())))
             {
                 foundDiff = true;
-                // console.log("found diff", ports[i].name, ports[i].get(), "u", oldEles[i]);
+
             }
         }
         if (!foundDiff) return;
@@ -58,12 +56,12 @@ function rebuild()
         }
         parent = fakeParent;
     }
-    // console.log("rebuild all");
+
     removeOldEles();
 
     for (let i = 0; i < ports.length; i++)
     {
-        if (ports[i].links.length > 1)console.log("!!!!!!!!!! element childs to many", op.id);
+
         const ele = ports[i].get();
         oldEles.push(ele);
         if (ele)
@@ -73,6 +71,6 @@ function rebuild()
     }
 
     outNum.set(oldEles.length);
-    if (parent == fakeParent)outParent.setRef(null);
+    if (parent == fakeParent) outParent.setRef(null);
     else outParent.setRef(parent);
 }
