@@ -123,5 +123,5 @@
     },
     "summary": "Low frequency oscillator (sine, triangle, ramp, square, random) with built-in timer, frequency in Hz, output range -1 to 1 by default",
     "exampleProjectId": "9EOrS8",
-    "isReleased": true
+    "isReleased": false
 }
