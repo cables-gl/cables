@@ -190,5 +190,6 @@
     "license": "MIT",
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "summary": "Changes particle velocity in an area."
 }

@@ -175,5 +175,6 @@
     "license": "MIT",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Changes particle velocity in an area."
 }

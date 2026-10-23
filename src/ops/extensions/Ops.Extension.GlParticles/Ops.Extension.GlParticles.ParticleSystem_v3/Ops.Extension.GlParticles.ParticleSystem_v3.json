@@ -240,5 +240,6 @@
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Simulates particles on the GPU."
 }

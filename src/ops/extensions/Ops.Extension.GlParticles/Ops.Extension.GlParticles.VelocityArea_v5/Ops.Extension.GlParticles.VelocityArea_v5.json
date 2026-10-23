@@ -196,5 +196,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Changes particle velocity in an area."
 }

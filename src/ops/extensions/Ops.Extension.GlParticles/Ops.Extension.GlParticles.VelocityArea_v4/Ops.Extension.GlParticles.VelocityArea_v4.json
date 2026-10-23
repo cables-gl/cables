@@ -170,7 +170,7 @@
             }
         ]
     },
-    "summary": "we",
+    "summary": "Changes particle velocity in an area.",
     "docs": {
         "ports": []
     },

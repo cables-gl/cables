@@ -280,7 +280,7 @@
             }
         ]
     },
-    "summary": "GPU Particle System ",
+    "summary": "Simulates particles on the GPU.",
     "docs": {
         "ports": []
     },
