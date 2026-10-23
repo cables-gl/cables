@@ -65,5 +65,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Round to the nearest whole number"
 }

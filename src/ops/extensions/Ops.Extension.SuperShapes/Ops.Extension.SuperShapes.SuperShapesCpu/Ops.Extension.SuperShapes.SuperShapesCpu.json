@@ -160,5 +160,6 @@
         "ports": []
     },
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Generate supershape geometry on the CPU"
 }

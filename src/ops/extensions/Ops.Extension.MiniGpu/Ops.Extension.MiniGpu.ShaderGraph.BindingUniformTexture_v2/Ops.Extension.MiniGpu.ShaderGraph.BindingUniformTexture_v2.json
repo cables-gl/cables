@@ -100,5 +100,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Bind a texture as a uniform for WebGPU shaders"
 }

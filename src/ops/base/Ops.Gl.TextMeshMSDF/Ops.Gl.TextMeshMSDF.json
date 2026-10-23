@@ -151,5 +151,6 @@
         "cgl"
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Render text as a 3D mesh using MSDF fonts"
 }

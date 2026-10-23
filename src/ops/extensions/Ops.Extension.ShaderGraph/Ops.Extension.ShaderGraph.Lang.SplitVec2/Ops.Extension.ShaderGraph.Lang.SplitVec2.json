@@ -40,5 +40,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Split a vec2 into X and Y"
 }

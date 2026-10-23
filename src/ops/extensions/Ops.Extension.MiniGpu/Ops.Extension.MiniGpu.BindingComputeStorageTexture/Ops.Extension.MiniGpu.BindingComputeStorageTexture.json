@@ -72,5 +72,6 @@
                 "name": "texture"
             }
         ]
-    }
+    },
+    "summary": "Storage texture for compute shaders"
 }

@@ -47,5 +47,6 @@
             "date": 1771742992682
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "OpenSCAD sphere shape"
 }

@@ -27,5 +27,6 @@
     "exampleProjectId": "YrUfnv",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "UV coordinates in a GLSL shader"
 }

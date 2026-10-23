@@ -81,5 +81,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Create a vec3 from X, Y and Z"
 }

@@ -59,5 +59,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Normalize a vector to length 1"
 }

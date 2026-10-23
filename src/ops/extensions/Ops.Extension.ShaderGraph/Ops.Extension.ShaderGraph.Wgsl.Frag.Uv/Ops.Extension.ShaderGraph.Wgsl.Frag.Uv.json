@@ -89,5 +89,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "UV coordinates in a WGSL fragment shader"
 }

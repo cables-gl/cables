@@ -39,5 +39,6 @@
     "isReleased": true,
     "coreLibs": [
         "minigpu"
-    ]
+    ],
+    "summary": "WebGPU canvas, reports whether WebGPU is supported"
 }

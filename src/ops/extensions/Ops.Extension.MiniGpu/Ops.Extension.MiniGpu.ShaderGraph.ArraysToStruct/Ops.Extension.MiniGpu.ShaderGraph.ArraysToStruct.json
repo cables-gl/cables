@@ -107,5 +107,6 @@
                 "name": "Struct Code"
             }
         ]
-    }
+    },
+    "summary": "Combine arrays into a WGSL struct"
 }

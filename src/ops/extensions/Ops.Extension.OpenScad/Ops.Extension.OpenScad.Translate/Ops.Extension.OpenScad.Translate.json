@@ -40,5 +40,6 @@
             "date": 1771744335151
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Move an OpenSCAD shape"
 }

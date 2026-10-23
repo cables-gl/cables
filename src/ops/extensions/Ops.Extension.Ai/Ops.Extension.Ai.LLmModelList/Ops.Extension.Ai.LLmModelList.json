@@ -63,5 +63,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "List of available AI language models"
 }

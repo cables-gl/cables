@@ -35,5 +35,6 @@
             "date": 1771757144000
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Import a 3D file into OpenSCAD"
 }

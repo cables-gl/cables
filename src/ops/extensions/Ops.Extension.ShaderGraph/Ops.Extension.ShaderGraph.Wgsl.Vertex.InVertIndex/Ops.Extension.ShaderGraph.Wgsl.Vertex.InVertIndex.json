@@ -89,5 +89,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Vertex index of a WGSL vertex shader"
 }

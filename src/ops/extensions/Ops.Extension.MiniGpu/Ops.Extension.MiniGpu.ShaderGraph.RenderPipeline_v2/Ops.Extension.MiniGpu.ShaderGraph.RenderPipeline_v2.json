@@ -113,5 +113,6 @@
     "isReleased": true,
     "coreLibs": [
         "minigpu"
-    ]
+    ],
+    "summary": "Render pipeline for WebGPU draw calls"
 }

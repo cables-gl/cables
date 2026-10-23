@@ -67,5 +67,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Sort image pixels by structure, optionally masked"
 }

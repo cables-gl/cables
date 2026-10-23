@@ -72,5 +72,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Create a 4x4 matrix"
 }

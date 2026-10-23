@@ -70,5 +70,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pass a 4x4 matrix to a GLSL shader"
 }

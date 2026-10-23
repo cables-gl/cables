@@ -138,5 +138,6 @@
         "cgl"
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Material for Phong-shaded objects with colour, textures and light toggles"
 }

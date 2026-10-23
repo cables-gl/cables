@@ -89,5 +89,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "2 to the power of a number"
 }

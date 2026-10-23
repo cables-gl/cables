@@ -30,5 +30,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Load an image as a texture for Three.js"
 }

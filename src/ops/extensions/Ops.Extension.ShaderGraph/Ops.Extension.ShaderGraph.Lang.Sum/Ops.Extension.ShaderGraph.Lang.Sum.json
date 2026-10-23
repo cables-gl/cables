@@ -70,5 +70,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Add two numbers"
 }

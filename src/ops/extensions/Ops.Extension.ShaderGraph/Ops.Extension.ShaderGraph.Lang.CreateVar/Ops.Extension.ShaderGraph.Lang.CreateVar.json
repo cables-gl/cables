@@ -39,5 +39,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Create a named shader variable"
 }

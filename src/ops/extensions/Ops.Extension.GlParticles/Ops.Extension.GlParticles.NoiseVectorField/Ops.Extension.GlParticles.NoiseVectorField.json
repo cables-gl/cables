@@ -133,5 +133,6 @@
         "cgl"
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Move particles with a noise field inside an area"
 }

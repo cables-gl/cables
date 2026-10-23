@@ -76,5 +76,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Create a vec2 from X and Y"
 }

@@ -41,5 +41,6 @@
                 "objType": "sg_SdfShape"
             }
         ]
-    }
+    },
+    "summary": "Sphere distance field shape"
 }

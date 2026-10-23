@@ -34,5 +34,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Set constant values for a compute shader"
 }

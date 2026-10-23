@@ -52,5 +52,6 @@
             "date": 1771915144382
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Mirror an OpenSCAD shape along axes"
 }

@@ -33,5 +33,6 @@
         ]
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Input of a subpatch, passes a value in from the parent patch"
 }

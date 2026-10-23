@@ -102,5 +102,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Send a prompt to an AI language model and get the answer"
 }

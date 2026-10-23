@@ -92,5 +92,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Unlit basic material for Three.js"
 }

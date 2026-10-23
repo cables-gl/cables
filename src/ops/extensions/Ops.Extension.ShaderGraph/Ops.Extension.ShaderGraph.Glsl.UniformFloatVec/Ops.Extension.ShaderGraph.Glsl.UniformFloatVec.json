@@ -74,5 +74,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pass float or vec values to a GLSL shader"
 }

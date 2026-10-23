@@ -45,5 +45,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Split a vec3 into X, Y and Z"
 }

@@ -51,5 +51,6 @@
             "date": 1771760083634
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "3D text shape in OpenSCAD"
 }

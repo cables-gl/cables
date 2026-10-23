@@ -59,5 +59,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Fog for Three.js scenes"
 }

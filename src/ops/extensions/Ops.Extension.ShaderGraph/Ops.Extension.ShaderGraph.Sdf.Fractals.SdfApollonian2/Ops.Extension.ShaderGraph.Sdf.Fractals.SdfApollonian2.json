@@ -77,5 +77,6 @@
                 "objType": "sg_SdfShape"
             }
         ]
-    }
+    },
+    "summary": "Apollonian fractal distance field"
 }

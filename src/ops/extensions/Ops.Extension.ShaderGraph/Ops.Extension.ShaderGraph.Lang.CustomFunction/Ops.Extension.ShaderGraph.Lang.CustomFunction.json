@@ -38,5 +38,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Write your own shader function"
 }

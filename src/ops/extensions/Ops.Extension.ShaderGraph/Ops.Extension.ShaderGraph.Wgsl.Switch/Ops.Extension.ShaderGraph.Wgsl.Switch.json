@@ -111,5 +111,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pick one of several values by index"
 }

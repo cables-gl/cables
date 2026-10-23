@@ -45,5 +45,6 @@
                 "subType": "boolean"
             }
         ]
-    }
+    },
+    "summary": "Load a .ply 3D file as geometry"
 }

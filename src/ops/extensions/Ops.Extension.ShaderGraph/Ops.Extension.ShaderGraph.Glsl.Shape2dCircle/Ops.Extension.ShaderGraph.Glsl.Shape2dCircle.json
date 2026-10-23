@@ -82,5 +82,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "2D circle shape"
 }

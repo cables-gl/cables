@@ -70,5 +70,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Arctangent of Y and X"
 }

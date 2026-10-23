@@ -47,5 +47,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Scene for Three.js, renders all child objects"
 }

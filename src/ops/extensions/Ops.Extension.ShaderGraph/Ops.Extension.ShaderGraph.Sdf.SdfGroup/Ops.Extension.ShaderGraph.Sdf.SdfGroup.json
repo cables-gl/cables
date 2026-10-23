@@ -53,5 +53,6 @@
                 "objType": "sg_SdfShape"
             }
         ]
-    }
+    },
+    "summary": "Combine SDF shapes with union, blend or subtract"
 }

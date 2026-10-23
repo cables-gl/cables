@@ -75,5 +75,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Convert HSV colour to RGB"
 }

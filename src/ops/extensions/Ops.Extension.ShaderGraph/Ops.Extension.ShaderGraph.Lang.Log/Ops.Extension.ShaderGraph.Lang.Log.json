@@ -89,5 +89,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Natural logarithm"
 }

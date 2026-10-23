@@ -62,5 +62,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Toon material for Three.js"
 }

@@ -71,5 +71,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "2D rectangle shape"
 }

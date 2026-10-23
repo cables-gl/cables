@@ -94,5 +94,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Instance index of a WGSL vertex shader"
 }

@@ -106,5 +106,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Move, rotate and scale 2D coordinates"
 }

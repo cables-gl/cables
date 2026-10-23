@@ -152,5 +152,6 @@
             "author": "pandur",
             "date": 1791379918634
         }
-    ]
+    ],
+    "summary": "GPU particle system with lifetime, gravity and velocity"
 }

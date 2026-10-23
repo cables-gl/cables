@@ -48,5 +48,6 @@
             "date": 1771744932022
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Group OpenSCAD shapes together"
 }

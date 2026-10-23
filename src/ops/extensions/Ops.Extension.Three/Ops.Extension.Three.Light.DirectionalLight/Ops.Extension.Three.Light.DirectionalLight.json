@@ -92,5 +92,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Directional light for Three.js scenes"
 }

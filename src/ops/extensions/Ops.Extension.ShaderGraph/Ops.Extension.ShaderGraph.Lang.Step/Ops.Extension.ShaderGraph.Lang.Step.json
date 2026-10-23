@@ -70,5 +70,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "0 or 1 depending on a threshold"
 }

@@ -83,5 +83,6 @@
         "cgl"
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Create points in circles and rounds with radius and offset steps"
 }

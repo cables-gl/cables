@@ -82,5 +82,6 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "summary": "GLSL code module for a shader graph"
 }

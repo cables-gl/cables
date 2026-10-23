@@ -70,5 +70,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Distance between two points"
 }

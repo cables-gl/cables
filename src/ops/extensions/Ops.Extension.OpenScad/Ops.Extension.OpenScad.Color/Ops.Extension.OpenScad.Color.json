@@ -51,5 +51,6 @@
             "date": 1771759413623
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Set the colour of an OpenSCAD shape"
 }

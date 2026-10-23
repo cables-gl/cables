@@ -172,5 +172,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Physical PBR material for Three.js"
 }

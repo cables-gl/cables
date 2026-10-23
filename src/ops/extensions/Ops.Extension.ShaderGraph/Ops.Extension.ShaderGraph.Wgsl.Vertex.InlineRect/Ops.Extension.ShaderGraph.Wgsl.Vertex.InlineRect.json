@@ -69,5 +69,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Draw a rectangle from vertex index"
 }

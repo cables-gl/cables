@@ -33,5 +33,6 @@
                 "objType": "sg_vec4"
             }
         ]
-    }
+    },
+    "summary": "Raymarch SDF shapes into an image"
 }

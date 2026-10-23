@@ -51,5 +51,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Smooth transition between two edges"
 }

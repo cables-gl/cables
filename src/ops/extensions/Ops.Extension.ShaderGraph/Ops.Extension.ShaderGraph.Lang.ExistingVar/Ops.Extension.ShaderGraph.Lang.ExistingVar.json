@@ -32,5 +32,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Use an existing shader variable by name"
 }

@@ -41,5 +41,6 @@
             "date": 1771772788881
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Grow or shrink a 2D OpenSCAD shape by radius"
 }

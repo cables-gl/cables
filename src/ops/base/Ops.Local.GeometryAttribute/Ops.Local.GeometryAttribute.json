@@ -39,5 +39,6 @@
                 "subType": "boolean"
             }
         ]
-    }
+    },
+    "summary": "Get a named attribute array from a geometry (vertices, normals, UVs)"
 }

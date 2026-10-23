@@ -52,5 +52,6 @@
             "type": "commonjs"
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Physics world for Rapier rigid body simulation"
 }

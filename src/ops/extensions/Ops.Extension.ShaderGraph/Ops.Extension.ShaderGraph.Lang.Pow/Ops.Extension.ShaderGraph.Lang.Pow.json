@@ -64,5 +64,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Raise a number to a power"
 }

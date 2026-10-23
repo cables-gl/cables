@@ -52,5 +52,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Smaller of two values"
 }

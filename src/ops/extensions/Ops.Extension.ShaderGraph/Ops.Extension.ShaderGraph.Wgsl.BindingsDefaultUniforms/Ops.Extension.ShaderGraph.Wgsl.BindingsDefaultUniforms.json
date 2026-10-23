@@ -90,5 +90,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Default uniforms: MVP, model, view, projection, time"
 }

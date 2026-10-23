@@ -48,5 +48,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Normal colour material for Three.js"
 }

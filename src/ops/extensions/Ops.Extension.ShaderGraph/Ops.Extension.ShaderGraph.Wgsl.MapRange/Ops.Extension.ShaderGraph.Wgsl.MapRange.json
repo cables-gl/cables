@@ -79,5 +79,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Remap a value from one range to another"
 }

@@ -82,5 +82,6 @@
                 "objType": "sg_SdfShape"
             }
         ]
-    }
+    },
+    "summary": "KIFS fractal distance field"
 }

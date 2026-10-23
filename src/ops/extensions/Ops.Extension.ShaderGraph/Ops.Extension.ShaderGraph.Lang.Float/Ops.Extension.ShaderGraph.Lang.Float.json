@@ -84,5 +84,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Float value for a shader"
 }

@@ -49,5 +49,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Render an HTML element into a texture"
 }

@@ -76,5 +76,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Subtract two numbers"
 }

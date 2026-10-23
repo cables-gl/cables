@@ -29,5 +29,6 @@
             }
         ]
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Read a GPU buffer back into an array"
 }

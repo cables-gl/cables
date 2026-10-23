@@ -71,5 +71,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "One minus a number"
 }

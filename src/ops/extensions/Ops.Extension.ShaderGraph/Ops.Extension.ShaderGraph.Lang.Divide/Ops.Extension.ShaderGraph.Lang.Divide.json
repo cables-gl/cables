@@ -82,5 +82,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Divide two numbers"
 }

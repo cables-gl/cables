@@ -44,5 +44,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Split a vec4 into X, Y, Z and W"
 }

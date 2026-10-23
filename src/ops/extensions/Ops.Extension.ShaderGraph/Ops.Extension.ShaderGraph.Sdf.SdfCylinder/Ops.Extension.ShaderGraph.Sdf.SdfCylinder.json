@@ -53,5 +53,6 @@
                 "objType": "sg_SdfShape"
             }
         ]
-    }
+    },
+    "summary": "Cylinder distance field shape"
 }

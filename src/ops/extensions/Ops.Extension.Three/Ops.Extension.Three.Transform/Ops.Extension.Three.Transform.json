@@ -75,5 +75,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Position, scale and rotate a Three.js object"
 }

@@ -34,5 +34,6 @@
     "exampleProjectId": "KFAfnv",
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Output colour of a GLSL fragment shader"
 }

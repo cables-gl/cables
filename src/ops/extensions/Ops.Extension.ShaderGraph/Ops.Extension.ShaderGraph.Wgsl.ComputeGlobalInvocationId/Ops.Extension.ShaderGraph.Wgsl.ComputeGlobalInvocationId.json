@@ -77,5 +77,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Global invocation ID of a compute shader"
 }

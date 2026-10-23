@@ -57,5 +57,6 @@
             "date": 1771742116566
         }
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "OpenSCAD cube shape"
 }

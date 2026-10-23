@@ -59,5 +59,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "End of a GLSL shader graph for loop"
 }

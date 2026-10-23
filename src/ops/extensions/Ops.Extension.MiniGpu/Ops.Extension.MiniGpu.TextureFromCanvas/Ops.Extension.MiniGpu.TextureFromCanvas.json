@@ -34,5 +34,6 @@
                 "objType": "texture"
             }
         ]
-    }
+    },
+    "summary": "Use a canvas as a WebGPU texture"
 }

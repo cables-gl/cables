@@ -93,5 +93,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Perspective camera for Three.js"
 }

@@ -117,5 +117,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pick one of several vec2 values by index"
 }

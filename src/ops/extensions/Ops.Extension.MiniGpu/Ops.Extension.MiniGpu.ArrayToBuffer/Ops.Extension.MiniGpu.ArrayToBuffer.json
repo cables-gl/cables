@@ -44,5 +44,6 @@
                 "name": "Buffer"
             }
         ]
-    }
+    },
+    "summary": "Copy an array into a GPU buffer"
 }

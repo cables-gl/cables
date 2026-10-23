@@ -47,5 +47,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Load a glTF or GLB 3D model into Three.js"
 }

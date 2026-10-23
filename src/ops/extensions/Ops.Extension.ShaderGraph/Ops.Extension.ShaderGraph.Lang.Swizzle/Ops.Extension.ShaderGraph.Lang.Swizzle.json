@@ -87,5 +87,6 @@
                 "objType": "sg_vec3"
             }
         ]
-    }
+    },
+    "summary": "Reorder or pick vector components"
 }

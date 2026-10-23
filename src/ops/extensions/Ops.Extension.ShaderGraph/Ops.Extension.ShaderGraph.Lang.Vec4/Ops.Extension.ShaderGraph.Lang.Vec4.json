@@ -80,5 +80,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Create a vec4 from X, Y, Z and W"
 }

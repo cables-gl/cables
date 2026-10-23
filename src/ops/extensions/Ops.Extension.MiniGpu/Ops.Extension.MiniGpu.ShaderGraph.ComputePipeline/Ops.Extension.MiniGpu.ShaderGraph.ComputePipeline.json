@@ -92,5 +92,6 @@
     "coreLibs": [
         "minigpu"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Run a compute shader on the GPU"
 }

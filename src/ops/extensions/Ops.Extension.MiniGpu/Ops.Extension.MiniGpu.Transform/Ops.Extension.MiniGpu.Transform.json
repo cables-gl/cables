@@ -77,5 +77,6 @@
     },
     "coreLibs": [
         "minigpu"
-    ]
+    ],
+    "summary": "Translate, rotate and scale for WebGPU objects"
 }

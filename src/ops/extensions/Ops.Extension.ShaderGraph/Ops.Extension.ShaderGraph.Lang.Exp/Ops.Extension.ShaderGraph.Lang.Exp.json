@@ -83,5 +83,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Exponential, e to the power of a number"
 }

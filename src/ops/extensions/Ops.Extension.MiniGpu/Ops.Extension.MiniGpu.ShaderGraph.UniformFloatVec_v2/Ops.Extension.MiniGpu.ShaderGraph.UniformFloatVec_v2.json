@@ -68,5 +68,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pass float or vec values to a WebGPU shader"
 }

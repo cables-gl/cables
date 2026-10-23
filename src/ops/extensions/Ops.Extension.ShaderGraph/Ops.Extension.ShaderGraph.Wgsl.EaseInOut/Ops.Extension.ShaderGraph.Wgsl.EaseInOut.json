@@ -65,5 +65,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Ease in and out curve from a seed"
 }

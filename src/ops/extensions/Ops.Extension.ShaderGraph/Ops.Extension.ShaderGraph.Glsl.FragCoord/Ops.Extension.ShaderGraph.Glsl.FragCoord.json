@@ -23,5 +23,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pixel coordinate in a GLSL fragment shader"
 }

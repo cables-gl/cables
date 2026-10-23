@@ -83,5 +83,6 @@
     "coreLibs": [
         "minigpu"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "WGSL shader module with code"
 }

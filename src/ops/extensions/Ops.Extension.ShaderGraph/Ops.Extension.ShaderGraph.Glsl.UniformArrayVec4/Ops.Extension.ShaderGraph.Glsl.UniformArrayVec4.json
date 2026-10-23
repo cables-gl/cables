@@ -86,5 +86,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pass an array of vec4 values to a GLSL shader"
 }

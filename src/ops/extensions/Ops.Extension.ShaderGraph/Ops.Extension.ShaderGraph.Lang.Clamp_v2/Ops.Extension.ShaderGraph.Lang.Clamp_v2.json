@@ -63,5 +63,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Limit a value between min and max"
 }

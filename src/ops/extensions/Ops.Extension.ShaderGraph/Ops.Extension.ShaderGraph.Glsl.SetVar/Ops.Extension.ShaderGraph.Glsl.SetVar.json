@@ -39,5 +39,6 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "summary": "Set a shader graph variable"
 }

@@ -64,5 +64,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Worley noise from a seed and scale"
 }

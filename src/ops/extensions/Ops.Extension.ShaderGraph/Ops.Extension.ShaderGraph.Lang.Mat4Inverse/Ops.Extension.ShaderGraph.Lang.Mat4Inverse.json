@@ -60,5 +60,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Inverse of a 4x4 matrix"
 }

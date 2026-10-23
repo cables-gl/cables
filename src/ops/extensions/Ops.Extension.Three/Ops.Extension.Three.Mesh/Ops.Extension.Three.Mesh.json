@@ -47,5 +47,6 @@
     "docs": {
         "ports": []
     },
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Mesh for Three.js, combines geometry and material"
 }

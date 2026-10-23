@@ -45,5 +45,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Output colour of a WGSL fragment shader"
 }

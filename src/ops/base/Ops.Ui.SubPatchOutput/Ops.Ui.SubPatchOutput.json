@@ -26,5 +26,6 @@
         "portsOut": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Output of a subpatch, passes a value back to the parent patch"
 }

@@ -74,5 +74,6 @@
                 "objType": "texture"
             }
         ]
-    }
+    },
+    "summary": "Render target for WebGPU output"
 }

@@ -58,5 +58,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Dot product of two vectors"
 }

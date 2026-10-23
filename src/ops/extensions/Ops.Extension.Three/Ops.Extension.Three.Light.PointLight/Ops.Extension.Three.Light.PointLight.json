@@ -85,5 +85,6 @@
     "coreLibs": [
         "three"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Point light for Three.js scenes"
 }

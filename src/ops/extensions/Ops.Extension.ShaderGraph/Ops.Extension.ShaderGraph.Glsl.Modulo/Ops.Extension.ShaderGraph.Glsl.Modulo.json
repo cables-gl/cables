@@ -64,5 +64,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Modulo of two values"
 }

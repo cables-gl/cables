@@ -71,5 +71,6 @@
     },
     "coreLibs": [
         "shadergraph"
-    ]
+    ],
+    "summary": "Pixel position in a WGSL fragment shader"
 }

@@ -82,5 +82,6 @@
         "three",
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "summary": "Render loop for Three.js, sets canvas size and pixel density"
 }

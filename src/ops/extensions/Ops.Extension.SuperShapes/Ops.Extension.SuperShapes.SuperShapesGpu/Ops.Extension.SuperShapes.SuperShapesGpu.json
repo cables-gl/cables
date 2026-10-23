@@ -153,5 +153,6 @@
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "summary": "Generate supershape geometry on the GPU"
 }
