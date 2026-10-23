@@ -5,11 +5,6 @@
             "message": "created op",
             "author": "pandur",
             "date": 1620741256742
-        },
-        {
-            "message": "Ops.User.pandur.IsNumberRising renamed to Ops.Math.IsNumberRising",
-            "author": "pandur",
-            "date": 1623845388368
         }
     ],
     "authorName": "pandur",
@@ -31,12 +26,9 @@
         ]
     },
     "summary": "detect if a number rising or falling ",
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": []
     },
-    "exampleProjectId": "UN11cI",
     "isReleased": true,
     "license": "MIT"
 }

@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1762181456725
-        },
-        {
-            "message": "Patch.Pp8qZu1.SubPatch0 renamed to Ops.Extension.Ai.LlmPrompt",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1762181493078
         }
     ],
     "coreLibs": [
