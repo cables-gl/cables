@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1653203279586
-        },
-        {
-            "message": "Ops.User.pandur.SchlickGain renamed to Ops.Math.SchlickBias",
-            "author": "pandur",
-            "date": 1653204668601
+            "date": 1653203279586,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
@@ -41,10 +37,7 @@
         ]
     },
     "summary": "Custom easing curve via schlick bias and gain",
-    "issues": "",
-    "caniusequery": "",
-    "youtubeids": [],
-    "exampleProjectId": "FO9IG3",
+    "exampleProjectId": "yeJETy",
     "docs": {
         "ports": []
     },

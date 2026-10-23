@@ -47,5 +47,6 @@
         ]
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "K45BTy"
 }
