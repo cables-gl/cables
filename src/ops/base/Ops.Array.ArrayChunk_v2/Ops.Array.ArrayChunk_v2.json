@@ -2,6 +2,7 @@
     "authorName": "tim",
     "id": "071ebf92-100e-4348-b120-a08dca8dfc8e",
     "created": 1791451672666,
+    "isReleased":true,
     "layout": {
         "portsIn": [
             {

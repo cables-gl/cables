@@ -1,5 +1,6 @@
 {
     "summary": "Returns current date and time and timestamp",
+    "isReleased":true,
     "layout": {
         "portsIn": [
             {
