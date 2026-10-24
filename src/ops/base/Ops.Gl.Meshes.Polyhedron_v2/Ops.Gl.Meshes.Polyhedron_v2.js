@@ -114,7 +114,7 @@ function buildMesh()
     catch (ex)
     {
         op.setUiError("mesh", ex);
-        op.logError(ex);
+        // op.logError(ex);
         return;
     }
 

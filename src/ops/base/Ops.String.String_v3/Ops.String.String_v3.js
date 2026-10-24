@@ -13,7 +13,7 @@ v.onChange = function ()
     op.setUiAttrib({ "extendTitle": "" });
     if (CABLES.UI)
     {
-        if (v.get()) lines = (v.get() || "").split("\n");
+        if (v.get()) lines = String(v.get() || "").split("\n");
         else lines = [];
     }
     result.set(v.get());
@@ -38,7 +38,8 @@ op.renderVizLayer = (ctx, layer, viz) =>
     ctx.save();
     ctx.scale(layer.scale, layer.scale);
 
-    viz.renderText(ctx, layer, lines, {
+    viz.renderText(ctx, layer, lines,
+    {
         "zoomText": false,
         "showLineNum": false,
         "fontSize": 12,

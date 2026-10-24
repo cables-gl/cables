@@ -421,16 +421,14 @@ function loadBin(addCacheBuster)
                 if (loadingId) cgl.patch.loading.finished(loadingId);
                 loadingId = null;
                 finishLoading();
-
-                op.logError("gltf fetch error", e);
+                op.logWarn("gltf fetch error", e);
             });
     });
     closeTab();
 
-    cgl.patch.loading.addAssetLoadingTask(() =>
-    {
-
-    });
+    // cgl.patch.loading.addAssetLoadingTask(() =>
+    // {
+    // });
 }
 
 // op.onFileChanged = function (fn)
@@ -466,15 +464,12 @@ function reloadSoon(nocache)
     if (!inActive.get()) return;
     if (preload) cgl.patch.loading.finished(preload);
 
-    // preload = cgl.patch.loading.start("gltfScenePre", inFile.get(), op);
-
     clearTimeout(idle);
     idle = setTimeout(() =>
     {
         if (!inActive.get()) return;
         loadBin(nocache);
 
-        // cgl.patch.loading.finished(preload);
         preload = null;
     }, 100);
 }

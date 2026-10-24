@@ -50,12 +50,12 @@ function setupUniform()
 {
     if (shader)
     {
-        uniform = shader.getUniform((inSelect.get() || "").split(" ")[0]);
+        uniform = shader.getUniform(String(inSelect.get() || "").split(" ")[0]);
         doSetupUniform = false;
 
         if (!uniform)
         {
-            op.setUiError("nouni", "uniform unknown", 1);// op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+            op.setUiError("nouni", "uniform unknown", 1); // op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
             outFound.set(false);
         }
         else

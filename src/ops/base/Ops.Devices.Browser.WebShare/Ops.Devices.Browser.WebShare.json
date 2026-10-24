@@ -68,7 +68,7 @@
             {
                 "type": 0,
                 "name": "Supported",
-                "subType": "number"
+                "subType": "boolean"
             }
         ]
     },

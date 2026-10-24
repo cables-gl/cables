@@ -17,9 +17,8 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
-                "name": "Receipt",
-                "subType": "string"
+                "type": 5,
+                "name": "Receipt"
             }
         ],
         "portsOut": [
