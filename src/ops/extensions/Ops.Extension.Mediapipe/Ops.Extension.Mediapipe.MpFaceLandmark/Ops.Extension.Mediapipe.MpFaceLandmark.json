@@ -41,7 +41,7 @@
             }
         ]
     },
-    "isReleased": false,
+    "isReleased": true,
     "summary": "Face Landmark positions (chin,eye,brow etc)",
     "docs": {
         "ports": []
