@@ -228,6 +228,7 @@ export class Patch extends Events
         this.timer.play();
 
         console.log("made with https://cables.gl"); // eslint-disable-line
+        this.emitEvent("PatchStart");
         this.cg = undefined;
     }
 
