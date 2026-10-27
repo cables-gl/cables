@@ -1,0 +1,20 @@
+{
+    "id": "7c53b07a-a08c-49ee-8e03-0dcf4e6451d0",
+    "created": 1793110704571,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793110704580
+        },
+        {
+            "message": "Local.LoopEnd renamed to Ops.Dev.Trigger.LoopEnd",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793110707959
+        }
+    ]
+}

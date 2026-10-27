@@ -1,0 +1,49 @@
+{
+    "id": "867f45b3-c26f-4f37-a1cd-d00b326134bb",
+    "created": 1793110704030,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793110704039
+        },
+        {
+            "message": "Local.Loop renamed to Ops.Dev.Trigger.Loop",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793110708887
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Count",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "areaScopeBegin",
+                "objType": "areaScope"
+            }
+        ]
+    }
+}
