@@ -182,6 +182,9 @@ export class Port extends Events
         this.canLink = null; // function can be overwritten
         this.preserveLinks = null;
         this.indexPort = null;
+
+        /** @type {Port} on stack copy outputs: the head output whose links get the values and triggers */
+        this.proxyPort = null;
     }
 
     // re-declared here because typescript declaration emit drops the "extends events"
@@ -395,6 +398,12 @@ export class Port extends Events
     /** Get value of port. */
     get()
     {
+        if (this.#op.isStacked && this.direction == Port.DIR_IN && this.#op.patch.isInLoop() && !this.#op.patch.isHeadLoopKey())
+        {
+            const p = this.#op.getStackCopyPort(this);
+            if (p) return p.get();
+        }
+
         if (!this.#animated) return this.value;
 
         if (CABLES.UI && this.lastAnimTime == this.#op.patch.timer.getTime() && !CABLES.UI.keyframeAutoCreate)
@@ -458,6 +467,12 @@ export class Port extends Events
 
         if (this.#op.enabled && !this.crashed)
         {
+            if (this.#op.isStacked && this.direction == Port.DIR_IN)
+            {
+                if (this.#op.routeStackedValue(this, v)) return;
+                if (this.#op.patch.isInLoop()) return this.setValueForced(v);
+            }
+
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
             {
                 if (this.#animated && CABLES.UI)
@@ -497,7 +512,32 @@ export class Port extends Events
 
                 if (this.direction == Port.DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
             }
+
+            if (this.proxyPort) this.forwardToProxy();
         }
+    }
+
+    /**
+     * stack copies send their output through the head links, with their own loop key as current key
+     */
+    forwardToProxy()
+    {
+        const patch = this.#op.patch;
+        const links = this.proxyPort.links;
+        patch.pushLoopKey(this.#op.stackKeyIndices);
+        for (let i = 0; i < links.length; i++) links[i].setValueFromStackCopy(this.value, this.forceRefChange);
+        patch.popLoopKey();
+    }
+
+    /**
+     * sets the value without checking if it changed
+     * @param {any} v
+     */
+    setValueForced(v)
+    {
+        this.value = v;
+        this.forceChange();
+        if (this.direction == Port.DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
     }
 
     updateAnim()
@@ -516,6 +556,12 @@ export class Port extends Events
 
     forceChange()
     {
+        if (this.#op.isStacked && this.direction == Port.DIR_IN && this.type != Port.TYPE_FUNCTION && this.#op.patch.isInLoop() && !this.#op.patch.isHeadLoopKey())
+        {
+            const p = this.#op.getStackCopyPort(this);
+            if (p) return p.forceChange();
+        }
+
         if (this.onValueChanged || this.onChange)
         {
 
@@ -843,6 +889,15 @@ export class Port extends Events
     /** Triggers the linked ports (usually invoked on an output trigger port). */
     trigger()
     {
+        if (this.proxyPort)
+        {
+            const patch = this.#op.patch;
+            patch.pushLoopKey(this.#op.stackKeyIndices);
+            this.proxyPort.trigger();
+            patch.popLoopKey();
+            return;
+        }
+
         const linksLength = this.links.length;
 
         this._activity();
@@ -1019,6 +1074,11 @@ export class Port extends Events
      */
     setAnimated(a)
     {
+        if (a && this.#op.isStacked)
+        {
+            this.#log.warn("stacked ops can not have animated ports", this.#op.objName, this.name);
+            return;
+        }
         let changed = false;
         if (this.#animated != a)
         {
@@ -1121,6 +1181,8 @@ export class Port extends Events
     {
         this._activity();
         if (this.#op.hasAnimPort) this.#op.updateAnims();
+
+        if (this.#op.isStacked && this.#op.enabled && this.#op.routeStackedTrigger(this, name)) return;
         if (this.#op.enabled && this.onTriggered) this.onTriggered();
 
         if (this.#op.enabled) this.emitEvent(Port.EVENT_TRIGGER, name);

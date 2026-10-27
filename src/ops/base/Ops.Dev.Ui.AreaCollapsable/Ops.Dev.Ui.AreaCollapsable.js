@@ -1,13 +1,15 @@
 const
     inTitle = op.inString("Title", ""),
     inDelete = op.inTriggerButton("Delete"),
-    inCollapse = op.inTriggerButton("Collapse");
+    inCollapse = op.inTriggerButton("Collapse"),
+    inSelectChilds = op.inTriggerButton("Select Children");
 
 inTitle.setUiAttribs({ "hidePort": true });
 inDelete.setUiAttribs({ "hidePort": true });
 inCollapse.setUiAttribs({ "hidePort": true });
+inSelectChilds.setUiAttribs({ "hidePort": true });
 
-op.setUiAttrib({ "hasArea": true });
+op.setUiAttrib({ "hasArea": true, "collapsable": true });
 
 op.init =
     inTitle.onChange =
@@ -23,9 +25,9 @@ function update()
     {
         gui.savedState.setUnSaved("areaOp", op.getSubPatch());
         op.setUiAttribs(
-            {
-                "comment_title": inTitle.get() || " "
-            });
+        {
+            "comment_title": inTitle.get() || " "
+        });
 
         op.name = inTitle.get();
     }
@@ -34,6 +36,11 @@ function update()
 inDelete.onTriggered = () =>
 {
     op.patch.deleteOp(op.id);
+};
+
+inSelectChilds.onTriggered = () =>
+{
+    if (CABLES.UI) gui.patchView.selectAreaChilds(op);
 };
 
 inCollapse.onTriggered = () =>

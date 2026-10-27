@@ -75,6 +75,27 @@ export class Link extends Events
     }
 
     /**
+     * value of a stack copy output, the head output keeps its own value
+     * @param {any} v
+     * @param {boolean} forceRefChange
+     */
+    setValueFromStackCopy(v, forceRefChange)
+    {
+        if (!this.portIn || v != v) return;
+        if (this.portIn.type != Port.TYPE_FUNCTION) this.activity();
+
+        if (this.portIn.get() !== v)
+        {
+            this.portIn.set(v);
+        }
+        else
+        {
+            if (this.portIn.changeAlways) this.portIn.set(v);
+            if (forceRefChange) this.portIn.forceChange();
+        }
+    }
+
+    /**
      * Returns the port of the link that is not the given port.
      *
      * @param {Port} p port

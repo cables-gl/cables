@@ -114,6 +114,14 @@ export class Patch extends Events
     _animReq = null;
     _opIdCache = {};
     _triggerStack = [];
+
+    /** @type {number[]} */
+    #loopStack = [];
+    #loopKey = "0";
+    #loopKeyIsHead = true;
+
+    /** @type {number[][]} */
+    #savedLoopStacks = [];
     _volumeListeners = [];
     #patchVolume = 1.0;
     #muted = false;
@@ -228,11 +236,6 @@ export class Patch extends Events
         this.timer.play();
 
         console.log("made with https://cables.gl"); // eslint-disable-line
-        setTimeout(() =>
-        {
-
-            this.emitEvent("PatchStart");
-        }, 100);
         this.cg = undefined;
     }
 
@@ -580,6 +583,7 @@ export class Patch extends Events
         if (op)
         {
             op.attribs = opAttribs;
+            if (op.attribs.stacked) op.setStacked(true, false);
             uiAttribs = uiAttribs || {};
             uiAttribs.subPatch = uiAttribs.subPatch || Patch.DEFAULT_SUBPATCHID;
             op.setUiAttribs(uiAttribs);
@@ -612,6 +616,133 @@ export class Patch extends Events
         }
 
         return /** @type {T} */ (op);
+    }
+
+    /**
+     * hidden copy of a stacked op, not in patch.ops and not serialized
+     * @param {Op} head
+     * @returns {Op}
+     */
+    createStackCopy(head)
+    {
+        const copy = this.createOp(head.opId || head.objName, null, head.objName);
+        if (!copy) return null;
+
+        copy.attribs = {};
+        copy.isStackCopy = true;
+        copy.setUiAttribs({ "subPatch": head.getSubPatch() });
+        if (copy.onCreate) copy.onCreate();
+
+        if (copy.hasOwnProperty("onAnimFrame") && copy.onAnimFrame) this.addOnAnimFrame(copy);
+        if (copy.hasOwnProperty("onAnimFramePre") && copy.onAnimFramePre) this.addOnAnimFrame(copy);
+
+        if (copy.init) copy.init();
+        return copy;
+    }
+
+    /**
+     * @param {number} i
+     */
+    pushLoopIndex(i)
+    {
+        this.#loopStack.push(i);
+        this.#updateLoopKey();
+    }
+
+    popLoopIndex()
+    {
+        this.#loopStack.pop();
+        this.#updateLoopKey();
+    }
+
+    #updateLoopKey()
+    {
+        this.#loopKeyIsHead = true;
+        for (let i = 0; i < this.#loopStack.length; i++) if (this.#loopStack[i] != 0) this.#loopKeyIsHead = false;
+
+        if (this.#loopStack.length == 0) this.#loopKey = "0";
+        else this.#loopKey = this.#loopStack.join("/");
+    }
+
+    /**
+     * @returns {boolean} true outside loops and at index 0, where stacked ops run their head
+     */
+    isHeadLoopKey()
+    {
+        return this.#loopKeyIsHead;
+    }
+
+    /**
+     * @param {string} areaId
+     * @returns {Op}
+     */
+    getStackingAreaOp(areaId)
+    {
+        if (!areaId) return null;
+        for (let i = 0; i < this.ops.length; i++)
+        {
+            const ua = this.ops[i].uiAttribs;
+            if (ua.allowStacking && ua.area && ua.area.id == areaId) return this.ops[i];
+        }
+        return null;
+    }
+
+    /**
+     * all loop keys of a stacked op, outer loops first, e.g. ["0/0","0/1","1/0","1/1"]
+     * @param {Op} op
+     * @returns {string[]} null if the op is not in a stacking area
+     */
+    getStackKeys(op)
+    {
+        const counts = [];
+        let areaOp = this.getStackingAreaOp(op.attribs.area);
+
+        while (areaOp && counts.length <= Op.MAX_STACK_DEPTH)
+        {
+            counts.unshift(Math.max(0, Math.floor(areaOp.stackCount)));
+            const outer = this.getStackingAreaOp(areaOp.attribs.area);
+            if (outer == areaOp) break;
+            areaOp = outer;
+        }
+        if (counts.length == 0) return null;
+
+        let keys = [""];
+        for (let i = 0; i < counts.length; i++)
+        {
+            const next = [];
+            for (let j = 0; j < keys.length; j++)
+                for (let k = 0; k < counts[i]; k++)
+                    next.push(keys[j] ? keys[j] + "/" + k : String(k));
+            keys = next;
+        }
+        return keys;
+    }
+
+    /**
+     * current loop key of a stack copy, until popLoopKey
+     * @param {number[]} indices
+     */
+    pushLoopKey(indices)
+    {
+        this.#savedLoopStacks.push(this.#loopStack);
+        this.#loopStack = indices.slice();
+        this.#updateLoopKey();
+    }
+
+    popLoopKey()
+    {
+        this.#loopStack = this.#savedLoopStacks.pop() || [];
+        this.#updateLoopKey();
+    }
+
+    isInLoop()
+    {
+        return this.#loopStack.length > 0;
+    }
+
+    getLoopKey()
+    {
+        return this.#loopKey;
     }
 
     /**
@@ -1343,6 +1474,7 @@ export class Patch extends Events
         setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
         this.updateAnimMaxTime();
+        for (let i = 0; i < this.ops.length; i++) if (this.ops[i].isStacked) this.ops[i].updateStackCopies();
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);

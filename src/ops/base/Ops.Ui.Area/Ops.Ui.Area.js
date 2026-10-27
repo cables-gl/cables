@@ -5,7 +5,7 @@ const
 inTitle.setUiAttribs({ "hidePort": true });
 inDelete.setUiAttribs({ "hidePort": true });
 
-op.setUiAttrib({ "hasArea": true });
+op.setUiAttrib({ "hasArea": true, "selectChildsOnClick": true });
 
 op.init =
     inTitle.onChange =
@@ -19,9 +19,9 @@ function update()
     {
         gui.savedState.setUnSaved("areaOp", op.getSubPatch());
         op.setUiAttribs(
-            {
-                "comment_title": inTitle.get() || " "
-            });
+        {
+            "comment_title": inTitle.get() || " "
+        });
 
         op.name = inTitle.get();
     }

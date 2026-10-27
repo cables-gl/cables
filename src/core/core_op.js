@@ -53,6 +53,7 @@ import { showUiErrors } from "./uierrors.js";
  * @typedef OpAttribs
  * @property {string[]} [tags] tags
  * @property {string} [area] area
+ * @property {boolean} [stacked] op runs a hidden copy for every loop iteration
  */
 
 /**
@@ -113,7 +114,9 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string} [extendTitlePort]
  * @property {string} [display]
  * @property {boolean} [hasArea]
+ * @property {boolean} [collapsable]
  * @property {boolean} [scopeArea]
+ * @property {boolean} [selectChildsOnClick] clicking the area op selects all ops in its area
  * @property {boolean} [resizableX]
  * @property {boolean} [resizableY]
  * @property {boolean} [moveableOnlyY]
@@ -158,6 +161,9 @@ export class Op extends Events
     static EVENT_PORT_ORDER_CHANGE = "portOrderChanged";
     static EVENT_STORAGE_CHANGE = "onStorageChange";
     static EVENT_LINK_CHANGED = "onLinkChanged";
+    static EVENT_STACKED_CHANGED = "stackedChanged";
+    static EVENT_STACK_COPIES_CHANGED = "stackCopiesChanged";
+    static MAX_STACK_DEPTH = 8;
 
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
@@ -235,6 +241,20 @@ export class Op extends Events
     /** @type {Object} */
     uiErrors = {};
     hasAnimPort = false;
+    isStacked = false;
+    isStackCopy = false;
+
+    /** @type {string} loop key of a stack copy, e.g. "3" or "1/3" */
+    stackKey = null;
+
+    /** @type {number[]} */
+    stackKeyIndices = null;
+
+    /** @type {number} number of stacks (instances/iterations/copies) */
+    stackCount = 0;
+
+    /** @type {Map<string, Op>} */
+    #stackCopies = null;
 
     /** @type {Port} */
     patchId = null; // will be defined by subpatchops
@@ -268,8 +288,6 @@ export class Op extends Events
         this.onLoaded = null;
         this.onDelete = null;
         this.onError = null;
-
-        this._instances = null;
 
         /**
          * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
@@ -1773,18 +1791,11 @@ export class Op extends Events
     }
 
     /* minimalcore:end */
-    // todo: check instancing stuff?
     cleanUp()
     {
 
         /* minimalcore:start */
-        if (this._instances)
-        {
-            for (let i = 0; i < this._instances.length; i++)
-                if (this._instances[i].onDelete) this._instances[i].onDelete();
-
-            this._instances.length = 0;
-        }
+        this.#disposeStackCopies();
 
         for (let i = 0; i < this.portsIn.length; i++)
             this.portsIn[i].setAnimated(false);
@@ -1794,120 +1805,274 @@ export class Op extends Events
     /* minimalcore:end */
     }
 
-    // todo: check instancing stuff?
-    instanced(triggerPort)
+    /**
+     * @deprecated old instancing, always false
+     * @param {Port} _triggerPort
+     */
+    instanced(_triggerPort)
     {
         return false;
-
-        /*
-         * this._log.log("instanced", this.patch.instancing.numCycles());
-         * if (this.patch.instancing.numCycles() === 0) return false;
-         */
-
-        /*
-         * let i = 0;
-         * let ipi = 0;
-         * if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
-         * {
-         *     if (!this._instances) this._instances = [];
-         *     this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
-         *     this._instances.length = this.patch.instancing.numCycles();
-         */
-
-        /*
-         *     for (i = 0; i < this._instances.length; i++)
-         *     {
-         *         this._instances[i] = this.patch.createOp(this.objName, true);
-         *         this._instances[i].instanced ()
-         *         {
-         *             return false;
-         *         };
-         *         this._instances[i].uiAttr(this.uiAttribs);
-         */
-
-        /*
-         *         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-         *         {
-         *             if (this.portsOut[ipo].type == Port.TYPE_FUNCTION)
-         *             {
-         *                 this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
-         *             }
-         *         }
-         *     }
-         */
-
-        /*
-         *     for (ipi = 0; ipi < this.portsIn.length; ipi++)
-         *     {
-         *         this.portsIn[ipi].onChange = null;
-         *         this.portsIn[ipi].onValueChanged = null;
-         *     }
-         * }
-         */
-
-        /*
-         * const theTriggerPort = null;
-         * for (ipi = 0; ipi < this.portsIn.length; ipi++)
-         * {
-         *     if (
-         *         this.portsIn[ipi].type == Port.TYPE_VALUE ||
-         *         this.portsIn[ipi].type == Port.TYPE_ARRAY
-         *     )
-         *     {
-         *         this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
-         *     }
-         *     if (this.portsIn[ipi].type == Port.TYPE_FUNCTION)
-         *     {
-         *         // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-         *         // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
-         *     }
-         * }
-         */
-
-        // if (theTriggerPort) theTriggerPort.onTriggered();
-
-        /*
-         * for (ipi = 0; ipi < this.portsOut.length; ipi++)
-         * {
-         *     if (this.portsOut[ipi].type == Port.TYPE_VALUE)
-         *     {
-         *         this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
-         *     }
-         * }
-         */
-
-        // return true;
     }
 
-    // todo: check instancing stuff?
-    initInstancable()
+    /**
+     * stacked ops run a hidden copy per loop iteration, the op itself runs index 0. only in stacking areas, no animated ports
+     * @param {boolean} stacked
+     * @param {boolean} [updateCopies] false while loading
+     * @returns {boolean} false if the op can not be stacked
+     */
+    setStacked(stacked, updateCopies = true)
     {
-        //         if(this.isInstanced)
-        //         {
-        //             this._log.log('cancel instancing');
-        //             return;
-        //         }
-        //         this._instances=[];
-        //         for(var ipi=0;ipi<this.portsIn.length;ipi++)
-        //         {
-        //             if(this.portsIn[ipi].type==Port.TYPE_VALUE)
-        //             {
-        //
-        //             }
-        //             if(this.portsIn[ipi].type==Port.TYPE_FUNCTION)
-        //             {
-        //                 // var piIndex=ipi;
-        //                 this.portsIn[ipi].onTriggered=function(piIndex)
-        //                 {
-        //
-        //                     var i=0;
-        // // this._log.log('trigger',this._instances.length);
-        //
-        //                 }.bind(this,ipi );
-        //
-        //             }
-        // };
-        // this._instances=null;
+        if (stacked == this.isStacked) return true;
+
+        if (stacked)
+        {
+            if (this.hasAnimatedPorts()) return false;
+            this.attribs.stacked = true;
+            this.#stackCopies = new Map();
+            this.isStacked = true;
+            if (updateCopies) this.updateStackCopies();
+            if (!this.isStacked) return false;
+        }
+        else
+        {
+            delete this.attribs.stacked;
+            this.#disposeStackCopies();
+            this.isStacked = false;
+        }
+        this.emitEvent(Op.EVENT_STACKED_CHANGED, stacked);
+        return true;
+    }
+
+    hasAnimatedPorts()
+    {
+        for (let i = 0; i < this.portsIn.length; i++) if (this.portsIn[i].isAnimated()) return true;
+        return false;
+    }
+
+    /**
+     * @param {string} key
+     * @returns {boolean} true for the key the head runs, e.g. "0" or "0/0"
+     */
+    static isHeadStackKey(key)
+    {
+        return /^0(\/0)*$/.test(key);
+    }
+
+    /**
+     * matches the copies to the loop counts of the stacking area, unstacks outside of it
+     */
+    updateStackCopies()
+    {
+        if (!this.isStacked) return;
+
+        const keys = this.patch.getStackKeys(this);
+        if (!keys || this.hasAnimatedPorts())
+        {
+            this.setStacked(false);
+            return;
+        }
+
+        const keep = new Set(keys);
+        const remove = [];
+        this.#stackCopies.forEach((copy, key) => { if (!keep.has(key)) remove.push(key); });
+        for (let i = 0; i < remove.length; i++) this.#disposeStackCopy(remove[i]);
+
+        for (let i = 0; i < keys.length; i++) this.getStackCopy(keys[i]);
+        this.emitEvent(Op.EVENT_STACK_COPIES_CHANGED, this.getNumStacks());
+    }
+
+    /**
+     * stacking area ops: update copies of stacked ops in the area
+     * @param {number} [depth]
+     */
+    updateAreaStacks(depth = 0)
+    {
+        if (!this.uiAttribs.area || !this.uiAttribs.area.id || depth > Op.MAX_STACK_DEPTH) return;
+
+        const ops = this.patch.getOpsByArea(this.uiAttribs.area.id);
+        for (let i = 0; i < ops.length; i++)
+        {
+            if (ops[i] == this) continue;
+            if (ops[i].isStacked) ops[i].updateStackCopies();
+            if (ops[i].uiAttribs.allowStacking) ops[i].updateAreaStacks(depth + 1);
+        }
+    }
+
+    /**
+     * @param {string} key
+     * @returns {Op} the op running this key, null if there is none
+     */
+    findStackCopy(key)
+    {
+        if (!this.#stackCopies) return null;
+        if (Op.isHeadStackKey(key)) return this;
+        return this.#stackCopies.get(key) || null;
+    }
+
+    getStackCopyKeys()
+    {
+        if (!this.#stackCopies) return [];
+        return Array.from(this.#stackCopies.keys());
+    }
+
+    /**
+     * @returns {number} copies plus the head
+     */
+    getNumStacks()
+    {
+        if (!this.#stackCopies) return 0;
+        return this.#stackCopies.size + 1;
+    }
+
+    /**
+     * creates the copy if needed, only called for keys of the stacking area
+     * @param {string} key
+     * @returns {Op}
+     */
+    getStackCopy(key)
+    {
+        if (Op.isHeadStackKey(key)) return this;
+
+        let copy = this.#stackCopies.get(key);
+        if (copy) return copy;
+
+        copy = this.patch.createStackCopy(this);
+        if (!copy) return null;
+
+        copy.stackKey = key;
+        copy.stackKeyIndices = key.split("/").map(Number);
+        this.#stackCopies.set(key, copy);
+
+        for (let i = 0; i < this.portsOut.length; i++)
+        {
+            const p = copy.getPortByName(this.portsOut[i].name);
+            if (p) p.proxyPort = this.portsOut[i];
+        }
+
+        for (let i = 0; i < this.portsIn.length; i++)
+        {
+            const headPort = this.portsIn[i];
+            if (headPort.type == Port.TYPE_FUNCTION) continue;
+            const p = copy.getPortByName(headPort.name);
+            if (p) p.set(this.#getStackInputValue(headPort, key, headPort.value));
+        }
+
+        if (copy.onLoaded) copy.onLoaded();
+
+        for (let i = 0; i < copy.portsOut.length; i++)
+        {
+            const p = copy.portsOut[i];
+            if (p.proxyPort && p.type != Port.TYPE_FUNCTION && p.value !== null && p.value !== undefined) p.forwardToProxy();
+        }
+        return copy;
+    }
+
+    /**
+     * input value for a copy: from the same key of a linked stacked op, otherwise v
+     * @param {Port} headPort
+     * @param {string} key
+     * @param {any} v
+     */
+    #getStackInputValue(headPort, key, v)
+    {
+        if (headPort.links.length == 0) return v;
+
+        const outPort = headPort.links[0].getOtherPort(headPort);
+        if (!outPort || !outPort.op.isStacked) return v;
+
+        const upstream = outPort.op.findStackCopy(key);
+        if (!upstream) return v;
+
+        const p = upstream.getPortByName(outPort.name);
+        if (!p) return v;
+        return p.value;
+    }
+
+    /**
+     * @param {Port} headPort
+     * @returns {Port} port of the copy for the current loop key, null if there is no copy
+     */
+    getStackCopyPort(headPort)
+    {
+        const copy = this.findStackCopy(this.patch.getLoopKey());
+        if (!copy) return null;
+        return copy.getPortByName(headPort.name);
+    }
+
+    /**
+     * value at a head input: in a loop to the copy of the current key, outside loops to the head and all copies
+     * @param {Port} headPort
+     * @param {any} v
+     * @returns {boolean} true if a copy handled it
+     */
+    routeStackedValue(headPort, v)
+    {
+        const patch = this.patch;
+        if (!patch.isInLoop())
+        {
+            this.#stackCopies.forEach((copy, key) =>
+            {
+                const p = copy.getPortByName(headPort.name);
+                if (p) p.set(this.#getStackInputValue(headPort, key, v));
+            });
+            return false;
+        }
+        if (patch.isHeadLoopKey()) return false;
+
+        const p = this.getStackCopyPort(headPort);
+        if (!p) return false;
+        p.setValueForced(v);
+        return true;
+    }
+
+    /**
+     * trigger at a head input: in a loop to the copy of the current key, outside loops to the head and all copies
+     * @param {Port} headPort
+     * @param {string} [name]
+     * @returns {boolean} true if a copy handled it
+     */
+    routeStackedTrigger(headPort, name)
+    {
+        const patch = this.patch;
+        if (!patch.isInLoop())
+        {
+            this.#stackCopies.forEach((copy) =>
+            {
+                const p = copy.getPortByName(headPort.name);
+                if (p) p._onTriggered(name);
+            });
+            return false;
+        }
+        if (patch.isHeadLoopKey()) return false;
+
+        const p = this.getStackCopyPort(headPort);
+        if (!p) return false;
+        p._onTriggered(name);
+        return true;
+    }
+
+    /**
+     * @param {string} key
+     */
+    #disposeStackCopy(key)
+    {
+        const copy = this.#stackCopies.get(key);
+        if (!copy) return;
+
+        copy.emitEvent("delete", copy);
+        if (copy.onDelete) copy.onDelete();
+        copy.cleanUp();
+        this.patch.removeOnAnimFrame(copy);
+        this.#stackCopies.delete(key);
+    }
+
+    #disposeStackCopies()
+    {
+        if (!this.#stackCopies) return;
+
+        const keys = Array.from(this.#stackCopies.keys());
+        for (let i = 0; i < keys.length; i++) this.#disposeStackCopy(keys[i]);
+        this.emitEvent(Op.EVENT_STACK_COPIES_CHANGED, 0);
     }
 
     // setValues(obj)
