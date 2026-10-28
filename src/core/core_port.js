@@ -559,7 +559,8 @@ export class Port extends Events
         if (this.#op.isStacked && this.direction == Port.DIR_IN && this.type != Port.TYPE_FUNCTION && this.#op.patch.isInLoop() && !this.#op.patch.isHeadLoopKey())
         {
             const p = this.#op.getStackCopyPort(this);
-            if (p) return p.forceChange();
+            if (p) p.forceChange();
+            return;
         }
 
         if (this.onValueChanged || this.onChange)

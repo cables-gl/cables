@@ -1464,17 +1464,21 @@ export class Patch extends Events
 
         this.logStartup("initializing var ports");
 
+        const pastedOps = new Set();
         // for (const i in this.ops)
         for (let i = 0; i < this.ops.length; i++)
         {
             this.ops[i].initVarPorts();
+            if (this.ops[i].uiAttribs.pasted) pastedOps.add(this.ops[i]);
             delete this.ops[i].uiAttribs.pasted;
         }
 
         setTimeout(() => { this.loading.finished(loadingId); }, 100);
 
         this.updateAnimMaxTime();
-        for (let i = 0; i < this.ops.length; i++) if (this.ops[i].isStacked) this.ops[i].updateStackCopies();
+
+        // only ops of this call: nested calls (subpatch contents) run before the rest of the patch is loaded. pasted ops get their stacking area from the ui after pasting
+        for (let i = 0; i < addedOps.length; i++) if (addedOps[i].isStacked && !pastedOps.has(addedOps[i])) addedOps[i].updateStackCopies();
         if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
         this.emitEvent(Patch.EVENT_PATCHLOADEND, newOps, obj, options.genIds);

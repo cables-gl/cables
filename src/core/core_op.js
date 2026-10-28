@@ -1826,7 +1826,7 @@ export class Op extends Events
 
         if (stacked)
         {
-            if (this.hasAnimatedPorts()) return false;
+            if (this.hasAnimatedPorts() || !this.canHaveStackCopies()) return false;
             this.attribs.stacked = true;
             this.#stackCopies = new Map();
             this.isStacked = true;
@@ -1841,6 +1841,15 @@ export class Op extends Events
         }
         this.emitEvent(Op.EVENT_STACKED_CHANGED, stacked);
         return true;
+    }
+
+    /**
+     * subpatch ops can only be stacked if they load their own contents ("bp2sub_" ids, like saving assumes), otherwise copies would be empty
+     */
+    canHaveStackCopies()
+    {
+        if (!this.patchId) return true;
+        return String(this.patchId.get()).indexOf("bp2sub_") == 0;
     }
 
     hasAnimatedPorts()
@@ -1866,7 +1875,7 @@ export class Op extends Events
         if (!this.isStacked) return;
 
         const keys = this.patch.getStackKeys(this);
-        if (!keys || this.hasAnimatedPorts())
+        if (!keys || this.hasAnimatedPorts() || !this.canHaveStackCopies())
         {
             this.setStacked(false);
             return;
@@ -2000,10 +2009,10 @@ export class Op extends Events
     }
 
     /**
-     * value at a head input: in a loop to the copy of the current key, outside loops to the head and all copies
+     * value at a head input: in a loop to the copy of the current key (dropped if it does not exist yet), outside loops to the head and all copies
      * @param {Port} headPort
      * @param {any} v
-     * @returns {boolean} true if a copy handled it
+     * @returns {boolean} true if the head must ignore it
      */
     routeStackedValue(headPort, v)
     {
@@ -2020,8 +2029,7 @@ export class Op extends Events
         if (patch.isHeadLoopKey()) return false;
 
         const p = this.getStackCopyPort(headPort);
-        if (!p) return false;
-        p.setValueForced(v);
+        if (p) p.setValueForced(v);
         return true;
     }
 
@@ -2029,7 +2037,7 @@ export class Op extends Events
      * trigger at a head input: in a loop to the copy of the current key, outside loops to the head and all copies
      * @param {Port} headPort
      * @param {string} [name]
-     * @returns {boolean} true if a copy handled it
+     * @returns {boolean} true if the head must ignore it
      */
     routeStackedTrigger(headPort, name)
     {
@@ -2046,8 +2054,7 @@ export class Op extends Events
         if (patch.isHeadLoopKey()) return false;
 
         const p = this.getStackCopyPort(headPort);
-        if (!p) return false;
-        p._onTriggered(name);
+        if (p) p._onTriggered(name);
         return true;
     }
 
