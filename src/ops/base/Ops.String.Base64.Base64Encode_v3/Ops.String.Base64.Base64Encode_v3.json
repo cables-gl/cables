@@ -46,7 +46,6 @@
             "date": 1724404097812
         }
     ],
-    "issues": "",
     "docs": {
         "ports": [
             {
@@ -60,5 +59,6 @@
         ]
     },
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "twbTTy"
 }

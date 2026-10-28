@@ -18,11 +18,10 @@
         ]
     },
     "summary": "Parse a string to an integer number / string to number",
-    "issues": "",
     "docs": {
         "ports": []
     },
-    "youtubeids": [],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "BEjHTy"
 }

@@ -571,6 +571,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1792581877768
+        },
+        {
+            "message": "Show a message to use C key, when scrolled out of patchfield bounds",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1792927540632
+        },
+        {
+            "message": "Creating subpatch ops fix saved state and improved links/connections",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793021621955
         }
     ],
     "isReleased": true,

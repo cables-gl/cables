@@ -41,8 +41,7 @@
             }
         ]
     },
-    "youtubeid": "",
-    "issues": "",
     "license": "MIT",
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "CnTLTy"
 }

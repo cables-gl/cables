@@ -1,0 +1,38 @@
+{
+    "authorName": "tim",
+    "id": "19d8d790-e9db-4c9d-b4a3-87190bd81353",
+    "created": 1792915811014,
+    "summary": "Outputs the maximum value since reset has been triggered",
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Maximum",
+                "subType": "number"
+            }
+        ]
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Math.MaxSinceReset",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792915811014
+        }
+    ]
+}

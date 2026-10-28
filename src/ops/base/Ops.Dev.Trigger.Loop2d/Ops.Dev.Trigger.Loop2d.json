@@ -1,0 +1,56 @@
+{
+    "id": "d3d4971b-5d01-44ba-8982-979f5f0ce0ac",
+    "created": 1793177920981,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793110704039
+        },
+        {
+            "message": "Local.Loop renamed to Ops.Dev.Trigger.Loop",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793110708887
+        },
+        {
+            "message": "cloned op from Ops.Dev.Trigger.Loop",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793177920981,
+            "cloneOf": "867f45b3-c26f-4f37-a1cd-d00b326134bb"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Execute"
+            },
+            {
+                "type": 0,
+                "name": "Count",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "areaScopeBegin",
+                "objType": "areaScope"
+            }
+        ]
+    }
+}

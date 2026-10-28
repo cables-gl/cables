@@ -5,6 +5,7 @@ const inId = op.inString("Id", "");
 
 // outputs
 const siblingsPort = op.outObject("childs");
+labelPort.setUiAttribs({ "display": "text" });
 
 // vars
 const el = document.createElement("div");

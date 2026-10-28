@@ -27,11 +27,10 @@
         ]
     },
     "summary": "check if string contains another string (find,search,indexOf)",
-    "youtubeid": "",
-    "issues": "",
     "docs": {
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "gDbHTy"
 }

@@ -1,0 +1,29 @@
+{
+    "id": "6f7bea47-1c3f-4b88-8653-5b522b3ddc94",
+    "created": 1792916311376,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792916311377
+        },
+        {
+            "message": "Trigger.TriggerOnPatchLoad renamed to Ops.Trigger.TriggerOnPatchStart",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1792916860366
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    }
+}

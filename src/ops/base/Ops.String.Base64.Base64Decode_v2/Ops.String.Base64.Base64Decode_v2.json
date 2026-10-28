@@ -2,7 +2,7 @@
     "authorName": "pandur",
     "id": "4986a1d8-390f-48ee-aff4-c4257ddb480a",
     "created": 1613114969150,
-    "summary": "decode a string to base64",
+    "summary": "Decode a base64 string",
     "layout": {
         "portsIn": [
             {
@@ -21,14 +21,14 @@
         {
             "message": "cloned op from Ops.String.Base64Decode",
             "author": "pandur",
-            "date": 1613114969150
-        },
-        {
-            "message": "Ops.User.pandur.Base64Decode_v2 renamed to Ops.String.Base64Decode_v2",
-            "author": "pandur",
-            "date": 1613115683204
+            "date": 1613114969150,
+            "type": "new op"
         }
     ],
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "twbTTy",
+    "docs": {
+        "ports": []
+    }
 }

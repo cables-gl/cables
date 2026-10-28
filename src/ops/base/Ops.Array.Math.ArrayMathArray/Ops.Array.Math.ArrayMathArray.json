@@ -11,10 +11,6 @@
                 "text": "Array in"
             },
             {
-                "name": "Math function",
-                "text": "Pick a math function to apply to both arrays"
-            },
-            {
                 "name": "Array result",
                 "text": "Calculated array out "
             }
@@ -51,7 +47,6 @@
             }
         ]
     },
-    "issues": "",
     "changelog": [
         {
             "message": "optimized - removed function call occurring twice",
@@ -59,8 +54,6 @@
             "date": 1558625292186
         }
     ],
-    "youtubeids": [],
-    "exampleProjectId": "uIYNcn",
     "isReleased": true,
     "license": "MIT"
 }

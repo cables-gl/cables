@@ -1,0 +1,27 @@
+{
+    "id": "3b3541f8-0277-4c76-8a87-cbb487fd5808",
+    "created": 1793177931651,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793110704580
+        },
+        {
+            "message": "Local.LoopEnd renamed to Ops.Dev.Trigger.LoopEnd",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793110707959
+        },
+        {
+            "message": "cloned op from Ops.Dev.Trigger.LoopEnd",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793177931652,
+            "cloneOf": "7c53b07a-a08c-49ee-8e03-0dcf4e6451d0"
+        }
+    ]
+}

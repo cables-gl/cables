@@ -34,10 +34,10 @@
         ]
     },
     "summary": "Return the next values as power of two",
-    "youtubeid": "",
     "docs": {
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "44YITy"
 }

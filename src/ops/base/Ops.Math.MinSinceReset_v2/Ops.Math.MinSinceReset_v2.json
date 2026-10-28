@@ -1,0 +1,38 @@
+{
+    "authorName": "tim",
+    "id": "c1e06d7c-0d60-43ad-b665-e9c4a1e6c30b",
+    "created": 1792915818039,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Minimum",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "Outputs the minimum value since reset has been triggered",
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Math.MinSinceReset",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1792915818039
+        }
+    ]
+}
