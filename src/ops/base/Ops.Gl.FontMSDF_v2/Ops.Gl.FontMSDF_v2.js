@@ -25,7 +25,7 @@ let
     loadingId = 0;
 
 inUUID.onChange =
-urlData.onChange =
+    urlData.onChange =
     urlTex.onChange =
     urlTex1.onChange =
     urlTex2.onChange =
@@ -96,7 +96,9 @@ function load()
         {
             if (err)
             {
-                // op.logError(err);
+                op.setUiError("jsonerr", "could not load font data: " + urlDatastr);
+                op.patch.loading.finished(loadingId);
+                updateLoaded();
                 return;
             }
             try
@@ -106,22 +108,24 @@ function load()
                 if (!data.chars || !data.info || !data.info.face)
                 {
                     op.setUiError("invaliddata", "data file is invalid");
+                    op.patch.loading.finished(loadingId);
+                    updateLoaded();
                     return;
                 }
 
                 outNumChars.set(data.chars.length);
                 let allChars = "";
-                for (let i = 0; i < data.chars.length; i++)allChars += data.chars[i].char;
+                for (let i = 0; i < data.chars.length; i++) allChars += data.chars[i].char;
                 outChars.set(allChars);
 
                 op.setUiAttrib({ "extendTitle": data.info.face });
                 op.patch.setVarValue(varNameData, null);
                 op.patch.setVarValue(varNameData,
-                    {
-                        "name": CABLES.basename(urlData.get()),
-                        "basename": inUUID.get(),
-                        "data": data
-                    });
+                {
+                    "name": CABLES.basename(urlData.get()),
+                    "basename": inUUID.get(),
+                    "data": data
+                });
 
                 op.patch.loading.finished(loadingId);
                 loadedData = true;
@@ -148,9 +152,9 @@ function load()
         const num = i;
 
         let texPort = urlTex;
-        if (i == 1)texPort = urlTex1;
-        if (i == 2)texPort = urlTex2;
-        if (i == 3)texPort = urlTex3;
+        if (i == 1) texPort = urlTex1;
+        if (i == 2) texPort = urlTex2;
+        if (i == 3) texPort = urlTex3;
 
         if (!texPort.get()) continue;
 
@@ -173,7 +177,8 @@ function load()
             loadedTex = true;
             cgl.patch.loading.finished(loadingIdTex);
             updateLoaded();
-        }, {
+        },
+        {
             "filter": CGL.Texture.FILTER_LINEAR,
             "flip": false
         });

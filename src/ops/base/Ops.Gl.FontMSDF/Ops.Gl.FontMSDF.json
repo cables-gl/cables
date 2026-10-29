@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.FontFileMSDF renamed to Ops.Gl.FontMSDF",
             "author": "pandur",
             "date": 1587308524651
+        },
+        {
+            "message": "show error and finish loading when font data can not be loaded or is invalid",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793269918302
         }
     ],
     "authorName": "pandur",

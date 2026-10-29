@@ -58,6 +58,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1725892920903
+        },
+        {
+            "message": "show error and finish loading when font data can not be loaded or is invalid",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793269917788
         }
     ],
     "summary": "Load MSDF Font data and texture to use ",

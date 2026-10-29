@@ -473,7 +473,8 @@ export class Port extends Events
                 if (this.#op.patch.isInLoop()) return this.setValueForced(v);
             }
 
-            if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY)
+            // in loops every iteration can go to another stack copy, so outputs forward unchanged values too
+            if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY || (this.direction == Port.DIR_OUT && this.#op.patch.isInLoop()))
             {
                 if (this.#animated && CABLES.UI)
                 {

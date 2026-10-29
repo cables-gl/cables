@@ -1464,13 +1464,14 @@ export class Patch extends Events
 
         this.logStartup("initializing var ports");
 
+        for (let i = 0; i < this.ops.length; i++) this.ops[i].initVarPorts();
+
+        // only ops of this call, nested calls (subpatch contents) would remove the flag of ops pasted in the outer call
         const pastedOps = new Set();
-        // for (const i in this.ops)
-        for (let i = 0; i < this.ops.length; i++)
+        for (let i = 0; i < addedOps.length; i++)
         {
-            this.ops[i].initVarPorts();
-            if (this.ops[i].uiAttribs.pasted) pastedOps.add(this.ops[i]);
-            delete this.ops[i].uiAttribs.pasted;
+            if (addedOps[i].uiAttribs.pasted) pastedOps.add(addedOps[i]);
+            delete addedOps[i].uiAttribs.pasted;
         }
 
         setTimeout(() => { this.loading.finished(loadingId); }, 100);
