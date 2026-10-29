@@ -31,6 +31,11 @@ let snappedArr = [];
 
 snapVals.onChange = checkError;
 
+op.onDelete = () =>
+{
+    clearTimeout(timeout);
+};
+
 inReset.onTriggered = function ()
 {
     val = 0;
@@ -56,7 +61,7 @@ function checkError()
     }
 
     snappedArr = [];
-    for (let i = 0; i < snapVals.length; i++)
+    for (let i = 0; i < snaps.length; i++)
     {
         snappedArr[i] = false;
     }
@@ -66,6 +71,7 @@ function update()
 {
     if (blocking) return;
     let snaps = snapVals.get();
+    if (!snaps) return;
 
     let d = 999999999;
     let snapvalue = 0;
@@ -157,8 +163,8 @@ function update()
 
     if (inMax.get() != inMin.get() != 0)
     {
-        if (val > inMax.get())val = inMax.get();
-        else if (val < inMin.get())val = inMin.get();
+        if (val > inMax.get()) val = inMax.get();
+        else if (val < inMin.get()) val = inMin.get();
     }
 
     outVal.set(val);

@@ -96,5 +96,13 @@
     },
     "exampleProjectId": "7B11U6",
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "fixed exception when snap values array is null, fixed snapped state init, clear timeout on delete",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793271922982
+        }
+    ]
 }
