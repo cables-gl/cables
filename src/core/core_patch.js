@@ -760,14 +760,8 @@ export class Patch extends Events
     //  */
     removeOnAnimFrame(op)
     {
-        for (let i = 0; i < this.animFrameOps.length; i++)
-        {
-            if (this.animFrameOps[i] == op)
-            {
-                this.animFrameOps.splice(i, 1);
-                return;
-            }
-        }
+        for (let i = this.animFrameOps.length - 1; i >= 0; i--)
+            if (this.animFrameOps[i] == op) this.animFrameOps.splice(i, 1);
     }
 
     // /**
@@ -883,6 +877,10 @@ export class Patch extends Events
 
                     if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                     opToDelete.cleanUp();
+
+                    this.removeOnAnimFrame(opToDelete);
+                    for (let j = this._volumeListeners.length - 1; j >= 0; j--)
+                        if (this._volumeListeners[j] == opToDelete) this._volumeListeners.splice(j, 1);
 
                     /* minimalcore:start */
                     if (!reloadingOp && reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
