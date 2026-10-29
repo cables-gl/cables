@@ -34,8 +34,9 @@
         ]
     },
     "summary": "Keep the last non-empty array and report whether the current array is valid",
-    "docs": {},
+    "docs": {
+        "ports": []
+    },
     "isReleased": true,
-    "license": "MIT",
-    "exampleProjectId": "CfQ6Ry"
+    "license": "MIT"
 }
