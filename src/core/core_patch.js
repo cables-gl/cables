@@ -122,7 +122,9 @@ export class Patch extends Events
 
     /** @type {number[][]} */
     #savedLoopStacks = [];
-    _volumeListeners = [];
+
+    /** @type {Op[][]} */
+    #volumeListeners = [];
     #patchVolume = 1.0;
     #muted = false;
     namedTriggers = {};
@@ -347,7 +349,7 @@ export class Patch extends Events
     {
         const v = this.#muted ? 0 : this.#patchVolume;
         this.config.masterVolume = v;
-        for (let i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
+        for (let i = 0; i < this.#volumeListeners.length; i++) this.#volumeListeners[i].onMasterVolumeChanged(v);
     }
 
     /**
@@ -591,7 +593,7 @@ export class Patch extends Events
 
             if (op.hasOwnProperty("onAnimFrame") && op.onAnimFrame) this.addOnAnimFrame(op);
             if (op.hasOwnProperty("onAnimFramePre") && op.onAnimFramePre) this.addOnAnimFrame(op);
-            if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
+            if (op.hasOwnProperty("onMasterVolumeChanged")) this.#volumeListeners.push(op);
 
             if (this._opIdCache[op.id])
             {
@@ -879,8 +881,8 @@ export class Patch extends Events
                     opToDelete.cleanUp();
 
                     this.removeOnAnimFrame(opToDelete);
-                    for (let j = this._volumeListeners.length - 1; j >= 0; j--)
-                        if (this._volumeListeners[j] == opToDelete) this._volumeListeners.splice(j, 1);
+                    for (let j = this.#volumeListeners.length - 1; j >= 0; j--)
+                        if (this.#volumeListeners[j] == opToDelete) this.#volumeListeners.splice(j, 1);
 
                     /* minimalcore:start */
                     if (!reloadingOp && reLinkP1 && reLinkP2 && reLinkP1.op && reLinkP2.op)
