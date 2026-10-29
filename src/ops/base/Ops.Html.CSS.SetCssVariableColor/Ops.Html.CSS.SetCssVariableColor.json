@@ -38,6 +38,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1730273711740
+        },
+        {
+            "message": "restores the previous value of the variable when deleted or when the var name changes",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1793271435360
         }
     ],
     "isReleased": true,

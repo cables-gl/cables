@@ -5,6 +5,10 @@ const
     b = op.inFloatSlider("b", Math.random());
 
 let root = document.documentElement;
+let setName = null;
+let oldValue = "";
+
+op.onDelete = restore;
 
 r.setUiAttribs({ "colorPick": true });
 r.onChange =
@@ -21,6 +25,23 @@ function toHex(c)
 
 function update()
 {
+    const name = "--" + varname.get();
+    if (name != setName)
+    {
+        restore();
+        if (!varname.get()) return;
+        setName = name;
+        oldValue = root.style.getPropertyValue(name);
+    }
+
     const hex = "#" + toHex(r.get()) + toHex(g.get()) + toHex(b.get());
-    root.style.setProperty("--" + varname.get(), hex);
+    root.style.setProperty(name, hex);
+}
+
+function restore()
+{
+    if (setName === null) return;
+    if (oldValue) root.style.setProperty(setName, oldValue);
+    else root.style.removeProperty(setName);
+    setName = null;
 }
