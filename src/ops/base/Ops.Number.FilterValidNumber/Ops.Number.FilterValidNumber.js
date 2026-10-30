@@ -7,8 +7,9 @@ const
     outValid = op.outBoolNum("Is Valid");
 
 inZero.onChange =
-inSmaller.onChange =
-inNumber.onChange =
+    inSmaller.onChange =
+    inInfinity.onChange =
+    inNumber.onChange =
     update;
 
 function update()
@@ -19,7 +20,7 @@ function update()
 
     if (num === null || num === undefined || num != num) r = false;
     if (inZero.get() && num === 0) r = false;
-    if (inZero.get() && num === Infinity) r = false;
+    if (inInfinity.get() && (num === Infinity || num === -Infinity)) r = false;
     if (inSmaller.get() && num < 0) r = false;
 
     if (r) outNum.set(num);

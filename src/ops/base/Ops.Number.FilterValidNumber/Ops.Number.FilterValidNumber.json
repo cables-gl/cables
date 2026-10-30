@@ -4,18 +4,14 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1585905995389
+            "date": 1585905995389,
+            "type": "new op"
         },
         {
-            "message": "Ops.Value.ValidNumber renamed to Ops.Value.FilterValidNumber",
+            "message": "Fixed bug with infinity option being ignored",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1587047929256
-        },
-        {
-            "message": "Ops.Value.FilterValidNumber renamed to Ops.Number.FilterValidNumber",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1701852519240
+            "date": 1793365387202
         }
     ],
     "authorName": "pandur",
