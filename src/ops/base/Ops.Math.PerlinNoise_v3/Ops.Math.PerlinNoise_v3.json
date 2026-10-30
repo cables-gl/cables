@@ -1,0 +1,103 @@
+{
+    "id": "d3b12819-e966-4976-8379-ae90eb29bc08",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1616136138477,
+            "type": "new op"
+        },
+        {
+            "message": "New Version v3: seed is applied on load and the output updates when seed or scale change",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793367503460
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1793367368465,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "outputs a perlin noise value like random ",
+    "docs": {
+        "ports": [
+            {
+                "name": "X",
+                "text": "Scroll noise values in the X dimension."
+            },
+            {
+                "name": "Y",
+                "text": "Scroll noise values in the Y dimension."
+            },
+            {
+                "name": "Z",
+                "text": "Scroll noise values in the Z dimension."
+            },
+            {
+                "name": "Scale",
+                "text": "Noise Scale - affects rate of change in values. The smaller the Scale number, the smoother the changes of the output."
+            },
+            {
+                "name": "Seed",
+                "text": "Noise Seed"
+            },
+            {
+                "name": "Result",
+                "text": "Output range 0-1"
+            }
+        ]
+    },
+    "exampleProjectId": "gOCdhL",
+    "dependencies": [
+        {
+            "src": "./perlin.js",
+            "type": "commonjs"
+        }
+    ],
+    "credits": [
+        {
+            "title": "Perlin Noise Library",
+            "author": "Stefan Gustavson / josephg",
+            "url": "https://github.com/josephg/noisejs",
+            "licence": "Public Domain",
+            "version": "2012-03-09",
+            "username": "stephan",
+            "date": 1790244256014
+        }
+    ],
+    "license": "MIT"
+}
