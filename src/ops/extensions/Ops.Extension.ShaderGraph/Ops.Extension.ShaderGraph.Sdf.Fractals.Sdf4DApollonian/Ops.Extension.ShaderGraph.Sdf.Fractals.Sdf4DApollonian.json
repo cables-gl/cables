@@ -1,0 +1,87 @@
+{
+    "id": "497013d7-861d-4aee-bc94-239bc66f1177",
+    "created": 1793376991793,
+    "license": "MIT",
+    "authorName": "AdamPartGL",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1790250717767
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Sdf.SdfSphere",
+            "type": "new op",
+            "author": "AdamPartGL",
+            "date": 1790932535616,
+            "cloneOf": "452aeb98-0351-4d52-841c-d3effdb3c40d"
+        },
+        {
+            "message": "Extension.ShaderGraph.Sdf.SdfApollonian renamed to Ops.Extension.ShaderGraph.Sdf.Fractals.SdfApollonian",
+            "type": "rename",
+            "author": "AdamPartGL",
+            "date": 1791582263950
+        },
+        {
+            "message": "Extension.ShaderGraph.Sdf.Fractals.SdfApollonian renamed to Ops.Extension.ShaderGraph.Sdf.Fractals.SdfApollonian1",
+            "type": "rename",
+            "author": "AdamPartGL",
+            "date": 1791993661715
+        },
+        {
+            "message": "cloned op from Ops.Extension.ShaderGraph.Sdf.Fractals.SdfApollonian1",
+            "type": "new op",
+            "author": "AdamPartGL",
+            "date": 1793376991793,
+            "cloneOf": "4039f509-b921-45e2-8606-0cba1d8a0897"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "scale",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "rotation",
+                "objType": "sg_vec3"
+            },
+            {
+                "type": 2,
+                "name": "translation",
+                "objType": "sg_vec3"
+            },
+            {
+                "type": 2,
+                "name": "iterations",
+                "objType": "sg_float"
+            },
+            {
+                "type": 2,
+                "name": "transform",
+                "objType": "sg_mat4"
+            },
+            {
+                "type": 2,
+                "name": "color",
+                "objType": "sg_vec4"
+            },
+            {
+                "type": 2,
+                "name": "active",
+                "objType": "sg_float"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "sdf",
+                "objType": "sg_SdfShape"
+            }
+        ]
+    },
+    "summary": "Apollonian fractal distance field"
+}
