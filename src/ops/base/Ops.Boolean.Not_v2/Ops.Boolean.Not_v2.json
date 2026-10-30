@@ -1,0 +1,41 @@
+{
+    "authorName": "pandur",
+    "id": "b5b1960b-9de4-4300-9846-74cb44234be7",
+    "created": 1793369592143,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ]
+    },
+    "summary": "result is false if input is true and vice versa (negate/toggle/switch/!=)",
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "1dAfW2",
+    "license": "MIT",
+    "changelog": [
+        {
+            "message": "created as a new version of Ops.Boolean.Not",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793369592144
+        },
+        {
+            "message": "New version: correct default output value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793369631952
+        }
+    ]
+}
