@@ -9,14 +9,16 @@ let lastTimeout = null;
 
 cancel.onTriggered = function ()
 {
-    if (lastTimeout)clearTimeout(lastTimeout);
+    if (lastTimeout) clearTimeout(lastTimeout);
     lastTimeout = null;
+
+    outDelaying.set(false);
 };
 
 exe.onTriggered = function ()
 {
     outDelaying.set(true);
-    if (lastTimeout)clearTimeout(lastTimeout);
+    if (lastTimeout) clearTimeout(lastTimeout);
 
     lastTimeout = setTimeout(
         function ()
