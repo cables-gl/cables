@@ -1,0 +1,69 @@
+{
+    "id": "ab859b13-0828-4100-ba98-6db1a3f1be5b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1560245717548,
+            "type": "new op"
+        },
+        {
+            "message": "new version v2: ceil mode was round, not ceil",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793358063606
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1793358063605,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "values": [
+                    "Ceil",
+                    "Floor"
+                ],
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "round to the next even number",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Number",
+                "text": "the number"
+            },
+            {
+                "name": "Mode index",
+                "text": "round up (ceil) or down (floor)"
+            },
+            {
+                "name": "Mode",
+                "text": "round up (ceil) or down (floor)"
+            },
+            {
+                "name": "Result",
+                "text": "the rounded output"
+            }
+        ]
+    },
+    "exampleProjectId": "a0z7hL",
+    "license": "MIT"
+}
