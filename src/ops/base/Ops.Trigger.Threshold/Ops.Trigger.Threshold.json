@@ -13,16 +13,30 @@
                 "type": 0,
                 "name": "Threshold",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Trigger index",
+                "values": [
+                    "Below",
+                    "Above"
+                ],
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Triggered",
+                "subType": "boolean"
             }
         ]
     },
-    "summary": "Triggers only once when threshold is crossed",
+    "summary": "Triggers once above or below a threshold and outputs the current threshold state",
     "docs": {
         "ports": []
     },
