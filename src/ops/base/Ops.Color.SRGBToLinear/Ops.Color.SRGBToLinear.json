@@ -1,0 +1,50 @@
+{
+    "id": "bdcd34ec-4db7-495a-a89d-3c07f7f3dbd1",
+    "created": 1793359825106,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793366702337
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Linear R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear B",
+                "subType": "number"
+            }
+        ]
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "id": "36306717-fb17-4605-b19a-c819fda6bb43",
+    "created": 1793359825482,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793359825493
+        },
+        {
+            "message": "Local.LinearToSRGB renamed to Ops.Color.LinearToSRGB",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793359849580
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Linear R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Linear B",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "subType": "number"
+            }
+        ]
+    }
+}
