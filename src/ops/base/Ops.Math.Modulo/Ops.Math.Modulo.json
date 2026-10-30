@@ -48,5 +48,13 @@
     },
     "isReleased": true,
     "license": "MIT",
-    "exampleProjectId": "K45BTy"
+    "exampleProjectId": "K45BTy",
+    "changelog": [
+        {
+            "message": "Value was not updating after pingpong toggle",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793358425501
+        }
+    ]
 }

@@ -5,14 +5,15 @@ const
     result = op.outString("Result");
 
 inChars.onChange =
-inStr.onChange = () =>
-{
-    let str = inStr.get() || "";
-    const chars = inChars.get();
-    const rep = inReplace.get();
-    for (let i = 0; i < chars.length; i++)
+    inReplace.onChange =
+    inStr.onChange = () =>
     {
-        str = str.replaceAll(chars[i], rep);
-    }
-    result.set(str);
-};
+        let str = inStr.get() || "";
+        const chars = inChars.get();
+        const rep = inReplace.get();
+        for (let i = 0; i < chars.length; i++)
+        {
+            str = str.replaceAll(chars[i], rep);
+        }
+        result.set(str);
+    };

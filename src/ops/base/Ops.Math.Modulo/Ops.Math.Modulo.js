@@ -7,7 +7,7 @@ const
 let calculateFunction = calculateModule;
 
 number1.onChange =
-number2.onChange = exec;
+    number2.onChange = exec;
 
 pingpong.onChange = updatePingPong;
 
@@ -40,4 +40,6 @@ function updatePingPong()
 {
     if (pingpong.get()) calculateFunction = calculatePingPong;
     else calculateFunction = calculateModule;
+
+    calculateFunction();
 }

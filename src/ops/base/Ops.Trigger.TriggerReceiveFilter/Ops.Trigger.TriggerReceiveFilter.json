@@ -5,11 +5,6 @@
             "message": "created op",
             "author": "stephan",
             "date": 1612445104655
-        },
-        {
-            "message": "Ops.User.stephan.TriggerReceiveFilter renamed to Ops.Trigger.TriggerReceiveFilter",
-            "author": "stephan",
-            "date": 1612447019365
         }
     ],
     "authorName": "stephan",
