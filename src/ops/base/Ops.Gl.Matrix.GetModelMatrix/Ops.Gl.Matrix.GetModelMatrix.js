@@ -7,9 +7,11 @@ const m = mat4.create();
 
 render.onTriggered = function ()
 {
-    mat4.copy(m, op.patch.cg.mMatrix);
-    matrix.set(null);
-    matrix.set(m);
+    if (op.patch.cg)
+    {
+        mat4.copy(m, op.patch.cg.mMatrix);
+        matrix.setRef(m);
+    }
     trigger.trigger();
 };
 
