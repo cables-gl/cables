@@ -12,7 +12,7 @@
     "main": "src/core/index.js",
     "type": "module",
     "engines": {
-        "node": "24.18.1"
+        "node": "24.22.1"
     },
     "dependencies": {
         "@webgpu/types": "0.1.53",
