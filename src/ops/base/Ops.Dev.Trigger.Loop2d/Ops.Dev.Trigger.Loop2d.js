@@ -8,7 +8,7 @@ const
     outIndexX = op.outNumber("X"),
     outIndexY = op.outNumber("Y");
 
-op.setUiAttrib({ "allowStacking": true });
+op.setUiAttrib({ "allowStacking": true, "moveChilds": true });
 
 const scopeData = { "count": 0 };
 

@@ -5,7 +5,7 @@ const
     next = op.outTrigger("Next"),
     outIndex = op.outNumber("Index");
 
-op.setUiAttrib({ "allowStacking": true });
+op.setUiAttrib({ "allowStacking": true, "moveChilds": true });
 
 const scopeData = { "count": 0 };
 
