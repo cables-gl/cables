@@ -1,11 +1,10 @@
-// inputs
 const
     parentPort = op.inObject("link", "element"),
     labelPort = op.inString("Text", "Select File:"),
     inLabelText = op.inString("Button Text", "Choose File"),
     inAccept = op.inString("Accept Files", ""),
     inMultiple = op.inBool("Allow Multiple Files", false),
-    inId = op.inValueString("Id", ""),
+    inId = op.inString("Id", ""),
     inVisible = op.inBool("Visible", true),
     inGreyOut = op.inBool("Grey Out", false),
     inOpenDialog = op.inTriggerButton("Show Dialog"),
@@ -79,7 +78,7 @@ greyOut.style.display = "none";
 
 inMultiple.onChange = () =>
 {
-    if (inMultiple.get())fileInputEle.setAttribute("multiple", "multiple");
+    if (inMultiple.get()) fileInputEle.setAttribute("multiple", "multiple");
     else fileInputEle.removeAttribute("multiple");
 };
 
@@ -147,7 +146,7 @@ function handleFileSelect(evt)
             {
                 reader.readAsDataURL(evt.target.files[0]);
                 outFilename.set(evt.target.files[0].name);
-                if (numFiles == 1)fileInputButton.innerHTML = evt.target.files[0].name;
+                if (numFiles == 1) fileInputButton.innerHTML = evt.target.files[0].name;
                 outObject.set(evt.target.files[0]);
             }
 
@@ -162,7 +161,11 @@ function handleFileSelect(evt)
                 fileInputButton.innerHTML = numFiles + " files selected";
 
                 clearTimeout(outDelay);
-                outDelay = setTimeout(() => { outDataURLs.setRef(dataUrlArray); outFileChanged.trigger(); }, 100);
+                outDelay = setTimeout(() =>
+                {
+                    outDataURLs.setRef(dataUrlArray);
+                    outFileChanged.trigger();
+                }, 100);
             };
             readerLoop.readAsDataURL(evt.target.files[i]);
         }

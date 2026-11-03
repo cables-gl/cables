@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1770304453113
+        },
+        {
+            "message": "op Gl.GLTF.GltfMaterialUseProperties was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793632996232
         }
     ],
     "layout": {

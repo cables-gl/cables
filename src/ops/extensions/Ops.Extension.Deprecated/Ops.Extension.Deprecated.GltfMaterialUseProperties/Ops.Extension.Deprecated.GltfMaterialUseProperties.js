@@ -14,14 +14,14 @@ let matIdx = -1;
 
 // inSubmesh.onChange =
 inNameMatch.onChange =
-inMatName.onChange = function ()
-{
-    outObj.setRef(null);
-    outFound.set(false);
-    let title = inMatName.get();
-    matIdx = -1;
-    mat = null;
-};
+    inMatName.onChange = function ()
+    {
+        outObj.setRef(null);
+        outFound.set(false);
+        let title = inMatName.get();
+        matIdx = -1;
+        mat = null;
+    };
 
 exec.onTriggered = () =>
 {
@@ -30,8 +30,8 @@ exec.onTriggered = () =>
 
     if (!mat)
     {
-    //     if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes || !cgl.tempData.currentScene.loaded)
-    //         return;
+        //     if (!cgl.tempData || !cgl.tempData.currentScene || !cgl.tempData.currentScene.nodes || !cgl.tempData.currentScene.loaded)
+        //         return;
 
         outFound.set(false);
         //     outGeom.setRef(null);
@@ -68,13 +68,13 @@ exec.onTriggered = () =>
             }
         }
 
-        if (!outFound.get())op.setUiError("notfound", "material not found", 1);
+        if (!outFound.get()) op.setUiError("notfound", "material not found", 1);
         else op.setUiError("notfound", null);
     }
 
     if (mat)
     {
-        if (mat._matTexDiffuse)outTexDiff.setRef(mat._matTexDiffuse.tex);
+        if (mat._matTexDiffuse) outTexDiff.setRef(mat._matTexDiffuse.tex);
         mat.bind(op.patch.cgl, cgl.getShader());
     }
 

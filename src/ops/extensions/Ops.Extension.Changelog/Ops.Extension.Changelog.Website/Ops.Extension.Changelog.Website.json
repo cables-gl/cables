@@ -221,6 +221,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1791465513151
+        },
+        {
+            "message": "Added wordpress iframe integration info to docs - https://cables.gl/docs/faq/embedding/cms/wordpress",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1793706365153
         }
     ],
     "isReleased": true,

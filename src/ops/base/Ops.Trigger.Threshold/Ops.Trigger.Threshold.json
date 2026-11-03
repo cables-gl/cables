@@ -42,12 +42,20 @@
     },
     "changelog": [
         {
-            "message": "Ops.Trigger.Past renamed to Ops.Trigger.Threshold",
+            "message": "op created",
             "author": "pandur",
-            "date": 1568277658158
+            "date": 1568277658158,
+            "type": "new op"
+        },
+        {
+            "message": "Added toggle for above/below direction , output whether the threshold condition is currently met.",
+            "type": "improvement",
+            "author": "franck",
+            "date": 1793709422339,
+            "url": "https://github.com/cables-gl/cables/pull/8846"
         }
     ],
-    "exampleProjectId": "pG-Mwq",
+    "exampleProjectId": "ilDpxz",
     "isReleased": true,
     "license": "MIT"
 }

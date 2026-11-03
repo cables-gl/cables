@@ -67,9 +67,8 @@
                 "subType": "boolean"
             },
             {
-                "type": 0,
-                "name": "Id",
-                "subType": "string"
+                "type": 5,
+                "name": "Id"
             },
             {
                 "type": 0,

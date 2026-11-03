@@ -1,5 +1,5 @@
 {
-    "summary": "gyroscope motionsensor camera",
+    "summary": "Gyroscope motionsensor camera",
     "layout": {
         "portsIn": [
             {
@@ -29,13 +29,19 @@
     "authorName": "pandur",
     "id": "c213a5b4-6a47-425a-9457-ae0b14c88e9a",
     "created": 1554973647512,
-    "issues": "",
-    "youtubeids": [],
     "changelog": [
         {
-            "message": "Ops.Exp.Gl.DeviceOrientationCamera renamed to Ops.Gl.Matrix.DeviceOrientationCamera",
+            "message": "Op created",
             "author": "pandur",
-            "date": 1606808243671
+            "date": 1606808243671,
+            "type": "new op"
+        },
+        {
+            "message": "Fix and handling for iOS",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1793719992483,
+            "url": "https://github.com/cables-gl/cables/issues/8836"
         }
     ],
     "exampleProjectId": "dZ8wQ0",

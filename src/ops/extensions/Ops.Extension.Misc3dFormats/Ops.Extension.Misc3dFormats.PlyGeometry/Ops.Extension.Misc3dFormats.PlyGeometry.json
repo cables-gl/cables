@@ -2,19 +2,13 @@
     "id": "871d94fd-efeb-42ce-9132-c88263174b0a",
     "created": 1792056400332,
     "license": "MIT",
-    "authorName": "claude",
+    "authorName": "bender",
     "changelog": [
         {
             "message": "op created",
             "type": "new op",
             "author": "claude",
             "date": 1792056400345
-        },
-        {
-            "message": "Local.PlyGeometry renamed to Ops.Extension.Misc3dFormats.PlyGeometry",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792064205157
         }
     ],
     "isReleased": false,
