@@ -160,7 +160,7 @@ export class MultiPort2 extends Port
                 const idx = i;
 
                 if (po.tempData.multiPortChangeListener)po.tempData.multiPortChangeListener = po.off(po.tempData.multiPortChangeListener);
-                po.tempData.multiPortChangeListener = po.on("change", updateArray.bind(this));
+                if (this.direction == Port.DIR_IN) po.tempData.multiPortChangeListener = po.on("change", updateArray.bind(this));
 
                 if (po.tempData.multiPortTriggerListener)po.tempData.multiPortTriggerListener = po.off(po.tempData.multiPortTriggerListener);
                 po.tempData.multiPortTriggerListener = po.on("trigger", () => { this._onTriggered(idx); });
