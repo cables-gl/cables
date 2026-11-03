@@ -1,5 +1,6 @@
 const
     render = op.inTrigger("Render"),
+    inRequest = op.inTriggerButton("Request Permission"),
     next = op.outTrigger("Next"),
     winOrient = op.outNumber("Window Orientation"),
     cgl = op.patch.cgl,
@@ -8,36 +9,95 @@ const
     displayOrientQuat = quat.create(),
     displayOrientMatrix = mat4.create();
 
-window.addEventListener("deviceorientation", onOrientationChange, true);
 let tempQuat = quat.create();
 mat4.identity(transMatrix);
 
 const viewDirQuat = quat.create();
 
-render.onTriggered = function ()
+// iOS (Safari) only allows requestPermission() inside a user gesture,
+// so it must not be called from the render loop
+const gestureEvents = ["click", "touchend"];
+let requesting = false;
+
+function setError(text, level)
 {
-    // check for new permission request on IOS or android
-    if (window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission)
+    op.setUiError("permission", text, level);
+}
+
+function addGestureListeners()
+{
+    gestureEvents.forEach((name) => { document.addEventListener(name, requestPermission, true); });
+}
+
+function removeGestureListeners()
+{
+    gestureEvents.forEach((name) => { document.removeEventListener(name, requestPermission, true); });
+}
+
+// can be triggered from a button op (e.g. a html button), which counts as user gesture on iOS
+inRequest.onTriggered = () =>
+{
+    if (typeof window.DeviceOrientationEvent?.requestPermission === "function") requestPermission();
+};
+
+function requestPermission()
+{
+    if (requesting) return;
+    requesting = true;
+
+    Promise.resolve(window.DeviceOrientationEvent.requestPermission())
+        .then((response) =>
+        {
+            if (response == "granted")
+            {
+                setError(null);
+                removeGestureListeners();
+                window.addEventListener("deviceorientation", onOrientationChange, true);
+            }
+            else setError("device orientation permission denied, tap the screen to try again", 1);
+        })
+        .catch((e) =>
+        {
+            setError("could not get device orientation permission: " + e.message, 1);
+        })
+        .finally(() =>
+        {
+            requesting = false;
+        });
+}
+
+function init()
+{
+    if (!window.DeviceOrientationEvent)
     {
-        DeviceOrientationEvent.requestPermission()
-            .then((response) =>
-            {
-                if (response == "granted")
-                {
-                    op.setUiError("permission", null);
-                    window.addEventListener("deviceorientation", onOrientationChange, true);
-                }
-            })
-            .catch((e) =>
-            {
-                op.setUiError("permission", "no permission for device orientation: " + e.message, 1);
-            });
+        setError("device orientation is not supported by this browser", 1);
+    }
+    else if (typeof window.DeviceOrientationEvent.requestPermission === "function")
+    {
+        // iOS: permission can only be requested from a user gesture, not from the render loop
+        if (!window.isSecureContext) setError("device orientation needs a secure context (https)", 1);
+        else
+        {
+            setError("tap the screen or trigger \"Request Permission\" to enable device orientation", 0);
+            addGestureListeners();
+        }
     }
     else
     {
         window.addEventListener("deviceorientation", onOrientationChange, true);
     }
+}
 
+init();
+
+op.onDelete = () =>
+{
+    removeGestureListeners();
+    window.removeEventListener("deviceorientation", onOrientationChange, true);
+};
+
+render.onTriggered = function ()
+{
     if (window.orientation === undefined)
     {
         next.trigger();
