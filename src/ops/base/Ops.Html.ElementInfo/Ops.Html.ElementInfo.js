@@ -1,7 +1,8 @@
 const
     inEle = op.inObject("Element"),
     outTagname = op.outString("Tagname"),
-    outId = op.outString("Id");
+    outId = op.outString("Id"),
+    outAttrs = op.outObject("Attributes");
 
 inEle.onChange = () =>
 {
@@ -11,6 +12,10 @@ inEle.onChange = () =>
         outTagname.set("");
         return;
     }
+
+    const attrs = {};
+    for (const a of ele.attributes) attrs[a.name] = a.value;
+    outAttrs.setRef(attrs);
     outTagname.set(ele.tagName);
     outId.set(ele.id);
 };

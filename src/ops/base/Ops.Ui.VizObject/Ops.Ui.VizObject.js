@@ -194,6 +194,24 @@ function myStringify(o, level = 0)
     return str;
 }
 
+function elementToString(el)
+{
+    let str = "<" + el.tagName.toLowerCase() + "> (cannot be stringified, showing attributes)\n";
+
+    let keys = Array.from(el.attributes, (a) => { return a.name; });
+    if (keys.length == 0) return str + "{}";
+    if (inSort.get()) keys = keys.sort();
+
+    str += "{\n";
+    for (let i = 0; i < keys.length; i++)
+    {
+        str += "   " + JSON.stringify(keys[i]) + ": " + JSON.stringify(el.getAttribute(keys[i]));
+        if (i < keys.length - 1) str += ",";
+        str += "\n";
+    }
+    return str + "}";
+}
+
 inSearch.onChange =
     inHideArr.onChange =
     inSort.onChange =
@@ -210,6 +228,7 @@ inSearch.onChange =
         else if (obj === null) str = "null";
         else if (obj === false) str = "false";
         else if (obj === 0) str = "0";
+        else if (obj.nodeType === 1 && obj.attributes) str = elementToString(obj);
         else
             try
             {

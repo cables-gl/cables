@@ -72,6 +72,12 @@
             "type": "bugfix",
             "author": "stephan",
             "date": 1785497255358
+        },
+        {
+            "message": "Html Elements: show only attributes that are set on the elements, not the whole dom object",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1793716363835
         }
     ],
     "authorName": "pandur",

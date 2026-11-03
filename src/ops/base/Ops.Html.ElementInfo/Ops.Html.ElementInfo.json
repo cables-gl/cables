@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1758095816587
+        },
+        {
+            "message": "Output an object with attributes as key/value pairs",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793716206079
         }
     ],
     "layout": {
@@ -26,6 +32,10 @@
             {
                 "type": 5,
                 "name": "Id"
+            },
+            {
+                "type": 2,
+                "name": "Attributes"
             }
         ]
     },
