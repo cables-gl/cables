@@ -15,6 +15,12 @@
             "type": "deprecation",
             "author": "pandur",
             "date": 1793632996232
+        },
+        {
+            "message": "op Extension.Deprecated.GltfMaterialUseProperties was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793720259278
         }
     ],
     "layout": {
